@@ -1,0 +1,11 @@
+ZipCodeRequirement:
+    type: object
+    inherits:
+        - Node
+        - Requirement
+    config:
+        name: ZipCodeRequirement
+        interfaces:
+            - Node
+            - Requirement
+        description: 'Requires a verified zip code.'

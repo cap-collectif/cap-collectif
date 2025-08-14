@@ -3,5 +3,7 @@ UpdateUserReplyPayload:
     config:
         fields:
             reply:
-                type: 'InternalUserReply'
+                type: 'InternalReply'
                 description: 'Update a reply'
+            errorCode:
+                type: 'UpdateUserReplyErrorCode'

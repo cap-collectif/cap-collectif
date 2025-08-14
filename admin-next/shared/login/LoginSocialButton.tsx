@@ -16,6 +16,7 @@ type Props = {
   primaryColor?: string
   colorText?: string
   fcTitle?: string
+  customRedirectUri?: string
 }
 export const getLabelColorForType = (type: LoginSocialButtonType, color?: string): string => {
   switch (type) {
@@ -183,6 +184,7 @@ export const FranceConnectButton = styled.div<{
     & > svg {
       height: 56px;
       width: 209px;
+      border-radius: 4px;
     }
   }
 `
@@ -208,9 +210,10 @@ export const LoginSocialButton = ({
   primaryColor,
   colorText,
   fcTitle = 'fc-title',
+  customRedirectUri
 }: Props) => {
   const [isHover, seIsHover] = useState<boolean>(false)
-  const redirectUri = switchUserMode ? `${getBaseUrl()}/sso/switch-user` : window && window.location.href
+  const redirectUri = customRedirectUri ? customRedirectUri : switchUserMode ? `${getBaseUrl()}/sso/switch-user` : window && window.location.href
   const intl = useIntl()
 
   if (text === 'grandLyonConnect') {

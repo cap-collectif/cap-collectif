@@ -10,9 +10,12 @@ UpdateProfilePersonalDataErrorCode:
             PHONE_SHOULD_BE_MOBILE_NUMBER:
                 value: !php/const Capco\AppBundle\Enum\UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER
                 description: 'The given phone should be a mobile phone number.'
-            PHONE_ALREADY_USED_BY_ANOTHER_USER:
-                value: !php/const Capco\AppBundle\Enum\UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER
-                description: 'The given phone is already used by another user.'
             PHONE_INVALID_LENGTH:
                 value: !php/const Capco\AppBundle\Enum\UserPhoneErrors::PHONE_INVALID_LENGTH
                 description: 'The given phone should be 10 digits.'
+            BAD_CODE:
+                value: !php/const Capco\AppBundle\Validator\Constraints\CheckIdentificationCode::BAD_CODE
+                description: 'The identification code does not exist.'
+            CODE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\Validator\Constraints\CheckIdentificationCode::CODE_ALREADY_USED
+                description: 'The identification code is already used by another user or participant.'

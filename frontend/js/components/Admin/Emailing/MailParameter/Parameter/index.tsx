@@ -10,8 +10,8 @@ import { InstructionContainer, ButtonMembers } from './style'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers'
 import ModalInternalMembers from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers'
-import type { Parameter_query } from '~relay/Parameter_query.graphql'
-import type { Parameter_emailingCampaign } from '~relay/Parameter_emailingCampaign.graphql'
+import type { Parameter_query$data } from '~relay/Parameter_query.graphql'
+import type { Parameter_emailingCampaign$data } from '~relay/Parameter_emailingCampaign.graphql'
 import Text from '~ui/Primitives/Text'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Flex from '~ui/Primitives/Layout/Flex'
@@ -23,33 +23,23 @@ import select from '~/components/Form/Select'
 import { ModalGroupMembers } from '~/components/Admin/Emailing/ModalMembers/ModalGroupMembers'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import ModalProjectContributors from '~/components/Admin/Emailing/ModalMembers/ModalProjectContributors'
-import type { Parameter_projectOwner } from '~relay/Parameter_projectOwner.graphql'
-import type { Parameter_mailingListOwner } from '~relay/Parameter_mailingListOwner.graphql'
+import type { Parameter_projectOwner$data } from '~relay/Parameter_projectOwner.graphql'
+import type { Parameter_mailingListOwner$data } from '~relay/Parameter_mailingListOwner.graphql'
 
-export const DEFAULT_MAILING_LIST = ['REGISTERED', 'CONFIRMED', 'NOT_CONFIRMED']
+export const DEFAULT_MAILING_LIST = ['REGISTERED']
 type Props = {
-  emailingCampaign: Parameter_emailingCampaign
-  query: Parameter_query
+  emailingCampaign: Parameter_emailingCampaign$data
+  query: Parameter_query$data
   disabled: boolean
   showError: boolean
-  projectOwner: Parameter_projectOwner
-  mailingListOwner: Parameter_mailingListOwner
+  projectOwner: Parameter_projectOwner$data
+  mailingListOwner: Parameter_mailingListOwner$data
 }
 export const getWordingMailingInternal = (mailingInternal: string, intl: IntlShape) => {
   switch (mailingInternal) {
-    case 'CONFIRMED':
-      return intl.formatMessage({
-        id: 'default-mailing-list-registered-confirmed',
-      })
-
-    case 'NOT_CONFIRMED':
-      return intl.formatMessage({
-        id: 'default-mailing-list-registered-not-confirmed',
-      })
-
     case 'REGISTERED':
       return intl.formatMessage({
-        id: 'default-mailing-list-registered',
+        id: 'users',
       })
 
     default:
@@ -67,13 +57,11 @@ export const ParameterPage = ({
   const { mailingListFragment, mailingInternal, emailingGroup, project } = emailingCampaign
   const {
     users,
-    usersConfirmed,
-    usersNotConfirmed,
     usersRefusing,
-    usersConfirmedRefusing,
-    usersNotConfirmedRefusing,
     senderEmails,
     groups,
+    participants,
+    participantsRefusing,
   } = query
   const { mailingLists } = mailingListOwner
   const { projects } = projectOwner
@@ -89,20 +77,10 @@ export const ParameterPage = ({
   React.useEffect(() => {
     if (mailingInternal) {
       switch (mailingInternal) {
-        case 'CONFIRMED':
-          setCountUsers(usersConfirmed.totalCount)
-          setCountUsersRefusing(usersConfirmedRefusing.totalCount)
-          break
-
-        case 'NOT_CONFIRMED':
-          setCountUsers(usersNotConfirmed.totalCount)
-          setCountUsersRefusing(usersNotConfirmedRefusing.totalCount)
-          break
-
         case 'REGISTERED':
         default:
-          setCountUsers(users.totalCount)
-          setCountUsersRefusing(usersRefusing.totalCount)
+          setCountUsers(users.totalCount + participants.totalCount)
+          setCountUsersRefusing(usersRefusing.totalCount + participantsRefusing.totalCount)
           break
       }
     }
@@ -127,15 +105,13 @@ export const ParameterPage = ({
     mailingInternal,
     mailingListFragment,
     users.totalCount,
-    usersConfirmed.totalCount,
-    usersNotConfirmed.totalCount,
     usersRefusing.totalCount,
-    usersConfirmedRefusing.totalCount,
-    usersNotConfirmedRefusing.totalCount,
     emailingGroup,
     project,
     mailingListValue,
     emailingGroupEnabled,
+    participants.totalCount,
+    participantsRefusing.totalCount,
   ])
 
   const getMailingList = () => {
@@ -191,16 +167,6 @@ export const ParameterPage = ({
             value: 'REGISTERED',
             label: getWordingMailingInternal('REGISTERED', intl),
             ariaLabel: getWordingMailingInternal('REGISTERED', intl),
-          },
-          {
-            value: 'CONFIRMED',
-            label: getWordingMailingInternal('CONFIRMED', intl),
-            ariaLabel: getWordingMailingInternal('CONFIRMED', intl),
-          },
-          {
-            value: 'NOT_CONFIRMED',
-            label: getWordingMailingInternal('NOT_CONFIRMED', intl),
-            ariaLabel: getWordingMailingInternal('NOT_CONFIRMED', intl),
           },
         ]
       : []
@@ -432,17 +398,11 @@ export default createFragmentContainer(ParameterPage, {
       usersRefusing: users(first: 0, consentInternalCommunication: false) {
         totalCount
       }
-      usersConfirmed: users(first: 0, emailConfirmed: true) {
-        totalCount
+      participants(first: 0) {
+          totalCount
       }
-      usersConfirmedRefusing: users(first: 0, emailConfirmed: true, consentInternalCommunication: false) {
-        totalCount
-      }
-      usersNotConfirmed: users(first: 0, emailConfirmed: false) {
-        totalCount
-      }
-      usersNotConfirmedRefusing: users(first: 0, emailConfirmed: false, consentInternalCommunication: false) {
-        totalCount
+      participantsRefusing: participants(first: 0, consentInternalCommunication: false) {
+          totalCount
       }
       senderEmails {
         id

@@ -8,23 +8,23 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "PhoneRequirement",
+            "participantMeetsTheRequirement": true,
+            "participantValue": "+33602020202",
+          },
+        },
+        Object {
+          "node": Object {
             "__typename": "FirstnameRequirement",
             "participantMeetsTheRequirement": true,
-            "participantValue": "Laurent",
+            "participantValue": "Participant1 firstname",
           },
         },
         Object {
           "node": Object {
             "__typename": "LastnameRequirement",
             "participantMeetsTheRequirement": true,
-            "participantValue": "Brunet",
-          },
-        },
-        Object {
-          "node": Object {
-            "__typename": "PhoneRequirement",
-            "participantMeetsTheRequirement": true,
-            "participantValue": "+3300000000",
+            "participantValue": "Participant1 lastname",
           },
         },
         Object {

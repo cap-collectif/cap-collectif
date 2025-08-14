@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Entity\ActionToken;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
 use Capco\AppBundle\Manager\TokenManager;
@@ -194,7 +195,8 @@ class MailerService extends MailerFactory
         return strpos($template, '.twig');
     }
 
-    private function getUnsubscribeUrl(User $recipient): string
+    /** @param Participant|User $recipient */
+    private function getUnsubscribeUrl($recipient): string
     {
         return $this->router->generate(
             'capco_app_action_token',

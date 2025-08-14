@@ -1232,3 +1232,179 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $createdAt
         theme: '@theme<numberBetween(1,4)>'
         category: '@pCategoryBp3Idf<numberBetween(1,5)>'
+    proposalWorkflowVoteA:
+        id: proposalWorkflowVoteA
+        title: Proposition A
+        body: Proposition A
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVoteB:
+        id: proposalWorkflowVoteB
+        title: Proposition B
+        body: Proposition B
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVoteC:
+        id: proposalWorkflowVoteC
+        title: Proposition C
+        body: Proposition C
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVoteD:
+        id: proposalWorkflowVoteD
+        title: Proposition D
+        body: Proposition D
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVoteE:
+        id: proposalWorkflowVoteE
+        title: Proposition E
+        body: Proposition E
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVoteF:
+        id: proposalWorkflowVoteF
+        title: Proposition F
+        body: Proposition F
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVote2-A:
+        id: proposalWorkflowVote2-A
+        title: Proposition 2-A
+        body: Proposition 2-A
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote2'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVote2-B:
+        id: proposalWorkflowVote2-B
+        title: Proposition 2-B
+        body: Proposition 2-B
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote2'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVote2-C:
+        id: proposalWorkflowVote2-C
+        title: Proposition 2-C
+        body: Proposition 2-C
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote2'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowVote2-D:
+        id: proposalWorkflowVote2-D
+        title: Proposition 2-D
+        body: Proposition 2-D
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowVote2'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteA:
+        id: proposalWorkflowCollectVoteA
+        title: Proposition Collect + Vote A
+        body: Proposition Collect + Vote A
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteB:
+        id: proposalWorkflowCollectVoteB
+        title: Proposition Collect + Vote B
+        body: Proposition Collect + Vote B
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteC:
+        id: proposalWorkflowCollectVoteC
+        title: Proposition Collect + Vote C
+        body: Proposition Collect + Vote C
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteD:
+        id: proposalWorkflowCollectVoteD
+        title: Proposition Collect + Vote D
+        body: Proposition Collect + Vote D
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteE:
+        id: proposalWorkflowCollectVoteE
+        title: Proposition Collect + Vote E
+        body: Proposition Collect + Vote E
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+    proposalWorkflowCollectVoteF:
+        id: proposalWorkflowCollectVoteF
+        title: Proposition Collect + Vote F
+        body: Proposition Collect + Vote F
+        author: '@user1'
+        proposalForm: '@proposalFormWorkflowCollectVote'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt

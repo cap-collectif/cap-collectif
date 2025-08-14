@@ -209,10 +209,14 @@
                 <cascade-remove/>
             </cascade>
         </one-to-many>
-
+        <field name="magicLinkSentAt" column="magic_link_sent_at" type="datetime" nullable="true" />
         <field name="anonymizationReminderEmailSentAt" column="anonymization_reminder_email_sent_at" type="datetime" nullable="true"/>
         <field name="anonymizationReminderEmailToken" column="anonymization_reminder_email_token" type="string" length="255" nullable="true"/>
-
+        <field name="consentPrivacyPolicy" column="consent_privacy_policy" type="boolean" nullable="false">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
     </entity>
 
 </doctrine-mapping>

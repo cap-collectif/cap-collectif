@@ -260,7 +260,6 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly when admin proj
                 "LASTNAME": true,
               }
             }
-            isAnonymousParticipationAllowed={false}
             isFranceConnectConfigured={true}
             questionnaire={
               Object {
@@ -549,7 +548,6 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with a question
                 "LASTNAME": true,
               }
             }
-            isAnonymousParticipationAllowed={false}
             isFranceConnectConfigured={true}
             questionnaire={
               Object {
@@ -838,7 +836,6 @@ exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with no data 1`
                 "LASTNAME": true,
               }
             }
-            isAnonymousParticipationAllowed={false}
             isFranceConnectConfigured={true}
             requirements={
               Array [
@@ -1121,7 +1118,6 @@ exports[`<ProjectAdminQuestionnaireStepForm /> should not render requirements wh
                 "LASTNAME": true,
               }
             }
-            isAnonymousParticipationAllowed={true}
             isFranceConnectConfigured={true}
             questionnaire={
               Object {

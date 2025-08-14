@@ -2,12 +2,9 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import type { RegistrationFormWrapper_query$key } from '@relay/RegistrationFormWrapper_query.graphql'
 import { FormProvider, useForm } from 'react-hook-form'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { graphql, useFragment } from 'react-relay'
 import RegisterMutation from '@mutations/RegisterMutation'
-import { toast } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { ResponseInput } from '@relay/RegisterMutation.graphql'
 
 type FormValues = {
@@ -39,12 +36,12 @@ export const RegistrationFormWrapper: React.FC<{
   children: React.ReactNode
   query: RegistrationFormWrapper_query$key
   invitationToken?: string
-  email?: string
-}> = ({ children, query: queryFragment, invitationToken, email }) => {
+  email?: string,
+  onSuccess?: (email: string, password: string) => void
+}> = ({ children, query: queryFragment, invitationToken, email, onSuccess }) => {
   const query = useFragment(FRAGMENT, queryFragment)
 
   const intl = useIntl()
-  const shieldEnabled = useFeatureFlag('shield_mode')
 
   const methods = useForm<FormValues & { _error: any }>({
     mode: 'onSubmit',
@@ -82,48 +79,16 @@ export const RegistrationFormWrapper: React.FC<{
       return
     }
 
-    if (shieldEnabled && !form.invitationToken) {
-      toast({
-        content: intl.formatMessage(
-          { id: 'please-check-your-inbox' },
-          {
-            emailAddress: data.email,
-          },
-        ),
-        variant: 'success',
-      })
-    } else {
-      toast({ content: intl.formatMessage({ id: 'alert.success.add.user' }), variant: 'success' })
+    const adCookie = !(
+      typeof CookieMonster.adCookieConsentValue() === 'undefined' || CookieMonster.adCookieConsentValue() === false
+    )
 
-      const adCookie = !(
-        typeof CookieMonster.adCookieConsentValue() === 'undefined' || CookieMonster.adCookieConsentValue() === false
-      )
-
-      if (adCookie) {
-        // @ts-expect-error call to window function not currently well typed
-        window.App.dangerouslyExecuteHtml(query.registrationScript)
-      }
-
-      return fetch(`${window.location.origin}/login_check`, {
-        method: 'POST',
-        body: JSON.stringify({ username: data.email, password: data.plainPassword }),
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      })
-        .then(response => {
-          if (response.status >= 500) mutationErrorToast(intl)
-          return response.json()
-        })
-        .then((response: { success?: boolean }) => {
-          if (response.success) {
-            window.location.reload()
-            return true
-          }
-        })
+    if (adCookie) {
+      // @ts-expect-error call to window function not currently well typed
+      window.App.dangerouslyExecuteHtml(query.registrationScript)
+    }
+    if (onSuccess) {
+      onSuccess(data.email, data.plainPassword)
     }
   }
 

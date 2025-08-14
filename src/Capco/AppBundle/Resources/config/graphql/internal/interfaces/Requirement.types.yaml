@@ -18,7 +18,7 @@ Requirement:
                 description: 'Does the participant meets the requirement ?'
                 args:
                     token:
-                        type: 'String!'
+                        type: 'String'
                         description: 'The token associated to the Participant.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ParticipantMeetsTheRequirementResolver", value, args)'
             type:

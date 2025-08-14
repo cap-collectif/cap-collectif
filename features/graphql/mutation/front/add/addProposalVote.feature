@@ -37,78 +37,6 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
   }
   """
 
-@security
-Scenario: Logged in API client wants to vote for a proposal in a step with vote limited but has already reached vote limit
-  Given I am logged in to graphql as user_not_confirmed
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: AddProposalVoteInput!) {
-      addProposalVote(input: $input) {
-        vote {
-          id
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMzg="
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors": [
-      {
-        "message": "You have reached the limit of votes.",
-        "@*@": "@*@"
-      }
-    ],
-    "data": {
-      "addProposalVote": null
-    }
-  }
-  """
-
-@security
-Scenario: Logged in API client without all requirements wants to vote for a proposal in a step with requirements
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: AddProposalVoteInput!) {
-      addProposalVote(input: $input) {
-        vote {
-          id
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwyNA=="
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors": [
-      {
-        "message": "You dont meets all the requirements.",
-        "@*@": "@*@"
-      }
-    ],
-    "data": {
-      "addProposalVote": null
-    }
-  }
-  """
-
 @database
 Scenario: Logged in API client wants to vote for a question in a step with requirements
   Given I am logged in to graphql as user
@@ -347,16 +275,14 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   """
 
 @security
-Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
+Scenario: Logged in API client wants to vote for a proposal in a not contribuable selection step
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        vote {
-          id
-        }
+        errorCode
       }
     }",
     "variables": {
@@ -370,14 +296,10 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   Then the JSON response should match:
   """
   {
-    "errors": [
-      {
-        "message": "This step is no longer contributable.",
-        "@*@": "@*@"
-      }
-    ],
     "data": {
-      "addProposalVote": null
+      "addProposalVote": {
+        "errorCode": "CONTRIBUTION_NOT_ALLOWED"
+      }
     }
   }
   """

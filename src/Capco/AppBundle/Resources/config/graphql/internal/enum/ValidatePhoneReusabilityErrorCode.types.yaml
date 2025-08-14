@@ -1,0 +1,9 @@
+ValidatePhoneReusabilityErrorCode:
+    type: enum
+    config:
+        name: ValidatePhoneReusabilityErrorCode
+        description: 'Available errors on validetePhoneReusability mutation'
+        values:
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED
+                description: 'The given phone is already used by another participant / user in this step.'

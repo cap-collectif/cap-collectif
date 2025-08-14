@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
-use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
-use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,8 +51,8 @@ class ParticipantExporter
     }
 
     /**
-     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $participants
-     * @param array<string, string>                                                    $paths
+     * @param array<ExportableContributionInterface|Participant|Reply|User> $participants
+     * @param array<string, string>                                         $paths
      */
     protected function exportParticipants(array $participants, array $paths, bool $withHeaders, bool $append = false): void
     {
@@ -64,8 +64,8 @@ class ParticipantExporter
     }
 
     /**
-     * @param array<DebateAnonymousArgument>|array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $participants
-     * @param array<string, string>                                                                                   $paths
+     * @param array<ExportableContributionInterface|Participant|Reply|User> $participants
+     * @param array<string, string>                                         $paths
      */
     protected function writeFiles(array $participants, array $paths, bool $withHeaders, bool $append = false): void
     {

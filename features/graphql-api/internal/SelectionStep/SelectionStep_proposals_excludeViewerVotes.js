@@ -13,7 +13,7 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
               votes {
                 edges {
                   node {
-                    ...on ProposalUserVote {
+                    ...on ProposalVote {
                       author {
                         id
                         email

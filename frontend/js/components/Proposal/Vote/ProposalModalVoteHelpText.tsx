@@ -30,17 +30,17 @@ export const ProposalModalVoteHelpText: React.FC<Props> = ({ votesHelpText, step
   if (!rawText) return null;
 
   return (
-      <InfoMessage variant="info" width="100%">
-        <InfoMessage.Title>
-          {intl.formatMessage({
-            id: isInterpellationContextFromStep(step)
-              ? 'admin.fields.step.supportsHelpText'
-              : 'admin.fields.step.votesHelpText',
-          })}
-        </InfoMessage.Title>
-        <InfoMessage.Content>
-          <WYSIWYGRender value={votesHelpText} />
-        </InfoMessage.Content>
-      </InfoMessage>
+    <InfoMessage variant="info" width="100%">
+      <InfoMessage.Title>
+        {intl.formatMessage({
+          id: isInterpellationContextFromStep(step)
+            ? 'admin.fields.step.supportsHelpText'
+            : 'admin.fields.step.votesHelpText',
+        })}
+      </InfoMessage.Title>
+      <InfoMessage.Content>
+        <WYSIWYGRender value={votesHelpText} />
+      </InfoMessage.Content>
+    </InfoMessage>
   )
 }

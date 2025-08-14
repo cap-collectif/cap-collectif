@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { CapUIFontSize, Flex, Switch, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUIIcon, Flex, Icon, Switch, Text, Tooltip } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { config, RequirementTypeName } from '../Requirements/Requirements'
 import { useFormContext } from 'react-hook-form'
@@ -30,7 +30,8 @@ const RequirementItem: React.FC<Props> = ({
   const [checked, setIsChecked] = React.useState(() => isChecked)
 
   const apiTypename = config[typename].apiTypename
-  const title = config[typename].title
+  const title = intl.formatMessage({ id: config[typename].title })
+  const tooltip = config[typename].tooltip ? intl.formatMessage({ id: config[typename].tooltip }) : null
 
   const fc = watch('requirements').find(r => r.typename === 'FRANCE_CONNECT')
   const isDataCollectedByFranceConnect = requirement?.isCollectedByFranceConnect && fc?.isChecked
@@ -56,7 +57,16 @@ const RequirementItem: React.FC<Props> = ({
       <Flex justifyContent="space-between">
         <Text as="label" htmlFor={typename} fontWeight={600} width="100%" color="blue.900">
           <Flex justifyContent="space-between">
-            {intl.formatMessage({ id: title })}
+            {tooltip ? (
+              <Flex>
+                <Text>{title}</Text>
+                <Tooltip label={tooltip}>
+                  <Icon name={CapUIIcon.Info} color={'blue.500'} />
+                </Tooltip>
+              </Flex>
+            ) : (
+              title
+            )}
             {isDataCollectedByFranceConnect && (
               <Text as="span" mr={4} fontSize={CapUIFontSize.Caption} color="gray.400">
                 {intl.formatMessage({ id: 'data-collected-by-france-connect' })}

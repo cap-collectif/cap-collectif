@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useScrollYPosition } from 'react-use-scroll-position'
 
@@ -24,6 +24,9 @@ import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
+import { createPortal } from 'react-dom'
+import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
+import ParticipationWorkflowModal from '~/components/ParticipationWorkflow/ParticipationWorkflowModal'
 
 export type Props = {
   queryRef: ProposalPageLogic_query$key | null | undefined
@@ -83,9 +86,9 @@ const FRAGMENT = graphql`
     }
     step: node(id: $stepId) @include(if: $hasVotableStep) {
       ... on ProposalStep {
+        id
         title
         url
-        isProposalSmsVoteEnabled
       }
       ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalPageTabs_step
@@ -94,14 +97,14 @@ const FRAGMENT = graphql`
     proposal: proposalFromSlug(slug: $proposalSlug) {
       ...ProposalPageAside_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalDraftAlert_proposal
-      ...ProposalPageMainContent_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalPageMainContent_proposal @arguments(isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalPageAlert_proposal
       ...ProposalPageTabs_proposal
       ...ProposalPageVotes_proposal
       ...ProposalPageBlog_proposal
       ...ProposalPageFollowers_proposal
       ...ProposalPageHeader_proposal
-        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled)
+        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled, token: $token)
       ...ProposalPageMainAside_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         @include(if: $isAuthenticated)
@@ -165,8 +168,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis)
   const bottom = bodyHeight - scrollY - height - footerSize
   const twilio = useFeatureFlag('twilio')
-  const proposalSmsVote = useFeatureFlag('proposal_sms_vote')
-  const smsVoteEnabled = step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated
+  const smsVoteEnabled = twilio && !isAuthenticated
   const showVotesWidget =
     (isAuthenticated || smsVoteEnabled) && currentVotableStep && currentVotableStep.state === 'OPENED'
 
@@ -188,6 +190,29 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
     if (show !== 'SHOWED') setShow(viewer && isMobile && hasAnalysis ? 'TRUE' : 'FALSE')
   }, [show, viewer, hasAnalysis, isMobile])
 
+  const [voteId, setVoteId] = React.useState<string | null>(null)
+  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false);
+
+  const triggerRequirementsModal = (voteId: string) => {
+    setVoteId(voteId);
+    setShowRequirementsModal(true);
+  }
+
+
+  if (showRequirementsModal && voteId) {
+    return (
+      createPortal(
+        <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
+          <Suspense fallback={<ModalSkeleton/>}>
+            <ParticipationWorkflowModal stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
+          </Suspense>
+        </Box>,
+        document.body
+      )
+    )
+  }
+
+
   return (
     <>
       {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} />}
@@ -208,6 +233,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
             step={step}
             viewer={viewer}
             platformLocale={platformLocale}
+            triggerRequirementsModal={triggerRequirementsModal}
           />
           <ProposalPageTabs proposal={proposal} step={step} tabKey={tabKey} votesCount={votesCount} />
           <Tab.Content animation={false}>
@@ -258,7 +284,12 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
         </PageContainer>
       </Tab.Container>
       {hasAnalysis && !isMobile && proposal && tabKey === 'content' && (
-        <PanelContainer isAnalysing={isAnalysing} scrollY={scrollY} bottom={bottom} hasVoteBar={showVotesWidget}>
+        <PanelContainer
+          isAnalysing={isAnalysing}
+          scrollY={scrollY}
+          bottom={bottom}
+          hasVoteBar={showVotesWidget}
+        >
           <ProposalAnalysisPanel
             viewer={viewer}
             proposal={proposal}

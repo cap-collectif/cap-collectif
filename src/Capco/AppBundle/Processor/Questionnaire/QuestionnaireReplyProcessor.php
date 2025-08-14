@@ -2,16 +2,14 @@
 
 namespace Capco\AppBundle\Processor\Questionnaire;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
 class QuestionnaireReplyProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly ReplyRepository $replyRepository, private readonly ReplyAnonymousRepository $replyAnonymousRepository, private readonly QuestionnaireReplyNotifier $notifier)
+    public function __construct(private readonly ReplyRepository $replyRepository, private readonly QuestionnaireReplyNotifier $notifier)
     {
     }
 
@@ -25,7 +23,7 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE:
                 $replyId = $json['replyId'];
 
-                $reply = $this->getReply($replyId);
+                $reply = $this->replyRepository->find($replyId);
                 if (!$reply) {
                     throw new \RuntimeException('Unable to find reply/replyAnonymous with id : ' . $replyId);
                 }
@@ -47,15 +45,5 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
         }
 
         return true;
-    }
-
-    private function getReply(string $replyId): ?AbstractReply
-    {
-        $reply = $this->replyRepository->find($replyId);
-        if (!$reply) {
-            $reply = $this->replyAnonymousRepository->find($replyId);
-        }
-
-        return $reply;
     }
 }

@@ -4,9 +4,12 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
+use Capco\AppBundle\Traits\CompletionStatusTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -49,6 +52,14 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *            columns={"voter_id", "proposal_id", "collect_step_id"}
  *        ),
  *        @UniqueConstraint(
+ *            name="selection_step_vote_unique_participant",
+ *            columns={"participant_id", "proposal_id", "selection_step_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="collect_step_vote_unique_participant",
+ *            columns={"participant_id", "proposal_id", "collect_step_id"}
+ *        ),
+ *        @UniqueConstraint(
  *            name="source_vote_unique",
  *            columns={"voter_id", "source_id"}
  *        ),
@@ -68,14 +79,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *            name="debate_argument_vote_unique",
  *            columns={"voter_id", "debate_argument_id"}
  *        ),
- *        @UniqueConstraint(
- *            name="selection_step_sms_vote_unique",
- *            columns={"phone", "proposal_id", "selection_step_id"}
- *        ),
- *        @UniqueConstraint(
- *            name="collect_step_sms_vote_unique",
- *            columns={"phone", "proposal_id", "collect_step_id"}
- *        ),
  *    }
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
@@ -93,15 +96,20 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "debate"                    = "Capco\AppBundle\Entity\Debate\DebateVote",
  *      "debateArgument"            = "Capco\AppBundle\Entity\Debate\DebateArgumentVote",
  *      "debateAnonymousArgument"   = "Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote",
- *      "proposalSelectionSms"      = "ProposalSelectionSmsVote",
- *      "proposalCollectSms"        = "ProposalCollectSmsVote",
  * })
  */
-abstract class AbstractVote implements EntityInterface, Publishable, VoteContribution, IndexableInterface
+abstract class AbstractVote implements EntityInterface, Publishable, VoteContribution, IndexableInterface, ContributionInterface
 {
+    use CompletionStatusTrait;
     use IdTrait;
     use PublishableTrait;
     use TimestampableTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    protected ?Participant $participant = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
@@ -119,6 +127,11 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
      * @ORM\JoinColumn(name="mediator_id", referencedColumnName="id")
      */
     private ?Mediator $mediator = null;
+
+    /**
+     * @ORM\Column(name="is_created_before_workflow", type="boolean", options={"default": false})
+     */
+    private bool $isCreatedBeforeWorkflow = false;
 
     public function getKind(): string
     {
@@ -160,6 +173,18 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
     public function isPrivate(): bool
     {
         return false;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
     }
 
     /** ======= Useful methods for ElasticSearch ======= */
@@ -238,6 +263,29 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
     public function setMediator(?Mediator $mediator): self
     {
         $this->mediator = $mediator;
+
+        return $this;
+    }
+
+    public function setContributor(ContributorInterface $contributor): void
+    {
+        if ($contributor instanceof Participant) {
+            $this->setParticipant($contributor);
+            $this->setUser(null);
+        } elseif ($contributor instanceof User) {
+            $this->setParticipant(null);
+            $this->setUser($contributor);
+        }
+    }
+
+    public function getIsCreatedBeforeWorkflow(): bool
+    {
+        return $this->isCreatedBeforeWorkflow;
+    }
+
+    public function setIsCreatedBeforeWorkflow(bool $isCreatedBeforeWorkflow): self
+    {
+        $this->isCreatedBeforeWorkflow = $isCreatedBeforeWorkflow;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\CollectStepImapServerConfig;
 use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
@@ -13,10 +14,10 @@ use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
-use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,19 +26,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  * @CapcoAssert\VoteMin
  */
-class CollectStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface
+class CollectStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
     use ProposalArchivedTrait;
     use SecretBallotTrait;
     use TimelessStepTrait;
-    use VoteSmsTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
     final public const TYPE = 'collect';
 
-    public static $sort = [
+    /**
+     * @var array|string[]
+     */
+    public static array $sort = [
         'old',
         'last',
         'votes',
@@ -48,7 +51,10 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
         'cheap',
     ];
 
-    public static $sortLabels = [
+    /**
+     * @var array|string[]
+     */
+    public static array $sortLabels = [
         'global.filter_f_comments' => 'comments',
         'global.filter_f_last' => 'last',
         'global.filter_f_old' => 'old',
@@ -62,7 +68,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist"})
      */
-    private $proposalForm;
+    private ?ProposalForm $proposalForm = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
@@ -73,13 +79,19 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
      */
-    private $private = false;
+    private bool $private = false;
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
-    private $defaultSort = ProposalSort::RANDOM;
+    private string $defaultSort = ProposalSort::RANDOM;
+
+    /**
+     * @var Collection<int, ProposalCollectVote>
+     * @ORM\OneToMany(targetEntity=ProposalCollectVote::class, mappedBy="collectStep")
+     */
+    private Collection $collectVotes;
 
     /**
      * @ORM\OneToOne(targetEntity=CollectStepImapServerConfig::class, mappedBy="collectStep", cascade={"persist", "remove"})
@@ -196,6 +208,35 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
         }
 
         return false;
+    }
+
+    /**
+     * @return Collection<int, ProposalCollectVote >
+     */
+    public function getCollectVotes(): Collection
+    {
+        return $this->collectVotes;
+    }
+
+    /**
+     * @param Collection<int, ProposalCollectVote > $votes
+     *
+     * @return $this
+     */
+    public function setCollectVotes(Collection $votes): self
+    {
+        $this->collectVotes = $votes;
+
+        return $this;
+    }
+
+    public function addSelectionVote(ProposalCollectVote $selectionVote): self
+    {
+        if (!$this->collectVotes->contains($selectionVote)) {
+            $this->collectVotes->add($selectionVote);
+        }
+
+        return $this;
     }
 
     public function getCollectStepImapServerConfig(): ?CollectStepImapServerConfig

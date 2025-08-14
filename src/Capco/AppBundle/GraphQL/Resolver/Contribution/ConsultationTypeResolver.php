@@ -81,7 +81,7 @@ class ConsultationTypeResolver implements QueryInterface
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($data instanceof ProposalSelectionVote || $data instanceof ProposalCollectVote) {
-            return $this->typeResolver->resolve('InternalProposalUserVote');
+            return $this->typeResolver->resolve('InternalProposalVote');
         }
         if ($data instanceof Reply) {
             return $this->replyTypeResolver->__invoke($data);

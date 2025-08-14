@@ -503,3 +503,27 @@ Capco\AppBundle\Entity\ProposalForm:
         owner: '@user1'
         creator: '@user1'
         reference: 31
+    proposalFormWorkflowVote:
+        id: proposalFormWorkflowVote
+        title: Formulaire parcours vote
+        description: Formulaire parcours vote
+        step: '@collectStepWorkflowVote'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 32
+    proposalFormWorkflowVote2:
+        id: proposalFormWorkflowVote2
+        title: Formulaire parcours vote min 2 max 2
+        description: Formulaire parcours vote min 2 max 2
+        step: '@collectStepWorkflowVote2'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 33
+    proposalFormWorkflowCollectVote:
+        id: proposalFormWorkflowCollectVote
+        title: Formulaire parcours vote dépôt min 3 max 5
+        description: Formulaire parcours vote dépôt min 3 max 5
+        step: '@collectStepWorkflowCollectVote'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 34

@@ -19,7 +19,7 @@ PreviewProject:
                         type: 'UserOrder'
                         description: 'Ordering options for contributors returning from the connection.'
                         defaultValue: { field: CREATED_AT, direction: DESC }
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", value, info, args)'
             contributionsCount:
                 type: 'Int!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionCountResolver", value)'

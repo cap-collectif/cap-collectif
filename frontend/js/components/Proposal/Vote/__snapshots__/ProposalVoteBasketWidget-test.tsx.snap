@@ -44,6 +44,20 @@ exports[`<ProposalVoteBasketWidget /> should hide votes button when anon vote is
       </div>
     </div>
   </div>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    className="widget__button "
+    disabled={false}
+    href="/projects//consult/votes"
+  >
+    <FormattedMessage
+      id="project.votes.title"
+      values={Object {}}
+    />
+  </Button>
 </ProposalVoteBasketWidget__NavBar>
 `;
 

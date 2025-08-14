@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Enum\SendSMSErrorCode;
 use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation;
 use Capco\AppBundle\Helper\TwilioSmsProvider;
@@ -13,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 {
@@ -22,10 +24,11 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
         TwilioSmsProvider $smsProvider,
-        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
+        KernelInterface $kernel
     ): void {
         $smsProviderFactory->fetch()->willReturn($smsProvider);
-        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationSmsRepository);
+        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationSmsRepository, $kernel);
     }
 
     public function it_is_initializable(): void
@@ -56,7 +59,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 
         $smsList = [$sms];
         $userPhoneVerificationSmsRepository
-            ->findByUserWithinOneMinuteRange($viewer)
+            ->findSmsWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
             ->willReturn($smsList)
         ;
@@ -94,7 +97,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $smsList = [$sms, $sms2];
         $this->getMockedGraphQLArgumentFormatted($input);
         $userPhoneVerificationSmsRepository
-            ->findByUserWithinOneMinuteRange($viewer)
+            ->findSmsWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
             ->willReturn($smsList)
         ;
@@ -103,7 +106,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $payload['errorCode']->shouldBe('RETRY_LIMIT_REACHED');
     }
 
-    public function it_should_return_twilio_api_error_error_code(
+    public function it_should_return_server_error_error_code(
         TwilioSmsProvider $smsProvider,
         Arg $input,
         User $viewer,
@@ -125,7 +128,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 
         $smsList = [$sms];
         $userPhoneVerificationSmsRepository
-            ->findByUserWithinOneMinuteRange($viewer)
+            ->findSmsWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
             ->willReturn($smsList)
         ;
@@ -133,11 +136,11 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $smsProvider
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioSmsProvider::TWILIO_API_ERROR)
+            ->willReturn(SendSMSErrorCode::SERVER_ERROR)
         ;
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioSmsProvider::TWILIO_API_ERROR);
+        $payload['errorCode']->shouldBe(SendSMSErrorCode::SERVER_ERROR);
     }
 
     public function it_should_return_invalid_number_error_code(
@@ -153,11 +156,11 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 
         $viewer->getPhone()->shouldBeCalledOnce()->willReturn($to);
 
-        $userPhoneVerificationSmsRepository->findByUserWithinOneMinuteRange($viewer)->shouldBeCalledOnce()->willReturn([$sms]);
+        $userPhoneVerificationSmsRepository->findSmsWithinOneMinuteRange($viewer)->shouldBeCalledOnce()->willReturn([$sms]);
 
-        $smsProvider->sendVerificationSms($to)->shouldBeCalledOnce()->willReturn(TwilioSmsProvider::INVALID_NUMBER);
+        $smsProvider->sendVerificationSms($to)->shouldBeCalledOnce()->willReturn(SendSMSErrorCode::INVALID_NUMBER);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioSmsProvider::INVALID_NUMBER);
+        $payload['errorCode']->shouldBe(SendSMSErrorCode::INVALID_NUMBER);
     }
 }

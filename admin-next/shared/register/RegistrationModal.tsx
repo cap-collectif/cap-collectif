@@ -5,13 +5,14 @@ import RegistrationForm from './RegistrationForm'
 import LoginSocialButtons from '@shared/login/LoginSocialButtons'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { RegistrationModal_query$key } from '@relay/RegistrationModal_query.graphql'
-import { Box, Button, CapUIFontSize, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, CapUIModalSize, Heading, InfoMessage, Modal } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 
 type Props = {
   query: RegistrationModal_query$key
   show: boolean
-  onClose: () => void
+  onClose: () => void,
+  showPendingEmailConfirmation: boolean
 }
 
 const FRAGMENT = graphql`
@@ -27,13 +28,19 @@ const FRAGMENT = graphql`
   }
 `
 
-export const RegistrationModal = ({ onClose, show, query: queryFragment }: Props) => {
+export const RegistrationModal = ({ onClose, show, query: queryFragment, showPendingEmailConfirmation }: Props) => {
   const query = useFragment(FRAGMENT, queryFragment)
 
   const textTop = query.registrationForm.topTextDisplayed && query.registrationForm.topText
   const bottomText = query.registrationForm.bottomTextDisplayed && query.registrationForm.bottomText
 
   const intl = useIntl()
+
+
+  const {
+    getValues,
+  } = useFormContext()
+  const email = getValues('email')
 
   const {
     formState: { isSubmitting },
@@ -83,6 +90,18 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment }: Props
             <WYSIWYGRender value={bottomText} />
           </Box>
         )}
+        {
+          showPendingEmailConfirmation && (
+            <InfoMessage variant="warning" mt={2}>
+              <InfoMessage.Title>
+                {intl.formatMessage({ id: 'confirm-your-email' })}
+              </InfoMessage.Title>
+              <InfoMessage.Content>
+                {intl.formatMessage({ id: 'email-confirmation-help-message'}, { email })}
+              </InfoMessage.Content>
+            </InfoMessage>
+          )
+        }
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -96,7 +115,8 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment }: Props
           {intl.formatMessage({ id: 'global.cancel' })}
         </Button>
 
-        <Button variant="primary" id="confirm-login" type="submit" isLoading={isSubmitting} variantSize="big">
+        <Button variant="primary" id="confirm-login" type="submit" isLoading={isSubmitting}
+                variantSize="big">
           {intl.formatMessage({ id: isSubmitting ? 'global.loading' : 'global.register' })}
         </Button>
       </Modal.Footer>

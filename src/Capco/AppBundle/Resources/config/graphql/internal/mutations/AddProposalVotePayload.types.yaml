@@ -3,10 +3,16 @@ AddProposalVotePayload:
     config:
         fields:
             vote:
-                type: 'InternalProposalUserVote'
+                type: 'InternalProposalVote'
             viewer:
                 type: 'InternalUser'
             voteEdge:
                 type: 'InternalProposalVoteEdge'
             errorCode:
                 type: 'AddProposalVoteErrorCode'
+            shouldTriggerConsentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not we should trigger workflow modal to display internal communication modal.'
+            shouldIncrementProjectContributorsTotalCount:
+                type: 'Boolean'
+                description: 'Wether or not we should increment project contributors totalCount.'

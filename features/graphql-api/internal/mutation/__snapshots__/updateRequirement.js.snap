@@ -3,10 +3,12 @@
 exports[`mutations.updateRequirementMutation wants to accept a requirement as user 1`] = `
 Object {
   "updateRequirement": Object {
-    "requirement": Object {
-      "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
-      "viewerMeetsTheRequirement": true,
-    },
+    "requirements": Array [
+      Object {
+        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+        "viewerMeetsTheRequirement": true,
+      },
+    ],
   },
 }
 `;
@@ -14,10 +16,12 @@ Object {
 exports[`mutations.updateRequirementMutation wants to decline a requirement as user 1`] = `
 Object {
   "updateRequirement": Object {
-    "requirement": Object {
-      "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
-      "viewerMeetsTheRequirement": false,
-    },
+    "requirements": Array [
+      Object {
+        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+        "viewerMeetsTheRequirement": false,
+      },
+    ],
   },
 }
 `;

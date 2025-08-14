@@ -22,7 +22,7 @@ trait PublishableTrait
     }
 
     // We can only publish, never unpublish (= passing NULL)
-    public function setPublishedAt(\DateTime $publishedAt)
+    public function setPublishedAt(\DateTime $publishedAt): self
     {
         $this->published = true;
         $this->publishedAt = $publishedAt;

@@ -1,0 +1,18 @@
+SendSMSErrorCode:
+    type: enum
+    config:
+        name: SendSMSErrorCode
+        description: 'Available errors for an `verifyParticipantPhoneNumber and verifyUserPhoneNumber` mutations.'
+        values:
+            INVALID_NUMBER:
+                value: !php/const Capco\AppBundle\Enum\SendSMSErrorCode::INVALID_NUMBER
+                description: 'The given phone is not correctly formatted.'
+            PHONE_ALREADY_CONFIRMED:
+                value: !php/const Capco\AppBundle\Enum\SendSMSErrorCode::PHONE_ALREADY_CONFIRMED
+                description: 'The phone is already confirmed.'
+            RETRY_LIMIT_REACHED:
+                value: !php/const Capco\AppBundle\Enum\SendSMSErrorCode::RETRY_LIMIT_REACHED
+                description: 'The retry limit is reached.'
+            SERVER_ERROR:
+                value: !php/const Capco\AppBundle\Enum\SendSMSErrorCode::SERVER_ERROR
+                description: 'An error occured while calling sms verify api.'

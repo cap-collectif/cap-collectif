@@ -12,6 +12,9 @@ Capco\AppBundle\Entity\AbstractVote:
             groups: [ElasticsearchVote]
         private:
             groups: [ElasticsearchVote]
+        isCreatedBeforeWorkflow:
+            serialized_name: isCreatedBeforeWorkflow
+            groups: [ElasticsearchVote, ElasticsearchVoteNestedAuthor]
         getStep:
             type: object
             groups: [ElasticsearchVoteNestedStep]

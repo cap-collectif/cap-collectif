@@ -72,12 +72,33 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
                     },
                   ],
                   "kind": "FragmentSpread",
-                  "name": "InternalMembers_query",
+                  "name": "InternalMembers_query_users",
+                },
+                Object {
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "count",
+                      "variableName": "count",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "cursor",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                  ],
+                  "kind": "FragmentSpread",
+                  "name": "InternalMembers_query_participants",
                 },
               ],
               "type": "Query",
             },
-            "hash": "145c7d057fddef27cf501aefb4ae1d5d",
+            "hash": "4daa20c92683125cafdab4f4d67154da",
             "kind": "Request",
             "operation": Object {
               "argumentDefinitions": Array [
@@ -255,16 +276,183 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
                       "variableName": "count",
                     },
                   ],
-                  "filters": Array [],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
                   "handle": "connection",
                   "key": "InternalMembers_members",
                   "kind": "LinkedHandle",
                   "name": "users",
                 },
+                Object {
+                  "alias": "refusingParticipants",
+                  "args": Array [
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": false,
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": "participants(consentInternalCommunication:false)",
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "PageInfo",
+                      "kind": "LinkedField",
+                      "name": "pageInfo",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "hasNextPage",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "endCursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ParticipantEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Participant",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "email",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "cursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
+                  "handle": "connection",
+                  "key": "InternalParticipants_participants",
+                  "kind": "LinkedHandle",
+                  "name": "participants",
+                },
               ],
             },
             "params": Object {
-              "cacheID": "45a677a64c439ff9d62a9f2c4650a426",
+              "cacheID": "4d4c531cd3ee8b664707d53bde03446f",
               "id": null,
               "metadata": Object {},
               "name": "ModalInternalMembersQuery",
@@ -274,10 +462,31 @@ exports[`<ModalInternalMembers /> should open with internal list with confirmed 
   $cursor: String
   $emailConfirmed: Boolean
 ) {
-  ...InternalMembers_query_HnPGj
+  ...InternalMembers_query_users_HnPGj
+  ...InternalMembers_query_participants_HnPGj
 }
 
-fragment InternalMembers_query_HnPGj on Query {
+fragment InternalMembers_query_participants_HnPGj on Query {
+  refusingParticipants: participants(consentInternalCommunication: false) {
+    totalCount
+  }
+  participants(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+
+fragment InternalMembers_query_users_HnPGj on Query {
   refusingMembers: users(consentInternalCommunication: false) {
     totalCount
   }
@@ -385,12 +594,33 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
                     },
                   ],
                   "kind": "FragmentSpread",
-                  "name": "InternalMembers_query",
+                  "name": "InternalMembers_query_users",
+                },
+                Object {
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "count",
+                      "variableName": "count",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "cursor",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                  ],
+                  "kind": "FragmentSpread",
+                  "name": "InternalMembers_query_participants",
                 },
               ],
               "type": "Query",
             },
-            "hash": "145c7d057fddef27cf501aefb4ae1d5d",
+            "hash": "4daa20c92683125cafdab4f4d67154da",
             "kind": "Request",
             "operation": Object {
               "argumentDefinitions": Array [
@@ -568,16 +798,183 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
                       "variableName": "count",
                     },
                   ],
-                  "filters": Array [],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
                   "handle": "connection",
                   "key": "InternalMembers_members",
                   "kind": "LinkedHandle",
                   "name": "users",
                 },
+                Object {
+                  "alias": "refusingParticipants",
+                  "args": Array [
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": false,
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": "participants(consentInternalCommunication:false)",
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "PageInfo",
+                      "kind": "LinkedField",
+                      "name": "pageInfo",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "hasNextPage",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "endCursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ParticipantEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Participant",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "email",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "cursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
+                  "handle": "connection",
+                  "key": "InternalParticipants_participants",
+                  "kind": "LinkedHandle",
+                  "name": "participants",
+                },
               ],
             },
             "params": Object {
-              "cacheID": "45a677a64c439ff9d62a9f2c4650a426",
+              "cacheID": "4d4c531cd3ee8b664707d53bde03446f",
               "id": null,
               "metadata": Object {},
               "name": "ModalInternalMembersQuery",
@@ -587,10 +984,31 @@ exports[`<ModalInternalMembers /> should open with internal list with not confir
   $cursor: String
   $emailConfirmed: Boolean
 ) {
-  ...InternalMembers_query_HnPGj
+  ...InternalMembers_query_users_HnPGj
+  ...InternalMembers_query_participants_HnPGj
 }
 
-fragment InternalMembers_query_HnPGj on Query {
+fragment InternalMembers_query_participants_HnPGj on Query {
+  refusingParticipants: participants(consentInternalCommunication: false) {
+    totalCount
+  }
+  participants(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+
+fragment InternalMembers_query_users_HnPGj on Query {
   refusingMembers: users(consentInternalCommunication: false) {
     totalCount
   }
@@ -698,12 +1116,33 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
                     },
                   ],
                   "kind": "FragmentSpread",
-                  "name": "InternalMembers_query",
+                  "name": "InternalMembers_query_users",
+                },
+                Object {
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "count",
+                      "variableName": "count",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "cursor",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                  ],
+                  "kind": "FragmentSpread",
+                  "name": "InternalMembers_query_participants",
                 },
               ],
               "type": "Query",
             },
-            "hash": "145c7d057fddef27cf501aefb4ae1d5d",
+            "hash": "4daa20c92683125cafdab4f4d67154da",
             "kind": "Request",
             "operation": Object {
               "argumentDefinitions": Array [
@@ -881,16 +1320,183 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
                       "variableName": "count",
                     },
                   ],
-                  "filters": Array [],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
                   "handle": "connection",
                   "key": "InternalMembers_members",
                   "kind": "LinkedHandle",
                   "name": "users",
                 },
+                Object {
+                  "alias": "refusingParticipants",
+                  "args": Array [
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": false,
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": "participants(consentInternalCommunication:false)",
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "concreteType": "ParticipantConnection",
+                  "kind": "LinkedField",
+                  "name": "participants",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "PageInfo",
+                      "kind": "LinkedField",
+                      "name": "pageInfo",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "hasNextPage",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "endCursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ParticipantEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Participant",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "email",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "cursor",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "after",
+                      "variableName": "cursor",
+                    },
+                    Object {
+                      "kind": "Literal",
+                      "name": "consentInternalCommunication",
+                      "value": true,
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailConfirmed",
+                      "variableName": "emailConfirmed",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "first",
+                      "variableName": "count",
+                    },
+                  ],
+                  "filters": Array [
+                    "emailConfirmed",
+                    "consentInternalCommunication",
+                  ],
+                  "handle": "connection",
+                  "key": "InternalParticipants_participants",
+                  "kind": "LinkedHandle",
+                  "name": "participants",
+                },
               ],
             },
             "params": Object {
-              "cacheID": "45a677a64c439ff9d62a9f2c4650a426",
+              "cacheID": "4d4c531cd3ee8b664707d53bde03446f",
               "id": null,
               "metadata": Object {},
               "name": "ModalInternalMembersQuery",
@@ -900,10 +1506,31 @@ exports[`<ModalInternalMembers /> should open with internal list with registered
   $cursor: String
   $emailConfirmed: Boolean
 ) {
-  ...InternalMembers_query_HnPGj
+  ...InternalMembers_query_users_HnPGj
+  ...InternalMembers_query_participants_HnPGj
 }
 
-fragment InternalMembers_query_HnPGj on Query {
+fragment InternalMembers_query_participants_HnPGj on Query {
+  refusingParticipants: participants(consentInternalCommunication: false) {
+    totalCount
+  }
+  participants(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        __typename
+      }
+      cursor
+    }
+  }
+}
+
+fragment InternalMembers_query_users_HnPGj on Query {
   refusingMembers: users(consentInternalCommunication: false) {
     totalCount
   }

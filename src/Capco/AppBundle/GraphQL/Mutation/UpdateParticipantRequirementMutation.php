@@ -3,10 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ParticipantRequirement;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ParticipantRequirementRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -17,7 +18,7 @@ class UpdateParticipantRequirementMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ParticipantRequirementRepository $participantRequirementRepository, private readonly LoggerInterface $logger, private readonly ParticipantRepository $participantRepository, private readonly GlobalIdResolver $globalIdResolver)
+    public function __construct(private EntityManagerInterface $em, private ParticipantRequirementRepository $participantRequirementRepository, private LoggerInterface $logger, private GlobalIdResolver $globalIdResolver, private ParticipantHelper $participantHelper)
     {
     }
 
@@ -25,38 +26,47 @@ class UpdateParticipantRequirementMutation implements MutationInterface
     {
         $this->formatInput($input);
 
-        $value = $input->offsetGet('value');
-        $requirementId = $input->offsetGet('requirementId');
+        $values = $input->offsetGet('values');
         $participantToken = $input->offsetGet('participantToken');
 
-        $participant = $this->participantRepository->findOneBy(['token' => $participantToken]);
-        if (!$participant) {
-            throw new UserError('No participant found');
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException $e) {
+            throw new UserError($e->getMessage());
         }
 
-        $requirement = $this->globalIdResolver->resolve($requirementId);
+        $requirements = [];
 
-        if (!$requirement) {
-            $error = sprintf('Unknown requirement with id "%s"', $requirementId);
-            $this->logger->error($error);
+        foreach ($values as $valueInput) {
+            $value = $valueInput['value'];
+            $requirementId = $valueInput['requirementId'];
 
-            throw new UserError($error);
-        }
+            $requirement = $this->globalIdResolver->resolve($requirementId);
 
-        $participantRequirement = $this->participantRequirementRepository->findOneBy([
-            'requirement' => $requirement,
-            'participant' => $participant,
-        ]);
+            if (!$requirement) {
+                $error = sprintf('Unknown requirement with id "%s"', $requirementId);
+                $this->logger->error($error);
 
-        if (!$participantRequirement) {
-            $participantRequirement = new ParticipantRequirement($participant, $requirement, $value);
-            $this->em->persist($participantRequirement);
-        } else {
-            $participantRequirement->setValue($value);
+                throw new UserError($error);
+            }
+
+            $requirements[] = $requirement;
+
+            $participantRequirement = $this->participantRequirementRepository->findOneBy([
+                'requirement' => $requirement,
+                'participant' => $participant,
+            ]);
+
+            if (!$participantRequirement) {
+                $participantRequirement = new ParticipantRequirement($participant, $requirement, $value);
+                $this->em->persist($participantRequirement);
+            } else {
+                $participantRequirement->setValue($value);
+            }
         }
 
         $this->em->flush();
 
-        return ['requirement' => $requirement, 'participant' => $participant];
+        return ['requirements' => $requirements, 'participant' => $participant];
     }
 }

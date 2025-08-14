@@ -3,6 +3,9 @@ DeleteAnonymousReplyInput:
     config:
         description: 'Delete an anonymous reply'
         fields:
-            hashedToken:
+            replyId:
+                type: 'ID!'
+                description: 'The reply id to delete.'
+            participantToken:
                 type: 'String!'
-                description: 'The hashed token of the reply'
+                description: 'The token of the participant who created the reply.'

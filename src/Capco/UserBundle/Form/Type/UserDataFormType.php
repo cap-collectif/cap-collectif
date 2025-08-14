@@ -66,9 +66,7 @@ class UserDataFormType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('phone', TelType::class, [
-                'constraints' => [new CheckPhoneNumber([
-                    'stepId' => $options['stepId'],
-                ])],
+                'constraints' => [new CheckPhoneNumber()],
             ])
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')

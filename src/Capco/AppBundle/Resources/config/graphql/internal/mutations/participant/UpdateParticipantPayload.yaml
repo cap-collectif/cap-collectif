@@ -1,0 +1,10 @@
+UpdateParticipantPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            participant:
+                type: 'InternalParticipant!'
+                description: 'The updated Participant.'
+            validationErrors:
+                type: 'String'
+                description: 'Form errors JSON.'

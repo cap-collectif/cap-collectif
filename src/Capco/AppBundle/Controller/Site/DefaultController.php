@@ -3,16 +3,18 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Mailer\Message\MessagesList;
+use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DefaultController extends AbstractController
@@ -20,14 +22,20 @@ class DefaultController extends AbstractController
     /**
      * @Route("/login_check", name="login_check", options={"i18n" = false})
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, TokenStorageInterface $tokenStorage, LoggerInterface $logger, FOSNotifier $notifier)
     {
-        if (
-            $this->get(Manager::class)->isActive('shield_mode')
-            && !$this->getUser()->isEmailConfirmed()
-        ) {
+        $user = $this->getUser();
+
+        if (!$user->isEmailConfirmed()) {
             if ($request->getSession()) {
                 $request->getSession()->invalidate();
+            }
+            $tokenStorage->setToken(null);
+
+            if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
+                $logger->warning('Email already sent less than a minute ago.');
+            } else {
+                $notifier->sendConfirmationEmailMessage($user);
             }
 
             return $this->json([
@@ -36,7 +44,7 @@ class DefaultController extends AbstractController
             ]);
         }
 
-        if (!$this->getUser()) {
+        if (!$user) {
             return $this->json([
                 'success' => false,
             ]);

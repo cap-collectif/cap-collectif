@@ -17,6 +17,7 @@ describe('<ProposalsList />', () => {
 
     const setFilters = jest.fn()
     const setView = jest.fn()
+    const setIsParticipationAnonymous = jest.fn()
 
     TestProposalsList = ({ showImages }) => (
       <RelaySuspensFragmentTest environment={environment}>
@@ -37,6 +38,9 @@ describe('<ProposalsList />', () => {
             view: 'map',
             setFilters,
             setView,
+            hasMapView: false,
+            isParticipationAnonymous: false,
+            setIsParticipationAnonymous
           }}
         >
           <TestRenderer showImages={showImages} />

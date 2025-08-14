@@ -19,7 +19,8 @@ import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation
 import { AddProposalVoteMutation$data } from '~relay/AddProposalVoteMutation.graphql'
 import { useVoteStepContext } from './Context/VoteStepContext'
 import ResetCss from '~/utils/ResetCss'
-import ProposalVoteModal from '../Proposal/Vote/ProposalVoteModal'
+import { VoteButton_participant$key } from '~relay/VoteButton_participant.graphql'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Props = {
   proposalId: string
@@ -27,16 +28,17 @@ type Props = {
   disabled: boolean
   proposal: VoteButton_proposal$key | null | undefined
   viewer: VoteButton_viewer$key | null | undefined
+  participant: VoteButton_participant$key | null | undefined
   step: VoteButton_step$key | null | undefined
 }
 
 const FRAGMENT = graphql`
   fragment VoteButton_proposal on Proposal
-  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     estimation
+    ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId, token: $token)
     title
-    ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
     ...ProposalVoteModal_proposal
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
     paperVotesTotalCount(stepId: $stepId)
@@ -57,7 +59,7 @@ const FRAGMENT_STEP = graphql`
   fragment VoteButton_step on Step
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteModal_step @arguments(token: $token)
     ... on ProposalStep {
       open
       project {
@@ -95,8 +97,17 @@ const FRAGMENT_STEP = graphql`
 const FRAGMENT_VIEWER = graphql`
   fragment VoteButton_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
     ...ProposalPreviewVote_viewer @arguments(stepId: $stepId)
-    ...ProposalVoteModal_viewer
     proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
+      totalCount
+      creditsLeft
+    }
+  }
+`
+
+const PARTICIPANT_FRAGMENT = graphql`
+  fragment VoteButton_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...ProposalPreviewVote_participant @arguments(stepId: $stepId)
+    proposalVotes(stepId: $stepId) {
       totalCount
       creditsLeft
     }
@@ -110,12 +121,14 @@ const VoteButton = ({
   proposal: proposalFragment,
   viewer: viewerFragment,
   step: stepFragment,
+  participant: participantFragment,
 }: Props) => {
   const isAuthenticated = useSelector((state: GlobalState) => state.user.user) !== null
   const dispatch = useDispatch()
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)
   const step = useFragment(FRAGMENT_STEP, stepFragment)
+  const participant = useFragment(PARTICIPANT_FRAGMENT, participantFragment)
   const [isLoading, setIsLoading] = React.useState(false)
   const isVoteMin = useFeatureFlag('votes_min')
   const { isParticipationAnonymous, setView } = useVoteStepContext()
@@ -125,13 +138,13 @@ const VoteButton = ({
   const remainingVotesAfterValidation = votesMin - viewerVotesBeforeValidation - 1
   const hasFinished = remainingVotesAfterValidation < 0
   const hasJustFinished = remainingVotesAfterValidation === 0
+  const token = CookieMonster.getParticipantCookie();
 
   const { paperVotesTotalCount, votes } = proposal
 
   const totalCount = votes.totalCount + paperVotesTotalCount
 
-  const hasVoted =
-    viewer && proposal?.viewerHasVote
+  const hasVoted = proposal?.viewerHasVote
       ? proposal.viewerHasVote
       : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false
 
@@ -154,6 +167,12 @@ const VoteButton = ({
           proposalId,
         })
         setIsLoading(false)
+        toast({
+          variant: 'success',
+          content: intl.formatMessage({
+            id: 'vote.delete_success',
+          })
+        })
       })
       .catch(() => {
         setIsLoading(false)
@@ -167,7 +186,9 @@ const VoteButton = ({
   }
 
   const onButtonClick = () => {
-    if (hasVoted) deleteVote()
+    if (hasVoted) {
+      deleteVote()
+    }
     else {
       setIsLoading(true)
       vote(
@@ -177,7 +198,7 @@ const VoteButton = ({
         isParticipationAnonymous,
         intl,
         isAuthenticated,
-        '',
+        token,
         () => {
           setIsLoading(false)
           if (votesMin > 1 && (!hasFinished || hasJustFinished)) {
@@ -185,7 +206,7 @@ const VoteButton = ({
               variant: hasJustFinished ? 'success' : 'warning',
               content: intl.formatMessage(
                 {
-                  id: hasJustFinished ? 'participation-validated' : 'vote-for-x-proposals',
+                  id: hasJustFinished ? (isAuthenticated ? 'participation-validated' :  'participation-validated-anonymous') : 'vote-for-x-proposals',
                 },
                 {
                   num: remainingVotesAfterValidation,
@@ -214,6 +235,7 @@ const VoteButton = ({
                 id: 'vote.add_success',
               }),
             })
+            setIsLoading(false)
           }
         },
         () => setIsLoading(false),
@@ -269,8 +291,6 @@ const VoteButton = ({
 
   return (
     <>
-      {isAuthenticated && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
-
       {
         /**
          * Dans les cas suivants : vote anonyme (SMS), vote max atteint, conditions requises non remplies,
@@ -291,6 +311,7 @@ const VoteButton = ({
             proposal={proposal}
             usesNewUI
             disabled={disabled || isLoading}
+            participant={participant}
           />
         ) : (
           <VoteButtonUI

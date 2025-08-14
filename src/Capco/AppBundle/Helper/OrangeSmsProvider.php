@@ -2,26 +2,22 @@
 
 namespace Capco\AppBundle\Helper;
 
+use Capco\AppBundle\Enum\SendSMSErrorCode;
+use Capco\AppBundle\Enum\VerifySMSErrorCode;
 use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Predis\ClientInterface;
 use Psr\Log\LoggerInterface;
 
 class OrangeSmsProvider implements SmsProviderInterface
 {
-    final public const INVALID_NUMBER = 'INVALID_NUMBER'; // For 400 errors
-    final public const UNAUTHORIZED = 'UNAUTHORIZED'; // For 401 errors
-    final public const RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED'; // For 429 errors
-    final public const SERVER_ERROR = 'SERVER_ERROR'; // For 500 errors
-    final public const UNKNOWN_ERROR = 'UNKNOWN_ERROR'; // Catch-all for any other errors
-    final public const NOT_VALID_CODE = 'NOT_VALID_CODE';
-    final public const CODE_NOT_VALID = 'CODE_NOT_VALID';
-    final public const CODE_EXPIRED = 'CODE_EXPIRED';
-
-    final public const NOT_FOUND = 'NOT_FOUND';
     final public const REDIS_KEY_SMS_VERIFICATION = 'sms:verification:';
 
-    public function __construct(private readonly OrangeClient $orangeClient, private readonly LoggerInterface $logger, private readonly ClientInterface $redis, private readonly int $redisExpirationTime)
-    {
+    public function __construct(
+        private readonly OrangeClient $orangeClient,
+        private readonly LoggerInterface $logger,
+        private readonly ClientInterface $redis,
+        private readonly int $redisExpirationTime,
+    ) {
     }
 
     public function sendVerificationSms(string $phone): ?string
@@ -37,21 +33,27 @@ class OrangeSmsProvider implements SmsProviderInterface
                 return null;  // Success
 
             case 400:
-                return self::INVALID_NUMBER;
+                $this->logger->error('400 - Returned if one of the required parameters is not specified or does not have the proper format. ' . $phone);
+
+                return SendSMSErrorCode::INVALID_NUMBER;
 
             case 401:
-                return self::UNAUTHORIZED;
+                $this->logger->error('401 - Returned if the token is invalid or inactive. ' . $phone);
+
+                return SendSMSErrorCode::SERVER_ERROR;
 
             case 429:
-                return self::RATE_LIMIT_EXCEEDED;
+                $this->logger->error('429 - Returned if the max amount of SMS/EMAIL per hour and MSISDN/Email is reached. ' . $phone);
+
+                return SendSMSErrorCode::RETRY_LIMIT_REACHED;
 
             case 500:
-                return self::SERVER_ERROR;
+                return SendSMSErrorCode::SERVER_ERROR;
 
             default:
-                $this->logger->error("Received unexpected HTTP status code: {$statusCode}");
+                $this->logger->error("Received unexpected HTTP status code: {$statusCode}. {$phone}");
 
-                return self::UNKNOWN_ERROR;  // Catch-all for any other non-successful status
+                return SendSMSErrorCode::SERVER_ERROR;
         }
     }
 
@@ -62,43 +64,51 @@ class OrangeSmsProvider implements SmsProviderInterface
         if (!$requestId) {
             $this->logger->error("No requestId found for phone: {$phone}");
 
-            return self::CODE_EXPIRED;
+            return VerifySMSErrorCode::CODE_EXPIRED;
         }
 
         $response = $this->orangeClient->checkVerificationCode($requestId, $code);
         $statusCode = $response['statusCode'];
         $data = $response['data'];
 
+        // docs available here : https://github.com/cap-collectif/platform/issues/16912 - Live Identity Verify API Integration Specification v1.0.25.pdf
         switch ($statusCode) {
             case 200:
                 if (($data['validOtp'] ?? null) === false) {
-                    return self::CODE_NOT_VALID;
+                    return VerifySMSErrorCode::CODE_NOT_VALID;
                 }
 
-                return null; // Success
+                return null;
 
             case 400:
-                return $data['error_description'] ?? self::INVALID_NUMBER;
+                $this->logger->error('Orange SMS API - 400 - Returned if one of the required parameters is not specified or does not have the proper format. ' . $phone);
+
+                return VerifySMSErrorCode::SERVER_ERROR;
 
             case 401:
-                return $data['error_description'] ?? self::UNAUTHORIZED;
+                $this->logger->error('Orange SMS API - 401 - Returned if the token is invalid or inactive. ' . $phone);
 
-            case 403:
-                return $data['error_description'] ?? self::CODE_NOT_VALID; // OTP was incorrect
+                return VerifySMSErrorCode::CODE_EXPIRED;
 
             case 404:
-                return $data['error_description'] ?? self::NOT_FOUND;
+                $this->logger->error('Orange SMS API - 404 - Returned if the requestId was not found. ' . $phone);
+
+                return VerifySMSErrorCode::CODE_EXPIRED;
 
             case 429:
-                return $data['error_description'] ?? self::RATE_LIMIT_EXCEEDED;
+                $this->logger->error('Orange SMS API - 429 - Maximum validation attempts reached (3 attempts maximum). ' . $phone);
+
+                return VerifySMSErrorCode::RETRY_LIMIT_REACHED;
 
             case 500:
-                return $data['error_description'] ?? self::SERVER_ERROR;
+                $this->logger->error('Orange SMS API - 500 - Orange Verify API Server Error. ' . $phone);
+
+                return VerifySMSErrorCode::SERVER_ERROR;
 
             default:
-                $this->logger->error("Received unexpected HTTP status code: {$statusCode}");
+                $this->logger->error("Received unexpected HTTP status code: {$statusCode}. {$phone}");
 
-                return 'UNKNOWN ERROR';
+                return VerifySMSErrorCode::SERVER_ERROR;
         }
     }
 

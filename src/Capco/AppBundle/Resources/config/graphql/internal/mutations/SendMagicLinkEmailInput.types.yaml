@@ -1,0 +1,14 @@
+SendMagicLinkEmailInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            email:
+                type: 'Email!'
+                description: 'The email to send the magic link to.'
+            variant:
+                type: 'SendMagicLinkEmailVariantEnum'
+                description: 'Available email template variants'
+                defaultValue: !php/const Capco\AppBundle\Service\ParticipationWorkflow\MagicLinkEmailSender::DEFAULT
+            redirectUrl:
+                type: 'URI!'
+                description: 'The url to redirect to after logging in.'

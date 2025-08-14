@@ -4,7 +4,7 @@ exports[`mutations.updateAnonymousReply should update an anonymous reply 1`] = `
 Object {
   "updateAnonymousReply": Object {
     "reply": Object {
-      "__typename": "AnonymousReply",
+      "__typename": "Reply",
       "id": "UmVwbHk6cmVwbHlBbm9ueW1vdXMx",
       "responses": Array [
         Object {

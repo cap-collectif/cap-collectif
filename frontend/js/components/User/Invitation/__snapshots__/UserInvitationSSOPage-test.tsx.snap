@@ -81,7 +81,7 @@ Array [
           </div>
           <a
             backgroundColor="green"
-            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
+            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA gaZgJr hMpXwe"
             href="/?token=onishan"
             onClick={[Function]}
             textColor="white"
@@ -146,10 +146,10 @@ Array [
           className="sc-gsGkXq Flex___StyledAppBox-SiGEY eKpbrE UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
           <div
-            className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
+            className="SSOButtonstyle__FranceConnectButton-iIoYOE gkPYMZ"
           >
             <a
-              className="sc-gsGkXq Link__LinkInner-jUMeyB ddgViA jQFfTS"
+              className="sc-gsGkXq Link__LinkInner-jUMeyB jAqizK jQFfTS"
               href="/login/franceconnect?_destination=http://localhost"
               target="_blank"
             >
@@ -183,7 +183,7 @@ Array [
           </div>
           <a
             backgroundColor="green"
-            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
+            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA gaZgJr hMpXwe"
             href="/?token=onishan"
             onClick={[Function]}
             textColor="white"

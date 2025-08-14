@@ -2,11 +2,10 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -23,13 +22,12 @@ class ReplyAnonymousType extends AbstractType
             'types' => [ValueResponseType::class, MediaResponseType::class],
             'type_name' => AbstractResponse::TYPE_FIELD_NAME,
         ]);
-        $builder->add('participantEmail', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ReplyAnonymous::class,
+            'data_class' => Reply::class,
             'csrf_protection' => false,
             'constraints' => new Valid(),
         ]);

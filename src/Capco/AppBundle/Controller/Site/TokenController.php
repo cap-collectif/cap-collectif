@@ -13,7 +13,7 @@ use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\Repository\ActionTokenRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateVoteTokenRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -191,15 +191,15 @@ class TokenController extends AbstractController
     public function unsubscribeAnonymous(
         EntityManagerInterface $entityManager,
         DebateAnonymousArgumentRepository $argumentRepository,
-        ReplyAnonymousRepository $replyRepository,
+        ParticipantRepository $participantRepository,
         Request $request
     ): Response {
         $email = $request->get('email');
         $token = $request->get('token');
         $argument = $argumentRepository->findOneBy(['email' => $email, 'token' => $token]);
         if (null === $argument) {
-            $reply = $replyRepository->findOneBy(['participantEmail' => $email, 'token' => $token]);
-            if (null === $reply) {
+            $participant = $participantRepository->findOneBy(['email' => $email, 'token' => $token]);
+            if (null === $participant) {
                 $this->logger->info(
                     __METHOD__ . ' : invalid token and email : ' . $email . ' - ' . $token . '}'
                 );
@@ -210,15 +210,12 @@ class TokenController extends AbstractController
 
                 return $this->redirectToRoute('app_homepage');
             }
+            $participant->setConsentInternalCommunication(false);
         }
         $arguments = $argumentRepository->findBy(['email' => $email]);
-        $replies = $replyRepository->findBy(['participantEmail' => $email]);
 
         foreach ($arguments as $argument) {
             $argument->setConsentInternalCommunication(false);
-        }
-        foreach ($replies as $reply) {
-            $reply->setEmailConfirmed(false);
         }
 
         $entityManager->flush();

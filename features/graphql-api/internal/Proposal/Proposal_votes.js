@@ -11,7 +11,7 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
           edges {
             node {
               id
-              ...on ProposalUserVote {
+              ...on ProposalVote {
                   isAccounted
                   published
               }
@@ -27,7 +27,7 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
           edges {
             node {
               id
-              ...on ProposalUserVote {
+              ...on ProposalVote {
                   isAccounted
                   published
               }

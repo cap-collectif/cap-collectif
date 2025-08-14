@@ -1,9 +1,0 @@
-PreviewUserReplyConnection:
-    type: relay-connection
-    config:
-        name: UserReplyConnection
-        nodeType: PreviewUserReply!
-        connectionFields:
-            totalCount:
-                type: Int!
-                description: Identifies the total count of items in the connection.

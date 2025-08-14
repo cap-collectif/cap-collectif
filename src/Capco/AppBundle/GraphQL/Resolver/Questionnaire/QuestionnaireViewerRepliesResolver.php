@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -15,7 +17,7 @@ class QuestionnaireViewerRepliesResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly ReplyRepository $replyRepo, private readonly LoggerInterface $logger)
+    public function __construct(private ReplyRepository $replyRepo, private LoggerInterface $logger, private EntityManagerInterface $em)
     {
     }
 
@@ -26,6 +28,10 @@ class QuestionnaireViewerRepliesResolver implements QueryInterface
     ): ConnectionInterface {
         $viewer = $this->preventNullableViewer($viewer);
         $totalCount = 0;
+
+        if ($this->em->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->em->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
 
         $paginator = new Paginator(function (int $limit, int $offset) use (
             $questionnaire,

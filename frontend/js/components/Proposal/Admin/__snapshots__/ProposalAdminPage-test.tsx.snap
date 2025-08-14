@@ -2003,21 +2003,14 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "username",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "avatarUrl",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
                                     "name": "displayName",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "username",
                                     "storageKey": null,
                                   },
                                   Object {
@@ -2076,6 +2069,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     "kind": "ScalarField",
                                     "name": "__typename",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isContributor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Contributor",
                                   },
                                 ],
                                 "storageKey": null,
@@ -2416,7 +2423,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "bc04370cd09a1d1e91f06d22f7c1df51",
+            "cacheID": "fa47533db6e8e2af404d2b508055b44a",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2879,8 +2886,11 @@ fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }

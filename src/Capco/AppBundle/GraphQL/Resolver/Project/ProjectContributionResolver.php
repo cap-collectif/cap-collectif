@@ -62,6 +62,7 @@ class ProjectContributionResolver implements QueryInterface
                     $limit,
                     $cursor
                 );
+
                 $totalCount = $response->getTotalCount();
 
                 return $response;

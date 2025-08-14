@@ -64,7 +64,6 @@ class FeaturesCategoryResolver
                     Manager::analytics_page,
                     Manager::project_admin,
                     Manager::noindex_on_profiles,
-                    Manager::anonymous_questionnaire,
                     Manager::twilio,
                     Manager::paper_vote,
                     Manager::helpscout_beacon,

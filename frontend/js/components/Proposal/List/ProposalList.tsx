@@ -15,6 +15,7 @@ type Props = {
   step: ProposalList_step$data | null | undefined
   proposals: ProposalList_proposals$data
   viewer: ProposalList_viewer$data | null | undefined
+  participant: ProposalList_participant$data | null | undefined
   view?: ProposalViewMode
 }
 const classes = classNames({
@@ -23,7 +24,7 @@ const classes = classNames({
   opinion__list: true,
 })
 
-const renderProposals = (proposals, step, viewer) => (
+const renderProposals = (proposals, step, viewer, participant) => (
   <Row>
     <ul className={classes}>
       {proposals.edges &&
@@ -31,7 +32,7 @@ const renderProposals = (proposals, step, viewer) => (
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          .map((node, key) => <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} isSPA={false} />)}
+          .map((node, key) => <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} isSPA={false} participant={participant} />)}
     </ul>
   </Row>
 )
@@ -51,7 +52,7 @@ const getEmptyWordingProposalList = (step: ProposalList_step$data | null | undef
 
 export class ProposalList extends React.Component<Props> {
   render() {
-    const { step, proposals, viewer, view } = this.props
+    const { step, proposals, viewer, view, participant } = this.props
 
     if (proposals.totalCount === 0) {
       return (
@@ -70,14 +71,14 @@ export class ProposalList extends React.Component<Props> {
         {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length > 0 && (
           <React.Fragment>
             {view === 'GRID'
-              ? renderProposals(proposalsVisiblePublicly, step, viewer)
+              ? renderProposals(proposalsVisiblePublicly, step, viewer, participant)
               : renderProposalListTableView(proposalsVisiblePublicly, step)}
           </React.Fragment>
         )}
         {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length > 0 && (
           <VisibilityBox enabled>
             {view === 'GRID'
-              ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
+              ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer, participant)
               : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
           </VisibilityBox>
         )}
@@ -89,6 +90,11 @@ export default createFragmentContainer(ProposalList, {
   viewer: graphql`
     fragment ProposalList_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
       ...ProposalPreview_viewer @arguments(stepId: $stepId)
+    }
+  `,
+  participant: graphql`
+    fragment ProposalList_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalPreview_participant @arguments(stepId: $stepId)
     }
   `,
   step: graphql`
@@ -118,7 +124,7 @@ export default createFragmentContainer(ProposalList, {
       edges {
         node {
           id
-          ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+          ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
         }
       }
     }

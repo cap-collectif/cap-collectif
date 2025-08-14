@@ -43,6 +43,18 @@ class RequirementTypeResolver implements QueryInterface
         if (Requirement::FRANCE_CONNECT === $requirement->getType()) {
             return $this->typeResolver->resolve('FranceConnectRequirement');
         }
+        if (Requirement::EMAIL_VERIFIED === $requirement->getType()) {
+            return $this->typeResolver->resolve('EmailVerifiedRequirement');
+        }
+        if (Requirement::ZIP_CODE === $requirement->getType()) {
+            return $this->typeResolver->resolve('ZipCodeRequirement');
+        }
+        if (Requirement::CONSENT_PRIVACY_POLICY === $requirement->getType()) {
+            return $this->typeResolver->resolve('ConsentPrivacyPolicyRequirement');
+        }
+        if (Requirement::SSO === $requirement->getType()) {
+            return $this->typeResolver->resolve('SSORequirement');
+        }
 
         throw new UserError('Could not resolve type of Requirement.');
     }

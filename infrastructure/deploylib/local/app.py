@@ -19,6 +19,11 @@ def cmd(ctx, commandName='', environment='dev'):
     environments.local()
     app.cmd(commandName, environment)
 
+@task
+def sql(ctx, sql='', environment='dev'):
+    environments.local()
+    app.sql(sql, environment)
+
 
 @task
 def deploy(ctx):
@@ -54,6 +59,11 @@ def ssh(ctx, user='capco'):
 def start_consumers(ctx):
     environments.local()
     app.start_consumers()
+
+@task
+def swarrot_consume(ctx, name):
+    environments.ci()
+    app.swarrot_consume(name)
 
 
 @task

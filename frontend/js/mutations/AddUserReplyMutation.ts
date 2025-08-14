@@ -8,22 +8,31 @@ import commitMutation from './commitMutation'
 import type { AddUserReplyMutationVariables, AddUserReplyMutationResponse } from '~relay/AddUserReplyMutation.graphql'
 
 const mutation = graphql`
-  mutation AddUserReplyMutation($input: AddUserReplyInput!, $isAuthenticated: Boolean!) {
+  mutation AddUserReplyMutation($input: AddUserReplyInput!) {
     addUserReply(input: $input) {
       reply {
         id
+        requirementsUrl
+        completionStatus
         ...ReplyForm_reply
         ...ReplyLink_reply
         ...UnpublishedLabel_publishable
+        draft
         questionnaire {
-          id
-          ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+            step {
+                project {
+                    contributors {
+                        totalCount
+                    }
+                    contributions {
+                        totalCount
+                    }
+                }
+            }
         }
       }
-      questionnaire {
-        ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
-      }
       errorCode
+      shouldTriggerConsentInternalCommunication
     }
   }
 `
@@ -33,12 +42,30 @@ const commit = (variables: AddUserReplyMutationVariables): Promise<AddUserReplyM
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
+
       const payload = store.getRootField('addUserReply')
       if (!payload) return
+
+      if (payload.getValue('shouldTriggerConsentInternalCommunication')) {
+        return;
+      }
+
       const reply = payload.getLinkedRecord('reply')
       if (!reply) return
       const questionnaire = store.get(variables.input.questionnaireId)
       if (!questionnaire) return
+
+      const completionStatus = reply.getValue('completionStatus');
+      const isDraft = reply.getValue('draft');
+      if (completionStatus === 'COMPLETED' || isDraft) {
+        const viewerReplies = questionnaire?.getLinkedRecord('viewerReplies');
+        const viewerRepliesTotalCount = viewerReplies?.getValue('totalCount');
+        if (viewerRepliesTotalCount !== undefined) {
+          viewerReplies.setValue(viewerRepliesTotalCount + 1, 'totalCount');
+        }
+      }
+
+
       const userRepliesConnection = ConnectionHandler.getConnection(questionnaire, 'UserReplies_userReplies')
       if (!userRepliesConnection) return
       const userRepliesTotalCount = parseInt(userRepliesConnection.getValue('totalCount'), 10)

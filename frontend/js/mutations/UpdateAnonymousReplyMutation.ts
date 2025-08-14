@@ -1,30 +1,37 @@
 // @ts-nocheck
-import { graphql } from 'react-relay'
-import environment from '../createRelayEnvironment'
-import commitMutation from './commitMutation'
+import { graphql } from 'react-relay';
+import environment from '../createRelayEnvironment';
+import commitMutation from './commitMutation';
 import type {
-  UpdateAnonymousReplyMutationVariables,
-  UpdateAnonymousReplyMutationResponse,
-} from '~relay/UpdateAnonymousReplyMutation.graphql'
+    UpdateAnonymousReplyMutationVariables,
+    UpdateAnonymousReplyMutationResponse,
+} from '~relay/UpdateAnonymousReplyMutation.graphql';
 
 const mutation = graphql`
-  mutation UpdateAnonymousReplyMutation($input: UpdateAnonymousReplyInput!) {
-    updateAnonymousReply(input: $input) {
-      reply {
-        id
-        ...ReplyForm_reply
-        ...ReplyLink_reply
-      }
+    mutation UpdateAnonymousReplyMutation(
+        $input: UpdateAnonymousReplyInput!
+        $isAuthenticated: Boolean!
+    ) {
+        updateAnonymousReply(input: $input) {
+            reply {
+                id
+                requirementsUrl
+                ...ReplyForm_reply @arguments(isAuthenticated: $isAuthenticated)
+                ...ReplyLink_reply @arguments(isAuthenticated: $isAuthenticated)
+            }
+            errorCode
+        }
     }
-  }
-`
+`;
 
-const commit = (variables: UpdateAnonymousReplyMutationVariables): Promise<UpdateAnonymousReplyMutationResponse> =>
-  commitMutation(environment, {
-    mutation,
-    variables,
-  })
+const commit = (
+    variables: UpdateAnonymousReplyMutationVariables,
+): Promise<UpdateAnonymousReplyMutationResponse> =>
+    commitMutation(environment, {
+        mutation,
+        variables,
+    });
 
 export default {
-  commit,
-}
+    commit,
+};

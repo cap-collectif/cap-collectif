@@ -24,7 +24,6 @@ type Props = {
     label: string
     value: string
   }
-  isAnonymousParticipationAllowed: boolean
   fcAllowedData: FranceConnectAllowedData
   isFranceConnectConfigured: boolean
   footerUsingJoditWysiwyg?: boolean | null | undefined
@@ -101,7 +100,6 @@ export const ProjectAdminQuestionnaireStepForm = ({
   questionnaire,
   dispatch,
   requirements,
-  isAnonymousParticipationAllowed,
   fcAllowedData,
   isFranceConnectConfigured,
 }: Props) => {
@@ -137,43 +135,41 @@ export const ProjectAdminQuestionnaireStepForm = ({
         loadOptions={(term: string | null | undefined) => loadQuestionnaireOptions(questionnaire, term, isAdmin)}
         clearable
       />
-      {!isAnonymousParticipationAllowed && (
-        <>
-          {renderSubSection('requirements')}
-          <FieldArray
-            name="requirements"
-            component={StepRequirementsList}
-            formName={formName}
-            requirements={requirements}
-            fcAllowedData={fcAllowedData}
-            isFranceConnectConfigured={isFranceConnectConfigured}
-            stepType="QuestionnaireStep"
-          />
-          <Button
-            id="js-btn-create-step"
-            bsStyle="primary"
-            className="btn-outline-primary box-content__toolbar mb-20"
-            onClick={() =>
-              dispatch(
-                arrayPush(formName, 'requirements', {
-                  uniqueId: getUId(),
-                  id: null,
-                  type: 'CHECKBOX',
-                }),
-              )
-            }
-          >
-            <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-          </Button>
-          <Field
-            type="textarea"
-            name="requirementsReason"
-            id="step-requirementsReason"
-            label={<FormattedMessage id="reason-for-collection" />}
-            component={component}
-          />
-        </>
-      )}
+      <>
+        {renderSubSection('requirements')}
+        <FieldArray
+          name="requirements"
+          component={StepRequirementsList}
+          formName={formName}
+          requirements={requirements}
+          fcAllowedData={fcAllowedData}
+          isFranceConnectConfigured={isFranceConnectConfigured}
+          stepType="QuestionnaireStep"
+        />
+        <Button
+          id="js-btn-create-step"
+          bsStyle="primary"
+          className="btn-outline-primary box-content__toolbar mb-20"
+          onClick={() =>
+            dispatch(
+              arrayPush(formName, 'requirements', {
+                uniqueId: getUId(),
+                id: null,
+                type: 'CHECKBOX',
+              }),
+            )
+          }
+        >
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+        </Button>
+        <Field
+          type="textarea"
+          name="requirementsReason"
+          id="step-requirementsReason"
+          label={<FormattedMessage id="reason-for-collection" />}
+          component={component}
+        />
+      </>
     </>
   )
 }

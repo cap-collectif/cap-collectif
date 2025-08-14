@@ -105,3 +105,176 @@ Capco\AppBundle\Entity\Requirement:
         type: PHONE_VERIFIED
         position: 1
         step: '@collectSPhoneVerifRequire'
+    requirement22:
+        id: requirement22
+        type: EMAIL_VERIFIED
+        position: 1
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement23:
+        id: requirement23
+        type: FIRSTNAME
+        position: 2
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement24:
+        id: requirement24
+        type: LASTNAME
+        position: 3
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement25:
+        id: requirement25
+        type: PHONE
+        position: 4
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement26:
+        id: requirement26
+        type: PHONE_VERIFIED
+        position: 5
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement27:
+        id: requirement27
+        type: DATE_OF_BIRTH
+        position: 6
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement28:
+        id: requirement28
+        type: POSTAL_ADDRESS
+        position: 7
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement29:
+        id: requirement29
+        type: ZIP_CODE
+        position: 8
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement30:
+        id: requirement30
+        type: CHECKBOX
+        position: 9
+        step: '@qStepProjectAnonymousQuestionnaire'
+        label: J'atteste avoir plus de 16 ans
+    requirement42:
+        id: requirement42
+        type: IDENTIFICATION_CODE
+        position: 10
+        step: '@qStepProjectAnonymousQuestionnaire'
+    requirement31:
+        id: requirement31
+        type: EMAIL_VERIFIED
+        position: 1
+        step: '@selectionStepWorkflowVote1'
+    requirement32:
+        id: requirement32
+        type: FIRSTNAME
+        position: 2
+        step: '@selectionStepWorkflowVote1'
+    requirement33:
+        id: requirement33
+        type: LASTNAME
+        position: 3
+        step: '@selectionStepWorkflowVote1'
+    requirement34:
+        id: requirement34
+        type: PHONE
+        position: 4
+        step: '@selectionStepWorkflowVote1'
+    requirement35:
+        id: requirement35
+        type: PHONE_VERIFIED
+        position: 5
+        step: '@selectionStepWorkflowVote1'
+    requirement36:
+        id: requirement36
+        type: DATE_OF_BIRTH
+        position: 6
+        step: '@selectionStepWorkflowVote1'
+    requirement37:
+        id: requirement37
+        type: POSTAL_ADDRESS
+        position: 7
+        step: '@selectionStepWorkflowVote1'
+    requirement38:
+        id: requirement38
+        type: ZIP_CODE
+        position: 8
+        step: '@selectionStepWorkflowVote1'
+    requirement39:
+        id: requirement39
+        type: CHECKBOX
+        position: 9
+        step: '@selectionStepWorkflowVote1'
+        label: J'atteste avoir plus de 16 ans
+    requirement40:
+        id: requirement40
+        type: EMAIL_VERIFIED
+        position: 1
+        step: '@selectionStepWorkflowVote2'
+    requirement41:
+        id: requirement41
+        type: ZIP_CODE
+        position: 2
+        step: '@selectionStepWorkflowVote2'
+    requirement43:
+        id: requirement43
+        type: EMAIL_VERIFIED
+        position: 1
+        step: '@collectStepWorkflowCollectVote'
+    requirement44:
+        id: requirement44
+        type: FIRSTNAME
+        position: 2
+        step: '@collectStepWorkflowCollectVote'
+    requirement45:
+        id: requirement45
+        type: LASTNAME
+        position: 3
+        step: '@collectStepWorkflowCollectVote'
+    requirement46:
+        id: requirement46
+        type: PHONE
+        position: 4
+        step: '@collectStepWorkflowCollectVote'
+    requirement47:
+        id: requirement47
+        type: PHONE_VERIFIED
+        position: 5
+        step: '@collectStepWorkflowCollectVote'
+    requirement48:
+        id: requirement48
+        type: DATE_OF_BIRTH
+        position: 6
+        step: '@collectStepWorkflowCollectVote'
+    requirement49:
+        id: requirement49
+        type: POSTAL_ADDRESS
+        position: 7
+        step: '@collectStepWorkflowCollectVote'
+    requirement50:
+        id: requirement50
+        type: ZIP_CODE
+        position: 8
+        step: '@collectStepWorkflowCollectVote'
+    requirement51:
+        id: requirement51
+        type: CHECKBOX
+        position: 9
+        step: '@collectStepWorkflowCollectVote'
+        label: J'atteste avoir plus de 16 ans
+    requirement52:
+        id: requirement52
+        type: CONSENT_PRIVACY_POLICY
+        position: 0
+        step: '@collectStepWorkflowCollectVote'
+    requirement53:
+        id: requirement53
+        type: CONSENT_PRIVACY_POLICY
+        position: 0
+        step: '@selectionStepWorkflowVote2'
+    requirement54:
+        id: requirement54
+        type: CONSENT_PRIVACY_POLICY
+        position: 0
+        step: '@selectionStepWorkflowVote1'
+    requirement55:
+        id: requirement55
+        type: CONSENT_PRIVACY_POLICY
+        position: 0
+        step: '@qStepProjectAnonymousQuestionnaire'

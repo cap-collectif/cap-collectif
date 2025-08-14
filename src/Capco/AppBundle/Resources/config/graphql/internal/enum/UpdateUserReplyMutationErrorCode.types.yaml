@@ -1,0 +1,9 @@
+UpdateUserReplyErrorCode:
+    type: enum
+    config:
+        name: UpdateUserReplyErrorCode
+        description: 'Available errors on `UpdateUserReply` mutation.'
+        values:
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ReplyMutation::PHONE_ALREADY_USED
+                description: 'The phone is already used by another participant / user.'

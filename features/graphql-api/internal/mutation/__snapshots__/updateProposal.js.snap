@@ -13,19 +13,6 @@ Object {
 }
 `;
 
-exports[`mutations.changeProposalContentMutation tries to update and published a draft proposal as userNotConfirmedWithContributions 1`] = `
-Object {
-  "changeProposalContent": Object {
-    "proposal": Object {
-      "draft": false,
-      "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
-      "publicationStatus": "UNPUBLISHED",
-      "title": "NewTitle",
-    },
-  },
-}
-`;
-
 exports[`mutations.changeProposalContentMutation tries to update his proposal in revision as pierre 1`] = `
 Object {
   "changeProposalContent": Object {

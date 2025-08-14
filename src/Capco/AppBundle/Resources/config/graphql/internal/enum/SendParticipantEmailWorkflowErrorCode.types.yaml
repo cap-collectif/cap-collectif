@@ -1,0 +1,9 @@
+SendParticipantEmailWorkflowErrorCode:
+    type: enum
+    config:
+        name: SendParticipantEmailWorkflowErrorCode
+        description: 'Available errors for an `SendParticipantEmailWorkflowErrorCode` mutation.'
+        values:
+            EMAIL_RECENTLY_SENT:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SendParticipantEmailWorkflowMutation::EMAIL_RECENTLY_SENT
+                description: 'The email has already been sent recently'

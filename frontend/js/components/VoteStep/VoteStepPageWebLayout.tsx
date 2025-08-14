@@ -38,7 +38,6 @@ const QUERY = graphql`
       ... on ProposalStep {
         open
         kind
-        isProposalSmsVoteEnabled
         votable
         form {
           id
@@ -132,10 +131,10 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView, disa
               hideText={width <= 1133 || (view === View.Map && width < 1280)}
               hasMapView={hasMapView}
               hasVotesView={isVotable}
-              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
               disableMapView={disableMapView}
             />
           </Flex>
+
           <React.Suspense fallback={<ProposalsListSkeleton showImages={showImages} />}>
             {view === View.Votes ? (
               <VotesList stepId={stepId} showImages />

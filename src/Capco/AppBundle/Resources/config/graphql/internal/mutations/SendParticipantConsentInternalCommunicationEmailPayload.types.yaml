@@ -1,0 +1,8 @@
+SendParticipantConsentInternalCommunicationEmailPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            participant:
+                type: 'InternalParticipant!'
+            errorCode:
+                type: 'SendParticipantConsentInternalCommunicationEmailErrorCode'

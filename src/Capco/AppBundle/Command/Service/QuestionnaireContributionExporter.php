@@ -2,14 +2,12 @@
 
 namespace Capco\AppBundle\Command\Service;
 
-use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
 use Capco\AppBundle\Command\Serializer\ReplyNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -27,10 +25,8 @@ class QuestionnaireContributionExporter extends ContributionExporter
     public function __construct(
         protected EntityManagerInterface $entityManager,
         private readonly ReplyRepository $replyRepository,
-        private readonly ReplyAnonymousRepository $anonymousReplyRepository,
         private readonly QuestionnaireRepository $questionnaireRepository,
         private readonly ReplyNormalizer $replyNormalizer,
-        private readonly ReplyAnonymousNormalizer $anonymousReplyNormalizer,
         protected ContributionsFilePathResolver $contributionsFilePathResolver,
         Filesystem $fileSystem,
         private readonly LoggerInterface $logger
@@ -57,7 +53,6 @@ class QuestionnaireContributionExporter extends ContributionExporter
             $this->setDelimiter($delimiter);
 
             $this->exportQuestionnaireRepliesInBatches($questionnaire);
-            $this->exportQuestionnaireAnonymousRepliesInBatches($questionnaire);
         }
     }
 
@@ -131,46 +126,15 @@ class QuestionnaireContributionExporter extends ContributionExporter
         return new Serializer(
             [
                 $this->replyNormalizer,
-                $this->anonymousReplyNormalizer,
             ],
             [new CsvEncoder()],
         );
     }
 
-    private function exportQuestionnaireAnonymousRepliesInBatches(Questionnaire $questionnaire): void
-    {
-        $anonymousRepliesOffset = 0;
-        if (!isset($this->withHeaders)) {
-            $this->withHeaders = true;
-        }
-
-        do {
-            $anonymousReplies = $this->anonymousReplyRepository->getQuestionnaireAnonymousReplies(
-                $questionnaire,
-                $anonymousRepliesOffset,
-                self::BATCH_SIZE
-            );
-
-            if ([] === $anonymousReplies) {
-                break;
-            }
-
-            $this->exportContributions(
-                $this->sortQuestionsByResponsesPosition($anonymousReplies),
-                $questionnaire->getStep(),
-                $this->withHeaders
-            );
-
-            $this->withHeaders = false;
-            $anonymousRepliesOffset += self::BATCH_SIZE;
-            $this->entityManager->clear();
-        } while (self::BATCH_SIZE === \count($anonymousReplies));
-    }
-
     /**
-     * @param AbstractReply[] $replies
+     * @param Reply[] $replies
      *
-     * @return AbstractReply[]
+     * @return Reply[]
      */
     private function sortQuestionsByResponsesPosition(array $replies): array
     {

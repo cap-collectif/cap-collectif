@@ -3,9 +3,10 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\PhoneToken;
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCollectSmsVote;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
@@ -14,9 +15,11 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Mutation\RemoveProposalSmsVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\PhoneTokenRepository;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -31,26 +34,30 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         Indexer $indexer,
         GlobalIdResolver $globalIdResolver,
-        PhoneTokenRepository $phoneTokenRepository,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler
+        ParticipantHelper $participantHelper,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        ParticipantRepository $participantRepository,
+        ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
     ) {
         $this->beConstructedWith(
             $em,
             $proposalVotesDataLoader,
-            $proposalCollectSmsVoteRepository,
-            $proposalSelectionSmsVoteRepository,
+            $proposalCollectVoteRepository,
+            $proposalSelectionVoteRepository,
             $proposalViewerVoteDataLoader,
             $proposalViewerHasVoteDataLoader,
             $indexer,
             $globalIdResolver,
-            $phoneTokenRepository,
-            $proposalVoteAccountHandler
+            $participantHelper,
+            $proposalVoteAccountHandler,
+            $participantRepository,
+            $participantsTotalCountCacheHandler,
         );
     }
 
@@ -63,18 +70,19 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         Arg $input,
         EntityManagerInterface $em,
         ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         Indexer $indexer,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step,
-        ProposalCollectSmsVote $currentVote,
-        PhoneTokenRepository $phoneTokenRepository,
-        PhoneToken $phoneToken
+        ProposalCollectVote $currentVote,
+        ParticipantHelper $participantHelper,
+        Participant $participant,
+        Project $project,
+        ParticipantRepository $participantRepository,
     ) {
-        $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -84,14 +92,13 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
 
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
-        $phoneToken->getPhone()->willReturn($phone);
-
         $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
         $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
 
-        $proposalCollectSmsVoteRepository
-            ->findOneBy(['phone' => $phone, 'proposal' => $proposal, 'collectStep' => $step])
+        $participantHelper->getParticipantByToken($token)->shouldBeCalledOnce()->willReturn($participant);
+
+        $proposalCollectVoteRepository
+            ->findOneBy(['participant' => $participant, 'proposal' => $proposal, 'collectStep' => $step])
             ->shouldBeCalledOnce()
             ->willReturn($currentVote)
         ;
@@ -102,14 +109,19 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $currentVote->getId()->shouldBeCalledOnce()->willReturn($currentVoteId);
 
         $indexer->remove(Argument::type('string'), $currentVoteId)->shouldBeCalledOnce();
-        $em->remove(Argument::type(ProposalCollectSmsVote::class))->shouldBeCalledOnce();
+        $em->remove(Argument::type(ProposalCollectVote::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
+
+        $step->getVotesMin()->willReturn(null);
+
+        $step->getProject()->willReturn($project);
+        $participantRepository->findWithContributionsByProjectAndParticipant($project, $participant)->shouldBeCalledOnce()->willReturn(true);
 
         $proposalId = 'proposalId';
         $proposal->getId()->shouldBeCalledOnce()->willReturn($proposalId);
         $currentVote->getProposal()->willReturn($proposal);
+        $currentVote->getIsAccounted()->willReturn(false);
         $indexer->index(Argument::type('string'), $proposalId)->shouldBeCalledOnce();
-        $indexer->finishBulk()->shouldBeCalledOnce();
 
         $proposalVotesDataLoader->invalidate($proposal)->shouldBeCalledOnce();
         $proposalViewerVoteDataLoader->invalidate($proposal)->shouldBeCalledOnce();
@@ -125,10 +137,9 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         Arg $input,
         GlobalIdResolver $globalIdResolver,
         CollectStep $step,
-        PhoneTokenRepository $phoneTokenRepository,
-        PhoneToken $phoneToken
+        ParticipantHelper $participantHelper,
+        Participant $participant
     ) {
-        $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -138,11 +149,10 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
 
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
-        $phoneToken->getPhone()->willReturn($phone);
-
         $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn(null);
         $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+
+        $participantHelper->getParticipantByToken($token)->shouldBeCalledOnce()->willReturn($participant);
 
         $this->shouldThrow(new UserError('Unknown proposal with id: proposalId'))->during('__invoke', [$input]);
     }
@@ -151,10 +161,9 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         Arg $input,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
-        PhoneTokenRepository $phoneTokenRepository,
-        PhoneToken $phoneToken
+        ParticipantHelper $participantHelper,
+        Participant $participant
     ) {
-        $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -164,11 +173,10 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
 
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
-        $phoneToken->getPhone()->willReturn($phone);
-
         $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
         $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn(null);
+
+        $participantHelper->getParticipantByToken($token)->shouldBeCalledOnce()->willReturn($participant);
 
         $this->shouldThrow(new UserError('Unknown step with id: stepId'))->during('__invoke', [$input]);
     }
@@ -178,10 +186,9 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         AbstractStep $step,
-        PhoneTokenRepository $phoneTokenRepository,
-        PhoneToken $phoneToken
+        ParticipantHelper $participantHelper,
+        Participant $participant
     ) {
-        $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -191,11 +198,10 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
 
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
-        $phoneToken->getPhone()->willReturn($phone);
-
         $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
         $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+
+        $participantHelper->getParticipantByToken($token)->shouldBeCalledOnce()->willReturn($participant);
 
         $this->shouldThrow(new UserError('Wrong step with id: stepId'))->during('__invoke', [$input]);
     }
@@ -205,11 +211,10 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        PhoneTokenRepository $phoneTokenRepository,
-        PhoneToken $phoneToken
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        ParticipantHelper $participantHelper,
+        Participant $participant
     ) {
-        $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -219,14 +224,13 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
 
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
-        $phoneToken->getPhone()->willReturn($phone);
-
         $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
         $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
 
-        $proposalCollectSmsVoteRepository
-            ->findOneBy(['phone' => $phone, 'proposal' => $proposal, 'collectStep' => $step])
+        $participantHelper->getParticipantByToken($token)->shouldBeCalledOnce()->willReturn($participant);
+
+        $proposalCollectVoteRepository
+            ->findOneBy(['participant' => $participant, 'proposal' => $proposal, 'collectStep' => $step])
             ->shouldBeCalledOnce()
             ->willReturn(null)
         ;
@@ -234,30 +238,5 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $this->shouldThrow(new UserError('You have not voted for this proposal in this step.'))
             ->during('__invoke', [$input])
         ;
-    }
-
-    public function it_should_return_phone_PHONE_NOT_FOUND_error_code(
-        Arg $input,
-        PhoneTokenRepository $phoneTokenRepository,
-        GlobalIdResolver $globalIdResolver,
-        Proposal $proposal,
-        CollectStep $step
-    ) {
-        $token = 'SAJOJOFHOHX=';
-        $stepId = 'stepId';
-        $proposalId = 'proposalId';
-
-        $this->getMockedGraphQLArgumentFormatted($input);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
-
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn(null);
-        $this->__invoke($input)->shouldReturn([
-            'errorCode' => 'PHONE_NOT_FOUND',
-        ]);
     }
 }

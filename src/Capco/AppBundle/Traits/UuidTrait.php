@@ -11,7 +11,7 @@ trait UuidTrait
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      */
-    protected $id;
+    protected ?string $id = null;
 
     public function getId(): ?string
     {

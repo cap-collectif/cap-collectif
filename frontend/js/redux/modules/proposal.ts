@@ -251,10 +251,15 @@ export const vote = (
       .then(response => {
         const errorCode = response?.addProposalVote?.errorCode;
 
-        if (errorCode === 'PHONE_ALREADY_USED') {
+        const errorMap = {
+          'PHONE_ALREADY_USED': 'phone.already.used.in.this.step',
+          'CONTRIBUTION_NOT_ALLOWED': 'participant-already-contributed-title',
+        }
+
+        if (errorCode) {
           toast({
             variant: 'danger',
-            content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
+            content: intl.formatMessage({ id: errorMap[errorCode] }),
           })
           dispatch(closeVoteModal())
           return;
@@ -286,7 +291,6 @@ export const vote = (
       })
   } else {
     dispatch(startVoting())
-    const consentSmsCommunication = localStorage.getItem('consentSmsCommunication') ?? false
     return AddProposalSmsVoteMutation
       .commit({
         stepId,
@@ -294,7 +298,7 @@ export const vote = (
           proposalId,
           stepId,
           token,
-          consentSmsCommunication
+          anonymously
         },
         token: token ?? ''
       })
@@ -358,19 +362,19 @@ export type ProposalAction =
   | OpenDetailLikersModalAction
   | CloseDetailLikersModalAction
   | {
-  type: 'proposal/POSTS_FETCH_FAILED'
-  error: Error
-}
+      type: 'proposal/POSTS_FETCH_FAILED'
+      error: Error
+    }
   | {
-  type: 'proposal/FETCH_SUCCEEDED'
-  proposals: Array<Record<string, any>>
-  count: number
-}
+      type: 'proposal/FETCH_SUCCEEDED'
+      proposals: Array<Record<string, any>>
+      count: number
+    }
   | {
-  type: 'proposal/POSTS_FETCH_SUCCEEDED'
-  posts: Array<Record<string, any>>
-  proposalId: Uuid
-}
+      type: 'proposal/POSTS_FETCH_SUCCEEDED'
+      posts: Array<Record<string, any>>
+      proposalId: Uuid
+    }
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'proposal/CHANGE_FILTER': {

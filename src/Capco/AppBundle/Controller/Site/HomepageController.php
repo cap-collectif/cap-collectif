@@ -5,25 +5,26 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\Resolver\SectionResolver;
-use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Service\Encryptor;
+use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageController extends Controller
 {
-    public function __construct(private readonly QueryEventsResolver $eventsResolver, private readonly SectionResolver $sectionResolver, private readonly Manager $manager, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly QueryEventsResolver $eventsResolver, private readonly SectionResolver $sectionResolver, private readonly TranslatorInterface $translator, private readonly Encryptor $encryptor)
     {
     }
 
     /**
      * @Route("/", name="app_homepage")
-     * @Template("@CapcoApp/Homepage/homepage.html.twig")
      */
-    public function homepageAction(Request $request)
+    public function homepageAction(Request $request): Response
     {
         $locale = $request->getLocale();
         $sections = $this->sectionResolver->getDisplayableEnabledOrdered();
@@ -48,9 +49,38 @@ class HomepageController extends Controller
             }
         }
 
-        return [
+        $response = $this->render('@CapcoApp/Homepage/homepage.html.twig', [
             'sections' => $sections,
             'eventsCount' => $eventsCount,
-        ];
+        ]);
+
+        $this->addParticipationCookies($request, $response);
+
+        return $response;
+    }
+
+    private function addParticipationCookies(Request $request, Response $response): void
+    {
+        $participationCookies = $request->get('participationCookies');
+
+        if (!$participationCookies) {
+            return;
+        }
+
+        $decryptedParticipationCookies = $this->encryptor->decryptData($participationCookies);
+        $cookies = json_decode($decryptedParticipationCookies, true);
+
+        $decryptedReplyCookie = ($cookies['replyCookie'] ?? null) ? $this->encryptor->decryptData($cookies['replyCookie']) : null;
+        $decryptedParticipantCookie = ($cookies['participantCookie'] ?? null) ? $this->encryptor->decryptData($cookies['participantCookie']) : null;
+
+        if ($decryptedReplyCookie) {
+            $replyCookie = Cookie::create(ParticipationCookieManager::REPLY_COOKIE, $decryptedReplyCookie, (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($replyCookie);
+        }
+
+        if ($decryptedParticipantCookie) {
+            $participantCookie = Cookie::create(ParticipationCookieManager::PARTICIPANT_COOKIE, $decryptedParticipantCookie, (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($participantCookie);
+        }
     }
 }

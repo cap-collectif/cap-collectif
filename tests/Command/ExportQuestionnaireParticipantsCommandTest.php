@@ -111,7 +111,7 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
     private function updateAnonymousReply(): void
     {
         $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $reply = $em->getRepository('CapcoAppBundle:ReplyAnonymous')->findOneBy(['id' => 'replyAnonymous1']);
+        $reply = $em->getRepository('CapcoAppBundle:Reply')->findOneBy(['id' => 'replyAnonymous1']);
         $reply->setUpdatedAt(new \DateTime('+ 1 day'));
         $em->persist($reply);
         $em->flush();
@@ -120,7 +120,7 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
     private function resetAnonymousReply(): void
     {
         $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $reply = $em->getRepository('CapcoAppBundle:ReplyAnonymous')->findOneBy(['id' => 'replyAnonymous1']);
+        $reply = $em->getRepository('CapcoAppBundle:Reply')->findOneBy(['id' => 'replyAnonymous1']);
         $reply->setUpdatedAt(new \DateTime('2016-03-01 00:00:00'));
         $em->persist($reply);
         $em->flush();

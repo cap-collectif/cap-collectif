@@ -38,16 +38,6 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private ?Questionnaire $questionnaire = null;
 
     /**
-     * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
-     */
-    private bool $isAnonymousParticipationAllowed = false;
-
-    /**
-     * @ORM\Column(name="collect_participants_email", type="boolean", nullable=false, options={"default" = false})
-     */
-    private bool $collectParticipantsEmail = false;
-
-    /**
      * @ORM\Column(name="footer", type="text", nullable=true)
      */
     private $footer;
@@ -145,29 +135,5 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     public function useAddressOrMap(): bool
     {
         return true;
-    }
-
-    public function isAnonymousParticipationAllowed(): bool
-    {
-        return $this->isAnonymousParticipationAllowed;
-    }
-
-    public function setIsAnonymousParticipationAllowed(bool $isAnonymousParticipationAllowed): self
-    {
-        $this->isAnonymousParticipationAllowed = $isAnonymousParticipationAllowed;
-
-        return $this;
-    }
-
-    public function isCollectParticipantsEmail(): bool
-    {
-        return $this->collectParticipantsEmail;
-    }
-
-    public function setCollectParticipantsEmail(bool $collectParticipantsEmail): self
-    {
-        $this->collectParticipantsEmail = $collectParticipantsEmail;
-
-        return $this;
     }
 }

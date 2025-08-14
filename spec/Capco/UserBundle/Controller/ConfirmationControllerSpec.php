@@ -3,20 +3,29 @@
 namespace spec\Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Service\Encryptor;
+use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
+use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Controller\ConfirmationController;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use FOS\UserBundle\Security\LoginManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -39,7 +48,11 @@ class ConfirmationControllerSpec extends ObjectBehavior
         CommentRepository $commentRepository,
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        SendInBluePublisher $sendInBluePublisher
+        ParticipantRepository $participantRepository,
+        SendInBluePublisher $sendInBluePublisher,
+        Encryptor $encryptor,
+        ReplyReconcilier $replyReconcilier,
+        VotesReconcilier $votesReconcilier
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -54,7 +67,11 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $commentRepository,
             $em,
             $logger,
-            $sendInBluePublisher
+            $sendInBluePublisher,
+            $participantRepository,
+            $encryptor,
+            $replyReconcilier,
+            $votesReconcilier
         );
         $this->login = false;
     }
@@ -67,10 +84,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
     public function it_can_not_confirm_an_email_of_unknown_token(
         UserManager $userManager,
         Session $session,
-        LoginManager $loginManager,
         FlashBagInterface $flashBag,
         Router $router,
-        ContributionManager $contributionManager,
         TranslatorInterface $translator
     ) {
         $router->generate('app_homepage')->willReturn('/');
@@ -88,12 +103,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->emailAction(
             'unknowntoken',
-            false,
-            $userManager,
-            $session,
-            $loginManager,
-            $router,
-            $contributionManager
+            false
         );
     }
 
@@ -156,12 +166,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
 
         $this->emailAction(
             'validtoken',
-            false,
-            $userManager,
-            $session,
-            $loginManager,
-            $router,
-            $contributionManager
+            false
         );
     }
 
@@ -190,14 +195,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
         ;
         $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->newEmailAction(
-            'invalidtoken',
-            false,
-            $userManager,
-            $session,
-            $loginManager,
-            $router,
-            $userRepo,
-            $contributionManager
+            'invalidtoken'
         );
     }
 
@@ -261,14 +259,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $flashBag->add('success', 'global.alert.new_email_confirmed')->shouldBeCalled();
 
         $this->newEmailAction(
-            'validtoken',
-            false,
-            $userManager,
-            $session,
-            $loginManager,
-            $router,
-            $userRepo,
-            $contributionManager
+            'validtoken'
         );
     }
 
@@ -296,5 +287,136 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $flashBag->add('success', $message)->shouldBeCalledOnce();
 
         $this->commentConfirmAnonymousEmail($token);
+    }
+
+    public function it_should_confirm_anon_participant_email(
+        RouterInterface $router,
+        SessionInterface $session,
+        ParticipantRepository $participantRepository,
+        TranslatorInterface $translator,
+        Participant $participant,
+        EntityManagerInterface $em,
+        FlashBagInterface $flashBag,
+        Request $request,
+        FilterCollection $filterCollection,
+        Encryptor $encryptor
+    ) {
+        $em->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+
+        $fakeToken = 'fakeToken';
+        $expectedResponse = new RedirectResponse('/');
+        $expectedStatusCode = 302;
+
+        $request->get('redirectUrl')->willReturn(null);
+
+        $router
+            ->generate('app_homepage')
+            ->shouldBeCalledOnce()
+            ->willReturn('/')
+        ;
+
+        $session
+            ->getFlashBag()
+            ->willReturn($flashBag)
+        ;
+
+        $request->get('participationCookies')->willReturn('encryptedData');
+        $decryptedParticipationCookies = '{"replyCookie": "cryptedReplyCookie", "participantCookie": "cryptedParticipantCookie"}';
+        $encryptor->decryptData('encryptedData')->willReturn(
+            $decryptedParticipationCookies
+        );
+
+        $participantRepository->findOneBy([
+            'email' => 'toto@gmail.com',
+            'confirmationToken' => null,
+        ])->willReturn(null);
+
+        $decryptedReplyCookie = 'replyCookie';
+        $encryptor->decryptData('cryptedReplyCookie')->willReturn($decryptedReplyCookie);
+
+        $decryptedParticipantCookie = 'participantCookie';
+        $encryptor->decryptData('cryptedParticipantCookie')->willReturn($decryptedParticipantCookie);
+        $participantRepository
+            ->findOneBy(['newEmailConfirmationToken' => $fakeToken])
+            ->willReturn($participant)
+        ;
+
+        $participant
+            ->getNewEmailToConfirm()
+            ->willReturn('toto@gmail.com')
+        ;
+        $participant
+            ->setEmail(Argument::any())
+            ->willReturn($participant)
+        ;
+        $participant
+            ->isEmailConfirmed()
+            ->willReturn(false)
+        ;
+        $participant
+            ->setConfirmationToken(null)
+            ->shouldBeCalledOnce()
+        ;
+
+        $participant
+            ->setNewEmailConfirmationToken(null)
+            ->willReturn($participant)
+        ;
+        $participant
+            ->setNewEmailToConfirm(null)
+            ->shouldBeCalledOnce()
+        ;
+
+        $em
+            ->flush()
+            ->shouldBeCalledOnce()
+        ;
+
+        $response = $this->confirmEmailParticipantAction($request, $fakeToken);
+
+        $response->shouldHaveType(RedirectResponse::class);
+        $response->getTargetUrl()->shouldBeEqualTo($expectedResponse->getTargetUrl());
+        $response->getStatusCode()->shouldEqual($expectedStatusCode);
+    }
+
+    public function it_should_not_confirm_participant_email_already_confirmed(
+        RouterInterface $router,
+        SessionInterface $session,
+        ParticipantRepository $participantRepository,
+        FlashBagInterface $flashBag,
+        Request $request,
+        FilterCollection $filterCollection,
+        EntityManagerInterface $em
+    ) {
+        $em->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+
+        $request->get('redirectUrl')->shouldBeCalled()->willReturn(null);
+        $fakeToken = 'fakeToken';
+        $expectedResponse = new RedirectResponse('/');
+        $expectedStatusCode = 302;
+
+        $router
+            ->generate('app_homepage')
+            ->shouldBeCalledOnce()
+            ->willReturn('/')
+        ;
+
+        $session
+            ->getFlashBag()
+            ->willReturn($flashBag)
+        ;
+
+        $participantRepository
+            ->findOneBy(['newEmailConfirmationToken' => $fakeToken])
+            ->willReturn(null)
+        ;
+
+        $response = $this->confirmEmailParticipantAction($request, $fakeToken);
+
+        $response->shouldHaveType(RedirectResponse::class);
+        $response->getTargetUrl()->shouldBeEqualTo($expectedResponse->getTargetUrl());
+        $response->getStatusCode()->shouldEqual($expectedStatusCode);
     }
 }

@@ -1,5 +1,4 @@
 ﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code,export_participant_user_created_at,export_participant_user_updated_at,export_participant_user_last_login,export_participant_user_roles_text,export_participant_user_enabled,export_participant_user_is_email_confirmed,export_participant_user_locked,export_participant_user_is_phone_confirmed,export_participant_gender,export_participant_website_url,export_participant_biography,export_participant_is_france_connect_associated
 user1,lbrunet,lbrunet@cap-collectif.com,Oui,+3300000000,Citoyen,Laurent,Brunet,,,,,https://capco.dev/profile/lbrunet,,"2015-01-01 00:00:00",,,"Super Admin|Utilisateur",Oui,Oui,Non,Non,,,,Non
-,,abc@cap-collectif.com,Non,,,,,,,,,,,,,,,,,,,,,,
-,,abc@cap-collectif.com,Non,,,,,,,,,,,,,,,,,,,,,,
-,,,Non,,,,,,,,,,,,,,,,,,,,,,
+participant1,,participant1@cap-collectif.com,Non,+33602020202,,"Participant1 firstname","Participant1 lastname","2023-02-01 00:00:00","Rue de la Savate 10, 4340 Awans, Belgium",75018,,,,"2020-01-14 00:00:00",,,,,Oui,,Oui,,,,
+participant2,,participant2@cap-collectif.com,Non,,,"Participant2 firstname","Participant2 lastname","2023-03-01 00:00:00",,75015,,,,"2021-01-14 00:00:00",,,,,Oui,,Non,,,,

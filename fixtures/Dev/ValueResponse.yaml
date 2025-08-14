@@ -978,14 +978,14 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
     responseAnonymousQuestionnaire1:
         question: '@simpleQuestionAnonymousQuestionnaire'
-        replyAnonymous: '@replyAnonymous1'
+        reply: '@replyAnonymous1'
         value: 'bien'
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
         iaSentiment: 'POSITIVE'
         iaReadability: 7.53
     responseAnonymousQuestionnaire2:
         question: '@simpleQuestionAnonymousQuestionnaire'
-        replyAnonymous: '@replyAnonymous2'
+        reply: '@replyAnonymous2'
         value: 'bien bien bien'
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
         iaSentiment: 'POSITIVE'

@@ -4561,11 +4561,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsUserNotConfirmedWithContributions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsUserWithoutPhone\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
@@ -12951,16 +12946,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Site/GlobalDistrictController.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\HomepageController\\:\\:homepageAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/HomepageController.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Controller\\\\Site\\\\HomepageController\\:\\:\\$manager is never read, only written\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/HomepageController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\ModerationController\\:\\:getTrashMessage\\(\\) has parameter \\$contribution with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/ModerationController.php
@@ -14146,11 +14131,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AbstractLogicJumpCondition.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractLogicJumpCondition\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractLogicJumpCondition.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractLogicJumpCondition\\:\\:\\$jump has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AbstractLogicJumpCondition.php
@@ -14171,54 +14151,19 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AbstractLogicJumpCondition.php
 
 		-
-			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 5
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
+			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AbstractPhoneVerificationSms\\)\\:\\:\\$updatedAt\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/AbstractPhoneVerificationSms.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractPhoneVerificationSms\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
+			path: src/Capco/AppBundle/Entity/AbstractPhoneVerificationSms.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractPhoneVerificationSms\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getRelated\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractReply.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractStatistics\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractStatistics.php
+			path: src/Capco/AppBundle/Entity/AbstractPhoneVerificationSms.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractStatistics\\:\\:\\$nbrOfMessagesSentToAuthor has no type specified\\.$#"
@@ -14247,11 +14192,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractVote\\:\\:getRelated\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AbstractVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractVote\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AbstractVote.php
 
@@ -14291,11 +14231,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
@@ -14321,11 +14256,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AnalysisConfigurationProcess.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfigurationProcess\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AnalysisConfigurationProcess.php
-
-		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AnonymousUserProposalSmsVote\\)\\:\\:\\$updatedAt\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnonymousUserProposalSmsVote.php
@@ -14337,11 +14267,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnonymousUserProposalSmsVote\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AnonymousUserProposalSmsVote.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnonymousUserProposalSmsVote\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnonymousUserProposalSmsVote.php
 
@@ -14437,11 +14362,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:\\$helpText has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AppendixType.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
@@ -14551,11 +14471,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Argument.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Argument.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:setTrashedReason\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Argument.php
@@ -14607,11 +14522,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:\\$createdAt has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Argument.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Argument.php
 
@@ -14721,11 +14631,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/CategoryImage.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\:\\:\\$image has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
@@ -14739,11 +14644,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\:\\:\\$updatedAt has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\CollectStepImapServerConfig\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/CollectStepImapServerConfig.php
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Comment\\) and 'updatedAt' will always evaluate to true\\.$#"
@@ -14831,11 +14731,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Comment.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Comment.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:setRelatedObject\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Comment.php
@@ -14892,11 +14787,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Comment.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Comment.php
 
@@ -15006,22 +14896,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Consultation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Consultation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Consultation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Consultation\\:\\:\\$metaDescription has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Consultation.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactForm\\:\\:\\$email has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactForm.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactForm\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactForm.php
 
@@ -15046,11 +14926,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:\\$slug has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
@@ -15059,11 +14934,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:\\$title has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\Debate\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/Debate.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\Debate\\:\\:\\$step has no type specified\\.$#"
@@ -15116,11 +14986,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:setTrashedReason\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
@@ -15137,11 +15002,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
 
@@ -15196,11 +15056,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousVote.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousVote\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousVote.php
-
-		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
@@ -15246,11 +15101,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:setTrashedReason\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
@@ -15267,11 +15117,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
 
@@ -15321,11 +15166,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateArticle.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArticle\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateArticle.php
-
-		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
@@ -15342,11 +15182,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
 
@@ -15381,17 +15216,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\AbstractDistrict\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
 
@@ -15412,11 +15237,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\:\\:getPosition\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/EventDistrictPositioner.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/EventDistrictPositioner.php
 
@@ -15486,11 +15306,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/ProjectDistrictPositioner.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/ProjectDistrictPositioner.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\:\\:\\$position has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/ProjectDistrictPositioner.php
@@ -15526,11 +15341,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EmailDomain.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EmailDomain\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EmailDomain.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EmailDomain\\:\\:\\$registrationForm has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EmailDomain.php
@@ -15539,11 +15349,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EmailDomain\\:\\:\\$value has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EmailDomain.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EmailingCampaign\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EmailingCampaign.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EmailingCampaign\\:\\:\\$sendAt \\(DateTime\\|null\\) does not accept DateTimeInterface\\|null\\.$#"
@@ -15716,11 +15521,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Event.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Event\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Event.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Event\\:\\:\\$similarityOfNewAddress \\(bool\\|null\\) does not accept float\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Event.php
@@ -15841,11 +15641,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EventReview\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventReview.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EventReview\\:\\:\\$refusedReason has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EventReview.php
@@ -15872,11 +15667,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EventTranslation.php
 
@@ -15917,11 +15707,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Follower\\:\\:\\$followedAt has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Follower.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Follower\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Follower.php
 
@@ -15982,11 +15767,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Font\\:\\:\\$fullname has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Font.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Font\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Font.php
 
@@ -16107,11 +15887,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Group\\:\\:\\$evaluating has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Group.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Group\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Group.php
 
@@ -16436,11 +16211,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Locale.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Locale\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Locale.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Locale\\:\\:\\$published has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Locale.php
@@ -16471,11 +16241,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/LogicJump.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\LogicJump\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/LogicJump.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\LogicJump\\:\\:\\$origin has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/LogicJump.php
@@ -16491,11 +16256,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MailingList.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\MailingList\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MailingList.php
-
-		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\MapToken\\)\\:\\:\\$updatedAt\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MapToken.php
@@ -16507,11 +16267,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MapToken\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MapToken.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\MapToken\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MapToken.php
 
@@ -16544,21 +16299,6 @@ parameters:
 			message: "#^Strict comparison using \\!\\=\\= between '' and non\\-falsy\\-string will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MapToken.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Media\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Media.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Mediator\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Mediator.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\MediatorParticipantStep\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MediatorParticipantStep.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\:\\:deleteMenuItem\\(\\) has no return type specified\\.$#"
@@ -16632,11 +16372,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:setTitle\\(\\) has parameter \\$title with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
 
@@ -16721,11 +16456,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OfficialResponse.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
@@ -16734,11 +16464,6 @@ parameters:
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OfficialResponseAuthor\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OfficialResponseAuthor.php
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Opinion\\) and 'updatedAt' will always evaluate to true\\.$#"
@@ -16821,11 +16546,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Opinion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Opinion.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:setRanking\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Opinion.php
@@ -16892,11 +16612,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:\\$followers has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Opinion.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Opinion.php
 
@@ -17006,11 +16721,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:\\$opinion has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
@@ -17112,11 +16822,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\:\\:\\$diff has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionModal.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionModal.php
 
@@ -17281,7 +16986,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionType.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionType\\:\\:\\$id has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionType\\:\\:\\$id \\(string\\|null\\) does not accept int\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionType.php
 
@@ -17362,11 +17067,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionTypeAppendixType\\:\\:\\$appendixType has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionTypeAppendixType.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionTypeAppendixType\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionTypeAppendixType.php
 
@@ -17506,11 +17206,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionVersion.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:setRanking\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
@@ -17562,11 +17257,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:\\$followers has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionVersion.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
 
@@ -17751,11 +17441,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/Organization.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\Organization\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/Organization.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\Organization\\:\\:\\$members has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/Organization.php
@@ -17776,17 +17461,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationMember\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
 
@@ -17812,11 +17487,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\PendingOrganizationInvitation\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/PendingOrganizationInvitation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\PendingOrganizationInvitation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/PendingOrganizationInvitation.php
 
@@ -17886,11 +17556,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Page.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Page.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:\\$isEnabled has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Page.php
@@ -17916,11 +17581,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PageTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:\\$metaDescription has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PageTranslation.php
@@ -17936,8 +17596,8 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PageTranslation.php
 
 		-
-			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Participant\\)\\:\\:\\$updatedAt\\.$#"
-			count: 1
+			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Participant\\) and 'updatedAt' will always evaluate to true\\.$#"
+			count: 5
 			path: src/Capco/AppBundle/Entity/Participant.php
 
 		-
@@ -17952,11 +17612,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Participant\\:\\:\\$dateOfBirth \\(DateTime\\|null\\) does not accept DateTimeInterface\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Participant.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Participant\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Participant.php
 
@@ -18026,11 +17681,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Post.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Post.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Post.php
@@ -18039,11 +17689,6 @@ parameters:
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Post.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PostAuthor\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostAuthor.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostComment\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -18081,11 +17726,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:\\$metaDescription has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
@@ -18107,11 +17747,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProgressStep\\:\\:\\$endAt has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProgressStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProgressStep\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProgressStep.php
 
@@ -18361,11 +17996,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Project.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Project\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Project\\:\\:\\$includeAuthorInRanking has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Project.php
@@ -18457,11 +18087,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProjectAuthor\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProjectAuthor.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProjectAuthor\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProjectAuthor.php
 
@@ -18726,11 +18351,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Proposal.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:setTrashedReason\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Proposal.php
@@ -18792,11 +18412,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:\\$followers has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Proposal.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
@@ -18896,11 +18511,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis\\:\\:\\$updatedAt has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
@@ -18961,11 +18571,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalAssessment\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalAssessment\\:\\:\\$updatedAt has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
@@ -19016,11 +18621,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalCategory.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\:\\:\\$name has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
@@ -19034,26 +18634,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\:\\:\\$updatedAt has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalCollectSmsVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalCollectSmsVote\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalCollectSmsVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalCollectSmsVote\\:\\:getPosition\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalCollectSmsVote.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalCollectSmsVote\\:\\:\\$position has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalCollectSmsVote.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalCollectVote\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -19131,11 +18711,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalDecision.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
@@ -19182,11 +18757,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalEvaluation\\:\\:setResponseOn\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalEvaluation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalEvaluation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalEvaluation.php
 
@@ -19296,11 +18866,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalForm.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalForm.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\:\\:\\$reference has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalForm.php
@@ -19354,36 +18919,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalRevision\\:\\:\\$body has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalRevision.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalRevision\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalRevision.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalSelectionSmsVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSelectionSmsVote\\:\\:deleteVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalSelectionSmsVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSelectionSmsVote\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalSelectionSmsVote.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSelectionSmsVote\\:\\:getPosition\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalSelectionSmsVote.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalSelectionSmsVote\\:\\:\\$position has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ProposalSelectionSmsVote.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSelectionVote\\:\\:deleteVote\\(\\) has no return type specified\\.$#"
@@ -19471,11 +19006,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PublicApiToken.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PublicApiToken\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PublicApiToken.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\PublicApiToken\\:\\:\\$user has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PublicApiToken.php
@@ -19502,11 +19032,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\QuestionChoice\\:\\:\\$description has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/QuestionChoice.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\QuestionChoice\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/QuestionChoice.php
 
@@ -19577,11 +19102,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:viewerCanSeeInBo\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Questionnaire.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
@@ -19866,11 +19386,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/RegistrationForm.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\RegistrationForm\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationForm.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\RegistrationForm\\:\\:\\$questions has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/RegistrationForm.php
@@ -19891,18 +19406,33 @@ parameters:
 			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:\\$topText has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getResponsesArray\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Reply\\) and 'updatedAt' will always evaluate to true\\.$#"
+			count: 3
+			path: src/Capco/AppBundle/Entity/Reply.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
 			count: 1
+			path: src/Capco/AppBundle/Entity/Reply.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Reply.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getRelated\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Reply.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getResponsesArray\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 2
 			path: src/Capco/AppBundle/Entity/Reply.php
 
 		-
@@ -19921,19 +19451,14 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Reply.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:\\$responses has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Reply.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ReplyAnonymous\\:\\:getResponsesArray\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: "#^Right side of && is always true\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/ReplyAnonymous.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ReplyAnonymous\\:\\:\\$responses has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ReplyAnonymous.php
+			path: src/Capco/AppBundle/Entity/Reply.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reporting\\:\\:deleteReport\\(\\) has no return type specified\\.$#"
@@ -20021,11 +19546,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Requirement.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Requirement\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Requirement.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Requirement\\:\\:\\$position has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Requirement.php
@@ -20062,11 +19582,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Responses\\\\AbstractResponse\\:\\:getType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Responses/AbstractResponse.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Responses\\\\AbstractResponse\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Responses/AbstractResponse.php
 
@@ -20122,11 +19637,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SSO\\\\AbstractSSOConfiguration\\:\\:\\$environment has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SSO/AbstractSSOConfiguration.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SSO\\\\AbstractSSOConfiguration\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SSO/AbstractSSOConfiguration.php
 
@@ -20246,16 +19756,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/Section.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionCarrouselElement\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionCarrouselElement.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionProject\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Section/SectionProject.php
@@ -20273,11 +19773,6 @@ parameters:
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$body has no type specified\\.$#"
 			count: 2
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
@@ -20304,11 +19799,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Security\\\\UserIdentificationCode\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Security/UserIdentificationCode.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Security\\\\UserIdentificationCodeList\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Security/UserIdentificationCodeList.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Selection\\:\\:preRemove\\(\\) has no return type specified\\.$#"
@@ -20344,16 +19834,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Selection\\:\\:\\$status has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Selection.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SenderEmail\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SenderEmail.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SenderEmailDomain\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SenderEmailDomain.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteColor\\:\\:getId\\(\\) has no return type specified\\.$#"
@@ -20466,11 +19946,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameter.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:\\$isEnabled has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
@@ -20521,22 +19996,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:\\$value has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteSettings\\:\\:\\$capcoDomain is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteSettings.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SiteSettings\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteSettings.php
 
@@ -20556,11 +20021,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SmsCredit.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SmsCredit\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SmsCredit.php
-
-		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\SmsOrder\\)\\:\\:\\$updatedAt\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsOrder.php
@@ -20576,11 +20036,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SmsOrder.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SmsOrder\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SmsOrder.php
-
-		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\SmsRemainingCreditEmailAlert\\)\\:\\:\\$updatedAt\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsRemainingCreditEmailAlert.php
@@ -20592,11 +20047,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsRemainingCreditEmailAlert\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SmsRemainingCreditEmailAlert.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SmsRemainingCreditEmailAlert\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsRemainingCreditEmailAlert.php
 
@@ -20696,11 +20146,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Source.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Source\\:\\:setPublishedAt\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Source.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Source\\:\\:setSlug\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Source.php
@@ -20747,11 +20192,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Source\\:\\:\\$createdAt has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Source.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Source\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Source.php
 
@@ -20831,11 +20271,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategory.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:\\$isEnabled has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
@@ -20852,11 +20287,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
 
@@ -20932,11 +20362,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:setName\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Status.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Status.php
 
@@ -21046,11 +20471,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:\\$isEnabled has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
@@ -21136,31 +20556,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$defaultSort has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$private has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$proposalForm has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$sort has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$sortLabels has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\:\\:\\$voteType has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/CollectStep.php
@@ -21207,11 +20602,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\ProjectAbstractStep\\:\\:getPosition\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/ProjectAbstractStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\ProjectAbstractStep\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/ProjectAbstractStep.php
 
@@ -21296,32 +20686,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:addSelection\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:getBudget\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:getProposalFormId\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:getProposals\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:getSelections\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:getType\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
@@ -21351,47 +20721,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$allowingProgressSteps has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$budget has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$defaultSort has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$defaultStatus has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$selections has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$sort has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$sortLabels has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$voteType has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep\\:\\:\\$voteTypeLabels has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
@@ -21417,11 +20752,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Styles\\\\AbstractStyle\\:\\:\\$enabled has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Styles/AbstractStyle.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Styles\\\\AbstractStyle\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Styles/AbstractStyle.php
 
@@ -21571,11 +20901,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Theme.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:\\$isEnabled has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Theme.php
@@ -21631,11 +20956,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:\\$metaDescription has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
@@ -21657,11 +20977,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserArchive\\:\\:\\$deletedAt has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserArchive.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserArchive\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserArchive.php
 
@@ -21701,11 +21016,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/UserConnection.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserConnection\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserConnection.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserConnection\\:\\:\\$success has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserConnection.php
@@ -21714,11 +21024,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserConnection\\:\\:\\$user has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserConnection.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserGroup\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserGroup.php
 
 		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\UserInvite\\)\\:\\:\\$updatedAt\\.$#"
@@ -21741,16 +21046,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/UserInvite.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserInvite\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserInvite.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserInviteEmailMessage\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserInviteEmailMessage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserNotificationsConfiguration\\:\\:disableAllNotifications\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserNotificationsConfiguration.php
@@ -21759,31 +21054,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserNotificationsConfiguration\\:\\:getNotificationsValues\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserNotificationsConfiguration.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserNotificationsConfiguration\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserNotificationsConfiguration.php
-
-		-
-			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\)\\:\\:\\$updatedAt\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\UserRequirement\\:\\:\\$requirement has no type specified\\.$#"
@@ -21877,11 +21147,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:\\$body has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/VideoTranslation.php
 
@@ -23286,11 +22551,6 @@ parameters:
 			path: src/Capco/AppBundle/Form/OtherStepType.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ParticipantType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/ParticipantType.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ParticipantType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ParticipantType.php
@@ -24621,11 +23881,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalViewerVoteDataLoader.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Proposal\\\\ProposalViewerVoteDataLoader\\:\\:\\$batch has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalViewerVoteDataLoader.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Proposal\\\\ProposalVotesDataLoader\\:\\:all\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalVotesDataLoader.php
@@ -24917,11 +24172,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\User\\\\ViewerProposalVotesDataLoader\\:\\:serializeKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/User/ViewerProposalVotesDataLoader.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\User\\\\ViewerProposalVotesDataLoader\\:\\:\\$abstractStepRepository is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/User/ViewerProposalVotesDataLoader.php
 
@@ -26266,11 +25516,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteParticipantMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteParticipantMutation\\:\\:getParticipant\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteParticipantMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeletePostMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeletePostMutation.php
@@ -26836,6 +26081,16 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Organization/LeaveOrganizationMutation.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Participant\\\\UpdateParticipantMutation\\:\\:__invoke\\(\\) should return array\\{participant\\: Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Participant\\\\Capco\\\\AppBundle\\\\Entity\\\\Participant\\|null, validationErrors\\: non\\-empty\\-string\\|false\\} but returns array\\{participant\\: Capco\\\\AppBundle\\\\Entity\\\\Participant\\|null, validationErrors\\: non\\-empty\\-string\\|false\\}\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/Participant/UpdateParticipantMutation.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Participant\\\\UpdateParticipantMutation\\:\\:__invoke\\(\\) should return array\\{participant\\: Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Participant\\\\Capco\\\\AppBundle\\\\Entity\\\\Participant\\|null, validationErrors\\: non\\-empty\\-string\\|false\\} but returns array\\{participant\\: Capco\\\\AppBundle\\\\Entity\\\\Participant\\|null, validationErrors\\: null\\}\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/Participant/UpdateParticipantMutation.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\PreConfigureProjectMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/PreConfigureProjectMutation.php
@@ -27326,11 +26581,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalVoteAccountHandler\\:\\:getVotesFromSpecificClass\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalVoteAccountHandler.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\RegisterEmailDomainsMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/RegisterEmailDomainsMutation.php
@@ -27641,19 +26891,9 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Sms/SendSmsPhoneValidationCodeMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Sms\\\\SendSmsProposalVoteMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/Sms/SendSmsProposalVoteMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Sms\\\\UpdateTwilioVerifyServiceMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/Sms/UpdateTwilioVerifyServiceMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Sms\\\\VerifySmsVotePhoneNumberMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/Sms/VerifySmsVotePhoneNumberMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Sms\\\\VerifyUserPhoneNumberMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -27781,6 +27021,21 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateAlphaProjectMutation.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateAnonymousProposalVotesMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateAnonymousProposalVotesMutation.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateAnonymousProposalVotesMutation\\:\\:getConnection\\(\\) has parameter \\$votes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateAnonymousProposalVotesMutation.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateAnonymousProposalVotesMutation\\:\\:reindexObjects\\(\\) has parameter \\$objects with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateAnonymousProposalVotesMutation.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateAnonymousReplyMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateAnonymousReplyMutation.php
@@ -27807,16 +27062,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateCollectStepMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateCollectStepMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateCollectStepMutation\\:\\:handleAnonParticipation\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateCollectStepMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateCollectStepMutation\\:\\:handleAnonParticipation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateCollectStepMutation.php
 
@@ -28217,16 +27462,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateQuestionnaireStepMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireStepMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateQuestionnaireStepMutation\\:\\:handleAnonParticipation\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireStepMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateQuestionnaireStepMutation\\:\\:handleAnonParticipation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireStepMutation.php
 
@@ -29291,6 +28526,11 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:getRequestedFields\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
@@ -29302,11 +28542,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:\\$connectionBuilder is never read, only written\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:\\$globalIdResolver is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
 
@@ -29656,29 +28891,29 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVotableStepsResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteAuthorResolver\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteContributorResolver\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteAuthorResolver.php
+			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteContributorResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteAuthorResolver\\:\\:__invoke\\(\\) should return Capco\\\\UserBundle\\\\Entity\\\\User\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteContributorResolver\\:\\:__invoke\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\ContributorInterface\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteAuthorResolver.php
+			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteContributorResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteAuthorResolver\\:\\:canSeeAnonymous\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteContributorResolver\\:\\:canSeeAnonymous\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteAuthorResolver.php
+			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteContributorResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteAuthorResolver\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteContributorResolver\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteAuthorResolver.php
+			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteContributorResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteAuthorResolver\\:\\:preventNullableViewer\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVoteContributorResolver\\:\\:preventNullableViewer\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteAuthorResolver.php
+			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalVoteContributorResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalVotesResolver\\:\\:__invoke\\(\\) has no return type specified\\.$#"
@@ -31301,6 +30536,16 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/ViewerStepVotesResolver.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Vote\\\\PropositionVoteUserResolver\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/Vote/PropositionVoteUserResolver.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Vote\\\\PropositionVoteUserResolver\\:\\:preventNullableViewer\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/Vote/PropositionVoteUserResolver.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Type\\\\DateTimeType\\:\\:parseLiteral\\(\\) has parameter \\$valueNode with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Type/DateTimeType.php
@@ -32631,6 +31876,26 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Message/Follower/FollowerActivitiesMessage.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\MagicLinkMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/MagicLinkMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\MagicLinkMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/MagicLinkMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\MagicLinkMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/MagicLinkMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\MagicLinkMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/MagicLinkMessage.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Mediator\\\\MediatorPubParticipateMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Mediator/MediatorPubParticipateMessage.php
@@ -32744,6 +32009,26 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Organization\\\\InvitationMessage\\:\\:mockData\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Organization/InvitationMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Participant\\\\ParticipantConfirmEmailMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Participant\\\\ParticipantConfirmEmailMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Participant\\\\ParticipantConfirmEmailMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Participant\\\\ParticipantConfirmEmailMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Project\\\\ProjectCreateMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
@@ -35102,6 +34387,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\QuestionnaireReplyNotifier\\:\\:onDelete\\(\\) has parameter \\$reply with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Notifier/QuestionnaireReplyNotifier.php
+
+		-
+			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/QuestionnaireReplyNotifier.php
 
@@ -37616,6 +36906,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/PageRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantPhoneVerificationSmsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantPhoneVerificationSmsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantPhoneVerificationSmsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantPhoneVerificationSmsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantPhoneVerificationSmsRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
@@ -37641,11 +36951,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository\\:\\:countWithVotes\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository\\:\\:findByMediator\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
@@ -37662,11 +36967,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository\\:\\:findPaginated\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository\\:\\:findWithVotes\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
 
@@ -38036,26 +37336,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProposalCategoryRepository.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectSmsVoteRepository\\:\\:countAll\\(\\) should return int but returns bool\\|float\\|int\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectSmsVoteRepository\\:\\:countByTokenAndStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectSmsVoteRepository\\:\\:countDistinctPhonePublishedCollectVoteByStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectSmsVoteRepository\\:\\:countPublishedCollectVoteByStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectSmsVoteRepository.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectVoteRepository\\:\\:countByAuthorAndProject\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
@@ -38122,11 +37402,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectVoteRepository\\:\\:getUserVotesGroupedByStepIds\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectVoteRepository\\:\\:getVotesByStepAndUser\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
 
@@ -38551,36 +37826,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:countAll\\(\\) should return int but returns bool\\|float\\|int\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:countByTokenAndStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:countDistinctPhonePublishedSelectionVoteByStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:countPublishedSelectionVoteByStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:getCountsByProposalGroupedBySteps\\(\\) has parameter \\$asTitle with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionSmsVoteRepository\\:\\:getCountsByProposalGroupedBySteps\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionSmsVoteRepository.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionVoteRepository\\:\\:countByAuthorAndProject\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalSelectionVoteRepository.php
@@ -38672,11 +37917,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionVoteRepository\\:\\:getUserVotesGroupedByStepIds\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalSelectionVoteRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalSelectionVoteRepository\\:\\:getVotesByStepAndUser\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalSelectionVoteRepository.php
 
@@ -38894,51 +38134,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\RankingStepRepository\\:\\:getOneBySlugAndProjectSlug\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\RankingStep\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/RankingStepRepository.php
-
-		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:countAll\\(\\) should return int but returns bool\\|float\\|int\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:getEnabledByQuestionnaireAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:hasNewAnonymousReplies\\(\\) should return bool but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:hydrateFromIds\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:hydrateFromIds\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
@@ -39616,11 +38811,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository\\:\\:findByUserWithinOneMinuteRange\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ValueResponseRepository\\:\\:countByQuestion\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ValueResponseRepository.php
@@ -39961,6 +39151,11 @@ parameters:
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
 		-
+			message: "#^Parameter \\#1 \\$string of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
+
+		-
 			message: "#^Parameter \\#2 \\$responses of method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getReplyItem\\(\\) expects array, iterable given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
@@ -40292,11 +39487,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProposalStepVotesResolver\\:\\:getCreditsLeftByStepIdForProjectAndUser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProposalStepVotesResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProposalStepVotesResolver\\:\\:getSpentCreditsForUser\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProposalStepVotesResolver.php
 
@@ -41519,11 +40709,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Service\\\\OpenIDBackchannel\\:\\:\\$env is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Service/OpenIDBackchannel.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Service/SmsAnalyticsHelper.php
 
 		-
 			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
@@ -43866,17 +43051,7 @@ parameters:
 			path: src/Capco/UserBundle/Entity/User.php
 
 		-
-			message: "#^Property Capco\\\\UserBundle\\\\Entity\\\\UserType\\:\\:\\$id has no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserType.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Property Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
 

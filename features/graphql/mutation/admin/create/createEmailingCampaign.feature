@@ -71,7 +71,7 @@ Scenario: GraphQL admin creates a campaign from an internal list
     }",
     "variables": {
       "input": {
-        "mailingList": "NOT_CONFIRMED"
+        "mailingList": "REGISTERED"
       }
     }
   }
@@ -84,7 +84,7 @@ Scenario: GraphQL admin creates a campaign from an internal list
         "error": null,
         "emailingCampaign": {
           "mailingList": null,
-          "mailingInternal": "NOT_CONFIRMED"
+          "mailingInternal": "REGISTERED"
         }
       }
     }
@@ -109,7 +109,7 @@ Scenario: GraphQL project owner wants to create a campaign from an internal list
     }",
     "variables": {
       "input": {
-        "mailingList": "NOT_CONFIRMED"
+        "mailingList": "REGISTERED"
       }
     }
   }

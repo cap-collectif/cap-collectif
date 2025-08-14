@@ -7,3 +7,6 @@ AddProposalVoteErrorCode:
             PHONE_ALREADY_USED:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::PHONE_ALREADY_USED
                 description: 'The proposal is already voted by another user/participant with the given number.'
+            CONTRIBUTION_NOT_ALLOWED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::CONTRIBUTION_NOT_ALLOWED
+                description: 'A participant with the same email as the logged in user already voted in this step.'

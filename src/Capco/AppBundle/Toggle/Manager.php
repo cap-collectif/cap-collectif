@@ -76,12 +76,10 @@ class Manager
     final public const import_proposals = 'import_proposals';
     final public const analytics_page = 'analytics_page';
     final public const project_admin = 'project_admin';
-    final public const anonymous_questionnaire = 'anonymous_questionnaire';
     final public const twilio = 'twilio';
     final public const paper_vote = 'paper_vote';
     final public const helpscout_beacon = 'helpscout_beacon';
     final public const api_sendinblue = 'api_sendinblue';
-    final public const proposal_sms_vote = 'proposal_sms_vote';
     final public const organizations = 'organizations';
     final public const moderation_comment = 'moderation_comment';
     final public const unstable__new_create_project = 'unstable__new_create_project';
@@ -93,7 +91,7 @@ class Manager
     final public const collect_proposals_by_email = 'collect_proposals_by_email';
     final public const user_anonymization_automated = 'user_anonymization_automated';
 
-    final public const ADMIN_ALLOWED_FEATURES = [
+    public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
         self::calendar,
         self::consultation_plan,
@@ -194,12 +192,10 @@ class Manager
         self::import_proposals,
         self::analytics_page,
         self::project_admin,
-        self::anonymous_questionnaire,
         self::twilio,
         self::paper_vote,
         self::helpscout_beacon,
         self::api_sendinblue,
-        self::proposal_sms_vote,
         self::organizations,
         self::moderation_comment,
         self::unstable__new_create_project,

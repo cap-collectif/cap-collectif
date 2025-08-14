@@ -115,6 +115,8 @@ class ResponseSearch extends Search
             $boolQuery->addFilter(new Term(['starCrafters.id' => ['value' => $starCrafter->getId()]]));
         }
 
+        $boolQuery->addFilter(new Term(['reply.completionStatus' => 'COMPLETED']));
+
         $query = new Query($boolQuery);
         $this->setSortWithId($query, $orderBy);
         $this->applyCursor($query, $cursor);
@@ -255,6 +257,7 @@ class ResponseSearch extends Search
             ->addFilter(new Exists('reply'))
             ->addMustNot(new Term(['reply.draft' => ['value' => true]]))
             ->addFilter(new Term(['question.id' => ['value' => $question->getId()]]))
+            ->addFilter(new Term(['reply.completionStatus' => 'COMPLETED']))
         ;
 
         if (!$withNotConfirmedUser) {

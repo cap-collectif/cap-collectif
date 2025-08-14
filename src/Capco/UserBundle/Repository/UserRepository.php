@@ -18,7 +18,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ContributorsRole;
-use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
@@ -1370,7 +1369,6 @@ class UserRepository extends EntityRepository
     }
 
     public function getFromInternalList(
-        string $internalList,
         bool $includeUnsubscribed = false,
         bool $includeSuperAdmin = false
     ): array {
@@ -1384,12 +1382,6 @@ class UserRepository extends EntityRepository
 
         if (!$includeSuperAdmin) {
             $qb->andWhere('u.roles NOT LIKE :role')->setParameter('role', '%ROLE_SUPER_ADMIN%');
-        }
-
-        if (EmailingCampaignInternalList::CONFIRMED === $internalList) {
-            $qb->andWhere('u.confirmationToken IS NULL');
-        } elseif (EmailingCampaignInternalList::NOT_CONFIRMED === $internalList) {
-            $qb->andWhere('u.confirmationToken IS NOT NULL');
         }
 
         return $qb->getQuery()->getResult();
@@ -2315,6 +2307,38 @@ class UserRepository extends EntityRepository
         $sql = 'UPDATE fos_user SET anonymization_reminder_email_sent_at = NOW() WHERE email IN (' . implode(', ', $placeholders) . ')';
 
         $conn->executeStatement($sql, $params);
+    }
+
+    public function findWithContributionsByProjectAndParticipant(Project $project, User $user): bool
+    {
+        $em = $this->getEntityManager();
+        $sql = "
+            SELECT u.id
+            FROM fos_user u
+            JOIN project_abstractstep pas ON pas.project_id = :projectId
+            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+            JOIN votes v ON v.voter_id = u.id AND (v.selection_step_id = s.id OR v.collect_step_id = s.id) AND v.is_accounted = 1
+            WHERE u.id = :userId
+            UNION
+            SELECT u.id
+            FROM fos_user u
+            JOIN project_abstractstep pas ON pas.project_id = :projectId
+            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('questionnaire')
+            JOIN reply r ON r.author_id = u.id AND r.completion_status = 'COMPLETED'
+            JOIN questionnaire q ON r.questionnaire_id = q.id AND s.id = q.step_id
+            WHERE u.id = :userId
+            UNION
+            SELECT u.id
+            FROM fos_user u
+            JOIN project_abstractstep pas ON pas.project_id = :projectId
+            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect')
+            JOIN proposal_form pf ON pf.step_id = s.id
+            JOIN proposal p ON p.proposal_form_id = pf.id AND p.author_id = u.id
+            WHERE u.id = :userId
+";
+        $params = ['projectId' => $project->getId(), 'userId' => $user->getId()];
+
+        return $em->getConnection()->executeStatement($sql, $params) > 0;
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

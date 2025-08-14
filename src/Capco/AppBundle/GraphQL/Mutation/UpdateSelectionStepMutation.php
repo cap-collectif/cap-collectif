@@ -39,7 +39,6 @@ class UpdateSelectionStepMutation implements MutationInterface
         $selectionStep = $this->getSelectionStep($selectionStepId, $viewer);
 
         unset($data['stepId']);
-        $this->handleAnonParticipation($data);
 
         $form = $this->formFactory->create(SelectionStepFormType::class, $selectionStep);
         $form->submit($data, false);
@@ -84,22 +83,5 @@ class UpdateSelectionStepMutation implements MutationInterface
         }
 
         return $selectionStep;
-    }
-
-    /**
-     * @param array<string, null|array<string, null|int|string>|int|string> $data
-     */
-    private function handleAnonParticipation(array &$data): void
-    {
-        $isAnonymousParticipationAllowed = $data['isProposalSmsVoteEnabled'] ?? null;
-
-        if (!$isAnonymousParticipationAllowed) {
-            return;
-        }
-
-        $data['requirements'] = [
-            ['type' => 'PHONE'],
-            ['type' => 'PHONE_VERIFIED'],
-        ];
     }
 }

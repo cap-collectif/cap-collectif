@@ -1,0 +1,11 @@
+ValidateContributionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update a participant'
+        fields:
+            token:
+                type: 'String'
+                description: 'If anonymous, the token of the participant who created the contribution.'
+            contributionId:
+                type: 'ID!'
+                description: 'The ID of the contribution, It can be either a Reply a Vote or a Proposal'

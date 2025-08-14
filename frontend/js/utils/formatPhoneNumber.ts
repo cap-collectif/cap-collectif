@@ -10,6 +10,7 @@ const formatPhoneNumber = (number: string | null | undefined) => {
     const countryCodeMatch = countryCodes.some(countryCode => number.includes(countryCode))
 
     if (!countryCodeMatch) {
+      console.error('No Country code match was found')
       return number
     }
 

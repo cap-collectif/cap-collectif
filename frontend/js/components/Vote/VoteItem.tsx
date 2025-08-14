@@ -110,7 +110,7 @@ export default createFragmentContainer(VoteItem, {
       ... on VersionVote {
         value
       }
-      ... on ProposalUserVote {
+      ... on ProposalVote {
         step {
           ...interpellationLabelHelper_step @relay(mask: false)
         }

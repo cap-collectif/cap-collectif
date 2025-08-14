@@ -1,0 +1,26 @@
+UpdateParticipantInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update a participant'
+        fields:
+            token:
+                type: 'String!'
+                description: 'The participant token to update'
+            firstname:
+                type: 'String'
+            lastname:
+                type: 'String'
+            postalAddress:
+                type: 'String'
+            dateOfBirth:
+                type: 'DateTime'
+            phone:
+                type: 'String'
+            zipCode:
+                type: 'String'
+            consentInternalCommunication:
+                type: 'Boolean'
+            consentPrivacyPolicy:
+                type: 'Boolean'
+            userIdentificationCode:
+                type: 'String'

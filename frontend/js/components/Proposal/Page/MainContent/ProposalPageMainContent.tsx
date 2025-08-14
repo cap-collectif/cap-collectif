@@ -48,7 +48,7 @@ export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing }: Pro
 }
 export default createFragmentContainer(ProposalPageMainContent, {
   proposal: graphql`
-    fragment ProposalPageMainContent_proposal on Proposal @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    fragment ProposalPageMainContent_proposal on Proposal @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: {type: "String"}) {
       ...ProposalPageFusionInformations_proposal
       ...ProposalPageOfficialAnswer_proposal
       ...ProposalPageDescription_proposal
@@ -57,7 +57,7 @@ export default createFragmentContainer(ProposalPageMainContent, {
       ...ProposalPageMainAside_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalPageNews_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalPageDiscussions_proposal
-      ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalPageComments_proposal
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
     }

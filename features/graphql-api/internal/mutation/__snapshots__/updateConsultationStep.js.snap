@@ -33,17 +33,17 @@ Object {
         "edges": Array [
           Object {
             "node": Object {
+              "__typename": "PhoneRequirement",
+            },
+          },
+          Object {
+            "node": Object {
               "__typename": "FirstnameRequirement",
             },
           },
           Object {
             "node": Object {
               "__typename": "LastnameRequirement",
-            },
-          },
-          Object {
-            "node": Object {
-              "__typename": "PhoneRequirement",
             },
           },
         ],

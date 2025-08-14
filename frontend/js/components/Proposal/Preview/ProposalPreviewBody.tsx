@@ -26,6 +26,7 @@ type Props = {
   proposal: ProposalPreviewBody_proposal
   step: ProposalPreviewBody_step | null | undefined
   viewer: ProposalPreviewBody_viewer | null | undefined
+  participant: ProposalPreviewBody_participant | null | undefined
   isSPA?: boolean
 }
 
@@ -72,7 +73,7 @@ const renderProposalTitle = (
   )
 }
 
-export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) => {
+export const ProposalPreviewBody = ({ proposal, step, viewer, participant, isSPA }: Props) => {
   const intl = useIntl()
   const summary =
     proposal.summaryOrBodyExcerpt && isPredefinedTraductionKey(proposal.summaryOrBodyExcerpt)
@@ -117,7 +118,7 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
         {step &&
           proposal.currentVotableStep &&
           step.id === proposal.currentVotableStep.id &&
-          !proposal.isArchived && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />}
+          !proposal.isArchived && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} participant={participant} />}
         {step && step.project && step.project.opinionCanBeFollowed ? (
           <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
         ) : null}
@@ -148,12 +149,18 @@ export default createFragmentContainer(ProposalPreviewBody, {
       ...ProposalPreviewVote_viewer @arguments(stepId: $stepId)
     }
   `,
+  participant: graphql`
+    fragment ProposalPreviewBody_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalPreviewVote_participant @arguments(stepId: $stepId)
+    }
+  `,
   proposal: graphql`
     fragment ProposalPreviewBody_proposal on Proposal
     @argumentDefinitions(
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
       stepId: { type: "ID!" }
+      token: {type: "String"}
     ) {
       isArchived
       id
@@ -184,7 +191,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       }
       ...ProposalPreviewUser_proposal
       ...ProposalPreviewVote_proposal
-        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
+        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId, token: $token)
         @skip(if: $isProfileView)
       ...ProposalDetailEstimation_proposal
       ...ProposalDetailLikers_proposal

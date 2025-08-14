@@ -15,6 +15,16 @@ const mutation = graphql`
     deleteUserReply(input: $input) {
       questionnaire {
         id
+        step {
+            project {
+                contributors {
+                    totalCount
+                }
+                contributions {
+                    totalCount
+                }
+            }
+        }
       }
       replyId
     }

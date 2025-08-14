@@ -13,31 +13,33 @@ const DeleteAnonymousReplyMutation = /* GraphQL*/ `
 `;
 
 describe('mutations.deleteAnonymousReply', () => {
+  it('should throw an error when participant token is not found', async () => {
+    await expect(
+      graphql(
+        DeleteAnonymousReplyMutation,
+        {
+          input: {
+            replyId: toGlobalId('Reply', 'replyAnonymous1'),
+            participantToken: 'def',
+          },
+        },
+        'internal',
+      ),
+    ).rejects.toThrowError('Given token does not match corresponding Participant');
+  });
+
   it('should delete an anonymous reply', async () => {
     const response = await graphql(
       DeleteAnonymousReplyMutation,
       {
         input: {
-          hashedToken: 'YWJj', // base 64 encode of replyAnonymous1's token "abc"
+          replyId: toGlobalId('Reply', 'replyAnonymous1'),
+          participantToken: btoa('fakeToken1'),
         },
       },
       'internal',
     );
 
     expect(response).toMatchSnapshot();
-  });
-
-  it('should throw an error when token is not found', async () => {
-    await expect(
-      graphql(
-        DeleteAnonymousReplyMutation,
-        {
-          input: {
-            hashedToken: 'def',
-          },
-        },
-        'internal',
-      ),
-    ).rejects.toThrowError('Reply not found');
   });
 });

@@ -7,7 +7,6 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
   />,
   <div
     aria-label="contained-modal-title-lg"
-    aria-modal={true}
     data-dialog={true}
     hidden={false}
     id="id-g"
@@ -19,7 +18,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      className="sc-bcXGCL inqKcp sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {

@@ -18,7 +18,8 @@ const UpdateAnonymousReplyMutation = /* GraphQL*/ `
 `;
 
 const input = {
-  hashedToken: 'YWJj', // base 64 encode of replyAnonymous1's token "abc"
+  replyId: toGlobalId('Reply', 'replyAnonymous1'),
+  participantToken: btoa('fakeToken1'),
   responses: [
     {
       value: 'updated anonymous reply',
@@ -40,18 +41,18 @@ describe('mutations.updateAnonymousReply', () => {
     expect(response).toMatchSnapshot();
   });
 
-  it('should throw an error when token is not found', async () => {
+  it('should throw an error when participant token is not found', async () => {
     await expect(
       graphql(
         UpdateAnonymousReplyMutation,
         {
           input: {
             ...input,
-            hashedToken: 'def',
+            participantToken: 'def',
           },
         },
         'internal',
       ),
-    ).rejects.toThrowError('Reply not found.');
+    ).rejects.toThrowError('Given token does not match corresponding Participant');
   });
 });

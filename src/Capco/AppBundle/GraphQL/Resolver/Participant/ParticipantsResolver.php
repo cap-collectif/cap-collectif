@@ -16,14 +16,19 @@ class ParticipantsResolver implements QueryInterface
 
     public function __invoke(Argument $args): ConnectionInterface
     {
+        $consentInternalCommunication = $args->offsetGet('consentInternalCommunication');
+        $emailConfirmed = $args->offsetGet('emailConfirmed');
+
         $paginator = new Paginator(
             fn (int $offset, int $limit) => $this->participantRepository->findPaginated(
                 $limit,
-                $offset
+                $offset,
+                $consentInternalCommunication,
+                $emailConfirmed
             )
         );
 
-        $totalCount = $this->participantRepository->count([]);
+        $totalCount = $this->participantRepository->countWithFilters($consentInternalCommunication, $emailConfirmed);
 
         return $paginator->auto($args, $totalCount);
     }

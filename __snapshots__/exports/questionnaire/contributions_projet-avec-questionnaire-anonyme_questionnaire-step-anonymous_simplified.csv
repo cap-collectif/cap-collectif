@@ -1,5 +1,5 @@
 ﻿export_contribution_type,export_contribution_id,export_contribution_author_id,export_contribution_published_at,"Comment ça va ?"
+export_contribution_type_questionnaire_reply,replyAnonymous1,participant1,"2016-03-01 00:00:00",bien
+export_contribution_type_questionnaire_reply,replyAnonymous1bis,participant1,"2016-03-01 00:00:00",
+export_contribution_type_questionnaire_reply,replyAnonymous2,participant2,"2017-03-01 00:00:00","bien bien bien"
 export_contribution_type_questionnaire_reply,replyQuestionnaireAnon,user1,"2016-03-02 00:00:00",
-export_contribution_type_questionnaire_reply_anonymous,replyAnonymous1,,"2016-03-01 00:00:00",bien
-export_contribution_type_questionnaire_reply_anonymous,replyAnonymous1bis,,"2016-03-01 00:00:00",
-export_contribution_type_questionnaire_reply_anonymous,replyAnonymous2,,"2017-03-01 00:00:00","bien bien bien"

@@ -10,8 +10,9 @@ AddProposalSmsVoteInput:
                 type: 'ID!'
                 description: 'The Node ID of the step.'
             token:
-                type: 'String!'
-                description: 'The token associated to this number.'
-            consentSmsCommunication:
-                type: 'Boolean!'
-                description: 'Whether or not the user consents to receive communications by sms.'
+                type: 'String'
+                description: 'The participant token.'
+            anonymously:
+                type: 'Boolean'
+                defaultValue: true
+                description: 'The vote will be anonymous.'

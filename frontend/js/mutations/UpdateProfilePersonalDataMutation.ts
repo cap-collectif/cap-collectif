@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { graphql } from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
   UpdateProfilePersonalDataMutationVariables,
-  UpdateProfilePersonalDataMutationResponse as Response,
+  UpdateProfilePersonalDataMutationResponse as Response, UpdateProfilePersonalDataMutation,
 } from '~relay/UpdateProfilePersonalDataMutation.graphql'
 
 export type UpdateProfilePersonalDataMutationResponse = Response
@@ -26,6 +26,16 @@ const commit = (variables: UpdateProfilePersonalDataMutationVariables): Promise<
     mutation,
     variables,
   })
+
+// we keep the old commit function for now, need to refactor it later to use the hook version
+export const useUpdateProfilePersonalDataMutation = () => {
+  const [commit, isLoading] = useMutation<UpdateProfilePersonalDataMutation>(mutation)
+
+  return {
+    commit,
+    isLoading
+  }
+}
 
 export default {
   commit,

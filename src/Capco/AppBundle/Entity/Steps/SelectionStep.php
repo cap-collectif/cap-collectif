@@ -6,7 +6,9 @@ use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\MediatorParticipantStep;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
@@ -15,7 +17,6 @@ use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
-use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -28,13 +29,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
  * @CapcoAssert\VoteMin
  */
-class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface
+class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
     use ProposalArchivedTrait;
     use SecretBallotTrait;
     use TimelessStepTrait;
-    use VoteSmsTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
@@ -43,13 +43,19 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     final public const VOTE_TYPE_SIMPLE = 1;
     final public const VOTE_TYPE_BUDGET = 2;
 
-    public static $voteTypeLabels = [
+    /**
+     * @var array|int[]
+     */
+    public static array $voteTypeLabels = [
         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
         'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
         'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
     ];
 
-    public static $sort = [
+    /**
+     * @var array|string[]
+     */
+    public static array $sort = [
         'old',
         'last',
         'votes',
@@ -60,7 +66,10 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         'cheap',
     ];
 
-    public static $sortLabels = [
+    /**
+     * @var array|string[]
+     */
+    public static array $sortLabels = [
         'global.filter_f_comments' => 'comments',
         'global.filter_f_last' => 'last',
         'global.filter_f_old' => 'old',
@@ -72,26 +81,27 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     ];
 
     /**
+     * @var Collection<int, Selection>
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="selectionStep", cascade={"persist"}, orphanRemoval=true)
      */
-    private $selections;
+    private Collection $selections;
 
     /**
      * @ORM\Column(name="allowing_progess_steps", type="boolean", options={"default": false})
      */
-    private $allowingProgressSteps = false;
+    private bool $allowingProgressSteps = false;
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
-    private $defaultSort = ProposalSort::RANDOM;
+    private string $defaultSort = ProposalSort::RANDOM;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
      * @ORM\JoinColumn(name="default_status_id", nullable=true, onDelete="SET NULL")
      */
-    private $defaultStatus;
+    private ?Status $defaultStatus = null;
 
     /**
      * @ORM\OneToMany(targetEntity=MediatorParticipantStep::class, mappedBy="step", orphanRemoval=true)
@@ -103,6 +113,12 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
      */
     private string $subType = SelectionStepSubTypes::VOTE;
 
+    /**
+     * @var Collection<int, ProposalSelectionVote>
+     * @ORM\OneToMany(targetEntity=ProposalSelectionVote::class, mappedBy="selectionStep")
+     */
+    private Collection $selectionVotes;
+
     public function __construct()
     {
         parent::__construct();
@@ -110,7 +126,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         $this->mediatorParticipantSteps = new ArrayCollection();
     }
 
-    public function addSelection(Selection $selection)
+    public function addSelection(Selection $selection): self
     {
         if (!$this->selections->contains($selection)) {
             $this->selections[] = $selection;
@@ -138,7 +154,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     /**
      * @return $this
      */
-    public function setDefaultSort(mixed $defaultSort)
+    public function setDefaultSort(mixed $defaultSort): self
     {
         $this->defaultSort = $defaultSort;
 
@@ -169,7 +185,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         return $this;
     }
 
-    public function getType()
+    public function getType(): string
     {
         return self::TYPE;
     }
@@ -196,12 +212,15 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         throw new \RuntimeException($this->getId() . ' : no proposalForm found for this selection step');
     }
 
-    public function getProposalFormId()
+    public function getProposalFormId(): string
     {
         return $this->getProposalForm()->getId();
     }
 
-    public function getProposals()
+    /**
+     * @return array<Proposal>
+     */
+    public function getProposals(): array
     {
         $proposals = [];
         foreach ($this->selections as $selection) {
@@ -276,6 +295,35 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     public function setSubType(string $subType): self
     {
         $this->subType = $subType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProposalSelectionVote>
+     */
+    public function getSelectionVotes(): Collection
+    {
+        return $this->selectionVotes;
+    }
+
+    /**
+     * @param Collection<int, ProposalSelectionVote> $votes
+     *
+     * @return $this
+     */
+    public function setSelectionVotes(Collection $votes): self
+    {
+        $this->selectionVotes = $votes;
+
+        return $this;
+    }
+
+    public function addSelectionVote(ProposalSelectionVote $selectionVote): self
+    {
+        if (!$this->selectionVotes->contains($selectionVote)) {
+            $this->selectionVotes->add($selectionVote);
+        }
 
         return $this;
     }

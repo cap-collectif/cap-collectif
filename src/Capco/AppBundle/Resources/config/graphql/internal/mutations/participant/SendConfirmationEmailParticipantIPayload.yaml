@@ -1,0 +1,10 @@
+SendConfirmationEmailParticipantPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            errorCode:
+                type: 'SendConfirmationEmailParticipantErrorCode'
+                description: 'The error code, if failing.'
+            confirmationUrl:
+                type: 'String'
+                description: 'For testing purpose only, the url to confirm the participant email.'

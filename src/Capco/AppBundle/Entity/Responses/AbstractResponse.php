@@ -3,13 +3,11 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -73,12 +71,6 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Reply $reply = null;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ReplyAnonymous", inversedBy="responses", cascade={"persist"})
-     * @ORM\JoinColumn(name="reply_anonymous_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    private ?ReplyAnonymous $replyAnonymous = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
@@ -162,15 +154,6 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
         return $this;
     }
 
-    public function getReplyOrReplyAnonymous(): ?AbstractReply
-    {
-        if ($this->replyAnonymous) {
-            return $this->replyAnonymous;
-        }
-
-        return $this->reply;
-    }
-
     public function getReply(): ?Reply
     {
         return $this->reply;
@@ -179,18 +162,6 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
     public function setReply(?Reply $reply = null): self
     {
         $this->reply = $reply;
-
-        return $this;
-    }
-
-    public function getReplyAnonymous(): ?ReplyAnonymous
-    {
-        return $this->replyAnonymous;
-    }
-
-    public function setReplyAnonymous(?ReplyAnonymous $replyAnonymous = null): self
-    {
-        $this->replyAnonymous = $replyAnonymous;
 
         return $this;
     }

@@ -16,13 +16,11 @@ Scenario: user wants to see user5's replies and is not the author
             edges{
               node{
                 createdAt
-                ...on UserReply {
-                  author{
+                author {
                     id
                     username
                   }
-                  private
-                }
+                private
                 id
               }
             }
@@ -66,13 +64,11 @@ Scenario: author wants to see his replies
             edges{
               node{
                 createdAt
-                ...on UserReply {
-                  author{
-                    id
-                    username
-                  }
-                  private
+                author{
+                  id
+                  username
                 }
+                private
                 id
               }
             }
@@ -204,13 +200,11 @@ Scenario: admin wants to see user5's replies
             edges{
               node{
                 createdAt
-                ...on UserReply {
-                  author{
-                    id
-                    username
-                  }
-                  private
+                author{
+                  id
+                  username
                 }
+                private
                 id
               }
             }
@@ -342,13 +336,11 @@ Scenario: admin in group wants to see user5's replies
             edges{
               node{
                 createdAt
-                ...on UserReply {
-                  author{
-                    id
-                    username
-                  }
-                  private
+                author{
+                  id
+                  username
                 }
+                private
                 id
               }
             }
@@ -490,10 +482,8 @@ Scenario: user wants to see userAdmin's replies
             totalCount
             edges{
               node{
-                ...on UserReply {
-                  author{
-                    _id
-                  }
+                author{
+                  _id
                 }
               }
             }
@@ -557,10 +547,8 @@ Scenario: admin wants to see userAdmin's replies (and see admin only questionnai
             totalCount
             edges{
               node{
-                ...on UserReply {
-                  author{
-                    id
-                  }
+                author{
+                  id
                 }
               }
             }

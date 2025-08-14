@@ -10,6 +10,11 @@ jest.mock('@liinkiing/react-hooks', () => ({
   useDisclosure: () => ({ isOpen: true, onOpen: () => {}, onClose: () => {} }),
 }))
 
+jest.mock('@shared/hooks/useIsMobile', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}))
+
 describe('<ChartModal />', () => {
   let environment
   let TestComponent

@@ -1,0 +1,6 @@
+ValidatePhoneReusabilityPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            errorCode:
+                type: 'ValidatePhoneReusabilityErrorCode'

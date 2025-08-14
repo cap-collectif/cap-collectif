@@ -225,7 +225,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         startAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
         voteType: 1
-        isProposalSmsVoteEnabled: true
         votesLimit: 2
     collectStepClosedIdf3:
         id: collectStepClosedIdf3
@@ -278,3 +277,30 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         voteThreshold: 2
         proposalArchivedTime: 10
         proposalArchivedUnitTime: DAYS
+    collectStepWorkflowVote:
+        id: collectStepWorkflowVote
+        title: Collecte des propositions parcours
+        label: Dépôt
+        body: Collecte des propositions parcours
+        timeless: true
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: null
+    collectStepWorkflowVote2:
+        id: collectStepWorkflowVote2
+        title: Collecte des propositions parcours min 2 max 2
+        label: Dépôt min 2 max 2
+        body: Collecte des propositions parcours min 2 max 2
+        timeless: true
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: null
+    collectStepWorkflowCollectVote:
+        id: collectStepWorkflowCollectVote
+        title: Collecte des propositions + vote parcours min 3 max 5
+        label: Dépôt + vote min 3 max 5
+        body: Collecte des propositions + vote parcours min 3 max 5
+        timeless: true
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: null
+        voteType: 1
+        votesMin: 3
+        votesLimit: 5

@@ -4,5 +4,5 @@ SendSmsPhoneValidationCodePayload:
         description: 'Payload of the sendSmsPhoneValidationCode mutation.'
         fields:
             errorCode:
-                type: 'SendSmsPhoneValidationCodeErrorCode'
+                type: 'SendSMSErrorCode'
                 description: 'The error code, if failing.'

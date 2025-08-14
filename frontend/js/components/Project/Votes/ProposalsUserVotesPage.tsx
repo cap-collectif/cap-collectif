@@ -50,14 +50,16 @@ class ProposalsUserVotesPage extends React.Component<Props> {
 
 export default createFragmentContainer(ProposalsUserVotesPage, {
   project: graphql`
-    fragment ProposalsUserVotesPage_project on Project {
+    fragment ProposalsUserVotesPage_project on Project
+    @argumentDefinitions(token: { type: "String" })
+    {
       type {
         title
       }
       id
       votableSteps {
         id
-        ...ProposalsUserVotesStep_step
+        ...ProposalsUserVotesStep_step @arguments(token: $token)
       }
     }
   `,

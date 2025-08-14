@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateParticipant should return BAD_CODE validation errors when attempting to use a non existing identification code 1`] = `
+Object {
+  "updateParticipant": Object {
+    "participant": Object {
+      "consentInternalCommunication": true,
+      "consentPrivacyPolicy": true,
+      "dateOfBirth": "2000-01-01 00:00:00",
+      "firstname": "new firstname",
+      "lastname": "new lastname",
+      "phone": "+33601010101",
+      "postalAddress": Object {
+        "formatted": "RuedelaSavate10,4340Awans,Belgium",
+      },
+      "userIdentificationCode": null,
+      "zipCode": "75001",
+    },
+    "validationErrors": "{\\"userIdentificationCode\\":\\"BAD_CODE\\"}",
+  },
+}
+`;
+
+exports[`mutations.updateParticipant should return CODE_ALREADY_USED validation errors when attempting to use an identification code already used by another user/participant 1`] = `
+Object {
+  "updateParticipant": Object {
+    "participant": Object {
+      "consentInternalCommunication": true,
+      "consentPrivacyPolicy": true,
+      "dateOfBirth": "2000-01-01 00:00:00",
+      "firstname": "new firstname",
+      "lastname": "new lastname",
+      "phone": "+33601010101",
+      "postalAddress": Object {
+        "formatted": "RuedelaSavate10,4340Awans,Belgium",
+      },
+      "userIdentificationCode": "DK2AZ554",
+      "zipCode": "75001",
+    },
+    "validationErrors": "{\\"userIdentificationCode\\":\\"CODE_ALREADY_USED\\"}",
+  },
+}
+`;
+
+exports[`mutations.updateParticipant should update participant 1`] = `
+Object {
+  "updateParticipant": Object {
+    "participant": Object {
+      "consentInternalCommunication": true,
+      "consentPrivacyPolicy": true,
+      "dateOfBirth": "2000-01-01 00:00:00",
+      "firstname": "new firstname",
+      "lastname": "new lastname",
+      "phone": "+33601010101",
+      "postalAddress": Object {
+        "formatted": "RuedelaSavate10,4340Awans,Belgium",
+      },
+      "userIdentificationCode": null,
+      "zipCode": "75001",
+    },
+    "validationErrors": null,
+  },
+}
+`;

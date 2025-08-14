@@ -8,7 +8,6 @@ const ParticipantReplies = /* GraphQL */ `
           totalCount
           edges {
             node {
-              adminUrl
               status
               __typename
             }

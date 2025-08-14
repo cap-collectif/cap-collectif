@@ -200,3 +200,23 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         votesMin: 1
         votesLimit: 3
         publishedVoteDate: <(new \DateTime('2022-01-03'))>
+    selectionStepWorkflowVote1:
+        id: selectionStepWorkflowVote1
+        title: Vote parcours min 3 max 5
+        label: Vote parcours min 3 max 5
+        startAt: <identity((new \DateTime('2024-08-2')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 1
+        body: Vote parcours
+        votesMin: 3
+        votesLimit: 5
+    selectionStepWorkflowVote2:
+        id: selectionStepWorkflowVote2
+        title: Vote parcours min 2 max 2
+        label: Vote parcours min 2 max 2
+        startAt: <identity((new \DateTime('2024-08-2')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 1
+        body: Vote parcours
+        votesMin: 2
+        votesLimit: 2

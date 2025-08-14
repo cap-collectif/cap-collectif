@@ -98,11 +98,9 @@ export type FeatureToggles = {
   project_admin: boolean | null | undefined
   http_redirects: boolean | null | undefined
   noindex_on_profiles: boolean | null | undefined
-  anonymous_questionnaire: boolean | null | undefined
   twilio: boolean | null | undefined
   paper_vote: boolean | null | undefined
   helpscout_beacon: boolean | null | undefined
-  proposal_sms_vote: boolean | null | undefined
   organizations: boolean | null | undefined
   moderation_comment: boolean | null | undefined
   online_help: boolean | null | undefined

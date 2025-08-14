@@ -19,6 +19,9 @@ InternalParticipant:
                 access: '@=hasRole("ROLE_ADMIN") or hasRole("ROLE_MEDIATOR")'
                 type: 'String!'
                 description: 'The participant token.'
+            phoneConfirmed:
+                type: 'Boolean!'
+                description: 'Wether or not the participant has confirmed his phone.'
             replies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -34,6 +37,16 @@ InternalParticipant:
                         type: 'ID'
                         description: 'Filter votes created by a mediator'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", value, getUser(), args)'
+            proposalVotes:
+                type: 'InternalProposalVoteConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    stepId:
+                        type: 'ID'
+                    orderBy:
+                        type: 'InternalProposalVoteOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantProposalVotesResolver", value, args)'
             user:
                 type: 'InternalUser'
                 description: 'If already registered, the user to add as participant.'
@@ -45,4 +58,16 @@ InternalParticipant:
                         type: 'ID!'
                         description: 'The step containing requirements.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", value, args, getUser())'
+            consentSmsCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not the participant consent receiving sms communication.'
+            consentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not the participant consent receiving internal communication.'
+            consentPrivacyPolicy:
+                type: 'Boolean!'
+                description: 'Wether or not the participant consent the privacy policy.'
+            isEmailConfirmed:
+                type: 'Boolean!'
+                description: 'Wether or not the participant has confirmed his email.'
 

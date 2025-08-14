@@ -1,0 +1,10 @@
+VerifyParticipantPhoneNumberPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            participant:
+                type: 'InternalParticipant'
+                description: 'The updated Participant.'
+            errorCode:
+                type: 'VerifySMSErrorCode'
+                description: 'The error code, if failing.'

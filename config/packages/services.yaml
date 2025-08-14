@@ -490,6 +490,10 @@ services:
         autowire: true
         public: true
 
+    Capco\AppBundle\Service\EmailRateLimiter:
+        autowire: true
+        public: true
+
     Capco\AppBundle\Fetcher\SmsProviderFetcher:
         arguments:
             $smsProvider: '%sms_provider%'

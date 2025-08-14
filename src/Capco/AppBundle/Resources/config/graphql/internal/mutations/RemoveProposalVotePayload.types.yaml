@@ -12,3 +12,5 @@ RemoveProposalVotePayload:
                 type: 'ID'
             areRemainingVotesAccounted:
                 type: 'Boolean!'
+            shouldDecrementContributorsTotalCount:
+                type: 'Boolean'

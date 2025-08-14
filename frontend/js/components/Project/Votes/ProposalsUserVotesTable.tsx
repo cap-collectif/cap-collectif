@@ -82,11 +82,6 @@ const renderPlaceholders = (
   isDraggable: boolean,
   startNumber?: number,
 ) => {
-
-  if (length < 0) {
-    return null;
-  }
-
   return [...Array(length)].map((e, i) => {
     return (
       <VotePlaceholder key={i} isDraggable={isDraggable}>
@@ -392,7 +387,7 @@ export default createFragmentContainer(container, {
         node {
           id
           ...ProposalUserVoteItem_vote
-          ... on ProposalUserVote {
+          ... on ProposalVote {
             anonymous
           }
           proposal {

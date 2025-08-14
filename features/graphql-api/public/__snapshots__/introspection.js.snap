@@ -269,13 +269,13 @@ Object {
         "name": "Questionnaire",
       },
       Object {
-        "name": "UserReplyConnection",
+        "name": "ReplyConnection",
       },
       Object {
-        "name": "UserReplyEdge",
+        "name": "ReplyEdge",
       },
       Object {
-        "name": "UserReply",
+        "name": "Reply",
       },
       Object {
         "name": "NotPublishedReason",

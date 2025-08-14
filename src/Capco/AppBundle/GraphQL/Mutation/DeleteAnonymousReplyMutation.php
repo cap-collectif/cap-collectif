@@ -3,15 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 
@@ -19,25 +18,20 @@ class DeleteAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ReplyAnonymousRepository $replyAnonymousRepository, private readonly Indexer $indexer, private readonly Publisher $publisher)
+    public function __construct(private EntityManagerInterface $em, private Indexer $indexer, private Publisher $publisher, private GlobalIdResolver $globalIdResolver)
     {
     }
 
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
-        $hashedToken = $args->offsetGet('hashedToken');
-        $decodedToken = base64_decode((string) $hashedToken);
-        $reply = $this->replyAnonymousRepository->findOneBy(['token' => $decodedToken]);
 
-        if (!$reply) {
-            throw new UserError('Reply not found');
-        }
+        $reply = $this->getReply($args);
 
-        $replyId = GlobalId::toGlobalId('Reply', $reply->getId());
+        $replyId = $args->offsetGet('replyId');
         $questionnaire = $reply->getQuestionnaire();
 
-        $this->indexer->remove(AbstractReply::class, $reply->getId());
+        $this->indexer->remove(Reply::class, $reply->getId());
         $this->indexer->finishBulk();
 
         $this->em->remove($reply);
@@ -65,5 +59,31 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         }
 
         return ['replyId' => $replyId, 'questionnaire' => $questionnaire];
+    }
+
+    private function getReply(Argument $argument): Reply
+    {
+        $replyId = $argument->offsetGet('replyId');
+
+        /** * @var Reply $reply  */
+        $reply = $this->globalIdResolver->resolve($replyId);
+
+        if (null === $reply) {
+            throw new UserError('Reply not found');
+        }
+
+        $participant = $reply->getParticipant();
+        if (null === $participant) {
+            throw new UserError('Reply is not anonymous');
+        }
+
+        $participantToken = $argument->offsetGet('participantToken');
+        $decodedToken = base64_decode((string) $participantToken);
+
+        if ($participant->getToken() !== $decodedToken) {
+            throw new UserError('Given token does not match corresponding Participant');
+        }
+
+        return $reply;
     }
 }

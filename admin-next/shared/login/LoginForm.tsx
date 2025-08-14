@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { FormControl, FieldInput } from '@cap-collectif/form'
-import { Box, CapInputSize, FormLabel, Link } from '@cap-collectif/ui'
+import { CapInputSize, FormLabel, InfoMessage, Link } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import Captcha from '../form/Captcha'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import {PENDING_EMAIL_CONFIRMATION} from './LoginFormWrapper'
 
 export const LoginForm: React.FC = () => {
   const intl = useIntl()
@@ -12,31 +13,35 @@ export const LoginForm: React.FC = () => {
   const {
     control,
     watch,
+    getValues,
     formState: { errors },
   } = useFormContext()
   const displayCaptcha = watch('displayCaptcha')
 
+  const infoMessageVariant = errors._error?.message === PENDING_EMAIL_CONFIRMATION ? 'warning' : 'danger'
+
+  const email = getValues('username')
+
   return (
     <>
       {errors._error ? (
-        <Box
+        <InfoMessage
+          variant={infoMessageVariant}
           id="login-error"
-          p={4}
-          borderRadius="normal"
-          border="normal"
-          backgroundColor="red.100"
-          borderColor="red.400"
-          color="red.600"
-          mb={5}
-          fontWeight={600}
+          mb={4}
         >
-          {intl.formatMessage({ id: errors._error?.message as string })}
-          {errors._error?.message === 'your-email-address-or-password-is-incorrect' ? (
-            <Box fontWeight={400} mt={1}>
-              {intl.formatMessage({ id: 'try-again-or-click-on-forgotten-password-to-reset-it' })}
-            </Box>
-          ) : null}
-        </Box>
+          <InfoMessage.Title>
+            {intl.formatMessage({ id: errors._error?.message as string })}
+          </InfoMessage.Title>
+          <InfoMessage.Content>
+            {errors._error?.message === PENDING_EMAIL_CONFIRMATION ? (
+              <p>{intl.formatMessage({ id: 'email-confirmation-help-message'}, { email })}</p>
+            ) : null}
+            {errors._error?.message === 'your-email-address-or-password-is-incorrect' ? (
+              <p>{intl.formatMessage({ id: 'try-again-or-click-on-forgotten-password-to-reset-it' })}</p>
+            ) : null}
+          </InfoMessage.Content>
+        </InfoMessage>
       ) : null}
       <FormControl name="username" control={control} isRequired mb={2}>
         <FormLabel htmlFor="username" label={intl.formatMessage({ id: 'global.email' })} mb={0} />

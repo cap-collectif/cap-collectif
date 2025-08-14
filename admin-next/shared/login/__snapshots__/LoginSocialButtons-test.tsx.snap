@@ -14,7 +14,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </p>
     </p>
     <div
-      className="sc-9028938f-1 dajwDO"
+      className="sc-cb1ada3e-1 hhWgMf"
       justifyContent="start"
     >
       <a
@@ -57,7 +57,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-9028938f-0 bBrqJe"
+      className="sc-cb1ada3e-0 kjkGMD"
       type="openId"
     >
       <span
@@ -84,7 +84,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-9028938f-0 kiVemb"
+      className="sc-cb1ada3e-0 dVooDa"
       type="cas"
     >
       <span
@@ -111,7 +111,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-9028938f-0 iTEeKO"
+      className="sc-cb1ada3e-0 bJcmYL"
       type="saml"
     >
       <span
@@ -153,7 +153,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   />,
   <div>
     <div
-      className="sc-9028938f-0 ijAVID"
+      className="sc-cb1ada3e-0 lleybm"
       type="cas"
     >
       <span
@@ -191,7 +191,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   />,
   <div>
     <div
-      className="sc-9028938f-0 ioqSA"
+      className="sc-cb1ada3e-0 cyRFFJ"
       type="facebook"
     >
       <span
@@ -234,7 +234,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </p>
     </p>
     <div
-      className="sc-9028938f-1 dajwDO"
+      className="sc-cb1ada3e-1 hhWgMf"
       justifyContent="start"
     >
       <a
@@ -288,7 +288,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   />,
   <div>
     <div
-      className="sc-9028938f-0 klHGfO"
+      className="sc-cb1ada3e-0 jHQgZD"
       type="openId"
     >
       <span
@@ -326,7 +326,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   />,
   <div>
     <div
-      className="sc-9028938f-0 exrEgw"
+      className="sc-cb1ada3e-0 cAWLYd"
       type="saml"
     >
       <span
@@ -362,7 +362,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   />,
   <div>
     <div
-      className="sc-9028938f-0 dEA-DJa"
+      className="sc-cb1ada3e-0 bODbyP"
       type="openId"
     >
       <span

@@ -30,7 +30,7 @@ export default (data: Props) => {
             {
               stepId: data.stepId,
               isAuthenticated: data.isAuthenticated,
-              token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+              token: CookieMonster.getParticipantCookie(),
             } as ProposalVoteBasketWidgetAppQueryVariables
           }
           environment={environment}

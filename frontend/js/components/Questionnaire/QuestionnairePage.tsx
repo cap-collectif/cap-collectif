@@ -73,7 +73,7 @@ const container = injectIntl(QuestionnairePage)
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnairePage_questionnaire on Questionnaire
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, participantToken: { type: "String" }) {
       multipleRepliesAllowed
       id
       step {
@@ -85,15 +85,23 @@ export default createFragmentContainer(container, {
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
       }
-      ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+      ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated, participantToken: $participantToken)
       ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
   query: graphql`
     fragment QuestionnairePage_query on Query
-    @argumentDefinitions(anonymousRepliesIds: { type: "[ID!]!" }, isNotAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(
+      anonymousRepliesIds: { type: "[ID!]!" }
+      isNotAuthenticated: { type: "Boolean!" }
+      isAuthenticated: { type: "Boolean!" }
+    ) {
       ...UserReplies_query
-        @arguments(anonymousRepliesIds: $anonymousRepliesIds, isNotAuthenticated: $isNotAuthenticated)
+        @arguments(
+          anonymousRepliesIds: $anonymousRepliesIds
+          isNotAuthenticated: $isNotAuthenticated
+          isAuthenticated: $isAuthenticated
+        )
       anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
         __typename
       }

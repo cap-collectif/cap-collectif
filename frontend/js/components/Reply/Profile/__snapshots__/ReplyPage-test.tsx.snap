@@ -98,6 +98,13 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
                     "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
@@ -120,22 +127,11 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": null,
+                                "concreteType": "Reply",
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "abstractKey": "__isReply",
-                                    "kind": "TypeDiscriminator",
-                                  },
                                   Object {
                                     "alias": null,
                                     "args": null,
@@ -201,24 +197,38 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "abstractKey": null,
-                                    "kind": "InlineFragment",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "kind": "LinkedField",
+                                    "name": "author",
+                                    "plural": false,
                                     "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "User",
-                                        "kind": "LinkedField",
-                                        "name": "author",
-                                        "plural": false,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -233,25 +243,11 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                                             "name": "avatarUrl",
                                             "storageKey": null,
                                           },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
                                         ],
-                                        "storageKey": null,
+                                        "type": "Contributor",
                                       },
                                     ],
-                                    "type": "UserReply",
+                                    "storageKey": null,
                                   },
                                 ],
                                 "storageKey": null,
@@ -265,20 +261,13 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                     ],
                     "type": "User",
                   },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
+            "cacheID": "24bf2a8221347fab0b032d453b0a928e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -300,7 +289,6 @@ exports[`<ReplyPage /> should render correctly 1`] = `
 fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
-      __typename
       ...Reply_reply
       id
     }
@@ -308,7 +296,6 @@ fragment ProfileReplyList_replies on ReplyConnection {
 }
 
 fragment Reply_reply on Reply {
-  __isReply: __typename
   id
   createdAt
   questionnaire {
@@ -319,17 +306,18 @@ fragment Reply_reply on Reply {
     }
     id
   }
-  ... on UserReply {
-    author {
-      ...UserAvatar_user
-      ...UserLink_user
-      id
-    }
+  author {
+    ...UserAvatar_user
+    ...UserLink_user
+    id
   }
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }
@@ -451,6 +439,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
                     "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
@@ -473,22 +468,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": null,
+                                "concreteType": "Reply",
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "abstractKey": "__isReply",
-                                    "kind": "TypeDiscriminator",
-                                  },
                                   Object {
                                     "alias": null,
                                     "args": null,
@@ -554,24 +538,38 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "abstractKey": null,
-                                    "kind": "InlineFragment",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "kind": "LinkedField",
+                                    "name": "author",
+                                    "plural": false,
                                     "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "User",
-                                        "kind": "LinkedField",
-                                        "name": "author",
-                                        "plural": false,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -586,25 +584,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                                             "name": "avatarUrl",
                                             "storageKey": null,
                                           },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
                                         ],
-                                        "storageKey": null,
+                                        "type": "Contributor",
                                       },
                                     ],
-                                    "type": "UserReply",
+                                    "storageKey": null,
                                   },
                                 ],
                                 "storageKey": null,
@@ -618,20 +602,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                     ],
                     "type": "User",
                   },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
+            "cacheID": "24bf2a8221347fab0b032d453b0a928e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -653,7 +630,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
 fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
-      __typename
       ...Reply_reply
       id
     }
@@ -661,7 +637,6 @@ fragment ProfileReplyList_replies on ReplyConnection {
 }
 
 fragment Reply_reply on Reply {
-  __isReply: __typename
   id
   createdAt
   questionnaire {
@@ -672,17 +647,18 @@ fragment Reply_reply on Reply {
     }
     id
   }
-  ... on UserReply {
-    author {
-      ...UserAvatar_user
-      ...UserLink_user
-      id
-    }
+  author {
+    ...UserAvatar_user
+    ...UserLink_user
+    id
   }
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }
@@ -804,6 +780,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                     "storageKey": null,
                   },
                   Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
                     "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
@@ -826,22 +809,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": null,
+                                "concreteType": "Reply",
                                 "kind": "LinkedField",
                                 "name": "node",
                                 "plural": false,
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "abstractKey": "__isReply",
-                                    "kind": "TypeDiscriminator",
-                                  },
                                   Object {
                                     "alias": null,
                                     "args": null,
@@ -907,24 +879,38 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "abstractKey": null,
-                                    "kind": "InlineFragment",
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "kind": "LinkedField",
+                                    "name": "author",
+                                    "plural": false,
                                     "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "User",
-                                        "kind": "LinkedField",
-                                        "name": "author",
-                                        "plural": false,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -939,25 +925,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                                             "name": "avatarUrl",
                                             "storageKey": null,
                                           },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
                                         ],
-                                        "storageKey": null,
+                                        "type": "Contributor",
                                       },
                                     ],
-                                    "type": "UserReply",
+                                    "storageKey": null,
                                   },
                                 ],
                                 "storageKey": null,
@@ -971,20 +943,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                     ],
                     "type": "User",
                   },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
+            "cacheID": "24bf2a8221347fab0b032d453b0a928e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -1006,7 +971,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
 fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
-      __typename
       ...Reply_reply
       id
     }
@@ -1014,7 +978,6 @@ fragment ProfileReplyList_replies on ReplyConnection {
 }
 
 fragment Reply_reply on Reply {
-  __isReply: __typename
   id
   createdAt
   questionnaire {
@@ -1025,17 +988,18 @@ fragment Reply_reply on Reply {
     }
     id
   }
-  ... on UserReply {
-    author {
-      ...UserAvatar_user
-      ...UserLink_user
-      id
-    }
+  author {
+    ...UserAvatar_user
+    ...UserLink_user
+    id
   }
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }

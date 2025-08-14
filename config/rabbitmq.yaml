@@ -332,12 +332,30 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: user_invite_invitation_by_organization
+        participant_confirmation_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: participant_confirmation_email
         mediator_participate_email:
             durable: true
             retries: [25, 125, 625]
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: mediator_participate_email
+        magic_link_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: magic_link_email
+        participant_consent_internal_communication_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: participant_consent_internal_communication_email
         proposal_collect_email_published:
             durable: true
             retries: [25, 125, 625]

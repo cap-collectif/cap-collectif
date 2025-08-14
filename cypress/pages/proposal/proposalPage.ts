@@ -69,11 +69,19 @@ export default new (class ProposalPage {
       proposal: 'proposal-assigned-120',
     })
   }
-  
-  visitCollectStepPage({project,step}) {
+
+  visitCollectStepPage({ project, step }: { project: string; step: string }) {
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
     this.cy.visit(`/project/${project}/collect/${step}`)
+    this.cy.wait('@ProposalStepPageQuery')
+    this.cy.wait('@ProposalListViewRefetchQuery')
+  }
+
+  visitSelectionStepPage({ project, step }: { project: string; step: string }) {
+    this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
+    this.cy.visit(`/project/${project}/selection/${step}`)
     this.cy.wait('@ProposalStepPageQuery')
     this.cy.wait('@ProposalListViewRefetchQuery')
   }

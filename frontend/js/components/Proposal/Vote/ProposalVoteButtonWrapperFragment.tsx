@@ -10,17 +10,21 @@ import type { ProposalVoteButtonWrapperFragment_step$key } from '~relay/Proposal
 import HoverObserver from '../../Utils/HoverObserver'
 import type { ProposalVoteButtonWrapperFragment_viewer$key } from '~relay/ProposalVoteButtonWrapperFragment_viewer.graphql'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import VoteButtonUI from '~/components/VoteStep/VoteButtonUI'
+import {
+  ProposalVoteButtonWrapperFragment_participant$key
+} from '~relay/ProposalVoteButtonWrapperFragment_participant.graphql'
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal$key
   viewer: ProposalVoteButtonWrapperFragment_viewer$key | null | undefined
   step: ProposalVoteButtonWrapperFragment_step$key | null | undefined
+  participant: ProposalVoteButtonWrapperFragment_participant$key | null | undefined
   id: string
   className?: string
   disabled?: boolean
   usesNewUI?: boolean
+  triggerRequirementsModal: (voteId: string) => void
 }
 const VIEWER_FRAGMENT = graphql`
   fragment ProposalVoteButtonWrapperFragment_viewer on User
@@ -32,9 +36,21 @@ const VIEWER_FRAGMENT = graphql`
     }
   }
 `
+
+const PARTICIPANT_FRAGMENT = graphql`
+    fragment ProposalVoteButtonWrapperFragment_participant on Participant
+    @argumentDefinitions(stepId: { type: "ID!" }) {
+        id
+        proposalVotes(stepId: $stepId) {
+            totalCount
+            creditsLeft
+        }
+    }
+`
+
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }, token: { type: "String" }) {
     id
     title
     estimation
@@ -43,18 +59,25 @@ const PROPOSAL_FRAGMENT = graphql`
     }
     paper: paperVotesTotalCount(stepId: $stepId)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+    viewerVote(step: $stepId) @include(if: $isAuthenticated) {
+        completionStatus
+    }
+    contributorVote(step: $stepId, token: $token) {
+        completionStatus
+    }
     ...interpellationLabelHelper_proposal @relay(mask: false)
-    ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+    ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
   }
 `
 const STEP_FRAGMENT = graphql`
-  fragment ProposalVoteButtonWrapperFragment_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
+  fragment ProposalVoteButtonWrapperFragment_step on ProposalStep 
+  @argumentDefinitions(token: { type: "String" }, isAuthenticated: { type: "Boolean!" }) 
+  {
     id
     votesLimit
     voteType
     budget
     open
-    isProposalSmsVoteEnabled
     viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
       totalCount
       edges {
@@ -65,7 +88,7 @@ const STEP_FRAGMENT = graphql`
         }
       }
     }
-    ...ProposalVoteButton_step
+    ...ProposalVoteButton_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     ...VoteButtonOverlay_step
   }
 `
@@ -104,29 +127,26 @@ export const ProposalVoteButtonWrapperFragment = ({
   viewer: viewerRef,
   proposal: proposalRef,
   step: stepRef,
+  participant: participantRef,
   id = '',
   className = '',
   disabled,
   usesNewUI,
+  triggerRequirementsModal
 }: Props) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const step = useFragment(STEP_FRAGMENT, stepRef)
-  const isTwilioFeatureEnabled = useFeatureFlag('twilio')
-  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
-  const smsVoteEnabled = step?.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
+  const participant = useFragment(PARTICIPANT_FRAGMENT, participantRef)
 
   const voteButtonLabel = isInterpellationContextFromProposal(proposal) ? 'global.support.for' : 'global.vote.for'
-  const hasVoted =
-    viewer && proposal?.viewerHasVote
-      ? proposal.viewerHasVote
-      : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false
+  const hasVoted = viewer ? proposal?.viewerVote?.completionStatus === 'COMPLETED' : proposal?.contributorVote?.completionStatus === 'COMPLETED'
 
   if (proposal && !step?.open && !usesNewUI) {
     return null
   }
 
-  if ((!viewer && !smsVoteEnabled) || !proposal) {
+  if (!proposal) {
     return (
       <LoginOverlay>
         {usesNewUI ? (
@@ -152,6 +172,9 @@ export const ProposalVoteButtonWrapperFragment = ({
   const viewerVotesCount = viewer?.proposalVotes ? viewer.proposalVotes.totalCount : 0
   const popoverId = `vote-tooltip-proposal-${proposal.id}`
 
+  const creditsLeft = viewer?.proposalVotes?.creditsLeft ?? participant?.proposalVotes?.creditsLeft
+  const hasNoProposalVotes = (!viewer || !viewer?.proposalVotes) && (!participant || !participant?.proposalVotes)
+
   if (step?.voteType === 'SIMPLE') {
     return (
       <VoteButtonOverlay
@@ -168,9 +191,9 @@ export const ProposalVoteButtonWrapperFragment = ({
         hasUserEnoughCredits={
           !step.budget ||
           userHasEnoughCredits(
-            !viewer || !viewer?.proposalVotes,
+            hasNoProposalVotes,
             proposal?.estimation,
-            viewer?.proposalVotes?.creditsLeft,
+            creditsLeft,
           )
         }
       >
@@ -182,6 +205,7 @@ export const ProposalVoteButtonWrapperFragment = ({
             disabled={disabled}
             hasVoted={hasVoted}
             usesNewUI={usesNewUI}
+            triggerRequirementsModal={triggerRequirementsModal}
           />
         </HoverObserver>
       </VoteButtonOverlay>
@@ -189,43 +213,46 @@ export const ProposalVoteButtonWrapperFragment = ({
   }
 
   return (
-    <VoteButtonOverlay
-      popoverId={popoverId}
-      step={step}
-      userHasVote={hasVoted || false}
-      hasReachedLimit={hasReachedLimit(
-        !!viewer,
-        step?.votesLimit,
-        hasVoted,
-        viewerVotesCount,
-        step?.viewerVotes?.totalCount,
-      )}
-      hasUserEnoughCredits={userHasEnoughCredits(
-        !viewer || !viewer?.proposalVotes,
-        proposal.estimation,
-        viewer?.proposalVotes?.creditsLeft,
-      )}
-    >
-      <HoverObserver>
-        <ProposalVoteButton
-          id={id}
-          proposal={proposal}
-          currentStep={step}
-          className={className}
-          hasVoted={hasVoted}
-          disabled={
-            (!hasVoted &&
-              !userHasEnoughCredits(
-                !viewer || !viewer?.proposalVotes,
-                proposal.estimation,
-                viewer?.proposalVotes?.creditsLeft,
-              )) ||
-            disabled
-          }
-          usesNewUI={usesNewUI}
-        />
-      </HoverObserver>
-    </VoteButtonOverlay>
+    <>
+      <VoteButtonOverlay
+        popoverId={popoverId}
+        step={step}
+        userHasVote={hasVoted || false}
+        hasReachedLimit={hasReachedLimit(
+          !!viewer,
+          step?.votesLimit,
+          hasVoted,
+          viewerVotesCount,
+          step?.viewerVotes?.totalCount,
+        )}
+        hasUserEnoughCredits={userHasEnoughCredits(
+          hasNoProposalVotes,
+          proposal.estimation,
+          creditsLeft,
+        )}
+      >
+        <HoverObserver>
+          <ProposalVoteButton
+            id={id}
+            proposal={proposal}
+            currentStep={step}
+            className={className}
+            hasVoted={hasVoted}
+            disabled={
+              (!hasVoted &&
+                !userHasEnoughCredits(
+                  hasNoProposalVotes,
+                  proposal.estimation,
+                  creditsLeft,
+                )) ||
+              disabled
+            }
+            usesNewUI={usesNewUI}
+            triggerRequirementsModal={triggerRequirementsModal}
+          />
+        </HoverObserver>
+      </VoteButtonOverlay>
+    </>
   )
 }
 export default ProposalVoteButtonWrapperFragment

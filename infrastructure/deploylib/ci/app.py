@@ -27,6 +27,12 @@ def start_consumers(ctx):
 
 
 @task
+def swarrot_consume(ctx, name):
+    environments.ci()
+    app.swarrot_consume(name)
+
+
+@task
 def toggle_disable(ctx, toggle='public_api', environment='test'):
     environments.ci()
     app.toggle_disable(toggle, environment)
@@ -41,3 +47,13 @@ def toggle_enable(ctx, toggle='public_api', environment='test'):
 def cmd(ctx, commandName='', environment='test'):
     environments.ci()
     app.cmd(commandName, environment)
+
+@task
+def sql(ctx, sql='', environment='test'):
+    environments.ci()
+    app.sql(sql, environment)
+
+@task
+def run_sql(ctx, sql, environment='test'):
+    environments.local()
+    app.run_sql(sql, environment)

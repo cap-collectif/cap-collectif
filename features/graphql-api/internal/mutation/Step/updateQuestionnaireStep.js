@@ -26,8 +26,6 @@ const UpdateQuestionnaireStep = /* GraphQL*/ `
             }
           }
         }
-        collectParticipantsEmail
-        isAnonymousParticipationAllowed
       }
     }
   }
@@ -50,8 +48,6 @@ const input = {
   "metaDescription": "updated metadescription",
   "customCode": "updated custom code",
   "footer": "updated footer",
-  "collectParticipantsEmail": false,
-  "isAnonymousParticipationAllowed": false,
   "requirements": [
     {
       "type": "FIRSTNAME"
@@ -71,27 +67,5 @@ describe('mutations.updateQuestionnaireStep', () => {
       'internal_admin',
     );
     expect(response).toMatchSnapshot();
-  });
-
-  it('should override requirements with an empty array if anon participation is enabled.', async () => {
-    const response = await graphql(
-      UpdateQuestionnaireStep,
-      {input: {...input, isAnonymousParticipationAllowed: true}},
-      'internal_admin',
-    );
-
-    const requirements = response.updateQuestionnaireStep.questionnaireStep.requirements.edges;
-    expect(requirements).toStrictEqual([]);
-  });
-
-  it('should set collectParticipantsEmail to false if isAnonymousParticipationAllowed is also set to false.', async () => {
-    const response = await graphql(
-      UpdateQuestionnaireStep,
-      {input: {...input, isAnonymousParticipationAllowed: false, collectParticipantsEmail: true}},
-      'internal_admin',
-    );
-
-    const collectParticipantsEmail = response.updateQuestionnaireStep.questionnaireStep.collectParticipantsEmail;
-    expect(collectParticipantsEmail).toBe(false);
   });
 });

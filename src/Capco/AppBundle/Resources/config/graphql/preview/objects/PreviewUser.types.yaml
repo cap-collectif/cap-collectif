@@ -29,7 +29,7 @@ PreviewUser:
             avatarUrl:
                 type: 'URI'
                 description: "The user's public avatar URL."
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", value)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorAvatarUrlResolver", value)'
             enabled:
                 type: 'Boolean!'
                 description: 'Whether or not this user has a confirmed account.'

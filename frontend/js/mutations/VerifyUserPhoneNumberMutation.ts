@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { graphql } from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
+  VerifyUserPhoneNumberMutation,
   VerifyUserPhoneNumberMutationResponse,
   VerifyUserPhoneNumberMutationVariables,
 } from '~relay/VerifyUserPhoneNumberMutation.graphql'
@@ -27,3 +28,13 @@ const commit = (variables: VerifyUserPhoneNumberMutationVariables): Promise<Veri
 export default {
   commit,
 }
+
+export const useVerifyUserPhoneNumberMutation = () => {
+  const [commit, isLoading] = useMutation<VerifyUserPhoneNumberMutation>(mutation);
+  return {
+    commit,
+    isLoading,
+  };
+};
+
+

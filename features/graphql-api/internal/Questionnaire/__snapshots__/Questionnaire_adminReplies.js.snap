@@ -7,7 +7,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -23,7 +23,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -39,7 +39,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -55,7 +55,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -71,7 +71,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -87,7 +87,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -103,7 +103,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -119,7 +119,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -135,7 +135,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -151,7 +151,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -167,7 +167,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -183,7 +183,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -199,7 +199,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -215,7 +215,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -231,7 +231,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user150@cap-collectif.com",
               "username": "user150",
@@ -247,7 +247,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user@test.com",
               "username": "user",
@@ -263,7 +263,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user@test.com",
               "username": "user",
@@ -279,7 +279,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user@test.com",
               "username": "user",
@@ -295,7 +295,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user_not_confirmed@test.com",
               "username": "user_not_confirmed",
@@ -311,7 +311,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user_updating_email@test.com",
               "username": "user_updating_email",
@@ -327,7 +327,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -343,7 +343,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -359,7 +359,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -375,7 +375,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user10@cap-collectif.com",
               "username": "user10",
@@ -391,7 +391,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user11@cap-collectif.com",
               "username": "user11",
@@ -407,7 +407,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user12@cap-collectif.com",
               "username": "user12",
@@ -423,7 +423,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user13@cap-collectif.com",
               "username": "user13",
@@ -439,7 +439,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user14@cap-collectif.com",
               "username": "user14",
@@ -455,7 +455,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user15@cap-collectif.com",
               "username": "user15",
@@ -471,7 +471,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user16@cap-collectif.com",
               "username": "user16",
@@ -487,7 +487,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user17@cap-collectif.com",
               "username": "user17",
@@ -503,7 +503,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user18@cap-collectif.com",
               "username": "user18",
@@ -519,7 +519,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user19@cap-collectif.com",
               "username": "user19",
@@ -535,7 +535,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user20@cap-collectif.com",
               "username": "user20",
@@ -551,7 +551,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user6@cap-collectif.com",
               "username": "user6",
@@ -567,7 +567,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user7@cap-collectif.com",
               "username": "user7",
@@ -583,7 +583,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user8@cap-collectif.com",
               "username": "user8",
@@ -599,7 +599,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "user9@cap-collectif.com",
               "username": "user9",
@@ -615,7 +615,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "msantostefano@cap-collectif.com",
               "username": "welcomattic",
@@ -657,7 +657,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-01 00:00:00",
             "id": "UmVwbHk6cmVwbHkx",
             "publishedAt": "2016-03-01 00:00:00",
@@ -666,7 +666,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
             "publishedAt": "2016-03-02 00:00:00",
@@ -675,7 +675,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
             "publishedAt": "2016-03-02 00:00:00",
@@ -684,7 +684,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
             "publishedAt": "2016-03-02 00:00:00",
@@ -693,7 +693,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
             "publishedAt": "2016-03-02 00:00:00",
@@ -702,7 +702,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
             "publishedAt": "2016-03-02 00:00:00",
@@ -711,7 +711,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
             "publishedAt": "2016-03-02 00:00:00",
@@ -720,7 +720,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
             "publishedAt": "2016-03-02 00:00:00",
@@ -729,7 +729,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
             "publishedAt": "2016-03-02 00:00:00",
@@ -738,7 +738,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
             "publishedAt": "2016-03-02 00:00:00",
@@ -747,7 +747,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
             "publishedAt": "2016-03-02 00:00:00",
@@ -756,7 +756,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
             "publishedAt": "2016-03-02 00:00:00",
@@ -765,7 +765,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
             "publishedAt": "2016-03-02 00:00:00",
@@ -774,7 +774,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
             "publishedAt": "2016-03-02 00:00:00",
@@ -783,7 +783,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
             "publishedAt": "2016-03-02 00:00:00",
@@ -792,7 +792,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
             "publishedAt": "2016-03-02 00:00:00",
@@ -801,7 +801,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-05 00:00:00",
             "id": "UmVwbHk6cmVwbHk5",
             "publishedAt": "2016-03-22 00:00:00",
@@ -810,7 +810,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-02 00:00:00",
             "id": "UmVwbHk6cmVwbHky",
             "publishedAt": "2016-03-02 00:00:00",
@@ -819,7 +819,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-05 00:00:00",
             "id": "UmVwbHk6cmVwbHk1",
             "publishedAt": "2016-03-05 00:00:00",
@@ -828,7 +828,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-06 00:00:00",
             "id": "UmVwbHk6cmVwbHk2",
             "publishedAt": "2016-03-06 00:00:00",
@@ -837,7 +837,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2016-03-07 00:00:00",
             "id": "UmVwbHk6cmVwbHk3",
             "publishedAt": null,
@@ -846,7 +846,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2019-03-20 00:00:00",
             "id": "UmVwbHk6cmVwbHlQcml2YXRl",
             "publishedAt": "2019-03-20 00:00:00",
@@ -855,7 +855,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2019-03-20 00:00:00",
             "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
             "publishedAt": null,
@@ -864,7 +864,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2019-03-20 00:00:00",
             "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
             "publishedAt": null,
@@ -873,7 +873,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -882,7 +882,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
             "publishedAt": "2020-01-12 00:00:00",
@@ -891,7 +891,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
             "publishedAt": "2020-01-12 00:00:00",
@@ -900,7 +900,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
             "publishedAt": "2020-01-12 00:00:00",
@@ -909,7 +909,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
             "publishedAt": "2020-01-12 00:00:00",
@@ -918,7 +918,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
             "publishedAt": "2020-01-12 00:00:00",
@@ -927,7 +927,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
             "publishedAt": "2020-01-12 00:00:00",
@@ -936,7 +936,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -945,7 +945,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -954,7 +954,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -963,7 +963,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -972,7 +972,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -981,7 +981,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -990,7 +990,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -999,7 +999,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "createdAt": "2020-01-12 00:00:00",
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
             "publishedAt": "2020-01-12 00:00:00",
@@ -1021,7 +1021,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": true,
             "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
             "published": false,
@@ -1030,7 +1030,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": true,
             "id": "UmVwbHk6cmVwbHk1",
             "published": true,
@@ -1039,7 +1039,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": true,
             "id": "UmVwbHk6cmVwbHk5",
             "published": true,
@@ -1061,7 +1061,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHk3",
             "published": false,
@@ -1083,7 +1083,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE=",
             "published": true,
@@ -1092,7 +1092,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEw",
             "published": true,
@@ -1101,7 +1101,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEx",
             "published": true,
@@ -1110,7 +1110,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEy",
             "published": true,
@@ -1119,7 +1119,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTEz",
             "published": true,
@@ -1128,7 +1128,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE0",
             "published": true,
@@ -1137,7 +1137,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTE1",
             "published": true,
@@ -1146,7 +1146,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTI=",
             "published": true,
@@ -1155,7 +1155,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTM=",
             "published": true,
@@ -1164,7 +1164,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTQ=",
             "published": true,
@@ -1173,7 +1173,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTU=",
             "published": true,
@@ -1182,7 +1182,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTY=",
             "published": true,
@@ -1191,7 +1191,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTc=",
             "published": true,
@@ -1200,7 +1200,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTg=",
             "published": true,
@@ -1209,7 +1209,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6dGFnQ2xvdWRSZXBseTk=",
             "published": true,
@@ -1218,7 +1218,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlQcml2YXRl",
             "published": true,
@@ -1227,7 +1227,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHk2",
             "published": true,
@@ -1236,7 +1236,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHky",
             "published": true,
@@ -1245,7 +1245,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
             "published": true,
@@ -1254,7 +1254,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
             "published": true,
@@ -1263,7 +1263,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
             "published": true,
@@ -1272,7 +1272,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
             "published": true,
@@ -1281,7 +1281,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
             "published": true,
@@ -1290,7 +1290,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
             "published": true,
@@ -1299,7 +1299,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
             "published": true,
@@ -1308,7 +1308,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
             "published": true,
@@ -1317,7 +1317,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
             "published": true,
@@ -1326,7 +1326,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
             "published": true,
@@ -1335,7 +1335,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
             "published": true,
@@ -1344,7 +1344,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
             "published": true,
@@ -1353,7 +1353,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
             "published": true,
@@ -1362,7 +1362,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
             "published": true,
@@ -1371,7 +1371,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
             "published": true,
@@ -1380,7 +1380,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHkx",
             "published": true,
@@ -1402,7 +1402,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -1418,7 +1418,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -1434,7 +1434,7 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "author": Object {
               "email": "admin@test.com",
               "username": "admin",
@@ -1464,7 +1464,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
+            "__typename": "Reply",
             "draft": false,
             "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
             "published": false,

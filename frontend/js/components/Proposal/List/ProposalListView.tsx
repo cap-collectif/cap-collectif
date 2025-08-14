@@ -4,6 +4,7 @@ import type { RelayRefetchProp } from 'react-relay'
 import { createRefetchContainer, graphql } from 'react-relay'
 import type { ProposalListView_step } from '~relay/ProposalListView_step.graphql'
 import type { ProposalListView_viewer } from '~relay/ProposalListView_viewer.graphql'
+import type { ProposalListView_participant$data } from '~relay/ProposalListView_participant.graphql'
 import Loader from '../../Ui/FeedbacksIndicators/Loader'
 import type { GlobalState } from '../../../types'
 import ProposalListViewPaginated from './ProposalListViewPaginated'
@@ -88,7 +89,7 @@ export const queryVariables = (filters: Filters, order: string | null | undefine
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
     userType: filters.types && filters.types !== '0' ? filters.types : null,
     status: filters.statuses && filters.statuses !== '0' ? filters.statuses : null,
-    token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+    token: CookieMonster.getParticipantCookie(),
     state: filters.state && filters.state !== '0' ? filters.state : null,
   }
 }
@@ -99,6 +100,7 @@ type Props = {
   relay: RelayRefetchProp
   step: ProposalListView_step
   viewer: ProposalListView_viewer | null | undefined
+  participant: ProposalListView_participant$data | null | undefined
   defaultMapOptions: MapOptions
   geoJsons: Array<GeoJson>
   displayMap: boolean
@@ -164,8 +166,11 @@ export class ProposalListView extends React.Component<Props, State> {
   }
 
   render() {
-    const { displayMap, geoJsons, defaultMapOptions, step, viewer, displayMode, count } = this.props
+    const { displayMap, geoJsons, defaultMapOptions, step, viewer, displayMode, participant, count } = this.props
     const { hasRefetchError, isRefetching } = this.state
+
+    
+
 
     if (hasRefetchError) {
       return graphqlError
@@ -183,6 +188,7 @@ export class ProposalListView extends React.Component<Props, State> {
         count={count}
         step={step}
         viewer={viewer}
+        participant={participant}
         displayMode={displayMode}
       />
     )
@@ -204,6 +210,11 @@ export default createRefetchContainer(
     viewer: graphql`
       fragment ProposalListView_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
         ...ProposalListViewPaginated_viewer @arguments(stepId: $stepId)
+      }
+    `,
+    participant: graphql`
+      fragment ProposalListView_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+        ...ProposalListViewPaginated_participant @arguments(stepId: $stepId)
       }
     `,
     step: graphql`

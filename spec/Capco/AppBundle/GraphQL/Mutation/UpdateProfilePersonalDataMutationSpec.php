@@ -57,9 +57,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $viewer, [
-            'stepId' => 'stepId',
-        ])->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
 
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -89,9 +87,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $viewer, [
-            'stepId' => 'stepId',
-        ])->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
 
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -134,9 +130,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
             ->willReturn($user)
         ;
 
-        $formFactory->create(PersonalDataFormType::class, $user, [
-            'stepId' => 'stepId',
-        ])->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
 
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -168,9 +162,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $user, [
-            'stepId' => 'stepId',
-        ])->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
 
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -205,9 +197,7 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $user, [
-            'stepId' => 'stepId',
-        ])->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
 
         $form->submit($argumentsValues, false)->willReturn(null);
         $form->isValid()->willReturn(true);

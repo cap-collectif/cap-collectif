@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Security;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -17,7 +16,7 @@ class ReplyVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        if (!$subject instanceof AbstractReply) {
+        if (!$subject instanceof Reply) {
             return false;
         }
 
@@ -32,7 +31,7 @@ class ReplyVoter extends AbstractOwnerableVoter
             $viewer = null;
         }
 
-        /** @var AbstractReply $reply */
+        /** @var Reply $reply */
         $reply = $subject;
 
         return match ($attribute) {
@@ -41,7 +40,7 @@ class ReplyVoter extends AbstractOwnerableVoter
         };
     }
 
-    private function canDeleteReply(AbstractReply $reply, ?User $viewer): bool
+    private function canDeleteReply(Reply $reply, ?User $viewer): bool
     {
         if (!$viewer) {
             return false;
@@ -55,7 +54,7 @@ class ReplyVoter extends AbstractOwnerableVoter
             return true;
         }
 
-        if ($reply instanceof Reply && $reply->getAuthor() === $viewer) {
+        if ($reply->getAuthor() === $viewer) {
             return true;
         }
 

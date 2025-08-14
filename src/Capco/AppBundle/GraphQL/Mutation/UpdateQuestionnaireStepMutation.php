@@ -33,7 +33,6 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         $questionnaireStep = $this->getQuestionnaireStep($questionnaireStepId, $viewer);
 
         unset($data['stepId']);
-        $this->handleAnonParticipation($data);
 
         $form = $this->formFactory->create(QuestionnaireStepFormType::class, $questionnaireStep);
         $form->submit($data, false);
@@ -72,18 +71,5 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         }
 
         return $questionnaireStep;
-    }
-
-    private function handleAnonParticipation(array &$data)
-    {
-        $isAnonymousParticipationAllowed = $data['isAnonymousParticipationAllowed'] ?? null;
-
-        if ($isAnonymousParticipationAllowed) {
-            $data['requirements'] = [];
-
-            return;
-        }
-
-        $data['collectParticipantsEmail'] = false;
     }
 }

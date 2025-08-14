@@ -318,11 +318,6 @@
                         "description": "description.module.emailing_parameters",
                         "onlySuperAdmin": false
                     },
-                    "anonymous_questionnaire": {
-                        "title": "capco.module.questionnaire__anonymous",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
                     "project_admin": {
                         "title": "capco.module.project_admin",
                         "description": "",
@@ -372,11 +367,6 @@
                         "title": "capco.module.api_sendinblue",
                         "description": "",
                         "onlySuperAdmin": true
-                    },
-                    "proposal_sms_vote": {
-                        "title": "capco.module.proposal_sms_vote",
-                        "description": "",
-                        "onlySuperAdmin": false
                     },
                     "full_proposal_card": {
                         "title": "capco.module.full_proposal_card",

@@ -14,13 +14,11 @@ const QuestionnaireAdminRepliesQuery = /** GraphQL */ `
               createdAt
               published
               status
-              ... on UserReply {
-                draft
-                notPublishedReason
-                author {
-                  username
-                  email
-                }
+              draft
+              notPublishedReason
+              author {
+                username
+                email
               }
             }
           }
@@ -43,9 +41,7 @@ const QuestionnaireAdminStatusRepliesQuery = /** GraphQL */ `
               id
               status
               published
-              ... on UserReply {
-                draft
-              }
+              draft
             }
           }
         }

@@ -307,6 +307,7 @@
         "react": "18.2.0",
         "react-beautiful-dnd": "https://github.com/cap-collectif/react-beautiful-dnd/tarball/runtime-update",
         "react-bootstrap": "^0.32.1",
+        "react-canvas-confetti": "^2.0.7",
         "react-color": "^2.18.1",
         "react-copy-to-clipboard": "^5.0.2",
         "react-datetime": "^2.9.0",

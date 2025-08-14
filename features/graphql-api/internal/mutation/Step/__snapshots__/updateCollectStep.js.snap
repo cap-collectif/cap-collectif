@@ -13,7 +13,6 @@ Object {
       "defaultStatus": null,
       "enabled": true,
       "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
-      "isProposalSmsVoteEnabled": false,
       "isSecretBallot": false,
       "label": "upated label",
       "mainView": "LIST",

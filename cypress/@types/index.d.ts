@@ -59,6 +59,7 @@ declare namespace Cypress {
     getByDataCy(name: string): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>
     directLoginAs(username: LoginAsUsernames): Chainable<any>
+    logout(): Chainable<any>
     directLogin(options: LoginOptions): Chainable<any>
     dsSelectSetOption(selector: string, query: string): Chainable<any>
   }

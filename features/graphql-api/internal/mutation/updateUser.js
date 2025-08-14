@@ -95,20 +95,6 @@ describe('mutations.updateUserMutation', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  it('should return PHONE_ALREADY_USED_BY_ANOTHER_USER validation error when attempting to update phone by a phone used by another user', async () => {
-    const response = await graphql(
-      UpdateUserMutation,
-      {
-        input: {
-          ...input,
-          phone: '+33675492871',
-        },
-      },
-      'internal_admin',
-    );
-    expect(response.updateUser.validationErrors).toBe("{\"phone\":\"PHONE_ALREADY_USED_BY_ANOTHER_USER\"}");
-  });
-
   it('should return PHONE_INVALID_LENGTH validation error', async () => {
     const tooShortResponse = await graphql(
       UpdateUserMutation,

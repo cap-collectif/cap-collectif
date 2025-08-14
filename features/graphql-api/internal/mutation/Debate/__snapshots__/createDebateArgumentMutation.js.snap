@@ -21,27 +21,6 @@ Object {
 }
 `;
 
-exports[`Internal|CreateDebateArgument create unpublished argument 1`] = `
-Object {
-  "createDebateArgument": Object {
-    "debateArgument": Object {
-      "author": Object {
-        "id": "VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=",
-      },
-      "body": "J'ai plein de trucs à dire",
-      "debate": Object {
-        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-      },
-      "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
-      "publishableUntil": "2060-10-01 00:00:00",
-      "published": false,
-      "type": "FOR",
-    },
-    "errorCode": null,
-  },
-}
-`;
-
 exports[`Internal|CreateDebateArgument try to create argument but already done 1`] = `
 Object {
   "createDebateArgument": Object {

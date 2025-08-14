@@ -148,16 +148,13 @@ describe('<ProposalVoteModal />', () => {
     }),
   }
   const query = graphql`
-    query ProposalVoteModalTestQuery($id: ID = "<default>", $isAuthenticated: Boolean!, $proposalId: ID = "<default>")
+    query ProposalVoteModalTestQuery($id: ID = "<default>", $proposalId: ID = "<default>")
     @relay_test_operation {
       proposal: node(id: $proposalId) {
         ...ProposalVoteModal_proposal
       }
       step: node(id: $id) {
-        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-      }
-      viewer {
-        ...ProposalVoteModal_viewer
+        ...ProposalVoteModal_step
       }
     }
   `
@@ -171,11 +168,10 @@ describe('<ProposalVoteModal />', () => {
 
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ProposalVoteModalTestQuery>(query, {
-        proposalId: 'proposal1',
-        isAuthenticated: true,
+        proposalId: 'proposal1'
       })
       if (!data.proposal || !data.step) return null
-      return <ProposalVoteModal proposal={data.proposal} step={data.step} viewer={data.viewer} {...props} />
+      return <ProposalVoteModal proposal={data.proposal} step={data.step} {...props} />
     }
 
     TestComponent = props => (

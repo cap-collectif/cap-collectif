@@ -57,11 +57,12 @@ module.exports = {
     toGlobalId: true,
   },
   rules: {
+    'relay/unused-fields': 'off',
     'relay/generated-flow-types': 'off',
     'no-unused-vars': 'off',
     'import/no-unresolved': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
-    'no-console': 'warn',
+    'no-console': ['warn', {'allow': ['error']}],
     'no-empty': 'error',
     'no-eval': 'error',
     'prefer-destructuring': [

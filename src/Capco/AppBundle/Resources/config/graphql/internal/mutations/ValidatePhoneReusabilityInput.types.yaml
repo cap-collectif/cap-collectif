@@ -1,0 +1,10 @@
+ValidatePhoneReusabilityInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            participantToken:
+                type: 'String'
+                description: 'Given participant token if unauthenticated.'
+            contributionId:
+                type: 'ID!'
+                description: 'The ID of the contribution'

@@ -207,8 +207,12 @@ export const onChange = (values: FormValues, dispatch: Dispatch, props: Props, p
           dispatch(startSubmit(formName))
           return UpdateRequirementMutation.commit({
             input: {
-              requirement: requirement.id,
-              value: newValue,
+              values: [
+                {
+                  requirementId: requirement.id,
+                  value: newValue,
+                }
+              ]
             },
           }).then(() => {
             dispatch(stopSubmit(formName))

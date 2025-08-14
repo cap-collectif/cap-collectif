@@ -61,8 +61,10 @@ const UserAvatarContainer = styled.span<{
 `
 
 const FRAGMENT = graphql`
-  fragment UserAvatar_user on User {
-    url
+  fragment UserAvatar_user on Contributor {
+    ...on User {
+        url
+    }
     username
     avatarUrl
   }

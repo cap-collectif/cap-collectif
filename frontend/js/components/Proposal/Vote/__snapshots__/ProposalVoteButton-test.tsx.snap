@@ -6,7 +6,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
-    className="mr-10 proposal__button__vote btn btn-success   btn btn-default"
+    className="sc-bcXGCL sc-gGvGpy lilXhM jrAhSN cap-button mr-10 proposal__button__vote btn btn-success  "
     disabled={false}
     id="buttonID"
     onClick={[Function]}
@@ -26,7 +26,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
-    className="mr-10 proposal__button__vote btn btn-success   btn btn-default active"
+    className="sc-bcXGCL sc-gGvGpy lilXhM jrAhSN cap-button mr-10 proposal__button__vote btn btn-success  "
     disabled={false}
     id="buttonID"
     onClick={[Function]}
@@ -46,7 +46,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
-    className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
+    className="sc-bcXGCL sc-gGvGpy lilXhM jrAhSN cap-button mr-10 proposal__button__vote btn btn-danger  "
     disabled={false}
     id="buttonID"
     onClick={[Function]}
@@ -66,7 +66,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
-    className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
+    className="sc-bcXGCL sc-gGvGpy lilXhM jrAhSN cap-button mr-10 proposal__button__vote btn btn-danger  "
     disabled={false}
     id="buttonID"
     onClick={[Function]}

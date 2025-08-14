@@ -10,13 +10,13 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",
-          "title": "Budget Participatif d'organisation",
+          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
+          "title": "BP avec archivage des propositions",
           "votes": Object {
             "totalCount": 0,
           },
@@ -33,8 +33,8 @@ Object {
             "totalCount": 0,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlNZQ==",
-          "title": "projectOrgaVisibilityMe",
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
+          "title": "BP avec étape personalisée ouverte",
           "votes": Object {
             "totalCount": 0,
           },
@@ -51,8 +51,8 @@ Object {
             "totalCount": 0,
           },
           "cover": null,
-          "id": "UHJvamVjdDpyYXBwb3J0RXZhbHVhdGlvbg==",
-          "title": "Rapport d'évaluation 6 (AR6)",
+          "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
+          "title": "Débats ouvert sans vote",
           "votes": Object {
             "totalCount": 0,
           },
@@ -62,17 +62,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 310,
+            "totalCount": 2,
           },
-          "contributionsCount": 310,
+          "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 3,
+            "totalCount": 2,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
-          "title": "Budget Participatif IdF 3",
+          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",
+          "title": "Budget Participatif d'organisation",
           "votes": Object {
-            "totalCount": 6,
+            "totalCount": 0,
           },
         },
       },
@@ -86,11 +86,9 @@ Object {
           "contributors": Object {
             "totalCount": 0,
           },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference58.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
-          "title": "Food project",
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlNZQ==",
+          "title": "projectOrgaVisibilityMe",
           "votes": Object {
             "totalCount": 0,
           },
@@ -101,7 +99,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 48,
+    "totalCount": 51,
   },
 }
 `;
@@ -201,7 +199,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 42,
+    "totalCount": 45,
   },
 }
 `;
@@ -212,6 +210,60 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 4,
+          },
+          "contributionsCount": 4,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dWb3RlMg==",
+          "title": "BP vote parcours min 2 max 2",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
+          "title": "BP avec archivage des propositions",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 0,
+          },
+          "contributionsCount": 0,
+          "contributors": Object {
+            "totalCount": 0,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
+          "title": "BP avec étape personalisée ouverte",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -229,7 +281,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -246,68 +298,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpyYXBwb3J0RXZhbHVhdGlvbg==",
-          "title": "Rapport d'évaluation 6 (AR6)",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 310,
-          },
-          "contributionsCount": 310,
-          "contributors": Object {
-            "totalCount": 3,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
-          "title": "Budget Participatif IdF 3",
-          "votes": Object {
-            "totalCount": 6,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": Object {
-            "url": "https://capco.test/media/default/0001/01/providerReference58.jpg",
-          },
-          "id": "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
-          "title": "Food project",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 42,
+    "totalCount": 45,
   },
 }
 `;

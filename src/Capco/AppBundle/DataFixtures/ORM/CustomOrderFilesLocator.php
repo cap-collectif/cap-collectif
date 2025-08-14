@@ -251,7 +251,6 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/Proposal.yaml',
             $this->fixturesDir . 'Dev/Selection.yaml',
             $this->fixturesDir . 'Dev/Reply.yaml',
-            $this->fixturesDir . 'Dev/ReplyAnonymous.yaml',
             $this->fixturesDir . 'Dev/ProposalEvaluation.yaml',
             $this->fixturesDir . 'Dev/ValueResponse.yaml',
             $this->fixturesDir . 'Dev/MediaResponse.yaml',
@@ -315,17 +314,17 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/OrganizationSocialNetworks.yaml',
             $this->fixturesDir . 'Dev/OrganizationTranslation.yaml',
             $this->fixturesDir . 'Dev/PendingOrganizationInvitation.yaml',
-            $this->fixturesDir . 'Dev/ProposalCollectSmsVote.yaml',
             $this->fixturesDir . 'Dev/AnonymousUserProposalSmsVote.yaml',
-            $this->fixturesDir . 'Dev/PhoneToken.yaml',
             $this->fixturesDir . 'Dev/ProposalAnalysisComment.yaml',
             $this->fixturesDir . 'Dev/PostAuthor.yaml',
             $this->fixturesDir . 'Dev/OfficialResponseAuthor.yaml',
             $this->fixturesDir . 'Dev/EmailingCampaignUser.yaml',
-            $this->fixturesDir . 'Dev/Participant.yaml',
             $this->fixturesDir . 'Dev/Mediator.yaml',
             $this->fixturesDir . 'Dev/MediatorParticipantStep.yaml',
             $this->fixturesDir . 'Dev/SectionCarrouselElement.yaml',
+            // Participant
+            $this->fixturesDir . 'Dev/Participant.yaml',
+            $this->fixturesDir . 'Dev/ParticipantPhoneVerificationSms.yaml',
         ];
     }
 

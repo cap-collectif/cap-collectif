@@ -15,8 +15,11 @@ type Props = {
   readonly questionnaire: ReplyLink_questionnaire
 }
 export const ReplyLink = ({ reply, questionnaire }: Props) => {
-  const { preloadReply } = React.useContext(QuestionnaireStepPageContext)
-  const isAnonymousReply = reply?.__typename === 'AnonymousReply'
+  const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
+
+  const isAnonymousReply = reply?.isAnonymous ?? false;
+  const isMissingRequirements = reply?.completionStatus === 'MISSING_REQUIREMENTS';
+
   return (
     <ReplyLinkContainer
       onMouseEnter={() => {
@@ -46,7 +49,7 @@ export const ReplyLink = ({ reply, questionnaire }: Props) => {
         &nbsp;
         {reply.draft && <ReplyDraftLabel draft={reply.draft} />}
         &nbsp;
-        {!reply.draft && !isAnonymousReply && <UnpublishedLabel publishable={reply} />}
+        {!reply.draft && !isAnonymousReply && !isMissingRequirements && <UnpublishedLabel publishable={reply} />}
       </div>
 
       {(reply.viewerCanDelete || isAnonymousReply) && <DeleteReplyModal reply={reply} questionnaire={questionnaire} />}
@@ -60,16 +63,17 @@ export default createFragmentContainer(ReplyLink, {
     }
   `,
   reply: graphql`
-    fragment ReplyLink_reply on Reply {
+    fragment ReplyLink_reply on Reply
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       __typename
       id
       createdAt
       publishedAt
-      ... on UserReply {
-        draft
-        viewerCanDelete
-        private
-      }
+      draft
+      viewerCanDelete @include(if: $isAuthenticated)
+      private
+      isAnonymous
+      completionStatus
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable
     }

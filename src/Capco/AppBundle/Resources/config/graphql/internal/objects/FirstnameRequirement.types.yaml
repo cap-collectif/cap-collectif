@@ -20,7 +20,7 @@ FirstnameRequirement:
                 type: 'String'
                 args:
                     token:
-                        type: 'String!'
+                        type: 'String'
                         description: 'The token associated to the Participant.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", value, args)'
                 description: 'The firstname of the participant.'

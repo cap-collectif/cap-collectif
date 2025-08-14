@@ -33,6 +33,7 @@ const ToggleRequirementsList: React.FC<Props> = ({ toggleRequirements }) => {
           }
 
           if (requirement.typename === 'PhoneVerifiedRequirement') return null
+          if (requirement.typename === 'ConsentPrivacyPolicyRequirement') return null
 
           return (
             <RequirementItem

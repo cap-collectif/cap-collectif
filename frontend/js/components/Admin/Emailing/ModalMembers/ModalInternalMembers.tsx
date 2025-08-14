@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { Modal } from 'react-bootstrap'
 import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style'
 import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { EmailingCampaignPageQueryResponse } from '~relay/EmailingCampaignPageQuery.graphql'
+import type { EmailingCampaignPageQuery$data } from '~relay/EmailingCampaignPageQuery.graphql'
 import InternalMembers, { USERS_PAGINATION } from './InternalMembers'
 import type { EmailingCampaignInternalList } from '~relay/Parameter_emailingCampaign.graphql'
 import Spinner from '~ds/Spinner/Spinner'
@@ -20,7 +20,7 @@ const renderInternalMembers = ({
   error,
   props,
 }: ReactRelayReadyState & {
-  props: EmailingCampaignPageQueryResponse | null | undefined
+  props: EmailingCampaignPageQuery$data | null | undefined
 }) => {
   if (error) return graphqlError
   if (props) return <InternalMembers query={props} key="InternalMembers" />
@@ -65,7 +65,8 @@ export const ModalInternalMembers = ({ show, onClose, type }: Props) => {
           environment={environment}
           query={graphql`
             query ModalInternalMembersQuery($count: Int!, $cursor: String, $emailConfirmed: Boolean) {
-              ...InternalMembers_query @arguments(count: $count, cursor: $cursor, emailConfirmed: $emailConfirmed)
+              ...InternalMembers_query_users @arguments(count: $count, cursor: $cursor, emailConfirmed: $emailConfirmed)
+              ...InternalMembers_query_participants @arguments(count: $count, cursor: $cursor, emailConfirmed: $emailConfirmed)
             }
           `}
           variables={{

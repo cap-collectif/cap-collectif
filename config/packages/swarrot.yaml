@@ -172,9 +172,18 @@ swarrot:
         organization_member.invitation:
             exchange: capco_direct_exchange
             routing_key: organization_member_invitation
+        participant.confirmation_email:
+            exchange: capco_direct_exchange
+            routing_key: participant_confirmation_email
         mediator_participate_email:
             exchange: capco_direct_exchange
             routing_key: mediator_participate_email_delayed
+        magic_link_email:
+            exchange: capco_direct_exchange
+            routing_key: magic_link_email
+        participant_consent_internal_communication_email:
+            exchange: capco_direct_exchange
+            routing_key: participant_consent_internal_communication_email
         proposal_collect_email_published:
             exchange: capco_direct_exchange
             routing_key: proposal_collect_email_published
@@ -1136,3 +1145,55 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'proposal_collect_email_published_%%attempt%%'
+
+        participant_confirmation_email:
+            processor: Capco\AppBundle\Processor\Participant\ParticipantEmailProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'participant_confirmation_email_retry_%%attempt%%'
+        magic_link_email:
+            processor: Capco\AppBundle\Processor\MagicLinkEmailProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'magic_link_email_%%attempt%%'
+        participant_consent_internal_communication_email:
+            processor: Capco\AppBundle\Processor\ParticipantConsentInternalCommunicationEmailProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'participant_contact_internal_communication_email%%attempt%%'

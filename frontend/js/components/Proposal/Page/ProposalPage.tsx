@@ -52,7 +52,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
         stepId: state?.currentVotableStepId || currentVotableStepId || '',
         isAuthenticated,
         proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
-        token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+        token: CookieMonster.getParticipantCookie(),
       }}
       render={({
         error,

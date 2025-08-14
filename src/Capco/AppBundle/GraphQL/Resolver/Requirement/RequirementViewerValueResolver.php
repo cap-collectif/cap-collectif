@@ -52,7 +52,18 @@ class RequirementViewerValueResolver implements QueryInterface
         if ($contributor instanceof User && Requirement::FRANCE_CONNECT === $requirement->getType()) {
             return $contributor->getFranceConnectId();
         }
-
+        if ($contributor instanceof User && Requirement::SSO === $requirement->getType()) {
+            return $contributor->getOpenId() || $contributor->getSamlId() || $contributor->getCasId();
+        }
+        if (Requirement::EMAIL_VERIFIED === $requirement->getType()) {
+            return $contributor->isEmailConfirmed() ? $contributor->getEmail() : null;
+        }
+        if (Requirement::ZIP_CODE === $requirement->getType()) {
+            return $contributor->getZipCode();
+        }
+        if (Requirement::CONSENT_PRIVACY_POLICY === $requirement->getType()) {
+            return $contributor->isConsentPrivacyPolicy();
+        }
         if (Requirement::CHECKBOX === $requirement->getType()) {
             if ($contributor instanceof User) {
                 $found = $this->userRequirementsRepo->findOneBy([

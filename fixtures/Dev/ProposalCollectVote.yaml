@@ -149,4 +149,38 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         position: 2
         createdAt: <(new \DateTime('2022-03-01 00:01:02'))>
         publishedAt: <(new \DateTime('2022-03-01 00:02:02'))>
+    proposalCollectSmsVote1:
+        id: 2069
+        proposal: '@proposalSmsVote1'
+        collectStep: '@collectstepSmsVoteIdf3'
+        phone: '+33611111111'
+        position: 1
+        createdAt: <(new \DateTime('2022-03-01 00:01:02'))>
+        publishedAt: <(new \DateTime('2022-03-01 00:02:02'))>
+        ipAddress: '127.0.0.1'
+        participant: '@participant3'
+    proposalCollectVoteWorkflow1:
+        id: 2070
+        proposal: '@proposalWorkflowCollectVoteA'
+        collectStep: '@collectStepWorkflowCollectVote'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true
+    proposalCollectVoteWorkflow2:
+        id: 2071
+        proposal: '@proposalWorkflowCollectVoteB'
+        collectStep: '@collectStepWorkflowCollectVote'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true
+    proposalCollectVoteWorkflow3:
+        id: 2072
+        proposal: '@proposalWorkflowCollectVoteC'
+        collectStep: '@collectStepWorkflowCollectVote'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true
 

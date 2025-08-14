@@ -113,8 +113,12 @@ exports[`<RequirementsFormLegacy /> call api on every value changed 3`] = `
     Array [
       Object {
         "input": Object {
-          "requirement": "requirement5",
-          "value": true,
+          "values": Array [
+            Object {
+              "requirementId": "requirement5",
+              "value": true,
+            },
+          ],
         },
       },
     ],

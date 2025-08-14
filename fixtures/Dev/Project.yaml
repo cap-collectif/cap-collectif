@@ -505,6 +505,36 @@ Capco\AppBundle\Entity\Project:
         visibility: 2
         owner: '@user1'
         creator: '@user1'
+    projectWorkflowVote:
+        id: 'projectWorkflowVote'
+        title: BP vote parcours
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2024-08-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'
+    projectWorkflowVote2:
+        id: 'projectWorkflowVote2'
+        title: BP vote parcours min 2 max 2
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2024-08-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'
+    projectWorkflowCollectVote:
+        id: 'projectWorkflowCollectVote'
+        title: BP vote étape de dépôt
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2024-08-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'
     projectWithOnlyOtherStepOpen:
         id: 'projectWithOnlyOtherStepOpen'
         title: BP avec étape personalisée ouverte

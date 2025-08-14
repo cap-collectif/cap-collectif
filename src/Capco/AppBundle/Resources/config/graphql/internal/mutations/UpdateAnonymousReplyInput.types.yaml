@@ -3,12 +3,12 @@ UpdateAnonymousReplyInput:
     config:
         description: 'input of UpdateAnonymousReply'
         fields:
-            hashedToken:
+            replyId:
+                type: 'ID!'
+                description: 'The Reply ID.'
+            participantToken:
                 type: 'String!'
-                description: 'The hashed token of the reply'
+                description: 'The participant token.'
             responses:
                 type: '[ResponseInput!]!'
                 description: 'The responses to the questionnaire questions'
-            participantEmail:
-                type: 'Email'
-                description: 'The participant email'

@@ -5,5 +5,5 @@ UpdateRequirementPayload:
         fields:
             viewer:
                 type: 'InternalUser'
-            requirement:
-                type: 'Requirement'
+            requirements:
+                type: '[Requirement]!'

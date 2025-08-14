@@ -280,7 +280,6 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     isEnabled: {
       labels: isEnabled,
     },
-    isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
     metaDescription: step?.metaDescription ?? '',
     footer: step?.footer ?? '',
     customCode: step?.customCode ?? '',
@@ -293,7 +292,6 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     },
     requirements: keepRequirements ? step.requirements : getDefaultRequirements(step),
     requirementsReason: keepRequirements ? step.requirementsReason : step.requirements?.reason ?? '',
-    collectParticipantsEmail: step.collectParticipantsEmail ?? false,
   }
 }
 

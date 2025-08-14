@@ -6,9 +6,7 @@ Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
       "body": null,
-      "collectParticipantsEmail": true,
       "enabled": true,
-      "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
         "creator": Object {
@@ -39,9 +37,7 @@ Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
       "body": null,
-      "collectParticipantsEmail": true,
       "enabled": true,
-      "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
         "creator": Object {
@@ -72,9 +68,7 @@ Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
       "body": null,
-      "collectParticipantsEmail": true,
       "enabled": true,
-      "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
         "creator": Object {
@@ -105,9 +99,7 @@ Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
       "body": null,
-      "collectParticipantsEmail": true,
       "enabled": true,
-      "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
         "creator": Object {

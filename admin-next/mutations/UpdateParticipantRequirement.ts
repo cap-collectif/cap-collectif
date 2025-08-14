@@ -11,7 +11,7 @@ import type {
 const mutation = graphql`
   mutation UpdateParticipantRequirementMutation($input: UpdateParticipantRequirementInput!) {
     updateParticipantRequirement(input: $input) {
-      requirement {
+      requirements {
         id
       }
     }

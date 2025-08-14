@@ -6,5 +6,5 @@ VerifyUserPhoneNumberPayload:
                 type: 'InternalUser'
                 description: 'The updated User.'
             errorCode:
-                type: 'VerifyUserPhoneNumberErrorCode'
+                type: 'VerifySMSErrorCode'
                 description: 'The error code, if failing.'

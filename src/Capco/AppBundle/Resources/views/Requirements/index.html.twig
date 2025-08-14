@@ -1,0 +1,15 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block body %}
+{{ react_render_component('RequirementsPageApp', {
+    'props': {
+        'stepId': stepId,
+        'contributionId': contributionId
+    }
+}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
+{% endblock %}

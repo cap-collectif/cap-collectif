@@ -16,6 +16,16 @@ const mutation = graphql`
     deleteAnonymousReply(input: $input) {
       questionnaire {
         id
+        step {
+            project {
+                contributors {
+                    totalCount
+                }
+                contributions {
+                    totalCount
+                }
+            }
+        }
       }
       replyId
     }

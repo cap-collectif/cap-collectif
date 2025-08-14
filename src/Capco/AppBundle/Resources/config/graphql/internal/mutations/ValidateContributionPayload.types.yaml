@@ -1,0 +1,7 @@
+ValidateContributionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            redirectUrl:
+                type: 'String!'
+                description: 'The url to redirect to if contribution is validated.'

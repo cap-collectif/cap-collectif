@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\AbstractProposalVote;
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -32,7 +33,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         return isset($context[self::IS_EXPORT_NORMALIZER])
-            && $data instanceof User
+            && $data instanceof ContributorInterface
             && !isset($context['groups']);
     }
 
@@ -43,21 +44,22 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
             $isFullExport = $context['is_full_export'];
         }
 
-        /** @var User $object */
+        /** @var ContributorInterface $object */
+        $isUser = $object instanceof User;
         $userArray = [
             self::EXPORT_PARTICIPANT_USER_ID => $object->getId(),
             self::EXPORT_PARTICIPANT_USERNAME => $object->getUsername(),
             self::EXPORT_PARTICIPANT_USER_EMAIL => $object->getEmail(),
             self::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION => $this->getReadableBoolean($object->isConsentInternalCommunication()),
             self::EXPORT_PARTICIPANT_PHONE => $object->getPhone(),
-            self::EXPORT_PARTICIPANT_TYPE => $object->getUserType() ? $object->getUserType()->getName() : '',
+            self::EXPORT_PARTICIPANT_TYPE => $isUser ? ($object->getUserType() ? $object->getUserType()->getName() : '') : '',
             self::EXPORT_PARTICIPANT_FIRSTNAME => $object->getFirstName(),
             self::EXPORT_PARTICIPANT_LASTNAME => $object->getLastName(),
             self::EXPORT_PARTICIPANT_DATE_OF_BIRTH => $object->getDateOfBirth() ? $object->getDateOfBirth()->format('Y-m-d H:i:s') : null,
             self::EXPORT_PARTICIPANT_POSTAL_ADDRESS => $object->getPostalAddress() ? $object->getPostalAddress()->getFormatted() : null,
             self::EXPORT_PARTICIPANT_ZIP_CODE => $object->getZipCode(),
             self::EXPORT_PARTICIPANT_CITY => $object->getCity(),
-            self::EXPORT_PARTICIPANT_PROFILE_URL => $this->userUrlResolver->__invoke($object),
+            self::EXPORT_PARTICIPANT_PROFILE_URL => $isUser ? $this->userUrlResolver->__invoke($object) : null,
             self::EXPORT_PARTICIPANT_IDENTIFICATION_CODE => $object->getUserIdentificationCode() ? $object->getUserIdentificationCode()->getIdentificationCode() : null,
         ];
 
@@ -65,22 +67,22 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
             $fullExportData = [
                 self::EXPORT_PARTICIPANT_USER_CREATED_AT => $object->getCreatedAt() ? $object->getCreatedAt()->format('Y-m-d H:i:s') : null,
                 self::EXPORT_PARTICIPANT_USER_UPDATED_AT => $object->getUpdatedAt() ? $object->getUpdatedAt()->format('Y-m-d H:i:s') : null,
-                self::EXPORT_PARTICIPANT_USER_LAST_LOGIN => $object->getLastLogin() ? $object->getLastLogin()->format('Y-m-d H:i:s') : null,
-                self::EXPORT_PARTICIPANT_USER_ROLES_TEXT => $this->userRolesTextResolver->resolve($object),
-                self::EXPORT_PARTICIPANT_USER_ENABLED => $this->getReadableBoolean($object->isEnabled()),
+                self::EXPORT_PARTICIPANT_USER_LAST_LOGIN => $isUser ? $object->getLastLogin() ? $object->getLastLogin()->format('Y-m-d H:i:s') : null : null,
+                self::EXPORT_PARTICIPANT_USER_ROLES_TEXT => $isUser ? $this->userRolesTextResolver->resolve($object) : null,
+                self::EXPORT_PARTICIPANT_USER_ENABLED => $isUser ? $this->getReadableBoolean($object->isEnabled()) : null,
                 self::EXPORT_PARTICIPANT_USER_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($object->isEmailConfirmed()),
-                self::EXPORT_PARTICIPANT_USER_LOCKED => $this->getReadableBoolean($object->isLocked()),
+                self::EXPORT_PARTICIPANT_USER_LOCKED => $isUser ? $this->getReadableBoolean($object->isLocked()) : null,
                 self::EXPORT_PARTICIPANT_USER_IS_PHONE_CONFIRMED => $this->getReadableBoolean($object->isPhoneConfirmed()),
-                self::EXPORT_PARTICIPANT_GENDER => $object->getGender(),
-                self::EXPORT_PARTICIPANT_WEBSITE_URL => $object->getWebsiteUrl(),
-                self::EXPORT_PARTICIPANT_BIOGRAPHY => $object->getBiography(),
-                self::EXPORT_PARTICIPANT_IS_FRANCE_CONNECT_ASSOCIATED => $this->getReadableBoolean($object->isFranceConnectAccount()),
+                self::EXPORT_PARTICIPANT_GENDER => $isUser ? $object->getGender() : null,
+                self::EXPORT_PARTICIPANT_WEBSITE_URL => $isUser ? $object->getWebsiteUrl() : null,
+                self::EXPORT_PARTICIPANT_BIOGRAPHY => $isUser ? $object->getBiography() : null,
+                self::EXPORT_PARTICIPANT_IS_FRANCE_CONNECT_ASSOCIATED => $isUser ? $this->getReadableBoolean($object->isFranceConnectAccount()) : null,
             ];
 
             $userArray = array_merge($userArray, $fullExportData);
         }
 
-        if (isset($context['step']) && $context['step']->isVotable()) {
+        if (isset($context['step']) && $context['step']->isVotable() && $object instanceof User) {
             $userArray[self::EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP] = $this->getParticipantVoteCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP] = $this->getProposalCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);

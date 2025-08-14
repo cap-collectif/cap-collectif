@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +17,7 @@ class QuestionnaireController extends AbstractController
      * @Route("/confirmAnonymousEmail", name="capco_app_questionnaire_confirm_anonymous_email", options={"i18n" = false})
      */
     public function confirmAnonymousEmail(
-        ReplyAnonymousRepository $repository,
+        ReplyRepository $repository,
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         TranslatorInterface $translator,

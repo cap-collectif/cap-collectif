@@ -33,11 +33,12 @@ type Props = {
   onAnalysisClick?: () => void
   shouldDisplayPictures: boolean
   platformLocale: string
+  triggerRequirementsModal: (voteId: string) => void
 }
 const Header = styled.header`
-  border-bottom: 1px solid ${colors.lightGray};
-  padding-bottom: 30px;
-  background-color: ${colors.white};
+    border-bottom: 1px solid ${colors.lightGray};
+    padding-bottom: 30px;
+    background-color: ${colors.white};
 
   > div {
     width: 100%;
@@ -46,11 +47,11 @@ const Header = styled.header`
     background-color: ${colors.white};
     padding-top: 25px;
 
-    > .default-header {
-      border-radius: 20px;
-      overflow: hidden;
-      height: 310px;
-      position: relative;
+        > .default-header {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 310px;
+            position: relative;
 
       > svg {
         position: absolute;
@@ -59,97 +60,97 @@ const Header = styled.header`
         z-index: 2;
       }
 
-      #background {
-        position: initial;
-        height: 100%;
-      }
+            #background {
+                position: initial;
+                height: 100%;
+            }
+        }
+
+        @media (max-width: ${mediaQueryMobile.maxWidth}) {
+            padding-top: 0;
+
+            > .default-header {
+                border-radius: 0;
+            }
+
+            #background {
+                margin-left: -10%;
+            }
+        }
     }
-
-    @media (max-width: ${mediaQueryMobile.maxWidth}) {
-      padding-top: 0;
-
-      > .default-header {
-        border-radius: 0;
-      }
-
-      #background {
-        margin-left: -10%;
-      }
-    }
-  }
 `
 const Cover = styled(Image)`
-  width: 100%;
-  height: 310px;
-  border-radius: 6px;
-  object-fit: cover;
+    width: 100%;
+    height: 310px;
+    border-radius: 6px;
+    object-fit: cover;
 
-  @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    border-radius: 0;
-  }
+    @media (max-width: ${mediaQueryMobile.maxWidth}) {
+        border-radius: 0;
+    }
 `
 const Informations = styled.div`
-  margin: 15px;
+    margin: 15px;
 
-  @media (min-width: ${bootstrapGrid.mdMin}px) {
-    max-width: 587px;
-    margin: 0;
-    margin-top: 15px;
-  }
+    @media (min-width: ${bootstrapGrid.mdMin}px) {
+        max-width: 587px;
+        margin: 0;
+        margin-top: 15px;
+    }
 
-  h1 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: ${colors.darkText};
-    word-break: break-word;
-  }
+    h1 {
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: ${colors.darkText};
+        word-break: break-word;
+    }
 `
 const About = styled.div`
-  margin-left: 5px;
+    margin-left: 5px;
 
-  div:first-child {
-    font-weight: 600;
-  }
+    div:first-child {
+        font-weight: 600;
+    }
 `
 const HeaderActions = styled.div`
-  z-index: 3;
-  position: absolute;
-  margin: 20px;
-  display: flex;
-  justify-content: space-between;
-  width: 910px;
-  max-width: calc(100% - 20px);
-
-  > a,
-  #side-analysis-open-button {
-    text-decoration: none;
-    background: #fff;
+    z-index: 3;
+    position: absolute;
+    margin: 20px;
     display: flex;
-    align-items: center;
-    padding: 3px 15px;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-    border: none;
-    color: ${colors.primaryColor};
-    height: 29px;
-    span {
-      margin-left: 5px;
-    }
-  }
-
-  @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    width: 200px;
-
-    span {
-      display: none;
-    }
+    justify-content: space-between;
+    width: 910px;
+    max-width: calc(100% - 20px);
 
     > a,
     #side-analysis-open-button {
-      padding: 3px 10px;
+        text-decoration: none;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        padding: 3px 15px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+        border: none;
+        color: ${colors.primaryColor};
+        height: 29px;
+        span {
+            margin-left: 5px;
+        }
     }
-  }
+
+    @media (max-width: ${mediaQueryMobile.maxWidth}) {
+        width: 200px;
+
+        span {
+            display: none;
+        }
+
+        > a,
+        #side-analysis-open-button {
+            padding: 3px 10px;
+        }
+    }
 `
 
 const AvatarPlaceholder = () => (
@@ -197,7 +198,7 @@ const BackUrl = ({
   }
 
   return (
-    <Link onClick={handleGoBack} sx={{cursor: 'pointer'}}> 
+    <Link onClick={handleGoBack} sx={{cursor: 'pointer'}}>
       <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={colors.primaryColor} />
       {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
     </Link>
@@ -205,13 +206,14 @@ const BackUrl = ({
 }
 
 export const ProposalPageHeader = ({
-  proposal,
-  step,
-  viewer,
-  hasAnalysingButton,
-  onAnalysisClick,
-  shouldDisplayPictures,
-  platformLocale,
+   proposal,
+   step,
+   viewer,
+   hasAnalysingButton,
+   onAnalysisClick,
+   shouldDisplayPictures,
+   platformLocale,
+   triggerRequirementsModal
 }: Props) => {
   const isMobile = useIsMobile()
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
@@ -259,7 +261,7 @@ export const ProposalPageHeader = ({
     // this works for the old vote step
     if (document.referrer) {
       return document.referrer.replace(getBaseUrl(), '') || ''
-       
+
     }
 
     // 3- If the user comes from a link, we want to redirect to the last step the proposal is in
@@ -359,7 +361,7 @@ export const ProposalPageHeader = ({
             </Flex>
           </Skeleton>
         </Informations>
-        <ProposalPageHeaderButtons proposal={proposal} step={step} viewer={viewer} />
+        <ProposalPageHeaderButtons proposal={proposal} step={step} viewer={viewer} triggerRequirementsModal={triggerRequirementsModal} />
       </div>
     </Header>
   )
@@ -373,25 +375,25 @@ const mapStateToProps = (state: GlobalState) => ({
 const container = connect(mapStateToProps)(ProposalPageHeader)
 export default createFragmentContainer(container, {
   viewer: graphql`
-    fragment ProposalPageHeader_viewer on User
-    @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
-      ...ProposalPageHeaderButtons_viewer @arguments(stepId: $stepId, hasVotableStep: $hasVotableStep)
-    }
+      fragment ProposalPageHeader_viewer on User
+      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
+          ...ProposalPageHeaderButtons_viewer @arguments(stepId: $stepId, hasVotableStep: $hasVotableStep)
+      }
   `,
   step: graphql`
-    fragment ProposalPageHeader_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
-      ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-    }
+      fragment ProposalPageHeader_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+          ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      }
   `,
   proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, proposalRevisionsEnabled: { type: "Boolean!" }, token: { type: "String" }) {
       id
       ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
       ...ProposalPageHeaderButtons_proposal
-        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled)
+        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled, token: $token)
       title
       media {
         url

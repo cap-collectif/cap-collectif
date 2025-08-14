@@ -1,3 +1,5 @@
+import { QuestionnairePage } from '~e2e-pages/index'
+
 type VisitOptions = {
   project: string
   questionnaire: string
@@ -85,8 +87,32 @@ export default new (class QuestionnairePage {
     this.cy.get('#label-checkbox-CreateReplyForm-reply-private').click({ force: true })
   }
 
-  submitForm() {
-    this.cy.contains('global.send').click({ force: true })
+  submitForm({
+    operationType = 'CREATE',
+    isAnonymous = false,
+    waitForRequirements = false,
+  }: { operationType?: 'CREATE' | 'EDIT'; isAnonymous?: boolean; waitForRequirements?: boolean } = {}) {
+    let operationName = ''
+    if (operationType === 'CREATE') {
+      operationName = isAnonymous ? 'AddAnonymousReplyMutation' : 'AddUserReplyMutation'
+    }
+    if (operationType === 'EDIT') {
+      operationName = isAnonymous ? 'UpdateAnonymousReplyMutation' : 'UpdateUserReplyMutation'
+    }
+
+    this.cy.interceptGraphQLOperation({ operationName: operationName })
+
+    if (waitForRequirements) {
+      this.cy.interceptGraphQLOperation({ operationName: 'ParticipationWorkflowModalQuery' })
+    }
+
+    this.cy.contains('global.send', { timeout: 10000 }).should('not.be.disabled').click({ force: true })
+
+    this.cy.wait(`@${operationName}`)
+
+    if (waitForRequirements) {
+      this.cy.wait('@ParticipationWorkflowModalQuery')
+    }
   }
 
   saveAsDraft() {
@@ -111,8 +137,8 @@ export default new (class QuestionnairePage {
 
   assertToast(type: 'create' | 'draft' | 'delete' = 'create') {
     const message = {
-      create: 'reply.request.create.success',
-      draft: 'your-answer-has-been-saved-as-a-draft',
+      create: 'your-participation-is-confirmed',
+      draft: 'draft.create.registered',
       delete: 'reply.request.delete.success',
     }
     this.cy.contains(message[type])
@@ -146,10 +172,12 @@ export default new (class QuestionnairePage {
   }
 
   visitAnonymousQuestionnaire() {
-    return this.visit({
+    this.cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepPageQuery' })
+    this.visit({
       project: 'projet-avec-questionnaire-anonyme',
       questionnaire: 'questionnaire-step-anonymous',
     })
+    return this.cy.wait('@QuestionnaireStepPageQuery')
   }
 
   visitQuestionnaireWithMajorityQuestion() {

@@ -7,3 +7,6 @@ AddAnonymousReplyErrorCode:
             INVALID_FORM:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\AddAnonymousReplyMutation::INVALID_FORM
                 description: 'The submited reply is not valid.'
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ReplyMutation::PHONE_ALREADY_USED
+                description: 'The phone is already used by another participant / user.'

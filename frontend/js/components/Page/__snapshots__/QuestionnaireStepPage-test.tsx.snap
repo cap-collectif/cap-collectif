@@ -30,6 +30,11 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
               "kind": "LocalArgument",
               "name": "isNotAuthenticated",
             },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "participantToken",
+            },
           ],
           "kind": "Fragment",
           "metadata": null,
@@ -202,6 +207,11 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                       "name": "isAuthenticated",
                       "variableName": "isAuthenticated",
                     },
+                    Object {
+                      "kind": "Variable",
+                      "name": "participantToken",
+                      "variableName": "participantToken",
+                    },
                   ],
                   "kind": "FragmentSpread",
                   "name": "QuestionnairePage_questionnaire",
@@ -218,6 +228,11 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "isAuthenticated",
+                  "variableName": "isAuthenticated",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "isNotAuthenticated",
                   "variableName": "isNotAuthenticated",
                 },
@@ -228,7 +243,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "ffac22bbd3c1f1e18b855038482276a5",
+        "hash": "8e9d1b1e69dec555736ad81239c0ba80",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -251,6 +266,11 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "anonymousRepliesIds",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "participantToken",
             },
           ],
           "kind": "Operation",
@@ -426,21 +446,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isAnonymousParticipationAllowed",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "collectParticipantsEmail",
                           "storageKey": null,
                         },
                         Object {
@@ -1166,6 +1172,19 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     },
                                   ],
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Variable",
+                                      "name": "token",
+                                      "variableName": "participantToken",
+                                    },
+                                  ],
+                                  "kind": "ScalarField",
+                                  "name": "participantMeetsTheRequirements",
+                                  "storageKey": null,
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -1835,18 +1854,11 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": null,
+                                  "concreteType": "Reply",
                                   "kind": "LinkedField",
                                   "name": "node",
                                   "plural": false,
                                   "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "__typename",
-                                      "storageKey": null,
-                                    },
                                     Object {
                                       "alias": null,
                                       "args": null,
@@ -1895,7 +1907,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": null,
+                                  "concreteType": "Reply",
                                   "kind": "LinkedField",
                                   "name": "node",
                                   "plural": false,
@@ -1904,12 +1916,15 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "__typename",
+                                      "name": "completionStatus",
                                       "storageKey": null,
                                     },
                                     Object {
-                                      "abstractKey": "__isReply",
-                                      "kind": "TypeDiscriminator",
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "__typename",
+                                      "storageKey": null,
                                     },
                                     Object {
                                       "alias": null,
@@ -1933,16 +1948,31 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
-                                      "abstractKey": null,
-                                      "kind": "InlineFragment",
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "draft",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "private",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isAnonymous",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "condition": "isAuthenticated",
+                                      "kind": "Condition",
+                                      "passingValue": true,
                                       "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "draft",
-                                          "storageKey": null,
-                                        },
                                         Object {
                                           "alias": null,
                                           "args": null,
@@ -1950,15 +1980,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                           "name": "viewerCanDelete",
                                           "storageKey": null,
                                         },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "private",
-                                          "storageKey": null,
-                                        },
                                       ],
-                                      "type": "UserReply",
                                     },
                                     Object {
                                       "abstractKey": "__isPublishable",
@@ -2086,9 +2108,16 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "abstractKey": "__isReply",
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "completionStatus",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": null,
@@ -2104,16 +2133,31 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           "storageKey": null,
                         },
                         Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "draft",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "private",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isAnonymous",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
                           "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "draft",
-                              "storageKey": null,
-                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -2121,15 +2165,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                               "name": "viewerCanDelete",
                               "storageKey": null,
                             },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "private",
-                              "storageKey": null,
-                            },
                           ],
-                          "type": "UserReply",
                         },
                         Object {
                           "abstractKey": "__isPublishable",
@@ -2170,7 +2206,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9a5ed52950c74aad8abb9b27604c5b0f",
+          "cacheID": "470635fea9fda0d667e091b6fda81c44",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2180,6 +2216,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
   $isAuthenticated: Boolean!
   $isNotAuthenticated: Boolean!
   $anonymousRepliesIds: [ID!]!
+  $participantToken: String
 ) {
   questionnaire: node(id: $id) {
     __typename
@@ -2206,10 +2243,10 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
       }
     }
     ...QuestionnaireReplyPage_questionnaire_39ngnn
-    ...QuestionnairePage_questionnaire_39ngnn
+    ...QuestionnairePage_questionnaire_2zcOyo
     id
   }
-  ...QuestionnairePage_query_2uEJPD
+  ...QuestionnairePage_query_cam2E
 }
 
 fragment DeleteReplyModal_questionnaire on Questionnaire {
@@ -2217,9 +2254,9 @@ fragment DeleteReplyModal_questionnaire on Questionnaire {
 }
 
 fragment DeleteReplyModal_reply on Reply {
-  __isReply: __typename
   __typename
   id
+  isAnonymous
 }
 
 fragment ProjectEventPreview_event on Event {
@@ -2251,15 +2288,15 @@ fragment QuestionnaireHeader_step on Step {
   body
 }
 
-fragment QuestionnairePage_query_2uEJPD on Query {
-  ...UserReplies_query_2uEJPD
+fragment QuestionnairePage_query_cam2E on Query {
+  ...UserReplies_query_cam2E
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
     __typename
     id
   }
 }
 
-fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
+fragment QuestionnairePage_questionnaire_2zcOyo on Questionnaire {
   multipleRepliesAllowed
   id
   step {
@@ -2270,7 +2307,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
-  ...ReplyCreateFormWrapper_questionnaire_39ngnn
+  ...ReplyCreateFormWrapper_questionnaire_2zcOyo
   ...UserReplies_questionnaire_39ngnn
 }
 
@@ -2284,7 +2321,6 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
-        __typename
         id
       }
     }
@@ -2292,7 +2328,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
   id
 }
 
-fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
+fragment ReplyCreateFormWrapper_questionnaire_2zcOyo on Questionnaire {
   id
   multipleRepliesAllowed
   phoneConfirmationRequired
@@ -2300,14 +2336,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
-  step {
-    isAnonymousParticipationAllowed
-    id
-  }
-  ...ReplyForm_questionnaire_39ngnn
+  ...ReplyForm_questionnaire_2zcOyo
 }
 
-fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
+fragment ReplyForm_questionnaire_2zcOyo on Questionnaire {
   id
   anonymousAllowed
   description
@@ -2325,16 +2357,14 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         reason
         totalCount
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
+        participantMeetsTheRequirements(token: $participantToken)
       }
     }
-    isAnonymousParticipationAllowed
-    collectParticipantsEmail
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {
       node {
-        __typename
         id
       }
     }
@@ -2437,17 +2467,16 @@ fragment ReplyLink_questionnaire on Questionnaire {
   ...DeleteReplyModal_questionnaire
 }
 
-fragment ReplyLink_reply on Reply {
-  __isReply: __typename
+fragment ReplyLink_reply_39ngnn on Reply {
   __typename
   id
   createdAt
   publishedAt
-  ... on UserReply {
-    draft
-    viewerCanDelete
-    private
-  }
+  draft
+  viewerCanDelete @include(if: $isAuthenticated)
+  private
+  isAnonymous
+  completionStatus
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -2575,12 +2604,12 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserReplies_query_2uEJPD on Query {
+fragment UserReplies_query_cam2E on Query {
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
     __typename
     ... on Reply {
-      __isReply: __typename
-      ...ReplyLink_reply
+      completionStatus
+      ...ReplyLink_reply_39ngnn
     }
     id
   }
@@ -2591,9 +2620,10 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
-        __typename
-        ...ReplyLink_reply
+        completionStatus
+        ...ReplyLink_reply_39ngnn
         id
+        __typename
       }
       cursor
     }
@@ -2616,6 +2646,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
       "id": "1",
       "isAuthenticated": true,
       "isNotAuthenticated": false,
+      "participantToken": undefined,
     }
   }
 />
@@ -2651,6 +2682,11 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
               "kind": "LocalArgument",
               "name": "isNotAuthenticated",
             },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "participantToken",
+            },
           ],
           "kind": "Fragment",
           "metadata": null,
@@ -2823,6 +2859,11 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                       "name": "isAuthenticated",
                       "variableName": "isAuthenticated",
                     },
+                    Object {
+                      "kind": "Variable",
+                      "name": "participantToken",
+                      "variableName": "participantToken",
+                    },
                   ],
                   "kind": "FragmentSpread",
                   "name": "QuestionnairePage_questionnaire",
@@ -2839,6 +2880,11 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "isAuthenticated",
+                  "variableName": "isAuthenticated",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "isNotAuthenticated",
                   "variableName": "isNotAuthenticated",
                 },
@@ -2849,7 +2895,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
           "type": "Query",
         },
-        "hash": "ffac22bbd3c1f1e18b855038482276a5",
+        "hash": "8e9d1b1e69dec555736ad81239c0ba80",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -2872,6 +2918,11 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "anonymousRepliesIds",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "participantToken",
             },
           ],
           "kind": "Operation",
@@ -3047,21 +3098,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isAnonymousParticipationAllowed",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "collectParticipantsEmail",
                           "storageKey": null,
                         },
                         Object {
@@ -3787,6 +3824,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     },
                                   ],
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Variable",
+                                      "name": "token",
+                                      "variableName": "participantToken",
+                                    },
+                                  ],
+                                  "kind": "ScalarField",
+                                  "name": "participantMeetsTheRequirements",
+                                  "storageKey": null,
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -4456,18 +4506,11 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": null,
+                                  "concreteType": "Reply",
                                   "kind": "LinkedField",
                                   "name": "node",
                                   "plural": false,
                                   "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "__typename",
-                                      "storageKey": null,
-                                    },
                                     Object {
                                       "alias": null,
                                       "args": null,
@@ -4516,7 +4559,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": null,
+                                  "concreteType": "Reply",
                                   "kind": "LinkedField",
                                   "name": "node",
                                   "plural": false,
@@ -4525,12 +4568,15 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "__typename",
+                                      "name": "completionStatus",
                                       "storageKey": null,
                                     },
                                     Object {
-                                      "abstractKey": "__isReply",
-                                      "kind": "TypeDiscriminator",
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "__typename",
+                                      "storageKey": null,
                                     },
                                     Object {
                                       "alias": null,
@@ -4554,16 +4600,31 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                       "storageKey": null,
                                     },
                                     Object {
-                                      "abstractKey": null,
-                                      "kind": "InlineFragment",
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "draft",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "private",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isAnonymous",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "condition": "isAuthenticated",
+                                      "kind": "Condition",
+                                      "passingValue": true,
                                       "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "draft",
-                                          "storageKey": null,
-                                        },
                                         Object {
                                           "alias": null,
                                           "args": null,
@@ -4571,15 +4632,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                           "name": "viewerCanDelete",
                                           "storageKey": null,
                                         },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "private",
-                                          "storageKey": null,
-                                        },
                                       ],
-                                      "type": "UserReply",
                                     },
                                     Object {
                                       "abstractKey": "__isPublishable",
@@ -4707,9 +4760,16 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                       "storageKey": null,
                     },
                     Object {
-                      "abstractKey": "__isReply",
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "completionStatus",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": null,
@@ -4725,16 +4785,31 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           "storageKey": null,
                         },
                         Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "draft",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "private",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isAnonymous",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
                           "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "draft",
-                              "storageKey": null,
-                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -4742,15 +4817,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                               "name": "viewerCanDelete",
                               "storageKey": null,
                             },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "private",
-                              "storageKey": null,
-                            },
                           ],
-                          "type": "UserReply",
                         },
                         Object {
                           "abstractKey": "__isPublishable",
@@ -4791,7 +4858,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "9a5ed52950c74aad8abb9b27604c5b0f",
+          "cacheID": "470635fea9fda0d667e091b6fda81c44",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -4801,6 +4868,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
   $isAuthenticated: Boolean!
   $isNotAuthenticated: Boolean!
   $anonymousRepliesIds: [ID!]!
+  $participantToken: String
 ) {
   questionnaire: node(id: $id) {
     __typename
@@ -4827,10 +4895,10 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
       }
     }
     ...QuestionnaireReplyPage_questionnaire_39ngnn
-    ...QuestionnairePage_questionnaire_39ngnn
+    ...QuestionnairePage_questionnaire_2zcOyo
     id
   }
-  ...QuestionnairePage_query_2uEJPD
+  ...QuestionnairePage_query_cam2E
 }
 
 fragment DeleteReplyModal_questionnaire on Questionnaire {
@@ -4838,9 +4906,9 @@ fragment DeleteReplyModal_questionnaire on Questionnaire {
 }
 
 fragment DeleteReplyModal_reply on Reply {
-  __isReply: __typename
   __typename
   id
+  isAnonymous
 }
 
 fragment ProjectEventPreview_event on Event {
@@ -4872,15 +4940,15 @@ fragment QuestionnaireHeader_step on Step {
   body
 }
 
-fragment QuestionnairePage_query_2uEJPD on Query {
-  ...UserReplies_query_2uEJPD
+fragment QuestionnairePage_query_cam2E on Query {
+  ...UserReplies_query_cam2E
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
     __typename
     id
   }
 }
 
-fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
+fragment QuestionnairePage_questionnaire_2zcOyo on Questionnaire {
   multipleRepliesAllowed
   id
   step {
@@ -4891,7 +4959,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
-  ...ReplyCreateFormWrapper_questionnaire_39ngnn
+  ...ReplyCreateFormWrapper_questionnaire_2zcOyo
   ...UserReplies_questionnaire_39ngnn
 }
 
@@ -4905,7 +4973,6 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
-        __typename
         id
       }
     }
@@ -4913,7 +4980,7 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
   id
 }
 
-fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
+fragment ReplyCreateFormWrapper_questionnaire_2zcOyo on Questionnaire {
   id
   multipleRepliesAllowed
   phoneConfirmationRequired
@@ -4921,14 +4988,10 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
   }
-  step {
-    isAnonymousParticipationAllowed
-    id
-  }
-  ...ReplyForm_questionnaire_39ngnn
+  ...ReplyForm_questionnaire_2zcOyo
 }
 
-fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
+fragment ReplyForm_questionnaire_2zcOyo on Questionnaire {
   id
   anonymousAllowed
   description
@@ -4946,16 +5009,14 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
         reason
         totalCount
         viewerMeetsTheRequirements @include(if: $isAuthenticated)
+        participantMeetsTheRequirements(token: $participantToken)
       }
     }
-    isAnonymousParticipationAllowed
-    collectParticipantsEmail
   }
   viewerReplies @include(if: $isAuthenticated) {
     totalCount
     edges {
       node {
-        __typename
         id
       }
     }
@@ -5058,17 +5119,16 @@ fragment ReplyLink_questionnaire on Questionnaire {
   ...DeleteReplyModal_questionnaire
 }
 
-fragment ReplyLink_reply on Reply {
-  __isReply: __typename
+fragment ReplyLink_reply_39ngnn on Reply {
   __typename
   id
   createdAt
   publishedAt
-  ... on UserReply {
-    draft
-    viewerCanDelete
-    private
-  }
+  draft
+  viewerCanDelete @include(if: $isAuthenticated)
+  private
+  isAnonymous
+  completionStatus
   ...DeleteReplyModal_reply
   ...UnpublishedLabel_publishable
 }
@@ -5196,12 +5256,12 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserReplies_query_2uEJPD on Query {
+fragment UserReplies_query_cam2E on Query {
   anonymousReplies: nodes(ids: $anonymousRepliesIds) @include(if: $isNotAuthenticated) {
     __typename
     ... on Reply {
-      __isReply: __typename
-      ...ReplyLink_reply
+      completionStatus
+      ...ReplyLink_reply_39ngnn
     }
     id
   }
@@ -5212,9 +5272,10 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
     totalCount
     edges {
       node {
-        __typename
-        ...ReplyLink_reply
+        completionStatus
+        ...ReplyLink_reply_39ngnn
         id
+        __typename
       }
       cursor
     }
@@ -5237,6 +5298,7 @@ fragment UserReplies_questionnaire_39ngnn on Questionnaire {
       "id": "1",
       "isAuthenticated": false,
       "isNotAuthenticated": true,
+      "participantToken": undefined,
     }
   }
 />

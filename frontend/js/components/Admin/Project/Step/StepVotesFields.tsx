@@ -25,7 +25,6 @@ type Props = ReduxFormFieldArrayProps & {
   stepFormName: string
   votable: boolean
   isBudgetEnabled: boolean
-  isProposalSmsVoteEnabled: boolean
   hasEnabledFeaturesToVoteBySms: boolean
   isTresholdEnabled: boolean
   isSecretBallotEnabled: boolean
@@ -56,7 +55,6 @@ export function StepVotesFields(
     votable,
     dispatch,
     isBudgetEnabled,
-    isProposalSmsVoteEnabled,
     hasEnabledFeaturesToVoteBySms,
     isTresholdEnabled,
     isSecretBallotEnabled,
@@ -87,7 +85,7 @@ export function StepVotesFields(
 
     return stepWithProposalArchivedConfigured?.proposalArchivedTime === currentStep?.proposalArchivedTime
   })
-  const voteSmsEnabled = hasEnabledFeaturesToVoteBySms && isProposalSmsVoteEnabled
+  const voteSmsEnabled = hasEnabledFeaturesToVoteBySms
   return (
     <>
       <ProjectBoxHeader>
@@ -113,35 +111,6 @@ export function StepVotesFields(
           </Text>
           <Flex className="vote-fields" justify="space-between">
             <AppBox maxWidth="50%" mr="79px">
-              {hasEnabledFeaturesToVoteBySms && (
-                <FieldContainer toggled={isProposalSmsVoteEnabled}>
-                  <Field
-                    component={toggle}
-                    labelSide="LEFT"
-                    id="step-isProposalSmsVoteEnabled"
-                    name="isProposalSmsVoteEnabled"
-                    normalize={val => !!val}
-                    helpText={intl.formatMessage({
-                      id: 'vote-without-account-help',
-                    })}
-                    label={intl.formatMessage({
-                      id: 'vote-without-account',
-                    })}
-                    onChange={e => {
-                      const { checked } = e.target
-
-                      if (checked) {
-                        dispatch(change(stepFormName, 'isBudgetEnabled', false))
-                        dispatch(change(stepFormName, 'budget', null))
-                        dispatch(change(stepFormName, 'isTresholdEnabled', false))
-                        dispatch(change(stepFormName, 'voteThreshold', null))
-                        dispatch(change(stepFormName, 'votesRanking', false))
-                        dispatch(change(stepFormName, 'votesMin', null))
-                      }
-                    }}
-                  />
-                </FieldContainer>
-              )}
               <FieldContainer toggled={isBudgetEnabled}>
                 <Field
                   component={toggle}

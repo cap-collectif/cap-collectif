@@ -190,28 +190,14 @@ exports[`<LastProposals /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "avatarUrl",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "displayName",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "url",
                             "storageKey": null,
                           },
                           Object {
@@ -238,6 +224,27 @@ exports[`<LastProposals /> should render correctly 1`] = `
                               },
                             ],
                             "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": "__isContributor",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "username",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Contributor",
                           },
                         ],
                         "storageKey": null,
@@ -570,27 +577,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "avatarUrl",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "displayName",
                             "storageKey": null,
                           },
@@ -623,8 +609,36 @@ exports[`<LastProposals /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "username",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "vip",
                             "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": "__isContributor",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Contributor",
                           },
                         ],
                         "storageKey": null,
@@ -673,7 +687,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "175d0b280f8f058a4293720b0d8e4871",
+            "cacheID": "077d3440a28e9008e60fb1b0db1c62a2",
             "id": null,
             "metadata": Object {},
             "name": "LastProposalsQuery",
@@ -732,7 +746,7 @@ fragment ProposalFollowButton_proposal_3HigpW on Proposal {
   id
 }
 
-fragment ProposalPreviewBody_proposal_dUMnP on Proposal {
+fragment ProposalPreviewBody_proposal_3xyD8p on Proposal {
   isArchived
   id
   slug
@@ -837,7 +851,7 @@ fragment ProposalPreview_proposal_dUMnP on Proposal {
   }
   isArchived
   ...ProposalPreviewFooter_proposal_2tPna9
-  ...ProposalPreviewBody_proposal_dUMnP
+  ...ProposalPreviewBody_proposal_3xyD8p
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 
@@ -849,8 +863,11 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }

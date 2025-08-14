@@ -35,10 +35,27 @@ class ProposalCollectVote extends AbstractProposalVote implements ExportableCont
     private Proposal $proposal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", cascade={"persist"}, inversedBy="collectVotes")
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private CollectStep $collectStep;
+
+    /**
+     * @ORM\Column(name="phone", type="string")
+     */
+    private string $phone;
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
 
     public function getStep(): ?AbstractStep
     {

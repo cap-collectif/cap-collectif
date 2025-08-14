@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { graphql } from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
+  SendSmsPhoneValidationCodeMutation,
   SendSmsPhoneValidationCodeMutationResponse,
   SendSmsPhoneValidationCodeMutationVariables,
 } from '~relay/SendSmsPhoneValidationCodeMutation.graphql'
@@ -26,3 +27,13 @@ const commit = (
 export default {
   commit,
 }
+
+export const useSendSmsPhoneValidationCodeMutation = () => {
+  const [commit, isLoading] = useMutation<SendSmsPhoneValidationCodeMutation>(mutation)
+  return {
+    commit,
+    isLoading
+  }
+}
+
+

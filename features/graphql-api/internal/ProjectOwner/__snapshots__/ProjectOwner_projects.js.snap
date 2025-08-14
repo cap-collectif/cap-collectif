@@ -7,6 +7,38 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "authors": Array [],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [
               Object {
                 "username": "lbrunet",
@@ -489,7 +521,7 @@ Object {
           },
         },
       ],
-      "totalCount": 49,
+      "totalCount": 52,
     },
   },
 }
@@ -888,8 +920,26 @@ Object {
             "title": "BP avec étape personalisée ouverte",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2024-08-01 12:00:00",
+            "title": "BP vote étape de dépôt",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2024-08-01 12:00:00",
+            "title": "BP vote parcours",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2024-08-01 12:00:00",
+            "title": "BP vote parcours min 2 max 2",
+          },
+        },
       ],
-      "totalCount": 49,
+      "totalCount": 52,
     },
   },
 }

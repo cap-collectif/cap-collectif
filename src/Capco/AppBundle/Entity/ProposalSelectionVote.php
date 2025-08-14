@@ -37,16 +37,10 @@ class ProposalSelectionVote extends AbstractProposalVote implements ExportableCo
     private Proposal $proposal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selectionVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private SelectionStep $selectionStep;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
-     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
-     */
-    private ?Participant $participant = null;
 
     public function getProposal(): ?Proposal
     {
@@ -120,17 +114,5 @@ class ProposalSelectionVote extends AbstractProposalVote implements ExportableCo
     public function getVoteTypeName(): string
     {
         return 'proposalSelectionVote';
-    }
-
-    public function getParticipant(): ?Participant
-    {
-        return $this->participant;
-    }
-
-    public function setParticipant(?Participant $participant): self
-    {
-        $this->participant = $participant;
-
-        return $this;
     }
 }

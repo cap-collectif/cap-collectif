@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|toggleFeature toggles a feature as admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_facebook",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature toggles a feature as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_facebook",
+    },
+  },
+}
+`;

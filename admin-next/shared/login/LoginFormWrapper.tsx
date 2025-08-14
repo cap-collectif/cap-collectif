@@ -14,6 +14,7 @@ type FormValues = {
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.'
 const MISSING_CAPTCHA = 'You must provide a captcha to login.'
+export const PENDING_EMAIL_CONFIRMATION = 'please-confirm-your-email-address-to-login'
 
 // TODO onSuccessAction Debate
 export const LoginFormWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -69,6 +70,8 @@ export const LoginFormWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
         } else if (response.reason === MISSING_CAPTCHA) {
           setValue('displayCaptcha', true)
           setError('_error', { message: 'registration.constraints.captcha.invalid' })
+        } else if (response.reason === PENDING_EMAIL_CONFIRMATION) {
+          setError('_error', { message: response.reason })
         } else if (response.reason) {
           setError('_error', { message: response.reason })
         } else mutationErrorToast(intl)

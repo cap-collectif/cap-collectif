@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
-use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Capco\AppBundle\Repository\ParticipantRepository;
-use GraphQL\Error\UserError;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -15,18 +13,27 @@ class RequirementConnectionParticipantMeetsTheRequirementsResolver implements Qu
 {
     use ResolverTrait;
 
-    public function __construct(private readonly ParticipantRepository $participantRepository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
+    public function __construct(private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private ParticipantHelper $participantHelper)
     {
     }
 
     public function __invoke(ConnectionInterface $connection, Argument $args): bool
     {
-        $token = $this->getToken($args);
+        $token = $args->offsetGet('token');
 
-        $participant = $this->getParticipant($token);
-
-        /** * @var EdgeInterface $edge  */
         $requirements = array_map(fn ($edge) => $edge->getNode(), $connection->getEdges());
+
+        if (empty($requirements)) {
+            return true;
+        }
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($token);
+        } catch (\Exception) {
+            return false;
+        }
+
+        // @var EdgeInterface $edge
 
         foreach ($requirements as $requirement) {
             if (!$this->viewerMeetsTheRequirementResolver->__invoke($requirement, $participant)) {
@@ -35,27 +42,5 @@ class RequirementConnectionParticipantMeetsTheRequirementsResolver implements Qu
         }
 
         return true;
-    }
-
-    public function getParticipant(string $token): Participant
-    {
-        $participant = $this->participantRepository->findOneBy(['token' => $token]);
-
-        if (!$participant instanceof Participant) {
-            throw new UserError("Participant not found given the token : {$token}");
-        }
-
-        return $participant;
-    }
-
-    public function getToken(Argument $args): string
-    {
-        $token = $args->offsetGet('token');
-
-        if (!$token) {
-            throw new UserError('Token not found');
-        }
-
-        return $token;
     }
 }

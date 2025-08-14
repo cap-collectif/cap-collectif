@@ -9,19 +9,19 @@ Object {
         Object {
           "node": Object {
             "id": "1000",
-            "kind": "proposalUserVote",
+            "kind": "proposalSelectionVote",
           },
         },
         Object {
           "node": Object {
             "id": "1053",
-            "kind": "proposalUserVote",
+            "kind": "proposalSelectionVote",
           },
         },
         Object {
           "node": Object {
             "id": "1067",
-            "kind": "proposalUserVote",
+            "kind": "proposalSelectionVote",
           },
         },
       ],

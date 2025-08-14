@@ -25,14 +25,7 @@ Scenario: Logged in user wants to vote when he has not enough credits left in a 
   # This only work on hover
   # When I click the proposal "proposal8" vote button
   # And I should see the proposal vote tooltip
-
-@security @elasticsearch @votes_from_selection_step
-Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
-  Given I go to a selection step with budget vote enabled
-  And I wait ".proposal-list-view-paginated" to appear on current page
-  When I click the proposal vote button
-  Then I should see a "#login-popover" element
-
+  
 @security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has reached limit in a selection step
   Given I am logged in as user
@@ -42,12 +35,6 @@ Scenario: Logged in user wants to vote when he has reached limit in a selection 
   # This only work on hover
   # When I click the proposal "proposal18" vote button
   # And I should see the proposal vote limited tooltip
-
-@security @elasticsearch @votes_from_proposal
-Scenario: Anonymous user wants to vote on a proposal page
-  Given I go to a proposal
-  When I click the proposal vote button
-  Then I should see a "#login-popover" element
 
 @security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left

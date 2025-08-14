@@ -18,8 +18,11 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly StepVotesCountResolver $stepVotesCountResolver, private readonly VoteSearch $voteSearch, protected PromiseAdapterInterface $adapter)
-    {
+    public function __construct(
+        private readonly StepVotesCountResolver $stepVotesCountResolver,
+        private readonly VoteSearch $voteSearch,
+        protected PromiseAdapterInterface $adapter,
+    ) {
     }
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
@@ -30,9 +33,10 @@ class ProjectVotesResolver implements QueryInterface
 
         $totalCount = $this->countProjectVotes($project, $args->offsetGet('anonymous'));
 
-        $paginator = new Paginator(fn (int $offset, int $limit) => []);
-
-        return $paginator->auto($args, $totalCount);
+        return (new Paginator(fn (int $offset, int $limit) => []))->auto(
+            $args,
+            $totalCount
+        );
     }
 
     public function countProjectVotes(Project $project, ?bool $anonymous = null): int

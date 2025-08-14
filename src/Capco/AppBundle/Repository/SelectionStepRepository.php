@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\VoteType;
 
 class SelectionStepRepository extends AbstractStepRepository
@@ -50,6 +52,20 @@ class SelectionStepRepository extends AbstractStepRepository
             ->executeQuery($sql, ['projectId' => $projectId])
             ->fetchAllAssociative()
         ;
+    }
+
+    /**
+     * @return array<SelectionStep>
+     */
+    public function findByParticipantWithVotes(Participant $participant): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->join('s.selectionVotes', 'v')
+            ->where('v.participant = :participant')
+            ->setParameter('participant', $participant)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     private function getEnabledQueryBuilder()

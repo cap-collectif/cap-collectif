@@ -139,8 +139,7 @@ class ValueResponseRepository extends EntityRepository
             // We must support responses on a proposal/other object
             $this->createQueryBuilder('r')
                 ->leftJoin('r.reply', 'reply')
-                ->leftJoin('r.replyAnonymous', 'replyAnonymous')
-                ->andWhere('((reply.draft = false OR replyAnonymous IS NOT NULL)')
+                ->andWhere('(reply.draft = false')
                 ->andWhere('r.value IS NOT NULL')
                 ->andWhere('r.value NOT LIKE :emptyValueOne')
                 ->andWhere('r.value NOT LIKE :emptyValueTwo')

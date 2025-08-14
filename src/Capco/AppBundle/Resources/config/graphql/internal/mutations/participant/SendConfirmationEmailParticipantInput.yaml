@@ -1,0 +1,14 @@
+SendConfirmationEmailParticipantInput:
+    type: relay-mutation-input
+    config:
+        description: 'Send email confirmation to participant'
+        fields:
+            email:
+                type: 'String!'
+                description: 'The email to send confirmation.'
+            token:
+                type: 'String!'
+                description: 'The returned token of Participant.'
+            redirectUrl:
+                type: 'String!'
+                description: 'The url to redirect to after confirming the email.'

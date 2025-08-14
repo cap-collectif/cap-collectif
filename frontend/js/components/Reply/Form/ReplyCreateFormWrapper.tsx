@@ -7,14 +7,11 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { Alert } from 'react-bootstrap'
 import type { ReplyCreateFormWrapper_questionnaire } from '~relay/ReplyCreateFormWrapper_questionnaire.graphql'
 import '~relay/ReplyCreateFormWrapper_questionnaire.graphql'
-import { LoginButtonQueryWrapper } from '@shared/login/LoginButton'
-import { RegistrationButtonQueryWrapper } from '@shared/register/RegistrationButton'
 import ReplyForm from './ReplyForm'
 import type { User } from '~/redux/modules/user'
 import '~/redux/modules/user'
 import type { GlobalState } from '~/types'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly questionnaire: ReplyCreateFormWrapper_questionnaire
   readonly user: User | null | undefined
@@ -23,36 +20,16 @@ type Props = {
 const ReplyCreateFormWrapperContainer = styled.div`
   margin-top: 35px;
 `
-export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
+export const ReplyCreateFormWrapper = ({ questionnaire, setIsShow }: Props) => {
   const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext)
-  const isAnonymousParticipationAllowed = questionnaire?.step?.isAnonymousParticipationAllowed
-  const isAnonymousQuestionnaireFeatureEnabled = useFeatureFlag('anonymous_questionnaire')
   const formIsDisabled =
     questionnaire.contribuable &&
     questionnaire.viewerReplies &&
     questionnaire.viewerReplies.totalCount > 0 &&
     !questionnaire.multipleRepliesAllowed
-  const canParticipateAnonymously = isAnonymousQuestionnaireFeatureEnabled ? isAnonymousParticipationAllowed : false
   return (
     <ReplyCreateFormWrapperContainer>
-      {questionnaire.contribuable && !user && !canParticipateAnonymously ? (
-        <Alert bsStyle="warning" className="hidden-print text-center">
-          <strong>
-            <FormattedMessage id="reply.not_logged_in.error" />
-          </strong>
-          <RegistrationButtonQueryWrapper
-            bsStyle="primary"
-            style={{
-              marginLeft: '10px',
-            }}
-          />
-          <LoginButtonQueryWrapper
-            style={{
-              marginLeft: 5,
-            }}
-          />
-        </Alert>
-      ) : (
+      {
         formIsDisabled && (
           <Alert bsStyle="warning" className="hidden-print">
             <strong>
@@ -63,7 +40,7 @@ export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props
             </p>
           </Alert>
         )
-      )}
+      }
       <ReplyForm
         questionnaire={questionnaire}
         reply={null}
@@ -83,7 +60,7 @@ const container = connect(mapStateToProps)(ReplyCreateFormWrapper)
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, participantToken: { type: "String" }) {
       id
       multipleRepliesAllowed
       phoneConfirmationRequired
@@ -91,10 +68,7 @@ export default createFragmentContainer(container, {
       viewerReplies @include(if: $isAuthenticated) {
         totalCount
       }
-      step {
-        isAnonymousParticipationAllowed
-      }
-      ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+      ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated, participantToken: $participantToken)
     }
   `,
 })

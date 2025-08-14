@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message\Questionnaire;
 
-use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 
@@ -12,7 +12,7 @@ final class QuestionnaireReplyAnonymousUpdateAdminMessage extends AbstractAdminM
     public const TEMPLATE = '@CapcoMail/notifyQuestionnaireReply.html.twig';
     public const FOOTER = '';
 
-    public static function getMyTemplateVars(ReplyAnonymous $reply, array $params): array
+    public static function getMyTemplateVars(Reply $reply, array $params): array
     {
         return [
             'projectTitle' => self::escape(
@@ -33,7 +33,7 @@ final class QuestionnaireReplyAnonymousUpdateAdminMessage extends AbstractAdminM
         ];
     }
 
-    public static function getMySubjectVars(ReplyAnonymous $reply, array $params): array
+    public static function getMySubjectVars(Reply $reply, array $params): array
     {
         return [
             '{questionnaireStepTitle}' => self::escape($reply->getStep()->getTitle()),

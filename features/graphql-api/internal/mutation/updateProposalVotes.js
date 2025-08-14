@@ -29,7 +29,7 @@ const UpdateProposalVotesWithVotesMutation = /* GraphQL */ `
             edges {
               node {
                 id
-                ...on ProposalUserVote {
+                ...on ProposalVote {
                   anonymous
                 }
               }

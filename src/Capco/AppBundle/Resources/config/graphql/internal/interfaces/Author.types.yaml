@@ -31,7 +31,7 @@ Author:
             avatarUrl:
                 type: 'URI'
                 description: "The author's public avatar URL."
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAvatarUrlResolver", value)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorAvatarUrlResolver", value)'
             email:
                 type: 'String'
             isProjectAdmin:

@@ -106,7 +106,7 @@ export default createPaginationContainer(
           @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
           edges {
             node {
-              ... on ProposalUserVote {
+              ... on ProposalVote {
                 author {
                   id
                   ...UserBox_user

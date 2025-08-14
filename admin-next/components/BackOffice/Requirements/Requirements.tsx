@@ -68,6 +68,10 @@ export type RequirementTypeName =
   | 'IdentificationCodeRequirement'
   | 'PhoneVerifiedRequirement'
   | 'FranceConnectRequirement'
+  | 'EmailVerifiedRequirement'
+  | 'ZipCodeRequirement'
+  | 'SSORequirement'
+  | 'ConsentPrivacyPolicyRequirement'
 
 export type RequirementApiTypeName =
   | 'FIRSTNAME'
@@ -79,6 +83,10 @@ export type RequirementApiTypeName =
   | 'PHONE_VERIFIED'
   | 'FRANCE_CONNECT'
   | 'CHECKBOX'
+  | 'EMAIL_VERIFIED'
+  | 'ZIP_CODE'
+  | 'SSO'
+  | 'CONSENT_PRIVACY_POLICY'
 
 export type Requirement = {
   isChecked?: boolean
@@ -92,6 +100,7 @@ export const config: Record<
   {
     title: string
     apiTypename: RequirementApiTypeName
+    tooltip?: string
   }
 > = {
   FirstnameRequirement: {
@@ -126,6 +135,23 @@ export const config: Record<
     title: 'france_connect',
     apiTypename: 'FRANCE_CONNECT',
   },
+  EmailVerifiedRequirement: {
+    title: 'user_email',
+    apiTypename: 'EMAIL_VERIFIED',
+    tooltip: 'verified-by-code-sent-by-email'
+  },
+  ZipCodeRequirement: {
+    title: 'user.register.zipcode',
+    apiTypename: 'ZIP_CODE',
+  },
+  SSORequirement: {
+    title: 'SSO',
+    apiTypename: 'SSO',
+  },
+  ConsentPrivacyPolicyRequirement: {
+    title: 'CONSENT_PRIVACY_POLICY',
+    apiTypename: 'CONSENT_PRIVACY_POLICY',
+  },
 }
 
 export type RequirementsFormValues = {
@@ -159,7 +185,7 @@ const getToggleRequirements = (step: KeyTypeData<Requirements_requirementStep$ke
     return {
       id: stepRequirement?.id ?? null,
       typename: typename as RequirementTypeName,
-      isChecked: !!stepRequirement,
+      isChecked: typename === 'ConsentPrivacyPolicyRequirement' ? true : !!stepRequirement,
       disabled: false,
       isCollectedByFranceConnect: requirement?.isCollectedByFranceConnect ?? false,
     }

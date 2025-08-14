@@ -7,7 +7,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         object: 'Veuillez confirmer votre email'
         content: <stripslashes('\<p>\')>Pourquoi vous l'avez toujours pas fait ?<stripslashes('\</p>\')>
         mailingList: null
-        mailingInternal: 'NOT_CONFIRMED'
+        mailingInternal: 'REGISTERED'
         sendAt: <identity((new \DateTime('2020-10-01')))>
         status: 'SENT'
     CampaignToThanksRegistered:
@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         object: 'Merci'
         content: <stripslashes('\<p>\')>C'est gentil d'avoir participé.<stripslashes('\</p>\')>
         mailingList: null
-        mailingInternal: 'CONFIRMED'
+        mailingInternal: 'REGISTERED'
         sendAt: <identity((new \DateTime('now'))->modify("+ 2 years"))>
         status: 'PLANNED'
     CampaignToCovidParticipants:

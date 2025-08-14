@@ -105,13 +105,12 @@ Array [
       aria-current={false}
       aria-label="project.votes.title"
       className="sc-bcXGCL foTwdv"
-      disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-oZHua dtFCAM hQQZty cap-icon"
+        className="sc-bcXGCL sc-oZHua dwxlba hQQZty cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -125,7 +124,7 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL ecyLRB cap-text"
+        className="sc-bcXGCL hmfqxH cap-text"
       >
         project.votes.title
       </span>
@@ -239,13 +238,12 @@ Array [
       aria-current={false}
       aria-label="project.votes.title"
       className="sc-bcXGCL foTwdv"
-      disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-oZHua dtFCAM hQQZty cap-icon"
+        className="sc-bcXGCL sc-oZHua dwxlba hQQZty cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -259,7 +257,7 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL ecyLRB cap-text"
+        className="sc-bcXGCL hmfqxH cap-text"
       >
         project.votes.title
       </span>

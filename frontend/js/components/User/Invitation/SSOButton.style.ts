@@ -16,7 +16,8 @@ type SecondarySSOButtonType = ButtonType & {
   readonly borderColor: string
 }
 export const BaseButton = styled(Link)<ButtonType>`
-  width: 325px;
+  display: block;
+  min-width: 325px;
   padding: 12px 12px;
   margin-bottom: 16px;
   border-radius: 4px;
@@ -45,7 +46,7 @@ export const TertiarySSOButton = styled(BaseButton)`
 export const FranceConnectButton = styled.div`
   width: 325px;
   border-radius: 4px;
-  background: rgb(3, 78, 162);
+  background: #000091;
   text-align: center;
   margin-bottom: 16px;
 

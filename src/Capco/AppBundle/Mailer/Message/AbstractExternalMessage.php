@@ -14,13 +14,13 @@ abstract class AbstractExternalMessage extends AbstractMessage
         array $subjectVars,
         string $template,
         array $templateVars,
-        ContributorInterface $recipient,
+        ?ContributorInterface $recipient = null,
         ?string $replyTo = null
     ) {
         parent::__construct(
             $recipientEmail,
-            $recipient->getLocale(),
-            $recipient->getShowName(),
+            $recipient ? $recipient->getLocale() : null,
+            $recipient ? $recipient->getShowName() : null,
             $subject,
             $subjectVars,
             $template,

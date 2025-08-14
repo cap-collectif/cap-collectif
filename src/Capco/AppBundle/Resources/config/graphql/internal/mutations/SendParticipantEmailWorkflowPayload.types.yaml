@@ -1,0 +1,9 @@
+SendParticipantEmailWorkflowPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            errorCode:
+                type: 'SendParticipantEmailWorkflowErrorCode'
+            redirectUrl:
+                type: 'String'
+                description: 'The url to redirect to, only for testing purpose.'

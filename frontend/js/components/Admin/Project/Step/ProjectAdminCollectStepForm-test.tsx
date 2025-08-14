@@ -24,7 +24,6 @@ describe('<ProjectAdminCollectStepForm />', () => {
     },
     endAt: '2050-01-01',
     isFranceConnectConfigured: true,
-    isProposalSmsVoteEnabled: false,
   }
   it('renders correctly for project admin', () => {
     const wrapper = shallow(

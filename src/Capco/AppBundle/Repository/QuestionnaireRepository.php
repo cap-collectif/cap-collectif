@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Enum\QuestionnaireAffiliation;
@@ -215,7 +216,7 @@ class QuestionnaireRepository extends EntityRepository
         $sql = '
             SELECT
                 CASE
-                    WHEN COUNT(r.id) > 0 OR COUNT(ra.id) > 0 OR COUNT(u.id) > 0 OR COUNT(resr.id) > 0 OR COUNT(resra.id) > 0 THEN TRUE
+                    WHEN COUNT(r.id) > 0 OR COUNT(u.id) > 0 OR COUNT(resr.id) > 0 THEN TRUE
                     ELSE FALSE
                 END AS hasRecentRepliesOrUpdatedUsers
             FROM
@@ -223,16 +224,12 @@ class QuestionnaireRepository extends EntityRepository
             LEFT JOIN
                 reply r ON q.id = r.questionnaire_id
             LEFT JOIN
-                reply_anonymous ra ON q.id = ra.questionnaire_id
-            LEFT JOIN
                 fos_user u ON r.author_id = u.id
             LEFT JOIN
                 response resr ON r.id = resr.reply_id
-            LEFT JOIN
-                response resra ON ra.id = resra.reply_id
             WHERE
                 q.id = :questionnaireId
-                AND (r.updated_at > :date OR ra.updated_at > :date OR u.updated_at > :date OR resr.updated_at > :date OR resra.updated_at > :date)
+                AND (r.updated_at > :date OR u.updated_at > :date OR resr.updated_at > :date)
         ';
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
@@ -259,6 +256,20 @@ class QuestionnaireRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @return array<Questionnaire>
+     */
+    public function getWithRepliesByParticipant(Participant $participant): array
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->join('q.replies', 'r')
+            ->where('r.participant = :participant')
+            ->setParameter('participant', $participant)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder

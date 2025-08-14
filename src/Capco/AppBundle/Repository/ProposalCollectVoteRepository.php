@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -11,7 +13,11 @@ use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\ProposalCollectVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalCollectVoteRepository extends EntityRepository
@@ -46,6 +52,55 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByConfirmedParticipantEmail(string $email, CollectStep $step): int
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->join('pv.participant', 'p')
+            ->where('p.email = :email')
+            ->andWhere('p.confirmationToken IS NULL')
+            ->andWhere('pv.collectStep = :step')
+            ->setParameter('email', $email)
+            ->setParameter('step', $step)
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<ProposalCollectVote>
+     */
+    public function findExistingContributorByStepAndPhoneNumber(CollectStep $step, string $phone, ContributorInterface $contributor): array
+    {
+        $participantFilter = '';
+        $userFilter = '';
+
+        if ($contributor instanceof Participant) {
+            $participantFilter = ' AND participant <> :contributor';
+        }
+
+        if ($contributor instanceof User) {
+            $userFilter = ' AND author <> :contributor';
+        }
+
+        $qb = $this->createQueryBuilder('v')
+            ->leftJoin('v.participant', 'participant')
+            ->leftJoin('v.user', 'author')
+            ->where('participant.phone = :phone AND participant.phoneConfirmed = 1' . $participantFilter)
+            ->orWhere('author.phone = :phone AND author.phoneConfirmed = 1' . $userFilter)
+            ->andWhere('v.collectStep = :step')
+            ->setParameter('step', $step)
+            ->setParameter('phone', $phone)
+            ->setParameter('contributor', $contributor)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getByProposalAndStepAndUser(
@@ -168,21 +223,37 @@ class ProposalCollectVoteRepository extends EntityRepository
     }
 
     // TODO remove this duplicate
-    public function getVotesByStepAndUser(CollectStep $step, User $user): array
+
+    /**
+     * @return array<ProposalCollectVote>
+     */
+    public function getVotesByStepAndContributor(CollectStep $step, ContributorInterface $contributor, bool $published = true): array
     {
-        return $this->createQueryBuilder('pv')
+        $qb = $this->createQueryBuilder('pv')
             ->select('pv', 'proposal')
             ->andWhere('pv.collectStep = :step')
-            ->andWhere('pv.user = :user')
-            ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.id IS NOT NULL')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->setParameter('user', $user)
             ->setParameter('step', $step)
+        ;
+
+        if ($contributor instanceof User) {
+            $qb->andWhere('pv.user = :user');
+            $qb->setParameter('user', $contributor);
+        } elseif ($contributor instanceof Participant) {
+            $qb->andWhere('pv.participant = :participant');
+            $qb->setParameter('participant', $contributor);
+        }
+
+        if ($published) {
+            $qb->andWhere('pv.published = true');
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
     public function getUserVotesGroupedByStepIds(array $collectStepsIds, ?User $user = null): array
@@ -421,6 +492,145 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return $pointsOnStep;
+    }
+
+    /**
+     * @return Paginator<QueryBuilder>
+     */
+    public function getByTokenAndStep(
+        CollectStep $step,
+        string $token,
+        int $limit = 0,
+        int $offset = 0,
+        ?string $field = null,
+        ?string $direction = null
+    ): Paginator {
+        $qb = $this->createQueryBuilder('pv')
+            ->andWhere('pv.collectStep = :step')
+            ->join('pv.participant', 'participant', Join::WITH, 'participant.token = :token')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.id IS NOT NULL')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('step', $step)
+            ->setParameter('token', $token)
+        ;
+
+        if ($field && $direction) {
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('pv.publishedAt', $direction);
+            }
+            if ('POSITION' === $field) {
+                $qb->addOrderBy('pv.position', $direction);
+            }
+        }
+
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+        }
+        $qb->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    public function countByTokenAndStep(CollectStep $step, string $token): ?int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv.id)')
+            ->andWhere('pv.collectStep = :step')
+            ->join('pv.participant', 'participant', Join::WITH, 'participant.token = :token')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('token', $token)
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array<ProposalCollectVote>
+     */
+    public function findByParticipantAndStep(Participant $participant, CollectStep $step, bool $published = true): array
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->where('v.participant = :participant')
+            ->andwhere('v.collectStep = :step')
+            ->setParameter('participant', $participant)
+            ->setParameter('step', $step)
+        ;
+
+        if ($published) {
+            $qb->andWhere('v.published = 1');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findOneByProposalTokenAndStep(Proposal $proposal, string $token, CollectStep $step): ?ProposalCollectVote
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->join('pv.participant', 'participant')
+            ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.collectStep = :step')
+            ->andWhere('participant.token = :token')
+            ->setParameter('proposal', $proposal)
+            ->setParameter('step', $step)
+            ->setParameter('token', $token)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function countDistinctParticipantPublishedCollectVoteByStep(
+        CollectStep $step,
+        bool $onlyAccounted
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv.participant)')
+            ->andWhere('pv.collectStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->setParameter('step', $step)
+        ;
+
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        return (int) $qb
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array<ProposalCollectVote>
+     */
+    public function findByParticipantEmail(string $participantEmail, CollectStep $step): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.participant', 'participant')
+            ->where('participant.email = :participantEmail')
+            ->andWhere('participant.confirmationToken IS NULL')
+            ->andWhere('v.collectStep = :step')
+            ->setParameters([
+                'participantEmail' => $participantEmail,
+                'step' => $step,
+            ])
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     private function getCountsByProposalGroupedBySteps(

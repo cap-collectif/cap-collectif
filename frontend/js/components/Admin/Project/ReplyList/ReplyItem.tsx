@@ -3,7 +3,7 @@ import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import moment from 'moment'
-import type { ReplyItem_reply$key, ReplyItem_reply } from '~relay/ReplyItem_reply.graphql'
+import type { ReplyItem_reply$key, ReplyItem_reply$data } from '~relay/ReplyItem_reply.graphql'
 import ReplyModalConfirmationDelete from './ReplyModalConfirmationDelete'
 import { ReplyItem_viewer$key } from '~relay/ReplyItem_viewer.graphql'
 import { ButtonQuickAction, CapUIIcon, Flex, Link, Table, Tag, Text } from '@cap-collectif/ui'
@@ -20,11 +20,13 @@ const REPLY_FRAGMENT = graphql`
     updatedAt
     status
     adminUrl
-    ... on UserReply {
-      author {
-        username
-      }
+    author {
+      username
     }
+    contributor {
+      username
+    }
+    isAnonymous
   }
 `
 
@@ -34,7 +36,7 @@ const VIEWER_FRAGMENT = graphql`
   }
 `
 
-const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply; intl: IntlShape }) => {
+const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply$data; intl: IntlShape }) => {
   let variant = null
   let message = null
 
@@ -72,21 +74,19 @@ const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply; intl: IntlShape })
   )
 }
 
-const getUsername = (reply: ReplyItem_reply, intl: IntlShape): string | null | undefined => {
-  if (reply.__typename === 'AnonymousReply') {
-    return intl.formatMessage({
-      id: 'no-account-user',
-    })
+const getUsername = (reply: ReplyItem_reply$data, intl: IntlShape) => {
+  if (reply.isAnonymous) {
+    return intl.formatMessage({ id: 'no-account-user' });
   }
 
-  if (reply.author?.username === 'deleted-user') {
+  if (reply.contributor?.username === 'deleted-user') {
     return intl.formatMessage({
       id: 'deleted-user',
     })
   }
 
-  if (reply.author?.username) {
-    return reply.author.username
+  if (reply.contributor?.username) {
+    return reply.contributor.username
   }
 
   return null

@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -21,7 +20,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly ObjectNormalizer $normalizer, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly ProposalResponsesResolver $proposalResponsesResolver, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository)
+    public function __construct(private ObjectNormalizer $normalizer, private ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private ProposalCollectVoteRepository $proposalCollectVoteRepository, private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository, private CommentableCommentsDataLoader $commentableCommentsDataLoader, private ProposalResponsesResolver $proposalResponsesResolver)
     {
     }
 
@@ -100,7 +99,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $selectionCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $proposal
         );
-        $selectionSmsCount = $this->proposalSelectionSmsVoteRepository->getCountsByProposalGroupedBySteps(
+        $selectionSmsCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedBySteps(
             $proposal
         );
         $collectCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(

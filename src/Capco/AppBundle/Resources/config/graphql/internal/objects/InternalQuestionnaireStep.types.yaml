@@ -28,12 +28,6 @@ InternalQuestionnaireStep:
                 description: 'Requirements for answering the questionnaire'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", value, args, getUser())'
-            isAnonymousParticipationAllowed:
-                description: 'Does the questionnaire allow anonymous users to participate ?'
-                type: 'Boolean!'
-            collectParticipantsEmail:
-                description: 'Does the questionnaire allow to collect anonymous users email ?'
-                type: 'Boolean!'
             footerUsingJoditWysiwyg:
                 description: 'Is the questionnaire footer using Jodit Wysiwyg.'
                 type: 'Boolean!'

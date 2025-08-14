@@ -12,9 +12,6 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
-        "step": Object {
-          "isAnonymousParticipationAllowed": false,
-        },
         "viewerReplies": Object {
           "totalCount": 1,
         },
@@ -57,9 +54,6 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
-        "step": Object {
-          "isAnonymousParticipationAllowed": false,
-        },
         "viewerReplies": Object {
           "totalCount": 2,
         },
@@ -73,34 +67,6 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
 
 exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and user is not logged in 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
-  <Alert
-    bsClass="alert"
-    bsStyle="warning"
-    className="hidden-print text-center"
-    closeLabel="Close alert"
-  >
-    <strong>
-      <FormattedMessage
-        id="reply.not_logged_in.error"
-        values={Object {}}
-      />
-    </strong>
-    <RegistrationButtonQueryWrapper
-      bsStyle="primary"
-      style={
-        Object {
-          "marginLeft": "10px",
-        }
-      }
-    />
-    <LoginButtonQueryWrapper
-      style={
-        Object {
-          "marginLeft": 5,
-        }
-      }
-    />
-  </Alert>
   <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     anonymousRepliesIds={Array []}
     questionnaire={
@@ -111,9 +77,6 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
-        "step": Object {
-          "isAnonymousParticipationAllowed": false,
-        },
         "viewerReplies": Object {
           "totalCount": 1,
         },
@@ -137,9 +100,6 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
-        "step": Object {
-          "isAnonymousParticipationAllowed": false,
-        },
         "viewerReplies": Object {
           "totalCount": 1,
         },
@@ -163,9 +123,6 @@ exports[`<ReplyCreateFormWrapper /> should render no alert when anonymous partic
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
-        "step": Object {
-          "isAnonymousParticipationAllowed": true,
-        },
         "viewerReplies": Object {
           "totalCount": 1,
         },

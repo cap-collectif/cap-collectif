@@ -196,9 +196,6 @@ Object {
       "type": "project_admin",
     },
     Object {
-      "type": "anonymous_questionnaire",
-    },
-    Object {
       "type": "twilio",
     },
     Object {
@@ -209,9 +206,6 @@ Object {
     },
     Object {
       "type": "api_sendinblue",
-    },
-    Object {
-      "type": "proposal_sms_vote",
     },
     Object {
       "type": "organizations",

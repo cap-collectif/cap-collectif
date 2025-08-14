@@ -53,10 +53,18 @@ Array [
                 "marginTop": 0,
               }
             }
-          />
+          >
+            <img
+              alt="Jane Doe"
+              className="sc-bcXGCL fUNjxh"
+              src="profile_pic.jpg"
+            />
+          </div>
           <span
             className="sc-bcXGCL cxXLsF cap-text"
-          />
+          >
+            Jane Doe
+          </span>
         </div>
         <div
           className="sc-bcXGCL iWPycw"

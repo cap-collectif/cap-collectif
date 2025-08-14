@@ -97,7 +97,6 @@ export type FormValues = {
   publishedVoteDate: string | null | undefined
   votesHelpText: string | null | undefined
   secretBallot: boolean | undefined
-  isProposalSmsVoteEnabled: boolean | undefined
   proposalArchivedTime?: number | undefined
   proposalArchivedUnitTime?: ProposalArchivedUnitTime | undefined
   allowAuthorsToAddNews: boolean | undefined
@@ -188,7 +187,6 @@ const SELECTION_QUERY = graphql`
         budget
         publishedVoteDate
         isSecretBallot
-        isProposalSmsVoteEnabled
         proposalArchivedTime
         proposalArchivedUnitTime
         ...Requirements_requirementStep @relay(mask: false)
@@ -329,7 +327,13 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           statuses: getStatusesInputList(values.statuses, bgColor),
           defaultStatus: values.defaultStatus,
           defaultSort: values.defaultSort,
-          isProposalSmsVoteEnabled: values.isProposalSmsVoteEnabled,
+          votesHelpText: values.votesHelpText,
+          votesMin: values.votesMin,
+          votesLimit: parseInt(String(values.votesLimit)),
+          votesRanking: values.votesRanking ?? false,
+          voteThreshold: parseInt(String(values.voteThreshold)),
+          proposalArchivedTime: parseInt(String(values.proposalArchivedTime)),
+          proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
           allowingProgressSteps: values.allowingProgressSteps,
           ...getVoteParameterInput(values),

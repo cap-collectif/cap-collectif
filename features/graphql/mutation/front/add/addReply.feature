@@ -71,7 +71,7 @@ Scenario: User wants to add a reply
   """
 
 @database
-Scenario: User wants to add an answer without fulfilling the requirements
+Scenario: User wants to add an answer without fulfilling the requirements, it should set completionStatus to MISSING_REQUIREMENTS
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
    """
@@ -79,8 +79,8 @@ Scenario: User wants to add an answer without fulfilling the requirements
     "query": "mutation ($input: AddUserReplyInput!) {
       addUserReply(input: $input) {
         reply {
-          id
           published
+          completionStatus
           responses {
             question {
               id
@@ -112,5 +112,32 @@ Scenario: User wants to add an answer without fulfilling the requirements
   """
   Then the JSON response should match:
   """
-  {"data":{"addUserReply":{"reply":null,"questionnaire":{"id":"UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw=="},"errorCode":"REQUIREMENTS_NOT_MET"}}}
+    {
+      "data": {
+        "addUserReply": {
+          "reply": {
+            "published": false,
+            "completionStatus": "MISSING_REQUIREMENTS",
+            "responses": [
+              {
+                "question": {
+                  "id": "UXVlc3Rpb246Mzk0NQ=="
+                },
+                "value": "{\"labels\":[\"Nom\"]}"
+              },
+              {
+                "question": {
+                  "id": "UXVlc3Rpb246MTQwMg=="
+                },
+                "value": null
+              }
+            ]
+          },
+          "questionnaire": {
+            "id": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw=="
+          },
+          "errorCode": null
+        }
+      }
+    }
   """

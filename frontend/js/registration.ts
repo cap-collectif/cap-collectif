@@ -81,6 +81,7 @@ import AccessDeniedApp from './startup/AccessDeniedApp'
 import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp'
 import NewsLetterPageApp from './startup/NewsLetterPageApp'
 import CarrouselApp from './startup/CarrouselApp'
+import RequirementsPageApp from './startup/RequirementsPageApp';
 import UserAvatarApp from './startup/UserAvatarApp'
 
 ReactOnRails.registerStore({
@@ -153,22 +154,23 @@ ReactOnRails.register({
   AccessDeniedApp,
   NewsLetterPageApp,
   CarrouselApp,
+  RequirementsPageApp,
   UserAvatarApp,
 
-  /* # COMPONENTS INTE CLIENT # */
-  CalendarApp,
-  EngagementListApp,
-  AccordionApp,
-  ConsultationStepApp,
-  ProposalPreviewApp,
-  DebatePreviewApp,
-  UserSliderApp,
-  GlobalStepApp,
-  HomeHeaderApp,
-  ImageSliderApp,
-  ParticipationTutorialApp,
-  ParticipationMotivationApp,
-  DebateCardApp,
-  WhatsNewApp,
-  IDFGeoSearchBarApp,
+    /* # COMPONENTS INTE CLIENT # */
+    CalendarApp,
+    EngagementListApp,
+    AccordionApp,
+    ConsultationStepApp,
+    ProposalPreviewApp,
+    DebatePreviewApp,
+    UserSliderApp,
+    GlobalStepApp,
+    HomeHeaderApp,
+    ImageSliderApp,
+    ParticipationTutorialApp,
+    ParticipationMotivationApp,
+    DebateCardApp,
+    WhatsNewApp,
+    IDFGeoSearchBarApp,
 })

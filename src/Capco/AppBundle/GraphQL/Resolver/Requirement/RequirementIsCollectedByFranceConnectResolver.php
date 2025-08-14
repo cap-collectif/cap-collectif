@@ -14,6 +14,7 @@ class RequirementIsCollectedByFranceConnectResolver implements QueryInterface
         FranceConnectAllowedData::GIVEN_NAME => Requirement::FIRSTNAME,
         FranceConnectAllowedData::FAMILY_NAME => Requirement::LASTNAME,
         FranceConnectAllowedData::BIRTHDATE => Requirement::DATE_OF_BIRTH,
+        FranceConnectAllowedData::EMAIL => Requirement::EMAIL_VERIFIED,
     ];
 
     public function __construct(private readonly Manager $manager, private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver)

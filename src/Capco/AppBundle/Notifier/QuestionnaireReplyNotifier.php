@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
@@ -46,7 +45,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
     }
 
-    public function onCreate(AbstractReply $reply): void
+    public function onCreate(Reply $reply): void
     {
         if (!$this->isValidReply($reply)) {
             return;
@@ -63,7 +62,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             return;
         }
 
-        $isAnonReply = $reply instanceof ReplyAnonymous;
+        $isAnonReply = $reply->isAnonymous();
 
         $userUrl = !$isAnonReply
             ? $this->router->generate(
@@ -140,7 +139,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         }
     }
 
-    public function onUpdate(AbstractReply $reply): void
+    public function onUpdate(Reply $reply): void
     {
         if (!$this->isValidReply($reply)) {
             return;
@@ -159,7 +158,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
             return;
         }
 
-        $isAnonReply = $reply instanceof ReplyAnonymous;
+        $isAnonReply = $reply->isAnonymous();
 
         $userUrl = !$isAnonReply
             ? $this->router->generate(
@@ -290,7 +289,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
     }
 
-    private function isValidReply(AbstractReply $reply): bool
+    private function isValidReply(Reply $reply): bool
     {
         $questionnaire = $reply->getQuestionnaire();
         if (!$questionnaire) {
@@ -319,7 +318,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         return true;
     }
 
-    private function confirmAnonymousEmail(ReplyAnonymous $replyAnonymous): void
+    private function confirmAnonymousEmail(Reply $replyAnonymous): void
     {
         if ($replyAnonymous->getParticipantEmail()) {
             $this->mailer->createAndSendMessage(

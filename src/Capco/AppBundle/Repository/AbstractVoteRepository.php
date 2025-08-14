@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -277,45 +276,6 @@ class AbstractVoteRepository extends EntityRepository
             ->getConnection()
             ->executeQuery($sql)
             ->fetchAll()[0]['result'];
-    }
-
-    public function findExistingVoteByStepAndPhoneNumber(SelectionStep $step, string $phone, ?string $token = null, ?User $user = null): int
-    {
-        $params = [
-            'phone' => $phone,
-            'step' => $step->getId(),
-        ];
-
-        $userCondition = '';
-        if ($user) {
-            $userCondition .= ' AND u.id <> :user';
-            $params['user'] = $user->getId();
-        }
-
-        $tokenCondition = $joinToken = '';
-        if ($token) {
-            $joinToken = 'LEFT JOIN phone_token pt ON pt.token = :token';
-            $tokenCondition = ' AND pt.token <> :token';
-            $params['token'] = $token;
-        }
-
-        $sql = <<<SQL
-                        SELECT COUNT(*) AS total_count
-                        FROM votes v
-                        LEFT JOIN fos_user u ON u.id = v.voter_id
-                        {$joinToken}
-                        WHERE (((v.phone = :phone {$tokenCondition}) OR (u.phone = :phone AND u.phone_confirmed = 1 {$userCondition})) AND
-                               v.selection_step_id = :step)
-                        AND v.voteType IN ('proposalSelectionSms', 'proposalSelection')
-            SQL;
-
-        $statement = $this->getEntityManager()->getConnection()->prepare($sql);
-
-        $statement->execute($params);
-
-        $result = $statement->fetchOne();
-
-        return (int) $result;
     }
 
     protected function getQueryBuilder()

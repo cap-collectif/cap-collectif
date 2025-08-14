@@ -16,21 +16,24 @@ type Props = {
   readonly questionnaire: DeleteReplyModal_questionnaire
 }
 export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
-  const intl = useIntl()
-  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext)
-  const isAnonymousReply = reply.__typename === 'AnonymousReply'
+  const intl = useIntl();
 
-  const handleSubmit = onClose => {
-    const hashedToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id)
+  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
+  const isAnonymousReply = reply.isAnonymous;
+
+  const handleSubmit = async onClose => {
+    const participantToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id)
     onClose()
 
-    if (isAnonymousReply && hashedToken) {
-      return DeleteAnonymousReplyMutation.commit({
-        input: {
-          hashedToken,
-        },
-        anonymousRepliesIds,
-      }).then(response => {
+    if (isAnonymousReply && participantToken) {
+      try {
+        const response = await DeleteAnonymousReplyMutation.commit({
+          input: {
+            replyId: reply.id,
+            participantToken,
+          },
+          anonymousRepliesIds,
+        })
         if (response?.deleteAnonymousReply?.replyId) {
           CookieMonster.removeAnonymousReplyCookie(questionnaire.id, reply.id)
           toast({
@@ -40,7 +43,10 @@ export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
             }),
           })
         }
-      })
+        return;
+      } catch {
+        return mutationErrorToast(intl)
+      }
     }
 
     DeleteUserReplyMutation.commit({
@@ -120,6 +126,7 @@ export default createFragmentContainer(DeleteReplyModal, {
     fragment DeleteReplyModal_reply on Reply {
       __typename
       id
+      isAnonymous
     }
   `,
 })

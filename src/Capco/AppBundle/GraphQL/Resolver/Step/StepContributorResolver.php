@@ -62,7 +62,8 @@ class StepContributorResolver implements QueryInterface
         }
 
         $participants = $this->participantRepository->findWithVotes($project, $step);
-        $participantsCount = $this->participantRepository->countWithVotes($project, $step);
+        $participantsCount = $this->participantRepository->countWithContributionsByProject($project, $step);
+
         $participantsCursors = array_map(fn ($participant) => [1, $participant->getId()], $participants);
 
         return ['participants' => $participants, 'participantsCount' => $participantsCount, 'participantsCursors' => $participantsCursors];

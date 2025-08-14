@@ -4,5 +4,7 @@ UpdateAnonymousReplyPayload:
         description: 'Payload of UpdateAnonymousReply'
         fields:
             reply:
-                type: 'InternalAnonymousReply'
+                type: 'InternalReply'
                 description: 'The updated AnonymousReply'
+            errorCode:
+                type: 'UpdateAnonymousReplyErrorCode'

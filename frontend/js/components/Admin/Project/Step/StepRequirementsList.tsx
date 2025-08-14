@@ -96,8 +96,11 @@ export function createRequirements(
   }
 
   const isSupportingPhoneVerifiedRequirement =
-    (step.__typename === 'CollectStep' || step.__typename === 'SelectionStep') && twilioEnabled
+    (step.__typename === 'CollectStep' || step.__typename === 'SelectionStep' || step.__typename === 'QuestionnaireStep') && twilioEnabled
   const initialRequirements = step.requirements || []
+  if (!initialRequirements.some((r: Requirement) => r.type === 'EMAIL_VERIFIED') && step.__typename === 'QuestionnaireStep') {
+    requirements.push(requirementFactory('EMAIL_VERIFIED', false, 'user_email', null, false))
+  }
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
     requirements.push(requirementFactory('FIRSTNAME', false, 'form.label_firstname', null, false))
   if (!initialRequirements.some((r: Requirement) => r.type === 'LASTNAME'))
@@ -108,6 +111,8 @@ export function createRequirements(
     requirements.push(requirementFactory('DATE_OF_BIRTH', false, 'form.label_date_of_birth', null, false))
   if (!initialRequirements.some((r: Requirement) => r.type === 'POSTAL_ADDRESS'))
     requirements.push(requirementFactory('POSTAL_ADDRESS', false, 'admin.fields.event.address', null))
+  if (!initialRequirements.some((r: Requirement) => r.type === 'ZIP_CODE') && step.__typename === 'QuestionnaireStep')
+    requirements.push(requirementFactory('ZIP_CODE', false, 'user.register.zipcode', null, false))
   if (!initialRequirements.some((r: Requirement) => r.type === 'IDENTIFICATION_CODE') && isAdmin)
     requirements.push(requirementFactory('IDENTIFICATION_CODE', false, 'identification_code', null))
 
@@ -128,6 +133,11 @@ export function createRequirements(
     }
 
     switch (requirement.type) {
+      case 'EMAIL_VERIFIED':
+        if (step.__typename === 'QuestionnaireStep') {
+          requirements.push(requirementFactory('EMAIL_VERIFIED', true, 'user_email', requirement.id))
+        }
+        break
       case 'FIRSTNAME':
         requirements.push(requirementFactory('FIRSTNAME', true, 'form.label_firstname', requirement.id))
         break
@@ -139,7 +149,16 @@ export function createRequirements(
       case 'PHONE':
         requirements.push(requirementFactory('PHONE', true, 'filter.label_phone', requirement.id))
         break
-
+      case 'PHONE_VERIFIED':
+        if (isSupportingPhoneVerifiedRequirement) {
+          requirements.push(requirementFactory('PHONE_VERIFIED', true, 'verify.number.sms', requirement.id))
+        }
+        break
+      case 'ZIP_CODE':
+        if (step.__typename === 'QuestionnaireStep') {
+          requirements.push(requirementFactory('ZIP_CODE', true, 'user.register.zipcode', requirement.id))
+        }
+        break
       case 'DATE_OF_BIRTH':
         requirements.push(requirementFactory('DATE_OF_BIRTH', true, 'form.label_date_of_birth', requirement.id))
         break
@@ -212,7 +231,7 @@ export function StepRequirementsList({
 
   /* # Requirement => Phone verified # */
   const hasFeatureTwilio = useFeatureFlag('twilio')
-  const hasPhoneVerifiedEnabled = stepType === 'CollectStep' || stepType === 'SelectionStep'
+  const hasPhoneVerifiedEnabled = stepType === 'CollectStep' || stepType === 'SelectionStep' || stepType === 'QuestionnaireStep'
   const phoneVerifiedRequirementIndex = requirements.findIndex(requirement => requirement.type === 'PHONE_VERIFIED')
   const phoneVerifiedRequirement = requirements[phoneVerifiedRequirementIndex]
   return (

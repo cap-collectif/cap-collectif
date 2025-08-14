@@ -40,9 +40,3 @@ UpdateQuestionnaireStepInput:
             requirementsReason:
                 type: 'String'
                 description: 'Reasons to require these requirements.'
-            collectParticipantsEmail:
-                type: 'Boolean'
-                description: 'If anonymous participation is allowed whether or not we collect participants email.'
-            isAnonymousParticipationAllowed:
-                type: 'Boolean'
-                description: 'Wether or not anonymous user can participate.'

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
+use Capco\AppBundle\Entity\Reply;
 use Doctrine\ORM\EntityRepository;
 
 class AbstractResponseRepository extends EntityRepository
@@ -15,7 +15,6 @@ class AbstractResponseRepository extends EntityRepository
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
             ->andWhere('r.reply = :reply')
-            ->orWhere('r.replyAnonymous = :reply')
             ->setParameter('reply', $replyId)
         ;
 
@@ -39,13 +38,13 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByReply(AbstractReply $reply, bool $showPrivate = false): iterable
+    public function getByReply(Reply $reply, bool $showPrivate = false): iterable
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
-            ->andWhere('r.reply = :reply OR r.replyAnonymous = :reply')
+            ->andWhere('r.reply = :reply')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
             ->setParameter('reply', $reply->getId())
         ;

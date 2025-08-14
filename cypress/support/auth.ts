@@ -86,47 +86,62 @@ Cypress.Commands.add('loginAs', (email: Cypress.LoginAsUsernames) => {
 })
 
 Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) => {
-  cy.session([email, password], () => {
-    cy.url().then(url => {
-      if (url === 'about:blank') {
-        cy.visit('/')
-      }
-    })
-
-    const log = Cypress.log({
-      name: 'login',
-      displayName: 'LOGIN',
-      message: [`🔐 Authenticating | ${email}`],
-      autoEnd: false,
-    })
-
-    cy.request({
-      url: '/login_check',
-      method: 'POST',
-      body: {
-        username: email,
-        password,
-      },
-      retryOnStatusCodeFailure: true,
-      retryOnNetworkFailure: true,
-    }).then(response => {
-      expect(response.status).to.eq(200)
-      log.set({
-        consoleProps() {
-          return {
-            email,
-            password,
-          }
-        },
+  cy.session(
+    [email, password],
+    () => {
+      cy.url().then(url => {
+        if (url === 'about:blank') {
+          cy.visit('/')
+        }
       })
 
-      log.snapshot('after')
-      log.end()
-    })
-    cy.getCookie('PHPSESSID').should('exist')
-  })
+      const log = Cypress.log({
+        name: 'login',
+        displayName: 'LOGIN',
+        message: [`🔐 Authenticating | ${email}`],
+        autoEnd: false,
+      })
+
+      cy.request({
+        url: '/login_check',
+        method: 'POST',
+        body: {
+          username: email,
+          password,
+        },
+        retryOnStatusCodeFailure: true,
+        retryOnNetworkFailure: true,
+      }).then(response => {
+        expect(response.status).to.eq(200)
+        log.set({
+          consoleProps() {
+            return {
+              email,
+              password,
+            }
+          },
+        })
+
+        log.snapshot('after')
+        log.end()
+      })
+      cy.getCookie('PHPSESSID').should('exist')
+    },
+    {
+      validate() {
+        cy.getCookie('PHPSESSID').should('exist')
+      },
+    },
+  )
 })
 
 Cypress.Commands.add('directLoginAs', (email: Cypress.LoginAsUsernames) => {
   return cy.directLogin(LoginAsData(email))
+})
+
+Cypress.Commands.add('logout', () => {
+  cy.get('#navbar-username').click()
+  cy.contains('global.logout').click({ force: true })
+  cy.clearCookie('PHPSESSID')
+  Cypress.session.clearAllSavedSessions()
 })

@@ -2,12 +2,19 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Service\Encryptor;
+use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
+use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
+use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -15,7 +22,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -36,7 +45,11 @@ class ConfirmationController extends Controller
         private readonly CommentRepository $commentRepository,
         private readonly EntityManagerInterface $em,
         private readonly LoggerInterface $logger,
-        private readonly SendInBluePublisher $sendInBluePublisher
+        private readonly SendInBluePublisher $sendInBluePublisher,
+        private readonly ParticipantRepository $participantRepository,
+        private readonly Encryptor $encryptor,
+        private readonly ReplyReconcilier $replyReconcilier,
+        private readonly VotesReconcilier $votesReconcilier
     ) {
         $this->login = true;
     }
@@ -194,6 +207,87 @@ class ConfirmationController extends Controller
                 'CapcoAppBundle'
             )
         );
+
+        return $response;
+    }
+
+    /**
+     * @Route("/participant/new_email_confirmation/{token}", name="participant_confirm_new_email", options={"i18n" = false})
+     */
+    public function confirmEmailParticipantAction(Request $request, string $token): RedirectResponse
+    {
+        if ($this->em->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->em->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
+        $redirectUrl = $request->get('redirectUrl');
+        $homePageUrl = $this->router->generate('app_homepage');
+
+        $responseUrl = $redirectUrl ?? $homePageUrl;
+        $response = new RedirectResponse($responseUrl);
+
+        $participant = $this->participantRepository->findOneBy(['newEmailConfirmationToken' => $token]);
+
+        if (!$participant instanceof Participant) {
+            return $response;
+        }
+
+        $participationCookies = $request->get('participationCookies');
+        $decryptedParticipationCookies = $this->encryptor->decryptData($participationCookies);
+        $cookies = json_decode($decryptedParticipationCookies, true);
+
+        $existingParticipant = $this->participantRepository->findOneBy([
+            'email' => $participant->getNewEmailToConfirm(),
+            'confirmationToken' => null,
+        ]);
+
+        if (($cookies['replyCookie'] ?? null) && !$existingParticipant) {
+            $decryptedReplyCookie = $this->encryptor->decryptData($cookies['replyCookie']);
+            $replyCookie = Cookie::create(ParticipationCookieManager::REPLY_COOKIE, $decryptedReplyCookie, (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($replyCookie);
+        }
+
+        if ($existingParticipant && $cookies['replyCookie']) {
+            $this->replyReconcilier->reconcile($participant, $existingParticipant);
+            $this->replyReconcilier->updateParticipantInfos($existingParticipant, $participant);
+            $this->em->flush();
+            $jsonReplies = $this->replyReconcilier->getJSONReplies($existingParticipant);
+
+            $replyCookie = Cookie::create(ParticipationCookieManager::REPLY_COOKIE, base64_encode($jsonReplies), (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($replyCookie);
+        }
+
+        if (($cookies['participantCookie'] ?? null) && !$existingParticipant) {
+            $decryptedParticipantCookies = $this->encryptor->decryptData($cookies['participantCookie']);
+            $participantCookie = Cookie::create(ParticipationCookieManager::PARTICIPANT_COOKIE, $decryptedParticipantCookies, (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($participantCookie);
+        }
+
+        if ($existingParticipant && ($cookies['participantCookie'] ?? null)) {
+            $this->votesReconcilier->reconcile($participant, $existingParticipant);
+            $this->votesReconcilier->updateParticipantInfos($existingParticipant, $participant);
+            $decryptedParticipantCookies = $this->encryptor->decryptData($cookies['participantCookie']);
+            $participantCookie = Cookie::create(ParticipationCookieManager::PARTICIPANT_COOKIE, $decryptedParticipantCookies, (new \DateTime())->modify('+1 year'), null, null, false, false);
+            $response->headers->setCookie($participantCookie);
+            $this->em->flush();
+        }
+
+        if ($existingParticipant) {
+            $this->em->remove($participant);
+            $this->em->flush();
+
+            return $response;
+        }
+
+        $participant->setEmail($participant->getNewEmailToConfirm());
+        $participant->setNewEmailConfirmationToken(null);
+        $participant->setNewEmailToConfirm(null);
+
+        if (!$participant->isEmailConfirmed()) {
+            $participant->setConfirmationToken(null);
+        }
+
+        $this->em->flush();
 
         return $response;
     }

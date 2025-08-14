@@ -34,9 +34,7 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
-      isProposalSmsVoteEnabled: false,
     },
-    isAuthenticated: true,
     viewer: {
       ' $refType': $refType,
       proposalVotes: {
@@ -69,9 +67,7 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
-      isProposalSmsVoteEnabled: false,
     },
-    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       ' $refType': $refType,
@@ -105,9 +101,7 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
-      isProposalSmsVoteEnabled: false,
     },
-    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       ' $refType': $refType,
@@ -140,9 +134,7 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'project.types.interpellation',
         },
       },
-      isProposalSmsVoteEnabled: false,
     },
-    isAuthenticated: true,
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
       ' $refType': $refType,
@@ -158,7 +150,7 @@ describe('<ProposalVoteBasketWidget />', () => {
   const anonVoteProps = {
     ...colorProps,
     viewer: null,
-    features: { ...features, twilio: true, proposal_sms_vote: true },
+    features: { ...features, twilio: true },
     step: {
       ' $refType': $refType,
       votesMin: null,
@@ -177,9 +169,7 @@ describe('<ProposalVoteBasketWidget />', () => {
           title: 'global.consultation',
         },
       },
-      isProposalSmsVoteEnabled: true,
     },
-    isAuthenticated: false,
     votesPageUrl: 'http//capco.dev/votes',
     image: 'http://capco.dev/images.png',
     relay,

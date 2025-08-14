@@ -3,9 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ReplyVoter;
@@ -34,15 +32,13 @@ class DeleteRepliesMutation implements MutationInterface
         );
 
         foreach ($decodedReplyIds as $decodedReplyId) {
-            $this->indexer->remove(AbstractReply::class, $decodedReplyId);
+            $this->indexer->remove(Reply::class, $decodedReplyId);
         }
         $this->indexer->finishBulk();
 
         $replyEntity = Reply::class;
-        $replyAnonEntity = ReplyAnonymous::class;
 
         $this->deleteReply($replyEntity, $decodedReplyIds);
-        $this->deleteReply($replyAnonEntity, $decodedReplyIds);
 
         return ['replyIds' => $replyIds];
     }

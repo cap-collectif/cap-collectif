@@ -265,28 +265,14 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "username",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
                                         "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -313,6 +299,27 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                           },
                                         ],
                                         "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "username",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
                                       },
                                     ],
                                     "storageKey": null,
@@ -645,27 +652,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "username",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
                                         "name": "displayName",
                                         "storageKey": null,
                                       },
@@ -698,8 +684,36 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "username",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
                                         "name": "vip",
                                         "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
                                       },
                                     ],
                                     "storageKey": null,
@@ -901,7 +915,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "c4c23c0b50ad3c2d9a8bf085eacbaa7f",
+            "cacheID": "7bc28a835a9fb3cb970b9164ef327bd9",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashProposalQuery",
@@ -962,7 +976,7 @@ fragment ProposalFollowButton_proposal_39ngnn on Proposal {
   viewerFollowingConfiguration @include(if: $isAuthenticated)
 }
 
-fragment ProposalPreviewBody_proposal_4died5 on Proposal {
+fragment ProposalPreviewBody_proposal_26Htv1 on Proposal {
   isArchived
   id
   slug
@@ -1043,7 +1057,7 @@ fragment ProposalPreviewUser_proposal on Proposal {
   }
 }
 
-fragment ProposalPreview_proposal_4died5 on Proposal {
+fragment ProposalPreview_proposal_26Htv1 on Proposal {
   id
   media {
     url
@@ -1067,7 +1081,7 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
   }
   isArchived
   ...ProposalPreviewFooter_proposal_2tPna9
-  ...ProposalPreviewBody_proposal_4died5
+  ...ProposalPreviewBody_proposal_26Htv1
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 
@@ -1078,7 +1092,7 @@ fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
     edges {
       node {
         id
-        ...ProposalPreview_proposal_4died5
+        ...ProposalPreview_proposal_26Htv1
         __typename
       }
       cursor
@@ -1107,8 +1121,11 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }

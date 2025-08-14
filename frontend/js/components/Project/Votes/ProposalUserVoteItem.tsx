@@ -8,48 +8,30 @@ import moment from 'moment'
 import { ButtonQuickAction, Popover, Button, CapUIIcon } from '@cap-collectif/ui'
 import toggle from '../../Form/Toggle'
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel'
-import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql'
-import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql'
+import type { ProposalUserVoteItem_vote$data } from '~relay/ProposalUserVoteItem_vote.graphql'
+import type { ProposalUserVoteItem_step$data } from '~relay/ProposalUserVoteItem_step.graphql'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import { VoteItemContainer } from './ProposalsUserVotes.style'
 
 type Props = {
-  vote: ProposalUserVoteItem_vote
-  step: ProposalUserVoteItem_step
+  vote: ProposalUserVoteItem_vote$data
+  step: ProposalUserVoteItem_step$data
   isVoteVisibilityPublic: boolean
   intl: IntlShape
   onDelete: (() => void) | null | undefined
   member: string
-  smsVoteEnabled: boolean
   isAuthenticated: boolean
 }
 export const ProposalUserVoteItem = ({
-  isVoteVisibilityPublic,
-  onDelete,
-  member,
-  step,
-  intl,
-  vote,
-  smsVoteEnabled,
-  isAuthenticated,
-}: Props) => {
+                                       isVoteVisibilityPublic,
+                                       onDelete,
+                                       member,
+                                       step,
+                                       intl,
+                                       vote,
+                                       isAuthenticated,
+                                     }: Props) => {
   const { proposal } = vote
-
-  const colTitleWidth = () => {
-    if (step.votesRanking === true && step.voteType === 'BUDGET') {
-      return 6
-    }
-
-    if (step.votesRanking === true) {
-      return 8
-    }
-
-    if (step.voteType === 'BUDGET') {
-      return 7
-    }
-
-    return 9
-  }
 
   const getTitle = title => {
     const windowWidth = window.innerWidth
@@ -76,10 +58,9 @@ export const ProposalUserVoteItem = ({
     })
   }
 
-  const showPrivateToggle = !(smsVoteEnabled && !isAuthenticated)
   return (
     <VoteItemContainer id={`vote-step${step.id}-proposal${proposal.id}`}>
-      <Col md={colTitleWidth()} sm={12} xs={12}>
+      <Col>
         <div>
           <div>
             <a href={proposal.url} className="proposals-user-votes__title">
@@ -103,7 +84,7 @@ export const ProposalUserVoteItem = ({
                 }
               />
             )}
-            {!vote?.published && (
+            {!vote?.published && isAuthenticated && (
               <div>
                 <UnpublishedLabel publishable={vote} />
               </div>
@@ -123,25 +104,23 @@ export const ProposalUserVoteItem = ({
           </div>
         </Col>
       )}
-      {showPrivateToggle && (
-        <Col id={`${proposal.id}-proposal-vote__private`} md={onDelete ? 2 : 3} sm={12} xs={12}>
-          <div>
-            <div className="toggle-group">
-              <Field
-                labelSide="RIGHT"
-                component={toggle}
-                label={getToggleLabel()}
-                roledescription={intl.formatMessage({
-                  id: 'vote-toggle-aria-roledescription',
-                })}
-                name={`${member}.public`}
-                normalize={val => !!val}
-                id={`${proposal.id}-proposal-vote__private-toggle`}
-              />
-            </div>
+      <Col id={`${proposal.id}-proposal-vote__private`}>
+        <div>
+          <div className="toggle-group">
+            <Field
+              labelSide="RIGHT"
+              component={toggle}
+              label={getToggleLabel()}
+              roledescription={intl.formatMessage({
+                id: 'vote-toggle-aria-roledescription',
+              })}
+              name={`${member}.public`}
+              normalize={val => !!val}
+              id={`${proposal.id}-proposal-vote__private-toggle`}
+            />
           </div>
-        </Col>
-      )}
+        </div>
+      </Col>
       {onDelete && (
         <Col md={1} className="proposal-vote__delete-container">
           <Popover
@@ -157,11 +136,11 @@ export const ProposalUserVoteItem = ({
                 label={intl.formatMessage(
                   isInterpellationContextFromStep(step)
                     ? {
-                        id: 'aria.label.delete-support',
-                      }
+                      id: 'aria.label.delete-support',
+                    }
                     : {
-                        id: 'aria-label-delete-vote',
-                      },
+                      id: 'aria-label-delete-vote',
+                    },
                 )}
                 icon={CapUIIcon.Trash}
                 id={`${proposal.id}-proposal-vote__private-delete`}
@@ -219,25 +198,27 @@ export const ProposalUserVoteItem = ({
 const container = injectIntl(ProposalUserVoteItem)
 export default createFragmentContainer(container, {
   vote: graphql`
-    fragment ProposalUserVoteItem_vote on ProposalVote {
-      ...UnpublishedLabel_publishable
-      createdAt
-      published
-      proposal {
-        id
-        title
-        url
-        estimation
+      fragment ProposalUserVoteItem_vote on ProposalVote {
+          ...UnpublishedLabel_publishable
+          ... on ProposalVote {
+              published
+              createdAt
+          }
+          proposal {
+              id
+              title
+              url
+              estimation
+          }
       }
-    }
   `,
   step: graphql`
-    fragment ProposalUserVoteItem_step on ProposalStep {
-      id
-      open
-      voteType
-      votesRanking
-      ...interpellationLabelHelper_step @relay(mask: false)
-    }
+      fragment ProposalUserVoteItem_step on ProposalStep {
+          id
+          open
+          voteType
+          votesRanking
+          ...interpellationLabelHelper_step @relay(mask: false)
+      }
   `,
 })

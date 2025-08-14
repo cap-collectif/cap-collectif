@@ -1,28 +1,29 @@
 Capco\AppBundle\Entity\Participant:
     participant1:
         id: 'participant1'
-        firstname: Laurent
-        lastname: Brunet
-        email: lbrunet@cap-collectif.com
-        phone: '+3300000000'
+        firstname: Participant1 firstname
+        lastname: Participant1 lastname
+        email: participant1@cap-collectif.com
+        phone: '+33602020202'
         postalAddress: '[{"address_components": [{ "long_name": "10", "short_name": "10", "types": ["street_number"] },{ "long_name": "Rue de la Savate", "short_name": "Rue de la Savate", "types": ["route"] },{ "long_name": "Awans", "short_name": "Awans", "types": ["locality", "political"] },{ "long_name": "Liège", "short_name": "LG", "types": ["administrative_area_level_2", "political"] },{ "long_name": "Région Wallonne", "short_name": "Région Wallonne", "types": ["administrative_area_level_1", "political"] },{ "long_name": "Belgium", "short_name": "BE", "types": ["country", "political"] },{ "long_name": "4340", "short_name": "4340", "types": ["postal_code"] }],"formatted_address": "Rue de la Savate 10, 4340 Awans, Belgium","geometry": {"location": { "lat": 50.7228035, "lng": 5.464624 },"location_type": "ROOFTOP","viewport": {"south": 50.7214585197085,"west": 5.463225469708497,"north": 50.72415648029149,"east": 5.465923430291502}},"place_id": "ChIJ1T224zPjwEcR1kNhE8iPg_k","plus_code": { "compound_code": "PFF7+4R Awans, Belgium", "global_code": "9F27PFF7+4R" },"types": ["street_address"]}]'
         zipCode: '75018'
         dateOfBirth: <(new \DateTime('2023-02-01'))>
         phoneConfirmed: true
         token: 'fakeToken1'
-        replies: ['@reply1']
+        locale: 'fr-FR'
+        replies: []
         votes: []
         user: '@user1'
         createdAt: <identity((new \DateTime('2020-01-14')))>
     participant2:
         id: 'participant2'
-        firstname: Suzanne
-        lastname: Favot
-        email: sfavot@cap-collectif.com
+        firstname: Participant2 firstname
+        lastname: Participant2 lastname
+        email: participant2@cap-collectif.com
         zipCode: '75015'
         dateOfBirth: <(new \DateTime('2023-03-01'))>
         token: 'fakeToken2'
-        replies: ['@reply1', '@reply2']
+        replies: ['@replyAnonymous2']
         votes: ['@proposalSelectionVote1', '@proposalSelectionVote53']
         user: '@user2'
         createdAt: <identity((new \DateTime('2021-01-14')))>

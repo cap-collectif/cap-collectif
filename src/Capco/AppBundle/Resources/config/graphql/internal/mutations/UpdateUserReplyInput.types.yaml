@@ -16,3 +16,5 @@ UpdateUserReplyInput:
                 type: 'Boolean!'
                 description: 'If true will create a draft reply.'
                 defaultValue: false
+            errorCode:
+                type: 'UpdateUserReplyErrorCode'

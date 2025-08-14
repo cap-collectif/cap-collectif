@@ -6,4 +6,10 @@ AddUserReplyErrorCode:
         values:
             REQUIREMENTS_NOT_MET:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\AddUserReplyMutation::REQUIREMENTS_NOT_MET
-                description: 'the viewer does not meet requirements'
+                description: 'The viewer does not meet requirements'
+            CONTRIBUTION_NOT_ALLOWED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddUserReplyMutation::CONTRIBUTION_NOT_ALLOWED
+                description: 'A participant with the same email as the logged in user already participated in this questionnaire.'
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ReplyMutation::PHONE_ALREADY_USED
+                description: 'The phone is already used by another participant / user.'

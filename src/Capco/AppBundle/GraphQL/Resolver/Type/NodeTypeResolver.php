@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
@@ -30,10 +29,13 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -223,7 +225,7 @@ class NodeTypeResolver implements QueryInterface
             return $this->typeResolver->resolve('InternalEvent');
         }
 
-        if ($node instanceof AbstractReply) {
+        if ($node instanceof Reply) {
             return $this->replyTypeResolver->__invoke($node);
         }
 
@@ -328,6 +330,10 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof UserType) {
             return $this->typeResolver->resolve('UserType');
+        }
+
+        if ($node instanceof ProposalSelectionVote || $node instanceof ProposalCollectVote) {
+            return $this->typeResolver->resolve('InternalProposalVote');
         }
 
         if ($node instanceof SectionCarrouselElement) {

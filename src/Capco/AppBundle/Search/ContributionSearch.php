@@ -13,8 +13,8 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
 use Capco\AppBundle\Enum\OrderDirection;
@@ -340,6 +340,34 @@ class ContributionSearch extends Search
         return $order;
     }
 
+    /**
+     * With new participation workflow we improve contributors counter by ignoring contributors which did not complete their votes
+     * So we added a isCreatedBeforeWorkflow to keep track of votes that are created after the workflow
+     * and only apply the isAccounted => true filter
+     * For votes created before we do not apply the filter to keep existing counters.
+     */
+    public function addIsAccountedFilter(BoolQuery $query): void
+    {
+        $voteIsAccountedBoolQuery = (new BoolQuery())
+            ->addFilter(new Term(['objectType' => ['value' => 'vote']]))
+            ->addFilter(new Term(['isCreatedBeforeWorkflow' => ['value' => false]]))
+            ->addFilter(new Term(['isAccounted' => ['value' => true]]))
+        ;
+
+        $voteNotAccountedBoolQuery = (new BoolQuery())
+            ->addFilter(new Term(['objectType' => ['value' => 'vote']]))
+            ->addFilter(new Term(['isCreatedBeforeWorkflow' => ['value' => true]]))
+        ;
+
+        $otherContributionsBoolQuery = (new BoolQuery())->addMustNot(new Term(['objectType' => ['value' => 'vote']]));
+
+        $query->addShould($voteIsAccountedBoolQuery);
+        $query->addShould($voteNotAccountedBoolQuery);
+        $query->addShould($otherContributionsBoolQuery);
+
+        $query->setMinimumShouldMatch(1);
+    }
+
     private function getQueryOrderedResults(ResultSet $response): ElasticsearchPaginatedResult
     {
         // Re-order results back in the order given by doctrine
@@ -403,7 +431,10 @@ class ContributionSearch extends Search
             ->addMustNot(new Query\Term(['published' => ['value' => false]]))
             ->addMustNot(new Query\Exists('comment'))
             ->addMustNot(new Query\Term(['draft' => ['value' => true]]))
+            ->addMustNot(new Query\Term(['completionStatus' => ['value' => ContributionCompletionStatus::MISSING_REQUIREMENTS]]))
         ;
+
+        $this->addIsAccountedFilter($query);
 
         if (!$includeTrashed) {
             $query->addMustNot(new Query\Exists('trashedAt'));
@@ -421,7 +452,6 @@ class ContributionSearch extends Search
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
             Reply::getElasticsearchTypeName(),
-            ReplyAnonymous::getElasticsearchTypeName(),
         ];
 
         if (!$inConsultation) {

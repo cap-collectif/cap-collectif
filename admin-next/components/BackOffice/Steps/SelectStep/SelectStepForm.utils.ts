@@ -55,7 +55,6 @@ export const getDefaultValues = (
     secretBallot: step?.isSecretBallot,
     publishedVoteDate: step?.publishedVoteDate,
     votesHelpText: step?.votesHelpText,
-    isProposalSmsVoteEnabled: step.isProposalSmsVoteEnabled,
     proposalArchivedTime: step.proposalArchivedTime,
     proposalArchivedUnitTime: step.proposalArchivedUnitTime,
     // @ts-ignore relay lookup

@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -52,9 +53,7 @@ class PersonalDataFormType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('phone', TelType::class, [
-                'constraints' => [new CheckPhoneNumber([
-                    'stepId' => $options['stepId'],
-                ])],
+                'constraints' => [new CheckPhoneNumber()],
             ])
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')
@@ -65,7 +64,11 @@ class PersonalDataFormType extends AbstractType
             ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())])
             ->add('userIdentificationCode', EntityType::class, [
                 'class' => UserIdentificationCode::class,
+                'invalid_message' => CheckIdentificationCode::BAD_CODE,
+                'constraints' => [new CheckIdentificationCode()],
             ])
+            ->add('consentInternalCommunication')
+            ->add('consentPrivacyPolicy')
         ;
     }
 
@@ -77,7 +80,6 @@ class PersonalDataFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'csrf_protection' => false,
-            'stepId' => null,
         ]);
     }
 }

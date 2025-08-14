@@ -1,0 +1,10 @@
+SendParticipantConsentInternalCommunicationEmailInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            participantToken:
+                type: 'String'
+                description: 'The Participant Token.'
+            email:
+                type: 'Email!'
+                description: 'The Participant email.'

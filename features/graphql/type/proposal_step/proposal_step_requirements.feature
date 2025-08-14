@@ -57,6 +57,12 @@ Scenario: User wants to see requirements to vote in a proposal step
                     {
                         "node": {
                             "viewerMeetsTheRequirement": true,
+                            "viewerValue": "+33635492871"
+                        }
+                    },
+                    {
+                        "node": {
+                            "viewerMeetsTheRequirement": true,
                             "viewerValue": "Utilisateur"
                         }
                     },
@@ -64,12 +70,6 @@ Scenario: User wants to see requirements to vote in a proposal step
                         "node": {
                             "viewerMeetsTheRequirement": true,
                             "viewerValue": "authentifier"
-                        }
-                    },
-                    {
-                        "node": {
-                            "viewerMeetsTheRequirement": true,
-                            "viewerValue": "+33635492871"
                         }
                     },
                     {

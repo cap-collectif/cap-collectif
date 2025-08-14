@@ -25,7 +25,7 @@ describe('Public|Query.viewer', () => {
   });
 
   it('can not access if not authenticated', async () => {
-    await expect(graphql(ViewerQuery, null, 'anonymous')).rejects.toMatchSnapshot();
+    await expect(graphql(ViewerQuery, null, 'anonymous')).rejects.toThrowError('Access denied to this field.');
   });
 });
 

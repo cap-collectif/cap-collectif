@@ -2,7 +2,9 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
+use Capco\AppBundle\Enum\SendSMSErrorCode;
 use Capco\AppBundle\Enum\UserPhoneErrors;
+use Capco\AppBundle\Enum\VerifySMSErrorCode;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Helper\TwilioSmsProvider;
 use PhpSpec\ObjectBehavior;
@@ -63,10 +65,10 @@ class TwilioSmsProviderSpec extends ObjectBehavior
             ->willReturn($response)
         ;
 
-        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioSmsProvider::INVALID_NUMBER);
+        $this->sendVerificationSms($this->phone)->shouldReturn(SendSMSErrorCode::INVALID_NUMBER);
     }
 
-    public function it_should_return_TWILIO_API_ERROR(TwilioClient $twilioClient): void
+    public function it_should_return_SERVER_ERROR(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 500];
         $twilioClient
@@ -75,7 +77,7 @@ class TwilioSmsProviderSpec extends ObjectBehavior
             ->willReturn($response)
         ;
 
-        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioSmsProvider::TWILIO_API_ERROR);
+        $this->sendVerificationSms($this->phone)->shouldReturn(SendSMSErrorCode::SERVER_ERROR);
     }
 
     public function it_should_verify_sms_correctly(TwilioClient $twilioClient): void
@@ -97,7 +99,7 @@ class TwilioSmsProviderSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($response)
         ;
-        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioSmsProvider::CODE_EXPIRED);
+        $this->verifySms($this->phone, $this->code)->shouldReturn(VerifySMSErrorCode::CODE_EXPIRED);
     }
 
     public function it_should_return_CODE_NOT_VALID(TwilioClient $twilioClient): void
@@ -108,6 +110,6 @@ class TwilioSmsProviderSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($response)
         ;
-        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioSmsProvider::CODE_NOT_VALID);
+        $this->verifySms($this->phone, $this->code)->shouldReturn(VerifySMSErrorCode::CODE_NOT_VALID);
     }
 }

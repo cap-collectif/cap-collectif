@@ -7,6 +7,8 @@ use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
@@ -34,8 +36,20 @@ class AllRequirementsResolver implements QueryInterface
                 return $this->isPhoneVerfiedAllowed($step);
             }
 
+            if (Requirement::EMAIL_VERIFIED === $requirement->getType() && $this->isSSOEnabled()) {
+                return false;
+            }
+
             if (Requirement::FRANCE_CONNECT === $requirement->getType()) {
                 return $this->isFranceConnectAllowed();
+            }
+
+            if (($step instanceof QuestionnaireStep || $step instanceof ProposalStepInterface) && Requirement::SSO === $requirement->getType()) {
+                return $this->isSSOEnabled();
+            }
+
+            if ((!$step instanceof QuestionnaireStep && !$step instanceof ProposalStepInterface) && \in_array($requirement->getType(), [Requirement::EMAIL_VERIFIED, Requirement::ZIP_CODE, Requirement::SSO])) {
+                return false;
             }
 
             return true;
@@ -50,18 +64,27 @@ class AllRequirementsResolver implements QueryInterface
 
     private function isPhoneVerfiedAllowed(AbstractStep $step): bool
     {
-        $isProposalStep = $step instanceof CollectStep || $step instanceof SelectionStep;
-        $twilioEnabled = $this->manager->isActive(Manager::twilio);
+        $isStepCompatible = $step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep;
 
-        if (!$isProposalStep) {
+        if (!$isStepCompatible) {
             return false;
         }
+
+        $twilioEnabled = $this->manager->isActive(Manager::twilio);
 
         if (!$twilioEnabled) {
             return false;
         }
 
         return true;
+    }
+
+    private function isSSOEnabled(): bool
+    {
+        $ssoByPassAuthEnabled = $this->manager->isActive(Manager::sso_by_pass_auth);
+        $ssoList = array_filter($this->abstractSSOConfigurationRepository->getPublicList(), fn ($requirement) => 'franceconnect' !== $requirement['ssoType']);
+
+        return !empty($ssoList) && $ssoByPassAuthEnabled;
     }
 
     private function isFranceConnectAllowed(): bool

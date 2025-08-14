@@ -679,17 +679,7 @@ describe('mutations.changeProposalContentMutation', () => {
       )
     ).resolves.toMatchSnapshot();
   });
-  it('tries to update and published a draft proposal as userNotConfirmedWithContributions', async () => {
-    await global.enableFeatureFlag('districts');
-    await global.enableFeatureFlag('themes');
-    await expect(
-      graphql(
-        ChangeProposalContentDraftUserNotConfirmedMutation,
-        { input: inputDraftUserNotConfirmed },
-        notConfirmedUserClient,
-      )
-    ).resolves.toMatchSnapshot();
-  });
+;
   it('tries to update his proposal in revision as pierre', async () => {
     await global.enableFeatureFlag('districts');
     await global.enableFeatureFlag('themes');

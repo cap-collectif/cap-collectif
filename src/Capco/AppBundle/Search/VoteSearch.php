@@ -452,6 +452,7 @@ class VoteSearch extends Search
             $searchQuery = $this->index->createSearch($query);
             $this->addObjectTypeFilter($query, $this->type);
             $query->setTrackTotalHits(true);
+//            dd(json_encode($query->toArray()));
             $searchQuery->setQuery($query);
             $globalQuery->addSearch($searchQuery);
         }

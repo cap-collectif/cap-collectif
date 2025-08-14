@@ -1,0 +1,65 @@
+InternalReply:
+    type: object
+    inherits:
+        - PreviewReply
+        - Deletable
+        - Draftable
+        - Updatable
+        - Contribution
+        - UniformResourceLocatable
+    config:
+        name: Reply
+        interfaces:
+            - PublicPublishable
+            - Contribution
+            - Draftable
+        description: 'Represents a user answer to a questionnaire.'
+        fields:
+            responses:
+                type: '[InternalResponse]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
+                description: 'The responses of the reply.'
+            questionnaire:
+                type: 'InternalQuestionnaire!'
+                description: 'Identifies the form where the contribution was submitted.'
+            url:
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", value)'
+                description: 'The url of the reply.'
+            adminUrl:
+                type: 'URI'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyAdminUrlResolver", value)'
+                description: 'The admin url of the reply.'
+            status:
+                type: 'ReplyStatus'
+                description: 'The status of the reply.'
+            author:
+                type: 'InternalUser'
+                description: 'The author of the Reply.'
+            contributor:
+                type: 'InternalContributor!'
+                description: 'The author or participant of the Reply.'
+                resolve: '@=value.getContributor()'
+            viewerCanUpdate:
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", value, getUser())'
+                description: 'Whether or not the current viewer can update the reply.'
+            viewerCanDelete:
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", value, getUser())'
+                description: 'Whether or not the current viewer can delete the reply.'
+            private:
+                type: 'Boolean!'
+                description: 'Whether or not the reply is private.'
+            publicationStatus:
+                type: 'ReplyPublicationStatus!'
+                description: 'The reply status.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", value)'
+            isAnonymous:
+                type: 'Boolean!'
+                description: 'Wether or not the reply is created by an authenticated user'
+                resolve: '@=value.isAnonymous()'
+            requirementsUrl:
+                type: 'URI'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\RequirementsUrlResolver", value)'
+                description: 'The url to the requirements workflow.'
+            completionStatus:
+                type: 'ContributionCompletionStatus!'
+                description: 'The contribution status wether or not the participant/user has meet all requirements'

@@ -21,8 +21,6 @@ class ProjectEmailableContributorsResolver implements QueryInterface
     private const SQL_FROM_PAS = 'FROM project_abstractstep ';
     private const SQL_JOIN_STEP =
         self::SQL_FROM_PAS . 'JOIN step ON step.id = project_abstractstep.step_id ';
-    private const SQL_JOIN_QUESTIONNAIRE =
-        self::SQL_JOIN_STEP . 'JOIN questionnaire ON questionnaire.step_id = step.id ';
     private const SQL_JOIN_CONSULTATION =
         self::SQL_JOIN_STEP . 'JOIN consultation ON consultation.step_id = step.id ';
     private const SQL_JOIN_OPINION =
@@ -37,11 +35,17 @@ class ProjectEmailableContributorsResolver implements QueryInterface
         self::SQL_JOIN_STEP . 'JOIN debate ON debate.step_id = step.id ';
 
     private const SQL_CONTRIBUTORS_REPLY =
-        self::SQL_SELECT_USER .
-        self::SQL_JOIN_QUESTIONNAIRE .
-        'JOIN reply ON reply.questionnaire_id = questionnaire.id ' .
-        'JOIN fos_user u ON u.id = reply.author_id ' .
-        self::SQL_FILTER_USER;
+        "SELECT IFNULL(u.username, p.username) AS username, IFNULL(u.email, p.email) AS email, pas.project_id, null as token
+        FROM project_abstractstep pas
+        JOIN step s on s.id = pas.step_id
+        JOIN questionnaire q on q.step_id = s.id
+        JOIN reply r on r.questionnaire_id = q.id
+        LEFT JOIN fos_user u ON r.author_id = u.id
+        LEFT JOIN participant p ON r.participant_id = p.id
+        WHERE pas.project_id = :projectId AND r.completion_status = 'COMPLETED'
+        AND (u.confirmation_token IS NULL OR p.confirmation_token IS NULL)
+        AND (u.consent_internal_communication = :consent OR p.consent_internal_communication = :consent)";
+
     private const SQL_CONTRIBUTORS_OPINION =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_OPINION .
@@ -82,16 +86,34 @@ class ProjectEmailableContributorsResolver implements QueryInterface
         'JOIN votes ON votes.debate_id = debate.id ' .
         'JOIN fos_user u ON u.id = votes.voter_id ' .
         self::SQL_FILTER_USER;
-    private const SQL_ANONYMOUS_REPLY =
-        'SELECT null as username, reply_anonymous.participant_email as email, project_abstractstep.project_id, token ' .
-        self::SQL_JOIN_QUESTIONNAIRE .
-        'JOIN reply_anonymous on reply_anonymous.questionnaire_id = questionnaire.id ' .
-        'WHERE reply_anonymous.participant_email IS NOT NULL AND email_confirmed = :consent ';
     private const SQL_ANONYMOUS_DEBATE_ARGUMENT =
         'SELECT null as username, email, project_abstractstep.project_id, token ' .
         self::SQL_JOIN_DEBATE .
         'JOIN debate_anonymous_argument ON debate_anonymous_argument.debate_id = debate.id ' .
         'WHERE consent_internal_communication = :consent ';
+    private const SQL_COLLECT_STEP_VOTES =
+        "SELECT IFNULL(u.username, p.username) AS username, IFNULL(u.email, p.email) AS email, pas.project_id, null as token
+        FROM project_abstractstep pas
+        JOIN step s on s.id = pas.step_id
+        JOIN votes v ON v.collect_step_id = pas.step_id
+        LEFT JOIN fos_user u ON v.voter_id = u.id
+        LEFT JOIN participant p ON v.participant_id = p.id
+        WHERE pas.project_id = :projectId
+        AND (v.completion_status = 'COMPLETED' AND v.is_accounted = 1)
+        AND (u.confirmation_token IS NULL OR p.confirmation_token IS NULL)
+        AND (u.consent_internal_communication = :consent OR p.consent_internal_communication = :consent)";
+
+    private const SQL_SELECTION_STEP_VOTES =
+        "SELECT IFNULL(u.username, p.username) AS username, IFNULL(u.email, p.email) AS email, pas.project_id, null as token
+        FROM project_abstractstep pas
+        JOIN step s on s.id = pas.step_id
+        JOIN votes v ON v.selection_step_id = pas.step_id
+        LEFT JOIN fos_user u ON v.voter_id = u.id
+        LEFT JOIN participant p ON v.participant_id = p.id
+        WHERE pas.project_id = :projectId
+        AND (v.completion_status = 'COMPLETED' AND v.is_accounted = 1)
+        AND (u.confirmation_token IS NULL OR p.confirmation_token IS NULL)
+        AND (u.consent_internal_communication = :consent OR p.consent_internal_communication = :consent)";
 
     private const SQL_UNION =
         '(' .
@@ -111,9 +133,11 @@ class ProjectEmailableContributorsResolver implements QueryInterface
         'UNION ' .
         self::SQL_CONTRIBUTORS_DEBATE_VOTE .
         'UNION ' .
-        self::SQL_ANONYMOUS_REPLY .
-        'UNION ' .
         self::SQL_ANONYMOUS_DEBATE_ARGUMENT .
+        'UNION ' .
+        self::SQL_COLLECT_STEP_VOTES .
+        'UNION ' .
+        self::SQL_SELECTION_STEP_VOTES .
         ')';
 
     public function __construct(private readonly EntityManagerInterface $em)

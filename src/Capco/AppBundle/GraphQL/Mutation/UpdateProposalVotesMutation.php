@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -25,8 +26,18 @@ class UpdateProposalVotesMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly AbstractStepRepository $stepRepo, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly Indexer $indexer, private readonly ConnectionBuilderInterface $connectionBuilder)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly AbstractStepRepository $stepRepo,
+        private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        private readonly Indexer $indexer,
+        private readonly ConnectionBuilderInterface $connectionBuilder
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -38,6 +49,10 @@ class UpdateProposalVotesMutation implements MutationInterface
             throw new UserError(sprintf('Unknown step with id "%s"', $stepId));
         }
         $votesInput = $input->offsetGet('votes');
+
+        if ($this->em->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->em->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
 
         if ($step instanceof SelectionStep) {
             $votes = $this->proposalSelectionVoteRepository

@@ -41,6 +41,8 @@ export const VoteItemContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 
   .col-md-8,
   .col-md-3 {

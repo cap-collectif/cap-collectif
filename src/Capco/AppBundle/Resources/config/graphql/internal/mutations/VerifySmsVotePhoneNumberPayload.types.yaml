@@ -1,9 +1,0 @@
-VerifySmsVotePhoneNumberPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            errorCode:
-                type: 'VerifySmsVotePhoneNumberErrorCode'
-            token:
-                type: 'String'
-                description: 'The returned token to authenticate the user.'

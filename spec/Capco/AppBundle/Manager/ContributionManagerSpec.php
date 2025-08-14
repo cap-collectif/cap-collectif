@@ -42,30 +42,33 @@ class ContributionManagerSpec extends ObjectBehavior
         Source $source,
         Reply $reply
     ) {
+        $vote->getId()->willReturn(null);
+        $vote->getStep()->willReturn(null);
+        $vote->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($vote);
         $proposal->getStep()->willReturn(null);
         $proposal->getId()->willReturn('proposal1');
-        $proposal->setPublishedAt(Arg::any())->shouldBeCalled();
+        $proposal->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($proposal);
         $opinion->getStep()->willReturn(null);
         $opinion->getId()->willReturn('opinion1');
-        $opinion->setPublishedAt(Arg::any())->shouldBeCalled();
+        $opinion->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($opinion);
         $version->getStep()->willReturn(null);
         $version->getId()->willReturn('version1');
-        $version->setPublishedAt(Arg::any())->shouldBeCalled();
+        $version->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($version);
         $comment->getStep()->willReturn(null);
         $comment->getId()->willReturn('opinion1');
-        $comment->setPublishedAt(Arg::any())->shouldBeCalled();
+        $comment->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($comment);
         $argument->getStep()->willReturn(null);
         $argument->getId()->willReturn('argument1');
-        $argument->setPublishedAt(Arg::any())->shouldBeCalled();
+        $argument->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($argument);
         $debateArgument->getStep()->willReturn(null);
         $debateArgument->getId()->willReturn('debateArgument1');
-        $debateArgument->setPublishedAt(Arg::any())->shouldBeCalled();
+        $debateArgument->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($debateArgument);
         $source->getStep()->willReturn(null);
         $source->getId()->willReturn('source1');
-        $source->setPublishedAt(Arg::any())->shouldBeCalled();
+        $source->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($source);
         $reply->getStep()->willReturn(null);
         $reply->getId()->willReturn('reply1');
-        $reply->setPublishedAt(Arg::any())->shouldBeCalled();
+        $reply->setPublishedAt(Arg::any())->shouldBeCalled()->willReturn($reply);
 
         $user
             ->getContributions()

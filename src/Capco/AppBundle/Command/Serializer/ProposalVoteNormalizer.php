@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Command\Serializer;
 
-use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -30,10 +28,7 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
      */
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        $isProposalVote = $data instanceof ProposalCollectVote
-            || $data instanceof ProposalSelectionVote
-            || $data instanceof ProposalCollectSmsVote
-            || $data instanceof ProposalSelectionSmsVote;
+        $isProposalVote = $data instanceof ProposalCollectVote || $data instanceof ProposalSelectionVote;
 
         return isset($context[self::IS_EXPORT_NORMALIZER]) && $isProposalVote && !isset($context['groups']);
     }
@@ -43,8 +38,8 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
         $fullExportData = [];
         $isFullExport = $context['is_full_export'] ?? false;
 
-        /** @var ProposalCollectSmsVote|ProposalCollectVote|ProposalSelectionSmsVote|ProposalSelectionVote $object */
-        $isPrivate = $object instanceof ProposalSelectionSmsVote || $object instanceof ProposalCollectSmsVote || $object->isPrivate();
+        /** @var ProposalCollectVote|ProposalSelectionVote $object */
+        $isPrivate = $object->isPrivate();
 
         /** @var null|User $author */
         $author = $object->getAuthor();

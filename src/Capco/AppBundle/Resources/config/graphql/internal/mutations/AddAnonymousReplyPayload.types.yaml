@@ -3,14 +3,17 @@ AddAnonymousReplyPayload:
     config:
         fields:
             reply:
-                type: 'InternalAnonymousReply'
+                type: 'InternalReply'
                 description: 'The created reply'
             questionnaire:
                 type: 'InternalQuestionnaire'
                 description: 'The associated questionnaire'
-            token:
+            participantToken:
                 type: 'String'
-                description: 'The reply token'
+                description: 'The token of the participant'
             errorCode:
                 type: 'AddAnonymousReplyErrorCode'
                 description: 'An error'
+            shouldTriggerConsentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not it should trigger consent internal communication modal.'

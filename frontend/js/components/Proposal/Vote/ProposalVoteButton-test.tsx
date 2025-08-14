@@ -44,7 +44,7 @@ describe('<ProposalVoteButton />', () => {
         ...ProposalVoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $id)
       }
       step: node(id: $id) {
-        ...ProposalVoteButton_step
+        ...ProposalVoteButton_step @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   `

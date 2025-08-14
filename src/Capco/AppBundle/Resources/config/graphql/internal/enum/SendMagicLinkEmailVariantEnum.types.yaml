@@ -1,0 +1,12 @@
+SendMagicLinkEmailVariantEnum:
+    type: enum
+    config:
+        name: SendMagicLinkEmailVariantEnum
+        description: 'Available email template variants for an `sendMagicLinkEmail` mutation.'
+        values:
+            DEFAULT:
+                value: !php/const Capco\AppBundle\Service\ParticipationWorkflow\MagicLinkEmailSender::DEFAULT
+                description: 'The default template when user request a magic link.'
+            ACCOUNT_DETECTED:
+                value: !php/const Capco\AppBundle\Service\ParticipationWorkflow\MagicLinkEmailSender::ACCOUNT_DETECTED
+                description: 'The template when we detect that there is an existing user with the given email.'

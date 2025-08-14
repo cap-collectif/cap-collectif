@@ -51,10 +51,12 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
-          {participant.__typename === 'User' && <a href={adminUrl ?? url}>{translateContent(username)}</a>}
-          {participant.__typename === 'Participant' ? (
-            <Text fontWeight={600}>{intl.formatMessage({ id: 'accompanied-participants' })}</Text>
-          ) : null}
+          {
+              participant.__typename === 'User' && (<a href={adminUrl ?? url}>{translateContent(username)}</a>)
+          }
+          {
+            (participant.__typename === 'Participant') ? <Text fontWeight={600}>{intl.formatMessage({ id: 'no-account-user' })}</Text> : null
+          }
           {vip && !hasAccountDeleted && (
             <Tooltip
               placement="top"
@@ -197,9 +199,11 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
       firstname
       lastname
       email
+      consentInternalCommunication
       votes(contribuableId: $contribuableId) {
         totalCount
       }
+      ...UserAvatar_user
       ... on User {
         username
         adminUrl @include(if: $viewerIsAdmin)
@@ -207,7 +211,6 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
         lastLogin
         vip
         isEmailConfirmed
-        consentInternalCommunication
         userType {
           id
           name
@@ -215,7 +218,6 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
         contributions(contribuableId: $contribuableId, includeTrashed: true) {
           totalCount
         }
-        ...UserAvatar_user
       }
     }
   `,

@@ -206,41 +206,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "username",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "condition": "isAuthenticated",
-                                        "kind": "Condition",
-                                        "passingValue": true,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "isViewer",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
                                         "name": "vip",
                                         "storageKey": null,
                                       },
@@ -287,6 +252,13 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
                                         "name": "isAdmin",
                                         "storageKey": null,
                                       },
@@ -296,6 +268,41 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "kind": "ScalarField",
                                         "name": "slug",
                                         "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "username",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "isViewer",
+                                            "storageKey": null,
+                                          },
+                                        ],
                                       },
                                     ],
                                     "storageKey": null,
@@ -378,28 +385,14 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                     "alias": null,
                                                     "args": null,
                                                     "kind": "ScalarField",
-                                                    "name": "url",
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "username",
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "avatarUrl",
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
                                                     "name": "id",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "url",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -408,6 +401,34 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                     "kind": "ScalarField",
                                                     "name": "isAdmin",
                                                     "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "slug",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "abstractKey": "__isContributor",
+                                                    "kind": "InlineFragment",
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "username",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "avatarUrl",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
+                                                    "type": "Contributor",
                                                   },
                                                   Object {
                                                     "condition": "isAuthenticated",
@@ -422,13 +443,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "slug",
-                                                    "storageKey": null,
                                                   },
                                                 ],
                                                 "storageKey": null,
@@ -977,7 +991,7 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "26fa97460e2cc8980f36068a5a25e25d",
+            "cacheID": "1acc85bddd391586f75f9e8b3caae95b",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashCommentQuery",
@@ -1159,8 +1173,11 @@ fragment UnpublishedTooltip_publishable on Publishable {
   notPublishedReason
 }
 
-fragment UserAvatar_user on User {
-  url
+fragment UserAvatar_user on Contributor {
+  __isContributor: __typename
+  ... on User {
+    url
+  }
   username
   avatarUrl
 }

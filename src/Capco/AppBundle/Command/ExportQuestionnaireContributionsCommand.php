@@ -8,7 +8,6 @@ use Capco\AppBundle\Command\Service\QuestionnaireContributionExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\QuestionnaireStepRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +27,6 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
     public function __construct(
         ExportUtils $exportUtils,
         private readonly QuestionnaireStepRepository $questionnaireStepRepository,
-        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly QuestionnaireContributionExporter $questionnaireContributionExporter,
         private readonly Stopwatch $stopwatch,
@@ -111,9 +109,8 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
 
             $replies = $questionnaire->getReplies();
-            $repliesAnonymous = $this->replyAnonymousRepository->findBy(['questionnaire' => $questionnaire]);
             $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-                [...$replies, ...$repliesAnonymous],
+                [$replies],
                 $questionnaireStep,
                 'questionnaire-contributions-count',
                 $this->contributionsFilePathResolver

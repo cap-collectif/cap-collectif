@@ -58,7 +58,7 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributions-count"
           >
             16
           </p>
@@ -147,9 +147,9 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributors-count"
           >
-            88
+            4
           </p>
           <p
             className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
@@ -221,7 +221,7 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributions-count"
           >
             16
           </p>
@@ -310,9 +310,9 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributors-count"
           >
-            88
+            4
           </p>
           <p
             className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
@@ -384,7 +384,7 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributions-count"
           >
             16
           </p>
@@ -473,9 +473,9 @@ Array [
         >
           <p
             className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
-            id=""
+            id="contributors-count"
           >
-            88
+            4
           </p>
           <p
             className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"

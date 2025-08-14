@@ -187,7 +187,7 @@ const onSubmit = (
                 ? s.timeless
                 : undefined,
             isAnonymousParticipationAllowed:
-              sTypename === 'DebateStep' || sTypename === 'QuestionnaireStep'
+              sTypename === 'DebateStep'
                 ? s.isAnonymousParticipationAllowed
                 : undefined,
             startAt: s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
@@ -279,8 +279,6 @@ const onSubmit = (
             votable: undefined,
             isBudgetEnabled: undefined,
             isSecretBallotEnabled: undefined,
-            isProposalSmsVoteEnabled:
-              sTypename === 'CollectStep' || sTypename === 'SelectionStep' ? s.isProposalSmsVoteEnabled : undefined,
             isSecretBallot: undefined,
             isTresholdEnabled: undefined,
             isLimitEnabled: undefined,
@@ -480,6 +478,7 @@ export function ProjectAdminForm(props: Props) {
     ...rest
   } = props
   changeTitle(onTitleChange, title)
+
   return (
     <form onSubmit={handleSubmit} id={formName}>
       <ProjectContentAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
@@ -520,10 +519,16 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
                   ? 'DATE_OF_BIRTH'
                   : edge?.node?.type === 'PostalAddressRequirement'
                   ? 'POSTAL_ADDRESS'
+                  : edge?.node?.type === 'EmailVerifiedRequirement'
+                  ? 'EMAIL_VERIFIED'
+                  : edge?.node?.type === 'ZipCodeRequirement'
+                  ? 'ZIP_CODE'
                   : edge?.node?.type === 'IdentificationCodeRequirement'
                   ? 'IDENTIFICATION_CODE'
                   : edge?.node?.type === 'PhoneVerifiedRequirement'
                   ? 'PHONE_VERIFIED'
+                  : edge?.node?.type === 'EmailVerifiedRequirement'
+                  ? 'EMAIL_VERIFIED'
                   : edge?.node?.type === 'FranceConnectRequirement'
                   ? 'FRANCE_CONNECT'
                   : edge?.node?.type.slice(0, -11).toUpperCase(),
@@ -531,7 +536,6 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
             requirementsReason: step.requirements?.reason || null,
             consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
             isBudgetEnabled: !!step.budget,
-            isProposalSmsVoteEnabled: !!step.isProposalSmsVoteEnabled,
             isLimitEnabled: !!step.votesLimit,
             isTresholdEnabled: !!step.voteThreshold,
             isSecretBallotEnabled: step.isSecretBallot,
@@ -718,7 +722,6 @@ export default createFragmentContainer(injectIntl(container), {
           publishedVoteDate
           voteType
           budget
-          isProposalSmsVoteEnabled
         }
         ... on ProposalStep {
           proposalArchivedTime
@@ -748,7 +751,6 @@ export default createFragmentContainer(injectIntl(container), {
           allowAuthorsToAddNews
           budget
           mainView
-          isProposalSmsVoteEnabled
         }
         ... on ConsultationStep {
           consultations {
@@ -781,8 +783,6 @@ export default createFragmentContainer(injectIntl(container), {
           }
           footer
           footerUsingJoditWysiwyg
-          isAnonymousParticipationAllowed
-          collectParticipantsEmail
           requirements {
             reason
             edges {
@@ -795,7 +795,6 @@ export default createFragmentContainer(injectIntl(container), {
               }
             }
           }
-          isAnonymousParticipationAllowed
         }
         ... on DebateStep {
           isAnonymousParticipationAllowed

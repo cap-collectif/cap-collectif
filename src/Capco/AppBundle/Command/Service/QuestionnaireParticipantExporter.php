@@ -3,11 +3,9 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
-use Capco\AppBundle\Command\Serializer\ReplyAnonymousParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\ReplyAnonymous;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -22,11 +20,10 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly ParticipantNormalizer $participantNormalizer,
-        private readonly ReplyAnonymousParticipantNormalizer $replyAnonymousNormalizer,
         EntityManagerInterface $entityManager,
-        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
         Filesystem $fileSystem,
-        private readonly ParticipantsFilePathResolver $filePathResolver
+        private readonly ParticipantsFilePathResolver $filePathResolver,
+        private readonly ParticipantRepository $participantRepository,
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -48,35 +45,19 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
         $paths['full'] = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
 
-        if ($this->shouldExportParticipant($paths, $questionnaire)
-            || $this->shouldExportReplyAnonymous(
-                $paths,
-                $questionnaire
-            )) {
+        if (
+            $this->shouldExportParticipant($paths, $questionnaire)
+            || $this->shouldExportUser($paths, $questionnaire)
+        ) {
+            $this->exportUsersInBatches($questionnaire, $paths);
             $this->exportParticipantsInBatches($questionnaire, $paths);
-            $this->exportReplyAnonymousInBatches($questionnaire, $paths);
         }
-    }
-
-    /**
-     * @param array<ReplyAnonymous> $anonymousReplies
-     * @param array<string, string> $paths
-     */
-    private function exportAnonymousReplies(
-        array $anonymousReplies,
-        array $paths,
-        bool $withHeaders
-    ): void {
-        if (!$anonymousReplies) {
-            return;
-        }
-        $this->writeFiles($anonymousReplies, $paths, $withHeaders);
     }
 
     /**
      * @param array<string, string> $paths
      */
-    private function exportParticipantsInBatches(
+    private function exportUsersInBatches(
         Questionnaire $questionnaire,
         array $paths
     ): void {
@@ -106,33 +87,34 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
     /**
      * @param array<string, string> $paths
+     *                                     WE KEEP THIS FUNCTION FOR NOW IT FETCHES REPLIES THAT ARE OWNED BY PARTICIPANT, DELETE IT WHEN WE MIGRATE PARTICIPANT TO USER
      */
-    private function exportReplyAnonymousInBatches(
+    private function exportParticipantsInBatches(
         Questionnaire $questionnaire,
         array $paths
     ): void {
-        $anonymousRepliesOffset = 0;
+        $offset = 0;
 
         do {
-            $anonymousReplies = $this->replyAnonymousRepository->getQuestionnaireAnonymousReplies(
+            $participants = $this->participantRepository->getQuestionnaireParticipants(
                 $questionnaire,
-                $anonymousRepliesOffset,
-                self::BATCH_SIZE,
+                $offset,
+                self::BATCH_SIZE
             );
 
-            if ([] === $anonymousReplies) {
+            if ([] === $participants) {
                 return;
             }
 
-            $this->exportAnonymousReplies(
-                $anonymousReplies,
+            $this->exportParticipants(
+                $participants,
                 $paths,
-                0 === $anonymousRepliesOffset && !$this->hasParticipants
+                0 === $offset && !$this->hasParticipants
             );
 
-            $anonymousRepliesOffset += self::BATCH_SIZE;
+            $offset += self::BATCH_SIZE;
             $this->entityManager->clear();
-        } while (self::BATCH_SIZE === \count($anonymousReplies));
+        } while (self::BATCH_SIZE === \count($participants));
     }
 
     /**
@@ -146,13 +128,13 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
-        return $this->userRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
+        return $this->participantRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
     }
 
     /**
      * @param array<string, string> $paths
      */
-    private function shouldExportReplyAnonymous(array $paths, Questionnaire $questionnaire): bool
+    private function shouldExportUser(array $paths, Questionnaire $questionnaire): bool
     {
         if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
@@ -160,13 +142,13 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
-        return $this->replyAnonymousRepository->hasNewAnonymousReplies($questionnaire, $oldestUpdateDate);
+        return $this->userRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
     }
 
     private function initializeSerializer(): Serializer
     {
         return new Serializer(
-            [$this->participantNormalizer, $this->replyAnonymousNormalizer],
+            [$this->participantNormalizer],
             [new CsvEncoder()]
         );
     }

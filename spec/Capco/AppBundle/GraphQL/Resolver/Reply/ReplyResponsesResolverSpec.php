@@ -48,6 +48,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -79,6 +80,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -110,6 +112,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -138,6 +141,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -166,6 +170,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -195,6 +200,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
@@ -224,6 +230,7 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
+        $reply->isAnonymous()->willReturn(false);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())

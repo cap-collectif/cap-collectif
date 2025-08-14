@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProfilePersonalData should return updated profile personal data 1`] = `
+Object {
+  "updateProfilePersonalData": Object {
+    "errorCode": null,
+    "user": Object {
+      "birthPlace": "East blue",
+      "consentPrivacyPolicy": true,
+      "dateOfBirth": null,
+      "firstname": "firstname",
+      "gender": null,
+      "lastname": "lastname",
+      "media": null,
+      "phone": "+33611111111",
+      "phoneConfirmed": false,
+      "postalAddress": null,
+      "username": "admin",
+      "zipCode": null,
+    },
+  },
+}
+`;

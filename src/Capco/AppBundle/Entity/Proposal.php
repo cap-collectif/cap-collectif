@@ -216,19 +216,9 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     private Collection $selectionVotes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSelectionSmsVote", mappedBy="proposal", cascade={"persist"})
-     */
-    private Collection $selectionSmsVotes;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCollectVote", mappedBy="proposal", cascade={"persist"})
      */
     private Collection $collectVotes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCollectSmsVote", mappedBy="proposal", cascade={"persist"})
-     */
-    private Collection $collectSmsVotes;
 
     /** TODO: To remove for a real dynamic evaluation */
 
@@ -356,8 +346,6 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     {
         $this->selectionVotes = new ArrayCollection();
         $this->collectVotes = new ArrayCollection();
-        $this->selectionSmsVotes = new ArrayCollection();
-        $this->collectSmsVotes = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
@@ -1071,40 +1059,19 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
         return $this;
     }
 
-    public function getSelectionSmsVotes(): Collection
-    {
-        return $this->selectionSmsVotes;
-    }
-
-    public function setSelectionSmsVotes(Collection $votes): self
-    {
-        $this->selectionSmsVotes = $votes;
-
-        return $this;
-    }
-
     public function getCollectVotes(): Collection
     {
         return $this->collectVotes;
     }
 
-    public function setCollectVotes(Collection $collectVotes): self
+    public function getCollectAnonymousVotes(): Collection
     {
-        $this->collectVotes = $collectVotes;
-
-        return $this;
+        return $this->collectVotes->filter(fn ($vote) => null !== $vote->getParticipant());
     }
 
-    public function getCollectSmsVotes(): Collection
+    public function getSelectionAnonymousVotes(): Collection
     {
-        return $this->collectSmsVotes;
-    }
-
-    public function setCollectSmsVotes(Collection $collectVotes): self
-    {
-        $this->collectSmsVotes = $collectVotes;
-
-        return $this;
+        return $this->selectionVotes->filter(fn ($vote) => null !== $vote->getParticipant());
     }
 
     public function addSelectionVote(ProposalSelectionVote $selectionVote): self
@@ -1125,46 +1092,10 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
         return $this;
     }
 
-    public function addSelectionSmsVote(ProposalSelectionSmsVote $selectionVote): self
-    {
-        if (!$this->selectionSmsVotes->contains($selectionVote)) {
-            $this->selectionSmsVotes->add($selectionVote);
-        }
-
-        return $this;
-    }
-
-    public function removeSelectionSmsVote(ProposalSelectionSmsVote $vote): self
-    {
-        if ($this->selectionSmsVotes->contains($vote)) {
-            $this->selectionSmsVotes->removeElement($vote);
-        }
-
-        return $this;
-    }
-
     public function addCollectVote(ProposalCollectVote $vote): self
     {
         if (!$this->collectVotes->contains($vote)) {
             $this->collectVotes->add($vote);
-        }
-
-        return $this;
-    }
-
-    public function addCollectSmsVote(ProposalCollectSmsVote $vote): self
-    {
-        if (!$this->collectSmsVotes->contains($vote)) {
-            $this->collectSmsVotes->add($vote);
-        }
-
-        return $this;
-    }
-
-    public function removeCollectSmsVote(ProposalCollectSmsVote $vote): self
-    {
-        if ($this->collectSmsVotes->contains($vote)) {
-            $this->collectSmsVotes->removeElement($vote);
         }
 
         return $this;

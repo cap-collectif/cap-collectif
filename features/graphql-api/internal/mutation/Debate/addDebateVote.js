@@ -87,31 +87,6 @@ describe('Internal|addDebateVote mutation', () => {
     expect(response.addDebateVote.debateVote.id).toBe(updateResponse.addDebateVote.previousVoteId);
   });
 
-  it('Add an unpublished debate vote.', async () => {
-    const response = await graphql(
-      AddDebateVoteMutation,
-      {
-        input: {
-          debateId: toGlobalId('Debate', 'debateCannabis'),
-          type: 'FOR',
-        },
-      },
-      'internal_not_confirmed',
-    );
-
-    expect(response).toMatchSnapshot({
-      addDebateVote: {
-        debateVote: {
-          id: expect.any(String),
-          createdAt: expect.any(String),
-        },
-      },
-    });
-
-    // The vote must not be published.
-    expect(response.addDebateVote.debateVote.published).toBe(false);
-  });
-
   it('Add a vote by widget.', async () => {
     const response = await graphql(
       AddDebateVoteAndGetOriginMutation,

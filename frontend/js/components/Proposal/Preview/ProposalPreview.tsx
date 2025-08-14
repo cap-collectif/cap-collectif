@@ -21,6 +21,7 @@ type Props = {
   readonly proposal: ProposalPreview_proposal
   readonly step: ProposalPreview_step | null | undefined
   readonly viewer: ProposalPreview_viewer | null | undefined
+  readonly participant: ProposalPreview_participant | null | undefined
   readonly features: FeatureToggles
   readonly isSPA?: boolean
 }
@@ -56,7 +57,9 @@ const getCategoryImage = (proposal: ProposalPreview_proposal) => {
 
 export class ProposalPreview extends React.Component<Props> {
   render() {
-    const { proposal, step, viewer, features, isSPA } = this.props
+    const { proposal, step, viewer, features, isSPA, participant } = this.props
+    
+
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
         <ProposalCard
@@ -97,7 +100,7 @@ export class ProposalPreview extends React.Component<Props> {
               </>
             )
           ) : null}
-          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} isSPA={isSPA} />
+          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} isSPA={isSPA} participant={participant} />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           <ProposalPreviewStatus proposal={proposal} />
         </ProposalCard>
@@ -116,6 +119,11 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
       ...ProposalPreviewBody_viewer @arguments(stepId: $stepId)
     }
   `,
+  participant: graphql`
+    fragment ProposalPreview_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+      ...ProposalPreviewBody_participant @arguments(stepId: $stepId)
+    }
+  `,
   step: graphql`
     fragment ProposalPreview_step on Step {
       ...ProposalPreviewBody_step
@@ -128,6 +136,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
       stepId: { type: "ID!" }
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
+      token: { type: "String" }
     ) {
       id
       media {
@@ -149,7 +158,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
       isArchived
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
-        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView, stepId: $stepId)
+        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView, stepId: $stepId, token: $token)
       ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
     }
   `,

@@ -67,6 +67,24 @@ Object {
       Object {
         "node": Object {
           "status": "OPENED_PARTICIPATION",
+          "title": "BP vote étape de dépôt",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "BP vote parcours",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "BP vote parcours min 2 max 2",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
           "title": "BP avec archivage des propositions",
         },
       },

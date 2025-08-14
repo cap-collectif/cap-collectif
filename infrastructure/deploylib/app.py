@@ -120,6 +120,10 @@ def start_consumers():
     command('if pgrep supervisord; then pkill supervisord; sleep 3; fi', 'application', Config.www_app, 'root')
     command('supervisord --configuration=/etc/supervisord/supervisord.conf', 'application', Config.www_app, 'root')
 
+def swarrot_consume(name):
+    "Consume rabbitmq queue"
+    command('php -d memory_limit=-1 bin/console swarrot:consume:' + name + ' ' + name, 'application', Config.www_app, 'capco')
+
 
 def stop_consumers():
     "Stop consumers"
@@ -140,3 +144,8 @@ def clear_cache(environment='dev'):
 def cmd(commandName='', environment='dev'):
     "Executing Symfony command"
     command('php -d memory_limit=-1 bin/console ' + commandName + ' --no-interaction --env=' + environment, 'application', Config.www_app, 'root')
+
+def sql(sql='', environment='dev'):
+    "Executing SQL command"
+    sql = sql.replace('"', '\\\\\\"')
+    command('php -d memory_limit=-1 bin/console doctrine:query:sql \\"' + sql + '\\" --no-interaction --env=' + environment, 'application', Config.www_app, 'root')

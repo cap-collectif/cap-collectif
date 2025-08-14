@@ -10,3 +10,5 @@ RemoveProposalSmsVotePayload:
                 type: 'ID'
             errorCode:
                 type: 'RemoveProposalSmsVoteErrorCode'
+            participant:
+                type: 'InternalParticipant!'

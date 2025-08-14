@@ -14,6 +14,7 @@ import VoteStepPageDescription from './VoteStepPageDescription'
 import CookieMonster from '@shared/utils/CookieMonster'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
+import { useUrlToast } from '~/utils/hooks/useUrlToast'
 
 type Props = {
   stepId: string
@@ -36,11 +37,11 @@ const QUERY = graphql`
           isMapViewEnabled
         }
         body
-        viewerVotes(token: $token) {
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
           totalCount
           edges {
             node {
-              ... on ProposalUserVote {
+              ... on ProposalVote {
                 anonymous
               }
             }
@@ -69,6 +70,7 @@ const QUERY = graphql`
 `
 
 export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Props) => {
+  useUrlToast()
   const isMobile = useIsMobile()
   const { width } = useWindowWidth()
   const intl = useIntl()
@@ -78,7 +80,7 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
 
   const data = useLazyLoadQuery<VoteStepPageQuery>(QUERY, {
     stepId: step,
-    token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+    token: CookieMonster.getParticipantCookie(),
   })
 
   const hasMapView =

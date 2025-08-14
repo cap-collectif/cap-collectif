@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\FormValidationErrorsTraits;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserDataFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateUserMutation implements MutationInterface
 {
+    use FormValidationErrorsTraits;
     use MutationTrait;
 
     public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly Manager $toggleManager, private readonly GlobalIdResolver $globalIdResolver)
@@ -39,15 +41,7 @@ class UpdateUserMutation implements MutationInterface
 
         $form->submit($arguments, false);
 
-        $validationErrors = [];
-
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $form->getErrors(true);
-            foreach ($errors as $error) {
-                $field = $error->getOrigin()->getName();
-                $validationErrors[$field] = $error->getMessageTemplate();
-            }
-        }
+        $validationErrors = $this->getFormValidationErrors($form);
 
         if (!empty($validationErrors)) {
             return ['user' => null, 'validationErrors' => json_encode($validationErrors)];

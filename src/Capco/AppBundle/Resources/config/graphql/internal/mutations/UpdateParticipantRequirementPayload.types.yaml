@@ -5,5 +5,5 @@ UpdateParticipantRequirementPayload:
     fields:
       participant:
         type: 'InternalParticipant'
-      requirement:
-        type: 'Requirement'
+      requirements:
+        type: '[Requirement]'

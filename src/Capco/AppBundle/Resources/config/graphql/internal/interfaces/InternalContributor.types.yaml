@@ -11,6 +11,8 @@ InternalContributor:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: Contributor
+      username:
+        type: 'String'
       email:
         type: 'String'
       firstname:
@@ -25,6 +27,8 @@ InternalContributor:
         type: 'PreviewGoogleMapsAddress'
       dateOfBirth:
         type: 'DateTime'
+      zipCode:
+        type: 'String'
       userIdentificationCode:
         type: 'String'
         resolve: '@=value.getUserIdentificationCodeValue()'
@@ -32,6 +36,9 @@ InternalContributor:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
+      consentInternalCommunication:
+        type: 'Boolean'
+        description: 'Wether or not the contributor consent to receive internal communication.'
       votes:
         type: 'InternalVoteConnection!'
         argsBuilder: 'Relay::ForwardConnection'
@@ -39,3 +46,8 @@ InternalContributor:
           contribuableId:
             type: 'ID'
             description: 'The id of the contribuable entity (Project, Step)'
+      avatarUrl:
+        type: 'URI'
+        description: "The contributor's public avatar URL."
+        resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorAvatarUrlResolver", value)'
+

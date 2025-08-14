@@ -420,18 +420,8 @@ Object {
             },
           },
         },
-        Object {
-          "node": Object {
-            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQy",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQx",
-          },
-        },
       ],
-      "totalCount": 3,
+      "totalCount": 1,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },
@@ -500,6 +490,9 @@ Object {
           "node": Object {
             "consentInternalCommunication": true,
           },
+        },
+        Object {
+          "node": Object {},
         },
       ],
     },

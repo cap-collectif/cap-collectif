@@ -1,0 +1,27 @@
+EmailVerifiedRequirement:
+    type: object
+    inherits:
+        - Node
+        - Requirement
+        - DataCollectedByFranceConnectRequirement
+    config:
+        name: EmailVerifiedRequirement
+        interfaces:
+            - Node
+            - Requirement
+            - DataCollectedByFranceConnectRequirement
+        description: 'Requires a verified email'
+        fields:
+            viewerValue:
+                type: 'String'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", value, getUser())'
+                description: 'The email of the viewer.'
+            participantValue:
+                type: 'String'
+                args:
+                    token:
+                        type: 'String'
+                        description: 'The token associated to the Participant.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", value, args)'
+                description: 'The email of the participant.'

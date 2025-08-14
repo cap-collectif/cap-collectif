@@ -61,6 +61,8 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS,
     })
   }
 
+  const Theme = designSystem ? CapUIProvider : ThemeProvider
+
   const state = store.getState()
 
   const CapUITheme = extendTheme(
@@ -74,7 +76,6 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS,
       : {},
   )
 
-  const Theme = designSystem ? CapUIProvider : ThemeProvider
   return (
     <ReduxProvider store={store}>
       <IntlProvider timeZone={timeZone}>

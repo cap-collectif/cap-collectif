@@ -14,7 +14,6 @@ describe('<ProjectAdminSelectionStepForm />', () => {
     votable: false,
     votesRanking: true,
     isSecretBallotEnabled: true,
-    isProposalSmsVoteEnabled: false,
     votesLimit: 3,
     votesMin: 1,
     stepFormName: 'defaultForm',

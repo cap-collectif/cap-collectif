@@ -7,9 +7,6 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
   <Col
     bsClass="col"
     componentClass="div"
-    md={9}
-    sm={12}
-    xs={12}
   >
     <div>
       <div>
@@ -45,9 +42,6 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
     bsClass="col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={2}
-    sm={12}
-    xs={12}
   >
     <div>
       <div
@@ -104,9 +98,6 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
   <Col
     bsClass="col"
     componentClass="div"
-    md={9}
-    sm={12}
-    xs={12}
   >
     <div>
       <div>
@@ -128,9 +119,6 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
     bsClass="col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={2}
-    sm={12}
-    xs={12}
   >
     <div>
       <div
@@ -187,9 +175,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
   <Col
     bsClass="col"
     componentClass="div"
-    md={9}
-    sm={12}
-    xs={12}
   >
     <div>
       <div>
@@ -225,9 +210,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     bsClass="col"
     componentClass="div"
     id="1-proposal-vote__private"
-    md={2}
-    sm={12}
-    xs={12}
   >
     <div>
       <div

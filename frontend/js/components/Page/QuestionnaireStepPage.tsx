@@ -4,16 +4,16 @@ import { useIntl } from 'react-intl'
 import { loadQuery } from 'relay-hooks'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom'
-import environment, { graphqlError } from '~/createRelayEnvironment'
+import environment, { graphqlError } from '../../createRelayEnvironment'
 import type { GlobalState, Dispatch } from '~/types'
 import '~/types'
 import { insertCustomCode } from '~/utils/customCode'
 import type { QuestionnaireStepPageQuery$data } from '~relay/QuestionnaireStepPageQuery.graphql'
 import '~relay/QuestionnaireStepPageQuery.graphql'
-import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader'
+import { Loader } from '~ui/FeedbacksIndicators/Loader'
 import QuestionnaireReplyPage, {
   queryReply,
-} from '~/components/Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage'
+} from '../Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage'
 import { baseUrl } from '~/config'
 import ScrollToTop from '~/components/Utils/ScrollToTop'
 import type { Context } from './QuestionnaireStepPage.context'
@@ -23,6 +23,7 @@ import QuestionnairePage from '../Questionnaire/QuestionnairePage'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import StepEvents from '~/components/Steps/StepEvents'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useUrlToast } from '~/utils/hooks/useUrlToast'
 
 export type PropsNotConnected = {
   readonly initialQuestionnaireId: string | null | undefined
@@ -62,6 +63,7 @@ const Component = ({
 }) => {
   const intl = useIntl()
   const hasFeatureFlagCalendar = useFeatureFlag('calendar')
+  useUrlToast()
   React.useEffect(() => {
     insertCustomCode(props?.questionnaire?.step?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props?.questionnaire?.step?.id])
@@ -150,6 +152,7 @@ const Component = ({
 export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated }: Props) => {
   const { state } = useLocation<{ questionnaireId: string }>()
   const questionnaireId = state?.questionnaireId || initialQuestionnaireId
+  const participantToken = CookieMonster.getParticipantCookie()
   const [replyPrefetch, setReplyPrefetch] = React.useState(null)
   const anonymousRepliesIds = React.useMemo(
     () => (questionnaireId ? CookieMonster.getAnonymousRepliesIds(questionnaireId) : []),
@@ -173,6 +176,7 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
           $isAuthenticated: Boolean!
           $isNotAuthenticated: Boolean!
           $anonymousRepliesIds: [ID!]!
+          $participantToken: String
         ) {
           questionnaire: node(id: $id) {
             ... on Questionnaire {
@@ -197,10 +201,14 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
               }
             }
             ...QuestionnaireReplyPage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
-            ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+            ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated, participantToken: $participantToken)
           }
           ...QuestionnairePage_query
-            @arguments(anonymousRepliesIds: $anonymousRepliesIds, isNotAuthenticated: $isNotAuthenticated)
+            @arguments(
+              anonymousRepliesIds: $anonymousRepliesIds
+              isAuthenticated: $isAuthenticated
+              isNotAuthenticated: $isNotAuthenticated
+            )
         }
       `}
       variables={{
@@ -208,6 +216,7 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
         isAuthenticated,
         isNotAuthenticated: !isAuthenticated,
         anonymousRepliesIds,
+        participantToken
       }}
       render={({ error, props, retry }) => (
         <Component error={error} props={props} retry={retry} context={context} dataPrefetch={replyPrefetch} />

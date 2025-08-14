@@ -141,7 +141,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate(Manager::emailing);
             $this->manager->activate(Manager::emailing_parameters);
             $this->manager->activate(Manager::proposal_revisions);
-            $this->manager->activate(Manager::anonymous_questionnaire);
+            $this->manager->activate(Manager::new_project_card);
             $this->manager->deactivate(Manager::user_type);
             $this->manager->activate(Manager::helpscout_beacon);
             $this->manager->activate(Manager::emailing_group);

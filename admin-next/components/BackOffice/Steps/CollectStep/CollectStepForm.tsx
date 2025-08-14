@@ -158,7 +158,6 @@ export type FormValues = {
   publishedVoteDate: string | null | undefined
   votesHelpText: string | null | undefined
   secretBallot: boolean | undefined
-  isProposalSmsVoteEnabled: boolean | undefined
   proposalArchivedTime?: number | undefined
   proposalArchivedUnitTime?: ProposalArchivedUnitTime | undefined
   allowAuthorsToAddNews: boolean | undefined
@@ -353,7 +352,6 @@ const COLLECT_FRAGMENT = graphql`
         budget
         publishedVoteDate
         isSecretBallot
-        isProposalSmsVoteEnabled
         proposalArchivedTime
         proposalArchivedUnitTime
         ...Requirements_requirementStep @relay(mask: false)

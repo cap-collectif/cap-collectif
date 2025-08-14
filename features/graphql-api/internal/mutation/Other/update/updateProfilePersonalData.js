@@ -5,8 +5,24 @@ const UpdateProfilePersonalDataMutation = /* GraphQL*/ `
     mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
         updateProfilePersonalData(input: $input) {
             user {
+                firstname
+                lastname
+                username
+                zipCode
+                postalAddress {
+                  formatted
+                }
                 phone
                 phoneConfirmed
+                gender
+                dateOfBirth
+                birthPlace
+                media {
+                    id
+                    name
+                    url
+                }
+                consentPrivacyPolicy
             }
             errorCode
         }
@@ -25,23 +41,10 @@ const input = {
   "gender": null,
   "dateOfBirth": null,
   "birthPlace": "East blue",
+  "consentPrivacyPolicy": true,
 };
 
 describe('mutations.updateProfilePersonalData', () => {
-  it('should return PHONE_ALREADY_USED_BY_ANOTHER_USER errorCode', async () => {
-    const response = await graphql(
-      UpdateProfilePersonalDataMutation,
-      {
-        input: {
-          ...input,
-          phone: '+33675492871',
-        },
-      },
-      'internal_admin',
-    );
-    expect(response.updateProfilePersonalData.errorCode).toBe('PHONE_ALREADY_USED_BY_ANOTHER_USER');
-  });
-
   it('should return PHONE_INVALID_LENGTH errorCode', async () => {
     const tooShortResponse = await graphql(
       UpdateProfilePersonalDataMutation,
@@ -66,5 +69,17 @@ describe('mutations.updateProfilePersonalData', () => {
       'internal_admin',
     );
     expect(tooLongResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH');
+  });
+  it('should return updated profile personal data', async () => {
+    const updateProfilePersonalData = await graphql(
+      UpdateProfilePersonalDataMutation,
+      {
+        input: {
+          ...input,
+        },
+      },
+      'internal_admin',
+    );
+    expect(updateProfilePersonalData).toMatchSnapshot();
   });
 });

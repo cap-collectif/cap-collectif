@@ -8,7 +8,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "__typename": "Participant",
-          "firstname": "Laurent",
+          "firstname": "Participant1 firstname",
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQx",
         },
       },
@@ -16,7 +16,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "__typename": "Participant",
-          "firstname": "Suzanne",
+          "firstname": "Participant2 firstname",
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQy",
         },
       },

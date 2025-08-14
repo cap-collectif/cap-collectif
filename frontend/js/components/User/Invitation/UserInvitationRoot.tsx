@@ -9,6 +9,9 @@ import type { UserInvitationRootPage_colors$key } from '~relay/UserInvitationRoo
 import type { UserInvitationRootPage_query$key } from '~relay/UserInvitationRootPage_query.graphql'
 import type { UserInvitationRootPage_logo$key } from '~relay/UserInvitationRootPage_logo.graphql'
 import RegistrationFormWrapper from '@shared/register/RegistrationFormWrapper'
+import { useIntl } from 'react-intl'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { toast } from '@cap-collectif/ui'
 type Props = {
   readonly queryFragmentRef: UserInvitationRootPage_query$key
   readonly colorsFragmentRef: UserInvitationRootPage_colors$key
@@ -56,6 +59,7 @@ const UserInvitationRootPage = ({
   hasEnabledSSO,
   isRegistrationAllowed,
 }: Props) => {
+  const intl = useIntl();
   const colors = useFragment(COLORS_FRAGMENT, colorsFragmentRef)
   const logo = useFragment(LOGO_FRAGMENT, logoFragmentRef)
   const query = useFragment(QUERY_FRAGMENT, queryFragmentRef)
@@ -67,6 +71,31 @@ const UserInvitationRootPage = ({
   const primaryColor = colors.find(color => color.keyname === 'color.btn.primary.bg')?.value || defaultPrimaryColor
   const btnTextColor = colors.find(color => color.keyname === 'color.btn.primary.text')?.value || defaultColorText
   const backgroundColor = colors.find(color => color.keyname === 'color.main_menu.bg')?.value || defaultPrimaryColor
+
+  const login = async (email: string, password: string) => {
+    return fetch(`${window.location.origin}/login_check`, {
+      method: 'POST',
+      body: JSON.stringify({ username: email, password: password }),
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
+      .then(response => {
+        if (response.status >= 500) mutationErrorToast(intl)
+        return response.json()
+      })
+      .then((response: { success?: boolean }) => {
+        if (response.success) {
+          toast({ content: intl.formatMessage({ id: 'alert.success.add.user' }), variant: 'success' })
+          window.location.reload()
+          return true
+        }
+      })
+  }
+
   return (
     <Switch>
       <Route path="/sso">
@@ -92,7 +121,7 @@ const UserInvitationRootPage = ({
         {hasEnabledSSO && !firstVisited ? (
           <Redirect to="/sso" />
         ) : (
-          <RegistrationFormWrapper query={query} invitationToken={token} email={email}>
+          <RegistrationFormWrapper query={query} invitationToken={token} email={email} onSuccess={login}>
             <UserInvitationPage
               queryFragmentRef={query}
               primaryColor={primaryColor}

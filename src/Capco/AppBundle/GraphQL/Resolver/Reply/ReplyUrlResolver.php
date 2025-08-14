@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ReplyUrlResolver implements QueryInterface
 {
@@ -12,12 +13,19 @@ class ReplyUrlResolver implements QueryInterface
     {
     }
 
-    public function __invoke(AbstractReply $reply): string
+    public function __invoke(Reply $reply): string
     {
-        if ($reply->getQuestionnaire() && null !== $reply->getQuestionnaire()->getStep()) {
-            return $this->urlResolver->getStepUrl($reply->getQuestionnaire()->getStep(), true);
+        $questionnaire = $reply->getQuestionnaire();
+        $step = $questionnaire->getStep() ?? null;
+
+        if (!$step) {
+            return '/';
         }
 
-        return '';
+        $replyIdBase64 = GlobalId::toGlobalId('Reply', $reply->getId());
+
+        $url = $this->urlResolver->getStepUrl($step, true);
+
+        return "{$url}/replies/{$replyIdBase64}";
     }
 }

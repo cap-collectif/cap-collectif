@@ -3,8 +3,11 @@ AddUserReplyPayload:
     config:
         fields:
             reply:
-                type: 'InternalUserReply'
+                type: 'InternalReply'
             questionnaire:
                 type: 'InternalQuestionnaire'
             errorCode:
                 type: 'AddUserReplyErrorCode'
+            shouldTriggerConsentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not it should trigger consent internal communication modal.'

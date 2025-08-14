@@ -1,18 +1,17 @@
 // @ts-nocheck
-import { graphql } from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
   UpdateRequirementMutationVariables,
-  UpdateRequirementMutationResponse,
+  UpdateRequirementMutationResponse, UpdateRequirementMutation,
 } from '~relay/UpdateRequirementMutation.graphql'
 
 const mutation = graphql`
   mutation UpdateRequirementMutation($input: UpdateRequirementInput!) {
     updateRequirement(input: $input) {
-      requirement {
-        id
-        viewerMeetsTheRequirement
+      requirements {
+          id
       }
     }
   }
@@ -26,4 +25,12 @@ const commit = (variables: UpdateRequirementMutationVariables): Promise<UpdateRe
 
 export default {
   commit,
+}
+
+export const useUpdateRequirementMutation = () => {
+  const [commit, isLoading] = useMutation<UpdateRequirementMutation>(mutation);
+  return {
+    commit,
+    isLoading
+  }
 }

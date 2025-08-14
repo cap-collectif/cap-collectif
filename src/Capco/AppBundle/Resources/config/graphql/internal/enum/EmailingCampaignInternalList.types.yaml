@@ -6,9 +6,3 @@ EmailingCampaignInternalList:
             REGISTERED:
                 value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::REGISTERED
                 description: 'All users registered.'
-            NOT_CONFIRMED:
-                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::NOT_CONFIRMED
-                description: 'Users registered but with email not confirmed.'
-            CONFIRMED:
-                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::CONFIRMED
-                description: 'Only confirmed users.'

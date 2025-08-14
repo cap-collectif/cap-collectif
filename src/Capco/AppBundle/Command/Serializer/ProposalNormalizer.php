@@ -96,17 +96,11 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
 
             $isCollectStepProposal = 'collect' === $step->getType();
             $votes = $isCollectStepProposal ? $object->getCollectVotes() : $object->getSelectionVotes();
-            $votesWithoutAccount = $isCollectStepProposal ? $object->getCollectSmsVotes() : $object->getSelectionSmsVotes();
 
             $votes = $votes->filter(fn (AbstractVote $vote) => $vote->getIsAccounted() && $vote->isPublished());
-            $votesWithoutAccount = $votesWithoutAccount->filter(fn (AbstractVote $vote) => $vote->getIsAccounted() && $vote->isPublished());
-            $totalDigitalCount = $votes->count() + $votesWithoutAccount->count();
+            $totalDigitalCount = $votes->count();
 
             $positions = $votes->map(fn ($vote) => [
-                'position' => $vote->getPosition(),
-            ])->getValues();
-
-            $positionsWithoutAccount = $votesWithoutAccount->map(fn ($vote) => [
                 'position' => $vote->getPosition(),
             ])->getValues();
 
@@ -120,10 +114,6 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
                         }
                     }
                 };
-
-                if (!empty($positionsWithoutAccount)) {
-                    $calculatePoints($positionsWithoutAccount);
-                }
 
                 if (!empty($positions)) {
                     $calculatePoints($positions);

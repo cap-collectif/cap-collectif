@@ -13,7 +13,7 @@ Object {
                 Object {
                   "node": Object {
                     "createdAt": "2021-01-14 00:00:00",
-                    "firstname": "Suzanne",
+                    "firstname": "Participant2 firstname",
                     "votes": Object {
                       "edges": Array [
                         Object {
@@ -29,7 +29,7 @@ Object {
                 Object {
                   "node": Object {
                     "createdAt": "2020-01-14 00:00:00",
-                    "firstname": "Laurent",
+                    "firstname": "Participant1 firstname",
                     "votes": Object {
                       "edges": Array [
                         Object {
@@ -66,7 +66,7 @@ Object {
                 Object {
                   "node": Object {
                     "createdAt": "2020-01-14 00:00:00",
-                    "firstname": "Laurent",
+                    "firstname": "Participant1 firstname",
                     "votes": Object {
                       "edges": Array [
                         Object {
@@ -82,7 +82,7 @@ Object {
                 Object {
                   "node": Object {
                     "createdAt": "2021-01-14 00:00:00",
-                    "firstname": "Suzanne",
+                    "firstname": "Participant2 firstname",
                     "votes": Object {
                       "edges": Array [
                         Object {

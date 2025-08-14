@@ -494,6 +494,31 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectStepProposalArchiving'
         project: '@projectProposalArchiving'
         position: 1
+    pasCollectStepWorkflowVote:
+        id: pasCollectStepWorkflowVote
+        step: '@collectStepWorkflowVote'
+        project: '@projectWorkflowVote'
+        position: 1
+    pasSelectionStepWorkflowVote1:
+        id: pasSelectionStepWorkflowVote1
+        step: '@selectionStepWorkflowVote1'
+        project: '@projectWorkflowVote'
+        position: 2
+    pasCollectStepWorkflowVote2:
+        id: pasCollectStepWorkflowVote2
+        step: '@collectStepWorkflowVote2'
+        project: '@projectWorkflowVote2'
+        position: 1
+    pasSelectionStepWorkflowVote2:
+        id: pasSelectionStepWorkflowVote2
+        step: '@selectionStepWorkflowVote2'
+        project: '@projectWorkflowVote2'
+        position: 2
+    pasCollectStepVoteWorkflowVote:
+        id: pasCollectStepVoteWorkflowVote
+        step: '@collectStepWorkflowCollectVote'
+        project: '@projectWorkflowCollectVote'
+        position: 1
     pasOtherStepOpened:
         id: pasOtherStepOpened
         step: '@ostep4'

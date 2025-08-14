@@ -131,6 +131,10 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
 
     private Collection $mediators;
 
+    private ?\DateTime $magicLinkSentAt = null;
+
+    private bool $consentPrivacyPolicy = false;
+
     private ?\Datetime $anonymizationReminderEmailSentAt = null;
 
     private ?string $anonymizationReminderEmailToken = null;
@@ -1271,6 +1275,30 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     public function getShowName(): ?string
     {
         return $this->getUsername();
+    }
+
+    public function getMagicLinkSentAt(): ?\DateTime
+    {
+        return $this->magicLinkSentAt;
+    }
+
+    public function setMagicLinkSentAt(?\DateTime $magicLinkSentAt): self
+    {
+        $this->magicLinkSentAt = $magicLinkSentAt;
+
+        return $this;
+    }
+
+    public function isConsentPrivacyPolicy(): bool
+    {
+        return $this->consentPrivacyPolicy;
+    }
+
+    public function setConsentPrivacyPolicy(bool $consentPrivacyPolicy): self
+    {
+        $this->consentPrivacyPolicy = $consentPrivacyPolicy;
+
+        return $this;
     }
 
     public function hasBackOfficeAccess(): bool

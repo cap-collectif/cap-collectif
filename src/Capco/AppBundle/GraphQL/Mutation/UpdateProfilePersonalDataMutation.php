@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\UserPhoneErrors;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
 use Capco\UserBundle\Repository\UserRepository;
@@ -44,13 +45,17 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
         $oldPhone = $viewer->getPhone();
         $newPhone = $this->arguments['phone'] ?? null;
-        if (!$newPhone || ($oldPhone !== $newPhone)) {
+
+        $hasUpdatedPhoneWithEmptyValue = \array_key_exists('phone', $this->arguments) && null === $this->arguments['phone'];
+        $hasUpdatedWithNewPhone = $newPhone && $oldPhone !== $newPhone;
+        if (
+            $hasUpdatedPhoneWithEmptyValue
+            || $hasUpdatedWithNewPhone
+        ) {
             $viewer->setPhoneConfirmed(false);
         }
 
-        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user, [
-            'stepId' => $stepId,
-        ]);
+        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user);
 
         try {
             $form->submit($this->arguments, false);
@@ -61,17 +66,23 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         if (!$form->isValid()) {
             $errors = $form->getErrors(true, true);
             foreach ($errors as $error) {
-                $message = $error->getMessage();
-                if (UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER === $message) {
-                    return [
-                        'user' => $this->user,
-                        'errorCode' => UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER,
-                    ];
-                }
+                $message = $error->getMessageTemplate();
                 if (UserPhoneErrors::PHONE_INVALID_LENGTH === $message) {
                     return [
                         'user' => $this->user,
                         'errorCode' => UserPhoneErrors::PHONE_INVALID_LENGTH,
+                    ];
+                }
+                if (CheckIdentificationCode::BAD_CODE === $message) {
+                    return [
+                        'user' => $this->user,
+                        'errorCode' => CheckIdentificationCode::BAD_CODE,
+                    ];
+                }
+                if (CheckIdentificationCode::CODE_ALREADY_USED === $message) {
+                    return [
+                        'user' => $this->user,
+                        'errorCode' => CheckIdentificationCode::CODE_ALREADY_USED,
                     ];
                 }
             }

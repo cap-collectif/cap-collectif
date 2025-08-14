@@ -3,4 +3,4 @@ UpdateVotesVisibilityPayload:
     config:
         fields:
             votes:
-                type: '[InternalProposalUserVote]!'
+                type: '[InternalProposalVote]!'

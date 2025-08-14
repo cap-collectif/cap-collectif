@@ -51,13 +51,10 @@ class MediatorVotesMutation
 
     protected function handleCheckboxes(Participant $participant, array $checkboxes)
     {
-        foreach ($checkboxes as $checkbox) {
-            ['requirementId' => $requirementId, 'value' => $value] = $checkbox;
-            $token = $participant->getToken();
-            $input = new Argument(['input' => [
-                'requirementId' => $requirementId, 'value' => $value, 'participantToken' => $token,
-            ]]);
-            $this->updateParticipantRequirementMutation->__invoke($input);
-        }
+        $token = $participant->getToken();
+        $input = new Argument(['input' => [
+            'values' => $checkboxes, 'participantToken' => $token,
+        ]]);
+        $this->updateParticipantRequirementMutation->__invoke($input);
     }
 }

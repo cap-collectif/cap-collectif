@@ -3,7 +3,7 @@
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes'
 const DEBATE_ANONYMOUS_ARGUMENTS_NAME = 'CapcoAnonArguments'
 const REPLY_ANONYMOUS_NAME = 'CapcoAnonReply'
-const ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE = 'AnonymousAuthenticatedWithConfirmedPhone'
+const PARTICIPANT_NAME = 'CapcoParticipant'
 const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid']
 const FACEBOOK_COOKIE_NAMES = ['_fbp']
 const GTAG_COOKIE_NAMES = ['_gcl_au']
@@ -107,18 +107,6 @@ class CookieMonster {
       secure: true,
       sameSite: 'None',
     })
-  }
-  addAnonymousAuthenticatedWithConfirmedPhone = (token: string): void => {
-    Cookies.set(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE, btoa(JSON.stringify(token)), {
-      expires: 395,
-      secure: true,
-      sameSite: 'None',
-    })
-  }
-  getAnonymousAuthenticatedWithConfirmedPhone = (): string | null => {
-    return Cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)
-      ? JSON.parse(atob(Cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)))
-      : null
   }
   getDebateAnonymousArgumentCookie = (debateId: string): DebateAnonymousArgumentValue | null => {
     const args: DebateAnonymousArgumentsCookie = Cookies.get(DEBATE_ANONYMOUS_ARGUMENTS_NAME)
@@ -255,6 +243,19 @@ class CookieMonster {
       sameSite: 'None',
     })
   }
+
+  addParticipantCookie = (participantToken: string): void => {
+    Cookies.set(PARTICIPANT_NAME, btoa(participantToken), {
+      expires: 395,
+      secure: true,
+      sameSite: 'None',
+    })
+  }
+
+  getParticipantCookie = () => {
+    return Cookies.get(PARTICIPANT_NAME);
+  }
+
   isDoNotTrackActive = () => {
     const doNotTrack = navigator.doNotTrack
     return doNotTrack === 'yes' || doNotTrack === '1'
@@ -526,6 +527,11 @@ class CookieMonster {
   }
   getLocale = () => {
     return Cookies.getJSON('locale')
+  }
+
+  removeParticipationToken = () => {
+    Cookies.remove(REPLY_ANONYMOUS_NAME)
+    Cookies.remove(PARTICIPANT_NAME)
   }
 }
 

@@ -14,6 +14,8 @@ use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -25,12 +27,27 @@ class ProjectContributorResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly AbstractStepRepository $stepRepository, private readonly ConnectionBuilderInterface $connectionBuilder, private readonly ParticipantRepository $participantRepository)
-    {
+    private bool $isOnlyFetchingTotalCount = false;
+
+    public function __construct(
+        private readonly UserSearch $userSearch,
+        private readonly LoggerInterface $logger,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AbstractStepRepository $stepRepository,
+        private readonly ConnectionBuilderInterface $connectionBuilder,
+        private readonly ParticipantRepository $participantRepository,
+        private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
+    ) {
     }
 
-    public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
+    public function __invoke(Project $project, ResolveInfo $info, ?Arg $args = null): ConnectionInterface
     {
+        $requestedFields = $this->getRequestedFields($info);
+
+        $this->isOnlyFetchingTotalCount = 1 === \count($requestedFields) && 'totalCount' === $requestedFields[0];
+
         $totalCount = 0;
         if (!$args) {
             $args = new Arg([
@@ -77,7 +94,7 @@ class ProjectContributorResolver implements QueryInterface
                     );
                     $userContributors = $response->getEntities();
 
-                    [$participantsContributors, $participantsCount, $participantsCursors] = $this->getParticipants($project, $providedFilters['step']);
+                    [$participantsContributors, $participantsCount, $participantsCursors] = $this->getParticipants($project, $providedFilters['step'], $providedFilters['term']);
 
                     $cursors = array_merge($response->getCursors(), $participantsCursors);
                     $response->setCursors($cursors);
@@ -111,27 +128,52 @@ class ProjectContributorResolver implements QueryInterface
         return $connection;
     }
 
-    public function getParticipants(Project $project, ?string $stepId = null): array
+    public function getParticipants(Project $project, ?string $stepId = null, ?string $term = null): array
     {
-        $participantsContributors = $this->getParticipantsContributors($project, $stepId) ?? [];
-        $participantsCount = \count($participantsContributors);
-        $participantsCursors = array_map(
-            fn ($participantContributor) => [1, $participantContributor->getId()],
-            $participantsContributors
-        );
+        $step = $stepId ? $this->globalIdResolver->resolve($stepId) : null;
+        if ($this->isOnlyFetchingTotalCount) {
+            $participantsCount = $this->projectParticipantsTotalCountCacheHandler->updateTotalCount(
+                updateCallable: fn () => $this->participantRepository->countWithContributionsByProject($project, $step, $term),
+                project: $project,
+                conditionCallBack: fn ($cachedItem): bool => !$cachedItem->isHIt()
+            );
+
+            return [[], $participantsCount, []];
+        }
+
+        $participantsContributors = $this->getParticipantsContributors($project, $stepId, $term) ?? [];
+        $participantsCount = $this->participantRepository->countWithContributionsByProject($project, $step, $term);
+
+        $participantsCursors = array_map(fn ($participantContributor) => [1, $participantContributor->getId()], $participantsContributors);
 
         return [$participantsContributors, $participantsCount, $participantsCursors];
     }
 
-    private function getParticipantsContributors(Project $project, ?string $stepId = null): array
+    private function getRequestedFields(ResolveInfo $info): array
+    {
+        $fields = [];
+
+        $fieldNodes = $info->fieldNodes;
+        foreach ($fieldNodes as $fieldNode) {
+            if (!isset($fieldNode->selectionSet)) {
+                continue;
+            }
+
+            foreach ($fieldNode->selectionSet->selections as $selection) {
+                if (property_exists($selection, 'name')) {
+                    $fields[] = $selection->name->value;
+                }
+            }
+        }
+
+        return $fields;
+    }
+
+    private function getParticipantsContributors(Project $project, ?string $stepId = null, ?string $term = null): array
     {
         $step = $stepId ? $this->stepRepository->find($stepId) : null;
 
-        if ($step && !$step instanceof SelectionStep) {
-            return [];
-        }
-
-        return $this->participantRepository->findWithVotes($project, $step);
+        return $this->participantRepository->getParticipantsWithContributionsByProject($project, $step, $term);
     }
 
     private function getAnonymousCount(Project $project): int

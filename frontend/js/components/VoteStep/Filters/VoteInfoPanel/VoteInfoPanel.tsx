@@ -38,7 +38,7 @@ const VoteInfoPanel: React.FC<{ stepId: string; isMobile?: boolean }> = ({ stepI
   const isAuthenticated = useSelector((state: GlobalState) => state.user.user) !== null
   const { step, viewer } = useLazyLoadQuery<VoteInfoPanelQuery>(QUERY, {
     stepId,
-    token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+    token: CookieMonster.getParticipantCookie(),
     isAuthenticated,
   })
   const intl = useIntl()

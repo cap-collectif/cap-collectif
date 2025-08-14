@@ -29,6 +29,9 @@ doctrine:
             softdeleted:
                 class: Capco\AppBundle\Filter\SoftDeletedFilter
                 enabled: true
+            contributionCompletionStatus:
+                class: Capco\AppBundle\Filter\ContributionCompletionStatusFilter
+                enabled: true
         dql:
             datetime_functions:
                 DATE: Capco\AppBundle\DQL\DateFunction

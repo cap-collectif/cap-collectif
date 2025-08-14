@@ -1,0 +1,12 @@
+ContributionCompletionStatus:
+    type: enum
+    config:
+        name: ContributionCompletionStatus
+        description: 'Available completion status for a contribution'
+        values:
+            COMPLETED:
+                value: !php/const Capco\AppBundle\Enum\ContributionCompletionStatus::COMPLETED
+                description: 'If the participant/author of the contribution has filled all the requirements.'
+            MISSING_REQUIREMENTS:
+                value: !php/const Capco\AppBundle\Enum\ContributionCompletionStatus::MISSING_REQUIREMENTS
+                description: 'If the participant/author of the contribution has not yet filled all the requirements.'

@@ -1,11 +1,19 @@
 InternalProposalVote:
-    type: interface
+    type: object
     inherits:
+        - Node
         - Contribution
+        - PublicPublishable
+        - InternalPrivatableVote
+        - InternalVote
     config:
         name: ProposalVote
+        interfaces:
+            - Node
+            - InternalVote
+            - PublicPublishable
+            - InternalPrivatableVote
         description: 'Represents a proposal vote.'
-        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\ProposalVoteTypeResolver", value)'
         fields:
             proposal:
                 type: 'InternalProposal!'
@@ -13,9 +21,17 @@ InternalProposalVote:
             step:
                 type: 'ProposalStep!'
                 description: 'Return the step.'
+            ranking:
+                type: 'Int'
+                description: 'Return the ranking of the vote (if any)'
+                resolve: '@=value.getPosition()'
             createdAt:
                 type: 'DateTime!'
                 description: 'The date of the vote.'
+            contributor:
+                type: 'InternalContributor'
+                description: 'The contributor of the vote.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVoteContributorResolver", value, getUser() ,context)'
             published:
                 type: 'Boolean!'
                 description: 'Whether or not the entity is published.'
@@ -24,3 +40,14 @@ InternalProposalVote:
                 type: 'DateTime'
                 description: 'Identifies when the entity was published at.'
                 resolve: '@=value.getPublishedAt()'
+            url:
+                type: 'URI!'
+                description: 'The URL of the proposal linked to the vote.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", value.getProposal(), serv("request_stack"))'
+            requirementsUrl:
+                type: 'URI'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\RequirementsUrlResolver", value)'
+                description: 'The url to the requirements workflow.'
+            completionStatus:
+                type: 'ContributionCompletionStatus!'
+                description: 'The contribution status wether or not the participant/user has meet all requirements'

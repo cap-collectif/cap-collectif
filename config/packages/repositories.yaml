@@ -26,11 +26,6 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Reply']
 
-    Capco\AppBundle\Repository\ReplyAnonymousRepository:
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        lazy: true
-        tags: ['repository.manager']
-        arguments: ['CapcoAppBundle:ReplyAnonymous']
 
     Capco\AppBundle\Repository\ArgumentVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -212,18 +207,6 @@ services:
         lazy: true
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalCollectVote']
-
-    Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository:
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        lazy: true
-        tags: ['repository.manager']
-        arguments: ['CapcoAppBundle:ProposalCollectSmsVote']
-
-    Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository:
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        lazy: true
-        tags: ['repository.manager']
-        arguments: ['CapcoAppBundle:ProposalSelectionSmsVote']
 
     Capco\AppBundle\Repository\OpinionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -872,13 +855,6 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:AnonymousUserProposalSmsVote']
 
-    Capco\AppBundle\Repository\PhoneTokenRepository:
-        public: true
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        lazy: true
-        tags: ['repository.manager']
-        arguments: ['CapcoAppBundle:PhoneToken']
-
     Capco\AppBundle\Repository\Organization\OrganizationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -1001,6 +977,12 @@ services:
         lazy: true
         tags: [ 'repository.manager' ]
         arguments: [ 'CapcoAppBundle:EventTranslation' ]
+
+    Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ParticipantPhoneVerificationSms']
 
     Capco\AppBundle\Repository\CollectStepImapServerConfigRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]

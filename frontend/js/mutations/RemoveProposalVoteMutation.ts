@@ -1,41 +1,52 @@
 // @ts-nocheck
 import { graphql } from 'react-relay'
-import { ConnectionHandler } from 'relay-runtime'
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
-  RemoveProposalVoteMutationVariables,
-  RemoveProposalVoteMutationResponse,
+  RemoveProposalVoteMutation$variables,
+  RemoveProposalVoteMutation$data,
 } from '~relay/RemoveProposalVoteMutation.graphql'
+import { RecordSourceSelectorProxy } from 'relay-runtime'
 
 const mutation = graphql`
   mutation RemoveProposalVoteMutation(
     $input: RemoveProposalVoteInput!
     $stepId: ID!
-    $isAuthenticated: Boolean!
-    $token: String
   ) {
     removeProposalVote(input: $input) {
+      shouldDecrementContributorsTotalCount
       previousVoteId @deleteRecord
+      proposal {
+          viewerHasVote(step: $stepId)
+          votes(stepId: $stepId, first: 0) {
+              totalCount
+              totalPointsCount
+          }
+      }
       step {
+        votesMin
+        votesLimit
+        votesRanking
+        project {
+            votes {
+                totalCount
+            }
+        }
         id
-        ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-        ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
-          ...ProposalsUserVotesTable_votes
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
           totalCount
           edges {
             node {
               id
               proposal {
                 id
+                votes(stepId: $stepId, first: 0) {
+                    totalPointsCount
+                }
               }
             }
           }
         }
-        ...interpellationLabelHelper_step @relay(mask: false)
       }
       viewer {
         id
@@ -43,104 +54,68 @@ const mutation = graphql`
           totalCount
           creditsLeft
           creditsSpent
-          #  totalPointsCount
         }
       }
     }
   }
 `
 
-const commit = (variables: RemoveProposalVoteMutationVariables): Promise<RemoveProposalVoteMutationResponse> =>
+const commit = (variables: RemoveProposalVoteMutation$variables): Promise<RemoveProposalVoteMutation$data> =>
   commitMutation(environment, {
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('removeProposalVote')
-      const previousVoteId = payload?.getValue('previousVoteId')
-      if (!payload || !previousVoteId) return
-      const proposalProxy = store.get(variables.input.proposalId)
-      if (!proposalProxy) return
-      const stepProxy = store.get(variables.input.stepId)
+      if (!payload) return
 
-      if (stepProxy) {
-        const connectionRecord = ConnectionHandler.getConnection(stepProxy, 'VotesList_userVotes', {})
+      const step = payload.getLinkedRecord('step')
+      if (!step) return
 
-        if (connectionRecord) {
-          ConnectionHandler.deleteNode(connectionRecord, String(previousVoteId))
-          const viewerVotes = stepProxy?.getLinkedRecord('userVotes', {})
-
-          if (viewerVotes) {
-            const previousValue = parseInt(viewerVotes.getValue('totalCount'), 10)
-            viewerVotes.setValue(previousValue - 1, 'totalCount')
-          }
-        }
-
-        const project = stepProxy?.getLinkedRecord('project', {})
-
-        if (project) {
-          const votes = project?.getLinkedRecord('votes', {})
-
-          if (votes) {
-            const previousValue = parseInt(votes.getValue('totalCount'), 10)
-            votes.setValue(previousValue - 1, 'totalCount')
-          }
-        }
+      // START DECREMENTING PROJECT CONTRIBUTORS TOTALCOUNT
+      const shouldDecrementContributorsTotalCount = payload.getValue(
+        'shouldDecrementContributorsTotalCount',
+      );
+      if (shouldDecrementContributorsTotalCount) {
+        const contributors = step
+          .getLinkedRecord('project')
+          .getLinkedRecord('contributors');
+        contributors.setValue(contributors.getValue('totalCount') - 1, 'totalCount');
       }
+      // END DECREMENTING PROJECT CONTRIBUTORS TOTALCOUNT
 
-      const votesArgs = {
-        first: 0,
-        stepId: variables.input.stepId,
-      }
-      proposalProxy.setValue(false, 'viewerHasVote', {
-        step: variables.input.stepId,
+      const votesMin = step.getValue('votesMin')
+      const viewerVotes = step.getLinkedRecord('viewerVotes', {
+        orderBy: { field: 'POSITION', direction: 'ASC' }
       })
-      if (!stepProxy) return
-      const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: {
-          field: 'POSITION',
-          direction: 'ASC',
-        },
-      })
-      if (!stepConnection) return
-      const proposalVotesProxy =
-        proposalProxy.getLinkedRecord('votes', {
-          first: 0,
-          stepId: variables.input.stepId,
-        }) ||
-        proposalProxy.getLinkedRecord('votes', {
-          first: 0,
-        })
-      if (!proposalVotesProxy) return
-      const totalCount = parseInt(stepConnection.getValue('totalCount'), 10)
-      stepConnection.setValue(totalCount, 'totalCount')
-      let votesMin = parseInt(stepProxy.getValue('votesMin'), 10)
-      if (!votesMin || Number.isNaN(votesMin)) votesMin = 1
-      if (votesMin && votesMin > 1 && totalCount < votesMin - 1) return
 
-      if (votesMin && votesMin > 1 && totalCount === votesMin - 1) {
-        const ids =
-          stepConnection.getLinkedRecords('edges')?.map(edge => {
-            return String(edge?.getLinkedRecord('node')?.getLinkedRecord('proposal')?.getValue('id'))
-          }) || []
-        ids.forEach((id: string) => {
-          const proposal = store.get(id)
-          const proposalStore = proposal?.getLinkedRecord('votes', votesArgs)
-          if (!proposalStore) return
-          const previousValue = parseInt(proposalStore.getValue('totalCount'), 10)
-          proposalStore.setValue(previousValue - 1, 'totalCount')
-        })
+      if (!viewerVotes) return
+
+      const viewerVotesCount = viewerVotes.getValue('totalCount')
+
+
+      if (viewerVotesCount >= votesMin) return
+
+      const voteEdges = viewerVotes.getLinkedRecords('edges')
+
+      if (!voteEdges) return
+
+      for (const edge of voteEdges) {
+        const node = edge.getLinkedRecord('node')
+        if (!node) continue
+
+        const proposal = node.getLinkedRecord('proposal')
+        if (!proposal) continue
+
+        const votes = proposal.getLinkedRecord('votes', { stepId: step.getDataID(), first: 0 })
+        if (!votes) continue
+
+        const count = votes.getValue('totalCount')
+        if (typeof count === 'number' && count > 0) {
+          votes.setValue(count - 1, 'totalCount')
+        }
       }
 
-      const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10)
-      proposalVotesProxy.setValue(previousValue - 1, 'totalCount')
-      const connectionConfig = {
-        stepId: variables.input.stepId,
-      }
-      const connection = ConnectionHandler.getConnection(proposalProxy, 'ProposalVotes_votes', connectionConfig)
-      if (!connection) return
-      const previousValueConnection = parseInt(connection.getValue('totalCount'), 10)
-      connection.setValue(previousValueConnection - 1, 'totalCount')
-    },
+    }
   })
 
 export default {

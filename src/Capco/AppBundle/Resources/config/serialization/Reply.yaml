@@ -16,6 +16,8 @@ Capco\AppBundle\Entity\Reply:
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         draft:
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
+        completionStatus:
+            groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]
         getStatus:
             serialized_name: replyStatus
             groups: [ElasticsearchReply, ElasticsearchResponseNestedReply]

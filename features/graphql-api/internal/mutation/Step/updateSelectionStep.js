@@ -35,7 +35,6 @@ const UpdateSelectionStep = /* GraphQL*/ `
           publishedVoteDate
           voteType
           budget
-          isProposalSmsVoteEnabled
           requirements {
             reason
             edges {
@@ -82,7 +81,6 @@ const input = {
   publishedVoteDate: null,
   voteType: 'DISABLED',
   budget: 30000,
-  isProposalSmsVoteEnabled: false,
   requirements: [
     {
       type: 'FIRSTNAME',
@@ -102,19 +100,5 @@ describe('mutations.updateSelectionStep', () => {
   it('admin should be able to edit selectionStep step.', async () => {
     const response = await graphql(UpdateSelectionStep, { input: { ...input } }, 'internal_admin');
     expect(response).toMatchSnapshot();
-  });
-
-  it('should override requirements with phone and phone_verified if sms vote is enabled.', async () => {
-    const response = await graphql(
-      UpdateSelectionStep,
-      { input: { ...input, isProposalSmsVoteEnabled: true } },
-      'internal_admin',
-    );
-
-    const requirements = response.updateSelectionStep.selectionStep.requirements.edges;
-    expect(requirements).toStrictEqual([
-      { node: { __typename: 'PhoneRequirement' } },
-      { node: { __typename: 'PhoneVerifiedRequirement' } },
-    ]);
   });
 });

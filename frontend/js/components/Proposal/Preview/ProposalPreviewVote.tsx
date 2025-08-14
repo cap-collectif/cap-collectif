@@ -7,13 +7,17 @@ import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapper
 import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVote_proposal.graphql'
 import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql'
 import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import ProposalSmsVoteModal from '~/components/Proposal/Vote/ProposalSmsVoteModal'
+import { createPortal } from 'react-dom'
+import { Box } from '@cap-collectif/ui'
+import { Suspense } from 'react'
+import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
+import ParticipationWorkflowModal from '~/components/ParticipationWorkflow/ParticipationWorkflowModal'
 
 type Props = {
   proposal: ProposalPreviewVote_proposal$key
   step: ProposalPreviewVote_step$key
   viewer: ProposalPreviewVote_viewer$key | null | undefined
+  participant: ProposalPreviewVote_participant$key | null | undefined
   usesNewUI?: boolean
   disabled?: boolean
 }
@@ -27,27 +31,27 @@ const Container = styled.span`
 const VIEWER_FRAGMENT = graphql`
   fragment ProposalPreviewVote_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
     ...ProposalVoteButtonWrapperFragment_viewer @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
-    ...ProposalVoteModal_viewer
+  }
+`
+const PARTICIPANT_FRAGMENT = graphql`
+  fragment ProposalPreviewVote_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...ProposalVoteButtonWrapperFragment_participant @arguments(stepId: $stepId)
   }
 `
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalPreviewVote_proposal on Proposal
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }, token: { type: "String" }) {
     id
-    ...ProposalSmsVoteModal_proposal
     ...ProposalVoteModal_proposal
-    ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+    ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
   }
 `
 const STEP_FRAGMENT = graphql`
   fragment ProposalPreviewVote_step on Step
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
-    ... on ProposalStep {
-      isProposalSmsVoteEnabled
-    }
-    ...ProposalSmsVoteModal_step @arguments(token: $token)
-    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-    ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
+    id
+    ...ProposalVoteModal_step @arguments(token: $token)
+    ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token, isAuthenticated: $isAuthenticated)
   }
 `
 export const ProposalPreviewVote: React.FC<Props> = ({
@@ -56,13 +60,34 @@ export const ProposalPreviewVote: React.FC<Props> = ({
   proposal: proposalRef,
   usesNewUI,
   disabled,
+  participant: participantRef,
 }) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
+  const participant = useFragment(PARTICIPANT_FRAGMENT, participantRef)
+  
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const step = useFragment(STEP_FRAGMENT, stepRef)
-  const isTwilioFeatureEnabled = useFeatureFlag('twilio')
-  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
-  const smsVoteEnabled = step.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
+
+  const [voteId, setVoteId] = React.useState<string | null>(null)
+  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false);
+
+  const triggerRequirementsModal = (voteId: string) => {
+    setVoteId(voteId);
+    setShowRequirementsModal(true);
+  }
+
+  if (showRequirementsModal && voteId) {
+    return (
+      createPortal(
+        <Box width="100%" height="100%" position="absolute" top={0} left={0}>
+          <Suspense fallback={<ModalSkeleton/>}>
+            <ParticipationWorkflowModal stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
+          </Suspense>
+        </Box>,
+        document.body
+      )
+    )
+  }
 
   return (
     <Container>
@@ -74,9 +99,12 @@ export const ProposalPreviewVote: React.FC<Props> = ({
         className="proposal__preview__vote mr-15"
         usesNewUI={usesNewUI}
         disabled={disabled}
+        triggerRequirementsModal={triggerRequirementsModal}
+        participant={participant}
       />
-      {viewer && !usesNewUI && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
-      {!viewer && smsVoteEnabled && <ProposalSmsVoteModal proposal={proposal} step={step} />}
+      {!usesNewUI && (
+        <ProposalVoteModal proposal={proposal} step={step} triggerRequirementsModal={triggerRequirementsModal} />
+      )}
     </Container>
   )
 }

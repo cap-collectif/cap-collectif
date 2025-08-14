@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Enum\VerifySMSErrorCode;
 use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\VerifyUserPhoneNumberMutation;
 use Capco\AppBundle\Helper\TwilioSmsProvider;
@@ -12,6 +13,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 {
@@ -21,10 +23,11 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
         TwilioSmsProvider $smsProvider,
-        UserPhoneVerificationSmsRepository $userPhoneVerificationRepository
+        UserPhoneVerificationSmsRepository $userPhoneVerificationRepository,
+        KernelInterface $kernel
     ): void {
         $smsProviderFactory->fetch()->willReturn($smsProvider);
-        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationRepository);
+        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationRepository, $kernel);
     }
 
     public function it_is_initializable(): void
@@ -114,10 +117,10 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
         $viewer->setPhoneConfirmed(true)->willReturn($viewer);
 
-        $smsProvider->verifySms($phone, $code)->willReturn(TwilioSmsProvider::CODE_NOT_VALID);
+        $smsProvider->verifySms($phone, $code)->willReturn(VerifySMSErrorCode::CODE_NOT_VALID);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioSmsProvider::CODE_NOT_VALID);
+        $payload['errorCode']->shouldBe(VerifySMSErrorCode::CODE_NOT_VALID);
     }
 
     public function it_should_return_code_expired_error_code(
@@ -146,9 +149,9 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
         $viewer->setPhoneConfirmed(true)->willReturn($viewer);
 
-        $smsProvider->verifySms($phone, $code)->willReturn(TwilioSmsProvider::CODE_EXPIRED);
+        $smsProvider->verifySms($phone, $code)->willReturn(VerifySMSErrorCode::CODE_EXPIRED);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioSmsProvider::CODE_EXPIRED);
+        $payload['errorCode']->shouldBe(VerifySMSErrorCode::CODE_EXPIRED);
     }
 }

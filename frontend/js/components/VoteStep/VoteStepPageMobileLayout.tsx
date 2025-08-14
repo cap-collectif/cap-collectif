@@ -45,7 +45,6 @@ const QUERY = graphql`
           endAt
         }
         body
-        isProposalSmsVoteEnabled
         form {
           id
           objectType
@@ -122,7 +121,6 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
             hideText
             hasMapView={hasMapView}
             hasVotesView={isVotable}
-            isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
           />
         </Flex>
         {view === View.Map ? (

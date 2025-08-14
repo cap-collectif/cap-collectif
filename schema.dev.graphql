@@ -132,6 +132,9 @@ interface AbstractDebateVote {
 enum AddAnonymousReplyErrorCode {
   """The submited reply is not valid."""
   INVALID_FORM
+
+  """The phone is already used by another participant / user."""
+  PHONE_ALREADY_USED
 }
 
 input AddAnonymousReplyInput {
@@ -141,23 +144,26 @@ input AddAnonymousReplyInput {
   """The responses to the questionnaire questions"""
   responses: [ResponseInput!]!
 
-  """The participant email"""
-  participantEmail: Email
+  """Token of existing participant."""
+  participantToken: String
   clientMutationId: String
 }
 
 type AddAnonymousReplyPayload {
   """The created reply"""
-  reply: AnonymousReply
+  reply: Reply
 
   """The associated questionnaire"""
   questionnaire: Questionnaire
 
-  """The reply token"""
-  token: String
+  """The token of the participant"""
+  participantToken: String
 
   """An error"""
   errorCode: AddAnonymousReplyErrorCode
+
+  """Wether or not it should trigger consent internal communication modal."""
+  shouldTriggerConsentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
@@ -592,9 +598,6 @@ enum AddProposalSmsVoteErrorCode {
   """Max votes limit reached."""
   VOTE_LIMIT_REACHED
 
-  """Phone not found for the given token."""
-  PHONE_NOT_FOUND
-
   """
   The proposal is already voted by another user/participant with the given number.
   """
@@ -608,19 +611,26 @@ input AddProposalSmsVoteInput {
   """The Node ID of the step."""
   stepId: ID!
 
-  """The token associated to this number."""
-  token: String!
+  """The participant token."""
+  token: String
 
-  """Whether or not the user consents to receive communications by sms."""
-  consentSmsCommunication: Boolean!
+  """The vote will be anonymous."""
+  anonymously: Boolean = true
   clientMutationId: String
 }
 
 type AddProposalSmsVotePayload {
-  vote: ProposalSmsVote
+  vote: ProposalVote
   voteEdge: ProposalVoteEdge
   errorCode: AddProposalSmsVoteErrorCode
   votes: ProposalSmsVoteConnection
+  participantToken: String
+
+  """
+  Wether or not we should trigger workflow modal to display internal communication modal.
+  """
+  shouldTriggerConsentInternalCommunication: Boolean!
+  participant: Participant!
   clientMutationId: String
 }
 
@@ -630,6 +640,11 @@ enum AddProposalVoteErrorCode {
   The proposal is already voted by another user/participant with the given number.
   """
   PHONE_ALREADY_USED
+
+  """
+  A participant with the same email as the logged in user already voted in this step.
+  """
+  CONTRIBUTION_NOT_ALLOWED
 }
 
 input AddProposalVoteInput {
@@ -640,15 +655,23 @@ input AddProposalVoteInput {
   stepId: ID!
 
   """The vote will be anonymous."""
-  anonymously: Boolean = false
+  anonymously: Boolean = true
   clientMutationId: String
 }
 
 type AddProposalVotePayload {
-  vote: ProposalUserVote
+  vote: ProposalVote
   viewer: User
   voteEdge: ProposalVoteEdge
   errorCode: AddProposalVoteErrorCode
+
+  """
+  Wether or not we should trigger workflow modal to display internal communication modal.
+  """
+  shouldTriggerConsentInternalCommunication: Boolean!
+
+  """Wether or not we should increment project contributors totalCount."""
+  shouldIncrementProjectContributorsTotalCount: Boolean
   clientMutationId: String
 }
 
@@ -807,8 +830,16 @@ type AddStepPayload {
 
 """Available errors for an `addUserReply` mutation."""
 enum AddUserReplyErrorCode {
-  """the viewer does not meet requirements"""
+  """The viewer does not meet requirements"""
   REQUIREMENTS_NOT_MET
+
+  """
+  A participant with the same email as the logged in user already participated in this questionnaire.
+  """
+  CONTRIBUTION_NOT_ALLOWED
+
+  """The phone is already used by another participant / user."""
+  PHONE_ALREADY_USED
 }
 
 input AddUserReplyInput {
@@ -827,9 +858,12 @@ input AddUserReplyInput {
 }
 
 type AddUserReplyPayload {
-  reply: UserReply
+  reply: Reply
   questionnaire: Questionnaire
   errorCode: AddUserReplyErrorCode
+
+  """Wether or not it should trigger consent internal communication modal."""
+  shouldTriggerConsentInternalCommunication: Boolean!
   clientMutationId: String
 }
 
@@ -966,51 +1000,6 @@ type AnalysisConfiguration {
   Indicates whether or not a proposal has been processed on effectiveDate
   """
   effectiveDateProcessed: Boolean
-}
-
-"""Represents an answer from a non-registered to a questionnaire."""
-type AnonymousReply implements Reply & Node {
-  """The ID of an object"""
-  id: ID!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The url of the reply."""
-  url: URI!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """The responses of the reply."""
-  responses: [Response]!
-
-  """Identifies the form where the contribution was submitted."""
-  questionnaire: Questionnaire!
-
-  """The admin url of the reply."""
-  adminUrl: URI
-
-  """The status of the reply."""
-  status: ReplyStatus
-  participantEmail: Email
 }
 
 """A contribution"""
@@ -2232,7 +2221,7 @@ type CheckboxRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -2240,6 +2229,15 @@ type CheckboxRequirement implements Node & Requirement {
 
   """The condition set by the requirement."""
   label: String!
+}
+
+"""Checkbox Requirement input"""
+input CheckboxRequirementInput {
+  """The Node ID of the requirement to modify."""
+  requirementId: ID!
+
+  """The updated value of the requirement."""
+  value: Boolean!
 }
 
 """A node that can be analyzed by civicIA."""
@@ -2510,9 +2508,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
-
-  """Whether or not sms vote are enabled."""
-  isProposalSmsVoteEnabled: Boolean
 
   """
   Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
@@ -3369,6 +3364,19 @@ interface Contribution {
   url: URI!
 }
 
+"""Available completion status for a contribution"""
+enum ContributionCompletionStatus {
+  """
+  If the participant/author of the contribution has filled all the requirements.
+  """
+  COMPLETED
+
+  """
+  If the participant/author of the contribution has not yet filled all the requirements.
+  """
+  MISSING_REQUIREMENTS
+}
+
 """A connection to a list of items."""
 type ContributionConnection {
   totalCount: Int!
@@ -3474,6 +3482,7 @@ interface ContributionWithAuthor {
 interface Contributor {
   """The ID of an object"""
   id: ID!
+  username: String
   email: String
   firstname: String
   lastname: String
@@ -3481,12 +3490,18 @@ interface Contributor {
   phoneConfirmed: Boolean!
   postalAddress: GoogleMapsAddress
   dateOfBirth: DateTime
+  zipCode: String
 
   """The contributor identification code value"""
   userIdentificationCode: String
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """
+  Wether or not the contributor consent to receive internal communication.
+  """
+  consentInternalCommunication: Boolean
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -3499,6 +3514,9 @@ interface Contributor {
     """The id of the contribuable entity (Project, Step)"""
     contribuableId: ID
   ): VoteConnection!
+
+  """The contributor's public avatar URL."""
+  avatarUrl: URI
 }
 
 """A connection to a list of items."""
@@ -4585,7 +4603,7 @@ type DateOfBirthRequirement implements Node & Requirement & DataCollectedByFranc
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -4600,7 +4618,7 @@ type DateOfBirthRequirement implements Node & Requirement & DataCollectedByFranc
   """The date of birth of the participant."""
   participantDateOfBirth(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): DateTime
 }
 
@@ -5511,8 +5529,11 @@ enum DeleteAccountType {
 }
 
 input DeleteAnonymousReplyInput {
-  """The hashed token of the reply"""
-  hashedToken: String!
+  """The reply id to delete."""
+  replyId: ID!
+
+  """The token of the participant who created the reply."""
+  participantToken: String!
   clientMutationId: String
 }
 
@@ -6305,6 +6326,36 @@ input EmailDomainInput {
   value: String!
 }
 
+"""Requires a verified email"""
+type EmailVerifiedRequirement implements Node & Requirement & DataCollectedByFranceConnectRequirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
+
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String
+  ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
+  """Wether or not the data is collected by france connect."""
+  isCollectedByFranceConnect: Boolean
+
+  """The email of the viewer."""
+  viewerValue: String
+
+  """The email of the participant."""
+  participantValue(
+    """The token associated to the Participant."""
+    token: String
+  ): String
+}
+
 """A user, with or without account, who can receive email."""
 type Emailable {
   """The user's public name."""
@@ -6421,12 +6472,6 @@ type EmailingCampaignEdge {
 enum EmailingCampaignInternalList {
   """All users registered."""
   REGISTERED
-
-  """Users registered but with email not confirmed."""
-  NOT_CONFIRMED
-
-  """Only confirmed users."""
-  CONFIRMED
 }
 
 """Ways in which lists of campaigns can be ordered upon return."""
@@ -7162,9 +7207,6 @@ enum FeatureFlagType {
   """Whether or not profiles can be indexed."""
   noindex_on_profiles
 
-  """Whether or not admin can create anonymous questionnaire."""
-  anonymous_questionnaire
-
   """Whether or not the twilio service is enabled."""
   twilio
 
@@ -7177,9 +7219,6 @@ enum FeatureFlagType {
 
   """Whether or not the Sendiblue API is enabled"""
   api_sendinblue
-
-  """Whether or not proposal sms vote is enabled"""
-  proposal_sms_vote
 
   """Whether or not organizations are enabled"""
   organizations
@@ -7223,7 +7262,7 @@ type FirstnameRequirement implements Node & Requirement & DataCollectedByFranceC
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -7238,7 +7277,7 @@ type FirstnameRequirement implements Node & Requirement & DataCollectedByFranceC
   """The firstname of the participant."""
   participantValue(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): String
 }
 
@@ -7449,7 +7488,7 @@ type FranceConnectRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -7899,7 +7938,7 @@ type IdentificationCodeRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -7911,7 +7950,7 @@ type IdentificationCodeRequirement implements Node & Requirement {
   """The identification code of the participant."""
   participantValue(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): String
 }
 
@@ -8070,7 +8109,7 @@ type LastnameRequirement implements Node & Requirement & DataCollectedByFranceCo
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -8085,7 +8124,7 @@ type LastnameRequirement implements Node & Requirement & DataCollectedByFranceCo
   """The lastname of the participant."""
   participantValue(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): String
 }
 
@@ -9009,6 +9048,7 @@ type Mutation {
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
+  updateAnonymousProposalVotes(input: UpdateAnonymousProposalVotesInput!): UpdateAnonymousProposalVotesPayload
   changeProposalAssessment(input: ChangeProposalAssessmentInput!): ChangeProposalAssessmentPayload
   evaluateProposalAssessment(input: EvaluateProposalAssessmentInput!): EvaluateProposalAssessmentPayload
   changeProposalDecision(input: ChangeProposalDecisionInput!): ChangeProposalDecisionPayload
@@ -9251,8 +9291,6 @@ type Mutation {
   unstarResponse(input: UnstarResponseInput!): UnstarResponsePayload
   addProposalSmsVote(input: AddProposalSmsVoteInput!): AddProposalSmsVotePayload
   removeProposalSmsVote(input: RemoveProposalSmsVoteInput!): RemoveProposalSmsVotePayload
-  sendSmsProposalVote(input: SendSmsProposalVoteInput!): SendSmsProposalVotePayload
-  verifySmsVotePhoneNumber(input: VerifySmsVotePhoneNumberInput!): VerifySmsVotePhoneNumberPayload
   inviteOrganizationMember(input: InviteOrganizationMemberInput!): InviteOrganizationMemberPayload
   kickFromOrganization(input: KickFromOrganizationInput!): KickFromOrganizationPayload
   deleteOrganizationInvitation(input: DeleteOrganizationInvitationInput!): DeleteOrganizationInvitationPayload
@@ -9277,12 +9315,21 @@ type Mutation {
   createOrUpdateConsultation(input: CreateOrUpdateConsultationInput!): CreateOrUpdateConsultationPayload
   deleteConsultation(input: DeleteConsultationInput!): DeleteConsultationPayload
   createConsultation(input: CreateConsultationInput!): CreateConsultationPayload
+  sendParticipantPhoneValidationCode(input: SendParticipantPhoneValidationCodeInput!): SendParticipantPhoneValidationCodePayload
+  verifyParticipantPhoneNumber(input: VerifyParticipantPhoneNumberInput!): VerifyParticipantPhoneNumberPayload
+  sendConfirmationEmailParticipant(input: SendConfirmationEmailParticipantInput!): SendConfirmationEmailParticipantPayload
+  updateParticipant(input: UpdateParticipantInput!): UpdateParticipantPayload
+  validateContribution(input: ValidateContributionInput!): ValidateContributionPayload
   addMediators(input: AddMediatorsInput!): AddMediatorsPayload
   deleteMediator(input: DeleteMediatorInput!): DeleteMediatorPayload
   addMediatorVotes(input: AddMediatorVotesInput!): AddMediatorVotesPayload
   updateMediatorVotes(input: UpdateMediatorVotesInput!): UpdateMediatorVotesPayload
   deleteParticipant(input: DeleteParticipantInput!): DeleteParticipantPayload
+  sendMagicLinkEmail(input: SendMagicLinkEmailInput!): SendMagicLinkEmailPayload
+  sendParticipantEmailWorkflow(input: SendParticipantEmailWorkflowInput!): SendParticipantEmailWorkflowPayload
   updateVotesVisibility(input: UpdateVotesVisibilityInput!): UpdateVotesVisibilityPayload
+  validatePhoneReusability(input: ValidatePhoneReusabilityInput!): ValidatePhoneReusabilityPayload
+  sendParticipantConsentInternalCommunicationEmail(input: SendParticipantConsentInternalCommunicationEmailInput!): SendParticipantConsentInternalCommunicationEmailPayload
   handleProposalFormCategoryImage(input: HandleProposalFormCategoryImageInput!): HandleProposalFormCategoryImagePayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   saveImapConfig(input: SaveImapConfigInput!): SaveImapConfigPayload
@@ -10377,19 +10424,28 @@ type PageTranslation {
 type Participant implements Node & Contributor {
   """The ID of an object."""
   id: ID!
+  username: String
   email: String
   firstname: String
   lastname: String
   phone: String
+
+  """Wether or not the participant has confirmed his phone."""
   phoneConfirmed: Boolean!
   postalAddress: GoogleMapsAddress
   dateOfBirth: DateTime
+  zipCode: String
 
   """The contributor identification code value"""
   userIdentificationCode: String
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """
+  Wether or not the participant consent receiving internal communication.
+  """
+  consentInternalCommunication: Boolean!
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -10406,6 +10462,9 @@ type Participant implements Node & Contributor {
     mediatorId: ID
   ): VoteConnection!
 
+  """The contributor's public avatar URL."""
+  avatarUrl: URI
+
   """The participant token."""
   token: String!
   replies(
@@ -10417,6 +10476,17 @@ type Participant implements Node & Contributor {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ReplyConnection
+  proposalVotes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    stepId: ID
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): ProposalVoteConnection!
 
   """If already registered, the user to add as participant."""
   user: User
@@ -10426,6 +10496,15 @@ type Participant implements Node & Contributor {
     """The step containing requirements."""
     stepId: ID!
   ): Boolean
+
+  """Wether or not the participant consent receiving sms communication."""
+  consentSmsCommunication: Boolean!
+
+  """Wether or not the participant consent the privacy policy."""
+  consentPrivacyPolicy: Boolean!
+
+  """Wether or not the participant has confirmed his email."""
+  isEmailConfirmed: Boolean!
 }
 
 """A connection to a list of items."""
@@ -10484,6 +10563,15 @@ enum ParticipantOrderField {
   CREATED_AT
 }
 
+"""Available authentication email"""
+enum ParticipationWorkflowParticipantEmailType {
+  """The magic link email to authenticate without password."""
+  MAGIC_LINK
+
+  """The email to confirm a participant email"""
+  PARTICIPANT_CONFIRMATION_EMAIL
+}
+
 """Represent an invitation to join an organization."""
 type PendingOrganizationInvitation {
   """The ID of an object."""
@@ -10536,7 +10624,7 @@ type PhoneRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -10548,7 +10636,7 @@ type PhoneRequirement implements Node & Requirement {
   """The phone of the participant."""
   participantValue(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): String
 }
 
@@ -10563,7 +10651,7 @@ type PhoneVerifiedRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -10992,7 +11080,7 @@ type PostalAddressRequirement implements Node & Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -11853,9 +11941,6 @@ input ProjectStepInput {
   voteThreshold: Int
   defaultSort: ProposalSort
 
-  """Whether or not sms vote is enabled."""
-  isProposalSmsVoteEnabled: Boolean
-
   """
   Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
   """
@@ -11879,7 +11964,6 @@ input ProjectStepInput {
 
   """Is the questionnaire footer using Jodit Wysiwyg."""
   footerUsingJoditWysiwyg: Boolean
-  collectParticipantsEmail: Boolean
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
   articles: [DebateArticleInput]
@@ -12213,7 +12297,8 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   viewerVote(
     """The concerned step."""
     step: ID!
-  ): ProposalUserVote
+  ): ProposalVote
+  contributorVote(step: ID!, token: String): ProposalVote
   votableSteps: [ProposalStep!]!
 
   """The supervisor of the proposal."""
@@ -13164,47 +13249,6 @@ type ProposalSelection {
   status: ProposalStepStatus
 }
 
-"""Represents an vote from a non-registered to a proposal."""
-type ProposalSmsVote implements ProposalVote & Vote {
-  """The ID of an object"""
-  id: ID!
-
-  """The date of the vote."""
-  createdAt: DateTime!
-
-  """The author of the contribution. If null, the vote is anonymous."""
-  author: User
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """Returns 'proposalSmsVote'."""
-  kind: String!
-
-  """Returns if vote is accounted or not"""
-  isAccounted: Boolean!
-
-  """The participant of the contribution."""
-  participant: Participant
-
-  """Url of the contribution"""
-  url: URI!
-
-  """Return the proposal."""
-  proposal: Proposal!
-
-  """Return the step."""
-  step: ProposalStep!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-}
-
 """A connection to a list of items."""
 type ProposalSmsVoteConnection {
   totalCount: Int!
@@ -13219,7 +13263,7 @@ type ProposalSmsVoteConnection {
 """An edge in a connection."""
 type ProposalSmsVoteEdge {
   """The item at the end of the edge."""
-  node: ProposalSmsVote!
+  node: ProposalVote!
 
   """A cursor for use in pagination."""
   cursor: String!
@@ -13530,9 +13574,6 @@ interface ProposalStep {
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
 
-  """Whether or not sms vote are enabled."""
-  isProposalSmsVoteEnabled: Boolean
-
   """
   Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
   """
@@ -13620,9 +13661,15 @@ enum ProposalTrashedStatus {
 }
 
 """Represents a proposal vote."""
-type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableVote {
+type ProposalVote implements Node & Vote & Publishable & PrivatableVote {
   """The ID of an object"""
   id: ID!
+
+  """The contribution that was voted."""
+  related: Contribution
+
+  """The URL of the proposal linked to the vote."""
+  url: URI!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -13642,25 +13689,13 @@ type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableV
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
 
-  """The contribution that was voted."""
-  related: Contribution
-
-  """Url of the contribution"""
-  url: URI!
-
-  """Return the proposal."""
-  proposal: Proposal!
-
-  """Return the step."""
-  step: ProposalStep!
-
   """The date of the vote."""
   createdAt: DateTime!
 
-  """The author of the contribution. If null, the vote is anonymous."""
+  """The author of the contribution."""
   author: User
 
-  """Returns 'proposalUserVote'."""
+  """Returns Type of vote"""
   kind: String!
 
   """Returns if vote is accounted or not"""
@@ -13669,37 +13704,25 @@ type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableV
   """The participant of the contribution."""
   participant: Participant
 
-  """Return the ranking of the vote (if any)"""
-  ranking: Int
-}
-
-"""Represents a proposal vote."""
-interface ProposalVote {
-  """The ID of an object"""
-  id: ID!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """Url of the contribution"""
-  url: URI!
-
   """Return the proposal."""
   proposal: Proposal!
 
   """Return the step."""
   step: ProposalStep!
 
-  """The date of the vote."""
-  createdAt: DateTime!
+  """Return the ranking of the vote (if any)"""
+  ranking: Int
 
-  """Whether or not the entity is published."""
-  published: Boolean!
+  """The contributor of the vote."""
+  contributor: Contributor
 
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
+  """The url to the requirements workflow."""
+  requirementsUrl: URI
+
+  """
+  The contribution status wether or not the participant/user has meet all requirements
+  """
+  completionStatus: ContributionCompletionStatus!
 }
 
 """A connection to a list of items."""
@@ -14371,7 +14394,17 @@ type Query {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Filter participants who consent receiving internal communication."""
+    consentInternalCommunication: Boolean
+
+    """Filter participants who confirmed their email."""
+    emailConfirmed: Boolean
   ): ParticipantConnection!
+  participant(
+    """get a participant by its token"""
+    token: String
+  ): Participant
 
   """The navbar menu items."""
   menuItems: [MenuItem!]!
@@ -15034,12 +15067,6 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   """A questionnaire associated with the step."""
   questionnaire: Questionnaire
 
-  """Does the questionnaire allow anonymous users to participate ?"""
-  isAnonymousParticipationAllowed: Boolean!
-
-  """Does the questionnaire allow to collect anonymous users email ?"""
-  collectParticipantsEmail: Boolean!
-
   """Is the questionnaire footer using Jodit Wysiwyg."""
   footerUsingJoditWysiwyg: Boolean!
 }
@@ -15509,8 +15536,8 @@ type RemoveOpinionVotePayload {
 
 """Available errors for an `removeProposalSmsVoteMutation` mutation."""
 enum RemoveProposalSmsVoteErrorCode {
-  """The given token does not match any phone."""
-  PHONE_NOT_FOUND
+  """The given token does not match any participant."""
+  PARTICIPANT_NOT_FOUND
 }
 
 input RemoveProposalSmsVoteInput {
@@ -15530,6 +15557,7 @@ type RemoveProposalSmsVotePayload {
   proposal: Proposal
   previousVoteId: ID
   errorCode: RemoveProposalSmsVoteErrorCode
+  participant: Participant!
   clientMutationId: String
 }
 
@@ -15548,6 +15576,7 @@ type RemoveProposalVotePayload {
   viewer: User!
   previousVoteId: ID
   areRemainingVotesAccounted: Boolean!
+  shouldDecrementContributorsTotalCount: Boolean
   clientMutationId: String
 }
 
@@ -15621,24 +15650,10 @@ type RemoveSsoPayload {
   clientMutationId: String
 }
 
-"""Represents an answer to a questionnaire."""
-interface Reply {
+"""Represents a user answer to a questionnaire."""
+type Reply implements Node & Publishable & Contribution & Draftable {
   """The ID of an object"""
   id: ID!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The url of the reply."""
-  url: URI!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -15652,8 +15667,37 @@ interface Reply {
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
   """The responses of the reply."""
   responses: [Response]!
+
+  """The author of the Reply."""
+  author: User
+
+  """Whether or not the current viewer can delete the reply."""
+  viewerCanDelete: Boolean!
+
+  """Whether or not the current viewer can update the reply."""
+  viewerCanUpdate: Boolean!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the reply."""
+  url: URI!
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!
@@ -15663,6 +15707,26 @@ interface Reply {
 
   """The status of the reply."""
   status: ReplyStatus
+
+  """The author or participant of the Reply."""
+  contributor: Contributor!
+
+  """Whether or not the reply is private."""
+  private: Boolean!
+
+  """The reply status."""
+  publicationStatus: ReplyPublicationStatus!
+
+  """Wether or not the reply is created by an authenticated user"""
+  isAnonymous: Boolean!
+
+  """The url to the requirements workflow."""
+  requirementsUrl: URI
+
+  """
+  The contribution status wether or not the participant/user has meet all requirements
+  """
+  completionStatus: ContributionCompletionStatus!
 }
 
 """A connection to a list of items."""
@@ -15902,7 +15966,7 @@ interface Requirement {
   """Does the participant meets the requirement ?"""
   participantMeetsTheRequirement(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The requirement type sent to the api."""
@@ -15920,7 +15984,7 @@ type RequirementConnection {
   """Does the participant meets all the requirements ?"""
   participantMeetsTheRequirements(
     """The token associated to the Participant."""
-    token: String!
+    token: String
   ): Boolean!
 
   """The reason for requirements."""
@@ -15992,6 +16056,18 @@ enum RequirementType {
 
   """The requirement is authentication to France Connect"""
   FRANCE_CONNECT
+
+  """The requirement is a verified email address"""
+  EMAIL_VERIFIED
+
+  """The requirement is a valid zip code"""
+  ZIP_CODE
+
+  """The requirement is authentication through SSO"""
+  SSO
+
+  """The requirement is to accept privacy policy"""
+  CONSENT_PRIVACY_POLICY
 }
 
 """Available errors on resendEmailConfirmationMutation"""
@@ -16783,9 +16859,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """Whether or not can display vote counters and points"""
   canDisplayBallot: Boolean!
 
-  """Whether or not sms vote are enabled."""
-  isProposalSmsVoteEnabled: Boolean
-
   """
   Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
   """
@@ -16876,6 +16949,38 @@ type SendConfirmationEmailDebateAnonymousArgumentPayload {
   clientMutationId: String
 }
 
+"""
+Available errors for an `SendConfirmationEmailParticipantErrorCode` mutation.
+"""
+enum SendConfirmationEmailParticipantErrorCode {
+  """The email is already confirmed"""
+  EMAIL_ALREADY_CONFIRMED
+
+  """The email has already been sent recently"""
+  EMAIL_RECENTLY_SENT
+}
+
+input SendConfirmationEmailParticipantInput {
+  """The email to send confirmation."""
+  email: String!
+
+  """The returned token of Participant."""
+  token: String!
+
+  """The url to redirect to after confirming the email."""
+  redirectUrl: String!
+  clientMutationId: String
+}
+
+type SendConfirmationEmailParticipantPayload {
+  """The error code, if failing."""
+  errorCode: SendConfirmationEmailParticipantErrorCode
+
+  """For testing purpose only, the url to confirm the participant email."""
+  confirmationUrl: String
+  clientMutationId: String
+}
+
 input SendContactFormInput {
   """The ID of the contact form."""
   idContactForm: ID!
@@ -16929,37 +17034,117 @@ type SendEmailingCampaignPayload {
   clientMutationId: String
 }
 
-"""Available errors for an `sendSmsPhoneValidationCode` mutation."""
-enum SendSmsPhoneValidationCodeErrorCode {
-  """The given number is invalid"""
+"""Available errors for an `sendMagicLinkEmail` mutation."""
+enum SendMagicLinkEmailErrorCode {
+  """The user has already requested an email sending."""
+  EMAIL_RECENTLY_SENT
+}
+
+input SendMagicLinkEmailInput {
+  """The email to send the magic link to."""
+  email: Email!
+
+  """Available email template variants"""
+  variant: SendMagicLinkEmailVariantEnum = DEFAULT
+
+  """The url to redirect to after logging in."""
+  redirectUrl: URI!
+  clientMutationId: String
+}
+
+type SendMagicLinkEmailPayload {
+  errorCode: SendMagicLinkEmailErrorCode
+  clientMutationId: String
+}
+
+"""
+Available email template variants for an `sendMagicLinkEmail` mutation.
+"""
+enum SendMagicLinkEmailVariantEnum {
+  """The default template when user request a magic link."""
+  DEFAULT
+
+  """
+  The template when we detect that there is an existing user with the given email.
+  """
+  ACCOUNT_DETECTED
+}
+
+"""Available errors on sendParticipantConsentInternalCommunicationEmail"""
+enum SendParticipantConsentInternalCommunicationEmailErrorCode {
+  """The email has already been sent recently"""
+  EMAIL_RECENTLY_SENT
+}
+
+input SendParticipantConsentInternalCommunicationEmailInput {
+  """The Participant Token."""
+  participantToken: String
+
+  """The Participant email."""
+  email: Email!
+  clientMutationId: String
+}
+
+type SendParticipantConsentInternalCommunicationEmailPayload {
+  participant: Participant!
+  errorCode: SendParticipantConsentInternalCommunicationEmailErrorCode
+  clientMutationId: String
+}
+
+"""
+Available errors for an `SendParticipantEmailWorkflowErrorCode` mutation.
+"""
+enum SendParticipantEmailWorkflowErrorCode {
+  """The email has already been sent recently"""
+  EMAIL_RECENTLY_SENT
+}
+
+input SendParticipantEmailWorkflowInput {
+  participantToken: String!
+  email: Email!
+  redirectUrl: URI!
+  emailType: ParticipationWorkflowParticipantEmailType!
+  clientMutationId: String
+}
+
+type SendParticipantEmailWorkflowPayload {
+  errorCode: SendParticipantEmailWorkflowErrorCode
+
+  """The url to redirect to, only for testing purpose."""
+  redirectUrl: String
+  clientMutationId: String
+}
+
+input SendParticipantPhoneValidationCodeInput {
+  """The phone number to send the sms."""
+  phone: String!
+
+  """The returned token of Participant."""
+  token: String!
+  clientMutationId: String
+}
+
+type SendParticipantPhoneValidationCodePayload {
+  """The error code, if failing."""
+  errorCode: SendSMSErrorCode
+  clientMutationId: String
+}
+
+"""
+Available errors for an `verifyParticipantPhoneNumber and verifyUserPhoneNumber` mutations.
+"""
+enum SendSMSErrorCode {
+  """The given phone is not correctly formatted."""
   INVALID_NUMBER
 
-  """The user reached the retry limit of 2 within a minute"""
-  RETRY_LIMIT_REACHED
-
-  """The user has already confirmed his phone number"""
+  """The phone is already confirmed."""
   PHONE_ALREADY_CONFIRMED
 
-  """The user is unauthorized"""
-  UNAUTHORIZED
+  """The retry limit is reached."""
+  RETRY_LIMIT_REACHED
 
-  """The rate limit for requests has been exceeded"""
-  RATE_LIMIT_EXCEEDED
-
-  """A server error occurred while processing the request"""
+  """An error occured while calling sms verify api."""
   SERVER_ERROR
-
-  """An unknown error occurred"""
-  UNKNOWN_ERROR
-
-  """The requested resource was not found"""
-  NOT_FOUND
-
-  """The provided code is not valid"""
-  NOT_VALID_CODE
-
-  """An error occured while calling twilio api"""
-  TWILIO_API_ERROR
 }
 
 input SendSmsPhoneValidationCodeInput {
@@ -16968,46 +17153,7 @@ input SendSmsPhoneValidationCodeInput {
 
 type SendSmsPhoneValidationCodePayload {
   """The error code, if failing."""
-  errorCode: SendSmsPhoneValidationCodeErrorCode
-  clientMutationId: String
-}
-
-"""Available errors for an `sendSmsProposalVote` mutation."""
-enum SendSmsProposalVoteErrorCode {
-  """The given number is invalid."""
-  INVALID_NUMBER
-
-  """An error occured while calling twilio api."""
-  TWILIO_API_ERROR
-
-  """Given phone number should be a mobile number."""
-  PHONE_SHOULD_BE_MOBILE_NUMBER
-
-  """Given phone number has incorrect length."""
-  PHONE_INVALID_LENGTH
-
-  """Given phone number is already used by another user."""
-  PHONE_ALREADY_USED_BY_ANOTHER_USER
-
-  """The user reached the retry limit."""
-  RETRY_LIMIT_REACHED
-}
-
-input SendSmsProposalVoteInput {
-  """The phone number to send the sms."""
-  phone: String!
-
-  """The step global id."""
-  stepId: ID!
-
-  """The proposal global id."""
-  proposalId: ID!
-  clientMutationId: String
-}
-
-type SendSmsProposalVotePayload {
-  """The error code, if failing."""
-  errorCode: SendSmsProposalVoteErrorCode
+  errorCode: SendSMSErrorCode
   clientMutationId: String
 }
 
@@ -18303,21 +18449,45 @@ type UpdateAlphaProjectPayload {
   clientMutationId: String
 }
 
+input UpdateAnonymousProposalVotesInput {
+  """Participant token."""
+  token: String!
+
+  """The step."""
+  step: ID!
+
+  """The votes."""
+  votes: [VoteInput!]!
+  clientMutationId: String
+}
+
+type UpdateAnonymousProposalVotesPayload {
+  step: ProposalStep!
+  clientMutationId: String
+}
+
+"""Available errors on `UpdateAnonymousReply` mutation."""
+enum UpdateAnonymousReplyErrorCode {
+  """The phone is already used by another participant / user."""
+  PHONE_ALREADY_USED
+}
+
 input UpdateAnonymousReplyInput {
-  """The hashed token of the reply"""
-  hashedToken: String!
+  """The Reply ID."""
+  replyId: ID!
+
+  """The participant token."""
+  participantToken: String!
 
   """The responses to the questionnaire questions"""
   responses: [ResponseInput!]!
-
-  """The participant email"""
-  participantEmail: Email
   clientMutationId: String
 }
 
 type UpdateAnonymousReplyPayload {
   """The updated AnonymousReply"""
-  reply: AnonymousReply
+  reply: Reply
+  errorCode: UpdateAnonymousReplyErrorCode
   clientMutationId: String
 }
 
@@ -18411,11 +18581,6 @@ input UpdateCollectStepInput {
   """Reasons to require these requirements."""
   requirementsReason: String
 
-  """
-  If anonymous participation is allowed whether or not we collect participants email.
-  """
-  collectParticipantsEmail: Boolean
-
   """Wether or not anonymous user can participate."""
   isAnonymousParticipationAllowed: Boolean
 
@@ -18449,9 +18614,6 @@ input UpdateCollectStepInput {
   publishedVoteDate: DateTime
   voteType: ProposalStepVoteType
   budget: Float
-
-  """Whether or not sms vote is enabled."""
-  isProposalSmsVoteEnabled: Boolean
 
   """Whether or not secret ballot is enable"""
   secretBallot: Boolean
@@ -19388,12 +19550,32 @@ type UpdatePaperVotePayload {
   clientMutationId: String
 }
 
-input UpdateParticipantRequirementInput {
-  """The Node ID of the requirement to modify."""
-  requirementId: ID!
+input UpdateParticipantInput {
+  """The participant token to update"""
+  token: String!
+  firstname: String
+  lastname: String
+  postalAddress: String
+  dateOfBirth: DateTime
+  phone: String
+  zipCode: String
+  consentInternalCommunication: Boolean
+  consentPrivacyPolicy: Boolean
+  userIdentificationCode: String
+  clientMutationId: String
+}
 
-  """The updated value of the requirement."""
-  value: Boolean!
+type UpdateParticipantPayload {
+  """The updated Participant."""
+  participant: Participant!
+
+  """Form errors JSON."""
+  validationErrors: String
+  clientMutationId: String
+}
+
+input UpdateParticipantRequirementInput {
+  values: [CheckboxRequirementInput]!
 
   """The participant token."""
   participantToken: String!
@@ -19402,7 +19584,7 @@ input UpdateParticipantRequirementInput {
 
 type UpdateParticipantRequirementPayload {
   participant: Participant
-  requirement: Requirement
+  requirements: [Requirement]
   clientMutationId: String
 }
 
@@ -19526,11 +19708,16 @@ enum UpdateProfilePersonalDataErrorCode {
   """The given phone should be a mobile phone number."""
   PHONE_SHOULD_BE_MOBILE_NUMBER
 
-  """The given phone is already used by another user."""
-  PHONE_ALREADY_USED_BY_ANOTHER_USER
-
   """The given phone should be 10 digits."""
   PHONE_INVALID_LENGTH
+
+  """The identification code does not exist."""
+  BAD_CODE
+
+  """
+  The identification code is already used by another user or participant.
+  """
+  CODE_ALREADY_USED
 }
 
 input UpdateProfilePersonalDataInput {
@@ -19581,6 +19768,8 @@ input UpdateProfilePersonalDataInput {
   """Your identification code to verify your account"""
   userIdentificationCode: String
   stepId: ID
+  consentInternalCommunication: Boolean
+  consentPrivacyPolicy: Boolean
   clientMutationId: String
 }
 
@@ -20071,14 +20260,6 @@ input UpdateQuestionnaireStepInput {
 
   """Reasons to require these requirements."""
   requirementsReason: String
-
-  """
-  If anonymous participation is allowed whether or not we collect participants email.
-  """
-  collectParticipantsEmail: Boolean
-
-  """Wether or not anonymous user can participate."""
-  isAnonymousParticipationAllowed: Boolean
   clientMutationId: String
 }
 
@@ -20141,17 +20322,13 @@ type UpdateRegistrationPagePayload {
 }
 
 input UpdateRequirementInput {
-  """The Node ID of the requirement to modify."""
-  requirement: ID!
-
-  """The updated value of the requirement."""
-  value: Boolean!
+  values: [CheckboxRequirementInput]!
   clientMutationId: String
 }
 
 type UpdateRequirementPayload {
   viewer: User
-  requirement: Requirement
+  requirements: [Requirement]!
   clientMutationId: String
 }
 
@@ -20193,11 +20370,6 @@ input UpdateSelectionStepInput {
   """Reasons to require these requirements."""
   requirementsReason: String
 
-  """
-  If anonymous participation is allowed whether or not we collect participants email.
-  """
-  collectParticipantsEmail: Boolean
-
   """Wether or not anonymous user can participate."""
   isAnonymousParticipationAllowed: Boolean
 
@@ -20231,9 +20403,6 @@ input UpdateSelectionStepInput {
   publishedVoteDate: DateTime
   voteType: ProposalStepVoteType
   budget: Float
-
-  """Whether or not sms vote is enabled."""
-  isProposalSmsVoteEnabled: Boolean
 
   """Whether or not secret ballot is enable"""
   secretBallot: Boolean
@@ -20478,6 +20647,12 @@ type UpdateUserPayload {
   clientMutationId: String
 }
 
+"""Available errors on `UpdateUserReply` mutation."""
+enum UpdateUserReplyErrorCode {
+  """The phone is already used by another participant / user."""
+  PHONE_ALREADY_USED
+}
+
 input UpdateUserReplyInput {
   """The id of the reply"""
   replyId: ID!
@@ -20490,12 +20665,14 @@ input UpdateUserReplyInput {
 
   """If true will create a draft reply."""
   draft: Boolean! = false
+  errorCode: UpdateUserReplyErrorCode
   clientMutationId: String
 }
 
 type UpdateUserReplyPayload {
   """Update a reply"""
-  reply: UserReply
+  reply: Reply
+  errorCode: UpdateUserReplyErrorCode
   clientMutationId: String
 }
 
@@ -20529,11 +20706,14 @@ input UpdateVotesVisibilityInput {
 
   """Wether the votes should be anonymous or not."""
   anonymous: Boolean!
+
+  """If participant, the participant token."""
+  participantToken: String
   clientMutationId: String
 }
 
 type UpdateVotesVisibilityPayload {
-  votes: [ProposalUserVote]!
+  votes: [ProposalVote]!
   clientMutationId: String
 }
 
@@ -20958,6 +21138,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """Whether or not this user consent external communication."""
   consentExternalCommunication: Boolean!
+
+  """Whether or not this user consent privacy policy."""
+  consentPrivacyPolicy: Boolean!
 
   """Array of proposals followed by current user."""
   followingProposals(
@@ -21488,71 +21671,6 @@ enum UserOrderField {
   ACTIVITY
 }
 
-"""Represents a user answer to a questionnaire."""
-type UserReply implements Node & Reply & Publishable & Contribution & Draftable {
-  """The ID of an object"""
-  id: ID!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Whether or not the entity is a draft."""
-  draft: Boolean!
-
-  """Identifies when the entity was undraft at."""
-  undraftAt: DateTime
-
-  """The responses of the reply."""
-  responses: [Response]!
-
-  """The author of the Reply."""
-  author: User!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The url of the reply."""
-  url: URI!
-
-  """Identifies the form where the contribution was submitted."""
-  questionnaire: Questionnaire!
-
-  """The admin url of the reply."""
-  adminUrl: URI
-
-  """The status of the reply."""
-  status: ReplyStatus
-
-  """Whether or not the current viewer can delete the reply."""
-  viewerCanDelete: Boolean!
-
-  """Whether or not the current viewer can update the reply."""
-  viewerCanUpdate: Boolean!
-
-  """Whether or not the reply is private."""
-  private: Boolean!
-
-  """The reply status."""
-  publicationStatus: ReplyPublicationStatus!
-}
-
 """4 possible values"""
 enum UserRole {
   """Represents a user."""
@@ -21581,6 +21699,47 @@ type UserType implements Node {
 
   """The media associated with this type"""
   media: Media
+}
+
+input ValidateContributionInput {
+  """
+  If anonymous, the token of the participant who created the contribution.
+  """
+  token: String
+
+  """
+  The ID of the contribution, It can be either a Reply a Vote or a Proposal
+  """
+  contributionId: ID!
+  clientMutationId: String
+}
+
+type ValidateContributionPayload {
+  """The url to redirect to if contribution is validated."""
+  redirectUrl: String!
+  clientMutationId: String
+}
+
+"""Available errors on validetePhoneReusability mutation"""
+enum ValidatePhoneReusabilityErrorCode {
+  """
+  The given phone is already used by another participant / user in this step.
+  """
+  PHONE_ALREADY_USED
+}
+
+input ValidatePhoneReusabilityInput {
+  """Given participant token if unauthenticated."""
+  participantToken: String
+
+  """The ID of the contribution"""
+  contributionId: ID!
+  clientMutationId: String
+}
+
+type ValidatePhoneReusabilityPayload {
+  errorCode: ValidatePhoneReusabilityErrorCode
+  clientMutationId: String
 }
 
 """A response"""
@@ -21613,43 +21772,28 @@ type ValueResponse implements Response & CivicIAAnalyzable & Node {
   iaSentiment: CivicIASentiment
 }
 
-"""Available errors for an `verifySmsVotePhoneNumber` mutation."""
-enum VerifySmsVotePhoneNumberErrorCode {
-  """The given code is expired."""
-  CODE_EXPIRED
+input VerifyParticipantPhoneNumberInput {
+  """The token participant"""
+  token: String!
 
-  """The given code is not valid."""
-  CODE_NOT_VALID
-
-  """An error occured while calling twilio api."""
-  TWILIO_API_ERROR
-}
-
-input VerifySmsVotePhoneNumberInput {
-  """The phone that received the code."""
-  phone: String!
-
-  """The verification code to verify the phone."""
+  """The validaton code sent by sms"""
   code: String!
-
-  """The Node ID of the proposal to vote."""
-  proposalId: ID!
-
-  """The Node ID of the step."""
-  stepId: ID!
   clientMutationId: String
 }
 
-type VerifySmsVotePhoneNumberPayload {
-  errorCode: VerifySmsVotePhoneNumberErrorCode
+type VerifyParticipantPhoneNumberPayload {
+  """The updated Participant."""
+  participant: Participant
 
-  """The returned token to authenticate the user."""
-  token: String
+  """The error code, if failing."""
+  errorCode: VerifySMSErrorCode
   clientMutationId: String
 }
 
-"""Available errors for an `verifyUserPhoneNumber` mutation."""
-enum VerifyUserPhoneNumberErrorCode {
+"""
+Available errors for an `verifyParticipantPhoneNumber and verifyUserPhoneNumber` mutations.
+"""
+enum VerifySMSErrorCode {
   """The given phone is already confirmed."""
   PHONE_ALREADY_CONFIRMED
 
@@ -21659,8 +21803,11 @@ enum VerifyUserPhoneNumberErrorCode {
   """The given code is not valid."""
   CODE_NOT_VALID
 
-  """An error occured while calling twilio api."""
-  TWILIO_API_ERROR
+  """The retry limit is reached."""
+  RETRY_LIMIT_REACHED
+
+  """An error occured while calling sms verify api."""
+  SERVER_ERROR
 }
 
 input VerifyUserPhoneNumberInput {
@@ -21674,7 +21821,7 @@ type VerifyUserPhoneNumberPayload {
   user: User
 
   """The error code, if failing."""
-  errorCode: VerifyUserPhoneNumberErrorCode
+  errorCode: VerifySMSErrorCode
   clientMutationId: String
 }
 

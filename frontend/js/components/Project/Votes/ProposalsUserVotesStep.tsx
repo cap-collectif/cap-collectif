@@ -7,6 +7,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import ProposalsUserVotesTable from './ProposalsUserVotesTable'
 import SubmitButton from '../../Form/SubmitButton'
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation'
+import UpdateAnonymousProposalVotesMutation from '../../../mutations/UpdateAnonymousProposalVotesMutation'
 import type { ProposalsUserVotesStep_step$data } from '~relay/ProposalsUserVotesStep_step.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
@@ -15,6 +16,7 @@ import { ProposalUserVoteStepContainer, BackToVote } from './ProposalsUserVotes.
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import withColors from '~/components/Utils/withColors'
 import type { GlobalState } from '~/types'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type RelayProps = {
   step: ProposalsUserVotesStep_step$data
@@ -28,6 +30,7 @@ type Props = RelayProps & {
 }
 export const ProposalsUserVotesStep = ({ step, dirty, submitting, dispatch, isAuthenticated, linkColor }: Props) => {
   const [showAbout, setShowAbout] = useState<boolean>(false)
+  const token = CookieMonster.getParticipantCookie()
   const intl = useIntl()
   const keyTradProjectCount =
     step.form?.objectType === 'PROPOSAL'
@@ -42,7 +45,26 @@ export const ProposalsUserVotesStep = ({ step, dirty, submitting, dispatch, isAu
       id: string
     }>
   }) => {
-    return UpdateProposalVotesMutation.commit(
+
+    if (isAuthenticated) {
+      return UpdateProposalVotesMutation.commit(
+        {
+          input: {
+            step: step.id,
+            votes: values.votes.map(v => ({
+              id: v.id,
+              anonymous: !v.public,
+            })),
+          },
+          stepId: step.id,
+          isAuthenticated,
+          token: null,
+        },
+        null,
+      )
+    }
+
+    return UpdateAnonymousProposalVotesMutation.commit(
       {
         input: {
           step: step.id,
@@ -50,13 +72,15 @@ export const ProposalsUserVotesStep = ({ step, dirty, submitting, dispatch, isAu
             id: v.id,
             anonymous: !v.public,
           })),
+          token
         },
         stepId: step.id,
         isAuthenticated,
-        token: null,
+        token,
       },
       null,
     )
+
   }
 
   if (!step.viewerVotes) {

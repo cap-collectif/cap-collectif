@@ -47,6 +47,7 @@ settings:
 mappings:
     dynamic: false
     properties:
+        isCreatedBeforeWorkflow: { type: boolean }
         id: { type: keyword } # type:db ID
         objectType: { type: keyword } # replace ES < 6 "type" field
         slug: { type: keyword }
@@ -398,6 +399,7 @@ mappings:
                 draft: { type: boolean }
                 replyType: { type: keyword }
                 replyStatus: { type: keyword }
+                completionStatus: { type: keyword }
         questionnaire:
             properties:
                 id: { type: keyword }
@@ -407,6 +409,7 @@ mappings:
         followedAt: { type: date }
 
         replyStatus: { type: keyword }
+        completionStatus: { type: keyword }
 
         #
         # This allow ous to monitore the usage of our API.

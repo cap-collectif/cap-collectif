@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -23,12 +24,16 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Security\StepVoter;
+use Capco\AppBundle\Service\CapcoAnonReplyDecoder;
+use Capco\AppBundle\Service\ParticipantAccessResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -37,7 +42,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
-    public function __construct(private readonly TranslatorInterface $translator, private readonly SerializerInterface $serializer, private readonly OpinionSearch $opinionSearch, private readonly VersionSearch $versionSearch, private readonly LocaleRepository $localeRepo, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private readonly TranslatorInterface $translator, private readonly SerializerInterface $serializer, private readonly OpinionSearch $opinionSearch, private readonly VersionSearch $versionSearch, private readonly LocaleRepository $localeRepo, private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder, private readonly ParticipantAccessResolver $participantAccessResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 
@@ -341,7 +346,6 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
         ];
     }
 
@@ -358,21 +362,52 @@ class StepController extends Controller
      * @Template("@CapcoApp/Step/questionnaire.html.twig")
      */
     public function showQuestionnaireStepAction(
+        Request $request,
         Project $project,
         QuestionnaireStep $step,
         ?string $replyId = null
     ) {
+        if (null !== $request->query->get('workflow') && $replyId) {
+            return $this->redirectToRoute('requirements', [
+                'stepId' => $step->getId(),
+                'contributionId' => $replyId,
+            ]);
+        }
+
         $viewer = $this->getUser();
         if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
         if ($replyId) {
-            $decodedId = GlobalId::fromGlobalId($replyId)['id'];
-            if ($decodedId) {
-                $reply = $this->get(ReplyRepository::class)->find($decodedId);
+            if ($this->em->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+                $this->em->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
             }
-            if (!$viewer || !$decodedId || !$reply || !$reply->viewerCanSee($viewer)) {
+
+            $decodedId = GlobalId::fromGlobalId($replyId)['id'];
+            $reply = $this->get(ReplyRepository::class)->find($decodedId);
+
+            if (!$reply) {
+                return $this->redirectToRoute('app_project_show_questionnaire', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                ]);
+            }
+
+            $anonReplyBase64 = $request->cookies->get('CapcoAnonReply');
+            $participantHasAccess = false;
+            if (!$viewer && $anonReplyBase64) {
+                $decodedAnonReply = $this->capcoAnonReplyDecoder->decode($anonReplyBase64);
+                $questionnaireId = $step->getQuestionnaire()->getId();
+                $replies = $decodedAnonReply[$questionnaireId] ?? [];
+                foreach ($replies as $reply) {
+                    ['EDIT' => $participantHasAccess] = $this->participantAccessResolver->getReplyAccess($reply['replyId'], $reply['token']);
+                }
+            }
+
+            $hasAccess = $participantHasAccess || ($reply && $viewer && $reply->viewerCanSee($viewer));
+
+            if (!$hasAccess) {
                 return $this->redirectToRoute('app_project_show_questionnaire', [
                     'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
@@ -383,9 +418,7 @@ class StepController extends Controller
         $props = $this->serializer->serialize(
             [
                 'step' => $step,
-                'isPrivateResult' => $step->getQuestionnaire()
-                    ? $step->getQuestionnaire()->isPrivateResult()
-                    : false,
+                'isPrivateResult' => $step->getQuestionnaire() && $step->getQuestionnaire()->isPrivateResult(),
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
                     : null,
@@ -427,7 +460,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalForm' => null,
-            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
         ];
     }
 
@@ -451,7 +483,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalForm' => null,
-            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
             'isMapView' => ViewConfiguration::MAP === $step->getMainView(),
         ];
     }

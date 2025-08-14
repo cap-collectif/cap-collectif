@@ -257,9 +257,11 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
               edges {
                 node {
                   project {
+                    title
                     _id
                     visibility
                   }
+                  title
                 }
               }
             }
@@ -275,53 +277,63 @@ Scenario: GraphQL user wants to get proposals of a project with custom acces tha
   Then the JSON response should match:
   """
   {
-     "data":{
-        "user":{
-           "proposals":{
-              "edges": [
-                {
-                  "node": {
-                    "project": {
-                      "_id": "project10",
-                      "visibility": "PUBLIC"
-                    }
-                  }
+    "data": {
+      "user": {
+        "proposals": {
+          "edges": [
+            {
+              "node": {
+                "project": {
+                  "title": "Budget Participatif Rennes",
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 },
-                {
-                  "node": {
-                    "project": {
-                      "_id": "project9",
-                      "visibility": "PUBLIC"
-                    }
-                  }
+                "title": "Proposal 53"
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "title": "Budget Participatif Rennes",
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 },
-                {
-                  "node": {
-                    "project": {
-                      "_id": "ProjectWithCustomAccess",
-                      "visibility": "CUSTOM"
-                    }
-                  }
+                "title": "Proposal 52"
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "title": "Budget Participatif Rennes",
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 },
-                {
-                  "node": {
-                    "project": {
-                      "_id": "ProjectWithCustomAccess",
-                      "visibility": "CUSTOM"
-                    }
-                  }
+                "title": "Proposal 51"
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "title": "Budget Participatif Rennes",
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 },
-                {
-                  "node": {
-                    "project": {
-                      "_id": "ProjectWithCustomAccess",
-                      "visibility": "CUSTOM"
-                    }
-                  }
-                }
-              ]
-           }
+                "title": "Proposal 50"
+              }
+            },
+            {
+              "node": {
+                "project": {
+                  "title": "Budget Participatif Rennes",
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
+                },
+                "title": "Proposal 49"
+              }
+            }
+          ]
         }
-     }
+      }
+    }
   }
   """

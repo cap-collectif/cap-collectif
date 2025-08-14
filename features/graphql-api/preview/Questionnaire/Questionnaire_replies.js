@@ -16,18 +16,16 @@ const OpenDataRepliesQuery = /* GraphQL */ `
               createdAt
               publishedAt
               updatedAt
-              ... on UserReply {
-                author {
-                  id
-                  userType {
-                    name
-                  }
-                  responses {
-                    edges {
-                      node {
-                        ... on ValueResponse {
-                          value
-                        }
+              author {
+                id
+                userType {
+                  name
+                }
+                responses {
+                  edges {
+                    node {
+                      ... on ValueResponse {
+                        value
                       }
                     }
                   }

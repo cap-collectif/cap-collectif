@@ -145,7 +145,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
           createdAt
           publishedAt
           published
-          ...on ProposalUserVote {
+          ...on ProposalVote {
               isAccounted
               anonymous
               ranking
@@ -857,7 +857,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     protected function addProposalVotesRow(array $vote, array $proposal): void
     {
         $type =
-            'ProposalUserVote' === $vote['__typename'] ? 'proposalVote' : 'proposalAnonymousVote';
+            'ProposalVote' === $vote['__typename'] ? 'proposalVote' : 'proposalAnonymousVote';
         $this->addDataBlock($type, 'vote', $vote, $proposal);
     }
 

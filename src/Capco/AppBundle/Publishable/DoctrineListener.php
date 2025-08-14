@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\Publishable;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
+use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -46,6 +49,11 @@ class DoctrineListener implements EventSubscriber
     {
         /** @var User $author */
         $author = $entity->getAuthor();
+
+        if (!self::handleContribution($entity)) {
+            return;
+        }
+
         if (!$author || $author->isEmailConfirmed()) {
             if ($entity instanceof DraftableInterface && $entity->isDraft()) {
                 return;
@@ -62,5 +70,30 @@ class DoctrineListener implements EventSubscriber
             return;
         }
         self::setPublishedStatus($comment);
+    }
+
+    private static function handleContribution(Publishable $entity): bool
+    {
+        if (!$entity instanceof ContributionInterface) {
+            return true;
+        }
+
+        if (ContributionCompletionStatus::MISSING_REQUIREMENTS === $entity->getCompletionStatus()) {
+            return false;
+        }
+
+        if (!$entity->getStep()) {
+            return true;
+        }
+
+        $requirements = $entity->getStep()->getRequirements();
+        $hasEmailRequirements = 1 === $requirements->filter(fn ($requirement) => Requirement::EMAIL_VERIFIED === $requirement->getType())->count();
+
+        $participant = $entity->getParticipant();
+        if ($hasEmailRequirements && $participant && !$participant->isEmailConfirmed()) {
+            return false;
+        }
+
+        return true;
     }
 }

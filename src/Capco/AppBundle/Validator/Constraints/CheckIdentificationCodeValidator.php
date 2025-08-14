@@ -26,7 +26,7 @@ class CheckIdentificationCodeValidator extends ConstraintValidator
             return;
         }
 
-        if (!empty($code['isUsed'])) {
+        if (!empty($code['isUsedByUser']) || !empty($code['isUsedByParticipant'])) {
             $this->context->buildViolation($constraint->messageUsed)->addViolation();
         }
     }

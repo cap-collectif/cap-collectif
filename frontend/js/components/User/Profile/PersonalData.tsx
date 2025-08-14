@@ -153,11 +153,7 @@ const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props)
         let phone
 
         switch (errorCode) {
-          case 'PHONE_ALREADY_USED_BY_ANOTHER_USER':
-            phone = intl.formatMessage({
-              id: 'phone.validation.number.already.used',
-            })
-            break
+
 
           case 'PHONE_INVALID_LENGTH':
             phone = intl.formatMessage({

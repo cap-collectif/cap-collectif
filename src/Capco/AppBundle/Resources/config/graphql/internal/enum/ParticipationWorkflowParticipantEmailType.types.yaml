@@ -1,0 +1,12 @@
+ParticipationWorkflowParticipantEmailType:
+    type: enum
+    config:
+        name: ParticipationWorkflowParticipantEmailType
+        description: 'Available authentication email'
+        values:
+            MAGIC_LINK:
+                value: !php/const Capco\AppBundle\Enum\ParticipationWorkflowParticipantEmailType::MAGIC_LINK
+                description: 'The magic link email to authenticate without password.'
+            PARTICIPANT_CONFIRMATION_EMAIL:
+                value: !php/const Capco\AppBundle\Enum\ParticipationWorkflowParticipantEmailType::PARTICIPANT_CONFIRMATION_EMAIL
+                description: 'The email to confirm a participant email'

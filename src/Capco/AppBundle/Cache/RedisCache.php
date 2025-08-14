@@ -8,6 +8,7 @@ use Symfony\Component\Cache\Adapter\RedisAdapter;
 class RedisCache extends RedisAdapter
 {
     final public const ONE_MINUTE = 60;
+    final public const FIVE_MINUTES = 300;
     final public const ONE_HOUR = 3600;
     final public const ONE_DAY = 50400;
 

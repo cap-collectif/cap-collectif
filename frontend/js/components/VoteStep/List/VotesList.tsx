@@ -46,7 +46,7 @@ const FRAGMENT = graphql`
           id
           proposal {
             id
-            ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+            ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
           }
         }
       }
@@ -72,7 +72,7 @@ export const VotesList = ({ stepId, showImages = false }: Props) => {
       count: LOAD_PROPOSAL_COUNT,
       cursor: null,
       isAuthenticated,
-      token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+      token: CookieMonster.getParticipantCookie(),
     },
     {
       fetchPolicy: 'network-only',

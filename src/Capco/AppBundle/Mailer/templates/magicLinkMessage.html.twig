@@ -1,0 +1,72 @@
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+
+{% block core_mail %}
+    <div>
+
+        <img style="margin-bottom: 10px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+
+        <div style="margin: 20px 0; color: #2B2B2B; text-align: left;">
+            <p style="margin: 0 0 24px 0; font-weight: 600; line-height: 32px; color: #2B2B2B; font-size: 24px;">
+                {{ 'login-link'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+            </p>
+            <div style="margin-bottom: 16px">
+                <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                    {{ 'mail-greeting-username'|trans({'username': username}, 'CapcoAppBundle', user_locale)|raw }}
+                </p>
+                {% if variant == 'DEFAULT'%}
+                    <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                        {{ 'magic-link-email-body'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                    </p>
+                {% endif %}
+                {% if variant == 'ACCOUNT_DETECTED' %}
+                    <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                        {{ 'magic-link-account-detected-body-1'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                    </p>
+                    <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                        {{ 'magic-link-account-detected-body-2'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                    </p>
+                    <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                        {{ 'magic-link-account-detected-body-3'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <p style="margin: 20px 0">
+            <a href="{{ magicLinkUrl }}"
+               style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: bold;">
+                {% if variant == 'DEFAULT' %}
+                    {{ 'global.login_me'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                {% endif %}
+                {% if variant == 'ACCOUNT_DETECTED' %}
+                    {{ 'validate-participation'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                {% endif %}
+            </a>
+        </p>
+
+        <a href="{{ magicLinkUrl }}" style="color: {{ btnBg }}">{{ magicLinkUrl | u.truncate(75, '...') }}</a>
+
+        <p style="color: #5d5d5d; font-size: 11px; line-height: 16px">
+            {{ 'comment_confirmation_anonymous_email_help'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+        </p>
+    </div>
+{% endblock %}
+
+{% block footer_mail %}
+    <div>
+        <p style="text-align: left;">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
+            {{ siteName }}
+        </p>
+    </div>
+{% endblock %}

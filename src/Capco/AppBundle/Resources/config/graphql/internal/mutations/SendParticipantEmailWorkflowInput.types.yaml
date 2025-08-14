@@ -1,0 +1,12 @@
+SendParticipantEmailWorkflowInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            participantToken:
+                type: 'String!'
+            email:
+                type: 'Email!'
+            redirectUrl:
+                type: 'URI!'
+            emailType:
+                type: 'ParticipationWorkflowParticipantEmailType!'

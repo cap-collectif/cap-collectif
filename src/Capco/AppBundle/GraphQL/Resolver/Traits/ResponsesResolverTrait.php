@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -73,7 +73,7 @@ trait ResponsesResolverTrait
         return $responses;
     }
 
-    private function getResponsesForReply(AbstractReply $reply): Collection
+    private function getResponsesForReply(Reply $reply): Collection
     {
         $responses = new ArrayCollection(
             $this->abstractResponseRepository->getByReply($reply, true) ?? []

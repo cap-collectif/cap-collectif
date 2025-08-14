@@ -34,7 +34,6 @@ class UpdateCollectStepMutation implements MutationInterface
         $collectStep = $this->getCollectStep($collectStepId, $viewer);
 
         unset($data['stepId']);
-        $this->handleAnonParticipation($data);
 
         $form = $this->formFactory->create(CollectStepFormType::class, $collectStep);
         $form->submit($data, false);
@@ -76,22 +75,5 @@ class UpdateCollectStepMutation implements MutationInterface
         }
 
         return $collectStep;
-    }
-
-    private function handleAnonParticipation(array &$data)
-    {
-        $isAnonymousParticipationAllowed = $data['isProposalSmsVoteEnabled'] ?? null;
-
-        if (!$isAnonymousParticipationAllowed) {
-            return;
-        }
-
-        $data['votesLimit'] = null;
-        $data['votesMin'] = null;
-        $data['voteThreshold'] = null;
-        $data['requirements'] = [
-            ['type' => 'PHONE'],
-            ['type' => 'PHONE_VERIFIED'],
-        ];
     }
 }

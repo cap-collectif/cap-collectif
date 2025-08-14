@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -76,7 +77,7 @@ class ProposalStepVotesResolver extends AbstractExtension
             ) {
                 $creditsLeft = $step->getBudget();
                 if ($creditsLeft > 0 && $user) {
-                    $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+                    $creditsLeft -= $this->getSpentCreditsForContributor($user, $step);
                 }
                 $creditsLeftByStepId[$step->getId()] = $creditsLeft;
             }
@@ -130,15 +131,15 @@ class ProposalStepVotesResolver extends AbstractExtension
         return \count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }
 
-    public function getSpentCreditsForUser(User $user, AbstractStep $step)
+    public function getSpentCreditsForContributor(ContributorInterface $contributor, AbstractStep $step): int
     {
         $votes = [];
 
         if ($step instanceof SelectionStep) {
-            $votes = $this->proposalSelectionVoteRepository->getVotesByStepAndUser($step, $user);
+            $votes = $this->proposalSelectionVoteRepository->getVotesByStepAndContributor($step, $contributor);
         }
         if ($step instanceof CollectStep) {
-            $votes = $this->proposalCollectVoteRepository->getVotesByStepAndUser($step, $user);
+            $votes = $this->proposalCollectVoteRepository->getVotesByStepAndContributor($step, $contributor);
         }
 
         return $this->getAmountSpentForVotes($votes);

@@ -37,9 +37,6 @@ const FRAGMENT = graphql`
     replies: contributions(type: REPLY) {
       totalCount
     }
-    repliesAnonymous: contributions(type: REPLY_ANONYMOUS) {
-      totalCount
-    }
     argument: contributions(type: ARGUMENT) {
       totalCount
     }
@@ -56,9 +53,6 @@ const FRAGMENT = graphql`
       totalCount
     }
     votes {
-      totalCount
-    }
-    anonymousVotes: votes(anonymous: true) {
       totalCount
     }
     paperVotesTotalCount
@@ -78,13 +72,11 @@ const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
     opinionVersions,
     sources,
     replies,
-    repliesAnonymous,
     argument,
     debateArgument,
     debateAnonymousArgument,
     proposals,
     votes,
-    anonymousVotes,
     paperVotesTotalCount,
     contributions,
     contributors,
@@ -94,7 +86,7 @@ const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
   } = data
   const numericVotesTotalCount = votes?.totalCount ?? 0
   const votesTotalCount = numericVotesTotalCount + paperVotesTotalCount
-  const participantsTotalCount = contributors.totalCount + anonymousVotes.totalCount + repliesAnonymous.totalCount
+  const participantsTotalCount = contributors.totalCount
 
   const getDaysLeftBlock = () => {
     if (steps.length === 1 && steps[0].state === 'OPENED' && steps[0].timeRange?.endAt) {
@@ -277,6 +269,7 @@ const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
       {getDaysLeftBlock()}
       {isContributionsCounterDisplayable && (
         <ProjectHeaderLayout.Block
+          contentId="contributions-count"
           tooltipLabel={getContributionsTooltip()}
           title={intl.formatMessage(
             {
@@ -308,6 +301,7 @@ const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
       {isParticipantsCounterDisplayable && (
         <ProjectHeaderLayout.Block
           tooltipLabel={getParticipantsTooltip()}
+          contentId="contributors-count"
           title={intl.formatMessage(
             {
               id: 'project.preview.counters.contributors',

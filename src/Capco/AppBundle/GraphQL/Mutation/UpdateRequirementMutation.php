@@ -25,33 +25,40 @@ class UpdateRequirementMutation implements MutationInterface
     public function __invoke(Argument $input, User $user): array
     {
         $this->formatInput($input);
-        $value = $input->offsetGet('value');
+        $values = $input->offsetGet('values');
 
-        // Requirement
-        $requirementId = GlobalId::fromGlobalId($input->offsetGet('requirement'))['id'];
-        $requirement = $this->requirementRepository->find($requirementId);
+        $requirements = [];
+        foreach ($values as $valueInput) {
+            $value = $valueInput['value'];
+            $requirementId = $valueInput['requirementId'];
 
-        if (!$requirement) {
-            $error = sprintf('Unknown requirement with id "%s"', $requirementId);
-            $this->logger->error($error);
+            $requirementId = GlobalId::fromGlobalId($requirementId)['id'];
+            $requirement = $this->requirementRepository->find($requirementId);
 
-            throw new UserError($error);
-        }
+            if (!$requirement) {
+                $error = sprintf('Unknown requirement with id "%s"', $requirementId);
+                $this->logger->error($error);
 
-        $userRequirement = $this->userRequirementRepository->findOneBy([
-            'requirement' => $requirement,
-            'user' => $user,
-        ]);
+                throw new UserError($error);
+            }
 
-        if (!$userRequirement) {
-            $userRequirement = new UserRequirement($user, $requirement, $value);
-            $this->em->persist($userRequirement);
-        } else {
-            $userRequirement->setValue($value);
+            $requirements[] = $requirement;
+
+            $userRequirement = $this->userRequirementRepository->findOneBy([
+                'requirement' => $requirement,
+                'user' => $user,
+            ]);
+
+            if (!$userRequirement) {
+                $userRequirement = new UserRequirement($user, $requirement, $value);
+                $this->em->persist($userRequirement);
+            } else {
+                $userRequirement->setValue($value);
+            }
         }
 
         $this->em->flush();
 
-        return ['requirement' => $requirement, 'viewer' => $user];
+        return ['requirements' => $requirements, 'viewer' => $user];
     }
 }

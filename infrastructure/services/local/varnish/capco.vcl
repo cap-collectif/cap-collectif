@@ -56,7 +56,7 @@ sub vcl_recv {
   # Remove all cookies except the Symfony or SimpleSAML session.
   if (req.http.Cookie) {
     cookie.parse(req.http.Cookie);
-    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,locale,AnonymousAuthenticatedWithConfirmedPhone");
+    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,locale,AnonymousAuthenticatedWithConfirmedPhone,CapcoAnonReply,CapcoParticipant");
     set req.http.cookie = cookie.get_string();
 
     if (req.http.Cookie == "") {

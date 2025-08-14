@@ -54,7 +54,7 @@ Scenario: GraphQL client wants to get all campaigns
               "unlayerConf": null,
               "sendAt": @date@,
               "status": "PLANNED",
-              "mailingInternal": "CONFIRMED",
+              "mailingInternal": "REGISTERED",
               "mailingList": null,
               "project": null,
               "preview": @string@

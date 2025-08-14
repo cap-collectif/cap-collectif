@@ -8,7 +8,7 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
   <div>
     <div
       buttonColor="#fffeee"
-      className="sc-9028938f-0 ioqSA"
+      className="sc-cb1ada3e-0 cyRFFJ"
       labelColor="#fff"
       type="facebook"
     >
@@ -49,7 +49,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
       </p>
     </p>
     <div
-      className="sc-9028938f-1 bVtkgV"
+      className="sc-cb1ada3e-1 bbfUU"
       justifyContent="center"
     >
       <a
@@ -99,7 +99,7 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-9028938f-2 fVnzLI"
+    className="sc-cb1ada3e-2 gyHaVx"
   >
     <a
       href="/login/openid?_destination=http://localhost/"
@@ -130,7 +130,7 @@ exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] =
   <div>
     <div
       buttonColor="#fffeee"
-      className="sc-9028938f-0 gGwgwI"
+      className="sc-cb1ada3e-0 eYJPwN"
       labelColor="#fff"
       type="openId"
     >

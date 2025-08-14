@@ -34,6 +34,11 @@ trait ContributorTrait
      */
     private bool $phoneConfirmed = false;
 
+    /**
+     * @ORM\Column(name="locale", type="string", length=255, nullable=true)
+     */
+    private ?string $locale = null;
+
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -92,5 +97,22 @@ trait ContributorTrait
         $this->phoneConfirmed = $phoneConfirmed;
 
         return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
     }
 }

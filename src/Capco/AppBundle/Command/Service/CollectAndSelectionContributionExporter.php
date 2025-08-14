@@ -20,10 +20,8 @@ use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -337,22 +335,12 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         }
 
         $proposalDigitalVotes = [];
-        $proposalAnonymousVotes = [];
         $isVotable = $step->isVotable();
         if ($isVotable) {
             switch ($step->getType()) {
                 case 'selection':
                     $proposalDigitalVotes = $this->batchProcessor->processQueryInBatches(
                         ProposalSelectionVote::class,
-                        'v',
-                        'v.proposal = :proposal',
-                        ['proposal' => $proposal],
-                        5000,
-                        $this->style
-                    );
-
-                    $proposalAnonymousVotes = $this->batchProcessor->processQueryInBatches(
-                        ProposalSelectionSmsVote::class,
                         'v',
                         'v.proposal = :proposal',
                         ['proposal' => $proposal],
@@ -372,15 +360,6 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
                         $this->style
                     );
 
-                    $proposalAnonymousVotes = $this->batchProcessor->processQueryInBatches(
-                        ProposalCollectSmsVote::class,
-                        'v',
-                        'v.proposal = :proposal',
-                        ['proposal' => $proposal],
-                        5000,
-                        $this->style
-                    );
-
                     break;
 
                 default:
@@ -393,7 +372,6 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
             'CommentVote (ProposalComment)' => $proposalCommentsVotes,
             'Reporting (Proposal)' => $proposalReports,
             'DigitalVote' => $proposalDigitalVotes,
-            'AnonymousVote' => $proposalAnonymousVotes,
             'Post' => $proposalNews,
             'PostComment' => $proposalNewsComments,
             'CommentVote (PostComment)' => $proposalNewsCommentsVotes,
@@ -418,7 +396,6 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
             $proposalCommentsVotes,
             $proposalReports,
             $proposalDigitalVotes,
-            $proposalAnonymousVotes
         );
     }
 

@@ -94,6 +94,11 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       return Promise.resolve(null)
     },
+    'swarrot:consume': async (name: string) => {
+      console.log(`Consumming swarrot "${name}"...`)
+      exec(`fab ${env}.app.swarrot-consume ${name}`)
+      return Promise.resolve(null)
+    },
     'enable:feature': async (name: string) => {
       console.log(`Enabling feature flag "${name}"...`)
       console.time('enable_feature')
@@ -110,6 +115,11 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`)
       console.log(`Successfully disabled "${name}"`)
       console.timeEnd('enable_disable')
+      return Promise.resolve(null)
+    },
+    'run:sql': async (sql: string) => {
+      console.log(`fab ${env}.app.sql --sql="${sql}" --environment=test`)
+      await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
       return Promise.resolve(null)
     },
     'run:command': async (name: string) => {

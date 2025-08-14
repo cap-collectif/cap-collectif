@@ -150,7 +150,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         $proposalsIds = $this->proposalRepository->getProposalsByCollectStepOrSelectionStep($step->getId(), $stepClass);
         $votesCount = $step instanceof SelectionStep
             ? $this->proposalSelectionVote->findPublishedSelectionVoteIdsByStep($step)
-            : $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep($step, true, true);
+            : $this->proposalCollectVoteRepository->getPublishedCollectVoteByStep($step, true);
 
         $questionsResponses = $this->proposalFormRepository->getQuestionsResponsesByProposalsIds($proposalsIds);
         $this->collectAndSelectionContributionExporter->setQuestionsResponses($questionsResponses);

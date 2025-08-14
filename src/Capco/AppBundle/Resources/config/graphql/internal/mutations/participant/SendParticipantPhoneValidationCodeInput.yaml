@@ -1,0 +1,11 @@
+SendParticipantPhoneValidationCodeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Send a phone validation to participant'
+        fields:
+            phone:
+                type: 'String!'
+                description: 'The phone number to send the sms.'
+            token:
+                type: 'String!'
+                description: 'The returned token of Participant.'

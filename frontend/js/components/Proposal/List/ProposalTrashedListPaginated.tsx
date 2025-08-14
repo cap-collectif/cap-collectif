@@ -90,7 +90,7 @@ export default createPaginationContainer(
             node {
               id
               ...ProposalPreview_proposal
-                @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated)
+                @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
             }
           }
           pageInfo {

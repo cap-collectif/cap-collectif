@@ -43,4 +43,18 @@ interface ContributorInterface
     public function getUserIdentificationCodeValue(): ?string;
 
     public function getShowName(): ?string;
+
+    public function getLocale(): ?string;
+
+    public function setLocale(?string $locale): self;
+
+    public function getZipCode(): ?string;
+
+    public function isEmailConfirmed(): bool;
+
+    public function getUsername(): ?string;
+
+    public function isConsentInternalCommunication(): bool;
+
+    public function isConsentPrivacyPolicy(): bool;
 }

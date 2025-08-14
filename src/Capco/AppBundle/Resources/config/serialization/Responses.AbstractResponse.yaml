@@ -14,9 +14,6 @@ Capco\AppBundle\Entity\Responses\AbstractResponse:
             groups: [ElasticsearchResponse]
         question:
             groups: [Proposals, Replies, ElasticsearchResponseNestedQuestion]
-        getReplyOrReplyAnonymous:
-            serialized_name: reply
-            groups: [ElasticsearchResponseNestedReply]
         type:
             groups: [ElasticsearchResponse]
             serialized_name: responseType
@@ -25,3 +22,5 @@ Capco\AppBundle\Entity\Responses\AbstractResponse:
             groups: [ElasticsearchResponse]
         starCrafters:
             groups: [Proposals, Replies, ElasticsearchResponse]
+        reply:
+            groups: [ElasticsearchResponseNestedReply]

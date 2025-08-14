@@ -38,9 +38,6 @@ const baseProps = {
       totalCount: 1,
     },
     phoneConfirmationRequired: false,
-    step: {
-      isAnonymousParticipationAllowed: false,
-    },
   },
   setIsShow: jest.fn(),
 }
@@ -65,9 +62,6 @@ const props = {
     ...baseProps,
     questionnaire: {
       ...baseProps.questionnaire,
-      step: {
-        isAnonymousParticipationAllowed: true,
-      },
     },
   },
 }

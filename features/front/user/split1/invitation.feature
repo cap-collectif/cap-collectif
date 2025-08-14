@@ -27,8 +27,6 @@ Scenario: A user which has been invited should be able to register
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element
   And I press "confirm-register"
-  And I wait ".toasts-container--top div" to appear on current page
-  Then I should see "alert.success.add.user"
   And I should be redirected to "/"
   Then I can see I am logged in as "RemChanDaiSki"
 
@@ -49,8 +47,6 @@ Scenario: A user which has been invited should be able to register even with shi
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element
   And I press "confirm-register"
-  And I wait ".toasts-container--top div" to appear on current page
-  Then I should see "alert.success.add.user"
   And I should be redirected to "/"
   Then I can see I am logged in as "RemChanDaiSki"
 
@@ -71,7 +67,5 @@ Scenario: A user which has been invited should be able to register even when reg
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element
   And I press "confirm-register"
-  And I wait ".toasts-container--top div" to appear on current page
-  Then I should see "alert.success.add.user"
   And I should be redirected to "/"
   Then I can see I am logged in as "RemChanDaiSki"

@@ -18,17 +18,23 @@ class Requirement implements EntityInterface
     use PositionableTrait;
     use UuidTrait;
 
-    final public const CHECKBOX = 'CHECKBOX';
-    final public const FIRSTNAME = 'FIRSTNAME';
-    final public const LASTNAME = 'LASTNAME';
-    final public const PHONE = 'PHONE';
-    final public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
-    final public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
-    final public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
-    final public const PHONE_VERIFIED = 'PHONE_VERIFIED';
-    final public const FRANCE_CONNECT = 'FRANCE_CONNECT';
+    public const CHECKBOX = 'CHECKBOX';
+    public const FIRSTNAME = 'FIRSTNAME';
+    public const LASTNAME = 'LASTNAME';
+    public const PHONE = 'PHONE';
+    public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
+    public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
+    public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
+    public const PHONE_VERIFIED = 'PHONE_VERIFIED';
+    public const FRANCE_CONNECT = 'FRANCE_CONNECT';
+    public const EMAIL_VERIFIED = 'EMAIL_VERIFIED';
+    public const ZIP_CODE = 'ZIP_CODE';
+    public const SSO = 'SSO';
+    public const CONSENT_PRIVACY_POLICY = 'CONSENT_PRIVACY_POLICY';
 
     public static array $types = [
+        self::CONSENT_PRIVACY_POLICY,
+        self::EMAIL_VERIFIED,
         self::CHECKBOX,
         self::FIRSTNAME,
         self::LASTNAME,
@@ -37,7 +43,9 @@ class Requirement implements EntityInterface
         self::POSTAL_ADDRESS,
         self::IDENTIFICATION_CODE,
         self::PHONE_VERIFIED,
+        self::ZIP_CODE,
         self::FRANCE_CONNECT,
+        self::SSO,
     ];
 
     public static array $requirementsLabels = [
@@ -50,7 +58,15 @@ class Requirement implements EntityInterface
         self::IDENTIFICATION_CODE => 'identification_code',
         self::PHONE_VERIFIED => 'verify.number.sms',
         self::FRANCE_CONNECT => 'france_connect',
+        self::SSO => 'SSO',
+        self::EMAIL_VERIFIED => 'verify.email',
+        self::ZIP_CODE => 'user.register.zipcode',
     ];
+
+    /**
+     * @var array|string[]
+     */
+    public static array $PRIORITIZED_REQUIREMENTS = [self::EMAIL_VERIFIED, self::PHONE, self::PHONE_VERIFIED];
 
     /**
      * @ORM\Column(name="type", type="string")

@@ -3,10 +3,17 @@ AddProposalSmsVotePayload:
     config:
         fields:
             vote:
-                type: 'InternalProposalSmsVote'
+                type: 'InternalProposalVote'
             voteEdge:
                 type: 'InternalProposalVoteEdge'
             errorCode:
                 type: 'AddProposalSmsVoteErrorCode'
             votes:
                 type: 'ProposalSmsVoteConnection'
+            participantToken:
+                type: 'String'
+            shouldTriggerConsentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Wether or not we should trigger workflow modal to display internal communication modal.'
+            participant:
+                type: 'InternalParticipant!'

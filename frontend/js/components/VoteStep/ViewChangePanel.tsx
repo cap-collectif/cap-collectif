@@ -1,9 +1,7 @@
 import { CapUIIcon, CapUIIconSize, Flex, Icon, Text, Box, useTheme, CapUIFontSize } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { useSelector } from 'react-redux'
 import { useEventListener } from '@shared/hooks/useEventListener'
-import type { GlobalState } from '~/types'
 import { VoteStepEvent, View, dispatchEvent } from './utils'
 import { useVoteStepContext } from './Context/VoteStepContext'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
@@ -79,24 +77,18 @@ const ViewButton = ({
 export const ViewChangePanel = ({
   hideText = false,
   hasMapView = true,
-  isProposalSmsVoteEnabled = false,
   hasVotesView = true,
   disableMapView,
 }: {
   hideText?: boolean
   hasMapView?: boolean
-  isProposalSmsVoteEnabled?: boolean
   hasVotesView?: boolean
   disableMapView?: boolean
 }) => {
   const intl = useIntl()
   const [hasNewVote, setHasNewVote] = React.useState(false)
-  const { user } = useSelector((state: GlobalState) => state.user)
   const { view, setView, setFilters } = useVoteStepContext()
-  const isTwilioFeatureEnabled = useFeatureFlag('twilio')
-  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
   const isCompleteView = useFeatureFlag('full_proposal_card')
-  const smsVoteEnabled = isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
   const { colors } = useTheme()
   const { width } = useWindowWidth()
   const isMobile = useIsMobile()
@@ -183,7 +175,6 @@ export const ViewChangePanel = ({
             borderBottom="normal"
           />
           <ViewButton
-            disabled={!user && !smsVoteEnabled}
             hideText={hideText}
             onClick={() => {
               setHasNewVote(false)

@@ -12,5 +12,5 @@ AddProposalVoteInput:
                 description: 'The Node ID of the step.'
             anonymously:
                 type: 'Boolean'
-                defaultValue: false
+                defaultValue: true
                 description: 'The vote will be anonymous.'

@@ -11,8 +11,6 @@ const AddQuestionnaireStep = /* GraphQL*/ `
             body
             enabled
             ... on QuestionnaireStep {
-                isAnonymousParticipationAllowed
-                collectParticipantsEmail
                 questionnaire {
                     owner {
                         username

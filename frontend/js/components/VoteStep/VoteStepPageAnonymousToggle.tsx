@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { State } from '~/types'
 import { useVoteStepContext } from './Context/VoteStepContext'
 import UpdateVotesVisibilityMutation from '~/mutations/UpdateVotesVisibilityMutation'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Props = {
   readonly stepId: string
@@ -14,7 +15,12 @@ const VoteStepPageAnonymousToggle = ({ stepId }: Props) => {
   const isAuthenticated = useSelector((state: State) => state.user.user !== null)
   const intl = useIntl()
   const { isParticipationAnonymous, setIsParticipationAnonymous } = useVoteStepContext()
-  if (!isAuthenticated) return null
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  const participantToken = !isAuthenticated ? CookieMonster.getParticipantCookie() : null;
 
   return (
     <Flex
@@ -30,7 +36,7 @@ const VoteStepPageAnonymousToggle = ({ stepId }: Props) => {
         id="anonymous-toggle"
         checked={isParticipationAnonymous}
         onChange={() => {
-          UpdateVotesVisibilityMutation.commit({ input: { stepId, anonymous: !isParticipationAnonymous } }).then(() => {
+          UpdateVotesVisibilityMutation.commit({ input: { stepId, anonymous: !isParticipationAnonymous, participantToken } }).then(() => {
             setIsParticipationAnonymous(!isParticipationAnonymous)
           })
         }}

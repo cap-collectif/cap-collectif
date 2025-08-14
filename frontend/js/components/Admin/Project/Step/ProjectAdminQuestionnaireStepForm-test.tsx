@@ -23,7 +23,6 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
       LASTNAME: true,
       DATE_OF_BIRTH: false,
     },
-    isAnonymousParticipationAllowed: false,
     isFranceConnectConfigured: true,
   }
   it('renders correctly with no data', () => {
@@ -99,7 +98,6 @@ describe('<ProjectAdminQuestionnaireStepForm />', () => {
       >
         <ProjectAdminQuestionnaireStepForm
           {...props}
-          isAnonymousParticipationAllowed
           questionnaire={{
             label: 'questionnaire1',
             value: 'q1id',

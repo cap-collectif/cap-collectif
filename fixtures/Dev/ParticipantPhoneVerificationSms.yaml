@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\ParticipantPhoneVerificationSms:
+    participantPhoneVerifSmsConfirmed:
+        id: 'participantPhoneVerifSmsConfirmed'
+        participant: '@participant1'
+        status: 'APPROVED'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>
+    participantPhoneVerifSmsPending:
+        id: 'participantPhoneVerifSmsPending'
+        participant: '@participant2'
+        status: 'PENDING'
+        createdAt: <(new \DateTime('2021-12-08 17:01:53'))>

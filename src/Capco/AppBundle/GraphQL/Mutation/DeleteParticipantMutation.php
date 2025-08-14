@@ -4,11 +4,11 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\MediatorParticipantStep;
-use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MediatorParticipantStepRepository;
-use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -20,7 +20,7 @@ class DeleteParticipantMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly ParticipantRepository $participantRepository, private readonly MediatorParticipantStepRepository $mediatorParticipantStepRepository)
+    public function __construct(private EntityManagerInterface $em, private GlobalIdResolver $globalIdResolver, private MediatorParticipantStepRepository $mediatorParticipantStepRepository, private ParticipantHelper $participantHelper)
     {
     }
 
@@ -28,7 +28,13 @@ class DeleteParticipantMutation implements MutationInterface
     {
         $this->formatInput($input);
         $participantToken = $input->offsetGet('participantToken');
-        $participant = $this->getParticipant($participantToken);
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException $e) {
+            throw new UserError($e->getMessage());
+        }
+
         $participantId = $participant->getId();
 
         $this->em->remove($participant);
@@ -47,7 +53,11 @@ class DeleteParticipantMutation implements MutationInterface
             return false;
         }
 
-        $participant = $this->getParticipant($participantToken);
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException $e) {
+            throw new UserError($e->getMessage());
+        }
 
         $mediatorParticipantStep = $this->mediatorParticipantStepRepository->findOneBy(['mediator' => $mediator, 'participant' => $participant]);
 
@@ -67,16 +77,5 @@ class DeleteParticipantMutation implements MutationInterface
         }
 
         return $mediator;
-    }
-
-    private function getParticipant(string $token): ?Participant
-    {
-        $participant = $this->participantRepository->findOneBy(['token' => $token]);
-
-        if (!$participant instanceof Participant) {
-            throw new UserError("No participant found for token {$token}");
-        }
-
-        return $participant;
     }
 }

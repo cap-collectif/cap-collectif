@@ -8,3 +8,6 @@ UpdateVotesVisibilityInput:
             anonymous:
                 type: 'Boolean!'
                 description: 'Wether the votes should be anonymous or not.'
+            participantToken:
+                type: 'String'
+                description: 'If participant, the participant token.'

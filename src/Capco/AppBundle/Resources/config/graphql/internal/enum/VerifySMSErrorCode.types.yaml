@@ -1,0 +1,21 @@
+VerifySMSErrorCode:
+    type: enum
+    config:
+        name: VerifySMSErrorCode
+        description: 'Available errors for an `verifyParticipantPhoneNumber and verifyUserPhoneNumber` mutations.'
+        values:
+            PHONE_ALREADY_CONFIRMED:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::PHONE_ALREADY_CONFIRMED
+                description: 'The given phone is already confirmed.'
+            CODE_EXPIRED:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::CODE_EXPIRED
+                description: 'The given given code is expired.'
+            CODE_NOT_VALID:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::CODE_NOT_VALID
+                description: 'The given code is not valid.'
+            RETRY_LIMIT_REACHED:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::RETRY_LIMIT_REACHED
+                description: 'The retry limit is reached.'
+            SERVER_ERROR:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::SERVER_ERROR
+                description: 'An error occured while calling sms verify api.'

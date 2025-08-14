@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Repository\EmailingCampaignUserRepository;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,19 +15,25 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EmailingCampaignUser implements EntityInterface
 {
+    use UuidTrait;
+
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity=EmailingCampaign::class, inversedBy="emailingCampaignUsers")
      * @ORM\JoinColumn(nullable=false, name="emailing_campaign_id")
      */
     private EmailingCampaign $emailingCampaign;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="emailingCampaignUsers")
-     * @ORM\JoinColumn(nullable=false, name="user_id")
+     * @ORM\JoinColumn(nullable=true, name="user_id")
      */
-    private User $user;
+    private ?User $user = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="emailingCampaignUsers")
+     * @ORM\JoinColumn(nullable=true, name="participant_id")
+     */
+    private ?Participant $participant = null;
 
     /**
      * @ORM\Column(name="sent_at", type="datetime", nullable=true)
@@ -66,5 +74,22 @@ class EmailingCampaignUser implements EntityInterface
         $this->sentAt = $sentAt;
 
         return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
+    }
+
+    public function getContributor(): ContributorInterface
+    {
+        return $this->user ?? $this->participant;
     }
 }

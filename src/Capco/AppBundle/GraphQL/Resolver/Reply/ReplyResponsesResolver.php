@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
@@ -24,7 +22,7 @@ class ReplyResponsesResolver implements QueryInterface
         $this->abstractResponseRepository = $abstractResponseRepository;
     }
 
-    public function __invoke(AbstractReply $reply, $viewer, \ArrayObject $context): iterable
+    public function __invoke(Reply $reply, $viewer, \ArrayObject $context): iterable
     {
         $skipVerification =
             $context
@@ -33,7 +31,7 @@ class ReplyResponsesResolver implements QueryInterface
 
         $responses = [];
 
-        if ($reply instanceof Reply) {
+        if (false === $reply->isAnonymous()) {
             $author = $reply->getAuthor();
 
             if (
@@ -51,7 +49,7 @@ class ReplyResponsesResolver implements QueryInterface
                 $viewer,
                 $context
             );
-        } elseif ($reply instanceof ReplyAnonymous) {
+        } elseif ($reply->isAnonymous()) {
             $responses = $this->getResponsesForReply($reply);
         }
 

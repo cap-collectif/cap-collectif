@@ -12,9 +12,9 @@ class SenderEmailResolver implements QueryInterface
     {
     }
 
-    public function __invoke(User $viewer): array
+    public function __invoke(?User $viewer = null): array
     {
-        return $viewer->isAdmin()
+        return $viewer && $viewer->isAdmin()
             ? $this->repository->findAll()
             : [$this->repository->getDefault()];
     }

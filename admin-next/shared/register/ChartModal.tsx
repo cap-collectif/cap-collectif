@@ -35,7 +35,15 @@ export const ChartModal: React.FC<{ query: ChartModal_query$key }> = ({ query: q
   if (!isOpen) return null
 
   return (
-    <Modal size={CapUIModalSize.Md} show={isOpen} onClose={onClose} ariaLabel="contained-modal-title-lg">
+    <Modal
+      size={CapUIModalSize.Md}
+      show={isOpen}
+      onClose={onClose}
+      ariaLabel="contained-modal-title-lg"
+      alwaysOpenInPortal
+      forceModalDialogToFalse
+      zIndex={9999}
+    >
       <Modal.Header>
         <Heading as="h4">{intl.formatMessage({ id: 'charter' })}</Heading>
       </Modal.Header>

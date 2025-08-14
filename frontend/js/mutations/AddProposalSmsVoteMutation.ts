@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { graphql } from 'react-relay'
-import { ConnectionHandler } from 'relay-runtime'
 // eslint-disable-next-line import/no-unresolved
 import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes'
 import environment from '../createRelayEnvironment'
@@ -11,49 +10,50 @@ import type {
 } from '~relay/AddProposalSmsVoteMutation.graphql'
 
 const mutation = graphql`
-  mutation AddProposalSmsVoteMutation($input: AddProposalSmsVoteInput!, $token: String!) {
-    addProposalSmsVote(input: $input) {
-      errorCode
-      voteEdge {
-        cursor
-        node {
-          id
-          __typename
-          ... on ProposalSmsVote {
-            step {
-              votesMin
-              votesLimit
-              id
-              viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
-                ...ProposalsUserVotesTable_votes
-                totalCount
-                edges {
-                  node {
+    mutation AddProposalSmsVoteMutation($input: AddProposalSmsVoteInput!, $token: String!, $stepId: ID!) {
+        addProposalSmsVote(input: $input) {
+            errorCode
+            voteEdge {
+                cursor
+                node {
+                    anonymous
                     id
+                    completionStatus
                     proposal {
-                      id
+                        contributorVote(step: $stepId, token: $token) {
+                            id
+                            completionStatus
+                        }
                     }
-                  }
+                    ... on ProposalVote {
+                        step {
+                            votesMin
+                            votesLimit
+                            project {
+                                votes {
+                                    totalCount
+                                }
+                                contributors {
+                                    totalCount
+                                }
+                            }
+                            viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
+                                totalCount
+                                edges {
+                                    node {
+                                        id
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
-              ...interpellationLabelHelper_step @relay(mask: false)
             }
-          }
+            errorCode
+            participantToken
+            shouldTriggerConsentInternalCommunication
         }
-      }
-      votes {
-        totalCount
-        edges {
-          node {
-            proposal {
-              id
-            }
-          }
-        }
-      }
-      errorCode
     }
-  }
 `
 
 const commit = (variables: AddProposalSmsVoteMutationVariables): Promise<AddProposalSmsVoteMutationResponse> =>
@@ -77,76 +77,58 @@ const commit = (variables: AddProposalSmsVoteMutationVariables): Promise<AddProp
       },
     ],
     updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('addProposalSmsVote')
-      const errorCode = payload?.getValue('errorCode')
-      const voteEdge = payload?.getLinkedRecord('voteEdge')
-
-      if (!payload) {
-        return
-      }
-
+      // START set vote button with voted state
       const proposalProxy = store.get(variables.input.proposalId)
       if (!proposalProxy) return
-      const votesArgs = {
-        first: 0,
-        stepId: variables.input.stepId,
-      }
+      const {stepId} = variables.input
+
+      const payload = store.getRootField('addProposalSmsVote')
+
+      const errorCode = payload?.getValue('errorCode');
+
+      if (errorCode) return;
+
+      const voteEdge = payload?.getLinkedRecord('voteEdge')
+
+      if (!voteEdge) return
+
+      const node = voteEdge.getLinkedRecord('node')
+      proposalProxy.setLinkedRecord(node, 'contributorVote', {
+        step: stepId,
+      });
+
       proposalProxy.setValue(true, 'viewerHasVote', {
-        step: variables.input.stepId,
+        step: stepId,
       })
-      const stepProxy = store.get(variables.input.stepId)
-      if (!stepProxy) return
-      const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {
-        orderBy: {
-          field: 'POSITION',
-          direction: 'ASC',
-        },
-      })
-      if (!stepConnection) return
-      const totalCount = parseInt(stepConnection.getValue('totalCount'), 10)
-      stepConnection.setValue(totalCount + 1, 'totalCount')
+      // END set vote button with voted state
 
-      if (errorCode === 'VOTE_LIMIT_REACHED') {
-        const votes = payload.getLinkedRecord('votes')
-
-        if (votes) {
-          stepConnection.copyFieldsFrom(votes)
-        }
-
-        return
+      // update proposal page voter list when all requirements are met
+      const proposalVotesProxy = store.get(`client:${variables.input.proposalId}:__ProposalVotes_votes_connection(stepId:"${variables.input.stepId}")`)
+      if (proposalVotesProxy) {
+        const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10)
+        proposalVotesProxy.setValue(previousValue + 1, 'totalCount')
       }
 
-      // if user is voting with a new token we need to retrieve his old votes and update the current connection which does not contain the token in args
-      const updatedViewerVotes = voteEdge
-        ?.getLinkedRecord('node')
-        ?.getLinkedRecord('step')
-        ?.getLinkedRecord('viewerVotes', {
-          orderBy: {
-            field: 'POSITION',
-            direction: 'ASC',
-          },
-          token: variables.input.token,
-        })
 
-      if (updatedViewerVotes) {
-        stepConnection.copyFieldsFrom(updatedViewerVotes)
-      }
+      const stepProxy = store.get(variables.input.stepId);
+      const votesMin = parseInt(stepProxy.getValue('votesMin'), 10);
+      const hasVotesMin = votesMin && votesMin > 0;
 
-      const proposalVotesProxy =
-        proposalProxy.getLinkedRecord('votes', votesArgs) ||
-        proposalProxy.getLinkedRecord('votes', {
-          first: 0,
-        })
-      if (!proposalVotesProxy) return
-      const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10)
-      proposalVotesProxy.setValue(previousValue + 1, 'totalCount')
-      const connectionConfig = {
-        stepId: variables.input.stepId,
+      // START increment proposal counter when it is first vote
+      if (!hasVotesMin) {
+        const proposalVotesProxy =
+          proposalProxy.getLinkedRecord('votes', {
+            first: 0,
+            stepId: stepId,
+          }) ||
+          proposalProxy.getLinkedRecord('votes', {
+            first: 0,
+          })
+        if (!proposalVotesProxy) return
+        const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10)
+        proposalVotesProxy.setValue(previousValue + 1, 'totalCount')
       }
-      const connection = ConnectionHandler.getConnection(proposalProxy, 'ProposalVotes_votes', connectionConfig)
-      if (!connection) return
-      const previousValueConnection = parseInt(connection.getValue('totalCount'), 10)
-      connection.setValue(previousValueConnection + 1, 'totalCount')
+      // END increment proposal counter when it is first vote
     },
   })
 

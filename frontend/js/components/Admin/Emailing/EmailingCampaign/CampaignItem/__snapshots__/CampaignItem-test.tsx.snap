@@ -231,7 +231,7 @@ exports[`<CampaignItem /> should renders correctly with mailing list internal 1`
       size="md"
     />
     <span>
-      default-mailing-list-registered
+      users
     </span>
   </ForwardRef>
 </CampaignItemstyle__Container>

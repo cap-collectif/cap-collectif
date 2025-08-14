@@ -582,7 +582,6 @@ InternalQuery:
             senderEmails:
                 type: '[SenderEmail!]!'
                 description: 'Get all sending addresses registered'
-                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", getUser())'
             siteSettings:
                 type: 'InternalSiteSettings'
@@ -630,6 +629,20 @@ InternalQuery:
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", args)'
+                args:
+                    consentInternalCommunication:
+                        type: 'Boolean'
+                        description: 'Filter participants who consent receiving internal communication.'
+                    emailConfirmed:
+                        type: 'Boolean'
+                        description: 'Filter participants who confirmed their email.'
+            participant:
+                type: 'InternalParticipant'
+                args:
+                    token:
+                        type: 'String'
+                        description: 'get a participant by its token'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver", args)'
             menuItems:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'

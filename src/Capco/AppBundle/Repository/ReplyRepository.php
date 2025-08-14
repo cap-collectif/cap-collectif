@@ -2,18 +2,21 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 
@@ -261,8 +264,24 @@ class ReplyRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('reply')
             ->addSelect('author')
-            ->leftJoin('reply.author', 'author')
+            ->innerJoin('reply.author', 'author')
             ->andWhere('reply.questionnaire = :questionnaire')
+            ->setParameter('questionnaire', $questionnaire)
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function getEnabledAnonymousByQuestionnaireAsArray(Questionnaire $questionnaire): array
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->addSelect('p')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->andWhere('reply.author IS NULL')
+            ->join('reply.participant', 'p')
             ->setParameter('questionnaire', $questionnaire)
         ;
 
@@ -321,7 +340,161 @@ class ReplyRepository extends EntityRepository
     }
 
     /**
-     * @return AbstractReply[]
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('q')
+            ->select('COUNT(q.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countAnonymous(): int
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.author IS NULL')
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<Reply>
+     */
+    public function getQuestionnaireAnonymousRepliesWithDistinctEmails(Questionnaire $questionnaire, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->join('reply.participant', 'participant')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->andWhere('reply.published = 1')
+            ->andWhere('participant.email IS NOT NULL')
+            ->andWhere('reply.author IS NULL')
+            ->setParameter('questionnaire', $questionnaire)
+            ->groupBy('participant.email')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     *
+     * @return float|int|mixed|string
+     */
+    public function hasNewAnonymousReplies(Questionnaire $questionnaire, \DateTime $oldestUpdateDate): mixed
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->select('count(reply.id)')
+            ->join('reply.participant', 'participant')
+            ->andWhere('reply.author IS NULL')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->andWhere('reply.published = 1')
+            ->andWhere('reply.updatedAt >= :oldestUpdateDate')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate->format('Y-m-d H:i:s'))
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByConfirmedParticipantEmail(string $email, Questionnaire $questionnaire): int
+    {
+        $qb = $this->createQueryBuilder('qb')
+            ->select('COUNT(qb.id)')
+            ->join('qb.participant', 'p')
+            ->where('p.email = :email')
+            ->andWhere('p.confirmationToken IS NULL')
+            ->andWhere('qb.questionnaire = :questionnaire')
+            ->setParameter('email', $email)
+            ->setParameter('questionnaire', $questionnaire)
+            ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<Reply>
+     */
+    public function findExistingContributorByQuestionnaireAndPhoneNumber(Questionnaire $questionnaire, string $phone, ContributorInterface $contributor): array
+    {
+        $participantFilter = '';
+        $userFilter = '';
+
+        if ($contributor instanceof Participant) {
+            $participantFilter = ' AND participant <> :contributor';
+        }
+
+        if ($contributor instanceof User) {
+            $userFilter = ' AND author <> :contributor';
+        }
+
+        $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.participant', 'participant')
+            ->leftJoin('r.author', 'author')
+            ->where('participant.phone = :phone AND participant.phoneConfirmed = 1' . $participantFilter)
+            ->orWhere('author.phone = :phone AND author.phoneConfirmed = 1' . $userFilter)
+            ->andWhere('r.questionnaire = :questionnaire')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setParameter('phone', $phone)
+            ->setParameter('contributor', $contributor)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<Reply>
+     */
+    public function findRepliesByParticipantTokenAndQuestionnaire(string $participantToken, Questionnaire $questionnaire): array
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->leftJoin('reply.participant', 'participant')
+            ->where('reply.questionnaire = :questionnaire')
+            ->andWhere('reply.completionStatus = :completionStatus')
+            ->andWhere('participant.token = :participantToken')
+            ->setParameter('participantToken', $participantToken)
+            ->setParameter('questionnaire', $questionnaire)
+            ->setParameter('completionStatus', ContributionCompletionStatus::MISSING_REQUIREMENTS)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<Reply>
+     */
+    public function getQuestionnaireAnonymousReplies(Questionnaire $questionnaire, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->join('reply.participant', 'p')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->andWhere('reply.published = 1')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->groupBy('p.id')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return Reply[]
      */
     public function getBatchOfReplies(string $questionnaireId, int $offset, int $limit): array
     {
@@ -334,6 +507,25 @@ class ReplyRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<Reply>
+     */
+    public function findByParticipantEmail(string $participantEmail, Questionnaire $questionnaire): array
+    {
+        return $this->createQueryBuilder('reply')
+            ->join('reply.participant', 'participant')
+            ->where('participant.email = :participantEmail')
+            ->andWhere('participant.confirmationToken IS NULL')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->setParameters([
+                'participantEmail' => $participantEmail,
+                'questionnaire' => $questionnaire,
+            ])
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     protected function getPublishedQueryBuilder(): QueryBuilder

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Enum\SendSMSErrorCode;
 use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
@@ -11,48 +12,52 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class SendSmsPhoneValidationCodeMutation implements MutationInterface
 {
     use MutationTrait;
-
-    final public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
-    final public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
     private const RETRY_PER_MINUTE = 2;
-    private readonly SmsProviderInterface $smsProvider;
+    private SmsProviderInterface $smsProvider;
 
     public function __construct(
-        private readonly EntityManagerInterface $em,
+        private EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
-        private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+        private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
+        private KernelInterface $kernel
     ) {
         $this->smsProvider = $smsProviderFactory->fetch();
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $env = $this->kernel->getEnvironment();
+
         $this->formatInput($input);
         if ($viewer->isPhoneConfirmed()) {
-            return ['errorCode' => self::PHONE_ALREADY_CONFIRMED];
+            return ['errorCode' => SendSMSErrorCode::PHONE_ALREADY_CONFIRMED];
         }
 
         if (!$this->canRetry($viewer)) {
-            return ['errorCode' => self::RETRY_LIMIT_REACHED];
+            return ['errorCode' => SendSMSErrorCode::RETRY_LIMIT_REACHED];
         }
 
         $recipientNumber = $viewer->getPhone();
 
-        $sendVerificationSmsErrorCode = $this->smsProvider->sendVerificationSms($recipientNumber);
-        if ($sendVerificationSmsErrorCode) {
-            return ['errorCode' => $sendVerificationSmsErrorCode];
-        }
+        if ('test' !== $env) {
+            $sendVerificationSmsErrorCode = $this->smsProvider->sendVerificationSms($recipientNumber);
+            if ($sendVerificationSmsErrorCode) {
+                return ['errorCode' => $sendVerificationSmsErrorCode];
+            }
 
-        $userPhoneVerificationSms = (new UserPhoneVerificationSms())
-            ->setUser($viewer)
-            ->setPending()
-        ;
-        $this->em->persist($userPhoneVerificationSms);
-        $this->em->flush();
+            $userPhoneVerificationSms = (new UserPhoneVerificationSms())
+                ->setUser($viewer)
+                ->setPending()
+            ;
+
+            $this->em->persist($userPhoneVerificationSms);
+            $this->em->flush();
+        }
 
         return ['errorCode' => null];
     }
@@ -63,7 +68,7 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
      */
     private function canRetry(User $viewer): bool
     {
-        $userPhoneVerificationSmsList = $this->userPhoneVerificationSmsRepository->findByUserWithinOneMinuteRange(
+        $userPhoneVerificationSmsList = $this->userPhoneVerificationSmsRepository->findSmsWithinOneMinuteRange(
             $viewer
         );
 

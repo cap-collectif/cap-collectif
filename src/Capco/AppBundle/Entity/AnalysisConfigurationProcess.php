@@ -37,7 +37,7 @@ class AnalysisConfigurationProcess implements EntityInterface
         $this->decisions = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

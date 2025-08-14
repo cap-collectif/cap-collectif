@@ -5,34 +5,45 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Publishable\DoctrineListener;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateUserReplyMutation implements MutationInterface
+class UpdateUserReplyMutation extends ReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ReplyRepository $replyRepo, private readonly ResponsesFormatter $responsesFormatter, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FormFactoryInterface $formFactory,
+        private ResponsesFormatter $responsesFormatter,
+        private Publisher $publisher,
+        private GlobalIdResolver $globalIdResolver,
+        ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
+    ) {
+        parent::__construct($validatePhoneReusabilityMutation);
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
-        $reply = $this->getReply($input, $viewer);
+        $reply = $this->getReply($input->offsetGet('replyId'), $viewer);
         $wasDraft = $reply->isDraft();
+
+//        if (!$this->canReusePhone($reply, null, $viewer)) {
+//            return ['errorCode' => ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED];
+//        }
+
         $reply = $this->updateReply($reply, $input, $wasDraft);
         $this->em->flush();
 
@@ -58,13 +69,11 @@ class UpdateUserReplyMutation implements MutationInterface
         );
     }
 
-    private function getReply(Argument $argument, User $viewer): Reply
+    private function getReply(string $id, User $viewer): Reply
     {
-        $reply = $this->replyRepo->find(
-            GlobalId::fromGlobalId($argument->offsetGet('replyId'))['id']
-        );
+        $reply = $this->globalIdResolver->resolve($id);
 
-        if (!$reply) {
+        if (!$reply instanceof Reply) {
             throw new UserError('Reply not found.');
         }
         if ($reply->getAuthor() !== $viewer) {

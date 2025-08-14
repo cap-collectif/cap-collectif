@@ -15,7 +15,6 @@ abstract class AbstractUser extends FosUser
     protected ?string $website = null;
     protected ?string $biography = null;
     protected ?string $gender = null;
-    protected ?string $locale = null;
 
     public function __construct()
     {
@@ -50,18 +49,6 @@ abstract class AbstractUser extends FosUser
     public function getGender(): ?string
     {
         return $this->gender;
-    }
-
-    public function setLocale(?string $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
-    }
-
-    public function getLocale(): ?string
-    {
-        return $this->locale;
     }
 
     public function setWebsite(?string $website): self

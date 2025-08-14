@@ -16,6 +16,7 @@ export const VoteStepEvent = {
   AnimateCard: 'animate-card',
   HoverCardStart: 'hover-card-start',
   HoverCardEnd: 'hover-card-end',
+  NewParticipantToken: 'new-participant-token',
 }
 
 export const dispatchEvent = (type: $Values<typeof VoteStepEvent>, data?: Record<string, any>) => {

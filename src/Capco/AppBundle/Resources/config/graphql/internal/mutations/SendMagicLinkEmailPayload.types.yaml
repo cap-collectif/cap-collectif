@@ -1,0 +1,6 @@
+SendMagicLinkEmailPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            errorCode:
+                type: 'SendMagicLinkEmailErrorCode'

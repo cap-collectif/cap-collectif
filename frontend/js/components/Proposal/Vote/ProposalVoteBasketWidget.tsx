@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { graphql, createFragmentContainer } from 'react-relay'
-import { FormattedNumber, FormattedMessage } from 'react-intl'
-import { Navbar, Button } from 'react-bootstrap'
+import { createFragmentContainer, graphql } from 'react-relay'
+import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { Button, Navbar } from 'react-bootstrap'
 
 import styled, { css } from 'styled-components'
 import type { ProposalVoteBasketWidget_step$data } from '~relay/ProposalVoteBasketWidget_step.graphql'
@@ -12,6 +12,7 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import withColors from '~/components/Utils/withColors'
 import type { FeatureToggles, State } from '~/types'
+import { ProposalVoteBasketWidget_participant$data } from '~relay/ProposalVoteBasketWidget_participant.graphql'
 
 export const BlockContainer = styled.div`
   display: flex;
@@ -168,7 +169,7 @@ type Props = {
   voteBarButtonBgColor: string
   voteBarButtonTextColor: string
   features: FeatureToggles
-  isAuthenticated: boolean
+  participant: ProposalVoteBasketWidget_participant$data | null | undefined
 }
 
 export const ProposalVoteBasketWidget = ({
@@ -180,10 +181,10 @@ export const ProposalVoteBasketWidget = ({
   voteBarButtonBgColor,
   voteBarButtonTextColor,
   features,
-  isAuthenticated,
+  participant
 }: Props) => {
   const [collapsed, setCollapsed] = useState<boolean>(true)
-  const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0
+  const creditsSpent = (viewer?.proposalVotes?.creditsSpent || participant?.proposalVotes?.creditsSpent) ?? 0;
   const isBudget = step.voteType === 'BUDGET'
   const isInterpellation = isInterpellationContextFromStep(step)
   const votesPageUrl = `/projects/${step.project?.slug || ''}/votes`
@@ -194,6 +195,7 @@ export const ProposalVoteBasketWidget = ({
       if (html) html.classList.remove('has-new-vote-widget')
     }
   }, [])
+
   return (
     <NavBar
       fixedTop
@@ -295,11 +297,9 @@ export const ProposalVoteBasketWidget = ({
           </div>
         </div>
       </div>
-      {isAuthenticated && (
-        <Button bsStyle="default" className="widget__button " href={votesPageUrl}>
-          <FormattedMessage id={isInterpellation ? 'project.supports.title' : 'project.votes.title'} />
-        </Button>
-      )}
+      <Button bsStyle="default" className="widget__button " href={votesPageUrl}>
+        <FormattedMessage id={isInterpellation ? 'project.supports.title' : 'project.votes.title'} />
+      </Button>
     </NavBar>
   )
 }
@@ -322,12 +322,19 @@ export default createFragmentContainer(withColors(connect(mapStateToProps)(Propo
       votesLimit
       votesMin
       budget
-      isProposalSmsVoteEnabled
       ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,
   viewer: graphql`
     fragment ProposalVoteBasketWidget_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+      proposalVotes(stepId: $stepId) {
+        totalCount
+        creditsSpent
+      }
+    }
+  `,
+  participant: graphql`
+    fragment ProposalVoteBasketWidget_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
       proposalVotes(stepId: $stepId) {
         totalCount
         creditsSpent

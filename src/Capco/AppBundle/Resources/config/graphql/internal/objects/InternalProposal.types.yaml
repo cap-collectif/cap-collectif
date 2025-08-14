@@ -200,12 +200,20 @@ InternalProposal:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", value, args, getUser())'
             viewerVote:
                 access: "@=hasRole('ROLE_USER')"
-                type: 'InternalProposalUserVote'
+                type: 'InternalProposalVote'
                 args:
                     step:
                         type: 'ID!'
                         description: 'The concerned step.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerVoteResolver", value, args, getUser())'
+            contributorVote:
+                type: 'InternalProposalVote'
+                args:
+                    step:
+                        type: 'ID!'
+                    token:
+                        type: 'String'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalContributorVoteResolver", value, args, getUser())'
             viewerHasReport:
                 resolve: '@=value.userDidReport(getUser())'
             votableSteps:

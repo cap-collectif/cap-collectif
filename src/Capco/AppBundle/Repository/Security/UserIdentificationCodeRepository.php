@@ -21,7 +21,12 @@ class UserIdentificationCodeRepository extends EntityRepository
         $qb = $this->getEntityManager()
             ->getConnection()
             ->executeQuery(
-                'select uic.identification_code, fu.id as isUsed from user_identification_code uic left join fos_user fu ON fu.user_identification_code = uic.identification_code where uic.identification_code = ?',
+                'select uic.identification_code, fu.id as isUsedByUser, p.id as isUsedByParticipant
+                     from user_identification_code uic
+                     left join fos_user fu ON fu.user_identification_code = uic.identification_code
+                     left join participant p ON p.user_identification_code = uic.identification_code
+                     where uic.identification_code = ?
+                     ',
                 [$code]
             )
         ;

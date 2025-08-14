@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message\Questionnaire;
 
-use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 final class QuestionnaireReplyAnonymousCreateConfirmMessage extends AbstractExternalMessage
@@ -11,7 +11,7 @@ final class QuestionnaireReplyAnonymousCreateConfirmMessage extends AbstractExte
     public const TEMPLATE = '@CapcoMail/Questionnaire/questionnaireReplyAnonymousCreateConfirm.html.twig';
     public const FOOTER = '';
 
-    public static function getMyTemplateVars(ReplyAnonymous $reply, array $params): array
+    public static function getMyTemplateVars(Reply $reply, array $params): array
     {
         return [
             'organizationName' => self::escape($params['organizationName']),
@@ -20,7 +20,7 @@ final class QuestionnaireReplyAnonymousCreateConfirmMessage extends AbstractExte
         ];
     }
 
-    public static function getMySubjectVars(ReplyAnonymous $reply, array $params): array
+    public static function getMySubjectVars(Reply $reply, array $params): array
     {
         return [
             '{siteName}' => self::escape($params['organizationName']),

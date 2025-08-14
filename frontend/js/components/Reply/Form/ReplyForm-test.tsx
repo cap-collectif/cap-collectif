@@ -14,8 +14,6 @@ describe('<ReplyForm />', () => {
       totalCount: 3,
       viewerMeetsTheRequirements: true,
     },
-    isAnonymousParticipationAllowed: false,
-    collectParticipantsEmail: false,
     ' $fragmentRefs': $fragmentRefs,
   }
   const stepWithRequirementNotFullFill = {
@@ -348,7 +346,6 @@ describe('<ReplyForm />', () => {
     isAuthenticated: true,
     platformName: 'capco',
     isAnonymousQuestionnaireFeatureEnabled: false,
-    backgroundColorSection: '#fff000',
     backgroundPrimaryButton: '#fff000',
   }
   it('should render correctly with equal required and facultative fields', () => {
@@ -465,21 +462,6 @@ describe('<ReplyForm />', () => {
         user={{
           id: 'connectedUser',
         }}
-      />,
-    )
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly when anonymous participation is allowed', () => {
-    const wrapper = shallow(
-      <ReplyForm
-        questionnaire={{
-          step: { ...step, isAnonymousParticipationAllowed: true },
-          questions: [requiredText],
-          ...questionnaireProps,
-        }}
-        reply={null}
-        {...props}
-        isAnonymousQuestionnaireFeatureEnabled
       />,
     )
     expect(wrapper).toMatchSnapshot()

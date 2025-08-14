@@ -9,8 +9,9 @@ export default defineConfig({
   chromeWebSecurity: false,
   retries: {
     runMode: 2,
-    openMode: 0
+    openMode: 0,
   },
+  defaultCommandTimeout: 15000,
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.

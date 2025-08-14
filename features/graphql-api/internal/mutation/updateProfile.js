@@ -290,7 +290,7 @@ describe('mutations.updateProfilePersonalDataMutation', () => {
         { input: inputUserIdCodeUsed },
         'internal_kiroule',
       )
-    ).rejects.toThrowError('An unknown error occurred.');
+    ).resolves.toMatchSnapshot();
   });
   it('should add identification code, but the code is wrong', async () => {
     await expect(

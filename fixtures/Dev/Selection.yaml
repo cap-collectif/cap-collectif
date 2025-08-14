@@ -136,3 +136,43 @@ Capco\AppBundle\Entity\Selection:
         proposal: '@proposalLocation<current()>'
         selectionStep: '@selectionStepIdf3Vote'
         createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-1:
+        proposal: '@proposalWorkflowVoteA'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-2:
+        proposal: '@proposalWorkflowVoteB'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-3:
+        proposal: '@proposalWorkflowVoteC'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-4:
+        proposal: '@proposalWorkflowVoteD'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-5:
+        proposal: '@proposalWorkflowVoteE'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow1-6:
+        proposal: '@proposalWorkflowVoteF'
+        selectionStep: '@selectionStepWorkflowVote1'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow2-1:
+        proposal: '@proposalWorkflowVote2-A'
+        selectionStep: '@selectionStepWorkflowVote2'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow2-2:
+        proposal: '@proposalWorkflowVote2-B'
+        selectionStep: '@selectionStepWorkflowVote2'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow2-3:
+        proposal: '@proposalWorkflowVote2-C'
+        selectionStep: '@selectionStepWorkflowVote2'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionVoteWorkflow2-4:
+        proposal: '@proposalWorkflowVote2-D'
+        selectionStep: '@selectionStepWorkflowVote2'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>

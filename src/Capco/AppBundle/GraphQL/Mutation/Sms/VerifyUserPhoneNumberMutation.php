@@ -10,24 +10,27 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class VerifyUserPhoneNumberMutation implements MutationInterface
 {
     use MutationTrait;
 
-    final public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
-    private readonly SmsProviderInterface $smsProvider;
+    public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
+    private SmsProviderInterface $smsProvider;
 
     public function __construct(
-        private readonly EntityManagerInterface $em,
+        private EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
-        private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+        private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
+        private KernelInterface $kernel
     ) {
         $this->smsProvider = $smsProviderFactory->fetch();
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $env = $this->kernel->getEnvironment();
         $this->formatInput($input);
         if ($viewer->isPhoneConfirmed()) {
             return ['errorCode' => self::PHONE_ALREADY_CONFIRMED];
@@ -35,14 +38,21 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
 
         $code = $input->offsetGet('code');
         $phone = $viewer->getPhone();
-        $verifyErrorCode = $this->smsProvider->verifySms($phone, $code);
-        if ($verifyErrorCode) {
-            return ['errorCode' => $verifyErrorCode];
+
+        if ('test' !== $env) {
+            $verifyErrorCode = $this->smsProvider->verifySms($phone, $code);
+            if ($verifyErrorCode) {
+                return ['errorCode' => $verifyErrorCode];
+            }
         }
 
         $viewer->setPhoneConfirmed(true);
-        $userPhoneVerif = $this->userPhoneVerificationSmsRepository->findMostRecentSms($viewer);
-        $userPhoneVerif->setApproved();
+
+        if ('test' !== $env) {
+            $userPhoneVerif = $this->userPhoneVerificationSmsRepository->findMostRecentSms($viewer);
+            $userPhoneVerif->setApproved();
+        }
+
         $this->em->flush();
 
         return ['errorCode' => null, 'user' => $viewer];

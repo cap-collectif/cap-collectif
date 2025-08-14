@@ -44,7 +44,7 @@ Object {
                                 "id": "1066",
                                 "isAccounted": true,
                                 "participant": Object {
-                                  "email": "lbrunet@cap-collectif.com",
+                                  "email": "participant1@cap-collectif.com",
                                 },
                               },
                             },
@@ -53,7 +53,7 @@ Object {
                                 "id": "1067",
                                 "isAccounted": false,
                                 "participant": Object {
-                                  "email": "sfavot@cap-collectif.com",
+                                  "email": "participant2@cap-collectif.com",
                                 },
                               },
                             },

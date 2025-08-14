@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\ReplyAnonymous;
-use Capco\AppBundle\Form\ReplyAnonymousType;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -17,19 +18,38 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateAnonymousReplyMutation implements MutationInterface
+class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly ReplyAnonymousRepository $replyAnonymousRepository, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ResponsesFormatter $responsesFormatter,
+        private readonly Publisher $publisher,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ParticipantHelper $participantHelper,
+        ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
+    ) {
+        parent::__construct($validatePhoneReusabilityMutation);
     }
 
     public function __invoke(Argument $input): array
     {
         $this->formatInput($input);
         $reply = $this->getReply($input);
+
+        $participantToken = $input->offsetGet('participantToken');
+
+        if (!$this->canReusePhone($reply, $participantToken)) {
+            return ['errorCode' => ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED];
+        }
+
+        $participant = $this->participantHelper->getParticipantByToken($participantToken);
+
         $reply = $this->updateReply($reply, $input);
+
+        $participant->setLastContributedAt(new \DateTime());
         $this->em->flush();
 
         if (self::shouldNotify($reply)) {
@@ -39,7 +59,7 @@ class UpdateAnonymousReplyMutation implements MutationInterface
         return ['reply' => $reply];
     }
 
-    private function notify(ReplyAnonymous $reply): void
+    private function notify(Reply $reply): void
     {
         $this->publisher->publish(
             'questionnaire.reply',
@@ -52,22 +72,35 @@ class UpdateAnonymousReplyMutation implements MutationInterface
         );
     }
 
-    private function getReply(Argument $argument): ReplyAnonymous
+    private function getReply(Argument $argument): Reply
     {
-        $hashedToken = $argument->offsetGet('hashedToken');
-        $decodedToken = base64_decode((string) $hashedToken);
-        $reply = $this->replyAnonymousRepository->findOneBy(['token' => $decodedToken]);
+        $replyId = $argument->offsetGet('replyId');
 
-        if (!$reply) {
-            throw new UserError('Reply not found.');
+        /** * @var Reply $reply  */
+        $reply = $this->globalIdResolver->resolve($replyId);
+
+        if (null === $reply) {
+            throw new UserError('Reply not found');
+        }
+
+        $participant = $reply->getParticipant();
+        if (null === $participant) {
+            throw new UserError('Reply is not anonymous');
+        }
+
+        $participantToken = $argument->offsetGet('participantToken');
+        $decodedToken = base64_decode((string) $participantToken);
+
+        if ($participant->getToken() !== $decodedToken) {
+            throw new UserError('Given token does not match corresponding Participant');
         }
 
         return $reply;
     }
 
-    private function updateReply(ReplyAnonymous $reply, Argument $input): ReplyAnonymous
+    private function updateReply(Reply $reply, Argument $input): Reply
     {
-        $form = $this->formFactory->create(ReplyAnonymousType::class, $reply);
+        $form = $this->formFactory->create(ReplyType::class, $reply);
         $form->submit($this->formatValuesForForm($input), false);
         if (!$form->isValid()) {
             throw GraphQLException::fromFormErrors($form);
@@ -79,13 +112,14 @@ class UpdateAnonymousReplyMutation implements MutationInterface
     private function formatValuesForForm(Argument $argument): array
     {
         $values = $argument->getArrayCopy();
-        unset($values['hashedToken']);
+        unset($values['participantToken'], $values['replyId']);
+
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
         return $values;
     }
 
-    private static function shouldNotify(ReplyAnonymous $reply): bool
+    private static function shouldNotify(Reply $reply): bool
     {
         $questionnaire = $reply->getQuestionnaire();
 

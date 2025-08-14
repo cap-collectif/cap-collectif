@@ -156,9 +156,13 @@ gosu capco php bin/console capco:generate:map-token MAPBOX --no-debug --env=prod
 
 if [[ ! -f config/jwt/private.pem ]]; then
     echo "[$(date -u)][PHP-FPM] Generating JWT keypair"
+    gosu capco mkdir -m 700 -p config/jwt
     gosu capco openssl genrsa -passout pass:${SYMFONY_JWT_PASSPHRASE} -out config/jwt/private.pem
     gosu capco openssl rsa -in config/jwt/private.pem -passin pass:${SYMFONY_JWT_PASSPHRASE} -pubout -out config/jwt/public.pem
 fi
+
+chown -R capco:capco config/jwt
+
 
 echo "[$(date -u)][PHP-FPM] Checking ES mapping..."
 gosu capco php bin/console capco:es:mapping

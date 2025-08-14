@@ -7,7 +7,6 @@ import { Button, Modal } from 'react-bootstrap'
 import { arrayPush, change, Field, formValueSelector, reduxForm, submit } from 'redux-form'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import styled from 'styled-components'
 import { renderLabel } from '../Content/ProjectContentAdminForm'
 import toggle from '~/components/Form/Toggle'
 import renderComponent from '~/components/Form/Field'
@@ -44,9 +43,6 @@ import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql'
 import Accordion from '~ds/Accordion'
 import Heading from '~ui/Primitives/Heading'
 import DebateWidgetForm from '~/components/Admin/Project/Step/DebateWidgetForm/DebateWidgetForm'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import Text from '~ui/Primitives/Text'
-import AppBox from '~/components/Ui/Primitives/AppBox'
 export type FranceConnectAllowedData = {
   FIRSTNAME: boolean
   LASTNAME: boolean
@@ -100,7 +96,6 @@ type Props = ReduxFormFormProps & {
     isSecretBallot: boolean
     publishedVoteDate?: string | null | undefined
     isLimitEnabled?: boolean | null | undefined
-    isProposalSmsVoteEnabled?: boolean
     allowingProgressSteps?: boolean | null | undefined
     allowAuthorsToAddNews?: boolean | null | undefined
     nbVersionsToDisplay?: number | null | undefined
@@ -130,7 +125,6 @@ type Props = ReduxFormFormProps & {
     debateType?: DebateType
     debateContent?: string
     debateContentUsingJoditWysiwyg?: boolean | null | undefined
-    collectParticipantsEmail?: boolean
     proposalArchivedTime: number
     proposalArchivedUnitTime: 'DAYS' | 'MONTHS'
   }
@@ -145,7 +139,6 @@ type Props = ReduxFormFormProps & {
   statuses?: Array<ProposalStepStatus> | null | undefined
   votable?: boolean
   isBudgetEnabled?: boolean
-  isProposalSmsVoteEnabled?: boolean
   isTresholdEnabled?: boolean
   isLimitEnabled?: boolean
   isSecretBallotEnabled?: boolean
@@ -189,7 +182,6 @@ export type FormValues = DebateStepForm & {
   votesRanking?: boolean
   budget?: number
   isBudgetEnabled?: boolean | null | undefined
-  isProposalSmsVoteEnabled?: boolean | null | undefined
   isTresholdEnabled?: boolean | null | undefined
   isLimitEnabled?: boolean | null | undefined
   isSecretBallotEnabled?: boolean | null | undefined
@@ -385,12 +377,6 @@ const renderDateContainer = (formName: string, intl: IntlShape) => (
   </DateContainer>
 )
 
-const AppBoxNoMargin = styled(AppBox)`
-  .form-group,
-  .form-group label {
-    margin-bottom: 0 !important;
-  }
-`
 export function ProjectAdminStepForm({
   step,
   handleSubmit,
@@ -406,7 +392,6 @@ export function ProjectAdminStepForm({
   statuses,
   votable,
   isBudgetEnabled,
-  isProposalSmsVoteEnabled,
   isTresholdEnabled,
   isLimitEnabled,
   isSecretBallotEnabled,
@@ -424,7 +409,6 @@ export function ProjectAdminStepForm({
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled)
-  const anonymous_questionnaire = useFeatureFlag('anonymous_questionnaire')
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
     // Normally, need to use enableReinitialize but it resets the form...
@@ -443,7 +427,6 @@ export function ProjectAdminStepForm({
         })
         .filter(Boolean)
     : []
-  const hasCheckedRequirements = requirementsFiltered.some(requirement => requirement.checked)
   return (
     <>
       <Modal.Body>
@@ -538,39 +521,6 @@ export function ProjectAdminStepForm({
               {!timeless && renderDateContainer(formName, intl)}
             </>
           )}
-          {step.__typename === 'QuestionnaireStep' && anonymous_questionnaire && (
-            <>
-              <Field
-                component={toggle}
-                name="isAnonymousParticipationAllowed"
-                id="step-isAnonymousParticipationAllowed"
-                normalize={val => !!val}
-                label={<FormattedMessage id="allow-debate-anonymous-participation" />}
-                disabled={hasCheckedRequirements}
-              />
-              {isAnonymousParticipationAllowed && (
-                <AppBoxNoMargin ml={4} mb={5}>
-                  <Field
-                    name="collectParticipantsEmail"
-                    component={renderComponent}
-                    type="checkbox"
-                    id="collectParticipantsEmail"
-                  >
-                    <Text color="gray.900">
-                      {intl.formatMessage({
-                        id: 'collect-particpants-email',
-                      })}
-                    </Text>
-                  </Field>
-                  <Text ml="2.5rem" color="gray.700">
-                    {intl.formatMessage({
-                      id: 'collect-particpants-email-help',
-                    })}
-                  </Text>
-                </AppBoxNoMargin>
-              )}
-            </>
-          )}
           {step.__typename === 'DebateStep' && (
             <Field
               icons
@@ -609,7 +559,6 @@ export function ProjectAdminStepForm({
               requirements={requirementsFiltered}
               fcAllowedData={fcAllowedData}
               isFranceConnectConfigured={isFranceConnectConfigured}
-              isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
             />
           )}
           {step.__typename === 'ConsultationStep' && (
@@ -624,7 +573,6 @@ export function ProjectAdminStepForm({
             <ProjectAdminSelectionStepForm
               id={step.id}
               isBudgetEnabled={isBudgetEnabled}
-              isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isSecretBallotEnabled={isSecretBallotEnabled}
               isLimitEnabled={isLimitEnabled}
@@ -649,7 +597,6 @@ export function ProjectAdminStepForm({
               isPrivate={isPrivate}
               proposal={step.proposalForm}
               isBudgetEnabled={isBudgetEnabled}
-              isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isLimitEnabled={isLimitEnabled}
               isSecretBallotEnabled={isSecretBallotEnabled}
@@ -854,12 +801,6 @@ const mapStateToProps = (
       // QuestionnaireStep
       questionnaire: step?.questionnaire || null,
       footer: step?.footer ? step.footer : null,
-      collectParticipantsEmail:
-        step?.collectParticipantsEmail !== undefined
-          ? step.collectParticipantsEmail
-          : step.__typename === 'QuestionnaireStep'
-          ? true
-          : undefined,
       footerUsingJoditWysiwyg: step.footerUsingJoditWysiwyg !== false,
       // ConsultationStep
       consultations: step?.consultations || [],
@@ -895,7 +836,6 @@ const mapStateToProps = (
       allowAuthorsToAddNews: step?.allowAuthorsToAddNews || false,
       budget: step?.budget || null,
       isBudgetEnabled: step?.isBudgetEnabled || false,
-      isProposalSmsVoteEnabled: step?.isProposalSmsVoteEnabled || false,
       isLimitEnabled: step?.votesMin != null || step?.votesLimit != null || false,
       isTresholdEnabled: step?.isTresholdEnabled || false,
       isSecretBallotEnabled: step?.isSecretBallotEnabled || false,
@@ -906,7 +846,6 @@ const mapStateToProps = (
       private: step?.private || false,
     },
     isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,
-    isProposalSmsVoteEnabled: formValueSelector(stepFormName)(state, 'isProposalSmsVoteEnabled') || false,
     isLimitEnabled: formValueSelector(stepFormName)(state, 'isLimitEnabled') || false,
     isTresholdEnabled: formValueSelector(stepFormName)(state, 'isTresholdEnabled') || false,
     isSecretBallotEnabled: formValueSelector(stepFormName)(state, 'isSecretBallot') || false,

@@ -3,30 +3,27 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteUserReplyMutation implements MutationInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ReplyRepository $replyRepo, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly Publisher $publisher, private readonly Indexer $indexer, private readonly GlobalIdResolver $globalIdResolver)
     {
     }
 
     public function __invoke(string $id, User $viewer): array
     {
-        /** @var Reply $reply */
-        $reply = $this->replyRepo->find(GlobalId::fromGlobalId($id)['id']);
+        $reply = $this->globalIdResolver->resolve($id);
 
-        if (!$reply) {
+        if (!$reply instanceof Reply) {
             throw new UserError('Reply not found');
         }
 
@@ -36,7 +33,9 @@ class DeleteUserReplyMutation implements MutationInterface
 
         $questionnaire = $reply->getQuestionnaire();
 
-        $this->indexer->remove(AbstractReply::class, $reply->getId());
+        $this->indexer->remove(Reply::class, $reply->getId());
+        $this->indexer->finishBulk();
+        $this->indexer->index(User::class, $viewer->getId());
         $this->indexer->finishBulk();
 
         $this->em->remove($reply);

@@ -51,7 +51,7 @@ exports[`Internal|Analytics fetches analytics data 1`] = `
 Object {
   "analytics": Object {
     "anonymousContributors": Object {
-      "totalCount": 4,
+      "totalCount": 3,
       "values": Array [
         Object {
           "key": "2014-01-01T00:00:00.000+01:00",
@@ -447,7 +447,7 @@ Object {
         },
         Object {
           "key": "2022-03-01T00:00:00.000+01:00",
-          "totalCount": 1,
+          "totalCount": 0,
         },
         Object {
           "key": "2022-04-01T00:00:00.000+02:00",
@@ -1431,11 +1431,11 @@ Object {
         },
         Object {
           "key": "2022-05-01T00:00:00.000+02:00",
-          "totalCount": 22,
+          "totalCount": 21,
         },
         Object {
           "key": "2022-06-01T00:00:00.000+02:00",
-          "totalCount": 21,
+          "totalCount": 23,
         },
         Object {
           "key": "2022-07-01T00:00:00.000+02:00",
@@ -1443,15 +1443,15 @@ Object {
         },
         Object {
           "key": "2022-08-01T00:00:00.000+02:00",
-          "totalCount": 31,
+          "totalCount": 32,
         },
         Object {
           "key": "2022-09-01T00:00:00.000+02:00",
-          "totalCount": 23,
+          "totalCount": 21,
         },
         Object {
           "key": "2022-10-01T00:00:00.000+02:00",
-          "totalCount": 28,
+          "totalCount": 26,
         },
         Object {
           "key": "2022-11-01T00:00:00.000+01:00",
@@ -1459,7 +1459,7 @@ Object {
         },
         Object {
           "key": "2022-12-01T00:00:00.000+01:00",
-          "totalCount": 24,
+          "totalCount": 25,
         },
         Object {
           "key": "2023-01-01T00:00:00.000+01:00",
@@ -1467,15 +1467,15 @@ Object {
         },
         Object {
           "key": "2023-02-01T00:00:00.000+01:00",
-          "totalCount": 23,
-        },
-        Object {
-          "key": "2023-03-01T00:00:00.000+01:00",
           "totalCount": 27,
         },
         Object {
+          "key": "2023-03-01T00:00:00.000+01:00",
+          "totalCount": 26,
+        },
+        Object {
           "key": "2023-04-01T00:00:00.000+02:00",
-          "totalCount": 20,
+          "totalCount": 18,
         },
         Object {
           "key": "2023-05-01T00:00:00.000+02:00",
@@ -1487,7 +1487,7 @@ Object {
         },
         Object {
           "key": "2023-07-01T00:00:00.000+02:00",
-          "totalCount": 2,
+          "totalCount": 18,
         },
         Object {
           "key": "2023-08-01T00:00:00.000+02:00",
@@ -2495,21 +2495,21 @@ Object {
       "values": Array [
         Object {
           "category": Object {
-            "id": "pCategoryBp3Idf5",
+            "id": "pCategoryBp3Idf3",
           },
-          "totalCount": 69,
+          "totalCount": 68,
         },
         Object {
           "category": Object {
-            "id": "pCategoryBp3Idf3",
+            "id": "pCategoryBp3Idf5",
           },
-          "totalCount": 65,
+          "totalCount": 67,
         },
         Object {
           "category": Object {
             "id": "pCategoryBp3Idf1",
           },
-          "totalCount": 61,
+          "totalCount": 62,
         },
         Object {
           "category": Object {
@@ -2521,7 +2521,7 @@ Object {
           "category": Object {
             "id": "pCategoryBp3Idf2",
           },
-          "totalCount": 50,
+          "totalCount": 48,
         },
       ],
     },

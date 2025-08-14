@@ -67,11 +67,9 @@ export default createFragmentContainer(Reply, {
           url
         }
       }
-      ... on UserReply {
-        author {
-          ...UserAvatar_user
-          ...UserLink_user
-        }
+      author {
+        ...UserAvatar_user
+        ...UserLink_user
       }
     }
   `,

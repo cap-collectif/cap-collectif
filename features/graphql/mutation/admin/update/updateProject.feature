@@ -643,13 +643,11 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "startAt": "2014-09-27 00:00:00",
                 "isEnabled": true,
                 "timeless": false,
-                "isAnonymousParticipationAllowed": false,
                 "metaDescription": null,
                 "customCode": null,
                 "requirementsReason": null,
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
                 "footer": null,
-                "collectParticipantsEmail": false,
                 "footerUsingJoditWysiwyg": false,
                 "requirements": [],
                 "type": "QUESTIONNAIRE"
@@ -670,8 +668,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               },
@@ -691,8 +687,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               },
@@ -712,8 +706,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBzMg==",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               },
@@ -733,8 +725,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMw==",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               },
@@ -754,8 +744,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlTG90Q2hvaWNlcw==",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               },
@@ -792,8 +780,6 @@ Scenario: GraphQL client wants to update step with another questionnaire
                 "questionnaire": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
                 "footer": null,
                 "footerUsingJoditWysiwyg": false,
-                "isAnonymousParticipationAllowed": false,
-                "collectParticipantsEmail": false,
                 "requirementsReason": null,
                 "type": "QUESTIONNAIRE"
               }

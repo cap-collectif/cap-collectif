@@ -46,7 +46,6 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('mainView', ChoiceType::class, [
                 'choices' => ViewConfiguration::ALL,
             ])
-            ->add('isProposalSmsVoteEnabled')
             ->add('proposalArchivedTime')
             ->add('proposalArchivedUnitTime')
             ->add('isCollectByEmailEnabled')

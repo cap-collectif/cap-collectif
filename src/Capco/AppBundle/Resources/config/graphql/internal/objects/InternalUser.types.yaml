@@ -175,6 +175,10 @@ InternalUser:
                 type: 'Boolean!'
                 description: 'Whether or not this user consent external communication.'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            consentPrivacyPolicy:
+                type: 'Boolean!'
+                description: 'Whether or not this user consent privacy policy.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             followingProposals:
                 type: 'InternalProposalConnection!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", value, args)'

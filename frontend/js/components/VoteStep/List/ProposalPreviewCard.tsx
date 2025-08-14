@@ -31,7 +31,7 @@ import ProposalPreviewCardFooter from './ProposalPreviewCardFooter'
 
 const FRAGMENT = graphql`
   fragment ProposalPreviewCard_proposal on Proposal
-  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     title
     url
@@ -65,7 +65,7 @@ const FRAGMENT = graphql`
     currentVotableStep {
       id
     }
-    ...ProposalPreviewCardFooter_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+    ...ProposalPreviewCardFooter_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   }
 `

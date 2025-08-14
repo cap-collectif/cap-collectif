@@ -238,6 +238,9 @@ const getParticipatoryBudgetAnalysisInput = ({
           mainView: 'GRID',
           requirements: [
             {
+              type: 'CONSENT_PRIVACY_POLICY',
+            },
+            {
               type: 'FIRSTNAME',
             },
             {

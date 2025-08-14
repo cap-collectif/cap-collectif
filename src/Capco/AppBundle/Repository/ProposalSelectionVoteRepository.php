@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
@@ -10,11 +11,15 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\ProposalSelectionVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -112,18 +117,33 @@ class ProposalSelectionVoteRepository extends EntityRepository
     }
 
     // TODO remove this duplicate
-    public function getVotesByStepAndUser(SelectionStep $step, User $user): array
+    /**
+     * @return array<ProposalSelectionVote>
+     */
+    public function getVotesByStepAndContributor(SelectionStep $step, ContributorInterface $contributor, bool $published = true): array
     {
-        return $this->createQueryBuilder('pv')
+        $qb = $this->createQueryBuilder('pv')
             ->select('pv', 'proposal')
             ->andWhere('pv.selectionStep = :step')
-            ->andWhere('pv.user = :user')
-            ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.id IS NOT NULL')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->setParameter('user', $user)
             ->setParameter('step', $step)
+        ;
+
+        if ($contributor instanceof User) {
+            $qb->andWhere('pv.user = :user');
+            $qb->setParameter('user', $contributor);
+        } elseif ($contributor instanceof Participant) {
+            $qb->andWhere('pv.participant = :participant');
+            $qb->setParameter('participant', $contributor);
+        }
+
+        if ($published) {
+            $qb->andWhere('pv.published = true');
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
@@ -507,49 +527,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')
+            ->andWhere("pv.completionStatus = 'COMPLETED'")
             ->setParameter('step', $step)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    private function findByParticipantQueryBuilder(
-        Participant $participant,
-        ?Mediator $mediator = null,
-        ?Project $project = null,
-        ?AbstractStep $step = null
-    ): QueryBuilder {
-        $qb = $this->createQueryBuilder('v')
-            ->where('v.participant = :participant')
-            ->setParameter('participant', $participant)
-        ;
-
-        if ($mediator) {
-            $qb->andWhere('v.mediator = :mediator')
-                ->setParameter('mediator', $mediator)
-            ;
-        }
-
-        if ($project) {
-            $qb->join('v.selectionStep', 's')
-                ->join('s.projectAbstractStep', 'pas')
-                ->join('pas.project', 'p')
-                ->andWhere('p = :project')
-                ->setParameter('project', $project)
-            ;
-        }
-
-        if ($step) {
-            $qb->join('v.selectionStep', 's')
-                ->andWhere('s = :step')
-                ->setParameter('step', $step)
-            ;
-        }
-
-        return $qb;
-    }
-
-    private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
+    public function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
     {
         $items = array_map(fn ($value) => $asTitle ? $value->getTitle() : $value->getId(), $proposal->getSelectionSteps());
 
@@ -621,5 +606,271 @@ class ProposalSelectionVoteRepository extends EntityRepository
         }
 
         return $data;
+    }
+
+    /**
+     * @return Paginator<QueryBuilder>
+     */
+    public function getByTokenAndStep(
+        SelectionStep $step,
+        string $token,
+        int $limit = 0,
+        int $offset = 0,
+        ?string $field = null,
+        ?string $direction = null
+    ): Paginator {
+        $qb = $this->createQueryBuilder('pv')
+            ->andWhere('pv.selectionStep = :step')
+            ->join('pv.participant', 'participant', Join::WITH, 'participant.token = :token')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.id IS NOT NULL')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('step', $step)
+            ->setParameter('token', $token)
+        ;
+
+        if ($field && $direction) {
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('pv.publishedAt', $direction);
+            }
+            if ('POSITION' === $field) {
+                $qb->addOrderBy('pv.position', $direction);
+            }
+        }
+
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+        }
+        $qb->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    public function findOneByProposalTokenAndStep(Proposal $proposal, string $token, SelectionStep $step): ?ProposalSelectionVote
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->join('pv.participant', 'participant')
+            ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('participant.token = :token')
+            ->setParameter('proposal', $proposal)
+            ->setParameter('step', $step)
+            ->setParameter('token', $token)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function countByTokenAndStep(SelectionStep $step, string $token): int
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv)')
+            ->andWhere('pv.selectionStep = :step')
+            ->join('pv.participant', 'participant', Join::WITH, 'participant.token = :token')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('token', $token)
+            ->setParameter('step', $step)
+        ;
+
+        return (int) $qb
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function countDistinctPhonePublishedSelectionVoteByStep(SelectionStep $step): int
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv.phone)')
+            ->andWhere('pv.selectionStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.published = 1')
+        ;
+
+        return (int) $qb
+            ->andWhere('pv.isAccounted = 1')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array<ProposalSelectionVote>
+     */
+    public function findByParticipantAndStep(Participant $participant, SelectionStep $step, bool $published = true): array
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->where('v.participant = :participant')
+            ->andwhere('v.selectionStep = :step')
+            ->setParameter('participant', $participant)
+            ->setParameter('step', $step)
+        ;
+
+        if ($published) {
+            $qb->andWhere('v.published = 1');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<ProposalSelectionVote>
+     */
+    public function findMissingRequirementsByParticipantTokenAndStep(string $participantToken, SelectionStep $step): array
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->leftJoin('pv.participant', 'participant')
+            ->where('pv.selectionStep = :step')
+            ->andWhere('pv.completionStatus = :completionStatus')
+            ->andWhere('participant.token = :participantToken')
+            ->setParameter('participantToken', $participantToken)
+            ->setParameter('step', $step)
+            ->setParameter('completionStatus', ContributionCompletionStatus::MISSING_REQUIREMENTS)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByConfirmedParticipantEmail(string $email, SelectionStep $step): int
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->join('pv.participant', 'p')
+            ->where('p.email = :email')
+            ->andWhere('p.confirmationToken IS NULL')
+            ->andWhere('pv.selectionStep = :step')
+            ->setParameter('email', $email)
+            ->setParameter('step', $step)
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countDistinctParticipantPublishedCollectVoteByStep(
+        SelectionStep $step,
+        bool $onlyAccounted
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv.participant)')
+            ->andWhere('pv.selectionStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->setParameter('step', $step)
+        ;
+
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        return (int) $qb
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array<ProposalSelectionVote>
+     */
+    public function findExistingContributorByStepAndPhoneNumber(SelectionStep $step, string $phone, ContributorInterface $contributor): array
+    {
+        $participantFilter = '';
+        $userFilter = '';
+
+        if ($contributor instanceof Participant) {
+            $participantFilter = ' AND participant <> :contributor';
+        }
+
+        if ($contributor instanceof User) {
+            $userFilter = ' AND author <> :contributor';
+        }
+
+        $qb = $this->createQueryBuilder('v')
+            ->leftJoin('v.participant', 'participant')
+            ->leftJoin('v.user', 'author')
+            ->where('participant.phone = :phone AND participant.phoneConfirmed = 1' . $participantFilter)
+            ->orWhere('author.phone = :phone AND author.phoneConfirmed = 1' . $userFilter)
+            ->andWhere('v.selectionStep = :step')
+            ->setParameter('step', $step)
+            ->setParameter('phone', $phone)
+            ->setParameter('contributor', $contributor)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<ProposalSelectionVote>
+     */
+    public function findByParticipantEmail(string $participantEmail, SelectionStep $step): array
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.participant', 'participant')
+            ->where('participant.email = :participantEmail')
+            ->andWhere('participant.confirmationToken IS NULL')
+            ->andWhere('v.selectionStep = :step')
+            ->setParameters([
+                'participantEmail' => $participantEmail,
+                'step' => $step,
+            ])
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    private function findByParticipantQueryBuilder(
+        Participant $participant,
+        ?Mediator $mediator = null,
+        ?Project $project = null,
+        ?AbstractStep $step = null
+    ): QueryBuilder {
+        $qb = $this->createQueryBuilder('v')
+            ->where('v.participant = :participant')
+            ->setParameter('participant', $participant)
+        ;
+
+        if ($mediator) {
+            $qb->andWhere('v.mediator = :mediator')
+                ->setParameter('mediator', $mediator)
+            ;
+        }
+
+        if ($project) {
+            $qb->join('v.selectionStep', 's')
+                ->join('s.projectAbstractStep', 'pas')
+                ->join('pas.project', 'p')
+                ->andWhere('p = :project')
+                ->setParameter('project', $project)
+            ;
+        }
+
+        if ($step) {
+            $qb->join('v.selectionStep', 's')
+                ->andWhere('s = :step')
+                ->setParameter('step', $step)
+            ;
+        }
+
+        return $qb;
     }
 }

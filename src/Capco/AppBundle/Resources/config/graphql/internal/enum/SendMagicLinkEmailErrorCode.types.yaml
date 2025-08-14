@@ -1,0 +1,9 @@
+SendMagicLinkEmailErrorCode:
+    type: enum
+    config:
+        name: SendMagicLinkEmailErrorCode
+        description: 'Available errors for an `sendMagicLinkEmail` mutation.'
+        values:
+            EMAIL_RECENTLY_SENT:
+                value: !php/const Capco\AppBundle\Service\ParticipationWorkflow\MagicLinkEmailSender::EMAIL_RECENTLY_SENT
+                description: 'The user has already requested an email sending.'

@@ -10,10 +10,10 @@ use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Enum\UserOrderField;
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
@@ -25,16 +25,16 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserSearch extends Search
 {
-    final public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
+    public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
 
     public function __construct(
         Index $index,
         private readonly UserRepository $userRepo,
         private readonly EventSearch $eventSearch,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
-        private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        private readonly ReplyRepository $replyRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         private readonly ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository
     ) {
         parent::__construct($index);
@@ -483,13 +483,13 @@ class UserSearch extends Search
 
     private function getAnonymousQuestionnaireRepliesCount(): int
     {
-        return $this->replyAnonymousRepository->countAll();
+        return $this->replyRepository->countAnonymous();
     }
 
     private function getProposalSmsAnonymousVotesCount(): int
     {
-        $selectionTotalCount = $this->proposalSelectionSmsVoteRepository->countAll();
-        $collectTotalCount = $this->proposalCollectSmsVoteRepository->countAll();
+        $selectionTotalCount = $this->proposalSelectionVoteRepository->countAll();
+        $collectTotalCount = $this->proposalCollectVoteRepository->countAll();
 
         return $selectionTotalCount + $collectTotalCount;
     }

@@ -113,9 +113,9 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         proposal: '@proposalByFranceConnectUser'
         selectionStep: '@selectionStepIdf3Vote'
         user: '@user5'
-        position: 0
         publishedAt: <(new \DateTime('2022-01-03'))>
         createdAt: <(new \DateTime('2022-01-03'))>
+        position: 0
     proposalSelectionVote59:
         id: 1064
         proposal: '@propositionAvecDesRs'
@@ -129,25 +129,49 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         proposal: '@proposalByFranceConnectUser'
         selectionStep: '@selectionStepIdf3Vote'
         user: '@user1'
-        position: 0
         publishedAt: <(new \DateTime('2022-01-03'))>
         createdAt: <(new \DateTime('2022-01-03'))>
+        position: 0
     proposalSelectionVoteMediator1:
         id: 1066
         proposal: '@proposal2'
         selectionStep: '@selectionstep1'
-        position: 0
         publishedAt: <(new \DateTime('2024-01-01'))>
         createdAt: <(new \DateTime('2024-01-01'))>
         mediator: '@mediator1'
         participant: '@participant1'
+        position: 0
     proposalSelectionVoteMediator2:
         id: 1067
         proposal: '@proposal3'
         selectionStep: '@selectionstep1'
-        position: 0
         publishedAt: <(new \DateTime('2024-01-03'))>
         createdAt: <(new \DateTime('2024-01-03'))>
         mediator: '@mediator1'
         participant: '@participant2'
         isAccounted: false
+        position: 0
+    proposalSelectionVoteWorkflow1:
+        id: 1068
+        proposal: '@proposalWorkflowVoteA'
+        selectionStep: '@selectionStepWorkflowVote1'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true
+    proposalSelectionVoteWorkflow2:
+        id: 1069
+        proposal: '@proposalWorkflowVoteB'
+        selectionStep: '@selectionStepWorkflowVote1'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true
+    proposalSelectionVoteWorkflow3:
+        id: 1070
+        proposal: '@proposalWorkflowVoteC'
+        selectionStep: '@selectionStepWorkflowVote1'
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        user: '@user1'
+        isAccounted: true

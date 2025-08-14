@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Traits\Repository\PhoneVerification;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
@@ -14,47 +15,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserPhoneVerificationSmsRepository extends EntityRepository
 {
-    public function findByUserWithinOneMinuteRange(User $user): array
+    use PhoneVerification;
+
+    public function findLastByCreatedAtAndParticipant(User $user): ?UserPhoneVerificationSms
     {
-        $fromDate = (new \DateTime())->modify('-1 minute')->format('Y-m-d H:i:s');
-        $toDate = (new \DateTime())->format('Y-m-d H:i:s');
-
-        $qb = $this->createQueryBuilder('s')
-            ->andWhere('s.user = :user')
-            ->andWhere('s.createdAt BETWEEN :fromDate AND :toDate')
-            ->setParameters([
-                'user' => $user,
-                'fromDate' => $fromDate,
-                'toDate' => $toDate,
-            ])
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findMostRecentSms(User $user): ?UserPhoneVerificationSms
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->where('s.user = :user')
-            ->orderBy('s.createdAt', 'DESC')
-            ->setParameters(['user' => $user])
-        ;
-
-        $results = $qb->getQuery()->getResult();
-
-        return $results[0] ?? null;
-    }
-
-    public function countApprovedSms(): int
-    {
-        $status = UserPhoneVerificationSms::APPROVED;
-
-        return (int) $this->createQueryBuilder('s')
-            ->select('COUNT(s.id)')
-            ->where('s.status = :status')
-            ->setParameter('status', $status)
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->where('p.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(1)
             ->getQuery()
-            ->getSingleScalarResult()
+            ->getOneOrNullResult()
         ;
     }
 }

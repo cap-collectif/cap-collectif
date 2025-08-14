@@ -5,7 +5,7 @@ const UpdateRequirementMutation = /* GraphQL */ `
     $input: UpdateRequirementInput!
   ) {
     updateRequirement(input: $input) {
-      requirement {
+      requirements {
         id
         viewerMeetsTheRequirement
       }
@@ -13,16 +13,25 @@ const UpdateRequirementMutation = /* GraphQL */ `
   }`;
 
 const input = {
-  "requirement": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
-  "value": true
+  values: [
+    {
+      "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+      "value": true
+    }
+  ]
 }
 
 const inputWithNoRequirement = {
-  "requirement": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
-  "value": false
+  values: [
+    {
+    "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+    "value": false
+    }
+  ]
 }
 describe('mutations.updateRequirementMutation', () => {
   it('wants to accept a requirement as user', async () => {
+    console.log(JSON.stringify({input}))
     await expect(
       graphql(
         UpdateRequirementMutation,

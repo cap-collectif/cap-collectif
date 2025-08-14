@@ -13,7 +13,7 @@ import { useVoteStepContext } from '../Context/VoteStepContext'
 
 const FRAGMENT = graphql`
   fragment ProposalPreviewCardFooter_proposal on Proposal
-  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     title
     url
@@ -45,7 +45,7 @@ const FRAGMENT = graphql`
     form {
       objectType
     }
-    ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
+    ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId, token: $token)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   }
 `
@@ -64,7 +64,7 @@ const FRAGMENT_STEP = graphql`
         edges {
           node {
             id
-            ... on ProposalUserVote {
+            ... on ProposalVote {
               anonymous
             }
             proposal {
@@ -114,6 +114,7 @@ export const ProposalPreviewCardFooter = ({
   stepId: string
   disabled: boolean
 }) => {
+
   const isMobile = useIsMobile()
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)

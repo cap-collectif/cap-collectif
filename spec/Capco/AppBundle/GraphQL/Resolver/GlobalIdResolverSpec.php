@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
@@ -30,6 +31,7 @@ use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\Manager\RepositoryManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\FilterCollection;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -54,8 +56,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         EventRepository $eventRepo,
-        Event $event
+        Event $event,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $event->canDisplay(null)->willReturn(true);
         $eventRepo->find('event1')->willReturn($event);
 
@@ -76,9 +83,14 @@ class GlobalIdResolverSpec extends ObjectBehavior
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         ProjectRepository $projectRepository,
+        Project $project,
+        FilterCollection $filterCollection,
         RepositoryManager $repositoryManager,
-        Project $project
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $projectRepository->find('ProjectAccessibleForMeOnly')->willReturn($project);
         $container->get(ProjectRepository::class)->willReturn($projectRepository);
 
@@ -105,8 +117,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         RequirementRepository $repository,
-        Requirement $requirement
+        Requirement $requirement,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('requirement1')->willReturn($requirement);
         $container->get(RequirementRepository::class)->willReturn($repository);
 
@@ -126,8 +143,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         AbstractStepRepository $repository,
-        DebateStep $debateStep
+        DebateStep $debateStep,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $debateStep->canDisplay(null)->willReturn(true);
         $repository->find('debateStepCannabis')->willReturn($debateStep);
 
@@ -149,8 +171,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         DebateOpinionRepository $repository,
-        DebateOpinion $debateOpinion
+        DebateOpinion $debateOpinion,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('debateCannabisOpinion1')->willReturn($debateOpinion);
         $container->get(DebateOpinionRepository::class)->willReturn($repository);
 
@@ -170,8 +197,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         DebateArticleRepository $repository,
-        DebateArticle $article
+        DebateArticle $article,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('canabisArticleBfm')->willReturn($article);
         $container->get(DebateArticleRepository::class)->willReturn($repository);
 
@@ -191,8 +223,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         DebateArgumentRepository $repository,
-        DebateArgument $argument
+        DebateArgument $argument,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('debateArgument1')->willReturn($argument);
         $container->get(DebateArgumentRepository::class)->willReturn($repository);
 
@@ -213,8 +250,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         RepositoryManager $repositoryManager,
         DebateArgumentRepository $repository,
         DebateAnonymousArgumentRepository $anonymousRepository,
-        DebateAnonymousArgument $argument
+        DebateAnonymousArgument $argument,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('debateArgument1')->willReturn(null);
         $anonymousRepository->find('debateArgument1')->willReturn($argument);
 
@@ -237,8 +279,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         DebateRepository $repository,
-        Debate $debate
+        Debate $debate,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('debateCannabis')->willReturn($debate);
         $container->get(DebateRepository::class)->willReturn($repository);
 
@@ -258,8 +305,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         OfficialResponseRepository $repository,
-        OfficialResponse $officialResponse
+        OfficialResponse $officialResponse,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $repository->find('officialResponse11')->willReturn($officialResponse);
         $container->get(OfficialResponseRepository::class)->willReturn($repository);
 
@@ -278,8 +330,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
-        EntityRepository $repository
+        EntityRepository $repository,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $id = 'Unknoownnnn1';
         $globalId = GlobalId::toGlobalId('Unknoownnnn', $id);
 
@@ -300,8 +357,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         OpinionRepository $opinionRepo,
-        Opinion $opinion
+        Opinion $opinion,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $uuid = 'opinion1';
         $opinionRepo->find($uuid)->willReturn($opinion);
         $container->get(OpinionRepository::class)->willReturn($opinionRepo);
@@ -316,8 +378,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         CASSSOConfigurationRepository $repository,
-        CASSSOConfiguration $casSSOConfiguration
+        CASSSOConfiguration $casSSOConfiguration,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $id = 'casSSOConfigurationID';
         $container->get(CASSSOConfigurationRepository::class)->willReturn($repository);
 
@@ -338,8 +405,13 @@ class GlobalIdResolverSpec extends ObjectBehavior
         ContainerInterface $container,
         LoggerInterface $logger,
         RepositoryManager $repositoryManager,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        FilterCollection $filterCollection
     ) {
+        $entityManager->getFilters()->willReturn($filterCollection);
+        $filterCollection->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)->willReturn(false);
+        $filterCollection->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
+
         $id = 'Unknoownnnn1';
         $repository->find($id)->willReturn(null);
 

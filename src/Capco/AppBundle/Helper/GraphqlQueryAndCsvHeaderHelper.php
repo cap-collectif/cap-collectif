@@ -17,6 +17,8 @@ class GraphqlQueryAndCsvHeaderHelper
         dateOfBirth
         userIdentificationCode
         createdAt
+        zipCode
+        consentInternalCommunication
     ';
 
     final public const USER_FRAGMENT = '

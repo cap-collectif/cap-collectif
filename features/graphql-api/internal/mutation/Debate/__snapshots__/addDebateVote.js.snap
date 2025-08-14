@@ -11,33 +11,6 @@ Object {
 }
 `;
 
-exports[`Internal|addDebateVote mutation Add an unpublished debate vote. 1`] = `
-Object {
-  "addDebateVote": Object {
-    "debateVote": Object {
-      "author": Object {
-        "id": "VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=",
-      },
-      "createdAt": Any<String>,
-      "debate": Object {
-        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
-        "votes": Object {
-          "totalCount": 16,
-        },
-      },
-      "id": Any<String>,
-      "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
-      "publishableUntil": "2060-10-01 00:00:00",
-      "published": false,
-      "publishedAt": null,
-      "type": "FOR",
-    },
-    "errorCode": null,
-    "previousVoteId": null,
-  },
-}
-`;
-
 exports[`Internal|addDebateVote mutation Add and update a debate vote. 1`] = `
 Object {
   "addDebateVote": Object {

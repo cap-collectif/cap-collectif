@@ -8,17 +8,19 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalViewerVoteDataLoader extends BatchDataLoader
 {
-    private $batch = true;
+    private bool $batch = true;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -32,7 +34,8 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
-        bool $enableCache
+        bool $enableCache,
+        private readonly EntityManagerInterface $em
     ) {
         parent::__construct(
             $this->all(...),
@@ -113,7 +116,12 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
 
         $batchProposalIds = array_map(fn ($key) => $key['proposal']->getId(), $keys);
 
+        if ($this->em->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->em->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
         $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
+        $this->em->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+
         $results = array_map(function ($key) use ($votes) {
             $found = array_values(
                 array_filter($votes, fn ($vote) => $vote->getProposal()->getId() === $key['proposal']->getId())

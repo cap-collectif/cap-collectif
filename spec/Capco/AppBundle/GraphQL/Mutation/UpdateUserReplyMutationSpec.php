@@ -6,19 +6,22 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateUserReplyMutation;
+use Capco\AppBundle\GraphQL\Mutation\ValidatePhoneReusabilityMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
@@ -33,16 +36,18 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        ReplyRepository $replyRepo,
         ResponsesFormatter $responsesFormatter,
-        Publisher $publisher
+        Publisher $publisher,
+        GlobalIdResolver $globalIdResolver,
+        ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
     ) {
         $this->beConstructedWith(
             $em,
             $formFactory,
-            $replyRepo,
             $responsesFormatter,
-            $publisher
+            $publisher,
+            $globalIdResolver,
+            $validatePhoneReusabilityMutation
         );
     }
 
@@ -58,25 +63,26 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form,
         Reply $reply,
-        ReplyRepository $replyRepo,
+        GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
         QuestionnaireStep $step,
         Publisher $publisher,
         Project $project,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
     ) {
         $values = [];
-        $values['replyId'] = 'UmVwbHk6cmVwbHk1';
+        $replyId = 'UmVwbHk6cmVwbHk1';
+        $values['replyId'] = $replyId;
         $values['draft'] = false;
         $values['responses'] = [];
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->getArrayCopy()->willReturn($values);
-        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
+        $arguments->offsetGet('replyId')->willReturn($replyId);
 
-        $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
-        $replyRepo->find($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId)->willReturn($reply);
 
         $viewer
             ->isEmailConfirmed()
@@ -84,10 +90,13 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
             ->willReturn(true)
         ;
 
+        $validatePhoneReusabilityMutation->__invoke(Argument::type(Arg::class), $viewer)->willReturn(['errorCode' => null]);
+
         // https://github.com/phpspec/prophecy/issues/213#issuecomment-145499760
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($viewer);
+        $reply->getCompletionStatus()->willReturn(ContributionCompletionStatus::COMPLETED);
         $reply
             ->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))
             ->shouldBeCalled()
@@ -105,6 +114,11 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(true)
         ;
+
+        $reply->getStep()->willReturn($step);
+        $step->getRequirements()->willReturn(new ArrayCollection([]));
+        $reply->getParticipant()->willReturn(null);
+
         $step->getSlug()->willReturn('questionnaire-step');
         $project->getId()->willReturn('projectQuestionnaireId');
         $project->getSlug()->willReturn('project1');
@@ -137,19 +151,19 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         Arg $arguments,
         User $viewer,
-        ReplyRepository $replyRepo
+        GlobalIdResolver $globalIdResolver
     ) {
         $values = [];
-        $values['replyId'] = 'UmVwbHkscmVwbHkxMA==';
+        $replyId = 'UmVwbHkscmVwbHkxMA==';
+        $values['replyId'] = $replyId;
         $values['draft'] = false;
         $values['responses'] = [];
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->getArrayCopy()->willReturn($values);
-        $arguments->offsetGet('replyId')->willReturn('UmVwbHkscmVwbHkxMA==');
+        $arguments->offsetGet('replyId')->willReturn($replyId);
 
-        $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
-        $replyRepo->find($replyId)->willReturn(null);
+        $globalIdResolver->resolve($replyId)->willReturn(null);
         $em->flush()->shouldNotBeCalled();
 
         $this->shouldThrow(new UserError('Reply not found.'))->during('__invoke', [
@@ -164,26 +178,26 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         User $viewer,
         User $author,
         Reply $reply,
-        ReplyRepository $replyRepo
+        GlobalIdResolver $globalIdResolver
     ) {
         $values = [];
-        $values['replyId'] = 'UmVwbHk6cmVwbHk1';
+        $replyId = 'UmVwbHk6cmVwbHk1';
+        $values['replyId'] = $replyId;
         $values['draft'] = false;
         $values['responses'] = [];
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->getArrayCopy()->willReturn($values);
-        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
+        $arguments->offsetGet('replyId')->willReturn($replyId);
 
         $viewer->getId()->willReturn('user1');
         $author->getId()->willReturn('user2');
 
-        $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($author);
 
-        $replyRepo->find($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId)->willReturn($reply);
         $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
         $em->flush()->shouldNotBeCalled();
         $this->shouldThrow(
@@ -198,31 +212,34 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         User $viewer,
         FormInterface $form,
         Reply $reply,
-        ReplyRepository $replyRepo,
+        GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
         QuestionnaireStep $step,
         Project $project,
         ResponsesFormatter $responsesFormatter,
-        StepUrlResolver $stepUrlResolver
+        StepUrlResolver $stepUrlResolver,
+        ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
     ) {
         $values = [];
-        $values['replyId'] = 'UmVwbHk6cmVwbHk1';
+        $replyId = 'UmVwbHk6cmVwbHk1';
+        $values['replyId'] = $replyId;
         $values['draft'] = false;
         $values['responses'] = [];
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->getArrayCopy()->willReturn($values);
-        $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
+        $arguments->offsetGet('replyId')->willReturn($replyId);
+
+        $validatePhoneReusabilityMutation->__invoke(Argument::type(Arg::class), $viewer)->willReturn(['errorCode' => null]);
 
         $viewer->getId()->willReturn('user1');
 
-        $replyId = GlobalId::fromGlobalId($values['replyId'])['id'];
         $reply->isDraft()->willReturn(true, false);
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($viewer);
         $reply->getQuestionnaire()->willReturn($questionnaire);
 
-        $replyRepo->find($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId)->willReturn($reply);
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
         $questionnaire->isAnonymousAllowed()->willReturn(true);

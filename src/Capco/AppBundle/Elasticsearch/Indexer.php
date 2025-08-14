@@ -3,14 +3,13 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\AbstractProposalVote;
-use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Bulk;
@@ -81,6 +80,7 @@ class Indexer
     public function indexAll(?OutputInterface $output = null, bool $isCli = false): void
     {
         $this->disableBuiltinSoftdelete();
+        $this->disableContributionCompletionStatusFilter();
         if ($isCli) {
             $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
         }
@@ -108,6 +108,7 @@ class Indexer
         bool $isCli = false
     ): void {
         $this->disableBuiltinSoftdelete();
+        $this->disableContributionCompletionStatusFilter();
         if ($isCli) {
             $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
         }
@@ -127,6 +128,7 @@ class Indexer
     public function index(string $entityFQN, mixed $identifier): void
     {
         $this->disableBuiltinSoftdelete();
+        $this->disableContributionCompletionStatusFilter();
 
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
@@ -214,7 +216,7 @@ class Indexer
         }
 
         $this->classes['comment'] = Comment::class;
-        $this->classes['reply'] = AbstractReply::class;
+        $this->classes['reply'] = Reply::class;
         $this->classes['vote'] = AbstractVote::class;
         $this->classes['response'] = AbstractResponse::class;
         $this->classes['district'] = AbstractDistrict::class;
@@ -264,6 +266,14 @@ class Indexer
         }
     }
 
+    private function disableContributionCompletionStatusFilter(): void
+    {
+        $filters = $this->em->getFilters();
+        if ($filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+    }
+
     private function getTypeFromEntityFQN($entityFQN): string
     {
         $parentClass = (new \ReflectionClass($entityFQN))->getParentClass() ?? false;
@@ -308,28 +318,15 @@ class Indexer
             ;
         }
 
-        $replies = [];
-        if (AbstractReply::class === $class) {
-            $userReplies = $this->em->getRepository(Reply::class)->findAll();
-            $anonReplyQuery = $this->em->getRepository(ReplyAnonymous::class)->findAll();
-
-            $replies = array_merge($userReplies, $anonReplyQuery);
-            $iterableResult = array_map(fn ($result) => [$result], $replies);
-        } else {
-            $iterableResult = $query->iterate();
-        }
+        $iterableResult = $query->iterate();
 
         if ($output) {
-            if (AbstractReply::class === $class) {
-                $count = \count($replies);
-            } else {
-                $count = $repository
-                    ->createQueryBuilder('a')
-                    ->select('count(a)')
-                    ->getQuery()
-                    ->getSingleScalarResult()
-                ;
-            }
+            $count = $repository
+                ->createQueryBuilder('a')
+                ->select('count(a)')
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
             $output->writeln(\PHP_EOL . "<info> Indexing {$count} {$class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();

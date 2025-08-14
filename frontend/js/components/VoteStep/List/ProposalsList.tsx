@@ -16,6 +16,7 @@ import EmptyList from './EmptyList'
 import { useSelector } from 'react-redux'
 import { State } from '~/types'
 import CookieMonster from '@shared/utils/CookieMonster'
+import useVoteStepFilters from '~/components/VoteStep/Filters/useVoteStepFilters'
 
 const QUERY = graphql`
   query ProposalsListQuery(
@@ -50,7 +51,8 @@ const QUERY = graphql`
             geoBoundingBox: $geoBoundingBox
             term: $term
             stepId: $stepId
-            isAuthenticated: $isAuthenticated
+            isAuthenticated: $isAuthenticated,
+            token: $token
           )
       }
     }
@@ -75,6 +77,7 @@ const FRAGMENT = graphql`
     term: { type: "String" }
     stepId: { type: "ID!" }
     isAuthenticated: { type: "Boolean!" }
+    token: { type: "String" }
   )
   @refetchable(queryName: "ProposalsListPaginationQuery") {
     proposals(
@@ -93,7 +96,7 @@ const FRAGMENT = graphql`
       edges {
         node {
           id
-          ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+          ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
         }
       }
     }
@@ -104,11 +107,11 @@ const FRAGMENT = graphql`
 `
 
 const ADD_PROPOSAL_QUERY = graphql`
-  query ProposalsListAddProposalQuery($id: ID!, $stepId: ID!, $isAuthenticated: Boolean!) {
+  query ProposalsListAddProposalQuery($id: ID!, $stepId: ID!, $isAuthenticated: Boolean!, $token: String) {
     node(id: $id) {
       ... on Proposal {
         id
-        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
       }
     }
   }
@@ -175,6 +178,9 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
   const { sort, userType, theme, category, district, status, term, latlngBounds } = filters
   const geoBoundingBox = !isMobile && latlngBounds && view === View.Map ? parseLatLngBounds(latlngBounds) : null
 
+  // hack to refetch list when participant store token in cookie for the first time
+  useVoteStepFilters(stepId)
+
   const query = useLazyLoadQuery<ProposalsListQueryType>(
     QUERY,
     {
@@ -195,7 +201,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
       geoBoundingBox,
       term: term || null,
       isAuthenticated,
-      token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+      token: CookieMonster.getParticipantCookie(),
     },
     {
       fetchPolicy: 'network-only',

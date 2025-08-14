@@ -1,4 +1,4 @@
 ﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm,"Comment ca va 1"
 replyQuestionnaireAnon,Yes,"2016-03-02 00:00:00",lbrunet,user1,lbrunet@cap-collectif.com,+3300000000,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,Yes,,,No,
-replyAnonymous1,Yes,"2016-03-01 00:00:00",,,,,"2016-03-01 00:00:00","2016-03-01 00:00:00",,,,No,abc@cap-collectif.com,No,Yes,bien
+replyAnonymous1,Yes,"2016-03-01 00:00:00",,,,,"2016-03-01 00:00:00","2016-03-01 00:00:00",,,,No,lbrunet@cap-collectif.com,No,Yes,bien
 replyAnonymous2,Yes,"2017-03-01 00:00:00",,,,,"2017-03-01 00:00:00","2017-03-01 00:00:00",,,,No,,No,No,"bien bien bien"

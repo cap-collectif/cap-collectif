@@ -55,22 +55,6 @@ describe('Internal|CreateDebateArgument', () => {
     ).resolves.toMatchSnapshot();
   });
 
-  it('create unpublished argument', async () => {
-    await expect(
-      graphql(
-        CreateDebateArgumentMutation,
-        {
-          input: {
-            debate: toGlobalId('Debate', 'debateCannabis'),
-            body: "J'ai plein de trucs à dire",
-            type: 'FOR',
-          },
-        },
-        'internal_not_confirmed',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
   it('try to create argument but already done', async () => {
     await expect(
       graphql(

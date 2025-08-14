@@ -23,16 +23,16 @@ import Loader from '~ui/FeedbacksIndicators/Loader'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
 import CookieMonster from '@shared/utils/CookieMonster'
 export const queryReply = graphql`
-  query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
+  query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!, $participantToken: String) {
     reply: node(id: $replyId) {
       id
       ... on Reply {
         createdAt
         publishedAt
         questionnaire {
-          ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+          ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated, participantToken: $participantToken)
         }
-        ...ReplyForm_reply
+        ...ReplyForm_reply @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   }
@@ -80,6 +80,7 @@ export const QuestionnaireReplyPage = ({
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [isEditingReplyForm, setIsEditingReplyForm] = useState<boolean>(false)
   const { preloadReply, anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext)
+  const participantToken = CookieMonster.getParticipantCookie()
   const history = useHistory()
   // Skip query when data preloaded is used
   // (data is preloaded when hovering a reply)
@@ -88,6 +89,7 @@ export const QuestionnaireReplyPage = ({
     {
       isAuthenticated,
       replyId: match.params.id,
+      participantToken
     },
     {
       skip: !!dataPrefetch,

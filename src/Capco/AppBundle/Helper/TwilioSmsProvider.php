@@ -2,16 +2,13 @@
 
 namespace Capco\AppBundle\Helper;
 
+use Capco\AppBundle\Enum\SendSMSErrorCode;
 use Capco\AppBundle\Enum\UserPhoneErrors;
+use Capco\AppBundle\Enum\VerifySMSErrorCode;
 use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 
 class TwilioSmsProvider implements SmsProviderInterface
 {
-    final public const INVALID_NUMBER = 'INVALID_NUMBER';
-    final public const CODE_EXPIRED = 'CODE_EXPIRED';
-    final public const CODE_NOT_VALID = 'CODE_NOT_VALID';
-    final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
-
     public function __construct(private readonly TwilioClient $twilioClient)
     {
     }
@@ -27,14 +24,14 @@ class TwilioSmsProvider implements SmsProviderInterface
         }
 
         if ($apiErrorCode === TwilioClient::ERRORS['INVALID_PARAMETER']) {
-            return self::INVALID_NUMBER;
+            return SendSMSErrorCode::INVALID_NUMBER;
         }
 
         if (201 === $statusCode) {
             return null;
         }
 
-        return self::TWILIO_API_ERROR;
+        return SendSMSErrorCode::SERVER_ERROR;
     }
 
     public function verifySms(string $phone, string $code): ?string
@@ -45,18 +42,18 @@ class TwilioSmsProvider implements SmsProviderInterface
         // see https://www.twilio.com/docs/verify/api/verification-check#check-a-verification
         $apiErrorCode = 404 === $statusCode ? $response['data']['code'] : null;
         if ($apiErrorCode === TwilioClient::ERRORS['NOT_FOUND']) {
-            return self::CODE_EXPIRED;
+            return VerifySMSErrorCode::CODE_EXPIRED;
         }
 
         if (200 === $statusCode) {
             $verificationStatus = $response['data']['status'];
             if ('pending' === $verificationStatus) {
-                return self::CODE_NOT_VALID;
+                return VerifySMSErrorCode::CODE_NOT_VALID;
             }
 
             return null;
         }
 
-        return self::TWILIO_API_ERROR;
+        return VerifySMSErrorCode::SERVER_ERROR;
     }
 }

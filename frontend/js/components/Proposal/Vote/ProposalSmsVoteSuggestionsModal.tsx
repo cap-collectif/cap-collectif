@@ -15,7 +15,6 @@ import {
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import ResetCss from '~/utils/ResetCss'
-import type { Status } from '~/components/Proposal/Vote/ProposalSmsVoteModal'
 import type { ProposalSmsVoteSuggestionsModal_step$key } from '~relay/ProposalSmsVoteSuggestionsModal_step.graphql'
 import type { ProposalSmsVoteSuggestionsModal_proposal$key } from '~relay/ProposalSmsVoteSuggestionsModal_proposal.graphql'
 import ProposalSuggestionCard from '~/components/Proposal/Vote/ProposalSuggestionCard'
@@ -25,6 +24,9 @@ type Props = {
   readonly step: ProposalSmsVoteSuggestionsModal_step$key
   readonly proposal: ProposalSmsVoteSuggestionsModal_proposal$key
 }
+
+type Status = 'SUCCESS' | 'VOTE_LIMIT_REACHED' | 'PROPOSAL_ALREADY_VOTED' | null
+
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalSmsVoteSuggestionsModal_proposal on Proposal {
     id

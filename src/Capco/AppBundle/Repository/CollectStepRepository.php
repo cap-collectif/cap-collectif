@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -57,6 +58,20 @@ class CollectStepRepository extends AbstractStepRepository
         $qb = $this->createQueryBuilder('s')
             ->where('s.proposalArchivedTime > 0')
             ->andWhere('s.voteThreshold > 0')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<CollectStep>
+     */
+    public function findByParticipantWithVotes(Participant $participant): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->join('s.collectVotes', 'v')
+            ->where('v.participant = :participant')
+            ->setParameter('participant', $participant)
         ;
 
         return $qb->getQuery()->getResult();

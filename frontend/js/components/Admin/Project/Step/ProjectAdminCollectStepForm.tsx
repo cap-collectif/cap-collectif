@@ -34,7 +34,6 @@ type Props = {
   dispatch: Dispatch
   votable: boolean
   isBudgetEnabled: boolean
-  isProposalSmsVoteEnabled: boolean
   isTresholdEnabled: boolean
   isLimitEnabled: boolean
   isSecretBallotEnabled: boolean
@@ -133,7 +132,6 @@ export const ProjectAdminCollectStepForm = ({
   statuses,
   dispatch,
   isBudgetEnabled,
-  isProposalSmsVoteEnabled,
   isTresholdEnabled,
   isLimitEnabled,
   isSecretBallotEnabled,
@@ -152,19 +150,15 @@ export const ProjectAdminCollectStepForm = ({
   const isAdmin = user ? user.isAdmin : false
   const statusesWithId = statuses?.filter(s => s.id) || []
   const isTwilioFeatureEnabled = useFeatureFlag('twilio')
-  const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
-  const hasEnabledFeaturesToVoteBySms = isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
-  const showAddRequirementsButton = hasEnabledFeaturesToVoteBySms ? !isProposalSmsVoteEnabled : true
-  const smsVoteEnabled = hasEnabledFeaturesToVoteBySms && isProposalSmsVoteEnabled
   const filteredRequirements =
     requirements &&
     requirements.map((requirement, index) => {
-      const updatedRequirement = { ...requirement, disabled: smsVoteEnabled }
+      const updatedRequirement = { ...requirement, disabled: isTwilioFeatureEnabled }
 
       if (['PHONE_VERIFIED', 'PHONE'].includes(requirement.type)) {
-        updatedRequirement.checked = smsVoteEnabled ? true : requirement.checked
+        updatedRequirement.checked = isTwilioFeatureEnabled ? true : requirement.checked
       } else {
-        updatedRequirement.checked = smsVoteEnabled ? false : requirement.checked
+        updatedRequirement.checked = isTwilioFeatureEnabled ? false : requirement.checked
       }
 
       dispatch(change(formName, `requirements[${index}]`, updatedRequirement))
@@ -280,8 +274,6 @@ export const ProjectAdminCollectStepForm = ({
         isLimitEnabled={isLimitEnabled}
         isSecretBallotEnabled={isSecretBallotEnabled}
         endAt={endAt}
-        isProposalSmsVoteEnabled={isProposalSmsVoteEnabled}
-        hasEnabledFeaturesToVoteBySms={hasEnabledFeaturesToVoteBySms}
       />
 
       {renderSubSection('admin.fields.step.statuses')}
@@ -328,7 +320,7 @@ export const ProjectAdminCollectStepForm = ({
         isFranceConnectConfigured={isFranceConnectConfigured}
         stepType="CollectStep"
       />
-      {showAddRequirementsButton && (
+      {isTwilioFeatureEnabled && (
         <BootstrapButton
           id="js-btn-create-step"
           bsStyle="primary"

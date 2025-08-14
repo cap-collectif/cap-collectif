@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\ActionToken;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\EmailingCampaignUser;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
@@ -13,6 +15,7 @@ use Capco\AppBundle\GraphQL\Resolver\Project\ProjectEmailableContributorsResolve
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
 use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\Repository\EmailingCampaignUserRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -26,8 +29,18 @@ use Symfony\Component\Routing\RouterInterface;
 
 class EmailingCampaignSender
 {
-    public function __construct(private readonly MailerService $mailerService, private readonly UserRepository $userRepository, private readonly SiteParameterResolver $siteParams, private readonly RouterInterface $router, private readonly TokenManager $tokenManager, private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver, private readonly EntityManagerInterface $em, private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly MailerService $mailerService,
+        private readonly UserRepository $userRepository,
+        private readonly SiteParameterResolver $siteParams,
+        private readonly RouterInterface $router,
+        private readonly TokenManager $tokenManager,
+        private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository,
+        private readonly LoggerInterface $logger,
+        private readonly ParticipantRepository $participantRepository,
+    ) {
     }
 
     public function send(EmailingCampaign $emailingCampaign): int
@@ -44,7 +57,7 @@ class EmailingCampaignSender
             /** * @var EmailingCampaignUser $emailingCampaignUser  */
             foreach ($emailingCampaignUsers as $emailingCampaignUser) {
                 ++$count;
-                $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getUser());
+                $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getContributor());
 
                 $emailingCampaignUser->setSentAt(new \DateTime());
                 $this->em->persist($emailingCampaignUser);
@@ -74,7 +87,13 @@ class EmailingCampaignSender
         if (0 === $emailingCampaignUsersCount) {
             $emailingCampaignUsers = new ArrayCollection();
             foreach ($allRecipients as $recipient) {
-                $emailingCampaignUser = (new EmailingCampaignUser())->setEmailingCampaign($emailingCampaign)->setUser($recipient);
+                $emailingCampaignUser = (new EmailingCampaignUser())->setEmailingCampaign($emailingCampaign);
+                if ($recipient instanceof User) {
+                    $emailingCampaignUser->setUser($recipient);
+                } elseif ($recipient instanceof Participant) {
+                    $emailingCampaignUser->setParticipant($recipient);
+                }
+
                 $emailingCampaignUsers->add($emailingCampaignUser);
                 $this->em->persist($emailingCampaignUser);
             }
@@ -86,8 +105,8 @@ class EmailingCampaignSender
 
     private function createAndSendMessage(
         EmailingCampaign $emailingCampaign,
-        User $recipient
-    ): EmailingCampaignMessage {
+        ContributorInterface $recipient
+    ): void {
         $message = new EmailingCampaignMessage($emailingCampaign, [
             'baseUrl' => $this->router->generate(
                 'app_homepage',
@@ -102,15 +121,14 @@ class EmailingCampaignSender
             'unsubscribeUrl' => $this->getUnsubscribeUrl($recipient),
             'siteName' => $this->siteParams->getValue('global.site.fullname'),
         ]);
+
         $message->addRecipient(
             $recipient->getEmail(),
-            $recipient->getLocale(),
+            $recipient->getLocale() ?? null,
             $recipient->getUsername()
         );
 
         $this->mailerService->sendMessage($message);
-
-        return $message;
     }
 
     private function setCampaignAsSent(EmailingCampaign $emailingCampaign): EmailingCampaign
@@ -121,22 +139,23 @@ class EmailingCampaignSender
         return $emailingCampaign;
     }
 
-    private function getUnsubscribeUrl(User $user): string
+    private function getUnsubscribeUrl(ContributorInterface $contributor): string
     {
-        if ($user->getId()) {
+        if ($contributor instanceof User) {
             $parameters = [
                 'token' => $this->tokenManager
-                    ->getOrCreateActionToken($user, ActionToken::UNSUBSCRIBE)
+                    ->getOrCreateActionToken($contributor, ActionToken::UNSUBSCRIBE)
                     ->getToken(),
             ];
             $route = 'capco_app_action_token';
-        } else {
-            //user without account, token is put in password
+        } elseif ($contributor instanceof Participant) {
             $parameters = [
-                'token' => $user->getPassword(),
-                'email' => $user->getEmail(),
+                'token' => $contributor->getToken(),
+                'email' => $contributor->getEmail(),
             ];
             $route = 'capco_app_unsubscribe_anonymous';
+        } else {
+            throw new \Exception('Contributor must be either Participant or User');
         }
 
         return $this->router->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
@@ -148,7 +167,7 @@ class EmailingCampaignSender
             return $emailingCampaign->getMailingList()->getUsersWithValidEmail(true);
         }
         if ($emailingCampaign->getMailingInternal()) {
-            return $this->getRecipientsFromInternalList($emailingCampaign->getMailingInternal());
+            return $this->getRecipientsFromInternalList();
         }
         if ($emailingCampaign->getEmailingGroup()) {
             return $this->getRecipientsFromUserGroup($emailingCampaign->getEmailingGroup());
@@ -160,11 +179,14 @@ class EmailingCampaignSender
         throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
     }
 
-    private function getRecipientsFromInternalList(string $internalList): Collection
+    private function getRecipientsFromInternalList(): Collection
     {
-        return new ArrayCollection(
-            ($users = $this->userRepository->getFromInternalList($internalList))
-        );
+        $users = $this->userRepository->getFromInternalList();
+        $participants = $this->participantRepository->getFromInternalList();
+
+        $contributors = array_merge($users, $participants);
+
+        return new ArrayCollection($contributors);
     }
 
     private function getRecipientsFromUserGroup(Group $group): Collection
@@ -184,13 +206,18 @@ class EmailingCampaignSender
         $participants = new ArrayCollection();
         foreach ($participantsData as $participantsDatum) {
             $email = $participantsDatum['email'];
+
             $user = $this->userRepository->findOneByEmail($email);
-            if (null === $user) {
-                $user = new User();
-                $user->setEmail($email);
-                $user->setPassword($participantsDatum['token']);
+            $participant = $this->participantRepository->findOneByEmail($email);
+
+            $contributor = $user ?? $participant;
+
+            if (null === $contributor) {
+                $contributor = new User();
+                $contributor->setEmail($email);
+                $contributor->setPassword($participantsDatum['token']);
             }
-            $participants->add($user);
+            $participants->add($contributor);
         }
 
         return $participants;

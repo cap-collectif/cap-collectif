@@ -21,7 +21,6 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -75,7 +74,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("@CapcoApp/Project/show_user_votes.html.twig")

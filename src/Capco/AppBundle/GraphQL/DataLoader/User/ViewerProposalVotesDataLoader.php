@@ -7,18 +7,18 @@ use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\UserBundle\Entity\User;
 use DeepCopy\DeepCopy;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -36,11 +36,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        private readonly AbstractStepRepository $abstractStepRepository,
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         private readonly ProposalStepVotesResolver $helper,
         private readonly GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
@@ -49,7 +46,9 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
         bool $enableCache,
-        private readonly AbstractVoteRepository $abstractVoteRepository
+        private readonly AbstractVoteRepository $abstractVoteRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly ParticipantHelper $participantHelper
     ) {
         parent::__construct(
             $this->all(...),
@@ -99,6 +98,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 
+        $this->em->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+
         if ($step instanceof CollectStep) {
             $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalCollectVoteRepository
                 ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
@@ -119,7 +120,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         }
         $connection = $paginator->auto($args, $totalCount);
 
-        $creditsSpent = $this->helper->getSpentCreditsForUser($user, $step);
+        $creditsSpent = $this->helper->getSpentCreditsForContributor($user, $step);
         $connection->{'creditsSpent'} = $creditsSpent;
         $connection->{'creditsLeft'} = $step->getBudget() - $creditsSpent;
 
@@ -131,27 +132,37 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
         $token = $args->offsetGet('token');
+        $decodedToken = base64_decode((string) $token);
+
+        $this->em->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
 
         if ($step instanceof CollectStep) {
-            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalCollectSmsVoteRepository
-                ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalCollectVoteRepository
+                ->getByTokenAndStep($step, $decodedToken, $limit, $offset, $field, $direction)
                 ->getIterator()
                 ->getArrayCopy());
-            $totalCount = $this->proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token);
+            $totalCount = $this->proposalCollectVoteRepository->countByTokenAndStep($step, $decodedToken);
         } elseif ($step instanceof SelectionStep) {
-            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalSelectionSmsVoteRepository
-                ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalSelectionVoteRepository
+                ->getByTokenAndStep($step, $decodedToken, $limit, $offset, $field, $direction)
                 ->getIterator()
                 ->getArrayCopy());
-            $totalCount = $this->proposalSelectionSmsVoteRepository->countByTokenAndStep(
+            $totalCount = $this->proposalSelectionVoteRepository->countByTokenAndStep(
                 $step,
-                $token
+                $decodedToken
             );
         } else {
             throw new \RuntimeException('Expected a proposal step got :' . $step::class);
         }
 
-        return $paginator->auto($args, $totalCount);
+        $connection = $paginator->auto($args, $totalCount);
+
+        $participant = $this->participantHelper->getParticipantByToken($token);
+        $creditsSpent = $this->helper->getSpentCreditsForContributor($participant, $step);
+        $connection->{'creditsSpent'} = $creditsSpent;
+        $connection->{'creditsLeft'} = $step->getBudget() - $creditsSpent;
+
+        return $connection;
     }
 
     protected function normalizeValue($value)

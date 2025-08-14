@@ -284,7 +284,6 @@ exports[`<EventListFilters /> renders correctly 1`] = `
               Object {
                 "allow_users_to_propose_events": false,
                 "analytics_page": false,
-                "anonymous_questionnaire": false,
                 "blog": false,
                 "calendar": false,
                 "captcha": false,
@@ -324,7 +323,6 @@ exports[`<EventListFilters /> renders correctly 1`] = `
                 "project_trash": false,
                 "projects_form": true,
                 "proposal_revisions": false,
-                "proposal_sms_vote": false,
                 "questionnaire_result": false,
                 "read_more": false,
                 "registration": false,
@@ -697,7 +695,6 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
               Object {
                 "allow_users_to_propose_events": false,
                 "analytics_page": false,
-                "anonymous_questionnaire": false,
                 "blog": false,
                 "calendar": false,
                 "captcha": false,
@@ -737,7 +734,6 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
                 "project_trash": false,
                 "projects_form": false,
                 "proposal_revisions": false,
-                "proposal_sms_vote": false,
                 "questionnaire_result": false,
                 "read_more": false,
                 "registration": false,

@@ -1,6 +1,6 @@
 import { QuestionnairePage } from '~e2e/pages'
 
-context('Questionnaire Logged-in as admin', () => {
+describe('Questionnaire Logged-in as admin', () => {
   describe('Opened Questionnaire - Mutation', () => {
     beforeEach(() => {
       cy.task('db:restore')
@@ -12,24 +12,26 @@ context('Questionnaire Logged-in as admin', () => {
       QuestionnairePage.clickAnswerAgainButton()
       cy.get('#reply-form-container')
       QuestionnairePage.fillCreateFormWithRequiredFields()
-      QuestionnairePage.submitForm()
-      cy.wait('@AddUserReplyMutation')
+      QuestionnairePage.submitForm({ isAnonymous: false })
       QuestionnairePage.assertToast()
       QuestionnairePage.assertRepliesLengthToBe(4)
     })
     it('should correctly update a reply', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateUserReplyMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireReplyPageQuery' })
       QuestionnairePage.clickOnFirstReply()
+      cy.wait('@QuestionnaireReplyPageQuery')
       cy.get('#reply-form-container')
       QuestionnairePage.fillUpdateFormWithRequiredFields()
-      QuestionnairePage.submitForm()
-      cy.wait('@UpdateUserReplyMutation')
+      QuestionnairePage.submitForm({ isAnonymous: false, operationType: 'EDIT' })
       QuestionnairePage.assertToast()
       QuestionnairePage.assertRepliesLengthToBe(3)
     })
     it('should correctly update a draft to a questionnaire with wrong values', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateUserReplyMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireReplyPageQuery' })
       QuestionnairePage.clickOnFirstReply()
+      cy.wait('@QuestionnaireReplyPageQuery')
       cy.get('#reply-form-container')
       QuestionnairePage.fillUpdateFormWithWrongFields()
       QuestionnairePage.saveAsDraft()

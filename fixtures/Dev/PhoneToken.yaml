@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\PhoneToken:
-    phoneToken1:
-        phone: '+33611111111'
-        token: 'token'

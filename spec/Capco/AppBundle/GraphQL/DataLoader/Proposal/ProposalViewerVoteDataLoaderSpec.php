@@ -7,11 +7,14 @@ use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -29,7 +32,8 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         GlobalIdResolver $globalIdResolver,
         GraphQLCollector $collector,
-        Stopwatch $stopwatch
+        Stopwatch $stopwatch,
+        EntityManagerInterface $em
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -43,7 +47,8 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
             false,
             $collector,
             $stopwatch,
-            true
+            true,
+            $em
         );
     }
 
@@ -61,7 +66,9 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalCollectVote $vote1,
         ProposalCollectVote $vote2,
-        PromiseAdapterInterface $promiseFactory
+        PromiseAdapterInterface $promiseFactory,
+        FilterCollection $filters,
+        EntityManagerInterface $em
     ) {
         $proposal1->getId()->willReturn('proposal1');
         $proposal2->getId()->willReturn('proposal2');
@@ -82,10 +89,19 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         $vote2->getProposal()->willReturn($proposal1);
 
         $globalIdResolver->resolve('step1', $user1)->willReturn($step);
+
+        $em->getFilters()->willReturn($filters);
+        $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+
         $proposalCollectVoteRepository
             ->getByProposalIdsAndStepAndUser(['proposal1', 'proposal2'], $step, $user1)
             ->willReturn([$vote1, $vote2])
         ;
+
+        $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME)->shouldBeCalled();
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory

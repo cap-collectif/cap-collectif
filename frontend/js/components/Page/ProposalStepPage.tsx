@@ -23,6 +23,7 @@ import ProposalVoteBasketWidget from '../Proposal/Vote/ProposalVoteBasketWidget'
 import CookieMonster from '@shared/utils/CookieMonster'
 import MediatorAddVotesLink from './MediatorAddVotesLink'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useUrlToast } from '~/utils/hooks/useUrlToast'
 
 type OwnProps = {
   stepId: string
@@ -44,21 +45,19 @@ type RenderedProps = ProposalStepPageQuery$data & {
   projectId?: string
 }
 export const ProposalStepPageRendered = (props: RenderedProps) => {
-  const { viewer, isAuthenticated, features, step, count } = props
+  const { viewer, isAuthenticated, features, step, count, participant } = props
   const [displayMode, setDisplayMode] = React.useState(step?.mainView)
   const intl = useIntl()
   const calendar = useFeatureFlag('calendar')
-  const twilio = useFeatureFlag('twilio')
-  const proposalSmsVote = useFeatureFlag('proposal_sms_vote')
-  const smsVoteEnabled = step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated
-  const showVotesWidget =
-    (isAuthenticated || smsVoteEnabled) && step && step.slug && step.votable && step.state === 'OPENED'
+  const showVotesWidget = step && step.slug && step.votable && step.state === 'OPENED'
   React.useEffect(() => {
     if (!displayMode && step?.mainView) setDisplayMode(step?.mainView)
   }, [displayMode, setDisplayMode, step])
   React.useEffect(() => {
     insertCustomCode(step?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step?.id])
+
+  useUrlToast()
 
   React.useEffect(() => {
     dispatchNavBarEvent('set-breadcrumb', [
@@ -86,7 +85,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
 
   return (
     <>
-      {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} />}
+      {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} participant={participant} />}
       <div className="ProposalStepPage-rendered" id={`proposalsStep-${step.id || ''}`}>
         {step.eventCount?.totalCount && calendar ? <StepEvents step={step} /> : null}
         {step.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
@@ -131,6 +130,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         <ProposalStepPageHeader step={step} displayMode={displayMode} />
         <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
         <ProposalListView
+          participant={participant}
           displayMap={features.display_map}
           geoJsons={geoJsons}
           step={step}
@@ -156,7 +156,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
     term: '',
     ...queryVariables(filters, order),
   }
-  const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone()
+  const token = CookieMonster.getParticipantCookie()
   return (
     <div className="proposal__step-page">
       <QueryRenderer
@@ -179,6 +179,10 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             $token: String
             $state: ProposalsState
           ) {
+            participant(token: $token) {
+              ...ProposalVoteBasketWidget_participant @arguments(stepId: $stepId)
+              ...ProposalListView_participant @arguments(stepId: $stepId)
+            }
             viewer @include(if: $isAuthenticated) {
               ...ProposalListView_viewer @arguments(stepId: $stepId)
               ...UnpublishedProposalListView_viewer @arguments(stepId: $stepId)
@@ -195,7 +199,6 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
               ... on ProposalStep {
                 title
                 label
-                isProposalSmsVoteEnabled
                 customCode
                 id
                 eventCount: events(orderBy: { field: START_AT, direction: DESC }) {

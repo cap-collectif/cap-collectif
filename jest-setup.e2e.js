@@ -163,13 +163,6 @@ global.graphql = (query, variables, client = 'anonymous') => {
         query,
         variables,
       );
-    case 'internal_not_confirmed':
-      return authenticatedInternalRequest(
-        'user_not_confirmed@test.com',
-        'user_not_confirmed',
-        query,
-        variables,
-      );
     case 'internal_welcomatic':
       return authenticatedInternalRequest(
         'msantostefano@cap-collectif.com',

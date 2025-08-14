@@ -19,7 +19,7 @@ Object {
                   "node": Object {
                     "isAccounted": true,
                     "participant": Object {
-                      "email": "lbrunet@cap-collectif.com",
+                      "email": "participant1@cap-collectif.com",
                     },
                   },
                 },
@@ -27,7 +27,7 @@ Object {
                   "node": Object {
                     "isAccounted": false,
                     "participant": Object {
-                      "email": "sfavot@cap-collectif.com",
+                      "email": "participant2@cap-collectif.com",
                     },
                   },
                 },

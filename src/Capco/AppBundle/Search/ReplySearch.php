@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ReplyOrderField;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\Terms as AggregationTerms;
@@ -19,8 +19,7 @@ class ReplySearch extends Search
 {
     public function __construct(
         Index $index,
-        private readonly ReplyRepository $replyRepository,
-        private readonly ReplyAnonymousRepository $replyAnonymousRepository
+        private readonly ReplyRepository $replyRepository
     ) {
         parent::__construct($index);
         $this->type = 'reply';
@@ -33,6 +32,7 @@ class ReplySearch extends Search
         ?string $cursor
     ): ElasticsearchPaginatedResult {
         $boolQuery = (new BoolQuery())->addFilter(new Term(['step.id' => $stepId]));
+        $boolQuery->addFilter(new Term(['completionStatus' => ContributionCompletionStatus::COMPLETED]));
 
         foreach ($filters as $key => $filter) {
             $boolQuery->addFilter(new Term([$key => $filter]));
@@ -61,6 +61,7 @@ class ReplySearch extends Search
         ?array $orderBy = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = (new BoolQuery())->addFilter(new Term(['step.id' => $stepId]));
+        $boolQuery->addFilter(new Term(['completionStatus' => ContributionCompletionStatus::COMPLETED]));
 
         if ($filtersStatus) {
             $filterBoolQuery = new BoolQuery();
@@ -92,6 +93,7 @@ class ReplySearch extends Search
             ->addFilter(new Term(['step.id' => $stepId]))
             ->addFilter(new Term(['draft' => false]))
             ->addFilter(new Term(['published' => true]))
+            ->addFilter(new Term(['completionStatus' => 'COMPLETED']))
         ;
 
         $query = new Query($boolQuery);
@@ -159,11 +161,9 @@ class ReplySearch extends Search
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         $results = [];
         foreach ($map as $objectIds) {
-            $replies = $term
+            $results = $term
                 ? $this->replyRepository->hydrateFromIdsByTerm($objectIds, $term)
                 : $this->replyRepository->hydrateFromIds($objectIds);
-            $repliesAnon = $term ? [] : $this->replyAnonymousRepository->hydrateFromIds($objectIds);
-            $results = array_merge($repliesAnon, $replies);
         }
 
         // We have to restore the correct order of ids, because Doctrine has lost it, see:

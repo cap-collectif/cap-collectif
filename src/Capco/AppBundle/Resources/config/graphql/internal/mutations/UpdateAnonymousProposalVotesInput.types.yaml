@@ -1,0 +1,14 @@
+UpdateAnonymousProposalVotesInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update votes.'
+        fields:
+            token:
+                type: 'String!'
+                description: 'Participant token.'
+            step:
+                type: 'ID!'
+                description: 'The step.'
+            votes:
+                type: '[VoteInput!]!'
+                description: 'The votes.'

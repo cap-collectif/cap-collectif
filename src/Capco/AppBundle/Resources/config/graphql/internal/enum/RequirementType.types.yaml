@@ -30,3 +30,15 @@ RequirementType:
             FRANCE_CONNECT:
                 value: !php/const Capco\AppBundle\Entity\Requirement::FRANCE_CONNECT
                 description: 'The requirement is authentication to France Connect'
+            EMAIL_VERIFIED:
+                value: !php/const Capco\AppBundle\Entity\Requirement::EMAIL_VERIFIED
+                description: 'The requirement is a verified email address'
+            ZIP_CODE:
+                value: !php/const Capco\AppBundle\Entity\Requirement::ZIP_CODE
+                description: 'The requirement is a valid zip code'
+            SSO:
+                value: !php/const Capco\AppBundle\Entity\Requirement::SSO
+                description: 'The requirement is authentication through SSO'
+            CONSENT_PRIVACY_POLICY:
+                value: !php/const Capco\AppBundle\Entity\Requirement::CONSENT_PRIVACY_POLICY
+                description: 'The requirement is to accept privacy policy'

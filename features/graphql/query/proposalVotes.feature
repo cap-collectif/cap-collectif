@@ -14,7 +14,7 @@ Scenario: User wants to see unpublished votes on proposals
             edges {
               node {
                 id
-                ...on ProposalUserVote {
+                ...on ProposalVote {
                   published
                 }
               }
@@ -512,7 +512,7 @@ Scenario: User wants to see votes on collect and selection steps simultaneously
                   edges {
                     node {
                       id
-                      ...on ProposalUserVote {
+                      ...on ProposalVote {
                         published
                       }
                       step {
@@ -527,7 +527,7 @@ Scenario: User wants to see votes on collect and selection steps simultaneously
                   edges {
                     node {
                       id
-                      ...on ProposalUserVote {
+                      ...on ProposalVote {
                         published
                       }
                       step {
@@ -542,7 +542,7 @@ Scenario: User wants to see votes on collect and selection steps simultaneously
                   edges {
                     node {
                       id
-                      ...on ProposalUserVote {
+                      ...on ProposalVote {
                         published
                       }
                       step {

@@ -12,9 +12,11 @@ const mutation = graphql`
     updateUserReply(input: $input) {
       reply {
         id
+        requirementsUrl
         ...ReplyForm_reply
         ...ReplyLink_reply
       }
+      errorCode
     }
   }
 `

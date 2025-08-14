@@ -8,20 +8,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "__typename": "UserReply",
-            "adminUrl": "https://capco.test/admin/capco/app/reply/reply1/show?_locale=fr-FR",
-            "status": "PUBLISHED",
-          },
-        },
-        Object {
-          "node": Object {
-            "__typename": "UserReply",
-            "adminUrl": "https://capco.test/admin/capco/app/reply/reply2/show?_locale=fr-FR",
+            "__typename": "Reply",
             "status": "PUBLISHED",
           },
         },
       ],
-      "totalCount": 2,
+      "totalCount": 1,
     },
   },
 }

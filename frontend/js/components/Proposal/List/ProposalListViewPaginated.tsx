@@ -22,12 +22,14 @@ type Props = {
   defaultMapOptions: MapOptions
   geoJsons: Array<GeoJson>
   viewer: ProposalListViewPaginated_viewer | null | undefined
+  participant: ProposalListViewPaginated_participant | null | undefined
   count: number
 }
 
 const ProposalListViewPaginated = ({
   step,
   viewer,
+  participant,
   geoJsons,
   defaultMapOptions,
   displayMap,
@@ -55,6 +57,7 @@ const ProposalListViewPaginated = ({
               viewer={viewer}
               view={displayMode}
               id="proposals-list"
+              participant={participant}
             />
           </VisibilityBox>
           <div id="proposal-list-pagination-footer" className="text-center">
@@ -84,6 +87,11 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
     viewer: graphql`
       fragment ProposalListViewPaginated_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
         ...ProposalList_viewer @arguments(stepId: $stepId)
+      }
+    `,
+    participant: graphql`
+      fragment ProposalListViewPaginated_participant on Participant @argumentDefinitions(stepId: { type: "ID!" }) {
+        ...ProposalList_participant @arguments(stepId: $stepId)
       }
     `,
     step: graphql`
@@ -143,7 +151,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         cursor,
         stepId: props.step.id,
         isAuthenticated: !!props.viewer,
-        token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+        token: CookieMonster.getParticipantCookie(),
       }
     },
 

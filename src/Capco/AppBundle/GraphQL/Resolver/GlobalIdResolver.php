@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -26,11 +27,12 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Repository\SourceRepository;
@@ -58,6 +60,7 @@ class GlobalIdResolver
         'ConsultationStep',
         'OtherStep',
         'QuestionnaireStep',
+        'AbstractStep',
         'PresentationStep',
         'CollectStep',
         'SelectionStep',
@@ -100,6 +103,7 @@ class GlobalIdResolver
         'Contributor',
         'SectionCarrouselElement',
         'Media',
+        'AbstractVote',
     ];
 
     private const CUSTOM_REPOSITORY_RESOLVER = [
@@ -128,6 +132,11 @@ class GlobalIdResolver
         ReplyRepository::class,
         GlobalDistrictRepository::class,
         ProposalDistrictRepository::class,
+    ];
+
+    private const LEGACY_NUMERICAL_ID_REPOSITORY = [
+        ProposalSelectionVoteRepository::class,
+        ProposalCollectVoteRepository::class,
     ];
 
     // since we are calling all repositories it is easier to directly inject the container instead of injecting all repositories one by one.
@@ -163,9 +172,18 @@ class GlobalIdResolver
             }
         }
 
+        if ($this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->entityManager->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
+        // We try to decode the global id
         $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
 
         $node = $this->getNode($decodeGlobalId, $uuidOrGlobalId);
+
+        if (!$this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->entityManager->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
 
         return $this->viewerCanSee($node, $user, $skipVerification) ? $node : null;
     }
@@ -196,6 +214,11 @@ class GlobalIdResolver
                 $this->entityManager->getFilters()->disable('softdeleted');
             }
         }
+
+        if ($this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->entityManager->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
         $decodeGlobalIds = [];
         foreach ($uuidOrGlobalIds as $uuidOrGlobalId) {
             // We try to decode the global id
@@ -244,6 +267,11 @@ class GlobalIdResolver
         if (!$node) {
             $node = $this->container->get(UserRepository::class)->findById($uuids);
         }
+
+        if (!$this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
+            $this->entityManager->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
         if (!$node) {
             $error = 'Could not resolve node with uuids ' . var_export($uuids, true);
             $this->logger->warning($error);
@@ -378,7 +406,7 @@ class GlobalIdResolver
             return match ($type) {
                 'DebateArgument' => $repository->find($uuid) ?? $this->container->get(DebateAnonymousArgumentRepository::class)->find($uuid),
                 'Question' => $this->container->get(AbstractQuestionRepository::class)->find($uuid),
-                'Reply' => $repository->find($uuid) ?? $this->container->get(ReplyAnonymousRepository::class)->find($uuid),
+                'Reply' => $repository->find($uuid),
                 'District' => $this->container->get(ProposalDistrictRepository::class)->find($uuid) ?? $this->container->get(GlobalDistrictRepository::class)->find($uuid),
                 'Contributor' => $this->container->get(UserRepository::class)->find($uuid) ?? $this->container->get(ParticipantRepository::class)->find($uuid),
                 'SectionCarrouselElement' => $this->container->get(SectionCarrouselElementRepository::class)->find($uuid),
@@ -401,18 +429,24 @@ class GlobalIdResolver
         foreach (self::LEGACY_REPOSITORY as $repository) {
             $node = $this->container->get($repository)->find($uuid);
 
-            if (null !== $node) {
-                break;
+            if ($node) {
+                return $node;
             }
         }
 
-        if (!$node) {
-            $error = "Could not resolve node with uuid {$uuid}";
-            $this->logger->warning($error);
+        foreach (self::LEGACY_NUMERICAL_ID_REPOSITORY as $repository) {
+            if ($uuid == (int) $uuid) {
+                $node = $this->container->get($repository)->find($uuid);
+            }
 
-            return null;
+            if ($node) {
+                return $node;
+            }
         }
 
-        return $node;
+        $error = "Could not resolve node with uuid {$uuid}";
+        $this->logger->warning($error);
+
+        return null;
     }
 }

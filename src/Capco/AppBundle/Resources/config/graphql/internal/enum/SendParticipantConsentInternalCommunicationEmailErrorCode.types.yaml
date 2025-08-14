@@ -1,0 +1,9 @@
+SendParticipantConsentInternalCommunicationEmailErrorCode:
+    type: enum
+    config:
+        name: SendParticipantConsentInternalCommunicationEmailErrorCode
+        description: 'Available errors on sendParticipantConsentInternalCommunicationEmail'
+        values:
+            EMAIL_RECENTLY_SENT:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SendParticipantConsentInternalCommunicationEmailMutation::EMAIL_RECENTLY_SENT
+                description: 'The email has already been sent recently'
