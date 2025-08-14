@@ -3,22 +3,22 @@
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render facebook sso button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
+    className="sc-gsGkXq Flex___StyledAppBox-SiGEY eLNAEY UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY llwhtD UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY cuIwHb UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
     >
       <div
-        className="sc-csDjRa Flex___StyledAppBox-SiGEY ehNxxg UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+        className="sc-gsGkXq Flex___StyledAppBox-SiGEY cwhOPk UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
       >
         <div
-          className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
+          className="sc-gsGkXq UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ fAaMlA dPMeBO"
         >
           <h2
-            className="sc-bcXGCL ethVoT cap-heading"
+            className="sc-bcXGCL hOPycA cap-heading"
           >
             global-welcome
              
@@ -30,13 +30,13 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-bcXGCL iRcref cap-text"
+            className="sc-bcXGCL hxrlMk cap-text"
           >
             invite-join-platform
           </p>
         </div>
         <div
-          className="sc-csDjRa Flex___StyledAppBox-SiGEY egLFRY UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+          className="sc-gsGkXq Flex___StyledAppBox-SiGEY eKpbrE UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
           <div
             className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
@@ -65,18 +65,18 @@ Array [
             </a>
           </div>
           <div
-            className="sc-bcXGCL fHDDQZ"
+            className="sc-bcXGCL eytkwe"
           >
             <div
-              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
+              className="sc-gsGkXq UserInvitationSSOPagestyle__Line-eEMwHm gDkJKg hPTlau"
             />
             <p
-              className="sc-bcXGCL bmcaZK cap-text"
+              className="sc-bcXGCL iuhcLt cap-text"
             >
               global-or
             </p>
             <div
-              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
+              className="sc-gsGkXq UserInvitationSSOPagestyle__Line-eEMwHm gDkJKg hPTlau"
             />
           </div>
           <a
@@ -92,7 +92,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY kSGgXm UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY flTa-da UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
     >
       <div
         className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
@@ -110,22 +110,22 @@ Array [
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
+    className="sc-gsGkXq Flex___StyledAppBox-SiGEY eLNAEY UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY llwhtD UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY cuIwHb UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
     >
       <div
-        className="sc-csDjRa Flex___StyledAppBox-SiGEY ehNxxg UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+        className="sc-gsGkXq Flex___StyledAppBox-SiGEY cwhOPk UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
       >
         <div
-          className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
+          className="sc-gsGkXq UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ fAaMlA dPMeBO"
         >
           <h2
-            className="sc-bcXGCL ethVoT cap-heading"
+            className="sc-bcXGCL hOPycA cap-heading"
           >
             global-welcome
              
@@ -137,19 +137,19 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-bcXGCL iRcref cap-text"
+            className="sc-bcXGCL hxrlMk cap-text"
           >
             invite-join-platform
           </p>
         </div>
         <div
-          className="sc-csDjRa Flex___StyledAppBox-SiGEY egLFRY UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+          className="sc-gsGkXq Flex___StyledAppBox-SiGEY eKpbrE UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
           <div
             className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
           >
             <a
-              className="sc-csDjRa Link__LinkInner-jUMeyB jTtoDs jQFfTS"
+              className="sc-gsGkXq Link__LinkInner-jUMeyB ddgViA jQFfTS"
               href="/login/franceconnect?_destination=http://localhost"
               target="_blank"
             >
@@ -167,18 +167,18 @@ Array [
             </a>
           </div>
           <div
-            className="sc-bcXGCL fHDDQZ"
+            className="sc-bcXGCL eytkwe"
           >
             <div
-              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
+              className="sc-gsGkXq UserInvitationSSOPagestyle__Line-eEMwHm gDkJKg hPTlau"
             />
             <p
-              className="sc-bcXGCL bmcaZK cap-text"
+              className="sc-bcXGCL iuhcLt cap-text"
             >
               global-or
             </p>
             <div
-              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
+              className="sc-gsGkXq UserInvitationSSOPagestyle__Line-eEMwHm gDkJKg hPTlau"
             />
           </div>
           <a
@@ -194,7 +194,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY kSGgXm UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY flTa-da UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
     >
       <div
         className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"

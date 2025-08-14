@@ -3,7 +3,7 @@
 exports[`<RegistrationButton /> renders a button 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <form
     id="registration-form"
@@ -12,7 +12,7 @@ exports[`<RegistrationButton /> renders a button 1`] = `
   />,
   <button
     aria-label="open.inscription_modal"
-    className="sc-bcXGCL sc-gGvGpy juTTmZ dmtkzs cap-button"
+    className="sc-bcXGCL sc-gGvGpy euZpGu dmtkzs cap-button"
     id="registration-button"
     onClick={[Function]}
     type="button"

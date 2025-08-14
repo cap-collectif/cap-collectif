@@ -3,31 +3,31 @@
 exports[`<BreadCrumbItems /> should render multiple items with slash in between them 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kVLURz"
+    className="sc-bcXGCL lcYpuI"
   >
     <div
-      className="sc-bcXGCL kVLURz"
+      className="sc-bcXGCL lcYpuI"
     >
       <a
-        className="sc-bcXGCL bLpBVV cap-link"
+        className="sc-bcXGCL fOGmNq cap-link"
         href="/projects"
       >
         Project list
       </a>
       <span
-        className="sc-bcXGCL lfcOKv cap-text"
+        className="sc-bcXGCL hlIIDU cap-text"
       >
         /
       </span>
     </div>
     <div
-      className="sc-bcXGCL kVLURz"
+      className="sc-bcXGCL lcYpuI"
     >
       <p
-        className="sc-bcXGCL jcAoAB cap-text"
+        className="sc-bcXGCL hHORdi cap-text"
       >
         New Project
       </p>
@@ -39,16 +39,16 @@ exports[`<BreadCrumbItems /> should render multiple items with slash in between 
 exports[`<BreadCrumbItems /> should render one single item 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kVLURz"
+    className="sc-bcXGCL lcYpuI"
   >
     <div
-      className="sc-bcXGCL kVLURz"
+      className="sc-bcXGCL lcYpuI"
     >
       <p
-        className="sc-bcXGCL jcAoAB cap-text"
+        className="sc-bcXGCL hHORdi cap-text"
       >
         Project list
       </p>

@@ -3,16 +3,16 @@
 exports[`<ViewButton /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     aria-current={true}
-    className="sc-bcXGCL jpJRFb"
+    className="sc-bcXGCL fNybw"
     onClick={[Function]}
   >
     <svg
       aria-hidden={true}
-      className="sc-bcXGCL sc-oZHua iYuClr hQQZty cap-icon"
+      className="sc-bcXGCL sc-oZHua giPkhU hQQZty cap-icon"
       fill="none"
       focusable={false}
       height="1em"
@@ -56,7 +56,7 @@ exports[`<ViewButton /> should render correctly 1`] = `
       />
     </svg>
     <span
-      className="sc-bcXGCL arWvA cap-text"
+      className="sc-bcXGCL kyoZrf cap-text"
     >
       List
     </span>

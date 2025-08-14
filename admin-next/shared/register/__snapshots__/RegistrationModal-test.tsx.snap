@@ -2,14 +2,14 @@
 
 exports[`<RegistrationModal /> renders closed modal 1`] = `
 <div
-  className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+  className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
 />
 `;
 
 exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.register"
@@ -24,7 +24,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -33,7 +33,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
         style={
           {
             "opacity": 0,
@@ -43,13 +43,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL jMEcWl cap-modal__header"
+          className="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
-            className="sc-bcXGCL ejBfRc"
+            className="sc-bcXGCL jevVsb"
           >
             <h4
-              className="sc-bcXGCL osejp cap-heading"
+              className="sc-bcXGCL dwAFlO cap-heading"
               id="modal-title"
               style={
                 {
@@ -63,13 +63,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL dCLTmf"
+            className="sc-bcXGCL cNICVM"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -88,10 +88,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL hsPaVR cap-modal__body"
+          className="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div
-            className="sc-bcXGCL kfmAic"
+            className="sc-bcXGCL iAhoTX"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -103,10 +103,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor=":r0:"
               style={
                 {
@@ -116,7 +116,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               }
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -131,7 +131,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id=":r0:"
               name="email"
@@ -145,13 +145,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL jAguPG"
+            className="sc-bcXGCL klvDp"
           >
             <div
-              className="sc-bcXGCL dAxZoG cap-form-control"
+              className="sc-bcXGCL hQCGLB cap-form-control"
             >
               <label
-                className="sc-bcXGCL egOoIT cap-form-label"
+                className="sc-bcXGCL fTPHCc cap-form-label"
                 htmlFor=":r1:"
                 style={
                   {
@@ -161,7 +161,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               >
                 <span
-                  className="sc-bcXGCL dRxVYq cap-text"
+                  className="sc-bcXGCL dQChsN cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -176,7 +176,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                 disabled={false}
                 id=":r1:"
                 name="plainPassword"
@@ -190,10 +190,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </div>
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor="username"
               style={
                 {
@@ -203,7 +203,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               }
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -217,7 +217,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -232,14 +232,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor="responses.0.value"
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -250,13 +250,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 &lt;mock-value-for-field-"title"&gt;
               </span>
               <p
-                className="sc-bcXGCL ayaql cap-text"
+                className="sc-bcXGCL gPctOm cap-text"
               >
                 global.optional
               </p>
             </label>
             <span
-              className="sc-bcXGCL cqMoEC cap-form-guideline"
+              className="sc-bcXGCL ifYgMR cap-form-guideline"
             >
               &lt;mock-value-for-field-"helpText"&gt;
             </span>
@@ -270,7 +270,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
@@ -283,14 +283,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL hcROMr"
+              className="sc-bcXGCL hICbbA"
               htmlFor="charte"
             >
               <div
-                className="sc-bcXGCL fMWewb cap-checkbox"
+                className="sc-bcXGCL dawbeU cap-checkbox"
                 style={
                   {
                     "marginLeft": 0,
@@ -300,7 +300,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               >
                 <input
                   aria-required={true}
-                  className="sc-bcXGCL kwwjrp cap-checkbox__input"
+                  className="sc-bcXGCL leuqnG cap-checkbox__input"
                   disabled={false}
                   id="charte"
                   name="charte"
@@ -318,14 +318,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL isUvxF cap-checkbox__box"
+                  className="sc-bcXGCL cCxzTy cap-checkbox__box"
                 />
               </div>
               <span
-                className="sc-bcXGCL gXHFMY"
+                className="sc-bcXGCL grQllb"
               >
                 <span
-                  className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
+                  className="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -333,7 +333,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </label>
           </div>
           <div
-            className="sc-bcXGCL dCOQzu"
+            className="sc-bcXGCL kGpePR"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -346,10 +346,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL gthNCX cap-modal__footer"
+          className="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ iCdXwD cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
             onClick={[Function]}
             style={
               {
@@ -362,7 +362,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
             id="confirm-login"
             type="submit"
           >
@@ -378,7 +378,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
 exports[`<RegistrationModal /> renders only form 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.register"
@@ -393,7 +393,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -402,7 +402,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
         style={
           {
             "opacity": 0,
@@ -412,13 +412,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL jMEcWl cap-modal__header"
+          className="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
-            className="sc-bcXGCL ejBfRc"
+            className="sc-bcXGCL jevVsb"
           >
             <h4
-              className="sc-bcXGCL osejp cap-heading"
+              className="sc-bcXGCL dwAFlO cap-heading"
               id="modal-title"
               style={
                 {
@@ -432,13 +432,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL dCLTmf"
+            className="sc-bcXGCL cNICVM"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -457,13 +457,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL hsPaVR cap-modal__body"
+          className="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor=":r5:"
               style={
                 {
@@ -473,7 +473,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               }
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -488,7 +488,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id=":r5:"
               name="email"
@@ -502,13 +502,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL jAguPG"
+            className="sc-bcXGCL klvDp"
           >
             <div
-              className="sc-bcXGCL dAxZoG cap-form-control"
+              className="sc-bcXGCL hQCGLB cap-form-control"
             >
               <label
-                className="sc-bcXGCL egOoIT cap-form-label"
+                className="sc-bcXGCL fTPHCc cap-form-label"
                 htmlFor=":r6:"
                 style={
                   {
@@ -518,7 +518,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               >
                 <span
-                  className="sc-bcXGCL dRxVYq cap-text"
+                  className="sc-bcXGCL dQChsN cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -533,7 +533,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                 disabled={false}
                 id=":r6:"
                 name="plainPassword"
@@ -547,10 +547,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             </div>
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor="username"
               style={
                 {
@@ -560,7 +560,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               }
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -574,7 +574,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -589,14 +589,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL egOoIT cap-form-label"
+              className="sc-bcXGCL fTPHCc cap-form-label"
               htmlFor="responses.0.value"
             >
               <span
-                className="sc-bcXGCL dRxVYq cap-text"
+                className="sc-bcXGCL dQChsN cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -607,13 +607,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 &lt;mock-value-for-field-"title"&gt;
               </span>
               <p
-                className="sc-bcXGCL ayaql cap-text"
+                className="sc-bcXGCL gPctOm cap-text"
               >
                 global.optional
               </p>
             </label>
             <span
-              className="sc-bcXGCL cqMoEC cap-form-guideline"
+              className="sc-bcXGCL ifYgMR cap-form-guideline"
             >
               &lt;mock-value-for-field-"helpText"&gt;
             </span>
@@ -627,7 +627,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+              className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
@@ -640,14 +640,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL hOBcKE cap-form-control"
+            className="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              className="sc-bcXGCL hcROMr"
+              className="sc-bcXGCL hICbbA"
               htmlFor="charte"
             >
               <div
-                className="sc-bcXGCL fMWewb cap-checkbox"
+                className="sc-bcXGCL dawbeU cap-checkbox"
                 style={
                   {
                     "marginLeft": 0,
@@ -657,7 +657,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               >
                 <input
                   aria-required={true}
-                  className="sc-bcXGCL kwwjrp cap-checkbox__input"
+                  className="sc-bcXGCL leuqnG cap-checkbox__input"
                   disabled={false}
                   id="charte"
                   name="charte"
@@ -675,14 +675,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL isUvxF cap-checkbox__box"
+                  className="sc-bcXGCL cCxzTy cap-checkbox__box"
                 />
               </div>
               <span
-                className="sc-bcXGCL gXHFMY"
+                className="sc-bcXGCL grQllb"
               >
                 <span
-                  className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
+                  className="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -691,10 +691,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL gthNCX cap-modal__footer"
+          className="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ iCdXwD cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
             onClick={[Function]}
             style={
               {
@@ -707,7 +707,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
             id="confirm-login"
             type="submit"
           >

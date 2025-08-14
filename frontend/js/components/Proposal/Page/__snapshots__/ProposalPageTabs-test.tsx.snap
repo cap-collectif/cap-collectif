@@ -3,7 +3,7 @@
 exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="ProposalPageTabs__Tabs-eloHg ELnYN"
@@ -109,7 +109,7 @@ Array [
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="ProposalPageTabs__Tabs-eloHg ELnYN"
@@ -215,7 +215,7 @@ Array [
 exports[`<ProposalPageTabs /> should render without vote tab 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="ProposalPageTabs__Tabs-eloHg ELnYN"

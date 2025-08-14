@@ -3,35 +3,35 @@
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-abstract-card"
+    className="sc-bcXGCL ghJpbt cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL ixtUuC cap-tag"
+      className="sc-bcXGCL kqegfx cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL cTcRPm cap-text"
+        className="sc-bcXGCL KgSYF cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kLxxct"
+      className="sc-bcXGCL vKvFG"
     />
     <div
-      className="sc-bcXGCL bmUsou"
+      className="sc-bcXGCL eiUVZV"
     >
       <div
-        className="sc-bcXGCL eOGshx"
+        className="sc-bcXGCL gJEVDa"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
@@ -44,35 +44,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
+            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL gCRbeu"
+              className="sc-bcXGCL fUNjxh"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL hcRDrK cap-text"
+            className="sc-bcXGCL iCvqfB cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQfrOq cap-text"
+            className="sc-bcXGCL ilQWDZ cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL jSZdGK"
+        className="sc-bcXGCL ghdPxh"
       >
         <h4
-          className="sc-bcXGCL bXZVvT cap-heading"
+          className="sc-bcXGCL bXwsiw cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -83,7 +83,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -106,35 +106,35 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-abstract-card"
+    className="sc-bcXGCL ghJpbt cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL ixtUuC cap-tag"
+      className="sc-bcXGCL kqegfx cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL cTcRPm cap-text"
+        className="sc-bcXGCL KgSYF cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kLxxct"
+      className="sc-bcXGCL vKvFG"
     />
     <div
-      className="sc-bcXGCL bmUsou"
+      className="sc-bcXGCL eiUVZV"
     >
       <div
-        className="sc-bcXGCL eOGshx"
+        className="sc-bcXGCL gJEVDa"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
@@ -147,35 +147,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
+            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL gCRbeu"
+              className="sc-bcXGCL fUNjxh"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL hcRDrK cap-text"
+            className="sc-bcXGCL iCvqfB cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQfrOq cap-text"
+            className="sc-bcXGCL ilQWDZ cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL jSZdGK"
+        className="sc-bcXGCL ghdPxh"
       >
         <h4
-          className="sc-bcXGCL bXZVvT cap-heading"
+          className="sc-bcXGCL bXwsiw cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -186,7 +186,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -209,32 +209,32 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gMthXY cap-abstract-card"
+    className="sc-bcXGCL fwhnyr cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL ixtUuC cap-tag"
+      className="sc-bcXGCL kqegfx cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL cTcRPm cap-text"
+        className="sc-bcXGCL KgSYF cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL bmUsou"
+      className="sc-bcXGCL eiUVZV"
     >
       <div
-        className="sc-bcXGCL eOGshx"
+        className="sc-bcXGCL gJEVDa"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
@@ -247,35 +247,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
+            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL gCRbeu"
+              className="sc-bcXGCL fUNjxh"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL hcRDrK cap-text"
+            className="sc-bcXGCL iCvqfB cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQfrOq cap-text"
+            className="sc-bcXGCL ilQWDZ cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL jSZdGK"
+        className="sc-bcXGCL ghdPxh"
       >
         <h4
-          className="sc-bcXGCL bXZVvT cap-heading"
+          className="sc-bcXGCL bXwsiw cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -286,7 +286,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -309,35 +309,35 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-abstract-card"
+    className="sc-bcXGCL ghJpbt cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL ixtUuC cap-tag"
+      className="sc-bcXGCL kqegfx cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL cTcRPm cap-text"
+        className="sc-bcXGCL KgSYF cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kLxxct"
+      className="sc-bcXGCL vKvFG"
     />
     <div
-      className="sc-bcXGCL bmUsou"
+      className="sc-bcXGCL eiUVZV"
     >
       <div
-        className="sc-bcXGCL eOGshx"
+        className="sc-bcXGCL gJEVDa"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
@@ -350,35 +350,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
+            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL gCRbeu"
+              className="sc-bcXGCL fUNjxh"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL hcRDrK cap-text"
+            className="sc-bcXGCL iCvqfB cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQfrOq cap-text"
+            className="sc-bcXGCL ilQWDZ cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL jSZdGK"
+        className="sc-bcXGCL ghdPxh"
       >
         <h4
-          className="sc-bcXGCL bXZVvT cap-heading"
+          className="sc-bcXGCL bXwsiw cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -389,7 +389,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -404,7 +404,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-gGvGpy biUlLS cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-gGvGpy dXuIGx cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >
@@ -419,32 +419,32 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gMthXY cap-abstract-card"
+    className="sc-bcXGCL fwhnyr cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL ixtUuC cap-tag"
+      className="sc-bcXGCL kqegfx cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL cTcRPm cap-text"
+        className="sc-bcXGCL KgSYF cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL bmUsou"
+      className="sc-bcXGCL eiUVZV"
     >
       <div
-        className="sc-bcXGCL eOGshx"
+        className="sc-bcXGCL gJEVDa"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
@@ -457,35 +457,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
+            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL gCRbeu"
+              className="sc-bcXGCL fUNjxh"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL hcRDrK cap-text"
+            className="sc-bcXGCL iCvqfB cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQfrOq cap-text"
+            className="sc-bcXGCL ilQWDZ cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL jSZdGK"
+        className="sc-bcXGCL ghdPxh"
       >
         <h4
-          className="sc-bcXGCL bXZVvT cap-heading"
+          className="sc-bcXGCL bXwsiw cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -496,7 +496,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -511,7 +511,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-gGvGpy biUlLS cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-gGvGpy dXuIGx cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >

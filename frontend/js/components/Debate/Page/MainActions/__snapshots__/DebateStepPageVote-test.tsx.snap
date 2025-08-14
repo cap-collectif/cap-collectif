@@ -3,21 +3,21 @@
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL lmSqRY"
+    class="sc-bcXGCL clbpBn"
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL eTLrxp"
+      class="sc-bcXGCL jLCCpW"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -30,21 +30,21 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bcXGCL dQKVuQ"
+      class="sc-bcXGCL fjBkoL"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -57,7 +57,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.against
         </p>
@@ -70,25 +70,25 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL lmSqRY"
+    class="sc-bcXGCL clbpBn"
     style="opacity:0"
   >
     <button
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bcXGCL eTLrxp"
+      class="sc-bcXGCL jLCCpW"
       type="button"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -101,7 +101,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.for
         </p>
@@ -127,7 +127,7 @@ Array [
       unstable_referenceref="[object Object]"
     >
       <div
-        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gUqBPX bAlxBy"
+        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf ehpToA bAlxBy"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -145,28 +145,28 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bcXGCL irbWaO"
+        class="sc-bcXGCL eHnnHB"
       >
         <p
-          class="sc-bcXGCL jEiGcJ cap-text"
+          class="sc-bcXGCL juddyS cap-text"
         >
           vote.popover.title
         </p>
         <div
-          class="sc-bcXGCL idhYbX"
+          class="sc-bcXGCL dQlBHo"
         >
           <p
-            class="sc-bcXGCL gwOTQw cap-text"
+            class="sc-bcXGCL FTdzv cap-text"
             style="margin-left:0;margin-top:0"
           >
             vote.popover.body
           </p>
           <span
-            class="sc-csDjRa jLjtIq"
+            class="sc-gsGkXq iMAODW"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
               type="button"
             >
               global.close
@@ -174,7 +174,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
             id="login-button"
             type="button"
           >
@@ -187,15 +187,15 @@ Array [
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bcXGCL dQKVuQ"
+      class="sc-bcXGCL fjBkoL"
       type="button"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -208,7 +208,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.against
         </p>
@@ -234,7 +234,7 @@ Array [
       unstable_referenceref="[object Object]"
     >
       <div
-        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gUqBPX bAlxBy"
+        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf ehpToA bAlxBy"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -252,28 +252,28 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bcXGCL irbWaO"
+        class="sc-bcXGCL eHnnHB"
       >
         <p
-          class="sc-bcXGCL jEiGcJ cap-text"
+          class="sc-bcXGCL juddyS cap-text"
         >
           vote.popover.title
         </p>
         <div
-          class="sc-bcXGCL idhYbX"
+          class="sc-bcXGCL dQlBHo"
         >
           <p
-            class="sc-bcXGCL gwOTQw cap-text"
+            class="sc-bcXGCL FTdzv cap-text"
             style="margin-left:0;margin-top:0"
           >
             vote.popover.body
           </p>
           <span
-            class="sc-csDjRa jLjtIq"
+            class="sc-gsGkXq iMAODW"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
               type="button"
             >
               global.close
@@ -281,7 +281,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
             id="login-button"
             type="button"
           >
@@ -297,21 +297,21 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL lmSqRY"
+    class="sc-bcXGCL clbpBn"
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL eTLrxp"
+      class="sc-bcXGCL jLCCpW"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -324,21 +324,21 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bcXGCL dQKVuQ"
+      class="sc-bcXGCL fjBkoL"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -351,7 +351,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.against
         </p>
@@ -364,21 +364,21 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL lmSqRY"
+    class="sc-bcXGCL clbpBn"
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL eTLrxp"
+      class="sc-bcXGCL jLCCpW"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -391,21 +391,21 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bcXGCL dQKVuQ"
+      class="sc-bcXGCL fjBkoL"
     >
       <div
-        class="sc-bcXGCL dHilBn"
+        class="sc-bcXGCL dCeLwM"
       >
         <svg
           aria-hidden="true"
-          class="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
+          class="sc-bcXGCL sc-oZHua wjzqm hQQZty cap-icon"
           fill="none"
           height="1em"
           viewBox="0 0 32 29"
@@ -418,7 +418,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bcXGCL cvCRpc cap-text"
+          class="sc-bcXGCL kxBQAH cap-text"
         >
           global.against
         </p>

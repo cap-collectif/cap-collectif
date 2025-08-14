@@ -3,7 +3,7 @@
 exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author confirmed his account too late 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     baseId="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -45,7 +45,7 @@ Array [
       data-testid="Header"
     >
       <p
-        className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
+        className="sc-bcXGCL bmiMg cap-text excerpt_dark"
       >
         account-confirmed-too-late
       </p>
@@ -55,7 +55,7 @@ Array [
       marginBottom={0}
     >
       <p
-        className="sc-bcXGCL hQvDkj cap-text"
+        className="sc-bcXGCL csWJbs cap-text"
       >
         account-confirmed-too-late-message
       </p>
@@ -67,7 +67,7 @@ Array [
 exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author is not confirmed 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     baseId="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -109,7 +109,7 @@ Array [
       data-testid="Header"
     >
       <p
-        className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
+        className="sc-bcXGCL bmiMg cap-text excerpt_dark"
       >
         account-confirmed-too-late
       </p>
@@ -119,7 +119,7 @@ Array [
       marginBottom={0}
     >
       <p
-        className="sc-bcXGCL hQvDkj cap-text"
+        className="sc-bcXGCL csWJbs cap-text"
       >
         account-confirmed-too-late-message
       </p>
@@ -131,7 +131,7 @@ Array [
 exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when not published because author must confirm 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     baseId="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -173,7 +173,7 @@ Array [
       data-testid="Header"
     >
       <p
-        className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
+        className="sc-bcXGCL bmiMg cap-text excerpt_dark"
       >
         account-confirmed-too-late
       </p>
@@ -183,7 +183,7 @@ Array [
       marginBottom={0}
     >
       <p
-        className="sc-bcXGCL hQvDkj cap-text"
+        className="sc-bcXGCL csWJbs cap-text"
       >
         account-confirmed-too-late-message
       </p>
@@ -195,7 +195,7 @@ Array [
 exports[`<UnpublishedLabel /> <TestUnpublishedLabel /> renders when published 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     baseId="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -237,7 +237,7 @@ Array [
       data-testid="Header"
     >
       <p
-        className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
+        className="sc-bcXGCL bmiMg cap-text excerpt_dark"
       >
         account-confirmed-too-late
       </p>
@@ -247,7 +247,7 @@ Array [
       marginBottom={0}
     >
       <p
-        className="sc-bcXGCL hQvDkj cap-text"
+        className="sc-bcXGCL csWJbs cap-text"
       >
         account-confirmed-too-late-message
       </p>

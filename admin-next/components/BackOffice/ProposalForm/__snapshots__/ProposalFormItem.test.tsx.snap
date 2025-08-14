@@ -3,10 +3,10 @@
 exports[`<ProposalFormItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -14,14 +14,14 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     }
   >
     <a
-      className="sc-bcXGCL cwEAzx cap-link"
+      className="sc-bcXGCL gudgoe cap-link"
       href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
     >
       Formulaire organisation crée par un admin
     </a>
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -31,7 +31,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     -
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -41,7 +41,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -51,7 +51,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -61,7 +61,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL hWmQkC cap-table__td visible-on-hover"
+    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -69,12 +69,12 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     }
   >
     <div
-      className="sc-bcXGCL skEPE cap-buttonGroup"
+      className="sc-bcXGCL jWSPbb cap-buttonGroup"
     >
       <button
         aria-describedby=":r6:"
         aria-label="duplicate"
-        className="sc-bcXGCL hluKno cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL cxVtKf cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -94,7 +94,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
+          className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
           fill="none"
           height="1em"
           viewBox="0 0 10 12"
@@ -128,10 +128,10 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
 exports[`<ProposalFormItem /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -139,14 +139,14 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL cwEAzx cap-link"
+      className="sc-bcXGCL gudgoe cap-link"
       href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
     >
       Formulaire organisation crée par un admin
     </a>
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -156,7 +156,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     -
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -166,7 +166,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -176,7 +176,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL lpgNFi cap-table__td"
+    className="sc-bcXGCL TOCat cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -186,7 +186,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL hWmQkC cap-table__td visible-on-hover"
+    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -194,12 +194,12 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL skEPE cap-buttonGroup"
+      className="sc-bcXGCL jWSPbb cap-buttonGroup"
     >
       <button
         aria-describedby=":r0:"
         aria-label="duplicate"
-        className="sc-bcXGCL hluKno cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL cxVtKf cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -219,7 +219,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
+          className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
           fill="none"
           height="1em"
           viewBox="0 0 10 12"
@@ -251,7 +251,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="global.delete"
-        className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
+        className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -268,7 +268,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
+          className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
           fill="none"
           height="1em"
           viewBox="0 0 12 12"

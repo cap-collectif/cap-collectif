@@ -3,15 +3,15 @@
 exports[`<EventModerationMotive /> <TestEventModerationMotive /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <span
-    className="sc-bcXGCL jISIuZ cap-text"
+    className="sc-bcXGCL kgKwRy cap-text"
   >
     admin.action.recent_contributions.unpublish.input_label
   </span>,
   <div
-    className="sc-bcXGCL eeZHSo sc-fvEvfv cap-info-message"
+    className="sc-bcXGCL SYehn sc-jRwapC cap-info-message"
   />,
 ]
 `;

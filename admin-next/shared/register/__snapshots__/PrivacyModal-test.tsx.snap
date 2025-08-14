@@ -3,7 +3,7 @@
 exports[`<PrivacyModal /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="contained-modal-title-lg"
@@ -19,7 +19,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL JcTvy sc-GKYOR htNobg cap-modal privacy-policy"
+        className="sc-bcXGCL guZZlV sc-fcCDYY cOPviG cap-modal privacy-policy"
         id="privacy-modal"
         style={
           {
@@ -38,13 +38,13 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL jMEcWl cap-modal__header privacy-policy"
+          className="sc-bcXGCL jJSzZW cap-modal__header privacy-policy"
         >
           <div
-            className="sc-bcXGCL ejBfRc"
+            className="sc-bcXGCL jevVsb"
           >
             <h2
-              className="sc-bcXGCL dIdmc cap-heading"
+              className="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
               style={
                 {
@@ -58,13 +58,13 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL dCLTmf"
+            className="sc-bcXGCL cNICVM"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -83,7 +83,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL hsPaVR cap-modal__body"
+          className="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -95,10 +95,10 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
           />
         </div>
         <footer
-          className="sc-bcXGCL gthNCX cap-modal__footer privacy-policy"
+          className="sc-bcXGCL fMWhlA cap-modal__footer privacy-policy"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ dmtkzs cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
             onClick={[Function]}
             style={
               {

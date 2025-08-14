@@ -3,32 +3,32 @@
 exports[`<District /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eBHnuC sc-b4d5bec3-1 ggMSJN"
+    className="sc-bcXGCL ZWPJF sc-b4d5bec3-1 ggMSJN"
   >
     <div
-      className="sc-bcXGCL sc-b4d5bec3-0 dtmyTo brnRnh"
+      className="sc-bcXGCL sc-b4d5bec3-0 jWEstj brnRnh"
     />
     <div
-      className="sc-bcXGCL jFlYXF"
+      className="sc-bcXGCL lplYjq"
     >
       <h2
-        className="sc-bcXGCL hUDYie cap-heading"
+        className="sc-bcXGCL enwYRx cap-heading"
       >
         Nice District
       </h2>
     </div>
   </div>,
   <div
-    className="sc-bcXGCL jrELcQ"
+    className="sc-bcXGCL hPKpWL"
   >
     <div
-      className="sc-bcXGCL dTITPe"
+      className="sc-bcXGCL bvnEep"
     >
       <div
-        className="sc-bcXGCL filejO"
+        className="sc-bcXGCL fmjscd"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -42,32 +42,32 @@ exports[`<District /> renders correctly 1`] = `
     </div>
   </div>,
   <div
-    className="sc-bcXGCL jOefUM"
+    className="sc-bcXGCL eTEmwb"
   >
     <div
-      className="sc-bcXGCL eKZdji"
+      className="sc-bcXGCL cwCKgd"
     >
       <h4
-        className="sc-bcXGCL bSNSwp cap-heading"
+        className="sc-bcXGCL QfKUy cap-heading"
       >
         n_projects {"num":1}
       </h4>
       <div
-        className="sc-bcXGCL hyOupk"
+        className="sc-bcXGCL eYEFlv"
       >
         <div
-          className="sc-bcXGCL fMnUYI"
+          className="sc-bcXGCL byqSmn"
         >
           <div
-            className="sc-bcXGCL kXNVml cap-card cap-project-card"
+            className="sc-bcXGCL legmwK cap-card cap-project-card"
             id="cap-project-card-project-id-1"
           >
             <div
-              className="sc-bcXGCL eHlVFt cap-card-cover"
+              className="sc-bcXGCL lkRzAG cap-card-cover"
             >
               <img
                 alt=""
-                className="sc-bcXGCL jqlklV"
+                className="sc-bcXGCL khbwMK"
                 loading="lazy"
                 sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
                 srcSet="
@@ -90,13 +90,13 @@ exports[`<District /> renders correctly 1`] = `
               />
               <div
                 aria-label="Tag  global-archived"
-                className="sc-bcXGCL gvYJvN cap-tag"
+                className="sc-bcXGCL hkjXaC cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 title=" global-archived"
               >
                 <span
-                  className="sc-bcXGCL gGmAkb cap-tag__label"
+                  className="sc-bcXGCL lnyRPA cap-tag__label"
                 >
                    
                   global-archived
@@ -104,16 +104,16 @@ exports[`<District /> renders correctly 1`] = `
               </div>
             </div>
             <div
-              className="sc-bcXGCL fwgwMu cap-card-content"
+              className="sc-bcXGCL kkRGEJ cap-card-content"
             >
               <div
-                className="sc-bcXGCL crFwrP"
+                className="sc-bcXGCL bIZLTw"
               >
                 <h3
-                  className="sc-bcXGCL fyvWHu cap-card-primaryInfo"
+                  className="sc-bcXGCL bpFsRd cap-card-primaryInfo"
                 >
                   <a
-                    className="sc-bcXGCL heYhqG cap-card-link"
+                    className="sc-bcXGCL kZMHwF cap-card-link"
                     href="<mock-value-for-field-"externalLink">"
                   >
                     Nice project
@@ -121,18 +121,18 @@ exports[`<District /> renders correctly 1`] = `
                 </h3>
               </div>
               <div
-                className="sc-bcXGCL eHGlhC"
+                className="sc-bcXGCL dNOxjl"
               >
                 <div
                   aria-label="Tag 0 project.votes.widget.votes"
-                  className="sc-bcXGCL kWsHud cap-tag"
+                  className="sc-bcXGCL gTREYS cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   title="0 project.votes.widget.votes"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 32 28"
@@ -166,12 +166,12 @@ exports[`<District /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                    className="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL kIAgwG"
+                    className="sc-bcXGCL iWtiap"
                   >
                      
                     project.votes.widget.votes
@@ -179,14 +179,14 @@ exports[`<District /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 global.contribution"
-                  className="sc-bcXGCL kWsHud cap-tag"
+                  className="sc-bcXGCL gTREYS cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   title="0 global.contribution"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 14 13"
@@ -201,12 +201,12 @@ exports[`<District /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                    className="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL kIAgwG"
+                    className="sc-bcXGCL iWtiap"
                   >
                      
                     global.contribution
@@ -214,14 +214,14 @@ exports[`<District /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 capco.section.metrics.participants"
-                  className="sc-bcXGCL kWsHud cap-tag"
+                  className="sc-bcXGCL gTREYS cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   title="0 capco.section.metrics.participants"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 13 14"
@@ -243,12 +243,12 @@ exports[`<District /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                    className="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL kIAgwG"
+                    className="sc-bcXGCL iWtiap"
                   >
                      
                     capco.section.metrics.participants

@@ -3,23 +3,23 @@
 exports[`<Footer /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <footer
-    className="sc-bcXGCL eksNNn"
+    className="sc-bcXGCL gxjnLQ"
     role="contentinfo"
   >
     <div
-      className="sc-bcXGCL hiFWKO"
+      className="sc-bcXGCL OgikN"
     >
       <div
-        className="sc-bcXGCL cEVsdY"
+        className="sc-bcXGCL diSKHL"
       >
         <div
-          className="sc-bcXGCL dnlRh"
+          className="sc-bcXGCL bEfTSe"
         >
           <h3
-            className="sc-bcXGCL hDaepK cap-heading"
+            className="sc-bcXGCL btUAcF cap-heading"
           >
             À Propos
           </h3>
@@ -33,18 +33,18 @@ exports[`<Footer /> renders correctly 1`] = `
           />
         </div>
         <div
-          className="sc-bcXGCL bMPArT"
+          className="sc-bcXGCL dNqoYo"
         >
           <ul
-            className="sc-bcXGCL jxmsBe"
+            className="sc-bcXGCL EoHHt"
           >
             <li>
               <div
-                className="sc-bcXGCL kVLURz"
+                className="sc-bcXGCL lcYpuI"
               >
                 <div
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
+                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
                 />
                 <a
                   href="x.com/cap-collectif"
@@ -60,14 +60,14 @@ exports[`<Footer /> renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-bcXGCL iZpmcC"
+      className="sc-bcXGCL felxZh"
       id="footer-links"
     >
       <div
-        className="sc-bcXGCL cehMNz"
+        className="sc-bcXGCL hRlsIk"
       >
         <ul
-          className="sc-bcXGCL hzjrIF"
+          className="sc-bcXGCL hNLvDS"
         >
           <li>
             <a
@@ -78,15 +78,15 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL jrKnWT"
+              className="sc-bcXGCL fa-doRo"
             >
               |
             </span>
             <div
-              className="sc-bcXGCL eCfERu"
+              className="sc-bcXGCL gNKGgV"
             >
               <button
-                className="sc-bcXGCL gjsubU"
+                className="sc-bcXGCL keKWCf"
                 id="cookies-management"
                 onClick={[Function]}
                 type="button"
@@ -97,7 +97,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL jrKnWT"
+              className="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -109,7 +109,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL jrKnWT"
+              className="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -121,7 +121,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL jrKnWT"
+              className="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -131,7 +131,7 @@ exports[`<Footer /> renders correctly 1`] = `
               FAQ
             </a>
             <span
-              className="sc-bcXGCL jrKnWT"
+              className="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -146,19 +146,19 @@ exports[`<Footer /> renders correctly 1`] = `
         </ul>
       </div>
       <hr
-        className="sc-bcXGCL isZRdN"
+        className="sc-bcXGCL fwxxqu"
       />
       <div
-        className="sc-bcXGCL dHilBn"
+        className="sc-bcXGCL dCeLwM"
       >
         powered_by
         <img
           alt=""
-          className="sc-bcXGCL iteBAi"
+          className="sc-bcXGCL ecZTMp"
           src="/favicon-64x64.png"
         />
         <a
-          className="sc-bcXGCL cxIaeX"
+          className="sc-bcXGCL blMEeg"
           href="https://cap-collectif.com"
         >
           <span>

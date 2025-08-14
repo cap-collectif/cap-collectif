@@ -3,7 +3,7 @@
 exports[`<WYSIWYGRender /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="myClass ql-editor wysiwyg-render"
@@ -19,7 +19,7 @@ exports[`<WYSIWYGRender /> should render correctly 1`] = `
 exports[`<WYSIWYGRender /> should render correctly with tagName 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="myClass ql-editor wysiwyg-render"

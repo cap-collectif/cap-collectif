@@ -3,22 +3,22 @@
 exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <section
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL jPGxXS"
+    className="sc-bcXGCL bGwxQV"
     id="carrousel"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="sc-bcXGCL lfSKRX"
+      className="sc-bcXGCL hbhjng"
     >
       <div
         aria-live="off"
-        className="sc-bcXGCL fRtILG"
+        className="sc-bcXGCL fliKOZ"
         id="carrousel-items"
         onTransitionEnd={[Function]}
         style={
@@ -31,16 +31,16 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
         <div
           aria-hidden={true}
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL gFjRDL"
+          className="sc-bcXGCL fKHBjQ"
           role="group"
           tabIndex={-1}
         >
           <div
-            className="sc-bcXGCL kTxBHB"
+            className="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL icjWQy"
+              className="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
               srcSet="
@@ -60,27 +60,27 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL jNzoRB"
+            className="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL kpuzHJ"
+              className="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL gjsubU"
+                className="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL gSuuRt cap-heading"
+                  className="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL dxUxdV"
+                  className="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL UEWLU"
+                className="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
                 tabIndex={-1}
               >
@@ -93,15 +93,15 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
           aria-hidden={false}
           aria-label="carrousel.position {"position":1,"total":1}"
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL gFjRDL"
+          className="sc-bcXGCL fKHBjQ"
           role="group"
         >
           <div
-            className="sc-bcXGCL kTxBHB"
+            className="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL icjWQy"
+              className="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
               srcSet="
@@ -121,27 +121,27 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL jNzoRB"
+            className="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL kpuzHJ"
+              className="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL gjsubU"
+                className="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL gSuuRt cap-heading"
+                  className="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL dxUxdV"
+                  className="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL UEWLU"
+                className="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
               >
                 Voir +
@@ -152,16 +152,16 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
         <div
           aria-hidden={true}
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL gFjRDL"
+          className="sc-bcXGCL fKHBjQ"
           role="group"
           tabIndex={-1}
         >
           <div
-            className="sc-bcXGCL kTxBHB"
+            className="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL icjWQy"
+              className="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
               srcSet="
@@ -181,27 +181,27 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL jNzoRB"
+            className="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL kpuzHJ"
+              className="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL gjsubU"
+                className="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL gSuuRt cap-heading"
+                  className="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL dxUxdV"
+                  className="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL UEWLU"
+                className="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
                 tabIndex={-1}
               >
@@ -219,66 +219,66 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
 exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL gYleZF"
+    className="sc-bcXGCL iQCFge"
   >
     <div
-      className="sc-bcXGCL ckIgbN"
+      className="sc-bcXGCL kwEgby"
     >
       <div
-        className="sc-bcXGCL jJHnhg"
+        className="sc-bcXGCL coObtj"
       >
         <div
-          className="sc-bcXGCL fJEreX"
+          className="sc-bcXGCL jsXoBQ"
         >
           <div
-            className="sc-bcXGCL eZYuXx"
+            className="sc-bcXGCL dwbxzy"
           >
             <h3
-              className="sc-bcXGCL jGwkpw cap-heading"
+              className="sc-bcXGCL jZrWcn cap-heading"
             >
               Title
             </h3>
           </div>
           <div
             aria-live="off"
-            className="sc-bcXGCL kizpMN"
+            className="sc-bcXGCL iNlobK"
             id="whats-new-items"
           >
             <div
               aria-label="carrousel.position {"position":1,"total":1}"
               aria-roledescription="carrousel.slide"
-              className="sc-bcXGCL hYIRwa"
+              className="sc-bcXGCL hVTsVt"
               id="whats-new-item-0"
               onClick={[Function]}
               role="group"
             >
               <div
-                className="sc-bcXGCL ewzazk"
+                className="sc-bcXGCL hpxT"
               >
                 <p
-                  className="sc-bcXGCL cvCRpc cap-text"
+                  className="sc-bcXGCL kxBQAH cap-text"
                 >
                   type-event
                 </p>
               </div>
               <h4
-                className="sc-bcXGCL cHdXqd cap-heading"
+                className="sc-bcXGCL kxNmEm cap-heading"
               >
                 Item1
               </h4>
               <p
-                className="sc-bcXGCL bnBsPp cap-text"
+                className="sc-bcXGCL giNlAC cap-text"
                 title="Lorem ipsum"
               >
                 Lorem ipsum
               </p>
               <a
-                className="sc-bcXGCL fmHybK cap-link"
+                className="sc-bcXGCL jqCqap cap-link"
                 href="/event/mon-event"
               >
                 learn.more
@@ -296,11 +296,11 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
           </div>
         </div>
         <div
-          className="sc-bcXGCL iGOMlb"
+          className="sc-bcXGCL jASAGQ"
         >
           <img
             alt=""
-            className="sc-bcXGCL hJtzCJ"
+            className="sc-bcXGCL bFjPnG"
             loading="eager"
             sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
             srcSet="
@@ -323,15 +323,15 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
 exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL xUnqz"
+    className="sc-bcXGCL eqchdY"
   >
     <h3
-      className="sc-bcXGCL eCwHQX cap-heading"
+      className="sc-bcXGCL kbFwwM cap-heading"
     >
       TitleMobile
     </h3>
@@ -372,7 +372,7 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
           >
             <div>
               <a
-                className="sc-bcXGCL hEmCby"
+                className="sc-bcXGCL rVgbN"
                 href="/event/mon-event"
                 style={
                   {
@@ -384,7 +384,7 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
               >
                 <img
                   alt=""
-                  className="sc-bcXGCL kAPKok"
+                  className="sc-bcXGCL erCQef"
                   loading="eager"
                   sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                   srcSet="
@@ -403,19 +403,19 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
                   }
                 />
                 <div
-                  className="sc-bcXGCL jensdJ"
+                  className="sc-bcXGCL fTSAZS"
                 >
                   <div
-                    className="sc-bcXGCL kyCDBf"
+                    className="sc-bcXGCL dVWqGM"
                   >
                     <div
-                      className="sc-bcXGCL hQmHcG cap-text"
+                      className="sc-bcXGCL dTiXUh cap-text"
                     >
                       type-event
                     </div>
                   </div>
                   <p
-                    className="sc-bcXGCL lddfrQ cap-text"
+                    className="sc-bcXGCL fMsHJT cap-text"
                     title="Item1"
                   >
                     Item1

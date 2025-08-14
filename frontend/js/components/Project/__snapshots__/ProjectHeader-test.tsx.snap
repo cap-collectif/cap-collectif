@@ -3,22 +3,22 @@
 exports[`<ProjectHeader /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL ioPoxw projectHeader"
+    className="sc-bcXGCL gaWxhz projectHeader"
   >
     <div
-      className="sc-bcXGCL hDasIZ projectHeader__cover"
+      className="sc-bcXGCL bEARji projectHeader__cover"
     >
       <div
-        className="sc-bcXGCL gsTrth projectHeader__cover__content"
+        className="sc-bcXGCL ikBsYC projectHeader__cover__content"
       >
         <div
-          className="sc-bcXGCL gRmRnJ"
+          className="sc-bcXGCL ccmzmG"
         >
           <div
-            className="sc-bcXGCL geLYcx cap-avatar-group projectHeader__authors platform__body"
+            className="sc-bcXGCL fTDRnu cap-avatar-group projectHeader__authors platform__body"
             id="project-header"
             onClick={[Function]}
             role="group"
@@ -29,18 +29,18 @@ Array [
             }
           >
             <div
-              className="sc-bcXGCL cVFHrm"
+              className="sc-bcXGCL hyRkwp"
             >
               <span
                 className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
                 hasBadge={false}
               >
                 <div
-                  className="sc-bcXGCL imHdYT sc-fbYNKQ fEcFBX cap-avatar"
+                  className="sc-bcXGCL pFvRM sc-fbYNKQ fEcFBX cap-avatar"
                 >
                   <img
                     alt="Vince"
-                    className="sc-bcXGCL gCRbeu"
+                    className="sc-bcXGCL fUNjxh"
                     src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
                   />
                 </div>
@@ -48,7 +48,7 @@ Array [
             </div>
           </div>
           <p
-            className="sc-bcXGCL lovKkw cap-text platform__body"
+            className="sc-bcXGCL eEmsGP cap-text platform__body"
             id="authors-credit"
             onClick={[Function]}
           >
@@ -56,7 +56,7 @@ Array [
           </p>
         </div>
         <h1
-          className="sc-bcXGCL kMVONC cap-text projectHeader__title platform__title"
+          className="sc-bcXGCL kZMPsh cap-text projectHeader__title platform__title"
           title="Food project "
         >
           Food project
@@ -64,7 +64,7 @@ Array [
         </h1>
       </div>
       <div
-        className="sc-bcXGCL facTRx projectHeader__coverVideo"
+        className="sc-bcXGCL caiysS projectHeader__coverVideo"
       >
         <div
           ariaLabel="project-header-video-modal"
@@ -115,7 +115,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-bcXGCL cPHXza"
+        className="sc-bcXGCL ereVol"
       >
         <div
           data-testid="Tooltip"
@@ -129,7 +129,7 @@ Array [
         >
           <div
             aria-label="Tag "
-            className="sc-bcXGCL kuHDpJ cap-tag"
+            className="sc-bcXGCL laiYJS cap-tag"
             id="restricted-access"
             onBlur={[Function]}
             onFocus={[Function]}
@@ -137,7 +137,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
+              className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
               fill="none"
               height="1em"
               viewBox="0 0 10 12"

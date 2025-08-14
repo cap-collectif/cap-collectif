@@ -3,17 +3,17 @@
 exports[`<StepEvents /> <TestStepEvents /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     className="StepEventsstyle__Container-jvrJbu dRuOvl block"
     id="StepEvents"
   >
     <div
-      className="sc-bcXGCL kyCDBf"
+      className="sc-bcXGCL dVWqGM"
     >
       <h2
-        className="sc-bcXGCL elTwUA cap-heading"
+        className="sc-bcXGCL kgUgBP cap-heading"
       >
         global.events
          
@@ -43,7 +43,7 @@ Array [
             onClick={[Function]}
           >
             <p
-              className="sc-bcXGCL iqqNFB cap-text"
+              className="sc-bcXGCL knKGoO cap-text"
             >
               theme.show.status.future
             </p>
@@ -54,7 +54,7 @@ Array [
             onClick={[Function]}
           >
             <p
-              className="sc-bcXGCL iqqNFB cap-text"
+              className="sc-bcXGCL knKGoO cap-text"
             >
               finished
             </p>
@@ -67,67 +67,67 @@ Array [
       inline={false}
     >
       <div
-        className="sc-WKhfq iRNDRx"
+        className="sc-fHSyNF kzmJWt"
         color="#333333"
         size={40}
       >
         <div
-          className="sc-dkBcLH gbBSpX"
+          className="sc-evzWxC eGPXRM"
           delay={-1.2}
           transform={30}
         />
         <div
-          className="sc-dkBcLH cJWwIt"
+          className="sc-evzWxC hUGEzG"
           delay={-1.1}
           transform={60}
         />
         <div
-          className="sc-dkBcLH cDZHod"
+          className="sc-evzWxC iRgtjG"
           delay={-1}
           transform={90}
         />
         <div
-          className="sc-dkBcLH ixmtbJ"
+          className="sc-evzWxC kvzyii"
           delay={-0.9}
           transform={120}
         />
         <div
-          className="sc-dkBcLH joUjeH"
+          className="sc-evzWxC dtQfJc"
           delay={-0.8}
           transform={150}
         />
         <div
-          className="sc-dkBcLH hvBQmZ"
+          className="sc-evzWxC gmitq"
           delay={-0.7}
           transform={180}
         />
         <div
-          className="sc-dkBcLH hSUCFC"
+          className="sc-evzWxC bYUmDJ"
           delay={-0.6}
           transform={210}
         />
         <div
-          className="sc-dkBcLH sWPA"
+          className="sc-evzWxC jxxUer"
           delay={-0.5}
           transform={240}
         />
         <div
-          className="sc-dkBcLH bzEyJq"
+          className="sc-evzWxC hDZgVx"
           delay={-0.4}
           transform={270}
         />
         <div
-          className="sc-dkBcLH cuWrdH"
+          className="sc-evzWxC ihaJqY"
           delay={-0.3}
           transform={300}
         />
         <div
-          className="sc-dkBcLH bqtUGV"
+          className="sc-evzWxC iBuUCq"
           delay={-0.2}
           transform={330}
         />
         <div
-          className="sc-dkBcLH fMTEVD"
+          className="sc-evzWxC eQFEDI"
           delay={-0.1}
           transform={360}
         />

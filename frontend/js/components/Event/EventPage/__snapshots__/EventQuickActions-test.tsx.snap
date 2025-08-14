@@ -3,7 +3,7 @@
 exports[`<EventQuickActions /> should render correctly with the right conditions 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     data-testid="Menu"
@@ -33,7 +33,7 @@ Array [
         }
       >
         <p
-          className="sc-bcXGCL cvCRpc cap-text"
+          className="sc-bcXGCL kxBQAH cap-text"
         >
            
           export-registered
@@ -68,6 +68,6 @@ Array [
 
 exports[`<EventQuickActions /> should return nothing with the right conditions 1`] = `
 <div
-  className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+  className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
 />
 `;

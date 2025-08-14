@@ -3,33 +3,33 @@
 exports[`<Contact /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kzYcKZ"
+    className="sc-bcXGCL bNjzIC"
   >
     <div
-      className="sc-bcXGCL jkMDXM"
+      className="sc-bcXGCL drtrwv"
     >
       <div
-        className="sc-bcXGCL hxkawY"
+        className="sc-bcXGCL fYlNWT"
       >
         <div
-          className="sc-bcXGCL ifGhhS"
+          className="sc-bcXGCL bdBwbl"
         >
           <div
-            className="sc-bcXGCL bJaWaO"
+            className="sc-bcXGCL heKSwN"
           >
             <div
-              className="sc-bcXGCL cvZLAn"
+              className="sc-bcXGCL dzecEA"
             >
               <h1
-                className="sc-bcXGCL iHMoWe cap-heading"
+                className="sc-bcXGCL eZylMR cap-heading"
               >
                 Contact us
               </h1>
               <p
-                className="sc-bcXGCL egKDCQ cap-text"
+                className="sc-bcXGCL koJZlX cap-text"
               >
                 <div
                   className=" ql-editor wysiwyg-render"
@@ -45,29 +45,29 @@ exports[`<Contact /> renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL ggwuDG"
+        className="sc-bcXGCL kBzaMB"
       >
         <div
-          className="sc-bcXGCL gdTSGr"
+          className="sc-bcXGCL hSvFdA"
         >
           <div
-            className="sc-bcXGCL eQUJjL"
+            className="sc-bcXGCL gkMwg"
           >
             <div
-              className="sc-bcXGCL dDfCSY cap-accordion__item"
+              className="sc-bcXGCL gwLuHb cap-accordion__item"
               id="contactForm1"
             >
               <button
                 aria-controls="accordion-panel-contactForm1"
                 aria-expanded={true}
-                className="sc-bcXGCL lkvxTQ cap-accordion__button"
+                className="sc-bcXGCL isrhRD cap-accordion__button"
                 id="accordion-button-contactForm1"
                 onClick={[Function]}
                 type="button"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua dAsYTG hQQZty cap-icon"
+                  className="sc-bcXGCL sc-oZHua fqrjxx hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 7"
@@ -80,14 +80,14 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  className="sc-bcXGCL gboujX cap-text"
+                  className="sc-bcXGCL dfvBVw cap-text"
                 >
                   For a project
                 </p>
               </button>
               <div
                 aria-labelledby="accordion-button-contactForm1"
-                className="sc-bcXGCL hopKiY cap-accordion__panel"
+                className="sc-bcXGCL hvhhfr cap-accordion__panel"
                 id="accordion-panel-contactForm1"
                 role="group"
                 style={
@@ -98,7 +98,7 @@ exports[`<Contact /> renders correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-bcXGCL dJWBlh cap-text"
+                  className="sc-bcXGCL fywbGu cap-text"
                 >
                   <div
                     className=" ql-editor wysiwyg-render"
@@ -110,7 +110,7 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </div>
                 <div
-                  className="sc-bcXGCL gsVzAx"
+                  className="sc-bcXGCL itiXDK"
                 >
                   form.fields_mandatory_without_mention
                 </div>
@@ -120,10 +120,10 @@ exports[`<Contact /> renders correctly 1`] = `
                   onSubmit={[Function]}
                 >
                   <div
-                    className="sc-bcXGCL brfJeR cap-form-control"
+                    className="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL erDWnu cap-form-label"
+                      className="sc-bcXGCL jfvNeV cap-form-label"
                       htmlFor=":r0:"
                       style={
                         {
@@ -133,7 +133,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       }
                     >
                       <span
-                        className="sc-bcXGCL dRxVYq cap-text"
+                        className="sc-bcXGCL dQChsN cap-text"
                         style={
                           {
                             "marginLeft": 0,
@@ -144,13 +144,13 @@ exports[`<Contact /> renders correctly 1`] = `
                         global.name
                       </span>
                       <p
-                        className="sc-bcXGCL tOsF cap-text"
+                        className="sc-bcXGCL hIqMOW cap-text"
                       >
                         global.optional
                       </p>
                     </label>
                     <input
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       disabled={false}
                       id=":r0:"
                       minLength={2}
@@ -165,10 +165,10 @@ exports[`<Contact /> renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL brfJeR cap-form-control"
+                    className="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL erDWnu cap-form-label"
+                      className="sc-bcXGCL jfvNeV cap-form-label"
                       htmlFor=":r1:"
                       style={
                         {
@@ -178,7 +178,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       }
                     >
                       <span
-                        className="sc-bcXGCL dRxVYq cap-text"
+                        className="sc-bcXGCL dQChsN cap-text"
                         style={
                           {
                             "marginLeft": 0,
@@ -191,7 +191,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       disabled={false}
                       id=":r1:"
                       name="email"
@@ -205,10 +205,10 @@ exports[`<Contact /> renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL brfJeR cap-form-control"
+                    className="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL erDWnu cap-form-label"
+                      className="sc-bcXGCL jfvNeV cap-form-label"
                       htmlFor=":r2:"
                       style={
                         {
@@ -218,7 +218,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       }
                     >
                       <span
-                        className="sc-bcXGCL dRxVYq cap-text"
+                        className="sc-bcXGCL dQChsN cap-text"
                         style={
                           {
                             "marginLeft": 0,
@@ -231,7 +231,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       disabled={false}
                       id=":r2:"
                       minLength={2}
@@ -247,10 +247,10 @@ exports[`<Contact /> renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL dAxZoG cap-form-control"
+                    className="sc-bcXGCL hQCGLB cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL erDWnu cap-form-label"
+                      className="sc-bcXGCL jfvNeV cap-form-label"
                       htmlFor=":r3:"
                       style={
                         {
@@ -260,7 +260,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       }
                     >
                       <span
-                        className="sc-bcXGCL dRxVYq cap-text"
+                        className="sc-bcXGCL dQChsN cap-text"
                         style={
                           {
                             "marginLeft": 0,
@@ -272,11 +272,11 @@ exports[`<Contact /> renders correctly 1`] = `
                       </span>
                     </label>
                     <div
-                      className="sc-bcXGCL dByCbc"
+                      className="sc-bcXGCL hOytyr"
                     >
                       <textarea
                         aria-required={true}
-                        className="sc-bcXGCL sc-dwnPIk lnUMOb eCNeCU cap-textarea"
+                        className="sc-bcXGCL sc-dwnPIk hTPOzI eCNeCU cap-textarea"
                         disabled={false}
                         id=":r3:"
                         minLength={2}
@@ -293,7 +293,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </div>
                   </div>
                   <button
-                    className="sc-bcXGCL sc-gGvGpy fYBGhH jrAhSN cap-button"
+                    className="sc-bcXGCL sc-gGvGpy cxSbzw jrAhSN cap-button"
                     type="submit"
                   >
                     global.send
@@ -303,23 +303,23 @@ exports[`<Contact /> renders correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-bcXGCL eQUJjL"
+            className="sc-bcXGCL gkMwg"
           >
             <div
-              className="sc-bcXGCL cvULpZ cap-accordion__item"
+              className="sc-bcXGCL jJplVC cap-accordion__item"
               id="contactForm2"
             >
               <button
                 aria-controls="accordion-panel-contactForm2"
                 aria-expanded={false}
-                className="sc-bcXGCL lkvxTQ cap-accordion__button"
+                className="sc-bcXGCL isrhRD cap-accordion__button"
                 id="accordion-button-contactForm2"
                 onClick={[Function]}
                 type="button"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua fNywAu hQQZty cap-icon"
+                  className="sc-bcXGCL sc-oZHua iNqQTh hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 8 12"
@@ -332,7 +332,7 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  className="sc-bcXGCL gboujX cap-text"
+                  className="sc-bcXGCL dfvBVw cap-text"
                 >
                   For another request
                 </p>

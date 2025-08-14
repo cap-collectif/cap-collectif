@@ -3,22 +3,22 @@
 exports[`<PageRender /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL xXAWG"
+    className="sc-bcXGCL jkrNvd"
   >
     <div
-      className="sc-bcXGCL jPDNqg"
+      className="sc-bcXGCL gjIVnT"
     >
       <div
-        className="sc-bcXGCL ctOvVF"
+        className="sc-bcXGCL dhRFMK"
       >
         <div
-          className="sc-bcXGCL icDYev"
+          className="sc-bcXGCL lOxoQ"
         >
           <h1
-            className="sc-bcXGCL iHMoWe cap-heading"
+            className="sc-bcXGCL eZylMR cap-heading"
           >
             My custom page
           </h1>
@@ -27,7 +27,7 @@ exports[`<PageRender /> renders correctly 1`] = `
     </div>
   </div>,
   <div
-    className="sc-bcXGCL gAzpqj"
+    className="sc-bcXGCL hrlBeU"
   >
     <div
       className="old-editor ql-editor wysiwyg-render"

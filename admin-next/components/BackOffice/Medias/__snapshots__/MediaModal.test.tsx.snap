@@ -3,7 +3,7 @@
 exports[`<MediaModal /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.image_uploader.image.preview"
@@ -19,7 +19,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL gqJtmr sc-GKYOR htNobg cap-modal"
+        className="sc-bcXGCL dtnFPI sc-fcCDYY cOPviG cap-modal"
         style={
           {
             "opacity": 0,
@@ -37,13 +37,13 @@ exports[`<MediaModal /> should render correctly 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL jMEcWl cap-modal__header"
+          className="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
-            className="sc-bcXGCL ejBfRc"
+            className="sc-bcXGCL jevVsb"
           >
             <h2
-              className="sc-bcXGCL dIdmc cap-heading"
+              className="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
               style={
                 {
@@ -57,13 +57,13 @@ exports[`<MediaModal /> should render correctly 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL dCLTmf"
+            className="sc-bcXGCL cNICVM"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -82,23 +82,23 @@ exports[`<MediaModal /> should render correctly 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL eXhIav cap-modal__body"
+          className="sc-bcXGCL ksxgKs cap-modal__body"
         >
           <img
-            className="sc-bcXGCL fBSpCP"
+            className="sc-bcXGCL gzUCuU"
             loading="lazy"
             src="/media/33232332.png"
           />
         </div>
         <footer
-          className="sc-bcXGCL jodKrZ cap-modal__footer"
+          className="sc-bcXGCL gGgQoy cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL hgyvOe"
+            className="sc-bcXGCL fdboPV"
           >
             <div
               aria-label="Tag 200x200px"
-              className="sc-bcXGCL jDGtwv cap-tag"
+              className="sc-bcXGCL bcUGUs cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               style={
@@ -113,7 +113,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             </div>
             <div
               aria-label="Tag 977ko"
-              className="sc-bcXGCL jDGtwv cap-tag"
+              className="sc-bcXGCL bcUGUs cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               title="977ko"
@@ -122,7 +122,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             </div>
             <div
               aria-label="Tag png"
-              className="sc-bcXGCL jDGtwv cap-tag"
+              className="sc-bcXGCL bcUGUs cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               title="png"
@@ -131,10 +131,10 @@ exports[`<MediaModal /> should render correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-bcXGCL rTUdv"
+            className="sc-bcXGCL iOrCWg"
           >
             <button
-              className="sc-bcXGCL sc-gGvGpy fzdPDJ hRxmzr cap-button"
+              className="sc-bcXGCL sc-gGvGpy kAXCTC hRxmzr cap-button"
               onClick={[Function]}
               style={
                 {
@@ -147,14 +147,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
               global.delete
             </button>
             <button
-              className="sc-bcXGCL sc-gGvGpy fzdPDJ dmtkzs cap-button"
+              className="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
               onClick={[Function]}
               type="button"
             >
               copy-link
             </button>
             <button
-              className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
+              className="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
               onClick={[Function]}
               type="button"
             >

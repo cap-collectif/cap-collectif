@@ -3,7 +3,7 @@
 exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     className="mr-10 proposal__button__vote btn btn-success   btn btn-default"
@@ -23,7 +23,7 @@ Array [
 exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     className="mr-10 proposal__button__vote btn btn-success   btn btn-default active"
@@ -43,7 +43,7 @@ Array [
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
@@ -63,7 +63,7 @@ Array [
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering with ranking 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"

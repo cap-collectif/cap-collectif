@@ -10,7 +10,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
     data-testid="Header"
   >
     <h2
-      class="sc-bcXGCL lgHMLK cap-heading"
+      class="sc-bcXGCL kpgQx cap-heading"
       id="modal-title"
     >
       moderate-argument
@@ -23,7 +23,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
       id="moderate-form"
     >
       <div
-        class="sc-csDjRa form-group"
+        class="sc-gsGkXq form-group"
       >
         <div
           class="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"
@@ -46,7 +46,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                 class="label-toggler"
               >
                 <div
-                  class="sc-bcXGCL gmYHfI"
+                  class="sc-bcXGCL hwbdvT"
                 >
                   toggle.hide.content
                   <div

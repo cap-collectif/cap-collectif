@@ -3,30 +3,30 @@
 exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-csDjRa Flex___StyledAppBox-SiGEY gTAar crLbTm"
+    className="sc-gsGkXq Flex___StyledAppBox-SiGEY fEhiDP crLbTm"
   >
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY ccelaW gqpUzc"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY OxIuS gqpUzc"
     >
       <p
-        className="sc-csDjRa gmJIiF"
+        className="sc-gsGkXq lmKqqJ"
       >
         emailing-service
       </p>
       <p
-        className="sc-csDjRa dlBXTq"
+        className="sc-gsGkXq eOPPZm"
       >
         emailing-service-explanation
       </p>
     </div>
     <div
-      className="sc-csDjRa Flex___StyledAppBox-SiGEY lkGZVC crLbTm"
+      className="sc-gsGkXq Flex___StyledAppBox-SiGEY efiLly crLbTm"
     >
       <div
-        className="sc-csDjRa Flex___StyledAppBox-SiGEY bCBkIq"
+        className="sc-gsGkXq Flex___StyledAppBox-SiGEY dGMilO"
       >
         <div
           checked={false}
@@ -54,7 +54,7 @@ Array [
               width={19}
             />
             <IconMock
-              className="sc-csDjRa pBnbk"
+              className="sc-gsGkXq keuWoA"
             />
           </label>
           <input
@@ -69,7 +69,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-csDjRa Flex___StyledAppBox-SiGEY dyoTkh"
+        className="sc-gsGkXq Flex___StyledAppBox-SiGEY fmIZoB"
       >
         <div
           checked={true}
@@ -97,7 +97,7 @@ Array [
               width={19}
             />
             <IconMock
-              className="sc-csDjRa pBnbk"
+              className="sc-gsGkXq keuWoA"
             />
           </label>
           <input
@@ -111,14 +111,14 @@ Array [
           />
         </div>
         <div
-          className="sc-csDjRa Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl hBNCTZ vtPwp fsbxdV"
+          className="sc-gsGkXq Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl kiYMfh vtPwp fsbxdV"
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           title="global.active"
         >
           <p
-            className="sc-csDjRa fPkMMT Tag___StyledText-hFlneM dQIvA-d"
+            className="sc-gsGkXq hzzuJD Tag___StyledText-hFlneM dQIvA-d"
           >
             global.active
           </p>

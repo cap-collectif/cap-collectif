@@ -3,13 +3,13 @@
 exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <ul
-    className="sc-bcXGCL jCaivR projectHeader__blocks"
+    className="sc-bcXGCL gpJkVS projectHeader__blocks"
   >
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -54,16 +54,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             16
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Contribution-plural
           </p>
@@ -71,7 +71,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -101,16 +101,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id="votes-counter-pill"
           >
             47
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Vote-plural
           </p>
@@ -118,7 +118,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -143,16 +143,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             88
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Project.preview.counters.contributors
           </p>
@@ -166,13 +166,13 @@ Array [
 exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <ul
-    className="sc-bcXGCL jCaivR projectHeader__blocks"
+    className="sc-bcXGCL gpJkVS projectHeader__blocks"
   >
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -217,16 +217,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             16
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Contribution-plural
           </p>
@@ -234,7 +234,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -264,16 +264,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id="votes-counter-pill"
           >
             47
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Vote-plural
           </p>
@@ -281,7 +281,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -306,16 +306,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             88
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Project.preview.counters.contributors
           </p>
@@ -329,13 +329,13 @@ Array [
 exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <ul
-    className="sc-bcXGCL jCaivR projectHeader__blocks"
+    className="sc-bcXGCL gpJkVS projectHeader__blocks"
   >
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -380,16 +380,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             16
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Contribution-plural
           </p>
@@ -397,7 +397,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -427,16 +427,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id="votes-counter-pill"
           >
             47
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Vote-plural
           </p>
@@ -444,7 +444,7 @@ Array [
       </div>
     </li>
     <li
-      className="sc-bcXGCL eRnyGX"
+      className="sc-bcXGCL gIgUbY"
     >
       <div
         data-testid="Tooltip"
@@ -469,16 +469,16 @@ Array [
         zIndex={10}
       >
         <button
-          className="sc-bcXGCL hSmIVc projectHeader__block"
+          className="sc-bcXGCL JaTsH projectHeader__block"
         >
           <p
-            className="sc-bcXGCL gVyFws cap-text projectHeader__block__content platform__body"
+            className="sc-bcXGCL fgSaLP cap-text projectHeader__block__content platform__body"
             id=""
           >
             88
           </p>
           <p
-            className="sc-bcXGCL oTwQu cap-text projectHeader__block__title platform__body"
+            className="sc-bcXGCL erNyvN cap-text projectHeader__block__title platform__body"
           >
             Project.preview.counters.contributors
           </p>

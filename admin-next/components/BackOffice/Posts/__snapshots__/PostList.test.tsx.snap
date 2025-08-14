@@ -3,13 +3,13 @@
 exports[`<PostList /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL egjkRc"
+    className="sc-bcXGCL bVspmP"
   >
     <table
-      className="sc-bcXGCL dCIzNH"
+      className="sc-bcXGCL gjuUAI"
       onReset={[Function]}
       style={
         {
@@ -18,82 +18,86 @@ exports[`<PostList /> should render correctly 1`] = `
       }
     >
       <thead
-        className="sc-bcXGCL iKYZOv"
+        className="sc-bcXGCL caJRro"
       >
         <tr
-          className="sc-bcXGCL jgOjXT cap-table__tr"
+          className="sc-bcXGCL eUkqFA cap-table__tr"
         >
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL wTiDQ cap-text"
+              className="sc-bcXGCL btOiqz cap-text"
             >
               global.title
             </p>
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL wTiDQ cap-text"
+              className="sc-bcXGCL btOiqz cap-text"
             >
               global.authors
             </p>
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             global.owner
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL wTiDQ cap-text"
+              className="sc-bcXGCL btOiqz cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL wTiDQ cap-text"
+              className="sc-bcXGCL btOiqz cap-text"
             >
               global.participative.project
             </p>
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL wTiDQ cap-text"
+              className="sc-bcXGCL btOiqz cap-text"
             >
               global.publication
             </p>
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           >
             <button
-              aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL sc-gGvGpy bIdQns haoZBz cap-button cap-menu__disclosure"
+              className="sc-bcXGCL sc-gGvGpy jRvDnT haoZBz cap-button cap-menu__disclosure"
+              id=":r0:"
+              onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
+              onFocusCapture={[Function]}
               onKeyDown={[Function]}
+              onKeyDownCapture={[Function]}
               onKeyPressCapture={[Function]}
               onKeyUp={[Function]}
+              onLoadedMetadataCapture={[Function]}
               onMouseDown={[Function]}
               onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
+              onMouseMove={[Function]}
               type="button"
             >
               <p
-                className="sc-bcXGCL wTiDQ cap-text"
+                className="sc-bcXGCL btOiqz cap-text"
                 style={
                   {
                     "whiteSpace": "nowrap",
@@ -104,7 +108,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-button-icon"
+                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-button-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -120,154 +124,31 @@ exports[`<PostList /> should render correctly 1`] = `
                 />
               </svg>
             </button>
-            <div
-              aria-orientation="vertical"
-              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
-              data-dialog={true}
+            <span
               hidden={true}
-              id="id-g"
-              onAnimationEnd={[Function]}
-              onBlur={[Function]}
-              onBlurCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyUpCapture={[Function]}
-              onTransitionEnd={[Function]}
-              role="menu"
+              id=":r1:"
               style={
                 {
-                  "display": "none",
-                  "left": "100%",
-                  "opacity": 0,
                   "position": "fixed",
-                  "top": "100%",
                 }
               }
-              tabIndex={-1}
-            >
-              <div
-                className="sc-bcXGCL iLFCCQ cap-menu__optionGroup"
-                role="group"
-              >
-                <p
-                  className="sc-bcXGCL gUzEFk cap-text cap-menu__optionGroup--title"
-                >
-                  sort-by
-                </p>
-                <button
-                  className="sc-bcXGCL TXmLf cap-menu__item cap-menu__optionItem"
-                  id="id-g"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                  type="button"
-                >
-                  <input
-                    checked={true}
-                    className="sc-bcXGCL bVZPFk"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bcXGCL cvCRpc cap-text"
-                  >
-                    global.filter_last
-                  </p>
-                  <svg
-                    aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
-                    fill="none"
-                    height="1em"
-                    viewBox="0 0 12 7"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 6 6.163 1.066a.2.2 0 0 0-.074-.049.24.24 0 0 0-.252.05L1 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="sc-bcXGCL TXmLf cap-menu__item cap-menu__optionItem"
-                  id="id-g"
-                  onBlurCapture={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseMove={[Function]}
-                  role="menuitem"
-                  tabIndex={0}
-                  type="button"
-                >
-                  <input
-                    checked={false}
-                    className="sc-bcXGCL bVZPFk"
-                    type="radio"
-                  />
-                  <p
-                    className="sc-bcXGCL cvCRpc cap-text"
-                  >
-                    global.filter_old
-                  </p>
-                  <svg
-                    aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
-                    fill="none"
-                    height="1em"
-                    viewBox="0 0 12 7"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 6 6.163 1.066a.2.2 0 0 0-.074-.049.24.24 0 0 0-.252.05L1 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+            />
           </th>
           <th
-            className="sc-bcXGCL diEcAl cap-table__th"
+            className="sc-bcXGCL iEaAye cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL bTSluX cap-table__tbody"
+        className="sc-bcXGCL cqfhNk cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL iBjnpJ cap-table__tr"
+          className="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="post-item"
           id="UG9zdDpwb3N0MTI="
         >
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -275,14 +156,14 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL cwEAzx cap-link"
+              className="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"adminUrl">"
             >
               Post FR 12
             </a>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -290,14 +171,14 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL cwEAzx cap-link"
+              className="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -307,7 +188,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -317,7 +198,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -325,13 +206,13 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL eQUJjL"
+              className="sc-bcXGCL gkMwg"
             >
               <div
-                className="sc-bcXGCL hxRyWs"
+                className="sc-bcXGCL bwuDFj"
               >
                 <a
-                  className="sc-bcXGCL fOKoDi cap-link"
+                  className="sc-bcXGCL kfWSPh cap-link"
                   href="<mock-value-for-field-"url">"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -340,7 +221,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -350,7 +231,7 @@ exports[`<PostList /> should render correctly 1`] = `
             global.no.published
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -360,7 +241,7 @@ exports[`<PostList /> should render correctly 1`] = `
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL hWmQkC cap-table__td visible-on-hover"
+            className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -368,12 +249,12 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL hxFFPc"
+              className="sc-bcXGCL hcHFdL"
             >
               <button
-                aria-describedby=":r0:"
+                aria-describedby=":r4:"
                 aria-label="global.preview"
-                className="sc-bcXGCL hluKno cap-buttonQuickAction"
+                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -387,7 +268,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -409,7 +290,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </button>
               <span
                 hidden={true}
-                id=":r0:"
+                id=":r4:"
                 style={
                   {
                     "position": "fixed",
@@ -418,11 +299,11 @@ exports[`<PostList /> should render correctly 1`] = `
               />
               <button
                 aria-controls="id-g"
-                aria-describedby=":r3:"
+                aria-describedby=":r7:"
                 aria-expanded={false}
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
+                className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -439,7 +320,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -454,7 +335,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </button>
               <span
                 hidden={true}
-                id=":r3:"
+                id=":r7:"
                 style={
                   {
                     "position": "fixed",
@@ -483,12 +364,12 @@ exports[`<PostList /> should render correctly 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL iBjnpJ cap-table__tr"
+          className="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="post-item"
           id="UG9zdDpwb3N0MTM="
         >
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -496,14 +377,14 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL cwEAzx cap-link"
+              className="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"adminUrl">"
             >
               Post FR 13
             </a>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -511,14 +392,14 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL cwEAzx cap-link"
+              className="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -528,7 +409,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -538,7 +419,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -546,13 +427,13 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL eQUJjL"
+              className="sc-bcXGCL gkMwg"
             >
               <div
-                className="sc-bcXGCL hxRyWs"
+                className="sc-bcXGCL bwuDFj"
               >
                 <a
-                  className="sc-bcXGCL fOKoDi cap-link"
+                  className="sc-bcXGCL kfWSPh cap-link"
                   href="<mock-value-for-field-"url">"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -561,7 +442,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -571,7 +452,7 @@ exports[`<PostList /> should render correctly 1`] = `
             global.no.published
           </td>
           <td
-            className="sc-bcXGCL lpgNFi cap-table__td"
+            className="sc-bcXGCL TOCat cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -581,7 +462,7 @@ exports[`<PostList /> should render correctly 1`] = `
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL hWmQkC cap-table__td visible-on-hover"
+            className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -589,12 +470,12 @@ exports[`<PostList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL hxFFPc"
+              className="sc-bcXGCL hcHFdL"
             >
               <button
-                aria-describedby=":r6:"
+                aria-describedby=":ra:"
                 aria-label="global.preview"
-                className="sc-bcXGCL hluKno cap-buttonQuickAction"
+                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -608,7 +489,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -630,7 +511,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </button>
               <span
                 hidden={true}
-                id=":r6:"
+                id=":ra:"
                 style={
                   {
                     "position": "fixed",
@@ -639,11 +520,11 @@ exports[`<PostList /> should render correctly 1`] = `
               />
               <button
                 aria-controls="id-g"
-                aria-describedby=":r9:"
+                aria-describedby=":rd:"
                 aria-expanded={false}
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
+                className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -660,7 +541,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -675,7 +556,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </button>
               <span
                 hidden={true}
-                id=":r9:"
+                id=":rd:"
                 style={
                   {
                     "position": "fixed",
@@ -706,10 +587,10 @@ exports[`<PostList /> should render correctly 1`] = `
       </tbody>
     </table>
     <div
-      className="sc-bcXGCL hlZNwS"
+      className="sc-bcXGCL dJEfDp"
     >
       <p
-        className="sc-bcXGCL cuALoI cap-text"
+        className="sc-bcXGCL dvEYUL cap-text"
         style={
           {
             "marginLeft": 0,
@@ -720,12 +601,12 @@ exports[`<PostList /> should render correctly 1`] = `
         no-result-found
       </p>
       <p
-        className="sc-bcXGCL egaKeB cap-text"
+        className="sc-bcXGCL fVnSJG cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-gGvGpy kkwMkp iCdXwD cap-button"
+        className="sc-bcXGCL sc-gGvGpy hSrtJu iCdXwD cap-button"
         onClick={[Function]}
         type="button"
       >

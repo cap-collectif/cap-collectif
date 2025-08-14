@@ -3,13 +3,13 @@
 exports[`<ModalAddEmailSender /> <TestModalAddEmailSender /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV egpGUm"
+    className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -45,13 +45,13 @@ Array [
 exports[`<ModalAddEmailSender /> <TestModalAddEmailSender /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV egpGUm"
+    className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -80,7 +80,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-csDjRa cLNFbx Modal__ModalContainerInner-gRvBLO"
+        className="sc-gsGkXq bqCVAp Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -89,7 +89,7 @@ Array [
         }
       >
         <div
-          className="sc-csDjRa eKeibo Modal__ModalInner-fNGFsd"
+          className="sc-gsGkXq gLkppc Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -98,37 +98,37 @@ Array [
           }
         >
           <header
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY bGPrlH"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY kCymiX"
           >
             <div
-              className="sc-csDjRa Flex___StyledAppBox-SiGEY dBMbGw ModalHeader___StyledFlex-hKIJSk YmlkP"
+              className="sc-gsGkXq Flex___StyledAppBox-SiGEY eyWWks ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <p
-                className="sc-csDjRa jMyGaH"
+                className="sc-gsGkXq Ednlr"
               >
                 notification-email
               </p>
               <h2
-                className="sc-csDjRa gOMzoX"
+                className="sc-gsGkXq gnRzDX"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-csDjRa Button__ButtonInner-dXfNcJ liVenR iWxcUO"
+              className="sc-gsGkXq Button__ButtonInner-dXfNcJ kSBJTF iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-csDjRa Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ yOzEu dpibyo AjyOr icon"
+                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ lipHVK dpibyo AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY eABYsx"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
           >
             <div
-              className="sc-csDjRa Flex___StyledAppBox-SiGEY iQMLBJ ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
+              className="sc-gsGkXq Flex___StyledAppBox-SiGEY flIdol ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
             >
               <div
                 className="form-group"
@@ -290,20 +290,20 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY kKzyHd"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY cUDVRF"
           >
             <div
-              className="sc-csDjRa Flex___StyledAppBox-SiGEY bwea-Dz crLbTm"
+              className="sc-gsGkXq Flex___StyledAppBox-SiGEY fUBAQz crLbTm"
             >
               <button
-                className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV jzOsGm"
+                className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-csDjRa Button__ButtonInner-dXfNcJ fLURBJ erDeRS"
+                className="sc-gsGkXq Button__ButtonInner-dXfNcJ lhYhSt erDeRS"
                 onClick={[Function]}
                 type="button"
               >

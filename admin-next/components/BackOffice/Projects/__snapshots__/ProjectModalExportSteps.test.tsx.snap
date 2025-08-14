@@ -3,101 +3,37 @@
 exports[`<ProjectModalExportSteps /> <TestProjectModalExportSteps /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
-    aria-controls="id-g"
     aria-expanded={false}
     aria-haspopup="menu"
     className="cap-menu__disclosure"
+    id=":r0:"
+    onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyPressCapture={[Function]}
-    onKeyUp={[Function]}
-    onMouseDown={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseEnter={[Function]}
-    type="button"
-  >
-    disclosure
-  </button>,
-  <div
-    aria-orientation="vertical"
-    className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
-    data-dialog={true}
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onBlurCapture={[Function]}
     onFocus={[Function]}
     onFocusCapture={[Function]}
     onKeyDown={[Function]}
     onKeyDownCapture={[Function]}
-    onKeyUpCapture={[Function]}
-    onTransitionEnd={[Function]}
-    role="menu"
+    onKeyPressCapture={[Function]}
+    onKeyUp={[Function]}
+    onLoadedMetadataCapture={[Function]}
+    onMouseDown={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseMove={[Function]}
+  >
+    disclosure
+  </button>,
+  <span
+    hidden={true}
+    id=":r1:"
     style={
       {
-        "display": "none",
-        "left": "100%",
-        "opacity": 0,
         "position": "fixed",
-        "top": "100%",
       }
     }
-    tabIndex={-1}
-  >
-    <button
-      aria-controls="id-g"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      className="sc-bcXGCL TXmLf cap-menu__item"
-      id="id-g"
-      onBlurCapture={[Function]}
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      role="menuitem"
-      tabIndex={0}
-      type="button"
-    >
-      <p
-        className="sc-bcXGCL cvCRpc cap-text"
-      >
-         
-        project.download.button
-         
-      </p>
-    </button>
-    <div
-      aria-label="delete-confirmation"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        {
-          "display": "none",
-        }
-      }
-      tabIndex={-1}
-    />
-  </div>,
+  />,
 ]
 `;

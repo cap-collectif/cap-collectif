@@ -3,7 +3,7 @@
 exports[`<LoginModal /> render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     aria-label="login.with"
@@ -18,7 +18,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     >
       <div
         autoFocus={true}
-        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
         style={
           {
             "opacity": 0,
@@ -38,14 +38,14 @@ exports[`<LoginModal /> render correctly 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL jMEcWl cap-modal__header"
+          className="sc-bcXGCL jJSzZW cap-modal__header"
           id="contained-modal-title-lg"
         >
           <div
-            className="sc-bcXGCL ejBfRc"
+            className="sc-bcXGCL jevVsb"
           >
             <h2
-              className="sc-bcXGCL dIdmc cap-heading"
+              className="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
               style={
                 {
@@ -59,13 +59,13 @@ exports[`<LoginModal /> render correctly 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL dCLTmf"
+            className="sc-bcXGCL cNICVM"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -84,11 +84,11 @@ exports[`<LoginModal /> render correctly 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL hsPaVR cap-modal__body"
+          className="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div>
             <div
-              className="sc-bcXGCL kfmAic"
+              className="sc-bcXGCL iAhoTX"
             >
               <div
                 className=" ql-editor wysiwyg-render"
@@ -100,10 +100,10 @@ exports[`<LoginModal /> render correctly 1`] = `
               />
             </div>
             <div
-              className="sc-bcXGCL hOBcKE cap-form-control"
+              className="sc-bcXGCL fVgOgb cap-form-control"
             >
               <label
-                className="sc-bcXGCL egOoIT cap-form-label"
+                className="sc-bcXGCL fTPHCc cap-form-label"
                 htmlFor=":r0:"
                 style={
                   {
@@ -113,7 +113,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 }
               >
                 <span
-                  className="sc-bcXGCL dRxVYq cap-text"
+                  className="sc-bcXGCL dQChsN cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -128,7 +128,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 aria-required={true}
                 autoComplete="email"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                 disabled={false}
                 id=":r0:"
                 name="username"
@@ -142,10 +142,10 @@ exports[`<LoginModal /> render correctly 1`] = `
               />
             </div>
             <div
-              className="sc-bcXGCL hOBcKE cap-form-control"
+              className="sc-bcXGCL fVgOgb cap-form-control"
             >
               <label
-                className="sc-bcXGCL egOoIT cap-form-label"
+                className="sc-bcXGCL fTPHCc cap-form-label"
                 htmlFor=":r1:"
                 style={
                   {
@@ -155,7 +155,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 }
               >
                 <span
-                  className="sc-bcXGCL dRxVYq cap-text"
+                  className="sc-bcXGCL dQChsN cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -169,7 +169,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               <input
                 aria-required={true}
                 autoComplete="off"
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                 disabled={false}
                 id=":r1:"
                 name="password"
@@ -182,13 +182,13 @@ exports[`<LoginModal /> render correctly 1`] = `
               />
             </div>
             <a
-              className="sc-bcXGCL cwEAzx cap-link"
+              className="sc-bcXGCL gudgoe cap-link"
               href="/resetting/request"
             >
               global.forgot_password
             </a>
             <div
-              className="sc-bcXGCL jITGqX"
+              className="sc-bcXGCL gvdeaM"
             >
               <div
                 className=" ql-editor wysiwyg-render"
@@ -202,10 +202,10 @@ exports[`<LoginModal /> render correctly 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL gthNCX cap-modal__footer"
+          className="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ iCdXwD cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
             style={
               {
                 "marginLeft": 0,
@@ -217,7 +217,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
             id="confirm-login"
             type="submit"
           >

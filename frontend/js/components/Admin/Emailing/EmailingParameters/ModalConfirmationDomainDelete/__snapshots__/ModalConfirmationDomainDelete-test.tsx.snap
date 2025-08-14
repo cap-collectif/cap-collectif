@@ -3,14 +3,14 @@
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"
     aria-describedby="id-2"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-csDjRa Button__ButtonInner-dXfNcJ febYsK iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-gsGkXq Button__ButtonInner-dXfNcJ hwdTNu iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -26,7 +26,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-csDjRa Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ bpTvck dpibyo AjyOr icon"
+      className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ eUrHPA dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -71,14 +71,14 @@ Array [
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"
     aria-describedby="id-2"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-csDjRa Button__ButtonInner-dXfNcJ febYsK iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-gsGkXq Button__ButtonInner-dXfNcJ hwdTNu iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -94,7 +94,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-csDjRa Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ bpTvck dpibyo AjyOr icon"
+      className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ eUrHPA dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -132,7 +132,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-csDjRa cLNFbx Modal__ModalContainerInner-gRvBLO"
+        className="sc-gsGkXq bqCVAp Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -141,7 +141,7 @@ Array [
         }
       >
         <div
-          className="sc-csDjRa eKeibo Modal__ModalInner-fNGFsd"
+          className="sc-gsGkXq gLkppc Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -150,51 +150,51 @@ Array [
           }
         >
           <header
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY bGPrlH"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY kCymiX"
           >
             <div
-              className="sc-csDjRa Flex___StyledAppBox-SiGEY dBMbGw ModalHeader___StyledFlex-hKIJSk YmlkP"
+              className="sc-gsGkXq Flex___StyledAppBox-SiGEY eyWWks ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <h2
-                className="sc-csDjRa gOMzoX"
+                className="sc-gsGkXq gnRzDX"
               >
                 delete-confirmation
               </h2>
             </div>
             <button
-              className="sc-csDjRa Button__ButtonInner-dXfNcJ liVenR iWxcUO"
+              className="sc-gsGkXq Button__ButtonInner-dXfNcJ kSBJTF iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-csDjRa Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ yOzEu dpibyo AjyOr icon"
+                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ lipHVK dpibyo AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY eABYsx"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
           >
             <p
-              className="sc-csDjRa hGwkiT"
+              className="sc-gsGkXq cwfoqX"
             >
               are-you-sure-to-delete-something
             </p>
           </main>
           <footer
-            className="sc-csDjRa Flex___StyledAppBox-SiGEY kKzyHd frpAOM"
+            className="sc-gsGkXq Flex___StyledAppBox-SiGEY cUDVRF frpAOM"
           >
             <div
-              className="sc-csDjRa Flex___StyledAppBox-SiGEY bwea-Dz crLbTm"
+              className="sc-gsGkXq Flex___StyledAppBox-SiGEY fUBAQz crLbTm"
             >
               <button
-                className="sc-csDjRa Button__ButtonInner-dXfNcJ kmfWzB lilFYw"
+                className="sc-gsGkXq Button__ButtonInner-dXfNcJ hdipVx lilFYw"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-csDjRa Button__ButtonInner-dXfNcJ kmfWzB fjccAb"
+                className="sc-gsGkXq Button__ButtonInner-dXfNcJ hdipVx fjccAb"
                 onClick={[Function]}
                 type="button"
               >

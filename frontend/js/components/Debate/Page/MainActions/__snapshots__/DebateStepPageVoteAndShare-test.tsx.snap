@@ -3,21 +3,21 @@
 exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL seAfs"
+    class="sc-bcXGCL lkhtOX"
   >
     <div
-      class="sc-bcXGCL hCqQZQ"
+      class="sc-bcXGCL hWYUYP"
     >
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         summary-debate-participation
       </h3>
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         thanks-participation-debate-ended
       </h3>
@@ -29,21 +29,21 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL seAfs"
+    class="sc-bcXGCL lkhtOX"
   >
     <div
-      class="sc-bcXGCL hCqQZQ"
+      class="sc-bcXGCL hWYUYP"
     >
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         summary-debate-participation
       </h3>
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         thanks-participation-debate-ended
       </h3>
@@ -55,21 +55,21 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous participation allowed 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL seAfs"
+    class="sc-bcXGCL lkhtOX"
   >
     <div
-      class="sc-bcXGCL hCqQZQ"
+      class="sc-bcXGCL hWYUYP"
     >
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         summary-debate-participation
       </h3>
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         thanks-participation-debate-ended
       </h3>
@@ -81,21 +81,21 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirmed 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bcXGCL seAfs"
+    class="sc-bcXGCL lkhtOX"
   >
     <div
-      class="sc-bcXGCL hCqQZQ"
+      class="sc-bcXGCL hWYUYP"
     >
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         summary-debate-participation
       </h3>
       <h3
-        class="sc-bcXGCL gRSOAr cap-heading"
+        class="sc-bcXGCL dboyIM cap-heading"
       >
         thanks-participation-debate-ended
       </h3>

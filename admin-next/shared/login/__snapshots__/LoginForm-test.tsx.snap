@@ -3,13 +3,13 @@
 exports[`<LoginForm /> renders a form with inputs 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL hOBcKE cap-form-control"
+    className="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL egOoIT cap-form-label"
+      className="sc-bcXGCL fTPHCc cap-form-label"
       htmlFor=":r0:"
       style={
         {
@@ -19,7 +19,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       }
     >
       <span
-        className="sc-bcXGCL dRxVYq cap-text"
+        className="sc-bcXGCL dQChsN cap-text"
         style={
           {
             "marginLeft": 0,
@@ -34,7 +34,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       disabled={false}
       id=":r0:"
       name="username"
@@ -48,10 +48,10 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     />
   </div>,
   <div
-    className="sc-bcXGCL hOBcKE cap-form-control"
+    className="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL egOoIT cap-form-label"
+      className="sc-bcXGCL fTPHCc cap-form-label"
       htmlFor=":r1:"
       style={
         {
@@ -61,7 +61,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       }
     >
       <span
-        className="sc-bcXGCL dRxVYq cap-text"
+        className="sc-bcXGCL dQChsN cap-text"
         style={
           {
             "marginLeft": 0,
@@ -75,7 +75,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     <input
       aria-required={true}
       autoComplete="off"
-      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       disabled={false}
       id=":r1:"
       name="password"
@@ -88,7 +88,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     />
   </div>,
   <a
-    className="sc-bcXGCL cwEAzx cap-link"
+    className="sc-bcXGCL gudgoe cap-link"
     href="/resetting/request"
   >
     global.forgot_password

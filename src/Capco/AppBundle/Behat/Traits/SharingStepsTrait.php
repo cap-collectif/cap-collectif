@@ -13,8 +13,8 @@ trait SharingStepsTrait
     {
         $this->assertElementOnPage('.share-dropdown-button');
         $this->assertElementOnPage('.share-button-dropdown');
-        $this->assertElementContainsText('.share-button-dropdown', 'share.facebook');
-        $this->assertElementContainsText('.share-button-dropdown', 'share.link');
+        $this->assertElementContainsText('.cap-menu__list.share-button-dropdown', 'share.facebook');
+        $this->assertElementContainsText('.cap-menu__list.share-button-dropdown', 'share.link');
     }
 
     /**

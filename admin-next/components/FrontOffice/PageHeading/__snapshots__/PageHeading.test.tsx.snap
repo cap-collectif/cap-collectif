@@ -3,27 +3,27 @@
 exports[`<PageHeading /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL xXAWG"
+    className="sc-bcXGCL jkrNvd"
   >
     <div
-      className="sc-bcXGCL jPDNqg"
+      className="sc-bcXGCL gjIVnT"
     >
       <div
-        className="sc-bcXGCL ctOvVF"
+        className="sc-bcXGCL dhRFMK"
       >
         <div
-          className="sc-bcXGCL icDYev"
+          className="sc-bcXGCL lOxoQ"
         >
           <h1
-            className="sc-bcXGCL iHMoWe cap-heading"
+            className="sc-bcXGCL eZylMR cap-heading"
           >
             Liste des projets
           </h1>
           <div
-            className="sc-bcXGCL egKDCQ cap-text"
+            className="sc-bcXGCL koJZlX cap-text"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -37,13 +37,13 @@ exports[`<PageHeading /> renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL WOzuj"
+        className="sc-bcXGCL ehiyYw"
       >
         <div
-          className="sc-bcXGCL itrdpj"
+          className="sc-bcXGCL kPYlWc"
         >
           <div
-            className="sc-bcXGCL egCEHr cap-text"
+            className="sc-bcXGCL fGfXPU cap-text"
           >
             <div
               className=" ql-editor wysiwyg-render"

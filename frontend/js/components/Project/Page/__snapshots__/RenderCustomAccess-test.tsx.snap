@@ -3,7 +3,7 @@
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     data-testid="Tooltip"
@@ -12,7 +12,7 @@ Array [
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL kuHDpJ cap-tag"
+      className="sc-bcXGCL laiYJS cap-tag"
       id="restricted-access"
       onBlur={[Function]}
       onClick={[Function]}
@@ -21,7 +21,7 @@ Array [
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
+        className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
         fill="none"
         height="1em"
         viewBox="0 0 10 12"
@@ -51,7 +51,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL dIdmc cap-heading"
+          className="sc-bcXGCL YIciv cap-heading"
         >
           people-with-access-to-project
         </h2>
@@ -90,7 +90,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-gGvGpy kkwMkp cITHqt cap-button btn-md p-0"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu cITHqt cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -113,7 +113,7 @@ Array [
                 data-testid="Header"
               >
                 <h2
-                  className="sc-bcXGCL dIdmc cap-heading"
+                  className="sc-bcXGCL YIciv cap-heading"
                   id="contained-modal-title-lg"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -136,11 +136,11 @@ Array [
                     hasBadge={false}
                   >
                     <div
-                      className="sc-bcXGCL KmVep sc-fbYNKQ fEcFBX cap-avatar"
+                      className="sc-bcXGCL dhlCFS sc-fbYNKQ fEcFBX cap-avatar"
                     >
                       <img
                         alt="<mock-value-for-field-\\"username\\">"
-                        className="sc-bcXGCL gCRbeu"
+                        className="sc-bcXGCL fUNjxh"
                         src="<mock-value-for-field-\\"avatarUrl\\">"
                       />
                     </div>
@@ -159,7 +159,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-gGvGpy fnqecp jrAhSN cap-button"
+                className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -174,7 +174,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-gGvGpy fnqecp jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
         onClick={[Function]}
         type="button"
       >

@@ -3,13 +3,13 @@
 exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL fbodrd DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -18,11 +18,11 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL jQLipA"
+        className="sc-bcXGCL qvGNf"
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua bhFHKT fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua dOhbaQ fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -39,15 +39,15 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL eQUJjL"
+          className="sc-bcXGCL gkMwg"
         >
           <p
-            className="sc-bcXGCL iWmxEo cap-text"
+            className="sc-bcXGCL biRotf cap-text"
           >
             shortcut.opinion {"num":42}
           </p>
           <p
-            className="sc-bcXGCL ftsEYj cap-text"
+            className="sc-bcXGCL gybKdQ cap-text"
           >
             vote-count-for-and-against {"for":42,"against":42}
           </p>
@@ -70,42 +70,42 @@ Array [
         />
       </div>
       <div
-        className="sc-bcXGCL ibovxp"
+        className="sc-bcXGCL EuORG"
         onClose={[MockFunction]}
       >
         <div
-          className="sc-bcXGCL kbGQwo"
+          className="sc-bcXGCL ZAjbT"
         >
           <div>
             <div
-              className="sc-bcXGCL dMEnEj"
+              className="sc-bcXGCL gMSbdA"
             >
               <div
-                className="sc-bcXGCL ipHZSk cap-abstract-card"
+                className="sc-bcXGCL bWzdDj cap-abstract-card"
               >
                 <div
-                  className="sc-bcXGCL gCpfXF"
+                  className="sc-bcXGCL bHwpUS"
                 >
                   <div
-                    className="sc-bcXGCL ESNcu"
+                    className="sc-bcXGCL hYPTGl"
                   >
                     <div
-                      className="sc-bcXGCL jSUnfU"
+                      className="sc-bcXGCL hrEHcD"
                     >
                       <p
-                        className="sc-bcXGCL kdgYTm cap-text"
+                        className="sc-bcXGCL dfJnxl cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
                         aria-label="Tag "
-                        className="sc-bcXGCL cVUbaE cap-tag"
+                        className="sc-bcXGCL koHUwb cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL cTcRPm cap-text"
+                          className="sc-bcXGCL KgSYF cap-text"
                         >
                           global.against
                         </span>
@@ -116,13 +116,13 @@ Array [
                       >
                         <div
                           aria-label="Tag "
-                          className="sc-bcXGCL bOZdHG cap-tag"
+                          className="sc-bcXGCL eamhkB cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL cTcRPm cap-text"
+                            className="sc-bcXGCL KgSYF cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -130,35 +130,35 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL dcPIb"
+                      className="sc-bcXGCL jHUMbA"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL cvCRpc cap-text"
+                    className="sc-bcXGCL kxBQAH cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL kzlDRK"
+                    className="sc-bcXGCL BsmUp"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL gjsubU"
+                        className="sc-bcXGCL keKWCf"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
                             aria-hidden="true"
-                            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
+                            className="sc-bcXGCL sc-oZHua dkLUBa fzfEdP cap-icon"
                             fill="none"
                             height="1em"
                             viewBox="0 0 10 12"
@@ -174,7 +174,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL lgjQie cap-text"
+                      className="sc-bcXGCL flqqfV cap-text"
                     >
                       42
                     </span>
@@ -192,34 +192,34 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL dMEnEj"
+              className="sc-bcXGCL gMSbdA"
             >
               <div
-                className="sc-bcXGCL ipHZSk cap-abstract-card"
+                className="sc-bcXGCL bWzdDj cap-abstract-card"
               >
                 <div
-                  className="sc-bcXGCL gCpfXF"
+                  className="sc-bcXGCL bHwpUS"
                 >
                   <div
-                    className="sc-bcXGCL ESNcu"
+                    className="sc-bcXGCL hYPTGl"
                   >
                     <div
-                      className="sc-bcXGCL jSUnfU"
+                      className="sc-bcXGCL hrEHcD"
                     >
                       <p
-                        className="sc-bcXGCL kdgYTm cap-text"
+                        className="sc-bcXGCL dfJnxl cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
                         aria-label="Tag "
-                        className="sc-bcXGCL cVUbaE cap-tag"
+                        className="sc-bcXGCL koHUwb cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL cTcRPm cap-text"
+                          className="sc-bcXGCL KgSYF cap-text"
                         >
                           global.against
                         </span>
@@ -230,13 +230,13 @@ Array [
                       >
                         <div
                           aria-label="Tag "
-                          className="sc-bcXGCL bOZdHG cap-tag"
+                          className="sc-bcXGCL eamhkB cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL cTcRPm cap-text"
+                            className="sc-bcXGCL KgSYF cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -244,35 +244,35 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL dcPIb"
+                      className="sc-bcXGCL jHUMbA"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL cvCRpc cap-text"
+                    className="sc-bcXGCL kxBQAH cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL kzlDRK"
+                    className="sc-bcXGCL BsmUp"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL gjsubU"
+                        className="sc-bcXGCL keKWCf"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
                             aria-hidden="true"
-                            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
+                            className="sc-bcXGCL sc-oZHua dkLUBa fzfEdP cap-icon"
                             fill="none"
                             height="1em"
                             viewBox="0 0 10 12"
@@ -288,7 +288,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL lgjQie cap-text"
+                      className="sc-bcXGCL flqqfV cap-text"
                     >
                       42
                     </span>
@@ -306,34 +306,34 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL dMEnEj"
+              className="sc-bcXGCL gMSbdA"
             >
               <div
-                className="sc-bcXGCL ipHZSk cap-abstract-card"
+                className="sc-bcXGCL bWzdDj cap-abstract-card"
               >
                 <div
-                  className="sc-bcXGCL gCpfXF"
+                  className="sc-bcXGCL bHwpUS"
                 >
                   <div
-                    className="sc-bcXGCL ESNcu"
+                    className="sc-bcXGCL hYPTGl"
                   >
                     <div
-                      className="sc-bcXGCL jSUnfU"
+                      className="sc-bcXGCL hrEHcD"
                     >
                       <p
-                        className="sc-bcXGCL kdgYTm cap-text"
+                        className="sc-bcXGCL dfJnxl cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
                         aria-label="Tag "
-                        className="sc-bcXGCL cVUbaE cap-tag"
+                        className="sc-bcXGCL koHUwb cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL cTcRPm cap-text"
+                          className="sc-bcXGCL KgSYF cap-text"
                         >
                           global.against
                         </span>
@@ -344,13 +344,13 @@ Array [
                       >
                         <div
                           aria-label="Tag "
-                          className="sc-bcXGCL bOZdHG cap-tag"
+                          className="sc-bcXGCL eamhkB cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL cTcRPm cap-text"
+                            className="sc-bcXGCL KgSYF cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -358,35 +358,35 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL dcPIb"
+                      className="sc-bcXGCL jHUMbA"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL cvCRpc cap-text"
+                    className="sc-bcXGCL kxBQAH cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL kzlDRK"
+                    className="sc-bcXGCL BsmUp"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL gjsubU"
+                        className="sc-bcXGCL keKWCf"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
                             aria-hidden="true"
-                            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
+                            className="sc-bcXGCL sc-oZHua dkLUBa fzfEdP cap-icon"
                             fill="none"
                             height="1em"
                             viewBox="0 0 10 12"
@@ -402,7 +402,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL lgjQie cap-text"
+                      className="sc-bcXGCL flqqfV cap-text"
                     >
                       42
                     </span>

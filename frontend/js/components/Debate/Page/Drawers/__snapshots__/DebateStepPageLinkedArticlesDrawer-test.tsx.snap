@@ -3,13 +3,13 @@
 exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL fbodrd DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -18,11 +18,11 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL lfoVAo"
+        className="sc-bcXGCL gZXbtL"
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua bhFHKT fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua dOhbaQ fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -39,17 +39,17 @@ Array [
           />
         </svg>
         <h3
-          className="sc-bcXGCL jGwkpw cap-heading"
+          className="sc-bcXGCL jZrWcn cap-heading"
         >
           related.articles
         </h3>
       </div>
       <div
-        className="sc-bcXGCL ibovxp"
+        className="sc-bcXGCL EuORG"
         onClose={[MockFunction]}
       >
         <div
-          className="sc-bcXGCL cVJPWE"
+          className="sc-bcXGCL cjjKRD"
         >
           <a
             href="https://www.generationlibre.eu/medias/non-au-passeport-vaccinal-gaspard-koenig/"
@@ -63,29 +63,29 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL kESHDp cap-abstract-card"
+              className="sc-bcXGCL cnswNO cap-abstract-card"
             >
               <div
-                className="sc-bcXGCL kNFKRs"
+                className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-csDjRa cAGsNW DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-gsGkXq cOJiW DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="https://www.generationlibre.eu/wp-content/uploads/2021/03/markus-winkler-eNyIi0oS7P4-unsplash-e1616584197949-1024x576.jpg"
                 />
               </div>
               <div
-                className="sc-bcXGCL beSutV"
+                className="sc-bcXGCL dovjmC"
               >
                 <h2
-                  className="sc-bcXGCL kNpxud cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="« Non au passeport vaccinal » Gaspard Koenig - GenerationLibre"
                 >
                   « Non au passeport vaccinal » Gaspard Koenig - GenerationLibre
                 </h2>
                 <p
-                  className="sc-bcXGCL cpaPUy cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
+                  className="sc-bcXGCL kAeCIV cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
                 >
                   GenerationLibre
                 </p>
@@ -98,34 +98,34 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL kESHDp cap-abstract-card"
+              className="sc-bcXGCL cnswNO cap-abstract-card"
             >
               <div
-                className="sc-bcXGCL kNFKRs"
+                className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-csDjRa cAGsNW DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-gsGkXq cOJiW DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="http://media1.woopic.com/api/v1/images/1039%2Fmulti%2F3ukfr%2Fmacron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent%7Cfzqpqs-H.jpg?format=470x264&facedetect=1&quality=85"
                 />
               </div>
               <div
-                className="sc-bcXGCL beSutV"
+                className="sc-bcXGCL dovjmC"
               >
                 <h2
-                  className="sc-bcXGCL kNpxud cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="Macron: ceux qui disent \\"on aura un vaccin en mars ou avril prochain, vous trompent\\""
                 >
                   Macron: ceux qui disent "on aura un vaccin en mars ou avril prochain, vous trompent"
                 </h2>
                 <p
-                  className="sc-bcXGCL cpaPUy cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
+                  className="sc-bcXGCL kAeCIV cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
                 >
                   Orange Actualités
                 </p>
                 <p
-                  className="sc-bcXGCL fgOkGK cap-text"
+                  className="sc-bcXGCL fYwvet cap-text"
                 >
                   2 avr. 2021
                 </p>
@@ -138,34 +138,34 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL kESHDp cap-abstract-card"
+              className="sc-bcXGCL cnswNO cap-abstract-card"
             >
               <div
-                className="sc-bcXGCL kNFKRs"
+                className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-csDjRa cAGsNW DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-gsGkXq cOJiW DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="https://www.francetvinfo.fr/pictures/XG0eIHnEfHnOuHCFy2xOQse_Um4/1500x843/2021/03/09/phplNpe9r.jpg"
                 />
               </div>
               <div
-                className="sc-bcXGCL beSutV"
+                className="sc-bcXGCL dovjmC"
               >
                 <h2
-                  className="sc-bcXGCL kNpxud cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="Covid-19 : passeport vaccinal, \\"pass sanitaire\\", \\"certificat vert\\"... L'article à lire pour comprendre le débat qui agite la France et l'Europe"
                 >
                   Covid-19 : passeport vaccinal, "pass sanitaire", "certificat vert"... L'article à lire pour comprendre le débat qui agite la France et l'Europe
                 </h2>
                 <p
-                  className="sc-bcXGCL cpaPUy cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
+                  className="sc-bcXGCL kAeCIV cap-text DebateArticleCard__DebateArticleCardOrigin-pggrD"
                 >
                   Franceinfo
                 </p>
                 <p
-                  className="sc-bcXGCL fgOkGK cap-text"
+                  className="sc-bcXGCL fYwvet cap-text"
                 >
                   11 mars 2021
                 </p>

@@ -3,7 +3,7 @@
 exports[`<ProfileNeutralIcon /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <svg
     className="profile-neutral-icon"
