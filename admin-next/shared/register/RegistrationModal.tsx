@@ -92,7 +92,7 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment, showPen
         )}
         {
           showPendingEmailConfirmation && (
-            <InfoMessage variant="warning" mt={2}>
+            <InfoMessage variant="warning" mt={2} id="email-confirmation-help-message">
               <InfoMessage.Title>
                 {intl.formatMessage({ id: 'confirm-your-email' })}
               </InfoMessage.Title>
