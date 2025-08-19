@@ -184,6 +184,9 @@ class ProposalSelectionVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.id IS NOT NULL')
+            ->andWhere('proposal.deletedAt IS NULL')
             ->andWhere('pv.selectionStep = :selectionStep')
             ->andWhere('pv.user = :user')
             ->setParameter('selectionStep', $step)

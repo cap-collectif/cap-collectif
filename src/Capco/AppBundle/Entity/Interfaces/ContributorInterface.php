@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Interfaces;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 
 interface ContributorInterface
@@ -57,4 +58,6 @@ interface ContributorInterface
     public function isConsentInternalCommunication(): bool;
 
     public function isConsentPrivacyPolicy(): bool;
+
+    public function getMedia(): ?Media;
 }

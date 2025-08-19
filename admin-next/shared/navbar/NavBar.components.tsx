@@ -161,7 +161,7 @@ NavBarLink.displayName = 'NavBarLink'
 
 const IS_BIG_LOGO_RATIO = 1.5
 
-export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number } }> = ({ logo }) => {
+export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number }} & BoxProps> = ({ logo , ...props}) => {
   const intl = useIntl()
   const width = logo?.width > 180 ? 180 : logo?.width
   const {
@@ -186,6 +186,7 @@ export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height:
           outlineOffset: 0,
         },
       }}
+      {...props}
     >
       <Box as="a" href="/">
         <Box

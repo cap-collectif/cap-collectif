@@ -24,11 +24,9 @@ export const DefaultLayout: React.FC<HeaderProps> = ({
   intl
 })=> {
   return (
-    <Flex alignItems="center" justifyContent="space-between" position="relative" height={['24px', '48px']}>
-      <Box position="absolute" left={0} display={['none', 'block']}>
-        <Box pl={6}>
-          <NavBarLogo logo={logo} />
-        </Box>
+    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px" >
+      <Box ml={6} display={['none', 'block']}>
+        <NavBarLogo logo={logo} my={0} />
       </Box>
       <Flex justifyContent="space-between" alignItems="center" margin="auto" maxWidth="540px" width="100%"
         sx={{
@@ -77,11 +75,9 @@ export const HideBackArrowLayout: React.FC<HeaderProps> = ({
    intl
  }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between" position="relative" height={['24px', '48px']}>
-      <Box position="absolute" left={0} display={['none', 'block']}>
-        <Box pl={6}>
-          <NavBarLogo logo={logo} />
-        </Box>
+    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px" >
+      <Box ml={6} display={['none', 'block']}>
+          <NavBarLogo logo={logo} my={0} />
       </Box>
       <Flex justifyContent="space-between" alignItems="center" margin="auto" maxWidth="540px" width="100%"
             sx={{

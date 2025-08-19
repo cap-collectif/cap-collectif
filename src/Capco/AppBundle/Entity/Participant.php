@@ -461,4 +461,10 @@ class Participant implements EntityInterface, ContributorInterface, \Stringable
 
         return $this;
     }
+
+    public function getMedia(): ?Media
+    {
+        // will be fixed when rebasing parcours dépôt
+        return null;
+    }
 }

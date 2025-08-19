@@ -179,7 +179,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             $token: String
             $state: ProposalsState
           ) {
-            participant(token: $token) {
+            participant(token: $token) @skip(if: $isAuthenticated) {
               ...ProposalVoteBasketWidget_participant @arguments(stepId: $stepId)
               ...ProposalListView_participant @arguments(stepId: $stepId)
             }

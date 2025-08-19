@@ -39,6 +39,7 @@ import { onUnload } from '~/components/Reply/Form/ReplyForm'
 import IdentificationCodeRequirementModal from '~/components/ParticipationWorkflow/IdentificationCodeRequirementModal'
 import ConsentPrivacyPolicyRequirementModal
   from '~/components/ParticipationWorkflow/ConsentPrivacyPolicyRequirementModal'
+import moment from 'moment'
 
 type Props = {
   stepId: string
@@ -53,7 +54,7 @@ export type FormValues = {
   code: string
   address: string
   realAddress: AddressComplete
-  birthday: string
+  birthday: moment.Moment
   zipCode: string
   checkboxes: {
     [requirementId: string]: boolean,
@@ -250,6 +251,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     firstname: isAuthenticated ? firstnameRequirement?.viewerValue : firstnameRequirement?.participantValue,
     lastname: isAuthenticated ? lastnameRequirement?.viewerValue : lastnameRequirement?.participantValue,
     phone: isAuthenticated ? convertPhone(phoneRequirement?.viewerValue) : convertPhone(phoneRequirement?.participantValue),
+    birthday: moment("2000-01-01 00:00:00", "YYYY-MM-DD HH:mm:ss"),
     countryCode: '+33',
   }
 
