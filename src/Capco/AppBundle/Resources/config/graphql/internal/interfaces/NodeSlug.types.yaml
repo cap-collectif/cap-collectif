@@ -5,4 +5,4 @@ NodeSlug:
         resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeSlugTypeResolver", value)'
         fields:
             slug:
-                type: 'String!'
+                type: 'String'

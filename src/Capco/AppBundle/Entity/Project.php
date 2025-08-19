@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -52,7 +53,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements EntityInterface, IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, \Stringable
+class Project implements EntityInterface, IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, SluggableInterface, \Stringable
 {
     use AddressableTrait;
     use CoverTrait;
@@ -357,10 +358,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }

@@ -98,6 +98,11 @@ class ProjectRepository extends EntityRepository
         ;
     }
 
+    public function getBySlug(string $slug): ?Project
+    {
+        return $this->getOneWithoutVisibility($slug);
+    }
+
     public function getByUser(User $user, $viewer = null)
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)

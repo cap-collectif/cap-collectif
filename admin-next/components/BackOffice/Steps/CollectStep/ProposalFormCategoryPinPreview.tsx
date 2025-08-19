@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { renderToString } from 'react-dom/server'
 
 import { MapContainer, Marker } from 'react-leaflet'
-import { CapcoTileLayer } from '@utils/leaflet'
+import { CapcoTileLayerLegacy } from '@utils/leaflet'
 import { CapUIIcon, CapUIIconSize, Icon } from '@cap-collectif/ui'
 import convertIconToDs from '@components/BackOffice/Steps/CollectStep/ProposalFormAdminCategories.utils'
 import 'leaflet/dist/leaflet.css'
@@ -72,7 +72,7 @@ const ProposalFormCategoryPinPreview: React.FC<ProposalFormCategoryPinPreviewPro
           }}
           gestureHandling
         >
-          <CapcoTileLayer />
+          <CapcoTileLayerLegacy />
           <Marker
             position={[48.8601, 2.3507]}
             // @ts-ignore

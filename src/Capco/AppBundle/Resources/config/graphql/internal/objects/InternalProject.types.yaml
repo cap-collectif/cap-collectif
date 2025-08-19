@@ -11,6 +11,7 @@ InternalProject:
         name: Project
         interfaces:
             - UniformResourceAdminLocatable
+            - NodeSlug
         description: 'A participatory project.'
         fields:
             # Override PublicProject or PreviewProject fields

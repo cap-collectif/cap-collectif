@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\Mediator;
@@ -48,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "debate" = "DebateStep",
  * })
  */
-abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface, TimeRangeable, \Stringable
+abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface, TimeRangeable, SluggableInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use CustomCodeTrait;

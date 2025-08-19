@@ -8,7 +8,7 @@ import union from 'turf-union'
 import turf from 'turf-meta'
 import 'leaflet/dist/leaflet.css'
 import { Box } from '@cap-collectif/ui'
-import { CapcoTileLayer, formatGeoJsons } from '@utils/leaflet'
+import { CapcoTileLayerLegacy, formatGeoJsons } from '@utils/leaflet'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
@@ -126,7 +126,7 @@ const DistrictPageMap = ({ geojson }: Props) => {
         trackResize={false}
         scrollWheelZoom={false}
       >
-        <CapcoTileLayer />
+        <CapcoTileLayerLegacy />
       </MapContainer>
     </Box>
   )

@@ -722,6 +722,9 @@ InternalQuery:
                     slug:
                         type: 'String!'
                         description: 'The slug to search for.'
+                    projectSlug:
+                        type: 'String'
+                        description: 'The project slug to search on when requiring a step'
                 description: 'Get a node by its slug.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NodeSlugResolver", args)'
             contributors:

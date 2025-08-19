@@ -1,6 +1,8 @@
 import useMapTokens from '@hooks/useMapTokens'
 import React from 'react'
 import { TileLayer } from 'react-leaflet'
+import L from 'leaflet'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 export type District = {
   id: string
@@ -90,19 +92,19 @@ export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojson
   return geoJsons
 }
 
-export const getMapboxUrl = (
-  mapTokens: {
-    readonly styleOwner: string | null
-    readonly styleId: string | null
-    readonly publicToken: string | null
-  } | null,
-) => {
+export type MapToken = {
+  readonly styleOwner: string | null
+  readonly styleId: string | null
+  readonly publicToken: string | null
+} | null
+
+export const getMapboxUrl = (mapTokens: MapToken) => {
   return mapTokens
     ? `https://api.mapbox.com/styles/v1/${mapTokens.styleOwner}/${mapTokens.styleId}/tiles/256/{z}/{x}/{y}?access_token=${mapTokens.publicToken}`
     : null
 }
 
-export const CapcoTileLayer = () => {
+export const CapcoTileLayerLegacy = () => {
   const mapTokens = useMapTokens()
   return (
     <TileLayer
@@ -111,4 +113,51 @@ export const CapcoTileLayer = () => {
       url={getMapboxUrl(mapTokens) || ''}
     />
   )
+}
+
+export const CapcoTileLayer = () => {
+  const { mapToken } = useAppContext()
+  return (
+    <TileLayer
+      // @ts-ignore
+      attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
+      url={getMapboxUrl(mapToken) || ''}
+    />
+  )
+}
+
+export const parseLatLng = (latlng: string) => {
+  try {
+    const value = JSON.parse(latlng)
+    return value
+  } catch (e) {
+    return null
+  }
+}
+
+type Bounds = {
+  readonly topLeft: {
+    readonly lat: number
+    readonly lng: number
+  }
+  readonly bottomRight: {
+    readonly lat: number
+    readonly lng: number
+  }
+}
+
+export const boundsToLeaflet = (bounds: Bounds) => [bounds.topLeft, bounds.bottomRight]
+
+export const parseLatLngBounds = (latlngBounds: string) => {
+  try {
+    const value = JSON.parse(latlngBounds)
+
+    if (value.topLeft && value.bottomRight) {
+      const bounds = L.latLngBounds(boundsToLeaflet(value))
+      if (bounds.isValid()) return value
+    }
+    return null
+  } catch (e) {
+    return null
+  }
 }

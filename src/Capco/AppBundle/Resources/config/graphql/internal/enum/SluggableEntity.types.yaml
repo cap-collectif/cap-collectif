@@ -12,3 +12,7 @@ SluggableEntity:
                 value: !php/const Capco\AppBundle\Enum\SluggableEntity::PROPOSAL_DISTRICT
             PAGE:
                 value: !php/const Capco\AppBundle\Enum\SluggableEntity::PAGE
+            PROJECT:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::PROJECT
+            STEP:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::STEP

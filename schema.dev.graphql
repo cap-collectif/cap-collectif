@@ -2268,7 +2268,7 @@ enum CivicIASentiment {
 }
 
 """A proposal step"""
-type CollectStep implements Node & Step & ProposalStep & RequirementStep {
+type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementStep {
   """The requirements to vote on this step."""
   requirements(
     """
@@ -3105,7 +3105,7 @@ interface ConsultationOwner {
 }
 
 """A consultation step"""
-type ConsultationStep implements Node & Step & RequirementStep {
+type ConsultationStep implements NodeSlug & Node & Step & RequirementStep {
   """Expose Primary Key, do not use it, except for testing purpose."""
   _id: ID!
 
@@ -5266,7 +5266,7 @@ type DebateOpinionEdge {
 }
 
 """A step with a debate."""
-type DebateStep implements Step & Node {
+type DebateStep implements NodeSlug & Step & Node {
   """The ID of an object."""
   id: ID!
 
@@ -9377,7 +9377,7 @@ interface Node {
 
 """A object that has a slug."""
 interface NodeSlug {
-  slug: String!
+  slug: String
 }
 
 """Possible reason that a `Publishable` is not published."""
@@ -10284,7 +10284,7 @@ type OrganizationSocialNetworks {
 
 """A translation organization."""
 type OrganizationTranslation implements NodeSlug {
-  slug: String!
+  slug: String
   locale: String!
   title: String!
   body: String!
@@ -10292,7 +10292,7 @@ type OrganizationTranslation implements NodeSlug {
 }
 
 """A step inside a project."""
-type OtherStep implements Node & Step {
+type OtherStep implements NodeSlug & Node & Step {
   """The ID of an object"""
   id: ID!
 
@@ -10374,7 +10374,7 @@ type OtherStep implements Node & Step {
 
 """A page."""
 type Page implements NodeSlug & UniformResourceLocatable {
-  slug: String!
+  slug: String
 
   """The URL to this resource."""
   url: URI!
@@ -11208,7 +11208,7 @@ input PreConfigureProjectQuestionnaireInput {
 }
 
 """A step inside a project."""
-type PresentationStep implements Node & Step {
+type PresentationStep implements NodeSlug & Node & Step {
   """The ID of an object"""
   id: ID!
 
@@ -11312,7 +11312,7 @@ input ProgressStepInput {
 }
 
 """A participatory project."""
-type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
+type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable & NodeSlug {
   """The URL to this resource."""
   url: URI!
 
@@ -13333,7 +13333,7 @@ enum ProposalStatementErrorCode {
 }
 
 """A proposal step"""
-interface ProposalStep {
+interface ProposalStep implements NodeSlug {
   """The requirements to vote on this step."""
   requirements(
     """
@@ -14476,6 +14476,9 @@ type Query {
 
     """The slug to search for."""
     slug: String!
+
+    """The project slug to search on when requiring a step"""
+    projectSlug: String
   ): NodeSlug
 
   """List of users and participants"""
@@ -14953,7 +14956,7 @@ interface QuestionnaireOwner {
 }
 
 """A step inside a project."""
-type QuestionnaireStep implements Node & Step & RequirementStep {
+type QuestionnaireStep implements NodeSlug & Node & Step & RequirementStep {
   """The ID of an object"""
   id: ID!
 
@@ -15090,7 +15093,7 @@ enum QuestionsFilterType {
 }
 
 """A step inside a project."""
-type RankingStep implements Node & Step {
+type RankingStep implements NodeSlug & Node & Step {
   """The ID of an object"""
   id: ID!
 
@@ -16618,7 +16621,7 @@ type SelectSenderEmailPayload {
 }
 
 """A budget contribution"""
-type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
+type SelectionStep implements NodeSlug & Node & Step & ProposalStep & RequirementStep {
   """The requirements to vote on this step."""
   requirements(
     """
@@ -17446,6 +17449,8 @@ enum SluggableEntity {
   DISTRICT
   PROPOSAL_DISTRICT
   PAGE
+  PROJECT
+  STEP
 }
 
 """Sms analytics."""
@@ -17806,7 +17811,7 @@ type StarResponsePayload {
 }
 
 """A step inside a project."""
-interface Step {
+interface Step implements NodeSlug {
   """The ID of an object"""
   id: ID!
 

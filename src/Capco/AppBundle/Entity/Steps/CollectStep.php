@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\CollectStepImapServerConfig;
 use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -26,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  * @CapcoAssert\VoteMin
  */
-class CollectStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
+class CollectStep extends AbstractStep implements SluggableInterface, ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
     use ProposalArchivedTrait;

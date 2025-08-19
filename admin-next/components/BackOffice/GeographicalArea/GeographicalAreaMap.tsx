@@ -2,7 +2,7 @@ import * as React from 'react'
 import L from 'leaflet'
 import { MapContainer, GeoJSON, Rectangle, Tooltip } from 'react-leaflet'
 import { Box, CapUIFontFamily } from '@cap-collectif/ui'
-import { CapcoTileLayer, District, formatGeoJsons } from '@utils/leaflet'
+import { CapcoTileLayerLegacy, District, formatGeoJsons } from '@utils/leaflet'
 import 'leaflet/dist/leaflet.css'
 import { convertToGeoJsonStyle } from '@utils/leaflet'
 
@@ -74,7 +74,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
         trackResize={false}
         scrollWheelZoom={false}
       >
-        <CapcoTileLayer />
+        <CapcoTileLayerLegacy />
         {isValidGeoJSON ? (
           <GeoJSON
             // @ts-ignore https://github.com/cap-collectif/platform/issues/15975

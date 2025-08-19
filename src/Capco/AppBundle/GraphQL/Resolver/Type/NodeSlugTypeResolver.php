@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Page;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -31,6 +32,16 @@ class NodeSlugTypeResolver implements QueryInterface
         }
         if ($node instanceof Page) {
             return $this->typeResolver->resolve('InternalPage');
+        }
+        if ($node instanceof Project) {
+            return $this->typeResolver->resolve('InternalProject');
+        }
+        $nodeClass = $node::class;
+        if (str_contains($nodeClass, 'CollectStep')) {
+            return $this->typeResolver->resolve('InternalCollectStep');
+        }
+        if (str_contains($nodeClass, 'SelectionStep')) {
+            return $this->typeResolver->resolve('InternalSelectionStep');
         }
 
         throw new UserError('Could not resolve type of Node.');

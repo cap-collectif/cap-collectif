@@ -8,6 +8,8 @@ InternalStep:
         name: Step
         description: 'A step inside a project.'
         resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", value)'
+        interfaces:
+            - NodeSlug
         fields:
             # TODO remove
             kind:

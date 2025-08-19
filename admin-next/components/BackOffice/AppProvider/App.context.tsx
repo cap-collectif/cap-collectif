@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 import { ViewerSession } from 'types'
+import { GlobalTheme } from '@shared/navbar/NavBar.utils'
+import { MapToken } from '@utils/leaflet'
 
 type AppContext = {
   viewerSession: ViewerSession
   appVersion: string
   siteColors: GlobalTheme
+  mapToken: MapToken
 }
 
 export const AppContext = React.createContext<AppContext>({
@@ -23,6 +25,7 @@ export const AppContext = React.createContext<AppContext>({
   },
   appVersion: '',
   siteColors: null,
+  mapToken: null,
 })
 
 export const useAppContext = (): AppContext => {
