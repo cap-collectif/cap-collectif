@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Exception\UploadedFileException;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
@@ -13,8 +12,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediaAdminController extends CRUDController
 {
@@ -22,7 +19,6 @@ class MediaAdminController extends CRUDController
 
     public function __construct(
         private readonly MediaManager $mediaManager,
-        private readonly ValidatorInterface $validator,
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         Pool $pool,
     ) {
@@ -71,27 +67,8 @@ class MediaAdminController extends CRUDController
             throw new UploadedFileException(MediasController::NO_MEDIA_FOUND);
         }
 
-        $this->checkUploadedFile($uploadedFile);
+        $this->mediaManager->validateUploadedFile($uploadedFile);
 
         return $uploadedFile;
-    }
-
-    private function checkUploadedFile(UploadedFile $uploadedFile): void
-    {
-        $violations = $this->validator->validate($uploadedFile, [
-            new File([
-                'maxSize' => '10M',
-                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES_IMAGE,
-            ]),
-        ]);
-
-        if ($violations->count() > 0) {
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $errorMessages[] = $violation->getMessage();
-            }
-
-            throw new UploadedFileException(implode(' ', $errorMessages));
-        }
     }
 }

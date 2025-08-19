@@ -61,6 +61,8 @@ services:
 
     Capco\AppBundle\Manager\MediaManager:
         public: true
+        bind:
+            $mediaSizeLimit: '%media_size_limit%'
 
     Capco\AppBundle\Resolver\Project\ProjectSearchResolver:
         public: true

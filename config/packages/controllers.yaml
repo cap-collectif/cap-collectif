@@ -24,6 +24,10 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
+    Capco\AppBundle\Controller\Site\TusUploadController:
+        bind:
+            $tusMediaSizeLimit: '%tus_media_size_limit%'
+
     Capco\AppBundle\Controller\Api\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Api/'
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Api/{GraphQLController.php, GraphiQLController.php}'

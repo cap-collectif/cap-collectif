@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Entity\AppendixType;
@@ -88,6 +87,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCo
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepPointsVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
+use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Publishable\DoctrineListener;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
@@ -273,7 +273,7 @@ class ReinitCommand extends Command
             'Total command duration: <info>' .
                 floor($event->getDuration() / 1000) .
                 '</info>s. ' .
-                MediasController::formatBytes($event->getMemory()) .
+                MediaManager::formatBytes($event->getMemory()) .
                 '.'
         );
 

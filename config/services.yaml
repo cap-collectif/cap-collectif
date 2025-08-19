@@ -110,6 +110,9 @@ parameters:
     session_timeout_seconds: '%env(int:SYMFONY_SESSION_TIMEOUT_SECONDS)%'
     anonymization_inactivity_days: '%env(int:SYMFONY_ANONYMIZATION_INACTIVITY_DAYS)%'
     anonymization_inactivity_email_reminder_days: '%env(int:SYMFONY_ANONYMIZATION_INACTIVITY_EMAIL_REMINDER_DAYS)%'
+    max_media_folder_size: '%env(int:SYMFONY_MAX_MEDIA_FOLDER_SIZE)%'
+    media_size_limit: '%env(SYMFONY_MEDIA_SIZE_LIMIT)%'
+    tus_media_size_limit: '%env(int:SYMFONY_TUS_MEDIA_SIZE_LIMIT)%'
 
     #
     # Default env values :
@@ -179,6 +182,9 @@ parameters:
     env(SYMFONY_SESSION_TIMEOUT_SECONDS): 7200 # in seconds, 7200 = two hours
     env(SYMFONY_ANONYMIZATION_INACTIVITY_DAYS): 365 # 1 year
     env(SYMFONY_ANONYMIZATION_INACTIVITY_EMAIL_REMINDER_DAYS): 7
+    env(SYMFONY_MAX_MEDIA_FOLDER_SIZE): 32212254720 # 30G
+    env(SYMFONY_MEDIA_SIZE_LIMIT): '10M'
+    env(SYMFONY_TUS_MEDIA_SIZE_LIMIT): 104857600 # 100M
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): null
     # ELASTICSEARCH-LOGPUSH
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): 'INSERT_A_REAL_SECRET'

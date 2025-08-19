@@ -3,27 +3,21 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\AppBundle\Twig\MediaExtension;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediasController extends AbstractController
 {
     final public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
-    final public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
-    private ?ConstraintViolationListInterface $fileUploadViolations = null;
 
-    public function __construct(private readonly ValidatorInterface $validator, private readonly MediaManager $mediaManager, private readonly MediaExtension $mediaExtension, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly MediaManager $mediaManager,
+        private readonly MediaExtension $mediaExtension
+    ) {
     }
 
     /**
@@ -43,7 +37,7 @@ class MediasController extends AbstractController
             [
                 'name' => $media->getName(),
                 'id' => $media->getId(),
-                'size' => self::formatBytes($media->getSize()),
+                'size' => $this->mediaManager::formatBytes($media->getSize()),
                 'url' => $request->getUriForPath('/media') .
                     $this->mediaExtension->getMediaUrl($media, 'reference'),
                 'type' => $media->getContentType(),
@@ -72,36 +66,6 @@ class MediasController extends AbstractController
         return $response;
     }
 
-    public static function formatBytes(int $bytes): string
-    {
-        $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
-        $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
-
-        return number_format($bytes / 1024 ** $power, 1) . ' ' . $units[$power];
-    }
-
-    /**
-     * For security reasons, we have to check the file size and type.
-     */
-    private function validateUploadedFile(UploadedFile $file): bool
-    {
-        $violations = $this->validator->validate($file, [
-            new File([
-                'maxSize' => '10M',
-                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES,
-            ]),
-        ]);
-
-        $this->setFileUploadViolations($violations);
-
-        return 0 === $violations->count();
-    }
-
-    private function setFileUploadViolations($fileUploadViolations)
-    {
-        $this->fileUploadViolations = $fileUploadViolations;
-    }
-
     private function getFile(Request $request)
     {
         $uploadedFile = $request->files->get('file') ?? $request->files->get('upload');
@@ -110,17 +74,7 @@ class MediasController extends AbstractController
             throw new \RuntimeException(self::NO_MEDIA_FOUND);
         }
 
-        if (!$this->validateUploadedFile($uploadedFile)) {
-            $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $uploadedFile->getMimeType() .
-                    ' ' .
-                    var_export($this->fileUploadViolations->get(0), true)
-            );
-
-            throw new \RuntimeException(self::FILE_NOT_ALLOWED);
-        }
+        $this->mediaManager->validateUploadedFile($uploadedFile);
 
         return $uploadedFile;
     }

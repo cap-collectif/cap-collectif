@@ -515,3 +515,11 @@ services:
         tags:
             name: messenger.message_handler
             handles: Capco\AppBundle\Message\MailSingleRecipientMessage
+
+    Symfony\Component\Finder\Finder:
+        class: Symfony\Component\Finder\Finder
+
+    Capco\AppBundle\Validator\Constraints\MaxFolderSizeValidator:
+        arguments:
+            $maxSize: '%max_media_folder_size%'
+            $projectDir: '%kernel.project_dir%'
