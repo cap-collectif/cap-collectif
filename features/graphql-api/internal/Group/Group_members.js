@@ -77,13 +77,28 @@ describe('Internal.Group.members', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
-  it('should fetch members after lbrunet ', async () => {
+  it('should fetch with a null notInIds value', async () => {
     await expect(
       graphql(
         GroupMembersQuery,
         {
           groupId: toGlobalId('Group', 'group1'),
           first: 100,
+          after: null,
+          term: 'msantostefano@cap-collectif.com',
+          notInIds: [null],
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+  it('should fetch first member after lbrunet ', async () => {
+    await expect(
+      graphql(
+        GroupMembersQuery,
+        {
+          groupId: toGlobalId('Group', 'group1'),
+          first: 1,
           after: 'YXJyYXljb25uZWN0aW9uOjA=',
           term: null,
         },

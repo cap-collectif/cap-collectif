@@ -7,11 +7,11 @@ import { useFormContext } from 'react-hook-form'
 import CreateGroupMutation from '@mutations/CreateGroupMutation'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
-type ImportMembersUploaderProps = {
+type Props = {
   existingGroupName?: string // If the import is from the edit group modal, we need to get the groupName for the dry run mutation that checks availability
 }
 
-export const ImportMembersUploader = ({ existingGroupName }: ImportMembersUploaderProps): JSX.Element => {
+export const ImportMembersUploader: React.FC<Props> = ({ existingGroupName }) => {
   const intl = useIntl()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [isCorrectFormat, setIsCorrectFormat] = React.useState<boolean | null>(null)

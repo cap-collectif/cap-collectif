@@ -72,15 +72,22 @@ class GroupRepository extends EntityRepository
         ;
     }
 
-    public function getByTerm(?string $term): array
+    public function getByTerm(?int $offset = null, ?int $limit = null, ?string $term = ''): array
     {
-        if (!$term) {
-            return $this->findAll();
-        }
-
-        return $this->createQueryBuilder('g')
+        $qb = $this->createQueryBuilder('g')
             ->where('g.title LIKE :term')
             ->setParameters(['term' => "%{$term}%"])
+        ;
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
@@ -89,24 +96,34 @@ class GroupRepository extends EntityRepository
     /**
      * @return array<int, array<string, mixed>>
      */
-    public function getMembers(Group $group, string $term): array
+    public function getMembers(Group $group, string $term, ?int $offset = 0, ?int $limit = 10000): array
     {
         $conn = $this->_em->getConnection();
         $sql = <<<'SQL'
-                        SELECT TO_BASE64(CONCAT('User:', u1.id)) AS userId, u1.email AS email, u1.username AS username, 'MEMBER' AS type
-                        FROM user_group g
-                        LEFT JOIN user_in_group uig ON uig.group_id = g.id
-                        LEFT JOIN fos_user u1 ON u1.id = uig.user_id
-                        WHERE g.id = :groupId and (u1.email like :term OR u1.username like :term)
-                        UNION
-                        SELECT null as id, user_invite.email, '' AS username, 'INVITATION' AS type
-                        FROM user_invite_groups
-                        LEFT JOIN user_invite ON user_invite.id = user_invite_groups.user_invite_id
-                        WHERE user_invite_groups.group_id = :groupId AND user_invite.email LIKE :term
+                        SELECT *
+                        FROM (
+                            SELECT TO_BASE64(CONCAT('User:', u1.id)) AS userId, u1.email AS email, u1.username AS username, 'MEMBER' AS type
+                            FROM user_group g
+                            LEFT JOIN user_in_group uig ON uig.group_id = g.id
+                            LEFT JOIN fos_user u1 ON u1.id = uig.user_id
+                            WHERE g.id = :groupId and (u1.email like :term OR u1.username like :term)
+                            UNION
+                            SELECT null as id, user_invite.email, '' AS username, 'INVITATION' AS type
+                            FROM user_invite_groups
+                            LEFT JOIN user_invite ON user_invite.id = user_invite_groups.user_invite_id
+                            WHERE user_invite_groups.group_id = :groupId AND user_invite.email LIKE :term
+                        ) AS RESULTS
+                        LIMIT :limit OFFSET :offset
             SQL;
+
         $stmt = $conn->prepare($sql);
-        $params = ['term' => "%{$term}%", 'groupId' => $group->getId()];
-        $stmt->execute($params);
+
+        $stmt->bindValue('groupId', $group->getId(), \PDO::PARAM_STR);
+        $stmt->bindValue('term', '%' . $term . '%', \PDO::PARAM_STR);
+        $stmt->bindValue('limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue('offset', $offset, \PDO::PARAM_INT);
+
+        $stmt->execute();
 
         return $stmt->fetchAllAssociative();
     }

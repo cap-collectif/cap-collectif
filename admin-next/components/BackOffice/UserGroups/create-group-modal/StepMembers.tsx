@@ -25,7 +25,7 @@ type Props = {
   connectionId: string
 }
 
-export const StepMembers = ({ connectionId }: Props): JSX.Element => {
+export const StepMembers: React.FC<Props> = ({ connectionId }) => {
   const intl = useIntl()
   const { goToPreviousStep, hide } = useMultiStepModal()
 

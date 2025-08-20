@@ -4,7 +4,7 @@ import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay'
 import { MembersList_UsersFragment$key } from '@relay/MembersList_UsersFragment.graphql'
 import { MembersList_Query } from '@relay/MembersList_Query.graphql'
-import { MembersList_MembersQuery } from '@relay/MembersList_MembersQuery.graphql'
+import { MembersList_Members_Query } from '@relay/MembersList_Members_Query.graphql'
 import { CONNECTION_NODES_PER_PAGE } from '../../utils'
 import InfiniteScroll from 'react-infinite-scroller'
 import MemberCard from './MemberCard'
@@ -18,6 +18,10 @@ const USERS_FRAGMENT = graphql`
     members(first: $countUsers, term: $term, after: $cursorUsers) @connection(key: "MembersList_members") {
       __typename
       totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         cursor
         node {
@@ -30,9 +34,8 @@ const USERS_FRAGMENT = graphql`
     }
   }
 `
-
 const MEMBERS_QUERY = graphql`
-  query MembersList_MembersQuery($groupId: ID!, $first: Int!, $term: String!) {
+  query MembersList_Members_Query($groupId: ID!, $first: Int!, $term: String!) {
     node(id: $groupId) {
       ... on Group {
         ...MembersList_UsersFragment @arguments(countUsers: $first, term: $term)
@@ -65,17 +68,17 @@ type Props = {
   onMembersLoaded?: (memberIds: string[]) => void
 }
 
-export const MembersList = ({
+export const MembersList: React.FC<Props> = ({
   groupId,
   term,
   membersToRemoveIds,
   onMemberRemoval,
   usersToAddFromCsvEmails,
   onMembersLoaded,
-}: Props): JSX.Element => {
+}) => {
   const ref = React.useRef<null | boolean>(null)
 
-  const queryData = useLazyLoadQuery<MembersList_MembersQuery>(MEMBERS_QUERY, {
+  const queryData = useLazyLoadQuery<MembersList_Members_Query>(MEMBERS_QUERY, {
     groupId,
     first: CONNECTION_NODES_PER_PAGE,
     term,
@@ -109,13 +112,17 @@ export const MembersList = ({
       <InfiniteScroll
         key="infinite-scroll-group-members"
         initialLoad={false}
-        loadMore={() => loadNext(CONNECTION_NODES_PER_PAGE)}
+        loadMore={() => {
+          // if (!isLoadingNext && hasNext) {
+          loadNext(CONNECTION_NODES_PER_PAGE)
+          // }
+        }}
         hasMore={hasNext}
         isLoading={isLoadingNext}
         loader={<Spinner size={CapUIIconSize.Sm} mx={'auto'} my={2} />}
         style={{ border: 'none', padding: '0' }}
         useWindow={false}
-        getScrollParent={() => ref.current}
+        getScrollParent={ref.current ? () => ref.current : undefined}
       >
         <Flex direction={'column'} gap={2}>
           {usersToAddFromCsvEmails.map(email => (

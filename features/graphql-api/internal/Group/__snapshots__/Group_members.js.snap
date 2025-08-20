@@ -88,7 +88,7 @@ Object {
 }
 `;
 
-exports[`Internal.Group.members should fetch members after lbrunet  1`] = `
+exports[`Internal.Group.members should fetch first member after lbrunet  1`] = `
 Object {
   "node": Object {
     "members": Object {
@@ -99,38 +99,6 @@ Object {
             "type": "MEMBER",
             "userId": "VXNlcjp1c2VyMg==",
             "username": "sfavot",
-          },
-        },
-        Object {
-          "node": Object {
-            "email": "user@test.com",
-            "type": "MEMBER",
-            "userId": "VXNlcjp1c2VyNQ==",
-            "username": "user",
-          },
-        },
-        Object {
-          "node": Object {
-            "email": "aurelien@cap-collectif.com",
-            "type": "MEMBER",
-            "userId": "VXNlcjp1c2VyU3B5bA==",
-            "username": "spyl",
-          },
-        },
-        Object {
-          "node": Object {
-            "email": "msantostefano@cap-collectif.com",
-            "type": "MEMBER",
-            "userId": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
-            "username": "welcomattic",
-          },
-        },
-        Object {
-          "node": Object {
-            "email": "user-invited-in-group@gmail.com",
-            "type": "INVITATION",
-            "userId": null,
-            "username": "",
           },
         },
       ],
@@ -171,6 +139,26 @@ Object {
             "type": "MEMBER",
             "userId": "VXNlcjp1c2VyU3B5bA==",
             "username": "spyl",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.Group.members should fetch with a null notInIds value 1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "msantostefano@cap-collectif.com",
+            "type": "MEMBER",
+            "userId": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "username": "welcomattic",
           },
         },
       ],

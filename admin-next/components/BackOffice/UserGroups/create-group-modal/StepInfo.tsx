@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 
-export const StepInfo = (): JSX.Element => {
+export const StepInfo: React.FC = () => {
   const intl = useIntl()
   const { goToNextStep, hide } = useMultiStepModal()
   const methods = useFormContext()

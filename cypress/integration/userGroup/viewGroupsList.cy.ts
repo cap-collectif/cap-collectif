@@ -40,4 +40,12 @@ describe('Displays or not the page based on the viewer', () => {
         AdminGroupsPage.getRowCellByColumnIndex(3).find('button').should('have.attr', 'aria-label', 'global.delete')
       })
   })
+
+  it('views filtered groups', () => {
+    cy.directLoginAs('admin')
+    AdminGroupsPage.visitGroupsList()
+    cy.get('div.cap-search').click({ force: true }).type('Agent')
+    cy.get('.cap-table__tbody .cap-table__tr').should('have.length', 1)
+    AdminGroupsPage.getRowCellByColumnIndex(0).should('contain', 'Agent de la ville')
+  })
 })

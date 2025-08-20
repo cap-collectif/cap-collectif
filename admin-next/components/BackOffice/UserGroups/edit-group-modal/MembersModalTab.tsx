@@ -17,14 +17,14 @@ type Props = {
   setUsersToAddFromCsvEmails: React.Dispatch<React.SetStateAction<Array<string>>>
 }
 
-export const MembersModalTab = ({
+export const MembersModalTab: React.FC<Props> = ({
   groupTitle,
   groupId,
   membersToRemoveIds,
   setMembersToRemoveIds,
   usersToAddFromCsvEmails,
   setUsersToAddFromCsvEmails,
-}: Props): JSX.Element => {
+}) => {
   const intl = useIntl()
   const [membersSearchTerm, setMembersSearchTerm] = React.useState<string>('')
   const [userIdsToNotSearch, setUserIdsToNotSearch] = React.useState<string[]>([])
@@ -84,7 +84,7 @@ export const MembersModalTab = ({
           />
         </FormControl>
 
-        <React.Suspense fallback={<Spinner size={CapUIIconSize.Md} mx="auto" />}>
+        <React.Suspense fallback={<Spinner size={CapUIIconSize.Xl} color="gray.150" mt="xxl" mx="auto" />}>
           <MembersList
             groupId={groupId}
             term={membersSearchTerm}

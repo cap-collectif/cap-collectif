@@ -133,8 +133,6 @@ class GroupMutation implements MutationInterface
             throw new UserError(sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId));
         }
 
-        $groupId = $group->getId();
-
         try {
             $this->entityManager->remove($group);
             $this->entityManager->flush();

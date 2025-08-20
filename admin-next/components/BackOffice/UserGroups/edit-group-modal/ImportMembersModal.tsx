@@ -13,7 +13,7 @@ type Props = {
   setUsersToAddFromCsvEmails: React.Dispatch<React.SetStateAction<Array<string>>>
 }
 
-export const ImportMembersModal = ({ groupTitle, groupId, setUsersToAddFromCsvEmails }: Props): JSX.Element => {
+export const ImportMembersModal: React.FC<Props> = ({ groupTitle, groupId, setUsersToAddFromCsvEmails }) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 

@@ -10,7 +10,7 @@ type Props = {
   connectionId: string
 }
 
-export const CreateGroupModal = ({ connectionId }: Props): JSX.Element => {
+export const CreateGroupModal: React.FC<Props> = ({ connectionId }) => {
   const intl = useIntl()
 
   const methods = useForm<CreateGroupFormProps>({

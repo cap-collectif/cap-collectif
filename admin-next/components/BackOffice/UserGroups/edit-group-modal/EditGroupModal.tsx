@@ -1,5 +1,17 @@
 import * as React from 'react'
-import { Box, Button, CapUIModalSize, Flex, Heading, Modal, TabBar, Table, toast } from '@cap-collectif/ui'
+import {
+  Box,
+  Button,
+  CapUIIconSize,
+  CapUIModalSize,
+  Flex,
+  Heading,
+  Modal,
+  Spinner,
+  TabBar,
+  Table,
+  toast,
+} from '@cap-collectif/ui'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { pxToRem } from '@shared/utils/pxToRem'
@@ -10,15 +22,16 @@ import { UpdateGroupFormProps } from '../UserGroups.type'
 import UpdateGroupMutation from '@mutations/UpdateGroupMutation'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { UserGroupsList_Fragment$key } from '@relay/UserGroupsList_Fragment.graphql'
+import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
 import { graphql, RefetchFnDynamic, useFragment } from 'react-relay'
 import { OperationType } from 'relay-runtime'
 import { EditGroupModal_group$key } from '@relay/EditGroupModal_group.graphql'
 
 type Props = {
   group: EditGroupModal_group$key
-  refetch: RefetchFnDynamic<OperationType, UserGroupsList_Fragment$key>
+  refetch: RefetchFnDynamic<OperationType, UserGroupsList_query$key>
   term: string
+  connectionId: string
 }
 
 const GROUP_FRAGMENT = graphql`
@@ -29,7 +42,7 @@ const GROUP_FRAGMENT = graphql`
   }
 `
 
-export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.Element => {
+export const EditGroupModal: React.FC<Props> = ({ group: groupRef, refetch, term, connectionId }) => {
   const intl = useIntl()
   const group = useFragment(GROUP_FRAGMENT, groupRef)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
@@ -82,6 +95,7 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
 
         setMembersToRemoveIds([])
         setUsersToAddFromCsvEmails([])
+        refetch({ term })
         onClose()
       })
       .catch(() => {
@@ -121,6 +135,8 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
         onClose={() => {
           reset()
           onClose()
+          setMembersToRemoveIds([])
+          setUsersToAddFromCsvEmails([])
         }}
         size={CapUIModalSize.SidePanel}
         ariaLabel={''}
@@ -149,14 +165,22 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
                   zIndex={99}
                 >
                   <TabBar.Pane id="members" title={intl.formatMessage({ id: 'organisation.members' })}>
-                    <MembersModalTab
-                      groupTitle={group.title}
-                      groupId={group.id}
-                      membersToRemoveIds={membersToRemoveIds}
-                      setMembersToRemoveIds={setMembersToRemoveIds}
-                      usersToAddFromCsvEmails={usersToAddFromCsvEmails}
-                      setUsersToAddFromCsvEmails={setUsersToAddFromCsvEmails}
-                    />
+                    <React.Suspense
+                      fallback={
+                        <Flex alignItems="center" justifyContent="center" width="100%" mt="xxl">
+                          <Spinner size={CapUIIconSize.Xl} color="gray.150" />
+                        </Flex>
+                      }
+                    >
+                      <MembersModalTab
+                        groupTitle={group.title}
+                        groupId={group.id}
+                        membersToRemoveIds={membersToRemoveIds}
+                        setMembersToRemoveIds={setMembersToRemoveIds}
+                        usersToAddFromCsvEmails={usersToAddFromCsvEmails}
+                        setUsersToAddFromCsvEmails={setUsersToAddFromCsvEmails}
+                      />
+                    </React.Suspense>
                   </TabBar.Pane>
                   <TabBar.Pane id="settings" title={intl.formatMessage({ id: 'global.params' })}>
                     <SettingsModalTab />
@@ -198,6 +222,7 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
                   closeParentModal={onClose}
                   refetch={refetch}
                   term={term}
+                  connectionId={connectionId}
                 />
               </Flex>
             </Modal.Footer>

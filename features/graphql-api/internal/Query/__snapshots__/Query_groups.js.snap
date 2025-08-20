@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query groups fetch all groups 1`] = `
+Object {
+  "groups": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 6,
+          },
+          "title": "Super-administrateur",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 3,
+          },
+          "title": "Agent de la ville",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 129,
+          },
+          "title": "Utilisateurs",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 1,
+          },
+          "title": "Comité de suvi",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 0,
+          },
+          "title": "Direction Culture",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 2,
+          },
+          "title": "Projet 2",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 1,
+          },
+          "title": "Evaluers on proposal2",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 2,
+          },
+          "title": "Evaluers on proposal3",
+        },
+      },
+    ],
+    "totalCount": 8,
+  },
+}
+`;
+
+exports[`Internal|Query groups fetch first two groups 1`] = `
+Object {
+  "groups": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 6,
+          },
+          "title": "Super-administrateur",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 3,
+          },
+          "title": "Agent de la ville",
+        },
+      },
+    ],
+    "totalCount": 8,
+  },
+}
+`;
+
+exports[`Internal|Query groups fetch groups filterd by terms 1`] = `
+Object {
+  "groups": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 0,
+          },
+          "title": "Direction Culture",
+        },
+      },
+    ],
+    "totalCount": 8,
+  },
+}
+`;
+
+exports[`Internal|Query groups fetch two groups following the first two groups 1`] = `
+Object {
+  "groups": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 129,
+          },
+          "title": "Utilisateurs",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 1,
+          },
+          "title": "Comité de suvi",
+        },
+      },
+    ],
+    "totalCount": 8,
+  },
+}
+`;

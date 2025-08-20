@@ -11,7 +11,7 @@ type Props = {
   isLoading: boolean
 }
 
-export const CsvImportResult = ({ csvEmails, isCorrectFormat, isLoading }: Props) => {
+export const CsvImportResult: React.FC<Props> = ({ csvEmails, isCorrectFormat, isLoading }) => {
   const intl = useIntl()
 
   if (!csvEmails) return null

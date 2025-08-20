@@ -20,7 +20,11 @@ class GroupMembersResolver implements QueryInterface
     {
         $term = $args->offsetGet('term') ?? '';
         $paginator = new Paginator(
-            fn () => $this->groupRepository->getMembers($group, $term)
+            function (?int $offset = 0, ?int $limit = 10000) use ($group, $term) {
+                $limit = $limit ?: 10000;
+
+                return $this->groupRepository->getMembers($group, $term, $offset, $limit);
+            }
         );
 
         $totalCount = $this->groupRepository->countMembers($group, $term);

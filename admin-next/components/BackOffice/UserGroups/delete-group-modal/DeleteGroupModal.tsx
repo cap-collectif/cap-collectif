@@ -17,17 +17,25 @@ import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { RefetchFnDynamic } from 'react-relay'
 import { OperationType } from 'relay-runtime'
-import { UserGroupsList_Fragment$key } from '@relay/UserGroupsList_Fragment.graphql'
+import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
 
 type Props = {
   button: 'regular' | 'quick-action'
   groupId: string
+  connectionId: string
   closeParentModal?: () => void
-  refetch: RefetchFnDynamic<OperationType, UserGroupsList_Fragment$key>
+  refetch: RefetchFnDynamic<OperationType, UserGroupsList_query$key>
   term: string
 }
 
-export const DeleteGroupModal = ({ button = 'regular', groupId, closeParentModal }: Props): JSX.Element => {
+export const DeleteGroupModal: React.FC<Props> = ({
+  button = 'regular',
+  groupId,
+  closeParentModal,
+  refetch,
+  term,
+  connectionId,
+}) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -36,6 +44,7 @@ export const DeleteGroupModal = ({ button = 'regular', groupId, closeParentModal
     setIsLoading(true)
     await DeleteGroupMutation.commit({
       input: { groupId },
+      connectionId: [connectionId],
     })
       .then(() => {
         toast({
@@ -49,6 +58,7 @@ export const DeleteGroupModal = ({ button = 'regular', groupId, closeParentModal
       })
 
     setIsLoading(false)
+    refetch({ term })
     onClose()
 
     if (closeParentModal) {

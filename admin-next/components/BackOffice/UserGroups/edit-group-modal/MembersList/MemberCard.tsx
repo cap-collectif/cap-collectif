@@ -20,13 +20,13 @@ type Props = {
   onRemove: () => void
 }
 
-export const MemberCard = ({
+export const MemberCard: React.FC<Props> = ({
   cardKey,
   isPendingMember = false,
   pendingMember,
   existingMember,
   onRemove,
-}: Props): JSX.Element => {
+}) => {
   const intl = useIntl()
 
   return (

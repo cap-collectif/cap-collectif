@@ -1,4 +1,4 @@
-import { ConnectionHandler, graphql } from 'react-relay'
+import { graphql } from 'react-relay'
 import commitMutation from './commitMutation'
 import { environment } from '@utils/relay-environement'
 import {
@@ -6,12 +6,12 @@ import {
   DeleteGroupMutation$data,
   DeleteGroupMutation$variables,
 } from '@relay/DeleteGroupMutation.graphql'
-import { GraphQLTaggedNode, RecordSourceSelectorProxy } from 'relay-runtime'
+import { GraphQLTaggedNode } from 'relay-runtime'
 
 const mutation = graphql`
-  mutation DeleteGroupMutation($input: DeleteGroupInput!) {
+  mutation DeleteGroupMutation($input: DeleteGroupInput!, $connectionId: [ID!]!) {
     deleteGroup(input: $input) {
-      deletedGroupId
+      deletedGroupId @deleteEdge(connections: $connectionId)
     }
   }
 ` as GraphQLTaggedNode
@@ -20,16 +20,6 @@ const commit = (variables: DeleteGroupMutation$variables): Promise<DeleteGroupMu
   commitMutation<DeleteGroupMutation>(environment, {
     mutation,
     variables,
-    updater: (store: RecordSourceSelectorProxy) => {
-      const root = store.get('client:root')
-      const connectionRecord = ConnectionHandler.getConnection(root, 'UserGroupsList_groups')
-
-      if (!connectionRecord || !root) {
-        return
-      }
-
-      ConnectionHandler.deleteNode(connectionRecord, variables.input.groupId)
-    },
   })
 
 export default { commit }

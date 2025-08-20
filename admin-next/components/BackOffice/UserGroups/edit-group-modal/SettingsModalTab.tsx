@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 
-export const SettingsModalTab = (): JSX.Element => {
+export const SettingsModalTab: React.FC = () => {
   const intl = useIntl()
   const methods = useFormContext()
   const { control } = methods

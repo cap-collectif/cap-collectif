@@ -168,7 +168,7 @@ class UserSearch extends Search
         }
 
         if (null !== $notInIds && \count($notInIds) > 0) {
-            $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
+            $query = $this->searchNotInTermsForField($query, 'id', array_filter($notInIds));
         }
 
         if ($isMediatorCompliant) {
@@ -180,6 +180,7 @@ class UserSearch extends Search
         $realQuery = Query::create($query);
         $this->addObjectTypeFilter($realQuery);
         $realQuery->setTrackTotalHits();
+
         $resultSet = $this->index->search($realQuery);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 

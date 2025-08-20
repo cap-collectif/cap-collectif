@@ -17,7 +17,7 @@ class GroupListResolver implements QueryInterface
     public function __invoke(Argument $args): Connection
     {
         $term = $args->offsetGet('term');
-        $paginator = new Paginator(fn () => $this->groupRepository->getByTerm($term));
+        $paginator = new Paginator(fn (?int $offset = null, ?int $limit = null) => $this->groupRepository->getByTerm($offset, $limit, $term));
 
         $totalCount = $this->groupRepository->countAll();
 
