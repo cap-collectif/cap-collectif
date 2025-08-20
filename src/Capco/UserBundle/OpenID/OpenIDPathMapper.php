@@ -35,7 +35,7 @@ class OpenIDPathMapper
             'participer-debat-gravelines', 'participer-debat-fessenheim',
             'participer-debat-bugey', 'participer-debat-fos' => new CndpMapping(),
             'dijon' => new DijonMapping(),
-            'nimes' => new NimesMapping(),
+            'nimes', 'nimes-metropole' => new NimesMapping(),
             default => new DevOpenIDMapping(),
         };
     }
