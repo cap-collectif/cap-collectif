@@ -10,6 +10,7 @@
     "lint": "eslint ./ --ext .ts --ext .tsx",
     "prettier": "prettier --write {pages,utils,.}/*.{ts,tsx,js}",
     "test": "jest -c jest.config.js",
+    "test:ci": "jest -c jest.config.js --maxWorkers=2",
     "ts": "tsc --project tsconfig.json --noEmit",
     "relay": "relay-compiler",
     "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --artifactDirectory ./__generated__ --watch"

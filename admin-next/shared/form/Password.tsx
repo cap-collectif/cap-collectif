@@ -5,6 +5,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, CapInputSize, FormLabel } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { CheckInfo } from '@shared/ui/CheckInfo'
+import useShowPassword from '@shared/hooks/useShowPassword'
 
 export const getPasswordError = (hasRequiredLength: boolean, hasUpperLowerCase: boolean, hasDigit: boolean) => {
   const sum = (hasRequiredLength ? 0 : 1) + (hasUpperLowerCase ? 0 : 2) + (hasDigit ? 0 : 4)
@@ -42,12 +43,14 @@ export const Password = React.forwardRef<any, { name: string; id: string }>(({ n
   const hasUpperLowerCase = /[A-Z]/.test(password) && /[a-z]/.test(password)
   const hasDigit = /\d/.test(password)
 
+  const { showPassword, onClickActions } = useShowPassword()
+
   return (
     <Box mb={2}>
       <FormControl name={name} control={control} isRequired>
         <FormLabel htmlFor={name} label={intl.formatMessage({ id: 'registration.password' })} mb={0} />
         <FieldInput
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           control={control}
           name={name}
           id={id}
@@ -63,6 +66,7 @@ export const Password = React.forwardRef<any, { name: string; id: string }>(({ n
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           variantSize={CapInputSize.Md}
+          onClickActions={onClickActions}
           ref={ref}
         />
       </FormControl>

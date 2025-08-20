@@ -89,20 +89,74 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
             global.password
           </span>
         </label>
-        <input
-          aria-required={true}
-          autoComplete="off"
-          className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-          disabled={false}
-          id=":r1:"
-          name="password"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
-          type="password"
-        />
+        <div
+          className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        >
+          <input
+            aria-required={true}
+            autoComplete="off"
+            className="sc-bcXGCL dANhtW cap-input"
+            disabled={false}
+            id=":r1:"
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            readOnly={false}
+            required={true}
+            type="password"
+          />
+          <button
+            aria-describedby=":r2:"
+            className="sc-bcXGCL fROdoz"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onFocusCapture={[Function]}
+            onKeyDownCapture={[Function]}
+            onKeyPressCapture={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            onMouseEnter={[Function]}
+            onMouseMove={[Function]}
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+              fill="none"
+              height="1em"
+              viewBox="0 0 12 10"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+              <path
+                d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+          <span
+            hidden={true}
+            id=":r2:"
+            style={
+              {
+                "position": "fixed",
+              }
+            }
+          />
+        </div>
       </div>
       <a
         className="sc-bcXGCL gudgoe cap-link"
