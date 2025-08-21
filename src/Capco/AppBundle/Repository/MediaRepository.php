@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Media;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -16,6 +17,44 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class MediaRepository extends EntityRepository
 {
+    /**
+     * @throws Exception
+     */
+    public function deleteUnusedMedia(): int
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $mediasRelatedFKSql = "
+            SELECT TABLE_NAME, COLUMN_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE REFERENCED_TABLE_NAME = 'media__media'
+              AND REFERENCED_COLUMN_NAME = 'id'
+        ";
+
+        $mediasRelatedFKRows = $connection->fetchAllAssociative($mediasRelatedFKSql);
+
+        $notExistsClauses = [];
+        foreach ($mediasRelatedFKRows as $row) {
+            $table = $row['TABLE_NAME'];
+            $column = $row['COLUMN_NAME'];
+            $notExistsClauses[] = sprintf(
+                'NOT EXISTS (SELECT 1 FROM %s WHERE %s.%s = m.id)',
+                $table,
+                $table,
+                $column
+            );
+        }
+
+        $sql = 'DELETE m FROM media__media m';
+
+        if (!empty($notExistsClauses)) {
+            $sql .= ' WHERE ' . implode(' AND ', $notExistsClauses);
+        }
+
+        // executeStatement returns the number of affected rows
+        return (int) $connection->executeStatement($sql);
+    }
+
     /**
      * @return array<Media> list of Media entities that belong to default categories
      */

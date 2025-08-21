@@ -38,6 +38,11 @@ class MediaProvider
         return $this->filesystem->get($this->getImagePath($media), true);
     }
 
+    public function referenceFileExists(Media $media): bool
+    {
+        return $this->filesystem->has($this->getImagePath($media));
+    }
+
     public function writeBinaryContentInFile(Media $media): void
     {
         if (null === $media->getBinaryContent()) {
