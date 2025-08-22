@@ -1,3 +1,4 @@
+import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
 
 const Play = () => {
@@ -9,8 +10,8 @@ const Play = () => {
         left: '50%',
         transform: 'translate3d(-50%,-50%,0)',
       }}
-      width="48px"
-      height="48px"
+      width={pxToRem(48)}
+      height={pxToRem(48)}
       viewBox="0 0 48 48"
       fill="none"
     >

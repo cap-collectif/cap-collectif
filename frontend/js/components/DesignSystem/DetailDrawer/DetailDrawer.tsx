@@ -10,8 +10,8 @@ import { Box } from '@cap-collectif/ui'
 import { ease } from '~/utils/motion'
 import DetailDrawerHeader from '~ds/DetailDrawer/DetailDrawerHeader'
 import DetailDrawerBody from '~ds/DetailDrawer/DetailDrawerBody'
-import { cleanChildren } from '~/utils/cleanChildren'
 import config from '~/config'
+import { cleanChildren } from '@shared/utils/cleanChildren'
 export type Props = {
   readonly isOpen: boolean
   readonly onClose?: () => void

@@ -1,0 +1,667 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
+[
+  <div
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL hHvZtB frise"
+  >
+    <ul
+      className="sc-bcXGCL eOinCi frise__stepList"
+    >
+      <div
+        className="slick-slider sc-31205d77-0 jMnHsj slick-initialized"
+      >
+        <div
+          className="slick-list"
+        >
+          <div
+            className="slick-track"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            style={
+              {
+                "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                "WebkitTransition": "",
+                "msTransform": "translateX(0px)",
+                "opacity": 1,
+                "transform": "translate3d(0px, 0px, 0px)",
+                "transition": "",
+              }
+            }
+          >
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active slick-current"
+              data-index={0}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL kCUHOf frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 231 56"
+                    width="248"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      width="215.6"
+                    />
+                    <path
+                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                      fill="white"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Présentation"
+                    >
+                      Présentation
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={1}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL StdhZ frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Consultation"
+                    >
+                      Consultation
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    >
+                      step.status.closed
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={2}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL StdhZ frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Dépôt"
+                    >
+                      Dépôt
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    >
+                      <div
+                        aria-describedby=":r0:"
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onClickCapture={[Function]}
+                        onFocusCapture={[Function]}
+                        onKeyDownCapture={[Function]}
+                        onKeyPressCapture={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseDownCapture={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseMove={[Function]}
+                      >
+                        count.block.daysLeft {"count":-1406}
+                      </div>
+                      <span
+                        hidden={true}
+                        id=":r0:"
+                        style={
+                          {
+                            "position": "fixed",
+                          }
+                        }
+                      />
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={3}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL isjtcp frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 232 56"
+                    width="248"
+                  >
+                    <path
+                      d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <p
+                      aria-describedby=":r3:"
+                      className="sc-bcXGCL fWXba-D cap-text frise__stepItem__link__title platform__body"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onClickCapture={[Function]}
+                      onFocusCapture={[Function]}
+                      onKeyDownCapture={[Function]}
+                      onKeyPressCapture={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseDownCapture={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseMove={[Function]}
+                      title="Questionnaire qui dénonce"
+                    >
+                      Questionnaire qui dénonce
+                    </p>
+                    <span
+                      hidden={true}
+                      id=":r3:"
+                      style={
+                        {
+                          "position": "fixed",
+                        }
+                      }
+                    />
+                    <p
+                      className="sc-bcXGCL dlvOxF cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>,
+]
+`;
+
+exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
+[
+  <div
+    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL hHvZtB frise"
+  >
+    <ul
+      className="sc-bcXGCL eOinCi frise__stepList"
+    >
+      <div
+        className="slick-slider sc-31205d77-0 jMnHsj slick-initialized"
+      >
+        <div
+          className="slick-list"
+        >
+          <div
+            className="slick-track"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            style={
+              {
+                "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                "WebkitTransition": "",
+                "msTransform": "translateX(0px)",
+                "opacity": 1,
+                "transform": "translate3d(0px, 0px, 0px)",
+                "transition": "",
+              }
+            }
+          >
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active slick-current"
+              data-index={0}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL kCUHOf frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 231 56"
+                    width="248"
+                  >
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      width="215.6"
+                    />
+                    <path
+                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                      fill="white"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Présentation"
+                    >
+                      Présentation
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={1}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL StdhZ frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Consultation"
+                    >
+                      Consultation
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    >
+                      step.status.closed
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={2}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL StdhZ frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 248 56"
+                    width="248"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                    <rect
+                      fill="currentColor"
+                      height="56"
+                      transform="translate(17)"
+                      width="216"
+                    />
+                    <path
+                      d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <h2
+                      className="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
+                      title="Dépôt"
+                    >
+                      Dépôt
+                    </h2>
+                    <p
+                      className="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
+                    >
+                      <div
+                        aria-describedby=":r6:"
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onClickCapture={[Function]}
+                        onFocusCapture={[Function]}
+                        onKeyDownCapture={[Function]}
+                        onKeyPressCapture={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseDownCapture={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseMove={[Function]}
+                      >
+                        count.block.daysLeft {"count":-1406}
+                      </div>
+                      <span
+                        hidden={true}
+                        id=":r6:"
+                        style={
+                          {
+                            "position": "fixed",
+                          }
+                        }
+                      />
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={3}
+              onClick={[Function]}
+              style={
+                {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <li
+                  className="sc-bcXGCL isjtcp frise__stepItem"
+                  onClick={[Function]}
+                >
+                  <svg
+                    fill="none"
+                    height="56"
+                    viewBox="0 0 232 56"
+                    width="248"
+                  >
+                    <path
+                      d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      clipRule="evenodd"
+                      d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <a
+                    className="sc-bcXGCL flqMXj frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/questionnaire/questionnaire-administrateur-de-projet"
+                    style={
+                      {
+                        "transform": "translate(-45%,-50%)",
+                      }
+                    }
+                  >
+                    <p
+                      aria-describedby=":r9:"
+                      className="sc-bcXGCL fWXba-D cap-text frise__stepItem__link__title platform__body"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onClickCapture={[Function]}
+                      onFocusCapture={[Function]}
+                      onKeyDownCapture={[Function]}
+                      onKeyPressCapture={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseDownCapture={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseMove={[Function]}
+                      title="Questionnaire qui dénonce"
+                    >
+                      Questionnaire qui dénonce
+                    </p>
+                    <span
+                      hidden={true}
+                      id=":r9:"
+                      style={
+                        {
+                          "position": "fixed",
+                        }
+                      }
+                    />
+                    <p
+                      className="sc-bcXGCL dlvOxF cap-text frise__stepItem__link__content platform__body"
+                    />
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>,
+]
+`;

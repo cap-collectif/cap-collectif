@@ -1,13 +1,13 @@
 // @ts-nocheck
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { cleanChildren } from '~/utils/cleanChildren'
 import type { AvatarSize } from '~ds/Avatar/Avatar'
 import Avatar from '~ds/Avatar/Avatar'
 import AppBox from '~ui/Primitives/AppBox'
 import Flex from '~ui/Primitives/Layout/Flex'
 import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type'
 import Text from '~ui/Primitives/Text'
+import { cleanChildren } from '@shared/utils/cleanChildren'
 export type Props = AppBoxProps & {
   readonly children?: JSX.Element | JSX.Element[] | string
   readonly max?: number

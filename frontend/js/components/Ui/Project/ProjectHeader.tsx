@@ -14,7 +14,6 @@ import {
   Title,
   Info,
 } from './ProjectHeader.Cover'
-import { Frise, Step, Steps } from './ProjectHeader.Frise'
 
 type Props = BoxProps & {
   children?: JSX.Element | JSX.Element[] | string
@@ -29,7 +28,6 @@ const ProjectHeader = ({ children, ...rest }: Props) => {
 }
 
 ProjectHeader.Cover = Cover
-ProjectHeader.Frise = Frise
 ProjectHeader.Title = Title
 ProjectHeader.Content = Content
 ProjectHeader.CoverImage = CoverImage
@@ -40,6 +38,5 @@ ProjectHeader.Block = Block
 ProjectHeader.Info = Info
 ProjectHeader.Socials = Socials
 ProjectHeader.Social = Social
-ProjectHeader.Steps = Steps
-ProjectHeader.Step = Step
+
 export default ProjectHeader

@@ -1,21 +1,23 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useFragment, graphql } from 'react-relay'
-import { useSelector } from 'react-redux'
-import { Tooltip } from '@cap-collectif/ui'
+import { Box, BoxProps, Tooltip } from '@cap-collectif/ui'
 import moment from 'moment'
-import ProjectHeader from '~ui/Project/ProjectHeader'
-import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project.graphql'
+import type { ProjectStepTabs_project$key } from '@relay/ProjectStepTabs_project.graphql'
 import { fromGlobalId, isGlobalId } from '@shared/utils/fromGlobalId'
-import { convertTypenameToStepSlug } from '~/utils/router'
-import useIsMobile from '~/utils/hooks/useIsMobile'
-import { GlobalState } from '~/types'
+import useIsMobile from '@shared/hooks/useIsMobile'
+import { convertTypenameToStepSlug } from './utils'
+import { Progress } from './Progress'
+import { Steps } from './Steps'
+import { Step } from './Step'
 
-export type Props = {
+export type Props = BoxProps & {
   project: ProjectStepTabs_project$key
-  platformLocale: string
+  platformLocale?: string
   isConsultation?: boolean
   currentStepId?: string
+  mainColor: string
+  RouterWrapper?: React.JSXElementConstructor<any>
 }
 const FRAGMENT = graphql`
   fragment ProjectStepTabs_project on Project {
@@ -40,18 +42,20 @@ const FRAGMENT = graphql`
   }
 `
 
-const ProjectStepTabs = ({
+const ProjectStepTabs: React.FC<Props> = ({
   project,
   isConsultation,
   platformLocale,
-  currentStepId: routerCurrentStep,
-}: Props): JSX.Element => {
+  currentStepId: initialStepId,
+  mainColor,
+  RouterWrapper,
+  ...rest
+}) => {
   const data = useFragment(FRAGMENT, project)
   const intl = useIntl()
   const isMobile = useIsMobile()
-  const projectStepId = useSelector((state: GlobalState) => state.project.currentProjectStepById)
 
-  const [currentStepId, setCurrentStepId] = React.useState(routerCurrentStep ?? projectStepId)
+  const [currentStepId, setCurrentStepId] = React.useState(initialStepId)
 
   const { id: current } = isGlobalId(currentStepId)
     ? fromGlobalId(currentStepId)
@@ -122,14 +126,14 @@ const ProjectStepTabs = ({
                 id: 'fromDayToDay',
               },
               {
-                day: intl.formatDate(moment(step.timeRange?.startAt), {
+                day: intl.formatDate(moment(step.timeRange?.startAt) as unknown as string, {
                   day: 'numeric',
                   month: 'short',
                   year: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric',
                 }),
-                anotherDay: intl.formatDate(moment(step.timeRange?.endAt), {
+                anotherDay: intl.formatDate(moment(step.timeRange?.endAt) as unknown as string, {
                   day: 'numeric',
                   month: 'short',
                   year: 'numeric',
@@ -164,7 +168,7 @@ const ProjectStepTabs = ({
           id: 'frise-tooltip-text',
         },
         {
-          date: intl.formatDate(moment(step.timeRange?.startAt), {
+          date: intl.formatDate(moment(step.timeRange?.startAt) as unknown as string, {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -188,7 +192,7 @@ const ProjectStepTabs = ({
         const progress =
           moment().diff(moment(step.timeRange.startAt), 'days') /
           moment(step.timeRange?.endAt).diff(moment(step.timeRange?.startAt), 'days')
-        return <ProjectHeader.Step.Progress progress={progress * 100} />
+        return <Progress progress={progress * 100} mainColor={mainColor} />
       }
     }
 
@@ -218,17 +222,18 @@ const ProjectStepTabs = ({
   }
 
   return (
-    <ProjectHeader.Frise>
-      <ProjectHeader.Steps
+    <Box className="frise" width="100%" paddingX={[4, 0]} {...rest}>
+      <Steps
         modalTitle={intl.formatMessage({
           id: 'project-header-step-modal-title',
         })}
         currentStepIndex={currentStepIndex}
+        mainColor={mainColor}
       >
         {data.steps
           .filter(step => step.enabled)
           .map(step => (
-            <ProjectHeader.Step
+            <Step
               key={step.id}
               stepId={step.id}
               title={step.label}
@@ -237,17 +242,21 @@ const ProjectStepTabs = ({
               }}
               questionnaireId={step.questionnaire?.id}
               href={`/${convertTypenameToStepSlug(step.__typename)}/${step.slug || ''}`}
-              url={isConsultation || step.__typename === 'ConsultationStep' || isMobile ? step.url : null}
+              url={
+                isConsultation || step.__typename === 'ConsultationStep' || isMobile || !RouterWrapper ? step.url : null
+              }
               content={returnStepStatus(step)}
               tooltipLabel={getTooltipText(step)}
               state={getColorState(step.id, step.state)}
               platformLocale={platformLocale}
+              mainColor={mainColor}
+              RouterWrapper={RouterWrapper}
             >
               {renderProgressBar(step)}
-            </ProjectHeader.Step>
+            </Step>
           ))}
-      </ProjectHeader.Steps>
-    </ProjectHeader.Frise>
+      </Steps>
+    </Box>
   )
 }
 

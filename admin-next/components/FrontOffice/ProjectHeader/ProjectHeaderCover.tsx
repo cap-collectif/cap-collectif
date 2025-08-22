@@ -89,7 +89,7 @@ export const ProjectHeaderCover: FC<{
         (max-width: 2560px) 960px,"
         />
       ) : (
-        <EntityPlaceholder icon={CapUIIcon.FolderO} scale="3" />
+        <EntityPlaceholder icon={CapUIIcon.FolderO} scale="3" color="primary.base" />
       )}
       {archived && visibility === 'PUBLIC' ? (
         <Tag id="cap-project-archived" variantColor="infoGray" position="absolute" top="xs" right="xs">

@@ -2,7 +2,6 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import ProjectHeaderDistrictsList from '~/components/Project/ProjectHeaderDistrictsList'
 import ProjectRestrictedAccessFragment from '~/components/Project/Page/ProjectRestrictedAccessFragment'
-import ProjectStepTabs from '~/components/Project/ProjectStepTabs'
 import ProjectHeaderBlocks from '~/components/Project/ProjectHeaderBlocks'
 import ProjectHeaderShareButtons from '~/components/Project/ProjectHeaderShareButtons'
 import type { ProjectHeader_project$key } from '~relay/ProjectHeader_project.graphql'
@@ -12,6 +11,10 @@ import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList'
 import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag'
 import htmlDecode from '~/components/Utils/htmlDecode'
 import { insertCustomCode } from '~/utils/customCode'
+import ProjectStepTabs from '@shared/projectFrise/ProjectStepTabs'
+import { useSelector } from 'react-redux'
+import { GlobalState } from '~/types'
+import { RouterWrapper } from '~ui/Project/ProjectHeader.Frise'
 
 const FRAGMENT = graphql`
   fragment ProjectHeader_project on Project
@@ -52,6 +55,8 @@ export type Props = {
 
 const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId }: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
+  const projectStepId = useSelector((state: GlobalState) => state.project.currentProjectStepById)
+  const mainColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
 
   React.useEffect(() => {
     insertCustomCode(data?.customCode, 'projectCustomCode') // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,10 +99,14 @@ const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId 
         {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTag />}
       </ProjectHeaderLayout.Cover>
       <ProjectStepTabs
+        mainColor={mainColor}
         project={data}
         isConsultation={isConsultation}
         platformLocale={platformLocale}
-        currentStepId={currentStepId}
+        currentStepId={currentStepId ?? projectStepId}
+        wrapper={RouterWrapper}
+        marginBottom={[-8, -13]}
+        marginTop={3}
       />
     </ProjectHeaderLayout>
   )

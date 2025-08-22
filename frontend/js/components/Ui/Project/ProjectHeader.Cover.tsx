@@ -17,11 +17,9 @@ import {
   CapUIFontSize,
   CapUILineHeight,
 } from '@cap-collectif/ui'
-import { cleanChildren } from '~/utils/cleanChildren'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage'
 import useIsMobile from '~/utils/hooks/useIsMobile'
-import Play from './SVG/Play'
 import type { Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup'
 import '~ds/AvatarGroup/AvatarGroup'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
@@ -29,6 +27,8 @@ import '~ui/Primitives/AppBox.type'
 import Image from '~ui/Primitives/Image'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { GlobalState } from '~/types'
+import { cleanChildren } from '@shared/utils/cleanChildren'
+import Play from '@shared/projectFrise/SVG/Play'
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])

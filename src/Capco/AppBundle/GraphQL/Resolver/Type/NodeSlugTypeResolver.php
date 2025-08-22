@@ -43,6 +43,9 @@ class NodeSlugTypeResolver implements QueryInterface
         if (str_contains($nodeClass, 'SelectionStep')) {
             return $this->typeResolver->resolve('InternalSelectionStep');
         }
+        if (str_contains($nodeClass, 'OtherStep')) {
+            return $this->typeResolver->resolve('OtherStep');
+        }
 
         throw new UserError('Could not resolve type of Node.');
     }

@@ -3,7 +3,7 @@ import * as React from 'react'
 import type { FlexProps } from '~ui/Primitives/Layout/Flex'
 import Flex from '~ui/Primitives/Layout/Flex'
 import AppBox from '~ui/Primitives/AppBox'
-import { cleanChildren } from '~/utils/cleanChildren'
+import { cleanChildren } from '@shared/utils/cleanChildren'
 
 type Props = FlexProps & {
   separator: string

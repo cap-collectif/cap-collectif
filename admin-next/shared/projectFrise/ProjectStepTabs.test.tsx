@@ -4,8 +4,8 @@ import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProjectStepTabs from './ProjectStepTabs'
-import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
-import type { ProjectStepTabsTestQuery } from '~relay/ProjectStepTabsTestQuery.graphql'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
+import type { ProjectStepTabsTestQuery } from '@relay/ProjectStepTabsTestQuery.graphql'
 
 describe('<ProjectStepTabs />', () => {
   let environment
@@ -82,24 +82,11 @@ describe('<ProjectStepTabs />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ProjectStepTabsTestQuery>(query, {})
       if (!data.project) return null
-      return <ProjectStepTabs project={data.project} {...props} platformLocale="fr-FR" />
+      return <ProjectStepTabs mainColor="#546E7A" project={data.project} {...props} />
     }
 
     TestComponent = props => (
-      <RelaySuspensFragmentTest
-        store={{
-          project: {
-            currentProjectStepById: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcFByb2plY3RPd25lcg==',
-          },
-          default: {
-            parameters: {
-              'color.btn.primary.bg': '#546E7A',
-            },
-          },
-        }}
-        useCapUIProvider
-        environment={environment}
-      >
+      <RelaySuspensFragmentTest useCapUIProvider environment={environment}>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Skeleton } from '@cap-collectif/ui'
+import { Box, Skeleton } from '@cap-collectif/ui'
 import ProjectHeader from '~ui/Project/ProjectHeader'
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery'
 
@@ -35,9 +35,9 @@ const ProjectHeaderPlaceholder = ({ hasError, fetchData }: Props): JSX.Element =
           </ProjectHeader.Socials>
         </ProjectHeader.Content>
       </ProjectHeader.Cover>
-      <ProjectHeader.Frise>
+      <Box width="100%" paddingX={[4, 0]}>
         <Skeleton.Text width="100%" height="56px" />
-      </ProjectHeader.Frise>
+      </Box>
     </ProjectHeader>
   )
 }
