@@ -10,6 +10,7 @@ import type { ProjectStepTabsTestQuery } from '@relay/ProjectStepTabsTestQuery.g
 describe('<ProjectStepTabs />', () => {
   let environment
   let TestComponent
+  jest.useFakeTimers().setSystemTime(new Date('2023-01-01T12:00:00Z'))
   const defaultMockResolvers = {
     Project: () => ({
       steps: [

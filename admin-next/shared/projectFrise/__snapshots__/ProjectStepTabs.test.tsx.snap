@@ -232,7 +232,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                         onMouseEnter={[Function]}
                         onMouseMove={[Function]}
                       >
-                        count.block.daysLeft {"count":-1406}
+                        count.block.daysLeft {"count":-442}
                       </div>
                       <span
                         hidden={true}
@@ -565,7 +565,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                         onMouseEnter={[Function]}
                         onMouseMove={[Function]}
                       >
-                        count.block.daysLeft {"count":-1406}
+                        count.block.daysLeft {"count":-442}
                       </div>
                       <span
                         hidden={true}
