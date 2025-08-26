@@ -322,6 +322,13 @@ abstract class BaseNormalizer
     protected const EXPORT_USER_GROUPS_COUNT_USER_GROUPS = 'export_user_groups_count_user_groups';
     protected const EXPORT_USER_GROUPS_CREATED_AT = 'export_user_groups_created_at';
     protected const EXPORT_USER_GROUPS_UPDATED_AT = 'export_user_groups_updated_at';
+    protected const EXPORT_APP_LOG_CREATED_AT = 'export_app_log_created_at';
+    protected const EXPORT_APP_LOG_DESCRIPTION = 'export_app_log_description';
+    protected const EXPORT_APP_LOG_IP = 'export_app_log_ip';
+
+    protected const EXPORT_APP_LOG_USER_EMAIL = 'export_app_log_user_email';
+    protected const EXPORT_APP_LOG_ACTION_TYPE = 'export_app_log_action_type';
+    protected const EXPORT_APP_LOG_USER_USERNAME = 'export_app_log_user_username';
     protected const EXPORT_VOTE_TYPES = [
         ForOrAgainstType::FOR => self::EXPORT_VOTE_TYPE_FOR,
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,

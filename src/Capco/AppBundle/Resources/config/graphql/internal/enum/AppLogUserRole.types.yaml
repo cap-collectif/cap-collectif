@@ -1,0 +1,20 @@
+AppLogUserRole:
+    type: enum
+    config:
+        description: 'Available roles to filter app log authors'
+        values:
+            ROLE_PROJECT_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_PROJECT_ADMIN
+                description: 'Represents a project admin.'
+            ROLE_SUPER_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_SUPER_ADMIN
+                description: 'Represents a super administrator.'
+            ROLE_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_ADMIN
+                description: 'Represents an administrator.'
+            ORGANIZATION_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\OrganizationMemberRoleType::ADMIN
+                description: 'Admin of the organization'
+            ORGANIZATION_MEMBER:
+                value: !php/const Capco\AppBundle\Enum\OrganizationMemberRoleType::USER
+                description: 'Member of the organization'

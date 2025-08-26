@@ -1,0 +1,11 @@
+DateRange:
+    type: input-object
+    config:
+        description: 'Filter by dates between startedAt and endedAt'
+        fields:
+            startedAt:
+                type: 'DateTime'
+                description: 'The start date of the range.'
+            endedAt:
+                type: 'DateTime'
+                description: 'The end date of the range.'

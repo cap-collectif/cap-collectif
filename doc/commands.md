@@ -86,7 +86,8 @@ Pour les prochaines commandes d'export merci de ne pas utiliser graphQL, mais bi
       capco:export:projects-contributors          
       capco:export:collect-selection:contributions
       capco:export:questionnaire:contributions
-      capco:export:step-contributors              
+      capco:export:step-contributors
+      capco:export:applogs
 
 
 <a div="emails"></a>Génération d'emails - Obsolète ?

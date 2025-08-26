@@ -742,3 +742,31 @@ InternalQuery:
                         description: 'The ordering direction for the user last login date'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContributorsResolver", [args])'
                 argsBuilder: 'Relay::ForwardConnection'
+            appLog:
+                type: 'InternalAppLogConnection!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    term:
+                        type: 'String'
+                        description: 'If provided, searches logs by username, email, description, ip.'
+                        defaultValue: null
+                    dateRange:
+                        type: 'DateRange'
+                        description: 'Filter logs by a date range.'
+                        defaultValue: null
+                    orderBy:
+                        type: 'AppLogOrder'
+                        description: 'Ordering options for logs returning from the connection.'
+                        defaultValue:
+                          {
+                              field: !php/const Capco\AppBundle\Enum\SortField::CREATED_AT,
+                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                          }
+                    userRole:
+                        type: 'AppLogUserRole'
+                        defaultValue: null
+                    actionType:
+                        type: 'LogActionType'
+                        defaultValue: null
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AppLogResolver", args, getUser())'

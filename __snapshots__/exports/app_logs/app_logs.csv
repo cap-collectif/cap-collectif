@@ -1,0 +1,6 @@
+﻿export_log_admin_created_at,export_log_admin_user_username,export_log_admin_user_email,export_log_admin_ip,export_log_admin_action_type,export_log_admin_description
+"2025-07-01 12:02:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,DELETE,"l'étape Collecte des questions chez youpie du projet Questions/Responses"
+"2025-07-01 11:59:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,EXPORT,"les données des utilisateurs"
+"2025-06-01 18:35:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,EDIT,"Formulaire de questionnaire du projet Je suis un projet"
+"2025-06-01 15:32:18",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,CREATE,"Formulaire de questionnaire du projet Je suis un projet"
+"2025-01-01 00:00:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,SHOW,"Page Liste des utilisateurs"

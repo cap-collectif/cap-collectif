@@ -1017,6 +1017,75 @@ type Answer {
 
 union AnswerOrPost = Answer | Post
 
+"""App log."""
+type AppLog {
+  """The action logged date."""
+  createdAt: DateTime!
+  user: UserAppLog!
+  actionType: String!
+  description: String
+  ip: String
+}
+
+"""A connection to a list of items."""
+type AppLogConnection {
+  totalCount: Int!
+
+  """newest logged action"""
+  newestLoggedAt: DateTime!
+
+  """oldest logged action"""
+  oldestLoggedAt: DateTime!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [AppLogEdge]
+}
+
+"""An edge in a connection."""
+type AppLogEdge {
+  """The item at the end of the edge."""
+  node: AppLog!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of users can be ordered upon return."""
+input AppLogOrder {
+  """The field to order log admin by."""
+  field: AppLogOrderField! = 
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which app log connections can be ordered"""
+enum AppLogOrderField {
+  """Allows ordering a list of app log by when they were created."""
+  CREATED_AT
+}
+
+"""Available roles to filter app log authors"""
+enum AppLogUserRole {
+  """Represents a project admin."""
+  ROLE_PROJECT_ADMIN
+
+  """Represents a super administrator."""
+  ROLE_SUPER_ADMIN
+
+  """Represents an administrator."""
+  ROLE_ADMIN
+
+  """Admin of the organization"""
+  ORGANIZATION_ADMIN
+
+  """Member of the organization"""
+  ORGANIZATION_MEMBER
+}
+
 """A contribution"""
 type Appendix {
   """Identifies the body of the contribution."""
@@ -4622,6 +4691,15 @@ type DateOfBirthRequirement implements Node & Requirement & DataCollectedByFranc
   ): DateTime
 }
 
+"""Filter by dates between startedAt and endedAt"""
+input DateRange {
+  """The start date of the range."""
+  startedAt: DateTime
+
+  """The end date of the range."""
+  endedAt: DateTime
+}
+
 """A string containing a datetime."""
 scalar DateTime
 
@@ -8205,6 +8283,24 @@ input Location {
 
   """The longitude of this address."""
   lng: Float!
+}
+
+"""Available app log actions"""
+enum LogActionType {
+  """Represents a listing page."""
+  SHOW
+
+  """Represents an entity insertion."""
+  CREATE
+
+  """Represents an entity deletion."""
+  DELETE
+
+  """Represents an entity update."""
+  EDIT
+
+  """Represents an export download"""
+  EXPORT
 }
 
 """A logic jump in a question."""
@@ -14500,6 +14596,26 @@ type Query {
     """The ordering direction for the user last login date"""
     orderBy: ContributorOrder
   ): ContributorConnection!
+  appLog(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """If provided, searches logs by username, email, description, ip."""
+    term: String = null
+
+    """Filter logs by a date range."""
+    dateRange: DateRange = null
+
+    """Ordering options for logs returning from the connection."""
+    orderBy: AppLogOrder = {field: CREATED_AT, direction: DESC}
+    userRole: AppLogUserRole = null
+    actionType: LogActionType = null
+  ): AppLogConnection!
 }
 
 input QueryAnalyticsFilter {
@@ -21432,6 +21548,14 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   one proposal, as analyst, supervisor or decision marker
   """
   isEvaluerOnNewTool: Boolean!
+}
+
+"""A user is an individual's account."""
+type UserAppLog {
+  """uuid of the user"""
+  id: ID!
+  username: String
+  email: String
 }
 
 """A connection to a list of items."""

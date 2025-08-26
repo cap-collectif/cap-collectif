@@ -1,0 +1,18 @@
+InternalUserAppLog:
+    type: object
+    config:
+        description: "A user is an individual's account."
+        name: UserAppLog
+        fields:
+            id:
+                type: 'ID!'
+                description: 'uuid of the user'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: User
+            username:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            email:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'

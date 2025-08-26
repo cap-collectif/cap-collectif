@@ -1,0 +1,562 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query.appLog connection fetches app logs with ADMIN user role 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with CREATE action type 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with DELETE action type 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with EDIT action type 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with EXPORT action type 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with ORGANIZATION_ADMIN 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with ORGANIZATION_MEMBER 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with SHOW action type 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with SUPER_ADMIN user role 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with all arguments 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with created_at order DESC 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with dates between startedAt and endedAt 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with ip term 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with user email term 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with username term 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs without arguments 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+  },
+}
+`;

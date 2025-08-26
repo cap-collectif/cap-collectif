@@ -1,0 +1,14 @@
+InternalAppLogConnection:
+    type: relay-connection
+    config:
+        name: AppLogConnection
+        nodeType: InternalAppLog!
+        connectionFields:
+            totalCount:
+                type: Int!
+            newestLoggedAt:
+                type: DateTime!
+                description: 'newest logged action'
+            oldestLoggedAt:
+                type: DateTime!
+                description: 'oldest logged action'

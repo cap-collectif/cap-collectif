@@ -1,0 +1,17 @@
+InternalAppLog:
+    type: object
+    config:
+        description: 'App log.'
+        name: AppLog
+        fields:
+            createdAt:
+                type: DateTime!
+                description: 'The action logged date.'
+            user:
+                type: InternalUserAppLog!
+            actionType:
+                type: String!
+            description:
+                type: String
+            ip:
+                type: String

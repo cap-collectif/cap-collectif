@@ -1,0 +1,13 @@
+AppLogOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of users can be ordered upon return.'
+        fields:
+            field:
+                type: 'AppLogOrderField!'
+                defaultValue: !php/const Capco\AppBundle\Enum\AppLogOrderField::CREATED_AT
+                description: The field to order log admin by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
+                description: The ordering direction.

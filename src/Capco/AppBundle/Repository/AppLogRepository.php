@@ -96,7 +96,7 @@ class AppLogRepository extends EntityRepository
 
         $directionField = $direction['field'];
 
-        $orderByField = \constant("Capco\\AppBundle\\Enum\\LogAdminOrderField::{$directionField}");
+        $orderByField = \constant("Capco\\AppBundle\\Enum\\AppLogOrderField::{$directionField}");
 
         return $qb
             ->orderBy(sprintf('l.%s', $orderByField), $direction['direction'])
@@ -132,6 +132,20 @@ class AppLogRepository extends EntityRepository
         ;
 
         return $qbd->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @return AppLog[]
+     */
+    public function findAllLogsPaginated(string $locale, int $offset = 0, int $limit = 100): array
+    {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     public function getOldestLogDate(): \DateTime

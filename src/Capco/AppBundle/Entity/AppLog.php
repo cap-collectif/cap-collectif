@@ -31,9 +31,9 @@ class AppLog
     private ?string $description = null;
 
     /**
-     * @ORM\Column(name="ip", type="string")
+     * @ORM\Column(name="ip", type="string", nullable=true)
      */
-    private string $ip;
+    private ?string $ip = null;
 
     /**
      * @ORM\Column(type="string", name="entity_id", length=36, nullable=true)
@@ -111,12 +111,12 @@ class AppLog
         return $this;
     }
 
-    public function getIp(): string
+    public function getIp(): ?string
     {
         return $this->ip;
     }
 
-    public function setIp(string $ip): self
+    public function setIp(?string $ip): self
     {
         $this->ip = $ip;
 

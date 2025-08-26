@@ -16,6 +16,7 @@ use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Command\ExportDebateContributionsCommand;
 use Capco\AppBundle\Command\Service\CronTimeInterval;
+use Capco\AppBundle\Command\Service\FilePathResolver\AppLogFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\VotesFilePathResolver;
@@ -82,6 +83,7 @@ class ExportController extends Controller
         private readonly KernelInterface $kernel,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly AppLogFilePathResolver $appLogFilePathResolver,
         private readonly VotesFilePathResolver $votesFilePathResolver,
         private readonly SessionInterface $session,
         private readonly CronTimeInterval $cronTimeInterval,
@@ -433,6 +435,30 @@ class ExportController extends Controller
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
         $response = $this->file($absolutePath, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/download-app-logs", name="app_export_app_logs", options={"i18n" = false})
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function downloadAppLog(Request $request): Response
+    {
+        $fileName = $this->appLogFilePathResolver->getFileName();
+        $filePath = $this->appLogFilePathResolver->getExportPath();
+
+        if (!file_exists($filePath)) {
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                404
+            );
+        }
+
+        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
+
+        $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;

@@ -1,0 +1,8 @@
+AppLogOrderField:
+    type: enum
+    config:
+        description: 'Properties by which app log connections can be ordered'
+        values:
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\UserOrderField::CREATED_AT
+                description: 'Allows ordering a list of app log by when they were created.'

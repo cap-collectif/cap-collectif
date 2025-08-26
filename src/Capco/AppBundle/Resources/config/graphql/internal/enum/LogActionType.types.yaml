@@ -1,0 +1,20 @@
+LogActionType:
+    type: enum
+    config:
+        description: 'Available app log actions'
+        values:
+            SHOW:
+                value: !php/const Capco\AppBundle\Enum\LogActionType::SHOW
+                description: 'Represents a listing page.'
+            CREATE:
+                value: !php/const Capco\AppBundle\Enum\LogActionType::CREATE
+                description: 'Represents an entity insertion.'
+            DELETE:
+                value: !php/const Capco\AppBundle\Enum\LogActionType::DELETE
+                description: 'Represents an entity deletion.'
+            EDIT:
+                value: !php/const Capco\AppBundle\Enum\LogActionType::EDIT
+                description: 'Represents an entity update.'
+            EXPORT:
+                value: !php/const Capco\AppBundle\Enum\LogActionType::EXPORT
+                description: 'Represents an export download'

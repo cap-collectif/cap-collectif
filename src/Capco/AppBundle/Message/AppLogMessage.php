@@ -10,7 +10,7 @@ class AppLogMessage
         private readonly ?string $description,
         private readonly ?string $entityType,
         private readonly ?string $entityId,
-        private readonly string $ip
+        private readonly ?string $ip
     ) {
     }
 
@@ -39,7 +39,7 @@ class AppLogMessage
         return $this->entityId;
     }
 
-    public function getIp(): string
+    public function getIp(): ?string
     {
         return $this->ip;
     }
