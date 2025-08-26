@@ -1,0 +1,49 @@
+Capco\AppBundle\Entity\AppLog:
+    log1:
+        id: 'logShow'
+        user: '@user1'
+        actionType: 'SHOW'
+        description: 'Page Liste des utilisateurs'
+        ip: '127.0.0.1'
+        createdAt: <identity((new \DateTime('2025-01-01 00:00:00')))>
+    log2:
+        id: 'logCreate'
+        user: '@user2'
+        actionType: 'CREATE'
+        description: 'Formulaire de questionnaire du projet Je suis un projet'
+        ip: '127.0.0.1'
+        entityType: 'Capco\AppBundle\Entity\Questionnaire'
+        entityId: 'qAvecDesConditionsRequises'
+        createdAt: <identity((new \DateTime('2025-06-01 15:32:18')))>
+    log3:
+        id: 'logEdit'
+        user: '@user3'
+        actionType: 'EDIT'
+        description: 'Formulaire de questionnaire du projet Je suis un projet'
+        ip: '127.0.0.1'
+        entityType: 'Capco\AppBundle\Entity\Questionnaire'
+        entityId: 'qAvecDesConditionsRequises'
+        createdAt: <identity((new \DateTime('2025-06-01 18:35:00')))>
+    log4:
+        id: 'logDelete'
+        user: '@user4'
+        actionType: 'DELETE'
+        description: "l'étape Collecte des questions chez youpie du projet Questions/Responses"
+        ip: '127.0.0.1'
+        entityType: 'Capco\AppBundle\Entity\Steps\CollectStep'
+        entityId: 'project21'
+        createdAt: <identity((new \DateTime('2025-07-01 12:02:00')))>
+    log5:
+        id: 'logExport'
+        user: '@userWelcomattic'
+        actionType: 'EXPORT'
+        description: 'les données des utilisateurs'
+        ip: '127.0.0.1'
+        createdAt: <identity((new \DateTime('2025-07-01 11:59:00')))>
+    log6:
+        id: 'logOrganizationMember'
+        user: '@valerieMassonDelmotte'
+        actionType: 'EXPORT'
+        description: 'les données des utilisateurs'
+        ip: '127.0.0.2'
+        createdAt: <identity((new \DateTime('2025-07-01 11:59:00')))>

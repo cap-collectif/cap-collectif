@@ -7066,61 +7066,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/ContactPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CustomPage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/CustomPage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\DeveloperCategoryPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/DeveloperCategoryPage.php
@@ -12761,16 +12706,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Api/MediasController.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Api\\\\MediasController\\:\\:setFileUploadViolations\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Api/MediasController.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Api\\\\MediasController\\:\\:setFileUploadViolations\\(\\) has parameter \\$fileUploadViolations with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Api/MediasController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Api\\\\SiradelController\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Api/SiradelController.php
@@ -17657,11 +17592,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Post.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:getUpdatedAt\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Post.php
 
@@ -23476,16 +23406,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Args/TranslatableField.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\ConnectionBuilder\\:\\:connectionFromArray\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/ConnectionBuilder.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\ConnectionBuilder\\:\\:empty\\(\\) has parameter \\$extraFields with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/ConnectionBuilder.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\ConnectionTraversor\\:\\:traverse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/ConnectionTraversor.php
@@ -29109,11 +29029,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\QueryPagesResolver\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/QueryPagesResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\QueryPostsResolver\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Query/QueryPostsResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\QueryProjectsResolver\\:\\:getFilters\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -35096,6 +35011,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AppLogRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AppLogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AppLogRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AppLogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AppLogRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AppLogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AppLogRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AppLogRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ArgumentRepository\\:\\:countAllByAuthor\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ArgumentRepository.php
@@ -37351,11 +37286,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectVoteRepository\\:\\:countPublishedCollectVoteByStep\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalCollectVoteRepository\\:\\:countVotesByProposal\\(\\) has parameter \\$proposalId with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalCollectVoteRepository.php
@@ -39069,111 +38999,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\Project\\\\ProjectSerializerInterface\\:\\:renderProjects\\(\\) has parameter \\$projects with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/Project/ProjectSerializerInterface.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:addItemToData\\(\\) has parameter \\$item with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:booleanToString\\(\\) has parameter \\$boolean with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:formatText\\(\\) has parameter \\$text with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getQuestionnaireData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getQuestionnaireHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getRepliesData\\(\\) has parameter \\$replies with no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getReplyItem\\(\\) has parameter \\$reply with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getReplyItem\\(\\) has parameter \\$responses with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getReplyItem\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getResponseValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getResponseValue\\(\\) has parameter \\$response with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getWriterFromData\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getWriterFromData\\(\\) has parameter \\$headers with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getWriterFromData\\(\\) has parameter \\$title with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:translateHeaders\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Parameter \\#2 \\$responses of method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:getReplyItem\\(\\) expects array, iterable given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:\\$customFields type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:\\$headers type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectStatsResolver\\:\\:addPercentages\\(\\) has parameter \\$base with no type specified\\.$#"
@@ -41981,11 +41806,6 @@ parameters:
 			path: src/Capco/AppBundle/Utils/Map.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\RequestGuesser\\:\\:getJsonContent\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/RequestGuesser.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\SpoutHelper\\:\\:getFormattedHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/SpoutHelper.php
@@ -43947,11 +43767,6 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository\\:\\:findAllToArray\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
 

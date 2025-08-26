@@ -990,3 +990,8 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:CollectStepImapServerConfig']
 
+    Capco\AppBundle\Repository\AppLogRepository:
+        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        lazy: true
+        tags: [ 'repository.manager' ]
+        arguments: [ 'CapcoAppBundle:AppLog' ]

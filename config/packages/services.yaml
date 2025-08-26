@@ -511,10 +511,8 @@ services:
         arguments:
             $mandrillApiKey: '%mandrill_api_key%'
 
-    Capco\AppBundle\MessageHandler\MailSingleRecipientMessageHandler:
-        tags:
-            name: messenger.message_handler
-            handles: Capco\AppBundle\Message\MailSingleRecipientMessage
+    Capco\AppBundle\MessageHandler\:
+        resource: '../../src/Capco/AppBundle/MessageHandler'
 
     Symfony\Component\Finder\Finder:
         class: Symfony\Component\Finder\Finder
@@ -523,3 +521,5 @@ services:
         arguments:
             $maxSize: '%max_media_folder_size%'
             $projectDir: '%kernel.project_dir%'
+
+    Capco\AppBundle\Logger\ActionLogger: ~

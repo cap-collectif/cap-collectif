@@ -6,7 +6,7 @@ use Capco\AppBundle\Message\MailSingleRecipientMessage;
 use Capco\AppBundle\Service\MailChimpClient;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-#[AsMessageHandler]
+#[AsMessageHandler(fromTransport: 'async', handles: MailSingleRecipientMessage::class)]
 class MailSingleRecipientMessageHandler
 {
     public function __construct(

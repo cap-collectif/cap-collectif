@@ -325,6 +325,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             // Participant
             $this->fixturesDir . 'Dev/Participant.yaml',
             $this->fixturesDir . 'Dev/ParticipantPhoneVerificationSms.yaml',
+            $this->fixturesDir . 'Dev/AppLog.yaml',
         ];
     }
 
