@@ -2,7 +2,7 @@ import { CapUIFontSize, CapUILineHeight, Flex, Text, Tooltip, headingStyles } fr
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { cleanChildren } from '@shared/utils/cleanChildren'
 import { hexToRgb } from '@shared/utils/colors'
-import { cloneElement, FC } from 'react'
+import React, { cloneElement, FC } from 'react'
 import StartStep from './SVG/Start'
 import EndStep from './SVG/End'
 import MiddleStep from './SVG/Step'
@@ -175,7 +175,7 @@ export const Step: FC<StepProps> = ({
   }
 
   return (
-    <>
+    <React.Fragment>
       {isValidTooltip ? (
         <Tooltip className="platform__body" label={tooltipLabel}>
           <Flex
@@ -301,6 +301,6 @@ export const Step: FC<StepProps> = ({
           </Flex>
         </>
       )}
-    </>
+    </React.Fragment>
   )
 }
