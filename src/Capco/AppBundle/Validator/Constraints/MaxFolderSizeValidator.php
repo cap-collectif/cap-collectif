@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use TusPhp\File;
 
 class MaxFolderSizeValidator extends ConstraintValidator
 {
@@ -26,11 +27,14 @@ class MaxFolderSizeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, MaxFolderSize::class);
         }
 
-        if (!$value instanceof UploadedFile) {
-            throw new UnexpectedTypeException($value, UploadedFile::class);
+        if (
+            !$value instanceof UploadedFile
+            && !$value instanceof File
+        ) {
+            throw new \InvalidArgumentException(sprintf('The value must be an instance of "%s" or "%s"', UploadedFile::class, File::class));
         }
 
-        $uploadedFileSize = $value->getSize();
+        $uploadedFileSize = $value instanceof UploadedFile ? $value->getSize() : $value->getFileSize();
 
         $totalSize = $this->getMediaFolderSize() + $uploadedFileSize;
 

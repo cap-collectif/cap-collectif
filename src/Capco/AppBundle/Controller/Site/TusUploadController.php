@@ -49,7 +49,7 @@ class TusUploadController extends AbstractController
         $server->event()->addListener(UploadCreated::NAME, function (TusEvent $event) use ($validator, $logger) {
             $file = $event->getFile();
 
-            $violations = $validator->validate($file->getFileSize(), [
+            $violations = $validator->validate($file, [
                 new MaxFolderSize(),
             ]);
 
