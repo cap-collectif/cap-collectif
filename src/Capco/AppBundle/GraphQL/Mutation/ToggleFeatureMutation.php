@@ -5,11 +5,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Form\ApiToggleType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ToggleFeatureMutation implements MutationInterface
@@ -20,18 +18,16 @@ class ToggleFeatureMutation implements MutationInterface
     {
     }
 
-    public function __invoke(Argument $args, User $viewer)
+    public function __invoke(Argument $args)
     {
         $this->formatInput($args);
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
 
         $feature = $args->offsetGet('type');
         $enabled = $args->offsetGet('enabled');
         unset($args['type']);
         $data = $args->getArrayCopy();
 
+        // todo remove this check, it's useless https://github.com/cap-collectif/platform/issues/18474
         if (!$this->toggleManager->exists($feature)) {
             throw new NotFoundHttpException(sprintf('The feature "%s" doesn\'t exists.', $feature));
         }

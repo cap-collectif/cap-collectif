@@ -9,6 +9,7 @@ import ModalOpenIDDelete from './ModalOpenIDDelete'
 import { toggleSSO } from '@mutations/ToggleSSOConfigurationStatusMutation'
 import { useIntl } from 'react-intl'
 import { useMultipleDisclosure } from '@liinkiing/react-hooks'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type CardOpenIDProps = {
   readonly ssoConfiguration: CardOpenID_ssoConfiguration$key
@@ -34,6 +35,7 @@ const CardOpenID: FC<CardOpenIDProps> = ({ ssoConfiguration: ssoConfigurationFra
     'openID-configuration': false,
     'openID-delete': false,
   })
+  const { viewerSession } = useAppContext()
 
   return (
     <>
@@ -41,12 +43,14 @@ const CardOpenID: FC<CardOpenIDProps> = ({ ssoConfiguration: ssoConfigurationFra
         <CardSSO.Header>
           {hover ? (
             <ButtonGroup>
-              <ButtonQuickAction
-                variantColor="primary"
-                icon={CapUIIcon.Pencil}
-                label={intl.formatMessage({ id: 'action_edit' })}
-                onClick={onOpen('openID-configuration')}
-              />
+              {viewerSession.isSuperAdmin && (
+                <ButtonQuickAction
+                  variantColor="primary"
+                  icon={CapUIIcon.Pencil}
+                  label={intl.formatMessage({ id: 'action_edit' })}
+                  onClick={onOpen('openID-configuration')}
+                />
+              )}
               <ButtonQuickAction
                 variantColor="danger"
                 icon={CapUIIcon.Trash}

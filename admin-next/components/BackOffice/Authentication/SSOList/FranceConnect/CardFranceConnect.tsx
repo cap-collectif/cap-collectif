@@ -11,6 +11,7 @@ import ModalFranceConnectConfiguration from './ModalFranceConnectConfiguration'
 import { toggleSSO } from '@mutations/ToggleSSOConfigurationStatusMutation'
 import { useMultipleDisclosure } from '@liinkiing/react-hooks'
 import { useIntl } from 'react-intl'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type CardFranceConnectProps = {
   readonly ssoConfiguration: CardFranceConnect_ssoConfiguration$key | null
@@ -48,12 +49,13 @@ const CardFranceConnect: FC<CardFranceConnectProps> = ({
     'franceConnect-configuration': false,
     'franceConnect-configuration-editing': false,
   })
+  const { viewerSession } = useAppContext()
 
   return (
     <>
       <CardSSO onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         <CardSSO.Header>
-          {hover ? (
+          {hover && viewerSession.isSuperAdmin ? (
             <ButtonQuickAction
               variantColor="primary"
               icon={CapUIIcon.Pencil}

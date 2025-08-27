@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SSO|CAS Creates a config as super admin 1`] = `
+Object {
+  "createCASSSOConfiguration": Object {
+    "ssoConfiguration": Object {
+      "casCertificate": "--- TEST CREATE CONFIG CERTIFICATE ---",
+      "casServerUrl": "https://test.dev/cas",
+      "casVersion": "v2",
+      "enabled": true,
+      "id": Any<String>,
+      "name": "Test SSO",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO|CAS Deletes a config as admin only 1`] = `
+Object {
+  "deleteSSOConfiguration": Object {
+    "deletedSsoConfigurationId": Any<String>,
+  },
+}
+`;
+
+exports[`Internal|SSO|CAS Updates a config as super admin 1`] = `
+Object {
+  "updateCASSSOConfiguration": Object {
+    "ssoConfiguration": Object {
+      "casCertificate": "--- CERTIFICATE UPDATED ---",
+      "casServerUrl": "https://new.url.com/cas",
+      "casVersion": "v3",
+      "enabled": true,
+      "id": Any<String>,
+      "name": "Cap collectif CAS Provider",
+    },
+  },
+}
+`;

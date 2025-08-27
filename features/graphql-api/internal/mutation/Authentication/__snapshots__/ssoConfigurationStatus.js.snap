@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of cas as admin 1`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "CASSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "Q0FTU1NPQ29uZmlndXJhdGlvbjpjYXM=",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of cas as admin 2`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "CASSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "Q0FTU1NPQ29uZmlndXJhdGlvbjpjYXM=",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of facebook as admin 1`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "FacebookSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "RmFjZWJvb2tTU09Db25maWd1cmF0aW9uOmZhY2Vib29r",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of facebook as admin 2`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "FacebookSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "RmFjZWJvb2tTU09Db25maWd1cmF0aW9uOmZhY2Vib29r",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of franceConnect as admin 1`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "FranceConnectSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of franceConnect as admin 2`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "FranceConnectSSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of ssoOauth2 as admin 1`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "Oauth2SSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
+    },
+  },
+}
+`;
+
+exports[`Internal|ssoConfigurationStatus Toggles twice the status of ssoOauth2 as admin 2`] = `
+Object {
+  "toggleSSOConfigurationStatus": Object {
+    "ssoConfiguration": Object {
+      "__typename": "Oauth2SSOConfiguration",
+      "enabled": Any<Boolean>,
+      "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
+    },
+  },
+}
+`;

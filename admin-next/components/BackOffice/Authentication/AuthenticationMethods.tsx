@@ -30,7 +30,7 @@ const AuthenticationMethods: FC = () => {
           <Section.Description>{intl.formatMessage({ id: 'authentication-methods-description' })}</Section.Description>
         </Flex>
 
-        <AddSSO query={query} />
+        {viewerSession.isSuperAdmin && <AddSSO query={query} />}
       </Flex>
 
       <SSOList query={query} />

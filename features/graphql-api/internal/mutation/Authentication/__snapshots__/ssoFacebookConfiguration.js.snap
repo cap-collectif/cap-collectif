@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SSO|Facebook Updates a config as super admin 1`] = `
+Object {
+  "updateFacebookSSOConfiguration": Object {
+    "facebookSSOConfiguration": Object {
+      "clientId": "123",
+      "enabled": false,
+      "id": "RmFjZWJvb2tTU09Db25maWd1cmF0aW9uOmZhY2Vib29r",
+      "name": "Facebook",
+      "secret": "53cr37",
+    },
+  },
+}
+`;

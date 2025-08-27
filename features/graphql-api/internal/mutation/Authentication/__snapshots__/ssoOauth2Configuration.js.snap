@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SSO|Oauth2 Creates a config as super admin 1`] = `
+Object {
+  "createOauth2SSOConfiguration": Object {
+    "ssoConfiguration": Object {
+      "accessTokenUrl": "https://test.dev/token",
+      "authorizationUrl": "https://test.dev/auth",
+      "clientId": "test",
+      "enabled": true,
+      "id": Any<String>,
+      "logoutUrl": "https://test.dev/logout",
+      "name": "Test SSO",
+      "redirectUri": Any<String>,
+      "secret": "test",
+      "userInfoUrl": "https://test.dev/userinfo",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO|Oauth2 Deletes a config as admin only 1`] = `
+Object {
+  "deleteSSOConfiguration": Object {
+    "deletedSsoConfigurationId": Any<String>,
+  },
+}
+`;
+
+exports[`Internal|SSO|Oauth2 Updates a config as super admin 1`] = `
+Object {
+  "updateOauth2SSOConfiguration": Object {
+    "ssoConfiguration": Object {
+      "accessTokenUrl": "http://INSERT_A_REAL_SECRET",
+      "authorizationUrl": "http://INSERT_A_REAL_SECRET",
+      "clientId": "account",
+      "enabled": true,
+      "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
+      "logoutUrl": "http://INSERT_A_REAL_SECRET",
+      "name": "Cap collectif Oauth2 Provider",
+      "redirectUri": Any<String>,
+      "secret": "INSERT_A_REAL_SECRET",
+      "userInfoUrl": "http://INSERT_A_REAL_SECRET",
+    },
+  },
+}
+`;

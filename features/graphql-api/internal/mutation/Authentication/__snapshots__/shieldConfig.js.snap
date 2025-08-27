@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ShieldConfig Updates a shield config as admin 1`] = `
+Object {
+  "updateShieldAdminForm": Object {
+    "clientMutationId": null,
+    "shieldAdminForm": Object {
+      "introduction": "<p>Jean est une belle personne</p>",
+      "media": Object {
+        "authorName": null,
+        "copyright": null,
+        "description": null,
+        "enabled": true,
+        "height": 900,
+        "id": "ProfilePicBobMarley",
+        "name": "ProfileBobMarley",
+        "providerReference": "bob-marley.jpg",
+        "size": "72469",
+        "type": "image/jpeg",
+        "url": "https://capco.test/media/default/0001/01/bob-marley.jpg",
+        "width": 1200,
+      },
+      "shieldMode": true,
+      "translations": Array [
+        Object {
+          "introduction": "<p>Jean est une belle personne</p>",
+          "locale": "fr-FR",
+        },
+        Object {
+          "introduction": "<p>Jean is a great person and he deserve a great wife.</p>",
+          "locale": "en-GB",
+        },
+      ],
+    },
+  },
+}
+`;

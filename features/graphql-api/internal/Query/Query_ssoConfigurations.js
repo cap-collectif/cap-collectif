@@ -31,6 +31,11 @@ const InternalQuery = /* GraphQL */ `
             clientId
             secret
           }
+          ... on CASSSOConfiguration {
+            casVersion
+            casCertificate
+            casServerUrl
+          }
         }
       }
     }
@@ -44,14 +49,25 @@ describe('Internal|Query.ssoConfigurations', () => {
         edges: [
           {
             node: {
-              clientId: expect.any(String),
-              secret: expect.any(String),
+              casVersion: expect.any(String),
+              casCertificate: expect.any(String),
+              casServerUrl: expect.any(String),
+              name: 'CAS'
             },
           },
           {
             node: {
               clientId: expect.any(String),
               secret: expect.any(String),
+              name: 'Facebook'
+            },
+          },
+          {
+            node: {
+              clientId: expect.any(String),
+              secret: expect.any(String),
+              redirectUri: expect.any(String),
+              name: 'France Connect'
             },
           },
           {
@@ -61,7 +77,9 @@ describe('Internal|Query.ssoConfigurations', () => {
               authorizationUrl: expect.any(String),
               accessTokenUrl: expect.any(String),
               userInfoUrl: expect.any(String),
+              redirectUri: expect.any(String),
               logoutUrl: expect.any(String),
+              name: 'Oauth2'
             },
           },
         ],

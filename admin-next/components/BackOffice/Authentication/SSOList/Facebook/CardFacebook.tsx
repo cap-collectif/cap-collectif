@@ -5,9 +5,10 @@ import logo from './Logo'
 import { graphql, useFragment } from 'react-relay'
 import type { CardFacebook_ssoConfiguration$key } from '@relay/CardFacebook_ssoConfiguration.graphql'
 import ModalFacebookConfiguration from './ModalFacebookConfiguration'
-import { toggleFacebook } from '@mutations/UpdateFacebookSSOConfigurationMutation'
 import { useMultipleDisclosure } from '@liinkiing/react-hooks'
 import { useIntl } from 'react-intl'
+import { toggleSSO } from '@mutations/ToggleSSOConfigurationStatusMutation'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type CardFacebookProps = {
   readonly ssoConfiguration: CardFacebook_ssoConfiguration$key | null
@@ -18,6 +19,7 @@ const FRAGMENT = graphql`
   fragment CardFacebook_ssoConfiguration on FacebookSSOConfiguration {
     __typename
     clientId
+    id
     secret
     enabled
     ...ModalFacebookConfiguration_ssoConfiguration
@@ -32,12 +34,13 @@ const CardFacebook: FC<CardFacebookProps> = ({ ssoConfiguration: ssoConfiguratio
     'facebook-configuration': false,
     'facebook-configuration-editing': false,
   })
+  const { viewerSession } = useAppContext()
 
   return (
     <>
       <CardSSO onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         <CardSSO.Header>
-          {hover ? (
+          {hover && viewerSession.isSuperAdmin ? (
             <ButtonQuickAction
               variantColor="primary"
               icon={CapUIIcon.Pencil}
@@ -57,7 +60,7 @@ const CardFacebook: FC<CardFacebookProps> = ({ ssoConfiguration: ssoConfiguratio
             <Switch
               id="sso-facebook"
               checked={ssoConfiguration.enabled}
-              onChange={() => toggleFacebook(ssoConfiguration, ssoConnectionName)}
+              onChange={() => toggleSSO(ssoConfiguration.id, ssoConfiguration.enabled, ssoConfiguration.__typename)}
             />
           ) : (
             <Button variantColor="primary" variant="tertiary" onClick={onOpen('facebook-configuration')} alternative>

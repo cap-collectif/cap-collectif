@@ -9,6 +9,7 @@ import { useMultipleDisclosure } from '@liinkiing/react-hooks'
 import { useIntl } from 'react-intl'
 import { toggleSSO } from '@mutations/ToggleSSOConfigurationStatusMutation'
 import ModalCASDelete from './ModalCASDelete'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type CardCASProps = {
   readonly ssoConfiguration: CardCAS_ssoConfiguration$key | null
@@ -34,6 +35,7 @@ const CardCAS: FC<CardCASProps> = ({ ssoConfiguration: ssoConfigurationFragment,
     'cas-configuration': false,
     'cas-delete': false,
   })
+  const { viewerSession } = useAppContext()
 
   if (!ssoConfiguration) {
     return null
@@ -45,12 +47,14 @@ const CardCAS: FC<CardCASProps> = ({ ssoConfiguration: ssoConfigurationFragment,
         <CardSSO.Header>
           {hover ? (
             <ButtonGroup>
-              <ButtonQuickAction
-                variantColor="primary"
-                icon={CapUIIcon.Pencil}
-                label={intl.formatMessage({ id: 'action_edit' })}
-                onClick={onOpen('cas-configuration')}
-              />
+              {viewerSession.isSuperAdmin && (
+                <ButtonQuickAction
+                  variantColor="primary"
+                  icon={CapUIIcon.Pencil}
+                  label={intl.formatMessage({ id: 'action_edit' })}
+                  onClick={onOpen('cas-configuration')}
+                />
+              )}
               <ButtonQuickAction
                 variantColor="danger"
                 icon={CapUIIcon.Trash}

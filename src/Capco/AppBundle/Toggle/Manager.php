@@ -127,6 +127,16 @@ class Manager
         self::user_anonymization_automated,
     ];
 
+    final public const SUPER_ADMIN_ALLOWED_FEATURES = [
+        self::login_openid,
+        self::login_franceconnect,
+        self::login_saml,
+        self::login_cas,
+        self::remind_user_account_confirmation,
+        self::sso_by_pass_auth,
+        self::oauth2_switch_user,
+    ];
+
     public static $toggles = [
         self::noindex_on_profiles,
         self::graphql_query_analytics,

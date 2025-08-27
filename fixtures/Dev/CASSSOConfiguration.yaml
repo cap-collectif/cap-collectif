@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\SSO\CASSSOConfiguration:
+    cas:
+        id: 'cas'
+        name: 'CAS'
+        enabled: false
+        casVersion: 2
+        casServerUrl: 'https://fake.cap.co/cas'
+        casCertificateFile: '../fixtures/files/face-cert.pem'
+        ssoType: 'cas'

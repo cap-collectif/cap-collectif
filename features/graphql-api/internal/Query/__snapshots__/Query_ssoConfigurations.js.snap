@@ -6,6 +6,16 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "casCertificate": Any<String>,
+          "casServerUrl": Any<String>,
+          "casVersion": Any<String>,
+          "enabled": false,
+          "id": "Q0FTU1NPQ29uZmlndXJhdGlvbjpjYXM=",
+          "name": "CAS",
+        },
+      },
+      Object {
+        "node": Object {
           "clientId": Any<String>,
           "enabled": false,
           "id": "RmFjZWJvb2tTU09Db25maWd1cmF0aW9uOmZhY2Vib29r",
@@ -23,7 +33,7 @@ Object {
           "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
           "logoutUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
           "name": "France Connect",
-          "redirectUri": "https://capco.test/login/check-franceconnect?_locale=fr-FR",
+          "redirectUri": Any<String>,
           "secret": Any<String>,
           "userInfoUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
         },
@@ -37,13 +47,13 @@ Object {
           "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
           "logoutUrl": Any<String>,
           "name": "Oauth2",
-          "redirectUri": "https://capco.test/login/check-openid?_locale=fr-FR",
+          "redirectUri": Any<String>,
           "secret": Any<String>,
           "userInfoUrl": Any<String>,
         },
       },
     ],
-    "totalCount": 3,
+    "totalCount": 4,
   },
 }
 `;

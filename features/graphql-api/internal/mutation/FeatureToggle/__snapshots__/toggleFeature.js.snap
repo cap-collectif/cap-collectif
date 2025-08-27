@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|toggleFeature Toggles login_cas as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_cas",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_cas as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_cas",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_franceconnect as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_franceconnect",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_franceconnect as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_franceconnect",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_openid as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_openid",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_openid as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_openid",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_saml as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_saml",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles login_saml as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_saml",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles oauth2_switch_user as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "oauth2_switch_user",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles oauth2_switch_user as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "oauth2_switch_user",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles remind_user_account_confirmation as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "remind_user_account_confirmation",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles remind_user_account_confirmation as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "remind_user_account_confirmation",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles sso_by_pass_auth as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "sso_by_pass_auth",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature Toggles sso_by_pass_auth as super-admin 2`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "sso_by_pass_auth",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature disables a feature as admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_facebook",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature disables a feature as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": false,
+      "type": "login_facebook",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature enables a feature as admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_facebook",
+    },
+  },
+}
+`;
+
+exports[`Internal|toggleFeature enables a feature as super-admin 1`] = `
+Object {
+  "toggleFeature": Object {
+    "featureFlag": Object {
+      "enabled": true,
+      "type": "login_facebook",
+    },
+  },
+}
+`;

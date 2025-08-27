@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SSO|FranceConnect Updates a config and turn it to production as super admin 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://app.franceconnect.gouv.fr/api/v1/token",
+      "authorizationUrl": "https://app.franceconnect.gouv.fr/api/v1/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "PRODUCTION",
+      "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+      "logoutUrl": "https://app.franceconnect.gouv.fr/api/v1/logout",
+      "name": "France Connect",
+      "redirectUri": Any<String>,
+      "secret": "INSERT_A_REAL_SECRET",
+      "userInfoUrl": "https://app.franceconnect.gouv.fr/api/v1/userinfo",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO|FranceConnect Updates a config as super admin 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
+      "authorizationUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "TESTING",
+      "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+      "logoutUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
+      "name": "France Connect",
+      "redirectUri": Any<String>,
+      "secret": "INSERT_A_REAL_SECRET",
+      "userInfoUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
+    },
+  },
+}
+`;
