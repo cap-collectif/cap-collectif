@@ -19,6 +19,7 @@ import ForgotPassword from '~/components/ParticipationWorkflow/ForgotPassword';
 import { MAGIC_LINK_FORM_INDEX } from '~/components/ParticipationWorkflow/EmailMagicLinkForm';
 import { PARTICIPANT_FORM_INDEX } from '~/components/ParticipationWorkflow/EmailParticipantForm';
 import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext';
+import useShowPassword from '@shared/hooks/useShowPassword'
 
 type FormValues = { email: string, password: string };
 
@@ -37,6 +38,8 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
 
     const isMobile = useIsMobile();
     const isDesktop = !isMobile;
+
+    const { showPassword, onClickActions } = useShowPassword();
 
     const [formState, setFormState] = React.useState<FormState>(null);
     const isLoading = formState === 'LOADING';
@@ -138,8 +141,9 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
                             id="password"
                             name="password"
                             control={control}
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             variantSize={CapInputSize.Md}
+                            onClickActions={onClickActions}
                         />
                     </FormControl>
                     <Flex direction="column">
