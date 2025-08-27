@@ -6,6 +6,8 @@ import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation
 import { useSelector } from 'react-redux'
 import { GlobalState } from '~/types'
 import { VoteStepEvent, dispatchEvent } from '../utils'
+import UpdateAnonymousProposalVotesMutation from '~/mutations/UpdateAnonymousProposalVotesMutation'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Props = {
   stepId: string
@@ -38,27 +40,53 @@ export const ProposalPreviewCardRankVoteActions = ({ points, votes, proposalId, 
       }),
     )
 
-    return UpdateProposalVotesMutation.commit(
-      {
-        input: {
-          step: stepId,
-          votes: votesSorted
-            .filter(voteFilter => voteFilter.id !== null)
-            .map(v => ({
-              id: v.id,
-              anonymous: v.anonymous,
-            })),
+    if(isAuthenticated) {
+      return UpdateProposalVotesMutation.commit(
+        {
+          input: {
+            step: stepId,
+            votes: votesSorted
+              .filter(voteFilter => voteFilter.id !== null)
+              .map(v => ({
+                id: v.id,
+                anonymous: v.anonymous,
+              })),
+          },
+          stepId,
+          isAuthenticated,
+          token: null,
         },
-        stepId,
-        isAuthenticated,
-        token: null,
-      },
-      {
-        id: null,
-        position: -1,
-        isVoteRanking: true,
-      },
-    )
+        {
+          id: null,
+          position: -1,
+          isVoteRanking: true,
+        },
+      )
+    } else {
+      const token = CookieMonster.getParticipantCookie()
+      return UpdateAnonymousProposalVotesMutation.commit(
+        {
+          input: {
+            step: stepId,
+            votes: votesSorted
+              .filter(voteFilter => voteFilter.id !== null)
+              .map(v => ({
+                id: v.id,
+                anonymous: v.anonymous,
+              })),
+            token
+          },
+          stepId: stepId,
+          token,
+        },
+        {
+          id: null,
+          position: -1,
+          isVoteRanking: true,
+        },
+      )
+    }
+
   }
 
   return (

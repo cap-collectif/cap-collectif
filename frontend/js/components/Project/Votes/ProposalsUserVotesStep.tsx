@@ -75,7 +75,6 @@ export const ProposalsUserVotesStep = ({ step, dirty, submitting, dispatch, isAu
           token
         },
         stepId: step.id,
-        isAuthenticated,
         token,
       },
       null,

@@ -1,12 +1,12 @@
 // @ts-nocheck
 import { graphql } from 'react-relay'
 // eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes'
+import type { RecordSourceSelectorProxy } from 'relay-runtime'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
-  UpdateProposalVotesMutationResponse,
-  UpdateProposalVotesMutationVariables,
+  UpdateProposalVotesMutation$data,
+  UpdateProposalVotesMutation$variables,
 } from '~relay/UpdateProposalVotesMutation.graphql'
 
 const mutation = graphql`
@@ -62,7 +62,7 @@ const mutation = graphql`
 `
 
 const commit = (
-  variables: UpdateProposalVotesMutationVariables,
+  variables: UpdateProposalVotesMutation$variables,
   proposalJustVoted:
     | {
         id: string | null | undefined
@@ -71,7 +71,7 @@ const commit = (
       }
     | null
     | undefined,
-): Promise<UpdateProposalVotesMutationResponse> =>
+): Promise<UpdateProposalVotesMutation$data> =>
   commitMutation(environment, {
     mutation,
     variables,

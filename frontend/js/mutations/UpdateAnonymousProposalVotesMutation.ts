@@ -1,12 +1,10 @@
-// @ts-nocheck
 import { graphql } from 'react-relay'
-// eslint-disable-next-line import/no-unresolved
-import type { RecordSourceSelectorProxy } from 'relay-runtime/store/RelayStoreTypes'
+import type { RecordSourceSelectorProxy } from 'relay-runtime'
 import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
-  UpdateAnonymousProposalVotesMutationResponse,
-  UpdateAnonymousProposalVotesMutationVariables,
+  UpdateAnonymousProposalVotesMutation$data,
+  UpdateAnonymousProposalVotesMutation$variables,
 } from '~relay/UpdateAnonymousProposalVotesMutation.graphql'
 
 const mutation = graphql`
@@ -43,7 +41,7 @@ const mutation = graphql`
                         }
                     }
                 }
-                userVotes: viewerVotes(first: 50, orderBy: { field: POSITION, direction: ASC })
+                userVotes: viewerVotes(first: 50, orderBy: { field: POSITION, direction: ASC }, token: $token)
                 @connection(key: "VotesList_userVotes", filters: []) {
                     edges {
                         node {
@@ -61,7 +59,7 @@ const mutation = graphql`
 `
 
 const commit = (
-  variables: UpdateAnonymousProposalVotesMutationVariables,
+  variables: UpdateAnonymousProposalVotesMutation$variables,
   proposalJustVoted:
     | {
     id: string | null | undefined
@@ -70,7 +68,7 @@ const commit = (
   }
     | null
     | undefined,
-): Promise<UpdateAnonymousProposalVotesMutationResponse> =>
+): Promise<UpdateAnonymousProposalVotesMutation$data> =>
   commitMutation(environment, {
     mutation,
     variables,
