@@ -5,7 +5,9 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +23,7 @@ class CollectParticipantExporter extends ParticipantExporter
 
     public function __construct(
         private readonly UserRepository $userRepository,
+        private readonly ParticipantRepository $participantRepository,
         private readonly ParticipantNormalizer $participantNormalizer,
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
@@ -33,7 +36,7 @@ class CollectParticipantExporter extends ParticipantExporter
     }
 
     /**
-     * @param array<User> $participants
+     * @param array< Participant|User > $participants
      */
     public function exportCollectParticipants(CollectStep $collectStep, array $participants, ?string $delimiter, bool $withHeaders, bool $append, OutputInterface $output): void
     {
@@ -42,14 +45,14 @@ class CollectParticipantExporter extends ParticipantExporter
         $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($collectStep);
         $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($collectStep);
 
-        if ($this->shouldExportParticipant($collectStep, $participants, $paths, $append)) {
+        if ($this->shouldExportParticipant($collectStep, $paths, $append)) {
             $this->setStep($collectStep);
             $this->exportParticipants($participants, $paths, $withHeaders, $append);
         }
     }
 
     /**
-     * @param array<User> $data
+     * @param array< Participant|User > $data
      */
     protected function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
     {
@@ -62,7 +65,7 @@ class CollectParticipantExporter extends ParticipantExporter
         ];
 
         if (!$isFullExport) {
-            $data = array_filter($data, function (User $participant) {
+            $data = array_filter($data, function (User|Participant $participant) {
                 foreach ($participant->getVotes() as $vote) {
                     $step = $vote->getStep();
 
@@ -110,9 +113,8 @@ class CollectParticipantExporter extends ParticipantExporter
 
     /**
      * @param array<string, string> $paths
-     * @param array<User>           $participants
      */
-    private function shouldExportParticipant(CollectStep $collectStep, array $participants, array $paths, bool $append): bool
+    private function shouldExportParticipant(CollectStep $collectStep, array $paths, bool $append): bool
     {
         if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
@@ -121,7 +123,10 @@ class CollectParticipantExporter extends ParticipantExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
-            return $this->userRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
+            $hasNewUsersForACollectStep = $this->userRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
+            $hasNewParticipantsForACollectStep = $this->participantRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
+
+            return $hasNewUsersForACollectStep || $hasNewParticipantsForACollectStep;
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
 

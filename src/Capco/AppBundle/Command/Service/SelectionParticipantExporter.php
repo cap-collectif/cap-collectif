@@ -4,7 +4,9 @@ namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,6 +21,7 @@ class SelectionParticipantExporter extends ParticipantExporter
 
     public function __construct(
         private readonly UserRepository $userRepository,
+        private readonly ParticipantRepository $participantRepository,
         private readonly ParticipantNormalizer $participantNormalizer,
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
@@ -31,7 +34,7 @@ class SelectionParticipantExporter extends ParticipantExporter
     }
 
     /**
-     * @param array<User> $participants
+     * @param array< Participant|User > $participants
      */
     public function exportSelectionParticipants(
         SelectionStep $selectionStep,
@@ -45,7 +48,7 @@ class SelectionParticipantExporter extends ParticipantExporter
         $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($selectionStep);
         $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($selectionStep);
 
-        if ($this->shouldExportParticipant($selectionStep, $participants, $paths, $append)) {
+        if ($this->shouldExportParticipant($selectionStep, $paths, $append)) {
             $this->setStep($selectionStep);
             $this->exportParticipants($participants, $paths, $withHeaders, $append);
         }
@@ -53,9 +56,8 @@ class SelectionParticipantExporter extends ParticipantExporter
 
     /**
      * @param array<string, string> $paths
-     * @param array<User>           $participants
      */
-    private function shouldExportParticipant(SelectionStep $selectionStep, array $participants, array $paths, bool $append): bool
+    private function shouldExportParticipant(SelectionStep $selectionStep, array $paths, bool $append): bool
     {
         if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
@@ -64,7 +66,10 @@ class SelectionParticipantExporter extends ParticipantExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
-            return $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
+            $hasNewUserForSelectionStep = $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
+            $hasnewParticipantForSelectionStep = $this->participantRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
+
+            return $hasNewUserForSelectionStep || $hasnewParticipantForSelectionStep;
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
 

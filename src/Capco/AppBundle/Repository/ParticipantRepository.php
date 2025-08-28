@@ -7,8 +7,10 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -472,6 +474,96 @@ class ParticipantRepository extends EntityRepository
         $params = ['projectId' => $project->getId(), 'participantId' => $participant->getId()];
 
         return $em->getConnection()->executeStatement($sql, $params) > 0;
+    }
+
+    /**
+     * @return array<Participant>
+     */
+    public function findVotersForSelection(SelectionStep $selectionStep, int $offset, int $limit): array
+    {
+        $subQueryBuilder = $this->createQueryBuilder('pv');
+        $subQuery = $subQueryBuilder->select('IDENTITY(participantVote.participant)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'participantVote')
+            ->where('participantVote.selectionStep = :selectionStep')
+            ->andWhere('participantVote.isAccounted = 1')
+            ->getDQL()
+        ;
+
+        $queryBuilder = $this->createQueryBuilder('p');
+        $query = $queryBuilder->select('participant')
+            ->from('CapcoAppBundle:Participant', 'participant')
+            ->where(
+                $queryBuilder->expr()->in('participant.id', $subQuery)
+            )
+            ->setParameter('selectionStep', $selectionStep)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return array<Participant>
+     */
+    public function findVotersForCollect(CollectStep $collectStep, int $offset, int $limit): array
+    {
+        $subQueryBuilder = $this->createQueryBuilder('pv');
+        $subQuery = $subQueryBuilder->select('IDENTITY(participantVote.participant)')
+            ->from('CapcoAppBundle:ProposalCollectVote', 'participantVote')
+            ->where('participantVote.collectStep = :collectStep')
+            ->andWhere('participantVote.isAccounted = 1')
+            ->getDQL()
+        ;
+
+        $queryBuilder = $this->createQueryBuilder('p');
+        $query = $queryBuilder->select('participant')
+            ->from('CapcoAppBundle:Participant', 'participant')
+            ->where(
+                $queryBuilder->expr()->in('participant.id', $subQuery)
+            )
+            ->setParameter('collectStep', $collectStep)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
+    public function hasNewParticipantsForASelectionStep(SelectionStep $selectionStep, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('COUNT(DISTINCT p.id)')
+            ->join('CapcoAppBundle:ProposalSelectionVote', 'pv', 'WITH', 'pv.participant = p.id')
+            ->where('pv.createdAt > :date OR p.updatedAt > :date')
+            ->andWhere('pv.selectionStep = :selectionStep')
+        ;
+
+        $qb->setParameters([
+            'selectionStep' => $selectionStep->getId(),
+            'date' => $mostRecentFileModificationDate->format('Y-m-d H:i:s'),
+        ]);
+
+        return ($qb->getQuery()->getSingleScalarResult() ?? 0) > 0;
+    }
+
+    public function hasNewParticipantsForACollectStep(CollectStep $collectStep, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('COUNT(DISTINCT p.id)')
+            ->join('CapcoAppBundle:ProposalCollectVote', 'pv', 'WITH', 'pv.participant = p.id')
+            ->where('pv.createdAt > :date OR p.updatedAt > :date')
+            ->andWhere('pv.collectStep = :collectStep')
+        ;
+
+        $qb->setParameters([
+            'collectStep' => $collectStep->getId(),
+            'date' => $mostRecentFileModificationDate->format('Y-m-d H:i:s'),
+        ]);
+
+        return ($qb->getQuery()->getSingleScalarResult() ?? 0) > 0;
     }
 
     private function findWithRepliesQueryBuilder(Project $project, ?QuestionnaireStep $step = null, ?string $term = null): QueryBuilder

@@ -467,4 +467,10 @@ class Participant implements EntityInterface, ContributorInterface, \Stringable
         // will be fixed when rebasing parcours dépôt
         return null;
     }
+
+    public function getProposals(): Collection
+    {
+        // will be fixed when rebasing parcours dépôt
+        return new ArrayCollection();
+    }
 }

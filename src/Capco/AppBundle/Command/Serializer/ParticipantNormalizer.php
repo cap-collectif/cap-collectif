@@ -82,7 +82,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
             $userArray = array_merge($userArray, $fullExportData);
         }
 
-        if (isset($context['step']) && $context['step']->isVotable() && $object instanceof User) {
+        if (isset($context['step']) && $context['step']->isVotable() && $object instanceof ContributorInterface) {
             $userArray[self::EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP] = $this->getParticipantVoteCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP] = $this->getProposalCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);
@@ -91,16 +91,16 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
         return $this->translateHeaders($userArray);
     }
 
-    private function getParticipantVoteCountPerStep(User $participant, AbstractStep $step): int
+    private function getParticipantVoteCountPerStep(ContributorInterface $contributor, AbstractStep $step): int
     {
         $filterClosure = fn (AbstractVote $vote) => null !== $vote->getStep()
             && $vote->getStep()->getId() === $step->getId()
             && $vote->getIsAccounted();
 
-        return $participant->getVotes()->filter($filterClosure)->count();
+        return $contributor->getVotes()->filter($filterClosure)->count();
     }
 
-    private function getProposalCountPerStep(User $participant, AbstractStep $step): int
+    private function getProposalCountPerStep(ContributorInterface $contributor, AbstractStep $step): int
     {
         $filterClosure = function (Proposal $proposal) use ($step) {
             if ($step instanceof CollectStep) {
@@ -125,10 +125,10 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
             return $proposalStep->getId() === $step->getId() && $proposal->isPublished();
         };
 
-        return $participant->getProposals()->filter($filterClosure)->count();
+        return $contributor->getProposals()->filter($filterClosure)->count();
     }
 
-    private function getVotedProposalReferencesPerStep(User $participant, AbstractStep $step): string
+    private function getVotedProposalReferencesPerStep(ContributorInterface $contributor, AbstractStep $step): string
     {
         $filterClosure = function (AbstractVote $vote) use ($step) {
             $currentVoteStep = $vote->getStep();
@@ -143,7 +143,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
                 && $currentVoteStep->getId() === $step->getId();
         };
 
-        $votedProposalReferences = $participant->getVotes()->filter($filterClosure)->map(
+        $votedProposalReferences = $contributor->getVotes()->filter($filterClosure)->map(
             fn (AbstractVote $vote) => $vote->getProposal() ? $vote->getProposal()->getReference() : null
         )->toArray();
 

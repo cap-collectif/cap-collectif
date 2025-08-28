@@ -8,6 +8,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\UserBundle\Repository\UserRepository;
@@ -28,6 +29,8 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
     private const BATCH_SIZE = 1000;
     protected string $projectRootDir;
 
+    private bool $append = false;
+
     public function __construct(
         ExportUtils $exportUtils,
         private readonly Manager $toggleManager,
@@ -36,6 +39,7 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         private readonly CollectParticipantExporter $stepParticipantExporter,
         private readonly ParticipantsFilePathResolver $participantFilePathResolver,
         private readonly UserRepository $userRepository,
+        private readonly ParticipantRepository $participantRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly Stopwatch $stopwatch,
         private readonly string $exportDirectory,
@@ -94,10 +98,12 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
                 'collect-participants-count',
                 $this->participantFilePathResolver
             );
+
+            $userExported = $this->exportUsersByBatch($input, $collectStep, $output);
             $participantsExported = $this->exportParticipantsByBatch($input, $collectStep, $output);
 
-            $totalParticipants += $participantsExported;
-            $tableSummary->addRows([[$collectStep->getTitle(), $participantsExported], new TableSeparator()]);
+            $totalParticipants += $userExported + $participantsExported;
+            $tableSummary->addRows([[$collectStep->getTitle(), $totalParticipants], new TableSeparator()]);
 
             $this->finalizeExportFiles($filesystem, $collectStep, $filePaths, $style, $input, $output);
         }
@@ -135,12 +141,12 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         ];
     }
 
-    private function exportParticipantsByBatch(InputInterface $input, CollectStep $step, OutputInterface $output): int
+    private function exportUsersByBatch(InputInterface $input, CollectStep $step, OutputInterface $output): int
     {
         $offset = 0;
         $countParticipants = 0;
-        $append = false;
-        $withHeaders = true;
+
+        $this->append = false;
 
         do {
             $participants = $this->userRepository->getCollectParticipants($step, $offset, self::BATCH_SIZE);
@@ -152,16 +158,45 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
             $countParticipants += \count($participants);
 
             $this->stepParticipantExporter->exportCollectParticipants(
-                $step,
-                $participants,
-                $input->getOption('delimiter'),
-                $withHeaders,
-                $append,
-                $output
+                collectStep: $step,
+                participants: $participants,
+                delimiter: $input->getOption('delimiter'),
+                withHeaders: !$this->append,
+                append: $this->append,
+                output: $output
             );
 
-            $append = true;
-            $withHeaders = false;
+            $this->append = true;
+            $this->entityManager->clear();
+            $offset += self::BATCH_SIZE;
+        } while (self::BATCH_SIZE === \count($participants));
+
+        return $countParticipants;
+    }
+
+    private function exportParticipantsByBatch(InputInterface $input, CollectStep $step, OutputInterface $output): int
+    {
+        $offset = 0;
+        $countParticipants = 0;
+
+        do {
+            $participants = $this->participantRepository->findVotersForCollect($step, $offset, self::BATCH_SIZE);
+
+            if (empty($participants)) {
+                break;
+            }
+
+            $countParticipants += \count($participants);
+
+            $this->stepParticipantExporter->exportCollectParticipants(
+                collectStep: $step,
+                participants: $participants,
+                delimiter: $input->getOption('delimiter'),
+                withHeaders: !$this->append,
+                append: $this->append,
+                output: $output,
+            );
+
             $this->entityManager->clear();
             $offset += self::BATCH_SIZE;
         } while (self::BATCH_SIZE === \count($participants));

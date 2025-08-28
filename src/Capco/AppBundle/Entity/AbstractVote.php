@@ -289,4 +289,9 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
 
         return $this;
     }
+
+    public function getContributor(): ContributorInterface
+    {
+        return $this->user ?? $this->participant;
+    }
 }

@@ -46,3 +46,5 @@ user7,user7,user7@cap-collectif.com,Oui,,Citoyen,firstname7,lastname7,,,,,https:
 user8,user8,user8@cap-collectif.com,Oui,,Citoyen,firstname8,lastname8,,,,,https://capco.dev/profile/user8,,"2017-01-01 00:08:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non,1,0,3
 user9,user9,user9@cap-collectif.com,Oui,,Citoyen,firstname9,lastname9,,,,,https://capco.dev/profile/user9,,"2017-01-01 00:09:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non,1,0,3
 userAdmin,admin,admin@test.com,Non,+33675492871,Citoyen,Administrateur,authentifier,,"26 Rue Claude Tillier, 75012 Paris, France",,,https://capco.dev/profile/admin,,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,Oui,Oui,Non,Oui,,,,Non,2,0,"2,3"
+participant1,,participant1@cap-collectif.com,Non,+33602020202,,"Participant1 firstname","Participant1 lastname","2023-02-01 00:00:00","Rue de la Savate 10, 4340 Awans, Belgium",75018,,,,"2020-01-14 00:00:00",,,,,Oui,,Oui,,,,,1,0,2
+participant2,,participant2@cap-collectif.com,Non,,,"Participant2 firstname","Participant2 lastname","2023-03-01 00:00:00",,75015,,,,"2021-01-14 00:00:00",,,,,Oui,,Non,,,,,1,0,2

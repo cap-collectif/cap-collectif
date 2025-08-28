@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\Serializer;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -41,9 +42,13 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
         /** @var ProposalCollectVote|ProposalSelectionVote $object */
         $isPrivate = $object->isPrivate();
 
-        /** @var null|User $author */
-        $author = $object->getAuthor();
-        $userType = $author?->getUserType();
+        /** @var null|ContributorInterface $author */
+        $author = $object->getContributor();
+
+        $isUser = $author instanceof User;
+
+        $userType = $isUser ? $author->getUserType() : null;
+
         /** @var CollectStep|SelectionStep $step */
         $step = $object->getStep();
         $position = null;
@@ -68,10 +73,10 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
                 self::EXPORT_PROPOSAL_VOTES_PUBLISHED => $this->getReadableBoolean($object->isPublished()),
                 self::EXPORT_PROPOSAL_VOTES_ACCOUNTED => $this->getReadableBoolean($object->getIsAccounted()),
                 self::EXPORT_PROPOSAL_VOTES_ANONYMOUS => $this->getReadableBoolean($isPrivate),
-                self::EXPORT_PROPOSAL_VOTES_AUTHOR_ID => $author?->getId(),
-                self::EXPORT_PROPOSAL_VOTES_AUTHOR_USERNAME => $author?->getUsername(),
-                self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_EMAIL_CONFIRMED => null !== $author ? $this->getReadableBoolean($author->isEmailConfirmed()) : null,
-                self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_PHONE_CONFIRMED => null !== $author ? $this->getReadableBoolean($author->isPhoneConfirmed()) : null,
+                self::EXPORT_PROPOSAL_VOTES_AUTHOR_ID => $author->getId(),
+                self::EXPORT_PROPOSAL_VOTES_AUTHOR_USERNAME => $author->getUsername(),
+                self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($author->isEmailConfirmed()),
+                self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_PHONE_CONFIRMED => $this->getReadableBoolean($author->isPhoneConfirmed()),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_USER_TYPE_ID => $userType?->getId(),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_USER_TYPE_NAME => $userType?->getName(),
             ];

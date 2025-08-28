@@ -2203,25 +2203,27 @@ class UserRepository extends EntityRepository
 
     public function countSelectionConfirmedParticipants(SelectionStep $selectionStep): int
     {
-        $subQueryBuilder = $this->createQueryBuilder('uv');
-        $subQuery = $subQueryBuilder->select('IDENTITY(userVote.user)')
-            ->from('CapcoAppBundle:ProposalSelectionVote', 'userVote')
-            ->where('userVote.selectionStep = :selectionStep')
-            ->andWhere('userVote.isAccounted = 1')
-            ->getDQL()
-        ;
+        $conn = $this->getEntityManager()->getConnection();
 
-        $countBuilder = $this->createQueryBuilder('u');
-        $total = $countBuilder->select('COUNT(user.id)')
-            ->from('CapcoUserBundle:User', 'user')
-            ->where($countBuilder->expr()->in('user.id', $subQuery))
-            ->andWhere('user.confirmationToken IS NULL')
-            ->setParameter('selectionStep', $selectionStep)
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
+        $sql = "
+            SELECT
+                (
+                    SELECT COUNT(DISTINCT v.voter_id)
+                    FROM votes v
+                    JOIN fos_user u ON v.voter_id = u.id AND u.confirmation_token IS NULL
+                    WHERE v.selection_step_id = :step AND v.is_accounted = 1 AND v.completion_status = 'COMPLETED'
+                 ) +
+                (
+                    SELECT COUNT(DISTINCT v.participant_id)
+                    FROM votes v
+                    JOIN participant p ON v.participant_id = p.id
+                    WHERE v.selection_step_id = :step AND v.is_accounted = 1 AND v.completion_status = 'COMPLETED'
+            ) AS TOTAL;
+    ";
 
-        return (int) $total;
+        return (int) $conn->fetchOne($sql, [
+            'step' => $selectionStep->getId(),
+        ]);
     }
 
     /**

@@ -3,3 +3,4 @@ user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996
 user2,sfavot,sfavot@cap-collectif.com,Non,+3300000000,Citoyen,Suzanne,Favot,,,,Antony,https://capco.dev/profile/sfavot,,1,0,1
 user1,lbrunet,lbrunet@cap-collectif.com,Oui,+3300000000,Citoyen,Laurent,Brunet,,,,,https://capco.dev/profile/lbrunet,,1,1,1
 userAdmin,admin,admin@test.com,Non,+33675492871,Citoyen,Administrateur,authentifier,,"26 Rue Claude Tillier, 75012 Paris, France",,,https://capco.dev/profile/admin,,1,0,
+participant2,,participant2@cap-collectif.com,Non,,,"Participant2 firstname","Participant2 lastname","2023-03-01 00:00:00",,75015,,,,1,0,1
