@@ -7866,11 +7866,14 @@ type GroupMember {
   """The id of the user when they have an account"""
   userId: String
 
-  """The user username if already registered otherwise empty string."""
-  username: String!
+  """The user username if already registered."""
+  username: String
+
+  """The user fullname if already registered."""
+  fullname: String
 
   """The user or pending user email."""
-  email: String!
+  email: String
 
   """Member or invitation."""
   type: String!

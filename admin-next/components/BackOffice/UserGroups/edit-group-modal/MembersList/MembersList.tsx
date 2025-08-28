@@ -29,6 +29,7 @@ const USERS_FRAGMENT = graphql`
           username
           email
           type
+          fullname
         }
       }
     }
@@ -51,6 +52,7 @@ const MEMBERS_QUERY = graphql`
               username
               email
               type
+              fullname
             }
           }
         }

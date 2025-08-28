@@ -61,7 +61,7 @@ export const MemberCard: React.FC<Props> = ({
             <Text fontWeight={CapUIFontWeight.Semibold} color={'neutral-gray.600'}>
               {existingMember.username}
             </Text>
-            <Text fontWeight={CapUIFontWeight.Semibold}>{existingMember.email}</Text>
+            <Text fontWeight={CapUIFontWeight.Semibold}>{existingMember?.email || existingMember?.fullname || ''}</Text>
           </>
         )}
       </Flex>
