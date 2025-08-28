@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\MediaRepository;
+use Capco\AppBundle\Service\MediaManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -11,6 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Finder\Finder;
 
 #[AsCommand(
     name: 'capco:media:purge-unused',
@@ -19,10 +22,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CapcoMediaPurgeUnusedCommand extends Command
 {
     public function __construct(
+        private readonly string $projectRootDir,
         private readonly EntityManagerInterface $em,
         private readonly MediaRepository $mediaRepository,
         private readonly MediaProvider $mediaProvider,
-        ?string $name = null
+        private readonly Finder $finder,
+        ?string $name = null,
     ) {
         parent::__construct($name);
     }
@@ -48,6 +53,14 @@ class CapcoMediaPurgeUnusedCommand extends Command
             return Command::FAILURE;
         }
 
+        try {
+            $this->purgeFilesWithoutMedia($io);
+        } catch (\Throwable $e) {
+            $io->error(sprintf('Could not remove file from disk: %s', $e->getMessage()));
+
+            return Command::FAILURE;
+        }
+
         return Command::SUCCESS;
     }
 
@@ -56,14 +69,14 @@ class CapcoMediaPurgeUnusedCommand extends Command
      */
     private function purgeMediasWithoutDatabaseRelation(SymfonyStyle $io): void
     {
-        $io->info('Purging database-orphan Media entries');
+        $io->info('Purging Media database entries without a database relation to anowher table');
         $deletedCount = $this->mediaRepository->deleteUnusedMedia();
         $io->success(sprintf('Deleted %d Media from database', $deletedCount));
     }
 
     private function purgeMediasWithoutFileSystemRelation(SymfonyStyle $io): void
     {
-        $io->info('Purging file-system-orphan Media entries');
+        $io->info('Purging Media database entries without a file on the file-system');
 
         // Fetching media that have the file-system provider (Capco\AppBundle\Provider\MediaProvider) from database
         $medias = $this->mediaRepository->findBy(['providerName' => MediaProvider::class]);
@@ -78,5 +91,45 @@ class CapcoMediaPurgeUnusedCommand extends Command
 
         $this->em->flush();
         $io->success(sprintf('Deleted %d media from file-system', $deletedCount));
+    }
+
+    private function purgeFilesWithoutMedia(SymfonyStyle $io): void
+    {
+        $io->info("Purging files that don't have a Media database entry");
+
+        $deletedCount = 0;
+        $this->finder
+            ->in($this->projectRootDir . MediaManager::MEDIAS_PATH)
+            ->files()
+        ;
+
+        $fileNames = [];
+        foreach ($this->finder as $file) {
+            $fileNames[] = $file->getFilename();
+        }
+
+        // In the very rare but possible case that we find 2 files with the same name, we will require a human intervention
+        if (\count($fileNames) !== \count(array_unique($fileNames))) {
+            throw new \RuntimeException('There are 2 files with the same name, please check it manually.');
+        }
+
+        $medias = $this->mediaRepository->findBy([
+            'providerName' => MediaProvider::class,
+            'providerReference' => $fileNames,
+        ]);
+
+        // Be careful, the array_diff function will return the elements that are in the first array but not in the second array,
+        // so the order of the arguments is very important, otherwise we would delete te wrong files
+        $mediaReferences = array_map(fn (Media $media) => $media->getProviderReference(), $medias);
+        $filesToRemove = array_diff($fileNames, $mediaReferences);
+
+        foreach ($this->finder as $file) {
+            if (\in_array($file->getFilename(), $filesToRemove, true)) {
+                unlink($file->getRealPath());
+                ++$deletedCount;
+            }
+        }
+
+        $io->success(sprintf('Deleted %d files from file-system', $deletedCount));
     }
 }
