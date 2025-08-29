@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import type { PostCard_post$key } from '@relay/PostCard_post.graphql'
+import type { OrganizationPostCard_post$key } from '@relay/OrganizationPostCard_post.graphql'
 import {
   BoxProps,
   CapUIIcon,
@@ -13,11 +13,11 @@ import {
 import { getSrcSet } from '@ui/Image/Image'
 
 type Props = BoxProps & {
-  readonly post: PostCard_post$key
+  readonly post: OrganizationPostCard_post$key
 }
 
 const FRAGMENT = graphql`
-  fragment PostCard_post on Post {
+  fragment OrganizationPostCard_post on Post {
     id
     title
     url
@@ -31,7 +31,7 @@ const FRAGMENT = graphql`
   }
 `
 
-export const PostCard = ({ post: postQuery, ...props }: Props) => {
+export const OrganizationPostCard = ({ post: postQuery, ...props }: Props) => {
   const post = useFragment(FRAGMENT, postQuery)
 
   return (
@@ -48,4 +48,4 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
   )
 }
 
-export default PostCard
+export default OrganizationPostCard

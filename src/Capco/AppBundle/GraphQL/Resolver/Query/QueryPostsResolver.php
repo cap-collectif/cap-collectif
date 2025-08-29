@@ -23,9 +23,7 @@ class QueryPostsResolver implements QueryInterface
 
     public function __invoke(Argument $args): ConnectionInterface|Promise
     {
-        $themeId = $args->offsetGet('theme')
-            ? GlobalId::fromGlobalId($args->offsetGet('theme'))['id']
-            : null;
+        $themeId = $args->offsetGet('theme') ?: null;
 
         $projectId = $args->offsetGet('project')
             ? GlobalId::fromGlobalId($args->offsetGet('project'))['id']

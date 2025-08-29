@@ -3,7 +3,7 @@ import { graphql, usePaginationFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import type { OrganizationPagePostList_organization$key } from '@relay/OrganizationPagePostList_organization.graphql'
 import { Flex, Heading, Button, CapUIFontSize } from '@cap-collectif/ui'
-import PostCard from './PostCard'
+import OrganizationPostCard from './OrganizationPostCard'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 const FRAGMENT = graphql`
@@ -15,7 +15,7 @@ const FRAGMENT = graphql`
       edges {
         node {
           id
-          ...PostCard_post
+          ...OrganizationPostCard_post
         }
       }
     }
@@ -39,7 +39,7 @@ export const OrganizationPagePostList = ({ organization }: Props) => {
         })}
       </Heading>
       {posts.edges?.filter(Boolean).map((edge, index) => (
-        <PostCard post={edge?.node} key={index} mb={4} />
+        <OrganizationPostCard post={edge?.node} key={index} mb={4} />
       ))}
       {hasNext ? (
         <Flex width="100%">

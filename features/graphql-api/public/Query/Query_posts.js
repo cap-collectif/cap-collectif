@@ -41,7 +41,7 @@ describe('Internal|Query.posts array', () => {
       graphql(
         query,
         {
-          theme: global.toGlobalId('theme', 'theme1'),
+          theme: 'theme1',
         },
         'internal',
       ),
@@ -65,7 +65,7 @@ describe('Internal|Query.posts array', () => {
       graphql(
         query,
         {
-          theme: global.toGlobalId('theme', 'theme1'),
+          theme: 'theme1',
           project: global.toGlobalId('project', 'ProjectAccessibleForMeOnlyByAdmin'),
         },
         'internal',

@@ -64,6 +64,7 @@ class SiteParameterVoter extends Voter
             'projects.content.body',
             'projects.metadescription',
             'projects.customcode',
+            'projects.pagination',
             'shield.introduction',
             'cookies-list',
             'footer.text.title',
@@ -73,7 +74,12 @@ class SiteParameterVoter extends Voter
             'contact.metadescription',
             'contact.content.body',
             'contact.customcode',
-            'projects.pagination',
+            'blog.jumbotron.title',
+            'blog.jumbotron.body',
+            'blog.content.body',
+            'blog.metadescription',
+            'blog.customcode',
+            'blog.pagination.size',
         ];
         $key = $siteParameter->getKeyname();
 

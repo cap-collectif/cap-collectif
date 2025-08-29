@@ -37,11 +37,12 @@ Scenario: An anonymous accept cookies then should have one created
   Then I should see a cookie named "hasFullConsent"
 
 Scenario: An anonymous accept cookies then change is mind and the cookies should be deleted
+  Given feature "calendar" is enabled
   Given I am on the homepage
   And I should not see "cookies-text"
   And I should see a cookie named "hasFullConsent"
   And I create a cookie named "_pk_id.2733"
-  And I visited "blog page"
+  And I visited "events page"
   When I click on button "#cookies-management"
   Then I check element "cookies-enable-analytic"
   And I click on button "#cookies-save"
