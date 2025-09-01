@@ -648,6 +648,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:MailingList']
 
+    Capco\AppBundle\Repository\MailingListUserRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:MailingListUser']
+
     Capco\AppBundle\Repository\SimpleQuestionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]

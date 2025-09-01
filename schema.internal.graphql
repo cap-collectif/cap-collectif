@@ -8402,7 +8402,7 @@ type MailingList implements Node {
 
     """Filter the list by consent to internal communication"""
     consentInternalCommunicationOnly: Boolean = false
-  ): UserConnection!
+  ): ContributorConnection!
 
   """the project from which the list has been built, if any"""
   project: Project

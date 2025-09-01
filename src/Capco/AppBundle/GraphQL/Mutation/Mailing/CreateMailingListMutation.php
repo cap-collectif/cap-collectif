@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\MailingList;
+use Capco\AppBundle\Entity\MailingListUser;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\CreateMailingListErrorCode;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\MailingListVoter;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -23,8 +25,13 @@ class CreateMailingListMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly UserRepository $userRepository, private readonly ProjectRepository $projectRepository, private readonly EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver)
-    {
+    public function __construct(
+        private readonly GlobalIDResolver $globalIDResolver,
+        private readonly ProjectRepository $projectRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly SettableOwnerResolver $settableOwnerResolver
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -51,6 +58,19 @@ class CreateMailingListMutation implements MutationInterface
         return $this->authorizationChecker->isGranted(MailingListVoter::CREATE, new MailingList());
     }
 
+    /**
+     * @param array<ContributorInterface> $contributors
+     */
+    public function addContributors(MailingList $mailingList, array $contributors): void
+    {
+        foreach ($contributors as $contributor) {
+            $mailingListUser = new MailingListUser();
+            $mailingListUser->setMailingList($mailingList);
+            $mailingListUser->setContributor($contributor);
+            $this->entityManager->persist($mailingListUser);
+        }
+    }
+
     private function createMailingList(Argument $input, User $viewer): MailingList
     {
         $users = $this->getUsers($input);
@@ -58,7 +78,7 @@ class CreateMailingListMutation implements MutationInterface
 
         $mailingList = new MailingList();
         $mailingList->setName($input->offsetGet('name'));
-        $mailingList->setUsers($users);
+        $this->addContributors($mailingList, $users);
         $mailingList->setOwner(
             $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
         );
@@ -71,18 +91,14 @@ class CreateMailingListMutation implements MutationInterface
     private function getUsers(Argument $input): array
     {
         $users = [];
-        foreach ($input->offsetGet('userIds') as $globalId) {
-            $userId = GlobalId::fromGlobalId($globalId)['id'];
-            if (null === $userId) {
+        $userIds = $input->offsetGet('userIds') ?? [];
+        foreach ($userIds as $globalId) {
+            $contributor = $this->globalIDResolver->resolve($globalId);
+            if (!$contributor instanceof ContributorInterface) {
                 throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_USER);
             }
 
-            $user = $this->userRepository->find($userId);
-            if (null === $user) {
-                throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_USER);
-            }
-
-            $users[] = $user;
+            $users[] = $contributor;
         }
         if (empty($users)) {
             throw new UserError(CreateMailingListErrorCode::EMPTY_USERS);

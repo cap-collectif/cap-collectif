@@ -1,0 +1,169 @@
+Capco\AppBundle\Entity\MailingListUser:
+    mailingListWithoutProjectUser1:
+        mailingList: '@mailingListWithoutProject'
+        user: '@userMickael'
+    mailingListWithoutProjectUser2:
+        mailingList: '@mailingListWithoutProject'
+        user: '@userVincent'
+    mailingListFromCovidProjectUser1:
+        mailingList: '@mailingListFromCovidProject'
+        user: '@user4'
+    mailingListFromCovidProjectUser2:
+        mailingList: '@mailingListFromCovidProject'
+        user: '@user666'
+    longMailingListUser1:
+        mailingList: '@longMailingList'
+        user: '@user1'
+    longMailingListUser2:
+        mailingList: '@longMailingList'
+        user: '@user2'
+    longMailingListUser3:
+        mailingList: '@longMailingList'
+        user: '@user3'
+    longMailingListUser4:
+        mailingList: '@longMailingList'
+        user: '@userSpyl'
+    longMailingListUser5:
+        mailingList: '@longMailingList'
+        user: '@userWelcomattic'
+    longMailingListUser6:
+        mailingList: '@longMailingList'
+        user: '@userKiroule'
+    longMailingListUser7:
+        mailingList: '@longMailingList'
+        user: '@userMaxime'
+    longMailingListUser8:
+        mailingList: '@longMailingList'
+        user: '@userBellenger'
+    longMailingListUser9:
+        mailingList: '@longMailingList'
+        user: '@userJean'
+    longMailingListUser10:
+        mailingList: '@longMailingList'
+        user: '@userAgui'
+    longMailingListUser11:
+        mailingList: '@longMailingList'
+        user: '@userVincent'
+    longMailingListUser12:
+        mailingList: '@longMailingList'
+        user: '@userOmar'
+    longMailingListUser13:
+        mailingList: '@longMailingList'
+        user: '@userTheo'
+    longMailingListUser14:
+        mailingList: '@longMailingList'
+        user: '@userJpec'
+    longMailingListUser15:
+        mailingList: '@longMailingList'
+        user: '@userMickael'
+    longMailingListUser16:
+        mailingList: '@longMailingList'
+        user: '@userIan'
+    longMailingListUser17:
+        mailingList: '@longMailingList'
+        user: '@userMaximeQA'
+    longMailingListUser18:
+        mailingList: '@longMailingList'
+        user: '@user18'
+    longMailingListUser19:
+        mailingList: '@longMailingList'
+        user: '@user19'
+    longMailingListUser20:
+        mailingList: '@longMailingList'
+        user: '@user20'
+    longMailingListUser21:
+        mailingList: '@longMailingList'
+        user: '@user21'
+    longMailingListUser22:
+        mailingList: '@longMailingList'
+        user: '@user22'
+    longMailingListUser23:
+        mailingList: '@longMailingList'
+        user: '@user23'
+    longMailingListUser24:
+        mailingList: '@longMailingList'
+        user: '@user24'
+    longMailingListUser25:
+        mailingList: '@longMailingList'
+        user: '@user25'
+    longMailingListUser26:
+        mailingList: '@longMailingList'
+        user: '@user26'
+    longMailingListUser27:
+        mailingList: '@longMailingList'
+        user: '@user27'
+    longMailingListUser28:
+        mailingList: '@longMailingList'
+        user: '@user28'
+    longMailingListUser29:
+        mailingList: '@longMailingList'
+        user: '@user29'
+    longMailingListUser30:
+        mailingList: '@longMailingList'
+        user: '@user30'
+    longMailingListUser31:
+        mailingList: '@longMailingList'
+        user: '@user31'
+    longMailingListUser32:
+        mailingList: '@longMailingList'
+        user: '@user32'
+    longMailingListUser33:
+        mailingList: '@longMailingList'
+        user: '@user33'
+    longMailingListUser34:
+        mailingList: '@longMailingList'
+        user: '@user34'
+    longMailingListUser35:
+        mailingList: '@longMailingList'
+        user: '@user35'
+    longMailingListUser36:
+        mailingList: '@longMailingList'
+        user: '@user36'
+    longMailingListUser37:
+        mailingList: '@longMailingList'
+        user: '@user37'
+    longMailingListUser38:
+        mailingList: '@longMailingList'
+        user: '@user38'
+    longMailingListUser39:
+        mailingList: '@longMailingList'
+        user: '@user39'
+    longMailingListUser40:
+        mailingList: '@longMailingList'
+        user: '@user40'
+    longMailingListUser41:
+        mailingList: '@longMailingList'
+        user: '@user41'
+    longMailingListUser42:
+        mailingList: '@longMailingList'
+        user: '@user42'
+    longMailingListUser43:
+        mailingList: '@longMailingList'
+        user: '@user43'
+    longMailingListUser44:
+        mailingList: '@longMailingList'
+        user: '@user44'
+    longMailingListUser45:
+        mailingList: '@longMailingList'
+        user: '@user45'
+    longMailingListUser46:
+        mailingList: '@longMailingList'
+        user: '@user46'
+    longMailingListUser47:
+        mailingList: '@longMailingList'
+        user: '@user47'
+    longMailingListUser48:
+        mailingList: '@longMailingList'
+        user: '@user48'
+    longMailingListUser49:
+        mailingList: '@longMailingList'
+        user: '@user49'
+    longMailingListUser50:
+        mailingList: '@longMailingList'
+        user: '@user50'
+    mailingListOrganizationUser1:
+        mailingList: "@mailingListOrganization"
+        user: "@user1"
+    mailingListOrganizationUser2:
+        mailingList: "@mailingListOrganization"
+        user: "@userSpyl"

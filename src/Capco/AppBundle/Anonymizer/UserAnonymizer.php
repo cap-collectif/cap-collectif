@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Anonymizer;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
-use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\MailingListUserRepository;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
@@ -20,8 +20,17 @@ class UserAnonymizer
 {
     final public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly UserGroupRepository $groupRepository, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly LoggerInterface $logger, private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader, private readonly UserManager $userManager, private readonly MediaRepository $mediaRepository, private readonly MailingListRepository $mailingListRepository, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly UserGroupRepository $groupRepository,
+        private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        private readonly LoggerInterface $logger,
+        private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader,
+        private readonly UserManager $userManager,
+        private readonly MediaRepository $mediaRepository,
+        private readonly MailingListUserRepository $mailingListUserRepository,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     public function anonymize(User $user): void
@@ -121,8 +130,9 @@ class UserAnonymizer
 
     public function removeFromMailingLists(User $user): void
     {
-        foreach ($this->mailingListRepository->getMailingListByUser($user) as $mailingList) {
-            $mailingList->getUsers()->removeElement($user);
+        $mailingListUsers = $this->mailingListUserRepository->getMailingListUserByUser($user);
+        foreach ($mailingListUsers as $mailingListUser) {
+            $this->em->remove($mailingListUser);
         }
     }
 }

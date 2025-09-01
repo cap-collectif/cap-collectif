@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
@@ -474,6 +475,69 @@ class ParticipantRepository extends EntityRepository
         $params = ['projectId' => $project->getId(), 'participantId' => $participant->getId()];
 
         return $em->getConnection()->executeStatement($sql, $params) > 0;
+    }
+
+    /**
+     * @return array<Participant>
+     */
+    public function getParticipantsInMailingList(
+        MailingList $mailingList,
+        bool $validEmailOnly = true,
+        bool $consentInternalOnly = true,
+        ?int $offset = null,
+        ?int $limit = null
+    ): array {
+        $qb = $this->createQueryBuilder('p')
+            ->innerJoin(
+                'CapcoAppBundle:MailingListUser',
+                'mlu',
+                'WITH',
+                'mlu.participant = p'
+            )
+            ->where('mlu.mailingList = :mailingList')
+            ->orderBy('p.createdAt')
+            ->setParameter('mailingList', $mailingList)
+        ;
+        if ($validEmailOnly) {
+            $qb->andWhere('p.email IS NOT NULL');
+        }
+        if ($consentInternalOnly) {
+            $qb->andWhere('p.consentInternalCommunication = 1');
+        }
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countParticipantsInMailingList(
+        MailingList $mailingList,
+        bool $validEmailOnly = true,
+        bool $consentInternalOnly = true
+    ): int {
+        $qb = $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->innerJoin(
+                'CapcoAppBundle:MailingListUser',
+                'mlu',
+                'WITH',
+                'mlu.participant = p'
+            )
+            ->where('mlu.mailingList = :mailingList')
+            ->setParameter('mailingList', $mailingList)
+        ;
+        if ($validEmailOnly) {
+            $qb->andWhere('p.email IS NOT NULL');
+        }
+        if ($consentInternalOnly) {
+            $qb->andWhere('p.consentInternalCommunication = 1');
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

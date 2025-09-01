@@ -41,16 +41,6 @@ class MailingListRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getMailingListByUser(User $user): array
-    {
-        return $qb = $this->createQueryBuilder('ml')
-            ->where(':user MEMBER OF ml.users')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     public function findPaginatedByOwner(
         Owner $owner,
         ?int $limit,

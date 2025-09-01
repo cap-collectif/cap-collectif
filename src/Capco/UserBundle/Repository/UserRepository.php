@@ -1611,16 +1611,24 @@ class UserRepository extends EntityRepository
         return \count($stmt->executeQuery()->fetchAllAssociative()) > 0;
     }
 
+    /**
+     * @return array<User>
+     */
     public function getUsersInMailingList(
         MailingList $mailingList,
         bool $validEmailOnly = true,
         bool $consentInternalOnly = true,
         ?int $offset = null,
         ?int $limit = null
-    ): Paginator {
+    ): array {
         $qb = $this->createQueryBuilder('u')
-            ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
-            ->where('ml = :mailingList')
+            ->innerJoin(
+                'CapcoAppBundle:MailingListUser',
+                'mlu',
+                'WITH',
+                'mlu.user = u'
+            )
+            ->where('mlu.mailingList = :mailingList')
             ->orderBy('u.createdAt')
             ->setParameter('mailingList', $mailingList)
         ;
@@ -1637,7 +1645,7 @@ class UserRepository extends EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return new Paginator($qb);
+        return $qb->getQuery()->getResult();
     }
 
     public function countUsersInMailingList(
@@ -1647,8 +1655,13 @@ class UserRepository extends EntityRepository
     ): int {
         $qb = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
-            ->where('ml = :mailingList')
+            ->innerJoin(
+                'CapcoAppBundle:MailingListUser',
+                'mlu',
+                'WITH',
+                'mlu.user = u'
+            )
+            ->where('mlu.mailingList = :mailingList')
             ->setParameter('mailingList', $mailingList)
         ;
         if ($validEmailOnly) {

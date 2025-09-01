@@ -2,78 +2,21 @@ Capco\AppBundle\Entity\MailingList:
     mailingListWithoutProject:
         id: mailingListWithoutProject
         name: 'Les gens qui pèsent dans le capco-game'
-        users: ['@userMickael', '@userVincent']
         isDeletable: false
     mailingListFromCovidProject:
         id: mailignListFromCovidProject
         name: 'liste Solidarité COVID-19'
-        users: ['@user4', '@user666']
         project: '@projectCorona'
     emptyMailingListWithOwner:
         id: emptyMailingListWithOwner
         name: "J'avoue je sers à rien"
-        users: []
         owner: '@userTheo'
         creator: '@userTheo'
     longMailingList:
         id: longMailingList
         name: 'Coucou, tu veux voir ma liste ?'
-        users:
-            [
-                '@user1',
-                '@user2',
-                '@user3',
-                '@userSpyl',
-                '@userWelcomattic',
-                '@userKiroule',
-                '@userMaxime',
-                '@userBellenger',
-                '@userJean',
-                '@userAgui',
-                '@userVincent',
-                '@userOmar',
-                '@userTheo',
-                '@userJpec',
-                '@userMickael',
-                '@userIan',
-                '@userMaximeQA',
-                '@user18',
-                '@user19',
-                '@user20',
-                '@user21',
-                '@user22',
-                '@user23',
-                '@user24',
-                '@user25',
-                '@user26',
-                '@user27',
-                '@user28',
-                '@user29',
-                '@user30',
-                '@user31',
-                '@user32',
-                '@user33',
-                '@user34',
-                '@user35',
-                '@user36',
-                '@user37',
-                '@user38',
-                '@user39',
-                '@user40',
-                '@user41',
-                '@user42',
-                '@user43',
-                '@user44',
-                '@user45',
-                '@user46',
-                '@user47',
-                '@user48',
-                '@user49',
-                '@user50',
-            ]
     mailingListOrganization:
         id: mailingListOrganization
         name: 'Mailing list organization'
-        users: ['@user1', '@userSpyl']
         owner: '@organization2'
         creator: '@valerieMassonDelmotte'

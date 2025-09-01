@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\Capco\Facade\EntityInterface;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,10 +29,10 @@ class MailingList implements EntityInterface, Ownerable, CreatableInterface
     private string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinTable(name="mailing_list_user")
+     * @var Collection<int, MailingListUser>
+     * @ORM\OneToMany(targetEntity=MailingListUser::class, mappedBy="mailingList", cascade={"persist", "remove"})
      */
-    private Collection $users;
+    private Collection $mailingListUsers;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project")
@@ -58,7 +57,7 @@ class MailingList implements EntityInterface, Ownerable, CreatableInterface
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->mailingListUsers = new ArrayCollection();
         $this->project = null;
         $this->emailingCampaigns = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -76,40 +75,40 @@ class MailingList implements EntityInterface, Ownerable, CreatableInterface
         return $this;
     }
 
-    public function getUsers(): Collection
+    public function getMailingListUsers(): Collection
     {
-        return $this->users;
+        return $this->mailingListUsers;
+    }
+
+    public function addMailingListUser(MailingListUser $mailingListUser): self
+    {
+        if (!$this->mailingListUsers->contains($mailingListUser)) {
+            $this->mailingListUsers->add($mailingListUser);
+        }
+
+        return $this;
+    }
+
+    public function removeMailingListUser(MailingListUser $mailingListUser): self
+    {
+        $this->mailingListUsers->removeElement($mailingListUser);
+
+        return $this;
     }
 
     public function getUsersWithValidEmail(bool $consentInternalOnly = false): Collection
     {
         $usersWithValidEmail = new ArrayCollection();
-        /** @var User $user */
-        foreach ($this->users as $user) {
-            if ($user->getEmail()) {
-                if (!$consentInternalOnly || $user->isConsentInternalCommunication()) {
-                    $usersWithValidEmail->add($user);
-                }
+        foreach ($this->mailingListUsers as $mailingListUser) {
+            $contributor = $mailingListUser->getContributor();
+            if ($contributor->getEmail()
+              && (!$consentInternalOnly || $contributor->isConsentInternalCommunication())
+            ) {
+                $usersWithValidEmail->add($contributor);
             }
         }
 
         return $usersWithValidEmail;
-    }
-
-    public function setUsers(array $users = []): self
-    {
-        $this->users = new ArrayCollection($users);
-
-        return $this;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-        }
-
-        return $this;
     }
 
     public function getProject(): ?Project

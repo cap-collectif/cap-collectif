@@ -439,8 +439,8 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
             cursor
             node {
               id
+              consentInternalCommunication
               ... on User {
-                consentInternalCommunication
                 userType {
                   id
                   name
