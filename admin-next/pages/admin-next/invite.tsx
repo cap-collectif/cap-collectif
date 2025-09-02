@@ -41,7 +41,7 @@ const InvitePage = ({ queryReference }: Props): React.JSX.Element => {
   const { allInvitations, pendingInvitations, acceptedInvitations } = query
 
   return (
-    <Flex direction="column" spacing={6} height="100%" justify="flex-start">
+    <Flex direction="column" spacing={6} justify="flex-start">
       <Flex
         direction="column"
         spacing={6}
