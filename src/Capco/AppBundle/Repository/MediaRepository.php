@@ -98,6 +98,7 @@ class MediaRepository extends EntityRepository
         $qb = $this->getQueryBuilderWithoutCategory($term, $showProfilePictures)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->orderBy('m.createdAt', 'DESC')
         ;
 
         return new Paginator($qb);

@@ -29,19 +29,33 @@ class MediaManager
         string $context = 'default',
         ?string $providerReference = null
     ): Media {
-        $media = new Media();
-        $media->setProviderName(MediaProvider::class);
-        $media->setBinaryContent($file);
-        $media->setProviderReference(
-            $providerReference ?: $this->mediaProvider->generateName($media)
-        );
-        $media->setName($file->getClientOriginalName());
-        $media->setContentType($file->getMimeType());
-        $media->setSize($file->getSize());
-        $media->setContext($context);
-        $media->setEnabled(true);
-        $this->entityManager->persist($media);
-        $this->mediaProvider->writeBinaryContentInFile($media);
+        $name = $file->getClientOriginalName();
+        $size = $file->getSize();
+        $contentType = $file->getMimeType();
+
+        $mediaRepository = $this->entityManager->getRepository(Media::class);
+
+        // simple check that is not 100% accurate but should cover almost all cases (size is precise to the byte)
+        $media = $mediaRepository->findOneBy(['name' => $name, 'size' => $size, 'contentType' => $contentType]);
+        if (null !== $media) {
+            $media->setUpdatedAt(new \DateTime());
+            $media->setCreatedAt(new \DateTime());
+        } else {
+            $media = new Media();
+            $media->setProviderName(MediaProvider::class);
+            $media->setBinaryContent($file);
+            $media->setProviderReference(
+                $providerReference ?: $this->mediaProvider->generateName($media)
+            );
+            $media->setName($name);
+            $media->setContentType($contentType);
+            $media->setSize($size);
+            $media->setContext($context);
+            $media->setEnabled(true);
+            $this->entityManager->persist($media);
+            $this->mediaProvider->writeBinaryContentInFile($media);
+        }
+
         $this->entityManager->flush();
 
         return $media;
