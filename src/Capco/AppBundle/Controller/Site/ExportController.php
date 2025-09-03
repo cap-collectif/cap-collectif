@@ -362,7 +362,7 @@ class ExportController extends Controller
         }
 
         // TODO remove this if after all export participants has been merged
-        if ($step instanceof QuestionnaireStep) {
+        if ($step instanceof QuestionnaireStep || $step instanceof CollectStep || $step instanceof SelectionStep) {
             $isSimplified = 'true' === $request->query->get('simplified');
             $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
