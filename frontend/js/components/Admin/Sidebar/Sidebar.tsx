@@ -223,10 +223,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin-menu-invite-users-label" href="/admin-next/invite" />
                   <SidebarLink text="admin.label.group" href="/admin-next/groups" />
                   <SidebarLink text="admin.label.user_type" href="/admin/capco/user/usertype/list" />
-                  <SidebarLink
-                    text="admin.label.newsletter_subscription"
-                    href="/admin/capco/app/newslettersubscription/list"
-                  />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
@@ -301,6 +297,12 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.emailing_parameters && isAdmin ? (
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}
+                  {(isAdmin || isSuperAdmin) &&
+                    <SidebarLink
+                    text="admin.label.newsletter_subscription"
+                    href="/admin/capco/app/newslettersubscription/list"
+                    />
+                  }
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

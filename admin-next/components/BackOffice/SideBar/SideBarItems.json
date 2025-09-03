@@ -164,12 +164,6 @@
                 "href": "/admin/capco/user/usertype/list",
                 "rolesRequired": [],
                 "featuresRequired": []
-            },
-            {
-                "title": "admin.label.newsletter_subscription",
-                "href": "/admin/capco/app/newslettersubscription/list",
-                "rolesRequired": [],
-                "featuresRequired": []
             }
         ]
     },
@@ -411,6 +405,12 @@
                 "href": "/admin/mailingParameters/list",
                 "rolesRequired": ["admin"],
                 "featuresRequired": ["emailing_parameters"]
+            },
+            {
+                "title": "admin.label.newsletter_subscription",
+                "href": "/admin/capco/app/newslettersubscription/list",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
             }
         ]
     },

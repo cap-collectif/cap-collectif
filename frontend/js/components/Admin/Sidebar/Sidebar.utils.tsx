@@ -36,7 +36,6 @@ export const URL_MAP = {
     '/admin/capco/user/invite/',
     '/admin/capco/app/group/',
     '/admin/capco/user/usertype/',
-    '/admin/capco/app/newslettersubscription/',
   ],
   reglages: [
     '/admin/locale/',
@@ -73,8 +72,13 @@ export const URL_MAP = {
     '/admin/settings/pages.charter/',
     '/admin/settings/pages.shield/',
   ],
-  emailing: ['/admin/mailingCampaign/', '/admin/mailingList/'],
+  emailing: [
+    '/admin/mailingCampaign/',
+    '/admin/mailingList/',
+    '/admin/capco/app/newslettersubscription/',
+  ],
 }
+
 export const CAP_COLLECTIF_SVG: JSX.Element | JSX.Element[] | string = (
   <svg width="144" height="24" viewBox="0 0 144 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -126,4 +130,4 @@ export const CAP_COLLECTIF_SVG: JSX.Element | JSX.Element[] | string = (
       fill="#FEFCF6"
     />
   </svg>
-)
+);
