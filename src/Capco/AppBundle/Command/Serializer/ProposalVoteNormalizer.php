@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -37,7 +38,8 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
     public function normalize($object, $format = null, array $context = [])
     {
         $fullExportData = [];
-        $isFullExport = $context['is_full_export'] ?? false;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var ProposalCollectVote|ProposalSelectionVote $object */
         $isPrivate = $object->isPrivate();
@@ -62,7 +64,8 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
             [
                 'step' => $context['step'],
                 'questionsResponses' => $context['questionsResponses'],
-            ]
+                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED,
+            ],
         );
         $proposalNormalized[self::EXPORT_PROPOSAL_VOTES_ID] = $object->getId();
         $proposalNormalized[self::EXPORT_PROPOSAL_VOTES_RANKING] = null !== $position ? $position + 1 : null;

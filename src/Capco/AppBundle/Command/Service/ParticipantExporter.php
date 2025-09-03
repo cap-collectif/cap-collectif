@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterf
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -44,8 +45,8 @@ class ParticipantExporter
      */
     protected function getOldestUpdateDate(array $paths): \DateTime
     {
-        $simplifiedFileDate = filemtime($paths['simplified']);
-        $fullFileDate = filemtime($paths['full']);
+        $simplifiedFileDate = filemtime($paths[ExportVariantsEnum::SIMPLIFIED->value]);
+        $fullFileDate = filemtime($paths[ExportVariantsEnum::FULL->value]);
 
         return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
     }
@@ -69,8 +70,8 @@ class ParticipantExporter
      */
     protected function writeFiles(array $participants, array $paths, bool $withHeaders, bool $append = false): void
     {
-        $this->write($paths['simplified'], $participants, $withHeaders, false, $append);
-        $this->write($paths['full'], $participants, $withHeaders, true, $append);
+        $this->write($paths[ExportVariantsEnum::SIMPLIFIED->value], $participants, $withHeaders, ExportVariantsEnum::SIMPLIFIED, $append);
+        $this->write($paths[ExportVariantsEnum::FULL->value], $participants, $withHeaders, ExportVariantsEnum::FULL, $append);
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -80,13 +81,13 @@ class ParticipantExporter
         }
     }
 
-    protected function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
+    protected function write(string $path, array $data, bool $withHeader, ExportVariantsEnum $variant, bool $append): void
     {
         $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
-            BaseNormalizer::IS_FULL_EXPORT => $isFullExport,
+            BaseNormalizer::EXPORT_VARIANT => $variant,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
 

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Command\Service\FilePathResolver\FilePathResolverInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -43,7 +44,7 @@ class ExportRegenerationService
             $finder = new Finder();
             $filesystem = new Filesystem();
 
-            $filename = $filePathResolver->getFileName($step);
+            $filename = $filePathResolver->getFileName($step, ExportVariantsEnum::FULL);
             $baseName = str_replace('.csv', '', $filename);
             $pattern = sprintf('/^%s(_simplified)?\.csv$/', preg_quote($baseName, '/'));
 

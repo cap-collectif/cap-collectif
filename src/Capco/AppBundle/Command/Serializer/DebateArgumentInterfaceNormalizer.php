@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Serializer;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableDebateContributionInterface;
 use Capco\AppBundle\Command\Service\GeoIPReader;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateUrlResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -33,7 +34,8 @@ class DebateArgumentInterfaceNormalizer extends BaseNormalizer implements Normal
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = $context['is_full_export'] ?? false;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var ExportableDebateContributionInterface $object */
         $author = $object->getAuthor();

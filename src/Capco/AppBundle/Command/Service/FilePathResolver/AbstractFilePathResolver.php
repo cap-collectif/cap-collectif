@@ -13,4 +13,9 @@ abstract class AbstractFilePathResolver implements FilePathResolverInterface
     abstract public function getSimplifiedExportPath(AbstractStep $step): string;
 
     abstract public function getFullExportPath(AbstractStep $step): string;
+
+    public function getGroupedExportPath(AbstractStep $step): string
+    {
+        return '';
+    }
 }

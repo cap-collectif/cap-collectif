@@ -8,6 +8,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\DebateVoteRepository;
@@ -43,8 +44,8 @@ class DebateParticipantExporter extends ParticipantExporter
     {
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($debateStep);
-        $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($debateStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($debateStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($debateStep);
 
         /** @var Debate $debate */
         $debate = $debateStep->getDebate();
@@ -99,7 +100,7 @@ class DebateParticipantExporter extends ParticipantExporter
      */
     private function shouldExport(array $paths, Debate $debate): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 

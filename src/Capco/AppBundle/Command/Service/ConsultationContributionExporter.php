@@ -21,6 +21,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -61,8 +62,8 @@ class ConsultationContributionExporter extends ContributionExporter
         ConsultationStep $consultationStep,
         bool $append
     ): void {
-        $paths['simplified'] = $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep);
-        $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($consultationStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($consultationStep);
 
         if ($this->shouldExport($consultationStep->getId(), $paths, $append)) {
             $this->setDelimiter($delimiter);
@@ -83,11 +84,11 @@ class ConsultationContributionExporter extends ContributionExporter
      */
     private function shouldExport(string $consultationStepId, array $paths, bool $append): bool
     {
-        if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths['simplified'], $paths['full']);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths[ExportVariantsEnum::SIMPLIFIED->value], $paths[ExportVariantsEnum::FULL->value]);
 
         try {
             return $this->consultationStepRepository->hasRecentContributionsOrUpdatedUsers($consultationStepId, $oldestUpdateDate);

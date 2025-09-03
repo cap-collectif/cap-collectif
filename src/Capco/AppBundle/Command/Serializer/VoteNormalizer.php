@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Serializer;
 use Capco\AppBundle\Command\Service\GeoIPReader;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateUrlResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,10 +26,8 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
 
     public function normalize($object, $format = null, array $context = []): array
     {
-        $isFullExport = false;
-        if ($context && isset($context['is_full_export'])) {
-            $isFullExport = $context['is_full_export'];
-        }
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
         $author = null;
         /** @var DebateAnonymousVote|DebateVote $object */
         if ($object instanceof DebateVote) {

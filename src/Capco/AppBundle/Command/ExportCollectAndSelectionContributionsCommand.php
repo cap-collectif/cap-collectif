@@ -9,6 +9,7 @@ use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -133,8 +134,8 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
     private function getFilePaths(AbstractStep $step): array
     {
         return [
-            'full' => $this->contributionsFilePathResolver->getFullExportPath($step),
-            'simplified' => $this->contributionsFilePathResolver->getSimplifiedExportPath($step),
+            ExportVariantsEnum::FULL->value => $this->contributionsFilePathResolver->getFullExportPath($step),
+            ExportVariantsEnum::SIMPLIFIED->value => $this->contributionsFilePathResolver->getSimplifiedExportPath($step),
         ];
     }
 
@@ -174,7 +175,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
 
             $countProposals += \count($proposals);
 
-            if (file_exists($filePaths['full']) && file_exists($filePaths['simplified'])) {
+            if (file_exists($filePaths[ExportVariantsEnum::FULL->value]) && file_exists($filePaths[ExportVariantsEnum::SIMPLIFIED->value])) {
                 $append = false;
             }
 
@@ -205,25 +206,27 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         InputInterface $input,
         OutputInterface $output
     ): void {
-        $tmpFullExport = $filePaths['full'] . '.tmp';
-        $tmpSimplifiedExport = $filePaths['simplified'] . '.tmp';
+        $tmpFullExport = $filePaths[ExportVariantsEnum::FULL->value] . '.tmp';
+        $tmpSimplifiedExport = $filePaths[ExportVariantsEnum::SIMPLIFIED->value] . '.tmp';
 
         if (file_exists($tmpFullExport)) {
-            $filesystem->rename($tmpFullExport, $filePaths['full'], true);
+            $filesystem->rename($tmpFullExport, $filePaths[ExportVariantsEnum::FULL->value], true);
         }
 
         if (file_exists($tmpSimplifiedExport)) {
-            $filesystem->rename($tmpSimplifiedExport, $filePaths['simplified'], true);
+            $filesystem->rename($tmpSimplifiedExport, $filePaths[ExportVariantsEnum::SIMPLIFIED->value], true);
         }
 
         foreach ($filePaths as $type => $path) {
-            $isSimplified = 'simplified' === $type;
+            $isSimplified = ExportVariantsEnum::SIMPLIFIED->value === $type;
+            $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
+
             if (file_exists($path)) {
                 $style->writeln("\n<info>Exported the CSV files {$type}: {$path}</info>\n");
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $step->getType() . '/' . $this->contributionsFilePathResolver->getFileName($step, $isSimplified)
+                    $step->getType() . '/' . $this->contributionsFilePathResolver->getFileName($step, $variant)
                 );
             }
         }

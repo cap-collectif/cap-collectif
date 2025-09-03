@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Service\DebateParticipantExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -63,8 +64,8 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
 
             $this->exporter->initializeStyle($style);
             $this->exporter->exportDebateParticipants($debateStep, $input->getOption('delimiter'));
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep));
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep, true));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep, ExportVariantsEnum::FULL));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep, ExportVariantsEnum::SIMPLIFIED));
             $style->progressAdvance();
         }
 

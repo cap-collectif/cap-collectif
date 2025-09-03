@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -34,7 +35,8 @@ class ReportingNormalizer extends BaseNormalizer implements NormalizerInterface,
     public function normalize($object, $format = null, array $context = [])
     {
         $fullExportData = [];
-        $isFullExport = $context['is_full_export'] ?? false;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var Reporting $object */
         $author = $object->getReporter();
@@ -56,7 +58,7 @@ class ReportingNormalizer extends BaseNormalizer implements NormalizerInterface,
             null,
             [
                 'step' => $context['step'],
-                'is_full_export' => $isFullExport,
+                BaseNormalizer::EXPORT_VARIANT => $variant,
                 'questionsResponses' => $context['questionsResponses'],
             ]
         );

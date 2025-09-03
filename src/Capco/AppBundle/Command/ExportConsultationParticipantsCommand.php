@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Service\ConsultationParticipantExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -23,13 +24,13 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
 
     public function __construct(
         ExportUtils $exportUtils,
-        private Manager $toggleManager,
-        private ConsultationStepRepository $consultationRepository,
+        private readonly Manager $toggleManager,
+        private readonly ConsultationStepRepository $consultationRepository,
         string $projectRootDir,
-        private ConsultationParticipantExporter $exporter,
-        private ParticipantsFilePathResolver $participantsFilePathResolver,
-        private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager
+        private readonly ConsultationParticipantExporter $exporter,
+        private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
@@ -77,8 +78,8 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
                     continue;
                 }
 
-                $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($consultationStep);
-                $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($consultationStep);
+                $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($consultationStep);
+                $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($consultationStep);
 
                 $this->exporter->exportConsultationParticipants(
                     $participantsIds,
@@ -88,8 +89,8 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
 
                 $style->progressAdvance();
 
-                $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, true));
-                $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep));
+                $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::SIMPLIFIED));
+                $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::FULL));
             }
             $this->entityManager->clear();
 

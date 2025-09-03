@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,8 +43,8 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
-        $paths['full'] = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
+        $paths[ExportVariantsEnum::FULL->value] = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
 
         if (
             $this->shouldExportParticipant($paths, $questionnaire)
@@ -122,7 +123,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
      */
     private function shouldExportParticipant(array $paths, Questionnaire $questionnaire): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 
@@ -136,7 +137,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
      */
     private function shouldExportUser(array $paths, Questionnaire $questionnaire): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 

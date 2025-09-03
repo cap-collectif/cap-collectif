@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\Serializer;
 
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -9,7 +10,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class BaseNormalizer
 {
     final public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
-    final public const IS_FULL_EXPORT = 'is_full_export';
+    final public const EXPORT_VARIANT = 'export_variant';
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY = 'export_contribution_type_questionnaire_reply';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS = 'export_contribution_type_questionnaire_reply_anonymous';
@@ -336,6 +337,18 @@ abstract class BaseNormalizer
 
     public function __construct(protected TranslatorInterface $translator)
     {
+    }
+
+    /**
+     * @param array<mixed, mixed> $context
+     */
+    public static function getVariantFromContext(array $context): ExportVariantsEnum
+    {
+        if (!\array_key_exists(self::EXPORT_VARIANT, $context)) {
+            throw new \InvalidArgumentException('context must contain ' . self::EXPORT_VARIANT . ' key');
+        }
+
+        return $context[self::EXPORT_VARIANT];
     }
 
     protected function getReadableBoolean(bool $value): string

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -34,7 +35,8 @@ class ProposalNewsCommentReporting extends BaseNormalizer implements NormalizerI
     public function normalize($object, $format = null, array $context = [])
     {
         $fullExportData = [];
-        $isFullExport = $context['is_full_export'] ?? false;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         $author = $object->getReporter();
         $userType = $author?->getUserType();
@@ -55,7 +57,7 @@ class ProposalNewsCommentReporting extends BaseNormalizer implements NormalizerI
             null,
             [
                 'step' => $context['step'],
-                'is_full_export' => $isFullExport,
+                BaseNormalizer::EXPORT_VARIANT => $variant,
                 'questionsResponses' => $context['questionsResponses'],
             ]
         );

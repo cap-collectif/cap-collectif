@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\UserNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\UsersFilePathResolver;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Exception\LocaleConfigurationException;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
@@ -82,7 +83,7 @@ class UserExporter
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
-            'is_full_export' => true,
+            BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL,
         ];
 
         $content = $this->serializer->serialize(

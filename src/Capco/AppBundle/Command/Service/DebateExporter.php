@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -32,8 +33,8 @@ class DebateExporter
      */
     protected function getOldestUpdateDate(array $paths): \DateTime
     {
-        $simplifiedFileDate = filemtime($paths['simplified']);
-        $fullFileDate = filemtime($paths['full']);
+        $simplifiedFileDate = filemtime($paths[ExportVariantsEnum::SIMPLIFIED->value]);
+        $fullFileDate = filemtime($paths[ExportVariantsEnum::FULL->value]);
 
         return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
     }
@@ -57,8 +58,8 @@ class DebateExporter
      */
     protected function writeFiles(array $data, array $paths, bool $withHeaders): void
     {
-        $this->write($paths['simplified'], $data, $withHeaders, false);
-        $this->write($paths['full'], $data, $withHeaders, true);
+        $this->write($paths[ExportVariantsEnum::SIMPLIFIED->value], $data, $withHeaders, ExportVariantsEnum::SIMPLIFIED);
+        $this->write($paths[ExportVariantsEnum::FULL->value], $data, $withHeaders, ExportVariantsEnum::FULL);
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -71,13 +72,13 @@ class DebateExporter
     /**
      * @param array<DebateAnonymousVote|DebateVote> $data
      */
-    private function write(string $path, array $data, bool $withHeader, bool $isFullExport): void
+    private function write(string $path, array $data, bool $withHeader, ExportVariantsEnum $variant): void
     {
         $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
-            BaseNormalizer::IS_FULL_EXPORT => $isFullExport,
+            BaseNormalizer::EXPORT_VARIANT => $variant,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
 

@@ -29,6 +29,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -306,8 +307,9 @@ class ExportController extends Controller
         }
 
         $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+        $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,
@@ -362,8 +364,9 @@ class ExportController extends Controller
         // TODO remove this if after all export participants has been merged
         if ($step instanceof QuestionnaireStep) {
             $isSimplified = 'true' === $request->query->get('simplified');
+            $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+            $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
             $filePath = sprintf(
                 '%s%s/%s',
                 $this->exportDir,
@@ -396,8 +399,9 @@ class ExportController extends Controller
             }
 
             $isSimplified = 'true' === $request->query->get('simplified');
+            $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+            $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
             $filePath = sprintf(
                 '%s%s/%s',
                 $this->exportDir,
@@ -492,8 +496,9 @@ class ExportController extends Controller
         }
 
         $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+        $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,
@@ -724,8 +729,9 @@ class ExportController extends Controller
         $debate = $debateRepository->find($debateId);
 
         $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->contributionsFilePathResolver->getFileName($debate->getStep(), $isSimplified);
+        $fileName = $this->contributionsFilePathResolver->getFileName($debate->getStep(), $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,
@@ -827,8 +833,9 @@ class ExportController extends Controller
         }
 
         $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+        $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,
@@ -869,8 +876,9 @@ class ExportController extends Controller
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
 
         $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->contributionsFilePathResolver->getFileName($step, $isSimplified);
+        $fileName = $this->contributionsFilePathResolver->getFileName($step, $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,

@@ -25,6 +25,7 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -106,20 +107,22 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
     /**
      * @param array<ExportableContributionInterface> $contributions
      */
-    protected function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport, bool $append): void
+    protected function write(AbstractStep $step, array $contributions, bool $withHeader, ExportVariantsEnum $variant, bool $append): void
     {
         $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
-            BaseNormalizer::IS_FULL_EXPORT => $isFullExport,
+            BaseNormalizer::EXPORT_VARIANT => $variant,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
             'step' => $step,
             'questionsResponses' => $this->questionsResponses,
             'proposal' => $this->proposal,
         ];
 
-        if (!$context[BaseNormalizer::IS_FULL_EXPORT]) {
+        $isFullExport = ExportVariantsEnum::isFull($variant);
+
+        if (!$isFullExport) {
             $contributions = array_filter($contributions, static function (ExportableContributionInterface $contribution) {
                 switch ($contribution::class) {
                     case Proposal::class:
@@ -158,9 +161,11 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
             $context
         );
 
-        $path = $isFullExport
-            ? $this->contributionsFilePathResolver->getFullExportPath($step)
-            : $this->contributionsFilePathResolver->getSimplifiedExportPath($step);
+        $path = match ($variant) {
+            ExportVariantsEnum::FULL => $this->contributionsFilePathResolver->getFullExportPath($step),
+            ExportVariantsEnum::SIMPLIFIED => $this->contributionsFilePathResolver->getSimplifiedExportPath($step),
+            ExportVariantsEnum::GROUPED => $this->contributionsFilePathResolver->getGroupedExportPath($step),
+        };
 
         $path .= '.tmp';
 

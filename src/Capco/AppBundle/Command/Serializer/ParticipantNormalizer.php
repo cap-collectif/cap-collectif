@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRolesTextResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\UserBundle\Entity\User;
@@ -39,29 +40,17 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = false;
-        if ($context && isset($context['is_full_export'])) {
-            $isFullExport = $context['is_full_export'];
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
+
+        if (!$object instanceof ContributorInterface) {
+            throw new \InvalidArgumentException('Object must be an instance of ContributorInterface.');
         }
 
         /** @var ContributorInterface $object */
+        $userArray = $this->getParticipantPersonnalData($object);
+
         $isUser = $object instanceof User;
-        $userArray = [
-            self::EXPORT_PARTICIPANT_USER_ID => $object->getId(),
-            self::EXPORT_PARTICIPANT_USERNAME => $object->getUsername(),
-            self::EXPORT_PARTICIPANT_USER_EMAIL => $object->getEmail(),
-            self::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION => $this->getReadableBoolean($object->isConsentInternalCommunication()),
-            self::EXPORT_PARTICIPANT_PHONE => $object->getPhone(),
-            self::EXPORT_PARTICIPANT_TYPE => $isUser ? ($object->getUserType() ? $object->getUserType()->getName() : '') : '',
-            self::EXPORT_PARTICIPANT_FIRSTNAME => $object->getFirstName(),
-            self::EXPORT_PARTICIPANT_LASTNAME => $object->getLastName(),
-            self::EXPORT_PARTICIPANT_DATE_OF_BIRTH => $object->getDateOfBirth() ? $object->getDateOfBirth()->format('Y-m-d H:i:s') : null,
-            self::EXPORT_PARTICIPANT_POSTAL_ADDRESS => $object->getPostalAddress() ? $object->getPostalAddress()->getFormatted() : null,
-            self::EXPORT_PARTICIPANT_ZIP_CODE => $object->getZipCode(),
-            self::EXPORT_PARTICIPANT_CITY => $object->getCity(),
-            self::EXPORT_PARTICIPANT_PROFILE_URL => $isUser ? $this->userUrlResolver->__invoke($object) : null,
-            self::EXPORT_PARTICIPANT_IDENTIFICATION_CODE => $object->getUserIdentificationCode() ? $object->getUserIdentificationCode()->getIdentificationCode() : null,
-        ];
 
         if ($isFullExport) {
             $fullExportData = [
@@ -82,13 +71,53 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
             $userArray = array_merge($userArray, $fullExportData);
         }
 
-        if (isset($context['step']) && $context['step']->isVotable() && $object instanceof ContributorInterface) {
+        if (isset($context['step']) && $context['step']->isVotable()) {
             $userArray[self::EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP] = $this->getParticipantVoteCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP] = $this->getProposalCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);
         }
 
         return $this->translateHeaders($userArray);
+    }
+
+    /**
+     * @return array{
+     *     export_participant_user_id: string,
+     *     export_participant_username: string,
+     *     export_participant_user_email: string,
+     *     export_participant_consent_internal_communication: string,
+     *     export_participant_phone: string|null,
+     *     export_participant_type: string,
+     *     export_participant_firstname: string,
+     *     export_participant_lastname: string,
+     *     export_participant_date_of_birth: string|null,
+     *     export_participant_postal_address: string|null,
+     *     export_participant_zip_code: string|null,
+     *     export_participant_city: string|null,
+     *     export_participant_profile_url: string|null,
+     *     export_participant_identification_code: string|null
+     * }
+     */
+    public function getParticipantPersonnalData(ContributorInterface $contributor): array
+    {
+        $isUser = $contributor instanceof User;
+
+        return [
+            self::EXPORT_PARTICIPANT_USER_ID => $contributor->getId(),
+            self::EXPORT_PARTICIPANT_USERNAME => $contributor->getUsername(),
+            self::EXPORT_PARTICIPANT_USER_EMAIL => $contributor->getEmail(),
+            self::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION => $this->getReadableBoolean($contributor->isConsentInternalCommunication()),
+            self::EXPORT_PARTICIPANT_PHONE => $contributor->getPhone(),
+            self::EXPORT_PARTICIPANT_TYPE => $isUser ? $contributor->getUserType()?->getName() : '',
+            self::EXPORT_PARTICIPANT_FIRSTNAME => $contributor->getFirstName(),
+            self::EXPORT_PARTICIPANT_LASTNAME => $contributor->getLastName(),
+            self::EXPORT_PARTICIPANT_DATE_OF_BIRTH => $contributor->getDateOfBirth()?->format('Y-m-d H:i:s') ?? null,
+            self::EXPORT_PARTICIPANT_POSTAL_ADDRESS => $contributor->getPostalAddress()?->getFormatted() ?? null,
+            self::EXPORT_PARTICIPANT_ZIP_CODE => $contributor->getZipCode(),
+            self::EXPORT_PARTICIPANT_CITY => $contributor->getCity(),
+            self::EXPORT_PARTICIPANT_PROFILE_URL => $isUser ? $this->userUrlResolver->__invoke($contributor) : null,
+            self::EXPORT_PARTICIPANT_IDENTIFICATION_CODE => $contributor->getUserIdentificationCode()?->getIdentificationCode() ?? null,
+        ];
     }
 
     private function getParticipantVoteCountPerStep(ContributorInterface $contributor, AbstractStep $step): int

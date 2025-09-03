@@ -2,9 +2,11 @@
 
 namespace Capco\Tests\Normalizer\Proposal;
 
+use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ProposalNormalizer;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
@@ -65,6 +67,7 @@ class ProposalNormalizerTest extends KernelTestCase
             [
                 'step' => $stepMock,
                 'questionsResponses' => [],
+                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED,
             ]
         );
 

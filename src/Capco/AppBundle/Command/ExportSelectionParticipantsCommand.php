@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Command\Service\SelectionParticipantExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -195,12 +196,12 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         }
 
         foreach ($filePaths as $type => $path) {
-            $isSimplified = 'simplified' === $type;
+            $variant = ExportVariantsEnum::from($type);
             if (file_exists($path)) {
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $isSimplified)
+                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $variant)
                 );
             }
         }

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Enum\ReportingType;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -35,7 +36,8 @@ class OpinionReportingNormalizer extends BaseNormalizer implements NormalizerInt
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = $context['is_full_export'] ?? null;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         $related = $object->getRelated();
         $reporter = $object->getReporter();
@@ -52,7 +54,7 @@ class OpinionReportingNormalizer extends BaseNormalizer implements NormalizerInt
             ];
         }
 
-        $opinionArray = $this->opinionNormalizer->normalize($object->getRelated(), null, ['is_full_export' => $isFullExport, 'skip' => true]);
+        $opinionArray = $this->opinionNormalizer->normalize($object->getRelated(), null, [BaseNormalizer::EXPORT_VARIANT => $variant, 'skip' => true]);
         $reportingArray[self::EXPORT_CONTRIBUTION_TYPE] = $this->getTranslatedRelatedContribution($object);
 
         return $this->translateHeaders(array_merge((array) $opinionArray, $reportingArray));

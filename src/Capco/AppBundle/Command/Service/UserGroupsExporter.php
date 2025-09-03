@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\UserGroupNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\UserGroupsFilePathResolver;
 use Capco\AppBundle\Entity\UserGroup;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -72,7 +73,7 @@ class UserGroupsExporter
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
-            'is_full_export' => true,
+            BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL,
         ];
 
         $content = $this->serializer->serialize(

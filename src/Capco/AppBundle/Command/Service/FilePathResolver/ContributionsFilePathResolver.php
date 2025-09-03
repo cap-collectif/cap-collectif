@@ -3,20 +3,26 @@
 namespace Capco\AppBundle\Command\Service\FilePathResolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 
 class ContributionsFilePathResolver extends AbstractFilePathResolver
 {
     public function getSimplifiedExportPath(AbstractStep $step): string
     {
-        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, true));
+        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, ExportVariantsEnum::SIMPLIFIED));
     }
 
     public function getFullExportPath(AbstractStep $step): string
     {
-        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step));
+        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, ExportVariantsEnum::FULL));
     }
 
-    public function getFileName(AbstractStep $step, bool $simplified = false): string
+    public function getGroupedExportPath(AbstractStep $step): string
+    {
+        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, ExportVariantsEnum::GROUPED));
+    }
+
+    public function getFileName(AbstractStep $step, ExportVariantsEnum $variant): string
     {
         $fileName = sprintf(
             'contributions_%s_%s',
@@ -30,9 +36,9 @@ class ContributionsFilePathResolver extends AbstractFilePathResolver
             $fileName = md5($fileName);
         }
 
-        if ($simplified) {
-            $fileName .= '_simplified';
-        }
+        $fileNameSuffix = ExportVariantsEnum::getFileSuffix($variant);
+
+        $fileName .= $fileNameSuffix;
 
         return $fileName . '.csv';
     }

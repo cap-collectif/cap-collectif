@@ -3,20 +3,26 @@
 namespace Capco\AppBundle\Command\Service\FilePathResolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 
 class ParticipantsFilePathResolver extends AbstractFilePathResolver
 {
     public function getSimplifiedExportPath(AbstractStep $step): string
     {
-        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, true));
+        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, ExportVariantsEnum::SIMPLIFIED));
     }
 
     public function getFullExportPath(AbstractStep $step): string
     {
-        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step));
+        return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step, ExportVariantsEnum::FULL));
     }
 
-    public function getFileName(AbstractStep $step, bool $simplified = false): string
+    public function getGroupedExportPath(AbstractStep $step): string
+    {
+        return '';
+    }
+
+    public function getFileName(AbstractStep $step, ExportVariantsEnum $variant): string
     {
         $fileName = sprintf(
             'participants_%s_%s',
@@ -30,8 +36,10 @@ class ParticipantsFilePathResolver extends AbstractFilePathResolver
             $fileName = md5($fileName);
         }
 
-        if ($simplified) {
+        if (ExportVariantsEnum::SIMPLIFIED === $variant) {
             $fileName .= '_simplified';
+        } elseif (ExportVariantsEnum::GROUPED === $variant) {
+            $fileName .= '_grouped';
         }
 
         return $fileName . '.csv';

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -32,7 +33,8 @@ class OpinionVoteNormalizer extends BaseNormalizer implements NormalizerInterfac
     public function normalize($object, $format = null, array $context = [])
     {
         /** @var OpinionVote $object */
-        $isFullExport = $context['is_full_export'] ?? null;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
         $author = $object->getAuthor();
         $voteValue = OpinionVote::$voteTypesLabels[$object->getValue()];
 
@@ -53,7 +55,7 @@ class OpinionVoteNormalizer extends BaseNormalizer implements NormalizerInterfac
             ];
         }
 
-        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, ['is_full_export' => $isFullExport, 'skip' => true]);
+        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, [BaseNormalizer::EXPORT_VARIANT => $variant, 'skip' => true]);
         $opinionVoteArray[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
         return $this->translateHeaders(array_merge((array) $opinionArray, $opinionVoteArray));

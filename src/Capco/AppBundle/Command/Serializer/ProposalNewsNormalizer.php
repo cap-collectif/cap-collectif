@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Serializer;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -35,11 +36,9 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
     public function normalize($object, $format = null, array $context = [])
     {
         $fullExportData = [];
-        $isFullExport = false;
 
-        if ($context && isset($context['is_full_export'])) {
-            $isFullExport = $context['is_full_export'];
-        }
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var Post $object */
         $postAuthors = $object->getAuthors();
@@ -101,7 +100,7 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
             null,
             [
                 'step' => $context['step'],
-                'is_full_export' => $isFullExport,
+                BaseNormalizer::EXPORT_VARIANT => $variant,
                 'questionsResponses' => $context['questionsResponses'],
             ]
         );

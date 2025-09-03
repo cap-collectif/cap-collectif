@@ -22,6 +22,7 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
     ];
     final public const FULL_SUFFIX = '.csv';
     final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
+    final public const GROUPED_SUFFIX = '_grouped.csv';
     final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/questionnaire';
     final public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
 
@@ -38,8 +39,9 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
         $completedFileNames = self::getCompletedFileNames(self::FULL_SUFFIX);
         $simplifiedFileNames = self::getCompletedFileNames(self::SIMPLIFIED_SUFFIX);
+        $groupedFileNames = self::getCompletedFileNames(self::GROUPED_SUFFIX);
 
-        $this->assertOutputs($actualOutputs, array_merge($simplifiedFileNames, $completedFileNames));
+        $this->assertOutputs($actualOutputs, array_merge($simplifiedFileNames, $completedFileNames, $groupedFileNames));
     }
 
     public function testIfUpdateUserFileGenerated(): void

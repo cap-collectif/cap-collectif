@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,10 +24,8 @@ class DebateAnonymousArgumentNormalizer extends BaseNormalizer implements Contex
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = false;
-        if ($context && isset($context['is_full_export'])) {
-            $isFullExport = $context['is_full_export'];
-        }
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var DebateAnonymousArgument $object */
         $userArray = [

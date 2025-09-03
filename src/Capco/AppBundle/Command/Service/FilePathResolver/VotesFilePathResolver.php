@@ -16,6 +16,11 @@ class VotesFilePathResolver extends AbstractFilePathResolver
         return sprintf('%s%s/%s', $this->exportDirectory, $step->getType(), $this->getFileName($step));
     }
 
+    public function getGroupedExportPath(AbstractStep $step): string
+    {
+        return '';
+    }
+
     public function getFileName(AbstractStep $step, bool $simplified = false): string
     {
         $fileName = sprintf(

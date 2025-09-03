@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Command\Service\DebateContributionExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -74,12 +75,12 @@ class ExportDebateContributionsCommand extends BaseExportCommand
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), true)
+                    self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), ExportVariantsEnum::SIMPLIFIED)
                 );
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep())
+                    self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), ExportVariantsEnum::FULL)
                 );
             }
             $this->entityManager->clear();

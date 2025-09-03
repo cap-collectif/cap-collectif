@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolv
 use Capco\AppBundle\Command\Service\QuestionnaireContributionExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -105,8 +106,9 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
 
             $this->questionnaireContributionExporter->initializeStyle($style);
 
-            $paths['simplified'] = $this->contributionsFilePathResolver->getSimplifiedExportPath($questionnaireStep);
-            $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
+            $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->contributionsFilePathResolver->getSimplifiedExportPath($questionnaireStep);
+            $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
+            $paths[ExportVariantsEnum::GROUPED->value] = $this->contributionsFilePathResolver->getGroupedExportPath($questionnaireStep);
 
             $replies = $questionnaire->getReplies();
             $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
@@ -121,11 +123,13 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
                 $paths
             );
 
-            $style->writeln("\n<info>Exported the CSV files full : {$paths['full']}</info>");
-            $style->writeln("\n<info>Exported the CSV files simplified : {$paths['simplified']}</info>\n");
+            $style->writeln("\n<info>Exported the CSV files full : {$paths[ExportVariantsEnum::FULL->value]}</info>");
+            $style->writeln("\n<info>Exported the CSV files simplified : {$paths[ExportVariantsEnum::SIMPLIFIED->value]}</info>\n");
+            $style->writeln("\n<info>Exported the CSV files grouped : {$paths[ExportVariantsEnum::GROUPED->value]}</info>\n");
 
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($questionnaireStep));
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($questionnaireStep, true));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::FULL));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::SIMPLIFIED));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::GROUPED));
         }
 
         $this->stopwatch->stop(self::STOP_WATCH_MARKER);

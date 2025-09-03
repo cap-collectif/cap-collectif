@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -155,7 +156,9 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = $context['is_full_export'] ?? null;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
+
         if (isset($context['skip']) && true === $context['skip']) {
             $exportData = $isFullExport ? self::FULL_EXPORT_SORTED : self::SIMPLIFIED_EXPORT_SORTED;
 

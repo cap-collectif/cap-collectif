@@ -49,19 +49,25 @@ class QuestionnaireContributionExporter extends ContributionExporter
             return;
         }
 
-        if ($this->shouldExport($questionnaireStep, $questionnaire, $paths)) {
+        if ($this->shouldExport($questionnaire, $paths)) {
             $this->setDelimiter($delimiter);
 
             $this->exportQuestionnaireRepliesInBatches($questionnaire);
         }
     }
 
-    protected function getOldestUpdateDate(string $simplifiedPath, string $fullPath): \DateTime
+    /**
+     * @param array<ExportVariantsEnum::value, string> $paths
+     */
+    protected function getOldestUpdateDate(array $paths): \DateTime
     {
-        $simplifiedFileDate = filemtime($simplifiedPath);
-        $fullFileDate = filemtime($fullPath);
+        $filesDate = array_map(fn ($path) => filemtime($path), $paths);
 
-        return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
+        if (empty($filesDate)) {
+            throw new \Exception('Array cannot be empty');
+        }
+
+        return (new \DateTime())->setTimestamp(min($filesDate));
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -74,13 +80,15 @@ class QuestionnaireContributionExporter extends ContributionExporter
     /**
      * @param array<string, string> $paths
      */
-    private function shouldExport(QuestionnaireStep $questionnaireStep, string $questionnaireId, array $paths): bool
+    private function shouldExport(string $questionnaireId, array $paths): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
-            return true;
+        foreach ($paths as $path) {
+            if (!file_exists($path)) {
+                return true;
+            }
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths['simplified'], $paths['full']);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
             return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);

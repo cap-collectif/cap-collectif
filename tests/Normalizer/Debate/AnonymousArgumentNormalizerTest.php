@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\DebateAnonymousArgumentNormalizer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -56,7 +57,7 @@ class AnonymousArgumentNormalizerTest extends TestCase
     }
 
     /**
-     * @return array<string, array<int, array<string, null|bool|string>>>
+     * @return array<string, array<int, array<string, null|bool|ExportVariantsEnum|string>>>
      */
     public function normalizationDataProvider(): array
     {
@@ -93,8 +94,10 @@ class AnonymousArgumentNormalizerTest extends TestCase
         ];
 
         return [
-            'Partial Export' => [['is_full_export' => false, BaseNormalizer::IS_EXPORT_NORMALIZER => true], $simplifiedExportResult],
-            'Full Export' => [['is_full_export' => true, BaseNormalizer::IS_EXPORT_NORMALIZER => true], $fullExportResult],
+            'Partial Export' => [[
+                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED, BaseNormalizer::IS_EXPORT_NORMALIZER => true, ], $simplifiedExportResult],
+            'Full Export' => [[
+                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL, BaseNormalizer::IS_EXPORT_NORMALIZER => true, ], $fullExportResult],
         ];
     }
 }

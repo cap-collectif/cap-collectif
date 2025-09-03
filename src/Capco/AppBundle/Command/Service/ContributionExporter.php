@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Command\Service\FilePathResolver\AbstractFilePathResolver;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -17,7 +18,7 @@ class ContributionExporter
     final public const CSV_DELIMITER = ';';
     protected SymfonyStyle $style;
     /**
-     * @var array<string, null|bool|string>
+     * @var array<string, null|bool|ExportVariantsEnum|string>
      */
     protected array $context;
     protected ?string $delimiter = self::CSV_DELIMITER;
@@ -52,8 +53,9 @@ class ContributionExporter
      */
     protected function writeFiles(array $contributions, AbstractStep $step, bool $withHeaders, bool $append = false): void
     {
-        $this->write($step, $contributions, $withHeaders, false, $append);
-        $this->write($step, $contributions, $withHeaders, true, $append);
+        $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::FULL, $append);
+        $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::SIMPLIFIED, $append);
+        $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::GROUPED, $append);
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -66,17 +68,19 @@ class ContributionExporter
     /**
      * @param array<ExportableContributionInterface> $contributions
      */
-    protected function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport, bool $append): void
+    protected function write(AbstractStep $step, array $contributions, bool $withHeader, ExportVariantsEnum $variant, bool $append): void
     {
-        $path = $isFullExport
-            ? $this->filePathResolverContributions->getFullExportPath($step)
-            : $this->filePathResolverContributions->getSimplifiedExportPath($step);
+        $path = match ($variant) {
+            ExportVariantsEnum::SIMPLIFIED => $this->filePathResolverContributions->getSimplifiedExportPath($step),
+          ExportVariantsEnum::FULL => $this->filePathResolverContributions->getFullExportPath($step),
+          ExportVariantsEnum::GROUPED => $this->filePathResolverContributions->getGroupedExportPath($step),
+        };
 
         $this->context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
-            BaseNormalizer::IS_FULL_EXPORT => $isFullExport,
+            BaseNormalizer::EXPORT_VARIANT => $variant,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
 

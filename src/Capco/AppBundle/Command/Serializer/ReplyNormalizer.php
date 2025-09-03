@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver;
 use Capco\UserBundle\Entity\User;
@@ -18,7 +19,8 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
     public function __construct(
         TranslatorInterface $translator,
         private readonly FormattedValueResponseTypeResolver $formattedValueResponseTypeResolver,
-        private readonly MediaUrlResolver $mediaUrlResolver
+        private readonly MediaUrlResolver $mediaUrlResolver,
+        private readonly ParticipantNormalizer $participantNormalizer,
     ) {
         parent::__construct($translator);
     }
@@ -43,11 +45,9 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
      */
     public function normalize($object, ?string $format = null, array $context = []): array
     {
-        $isFullExport = false;
-
-        if ($context && isset($context['is_full_export'])) {
-            $isFullExport = $context['is_full_export'];
-        }
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isGrouped = ExportVariantsEnum::isGrouped($variant);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         $contributor = $object->getContributor();
 
@@ -73,6 +73,9 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
             ];
 
             $responseArray = array_merge($responseArray, $fullUserArray);
+        } elseif ($isGrouped) {
+            $contributorData = $this->participantNormalizer->getParticipantPersonnalData($contributor);
+            $responseArray = array_merge($contributorData, $responseArray);
         }
 
         $keyCounters = [];

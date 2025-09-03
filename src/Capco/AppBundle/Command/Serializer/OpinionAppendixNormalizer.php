@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -30,7 +31,8 @@ class OpinionAppendixNormalizer extends BaseNormalizer implements NormalizerInte
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = $context['is_full_export'] ?? null;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         /** @var AppendixType $appendixType */
         $appendixType = $object->getAppendixType();
@@ -47,7 +49,7 @@ class OpinionAppendixNormalizer extends BaseNormalizer implements NormalizerInte
             ];
         }
 
-        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, ['is_full_export' => $isFullExport, 'skip' => true]);
+        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, [BaseNormalizer::EXPORT_VARIANT => $variant, 'skip' => true]);
         $contextElementArray[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
         return $this->translateHeaders(array_merge((array) $opinionArray, $contextElementArray));

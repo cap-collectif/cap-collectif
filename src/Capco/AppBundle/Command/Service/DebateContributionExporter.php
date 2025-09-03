@@ -8,6 +8,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolv
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -50,8 +51,8 @@ class DebateContributionExporter extends ContributionExporter
     ): void {
         $this->setDelimiter($delimiter);
         $debateStep = $debate->getStep();
-        $paths['simplified'] = $this->contributionsFilePathResolver->getSimplifiedExportPath($debateStep);
-        $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($debateStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->contributionsFilePathResolver->getSimplifiedExportPath($debateStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($debateStep);
 
         if ($this->shouldExport($debate, $paths)) {
             $this->exportContributionsInBatches($debate, $output);
@@ -85,11 +86,11 @@ class DebateContributionExporter extends ContributionExporter
      */
     private function shouldExport(Debate $debate, array $paths): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths['simplified'], $paths['full']);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths[ExportVariantsEnum::SIMPLIFIED->value], $paths[ExportVariantsEnum::FULL->value]);
 
         try {
             return $this->debateRepository->hasNewArgumentsForADebate($debate, $oldestUpdateDate);

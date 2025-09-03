@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Service\ConsultationContributionExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -24,6 +25,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ExportConsultationContributionsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
+
     public const CAPCO_EXPORT_CONSULTATION_CONTRIBUTIONS = 'capco:export:consultation:contributions';
     private const OPINION_BATCH_SIZE = 50;
     private const CONSULTATION_STEP_BATCH_SIZE = 25;
@@ -210,13 +212,14 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
         }
 
         foreach ($filePaths as $type => $path) {
-            $isSimplified = 'simplified' === $type;
+            $variant = ExportVariantsEnum::from($type);
+
             if (file_exists($path)) {
                 $style->writeln("\n<info>Exported the CSV files {$type}: {$path}</info>\n");
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $consultationStep->getType() . '/' . $this->contributionsFilePathResolver->getFileName($consultationStep, $isSimplified)
+                    $consultationStep->getType() . '/' . $this->contributionsFilePathResolver->getFileName($consultationStep, $variant)
                 );
             }
         }

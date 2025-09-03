@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -105,7 +106,7 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
             $totalParticipants += $userExported + $participantsExported;
             $tableSummary->addRows([[$collectStep->getTitle(), $totalParticipants], new TableSeparator()]);
 
-            $this->finalizeExportFiles($filesystem, $collectStep, $filePaths, $style, $input, $output);
+            $this->finalizeExportFiles($filesystem, $collectStep, $filePaths, $input, $output);
         }
 
         $tableSummary->setFooterTitle('Total Participants: ' . $totalParticipants);
@@ -136,8 +137,8 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
     private function getFilePaths(CollectStep $step): array
     {
         return [
-            'full' => $this->participantFilePathResolver->getFullExportPath($step),
-            'simplified' => $this->participantFilePathResolver->getSimplifiedExportPath($step),
+            ExportVariantsEnum::FULL->value => $this->participantFilePathResolver->getFullExportPath($step),
+            ExportVariantsEnum::SIMPLIFIED->value => $this->participantFilePathResolver->getSimplifiedExportPath($step),
         ];
     }
 
@@ -211,28 +212,27 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         Filesystem $filesystem,
         CollectStep $step,
         array $filePaths,
-        SymfonyStyle $style,
         InputInterface $input,
         OutputInterface $output
     ): void {
-        $tmpFullExport = $filePaths['full'] . '.tmp';
-        $tmpSimplifiedExport = $filePaths['simplified'] . '.tmp';
+        $tmpFullExport = $filePaths[ExportVariantsEnum::FULL->value] . '.tmp';
+        $tmpSimplifiedExport = $filePaths[ExportVariantsEnum::SIMPLIFIED->value] . '.tmp';
 
         if (file_exists($tmpFullExport)) {
-            $filesystem->rename($tmpFullExport, $filePaths['full'], true);
+            $filesystem->rename($tmpFullExport, $filePaths[ExportVariantsEnum::FULL->value], true);
         }
 
         if (file_exists($tmpSimplifiedExport)) {
-            $filesystem->rename($tmpSimplifiedExport, $filePaths['simplified'], true);
+            $filesystem->rename($tmpSimplifiedExport, $filePaths[ExportVariantsEnum::SIMPLIFIED->value], true);
         }
 
         foreach ($filePaths as $type => $path) {
-            $isSimplified = 'simplified' === $type;
+            $variant = ExportVariantsEnum::from($type);
             if (file_exists($path)) {
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $isSimplified)
+                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $variant)
                 );
             }
         }

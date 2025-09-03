@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Command\Service\QuestionnaireParticipantExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -68,8 +69,8 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
 
             $this->exporter->initializeStyle($style);
             $this->exporter->exportQuestionnaireParticipants($questionnaire, $input->getOption('delimiter'));
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($questionnaireStep));
-            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($questionnaireStep, true));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::FULL));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::SIMPLIFIED));
             $style->progressAdvance();
         }
 

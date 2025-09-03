@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\VoteNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\VotesFilePathResolver;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -33,8 +34,8 @@ class DebateVoteExporter extends DebateExporter
     {
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->voteFilePathResolver->getSimplifiedExportPath($debateStep);
-        $paths['full'] = $this->voteFilePathResolver->getFullExportPath($debateStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->voteFilePathResolver->getSimplifiedExportPath($debateStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->voteFilePathResolver->getFullExportPath($debateStep);
 
         if ($this->shouldExportDebate($paths, $debate)) {
             $this->exportVotesInBatches($debate, $paths);
@@ -56,7 +57,7 @@ class DebateVoteExporter extends DebateExporter
      */
     private function shouldExportDebate(array $paths, Debate $debate)
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 

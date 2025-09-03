@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -79,7 +80,7 @@ class ConsultationParticipantExporter extends ParticipantExporter
      */
     private function shouldExport(array $paths, array $participantsIds): bool
     {
-        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 

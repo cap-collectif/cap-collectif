@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentUrlResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -33,7 +34,8 @@ class OpinionArgumentNormalizer extends BaseNormalizer implements NormalizerInte
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $isFullExport = $context['is_full_export'] ?? null;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
         $author = $object->getAuthor();
 
         $argumentArray = [
@@ -65,7 +67,7 @@ class OpinionArgumentNormalizer extends BaseNormalizer implements NormalizerInte
             ];
         }
 
-        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, ['skip' => true, 'is_full_export' => $isFullExport]);
+        $opinionArray = $this->opinionNormalizer->normalize($object->getOpinion(), null, ['skip' => true, BaseNormalizer::EXPORT_VARIANT => $variant]);
         $argumentArray[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
         return $this->translateHeaders(array_merge((array) $opinionArray, $argumentArray));

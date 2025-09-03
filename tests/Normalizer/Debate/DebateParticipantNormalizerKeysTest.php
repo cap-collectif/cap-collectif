@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Serializer\DebateAnonymousArgumentNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -37,8 +38,8 @@ class DebateParticipantNormalizerKeysTest extends KernelTestCase
 
     public function testExportDebateParticipantNormalizersHaveSameKeys(): void
     {
-        $userNormalizedData = $this->participantNormalizer->normalize($this->user);
-        $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument);
+        $userNormalizedData = $this->participantNormalizer->normalize($this->user, null, [BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL]);
+        $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument, null, [BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL]);
 
         $this->assertSame(
             array_keys($userNormalizedData),
@@ -50,8 +51,8 @@ class DebateParticipantNormalizerKeysTest extends KernelTestCase
 
     public function testFullExportQuestionnaireParticipantNormalizersHaveSameKeys(): void
     {
-        $userNormalizedData = $this->participantNormalizer->normalize($this->user, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
-        $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
+        $userNormalizedData = $this->participantNormalizer->normalize($this->user, null, [BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL]);
+        $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument, null, [BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL]);
 
         $this->assertSame(
             array_keys($userNormalizedData),

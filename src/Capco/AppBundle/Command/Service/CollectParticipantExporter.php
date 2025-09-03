@@ -7,6 +7,7 @@ use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -42,8 +43,8 @@ class CollectParticipantExporter extends ParticipantExporter
     {
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($collectStep);
-        $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($collectStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($collectStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($collectStep);
 
         if ($this->shouldExportParticipant($collectStep, $paths, $append)) {
             $this->setStep($collectStep);
@@ -54,15 +55,17 @@ class CollectParticipantExporter extends ParticipantExporter
     /**
      * @param array< Participant|User > $data
      */
-    protected function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
+    protected function write(string $path, array $data, bool $withHeader, ExportVariantsEnum $variant, bool $append): void
     {
         $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
-            BaseNormalizer::IS_FULL_EXPORT => $isFullExport,
+            BaseNormalizer::EXPORT_VARIANT => $variant,
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
+
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         if (!$isFullExport) {
             $data = array_filter($data, function (User|Participant $participant) {
@@ -116,7 +119,7 @@ class CollectParticipantExporter extends ParticipantExporter
      */
     private function shouldExportParticipant(CollectStep $collectStep, array $paths, bool $append): bool
     {
-        if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 

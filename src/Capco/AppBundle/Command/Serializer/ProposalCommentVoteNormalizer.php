@@ -6,6 +6,7 @@ namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,7 +37,8 @@ class ProposalCommentVoteNormalizer extends BaseNormalizer implements Normalizer
     public function normalize($object, $format = null, array $context = [])
     {
         $fullExportData = [];
-        $isFullExport = $context['is_full_export'] ?? false;
+        $variant = BaseNormalizer::getVariantFromContext($context);
+        $isFullExport = ExportVariantsEnum::isFull($variant);
 
         $commentAuthor = $object->getAuthor();
         $commentAuthorUserType = $commentAuthor?->getUserType();
@@ -60,7 +62,7 @@ class ProposalCommentVoteNormalizer extends BaseNormalizer implements Normalizer
             null,
             [
                 'step' => $context['step'],
-                'is_full_export' => $isFullExport,
+                BaseNormalizer::EXPORT_VARIANT => $variant,
                 'questionsResponses' => $context['questionsResponses'],
             ]
         );

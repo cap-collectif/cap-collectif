@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -45,8 +46,8 @@ class SelectionParticipantExporter extends ParticipantExporter
     ): void {
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($selectionStep);
-        $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($selectionStep);
+        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($selectionStep);
+        $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($selectionStep);
 
         if ($this->shouldExportParticipant($selectionStep, $paths, $append)) {
             $this->setStep($selectionStep);
@@ -59,7 +60,7 @@ class SelectionParticipantExporter extends ParticipantExporter
      */
     private function shouldExportParticipant(SelectionStep $selectionStep, array $paths, bool $append): bool
     {
-        if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
+        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 
