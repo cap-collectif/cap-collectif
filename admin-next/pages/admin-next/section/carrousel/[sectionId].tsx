@@ -51,10 +51,8 @@ export const QUERY = graphql`
               url(format: "reference")
               type: contentType
             }
-            extraData {
-              startAt
-              endAt
-            }
+            startAt
+            endAt
           }
         }
       }
@@ -122,7 +120,8 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
           position,
           image: element.image?.id,
           defaultIsOpen: undefined,
-          extraData: type === 'carrousel' ? undefined : element.extraData,
+          startAt: type === 'carrousel' ? undefined : element.startAt,
+          endAt: type === 'carrousel' ? undefined : element.endAt,
         })),
       },
     })

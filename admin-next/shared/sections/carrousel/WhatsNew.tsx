@@ -129,7 +129,7 @@ const WhatsNew: FC<{ items: Item[]; title: string; backgroundColor: 'WHITE' | 'G
                         color={isCurrent ? 'neutral-gray.900' : 'neutral-gray.700'}
                       >
                         <Text>{intl.formatMessage({ id: getCardLabel(slide.type) })}</Text>
-                        <DateItem dateRange={slide.extraData} />
+                        <DateItem dateRange={{ startAt: slide.startAt, endAt: slide.endAt }} />
                       </Flex>
                     ) : null}
                     <Heading

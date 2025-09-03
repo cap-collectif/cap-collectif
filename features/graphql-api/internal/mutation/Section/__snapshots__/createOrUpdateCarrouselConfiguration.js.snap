@@ -10,7 +10,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 4",
               "description": "SectionCarrouselElement10 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 310,
                 "url": "https://capco.test/media/default/0001/01/cafetier.png",
@@ -19,6 +19,7 @@ Object {
               "isDisplayed": false,
               "position": 4,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement10",
               "type": "THEME",
             },
@@ -27,7 +28,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 5",
               "description": "SectionCarrouselElement11 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -36,6 +37,7 @@ Object {
               "isDisplayed": false,
               "position": 5,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement11",
               "type": "ARTICLE",
             },
@@ -44,7 +46,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 6",
               "description": "SectionCarrouselElement12 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 410,
                 "url": "https://capco.test/media/default/0001/01/cafe.png",
@@ -53,6 +55,7 @@ Object {
               "isDisplayed": true,
               "position": 6,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement12",
               "type": "PROJECT",
             },
@@ -61,7 +64,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 1",
               "description": "SectionCarrouselElement7 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 400,
                 "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
@@ -70,6 +73,7 @@ Object {
               "isDisplayed": true,
               "position": 1,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement7",
               "type": "ARTICLE",
             },
@@ -78,7 +82,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 2",
               "description": "SectionCarrouselElement8 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 200,
                 "url": "https://capco.test/media/default/0001/01/confinement.jpg",
@@ -87,6 +91,7 @@ Object {
               "isDisplayed": true,
               "position": 2,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement8",
               "type": "PROJECT",
             },
@@ -95,10 +100,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 3",
               "description": "SectionCarrouselElement9 description",
-              "extraData": Object {
-                "endAt": "2060-01-16 10:00:00",
-                "startAt": "2024-01-16 10:00:00",
-              },
+              "endAt": "2060-01-16 10:00:00",
               "image": Object {
                 "height": 316,
                 "url": "https://capco.test/media/default/0001/01/cereale.png",
@@ -107,6 +109,7 @@ Object {
               "isDisplayed": true,
               "position": 3,
               "redirectLink": "http://www.example.com",
+              "startAt": "2024-01-16 10:00:00",
               "title": "SectionCarrouselElement9",
               "type": "EVENT",
             },
@@ -115,7 +118,7 @@ Object {
             "node": Object {
               "buttonLabel": "Libellé du bouton",
               "description": "Description de l'article",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -124,6 +127,7 @@ Object {
               "isDisplayed": false,
               "position": 2,
               "redirectLink": "https://www.exemple.com",
+              "startAt": null,
               "title": "Titre de l'article",
               "type": "ARTICLE",
             },
@@ -149,10 +153,7 @@ Object {
             "node": Object {
               "buttonLabel": "Libellé du bouton",
               "description": "Description de l'événement",
-              "extraData": Object {
-                "endAt": "2060-09-01T00:00:00.000Z",
-                "startAt": "2024-09-01T00:00:00.000Z",
-              },
+              "endAt": "2060-09-01 00:00:00",
               "image": Object {
                 "height": 112,
                 "url": "https://capco.test/media/default/0001/01/giec.jpg",
@@ -161,6 +162,7 @@ Object {
               "isDisplayed": false,
               "position": 1,
               "redirectLink": "https://www.exemple.com",
+              "startAt": "2024-09-01 00:00:00",
               "title": "Titre de l'événement",
               "type": "EVENT",
             },
@@ -169,7 +171,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 2",
               "description": "SectionCarrouselElement2 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 200,
                 "url": "https://capco.test/media/default/0001/01/confinement.jpg",
@@ -178,6 +180,7 @@ Object {
               "isDisplayed": true,
               "position": 2,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement2",
               "type": "PROJECT",
             },
@@ -186,7 +189,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 3",
               "description": "SectionCarrouselElement3 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 316,
                 "url": "https://capco.test/media/default/0001/01/cereale.png",
@@ -195,6 +198,7 @@ Object {
               "isDisplayed": true,
               "position": 3,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement3",
               "type": "EVENT",
             },
@@ -203,7 +207,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 4",
               "description": "SectionCarrouselElement4 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 310,
                 "url": "https://capco.test/media/default/0001/01/cafetier.png",
@@ -212,6 +216,7 @@ Object {
               "isDisplayed": false,
               "position": 4,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement4",
               "type": "THEME",
             },
@@ -220,7 +225,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 5",
               "description": "SectionCarrouselElement5 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -229,6 +234,7 @@ Object {
               "isDisplayed": false,
               "position": 5,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement5",
               "type": "ARTICLE",
             },
@@ -237,7 +243,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 6",
               "description": "SectionCarrouselElement6 description",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 410,
                 "url": "https://capco.test/media/default/0001/01/cafe.png",
@@ -246,6 +252,7 @@ Object {
               "isDisplayed": true,
               "position": 6,
               "redirectLink": "http://www.example.com",
+              "startAt": null,
               "title": "SectionCarrouselElement6",
               "type": "PROJECT",
             },
@@ -254,7 +261,7 @@ Object {
             "node": Object {
               "buttonLabel": "Libellé du bouton",
               "description": "Description de l'article",
-              "extraData": null,
+              "endAt": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -263,6 +270,7 @@ Object {
               "isDisplayed": false,
               "position": 2,
               "redirectLink": "https://www.exemple.com",
+              "startAt": null,
               "title": "Titre de l'article",
               "type": "ARTICLE",
             },

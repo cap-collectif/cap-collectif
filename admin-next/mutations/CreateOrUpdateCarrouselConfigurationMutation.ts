@@ -33,10 +33,8 @@ const mutation = graphql`
                 url(format: "reference")
                 type: contentType
               }
-              extraData {
-                startAt
-                endAt
-              }
+              startAt
+              endAt
             }
           }
         }

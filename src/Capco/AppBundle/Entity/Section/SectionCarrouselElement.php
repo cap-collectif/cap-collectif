@@ -72,11 +72,14 @@ class SectionCarrouselElement implements EntityInterface
     private string $type;
 
     /**
-     * @var null|array<string, mixed>
-     *
-     * @ORM\Column(name="extra_data", type="json", nullable=true)
+     * @ORM\Column(name="start_at", type="datetime", nullable=true)
      */
-    private ?array $extraData = null;
+    private ?\DateTimeInterface $startAt = null;
+
+    /**
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $endAt = null;
 
     public function getSection(): Section
     {
@@ -203,20 +206,26 @@ class SectionCarrouselElement implements EntityInterface
         ];
     }
 
-    /**
-     * @return null|array<string, mixed>
-     */
-    public function getExtraData(): ?array
+    public function getStartAt(): ?\DateTimeInterface
     {
-        return $this->extraData;
+        return $this->startAt;
     }
 
-    /**
-     * @param null|array<string, mixed> $extraData
-     */
-    public function setExtraData(?array $extraData): self
+    public function getEndAt(): ?\DateTimeInterface
     {
-        $this->extraData = $extraData;
+        return $this->endAt;
+    }
+
+    public function setStartAt(?string $startAt): self
+    {
+        $this->startAt = new \DateTime($startAt);
+
+        return $this;
+    }
+
+    public function setEndAt(?string $endAt): self
+    {
+        $this->endAt = new \DateTime($endAt);
 
         return $this;
     }

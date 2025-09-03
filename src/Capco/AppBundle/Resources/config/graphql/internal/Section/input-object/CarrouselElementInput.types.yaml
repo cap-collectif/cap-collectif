@@ -28,6 +28,9 @@ CarrouselElementInput:
             isDisplayed:
                 type: 'Boolean'
                 description: 'A toggle indicating whether the carrousel element is visible to users.'
-            extraData:
-                type: 'ExtraDataInput'
-                description: 'Additional data associated with the carrousel element.'
+            startAt:
+                type: 'DateTime'
+                description: 'When the carrouselElement start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the carrouselElement end.'

@@ -163,7 +163,7 @@ const WhatsNewMobile: FC<{ items: Item[]; title: string }> = ({ items, title }) 
                   <Text as="div" fontSize={CapUIFontSize.Headline} mb={1}>
                     {intl.formatMessage({ id: getCardLabel(item.type) })}
                   </Text>
-                  <DateItem dateRange={item.extraData} short />
+                  <DateItem dateRange={{ startAt: item.startAt, endAt: item.endAt }} short />
                 </Flex>
               ) : null}
               <Text fontSize={CapUIFontSize.Headline} fontWeight={600} truncate={ITEM_TITLE_MAX_LENGTH}>

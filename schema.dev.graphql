@@ -1747,8 +1747,11 @@ input CarrouselElementInput {
   """
   isDisplayed: Boolean
 
-  """Additional data associated with the carrousel element."""
-  extraData: ExtraDataInput
+  """When the carrouselElement start."""
+  startAt: DateTime
+
+  """When the carrouselElement end."""
+  endAt: DateTime
 }
 
 """The type of the carrousel element."""
@@ -7150,28 +7153,6 @@ enum ExternalServiceConfigurationType {
 
   """Twilio subaccount auth token."""
   TWILIO_SUBACCOUNT_AUTH_TOKEN
-}
-
-"""Extra data"""
-type ExtraData implements Node {
-  """The ID of an object."""
-  id: ID!
-
-  """When the carrouselElement start."""
-  startAt: String
-
-  """When the carrouselElement end."""
-  endAt: String
-}
-
-input ExtraDataInput {
-  id: ID
-
-  """When the carrouselElement start."""
-  startAt: String
-
-  """When the carrouselElement end."""
-  endAt: String
 }
 
 """Facebook SSO Configuration."""
@@ -16577,8 +16558,11 @@ type SectionCarrouselElement implements Node {
   """
   isDisplayed: Boolean!
 
-  """Additional data associated with the carrousel element."""
-  extraData: ExtraData
+  """When the carrouselElement start."""
+  startAt: DateTime
+
+  """When the carrouselElement end."""
+  endAt: DateTime
 }
 
 """A connection to a list of items."""

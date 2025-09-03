@@ -18,7 +18,8 @@ export type FormValues = {
     type: CarrouselElementType
     isDisplayed: boolean
     defaultIsOpen?: boolean
-    extraData?: { startAt: string; endAt?: string }
+    startAt?: string
+    endAt?: string
   }>
 }
 

@@ -18,7 +18,8 @@ const item = {
     id: 'img1',
     url: '/media/img1.png',
   },
-  extraData: null,
+  startAt: null,
+  endAt: null,
 }
 
 describe('<Carrousel />', () => {

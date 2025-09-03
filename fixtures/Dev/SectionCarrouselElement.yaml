@@ -98,9 +98,8 @@ Capco\AppBundle\Entity\Section\SectionCarrouselElement:
         position: 3
         isDisplayed: true
         type: 'event'
-        extraData:
-            startAt: "2024-01-16 10:00:00"
-            endAt: "2060-01-16 10:00:00"
+        startAt: '2024-01-16 10:00:00'
+        endAt: '2060-01-16 10:00:00'
     SectionCarrouselElement10:
         id: 'SectionCarrouselElement10'
         section: '@SectionCarrouselHighlighted'

@@ -55,10 +55,8 @@ const QUERY = graphql`
               type: contentType
               url(format: "reference")
             }
-            extraData: timeRange {
-              startAt
-              endAt
-            }
+            startAt
+            endAt
           }
         }
       }
@@ -166,7 +164,8 @@ export const CarrouselSelects: FC<{ fieldBaseName: string; sectionType: SectionT
               )
               setValue(`${fieldBaseName}.redirectLink`, value.url)
               setValue(`${fieldBaseName}.image`, value.media)
-              setValue(`${fieldBaseName}.extraData`, type === 'EVENT' ? value.extraData : undefined)
+              setValue(`${fieldBaseName}.startAt`, type === 'EVENT' ? value.startAt : undefined)
+              setValue(`${fieldBaseName}.endAt`, type === 'EVENT' ? value.endAt : undefined)
             }
           }}
         />

@@ -163,10 +163,8 @@ export const QUERY = graphql`
               id
               url
             }
-            extraData {
-              startAt
-              endAt
-            }
+            startAt
+            endAt
           }
         }
       }
