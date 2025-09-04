@@ -52,6 +52,10 @@ class AllRequirementsResolver implements QueryInterface
                 return false;
             }
 
+            if (Requirement::CONSENT_PRIVACY_POLICY === $requirement->getType() && (!$step instanceof QuestionnaireStep && !$step instanceof ProposalStepInterface)) {
+                return false;
+            }
+
             return true;
         });
 
