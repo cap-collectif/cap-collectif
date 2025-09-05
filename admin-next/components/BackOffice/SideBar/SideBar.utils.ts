@@ -23,7 +23,7 @@ export const getSideBarItemsFiltered = (
         return acc
       }
       if (isAdminOrganization) {
-        sideBarItem.href = `/admin-next/organizationConfig/${organization}`
+        sideBarItem.href = `/admin-next/organization-config/${organization}`
       } else if (isOrganizationMember && !isAdminOrganization) {
         return acc
       }

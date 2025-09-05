@@ -236,7 +236,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     text="admin.label.footer_social_network"
                     href="/admin/capco/app/footersocialnetwork/list"
                   />
-                  <SidebarLink text="admin.label.project_district" href="/admin-next/geographicalAreas" />
+                  <SidebarLink text="admin.label.project_district" href="/admin-next/geographical-areas" />
                   <SidebarLink text="admin.fields.proposal_form.map" href="/admin/map/list" />
                   {features.multilangue && <SidebarLink text="global-languages" href="/admin/locale/list" />}
                   {features.http_redirects && <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />}
@@ -257,7 +257,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     />
                   )}
                   <SidebarLink text="admin.label.settings.appearance" href="/admin/settings/settings.appearance/list" />
-                  <SidebarLink text="secured-participation" href="/admin-next/securedParticipation" />
+                  <SidebarLink text="secured-participation" href="/admin-next/secured-participation" />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
@@ -284,7 +284,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   )}
                   <SidebarLink text="admin.label.pages.legal" href="/admin/settings/pages.legal/list" />
                   <SidebarLink text="admin.label.pages.charter" href="/admin/settings/pages.charter/list" />
-                  <SidebarLink text="admin.label.pages.shield" href="/admin-next/authentification" />
+                  <SidebarLink text="admin.label.pages.shield" href="/admin-next/authentication" />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
@@ -313,7 +313,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               href={
                 isAdmin && !organizationId
                   ? '/admin-next/organizations'
-                  : `/admin-next/organizationConfig/${organizationId || ''}`
+                  : `/admin-next/organization-config/${organizationId || ''}`
               }
               icon="ORGANISATION"
               withLabel={isOpen}

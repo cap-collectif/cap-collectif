@@ -42,7 +42,7 @@ export const URL_MAP = {
     '/admin/capco/app/menuitem/',
     '/admin/capco/app/socialnetwork/',
     '/admin/capco/app/footersocialnetwork/',
-    '/admin-next/geographicalAreas',
+    '/admin-next/geographical-areas',
     '/admin/map/',
     '/admin/redirect/',
     '/admin/favicon/',

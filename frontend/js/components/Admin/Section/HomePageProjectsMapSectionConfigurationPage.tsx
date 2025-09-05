@@ -352,7 +352,7 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
               <FormattedHTMLMessage
                 id="create-district-link"
                 values={{
-                  url: '/admin-next/geographicalAreas',
+                  url: '/admin-next/geographical-areas',
                 }}
               />
             </InfoMessage.Content>

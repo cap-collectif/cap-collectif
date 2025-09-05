@@ -42,7 +42,7 @@ const CreateOrganizationButton: React.FC<CreateOrganizationButtonProps> = () => 
             },
           })
           if (response?.addOrganization) {
-            window.open(`/admin-next/organizationConfig/${response.addOrganization.organization?.id}`, '_self')
+            window.open(`/admin-next/organization-config/${response.addOrganization.organization?.id}`, '_self')
           }
         } catch (e) {
           console.error(e)

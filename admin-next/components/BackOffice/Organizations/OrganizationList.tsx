@@ -81,7 +81,7 @@ const OrganizationList: React.FC<OrganizationListProps> = ({ query: queryRef, on
                   </Text>
                   <Button
                     onClick={() => {
-                      window.open(`/admin-next/organizationConfig/${organization?.id}`, '_self')
+                      window.open(`/admin-next/organization-config/${organization?.id}`, '_self')
                     }}
                     variant="tertiary"
                     variantColor="primary"

@@ -204,7 +204,7 @@
             },
             {
                 "title": "admin.label.project_district",
-                "href": "/admin-next/geographicalAreas",
+                "href": "/admin-next/geographical-areas",
                 "rolesRequired": [],
                 "featuresRequired": []
             },
@@ -270,7 +270,7 @@
             },
             {
                 "title": "secured-participation",
-                "href": "/admin-next/securedParticipation",
+                "href": "/admin-next/secured-participation",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             }
@@ -375,7 +375,7 @@
             },
             {
                 "title": "admin.label.pages.shield",
-                "href": "/admin-next/authentification",
+                "href": "/admin-next/authentication",
                 "rolesRequired": [],
                 "featuresRequired": []
             }

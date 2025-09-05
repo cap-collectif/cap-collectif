@@ -372,7 +372,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
 
               <Text
                 as="a"
-                href="/admin-next/securedParticipation"
+                href="/admin-next/secured-participation"
                 target="_blank"
                 color="blue.500"
                 {...headingStyles.h5}

@@ -99,7 +99,7 @@ const GeographicalAreasList = () => {
           <Text color="gray.600" mb={5}>
             {intl.formatMessage({ id: 'areas-helptext' })}
           </Text>
-          <Button as="a" href="/admin-next/geographicalArea" variant="primary">
+          <Button as="a" href="/admin-next/geographical-area" variant="primary">
             {intl.formatMessage({ id: 'add.geographical.area' })}
           </Button>
         </Box>
@@ -118,7 +118,7 @@ const GeographicalAreasList = () => {
                 <ButtonGroup>
                   <ButtonQuickAction
                     as="a"
-                    href={`/admin-next/geographicalArea?id=${area?.id}`}
+                    href={`/admin-next/geographical-area?id=${area?.id}`}
                     variantColor="primary"
                     icon={CapUIIcon.Pencil}
                     label={intl.formatMessage({ id: 'global.edit' })}

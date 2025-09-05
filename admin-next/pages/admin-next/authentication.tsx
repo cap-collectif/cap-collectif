@@ -8,7 +8,7 @@ import withPageAuthRequired from '@utils/withPageAuthRequired'
 import AuthenticationMethodsPlaceholder from '@components/BackOffice/Authentication/AuthenticationMethodsPlaceholder'
 import ShieldPlaceholder from '@components/BackOffice/Authentication/ShieldPlaceholder'
 
-const Authentification = () => {
+const Authentication = () => {
   const intl = useIntl()
 
   return (
@@ -28,4 +28,4 @@ const Authentification = () => {
 
 export const getServerSideProps = withPageAuthRequired
 
-export default Authentification
+export default Authentication

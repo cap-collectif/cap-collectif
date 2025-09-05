@@ -105,7 +105,7 @@ const onSubmit = (
           content: intl.formatMessage({ id: 'zone-geo-created' }),
         })
         setIsLoading(false)
-        window.location.href = '/admin-next/geographicalAreas'
+        window.location.href = '/admin-next/geographical-areas'
       })
       .catch(() => {
         mutationErrorToast(intl)
@@ -418,7 +418,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
               variantColor="hierarchy"
               variantSize="big"
               as="a"
-              href="/admin-next/geographicalAreas"
+              href="/admin-next/geographical-areas"
             >
               {intl.formatMessage({
                 id: 'global.cancel',
