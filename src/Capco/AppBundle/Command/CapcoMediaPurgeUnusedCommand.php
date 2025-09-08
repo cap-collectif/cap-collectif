@@ -32,6 +32,10 @@ class CapcoMediaPurgeUnusedCommand extends Command
         parent::__construct($name);
     }
 
+    /**
+     * Be careful, the first purge purgeMediasWithoutDatabaseRelation does net remove files
+     * from the file-system, so it have to be done before purgeFilesWithoutMedia.
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -78,8 +82,7 @@ class CapcoMediaPurgeUnusedCommand extends Command
     {
         $io->info('Purging Media database entries without a file on the file-system');
 
-        // Fetching media that have the file-system provider (Capco\AppBundle\Provider\MediaProvider) from database
-        $medias = $this->mediaRepository->findBy(['providerName' => MediaProvider::class]);
+        $medias = $this->mediaRepository->findAll();
 
         $deletedCount = 0;
         foreach ($medias as $media) {
@@ -114,7 +117,6 @@ class CapcoMediaPurgeUnusedCommand extends Command
         }
 
         $medias = $this->mediaRepository->findBy([
-            'providerName' => MediaProvider::class,
             'providerReference' => $fileNames,
         ]);
 
