@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationTranslation;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Enum\OrganizationAffiliation;
+use Capco\AppBundle\Repository\SluggableRepositoryInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
@@ -16,7 +17,7 @@ use Doctrine\ORM\Query\Expr;
  * @method Organization[]    findAll()
  * @method Organization[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OrganizationRepository extends EntityRepository
+class OrganizationRepository extends EntityRepository implements SluggableRepositoryInterface
 {
     public function findOneBySlug(string $slug): ?Organization
     {

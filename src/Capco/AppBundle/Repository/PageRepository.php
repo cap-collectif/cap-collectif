@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 
-class PageRepository extends EntityRepository
+class PageRepository extends EntityRepository implements SluggableRepositoryInterface
 {
     public function getAll()
     {

@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query nodeSlug fetch DISTRICT with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "GlobalDistrict",
+    "slug": "premier-quartier",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch ORGANIZATION with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "Organization",
+    "slug": "giec",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch PAGE with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "Page",
+    "slug": "comment-ca-marche",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch PROJECT with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "Project",
+    "slug": "croissance-innovation-disruption",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch PROPOSAL_DISTRICT with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "ProposalDistrict",
+    "slug": "beauregard",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch collect step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "CollectStep",
+    "slug": "collecte-des-questions-chez-youpie",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch consultation step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "ConsultationStep",
+    "slug": "collecte-des-avis",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch other step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "OtherStep",
+    "slug": "etape-personnalisee-ouverte",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch presentation step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "PresentationStep",
+    "slug": "presentation-1",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug fetch ranking step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "RankingStep",
+    "slug": "classement-des-propositions-et-modifications",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug selection debate step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "DebateStep",
+    "slug": "pour-ou-contre-le-reconfinement",
+  },
+}
+`;
+
+exports[`Internal|Query nodeSlug selection questionnaire step with slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "__typename": "QuestionnaireStep",
+    "slug": "questionnaire-food",
+  },
+}
+`;

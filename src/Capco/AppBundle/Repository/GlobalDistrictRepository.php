@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class GlobalDistrictRepository extends EntityRepository
+class GlobalDistrictRepository extends EntityRepository implements SluggableRepositoryInterface
 {
     public function findByIds(array $ids): array
     {

@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
-class ProposalDistrictRepository extends EntityRepository
+class ProposalDistrictRepository extends EntityRepository implements SluggableRepositoryInterface
 {
     public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
     {

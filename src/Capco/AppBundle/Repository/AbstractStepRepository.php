@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class AbstractStepRepository extends EntityRepository
+class AbstractStepRepository extends EntityRepository implements SluggableStepRepositoryInterface
 {
     public static function createOrderedByCritera(array $orderings): Criteria
     {
@@ -142,6 +142,20 @@ class AbstractStepRepository extends EntityRepository
         $qb->andWhere($qb->expr()->isInstanceOf('cs', CollectStep::class));
 
         return $qb->getQuery()->execute();
+    }
+
+    public function getBySlug(string $slug, string $projectSlug): ?AbstractStep
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('s.slug = :slug')
+            ->andWhere('p.slug = :projectSlug')
+            ->setParameter('slug', $slug)
+            ->setParameter('projectSlug', $projectSlug)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     protected function getIsEnabledQueryBuilder()

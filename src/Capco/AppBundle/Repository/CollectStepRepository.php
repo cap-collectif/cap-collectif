@@ -48,9 +48,17 @@ class CollectStepRepository extends AbstractStepRepository
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlugAndProjectSlug(string $slug, string $projectSlug): ?CollectStep
+    public function getBySlug(string $slug, string $projectSlug): ?CollectStep
     {
-        return parent::getOneBySlugAndProjectSlug($slug, $projectSlug);
+        $collectStep = parent::getBySlug($slug, $projectSlug);
+
+        if (null === $collectStep) {
+            return null;
+        }
+
+        \assert($collectStep instanceof CollectStep);
+
+        return $collectStep;
     }
 
     public function findProposalArchivableSteps(): array

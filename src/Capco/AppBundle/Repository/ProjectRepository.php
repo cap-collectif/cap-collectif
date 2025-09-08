@@ -19,7 +19,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * @method null|Project[] findAll()
  */
-class ProjectRepository extends EntityRepository
+class ProjectRepository extends EntityRepository implements SluggableRepositoryInterface
 {
     use ProjectVisibilityTrait;
 

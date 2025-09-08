@@ -115,7 +115,7 @@ class StepController extends Controller
 
         // after presentation steps migration to other steps the url is now /step/{slug} but we still want to support /presentation/{slug} for old url that have been already shared
         // so we redirect to /step/{slug} if the slug matches other step
-        $otherStep = $otherStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
+        $otherStep = $otherStepRepository->getBySlug($stepSlug, $projectSlug);
 
         if ($otherStep) {
             if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $otherStep)) {
@@ -128,7 +128,7 @@ class StepController extends Controller
             ]);
         }
 
-        $presentationStep = $presentationStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
+        $presentationStep = $presentationStepRepository->getBySlug($stepSlug, $projectSlug);
 
         if (null === $presentationStep) {
             throw $this->createNotFoundException();
