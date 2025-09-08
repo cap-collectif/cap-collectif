@@ -92,7 +92,6 @@ def configure_vhosts(mode='symfony_bin'):
     localhost_domains = [
     ]
     if _platform == 'darwin' and mode == "symfony_bin":
-        domains.remove('capco.dev')
         tld = 'dev'
         proxy_path = '~/.symfony5/proxy.json'
         run('symfony local:proxy:domain:attach capco', warn=True)
