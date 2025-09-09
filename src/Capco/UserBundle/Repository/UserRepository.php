@@ -2299,7 +2299,9 @@ class UserRepository extends EntityRepository
                 AND om IS NULL
                 AND u.lastLogin < :inactivityLimitDate
                 AND u.email IS NOT NULL
-                AND u.anonymizationReminderEmailSentAt IS NULL")
+                AND u.anonymizationReminderEmailSentAt IS NULL
+                AND u.confirmationToken IS NULL
+            ")
             ->setMaxResults($limit)
         ;
 

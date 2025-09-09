@@ -84,7 +84,7 @@ class AnonymizeUsersAutomatedCommand extends Command
         $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_users (id VARCHAR(255), email VARCHAR(255))');
         $this->connection->executeStatement('CREATE UNIQUE INDEX idx_matching_users_email ON matching_users(email)');
         $this->connection->executeStatement(
-            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND last_login < :lastLoginLimit AND u.anonymization_reminder_email_sent_at IS NOT NULL",
+            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (last_login < :lastLoginLimit OR last_login IS NULL)",
             ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')]
         );
     }
