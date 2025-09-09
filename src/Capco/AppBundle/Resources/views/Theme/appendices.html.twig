@@ -10,7 +10,7 @@
                         <h2 class="h4">{{ 'theme.show.appendices.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="excerpt">
                             {{ 'article-related-count' | trans({'count': nbPosts}, 'CapcoAppBundle') }}
-                        <p><a href="{{ path('app_blog_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.posts.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                        <p><a href="/blog?theme={{theme.id}}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.posts.button'|trans({}, 'CapcoAppBundle') }}</a></p>
                     </div>
                 {% endif %}
                 {% if nbEvents > 0 %}
