@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Command\Service\DebateVoteExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\VotesFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -62,8 +63,8 @@ class ExportDebateVotesCommand extends BaseExportCommand
 
             $this->exporter->initializeStyle($style);
             $this->exporter->exportDebateVotes($debate, $debateStep, $input->getOption('delimiter'));
-            $this->executeSnapshot($input, $output, 'debate/' . $this->votesFilePathResolver->getFileName($debateStep));
-            $this->executeSnapshot($input, $output, 'debate/' . $this->votesFilePathResolver->getFileName($debateStep, true));
+            $this->executeSnapshot($input, $output, 'debate/' . $this->votesFilePathResolver->getFileName($debateStep, ExportVariantsEnum::FULL));
+            $this->executeSnapshot($input, $output, 'debate/' . $this->votesFilePathResolver->getFileName($debateStep, ExportVariantsEnum::SIMPLIFIED));
             $style->progressAdvance();
         }
 

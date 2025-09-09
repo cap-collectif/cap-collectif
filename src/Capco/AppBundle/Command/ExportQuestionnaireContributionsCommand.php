@@ -45,7 +45,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
     public static function getFileName(
         Questionnaire $questionnaire,
         bool $projectAdmin,
-        ?bool $isSimplifiedExport = false
+        ?ExportVariantsEnum $variant = ExportVariantsEnum::FULL
     ): string {
         $extension = '.csv';
         $step = $questionnaire->getStep();
@@ -58,7 +58,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $fileName = $questionnaire->getSlug();
         }
 
-        return self::getShortenedFilename($fileName, $extension, $projectAdmin, $isSimplifiedExport);
+        return self::getShortenedFilename($fileName, $extension, $projectAdmin, $variant);
     }
 
     protected function configure(): void

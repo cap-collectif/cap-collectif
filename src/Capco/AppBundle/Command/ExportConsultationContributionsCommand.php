@@ -143,8 +143,8 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
     private function getFilePaths(ConsultationStep $consultationStep): array
     {
         return [
-            'full' => $this->contributionsFilePathResolver->getFullExportPath($consultationStep),
-            'simplified' => $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep),
+            ExportVariantsEnum::FULL->value => $this->contributionsFilePathResolver->getFullExportPath($consultationStep),
+            ExportVariantsEnum::SIMPLIFIED->value => $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep),
         ];
     }
 
@@ -170,7 +170,7 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
 
             $countOpinions += \count($opinions);
 
-            if (file_exists($filePaths['full']) && file_exists($filePaths['simplified'])) {
+            if (file_exists($filePaths[ExportVariantsEnum::FULL->value]) && file_exists($filePaths[ExportVariantsEnum::SIMPLIFIED->value])) {
                 $append = false;
             }
 
@@ -200,15 +200,15 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
         InputInterface $input,
         OutputInterface $output
     ): void {
-        $tmpFullExport = $filePaths['full'] . '.tmp';
-        $tmpSimplifiedExport = $filePaths['simplified'] . '.tmp';
+        $tmpFullExport = $filePaths[ExportVariantsEnum::FULL->value] . '.tmp';
+        $tmpSimplifiedExport = $filePaths[ExportVariantsEnum::SIMPLIFIED->value] . '.tmp';
 
         if (file_exists($tmpFullExport)) {
-            $filesystem->rename($tmpFullExport, $filePaths['full'], true);
+            $filesystem->rename($tmpFullExport, $filePaths[ExportVariantsEnum::FULL->value], true);
         }
 
         if (file_exists($tmpSimplifiedExport)) {
-            $filesystem->rename($tmpSimplifiedExport, $filePaths['simplified'], true);
+            $filesystem->rename($tmpSimplifiedExport, $filePaths[ExportVariantsEnum::SIMPLIFIED->value], true);
         }
 
         foreach ($filePaths as $type => $path) {

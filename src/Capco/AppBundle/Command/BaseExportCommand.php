@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,7 +23,7 @@ abstract class BaseExportCommand extends Command
         string $filename,
         string $extension = '.csv',
         bool $projectAdmin = false,
-        ?bool $isSimplifiedExport = false
+        ExportVariantsEnum $variant = ExportVariantsEnum::FULL
     ): string {
         //If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
         if (\strlen($filename) >= 230) {
@@ -33,7 +34,7 @@ abstract class BaseExportCommand extends Command
             return "{$filename}-project-admin{$extension}";
         }
 
-        if ($isSimplifiedExport) {
+        if (ExportVariantsEnum::SIMPLIFIED === $variant) {
             return "{$filename}_simplified{$extension}";
         }
 

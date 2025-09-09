@@ -136,8 +136,8 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
     private function getFilePaths(SelectionStep $step): array
     {
         return [
-            'full' => $this->participantFilePathResolver->getFullExportPath($step),
-            'simplified' => $this->participantFilePathResolver->getSimplifiedExportPath($step),
+            ExportVariantsEnum::FULL->value => $this->participantFilePathResolver->getFullExportPath($step),
+            ExportVariantsEnum::SIMPLIFIED->value => $this->participantFilePathResolver->getSimplifiedExportPath($step),
         ];
     }
 
@@ -184,15 +184,15 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         InputInterface $input,
         OutputInterface $output
     ): void {
-        $tmpFullExport = $filePaths['full'] . '.tmp';
-        $tmpSimplifiedExport = $filePaths['simplified'] . '.tmp';
+        $tmpFullExport = $filePaths[ExportVariantsEnum::FULL->value] . '.tmp';
+        $tmpSimplifiedExport = $filePaths[ExportVariantsEnum::SIMPLIFIED->value] . '.tmp';
 
         if (file_exists($tmpFullExport)) {
-            $filesystem->rename($tmpFullExport, $filePaths['full'], true);
+            $filesystem->rename($tmpFullExport, $filePaths[ExportVariantsEnum::FULL->value], true);
         }
 
         if (file_exists($tmpSimplifiedExport)) {
-            $filesystem->rename($tmpSimplifiedExport, $filePaths['simplified'], true);
+            $filesystem->rename($tmpSimplifiedExport, $filePaths[ExportVariantsEnum::SIMPLIFIED->value], true);
         }
 
         foreach ($filePaths as $type => $path) {

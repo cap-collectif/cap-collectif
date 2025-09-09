@@ -184,11 +184,11 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
      */
     private function shouldExport(AbstractStep $step, array $proposals, array $filePaths, bool $append): bool
     {
-        if ($append || !file_exists($filePaths['full'])) {
+        if ($append || !file_exists($filePaths[ExportVariantsEnum::FULL->value])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($filePaths['simplified'], $filePaths['full']);
+        $oldestUpdateDate = $this->getOldestUpdateDate($filePaths[ExportVariantsEnum::SIMPLIFIED->value], $filePaths[ExportVariantsEnum::FULL->value]);
 
         try {
             if ([] === $proposals) {

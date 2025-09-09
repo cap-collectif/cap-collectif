@@ -779,9 +779,9 @@ class ExportController extends Controller
             throw new BadRequestHttpException('You must provide a valid debate Step id.');
         }
 
-        $isSimplified = 'true' === $request->query->get('simplified');
+        $variant = 'true' === $request->query->get('simplified') ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
 
-        $fileName = $this->votesFilePathResolver->getFileName($debateStep, $isSimplified);
+        $fileName = $this->votesFilePathResolver->getFileName($debateStep, $variant);
         $filePath = sprintf(
             '%s%s/%s',
             $this->exportDir,

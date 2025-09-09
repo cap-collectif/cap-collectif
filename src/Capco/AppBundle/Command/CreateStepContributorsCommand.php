@@ -6,6 +6,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -42,7 +43,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
     /**
      * We have to make sure the string is unique for each step.
      */
-    public static function getFilename(AbstractStep $step, ?bool $simplified = false): string
+    public static function getFilename(AbstractStep $step, ExportVariantsEnum $variant = ExportVariantsEnum::FULL): string
     {
         $slug = '';
         if ($step->getProject()) {
@@ -52,7 +53,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         }
         $slug .= $step->getSlug();
 
-        return self::getShortenedFilename('participants_' . $slug, '.csv', false, $simplified);
+        return self::getShortenedFilename('participants_' . $slug, '.csv', false, $variant);
     }
 
     public function generateSheet(
