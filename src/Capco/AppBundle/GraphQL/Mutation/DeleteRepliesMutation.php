@@ -11,36 +11,79 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteRepliesMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly GlobalIdResolver $globalIdResolver, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly Indexer $indexer,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
-        $replyIds = $args->offsetGet('replyIds');
-        $decodedReplyIds = array_map(
-            fn (string $globalId) => GlobalId::fromGlobalId($globalId)['id'],
-            $replyIds
-        );
+        $replyGlobalIds = $args->offsetGet('replyIds');
 
-        foreach ($decodedReplyIds as $decodedReplyId) {
-            $this->indexer->remove(Reply::class, $decodedReplyId);
+        $deletedIds = [];
+        $replyIdsToRemoveFromIndex = [];
+        $userIdsToReIndex = [];
+        foreach ($replyGlobalIds as $replyGlobalId) {
+            $reply = $this->globalIdResolver->resolve($replyGlobalId);
+
+            if (!$reply instanceof Reply) {
+                $this->logger->error(sprintf('Unknown reply with id : %s, are you passing other objects ?', $replyGlobalId));
+
+                continue;
+            }
+
+            // saving some data before removing the entity from doctrine
+            $replyId = $reply->getId();
+            $replyIdsToRemoveFromIndex[] = $replyId;
+
+            $author = $reply->getAuthor();
+            if ($author instanceof User) {
+                $userIdsToReIndex[] = $author->getId();
+            }
+
+            try {
+                $this->em->remove($reply);
+            } catch (\Throwable $e) {
+                $this->logger->error(sprintf('Error while removing reply (id: %s): %s', $replyId, $e->getMessage()));
+            }
+
+            $deletedIds[] = $replyGlobalId;
+        }
+
+        $this->em->flush();
+
+        // we have to finishBulk the replies deletion before re-indexing the users otherwise it won't work
+        foreach ($replyIdsToRemoveFromIndex as $replyId) {
+            try {
+                $this->indexer->remove(Reply::class, $replyId);
+            } catch (\Throwable $e) {
+                $this->logger->error(sprintf('Error while removing reply (id: %s) from index: %s', $replyId, $e->getMessage()));
+            }
         }
         $this->indexer->finishBulk();
 
-        $replyEntity = Reply::class;
+        foreach ($userIdsToReIndex as $userId) {
+            try {
+                $this->indexer->index(User::class, $userId);
+            } catch (\Throwable $e) {
+                $this->logger->error(sprintf('Error while re-indexing user (id: %s): %s', $userId, $e->getMessage()));
+            }
+        }
+        $this->indexer->finishBulk();
 
-        $this->deleteReply($replyEntity, $decodedReplyIds);
-
-        return ['replyIds' => $replyIds];
+        return ['replyIds' => $deletedIds];
     }
 
     public function isGranted(array $replyIds, ?User $viewer = null): bool
@@ -59,19 +102,5 @@ class DeleteRepliesMutation implements MutationInterface
         }
 
         return true;
-    }
-
-    private function deleteReply(string $entity, array $ids): void
-    {
-        $this->em
-            ->createQuery(
-                <<<DQL
-                        DELETE {$entity} ui WHERE ui.id IN (:ids)
-                    DQL
-            )
-            ->execute([
-                'ids' => $ids,
-            ])
-        ;
     }
 }

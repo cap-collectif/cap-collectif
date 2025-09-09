@@ -4,8 +4,8 @@ exports[`mutations.deleteReplies should delete reply and anon reply as admin. 1`
 Object {
   "deleteReplies": Object {
     "replyIds": Array [
-      "UmVwbHk6cmVwbHlRdWVzdGlvbm5haXJlQW5vbg==",
       "UmVwbHk6cmVwbHlBbm9ueW1vdXMx",
+      "UmVwbHk6cmVwbHlRdWVzdGlvbm5haXJlQW5vbg==",
     ],
   },
 }
