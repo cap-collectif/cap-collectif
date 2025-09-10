@@ -28,3 +28,4 @@ export { default as ParticipationWorkflowPage } from './admin/participationWorkf
 export { default as ProjectHeaderPage } from './projectHeader'
 export { default as EventFormPage } from './admin/event'
 export { default as OpinionPage } from './opinion'
+export { default as InvitationPage } from './invitation'
