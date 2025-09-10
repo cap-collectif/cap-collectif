@@ -3,11 +3,9 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Media;
-use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Service\MediaManager;
 use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,9 +21,7 @@ class CapcoMediaPurgeUnusedCommand extends Command
 {
     public function __construct(
         private readonly string $projectRootDir,
-        private readonly EntityManagerInterface $em,
         private readonly MediaRepository $mediaRepository,
-        private readonly MediaProvider $mediaProvider,
         private readonly Finder $finder,
         ?string $name = null,
     ) {
@@ -50,14 +46,6 @@ class CapcoMediaPurgeUnusedCommand extends Command
         }
 
         try {
-            $this->purgeMediasWithoutFileSystemRelation($io);
-        } catch (\Throwable $e) {
-            $io->error(sprintf('Could not remove media: %s', $e->getMessage()));
-
-            return Command::FAILURE;
-        }
-
-        try {
             $this->purgeFilesWithoutMedia($io);
         } catch (\Throwable $e) {
             $io->error(sprintf('Could not remove file from disk: %s', $e->getMessage()));
@@ -73,27 +61,9 @@ class CapcoMediaPurgeUnusedCommand extends Command
      */
     private function purgeMediasWithoutDatabaseRelation(SymfonyStyle $io): void
     {
-        $io->info('Purging Media database entries without a database relation to anowher table');
+        $io->info('Purging Media database entries without a database relation to another table');
         $deletedCount = $this->mediaRepository->deleteUnusedMedia();
         $io->success(sprintf('Deleted %d Media from database', $deletedCount));
-    }
-
-    private function purgeMediasWithoutFileSystemRelation(SymfonyStyle $io): void
-    {
-        $io->info('Purging Media database entries without a file on the file-system');
-
-        $medias = $this->mediaRepository->findAll();
-
-        $deletedCount = 0;
-        foreach ($medias as $media) {
-            if (!$this->mediaProvider->referenceFileExists($media)) {
-                $this->em->remove($media);
-                ++$deletedCount;
-            }
-        }
-
-        $this->em->flush();
-        $io->success(sprintf('Deleted %d media from file-system', $deletedCount));
     }
 
     private function purgeFilesWithoutMedia(SymfonyStyle $io): void
