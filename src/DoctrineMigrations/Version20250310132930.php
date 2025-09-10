@@ -6,7 +6,6 @@ namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Reply;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,17 +57,20 @@ final class Version20250310132930 extends AbstractMigration implements Container
             $token = $anonReply['token'];
             $participant = $participantRepository->findOneBy(['token' => $token]);
             $questionnaire = $questionnaireRepository->find($anonReply['questionnaire_id']);
-            $reply = (new Reply())
-                ->setId($anonReply['id'])
-                ->setQuestionnaire($questionnaire)
-                ->setParticipant($participant)
-                ->setCreatedAt(new \Datetime($anonReply['created_at']))
-            ;
-            $this->em->persist($reply);
+            $this->addSql('INSERT INTO reply (id, questionnaire_id, participant_id, created_at, private, published, updated_at, is_draft)
+                                VALUES (:id, :questionnaireId, :participantId, :createdAt, :private, :published, :updatedAt, :isDraft)', [
+                'id' => $anonReply['id'],
+                'questionnaireId' => $questionnaire->getId(),
+                'participantId' => $participant->getId(),
+                'createdAt' => $anonReply['created_at'],
+                'private' => 0,
+                'published' => $anonReply['published'],
+                'updatedAt' => $anonReply['updated_at'],
+                'isDraft' => 0,
+            ]);
         }
 
-        $this->em->flush();
-
+        $this->addSql('UPDATE response set response.reply_id = reply_anonymous_id WHERE reply_anonymous_id IS NOT NULL AND reply_id IS NULL');
         $this->addSql('ALTER TABLE response DROP FOREIGN KEY FK_3E7B0BFBEAFE8437');
         $this->addSql('DROP TABLE reply_anonymous');
         $this->addSql('DROP INDEX IDX_3E7B0BFBEAFE8437 ON response');
