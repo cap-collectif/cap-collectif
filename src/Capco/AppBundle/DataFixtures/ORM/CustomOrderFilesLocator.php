@@ -35,6 +35,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
         return $this->installDevFixtures();
     }
 
+    /**
+     * @return list<string>
+     */
     private function installBenchmarkFixtures(): array
     {
         return [
@@ -101,6 +104,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
         ];
     }
 
+    /**
+     * @return list<string>
+     */
     private function installProdFixtures(): array
     {
         return [
@@ -151,6 +157,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
         ];
     }
 
+    /**
+     * @return list<string>
+     */
     private function installDevFixtures(): array
     {
         return [
@@ -332,7 +341,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     }
 
     /**
-     * @return array<int, string>
+     * @return list<string>
      */
     private function installQaFixtures(): array
     {
