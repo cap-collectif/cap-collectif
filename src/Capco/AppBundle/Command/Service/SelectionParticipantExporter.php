@@ -7,11 +7,8 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
-use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
@@ -21,13 +18,10 @@ class SelectionParticipantExporter extends ParticipantExporter
     protected EntityManagerInterface $entityManager;
 
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly ParticipantRepository $participantRepository,
         private readonly ParticipantNormalizer $participantNormalizer,
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
-        private readonly LoggerInterface $logger
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -49,34 +43,32 @@ class SelectionParticipantExporter extends ParticipantExporter
         $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($selectionStep);
         $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($selectionStep);
 
-        if ($this->shouldExportParticipant($selectionStep, $paths, $append)) {
-            $this->setStep($selectionStep);
-            $this->exportParticipants($participants, $paths, $withHeaders, $append);
-        }
+        $this->setStep($selectionStep);
+        $this->exportParticipants($participants, $paths, $withHeaders, $append);
     }
 
-    /**
-     * @param array<string, string> $paths
-     */
-    private function shouldExportParticipant(SelectionStep $selectionStep, array $paths, bool $append): bool
-    {
-        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
-            return true;
-        }
-
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-
-        try {
-            $hasNewUserForSelectionStep = $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
-            $hasnewParticipantForSelectionStep = $this->participantRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
-
-            return $hasNewUserForSelectionStep || $hasnewParticipantForSelectionStep;
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-
-            return false;
-        }
-    }
+//    /**
+//     * @param array<string, string> $paths
+//     */
+//    private function shouldExportParticipant(SelectionStep $selectionStep, array $paths, bool $append): bool
+//    {
+//        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
+//            return true;
+//        }
+//
+//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
+//
+//        try {
+//            $hasNewUserForSelectionStep = $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
+//            $hasnewParticipantForSelectionStep = $this->participantRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
+//
+//            return $hasNewUserForSelectionStep || $hasnewParticipantForSelectionStep;
+//        } catch (\Exception $e) {
+//            $this->logger->error($e->getMessage());
+//
+//            return false;
+//        }
+//    }
 
     private function initializeSerializer(): Serializer
     {

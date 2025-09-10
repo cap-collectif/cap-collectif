@@ -26,9 +26,7 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
@@ -53,10 +51,8 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         private readonly ProposalVoteNormalizer $voteNormalizer,
         private readonly ReportingNormalizer $reportingNormalizer,
         EntityManagerInterface $entityManager,
-        private readonly LoggerInterface $logger,
         Filesystem $fileSystem,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
-        private readonly ProposalRepository $proposalRepository,
         private readonly BatchProcessor $batchProcessor
     ) {
         $this->serializer = $this->initializeSerializer();
@@ -77,9 +73,7 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
     ): void {
         $this->setDelimiter($delimiter);
 
-        if ($this->shouldExport($step, $proposals, $filePaths, $append)) {
-            $this->exportContributionsInBatches($proposals, $step, $append);
-        }
+        $this->exportContributionsInBatches($proposals, $step, $append);
     }
 
     /**
@@ -178,30 +172,30 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         unset($content);
     }
 
-    /**
-     * @param Proposal[]            $proposals
-     * @param array<string, string> $filePaths
-     */
-    private function shouldExport(AbstractStep $step, array $proposals, array $filePaths, bool $append): bool
-    {
-        if ($append || !file_exists($filePaths[ExportVariantsEnum::FULL->value])) {
-            return true;
-        }
-
-        $oldestUpdateDate = $this->getOldestUpdateDate($filePaths[ExportVariantsEnum::SIMPLIFIED->value], $filePaths[ExportVariantsEnum::FULL->value]);
-
-        try {
-            if ([] === $proposals) {
-                return false;
-            }
-
-            return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($step, $proposals, $oldestUpdateDate);
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-
-            return false;
-        }
-    }
+//    /**
+//     * @param Proposal[]            $proposals
+//     * @param array<string, string> $filePaths
+//     */
+//    private function shouldExport(AbstractStep $step, array $proposals, array $filePaths, bool $append): bool
+//    {
+//        if ($append || !file_exists($filePaths[ExportVariantsEnum::FULL->value])) {
+//            return true;
+//        }
+//
+//        $oldestUpdateDate = $this->getOldestUpdateDate($filePaths[ExportVariantsEnum::SIMPLIFIED->value], $filePaths[ExportVariantsEnum::FULL->value]);
+//
+//        try {
+//            if ([] === $proposals) {
+//                return false;
+//            }
+//
+//            return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($step, $proposals, $oldestUpdateDate);
+//        } catch (\Exception $e) {
+//            $this->logger->error($e->getMessage());
+//
+//            return false;
+//        }
+//    }
 
     /**
      * @param Proposal[] $proposals

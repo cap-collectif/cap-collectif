@@ -7,10 +7,8 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolv
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
@@ -25,11 +23,9 @@ class QuestionnaireContributionExporter extends ContributionExporter
     public function __construct(
         protected EntityManagerInterface $entityManager,
         private readonly ReplyRepository $replyRepository,
-        private readonly QuestionnaireRepository $questionnaireRepository,
         private readonly ReplyNormalizer $replyNormalizer,
         protected ContributionsFilePathResolver $contributionsFilePathResolver,
         Filesystem $fileSystem,
-        private readonly LoggerInterface $logger
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -49,11 +45,9 @@ class QuestionnaireContributionExporter extends ContributionExporter
             return;
         }
 
-        if ($this->shouldExport($questionnaire, $paths)) {
-            $this->setDelimiter($delimiter);
+        $this->setDelimiter($delimiter);
 
-            $this->exportQuestionnaireRepliesInBatches($questionnaire);
-        }
+        $this->exportQuestionnaireRepliesInBatches($questionnaire);
     }
 
     /**
@@ -77,27 +71,27 @@ class QuestionnaireContributionExporter extends ContributionExporter
         }
     }
 
-    /**
-     * @param array<string, string> $paths
-     */
-    private function shouldExport(string $questionnaireId, array $paths): bool
-    {
-        foreach ($paths as $path) {
-            if (!file_exists($path)) {
-                return true;
-            }
-        }
-
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-
-        try {
-            return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-
-            return false;
-        }
-    }
+//    /**
+//     * @param array<string, string> $paths
+//     */
+//    private function shouldExport(string $questionnaireId, array $paths): bool
+//    {
+//        foreach ($paths as $path) {
+//            if (!file_exists($path)) {
+//                return true;
+//            }
+//        }
+//
+//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
+//
+//        try {
+//            return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);
+//        } catch (\Exception $e) {
+//            $this->logger->error($e->getMessage());
+//
+//            return false;
+//        }
+//    }
 
     private function exportQuestionnaireRepliesInBatches(Questionnaire $questionnaire): void
     {

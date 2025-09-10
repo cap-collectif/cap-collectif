@@ -34,7 +34,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
         private readonly Manager $toggleManager,
         protected TranslatorInterface $translator,
         string $projectRootDir,
-        private readonly ExportRegenerationService $exportRegenerationService,
+//        private readonly ExportRegenerationService $exportRegenerationService,
     ) {
         $this->projectRootDir = $projectRootDir;
 
@@ -110,13 +110,13 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
             $paths[ExportVariantsEnum::GROUPED->value] = $this->contributionsFilePathResolver->getGroupedExportPath($questionnaireStep);
 
-            $replies = $questionnaire->getReplies();
-            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-                [$replies],
-                $questionnaireStep,
-                'questionnaire-contributions-count',
-                $this->contributionsFilePathResolver
-            );
+//            $replies = $questionnaire->getReplies();
+//            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+//                [$replies],
+//                $questionnaireStep,
+//                'questionnaire-contributions-count',
+//                $this->contributionsFilePathResolver
+//            );
             $this->questionnaireContributionExporter->exportQuestionnaireContributions(
                 $questionnaireStep,
                 $input->getOption('delimiter'),

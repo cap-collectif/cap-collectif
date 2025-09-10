@@ -44,7 +44,7 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         private readonly EntityManagerInterface $entityManager,
         private readonly Stopwatch $stopwatch,
         private readonly string $exportDirectory,
-        private readonly ExportRegenerationService $exportRegenerationService
+//        private readonly ExportRegenerationService $exportRegenerationService
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
@@ -92,13 +92,13 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
             $this->selectionParticipantExporter->initializeStyle($style);
 
             $filePaths = $this->getFilePaths($selectionStep);
-            $participants = $this->userRepository->countSelectionConfirmedParticipants($selectionStep);
-            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-                [$participants],
-                $selectionStep,
-                'selection-participants-count',
-                $this->participantFilePathResolver
-            );
+//            $participants = $this->userRepository->countSelectionConfirmedParticipants($selectionStep);
+//            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+//                [$participants],
+//                $selectionStep,
+//                'selection-participants-count',
+//                $this->participantFilePathResolver
+//            );
             $usersExported = $this->exportUsersByBatch($input, $selectionStep);
             $participantsExported = $this->exportParticipantsByBatch($input, $selectionStep);
 

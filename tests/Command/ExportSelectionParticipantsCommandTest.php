@@ -61,70 +61,70 @@ class ExportSelectionParticipantsCommandTest extends KernelTestCase
         $this->resetUserUpdatedAt('user7');
     }
 
-    public function testIfFileIsNotGeneratedWhenRandomUserWasUpdated(): void
-    {
-        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
+//    public function testIfFileIsNotGeneratedWhenRandomUserWasUpdated(): void
+//    {
+//        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
+//
+//        $this->updateUser('adminCapco');
+//
+//        $code = $commandTester->execute($options);
+//
+//        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection_simplified.csv', $commandTester->getDisplay());
+//        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection.csv', $commandTester->getDisplay());
+//        $this->assertSame(0, $code);
+//
+//        $this->resetUserUpdatedAt('adminCapco');
+//    }
 
-        $this->updateUser('adminCapco');
+//    public function testIfFileIsNotGeneratedWhenUserWasNotUpdated(): void
+//    {
+//        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
+//
+//        $code = $commandTester->execute($options);
+//
+//        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection_simplified.csv', $commandTester->getDisplay());
+//        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection.csv', $commandTester->getDisplay());
+//        $this->assertSame(0, $code);
+//    }
 
-        $code = $commandTester->execute($options);
+//    public function testIfFileIsGeneratedWhenThereIsANewVote(): void
+//    {
+//        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
+//
+//        $this->addVote('user6', 'selectionstep8', 'proposal17');
+//
+//        $code = $commandTester->execute($options);
+//
+//        $this->assertStringContainsString('participants_budget-avec-vote-limite_selection-avec-vote-budget-limite_simplified.csv', $commandTester->getDisplay());
+//        $this->assertStringContainsString('participants_budget-avec-vote-limite_selection-avec-vote-budget-limite.csv', $commandTester->getDisplay());
+//        $this->assertSame(0, $code);
+//
+//        $this->deleteVote('user6', 'selectionstep8');
+//    }
 
-        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection.csv', $commandTester->getDisplay());
-        $this->assertSame(0, $code);
-
-        $this->resetUserUpdatedAt('adminCapco');
-    }
-
-    public function testIfFileIsNotGeneratedWhenUserWasNotUpdated(): void
-    {
-        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
-
-        $code = $commandTester->execute($options);
-
-        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringNotContainsString('participants_budget-participatif-rennes_selection.csv', $commandTester->getDisplay());
-        $this->assertSame(0, $code);
-    }
-
-    public function testIfFileIsGeneratedWhenThereIsANewVote(): void
-    {
-        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
-
-        $this->addVote('user6', 'selectionstep8', 'proposal17');
-
-        $code = $commandTester->execute($options);
-
-        $this->assertStringContainsString('participants_budget-avec-vote-limite_selection-avec-vote-budget-limite_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringContainsString('participants_budget-avec-vote-limite_selection-avec-vote-budget-limite.csv', $commandTester->getDisplay());
-        $this->assertSame(0, $code);
-
-        $this->deleteVote('user6', 'selectionstep8');
-    }
-
-    private function addVote(string $id, string $selectionStepId, string $proposalId): void
-    {
-        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
-        $selectionStep = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBy(['id' => $selectionStepId]);
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->findOneBy(['id' => $proposalId]);
-
-        $vote = new ProposalSelectionVote();
-        $vote->setUser($user);
-        $vote->setSelectionStep($selectionStep);
-        $vote->setProposal($proposal);
-
-        $em->persist($vote);
-        $em->flush();
-    }
-
-    private function deleteVote(string $id, string $selectionStepId): void
-    {
-        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
-        $vote = $em->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy(['user' => $user, 'selectionStep' => $selectionStepId]);
-
-        $em->remove($vote);
-        $em->flush();
-    }
+//    private function addVote(string $id, string $selectionStepId, string $proposalId): void
+//    {
+//        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
+//        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
+//        $selectionStep = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBy(['id' => $selectionStepId]);
+//        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->findOneBy(['id' => $proposalId]);
+//
+//        $vote = new ProposalSelectionVote();
+//        $vote->setUser($user);
+//        $vote->setSelectionStep($selectionStep);
+//        $vote->setProposal($proposal);
+//
+//        $em->persist($vote);
+//        $em->flush();
+//    }
+//
+//    private function deleteVote(string $id, string $selectionStepId): void
+//    {
+//        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
+//        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
+//        $vote = $em->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy(['user' => $user, 'selectionStep' => $selectionStepId]);
+//
+//        $em->remove($vote);
+//        $em->flush();
+//    }
 }
