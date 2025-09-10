@@ -25,14 +25,14 @@ class MediatorNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
     }
 
-    public function onMediatorAddNewParticipant(Mediator $mediator, Participant $participant)
+    public function onMediatorAddNewParticipant(Mediator $mediator, Participant $participant): void
     {
         $this->mailer->createAndSendMessage(
             MediatorPubParticipateMessage::class,
             $mediator,
             [
                 'baseUrl' => $this->getBaseUrl(),
-                'siteName' => $this->siteName,
+                'siteName' => $this->getSiteName(),
                 'participationUrl' => $this->stepUrlResolver->__invoke($mediator->getStep()),
                 'projectName' => $this->getMediatorProjectName($mediator),
             ],
@@ -40,7 +40,7 @@ class MediatorNotifier extends BaseNotifier
         );
     }
 
-    private function getBaseUrl(): string
+    protected function getBaseUrl(): string
     {
         return $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
     }

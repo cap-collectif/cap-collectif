@@ -92,18 +92,26 @@ use Capco\AppBundle\Publishable\DoctrineListener;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Mapping\MappingException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+#[AsCommand(
+    name: 'capco:reinit',
+    description: 'Reinit the application data',
+)]
 class ReinitCommand extends Command
 {
     final public const ENTITIES_WITH_LISTENERS = [
@@ -115,11 +123,12 @@ class ReinitCommand extends Command
         UserInviteEmailMessageListener::class,
         DebateArticleListener::class,
     ];
-    private $env;
+    private string $env;
     private readonly EventManager $eventManager;
 
+    private SymfonyStyle $io;
+
     public function __construct(
-        string $name,
         private readonly ManagerRegistry $doctrine,
         private readonly EntityManagerInterface $em,
         private readonly ProgressBarProcessor $progressBarProcessor,
@@ -133,43 +142,50 @@ class ReinitCommand extends Command
         private readonly StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader,
         private readonly ProjectProposalsDataLoader $projectProposalsDataloader,
         private readonly ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader,
-        private readonly Stopwatch $stopwatch
+        private readonly Stopwatch $stopwatch,
+        ?string $name = null,
     ) {
         parent::__construct($name);
         $this->eventManager = $this->em->getEventManager();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
-        $this->setName('capco:reinit')
-            ->setDescription('Reinit the application data')
+        $this
             ->addOption(
                 'force',
-                false,
+                null,
                 InputOption::VALUE_NONE,
                 'set this option to force the rebuild'
             )
             ->addOption(
                 'migrate',
-                false,
+                null,
                 InputOption::VALUE_NONE,
                 'set this option to execute the migrations instead of creating schema'
             )
             ->addOption(
                 'no-toggles',
-                false,
+                null,
                 InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
             )
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * @throws MappingException
+     * @throws ExceptionInterface
+     * @throws \ReflectionException
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (!$input->getOption('force')) {
-            $output->writeln('Please set the --force option to run this command');
+        $this->io = new SymfonyStyle($input, $output);
 
-            return 1;
+        if (!$input->getOption('force')) {
+            $this->io->error('Please set the --force option to run this command');
+
+            return Command::FAILURE;
         }
 
         $this->stopwatch->start('reinit');
@@ -178,29 +194,26 @@ class ReinitCommand extends Command
 
         $this->env = $input->getOption('env');
 
-        $output->writeln('Droping database…');
+        $this->io->info('Droping database...');
 
         try {
             $this->dropDatabase($output);
-        } catch (ConnectionException) {
-            $output->writeln(
-                '<error>Database could not be deleted - maybe it didn\'t exist?</error>'
-            );
+        } catch (\Throwable $e) {
+            $this->io->error('Database could not be deleted: ' . $e->getMessage());
         }
 
-        $output->writeln('<info>Database is cleared !</info>');
-        $output->writeln('Disable event listeners…');
+        $this->io->info('Database is cleared !');
+        $this->io->info('Disable event listeners…');
 
         $listeners = [
             $this->elasticsearchListener,
             $this->publishableListener,
             $this->questionnaireSubscriber,
-            // $this->referenceListener,
         ];
 
         foreach ($listeners as $listener) {
             $this->eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
-            $output->writeln('Disabled <info>' . $listener::class . '</info>.');
+            $this->io->writeln(sprintf('Disabled %s.', $listener::class));
         }
 
         foreach (self::ENTITIES_WITH_LISTENERS as $entity) {
@@ -210,7 +223,7 @@ class ReinitCommand extends Command
                 foreach ($listeners as $key => $listener) {
                     if (\in_array($listener['class'], self::LISTENERS_TO_DISABLE)) {
                         unset($listeners[$key]);
-                        $output->writeln('Disabled <info>' . $listener['class'] . '</info>.');
+                        $this->io->writeln(sprintf('Disabled %s.', $listener['class']));
                     }
                 }
                 $metadata->entityListeners[$event] = $listeners;
@@ -218,7 +231,7 @@ class ReinitCommand extends Command
             $this->em->getMetadataFactory()->setMetadataFor($entity, $metadata);
         }
 
-        $output->writeln('Disable dataloader\'s cache…');
+        $this->io->info("Disable dataloader's cache…");
 
         // Disable some dataloader cache
         $dataloaders = [
@@ -232,7 +245,7 @@ class ReinitCommand extends Command
         ];
         foreach ($dataloaders as $dl) {
             $dl->disableCache();
-            $output->writeln('Disabled <info>' . $dl::class . '</info>.');
+            $this->io->writeln(sprintf('Disabled %s.', $dl::class));
         }
 
         $this->createDatabase($output);
@@ -246,41 +259,44 @@ class ReinitCommand extends Command
         $this->loadFixtures($output, $this->env);
 
         if ('prod' === $this->env) {
-            $output->writeln('Start generate map token');
+            $this->io->info('Start generate map token');
 
             $this->runCommands(['capco:generate:map-token' => ['provider' => 'MAPBOX']], $output);
-            $output->writeln('End generate map token');
+            $this->io->info('End generate map token');
         }
 
-        $output->writeln('<info>Database is ready !</info>');
+        $this->io->info('Database is ready!');
 
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-        $output->writeln('<info>Redis is ready !</info>');
+        $this->io->info('Redis is ready!');
         $this->em->clear();
 
         $this->recalculateCounters($output);
 
-        $output->writeln('<info>Database counters are ready !</info>');
+        $this->io->info('Database counters are ready!');
 
         $this->populateElasticsearch($output);
 
-        $output->writeln('<info>Elasticsearch is ready !</info>');
+        $this->io->info('Elasticsearch is ready!');
 
         $event = $this->stopwatch->stop('reinit');
-        $output->writeln(
-            'Total command duration: <info>' .
-                floor($event->getDuration() / 1000) .
-                '</info>s. ' .
-                MediaManager::formatBytes($event->getMemory()) .
-                '.'
+        $this->io->info(
+            sprintf(
+                'Total command duration: %ss. %s',
+                floor($event->getDuration() / 1000),
+                MediaManager::formatBytes($event->getMemory())
+            )
         );
 
-        return 0;
+        return Command::SUCCESS;
     }
 
-    protected function createDatabase(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function createDatabase(OutputInterface $output): void
     {
         $this->stopwatch->start('createDatabase');
         $this->runCommands(
@@ -291,12 +307,13 @@ class ReinitCommand extends Command
             $output
         );
         $event = $this->stopwatch->stop('createDatabase');
-        $output->writeln(
-            'Creating database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Creating database duration: %ss', $event->getDuration() / 1000));
     }
 
-    protected function createSchema(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function createSchema(OutputInterface $output): void
     {
         $this->stopwatch->start('createSchema');
         $this->runCommands(
@@ -306,12 +323,13 @@ class ReinitCommand extends Command
             $output
         );
         $event = $this->stopwatch->stop('createSchema');
-        $output->writeln(
-            'Creating database schema duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Creating database schema duration: %s.', $event->getDuration() / 1000));
     }
 
-    protected function dropDatabase(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function dropDatabase(OutputInterface $output): void
     {
         $this->stopwatch->start('dropDatabase');
         $this->runCommands(
@@ -321,12 +339,13 @@ class ReinitCommand extends Command
             $output
         );
         $event = $this->stopwatch->stop('dropDatabase');
-        $output->writeln(
-            'Dropping database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Dropping database duration: %s', $event->getDuration() / 1000));
     }
 
-    protected function loadFixtures(OutputInterface $output, $env = 'dev')
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function loadFixtures(OutputInterface $output, string $env = 'dev'): void
     {
         $this->stopwatch->start('loadFixtures');
 
@@ -413,7 +432,7 @@ class ReinitCommand extends Command
         foreach ($classes as $class) {
             /** @var ClassMetadata $metadata */
             $metadata = $this->doctrine->getManager()->getClassMetaData($class);
-            $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+            $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());
         }
 
@@ -433,12 +452,13 @@ class ReinitCommand extends Command
         $this->progressBarProcessor->finish();
 
         $event = $this->stopwatch->stop('loadFixtures');
-        $output->writeln(
-            'Loading fixtures duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Loading fixtures duration: %s.', $event->getDuration() / 1000));
     }
 
-    protected function loadToggles(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function loadToggles(OutputInterface $output): void
     {
         $this->runCommands(
             [
@@ -451,7 +471,10 @@ class ReinitCommand extends Command
         );
     }
 
-    protected function recalculateCounters(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function recalculateCounters(OutputInterface $output): void
     {
         $this->runCommands(
             [
@@ -461,7 +484,10 @@ class ReinitCommand extends Command
         );
     }
 
-    protected function populateElasticsearch(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function populateElasticsearch(OutputInterface $output): void
     {
         // /!\ Do not use create --populate
         // Because for correct counters value we need to query ES
@@ -476,7 +502,10 @@ class ReinitCommand extends Command
         );
     }
 
-    protected function executeMigrations(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function executeMigrations(OutputInterface $output): void
     {
         $this->stopwatch->start('executeMigrations');
 
@@ -488,12 +517,13 @@ class ReinitCommand extends Command
         );
 
         $event = $this->stopwatch->stop('executeMigrations');
-        $output->writeln(
-            'Adding migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Adding migrations duration: %s.', $event->getDuration() / 1000));
     }
 
-    protected function mockMigrations(OutputInterface $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    protected function mockMigrations(OutputInterface $output): void
     {
         $this->stopwatch->start('mockMigrations');
 
@@ -510,11 +540,12 @@ class ReinitCommand extends Command
         );
 
         $event = $this->stopwatch->stop('mockMigrations');
-        $output->writeln(
-            'Mocking migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
+        $this->io->info(sprintf('Mocking migrations duration: %s.', $event->getDuration() / 1000));
     }
 
+    /**
+     * @throws ExceptionInterface
+     */
     private function setDefaultLocale(OutputInterface $output): void
     {
         $this->runCommands(
@@ -528,6 +559,9 @@ class ReinitCommand extends Command
         );
     }
 
+    /**
+     * @throws ExceptionInterface
+     */
     private function translateBaseParameters(OutputInterface $output): void
     {
         $this->runCommands(
@@ -540,7 +574,10 @@ class ReinitCommand extends Command
         );
     }
 
-    private function runCommands(array $commands, $output)
+    /**
+     * @throws ExceptionInterface
+     */
+    private function runCommands(array $commands, mixed $output): void
     {
         foreach ($commands as $key => $value) {
             $input = new ArrayInput($value);
@@ -550,8 +587,8 @@ class ReinitCommand extends Command
                 ->run($input, $output)
             ;
 
-            if (0 !== $returnCode) {
-                throw new \RuntimeException('Command' . $key . 'failed…', 1);
+            if (Command::SUCCESS !== $returnCode) {
+                throw new \RuntimeException('Command' . $key . 'failed…', Command::FAILURE);
             }
         }
     }

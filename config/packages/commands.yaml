@@ -33,10 +33,6 @@ services:
             $mapboxSecretKey: '%mapbox_secret_key%'
             $instanceName: '%instance_name%'
 
-    Capco\AppBundle\Command\ReinitCommand:
-        arguments:
-            $name: 'capco:reinit'
-
     Capco\AppBundle\Command\LoadProdDataCommand:
         arguments:
             $name: 'capco:load-prod-data'
@@ -119,4 +115,3 @@ services:
         arguments:
             $anonymizationInactivityDays: '%anonymization_inactivity_days%'
             $anonymizationInactivityEmailReminderDays: '%anonymization_inactivity_email_reminder_days%'
-

@@ -29,7 +29,7 @@ class GlobalDistrictFollowerNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
     }
 
-    public function onNewProjectInDistrict(GlobalDistrict $district, Project $project)
+    public function onNewProjectInDistrict(GlobalDistrict $district, Project $project): void
     {
         $followers = $district->getFollowers();
         foreach ($followers as $follower) {
@@ -44,9 +44,9 @@ class GlobalDistrictFollowerNotifier extends BaseNotifier
                         ? $this->mediaUrlResolver->__invoke($project->getCover())
                         : null,
                     'projectTitle' => $project->getTitle(),
-                    'siteName' => $this->siteName,
-                    'baseUrl' => $this->baseUrl,
-                    'siteUrl' => $this->siteUrl,
+                    'siteName' => $this->getSiteName(),
+                    'baseUrl' => $this->getBaseUrl(),
+                    'siteUrl' => $this->getSiteUrl(),
                 ],
                 $follower->getUser()
             );

@@ -18,10 +18,9 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         ?string $name,
         UserManager $userManager,
         ConvertCsvToArray $csvReader,
-        UserTypeRepository $userTypeRepository
+        private readonly UserTypeRepository $userTypeRepository
     ) {
         parent::__construct($name, $userManager, $csvReader);
-        $this->setUserTypes($userTypeRepository);
     }
 
     protected function getRowErrors(array &$row): array
@@ -37,7 +36,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
 
         if (isset($row[self::HEADER_USER_TYPE])) {
             $userType = trim((string) $row[self::HEADER_USER_TYPE]);
-            if ($userType && !\in_array($userType, $this->userTypes)) {
+            if ($userType && !\in_array($userType, $this->getUserTypes())) {
                 $errors[] = "userType {$userType} not found.";
             }
         }
@@ -50,7 +49,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         $user = $this->generateUser(trim((string) $row[self::HEADER_USERNAME]), $row[self::HEADER_EMAIL]);
         $user->setOpenId($row[self::HEADER_OPENID]);
         if (isset($row[self::HEADER_USER_TYPE]) && !empty($row[self::HEADER_USER_TYPE])) {
-            $user->setUserType($this->userTypes[trim((string) $row[self::HEADER_USER_TYPE])]);
+            $user->setUserType($this->getUserTypes()[trim((string) $row[self::HEADER_USER_TYPE])]);
         }
         $this->createdOpenIds[] = $user->getOpenId();
 
@@ -71,11 +70,17 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         return false;
     }
 
-    private function setUserTypes(UserTypeRepository $repository): void
+    /**
+     * @return UserType[]
+     */
+    private function getUserTypes(): array
     {
-        /** @var UserType $userType */
-        foreach ($repository->findAll() as $userType) {
-            $this->userTypes[trim($userType->getName() ?? '')] = $userType;
+        if (empty($this->userTypes)) {
+            foreach ($this->userTypeRepository->findAll() as $userType) {
+                $this->userTypes[trim($userType->getName() ?? '')] = $userType;
+            }
         }
+
+        return $this->userTypes;
     }
 }

@@ -40,8 +40,8 @@ class ProposalCollectEmailPublishedNotifier extends BaseNotifier
             ProposalCollectEmailPublishedMessage::class,
             $proposal,
             [
-                'baseUrl' => $this->baseUrl,
-                'siteName' => $this->siteName,
+                'baseUrl' => $this->getBaseUrl(),
+                'siteName' => $this->getSiteName(),
                 'confirmationUrl' => $confirmationUrl,
                 'proposalUrl' => $proposalUrl,
                 'publishedAt' => $publishedAt,

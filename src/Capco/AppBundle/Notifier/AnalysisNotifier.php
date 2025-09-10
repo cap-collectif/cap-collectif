@@ -57,6 +57,11 @@ class AnalysisNotifier extends BaseNotifier
         );
     }
 
+    protected function getBaseUrl(): string
+    {
+        return $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
     private function addUrlToProposals(array &$proposals): void
     {
         foreach ($proposals as $proposal) {
@@ -110,10 +115,5 @@ class AnalysisNotifier extends BaseNotifier
         }
 
         return $url;
-    }
-
-    private function getBaseUrl(): string
-    {
-        return $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 }
