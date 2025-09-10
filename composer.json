@@ -66,7 +66,7 @@
         "maximal/emoji": "^1.7",
         "odolbeau/phone-number-bundle": "^3.0",
         "odolbeau/rabbit-mq-admin-toolkit": "^5.1",
-        "overblog/dataloader-bundle": "^0.5.0",
+        "overblog/dataloader-bundle": "^1.1.0",
         "overblog/graphiql-bundle": "^1.0",
         "overblog/graphql-bundle": "^0.14",
         "phenx/php-font-lib": "^0.5.1",

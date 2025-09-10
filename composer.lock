@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3057e78172f86147a8e1de1ac3928cb",
+    "content-hash": "b4f8700d5781fc29e9e7d45bf49708f6",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -7296,30 +7296,29 @@
         },
         {
             "name": "overblog/dataloader-bundle",
-            "version": "v0.5.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/dataloader-bundle.git",
-                "reference": "37c56f04ed49ea52c7d2612fd70b887a9f9fd8ae"
+                "reference": "6ac3ab346fc8ae88cd964d462defc451d335a4de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/37c56f04ed49ea52c7d2612fd70b887a9f9fd8ae",
-                "reference": "37c56f04ed49ea52c7d2612fd70b887a9f9fd8ae",
+                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/6ac3ab346fc8ae88cd964d462defc451d335a4de",
+                "reference": "6ac3ab346fc8ae88cd964d462defc451d335a4de",
                 "shasum": ""
             },
             "require": {
-                "overblog/dataloader-php": "^0.5.0 || ^0.6.0",
-                "php": ">=7.2",
-                "symfony/dependency-injection": "^4.3 || ^5.0"
+                "overblog/dataloader-php": "^1",
+                "php": "^8.1",
+                "symfony/dependency-injection": "^5.4 || ^6.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.1 || ^5.5 || ^6.5 || ^7.5 || ^8.5",
-                "react/promise": "^2.5",
-                "symfony/dependency-injection": "^4.3 || ^5.0",
-                "symfony/framework-bundle": "^4.3 || ^5.0",
-                "symfony/phpunit-bridge": "^4.3 || ^5.0",
-                "symfony/yaml": "^4.3 || ^5.0"
+                "phpunit/phpunit": "^10.3",
+                "react/promise": "^2.8.0",
+                "symfony/framework-bundle": "^5.4||^6.3 || ^7.0",
+                "symfony/phpunit-bridge": "^6.3 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.3 || ^7.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7329,11 +7328,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Overblog\\DataLoaderBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
+                    "Overblog\\DataLoaderBundle\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7353,35 +7349,35 @@
             ],
             "support": {
                 "issues": "https://github.com/overblog/dataloader-bundle/issues",
-                "source": "https://github.com/overblog/dataloader-bundle/tree/v0.5.2"
+                "source": "https://github.com/overblog/dataloader-bundle/tree/v1.1.0"
             },
-            "time": "2021-04-07T08:16:07+00:00"
+            "time": "2024-07-01T12:24:16+00:00"
         },
         {
             "name": "overblog/dataloader-php",
-            "version": "v0.6.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/dataloader-php.git",
-                "reference": "69ae4b7107231a95018c9039293a7fea9e800e09"
+                "reference": "b5016b85163101ef804a1c7729574aa984d5c190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/dataloader-php/zipball/69ae4b7107231a95018c9039293a7fea9e800e09",
-                "reference": "69ae4b7107231a95018c9039293a7fea9e800e09",
+                "url": "https://api.github.com/repos/overblog/dataloader-php/zipball/b5016b85163101ef804a1c7729574aa984d5c190",
+                "reference": "b5016b85163101ef804a1c7729574aa984d5c190",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1|^8.0"
+                "php": "^8.1"
             },
             "replace": {
                 "overblog/promise-adapter": "self.version"
             },
             "require-dev": {
-                "guzzlehttp/promises": "^1.3.0",
-                "phpunit/phpunit": "^7.5|^8.5",
-                "react/promise": "^2.5.0",
-                "webonyx/graphql-php": "^14.0"
+                "guzzlehttp/promises": "^1.5.0 || ^2.0.0",
+                "phpunit/phpunit": "^10.3",
+                "react/promise": "^2.8.0",
+                "webonyx/graphql-php": "^15.0"
             },
             "suggest": {
                 "guzzlehttp/promises": "To use with Guzzle promise",
@@ -7412,9 +7408,9 @@
             ],
             "support": {
                 "issues": "https://github.com/overblog/dataloader-php/issues",
-                "source": "https://github.com/overblog/dataloader-php/tree/v0.6.0"
+                "source": "https://github.com/overblog/dataloader-php/tree/v1.1.0"
             },
-            "time": "2021-01-13T11:41:29+00:00"
+            "time": "2024-12-03T14:44:03+00:00"
         },
         {
             "name": "overblog/graphiql-bundle",
