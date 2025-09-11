@@ -2,7 +2,6 @@
 
 import { Accordion, Box, CapUIAccordionColor, CapUIFontSize, CapUILineHeight, Flex, Text } from '@cap-collectif/ui'
 import { pageContactContentQuery$data } from '@relay/pageContactContentQuery.graphql'
-import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { FC, useEffect } from 'react'
 import { useIntl } from 'react-intl'
@@ -17,19 +16,11 @@ type Props = {
 
 export const Contact: FC<Props> = ({ data }) => {
   const intl = useIntl()
-  const { setBreadCrumbItems } = useNavBarContext()
   const { contactPageTitle, description, contactForms, customCode } = data
 
   useEffect(() => {
     evalCustomCode(customCode?.value)
   }, [customCode])
-
-  useEffect(() => {
-    setBreadCrumbItems([
-      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: contactPageTitle.value || intl.formatMessage({ id: 'admin.label.pages.contact' }), href: '' },
-    ])
-  }, [intl, setBreadCrumbItems, contactPageTitle])
 
   const isMultiForm = contactForms.length > 1
 

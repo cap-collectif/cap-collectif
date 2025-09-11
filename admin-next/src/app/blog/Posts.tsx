@@ -1,9 +1,7 @@
 'use client'
 
 import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
-import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { FC, Suspense, useEffect } from 'react'
-import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { evalCustomCode } from 'src/app/custom-code'
 import { PostsListQuery, OrderDirection } from '@relay/PostsListQuery.graphql'
@@ -56,19 +54,9 @@ export const PostsRender: FC<{ pagination?: number }> = ({ pagination }) => {
 }
 
 export const Posts: FC<Props> = ({ title, body, customCode, pagination }) => {
-  const intl = useIntl()
-  const { setBreadCrumbItems } = useNavBarContext()
-
   useEffect(() => {
     evalCustomCode(customCode)
   }, [customCode])
-
-  useEffect(() => {
-    setBreadCrumbItems([
-      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: title, href: '' },
-    ])
-  }, [intl, setBreadCrumbItems, title])
 
   return (
     <>

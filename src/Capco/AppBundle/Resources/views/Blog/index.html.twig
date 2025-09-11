@@ -115,16 +115,6 @@
         })
         observer.observe(document.body, { childList: true, subtree: true })
         }
-        const event = new MessageEvent("set-breadcrumb", {
-            bubbles: true,
-            data: [
-                { title: "{{ 'navbar.homepage' | trans({}, 'CapcoAppBundle') }}", href: "/" },
-                { title: "{{ jumbotron_title }}", href: "" },
-            ],
-        });
-        onElementAvailable('#main_navbar', () => {
-            document.dispatchEvent(event)
-        });
     </script>
     {{ parent() }}
     {% set customCode = capco_site_parameter_value('blog.customcode') %}

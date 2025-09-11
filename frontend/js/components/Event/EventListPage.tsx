@@ -11,8 +11,6 @@ import EventListPageHeader from './EventListPageHeader'
 import withColors from '../Utils/withColors'
 import type { GlobalState } from '~/types'
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
-import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
-import { useIntl } from 'react-intl'
 
 type Props = {
   readonly eventPageTitle: string | null | undefined
@@ -24,19 +22,11 @@ type Props = {
 
 export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventPageTitle, eventPageBody }: Props) => {
   const initialValues = getInitialValues()
-  const intl = useIntl()
   const { project } = initialValues
   const isFuture = initialValues.status === 'all' ? null : initialValues.status === 'ongoing-and-future'
   const urlSearch = new URLSearchParams(window.location.search)
   const theme = urlSearch.get('theme') ?? null
   const district = urlSearch.get('district') ?? null
-
-  React.useEffect(() => {
-    dispatchNavBarEvent('set-breadcrumb', [
-      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: intl.formatMessage({ id: 'global.events' }), href: '' },
-    ])
-  }, [intl])
 
   return (
     <div className="event-page">

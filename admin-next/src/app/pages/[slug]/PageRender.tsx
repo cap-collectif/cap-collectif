@@ -4,10 +4,8 @@ import { Box } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { FC, useEffect } from 'react'
-import { useIntl } from 'react-intl'
 import { evalCustomCode } from 'src/app/custom-code'
 import { GlobalFrontOfficeCKEDITORStyles } from 'src/app/styles'
 
@@ -18,20 +16,11 @@ type Props = {
 }
 
 export const PageRender: FC<Props> = ({ title, body, customCode }) => {
-  const intl = useIntl()
   const { siteColors } = useAppContext()
-  const { setBreadCrumbItems } = useNavBarContext()
 
   useEffect(() => {
     evalCustomCode(customCode)
   }, [customCode])
-
-  useEffect(() => {
-    setBreadCrumbItems([
-      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: title, href: '' },
-    ])
-  }, [intl, setBreadCrumbItems, title])
 
   return (
     <>

@@ -3,9 +3,7 @@
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
 import ProjectListSection from '@components/FrontOffice/Sections/ProjectList/ProjectListSection'
-import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { FC, Suspense, useEffect } from 'react'
-import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { evalCustomCode } from 'src/app/custom-code'
 import { GlobalFrontOfficeCKEDITORStyles } from 'src/app/styles'
@@ -103,20 +101,11 @@ export const ProjectsRender: FC<{ pagination?: number }> = ({ pagination }) => {
 }
 
 export const Projects: FC<Props> = ({ title, body, customCode, pagination }) => {
-  const intl = useIntl()
   const { siteColors } = useAppContext()
-  const { setBreadCrumbItems } = useNavBarContext()
 
   useEffect(() => {
     evalCustomCode(customCode)
   }, [customCode])
-
-  useEffect(() => {
-    setBreadCrumbItems([
-      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: title, href: '' },
-    ])
-  }, [intl, setBreadCrumbItems, title])
 
   return (
     <>
