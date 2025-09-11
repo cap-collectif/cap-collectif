@@ -156,7 +156,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         match ($this->getInstanceName()) {
             'carpentras', 'debatpenly', 'debateauidf', 'debatdsf',
             'participer-debat-lithium', 'participer-debat-gravelines',
-            'participer-debat-fessenheim', 'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp' => $resolver
+            'participer-debat-fessenheim', 'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp', 'pngmdr' => $resolver
                 ->setDefaults([
                     'state' => null,
                     'csrf' => true,

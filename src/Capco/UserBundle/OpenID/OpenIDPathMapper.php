@@ -33,7 +33,7 @@ class OpenIDPathMapper
             'aix-marseille-univ' => new AixMarseilleUnivMapping(),
             'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium',
             'participer-debat-gravelines', 'participer-debat-fessenheim',
-            'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp' => new CndpMapping(),
+            'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp', 'pngmdr' => new CndpMapping(),
             'dijon' => new DijonMapping(),
             'nimes', 'nimes-metropole' => new NimesMapping(),
             default => new DevOpenIDMapping(),
