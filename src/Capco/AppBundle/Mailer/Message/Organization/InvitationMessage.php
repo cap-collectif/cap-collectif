@@ -34,16 +34,4 @@ final class InvitationMessage extends AbstractExternalMessage
             'plateformName' => $params['organizationName'],
         ];
     }
-
-    public static function mockData()
-    {
-        return [
-            'organizationName' => 'Association des pas contents',
-            'plateformName' => 'capco',
-            'siteName' => 'capco',
-            'invitationUrl' => 'https://capco.dev/invitation/organization/token2',
-            'baseUrl' => 'https://capco.dev',
-            'user_locale' => 'fr_FR',
-        ];
-    }
 }
