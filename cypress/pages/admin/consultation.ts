@@ -20,9 +20,9 @@ export default new (class AdminConsultationPage {
   }
 
   visitConsultationPage(operationType: 'EDIT' | 'CREATE' = 'EDIT') {
+    cy.interceptGraphQLOperation({ operationName: 'ConsultationStepFormQuery' })
     const url = `/admin-next/project/UHJvamVjdDpwcm9qZWN0MQ==/update-step/consultation-step/Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=?operationType=${operationType}`
     cy.visit(url)
-    cy.interceptGraphQLOperation({ operationName: 'ConsultationStepFormQuery' })
     cy.wait('@ConsultationStepFormQuery', { timeout: 10000 })
   }
 
