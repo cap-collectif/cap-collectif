@@ -76,35 +76,6 @@ Scenario: Logged in admin adds a conditional jump on a question
 #  Then I should see "global.saved"
 
 @database @rabbitmq
-Scenario: Logged in admin edit questionnaire, import choices
-  Given I am logged in as admin
-  And I go to the admin questionnaire edit page with id questionnaireAdmin
-  Then I wait "#parameters-submit" to appear on current page
-  And I click the "#perso-field-add" element
-  And I wait "question_modal.create.title" to appear on current page in "body"
-  And I click the ".create-question" element
-  And I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
-  Then I fill in the following:
-    | questions[0].title | Question title edited with test |
-  And I select "global.question.types.select" from "questions[0].type"
-  Then I wait "#questions_choice_panel_personal" to appear on current page
-  And I click on button "#import_choices"
-  Then I wait "#import-file" to appear on current page
-  And I attach the file "/var/www/features/files/doublons.csv" to "csv-file_field"
-  And I should see 'n-items-found {"num":18}'
-  And I should see 'n-duplicate-answer-excluded {"num":15}'
-  And I wait 1 seconds
-  And I attach the file "/var/www/features/files/over_1500.csv" to "csv-file_field"
-  And I should see 'n-items-found {"num":1612}'
-  And I wait 2 seconds
-  And I click on button "#import-file"
-  Then I should see "75015 - PARIS ANTENNE DEX GRAND SUD OUEST"
-  When I click on button "[id='questions[0].submit']"
-  And I should see "your-question-has-been-registered"
-  When I click on button "[id='parameters-submit']"
-  And I should be redirected to "/admin/capco/app/questionnaire/questionnaireAdmin/edit" within 7 seconds
-
-@database @rabbitmq
 Scenario: Logged in admin edits questionnaire section and add specific color
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaireAdmin

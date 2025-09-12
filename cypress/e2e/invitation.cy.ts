@@ -1,5 +1,6 @@
 import { InvitationPage } from '~e2e-pages/index'
 
+// TODO: this test file is currently not running in CI - needs to be fixed ASAP.
 describe('User invitation', () => {
   beforeEach(() => {
     cy.task('db:restore')
