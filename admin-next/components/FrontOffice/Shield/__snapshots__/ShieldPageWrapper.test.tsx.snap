@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ShieldPageWrapper /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL kIvsqs"
+    class="sc-bcXGCL kIvsqs"
     id="shield-mode"
   >
     <div
-      className="sc-bcXGCL eAENdm"
+      class="sc-bcXGCL eAENdm"
     >
       <img
         alt="logo"
@@ -18,23 +18,20 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         src="shield.jpg"
       />
       <div
-        className="sc-bcXGCL bkaGgh"
+        class="sc-bcXGCL bkaGgh"
       >
         <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
-            {
-              "__html": "Réservé aux inscrits",
-            }
-          }
-        />
+          class=" ql-editor wysiwyg-render"
+        >
+          Réservé aux inscrits
+        </div>
       </div>
       <div
-        className="sc-bcXGCL iqOcCf"
+        class="sc-bcXGCL iqOcCf"
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dioYZa hQQZty cap-icon sc-hiDLIP exOZhK"
+          class="sc-bcXGCL sc-oZHua dioYZa hQQZty cap-icon sc-hiDLIP exOZhK"
           fill="none"
           height="1em"
           viewBox="0 0 12 12"
@@ -44,24 +41,23 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           <path
             d="M11 6a5 5 0 1 1-5-5"
             stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={0.8}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="0.8"
           />
         </svg>
       </div>
       <div
-        className="sc-bcXGCL ctwNbn"
+        class="sc-bcXGCL ctwNbn"
         id="shield-links"
       >
         <span
-          className="sc-bcXGCL dNIZTD"
+          class="sc-bcXGCL dNIZTD"
         >
           <button
-            className="sc-bcXGCL ehphTw"
+            class="sc-bcXGCL ehphTw"
             id="privacy-policy"
             name="privacy"
-            onClick={[Function]}
             type="button"
           >
             capco.module.privacy_policy
@@ -71,12 +67,11 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           •
         </span>
         <div
-          className="cookie-policy"
+          class="cookie-policy"
         >
           <button
-            className="sc-bcXGCL keKWCf"
+            class="sc-bcXGCL keKWCf"
             id="cookies-modal-button"
-            onClick={[Function]}
             type="button"
           >
             cookies
@@ -86,12 +81,11 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           •
         </span>
         <div
-          className="sc-bcXGCL keKWCf"
+          class="sc-bcXGCL keKWCf"
         >
           <button
-            className="sc-bcXGCL keKWCf"
+            class="sc-bcXGCL keKWCf"
             id="cookies-management"
-            onClick={[Function]}
             type="button"
           >
             cookies-management
@@ -99,18 +93,15 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL dzojIf capco-powered"
+        class="sc-bcXGCL dzojIf capco-powered"
       >
         <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
-            {
-              "__html": "email.propulsed.by.capco {"logoUrl":"/capco-logo-mail.png"}",
-            }
-          }
-        />
+          class=" ql-editor wysiwyg-render"
+        >
+          email.propulsed.by.capco {"logoUrl":"/capco-logo-mail.png"}
+        </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

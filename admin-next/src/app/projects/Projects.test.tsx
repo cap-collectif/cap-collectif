@@ -1,6 +1,7 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
+import { NavBarContext } from 'shared/navbar/NavBar.context'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from 'tests/testUtils'
 import Projects from './Projects'
@@ -8,7 +9,6 @@ import Projects from './Projects'
 describe('<Projects />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const queryResolver = {
     Query: () => ({
       projects: { totalCount: 1, edges: [{ node: { id: 'project-id-1', title: 'Nice project' } }] },
@@ -21,9 +21,11 @@ describe('<Projects />', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, queryResolver))
 
     TestComponent = () => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <Projects title="Liste des projets" body="Lorem ipsum" />
-      </RelaySuspensFragmentTest>
+      <NavBarContext.Provider value={{ setBreadCrumbItems: jest.fn() }}>
+        <RelaySuspensFragmentTest environment={environment}>
+          <Projects title="Liste des projets" body="Lorem ipsum" />
+        </RelaySuspensFragmentTest>
+      </NavBarContext.Provider>
     )
   })
 
@@ -32,7 +34,7 @@ describe('<Projects />', () => {
   })
 
   it('renders correctly', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

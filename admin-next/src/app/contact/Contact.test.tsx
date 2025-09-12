@@ -1,11 +1,11 @@
 /* eslint-env jest */
-import ReactTestRenderer from 'react-test-renderer'
-import Contact from './Contact'
+import React from 'react'
+import { render } from '@testing-library/react'
+import { NavBarContext } from 'shared/navbar/NavBar.context'
 import { MockProviders } from 'tests/testUtils'
+import Contact from './Contact'
 
 describe('<Contact />', () => {
-  let testComponentTree
-
   const data = {
     contactPageTitle: { value: 'Contact us' },
     description: { value: 'Lorem ipsum' },
@@ -17,11 +17,13 @@ describe('<Contact />', () => {
   }
 
   it('renders correctly', () => {
-    testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
-        <Contact data={data} />
-      </MockProviders>,
+    const { asFragment } = render(
+      <NavBarContext.Provider value={{ setBreadCrumbItems: jest.fn() }}>
+        <MockProviders>
+          <Contact data={data} />
+        </MockProviders>
+      </NavBarContext.Provider>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

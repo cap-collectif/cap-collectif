@@ -1,71 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginModal /> render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
     aria-label="login.with"
-    data-dialog={true}
-    hidden={false}
+    data-dialog="true"
     id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
     role="dialog"
-    tabIndex={-1}
+    tabindex="-1"
   >
     <div
-      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
-      onClick={[Function]}
-      style={
-        {
-          "opacity": 0,
-        }
-      }
+      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      style="opacity: 0;"
     >
       <div
-        autoFocus={true}
-        className="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
-        style={
-          {
-            "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
-            "zIndex": 9000,
-          }
-        }
+        class="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
+        style="z-index: 9000; opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
         <header
-          className="sc-bcXGCL jJSzZW cap-modal__header"
+          class="sc-bcXGCL jJSzZW cap-modal__header"
           id="contained-modal-title-lg"
         >
           <div
-            className="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL jevVsb"
           >
             <h2
-              className="sc-bcXGCL YIciv cap-heading"
+              class="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              style="margin-left: 0px; margin-top: 0px;"
             >
               login.with
             </h2>
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL cNICVM"
-            onClick={[Function]}
+            class="sc-bcXGCL cNICVM"
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
+              class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -76,132 +53,87 @@ exports[`<LoginModal /> render correctly 1`] = `
               <path
                 d="M1 11 11 1M1 1l10 10"
                 stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={0.8}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="0.8"
               />
             </svg>
           </button>
         </header>
         <div
-          className="sc-bcXGCL eqUaSq cap-modal__body"
+          class="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div>
             <div
-              className="sc-bcXGCL iAhoTX"
+              class="sc-bcXGCL iAhoTX"
             >
               <div
-                className=" ql-editor wysiwyg-render"
-                dangerouslySetInnerHTML={
-                  {
-                    "__html": "<mock-value-for-field-"value">",
-                  }
-                }
-              />
+                class=" ql-editor wysiwyg-render"
+              >
+                <mock-value-for-field-"value" />
+              </div>
             </div>
             <div
-              className="sc-bcXGCL fVgOgb cap-form-control"
+              class="sc-bcXGCL fVgOgb cap-form-control"
             >
               <label
-                className="sc-bcXGCL fTPHCc cap-form-label"
-                htmlFor=":r0:"
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL fTPHCc cap-form-label"
+                for=":r0:"
+                style="margin-left: 0px; margin-top: 0px;"
               >
                 <span
-                  className="sc-bcXGCL dQChsN cap-text"
-                  style={
-                    {
-                      "marginLeft": 0,
-                      "marginTop": 0,
-                    }
-                  }
+                  class="sc-bcXGCL dQChsN cap-text"
+                  style="margin-left: 0px; margin-top: 0px;"
                 >
                   global.email
                 </span>
               </label>
               <input
-                aria-required={true}
-                autoComplete="email"
-                autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-                disabled={false}
+                aria-required="true"
+                autocomplete="email"
+                class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                 id=":r0:"
                 name="username"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
                 placeholder="email.placeholder"
-                readOnly={false}
-                required={true}
+                required=""
                 type="email"
               />
             </div>
             <div
-              className="sc-bcXGCL fVgOgb cap-form-control"
+              class="sc-bcXGCL fVgOgb cap-form-control"
             >
               <label
-                className="sc-bcXGCL fTPHCc cap-form-label"
-                htmlFor=":r1:"
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL fTPHCc cap-form-label"
+                for=":r1:"
+                style="margin-left: 0px; margin-top: 0px;"
               >
                 <span
-                  className="sc-bcXGCL dQChsN cap-text"
-                  style={
-                    {
-                      "marginLeft": 0,
-                      "marginTop": 0,
-                    }
-                  }
+                  class="sc-bcXGCL dQChsN cap-text"
+                  style="margin-left: 0px; margin-top: 0px;"
                 >
                   global.password
                 </span>
               </label>
               <div
-                className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+                class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
               >
                 <input
-                  aria-required={true}
-                  autoComplete="off"
-                  className="sc-bcXGCL dANhtW cap-input"
-                  disabled={false}
+                  aria-required="true"
+                  autocomplete="off"
+                  class="sc-bcXGCL dANhtW cap-input"
                   id=":r1:"
                   name="password"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  readOnly={false}
-                  required={true}
+                  required=""
                   type="password"
                 />
                 <button
                   aria-describedby=":r2:"
-                  className="sc-bcXGCL fROdoz"
-                  disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocusCapture={[Function]}
-                  onKeyDownCapture={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
+                  class="sc-bcXGCL fROdoz"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 10"
@@ -211,67 +143,106 @@ exports[`<LoginModal /> render correctly 1`] = `
                     <path
                       d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.8"
                     />
                     <path
                       d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.8"
                     />
                   </svg>
                 </button>
-                <span
-                  hidden={true}
-                  id=":r2:"
-                  style={
-                    {
-                      "position": "fixed",
-                    }
-                  }
-                />
+                <div
+                  style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+                >
+                  <div
+                    class="cap-tooltip"
+                    data-dialog=""
+                    data-placing="true"
+                    hidden=""
+                    id=":r2:"
+                    role="tooltip"
+                    style="position: relative; z-index: 1800; display: none;"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                    >
+                      <svg
+                        display="block"
+                        viewBox="0 0 30 30"
+                      >
+                        <g
+                          transform="rotate(180 15 15)"
+                        >
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            fill="none"
+                            mask="url(#:r5:)"
+                          />
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            stroke="none"
+                          />
+                          <mask
+                            id=":r5:"
+                            maskUnits="userSpaceOnUse"
+                          >
+                            <rect
+                              fill="white"
+                              height="30"
+                              stroke="black"
+                              width="60"
+                              x="-15"
+                              y="0"
+                            />
+                          </mask>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="sc-bcXGCL bdghCN"
+                    >
+                      global.password.show
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="/resetting/request"
             >
               global.forgot_password
             </a>
             <div
-              className="sc-bcXGCL gvdeaM"
+              class="sc-bcXGCL gvdeaM"
             >
               <div
-                className=" ql-editor wysiwyg-render"
-                dangerouslySetInnerHTML={
-                  {
-                    "__html": "<mock-value-for-field-"value">",
-                  }
-                }
-              />
+                class=" ql-editor wysiwyg-render"
+              >
+                <mock-value-for-field-"value" />
+              </div>
             </div>
           </div>
         </div>
         <footer
-          className="sc-bcXGCL fMWhlA cap-modal__footer"
+          class="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
+            style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
             id="confirm-login"
             type="submit"
           >
@@ -280,6 +251,6 @@ exports[`<LoginModal /> render correctly 1`] = `
         </footer>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

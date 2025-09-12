@@ -1,19 +1,17 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest, FormWrapper } from 'tests/testUtils'
 import type { RegistrationFormTestQuery } from '@relay/RegistrationFormTestQuery.graphql'
 import { RegistrationForm } from './RegistrationForm'
 import useFeatureFlag, { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
+import { render } from '@testing-library/react'
 
 jest.mock('@shared/hooks/useFeatureFlag')
 
 describe('<RegistrationForm />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const query = graphql`
     query RegistrationFormTestQuery @relay_test_operation {
@@ -64,8 +62,8 @@ describe('<RegistrationForm />', () => {
       return { captcha: true }
     })
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders a form with user_type enabled', () => {
     // @ts-ignore jest
@@ -75,8 +73,8 @@ describe('<RegistrationForm />', () => {
       return { user_type: true }
     })
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders a form with zipcode enabled', () => {
     // @ts-ignore jest
@@ -86,7 +84,7 @@ describe('<RegistrationForm />', () => {
       return { zipcode_at_register: true }
     })
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

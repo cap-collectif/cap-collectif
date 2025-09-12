@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest, FormWrapper } from 'tests/testUtils'
@@ -13,7 +12,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<LoginBox />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const defaultMockResolvers = {
     Query: () => ({
@@ -51,13 +49,13 @@ describe('<LoginBox />', () => {
     )
   })
   it('renders', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders without LoginForm', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(() => true)
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChangeLanguageNavBar /> renders correctly 1`] = `
-<div
-  className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-/>
+<DocumentFragment>
+  <div
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+</DocumentFragment>
 `;

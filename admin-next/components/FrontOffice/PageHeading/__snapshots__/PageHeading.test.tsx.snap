@@ -1,62 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PageHeading /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL jkrNvd"
+    class="sc-bcXGCL jkrNvd"
   >
     <div
-      className="sc-bcXGCL gjIVnT"
+      class="sc-bcXGCL gjIVnT"
     >
       <div
-        className="sc-bcXGCL dhRFMK"
+        class="sc-bcXGCL dhRFMK"
       >
         <div
-          className="sc-bcXGCL lOxoQ"
+          class="sc-bcXGCL lOxoQ"
         >
           <h1
-            className="sc-bcXGCL eZylMR cap-heading"
+            class="sc-bcXGCL eZylMR cap-heading"
           >
             Liste des projets
           </h1>
           <div
-            className="sc-bcXGCL koJZlX cap-text"
+            class="sc-bcXGCL koJZlX cap-text"
           >
             <div
-              className=" ql-editor wysiwyg-render"
-              dangerouslySetInnerHTML={
-                {
-                  "__html": "Une belle liste",
-                }
-              }
-            />
+              class=" ql-editor wysiwyg-render"
+            >
+              Une belle liste
+            </div>
           </div>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ehiyYw"
+        class="sc-bcXGCL ehiyYw"
       >
         <div
-          className="sc-bcXGCL kPYlWc"
+          class="sc-bcXGCL kPYlWc"
         >
           <div
-            className="sc-bcXGCL fGfXPU cap-text"
+            class="sc-bcXGCL fGfXPU cap-text"
           >
             <div
-              className=" ql-editor wysiwyg-render"
-              dangerouslySetInnerHTML={
-                {
-                  "__html": "Lorem ipsum dolor....",
-                }
-              }
-            />
+              class=" ql-editor wysiwyg-render"
+            >
+              Lorem ipsum dolor....
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

@@ -1,89 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectList /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL bVspmP"
+    class="sc-bcXGCL bVspmP"
   >
     <table
-      className="sc-bcXGCL gjuUAI"
+      class="sc-bcXGCL gjuUAI"
     >
       <thead
-        className="sc-bcXGCL caJRro"
+        class="sc-bcXGCL caJRro"
       >
         <tr
-          className="sc-bcXGCL eUkqFA cap-table__tr"
+          class="sc-bcXGCL eUkqFA cap-table__tr"
         >
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               admin.fields.proposal.project
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               global.owner
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               admin.settings.header.access
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <button
-              aria-expanded={false}
+              aria-controls=":r1:"
+              aria-expanded="false"
               aria-haspopup="menu"
-              className="sc-bcXGCL jzljeA cap-menu__disclosure"
+              class="sc-bcXGCL jzljeA cap-menu__disclosure"
               id=":r0:"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onLoadedMetadataCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseMove={[Function]}
               type="button"
             >
               <p
-                className="sc-bcXGCL gCJpSz cap-text"
+                class="sc-bcXGCL gCJpSz cap-text"
               >
                 global.publication
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
+                class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -93,148 +81,203 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 <path
                   d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
                   stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="0.8"
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":r1:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                aria-labelledby=":r0:"
+                aria-orientation="vertical"
+                class="sc-bcXGCL bvFpIu cap-menu__list"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":r1:"
+                role="menu"
+                style="position: relative; display: none;"
+                tabindex="0"
+              >
+                <div
+                  class="sc-bcXGCL kmxJhr cap-menu__optionGroup"
+                  role="group"
+                >
+                  <span
+                    class="sc-bcXGCL ghvtPo cap-text cap-menu__optionGroup--title"
+                  >
+                    sort-by
+                  </span>
+                  <div
+                    aria-checked="true"
+                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    id=":r10:"
+                    role="menuitemradio"
+                    tabindex="0"
+                  >
+                    <input
+                      aria-hidden="true"
+                      checked=""
+                      class="sc-bcXGCL eocyqZ"
+                      readonly=""
+                      tabindex="-1"
+                      type="radio"
+                    />
+                    <p
+                      class="sc-bcXGCL kxBQAH cap-text"
+                    >
+                      global.filter_last
+                    </p>
+                    <svg
+                      aria-hidden="true"
+                      class="sc-bcXGCL sc-oZHua fIRBzM hQQZty cap-icon"
+                      fill="none"
+                      height="1em"
+                      viewBox="0 0 12 7"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="0.8"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    aria-checked="false"
+                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    id=":r12:"
+                    role="menuitemradio"
+                    tabindex="0"
+                  >
+                    <input
+                      aria-hidden="true"
+                      class="sc-bcXGCL eocyqZ"
+                      readonly=""
+                      tabindex="-1"
+                      type="radio"
+                    />
+                    <p
+                      class="sc-bcXGCL kxBQAH cap-text"
+                    >
+                      global.filter_old
+                    </p>
+                    <svg
+                      aria-hidden="true"
+                      class="sc-bcXGCL sc-oZHua fIRBzM hQQZty cap-icon"
+                      fill="none"
+                      height="1em"
+                      viewBox="0 0 12 7"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11 6 6.163 1.066a.2.2 0 0 0-.074-.049.24.24 0 0 0-.252.05L1 6"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="0.8"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cqfhNk cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0SWRmMw=="
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
-              className="sc-bcXGCL gkMwg"
+              class="sc-bcXGCL gkMwg"
             >
               <a
-                className="sc-bcXGCL gudgoe cap-link"
+                class="sc-bcXGCL gudgoe cap-link"
                 href="https://capco.dev/admin/alpha/project/projectIdf3/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Budget Participatif IdF 3
               </a>
               <div
-                className="sc-bcXGCL bwuDFj"
+                class="sc-bcXGCL bwuDFj"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL eQscED cap-tag"
-              onBlur={[Function]}
-              onFocus={[Function]}
+              class="sc-bcXGCL eQscED cap-tag"
               title="public-everybody"
             >
               public-everybody
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             01/05/2021
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
+              aria-controls=":r8:"
               aria-describedby=":r5:"
-              aria-expanded={false}
+              aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
               id=":r4:"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onLoadedMetadataCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -246,144 +289,235 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":r5:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
-            <span
-              hidden={true}
-              id=":r8:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":r5:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r14:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r14:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  global.plus
+                </div>
+              </div>
+            </div>
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                aria-labelledby=":r4:"
+                aria-orientation="vertical"
+                class="sc-bcXGCL bvFpIu cap-menu__list"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":r8:"
+                role="menu"
+                style="position: relative; display: none;"
+                tabindex="0"
+              >
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r15:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     action_show 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r17:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     project.download.button 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r19:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     duplicate 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1b:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     admin.global.delete 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Rm9vZA=="
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
-              className="sc-bcXGCL gkMwg"
+              class="sc-bcXGCL gkMwg"
             >
               <a
-                className="sc-bcXGCL gudgoe cap-link"
+                class="sc-bcXGCL gudgoe cap-link"
                 href="https://capco.dev/admin/alpha/project/projectFood/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Food project
               </a>
               <div
-                className="sc-bcXGCL bwuDFj"
+                class="sc-bcXGCL bwuDFj"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL eQscED cap-tag"
-              onBlur={[Function]}
-              onFocus={[Function]}
+              class="sc-bcXGCL eQscED cap-tag"
               title="public-everybody"
             >
               public-everybody
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             15/09/2020
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
+              aria-controls=":rf:"
               aria-describedby=":rc:"
-              aria-expanded={false}
+              aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
               id=":rb:"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onLoadedMetadataCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -395,144 +529,235 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":rc:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
-            <span
-              hidden={true}
-              id=":rf:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rc:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r1d:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r1d:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  global.plus
+                </div>
+              </div>
+            </div>
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                aria-labelledby=":rb:"
+                aria-orientation="vertical"
+                class="sc-bcXGCL bvFpIu cap-menu__list"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rf:"
+                role="menu"
+                style="position: relative; display: none;"
+                tabindex="0"
+              >
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1e:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     action_show 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1g:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     project.download.button 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1i:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     duplicate 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1k:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     admin.global.delete 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ="
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
-              className="sc-bcXGCL gkMwg"
+              class="sc-bcXGCL gkMwg"
             >
               <a
-                className="sc-bcXGCL gudgoe cap-link"
+                class="sc-bcXGCL gudgoe cap-link"
                 href="https://capco.dev/admin/alpha/project/projectArchived/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Projet Archivé
               </a>
               <div
-                className="sc-bcXGCL bwuDFj"
+                class="sc-bcXGCL bwuDFj"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL eQscED cap-tag"
-              onBlur={[Function]}
-              onFocus={[Function]}
+              class="sc-bcXGCL eQscED cap-tag"
               title="public-everybody"
             >
               public-everybody
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
+              aria-controls=":rm:"
               aria-describedby=":rj:"
-              aria-expanded={false}
+              aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
               id=":ri:"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onLoadedMetadataCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -544,144 +769,235 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":rj:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
-            <span
-              hidden={true}
-              id=":rm:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rj:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r1m:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r1m:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  global.plus
+                </div>
+              </div>
+            </div>
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                aria-labelledby=":ri:"
+                aria-orientation="vertical"
+                class="sc-bcXGCL bvFpIu cap-menu__list"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rm:"
+                role="menu"
+                style="position: relative; display: none;"
+                tabindex="0"
+              >
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1n:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     action_show 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1p:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     project.download.button 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1r:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     duplicate 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r1t:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     admin.global.delete 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ="
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
-              className="sc-bcXGCL gkMwg"
+              class="sc-bcXGCL gkMwg"
             >
               <a
-                className="sc-bcXGCL gudgoe cap-link"
+                class="sc-bcXGCL gudgoe cap-link"
                 href="https://capco.dev/admin/alpha/project/projectConfinement/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Débat du mois
               </a>
               <div
-                className="sc-bcXGCL bwuDFj"
+                class="sc-bcXGCL bwuDFj"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <a
-              className="sc-bcXGCL gudgoe cap-link"
+              class="sc-bcXGCL gudgoe cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL eQscED cap-tag"
-              onBlur={[Function]}
-              onFocus={[Function]}
+              class="sc-bcXGCL eQscED cap-tag"
               title="public-everybody"
             >
               public-everybody
             </div>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
+              aria-controls=":rt:"
               aria-describedby=":rq:"
-              aria-expanded={false}
+              aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
               id=":rp:"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocus={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDown={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onKeyUp={[Function]}
-              onLoadedMetadataCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -693,55 +1009,157 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":rq:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
-            <span
-              hidden={true}
-              id=":rt:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rq:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r1v:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r1v:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  global.plus
+                </div>
+              </div>
+            </div>
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                aria-labelledby=":rp:"
+                aria-orientation="vertical"
+                class="sc-bcXGCL bvFpIu cap-menu__list"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":rt:"
+                role="menu"
+                style="position: relative; display: none;"
+                tabindex="0"
+              >
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r20:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     action_show 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r22:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     project.download.button 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+                <button
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r24:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     duplicate 
+                  </p>
+                </button>
+                <button
+                  aria-controls="id-g"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  id=":r26:"
+                  role="menuitem"
+                  type="button"
+                >
+                  <p
+                    class="sc-bcXGCL kxBQAH cap-text"
+                  >
+                     admin.global.delete 
+                  </p>
+                </button>
+                <div
+                  aria-label="delete-confirmation"
+                  aria-modal="true"
+                  data-dialog="true"
+                  hidden=""
+                  id="id-g"
+                  role="dialog"
+                  style="display: none;"
+                  tabindex="-1"
+                />
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div
-      className="sc-bcXGCL dJEfDp"
-    >
-      <p
-        className="sc-bcXGCL dvEYUL cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        no-result-found
-      </p>
-      <p
-        className="sc-bcXGCL fVnSJG cap-text"
-      >
-        adjust-search-filters-to-find
-      </p>
-      <button
-        className="sc-bcXGCL sc-gGvGpy hSrtJu iCdXwD cap-button"
-        onClick={[Function]}
-        type="button"
-      >
-        clean-search-and-filters
-      </button>
-    </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

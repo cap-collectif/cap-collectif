@@ -1,171 +1,142 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <form
-    className="sc-bcXGCL hoKWeu"
+    class="sc-bcXGCL hoKWeu"
     id="custom-domain-form"
-    onSubmit={[Function]}
   >
     <h4
-      className="sc-bcXGCL kffmQt cap-heading"
+      class="sc-bcXGCL kffmQt cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bcXGCL iVJsrM"
+      class="sc-bcXGCL iVJsrM"
     >
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL fTyUUX"
+          class="sc-bcXGCL fTyUUX"
         >
           <p
-            className="sc-bcXGCL jpifeG cap-text"
+            class="sc-bcXGCL jpifeG cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bcXGCL kxBQAH cap-text"
+            class="sc-bcXGCL kxBQAH cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL iNCvnU cap-form-control"
+        class="sc-bcXGCL iNCvnU cap-form-control"
       >
         <label
-          className="sc-bcXGCL jfvNeV cap-form-label"
-          htmlFor="subDomain"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL jfvNeV cap-form-label"
+          for="subDomain"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           <span
-            className="sc-bcXGCL dQChsN cap-text"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL dQChsN cap-text"
+            style="margin-left: 0px; margin-top: 0px;"
           >
             sub-domain
           </span>
         </label>
         <input
-          aria-required={true}
-          className="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
-          disabled={true}
+          aria-required="true"
+          class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
+          disabled=""
           id="subDomain"
           name="subDomain"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
           placeholder="admiun.project.create.title.placeholder"
-          readOnly={false}
-          required={true}
+          required=""
           type="text"
           value="capco.domain.com"
         />
       </div>
     </div>
     <div
-      className="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL lcYpuI"
     >
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL fTyUUX"
+          class="sc-bcXGCL fTyUUX"
         >
           <p
-            className="sc-bcXGCL jpifeG cap-text"
+            class="sc-bcXGCL jpifeG cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bcXGCL kxBQAH cap-text"
+            class="sc-bcXGCL kxBQAH cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL iNCvnU cap-form-control"
+          class="sc-bcXGCL iNCvnU cap-form-control"
         >
           <label
-            className="sc-bcXGCL jfvNeV cap-form-label"
-            htmlFor="customDomain"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL jfvNeV cap-form-label"
+            for="customDomain"
+            style="margin-left: 0px; margin-top: 0px;"
           >
             <span
-              className="sc-bcXGCL dQChsN cap-text"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              class="sc-bcXGCL dQChsN cap-text"
+              style="margin-left: 0px; margin-top: 0px;"
             >
               custom-domain-name
             </span>
           </label>
           <span
-            className="sc-bcXGCL ifYgMR cap-form-guideline"
+            class="sc-bcXGCL ifYgMR cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bcXGCL kxBQAH cap-text"
+              class="sc-bcXGCL kxBQAH cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bcXGCL dWgVIC cap-input-group"
+            class="sc-bcXGCL dWgVIC cap-input-group"
           >
             <div
-              className="sc-bcXGCL bIFsXi"
+              class="sc-bcXGCL bIFsXi"
             >
               <div
                 aria-label="Tag custom.domain.com"
-                className="sc-bcXGCL cPzLeP cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL cPzLeP cap-tag"
                 title="custom.domain.com"
               >
                 <span
-                  className="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL lnyRPA cap-tag__label"
                 >
                   custom.domain.com
                 </span>
                 <button
                   aria-label="Remove custom.domain.com"
-                  className="sc-bcXGCL sc-gGvGpy hrfuWy cITHqt cap-button cap-tag__closeButton"
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
-                  tabIndex={0}
+                  class="sc-bcXGCL sc-gGvGpy hrfuWy cITHqt cap-button cap-tag__closeButton"
+                  tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua drcQcK fOGDXF cap-icon"
+                    class="sc-bcXGCL sc-oZHua drcQcK fOGDXF cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -175,9 +146,9 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                     <path
                       d="M1 11 11 1M1 1l10 10"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.8"
                     />
                   </svg>
                 </button>
@@ -189,182 +160,143 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
     </div>
     <div
       aria-label="delete-custom-domain"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
+      aria-modal="true"
+      data-dialog="true"
+      hidden=""
       id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
       role="dialog"
-      style={
-        {
-          "display": "none",
-        }
-      }
-      tabIndex={-1}
+      style="display: none;"
+      tabindex="-1"
     />
-  </form>,
-]
+  </form>
+</DocumentFragment>
 `;
 
 exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <form
-    className="sc-bcXGCL hoKWeu"
+    class="sc-bcXGCL hoKWeu"
     id="custom-domain-form"
-    onSubmit={[Function]}
   >
     <h4
-      className="sc-bcXGCL kffmQt cap-heading"
+      class="sc-bcXGCL kffmQt cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bcXGCL iVJsrM"
+      class="sc-bcXGCL iVJsrM"
     >
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL fTyUUX"
+          class="sc-bcXGCL fTyUUX"
         >
           <p
-            className="sc-bcXGCL jpifeG cap-text"
+            class="sc-bcXGCL jpifeG cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bcXGCL kxBQAH cap-text"
+            class="sc-bcXGCL kxBQAH cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL iNCvnU cap-form-control"
+        class="sc-bcXGCL iNCvnU cap-form-control"
       >
         <label
-          className="sc-bcXGCL jfvNeV cap-form-label"
-          htmlFor="subDomain"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL jfvNeV cap-form-label"
+          for="subDomain"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           <span
-            className="sc-bcXGCL dQChsN cap-text"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL dQChsN cap-text"
+            style="margin-left: 0px; margin-top: 0px;"
           >
             sub-domain
           </span>
         </label>
         <input
-          aria-required={true}
-          className="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
-          disabled={true}
+          aria-required="true"
+          class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
+          disabled=""
           id="subDomain"
           name="subDomain"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
           placeholder="admiun.project.create.title.placeholder"
-          readOnly={false}
-          required={true}
+          required=""
           type="text"
           value="capco.domain.com"
         />
       </div>
     </div>
     <div
-      className="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL lcYpuI"
     >
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL fTyUUX"
+          class="sc-bcXGCL fTyUUX"
         >
           <p
-            className="sc-bcXGCL jpifeG cap-text"
+            class="sc-bcXGCL jpifeG cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bcXGCL kxBQAH cap-text"
+            class="sc-bcXGCL kxBQAH cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL bYxiyO"
+        class="sc-bcXGCL bYxiyO"
       >
         <div
-          className="sc-bcXGCL iNCvnU cap-form-control"
+          class="sc-bcXGCL iNCvnU cap-form-control"
         >
           <label
-            className="sc-bcXGCL jfvNeV cap-form-label"
-            htmlFor="customDomain"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL jfvNeV cap-form-label"
+            for="customDomain"
+            style="margin-left: 0px; margin-top: 0px;"
           >
             <span
-              className="sc-bcXGCL dQChsN cap-text"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              class="sc-bcXGCL dQChsN cap-text"
+              style="margin-left: 0px; margin-top: 0px;"
             >
               custom-domain-name
             </span>
           </label>
           <span
-            className="sc-bcXGCL ifYgMR cap-form-guideline"
+            class="sc-bcXGCL ifYgMR cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bcXGCL kxBQAH cap-text"
+              class="sc-bcXGCL kxBQAH cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bcXGCL dWgVIC cap-input-group"
+            class="sc-bcXGCL dWgVIC cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
-              disabled={false}
+              class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
               id="customDomain"
               name="customDomain"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               placeholder="custom-domain-placeholder"
-              readOnly={false}
-              required={false}
               type="text"
             />
             <button
-              className="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
-              disabled={true}
+              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+              disabled=""
               type="submit"
             >
               global.use
@@ -375,22 +307,14 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
     </div>
     <div
       aria-label="delete-custom-domain"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
+      aria-modal="true"
+      data-dialog="true"
+      hidden=""
       id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
       role="dialog"
-      style={
-        {
-          "display": "none",
-        }
-      }
-      tabIndex={-1}
+      style="display: none;"
+      tabindex="-1"
     />
-  </form>,
-]
+  </form>
+</DocumentFragment>
 `;

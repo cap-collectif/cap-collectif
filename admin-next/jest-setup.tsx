@@ -12,6 +12,12 @@ global.console = {
   debug: jest.fn(),
 }
 
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
 Object.defineProperty(global, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({

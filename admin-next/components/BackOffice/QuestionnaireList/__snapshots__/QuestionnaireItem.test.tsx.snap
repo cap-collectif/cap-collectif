@@ -1,227 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="/admin/questionnaire/questionnaire-1"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="/admin/questionnaire/questionnaire-1"
-    >
-      Combien font 0 + 0 ?
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    Combien font 0 + 0 ?
+  </a>
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="<mock-value-for-field-"adminAlphaUrl">"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="<mock-value-for-field-"adminAlphaUrl">"
-    >
-      Le projet de la vie
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    Valérie Masson Delmotte
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    01/03/2050
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    01/03/2050
-  </td>,
-  <td
-    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  />,
-]
+    Le projet de la vie
+  </a>
+  Valérie Masson Delmotte01/03/205001/03/2050
+</DocumentFragment>
 `;
 
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="/admin/questionnaire/questionnaire-1"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="/admin/questionnaire/questionnaire-1"
+    Combien font 0 + 0 ?
+  </a>
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="<mock-value-for-field-"adminAlphaUrl">"
+  >
+    Le projet de la vie
+  </a>
+  &lt;mock-value-for-field-"username"&gt;&lt;mock-value-for-field-"username"&gt;01/03/205001/03/2050
+  <button
+    aria-controls="id-g"
+    aria-describedby=":r0:"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    aria-label="global.delete"
+    class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+      fill="none"
+      height="1em"
+      viewBox="0 0 12 12"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      Combien font 0 + 0 ?
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+      <path
+        d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
+        fill="currentColor"
+      />
+    </svg>
+  </button>
+  <div
+    style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="<mock-value-for-field-"adminAlphaUrl">"
-    >
-      Le projet de la vie
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    01/03/2050
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    01/03/2050
-  </td>,
-  <td
-    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <button
-      aria-controls="id-g"
-      aria-describedby=":r0:"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      aria-label="global.delete"
-      className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-      onBlur={[Function]}
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onFocusCapture={[Function]}
-      onKeyDown={[Function]}
-      onKeyDownCapture={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      onMouseEnter={[Function]}
-      onMouseMove={[Function]}
-      type="button"
-    >
-      <svg
-        aria-hidden="true"
-        className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
-        fill="none"
-        height="1em"
-        viewBox="0 0 12 12"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
-          fill="currentColor"
-        />
-      </svg>
-    </button>
-    <span
-      hidden={true}
-      id=":r0:"
-      style={
-        {
-          "position": "fixed",
-        }
-      }
-    />
     <div
-      aria-label="delete-confirmation"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        {
-          "display": "none",
-        }
-      }
-      tabIndex={-1}
-    />
-  </td>,
-]
+      class="cap-tooltip"
+      data-dialog=""
+      data-placing="true"
+      hidden=""
+      id=":r0:"
+      role="tooltip"
+      style="position: relative; z-index: 1800; display: none;"
+      tabindex="-1"
+    >
+      <div
+        aria-hidden="true"
+        style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+      >
+        <svg
+          display="block"
+          viewBox="0 0 30 30"
+        >
+          <g
+            transform="rotate(180 15 15)"
+          >
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              fill="none"
+              mask="url(#:r3:)"
+            />
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              stroke="none"
+            />
+            <mask
+              id=":r3:"
+              maskUnits="userSpaceOnUse"
+            >
+              <rect
+                fill="white"
+                height="30"
+                stroke="black"
+                width="60"
+                x="-15"
+                y="0"
+              />
+            </mask>
+          </g>
+        </svg>
+      </div>
+      <div
+        class="sc-bcXGCL bdghCN"
+      >
+        global.delete
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="delete-confirmation"
+    aria-modal="true"
+    data-dialog="true"
+    hidden=""
+    id="id-g"
+    role="dialog"
+    style="display: none;"
+    tabindex="-1"
+  />
+</DocumentFragment>
 `;

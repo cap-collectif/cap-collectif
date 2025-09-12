@@ -1,92 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Projects /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL jkrNvd"
+    class="sc-bcXGCL jkrNvd"
   >
     <div
-      className="sc-bcXGCL gjIVnT"
+      class="sc-bcXGCL gjIVnT"
     >
       <div
-        className="sc-bcXGCL dhRFMK"
+        class="sc-bcXGCL dhRFMK"
       >
         <div
-          className="sc-bcXGCL lOxoQ"
+          class="sc-bcXGCL lOxoQ"
         >
           <h1
-            className="sc-bcXGCL eZylMR cap-heading"
+            class="sc-bcXGCL eZylMR cap-heading"
           >
             Liste des projets
           </h1>
           <div
-            className="sc-bcXGCL koJZlX cap-text"
+            class="sc-bcXGCL koJZlX cap-text"
           >
             <div
-              className=" ql-editor wysiwyg-render"
-              dangerouslySetInnerHTML={
-                {
-                  "__html": "Lorem ipsum",
-                }
-              }
-            />
+              class=" ql-editor wysiwyg-render"
+            >
+              Lorem ipsum
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <section
-    className="sc-bcXGCL keKWCf project-list-section"
+    class="sc-bcXGCL keKWCf project-list-section"
   >
     <div
-      className="sc-bcXGCL eiRsso"
+      class="sc-bcXGCL eiRsso"
     >
       <div
-        className="sc-bcXGCL jA-DSys"
+        class="sc-bcXGCL jA-DSys"
       >
         <div
-          className="sc-bcXGCL gWXBpS"
+          class="sc-bcXGCL gWXBpS"
         >
           <div
-            className="sc-bcXGCL fhHjWe"
+            class="sc-bcXGCL fhHjWe"
           >
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
           </div>
@@ -94,27 +85,27 @@ exports[`<Projects /> renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-bcXGCL dahHqI"
+      class="sc-bcXGCL dahHqI"
     >
       <div
-        className="sc-bcXGCL iJNgaP project-list-section-projects"
+        class="sc-bcXGCL iJNgaP project-list-section-projects"
       >
         <div
-          className="sc-bcXGCL cpoarP"
+          class="sc-bcXGCL cpoarP"
         >
           <div
-            className="sc-bcXGCL iOvkUf cap-card cap-project-card"
+            class="sc-bcXGCL iOvkUf cap-card cap-project-card"
             id="cap-project-card-project-id-1"
           >
             <div
-              className="sc-bcXGCL lkRzAG cap-card-cover"
+              class="sc-bcXGCL lkRzAG cap-card-cover"
             >
               <img
                 alt=""
-                className="sc-bcXGCL khbwMK"
+                class="sc-bcXGCL khbwMK"
                 loading="lazy"
                 sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
-                srcSet="
+                srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
@@ -123,41 +114,31 @@ exports[`<Projects /> renders correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
-                style={
-                  {
-                    "aspectRatio": "3 / 2",
-                    "filter": "grayscale(1)",
-                    "objectFit": "cover",
-                    "opacity": "50%",
-                  }
-                }
+                style="object-fit: cover; filter: grayscale(1);"
               />
               <div
                 aria-label="Tag  global-archived"
-                className="sc-bcXGCL hkjXaC cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL hkjXaC cap-tag"
                 title=" global-archived"
               >
                 <span
-                  className="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL lnyRPA cap-tag__label"
                 >
-                   
-                  global-archived
+                   global-archived
                 </span>
               </div>
             </div>
             <div
-              className="sc-bcXGCL kkRGEJ cap-card-content"
+              class="sc-bcXGCL kkRGEJ cap-card-content"
             >
               <div
-                className="sc-bcXGCL bIZLTw"
+                class="sc-bcXGCL bIZLTw"
               >
                 <h2
-                  className="sc-bcXGCL bpFsRd cap-card-primaryInfo"
+                  class="sc-bcXGCL bpFsRd cap-card-primaryInfo"
                 >
                   <a
-                    className="sc-bcXGCL kZMHwF cap-card-link"
+                    class="sc-bcXGCL kZMHwF cap-card-link"
                     href="<mock-value-for-field-"externalLink">"
                   >
                     Nice project
@@ -165,18 +146,16 @@ exports[`<Projects /> renders correctly 1`] = `
                 </h2>
               </div>
               <div
-                className="sc-bcXGCL dNOxjl"
+                class="sc-bcXGCL dNOxjl"
               >
                 <div
                   aria-label="Tag 0 project.votes.widget.votes"
-                  className="sc-bcXGCL gTREYS cap-tag"
-                  onBlur={[Function]}
-                  onFocus={[Function]}
+                  class="sc-bcXGCL gTREYS cap-tag"
                   title="0 project.votes.widget.votes"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 32 28"
@@ -192,7 +171,7 @@ exports[`<Projects /> renders correctly 1`] = `
                       />
                     </mask>
                     <path
-                      className="thumb-up-o_svg__fillMeUp"
+                      class="thumb-up-o_svg__fillMeUp"
                       d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
                       fill="transparent"
                     />
@@ -202,35 +181,32 @@ exports[`<Projects /> renders correctly 1`] = `
                       mask="url(#thumb-up-o_svg__a)"
                     />
                     <path
-                      className="thumb-up-o_svg__fillMeUp"
+                      class="thumb-up-o_svg__fillMeUp"
                       d="M5.834 12.105a.45.45 0 0 1 .132.316v14.28a.45.45 0 0 1-.449.45H1.298a.45.45 0 0 1-.448-.45v-14.28a.45.45 0 0 1 .448-.448h4.22c.118 0 .232.047.316.132Z"
                       fill="transparent"
                       stroke="currentColor"
-                      strokeWidth={1.7}
+                      stroke-width="1.7"
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL iWtiap"
+                    class="sc-bcXGCL iWtiap"
                   >
-                     
-                    project.votes.widget.votes
+                     project.votes.widget.votes
                   </span>
                 </div>
                 <div
                   aria-label="Tag 0 global.contribution"
-                  className="sc-bcXGCL gTREYS cap-tag"
-                  onBlur={[Function]}
-                  onFocus={[Function]}
+                  class="sc-bcXGCL gTREYS cap-tag"
                   title="0 global.contribution"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 14 13"
@@ -240,32 +216,29 @@ exports[`<Projects /> renders correctly 1`] = `
                     <path
                       d="M7 .511c-3.314 0-6 2.22-6 4.957a4.56 4.56 0 0 0 1.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 0 0 7 10.424c3.314 0 6-2.219 6-4.956S10.314.51 7 .51"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL iWtiap"
+                    class="sc-bcXGCL iWtiap"
                   >
-                     
-                    global.contribution
+                     global.contribution
                   </span>
                 </div>
                 <div
                   aria-label="Tag 0 capco.section.metrics.participants"
-                  className="sc-bcXGCL gTREYS cap-tag"
-                  onBlur={[Function]}
-                  onFocus={[Function]}
+                  class="sc-bcXGCL gTREYS cap-tag"
                   title="0 capco.section.metrics.participants"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 13 14"
@@ -273,29 +246,28 @@ exports[`<Projects /> renders correctly 1`] = `
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      clipRule="evenodd"
+                      clip-rule="evenodd"
                       d="M3.75 3.261a2.75 2.75 0 1 0 5.5 0 2.75 2.75 0 0 0-5.5 0"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                     <path
                       d="M1 12.611a5.5 5.5 0 0 1 11 0"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                   </svg>
                   <span
-                    className="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL lnyRPA cap-tag__label"
                   >
                     0
                   </span>
                   <span
-                    className="sc-bcXGCL iWtiap"
+                    class="sc-bcXGCL iWtiap"
                   >
-                     
-                    capco.section.metrics.participants
+                     capco.section.metrics.participants
                   </span>
                 </div>
               </div>
@@ -304,6 +276,6 @@ exports[`<Projects /> renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </section>,
-]
+  </section>
+</DocumentFragment>
 `;

@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import MediatorList from './MediatorList'
@@ -93,7 +92,7 @@ describe('<MediatorList />', () => {
   })
 
   it('should render correctly and display mediators', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

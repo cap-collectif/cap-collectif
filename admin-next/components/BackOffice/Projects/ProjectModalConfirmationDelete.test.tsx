@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -10,7 +9,6 @@ import { Menu } from '@cap-collectif/ui'
 
 describe('<ProjectModalConfirmationDelete />', () => {
   let environment: any
-  let testComponentTree: any
   let TestModalConfirmationDelete: any
 
   const query = graphql`
@@ -65,10 +63,10 @@ describe('<ProjectModalConfirmationDelete />', () => {
 
   describe('<TestModalConfirmationDelete />', () => {
     it('should render correctly', () => {
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment } = render(
         <TestModalConfirmationDelete connectionName="client:VXNlcjp1c2VyMQ==:__ProjectList_projects_connection" />,
       )
-      expect(testComponentTree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

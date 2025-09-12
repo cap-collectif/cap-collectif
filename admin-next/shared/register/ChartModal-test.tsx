@@ -1,10 +1,11 @@
 /* eslint-env jest */
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { ChartModalTestQuery } from '@relay/ChartModalTestQuery.graphql'
 import { ChartModalQuery } from './ChartModal'
+import { render } from '@testing-library/react'
 
 jest.mock('@liinkiing/react-hooks', () => ({
   useDisclosure: () => ({ isOpen: true, onOpen: () => {}, onClose: () => {} }),
@@ -18,7 +19,6 @@ jest.mock('@shared/hooks/useIsMobile', () => ({
 describe('<ChartModal />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const defaultMockResolvers = {
     Query: () => ({
@@ -53,7 +53,7 @@ describe('<ChartModal />', () => {
     )
   })
   it('renders correctly', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

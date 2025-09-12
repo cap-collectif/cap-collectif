@@ -1,13 +1,10 @@
 /* eslint-env jest */
-import * as React from 'react'
+import { render } from '@testing-library/react'
 import { CapUIProvider } from '@cap-collectif/ui'
-import ReactTestRenderer from 'react-test-renderer'
 import BreadCrumbItems from './BreadCrumbItems'
 import { BreadCrumbItemType } from './BreadCrumbItem'
 
 describe('<BreadCrumbItems />', () => {
-  let testComponentTree: any
-
   const singleItem = [
     {
       title: 'Project list',
@@ -27,20 +24,20 @@ describe('<BreadCrumbItems />', () => {
   ]
 
   it('should render one single item', () => {
-    testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <CapUIProvider>
         <BreadCrumbItems breadCrumbItems={singleItem} />
       </CapUIProvider>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('should render multiple items with slash in between them', () => {
-    testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <CapUIProvider>
         <BreadCrumbItems breadCrumbItems={multipleItems} />
       </CapUIProvider>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

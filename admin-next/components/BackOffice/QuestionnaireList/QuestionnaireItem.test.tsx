@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -9,7 +8,6 @@ import QuestionnaireItem from './QuestionnaireItem'
 
 describe('<QuestionnaireItem />', () => {
   let environment: any
-  let testComponentTree
   let TestQuestionnaireItem: any
 
   const query = graphql`
@@ -101,20 +99,20 @@ describe('<QuestionnaireItem />', () => {
       environment.mock.queueOperationResolver(operation =>
         MockPayloadGenerator.generate(operation, defaultMockResolvers),
       )
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment } = render(
         <TestQuestionnaireItem connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
       )
-      expect(testComponentTree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('should hide delete button when viewer belongs to an organization and is not admin organization', () => {
       environment.mock.queueOperationResolver(operation =>
         MockPayloadGenerator.generate(operation, orgaMemberMockResolvers),
       )
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment } = render(
         <TestQuestionnaireItem connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
       )
-      expect(testComponentTree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

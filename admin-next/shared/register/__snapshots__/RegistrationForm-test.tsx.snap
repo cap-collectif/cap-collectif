@@ -1,117 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":r0:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":r0:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.email
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="email"
-      autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="true"
+      autocomplete="email"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id=":r0:"
       name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="email.placeholder"
-      readOnly={false}
-      required={true}
+      required=""
       type="email"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL klvDp"
+    class="sc-bcXGCL klvDp"
   >
     <div
-      className="sc-bcXGCL hQCGLB cap-form-control"
+      class="sc-bcXGCL hQCGLB cap-form-control"
     >
       <label
-        className="sc-bcXGCL fTPHCc cap-form-label"
-        htmlFor=":r1:"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL fTPHCc cap-form-label"
+        for=":r1:"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <span
-          className="sc-bcXGCL dQChsN cap-text"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL dQChsN cap-text"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           registration.password
         </span>
       </label>
       <div
-        className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
       >
         <input
-          aria-required={true}
-          autoComplete="off"
-          autoFocus={true}
-          className="sc-bcXGCL dANhtW cap-input"
-          disabled={false}
+          aria-required="true"
+          autocomplete="off"
+          class="sc-bcXGCL dANhtW cap-input"
           id=":r1:"
           name="plainPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
+          required=""
           type="password"
         />
         <button
           aria-describedby=":r2:"
-          className="sc-bcXGCL fROdoz"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onFocusCapture={[Function]}
-          onKeyDownCapture={[Function]}
-          onKeyPressCapture={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseMove={[Function]}
+          class="sc-bcXGCL fROdoz"
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -121,298 +78,253 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
             <path
               d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
             <path
               d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
           </svg>
         </button>
-        <span
-          hidden={true}
-          id=":r2:"
-          style={
-            {
-              "position": "fixed",
-            }
-          }
-        />
+        <div
+          style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+        >
+          <div
+            class="cap-tooltip"
+            data-dialog=""
+            data-placing="true"
+            hidden=""
+            id=":r2:"
+            role="tooltip"
+            style="position: relative; z-index: 1800; display: none;"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+            >
+              <svg
+                display="block"
+                viewBox="0 0 30 30"
+              >
+                <g
+                  transform="rotate(180 15 15)"
+                >
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    fill="none"
+                    mask="url(#:r8:)"
+                  />
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    stroke="none"
+                  />
+                  <mask
+                    id=":r8:"
+                    maskUnits="userSpaceOnUse"
+                  >
+                    <rect
+                      fill="white"
+                      height="30"
+                      stroke="black"
+                      width="60"
+                      x="-15"
+                      y="0"
+                    />
+                  </mask>
+                </g>
+              </svg>
+            </div>
+            <div
+              class="sc-bcXGCL bdghCN"
+            >
+              global.password.show
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="username"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="username"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.fullname
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="true"
+      autocomplete="username"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="username"
-      minLength={2}
+      minlength="2"
       name="username"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="global.placeholder.name"
-      readOnly={false}
-      required={true}
+      required=""
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="responses.0.value"
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="responses.0.value"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         &lt;mock-value-for-field-"title"&gt;
       </span>
       <p
-        className="sc-bcXGCL gPctOm cap-text"
+        class="sc-bcXGCL gPctOm cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL ifYgMR cap-form-guideline"
+      class="sc-bcXGCL ifYgMR cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "<mock-value-for-field-"description">",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      <mock-value-for-field-"description" />
+    </div>
     <input
-      aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="false"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="responses.0.value"
       name="responses.0.value"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      readOnly={false}
-      required={false}
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL hICbbA"
-      htmlFor="charte"
+      class="sc-bcXGCL hICbbA"
+      for="charte"
     >
       <div
-        className="sc-bcXGCL dawbeU cap-checkbox"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dawbeU cap-checkbox"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <input
-          aria-required={true}
-          className="sc-bcXGCL leuqnG cap-checkbox__input"
-          disabled={false}
+          aria-required="true"
+          class="sc-bcXGCL leuqnG cap-checkbox__input"
           id="charte"
           name="charte"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          required=""
+          style="margin-left: 0px; margin-top: 0px;"
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL cCxzTy cap-checkbox__box"
+          class="sc-bcXGCL cCxzTy cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL grQllb"
+        class="sc-bcXGCL grQllb"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
+          class="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
         >
           registration.charte
         </span>
       </span>
     </label>
-  </div>,
+  </div>
   <div
     id="recaptcha"
-    style={
-      {
-        "transform": "scale(0.85)",
-        "transformOrigin": "0 0",
-      }
-    }
-  />,
-]
+    style="transform: scale(0.85); transform-origin: 0 0;"
+  />
+</DocumentFragment>
 `;
 
 exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":r8:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":r9:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.email
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="email"
-      autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
-      id=":r8:"
+      aria-required="true"
+      autocomplete="email"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      id=":r9:"
       name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="email.placeholder"
-      readOnly={false}
-      required={true}
+      required=""
       type="email"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL klvDp"
+    class="sc-bcXGCL klvDp"
   >
     <div
-      className="sc-bcXGCL hQCGLB cap-form-control"
+      class="sc-bcXGCL hQCGLB cap-form-control"
     >
       <label
-        className="sc-bcXGCL fTPHCc cap-form-label"
-        htmlFor=":r9:"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL fTPHCc cap-form-label"
+        for=":ra:"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <span
-          className="sc-bcXGCL dQChsN cap-text"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL dQChsN cap-text"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           registration.password
         </span>
       </label>
       <div
-        className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
       >
         <input
-          aria-required={true}
-          autoComplete="off"
-          autoFocus={true}
-          className="sc-bcXGCL dANhtW cap-input"
-          disabled={false}
-          id=":r9:"
+          aria-required="true"
+          autocomplete="off"
+          class="sc-bcXGCL dANhtW cap-input"
+          id=":ra:"
           name="plainPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
+          required=""
           type="password"
         />
         <button
-          aria-describedby=":ra:"
-          className="sc-bcXGCL fROdoz"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onFocusCapture={[Function]}
-          onKeyDownCapture={[Function]}
-          onKeyPressCapture={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseMove={[Function]}
+          aria-describedby=":rb:"
+          class="sc-bcXGCL fROdoz"
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -422,174 +334,174 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
             <path
               d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
             <path
               d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
           </svg>
         </button>
-        <span
-          hidden={true}
-          id=":ra:"
-          style={
-            {
-              "position": "fixed",
-            }
-          }
-        />
+        <div
+          style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+        >
+          <div
+            class="cap-tooltip"
+            data-dialog=""
+            data-placing="true"
+            hidden=""
+            id=":rb:"
+            role="tooltip"
+            style="position: relative; z-index: 1800; display: none;"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+            >
+              <svg
+                display="block"
+                viewBox="0 0 30 30"
+              >
+                <g
+                  transform="rotate(180 15 15)"
+                >
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    fill="none"
+                    mask="url(#:ri:)"
+                  />
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    stroke="none"
+                  />
+                  <mask
+                    id=":ri:"
+                    maskUnits="userSpaceOnUse"
+                  >
+                    <rect
+                      fill="white"
+                      height="30"
+                      stroke="black"
+                      width="60"
+                      x="-15"
+                      y="0"
+                    />
+                  </mask>
+                </g>
+              </svg>
+            </div>
+            <div
+              class="sc-bcXGCL bdghCN"
+            >
+              global.password.show
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="username"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="username"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.fullname
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="true"
+      autocomplete="username"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="username"
-      minLength={2}
+      minlength="2"
       name="username"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="global.placeholder.name"
-      readOnly={false}
-      required={true}
+      required=""
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":re:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":rf:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         registration.type
       </span>
       <p
-        className="sc-bcXGCL gPctOm cap-text"
+        class="sc-bcXGCL gPctOm cap-text"
       >
         global.optional
       </p>
     </label>
     <div
-      className="sc-bcXGCL gGWHIo"
+      class="sc-bcXGCL gGWHIo"
     >
       <div
-        className="cap-select css-b62m3t-container"
-        id=":re:"
-        onKeyDown={[Function]}
+        class="cap-select css-b62m3t-container"
+        id=":rf:"
       >
         <span
-          className="css-1f43avz-a11yText-A11yText"
+          class="css-1f43avz-a11yText-A11yText"
           id="react-select-2-live-region"
         />
         <span
           aria-atomic="false"
           aria-live="polite"
           aria-relevant="additions text"
-          className="css-1f43avz-a11yText-A11yText"
+          class="css-1f43avz-a11yText-A11yText"
           role="log"
         />
         <div
-          className="cap-select__control css-1qmtci6-control"
-          onMouseDown={[Function]}
-          onTouchEnd={[Function]}
+          class="cap-select__control css-1qmtci6-control"
         >
           <div
-            className="cap-select__value-container css-206zzd"
+            class="cap-select__value-container css-206zzd"
           >
             <div
-              className="cap-select__placeholder css-rf6qli-placeholder"
+              class="cap-select__placeholder css-rf6qli-placeholder"
               id="react-select-2-placeholder"
             >
               registration.type
             </div>
             <div
-              className="cap-select__input-container css-1uvadrb"
+              class="cap-select__input-container css-1uvadrb"
               data-value=""
             >
               <input
                 aria-activedescendant=""
                 aria-autocomplete="list"
                 aria-describedby="react-select-2-placeholder"
-                aria-expanded={false}
-                aria-haspopup={true}
-                autoCapitalize="none"
-                autoComplete="off"
-                autoCorrect="off"
-                className="cap-select__input"
-                disabled={false}
+                aria-expanded="false"
+                aria-haspopup="true"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                class="cap-select__input"
                 id="userType"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
                 role="combobox"
-                spellCheck="false"
-                style={
-                  {
-                    "background": 0,
-                    "border": 0,
-                    "color": "inherit",
-                    "font": "inherit",
-                    "gridArea": "1 / 2",
-                    "label": "input",
-                    "margin": 0,
-                    "minWidth": "2px",
-                    "opacity": 1,
-                    "outline": 0,
-                    "padding": 0,
-                    "width": "100%",
-                  }
-                }
-                tabIndex={0}
+                spellcheck="false"
+                style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                tabindex="0"
                 type="text"
                 value=""
               />
@@ -597,14 +509,10 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           </div>
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-oZHua dKAEWa cCzERh cap-icon"
+            class="sc-bcXGCL sc-oZHua dKAEWa cCzERh cap-icon"
             fill="none"
             height="1em"
-            style={
-              {
-                "cursor": "pointer",
-              }
-            }
+            style="cursor: pointer;"
             viewBox="0 0 12 7"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
@@ -622,223 +530,151 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         />
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="responses.0.value"
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="responses.0.value"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         &lt;mock-value-for-field-"title"&gt;
       </span>
       <p
-        className="sc-bcXGCL gPctOm cap-text"
+        class="sc-bcXGCL gPctOm cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL ifYgMR cap-form-guideline"
+      class="sc-bcXGCL ifYgMR cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "<mock-value-for-field-"description">",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      <mock-value-for-field-"description" />
+    </div>
     <input
-      aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="false"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="responses.0.value"
       name="responses.0.value"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      readOnly={false}
-      required={false}
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL hICbbA"
-      htmlFor="charte"
+      class="sc-bcXGCL hICbbA"
+      for="charte"
     >
       <div
-        className="sc-bcXGCL dawbeU cap-checkbox"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dawbeU cap-checkbox"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <input
-          aria-required={true}
-          className="sc-bcXGCL leuqnG cap-checkbox__input"
-          disabled={false}
+          aria-required="true"
+          class="sc-bcXGCL leuqnG cap-checkbox__input"
           id="charte"
           name="charte"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          required=""
+          style="margin-left: 0px; margin-top: 0px;"
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL cCxzTy cap-checkbox__box"
+          class="sc-bcXGCL cCxzTy cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL grQllb"
+        class="sc-bcXGCL grQllb"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
+          class="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
         >
           registration.charte
         </span>
       </span>
     </label>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":rh:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":rj:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.email
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="email"
-      autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
-      id=":rh:"
+      aria-required="true"
+      autocomplete="email"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      id=":rj:"
       name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="email.placeholder"
-      readOnly={false}
-      required={true}
+      required=""
       type="email"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL klvDp"
+    class="sc-bcXGCL klvDp"
   >
     <div
-      className="sc-bcXGCL hQCGLB cap-form-control"
+      class="sc-bcXGCL hQCGLB cap-form-control"
     >
       <label
-        className="sc-bcXGCL fTPHCc cap-form-label"
-        htmlFor=":ri:"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL fTPHCc cap-form-label"
+        for=":rk:"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <span
-          className="sc-bcXGCL dQChsN cap-text"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL dQChsN cap-text"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           registration.password
         </span>
       </label>
       <div
-        className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
       >
         <input
-          aria-required={true}
-          autoComplete="off"
-          autoFocus={true}
-          className="sc-bcXGCL dANhtW cap-input"
-          disabled={false}
-          id=":ri:"
+          aria-required="true"
+          autocomplete="off"
+          class="sc-bcXGCL dANhtW cap-input"
+          id=":rk:"
           name="plainPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
+          required=""
           type="password"
         />
         <button
-          aria-describedby=":rj:"
-          className="sc-bcXGCL fROdoz"
-          disabled={false}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onFocusCapture={[Function]}
-          onKeyDownCapture={[Function]}
-          onKeyPressCapture={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          onMouseEnter={[Function]}
-          onMouseMove={[Function]}
+          aria-describedby=":rl:"
+          class="sc-bcXGCL fROdoz"
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -848,217 +684,204 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
             <path
               d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
             <path
               d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
               stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0.8"
             />
           </svg>
         </button>
-        <span
-          hidden={true}
-          id=":rj:"
-          style={
-            {
-              "position": "fixed",
-            }
-          }
-        />
+        <div
+          style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+        >
+          <div
+            class="cap-tooltip"
+            data-dialog=""
+            data-placing="true"
+            hidden=""
+            id=":rl:"
+            role="tooltip"
+            style="position: relative; z-index: 1800; display: none;"
+            tabindex="-1"
+          >
+            <div
+              aria-hidden="true"
+              style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+            >
+              <svg
+                display="block"
+                viewBox="0 0 30 30"
+              >
+                <g
+                  transform="rotate(180 15 15)"
+                >
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    fill="none"
+                    mask="url(#:rs:)"
+                  />
+                  <path
+                    d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                    stroke="none"
+                  />
+                  <mask
+                    id=":rs:"
+                    maskUnits="userSpaceOnUse"
+                  >
+                    <rect
+                      fill="white"
+                      height="30"
+                      stroke="black"
+                      width="60"
+                      x="-15"
+                      y="0"
+                    />
+                  </mask>
+                </g>
+              </svg>
+            </div>
+            <div
+              class="sc-bcXGCL bdghCN"
+            >
+              global.password.show
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="username"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="username"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.fullname
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="true"
+      autocomplete="username"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="username"
-      minLength={2}
+      minlength="2"
       name="username"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="global.placeholder.name"
-      readOnly={false}
-      required={true}
+      required=""
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":rn:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":rp:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         user.register.zipcode
       </span>
       <p
-        className="sc-bcXGCL gPctOm cap-text"
+        class="sc-bcXGCL gPctOm cap-text"
       >
         global.optional
       </p>
     </label>
     <input
-      autoComplete="postal-code"
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
-      id=":rn:"
+      autocomplete="postal-code"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      id=":rp:"
       name="zipcode"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      readOnly={false}
-      required={false}
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor="responses.0.value"
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for="responses.0.value"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         &lt;mock-value-for-field-"title"&gt;
       </span>
       <p
-        className="sc-bcXGCL gPctOm cap-text"
+        class="sc-bcXGCL gPctOm cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL ifYgMR cap-form-guideline"
+      class="sc-bcXGCL ifYgMR cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "<mock-value-for-field-"description">",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      <mock-value-for-field-"description" />
+    </div>
     <input
-      aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="false"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id="responses.0.value"
       name="responses.0.value"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      readOnly={false}
-      required={false}
       type="text"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL hICbbA"
-      htmlFor="charte"
+      class="sc-bcXGCL hICbbA"
+      for="charte"
     >
       <div
-        className="sc-bcXGCL dawbeU cap-checkbox"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dawbeU cap-checkbox"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         <input
-          aria-required={true}
-          className="sc-bcXGCL leuqnG cap-checkbox__input"
-          disabled={false}
+          aria-required="true"
+          class="sc-bcXGCL leuqnG cap-checkbox__input"
           id="charte"
           name="charte"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          readOnly={false}
-          required={true}
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          required=""
+          style="margin-left: 0px; margin-top: 0px;"
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL cCxzTy cap-checkbox__box"
+          class="sc-bcXGCL cCxzTy cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL grQllb"
+        class="sc-bcXGCL grQllb"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
+          class="sc-bcXGCL sc-cc425a65-0 keKWCf hMXkYl"
         >
           registration.charte
         </span>
       </span>
     </label>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

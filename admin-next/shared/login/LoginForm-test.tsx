@@ -1,20 +1,18 @@
 /* eslint-env jest */
 import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { LoginForm } from './LoginForm'
 import MockProviders, { FormWrapper } from 'tests/testUtils'
 
 describe('<LoginForm />', () => {
-  let testComponentTree: any
-
   it('renders a form with inputs', () => {
-    testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <FormWrapper>
           <LoginForm />
         </FormWrapper>
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

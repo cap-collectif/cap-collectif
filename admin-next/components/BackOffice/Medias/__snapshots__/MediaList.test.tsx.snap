@@ -1,55 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MediaList /> should render correctly in grid view 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div
-      className="sc-bcXGCL gZCPCS"
+      class="sc-bcXGCL gZCPCS"
     >
       <div
-        className="sc-bcXGCL iRxvDk"
+        class="sc-bcXGCL iRxvDk"
       >
         <img
-          className="sc-bcXGCL gzUCuU"
+          class="sc-bcXGCL gzUCuU"
           src="/media/1.png"
         />
         <div
-          className="sc-bcXGCL gmffPW"
+          class="sc-bcXGCL gmffPW"
         >
           <div
-            className="sc-bcXGCL jzSaXv"
+            class="sc-bcXGCL jzSaXv"
           >
             <div
-              className="sc-bcXGCL jWSPbb cap-buttonGroup"
-              onMouseLeave={[Function]}
+              class="sc-bcXGCL jWSPbb cap-buttonGroup"
             >
               <button
-                aria-describedby=":rc:"
+                aria-describedby=":rg:"
                 aria-label="global.more"
-                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                style="margin-left: 0px; margin-top: 0px;"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 6"
@@ -57,40 +41,77 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    clipRule="evenodd"
+                    clip-rule="evenodd"
                     d="M.19 2.505C1.355 1.222 3.208-.03 5 0 6.79-.03 8.643 1.222 9.81 2.505a.74.74 0 0 1 0 .989C8.67 4.749 6.822 6.03 5 5.999 3.176 6.03 1.33 4.75.19 3.494a.74.74 0 0 1 0-.99m6.195 1.421a1.667 1.667 0 1 0-2.771-1.853 1.667 1.667 0 0 0 2.771 1.853"
                     fill="currentColor"
-                    fillRule="evenodd"
+                    fill-rule="evenodd"
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":rc:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rg:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r12:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r12:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    global.more
+                  </div>
+                </div>
+              </div>
               <button
-                aria-describedby=":rf:"
+                aria-describedby=":rj:"
                 aria-label="copy-link"
-                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
+                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -100,39 +121,76 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   <path
                     d="m3.666 8.333 4.665-4.665M4.103 6.01a1.99 1.99 0 0 0-1.518.578l-1 1a2 2 0 0 0 2.828 2.827l1-1a1.99 1.99 0 0 0 .577-1.518M7.892 5.99a1.99 1.99 0 0 0 1.518-.577l1-1a2 2 0 0 0-2.827-2.827l-1 1a1.99 1.99 0 0 0-.575 1.517"
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="0.8"
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":rf:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rj:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r13:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r13:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    copy-link
+                  </div>
+                </div>
+              </div>
               <button
-                aria-describedby=":ri:"
+                aria-describedby=":rm:"
                 aria-label="global.delete"
-                className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
+                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -145,52 +203,88 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":ri:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rm:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r14:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r14:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    global.delete
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div
-            className="sc-bcXGCL hMrLTp"
+            class="sc-bcXGCL hMrLTp"
           >
             <div
-              className="sc-bcXGCL fdboPV"
+              class="sc-bcXGCL fdboPV"
             >
               <div
                 aria-label="Tag 200x200px"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL bcUGUs cap-tag"
+                style="margin-left: 0px; margin-top: 0px;"
                 title="200x200px"
               >
                 200x200px
               </div>
               <div
                 aria-label="Tag 39ko"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL bcUGUs cap-tag"
                 title="39ko"
               >
                 39ko
               </div>
               <div
                 aria-label="Tag png"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL bcUGUs cap-tag"
                 title="png"
               >
                 png
@@ -200,46 +294,30 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL iRxvDk"
+        class="sc-bcXGCL iRxvDk"
       >
         <img
-          className="sc-bcXGCL gzUCuU"
+          class="sc-bcXGCL gzUCuU"
           src="/media/2.png"
         />
         <div
-          className="sc-bcXGCL gmffPW"
+          class="sc-bcXGCL gmffPW"
         >
           <div
-            className="sc-bcXGCL jzSaXv"
+            class="sc-bcXGCL jzSaXv"
           >
             <div
-              className="sc-bcXGCL jWSPbb cap-buttonGroup"
-              onMouseLeave={[Function]}
+              class="sc-bcXGCL jWSPbb cap-buttonGroup"
             >
               <button
-                aria-describedby=":rl:"
+                aria-describedby=":rp:"
                 aria-label="global.more"
-                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                style="margin-left: 0px; margin-top: 0px;"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 6"
@@ -247,40 +325,77 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    clipRule="evenodd"
+                    clip-rule="evenodd"
                     d="M.19 2.505C1.355 1.222 3.208-.03 5 0 6.79-.03 8.643 1.222 9.81 2.505a.74.74 0 0 1 0 .989C8.67 4.749 6.822 6.03 5 5.999 3.176 6.03 1.33 4.75.19 3.494a.74.74 0 0 1 0-.99m6.195 1.421a1.667 1.667 0 1 0-2.771-1.853 1.667 1.667 0 0 0 2.771 1.853"
                     fill="currentColor"
-                    fillRule="evenodd"
+                    fill-rule="evenodd"
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":rl:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rp:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r15:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r15:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    global.more
+                  </div>
+                </div>
+              </div>
               <button
-                aria-describedby=":ro:"
+                aria-describedby=":rs:"
                 aria-label="copy-link"
-                className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
+                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -290,39 +405,76 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   <path
                     d="m3.666 8.333 4.665-4.665M4.103 6.01a1.99 1.99 0 0 0-1.518.578l-1 1a2 2 0 0 0 2.828 2.827l1-1a1.99 1.99 0 0 0 .577-1.518M7.892 5.99a1.99 1.99 0 0 0 1.518-.577l1-1a2 2 0 0 0-2.827-2.827l-1 1a1.99 1.99 0 0 0-.575 1.517"
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="0.8"
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":ro:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rs:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r16:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r16:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    copy-link
+                  </div>
+                </div>
+              </div>
               <button
-                aria-describedby=":rr:"
+                aria-describedby=":rv:"
                 aria-label="global.delete"
-                className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-                onBlur={[Function]}
-                onClick={[Function]}
-                onClickCapture={[Function]}
-                onFocusCapture={[Function]}
-                onKeyDownCapture={[Function]}
-                onKeyPressCapture={[Function]}
-                onMouseDown={[Function]}
-                onMouseDownCapture={[Function]}
-                onMouseEnter={[Function]}
-                onMouseMove={[Function]}
+                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -335,52 +487,88 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <span
-                hidden={true}
-                id=":rr:"
-                style={
-                  {
-                    "position": "fixed",
-                  }
-                }
-              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+              >
+                <div
+                  class="cap-tooltip"
+                  data-dialog=""
+                  data-placing="true"
+                  hidden=""
+                  id=":rv:"
+                  role="tooltip"
+                  style="position: relative; z-index: 1800; display: none;"
+                  tabindex="-1"
+                >
+                  <div
+                    aria-hidden="true"
+                    style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                  >
+                    <svg
+                      display="block"
+                      viewBox="0 0 30 30"
+                    >
+                      <g
+                        transform="rotate(180 15 15)"
+                      >
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          fill="none"
+                          mask="url(#:r17:)"
+                        />
+                        <path
+                          d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                          stroke="none"
+                        />
+                        <mask
+                          id=":r17:"
+                          maskUnits="userSpaceOnUse"
+                        >
+                          <rect
+                            fill="white"
+                            height="30"
+                            stroke="black"
+                            width="60"
+                            x="-15"
+                            y="0"
+                          />
+                        </mask>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="sc-bcXGCL bdghCN"
+                  >
+                    global.delete
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div
-            className="sc-bcXGCL hMrLTp"
+            class="sc-bcXGCL hMrLTp"
           >
             <div
-              className="sc-bcXGCL fdboPV"
+              class="sc-bcXGCL fdboPV"
             >
               <div
                 aria-label="Tag 100x300px"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                style={
-                  {
-                    "marginLeft": 0,
-                    "marginTop": 0,
-                  }
-                }
+                class="sc-bcXGCL bcUGUs cap-tag"
+                style="margin-left: 0px; margin-top: 0px;"
                 title="100x300px"
               >
                 100x300px
               </div>
               <div
                 aria-label="Tag 29ko"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL bcUGUs cap-tag"
                 title="29ko"
               >
                 29ko
               </div>
               <div
                 aria-label="Tag png"
-                className="sc-bcXGCL bcUGUs cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL bcUGUs cap-tag"
                 title="png"
               >
                 png
@@ -390,140 +578,119 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<MediaList /> should render correctly in list view 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL flZWmU"
+    class="sc-bcXGCL flZWmU"
   >
     <div
-      className="sc-bcXGCL gGWHIo"
+      class="sc-bcXGCL gGWHIo"
     >
       <table
-        className="sc-bcXGCL gGWHIo"
+        class="sc-bcXGCL gGWHIo"
       >
         <thead
-          className="sc-bcXGCL caJRro"
+          class="sc-bcXGCL caJRro"
         >
           <tr
-            className="sc-bcXGCL eUkqFA cap-table__tr"
+            class="sc-bcXGCL eUkqFA cap-table__tr"
           >
             <th
-              className="sc-bcXGCL lckfeQ cap-table__th"
+              class="sc-bcXGCL lckfeQ cap-table__th"
             >
               <span
-                className="sc-bcXGCL hGudve cap-visuallyHidden"
-                style={
-                  {
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "whiteSpace": "nowrap",
-                  }
-                }
+                class="sc-bcXGCL hGudve cap-visuallyHidden"
+                style="clip: rect(0px, 0px, 0px, 0px); white-space: nowrap;"
               >
                 <label
                   aria-label="Select all lines"
-                  htmlFor="allRows"
+                  for="allRows"
                 />
               </span>
               <input
-                className="all-rows-checkbox"
+                class="all-rows-checkbox"
                 id="allRows"
-                onChange={[Function]}
                 type="checkbox"
               />
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             >
               global.media
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             >
               global.preview
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             >
               editor.media.size
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             >
               table-head-label
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             >
               mediator.add_date
             </th>
             <th
-              className="sc-bcXGCL iEaAye cap-table__th"
+              class="sc-bcXGCL iEaAye cap-table__th"
             />
           </tr>
         </thead>
         <tbody
-          className="sc-bcXGCL cqfhNk cap-table__tbody"
+          class="sc-bcXGCL cqfhNk cap-table__tbody"
         >
           <tr
-            className="sc-bcXGCL eozKTK cap-table__tr"
+            class="sc-bcXGCL eozKTK cap-table__tr"
             id="UG9zdDpwb3N0MTI="
           >
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <input
-                checked={false}
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
                 id="checkbox-UG9zdDpwb3N0MTI="
-                onChange={[Function]}
                 type="checkbox"
               />
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               Media 1
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <div
-                className="sc-bcXGCL ckwaKj"
+                class="sc-bcXGCL ckwaKj"
               >
                 <img
-                  className="sc-bcXGCL cbmOzt"
+                  class="sc-bcXGCL cbmOzt"
                   loading="lazy"
                   src="/media/1.png"
                 />
                 <button
-                  className="sc-bcXGCL fNPknx"
-                  onClick={[Function]}
+                  class="sc-bcXGCL fNPknx"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua eJFcEs hQQZty cap-icon"
+                    class="sc-bcXGCL sc-oZHua eJFcEs hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 10 6"
@@ -531,81 +698,49 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      clipRule="evenodd"
+                      clip-rule="evenodd"
                       d="M.19 2.505C1.355 1.222 3.208-.03 5 0 6.79-.03 8.643 1.222 9.81 2.505a.74.74 0 0 1 0 .989C8.67 4.749 6.822 6.03 5 5.999 3.176 6.03 1.33 4.75.19 3.494a.74.74 0 0 1 0-.99m6.195 1.421a1.667 1.667 0 1 0-2.771-1.853 1.667 1.667 0 0 0 2.771 1.853"
                       fill="currentColor"
-                      fillRule="evenodd"
+                      fill-rule="evenodd"
                     />
                   </svg>
                 </button>
               </div>
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               200 x 200 px
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               39ko
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               Invalid date
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              onMouseLeave={[Function]}
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <div
-                className="sc-bcXGCL jWSPbb cap-buttonGroup"
+                class="sc-bcXGCL jWSPbb cap-buttonGroup"
               >
                 <button
                   aria-describedby=":r0:"
                   aria-label="copy-link"
-                  className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocusCapture={[Function]}
-                  onKeyDownCapture={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
-                  style={
-                    {
-                      "marginLeft": 0,
-                      "marginTop": 0,
-                    }
-                  }
+                  class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                  style="margin-left: 0px; margin-top: 0px;"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -615,39 +750,76 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     <path
                       d="m3.666 8.333 4.665-4.665M4.103 6.01a1.99 1.99 0 0 0-1.518.578l-1 1a2 2 0 0 0 2.828 2.827l1-1a1.99 1.99 0 0 0 .577-1.518M7.892 5.99a1.99 1.99 0 0 0 1.518-.577l1-1a2 2 0 0 0-2.827-2.827l-1 1a1.99 1.99 0 0 0-.575 1.517"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.8"
                     />
                   </svg>
                 </button>
-                <span
-                  hidden={true}
-                  id=":r0:"
-                  style={
-                    {
-                      "position": "fixed",
-                    }
-                  }
-                />
+                <div
+                  style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+                >
+                  <div
+                    class="cap-tooltip"
+                    data-dialog=""
+                    data-placing="true"
+                    hidden=""
+                    id=":r0:"
+                    role="tooltip"
+                    style="position: relative; z-index: 1800; display: none;"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                    >
+                      <svg
+                        display="block"
+                        viewBox="0 0 30 30"
+                      >
+                        <g
+                          transform="rotate(180 15 15)"
+                        >
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            fill="none"
+                            mask="url(#:rc:)"
+                          />
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            stroke="none"
+                          />
+                          <mask
+                            id=":rc:"
+                            maskUnits="userSpaceOnUse"
+                          >
+                            <rect
+                              fill="white"
+                              height="30"
+                              stroke="black"
+                              width="60"
+                              x="-15"
+                              y="0"
+                            />
+                          </mask>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="sc-bcXGCL bdghCN"
+                    >
+                      copy-link
+                    </div>
+                  </div>
+                </div>
                 <button
                   aria-describedby=":r3:"
                   aria-label="global.delete"
-                  className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocusCapture={[Function]}
-                  onKeyDownCapture={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
+                  class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -660,71 +832,103 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <span
-                  hidden={true}
-                  id=":r3:"
-                  style={
-                    {
-                      "position": "fixed",
-                    }
-                  }
-                />
+                <div
+                  style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+                >
+                  <div
+                    class="cap-tooltip"
+                    data-dialog=""
+                    data-placing="true"
+                    hidden=""
+                    id=":r3:"
+                    role="tooltip"
+                    style="position: relative; z-index: 1800; display: none;"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                    >
+                      <svg
+                        display="block"
+                        viewBox="0 0 30 30"
+                      >
+                        <g
+                          transform="rotate(180 15 15)"
+                        >
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            fill="none"
+                            mask="url(#:rd:)"
+                          />
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            stroke="none"
+                          />
+                          <mask
+                            id=":rd:"
+                            maskUnits="userSpaceOnUse"
+                          >
+                            <rect
+                              fill="white"
+                              height="30"
+                              stroke="black"
+                              width="60"
+                              x="-15"
+                              y="0"
+                            />
+                          </mask>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="sc-bcXGCL bdghCN"
+                    >
+                      global.delete
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>
           <tr
-            className="sc-bcXGCL eozKTK cap-table__tr"
+            class="sc-bcXGCL eozKTK cap-table__tr"
             id="UG9zdDpwb3N0MTL="
           >
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <input
-                checked={false}
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
                 id="checkbox-UG9zdDpwb3N0MTL="
-                onChange={[Function]}
                 type="checkbox"
               />
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               Media 2
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <div
-                className="sc-bcXGCL ckwaKj"
+                class="sc-bcXGCL ckwaKj"
               >
                 <img
-                  className="sc-bcXGCL cbmOzt"
+                  class="sc-bcXGCL cbmOzt"
                   loading="lazy"
                   src="/media/2.png"
                 />
                 <button
-                  className="sc-bcXGCL fNPknx"
-                  onClick={[Function]}
+                  class="sc-bcXGCL fNPknx"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua eJFcEs hQQZty cap-icon"
+                    class="sc-bcXGCL sc-oZHua eJFcEs hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 10 6"
@@ -732,81 +936,49 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      clipRule="evenodd"
+                      clip-rule="evenodd"
                       d="M.19 2.505C1.355 1.222 3.208-.03 5 0 6.79-.03 8.643 1.222 9.81 2.505a.74.74 0 0 1 0 .989C8.67 4.749 6.822 6.03 5 5.999 3.176 6.03 1.33 4.75.19 3.494a.74.74 0 0 1 0-.99m6.195 1.421a1.667 1.667 0 1 0-2.771-1.853 1.667 1.667 0 0 0 2.771 1.853"
                       fill="currentColor"
-                      fillRule="evenodd"
+                      fill-rule="evenodd"
                     />
                   </svg>
                 </button>
               </div>
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               100 x 300 px
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               29ko
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               Invalid date
             </td>
             <td
-              className="sc-bcXGCL TOCat cap-table__td"
-              onMouseLeave={[Function]}
-              style={
-                {
-                  "whiteSpace": "initial",
-                }
-              }
+              class="sc-bcXGCL TOCat cap-table__td"
+              style="white-space: initial;"
             >
               <div
-                className="sc-bcXGCL jWSPbb cap-buttonGroup"
+                class="sc-bcXGCL jWSPbb cap-buttonGroup"
               >
                 <button
                   aria-describedby=":r6:"
                   aria-label="copy-link"
-                  className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocusCapture={[Function]}
-                  onKeyDownCapture={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
-                  style={
-                    {
-                      "marginLeft": 0,
-                      "marginTop": 0,
-                    }
-                  }
+                  class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                  style="margin-left: 0px; margin-top: 0px;"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -816,39 +988,76 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     <path
                       d="m3.666 8.333 4.665-4.665M4.103 6.01a1.99 1.99 0 0 0-1.518.578l-1 1a2 2 0 0 0 2.828 2.827l1-1a1.99 1.99 0 0 0 .577-1.518M7.892 5.99a1.99 1.99 0 0 0 1.518-.577l1-1a2 2 0 0 0-2.827-2.827l-1 1a1.99 1.99 0 0 0-.575 1.517"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={0.8}
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.8"
                     />
                   </svg>
                 </button>
-                <span
-                  hidden={true}
-                  id=":r6:"
-                  style={
-                    {
-                      "position": "fixed",
-                    }
-                  }
-                />
+                <div
+                  style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+                >
+                  <div
+                    class="cap-tooltip"
+                    data-dialog=""
+                    data-placing="true"
+                    hidden=""
+                    id=":r6:"
+                    role="tooltip"
+                    style="position: relative; z-index: 1800; display: none;"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                    >
+                      <svg
+                        display="block"
+                        viewBox="0 0 30 30"
+                      >
+                        <g
+                          transform="rotate(180 15 15)"
+                        >
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            fill="none"
+                            mask="url(#:re:)"
+                          />
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            stroke="none"
+                          />
+                          <mask
+                            id=":re:"
+                            maskUnits="userSpaceOnUse"
+                          >
+                            <rect
+                              fill="white"
+                              height="30"
+                              stroke="black"
+                              width="60"
+                              x="-15"
+                              y="0"
+                            />
+                          </mask>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="sc-bcXGCL bdghCN"
+                    >
+                      copy-link
+                    </div>
+                  </div>
+                </div>
                 <button
                   aria-describedby=":r9:"
                   aria-label="global.delete"
-                  className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onClickCapture={[Function]}
-                  onFocusCapture={[Function]}
-                  onKeyDownCapture={[Function]}
-                  onKeyPressCapture={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseDownCapture={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseMove={[Function]}
+                  class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -861,21 +1070,68 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <span
-                  hidden={true}
-                  id=":r9:"
-                  style={
-                    {
-                      "position": "fixed",
-                    }
-                  }
-                />
+                <div
+                  style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+                >
+                  <div
+                    class="cap-tooltip"
+                    data-dialog=""
+                    data-placing="true"
+                    hidden=""
+                    id=":r9:"
+                    role="tooltip"
+                    style="position: relative; z-index: 1800; display: none;"
+                    tabindex="-1"
+                  >
+                    <div
+                      aria-hidden="true"
+                      style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                    >
+                      <svg
+                        display="block"
+                        viewBox="0 0 30 30"
+                      >
+                        <g
+                          transform="rotate(180 15 15)"
+                        >
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            fill="none"
+                            mask="url(#:rf:)"
+                          />
+                          <path
+                            d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                            stroke="none"
+                          />
+                          <mask
+                            id=":rf:"
+                            maskUnits="userSpaceOnUse"
+                          >
+                            <rect
+                              fill="white"
+                              height="30"
+                              stroke="black"
+                              width="60"
+                              x="-15"
+                              y="0"
+                            />
+                          </mask>
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="sc-bcXGCL bdghCN"
+                    >
+                      global.delete
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

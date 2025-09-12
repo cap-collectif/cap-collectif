@@ -1,11 +1,10 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import EventItem from './EventItem'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { EventItemTestQuery } from '@relay/EventItemTestQuery.graphql'
+import { act, render } from '@testing-library/react'
 
 describe('<EventItem />', () => {
   let environment: any
@@ -72,11 +71,11 @@ describe('<EventItem />', () => {
   })
 
   it('should render correctly', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly with deleted event', () => {
-    ReactTestRenderer.act(() => {
+    act(() => {
       environment.mock.queueOperationResolver((operation: any) =>
         MockPayloadGenerator.generate(operation, {
           ...defaultMockResolvers,
@@ -112,7 +111,7 @@ describe('<EventItem />', () => {
       )
     })
 
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

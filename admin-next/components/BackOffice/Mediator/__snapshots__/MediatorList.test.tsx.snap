@@ -1,141 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MediatorList /> should render correctly and display mediators 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL bVspmP"
+    class="sc-bcXGCL bVspmP"
   >
     <table
-      className="sc-bcXGCL gjuUAI"
+      class="sc-bcXGCL gjuUAI"
     >
       <thead
-        className="sc-bcXGCL caJRro"
+        class="sc-bcXGCL caJRro"
       >
         <tr
-          className="sc-bcXGCL eUkqFA cap-table__tr"
+          class="sc-bcXGCL eUkqFA cap-table__tr"
         >
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               global.mediator
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               admin.label.step
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               mediator.participants_count
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           >
             <p
-              className="sc-bcXGCL btOiqz cap-text"
+              class="sc-bcXGCL btOiqz cap-text"
             >
               global.email.short
             </p>
           </th>
           <th
-            className="sc-bcXGCL iEaAye cap-table__th"
+            class="sc-bcXGCL iEaAye cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cqfhNk cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <p
-              className="sc-bcXGCL kxBQAH cap-text"
+              class="sc-bcXGCL kxBQAH cap-text"
             >
               Mediateur 1
             </p>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             2/3
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             3
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
               aria-describedby=":r0:"
               aria-label="action_delete"
-              className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 12"
@@ -148,92 +118,109 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":r0:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":r0:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r6:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r6:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  action_delete
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL eozKTK cap-table__tr"
+          class="sc-bcXGCL eozKTK cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamDfooke4XJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <p
-              className="sc-bcXGCL kxBQAH cap-text"
+              class="sc-bcXGCL kxBQAH cap-text"
             >
               Mediateur 2
             </p>
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             0/0
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             0
           </td>
           <td
-            className="sc-bcXGCL TOCat cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
+            class="sc-bcXGCL TOCat cap-table__td"
+            style="white-space: initial;"
           >
             <button
               aria-describedby=":r3:"
               aria-label="action_delete"
-              className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onClickCapture={[Function]}
-              onFocusCapture={[Function]}
-              onKeyDownCapture={[Function]}
-              onKeyPressCapture={[Function]}
-              onMouseDown={[Function]}
-              onMouseDownCapture={[Function]}
-              onMouseEnter={[Function]}
-              onMouseMove={[Function]}
+              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
+                class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 12"
@@ -246,46 +233,66 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
                 />
               </svg>
             </button>
-            <span
-              hidden={true}
-              id=":r3:"
-              style={
-                {
-                  "position": "fixed",
-                }
-              }
-            />
+            <div
+              style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+            >
+              <div
+                class="cap-tooltip"
+                data-dialog=""
+                data-placing="true"
+                hidden=""
+                id=":r3:"
+                role="tooltip"
+                style="position: relative; z-index: 1800; display: none;"
+                tabindex="-1"
+              >
+                <div
+                  aria-hidden="true"
+                  style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                >
+                  <svg
+                    display="block"
+                    viewBox="0 0 30 30"
+                  >
+                    <g
+                      transform="rotate(180 15 15)"
+                    >
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        fill="none"
+                        mask="url(#:r7:)"
+                      />
+                      <path
+                        d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                        stroke="none"
+                      />
+                      <mask
+                        id=":r7:"
+                        maskUnits="userSpaceOnUse"
+                      >
+                        <rect
+                          fill="white"
+                          height="30"
+                          stroke="black"
+                          width="60"
+                          x="-15"
+                          y="0"
+                        />
+                      </mask>
+                    </g>
+                  </svg>
+                </div>
+                <div
+                  class="sc-bcXGCL bdghCN"
+                >
+                  action_delete
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div
-      className="sc-bcXGCL dJEfDp"
-    >
-      <p
-        className="sc-bcXGCL dvEYUL cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        no-result-found
-      </p>
-      <p
-        className="sc-bcXGCL fVnSJG cap-text"
-      >
-        adjust-search-filters-to-find
-      </p>
-      <button
-        className="sc-bcXGCL sc-gGvGpy hSrtJu iCdXwD cap-button"
-        onClick={[Function]}
-        type="button"
-      >
-        clean-search-and-filters
-      </button>
-    </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

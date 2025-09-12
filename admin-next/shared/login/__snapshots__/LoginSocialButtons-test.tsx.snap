@@ -1,35 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginSocialButtons /> renders all buttons 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <p
-      className="sc-bcXGCL bVtbqe cap-text"
-    >
-      <p>
-        fc-title
-      </p>
+      class="sc-bcXGCL bVtbqe cap-text"
+    />
+    <p>
+      fc-title
     </p>
+    <p />
     <div
-      className="sc-cb1ada3e-1 hhWgMf"
-      justifyContent="start"
+      class="sc-cb1ada3e-1 hhWgMf"
+      justifycontent="start"
     >
       <a
         href="/login/franceconnect?_destination=http://localhost/"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         title="FranceConnect"
       >
         <span
-          className="loginIcon"
-          style={
-            {
-              "lineHeight": "inherit",
-            }
-          }
+          class="loginIcon"
+          style="line-height: inherit;"
         >
           <div
             data-testid="LegacyIcon-franceConnect"
@@ -38,10 +32,10 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </a>
     </div>
     <div
-      className="sc-bcXGCL lhPwVY"
+      class="sc-bcXGCL lhPwVY"
     >
       <a
-        className="sc-bcXGCL cRTtob cap-link"
+        class="sc-bcXGCL cRTtob cap-link"
         href="https://franceconnect.gouv.fr/"
         rel="noreferrer"
         target="_blank"
@@ -49,24 +43,20 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         what-is-fc
       </a>
       <div
-        className="sc-bcXGCL dMUThH cap-text"
+        class="sc-bcXGCL dMUThH cap-text"
       >
         login.or
       </div>
     </div>
-  </div>,
+  </div>
   <div>
     <div
-      className="sc-cb1ada3e-0 kjkGMD"
+      class="sc-cb1ada3e-0 kjkGMD"
       type="openId"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-openId"
@@ -81,19 +71,15 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         </span>
       </a>
     </div>
-  </div>,
+  </div>
   <div>
     <div
-      className="sc-cb1ada3e-0 dVooDa"
+      class="sc-cb1ada3e-0 dVooDa"
       type="cas"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-cas"
@@ -108,19 +94,15 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         </span>
       </a>
     </div>
-  </div>,
+  </div>
   <div>
     <div
-      className="sc-cb1ada3e-0 bJcmYL"
+      class="sc-cb1ada3e-0 bJcmYL"
       type="saml"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-saml"
@@ -133,36 +115,34 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
         Saml
       </a>
     </div>
-  </div>,
+  </div>
   <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
+    class="sc-bcXGCL dxxsOW"
+  />
+</DocumentFragment>
 `;
 
 exports[`<LoginSocialButtons /> renders nothing 1`] = `
-<div
-  className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-/>
+<DocumentFragment>
+  <div
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+</DocumentFragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div
-      className="sc-cb1ada3e-0 lleybm"
+      class="sc-cb1ada3e-0 lleybm"
       type="cas"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-cas"
@@ -177,79 +157,39 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
         </span>
       </a>
     </div>
-  </div>,
+  </div>
   <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
+    class="sc-bcXGCL dxxsOW"
+  />
+</DocumentFragment>
 `;
 
-exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
-[
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <div>
-    <div
-      className="sc-cb1ada3e-0 cyRFFJ"
-      type="facebook"
-    >
-      <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
-      >
-        <div
-          data-testid="LegacyIcon-facebook"
-        />
-      </span>
-      <a
-        href="/login/facebook?_destination=http://localhost/"
-        title="facebook"
-      >
-        Facebook
-      </a>
-    </div>
-  </div>,
-  <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
-`;
+exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `[Function]`;
 
 exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <p
-      className="sc-bcXGCL bVtbqe cap-text"
-    >
-      <p>
-        fc-title
-      </p>
+      class="sc-bcXGCL bVtbqe cap-text"
+    />
+    <p>
+      fc-title
     </p>
+    <p />
     <div
-      className="sc-cb1ada3e-1 hhWgMf"
-      justifyContent="start"
+      class="sc-cb1ada3e-1 hhWgMf"
+      justifycontent="start"
     >
       <a
         href="/login/franceconnect?_destination=http://localhost/"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         title="FranceConnect"
       >
         <span
-          className="loginIcon"
-          style={
-            {
-              "lineHeight": "inherit",
-            }
-          }
+          class="loginIcon"
+          style="line-height: inherit;"
         >
           <div
             data-testid="LegacyIcon-franceConnect"
@@ -258,10 +198,10 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </a>
     </div>
     <div
-      className="sc-bcXGCL lhPwVY"
+      class="sc-bcXGCL lhPwVY"
     >
       <a
-        className="sc-bcXGCL cRTtob cap-link"
+        class="sc-bcXGCL cRTtob cap-link"
         href="https://franceconnect.gouv.fr/"
         rel="noreferrer"
         target="_blank"
@@ -269,35 +209,31 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
         what-is-fc
       </a>
       <div
-        className="sc-bcXGCL dMUThH cap-text"
+        class="sc-bcXGCL dMUThH cap-text"
       >
         login.or
       </div>
     </div>
-  </div>,
+  </div>
   <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
+    class="sc-bcXGCL dxxsOW"
+  />
+</DocumentFragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div
-      className="sc-cb1ada3e-0 jHQgZD"
+      class="sc-cb1ada3e-0 jHQgZD"
       type="openId"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-openId"
@@ -312,30 +248,26 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
         </span>
       </a>
     </div>
-  </div>,
+  </div>
   <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
+    class="sc-bcXGCL dxxsOW"
+  />
+</DocumentFragment>
 `;
 
 exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div
-      className="sc-cb1ada3e-0 cAWLYd"
+      class="sc-cb1ada3e-0 cAWLYd"
       type="saml"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-saml"
@@ -348,30 +280,26 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
         Saml
       </a>
     </div>
-  </div>,
+  </div>
   <hr
-    className="sc-bcXGCL dxxsOW"
-  />,
-]
+    class="sc-bcXGCL dxxsOW"
+  />
+</DocumentFragment>
 `;
 
 exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div
-      className="sc-cb1ada3e-0 bODbyP"
+      class="sc-cb1ada3e-0 bODbyP"
       type="openId"
     >
       <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
+        class="loginIcon"
+        style="line-height: inherit;"
       >
         <div
           data-testid="LegacyIcon-openId"
@@ -386,6 +314,6 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
         </span>
       </a>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

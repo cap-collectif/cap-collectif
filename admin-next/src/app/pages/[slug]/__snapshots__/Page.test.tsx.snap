@@ -1,42 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PageRender /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL jkrNvd"
+    class="sc-bcXGCL jkrNvd"
   >
     <div
-      className="sc-bcXGCL gjIVnT"
+      class="sc-bcXGCL gjIVnT"
     >
       <div
-        className="sc-bcXGCL dhRFMK"
+        class="sc-bcXGCL dhRFMK"
       >
         <div
-          className="sc-bcXGCL lOxoQ"
+          class="sc-bcXGCL lOxoQ"
         >
           <h1
-            className="sc-bcXGCL eZylMR cap-heading"
+            class="sc-bcXGCL eZylMR cap-heading"
           >
             My custom page
           </h1>
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL hrlBeU"
+    class="sc-bcXGCL hrlBeU"
   >
     <div
-      className="old-editor ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "Lorem ipsum",
-        }
-      }
-    />
-  </div>,
-]
+      class="old-editor ql-editor wysiwyg-render"
+    >
+      Lorem ipsum
+    </div>
+  </div>
+</DocumentFragment>
 `;

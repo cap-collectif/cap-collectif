@@ -1,36 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DropzoneWrapper /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL keKWCf"
-    onBlur={[Function]}
-    onClick={[Function]}
-    onDragEnter={[Function]}
-    onDragLeave={[Function]}
-    onDragOver={[Function]}
-    onDrop={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    tabIndex={0}
+    class="sc-bcXGCL keKWCf"
+    tabindex="0"
   >
     <input
-      autoComplete="off"
-      multiple={true}
-      onChange={[Function]}
-      onClick={[Function]}
-      style={
-        {
-          "display": "none",
-        }
-      }
-      tabIndex={-1}
+      autocomplete="off"
+      multiple=""
+      style="display: none;"
+      tabindex="-1"
       type="file"
     />
     content
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

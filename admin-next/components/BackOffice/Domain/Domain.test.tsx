@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -9,7 +8,6 @@ import type { DomainTestQuery } from '@relay/DomainTestQuery.graphql'
 
 describe('<Domain />', () => {
   let environment: any
-  let testComponentTree: any
   let TestDomain: any
 
   const query = graphql`
@@ -58,8 +56,8 @@ describe('<Domain />', () => {
           }),
         }),
       )
-      testComponentTree = ReactTestRenderer.create(<TestDomain />)
-      expect(testComponentTree).toMatchSnapshot()
+      const { asFragment } = render(<TestDomain />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('should render correctly with ACTIVE status', () => {
@@ -72,8 +70,8 @@ describe('<Domain />', () => {
           }),
         }),
       )
-      testComponentTree = ReactTestRenderer.create(<TestDomain />)
-      expect(testComponentTree).toMatchSnapshot()
+      const { asFragment } = render(<TestDomain />)
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

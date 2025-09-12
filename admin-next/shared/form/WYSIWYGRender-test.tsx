@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import WYSIWYGRender from './WYSIWYGRender'
 import MockProviders from 'tests/testUtils'
 
@@ -10,7 +9,7 @@ const props = {
 }
 
 const getTree = props =>
-  ReactTestRenderer.create(
+  render(
     <MockProviders>
       <WYSIWYGRender {...props} />
     </MockProviders>,

@@ -1,7 +1,7 @@
 /* eslint-disable relay/unused-fields */
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { LoginButtonTestQuery } from '@relay/LoginButtonTestQuery.graphql'
@@ -14,7 +14,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<LoginButton />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const defaultMockResolvers = {
     Query: () => ({
       oauth2sso: {
@@ -63,7 +62,7 @@ describe('<LoginButton />', () => {
   it('renders a button', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(() => false)
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

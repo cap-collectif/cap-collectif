@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import IconLinkBar from './IconLinkBar'
 import MockProviders from 'tests/testUtils'
 
@@ -11,11 +10,11 @@ describe('<IconLinkBar />', () => {
       message: 'capco.message',
       color: 'black',
     }
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <IconLinkBar {...props}>IconToRender</IconLinkBar>
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

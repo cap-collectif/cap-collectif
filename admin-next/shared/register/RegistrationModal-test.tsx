@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest, FormWrapper } from 'tests/testUtils'
@@ -16,7 +15,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<RegistrationModal />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const query = graphql`
     query RegistrationModalTestQuery @relay_test_operation {
@@ -71,17 +69,17 @@ describe('<RegistrationModal />', () => {
     useFeatureFlags.mockImplementation(() => false)
 
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent show />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent show />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders only form', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, simpleMock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent show />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent show />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders closed modal', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, simpleMock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

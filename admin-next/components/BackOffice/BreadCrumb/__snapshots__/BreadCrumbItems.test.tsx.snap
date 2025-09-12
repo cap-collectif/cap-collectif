@@ -1,58 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BreadCrumbItems /> should render multiple items with slash in between them 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL lcYpuI"
+    class="sc-bcXGCL lcYpuI"
   >
     <div
-      className="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL lcYpuI"
     >
       <a
-        className="sc-bcXGCL fOGmNq cap-link"
+        class="sc-bcXGCL fOGmNq cap-link"
         href="/projects"
       >
         Project list
       </a>
       <span
-        className="sc-bcXGCL hlIIDU cap-text"
+        class="sc-bcXGCL hlIIDU cap-text"
       >
         /
       </span>
     </div>
     <div
-      className="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL lcYpuI"
     >
       <p
-        className="sc-bcXGCL hHORdi cap-text"
+        class="sc-bcXGCL hHORdi cap-text"
       >
         New Project
       </p>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<BreadCrumbItems /> should render one single item 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL lcYpuI"
+    class="sc-bcXGCL lcYpuI"
   >
     <div
-      className="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL lcYpuI"
     >
       <p
-        className="sc-bcXGCL hHORdi cap-text"
+        class="sc-bcXGCL hHORdi cap-text"
       >
         Project list
       </p>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

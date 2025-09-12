@@ -1,287 +1,245 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventItem /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
+  >
+    GrenobleWeb2015
+  </a>
+  <div
+    class="sc-bcXGCL gkMwg"
   >
     <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
+      class="sc-bcXGCL gudgoe cap-link"
+      href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
     >
-      GrenobleWeb2015
+      Croissance, innovation, disruption
     </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
     <div
-      className="sc-bcXGCL gkMwg"
+      class="sc-bcXGCL bwuDFj"
+    />
+  </div>
+  <p
+    class="sc-bcXGCL csWJbs cap-text"
+  >
+    10/06/2032 - 16/03/2035
+  </p>
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="<mock-value-for-field-"url">"
+  >
+    &lt;mock-value-for-field-"username"&gt;
+  </a>
+  03/01/2015
+  <div
+    class="sc-bcXGCL hcHFdL"
+  >
+    <button
+      aria-describedby=":r0:"
+      aria-label="global.download"
+      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
     >
-      <a
-        className="sc-bcXGCL gudgoe cap-link"
-        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="currentColor"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        Croissance, innovation, disruption
-      </a>
+        <path
+          d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
+        />
+        <path
+          d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+    >
       <div
-        className="sc-bcXGCL bwuDFj"
-      />
-    </div>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <p
-      className="sc-bcXGCL csWJbs cap-text"
-    >
-      10/06/2032
-       
-      -
-       
-      16/03/2035
-    </p>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="<mock-value-for-field-"url">"
-    >
-      &lt;mock-value-for-field-"username"&gt;
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    03/01/2015
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <div
-      className="sc-bcXGCL hcHFdL"
-    >
-      <button
-        aria-describedby=":r0:"
-        aria-label="global.download"
-        className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
-      >
-        <svg
-          aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="currentColor"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
-          />
-          <path
-            d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
         id=":r0:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
+      >
+        <div
+          aria-hidden="true"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+        >
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:r3:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":r3:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
+        >
+          global.download
+        </div>
+      </div>
     </div>
-  </td>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<EventItem /> should render correctly with deleted event 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
+  >
+    GrenobleWeb2015
+  </a>
+  <div
+    class="sc-bcXGCL gkMwg"
   >
     <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
+      class="sc-bcXGCL gudgoe cap-link"
+      href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
     >
-      GrenobleWeb2015
+      Croissance, innovation, disruption
     </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
     <div
-      className="sc-bcXGCL gkMwg"
+      class="sc-bcXGCL bwuDFj"
+    />
+  </div>
+  <p
+    class="sc-bcXGCL csWJbs cap-text"
+  >
+    10/06/2032 - 16/03/2035
+  </p>
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="<mock-value-for-field-"url">"
+  >
+    &lt;mock-value-for-field-"username"&gt;
+  </a>
+  03/01/2015
+  <div
+    class="sc-bcXGCL hcHFdL"
+  >
+    <button
+      aria-describedby=":r4:"
+      aria-label="global.download"
+      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
     >
-      <a
-        className="sc-bcXGCL gudgoe cap-link"
-        href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="currentColor"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        Croissance, innovation, disruption
-      </a>
+        <path
+          d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
+        />
+        <path
+          d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+    >
       <div
-        className="sc-bcXGCL bwuDFj"
-      />
-    </div>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <p
-      className="sc-bcXGCL csWJbs cap-text"
-    >
-      10/06/2032
-       
-      -
-       
-      16/03/2035
-    </p>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="<mock-value-for-field-"url">"
-    >
-      &lt;mock-value-for-field-"username"&gt;
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    03/01/2015
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <div
-      className="sc-bcXGCL hcHFdL"
-    >
-      <button
-        aria-describedby=":r3:"
-        aria-label="global.download"
-        className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-        href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
+        id=":r4:"
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
       >
-        <svg
+        <div
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="currentColor"
-          height="1em"
-          viewBox="0 0 24 24"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
         >
-          <path
-            d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
-          />
-          <path
-            d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
-        id=":r3:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:r7:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":r7:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
+        >
+          global.download
+        </div>
+      </div>
     </div>
-  </td>,
-]
+  </div>
+</DocumentFragment>
 `;

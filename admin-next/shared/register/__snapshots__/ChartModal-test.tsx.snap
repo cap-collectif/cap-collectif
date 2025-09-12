@@ -1,68 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChartModal /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
     aria-label="contained-modal-title-lg"
-    data-dialog={true}
-    hidden={false}
+    data-dialog="true"
     id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
     role="dialog"
-    tabIndex={-1}
+    tabindex="-1"
   >
     <div
-      className="sc-bcXGCL inqKcp sc-fvEvfv cap-modal__overlay"
-      onClick={[Function]}
-      style={
-        {
-          "opacity": 0,
-        }
-      }
+      class="sc-bcXGCL inqKcp sc-fvEvfv cap-modal__overlay"
+      style="opacity: 0;"
     >
       <div
-        className="sc-bcXGCL guZZlV sc-fcCDYY kmYErD cap-modal"
-        style={
-          {
-            "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
-          }
-        }
+        class="sc-bcXGCL guZZlV sc-fcCDYY kmYErD cap-modal"
+        style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
         <header
-          className="sc-bcXGCL jJSzZW cap-modal__header"
+          class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
-            className="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL jevVsb"
           >
             <h4
-              className="sc-bcXGCL dwAFlO cap-heading"
+              class="sc-bcXGCL dwAFlO cap-heading"
               id="modal-title"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              style="margin-left: 0px; margin-top: 0px;"
             >
               charter
             </h4>
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL cNICVM"
-            onClick={[Function]}
+            class="sc-bcXGCL cNICVM"
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
+              class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -73,37 +52,28 @@ exports[`<ChartModal /> renders correctly 1`] = `
               <path
                 d="M1 11 11 1M1 1l10 10"
                 stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={0.8}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="0.8"
               />
             </svg>
           </button>
         </header>
         <div
-          className="sc-bcXGCL eqUaSq cap-modal__body"
+          class="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              {
-                "__html": "I am la charte much ethics wow",
-              }
-            }
-          />
+            class=" ql-editor wysiwyg-render"
+          >
+            I am la charte much ethics wow
+          </div>
         </div>
         <footer
-          className="sc-bcXGCL fMWhlA cap-modal__footer"
+          class="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
-            onClick={[Function]}
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
+            style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >
             global.close
@@ -111,6 +81,6 @@ exports[`<ChartModal /> renders correctly 1`] = `
         </footer>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

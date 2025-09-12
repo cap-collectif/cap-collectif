@@ -1,59 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectListSection /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <section
-    className="sc-bcXGCL keKWCf project-list-section"
+    class="sc-bcXGCL keKWCf project-list-section"
   >
     <div
-      className="sc-bcXGCL eiRsso"
+      class="sc-bcXGCL eiRsso"
     >
       <div
-        className="sc-bcXGCL jA-DSys"
+        class="sc-bcXGCL jA-DSys"
       >
         <div
-          className="sc-bcXGCL gWXBpS"
+          class="sc-bcXGCL gWXBpS"
         >
           <div
-            className="sc-bcXGCL fhHjWe"
+            class="sc-bcXGCL fhHjWe"
           >
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
           </div>
@@ -61,27 +55,27 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-bcXGCL dahHqI"
+      class="sc-bcXGCL dahHqI"
     >
       <div
-        className="sc-bcXGCL iJNgaP project-list-section-projects"
+        class="sc-bcXGCL iJNgaP project-list-section-projects"
       >
         <div
-          className="sc-bcXGCL cpoarP"
+          class="sc-bcXGCL cpoarP"
         >
           <div
-            className="sc-bcXGCL iOvkUf cap-card cap-project-card"
+            class="sc-bcXGCL iOvkUf cap-card cap-project-card"
             id="cap-project-card-project1"
           >
             <div
-              className="sc-bcXGCL lkRzAG cap-card-cover"
+              class="sc-bcXGCL lkRzAG cap-card-cover"
             >
               <img
                 alt=""
-                className="sc-bcXGCL khbwMK"
+                class="sc-bcXGCL khbwMK"
                 loading="lazy"
                 sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
-                srcSet="
+                srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
@@ -90,25 +84,16 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
-                style={
-                  {
-                    "aspectRatio": "3 / 2",
-                    "filter": undefined,
-                    "objectFit": "cover",
-                    "opacity": undefined,
-                  }
-                }
+                style="object-fit: cover;"
               />
               <div
                 aria-label="Tag  step.status.future"
-                className="sc-bcXGCL fzAvBd cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL fzAvBd cap-tag"
                 title=" step.status.future"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -118,28 +103,25 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   <path
                     d="M10.333 2.333H1.667A.667.667 0 0 0 1 3v7.333c0 .368.298.667.667.667h8.666a.667.667 0 0 0 .667-.667V3a.667.667 0 0 0-.667-.667M1 5h10M3.667 3.333V1M8.334 3.333V1"
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="0.8"
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL lnyRPA cap-tag__label"
                 >
-                   
-                  step.status.future
+                   step.status.future
                 </span>
               </div>
               <div
                 aria-label="Tag  restrictedaccess"
-                className="sc-bcXGCL ilaaKR cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL ilaaKR cap-tag"
                 title=" restrictedaccess"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua kXzwFN cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua kXzwFN cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 12"
@@ -152,24 +134,23 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL iWtiap"
+                  class="sc-bcXGCL iWtiap"
                 >
-                   
-                  restrictedaccess
+                   restrictedaccess
                 </span>
               </div>
             </div>
             <div
-              className="sc-bcXGCL kkRGEJ cap-card-content"
+              class="sc-bcXGCL kkRGEJ cap-card-content"
             >
               <div
-                className="sc-bcXGCL bIZLTw"
+                class="sc-bcXGCL bIZLTw"
               >
                 <h2
-                  className="sc-bcXGCL bpFsRd cap-card-primaryInfo"
+                  class="sc-bcXGCL bpFsRd cap-card-primaryInfo"
                 >
                   <a
-                    className="sc-bcXGCL kZMHwF cap-card-link"
+                    class="sc-bcXGCL kZMHwF cap-card-link"
                     href="site.com/BPH"
                   >
                     BPH
@@ -181,6 +162,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
         </div>
       </div>
     </div>
-  </section>,
-]
+  </section>
+</DocumentFragment>
 `;

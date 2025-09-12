@@ -1,49 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <section
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL bGwxQV"
+    class="sc-bcXGCL bGwxQV"
     id="carrousel"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <div
-      className="sc-bcXGCL hbhjng"
+      class="sc-bcXGCL hbhjng"
     >
       <div
         aria-live="off"
-        className="sc-bcXGCL fliKOZ"
+        class="sc-bcXGCL fliKOZ"
         id="carrousel-items"
-        onTransitionEnd={[Function]}
-        style={
-          {
-            "transform": "translate(-33.333333333333336%)",
-            "transition": "transform 1s",
-          }
-        }
+        style="transform: translate(-33.333333333333336%); transition: transform 1s;"
       >
         <div
-          aria-hidden={true}
+          aria-hidden="true"
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL fKHBjQ"
+          class="sc-bcXGCL fKHBjQ"
           role="group"
-          tabIndex={-1}
+          tabindex="-1"
         >
           <div
-            className="sc-bcXGCL gfXQQa"
+            class="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL cQVXux"
+              class="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-              srcSet="
+              srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
@@ -52,37 +44,33 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
          "
-              style={
-                {
-                  "objectFit": "cover",
-                }
-              }
+              style="object-fit: cover;"
             />
           </div>
           <div
-            className="sc-bcXGCL bLxXma"
+            class="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL iYgOAi"
+              class="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL hKAlKL"
+                class="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
-                tabIndex={-1}
+                tabindex="-1"
               >
                 Voir +
               </a>
@@ -90,21 +78,21 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
           </div>
         </div>
         <div
-          aria-hidden={false}
+          aria-hidden="false"
           aria-label="carrousel.position {"position":1,"total":1}"
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL fKHBjQ"
+          class="sc-bcXGCL fKHBjQ"
           role="group"
         >
           <div
-            className="sc-bcXGCL gfXQQa"
+            class="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL cQVXux"
+              class="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-              srcSet="
+              srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
@@ -113,35 +101,31 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
          "
-              style={
-                {
-                  "objectFit": "cover",
-                }
-              }
+              style="object-fit: cover;"
             />
           </div>
           <div
-            className="sc-bcXGCL bLxXma"
+            class="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL iYgOAi"
+              class="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL hKAlKL"
+                class="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
               >
                 Voir +
@@ -150,21 +134,21 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
           </div>
         </div>
         <div
-          aria-hidden={true}
+          aria-hidden="true"
           aria-roledescription="carrousel.slide"
-          className="sc-bcXGCL fKHBjQ"
+          class="sc-bcXGCL fKHBjQ"
           role="group"
-          tabIndex={-1}
+          tabindex="-1"
         >
           <div
-            className="sc-bcXGCL gfXQQa"
+            class="sc-bcXGCL gfXQQa"
           >
             <img
               alt=""
-              className="sc-bcXGCL cQVXux"
+              class="sc-bcXGCL cQVXux"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-              srcSet="
+              srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
@@ -173,37 +157,33 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
          "
-              style={
-                {
-                  "objectFit": "cover",
-                }
-              }
+              style="object-fit: cover;"
             />
           </div>
           <div
-            className="sc-bcXGCL bLxXma"
+            class="sc-bcXGCL bLxXma"
           >
             <div
-              className="sc-bcXGCL iYgOAi"
+              class="sc-bcXGCL iYgOAi"
             >
               <div
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  className="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL dbjepS cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  className="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL fEByha"
                 >
                   Lorem ipsum
                 </p>
               </div>
               <a
-                className="sc-bcXGCL hKAlKL"
+                class="sc-bcXGCL hKAlKL"
                 href="/event/mon-event"
-                tabIndex={-1}
+                tabindex="-1"
               >
                 Voir +
               </a>
@@ -212,56 +192,55 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
         </div>
       </div>
     </div>
-  </section>,
-]
+  </section>
+</DocumentFragment>
 `;
 
 exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL iQCFge"
+    class="sc-bcXGCL iQCFge"
   >
     <div
-      className="sc-bcXGCL kwEgby"
+      class="sc-bcXGCL kwEgby"
     >
       <div
-        className="sc-bcXGCL coObtj"
+        class="sc-bcXGCL coObtj"
       >
         <div
-          className="sc-bcXGCL jsXoBQ"
+          class="sc-bcXGCL jsXoBQ"
         >
           <div
-            className="sc-bcXGCL dwbxzy"
+            class="sc-bcXGCL dwbxzy"
           >
             <h3
-              className="sc-bcXGCL jZrWcn cap-heading"
+              class="sc-bcXGCL jZrWcn cap-heading"
             >
               Title
             </h3>
           </div>
           <div
             aria-live="off"
-            className="sc-bcXGCL iNlobK"
+            class="sc-bcXGCL iNlobK"
             id="whats-new-items"
           >
             <div
               aria-label="carrousel.position {"position":1,"total":1}"
               aria-roledescription="carrousel.slide"
-              className="sc-bcXGCL hVTsVt"
+              class="sc-bcXGCL hVTsVt"
               id="whats-new-item-0"
-              onClick={[Function]}
               role="group"
             >
               <div
-                className="sc-bcXGCL hpxT"
+                class="sc-bcXGCL hpxT"
               >
                 <p
-                  className="sc-bcXGCL kxBQAH cap-text"
+                  class="sc-bcXGCL kxBQAH cap-text"
                 >
                   type-event
                 </p>
@@ -270,43 +249,39 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
                 </div>
               </div>
               <h4
-                className="sc-bcXGCL kxNmEm cap-heading"
+                class="sc-bcXGCL kxNmEm cap-heading"
               >
                 Item1
               </h4>
               <p
-                className="sc-bcXGCL giNlAC cap-text"
+                class="sc-bcXGCL giNlAC cap-text"
                 title="Lorem ipsum"
               >
                 Lorem ipsum
               </p>
               <a
-                className="sc-bcXGCL jqCqap cap-link"
+                class="sc-bcXGCL jqCqap cap-link"
                 href="/event/mon-event"
               >
                 learn.more
                 <span
-                  className="sr-only"
+                  class="sr-only"
                 >
-                  global.on
-                   
-                  type-event
-                   
-                  Item1
+                  global.on type-event Item1
                 </span>
               </a>
             </div>
           </div>
         </div>
         <div
-          className="sc-bcXGCL jASAGQ"
+          class="sc-bcXGCL jASAGQ"
         >
           <img
             alt=""
-            className="sc-bcXGCL bFjPnG"
+            class="sc-bcXGCL bFjPnG"
             loading="eager"
             sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
-            srcSet="
+            srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
@@ -319,78 +294,55 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
     aria-label="menu.news"
     aria-roledescription="global.carrousel"
-    className="sc-bcXGCL eqchdY"
+    class="sc-bcXGCL eqchdY"
   >
     <h3
-      className="sc-bcXGCL kbFwwM cap-heading"
+      class="sc-bcXGCL kbFwwM cap-heading"
     >
       TitleMobile
     </h3>
     <div
-      className="slick-slider slick-initialized"
+      class="slick-slider slick-initialized"
     >
       <div
-        className="slick-list"
+        class="slick-list"
       >
         <div
-          className="slick-track"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseOver={[Function]}
-          style={
-            {
-              "WebkitTransform": "translate3d(0px, 0px, 0px)",
-              "WebkitTransition": "",
-              "msTransform": "translateX(0px)",
-              "opacity": 1,
-              "transform": "translate3d(0px, 0px, 0px)",
-              "transition": "",
-            }
-          }
+          class="slick-track"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px);"
         >
           <div
-            aria-hidden={false}
-            className="slick-slide slick-active slick-current"
-            data-index={0}
-            onClick={[Function]}
-            style={
-              {
-                "outline": "none",
-                "width": 0,
-              }
-            }
-            tabIndex="-1"
+            aria-hidden="false"
+            class="slick-slide slick-active slick-current"
+            data-index="0"
+            style="outline: none; width: 0px;"
+            tabindex="-1"
           >
             <div>
               <a
-                className="sc-bcXGCL rVgbN"
+                class="sc-bcXGCL rVgbN"
                 href="/event/mon-event"
-                style={
-                  {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
+                style="width: 100%; display: inline-block;"
+                tabindex="-1"
               >
                 <img
                   alt=""
-                  className="sc-bcXGCL erCQef"
+                  class="sc-bcXGCL erCQef"
                   loading="eager"
                   sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                  srcSet="
+                  srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
@@ -399,20 +351,16 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
          http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
          "
-                  style={
-                    {
-                      "objectFit": "cover",
-                    }
-                  }
+                  style="object-fit: cover;"
                 />
                 <div
-                  className="sc-bcXGCL fTSAZS"
+                  class="sc-bcXGCL fTSAZS"
                 >
                   <div
-                    className="sc-bcXGCL dVWqGM"
+                    class="sc-bcXGCL dVWqGM"
                   >
                     <div
-                      className="sc-bcXGCL dTiXUh cap-text"
+                      class="sc-bcXGCL dTiXUh cap-text"
                     >
                       type-event
                     </div>
@@ -421,7 +369,7 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
                     </div>
                   </div>
                   <p
-                    className="sc-bcXGCL fMsHJT cap-text"
+                    class="sc-bcXGCL fMsHJT cap-text"
                     title="Item1"
                   >
                     Item1
@@ -433,6 +381,6 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

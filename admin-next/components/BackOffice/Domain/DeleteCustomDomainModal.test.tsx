@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -12,7 +11,6 @@ const onSuccess = jest.fn()
 
 describe('<DeleteCustomDomainModal />', () => {
   let environment: any
-  let testComponentTree: any
   let TestDeleteCustomDomainModal: any
 
   const query = graphql`
@@ -59,10 +57,8 @@ describe('<DeleteCustomDomainModal />', () => {
 
   describe('<TestDeleteCustomDomainModal />', () => {
     it('should render correctly', () => {
-      testComponentTree = ReactTestRenderer.create(
-        <TestDeleteCustomDomainModal show onClose={onClose} onSuccess={onSuccess} />,
-      )
-      expect(testComponentTree).toMatchSnapshot()
+      const { asFragment } = render(<TestDeleteCustomDomainModal show onClose={onClose} onSuccess={onSuccess} />)
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

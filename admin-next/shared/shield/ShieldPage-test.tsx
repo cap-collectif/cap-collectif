@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { ShieldPageTestQuery } from '@relay/ShieldPageTestQuery.graphql'
@@ -14,7 +13,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<ShieldPage />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const defaultMockResolvers = {
     Query: () => ({
       oauth2sso: {
@@ -65,19 +63,19 @@ describe('<ShieldPage />', () => {
   it('renders with registration enabled', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(e => e === 'registration')
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders with registration disabled', () => {
     // @ts-ignore jest
     useFeatureFlag.mockReturnValue(false)
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders with registration disabled and classical auth by pass enabled', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(e => e === 'sso_by_pass_auth')
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

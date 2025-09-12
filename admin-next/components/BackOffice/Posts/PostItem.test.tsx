@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -85,8 +84,8 @@ describe('<PostItem />', () => {
 
   it('should render correctly', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly without authors', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -115,7 +114,7 @@ describe('<PostItem />', () => {
         }),
       }),
     )
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

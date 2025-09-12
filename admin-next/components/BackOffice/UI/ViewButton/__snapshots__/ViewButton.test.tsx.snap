@@ -1,20 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ViewButton /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <button
-    aria-current={true}
-    className="sc-bcXGCL fNybw"
-    onClick={[Function]}
+    aria-current="true"
+    class="sc-bcXGCL fNybw"
   >
     <svg
-      aria-hidden={true}
-      className="sc-bcXGCL sc-oZHua giPkhU hQQZty cap-icon"
+      aria-hidden="true"
+      class="sc-bcXGCL sc-oZHua giPkhU hQQZty cap-icon"
       fill="none"
-      focusable={false}
+      focusable="false"
       height="1em"
       viewBox="0 0 14 13"
       width="1em"
@@ -23,43 +22,43 @@ exports[`<ViewButton /> should render correctly 1`] = `
       <path
         d="M5.5 1.5h8M5.5 11.5h8"
         stroke="currentColor"
-        strokeLinecap="round"
+        stroke-linecap="round"
       />
       <rect
-        height={2}
-        rx={0.5}
+        height="2"
+        rx="0.5"
         stroke="currentColor"
-        width={2}
-        x={0.5}
-        y={0.5}
+        width="2"
+        x="0.5"
+        y="0.5"
       />
       <path
         d="M5.5 6.5h8"
         stroke="currentColor"
-        strokeLinecap="round"
+        stroke-linecap="round"
       />
       <rect
-        height={2}
-        rx={0.5}
+        height="2"
+        rx="0.5"
         stroke="currentColor"
-        width={2}
-        x={0.5}
-        y={5.5}
+        width="2"
+        x="0.5"
+        y="5.5"
       />
       <rect
-        height={2}
-        rx={0.5}
+        height="2"
+        rx="0.5"
         stroke="currentColor"
-        width={2}
-        x={0.5}
-        y={10.5}
+        width="2"
+        x="0.5"
+        y="10.5"
       />
     </svg>
     <span
-      className="sc-bcXGCL kyoZrf cap-text"
+      class="sc-bcXGCL kyoZrf cap-text"
     >
       List
     </span>
-  </button>,
-]
+  </button>
+</DocumentFragment>
 `;

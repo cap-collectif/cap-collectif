@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProjectStepTabs from './ProjectStepTabs'
@@ -10,6 +9,7 @@ import type { ProjectStepTabsTestQuery } from '@relay/ProjectStepTabsTestQuery.g
 describe('<ProjectStepTabs />', () => {
   let environment
   let TestComponent
+
   jest.useFakeTimers().setSystemTime(new Date('2023-01-01T12:00:00Z'))
   const defaultMockResolvers = {
     Project: () => ({
@@ -95,8 +95,8 @@ describe('<ProjectStepTabs />', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
   })
   it('should render correctly without arrow & with active tab', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment).toMatchSnapshot()
   })
   it('should render null when there is only one step', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -121,7 +121,7 @@ describe('<ProjectStepTabs />', () => {
         }),
       }),
     )
-    const wrapper = ReactTestRenderer.create(<TestComponent />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,39 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectModalExportSteps /> <TestProjectModalExportSteps /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <button
-    aria-expanded={false}
+    aria-controls=":r1:"
+    aria-expanded="false"
     aria-haspopup="menu"
-    className="cap-menu__disclosure"
+    class="cap-menu__disclosure"
     id=":r0:"
-    onBlur={[Function]}
-    onClick={[Function]}
-    onClickCapture={[Function]}
-    onFocus={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onKeyPressCapture={[Function]}
-    onKeyUp={[Function]}
-    onLoadedMetadataCapture={[Function]}
-    onMouseDown={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseMove={[Function]}
+    type="button"
   >
     disclosure
-  </button>,
-  <span
-    hidden={true}
-    id=":r1:"
-    style={
-      {
-        "position": "fixed",
-      }
-    }
-  />,
-]
+  </button>
+  <div
+    style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+  >
+    <div
+      aria-labelledby=":r0:"
+      aria-orientation="vertical"
+      class="sc-bcXGCL bvFpIu cap-menu__list"
+      data-dialog=""
+      data-placing="true"
+      hidden=""
+      id=":r1:"
+      role="menu"
+      style="position: relative; display: none;"
+      tabindex="0"
+    >
+      <button
+        aria-controls="id-g"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        class="sc-bcXGCL iLHRqt cap-menu__item"
+        id=":r4:"
+        role="menuitem"
+        type="button"
+      >
+        <p
+          class="sc-bcXGCL kxBQAH cap-text"
+        >
+           project.download.button 
+        </p>
+      </button>
+      <div
+        aria-label="delete-confirmation"
+        aria-modal="true"
+        data-dialog="true"
+        hidden=""
+        id="id-g"
+        role="dialog"
+        style="display: none;"
+        tabindex="-1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
 `;

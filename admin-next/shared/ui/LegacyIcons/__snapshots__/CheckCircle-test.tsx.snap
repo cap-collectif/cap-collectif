@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CheckCircle /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <svg
-    className="check-circle"
+    class="check-circle"
     height="20px"
     role="img"
     version="1.1"
@@ -24,6 +24,6 @@ exports[`<CheckCircle /> renders correctly 1`] = `
       d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"
       fill="black"
     />
-  </svg>,
-]
+  </svg>
+</DocumentFragment>
 `;

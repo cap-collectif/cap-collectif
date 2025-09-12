@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import EyeBar from './EyeBar'
 import MockProviders from 'tests/testUtils'
 
@@ -11,11 +10,11 @@ describe('<EyeBar />', () => {
       size: 16,
       color: 'black',
     }
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <EyeBar {...props} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

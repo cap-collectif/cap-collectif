@@ -1,5 +1,6 @@
 /* eslint-env jest */
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -18,7 +19,6 @@ jest.mock('@shared/hooks/useIsMobile', () => ({
 describe('<PrivacyModal />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const defaultMockResolvers = {
     Query: () => ({
@@ -53,7 +53,7 @@ describe('<PrivacyModal />', () => {
     )
   })
   it('renders correctly', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import ProfileNeutralIcon from './ProfileNeutralIcon'
 import MockProviders from 'tests/testUtils'
 
@@ -11,11 +10,11 @@ describe('<ProfileNeutralIcon />', () => {
       size: 16,
       color: 'black',
     }
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <ProfileNeutralIcon {...props} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

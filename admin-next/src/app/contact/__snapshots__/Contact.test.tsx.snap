@@ -1,73 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Contact /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL bNjzIC"
+    class="sc-bcXGCL bNjzIC"
   >
     <div
-      className="sc-bcXGCL drtrwv"
+      class="sc-bcXGCL drtrwv"
     >
       <div
-        className="sc-bcXGCL fYlNWT"
+        class="sc-bcXGCL fYlNWT"
       >
         <div
-          className="sc-bcXGCL bdBwbl"
+          class="sc-bcXGCL bdBwbl"
         >
           <div
-            className="sc-bcXGCL heKSwN"
+            class="sc-bcXGCL heKSwN"
           >
             <div
-              className="sc-bcXGCL dzecEA"
+              class="sc-bcXGCL dzecEA"
             >
               <h1
-                className="sc-bcXGCL eZylMR cap-heading"
+                class="sc-bcXGCL eZylMR cap-heading"
               >
                 Contact us
               </h1>
               <p
-                className="sc-bcXGCL koJZlX cap-text"
+                class="sc-bcXGCL koJZlX cap-text"
+              />
+              <div
+                class=" ql-editor wysiwyg-render"
               >
-                <div
-                  className=" ql-editor wysiwyg-render"
-                  dangerouslySetInnerHTML={
-                    {
-                      "__html": "Lorem ipsum",
-                    }
-                  }
-                />
-              </p>
+                Lorem ipsum
+              </div>
+              <p />
             </div>
           </div>
         </div>
       </div>
       <div
-        className="sc-bcXGCL kBzaMB"
+        class="sc-bcXGCL kBzaMB"
       >
         <div
-          className="sc-bcXGCL hSvFdA"
+          class="sc-bcXGCL hSvFdA"
         >
           <div
-            className="sc-bcXGCL gkMwg"
+            class="sc-bcXGCL gkMwg"
           >
             <div
-              className="sc-bcXGCL gwLuHb cap-accordion__item"
+              class="sc-bcXGCL gwLuHb cap-accordion__item"
               id="contactForm1"
             >
               <button
                 aria-controls="accordion-panel-contactForm1"
-                aria-expanded={true}
-                className="sc-bcXGCL isrhRD cap-accordion__button"
+                aria-expanded="true"
+                class="sc-bcXGCL isrhRD cap-accordion__button"
                 id="accordion-button-contactForm1"
-                onClick={[Function]}
                 type="button"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua fqrjxx hQQZty cap-icon"
+                  class="sc-bcXGCL sc-oZHua fqrjxx hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 7"
@@ -80,220 +76,149 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  className="sc-bcXGCL dfvBVw cap-text"
+                  class="sc-bcXGCL dfvBVw cap-text"
                 >
                   For a project
                 </p>
               </button>
               <div
                 aria-labelledby="accordion-button-contactForm1"
-                className="sc-bcXGCL hvhhfr cap-accordion__panel"
+                class="sc-bcXGCL hvhhfr cap-accordion__panel"
                 id="accordion-panel-contactForm1"
                 role="group"
-                style={
-                  {
-                    "height": "0px",
-                    "opacity": 0,
-                  }
-                }
+                style="opacity: 0; height: 0px;"
               >
                 <div
-                  className="sc-bcXGCL fywbGu cap-text"
+                  class="sc-bcXGCL fywbGu cap-text"
                 >
                   <div
-                    className=" ql-editor wysiwyg-render"
-                    dangerouslySetInnerHTML={
-                      {
-                        "__html": "blablabla nice project nice collab",
-                      }
-                    }
-                  />
+                    class=" ql-editor wysiwyg-render"
+                  >
+                    blablabla nice project nice collab
+                  </div>
                 </div>
                 <div
-                  className="sc-bcXGCL itiXDK"
+                  class="sc-bcXGCL itiXDK"
                 >
                   form.fields_mandatory_without_mention
                 </div>
                 <form
                   id="contact-form-contactForm1"
-                  noValidate={true}
-                  onSubmit={[Function]}
+                  novalidate=""
                 >
                   <div
-                    className="sc-bcXGCL hhSHam cap-form-control"
+                    class="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL jfvNeV cap-form-label"
-                      htmlFor=":r0:"
-                      style={
-                        {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
+                      class="sc-bcXGCL jfvNeV cap-form-label"
+                      for=":r0:"
+                      style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
-                        className="sc-bcXGCL dQChsN cap-text"
-                        style={
-                          {
-                            "marginLeft": 0,
-                            "marginTop": 0,
-                          }
-                        }
+                        class="sc-bcXGCL dQChsN cap-text"
+                        style="margin-left: 0px; margin-top: 0px;"
                       >
                         global.name
                       </span>
                       <p
-                        className="sc-bcXGCL hIqMOW cap-text"
+                        class="sc-bcXGCL hIqMOW cap-text"
                       >
                         global.optional
                       </p>
                     </label>
                     <input
-                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-                      disabled={false}
+                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       id=":r0:"
-                      minLength={2}
+                      minlength="2"
                       name="name"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      readOnly={false}
-                      required={false}
                       type="text"
                       value=""
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL hhSHam cap-form-control"
+                    class="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL jfvNeV cap-form-label"
-                      htmlFor=":r1:"
-                      style={
-                        {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
+                      class="sc-bcXGCL jfvNeV cap-form-label"
+                      for=":r1:"
+                      style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
-                        className="sc-bcXGCL dQChsN cap-text"
-                        style={
-                          {
-                            "marginLeft": 0,
-                            "marginTop": 0,
-                          }
-                        }
+                        class="sc-bcXGCL dQChsN cap-text"
+                        style="margin-left: 0px; margin-top: 0px;"
                       >
                         global.email
                       </span>
                     </label>
                     <input
-                      aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-                      disabled={false}
+                      aria-required="true"
+                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       id=":r1:"
                       name="email"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
                       placeholder="email.placeholder"
-                      readOnly={false}
-                      required={true}
+                      required=""
                       type="email"
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL hhSHam cap-form-control"
+                    class="sc-bcXGCL hhSHam cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL jfvNeV cap-form-label"
-                      htmlFor=":r2:"
-                      style={
-                        {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
+                      class="sc-bcXGCL jfvNeV cap-form-label"
+                      for=":r2:"
+                      style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
-                        className="sc-bcXGCL dQChsN cap-text"
-                        style={
-                          {
-                            "marginLeft": 0,
-                            "marginTop": 0,
-                          }
-                        }
+                        class="sc-bcXGCL dQChsN cap-text"
+                        style="margin-left: 0px; margin-top: 0px;"
                       >
                         object
                       </span>
                     </label>
                     <input
-                      aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-                      disabled={false}
+                      aria-required="true"
+                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       id=":r2:"
-                      minLength={2}
+                      minlength="2"
                       name="title"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
                       placeholder="placeholder.object"
-                      readOnly={false}
-                      required={true}
+                      required=""
                       type="text"
                       value=""
                     />
                   </div>
                   <div
-                    className="sc-bcXGCL hQCGLB cap-form-control"
+                    class="sc-bcXGCL hQCGLB cap-form-control"
                   >
                     <label
-                      className="sc-bcXGCL jfvNeV cap-form-label"
-                      htmlFor=":r3:"
-                      style={
-                        {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
+                      class="sc-bcXGCL jfvNeV cap-form-label"
+                      for=":r3:"
+                      style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
-                        className="sc-bcXGCL dQChsN cap-text"
-                        style={
-                          {
-                            "marginLeft": 0,
-                            "marginTop": 0,
-                          }
-                        }
+                        class="sc-bcXGCL dQChsN cap-text"
+                        style="margin-left: 0px; margin-top: 0px;"
                       >
                         contact.your-message
                       </span>
                     </label>
                     <div
-                      className="sc-bcXGCL hOytyr"
+                      class="sc-bcXGCL hOytyr"
                     >
                       <textarea
-                        aria-required={true}
-                        className="sc-bcXGCL sc-dwnPIk hTPOzI eCNeCU cap-textarea"
-                        disabled={false}
+                        aria-required="true"
+                        class="sc-bcXGCL sc-dwnPIk hTPOzI eCNeCU cap-textarea"
                         id=":r3:"
-                        minLength={2}
+                        minlength="2"
                         name="body"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
                         placeholder="contact_form.message"
-                        readOnly={false}
-                        required={true}
-                        rows={3}
-                        value=""
+                        required=""
+                        rows="3"
                       />
                     </div>
                   </div>
                   <button
-                    className="sc-bcXGCL sc-gGvGpy cxSbzw jrAhSN cap-button"
+                    class="sc-bcXGCL sc-gGvGpy cxSbzw jrAhSN cap-button"
                     type="submit"
                   >
                     global.send
@@ -303,23 +228,22 @@ exports[`<Contact /> renders correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-bcXGCL gkMwg"
+            class="sc-bcXGCL gkMwg"
           >
             <div
-              className="sc-bcXGCL jJplVC cap-accordion__item"
+              class="sc-bcXGCL jJplVC cap-accordion__item"
               id="contactForm2"
             >
               <button
                 aria-controls="accordion-panel-contactForm2"
-                aria-expanded={false}
-                className="sc-bcXGCL isrhRD cap-accordion__button"
+                aria-expanded="false"
+                class="sc-bcXGCL isrhRD cap-accordion__button"
                 id="accordion-button-contactForm2"
-                onClick={[Function]}
                 type="button"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua iNqQTh hQQZty cap-icon"
+                  class="sc-bcXGCL sc-oZHua iNqQTh hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 8 12"
@@ -332,7 +256,7 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  className="sc-bcXGCL dfvBVw cap-text"
+                  class="sc-bcXGCL dfvBVw cap-text"
                 >
                   For another request
                 </p>
@@ -342,6 +266,6 @@ exports[`<Contact /> renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

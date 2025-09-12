@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EarthIcon /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <svg
-    className="earth-icon"
+    class="earth-icon"
     height="16px"
     role="img"
     viewBox="0 0 24 24"
@@ -17,28 +17,28 @@ exports[`<EarthIcon /> renders correctly 1`] = `
       d="M23.5,11.941A11.538,11.538,0,0,1,11.968,23.485,11.662,11.662,0,0,1,.5,11.734,11.246,11.246,0,0,1,11.505.5c.166-.007.332-.01.5-.01A11.433,11.433,0,0,1,23.5,11.941Z"
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
     <path
       d="M11.505.5c-6,6.5-6,14.98,0,22.98"
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
     <path
       d="M12.505.5c6,6.5,6,14.977,0,22.977"
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
     <line
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
       x1="2.386"
       x2="21.52"
       y1="5.484"
@@ -47,8 +47,8 @@ exports[`<EarthIcon /> renders correctly 1`] = `
     <line
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
       x1="0.503"
       x2="23.5"
       y1="11.484"
@@ -57,13 +57,13 @@ exports[`<EarthIcon /> renders correctly 1`] = `
     <line
       fill="none"
       stroke="black"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-linecap="round"
+      stroke-linejoin="round"
       x1="1.985"
       x2="22.085"
       y1="17.484"
       y2="17.484"
     />
-  </svg>,
-]
+  </svg>
+</DocumentFragment>
 `;

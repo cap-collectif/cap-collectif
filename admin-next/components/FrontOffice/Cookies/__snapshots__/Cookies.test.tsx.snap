@@ -1,189 +1,157 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CookieBanner /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL kEQBzE cookie-banner"
+    class="sc-bcXGCL kEQBzE cookie-banner"
     id="cookie-banner"
   >
     <div
-      className="sc-bcXGCL ovXMQ cookie-text-wrapper"
+      class="sc-bcXGCL ovXMQ cookie-text-wrapper"
     >
       <p
-        className="sc-bcXGCL kbMcWV cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL kbMcWV cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         cookies-text
       </p>
       <button
-        className="sc-bcXGCL epyW"
+        class="sc-bcXGCL epyW"
         id="cookies-parameters"
-        onClick={[Function]}
         type="button"
       >
         setup-cookies
       </button>
     </div>
     <div
-      className="sc-bcXGCL hkntNi cookie-button"
+      class="sc-bcXGCL hkntNi cookie-button"
     >
       <button
-        className="sc-bcXGCL fFxubO"
+        class="sc-bcXGCL fFxubO"
         id="cookie-decline-button"
-        onClick={[Function]}
         type="button"
       >
         decline-optional-cookies
       </button>
       <button
-        className="sc-bcXGCL erIlBM btn-cookie-consent"
+        class="sc-bcXGCL erIlBM btn-cookie-consent"
         id="cookie-consent"
-        onClick={[Function]}
         type="button"
       >
         accept-everything
       </button>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<CookieContent /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div>
     <div>
       <div
-        className=" ql-editor wysiwyg-render"
-        dangerouslySetInnerHTML={
-          {
-            "__html": "cookies-page-texte-tmp-part1 {"platformLink":"http://localhost","cookieType":3}",
-          }
-        }
-      />
+        class=" ql-editor wysiwyg-render"
+      >
+        cookies-page-texte-tmp-part1 {"platformLink":"http://localhost","cookieType":3}
+      </div>
     </div>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "cookies-page-texte-part1-2 {"platformLink":"http://localhost"}",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      cookies-page-texte-part1-2 {"platformLink":"http://localhost"}
+    </div>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "cookies-page-texte-tmp-part1-3 {"platformLink":"http://localhost","nbCookies":3}",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      cookies-page-texte-tmp-part1-3 {"platformLink":"http://localhost","nbCookies":3}
+    </div>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "blablablabla cookies",
-        }
-      }
-    />
+      class=" ql-editor wysiwyg-render"
+    >
+      blablablabla cookies
+    </div>
     <div
-      className=" ql-editor wysiwyg-render"
-      dangerouslySetInnerHTML={
-        {
-          "__html": "cookies-page-texte-part2 {"platformLink":"http://localhost"}",
-        }
-      }
-    />
-  </div>,
-]
+      class=" ql-editor wysiwyg-render"
+    >
+      cookies-page-texte-part2 {"platformLink":"http://localhost"}
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<CookieManager /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL keKWCf"
+    class="sc-bcXGCL keKWCf"
   >
     <div
-      className="sc-bcXGCL kEQBzE cookie-banner"
+      class="sc-bcXGCL kEQBzE cookie-banner"
       id="cookie-banner"
     >
       <div
-        className="sc-bcXGCL ovXMQ cookie-text-wrapper"
+        class="sc-bcXGCL ovXMQ cookie-text-wrapper"
       >
         <p
-          className="sc-bcXGCL kbMcWV cap-text"
-          style={
-            {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
+          class="sc-bcXGCL kbMcWV cap-text"
+          style="margin-left: 0px; margin-top: 0px;"
         >
           cookies-text
         </p>
         <button
-          className="sc-bcXGCL epyW"
+          class="sc-bcXGCL epyW"
           id="cookies-parameters"
-          onClick={[Function]}
           type="button"
         >
           setup-cookies
         </button>
       </div>
       <div
-        className="sc-bcXGCL hkntNi cookie-button"
+        class="sc-bcXGCL hkntNi cookie-button"
       >
         <button
-          className="sc-bcXGCL fFxubO"
+          class="sc-bcXGCL fFxubO"
           id="cookie-decline-button"
-          onClick={[Function]}
           type="button"
         >
           decline-optional-cookies
         </button>
         <button
-          className="sc-bcXGCL erIlBM btn-cookie-consent"
+          class="sc-bcXGCL erIlBM btn-cookie-consent"
           id="cookie-consent"
-          onClick={[Function]}
           type="button"
         >
           accept-everything
         </button>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<CookieModal /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="cookie-policy"
+    class="cookie-policy"
   >
     <button
-      className="sc-bcXGCL keKWCf"
+      class="sc-bcXGCL keKWCf"
       id="cookies-modal-button"
-      onClick={[Function]}
       type="button"
     >
       cookies
     </button>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

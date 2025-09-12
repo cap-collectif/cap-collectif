@@ -1,7 +1,7 @@
 /* eslint-disable relay/unused-fields */
 /* eslint-env jest */
 import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { RegistrationButtonTestQuery } from '@relay/RegistrationButtonTestQuery.graphql'
@@ -17,7 +17,6 @@ jest.mock('use-analytics', () => ({
 describe('<RegistrationButton />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const defaultMockResolvers = {
     Query: () => ({
       isAuthenticated: false,
@@ -53,7 +52,7 @@ describe('<RegistrationButton />', () => {
   it('renders a button', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(flag => flag === 'registration')
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

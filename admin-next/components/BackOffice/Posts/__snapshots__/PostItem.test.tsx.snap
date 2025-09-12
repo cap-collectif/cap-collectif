@@ -1,415 +1,433 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PostItem /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
-    >
-      Post FR 12
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    Post FR 12
+  </a>
+  &lt;mock-value-for-field-"username"&gt;
+  <div
+    class="sc-bcXGCL gkMwg"
   >
     <div
-      className="sc-bcXGCL gkMwg"
+      class="sc-bcXGCL bwuDFj"
+    >
+      <a
+        class="sc-bcXGCL kfWSPh cap-link"
+        href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
+      >
+        Immobilier
+      </a>
+      <span>
+        ,   
+      </span>
+      <a
+        class="sc-bcXGCL kfWSPh cap-link"
+        href="https://localhost:8000/themes/justice?_locale=fr-FR"
+      >
+        Justice
+      </a>
+    </div>
+  </div>
+  global.published04/08/2021
+  <div
+    class="sc-bcXGCL hcHFdL"
+  >
+    <button
+      aria-describedby=":r0:"
+      aria-label="global.preview"
+      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+    >
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="none"
+        height="1em"
+        viewBox="0 0 12 12"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.717 6.717a.4.4 0 1 0 .566.566zM11.4 1a.4.4 0 0 0-.4-.4H7.4a.4.4 0 0 0 0 .8h3.2v3.2a.4.4 0 0 0 .8 0zM5.283 7.283l3-3-.566-.566-3 3zm3-3 3-3-.566-.566-3 3z"
+          fill="currentColor"
+        />
+        <path
+          d="M5.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6.5"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="0.8"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
     >
       <div
-        className="sc-bcXGCL bwuDFj"
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
+        id=":r0:"
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
       >
-        <a
-          className="sc-bcXGCL kfWSPh cap-link"
-          href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
+        <div
+          aria-hidden="true"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
         >
-          Immobilier
-        </a>
-        <span>
-          ,   
-        </span>
-        <a
-          className="sc-bcXGCL kfWSPh cap-link"
-          href="https://localhost:8000/themes/justice?_locale=fr-FR"
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:r6:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":r6:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
         >
-          Justice
-        </a>
+          global.preview
+        </div>
       </div>
     </div>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    global.published
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    04/08/2021
-  </td>,
-  <td
-    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <div
-      className="sc-bcXGCL hcHFdL"
+    <button
+      aria-controls="id-g"
+      aria-describedby=":r3:"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      aria-label="admin.global.delete"
+      class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+      type="button"
     >
-      <button
-        aria-describedby=":r0:"
-        aria-label="global.preview"
-        className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="none"
+        height="1em"
+        viewBox="0 0 12 12"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="none"
-          height="1em"
-          viewBox="0 0 12 12"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4.717 6.717a.4.4 0 1 0 .566.566zM11.4 1a.4.4 0 0 0-.4-.4H7.4a.4.4 0 0 0 0 .8h3.2v3.2a.4.4 0 0 0 .8 0zM5.283 7.283l3-3-.566-.566-3 3zm3-3 3-3-.566-.566-3 3z"
-            fill="currentColor"
-          />
-          <path
-            d="M5.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6.5"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={0.8}
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
-        id=":r0:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
-      <button
-        aria-controls="id-g"
-        aria-describedby=":r3:"
-        aria-expanded={false}
-        aria-haspopup="dialog"
-        aria-label="admin.global.delete"
-        className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDown={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="none"
-          height="1em"
-          viewBox="0 0 12 12"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
-            fill="currentColor"
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
-        id=":r3:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
+        <path
+          d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+    >
       <div
-        aria-label="delete-confirmation"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
-      />
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
+        id=":r3:"
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
+      >
+        <div
+          aria-hidden="true"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+        >
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:r7:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":r7:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
+        >
+          admin.global.delete
+        </div>
+      </div>
     </div>
-  </td>,
-]
+    <div
+      aria-label="delete-confirmation"
+      aria-modal="true"
+      data-dialog="true"
+      hidden=""
+      id="id-g"
+      role="dialog"
+      style="display: none;"
+      tabindex="-1"
+    />
+  </div>
+</DocumentFragment>
 `;
 
 exports[`<PostItem /> should render correctly without authors 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
+  <a
+    class="sc-bcXGCL gudgoe cap-link"
+    href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
   >
-    <a
-      className="sc-bcXGCL gudgoe cap-link"
-      href="https://localhost:8000/admin/capco/app/post/post12/edit?_locale=fr-FR"
-    >
-      Post FR 12
-    </a>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    &lt;mock-value-for-field-"username"&gt;
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
+    Post FR 12
+  </a>
+  &lt;mock-value-for-field-"username"&gt;
+  <div
+    class="sc-bcXGCL gkMwg"
   >
     <div
-      className="sc-bcXGCL gkMwg"
+      class="sc-bcXGCL bwuDFj"
+    >
+      <a
+        class="sc-bcXGCL kfWSPh cap-link"
+        href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
+      >
+        Immobilier
+      </a>
+      <span>
+        ,   
+      </span>
+      <a
+        class="sc-bcXGCL kfWSPh cap-link"
+        href="https://localhost:8000/themes/justice?_locale=fr-FR"
+      >
+        Justice
+      </a>
+    </div>
+  </div>
+  global.published04/08/2021
+  <div
+    class="sc-bcXGCL hcHFdL"
+  >
+    <button
+      aria-describedby=":r8:"
+      aria-label="global.preview"
+      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+    >
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="none"
+        height="1em"
+        viewBox="0 0 12 12"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.717 6.717a.4.4 0 1 0 .566.566zM11.4 1a.4.4 0 0 0-.4-.4H7.4a.4.4 0 0 0 0 .8h3.2v3.2a.4.4 0 0 0 .8 0zM5.283 7.283l3-3-.566-.566-3 3zm3-3 3-3-.566-.566-3 3z"
+          fill="currentColor"
+        />
+        <path
+          d="M5.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6.5"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="0.8"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
     >
       <div
-        className="sc-bcXGCL bwuDFj"
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
+        id=":r8:"
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
       >
-        <a
-          className="sc-bcXGCL kfWSPh cap-link"
-          href="https://localhost:8000/themes/immobilier?_locale=fr-FR"
+        <div
+          aria-hidden="true"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
         >
-          Immobilier
-        </a>
-        <span>
-          ,   
-        </span>
-        <a
-          className="sc-bcXGCL kfWSPh cap-link"
-          href="https://localhost:8000/themes/justice?_locale=fr-FR"
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:re:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":re:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
         >
-          Justice
-        </a>
+          global.preview
+        </div>
       </div>
     </div>
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    global.published
-  </td>,
-  <td
-    className="sc-bcXGCL TOCat cap-table__td"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    04/08/2021
-  </td>,
-  <td
-    className="sc-bcXGCL cRGbOJ cap-table__td visible-on-hover"
-    style={
-      {
-        "whiteSpace": "initial",
-      }
-    }
-  >
-    <div
-      className="sc-bcXGCL hcHFdL"
+    <button
+      aria-controls="id-g"
+      aria-describedby=":rb:"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      aria-label="admin.global.delete"
+      class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+      type="button"
     >
-      <button
-        aria-describedby=":r6:"
-        aria-label="global.preview"
-        className="sc-bcXGCL cxVtKf cap-buttonQuickAction"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
+      <svg
+        aria-hidden="true"
+        class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
+        fill="none"
+        height="1em"
+        viewBox="0 0 12 12"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="none"
-          height="1em"
-          viewBox="0 0 12 12"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4.717 6.717a.4.4 0 1 0 .566.566zM11.4 1a.4.4 0 0 0-.4-.4H7.4a.4.4 0 0 0 0 .8h3.2v3.2a.4.4 0 0 0 .8 0zM5.283 7.283l3-3-.566-.566-3 3zm3-3 3-3-.566-.566-3 3z"
-            fill="currentColor"
-          />
-          <path
-            d="M5.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6.5"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={0.8}
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
-        id=":r6:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
-      <button
-        aria-controls="id-g"
-        aria-describedby=":r9:"
-        aria-expanded={false}
-        aria-haspopup="dialog"
-        aria-label="admin.global.delete"
-        className="sc-bcXGCL iDqdWa cap-buttonQuickAction"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDown={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-buttonQuickAction-icon"
-          fill="none"
-          height="1em"
-          viewBox="0 0 12 12"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
-            fill="currentColor"
-          />
-        </svg>
-      </button>
-      <span
-        hidden={true}
-        id=":r9:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
+        <path
+          d="M10.091 3.75H1.909a.3.3 0 0 0-.193.073.24.24 0 0 0-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 0 0 .32-.707V4a.24.24 0 0 0-.08-.177.3.3 0 0 0-.193-.073m-5.045 6.5a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11.212.04.289.11a.36.36 0 0 1 .12.265zm2.727 0a.36.36 0 0 1-.12.265.43.43 0 0 1-.29.11.43.43 0 0 1-.289-.11.36.36 0 0 1-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11s.212.04.289.11a.36.36 0 0 1 .12.265zM11.455 2H8.863a.14.14 0 0 1-.097-.037.12.12 0 0 1-.04-.088V1.25a1.2 1.2 0 0 0-.4-.884A1.43 1.43 0 0 0 7.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 0 0-.4.884v.625a.12.12 0 0 1-.04.088.14.14 0 0 1-.096.037H.546a.57.57 0 0 0-.386.146A.48.48 0 0 0 0 2.5c0 .133.057.26.16.354A.57.57 0 0 0 .545 3h10.91a.57.57 0 0 0 .385-.146A.48.48 0 0 0 12 2.5a.48.48 0 0 0-.16-.354.57.57 0 0 0-.386-.146m-7.091-.125V1.25a.24.24 0 0 1 .08-.177A.3.3 0 0 1 4.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 0 1 .08.177v.625a.12.12 0 0 1-.04.088A.14.14 0 0 1 7.5 2h-3a.14.14 0 0 1-.096-.037.12.12 0 0 1-.04-.088"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+    <div
+      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+    >
       <div
-        aria-label="delete-confirmation"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
-      />
+        class="cap-tooltip"
+        data-dialog=""
+        data-placing="true"
+        hidden=""
+        id=":rb:"
+        role="tooltip"
+        style="position: relative; z-index: 1800; display: none;"
+        tabindex="-1"
+      >
+        <div
+          aria-hidden="true"
+          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+        >
+          <svg
+            display="block"
+            viewBox="0 0 30 30"
+          >
+            <g
+              transform="rotate(180 15 15)"
+            >
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                fill="none"
+                mask="url(#:rf:)"
+              />
+              <path
+                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                stroke="none"
+              />
+              <mask
+                id=":rf:"
+                maskUnits="userSpaceOnUse"
+              >
+                <rect
+                  fill="white"
+                  height="30"
+                  stroke="black"
+                  width="60"
+                  x="-15"
+                  y="0"
+                />
+              </mask>
+            </g>
+          </svg>
+        </div>
+        <div
+          class="sc-bcXGCL bdghCN"
+        >
+          admin.global.delete
+        </div>
+      </div>
     </div>
-  </td>,
-]
+    <div
+      aria-label="delete-confirmation"
+      aria-modal="true"
+      data-dialog="true"
+      hidden=""
+      id="id-g"
+      role="dialog"
+      style="display: none;"
+      tabindex="-1"
+    />
+  </div>
+</DocumentFragment>
 `;

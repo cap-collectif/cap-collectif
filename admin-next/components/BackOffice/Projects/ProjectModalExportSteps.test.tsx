@@ -1,5 +1,5 @@
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+/* eslint-env jest */
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProjectModalExportSteps from './ProjectModalExportSteps'
@@ -9,7 +9,6 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 
 describe('<ProjectModalExportSteps />', () => {
   let environment: any
-  let testComponentTree: any
   let TestProjectModalExportSteps: any
 
   const query = graphql`
@@ -69,8 +68,8 @@ describe('<ProjectModalExportSteps />', () => {
 
   describe('<TestProjectModalExportSteps />', () => {
     it('should render correctly', () => {
-      testComponentTree = ReactTestRenderer.create(<TestProjectModalExportSteps />)
-      expect(testComponentTree).toMatchSnapshot()
+      const { asFragment } = render(<TestProjectModalExportSteps />)
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

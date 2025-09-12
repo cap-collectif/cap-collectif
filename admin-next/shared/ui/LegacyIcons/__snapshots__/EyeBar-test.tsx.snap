@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EyeBar /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <svg
-    className="eye-bar"
+    class="eye-bar"
     height="16px"
     role="img"
     version="1.1"
@@ -16,17 +16,17 @@ exports[`<EyeBar /> renders correctly 1`] = `
   >
     <g
       fill="none"
-      fillRule="evenodd"
+      fill-rule="evenodd"
       id="eye-bar"
       stroke="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1"
     >
       <g
         id="view-off"
         stroke="black"
-        strokeWidth="2"
+        stroke-width="2"
         transform="translate(1.000000, 4.000000)"
       >
         <path
@@ -54,6 +54,6 @@ exports[`<EyeBar /> renders correctly 1`] = `
         />
       </g>
     </g>
-  </svg>,
-]
+  </svg>
+</DocumentFragment>
 `;

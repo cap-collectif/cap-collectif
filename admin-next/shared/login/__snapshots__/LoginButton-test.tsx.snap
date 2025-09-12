@@ -1,22 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginButton /> renders a button 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <form
     id="login-form"
-    onSubmit={[Function]}
-  />,
+  />
   <button
     aria-label="open.connection_modal"
-    className="sc-bcXGCL sc-gGvGpy euZpGu jrAhSN cap-button"
+    class="sc-bcXGCL sc-gGvGpy euZpGu jrAhSN cap-button"
     id="login-button"
-    onClick={[Function]}
     type="button"
   >
     global.login
-  </button>,
-]
+  </button>
+</DocumentFragment>
 `;

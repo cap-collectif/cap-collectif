@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<IconLinkBar /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-1bcb0ecb-0 bcWIho"
+    class="sc-1bcb0ecb-0 bcWIho"
     color="black"
   >
     IconToRender
@@ -15,6 +15,6 @@ exports[`<IconLinkBar /> renders correctly 1`] = `
     >
       capco.message
     </a>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

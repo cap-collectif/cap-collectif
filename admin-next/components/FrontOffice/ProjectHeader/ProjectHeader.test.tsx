@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import ProjectHeader from './ProjectHeader'
 import { MockProviders } from 'tests/testUtils'
 
@@ -29,11 +29,11 @@ describe('<ProjectHeader />', () => {
     }
 
     mockUsePathname.mockImplementation(() => '/project/food-project/step/mon-etape')
-    const wrapper = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <ProjectHeader projectSlug="food-project" project={project} />
       </MockProviders>,
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

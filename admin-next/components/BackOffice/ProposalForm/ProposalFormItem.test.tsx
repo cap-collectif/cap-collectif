@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProposalFormItem from './ProposalFormItem'
@@ -10,7 +9,6 @@ import type { ProposalFormItemTestQuery } from '@relay/ProposalFormItemTestQuery
 describe('<ProposalFormItem />', () => {
   let environment: any
   let TestComponent: any
-  let testComponentTree: any
 
   const defaultMockResolvers = {
     ProposalForm: () => ({
@@ -105,15 +103,15 @@ describe('<ProposalFormItem />', () => {
 
   it('should render correctly', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('should hide delete button when viewer belongs to an organization and is not admin organization', () => {
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, orgaMemberMockResolvers),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

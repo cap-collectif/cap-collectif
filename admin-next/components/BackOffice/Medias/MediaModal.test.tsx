@@ -1,12 +1,9 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import MediaModal from './MediaModal'
 import { addsSupportForPortals, clearSupportForPortals, MockProviders } from 'tests/testUtils'
 
 describe('<MediaModal />', () => {
-  let testComponentTree: any
-
   beforeEach(() => {
     addsSupportForPortals()
   })
@@ -16,7 +13,7 @@ describe('<MediaModal />', () => {
   })
 
   it('should render correctly', () => {
-    testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <MediaModal
           onClose={jest.fn}
@@ -34,6 +31,6 @@ describe('<MediaModal />', () => {
         />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

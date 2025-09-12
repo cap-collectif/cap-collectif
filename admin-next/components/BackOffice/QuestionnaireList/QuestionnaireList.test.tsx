@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -9,7 +8,6 @@ import QuestionnaireList from './QuestionnaireList'
 
 describe('<QuestionnaireList />', () => {
   let environment: any
-  let testComponentTree
   let TestQuestionnaireList: any
 
   const query = graphql`
@@ -78,10 +76,10 @@ describe('<QuestionnaireList />', () => {
 
   describe('<TestQuestionnaireList />', () => {
     it('should render correctly', () => {
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment } = render(
         <TestQuestionnaireList term="" resetTerm={jest.fn} setOrderBy={jest.fn} orderBy="DESC" />,
       )
-      expect(testComponentTree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

@@ -1,69 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
     aria-label="delete-custom-domain"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={false}
+    aria-modal="true"
+    data-dialog="true"
     id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
     role="dialog"
-    tabIndex={-1}
+    tabindex="-1"
   >
     <div
-      className="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
-      onClick={[Function]}
-      style={
-        {
-          "opacity": 0,
-        }
-      }
+      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      style="opacity: 0;"
     >
       <div
-        className="sc-bcXGCL guZZlV sc-fcCDYY kmYErD cap-modal"
-        style={
-          {
-            "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
-          }
-        }
+        class="sc-bcXGCL guZZlV sc-fcCDYY kmYErD cap-modal"
+        style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
         <header
-          className="sc-bcXGCL jJSzZW cap-modal__header"
+          class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
-            className="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL jevVsb"
           >
             <h2
-              className="sc-bcXGCL kLGZDE cap-heading"
+              class="sc-bcXGCL kLGZDE cap-heading"
               id="modal-title"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              style="margin-left: 0px; margin-top: 0px;"
             >
               are-you-sure-you-want-to-delete-your-custom-domain-name
             </h2>
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL cNICVM"
-            onClick={[Function]}
+            class="sc-bcXGCL cNICVM"
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
+              class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -74,83 +53,62 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
               <path
                 d="M1 11 11 1M1 1l10 10"
                 stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={0.8}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="0.8"
               />
             </svg>
           </button>
         </header>
         <div
-          className="sc-bcXGCL eqUaSq cap-modal__body"
+          class="sc-bcXGCL eqUaSq cap-modal__body"
         >
           <p
-            className="sc-bcXGCL hpbLBZ cap-text"
+            class="sc-bcXGCL hpbLBZ cap-text"
           >
             custom-domain-delete-confirmation-message
           </p>
           <label
-            className="sc-bcXGCL hICbbA"
-            htmlFor="agree-checkbox"
+            class="sc-bcXGCL hICbbA"
+            for="agree-checkbox"
           >
             <div
-              className="sc-bcXGCL dawbeU cap-checkbox"
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              class="sc-bcXGCL dawbeU cap-checkbox"
+              style="margin-left: 0px; margin-top: 0px;"
             >
               <input
-                checked={false}
-                className="sc-bcXGCL leuqnG cap-checkbox__input"
+                class="sc-bcXGCL leuqnG cap-checkbox__input"
                 id="agree-checkbox"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
                 type="checkbox"
               />
               <div
-                className="sc-bcXGCL cCxzTy cap-checkbox__box"
+                class="sc-bcXGCL cCxzTy cap-checkbox__box"
               />
             </div>
             <span
-              className="sc-bcXGCL fUXsiF cap-text"
+              class="sc-bcXGCL fUXsiF cap-text"
             >
               admin.project.delete.confirm
             </span>
           </label>
         </div>
         <footer
-          className="sc-bcXGCL eYlbed cap-modal__footer"
+          class="sc-bcXGCL eYlbed cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL jWSPbb cap-buttonGroup"
-            style={
-              {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            class="sc-bcXGCL jWSPbb cap-buttonGroup"
+            style="margin-left: 0px; margin-top: 0px;"
           >
             <button
-              className="sc-bcXGCL sc-gGvGpy iaJbua kpqYfq cap-button"
-              onClick={[Function]}
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              class="sc-bcXGCL sc-gGvGpy iaJbua kpqYfq cap-button"
+              style="margin-left: 0px; margin-top: 0px;"
               type="button"
             >
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-gGvGpy iaJbua qZtxX cap-button"
-              disabled={true}
-              onClick={[Function]}
+              class="sc-bcXGCL sc-gGvGpy iaJbua qZtxX cap-button"
+              disabled=""
               type="button"
             >
               global.delete
@@ -159,6 +117,6 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
         </footer>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;

@@ -1,50 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Footer /> renders correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <footer
-    className="sc-bcXGCL gxjnLQ"
+    class="sc-bcXGCL gxjnLQ"
     role="contentinfo"
   >
     <div
-      className="sc-bcXGCL OgikN"
+      class="sc-bcXGCL OgikN"
     >
       <div
-        className="sc-bcXGCL diSKHL"
+        class="sc-bcXGCL diSKHL"
       >
         <div
-          className="sc-bcXGCL bEfTSe"
+          class="sc-bcXGCL bEfTSe"
         >
           <h3
-            className="sc-bcXGCL btUAcF cap-heading"
+            class="sc-bcXGCL btUAcF cap-heading"
           >
             À Propos
           </h3>
           <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              {
-                "__html": "La démocratie et tout et tout",
-              }
-            }
-          />
+            class=" ql-editor wysiwyg-render"
+          >
+            La démocratie et tout et tout
+          </div>
         </div>
         <div
-          className="sc-bcXGCL dNqoYo"
+          class="sc-bcXGCL dNqoYo"
         >
           <ul
-            className="sc-bcXGCL EoHHt"
+            class="sc-bcXGCL EoHHt"
           >
             <li>
               <div
-                className="sc-bcXGCL lcYpuI"
+                class="sc-bcXGCL lcYpuI"
               >
                 <div
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
+                  class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon"
                 />
                 <a
                   href="x.com/cap-collectif"
@@ -60,14 +57,14 @@ exports[`<Footer /> renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-bcXGCL felxZh"
+      class="sc-bcXGCL felxZh"
       id="footer-links"
     >
       <div
-        className="sc-bcXGCL hRlsIk"
+        class="sc-bcXGCL hRlsIk"
       >
         <ul
-          className="sc-bcXGCL hNLvDS"
+          class="sc-bcXGCL hNLvDS"
         >
           <li>
             <a
@@ -78,17 +75,16 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL fa-doRo"
+              class="sc-bcXGCL fa-doRo"
             >
               |
             </span>
             <div
-              className="sc-bcXGCL gNKGgV"
+              class="sc-bcXGCL gNKGgV"
             >
               <button
-                className="sc-bcXGCL keKWCf"
+                class="sc-bcXGCL keKWCf"
                 id="cookies-management"
-                onClick={[Function]}
                 type="button"
               >
                 cookies-management
@@ -97,7 +93,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL fa-doRo"
+              class="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -109,7 +105,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL fa-doRo"
+              class="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -121,7 +117,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <span
-              className="sc-bcXGCL fa-doRo"
+              class="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -131,7 +127,7 @@ exports[`<Footer /> renders correctly 1`] = `
               FAQ
             </a>
             <span
-              className="sc-bcXGCL fa-doRo"
+              class="sc-bcXGCL fa-doRo"
             >
               |
             </span>
@@ -146,19 +142,19 @@ exports[`<Footer /> renders correctly 1`] = `
         </ul>
       </div>
       <hr
-        className="sc-bcXGCL fwxxqu"
+        class="sc-bcXGCL fwxxqu"
       />
       <div
-        className="sc-bcXGCL dCeLwM"
+        class="sc-bcXGCL dCeLwM"
       >
         powered_by
         <img
           alt=""
-          className="sc-bcXGCL ecZTMp"
+          class="sc-bcXGCL ecZTMp"
           src="/favicon-64x64.png"
         />
         <a
-          className="sc-bcXGCL blMEeg"
+          class="sc-bcXGCL blMEeg"
           href="https://cap-collectif.com"
         >
           <span>
@@ -167,6 +163,6 @@ exports[`<Footer /> renders correctly 1`] = `
         </a>
       </div>
     </div>
-  </footer>,
-]
+  </footer>
+</DocumentFragment>
 `;

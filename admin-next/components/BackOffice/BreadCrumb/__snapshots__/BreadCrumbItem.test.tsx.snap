@@ -1,18 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BreadCrumbItem /> should render a text when link is active 1`] = `
-<p
-  className="sc-bcXGCL fPghBz cap-text"
->
-  Project List
-</p>
+<DocumentFragment>
+  <p
+    class="sc-bcXGCL fPghBz cap-text"
+  >
+    Project List
+  </p>
+</DocumentFragment>
 `;
 
 exports[`<BreadCrumbItem /> should render link with href when link is not active 1`] = `
-<a
-  className="sc-bcXGCL cKcCXf cap-link"
-  href="/projects"
->
-  Project List
-</a>
+<DocumentFragment>
+  <a
+    class="sc-bcXGCL cKcCXf cap-link"
+    href="/projects"
+  >
+    Project List
+  </a>
+</DocumentFragment>
 `;

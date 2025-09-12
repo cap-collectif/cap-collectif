@@ -1,160 +1,495 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginSocialButton /> should render correctly 1`] = `
-[
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <div>
-    <div
-      buttonColor="#fffeee"
-      className="sc-cb1ada3e-0 cyRFFJ"
-      labelColor="#fff"
-      type="facebook"
-    >
-      <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
-      >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+      />
+      <div>
         <div
-          data-testid="LegacyIcon-facebook"
-        />
-      </span>
-      <a
-        href="/login/facebook?_destination=http://localhost/"
-        title="facebook"
+          buttoncolor="#fffeee"
+          class="sc-cb1ada3e-0 cyRFFJ"
+          labelcolor="#fff"
+          type="facebook"
+        >
+          <span
+            class="loginIcon"
+            style="line-height: inherit;"
+          >
+            <div
+              data-testid="LegacyIcon-facebook"
+            />
+          </span>
+          <a
+            href="/login/facebook?_destination=http://localhost/"
+            title="facebook"
+          >
+            Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+    />
+    <div>
+      <div
+        buttoncolor="#fffeee"
+        class="sc-cb1ada3e-0 cyRFFJ"
+        labelcolor="#fff"
+        type="facebook"
       >
-        Facebook
-      </a>
+        <span
+          class="loginIcon"
+          style="line-height: inherit;"
+        >
+          <div
+            data-testid="LegacyIcon-facebook"
+          />
+        </span>
+        <a
+          href="/login/facebook?_destination=http://localhost/"
+          title="facebook"
+        >
+          Facebook
+        </a>
+      </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
-[
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <div>
-    <p
-      className="sc-bcXGCL kQKQmV cap-text"
-    >
-      <p>
-        fc-title
-      </p>
-    </p>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+      />
+      <div>
+        <p
+          class="sc-bcXGCL kQKQmV cap-text"
+        >
+          <p>
+            fc-title
+          </p>
+        </p>
+        <div
+          class="sc-cb1ada3e-1 bbfUU"
+          justifycontent="center"
+        >
+          <a
+            href="/login/franceconnect?_destination=http://localhost/"
+            title="FranceConnect"
+          >
+            <span
+              class="loginIcon"
+              style="line-height: inherit;"
+            >
+              <div
+                data-testid="LegacyIcon-franceConnect"
+              />
+            </span>
+          </a>
+        </div>
+        <div
+          class="sc-bcXGCL lhPwVY"
+        >
+          <a
+            class="sc-bcXGCL cRTtob cap-link"
+            href="https://franceconnect.gouv.fr/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            what-is-fc
+          </a>
+          <div
+            class="sc-bcXGCL dMUThH cap-text"
+          >
+            login.or
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
     <div
-      className="sc-cb1ada3e-1 bbfUU"
-      justifyContent="center"
+      class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+    />
+    <div>
+      <p
+        class="sc-bcXGCL kQKQmV cap-text"
+      >
+        <p>
+          fc-title
+        </p>
+      </p>
+      <div
+        class="sc-cb1ada3e-1 bbfUU"
+        justifycontent="center"
+      >
+        <a
+          href="/login/franceconnect?_destination=http://localhost/"
+          title="FranceConnect"
+        >
+          <span
+            class="loginIcon"
+            style="line-height: inherit;"
+          >
+            <div
+              data-testid="LegacyIcon-franceConnect"
+            />
+          </span>
+        </a>
+      </div>
+      <div
+        class="sc-bcXGCL lhPwVY"
+      >
+        <a
+          class="sc-bcXGCL cRTtob cap-link"
+          href="https://franceconnect.gouv.fr/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          what-is-fc
+        </a>
+        <div
+          class="sc-bcXGCL dMUThH cap-text"
+        >
+          login.or
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+      />
+      <div
+        class="sc-cb1ada3e-2 gyHaVx"
+      >
+        <a
+          href="/login/openid?_destination=http://localhost/"
+          title="openId"
+        >
+          <span
+            class="loginIcon"
+            style="line-height: inherit;"
+          >
+            <div
+              data-testid="LegacyIcon-grandLyonConnect"
+            />
+          </span>
+        </a>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+    />
+    <div
+      class="sc-cb1ada3e-2 gyHaVx"
     >
       <a
-        href="/login/franceconnect?_destination=http://localhost/"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        title="FranceConnect"
+        href="/login/openid?_destination=http://localhost/"
+        title="openId"
       >
         <span
-          className="loginIcon"
-          style={
-            {
-              "lineHeight": "inherit",
-            }
-          }
+          class="loginIcon"
+          style="line-height: inherit;"
         >
           <div
-            data-testid="LegacyIcon-franceConnect"
+            data-testid="LegacyIcon-grandLyonConnect"
           />
         </span>
       </a>
     </div>
-    <div
-      className="sc-bcXGCL lhPwVY"
-    >
-      <a
-        className="sc-bcXGCL cRTtob cap-link"
-        href="https://franceconnect.gouv.fr/"
-        rel="noreferrer"
-        target="_blank"
-      >
-        what-is-fc
-      </a>
-      <div
-        className="sc-bcXGCL dMUThH cap-text"
-      >
-        login.or
-      </div>
-    </div>
   </div>,
-]
-`;
-
-exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`] = `
-[
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-cb1ada3e-2 gyHaVx"
-  >
-    <a
-      href="/login/openid?_destination=http://localhost/"
-      title="openId"
-    >
-      <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
-      >
-        <div
-          data-testid="LegacyIcon-grandLyonConnect"
-        />
-      </span>
-    </a>
-  </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
-[
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
-  <div>
-    <div
-      buttonColor="#fffeee"
-      className="sc-cb1ada3e-0 eYJPwN"
-      labelColor="#fff"
-      type="openId"
-    >
-      <span
-        className="loginIcon"
-        style={
-          {
-            "lineHeight": "inherit",
-          }
-        }
-      >
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+      />
+      <div>
         <div
-          data-testid="LegacyIcon-openId"
-        />
-      </span>
-      <a
-        href="/login/openid?_destination=http://localhost/sso/switch-user"
-        title="openId"
+          buttoncolor="#fffeee"
+          class="sc-cb1ada3e-0 eYJPwN"
+          labelcolor="#fff"
+          type="openId"
+        >
+          <span
+            class="loginIcon"
+            style="line-height: inherit;"
+          >
+            <div
+              data-testid="LegacyIcon-openId"
+            />
+          </span>
+          <a
+            href="/login/openid?_destination=http://localhost/sso/switch-user"
+            title="openId"
+          >
+            <span>
+              openid
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+    />
+    <div>
+      <div
+        buttoncolor="#fffeee"
+        class="sc-cb1ada3e-0 eYJPwN"
+        labelcolor="#fff"
+        type="openId"
       >
-        <span>
-          openid
+        <span
+          class="loginIcon"
+          style="line-height: inherit;"
+        >
+          <div
+            data-testid="LegacyIcon-openId"
+          />
         </span>
-      </a>
+        <a
+          href="/login/openid?_destination=http://localhost/sso/switch-user"
+          title="openId"
+        >
+          <span>
+            openid
+          </span>
+        </a>
+      </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

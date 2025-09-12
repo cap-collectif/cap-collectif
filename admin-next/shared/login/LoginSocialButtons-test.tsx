@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest, FormWrapper } from 'tests/testUtils'
@@ -13,7 +13,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<LoginSocialButtons />', () => {
   let environment
   let TestComponent
-  let testComponentTree
 
   const query = graphql`
     query LoginSocialButtonsTestQuery @relay_test_operation {
@@ -73,8 +72,8 @@ describe('<LoginSocialButtons />', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(() => false)
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, emptyMock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders only Facebook button', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -90,15 +89,15 @@ describe('<LoginSocialButtons />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment).toMatchSnapshot()
   })
   it('renders only SAML button', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(e => e === 'login_saml')
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, emptyMock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders only CAS button', () => {
     // @ts-ignore jest
@@ -116,8 +115,8 @@ describe('<LoginSocialButtons />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders only OpenID button', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -133,8 +132,8 @@ describe('<LoginSocialButtons />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders only FranceConnect button', () => {
     // @ts-ignore jest
@@ -152,21 +151,21 @@ describe('<LoginSocialButtons />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders all buttons', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(e => e !== 'sso_by_pass_auth')
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders without OR separator', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(e => e === 'sso_by_pass_auth')
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mock))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

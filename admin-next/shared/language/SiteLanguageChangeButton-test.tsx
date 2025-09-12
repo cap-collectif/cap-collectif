@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import SiteLanguageChangeButton from './SiteLanguageChangeButton'
 import MockProviders from 'tests/testUtils'
 
@@ -24,19 +23,19 @@ describe('<SiteLanguageChangeButton />', () => {
     ],
   }
   it('renders correctly', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <SiteLanguageChangeButton {...props} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should return null with a wrong defaultLanguage', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <SiteLanguageChangeButton {...props} defaultLanguage="Dothraki" />{' '}
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

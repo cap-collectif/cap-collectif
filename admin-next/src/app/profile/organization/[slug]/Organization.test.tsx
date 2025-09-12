@@ -1,8 +1,9 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { RelaySuspensFragmentTest } from 'tests/testUtils'
+import { NavBarContext } from 'shared/navbar/NavBar.context'
 import Organization from './Organization'
 
 describe('<Organization />', () => {
@@ -13,7 +14,6 @@ describe('<Organization />', () => {
 
   let environment
   let TestComponent
-  let testComponentTree
   const defaultMockResolvers = {
     Organization: () => ({
       id: 'org-id-1',
@@ -33,13 +33,15 @@ describe('<Organization />', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
 
     TestComponent = () => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <Organization slug="nice-org" organization={{ title }} />
-      </RelaySuspensFragmentTest>
+      <NavBarContext.Provider value={{ setBreadCrumbItems: jest.fn() }}>
+        <RelaySuspensFragmentTest environment={environment}>
+          <Organization slug="nice-org" organization={{ title }} />
+        </RelaySuspensFragmentTest>
+      </NavBarContext.Provider>
     )
   })
   it('renders correctly', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

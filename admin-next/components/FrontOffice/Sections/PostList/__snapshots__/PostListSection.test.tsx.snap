@@ -1,59 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PostListSection /> should render correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <section
-    className="sc-bcXGCL keKWCf news-list-section"
+    class="sc-bcXGCL keKWCf news-list-section"
   >
     <div
-      className="sc-bcXGCL eiRsso"
+      class="sc-bcXGCL eiRsso"
     >
       <div
-        className="sc-bcXGCL ekjERx"
+        class="sc-bcXGCL ekjERx"
       >
         <div
-          className="sc-bcXGCL gWXBpS"
+          class="sc-bcXGCL gWXBpS"
         >
           <div
-            className="sc-bcXGCL fhHjWe"
+            class="sc-bcXGCL fhHjWe"
           >
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
             <div
-              className="sc-bcXGCL ljlYbx"
+              class="sc-bcXGCL ljlYbx"
             >
               <div
-                className="sc-bcXGCL kYfEQk sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kYfEQk sc-jTjVHl"
               />
               <div
-                className="sc-bcXGCL kSsnXv sc-jTjVHl"
-                style={{}}
+                class="sc-bcXGCL kSsnXv sc-jTjVHl"
               />
             </div>
           </div>
@@ -61,24 +55,24 @@ exports[`<PostListSection /> should render correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-bcXGCL jIyEGY"
+      class="sc-bcXGCL jIyEGY"
     >
       <div
-        className="sc-bcXGCL jhFiXu post-list-section-posts"
+        class="sc-bcXGCL jhFiXu post-list-section-posts"
       >
         <div
-          className="sc-bcXGCL iXnXIj cap-card cap-post-card"
+          class="sc-bcXGCL iXnXIj cap-card cap-post-card"
           id="cap-post-card-post1"
         >
           <div
-            className="sc-bcXGCL hztmdy cap-card-cover"
+            class="sc-bcXGCL hztmdy cap-card-cover"
           >
             <img
               alt=""
-              className="sc-bcXGCL khbwMK"
+              class="sc-bcXGCL khbwMK"
               loading="lazy"
               sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
-              srcSet="
+              srcset="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
@@ -87,27 +81,20 @@ exports[`<PostListSection /> should render correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
-              style={
-                {
-                  "aspectRatio": "3 / 2",
-                  "filter": undefined,
-                  "objectFit": "cover",
-                  "opacity": undefined,
-                }
-              }
+              style="object-fit: cover;"
             />
           </div>
           <div
-            className="sc-bcXGCL EINPx cap-card-content"
+            class="sc-bcXGCL EINPx cap-card-content"
           >
             <div
-              className="sc-bcXGCL bIZLTw"
+              class="sc-bcXGCL bIZLTw"
             >
               <h3
-                className="sc-bcXGCL gThejf cap-card-primaryInfo"
+                class="sc-bcXGCL gThejf cap-card-primaryInfo"
               >
                 <a
-                  className="sc-bcXGCL kZMHwF cap-card-link"
+                  class="sc-bcXGCL kZMHwF cap-card-link"
                   href="site.com/table-ronde"
                 >
                   Table Ronde
@@ -115,18 +102,16 @@ exports[`<PostListSection /> should render correctly 1`] = `
               </h3>
             </div>
             <div
-              className="sc-bcXGCL hrEHcD"
+              class="sc-bcXGCL hrEHcD"
             >
               <div
                 aria-label="Tag Invalid Date (export_proposal_news_published_at)"
-                className="sc-bcXGCL gTREYS cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL gTREYS cap-tag"
                 title="Invalid Date (export_proposal_news_published_at)"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -136,33 +121,30 @@ exports[`<PostListSection /> should render correctly 1`] = `
                   <path
                     d="M10.333 2.333H1.667A.667.667 0 0 0 1 3v7.333c0 .368.298.667.667.667h8.666a.667.667 0 0 0 .667-.667V3a.667.667 0 0 0-.667-.667M1 5h10M3.667 3.333V1M8.334 3.333V1"
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="0.8"
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL lnyRPA cap-tag__label"
                 >
                   Invalid Date
                 </span>
                 <span
-                  className="sc-bcXGCL iWtiap"
+                  class="sc-bcXGCL iWtiap"
                 >
-                   
-                  (export_proposal_news_published_at)
+                   (export_proposal_news_published_at)
                 </span>
               </div>
               <div
                 aria-label="Tag <mock-value-for-field-"title"> (export_proposal_news_themes)"
-                className="sc-bcXGCL gTREYS cap-tag"
-                onBlur={[Function]}
-                onFocus={[Function]}
+                class="sc-bcXGCL gTREYS cap-tag"
                 title="<mock-value-for-field-"title"> (export_proposal_news_themes)"
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 10"
@@ -170,24 +152,23 @@ exports[`<PostListSection /> should render correctly 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    clipRule="evenodd"
+                    clip-rule="evenodd"
                     d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
                     stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="0.8"
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL lnyRPA cap-tag__label"
                 >
                   &lt;mock-value-for-field-"title"&gt;
                 </span>
                 <span
-                  className="sc-bcXGCL iWtiap"
+                  class="sc-bcXGCL iWtiap"
                 >
-                   
-                  (export_proposal_news_themes)
+                   (export_proposal_news_themes)
                 </span>
               </div>
             </div>
@@ -195,6 +176,6 @@ exports[`<PostListSection /> should render correctly 1`] = `
         </div>
       </div>
     </div>
-  </section>,
-]
+  </section>
+</DocumentFragment>
 `;

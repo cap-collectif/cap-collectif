@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import MediaList from './MediaList'
@@ -77,11 +76,11 @@ describe('<MediaList />', () => {
   })
 
   it('should render correctly in list view', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent view="LIST" />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent view="LIST" />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly in grid view', () => {
-    const wrapper = ReactTestRenderer.create(<TestComponent view="GRID" />)
-    expect(wrapper).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent view="GRID" />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

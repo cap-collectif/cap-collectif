@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import CookieModal from './CookieModal'
 import CookieBanner from './CookieBanner'
 import CookieContent from './CookieContent'
@@ -9,41 +8,41 @@ import MockProviders, { mockedSSRData } from 'tests/testUtils'
 
 describe('<CookieModal />', () => {
   it('renders correctly', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <CookieModal SSRData={mockedSSRData} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })
 describe('<CookieBanner />', () => {
   it('renders correctly', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <CookieBanner onOpen={jest.fn} onAccept={jest.fn} onRefuse={jest.fn} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })
 describe('<CookieContent />', () => {
   it('renders correctly', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <CookieContent SSRData={mockedSSRData} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })
 describe('<CookieManager />', () => {
   it('renders correctly', () => {
-    const testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <CookieManager SSRData={mockedSSRData} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

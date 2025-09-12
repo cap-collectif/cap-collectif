@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { RelaySuspensFragmentTest, MockProviders } from 'tests/testUtils'
 import Carrousel from './Carrousel'
@@ -25,7 +24,6 @@ const item = {
 describe('<Carrousel />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const defaultMockResolvers = {
     CarrouselConfiguration: () => ({
       id: 'carrouselId1',
@@ -52,19 +50,19 @@ describe('<Carrousel />', () => {
     )
   })
   it('renders correctly with a carrousel', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent type="carrousel" />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent type="carrousel" />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders correctly with a carrouselHighlighted', () => {
-    testComponentTree = ReactTestRenderer.create(<TestComponent type="carrouselHighlighted" />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent type="carrouselHighlighted" />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('renders correctly with a carrouselHighlighted on mobile', () => {
-    testComponentTree = ReactTestRenderer.create(
+    const { asFragment } = render(
       <MockProviders>
         <WhatsNewMobile title="TitleMobile" items={[item]} />
       </MockProviders>,
     )
-    expect(testComponentTree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

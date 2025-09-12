@@ -1,113 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginForm /> renders a form with inputs 1`] = `
-[
+<DocumentFragment>
   <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
-  />,
+    class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  />
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":r0:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":r0:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.email
       </span>
     </label>
     <input
-      aria-required={true}
-      autoComplete="email"
-      autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
-      disabled={false}
+      aria-required="true"
+      autocomplete="email"
+      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
       id=":r0:"
       name="username"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
       placeholder="email.placeholder"
-      readOnly={false}
-      required={true}
+      required=""
       type="email"
     />
-  </div>,
+  </div>
   <div
-    className="sc-bcXGCL fVgOgb cap-form-control"
+    class="sc-bcXGCL fVgOgb cap-form-control"
   >
     <label
-      className="sc-bcXGCL fTPHCc cap-form-label"
-      htmlFor=":r1:"
-      style={
-        {
-          "marginLeft": 0,
-          "marginTop": 0,
-        }
-      }
+      class="sc-bcXGCL fTPHCc cap-form-label"
+      for=":r1:"
+      style="margin-left: 0px; margin-top: 0px;"
     >
       <span
-        className="sc-bcXGCL dQChsN cap-text"
-        style={
-          {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
+        class="sc-bcXGCL dQChsN cap-text"
+        style="margin-left: 0px; margin-top: 0px;"
       >
         global.password
       </span>
     </label>
     <div
-      className="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+      class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
     >
       <input
-        aria-required={true}
-        autoComplete="off"
-        className="sc-bcXGCL dANhtW cap-input"
-        disabled={false}
+        aria-required="true"
+        autocomplete="off"
+        class="sc-bcXGCL dANhtW cap-input"
         id=":r1:"
         name="password"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        readOnly={false}
-        required={true}
+        required=""
         type="password"
       />
       <button
         aria-describedby=":r2:"
-        className="sc-bcXGCL fROdoz"
-        disabled={false}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocusCapture={[Function]}
-        onKeyDownCapture={[Function]}
-        onKeyPressCapture={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseMove={[Function]}
+        class="sc-bcXGCL fROdoz"
         type="button"
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+          class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
           fill="none"
           height="1em"
           viewBox="0 0 12 10"
@@ -117,35 +75,26 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
           <path
             d="m1.903 9 8.333-8M4.65 8.134c.437.135.892.203 1.35.2 1.822.03 3.67-1.25 4.81-2.506a.74.74 0 0 0 0-.99 9 9 0 0 0-1.366-1.225M7.072 2.459a4.2 4.2 0 0 0-1.073-.126c-1.791-.03-3.644 1.223-4.81 2.505a.74.74 0 0 0 0 .99q.534.582 1.156 1.066"
             stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={0.8}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="0.8"
           />
           <path
             d="M4.333 5.333a1.666 1.666 0 0 1 1.666-1.666M7.666 5.333A1.667 1.667 0 0 1 5.999 7"
             stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={0.8}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="0.8"
           />
         </svg>
       </button>
-      <span
-        hidden={true}
-        id=":r2:"
-        style={
-          {
-            "position": "fixed",
-          }
-        }
-      />
     </div>
-  </div>,
+  </div>
   <a
-    className="sc-bcXGCL gudgoe cap-link"
+    class="sc-bcXGCL gudgoe cap-link"
     href="/resetting/request"
   >
     global.forgot_password
-  </a>,
-]
+  </a>
+</DocumentFragment>
 `;

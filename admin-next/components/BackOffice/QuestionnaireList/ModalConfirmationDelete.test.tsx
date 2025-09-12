@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -9,7 +8,6 @@ import ModalConfirmationDelete from './ModalConfirmationDelete'
 
 describe('<ModalConfirmationDelete />', () => {
   let environment: any
-  let testComponentTree
   let TestModalConfirmationDelete: any
 
   const query = graphql`
@@ -57,19 +55,19 @@ describe('<ModalConfirmationDelete />', () => {
 
   describe('<TestModalConfirmationDelete />', () => {
     it('should render correctly', () => {
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment } = render(
         <TestModalConfirmationDelete connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
       )
-      expect(testComponentTree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('should render modal open', () => {
-      testComponentTree = ReactTestRenderer.create(
+      const { asFragment, getByRole } = render(
         <TestModalConfirmationDelete connectionName="client:root:__QuestionnaireList_questionnaires_connection" />,
       )
-      const fakeEvent = {}
-      testComponentTree.root.findByType('button').props.onClick(fakeEvent)
-      expect(testComponentTree).toMatchSnapshot()
+      const button = getByRole('button')
+      button.click()
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

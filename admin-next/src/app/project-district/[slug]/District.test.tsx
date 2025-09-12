@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import { NavBarContext } from 'shared/navbar/NavBar.context'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from 'tests/testUtils'
 import District from './District'
@@ -11,7 +12,6 @@ jest.mock('@shared/hooks/useFeatureFlag')
 describe('<District />', () => {
   let environment
   let TestComponent
-  let testComponentTree
   const districtResolver = {
     GlobalDistrict: () => ({
       id: 'district-id-1',
@@ -32,9 +32,11 @@ describe('<District />', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, queryResolver))
 
     TestComponent = () => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <District slug="nice-district" />
-      </RelaySuspensFragmentTest>
+      <NavBarContext.Provider value={{ setBreadCrumbItems: jest.fn() }}>
+        <RelaySuspensFragmentTest environment={environment}>
+          <District slug="nice-district" />
+        </RelaySuspensFragmentTest>
+      </NavBarContext.Provider>
     )
   })
 
@@ -45,7 +47,7 @@ describe('<District />', () => {
   it('renders correctly', () => {
     // @ts-ignore jest
     useFeatureFlag.mockImplementation(() => false)
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

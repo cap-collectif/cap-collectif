@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import * as React from 'react'
-import ReactTestRenderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProjectItem from './ProjectItem'
@@ -10,7 +9,6 @@ import type { ProjectItemTestQuery } from '@relay/ProjectItemTestQuery.graphql'
 describe('<ProjectItem />', () => {
   let environment: any
   let TestComponent: any
-  let testComponentTree: any
 
   const defaultMockResolvers = {
     Project: () => ({
@@ -119,8 +117,8 @@ describe('<ProjectItem />', () => {
 
   it('should render correctly', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly without authors', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -183,8 +181,8 @@ describe('<ProjectItem />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly without themes', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -240,8 +238,8 @@ describe('<ProjectItem />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
   it('should render correctly without exportable steps', () => {
     environment.mock.queueOperationResolver(operation =>
@@ -283,7 +281,7 @@ describe('<ProjectItem />', () => {
         }),
       }),
     )
-    testComponentTree = ReactTestRenderer.create(<TestComponent />)
-    expect(testComponentTree).toMatchSnapshot()
+    const { asFragment } = render(<TestComponent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })
