@@ -58,9 +58,6 @@ const FRAGMENT = graphql`
     contributors {
       totalCount
     }
-    anonymousReplies: contributions(type: REPLY_ANONYMOUS) {
-      totalCount
-    }
     hasParticipativeStep
     externalParticipantsCount
     externalContributionsCount
@@ -138,8 +135,7 @@ export const ProjectCard = ({ project: projectKey, primaryInfoTag, ...props }: P
                 isExternal
                   ? externalParticipantsCount || 0
                   : project.contributors.totalCount +
-                      project.anonymousVotes.totalCount +
-                      project.anonymousReplies?.totalCount,
+                      project.anonymousVotes.totalCount,
                 intl.formatMessage({ id: 'capco.section.metrics.participants' }),
               )) ||
               null}
