@@ -1,0 +1,4 @@
+export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
+proposalWorkflowVoteA,600509,"Proposition A",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-a,1068,,"2024-01-03 00:00:00",Non,user1
+proposalWorkflowVoteB,760144,"Proposition B",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-b,1069,,"2024-01-03 00:00:00",Non,user1
+proposalWorkflowVoteC,370076,"Proposition C",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-c,1070,,"2024-01-03 00:00:00",Non,user1

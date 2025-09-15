@@ -98,6 +98,18 @@ class CollectStepRepository extends AbstractStepRepository
         ;
     }
 
+    /**
+     * @return array<CollectStep>
+     */
+    public function findWithVotes(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->join('s.collectVotes', 'v')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')

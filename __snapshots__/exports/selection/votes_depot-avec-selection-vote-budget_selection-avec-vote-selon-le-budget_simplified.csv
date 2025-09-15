@@ -1,0 +1,2 @@
+export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
+proposal7,1,"Proposition très chère",https://capco.dev/project/depot-avec-selection-vote-budget/collect/collecte-des-propositions-1/proposals/proposition-tres-chere,1051,,"2017-02-01 00:00:51",Non,userAdmin

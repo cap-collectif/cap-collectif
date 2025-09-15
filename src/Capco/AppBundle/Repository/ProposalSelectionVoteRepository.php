@@ -841,6 +841,25 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ;
     }
 
+    /**
+     * @return iterable<ProposalSelectionVote>
+     */
+    public function findForVotesExport(SelectionStep $step): iterable
+    {
+        $qb = $this->exportVotesQueryBuilder($step);
+
+        return $qb->getQuery()->toIterable();
+    }
+
+    public function countForVotesExport(SelectionStep $step): int
+    {
+        $qb = $this->exportVotesQueryBuilder($step)
+            ->select('COUNT(v)')
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     private function findByParticipantQueryBuilder(
         Participant $participant,
         ?Mediator $mediator = null,
@@ -875,5 +894,17 @@ class ProposalSelectionVoteRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    private function exportVotesQueryBuilder(SelectionStep $step): QueryBuilder
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.proposal', 'p')
+            ->join('v.selectionStep', 's')
+            ->where('v.selectionStep = :step')
+            ->andWhere('v.isAccounted = 1')
+            ->andWhere('v.published = 1')
+            ->setParameter('step', $step)
+        ;
     }
 }

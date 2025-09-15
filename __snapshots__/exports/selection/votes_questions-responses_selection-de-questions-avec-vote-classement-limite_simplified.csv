@@ -1,0 +1,2 @@
+export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
+question1,48,"Comment faire de l'électricité ?",https://capco.dev/project/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite,1057,0,"2017-02-01 00:00:57",Non,userAdmin

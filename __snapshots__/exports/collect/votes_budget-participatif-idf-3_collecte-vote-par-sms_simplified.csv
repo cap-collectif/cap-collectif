@@ -1,0 +1,4 @@
+export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
+proposalSmsVote1,140,proposalSmsVote1,https://capco.dev/project/budget-participatif-idf-3/collect/collecte-vote-par-sms/proposals/proposalsmsvote1,2067,1,"2022-03-01 00:02:02",Non,user1
+proposalSmsVote2,141,proposalSmsVote2,https://capco.dev/project/budget-participatif-idf-3/collect/collecte-vote-par-sms/proposals/proposalsmsvote2,2068,2,"2022-03-01 00:02:02",Non,user1
+proposalSmsVote1,140,proposalSmsVote1,https://capco.dev/project/budget-participatif-idf-3/collect/collecte-vote-par-sms/proposals/proposalsmsvote1,2069,1,"2022-03-01 00:02:02",Non,participant3

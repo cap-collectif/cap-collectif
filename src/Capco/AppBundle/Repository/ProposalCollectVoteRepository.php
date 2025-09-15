@@ -636,6 +636,25 @@ class ProposalCollectVoteRepository extends EntityRepository
             ;
     }
 
+    /**
+     * @return iterable<ProposalCollectVote>
+     */
+    public function findForVotesExport(CollectStep $step): iterable
+    {
+        $qb = $this->votesExportQueryBuilder($step);
+
+        return $qb->getQuery()->toIterable();
+    }
+
+    public function countForVotesExport(CollectStep $step): int
+    {
+        $qb = $this->votesExportQueryBuilder($step)
+            ->select('COUNT(v)')
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     private function getCountsByProposalGroupedBySteps(
         Proposal $proposal,
         bool $asTitle = false
@@ -719,5 +738,17 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return $data;
+    }
+
+    private function votesExportQueryBuilder(CollectStep $step): QueryBuilder
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.proposal', 'p')
+            ->join('v.collectStep', 's')
+            ->where('v.collectStep = :step')
+            ->andWhere('v.isAccounted = 1')
+            ->andWhere('v.published = 1')
+            ->setParameter('step', $step)
+            ;
     }
 }

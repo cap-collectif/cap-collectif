@@ -68,6 +68,18 @@ class SelectionStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<SelectionStep>
+     */
+    public function findWithVotes(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->join('s.selectionVotes', 'v')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function getEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('ss')->where('ss.isEnabled = 1');

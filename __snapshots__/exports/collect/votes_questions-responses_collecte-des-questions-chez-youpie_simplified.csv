@@ -1,0 +1,3 @@
+export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
+question1,48,"Comment faire de l'électricité ?",https://capco.dev/project/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/comment-faire-de-lelectricite,2054,0,"2015-03-01 00:00:54",Non,user5
+question2,49,"Et chez Youpie c'est mieux ?",https://capco.dev/project/questions-responses/collect/collecte-des-questions-chez-youpie/proposals/et-chez-youpie-cest-mieux,2055,1,"2015-03-01 00:00:55",Non,user5
