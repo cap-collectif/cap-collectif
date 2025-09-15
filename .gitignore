@@ -3,6 +3,8 @@
 
 /frontend/js/__generated__/**
 !frontend/js/__generated__/.gitkeep
+/frontend/js/__generated__/~relay/**
+!frontend/js/__generated__/~relay/.gitkeep
 
 schema.internal.json
 
