@@ -4,11 +4,21 @@ exports[`mutations.updateUserType updates a user type 1`] = `
 Object {
   "updateUserType": Object {
     "userType": Object {
-      "id": "4",
+      "id": "VXNlclR5cGU6NA==",
       "media": Object {
-        "id": "user-type-nonprofit",
+        "url": "https://capco.test/media/default/0001/01/nonprofit.jpg",
       },
       "name": "Institution avec media",
+      "translations": Array [
+        Object {
+          "locale": "EN_GB",
+          "name": "Institution",
+        },
+        Object {
+          "locale": "FR_FR",
+          "name": "Institution avec media",
+        },
+      ],
     },
   },
 }

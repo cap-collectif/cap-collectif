@@ -3,12 +3,15 @@
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\UserTypeOrderField;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method null|UserType find($id, $lockMode = null, $lockVersion = null)
@@ -25,23 +28,51 @@ class UserTypeRepository extends EntityRepository
      */
     public function findAllToArray(?string $locale = null): array
     {
-        return $this->findAllQueryBuilder($locale)
+        $locale = $this->getLocale($locale);
+
+        $qb = $this->createQueryBuilder('ut')
             ->select('utt.name as name, ut.id as id')
-            ->getQuery()
-            ->getArrayResult()
+            ->leftJoin('ut.translations', 'utt')
+            ->where('utt.locale = :locale')
+            ->setParameter('locale', $locale)
         ;
+
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
-     * @return array<int, mixed>
+     * @param array<string, string> $orderBy
+     *
+     * @return UserType[]
      */
-    public function findAllWithMediaToArray(?string $locale = null): array
-    {
-        return $this->findAllQueryBuilder($locale)
-            ->select('ut', 'utt', 'utm')
-            ->leftJoin('ut.media', 'utm')
+    public function findAllPaginated(
+        int $offset = 0,
+        int $limit = 50,
+        array $orderBy = [
+            'field' => UserTypeOrderField::SORT_FIELD[UserTypeOrderField::CREATED_AT],
+            'direction' => OrderDirection::DESC,
+        ]
+    ): array {
+        $qb = $this->createQueryBuilder('ut');
+
+        // todo refacto: remake all these order by checks and constants in a consistent and practical system
+        if (
+            [] !== $orderBy
+            && \array_key_exists('field', $orderBy)
+            && \array_key_exists('direction', $orderBy)
+            && \array_key_exists($orderBy['field'], UserTypeOrderField::SORT_FIELD)
+            && \array_key_exists($orderBy['direction'], OrderDirection::SORT_DIRECTION)
+        ) {
+            $field = UserTypeOrderField::SORT_FIELD[$orderBy['field']];
+            $direction = OrderDirection::SORT_DIRECTION[$orderBy['direction']];
+            $qb->orderBy("p.{$field}", $direction);
+        }
+
+        return $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
             ->getQuery()
-            ->getArrayResult()
+            ->getResult()
         ;
     }
 
@@ -91,6 +122,10 @@ class UserTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
     public function countAll(): int
     {
         $qb = $this->createQueryBuilder('ut')->select('COUNT(ut.id)');
@@ -108,16 +143,5 @@ class UserTypeRepository extends EntityRepository
         if ($flush) {
             $this->_em->flush();
         }
-    }
-
-    private function findAllQueryBuilder(?string $locale = null): QueryBuilder
-    {
-        $locale = $this->getLocale($locale);
-
-        return $this->createQueryBuilder('ut')
-            ->leftJoin('ut.translations', 'utt')
-            ->where('utt.locale = :locale')
-            ->setParameter('locale', $locale)
-        ;
     }
 }

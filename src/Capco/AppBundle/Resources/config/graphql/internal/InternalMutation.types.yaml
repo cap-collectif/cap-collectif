@@ -1826,9 +1826,9 @@ InternalMutation:
             updateParticipant:
                 builder: 'Relay::Mutation'
                 builderConfig:
-                  inputType: UpdateParticipantInput
-                  payloadType: UpdateParticipantPayload
-                  mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Participant\\UpdateParticipantMutation", args, getUser())'
+                    inputType: UpdateParticipantInput
+                    payloadType: UpdateParticipantPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Participant\\UpdateParticipantMutation", args, getUser())'
             validateContribution:
                 builder: 'Relay::Mutation'
                 builderConfig:
@@ -1937,11 +1937,11 @@ InternalMutation:
                 builderConfig:
                     inputType: UpdateUserTypeInput
                     payloadType: UpdateUserTypePayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserTypeMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserTypeMutation", args, getUser())'
             deleteUserType:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteUserTypeInput
                     payloadType: DeleteUserTypePayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteUserTypeMutation", value["id"])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteUserTypeMutation", value["id"], getUser())'

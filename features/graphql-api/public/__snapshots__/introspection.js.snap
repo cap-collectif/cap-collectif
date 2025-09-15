@@ -35,7 +35,13 @@ Object {
         "name": "UserType",
       },
       Object {
+        "name": "TranslationLocale",
+      },
+      Object {
         "name": "Media",
+      },
+      Object {
+        "name": "UserTypeTranslation",
       },
       Object {
         "name": "Int",
@@ -129,9 +135,6 @@ Object {
       },
       Object {
         "name": "District",
-      },
-      Object {
-        "name": "TranslationLocale",
       },
       Object {
         "name": "GeoJSON",

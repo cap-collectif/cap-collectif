@@ -2193,14 +2193,25 @@ enum UserOrderField {
 
 """A type of person"""
 type UserType implements Node {
-  """The id of the type."""
+  """The ID of an object"""
   id: ID!
 
   """The name of the type."""
-  name: String!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
 
   """The media associated with this type"""
   media: Media
+  translations: [UserTypeTranslation!]
+}
+
+type UserTypeTranslation {
+  id: ID
+  locale: TranslationLocale!
+  name: String
+  slug: String
 }
 
 """A value response."""

@@ -5,7 +5,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Form\UserTypeType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -18,6 +20,7 @@ class UpdateUserTypeMutation implements MutationInterface
     use MutationTrait;
 
     public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
         private readonly FormFactoryInterface $formFactory
     ) {
@@ -26,12 +29,14 @@ class UpdateUserTypeMutation implements MutationInterface
     /**
      * @return array<string, UserType>
      */
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
-        $userType = $this->em->getRepository(UserType::class)->find($input->offsetGet('id'));
+
+        $id = $input->offsetGet('id');
+        $userType = $this->globalIdResolver->resolve($id, $viewer);
         if (null === $userType) {
-            throw new UserError(sprintf('UserType with id "%s" not found.', $input->offsetGet('id')));
+            throw new UserError(sprintf('UserType with id: %s not found.', $id));
         }
 
         $data = $input->getArrayCopy();

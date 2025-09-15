@@ -238,7 +238,7 @@ Scenario: GraphQL client wants to register with unknown additional data
         "plainPassword": "supersecureuserpass",
         "captcha": "fakekey",
         "zipcode": "99999",
-        "userType": "2",
+        "userType": "VXNlclR5cGU6Mg==",
         "responses": [
           {
             "question": "UXVlc3Rpb246Ng==",
@@ -279,7 +279,7 @@ Scenario: GraphQL client wants to register with zipcode and type
         "plainPassword": "supersecureuserpass",
         "captcha": "fakekey",
         "zipcode": "99999",
-        "userType": "1",
+        "userType": "VXNlclR5cGU6MQ==",
         "responses": [
           {
             "question": "UXVlc3Rpb246Ng==",

@@ -24,7 +24,7 @@ describe('<Profile />', () => {
       twitterUrl: 'https://twitter.com/cuicui',
       instagramUrl: 'https://instagram.com/cuicui',
       profilePageIndexed: false,
-      userType: 1,
+      userType: 'VXNlclR5cGU6MQ==', // UserType:1
       neighborhood: 'DTC',
     },
   }
@@ -46,7 +46,7 @@ describe('<Profile />', () => {
       twitterUrl: 'https://twitter.com/cuicui',
       instagramUrl: 'https://instagram.com/cuicui',
       profilePageIndexed: false,
-      userType: 1,
+      userType: 'VXNlclR5cGU6MQ==', // UserType:1
       neighborhood: 'DTC',
     },
   }

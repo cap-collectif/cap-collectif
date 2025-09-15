@@ -1,9 +1,39 @@
 /* eslint-env jest */
 const UserTypes = /* GraphQL */ `
-  query UserTypes  {
+  query UserTypes {
     userTypes {
-      id
-      name
+      totalCount
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          id
+          name
+          translations {
+            name
+            locale
+            slug
+          }
+          media {
+            id
+            name
+            url
+            size
+            description
+            enabled
+            height
+            width
+            authorName
+            contentType
+            copyright
+            providerReference
+          }
+        }
+      }
     }
   }
 `;

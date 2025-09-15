@@ -5,12 +5,12 @@ namespace Capco\UserBundle\Form\Type;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\MediaResponseType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\AppBundle\Form\ValueResponseType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Validator\Constraints\PasswordComplexity;
 use Capco\UserBundle\Entity\UserType;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -48,7 +48,7 @@ class ApiRegistrationFormType extends AbstractType
         $builder->add('captcha', CaptchaType::class, ['validation_groups' => ['registration']]);
 
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', EntityType::class, [
+            $builder->add('userType', RelayNodeType::class, [
                 'required' => false,
                 'class' => UserType::class,
             ]);

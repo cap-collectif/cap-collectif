@@ -635,20 +635,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\UserTypeAdmin:
-        arguments:
-            [~, Capco\UserBundle\Entity\UserType, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.user_type,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\HighlightedContentAdmin:
         arguments:
             [

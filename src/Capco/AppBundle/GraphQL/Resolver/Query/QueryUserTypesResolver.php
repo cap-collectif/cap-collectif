@@ -2,34 +2,46 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\UserTypeOrderField;
 use Capco\UserBundle\Repository\UserTypeRepository;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class QueryUserTypesResolver implements QueryInterface
 {
-    public function __construct(private readonly UserTypeRepository $userTypeRepository)
-    {
+    public function __construct(
+        private readonly UserTypeRepository $userTypeRepository,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
-    /**
-     * @return array<int, array<string, mixed>>
-     */
-    public function __invoke(): array
+    public function __invoke(Argument $args): ConnectionInterface|Promise
     {
-        $queryResult = $this->userTypeRepository->findAllWithMediaToArray();
-
-        $result = [];
-        foreach ($queryResult as $row) {
-            $formattedRow = [
-                'id' => $row['id'],
-                'name' => array_shift($row['translations'])['name'],
-            ];
-
-            $formattedRow['media'] = $row['media'] ?? null;
-
-            $result[] = $formattedRow;
+        try {
+            $total = $this->userTypeRepository->count([]);
+        } catch (\Throwable $e) {
+            $this->logger->error(sprintf('Error while counting userTypes: %s', $e->getMessage()));
+            $total = 0;
         }
 
-        return $result;
+        $orderBy = $args->offsetGet('orderBy') ?? [
+            'field' => UserTypeOrderField::UPDATED_AT,
+            'direction' => OrderDirection::DESC,
+        ];
+
+        $paginator = new Paginator(function (int $offset, int $limit) use ($total, $orderBy) {
+            if (0 === $total) {
+                return [];
+            }
+
+            return $this->userTypeRepository->findAllPaginated($offset, $limit, $orderBy);
+        });
+
+        return $paginator->auto($args, $total);
     }
 }

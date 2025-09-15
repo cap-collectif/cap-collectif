@@ -17,10 +17,14 @@ const CreateUserTypeMutation = /* GraphQL */ `
 const UserTypesQuery = /* GraphQL */ `
   query {
     userTypes {
-      id,
-      name,
-      media {
-        id
+      edges {
+        node {
+          id
+          name
+          media {
+            url
+          }
+        }
       }
     }
   }
@@ -34,16 +38,18 @@ const creationSnapshotPattern = {
   },
 };
 
-describe('mutations.createUserType', () => {
-  let userTypeCount;
-  let createdUserTypeIds = [];
-  beforeAll(async () => {
-    const result = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(result).toMatchObject({ userTypes: expect.any(Array) });
-    userTypeCount = result.userTypes.length;
-  });
+const queryObjectPattern = {
+  userTypes: {
+    edges: expect.any(Array),
+  },
+};
 
+describe('mutations.createUserType', () => {
   it('creates a new user type', async () => {
+    const before = await graphql(UserTypesQuery, null, 'internal_admin');
+    expect(before).toMatchObject(queryObjectPattern);
+    const beforeCount = before.userTypes.edges.length;
+
     const result = await graphql(
       CreateUserTypeMutation,
       {
@@ -63,37 +69,44 @@ describe('mutations.createUserType', () => {
       'internal_admin',
     );
     expect(result).toMatchSnapshot(creationSnapshotPattern);
-    createdUserTypeIds.push(result.createUserType.userType.id);
+
+    const after = await graphql(UserTypesQuery, null, 'internal_admin');
+    expect(after).toMatchObject(queryObjectPattern);
+    expect(after.userTypes.edges).toHaveLength(beforeCount + 1);
+    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(
+      true,
+    );
   });
 
   // the user-type-nonprofit should be in the fixtures
   it('creates a new user type with a media', async () => {
+    const before = await graphql(UserTypesQuery, null, 'internal_admin');
+    expect(before).toMatchObject(queryObjectPattern);
+    const beforeCount = before.userTypes.edges.length;
+
     const result = await graphql(
-        CreateUserTypeMutation,
-        {
-          input: {
-            translations: [
-              {
-                name: 'Licorne',
-                locale: 'FR_FR',
-              },
-            ],
-            media: 'user-type-nonprofit',
-          },
+      CreateUserTypeMutation,
+      {
+        input: {
+          translations: [
+            {
+              name: 'Licorne',
+              locale: 'FR_FR',
+            },
+          ],
+          media: 'user-type-nonprofit',
         },
-        'internal_admin',
+      },
+      'internal_admin',
     );
     expect(result).toMatchSnapshot(creationSnapshotPattern);
-    createdUserTypeIds.push(result.createUserType.userType.id);
-  });
 
-  it('checks user types after creation', async () => {
-    const result = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(result).toMatchObject({ userTypes: expect.any(Array) });
-    expect(result.userTypes).toHaveLength(userTypeCount + 2);
-    for (const createdId of createdUserTypeIds) {
-      expect(result.userTypes.some(u => u.id === createdId)).toBe(true);
-    }
+    const after = await graphql(UserTypesQuery, null, 'internal_admin');
+    expect(after).toMatchObject(queryObjectPattern);
+    expect(after.userTypes.edges).toHaveLength(beforeCount + 1);
+    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(
+      true,
+    );
   });
 
   it('creates a new user type with a non-existing media', async () => {
@@ -118,39 +131,39 @@ describe('mutations.createUserType', () => {
 
   it('tries to create a user type as a basic user', async () => {
     await expect(
-        graphql(
-            CreateUserTypeMutation,
-            {
-              input: {
-                translations: [
-                  {
-                    name: 'G pas les droits !',
-                    locale: 'FR_FR',
-                  },
-                ],
+      graphql(
+        CreateUserTypeMutation,
+        {
+          input: {
+            translations: [
+              {
+                name: 'G pas les droits !',
+                locale: 'FR_FR',
               },
-            },
-            'internal_user',
-        ),
+            ],
+          },
+        },
+        'internal_user',
+      ),
     ).rejects.toThrowError('Access denied to this field.');
   });
 
   it('tries to create a user type while being unauthenticated', async () => {
     await expect(
-        graphql(
-            CreateUserTypeMutation,
-            {
-              input: {
-                translations: [
-                  {
-                    name: 'Je suis pas loggé',
-                    locale: 'FR_FR',
-                  },
-                ],
+      graphql(
+        CreateUserTypeMutation,
+        {
+          input: {
+            translations: [
+              {
+                name: 'Je suis pas loggé',
+                locale: 'FR_FR',
               },
-            },
-            'internal',
-        ),
+            ],
+          },
+        },
+        'internal',
+      ),
     ).rejects.toThrowError('Access denied to this field.');
   });
 });

@@ -82,7 +82,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         </FormattedMessage>
         <option
           key="1"
-          value={1}
+          value="VXNlclR5cGU6MQ=="
         >
           type_1
         </option>

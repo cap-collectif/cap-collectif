@@ -94,8 +94,12 @@ const FRAGMENT = graphql`
       ...Responses_questions
     }
     userTypes {
-      value: id
-      label: name
+      edges {
+        node {
+          value: id
+          label: name
+        }
+      }
     }
     chart: siteParameter(keyname: "charter.body") {
       value
@@ -125,7 +129,8 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
     'privacy_policy',
   ])
 
-  const userTypes = [{ label: intl.formatMessage({ id: 'registration.select.type' }), value: '' }, ...query.userTypes]
+  const queryUserTypes = query.userTypes.edges.map(({ node }) => node)
+  const userTypes = [{ label: intl.formatMessage({ id: 'registration.select.type' }), value: '' }, ...queryUserTypes]
 
   const {
     control,

@@ -71,7 +71,7 @@ class ProjectContributorResolver implements QueryInterface
             ] = [
                 GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
                 $args->offsetGet('vip'),
-                $args->offsetGet('userType'),
+                GlobalId::fromGlobalId($args->offsetGet('userType'))['id'],
                 $args->offsetGet('term'),
                 $args->offsetGet('emailConfirmed'),
                 $args->offsetGet('consentInternalCommunication'),

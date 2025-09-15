@@ -3,10 +3,10 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -45,7 +45,7 @@ class PublicDataType extends AbstractType
             ])
         ;
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', EntityType::class, [
+            $builder->add('userType', RelayNodeType::class, [
                 'required' => false,
                 'class' => UserType::class,
                 'empty_data' => null,

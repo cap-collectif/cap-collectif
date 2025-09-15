@@ -9,11 +9,16 @@ PreviewUserType:
         description: 'A type of person'
         fields:
             id:
-                type: 'ID!'
-                description: 'The id of the type.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: UserType
             name:
-                type: 'String!'
+                type: 'String'
                 description: 'The name of the type.'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getName(args["locale"], true)'
             media:
                 type: 'PreviewMedia'
                 description: 'The media associated with this type'
+            translations:
+                type: '[PreviewUserTypeTranslation!]'

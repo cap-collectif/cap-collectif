@@ -43,7 +43,7 @@ const UpdateUserMutation = /* GraphQL */ `
 `;
 
   const input = {
-    "userId": "VXNlcjp1c2VyMQ==",
+    "userId": "VXNlcjp1c2VyMQ==", // User:user1
     "firstname": "firstname",
     "lastname": "lastname",
     "gender": "MALE",
@@ -59,7 +59,7 @@ const UpdateUserMutation = /* GraphQL */ `
     "birthPlace": "paris",
     "userIdentificationCode": "GG2AZR54",
     "username": "username",
-    "userType": 1,
+    "userType": "VXNlclR5cGU6MQ==", // UserType:1
     "biography": "",
     "neighborhood": "neighborhood",
     "websiteUrl": "websiteUrl",

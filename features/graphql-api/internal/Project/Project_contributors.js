@@ -68,11 +68,11 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           isVip: true,
-          userTypeId: 1,
+          userTypeId: 'VXNlclR5cGU6MQ==', // UserType:1
         },
         'internal_admin',
       ),
@@ -84,9 +84,9 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         },
         'internal_admin',
       ),
@@ -98,10 +98,10 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           orderBy: { field: 'ACTIVITY', direction: 'DESC' },
-          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         },
         'internal_admin',
       ),
@@ -113,9 +113,9 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',// CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           orderBy: { field: 'ACTIVITY', direction: 'ASC' },
         },
         'internal_admin',
@@ -127,8 +127,8 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-        contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
         term: 'sf',
       },
       'internal_admin',
@@ -141,9 +141,9 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         isVip: true,
         userTypeId: 1,
         term: 'msantos',
@@ -159,7 +159,7 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          projectId: toGlobalId('Project', 'projectCannabis'),
+          projectId: 'UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=', // Project:projectCannabis
           first: 5,
         },
         'internal_admin',
@@ -171,9 +171,9 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
-        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         term: 'jolicode',
       },
       'internal_user',
@@ -186,7 +186,7 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsConsentQuery,
         {
-          projectId: toGlobalId('Project', 'projectWithOwner'),
+          projectId: 'UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy', // Project:projectWithOwner
         },
         'internal_theo',
       ),

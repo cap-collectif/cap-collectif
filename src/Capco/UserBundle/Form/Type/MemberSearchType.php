@@ -2,9 +2,9 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ class MemberSearchType extends AbstractType
             'attr' => ['onchange' => 'this.form.submit()'],
         ]);
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', EntityType::class, [
+            $builder->add('userType', RelayNodeType::class, [
                 'required' => false,
                 'class' => 'CapcoUserBundle:UserType',
                 'choice_label' => 'name',

@@ -3,7 +3,7 @@
 exports[`mutations.deleteUserType deletes an existing user type 1`] = `
 Object {
   "deleteUserType": Object {
-    "deletedUserTypeId": "1",
+    "deletedUserTypeId": "VXNlclR5cGU6MQ==",
   },
 }
 `;

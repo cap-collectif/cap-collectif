@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -13,24 +15,26 @@ class DeleteUserTypeMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly UserTypeRepository $userTypeRepository)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly UserTypeRepository $userTypeRepository
+    ) {
     }
 
     /**
-     * @throws OptimisticLockException
      * @throws ORMException
+     * @throws OptimisticLockException
      *
      * @return string[]
      */
-    public function __invoke(string $id): array
+    public function __invoke(string $globalId, User $viewer): array
     {
-        $userType = $this->userTypeRepository->find($id);
+        $userType = $this->globalIdResolver->resolve($globalId, $viewer);
         if (null === $userType) {
-            throw new UserError(sprintf('Unknown userType with id "%s"', $id));
+            throw new UserError(sprintf('Unknown userType with globalID: %s', $globalId));
         }
         $this->userTypeRepository->remove($userType);
 
-        return ['deletedUserTypeId' => $id];
+        return ['deletedUserTypeId' => $globalId];
     }
 }

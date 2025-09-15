@@ -6,12 +6,6 @@ InternalUserType:
         name: UserType
         description: 'A type of person'
         fields:
-            id:
-                type: 'ID!'
-                description: 'The id of the type.'
-            name:
-                type: 'String!'
-                description: 'The name of the type.'
             media:
                 type: 'InternalMedia'
                 description: 'The media associated with this type'

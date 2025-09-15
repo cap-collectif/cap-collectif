@@ -25,11 +25,11 @@ describe('<RegistrationForm />', () => {
       internalCommunicationFrom: { value: 'Cap collectif' },
       userTypes: [
         {
-          value: '1',
+          value: 'VXNlclR5cGU6MQ==', // UserType:1
           label: 'Association',
         },
         {
-          value: '2',
+          value: 'VXNlclR5cGU6Mg==', // UserType:2
           label: 'Citoyen',
         },
       ],

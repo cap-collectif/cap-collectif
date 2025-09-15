@@ -6,6 +6,7 @@ import { UserAdminProfile } from './UserAdminProfile'
 import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils'
 
 describe('<UserAdminProfile/>', () => {
+  const userTypeGlobalId = 'VXNlclR5cGU6MQ=='; // UserType:1
   const props1 = {
     ...formMock,
     intl: intlMock,
@@ -24,7 +25,7 @@ describe('<UserAdminProfile/>', () => {
       instagramUrl: 'perd.u',
       url: 'perd.u',
       userType: {
-        id: '1',
+        id: userTypeGlobalId,
       },
       profilePageIndexed: true,
       neighborhood: 'neighborhood1',
@@ -44,7 +45,7 @@ describe('<UserAdminProfile/>', () => {
         {...props1}
         userTypes={[
           {
-            id: 1,
+            id: userTypeGlobalId,
             name: 'type_1',
           },
         ]}
@@ -59,7 +60,7 @@ describe('<UserAdminProfile/>', () => {
         {...props1}
         userTypes={[
           {
-            id: 1,
+            id: userTypeGlobalId,
             name: 'type_1',
           },
         ]}

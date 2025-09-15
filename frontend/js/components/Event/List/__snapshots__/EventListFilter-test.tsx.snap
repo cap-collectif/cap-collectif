@@ -392,11 +392,11 @@ exports[`<EventListFilters /> renders correctly 1`] = `
             userTypes={
               Array [
                 Object {
-                  "id": "userType-1",
+                  "id": "VXNlclR5cGU6MQ==",
                   "name": "Citoyen",
                 },
                 Object {
-                  "id": "userType-2",
+                  "id": "VXNlclR5cGU6Mg==",
                   "name": "Institution",
                 },
               ]
@@ -803,11 +803,11 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
             userTypes={
               Array [
                 Object {
-                  "id": "userType-1",
+                  "id": "VXNlclR5cGU6MQ==",
                   "name": "Citoyen",
                 },
                 Object {
-                  "id": "userType-2",
+                  "id": "VXNlclR5cGU6Mg==",
                   "name": "Institution",
                 },
               ]

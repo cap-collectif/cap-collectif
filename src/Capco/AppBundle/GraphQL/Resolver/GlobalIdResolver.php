@@ -53,6 +53,7 @@ class GlobalIdResolver
         'Post',
         'Event',
         'User',
+        'UserType',
         'Questionnaire',
         'Consultation',
         'MapToken',

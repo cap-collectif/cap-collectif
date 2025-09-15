@@ -2,23 +2,144 @@
 
 exports[`Internal|Query.userTypes fetches all user types 1`] = `
 Object {
-  "userTypes": Array [
-    Object {
-      "id": "1",
-      "name": "Citoyen",
+  "userTypes": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6MQ==",
+          "media": Object {
+            "authorName": null,
+            "contentType": "image/webp",
+            "copyright": null,
+            "description": null,
+            "enabled": true,
+            "height": 531,
+            "id": "user-type-citizen",
+            "name": "CitizenKane",
+            "providerReference": "citizen_kane.jpeg",
+            "size": "24298",
+            "url": "https://capco.test/media/default/0001/01/citizen_kane.jpeg",
+            "width": 944,
+          },
+          "name": "Citoyen",
+          "translations": Array [
+            Object {
+              "locale": "DE_DE",
+              "name": "Bürger",
+              "slug": "burger",
+            },
+            Object {
+              "locale": "EN_GB",
+              "name": "Citizen",
+              "slug": "citizen",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Citoyen",
+              "slug": "citoyen",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6Mg==",
+          "media": Object {
+            "authorName": null,
+            "contentType": "image/jpeg",
+            "copyright": null,
+            "description": null,
+            "enabled": true,
+            "height": 480,
+            "id": "user-type-business",
+            "name": "AbbaMoney",
+            "providerReference": "abba_money.jpg",
+            "size": "53928",
+            "url": "https://capco.test/media/default/0001/01/abba_money.jpg",
+            "width": 640,
+          },
+          "name": "Organisation à but lucratif",
+          "translations": Array [
+            Object {
+              "locale": "EN_GB",
+              "name": "Business",
+              "slug": "business",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Organisation à but lucratif",
+              "slug": "organisationabutlucratif",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6Mw==",
+          "media": Object {
+            "authorName": null,
+            "contentType": "image/jpeg",
+            "copyright": null,
+            "description": null,
+            "enabled": true,
+            "height": 768,
+            "id": "user-type-nonprofit",
+            "name": "Nonprofit",
+            "providerReference": "nonprofit.jpg",
+            "size": "144159",
+            "url": "https://capco.test/media/default/0001/01/nonprofit.jpg",
+            "width": 1024,
+          },
+          "name": "Organisation à but non lucratif",
+          "translations": Array [
+            Object {
+              "locale": "EN_GB",
+              "name": "Nonprofit organisation",
+              "slug": "nonprofitorganisation",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Organisation à but non lucratif",
+              "slug": "organisationabutnonlucratif",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6NA==",
+          "media": null,
+          "name": "Institution",
+          "translations": Array [
+            Object {
+              "locale": "EN_GB",
+              "name": "Institution",
+              "slug": "institution",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Institution",
+              "slug": "institution1",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6NQ==",
+          "media": null,
+          "name": null,
+          "translations": Array [],
+        },
+      },
+    ],
+    "pageInfo": Object {
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "startCursor": "YXJyYXljb25uZWN0aW9uOjA=",
     },
-    Object {
-      "id": "2",
-      "name": "Organisation à but lucratif",
-    },
-    Object {
-      "id": "3",
-      "name": "Organisation à but non lucratif",
-    },
-    Object {
-      "id": "4",
-      "name": "Institution",
-    },
-  ],
+    "totalCount": 5,
+  },
 }
 `;

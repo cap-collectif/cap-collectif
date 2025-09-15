@@ -10,55 +10,54 @@ const DeleteUserTypeMutation = /* GraphQL */ `
 const UserTypesQuery = /* GraphQL */ `
   query {
     userTypes {
-      id,
-      name,
-      media {
-        id
+      totalCount
+      edges {
+        node {
+          id
+          name
+          media {
+            url
+          }
+        }
       }
     }
   }
 `;
 
 // this id should be in the fixtures
+const userTypeGlobalID = 'VXNlclR5cGU6MQ=='; // UserType:1
+
 const input = {
   input: {
-    id: 1,
+    id: userTypeGlobalID,
   },
 };
 
 describe('mutations.deleteUserType', () => {
-  let userTypeCount;
-  beforeAll(async () => {
-    const result = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(result).toMatchObject({ userTypes: expect.any(Array) });
-    expect(result.userTypes.some(u => u.id === '1')).toBe(true);
-    userTypeCount = result.userTypes.length;
-  });
-
   it('deletes an existing user type', async () => {
+    // save the number of user types before the deletion
+    const before = await graphql(UserTypesQuery, null, 'internal_admin');
+    const beforeCount = before.userTypes.totalCount;
+
+    // checks that the user type to delete is in the list of user types
+    expect(before.userTypes.edges.some(u => u.node.id === userTypeGlobalID)).toBe(true);
+
     await expect(
       graphql(DeleteUserTypeMutation, input, 'internal_admin'),
     ).resolves.toMatchSnapshot();
+
+    // checks the number of user types after the deletion
+    const after = await graphql(UserTypesQuery, null, 'internal_admin');
+    expect(after.userTypes.totalCount).toBe(beforeCount - 1);
+
+    // checks that the user type to delete is not in the list of user types anymore
+    expect(after.userTypes.edges.some(u => u.node.id === userTypeGlobalID)).toBe(false);
   });
 
-  it('checks user types after deletion', async () => {
-    const result = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(result).toMatchObject({ userTypes: expect.any(Array) });
-    expect(result.userTypes).toHaveLength(userTypeCount - 1);
-    expect(result.userTypes.some(u => u.id === '1')).toBe(false);
-  });
-
-  // a delete on a non-existing resource must respond as if the resource was sucessfully deleted
   it('deletes a non-existing user type', async () => {
-    await expect(
-      graphql(DeleteUserTypeMutation, input, 'internal_admin'),
-    ).rejects.toThrowError('Unknown userType with id "1"');
-  });
-
-  it('counts user types after deletion of a non-existing user type', async () => {
-    const result = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(result).toMatchObject({ userTypes: expect.any(Array) });
-    expect(result.userTypes).toHaveLength(userTypeCount - 1);
+    await expect(graphql(DeleteUserTypeMutation, input, 'internal_admin')).rejects.toThrowError(
+      'Unknown userType with globalID: VXNlclR5cGU6MQ==',
+    );
   });
 
   it('tries to delete a user type as a basic user', async () => {

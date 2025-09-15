@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
@@ -114,7 +115,7 @@ class UserDataFormType extends AbstractType
         ;
         $builder->add('subscribedToProposalNews', CheckboxType::class);
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', EntityType::class, [
+            $builder->add('userType', RelayNodeType::class, [
                 'required' => false,
                 'class' => UserType::class,
                 'empty_data' => null,

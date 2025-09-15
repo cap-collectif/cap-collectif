@@ -14055,6 +14055,20 @@ type Query {
   """Lookup pages."""
   pages: [Page!]!
 
+  """List of user types."""
+  userTypes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for posts returning from the connection."""
+    orderBy: PostOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): UserTypeConnection!
+
   """Lookup blog posts."""
   posts(
     """
@@ -14522,9 +14536,6 @@ type Query {
     """The term to filter comments on the body or the author username."""
     term: String
   ): CommentConnection!
-
-  """List of user types."""
-  userTypes: [UserType!]!
 
   """List of sources"""
   sources(
@@ -15357,7 +15368,7 @@ input RegisterInput {
   responses: [ResponseInput]!
 
   """The user userType"""
-  userType: String
+  userType: ID
 
   """The user zipcode"""
   zipcode: String
@@ -21807,14 +21818,45 @@ enum UserRole {
 
 """A type of person"""
 type UserType implements Node {
-  """The id of the type."""
+  """The ID of an object"""
   id: ID!
 
   """The name of the type."""
-  name: String!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
 
   """The media associated with this type"""
   media: Media
+  translations: [UserTypeTranslation!]
+}
+
+"""A connection to a list of items."""
+type UserTypeConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserTypeEdge]
+}
+
+"""An edge in a connection."""
+type UserTypeEdge {
+  """The item at the end of the edge."""
+  node: UserType!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type UserTypeTranslation {
+  id: ID
+  locale: TranslationLocale!
+  name: String
+  slug: String
 }
 
 input ValidateContributionInput {

@@ -31,7 +31,7 @@ RegisterInput:
                 type: '[ResponseInput]!'
                 description: 'List of responses of optionnal questions set by the admin'
             userType:
-                type: 'String'
+                type: 'ID'
                 description: 'The user userType'
             zipcode:
                 type: 'String'

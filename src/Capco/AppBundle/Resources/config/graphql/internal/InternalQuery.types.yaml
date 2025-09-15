@@ -17,6 +17,16 @@ InternalQuery:
                 description: 'Lookup pages.'
                 type: '[InternalPage!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", args)'
+            userTypes:
+                type: 'InternalUserTypeConnection!'
+                description: 'List of user types.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver", args)'
+                args:
+                    orderBy:
+                        type: 'PostOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                        description: 'Ordering options for posts returning from the connection.'
             posts:
                 type: 'InternalPostConnection!'
                 description: 'Lookup blog posts.'
@@ -683,10 +693,6 @@ InternalQuery:
                     term:
                         type: 'String'
                         description: 'The term to filter comments on the body or the author username.'
-            userTypes:
-                type: '[InternalUserType!]!'
-                description: 'List of user types.'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
             sources:
                 type: 'SourceConnection!'
                 description: 'List of sources'
@@ -759,10 +765,10 @@ InternalQuery:
                         type: 'AppLogOrder'
                         description: 'Ordering options for logs returning from the connection.'
                         defaultValue:
-                          {
-                              field: !php/const Capco\AppBundle\Enum\SortField::CREATED_AT,
-                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
-                          }
+                            {
+                                field: !php/const Capco\AppBundle\Enum\SortField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                            }
                     userRole:
                         type: 'AppLogUserRole'
                         defaultValue: null

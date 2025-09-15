@@ -1,0 +1,13 @@
+PreviewUserTypeTranslation:
+    type: object
+    config:
+        name: UserTypeTranslation
+        fields:
+            id:
+                type: ID
+            locale:
+                type: 'TranslationLocale!'
+            name:
+                type: String
+            slug:
+                type: String

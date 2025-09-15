@@ -13,11 +13,11 @@ const defaultProps = {
   },
   userTypes: [
     {
-      id: 'userType-1',
+      id: 'VXNlclR5cGU6MQ==', // UserType:1
       name: 'Citoyen',
     },
     {
-      id: 'userType-2',
+      id: 'VXNlclR5cGU6Mg==', // UserType:2
       name: 'Institution',
     },
   ],
