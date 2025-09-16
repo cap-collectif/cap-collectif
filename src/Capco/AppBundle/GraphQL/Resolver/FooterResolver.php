@@ -2,14 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class FooterResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router, private readonly FooterSocialNetworksResolver $footerSocialNetworksResolver)
-    {
+    public function __construct(
+        private readonly RouterInterface $router,
+        private readonly FooterSocialNetworksResolver $footerSocialNetworksResolver,
+        private readonly SiteParameterResolver $siteParameterResolver,
+    ) {
     }
 
     /**
@@ -20,9 +24,9 @@ class FooterResolver implements QueryInterface
         $socialNetworks = $this->footerSocialNetworksResolver->getFooterSocialNetworks();
         $links = $this->footerSocialNetworksResolver->getFooterLinks();
         $legals = $this->footerSocialNetworksResolver->getLegalsPages();
-        $cookiesPath = $this->router->generate('app_cookies', [], RouterInterface::ABSOLUTE_PATH);
-        $privacyPath = $this->router->generate('app_privacy', [], RouterInterface::ABSOLUTE_PATH);
-        $legalPath = $this->router->generate('app_legal', [], RouterInterface::ABSOLUTE_PATH);
+        $cookiesPath = $this->router->generate('app_cookies');
+        $privacyPath = $this->router->generate('app_privacy');
+        $legalPath = $this->router->generate('app_legal');
 
         return [
             'socialNetworks' => $socialNetworks,
@@ -31,6 +35,8 @@ class FooterResolver implements QueryInterface
             'cookiesPath' => $cookiesPath,
             'privacyPath' => $privacyPath,
             'legalPath' => $legalPath,
+            'title' => $this->siteParameterResolver->getValue('footer.text.title'),
+            'body' => $this->siteParameterResolver->getValue('footer.text.body'),
         ];
     }
 }

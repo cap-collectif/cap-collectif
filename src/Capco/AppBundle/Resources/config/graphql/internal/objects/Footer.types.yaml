@@ -15,3 +15,7 @@ Footer:
                 type: 'String'
             privacyPath:
                 type: 'String'
+            title:
+                type: 'String'
+            body:
+                type: 'String'

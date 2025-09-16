@@ -3,6 +3,7 @@
 exports[`Internal|Query footer Get Footer data 1`] = `
 Object {
   "footer": Object {
+    "body": "Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href=\\"http://www.cap-collectif.com\\">Cap Collectif</a>, selon les principes de la <a href=\\"http://fr.wikipedia.org/wiki/Gouvernement_ouvert\\">démocratie ouverte</a>.",
     "cookiesPath": "/cookies-page",
     "legalPath": "/legal",
     "legals": Object {
@@ -42,6 +43,7 @@ Object {
         "title": "Youtube",
       },
     ],
+    "title": "À propos",
   },
 }
 `;

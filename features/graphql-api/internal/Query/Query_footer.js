@@ -18,6 +18,8 @@ const FooterQuery = /* GraphQL */ `
             }
             cookiesPath
             legalPath
+            title
+            body
         }
     }
 `;
