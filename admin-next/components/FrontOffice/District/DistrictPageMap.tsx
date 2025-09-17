@@ -8,7 +8,7 @@ import union from 'turf-union'
 import turf from 'turf-meta'
 import 'leaflet/dist/leaflet.css'
 import { Box } from '@cap-collectif/ui'
-import { CapcoTileLayerLegacy, formatGeoJsons } from '@utils/leaflet'
+import { CapcoTileLayer, formatGeoJsons } from '@utils/leaflet'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
@@ -60,7 +60,7 @@ const unionizeFeatureEach = (polygons: any) => {
 }
 
 const DistrictPageMap = ({ geojson }: Props) => {
-  const mapRef = React.useRef(null)
+  const [mapRef, setMapRef] = React.useState<L.Map | null>(null)
   const geoJSON = formatGeoJsons(
     [
       {
@@ -71,8 +71,32 @@ const DistrictPageMap = ({ geojson }: Props) => {
     ],
     true,
   )
-  if (!geoJSON.length || !geoJSON[0].district) return null
   const districtGeoJSON = getDistrict(geoJSON)
+
+  React.useEffect(() => {
+    if (mapRef) {
+      const latLngs = []
+      // Cannot precisely type a GeoJSON object
+      const hull: any = unionizeFeatureEach(geoJSON[0].district)
+
+      if (hull.geometry?.type === 'MultiPolygon') {
+        hull.geometry?.coordinates.forEach(coordinate => {
+          coordinate[0].forEach(point => latLngs.push(new L.LatLng(point[1], point[0])))
+        })
+      } else {
+        for (let i = 0; i < (hull.geometry?.coordinates[0].length || 0); i++) {
+          latLngs.push(new L.LatLng(hull.geometry?.coordinates[0][i][1], hull.geometry?.coordinates[0][i][0]))
+        }
+      }
+
+      mapRef.fitBounds(districtGeoJSON.getBounds())
+      // @ts-ignore TODO : updates and type leaflet
+      L.mask(latLngs).addTo(mapRef)
+      mapRef.invalidateSize()
+    }
+  }, [districtGeoJSON, geoJSON, mapRef])
+
+  if (!geoJSON.length || !geoJSON[0].district) return null
   if (!districtGeoJSON) return null
   return (
     <Box
@@ -92,26 +116,7 @@ const DistrictPageMap = ({ geojson }: Props) => {
       }}
     >
       <MapContainer
-        whenCreated={map => {
-          mapRef.current = map
-          const latLngs = []
-          // Cannot precisely type a GeoJSON object
-          const hull: any = unionizeFeatureEach(geoJSON[0].district)
-
-          if (hull.geometry?.type === 'MultiPolygon') {
-            hull.geometry?.coordinates.forEach(coordinate => {
-              coordinate[0].forEach(point => latLngs.push(new L.LatLng(point[1], point[0])))
-            })
-          } else {
-            for (let i = 0; i < (hull.geometry?.coordinates[0].length || 0); i++) {
-              latLngs.push(new L.LatLng(hull.geometry?.coordinates[0][i][1], hull.geometry?.coordinates[0][i][0]))
-            }
-          }
-
-          map.fitBounds(districtGeoJSON.getBounds())
-          // @ts-ignore TODO : updates and type leaflet
-          L.mask(latLngs).addTo(map)
-        }}
+        whenReady={() => {}}
         style={{
           width: '100%',
           height: '100%',
@@ -125,8 +130,9 @@ const DistrictPageMap = ({ geojson }: Props) => {
         touchZoom={false}
         trackResize={false}
         scrollWheelZoom={false}
+        ref={setMapRef}
       >
-        <CapcoTileLayerLegacy />
+        <CapcoTileLayer />
       </MapContainer>
     </Box>
   )

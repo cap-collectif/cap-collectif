@@ -110,7 +110,7 @@ export const Link = ({
   </RouterLink>
 )
 
-type Bounds = {
+export type Bounds = {
   readonly topLeft: {
     readonly lat: number
     readonly lng: number

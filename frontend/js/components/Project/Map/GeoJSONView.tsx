@@ -1,8 +1,7 @@
 import * as React from 'react'
 import L from 'leaflet'
-import { GeoJSON, Tooltip, Rectangle } from 'react-leaflet'
+import { GeoJSON, Tooltip, Rectangle, useMap } from 'react-leaflet'
 import { convertToGeoJsonStyle } from '~/utils/geojson'
-import type { MapProps } from '../../Proposal/Map/Map.types'
 
 const getDistrict = (geoJSON: any) => {
   try {
@@ -12,27 +11,17 @@ const getDistrict = (geoJSON: any) => {
   }
 }
 
-export const GeoJSONView = ({
-  geoJson,
-  zoom,
-  mapRef,
-}: {
-  geoJson: any
-  zoom: number
-  mapRef: {
-    current: MapProps | null
-  } | null
-}) => {
+export const GeoJSONView = ({ geoJson, zoom, displayPopup }: { geoJson: any; zoom: number; displayPopup: boolean }) => {
+  const map = useMap()
   const geoJsonRef = React.useRef(null)
   const tooltipRef = React.useRef(null)
-  const displayPopup = zoom > 10
 
   const closeTooltip = () => {
     if (tooltipRef?.current && !displayPopup) tooltipRef.current.close()
   }
 
   const openTooltip = () => {
-    if (tooltipRef?.current && mapRef?.current) tooltipRef.current.openOn(mapRef?.current)
+    if (tooltipRef?.current && map) tooltipRef.current.openOn(map)
   }
 
   const districtGeoJSON = getDistrict(geoJson)

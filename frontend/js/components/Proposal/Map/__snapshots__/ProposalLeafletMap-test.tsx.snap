@@ -48,18 +48,22 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       }
     }
     tap={false}
-    whenCreated={[Function]}
     zoom={12}
     zoomControl={false}
   >
+    <MapCustomEvents
+      closePopup={[Function]}
+      closeSlider={[Function]}
+      contribuable={true}
+      openPopup={[Function]}
+    />
     <ProposalMapOutOfAreaPane
       content="[object Object]"
     />
     <CapcoTileLayer />
-    <ForwardRef(OverlayComponent)
+    <Popup
       autoPan={false}
       className="popup-proposal"
-      closeButton={false}
       key="popup-proposal"
       position={
         Object {
@@ -82,8 +86,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           proposal.add
         </Button>
       </Connect(LoginOverlay)>
-    </ForwardRef(OverlayComponent)>
-    <ForwardRef(ContainerComponent)
+    </Popup>
+    <Component
       maxClusterRadius={30}
       onClick={[Function]}
       showCoverageOnHover={false}
@@ -91,7 +95,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >
-      <ForwardRef(ContainerComponent)
+      <Component
         alt="marker-0"
         eventHandlers={
           Object {
@@ -150,8 +154,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-      <ForwardRef(ContainerComponent)
+      </Component>
+      <Component
         alt="marker-1"
         eventHandlers={
           Object {
@@ -210,8 +214,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-      <ForwardRef(ContainerComponent)
+      </Component>
+      <Component
         alt="marker-2"
         eventHandlers={
           Object {
@@ -270,9 +274,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-    </ForwardRef(ContainerComponent)>
-    <ForwardRef(LeafComponent)
+      </Component>
+    </Component>
+    <Component
       position="bottomright"
     />
     <ProposalMapDiscoverPane
@@ -328,18 +332,22 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       }
     }
     tap={false}
-    whenCreated={[Function]}
     zoom={12}
     zoomControl={false}
   >
+    <MapCustomEvents
+      closePopup={[Function]}
+      closeSlider={[Function]}
+      contribuable={true}
+      openPopup={[Function]}
+    />
     <ProposalMapOutOfAreaPane
       content="[object Object]"
     />
     <CapcoTileLayer />
-    <ForwardRef(OverlayComponent)
+    <Popup
       autoPan={false}
       className="popup-proposal"
-      closeButton={false}
       key="popup-proposal"
       position={
         Object {
@@ -362,8 +370,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           proposal.add
         </Button>
       </Connect(LoginOverlay)>
-    </ForwardRef(OverlayComponent)>
-    <ForwardRef(ContainerComponent)
+    </Popup>
+    <Component
       maxClusterRadius={30}
       onClick={[Function]}
       showCoverageOnHover={false}
@@ -371,7 +379,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
     >
-      <ForwardRef(ContainerComponent)
+      <Component
         alt="marker-0"
         eventHandlers={
           Object {
@@ -430,8 +438,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-      <ForwardRef(ContainerComponent)
+      </Component>
+      <Component
         alt="marker-1"
         eventHandlers={
           Object {
@@ -490,8 +498,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-      <ForwardRef(ContainerComponent)
+      </Component>
+      <Component
         alt="marker-2"
         eventHandlers={
           Object {
@@ -550,9 +558,9 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             }
           />
         </ProposalLeafletMapstyle__BlankPopup>
-      </ForwardRef(ContainerComponent)>
-    </ForwardRef(ContainerComponent)>
-    <ForwardRef(LeafComponent)
+      </Component>
+    </Component>
+    <Component
       position="bottomright"
     />
     <ProposalMapLoaderPane

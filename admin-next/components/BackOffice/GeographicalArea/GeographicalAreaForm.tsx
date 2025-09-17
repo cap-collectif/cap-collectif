@@ -46,6 +46,11 @@ export const QUERY = graphql`
       isDefault
       traductionKey
     }
+    mapToken(provider: MAPBOX) {
+      publicToken
+      styleId
+      styleOwner
+    }
   }
 `
 

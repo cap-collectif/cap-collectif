@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { renderToString } from 'react-dom/server'
 import { MapContainer, Marker } from 'react-leaflet'
 import { GestureHandling } from 'leaflet-gesture-handling'
@@ -23,7 +23,7 @@ type Props = {
 }
 let L
 export const ProposalFormMapPreview = ({ address, category, categories }: Props) => {
-  const mapRef = React.useRef(null)
+  const [mapRef, setMapRef] = useState(null)
   const proposalAddress: AddressComplete = JSON.parse(address ? address.substring(1, address.length - 1) : '{}')
   React.useEffect(() => {
     if (config.canUseDOM) {
@@ -33,9 +33,9 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
     }
   }, [])
   React.useEffect(() => {
-    if (mapRef.current && proposalAddress?.geometry)
-      mapRef.current.setView([proposalAddress.geometry.location.lat, proposalAddress.geometry.location.lng])
-  }, [proposalAddress])
+    if (mapRef && proposalAddress?.geometry)
+      mapRef.setView([proposalAddress.geometry.location.lat, proposalAddress.geometry.location.lng])
+  }, [proposalAddress, mapRef])
   if (!L || !address) return null
   const proposalCategory = categories.find(cat => cat.id === category) || {
     color: dsColors.blue[500],
@@ -43,9 +43,8 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
   }
   return (
     <MapContainer
-      whenCreated={map => {
-        mapRef.current = map
-        setTimeout(() => map.invalidateSize(), 100)
+      whenReady={() => {
+        setTimeout(() => mapRef?.invalidateSize(), 100)
       }}
       doubleClickZoom={false}
       dragging={false}
@@ -62,6 +61,7 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
       }}
       tap={!L.Browser.mobile}
       gestureHandling
+      ref={setMapRef}
     >
       <CapcoTileLayer />
       <Marker

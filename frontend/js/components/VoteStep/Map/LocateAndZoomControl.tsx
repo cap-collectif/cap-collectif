@@ -3,7 +3,7 @@ import L from 'leaflet'
 import { CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
 import { Marker, useMapEvents } from 'react-leaflet'
 import LeafletControl from './LeafletControl'
-import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types'
+import type { MapCenterObject } from '~/components/Proposal/Map/Map.types'
 const svgIcon = L.divIcon({
   html: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" version="1.1" viewBox="-24 -24 48 48">
           <circle id="circle1" r="7" style="animation-delay: -3s" />
@@ -41,7 +41,7 @@ const ControlButton = ({
 
 const LocateAndZoomControl = () => {
   const [position, setPosition] = React.useState(null)
-  const map: MapProps = useMapEvents({
+  const map: L.Map = useMapEvents({
     locationfound(e: { latlng: MapCenterObject }) {
       setPosition(e.latlng)
       map.flyTo(e.latlng, 16) // TODO : choose a zoom level

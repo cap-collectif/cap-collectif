@@ -48,14 +48,16 @@ export const SearchContainer = styled.div<{
 `
 export const ButtonLocation = styled.button<{
   isMobile?: boolean
+  isEventMap?: boolean
 }>`
   background-color: #fafafa;
   border: 1px solid ${colors.lightGray};
   border-radius: ${props =>
     props.isMobile ? MAIN_BORDER_RADIUS_SIZE : `0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0`};
   border-left: ${({ isMobile }) => !isMobile && 'none'};
-  padding: 0 10px;
-  height: ${({ isMobile }) => isMobile && '35px'};
+  padding: ${({ isEventMap }) => (isEventMap ? '8px' : '0 10px')};
+  height: ${({ isMobile, isEventMap }) => (isEventMap ? '32px' : isMobile && '35px')};
+  width: ${({ isEventMap }) => isEventMap && '32px'};
 `
 export const LoaderContainer = styled.div`
   background-color: #fff;

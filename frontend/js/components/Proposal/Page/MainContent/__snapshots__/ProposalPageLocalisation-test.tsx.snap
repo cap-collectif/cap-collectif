@@ -46,7 +46,7 @@ exports[`<ProposalPageLocalisation /> should render correctly 1`] = `
           zoom={16}
         >
           <CapcoTileLayer />
-          <ForwardRef(ContainerComponent)
+          <Component
             position={
               Array [
                 45.742842,

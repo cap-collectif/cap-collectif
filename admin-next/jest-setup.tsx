@@ -51,6 +51,18 @@ jest.mock('./shared/ui/LegacyIcons/Icon.tsx', () => {
   return Icon
 })
 
+jest.doMock('react-leaflet', () => {
+  const MapContainer = props => <div data-testid="map">{props.children}</div>
+  const Popup = props => <div data-testid="map-popup">{props.children}</div>
+
+  return {
+    useMapEvents: jest.fn(),
+    MapContainer,
+    Popup,
+    Control: jest.fn(),
+  }
+})
+
 export const appContextValue = {
   viewerSession: {
     email: 'come-back@gmail.com',

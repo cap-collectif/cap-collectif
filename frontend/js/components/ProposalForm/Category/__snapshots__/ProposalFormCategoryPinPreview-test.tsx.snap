@@ -24,7 +24,7 @@ exports[`<ProposalFormCategoryPinPreview /> render correctly 1`] = `
     zoomControl={false}
   >
     <CapcoTileLayer />
-    <ForwardRef(ContainerComponent)
+    <Component
       icon={
         NewClass {
           "_initHooksCalled": true,

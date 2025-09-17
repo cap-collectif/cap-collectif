@@ -4,7 +4,7 @@ exports[`<Address /> renders correctly 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}
@@ -19,7 +19,7 @@ exports[`<Address /> renders correctly when hide search bar 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}
@@ -34,7 +34,7 @@ exports[`<Address /> renders correctly when no value 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}
@@ -49,7 +49,7 @@ exports[`<Address /> renders correctly when not reset button display 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}
@@ -64,7 +64,7 @@ exports[`<Address /> renders correctly with get address 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}
@@ -79,7 +79,7 @@ exports[`<Address /> renders correctly with get position of user 1`] = `
 <PlacesAutocomplete
   debounce={200}
   highlightFirstSuggestion={false}
-  onChange={[MockFunction]}
+  onChange={[Function]}
   onError={[Function]}
   onSelect={[Function]}
   searchOptions={Object {}}

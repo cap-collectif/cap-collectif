@@ -187,7 +187,7 @@ jest.doMock('@uppy/status-bar', () => {
   return props => (props.children ? <Mock {...props} testID="StatusBar" /> : null)
 })
 jest.doMock('@uppy/file-input', () => {
-    return props => (props.children ? <Mock {...props} testID="FileInput" /> : null)
+  return props => (props.children ? <Mock {...props} testID="FileInput" /> : null)
 })
 jest.doMock('@uppy/tus', () => {
   return props => (props.children ? <Mock {...props} testID="Tus" /> : null)
@@ -285,12 +285,31 @@ jest.doMock('reakit/Menu', () => {
 
 jest.doMock('react-leaflet', () => {
   const MapContainer = props => <div data-testid="map">{props.children}</div>
+  const Popup = props => <div data-testid="map-popup">{props.children}</div>
 
   return {
-    ...jest.requireActual('react-leaflet'),
     useMapEvents: jest.fn(),
     MapContainer,
+    Popup,
+    Control: jest.fn(),
   }
+})
+jest.doMock('leaflet-gesture-handling', () => {
+  return {
+    GestureHandling: jest.fn(),
+  }
+})
+jest.doMock('@react-leaflet/core', () => {
+  return {
+    useLeafletContext: jest.fn(),
+    createControlComponent: component => component,
+  }
+})
+jest.doMock('react-leaflet-markercluster', () => {
+  return props => <div data-testid="react-leaflet-markercluster">{props.children}</div>
+})
+jest.doMock('leaflet.locatecontrol/dist/L.Control.Locate.min', () => {
+  return ''
 })
 jest.doMock('jodit-react', () => {
   return props => <div data-testid="jodit-react">{props.children}</div>

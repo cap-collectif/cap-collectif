@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field, change, formValueSelector } from 'redux-form'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import L from 'leaflet'
-import { Marker, ZoomControl, MapContainer as Map } from 'react-leaflet'
+import { Marker, ZoomControl, MapContainer as Map, useMapEvents } from 'react-leaflet'
 import { FormattedHTMLMessage, injectIntl } from 'react-intl'
-import { GestureHandling } from 'leaflet-gesture-handling'
 import * as S from './HomePageProjectsSectionConfigurationPage.style'
 import renderComponent from '~/components/Form/Field'
 import type { Dispatch, GlobalState } from '~/types'
@@ -21,7 +20,6 @@ import type { HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSec
 import InfoMessage from '~ds/InfoMessage/InfoMessage'
 import { MapContainer } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode.style'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
-import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types'
 import {
   LOCATION_PARIS,
   ZOOM_CITY,
@@ -32,6 +30,7 @@ import Address from '~/components/Form/Address/Address'
 import { flyToPosition } from '~/components/Proposal/Create/ProposalChangeAddressModal'
 import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import { normalizeNumberInput } from '~/components/Form/utils'
+import GestureHandling from 'leaflet-gesture-handling'
 const formName = 'section-proposal-admin-form'
 type Props = ReduxFormFormProps & {
   readonly homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration
@@ -127,6 +126,25 @@ const onSubmit = async (values: FormValues, dispatch: Dispatch, { currentLanguag
   }
 }
 
+const MapEvents = ({ dispatch }: { dispatch: any }) => {
+  const map = useMapEvents({
+    click: e => {
+      dispatch(change(formName, 'centerLatitude', e?.latlng.lat))
+      dispatch(change(formName, 'centerLongitude', e?.latlng.lng))
+    },
+  })
+
+  useEffect(() => {
+    if (map) {
+      map.addHandler('gestureHandling', GestureHandling)
+      // @ts-expect-error typescript does not see additional handler here
+      map.gestureHandling.enable()
+    }
+  }, [map])
+
+  return null
+}
+
 export const HomePageProjectsMapSectionConfigurationPage = ({
   handleSubmit,
   intl,
@@ -138,19 +156,13 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
   zoomMap,
   homePageProjectsMapSectionConfiguration,
 }: Props) => {
+  const [mapRef, setMapRef] = useState(null)
   const [address, setAddress] = React.useState(null)
   const position = [
     centerLatitude || homePageProjectsMapSectionConfiguration.centerLatitude || LOCATION_PARIS.lat,
     centerLongitude || homePageProjectsMapSectionConfiguration.centerLongitude || LOCATION_PARIS.lng,
   ]
-  const refMap = React.useRef(null)
-  React.useEffect(() => {
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
 
-    if (refMap.current) {
-      refMap.current.setZoom(zoomMap)
-    }
-  }, [zoomMap, refMap])
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <S.SectionContainer>
@@ -209,17 +221,17 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
               })}
             </AppBox>
             <MapContainer>
-              <AppBox position="absolute" zIndex={1} top={2} left={2} width="45%">
+              <AppBox position="absolute" top={4} left={4} zIndex={990}>
                 <Address
                   id="address"
                   getPosition={(lat, lng) => {
-                    flyToPosition(refMap, lat, lng)
+                    flyToPosition(mapRef, lat, lng)
                     dispatch(change(formName, 'centerLatitude', lat))
                     dispatch(change(formName, 'centerLongitude', lng))
                   }}
                   getAddress={(addr: AddressComplete | null | undefined) => {
                     if (addr) {
-                      flyToPosition(refMap, addr.geometry.location.lat, addr.geometry.location.lng)
+                      flyToPosition(mapRef, addr.geometry.location.lat, addr.geometry.location.lng)
                       dispatch(change(formName, 'centerLatitude', addr.geometry.location.lat))
                       dispatch(change(formName, 'centerLongitude', addr.geometry.location.lng))
                     }
@@ -233,30 +245,14 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
                 />
               </AppBox>
               <Map
-                whenCreated={(map: MapProps) => {
-                  refMap.current = map
-                  map.on(
-                    'click',
-                    (
-                      e:
-                        | ((Event | null | undefined) & {
-                            latlng: MapCenterObject
-                          })
-                        | null
-                        | undefined,
-                    ) => {
-                      dispatch(change(formName, 'centerLatitude', e?.latlng.lat))
-                      dispatch(change(formName, 'centerLongitude', e?.latlng.lng))
-                    },
-                  )
-                }}
                 className="map"
                 center={position}
                 zoom={zoomMap || zoomLevels[ZOOM_CITY].id}
                 zoomControl={false}
                 doubleClickZoom={false}
-                gestureHandling
+                ref={setMapRef}
               >
+                <MapEvents dispatch={dispatch} />
                 <CapcoTileLayer />
                 <ZoomControl position="bottomright" />
                 <Marker

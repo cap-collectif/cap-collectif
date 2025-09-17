@@ -21,7 +21,7 @@ type Props = AddressProps & {
 const Address = ({
   id,
   placeholder,
-  value = '',
+  value: initialValue = '',
   onChange,
   debounce,
   getPosition,
@@ -29,9 +29,10 @@ const Address = ({
   allowReset = true,
   showSearchBar = true,
 }: Props) => {
+  const [address, setAddress] = React.useState(initialValue || '')
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true)
   const intl = useIntl()
-  const hasReset = allowReset && !!value
+  const hasReset = allowReset && !!address
 
   const dispatchLocationWarning = () => {
     toast({
@@ -84,6 +85,7 @@ const Address = ({
           },
         }
         if (getAddress) getAddress(addressComplete)
+        setAddress(addressComplete.formatted_address)
         onChange(addressComplete.formatted_address)
       })
       .catch(error => console.error('Error', error))
@@ -91,11 +93,12 @@ const Address = ({
 
   const onReset = () => {
     if (getAddress) getAddress(null)
+    setAddress(null)
     onChange(null)
   }
 
   return (
-    <PlacesAutocomplete value={value??''} onChange={onChange} onSelect={handleSelect} debounce={debounce}>
+    <PlacesAutocomplete value={address ?? ''} onChange={setAddress} onSelect={handleSelect} debounce={debounce}>
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="address-container">
           <SearchContainer hasLocationUser={!!getPosition} hasReset={hasReset}>
@@ -147,13 +150,13 @@ const Address = ({
             <ResultContainer id="list-suggestion">
               {suggestions.map((suggestion: GoogleAddressAPI, idx) => (
                 <li
+                  key={idx}
                   {...getSuggestionItemProps(suggestion, {
                     className: suggestion.active ? 'suggestion-item--active' : 'suggestion-item',
                     style: {
                       backgroundColor: suggestion.active ? '#fafafa' : '#fff',
                     },
                   })}
-                  key={idx}
                 >
                   <span>{suggestion.formattedSuggestion.mainText}</span>{' '}
                   <span>{suggestion.formattedSuggestion.secondaryText}</span>

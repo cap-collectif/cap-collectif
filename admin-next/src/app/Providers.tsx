@@ -115,7 +115,12 @@ export default function Providers({
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
       {/** @ts-expect-error MAJ react-intl */}
       <IntlProvider locale={intl.locale} messages={intl.messages}>
-        <AppProvider viewerSession={viewerSession} appVersion={appVersion} siteColors={siteColors}>
+        <AppProvider
+          viewerSession={viewerSession}
+          appVersion={appVersion}
+          siteColors={siteColors}
+          mapToken={SSRData?.mapToken}
+        >
           {/** Our first Suspense before our theme is loaded */}
           <Suspense fallback={null}>
             <NoSSR>

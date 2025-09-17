@@ -246,10 +246,10 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             zoomControl={false}
           >
             <CapcoTileLayer />
-            <ForwardRef(LeafComponent)
+            <Component
               position="bottomright"
             />
-            <ForwardRef(ContainerComponent)
+            <Component
               icon={
                 NewClass {
                   "_initHooksCalled": true,

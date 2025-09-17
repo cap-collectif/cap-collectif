@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { MapContainer, Marker, Popup } from 'react-leaflet'
 import { useSelector, useDispatch } from 'react-redux'
 import { graphql } from 'relay-runtime'
@@ -9,7 +9,7 @@ import { GestureHandling } from 'leaflet-gesture-handling'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import { useFragment } from 'react-relay'
-import LocateControl from '~/components/Proposal/Map/LocateControl'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { GlobalState, Dispatch } from '~/types'
 import { changeEventSelected } from '~/redux/modules/event'
 import type { MapOptions } from '~/components/Proposal/Map/Map.types'
@@ -20,6 +20,8 @@ import { isSafari } from '~/config'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
 import FullScreenControl from './FullScreenControl'
 import useIsMobile from '~/utils/hooks/useIsMobile'
+import { ButtonLocation } from '~/components/Form/Address/Address.style'
+import AppBox from '~ui/Primitives/AppBox'
 
 type Props = {
   query: LeafletMap_query$key
@@ -92,6 +94,52 @@ const formatBounds = bounds => {
   return bounds
 }
 
+const Mark = ({ marker, icon }) => (
+  <Marker key={marker.id} position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]} icon={icon}>
+    <Popup autoPanPadding={[50, 50]} maxWidth={250} minWidth={250}>
+      <EventMapPreview event={marker} />
+    </Popup>
+  </Marker>
+)
+
+const selectedIcon = L.icon({
+  iconUrl: '/svg/marker-red.svg',
+  iconSize: [50, 50],
+  iconAnchor: [25, 50],
+  popupAnchor: [0, -40],
+})
+
+const normalIcon = L.icon({
+  iconUrl: '/svg/marker.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -40],
+})
+
+const Markers = ({ markers }) => {
+  const eventSelected: string | null | undefined = useSelector((state: GlobalState) => state.event.eventSelected)
+
+  const getMarkerIcon = marker => {
+    if (eventSelected && eventSelected === marker.id) return selectedIcon
+    return normalIcon
+  }
+
+  return (
+    <>
+      {markers &&
+        markers.edges &&
+        markers.edges.length > 0 &&
+        markers.edges
+          .filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(marker =>
+            marker.googleMapsAddress ? <Mark key={marker.id} marker={marker} icon={getMarkerIcon(marker)} /> : null,
+          )}
+    </>
+  )
+}
+
 export const LeafletMap = ({
   loading,
   query: queryKey,
@@ -99,33 +147,15 @@ export const LeafletMap = ({
   toggleFullScreen,
   isFullScreen = false,
 }: Props) => {
+  const mapRef = useRef<L.Map | null>(null)
   const query = useFragment(FRAGMENT, queryKey)
   const markers = query.events
-  const eventSelected: string | null | undefined = useSelector((state: GlobalState) => state.event.eventSelected)
   const dispatch: Dispatch = useDispatch()
   const isMobile = useIsMobile()
 
   React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
   }, [])
-
-  const getMarkerIcon = marker => {
-    if (eventSelected && eventSelected === marker.id) {
-      return L.icon({
-        iconUrl: '/svg/marker-red.svg',
-        iconSize: [50, 50],
-        iconAnchor: [25, 50],
-        popupAnchor: [0, -40],
-      })
-    }
-
-    return L.icon({
-      iconUrl: '/svg/marker.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-      popupAnchor: [0, -40],
-    })
-  }
 
   const markersGroup = []
 
@@ -139,6 +169,12 @@ export const LeafletMap = ({
           markersGroup.push(L.latLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng))
         }
       })
+  }
+
+  const getLocation = () => {
+    window.navigator.geolocation.getCurrentPosition(position => {
+      if (position) mapRef.current?.flyTo({ lat: position.coords.latitude, lng: position.coords.longitude }, 18)
+    })
   }
 
   const bounds = L.latLngBounds(markersGroup)
@@ -184,6 +220,7 @@ export const LeafletMap = ({
         doubleClickZoom={false}
         gestureHandling={!isSafari}
         tap={false}
+        ref={mapRef}
       >
         <CapcoTileLayer />
         <MarkerClusterGroup
@@ -195,28 +232,21 @@ export const LeafletMap = ({
           }}
           maxClusterRadius={30}
         >
-          {markers &&
-            markers.edges &&
-            markers.edges.length > 0 &&
-            markers.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(marker =>
-                marker.googleMapsAddress ? (
-                  <Marker
-                    key={marker.id}
-                    position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]}
-                    icon={getMarkerIcon(marker)}
-                  >
-                    <Popup autoPanPadding={[50, 50]} maxWidth={250} minWidth={250}>
-                      <EventMapPreview event={marker} />
-                    </Popup>
-                  </Marker>
-                ) : null,
-              )}
+          <Markers markers={markers} />
         </MarkerClusterGroup>
-        <LocateControl />
+        <AppBox position="absolute" zIndex={999} left={3} top="80px">
+          <ButtonLocation
+            isEventMap
+            isMobile={isMobile}
+            type="button"
+            onClick={e => {
+              e.preventDefault()
+              getLocation()
+            }}
+          >
+            <Icon name={ICON_NAME.locationTarget} size={16} color="#707070" />
+          </ButtonLocation>
+        </AppBox>
         {!isMobile ? <FullScreenControl onClick={toggleFullScreen} /> : null}
       </MapContainer>
     </div>

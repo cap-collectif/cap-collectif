@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { renderToString } from 'react-dom/server'
 import noop from 'lodash/noop'
 import { change } from 'redux-form'
-import { GeoJSON, Marker, Popup, ZoomControl } from 'react-leaflet'
+import { GeoJSON, Marker, Popup, useMapEvents, ZoomControl } from 'react-leaflet'
 import { GestureHandling } from 'leaflet-gesture-handling'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
@@ -13,7 +13,7 @@ import L from 'leaflet'
 import { useResize, useDisclosure } from '@liinkiing/react-hooks'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { Button } from '@cap-collectif/ui'
-import type { MapCenterObject, MapOptions, MapRef, PopupRef } from './Map.types'
+import type { MapCenterObject, MapOptions, PopupRef } from './Map.types'
 import type { State, Dispatch } from '~/types'
 import ProposalMapPopover from './ProposalMapPopover'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
@@ -67,8 +67,8 @@ type Props = {
   btnTextColor: string
 }
 
-const goToPosition = (mapRef: MapRef, address: MapCenterObject | null | undefined) =>
-  mapRef.current?.panTo([address?.lat || 0, address?.lng || 0])
+const goToPosition = (mapRef: L.Map, address: MapCenterObject | null | undefined) =>
+  mapRef?.panTo([address?.lat || 0, address?.lng || 0])
 
 const locationIcon = L.divIcon({
   className: 'leaflet-control-locate-location',
@@ -76,18 +76,19 @@ const locationIcon = L.divIcon({
   iconSize: [48, 48],
 })
 let locationMarker: any = {}
-export const flyToPosition = (mapRef, lat: number, lng: number) => {
-  if (mapRef.current) {
-    mapRef.current.removeLayer(locationMarker)
+
+export const flyToPosition = (map: L.Map, lat: number, lng: number) => {
+  if (map) {
+    map.removeLayer(locationMarker)
   }
 
-  if (mapRef.current) {
-    mapRef.current.flyTo([lat, lng], 18)
+  if (map) {
+    map.flyTo([lat, lng], 18)
   }
 
   locationMarker = L.marker([lat, lng], {
     icon: locationIcon,
-  }).addTo(mapRef.current)
+  }).addTo(map)
 }
 let lastPopoverLatLng = {
   lat: 0,
@@ -95,7 +96,7 @@ let lastPopoverLatLng = {
 }
 
 const openPopup = (
-  mapRef: MapRef,
+  mapRef: L.Map,
   popupRef: PopupRef,
   latlng: MapCenterObject | null,
   geoJsons,
@@ -111,11 +112,11 @@ const openPopup = (
   lastPopoverLatLng = latlng
 
   if (popupRef.current) {
-    popupRef.current.setLatLng(latlng).openOn(mapRef.current)
+    popupRef.current.setLatLng(latlng).openOn(mapRef)
   }
 }
 
-const closePopup = (mapRef: MapRef, popupRef: PopupRef) => {
+const closePopup = (popupRef: PopupRef) => {
   if (popupRef.current) popupRef.current.close()
 }
 
@@ -128,7 +129,51 @@ const settingsSlider = {
   arrows: false,
 }
 let isOnCluster = false
-// WARNING : Due to the use of global variables this component is for now a one-time use
+
+const hideDiscoverPane = () => {
+  const pane: HTMLElement = document.querySelector('.map-discover')
+  if (pane) {
+    pane.style.display = 'none'
+  }
+}
+
+const MapCustomEvents = ({
+  closePopup,
+  closeSlider,
+  openPopup,
+  contribuable,
+}: {
+  closeSlider: () => void
+  openPopup: (map: L.Map, e: L.LeafletMouseEvent) => void
+  closePopup: () => void
+  contribuable: boolean
+}) => {
+  const map = useMapEvents({
+    zoomstart: () => {
+      closePopup()
+      closeSlider()
+      isOnCluster = false
+      hideDiscoverPane()
+    },
+    click: e => {
+      if (contribuable) openPopup(map, e)
+      closeSlider()
+      isOnCluster = false
+      hideDiscoverPane()
+    },
+  })
+
+  useEffect(() => {
+    if (!isSafari && map) {
+      map.addHandler('gestureHandling', GestureHandling)
+      // @ts-expect-error typescript does not see additional handler here
+      map.gestureHandling.enable()
+    }
+  }, [map])
+
+  return null
+}
+
 export const ProposalLeafletMap = ({
   geoJsons,
   defaultMapOptions,
@@ -149,12 +194,13 @@ export const ProposalLeafletMap = ({
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
-  const titleTradKey = proposalForm?.objectType === 'QUESTION'
+  const titleTradKey =
+    proposalForm?.objectType === 'QUESTION'
       ? 'submit-a-question'
       : proposalForm?.objectType === 'OPINION'
       ? 'submit-opinion'
       : getProposalLabelByType(projectType, 'add')
-  const mapRef = useRef(null)
+  const [mapRef, setMapRef] = useState(null)
   const popupRef = useRef(null)
   const slickRef = useRef(null)
   const markerRef = useRef(null)
@@ -164,12 +210,10 @@ export const ProposalLeafletMap = ({
   const { width } = useResize()
   const isMobile = width < bootstrapGrid.smMin
   const markers = proposals.filter(proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng))
-  useEffect(() => {
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
-  }, [])
+
   useEffect(() => {
     Emitter.on(MapEvents.OpenPopupOnMap, (addr: MapCenterObject) => {
-      closePopup(mapRef, popupRef)
+      closePopup(popupRef)
       goToPosition(mapRef, addr)
 
       if (isMobile) {
@@ -183,13 +227,6 @@ export const ProposalLeafletMap = ({
       Emitter.removeAllListeners(MapEvents.OpenPopupOnMap)
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const hideDiscoverPane = () => {
-    const pane: HTMLElement = document.querySelector('.map-discover')
-    if (pane) {
-      pane.style.display = 'none'
-    }
-  }
 
   if (!visible) {
     return null
@@ -222,22 +259,6 @@ export const ProposalLeafletMap = ({
         })}
       />
       <StyledMap
-        whenCreated={map => {
-          mapRef.current = map
-          map.on('click', e => {
-            if (isCollectStep && proposalForm?.contribuable)
-              openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired)
-            setIsMobileSliderOpen(false)
-            isOnCluster = false
-            hideDiscoverPane()
-          })
-          map.on('zoomstart', () => {
-            closePopup(mapRef, popupRef)
-            setIsMobileSliderOpen(false)
-            isOnCluster = false
-            hideDiscoverPane()
-          })
-        }}
         center={defaultMapOptions.center}
         zoom={defaultMapOptions.zoom}
         maxZoom={MAX_MAP_ZOOM}
@@ -254,7 +275,14 @@ export const ProposalLeafletMap = ({
         doubleClickZoom={false}
         // @ts-ignore safari sucks
         gestureHandling={!isSafari}
+        ref={setMapRef}
       >
+        <MapCustomEvents
+          contribuable={isCollectStep && proposalForm?.contribuable}
+          closeSlider={() => setIsMobileSliderOpen(false)}
+          openPopup={(map, e) => openPopup(map, popupRef, e.latlng, geoJsons, proposalInAZoneRequired)}
+          closePopup={() => closePopup(popupRef)}
+        />
         <ProposalMapOutOfAreaPane
           content={intl.formatHTMLMessage({
             id: 'constraints.address_in_zone',
@@ -264,7 +292,6 @@ export const ProposalLeafletMap = ({
         <Popup
           ref={popupRef}
           key="popup-proposal"
-          closeButton={false}
           position={lastPopoverLatLng}
           autoPan={false}
           className="popup-proposal"
@@ -292,7 +319,7 @@ export const ProposalLeafletMap = ({
             if (isCollectStep) {
               if (isOnCluster && proposalForm?.contribuable)
                 openPopup(mapRef, popupRef, e.latlng, geoJsons, proposalInAZoneRequired)
-              else closePopup(mapRef, popupRef)
+              else closePopup(popupRef)
             }
 
             isOnCluster = true
@@ -326,7 +353,7 @@ export const ProposalLeafletMap = ({
                   })}
                   eventHandlers={{
                     click: e => {
-                      closePopup(mapRef, popupRef)
+                      closePopup(popupRef)
                       hideDiscoverPane()
                       const isMarkerOpen: boolean = e.target.isPopupOpen()
 

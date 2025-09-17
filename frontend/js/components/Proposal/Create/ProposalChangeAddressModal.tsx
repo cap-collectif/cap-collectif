@@ -5,12 +5,11 @@ import noop from 'lodash/noop'
 import { renderToString } from 'react-dom/server'
 import { useDispatch, connect } from 'react-redux'
 import { graphql, useFragment } from 'react-relay'
-import { MapContainer, Marker, GeoJSON, ZoomControl } from 'react-leaflet'
+import { MapContainer, Marker, GeoJSON, ZoomControl, useMapEvents } from 'react-leaflet'
 import { Flex, Button, Modal, Box, CapUIIcon } from '@cap-collectif/ui'
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables'
 import { formName, retrieveDistrictForLocation } from '../Form/ProposalForm'
 import type { Dispatch, GlobalState } from '~/types'
-import type { MapRef } from '~/components/Proposal/Map/Map.types'
 import type { ProposalChangeAddressModal_proposalForm$key } from '~relay/ProposalChangeAddressModal_proposalForm.graphql'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import 'leaflet/dist/leaflet.css'
@@ -76,10 +75,23 @@ const FRAGMENT = graphql`
     }
   }
 `
-export const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
-  if (mapRef.current) {
-    mapRef.current.flyTo([lat, lng], 18)
-  }
+export const flyToPosition = (map: L.Map, lat: number, lng: number) => {
+  if (map) map.flyTo([lat, lng], 18)
+}
+
+const MapCustomEvents = ({
+  hideDiscoverPane,
+  onClick,
+}: {
+  hideDiscoverPane: () => void
+  onClick: (e: L.LeafletMouseEvent) => void
+}) => {
+  useMapEvents({
+    zoomstart: () => hideDiscoverPane(),
+    click: e => onClick(e),
+  })
+
+  return null
 }
 
 const ProposalChangeAddressModal = ({
@@ -90,7 +102,7 @@ const ProposalChangeAddressModal = ({
 }: Props): JSX.Element => {
   const proposalForm = useFragment(FRAGMENT, proposalFormFragment) // @ts-ignore relay fragment
   const geoJsons = proposalForm.step?.form?.districts ? formatGeoJsons(proposalForm.step.form.districts) : null
-  const mapRef = React.useRef(null)
+  const [mapRef, setMapRef] = React.useState(null)
   const intl = useIntl()
   const dispatch: Dispatch = useDispatch()
   const [showDiscoverPane, setShowDiscoverPane] = React.useState(!addressValue)
@@ -159,28 +171,6 @@ const ProposalChangeAddressModal = ({
             })}
           />
           <MapContainer
-            whenCreated={map => {
-              mapRef.current = map
-              map.on('zoomstart', () => {
-                setShowDiscoverPane(false)
-              })
-              map.on('click', async e => {
-                setShowDiscoverPane(false)
-
-                if (e?.latlng) {
-                  if (proposalForm.proposalInAZoneRequired && !geoContains(geoJsons || [], e.latlng)) {
-                    mapToast()
-                  } else {
-                    const geoAddr = await getAddressFromLatLng(e.latlng)
-                    setNewAddress(geoAddr)
-                    setNewAddressBar(geoAddr.formatted_address)
-                  }
-                }
-
-                return Promise.resolve()
-              })
-              setTimeout(() => map.invalidateSize(), 100)
-            }}
             doubleClickZoom={false}
             dragging
             touchZoom
@@ -211,7 +201,21 @@ const ProposalChangeAddressModal = ({
                 : {},
             }}
             tap
+            ref={setMapRef}
           >
+            <MapCustomEvents
+              hideDiscoverPane={() => setShowDiscoverPane(false)}
+              onClick={async e => {
+                if (e?.latlng) {
+                  if (proposalForm.proposalInAZoneRequired && !geoContains(geoJsons || [], e.latlng)) mapToast()
+                  else {
+                    const geoAddr = await getAddressFromLatLng(e.latlng)
+                    setNewAddress(geoAddr)
+                    setNewAddressBar(geoAddr.formatted_address)
+                  }
+                }
+              }}
+            />
             <CapcoTileLayer />
             {geoJsons &&
               geoJsons.map((geoJson, idx) => (

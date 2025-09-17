@@ -17,22 +17,20 @@ export const getDistrict = (geoJSON: any[]) => {
 }
 
 const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
-  const mapRef = React.useRef(null)
+  const [mapRef, setMapRef] = React.useState(null)
   const geoJsonLayerRef = React.useRef(null)
-
-  const [mapLoaded, setMapLoaded] = React.useState(false)
 
   const geoJSON = formatGeoJsons([district])
   const districtGeoJSON = getDistrict(geoJSON)
   const isValidGeoJSON = district.geojson && geoJSON.length && geoJSON[0].district && districtGeoJSON
 
   React.useEffect(() => {
-    if (mapRef.current && geoJsonLayerRef.current && isValidGeoJSON) {
-      mapRef?.current?.invalidateSize()
-      mapRef?.current?.fitBounds(districtGeoJSON.getBounds())
+    if (mapRef && geoJsonLayerRef.current && isValidGeoJSON) {
+      mapRef.invalidateSize()
+      mapRef.fitBounds(districtGeoJSON.getBounds())
       geoJsonLayerRef?.current?.clearLayers()?.addData(geoJSON[0].district)
     }
-  }, [isValidGeoJSON, districtGeoJSON, mapLoaded, geoJSON])
+  }, [isValidGeoJSON, districtGeoJSON, geoJSON, mapRef])
 
   return (
     <Box
@@ -55,10 +53,6 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
       }}
     >
       <MapContainer
-        whenCreated={map => {
-          mapRef.current = map
-          setTimeout(() => setMapLoaded(true), 150)
-        }}
         style={{
           width: '100%',
           height: '100%',
@@ -73,6 +67,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
         touchZoom={false}
         trackResize={false}
         scrollWheelZoom={false}
+        ref={setMapRef}
       >
         <CapcoTileLayerLegacy />
         {isValidGeoJSON ? (
@@ -83,7 +78,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
             ref={geoJsonLayerRef}
           />
         ) : null}
-        {district.titleOnMap && mapLoaded && isValidGeoJSON ? (
+        {district.titleOnMap && isValidGeoJSON ? (
           <Rectangle bounds={districtGeoJSON.getBounds()} pathOptions={{ color: 'transparent' }}>
             {/** @ts-ignore https://github.com/cap-collectif/platform/issues/15975 */}
             <Tooltip permanent className="titleTooltip">

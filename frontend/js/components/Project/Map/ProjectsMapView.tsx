@@ -2,7 +2,7 @@ import * as React from 'react'
 import L from 'leaflet'
 import { useLazyLoadQuery, graphql } from 'react-relay'
 import noop from 'lodash/noop'
-import { MapContainer as Map, Marker, ZoomControl } from 'react-leaflet'
+import { MapContainer as Map, Marker, useMapEvent, ZoomControl } from 'react-leaflet'
 import { useIntl } from 'react-intl'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { renderToString } from 'react-dom/server'
@@ -110,6 +110,30 @@ export const formatCounter = (iconName: CapUIIcon, count: number, archived: bool
   </Flex>
 )
 
+const MapEvents = ({
+  setDisplayPopup,
+  setFontSize,
+}: {
+  setDisplayPopup: (arg: boolean) => void
+  setFontSize: (arg: string) => void
+}) => {
+  const map = useMapEvent('zoomend', () => {
+    const zoom = map.getZoom()
+    setDisplayPopup(zoom > 10)
+    setFontSize(zoom < 13 ? '11px' : '14px')
+  })
+
+  React.useEffect(() => {
+    if (!isSafari && map) {
+      map.addHandler('gestureHandling', GestureHandling)
+      // @ts-expect-error typescript does not see additional handler here
+      map.gestureHandling.enable()
+    }
+  }, [map])
+
+  return null
+}
+
 export const ProjectsMapView = ({
   linkColor,
   linkHoverColor,
@@ -119,16 +143,24 @@ export const ProjectsMapView = ({
   linkHoverColor: string
   backgroundColor: string
 }) => {
+  const mapRef = React.useRef<L.Map | null>(null)
   const intl = useIntl()
   const query = useLazyLoadQuery<ProjectsMapViewQuery>(QUERY, {})
-  const mapRef = React.useRef(null)
+  const initialZoom = query?.homePageProjectsMapSectionConfiguration?.zoomMap
   const markerRef = React.useRef(null)
   const [address, setAddress] = React.useState(null)
   const isMobile = useIsMobile()
+  const [displayPopup, setDisplayPopup] = React.useState(initialZoom > 10)
+  const [zoom, setZoom] = React.useState(initialZoom)
+  const [fontSize, setFontSize] = React.useState(initialZoom < 13 ? '11px' : '14px')
+
+  React.useEffect(() => {
+    setZoom(mapRef?.current?.getZoom())
+  }, [displayPopup, fontSize])
+
   React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
   }, [])
-  const [zoom, setZoom] = React.useState(query?.homePageProjectsMapSectionConfiguration.zoomMap)
   if (!useFeatureFlag('display_map')) return null
   if (!query) return null
   const { homePageProjectsMapSectionConfiguration } = query
@@ -136,6 +168,7 @@ export const ProjectsMapView = ({
   const markers = query?.projects?.edges?.map(d => d.node).filter(p => !!(p.address && p.address.lat && p.address.lng))
   if (!markers.length) return null
   const geoJsons = districts ? formatGeoJsons(districts) : null
+
   return (
     <section id="projectsMap" className="section--custom">
       <div className="container">
@@ -149,7 +182,7 @@ export const ProjectsMapView = ({
               '.titleTooltip': {
                 opacity: '1 !important',
                 fontFamily: typography.fonts.openSans,
-                fontSize: zoom < 13 ? '11px' : '14px',
+                fontSize,
                 fontWeight: 600,
                 marginLeft: '50%',
                 zIndex: 99,
@@ -208,9 +241,9 @@ export const ProjectsMapView = ({
             <MapContainer isMobile={isMobile}>
               <Address
                 id="address"
-                getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
+                getPosition={(lat, lng) => flyToPosition(mapRef?.current, lat, lng)}
                 getAddress={(addr: AddressComplete | null | undefined) =>
-                  addr ? flyToPosition(mapRef, addr.geometry.location.lat, addr.geometry.location.lng) : noop()
+                  addr ? flyToPosition(mapRef?.current, addr.geometry.location.lat, addr.geometry.location.lng) : noop()
                 }
                 debounce={1200}
                 value={address}
@@ -219,17 +252,12 @@ export const ProjectsMapView = ({
                   id: 'proposal.map.form.placeholder',
                 })}
               />
-
               <Map
-                whenCreated={map => {
-                  mapRef.current = map
-                  map.on('zoomend', () => setZoom(mapRef?.current?.getZoom() || 0))
-                }}
                 center={{
                   lat: homePageProjectsMapSectionConfiguration.centerLatitude,
                   lng: homePageProjectsMapSectionConfiguration.centerLongitude,
                 }}
-                zoom={homePageProjectsMapSectionConfiguration.zoomMap}
+                zoom={initialZoom}
                 maxZoom={MAX_MAP_ZOOM}
                 style={{
                   height: isMobile ? '100vw' : '33vw',
@@ -241,8 +269,9 @@ export const ProjectsMapView = ({
                 dragging={!L.Browser.mobile}
                 tap={false}
                 doubleClickZoom={false}
-                gestureHandling={!isSafari}
+                ref={mapRef}
               >
+                <MapEvents setDisplayPopup={setDisplayPopup} setFontSize={setFontSize} />
                 <CapcoTileLayer />
                 <MarkerClusterGroup
                   spiderfyOnMaxZoom
@@ -349,7 +378,7 @@ export const ProjectsMapView = ({
                 {geoJsons &&
                   geoJsons.map((geoJson, idx) => (
                     <React.Fragment key={idx}>
-                      <GeoJSONView geoJson={geoJson} zoom={zoom || 0} mapRef={mapRef} />
+                      <GeoJSONView geoJson={geoJson} zoom={zoom || 0} displayPopup={displayPopup} />
                     </React.Fragment>
                   ))}
                 {!isMobile && <ZoomControl position="bottomright" />}

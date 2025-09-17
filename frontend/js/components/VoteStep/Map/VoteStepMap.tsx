@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { renderToString } from 'react-dom/server'
-import { Marker, MapContainer as Map, Popup, GeoJSON } from 'react-leaflet'
+import { MapContainer as Map, Popup, GeoJSON, useMapEvents } from 'react-leaflet'
 import { AnimatePresence, m as motion } from 'framer-motion'
 import { GestureHandling } from 'leaflet-gesture-handling'
 import { useDispatch } from 'react-redux'
@@ -30,11 +29,11 @@ import {
   boundsToLeaflet,
   parseLatLngBounds,
   DELAY_BEFORE_MAP_RELOADING,
-  dispatchEvent,
+  Bounds,
 } from '../utils'
 import EmptyList from '../List/EmptyList'
 import debounce from '@shared/utils/debounce-promise'
-import { Button, CapUIIcon, CapUIIconSize, Icon, useTheme } from '@cap-collectif/ui'
+import { Button, useTheme } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
 import ProposalCreateModal from '~/components/Proposal/Create/ProposalCreateModal'
@@ -42,7 +41,7 @@ import { formName } from '~/components/Proposal/Form/ProposalForm'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { getAddressFromLatLng } from '~/utils/googleMapAddress'
 import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson'
-import convertIconToDs from '@shared/utils/convertIconToDs'
+import VoteStepMapMarker from './VoteStepMapMarker'
 
 type Props = {
   voteStep: VoteStepMap_step$key
@@ -136,7 +135,60 @@ const FRAGMENT_VIEWER = graphql`
   }
 `
 
-const size = 40
+const onPositionChange = (map: L.Map, handleMapPositionChange: any) => {
+  const bounds = map.getBounds()
+  handleMapPositionChange(
+    JSON.stringify({
+      topLeft: bounds.getNorthWest(),
+      bottomRight: bounds.getSouthEast(),
+    }),
+  )
+}
+
+const debouncedOnPositionChange = debounce(
+  (map: L.Map, handleMapPositionChange: (arg: string) => void) => onPositionChange(map, handleMapPositionChange),
+  DELAY_BEFORE_MAP_RELOADING,
+)
+
+const MapCustomEvents = ({
+  handleMapPositionChange,
+  setSelectedProposal,
+  setPopoverLatLng,
+  contribuable,
+  filterBounds,
+}: {
+  handleMapPositionChange: (arg: string) => void
+  setSelectedProposal: (proposal: any) => void
+  setPopoverLatLng: (arg: L.LatLng) => void
+  contribuable: boolean
+  filterBounds: Bounds
+}) => {
+  const isMobile = useIsMobile()
+  const map = useMapEvents({
+    moveend: () => {
+      if (map) debouncedOnPositionChange(map, handleMapPositionChange)
+    },
+    click: e => {
+      if (map) setSelectedProposal(null)
+      if (contribuable) setPopoverLatLng(e?.latlng)
+    },
+  })
+
+  if (!isMobile) {
+    if (filterBounds && map) map.fitBounds(boundsToLeaflet(filterBounds) as unknown as L.LatLngBoundsExpression)
+    else if (map) onPositionChange(map, handleMapPositionChange)
+  }
+
+  useEffect(() => {
+    if (!isSafari && !isMobile && map) {
+      map.addHandler('gestureHandling', GestureHandling)
+      // @ts-expect-error typescript does not see additional handler here
+      map.gestureHandling.enable()
+    }
+  }, [isMobile, map])
+
+  return null
+}
 
 export const VoteStepMap = ({
   voteStep,
@@ -176,10 +228,6 @@ export const VoteStepMap = ({
   const geoJsons = formatGeoJsons(proposalForm.districts)
 
   useEffect(() => {
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
-  }, [])
-
-  useEffect(() => {
     if (hasNext) {
       loadNext(50)
     }
@@ -191,17 +239,6 @@ export const VoteStepMap = ({
     }
   }, [filterBounds, DEFAULT_CENTER])
 
-  const onPositionChange = (map: L.Map) => {
-    const bounds = map.getBounds()
-    handleMapPositionChange(
-      JSON.stringify({
-        topLeft: bounds.getNorthWest(),
-        bottomRight: bounds.getSouthEast(),
-      }),
-    )
-  }
-
-  const debouncedOnPositionChange = debounce((map: L.Map) => onPositionChange(map), DELAY_BEFORE_MAP_RELOADING)
   useEventListener(VoteStepEvent.HoverCardStart, e => {
     const proposalId = e?.data?.id
     if (proposalId) setHoveredProposal(proposalId)
@@ -209,10 +246,6 @@ export const VoteStepMap = ({
   useEventListener(VoteStepEvent.HoverCardEnd, () => {
     setHoveredProposal(null)
   })
-
-  const closePopup = () => {
-    if (popupRef.current) popupRef.current.close()
-  }
 
   return (
     <>
@@ -231,25 +264,6 @@ export const VoteStepMap = ({
       <MapContainer>
         <Map
           id="map"
-          whenCreated={map => {
-            mapRef.current = map
-
-            if (!isMobile) {
-              // @ts-ignore Use ts leaflet types now that we are in TS
-              if (filterBounds && mapRef.current) mapRef.current.fitBounds(boundsToLeaflet(filterBounds))
-              else if (mapRef.current) onPositionChange(mapRef.current)
-            }
-            map.on('moveend', () => {
-              closePopup()
-              if (mapRef.current) debouncedOnPositionChange(mapRef.current)
-            })
-            map.on('click', e => {
-              if (mapRef.current) setSelectedProposal(null)
-              if (isCollectStep && proposalForm?.contribuable) {
-                setPopoverLatLng(e?.latlng)
-              }
-            })
-          }}
           center={
             urlCenter || {
               lat: DEFAULT_CENTER.lat,
@@ -267,13 +281,18 @@ export const VoteStepMap = ({
           dragging
           tap={false}
           doubleClickZoom={isMobile}
-          gestureHandling={!isSafari && !isMobile}
         >
+          <MapCustomEvents
+            handleMapPositionChange={handleMapPositionChange}
+            setPopoverLatLng={setPopoverLatLng}
+            contribuable={proposalForm?.contribuable && isCollectStep}
+            setSelectedProposal={setSelectedProposal}
+            filterBounds={filterBounds}
+          />
           <CapcoTileLayer />
           <Popup
             ref={popupRef}
             key="popup-proposal"
-            closeButton={false}
             position={popoverLatLng}
             autoPan={false}
             className="popup-proposal"
@@ -299,50 +318,22 @@ export const VoteStepMap = ({
             maxClusterRadius={30}
           >
             {markers?.length > 0 &&
-              markers.map((mark, idx) => {
+              markers.map(mark => {
                 const icon = mark.category?.icon
                 const isSelected = selectedProposal === mark.id
                 const isActive = isSelected || hoveredProposal === mark.id
-                const iconSize = size + 10
+
                 return (
-                  <Marker
-                    key={idx}
-                    position={[mark.address?.lat, mark.address?.lng]}
-                    icon={L.divIcon({
-                      className: `preview-icn ${isActive ? 'active' : ''}`,
-                      html: renderToString(
-                        <>
-                          <Icon
-                            name={icon ? CapUIIcon.PinFull : CapUIIcon.Pin}
-                            size={CapUIIconSize.Sm}
-                            color={mark.category?.color || colors['neutral-gray'][800]}
-                          />
-                          {icon && <Icon name={convertIconToDs(icon)} size={CapUIIconSize.Xs} color="white" />}
-                        </>,
-                      ),
-                      /* <> Keeping it in case IDF
-                          <Icon
-                            name={ICON_NAME.pin3}
-                            size={size}
-                            css={{
-                              fill: mark.category?.color || ICON_COLOR,
-                            }}
-                          />
-                          {icon && <Icon name={ICON_NAME[icon]} size={16} color="white" />}
-                        </>,*/
-                      iconSize: [iconSize, iconSize],
-                      iconAnchor: [iconSize / 2, iconSize],
-                      popupAnchor: [0, -iconSize],
-                    })}
-                    eventHandlers={{
-                      click: () => {
-                        if (isMobile) setSelectedProposal(isSelected ? null : mark.id)
-                        else
-                          dispatchEvent(VoteStepEvent.ClickProposal, {
-                            id: mark.id,
-                          })
-                      },
-                    }}
+                  <VoteStepMapMarker
+                    key={mark.id}
+                    id={mark.id}
+                    lat={mark.address.lat}
+                    lng={mark.address.lng}
+                    icon={icon}
+                    isActive={isActive}
+                    isSelected={isSelected}
+                    setSelectedProposal={setSelectedProposal}
+                    color={mark.category?.color || colors['neutral-gray'][800]}
                   />
                 )
               })}
