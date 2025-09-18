@@ -170,9 +170,9 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
 
             $countOpinions += \count($opinions);
 
-            if (file_exists($filePaths[ExportVariantsEnum::FULL->value]) && file_exists($filePaths[ExportVariantsEnum::SIMPLIFIED->value])) {
-                $append = false;
-            }
+//            if (!file_exists($filePaths[ExportVariantsEnum::FULL->value]) && !file_exists($filePaths[ExportVariantsEnum::SIMPLIFIED->value])) {
+//                $append = false;
+//            }
 
             $this->consultationContributionsExporter->exportConsultationContributions(
                 $opinions,

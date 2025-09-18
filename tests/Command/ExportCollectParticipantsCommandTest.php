@@ -57,32 +57,6 @@ class ExportCollectParticipantsCommandTest extends KernelTestCase
         $this->resetUserUpdatedAt('user1');
     }
 
-//    public function testIfFileIsNotGeneratedIfRandomUserWasUpdated(): void
-//    {
-//        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
-//
-//        $this->updateUser('user6');
-//
-//        $code = $commandTester->execute($options);
-//
-//        $this->assertStringNotContainsString('participants_bp-avec-vote-classement_collecte-avec-vote-classement-limite_simplified.csv', $commandTester->getDisplay());
-//        $this->assertStringNotContainsString('participants_bp-avec-vote-classement_collecte-avec-vote-classement-limite.csv', $commandTester->getDisplay());
-//        $this->assertSame(0, $code);
-//
-//        $this->resetUserUpdatedAt('user6');
-//    }
-
-//    public function testIfFileIsNotGeneratedIfUserWasNotUpdated(): void
-//    {
-//        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
-//
-//        $code = $commandTester->execute($options);
-//
-//        $this->assertStringNotContainsString('participants_bp-avec-vote-classement_collecte-avec-vote-classement-limite.csv', $commandTester->getDisplay());
-//        $this->assertStringNotContainsString('participants_bp-avec-vote-classement_collecte-avec-vote-classement-limite.csv', $commandTester->getDisplay());
-//        $this->assertSame(0, $code);
-//    }
-
     public function testIfFileIsGeneratedIfThereIsANewVote(): void
     {
         [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);

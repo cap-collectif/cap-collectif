@@ -71,28 +71,6 @@ class QuestionnaireContributionExporter extends ContributionExporter
         }
     }
 
-//    /**
-//     * @param array<string, string> $paths
-//     */
-//    private function shouldExport(string $questionnaireId, array $paths): bool
-//    {
-//        foreach ($paths as $path) {
-//            if (!file_exists($path)) {
-//                return true;
-//            }
-//        }
-//
-//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-//
-//        try {
-//            return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);
-//        } catch (\Exception $e) {
-//            $this->logger->error($e->getMessage());
-//
-//            return false;
-//        }
-//    }
-
     private function exportQuestionnaireRepliesInBatches(Questionnaire $questionnaire): void
     {
         $replyOffset = 0;

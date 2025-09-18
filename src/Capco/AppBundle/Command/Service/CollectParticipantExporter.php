@@ -106,29 +106,6 @@ class CollectParticipantExporter extends ParticipantExporter
         unset($content);
     }
 
-//    /**
-//     * @param array<string, string> $paths
-//     */
-//    private function shouldExportParticipant(CollectStep $collectStep, array $paths, bool $append): bool
-//    {
-//        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
-//            return true;
-//        }
-//
-//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-//
-//        try {
-//            $hasNewUsersForACollectStep = $this->userRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
-//            $hasNewParticipantsForACollectStep = $this->participantRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
-//
-//            return $hasNewUsersForACollectStep || $hasNewParticipantsForACollectStep;
-//        } catch (\Exception $e) {
-//            $this->logger->error($e->getMessage());
-//
-//            return false;
-//        }
-//    }
-
     private function initializeSerializer(): Serializer
     {
         return new Serializer(

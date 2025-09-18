@@ -21,10 +21,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Enum\ExportVariantsEnum;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
@@ -34,7 +31,6 @@ class ConsultationContributionExporter extends ContributionExporter
 {
     public function __construct(
         protected EntityManagerInterface $entityManager,
-        private readonly ConsultationStepRepository $consultationStepRepository,
         private readonly OpinionNormalizer $opinionNormalizer,
         private readonly OpinionArgumentNormalizer $opinionArgumentNormalizer,
         private readonly OpinionAppendixNormalizer $opinionAppendixNormalizer,
@@ -44,7 +40,6 @@ class ConsultationContributionExporter extends ContributionExporter
         private readonly OpinionSourceNormalizer $opinionSourceNormalizer,
         private readonly OpinionReportingNormalizer $opinionReportingNormalizer,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
-        private readonly LoggerInterface $logger,
         Filesystem $fileSystem,
         private readonly BatchProcessor $batchProcessor
     ) {
@@ -62,41 +57,8 @@ class ConsultationContributionExporter extends ContributionExporter
         ConsultationStep $consultationStep,
         bool $append
     ): void {
-        $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep);
-        $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($consultationStep);
-
-        if ($this->shouldExport($consultationStep->getId(), $paths, $append)) {
-            $this->setDelimiter($delimiter);
-            $this->exportContributionsInBatches($opinions, $consultationStep, $append);
-        }
-    }
-
-    private function getOldestUpdateDate(string $simplifiedPath, string $fullPath): \DateTime
-    {
-        $simplifiedFileDate = filemtime($simplifiedPath);
-        $fullFileDate = filemtime($fullPath);
-
-        return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
-    }
-
-    /**
-     * @param array<string, string> $paths
-     */
-    private function shouldExport(string $consultationStepId, array $paths, bool $append): bool
-    {
-        if ($append || !file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
-            return true;
-        }
-
-        $oldestUpdateDate = $this->getOldestUpdateDate($paths[ExportVariantsEnum::SIMPLIFIED->value], $paths[ExportVariantsEnum::FULL->value]);
-
-        try {
-            return $this->consultationStepRepository->hasRecentContributionsOrUpdatedUsers($consultationStepId, $oldestUpdateDate);
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-
-            return false;
-        }
+        $this->setDelimiter($delimiter);
+        $this->exportContributionsInBatches($opinions, $consultationStep, $append);
     }
 
     /**

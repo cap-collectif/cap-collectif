@@ -61,15 +61,13 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
     }
 
     /**
-     * @param Proposal[]            $proposals
-     * @param array<string, string> $filePaths
+     * @param Proposal[] $proposals
      */
     public function exportStepContributions(
         AbstractStep $step,
         array $proposals,
         ?string $delimiter,
         bool $append,
-        array $filePaths
     ): void {
         $this->setDelimiter($delimiter);
 
@@ -171,31 +169,6 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
 
         unset($content);
     }
-
-//    /**
-//     * @param Proposal[]            $proposals
-//     * @param array<string, string> $filePaths
-//     */
-//    private function shouldExport(AbstractStep $step, array $proposals, array $filePaths, bool $append): bool
-//    {
-//        if ($append || !file_exists($filePaths[ExportVariantsEnum::FULL->value])) {
-//            return true;
-//        }
-//
-//        $oldestUpdateDate = $this->getOldestUpdateDate($filePaths[ExportVariantsEnum::SIMPLIFIED->value], $filePaths[ExportVariantsEnum::FULL->value]);
-//
-//        try {
-//            if ([] === $proposals) {
-//                return false;
-//            }
-//
-//            return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($step, $proposals, $oldestUpdateDate);
-//        } catch (\Exception $e) {
-//            $this->logger->error($e->getMessage());
-//
-//            return false;
-//        }
-//    }
 
     /**
      * @param Proposal[] $proposals

@@ -113,34 +113,6 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         } while (self::BATCH_SIZE === \count($participants));
     }
 
-//    /**
-//     * @param array<string, string> $paths
-//     */
-//    private function shouldExportParticipant(array $paths, Questionnaire $questionnaire): bool
-//    {
-//        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
-//            return true;
-//        }
-//
-//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-//
-//        return $this->participantRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
-//    }
-
-//    /**
-//     * @param array<string, string> $paths
-//     */
-//    private function shouldExportUser(array $paths, Questionnaire $questionnaire): bool
-//    {
-//        if (!file_exists($paths[ExportVariantsEnum::SIMPLIFIED->value]) || !file_exists($paths[ExportVariantsEnum::FULL->value])) {
-//            return true;
-//        }
-//
-//        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
-//
-//        return $this->userRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
-//    }
-
     private function initializeSerializer(): Serializer
     {
         return new Serializer(

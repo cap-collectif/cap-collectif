@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Service\CollectParticipantExporter;
-use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -91,13 +90,6 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
             $this->stepParticipantExporter->initializeStyle($style);
 
             $filePaths = $this->getFilePaths($collectStep);
-//            $participants = $this->userRepository->countCollectConfirmedParticipants($collectStep);
-//            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-//                [$participants],
-//                $collectStep,
-//                'collect-participants-count',
-//                $this->participantFilePathResolver
-//            );
 
             $userExported = $this->exportUsersByBatch($input, $collectStep, $output);
             $participantsExported = $this->exportParticipantsByBatch($input, $collectStep, $output);
