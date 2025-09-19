@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, CapUIFontSize } from '@cap-collectif/ui'
+import { Flex, Box, CapUIFontSize, Text } from '@cap-collectif/ui'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import type { FilterOptions } from '~/components/VoteStep/Filters/useVoteStepFilters'
 import '~/components/VoteStep/Filters/useVoteStepFilters'
@@ -23,6 +23,7 @@ const Button = ({ isChecked, children, value, onClick }) => {
       border="none"
       textAlign="left"
       onClick={() => onClick(value)}
+      aria-current={isChecked}
     >
       {children}
     </Box>
@@ -47,7 +48,7 @@ export const VoteStepFilterButtons = ({ options, filterName }: Props) => {
         {options.map(choice => (
           <Flex alignItems="center" key={choice.id}>
             <Button isChecked={choice.id === filter} value={choice.id} onClick={handleOnChange}>
-              {choice?.title || choice?.name}
+              <Text fontWeight={choice.id === filter ? 600 : 400}>{choice?.title || choice?.name}</Text>
             </Button>
           </Flex>
         ))}

@@ -18,7 +18,7 @@ const ModalBody = ({ children, ...rest }: Props) => {
   const isMobile = useIsMobile()
   const style = fullPageScrollable && isMobile ? scrollableBody : null
   return (
-    <Flex as="main" p={6} direction="column" {...style} {...rest}>
+    <Flex as="main" role='main' p={6} direction="column" {...style} {...rest}>
       {children}
     </Flex>
   )

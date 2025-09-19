@@ -6,7 +6,7 @@ import { useDisclosure } from '@liinkiing/react-hooks'
 import moment from 'moment'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import styled from 'styled-components'
-import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize, Link } from '@cap-collectif/ui'
+import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize, Link, Text } from '@cap-collectif/ui'
 import { useLocation, useParams } from 'react-router-dom'
 import { getBaseUrl } from '~/config'
 import colors from '~/utils/colors'
@@ -183,6 +183,11 @@ const BackUrl = ({
 
   const fullUrl = `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`
 
+    const { btnTextColor, btnTextColorHover } = useSelector((state: GlobalState) => ({
+      btnTextColor: state.default.parameters['color.btn.ghost.base'],
+      btnTextColorHover: state.default.parameters['color.btn.ghost.hover'],
+    }))
+
   const handleGoBack = () => {
     // !important: `fullUrl` won't work on mobile / mobile sized view
     // Detect if the user is on a mobile device or a small screen
@@ -198,9 +203,16 @@ const BackUrl = ({
   }
 
   return (
-    <Link onClick={handleGoBack} sx={{cursor: 'pointer'}}>
-      <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={colors.primaryColor} />
-      {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
+    <Link onClick={handleGoBack} sx={{cursor: 'pointer', textDecorationColor: btnTextColor, "&:hover": {
+      textDecorationColor: btnTextColorHover, "svg": {
+        color: btnTextColorHover
+      }, "p": {
+        color: btnTextColorHover,
+        textDecorationColor: btnTextColorHover,
+      }
+    }}}>
+      <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={btnTextColor} />
+        {tradKeyToBack && <Text color={btnTextColor}><FormattedMessage id={tradKeyToBack} /></Text>}
     </Link>
   )
 }

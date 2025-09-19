@@ -81,7 +81,7 @@ export default async function Page({ params }: Params) {
   if (!organization) return notFound()
 
   return (
-    <main id="organization-page">
+    <main role="main" id="organization-page">
       <Organization slug={slug} organization={organization} />
     </main>
   )

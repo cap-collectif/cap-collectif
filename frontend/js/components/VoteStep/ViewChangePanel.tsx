@@ -27,12 +27,19 @@ const ViewButton = ({
   borderBottomRightRadius?: string
   borderRight?: string
   borderLeft?: string
-  text: string
+  text: string // 'global.list' | 'global.card' | 'vote_step.all_proposals' translated
   children?: React.ReactNode
   disabled?: boolean
   id?: string
 }) => {
   const { view } = useVoteStepContext()
+  const intl = useIntl()
+  const ariaLabel = text === intl.formatMessage({ id: 'global.list'})
+  ? intl.formatMessage({ id: 'front.results.list-view' })
+  : text === intl.formatMessage({ id: 'global.card' })
+  ? intl.formatMessage({ id: 'front.results.map-view' })
+  : text
+
   return (
     <Flex
       as="button"
@@ -45,7 +52,7 @@ const ViewButton = ({
       border={hideText ? 'none' : 'normal'}
       position="relative"
       {...rest}
-      aria-label={text}
+      aria-label={ariaLabel}
       borderColor={active ? 'primary.base' : 'gray.300'}
       aria-current={active}
     >
@@ -146,7 +153,6 @@ export const ViewChangePanel = ({
             hideText={hideText}
             onClick={() => {
               setView(View.Map)
-
               if (hideText) {
                 setFilters('term', '')
               }

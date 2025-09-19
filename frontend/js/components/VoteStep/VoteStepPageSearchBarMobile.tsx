@@ -28,6 +28,10 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
     )
   }
 
+  const ariaLabel = view === 'map'
+    ? intl.formatMessage({ id: 'geo.search.bar.placeholder' })
+    : intl.formatMessage({ id: 'global.search' })
+
   return (
     <Flex
       onClick={e => {
@@ -41,8 +45,8 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
       boxShadow="small"
       width="100%"
       sx={{
-        fontFamily: CapUIFontFamily.Input,
-        lineHeight: CapUILineHeight.Base,
+        fontFamily: CapUIFontFamily.Body,
+        lineHeight: CapUILineHeight.Normal,
         color: 'gray.900',
         bg: 'white',
       }}
@@ -53,6 +57,7 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
           e.preventDefault()
         }}
         type="button"
+        aria-label={ariaLabel}
         sx={{
           cursor: 'pointer',
           background: 'inherit',
@@ -74,12 +79,16 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
         width="100%"
         bg="inherit"
         className="geo-search-bar-input"
+        title={intl.formatMessage({
+          id: 'geo.search.bar.placeholder',
+        })}
         placeholder={getPlaceholder()}
         sx={{
           background: 'inherit',
           borderWidth: '0px',
           fontSize: '14px !important',
         }}
+        name="geoSearchBarInput"
       />
     </Flex>
   )

@@ -77,7 +77,7 @@ export default async function Page() {
           dangerouslySetInnerHTML={{ __html: data?.customCode?.value }}
         />
       ) : null}
-      <main id="contact-page">
+      <main role="main" id="contact-page">
         <Contact data={data} />
       </main>
     </>

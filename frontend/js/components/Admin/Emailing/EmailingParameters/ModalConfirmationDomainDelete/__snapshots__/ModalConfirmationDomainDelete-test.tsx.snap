@@ -173,6 +173,7 @@ Array [
           </header>
           <main
             className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
+            role="main"
           >
             <p
               className="sc-gsGkXq cwfoqX"

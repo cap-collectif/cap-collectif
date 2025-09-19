@@ -33,7 +33,7 @@ const SaveButton = ({ children, onClick }) => {
   )
 }
 
-const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
+const VoteStepFiltersMobile: React.FC<Props> = ({ stepId, onClose }) => {
   const intl = useIntl()
   const voteStepFilters = useVoteStepFilters(stepId)
   const { view } = useVoteStepContext()
@@ -63,7 +63,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
           })}
         </Text>
         <ResetCss>
-          <Box as="button" onClick={onClose}>
+          <Box as="button" onClick={onClose} aria-label={intl.formatMessage({ id: 'modal.close-filters' })}>
             <Icon name={CapUIIcon.CrossO} size={CapUIIconSize.Sm} />
           </Box>
         </ResetCss>

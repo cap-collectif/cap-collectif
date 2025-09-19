@@ -99,6 +99,8 @@ class ParametersRuntime implements RuntimeExtensionInterface
                 'color.main_menu.text_active',
                 'color.btn.primary.bg',
                 'color.btn.primary.text',
+                'color.btn.ghost.base',
+                'color.btn.ghost.hover',
                 'color.section.bg',
                 'color.body.bg',
                 'color.votes_bar.bg',

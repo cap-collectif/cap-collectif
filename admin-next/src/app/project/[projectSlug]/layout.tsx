@@ -73,7 +73,7 @@ export default async function ProjectLayout({
   const { project, siteImage } = data
 
   return (
-    <main id="project-page">
+    <main role="main" id="project-page">
       <ProjectHeader project={project} defaultAvatarImage={siteImage?.media?.url} projectSlug={slug} />
       {children}
     </main>

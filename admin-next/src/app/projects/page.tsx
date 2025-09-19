@@ -74,7 +74,7 @@ export default async function Page() {
           dangerouslySetInnerHTML={{ __html: customCode?.value }}
         />
       ) : null}
-      <main id="projects-page">
+      <main role="main" id="projects-page">
         <Projects
           title={pageTitle?.value}
           customCode={customCode?.value}

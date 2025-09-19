@@ -126,7 +126,7 @@ export default async function Page({ params }: Params) {
     const title = messages[locale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || 'fr-FR']?.charter
 
     return (
-      <main id="charter-page">
+      <main role="main" id="charter-page">
         <PageRender title={title || 'Charte'} body={charter?.value} />
       </main>
     )
@@ -146,7 +146,7 @@ export default async function Page({ params }: Params) {
       {customCode ? (
         <div id="custom-page-code" className="cap-custom-code" dangerouslySetInnerHTML={{ __html: customCode }} />
       ) : null}
-      <main id="custom-page">
+      <main role="main" id="custom-page">
         <PageRender title={title} body={body} customCode={customCode} />
       </main>
     </>

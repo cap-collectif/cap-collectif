@@ -62,7 +62,7 @@ export default function Page({ params }: Params) {
   const slug = removeAccents(decodeURI(initialSlug))
 
   return (
-    <main id="district-page">
+    <main role="main" id="district-page">
       <District slug={slug} />
     </main>
   )

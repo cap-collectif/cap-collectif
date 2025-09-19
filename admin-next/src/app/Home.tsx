@@ -10,7 +10,7 @@ export const Home = () => {
     setBreadCrumbItems([])
   }, [setBreadCrumbItems])
 
-  return <main>Homepage - not ready and not accessible</main>
+  return <main role="main">Homepage - not ready and not accessible</main>
 }
 
 export default Home

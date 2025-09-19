@@ -69,7 +69,7 @@ export default async function Page() {
       {customCode ? (
         <div id="news-page-code" className="cap-custom-code" dangerouslySetInnerHTML={{ __html: customCode?.value }} />
       ) : null}
-      <main id="news-page">
+      <main role="main" id="news-page">
         <Posts
           title={pageTitle?.value}
           customCode={customCode?.value}

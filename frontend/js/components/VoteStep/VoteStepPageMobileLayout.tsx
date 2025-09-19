@@ -56,7 +56,7 @@ const QUERY = graphql`
   }
 `
 
-export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }: Props) => {
+export const VoteStepPageMobileLayout: React.FC<Props> = ({ query: queryKey, stepId, isMapView }) => {
   const [showFiltersPage, setShowFiltersPage] = React.useState<boolean>(false)
   const { filters, setFilters, view: contextView, hasMapView, setView } = useVoteStepContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
