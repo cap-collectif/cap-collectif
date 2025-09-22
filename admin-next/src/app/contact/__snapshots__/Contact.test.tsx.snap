@@ -152,6 +152,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required="true"
+                      autocomplete="email"
                       class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
                       id=":r1:"
                       name="email"

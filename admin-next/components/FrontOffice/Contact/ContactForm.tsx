@@ -67,6 +67,7 @@ export const ContactForm: FC<{
           control={control}
           type="email"
           placeholder={intl.formatMessage({ id: 'email.placeholder' })}
+          autoComplete="email"
         />
       </FormControl>
       <FormControl control={control} name="title" isRequired variantSize={variantSize} mb="lg">
