@@ -55,7 +55,7 @@ export const getCardLabel = (type: CarrouselElementType) => {
 
 export const DateItem: FC<{ dateRange: ItemDate; short?: boolean }> = ({ dateRange, short = false }) => {
   const intl = useIntl()
-  if (!dateRange) return null
+  if (!dateRange || (!dateRange.startAt && !dateRange.endAt)) return null
   const isSameDay = dateRange?.endAt && moment(dateRange?.startAt).isSame(moment(dateRange?.endAt), 'day')
 
   return (

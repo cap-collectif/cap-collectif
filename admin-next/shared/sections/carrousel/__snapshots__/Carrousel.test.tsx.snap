@@ -244,9 +244,6 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
                 >
                   type-event
                 </p>
-                <div>
-                  01/01
-                </div>
               </div>
               <h4
                 class="sc-bcXGCL kxNmEm cap-heading"
@@ -363,9 +360,6 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
                       class="sc-bcXGCL dTiXUh cap-text"
                     >
                       type-event
-                    </div>
-                    <div>
-                      01/01
                     </div>
                   </div>
                   <p
