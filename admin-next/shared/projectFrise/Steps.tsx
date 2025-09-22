@@ -206,17 +206,8 @@ export const Steps: FC<StepsProps> = ({ children, modalTitle, currentStepIndex, 
           ariaLabel={modalTitle}
           scrollBehavior="inside"
           disclosure={
-            <StepArrowContainer
-              onClick={e => {
-                e.stopPropagation()
-                e.nativeEvent.stopImmediatePropagation()
-              }}
-            >
-              {cloneElement(activeStep, {
-                style: {
-                  pointerEvents: 'none',
-                },
-              })}
+            <StepArrowContainer>
+              {cloneElement(activeStep, { url: null })}
               <StepsModalToggle className="arrow">
                 <Icon
                   name={CapUIIcon.ArrowDown}
