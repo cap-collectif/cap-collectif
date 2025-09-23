@@ -1,3 +1,4 @@
+export { default as Base } from './base'
 export { default as DebatePage } from './debate'
 export { default as QuestionnairePage } from './questionnaire'
 export { default as ProjectsPage } from './projects'
