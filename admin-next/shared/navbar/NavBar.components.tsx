@@ -161,7 +161,10 @@ NavBarLink.displayName = 'NavBarLink'
 
 const IS_BIG_LOGO_RATIO = 1.5
 
-export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number }} & BoxProps> = ({ logo , ...props}) => {
+export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number } } & BoxProps> = ({
+  logo,
+  ...props
+}) => {
   const intl = useIntl()
   const width = logo?.width > 180 ? 180 : logo?.width
   const {
@@ -248,6 +251,7 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
   return (
     <Box
       as="nav"
+      role="navigation"
       aria-label={intl.formatMessage({ id: 'navbar.breadcrumb' })}
       py={2}
       borderTop={`1px solid ${colors['neutral-gray']['150']}`}

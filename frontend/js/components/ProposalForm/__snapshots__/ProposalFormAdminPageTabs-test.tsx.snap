@@ -16,7 +16,9 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
     initialIndex={0}
     keyLength={4}
   >
-    <header>
+    <header
+      role="banner"
+    >
       <div>
         <FormattedMessage
           id="page.title.form.name"
@@ -171,7 +173,9 @@ exports[`<ProposalFormAdminPageTabs /> should render correctly 1`] = `
     initialIndex={0}
     keyLength={4}
   >
-    <header>
+    <header
+      role="banner"
+    >
       <div>
         <FormattedMessage
           id="page.title.form.name"

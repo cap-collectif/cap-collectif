@@ -49,7 +49,7 @@ export const ProposalFormAdminPageTabs = ({ intl, proposalForm, query }: Props) 
       initialIndex={setIntialIndex()}
       keyLength={Object.values(TABS).length}
     >
-      <header>
+      <header role="banner">
         <div>
           <FormattedMessage
             id="page.title.form.name"

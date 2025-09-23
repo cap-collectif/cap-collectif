@@ -97,7 +97,7 @@ Array [
             }
           }
         >
-          <header
+          <div
             className="sc-gsGkXq Flex___StyledAppBox-SiGEY kCymiX"
           >
             <div
@@ -123,7 +123,7 @@ Array [
                 className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ lipHVK dpibyo AjyOr icon"
               />
             </button>
-          </header>
+          </div>
           <main
             className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
             role="main"

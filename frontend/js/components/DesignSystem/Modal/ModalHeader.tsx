@@ -32,7 +32,7 @@ const ModalHeader = ({ children, closeLabel, ...rest }: Props) => {
   const isMobile = useIsMobile()
   const style = fullPageScrollable && isMobile ? fixedHeader : null
   return (
-    <Flex as="header" p={6} pb={0} align="center" {...style} {...rest}>
+    <Flex p={6} pb={0} align="center" {...style} {...rest}>
       <Flex
         direction="column"
         flex={1}

@@ -69,7 +69,7 @@ export const ProjectHeader: FC<BoxProps & ProjectHeaderProps> = ({
   const hasMultipleAuthors = authors.length > 1
 
   return (
-    <Box backgroundColor="white" as="header">
+    <Box backgroundColor="white" as="header" role="banner">
       <Flex
         maxWidth={pxToRem(1280)}
         width="100%"

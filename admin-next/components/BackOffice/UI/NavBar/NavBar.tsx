@@ -19,6 +19,7 @@ type SubComponents = {
 export const NavBar: React.FC<NavBarProps> & SubComponents = ({ children, className, ...props }) => (
   <Flex
     as="nav"
+    role="navigation"
     direction="row"
     bg="white"
     justify="space-between"

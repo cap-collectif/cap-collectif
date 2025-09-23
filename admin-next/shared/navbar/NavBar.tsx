@@ -52,6 +52,7 @@ const NavBarContent = ({
   return (
     <Flex
       as="nav"
+      role="navigation"
       px={[0, 0, isExtended ? 4 : 8]}
       ref={containerRef}
       flex={1}
@@ -112,6 +113,7 @@ const NavBarWeb = ({ children, links, theme, showBorder, logo }: NavBarProps) =>
   return (
     <Flex
       as="header"
+      role="banner"
       justifyContent="center"
       bg={theme.menuBackground}
       width="100%"
@@ -150,6 +152,7 @@ const NavBarMobile = ({ children, links, theme, showBorder, logo }: NavBarProps)
     <Flex
       id="main_navbar"
       as="header"
+      role="banner"
       direction="column"
       bg={theme.menuBackground}
       overflow="visible"

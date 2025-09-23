@@ -60,7 +60,7 @@ export const EventListProfileRefetch = ({ relay, user }: Props) => {
 
   return user ? (
     <EventListProfileRefetchContainer>
-      <header>
+      <header role="banner">
         <h2 className="h2">
           <FormattedMessage id="global.events" />
         </h2>

@@ -7,6 +7,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
   />
   <header
     class="sc-bcXGCL jJLeDl"
+    role="banner"
   >
     <div
       class="sc-bcXGCL cnDWWp"
