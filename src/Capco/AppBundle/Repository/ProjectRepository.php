@@ -11,6 +11,7 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
@@ -73,7 +74,7 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getOneWithoutVisibility(string $slug): ?Project
     {
@@ -118,21 +119,33 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
         return $qb->getQuery()->execute();
     }
 
+    /**
+     * @param array{field: string, direction: string} $orderBy
+     *
+     * @return Project[]
+     */
     public function getByOwnerPaginated(
         ProjectOwner $owner,
         int $offset,
         int $limit,
         ?User $viewer = null,
         array $orderBy = ['field' => 'publishedAt', 'direction' => 'DESC'],
-        ?int $status = null
+        ?int $status = null,
+        ?string $term = null
     ): array {
-        $projects = $this->getByOwnerQueryBuilder($owner, $viewer)
+        $qb = $this->getByOwnerQueryBuilder($owner, $viewer)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->orderBy("p.{$orderBy['field']}", $orderBy['direction'])
-            ->getQuery()
-            ->getResult()
         ;
+
+        if (!empty($term)) {
+            $qb->andWhere('p.title LIKE :term')
+                ->setParameter('term', '%' . $term . '%')
+            ;
+        }
+
+        $projects = $qb->getQuery()->getResult();
 
         if (null !== $status) {
             $projects = array_filter($projects, fn (Project $project) => $project->getCurrentStepState() === $status);

@@ -1,10 +1,10 @@
 /* eslint-env jest */
-const OrganizationProjects = /* GraphQL */ `
-  query OrganizationProjects($organizationId: ID!) {
+const OrganizationProjectsQuery = /* GraphQL */ `
+  query OrganizationProjects($organizationId: ID!, $query: String) {
     node(id: $organizationId) {
       ... on Organization {
         id
-        projects {
+        projects(query: $query) {
           totalCount
           edges {
             node {
@@ -22,9 +22,9 @@ describe('Internal|Organization.Projects', () => {
   it('anonymous should be able to fetch public projects from organization', async () => {
     await expect(
       graphql(
-        OrganizationProjects,
+        OrganizationProjectsQuery,
         {
-          organizationId: toGlobalId('Organization', 'organization2'),
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
         },
         'internal'
       ),
@@ -33,9 +33,9 @@ describe('Internal|Organization.Projects', () => {
   it('orga member should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
-        OrganizationProjects,
+        OrganizationProjectsQuery,
         {
-          organizationId: toGlobalId('Organization', 'organization2'),
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
         },
         'internal_valerie'
       ),
@@ -44,9 +44,9 @@ describe('Internal|Organization.Projects', () => {
   it('admin should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
-        OrganizationProjects,
+        OrganizationProjectsQuery,
         {
-          organizationId: toGlobalId('Organization', 'organization2'),
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
         },
         'internal_admin'
       ),
@@ -55,12 +55,25 @@ describe('Internal|Organization.Projects', () => {
   it('super admin should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
-        OrganizationProjects,
+        OrganizationProjectsQuery,
         {
-          organizationId: toGlobalId('Organization', 'organization2'),
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
         },
         'internal_super_admin'
       ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('orga member should be able to filter projects by title', async () => {
+    await expect(
+      graphql(
+        OrganizationProjectsQuery,
+        {
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
+          query: 'Budget'
+        },
+        'internal_valerie',
+      )
     ).resolves.toMatchSnapshot();
   });
 })

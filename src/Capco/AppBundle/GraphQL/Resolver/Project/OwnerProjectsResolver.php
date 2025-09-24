@@ -23,30 +23,26 @@ class OwnerProjectsResolver implements QueryInterface
         ?User $viewer = null
     ): ConnectionInterface {
         $orderBy = $this->getOrderBy($args);
-        $projectStatus = $args->offsetGet('status') ?? null;
-        $hasProjectStatus = null !== $projectStatus;
 
-        $getProjectsByOwnerPaginated = fn (int $offset, int $limit): array => $this->repository->getByOwnerPaginated(
-            $owner,
-            $offset,
-            $limit,
-            $viewer,
-            $orderBy,
-            $projectStatus
-        )
-        ;
+        $totalCount = 0;
+        $paginator = new Paginator(function (int $offset, int $limit) use ($args, $orderBy, $viewer, $owner, &$totalCount): array {
+            $result = $this->repository->getByOwnerPaginated(
+                $owner,
+                $offset,
+                $limit,
+                $viewer,
+                $orderBy,
+                $args->offsetGet('status'),
+                $args->offsetGet('query')
+            );
 
-        $totalCount = $hasProjectStatus
-            ? \count($getProjectsByOwnerPaginated(0, \PHP_INT_MAX))
-            : $this->repository->countByOwner($owner, $viewer);
+            $totalCount = \count($result);
 
-        $paginator = new Paginator(fn (int $offset, int $limit): array => $getProjectsByOwnerPaginated($offset, $limit));
+            return $result;
+        });
 
         $connection = $paginator->auto($args, $totalCount);
-
-        if ($projectStatus) {
-            $connection->setTotalCount($totalCount);
-        }
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }
