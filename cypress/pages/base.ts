@@ -4,24 +4,28 @@ export default new (class Base {
   }
 
   visit(
-    { path = '', toWait = '', withIntercept = false }: { toWait: string; path?: string; withIntercept?: boolean } = {
-      toWait: '',
+    {
+      path = '',
+      operationName = '',
+      withIntercept = false,
+    }: { operationName: string; path?: string; withIntercept?: boolean } = {
+      operationName: '',
     },
   ) {
-    if (withIntercept) cy.interceptGraphQLOperation({ operationName: toWait })
+    if (withIntercept) cy.interceptGraphQLOperation({ operationName: operationName })
     this.cy.visit(path)
-    this.cy.wait(`@${toWait}`)
+    this.cy.wait(`@${operationName}`)
   }
-  reload({ toWait = '' }: { toWait?: string } = {}) {
+  reload({ operationName = '' }: { operationName?: string } = {}) {
     this.cy.reload()
-    this.cy.wait(`@${toWait}`)
+    this.cy.wait(`@${operationName}`)
   }
 
   visitHomepage({
     lang = '',
     withIntercept = false,
-    toWait = 'NavbarRightQuery',
-  }: { lang?: string; withIntercept?: boolean; toWait?: string } = {}) {
-    this.visit({ path: `${lang}/`, withIntercept, toWait })
+    operationName = 'NavbarRightQuery',
+  }: { lang?: string; withIntercept?: boolean; operationName?: string } = {}) {
+    this.visit({ path: `${lang}/`, withIntercept, operationName })
   }
 })()

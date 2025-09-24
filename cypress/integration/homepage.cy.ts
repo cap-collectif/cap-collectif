@@ -25,11 +25,11 @@ describe('Homepage', () => {
 
     Base.visit({
       path: '/admin/features/developer_documentation/switch',
-      toWait: 'AdminRightNavbarAppQuery',
+      operationName: 'AdminRightNavbarAppQuery',
       withIntercept: true,
     })
 
-    Base.visitHomepage({ toWait: 'NavBarMenuQuery', withIntercept: true })
+    Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
     cy.get('#footer-links').should('exist')
     cy.contains('#footer-links', 'Développeurs').should('exist')
   })
@@ -40,11 +40,11 @@ describe('Homepage', () => {
 
     Base.visit({
       path: '/admin/features/developer_documentation/switch',
-      toWait: 'AdminRightNavbarAppQuery',
+      operationName: 'AdminRightNavbarAppQuery',
       withIntercept: true,
     })
 
-    Base.visitHomepage({ toWait: 'NavBarMenuQuery', withIntercept: true })
+    Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
     cy.get('#footer-links').should('exist')
     cy.contains('#footer-links', 'Développeurs').should('not.exist')
   })
