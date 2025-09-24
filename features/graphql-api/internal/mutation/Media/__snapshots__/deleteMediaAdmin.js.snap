@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delete Media (admin media page) deletes one media as admin 1`] = `
+Object {
+  "deleteMediaAdmin": Object {
+    "deletedMediaIds": Array [
+      "user-type-business",
+    ],
+  },
+}
+`;
+
+exports[`Delete Media (admin media page) deletes several medias as admin 1`] = `
+Object {
+  "deleteMediaAdmin": Object {
+    "deletedMediaIds": Array [
+      "imageArchived",
+      "ProfilePicBobMarley",
+    ],
+  },
+}
+`;
+
+exports[`Delete Media (admin media page) deletes several medias, one of them is an invalid ID, as admin 1`] = `
+Object {
+  "deleteMediaAdmin": Object {
+    "deletedMediaIds": Array [
+      "imageCafe",
+    ],
+  },
+}
+`;

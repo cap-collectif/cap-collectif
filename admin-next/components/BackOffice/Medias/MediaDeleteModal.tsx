@@ -19,7 +19,6 @@ const MediaDeleteModal: FC<MediaDeleteModalProps> = ({ onClose, medias, connecti
     return DeleteMediaAdminMutation.commit({
       input: {
         ids: medias,
-        all: false,
       },
       connections: [connectionName],
     })

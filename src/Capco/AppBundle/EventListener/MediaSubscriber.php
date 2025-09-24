@@ -41,7 +41,7 @@ class MediaSubscriber implements EventSubscriberInterface
         [$oldValue, $newValue] = $mediaChanges;
 
         if ($oldValue instanceof Media && null === $newValue) {
-            $this->mediaManager->removeFromFilesystem($oldValue);
+            $this->mediaManager->removeWithFileIfFileExists($oldValue);
         }
     }
 }

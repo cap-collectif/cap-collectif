@@ -5888,16 +5888,11 @@ type DeleteMailingListPayload {
 input DeleteMediaAdminInput {
   """List of media ID to delete."""
   ids: [ID]!
-
-  """Delete all medias bypassing given ids"""
-  all: Boolean! = false
 }
 
 type DeleteMediaAdminPayload {
+  """The deleted media IDs"""
   deletedMediaIds: [ID]!
-
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
   clientMutationId: String
 }
 
