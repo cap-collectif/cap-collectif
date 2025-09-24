@@ -194,6 +194,7 @@ class ResponseSearch extends Search
         $boolQuery
             ->addFilter(new Exists('reply'))
             ->addMustNot(new Term(['reply.draft' => ['value' => true]]))
+            ->addMust(new Term(['reply.completionStatus' => ['value' => 'COMPLETED']]))
         ;
 
         $query = new Query($boolQuery);
