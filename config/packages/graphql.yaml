@@ -114,6 +114,7 @@ overblog_graphql:
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement
+                    - ZipCodeRequirement
                     - LastnameRequirement
                     - IdentificationCodeRequirement
                     - FranceConnectRequirement
@@ -160,6 +161,7 @@ overblog_graphql:
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement
+                    - ZipCodeRequirement
                     - LastnameRequirement
                     - IdentificationCodeRequirement
                     - FranceConnectRequirement

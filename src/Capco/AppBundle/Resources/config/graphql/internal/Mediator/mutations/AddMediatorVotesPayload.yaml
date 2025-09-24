@@ -3,6 +3,8 @@ AddMediatorVotesPayload:
     config:
         fields:
             mediator:
-                type: 'InternalMediator!'
+                type: 'InternalMediator'
             participant:
-                type: 'InternalParticipant!'
+                type: 'InternalParticipant'
+            errors:
+                type: '[FieldError]'

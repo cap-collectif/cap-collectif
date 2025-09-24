@@ -514,8 +514,9 @@ input AddMediatorVotesInput {
 }
 
 type AddMediatorVotesPayload {
-  mediator: Mediator!
-  participant: Participant!
+  mediator: Mediator
+  participant: Participant
+  errors: [FieldError]
   clientMutationId: String
 }
 
@@ -7305,6 +7306,15 @@ enum FeatureFlagType {
   user_anonymization_automated
 }
 
+"""A field error mapped to a form"""
+type FieldError {
+  """The field associated to the form, if null the error is global"""
+  field: String
+
+  """The error message"""
+  message: String!
+}
+
 """Require a firstname"""
 type FirstnameRequirement implements Node & Requirement & DataCollectedByFranceConnectRequirement {
   """The ID of an object"""
@@ -10623,6 +10633,7 @@ input ParticipantInfosInput {
   postalAddress: String
   phone: String
   checkboxes: [ParticipantInfosCheckbox]
+  zipCode: String
 }
 
 """Properties by which participant connections can be ordered."""
@@ -19305,8 +19316,9 @@ input UpdateMediatorVotesInput {
 }
 
 type UpdateMediatorVotesPayload {
-  mediator: Mediator!
-  participant: Participant!
+  mediator: Mediator
+  participant: Participant
+  errors: [FieldError]
   clientMutationId: String
 }
 
@@ -22385,6 +22397,24 @@ enum YesNoPairedVoteValue {
   YES
   NO
   MITIGE
+}
+
+"""Requires a verified zip code."""
+type ZipCodeRequirement implements Node & Requirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
+
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String
+  ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
 }
 
 """Available errors for an `updateCASSSOConfiguraton` mutation."""

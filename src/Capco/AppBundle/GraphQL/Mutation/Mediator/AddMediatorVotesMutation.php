@@ -9,11 +9,14 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Exception\ContributorAlreadyUsedPhoneException;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Mutation\UpdateParticipantRequirementMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +27,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
@@ -39,9 +43,12 @@ class AddMediatorVotesMutation extends MediatorVotesMutation implements Mutation
         private readonly Publisher $publisher,
         Manager $manager,
         private readonly FormFactoryInterface $formFactory,
-        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
+        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly TranslatorInterface $translator,
     ) {
-        parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
+        parent::__construct($globalIdResolver, $manager, $proposalSelectionVoteRepository, $proposalCollectVoteRepository, $updateParticipantRequirementMutation, $entityManager);
         $this->globalIdResolver = $globalIdResolver;
     }
 
@@ -61,7 +68,24 @@ class AddMediatorVotesMutation extends MediatorVotesMutation implements Mutation
         $checkboxes = $participantInfos['checkboxes'] ?? null;
         unset($participantInfos['checkboxes']);
 
-        $participant = $this->getParticipant($participantInfos);
+        $participant = $this->
+        getParticipant($participantInfos);
+
+        if ($participantInfos['phone'] ?? null) {
+            try {
+                $this->canReusePhone($step, $participant, $participantInfos['phone']);
+                $participant->setPhoneConfirmed(true);
+            } catch (ContributorAlreadyUsedPhoneException) {
+                $this->entityManager->remove($participant);
+                $this->entityManager->flush();
+
+                return [
+                    'errors' => [
+                        ['field' => 'phone', 'message' => $this->translator->trans('PHONE_ALREADY_USED_BY_ANOTHER_USER')],
+                    ],
+                ];
+            }
+        }
 
         if ($checkboxes) {
             $this->handleCheckboxes($participant, $checkboxes);
@@ -122,6 +146,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutation implements Mutation
     private function getParticipant(array $participantInfos): Participant
     {
         $participant = new Participant();
+        $participant->setConsentPrivacyPolicy(true);
         $participantInfos['token'] = $this->tokenGenerator->generateToken();
         $form = $this->formFactory->create(ParticipantType::class, $participant);
         $form->submit($participantInfos, false);

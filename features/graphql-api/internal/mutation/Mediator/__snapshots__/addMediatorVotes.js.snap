@@ -3,6 +3,7 @@
 exports[`mutations|addMediatorVotes Mediator add votes. 1`] = `
 Object {
   "addMediatorVotes": Object {
+    "errors": null,
     "mediator": Object {
       "votes": Object {
         "edges": Array [
@@ -28,6 +29,7 @@ Object {
                     },
                   ],
                 },
+                "zipCode": "75018",
               },
             },
           },
@@ -65,6 +67,7 @@ Object {
                     },
                   ],
                 },
+                "zipCode": "75015",
               },
             },
           },
@@ -97,6 +100,7 @@ Object {
                     },
                   ],
                 },
+                "zipCode": "77100",
               },
             },
           },
@@ -129,6 +133,7 @@ Object {
                     },
                   ],
                 },
+                "zipCode": "77100",
               },
             },
           },
@@ -136,6 +141,20 @@ Object {
         "totalCount": 4,
       },
     },
+  },
+}
+`;
+
+exports[`mutations|addMediatorVotes Should return phone already used error. 1`] = `
+Object {
+  "addMediatorVotes": Object {
+    "errors": Array [
+      Object {
+        "field": "phone",
+        "message": "PHONE_ALREADY_USED_BY_ANOTHER_USER",
+      },
+    ],
+    "mediator": null,
   },
 }
 `;

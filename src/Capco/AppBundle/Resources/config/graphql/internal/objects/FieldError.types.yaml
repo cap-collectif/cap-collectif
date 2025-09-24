@@ -1,0 +1,11 @@
+FieldError:
+    type: object
+    config:
+        description: 'A field error mapped to a form'
+        fields:
+            field:
+                type: 'String'
+                description: 'The field associated to the form, if null the error is global'
+            message:
+                type: 'String!'
+                description: 'The error message'

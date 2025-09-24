@@ -41,7 +41,10 @@ type FormValues = {
   checkboxes: {
     [requirementId: string]: boolean
   } | null
+  zipCode?: string
 }
+
+type fieldKeys = keyof FormValues
 
 export const REQUIREMENTS_QUERY = graphql`
   query MediatorVoteModal_REQUIREMENTS_Query($stepId: ID!) {
@@ -76,6 +79,16 @@ const MediatorVoteModal = ({
 
   const query = useLazyLoadQuery<MediatorVoteModal_REQUIREMENTS_Query>(REQUIREMENTS_QUERY, { stepId })
 
+
+  const methods = useForm<FormValues>({
+    mode: 'onChange',
+    defaultValues,
+  })
+
+  const { handleSubmit, setError } = methods
+
+
+
   const onSubmit = async ({ votes, ...data }: FormValues) => {
     const connectionName = ConnectionHandler.getConnectionID(mediatorId, 'ParticipantList_participants', {
       firstname: username || undefined,
@@ -96,13 +109,16 @@ const MediatorVoteModal = ({
       return JSON.stringify([JSONaddress])
     }
 
+    const phone = data.phone ? data.phone.replace(/^0/, "+33") : null
+
     const participantInfos = {
       dateOfBirth: data.dateOfBirth?.format('YYYY-MM-DD HH:mm:ss') || null,
       firstname: data.firstname || null,
       lastname: data.lastname || null,
       email: data.email || null,
       postalAddress: postalAddress(),
-      phone: data.phone || null,
+      phone,
+      zipCode: data.zipCode || null,
       checkboxes: Object.entries(data.checkboxes ?? {}).map(([requirementId, value]) => {
         return {
           requirementId,
@@ -121,20 +137,34 @@ const MediatorVoteModal = ({
 
     try {
       if (!participantId) {
-        await AddMediatorVotesMutation.commit(
+        const response = await AddMediatorVotesMutation.commit(
           {
             input: { ...input, stepId },
           },
           connectionName,
         )
+
+        const errors = response.addMediatorVotes.errors ?? [];
+        errors.forEach(({field, message}) => {
+          setError(field as fieldKeys, {type: 'manual', message})
+        })
+
+        if(errors.length > 0) return;
       } else {
-        await UpdateMediatorVotesMutation.commit({
+        const response = await UpdateMediatorVotesMutation.commit({
           input: {
             ...input,
             participantId,
           },
           mediatorId,
         })
+
+        const errors = response.updateMediatorVotes.errors ?? [];
+        errors.forEach(({field, message}) => {
+          setError(field as fieldKeys, {type: 'manual', message})
+        })
+
+        if(errors.length > 0) return;
       }
 
       toast({
@@ -150,16 +180,11 @@ const MediatorVoteModal = ({
     }
   }
 
-  const methods = useForm<FormValues>({
-    mode: 'onChange',
-    defaultValues,
-  })
 
   if (!query) return null
 
   const step = query.node
   const votesMin = query.node.votesMin || 1
-  const { handleSubmit } = methods
 
   const showRequiredRequirementsModal = step.requirements.edges
     .map(edge => edge?.node)
@@ -288,7 +313,7 @@ export const MediatorVoteModalEdit = ({ token, ...props }: Props) => {
     email: participant.email,
     firstname: (requirements.find(r => r.__typename === 'FirstnameRequirement') as Requirement)?.participantValue,
     lastname: (requirements.find(r => r.__typename === 'LastnameRequirement') as Requirement)?.participantValue,
-    phone: (requirements.find(r => r.__typename === 'PhoneRequirement') as Requirement)?.participantValue,
+    phone: (requirements.find(r => r.__typename === 'PhoneRequirement') as Requirement)?.participantValue?.replace(/^(\+33)/, "0"),
     dateOfBirth: dateOfBirth ? moment(dateOfBirth) : null,
     address: (requirements.find(r => r.__typename === 'PostalAddressRequirement') as AddressRequirement)
       ?.participantAddress?.formatted,

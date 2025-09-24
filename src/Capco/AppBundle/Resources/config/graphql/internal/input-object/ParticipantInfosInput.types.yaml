@@ -17,3 +17,5 @@ ParticipantInfosInput:
                 type: 'String'
             checkboxes:
                 type: '[ParticipantInfosCheckbox]'
+            zipCode:
+                type: 'String'

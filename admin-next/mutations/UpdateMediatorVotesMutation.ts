@@ -36,6 +36,10 @@ const mutation = graphql`
           }
         }
       }
+      errors {
+          field
+          message
+      }
     }
   }
 ` as GraphQLTaggedNode

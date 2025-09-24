@@ -1,6 +1,16 @@
-import { type FC } from 'react'
+import React, { type FC } from 'react'
 import { useIntl } from 'react-intl'
-import { MultiStepModal, Modal, Heading, Button, useMultiStepModal, CapUIIcon, FormLabel, Box } from '@cap-collectif/ui'
+import {
+  MultiStepModal,
+  Modal,
+  Heading,
+  Button,
+  useMultiStepModal,
+  CapUIIcon,
+  FormLabel,
+  Box,
+  CapInputSize,
+} from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { graphql, useFragment } from 'react-relay'
@@ -17,7 +27,7 @@ const STEP_FRAGMENT = graphql`
       edges {
         node {
           id
-          ... on FirstnameRequirement {
+            ... on FirstnameRequirement {
             __typename
           }
           ... on LastnameRequirement {
@@ -27,6 +37,9 @@ const STEP_FRAGMENT = graphql`
             __typename
           }
           ... on PostalAddressRequirement {
+            __typename
+          }
+          ... on ZipCodeRequirement {
             __typename
           }
           ... on CheckboxRequirement {
@@ -39,6 +52,10 @@ const STEP_FRAGMENT = graphql`
     }
   }
 `
+
+const ONLY_NUMBER_REGEX = /^(0|[1-9]\d*)(\.\d+)?$/;
+const ZIP_CODE_LENGTH = 5;
+
 
 type RequirementType = 'CheckboxRequirement' | 'LastnameRequirement'
 
@@ -107,6 +124,39 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
                       setValue('JSONaddress', add)
                     }}
                   />
+                </FormControl>
+              )
+            }
+            if (requirement.__typename === 'ZipCodeRequirement') {
+              return (
+                <FormControl name="zipCode" control={control}>
+                  <FormLabel htmlFor="zipCode" label={intl.formatMessage({ id: 'admin.fields.event.address' })} />
+                  <FieldInput
+                    id="zipCode"
+                    name="zipCode"
+                    control={control}
+                    type="text"
+                    variantSize={CapInputSize.Md}
+                    placeholder="75100"
+                    maxLength={5}
+                    rules={{
+                      pattern: {
+                        value: ONLY_NUMBER_REGEX,
+                        message: intl.formatMessage({
+                          id: 'field-must-contains-number',
+                        }),
+                      },
+                      validate: {
+                        exact: v =>
+                          v.length === ZIP_CODE_LENGTH ||
+                          intl.formatMessage(
+                            { id: 'characters-required' },
+                            { length: ZIP_CODE_LENGTH },
+                          ),
+                      },
+                    }}
+                  />
+
                 </FormControl>
               )
             }

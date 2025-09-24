@@ -3,6 +3,7 @@
 exports[`mutations|updateMediatorVotes Mediator update votes participant Infos and remove one proposal. 1`] = `
 Object {
   "updateMediatorVotes": Object {
+    "errors": null,
     "mediator": Object {
       "votes": Object {
         "edges": Array [
@@ -18,6 +19,7 @@ Object {
                 "postalAddress": Object {
                   "json": "[{\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"RuedelaSavate\\",\\"short_name\\":\\"RuedelaSavate\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Awans\\",\\"short_name\\":\\"Awans\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Liège\\",\\"short_name\\":\\"LG\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"RégionWallonne\\",\\"short_name\\":\\"RégionWallonne\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Belgium\\",\\"short_name\\":\\"BE\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"4340\\",\\"short_name\\":\\"4340\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"RuedelaSavate10,4340Awans,Belgium\\",\\"geometry\\":{\\"location\\":{\\"lat\\":50.7228035,\\"lng\\":5.464624},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":50.7214585197085,\\"west\\":5.463225469708497,\\"north\\":50.72415648029149,\\"east\\":5.465923430291502}},\\"place_id\\":\\"ChIJ1T224zPjwEcR1kNhE8iPg_k\\",\\"plus_code\\":{\\"compound_code\\":\\"PFF7+4RAwans,Belgium\\",\\"global_code\\":\\"9F27PFF7+4R\\"},\\"types\\":[\\"street_address\\"]}]",
                 },
+                "zipCode": "75018",
               },
             },
           },
@@ -31,6 +33,7 @@ Object {
                 "lastname": "Participant2 lastname",
                 "phone": null,
                 "postalAddress": null,
+                "zipCode": "75015",
               },
             },
           },
@@ -38,6 +41,20 @@ Object {
         "totalCount": 2,
       },
     },
+  },
+}
+`;
+
+exports[`mutations|updateMediatorVotes Should return phone already used error. 1`] = `
+Object {
+  "updateMediatorVotes": Object {
+    "errors": Array [
+      Object {
+        "field": "phone",
+        "message": "PHONE_ALREADY_USED_BY_ANOTHER_USER",
+      },
+    ],
+    "mediator": null,
   },
 }
 `;

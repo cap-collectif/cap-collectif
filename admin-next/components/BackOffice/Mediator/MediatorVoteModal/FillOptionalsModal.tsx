@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { graphql, useFragment } from 'react-relay'
 import { FillOptionalsModal_step$key } from '@relay/FillOptionalsModal_step.graphql'
+import * as React from 'react'
 
 type FillOptionalsModalProps = {
   step: FillOptionalsModal_step$key
@@ -25,6 +26,8 @@ const STEP_FRAGMENT = graphql`
     }
   }
 `
+
+const PHONE_LENGTH = 10;
 
 const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubmit, isNew }) => {
   const intl = useIntl()
@@ -52,7 +55,40 @@ const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubm
               return (
                 <FormControl name="phone" control={control}>
                   <FormLabel htmlFor="phone" label={intl.formatMessage({ id: 'filter.label_phone' })} />
-                  <FieldInput id="phone" name="phone" control={control} type="tel" />
+                  <FieldInput
+                    id="phone"
+                    name="phone"
+                    control={control}
+                    type="tel"
+                    rules={{
+                      pattern: {
+                        value: /^\d*$/,
+                        message: intl.formatMessage({
+                          id: 'field-must-contains-number',
+                        }),
+                      },
+                      validate: {
+                        exact: v => {
+                          if (!v) return;
+                          return v.length === PHONE_LENGTH ||
+                          intl.formatMessage(
+                            { id: 'characters-required' },
+                            { length: PHONE_LENGTH },
+                          )
+                        },
+                        startWithZero: v => {
+                          if (!v) return;
+                          return (
+                            v.startsWith('06') ||
+                            v.startsWith('07') ||
+                            intl.formatMessage({
+                              id: 'number-must-start-with-zero-six-or-seven',
+                            })
+                          );
+                        }
+                      },
+                    }}
+                  />
                 </FormControl>
               )
             }

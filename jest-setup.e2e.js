@@ -82,6 +82,10 @@ global.enableFeatureFlag = async name => {
   console.log(`Successfully enabled "${name}"`);
 };
 
+global.runSQL = async sql => {
+  await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+};
+
 global.disableFeatureFlag = async name => {
   console.log(`Disabling feature flag "${name}"...`);
   await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`);

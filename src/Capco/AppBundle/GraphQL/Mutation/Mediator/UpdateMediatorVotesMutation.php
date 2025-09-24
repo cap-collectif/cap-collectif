@@ -7,11 +7,13 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Exception\ContributorAlreadyUsedPhoneException;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Mutation\UpdateParticipantRequirementMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -21,6 +23,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
@@ -32,15 +35,20 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         private readonly EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver,
         private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         Manager $manager,
         private readonly FormFactoryInterface $formFactory,
-        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
+        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly TranslatorInterface $translator,
     ) {
-        parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
+        parent::__construct($globalIdResolver, $manager, $proposalSelectionVoteRepository, $proposalCollectVoteRepository, $updateParticipantRequirementMutation, $this->entityManager);
         $this->globalIdResolver = $globalIdResolver;
     }
 
+    /**
+     * @throws ContributorAlreadyUsedPhoneException
+     */
     public function __invoke(Argument $argument, User $viewer): array
     {
         $this->formatInput($argument);
@@ -49,11 +57,10 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         $proposalsId = $argument->offsetGet('proposals');
         $participantInfos = $argument->offsetGet('participantInfos');
 
-        /** * @var Mediator $mediator  */
-        $mediator = $this->getEntityByGlobalId($mediatorId, $viewer, Mediator::class);
+        /** * @var Mediator $mediator */
+        $mediator = $this->globalIdResolver->resolve($mediatorId, $viewer);
 
-        /** * @var Participant $participant  */
-        $participant = $this->getEntityByGlobalId($participantId, $viewer, Participant::class);
+        $participant = $this->globalIdResolver->resolve($participantId, $viewer);
 
         $checkboxes = $participantInfos['checkboxes'] ?? null;
         unset($participantInfos['checkboxes']);
@@ -69,6 +76,23 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         ]);
 
         $this->removeOldVotes($currentVotes, $proposalsId);
+
+        if ($participantInfos['phone'] ?? null) {
+            try {
+                $this->canReusePhone($step, $participant, $participantInfos['phone']);
+                $participant->setPhoneConfirmed(true);
+            } catch (ContributorAlreadyUsedPhoneException) {
+                $this->entityManager->remove($participant);
+                $this->entityManager->flush();
+
+                return [
+                    'errors' => [
+                        ['field' => 'phone', 'message' => $this->translator->trans('PHONE_ALREADY_USED_BY_ANOTHER_USER')],
+                    ],
+                ];
+            }
+        }
+
         $this->addNewVotes($currentVotes, $proposalsId, $viewer, $mediator, $step, $participant);
         $this->updateParticipantInfos($participant, $participantInfos);
         $this->updateAccountedVotes($step, $mediator, $participant, $viewer);
@@ -88,19 +112,12 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         $this->entityManager->flush();
     }
 
-    private function getEntityByGlobalId(string $id, ?User $viewer, string $entityClass): object
-    {
-        $entity = $this->globalIdResolver->resolve($id, $viewer);
-
-        if (!$entity instanceof $entityClass) {
-            throw new \RuntimeException("{$entityClass} not found for id: {$id}");
-        }
-
-        return $entity;
-    }
-
-    private function addVote(Proposal $proposal, Mediator $mediator, ?AbstractStep $step, Participant $participant): void
-    {
+    private function addVote(
+        Proposal $proposal,
+        Mediator $mediator,
+        ?AbstractStep $step,
+        Participant $participant
+    ): void {
         $proposalSelectionVote = (new ProposalSelectionVote())
             ->setProposal($proposal)
             ->setMediator($mediator)
@@ -113,8 +130,12 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         $this->entityManager->flush();
     }
 
-    private function updateAccountedVotes(?AbstractStep $step, Mediator $mediator, Participant $participant, User $viewer): void
-    {
+    private function updateAccountedVotes(
+        ?AbstractStep $step,
+        Mediator $mediator,
+        Participant $participant,
+        User $viewer
+    ): void {
         $this->proposalVoteAccountHandler->checkIfMediatorParticipantVotesAreStillAccounted(
             $step,
             $mediator,
@@ -144,7 +165,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         Mediator $mediator,
         ?AbstractStep $step,
         Participant $participant
-    ) {
+    ): void {
         $currentProposalsId = array_map(
             fn ($vote) => GlobalId::toGlobalId('Proposal', $vote->getProposal()->getId()),
             $currentVotes
@@ -155,7 +176,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
             if (!$isNewVote) {
                 continue;
             }
-            $proposal = $this->getEntityByGlobalId($updatedProposalId, $viewer, Proposal::class);
+            $proposal = $this->globalIdResolver->resolve($updatedProposalId, $viewer);
             $this->addVote($proposal, $mediator, $step, $participant);
         }
     }
