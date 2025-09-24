@@ -51,6 +51,13 @@ class VotesReconcilier extends ContributionsReconcilier
                 continue;
             }
 
+            $hasSSORequirements = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::SSO === $requirement->getType())->count() > 0;
+            if ($hasSSORequirements) {
+                $this->reconcileByStep($step, $participant, $contributorTarget);
+
+                continue;
+            }
+
             $hasEmailVerifiedRequirement = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::EMAIL_VERIFIED === $requirement->getType())->count() > 0;
 
             if (!$hasEmailVerifiedRequirement) {
