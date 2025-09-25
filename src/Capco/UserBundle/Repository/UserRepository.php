@@ -1715,10 +1715,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('ut.translations', 'utt', 'WITH', 'utt.locale = :locale')
             ->where('q.id = :questionnaireId')
             ->andWhere('u.confirmationToken IS NULL')
+            ->andWhere('r.draft = :draft')
             ->groupBy('u.id')
             ->orderBy('u.id', 'ASC')
             ->setParameter('questionnaireId', $questionnaire->getId())
             ->setParameter('locale', 'fr-FR')
+            ->setParameter('draft', false)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;

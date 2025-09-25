@@ -2,4 +2,6 @@
 export_contribution_type_questionnaire_reply,replyAnonymous1,participant1,"2016-03-01 00:00:00",Oui,,participant1@cap-collectif.com,+33602020202,"2016-03-01 00:00:00","2016-03-01 00:00:00",Non,,Non,Non,bien
 export_contribution_type_questionnaire_reply,replyAnonymous1bis,participant1,"2016-03-01 00:00:00",Oui,,participant1@cap-collectif.com,+33602020202,"2016-03-01 00:00:00","2016-03-01 00:00:00",Non,,Non,Non,
 export_contribution_type_questionnaire_reply,replyAnonymous2,participant2,"2017-03-01 00:00:00",Oui,,participant2@cap-collectif.com,,"2017-03-01 00:00:00","2017-03-01 00:00:00",Non,,Non,Non,"bien bien bien"
-export_contribution_type_questionnaire_reply,replyQuestionnaireAnon,user1,"2016-03-02 00:00:00",Oui,lbrunet,lbrunet@cap-collectif.com,+3300000000,"2016-03-02 00:00:00","2016-03-02 00:00:00",Non,,Oui,Oui,
+export_contribution_type_questionnaire_reply,replyAnonymousDraft,participant1,"2017-03-01 00:00:00",Oui,,participant1@cap-collectif.com,+33602020202,"2017-03-01 00:00:00","2017-03-01 00:00:00",Oui,,Non,Non,"who am i"
+export_contribution_type_questionnaire_reply,replyQuestionnaireAnon,user1,"2016-03-02 00:00:00",Oui,lbrunet,lbrunet@cap-collectif.com,+3300000000,"2016-03-02 00:00:00","2016-03-02 00:00:00",Non,,Oui,Oui,"i am admin"
+export_contribution_type_questionnaire_reply,replyQuestionnaireAnonDraft,user10,"2016-03-02 00:00:00",Oui,user10,user10@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",Oui,,Oui,Oui,"i am not admin snif"

@@ -161,6 +161,13 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+    replyAnonQuestionnaireAnonPOwner:
+        id: 'replyAnonQuestionnaireAnonPOwner'
+        questionnaire: '@questionnaireProjectOwnerAnonymous'
+        publishedAt: <(new \DateTime('2018-03-01'))>
+        createdAt: <(new \DateTime('2018-03-01'))>
+        updatedAt: <(new \DateTime('2018-03-01'))>
+        participant: '@participant1'
     replyQuestionnaireAnon:
         id: 'replyQuestionnaireAnon'
         draft: 0
@@ -169,8 +176,25 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+    replyQuestionnaireAnonDraft:
+        id: 'replyQuestionnaireAnonDraft'
+        draft: 1
+        author: '@user10'
+        questionnaire: '@questionnaireAnonymous'
+        publishedAt: <(new \DateTime('2016-03-02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     replyAnonymous1:
         id: 'replyAnonymous1'
+        draft: 0
+        questionnaire: '@questionnaireAnonymous'
+        publishedAt: <(new \DateTime('2016-03-01'))>
+        createdAt: <(new \DateTime('2016-03-01'))>
+        updatedAt: <(new \DateTime('2016-03-01'))>
+        participant: '@participant1'
+    replyAnonymous1bis:
+        id: 'replyAnonymous1bis'
+        draft: 0
         questionnaire: '@questionnaireAnonymous'
         publishedAt: <(new \DateTime('2016-03-01'))>
         createdAt: <(new \DateTime('2016-03-01'))>
@@ -178,22 +202,17 @@ Capco\AppBundle\Entity\Reply:
         participant: '@participant1'
     replyAnonymous2:
         id: 'replyAnonymous2'
+        draft: 0
         questionnaire: '@questionnaireAnonymous'
         publishedAt: <(new \DateTime('2017-03-01'))>
         createdAt: <(new \DateTime('2017-03-01'))>
         updatedAt: <(new \DateTime('2017-03-01'))>
         participant: '@participant1'
-    replyAnonQuestionnaireAnonPOwner:
-        id: 'replyAnonQuestionnaireAnonPOwner'
-        questionnaire: '@questionnaireProjectOwnerAnonymous'
-        publishedAt: <(new \DateTime('2018-03-01'))>
-        createdAt: <(new \DateTime('2018-03-01'))>
-        updatedAt: <(new \DateTime('2018-03-01'))>
-        participant: '@participant1'
-    replyAnonymous1bis:
-        id: 'replyAnonymous1bis'
+    replyAnonymousDraft:
+        id: 'replyAnonymousDraft'
+        draft: 1
         questionnaire: '@questionnaireAnonymous'
-        publishedAt: <(new \DateTime('2016-03-01'))>
-        createdAt: <(new \DateTime('2016-03-01'))>
-        updatedAt: <(new \DateTime('2016-03-01'))>
+        publishedAt: <(new \DateTime('2017-03-01'))>
+        createdAt: <(new \DateTime('2017-03-01'))>
+        updatedAt: <(new \DateTime('2017-03-01'))>
         participant: '@participant1'

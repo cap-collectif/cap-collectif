@@ -388,9 +388,11 @@ class ParticipantRepository extends EntityRepository
             ->innerJoin('p.replies', 'r')
             ->innerJoin('r.questionnaire', 'q')
             ->where('q.id = :questionnaireId')
+            ->andWhere('r.draft = :draft')
             ->groupBy('p.id')
             ->orderBy('p.id', 'ASC')
             ->setParameter('questionnaireId', $questionnaire->getId())
+            ->setParameter('draft', false)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;

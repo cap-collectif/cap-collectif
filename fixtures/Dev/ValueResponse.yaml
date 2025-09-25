@@ -990,3 +990,24 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
         iaSentiment: 'POSITIVE'
         iaReadability: 12
+    responseAnonymousQuestionnaire3:
+        question: '@simpleQuestionAnonymousQuestionnaire'
+        reply: '@replyQuestionnaireAnon'
+        value: 'i am admin'
+        createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
+        iaSentiment: 'POSITIVE'
+        iaReadability: 10
+    responseAnonymousQuestionnaire4:
+        question: '@simpleQuestionAnonymousQuestionnaire'
+        reply: '@replyQuestionnaireAnonDraft'
+        value: 'i am not admin snif'
+        createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
+        iaSentiment: 'POSITIVE'
+        iaReadability: 9.43
+    responseAnonymousQuestionnaire5:
+        question: '@simpleQuestionAnonymousQuestionnaire'
+        reply: '@replyAnonymousDraft'
+        value: 'who am i'
+        createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
+        iaSentiment: 'POSITIVE'
+        iaReadability: 11.11
