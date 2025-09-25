@@ -1,9 +1,11 @@
+import Base from './base'
+
 export default new (class OpinionPage {
   get cy() {
     return cy
   }
 
-  visitOpinionDetailsPage() {
+  visitConsultationDetailsPage() {
     cy.interceptGraphQLOperation({ operationName: 'OpinionPageQuery' })
     this.cy.visit(
       '/consultations/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/sous-partie-1/opinion-d-hier-69',
@@ -15,10 +17,36 @@ export default new (class OpinionPage {
     this.cy.visit('/project/croissance-innovation-disruption/ranking/classement-des-propositions-et-modifications')
   }
 
-  visitOpinionsPage() {
-    cy.interceptGraphQLOperation({ operationName: 'OpinionListQuery' })
-    this.cy.visit('/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi')
-    return cy.wait('@OpinionListQuery', { timeout: 10000 })
+  visitConsultationsPage({
+    projectSlug,
+    stepSlug,
+    consultationSlug,
+    typeSlug,
+  }: {
+    projectSlug: string
+    stepSlug: string
+    consultationSlug?: string
+    typeSlug?: string
+  }) {
+    const path = `/project/${projectSlug}/consultation/${stepSlug}${consultationSlug ? `/${consultationSlug}` : ''}${
+      typeSlug ? `/types/${typeSlug}` : ''
+    }`
+    Base.visit({ path, operationName: 'OpinionListQuery' })
+  }
+
+  visitOpinionsPage({
+    projectSlug,
+    stepSlug,
+    opinionTypeSlug,
+    opinionSlug,
+  }: {
+    projectSlug: string
+    stepSlug: string
+    opinionTypeSlug: string
+    opinionSlug: string
+  }) {
+    const path = `/projects/${projectSlug}/consultation/${stepSlug}/opinions/${opinionTypeSlug}/${opinionSlug}`
+    Base.visit({ path, operationName: 'ArgumentListQuery' })
   }
 
   getSingleOpinion() {
