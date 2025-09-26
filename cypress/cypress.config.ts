@@ -18,7 +18,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./plugins/index.ts')(on, config)
     },
-    specPattern: ['./integration/**/*.cy.{js,jsx,ts,tsx}', './e2e/**/*.cy.{js,jsx,ts,tsx}'],
+    specPattern: ['./e2e/**/*.cy.{js,jsx,ts,tsx}'],
     supportFile: './support/index.ts',
     baseUrl: 'https://capco.test',
   },

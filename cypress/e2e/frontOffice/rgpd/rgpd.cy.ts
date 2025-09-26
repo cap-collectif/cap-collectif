@@ -117,7 +117,7 @@ describe('Multilangue - gestion de la locale', () => {
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-fr-FR').click({ force: true })
     cy.get('#language-header-continue-button').click({ force: true })
-    cy.wait('@NavbarRightQuery')
+    cy.wait('@NavbarRightQuery', { timeout: 10000 })
     cy.getCookie('locale').should('have.property', 'value', 'fr-FR')
   })
 
@@ -158,7 +158,7 @@ describe('Multilangue - gestion de la locale', () => {
     cy.get('#cookie-consent').click({ force: true }) // Otherwise the footer is hidden and fail test
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-de-DE').click({ force: true })
-    cy.wait('@NavbarRightQuery')
+    cy.wait('@NavbarRightQuery', { timeout: 10000 })
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 
@@ -173,7 +173,7 @@ describe('Multilangue - gestion de la locale', () => {
     cy.get('#cookie-consent').click({ force: true }) // Otherwise the footer is hidden and fail test
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-de-DE').click({ force: true })
-    cy.wait('@ProposalListViewRefetchQuery')
+    cy.wait('@ProposalListViewRefetchQuery', { timeout: 10000 })
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 

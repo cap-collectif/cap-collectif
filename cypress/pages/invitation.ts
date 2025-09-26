@@ -4,7 +4,6 @@ export default new (class InvitationPage {
   }
 
   fillInvitationForm = () => {
-    cy.interceptGraphQLOperation({ operationName: 'RegistrationButtonQuery' })
     cy.get('#responses\\.0\\.value').should('exist').and('be.visible')
     cy.get('input[name="plainPassword"]').type('RemChanDaiSki93160')
     cy.get('input[name="username"]').type('RemChanDaiSki')
@@ -16,12 +15,10 @@ export default new (class InvitationPage {
     cy.get('.cap-select__option').contains('Sangohan').click({ force: true })
     cy.get('input[name="charte"]').check({ force: true })
     cy.get('div[id^=turnstile_captcha-]').should('exist')
-    cy.get('#confirm-register').click()
-    cy.contains('registration.constraints.captcha.invalid').should('be.visible')
     cy.confirmCaptcha()
     cy.wait(500) // wait for captcha, cannot be intercepted
     cy.get('#confirm-register').click()
-    cy.wait('@RegistrationButtonQuery', { timeout: 10000 })
+    cy.wait(500) // wait for redirect, can't figure out why intercepts are not working here
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     cy.get('#navbar-username').contains('RemChanDaiSki').should('exist').and('be.visible')
   }

@@ -1,12 +1,10 @@
 import { InvitationPage } from '~e2e-pages/index'
 
-// TODO: this test file is currently not running in CI - needs to be fixed ASAP.
 describe('User invitation', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'registration')
     cy.task('enable:feature', 'user_type')
     cy.task('enable:feature', 'zipcode_at_register')
@@ -29,7 +27,6 @@ describe('User invitation', () => {
   it('An invited user should be able to register', () => {
     cy.interceptGraphQLOperation({ operationName: 'UserInvitationPageAppQuery' })
     cy.visit('/invitation?token=oniiiichaaan')
-    cy.wait('@UserInvitationPageAppQuery', { timeout: 10000 })
     InvitationPage.fillInvitationForm()
   })
 
@@ -37,6 +34,7 @@ describe('User invitation', () => {
     cy.task('enable:feature', 'shield_mode')
     cy.visit('/invitation?token=oniiiichaaan')
     InvitationPage.fillInvitationForm()
+    cy.task('disable:feature', 'shield_mode') // prevent impacting other tests
   })
 
   it('An invited user should be able to register even when registration is disabled', () => {

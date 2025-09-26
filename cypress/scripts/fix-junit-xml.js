@@ -18,13 +18,23 @@ fs.readdir('./tests-results', (err, files) => {
           return console.log(err)
         }
 
-        const { file } = xml.testsuites.testsuite[0].$
+        if (!xml.testsuites.testsuite) {
+          console.log(`Skip empty report: ${filePath}`)
+          return
+        }
+
+        const firstSuite = xml.testsuites.testsuite[0]
+        const baseFile = firstSuite.$ && firstSuite.$.file ? firstSuite.$.file : filePath
+
         xml.testsuites.testsuite = xml.testsuites.testsuite.filter(testsuite => {
           return testsuite.testcase && testsuite.testcase.length > 0
         })
 
         xml.testsuites.testsuite.forEach(testsuite => {
-          testsuite.$.file = file
+          testsuite.$ = testsuite.$ || {}
+          if (!testsuite.$.file) {
+            testsuite.$.file = baseFile
+          }
         })
 
         const builder = new xml2js.Builder()
