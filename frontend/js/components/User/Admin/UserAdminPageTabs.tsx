@@ -70,6 +70,10 @@ export default createFragmentContainer(container, {
   user: graphql`
     fragment UserAdminPageTabs_user on User {
       url
+      userType {
+        id
+        name
+      }
       ...UserAdminAccount_user
       ...UserAdminProfile_user
       ...UserAdminPersonalData_user

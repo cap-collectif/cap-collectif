@@ -15,6 +15,10 @@ Capco\UserBundle\Entity\UserTypeTranslation:
         translatable: '@UserType4'
         locale: fr-FR
         name: Institution
+    UserType5fr:
+        translatable: '@UserType5'
+        locale: fr-FR
+        name: Militant·e
     UserType1en:
         translatable: '@UserType1'
         locale: en-GB
@@ -31,6 +35,10 @@ Capco\UserBundle\Entity\UserTypeTranslation:
         translatable: '@UserType4'
         locale: en-GB
         name: Institution
+    UserType5en:
+        translatable: '@UserType5'
+        locale: en-GB
+        name: Activist
     UserType1de:
         translatable: '@UserType1'
         locale: de-DE

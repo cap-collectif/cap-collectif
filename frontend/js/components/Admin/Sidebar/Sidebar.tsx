@@ -222,7 +222,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="global.select_user.type" href="/admin/capco/user/user/list" />
                   <SidebarLink text="admin-menu-invite-users-label" href="/admin-next/invite" />
                   <SidebarLink text="admin.label.group" href="/admin-next/groups" />
-                  <SidebarLink text="admin.label.user_type" href="/admin/capco/user/usertype/list" />
+                  <SidebarLink text="admin.label.user_type" href="/admin-next/user-types" />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

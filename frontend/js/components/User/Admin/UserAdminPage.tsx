@@ -63,7 +63,7 @@ export class UserAdminPage extends React.Component<Props> {
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
-          environment={environment}
+          environment={environment as any}
           query={graphql`
             query UserAdminPageQuery($id: ID!) {
               user: node(id: $id) {

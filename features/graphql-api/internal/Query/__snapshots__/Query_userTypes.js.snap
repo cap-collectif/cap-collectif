@@ -127,9 +127,33 @@ Object {
       Object {
         "node": Object {
           "id": "VXNlclR5cGU6NQ==",
-          "media": null,
-          "name": null,
-          "translations": Array [],
+          "media": Object {
+            "authorName": null,
+            "contentType": "image/jpeg",
+            "copyright": null,
+            "description": null,
+            "enabled": true,
+            "height": 392,
+            "id": "user-type-activist",
+            "name": "Militantes",
+            "providerReference": "militantes.jpg",
+            "size": "67924",
+            "url": "https://capco.test/media/default/0001/01/militantes.jpg",
+            "width": 490,
+          },
+          "name": "Militant·e",
+          "translations": Array [
+            Object {
+              "locale": "EN_GB",
+              "name": "Activist",
+              "slug": "activist",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Militant·e",
+              "slug": "militante",
+            },
+          ],
         },
       },
     ],

@@ -12,3 +12,4 @@ Capco\UserBundle\Entity\UserType:
         id: 4
     UserType5:
         id: 5
+        media: '@UserTypeActivist'

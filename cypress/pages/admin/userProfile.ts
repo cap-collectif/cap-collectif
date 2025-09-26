@@ -1,300 +1,297 @@
-export default new (class AdminUserPage{
-
-    get cy() {
-        return cy
-    }
-
-    pathProfileUser(userId: string) {
-        return `admin/capco/user/user/${userId}/edit`
-    }
-
-    visitProfile(userId: string) {
-        return this.cy.visit(this.pathProfileUser(userId))
-    }
-
-    userProfileAccountTab() {
-        return this.cy.get('a[id="UserAdminPageTabs-tab-1"]')
-    }
-
-    userProfileTitle() {
-        return this.cy.get('a[id="UserAdminPageTabs-tab-2"]').click()
-    }
-    
-    userProfileData() {
-        return this.cy.get('a[id="UserAdminPageTabs-tab-3"]').click()
-    }
-
-    userProfilePassword() {
-        return this.cy.get('a[id="UserAdminPageTabs-tab-4"]').click()
-    }
-
-    //profile account
-
-    get formLabelVip() {
-        return this.cy.get('input[id="vip"]')
-    }
+export default new (class AdminUserPage {
+  get cy() {
+    return cy
+  }
 
-    vipBeChecked() {
-        this.formLabelVip.should('be.checked')
-    }
+  pathProfileUser(userId: string) {
+    return `admin/capco/user/user/${userId}/edit`
+  }
 
-    get formLabelEnabled() {
-        return this.cy.get('input[id="enabled"]')
-    }
+  visitProfile(userId: string) {
+    return this.cy.visit(this.pathProfileUser(userId))
+  }
 
-    labelEnabledBeChecked() {
-        this.formLabelEnabled.should('be.checked')
-    }
+  userProfileAccountTab() {
+    return this.cy.get('a[id="UserAdminPageTabs-tab-1"]')
+  }
 
-    get inputFormLabelLocked() {
-        return this.cy.get('input[id="locked"]')
-    }
+  userProfileTitle() {
+    return this.cy.get('a[id="UserAdminPageTabs-tab-2"]').click()
+  }
 
-    get formLabelLocked() {
-        return this.cy.get('label[id="label-checkbox-locked"]')
-    }
+  userProfileData() {
+    return this.cy.get('a[id="UserAdminPageTabs-tab-3"]').click()
+  }
 
-    clickFormLabelLocked() {
-        return this.formLabelLocked.click()
-    }
+  userProfilePassword() {
+    return this.cy.get('a[id="UserAdminPageTabs-tab-4"]').click()
+  }
 
-    labelLockedNotBeChecked() {
-        this.inputFormLabelLocked.should('not.be.checked')
-    }
+  // profile account
+
+  get formLabelVip() {
+    return this.cy.get('input[id="vip"]')
+  }
 
-    get roleUser() {
-        return this.cy.get('input[id="user_roles_choice-ROLE_USER"]')
-    }
+  vipBeChecked() {
+    this.formLabelVip.should('be.checked')
+  }
 
-    roleUserBeChecked() {
-        this.roleUser.should('be.checked')
-    }
+  get formLabelEnabled() {
+    return this.cy.get('input[id="enabled"]')
+  }
 
-    get roleAdmin() {
-        return this.cy.get('input[id="user_roles_choice-ROLE_ADMIN"]')
-    }
+  labelEnabledBeChecked() {
+    this.formLabelEnabled.should('be.checked')
+  }
 
-    get roleSuperAdmin() {
-        return this.cy.get('input[id="user_roles_choice-ROLE_SUPER_ADMIN"]')
-    }
+  get inputFormLabelLocked() {
+    return this.cy.get('input[id="locked"]')
+  }
 
-    roleSuperAdminShouldNotExist() {
-        this.roleSuperAdmin.should('not.exist')
-    }
+  get formLabelLocked() {
+    return this.cy.get('label[id="label-checkbox-locked"]')
+  }
 
-    roleSuperAdminBeChecked() {
-        this.roleSuperAdmin.should('be.checked')
-    }
+  clickFormLabelLocked() {
+    return this.formLabelLocked.click()
+  }
 
-    get newsletter() {
-        return this.cy.get('input[id="newsletter"]')
-    }
+  labelLockedNotBeChecked() {
+    this.inputFormLabelLocked.should('not.be.checked')
+  }
 
-    newsletterBeChecked() {
-        this.newsletter.should('be.checked')
-    }
+  get roleUser() {
+    return this.cy.get('input[id="user_roles_choice-ROLE_USER"]')
+  }
 
-    get proposalActualities() {
-        return this.cy.get('input[id="isSubscribedToProposalNews"]')
-    }
+  roleUserBeChecked() {
+    this.roleUser.should('be.checked')
+  }
 
-    get saveProfileAccount() {
-        return this.cy.get('button[id="user_admin_account_save"]')
-    }
+  get roleAdmin() {
+    return this.cy.get('input[id="user_roles_choice-ROLE_ADMIN"]')
+  }
 
-    openDeleteProfileAccount() {
-        return this.cy.get('button[id="delete-account-profile-button"]').click()
-    }
+  get roleSuperAdmin() {
+    return this.cy.get('input[id="user_roles_choice-ROLE_SUPER_ADMIN"]')
+  }
 
-    saveAccountButtonBeDisabled() {
-        this.saveProfileAccount.should('be.disabled')
-    }
+  roleSuperAdminShouldNotExist() {
+    this.roleSuperAdmin.should('not.exist')
+  }
 
-    saveAccountButtonNotDisabled() {
-        this.saveProfileAccount.should('not.be.disabled')
-    }
+  roleSuperAdminBeChecked() {
+    this.roleSuperAdmin.should('be.checked')
+  }
 
-    saveProfileAccountClicked() {
-        this.saveProfileAccount.click()
-    }
+  get newsletter() {
+    return this.cy.get('input[id="newsletter"]')
+  }
 
-    deleteAccountAndAnonymize() {
-        return this.cy.contains('delete-account-and-anonymize-contents').check()
-    }
+  newsletterBeChecked() {
+    this.newsletter.should('be.checked')
+  }
 
-    deleteAccountAndContents() {
-        return this.cy.contains('delete-account-and-contents').click()
-    }
+  get proposalActualities() {
+    return this.cy.get('input[id="isSubscribedToProposalNews"]')
+  }
 
-    confirmDeleteAccount() {
-        return this.cy.get('button[id="confirm-delete-form-submit"]').click()
-    }
+  get saveProfileAccount() {
+    return this.cy.get('button[id="user_admin_account_save"]')
+  }
 
-    //profile title
+  openDeleteProfileAccount() {
+    return this.cy.get('button[id="delete-account-profile-button"]').click()
+  }
 
-    imageProfile(img: string) {
-        return this.cy.get('input[id="profile_avatar_field"]').selectFile(`${img}`).wait(500)
-    }
+  saveAccountButtonBeDisabled() {
+    this.saveProfileAccount.should('be.disabled')
+  }
 
-    get deleteImage() {
-        return this.cy.get('label[id="label-checkbox-profile_avatar_delete"]')
-    }
+  saveAccountButtonNotDisabled() {
+    this.saveProfileAccount.should('not.be.disabled')
+  }
 
-    get fullName() {
-        return this.cy.get('input[id="profile-form-username"]')
-    }
+  saveProfileAccountClicked() {
+    this.saveProfileAccount.click()
+  }
 
-    get biography() {
-        return this.cy.get('textarea[id="public-data-form-biography"]')
-    }
+  deleteAccountAndAnonymize() {
+    return this.cy.contains('delete-account-and-anonymize-contents').check()
+  }
 
-    fillBiography(biography: string) {
-        this.biography.type(`${biography}`)
-    }
+  deleteAccountAndContents() {
+    return this.cy.contains('delete-account-and-contents').click()
+  }
 
-    get neighborhood() {
-        return this.cy.get('input[id="public-data-form-neighborhood"]')
-    }
+  confirmDeleteAccount() {
+    return this.cy.get('button[id="confirm-delete-form-submit"]').click()
+  }
 
-    fillNeighborhood(neighborhood: string) {
-        this.neighborhood.type(`${neighborhood}`)
-    }
+  // profile title
 
-    get website() {
-        return this.cy.get('input[id="public-data-form-website"]')
-    }
+  imageProfile(img: string) {
+    return this.cy.get('input[id="profile_avatar_field"]').selectFile(`${img}`).wait(500)
+  }
 
-    get facebook() {
-        return this.cy.get('input[id="public-data-form-facebook"]')
-    }
+  get deleteImage() {
+    return this.cy.get('label[id="label-checkbox-profile_avatar_delete"]')
+  }
 
-    get instagram() {
-        return this.cy.get('input[id="public-data-form-instagram"]')
-    }
+  get fullName() {
+    return this.cy.get('input[id="profile-form-username"]')
+  }
 
-    get twitter() {
-        return this.cy.get('input[id="public-data-form-twitter"]')
-    }
+  get biography() {
+    return this.cy.get('textarea[id="public-data-form-biography"]')
+  }
 
-    get linkedin() {
-        return this.cy.get('input[id="public-data-form-linkedIn"]')
-    }
+  fillBiography(biography: string) {
+    this.biography.type(`${biography}`)
+  }
 
-    get profilePageIndexed() {
-        return this.cy.get('input[id="profilePageIndexed"]')
-    }
+  get neighborhood() {
+    return this.cy.get('input[id="public-data-form-neighborhood"]')
+  }
 
-    saveProfileTitle() {
-        return this.cy.get('button[id="user-admin-profile-save"]').click()
-    }
+  fillNeighborhood(neighborhood: string) {
+    this.neighborhood.type(`${neighborhood}`)
+  }
 
-    //profile data
+  get website() {
+    return this.cy.get('input[id="public-data-form-website"]')
+  }
 
-    get mail() {
-        return this.cy.get('input[id="personal-data-email"]')
-    }
+  get facebook() {
+    return this.cy.get('input[id="public-data-form-facebook"]')
+  }
 
-    get firstName() {
-        return this.cy.get('input[id="personal-data-form-firstname"]')
-    }
+  get instagram() {
+    return this.cy.get('input[id="public-data-form-instagram"]')
+  }
 
-    get name() {
-        return this.cy.get('input[id="personal-data-form-lastname"]')
-    }
+  get twitter() {
+    return this.cy.get('input[id="public-data-form-twitter"]')
+  }
 
-    get gender() {
-        return this.cy.get('select[id="personal-data-form-gender"]')
-    }
+  get linkedin() {
+    return this.cy.get('input[id="public-data-form-linkedIn"]')
+  }
 
-    get dayOfBirth() {
-        return this.cy.get('select[id="day"]')
-    }
+  get profilePageIndexed() {
+    return this.cy.get('input[id="profilePageIndexed"]')
+  }
 
-    get monthOfBirth() {
-        return this.cy.get('select[id="month"]')
-    }
+  saveProfileTitle() {
+    return this.cy.get('button[id="user-admin-profile-save"]').click()
+  }
 
-    get yearOfBirth() {
-        return this.cy.get('select[id="year"]')
-    }
+  // profile data
 
-    get adress() {
-        return this.cy.get('input[id="personal-data-form-address"]')
-    }
+  get mail() {
+    return this.cy.get('input[id="personal-data-email"]')
+  }
 
-    get adress2() {
-        return this.cy.get('input[id="personal-data-form-address2"]')
-    }
+  get firstName() {
+    return this.cy.get('input[id="personal-data-form-firstname"]')
+  }
 
-    get city() {
-        return this.cy.get('input[id="city"]')
-    }
+  get name() {
+    return this.cy.get('input[id="personal-data-form-lastname"]')
+  }
 
-    fillCity(city: string) {
-        this.city.type(city)
-    }
+  get gender() {
+    return this.cy.get('select[id="personal-data-form-gender"]')
+  }
 
-    get zipCode() {
-        return this.cy.get('input[id="zipCode"]')
-    }
+  get dayOfBirth() {
+    return this.cy.get('select[id="day"]')
+  }
 
-    get phone() {
-        return this.cy.get('input[id="phone"]')
-    }    
+  get monthOfBirth() {
+    return this.cy.get('select[id="month"]')
+  }
 
-    get identificationCode() {
-        return this.cy.get('input[id="userIdentificationCode"]')
-    }
+  get yearOfBirth() {
+    return this.cy.get('select[id="year"]')
+  }
 
+  get adress() {
+    return this.cy.get('input[id="personal-data-form-address"]')
+  }
 
-    saveProfileData() {
-        return this.cy.get('button[id="user-admin-personal-data-save"]').click({force:true})
-    }
+  get adress2() {
+    return this.cy.get('input[id="personal-data-form-address2"]')
+  }
 
-    //profile password
+  get city() {
+    return this.cy.get('input[id="city"]')
+  }
 
-    get currentPassword() {
-        return this.cy.get('input[id="password-form-current"]')
-    }
+  fillCity(city: string) {
+    this.city.type(city)
+  }
 
-    currentPwdShouldBeDisabled() {
-        this.currentPassword.should('be.disabled')
-    }
+  get zipCode() {
+    return this.cy.get('input[id="zipCode"]')
+  }
 
-    fillCurrentPassword(pwd: string) {
-        return this.currentPassword.type(pwd)
-    }
+  get phone() {
+    return this.cy.get('input[id="phone"]')
+  }
 
-    get newPassword() {
-        return this.cy.get('input[id="password-form-new_password"]')
-    }
+  get identificationCode() {
+    return this.cy.get('input[id="userIdentificationCode"]')
+  }
 
-    fillNewPassword(pwd: string) {
-        return this.newPassword.type(pwd)
-    }
+  saveProfileData() {
+    return this.cy.get('button[id="user-admin-personal-data-save"]').click({ force: true })
+  }
 
-    clearNewPassword() {
-        return this.newPassword.clear()
-    }
+  // profile password
 
-    newPwdShouldBeDisabled(){
-        this.newPassword.should('be.disabled')
-    }
+  get currentPassword() {
+    return this.cy.get('input[id="password-form-current"]')
+  }
 
-    get saveProfilePassword() {
-        return this.cy.get('button[id="user-admin-password-save"]')
-    }
+  currentPwdShouldBeDisabled() {
+    this.currentPassword.should('be.disabled')
+  }
 
-    confirmSaveProfilePassword() {
-        return this.saveProfilePassword.click()
-    }
+  fillCurrentPassword(pwd: string) {
+    return this.currentPassword.type(pwd)
+  }
 
-    saveProfilePasswordShouldNotBeDisabled() {
-        return this.saveProfilePassword.should('not.be.disabled')
-    }
+  get newPassword() {
+    return this.cy.get('input[id="password-form-new_password"]')
+  }
 
-    notifSave() {
-        this.cy.contains('global.saved').should('be.visible')
-    }
-})
+  fillNewPassword(pwd: string) {
+    return this.newPassword.type(pwd)
+  }
 
+  clearNewPassword() {
+    return this.newPassword.clear()
+  }
+
+  newPwdShouldBeDisabled() {
+    this.newPassword.should('be.disabled')
+  }
+
+  get saveProfilePassword() {
+    return this.cy.get('button[id="user-admin-password-save"]')
+  }
+
+  confirmSaveProfilePassword() {
+    return this.saveProfilePassword.click()
+  }
+
+  saveProfilePasswordShouldNotBeDisabled() {
+    return this.saveProfilePassword.should('not.be.disabled')
+  }
+
+  notifSave() {
+    this.cy.contains('global.saved').should('be.visible')
+  }
+})()

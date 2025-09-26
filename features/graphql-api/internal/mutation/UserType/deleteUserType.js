@@ -33,6 +33,12 @@ const input = {
   },
 };
 
+const queryObjectPattern = {
+  userTypes: {
+    edges: expect.any(Array),
+  },
+};
+
 describe('mutations.deleteUserType', () => {
   it('deletes an existing user type', async () => {
     // save the number of user types before the deletion

@@ -118,6 +118,31 @@ exports[`<UserAdminPage/> should render 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "UserType",
+                        "kind": "LinkedField",
+                        "name": "userType",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "name",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "isViewer",
                         "storageKey": null,
@@ -315,24 +340,6 @@ exports[`<UserAdminPage/> should render 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "UserType",
-                        "kind": "LinkedField",
-                        "name": "userType",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
                         "kind": "ScalarField",
                         "name": "neighborhood",
                         "storageKey": null,
@@ -483,7 +490,7 @@ exports[`<UserAdminPage/> should render 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "003bf38b2c389dd14be93de469e35ae1",
+            "cacheID": "11322bccffc86b7c422b81fa44d933d4",
             "id": null,
             "metadata": Object {},
             "name": "UserAdminPageQuery",
@@ -533,6 +540,10 @@ fragment UserAdminAccount_viewer on User {
 
 fragment UserAdminPageTabs_user on User {
   url
+  userType {
+    id
+    name
+  }
   ...UserAdminAccount_user
   ...UserAdminProfile_user
   ...UserAdminPersonalData_user

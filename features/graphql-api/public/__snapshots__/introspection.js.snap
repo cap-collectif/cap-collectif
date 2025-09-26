@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Public|introspection query fetche schema if enabled 1`] = `
+exports[`Public|introspection query fetch schema if enabled 1`] = `
 Object {
   "__schema": Object {
     "types": Array [

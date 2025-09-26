@@ -110,7 +110,7 @@ const FRAGMENT = graphql`
   }
 `
 
-export const RegistrationForm = ({ query: queryFragment }: Props) => {
+export const RegistrationForm: React.FC<Props> = ({ query: queryFragment }) => {
   const query = useFragment(FRAGMENT, queryFragment)
   const intl = useIntl()
   const {
@@ -129,8 +129,9 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
     'privacy_policy',
   ])
 
-  const queryUserTypes = query.userTypes.edges.map(({ node }) => node)
-  const userTypes = [{ label: intl.formatMessage({ id: 'registration.select.type' }), value: '' }, ...queryUserTypes]
+  const userTypesData = query.userTypes.edges.map(userType => userType.node)
+
+  const userTypes = [{ label: intl.formatMessage({ id: 'registration.select.type' }), value: '' }, ...userTypesData]
 
   const {
     control,

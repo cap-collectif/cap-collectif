@@ -10,7 +10,7 @@ const IntrospectionQuery = /* GraphQL */ `
 `;
 
 describe('Public|introspection query', () => {
-  it('fetche schema if enabled', async () => {
+  it('fetch schema if enabled', async () => {
     await global.enableFeatureFlag('graphql_introspection');
     await expect(graphql(IntrospectionQuery)).resolves.toMatchSnapshot();
   });

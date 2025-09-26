@@ -81,7 +81,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
           <Component />
         </FormattedMessage>
         <option
-          key="1"
+          key="VXNlclR5cGU6MQ=="
           value="VXNlclR5cGU6MQ=="
         >
           type_1

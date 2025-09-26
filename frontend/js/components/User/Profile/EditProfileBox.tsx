@@ -38,7 +38,7 @@ export class EditProfileBox extends Component<Props> {
       return <Loader />
     }
 
-    return <QueryRenderer variables={{}} environment={environment} query={query} render={renderEditProfile} />
+    return <QueryRenderer variables={{}} environment={environment as any} query={query} render={renderEditProfile} />
   }
 }
 export default EditProfileBox

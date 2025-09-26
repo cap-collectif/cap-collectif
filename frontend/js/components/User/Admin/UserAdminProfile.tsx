@@ -217,8 +217,8 @@ export const UserAdminProfile = ({
               <FormattedMessage id="registration.select.type">
                 {(message: string) => <option value="">{message}</option>}
               </FormattedMessage>
-              {userTypes.map((type, i) => (
-                <option key={i + 1} value={type.id}>
+              {userTypes.map((type) => (
+                <option key={type.id} value={type.id}>
                   {type.name}
                 </option>
               ))}

@@ -3,7 +3,7 @@
 exports[`Internal|Query medias Fetch all medias 1`] = `
 Object {
   "medias": Object {
-    "totalCount": 64,
+    "totalCount": 65,
   },
 }
 `;
@@ -11,7 +11,7 @@ Object {
 exports[`Internal|Query medias Fetch medias hiding profile pictures 1`] = `
 Object {
   "medias": Object {
-    "totalCount": 43,
+    "totalCount": 44,
   },
 }
 `;

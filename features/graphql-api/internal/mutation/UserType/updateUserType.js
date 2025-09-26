@@ -19,7 +19,7 @@ const UpdateUserTypeMutation = /* GraphQL */ `
 `;
 
 describe('mutations.updateUserType', () => {
-  const userTypeGlobalId = 'VXNlclR5cGU6NA==' // UserType:4
+  const userTypeGlobalId = 'VXNlclR5cGU6NA=='; // UserType:4
   // the media:user-type-nonprofit and id:4 should be in the fixtures
   it('updates a user type', async () => {
     await expect(

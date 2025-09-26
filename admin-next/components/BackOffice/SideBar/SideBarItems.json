@@ -161,7 +161,7 @@
             },
             {
                 "title": "admin.label.user_type",
-                "href": "/admin/capco/user/usertype/list",
+                "href": "/admin-next/user-types",
                 "rolesRequired": [],
                 "featuresRequired": []
             }

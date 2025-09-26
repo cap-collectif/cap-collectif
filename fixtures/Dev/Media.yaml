@@ -458,6 +458,7 @@ Capco\AppBundle\Entity\Media:
         name: IlesDeNantes
         category: '@MediaCategory1'
         providerReference: ile_de_nantes.jpeg
+        # user types
     UserTypeCitizen:
         id: 'user-type-citizen'
         binaryContentPath: user_type/citizen_kane.jpeg
@@ -482,3 +483,9 @@ Capco\AppBundle\Entity\Media:
         name: Institution
         category: '@MediaCategory1'
         providerReference: institution.jpg
+    UserTypeActivist:
+        id: 'user-type-activist'
+        binaryContentPath: user_type/militantes.jpg
+        name: Militantes
+        category: '@MediaCategory1'
+        providerReference: militantes.jpg

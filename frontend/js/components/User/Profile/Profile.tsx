@@ -109,7 +109,6 @@ const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props)
 
   const input = { ...values, profilePageIndexed, media }
   return UpdateProfilePublicDataMutation.commit({
-    /* @ts-expect-error */
     input,
   })
     .then(response => {
