@@ -167,6 +167,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   return (
     <Flex direction="row" align="center" spacing={2}>
       <Select
+        noOptionsMessage={() => intl.formatMessage({ id: 'result-not-found' })}
         variantColor="hierarchy"
         onChange={optionSelected => setFilters(FilterKey.PROJECT, optionSelected.value)}
         defaultValue={defaultValueFormatted}
