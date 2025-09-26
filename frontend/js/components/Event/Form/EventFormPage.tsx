@@ -117,7 +117,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
       if (response?.addEvent?.eventEdge?.node) {
         if (isFrontendView)
-          toast({ content: intl.formatMessage({ id: 'alert.success.add.argument' }), variant: 'success' })
+          toast({ content: intl.formatMessage({ id: 'front.event.submit-success' }), variant: 'success' })
 
         window.location.href = isFrontendView
           ? response.addEvent.eventEdge.node.url
