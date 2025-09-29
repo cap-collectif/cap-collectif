@@ -14,8 +14,10 @@ class ProposalFormViewerProposalsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ProposalRepository $proposalRepo, private readonly ConnectionBuilderInterface $builder)
-    {
+    public function __construct(
+        private ProposalRepository $proposalRepo,
+        private readonly ConnectionBuilderInterface $builder
+    ) {
     }
 
     public function __invoke(ProposalForm $form, Arg $args, $viewer): ConnectionInterface

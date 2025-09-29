@@ -21,8 +21,11 @@ class FollowOpinionMutation implements MutationInterface
     private $opinionRepository;
     private $opinionVersionRepository;
 
-    public function __construct(private EntityManagerInterface $em, private FollowerRepository $followerRepository, private GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FollowerRepository $followerRepository,
+        private GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array

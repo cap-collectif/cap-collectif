@@ -14,8 +14,11 @@ class UpdateRegistrationPageMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private SiteParameterRepository $siteParameterRepository, private EntityManagerInterface $em, private RedisCache $cache)
-    {
+    public function __construct(
+        private SiteParameterRepository $siteParameterRepository,
+        private EntityManagerInterface $em,
+        private RedisCache $cache
+    ) {
     }
 
     public function __invoke(Argument $args)

@@ -9,8 +9,11 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class DecisionEvent extends Event
 {
-    public function __construct(private readonly Proposal $proposal, private readonly ProposalDecision $decision, private readonly AnalysisConfiguration $analysisConfig)
-    {
+    public function __construct(
+        private readonly Proposal $proposal,
+        private readonly ProposalDecision $decision,
+        private readonly AnalysisConfiguration $analysisConfig
+    ) {
     }
 
     public function getDecision(): ProposalDecision

@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class GroupUsersResolver implements QueryInterface
 {
-    public function __construct(private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     public function __invoke(Group $group, Argument $args): Connection

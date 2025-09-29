@@ -21,8 +21,13 @@ class UpdateOtherStepMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

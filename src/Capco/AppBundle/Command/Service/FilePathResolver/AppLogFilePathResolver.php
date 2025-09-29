@@ -4,8 +4,9 @@ namespace Capco\AppBundle\Command\Service\FilePathResolver;
 
 class AppLogFilePathResolver
 {
-    public function __construct(private readonly string $exportDirectory)
-    {
+    public function __construct(
+        private readonly string $exportDirectory
+    ) {
     }
 
     public function getExportPath(): string

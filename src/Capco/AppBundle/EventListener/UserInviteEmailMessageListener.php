@@ -10,8 +10,10 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class UserInviteEmailMessageListener
 {
-    public function __construct(private readonly Publisher $publisher, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly Publisher $publisher,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function postPersist(UserInviteEmailMessage $entity, LifecycleEventArgs $args): void

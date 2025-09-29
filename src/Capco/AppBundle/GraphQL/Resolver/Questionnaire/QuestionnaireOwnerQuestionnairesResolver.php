@@ -13,8 +13,10 @@ use Psr\Log\LoggerInterface;
 
 class QuestionnaireOwnerQuestionnairesResolver implements QueryInterface
 {
-    public function __construct(private readonly QuestionnaireRepository $questionnaireRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $args, User $viewer): ConnectionInterface

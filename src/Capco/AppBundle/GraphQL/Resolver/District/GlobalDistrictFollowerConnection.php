@@ -13,8 +13,11 @@ use Psr\Log\LoggerInterface;
 
 class GlobalDistrictFollowerConnection implements QueryInterface
 {
-    public function __construct(private readonly UserRepository $userRepository, private readonly LoggerInterface $logger, private readonly FollowerRepository $followerRepository)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly LoggerInterface $logger,
+        private readonly FollowerRepository $followerRepository
+    ) {
     }
 
     public function __invoke(GlobalDistrict $globalDistrict, Arg $args): Connection

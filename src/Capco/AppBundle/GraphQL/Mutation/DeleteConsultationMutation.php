@@ -18,8 +18,11 @@ class DeleteConsultationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationChecker $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationChecker $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

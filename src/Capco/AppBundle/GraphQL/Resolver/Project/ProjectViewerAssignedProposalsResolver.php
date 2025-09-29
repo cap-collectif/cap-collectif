@@ -15,8 +15,9 @@ class ProjectViewerAssignedProposalsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly ProposalSearch $proposalSearch)
-    {
+    public function __construct(
+        private readonly ProposalSearch $proposalSearch
+    ) {
     }
 
     public function __invoke(Project $project, Arg $args, $viewer): ConnectionInterface

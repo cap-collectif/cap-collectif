@@ -16,8 +16,11 @@ class CreateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly SettableOwnerResolver $settableOwnerResolver
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

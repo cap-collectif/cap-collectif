@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationEmailingCampaignsResolver implements QueryInterface
 {
-    public function __construct(private readonly EmailingCampaignRepository $repository)
-    {
+    public function __construct(
+        private readonly EmailingCampaignRepository $repository
+    ) {
     }
 
     public function __invoke(Organization $organization, Argument $argument): ConnectionInterface

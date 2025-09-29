@@ -7,8 +7,9 @@ use Capco\AppBundle\Provider\MediaProvider;
 
 class MediaSizeRetriever
 {
-    public function __construct(private readonly MediaProvider $mediaProvider)
-    {
+    public function __construct(
+        private readonly MediaProvider $mediaProvider
+    ) {
     }
 
     /**

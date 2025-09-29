@@ -10,8 +10,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProjectResolver
 {
-    public function __construct(protected ProjectRepository $projectRepository, protected RouterInterface $router, protected RequestStack $requestStack)
-    {
+    public function __construct(
+        protected ProjectRepository $projectRepository,
+        protected RouterInterface $router,
+        protected RequestStack $requestStack
+    ) {
     }
 
     public function resolveAdminEditUrl(Project $project, bool $absolute = true): string

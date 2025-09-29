@@ -20,8 +20,9 @@ class FontProcessor
         'otf' => 'truetype',
     ];
 
-    public function __construct(private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function processArchive(UploadedFile $archive): array

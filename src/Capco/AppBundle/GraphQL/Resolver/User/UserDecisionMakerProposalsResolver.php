@@ -16,8 +16,10 @@ class UserDecisionMakerProposalsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ProposalDecisionMakerRepository $proposalDecisionMakerRepository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke($viewer, Argument $args): ConnectionInterface

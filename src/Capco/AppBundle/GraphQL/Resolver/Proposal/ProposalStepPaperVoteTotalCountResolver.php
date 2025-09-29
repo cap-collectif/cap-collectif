@@ -12,8 +12,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalStepPaperVoteTotalCountResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalStepPaperVoteCounterRepository $repository, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly ProposalStepPaperVoteCounterRepository $repository,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Proposal $proposal, Argument $args, ?User $viewer = null): int

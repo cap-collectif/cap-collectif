@@ -15,8 +15,11 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
 {
     use SerializerAwareTrait;
 
-    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private LogManager $logManager)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private LogManager $logManager
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

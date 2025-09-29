@@ -26,8 +26,14 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly ProposalSupervisorRepository $proposalSupervisorRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly ConnectionBuilderInterface $builder,
+        private readonly ProposalSupervisorRepository $proposalSupervisorRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

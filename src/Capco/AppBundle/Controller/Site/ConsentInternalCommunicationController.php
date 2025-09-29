@@ -11,8 +11,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsentInternalCommunicationController extends Controller
 {
-    public function __construct(private readonly ParticipantHelper $participantHelper, private readonly EntityManagerInterface $em, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly ParticipantHelper $participantHelper,
+        private readonly EntityManagerInterface $em,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**

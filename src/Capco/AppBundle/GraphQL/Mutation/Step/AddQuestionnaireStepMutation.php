@@ -14,8 +14,10 @@ class AddQuestionnaireStepMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly AddStepService $addStepService, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly AddStepService $addStepService,
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class RegistrationFormQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly RegistrationFormRepository $registrationFormRepository)
-    {
+    public function __construct(
+        private readonly RegistrationFormRepository $registrationFormRepository
+    ) {
     }
 
     public function __invoke(): ?RegistrationForm

@@ -6,8 +6,10 @@ use Capco\AppBundle\Repository\ReplyRepository;
 
 class ParticipantAccessResolver
 {
-    public function __construct(private readonly ParticipantHelper $participantHelper, private readonly ReplyRepository $replyRepository)
-    {
+    public function __construct(
+        private readonly ParticipantHelper $participantHelper,
+        private readonly ReplyRepository $replyRepository
+    ) {
     }
 
     /**

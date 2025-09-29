@@ -7,8 +7,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class DefaultLanguageRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(protected LocaleRepository $repo)
-    {
+    public function __construct(
+        protected LocaleRepository $repo
+    ) {
     }
 
     public function getDefaultLocale(): string

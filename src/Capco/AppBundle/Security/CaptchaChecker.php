@@ -8,8 +8,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CaptchaChecker
 {
-    public function __construct(protected HttpClientInterface $client, protected Manager $toggle, protected string $turnstilePrivateKey, protected string $recaptchaPrivateKey)
-    {
+    public function __construct(
+        protected HttpClientInterface $client,
+        protected Manager $toggle,
+        protected string $turnstilePrivateKey,
+        protected string $recaptchaPrivateKey
+    ) {
     }
 
     /**

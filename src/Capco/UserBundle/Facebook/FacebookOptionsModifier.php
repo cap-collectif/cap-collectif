@@ -12,8 +12,11 @@ class FacebookOptionsModifier implements OptionsModifierInterface
 {
     protected const REDIS_CACHE_KEY = 'FacebookSSOConfiguration';
 
-    public function __construct(protected FacebookSSOConfigurationRepository $repository, protected RedisCache $redisCache, protected Manager $toggleManager)
-    {
+    public function __construct(
+        protected FacebookSSOConfigurationRepository $repository,
+        protected RedisCache $redisCache,
+        protected Manager $toggleManager
+    ) {
     }
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array

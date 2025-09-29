@@ -16,8 +16,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class SelectionStepProposalResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalSearch $proposalSearch, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ProposalSearch $proposalSearch,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(

@@ -12,8 +12,13 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalDeleteProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalRepository $proposalRepository, private readonly UserRepository $userRepository, private readonly ProposalNotifier $notifier, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly UserRepository $userRepository,
+        private readonly ProposalNotifier $notifier,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function process(Message $message, array $options): bool

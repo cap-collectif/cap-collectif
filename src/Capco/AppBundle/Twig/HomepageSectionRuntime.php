@@ -18,8 +18,18 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class HomepageSectionRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly HighlightedContentRepository $highlightedContentRepository, private readonly VideoRepository $videoRepository, private readonly ProjectRepository $projectRepository, private readonly ThemeRepository $themeRepository, private readonly PostRepository $postRepository, private readonly SocialNetworkRepository $networkRepository, private readonly ProposalRepository $proposalRepository, private readonly SerializerInterface $serializer, private readonly Environment $twig, private readonly TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        private readonly HighlightedContentRepository $highlightedContentRepository,
+        private readonly VideoRepository $videoRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly ThemeRepository $themeRepository,
+        private readonly PostRepository $postRepository,
+        private readonly SocialNetworkRepository $networkRepository,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly SerializerInterface $serializer,
+        private readonly Environment $twig,
+        private readonly TokenStorageInterface $tokenStorage
+    ) {
     }
 
     public function getHighlightedContent(?Section $section = null): string

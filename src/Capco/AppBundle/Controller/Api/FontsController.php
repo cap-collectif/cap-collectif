@@ -42,8 +42,13 @@ class FontsController extends AbstractController
         'application/zip',
     ];
 
-    public function __construct(private readonly ValidatorInterface $validator, private readonly FontProcessor $fontProcessor, private readonly FontRepository $fontRepository, private readonly MediaUrlResolver $mediaUrlResolver, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly ValidatorInterface $validator,
+        private readonly FontProcessor $fontProcessor,
+        private readonly FontRepository $fontRepository,
+        private readonly MediaUrlResolver $mediaUrlResolver,
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     /**

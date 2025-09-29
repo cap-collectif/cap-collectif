@@ -20,8 +20,10 @@ class MailjetClient
 
     public Client $client;
 
-    public function __construct(private readonly string $publicKey, private readonly string $privateKey)
-    {
+    public function __construct(
+        private readonly string $publicKey,
+        private readonly string $privateKey
+    ) {
         $this->client = new Client();
     }
 

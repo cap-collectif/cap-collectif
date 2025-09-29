@@ -62,8 +62,11 @@ class ShieldListener
         'health_check',
     ];
 
-    public function __construct(protected Manager $manager, protected TokenStorageInterface $tokenStorage, protected Environment $templating)
-    {
+    public function __construct(
+        protected Manager $manager,
+        protected TokenStorageInterface $tokenStorage,
+        protected Environment $templating
+    ) {
     }
 
     public function onKernelRequest(RequestEvent $event)

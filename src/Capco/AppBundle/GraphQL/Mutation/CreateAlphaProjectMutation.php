@@ -15,8 +15,10 @@ class CreateAlphaProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly ProjectPersister $persister, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly ProjectPersister $persister,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

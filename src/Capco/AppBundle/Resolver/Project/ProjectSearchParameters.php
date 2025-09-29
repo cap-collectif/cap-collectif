@@ -4,8 +4,14 @@ namespace Capco\AppBundle\Resolver\Project;
 
 class ProjectSearchParameters
 {
-    public function __construct(private int $elements = 0, private int $page = 1, private ?string $term = null, private ?string $type = null, private string $orderBy = 'date', private ?string $theme = null)
-    {
+    public function __construct(
+        private int $elements = 0,
+        private int $page = 1,
+        private ?string $term = null,
+        private ?string $type = null,
+        private string $orderBy = 'date',
+        private ?string $theme = null
+    ) {
     }
 
     public function setTerm(?string $term = null): self

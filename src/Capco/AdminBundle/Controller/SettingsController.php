@@ -27,8 +27,19 @@ class SettingsController extends Controller
 {
     protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
 
-    public function __construct(private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository, private readonly MenuItemRepository $menuItemRepository, private readonly FeaturesCategoryResolver $featuresCategoryResolver, private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder, private readonly Pool $pool, private readonly SiteParameterRepository $siteParameterRepository, private readonly SiteParameterAdmin $siteParameterAdmin, private readonly SiteImageRepository $siteImageRepository, private readonly SiteColorRepository $siteColorRepository, private readonly Manager $manager, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository,
+        private readonly MenuItemRepository $menuItemRepository,
+        private readonly FeaturesCategoryResolver $featuresCategoryResolver,
+        private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        private readonly Pool $pool,
+        private readonly SiteParameterRepository $siteParameterRepository,
+        private readonly SiteParameterAdmin $siteParameterAdmin,
+        private readonly SiteImageRepository $siteImageRepository,
+        private readonly SiteColorRepository $siteColorRepository,
+        private readonly Manager $manager,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**

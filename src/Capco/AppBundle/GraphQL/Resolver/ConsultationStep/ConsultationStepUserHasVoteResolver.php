@@ -14,8 +14,14 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationStepUserHasVoteResolver implements QueryInterface
 {
-    public function __construct(private readonly UserRepository $userRepo, private readonly OpinionVoteRepository $opinionVoteRepo, private readonly ArgumentVoteRepository $argumentVoteRepo, private readonly SourceVoteRepository $sourceVoteRepo, private readonly OpinionVersionVoteRepository $versionVoteRepo, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepo,
+        private readonly OpinionVoteRepository $opinionVoteRepo,
+        private readonly ArgumentVoteRepository $argumentVoteRepo,
+        private readonly SourceVoteRepository $sourceVoteRepo,
+        private readonly OpinionVersionVoteRepository $versionVoteRepo,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(ConsultationStep $step, Argument $args): bool

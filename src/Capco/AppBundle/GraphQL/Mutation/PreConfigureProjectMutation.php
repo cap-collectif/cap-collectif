@@ -27,8 +27,20 @@ class PreConfigureProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister, private readonly PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister, private readonly PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister, private readonly PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister, private readonly DeleteQuestionnaireMutation $deleteQuestionnaireMutation, private readonly DeleteProposalFormMutation $deleteProposalFormMutation, private readonly DeleteProjectMutation $deleteProjectMutation, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProjectTypeRepository $projectTypeRepository, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister,
+        private readonly PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister,
+        private readonly PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister,
+        private readonly PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister,
+        private readonly DeleteQuestionnaireMutation $deleteQuestionnaireMutation,
+        private readonly DeleteProposalFormMutation $deleteProposalFormMutation,
+        private readonly DeleteProjectMutation $deleteProjectMutation,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ProjectTypeRepository $projectTypeRepository,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

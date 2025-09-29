@@ -18,8 +18,11 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
 
-    public function __construct(private RouterInterface $router, private readonly TokenStorageInterface $tokenStorage, private readonly ObjectNormalizer $normalizer)
-    {
+    public function __construct(
+        private RouterInterface $router,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly ObjectNormalizer $normalizer
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

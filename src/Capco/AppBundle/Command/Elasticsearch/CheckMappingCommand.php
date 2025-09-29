@@ -11,8 +11,10 @@ use Symfony\Component\Yaml\Yaml;
 
 class CheckMappingCommand extends Command
 {
-    public function __construct(private readonly Indexer $indexer, private readonly string $kernelProjectDir)
-    {
+    public function __construct(
+        private readonly Indexer $indexer,
+        private readonly string $kernelProjectDir
+    ) {
         parent::__construct();
     }
 

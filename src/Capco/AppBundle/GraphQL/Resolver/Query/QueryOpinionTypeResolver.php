@@ -9,8 +9,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class QueryOpinionTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly OpinionTypeRepository $repository)
-    {
+    public function __construct(
+        private readonly OpinionTypeRepository $repository
+    ) {
     }
 
     public function __invoke(Argument $args): array

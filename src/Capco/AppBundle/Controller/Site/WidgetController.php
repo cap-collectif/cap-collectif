@@ -10,8 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class WidgetController extends Controller
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     /**

@@ -30,8 +30,15 @@ class CreateProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly ProjectAuthorTransformer $transformer, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly ProjectAuthorTransformer $transformer,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

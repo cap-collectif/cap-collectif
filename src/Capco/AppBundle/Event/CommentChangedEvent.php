@@ -9,8 +9,10 @@ class CommentChangedEvent extends Event
 {
     protected $comment;
 
-    public function __construct(Comment $comment, protected $action)
-    {
+    public function __construct(
+        Comment $comment,
+        protected $action
+    ) {
         $this->comment = $comment;
     }
 

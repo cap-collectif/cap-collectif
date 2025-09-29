@@ -20,8 +20,12 @@ class DeleteMailingListMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly MailingListRepository $repository, private readonly EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly MailingListRepository $repository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -9,8 +9,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class SendInBlueProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly SendInBlueManager $sendInBlueManager, private readonly Manager $toggle)
-    {
+    public function __construct(
+        private readonly SendInBlueManager $sendInBlueManager,
+        private readonly Manager $toggle
+    ) {
     }
 
     public function process(Message $message, array $options): bool

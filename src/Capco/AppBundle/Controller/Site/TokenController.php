@@ -29,8 +29,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TokenController extends AbstractController
 {
-    public function __construct(private readonly LoginManagerInterface $loginManager, private readonly DebateUrlResolver $debateUrlResolver, private readonly UserUrlResolver $userUrlResolver, private readonly DebateVoteTokenRepository $debateVoteTokenRepository, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly TokenManager $tokenManager)
-    {
+    public function __construct(
+        private readonly LoginManagerInterface $loginManager,
+        private readonly DebateUrlResolver $debateUrlResolver,
+        private readonly UserUrlResolver $userUrlResolver,
+        private readonly DebateVoteTokenRepository $debateVoteTokenRepository,
+        private readonly LoggerInterface $logger,
+        private readonly TranslatorInterface $translator,
+        private readonly TokenManager $tokenManager
+    ) {
     }
 
     /**

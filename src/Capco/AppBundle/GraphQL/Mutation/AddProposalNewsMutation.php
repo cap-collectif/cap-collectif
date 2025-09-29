@@ -30,8 +30,15 @@ class AddProposalNewsMutation implements MutationInterface
 
     final public const PROPOSAL_DOESNT_ALLOW_NEWS = 'PROPOSAL_DOESNT_ALLOW_NEWS';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger, private readonly LocaleRepository $localeRepository, private readonly Publisher $publisher, private readonly PostUrlResolver $urlResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly LoggerInterface $logger,
+        private readonly LocaleRepository $localeRepository,
+        private readonly Publisher $publisher,
+        private readonly PostUrlResolver $urlResolver
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

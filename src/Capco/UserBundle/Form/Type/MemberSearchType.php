@@ -12,8 +12,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MemberSearchType extends AbstractType
 {
-    public function __construct(private readonly Manager $toggleManager)
-    {
+    public function __construct(
+        private readonly Manager $toggleManager
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

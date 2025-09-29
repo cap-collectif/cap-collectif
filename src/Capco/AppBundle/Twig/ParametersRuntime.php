@@ -16,8 +16,16 @@ class ParametersRuntime implements RuntimeExtensionInterface
 {
     final public const CACHE_KEY = 'site-parameters';
 
-    public function __construct(protected Manager $manager, protected RedisCache $cache, protected RouterInterface $router, protected SiteParameterResolver $siteParameterResolver, protected TranslatorInterface $translator, protected SiteColorResolver $siteColorResolver, protected RequestStack $requestStack, protected LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        protected Manager $manager,
+        protected RedisCache $cache,
+        protected RouterInterface $router,
+        protected SiteParameterResolver $siteParameterResolver,
+        protected TranslatorInterface $translator,
+        protected SiteColorResolver $siteColorResolver,
+        protected RequestStack $requestStack,
+        protected LocaleRepository $localeRepository
+    ) {
     }
 
     public function getIsFeatureEnabled($flag): bool

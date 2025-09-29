@@ -20,8 +20,15 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class QueryVotesResolver implements QueryInterface
 {
-    public function __construct(protected AbstractVoteRepository $votesRepository, protected QueryProjectsResolver $projectsResolver, protected StepVotesCountResolver $stepVotesCountResolver, protected StepPointsVotesCountResolver $stepPointsVotesCountResolver, private readonly VoteSearch $voteSearch, protected PromiseAdapterInterface $adapter, private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository)
-    {
+    public function __construct(
+        protected AbstractVoteRepository $votesRepository,
+        protected QueryProjectsResolver $projectsResolver,
+        protected StepVotesCountResolver $stepVotesCountResolver,
+        protected StepPointsVotesCountResolver $stepPointsVotesCountResolver,
+        private readonly VoteSearch $voteSearch,
+        protected PromiseAdapterInterface $adapter,
+        private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository
+    ) {
     }
 
     public function __invoke(Argument $args): Connection

@@ -9,8 +9,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserSubscribedToNewsLetterAtResolver implements QueryInterface
 {
-    public function __construct(protected NewsletterSubscriptionRepository $newLetterRepository)
-    {
+    public function __construct(
+        protected NewsletterSubscriptionRepository $newLetterRepository
+    ) {
     }
 
     public function __invoke(User $user): ?\DateTime

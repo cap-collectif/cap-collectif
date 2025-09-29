@@ -18,8 +18,13 @@ class UpdateParticipantRequirementMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private ParticipantRequirementRepository $participantRequirementRepository, private LoggerInterface $logger, private GlobalIdResolver $globalIdResolver, private ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private ParticipantRequirementRepository $participantRequirementRepository,
+        private LoggerInterface $logger,
+        private GlobalIdResolver $globalIdResolver,
+        private ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(Argument $input): array

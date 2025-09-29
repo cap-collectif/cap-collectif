@@ -24,8 +24,16 @@ class MagicLinkEmailSender
 
     public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ConfigFileSystem $filesystem, private readonly RouterInterface $router, private readonly UserRepository $userRepository, private readonly Publisher $publisher, private readonly EmailRateLimiter $emailRateLimiter, private readonly KernelInterface $kernel, private readonly ParticipationCookieManager $participationCookieManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ConfigFileSystem $filesystem,
+        private readonly RouterInterface $router,
+        private readonly UserRepository $userRepository,
+        private readonly Publisher $publisher,
+        private readonly EmailRateLimiter $emailRateLimiter,
+        private readonly KernelInterface $kernel,
+        private readonly ParticipationCookieManager $participationCookieManager
+    ) {
     }
 
     /**

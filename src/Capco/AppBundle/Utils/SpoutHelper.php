@@ -21,8 +21,10 @@ class SpoutHelper
      * Initialize on a per sheet basis
      *  Allow users to mention which row number contains the headers.
      */
-    public function __construct(SheetInterface $sheet, private readonly int $headerRowNumber = 1)
-    {
+    public function __construct(
+        SheetInterface $sheet,
+        private readonly int $headerRowNumber = 1
+    ) {
         $this->flushHeaders();
 
         $this->getFormattedHeaders($sheet); //Since this also calls the getRawHeaders, we will have both the arrays set at once

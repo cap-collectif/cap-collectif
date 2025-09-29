@@ -9,8 +9,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class StepVotesCountResolver implements QueryInterface
 {
-    public function __construct(private readonly StepVotesCountDataLoader $votesCountDataLoader)
-    {
+    public function __construct(
+        private readonly StepVotesCountDataLoader $votesCountDataLoader
+    ) {
     }
 
     public function __invoke(

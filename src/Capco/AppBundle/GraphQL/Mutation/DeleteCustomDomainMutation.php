@@ -16,8 +16,11 @@ class DeleteCustomDomainMutation implements MutationInterface
 
     final public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SiteSettingsRepository $siteSettingsRepository, private readonly DeployerClient $deployerClient)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SiteSettingsRepository $siteSettingsRepository,
+        private readonly DeployerClient $deployerClient
+    ) {
     }
 
     public function __invoke(Argument $input): array

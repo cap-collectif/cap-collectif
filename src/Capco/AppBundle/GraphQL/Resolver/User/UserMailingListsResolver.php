@@ -12,8 +12,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserMailingListsResolver implements QueryInterface
 {
-    public function __construct(private readonly MailingListRepository $repository)
-    {
+    public function __construct(
+        private readonly MailingListRepository $repository
+    ) {
     }
 
     public function __invoke(User $user, ?Argument $args = null): ConnectionInterface

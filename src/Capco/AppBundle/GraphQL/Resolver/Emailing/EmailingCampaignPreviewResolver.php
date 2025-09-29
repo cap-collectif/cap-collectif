@@ -12,8 +12,11 @@ use Twig\Environment;
 
 class EmailingCampaignPreviewResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteParameterResolver $siteParams, private readonly RouterInterface $router, private readonly Environment $twig)
-    {
+    public function __construct(
+        private readonly SiteParameterResolver $siteParams,
+        private readonly RouterInterface $router,
+        private readonly Environment $twig
+    ) {
     }
 
     /**

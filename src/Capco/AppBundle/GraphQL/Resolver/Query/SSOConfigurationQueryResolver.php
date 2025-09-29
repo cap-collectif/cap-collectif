@@ -11,8 +11,10 @@ use Psr\Log\LoggerInterface;
 
 class SSOConfigurationQueryResolver implements QueryInterface
 {
-    public function __construct(protected AbstractSSOConfigurationRepository $ssoConfigurationRepository, protected LoggerInterface $logger)
-    {
+    public function __construct(
+        protected AbstractSSOConfigurationRepository $ssoConfigurationRepository,
+        protected LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Arg $args): Connection

@@ -8,8 +8,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CommentEditUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(Comment $comment): string

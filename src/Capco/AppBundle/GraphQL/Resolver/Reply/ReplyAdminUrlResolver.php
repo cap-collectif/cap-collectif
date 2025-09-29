@@ -9,8 +9,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ReplyAdminUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(Reply $reply): ?string

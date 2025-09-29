@@ -18,8 +18,12 @@ class UpdateRequirementMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly RequirementRepository $requirementRepository, private readonly UserRequirementRepository $userRequirementRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly RequirementRepository $requirementRepository,
+        private readonly UserRequirementRepository $userRequirementRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input, User $user): array

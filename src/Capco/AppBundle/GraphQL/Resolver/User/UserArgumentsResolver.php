@@ -16,8 +16,11 @@ class UserArgumentsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private UserArgumentsDataLoader $userArgumentsDataLoader, private ArgumentRepository $argumentRepository, private PromiseAdapterInterface $promiseAdapter)
-    {
+    public function __construct(
+        private UserArgumentsDataLoader $userArgumentsDataLoader,
+        private ArgumentRepository $argumentRepository,
+        private PromiseAdapterInterface $promiseAdapter
+    ) {
     }
 
     public function __invoke(

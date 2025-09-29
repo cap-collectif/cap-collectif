@@ -17,8 +17,13 @@ class CropMediaMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly MediaRepository $mediaRepository, private readonly MediaProvider $mediaProvider, private readonly CacheManager $cacheManager, private readonly FilterManager $filterManager, private readonly DataManager $dataManager)
-    {
+    public function __construct(
+        private readonly MediaRepository $mediaRepository,
+        private readonly MediaProvider $mediaProvider,
+        private readonly CacheManager $cacheManager,
+        private readonly FilterManager $filterManager,
+        private readonly DataManager $dataManager
+    ) {
     }
 
     public function __invoke(Argument $args): array

@@ -7,8 +7,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class RegistrationScriptQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteParameterRepository $siteParameterRepository)
-    {
+    public function __construct(
+        private readonly SiteParameterRepository $siteParameterRepository
+    ) {
     }
 
     public function __invoke(): string

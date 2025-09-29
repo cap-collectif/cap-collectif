@@ -24,8 +24,14 @@ class AddSourceVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SourceRepository $sourceRepo, private readonly SourceVoteRepository $sourceVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SourceRepository $sourceRepo,
+        private readonly SourceVoteRepository $sourceVoteRepo,
+        private readonly RedisStorageHelper $redisStorageHelper,
+        private readonly StepRequirementsResolver $stepRequirementsResolver,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

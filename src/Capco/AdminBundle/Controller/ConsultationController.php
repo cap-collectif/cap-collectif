@@ -19,8 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ConsultationController extends CRUDController
 {
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, private readonly ConsultationStepRepository $consultationStepRepository)
-    {
+    public function __construct(
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool,
+        private readonly ConsultationStepRepository $consultationStepRepository
+    ) {
         parent::__construct($breadcrumbsBuilder, $pool);
     }
 

@@ -12,8 +12,9 @@ class SettableOwnerResolver
 {
     final public const OWNER_NOT_FOUND = 'OWNER_NOT_FOUND';
 
-    public function __construct(private readonly GlobalIdResolver $resolver)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $resolver
+    ) {
     }
 
     public function __invoke(?string $ownerId, User $viewer): Owner

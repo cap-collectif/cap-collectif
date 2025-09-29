@@ -12,8 +12,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class EventDistrictsPersister
 {
-    public function __construct(private readonly EventDistrictPositionerRepository $districtPositionerRepository, private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EventDistrictPositionerRepository $districtPositionerRepository,
+        private readonly GlobalDistrictRepository $globalDistrictRepository,
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function persist(array $districtsIds, Event $event)

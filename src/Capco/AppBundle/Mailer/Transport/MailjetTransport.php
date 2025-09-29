@@ -12,8 +12,9 @@ class MailjetTransport implements \Swift_Transport
     private ?string $privateKey = null;
     private ?string $lastSentMessageId = null;
 
-    public function __construct(protected \Swift_Events_EventDispatcher $dispatcher)
-    {
+    public function __construct(
+        protected \Swift_Events_EventDispatcher $dispatcher
+    ) {
     }
 
     /**

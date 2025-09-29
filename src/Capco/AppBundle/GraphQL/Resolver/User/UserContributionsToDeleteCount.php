@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserContributionsToDeleteCount implements QueryInterface
 {
-    public function __construct(private readonly DeleteAccountMutation $deleteAccountMutation)
-    {
+    public function __construct(
+        private readonly DeleteAccountMutation $deleteAccountMutation
+    ) {
     }
 
     public function __invoke(User $user): int

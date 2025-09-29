@@ -10,8 +10,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class NewBackOfficeToggleEventSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public static function getSubscribedEvents(): array

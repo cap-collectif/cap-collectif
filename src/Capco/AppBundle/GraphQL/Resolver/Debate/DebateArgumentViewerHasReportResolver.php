@@ -11,8 +11,9 @@ class DebateArgumentViewerHasReportResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly ReportingRepository $repository)
-    {
+    public function __construct(
+        private readonly ReportingRepository $repository
+    ) {
     }
 
     public function __invoke(DebateArgument $debateArgument, $viewer): bool

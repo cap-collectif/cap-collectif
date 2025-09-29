@@ -10,8 +10,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ViewerIsMeetingRequirementsResolver implements QueryInterface
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver
+    ) {
     }
 
     public function __invoke(Argument $args, User $viewer): bool

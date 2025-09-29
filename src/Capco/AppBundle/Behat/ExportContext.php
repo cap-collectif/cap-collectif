@@ -28,8 +28,9 @@ class ExportContext implements Context
         'enclosure' => '"',
     ];
 
-    public function __construct(private readonly KernelInterface $kernel)
-    {
+    public function __construct(
+        private readonly KernelInterface $kernel
+    ) {
     }
 
     /**

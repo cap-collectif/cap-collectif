@@ -12,8 +12,10 @@ class QueryViewerAssignedProjectsToAnalyseQueryResolver implements QueryInterfac
 {
     use ResolverTrait;
 
-    public function __construct(private readonly LoggerInterface $logger, private readonly ProjectRepository $projectRepository)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly ProjectRepository $projectRepository
+    ) {
     }
 
     public function __invoke(Argument $args, $viewer): array

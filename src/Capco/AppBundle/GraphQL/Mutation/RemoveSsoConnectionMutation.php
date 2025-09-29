@@ -26,8 +26,16 @@ class RemoveSsoConnectionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly UserManagerInterface $userManager, private readonly UserPasswordEncoderInterface $passwordEncoder, private readonly Publisher $publisher, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly TokenStorageInterface $tokenStorage, private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler, private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly UserManagerInterface $userManager,
+        private readonly UserPasswordEncoderInterface $passwordEncoder,
+        private readonly Publisher $publisher,
+        private readonly LoggerInterface $logger,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler,
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requests): array

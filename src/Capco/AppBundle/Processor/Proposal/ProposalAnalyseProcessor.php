@@ -18,8 +18,12 @@ class ProposalAnalyseProcessor implements ProcessorInterface
     final public const TYPE_DECISION = 'decision';
     final public const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
 
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly ProposalAnalysisRepository $analysisRepository, private readonly ProposalNotifier $notifier, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository,
+        private readonly ProposalAnalysisRepository $analysisRepository,
+        private readonly ProposalNotifier $notifier,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function process(Message $message, array $options): bool

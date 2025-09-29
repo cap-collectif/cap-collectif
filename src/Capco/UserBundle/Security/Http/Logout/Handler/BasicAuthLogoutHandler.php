@@ -7,8 +7,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class BasicAuthLogoutHandler implements LogoutHandlerInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function handle(

@@ -16,8 +16,11 @@ class OpinionViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private OpinionVoteRepository $opinionVoteRepository, private OpinionVersionVoteRepository $versionVoteRepository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private OpinionVoteRepository $opinionVoteRepository,
+        private OpinionVersionVoteRepository $versionVoteRepository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(OpinionContributionInterface $contribution, $viewer): ?AbstractVote

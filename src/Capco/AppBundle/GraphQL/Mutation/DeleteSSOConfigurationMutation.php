@@ -14,8 +14,11 @@ class DeleteSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private AbstractSSOConfigurationRepository $repository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private AbstractSSOConfigurationRepository $repository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Arg $input): array

@@ -37,8 +37,17 @@ class CreateOpinionMutation implements MutationInterface
     final public const CONTRIBUTED_TOO_MANY_TIMES = 'CONTRIBUTED_TOO_MANY_TIMES';
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly ProjectRepository $projectRepository, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly ConsultationStepRepository $consultationStepRepository, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly OpinionRepository $opinionRepository, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly ProjectRepository $projectRepository,
+        private readonly OpinionTypeRepository $opinionTypeRepository,
+        private readonly ConsultationStepRepository $consultationStepRepository,
+        private readonly StepRequirementsResolver $stepRequirementsResolver,
+        private readonly OpinionRepository $opinionRepository,
+        private readonly Publisher $publisher,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

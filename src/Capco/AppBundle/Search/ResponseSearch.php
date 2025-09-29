@@ -23,8 +23,10 @@ use Elastica\ResultSet;
 
 class ResponseSearch extends Search
 {
-    public function __construct(Index $index, private readonly AbstractResponseRepository $responseRepository)
-    {
+    public function __construct(
+        Index $index,
+        private readonly AbstractResponseRepository $responseRepository
+    ) {
         parent::__construct($index);
         $this->type = 'response';
     }

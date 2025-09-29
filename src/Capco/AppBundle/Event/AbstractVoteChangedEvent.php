@@ -9,8 +9,10 @@ class AbstractVoteChangedEvent extends Event
 {
     protected $vote;
 
-    public function __construct(AbstractVote $vote, protected $action)
-    {
+    public function __construct(
+        AbstractVote $vote,
+        protected $action
+    ) {
         $this->vote = $vote;
     }
 

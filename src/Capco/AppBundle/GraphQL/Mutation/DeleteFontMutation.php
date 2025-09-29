@@ -14,8 +14,11 @@ class DeleteFontMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private FontManager $manager, private FontRepository $repository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private FontManager $manager,
+        private FontRepository $repository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Arg $input): array

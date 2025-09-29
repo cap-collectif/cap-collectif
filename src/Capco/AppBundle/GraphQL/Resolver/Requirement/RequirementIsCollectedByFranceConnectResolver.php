@@ -17,8 +17,10 @@ class RequirementIsCollectedByFranceConnectResolver implements QueryInterface
         FranceConnectAllowedData::EMAIL => Requirement::EMAIL_VERIFIED,
     ];
 
-    public function __construct(private readonly Manager $manager, private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver)
-    {
+    public function __construct(
+        private readonly Manager $manager,
+        private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver
+    ) {
     }
 
     public function __invoke(Requirement $requirement): bool

@@ -29,8 +29,15 @@ abstract class AbstractProposalStepMutation
     protected ?Project $project = null;
     protected ?AbstractStep $step = null;
 
-    public function __construct(protected EntityManagerInterface $entityManager, protected GlobalIdResolver $globalIdResolver, private readonly SelectionRepository $selectionRepository, private readonly ConnectionBuilderInterface $connectionBuilder, private readonly Publisher $publisher, private readonly Indexer $indexer, protected AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected GlobalIdResolver $globalIdResolver,
+        private readonly SelectionRepository $selectionRepository,
+        private readonly ConnectionBuilderInterface $connectionBuilder,
+        private readonly Publisher $publisher,
+        private readonly Indexer $indexer,
+        protected AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function isGranted(array $stepsIds, ?User $viewer, string $accessType): bool

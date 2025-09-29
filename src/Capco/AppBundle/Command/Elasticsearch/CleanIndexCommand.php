@@ -24,8 +24,10 @@ class CleanIndexCommand extends Command
         'wasteBasket' => ' 🗑️',
     ];
 
-    public function __construct(protected IndexBuilder $indexManager, private array $config)
-    {
+    public function __construct(
+        protected IndexBuilder $indexManager,
+        private array $config
+    ) {
         parent::__construct();
     }
 

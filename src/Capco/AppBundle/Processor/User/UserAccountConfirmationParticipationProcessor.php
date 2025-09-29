@@ -9,8 +9,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserAccountConfirmationParticipationProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly UserNotifier $notifier, private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserNotifier $notifier,
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     public function process(Message $message, array $options): bool

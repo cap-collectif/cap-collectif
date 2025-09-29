@@ -19,8 +19,17 @@ class ResetPasswordMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly SessionInterface $session, private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly UserManager $userManager, private readonly LoginManagerInterface $loginManager, private readonly UserPasswordEncoderInterface $userPasswordEncoder, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly string $firewallName)
-    {
+    public function __construct(
+        private readonly SessionInterface $session,
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly UserManager $userManager,
+        private readonly LoginManagerInterface $loginManager,
+        private readonly UserPasswordEncoderInterface $userPasswordEncoder,
+        private readonly TranslatorInterface $translator,
+        private readonly LoggerInterface $logger,
+        private readonly string $firewallName
+    ) {
     }
 
     public function __invoke(Argument $args): array

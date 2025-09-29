@@ -12,8 +12,9 @@ class CreateCASSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(Argument $input): array

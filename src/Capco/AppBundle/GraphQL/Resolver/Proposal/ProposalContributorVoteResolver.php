@@ -17,8 +17,12 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalContributorVoteResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository)
-    {
+    public function __construct(
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository
+    ) {
     }
 
     public function __invoke(Proposal $proposal, Arg $args, ?User $viewer = null): ?AbstractVote

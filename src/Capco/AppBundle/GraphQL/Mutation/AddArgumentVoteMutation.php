@@ -24,8 +24,14 @@ class AddArgumentVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ArgumentRepository $argumentRepo, private readonly ArgumentVoteRepository $argumentVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ArgumentRepository $argumentRepo,
+        private readonly ArgumentVoteRepository $argumentVoteRepo,
+        private readonly RedisStorageHelper $redisStorageHelper,
+        private readonly StepRequirementsResolver $stepRequirementsResolver,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

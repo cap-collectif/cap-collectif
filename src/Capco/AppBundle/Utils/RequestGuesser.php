@@ -7,8 +7,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestGuesser implements RequestGuesserInterface
 {
-    public function __construct(private readonly RequestStack $requestStack)
-    {
+    public function __construct(
+        private readonly RequestStack $requestStack
+    ) {
     }
 
     public function getClientIp(): ?string

@@ -19,8 +19,10 @@ class RecalculateUsersCountersCommand extends Command
 
     protected static $defaultName = 'capco:compute:users-counters';
 
-    public function __construct(public EntityManagerInterface $em, public ClientInterface $redis)
-    {
+    public function __construct(
+        public EntityManagerInterface $em,
+        public ClientInterface $redis
+    ) {
         parent::__construct();
     }
 

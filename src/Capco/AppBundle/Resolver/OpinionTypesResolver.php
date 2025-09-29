@@ -12,8 +12,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionTypesResolver
 {
-    public function __construct(private readonly OpinionTypeRepository $opinionTypeRepo, private readonly OpinionRepository $opinionRepo, private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly OpinionTypeRepository $opinionTypeRepo,
+        private readonly OpinionRepository $opinionRepo,
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function findByStepAndSlug(ConsultationStep $step, string $slug): OpinionType

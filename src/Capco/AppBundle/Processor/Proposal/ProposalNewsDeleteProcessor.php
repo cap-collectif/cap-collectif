@@ -10,8 +10,11 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalNewsDeleteProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly LoggerInterface $logger, private readonly PostRepository $posRepository, private readonly ProposalNewsNotifier $notifier)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly PostRepository $posRepository,
+        private readonly ProposalNewsNotifier $notifier
+    ) {
     }
 
     public function process(Message $message, array $options): bool

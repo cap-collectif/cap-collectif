@@ -17,8 +17,11 @@ class DuplicateProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly CloneStepService $cloneStepService)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly CloneStepService $cloneStepService
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer)

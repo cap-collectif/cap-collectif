@@ -21,8 +21,11 @@ class KickFromOrganizationMutation implements MutationInterface
     final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     final public const USER_NOT_MEMBER = 'USER_NOT_MEMBER';
 
-    public function __construct(private readonly GlobalIdResolver $resolver, private readonly EntityManagerInterface $manager, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $resolver,
+        private readonly EntityManagerInterface $manager,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

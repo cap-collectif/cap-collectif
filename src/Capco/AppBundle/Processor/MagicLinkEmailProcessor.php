@@ -9,8 +9,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class MagicLinkEmailProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly UserRepository $userRepository, private readonly MagicLinkNotifier $notifier)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly MagicLinkNotifier $notifier
+    ) {
     }
 
     public function process(Message $message, array $options): bool

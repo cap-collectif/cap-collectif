@@ -23,8 +23,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommentController extends Controller
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly CommentResolver $commentResolver, private readonly TranslatorInterface $translator, private readonly EntityManagerInterface $em, private readonly SessionInterface $session, private readonly Manager $manager)
-    {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        private readonly CommentResolver $commentResolver,
+        private readonly TranslatorInterface $translator,
+        private readonly EntityManagerInterface $em,
+        private readonly SessionInterface $session,
+        private readonly Manager $manager
+    ) {
     }
 
     /**

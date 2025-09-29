@@ -72,8 +72,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadProdDataCommand extends Command
 {
-    public function __construct(string $name, private readonly ManagerRegistry $doctrine)
-    {
+    public function __construct(
+        string $name,
+        private readonly ManagerRegistry $doctrine
+    ) {
         parent::__construct($name);
     }
 

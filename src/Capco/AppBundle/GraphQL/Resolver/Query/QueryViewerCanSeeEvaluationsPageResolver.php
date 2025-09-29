@@ -13,8 +13,12 @@ class QueryViewerCanSeeEvaluationsPageResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private Manager $toggleManager, private ProposalAnalystRepository $analystRepo, private ProposalSupervisorRepository $supervisorRepo, private ProposalDecisionMakerRepository $decisionMakerRepo)
-    {
+    public function __construct(
+        private Manager $toggleManager,
+        private ProposalAnalystRepository $analystRepo,
+        private ProposalSupervisorRepository $supervisorRepo,
+        private ProposalDecisionMakerRepository $decisionMakerRepo
+    ) {
     }
 
     /**

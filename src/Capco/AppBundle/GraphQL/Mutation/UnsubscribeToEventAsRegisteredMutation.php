@@ -16,8 +16,11 @@ class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly EventRegistrationRepository $eventRegistrationRepository)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EventRegistrationRepository $eventRegistrationRepository
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

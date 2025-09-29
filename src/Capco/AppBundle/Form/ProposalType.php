@@ -21,8 +21,9 @@ use Symfony\Component\Validator\Constraints\Valid;
  */
 class ProposalType extends AbstractType
 {
-    public function __construct(protected Manager $toggleManager)
-    {
+    public function __construct(
+        protected Manager $toggleManager
+    ) {
     }
 
     /**

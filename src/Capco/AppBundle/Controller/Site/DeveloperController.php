@@ -23,8 +23,10 @@ class DeveloperController extends Controller
 {
     final public const CACHE_KEY = 'DeveloperController';
 
-    public function __construct(private readonly AdapterInterface $cache, private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly AdapterInterface $cache,
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     /**

@@ -17,8 +17,11 @@ class UpdateOauth2SSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly Oauth2SSOConfigurationRepository $repository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly Oauth2SSOConfigurationRepository $repository
+    ) {
     }
 
     public function __invoke(Argument $input): array

@@ -13,8 +13,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly ProposalVotesDataLoader $proposalVotesDataLoader,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(

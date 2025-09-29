@@ -11,8 +11,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ContributionsReconcilier
 {
-    public function __construct(protected EntityManagerInterface $em)
-    {
+    public function __construct(
+        protected EntityManagerInterface $em
+    ) {
     }
 
     public function updateParticipantInfos(Participant $existingParticipant, Participant $newParticipant): void

@@ -22,8 +22,10 @@ abstract class AbstractImportCsvCommand extends Command
     protected string $delimiter = ';';
     protected bool $dryRun = false;
 
-    public function __construct(string $name, protected ConvertCsvToArray $csvReader)
-    {
+    public function __construct(
+        string $name,
+        protected ConvertCsvToArray $csvReader
+    ) {
         parent::__construct($name);
     }
 

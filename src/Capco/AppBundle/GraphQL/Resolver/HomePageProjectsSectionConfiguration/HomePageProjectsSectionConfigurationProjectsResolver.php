@@ -12,8 +12,10 @@ use Psr\Log\LoggerInterface;
 
 class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInterface
 {
-    public function __construct(private readonly ProjectRepository $projectRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ProjectRepository $projectRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Section $section): ConnectionInterface

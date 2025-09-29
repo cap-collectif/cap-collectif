@@ -13,8 +13,10 @@ class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FacebookSSOConfigurationRepository $repository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FacebookSSOConfigurationRepository $repository
+    ) {
     }
 
     public function __invoke(Argument $input): array

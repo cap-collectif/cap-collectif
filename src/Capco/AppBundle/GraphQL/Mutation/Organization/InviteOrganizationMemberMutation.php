@@ -33,8 +33,17 @@ class InviteOrganizationMemberMutation implements MutationInterface
     final public const USER_ALREADY_INVITED = 'USER_ALREADY_INVITED';
     final public const USER_NOT_ONLY_ROLE_USER = 'USER_NOT_ONLY_ROLE_USER';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly UserRepository $userRepository, private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository, private readonly TokenGeneratorInterface $tokenGenerator, private readonly TranslatorInterface $translator, private readonly SiteParameterResolver $siteParameter, private readonly Publisher $publisher, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly UserRepository $userRepository,
+        private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly TranslatorInterface $translator,
+        private readonly SiteParameterResolver $siteParameter,
+        private readonly Publisher $publisher,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

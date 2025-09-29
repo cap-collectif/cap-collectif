@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CarrouselConfigurationResolver implements QueryInterface
 {
-    public function __construct(private readonly SectionRepository $sectionRepository)
-    {
+    public function __construct(
+        private readonly SectionRepository $sectionRepository
+    ) {
     }
 
     public function __invoke(Argument $argument): ?object

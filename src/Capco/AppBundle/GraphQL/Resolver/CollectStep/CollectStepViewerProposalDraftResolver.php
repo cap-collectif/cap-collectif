@@ -16,8 +16,11 @@ class CollectStepViewerProposalDraftResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ProposalFormRepository $proposalFormRepository, private ProposalRepository $proposalRepository, private readonly ConnectionBuilderInterface $builder)
-    {
+    public function __construct(
+        private ProposalFormRepository $proposalFormRepository,
+        private ProposalRepository $proposalRepository,
+        private readonly ConnectionBuilderInterface $builder
+    ) {
     }
 
     public function __invoke(CollectStep $step, $viewer, Argument $args): ConnectionInterface

@@ -12,8 +12,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class SourceVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly VoteSearch $voteSearch)
-    {
+    public function __construct(
+        private readonly VoteSearch $voteSearch
+    ) {
     }
 
     public function __invoke(Source $source, ?Arg $args = null): ConnectionInterface

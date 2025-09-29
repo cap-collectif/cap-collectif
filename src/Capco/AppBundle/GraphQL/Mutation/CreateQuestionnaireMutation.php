@@ -20,8 +20,13 @@ class CreateQuestionnaireMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger,
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

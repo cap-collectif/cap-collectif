@@ -18,8 +18,12 @@ class DeleteAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private Indexer $indexer, private Publisher $publisher, private GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private Indexer $indexer,
+        private Publisher $publisher,
+        private GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $args): array

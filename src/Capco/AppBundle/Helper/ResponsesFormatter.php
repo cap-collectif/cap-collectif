@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ResponsesFormatter
 {
-    public function __construct(protected AbstractQuestionRepository $questionRepo)
-    {
+    public function __construct(
+        protected AbstractQuestionRepository $questionRepo
+    ) {
     }
 
     public function format(array $responses): array

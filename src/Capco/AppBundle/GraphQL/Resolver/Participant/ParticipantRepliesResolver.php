@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ParticipantRepliesResolver implements QueryInterface
 {
-    public function __construct(private readonly ReplyRepository $replyRepository)
-    {
+    public function __construct(
+        private readonly ReplyRepository $replyRepository
+    ) {
     }
 
     public function __invoke(Participant $participant, ?Argument $args = null): ConnectionInterface

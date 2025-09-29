@@ -15,8 +15,9 @@ use Nelmio\Alice\IsAServiceTrait;
 {
     use IsAServiceTrait;
 
-    public function __construct(private readonly LoaderInterface $decoratedLoader)
-    {
+    public function __construct(
+        private readonly LoaderInterface $decoratedLoader
+    ) {
     }
 
     /**

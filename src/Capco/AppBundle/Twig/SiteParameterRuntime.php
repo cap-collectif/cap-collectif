@@ -12,8 +12,11 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
 {
     final public const CACHE_KEY = 'getSiteParameterValue';
 
-    public function __construct(protected SiteParameterResolver $resolver, protected RedisCache $cache, protected RequestStack $requestStack)
-    {
+    public function __construct(
+        protected SiteParameterResolver $resolver,
+        protected RedisCache $cache,
+        protected RequestStack $requestStack
+    ) {
     }
 
     public function getSiteParameterValue(string $key)

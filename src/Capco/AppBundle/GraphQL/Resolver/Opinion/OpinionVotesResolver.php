@@ -15,8 +15,10 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OpinionVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly OpinionVoteRepository $opinionVoteRepository, private readonly OpinionVersionVoteRepository $versionVoteRepository)
-    {
+    public function __construct(
+        private readonly OpinionVoteRepository $opinionVoteRepository,
+        private readonly OpinionVersionVoteRepository $versionVoteRepository
+    ) {
     }
 
     public function __invoke(

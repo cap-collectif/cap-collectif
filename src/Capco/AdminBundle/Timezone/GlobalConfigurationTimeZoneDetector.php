@@ -7,8 +7,9 @@ use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
 class GlobalConfigurationTimeZoneDetector implements TimezoneDetectorInterface
 {
-    public function __construct(protected SiteParameterResolver $resolver)
-    {
+    public function __construct(
+        protected SiteParameterResolver $resolver
+    ) {
     }
 
     public function getTimezone(): string

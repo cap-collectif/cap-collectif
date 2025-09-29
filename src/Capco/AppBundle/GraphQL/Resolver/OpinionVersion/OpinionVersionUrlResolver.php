@@ -12,8 +12,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionVersionUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(OpinionVersion $version): string

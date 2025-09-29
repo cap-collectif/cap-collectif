@@ -9,8 +9,10 @@ class PantherServiceCaller
     private const PARAMETER_KEY_TOKEN = 'capco-token';
     private const PARAMETER_KEY_URL = 'url';
 
-    public function __construct(private readonly string $pantherUrl, private readonly string $pantherToken)
-    {
+    public function __construct(
+        private readonly string $pantherUrl,
+        private readonly string $pantherToken
+    ) {
     }
 
     public function completeArticle(DebateArticle $debateArticle): DebateArticle

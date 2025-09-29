@@ -9,8 +9,10 @@ class ProjectKeyDataloader
 {
     private $projectKey;
 
-    public function __construct(private readonly SiteParameterRepository $siteParamRepository, private readonly Manager $toggle)
-    {
+    public function __construct(
+        private readonly SiteParameterRepository $siteParamRepository,
+        private readonly Manager $toggle
+    ) {
     }
 
     public function loadKey(): ?string

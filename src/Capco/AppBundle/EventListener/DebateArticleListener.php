@@ -12,8 +12,10 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DebateArticleListener
 {
-    public function __construct(private readonly Publisher $publisher, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly Publisher $publisher,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function postPersist(DebateArticle $entity, LifecycleEventArgs $args): void

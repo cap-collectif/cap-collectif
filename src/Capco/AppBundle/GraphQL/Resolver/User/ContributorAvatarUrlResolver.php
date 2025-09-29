@@ -9,8 +9,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ContributorAvatarUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly MediaUrlResolver $urlResolver)
-    {
+    public function __construct(
+        private readonly MediaUrlResolver $urlResolver
+    ) {
     }
 
     public function __invoke(ContributorInterface|Author $contributor): ?string

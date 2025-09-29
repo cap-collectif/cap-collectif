@@ -20,8 +20,13 @@ class UnfollowProposalMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FollowerRepository $followerRepository, private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader, private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FollowerRepository $followerRepository,
+        private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
+        private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $args, User $user): array

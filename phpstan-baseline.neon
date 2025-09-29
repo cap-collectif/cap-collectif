@@ -11476,6 +11476,21 @@ parameters:
 			path: src/Capco/AppBundle/Command/ExportAnalysisCSVCommand.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ExportCollectAndSelectionContributionsCommand\\:\\:\\$exportRegenerationService is never read, only written\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportCollectAndSelectionContributionsCommand.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ExportCollectAndSelectionContributionsCommand\\:\\:\\$proposalCollectVoteRepository is never read, only written\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportCollectAndSelectionContributionsCommand.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ExportCollectAndSelectionContributionsCommand\\:\\:\\$proposalSelectionVote is never read, only written\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportCollectAndSelectionContributionsCommand.php
+
+		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ExportDebateCommand.php
@@ -12366,77 +12381,7 @@ parameters:
 			path: src/Capco/AppBundle/Command/RecalculateUsersCountersCommand.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:createDatabase\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:createSchema\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:dropDatabase\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:executeMigrations\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:loadFixtures\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:loadFixtures\\(\\) has parameter \\$env with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:loadToggles\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:mockMigrations\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:populateElasticsearch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:recalculateCounters\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:runCommands\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:runCommands\\(\\) has parameter \\$commands with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:runCommands\\(\\) has parameter \\$output with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ReinitCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ReinitCommand\\:\\:\\$env has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ReinitCommand.php
 
@@ -13534,21 +13479,6 @@ parameters:
 			message: "#^Right side of \\|\\| is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/DataCollector/GraphQLCollector.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\DataFixtures\\\\ORM\\\\CustomOrderFilesLocator\\:\\:installBenchmarkFixtures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/DataFixtures/ORM/CustomOrderFilesLocator.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\DataFixtures\\\\ORM\\\\CustomOrderFilesLocator\\:\\:installDevFixtures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/DataFixtures/ORM/CustomOrderFilesLocator.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\DataFixtures\\\\ORM\\\\CustomOrderFilesLocator\\:\\:installProdFixtures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/DataFixtures/ORM/CustomOrderFilesLocator.php
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\DataFixtures\\\\ORM\\\\CustomOrderFilesLocator\\:\\:\\$decoratedFixtureLocator is never read, only written\\.$#"
@@ -16184,11 +16114,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\LogicJump\\:\\:\\$position has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/LogicJump.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MailingList\\:\\:setUsers\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MailingList.php
 
 		-
 			message: "#^Access to an undefined property \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\MapToken\\)\\:\\:\\$updatedAt\\.$#"
@@ -22126,6 +22051,16 @@ parameters:
 			path: src/Capco/AppBundle/Form/AddQuestionFieldSubscriber.php
 
 		-
+			message: "#^Parameter \\$arrayHydrator of method Capco\\\\AppBundle\\\\Form\\\\AddQuestionFieldSubscriber\\:\\:__construct\\(\\) has invalid type pmill\\\\Doctrine\\\\Hydrator\\\\ArrayHydrator\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Form/AddQuestionFieldSubscriber.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Form\\\\AddQuestionFieldSubscriber\\:\\:\\$arrayHydrator has unknown class pmill\\\\Doctrine\\\\Hydrator\\\\ArrayHydrator as its type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Form/AddQuestionFieldSubscriber.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ApiQuestionChoiceType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ApiQuestionChoiceType.php
@@ -22982,6 +22917,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\QuestionnaireAbstractQuestionType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Form/QuestionnaireAbstractQuestionType.php
+
+		-
+			message: "#^Parameter \\$arrayHydrator of method Capco\\\\AppBundle\\\\Form\\\\QuestionnaireAbstractQuestionType\\:\\:__construct\\(\\) has invalid type pmill\\\\Doctrine\\\\Hydrator\\\\ArrayHydrator\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/QuestionnaireAbstractQuestionType.php
 
@@ -25476,11 +25416,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteRepliesMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteRepliesMutation\\:\\:deleteReply\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteRepliesMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteRepliesMutation\\:\\:isGranted\\(\\) has parameter \\$replyIds with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteRepliesMutation.php
@@ -26887,11 +26822,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ToggleFeatureMutation\\:\\:__invoke\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ToggleFeatureMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ToggleFeatureMutation.php
 
@@ -31921,11 +31851,6 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Message/Organization/InvitationMessage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Organization\\\\InvitationMessage\\:\\:mockData\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Organization/InvitationMessage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Participant\\\\ParticipantConfirmEmailMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
@@ -34176,16 +34101,6 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/FollowerNotifier.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\GlobalDistrictFollowerNotifier\\:\\:onNewProjectInDistrict\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/GlobalDistrictFollowerNotifier.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\Mediator\\\\MediatorNotifier\\:\\:onMediatorAddNewParticipant\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/Mediator/MediatorNotifier.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\OpinionNotifier\\:\\:onCreation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/OpinionNotifier.php
@@ -35152,11 +35067,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\CollectStepRepository\\:\\:getIsEnabledQueryBuilder\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/CollectStepRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\CollectStepRepository\\:\\:getOneBySlugAndProjectSlug\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/CollectStepRepository.php
 
@@ -36187,11 +36097,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository\\:\\:findPaginatedByOwner\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/MailingListRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository\\:\\:getMailingListByUser\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/MailingListRepository.php
 
@@ -38059,11 +37964,6 @@ parameters:
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/QuestionnaireStepRepository.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\RankingStepRepository\\:\\:getOneBySlugAndProjectSlug\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\RankingStep\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/RankingStepRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"

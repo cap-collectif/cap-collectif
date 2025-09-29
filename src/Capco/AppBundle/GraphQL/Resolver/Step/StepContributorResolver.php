@@ -18,8 +18,13 @@ use Psr\Log\LoggerInterface;
 
 class StepContributorResolver implements QueryInterface
 {
-    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ParticipantRepository $participantRepository)
-    {
+    public function __construct(
+        private readonly UserSearch $userSearch,
+        private readonly LoggerInterface $logger,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ParticipantRepository $participantRepository
+    ) {
     }
 
     public function __invoke(AbstractStep $step, Arg $args): ConnectionInterface

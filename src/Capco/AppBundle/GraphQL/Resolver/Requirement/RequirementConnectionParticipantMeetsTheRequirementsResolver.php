@@ -13,8 +13,10 @@ class RequirementConnectionParticipantMeetsTheRequirementsResolver implements Qu
 {
     use ResolverTrait;
 
-    public function __construct(private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
+        private ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(ConnectionInterface $connection, Argument $args): bool

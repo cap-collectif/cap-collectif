@@ -15,8 +15,11 @@ class PopulateIndexCommand extends Command
     protected $toggleManager;
     protected $indexer;
 
-    public function __construct(Manager $toggleManager, Indexer $indexer, private readonly Stopwatch $stopwatch)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        Indexer $indexer,
+        private readonly Stopwatch $stopwatch
+    ) {
         $this->toggleManager = $toggleManager;
         $this->indexer = $indexer;
         parent::__construct();

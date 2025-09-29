@@ -23,8 +23,11 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class AuthorableTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver, private readonly ReplyTypeResolver $replyTypeResolver, private readonly VoteTypeResolver $voteTypeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver,
+        private readonly ReplyTypeResolver $replyTypeResolver,
+        private readonly VoteTypeResolver $voteTypeResolver
+    ) {
     }
 
     public function __invoke($data)

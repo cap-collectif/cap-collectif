@@ -15,8 +15,11 @@ class DistrictMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $input, $viewer): array

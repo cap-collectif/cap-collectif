@@ -23,8 +23,13 @@ class AddVersionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private OpinionRepository $opinionRepo, private RedisStorageHelper $redisStorage, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FormFactoryInterface $formFactory,
+        private OpinionRepository $opinionRepo,
+        private RedisStorageHelper $redisStorage,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

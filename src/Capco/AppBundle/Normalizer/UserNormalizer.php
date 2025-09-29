@@ -47,8 +47,12 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
     private $_capcoProfileEdit;
     private $_allProjects;
 
-    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private Manager $manager, private ContributionSearch $contributionSearch)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private Manager $manager,
+        private ContributionSearch $contributionSearch
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

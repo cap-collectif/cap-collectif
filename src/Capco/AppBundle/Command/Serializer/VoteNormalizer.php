@@ -12,8 +12,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
 {
-    public function __construct(TranslatorInterface $translator, private readonly GeoIPReader $geoIPReader, private readonly DebateUrlResolver $debateUrlResolver)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        private readonly GeoIPReader $geoIPReader,
+        private readonly DebateUrlResolver $debateUrlResolver
+    ) {
         parent::__construct($translator);
     }
 

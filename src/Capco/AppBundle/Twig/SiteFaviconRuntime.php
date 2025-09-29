@@ -9,8 +9,11 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteFaviconRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(protected ContainerInterface $container, private readonly SiteImageRepository $repository, private readonly MediaProvider $provider)
-    {
+    public function __construct(
+        protected ContainerInterface $container,
+        private readonly SiteImageRepository $repository,
+        private readonly MediaProvider $provider
+    ) {
     }
 
     public function getSiteFavicons(): ?array

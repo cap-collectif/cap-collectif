@@ -9,8 +9,9 @@ class ModerationTokenListener
 {
     final public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ModerableTrait';
 
-    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator)
-    {
+    public function __construct(
+        private readonly TokenGeneratorInterface $tokenGenerator
+    ) {
     }
 
     public function preFlush(PreFlushEventArgs $args)

@@ -14,8 +14,10 @@ class UpdateRedirectIOProjectIdMutation implements MutationInterface
     use MutationTrait;
     private const REDIRECTION_IO_PROJECT_ID_PARAM_KEY = 'redirectionio.project.id';
 
-    public function __construct(private SiteParameterRepository $siteParameterRepository, private EntityManagerInterface $em)
-    {
+    public function __construct(
+        private SiteParameterRepository $siteParameterRepository,
+        private EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(Argument $args): array

@@ -16,8 +16,11 @@ class DeleteVersionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private OpinionVersionRepository $versionRepo, private RedisStorageHelper $redisStorage)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private OpinionVersionRepository $versionRepo,
+        private RedisStorageHelper $redisStorage
+    ) {
     }
 
     public function __invoke(Arg $input, User $user): array

@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class AuthorTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     public function __invoke($node)

@@ -16,8 +16,11 @@ class DeleteOpinionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private OpinionRepository $opinionRepo, private RedisStorageHelper $redisStorage)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private OpinionRepository $opinionRepo,
+        private RedisStorageHelper $redisStorage
+    ) {
     }
 
     public function __invoke(Arg $input, User $user): array

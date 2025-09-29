@@ -17,8 +17,10 @@ class UpdateCASSSOConfigurationMutation implements MutationInterface
 
     final public const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $resolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $resolver
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

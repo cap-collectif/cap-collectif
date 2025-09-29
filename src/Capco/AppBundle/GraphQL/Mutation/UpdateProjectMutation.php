@@ -22,8 +22,14 @@ class UpdateProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly ProjectAuthorTransformer $transformer, private readonly ProjectRepository $projectRepository, private readonly GlobalDistrictsPersister $districtsPersister)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger,
+        private readonly ProjectAuthorTransformer $transformer,
+        private readonly ProjectRepository $projectRepository,
+        private readonly GlobalDistrictsPersister $districtsPersister
+    ) {
     }
 
     public function __invoke(Argument $input): array

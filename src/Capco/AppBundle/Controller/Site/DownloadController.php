@@ -23,8 +23,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DownloadController extends Controller
 {
-    public function __construct(private readonly LoggerInterface $logger, private readonly UserIdentificationCodeListRepository $userIdentificationCodeListRepository, private readonly MediaProvider $mediaProvider)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly UserIdentificationCodeListRepository $userIdentificationCodeListRepository,
+        private readonly MediaProvider $mediaProvider
+    ) {
     }
 
     /**

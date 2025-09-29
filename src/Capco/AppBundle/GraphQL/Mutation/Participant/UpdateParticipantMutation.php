@@ -17,8 +17,11 @@ class UpdateParticipantMutation implements MutationInterface
     use FormValidationErrorsTraits;
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FormFactoryInterface $formFactory,
+        private ParticipantHelper $participantHelper
+    ) {
     }
 
     /**

@@ -18,8 +18,12 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class SamlAuthenticator extends AbstractGuardAuthenticator
 {
-    public function __construct(protected Simple $samlAuth, protected string $samlIdp, protected LoggerInterface $logger, private readonly SamlUserProvider $samlUserProvider)
-    {
+    public function __construct(
+        protected Simple $samlAuth,
+        protected string $samlIdp,
+        protected LoggerInterface $logger,
+        private readonly SamlUserProvider $samlUserProvider
+    ) {
     }
 
     public function supports(Request $request): bool

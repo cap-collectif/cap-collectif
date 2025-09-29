@@ -12,8 +12,9 @@ class IsViewerParticipatingAtEventResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository)
-    {
+    public function __construct(
+        private readonly EventRegistrationRepository $eventRegistrationRepository
+    ) {
     }
 
     public function __invoke(Event $event, $viewer): bool

@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalOfficialResponseResolver implements QueryInterface
 {
-    public function __construct(private readonly OfficialResponseRepository $repository)
-    {
+    public function __construct(
+        private readonly OfficialResponseRepository $repository
+    ) {
     }
 
     public function __invoke(Proposal $proposal, ?User $viewer = null): ?OfficialResponse

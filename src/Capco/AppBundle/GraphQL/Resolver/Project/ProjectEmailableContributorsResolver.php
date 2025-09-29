@@ -140,8 +140,9 @@ class ProjectEmailableContributorsResolver implements QueryInterface
         self::SQL_SELECTION_STEP_VOTES .
         ')';
 
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(Project $project, Argument $argument): ConnectionInterface

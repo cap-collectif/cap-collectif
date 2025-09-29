@@ -13,8 +13,9 @@ class ViewerStepVotesResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly ViewerProposalVotesDataLoader $dataLoader)
-    {
+    public function __construct(
+        private readonly ViewerProposalVotesDataLoader $dataLoader
+    ) {
     }
 
     public function __invoke(AbstractStep $step, $user, Argument $args): Promise

@@ -20,8 +20,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DecisionSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly SelectionRepository $selectionRepository, private readonly EntityManagerInterface $entityManager, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly SelectionRepository $selectionRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public static function getSubscribedEvents(): array

@@ -11,8 +11,9 @@ class SendConfirmationEmailParticipantMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender)
-    {
+    public function __construct(
+        private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender
+    ) {
     }
 
     /**

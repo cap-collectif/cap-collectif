@@ -12,8 +12,10 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class StepMediatorsResolver implements QueryInterface
 {
-    public function __construct(private readonly ConnectionBuilderInterface $connectionBuilder, private readonly MediatorRepository $mediatorRepository)
-    {
+    public function __construct(
+        private readonly ConnectionBuilderInterface $connectionBuilder,
+        private readonly MediatorRepository $mediatorRepository
+    ) {
     }
 
     public function __invoke(AbstractStep $step, Arg $args, User $viewer): ConnectionInterface

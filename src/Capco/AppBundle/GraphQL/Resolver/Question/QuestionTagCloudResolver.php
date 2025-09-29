@@ -12,8 +12,10 @@ class QuestionTagCloudResolver implements QueryInterface
 {
     final public const CACHE_KEY = 'questionTagCloudData';
 
-    public function __construct(private readonly ResponseSearch $responseSearch, private readonly RedisCache $cache)
-    {
+    public function __construct(
+        private readonly ResponseSearch $responseSearch,
+        private readonly RedisCache $cache
+    ) {
     }
 
     public function __invoke(AbstractQuestion $question, Argument $args): array

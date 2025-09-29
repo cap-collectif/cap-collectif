@@ -19,8 +19,11 @@ class CreateGlobalDistrictMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(protected LoggerInterface $logger, protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory)
-    {
+    public function __construct(
+        protected LoggerInterface $logger,
+        protected EntityManagerInterface $em,
+        protected FormFactoryInterface $formFactory
+    ) {
     }
 
     public function __invoke(Argument $input): array

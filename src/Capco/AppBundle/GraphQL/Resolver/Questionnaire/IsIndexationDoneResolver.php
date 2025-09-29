@@ -7,8 +7,9 @@ use Swarrot\SwarrotBundle\Broker\PeclFactory;
 
 class IsIndexationDoneResolver implements QueryInterface
 {
-    public function __construct(private readonly PeclFactory $peclFactory)
-    {
+    public function __construct(
+        private readonly PeclFactory $peclFactory
+    ) {
     }
 
     public function __invoke(): bool

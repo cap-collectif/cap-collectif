@@ -15,8 +15,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**

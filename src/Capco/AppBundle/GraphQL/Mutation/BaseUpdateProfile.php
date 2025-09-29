@@ -20,8 +20,12 @@ abstract class BaseUpdateProfile implements MutationInterface
     protected ?User $user = null;
     protected array $arguments = [];
 
-    public function __construct(protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory, protected LoggerInterface $logger, protected UserRepository $userRepository)
-    {
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected FormFactoryInterface $formFactory,
+        protected LoggerInterface $logger,
+        protected UserRepository $userRepository
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer)

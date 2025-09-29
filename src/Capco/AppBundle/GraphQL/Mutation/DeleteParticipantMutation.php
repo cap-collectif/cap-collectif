@@ -20,8 +20,12 @@ class DeleteParticipantMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private GlobalIdResolver $globalIdResolver, private MediatorParticipantStepRepository $mediatorParticipantStepRepository, private ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private GlobalIdResolver $globalIdResolver,
+        private MediatorParticipantStepRepository $mediatorParticipantStepRepository,
+        private ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

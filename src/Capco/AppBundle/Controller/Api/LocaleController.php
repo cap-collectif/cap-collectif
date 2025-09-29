@@ -17,8 +17,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocaleController extends AbstractController
 {
-    public function __construct(private readonly LocaleRepository $localeRepository, private readonly PageRepository $pageRepository, private readonly RouterInterface $router, private readonly SetUserDefaultLocaleMutation $userDefaultLocaleMutation, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly LocaleRepository $localeRepository,
+        private readonly PageRepository $pageRepository,
+        private readonly RouterInterface $router,
+        private readonly SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
+        private readonly TranslatorInterface $translator,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     /**

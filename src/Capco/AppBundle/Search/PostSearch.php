@@ -15,8 +15,10 @@ use Elastica\Query\Term;
 
 class PostSearch extends Search
 {
-    public function __construct(Index $index, private readonly PostRepository $postRepository)
-    {
+    public function __construct(
+        Index $index,
+        private readonly PostRepository $postRepository
+    ) {
         parent::__construct($index);
         $this->type = 'post';
     }

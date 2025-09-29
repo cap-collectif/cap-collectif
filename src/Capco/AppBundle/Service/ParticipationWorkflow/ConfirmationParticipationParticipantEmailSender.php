@@ -20,8 +20,17 @@ class ConfirmationParticipationParticipantEmailSender implements MutationInterfa
     public const EMAIL_ALREADY_CONFIRMED = 'EMAIL_ALREADY_CONFIRMED';
     public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly TokenGeneratorInterface $tokenGenerator, private readonly ParticipantHelper $participantHelper, private readonly EmailRateLimiter $emailRateLimiter, private readonly ParticipantConfirmNewEmailUrlResolver $participantConfirmNewEmailUrlResolver, private readonly KernelInterface $kernel, private readonly ParticipationCookieManager $participationCookieManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly Publisher $publisher,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly ParticipantHelper $participantHelper,
+        private readonly EmailRateLimiter $emailRateLimiter,
+        private readonly ParticipantConfirmNewEmailUrlResolver $participantConfirmNewEmailUrlResolver,
+        private readonly KernelInterface $kernel,
+        private readonly ParticipationCookieManager $participationCookieManager
+    ) {
     }
 
     /**

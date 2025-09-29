@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class EventParticipantConnectionEdgeRegisteredAtResolver implements QueryInterface
 {
-    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository)
-    {
+    public function __construct(
+        private readonly EventRegistrationRepository $eventRegistrationRepository
+    ) {
     }
 
     public function __invoke(Edge $edge): ?\DateTime

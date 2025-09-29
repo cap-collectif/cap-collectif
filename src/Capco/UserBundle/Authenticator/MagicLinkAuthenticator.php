@@ -21,8 +21,11 @@ class MagicLinkAuthenticator
 
     private ?string $redirectUrl = null;
 
-    public function __construct(private readonly UserEmailProvider $userProvider, private readonly ConfigFileSystem $filesystem, private readonly int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES)
-    {
+    public function __construct(
+        private readonly UserEmailProvider $userProvider,
+        private readonly ConfigFileSystem $filesystem,
+        private readonly int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES
+    ) {
     }
 
     /**

@@ -28,8 +28,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserDataFormType extends AbstractType
 {
-    public function __construct(private readonly Manager $toggleManager)
-    {
+    public function __construct(
+        private readonly Manager $toggleManager
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

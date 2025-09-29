@@ -15,8 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SendInBlueController extends AbstractController
 {
-    public function __construct(private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly EntityManagerInterface $entityManager, private readonly string $sendInBlueSecret, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $sendInBlueSecret,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     /**

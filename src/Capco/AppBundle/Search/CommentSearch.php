@@ -15,8 +15,10 @@ use Elastica\ResultSet;
 
 class CommentSearch extends Search
 {
-    public function __construct(Index $index, private readonly CommentRepository $commentRepository)
-    {
+    public function __construct(
+        Index $index,
+        private readonly CommentRepository $commentRepository
+    ) {
         parent::__construct($index);
         $this->type = 'comment';
         $this->index = $index;

@@ -19,8 +19,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OpinionController extends Controller
 {
-    public function __construct(private readonly LoggerInterface $logger, private readonly OpinionTypeRepository $repository)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly OpinionTypeRepository $repository
+    ) {
     }
 
     /**

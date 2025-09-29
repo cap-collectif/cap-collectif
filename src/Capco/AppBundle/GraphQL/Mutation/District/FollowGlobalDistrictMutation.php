@@ -21,8 +21,11 @@ class FollowGlobalDistrictMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly EntityManagerInterface $entityManager, private readonly FollowerRepository $followerRepository)
-    {
+    public function __construct(
+        private readonly GlobalDistrictRepository $globalDistrictRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FollowerRepository $followerRepository
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

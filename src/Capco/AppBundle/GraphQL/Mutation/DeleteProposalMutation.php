@@ -16,8 +16,14 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteProposalMutation implements MutationInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly RedisStorageHelper $redisHelper, private readonly Publisher $publisher, private readonly Indexer $indexer, private readonly ProposalFormProposalsDataLoader $dataloader, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly RedisStorageHelper $redisHelper,
+        private readonly Publisher $publisher,
+        private readonly Indexer $indexer,
+        private readonly ProposalFormProposalsDataLoader $dataloader,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(string $proposalId, User $user): array

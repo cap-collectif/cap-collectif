@@ -7,8 +7,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryNotificationsFromEmailResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteParameterRepository $repository)
-    {
+    public function __construct(
+        private readonly SiteParameterRepository $repository
+    ) {
     }
 
     public function __invoke(): ?string

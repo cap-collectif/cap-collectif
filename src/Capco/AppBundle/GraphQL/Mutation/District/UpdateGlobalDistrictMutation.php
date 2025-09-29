@@ -17,8 +17,12 @@ class UpdateGlobalDistrictMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory, protected LoggerInterface $logger, protected GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected FormFactoryInterface $formFactory,
+        protected LoggerInterface $logger,
+        protected GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $input, $viewer): array

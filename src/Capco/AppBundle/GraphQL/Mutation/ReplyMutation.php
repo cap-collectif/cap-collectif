@@ -11,8 +11,9 @@ class ReplyMutation
 {
     public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
-    public function __construct(private readonly ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation)
-    {
+    public function __construct(
+        private readonly ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
+    ) {
     }
 
     public function canReusePhone(Reply $reply, ?string $participantToken = null, ?User $viewer = null): bool

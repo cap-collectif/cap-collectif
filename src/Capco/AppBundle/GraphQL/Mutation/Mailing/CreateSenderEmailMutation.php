@@ -18,8 +18,10 @@ class CreateSenderEmailMutation implements MutationInterface
     final public const ALREADY_EXIST = 'ALREADY_EXIST';
     final public const INVALID_DOMAIN = 'INVALID_DOMAIN';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SenderEmailDomainRepository $domainRepository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SenderEmailDomainRepository $domainRepository
+    ) {
     }
 
     public function __invoke(Argument $input): array

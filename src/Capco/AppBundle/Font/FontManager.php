@@ -9,8 +9,11 @@ use Psr\Log\LoggerInterface;
 
 class FontManager
 {
-    public function __construct(private readonly FontRepository $repository, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly FontRepository $repository,
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function deleteFont(Font $toDelete): void

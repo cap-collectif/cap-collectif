@@ -24,8 +24,9 @@ class MandrillTransport implements Swift_Transport
     protected ?string $subAccount;
     private ?string $lastSentMessageId = null;
 
-    public function __construct(protected Swift_Events_EventDispatcher $dispatcher)
-    {
+    public function __construct(
+        protected Swift_Events_EventDispatcher $dispatcher
+    ) {
         $this->apiKey = null;
         $this->async = null;
         $this->subAccount = null;

@@ -10,8 +10,11 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ParticipantHelper
 {
-    public function __construct(private readonly ParticipantRepository $participantRepository, private readonly TokenGeneratorInterface $tokenGenerator, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly ParticipantRepository $participantRepository,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function getParticipantByToken(?string $token = null): ?Participant

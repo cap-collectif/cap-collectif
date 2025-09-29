@@ -8,8 +8,10 @@ class HybridResult
 {
     protected $result;
 
-    public function __construct(Result $result, protected $transformed = null)
-    {
+    public function __construct(
+        Result $result,
+        protected $transformed = null
+    ) {
         $this->result = $result;
     }
 

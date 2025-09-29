@@ -10,8 +10,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckCustomDomainValidator extends ConstraintValidator
 {
-    public function __construct(private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function validate($customDomain, Constraint $constraint)

@@ -12,8 +12,9 @@ class SourceViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private SourceVoteRepository $sourceVoteRepository)
-    {
+    public function __construct(
+        private SourceVoteRepository $sourceVoteRepository
+    ) {
     }
 
     public function __invoke(Source $source, $viewer): ?SourceVote

@@ -18,8 +18,10 @@ class ParticipationCookieManager
      */
     private array $keys = [];
 
-    public function __construct(private readonly Encryptor $encryptor, RequestStack $requestStack)
-    {
+    public function __construct(
+        private readonly Encryptor $encryptor,
+        RequestStack $requestStack
+    ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->keys = [self::REPLY_COOKIE, self::PARTICIPANT_COOKIE];
     }

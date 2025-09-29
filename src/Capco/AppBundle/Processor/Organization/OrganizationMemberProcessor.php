@@ -10,8 +10,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class OrganizationMemberProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly PendingOrganizationInvitationRepository $repository, private readonly OrganizationMemberNotifier $notifier)
-    {
+    public function __construct(
+        private readonly PendingOrganizationInvitationRepository $repository,
+        private readonly OrganizationMemberNotifier $notifier
+    ) {
     }
 
     public function process(Message $message, array $options): bool

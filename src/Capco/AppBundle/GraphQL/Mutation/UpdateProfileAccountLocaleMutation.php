@@ -14,8 +14,9 @@ class UpdateProfileAccountLocaleMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly SetUserDefaultLocaleMutation $defaultLocaleMutation)
-    {
+    public function __construct(
+        private readonly SetUserDefaultLocaleMutation $defaultLocaleMutation
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array

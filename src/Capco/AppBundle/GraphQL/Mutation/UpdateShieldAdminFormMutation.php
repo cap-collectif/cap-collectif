@@ -25,8 +25,15 @@ class UpdateShieldAdminFormMutation implements MutationInterface
     final public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
     final public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
 
-    public function __construct(private readonly RedisCache $cache, private readonly SiteImageRepository $siteImageRepository, private readonly EntityManagerInterface $em, private readonly MediaRepository $mediaRepository, private readonly SiteParameterRepository $siteParameterRepository, private readonly Manager $toggleManager, private readonly UpdateSiteParameterMutation $updateSiteParameterMutation)
-    {
+    public function __construct(
+        private readonly RedisCache $cache,
+        private readonly SiteImageRepository $siteImageRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly MediaRepository $mediaRepository,
+        private readonly SiteParameterRepository $siteParameterRepository,
+        private readonly Manager $toggleManager,
+        private readonly UpdateSiteParameterMutation $updateSiteParameterMutation
+    ) {
     }
 
     public function __invoke(Argument $input): array

@@ -8,8 +8,9 @@ class PublishedLocalesDataloader
 {
     private array $publishedLocales = [];
 
-    public function __construct(private readonly LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        private readonly LocaleRepository $localeRepository
+    ) {
     }
 
     public function __invoke($viewer = null): array

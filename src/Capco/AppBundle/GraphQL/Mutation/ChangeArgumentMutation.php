@@ -25,8 +25,14 @@ class ChangeArgumentMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ArgumentRepository $argumentRepo, private readonly RedisStorageHelper $redisStorage, private readonly Publisher $publisher, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ArgumentRepository $argumentRepo,
+        private readonly RedisStorageHelper $redisStorage,
+        private readonly Publisher $publisher,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input, User $user): array

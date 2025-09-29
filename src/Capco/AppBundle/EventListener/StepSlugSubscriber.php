@@ -11,8 +11,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class StepSlugSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly SluggerInterface $slugger)
-    {
+    public function __construct(
+        private readonly SluggerInterface $slugger
+    ) {
     }
 
     public function getSubscribedEvents(): array

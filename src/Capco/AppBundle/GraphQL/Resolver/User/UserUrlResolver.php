@@ -9,8 +9,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UserUrlResolver implements QueryInterface
 {
-    public function __construct(protected RouterInterface $router)
-    {
+    public function __construct(
+        protected RouterInterface $router
+    ) {
     }
 
     public function __invoke(User $user): string

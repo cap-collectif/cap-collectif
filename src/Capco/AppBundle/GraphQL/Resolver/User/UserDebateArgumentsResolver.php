@@ -12,8 +12,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class UserDebateArgumentsResolver implements QueryInterface
 {
-    public function __construct(private readonly DebateSearch $debateSearch)
-    {
+    public function __construct(
+        private readonly DebateSearch $debateSearch
+    ) {
     }
 
     public function __invoke(?User $viewer, User $user, ?Argument $args = null): ConnectionInterface

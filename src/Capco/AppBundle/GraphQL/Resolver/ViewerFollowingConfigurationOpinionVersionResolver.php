@@ -10,8 +10,10 @@ use Psr\Log\LoggerInterface;
 
 class ViewerFollowingConfigurationOpinionVersionResolver implements QueryInterface
 {
-    public function __construct(private readonly FollowerRepository $followerRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly FollowerRepository $followerRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(OpinionVersion $opinion, User $viewer): ?string

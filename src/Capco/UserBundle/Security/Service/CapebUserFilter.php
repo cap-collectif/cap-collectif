@@ -22,8 +22,11 @@ class CapebUserFilter
 
     private readonly Client $client;
 
-    public function __construct(private readonly LoggerInterface $logger, private readonly UserTypeRepository $userTypeRepository, private readonly ?string $url)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly UserTypeRepository $userTypeRepository,
+        private readonly ?string $url
+    ) {
         $this->client = new Client();
     }
 

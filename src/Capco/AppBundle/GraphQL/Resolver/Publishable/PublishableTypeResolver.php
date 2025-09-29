@@ -16,8 +16,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class PublishableTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     public function __invoke(Publishable $node): Type

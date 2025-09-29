@@ -11,8 +11,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MenuItemLinkResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router, private readonly ValidatorInterface $validator)
-    {
+    public function __construct(
+        private readonly RouterInterface $router,
+        private readonly ValidatorInterface $validator
+    ) {
     }
 
     public function __invoke(

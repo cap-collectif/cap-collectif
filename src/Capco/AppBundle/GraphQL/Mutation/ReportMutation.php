@@ -22,8 +22,11 @@ class ReportMutation implements MutationInterface
     final public const REPORTABLE_NOT_FOUND = 'REPORTABLE_NOT_FOUND';
     final public const ALREADY_REPORTED = 'ALREADY_REPORTED';
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

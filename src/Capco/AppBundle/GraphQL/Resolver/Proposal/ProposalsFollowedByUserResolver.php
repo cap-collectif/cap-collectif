@@ -12,8 +12,10 @@ use Psr\Log\LoggerInterface;
 
 class ProposalsFollowedByUserResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(User $user, Arg $args): Connection

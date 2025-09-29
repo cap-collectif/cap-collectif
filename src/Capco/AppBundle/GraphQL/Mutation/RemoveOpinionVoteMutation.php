@@ -21,8 +21,15 @@ class RemoveOpinionVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private OpinionVoteRepository $opinionVoteRepo, private OpinionRepository $opinionRepo, private OpinionVersionVoteRepository $versionVoteRepo, private OpinionVersionRepository $versionRepo, private RedisStorageHelper $redisStorageHelper, private StepRequirementsResolver $stepRequirementsResolver)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private OpinionVoteRepository $opinionVoteRepo,
+        private OpinionRepository $opinionRepo,
+        private OpinionVersionVoteRepository $versionVoteRepo,
+        private OpinionVersionRepository $versionRepo,
+        private RedisStorageHelper $redisStorageHelper,
+        private StepRequirementsResolver $stepRequirementsResolver
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

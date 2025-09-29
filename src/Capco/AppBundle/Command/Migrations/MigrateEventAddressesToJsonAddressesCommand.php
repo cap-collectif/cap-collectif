@@ -14,8 +14,11 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
 {
     protected static $defaultName = 'capco:migrate:eventAddress-to-jsonAddress';
 
-    public function __construct(private readonly Connection $connection, private readonly Map $map, private readonly EventRepository $eventRepository)
-    {
+    public function __construct(
+        private readonly Connection $connection,
+        private readonly Map $map,
+        private readonly EventRepository $eventRepository
+    ) {
         parent::__construct();
     }
 

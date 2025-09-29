@@ -7,8 +7,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ContactFormQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly ContactFormRepository $contactFormRepository)
-    {
+    public function __construct(
+        private readonly ContactFormRepository $contactFormRepository
+    ) {
     }
 
     public function __invoke(): array

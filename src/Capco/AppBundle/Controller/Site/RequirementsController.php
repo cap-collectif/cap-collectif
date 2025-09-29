@@ -17,8 +17,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RequirementsController extends Controller
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly TranslatorInterface $translator, private readonly ContributionValidator $contributionValidator, private readonly StepUrlResolver $stepUrlResolver, private readonly ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly TranslatorInterface $translator,
+        private readonly ContributionValidator $contributionValidator,
+        private readonly StepUrlResolver $stepUrlResolver,
+        private readonly ParticipantHelper $participantHelper
+    ) {
     }
 
     /**

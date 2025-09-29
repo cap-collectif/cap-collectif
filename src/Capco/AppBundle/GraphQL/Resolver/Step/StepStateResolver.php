@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class StepStateResolver implements QueryInterface
 {
-    public function __construct(private readonly StepHelper $stepHelper)
-    {
+    public function __construct(
+        private readonly StepHelper $stepHelper
+    ) {
     }
 
     public function __invoke(AbstractStep $step): string

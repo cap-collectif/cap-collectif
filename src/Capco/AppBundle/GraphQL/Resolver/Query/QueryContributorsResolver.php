@@ -13,8 +13,10 @@ class QueryContributorsResolver implements QueryInterface
 {
     public $useElasticsearch = true;
 
-    public function __construct(private readonly UserSearch $userSearch, private readonly OccitanieClient $occitanieClient)
-    {
+    public function __construct(
+        private readonly UserSearch $userSearch,
+        private readonly OccitanieClient $occitanieClient
+    ) {
     }
 
     public function __invoke(?Arg $args = null): ConnectionInterface

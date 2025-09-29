@@ -20,8 +20,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class VoteTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     public function __invoke(AbstractVote $node): Type

@@ -16,8 +16,11 @@ class UpdateUsernameMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input, User $user): array

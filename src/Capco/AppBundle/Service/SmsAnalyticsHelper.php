@@ -10,8 +10,12 @@ use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 
 class SmsAnalyticsHelper
 {
-    public function __construct(private readonly SmsCreditRepository $smsCreditRepository, private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository, private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository, private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository)
-    {
+    public function __construct(
+        private readonly SmsCreditRepository $smsCreditRepository,
+        private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
+        private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
+        private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
+    ) {
     }
 
     public function getTotalCredits(): int

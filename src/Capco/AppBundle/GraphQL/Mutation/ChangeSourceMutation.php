@@ -21,8 +21,12 @@ class ChangeSourceMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly SourceRepository $sourceRepo, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly SourceRepository $sourceRepo,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

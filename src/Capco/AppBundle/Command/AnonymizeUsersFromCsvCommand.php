@@ -22,8 +22,9 @@ class AnonymizeUsersFromCsvCommand extends Command
 
     private readonly Connection $connection;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct();
         $this->connection = $this->entityManager->getConnection();
     }

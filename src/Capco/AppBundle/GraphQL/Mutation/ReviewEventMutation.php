@@ -24,8 +24,15 @@ class ReviewEventMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private GlobalIdResolver $globalIdResolver, private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private LoggerInterface $logger, private Indexer $indexer, private Publisher $publisher, private AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private GlobalIdResolver $globalIdResolver,
+        private EntityManagerInterface $em,
+        private FormFactoryInterface $formFactory,
+        private LoggerInterface $logger,
+        private Indexer $indexer,
+        private Publisher $publisher,
+        private AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Arg $input, User $reviewer): array

@@ -28,8 +28,16 @@ class AskProposalRevisionMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly ConnectionBuilderInterface $builder,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger,
+        private readonly Publisher $publisher,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input, $viewer): array

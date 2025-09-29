@@ -10,8 +10,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class StepExportStepUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(AbstractStep $step): string

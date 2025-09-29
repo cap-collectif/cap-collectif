@@ -335,8 +335,9 @@ abstract class BaseNormalizer
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,
     ];
 
-    public function __construct(protected TranslatorInterface $translator)
-    {
+    public function __construct(
+        protected TranslatorInterface $translator
+    ) {
     }
 
     /**

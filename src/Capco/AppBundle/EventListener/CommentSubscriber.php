@@ -14,8 +14,9 @@ class CommentSubscriber implements EventSubscriberInterface
     final public const NOTIFY_TO_ADMIN = 'admin';
     final public const NOTIFY_TO_AUTHOR = 'author';
 
-    public function __construct(private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly Publisher $publisher
+    ) {
     }
 
     public static function getSubscribedEvents(): array

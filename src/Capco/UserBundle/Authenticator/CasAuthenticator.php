@@ -16,8 +16,11 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class CasAuthenticator extends AbstractGuardAuthenticator
 {
-    public function __construct(protected LoggerInterface $logger, protected CasHandler $casHandler, private readonly CasUserProvider $casUserProvider)
-    {
+    public function __construct(
+        protected LoggerInterface $logger,
+        protected CasHandler $casHandler,
+        private readonly CasUserProvider $casUserProvider
+    ) {
     }
 
     public function supports(Request $request): bool

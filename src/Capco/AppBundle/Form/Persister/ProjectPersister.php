@@ -25,8 +25,16 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectPersister
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly ProjectAuthorTransformer $transformer, private readonly ProjectStepPersister $stepPersister, private readonly ProjectRepository $repository, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ProjectAuthorTransformer $transformer,
+        private readonly ProjectStepPersister $stepPersister,
+        private readonly ProjectRepository $repository,
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function persist(Argument $input, User $viewer, ?bool $editMode = false): Project

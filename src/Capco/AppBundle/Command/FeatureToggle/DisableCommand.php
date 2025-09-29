@@ -14,8 +14,9 @@ class DisableCommand extends Command
 {
     public $force;
 
-    public function __construct(private readonly ContainerInterface $container)
-    {
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {
         parent::__construct();
     }
 

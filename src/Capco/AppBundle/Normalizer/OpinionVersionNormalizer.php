@@ -16,8 +16,11 @@ class OpinionVersionNormalizer implements NormalizerInterface, SerializerAwareIn
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly ObjectNormalizer $normalizer, private readonly VoteSearch $voteSearch, private readonly ArgumentRepository $argumentRepository)
-    {
+    public function __construct(
+        private readonly ObjectNormalizer $normalizer,
+        private readonly VoteSearch $voteSearch,
+        private readonly ArgumentRepository $argumentRepository
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

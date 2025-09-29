@@ -21,8 +21,13 @@ class UpdateConsultationStepMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -26,8 +26,13 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ContributionValidator
 {
-    public function __construct(private readonly ReplyRepository $replyRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly EntityManagerInterface $em, private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly ReplyRepository $replyRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     public function validatePhoneReusability(ContributorInterface $contributor, ContributionInterface $contribution, AbstractStep $step): void

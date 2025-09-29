@@ -17,8 +17,11 @@ class QuestionnaireViewerRepliesResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ReplyRepository $replyRepo, private LoggerInterface $logger, private EntityManagerInterface $em)
-    {
+    public function __construct(
+        private ReplyRepository $replyRepo,
+        private LoggerInterface $logger,
+        private EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(

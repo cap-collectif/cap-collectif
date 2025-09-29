@@ -9,8 +9,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProjectVotableStepsResolver implements QueryInterface
 {
-    public function __construct(protected SelectionStepRepository $selectionStepRepository, protected CollectStepRepository $collectStepRepository)
-    {
+    public function __construct(
+        protected SelectionStepRepository $selectionStepRepository,
+        protected CollectStepRepository $collectStepRepository
+    ) {
     }
 
     public function __invoke(Project $project): iterable

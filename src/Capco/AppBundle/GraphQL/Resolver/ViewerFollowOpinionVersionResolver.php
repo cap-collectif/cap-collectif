@@ -11,8 +11,9 @@ class ViewerFollowOpinionVersionResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private UserRepository $userRepository)
-    {
+    public function __construct(
+        private UserRepository $userRepository
+    ) {
     }
 
     public function __invoke(OpinionVersion $version, $viewer): bool

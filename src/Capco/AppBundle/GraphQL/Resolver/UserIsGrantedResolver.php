@@ -8,8 +8,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class UserIsGrantedResolver
 {
-    public function __construct(protected TokenStorageInterface $tokenStorage, protected LoggerInterface $logger)
-    {
+    public function __construct(
+        protected TokenStorageInterface $tokenStorage,
+        protected LoggerInterface $logger
+    ) {
     }
 
     /**

@@ -21,8 +21,11 @@ class UnfollowGlobalDistrictMutation implements MutationInterface
     final public const DISTRICT_NOT_FOUND = 'DISTRICT_NOT_FOUND';
     final public const FOLLOWER_NOT_FOUND = 'FOLLOWER_NOT_FOUND';
 
-    public function __construct(private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly EntityManagerInterface $entityManager, private readonly FollowerRepository $followerRepository)
-    {
+    public function __construct(
+        private readonly GlobalDistrictRepository $globalDistrictRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FollowerRepository $followerRepository
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

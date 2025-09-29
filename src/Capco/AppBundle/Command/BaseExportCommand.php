@@ -14,8 +14,9 @@ abstract class BaseExportCommand extends Command
     final public const DEFAULT_CSV_DELIMITER = ';';
     protected bool $snapshot;
 
-    public function __construct(protected ExportUtils $exportUtils)
-    {
+    public function __construct(
+        protected ExportUtils $exportUtils
+    ) {
         parent::__construct();
     }
 

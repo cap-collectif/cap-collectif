@@ -8,8 +8,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class VoteMinValidator extends ConstraintValidator
 {
-    public function __construct(private readonly Manager $toggleManager)
-    {
+    public function __construct(
+        private readonly Manager $toggleManager
+    ) {
     }
 
     public function validate($form, Constraint $constraint)

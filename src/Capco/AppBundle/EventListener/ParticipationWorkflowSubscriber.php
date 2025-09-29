@@ -17,8 +17,13 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class ParticipationWorkflowSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly ReplyReconcilier $replyReconcilier, private readonly EntityManagerInterface $em, private readonly TokenStorageInterface $tokenStorage, private readonly ParticipantHelper $participantHelper, private readonly VotesReconcilier $votesReconcilier)
-    {
+    public function __construct(
+        private readonly ReplyReconcilier $replyReconcilier,
+        private readonly EntityManagerInterface $em,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly ParticipantHelper $participantHelper,
+        private readonly VotesReconcilier $votesReconcilier
+    ) {
     }
 
     public static function getSubscribedEvents(): array

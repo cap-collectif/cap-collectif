@@ -22,8 +22,13 @@ class ContactProposalAuthorMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly MailerService $mailerService, private readonly CaptchaChecker $captchaChecker, private readonly EmailValidator $emailValidator, private readonly RequestGuesserInterface $requestGuesser)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository,
+        private readonly MailerService $mailerService,
+        private readonly CaptchaChecker $captchaChecker,
+        private readonly EmailValidator $emailValidator,
+        private readonly RequestGuesserInterface $requestGuesser
+    ) {
     }
 
     public function __invoke(Argument $argument): array

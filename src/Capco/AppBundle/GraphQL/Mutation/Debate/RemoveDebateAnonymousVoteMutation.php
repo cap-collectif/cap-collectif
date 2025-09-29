@@ -31,8 +31,16 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
     final public const INVALID_HASH = 'INVALID_HASH';
     final public const NOT_VOTED = 'NOT_VOTED';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly DebateAnonymousVoteRepository $repository, private readonly DebateAnonymousArgumentRepository $argumentRepository, private readonly ValidatorInterface $validator, private readonly DebateAnonymousParticipationHashEncoder $encoder, private readonly GlobalIdResolver $globalIdResolver, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly DebateAnonymousVoteRepository $repository,
+        private readonly DebateAnonymousArgumentRepository $argumentRepository,
+        private readonly ValidatorInterface $validator,
+        private readonly DebateAnonymousParticipationHashEncoder $encoder,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input): array

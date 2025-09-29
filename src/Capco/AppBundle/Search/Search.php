@@ -31,8 +31,9 @@ abstract class Search
     ];
     protected $type;
 
-    public function __construct(protected Index $index)
-    {
+    public function __construct(
+        protected Index $index
+    ) {
     }
 
     public static function generateSeed(?RequestStack $requestStack = null, $viewer = null)

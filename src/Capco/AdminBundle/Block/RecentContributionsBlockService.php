@@ -14,8 +14,10 @@ use Twig\Environment;
 
 class RecentContributionsBlockService extends AbstractBlockService
 {
-    public function __construct(Environment $templating, protected RecentContributionsResolver $resolver)
-    {
+    public function __construct(
+        Environment $templating,
+        protected RecentContributionsResolver $resolver
+    ) {
         parent::__construct($templating);
     }
 

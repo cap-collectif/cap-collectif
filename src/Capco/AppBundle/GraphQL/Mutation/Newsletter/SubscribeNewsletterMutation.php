@@ -30,8 +30,18 @@ class SubscribeNewsletterMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'RegisterMutation';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    public function __construct(private readonly Manager $toggleManager, private readonly LoggerInterface $logger, private readonly CaptchaChecker $captchaChecker, private readonly RequestGuesserInterface $requestGuesser, private readonly FormFactoryInterface $formFactory, private EntityManagerInterface $entityManager, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly RateLimiter $rateLimiter, private readonly SendInBluePublisher $sendInBluePublisher)
-    {
+    public function __construct(
+        private readonly Manager $toggleManager,
+        private readonly LoggerInterface $logger,
+        private readonly CaptchaChecker $captchaChecker,
+        private readonly RequestGuesserInterface $requestGuesser,
+        private readonly FormFactoryInterface $formFactory,
+        private EntityManagerInterface $entityManager,
+        private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        private readonly UserRepository $userRepository,
+        private readonly RateLimiter $rateLimiter,
+        private readonly SendInBluePublisher $sendInBluePublisher
+    ) {
     }
 
     public function __invoke(Argument $args): array

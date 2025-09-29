@@ -16,8 +16,10 @@ class SiteParameterQueryResolver implements QueryInterface
     private $repository;
     private $translationRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, private readonly AuthorizationChecker $authorizationChecker)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        private readonly AuthorizationChecker $authorizationChecker
+    ) {
         $this->repository = $entityManager->getRepository(SiteParameter::class);
         $this->translationRepository = $entityManager->getRepository(
             SiteParameterTranslation::class

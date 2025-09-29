@@ -13,8 +13,10 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserGroupsResolver implements QueryInterface
 {
-    public function __construct(protected UserGroupRepository $userGroupRepo, protected GroupRepository $groupRepo)
-    {
+    public function __construct(
+        protected UserGroupRepository $userGroupRepo,
+        protected GroupRepository $groupRepo
+    ) {
     }
 
     public function __invoke(User $user, ?Argument $args = null): int|Promise|Connection

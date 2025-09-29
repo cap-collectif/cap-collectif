@@ -28,8 +28,9 @@ class StepAdminUrlResolver implements QueryInterface
         RankingStep::class => 'ranking-step',
     ];
 
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(AbstractStep $step, Argument $args): string

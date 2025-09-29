@@ -11,8 +11,10 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PostAuthorFactory
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     public function findOrCreatePostAuthors(Post $post, array $authorsId, User $viewer): array

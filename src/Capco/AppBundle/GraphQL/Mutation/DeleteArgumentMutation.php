@@ -17,8 +17,11 @@ class DeleteArgumentMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private ArgumentRepository $argumentRepo, private RedisStorageHelper $redisStorage)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private ArgumentRepository $argumentRepo,
+        private RedisStorageHelper $redisStorage
+    ) {
     }
 
     public function __invoke(Arg $input, User $user): array

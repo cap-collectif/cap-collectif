@@ -16,8 +16,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddStepService
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly StepFactory $stepFactory)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly StepFactory $stepFactory
+    ) {
     }
 
     public function addStep(Argument $input, User $viewer, string $stepType): array

@@ -31,8 +31,17 @@ class AddSmsCreditMutation implements MutationInterface
     final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
     private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SmsCreditRepository $smsCreditRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly FormFactoryInterface $formFactory, private readonly TwilioClient $twilioClient, private readonly SiteParameterResolver $siteParameterResolver, private readonly LoggerInterface $logger, private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SmsCreditRepository $smsCreditRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly TwilioClient $twilioClient,
+        private readonly SiteParameterResolver $siteParameterResolver,
+        private readonly LoggerInterface $logger,
+        private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

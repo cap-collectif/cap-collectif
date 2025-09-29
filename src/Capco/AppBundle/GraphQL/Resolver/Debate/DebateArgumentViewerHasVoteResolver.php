@@ -14,8 +14,10 @@ class DebateArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository, private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository)
-    {
+    public function __construct(
+        private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository,
+        private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository
+    ) {
     }
 
     public function __invoke(DebateArgumentInterface $debateArgument, $viewer): bool

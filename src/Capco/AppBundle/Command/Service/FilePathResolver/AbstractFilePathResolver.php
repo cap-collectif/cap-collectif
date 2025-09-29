@@ -6,8 +6,9 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 abstract class AbstractFilePathResolver implements FilePathResolverInterface
 {
-    public function __construct(protected string $exportDirectory)
-    {
+    public function __construct(
+        protected string $exportDirectory
+    ) {
     }
 
     abstract public function getSimplifiedExportPath(AbstractStep $step): string;

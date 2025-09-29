@@ -8,8 +8,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasEnoughCreditsToVoteValidator extends ConstraintValidator
 {
-    public function __construct(private readonly ProposalStepVotesResolver $resolver)
-    {
+    public function __construct(
+        private readonly ProposalStepVotesResolver $resolver
+    ) {
     }
 
     public function validate($object, Constraint $constraint)

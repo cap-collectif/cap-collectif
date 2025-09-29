@@ -20,8 +20,14 @@ class RemoveSourceVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SourceVoteRepository $sourceVoteRepo, private readonly SourceRepository $sourceRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SourceVoteRepository $sourceVoteRepo,
+        private readonly SourceRepository $sourceRepo,
+        private readonly RedisStorageHelper $redisStorageHelper,
+        private readonly StepRequirementsResolver $stepRequirementsResolver,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

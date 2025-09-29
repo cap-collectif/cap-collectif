@@ -13,8 +13,10 @@ class ChangeMapStyleMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private MapTokenRepository $repository, private EntityManagerInterface $em)
-    {
+    public function __construct(
+        private MapTokenRepository $repository,
+        private EntityManagerInterface $em
+    ) {
     }
 
     public function __invoke(Argument $input): array

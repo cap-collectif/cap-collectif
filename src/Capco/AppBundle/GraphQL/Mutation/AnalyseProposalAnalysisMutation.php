@@ -30,8 +30,16 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalysisRepository $analysisRepository, private readonly LoggerInterface $logger, private readonly ResponsesFormatter $responsesFormatter, private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ProposalAnalysisRepository $analysisRepository,
+        private readonly LoggerInterface $logger,
+        private readonly ResponsesFormatter $responsesFormatter,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Argument $args, $viewer)

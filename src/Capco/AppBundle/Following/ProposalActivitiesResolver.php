@@ -23,8 +23,17 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     final public const NOT_FOLLOWED = 0;
     final public const ACTIVITIES = ['comments', 'votes', 'lastStep', 'posts', 'officialResponses'];
 
-    public function __construct(protected FollowerRepository $followerRepository, protected ProposalRepository $proposalRepository, private readonly PostRepository $postRepository, protected ProposalFormRepository $proposalFormRepository, protected ProjectRepository $projectRepository, private readonly OfficialResponseRepository $officialResponseRepository, protected LoggerInterface $logger, protected RouterInterface $router, private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader)
-    {
+    public function __construct(
+        protected FollowerRepository $followerRepository,
+        protected ProposalRepository $proposalRepository,
+        private readonly PostRepository $postRepository,
+        protected ProposalFormRepository $proposalFormRepository,
+        protected ProjectRepository $projectRepository,
+        private readonly OfficialResponseRepository $officialResponseRepository,
+        protected LoggerInterface $logger,
+        protected RouterInterface $router,
+        private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
+    ) {
     }
 
     public function getFollowedByUserId(): array

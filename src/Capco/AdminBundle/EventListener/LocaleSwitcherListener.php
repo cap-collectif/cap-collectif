@@ -9,8 +9,9 @@ use Sonata\BlockBundle\Model\Block;
 
 class LocaleSwitcherListener
 {
-    public function __construct(private readonly Manager $toggleManager)
-    {
+    public function __construct(
+        private readonly Manager $toggleManager
+    ) {
     }
 
     public function onBlock(BlockEvent $event, $eventName)

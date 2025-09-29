@@ -16,8 +16,11 @@ class SendParticipantEmailWorkflowMutation implements MutationInterface
 
     public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
 
-    public function __construct(private UserRepository $userRepository, private MagicLinkEmailSender $magicLinkEmailSender, private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender)
-    {
+    public function __construct(
+        private UserRepository $userRepository,
+        private MagicLinkEmailSender $magicLinkEmailSender,
+        private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender
+    ) {
     }
 
     /**

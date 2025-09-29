@@ -17,8 +17,13 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly ObjectNormalizer $normalizer, private CollectStepProposalCountResolver $collectStepProposalCountResolver, private CollectStepContributorCountResolver $collectStepContributorCountResolver, private PromiseAdapterInterface $adapter, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ObjectNormalizer $normalizer,
+        private CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        private CollectStepContributorCountResolver $collectStepContributorCountResolver,
+        private PromiseAdapterInterface $adapter,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

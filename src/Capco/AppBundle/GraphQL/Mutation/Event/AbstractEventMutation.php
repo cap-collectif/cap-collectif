@@ -21,8 +21,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractEventMutation implements MutationInterface
 {
-    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected FormFactoryInterface $formFactory, protected Indexer $indexer, protected Publisher $publisher, protected AuthorizationCheckerInterface $authorizationChecker, protected TranslatorInterface $translator)
-    {
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected GlobalIdResolver $globalIdResolver,
+        protected FormFactoryInterface $formFactory,
+        protected Indexer $indexer,
+        protected Publisher $publisher,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected TranslatorInterface $translator
+    ) {
     }
 
     /**

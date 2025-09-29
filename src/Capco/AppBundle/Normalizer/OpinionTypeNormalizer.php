@@ -15,8 +15,11 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
 
-    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private OpinionTypesResolver $resolver)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private OpinionTypesResolver $resolver
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

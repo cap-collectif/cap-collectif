@@ -15,8 +15,11 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface, 
 {
     use SerializerAwareTrait;
 
-    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private MediaExtension $mediaExtension)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private MediaExtension $mediaExtension
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

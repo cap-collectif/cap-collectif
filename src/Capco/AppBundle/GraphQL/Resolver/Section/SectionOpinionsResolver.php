@@ -15,8 +15,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class SectionOpinionsResolver implements QueryInterface
 {
-    public function __construct(private readonly OpinionSearch $opinionSearch)
-    {
+    public function __construct(
+        private readonly OpinionSearch $opinionSearch
+    ) {
     }
 
     public function __invoke(

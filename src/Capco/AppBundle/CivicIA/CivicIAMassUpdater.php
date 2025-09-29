@@ -16,8 +16,11 @@ class CivicIAMassUpdater
     final public const NOT_FOUND = 'NOT_FOUND';
     final public const INVALID_JSON = 'INVALID_JSON';
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(string $json, User $viewer): array

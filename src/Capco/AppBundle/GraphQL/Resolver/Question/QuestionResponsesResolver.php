@@ -15,8 +15,10 @@ use Psr\Log\LoggerInterface;
 
 class QuestionResponsesResolver implements QueryInterface
 {
-    public function __construct(private readonly ResponseSearch $responseSearch, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly ResponseSearch $responseSearch,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(AbstractQuestion $question, Arg $args, $viewer)

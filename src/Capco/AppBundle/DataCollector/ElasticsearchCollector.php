@@ -9,8 +9,9 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 class ElasticsearchCollector extends DataCollector
 {
-    public function __construct(private readonly ElasticsearchLogger $logger)
-    {
+    public function __construct(
+        private readonly ElasticsearchLogger $logger
+    ) {
     }
 
     /**

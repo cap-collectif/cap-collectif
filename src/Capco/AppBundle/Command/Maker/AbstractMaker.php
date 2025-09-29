@@ -27,8 +27,9 @@ abstract class AbstractMaker extends Command
     protected $sourcePath;
     protected $className;
 
-    public function __construct(private readonly ContainerInterface $container)
-    {
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {
         parent::__construct();
     }
 

@@ -18,8 +18,11 @@ class RelaunchUserInvitationsMutation implements MutationInterface
     use MutationTrait;
     private const BATCH_SIZE = 800;
 
-    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator, private readonly UserInviteRepository $userInviteRepository, private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly UserInviteRepository $userInviteRepository,
+        private readonly EntityManagerInterface $entityManager
+    ) {
     }
 
     public function __invoke(Argument $args): array

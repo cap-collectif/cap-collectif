@@ -26,8 +26,14 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly OpinionTypeRepository $opinionTypeRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class EventParticipantConnectionEdgeRegisteredAnonymouslyResolver implements QueryInterface
 {
-    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository)
-    {
+    public function __construct(
+        private readonly EventRegistrationRepository $eventRegistrationRepository
+    ) {
     }
 
     public function __invoke(Edge $edge): bool

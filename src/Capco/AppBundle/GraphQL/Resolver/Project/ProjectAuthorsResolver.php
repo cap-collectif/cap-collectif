@@ -12,8 +12,12 @@ use Psr\Log\LoggerInterface;
 
 class ProjectAuthorsResolver implements QueryInterface
 {
-    public function __construct(private readonly UserRepository $userRepository, private readonly ProjectRepository $projectRepository, private readonly OrganizationRepository $organizationRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly OrganizationRepository $organizationRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $args, ?User $user): array

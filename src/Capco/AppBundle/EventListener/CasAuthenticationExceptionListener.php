@@ -16,8 +16,10 @@ use Twig\Error\SyntaxError;
  */
 class CasAuthenticationExceptionListener
 {
-    public function __construct(protected LoggerInterface $logger, private readonly Environment $templating)
-    {
+    public function __construct(
+        protected LoggerInterface $logger,
+        private readonly Environment $templating
+    ) {
     }
 
     /**

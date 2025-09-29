@@ -50,8 +50,14 @@ class ProjectStepPersister
         DebateStep::TYPE,
     ];
 
-    public function __construct(private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em, private readonly AbstractStepRepository $repository, private readonly ProjectAbstractStepRepository $pasRepository, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly EntityManagerInterface $em,
+        private readonly AbstractStepRepository $repository,
+        private readonly ProjectAbstractStepRepository $pasRepository,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function persist(Project $project, array $steps, User $viewer): void

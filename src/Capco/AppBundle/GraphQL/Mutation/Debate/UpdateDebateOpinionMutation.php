@@ -23,8 +23,13 @@ class UpdateDebateOpinionMutation implements MutationInterface
     final public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Arg $input): array

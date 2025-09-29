@@ -18,8 +18,11 @@ class HandleProposalFormCategoryImageMutation implements MutationInterface
     public const ADD = 'ADD';
     public const DELETE = 'DELETE';
 
-    public function __construct(private EntityManagerInterface $em, private MediaRepository $mediaRepository, private CategoryImageRepository $categoryImageRepository)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private MediaRepository $mediaRepository,
+        private CategoryImageRepository $categoryImageRepository
+    ) {
     }
 
     /**

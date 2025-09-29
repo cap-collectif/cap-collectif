@@ -6,8 +6,9 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 
 class OmarDjinn extends AbstractSlackMessager
 {
-    public function __construct(private readonly ?string $hook)
-    {
+    public function __construct(
+        private readonly ?string $hook
+    ) {
     }
 
     public function sendBefore(EmailingCampaign $emailingCampaign): void

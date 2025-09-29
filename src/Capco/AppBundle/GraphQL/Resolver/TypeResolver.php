@@ -7,8 +7,9 @@ use Overblog\GraphQLBundle\Resolver\TypeResolver as OverblogTypeResolver;
 
 class TypeResolver
 {
-    public function __construct(private readonly OverblogTypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly OverblogTypeResolver $typeResolver
+    ) {
     }
 
     // TODO make a PR to add this method to overblog/GraphQLBundle

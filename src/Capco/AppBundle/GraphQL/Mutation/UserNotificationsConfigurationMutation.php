@@ -17,8 +17,12 @@ class UserNotificationsConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly SendInBluePublisher $sendInBluePublisher)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $logger,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly SendInBluePublisher $sendInBluePublisher
+    ) {
     }
 
     public function __invoke(Argument $args, User $user): array

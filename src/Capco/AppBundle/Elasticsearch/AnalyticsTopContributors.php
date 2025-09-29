@@ -10,8 +10,9 @@ class AnalyticsTopContributors
 {
     private iterable $contributors = [];
 
-    public function __construct(private readonly UserRepository $repository)
-    {
+    public function __construct(
+        private readonly UserRepository $repository
+    ) {
     }
 
     public function getContributors(): iterable

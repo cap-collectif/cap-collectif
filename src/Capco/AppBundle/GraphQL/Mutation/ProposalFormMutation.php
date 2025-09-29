@@ -14,8 +14,11 @@ class ProposalFormMutation
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalFormRepository $proposalFormRepository, private readonly QuestionnaireRepository $questionnaireRepository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ProposalFormRepository $proposalFormRepository,
+        private readonly QuestionnaireRepository $questionnaireRepository
+    ) {
     }
 
     public function setEvaluationForm(Argument $input): array

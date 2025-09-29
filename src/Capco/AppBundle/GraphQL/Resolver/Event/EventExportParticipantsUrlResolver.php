@@ -11,8 +11,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class EventExportParticipantsUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly RouterInterface $router,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Event $event): string

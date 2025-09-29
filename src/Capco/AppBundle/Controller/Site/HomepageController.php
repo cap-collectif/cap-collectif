@@ -17,8 +17,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageController extends Controller
 {
-    public function __construct(private readonly QueryEventsResolver $eventsResolver, private readonly SectionResolver $sectionResolver, private readonly TranslatorInterface $translator, private readonly Encryptor $encryptor)
-    {
+    public function __construct(
+        private readonly QueryEventsResolver $eventsResolver,
+        private readonly SectionResolver $sectionResolver,
+        private readonly TranslatorInterface $translator,
+        private readonly Encryptor $encryptor
+    ) {
     }
 
     /**

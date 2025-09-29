@@ -19,8 +19,13 @@ class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $arguments, User $viewer): array

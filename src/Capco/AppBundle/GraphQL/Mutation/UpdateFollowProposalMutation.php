@@ -15,8 +15,11 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 final class UpdateFollowProposalMutation implements MutationInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FollowerRepository $followerRepository, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FollowerRepository $followerRepository,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(string $proposalId, string $notifiedOf, User $user): array

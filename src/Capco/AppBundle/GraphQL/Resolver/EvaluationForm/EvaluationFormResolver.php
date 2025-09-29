@@ -13,8 +13,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
  */
 class EvaluationFormResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalRepository $proposalRepository)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository
+    ) {
     }
 
     public function __invoke(Questionnaire $evaluationForm, $user): Collection

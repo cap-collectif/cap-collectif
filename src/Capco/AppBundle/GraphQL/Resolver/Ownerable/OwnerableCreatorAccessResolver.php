@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class OwnerableCreatorAccessResolver implements QueryInterface
 {
-    public function __construct(private readonly OrganizationAdminAccessResolver $organizationAdminAccessResolver)
-    {
+    public function __construct(
+        private readonly OrganizationAdminAccessResolver $organizationAdminAccessResolver
+    ) {
     }
 
     public function __invoke(Ownerable $entity, ?User $viewer = null): bool

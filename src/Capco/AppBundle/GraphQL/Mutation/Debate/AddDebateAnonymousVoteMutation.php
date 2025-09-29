@@ -26,8 +26,15 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ValidatorInterface $validator, private readonly TokenGeneratorInterface $tokenGenerator, private readonly Indexer $indexer, private readonly RequestGuesserInterface $requestGuesser)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ValidatorInterface $validator,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly Indexer $indexer,
+        private readonly RequestGuesserInterface $requestGuesser
+    ) {
     }
 
     public function __invoke(Arg $input): array

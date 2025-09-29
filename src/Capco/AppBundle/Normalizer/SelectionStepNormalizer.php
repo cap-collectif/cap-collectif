@@ -16,8 +16,12 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
 {
     use SerializerAwareTrait;
 
-    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private StepVotesCountDataLoader $votesCountDataLoader, private readonly UserSearch $userSearch)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private StepVotesCountDataLoader $votesCountDataLoader,
+        private readonly UserSearch $userSearch
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

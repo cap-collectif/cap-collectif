@@ -10,8 +10,11 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class LocaleLanguageRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(protected TranslatorInterface $translator, protected PublishedLocalesDataloader $localesDataloader, protected Manager $manager)
-    {
+    public function __construct(
+        protected TranslatorInterface $translator,
+        protected PublishedLocalesDataloader $localesDataloader,
+        protected Manager $manager
+    ) {
     }
 
     public function getLocaleMap($viewer = null): array

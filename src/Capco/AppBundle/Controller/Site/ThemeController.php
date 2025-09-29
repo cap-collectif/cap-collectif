@@ -18,8 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**

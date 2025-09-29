@@ -32,8 +32,16 @@ class ConfigureAnalysisMutation implements MutationInterface
 
     private $analysisConfigurationRepository;
 
-    public function __construct(private ProposalFormRepository $proposalFormRepository, private QuestionnaireRepository $questionnaireRepository, private AbstractStepRepository $abstractStepRepository, private StatusRepository $statusRepository, private SelectionStepRepository $selectionStepRepository, private EntityManagerInterface $entityManager, private readonly LoggerInterface $logger, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private ProposalFormRepository $proposalFormRepository,
+        private QuestionnaireRepository $questionnaireRepository,
+        private AbstractStepRepository $abstractStepRepository,
+        private StatusRepository $statusRepository,
+        private SelectionStepRepository $selectionStepRepository,
+        private EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $logger,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $args, $viewer): array

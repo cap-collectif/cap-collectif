@@ -19,8 +19,12 @@ class CreateProposalAnalysisCommentMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

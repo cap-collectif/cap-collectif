@@ -27,8 +27,15 @@ class AddSourceMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly OpinionRepository $opinionRepo, private readonly OpinionVersionRepository $versionRepo, private readonly RedisStorageHelper $redisStorage, private readonly LoggerInterface $logger, private readonly StepRequirementsResolver $stepRequirementsResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly OpinionRepository $opinionRepo,
+        private readonly OpinionVersionRepository $versionRepo,
+        private readonly RedisStorageHelper $redisStorage,
+        private readonly LoggerInterface $logger,
+        private readonly StepRequirementsResolver $stepRequirementsResolver
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

@@ -4,8 +4,10 @@ namespace Capco\AppBundle\DTO\Analytics;
 
 class AnalyticsContributorContribution
 {
-    private function __construct(private readonly string $type, private readonly int $totalCount)
-    {
+    private function __construct(
+        private readonly string $type,
+        private readonly int $totalCount
+    ) {
     }
 
     public static function fromEs(array $document): self

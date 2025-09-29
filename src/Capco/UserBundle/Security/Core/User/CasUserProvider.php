@@ -16,8 +16,12 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class CasUserProvider implements UserProviderInterface
 {
-    public function __construct(private readonly UserManager $userManager, private readonly GroupMutation $groupMutation, private readonly CapebUserFilter $capebUserFilter, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly UserManager $userManager,
+        private readonly GroupMutation $groupMutation,
+        private readonly CapebUserFilter $capebUserFilter,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     /**

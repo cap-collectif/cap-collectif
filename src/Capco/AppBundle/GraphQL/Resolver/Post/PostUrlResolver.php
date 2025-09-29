@@ -10,8 +10,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 class PostUrlResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly RouterInterface $router,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Post $post): string

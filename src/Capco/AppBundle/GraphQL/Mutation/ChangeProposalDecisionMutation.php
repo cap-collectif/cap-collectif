@@ -39,8 +39,19 @@ class ChangeProposalDecisionMutation implements MutationInterface
     use ResolverTrait;
     private readonly ProposalDecisionRepository $proposalDecisionRepository;
 
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly UserRepository $userRepository, private readonly EntityManagerInterface $entityManager, private readonly StatusRepository $statusRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger, private readonly Indexer $indexer, private readonly TranslatorInterface $translator, private readonly EventDispatcherInterface $eventDispatcher, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly StatusRepository $statusRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly LoggerInterface $logger,
+        private readonly Indexer $indexer,
+        private readonly TranslatorInterface $translator,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly Publisher $publisher,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array

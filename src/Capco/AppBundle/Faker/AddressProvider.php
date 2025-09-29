@@ -15,8 +15,10 @@ final class AddressProvider extends BaseProvider
     private const IDF_MIN_LONGITUDE = 1.43;
     private const IDF_MAX_LONGITUDE = 3.50;
 
-    public function __construct(Generator $generator, private readonly Generator $faker)
-    {
+    public function __construct(
+        Generator $generator,
+        private readonly Generator $faker
+    ) {
         parent::__construct($generator);
     }
 

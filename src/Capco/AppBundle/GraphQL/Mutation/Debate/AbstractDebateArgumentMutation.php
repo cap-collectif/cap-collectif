@@ -34,8 +34,18 @@ class AbstractDebateArgumentMutation
     final public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
     final public const INVALID_HASH = 'INVALID_HASH';
 
-    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected DebateArgumentRepository $repository, protected DebateAnonymousArgumentRepository $anonymousRepository, protected AuthorizationCheckerInterface $authorizationChecker, protected Indexer $indexer, protected ValidatorInterface $validator, protected TokenGeneratorInterface $tokenGenerator, protected DebateNotifier $debateNotifier, protected RequestGuesserInterface $requestGuesser)
-    {
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected GlobalIdResolver $globalIdResolver,
+        protected DebateArgumentRepository $repository,
+        protected DebateAnonymousArgumentRepository $anonymousRepository,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected Indexer $indexer,
+        protected ValidatorInterface $validator,
+        protected TokenGeneratorInterface $tokenGenerator,
+        protected DebateNotifier $debateNotifier,
+        protected RequestGuesserInterface $requestGuesser
+    ) {
     }
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate

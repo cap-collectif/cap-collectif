@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class CommentVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly VoteSearch $voteSearch)
-    {
+    public function __construct(
+        private readonly VoteSearch $voteSearch
+    ) {
     }
 
     public function __invoke(Comment $comment, Argument $args): ConnectionInterface

@@ -10,8 +10,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalUrlResolver implements QueryInterface
 {
-    public function __construct(protected RouterInterface $router)
-    {
+    public function __construct(
+        protected RouterInterface $router
+    ) {
     }
 
     public function __invoke(Proposal $proposal, ?RequestStack $requestStack = null): string

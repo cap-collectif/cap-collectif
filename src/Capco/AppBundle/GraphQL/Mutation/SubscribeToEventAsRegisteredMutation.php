@@ -19,8 +19,12 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly RequestGuesserInterface $requestGuesser)
-    {
+    public function __construct(
+        private readonly EventRegistrationRepository $eventRegistrationRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RequestGuesserInterface $requestGuesser
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

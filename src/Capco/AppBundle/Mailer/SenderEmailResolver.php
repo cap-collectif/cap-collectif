@@ -10,8 +10,10 @@ class SenderEmailResolver
     private const GLOBAL_PARAMETER = 'admin.mail.notifications.send_address';
     private const ERROR_NO_CONF = 'sender email is configured neither by emailing parameters nor by global parameters';
 
-    public function __construct(private readonly SiteParameterResolver $siteParams, private readonly SenderEmailRepository $repository)
-    {
+    public function __construct(
+        private readonly SiteParameterResolver $siteParams,
+        private readonly SenderEmailRepository $repository
+    ) {
     }
 
     public function __invoke(): string

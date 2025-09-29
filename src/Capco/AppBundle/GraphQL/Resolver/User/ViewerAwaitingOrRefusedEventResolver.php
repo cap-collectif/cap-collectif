@@ -17,8 +17,10 @@ class ViewerAwaitingOrRefusedEventResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private EventRepository $eventRepository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private EventRepository $eventRepository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke($viewer, $user, ?Argument $args = null): Connection

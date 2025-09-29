@@ -27,8 +27,13 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
     final public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
     final public const STEP_NOT_VOTABLE = 'STEP_NOT_VOTABLE';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $resolver, private readonly ProposalStepPaperVoteCounterRepository $repository, private readonly Indexer $indexer, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $resolver,
+        private readonly ProposalStepPaperVoteCounterRepository $repository,
+        private readonly Indexer $indexer,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

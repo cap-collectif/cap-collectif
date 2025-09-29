@@ -9,8 +9,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class HomePageProjectsSectionConfigurationResolver implements QueryInterface
 {
-    public function __construct(private readonly SectionRepository $sectionRepository)
-    {
+    public function __construct(
+        private readonly SectionRepository $sectionRepository
+    ) {
     }
 
     public function __invoke(Argument $args): ?Section

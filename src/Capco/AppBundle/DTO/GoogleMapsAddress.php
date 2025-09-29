@@ -4,8 +4,13 @@ namespace Capco\AppBundle\DTO;
 
 class GoogleMapsAddress
 {
-    public function __construct(protected string $json, protected array $types, protected float $lat, protected float $lng, protected ?string $formatted)
-    {
+    public function __construct(
+        protected string $json,
+        protected array $types,
+        protected float $lat,
+        protected float $lng,
+        protected ?string $formatted
+    ) {
     }
 
     public static function fromApi(string $response): ?self

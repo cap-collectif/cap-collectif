@@ -10,8 +10,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CaptchaValidator extends ConstraintValidator
 {
-    public function __construct(protected RequestGuesserInterface $requestGuesser, protected Manager $toggle, protected CaptchaChecker $captchaChecker, protected bool $enabled = true)
-    {
+    public function __construct(
+        protected RequestGuesserInterface $requestGuesser,
+        protected Manager $toggle,
+        protected CaptchaChecker $captchaChecker,
+        protected bool $enabled = true
+    ) {
     }
 
     public function validate($value, Constraint $constraint)

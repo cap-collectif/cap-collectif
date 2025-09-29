@@ -11,8 +11,9 @@ class SendMagicLinkEmailMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private MagicLinkEmailSender $magicLinkEmailSender)
-    {
+    public function __construct(
+        private MagicLinkEmailSender $magicLinkEmailSender
+    ) {
     }
 
     /**

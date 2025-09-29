@@ -83,8 +83,15 @@ class SiteFaviconProcessor
         ],
     ];
 
-    public function __construct(private readonly SiteFaviconRuntime $siteFaviconExtension, private readonly SerializerInterface $serializer, private readonly LoggerInterface $logger, private readonly MediaUrlResolver $urlResolver, private readonly SiteParameterResolver $siteResolver, private readonly Filesystem $filesystem, private readonly string $webDir = '')
-    {
+    public function __construct(
+        private readonly SiteFaviconRuntime $siteFaviconExtension,
+        private readonly SerializerInterface $serializer,
+        private readonly LoggerInterface $logger,
+        private readonly MediaUrlResolver $urlResolver,
+        private readonly SiteParameterResolver $siteResolver,
+        private readonly Filesystem $filesystem,
+        private readonly string $webDir = ''
+    ) {
     }
 
     public function process(SiteImage $siteFavicon): void

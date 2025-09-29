@@ -13,8 +13,9 @@ class DebateArgumentVotesResolver implements QueryInterface
 {
     final public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
 
-    public function __construct(private readonly VoteSearch $voteSearch)
-    {
+    public function __construct(
+        private readonly VoteSearch $voteSearch
+    ) {
     }
 
     public function __invoke(

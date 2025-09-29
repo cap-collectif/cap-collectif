@@ -23,8 +23,14 @@ class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly QuestionnaireRepository $questionnaireRepository, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input): array

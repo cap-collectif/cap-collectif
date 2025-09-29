@@ -20,8 +20,11 @@ class IndexBuilder
 {
     final public const PREFIX_INDEX = 'capco_';
 
-    public function __construct(protected Client $client, private readonly Cluster $cluster, protected string $indexName)
-    {
+    public function __construct(
+        protected Client $client,
+        private readonly Cluster $cluster,
+        protected string $indexName
+    ) {
     }
 
     /**

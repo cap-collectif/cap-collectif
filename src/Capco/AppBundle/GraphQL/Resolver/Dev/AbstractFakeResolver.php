@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
  */
 abstract class AbstractFakeResolver implements QueryInterface
 {
-    public function __construct(protected EntityManagerInterface $manager)
-    {
+    public function __construct(
+        protected EntityManagerInterface $manager
+    ) {
     }
 
     /** Follow this example to extend : */

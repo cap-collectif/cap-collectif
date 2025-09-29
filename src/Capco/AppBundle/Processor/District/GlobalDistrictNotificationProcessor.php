@@ -12,8 +12,11 @@ use Swarrot\Processor\ProcessorInterface;
 
 class GlobalDistrictNotificationProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly ProjectRepository $projectRepository, private readonly GlobalDistrictFollowerNotifier $notifier)
-    {
+    public function __construct(
+        private readonly GlobalDistrictRepository $globalDistrictRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly GlobalDistrictFollowerNotifier $notifier
+    ) {
     }
 
     public function process(Message $message, array $options): bool

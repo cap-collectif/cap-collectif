@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class EventDistrictsResolver implements QueryInterface
 {
-    public function __construct(private readonly GlobalDistrictRepository $globalDistrictRepository)
-    {
+    public function __construct(
+        private readonly GlobalDistrictRepository $globalDistrictRepository
+    ) {
     }
 
     public function __invoke(

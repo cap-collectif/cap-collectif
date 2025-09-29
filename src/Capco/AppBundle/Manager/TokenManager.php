@@ -14,8 +14,12 @@ use Psr\Log\LoggerInterface;
 
 class TokenManager
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ActionTokenRepository $repository, private readonly LoggerInterface $logger, private readonly RequestGuesserInterface $requestGuesser)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly ActionTokenRepository $repository,
+        private readonly LoggerInterface $logger,
+        private readonly RequestGuesserInterface $requestGuesser
+    ) {
     }
 
     public function consumeVoteToken(DebateVoteToken $voteToken, string $value): DebateVote

@@ -10,8 +10,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ParticipantConsentInternalCommunicationEmailProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly ParticipantConsentInternalCommunicationEmailNotifier $notifier, private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly ParticipantConsentInternalCommunicationEmailNotifier $notifier,
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function process(Message $message, array $options): bool

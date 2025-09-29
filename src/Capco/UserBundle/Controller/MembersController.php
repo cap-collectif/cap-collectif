@@ -15,8 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MembersController extends Controller
 {
-    public function __construct(private readonly UserTypeRepository $userTypeRepository, private readonly UserSearch $userSearch)
-    {
+    public function __construct(
+        private readonly UserTypeRepository $userTypeRepository,
+        private readonly UserSearch $userSearch
+    ) {
     }
 
     /**

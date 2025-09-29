@@ -37,8 +37,17 @@ class UpdateNewProjectMutation implements MutationInterface
     use HtmlSanitizationHelperTrait;
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly ProjectAuthorTransformer $transformer, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProjectAbstractStepRepository $projectAbstractStepRepository, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ProjectAuthorTransformer $transformer,
+        private readonly Publisher $publisher,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ProjectAbstractStepRepository $projectAbstractStepRepository,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

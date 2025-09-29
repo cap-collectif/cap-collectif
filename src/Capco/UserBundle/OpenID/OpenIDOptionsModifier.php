@@ -12,8 +12,11 @@ class OpenIDOptionsModifier implements OptionsModifierInterface
 {
     final public const REDIS_CACHE_KEY = 'SSOConfiguration';
 
-    public function __construct(protected Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository, protected RedisCache $redisCache, protected Manager $toggleManager)
-    {
+    public function __construct(
+        protected Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository,
+        protected RedisCache $redisCache,
+        protected Manager $toggleManager
+    ) {
     }
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array

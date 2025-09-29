@@ -8,8 +8,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckExternalLinkValidator extends ConstraintValidator
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
+    public function __construct(
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function validate($value, Constraint $constraint)

@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class MediaProvider
 {
-    public function __construct(protected Filesystem $filesystem, protected CacheManager $cacheManager)
-    {
+    public function __construct(
+        protected Filesystem $filesystem,
+        protected CacheManager $cacheManager
+    ) {
     }
 
     public function generatePublicUrl(Media $media, string $format): string

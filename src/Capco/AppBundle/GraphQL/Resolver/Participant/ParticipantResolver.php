@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class ParticipantResolver implements QueryInterface
 {
-    public function __construct(private readonly ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private readonly ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(Argument $args): ?Participant

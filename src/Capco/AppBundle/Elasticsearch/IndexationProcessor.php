@@ -8,8 +8,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class IndexationProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly Indexer $indexer, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly Indexer $indexer,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function process(Message $message, array $options): bool

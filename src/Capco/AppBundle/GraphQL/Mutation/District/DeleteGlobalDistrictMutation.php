@@ -14,8 +14,11 @@ class DeleteGlobalDistrictMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(protected LoggerInterface $logger, protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        protected LoggerInterface $logger,
+        protected EntityManagerInterface $em,
+        protected GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Argument $input, $viewer): array

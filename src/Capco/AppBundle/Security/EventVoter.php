@@ -16,8 +16,9 @@ class EventVoter extends AbstractOwnerableVoter
     final public const DELETE = 'delete';
     final public const EXPORT = 'export';
 
-    public function __construct(private readonly Manager $manager)
-    {
+    public function __construct(
+        private readonly Manager $manager
+    ) {
     }
 
     protected function supports($attribute, $subject)

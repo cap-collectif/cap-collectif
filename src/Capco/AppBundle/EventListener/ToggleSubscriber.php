@@ -13,8 +13,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ToggleSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository, private readonly SectionRepository $sectionRepository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository,
+        private readonly SectionRepository $sectionRepository
+    ) {
     }
 
     public static function getSubscribedEvents(): array

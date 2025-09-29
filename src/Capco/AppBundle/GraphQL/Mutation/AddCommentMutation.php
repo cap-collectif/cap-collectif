@@ -39,8 +39,17 @@ class AddCommentMutation implements MutationInterface
     final public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
     final public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger, private readonly EventDispatcherInterface $eventDispatcher, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly RequestGuesserInterface $requestGuesser, private readonly Manager $manager, private readonly TokenGeneratorInterface $tokenGenerator)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly LoggerInterface $logger,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        private readonly RequestGuesserInterface $requestGuesser,
+        private readonly Manager $manager,
+        private readonly TokenGeneratorInterface $tokenGenerator
+    ) {
     }
 
     public function __invoke(Arg $input, /*User|string*/ $viewer): array

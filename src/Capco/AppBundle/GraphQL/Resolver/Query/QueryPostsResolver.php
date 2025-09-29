@@ -17,8 +17,10 @@ use Psr\Log\LoggerInterface;
 
 class QueryPostsResolver implements QueryInterface
 {
-    public function __construct(private readonly PostRepository $postRepository, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly PostRepository $postRepository,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $args): ConnectionInterface|Promise

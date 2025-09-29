@@ -14,8 +14,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserProposalsResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalRepository $proposalRepository)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository
+    ) {
     }
 
     public function __invoke(

@@ -17,8 +17,12 @@ class SiradelController extends AbstractController
 {
     use ResolverTrait;
 
-    public function __construct(private readonly UserUrlResolver $urlResolver, private readonly UserIsGrantedResolver $isGrantedResolver, private readonly RouterInterface $router, private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly UserUrlResolver $urlResolver,
+        private readonly UserIsGrantedResolver $isGrantedResolver,
+        private readonly RouterInterface $router,
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     /**

@@ -15,8 +15,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MailerFactory
 {
-    public function __construct(protected TranslatorInterface $translator, protected SiteParameterResolver $siteParams, protected RouterInterface $router, protected SenderEmailResolver $senderEmailResolver)
-    {
+    public function __construct(
+        protected TranslatorInterface $translator,
+        protected SiteParameterResolver $siteParams,
+        protected RouterInterface $router,
+        protected SenderEmailResolver $senderEmailResolver
+    ) {
     }
 
     public function createMessage(

@@ -14,8 +14,9 @@ class SessionListener implements EventSubscriberInterface
 {
     private const NO_AUTO_CACHE_CONTROL_HEADER = 'X-No-Auto-Cache-Control';
 
-    public function __construct(private readonly SessionInterface $session)
-    {
+    public function __construct(
+        private readonly SessionInterface $session
+    ) {
     }
 
     public function onKernelResponse(ResponseEvent $event): void

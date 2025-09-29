@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserSearchQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly UserSearch $userSearch)
-    {
+    public function __construct(
+        private readonly UserSearch $userSearch
+    ) {
     }
 
     public function __invoke(Argument $args): array

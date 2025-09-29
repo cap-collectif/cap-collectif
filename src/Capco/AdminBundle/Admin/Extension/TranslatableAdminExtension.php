@@ -21,8 +21,10 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     final public const TRANSLATABLE_LOCALE_PARAMETER = 'tl';
     protected ?string $translatableLocale = null;
 
-    public function __construct(protected Manager $toggleManager, protected LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        protected Manager $toggleManager,
+        protected LocaleRepository $localeRepository
+    ) {
     }
 
     public function getEnabledTranslationLocales(): array

@@ -9,8 +9,11 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 class QueryAnalyzer
 {
-    public function __construct(private readonly Indexer $indexer, private readonly TypeResolver $typeResolver, private readonly Manager $toggleManager)
-    {
+    public function __construct(
+        private readonly Indexer $indexer,
+        private readonly TypeResolver $typeResolver,
+        private readonly Manager $toggleManager
+    ) {
     }
 
     /**

@@ -20,7 +20,8 @@ abstract class AbstractUserToken
      */
     protected ?\DateTime $consumptionDate = null;
 
-    public function __construct(/**
+    public function __construct(
+    /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */

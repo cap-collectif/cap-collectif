@@ -14,7 +14,8 @@ class MagicLinkPayload
         private readonly ?string $username,
         /** @Assert\Url() */
         private readonly string $redirect,
-        private readonly \DateTimeInterface $createdAt = new \DateTimeImmutable()
+        private readonly \DateTimeInterface $createdAt = new \DateTimeImmutable(
+        )
     ) {
     }
 

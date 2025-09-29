@@ -18,8 +18,10 @@ abstract class DefaultContext extends MinkContext
 {
     protected $navigationContext;
 
-    public function __construct(private readonly KernelInterface $kernel, protected ?Session $symfonySession = null)
-    {
+    public function __construct(
+        private readonly KernelInterface $kernel,
+        protected ?Session $symfonySession = null
+    ) {
     }
 
     /** @BeforeScenario */

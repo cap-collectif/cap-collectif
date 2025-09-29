@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class AbstractDebateVoteTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     /**

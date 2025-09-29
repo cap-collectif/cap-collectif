@@ -23,8 +23,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EventController extends Controller
 {
-    public function __construct(private readonly EventHelper $eventHelper, private readonly EventRepository $eventRepository, private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly SiteParameterResolver $parameterResolver, private readonly TranslatorInterface $tranlator, private readonly SessionInterface $session, private readonly string $projectDir)
-    {
+    public function __construct(
+        private readonly EventHelper $eventHelper,
+        private readonly EventRepository $eventRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly SiteParameterResolver $parameterResolver,
+        private readonly TranslatorInterface $tranlator,
+        private readonly SessionInterface $session,
+        private readonly string $projectDir
+    ) {
     }
 
     /**

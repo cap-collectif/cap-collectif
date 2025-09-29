@@ -28,8 +28,14 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
     private const NB_MAX_ANALYSTS_ASSIGNED = 10;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalysisRepository $proposalAnalysisRepository, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly ConnectionBuilderInterface $builder,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ProposalAnalysisRepository $proposalAnalysisRepository,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Arg $input, $viewer): array

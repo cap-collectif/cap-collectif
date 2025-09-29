@@ -10,8 +10,9 @@ class Encryptor
     public const TOKEN_CONFIG_FOLDER = '/jwt';
     private readonly string $privateKey;
 
-    public function __construct(private readonly ConfigFileSystem $filesystem)
-    {
+    public function __construct(
+        private readonly ConfigFileSystem $filesystem
+    ) {
         $this->privateKey = $this->filesystem->get(self::TOKEN_CONFIG_FOLDER . '/private.pem')->getContent();
     }
 

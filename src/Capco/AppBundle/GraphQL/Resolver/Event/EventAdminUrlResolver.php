@@ -12,8 +12,9 @@ class EventAdminUrlResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(protected RouterInterface $router)
-    {
+    public function __construct(
+        protected RouterInterface $router
+    ) {
     }
 
     public function __invoke(Event $event): string

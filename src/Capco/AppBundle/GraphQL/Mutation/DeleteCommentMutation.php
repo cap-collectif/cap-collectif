@@ -18,8 +18,14 @@ class DeleteCommentMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly RedisStorageHelper $redisStorage, private readonly LoggerInterface $logger, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly RedisStorageHelper $redisStorage,
+        private readonly LoggerInterface $logger,
+        private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

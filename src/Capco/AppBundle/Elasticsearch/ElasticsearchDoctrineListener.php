@@ -44,8 +44,16 @@ class ElasticsearchDoctrineListener implements EventSubscriber
 {
     private const BULK_SIZE = 200;
 
-    public function __construct(private readonly ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener, private readonly LoggerInterface $logger, private readonly AbstractResponseRepository $responseRepository, private readonly ProposalRepository $proposalRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly OpinionRepository $opinionRepository, private readonly EntityChangeSetResolver $changeSetResolver)
-    {
+    public function __construct(
+        private readonly ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,
+        private readonly LoggerInterface $logger,
+        private readonly AbstractResponseRepository $responseRepository,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly OpinionRepository $opinionRepository,
+        private readonly EntityChangeSetResolver $changeSetResolver
+    ) {
     }
 
     public function getSubscribedEvents(): array

@@ -20,8 +20,9 @@ class MailCatcherContext implements Context, TranslatableContext, MailCatcherAwa
     private bool $purgeBeforeScenario = true;
     private Message|null $currentMessage = null;
 
-    public function __construct(private readonly KernelInterface $kernel)
-    {
+    public function __construct(
+        private readonly KernelInterface $kernel
+    ) {
     }
 
     /**

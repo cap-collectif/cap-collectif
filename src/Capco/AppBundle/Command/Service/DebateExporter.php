@@ -19,8 +19,11 @@ class DebateExporter
     protected SymfonyStyle $style;
     private string $delimiter = self::CSV_DELIMITER;
 
-    public function __construct(protected EntityManagerInterface $entityManager, private readonly SerializerInterface $serializer, private readonly Filesystem $fileSystem)
-    {
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        private readonly SerializerInterface $serializer,
+        private readonly Filesystem $fileSystem
+    ) {
     }
 
     public function initializeStyle(SymfonyStyle $style): void

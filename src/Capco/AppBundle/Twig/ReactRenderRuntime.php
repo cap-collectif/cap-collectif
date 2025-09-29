@@ -9,8 +9,11 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ReactRenderRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly BaseExtension $extension, private readonly Manager $toggleManager, private readonly TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        private readonly BaseExtension $extension,
+        private readonly Manager $toggleManager,
+        private readonly TokenStorageInterface $tokenStorage
+    ) {
     }
 
     public function reactRenderIntlComponent($componentName, array $options = []): string

@@ -27,8 +27,15 @@ class AddOpinionVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private ValidatorInterface $validator, private OpinionRepository $opinionRepo, private OpinionVoteRepository $opinionVoteRepo, private OpinionVersionRepository $versionRepo, private OpinionVersionVoteRepository $versionVoteRepo, private StepRequirementsResolver $stepRequirementsResolver)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private ValidatorInterface $validator,
+        private OpinionRepository $opinionRepo,
+        private OpinionVoteRepository $opinionVoteRepo,
+        private OpinionVersionRepository $versionRepo,
+        private OpinionVersionVoteRepository $versionVoteRepo,
+        private StepRequirementsResolver $stepRequirementsResolver
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

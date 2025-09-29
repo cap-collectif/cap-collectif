@@ -16,8 +16,12 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class GraphQLRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly CollectStepRepository $collectStepRepo, private readonly QuestionnaireRepository $questionnaireRepo, private readonly ConsultationRepository $consultationRepository, private readonly ProjectRepository $projectRepo)
-    {
+    public function __construct(
+        private readonly CollectStepRepository $collectStepRepo,
+        private readonly QuestionnaireRepository $questionnaireRepo,
+        private readonly ConsultationRepository $consultationRepository,
+        private readonly ProjectRepository $projectRepo
+    ) {
     }
 
     public function getOffsetToCursor(int $key): string

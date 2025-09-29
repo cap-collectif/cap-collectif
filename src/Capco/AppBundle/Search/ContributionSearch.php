@@ -42,8 +42,10 @@ class ContributionSearch extends Search
         ContributionType::PROPOSAL => Proposal::class,
     ];
 
-    public function __construct(Index $index, private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        Index $index,
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct($index);
     }
 

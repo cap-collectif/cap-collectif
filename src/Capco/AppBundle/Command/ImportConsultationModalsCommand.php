@@ -15,8 +15,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImportConsultationModalsCommand extends Command
 {
-    public function __construct(private readonly ContainerInterface $container)
-    {
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {
         parent::__construct();
     }
 

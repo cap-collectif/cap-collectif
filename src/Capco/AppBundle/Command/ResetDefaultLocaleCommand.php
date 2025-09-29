@@ -11,8 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ResetDefaultLocaleCommand extends Command
 {
-    public function __construct(string $name, private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        string $name,
+        private readonly EntityManagerInterface $em
+    ) {
         parent::__construct($name);
     }
 

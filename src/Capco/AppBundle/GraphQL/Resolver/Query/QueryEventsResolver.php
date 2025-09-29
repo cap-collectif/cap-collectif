@@ -20,8 +20,11 @@ class QueryEventsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private EventSearch $eventSearch, private LoggerInterface $logger, private QueryAnalyzer $queryAnalyzer)
-    {
+    public function __construct(
+        private EventSearch $eventSearch,
+        private LoggerInterface $logger,
+        private QueryAnalyzer $queryAnalyzer
+    ) {
     }
 
     public function __invoke(

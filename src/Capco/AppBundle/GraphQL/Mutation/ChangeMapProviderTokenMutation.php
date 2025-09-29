@@ -20,8 +20,12 @@ class ChangeMapProviderTokenMutation implements MutationInterface
     final public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
     final public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
 
-    public function __construct(private EntityManagerInterface $em, private MapboxClient $mapboxClient, private MapTokenRepository $repository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private MapboxClient $mapboxClient,
+        private MapTokenRepository $repository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input): array

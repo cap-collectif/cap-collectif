@@ -16,8 +16,10 @@ class UpdateLocaleStatusMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $entityManager, private LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private LocaleRepository $localeRepository
+    ) {
     }
 
     public function __invoke(Argument $args): array

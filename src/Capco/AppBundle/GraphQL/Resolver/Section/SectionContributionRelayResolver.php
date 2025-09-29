@@ -11,8 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class SectionContributionRelayResolver implements QueryInterface
 {
-    public function __construct(private readonly OpinionSearch $opinionSearch)
-    {
+    public function __construct(
+        private readonly OpinionSearch $opinionSearch
+    ) {
     }
 
     public function __invoke(OpinionType $section, Arg $args, $viewer): ConnectionInterface

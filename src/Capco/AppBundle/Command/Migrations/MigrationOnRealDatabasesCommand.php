@@ -12,8 +12,9 @@ class MigrationOnRealDatabasesCommand extends Command
 {
     protected static $defaultName = 'database:check-migrations';
 
-    public function __construct(private readonly string $projectRootDir)
-    {
+    public function __construct(
+        private readonly string $projectRootDir
+    ) {
         parent::__construct();
     }
 

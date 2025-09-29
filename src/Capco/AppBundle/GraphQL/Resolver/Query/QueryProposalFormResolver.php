@@ -8,8 +8,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryProposalFormResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalFormRepository $repository)
-    {
+    public function __construct(
+        private readonly ProposalFormRepository $repository
+    ) {
     }
 
     public function __invoke(Argument $argument): array

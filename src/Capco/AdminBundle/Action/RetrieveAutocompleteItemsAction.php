@@ -25,8 +25,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class RetrieveAutocompleteItemsAction
 {
-    public function __construct(private readonly Pool $pool, private readonly UserSearch $userSearch)
-    {
+    public function __construct(
+        private readonly Pool $pool,
+        private readonly UserSearch $userSearch
+    ) {
     }
 
     /**

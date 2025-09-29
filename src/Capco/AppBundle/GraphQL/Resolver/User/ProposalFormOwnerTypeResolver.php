@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class ProposalFormOwnerTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     public function __invoke($user): Type

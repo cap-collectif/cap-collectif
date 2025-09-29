@@ -24,8 +24,13 @@ class UpdateOpinionMutation implements MutationInterface
     final public const INVALID_FORM = 'INVALID_FORM';
     final public const OPINION_NOT_CONTRIBUABLE = 'OPINION_NOT_CONTRIBUABLE';
 
-    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly RegistrationFormRepository $registrationFormRepository, private readonly EntityManagerInterface $em, private readonly OpinionRepository $opinionRepository, private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly FormFactoryInterface $formFactory,
+        private readonly RegistrationFormRepository $registrationFormRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly OpinionRepository $opinionRepository,
+        private readonly Publisher $publisher
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

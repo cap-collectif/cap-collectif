@@ -9,8 +9,10 @@ class ProposalEvent extends Event
 {
     protected $proposal;
 
-    public function __construct(Proposal $proposal, protected $action)
-    {
+    public function __construct(
+        Proposal $proposal,
+        protected $action
+    ) {
         $this->proposal = $proposal;
     }
 

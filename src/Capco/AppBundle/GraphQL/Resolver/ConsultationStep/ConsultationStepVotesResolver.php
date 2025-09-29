@@ -13,8 +13,10 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationStepVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly VoteSearch $voteSearch, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly VoteSearch $voteSearch,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(ConsultationStep $consultationStep, Args $args): ConnectionInterface

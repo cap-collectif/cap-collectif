@@ -8,8 +8,10 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ReactIntlRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly SiteParameterResolver $resolver, private readonly RequestStack $requestStack)
-    {
+    public function __construct(
+        private readonly SiteParameterResolver $resolver,
+        private readonly RequestStack $requestStack
+    ) {
     }
 
     public function getLocale(): string

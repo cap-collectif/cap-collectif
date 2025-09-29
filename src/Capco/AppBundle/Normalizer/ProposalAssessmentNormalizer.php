@@ -13,8 +13,9 @@ class ProposalAssessmentNormalizer implements NormalizerInterface, SerializerAwa
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly ObjectNormalizer $normalizer)
-    {
+    public function __construct(
+        private readonly ObjectNormalizer $normalizer
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

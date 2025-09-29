@@ -11,8 +11,11 @@ use Swarrot\Processor\ProcessorInterface;
 
 class EventReviewProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly EventRepository $eventRepository, private readonly EventNotifier $notifier, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EventRepository $eventRepository,
+        private readonly EventNotifier $notifier,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function process(Message $message, array $options): bool

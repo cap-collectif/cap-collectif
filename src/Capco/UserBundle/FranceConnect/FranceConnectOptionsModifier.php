@@ -17,8 +17,12 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
     final public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 5;
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
 
-    public function __construct(protected FranceConnectSSOConfigurationRepository $repository, protected RedisCache $redisCache, protected Manager $toggleManager, protected SessionInterface $session)
-    {
+    public function __construct(
+        protected FranceConnectSSOConfigurationRepository $repository,
+        protected RedisCache $redisCache,
+        protected Manager $toggleManager,
+        protected SessionInterface $session
+    ) {
     }
 
     public function getAllowedData(): array

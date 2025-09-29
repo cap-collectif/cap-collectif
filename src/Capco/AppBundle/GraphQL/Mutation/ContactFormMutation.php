@@ -25,8 +25,14 @@ class ContactFormMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em, private readonly ContactNotifier $contactNotifier, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly EntityManagerInterface $em,
+        private readonly ContactNotifier $contactNotifier,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly LocaleRepository $localeRepository
+    ) {
     }
 
     public function send(Argument $input, ?User $viewer): array

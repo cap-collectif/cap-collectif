@@ -18,8 +18,12 @@ class UpdateAlphaProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly ProjectPersister $persister, private readonly ProjectRepository $projectRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ProjectPersister $persister,
+        private readonly ProjectRepository $projectRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

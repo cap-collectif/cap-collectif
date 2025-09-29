@@ -19,8 +19,13 @@ class RemoveCommentVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly CommentVoteRepository $commentVoteRepo, private readonly CommentRepository $commentRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly CommentVoteRepository $commentVoteRepo,
+        private readonly CommentRepository $commentRepo,
+        private readonly RedisStorageHelper $redisStorageHelper,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

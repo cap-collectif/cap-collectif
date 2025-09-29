@@ -20,8 +20,15 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private readonly ProjectHelper $helper, private readonly MediaExtension $mediaExtension, private readonly StepResolver $stepResolver, private readonly ContributionResolver $contributionResolver, private readonly EventRepository $eventRepository)
-    {
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private readonly ProjectHelper $helper,
+        private readonly MediaExtension $mediaExtension,
+        private readonly StepResolver $stepResolver,
+        private readonly ContributionResolver $contributionResolver,
+        private readonly EventRepository $eventRepository
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

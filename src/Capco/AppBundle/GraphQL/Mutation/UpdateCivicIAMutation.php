@@ -13,8 +13,9 @@ class UpdateCivicIAMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly CivicIAMassUpdater $updater)
-    {
+    public function __construct(
+        private readonly CivicIAMassUpdater $updater
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

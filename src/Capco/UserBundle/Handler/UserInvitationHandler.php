@@ -13,8 +13,13 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class UserInvitationHandler
 {
-    public function __construct(private readonly UserInviteRepository $userInviteRepository, private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository, private readonly Manager $manager, private readonly EntityManagerInterface $em, private readonly SendInBluePublisher $sendInBluePublisher)
-    {
+    public function __construct(
+        private readonly UserInviteRepository $userInviteRepository,
+        private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository,
+        private readonly Manager $manager,
+        private readonly EntityManagerInterface $em,
+        private readonly SendInBluePublisher $sendInBluePublisher
+    ) {
     }
 
     public function handleUserOrganizationInvite(User $user): void

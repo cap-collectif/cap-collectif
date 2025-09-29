@@ -19,8 +19,12 @@ class CreateProposalFormMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly FormFactoryInterface $formFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

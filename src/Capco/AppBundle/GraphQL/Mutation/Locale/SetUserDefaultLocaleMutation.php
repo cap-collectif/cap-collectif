@@ -16,8 +16,11 @@ class SetUserDefaultLocaleMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly UserRepository $userRepository, private readonly LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository,
+        private readonly LocaleRepository $localeRepository
+    ) {
     }
 
     public function __invoke(Argument $args, User $viewer): array

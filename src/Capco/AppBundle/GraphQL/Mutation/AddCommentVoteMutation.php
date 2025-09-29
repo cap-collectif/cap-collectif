@@ -23,8 +23,13 @@ class AddCommentVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly CommentRepository $commentRepo, private readonly CommentVoteRepository $commentVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly CommentRepository $commentRepo,
+        private readonly CommentVoteRepository $commentVoteRepo,
+        private readonly RedisStorageHelper $redisStorageHelper,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

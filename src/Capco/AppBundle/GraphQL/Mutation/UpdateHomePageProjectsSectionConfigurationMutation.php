@@ -20,8 +20,12 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
     final public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SectionRepository $sectionRepository,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $args): array

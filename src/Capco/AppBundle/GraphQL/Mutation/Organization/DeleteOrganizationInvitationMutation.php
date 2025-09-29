@@ -19,8 +19,12 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
 
     final public const INVITATION_NOT_FOUND = 'INVITATION_NOT_FOUND';
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly UserInviteRepository $userInviteRepository)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly UserInviteRepository $userInviteRepository
+    ) {
     }
 
     public function __invoke(Argument $input, User $viewer): array

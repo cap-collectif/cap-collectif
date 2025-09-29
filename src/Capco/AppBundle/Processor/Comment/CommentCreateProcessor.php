@@ -9,8 +9,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class CommentCreateProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly CommentRepository $commentRepository, private readonly CommentNotifier $notifier)
-    {
+    public function __construct(
+        private readonly CommentRepository $commentRepository,
+        private readonly CommentNotifier $notifier
+    ) {
     }
 
     public function process(Message $message, array $options): bool

@@ -16,8 +16,10 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ParticipantVotesResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalSelectionVoteRepository $voteRepository, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly ProposalSelectionVoteRepository $voteRepository,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     public function __invoke(Participant $participant, User $viewer, ?Argument $args = null): ConnectionInterface

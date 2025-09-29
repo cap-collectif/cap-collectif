@@ -17,8 +17,10 @@ class LoadBenchmarkDataCommand extends Command
 {
     protected static $defaultName = 'capco:load-benchmark-data';
 
-    public function __construct(private readonly Manager $manger, private readonly EntityManagerInterface $entityManger)
-    {
+    public function __construct(
+        private readonly Manager $manger,
+        private readonly EntityManagerInterface $entityManger
+    ) {
         parent::__construct();
     }
 

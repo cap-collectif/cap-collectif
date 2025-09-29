@@ -20,8 +20,14 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 {
     use SerializerAwareTrait;
 
-    public function __construct(private ObjectNormalizer $normalizer, private ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private ProposalCollectVoteRepository $proposalCollectVoteRepository, private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository, private CommentableCommentsDataLoader $commentableCommentsDataLoader, private ProposalResponsesResolver $proposalResponsesResolver)
-    {
+    public function __construct(
+        private ObjectNormalizer $normalizer,
+        private ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository,
+        private CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        private ProposalResponsesResolver $proposalResponsesResolver
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

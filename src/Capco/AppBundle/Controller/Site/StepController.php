@@ -42,8 +42,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
-    public function __construct(private readonly TranslatorInterface $translator, private readonly SerializerInterface $serializer, private readonly OpinionSearch $opinionSearch, private readonly VersionSearch $versionSearch, private readonly LocaleRepository $localeRepo, private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder, private readonly ParticipantAccessResolver $participantAccessResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        private readonly SerializerInterface $serializer,
+        private readonly OpinionSearch $opinionSearch,
+        private readonly VersionSearch $versionSearch,
+        private readonly LocaleRepository $localeRepo,
+        private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder,
+        private readonly ParticipantAccessResolver $participantAccessResolver,
+        private readonly EntityManagerInterface $em,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     /**

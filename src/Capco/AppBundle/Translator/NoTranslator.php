@@ -8,8 +8,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NoTranslator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface
 {
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     public function trans($id, array $parameters = [], $domain = null, $locale = null)

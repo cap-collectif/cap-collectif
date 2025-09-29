@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class LogicJumpConditionTypeResolver implements QueryInterface
 {
-    public function __construct(private readonly TypeResolver $typeResolver)
-    {
+    public function __construct(
+        private readonly TypeResolver $typeResolver
+    ) {
     }
 
     public function __invoke(AbstractLogicJumpCondition $node)

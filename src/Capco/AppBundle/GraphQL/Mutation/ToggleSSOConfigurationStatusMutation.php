@@ -14,8 +14,10 @@ class ToggleSSOConfigurationStatusMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private AbstractSSOConfigurationRepository $repository)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private AbstractSSOConfigurationRepository $repository
+    ) {
     }
 
     public function __invoke(Argument $input): array

@@ -12,8 +12,10 @@ class OpinionAppendixNormalizer extends BaseNormalizer implements NormalizerInte
 {
     private const EXPORT_CONTRIBUTION_TYPE_NAME = 'export_contribution_type_appendix';
 
-    public function __construct(TranslatorInterface $translator, private readonly OpinionNormalizer $opinionNormalizer)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        private readonly OpinionNormalizer $opinionNormalizer
+    ) {
         parent::__construct($translator);
     }
 

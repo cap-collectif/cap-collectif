@@ -12,8 +12,9 @@ class ViewerMeetsTheRequirementResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly RequirementViewerValueResolver $resolver)
-    {
+    public function __construct(
+        private readonly RequirementViewerValueResolver $resolver
+    ) {
     }
 
     public function __invoke(Requirement $requirement, ?ContributorInterface $contributor = null): bool

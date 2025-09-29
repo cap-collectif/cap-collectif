@@ -12,8 +12,9 @@ class ViewerCanSeeProposalAnalystsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool

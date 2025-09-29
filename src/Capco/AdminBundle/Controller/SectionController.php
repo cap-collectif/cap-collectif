@@ -17,8 +17,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends PositionableController
 {
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, private readonly SectionResolver $sectionResolver)
-    {
+    public function __construct(
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool,
+        private readonly SectionResolver $sectionResolver
+    ) {
         parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool);
     }
 

@@ -19,8 +19,12 @@ class UpdateUserMutation implements MutationInterface
     use FormValidationErrorsTraits;
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly Manager $toggleManager, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly Manager $toggleManager,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     /**

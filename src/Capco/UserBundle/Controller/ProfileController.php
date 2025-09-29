@@ -45,8 +45,27 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileController extends Controller
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher, private readonly UserRepository $userRepository, private readonly ArgumentRepository $argumentRepository, private readonly SourceRepository $sourceRepository, private readonly ReplyRepository $replyRepository, private readonly EventRepository $eventRepository, private readonly ProjectRepository $projectRepository, private readonly CommentRepository $commentRepository, private readonly OpinionVersionRepository $opinionVersionRepository, private readonly UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository, private readonly UserArchiveRepository $userArchiveRepository, private readonly TranslatorInterface $translator, private readonly EntityManagerInterface $em, private readonly DeleteAccountMutation $deleteAccountMutation, private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler, private readonly RouterInterface $router, private readonly OrganizationRepository $organizationRepository, private readonly string $fireWall, private readonly string $projectDir)
-    {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly UserRepository $userRepository,
+        private readonly ArgumentRepository $argumentRepository,
+        private readonly SourceRepository $sourceRepository,
+        private readonly ReplyRepository $replyRepository,
+        private readonly EventRepository $eventRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly CommentRepository $commentRepository,
+        private readonly OpinionVersionRepository $opinionVersionRepository,
+        private readonly UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository,
+        private readonly UserArchiveRepository $userArchiveRepository,
+        private readonly TranslatorInterface $translator,
+        private readonly EntityManagerInterface $em,
+        private readonly DeleteAccountMutation $deleteAccountMutation,
+        private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler,
+        private readonly RouterInterface $router,
+        private readonly OrganizationRepository $organizationRepository,
+        private readonly string $fireWall,
+        private readonly string $projectDir
+    ) {
     }
 
     /**

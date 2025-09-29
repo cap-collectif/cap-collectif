@@ -11,8 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class BatchProcessor
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {
     }
 
     /**

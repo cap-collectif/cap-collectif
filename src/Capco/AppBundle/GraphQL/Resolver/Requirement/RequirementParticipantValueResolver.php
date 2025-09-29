@@ -10,8 +10,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class RequirementParticipantValueResolver implements QueryInterface
 {
-    public function __construct(private readonly RequirementViewerValueResolver $requirementViewerValueResolver, private readonly ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private readonly RequirementViewerValueResolver $requirementViewerValueResolver,
+        private readonly ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(Requirement $requirement, Argument $args)

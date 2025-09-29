@@ -20,8 +20,14 @@ class OrangeClient
     final public const SEND_SMS_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/send';
     final public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
 
-    public function __construct(private readonly HttpClientInterface $client, private readonly LoggerInterface $logger, private readonly string $clientId, private readonly string $clientSecret, private readonly TranslatorInterface $translator, private readonly SiteParameterResolver $siteParams)
-    {
+    public function __construct(
+        private readonly HttpClientInterface $client,
+        private readonly LoggerInterface $logger,
+        private readonly string $clientId,
+        private readonly string $clientSecret,
+        private readonly TranslatorInterface $translator,
+        private readonly SiteParameterResolver $siteParams
+    ) {
     }
 
     /**

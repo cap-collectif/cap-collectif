@@ -12,8 +12,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
  */
 class ProposalViewerIsAnEvaluerResolver implements QueryInterface
 {
-    public function __construct(private readonly ProposalRepository $proposalRepository)
-    {
+    public function __construct(
+        private readonly ProposalRepository $proposalRepository
+    ) {
     }
 
     public function __invoke(Proposal $proposal, $viewer): bool

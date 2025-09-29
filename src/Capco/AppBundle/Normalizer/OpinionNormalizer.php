@@ -20,8 +20,15 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private readonly TokenStorageInterface $tokenStorage, private readonly AbstractVoteRepository $voteRepository, private readonly Manager $toggleManager, private readonly VoteSearch $voteSearch, private readonly ArgumentRepository $argumentRepository)
-    {
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly AbstractVoteRepository $voteRepository,
+        private readonly Manager $toggleManager,
+        private readonly VoteSearch $voteSearch,
+        private readonly ArgumentRepository $argumentRepository
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

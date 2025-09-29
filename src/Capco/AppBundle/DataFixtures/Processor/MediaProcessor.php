@@ -22,8 +22,12 @@ class MediaProcessor implements ProcessorInterface
     final public const ENABLE_PROCESSOR = true;
     private array $referenceMap = [];
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FilterService $filterService, private readonly MediaProvider $mediaProvider, private readonly string $projectDir)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FilterService $filterService,
+        private readonly MediaProvider $mediaProvider,
+        private readonly string $projectDir
+    ) {
     }
 
     public function preProcess(string $id, $object): void

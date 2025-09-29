@@ -16,8 +16,9 @@ class CommandContext implements Context
     private $output;
     private $statusCode;
 
-    public function __construct(private readonly KernelInterface $kernel)
-    {
+    public function __construct(
+        private readonly KernelInterface $kernel
+    ) {
     }
 
     /**

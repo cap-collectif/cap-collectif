@@ -49,7 +49,8 @@ class EventRegistration implements EntityInterface
      */
     private $updatedAt;
 
-    public function __construct(/**
+    public function __construct(
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      * @Assert\NotNull()

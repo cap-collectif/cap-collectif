@@ -18,8 +18,11 @@ class DeleteSenderEmailDomainMutation implements MutationInterface
     final public const NOT_FOUND = 'NOT_FOUND';
     final public const DOMAIN_USED = 'DOMAIN_USED';
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly SenderEmailDomainRepository $senderEmailDomainRepository, private readonly SenderEmailRepository $senderEmailRepository)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly SenderEmailDomainRepository $senderEmailDomainRepository,
+        private readonly SenderEmailRepository $senderEmailRepository
+    ) {
     }
 
     public function __invoke(Argument $input)

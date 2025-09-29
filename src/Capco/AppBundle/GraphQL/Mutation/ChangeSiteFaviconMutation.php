@@ -15,8 +15,12 @@ class ChangeSiteFaviconMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private SiteImageRepository $siteImageRepository, private SiteFaviconProcessor $siteFaviconProcessor, private EntityManagerInterface $em, private MediaRepository $mediaRepository)
-    {
+    public function __construct(
+        private SiteImageRepository $siteImageRepository,
+        private SiteFaviconProcessor $siteFaviconProcessor,
+        private EntityManagerInterface $em,
+        private MediaRepository $mediaRepository
+    ) {
     }
 
     public function __invoke(Argument $input): array

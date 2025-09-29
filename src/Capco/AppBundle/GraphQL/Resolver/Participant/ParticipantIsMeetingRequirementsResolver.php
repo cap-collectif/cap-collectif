@@ -16,8 +16,11 @@ use Psr\Log\LogLevel;
 
 class ParticipantIsMeetingRequirementsResolver implements QueryInterface
 {
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Participant $participant, Argument $args, ?User $viewer = null): bool

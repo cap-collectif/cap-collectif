@@ -22,8 +22,10 @@ class TranslateBasicParameters extends Command
     private readonly LocaleRepository $localeRepository;
     private readonly SiteParameterRepository $siteParameterRepository;
 
-    public function __construct(string $name, private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        string $name,
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct($name);
         $this->localeRepository = $this->entityManager->getRepository(Locale::class);
         $this->siteParameterRepository = $this->entityManager->getRepository(SiteParameter::class);

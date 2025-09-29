@@ -15,8 +15,10 @@ class OpinionFollowersConnection implements QueryInterface
 {
     use ProjectOpinionSubscriptionGuard;
 
-    public function __construct(private UserRepository $userRepository, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private UserRepository $userRepository,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Opinion $opinion, Arg $args): ?ConnectionInterface

@@ -13,8 +13,11 @@ class ParticipantMeetsTheRequirementResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private RequirementViewerValueResolver $resolver, private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private ParticipantHelper $participantHelper)
-    {
+    public function __construct(
+        private RequirementViewerValueResolver $resolver,
+        private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
+        private ParticipantHelper $participantHelper
+    ) {
     }
 
     public function __invoke(Requirement $requirement, Argument $args): bool

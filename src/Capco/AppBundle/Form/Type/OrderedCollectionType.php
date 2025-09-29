@@ -13,8 +13,9 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 class OrderedCollectionType extends CollectionType
 {
-    public function __construct(private readonly PropertyAccessorInterface $propertyAccessor)
-    {
+    public function __construct(
+        private readonly PropertyAccessorInterface $propertyAccessor
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

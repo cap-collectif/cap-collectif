@@ -13,8 +13,10 @@ class RateLimiter
 
     private int $limit = 10;
 
-    public function __construct(private readonly RedisCache $cache, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly RedisCache $cache,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function setLimit(int $limit): self

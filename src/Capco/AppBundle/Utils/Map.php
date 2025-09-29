@@ -6,8 +6,9 @@ use GuzzleHttp\Client;
 
 class Map
 {
-    public function __construct(private readonly string $apiServerKey)
-    {
+    public function __construct(
+        private readonly string $apiServerKey
+    ) {
     }
 
     public function getFormattedAddress(string $address)

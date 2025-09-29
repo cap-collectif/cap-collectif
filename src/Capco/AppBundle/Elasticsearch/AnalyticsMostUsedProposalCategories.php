@@ -11,8 +11,9 @@ class AnalyticsMostUsedProposalCategories
     private iterable $values = [];
     private int $totalCount = 0;
 
-    public function __construct(private readonly ProposalCategoryRepository $repository)
-    {
+    public function __construct(
+        private readonly ProposalCategoryRepository $repository
+    ) {
     }
 
     public function getTotalCount(): int

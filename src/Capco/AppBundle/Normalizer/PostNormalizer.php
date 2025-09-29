@@ -15,8 +15,11 @@ class PostNormalizer implements NormalizerInterface, SerializerAwareInterface, C
 {
     use SerializerAwareTrait;
 
-    public function __construct(private readonly UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private readonly MediaExtension $mediaExtension)
-    {
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly ObjectNormalizer $normalizer,
+        private readonly MediaExtension $mediaExtension
+    ) {
     }
 
     public function hasCacheableSupportsMethod(): bool

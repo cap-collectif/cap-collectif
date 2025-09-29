@@ -10,8 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ProposalStepSplitViewService
 {
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em
+    ) {
     }
 
     /**

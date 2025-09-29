@@ -8,8 +8,9 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class SendInBluePublisher
 {
-    public function __construct(private readonly Publisher $publisher)
-    {
+    public function __construct(
+        private readonly Publisher $publisher
+    ) {
     }
 
     /**

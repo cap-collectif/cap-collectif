@@ -8,8 +8,9 @@ class DefaultLocaleCodeDataloader
 {
     private $defaultLocale;
 
-    public function __construct(private readonly LocaleResolver $localeResolver)
-    {
+    public function __construct(
+        private readonly LocaleResolver $localeResolver
+    ) {
     }
 
     public function __invoke(): string

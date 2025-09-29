@@ -7,8 +7,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AvailableConsultationsQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly ConsultationRepository $consultationRepository)
-    {
+    public function __construct(
+        private readonly ConsultationRepository $consultationRepository
+    ) {
     }
 
     public function __invoke(?string $term = null): array

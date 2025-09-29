@@ -31,8 +31,11 @@ class AnalyticsSearch
         'source',
     ];
 
-    public function __construct(private readonly Index $index, private readonly LoggerInterface $logger, private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector)
-    {
+    public function __construct(
+        private readonly Index $index,
+        private readonly LoggerInterface $logger,
+        private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector
+    ) {
     }
 
     public function getInternalAnalyticsResultSet(

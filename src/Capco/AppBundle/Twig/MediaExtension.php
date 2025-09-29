@@ -9,8 +9,11 @@ use Twig\TwigFunction;
 
 class MediaExtension extends AbstractExtension
 {
-    public function __construct(private readonly MediaProvider $mediaProvider, private readonly string $routerRequestContextHost, private ?string $assetsHost = null)
-    {
+    public function __construct(
+        private readonly MediaProvider $mediaProvider,
+        private readonly string $routerRequestContextHost,
+        private ?string $assetsHost = null
+    ) {
     }
 
     public function getFunctions(): array

@@ -15,8 +15,9 @@ use Swarrot\Broker\MessagePublisher\MessagePublisherInterface;
 
 class RabbitMQContext implements Context
 {
-    public function __construct(private readonly Kernel $kernel)
-    {
+    public function __construct(
+        private readonly Kernel $kernel
+    ) {
     }
 
     /**

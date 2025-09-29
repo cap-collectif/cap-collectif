@@ -19,8 +19,11 @@ class AddOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly SluggerInterface $slugger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly SluggerInterface $slugger
+    ) {
     }
 
     public function __invoke(Arg $input): array

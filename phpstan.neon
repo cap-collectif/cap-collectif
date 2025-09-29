@@ -7,7 +7,6 @@ includes:
 parameters:
     level: 7
     checkClassCaseSensitivity: true
-    checkGenericClassInNonGenericObjectType: false
     checkThisOnly: true
     paths:
         - src
@@ -20,6 +19,9 @@ parameters:
     symfony:
         constant_hassers: true
     reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - identifier: missingType.generics
     excludePaths:
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
+        - %currentWorkingDirectory%/.php-cs-fixer.dist.php
     treatPhpDocTypesAsCertain: false

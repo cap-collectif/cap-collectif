@@ -19,8 +19,11 @@ use Symfony\Component\Security\Core\Security;
 
 class SentryListener implements EventSubscriberInterface
 {
-    public function __construct(private readonly HubInterface $hub, private readonly Security $security, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly HubInterface $hub,
+        private readonly Security $security,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function onKernelRequest(RequestEvent $event): void

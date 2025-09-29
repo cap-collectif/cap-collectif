@@ -6,8 +6,11 @@ use Doctrine\ORM\EntityRepository;
 
 class EntityRepositoryLinker
 {
-    public function __construct(private string $type, private EntityRepository $repository, private array $entities)
-    {
+    public function __construct(
+        private string $type,
+        private EntityRepository $repository,
+        private array $entities
+    ) {
     }
 
     public function getType(): string

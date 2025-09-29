@@ -10,8 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryAnalyticsResolver implements QueryInterface
 {
-    public function __construct(private readonly QueryAnalyticsDataLoader $loader)
-    {
+    public function __construct(
+        private readonly QueryAnalyticsDataLoader $loader
+    ) {
     }
 
     public function __invoke(Argument $args, ResolveInfo $resolveInfo): Promise

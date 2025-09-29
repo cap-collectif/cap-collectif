@@ -18,8 +18,11 @@ class CreateUserMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private LoggerInterface $logger)
-    {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private FormFactoryInterface $formFactory,
+        private LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Argument $input): array
