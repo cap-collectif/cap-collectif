@@ -814,6 +814,17 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             }
         }
 
+        // todo quick dirty fix of bug #18764 before refactoring of the whole concept of Project Status : #18780
+        foreach ($steps as $step) {
+            if (OtherStep::TYPE === $step->getType() || ($step instanceof SelectionStep && !$step->isVotable())) {
+                continue;
+            }
+
+            if ($step->isFuture()) {
+                return $step;
+            }
+        }
+
         foreach ($steps as $step) {
             if ($step->isOpen()) {
                 return $step;
