@@ -21,6 +21,7 @@ use Elastica\Query\Terms;
 use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Uid\Uuid;
 
 class ProposalSearch extends Search
 {
@@ -174,7 +175,7 @@ class ProposalSearch extends Search
         foreach ($filters as $key => $value) {
             if ('proposalAnalysts.analyst.id' === $key) {
                 foreach ($value as $analyst) {
-                    if (!uuid_is_valid($analyst)) {
+                    if (!Uuid::isValid($analyst)) {
                         $analyst = GlobalIdResolver::getDecodedId($analyst, true);
                     }
 

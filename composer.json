@@ -113,7 +113,6 @@
         "symfony/messenger": "5.4.*",
         "symfony/monolog-bundle": "^3.8",
         "symfony/options-resolver": "5.4.*",
-        "symfony/polyfill-uuid": "^1.2",
         "symfony/process": "5.4.*",
         "symfony/property-access": "5.4.*",
         "symfony/proxy-manager-bridge": "5.4.*",
@@ -202,15 +201,6 @@
             "spec\\": "spec/",
             "Capco\\Tests\\": "tests/"
         }
-    },
-    "replace": {
-        "symfony/polyfill-php54": "*",
-        "symfony/polyfill-php55": "*",
-        "symfony/polyfill-php56": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-mbstring": "*",
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-apcu": "*"
     },
     "scripts": {
         "auto-scripts": {
