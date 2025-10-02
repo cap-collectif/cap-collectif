@@ -1612,7 +1612,7 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * @return array<User>
+     * @return User[]
      */
     public function getUsersInMailingList(
         MailingList $mailingList,
@@ -1664,6 +1664,7 @@ class UserRepository extends EntityRepository
             ->where('mlu.mailingList = :mailingList')
             ->setParameter('mailingList', $mailingList)
         ;
+
         if ($validEmailOnly) {
             $qb->andWhere('u.email IS NOT NULL');
         }

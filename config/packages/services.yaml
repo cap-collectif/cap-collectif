@@ -523,3 +523,5 @@ services:
             $projectDir: '%kernel.project_dir%'
 
     Capco\AppBundle\Logger\ActionLogger: ~
+
+    Capco\AppBundle\GraphQL\GraphQLRequestedFields:

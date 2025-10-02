@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Entity\MailingList;
+use Capco\AppBundle\GraphQL\GraphQLRequestedFields;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Repository\UserRepository;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -17,14 +19,20 @@ class MailingListUsersConnection implements QueryInterface
         private readonly MailingListRepository $repository,
         private readonly UserRepository $userRepository,
         private readonly ParticipantRepository $participantRepository,
+        private readonly GraphQLRequestedFields $graphQLRequestedFields,
     ) {
     }
 
-    public function __invoke($mailingList, Argument $argument): Connection
+    public function __invoke($mailingList, ResolveInfo $info, Argument $argument): Connection
     {
+        $isOnlyFetchingTotalCount = $this->graphQLRequestedFields->isOnlyFetchingTotalCount($info);
         $mailingList = $this->getMailingListEntity($mailingList);
         $consentInternalCommunicationOnly = $argument->offsetGet('consentInternalCommunicationOnly') ?? true;
-        $paginator = new Paginator(fetcher: function (int $offset, int $limit) use ($mailingList, $consentInternalCommunicationOnly) {
+        $paginator = new Paginator(fetcher: function (int $offset, int $limit) use ($mailingList, $consentInternalCommunicationOnly, $isOnlyFetchingTotalCount) {
+            if ($isOnlyFetchingTotalCount) {
+                return [];
+            }
+
             $users = $this->userRepository
                 ->getUsersInMailingList(
                     mailingList: $mailingList,
