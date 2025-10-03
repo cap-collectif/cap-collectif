@@ -111,4 +111,11 @@ export default new (class AdminQuestionnaireStepPage {
   getSaveButton() {
     return cy.get('#save-questionnaire-step')
   }
+
+  getFromModelTab() {
+    return cy.get('label.cCxBQb > span')
+  }
+  getFromModelTabListInput() {
+    return cy.get('div.cap-async-select__input-container')
+  }
 })()

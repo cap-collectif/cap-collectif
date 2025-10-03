@@ -169,7 +169,7 @@ export const QuestionnaireListField: React.FC<QuestionnaireListFieldProps> = ({ 
     const questionnairesData = await fetchQuery<QuestionnaireListFieldQuery>(environment, getQuestionnaireList, {
       term: search,
       affiliations: null,
-      types: ['QUESTIONNAIRE'],
+      types: ['QUESTIONNAIRE', 'VOTING'],
     }).toPromise()
 
     const questionnairesEdges =
