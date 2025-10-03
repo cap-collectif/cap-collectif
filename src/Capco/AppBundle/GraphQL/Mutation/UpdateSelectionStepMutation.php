@@ -2,12 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +31,8 @@ class UpdateSelectionStepMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
-        private readonly ProposalStepSplitViewService $proposalStepSplitViewService
+        private readonly ProposalStepSplitViewService $proposalStepSplitViewService,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -43,8 +47,9 @@ class UpdateSelectionStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
         $selectionStepId = $input->offsetGet('stepId');
         $selectionStep = $this->getSelectionStep($selectionStepId, $viewer);
+        $operationType = $input->offsetGet('operationType');
 
-        unset($data['stepId']);
+        unset($data['stepId'], $data['operationType']);
 
         $form = $this->formFactory->create(SelectionStepFormType::class, $selectionStep);
         $form->submit($data, false);
@@ -56,6 +61,14 @@ class UpdateSelectionStepMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+            sprintf('l\'étape de %s %s du projet %s', $selectionStep->getType(), $selectionStep->getSubType(), $selectionStep->getProject()->getTitle()),
+            ConsultationStep::class,
+            $selectionStep->getId()
+        );
 
         return [
             'selectionStep' => $selectionStep,

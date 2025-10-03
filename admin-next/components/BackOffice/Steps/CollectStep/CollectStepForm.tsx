@@ -39,11 +39,13 @@ import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdatePro
 import ProposalStepStatuses from '@components/BackOffice/Steps/ProposalStep/ProposalStepStatuses'
 import PublicationInput from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { TabsVoteType } from '../SelectStep/SelectStepForm.utils'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 export interface CollectStepFormProps {
   stepId: string
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
 }
+
 type StepVisibiltyTypeUnion = 'PUBLIC' | 'RESTRICTED'
 
 type Questionnaire = { questions: Array<QuestionInput>; questionsWithJumps: Array<any> }
@@ -477,6 +479,8 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
       const proposalFormUpdateResponse: UpdateProposalFormMutation$data = await UpdateProposalFormMutation.commit({
         input: {
           ...proposalFormUpdateInput,
+          operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
+          isLogged: false,
           proposalFormId: step?.form?.id || '',
         },
       })
@@ -487,6 +491,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           proposalFormUpdateResponse.updateProposalForm?.proposalForm.id,
           stepId,
           bgColor,
+          operationType,
         )
         try {
           // @ts-ignore

@@ -60,4 +60,6 @@ final class CapcoAppBundleMessagesTypes
     public const PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION_EMAIL = 'participant_consent_internal_communication_email';
 
     public const PROPOSAL_COLLECT_EMAIL_PUBLISHED = 'proposal_collect_email_published';
+
+    public const LOG_ADMIN = 'log_admin';
 }

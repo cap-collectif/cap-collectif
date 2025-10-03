@@ -4,12 +4,14 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Helper\QuestionJumpsHandler;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
@@ -50,7 +52,8 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         Indexer $indexer,
         ValidatorInterface $colorValidator,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly QuestionJumpsHandler $questionJumpsHandler
+        private readonly QuestionJumpsHandler $questionJumpsHandler,
+        private readonly ActionLogger $actionLogger
     ) {
         $this->em = $em;
         $this->questionRepo = $questionRepo;
@@ -61,16 +64,18 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $this->choiceQuestionRepository = $choiceQuestionRepository;
     }
 
-    public function __invoke(Argument $input, User $viewer): array
+    public function __invoke(Argument $input, User $viewer, bool $toLogUserAction = false): array
     {
         $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         // we remove jumps from this array to handle it later when questions are already saved
         $this->questionJumpsHandler->unsetJumps($arguments);
 
+        $toLogUserAction = $toLogUserAction || ($arguments['isLogged'] ?? false);
+
         $questionnaire = $this->getQuestionnaire($arguments['questionnaireId'], $viewer);
         $oldChoices = null;
-        unset($arguments['questionnaireId']);
+        unset($arguments['questionnaireId'], $arguments['isLogged']);
 
         $questionnaire->setUpdatedAt(new \Datetime());
 
@@ -92,6 +97,24 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
         $this->em->flush();
+
+        if ($toLogUserAction) {
+            $projectTitle = $questionnaire->getStep()?->getProject()->getTitle();
+
+            $type = 'de questionnaire';
+
+            if ('QUESTIONNAIRE_ANALYSIS' === $questionnaire->getType()) {
+                $type = 'de questionnaire d\'analyse';
+            }
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::EDIT,
+                sprintf('le formulaire %s %s%s', $type, $questionnaire->getTitle(), null === $projectTitle ? '' : sprintf(' du projet %s', $projectTitle)),
+                Questionnaire::class,
+                $questionnaire->getId()
+            );
+        }
 
         $this->questionJumpsHandler->saveJumps($input->getArrayCopy(), $questionnaire);
         $this->reIndex($oldChoices, $questionnaire->getId());

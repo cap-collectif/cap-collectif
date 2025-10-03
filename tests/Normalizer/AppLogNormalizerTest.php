@@ -76,7 +76,7 @@ class AppLogNormalizerTest extends TestCase
             'export_app_log_ip' => '127.0.0.1',
             'export_app_log_user_email' => 'test@test.com',
             'export_app_log_user_username' => 'test',
-            'export_app_log_action_type' => 'SHOW',
+            'export_app_log_action_type' => 'export_app_log_show_action_type',
         ];
 
         return [

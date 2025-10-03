@@ -6,13 +6,15 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalForm\CreateProposalFormMutation;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Argument as OverblogGraphQLArgument;
 use Overblog\GraphQLBundle\Error\UserError;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -25,9 +27,10 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         SettableOwnerResolver $settableOwnerResolver,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        ActionLogger $actionLogger
     ) {
-        $this->beConstructedWith($formFactory, $em, $settableOwnerResolver, $authorizationChecker);
+        $this->beConstructedWith($formFactory, $em, $settableOwnerResolver, $authorizationChecker, $actionLogger);
     }
 
     public function it_is_initializable(): void
@@ -40,8 +43,9 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         SettableOwnerResolver $settableOwnerResolver,
         FormInterface $form,
-        Argument $args,
-        User $viewer
+        OverblogGraphQLArgument $args,
+        User $viewer,
+        ActionLogger $actionLogger
     ): void {
         $title = 'title';
         $input = ['title' => $title, 'owner' => null];
@@ -55,7 +59,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         ;
 
         $formFactory
-            ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
+            ->create(ProposalFormCreateType::class, Argument::any())
             ->willReturn($form)
         ;
         unset($input['owner']);
@@ -65,13 +69,15 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(true)
         ;
-        $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
+        $em->persist(Argument::type(ProposalForm::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
             ->willReturn($viewer)
         ;
+
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
 
         $response = $this->__invoke($args, $viewer);
         $response['proposalForm']->shouldHaveType(ProposalForm::class);
@@ -84,9 +90,10 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         SettableOwnerResolver $settableOwnerResolver,
         FormInterface $form,
-        Argument $args,
+        OverblogGraphQLArgument $args,
         User $viewer,
-        Organization $organization
+        Organization $organization,
+        ActionLogger $actionLogger
     ): void {
         $title = 'title';
         $organizationId = 'organizationId';
@@ -101,7 +108,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         ;
 
         $formFactory
-            ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
+            ->create(ProposalFormCreateType::class, Argument::any())
             ->willReturn($form)
         ;
         unset($input['owner']);
@@ -111,13 +118,15 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn(true)
         ;
-        $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
+        $em->persist(Argument::type(ProposalForm::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $settableOwnerResolver
             ->__invoke($organizationId, $viewer)
             ->shouldBeCalled()
             ->willReturn($organization)
         ;
+
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
 
         $response = $this->__invoke($args, $viewer);
         $response['proposalForm']->shouldHaveType(ProposalForm::class);
@@ -129,8 +138,9 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         FormInterface $form,
-        Argument $args,
-        User $viewer
+        OverblogGraphQLArgument $args,
+        User $viewer,
+        ActionLogger $actionLogger
     ): void {
         $title = 'title';
         $input = ['title' => $title];
@@ -139,7 +149,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $args->getArrayCopy()->willReturn($input);
 
         $formFactory
-            ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
+            ->create(ProposalFormCreateType::class, Argument::any())
             ->willReturn($form)
         ;
         $form->submit($input, false)->shouldBeCalled();
@@ -150,6 +160,7 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         ;
         $form->getErrors(true, false)->willReturn('ceci est une erreur');
         $em->flush()->shouldNotBeCalled();
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(UserError::class)->during('__invoke', [$args, $viewer]);
     }

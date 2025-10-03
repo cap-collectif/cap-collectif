@@ -1,0 +1,11 @@
+IsLogged:
+    type: object
+    config:
+        description: 'Ways to log user action with custom description'
+        fields:
+            actionType:
+                type: 'LogActionType!'
+                description: 'The available action types.'
+            description:
+                type: 'String!'
+                description: 'The custom user action description'

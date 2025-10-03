@@ -29,7 +29,8 @@ class PreConfigureProjectQuestionnairePersister
     public function addQuestionnaire(
         array $questionnairesInput,
         string $ownerId,
-        User $viewer
+        User $viewer,
+        bool $toLogUserAction = true
     ): array {
         if (empty($questionnairesInput)) {
             return [];
@@ -45,7 +46,8 @@ class PreConfigureProjectQuestionnairePersister
                         'owner' => $ownerId,
                     ],
                 ]),
-                $viewer
+                $viewer,
+                $toLogUserAction
             );
 
             $questionsWithJumps = $this->getQuestionsWithJumps($questionnaireInput);
@@ -62,7 +64,8 @@ class PreConfigureProjectQuestionnairePersister
                         'description' => $questionnaireInput['description'],
                     ],
                 ]),
-                $viewer
+                $viewer,
+                true
             );
 
             $this->addJumpsToQuestionnaire($updatedQuestionnaire, $questionsWithJumps);

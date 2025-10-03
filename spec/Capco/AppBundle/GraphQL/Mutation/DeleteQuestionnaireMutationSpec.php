@@ -3,11 +3,13 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteQuestionnaireMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
@@ -16,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteQuestionnaireMutationSpec extends ObjectBehavior
@@ -26,13 +29,17 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
-        AnalysisConfigurationRepository $analysisConfigurationRepository
+        AnalysisConfigurationRepository $analysisConfigurationRepository,
+        ActionLogger $actionLogger
     ) {
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
+
         $this->beConstructedWith(
             $em,
             $globalIdResolver,
             $analysisConfigurationRepository,
-            $authorizationChecker
+            $authorizationChecker,
+            $actionLogger
         );
     }
 
@@ -57,7 +64,7 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $viewer)->shouldReturn([
+        $this->__invoke($arguments, $viewer, new RequestStack())->shouldReturn([
             'deletedQuestionnaireId' => $id,
         ]);
     }
@@ -79,11 +86,13 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $questionnaire->getProposalForm()->willReturn($proposalForm);
         $questionnaire->getStep()->shouldBeCalledOnce()->willReturn(null);
         $proposalForm->setEvaluationForm(null)->shouldBeCalled();
+        $questionnaire->getTitle()->willReturn('Titre du questionnaire');
+        $questionnaire->getId()->willReturn(1);
 
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $viewer)->shouldReturn([
+        $this->__invoke($arguments, $viewer, new RequestStack())->shouldReturn([
             'deletedQuestionnaireId' => $id,
         ]);
     }
@@ -112,7 +121,7 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $viewer)->shouldReturn([
+        $this->__invoke($arguments, $viewer, new RequestStack())->shouldReturn([
             'deletedQuestionnaireId' => $id,
         ]);
     }
@@ -151,7 +160,8 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         User $viewer,
         Questionnaire $questionnaire,
         ProposalForm $proposalForm,
-        QuestionnaireStep $questionnaireStep
+        QuestionnaireStep $questionnaireStep,
+        Project $project
     ) {
         $id = 'abc';
         $this->getMockedGraphQLArgumentFormatted($arguments);
@@ -162,9 +172,13 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $questionnaire->getProposalForm()->willReturn($proposalForm);
         $questionnaire->getStep()->shouldBeCalledOnce()->willReturn($questionnaireStep);
         $questionnaireStep->setQuestionnaire(null)->shouldBeCalledOnce();
+        $project->getTitle()->shouldBeCalledOnce()->willReturn('Mon projet');
+        $questionnaireStep->getProject()->shouldBeCalledOnce()->willReturn($project);
         $proposalForm->setEvaluationForm(null)->shouldBeCalled();
+        $questionnaire->getTitle()->shouldBeCalled()->willReturn('Titre du questionnaire');
+        $questionnaire->getId()->shouldBeCalled()->willReturn('1');
 
-        $this->__invoke($arguments, $viewer)->shouldReturn([
+        $this->__invoke($arguments, $viewer, new RequestStack())->shouldReturn([
             'deletedQuestionnaireId' => $id,
         ]);
     }

@@ -273,6 +273,12 @@
                 "href": "/admin-next/secured-participation",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
+            },
+            {
+                "title": "menu.activity-log",
+                "href": "/admin-next/activity-log",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
             }
         ]
     },

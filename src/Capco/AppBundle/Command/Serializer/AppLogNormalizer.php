@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\AppLog;
+use Capco\AppBundle\Enum\LogActionType;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -28,12 +29,16 @@ class AppLogNormalizer extends BaseNormalizer implements NormalizerInterface
      */
     public function normalize($object, ?string $format = null, array $context = []): array
     {
+        if (!$object instanceof AppLog) {
+            throw new \InvalidArgumentException(sprintf('The object must be an instance of "%s".', AppLog::class));
+        }
+
         $logs = [
             self::EXPORT_APP_LOG_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
             self::EXPORT_APP_LOG_USER_USERNAME => $object->getUser()->getUsername(),
             self::EXPORT_APP_LOG_USER_EMAIL => $object->getUser()->getEmail(),
             self::EXPORT_APP_LOG_IP => $object->getIp(),
-            self::EXPORT_APP_LOG_ACTION_TYPE => $object->getActionType(),
+            self::EXPORT_APP_LOG_ACTION_TYPE => $this->translator->trans(LogActionType::getTranslationKey($object->getActionType())),
             self::EXPORT_APP_LOG_DESCRIPTION => $object->getDescription(),
         ];
 

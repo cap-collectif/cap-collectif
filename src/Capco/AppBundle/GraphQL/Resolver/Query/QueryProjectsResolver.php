@@ -3,12 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\LogActionDescription;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProjectArchiveFilter;
 use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Search\ProjectSearch;
 use Capco\UserBundle\Entity\User;
@@ -29,6 +32,7 @@ class QueryProjectsResolver implements QueryInterface
     public function __construct(
         private readonly ProjectSearch $projectSearch,
         private readonly LoggerInterface $logger,
+        private readonly ActionLogger $actionLogger,
         private readonly QueryAnalyzer $queryAnalyzer,
         private readonly LocaleRepository $localeRepository
     ) {
@@ -40,6 +44,13 @@ class QueryProjectsResolver implements QueryInterface
         RequestStack $request,
         ResolveInfo $resolveInfo
     ): ConnectionInterface {
+        $this->actionLogger->logGraphQLQuery(
+            user: $viewer,
+            args: $args,
+            actionType: LogActionType::SHOW,
+            description: sprintf('la page %s', LogActionDescription::PROJECTS_LIST)
+        );
+
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 

@@ -34,6 +34,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\DebateStepRepository;
@@ -90,7 +91,9 @@ class ExportController extends Controller
         private readonly CronTimeInterval $cronTimeInterval,
         private readonly string $exportDir,
         private readonly string $locale,
-        private readonly string $projectDir
+        private readonly string $projectDir,
+        private readonly ActionLogger $actionLogger,
+        private readonly DebateRepository $debateRepository,
     ) {
     }
 
@@ -273,8 +276,11 @@ class ExportController extends Controller
                 404
             );
         }
+
         $response = $this->file($this->exportDir . $fileName, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        $this->actionLogger->logExport($this->getUser(), sprintf('participants du projet %s', $project->getTitle()));
 
         return $response;
     }
@@ -384,6 +390,8 @@ class ExportController extends Controller
                 return $this->redirect($redirectUrl);
             }
 
+            $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
+
             $response = $this->file($filePath, $fileName);
             $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
@@ -455,7 +463,7 @@ class ExportController extends Controller
 
         if (!file_exists($filePath)) {
             return new JsonResponse(
-                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                ['errorTranslationKey' => $this->cronTimeInterval->getRemainingCronExecutionTime(58)],
                 404
             );
         }
@@ -515,6 +523,8 @@ class ExportController extends Controller
             return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
         }
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
+
+        $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
 
         $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
@@ -693,6 +703,7 @@ class ExportController extends Controller
         string $type
     ): Response {
         $debateId = GlobalId::fromGlobalId($debateId)['id'];
+        $debate = $this->debateRepository->findOneBy(['id' => $debateId]);
 
         $user = $this->getUser();
         $isProjectAdmin = $user->isOnlyProjectAdmin();
@@ -712,6 +723,8 @@ class ExportController extends Controller
 
         $response = $this->file($filePath, $date . '_' . $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $debate->getStep()->getTitle(), $debate->getProject()->getTitle()));
 
         return $response;
     }
@@ -748,6 +761,8 @@ class ExportController extends Controller
             return $this->redirect($request->headers->get('referer'));
         }
         $date = (new \DateTime())->format('Y-m-d');
+
+        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $debate->getStep()->getTitle(), $debate->getProject()->getTitle()));
 
         $response = $this->file($filePath, $date . '_' . $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
@@ -854,6 +869,8 @@ class ExportController extends Controller
 
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
+        $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
+
         $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
@@ -894,6 +911,8 @@ class ExportController extends Controller
 
             return $this->redirect($request->headers->get('referer'));
         }
+
+        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
 
         $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
@@ -958,6 +977,8 @@ class ExportController extends Controller
                 $response = $this->file($filePath);
                 $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
+                $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
+
                 return $response;
             } catch (FileNotFoundException) {
                 return new JsonResponse(
@@ -976,6 +997,8 @@ class ExportController extends Controller
             try {
                 $response = $this->file($filePath);
                 $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+                $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
 
                 return $response;
             } catch (FileNotFoundException) {
@@ -1002,6 +1025,8 @@ class ExportController extends Controller
         $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
+            $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
+
             $response = $this->file($this->exportDir . $filename, $filename);
             $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\Tests\UserBundle\Security\Http\Logout;
+namespace Capco\Tests\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Exception\UnserializableException;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateAlternateArgumentsResolver;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class DebateAlternateArgumentsResolverTest extends TestCase
 {
     /**
-     * @covers \DebateAlternateArgumentsResolverTest::setOauthTokenFromSession()
+     * @covers \DebateAlternateArgumentsResolver::decodeCursor()
      */
     public function testUnserializeMaliciousContent(): void
     {

@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +30,8 @@ class UpdateCollectStepMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
-        private readonly ProposalStepSplitViewService $proposalStepSplitViewService
+        private readonly ProposalStepSplitViewService $proposalStepSplitViewService,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -37,9 +40,10 @@ class UpdateCollectStepMutation implements MutationInterface
         $this->formatInput($input);
         $data = $input->getArrayCopy();
         $collectStepId = $input->offsetGet('stepId');
+        $operationType = $input->offsetGet('operationType');
         $collectStep = $this->getCollectStep($collectStepId, $viewer);
 
-        unset($data['stepId']);
+        unset($data['stepId'], $data['operationType']);
 
         $form = $this->formFactory->create(CollectStepFormType::class, $collectStep);
         $form->submit($data, false);
@@ -51,6 +55,14 @@ class UpdateCollectStepMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+            sprintf('l\'étape %s du projet %s', $collectStep->getTitle(), $collectStep->getProject()->getTitle()),
+            CollectStep::class,
+            $collectStep->getId()
+        );
 
         return [
             'collectStep' => $collectStep,

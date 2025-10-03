@@ -822,7 +822,7 @@ InternalMutation:
                 builderConfig:
                     inputType: UpdateProjectInput
                     payloadType: UpdateProjectPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectMutation", args, getUser())'
             deleteProject:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProjectMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'

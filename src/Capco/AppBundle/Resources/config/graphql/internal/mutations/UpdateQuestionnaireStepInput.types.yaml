@@ -40,3 +40,5 @@ UpdateQuestionnaireStepInput:
             requirementsReason:
                 type: 'String'
                 description: 'Reasons to require these requirements.'
+            operationType:
+                type: 'StepAdminUrlOperationType'

@@ -111,7 +111,7 @@ class ActionLogger
         if (
             null === $user
             || null === $this->requestStack->getCurrentRequest()
-            || !$user->hasBackOfficeAccess()
+            || !$user->canBeAppLoggedBy()
         ) {
             $this->logger->error('You can not access to this action.');
 

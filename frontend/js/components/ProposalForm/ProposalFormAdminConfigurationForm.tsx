@@ -1,155 +1,162 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import type { IntlShape } from 'react-intl'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import * as React from 'react';
+import { connect } from 'react-redux';
+import type { IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
-import styled from 'styled-components'
-import { Panel, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap'
-import type { RelayRefetchProp } from 'react-relay'
-import { graphql, createRefetchContainer } from 'react-relay'
-import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form'
-import toggle from '../Form/Toggle'
-import select from '../Form/Select'
-import component from '../Form/Field'
-import AlertForm from '../Alert/AlertForm'
-import { submitQuestion } from '~/utils/submitQuestion'
-import ProposalFormAdminCategories from './ProposalFormAdminCategories'
-import ProposalFormAdminQuestions from './ProposalFormAdminQuestions'
-import ProposalFormAdminDistricts from './ProposalFormAdminDistricts'
-import type { GlobalState, FeatureToggles, Dispatch } from '~/types'
-import UpdateProposalFormMutation from '~/mutations/UpdateProposalFormMutation'
-import { getTranslationField, handleTranslationChange } from '~/services/Translation'
-import type { ProposalFormAdminConfigurationForm_query$data } from '~relay/ProposalFormAdminConfigurationForm_query.graphql'
-import type { ProposalFormAdminConfigurationForm_proposalForm$data } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql'
-import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm'
-import SectionDisplayMode from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode'
-import type { ProposalFormAdminConfigurationFormRefetchQuery$variables } from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql'
-import AppBox from '~ui/Primitives/AppBox'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
-import { styleGuideColors } from '~/utils/colors'
-import Heading from '~ui/Primitives/Heading'
+import styled from 'styled-components';
+import { Panel, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
+import type { RelayRefetchProp } from 'react-relay';
+import { graphql, createRefetchContainer } from 'react-relay';
+import { reduxForm, formValueSelector, Field, FieldArray, SubmissionError } from 'redux-form';
+import toggle from '../Form/Toggle';
+import select from '../Form/Select';
+import component from '../Form/Field';
+import AlertForm from '../Alert/AlertForm';
+import { submitQuestion } from '~/utils/submitQuestion';
+import ProposalFormAdminCategories from './ProposalFormAdminCategories';
+import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
+import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
+import type { GlobalState, FeatureToggles, Dispatch } from '~/types';
+import UpdateProposalFormMutation from '~/mutations/UpdateProposalFormMutation';
+import { getTranslationField, handleTranslationChange } from '~/services/Translation';
+import type {
+  ProposalFormAdminConfigurationForm_query$data,
+} from '~relay/ProposalFormAdminConfigurationForm_query.graphql';
+import type {
+  ProposalFormAdminConfigurationForm_proposalForm$data,
+} from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm';
+import SectionDisplayMode from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
+import type {
+  ProposalFormAdminConfigurationFormRefetchQuery$variables,
+} from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql';
+import AppBox from '~ui/Primitives/AppBox';
+import Flex from '~ui/Primitives/Layout/Flex';
+import Text from '~ui/Primitives/Text';
+import { styleGuideColors } from '~/utils/colors';
+import Heading from '~ui/Primitives/Heading';
+
 type RelayProps = {
   readonly proposalForm: ProposalFormAdminConfigurationForm_proposalForm$data
   readonly query: ProposalFormAdminConfigurationForm_query$data
 }
 type Props = RelayProps &
   ReduxFormFormProps & {
-    readonly defaultLanguage: string
-    readonly relay: RelayRefetchProp
-    readonly intl: IntlShape
-    readonly usingAddress: boolean
-    readonly usingCategories: boolean
-    readonly usingThemes: boolean
-    readonly usingDescription: boolean
-    readonly usingIllustration: boolean
-    readonly usingSummary: boolean
-    readonly usingDistrict: boolean
-    readonly isMapViewEnabled: boolean
-    readonly features: FeatureToggles
-    readonly descriptionUsingJoditWysiwyg?: boolean | null | undefined
-  }
+  readonly defaultLanguage: string
+  readonly relay: RelayRefetchProp
+  readonly intl: IntlShape
+  readonly usingAddress: boolean
+  readonly usingCategories: boolean
+  readonly usingThemes: boolean
+  readonly usingDescription: boolean
+  readonly usingIllustration: boolean
+  readonly usingSummary: boolean
+  readonly usingDistrict: boolean
+  readonly isMapViewEnabled: boolean
+  readonly features: FeatureToggles
+  readonly descriptionUsingJoditWysiwyg?: boolean | null | undefined
+}
 const TYPE_PROPOSAL_FORM = {
   PROPOSAL: 'PROPOSAL',
   QUESTION: 'QUESTION',
   OPINION: 'OPINION',
-}
-export const formName = 'proposal-form-admin-configuration'
+};
+export const formName = 'proposal-form-admin-configuration';
 // TODO type `FormValues`
 export const validate = (values: Record<string, any>) => {
-  const errors: any = {}
+  const errors: any = {};
 
   if (Object.keys(values).length === 0) {
-    return {}
+    return {};
   }
 
   if (values.usingCategories && values.categories.length === 0) {
-    errors.categories = 'admin.fields.proposal_form.errors.categories'
+    errors.categories = 'admin.fields.proposal_form.errors.categories';
   }
 
   if (values.viewEnabled && values.viewEnabled.isMapViewEnabled) {
     if (!values.zoomMap || values.zoomMap.length === 0) {
-      errors.zoomMap = 'admin.fields.proposal_form.errors.zoom'
+      errors.zoomMap = 'admin.fields.proposal_form.errors.zoom';
     }
 
     if (values.mapCenter && !values.mapCenter.lat) {
-      errors.lat = 'admin.fields.proposal_form.errors.lat'
+      errors.lat = 'admin.fields.proposal_form.errors.lat';
     }
 
     if (values.mapCenter && !values.mapCenter.lng) {
-      errors.lng = 'admin.fields.proposal_form.errors.lng'
+      errors.lng = 'admin.fields.proposal_form.errors.lng';
     }
   }
 
   if (values.viewEnabled && Object.values(values.viewEnabled).filter(Boolean).length === 0) {
-    errors.viewEnabled = 'select.display.mode'
+    errors.viewEnabled = 'select.display.mode';
   }
 
   if (values.usingDistrict) {
     if (values.districts.length === 0) {
-      errors.districts = 'admin.fields.proposal_form.errors.districts'
+      errors.districts = 'admin.fields.proposal_form.errors.districts';
     }
 
     if (values.districts && values.districts.length) {
-      const districtsArrayErrors = []
+      const districtsArrayErrors = [];
       values.districts.forEach((district: Record<string, any>, districtIndex: number) => {
-        const districtErrors: any = {}
+        const districtErrors: any = {};
 
         if (!district.name || district.name.length === 0) {
-          districtErrors.title = 'admin.fields.proposal_form.errors.question.title'
-          districtsArrayErrors[districtIndex] = districtErrors
+          districtErrors.title = 'admin.fields.proposal_form.errors.question.title';
+          districtsArrayErrors[districtIndex] = districtErrors;
         }
 
         if (!district.geojson || district.geojson.length === 0) {
-          districtErrors.title = 'admin.fields.proposal_form.errors.district.geojson'
-          districtsArrayErrors[districtIndex] = districtErrors
+          districtErrors.title = 'admin.fields.proposal_form.errors.district.geojson';
+          districtsArrayErrors[districtIndex] = districtErrors;
         }
-      })
+      });
 
       if (districtsArrayErrors.length) {
-        errors.districts = districtsArrayErrors
+        errors.districts = districtsArrayErrors;
       }
     }
   }
 
   if (values.questions && values.questions.length) {
-    const questionsArrayErrors = []
+    const questionsArrayErrors = [];
     values.questions.forEach((question: Record<string, any>, questionIndex: number) => {
-      const questionErrors: any = {}
+      const questionErrors: any = {};
 
       if (!question.title || question.title.length === 0) {
-        questionErrors.title = 'admin.fields.proposal_form.errors.question.title'
-        questionsArrayErrors[questionIndex] = questionErrors
+        questionErrors.title = 'admin.fields.proposal_form.errors.question.title';
+        questionsArrayErrors[questionIndex] = questionErrors;
       }
 
       if (!question.type || question.type.length === 0) {
-        questionErrors.type = 'admin.fields.proposal_form.errors.question.type'
-        questionsArrayErrors[questionIndex] = questionErrors
+        questionErrors.type = 'admin.fields.proposal_form.errors.question.type';
+        questionsArrayErrors[questionIndex] = questionErrors;
       }
 
       if (question.isRangeBetween) {
         if (!question.rangeMin && !question.rangeMax) {
-          questionErrors.rangeMin = 'error.define-value'
-          questionErrors.rangeMax = 'error.define-value'
-          questionsArrayErrors[questionIndex] = questionErrors
+          questionErrors.rangeMin = 'error.define-value';
+          questionErrors.rangeMax = 'error.define-value';
+          questionsArrayErrors[questionIndex] = questionErrors;
         } else if (parseInt(question.rangeMin, 10) === 0 && parseInt(question.rangeMax, 10) === 0) {
-          questionErrors.rangeMin = 'error.define-value'
-          questionErrors.rangeMax = 'error.define-value'
-          questionsArrayErrors[questionIndex] = questionErrors
+          questionErrors.rangeMin = 'error.define-value';
+          questionErrors.rangeMax = 'error.define-value';
+          questionsArrayErrors[questionIndex] = questionErrors;
         } else if (parseInt(question.rangeMin, 10) > parseInt(question.rangeMax, 10)) {
-          questionErrors.rangeMin = 'error.min-higher-maximum'
-          questionsArrayErrors[questionIndex] = questionErrors
+          questionErrors.rangeMin = 'error.min-higher-maximum';
+          questionsArrayErrors[questionIndex] = questionErrors;
         }
       }
-    })
+    });
 
     if (questionsArrayErrors.length) {
-      errors.questions = questionsArrayErrors
+      errors.questions = questionsArrayErrors;
     }
   }
 
-  return errors
-}
+  return errors;
+};
 const headerPanelUsingCategories = (
   <div id="proposal_form_admin_category_panel">
     <h4 className="pull-left">
@@ -165,7 +172,7 @@ const headerPanelUsingCategories = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 const headerPanelUsingThemes = (
   <div>
     <h4 className="pull-left">
@@ -176,7 +183,7 @@ const headerPanelUsingThemes = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 
 const headerPanelUsingAddress = isMapViewEnabled => (
   <div id="address">
@@ -194,7 +201,7 @@ const headerPanelUsingAddress = isMapViewEnabled => (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 
 const headerPanelUsingDistrict = (
   <div>
@@ -206,7 +213,7 @@ const headerPanelUsingDistrict = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 const headerPanelUsingDescription = (
   <div id="description">
     <h4 className="pull-left">
@@ -222,7 +229,7 @@ const headerPanelUsingDescription = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 const headerPanelUsingSummary = (
   <div id="summary">
     <h4 className="pull-left">
@@ -233,7 +240,7 @@ const headerPanelUsingSummary = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 const headerPanelUsingIllustration = (
   <div id="illustration">
     <h4 className="pull-left">
@@ -249,22 +256,22 @@ const headerPanelUsingIllustration = (
     </div>
     <div className="clearfix" />
   </div>
-)
+);
 const ExternaLinksFlex = styled(Flex)`
   .form-group {
     max-width: 400px;
     margin-top: 4px;
     margin-bottom: 0;
   }
-`
+`;
 
 const getCategoryImage = (
   category: {
     name: string
     newCategoryImage:
       | {
-          id: string
-        }
+      id: string
+    }
       | null
       | undefined
     customCategoryImage?: {
@@ -279,79 +286,80 @@ const getCategoryImage = (
   isUploaded: boolean,
 ): string | null | undefined => {
   if (category.newCategoryImage && isUploaded) {
-    return category.newCategoryImage.id
+    return category.newCategoryImage.id;
   }
 
   if (!isUploaded) {
     if (category.categoryImage && category.customCategoryImage) {
-      return category.customCategoryImage.id
+      return category.customCategoryImage.id;
     }
 
     if (!category.categoryImage && category.customCategoryImage) {
-      return category.customCategoryImage.id
+      return category.customCategoryImage.id;
     }
 
     if (category.categoryImage && !category.customCategoryImage) {
-      return category.categoryImage.id
+      return category.categoryImage.id;
     }
   }
 
-  return null
-}
+  return null;
+};
 
 const getDistrictsTranslated = (districts, defaultLanguage: string) =>
   districts.map(district => {
     const translation = {
       name: district.name,
       locale: defaultLanguage,
-    }
+    };
     return {
       ...district,
       name: undefined,
       translations: handleTranslationChange(district.translations || [], translation, defaultLanguage),
-    }
-  })
+    };
+  });
 
 const isJsonString = str => {
   try {
-    JSON.parse(str)
+    JSON.parse(str);
   } catch (e) {
-    return false
+    return false;
   }
 
-  return true
-}
+  return true;
+};
 
 const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props) => {
-  const { intl, defaultLanguage } = props
+  const { intl, defaultLanguage } = props;
   values.questions.map((question, index) => {
     if (question.importedResponses || question.importedResponses === null) {
-      delete question.importedResponses
+      delete question.importedResponses;
     }
 
-    values.questions[index].title = values.questions[index].title.trim()
+    values.questions[index].title = values.questions[index].title.trim();
 
     if (question.choices) {
       question.choices.map((choice, key) => {
-        question.choices[key].title = question.choices[key].title.trim()
-      })
+        question.choices[key].title = question.choices[key].title.trim();
+      });
     }
-  })
+  });
   const { id, __id, __fragmentOwner, __fragments, viewEnabled, address, __isWithinUnmatchedTypeRefinement, ...rest } =
-    values
-  let mapCenter = null
+    values;
+  let mapCenter = null;
 
   if (values.mapCenter && values.viewEnabled.isMapViewEnabled) {
     if (!isJsonString(values.mapCenter.json)) {
-      mapCenter = JSON.stringify([values.mapCenter.json])
+      mapCenter = JSON.stringify([values.mapCenter.json]);
     } else if (isJsonString(values.mapCenter.json)) {
-      mapCenter = values.mapCenter.json
+      mapCenter = values.mapCenter.json;
     }
   }
 
   const input = {
     ...rest,
     proposalFormId: props.proposalForm.id,
+    isLogged: true,
     districts: getDistrictsTranslated(values.districts, defaultLanguage),
     categories: values.categories.map(category => ({
       id: category.id || null,
@@ -367,75 +375,76 @@ const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props)
     isMapViewEnabled: values.viewEnabled.isMapViewEnabled,
     objectType: values.objectType,
     mapCenter,
-  }
+  };
   const nbChoices = input.questions.reduce((acc, array) => {
     if (array && array.question && array.question.choices && array.question.choices.length) {
-      acc += array.question.choices.length
+      acc += array.question.choices.length;
     }
 
-    return acc
-  }, 0)
+    return acc;
+  }, 0);
   return UpdateProposalFormMutation.commit({
     // @ts-ignore
     input,
   })
     .then(response => {
       if (nbChoices > 1500) {
-        window.location.reload()
+        window.location.reload();
       }
 
       if (!response.updateProposalForm || !response.updateProposalForm.proposalForm) {
-        throw new Error('Mutation "updateProposalForm" failed.')
+        throw new Error('Mutation "updateProposalForm" failed.');
       }
 
       if (response.updateProposalForm) {
-        props.relay.refetch({} as ProposalFormAdminConfigurationFormRefetchQuery$variables, null, () => {}, {
+        props.relay.refetch({} as ProposalFormAdminConfigurationFormRefetchQuery$variables, null, () => {
+        }, {
           force: true,
-        })
+        });
       }
     })
     .catch(response => {
       if (response.response && response.response.message) {
         throw new SubmissionError({
           _error: response.response.message,
-        })
+        });
       } else {
         throw new SubmissionError({
           _error: intl.formatMessage({
             id: 'global.error.server.form',
           }),
-        })
+        });
       }
-    })
-}
+    });
+};
 
 export const ProposalFormAdminConfigurationForm = ({
-  intl,
-  invalid,
-  valid,
-  submitSucceeded,
-  submitFailed,
-  pristine,
-  handleSubmit,
-  submitting,
-  usingAddress,
-  usingThemes,
-  usingCategories,
-  usingDescription,
-  usingSummary,
-  usingIllustration,
-  usingDistrict,
-  features,
-  query,
-  isMapViewEnabled,
-  proposalForm,
-  dispatch,
-}: Props) => {
+                                                     intl,
+                                                     invalid,
+                                                     valid,
+                                                     submitSucceeded,
+                                                     submitFailed,
+                                                     pristine,
+                                                     handleSubmit,
+                                                     submitting,
+                                                     usingAddress,
+                                                     usingThemes,
+                                                     usingCategories,
+                                                     usingDescription,
+                                                     usingSummary,
+                                                     usingIllustration,
+                                                     usingDistrict,
+                                                     features,
+                                                     query,
+                                                     isMapViewEnabled,
+                                                     proposalForm,
+                                                     dispatch,
+                                                   }: Props) => {
   const optional = (
     <span className="excerpt">
       <FormattedMessage id="global.optional" />
     </span>
-  )
+  );
   return (
     <form onSubmit={handleSubmit} id="proposalFormVote">
       <div className="box box-primary container-fluid mt-10">
@@ -527,7 +536,8 @@ export const ProposalFormAdminConfigurationForm = ({
             <FormattedMessage id="proposal_form.admin.configuration.optional_field" />
           </h3>
         </div>
-        <Panel id="proposal_form_admin_description_panel_body" expanded={usingDescription} onToggle={() => {}}>
+        <Panel id="proposal_form_admin_description_panel_body" expanded={usingDescription} onToggle={() => {
+        }}>
           <Panel.Heading>{headerPanelUsingDescription}</Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -554,7 +564,8 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
-        <Panel id="proposal_form_admin_summary_panel_body" expanded={usingSummary} onToggle={() => {}}>
+        <Panel id="proposal_form_admin_summary_panel_body" expanded={usingSummary} onToggle={() => {
+        }}>
           <Panel.Heading>{headerPanelUsingSummary}</Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -573,7 +584,8 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
-        <Panel id="proposal_form_admin_illustration_panel_body" expanded={usingIllustration} onToggle={() => {}}>
+        <Panel id="proposal_form_admin_illustration_panel_body" expanded={usingIllustration} onToggle={() => {
+        }}>
           <Panel.Heading>{headerPanelUsingIllustration}</Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -593,7 +605,8 @@ export const ProposalFormAdminConfigurationForm = ({
           </Panel.Collapse>
         </Panel>
         {features.themes && (
-          <Panel expanded={usingThemes} onToggle={() => {}}>
+          <Panel expanded={usingThemes} onToggle={() => {
+          }}>
             <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
             <Panel.Collapse>
               <Panel.Body>
@@ -616,7 +629,8 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Collapse>
           </Panel>
         )}
-        <Panel id="proposal_form_admin_category_panel_body" expanded={usingCategories} onToggle={() => {}}>
+        <Panel id="proposal_form_admin_category_panel_body" expanded={usingCategories} onToggle={() => {
+        }}>
           <Panel.Heading>{headerPanelUsingCategories}</Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -651,7 +665,8 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
-        <Panel id="address-body" expanded={usingAddress} onToggle={() => {}}>
+        <Panel id="address-body" expanded={usingAddress} onToggle={() => {
+        }}>
           <Panel.Heading>{headerPanelUsingAddress(isMapViewEnabled)}</Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -675,7 +690,8 @@ export const ProposalFormAdminConfigurationForm = ({
         </Panel>
 
         {features.districts && (
-          <Panel expanded={usingDistrict} onToggle={() => {}}>
+          <Panel expanded={usingDistrict} onToggle={() => {
+          }}>
             <Panel.Heading>{headerPanelUsingDistrict}</Panel.Heading>
             <Panel.Collapse>
               <Panel.Body>
@@ -794,43 +810,43 @@ export const ProposalFormAdminConfigurationForm = ({
         </div>
       </AppBox>
     </form>
-  )
-}
+  );
+};
 const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
   form: formName,
   asyncValidate,
-})(ProposalFormAdminConfigurationForm)
-export const selector = formValueSelector(formName)
+})(ProposalFormAdminConfigurationForm);
+export const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState, props: RelayProps) => {
   const questions = props.proposalForm.questions.map(question => {
     if (question.__typename !== 'MultipleChoiceQuestion')
-      return { ...question, descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false }
+      return { ...question, descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false };
     const choices =
       question.choices && question.choices.edges
         ? question.choices.edges
-            .filter(Boolean)
-            .map(edge => ({
-              ...edge.node,
-              descriptionUsingJoditWysiwyg: edge.node?.descriptionUsingJoditWysiwyg !== false,
-            }))
-            .filter(Boolean)
-        : []
-    return { ...question, choices, descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false }
-  })
+          .filter(Boolean)
+          .map(edge => ({
+            ...edge.node,
+            descriptionUsingJoditWysiwyg: edge.node?.descriptionUsingJoditWysiwyg !== false,
+          }))
+          .filter(Boolean)
+        : [];
+    return { ...question, choices, descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false };
+  });
   return {
     initialValues: {
       ...props.proposalForm,
       descriptionUsingJoditWysiwyg: props.proposalForm.descriptionUsingJoditWysiwyg !== false,
       step: undefined,
       categories: props.proposalForm.categories.filter(Boolean).map(category => {
-        const categoryImage = category.categoryImage && category.categoryImage.isDefault ? category.categoryImage : null
+        const categoryImage = category.categoryImage && category.categoryImage.isDefault ? category.categoryImage : null;
         const customCategoryImage =
-          category.categoryImage && !category.categoryImage.isDefault ? category.categoryImage : null
-        return { ...category, categoryImage, customCategoryImage }
+          category.categoryImage && !category.categoryImage.isDefault ? category.categoryImage : null;
+        return { ...category, categoryImage, customCategoryImage };
       }),
       questions,
       districts: props.proposalForm.districts
@@ -873,12 +889,12 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
     isMapViewEnabled: selector(state, 'viewEnabled')?.isMapViewEnabled,
-  }
-}
+  };
+};
 
 // @ts-ignore
-const container = connect(mapStateToProps)(form)
-const intlContainer = injectIntl(container)
+const container = connect(mapStateToProps)(form);
+const intlContainer = injectIntl(container);
 export default createRefetchContainer(
   intlContainer,
   {
@@ -984,4 +1000,4 @@ export default createRefetchContainer(
       }
     }
   `,
-)
+);

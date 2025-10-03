@@ -50,17 +50,25 @@ const OpenDataUsersQuery = /* GraphQL */ `
 describe('Preview|Query.users connection', () => {
   it('fetches the first hundred users with a cursor', async () => {
     await expect(
-      graphql(OpenDataUsersQuery, {
-        count: 100,
-      }),
+      graphql(
+        OpenDataUsersQuery,
+        {
+          count: 100,
+        },
+        'internal',
+      ),
     ).resolves.toMatchSnapshot();
   });
   it('fetches the next three users with a cursor', async () => {
     await expect(
-      graphql(OpenDataUsersQuery, {
-        count: 5,
-        cursor: 'YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxMDEiO30=',
-      }),
+      graphql(
+        OpenDataUsersQuery,
+        {
+          count: 5,
+          cursor: 'YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxMDEiO30=',
+        },
+        'internal',
+      ),
     ).resolves.toMatchSnapshot();
   });
   it('fetches the five last users', async () => {

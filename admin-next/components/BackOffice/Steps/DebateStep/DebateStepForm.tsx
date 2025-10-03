@@ -30,6 +30,7 @@ import { onBack } from '@components/BackOffice/Steps/utils'
 import { useDebateStep } from './DebateStepContext'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string
@@ -223,6 +224,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     const input: UpdateDebateStepInput = {
       ...values,
       isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
+      operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
       timeless,
       articles,
     }

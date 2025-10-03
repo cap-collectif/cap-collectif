@@ -1,19 +1,20 @@
-import * as React from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl'
-import { connect } from 'react-redux'
-import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart'
-import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking'
-import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart'
-import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText'
-import QuestionnaireAdminResultMajority from './QuestionnaireAdminResultMajority/QuestionnaireAdminResultMajority'
-import type { QuestionnaireAdminResults_questionnaire } from '~relay/QuestionnaireAdminResults_questionnaire.graphql'
-import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia'
-import withColors from '../Utils/withColors'
-import PrivateBox from '../Ui/Boxes/PrivateBox'
-import type { GlobalState } from '~/types'
-import QuestionnaireAdminResultsExportMenu from '~/components/Questionnaire/QuestionnaireAdminResultsExportMenu'
-import Flex from '~ui/Primitives/Layout/Flex'
+import * as React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
+import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
+import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
+import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText';
+import QuestionnaireAdminResultMajority from './QuestionnaireAdminResultMajority/QuestionnaireAdminResultMajority';
+import type { QuestionnaireAdminResults_questionnaire } from '~relay/QuestionnaireAdminResults_questionnaire.graphql';
+import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
+import withColors from '../Utils/withColors';
+import PrivateBox from '../Ui/Boxes/PrivateBox';
+import type { GlobalState } from '~/types';
+import QuestionnaireAdminResultsExportMenu from '~/components/Questionnaire/QuestionnaireAdminResultsExportMenu';
+import Flex from '~ui/Primitives/Layout/Flex';
+
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire
   backgroundColor: string
@@ -27,13 +28,14 @@ export type ChartsRef = Array<{
   readonly id: string
   readonly ref: any
 }>
+
 export class QuestionnaireAdminResults extends React.Component<Props> {
-  chartsRef: ChartsRef = []
+  chartsRef: ChartsRef = [];
   getFormattedResults = (question: Record<string, any>) => {
-    const { backgroundColor } = this.props
+    const { backgroundColor } = this.props;
 
     if (question.participants && question.participants.totalCount === 0) {
-      return null
+      return null;
     }
 
     // majority is also a simple question let it here :)
@@ -45,10 +47,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             this.chartsRef.push({
               id: question.id,
               ref: el,
-            })
+            });
           }}
         />
-      )
+      );
     }
 
     if (question.__typename === 'SimpleQuestion') {
@@ -59,14 +61,14 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             this.chartsRef.push({
               id: question.id,
               ref: el,
-            })
+            });
           }}
         />
-      )
+      );
     }
 
     if (question.__typename === 'MediaQuestion') {
-      return <QuestionnaireAdminResultsMedia mediaQuestion={question} />
+      return <QuestionnaireAdminResultsMedia mediaQuestion={question} />;
     }
 
     if (question.__typename !== 'MultipleChoiceQuestion') {
@@ -74,7 +76,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
         <p className="mb-25">
           <FormattedHTMLMessage id="results-not-available" />
         </p>
-      )
+      );
     }
 
     if (question.type === 'checkbox') {
@@ -86,10 +88,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             this.chartsRef.push({
               id: question.id,
               ref: el?.current,
-            })
+            });
           }}
         />
-      )
+      );
     }
 
     if (question.type === 'radio' || question.type === 'select' || question.type === 'button') {
@@ -101,10 +103,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             this.chartsRef.push({
               id: question.id,
               ref: el,
-            })
+            });
           }}
         />
-      )
+      );
     }
 
     if (question.type === 'ranking') {
@@ -115,18 +117,18 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             this.chartsRef.push({
               id: question.id,
               ref: el,
-            })
+            });
           }}
         />
-      )
+      );
     }
 
-    return null
-  }
+    return null;
+  };
 
   render() {
-    const { questionnaire, logoUrl } = this.props
-    const questions = questionnaire.questions.filter(q => q.type !== 'section')
+    const { questionnaire, logoUrl } = this.props;
+    const questions = questionnaire.questions.filter(q => q.type !== 'section');
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-25">
@@ -190,10 +192,11 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           )}
         </div>
       </div>
-    )
+    );
   }
 }
-const container = withColors(QuestionnaireAdminResults)
+
+const container = withColors(QuestionnaireAdminResults);
 const fragmentContainer = createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
@@ -220,10 +223,10 @@ const fragmentContainer = createFragmentContainer(container, {
       }
     }
   `,
-})
+});
 
 const mapStateToProps = (state: GlobalState) => ({
   logoUrl: state.default?.images?.logoUrl,
-})
+});
 
-export default connect(mapStateToProps)(fragmentContainer)
+export default connect(mapStateToProps)(fragmentContainer);

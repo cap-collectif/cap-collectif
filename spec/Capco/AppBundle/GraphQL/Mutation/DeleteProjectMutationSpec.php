@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\DeleteProjectMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteProjectMutationSpec extends ObjectBehavior
@@ -23,9 +25,12 @@ class DeleteProjectMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
-        Indexer $indexer
+        Indexer $indexer,
+        ActionLogger $actionLogger
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker, $indexer);
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
+
+        $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker, $indexer, $actionLogger);
     }
 
     public function it_is_initializable()
@@ -48,7 +53,7 @@ class DeleteProjectMutationSpec extends ObjectBehavior
         $em->remove(Argument::type(Project::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments, $viewer)->shouldReturn([
+        $this->__invoke($arguments, $viewer, new RequestStack())->shouldReturn([
             'deletedProjectId' => $id,
         ]);
     }

@@ -1,6 +1,7 @@
-﻿export_log_admin_created_at,export_log_admin_user_username,export_log_admin_user_email,export_log_admin_ip,export_log_admin_action_type,export_log_admin_description
-"2025-07-01 12:02:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,DELETE,"l'étape Collecte des questions chez youpie du projet Questions/Responses"
-"2025-07-01 11:59:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,EXPORT,"les données des utilisateurs"
-"2025-06-01 18:35:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,EDIT,"Formulaire de questionnaire du projet Je suis un projet"
-"2025-06-01 15:32:18",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,CREATE,"Formulaire de questionnaire du projet Je suis un projet"
-"2025-01-01 00:00:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,SHOW,"Page Liste des utilisateurs"
+﻿DATE,UTILISATEUR,EMAIL,"ADRESSE IP",ACTION,DESCRIPTION
+"2025-07-01 12:02:00",admin,admin@test.com,127.0.0.1,export_app_log_delete_action_type,"l'étape Collecte des questions chez youpie du projet Questions/Responses"
+"2025-07-01 11:59:00",welcomattic,msantostefano@cap-collectif.com,127.0.0.1,export_app_log_export_action_type,"les données des utilisateurs"
+"2025-07-01 11:59:00","Valérie Masson Delmotte",valerie.massondelmotte@cap-collectif.com,127.0.0.2,export_app_log_export_action_type,"les données des utilisateurs"
+"2025-06-01 18:35:00",xlacot,xlacot@cap-collectif.com,127.0.0.1,export_app_log_edit_action_type,"Formulaire de questionnaire du projet Je suis un projet"
+"2025-06-01 15:32:18",sfavot,sfavot@cap-collectif.com,127.0.0.1,export_app_log_create_action_type,"Formulaire de questionnaire du projet Je suis un projet"
+"2025-01-01 00:00:00",lbrunet,lbrunet@cap-collectif.com,127.0.0.1,export_app_log_show_action_type,"Page Liste des utilisateurs"

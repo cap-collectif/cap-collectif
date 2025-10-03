@@ -1,43 +1,44 @@
-import * as React from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
-import type { RelayPaginationProp } from 'react-relay'
-import { createFragmentContainer, createPaginationContainer, graphql } from 'react-relay'
-import { useDisclosure } from '@liinkiing/react-hooks'
-import { connect } from 'react-redux'
-import PickableList from '~ui/List/PickableList'
-import { usePickableList } from '~ui/List/PickableList/usePickableList'
-import DropdownSelect from '~ui/DropdownSelect'
-import Collapsable from '~ui/Collapsable'
-import { getAllFormattedChoicesForProject, getDifferenceFilters } from '../ProjectAdminParticipants.utils'
-import { useProjectAdminParticipantsContext } from '../ProjectAdminParticipant.context'
-import type { SortValues, Action } from '../ProjectAdminParticipant.reducer'
+import * as React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import type { RelayPaginationProp } from 'react-relay';
+import { createFragmentContainer, createPaginationContainer, graphql } from 'react-relay';
+import { useDisclosure } from '@liinkiing/react-hooks';
+import { connect } from 'react-redux';
+import PickableList from '~ui/List/PickableList';
+import { usePickableList } from '~ui/List/PickableList/usePickableList';
+import DropdownSelect from '~ui/DropdownSelect';
+import Collapsable from '~ui/Collapsable';
+import { getAllFormattedChoicesForProject, getDifferenceFilters } from '../ProjectAdminParticipants.utils';
+import { useProjectAdminParticipantsContext } from '../ProjectAdminParticipant.context';
+import type { SortValues, Action } from '../ProjectAdminParticipant.reducer';
 import {
   AnalysisPickableListContainer,
   AnalysisProposalListFiltersAction,
   AnalysisProposalListFiltersContainer,
   AnalysisProposalListFiltersList,
   AnalysisProposalListHeaderContainer,
-} from '~ui/Analysis/common.style'
-import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import FilterTag from '~ui/Analysis/FilterTag'
-import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort'
-import ProjectAdminParticipant from '../ProjectAdminParticipant/ProjectAdminParticipant'
-import ClearableInput from '~ui/Form/Input/ClearableInput'
-import { HeaderContainer, ButtonSendMail } from './ProjetAdminParticipants.style'
-import NoParticipant from '~/components/Admin/Project/ProjectAdminParticipantTab/NoParticipant/NoParticipant'
-import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton'
-import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminParticipants_project.graphql'
-import colors from '~/styles/modules/colors'
-import ModalCreateMailingList from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList'
-import type { GlobalState } from '~/types'
-import { clearToasts } from '~ds/Toast'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import Tooltip from '~ds/Tooltip/Tooltip'
-import type { ProjectAdminParticipants_viewer } from '~relay/ProjectAdminParticipants_viewer.graphql'
-import { Box, Flex } from '@cap-collectif/ui'
+} from '~ui/Analysis/common.style';
+import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader';
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
+import FilterTag from '~ui/Analysis/FilterTag';
+import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
+import ProjectAdminParticipant from '../ProjectAdminParticipant/ProjectAdminParticipant';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
+import { HeaderContainer, ButtonSendMail } from './ProjetAdminParticipants.style';
+import NoParticipant from '~/components/Admin/Project/ProjectAdminParticipantTab/NoParticipant/NoParticipant';
+import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
+import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminParticipants_project.graphql';
+import colors from '~/styles/modules/colors';
+import ModalCreateMailingList
+  from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList';
+import type { GlobalState } from '~/types';
+import { clearToasts } from '~ds/Toast';
+import useFeatureFlag from '@shared/hooks/useFeatureFlag';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import type { ProjectAdminParticipants_viewer } from '~relay/ProjectAdminParticipants_viewer.graphql';
+import { Box, Flex } from '@cap-collectif/ui';
 
-export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30
+export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30;
 type Props = {
   readonly relay: RelayPaginationProp
   readonly project: ProjectAdminParticipants_project
@@ -57,19 +58,19 @@ const countSelectedNotConsenting = (project: ProjectAdminParticipants_project, s
       .map(edge => edge.node)
       .filter(node => node && selectedIds.includes(node.id))
       .filter(node => !node.consentInternalCommunication).length ?? 0
-  )
-}
+  );
+};
 
 const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }: HeaderProps) => {
-  const { selectedRows, rowsCount } = usePickableList()
-  const { parameters, dispatch } = useProjectAdminParticipantsContext()
-  const intl = useIntl()
-  const hasFeatureEmail = useFeatureFlag('emailing')
-  const hasFeaturePaperVote = useFeatureFlag('paper_vote')
+  const { selectedRows, rowsCount } = usePickableList();
+  const { parameters, dispatch } = useProjectAdminParticipantsContext();
+  const intl = useIntl();
+  const hasFeatureEmail = useFeatureFlag('emailing');
+  const hasFeaturePaperVote = useFeatureFlag('paper_vote');
   const { steps, userTypes, filtersOrdered } = React.useMemo(
     () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered),
     [project, parameters.filtersOrdered],
-  )
+  );
   const renderFilters = (
     <>
       <Collapsable align="right">
@@ -157,11 +158,11 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
           dispatch({
             type: 'CHANGE_SORT',
             payload: newValue as any as SortValues,
-          })
+          });
         }}
       />
     </>
-  )
+  );
   return (
     <React.Fragment>
       {selectedRows.length > 0 && hasFeatureEmail ? (
@@ -225,9 +226,9 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
                     onClose={
                       action
                         ? () =>
-                            dispatch({
-                              type: action,
-                            } as any as Action)
+                          dispatch({
+                            type: action,
+                          } as any as Action)
                         : null
                     }
                     icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
@@ -242,21 +243,21 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
         </React.Fragment>
       )}
     </React.Fragment>
-  )
-}
+  );
+};
 
 export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer }: Props) => {
-  const { parameters, status, dispatch } = useProjectAdminParticipantsContext()
-  const { selectedRows } = usePickableList()
-  const refusingCount = countSelectedNotConsenting(project, selectedRows)
-  const intl = useIntl()
-  const hasFeatureEmail = useFeatureFlag('emailing')
-  const hasParticipants = project.participants?.totalCount > 0
-  const hasSelectedFilters = getDifferenceFilters(parameters.filters)
-  const { isOpen, onOpen, onClose } = useDisclosure(false)
+  const { parameters, status, dispatch } = useProjectAdminParticipantsContext();
+  const { selectedRows } = usePickableList();
+  const refusingCount = countSelectedNotConsenting(project, selectedRows);
+  const intl = useIntl();
+  const hasFeatureEmail = useFeatureFlag('emailing');
+  const hasParticipants = project.participants?.totalCount > 0;
+  const hasSelectedFilters = getDifferenceFilters(parameters.filters);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   React.useEffect(() => {
-    clearToasts()
-  })
+    clearToasts();
+  });
   return (
     <Box
       sx={{
@@ -273,7 +274,7 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
               disabled={!hasParticipants}
               linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
               onChange={stepId => {
-                window.open(`/export-step-contributors/${stepId}`, '_blank')
+                window.open(`/export-step-contributors/${stepId}`, '_blank');
               }}
             >
               {project.exportableSteps.filter(Boolean).map(({ step }) => {
@@ -282,10 +283,10 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
                     <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
                       {step.title}
                     </DropdownSelect.Choice>
-                  )
+                  );
                 }
 
-                return null
+                return null;
               })}
             </ExportButton>
           )}
@@ -300,7 +301,7 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
               if (parameters.filters.term !== null) {
                 dispatch({
                   type: 'CLEAR_TERM',
-                })
+                });
               }
             }}
             initialValue={parameters.filters.term}
@@ -308,12 +309,12 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
               if (term === '' && parameters.filters.term !== null) {
                 dispatch({
                   type: 'CLEAR_TERM',
-                })
+                });
               } else if (term !== '' && parameters.filters.term !== term) {
                 dispatch({
                   type: 'SEARCH_TERM',
                   payload: term,
-                })
+                });
               }
             }}
             placeholder={intl.formatMessage({
@@ -326,7 +327,7 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
           isLoading={status === 'loading'}
           useInfiniteScroll={hasParticipants}
           onScrollToBottom={() => {
-            relay.loadMore(PROJECT_ADMIN_PARTICIPANT_PAGINATION)
+            relay.loadMore(PROJECT_ADMIN_PARTICIPANT_PAGINATION);
           }}
           hasMore={project.participants?.pageInfo.hasNextPage}
           loader={<AnalysisProposalListLoader key="loader" />}
@@ -368,8 +369,8 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
         />
       </AnalysisPickableListContainer>
     </Box>
-  )
-}
+  );
+};
 const ProjectAdminParticipantsRelay = createPaginationContainer(
   ProjectAdminParticipants,
   {
@@ -465,15 +466,15 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
      * @ts-expect-error
      * */
     getConnectionFromProps(props: Props) {
-      return props.project && props.project.participants
+      return props.project && props.project.participants;
     },
 
     getFragmentVariables(prevVars) {
-      return { ...prevVars }
+      return { ...prevVars };
     },
 
     getVariables(props: Props, { count, cursor }, fragmentVariables) {
-      return { ...fragmentVariables, viewerIsAdmin: props.viewerIsAdmin, count, cursor }
+      return { ...fragmentVariables, viewerIsAdmin: props.viewerIsAdmin, count, cursor };
     },
 
     query: graphql`
@@ -505,13 +506,13 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
       }
     `,
   },
-)
+);
 
 const mapStateToProps = (state: GlobalState) => ({
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
-})
+});
 
-const ProjectAdminParticipantsConnected = connect(mapStateToProps)(ProjectAdminParticipantsRelay)
+const ProjectAdminParticipantsConnected = connect(mapStateToProps)(ProjectAdminParticipantsRelay);
 export default createFragmentContainer(ProjectAdminParticipantsConnected, {
   viewer: graphql`
     fragment ProjectAdminParticipants_viewer on User {
@@ -519,4 +520,4 @@ export default createFragmentContainer(ProjectAdminParticipantsConnected, {
       ...ModalCreateMailingList_viewer
     }
   `,
-})
+});

@@ -25,6 +25,7 @@ import { useOtherStep } from './OtherStepContext'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string
@@ -154,6 +155,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     const input = {
       ...values,
       stepId,
+      operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
       isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       timeless,
       endAt: timeless ? null : values?.endAt,

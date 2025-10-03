@@ -29,4 +29,5 @@ UpdateOtherStepInput:
             timeless:
                 type: 'Boolean!'
                 description: 'Wether or not the step is timeless'
-
+            operationType:
+                type: 'StepAdminUrlOperationType'

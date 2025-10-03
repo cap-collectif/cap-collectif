@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
@@ -20,7 +23,8 @@ class DeleteQuestionnaireMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AnalysisConfigurationRepository $analysisConfigurationRepository,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -50,6 +54,16 @@ class DeleteQuestionnaireMutation implements MutationInterface
 
         $this->em->remove($questionnaire);
         $this->em->flush();
+
+        $projectTitle = $step?->getProject()?->getTitle();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::DELETE,
+            sprintf('le formulaire de questionnaire %s%s', $questionnaire->getTitle(), null === $projectTitle ? '' : sprintf(' du projet %s', $projectTitle)),
+            Questionnaire::class,
+            $questionnaire->getId()
+        );
 
         return ['deletedQuestionnaireId' => $id];
     }

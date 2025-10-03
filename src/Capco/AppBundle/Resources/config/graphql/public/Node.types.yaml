@@ -2,4 +2,4 @@ Node:
     type: relay-node
     config:
         description: 'An object with an ID.'
-        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", value)'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", value, serv("request_stack"), getUser())'

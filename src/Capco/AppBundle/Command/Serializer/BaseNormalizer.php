@@ -11,6 +11,12 @@ abstract class BaseNormalizer
 {
     final public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
     final public const EXPORT_VARIANT = 'export_variant';
+    final public const IS_FULL_EXPORT = 'is_full_export';
+    final public const EXPORT_APP_LOG_SHOW_ACTION_TYPE = 'export_app_log_show_action_type';
+    final public const EXPORT_APP_LOG_CREATE_ACTION_TYPE = 'export_app_log_create_action_type';
+    final public const EXPORT_APP_LOG_DELETE_ACTION_TYPE = 'export_app_log_delete_action_type';
+    final public const EXPORT_APP_LOG_EDIT_ACTION_TYPE = 'export_app_log_edit_action_type';
+    final public const EXPORT_APP_LOG_EXPORT_ACTION_TYPE = 'export_app_log_export_action_type';
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY = 'export_contribution_type_questionnaire_reply';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS = 'export_contribution_type_questionnaire_reply_anonymous';
@@ -326,10 +332,10 @@ abstract class BaseNormalizer
     protected const EXPORT_APP_LOG_CREATED_AT = 'export_app_log_created_at';
     protected const EXPORT_APP_LOG_DESCRIPTION = 'export_app_log_description';
     protected const EXPORT_APP_LOG_IP = 'export_app_log_ip';
-
     protected const EXPORT_APP_LOG_USER_EMAIL = 'export_app_log_user_email';
     protected const EXPORT_APP_LOG_ACTION_TYPE = 'export_app_log_action_type';
     protected const EXPORT_APP_LOG_USER_USERNAME = 'export_app_log_user_username';
+
     protected const EXPORT_VOTE_TYPES = [
         ForOrAgainstType::FOR => self::EXPORT_VOTE_TYPE_FOR,
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,

@@ -30,3 +30,5 @@ UpdateDebateStepInput:
                 type: 'HTML'
             isAnonymousParticipationAllowed:
                 type: 'Boolean'
+            operationType:
+                type: 'StepAdminUrlOperationType'

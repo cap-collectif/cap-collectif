@@ -462,7 +462,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     public function getProject(): ?Project
     {
-        return $this->step ? $this->step->getProject() : null;
+        return $this->step?->getProject();
     }
 
     public function setStep(?CollectStep $step = null): self

@@ -62,5 +62,8 @@ declare namespace Cypress {
     logout(): Chainable<any>
     directLogin(options: LoginOptions): Chainable<any>
     dsSelectSetOption(selector: string, query: string): Chainable<any>
+    setCapInputDate(index: number, date: string): Chainable<any>
+    setCapInputDateTime(index: number, date: string): Chainable<any>
+    checkTableLength(length: number): Chainable<any>
   }
 }

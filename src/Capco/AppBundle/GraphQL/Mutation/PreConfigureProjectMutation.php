@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Persister\PreConfigureProjectAnalysisFormPersister;
 use Capco\AppBundle\Form\Persister\PreConfigureProjectProjectPersister;
 use Capco\AppBundle\Form\Persister\PreConfigureProjectProposalFormPersister;
@@ -12,6 +13,7 @@ use Capco\AppBundle\Form\Persister\PreConfigureProjectQuestionnairePersister;
 use Capco\AppBundle\GraphQL\Mutation\ProposalForm\DeleteProposalFormMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -39,7 +41,8 @@ class PreConfigureProjectMutation implements MutationInterface
         private readonly DeleteProjectMutation $deleteProjectMutation,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProjectTypeRepository $projectTypeRepository,
-        private readonly Indexer $indexer
+        private readonly Indexer $indexer,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -67,12 +70,14 @@ class PreConfigureProjectMutation implements MutationInterface
             $questionnaireTitleToIdMap = $this->preConfigureProjectQuestionnairePersister->addQuestionnaire(
                 $questionnairesInput,
                 $ownerId,
-                $viewer
+                $viewer,
+                false
             );
             $proposalFormTitleToIdMap = $this->preConfigureProjectProposalFormPersister->addProposalForm(
                 $proposalFormsInput,
                 $ownerId,
-                $viewer
+                $viewer,
+                false
             );
 
             $this->preConfigureProjectProjectPersister->updateProject(
@@ -118,6 +123,13 @@ class PreConfigureProjectMutation implements MutationInterface
 
         $this->indexer->index(ClassUtils::getClass($project), $project->getId());
         $this->indexer->finishBulk();
+
+        $this->actionLogger->logGraphQLMutation(
+            $owner,
+            LogActionType::CREATE,
+            sprintf('le projet %s', $title),
+            $project->getId()
+        );
 
         return $project;
     }

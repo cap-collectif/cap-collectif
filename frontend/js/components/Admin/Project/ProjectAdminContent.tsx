@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { loadQuery, RelayEnvironmentProvider } from 'relay-hooks'
 import { formValueSelector } from 'redux-form'
@@ -37,6 +37,8 @@ import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContribu
 import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import htmlDecode from '~/components/Utils/htmlDecode'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
+
 type Props = {
   readonly viewerIsAdmin: boolean
   readonly project: ProjectAdminContent_project$data
@@ -190,6 +192,19 @@ const formatNavbarLinks = (
   return links
 }
 
+const projectAdminParticipantAppLogQuery = graphql`
+  query ProjectAdminContentParticipantAppLogQuery($projectId: ID!) {
+    project: node(id: $projectId) {
+      ... on Project {
+        isLogged(actionType: SHOW, description: "l'onglet Participants du projet :getTitle") {
+          actionType
+          description
+        }
+      }
+    }
+  }
+` as GraphQLTaggedNode
+
 export const ProjectAdminContent = ({
   project,
   firstCollectStepId,
@@ -306,6 +321,24 @@ export const ProjectAdminContent = ({
       mediatorFeatureFlag,
     ],
   )
+
+  
+  /**
+   * @desc Register a log when loading /participants url, maybe find a better and robust solution later on a rework
+   */
+  const fetchProjectAdminParticipantAppLogQuery =  useCallback(async() => {
+    await fetchQuery(environment, projectAdminParticipantAppLogQuery, {
+      projectId: project.id,
+    }).toPromise()
+  }, [project.id])
+  const lastPathname = useRef('')
+  useEffect(() => {
+    if (location.pathname.includes("/participants") && lastPathname.current !== location.pathname) {
+          fetchProjectAdminParticipantAppLogQuery()
+    }
+    lastPathname.current = location.pathname;
+  }, [location, fetchProjectAdminParticipantAppLogQuery])
+
   return (
     <div className="d-flex">
       <Header>

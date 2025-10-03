@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\UserBundle\Entity\User;
@@ -23,11 +25,12 @@ class CreateProposalFormMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly EntityManagerInterface $em,
         private readonly SettableOwnerResolver $settableOwnerResolver,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
-    public function __invoke(Argument $input, User $viewer): array
+    public function __invoke(Argument $input, User $viewer, bool $toLogUserAction = true): array
     {
         $this->formatInput($input);
         $proposalForm = new ProposalForm();
@@ -51,6 +54,18 @@ class CreateProposalFormMutation implements MutationInterface
 
         $this->em->persist($proposalForm);
         $this->em->flush();
+
+        if ($toLogUserAction) {
+            $projetTitle = $proposalForm->getProject()?->getTitle();
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::CREATE,
+                sprintf('le formulaire de dépôt %s%s', $proposalForm->getTitle(), null === $projetTitle ? '' : sprintf(' du projet %s', $projetTitle)),
+                ProposalForm::class,
+                $proposalForm->getId()
+            );
+        }
 
         return ['proposalForm' => $proposalForm];
     }

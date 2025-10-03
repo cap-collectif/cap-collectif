@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\CategoryImage;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Exception\ViewConfigurationException;
 use Capco\AppBundle\Form\ProposalDistrictType;
@@ -18,6 +19,7 @@ use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Helper\QuestionJumpsHandler;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\MediaRepository;
@@ -40,52 +42,45 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
 {
     use MutationTrait;
     use QuestionPersisterTrait;
-    private readonly LoggerInterface $logger;
-    private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
-    private readonly AbstractQuestionRepository $abstractQuestionRepo;
-    private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
     private readonly ProposalDistrictRepository $proposalDistrictRepository;
-    private readonly Indexer $indexer;
-    private readonly ValidatorInterface $colorValidator;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker,
+        protected MultipleChoiceQuestionRepository $choiceQuestionRepository,
+        protected Indexer $indexer,
+        protected ValidatorInterface $colorValidator,
+        protected AbstractQuestionRepository $abstractQuestionRepo,
+        protected QuestionnaireAbstractQuestionRepository $questionRepo,
         private readonly FormFactoryInterface $formFactory,
         private readonly ProposalFormRepository $proposalFormRepo,
-        LoggerInterface $logger,
-        QuestionnaireAbstractQuestionRepository $questionRepo,
-        AbstractQuestionRepository $abstractQuestionRepo,
+        private LoggerInterface $logger,
         private readonly MediaRepository $mediaRepository,
         private readonly QueryCategoryImagesResolver $categoryImagesResolver,
         private readonly CategoryImageRepository $categoryImageRepository,
-        MultipleChoiceQuestionRepository $choiceQuestionRepository,
-        Indexer $indexer,
-        ValidatorInterface $colorValidator,
         private readonly Manager $toggleManager,
-        AuthorizationCheckerInterface $authorizationChecker,
-        private readonly QuestionJumpsHandler $questionJumpsHandler
+        private readonly QuestionJumpsHandler $questionJumpsHandler,
+        private readonly ActionLogger $actionLogger
     ) {
         parent::__construct($em, $globalIdResolver, $authorizationChecker);
-        $this->logger = $logger;
-        $this->questionRepo = $questionRepo;
-        $this->abstractQuestionRepo = $abstractQuestionRepo;
-        $this->choiceQuestionRepository = $choiceQuestionRepository;
-        $this->indexer = $indexer;
-        $this->colorValidator = $colorValidator;
     }
 
-    public function __invoke(Argument $input, User $viewer): array
+    public function __invoke(Argument $input, User $viewer, bool $toLogUserAction = false): array
     {
         $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $this->questionJumpsHandler->unsetJumps($arguments);
         $id = $arguments['proposalFormId'];
+        $operationType = $input->offsetGet('operationType');
         $oldChoices = null;
+
+        $toLogUserAction = $toLogUserAction || $input->offsetGet('isLogged');
 
         $proposalForm = $this->getProposalFormFromUUID($id);
 
-        unset($arguments['proposalFormId']);
+        unset($arguments['proposalFormId'], $arguments['operationType'], $arguments['isLogged']);
+
         $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
         $arguments = $this->districtsProcess($proposalForm, $arguments);
         $arguments = $this->categoriesProcess($proposalForm, $arguments);
@@ -124,6 +119,22 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         $this->em->flush();
         $this->questionJumpsHandler->saveJumps($input->getArrayCopy(), $proposalForm);
         $this->reIndexChoices($oldChoices, $proposalForm);
+
+        if ($toLogUserAction) {
+            $actionDescription = sprintf('le formulaire de dépôt %s', $proposalForm->getTitle());
+
+            if (null !== $proposalForm->getProject()) {
+                $actionDescription .= sprintf(' du projet %s', $proposalForm->getProject()->getTitle());
+            }
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+                $actionDescription,
+                ProposalForm::class,
+                $proposalForm->getId()
+            );
+        }
 
         return ['proposalForm' => $proposalForm];
     }

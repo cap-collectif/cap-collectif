@@ -21,6 +21,8 @@ class AddOtherStepMutation implements MutationInterface
     {
         $this->formatInput($input);
 
-        return $this->addStepService->addStep($input, $viewer, 'OTHER');
+        ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'OTHER');
+
+        return ['step' => $step];
     }
 }

@@ -5,11 +5,13 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\ConsultationType;
 use Capco\AppBundle\Form\OpinionTypeType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -32,7 +34,8 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly OpinionTypeRepository $opinionTypeRepository,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -43,6 +46,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         $stepId = $input->offsetGet('stepId');
         $step = $this->globalIdResolver->resolve($stepId, $viewer);
         $owner = $viewer->getOrganization() ?? $viewer;
+        $operationType = $input->offsetGet('operationType');
 
         $consultations = new ArrayCollection();
         foreach ($consultationsInput as $consultationInput) {
@@ -71,6 +75,14 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 
             $consultation->setCreator($consultation->getCreator() ?? $viewer);
             $consultations->add($consultation);
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+                sprintf('l\'étape de consultation %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()),
+                ConsultationStep::class,
+                $consultation->getId()
+            );
         }
 
         $this->em->flush();
@@ -181,7 +193,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
             $clonedConsultation->setTitle('copy ' . $title);
             $this->em->persist($clonedConsultation);
 
-            return $clonedConsultation;
+            return $consultation;
         }
 
         if (false === $consultation instanceof Consultation) {

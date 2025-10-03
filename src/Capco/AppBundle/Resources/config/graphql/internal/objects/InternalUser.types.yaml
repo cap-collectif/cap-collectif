@@ -407,7 +407,7 @@ InternalUser:
                 description: "The user's openidId value"
             organizations:
                 type: '[InternalOrganization]'
-                description: "The organizations of which user is a member"
+                description: 'The organizations of which user is a member'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", value)'
             consultations:
@@ -417,7 +417,7 @@ InternalUser:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", args)'
             participant:
                 type: 'InternalParticipant'
-                description: "The user (who has already participated / is participating) in a questionnaire or other type of interaction"
+                description: 'The user (who has already participated / is participating) in a questionnaire or other type of interaction'
                 resolve: '@=value.getParticipant()'
             projectsMediator:
                 access: "@=hasRole('ROLE_MEDIATOR') and hasFeatureFlag('mediator')"
@@ -425,6 +425,17 @@ InternalUser:
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectsMediatorResolver", value, args)'
             isEvaluerOnNewTool:
-                description: "A user that can access Evaluations page is a user that is assigned to at least one proposal, as analyst, supervisor or decision marker"
+                description: 'A user that can access Evaluations page is a user that is assigned to at least one proposal, as analyst, supervisor or decision marker'
                 type: 'Boolean!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerCanSeeEvaluationsPageResolver", value)'
+            isLogged:
+                type: 'IsLogged'
+                description: 'User action to log'
+                args:
+                    actionType:
+                        type: 'LogActionType!'
+                        description: 'The available action types.'
+                    description:
+                        type: 'String!'
+                        description: 'The custom user action description'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Logger\\IsLoggedResolver", value, args, getUser(), serv("request_stack"))'

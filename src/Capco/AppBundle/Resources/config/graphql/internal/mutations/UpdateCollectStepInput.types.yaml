@@ -93,3 +93,5 @@ UpdateCollectStepInput:
             isCollectByEmailEnabled:
                 type: 'Boolean!'
                 description: 'Whether or not collect by email is enabled.'
+            operationType:
+                type: 'StepAdminUrlOperationType'

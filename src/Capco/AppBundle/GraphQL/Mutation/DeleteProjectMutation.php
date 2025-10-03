@@ -3,8 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -21,7 +24,8 @@ class DeleteProjectMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly Indexer $indexer
+        private readonly Indexer $indexer,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -36,6 +40,14 @@ class DeleteProjectMutation implements MutationInterface
             $project->getId()
         );
         $this->indexer->finishBulk();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::DELETE,
+            sprintf('le projet %s', $project->getTitle()),
+            Project::class,
+            $project->getId()
+        );
 
         $this->em->remove($project);
         $this->em->flush();

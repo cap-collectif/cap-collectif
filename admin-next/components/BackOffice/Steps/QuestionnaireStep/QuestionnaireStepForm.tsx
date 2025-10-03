@@ -32,6 +32,7 @@ import { onBack } from '@components/BackOffice/Steps/utils'
 import useUrlState from '@hooks/useUrlState'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string
@@ -229,6 +230,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       startAt: timeless ? null : values.startAt,
       isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       questionnaire: CURRENTquestionnaire.questionnaireId,
+      operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
       ...getRequirementsInput(values),
     }
 

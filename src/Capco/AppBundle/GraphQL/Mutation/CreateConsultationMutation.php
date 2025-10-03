@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ConsultationVoter;
 use Capco\UserBundle\Entity\User;
@@ -19,7 +22,8 @@ class CreateConsultationMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly SettableOwnerResolver $settableOwnerResolver
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -39,6 +43,21 @@ class CreateConsultationMutation implements MutationInterface
 
         $this->em->persist($consultation);
         $this->em->flush();
+
+        $projectTitle = $consultation->getStep()?->getProject()?->getTitle();
+        $actionDescription = sprintf('le formulaire de consultation %s', $consultation->getTitle());
+
+        if (null !== $projectTitle) {
+            $actionDescription .= sprintf(' du projet %s', $projectTitle);
+        }
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE,
+            $actionDescription,
+            ConsultationStep::class,
+            $consultation->getId()
+        );
 
         return ['consultation' => $consultation];
     }

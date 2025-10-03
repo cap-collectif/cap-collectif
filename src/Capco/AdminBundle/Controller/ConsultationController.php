@@ -4,6 +4,8 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\LogActionType;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Security\ConsultationVoter;
 use Capco\UserBundle\Entity\User;
@@ -22,7 +24,8 @@ class ConsultationController extends CRUDController
     public function __construct(
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         Pool $pool,
-        private readonly ConsultationStepRepository $consultationStepRepository
+        private readonly ConsultationStepRepository $consultationStepRepository,
+        private readonly ActionLogger $actionLogger
     ) {
         parent::__construct($breadcrumbsBuilder, $pool);
     }
@@ -112,6 +115,28 @@ class ConsultationController extends CRUDController
                 $this->admin->setSubject($submittedObject);
 
                 try {
+                    $projectTitle = $existingObject->getStep()?->getProject()?->getTitle();
+
+                    $this->actionLogger->log(
+                        user: $this->getUser(),
+                        actionType: LogActionType::EDIT,
+                        description: sprintf('Le formulaire de consultation %s%s', $existingObject->getTitle(), sprintf(' du projet %s', $projectTitle)),
+                    );
+
+                    $projectTitle = $existingObject->getStep()?->getProject()?->getTitle();
+
+                    $actionDescription = sprintf('le formulaire de consultation %s', $existingObject->getTitle());
+
+                    if (null !== $projectTitle) {
+                        $actionDescription .= sprintf(' du projet %s', $projectTitle);
+                    }
+
+                    $this->actionLogger->log(
+                        user: $this->getUser(),
+                        actionType: LogActionType::EDIT,
+                        description: $actionDescription,
+                    );
+
                     $existingObject = $this->admin->update($submittedObject);
 
                     if ($this->isXmlHttpRequest($request)) {

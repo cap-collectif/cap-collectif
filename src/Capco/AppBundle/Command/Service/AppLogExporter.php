@@ -91,10 +91,10 @@ class AppLogExporter
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($path);
+        $oldestCreateDate = $this->getOldestCreateDate($path);
 
         try {
-            return $this->appLogRepository->hasNewLogs($oldestUpdateDate);
+            return $this->appLogRepository->hasNewLogs($oldestCreateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
 
@@ -102,7 +102,7 @@ class AppLogExporter
         }
     }
 
-    private function getOldestUpdateDate(string $path): \DateTime
+    private function getOldestCreateDate(string $path): \DateTime
     {
         $fileDate = filemtime($path);
 

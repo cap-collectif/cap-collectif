@@ -36,6 +36,7 @@ import { onBack } from '@components/BackOffice/Steps/utils'
 import { useConsultationStep } from './ConsultationStepContext'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string
@@ -323,6 +324,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         input: {
           consultations,
           stepId: values.stepId,
+          operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
         },
       })
 

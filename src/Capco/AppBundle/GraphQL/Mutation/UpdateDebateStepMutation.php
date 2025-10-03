@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\DebateStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +28,8 @@ class UpdateDebateStepMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -36,8 +39,9 @@ class UpdateDebateStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
         $debateStepId = $input->offsetGet('id');
         $debateStep = $this->getDebateStep($debateStepId, $viewer);
+        $operationType = $input->offsetGet('operationType');
 
-        unset($data['id']);
+        unset($data['id'], $data['operationType']);
 
         $form = $this->formFactory->create(DebateStepType::class, $debateStep);
         $form->submit($data, false);
@@ -49,6 +53,18 @@ class UpdateDebateStepMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+            sprintf(
+                'l\'étape %s du projet %s',
+                $debateStep->getTitle(),
+                $debateStep->getProject()->getTitle()
+            ),
+            DebateStep::class,
+            $debateStep->getId()
+        );
 
         return ['debateStep' => $debateStep];
     }

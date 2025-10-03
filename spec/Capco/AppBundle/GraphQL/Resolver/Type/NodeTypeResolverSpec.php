@@ -16,8 +16,12 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
 use Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use Capco\AppBundle\Logger\ActionLogger;
+use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class NodeTypeResolverSpec extends ObjectBehavior
 {
@@ -28,8 +32,11 @@ class NodeTypeResolverSpec extends ObjectBehavior
         ResponseResolver $responseTypeResolver,
         ReplyTypeResolver $replyTypeResolver,
         DistrictTypeResolver $districtTypeResolver,
-        ContributorTypeResolver $contributorTypeResolver
+        ContributorTypeResolver $contributorTypeResolver,
+        ActionLogger $actionLogger
     ) {
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
+
         $this->beConstructedWith(
             $typeResolver,
             $requirementTypeResolver,
@@ -37,7 +44,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
             $responseTypeResolver,
             $replyTypeResolver,
             $districtTypeResolver,
-            $contributorTypeResolver
+            $contributorTypeResolver,
+            $actionLogger
         );
     }
 
@@ -49,7 +57,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
     public function it_should_resolve_debate(
         TypeResolver $typeResolver,
         Debate $debate,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
@@ -57,13 +66,14 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type)
         ;
-        $this->__invoke($debate)->shouldReturn($type);
+        $this->__invoke($debate, new RequestStack(), $viewer)->shouldReturn($type);
     }
 
     public function it_should_resolve_debateStep(
         TypeResolver $typeResolver,
         DebateStep $debateStep,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
@@ -71,13 +81,14 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type)
         ;
-        $this->__invoke($debateStep)->shouldReturn($type);
+        $this->__invoke($debateStep, new RequestStack(), $viewer)->shouldReturn($type);
     }
 
     public function it_should_resolve_debateOpinion(
         TypeResolver $typeResolver,
         DebateOpinion $debateOpinion,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
@@ -85,13 +96,14 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type)
         ;
-        $this->__invoke($debateOpinion)->shouldReturn($type);
+        $this->__invoke($debateOpinion, new RequestStack(), $viewer)->shouldReturn($type);
     }
 
     public function it_should_resolve_debateArgument(
         TypeResolver $typeResolver,
         DebateArgument $debateArgument,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
@@ -99,13 +111,14 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type)
         ;
-        $this->__invoke($debateArgument)->shouldReturn($type);
+        $this->__invoke($debateArgument, new RequestStack(), $viewer)->shouldReturn($type);
     }
 
     public function it_should_resolve_debateArticle(
         TypeResolver $typeResolver,
         DebateArticle $article,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $typeResolver
@@ -113,14 +126,15 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type)
         ;
-        $this->__invoke($article)->shouldReturn($type);
+        $this->__invoke($article, new RequestStack(), $viewer)->shouldReturn($type);
     }
 
     public function it_should_resolve_response(
         TypeResolver $typeResolver,
         ResponseResolver $responseTypeResolver,
         ValueResponse $response,
-        Type $type
+        Type $type,
+        User $viewer
     ): void {
         $typeResolver->getCurrentSchemaName()->willReturn('internal');
         $responseTypeResolver
@@ -129,6 +143,6 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->willReturn($type)
         ;
 
-        $this->__invoke($response)->shouldReturn($type);
+        $this->__invoke($response, new RequestStack(), $viewer)->shouldReturn($type);
     }
 }

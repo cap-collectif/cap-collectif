@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +28,8 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -36,8 +39,9 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
         $questionnaireStepId = $input->offsetGet('stepId');
         $questionnaireStep = $this->getQuestionnaireStep($questionnaireStepId, $viewer);
+        $operationType = $data['operationType'];
 
-        unset($data['stepId']);
+        unset($data['stepId'], $data['operationType']);
 
         $form = $this->formFactory->create(QuestionnaireStepFormType::class, $questionnaireStep);
         $form->submit($data, false);
@@ -49,6 +53,14 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+            sprintf('l\'étape de questionnaire %s du projet %s', $questionnaireStep->getTitle(), $questionnaireStep->getProject()->getTitle()),
+            QuestionnaireStep::class,
+            $questionnaireStep->getId()
+        );
 
         return ['questionnaireStep' => $questionnaireStep];
     }

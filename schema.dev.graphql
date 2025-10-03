@@ -4147,6 +4147,7 @@ input CreateOrUpdateConsultationInput {
   ID of the owner of the consultation, user or organization. If null, fallback on the viewer.
   """
   owner: ID
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -8122,6 +8123,15 @@ enum InviteUsersRole {
   ROLE_PROJECT_ADMIN
 }
 
+"""Ways to log user action with custom description"""
+type IsLogged {
+  """The available action types."""
+  actionType: LogActionType!
+
+  """The custom user action description"""
+  description: String!
+}
+
 """A string containing JSON code."""
 scalar JSON
 
@@ -11276,6 +11286,10 @@ input PreConfigureProjectProposalFormInput {
 
   """Can proposal contain linkedin url"""
   usingLinkedIn: Boolean! = false
+  operationType: StepAdminUrlOperationType
+
+  """If true, log the user action"""
+  isLogged: Boolean = false
   notifications: ProposalFormNotificationsInput
   clientMutationId: String
 }
@@ -11292,6 +11306,9 @@ input PreConfigureProjectQuestionnaireInput {
 
   """The new list of available questions for this questionnaire"""
   questions: [QuestionnaireAbstractQuestionInput!]!
+
+  """If true, log the user action"""
+  isLogged: Boolean = false
   clientMutationId: String
 }
 
@@ -11617,6 +11634,15 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """The user that created the resource."""
   creator: User
   hasAnalysis: Boolean!
+
+  """User action to log"""
+  isLogged(
+    """The available action types."""
+    actionType: LogActionType!
+
+    """The custom user action description"""
+    description: String!
+  ): IsLogged
 
   """A list of contributors associated with the project."""
   emailableContributors(
@@ -14041,6 +14067,9 @@ type Query {
 
     """Ordering options for users returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
+
+    """If true, log the user action"""
+    isLogged: Boolean = false
   ): UserConnection!
 
   """List all the district project in the platform."""
@@ -18758,6 +18787,7 @@ input UpdateCollectStepInput {
 
   """Whether or not collect by email is enabled."""
   isCollectByEmailEnabled: Boolean!
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -18986,6 +19016,7 @@ input UpdateDebateStepInput {
   debateType: DebateType!
   debateContent: HTML
   isAnonymousParticipationAllowed: Boolean
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -19636,6 +19667,7 @@ input UpdateOtherStepInput {
 
   """Wether or not the step is timeless"""
   timeless: Boolean!
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -20116,6 +20148,10 @@ input UpdateProposalFormInput {
 
   """Can proposal contain linkedin url"""
   usingLinkedIn: Boolean! = false
+  operationType: StepAdminUrlOperationType
+
+  """If true, log the user action"""
+  isLogged: Boolean = false
   proposalFormId: ID!
   clientMutationId: String
 }
@@ -20304,6 +20340,9 @@ input UpdateQuestionnaireConfigurationInput {
 
   """The new list of available questions for this questionnaire"""
   questions: [QuestionnaireAbstractQuestionInput!]
+
+  """If true, log the user action"""
+  isLogged: Boolean = false
   questionnaireId: ID!
   clientMutationId: String
 }
@@ -20388,6 +20427,7 @@ input UpdateQuestionnaireStepInput {
 
   """Reasons to require these requirements."""
   requirementsReason: String
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -20548,6 +20588,7 @@ input UpdateSelectionStepInput {
 
   """Set this step as realisation step."""
   allowingProgressSteps: Boolean!
+  operationType: StepAdminUrlOperationType
   clientMutationId: String
 }
 
@@ -21555,6 +21596,15 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   one proposal, as analyst, supervisor or decision marker
   """
   isEvaluerOnNewTool: Boolean!
+
+  """User action to log"""
+  isLogged(
+    """The available action types."""
+    actionType: LogActionType!
+
+    """The custom user action description"""
+    description: String!
+  ): IsLogged
 }
 
 """A user is an individual's account."""

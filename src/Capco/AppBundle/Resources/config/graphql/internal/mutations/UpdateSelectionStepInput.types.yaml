@@ -90,3 +90,5 @@ UpdateSelectionStepInput:
             allowingProgressSteps:
                 type: 'Boolean!'
                 description: 'Set this step as realisation step.'
+            operationType:
+                type: 'StepAdminUrlOperationType'

@@ -11,3 +11,5 @@ CreateOrUpdateConsultationInput:
             owner:
                 type: 'ID'
                 description: 'ID of the owner of the consultation, user or organization. If null, fallback on the viewer.'
+            operationType:
+                type: 'StepAdminUrlOperationType'

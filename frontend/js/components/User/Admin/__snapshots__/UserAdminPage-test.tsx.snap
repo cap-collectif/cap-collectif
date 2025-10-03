@@ -41,6 +41,49 @@ exports[`<UserAdminPage/> should render 1`] = `
                     "kind": "FragmentSpread",
                     "name": "UserAdminPageTabs_user",
                   },
+                  Object {
+                    "abstractKey": null,
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "actionType",
+                            "value": "SHOW",
+                          },
+                          Object {
+                            "kind": "Literal",
+                            "name": "description",
+                            "value": "L'utilisateur :getUsername",
+                          },
+                        ],
+                        "concreteType": "IsLogged",
+                        "kind": "LinkedField",
+                        "name": "isLogged",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "actionType",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "description",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "isLogged(actionType:\\"SHOW\\",description:\\"L'utilisateur :getUsername\\")",
+                      },
+                    ],
+                    "type": "User",
+                  },
                 ],
                 "storageKey": null,
               },
@@ -63,7 +106,7 @@ exports[`<UserAdminPage/> should render 1`] = `
             ],
             "type": "Query",
           },
-          "hash": "e334a2a8ef74b5aff53705a5adc4a642",
+          "hash": "97541ca945908369d443e7d11256d935",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -449,6 +492,42 @@ exports[`<UserAdminPage/> should render 1`] = `
                         "name": "userIdentificationCode",
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "actionType",
+                            "value": "SHOW",
+                          },
+                          Object {
+                            "kind": "Literal",
+                            "name": "description",
+                            "value": "L'utilisateur :getUsername",
+                          },
+                        ],
+                        "concreteType": "IsLogged",
+                        "kind": "LinkedField",
+                        "name": "isLogged",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "actionType",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "description",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "isLogged(actionType:\\"SHOW\\",description:\\"L'utilisateur :getUsername\\")",
+                      },
                     ],
                     "type": "User",
                   },
@@ -490,7 +569,7 @@ exports[`<UserAdminPage/> should render 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "11322bccffc86b7c422b81fa44d933d4",
+            "cacheID": "cf325c7909f0cb6cef8c034b940959f2",
             "id": null,
             "metadata": Object {},
             "name": "UserAdminPageQuery",
@@ -501,6 +580,12 @@ exports[`<UserAdminPage/> should render 1`] = `
   user: node(id: $id) {
     __typename
     ...UserAdminPageTabs_user
+    ... on User {
+      isLogged(actionType: SHOW, description: \\"L'utilisateur :getUsername\\") {
+        actionType
+        description
+      }
+    }
     id
   }
   viewer {

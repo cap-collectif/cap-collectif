@@ -7,12 +7,14 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\HtmlSanitizationHelperTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -46,7 +48,8 @@ class UpdateNewProjectMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProjectAbstractStepRepository $projectAbstractStepRepository,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -85,6 +88,12 @@ class UpdateNewProjectMutation implements MutationInterface
         try {
             $this->em->persist($project);
             $this->em->flush();
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::EDIT,
+                sprintf('le projet %s', $project->getTitle())
+            );
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
@@ -177,6 +186,14 @@ class UpdateNewProjectMutation implements MutationInterface
                 'step' => $stepId,
             ]);
             $project->removeStep($projectAbstractStep);
+
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::DELETE,
+                sprintf('l\'étape %s du projet %s', $projectAbstractStep->getStep()->getTitle(), $projectAbstractStep->getProject()->getTitle()),
+                AbstractStep::class,
+                $projectAbstractStep->getStep()->getId()
+            );
         }
 
         foreach ($stepIds as $index => $stepId) {

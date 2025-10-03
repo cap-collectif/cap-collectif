@@ -38,7 +38,7 @@ PreviewQuery:
                 type: 'PreviewUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Lookup users.'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", args, info)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", args, info, serv("request_stack"), getUser())'
             globalDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'PreviewGlobalDistrictConnection!'

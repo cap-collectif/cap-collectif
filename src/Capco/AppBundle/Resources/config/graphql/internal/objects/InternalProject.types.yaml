@@ -44,6 +44,17 @@ InternalProject:
                     term:
                         type: 'String'
                         description: 'Search contributor by his email, username, lastname'
+            isLogged:
+                type: 'IsLogged'
+                description: 'User action to log'
+                args:
+                    actionType:
+                        type: 'LogActionType!'
+                        description: 'The available action types.'
+                    description:
+                        type: 'String!'
+                        description: 'The custom user action description'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Logger\\IsLoggedResolver", value, args, getUser(), serv("request_stack"))'
             emailableContributors:
                 type: 'InternalEmailableConnection!'
                 description: 'A list of contributors associated with the project.'

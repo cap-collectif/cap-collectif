@@ -5,10 +5,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -37,7 +39,8 @@ class CreateProjectMutation implements MutationInterface
         private readonly SettableOwnerResolver $settableOwnerResolver,
         private readonly ProjectAuthorTransformer $transformer,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly Indexer $indexer
+        private readonly Indexer $indexer,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -80,6 +83,13 @@ class CreateProjectMutation implements MutationInterface
         try {
             $this->em->persist($project);
             $this->em->flush();
+
+            $this->actionLogger->logGraphQLMutation(
+                $owner,
+                LogActionType::CREATE,
+                sprintf('le projet %s', $arguments['title']),
+                $project->getId()
+            );
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()

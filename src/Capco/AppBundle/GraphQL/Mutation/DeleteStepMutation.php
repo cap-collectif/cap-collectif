@@ -8,8 +8,10 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +27,8 @@ class DeleteStepMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -42,6 +45,14 @@ class DeleteStepMutation implements MutationInterface
 
         $this->em->remove($step);
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::DELETE,
+            sprintf('l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()),
+            AbstractStep::class,
+            $step->getId()
+        );
 
         return ['stepId' => $stepId];
     }

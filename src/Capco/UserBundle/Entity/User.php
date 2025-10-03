@@ -1306,6 +1306,11 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 
+    public function canBeAppLoggedBy(): bool
+    {
+        return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN);
+    }
+
     public function getAnonymizationReminderEmailSentAt(): ?\Datetime
     {
         return $this->anonymizationReminderEmailSentAt;

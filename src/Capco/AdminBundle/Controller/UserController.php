@@ -4,6 +4,9 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Command\CreateCsvFromLegacyUsersCommand;
 use Capco\AppBundle\Command\Service\CronTimeInterval;
+use Capco\AppBundle\Enum\LogActionDescription;
+use Capco\AppBundle\Enum\LogActionType;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -31,10 +34,22 @@ class UserController extends CRUDController
         Pool $pool,
         private readonly CronTimeInterval $cronTimeInterval,
         private readonly SessionInterface $session,
+        private readonly ActionLogger $actionLogger,
         private readonly KernelInterface $kernel,
         private readonly UserRepository $userRepository
     ) {
         parent::__construct($breadcrumbsBuilder, $pool);
+    }
+
+    public function listAction(Request $request): Response
+    {
+        $this->actionLogger->log(
+            user: $this->getUser(),
+            actionType: LogActionType::SHOW,
+            description: sprintf('la page %s', LogActionDescription::USERS_LIST)
+        );
+
+        return parent::listAction($request);
     }
 
     public function editAction($id = null): Response
@@ -59,6 +74,8 @@ class UserController extends CRUDController
 
     public function exportAction(Request $request): Response
     {
+        $this->actionLogger->logExport($this->getUser(), 'des utilisateurs');
+
         $this->admin->checkAccess('export');
 
         $path = $this->container->getParameter('kernel.project_dir') . '/public/export/users/';

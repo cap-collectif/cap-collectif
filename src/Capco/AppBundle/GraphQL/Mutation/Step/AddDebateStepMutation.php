@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Step;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Service\AddStepService;
 use Capco\UserBundle\Entity\User;
@@ -21,6 +22,9 @@ class AddDebateStepMutation implements MutationInterface
     {
         $this->formatInput($input);
 
-        return $this->addStepService->addStep($input, $viewer, 'DEBATE');
+        /** @var AbstractStep $step */
+        ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'DEBATE');
+
+        return ['step' => $step];
     }
 }

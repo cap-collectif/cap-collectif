@@ -112,3 +112,9 @@ InternalUpdateProposalForm:
                 type: 'Boolean!'
                 description: 'Can proposal contain linkedin url'
                 defaultValue: false
+            operationType:
+                type: 'StepAdminUrlOperationType'
+            isLogged:
+                type: 'Boolean'
+                description: 'If true, log the user action'
+                defaultValue: false

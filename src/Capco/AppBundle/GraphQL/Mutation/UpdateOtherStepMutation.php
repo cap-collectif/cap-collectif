@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\OtherStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +28,8 @@ class UpdateOtherStepMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
@@ -38,7 +41,10 @@ class UpdateOtherStepMutation implements MutationInterface
         $step = $this->getStep($data['stepId'], $viewer);
         $step->setTitle('');
 
-        unset($data['stepId']);
+        $operationType = $data['operationType'];
+
+        unset($data['stepId'], $data['operationType']);
+
         $form = $this->formFactory->create(OtherStepType::class, $step);
         $form->submit($data, false);
 
@@ -50,6 +56,14 @@ class UpdateOtherStepMutation implements MutationInterface
 
         $this->em->persist($step);
         $this->em->flush();
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::CREATE === $operationType ? LogActionType::CREATE : LogActionType::EDIT,
+            sprintf('l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()),
+            $step::class,
+            $step->getId()
+        );
 
         return ['step' => $step];
     }

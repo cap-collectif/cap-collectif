@@ -44,11 +44,13 @@ import ProposalStepStatuses, {
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { getVoteParameterInput } from '../utils'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 export interface SelectStepFormProps {
   stepId: string
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
 }
+
 type StepTypeDurationTypeUnion = 'CUSTOM' | 'TIMELESS'
 export type FormValues = {
   id: string
@@ -307,6 +309,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       const proposalFormUpdateResponse = await UpdateProposalFormMutation.commit({
         input: {
           ...input,
+          isLogged: false,
           proposalFormId: step?.form?.id || '',
         },
       })
@@ -336,6 +339,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
           allowingProgressSteps: values.allowingProgressSteps,
+          operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
           ...getVoteParameterInput(values),
           ...getRequirementsInput(values),
         }

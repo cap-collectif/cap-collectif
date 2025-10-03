@@ -3,11 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Persister\GlobalDistrictsPersister;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UpdateProjectFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -28,11 +31,12 @@ class UpdateProjectMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly ProjectAuthorTransformer $transformer,
         private readonly ProjectRepository $projectRepository,
-        private readonly GlobalDistrictsPersister $districtsPersister
+        private readonly GlobalDistrictsPersister $districtsPersister,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
         $arguments = $input->getArrayCopy();
@@ -52,6 +56,15 @@ class UpdateProjectMutation implements MutationInterface
         if (!$project instanceof Project) {
             throw new BadRequestHttpException('Sorry, please retry.');
         }
+
+        $this->actionLogger->logGraphQLMutation(
+            $viewer,
+            LogActionType::EDIT,
+            sprintf('le projet %s', $project->getTitle()),
+            Project::class,
+            $project->getId()
+        );
+
         $this->transformer->setProject($project);
 
         if (

@@ -1,19 +1,21 @@
-import React, { useState, useMemo } from 'react'
-import type { RelayPaginationProp } from 'react-relay'
-import { createPaginationContainer, graphql } from 'react-relay'
-import { FormattedMessage, useIntl } from 'react-intl'
-import ListGroupFlush from '../Ui/List/ListGroupFlush'
-import type { QuestionnaireAdminResultsText_simpleQuestion } from '~relay/QuestionnaireAdminResultsText_simpleQuestion.graphql'
-import Loader from '../Ui/FeedbacksIndicators/Loader'
-import TagCloud from '~ui/TagCloud/TagCloud'
-import ModalResponseTagSearchResults from '~/components/Questionnaire/ModalResponseTagSearchResults'
-import Button from '~ds/Button/Button'
-import QuestionnaireAdminResultsTextAnswerItem from './QuestionnaireAdminResultsTextAnswerItem'
-import Menu from '~ds/Menu/Menu'
-import Text from '~ui/Primitives/Text'
-import Flex from '~ui/Primitives/Layout/Flex'
+import React, { useState, useMemo } from 'react';
+import type { RelayPaginationProp } from 'react-relay';
+import { createPaginationContainer, graphql } from 'react-relay';
+import { FormattedMessage, useIntl } from 'react-intl';
+import ListGroupFlush from '../Ui/List/ListGroupFlush';
+import type {
+  QuestionnaireAdminResultsText_simpleQuestion,
+} from '~relay/QuestionnaireAdminResultsText_simpleQuestion.graphql';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
+import TagCloud from '~ui/TagCloud/TagCloud';
+import ModalResponseTagSearchResults from '~/components/Questionnaire/ModalResponseTagSearchResults';
+import Button from '~ds/Button/Button';
+import QuestionnaireAdminResultsTextAnswerItem from './QuestionnaireAdminResultsTextAnswerItem';
+import Menu from '~ds/Menu/Menu';
+import Text from '~ui/Primitives/Text';
+import Flex from '~ui/Primitives/Layout/Flex';
 
-const RESPONSE_PAGINATION = 15
+const RESPONSE_PAGINATION = 15;
 type VIEW = 'list' | 'tagCloud'
 type Props = {
   relay: RelayPaginationProp
@@ -21,17 +23,17 @@ type Props = {
 }
 export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement>(
   ({ relay, simpleQuestion }: Props, ref) => {
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false);
     const [responseSearchTag, setResponseSearchTag] = useState<
       | {
-          value: string
-          count: number
-        }
+      value: string
+      count: number
+    }
       | null
       | undefined
-    >(null)
-    const [view, setView] = useState<VIEW>('list')
-    const intl = useIntl()
+    >(null);
+    const [view, setView] = useState<VIEW>('list');
+    const intl = useIntl();
     const tags = useMemo(
       () =>
         simpleQuestion.tagCloud
@@ -47,18 +49,18 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
                   }),
               },
               marginBottom: -1 * Math.floor(Math.random() * 25),
-            }
+            };
           })
           .sort(() => Math.random() - 0.5),
       [simpleQuestion],
-    )
-
+    );
+    
     const handleLoadMore = () => {
-      setLoading(true)
+      setLoading(true);
       relay.loadMore(RESPONSE_PAGINATION, () => {
-        setLoading(false)
-      })
-    }
+        setLoading(false);
+      });
+    };
 
     if (simpleQuestion?.responses?.edges) {
       return (
@@ -149,18 +151,18 @@ export const QuestionnaireAdminResultsText = React.forwardRef<Props, HTMLElement
               questionId={simpleQuestion.id}
               show={!!responseSearchTag}
               onClose={() => {
-                setResponseSearchTag(null)
+                setResponseSearchTag(null);
               }}
               searchTag={responseSearchTag}
             />
           )}
         </div>
-      )
+      );
     }
 
-    return null
+    return null;
   },
-)
+);
 export default createPaginationContainer(
   QuestionnaireAdminResultsText,
   {
@@ -196,15 +198,15 @@ export default createPaginationContainer(
     direction: 'forward',
 
     getConnectionFromProps(props: Props) {
-      return props.simpleQuestion && props.simpleQuestion.responses
+      return props.simpleQuestion && props.simpleQuestion.responses;
     },
 
     getFragmentVariables(prevVars) {
-      return { ...prevVars }
+      return { ...prevVars };
     },
 
     getVariables(props: Props, { count, cursor }, fragmentVariables) {
-      return { ...fragmentVariables, count, cursor, questionId: props.simpleQuestion.id }
+      return { ...fragmentVariables, count, cursor, questionId: props.simpleQuestion.id };
     },
 
     query: graphql`
@@ -215,4 +217,4 @@ export default createPaginationContainer(
       }
     `,
   },
-)
+);

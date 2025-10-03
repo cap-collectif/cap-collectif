@@ -16,9 +16,9 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ExportAppLogCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    final public const EXPORT_FOLDER = 'log_admin/';
+    final public const EXPORT_FOLDER = 'app_logs/';
 
-    private const CAPCO_EXPORT_LOG_ADMIN = 'capco:export:app-logs';
+    private const CAPCO_EXPORT_APP_LOG = 'capco:export:app-logs';
     /** @phpstan-ignore-next-line */
     private readonly string $projectRootDir;
 
@@ -27,7 +27,7 @@ class ExportAppLogCommand extends BaseExportCommand
         private readonly Manager $toggleManager,
         private readonly Stopwatch $stopwatch,
         private readonly AppLogExporter $logAdminExporter,
-        private readonly AppLogFilePathResolver $logAdminFilePathResolver,
+        private readonly AppLogFilePathResolver $appLogFilePathResolver,
         string $projectRootDir
     ) {
         $this->projectRootDir = $projectRootDir;
@@ -48,25 +48,25 @@ class ExportAppLogCommand extends BaseExportCommand
         }
 
         $style->note('Starting the export.');
-        $this->stopwatch->start('export_log_admin');
+        $this->stopwatch->start('export_app_logs');
         $this->logAdminExporter->exportLogs($input->getOption('delimiter') ?? AppLogExporter::CSV_DELIMITER, $style);
 
         $this->executeSnapshot(
             $input,
             $output,
-            self::EXPORT_FOLDER . $this->logAdminFilePathResolver->getFileName()
+            self::EXPORT_FOLDER . $this->appLogFilePathResolver->getFileName()
         );
 
-        $this->stopwatch->stop('export_log_admin');
+        $this->stopwatch->stop('export_app_logs');
 
         $monitorMemoryAndTime = $this->stopwatch
-            ->getEvent('export_log_admin')
+            ->getEvent('export_app_logs')
             ->__toString()
         ;
 
         $style->success(sprintf(
             "Command '%s' ended successfully. %s",
-            self::CAPCO_EXPORT_LOG_ADMIN,
+            self::CAPCO_EXPORT_APP_LOG,
             $monitorMemoryAndTime
         ));
 
@@ -78,7 +78,7 @@ class ExportAppLogCommand extends BaseExportCommand
         parent::configure();
         $this->configureSnapshot();
         $this
-            ->setName(self::CAPCO_EXPORT_LOG_ADMIN)
+            ->setName(self::CAPCO_EXPORT_APP_LOG)
             ->setDescription('Export log admin')
         ;
     }

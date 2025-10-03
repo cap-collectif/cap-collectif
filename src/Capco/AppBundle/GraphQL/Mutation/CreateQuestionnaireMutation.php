@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
@@ -25,11 +27,12 @@ class CreateQuestionnaireMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
         private readonly SettableOwnerResolver $settableOwnerResolver,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ActionLogger $actionLogger
     ) {
     }
 
-    public function __invoke(Argument $input, User $viewer): array
+    public function __invoke(Argument $input, User $viewer, bool $toLogUserAction = true): array
     {
         $this->formatInput($input);
         $questionnaire = new Questionnaire();
@@ -54,6 +57,18 @@ class CreateQuestionnaireMutation implements MutationInterface
 
         $this->em->persist($questionnaire);
         $this->em->flush();
+
+        $projectTitle = $questionnaire->getStep()?->getProject()->getTitle();
+
+        if ($toLogUserAction) {
+            $this->actionLogger->logGraphQLMutation(
+                $viewer,
+                LogActionType::CREATE,
+                sprintf('le formulaire de questionnaire %s%s', $questionnaire->getTitle(), null === $projectTitle ? '' : sprintf(' du projet %s', $projectTitle)),
+                Questionnaire::class,
+                $questionnaire->getId()
+            );
+        }
 
         return ['questionnaire' => $questionnaire];
     }

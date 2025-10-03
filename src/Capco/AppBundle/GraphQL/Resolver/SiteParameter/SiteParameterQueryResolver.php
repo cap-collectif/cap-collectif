@@ -8,7 +8,7 @@ use Capco\AppBundle\Security\SiteParameterVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SiteParameterQueryResolver implements QueryInterface
@@ -16,10 +16,8 @@ class SiteParameterQueryResolver implements QueryInterface
     private $repository;
     private $translationRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        private readonly AuthorizationChecker $authorizationChecker
-    ) {
+    public function __construct(EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
         $this->repository = $entityManager->getRepository(SiteParameter::class);
         $this->translationRepository = $entityManager->getRepository(
             SiteParameterTranslation::class

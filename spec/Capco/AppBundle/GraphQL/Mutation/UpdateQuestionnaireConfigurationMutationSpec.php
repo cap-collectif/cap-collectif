@@ -3,12 +3,15 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateQuestionnaireConfigurationMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\QuestionJumpsHandler;
+use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
@@ -41,7 +44,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         Indexer $indexer,
         ValidatorInterface $colorValidator,
         AuthorizationCheckerInterface $authorizationChecker,
-        QuestionJumpsHandler $questionJumpsHandler
+        QuestionJumpsHandler $questionJumpsHandler,
+        ActionLogger $actionLogger
     ) {
         $this->beConstructedWith(
             $em,
@@ -54,7 +58,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             $indexer,
             $colorValidator,
             $authorizationChecker,
-            $questionJumpsHandler
+            $questionJumpsHandler,
+            $actionLogger
         );
     }
 
@@ -68,9 +73,12 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         User $viewer,
         GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
+        QuestionnaireStep $step,
+        Project $project,
         FormFactoryInterface $formFactory,
         FormInterface $form,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        ActionLogger $actionLogger
     ) {
         $arguments = [
             'questionnaireId' => 'abc',
@@ -85,6 +93,11 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             ->willReturn($questionnaire)
         ;
         $questionnaire->getId()->willReturn('abc');
+        $questionnaire->getType()->willReturn('Questionnaire');
+        $questionnaire->getTitle()->willReturn('abc');
+        $project->getTitle()->willReturn('Mon projet');
+        $step->getProject()->willReturn($project);
+        $questionnaire->getStep()->willReturn($step);
         $arguments = ['title' => 'abc'];
 
         $questionnaire->setUpdatedAt(Argument::type(\DateTime::class))->shouldBeCalled();
@@ -97,6 +110,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
 
         $em->flush()->shouldBeCalled();
+
+        $actionLogger->logGraphQLMutation(Argument::any(), Argument::any(), Argument::any(), Argument::any(), Argument::any())->willReturn(true);
 
         $this->__invoke($input, $viewer)->shouldReturn([
             'questionnaire' => $questionnaire,

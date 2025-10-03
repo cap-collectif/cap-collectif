@@ -58,7 +58,7 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
         );
     }
 
-    public function __invoke(Argument $input, $user): array
+    public function __invoke(Argument $input, User $user): array
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();

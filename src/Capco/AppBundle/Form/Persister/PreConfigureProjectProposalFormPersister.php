@@ -17,7 +17,7 @@ class PreConfigureProjectProposalFormPersister
     ) {
     }
 
-    public function addProposalForm(array $proposalFormsInput, string $ownerId, User $viewer): array
+    public function addProposalForm(array $proposalFormsInput, string $ownerId, User $viewer, bool $toLogUserAction = true): array
     {
         if (empty($proposalFormsInput)) {
             return [];
@@ -30,7 +30,8 @@ class PreConfigureProjectProposalFormPersister
 
             ['proposalForm' => $proposalForm] = $this->createProposalFormMutation->__invoke(
                 new Argument(['input' => ['title' => $proposalFormInput['title'], 'owner' => $ownerId]]),
-                $viewer
+                $viewer,
+                $toLogUserAction
             );
 
             unset($proposalFormInput['title']);

@@ -25046,11 +25046,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalAnalysisCommentMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalFromBackofficeMutation\\:\\:__invoke\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFromBackofficeMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalFromBackofficeMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFromBackofficeMutation.php
@@ -36034,6 +36029,26 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\LocaleRepository\\:\\:findPublishedLocales\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/LocaleRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"

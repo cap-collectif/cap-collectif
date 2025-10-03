@@ -13,6 +13,7 @@ import { formatQuestions, formatQuestionsInput, mergeQuestionsAndJumpsBeforeSubm
 import { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { getVoteParameterInput, voteTypeForTabs } from '../utils'
 import { ProposalSort, StepStatusInput } from '@relay/UpdateCollectStepMutation.graphql'
+import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
 
 export const getInitialValues = (
   step: CollectStepFormQuery$data['step'],
@@ -195,6 +196,7 @@ export const getCollectStepInput = (
   proposalFormId: string,
   stepId: string,
   bgColor: string,
+  operationType: string,
 ) => {
   const statusesList = getStatusesInputList(formValues.statuses, bgColor)
   return {
@@ -224,6 +226,7 @@ export const getCollectStepInput = (
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
     isCollectByEmailEnabled: formValues.isCollectByEmailEnabled ?? false,
+    operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
     ...getRequirementsInput(formValues),
     ...getVoteParameterInput(formValues),
   }

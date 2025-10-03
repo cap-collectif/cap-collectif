@@ -121,13 +121,12 @@ class AppLogRepository extends EntityRepository
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function hasNewLogs(\DateTime $oldestUpdateDate): bool
+    public function hasNewLogs(\DateTime $oldestCreateDate): bool
     {
         $qbd = $this->createQueryBuilder('l')
             ->select('COUNT(l.id)')
-            ->where('l.createdAt > :oldestUpdateDate')
-            ->orWhere('l.updatedAt > :oldestUpdateDate')
-            ->setParameter('oldestUpdateDate', $oldestUpdateDate)
+            ->where('l.createdAt > :oldestCreateDate')
+            ->setParameter(':oldestCreateDate', $oldestCreateDate)
             ->getQuery()
         ;
 
