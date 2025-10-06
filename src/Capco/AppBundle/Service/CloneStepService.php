@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -236,6 +237,7 @@ class CloneStepService
             || $clonedProject->getOwner() === $viewer->getOrganization()
         ) {
             $projectVisibility = ProjectVisibilityMode::VISIBILITY_ME;
+            $clonedProject->setRestrictedViewerGroups(new ArrayCollection());
         }
 
         $clonedProject->setVisibility($projectVisibility);

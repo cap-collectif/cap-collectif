@@ -12,6 +12,9 @@ const DuplicateProjectMutation = /* GraphQL */ `
           title
         }
         visibility
+        restrictedViewers {
+          totalCount
+        }
         steps {
           ... on CollectStep {
             title
@@ -108,7 +111,7 @@ describe('Internal | duplicateProject', () => {
       DuplicateProjectMutation,
       {
         input: {
-          id: toGlobalId('Project', 'projectIdf'),
+          id: 'UHJvamVjdDpwcm9qZWN0SWRm', //projectIdf
         },
       },
       'internal_admin',
@@ -193,7 +196,7 @@ describe('Internal | duplicateProject', () => {
       DuplicateProjectMutation,
       {
         input: {
-          id: toGlobalId('Project', 'externalProject'),
+          id: 'UHJvamVjdDpleHRlcm5hbFByb2plY3Q=', // externalProject
         },
       },
       'internal_welcomatic',
@@ -210,7 +213,7 @@ describe('Internal | duplicateProject', () => {
       DuplicateProjectMutation,
       {
         input: {
-          id: toGlobalId('Project', 'projectOrgaVisibilityAdminAndMe'),
+          id: 'UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l', // projectOrgaVisibilityAdminAndMe
         },
       },
       'internal_super_admin',
@@ -221,4 +224,25 @@ describe('Internal | duplicateProject', () => {
       'ADMIN'
     );
   });
+
+  it('should duplicate project with restricted groups, it should switch to visibility ME and remove groups', async () => {
+    const duplicateProjectResponse = await graphql(
+      DuplicateProjectMutation,
+      {
+        input: {
+          id: 'UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==', // ProjectWithCustomAccess
+        },
+      },
+      'internal_super_admin',
+    );
+    const newProject = duplicateProjectResponse.duplicateProject.newProject;
+
+    expect(newProject.visibility).toBe(
+      'ME'
+    );
+
+    expect(newProject.restrictedViewers.totalCount).toBe(
+      0
+    );
+  })
 });
