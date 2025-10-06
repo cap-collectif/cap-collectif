@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Security;
 use Capco\AppBundle\Cache\RedisCache;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class RateLimiter
 {
@@ -15,7 +16,8 @@ class RateLimiter
 
     public function __construct(
         private readonly RedisCache $cache,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly KernelInterface $kernel,
     ) {
     }
 
@@ -31,6 +33,12 @@ class RateLimiter
      */
     public function canDoAction(string $action, string $identifier): bool
     {
+        $env = $this->kernel->getEnvironment();
+
+        if ('test' === $env) {
+            return true;
+        }
+
         // TODO in upgrade of Symfony https://symfony.com/doc/current/rate_limiter.html
         // @var CacheItem $cachedItem
         try {

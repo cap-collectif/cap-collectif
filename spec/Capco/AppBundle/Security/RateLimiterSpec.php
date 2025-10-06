@@ -7,13 +7,14 @@ use Capco\AppBundle\Security\RateLimiter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class RateLimiterSpec extends ObjectBehavior
 {
-    public function let(RedisCache $cache, LoggerInterface $logger)
+    public function let(RedisCache $cache, LoggerInterface $logger, KernelInterface $kernel)
     {
-        $this->beConstructedWith($cache, $logger);
+        $this->beConstructedWith($cache, $logger, $kernel);
     }
 
     public function it_is_initializable()
