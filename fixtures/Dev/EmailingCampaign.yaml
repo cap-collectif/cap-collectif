@@ -77,3 +77,47 @@ Capco\AppBundle\Entity\EmailingCampaign:
         status: 'PLANNED'
         object: 'campagne orga'
         content: <stripslashes('\<p>\')>Content<stripslashes('\</p>\')>
+    CampaignWithMailingList:
+        id: CampaignWithMailingList
+        name: 'Campagne avec mailing list'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@user4'
+        creator: '@user4'
+        status: 'DRAFT'
+        object: 'Campagne avec mailing list'
+        content: <stripslashes('\<p>\')>Campagne avec mailing list<stripslashes('\</p>\')>
+        mailingList: '@longMailingList'
+    CampaignWithInternalList:
+        id: CampaignWithInternalList
+        name: 'Campagne avec internal list'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@user4'
+        creator: '@user4'
+        status: 'DRAFT'
+        object: 'Campagne avec internal list'
+        content: <stripslashes('\<p>\')>Campagne avec internal list<stripslashes('\</p>\')>
+        mailingInternal: 'REGISTERED'
+    CampaignWithUserGroup:
+        id: CampaignWithUserGroup
+        name: 'Campagne avec groupe de users'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@user4'
+        creator: '@user4'
+        status: 'DRAFT'
+        object: 'Campagne avec groupe de users'
+        content: <stripslashes('\<p>\')>Campagne avec groupe de users<stripslashes('\</p>\')>
+        emailingGroup: '@group1'
+    CampaignWithProject:
+        id: CampaignWithProject
+        name: 'Campagne avec un projet'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@user4'
+        creator: '@user4'
+        status: 'DRAFT'
+        object: 'Campagne avec un projet'
+        content: <stripslashes('\<p>\')>Campagne avec un projet<stripslashes('\</p>\')>
+        project: '@p1'

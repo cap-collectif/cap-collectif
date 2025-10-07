@@ -15,8 +15,15 @@ Capco\AppBundle\Entity\MailingList:
     longMailingList:
         id: longMailingList
         name: 'Coucou, tu veux voir ma liste ?'
+        owner: '@user1'
+        creator: '@user1'
     mailingListOrganization:
         id: mailingListOrganization
         name: 'Mailing list organization'
         owner: '@organization2'
         creator: '@valerieMassonDelmotte'
+    mailingListAdmin:
+        id: mailingListAdmin
+        name: 'Mailing list admin'
+        owner: '@user4'
+        creator: '@user1'

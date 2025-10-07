@@ -1,71 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal.viewer.emailingCampaigns admin can get all campaigns 1`] = `
+exports[`Internal.viewer.emailingCampaigns should get a project owner campaigns 1`] = `
 Object {
   "viewer": Object {
     "emailingCampaigns": Object {
       "edges": Array [
         Object {
           "node": Object {
-            "name": "Campagne pour remercier les inscrits confirmés",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Campagne pour rappeler aux utilisateurs de confirmer",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "On envoie un message aux utilisateurs du group Agent de la ville",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Campagne pour le projet avec organization draft",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Campagne pour le projet avec organization planned",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Campagne pour le projet avec propriétaire",
-          },
-        },
-      ],
-      "totalCount": 7,
-    },
-  },
-}
-`;
-
-exports[`Internal.viewer.emailingCampaigns admin can get its campaigns 1`] = `
-Object {
-  "viewer": Object {
-    "emailingCampaigns": Object {
-      "edges": Array [],
-      "totalCount": 0,
-    },
-  },
-}
-`;
-
-exports[`Internal.viewer.emailingCampaigns project owner should get its campaigns 1`] = `
-Object {
-  "viewer": Object {
-    "emailingCampaigns": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "name": "Campagne pour le projet avec propriétaire",
+            "content": "",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Vous vous souvenez de Théo ?",
+            "owner": Object {
+              "username": "Théo QP",
+            },
+            "project": Object {
+              "title": "Projet avec administrateur de projet",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "Théo qui assiste",
+            "status": "DRAFT",
+            "unlayerConf": null,
           },
         },
       ],
@@ -75,14 +30,533 @@ Object {
 }
 `;
 
-exports[`Internal.viewer.emailingCampaigns search a campaign 1`] = `
+exports[`Internal.viewer.emailingCampaigns should get all campains as admin 1`] = `
 Object {
   "viewer": Object {
     "emailingCampaigns": Object {
       "edges": Array [
         Object {
           "node": Object {
-            "name": "On envoie un message à ceux qui ont participé au projet Solidarité COVID-19",
+            "content": "<p>C'est gentil d'avoir participé.</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Merci",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Pourquoi vous l'avez toujours pas fait ?</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Veuillez confirmer votre email",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "SENT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Veuillez réparer la ville et la remettre à true.</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "La ville est false",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Mairie de true ville",
+            "status": "DRAFT",
+            "unlayerConf": "{\\"who\\":\\"agui\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Je pense qu'on va devoir relancer le projet.</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "liste Solidarité COVID-19",
+            },
+            "object": "Second confinement",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "DRAFT",
+            "unlayerConf": "{\\"who\\":\\"agui\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Content</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "campagne orga",
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "project": Object {
+              "title": "Rapport d'évaluation 6 (AR6)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "orga",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Content</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "campagne orga",
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "project": Object {
+              "title": "Rapport d'évaluation 6 (AR6)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "orga",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Vous vous souvenez de Théo ?",
+            "owner": Object {
+              "username": "Théo QP",
+            },
+            "project": Object {
+              "title": "Projet avec administrateur de projet",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "Théo qui assiste",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec internal list</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Campagne avec internal list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec mailing list</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "Coucou, tu veux voir ma liste ?",
+            },
+            "object": "Campagne avec mailing list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec un projet</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec un projet",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": Object {
+              "title": "Croissance, innovation, disruption",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec groupe de users</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec groupe de users",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+      ],
+      "totalCount": 11,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns should get an admin own campaigns 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec internal list</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Campagne avec internal list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec mailing list</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "Coucou, tu veux voir ma liste ?",
+            },
+            "object": "Campagne avec mailing list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec un projet</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec un projet",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": Object {
+              "title": "Croissance, innovation, disruption",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec groupe de users</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec groupe de users",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns should get campaigns ordered by sent date ascending 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "content": "<p>Veuillez réparer la ville et la remettre à true.</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "La ville est false",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Mairie de true ville",
+            "status": "DRAFT",
+            "unlayerConf": "{\\"who\\":\\"agui\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Je pense qu'on va devoir relancer le projet.</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "liste Solidarité COVID-19",
+            },
+            "object": "Second confinement",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "DRAFT",
+            "unlayerConf": "{\\"who\\":\\"agui\\"}",
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Content</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "campagne orga",
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "project": Object {
+              "title": "Rapport d'évaluation 6 (AR6)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "orga",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Content</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "campagne orga",
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "project": Object {
+              "title": "Rapport d'évaluation 6 (AR6)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "orga",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Vous vous souvenez de Théo ?",
+            "owner": Object {
+              "username": "Théo QP",
+            },
+            "project": Object {
+              "title": "Projet avec administrateur de projet",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "Théo qui assiste",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec internal list</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Campagne avec internal list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec mailing list</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "Coucou, tu veux voir ma liste ?",
+            },
+            "object": "Campagne avec mailing list",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec un projet</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec un projet",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": Object {
+              "title": "Croissance, innovation, disruption",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec groupe de users</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec groupe de users",
+            "owner": Object {
+              "username": "admin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Pourquoi vous l'avez toujours pas fait ?</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Veuillez confirmer votre email",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "SENT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>C'est gentil d'avoir participé.</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Merci",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+      ],
+      "totalCount": 11,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns should get only PLANNED campaigns as admin 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "content": "<p>C'est gentil d'avoir participé.</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Merci",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Content</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "campagne orga",
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "project": Object {
+              "title": "Rapport d'évaluation 6 (AR6)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "orga",
+            "status": "PLANNED",
+            "unlayerConf": null,
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.emailingCampaigns should search campaigns 1`] = `
+Object {
+  "viewer": Object {
+    "emailingCampaigns": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "content": "<p>Je pense qu'on va devoir relancer le projet.</p>",
+            "mailingInternal": null,
+            "mailingList": Object {
+              "name": "liste Solidarité COVID-19",
+            },
+            "object": "Second confinement",
+            "owner": null,
+            "project": null,
+            "senderEmail": "dev@cap-collectif.com",
+            "senderName": "Les devs de capco",
+            "status": "DRAFT",
+            "unlayerConf": "{\\"who\\":\\"agui\\"}",
           },
         },
       ],

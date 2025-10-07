@@ -1,28 +1,38 @@
 /* eslint-env jest */
 
 const ViewerEmailingCampaignsQuery = /* GraphQL */ `
-  query ViewerEmailingCampaignsQuery($affiliations: [EmailingCampaignAffiliation!]) {
+  query ViewerEmailingCampaignsQuery(
+    $affiliations: [EmailingCampaignAffiliation!]
+    $term: String
+    $status: EmailingCampaignStatusFilter
+    $orderBy: EmailingCampaignOrder
+  ) {
     viewer {
-      emailingCampaigns(affiliations: $affiliations) {
+      emailingCampaigns(
+        affiliations: $affiliations
+        term: $term
+        status: $status
+        orderBy: $orderBy
+      ) {
         totalCount
         edges {
           node {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
-
-const ViewerEmailingCampaignSearchQuery = /* GraphQL */ `
-  query ViewerEmailingCampaignSearchQuery($term: String) {
-    viewer {
-      emailingCampaigns(term: $term) {
-        totalCount
-        edges {
-          node {
-            name
+            owner {
+              username
+            }
+            senderEmail
+            senderName
+            object
+            content
+            unlayerConf
+            status
+            mailingInternal
+            mailingList {
+              name
+            }
+            project {
+              title
+            }
           }
         }
       }
@@ -31,29 +41,49 @@ const ViewerEmailingCampaignSearchQuery = /* GraphQL */ `
 `;
 
 describe('Internal.viewer.emailingCampaigns', () => {
-  it('project owner should get its campaigns', async () => {
+  it('should get a project owner campaigns', async () => {
     await expect(
       graphql(ViewerEmailingCampaignsQuery, { affiliations: ['OWNER'] }, 'internal_theo'),
     ).resolves.toMatchSnapshot();
   });
-  it('project owner cannot get all campaigns', async () => {
+
+  it('should thrown an error if a non-admin tries to get all campaigns', async () => {
     await expect(
       graphql(ViewerEmailingCampaignsQuery, { affiliations: [] }, 'internal_theo'),
     ).rejects.toThrowError('cannot request without affiliation');
   });
-  it('admin can get its campaigns', async () => {
+
+  it('should get an admin own campaigns', async () => {
     await expect(
       graphql(ViewerEmailingCampaignsQuery, { affiliations: ['OWNER'] }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
-  it('admin can get all campaigns', async () => {
+
+  it('should get only PLANNED campaigns as admin', async () => {
+    await expect(
+      graphql(ViewerEmailingCampaignsQuery, { status: 'PLANNED' }, 'internal_admin'),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('should get campaigns ordered by sent date ascending', async () => {
+    await expect(
+      graphql(
+        ViewerEmailingCampaignsQuery,
+        { orderBy: { field: 'SEND_AT', direction: 'ASC' } },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('should get all campains as admin', async () => {
     await expect(
       graphql(ViewerEmailingCampaignsQuery, { affiliations: [] }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
-  it('search a campaign', async () => {
+
+  it('should search campaigns', async () => {
     await expect(
-      graphql(ViewerEmailingCampaignSearchQuery, { term: 'COVID' }, 'internal_admin'),
+      graphql(ViewerEmailingCampaignsQuery, { term: 'COVID' }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
 });

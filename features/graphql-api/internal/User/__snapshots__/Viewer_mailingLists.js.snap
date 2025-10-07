@@ -1,82 +1,191 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal.viewer.mailingLists admin can get all mailingLists 1`] = `
+exports[`Internal.viewer.mailingLists should get a project owners own mailingLists 1`] = `
 Object {
   "viewer": Object {
     "mailingLists": Object {
       "edges": Array [
         Object {
           "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp1c2VyVGhlbw==",
+              "username": "Théo QP",
+            },
+            "id": "TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg==",
+            "isDeletable": true,
             "name": "J'avoue je sers à rien",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Coucou, tu veux voir ma liste ?",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "liste Solidarité COVID-19",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Mailing list organization",
-          },
-        },
-        Object {
-          "node": Object {
-            "name": "Les gens qui pèsent dans le capco-game",
+            "project": null,
+            "users": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
-      "totalCount": 5,
+      "totalCount": 1,
     },
   },
 }
 `;
 
-exports[`Internal.viewer.mailingLists admin can get its mailingLists 1`] = `
+exports[`Internal.viewer.mailingLists should get all mailingLists as admin 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp1c2VyVGhlbw==",
+              "username": "Théo QP",
+            },
+            "id": "TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg==",
+            "isDeletable": true,
+            "name": "J'avoue je sers à rien",
+            "project": null,
+            "users": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp1c2VyMQ==",
+              "username": "lbrunet",
+            },
+            "id": "TWFpbGluZ0xpc3Q6bG9uZ01haWxpbmdMaXN0",
+            "isDeletable": true,
+            "name": "Coucou, tu veux voir ma liste ?",
+            "project": null,
+            "users": Object {
+              "totalCount": 50,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": null,
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+            "isDeletable": true,
+            "name": "liste Solidarité COVID-19",
+            "project": Object {
+              "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+              "title": "Solidarité Covid-19",
+            },
+            "users": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp1c2VyMQ==",
+              "username": "lbrunet",
+            },
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGluZ0xpc3RBZG1pbg==",
+            "isDeletable": true,
+            "name": "Mailing list admin",
+            "project": null,
+            "users": Object {
+              "totalCount": 3,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp2YWxlcmllTWFzc29uRGVsbW90dGU=",
+              "username": "Valérie Masson Delmotte",
+            },
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGluZ0xpc3RPcmdhbml6YXRpb24=",
+            "isDeletable": true,
+            "name": "Mailing list organization",
+            "project": null,
+            "users": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": null,
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGluZ0xpc3RXaXRob3V0UHJvamVjdA==",
+            "isDeletable": false,
+            "name": "Les gens qui pèsent dans le capco-game",
+            "project": null,
+            "users": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+      "totalCount": 6,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists should get an admin own mailingLists 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "id": "VXNlcjp1c2VyMQ==",
+              "username": "lbrunet",
+            },
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGluZ0xpc3RBZG1pbg==",
+            "isDeletable": true,
+            "name": "Mailing list admin",
+            "project": null,
+            "users": Object {
+              "totalCount": 3,
+            },
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists should search mailingLists 1`] = `
+Object {
+  "viewer": Object {
+    "mailingLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": null,
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+            "isDeletable": true,
+            "name": "liste Solidarité COVID-19",
+            "project": Object {
+              "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+              "title": "Solidarité Covid-19",
+            },
+            "users": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.viewer.mailingLists should search mailingLists that dont exist 1`] = `
 Object {
   "viewer": Object {
     "mailingLists": Object {
       "edges": Array [],
       "totalCount": 0,
-    },
-  },
-}
-`;
-
-exports[`Internal.viewer.mailingLists project owner should get its mailingLists 1`] = `
-Object {
-  "viewer": Object {
-    "mailingLists": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "name": "J'avoue je sers à rien",
-          },
-        },
-      ],
-      "totalCount": 1,
-    },
-  },
-}
-`;
-
-exports[`Internal.viewer.mailingLists search a mailingList 1`] = `
-Object {
-  "viewer": Object {
-    "mailingLists": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "name": "liste Solidarité COVID-19",
-          },
-        },
-      ],
-      "totalCount": 1,
     },
   },
 }

@@ -162,8 +162,17 @@ Capco\AppBundle\Entity\MailingListUser:
         mailingList: '@longMailingList'
         user: '@user50'
     mailingListOrganizationUser1:
-        mailingList: "@mailingListOrganization"
-        user: "@user1"
+        mailingList: '@mailingListOrganization'
+        user: '@user1'
     mailingListOrganizationUser2:
-        mailingList: "@mailingListOrganization"
-        user: "@userSpyl"
+        mailingList: '@mailingListOrganization'
+        user: '@userSpyl'
+    mailingListAdminUser10:
+        mailingList: '@mailingListAdmin'
+        user: '@user11'
+    mailingListAdminUser11:
+        mailingList: '@mailingListAdmin'
+        user: '@user10'
+    mailingListAdminUser12:
+        mailingList: '@mailingListAdmin'
+        user: '@user12'

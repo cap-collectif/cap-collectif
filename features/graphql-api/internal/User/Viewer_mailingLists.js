@@ -1,28 +1,26 @@
 /* eslint-env jest */
 
 const ViewerMailingListsQuery = /* GraphQL */ `
-  query ViewerMailingListQuery($affiliations: [MailingListAffiliation!]) {
+  query ViewerMailingListQuery($affiliations: [MailingListAffiliation!], $term: String) {
     viewer {
-      mailingLists(affiliations: $affiliations) {
+      mailingLists(affiliations: $affiliations, term: $term) {
         totalCount
         edges {
           node {
+            id
             name
-          }
-        }
-      }
-    }
-  }
-`;
-
-const ViewerMailingListsSearchQuery = /* GraphQL */ `
-  query ViewerMailingListSearchQuery($term: String) {
-    viewer {
-      mailingLists(term: $term) {
-        totalCount
-        edges {
-          node {
-            name
+            isDeletable
+            creator {
+              id
+              username
+            }
+            project {
+              id
+              title
+            }
+            users {
+              totalCount
+            }
           }
         }
       }
@@ -31,29 +29,39 @@ const ViewerMailingListsSearchQuery = /* GraphQL */ `
 `;
 
 describe('Internal.viewer.mailingLists', () => {
-  it('project owner should get its mailingLists', async () => {
+  it('should get a project owners own mailingLists', async () => {
     await expect(
       graphql(ViewerMailingListsQuery, { affiliations: ['OWNER'] }, 'internal_theo'),
     ).resolves.toMatchSnapshot();
   });
-  it('project owner cannot get all mailingLists', async () => {
+
+  it('should thrown an error if a non-admin tries to get all mailingLists', async () => {
     await expect(
       graphql(ViewerMailingListsQuery, { affiliations: [] }, 'internal_theo'),
     ).rejects.toThrowError('cannot request without affiliation');
   });
-  it('admin can get its mailingLists', async () => {
+
+  it('should get an admin own mailingLists', async () => {
     await expect(
       graphql(ViewerMailingListsQuery, { affiliations: ['OWNER'] }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
-  it('admin can get all mailingLists', async () => {
+
+  it('should get all mailingLists as admin', async () => {
     await expect(
       graphql(ViewerMailingListsQuery, { affiliations: [] }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
-  it('search a mailingList', async () => {
+
+  it('should search mailingLists', async () => {
     await expect(
-      graphql(ViewerMailingListsSearchQuery, { term: 'COVID' }, 'internal_admin'),
+      graphql(ViewerMailingListsQuery, { term: 'COVID' }, 'internal_admin'),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('should search mailingLists that dont exist', async () => {
+    await expect(
+      graphql(ViewerMailingListsQuery, { term: 'COVID20' }, 'internal_admin'),
     ).resolves.toMatchSnapshot();
   });
 });

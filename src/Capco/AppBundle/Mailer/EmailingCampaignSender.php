@@ -103,6 +103,26 @@ class EmailingCampaignSender
         return $this->emailingCampaignUserRepository->findUnsentByEmailingCampaign($emailingCampaign, $maxResults);
     }
 
+    // todo this method is made public by the issue implementing the tests: #18817
+    // todo it will be refactoed as a separate service in the Mailjet implementation: #18611
+    public function getRecipients(EmailingCampaign $emailingCampaign): Collection
+    {
+        if ($emailingCampaign->getMailingList()) {
+            return $emailingCampaign->getMailingList()->getUsersWithValidEmail(true);
+        }
+        if ($emailingCampaign->getMailingInternal()) {
+            return $this->getRecipientsFromInternalList();
+        }
+        if ($emailingCampaign->getEmailingGroup()) {
+            return $this->getRecipientsFromUserGroup($emailingCampaign->getEmailingGroup());
+        }
+        if ($emailingCampaign->getProject()) {
+            return $this->getRecipientsFromProject($emailingCampaign->getProject());
+        }
+
+        throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
+    }
+
     private function createAndSendMessage(
         EmailingCampaign $emailingCampaign,
         ContributorInterface $recipient
@@ -159,24 +179,6 @@ class EmailingCampaignSender
         }
 
         return $this->router->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
-    private function getRecipients(EmailingCampaign $emailingCampaign): Collection
-    {
-        if ($emailingCampaign->getMailingList()) {
-            return $emailingCampaign->getMailingList()->getUsersWithValidEmail(true);
-        }
-        if ($emailingCampaign->getMailingInternal()) {
-            return $this->getRecipientsFromInternalList();
-        }
-        if ($emailingCampaign->getEmailingGroup()) {
-            return $this->getRecipientsFromUserGroup($emailingCampaign->getEmailingGroup());
-        }
-        if ($emailingCampaign->getProject()) {
-            return $this->getRecipientsFromProject($emailingCampaign->getProject());
-        }
-
-        throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
     }
 
     private function getRecipientsFromInternalList(): Collection
