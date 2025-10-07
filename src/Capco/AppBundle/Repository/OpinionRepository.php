@@ -76,6 +76,25 @@ class OpinionRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function getOpinionsByConsultationStepWithUserConfirmedCount(ConsultationStep $consultationStep): int
+    {
+        $query = $this->getOpinionsByConsultationStepWithUserConfirmedQuery($consultationStep);
+        $query->select('COUNT(o.id)');
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return iterable<Opinion>
+     */
+    public function getOpinionsByConsultationStepWithUserConfirmedIterator(ConsultationStep $consultationStep): iterable
+    {
+        $query = $this->getOpinionsByConsultationStepWithUserConfirmedQuery($consultationStep);
+        $opinionsQuery = $query->orderBy('o.createdAt', 'DESC');
+
+        return $opinionsQuery->getQuery()->toIterable();
+    }
+
     public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('o')
@@ -552,5 +571,19 @@ class OpinionRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
+    }
+
+    private function getOpinionsByConsultationStepWithUserConfirmedQuery(ConsultationStep $consultationStep): QueryBuilder
+    {
+        $cstepId = $consultationStep->getId();
+        $query = $this->createQueryBuilder('o');
+        $query->leftJoin('o.author', 'a')
+            ->leftJoin('o.consultation', 'cs')
+            ->andWhere('a.confirmationToken IS NULL')
+            ->andWhere('cs.step = :consultationStep')
+            ->setParameter(':consultationStep', $cstepId)
+        ;
+
+        return $query;
     }
 }

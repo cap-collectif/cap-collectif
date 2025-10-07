@@ -327,4 +327,16 @@ class ExportHeaders
         ForOrAgainstType::FOR => self::EXPORT_VOTE_TYPE_FOR,
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,
     ];
+
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION = 'export_contribution_type_opinion';
+    public const EXPORT_CONTRIBUTION_TYPE_APPENDIX = 'export_contribution_type_appendix';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_REPORT = 'export_contribution_type_opinion_report';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_VOTE = 'export_contribution_type_opinion_vote';
+    public const EXPORT_CONTRIBUTION_TYPE_ARGUMENT = 'export_contribution_type_argument';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_ARGUMENT_REPORT = 'export_contribution_type_opinion_argument_report';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_VERSION = 'export_contribution_type_opinion_version';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_VERSION_REPORT = 'export_contribution_type_opinion_version_report';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_VERSION_VOTE = 'export_contribution_type_opinion_version_vote';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_SOURCE = 'export_contribution_type_opinion_source';
+    public const EXPORT_CONTRIBUTION_TYPE_OPINION_SOURCE_REPORT = 'export_contribution_type_opinion_source_report';
 }

@@ -206,6 +206,17 @@ class ConsultationStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return iterable<ConsultationStep>
+     */
+    public function findAllConsultations(): iterable
+    {
+        return $this->createQueryBuilder('cs')
+            ->getQuery()
+            ->toIterable()
+        ;
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')
