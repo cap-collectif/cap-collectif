@@ -186,6 +186,18 @@ class DebateVoteRepository extends EntityRepository
         return array_merge($debateAnonymousVotes, $debateVotes);
     }
 
+    public function getDebateVoteByUser(User $user, Debate $debate): ?DebateVote
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.debate = :debate')
+            ->andWhere('v.user = :user')
+            ->setParameter('debate', $debate)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     private function getUnpublishedByDebateAndUserQB(Debate $debate, User $user): QueryBuilder
     {
         return $this->createQueryBuilder('v')

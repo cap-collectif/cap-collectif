@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableDebateContributionInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -97,6 +100,66 @@ class DebateRepository extends EntityRepository
         $anonymousArguments = $qbDebateAnonymousArgument->getQuery()->getResult();
 
         return [...$arguments, ...$anonymousArguments];
+    }
+
+    /**
+     * @return iterable<DebateArgument>
+     */
+    public function getDebateArgumentsConfirmedToIterable(Debate $debate): iterable
+    {
+        $qbDebateArgument = $this->getEntityManager()->createQueryBuilder()
+            ->select('a')
+            ->from('CapcoAppBundle:Debate\DebateArgument', 'a')
+            ->join('a.author', 'au')
+            ->where('a.debate = :debate')
+            ->andWhere('au.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+        ;
+
+        return $qbDebateArgument->getQuery()->toIterable();
+    }
+
+    public function getDebateArgumentsConfirmedCount(Debate $debate): int
+    {
+        $qbDebateArgument = $this->getEntityManager()->createQueryBuilder()
+            ->select('COUNT(a)')
+            ->from('CapcoAppBundle:Debate\DebateArgument', 'a')
+            ->leftJoin('a.author', 'au')
+            ->where('a.debate = :debate')
+            ->andWhere('au.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+        ;
+
+        return (int) $qbDebateArgument->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return iterable<DebateAnonymousArgument>
+     */
+    public function getDebateAnonymousArgumentsConfirmedToIterable(Debate $debate): iterable
+    {
+        $qbDebateAnonymousArgument = $this->_em->createQueryBuilder()
+            ->select('daa')
+            ->from('CapcoAppBundle:Debate\DebateAnonymousArgument', 'daa')
+            ->where('daa.debate = :debate')
+            ->andWhere('daa.publishedAt IS NOT NULL')
+            ->setParameter('debate', $debate)
+        ;
+
+        return $qbDebateAnonymousArgument->getQuery()->toIterable();
+    }
+
+    public function getDebateAnonymousArgumentsConfirmedCount(Debate $debate): int
+    {
+        $qbDebateAnonymousArgument = $this->_em->createQueryBuilder()
+            ->select('COUNT(daa)')
+            ->from('CapcoAppBundle:Debate\DebateAnonymousArgument', 'daa')
+            ->where('daa.debate = :debate')
+            ->andWhere('daa.publishedAt IS NOT NULL')
+            ->setParameter('debate', $debate)
+        ;
+
+        return (int) $qbDebateAnonymousArgument->getQuery()->getSingleScalarResult();
     }
 
     public function hasNewArgumentsForADebate(Debate $debate, \DateTime $mostRecentFileModificationDate): bool

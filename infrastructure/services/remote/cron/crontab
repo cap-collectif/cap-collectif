@@ -34,6 +34,7 @@
 57 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:participants --env=prod --quiet
 58 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:app-logs --env=prod --quiet
 59 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:app-log:outdated --env=prod --quiet
+58 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:debate-grouped --env=prod --quiet
 59 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:contributions --env=prod --quiet
 
 # Process analysis at minute 0 every hour.
@@ -73,8 +74,5 @@
 # Check queues with too many messages
 * * * * * /usr/local/bin/rabbitmq_queues_supervision >> /tmp/rabbitmq_queues_supervision.log
 
-# Remove outdated log admin all 6 months
-0 0 1 */6 * /usr/bin/timeout 10m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:app-log:outdated --env=prod --quiet
 # Read email inboxes to create proposals
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:collect-email-proposals --env=prod
-

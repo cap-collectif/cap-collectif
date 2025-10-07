@@ -13,6 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class DebateAnonymousVoteRepository extends EntityRepository
 {
+    /**
+     * @param string[] $ids
+     *
+     * @return DebateAnonymousVote[]
+     */
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('dav');

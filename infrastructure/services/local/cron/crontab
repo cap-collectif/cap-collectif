@@ -15,6 +15,8 @@
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:votes
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate --geoip
+#0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate-grouped
+#0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation:participants
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect-selection:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:app-logs
 #0 * * * * /usr/bin/timeout 10m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:app-log:outdated
