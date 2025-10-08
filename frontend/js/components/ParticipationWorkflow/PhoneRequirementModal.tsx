@@ -247,7 +247,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
                 }
                 onClose={() => {}}
                 title={intl.formatMessage({ id: 'participation-workflow.phone_number' })}
-                info={intl.formatMessage({ id: 'participation-workflow.phone_helptext' })}>
+                info={intl.formatMessage({ id: isPhoneVerifiedRequired ? 'participation-workflow.phone_helptext': 'participation-workflow.phone_helptext_without_sms' })}>
                 <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
                     <FormLabel
                         htmlFor="phone"

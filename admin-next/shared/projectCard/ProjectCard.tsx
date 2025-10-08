@@ -49,6 +49,9 @@ const FRAGMENT = graphql`
     }
     status
     paperVotesTotalCount
+    anonymousVotes: votes(anonymous: true) {
+      totalCount
+    }
     contributions {
       totalCount
     }
@@ -131,7 +134,8 @@ export const ProjectCard = ({ project: projectKey, primaryInfoTag, ...props }: P
                 CapUIIcon.UserO,
                 isExternal
                   ? externalParticipantsCount || 0
-                  : project.contributors.totalCount,
+                  : project.contributors.totalCount +
+                      project.anonymousVotes.totalCount,
                 intl.formatMessage({ id: 'capco.section.metrics.participants' }),
               )) ||
               null}
