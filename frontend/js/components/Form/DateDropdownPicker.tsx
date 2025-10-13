@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { DayPicker, MonthPicker, YearPicker } from 'react-dropdown-date'
 import config from '../../config'
+import moment from 'moment'
 
 type Props = {
   dayDefaultValue: string
@@ -20,20 +20,17 @@ type Props = {
 }
 
 const getDay = (date: string): number => {
-  let day: any = date.substr(8, 2)
-  day = day[0] === 0 ? day[1] : day
+  const day = date.substring(8, 10)
   return parseInt(day, 10)
 }
 
 const getMonth = (date: string): number => {
-  let month: any = date.substr(5, 2)
-  month = month[0] === 0 ? month[1] : month
-  month = parseInt(month, 10)
-  return month - 1
+  const month = date.substring(5, 7)
+  return parseInt(month, 10)
 }
 
 const getYear = (date: string): number => {
-  const year = date.substr(0, 4)
+  const year = date.substring(0, 4)
   return parseInt(year, 10)
 }
 
@@ -66,6 +63,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
     }
 
     if (props.input.value) {
+      console.log("intpu.value", props.input.value);
       this.state = {
         year: getYear(props.input.value),
         month: getMonth(props.input.value),
@@ -88,7 +86,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
       return
     }
 
-    input.onChange(`${year}-${parseInt(month, 10) + 1}-${day}`)
+    input.onChange(`${year}-${month}-${day}`)
   }
 
   render() {
@@ -115,53 +113,89 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
         </label>
         <div className={divClassName} id={componentId}>
           <div id={dayId}>
-            <DayPicker
-              defaultValue={dayDefaultValue}
-              year={year}
-              month={month}
+            <select
               value={day}
-              onChange={d => {
+              onBlur={e => {
                 this.setState({
-                  day: d,
+                  day: parseInt(e.target.value),
+                })
+              }}
+              onChange={e => {
+                this.setState({
+                  day: parseInt(e.target.value),
                 })
               }}
               id="day"
               name="day"
-              classes="form-control"
+              className="form-control"
               disabled={disabled}
-            />
+            >
+              <option value="">
+                {dayDefaultValue}
+              </option>
+              {[...Array(31)].map((_, i) => (
+                <option key={i} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
           </div>
           <div id={monthId}>
-            <MonthPicker
-              defaultValue={monthDefaultValue}
-              year={year}
+            <select
               value={month}
-              onChange={m => {
+              onBlur={e => {
                 this.setState({
-                  month: m,
+                  month: parseInt(e.target.value),
                 })
               }}
-              locale={wLocale.substr(3, 5)}
+              onChange={e => {
+                this.setState({
+                  month: parseInt(e.target.value),
+                })
+              }}
               id="month"
               name="month"
-              classes="form-control"
+              className="form-control"
+              style={{ textTransform: 'capitalize' }}
               disabled={disabled}
-            />
+            >
+              <option value="">
+                {monthDefaultValue}
+              </option>
+              {[...Array(12)].map((_, i) => (
+                <option key={i} value={i + 1}>
+                  {moment().locale(wLocale).month(i).format('MMMM')}
+                </option>
+              ))}
+            </select>
           </div>
           <div id={yearId}>
-            <YearPicker
-              defaultValue={yearDefaultValue}
+            <select
               value={year}
-              onChange={y => {
+              onBlur={e => {
                 this.setState({
-                  year: y,
+                  year: parseInt(e.target.value),
+                })
+              }}
+              onChange={e => {
+                this.setState({
+                  year: parseInt(e.target.value),
                 })
               }}
               id="year"
               name="year"
-              classes="form-control"
+              className="form-control"
               disabled={disabled}
-            />
+            >
+              <option value="">
+                {yearDefaultValue}
+              </option>
+              {[...Array(110)].map((_, i) => (
+                <option key={i} value={moment().year() - i}>
+                  {moment().year() - i}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
@@ -169,3 +203,4 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
   }
 }
 export default DateDropdownPicker
+

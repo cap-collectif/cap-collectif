@@ -207,14 +207,11 @@
 
 #personal-data-date-of-birth {
   padding-left: 0;
+  margin-bottom: 5px;
 
-  #personal-data-date-of-birth-day {
+  #personal-data-date-of-birth-day, #personal-data-date-of-birth-month, #personal-data-date-of-birth-year {
     padding-left: 0;
     padding-right: 2px;
-  }
-
-  #personal-data-date-of-birth-month, #personal-data-date-of-birth-year {
-    padding: 0 2px;
   }
 }
 

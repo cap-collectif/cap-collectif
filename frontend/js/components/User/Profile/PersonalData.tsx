@@ -504,7 +504,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                         </div>
                       )}
-                      {currentValues.dateOfBirth !== null && (
+                      { currentValues.dateOfBirth !== null && (
                         <div>
                           <div className="horizontal_field_with_border_top">
                             <Field
