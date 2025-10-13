@@ -39,7 +39,7 @@ exports[`<Address /> renders correctly when no value 1`] = `
   onSelect={[Function]}
   searchOptions={Object {}}
   shouldFetchSuggestions={true}
-  value=""
+  value={null}
 >
   <Component />
 </PlacesAutocomplete>

@@ -29,7 +29,7 @@ const Address = ({
   allowReset = true,
   showSearchBar = true,
 }: Props) => {
-  const [address, setAddress] = React.useState(initialValue || '')
+  const [address, setAddress] = React.useState(initialValue)
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true)
   const intl = useIntl()
   const hasReset = allowReset && !!address
@@ -97,8 +97,12 @@ const Address = ({
     onChange(null)
   }
 
+  React.useEffect(() => {
+    setAddress(initialValue)
+  }, [initialValue])
+
   return (
-    <PlacesAutocomplete value={address ?? ''} onChange={setAddress} onSelect={handleSelect} debounce={debounce}>
+    <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect} debounce={debounce}>
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="address-container">
           <SearchContainer hasLocationUser={!!getPosition} hasReset={hasReset}>
