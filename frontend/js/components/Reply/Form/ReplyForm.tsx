@@ -25,7 +25,7 @@ import type { Dispatch, GlobalState } from '~/types'
 import type { ReplyForm_questionnaire$data } from '~relay/ReplyForm_questionnaire.graphql'
 import type { ReplyForm_reply$data } from '~relay/ReplyForm_reply.graphql'
 import renderComponent from '~/components/Form/Field'
-import type { ResponsesInReduxForm } from '~/components/Form/Form.type'
+import type { ResponsesError, ResponsesInReduxForm, ResponsesWarning } from '~/components/Form/Form.type'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import SubmitButton from '~/components/Form/SubmitButton'
 import AlertForm from '~/components/Alert/AlertForm'
@@ -325,15 +325,25 @@ const validate = (values: FormValues, props: Props) => {
   const { intl } = props
   const { questions } = props.questionnaire
   const { responses } = values
-  const errors: any = {}
+  const errors: {responses: ResponsesError | ResponsesWarning} = { responses: [] }
   const responsesError = validateResponses(questions, responses, 'reply', intl, values.draft, availableQuestions)
 
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses
   }
 
+  if (errors.responses.length !== 0 && errors.responses.some((response) => response !== undefined)) {
+      scrollToErrors(errors.responses)
+  }
+
   return errors
 }
+
+const scrollToErrors = (errors: ResponsesError | ResponsesWarning) => {
+    const errIndex = errors.findIndex((val) => val !== undefined)
+    const element = document.getElementById(`label-CreateReplyForm-responses${errIndex}`)
+    if (element) element.scrollIntoView()
+} 
 
 export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`
 export class ReplyForm extends React.Component<Props, State> {
