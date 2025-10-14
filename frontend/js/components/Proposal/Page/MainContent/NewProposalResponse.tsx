@@ -33,7 +33,7 @@ const SubSectionTitle = styled.h3<{
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 5px;
 `
-const QuestionTitle = styled.h3<{
+const QuestionTitle = styled.p<{
   margin?: boolean
 }>`
   font-size: 16px;

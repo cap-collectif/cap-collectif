@@ -1,47 +1,47 @@
-import React from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
-import { MapContainer, Marker } from 'react-leaflet'
-import { GestureHandling } from 'leaflet-gesture-handling'
-import { Box, Skeleton } from '@cap-collectif/ui'
-import colors from '~/utils/colors'
-import config from '~/config'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
-import { MAX_MAP_ZOOM } from '~/utils/styles/variables'
-import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
-import type { ProposalPageLocalisation_proposal } from '~relay/ProposalPageLocalisation_proposal.graphql'
+import React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
+import { MapContainer, Marker } from 'react-leaflet';
+import { GestureHandling } from 'leaflet-gesture-handling';
+import { Box, Skeleton } from '@cap-collectif/ui';
+import colors from '~/utils/colors';
+import config from '~/config';
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
+import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
+import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
+import type { ProposalPageLocalisation_proposal } from '~relay/ProposalPageLocalisation_proposal.graphql';
 import {
   Card,
   CategoryContainer,
   CategoryCircledIcon,
   CategoryTitle,
-} from '~/components/Proposal/Page/ProposalPage.style'
+} from '~/components/Proposal/Page/ProposalPage.style';
 
 type Props = {
-  proposal: ProposalPageLocalisation_proposal | null | undefined
-}
-let L
+  proposal: ProposalPageLocalisation_proposal | null | undefined,
+};
+let L;
 
 const Placeholder = () => (
   <Box ml={4}>
     <Skeleton.Text width="100%" size="sm" mb={4} />
     <Skeleton.Text width="100%" height="130px" />
   </Box>
-)
+);
 
 export const ProposalPageLocalisation = ({ proposal }: Props) => {
   React.useEffect(() => {
     if (config.canUseDOM) {
-      L = require('leaflet')
+      L = require('leaflet');
 
-      L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
+      L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
     }
-  }, [])
+  }, []);
 
   if (!proposal || !config.canUseDOM || !proposal.address || !proposal.form.usingAddress) {
-    return null
+    return null;
   }
 
   return (
@@ -51,7 +51,7 @@ export const ProposalPageLocalisation = ({ proposal }: Props) => {
           <CategoryCircledIcon>
             <Icon name={ICON_NAME.pin} size={20} color={colors.secondaryGray} />
           </CategoryCircledIcon>
-          <FormattedMessage id="form.label_neighborhood" tagName="h3" />
+          <FormattedMessage id="form.label_neighborhood" tagName="h2" />
         </CategoryTitle>
         <Skeleton placeholder={<Placeholder />} isLoaded={proposal !== null}>
           {proposal?.address && config.canUseDOM ? (
@@ -69,8 +69,7 @@ export const ProposalPageLocalisation = ({ proposal }: Props) => {
                   height: 175,
                 }}
                 doubleClickZoom={false}
-                gestureHandling
-              >
+                gestureHandling>
                 <CapcoTileLayer />
                 <Marker
                   position={[proposal?.address.lat, proposal?.address.lng]}
@@ -90,8 +89,8 @@ export const ProposalPageLocalisation = ({ proposal }: Props) => {
         </Skeleton>
       </CategoryContainer>
     </Card>
-  )
-}
+  );
+};
 export default createFragmentContainer(ProposalPageLocalisation, {
   proposal: graphql`
     fragment ProposalPageLocalisation_proposal on Proposal {
@@ -106,4 +105,4 @@ export default createFragmentContainer(ProposalPageLocalisation, {
       }
     }
   `,
-})
+});

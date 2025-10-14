@@ -9,7 +9,7 @@ exports[`<ProposalPageAdvancement /> should render correctly 1`] = `
   <ProposalPageAdvancement__ProposalDetailAdvancementContainer>
     <FormattedMessage
       id="proposal.detail.advancement"
-      tagName="h4"
+      tagName="h2"
       values={Object {}}
     />
     <Skeleton

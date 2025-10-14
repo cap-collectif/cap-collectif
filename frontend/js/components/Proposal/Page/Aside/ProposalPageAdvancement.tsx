@@ -17,7 +17,7 @@ type Props = {
 export const ProposalDetailAdvancementContainer = styled.div`
   padding: 20px;
 
-  h4 {
+  h2 {
     margin: 0;
     margin-bottom: 20px;
     font-size: 18px;
@@ -98,7 +98,7 @@ export const ProposalPageAdvancement = ({ proposal }: Props) => {
   return (
     <Card id="ProposalPageAdvancement">
       <ProposalDetailAdvancementContainer>
-        <FormattedMessage tagName="h4" id="proposal.detail.advancement" />
+        <FormattedMessage tagName="h2" id="proposal.detail.advancement" />
         <Skeleton placeholder={<AdvancementsPlaceholder />} isLoaded={!!proposal}>
           {/** @ts-ignore */}
           <ProposalDetailAdvancement proposal={proposal} displayedSteps={displayedSteps} />

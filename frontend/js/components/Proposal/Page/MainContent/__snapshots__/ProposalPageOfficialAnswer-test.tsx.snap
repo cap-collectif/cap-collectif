@@ -15,14 +15,14 @@ exports[`<ProposalPageOfficialAnswer /> should render correctly 1`] = `
           size={20}
         />
       </ProposalPagestyle__CategoryCircledIcon>
-      <h3
+      <h2
         className="proposal__last__news__title"
       >
         <FormattedMessage
           id="card.title.official.answer"
           values={Object {}}
         />
-      </h3>
+      </h2>
     </ProposalPagestyle__CategoryTitle>
     <Flex
       gap={1}

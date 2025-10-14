@@ -20,7 +20,7 @@ type Props = {
 const ProposalPageVoteThresholdContainer = styled.div`
   padding: 20px 30px;
 
-  > h4 {
+  > h2 {
     margin: 0;
     margin-bottom: 20px;
     font-size: 18px;
@@ -69,7 +69,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
   return (
     <Card id="ProposalPageVoteThreshold">
       <ProposalPageVoteThresholdContainer>
-        <h4>
+        <h2>
           {voteThreshold && votesPercentage >= 100
             ? intl.formatMessage({
                 id: isInterpellation ? 'interpellation.vote.threshold.reached' : 'proposal.vote.threshold.reached',
@@ -81,7 +81,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                   ? 'opinion.vote.threshold.title'
                   : 'proposal.vote.threshold.title',
               })}
-        </h4>
+        </h2>
         <p>
           <Tooltip
             backgroundColor="black"

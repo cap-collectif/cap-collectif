@@ -45,12 +45,13 @@ export const CategoryTitle = styled.div.attrs({
   align-items: center;
   width: 100%;
 
-  h3 {
+  h2 {
     text-transform: uppercase;
     font-size: 20px;
     font-weight: 600;
     margin: 0;
     margin-left: 15px;
+    color: ${colors.darkText};
   }
 
   h5 {

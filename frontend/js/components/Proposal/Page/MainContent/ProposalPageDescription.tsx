@@ -1,31 +1,32 @@
-import React from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
-import { Box, Skeleton } from '@cap-collectif/ui'
-import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import colors from '~/utils/colors'
-import type { ProposalPageDescription_proposal } from '~relay/ProposalPageDescription_proposal.graphql'
+import React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
+import { Box, Heading, Skeleton } from '@cap-collectif/ui';
+import WYSIWYGRender from '@shared/form/WYSIWYGRender';
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
+import colors from '~/utils/colors';
+import type { ProposalPageDescription_proposal } from '~relay/ProposalPageDescription_proposal.graphql';
 import {
   Card,
   CategoryContainer,
   CategoryCircledIcon,
   CategoryTitle,
-} from '~/components/Proposal/Page/ProposalPage.style'
+} from '~/components/Proposal/Page/ProposalPage.style';
+import truncateHtml from 'html-truncate';
 
 type Props = {
-  proposal: ProposalPageDescription_proposal | null | undefined
-}
+  proposal: ProposalPageDescription_proposal | null | undefined,
+};
 
 const Placeholder = () => (
   <Box ml={4}>
     <Skeleton.Text size="sm" width="100%" mb={4} />
     <Skeleton.Text size="sm" width="50%" />
   </Box>
-)
+);
 
 export const ProposalPageDescription = ({ proposal }: Props) => {
-  if (proposal && !proposal.body && !proposal.summary) return null
+  if (proposal && !proposal.body && !proposal.summary) return null;
   return (
     <Card>
       <CategoryContainer>
@@ -33,18 +34,18 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
           <CategoryCircledIcon paddingLeft={10}>
             <Icon name={ICON_NAME.fileText} size={20} color={colors.secondaryGray} />
           </CategoryCircledIcon>
-          <FormattedMessage id="global.description" tagName="h3" />
+          <FormattedMessage id="global.description" tagName="h2" />
         </CategoryTitle>
         {proposal?.summary && (
           <>
-            <p
+            <Box
+              as="h3"
               style={{
                 fontWeight: 600,
-              }}
-            >
+              }}>
               {' '}
-              <WYSIWYGRender value={proposal.summary} />
-            </p>
+              {proposal.summary}
+            </Box>
             <br />
           </>
         )}
@@ -53,8 +54,8 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
         </Skeleton>
       </CategoryContainer>
     </Card>
-  )
-}
+  );
+};
 export default createFragmentContainer(ProposalPageDescription, {
   proposal: graphql`
     fragment ProposalPageDescription_proposal on Proposal {
@@ -62,4 +63,4 @@ export default createFragmentContainer(ProposalPageDescription, {
       summary
     }
   `,
-})
+});

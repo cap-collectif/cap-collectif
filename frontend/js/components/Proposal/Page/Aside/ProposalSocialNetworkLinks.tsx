@@ -93,7 +93,7 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
   return (
     <Card id="ProposalSocialNetworkLinks">
       <ProposalSocialNetworkLinksContainer>
-        <Text as="h4" mb="0" color="gray.900" fontWeight="700" fontSize="18px">
+        <Text as="h2" mb="0" color="gray.900" fontWeight="700" fontSize="18px">
           {intl.formatMessage({
             id: proposal.isProposalUsingAnySocialNetworks ? 'find-us' : 'add-external-links',
           })}

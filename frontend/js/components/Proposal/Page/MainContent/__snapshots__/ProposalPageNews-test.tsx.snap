@@ -45,12 +45,12 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <h3>
+        <h2>
           <FormattedMessage
             id="menu.news"
             values={Object {}}
           />
-        </h3>
+        </h2>
       </ProposalPagestyle__CategoryTitle>
       <Box />
     </Flex>
@@ -123,12 +123,12 @@ exports[`<ProposalPageNews /> should render correctly and add news is not allow 
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <h3>
+        <h2>
           <FormattedMessage
             id="menu.news"
             values={Object {}}
           />
-        </h3>
+        </h2>
       </ProposalPagestyle__CategoryTitle>
       <Box />
     </Flex>
@@ -201,12 +201,12 @@ exports[`<ProposalPageNews /> should render correctly with viewerDidAuthor 1`] =
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <h3>
+        <h2>
           <FormattedMessage
             id="menu.news"
             values={Object {}}
           />
-        </h3>
+        </h2>
       </ProposalPagestyle__CategoryTitle>
       <Box>
         <Button
@@ -279,12 +279,12 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <h3>
+        <h2>
           <FormattedMessage
             id="proposal.admin.news"
             values={Object {}}
           />
-        </h3>
+        </h2>
       </ProposalPagestyle__CategoryTitle>
       <Box />
     </Flex>
@@ -402,12 +402,12 @@ exports[`<ProposalPageNews /> should render correctly without viewerDidAuthor 1`
             size={20}
           />
         </ProposalPagestyle__CategoryCircledIcon>
-        <h3>
+        <h2>
           <FormattedMessage
             id="menu.news"
             values={Object {}}
           />
-        </h3>
+        </h2>
       </ProposalPagestyle__CategoryTitle>
       <Box />
     </Flex>

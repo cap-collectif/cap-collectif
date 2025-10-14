@@ -13,7 +13,7 @@ exports[`<ProposalPageLocalisation /> should render correctly 1`] = `
       </ProposalPagestyle__CategoryCircledIcon>
       <FormattedMessage
         id="form.label_neighborhood"
-        tagName="h3"
+        tagName="h2"
         values={Object {}}
       />
     </ProposalPagestyle__CategoryTitle>

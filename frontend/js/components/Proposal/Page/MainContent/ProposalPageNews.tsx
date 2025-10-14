@@ -64,9 +64,9 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
               {/** @ts-ignore size en dur */}
               <Icon name={CapUIIcon.Newspaper} size={20} color={colors.secondaryGray} />
             </CategoryCircledIcon>
-            <h3>
+            <h2>
               <FormattedMessage id={checkNews ? 'menu.news' : 'proposal.admin.news'} />
-            </h3>
+            </h2>
           </CategoryTitle>
           <Box>
             {checkNews && proposal.isProposalAuthorAllowedToAddNews && viewerIsAuthor && (

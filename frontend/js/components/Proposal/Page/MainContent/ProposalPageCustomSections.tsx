@@ -76,7 +76,7 @@ export const ProposalPageCustomSections = ({ proposal, cardColor }: Props) => {
               <CategoryCircledIcon paddingTop={9} paddingLeft={9}>
                 <Circle />
               </CategoryCircledIcon>
-              <h3>{section.question.title}</h3>
+              <h2>{section.question.title}</h2>
             </CategoryTitle>
             {section.child.map((response, index) => (
               <NewProposalResponse key={index} response={response} />
