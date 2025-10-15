@@ -27,7 +27,7 @@ const PROJECT_FRAGMENT = graphql`
     exportableSteps {
       position
       step {
-        title
+        label
         __typename
         exportStepUrl
         exportContributorsUrl
@@ -40,14 +40,14 @@ const getSteptrad = (step: ProjectModalExportSteps_project$data['exportableSteps
     return (
       <FormattedHTMLMessage
         id="admin.project.list.export.step.exportStepUrl"
-        values={{ index: step?.position, stepTitle: step?.step?.title }}
+        values={{ index: step?.position, stepTitle: step?.step?.label }}
       />
     )
   }
   return (
     <FormattedHTMLMessage
       id="admin.project.list.export.step.exportStepUrl.alt"
-      values={{ index: step?.position, stepTitle: step?.step?.title }}
+      values={{ index: step?.position, stepTitle: step?.step?.label }}
     />
   )
 }
@@ -78,7 +78,7 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({ proje
                 id="admin.project.list.export.step.exportContributorsUrl"
                 values={{
                   index: step?.position,
-                  stepTitle: step?.step?.title,
+                  stepTitle: step?.step?.label,
                 }}
               />
             ),
