@@ -9,13 +9,6 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20250926085728 extends AbstractMigration
 {
-    private const CHARSET_COMPATIBLE_TYPES = [
-        'string',
-        'text',
-        'guid',
-        'json',
-    ];
-
     public function getDescription(): string
     {
         return 'Convert all columns to utf8mb4 for the whole database.';
@@ -35,31 +28,15 @@ final class Version20250926085728 extends AbstractMigration
     {
         $schemaManager = $this->connection->getSchemaManager();
 
-        $platform = $this->connection->getDatabasePlatform();
-
         $this->addSql('SET FOREIGN_KEY_CHECKS=0');
 
         foreach ($schemaManager->listTableNames() as $tableName) {
-            $columns = $schemaManager->listTableColumns($tableName);
-
-            foreach ($columns as $column) {
-                $type = $column->getType()->getName();
-
-                if (!\in_array($type, self::CHARSET_COMPATIBLE_TYPES, true)) {
-                    continue;
-                }
-
-                $sqlType = $column->getType()->getSQLDeclaration($column->toArray(), $platform);
-
-                $this->addSql(sprintf(
-                    'ALTER TABLE `%s` MODIFY `%s` %s CHARACTER SET `%s` COLLATE `%s`',
-                    $tableName,
-                    $column->getName(),
-                    $sqlType,
-                    $charset,
-                    $charsetCollate
-                ));
-            }
+            $this->addSql(sprintf(
+                'ALTER TABLE `%s` CONVERT TO CHARACTER SET `%s` COLLATE `%s`',
+                $tableName,
+                $charset,
+                $charsetCollate
+            ));
         }
 
         $this->addSql('SET FOREIGN_KEY_CHECKS=1');
