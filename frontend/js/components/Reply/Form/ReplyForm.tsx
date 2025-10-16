@@ -16,7 +16,7 @@ import {
   getFormValues,
   SubmissionError,
 } from 'redux-form'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createFragmentContainer, graphql } from 'react-relay'
 import memoize from 'lodash/memoize'
@@ -40,16 +40,14 @@ import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import renderResponses from '~/components/Form/RenderResponses'
 import { analytics } from '~/startup/analytics'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import {
-  formName as RequirementsFormLegacyName,
-} from '~/components/Requirements/RequirementsFormLegacy'
+import { formName as RequirementsFormLegacyName } from '~/components/Requirements/RequirementsFormLegacy'
 import CookieMonster from '@shared/utils/CookieMonster'
 import Captcha from '~/components/Form/Captcha'
 import { SPACES_SCALES } from '~/styles/theme/base'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
 import ParticipationWorkflowModal from '../../ParticipationWorkflow/ParticipationWorkflowModal'
-import {Text, Box} from '@cap-collectif/ui'
+import { Text, Box } from '@cap-collectif/ui'
 import { css } from 'styled-components'
 import { Suspense } from 'react'
 import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
@@ -105,8 +103,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
   const viewerMeetsTheRequirements = questionnaire.step?.requirements?.viewerMeetsTheRequirements || false
   const participantMeetsTheRequirement = questionnaire.step?.requirements?.participantMeetsTheRequirements || false
   const stepHasRequirement = questionnaire.step?.requirements && questionnaire.step.requirements.totalCount > 0
-  const skipRequirementsPage = !stepHasRequirement || viewerMeetsTheRequirements || participantMeetsTheRequirement || values.draft
-
+  const skipRequirementsPage =
+    !stepHasRequirement || viewerMeetsTheRequirements || participantMeetsTheRequirement || values.draft
 
   if (questionnaire.anonymousAllowed) {
     data.private = values.private
@@ -127,15 +125,15 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
         },
         isAuthenticated: false,
       })
-        .then((response) => {
-          const {errorCode} = response.updateAnonymousReply;
+        .then(response => {
+          const { errorCode } = response.updateAnonymousReply
 
           if (errorCode) {
-            throw new SubmissionError({ _error: errorCode });
+            throw new SubmissionError({ _error: errorCode })
           }
 
           if (!skipRequirementsPage) {
-            return;
+            return
           }
           toast({
             variant: 'success',
@@ -144,16 +142,15 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
             }),
           })
           history.replace('/')
-
         })
-        .catch((error) => {
+        .catch(error => {
           if (error?.errors?._error === 'PHONE_ALREADY_USED') {
             toast({
               variant: 'danger',
               content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
             })
             dispatch(setSubmitFailed(formName)(state))
-            return;
+            return
           }
 
           mutationErrorToast(intl)
@@ -168,13 +165,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
         draft: typeof values.draft !== 'undefined' ? values.draft : !!reply.draft,
       },
     })
-      .then((response) => {
-        const {errorCode} = response.updateUserReply;
+      .then(response => {
+        const { errorCode } = response.updateUserReply
         if (errorCode) {
-          throw new SubmissionError({ _error: errorCode });
+          throw new SubmissionError({ _error: errorCode })
         }
         if (!skipRequirementsPage) {
-          return;
+          return
         }
         toast({
           variant: 'success',
@@ -184,14 +181,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
         })
         history.replace('/')
       })
-      .catch((error) => {
+      .catch(error => {
         if (error?.errors?._error === 'PHONE_ALREADY_USED') {
           toast({
             variant: 'danger',
             content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
           })
           dispatch(setSubmitFailed(formName)(state))
-          return;
+          return
         }
 
         mutationErrorToast(intl)
@@ -215,13 +212,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
       },
       isAuthenticated: false,
       anonymousRepliesIds,
-      skipRequirementsPage
+      skipRequirementsPage,
     })
       .then(response => {
         const anonymousReply = response.addAnonymousReply
-        const {errorCode, shouldTriggerConsentInternalCommunication} = anonymousReply;
+        const { errorCode, shouldTriggerConsentInternalCommunication } = anonymousReply
         if (errorCode) {
-          throw new SubmissionError({ _error: errorCode });
+          throw new SubmissionError({ _error: errorCode })
         }
 
         if (!anonymousReply || anonymousReply.errorCode) {
@@ -236,12 +233,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
           })
         }
 
-        if(
-          !skipRequirementsPage
-          || shouldTriggerConsentInternalCommunication
-        ) {
+        if (!skipRequirementsPage || shouldTriggerConsentInternalCommunication) {
           dispatch(change(props.form, 'id', anonymousReply?.reply?.id))
-          return;
+          return
         }
 
         toast({
@@ -253,14 +247,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
 
         if (setIsShow) setIsShow(false)
       })
-      .catch((error) => {
+      .catch(error => {
         if (error?.errors?._error === 'PHONE_ALREADY_USED') {
           toast({
             variant: 'danger',
             content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
           })
           dispatch(setSubmitFailed(formName)(state))
-          return;
+          return
         }
 
         mutationErrorToast(intl)
@@ -273,19 +267,19 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
       responses: data.responses,
       private: data.private,
       draft: data.draft,
-    }
+    },
   })
     .then(response => {
       const userReply = response.addUserReply
-      const { errorCode, shouldTriggerConsentInternalCommunication } = response.addUserReply;
+      const { errorCode, shouldTriggerConsentInternalCommunication } = response.addUserReply
 
       if (errorCode) {
-        throw new SubmissionError({ _error: errorCode });
+        throw new SubmissionError({ _error: errorCode })
       }
 
       if (!skipRequirementsPage || shouldTriggerConsentInternalCommunication) {
         dispatch(change(props.form, 'id', userReply?.reply?.id))
-        return;
+        return
       }
 
       toast({
@@ -297,14 +291,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
 
       if (setIsShow) setIsShow(false)
     })
-    .catch((error) => {
+    .catch(error => {
       const errorMap = {
-        'PHONE_ALREADY_USED': 'phone.already.used.in.this.step',
-        'REQUIREMENTS_NOT_MET': 'add_reply_requirements_not_met',
-        'CONTRIBUTION_NOT_ALLOWED': 'participant-already-contributed-title',
+        PHONE_ALREADY_USED: 'phone.already.used.in.this.step',
+        REQUIREMENTS_NOT_MET: 'add_reply_requirements_not_met',
+        CONTRIBUTION_NOT_ALLOWED: 'participant-already-contributed-title',
       }
 
-      const submissionError = error?.errors?._error;
+      const submissionError = error?.errors?._error
 
       if (submissionError) {
         toast({
@@ -325,25 +319,25 @@ const validate = (values: FormValues, props: Props) => {
   const { intl } = props
   const { questions } = props.questionnaire
   const { responses } = values
-  const errors: {responses: ResponsesError | ResponsesWarning} = { responses: [] }
+  const errors: { responses: ResponsesError | ResponsesWarning } = { responses: [] }
   const responsesError = validateResponses(questions, responses, 'reply', intl, values.draft, availableQuestions)
 
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses
   }
 
-  if (errors.responses.length !== 0 && errors.responses.some((response) => response !== undefined)) {
-      scrollToErrors(errors.responses)
+  if (errors.responses.length !== 0 && errors.responses.some(response => response !== undefined)) {
+    scrollToErrors(errors.responses)
   }
 
   return errors
 }
 
 const scrollToErrors = (errors: ResponsesError | ResponsesWarning) => {
-    const errIndex = errors.findIndex((val) => val !== undefined)
-    const element = document.getElementById(`label-CreateReplyForm-responses${errIndex}`)
-    if (element) element.scrollIntoView()
-} 
+  const errIndex = errors.findIndex(val => val !== undefined)
+  const element = document.getElementById(`label-CreateReplyForm-responses${errIndex}`)
+  if (element) element.scrollIntoView()
+}
 
 export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`
 export class ReplyForm extends React.Component<Props, State> {
@@ -365,9 +359,8 @@ export class ReplyForm extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-
-    const {questionnaire, replyId, submitSucceeded, isAuthenticated } = this.props;
-    const {step} = questionnaire
+    const { questionnaire, replyId, submitSucceeded, isAuthenticated } = this.props
+    const { step } = questionnaire
     const participantMeetsTheRequirement = step?.requirements?.participantMeetsTheRequirements || false
     const stepHasRequirement = step?.requirements && step.requirements.totalCount > 0
 
@@ -375,7 +368,7 @@ export class ReplyForm extends React.Component<Props, State> {
     const showRequirementsModal = replyId && !showCaptcha && submitSucceeded
 
     if (showRequirementsModal) {
-      const url = new URL(window.location.href);
+      const url = new URL(window.location.href)
       if (!url.searchParams.has('workflow')) {
         url.searchParams.append('workflow', '')
         window.history.pushState({}, '', url)
@@ -385,7 +378,7 @@ export class ReplyForm extends React.Component<Props, State> {
 
     const { dirty, setIsEditingReplyForm } = this.props
 
-    if ((prevProps.dirty === false && dirty === true) && !showRequirementsModal) {
+    if (prevProps.dirty === false && dirty === true && !showRequirementsModal) {
       window.addEventListener('beforeunload', onUnload)
     }
 
@@ -422,7 +415,7 @@ export class ReplyForm extends React.Component<Props, State> {
 
   formIsDisabled() {
     const { questionnaire } = this.props
-    return !questionnaire.contribuable;
+    return !questionnaire.contribuable
   }
 
   render() {
@@ -451,14 +444,16 @@ export class ReplyForm extends React.Component<Props, State> {
     const availableQuestions = memoizeAvailableQuestions.cache.get(getAvailabeQuestionsCacheKey(questionnaire.id))
     const disabled = this.formIsDisabled()
     const isDraft = reply && reply.draft
-    const {step} = questionnaire
-    const url = new URL(window.location.href);
+    const { step } = questionnaire
+    const url = new URL(window.location.href)
     const participantMeetsTheRequirement = step?.requirements?.participantMeetsTheRequirements || false
     const stepHasRequirement = step?.requirements && step.requirements.totalCount > 0
 
-    const showCaptcha = ((!stepHasRequirement || participantMeetsTheRequirement) && !replyId) && !isAuthenticated && !reply
+    const showCaptcha =
+      (!stepHasRequirement || participantMeetsTheRequirement) && !replyId && !isAuthenticated && !reply
 
-    const showRequirementsModal = replyId && !showCaptcha && submitSucceeded || (url.searchParams.has('workflow') && replyId)
+    const showRequirementsModal =
+      (replyId && !showCaptcha && submitSucceeded) || (url.searchParams.has('workflow') && replyId)
 
     const disabledSubmitBtn = () => {
       const isNativeFormValid = this.formRef.current?.reportValidity() ?? true
@@ -473,15 +468,13 @@ export class ReplyForm extends React.Component<Props, State> {
     }
 
     if (showRequirementsModal) {
-      return (
-        createPortal(
-          <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
-            <Suspense fallback={<ModalSkeleton/>}>
-              <ParticipationWorkflowModal stepId={step.id} contributionId={replyId} />
-            </Suspense>
-          </Box>,
-          document.body
-        )
+      return createPortal(
+        <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
+          <Suspense fallback={<ModalSkeleton />}>
+            <ParticipationWorkflowModal stepId={step.id} contributionId={replyId} />
+          </Suspense>
+        </Box>,
+        document.body,
       )
     }
 
@@ -559,7 +552,6 @@ export class ReplyForm extends React.Component<Props, State> {
             )}
           </ReplyFormContainer>
 
-
           {(!reply || reply.viewerCanUpdate || isAnonymousReply) && (
             <ButtonGroupSubmit className="btn-toolbar">
               {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && !!user && (
@@ -568,7 +560,7 @@ export class ReplyForm extends React.Component<Props, State> {
                   id={`${form}-submit-create-draft-reply`}
                   disabled={pristine || submitting || disabled || invalidRequirements || showRequirementsModal}
                   bsStyle="primary"
-                  label={(submitting || showRequirementsModal) ? 'global.loading' : 'global.save_as_draft'}
+                  label={submitting || showRequirementsModal ? 'global.loading' : 'global.save_as_draft'}
                   onSubmit={() => {
                     analytics.track('submit_draft_reply_click', {
                       stepName: step?.title || '',
@@ -586,7 +578,7 @@ export class ReplyForm extends React.Component<Props, State> {
                   borderColor: backgroundPrimaryButton,
                 }}
                 disabled={disabledSubmitBtn()}
-                label={(submitting || showRequirementsModal) ? 'global.loading' : 'global.send'}
+                label={submitting || showRequirementsModal ? 'global.loading' : 'global.send'}
                 onSubmit={() => {
                   this.submitReply(reply, questionnaire, form, dispatch)
                 }}
@@ -614,9 +606,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   const defaultResponses = formatInitialResponsesValues(questionnaire.questions, reply ? reply.responses : [])
   const form = reply ? getFormNameUpdate(reply.id) : `Create${formName}`
   return {
-    responses:
-      formValueSelector(form)(state, 'responses') ||
-      defaultResponses,
+    responses: formValueSelector(form)(state, 'responses') || defaultResponses,
     initialValues: {
       id: reply?.id ?? null,
       responses: defaultResponses,
@@ -658,7 +648,10 @@ export default createFragmentContainer(containerWithRouter, {
   `,
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }, participantToken: {type: "String"}) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!", defaultValue: true }
+      participantToken: { type: "String" }
+    ) {
       id
       anonymousAllowed
       description

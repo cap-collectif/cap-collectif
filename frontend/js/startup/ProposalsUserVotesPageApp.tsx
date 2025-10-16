@@ -18,7 +18,7 @@ const ProposalsUserVotesPage = lazy(
 )
 export default (data: { projectId: string }) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
-  const token = CookieMonster.getParticipantCookie();
+  const token = CookieMonster.getParticipantCookie()
   return (
     <Suspense fallback={<Loader />}>
       <Providers resetCSS={false} designSystem>
@@ -27,14 +27,14 @@ export default (data: { projectId: string }) => {
             {
               project: data.projectId,
               isAuthenticated: !token,
-              token
+              token,
             } as ProposalsUserVotesPageAppQueryVariables
           }
           environment={environment}
           query={graphql`
             query ProposalsUserVotesPageAppQuery($project: ID!, $token: String) {
               project: node(id: $project) {
-                ...ProposalsUserVotesPage_project @arguments(token: $token) 
+                ...ProposalsUserVotesPage_project @arguments(token: $token)
               }
             }
           `}

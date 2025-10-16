@@ -1,33 +1,32 @@
-import React from 'react';
+import React from 'react'
 import { InfoMessage } from '@cap-collectif/ui'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { useIntl } from 'react-intl'
 
 type Props = {
-  votesHelpText?: string,
+  votesHelpText?: string
   step: any
 }
 
 const stripHtmlTags = (input: string) => {
-  let text = input.replace(/<\/?[^>]+(>|$)/g, "");
+  let text = input.replace(/<\/?[^>]+(>|$)/g, '')
 
-  text = text.replace(/&[^;]+;/g, "");
+  text = text.replace(/&[^;]+;/g, '')
 
   text = text.trim()
 
-  return text;
+  return text
 }
 
 export const ProposalModalVoteHelpText: React.FC<Props> = ({ votesHelpText, step }) => {
+  const intl = useIntl()
 
-  const intl = useIntl();
+  if (!votesHelpText) return null
 
-  if (!votesHelpText) return null;
+  const rawText = stripHtmlTags(votesHelpText)
 
-  const rawText = stripHtmlTags(votesHelpText);
-
-  if (!rawText) return null;
+  if (!rawText) return null
 
   return (
     <InfoMessage variant="info" width="100%">

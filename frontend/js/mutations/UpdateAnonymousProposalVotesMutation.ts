@@ -8,64 +8,64 @@ import type {
 } from '~relay/UpdateAnonymousProposalVotesMutation.graphql'
 
 const mutation = graphql`
-    mutation UpdateAnonymousProposalVotesMutation(
-        $input: UpdateAnonymousProposalVotesInput!
-        $stepId: ID!
-        $token: String
-    ) {
-        updateAnonymousProposalVotes(input: $input) {
-            step {
+  mutation UpdateAnonymousProposalVotesMutation(
+    $input: UpdateAnonymousProposalVotesInput!
+    $stepId: ID!
+    $token: String
+  ) {
+    updateAnonymousProposalVotes(input: $input) {
+      step {
+        id
+        votesMin
+        votesLimit
+        ...ProposalVoteModal_step @arguments(token: $token)
+        ...ProposalsUserVotesStep_step @arguments(token: $token)
+        ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token, isAuthenticated: false)
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
+          ...ProposalsUserVotesTable_votes
+          totalCount
+          edges {
+            node {
+              id
+              ... on ProposalVote {
+                ranking
+                anonymous
+              }
+              proposal {
                 id
-                votesMin
-                votesLimit
-                ...ProposalVoteModal_step @arguments(token: $token)
-                ...ProposalsUserVotesStep_step @arguments(token: $token)
-                ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token, isAuthenticated: false)
-                viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
-                    ...ProposalsUserVotesTable_votes
-                    totalCount
-                    edges {
-                        node {
-                            id
-                            ... on ProposalVote {
-                                ranking
-                                anonymous
-                            }
-                            proposal {
-                                id
-                                ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: false)
-                                votes(stepId: $stepId, first: 0) {
-                                    totalPointsCount
-                                }
-                            }
-                        }
-                    }
+                ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: false)
+                votes(stepId: $stepId, first: 0) {
+                  totalPointsCount
                 }
-                userVotes: viewerVotes(first: 50, orderBy: { field: POSITION, direction: ASC }, token: $token)
-                @connection(key: "VotesList_userVotes", filters: []) {
-                    edges {
-                        node {
-                            id
-                            proposal {
-                                id
-                                ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: false)
-                            }
-                        }
-                    }
-                }
+              }
             }
+          }
         }
+        userVotes: viewerVotes(first: 50, orderBy: { field: POSITION, direction: ASC }, token: $token)
+          @connection(key: "VotesList_userVotes", filters: []) {
+          edges {
+            node {
+              id
+              proposal {
+                id
+                ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: false)
+              }
+            }
+          }
+        }
+      }
     }
+  }
 `
 
 const commit = (
   variables: UpdateAnonymousProposalVotesMutation$variables,
   proposalJustVoted:
     | {
-    id: string | null | undefined
-    position: number
-    isVoteRanking: boolean
-  }
+        id: string | null | undefined
+        position: number
+        isVoteRanking: boolean
+      }
     | null
     | undefined,
 ): Promise<UpdateAnonymousProposalVotesMutation$data> =>
@@ -73,8 +73,7 @@ const commit = (
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
-
-      return;
+      return
 
       const payload = store.getRootField('updateProposalVotes')
       if (!payload || !payload.getLinkedRecord('step')) return

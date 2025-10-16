@@ -1,41 +1,38 @@
 import * as React from 'react'
-import {useIntl} from 'react-intl'
+import { useIntl } from 'react-intl'
 import { Box, useMultiStepModal, Button, FormLabel, CapInputSize } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
-import {FieldInput, FormControl} from '@cap-collectif/form'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import ModalLayout from './ModalLayout'
 import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
-import {mutationErrorToast} from "~/components/Utils/MutationErrorToast";
-import CookieMonster from '@shared/utils/CookieMonster';
-import {useSelector} from "react-redux";
-import type {GlobalState} from "~/types";
-import  {
-  useUpdateProfilePersonalDataMutation,
-} from '~/mutations/UpdateProfilePersonalDataMutation'
-import {FormValues as WorkflowFormValues} from './ParticipationWorkflowModal'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import CookieMonster from '@shared/utils/CookieMonster'
+import { useSelector } from 'react-redux'
+import type { GlobalState } from '~/types'
+import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
+import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 
 type FormValues = Pick<WorkflowFormValues, 'address' | 'realAddress'>
-
 
 type Props = {
   hideGoBackArrow: boolean
 }
 
-const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
+const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
-  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user);
+  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
 
   const updateParticipantMutation = useUpdateParticipantMutation()
   const updateProfilePersonalDataMutation = useUpdateProfilePersonalDataMutation()
   const isLoading = updateParticipantMutation.isLoading || updateProfilePersonalDataMutation.isLoading
 
-  const {control, handleSubmit, setValue, setFocus, setError} = useFormContext<FormValues>()
+  const { control, handleSubmit, setValue, setFocus, setError } = useFormContext<FormValues>()
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
-      setFocus("address")
+      setFocus('address')
     }, 100)
     return () => clearTimeout(timeout)
   }, [setFocus])
@@ -46,7 +43,7 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
     }
     updateProfilePersonalDataMutation.commit({
       variables: {
-        input
+        input,
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
@@ -56,8 +53,8 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
       },
       onError: () => {
         return mutationErrorToast(intl)
-      }
-    });
+      },
+    })
   }
 
   const updateParticipant = (address: string) => {
@@ -67,7 +64,7 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
     }
     updateParticipantMutation.commit({
       variables: {
-        input
+        input,
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
@@ -77,8 +74,8 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
       },
       onError: () => {
         return mutationErrorToast(intl)
-      }
-    });
+      },
+    })
   }
 
   const onSubmit = (values: FormValues) => {
@@ -88,15 +85,15 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
       setError('address', {
         type: 'value',
         message: intl.formatMessage({
-          id: 'fill-address-error'
+          id: 'fill-address-error',
         }),
       })
-      return;
+      return
     }
 
     if (isAuthenticated) {
       updateUser(address)
-      return;
+      return
     }
 
     updateParticipant(address)
@@ -108,9 +105,19 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
         onClose={() => {}}
         title={intl.formatMessage({ id: 'participation-workflow.address' })}
         info={intl.formatMessage({ id: 'participation-workflow.address_helptext' })}
-        header={hideGoBackArrow ? ({intl, onClose, goBackCallback, logo, isMobile }) => (
-          <HideBackArrowLayout intl={intl} onClose={onClose} goBackCallback={goBackCallback} logo={logo} isMobile={isMobile} />
-        ) : null}
+        header={
+          hideGoBackArrow
+            ? ({ intl, onClose, goBackCallback, logo, isMobile }) => (
+                <HideBackArrowLayout
+                  intl={intl}
+                  onClose={onClose}
+                  goBackCallback={goBackCallback}
+                  logo={logo}
+                  isMobile={isMobile}
+                />
+              )
+            : null
+        }
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="address" control={control} isRequired>
@@ -128,8 +135,7 @@ const AddressRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
               placeholder={intl.formatMessage({ id: 'searchbar.placeholder' })}
             />
           </FormControl>
-          <Button variantSize="big" justifyContent="center" width="100%" type="submit"
-                  isLoading={isLoading}>
+          <Button variantSize="big" justifyContent="center" width="100%" type="submit" isLoading={isLoading}>
             {intl.formatMessage({ id: 'global.continue' })}
           </Button>
         </Box>

@@ -15,10 +15,10 @@ module.exports = (path, options) => {
       // This workaround prevents Jest from considering @hookform/resolvers module-based exports at all;
       // it falls back to CommonJS+node "main" property.
       if (pkg.name === '@hookform/resolvers') {
-        delete pkg.exports;
-        delete pkg.module;
+        delete pkg.exports
+        delete pkg.module
       }
-      return pkg;
+      return pkg
     },
-  });
-};
+  })
+}

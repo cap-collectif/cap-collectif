@@ -22,17 +22,7 @@ module.exports = {
     },
     ecmaVersion: 2018,
   },
-  plugins: [
-    'import',
-    'react',
-    'react-hooks',
-    'jsx-a11y',
-    'jest',
-    'relay',
-    'graphql',
-    'formatjs',
-    '@typescript-eslint',
-  ],
+  plugins: ['import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql', 'formatjs', '@typescript-eslint'],
   globals: {
     $: true,
     FontFace: true,
@@ -62,7 +52,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'import/no-unresolved': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
-    'no-console': ['warn', {'allow': ['error']}],
+    'no-console': ['warn', { allow: ['error'] }],
     'no-empty': 'error',
     'no-eval': 'error',
     'prefer-destructuring': [
@@ -190,4 +180,4 @@ module.exports = {
     // No large Snapshots
     'jest/no-large-snapshots': 'warn',
   },
-};
+}

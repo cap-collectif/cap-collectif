@@ -12,12 +12,12 @@ type Props = {
   email: string
   onSuccess?: () => void
   children: RenderProps | React.ReactNode
-};
+}
 
 type FormState = 'LOADING' | 'ERROR'
 
-const ForgotPassword: React.FC<Props> = ({email, onSuccess, children}) => {
-  const intl = useIntl();
+const ForgotPassword: React.FC<Props> = ({ email, onSuccess, children }) => {
+  const intl = useIntl()
   const [formState, setFormState] = React.useState<FormState>(null)
   const resetFormState = () => setFormState(null)
   const isLoading = formState === 'LOADING'
@@ -27,20 +27,21 @@ const ForgotPassword: React.FC<Props> = ({email, onSuccess, children}) => {
     setFormState('LOADING')
 
     const body = new URLSearchParams()
-    body.append('email', email);
+    body.append('email', email)
 
     const response = await fetch(`${window.location.origin}/resetting/send-email`, {
-      "headers": {
-        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-        "content-type": "application/x-www-form-urlencoded",
+      headers: {
+        accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'content-type': 'application/x-www-form-urlencoded',
       },
       body,
-      "method": "POST",
-    });
+      method: 'POST',
+    })
 
     if (!response.ok) {
       setFormState('ERROR')
-      return mutationErrorToast(intl);
+      return mutationErrorToast(intl)
     }
 
     resetFormState()
@@ -51,7 +52,7 @@ const ForgotPassword: React.FC<Props> = ({email, onSuccess, children}) => {
   }
 
   if (typeof children === 'function') {
-    return children({sendForgotPasswordEmail, isLoading, hasError})
+    return children({ sendForgotPasswordEmail, isLoading, hasError })
   }
 
   return children

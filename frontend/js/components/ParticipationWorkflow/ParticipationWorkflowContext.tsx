@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string
@@ -15,7 +15,6 @@ type Props = {
     contributionTypeName: string
   }
 }
-
 
 type Context = {
   contributionUrl: string
@@ -43,6 +42,5 @@ export const useParticipationWorkflow = () => {
 }
 
 export const ParticipationWorkflowContextProvider = ({ children, value }: Props) => {
-
   return <ParticipationWorkflowContext.Provider value={value}>{children}</ParticipationWorkflowContext.Provider>
 }

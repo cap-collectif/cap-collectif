@@ -13,4 +13,4 @@ System.config({
     '~image/*': './public/image/*',
     '~/*': './frontend/js/*',
   },
-});
+})

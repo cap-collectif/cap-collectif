@@ -5,7 +5,7 @@ import environment, { graphqlError } from '~/createRelayEnvironment'
 import HomePageProjectsSectionConfigurationPage from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPage'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import type { HomePageProjectsSectionConfigurationAppQueryResponse } from '~relay/HomePageProjectsSectionConfigurationAppQuery.graphql'
-import Providers from '~/startup/Providers';
+import Providers from '~/startup/Providers'
 
 const query = graphql`
   query HomePageProjectsSectionConfigurationAppQuery($first: Int!, $cursor: String) {

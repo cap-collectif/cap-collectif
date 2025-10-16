@@ -1,20 +1,15 @@
 import { useTheme } from '@cap-collectif/ui'
 import * as React from 'react'
 
-const EmailInboxSVG = ({isMobile}: {isMobile: boolean}) => {
-  const {colors} = useTheme()
+const EmailInboxSVG = ({ isMobile }: { isMobile: boolean }) => {
+  const { colors } = useTheme()
   const primaryColor500 = colors.primary[500]
 
-  const width = isMobile ? "261" : "300"
-  const height = isMobile ? "283" : "300"
+  const width = isMobile ? '261' : '300'
+  const height = isMobile ? '283' : '300'
 
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 226 225"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 226 225" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M21.486 171.569C18.854 170.21 15.9006 169.585 12.9554 169.268C11.2667 169.086 9.4266 169.037 8.02271 169.993C7.59469 170.284 7.20312 170.707 7.16342 171.224C7.11765 171.819 7.54358 172.339 7.97491 172.752C9.72248 174.425 11.9536 175.496 14.2042 176.383C16.7842 177.399 19.441 178.208 22.1494 178.802"
         fill="black"
@@ -475,6 +470,6 @@ const EmailInboxSVG = ({isMobile}: {isMobile: boolean}) => {
       />
     </svg>
   )
-};
+}
 
 export default EmailInboxSVG

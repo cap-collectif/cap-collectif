@@ -19,16 +19,16 @@ const mutation = graphql`
         ...UnpublishedLabel_publishable
         draft
         questionnaire {
-            step {
-                project {
-                    contributors {
-                        totalCount
-                    }
-                    contributions {
-                        totalCount
-                    }
-                }
+          step {
+            project {
+              contributors {
+                totalCount
+              }
+              contributions {
+                totalCount
+              }
             }
+          }
         }
       }
       errorCode
@@ -42,12 +42,11 @@ const commit = (variables: AddUserReplyMutationVariables): Promise<AddUserReplyM
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
-
       const payload = store.getRootField('addUserReply')
       if (!payload) return
 
       if (payload.getValue('shouldTriggerConsentInternalCommunication')) {
-        return;
+        return
       }
 
       const reply = payload.getLinkedRecord('reply')
@@ -55,16 +54,15 @@ const commit = (variables: AddUserReplyMutationVariables): Promise<AddUserReplyM
       const questionnaire = store.get(variables.input.questionnaireId)
       if (!questionnaire) return
 
-      const completionStatus = reply.getValue('completionStatus');
-      const isDraft = reply.getValue('draft');
+      const completionStatus = reply.getValue('completionStatus')
+      const isDraft = reply.getValue('draft')
       if (completionStatus === 'COMPLETED' || isDraft) {
-        const viewerReplies = questionnaire?.getLinkedRecord('viewerReplies');
-        const viewerRepliesTotalCount = viewerReplies?.getValue('totalCount');
+        const viewerReplies = questionnaire?.getLinkedRecord('viewerReplies')
+        const viewerRepliesTotalCount = viewerReplies?.getValue('totalCount')
         if (viewerRepliesTotalCount !== undefined) {
-          viewerReplies.setValue(viewerRepliesTotalCount + 1, 'totalCount');
+          viewerReplies.setValue(viewerRepliesTotalCount + 1, 'totalCount')
         }
       }
-
 
       const userRepliesConnection = ConnectionHandler.getConnection(questionnaire, 'UserReplies_userReplies')
       if (!userRepliesConnection) return

@@ -30,11 +30,9 @@ export default {
 }
 
 export const useVerifyUserPhoneNumberMutation = () => {
-  const [commit, isLoading] = useMutation<VerifyUserPhoneNumberMutation>(mutation);
+  const [commit, isLoading] = useMutation<VerifyUserPhoneNumberMutation>(mutation)
   return {
     commit,
     isLoading,
-  };
-};
-
-
+  }
+}

@@ -17,10 +17,10 @@ const VoteStepPageAnonymousToggle = ({ stepId }: Props) => {
   const { isParticipationAnonymous, setIsParticipationAnonymous } = useVoteStepContext()
 
   if (!isAuthenticated) {
-    return null;
+    return null
   }
 
-  const participantToken = !isAuthenticated ? CookieMonster.getParticipantCookie() : null;
+  const participantToken = !isAuthenticated ? CookieMonster.getParticipantCookie() : null
 
   return (
     <Flex
@@ -36,7 +36,9 @@ const VoteStepPageAnonymousToggle = ({ stepId }: Props) => {
         id="anonymous-toggle"
         checked={isParticipationAnonymous}
         onChange={() => {
-          UpdateVotesVisibilityMutation.commit({ input: { stepId, anonymous: !isParticipationAnonymous, participantToken } }).then(() => {
+          UpdateVotesVisibilityMutation.commit({
+            input: { stepId, anonymous: !isParticipationAnonymous, participantToken },
+          }).then(() => {
             setIsParticipationAnonymous(!isParticipationAnonymous)
           })
         }}

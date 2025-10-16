@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { IntlProvider } from 'react-intl-redux'
 
-// import { type IntlShape } from 'react-intl';
+// import { type IntlShape } from 'react-intl'
 // eslint-disable-next-line no-console
 const onError = (e: Error) => console.log(e)
 

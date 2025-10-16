@@ -43,7 +43,8 @@ const PROPOSAL_FRAGMENT = graphql`
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }, token: { type: "String" }) {
     id
     ...ProposalVoteModal_proposal
-    ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteButtonWrapperFragment_proposal
+      @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
   }
 `
 const STEP_FRAGMENT = graphql`
@@ -64,28 +65,29 @@ export const ProposalPreviewVote: React.FC<Props> = ({
 }) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
   const participant = useFragment(PARTICIPANT_FRAGMENT, participantRef)
-  
+
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const step = useFragment(STEP_FRAGMENT, stepRef)
 
   const [voteId, setVoteId] = React.useState<string | null>(null)
-  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false);
+  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false)
 
   const triggerRequirementsModal = (voteId: string) => {
-    setVoteId(voteId);
-    setShowRequirementsModal(true);
+    setVoteId(voteId)
+    setShowRequirementsModal(true)
   }
 
   if (showRequirementsModal && voteId) {
-    return (
-      createPortal(
-        <Box width="100%" height="100%" position="absolute" top={0} left={0}>
-          <Suspense fallback={<ModalSkeleton/>}>
-            <ParticipationWorkflowModal stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
-          </Suspense>
-        </Box>,
-        document.body
-      )
+    return createPortal(
+      <Box width="100%" height="100%" position="absolute" top={0} left={0}>
+        <Suspense fallback={<ModalSkeleton />}>
+          <ParticipationWorkflowModal
+            stepId={step.id}
+            contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)}
+          />
+        </Suspense>
+      </Box>,
+      document.body,
     )
   }
 

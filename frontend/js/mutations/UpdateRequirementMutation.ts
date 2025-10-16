@@ -4,14 +4,15 @@ import environment from '../createRelayEnvironment'
 import commitMutation from './commitMutation'
 import type {
   UpdateRequirementMutationVariables,
-  UpdateRequirementMutationResponse, UpdateRequirementMutation,
+  UpdateRequirementMutationResponse,
+  UpdateRequirementMutation,
 } from '~relay/UpdateRequirementMutation.graphql'
 
 const mutation = graphql`
   mutation UpdateRequirementMutation($input: UpdateRequirementInput!) {
     updateRequirement(input: $input) {
       requirements {
-          id
+        id
       }
     }
   }
@@ -28,9 +29,9 @@ export default {
 }
 
 export const useUpdateRequirementMutation = () => {
-  const [commit, isLoading] = useMutation<UpdateRequirementMutation>(mutation);
+  const [commit, isLoading] = useMutation<UpdateRequirementMutation>(mutation)
   return {
     commit,
-    isLoading
+    isLoading,
   }
 }

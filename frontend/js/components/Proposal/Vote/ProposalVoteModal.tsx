@@ -3,14 +3,7 @@ import { useIntl } from 'react-intl'
 import moment from 'moment'
 import { graphql, commitLocalUpdate, useFragment } from 'react-relay'
 import { ConnectionHandler } from 'relay-runtime'
-import {
-  Modal,
-  Button,
-  Heading,
-  CapUIModalSize,
-  Flex,
-  toast,
-} from '@cap-collectif/ui'
+import { Modal, Button, Heading, CapUIModalSize, Flex, toast } from '@cap-collectif/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { isPristine, submit } from 'redux-form'
 import { closeVoteModal, vote } from '~/redux/modules/proposal'
@@ -43,8 +36,7 @@ const PROPOSAL_FRAGMENT = graphql`
   }
 `
 const STEP_FRAGMENT = graphql`
-  fragment ProposalVoteModal_step on ProposalStep
-  @argumentDefinitions(token: { type: "String" }) {
+  fragment ProposalVoteModal_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
     id
     votesRanking
     votesHelpText
@@ -186,14 +178,13 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
     if (!tmpVote) return
     // First we add the vote
     return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl, isAuthenticated, token).then(data => {
-
       const vote = data?.addProposalVote?.voteEdge?.node ?? data?.addProposalSmsVote?.voteEdge?.node
 
       if (!vote) {
         invariant(false, 'The vote id is missing.')
       }
 
-      if(!isAuthenticated) {
+      if (!isAuthenticated) {
         CookieMonster.addParticipantCookie(data.addProposalSmsVote.participantToken)
       }
 
@@ -222,8 +213,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
               isVoteRanking: step.votesRanking,
             },
           )
-        }
-        else {
+        } else {
           UpdateAnonymousProposalVotesMutation.commit(
             {
               input: {
@@ -234,11 +224,11 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
                     id: v.id,
                     anonymous: !v.public,
                   })),
-                token: CookieMonster.getParticipantCookie()
+                token: CookieMonster.getParticipantCookie(),
               },
               stepId: step.id,
               isAuthenticated,
-              token: CookieMonster.getParticipantCookie()
+              token: CookieMonster.getParticipantCookie(),
             },
             {
               id: null,
@@ -249,11 +239,13 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
         }
       }
 
-      const shouldTriggerConsentInternalCommunication = data?.addProposalVote?.shouldTriggerConsentInternalCommunication ?? data?.addProposalSmsVote?.shouldTriggerConsentInternalCommunication
+      const shouldTriggerConsentInternalCommunication =
+        data?.addProposalVote?.shouldTriggerConsentInternalCommunication ??
+        data?.addProposalSmsVote?.shouldTriggerConsentInternalCommunication
 
       if (vote?.completionStatus === 'MISSING_REQUIREMENTS' || shouldTriggerConsentInternalCommunication) {
         triggerRequirementsModal(vote.id)
-        return;
+        return
       }
 
       tmpVote.id = vote.id
@@ -266,7 +258,11 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
           variant: hasJustFinished ? 'success' : 'warning',
           content: intl.formatMessage(
             {
-              id: hasJustFinished ? (isAuthenticated ? 'participation-validated' :  'participation-validated-anonymous') : 'vote-for-x-proposals',
+              id: hasJustFinished
+                ? isAuthenticated
+                  ? 'participation-validated'
+                  : 'participation-validated-anonymous'
+                : 'vote-for-x-proposals',
             },
             {
               num: remainingVotesAfterValidation,
@@ -324,7 +320,6 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
     votesHelpText = votesHelpText ? `${votesHelpText} ${step.votesHelpText}` : `${step.votesHelpText}`
   }
 
-
   if (!showModal) {
     return null
   }
@@ -355,9 +350,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
           <Flex direction="column" align="flex-start" spacing={6}>
             <VoteMinAlert step={step} translationKey={keyTradForModalVoteTitle} /> {/** @ts-ignore */}
             <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
-            {votesHelpText && (
-              <ProposalModalVoteHelpText step={step} votesHelpText={votesHelpText} />
-            )}
+            {votesHelpText && <ProposalModalVoteHelpText step={step} votesHelpText={votesHelpText} />}
           </Flex>
         </Modal.Body>
         <Modal.Footer>

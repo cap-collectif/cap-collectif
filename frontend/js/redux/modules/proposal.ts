@@ -239,21 +239,20 @@ export const vote = (
 ) => {
   if (isAuthenticated) {
     dispatch(startVoting())
-    return AddProposalVoteMutation
-      .commit({
+    return AddProposalVoteMutation.commit({
+      stepId,
+      input: {
+        proposalId,
         stepId,
-        input: {
-          proposalId,
-          stepId,
-          anonymously,
-        },
-      })
+        anonymously,
+      },
+    })
       .then(response => {
-        const errorCode = response?.addProposalVote?.errorCode;
+        const errorCode = response?.addProposalVote?.errorCode
 
         const errorMap = {
-          'PHONE_ALREADY_USED': 'phone.already.used.in.this.step',
-          'CONTRIBUTION_NOT_ALLOWED': 'participant-already-contributed-title',
+          PHONE_ALREADY_USED: 'phone.already.used.in.this.step',
+          CONTRIBUTION_NOT_ALLOWED: 'participant-already-contributed-title',
         }
 
         if (errorCode) {
@@ -262,7 +261,7 @@ export const vote = (
             content: intl.formatMessage({ id: errorMap[errorCode] }),
           })
           dispatch(closeVoteModal())
-          return;
+          return
         }
 
         dispatch(closeVoteModal())
@@ -291,20 +290,18 @@ export const vote = (
       })
   } else {
     dispatch(startVoting())
-    return AddProposalSmsVoteMutation
-      .commit({
+    return AddProposalSmsVoteMutation.commit({
+      stepId,
+      input: {
+        proposalId,
         stepId,
-        input: {
-          proposalId,
-          stepId,
-          token,
-          anonymously
-        },
-        token: token ?? ''
-      })
+        token,
+        anonymously,
+      },
+      token: token ?? '',
+    })
       .then(response => {
-
-        const errorCode = response?.addProposalSmsVote?.errorCode;
+        const errorCode = response?.addProposalSmsVote?.errorCode
 
         if (errorCode === 'PHONE_ALREADY_USED') {
           toast({
@@ -312,9 +309,8 @@ export const vote = (
             content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
           })
           dispatch(closeVoteModal())
-          return;
+          return
         }
-
 
         dispatch(closeVoteModal())
         const isInterpellation =

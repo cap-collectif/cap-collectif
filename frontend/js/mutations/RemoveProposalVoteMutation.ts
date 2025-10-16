@@ -9,28 +9,25 @@ import type {
 import { RecordSourceSelectorProxy } from 'relay-runtime'
 
 const mutation = graphql`
-  mutation RemoveProposalVoteMutation(
-    $input: RemoveProposalVoteInput!
-    $stepId: ID!
-  ) {
+  mutation RemoveProposalVoteMutation($input: RemoveProposalVoteInput!, $stepId: ID!) {
     removeProposalVote(input: $input) {
       shouldDecrementContributorsTotalCount
       previousVoteId @deleteRecord
       proposal {
-          viewerHasVote(step: $stepId)
-          votes(stepId: $stepId, first: 0) {
-              totalCount
-              totalPointsCount
-          }
+        viewerHasVote(step: $stepId)
+        votes(stepId: $stepId, first: 0) {
+          totalCount
+          totalPointsCount
+        }
       }
       step {
         votesMin
         votesLimit
         votesRanking
         project {
-            votes {
-                totalCount
-            }
+          votes {
+            totalCount
+          }
         }
         id
         viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
@@ -41,7 +38,7 @@ const mutation = graphql`
               proposal {
                 id
                 votes(stepId: $stepId, first: 0) {
-                    totalPointsCount
+                  totalPointsCount
                 }
               }
             }
@@ -72,26 +69,21 @@ const commit = (variables: RemoveProposalVoteMutation$variables): Promise<Remove
       if (!step) return
 
       // START DECREMENTING PROJECT CONTRIBUTORS TOTALCOUNT
-      const shouldDecrementContributorsTotalCount = payload.getValue(
-        'shouldDecrementContributorsTotalCount',
-      );
+      const shouldDecrementContributorsTotalCount = payload.getValue('shouldDecrementContributorsTotalCount')
       if (shouldDecrementContributorsTotalCount) {
-        const contributors = step
-          .getLinkedRecord('project')
-          .getLinkedRecord('contributors');
-        contributors.setValue(contributors.getValue('totalCount') - 1, 'totalCount');
+        const contributors = step.getLinkedRecord('project').getLinkedRecord('contributors')
+        contributors.setValue(contributors.getValue('totalCount') - 1, 'totalCount')
       }
       // END DECREMENTING PROJECT CONTRIBUTORS TOTALCOUNT
 
       const votesMin = step.getValue('votesMin')
       const viewerVotes = step.getLinkedRecord('viewerVotes', {
-        orderBy: { field: 'POSITION', direction: 'ASC' }
+        orderBy: { field: 'POSITION', direction: 'ASC' },
       })
 
       if (!viewerVotes) return
 
       const viewerVotesCount = viewerVotes.getValue('totalCount')
-
 
       if (viewerVotesCount >= votesMin) return
 
@@ -114,8 +106,7 @@ const commit = (variables: RemoveProposalVoteMutation$variables): Promise<Remove
           votes.setValue(count - 1, 'totalCount')
         }
       }
-
-    }
+    },
   })
 
 export default {

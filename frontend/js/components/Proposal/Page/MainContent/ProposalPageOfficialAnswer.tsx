@@ -1,35 +1,35 @@
-import React from 'react';
-import moment from 'moment';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage, FormattedDate } from 'react-intl';
-import { Box, Flex, Skeleton } from '@cap-collectif/ui';
-import BodyText from '~/components/Ui/Boxes/BodyText';
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
-import colors from '~/utils/colors';
-import type { ProposalPageOfficialAnswer_proposal$data } from '~relay/ProposalPageOfficialAnswer_proposal.graphql';
+import React from 'react'
+import moment from 'moment'
+import { createFragmentContainer, graphql } from 'react-relay'
+import { FormattedMessage, FormattedDate } from 'react-intl'
+import { Box, Flex, Skeleton } from '@cap-collectif/ui'
+import BodyText from '~/components/Ui/Boxes/BodyText'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import colors from '~/utils/colors'
+import type { ProposalPageOfficialAnswer_proposal$data } from '~relay/ProposalPageOfficialAnswer_proposal.graphql'
 import {
   Card,
   CategoryContainer,
   CategoryCircledIcon,
   CategoryTitle,
-} from '~/components/Proposal/Page/ProposalPage.style';
-import UserAvatar from '~/components/User/UserAvatar';
+} from '~/components/Proposal/Page/ProposalPage.style'
+import UserAvatar from '~/components/User/UserAvatar'
 
 type Props = {
-  proposal: ProposalPageOfficialAnswer_proposal$data | null | undefined,
-};
+  proposal: ProposalPageOfficialAnswer_proposal$data | null | undefined
+}
 
 const Placeholder = () => (
   <Box ml={4}>
     <Skeleton.Text width="100%" size="sm" mb={4} />
     <Skeleton.Text width="50%" size="sm" />
   </Box>
-);
+)
 
 export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
-  if (!proposal) return null;
-  if (!proposal.officialResponse || !proposal.officialResponse.isPublished) return null;
-  const authors = proposal.officialResponse.authors || [];
+  if (!proposal) return null
+  if (!proposal.officialResponse || !proposal.officialResponse.isPublished) return null
+  const authors = proposal.officialResponse.authors || []
   return (
     <Card withBorder>
       <CategoryContainer>
@@ -73,8 +73,8 @@ export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
         </Skeleton>
       </CategoryContainer>
     </Card>
-  );
-};
+  )
+}
 export default createFragmentContainer(ProposalPageOfficialAnswer, {
   proposal: graphql`
     fragment ProposalPageOfficialAnswer_proposal on Proposal {
@@ -92,4 +92,4 @@ export default createFragmentContainer(ProposalPageOfficialAnswer, {
       }
     }
   `,
-});
+})

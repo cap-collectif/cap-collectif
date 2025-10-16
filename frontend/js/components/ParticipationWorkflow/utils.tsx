@@ -1,4 +1,12 @@
-export const getSniperLink = ({ userEmail, fromEmail = 'cap-collectif.com', mailObject }: { userEmail: string, fromEmail?: string, mailObject?: string }) => {
+export const getSniperLink = ({
+  userEmail,
+  fromEmail = 'cap-collectif.com',
+  mailObject,
+}: {
+  userEmail: string
+  fromEmail?: string
+  mailObject?: string
+}) => {
   const getGoogleUrl = () => {
     let url = `https://mail.google.com/mail/u/${userEmail}`
 
@@ -25,7 +33,7 @@ export const getSniperLink = ({ userEmail, fromEmail = 'cap-collectif.com', mail
     icloud: 'https://www.icloud.com/mail/',
   }
 
-  const domain = userEmail.split('@')?.[1]?.split('.')?.[0]?.toLowerCase() ?? null;
+  const domain = userEmail.split('@')?.[1]?.split('.')?.[0]?.toLowerCase() ?? null
 
-  return domainsUrl[domain] ?? null;
+  return domainsUrl[domain] ?? null
 }

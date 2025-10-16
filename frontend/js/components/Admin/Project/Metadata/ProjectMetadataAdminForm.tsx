@@ -100,7 +100,7 @@ export const validate = ({ publishedAt }: FormValues) => {
 }
 const formName = 'project-metadata-admin-form'
 export const loadThemeOptions = (search: string | null | undefined) => {
-  return fetchQuery_DEPRECATED(environment, getThemeOptions, {
+  return fetchQuery_DEPRECATED(environment as any, getThemeOptions, {
     title: search,
   }).then(data => {
     return data.themes.map(u => ({
@@ -110,7 +110,7 @@ export const loadThemeOptions = (search: string | null | undefined) => {
   })
 }
 export const loadDistrictOptions = (search: string | null | undefined) => {
-  return fetchQuery_DEPRECATED(environment, getDistrictList, {
+  return fetchQuery_DEPRECATED(environment as any, getDistrictList, {
     name: search,
   }).then(data => {
     return (

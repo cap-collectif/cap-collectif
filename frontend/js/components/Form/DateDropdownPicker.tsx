@@ -63,7 +63,6 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
     }
 
     if (props.input.value) {
-      console.log("intpu.value", props.input.value);
       this.state = {
         year: getYear(props.input.value),
         month: getMonth(props.input.value),
@@ -130,9 +129,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               className="form-control"
               disabled={disabled}
             >
-              <option value="">
-                {dayDefaultValue}
-              </option>
+              <option value="">{dayDefaultValue}</option>
               {[...Array(31)].map((_, i) => (
                 <option key={i} value={i + 1}>
                   {i + 1}
@@ -159,9 +156,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               style={{ textTransform: 'capitalize' }}
               disabled={disabled}
             >
-              <option value="">
-                {monthDefaultValue}
-              </option>
+              <option value="">{monthDefaultValue}</option>
               {[...Array(12)].map((_, i) => (
                 <option key={i} value={i + 1}>
                   {moment().locale(wLocale).month(i).format('MMMM')}
@@ -187,9 +182,7 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
               className="form-control"
               disabled={disabled}
             >
-              <option value="">
-                {yearDefaultValue}
-              </option>
+              <option value="">{yearDefaultValue}</option>
               {[...Array(110)].map((_, i) => (
                 <option key={i} value={moment().year() - i}>
                   {moment().year() - i}
@@ -203,4 +196,3 @@ export class DateDropdownPicker extends React.Component<Props, DateState> {
   }
 }
 export default DateDropdownPicker
-

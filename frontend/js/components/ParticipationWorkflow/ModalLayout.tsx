@@ -7,15 +7,15 @@ import { DefaultLayout as HeaderLayout } from '~/components/ParticipationWorkflo
 import Confetti from '~/components/ParticipationWorkflow/Confetti'
 
 type HeaderProps = {
-  goBackCallback: () => void,
+  goBackCallback: () => void
   logo: {
     width: number
     height: number
     url: string
-  },
-  intl: IntlShape,
-  onClose: () => void,
-  isMobile: boolean,
+  }
+  intl: IntlShape
+  onClose: () => void
+  isMobile: boolean
 }
 
 const ModalLayout = ({
@@ -27,22 +27,22 @@ const ModalLayout = ({
   onBack,
   textBlockOrder = [0, 0],
   header,
-  showConfetti = false
+  showConfetti = false,
 }: {
   onClose: () => void
   hideGoBackArrow?: boolean
   children: React.ReactNode
   title: string
   info?: string | React.ReactNode
-  onBack?: () => void,
+  onBack?: () => void
   textBlockOrder?: [number, number]
   header?: (headerProps: HeaderProps) => React.ReactNode
   showConfetti?: boolean
 }) => {
   const { goToPreviousStep } = useMultiStepModal()
   const intl = useIntl()
-  const {logo} = useParticipationWorkflow();
-  const isMobile = useIsMobile();
+  const { logo } = useParticipationWorkflow()
+  const isMobile = useIsMobile()
 
   const getGoBackCallback = () => {
     if (onBack) {
@@ -59,17 +59,13 @@ const ModalLayout = ({
   return (
     <>
       <MultiStepModal.Header>
-        {
-          header ? header({ goBackCallback, logo, intl, onClose, isMobile }) : (
-            <HeaderLayout intl={intl} logo={logo} onClose={onClose} goBackCallback={goBackCallback} isMobile={isMobile} />
-          )
-        }
+        {header ? (
+          header({ goBackCallback, logo, intl, onClose, isMobile })
+        ) : (
+          <HeaderLayout intl={intl} logo={logo} onClose={onClose} goBackCallback={goBackCallback} isMobile={isMobile} />
+        )}
       </MultiStepModal.Header>
-      {
-        showConfetti && (
-          <Confetti/>
-        )
-      }
+      {showConfetti && <Confetti />}
       <MultiStepModal.Body bg="neutral-gray.50">
         <Flex
           sx={{
@@ -80,9 +76,9 @@ const ModalLayout = ({
             },
             'input[type=number]': { MozAppearance: 'textfield' },
             '.cap-address__dropdown': { padding: 0, width: '100%' },
-            'input': {
-              fontSize: '16px'
-            }
+            input: {
+              fontSize: '16px',
+            },
           }}
           py={[4, 13]}
           direction="column"
@@ -91,12 +87,25 @@ const ModalLayout = ({
           margin="auto"
           maxWidth="540px"
         >
-          <Box order={textBlockOrder} width={isMobile ? '100%': 'auto'}>
-            <Box mb={isMobile ? '4px': 4} width="100%" fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplaySmall]} textAlign={['left', 'center']} fontWeight={[600, 400]} color="neutral-gray.900">
+          <Box order={textBlockOrder} width={isMobile ? '100%' : 'auto'}>
+            <Box
+              mb={isMobile ? '4px' : 4}
+              width="100%"
+              fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplaySmall]}
+              textAlign={['left', 'center']}
+              fontWeight={[600, 400]}
+              color="neutral-gray.900"
+            >
               {title}
             </Box>
             {info && (
-              <Text sx={{marginBottom: '16px !important'}} textAlign={['left', 'center']} color="neutral-gray.700" fontSize={CapUIFontSize.BodyRegular} lineHeight="normal">
+              <Text
+                sx={{ marginBottom: '16px !important' }}
+                textAlign={['left', 'center']}
+                color="neutral-gray.700"
+                fontSize={CapUIFontSize.BodyRegular}
+                lineHeight="normal"
+              >
                 {info}
               </Text>
             )}

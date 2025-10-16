@@ -14,9 +14,7 @@ import ContributionValidationModal from '~/components/ParticipationWorkflow/Cont
 import CheckboxesRequirementModal from '~/components/ParticipationWorkflow/CheckboxesRequirementModal'
 import FranceConnectRequirementModal from '~/components/ParticipationWorkflow/FranceConnectRequirementModal'
 import CaptchaModal from '~/components/ParticipationWorkflow/CaptchaModal'
-import {
-  ParticipationWorkflowContextProvider,
-} from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { ParticipationWorkflowContextProvider } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
 import ZipCodeRequirementModal from '~/components/ParticipationWorkflow/ZipCodeRequirementModal'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AddressComplete } from '@cap-collectif/form'
@@ -31,14 +29,12 @@ import EmailParticipantCaptcha from '~/components/ParticipationWorkflow/EmailPar
 import EmailMagicLinkCaptcha from '~/components/ParticipationWorkflow/EmailMagicLinkCaptcha'
 import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
 import { useIntl } from 'react-intl'
-import ConsentInternalCommunicationEmailModal
-  from '~/components/ParticipationWorkflow/ConsentInternalCommunicationEmailModal'
+import ConsentInternalCommunicationEmailModal from '~/components/ParticipationWorkflow/ConsentInternalCommunicationEmailModal'
 import ConsentInternalCommunicationModal from '~/components/ParticipationWorkflow/ConsentInternalCommunicationModal'
 import { useEffect } from 'react'
 import { onUnload } from '~/components/Reply/Form/ReplyForm'
 import IdentificationCodeRequirementModal from '~/components/ParticipationWorkflow/IdentificationCodeRequirementModal'
-import ConsentPrivacyPolicyRequirementModal
-  from '~/components/ParticipationWorkflow/ConsentPrivacyPolicyRequirementModal'
+import ConsentPrivacyPolicyRequirementModal from '~/components/ParticipationWorkflow/ConsentPrivacyPolicyRequirementModal'
 import moment from 'moment'
 
 type Props = {
@@ -57,96 +53,101 @@ export type FormValues = {
   birthday: moment.Moment
   zipCode: string
   checkboxes: {
-    [requirementId: string]: boolean,
+    [requirementId: string]: boolean
   }
   userIdentificationCode: string
   consentPrivacyPolicy: boolean
 }
 
 export const QUERY = graphql`
-    query ParticipationWorkflowModalQuery($stepId: ID!, $participantToken: String, $isAuthenticated: Boolean!, $contributionId: ID!) {
-        ...EmailMagicLinkCheckEmail_query
-        ...EmailParticipantCheckEmail_query
-        siteColors {
-            ...EmailAccountLoginSSOForm_colors
-        }
-        step: node(id: $stepId) {
-            ...on QuestionnaireStep {
-                url
-            }
-            ...on SelectionStep {
-                url
-            }
-            ...on CollectStep {
-                url
-            }
-            ...on RequirementStep {
-                requirements {
-                    edges {
-                        node {
-                            __typename
-                            ...on EmailVerifiedRequirement {
-                                viewerValue @include(if: $isAuthenticated)
-                                participantValue(token: $participantToken)
-                            }
-                            ...on FirstnameRequirement {
-                                viewerValue @include(if: $isAuthenticated)
-                                participantValue(token: $participantToken)
-                            }
-                            ...on LastnameRequirement {
-                                viewerValue @include(if: $isAuthenticated)
-                                participantValue(token: $participantToken)
-                            }
-                            ...on PhoneRequirement {
-                                viewerValue @include(if: $isAuthenticated)
-                                participantValue(token: $participantToken)
-                            }
-                            ...on IdentificationCodeRequirement {
-                                viewerValue @include(if: $isAuthenticated)
-                                participantValue(token: $participantToken)
-                            }
-                            ...on CheckboxRequirement {
-                                id
-                                label
-                            }
-                            viewerMeetsTheRequirement @include(if: $isAuthenticated)
-                            participantMeetsTheRequirement(token: $participantToken)
-                        }
-                    }
-                }
-            }
-        }
-        contribution: node(id: $contributionId) {
-            __typename
-            ...on Reply {
-                url
-                requirementsUrl
-                completionStatus
-            }
-            ...on ProposalVote {
-                step {
-                    url
-                }
-                requirementsUrl
-                completionStatus
-            }
-        }
-        siteImage(keyname: "image.logo" ) {
-            media {
-                url
-                width
-                height
-            }
-        }
-        viewer @include(if: $isAuthenticated) {
-            consentInternalCommunication
-            email
-        }
-        participant(token: $participantToken) {
-            consentInternalCommunication
-            email
-        }
+  query ParticipationWorkflowModalQuery(
+    $stepId: ID!
+    $participantToken: String
+    $isAuthenticated: Boolean!
+    $contributionId: ID!
+  ) {
+    ...EmailMagicLinkCheckEmail_query
+    ...EmailParticipantCheckEmail_query
+    siteColors {
+      ...EmailAccountLoginSSOForm_colors
     }
+    step: node(id: $stepId) {
+      ... on QuestionnaireStep {
+        url
+      }
+      ... on SelectionStep {
+        url
+      }
+      ... on CollectStep {
+        url
+      }
+      ... on RequirementStep {
+        requirements {
+          edges {
+            node {
+              __typename
+              ... on EmailVerifiedRequirement {
+                viewerValue @include(if: $isAuthenticated)
+                participantValue(token: $participantToken)
+              }
+              ... on FirstnameRequirement {
+                viewerValue @include(if: $isAuthenticated)
+                participantValue(token: $participantToken)
+              }
+              ... on LastnameRequirement {
+                viewerValue @include(if: $isAuthenticated)
+                participantValue(token: $participantToken)
+              }
+              ... on PhoneRequirement {
+                viewerValue @include(if: $isAuthenticated)
+                participantValue(token: $participantToken)
+              }
+              ... on IdentificationCodeRequirement {
+                viewerValue @include(if: $isAuthenticated)
+                participantValue(token: $participantToken)
+              }
+              ... on CheckboxRequirement {
+                id
+                label
+              }
+              viewerMeetsTheRequirement @include(if: $isAuthenticated)
+              participantMeetsTheRequirement(token: $participantToken)
+            }
+          }
+        }
+      }
+    }
+    contribution: node(id: $contributionId) {
+      __typename
+      ... on Reply {
+        url
+        requirementsUrl
+        completionStatus
+      }
+      ... on ProposalVote {
+        step {
+          url
+        }
+        requirementsUrl
+        completionStatus
+      }
+    }
+    siteImage(keyname: "image.logo") {
+      media {
+        url
+        width
+        height
+      }
+    }
+    viewer @include(if: $isAuthenticated) {
+      consentInternalCommunication
+      email
+    }
+    participant(token: $participantToken) {
+      consentInternalCommunication
+      email
+    }
+  }
 `
 
 const getParticipantToken = (): string | null => {
@@ -164,8 +165,8 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     contributionId,
   })
 
-  const viewer = query?.viewer ?? null;
-  const participant = query?.participant ?? null;
+  const viewer = query?.viewer ?? null
+  const participant = query?.participant ?? null
 
   const intl = useIntl()
 
@@ -173,7 +174,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
 
   const logo = siteImage?.media ?? null
 
-  const contributionUrl = step?.url ?? '/';
+  const contributionUrl = step?.url ?? '/'
   const requirementsUrl = contribution?.requirementsUrl as string
   const contributionTypeName = contribution?.__typename as string
 
@@ -184,39 +185,49 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     window.removeEventListener('beforeunload', onUnload)
   }, [])
 
-
   const requirements = step?.requirements?.edges?.map(edge => edge.node).map(node => node) ?? []
-  let filteredRequirements = requirements.map((requirement) => {
+  let filteredRequirements = requirements.map(requirement => {
     return {
       ...requirement,
-      isMeetingTheRequirement: isAuthenticated ? requirement.viewerMeetsTheRequirement : requirement.participantMeetsTheRequirement,
+      isMeetingTheRequirement: isAuthenticated
+        ? requirement.viewerMeetsTheRequirement
+        : requirement.participantMeetsTheRequirement,
       viewerMeetsTheRequirement: undefined,
       participantMeetsTheRequirement: undefined,
     }
   })
 
-  const firstnameRequirement = filteredRequirements.find(requirement => requirement.__typename === 'FirstnameRequirement')
+  const firstnameRequirement = filteredRequirements.find(
+    requirement => requirement.__typename === 'FirstnameRequirement',
+  )
   const lastnameRequirement = filteredRequirements.find(requirement => requirement.__typename === 'LastnameRequirement')
-  const showNames = (firstnameRequirement && !firstnameRequirement.isMeetingTheRequirement) || (lastnameRequirement && !lastnameRequirement.isMeetingTheRequirement)
+  const showNames =
+    (firstnameRequirement && !firstnameRequirement.isMeetingTheRequirement) ||
+    (lastnameRequirement && !lastnameRequirement.isMeetingTheRequirement)
 
-  filteredRequirements = filteredRequirements.filter(requirement => ['FirstnameRequirement', 'LastnameRequirement'].includes(requirement.__typename) === false)
+  filteredRequirements = filteredRequirements.filter(
+    requirement => ['FirstnameRequirement', 'LastnameRequirement'].includes(requirement.__typename) === false,
+  )
   if (showNames) {
-    const index = requirements.findIndex(requirement => ['FirstnameRequirement', 'LastnameRequirement'].includes(requirement.__typename))
+    const index = requirements.findIndex(requirement =>
+      ['FirstnameRequirement', 'LastnameRequirement'].includes(requirement.__typename),
+    )
     filteredRequirements.splice(index, 0, {
-      '__typename': 'NamesRequirement',
+      __typename: 'NamesRequirement',
       participantMeetsTheRequirement: undefined,
       viewerMeetsTheRequirement: undefined,
       isMeetingTheRequirement: false,
     })
   }
 
-
-  const checkboxes = filteredRequirements.filter(r => r.__typename === 'CheckboxRequirement' && r.isMeetingTheRequirement === false)
+  const checkboxes = filteredRequirements.filter(
+    r => r.__typename === 'CheckboxRequirement' && r.isMeetingTheRequirement === false,
+  )
   if (checkboxes.length > 0) {
     filteredRequirements = filteredRequirements.filter(r => r.__typename !== 'CheckboxRequirement')
     const index = requirements.findIndex(r => r.__typename === 'CheckboxRequirement')
     filteredRequirements.splice(index, 0, {
-      '__typename': 'CheckboxesRequirement',
+      __typename: 'CheckboxesRequirement',
       participantMeetsTheRequirement: undefined,
       viewerMeetsTheRequirement: undefined,
       isMeetingTheRequirement: false,
@@ -225,15 +236,18 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
 
   const phoneRequirement = filteredRequirements.find(r => r.__typename === 'PhoneRequirement')
   const phoneVerifiedRequirement = filteredRequirements.find(r => r.__typename === 'PhoneVerifiedRequirement')
-  const emailRequirement = filteredRequirements.find(r => r.__typename === 'EmailVerifiedRequirement');
-  const ssoRequirement = filteredRequirements.find(r => r.__typename === 'SSORequirement');
-  const fcRequirement = filteredRequirements.find(r => r.__typename === 'FranceConnectRequirement');
-
+  const emailRequirement = filteredRequirements.find(r => r.__typename === 'EmailVerifiedRequirement')
+  const ssoRequirement = filteredRequirements.find(r => r.__typename === 'SSORequirement')
+  const fcRequirement = filteredRequirements.find(r => r.__typename === 'FranceConnectRequirement')
 
   filteredRequirements = filteredRequirements.filter(r => {
     // in case there is phoneVerifiedRequirement required we always show phoneRequirement since it is responsible for sending the code
-    if (r.__typename === 'PhoneRequirement' && (phoneVerifiedRequirement && phoneVerifiedRequirement.isMeetingTheRequirement === false)) {
-      return true;
+    if (
+      r.__typename === 'PhoneRequirement' &&
+      phoneVerifiedRequirement &&
+      phoneVerifiedRequirement.isMeetingTheRequirement === false
+    ) {
+      return true
     }
 
     return r.isMeetingTheRequirement === false
@@ -244,40 +258,46 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
       return ''
     }
 
-    return phone.replace('+33', '0');
+    return phone.replace('+33', '0')
   }
 
   const defaultValues = {
     firstname: isAuthenticated ? firstnameRequirement?.viewerValue : firstnameRequirement?.participantValue,
     lastname: isAuthenticated ? lastnameRequirement?.viewerValue : lastnameRequirement?.participantValue,
-    phone: isAuthenticated ? convertPhone(phoneRequirement?.viewerValue) : convertPhone(phoneRequirement?.participantValue),
-    birthday: moment("2000-01-01 00:00:00", "YYYY-MM-DD HH:mm:ss"),
+    phone: isAuthenticated
+      ? convertPhone(phoneRequirement?.viewerValue)
+      : convertPhone(phoneRequirement?.participantValue),
+    birthday: moment('2000-01-01 00:00:00', 'YYYY-MM-DD HH:mm:ss'),
     countryCode: '+33',
   }
 
   const formMethods = useForm<FormValues>({
     defaultValues,
-    mode: 'onBlur'
+    mode: 'onBlur',
   })
 
   const isMeetingEmailRequirement = emailRequirement?.isMeetingTheRequirement ?? false
   const isMeetingSSORequirement = ssoRequirement?.isMeetingTheRequirement ?? false
   const isMeetingFcRequirement = fcRequirement?.isMeetingTheRequirement ?? false
 
-  const phonesRequirements = filteredRequirements.filter(r => ['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename));
-  const hasPhoneVerifiedRequirement = phonesRequirements.some(r => r.__typename === 'PhoneVerifiedRequirement');
-  const hasOnlyPhoneRequirement = phonesRequirements.length === 1;
+  const phonesRequirements = filteredRequirements.filter(r =>
+    ['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename),
+  )
+  const hasPhoneVerifiedRequirement = phonesRequirements.some(r => r.__typename === 'PhoneVerifiedRequirement')
+  const hasOnlyPhoneRequirement = phonesRequirements.length === 1
 
-  filteredRequirements = filteredRequirements.filter(r => !['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename));
+  filteredRequirements = filteredRequirements.filter(
+    r => !['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename),
+  )
 
-  const hasMetAllRequirements = filteredRequirements.length === 0 && contribution?.completionStatus === 'COMPLETED';
-  const email = viewer?.email ?? participant?.email;
-  const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication;
+  const hasMetAllRequirements = filteredRequirements.length === 0 && contribution?.completionStatus === 'COMPLETED'
+  const email = viewer?.email ?? participant?.email
+  const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication
 
-  if(!contribution && step?.url) {
-    const toastConfig = JSON.stringify({ variant: 'danger', message: 'participant-already-contributed-title'})
+  if (!contribution && step?.url) {
+    const toastConfig = JSON.stringify({ variant: 'danger', message: 'participant-already-contributed-title' })
     window.location.href = `${step.url}?toast=${toastConfig}`
-    return <ModalSkeleton />;
+    return <ModalSkeleton />
   }
 
   if (!step) {
@@ -285,7 +305,9 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
   }
 
   return (
-    <ParticipationWorkflowContextProvider value={{ stepId, contributionUrl, logo, requirementsUrl, contributionId, contributionTypeName }}>
+    <ParticipationWorkflowContextProvider
+      value={{ stepId, contributionUrl, logo, requirementsUrl, contributionId, contributionTypeName }}
+    >
       <FormProvider {...formMethods}>
         <MultiStepModal
           hideOnClickOutside={false}
@@ -293,149 +315,101 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
           size={CapUIModalSize.Fullscreen}
           smoothWorkflow
           hideCloseButton
-          onClose={() => {
-          }}
+          onClose={() => {}}
           show
           fullSizeOnMobile
         >
-          {
-            fcRequirement && !isMeetingFcRequirement && (
-              <FranceConnectRequirementModal />
-            )
-          }
-          {
-            ssoRequirement && !isMeetingSSORequirement && (
-              <EmailAccountLoginSSOForm
-                colors={siteColors}
-                modalTitle={intl.formatMessage({ id: 'please-identify-with-our-sso' })}
-              />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailParticipantForm hideGoBackArrow />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailParticipantCaptcha />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailParticipantCheckEmail query={query} />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailAccountLoginForm>
-                <LoginChoices
-                  selected="ACCOUNT_LOGIN_FORM"
+          {fcRequirement && !isMeetingFcRequirement && <FranceConnectRequirementModal />}
+          {ssoRequirement && !isMeetingSSORequirement && (
+            <EmailAccountLoginSSOForm
+              colors={siteColors}
+              modalTitle={intl.formatMessage({ id: 'please-identify-with-our-sso' })}
+            />
+          )}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailParticipantForm hideGoBackArrow />}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailParticipantCaptcha />}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailParticipantCheckEmail query={query} />}
+          {emailRequirement && !isMeetingEmailRequirement && (
+            <EmailAccountLoginForm>
+              <LoginChoices selected="ACCOUNT_LOGIN_FORM" />
+            </EmailAccountLoginForm>
+          )}
+          {emailRequirement && !isMeetingEmailRequirement && (
+            <FranceConnectRequirementModal>
+              <LoginChoices selected="ACCOUNT_LOGIN_FRANCE_CONNECT_FORM" />
+            </FranceConnectRequirementModal>
+          )}
+          {emailRequirement && !isMeetingEmailRequirement && (
+            <EmailAccountLoginSSOForm colors={siteColors}>
+              <LoginChoices selected="ACCOUNT_LOGIN_SSO_FORM" />
+            </EmailAccountLoginSSOForm>
+          )}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkForm />}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkCaptcha />}
+          {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkCheckEmail query={query} />}
+          {phonesRequirements.map((requirement, index) => {
+            const { __typename } = requirement
+            if (__typename === 'PhoneRequirement') {
+              return (
+                <PhoneRequirementModal
+                  key={__typename}
+                  hideGoBackArrow={index === 0 || !hasOnlyPhoneRequirement}
+                  isPhoneVerifiedRequired={hasPhoneVerifiedRequirement}
                 />
-              </EmailAccountLoginForm>
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <FranceConnectRequirementModal>
-                <LoginChoices
-                  selected="ACCOUNT_LOGIN_FRANCE_CONNECT_FORM"
-                />
-              </FranceConnectRequirementModal>
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailAccountLoginSSOForm colors={siteColors}>
-                <LoginChoices
-                  selected="ACCOUNT_LOGIN_SSO_FORM"
-                />
-              </EmailAccountLoginSSOForm>
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailMagicLinkForm />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailMagicLinkCaptcha  />
-            )
-          }
-          {
-            (emailRequirement && !isMeetingEmailRequirement) && (
-              <EmailMagicLinkCheckEmail query={query} />
-            )
-          }
-          {
-            phonesRequirements.map((requirement, index) => {
-              const { __typename } = requirement
-              if (__typename === 'PhoneRequirement') {
-                return <PhoneRequirementModal key={__typename} hideGoBackArrow={index === 0 || !hasOnlyPhoneRequirement} isPhoneVerifiedRequired={hasPhoneVerifiedRequirement} />
-              }
-              if (__typename === 'PhoneVerifiedRequirement') {
-                return <PhoneConfirmationModal key={__typename} />
-              }
+              )
+            }
+            if (__typename === 'PhoneVerifiedRequirement') {
+              return <PhoneConfirmationModal key={__typename} />
+            }
           })}
-          {
-            filteredRequirements.map((requirement, index) => {
-              const { __typename } = requirement
-              const hideGoBackArrow = index === 0 && !hasOnlyPhoneRequirement
-              if (__typename === 'ConsentPrivacyPolicyRequirement') {
-                return <ConsentPrivacyPolicyRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'NamesRequirement') {
-                return <NamesRequirementModal
+          {filteredRequirements.map((requirement, index) => {
+            const { __typename } = requirement
+            const hideGoBackArrow = index === 0 && !hasOnlyPhoneRequirement
+            if (__typename === 'ConsentPrivacyPolicyRequirement') {
+              return <ConsentPrivacyPolicyRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'NamesRequirement') {
+              return (
+                <NamesRequirementModal
                   key={__typename}
                   hideGoBackArrow={hideGoBackArrow}
                   showFirstname={!!firstnameRequirement}
                   showLastname={!!lastnameRequirement}
                 />
-              }
-              if (__typename === 'PostalAddressRequirement') {
-                return <AddressRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'DateOfBirthRequirement') {
-                return <BirthdayRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'IdentificationCodeRequirement') {
-                return <IdentificationCodeRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'CheckboxesRequirement') {
-                return <CheckboxesRequirementModal key={__typename} checkboxes={checkboxes} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'FranceConnectRequirement') {
-                return <FranceConnectRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'ZipCodeRequirement') {
-                return <ZipCodeRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-              if (__typename === 'FranceConnectRequirement') {
-                return <FranceConnectRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
-              }
-            })
-          }
-          {
-            (!emailRequirement && !isAuthenticated && !hasMetAllRequirements) && (
-              <CaptchaModal />
-            )
-          }
-          {
-            !hasMetAllRequirements && (
-              <ContributionValidationModal contributionId={contributionId} />
-            )
-          }
-          {
-            !email && !consentInternalCommunication && (
-              <ConsentInternalCommunicationEmailModal />
-            )
-          }
-          {
-            (email && !consentInternalCommunication) && (
-              <ConsentInternalCommunicationModal />
-            )
-          }
+              )
+            }
+            if (__typename === 'PostalAddressRequirement') {
+              return <AddressRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'DateOfBirthRequirement') {
+              return <BirthdayRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'IdentificationCodeRequirement') {
+              return <IdentificationCodeRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'CheckboxesRequirement') {
+              return (
+                <CheckboxesRequirementModal
+                  key={__typename}
+                  checkboxes={checkboxes}
+                  hideGoBackArrow={hideGoBackArrow}
+                />
+              )
+            }
+            if (__typename === 'FranceConnectRequirement') {
+              return <FranceConnectRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'ZipCodeRequirement') {
+              return <ZipCodeRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+            if (__typename === 'FranceConnectRequirement') {
+              return <FranceConnectRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
+            }
+          })}
+          {!emailRequirement && !isAuthenticated && !hasMetAllRequirements && <CaptchaModal />}
+          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionId} />}
+          {!email && !consentInternalCommunication && <ConsentInternalCommunicationEmailModal />}
+          {email && !consentInternalCommunication && <ConsentInternalCommunicationModal />}
           {/* Uncomment when registration is implemented */}
           {/*{*/}
           {/*  (!isAuthenticated && emailRequirement && isMeetingEmailRequirement && consentInternalCommunication) && (*/}

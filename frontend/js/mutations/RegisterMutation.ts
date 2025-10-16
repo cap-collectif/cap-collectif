@@ -23,13 +23,12 @@ const commit = (variables: RegisterMutationVariables): Promise<RegisterMutationR
   })
 
 export const useRegisterMutation = () => {
-  const [commit, isLoading] = useMutation<RegisterMutation>(mutation);
+  const [commit, isLoading] = useMutation<RegisterMutation>(mutation)
   return {
     commit,
-    isLoading
+    isLoading,
   }
 }
-
 
 export default {
   commit,

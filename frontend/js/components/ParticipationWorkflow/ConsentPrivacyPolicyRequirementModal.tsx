@@ -1,40 +1,37 @@
 import * as React from 'react'
-import {useIntl} from 'react-intl'
+import { useIntl } from 'react-intl'
 import { Box, useMultiStepModal, Button, Flex } from '@cap-collectif/ui'
 import ModalLayout from './ModalLayout'
 import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
-import {mutationErrorToast} from "~/components/Utils/MutationErrorToast";
-import CookieMonster from '@shared/utils/CookieMonster';
-import {useSelector} from "react-redux";
-import type {GlobalState} from "~/types";
-import  {
-  useUpdateProfilePersonalDataMutation,
-} from '~/mutations/UpdateProfilePersonalDataMutation'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import CookieMonster from '@shared/utils/CookieMonster'
+import { useSelector } from 'react-redux'
+import type { GlobalState } from '~/types'
+import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
 import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 import RGPDSVG from '~/components/ParticipationWorkflow/assets/RGPDSVG'
 import { openPrivacyModal } from '@shared/register/PrivacyModal'
-
 
 type Props = {
   hideGoBackArrow: boolean
 }
 
-const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}) => {
+const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
-  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user);
+  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
 
   const updateParticipantMutation = useUpdateParticipantMutation()
   const updateProfilePersonalDataMutation = useUpdateProfilePersonalDataMutation()
   const isLoading = updateParticipantMutation.isLoading || updateProfilePersonalDataMutation.isLoading
 
-  const buttonRef = React.useRef(null);
+  const buttonRef = React.useRef(null)
 
   React.useEffect(() => {
     if (buttonRef.current) {
-      buttonRef.current.focus();
+      buttonRef.current.focus()
     }
-  }, []);
+  }, [])
 
   const updateUser = () => {
     const input = {
@@ -42,7 +39,7 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}
     }
     updateProfilePersonalDataMutation.commit({
       variables: {
-        input
+        input,
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
@@ -52,8 +49,8 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}
       },
       onError: () => {
         return mutationErrorToast(intl)
-      }
-    });
+      },
+    })
   }
 
   const updateParticipant = () => {
@@ -63,7 +60,7 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}
     }
     updateParticipantMutation.commit({
       variables: {
-        input
+        input,
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
@@ -73,14 +70,14 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}
       },
       onError: () => {
         return mutationErrorToast(intl)
-      }
-    });
+      },
+    })
   }
 
   const onClick = () => {
     if (isAuthenticated) {
       updateUser()
-      return;
+      return
     }
 
     updateParticipant()
@@ -110,18 +107,35 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({hideGoBackArrow}
             ),
           },
         )}
-        header={hideGoBackArrow ? ({intl, onClose, goBackCallback, logo, isMobile }) => (
-          <HideBackArrowLayout intl={intl} onClose={onClose} goBackCallback={goBackCallback} logo={logo} isMobile={isMobile} />
-        ) : null}
+        header={
+          hideGoBackArrow
+            ? ({ intl, onClose, goBackCallback, logo, isMobile }) => (
+                <HideBackArrowLayout
+                  intl={intl}
+                  onClose={onClose}
+                  goBackCallback={goBackCallback}
+                  logo={logo}
+                  isMobile={isMobile}
+                />
+              )
+            : null
+        }
       >
         <Flex direction="column" width="100%">
           <Flex justifyContent="center" order={[0, 1]} mt={[0, 4]}>
             <RGPDSVG />
           </Flex>
           <Flex width="100%" justifyContent="center">
-            <Button ref={buttonRef} variantSize="big" justifyContent="center" width={["100%", "auto"]} type="submit" order={[1, 0]} minWidth="18rem"
-                    onClick={onClick}
-                    isLoading={isLoading}
+            <Button
+              ref={buttonRef}
+              variantSize="big"
+              justifyContent="center"
+              width={['100%', 'auto']}
+              type="submit"
+              order={[1, 0]}
+              minWidth="18rem"
+              onClick={onClick}
+              isLoading={isLoading}
             >
               {intl.formatMessage({ id: 'i-accept' })}
             </Button>

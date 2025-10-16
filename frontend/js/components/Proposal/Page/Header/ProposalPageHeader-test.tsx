@@ -1,7 +1,7 @@
 /* eslint-env jest */
-import { shallow } from 'enzyme';
-import { $fragmentRefs, $refType } from '~/mocks';
-import { ProposalPageHeader } from './ProposalPageHeader';
+import { shallow } from 'enzyme'
+import { $fragmentRefs, $refType } from '~/mocks'
+import { ProposalPageHeader } from './ProposalPageHeader'
 
 describe('<ProposalPageHeader />', () => {
   const proposal = {

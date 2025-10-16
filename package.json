@@ -147,16 +147,6 @@
             "maxSize": "30 KB"
         }
     ],
-    "prettier": {
-        "parser": "flow",
-        "arrowParens": "avoid",
-        "bracketSpacing": true,
-        "singleQuote": true,
-        "bracketSameLine": true,
-        "trailingComma": "all",
-        "printWidth": 100,
-        "endOfLine": "auto"
-    },
     "dependencies": {
         "@babel/core": "^7.22.8",
         "@babel/eslint-parser": "^7.22.15",

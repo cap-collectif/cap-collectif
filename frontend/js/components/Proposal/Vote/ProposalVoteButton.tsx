@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import classNames from 'classnames'
-import { useDispatch, useSelector,  } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import type { IntlShape } from 'react-intl'
 import { openVoteModal } from '~/redux/modules/proposal'
 import type {
@@ -54,8 +54,8 @@ const PROPOSAL_FRAGMENT = graphql`
       ...UnpublishedTooltip_publishable
     }
     contributorVote(step: $stepId, token: $token) {
-        id
-        completionStatus
+      id
+      completionStatus
     }
     votes(stepId: $stepId, first: 0) {
       totalCount
@@ -64,23 +64,22 @@ const PROPOSAL_FRAGMENT = graphql`
 `
 const STEP_FRAGMENT = graphql`
   fragment ProposalVoteButton_step on ProposalStep
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) 
-  {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     votesRanking
     votesMin
     votesLimit
     viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
-        totalCount
+      totalCount
     }
     requirements {
-        viewerMeetsTheRequirements @include(if: $isAuthenticated)
-        participantMeetsTheRequirements(token: $token)
-        edges {
-            node {
-                __typename
-            }
+      viewerMeetsTheRequirements @include(if: $isAuthenticated)
+      participantMeetsTheRequirements(token: $token)
+      edges {
+        node {
+          __typename
         }
+      }
     }
   }
 `
@@ -187,27 +186,29 @@ const ProposalVoteButton = ({
   disabled = false,
   hasVoted,
   usesNewUI,
-  triggerRequirementsModal
+  triggerRequirementsModal,
 }: Props) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const currentStep = useFragment(STEP_FRAGMENT, stepRef)
   const isAuthenticated = useSelector<State>(state => state.user.user) != null
   const isDeleting = useSelector<State>(state => state.proposal.currentDeletingVote) === proposal.id
   const dispatch = useDispatch()
-  const isMeetingRequirements = isAuthenticated ? currentStep.requirements.viewerMeetsTheRequirements : currentStep.requirements.participantMeetsTheRequirements;
-  const [isLoading, setIsLoading] = React.useState(false);
+  const isMeetingRequirements = isAuthenticated
+    ? currentStep.requirements.viewerMeetsTheRequirements
+    : currentStep.requirements.participantMeetsTheRequirements
+  const [isLoading, setIsLoading] = React.useState(false)
 
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile()
 
-  const hasFilledCaptcha = JSON.parse(localStorage.getItem('hasFilledCaptcha'));
+  const hasFilledCaptcha = JSON.parse(localStorage.getItem('hasFilledCaptcha'))
   const setHasFilledCaptcha = () => {
-    localStorage.setItem('hasFilledCaptcha', JSON.stringify(true));
+    localStorage.setItem('hasFilledCaptcha', JSON.stringify(true))
   }
 
-  const {votesMin} = currentStep
-  const participantToken = CookieMonster.getParticipantCookie();
+  const { votesMin } = currentStep
+  const participantToken = CookieMonster.getParticipantCookie()
 
-  const vote = isAuthenticated ? proposal.viewerVote : proposal.contributorVote;
+  const vote = isAuthenticated ? proposal.viewerVote : proposal.contributorVote
 
   const getButtonStyle = () => {
     if (hasVoted && isHovering) {
@@ -253,59 +254,55 @@ const ProposalVoteButton = ({
 
     if (!hasVoted && vote?.completionStatus === 'MISSING_REQUIREMENTS') {
       triggerRequirementsModal(vote.id)
-      return;
+      return
     }
 
     if (
       !usesNewUI &&
-      (
-        votesMin && votesMin > 1 || (currentStep?.votesRanking && currentStep.viewerVotes.totalCount > 0)
-      )
-  ) {
+      ((votesMin && votesMin > 1) || (currentStep?.votesRanking && currentStep.viewerVotes.totalCount > 0))
+    ) {
       dispatch(openVoteModal(proposal.id))
-      return;
+      return
     }
-
 
     if (isAuthenticated) {
       try {
-        setIsLoading(true);
+        setIsLoading(true)
         const response = await AddProposalVoteMutation.commit({
           stepId: currentStep.id,
           input: {
             proposalId: proposal.id,
             stepId: currentStep.id,
-            anonymously: true
-          }
+            anonymously: true,
+          },
         })
 
-        setIsLoading(false);
+        setIsLoading(false)
 
-        const errorCode = response?.addProposalVote?.errorCode;
+        const errorCode = response?.addProposalVote?.errorCode
 
         if (errorCode === 'PHONE_ALREADY_USED') {
           toast({
             variant: 'danger',
             content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
           })
-          return;
+          return
         }
 
-        const newVote = response.addProposalVote.voteEdge.node;
-        const updatedVotesCount = response.addProposalVote.voteEdge.node.step.viewerVotes.totalCount;
+        const newVote = response.addProposalVote.voteEdge.node
+        const updatedVotesCount = response.addProposalVote.voteEdge.node.step.viewerVotes.totalCount
 
-        let hasReachedVotesMin= true;
+        let hasReachedVotesMin = true
         if (votesMin && votesMin > 1) {
           hasReachedVotesMin = votesMin === updatedVotesCount
         }
 
-        const {shouldTriggerConsentInternalCommunication} = response.addProposalVote;
+        const { shouldTriggerConsentInternalCommunication } = response.addProposalVote
 
         if ((!isMeetingRequirements || shouldTriggerConsentInternalCommunication) && hasReachedVotesMin) {
           triggerRequirementsModal(newVote.id)
-          return;
+          return
         }
-
 
         if (response && hasReachedVotesMin) {
           toast({
@@ -315,35 +312,35 @@ const ProposalVoteButton = ({
             }),
           })
         }
-        return;
+        return
       } catch (error) {
         return mutationErrorToast(intl)
       }
     } else {
-      setIsLoading(true);
+      setIsLoading(true)
       const response = await AddProposalSmsVoteMutation.commit({
         token: participantToken ?? '',
         stepId: currentStep.id,
         input: {
           proposalId: proposal.id,
           stepId: currentStep.id,
-          token: participantToken
-        }
+          token: participantToken,
+        },
       })
-      setIsLoading(false);
+      setIsLoading(false)
 
-      const errorCode = response?.addProposalSmsVote?.errorCode;
+      const errorCode = response?.addProposalSmsVote?.errorCode
 
       if (errorCode === 'PHONE_ALREADY_USED') {
         toast({
           variant: 'danger',
           content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
         })
-        return;
+        return
       }
 
       if (!participantToken) {
-        const newParticipantToken = response.addProposalSmsVote.participantToken;
+        const newParticipantToken = response.addProposalSmsVote.participantToken
         CookieMonster.addParticipantCookie(newParticipantToken)
         dispatchEvent(VoteStepEvent.NewParticipantToken, {
           token: newParticipantToken,
@@ -351,22 +348,22 @@ const ProposalVoteButton = ({
       }
 
       const newVote = response.addProposalSmsVote.voteEdge.node
-      let updatedVotesCount = newVote.step.viewerVotes.totalCount || 1;
+      let updatedVotesCount = newVote.step.viewerVotes.totalCount || 1
 
       if (newVote.completionStatus === 'MISSING_REQUIREMENTS') {
-        updatedVotesCount += 1;
+        updatedVotesCount += 1
       }
 
-      let hasReachedVotesMin= true;
+      let hasReachedVotesMin = true
       if (votesMin && votesMin > 1) {
         hasReachedVotesMin = votesMin === updatedVotesCount
       }
 
-      const {shouldTriggerConsentInternalCommunication} = response.addProposalSmsVote;
+      const { shouldTriggerConsentInternalCommunication } = response.addProposalSmsVote
 
       if ((!isMeetingRequirements || shouldTriggerConsentInternalCommunication) && hasReachedVotesMin) {
         triggerRequirementsModal(newVote.id)
-        return;
+        return
       }
 
       if (response && hasReachedVotesMin) {
@@ -381,7 +378,6 @@ const ProposalVoteButton = ({
   }
 
   if (!isAuthenticated && isMeetingRequirements && !hasVoted && !hasFilledCaptcha) {
-
     if (isMobile) {
       return (
         <Modal
@@ -415,14 +411,18 @@ const ProposalVoteButton = ({
           size={CapUIModalSize.Md}
         >
           <Modal.Header>
-            <Modal.Header.Label>{intl.formatMessage({ id: 'captcha-verification' })} <span role="img"
-                                                                                           aria-label="robot">🤖</span></Modal.Header.Label>
+            <Modal.Header.Label>
+              {intl.formatMessage({ id: 'captcha-verification' })}{' '}
+              <span role="img" aria-label="robot">
+                🤖
+              </span>
+            </Modal.Header.Label>
           </Modal.Header>
           <Modal.Body>
             <Flex justifyContent="center">
               <Captcha
                 onChange={async (value: any) => {
-                  if (!value) return;
+                  if (!value) return
                   setHasFilledCaptcha()
                   await onButtonClick()
                 }}
@@ -436,40 +436,40 @@ const ProposalVoteButton = ({
     return (
       <Popover
         id="popover-positioned-right"
-        placement={isMobile ? 'bottom': 'right'}
+        placement={isMobile ? 'bottom' : 'right'}
         disclosure={
-            usesNewUI ? (
-              <DSVoteButton
-                active={hasVoted}
-                id={id}
-                onClick={() => {}}
-                disabled={disabled}
-                aria-label={intl.formatMessage({ id: hasVoted ? 'delete-vote' : 'vote.add' })}
-              >
-                <Flex direction="column" align="flex-start">
-                  <Text fontWeight={CapUIFontWeight.Semibold}>{proposal?.votes?.totalCount}</Text>
-                </Flex>
-              </DSVoteButton>
-            ) : (
-              <Button
-                className={`mr-10 proposal__button__vote ${getButtonStyle()} ${classes} `}
-                fontWeight="400"
-                id={id}
-              >
-                <i className="cap cap-hand-like-2 mr-5" />
-                {intl.formatMessage({
-                  id: getButtonText(),
-                })}
-              </Button>
-            )
-          }
+          usesNewUI ? (
+            <DSVoteButton
+              active={hasVoted}
+              id={id}
+              onClick={() => {}}
+              disabled={disabled}
+              aria-label={intl.formatMessage({ id: hasVoted ? 'delete-vote' : 'vote.add' })}
+            >
+              <Flex direction="column" align="flex-start">
+                <Text fontWeight={CapUIFontWeight.Semibold}>{proposal?.votes?.totalCount}</Text>
+              </Flex>
+            </DSVoteButton>
+          ) : (
+            <Button className={`mr-10 proposal__button__vote ${getButtonStyle()} ${classes} `} fontWeight="400" id={id}>
+              <i className="cap cap-hand-like-2 mr-5" />
+              {intl.formatMessage({
+                id: getButtonText(),
+              })}
+            </Button>
+          )
+        }
       >
-        <Popover.Header>{intl.formatMessage({ id: 'captcha-verification' })} <span role="img"
-                                                                                   aria-label="robot">🤖</span></Popover.Header>
+        <Popover.Header>
+          {intl.formatMessage({ id: 'captcha-verification' })}{' '}
+          <span role="img" aria-label="robot">
+            🤖
+          </span>
+        </Popover.Header>
         <Popover.Body>
           <Captcha
             onChange={async (value: any) => {
-              if (!value) return;
+              if (!value) return
               setHasFilledCaptcha()
               await onButtonClick()
             }}

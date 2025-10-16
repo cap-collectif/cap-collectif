@@ -5,29 +5,28 @@ import React from 'react'
 
 const DEFAULT_KEY = 'toast'
 
-export const useUrlToast = (key : string = DEFAULT_KEY) => {
-  const [urlToast] = useUrlState(key, '');
+export const useUrlToast = (key: string = DEFAULT_KEY) => {
+  const [urlToast] = useUrlState(key, '')
   const intl = useIntl()
 
   const clearUrlParams = React.useCallback(() => {
-    const url = new URL(window.location.href);
+    const url = new URL(window.location.href)
 
-    url.searchParams.delete(key);
+    url.searchParams.delete(key)
 
-    window.history.replaceState({}, document.title, url.toString());
+    window.history.replaceState({}, document.title, url.toString())
   }, [key])
 
   React.useEffect(() => {
-    const toastParams = urlToast ? JSON.parse(urlToast) : null;
+    const toastParams = urlToast ? JSON.parse(urlToast) : null
     if (!toastParams?.variant && !toastParams?.message) {
-      return;
+      return
     }
     toast({
       variant: toastParams.variant,
-      content: intl.formatMessage({ id: toastParams.message })
+      content: intl.formatMessage({ id: toastParams.message }),
     })
 
     clearUrlParams()
-
   }, [urlToast, intl, clearUrlParams])
 }

@@ -15,10 +15,10 @@ type Props = {
   readonly questionnaire: ReplyLink_questionnaire
 }
 export const ReplyLink = ({ reply, questionnaire }: Props) => {
-  const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
+  const { preloadReply } = React.useContext(QuestionnaireStepPageContext)
 
-  const isAnonymousReply = reply?.isAnonymous ?? false;
-  const isMissingRequirements = reply?.completionStatus === 'MISSING_REQUIREMENTS';
+  const isAnonymousReply = reply?.isAnonymous ?? false
+  const isMissingRequirements = reply?.completionStatus === 'MISSING_REQUIREMENTS'
 
   return (
     <ReplyLinkContainer
@@ -63,8 +63,7 @@ export default createFragmentContainer(ReplyLink, {
     }
   `,
   reply: graphql`
-    fragment ReplyLink_reply on Reply
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    fragment ReplyLink_reply on Reply @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       __typename
       id
       createdAt

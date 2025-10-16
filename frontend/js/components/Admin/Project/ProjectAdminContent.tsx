@@ -322,21 +322,20 @@ export const ProjectAdminContent = ({
     ],
   )
 
-  
   /**
    * @desc Register a log when loading /participants url, maybe find a better and robust solution later on a rework
    */
-  const fetchProjectAdminParticipantAppLogQuery =  useCallback(async() => {
+  const fetchProjectAdminParticipantAppLogQuery = useCallback(async () => {
     await fetchQuery(environment, projectAdminParticipantAppLogQuery, {
       projectId: project.id,
     }).toPromise()
   }, [project.id])
   const lastPathname = useRef('')
   useEffect(() => {
-    if (location.pathname.includes("/participants") && lastPathname.current !== location.pathname) {
-          fetchProjectAdminParticipantAppLogQuery()
+    if (location.pathname.includes('/participants') && lastPathname.current !== location.pathname) {
+      fetchProjectAdminParticipantAppLogQuery()
     }
-    lastPathname.current = location.pathname;
+    lastPathname.current = location.pathname
   }, [location, fetchProjectAdminParticipantAppLogQuery])
 
   return (

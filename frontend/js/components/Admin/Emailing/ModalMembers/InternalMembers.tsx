@@ -1,109 +1,95 @@
-import React, { useRef } from 'react';
-import { usePaginationFragment, graphql } from 'react-relay';
-import InfiniteScroll from 'react-infinite-scroller';
-import { useIntl } from 'react-intl';
-import AppBox from '~ui/Primitives/AppBox';
-import Flex from '~ui/Primitives/Layout/Flex';
-import Spinner from '~ds/Spinner/Spinner';
-import InfoMessage from '~ds/InfoMessage/InfoMessage';
+import React, { useRef } from 'react'
+import { usePaginationFragment, graphql } from 'react-relay'
+import InfiniteScroll from 'react-infinite-scroller'
+import { useIntl } from 'react-intl'
+import AppBox from '~ui/Primitives/AppBox'
+import Flex from '~ui/Primitives/Layout/Flex'
+import Spinner from '~ds/Spinner/Spinner'
+import InfoMessage from '~ds/InfoMessage/InfoMessage'
 
-export const USERS_PAGINATION = 20;
+export const USERS_PAGINATION = 20
 
 const USERS_FRAGMENT = graphql`
-    fragment InternalMembers_query_users on Query
-    @argumentDefinitions(
-        emailConfirmed: { type: "Boolean" }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-    )
-    @refetchable(queryName: "InternalMembersPaginationQuery") {
-        refusingMembers: users(consentInternalCommunication: false) {
-            totalCount
-        }
-        members: users(
-            first: $count
-            after: $cursor
-            emailConfirmed: $emailConfirmed
-            consentInternalCommunication: true
-        ) @connection(key: "InternalMembers_members") {
-            pageInfo {
-                hasNextPage
-            }
-            edges {
-                node {
-                    id
-                    email
-                }
-            }
-        }
+  fragment InternalMembers_query_users on Query
+  @argumentDefinitions(emailConfirmed: { type: "Boolean" }, count: { type: "Int!" }, cursor: { type: "String" })
+  @refetchable(queryName: "InternalMembersPaginationQuery") {
+    refusingMembers: users(consentInternalCommunication: false) {
+      totalCount
     }
+    members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true)
+      @connection(key: "InternalMembers_members") {
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          email
+        }
+      }
+    }
+  }
 `
 
 const PARTICIPANTS_FRAGMENT = graphql`
-    fragment InternalMembers_query_participants on Query
-    @argumentDefinitions(
-        emailConfirmed: { type: "Boolean" }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-    )
-    @refetchable(queryName: "InternalParticipantsPaginationQuery") {
-        refusingParticipants: participants(consentInternalCommunication: false) {
-            totalCount
-        }
-        participants(
-            first: $count
-            after: $cursor
-            emailConfirmed: $emailConfirmed
-            consentInternalCommunication: true
-        ) @connection(key: "InternalParticipants_participants") {
-            pageInfo {
-                hasNextPage
-            }
-            edges {
-                node {
-                    id
-                    email
-                }
-            }
-        }
+  fragment InternalMembers_query_participants on Query
+  @argumentDefinitions(emailConfirmed: { type: "Boolean" }, count: { type: "Int!" }, cursor: { type: "String" })
+  @refetchable(queryName: "InternalParticipantsPaginationQuery") {
+    refusingParticipants: participants(consentInternalCommunication: false) {
+      totalCount
     }
+    participants(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true)
+      @connection(key: "InternalParticipants_participants") {
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          email
+        }
+      }
+    }
+  }
 `
 
-
 const InternalMembers = ({ query: queryRef }) => {
-  const listMembersRef = useRef(null);
-  const intl = useIntl();
+  const listMembersRef = useRef(null)
+  const intl = useIntl()
 
-  const { data: usersData, loadNext: loadNextUsers, hasNext: hasNextUsers } = usePaginationFragment(USERS_FRAGMENT, queryRef);
-  const { data: participantsData, loadNext: loadNextParticipants, hasNext: hasNextParticipants } = usePaginationFragment(PARTICIPANTS_FRAGMENT, queryRef);
+  const {
+    data: usersData,
+    loadNext: loadNextUsers,
+    hasNext: hasNextUsers,
+  } = usePaginationFragment(USERS_FRAGMENT, queryRef)
+  const {
+    data: participantsData,
+    loadNext: loadNextParticipants,
+    hasNext: hasNextParticipants,
+  } = usePaginationFragment(PARTICIPANTS_FRAGMENT, queryRef)
 
-  const users = usersData.members.edges?.filter(Boolean).map(edge => edge.node).filter(Boolean);
-  const participants = participantsData.participants.edges?.filter(Boolean).map(edge => edge.node).filter(Boolean);
+  const users = usersData.members.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+  const participants = participantsData.participants.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
 
-  const contributors = [...users, ...participants];
-  const refusingContributorsTotalCount = usersData.refusingMembers.totalCount + participantsData.refusingParticipants.totalCount;
+  const contributors = [...users, ...participants]
+  const refusingContributorsTotalCount =
+    usersData.refusingMembers.totalCount + participantsData.refusingParticipants.totalCount
 
   return (
-    <AppBox
-      as="ul"
-      p={0}
-      m={0}
-      css={{ listStyle: 'none', overflow: 'auto', maxHeight: '300px' }}
-      ref={listMembersRef}
-    >
+    <AppBox as="ul" p={0} m={0} css={{ listStyle: 'none', overflow: 'auto', maxHeight: '300px' }} ref={listMembersRef}>
       {refusingContributorsTotalCount > 0 && (
         <InfoMessage variant="info" mb={6}>
           <InfoMessage.Title>
-            {intl.formatMessage(
-              { id: 'mailingList-refusing-members-count' },
-              { num: refusingContributorsTotalCount }
-            )}
+            {intl.formatMessage({ id: 'mailingList-refusing-members-count' }, { num: refusingContributorsTotalCount })}
           </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage(
-              { id: 'mailingList-refusing-members' },
-              { num: refusingContributorsTotalCount }
-            )}
+            {intl.formatMessage({ id: 'mailingList-refusing-members' }, { num: refusingContributorsTotalCount })}
           </InfoMessage.Content>
         </InfoMessage>
       )}
@@ -120,9 +106,7 @@ const InternalMembers = ({ query: queryRef }) => {
             loadNextParticipants(USERS_PAGINATION)
           }
         }}
-        hasMore={
-          hasNextUsers || hasNextParticipants
-        }
+        hasMore={hasNextUsers || hasNextParticipants}
         loader={
           <Flex direction="row" justify="center" key={0}>
             <Spinner size="m" />
@@ -131,15 +115,14 @@ const InternalMembers = ({ query: queryRef }) => {
         getScrollParent={() => listMembersRef.current}
         useWindow={false}
       >
-        {contributors
-          .map(contributor => (
-            <AppBox as="li" key={contributor.id} mb={3}>
-              {contributor.email}
-            </AppBox>
-          ))}
+        {contributors.map(contributor => (
+          <AppBox as="li" key={contributor.id} mb={3}>
+            {contributor.email}
+          </AppBox>
+        ))}
       </InfiniteScroll>
     </AppBox>
-  );
-};
+  )
+}
 
-export default InternalMembers;
+export default InternalMembers

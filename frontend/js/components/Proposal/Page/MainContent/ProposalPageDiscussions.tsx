@@ -1,22 +1,22 @@
-import React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
-import ProposalPageComments from '../ProposalPageComments';
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
-import colors from '~/utils/colors';
-import type { ProposalPageDiscussions_proposal } from '~relay/ProposalPageDiscussions_proposal.graphql';
+import React from 'react'
+import { createFragmentContainer, graphql } from 'react-relay'
+import { FormattedMessage } from 'react-intl'
+import ProposalPageComments from '../ProposalPageComments'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import colors from '~/utils/colors'
+import type { ProposalPageDiscussions_proposal } from '~relay/ProposalPageDiscussions_proposal.graphql'
 import {
   Card,
   CategoryContainer,
   CategoryCircledIcon,
   CategoryTitle,
-} from '~/components/Proposal/Page/ProposalPage.style';
+} from '~/components/Proposal/Page/ProposalPage.style'
 
 type Props = {
-  proposal: ProposalPageDiscussions_proposal | null | undefined,
-};
+  proposal: ProposalPageDiscussions_proposal | null | undefined
+}
 export const ProposalPageDiscussions = ({ proposal }: Props) => {
-  if (proposal?.publicationStatus === 'DRAFT' || !proposal?.form.commentable) return null;
+  if (proposal?.publicationStatus === 'DRAFT' || !proposal?.form.commentable) return null
   return (
     <Card>
       <CategoryContainer>
@@ -33,8 +33,8 @@ export const ProposalPageDiscussions = ({ proposal }: Props) => {
         )}
       </CategoryContainer>
     </Card>
-  );
-};
+  )
+}
 export default createFragmentContainer(ProposalPageDiscussions, {
   proposal: graphql`
     fragment ProposalPageDiscussions_proposal on Proposal {
@@ -47,4 +47,4 @@ export default createFragmentContainer(ProposalPageDiscussions, {
       ...ProposalPageComments_proposal
     }
   `,
-});
+})

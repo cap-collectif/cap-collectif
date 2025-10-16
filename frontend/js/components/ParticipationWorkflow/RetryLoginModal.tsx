@@ -11,14 +11,13 @@ type Props = {
   email: string
   clearPassword: () => void
   onClose: () => void
-};
+}
 
 const RetryLoginModal: React.FC<Props> = ({ show, email, clearPassword, onClose }) => {
   const intl = useIntl()
   const sendMagicLinkEmailMutation = useSendMagicLinkEmailMutation()
-  const { setCurrentStep } = useMultiStepModal();
-  const goToMagicLinkForm = () => setCurrentStep(MAGIC_LINK_FORM_INDEX);
-
+  const { setCurrentStep } = useMultiStepModal()
+  const goToMagicLinkForm = () => setCurrentStep(MAGIC_LINK_FORM_INDEX)
 
   const tryAgain = () => {
     clearPassword()
@@ -27,19 +26,11 @@ const RetryLoginModal: React.FC<Props> = ({ show, email, clearPassword, onClose 
 
   return (
     <>
-      <Modal
-        size={CapUIModalSize.Xl}
-        ariaLabel="close modal"
-        show={show}
-        onClose={onClose}
-        maxHeight="initial"
-      >
+      <Modal size={CapUIModalSize.Xl} ariaLabel="close modal" show={show} onClose={onClose} maxHeight="initial">
         <>
           <ResetCss>
             <Modal.Header>
-              <Heading fontWeight={600}>
-                {intl.formatMessage({ id: 'impossible-to-login' })}
-              </Heading>
+              <Heading fontWeight={600}>{intl.formatMessage({ id: 'impossible-to-login' })}</Heading>
             </Modal.Header>
           </ResetCss>
           <Modal.Body>
@@ -47,22 +38,29 @@ const RetryLoginModal: React.FC<Props> = ({ show, email, clearPassword, onClose 
           </Modal.Body>
           <Modal.Footer>
             <Flex direction="column" width="100%">
-              <ForgotPassword email={email} onSuccess={() => {
-                toast({
-                  variant: 'success',
-                  content: intl.formatMessage({ id: 'reinit-password-email-sent' })
-                })
-                onClose()
-              }}>
-                {
-                  ({ sendForgotPasswordEmail, isLoading }) =>
-                    <Button mb={4} variantSize="big" onClick={sendForgotPasswordEmail} isLoading={isLoading}>
-                      {intl.formatMessage({ id: 'global.forgot_password' })}
-                    </Button>
-                }
+              <ForgotPassword
+                email={email}
+                onSuccess={() => {
+                  toast({
+                    variant: 'success',
+                    content: intl.formatMessage({ id: 'reinit-password-email-sent' }),
+                  })
+                  onClose()
+                }}
+              >
+                {({ sendForgotPasswordEmail, isLoading }) => (
+                  <Button mb={4} variantSize="big" onClick={sendForgotPasswordEmail} isLoading={isLoading}>
+                    {intl.formatMessage({ id: 'global.forgot_password' })}
+                  </Button>
+                )}
               </ForgotPassword>
-              <Button mb={4} variantSize="big" variant="secondary" isLoading={sendMagicLinkEmailMutation.isLoading}
-                      onClick={goToMagicLinkForm}>
+              <Button
+                mb={4}
+                variantSize="big"
+                variant="secondary"
+                isLoading={sendMagicLinkEmailMutation.isLoading}
+                onClick={goToMagicLinkForm}
+              >
                 {intl.formatMessage({ id: 'get-connection-link' })}
               </Button>
               <Button mb={4} variantSize="big" variant="tertiary" onClick={tryAgain}>

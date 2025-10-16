@@ -9,17 +9,16 @@ import { useSendParticipantEmailWorkflowMutation } from '~/mutations/SendPartici
 import { useFormContext } from 'react-hook-form'
 import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
 
-
-export const PARTICIPANT_CAPTCHA_INDEX = 1;
+export const PARTICIPANT_CAPTCHA_INDEX = 1
 
 const EmailParticipantCaptcha: React.FC = () => {
-  const {setCurrentStep} = useMultiStepModal();
-  const intl = useIntl();
+  const { setCurrentStep } = useMultiStepModal()
+  const intl = useIntl()
   const { requirementsUrl } = useParticipationWorkflow()
-  const sendParticipantEmailWorkflowMutation = useSendParticipantEmailWorkflowMutation();
-  const goToParticipantCheckEmail = () => setCurrentStep(PARTICIPANT_CHECK_EMAIL_INDEX);
+  const sendParticipantEmailWorkflowMutation = useSendParticipantEmailWorkflowMutation()
+  const goToParticipantCheckEmail = () => setCurrentStep(PARTICIPANT_CHECK_EMAIL_INDEX)
 
-  const {watch} = useFormContext();
+  const { watch } = useFormContext()
 
   const email = watch('email')
 
@@ -28,8 +27,8 @@ const EmailParticipantCaptcha: React.FC = () => {
       email,
       participantToken: CookieMonster.getParticipantCookie(),
       redirectUrl: requirementsUrl,
-      emailType: 'PARTICIPANT_CONFIRMATION_EMAIL'
-    } as const;
+      emailType: 'PARTICIPANT_CONFIRMATION_EMAIL',
+    } as const
 
     sendParticipantEmailWorkflowMutation.commit({
       variables: {
@@ -37,11 +36,11 @@ const EmailParticipantCaptcha: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
-          return mutationErrorToast(intl);
+          return mutationErrorToast(intl)
         }
 
-        const errorCode = response.sendParticipantEmailWorkflow?.errorCode;
-        const redirectUrl = response.sendParticipantEmailWorkflow?.redirectUrl;
+        const errorCode = response.sendParticipantEmailWorkflow?.errorCode
+        const redirectUrl = response.sendParticipantEmailWorkflow?.redirectUrl
 
         if (errorCode === 'EMAIL_RECENTLY_SENT') {
           toast({
@@ -49,29 +48,27 @@ const EmailParticipantCaptcha: React.FC = () => {
             content: intl.formatMessage({
               id: 'participant-email-verification-retry-limit-error',
             }),
-          });
-          return;
+          })
+          return
         }
 
         // this is only for testing purpose, so we bypass email checking and redirect to the email link
         if (redirectUrl) {
-          window.location.href = redirectUrl;
-          return;
+          window.location.href = redirectUrl
+          return
         }
 
-        goToParticipantCheckEmail();
+        goToParticipantCheckEmail()
       },
       onError: () => {
-        return mutationErrorToast(intl);
+        return mutationErrorToast(intl)
       },
-    });
-  };
+    })
+  }
 
   return (
     <>
-      <CaptchaModal
-        onCaptchaSuccess={onSuccess}
-      >
+      <CaptchaModal onCaptchaSuccess={onSuccess}>
         {sendParticipantEmailWorkflowMutation.isLoading && (
           <Flex width="100%" justifyContent="center">
             <Spinner size={CapUIIconSize.Lg} />
@@ -79,7 +76,6 @@ const EmailParticipantCaptcha: React.FC = () => {
         )}
       </CaptchaModal>
     </>
-
   )
 }
 

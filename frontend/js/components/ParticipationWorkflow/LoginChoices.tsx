@@ -11,31 +11,27 @@ import LoginChoicesSVG from '~/components/ParticipationWorkflow/assets/LoginChoi
 
 type Props = {
   selected: 'ACCOUNT_LOGIN_FORM' | 'ACCOUNT_LOGIN_FRANCE_CONNECT_FORM' | 'ACCOUNT_LOGIN_SSO_FORM'
-};
-
-
-
+}
 
 const Button = ({ onClick, children }) => {
   return (
-    <Box border="none" backgroundColor="inherit" as="button" type="button" onClick={onClick}>{children}</Box>
+    <Box border="none" backgroundColor="inherit" as="button" type="button" onClick={onClick}>
+      {children}
+    </Box>
   )
 }
 
-
-const LoginChoices: React.FC<Props> = ({
-                                         selected,
-                                       }) => {
-  const {setCurrentStep} = useMultiStepModal()
+const LoginChoices: React.FC<Props> = ({ selected }) => {
+  const { setCurrentStep } = useMultiStepModal()
   const isFCEnabled = useFeatureFlag('login_franceconnect')
   const isFacebookEnabled = useFeatureFlag('login_facebook')
-  const isCasEnabled = useFeatureFlag('login_cas');
-  const isLoginSamlEnabled = useFeatureFlag('login_saml');
+  const isCasEnabled = useFeatureFlag('login_cas')
+  const isLoginSamlEnabled = useFeatureFlag('login_saml')
   const { requirementsUrl } = useParticipationWorkflow()
 
-
-  let ssoList = useSelector((state) => state.default.ssoList)
-    .filter(sso => ['franceconnect', 'facebook'].includes(sso.ssoType) === false)
+  let ssoList = useSelector(state => state.default.ssoList).filter(
+    sso => ['franceconnect', 'facebook'].includes(sso.ssoType) === false,
+  )
 
   if (isCasEnabled) {
     ssoList = [...ssoList, { ssoType: 'cas', name: 'cas' }]
@@ -55,9 +51,9 @@ const LoginChoices: React.FC<Props> = ({
   const onSSOClick = () => {
     if (ssoList.length > 1) {
       setCurrentStep(ACCOUNT_LOGIN_SSO_FORM_INDEX)
-      return;
+      return
     }
-    const type = ssoList[0].ssoType;
+    const type = ssoList[0].ssoType
     const redirectUri = requirementsUrl
     const destinationUri = requirementsUrl
     window.location.href = getButtonLinkForType(type, redirectUri, destinationUri) ?? redirectUri
@@ -66,29 +62,26 @@ const LoginChoices: React.FC<Props> = ({
   return (
     <>
       <Flex justifyContent="center" spacing={4} my={4}>
-        <Button onClick={onEmailClick}><LoginChoicesSVG name="EMAIL" selected={selected === 'ACCOUNT_LOGIN_FORM'}/></Button>
-        {
-          isFCEnabled && (
-            <Button onClick={onFranceConnectClick}>
-              <LoginChoicesSVG name="FRANCE_CONNECT" selected={selected === 'ACCOUNT_LOGIN_FRANCE_CONNECT_FORM'}/>
-            </Button>
-          )
-        }
-        {
-          ssoList.length > 0 && (
-            <Button onClick={onSSOClick}><LoginChoicesSVG name="SSO" selected={selected === 'ACCOUNT_LOGIN_SSO_FORM'}/></Button>
-          )
-        }
-        {
-          isFacebookEnabled && (
-            <Button onClick={onFacebookClick}>
-              <LoginChoicesSVG name="FACEBOOK" selected={false}/>
-            </Button>
-          )
-        }
+        <Button onClick={onEmailClick}>
+          <LoginChoicesSVG name="EMAIL" selected={selected === 'ACCOUNT_LOGIN_FORM'} />
+        </Button>
+        {isFCEnabled && (
+          <Button onClick={onFranceConnectClick}>
+            <LoginChoicesSVG name="FRANCE_CONNECT" selected={selected === 'ACCOUNT_LOGIN_FRANCE_CONNECT_FORM'} />
+          </Button>
+        )}
+        {ssoList.length > 0 && (
+          <Button onClick={onSSOClick}>
+            <LoginChoicesSVG name="SSO" selected={selected === 'ACCOUNT_LOGIN_SSO_FORM'} />
+          </Button>
+        )}
+        {isFacebookEnabled && (
+          <Button onClick={onFacebookClick}>
+            <LoginChoicesSVG name="FACEBOOK" selected={false} />
+          </Button>
+        )}
       </Flex>
     </>
-
   )
 }
 

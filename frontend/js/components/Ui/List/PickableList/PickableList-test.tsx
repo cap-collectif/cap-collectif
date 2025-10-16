@@ -41,7 +41,6 @@ describe('<PickableList />', () => {
             ))}
           </PickableList.Body>
         </PickableList>
-        );
       </PickableList.Provider>,
     )
     expect(wrapper.render()).toMatchSnapshot()
@@ -77,7 +76,6 @@ describe('<PickableList />', () => {
             ))}
           </PickableList.Body>
         </PickableList>
-        );
       </PickableList.Provider>,
     )
     expect(wrapper.render()).toMatchSnapshot()

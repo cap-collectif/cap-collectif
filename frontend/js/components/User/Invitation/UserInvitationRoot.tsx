@@ -59,7 +59,7 @@ const UserInvitationRootPage = ({
   hasEnabledSSO,
   isRegistrationAllowed,
 }: Props) => {
-  const intl = useIntl();
+  const intl = useIntl()
   const colors = useFragment(COLORS_FRAGMENT, colorsFragmentRef)
   const logo = useFragment(LOGO_FRAGMENT, logoFragmentRef)
   const query = useFragment(QUERY_FRAGMENT, queryFragmentRef)

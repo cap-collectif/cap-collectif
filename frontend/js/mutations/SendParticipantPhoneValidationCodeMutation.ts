@@ -1,22 +1,20 @@
 // @ts-nocheck
-import { graphql, useMutation } from 'react-relay';
-import type { SendParticipantPhoneValidationCodeMutation } from '~relay/SendParticipantPhoneValidationCodeMutation.graphql';
+import { graphql, useMutation } from 'react-relay'
+import type { SendParticipantPhoneValidationCodeMutation } from '~relay/SendParticipantPhoneValidationCodeMutation.graphql'
 
 const mutation = graphql`
-    mutation SendParticipantPhoneValidationCodeMutation(
-        $input: SendParticipantPhoneValidationCodeInput!
-    ) {
-        sendParticipantPhoneValidationCode(input: $input) {
-            errorCode
-        }
+  mutation SendParticipantPhoneValidationCodeMutation($input: SendParticipantPhoneValidationCodeInput!) {
+    sendParticipantPhoneValidationCode(input: $input) {
+      errorCode
     }
-`;
+  }
+`
 
 export const useSendParticipantPhoneValidationCodeMutation = () => {
-    const [commit, isLoading] = useMutation<SendParticipantPhoneValidationCodeMutation>(mutation);
+  const [commit, isLoading] = useMutation<SendParticipantPhoneValidationCodeMutation>(mutation)
 
-    return {
-        commit,
-        isLoading
-    }
-};
+  return {
+    commit,
+    isLoading,
+  }
+}

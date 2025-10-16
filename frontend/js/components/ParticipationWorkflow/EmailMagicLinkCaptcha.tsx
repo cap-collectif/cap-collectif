@@ -9,18 +9,16 @@ import { useFormContext } from 'react-hook-form'
 import { MAGIC_LINK_CHECK_EMAIL_INDEX } from '~/components/ParticipationWorkflow/EmailMagicLinkCheckEmail'
 import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
 
-
-export const MAGIC_LINK_CAPTCHA_INDEX = 7;
+export const MAGIC_LINK_CAPTCHA_INDEX = 7
 
 const EmailMagicLinkCaptcha: React.FC = () => {
-
-  const {setCurrentStep} = useMultiStepModal();
-  const intl = useIntl();
+  const { setCurrentStep } = useMultiStepModal()
+  const intl = useIntl()
   const { requirementsUrl } = useParticipationWorkflow()
-  const sendParticipantEmailWorkflowMutation = useSendParticipantEmailWorkflowMutation();
-  const goToMagicLinkCheckEmail = () => setCurrentStep(MAGIC_LINK_CHECK_EMAIL_INDEX);
+  const sendParticipantEmailWorkflowMutation = useSendParticipantEmailWorkflowMutation()
+  const goToMagicLinkCheckEmail = () => setCurrentStep(MAGIC_LINK_CHECK_EMAIL_INDEX)
 
-  const {watch} = useFormContext();
+  const { watch } = useFormContext()
 
   const email = watch('email')
 
@@ -29,8 +27,8 @@ const EmailMagicLinkCaptcha: React.FC = () => {
       email,
       participantToken: CookieMonster.getParticipantCookie(),
       redirectUrl: requirementsUrl,
-      emailType: 'MAGIC_LINK'
-    } as const;
+      emailType: 'MAGIC_LINK',
+    } as const
 
     sendParticipantEmailWorkflowMutation.commit({
       variables: {
@@ -38,11 +36,11 @@ const EmailMagicLinkCaptcha: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
-          return mutationErrorToast(intl);
+          return mutationErrorToast(intl)
         }
 
-        const errorCode = response.sendParticipantEmailWorkflow?.errorCode;
-        const magicLinkUrl = response.sendParticipantEmailWorkflow?.redirectUrl;
+        const errorCode = response.sendParticipantEmailWorkflow?.errorCode
+        const magicLinkUrl = response.sendParticipantEmailWorkflow?.redirectUrl
 
         if (errorCode === 'EMAIL_RECENTLY_SENT') {
           toast({
@@ -50,31 +48,25 @@ const EmailMagicLinkCaptcha: React.FC = () => {
             content: intl.formatMessage({
               id: 'participant-email-verification-retry-limit-error',
             }),
-          });
-          return;
+          })
+          return
         }
 
         // this is only for testing purpose, so we bypass email checking and redirect to the email link
         if (magicLinkUrl) {
-          window.location.href = magicLinkUrl;
-          return;
+          window.location.href = magicLinkUrl
+          return
         }
 
-        goToMagicLinkCheckEmail();
+        goToMagicLinkCheckEmail()
       },
       onError: () => {
-        return mutationErrorToast(intl);
+        return mutationErrorToast(intl)
       },
-    });
+    })
+  }
 
-  };
-
-
-  return (
-    <CaptchaModal
-      onCaptchaSuccess={onSuccess}
-    />
-  )
+  return <CaptchaModal onCaptchaSuccess={onSuccess} />
 }
 
 export default EmailMagicLinkCaptcha

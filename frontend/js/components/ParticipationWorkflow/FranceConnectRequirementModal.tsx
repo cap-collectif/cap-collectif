@@ -10,7 +10,7 @@ import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLay
 type Props = {
   children?: React.ReactNode
   hideGoBackArrow?: boolean
-};
+}
 
 export const ACCOUNT_FRANCE_CONNECT_INDEX = 4
 
@@ -24,28 +24,34 @@ const FranceConnectRequirementModal: React.FC<Props> = ({ children, hideGoBackAr
   return (
     <>
       <ModalLayout
-        header={hideGoBackArrow ? ({ intl, onClose, goBackCallback, logo, isMobile }) => (
-          <HideBackArrowLayout intl={intl} onClose={onClose} goBackCallback={goBackCallback} logo={logo}
-                               isMobile={isMobile} />
-        ) : null}
+        header={
+          hideGoBackArrow
+            ? ({ intl, onClose, goBackCallback, logo, isMobile }) => (
+                <HideBackArrowLayout
+                  intl={intl}
+                  onClose={onClose}
+                  goBackCallback={goBackCallback}
+                  logo={logo}
+                  isMobile={isMobile}
+                />
+              )
+            : null
+        }
         title={intl.formatMessage({ id: 'please-authenticate-with-france-connect' })}
-        onClose={() => {
-        }}
+        onClose={() => {}}
         onBack={goToParticipantForm}
       >
         <LoginSocialButton type="franceConnect" customRedirectUri={requirementsUrl} noHR={true} />
-        {
-          children && (
-            <>
-              <Flex alignItems="center" width="100%" mt={4}>
-                <Box borderTop="1px solid black" mr={4} width="50%" borderTopColor="neutral-gray.500" />
-                <Text>{intl.formatMessage({ id: 'global.or' })}</Text>
-                <Box borderTop="1px solid black" ml={4} width="50%" borderTopColor="neutral-gray.500" />
-              </Flex>
-              {children}
-            </>
-          )
-        }
+        {children && (
+          <>
+            <Flex alignItems="center" width="100%" mt={4}>
+              <Box borderTop="1px solid black" mr={4} width="50%" borderTopColor="neutral-gray.500" />
+              <Text>{intl.formatMessage({ id: 'global.or' })}</Text>
+              <Box borderTop="1px solid black" ml={4} width="50%" borderTopColor="neutral-gray.500" />
+            </Flex>
+            {children}
+          </>
+        )}
       </ModalLayout>
     </>
   )
