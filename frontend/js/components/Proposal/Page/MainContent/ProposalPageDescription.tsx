@@ -1,7 +1,7 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Box, Heading, Skeleton } from '@cap-collectif/ui';
+import { Box, Skeleton } from '@cap-collectif/ui';
 import WYSIWYGRender from '@shared/form/WYSIWYGRender';
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon';
 import colors from '~/utils/colors';
@@ -12,7 +12,6 @@ import {
   CategoryCircledIcon,
   CategoryTitle,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import truncateHtml from 'html-truncate';
 
 type Props = {
   proposal: ProposalPageDescription_proposal | null | undefined,

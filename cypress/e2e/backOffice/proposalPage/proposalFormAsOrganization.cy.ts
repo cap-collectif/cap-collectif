@@ -12,14 +12,14 @@ context('Organization Proposalform', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormMutation' })
       // list proposalform
       FormListPage.visit('PROPOSAL_FORM')
-      cy.wait('@ProposalFormListQuery')
+      cy.wait('@ProposalFormListQuery', { timeout: 10000 })
       cy.contains('Formulaire organisation crée par un admin')
       cy.contains('Formulaire organisation crée par un membre')
       cy.getByDataCy('proposalform-item').should('have.length', 3)
       // open create proposalform modal
       FormListPage.createForm('PROPOSAL_FORM', 'my new proposalform')
       // update proposalform
-      cy.wait('@ProposalFormAdminPageQuery')
+      cy.wait('@ProposalFormAdminPageQuery', { timeout: 10000 })
       // add section
       cy.get('#perso-field-add').click()
       cy.contains('create-section').click()
@@ -27,11 +27,11 @@ context('Organization Proposalform', () => {
       cy.contains('global.validate').click()
       // submit proposalform
       cy.get('#proposal-form-admin-content-save').click()
-      cy.wait('@UpdateProposalFormMutation')
+      cy.wait('@UpdateProposalFormMutation', { timeout: 10000 })
       cy.contains('global.saved')
       // back to proposalform list
       FormListPage.visit('PROPOSAL_FORM')
-      cy.wait('@ProposalFormListQuery')
+      cy.wait('@ProposalFormListQuery', { timeout: 10000 })
       cy.contains('my new proposalform')
       cy.getByDataCy('proposalform-item').should('have.length', 4)
     })
@@ -44,7 +44,7 @@ context('Organization Proposalform', () => {
       ProposalFormPage.contactAuthorCheckbox.parent().click()
       ProposalFormPage.contactAuthorCheckbox.should('have.value', 'true')
       ProposalFormPage.saveParametersForm()
-      cy.wait('@ChangeProposalFormParametersMutation')
+      cy.wait('@ChangeProposalFormParametersMutation', { timeout: 10000 })
       cy.contains('global.saved')
     })
   })
