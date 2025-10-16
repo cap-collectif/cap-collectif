@@ -33,14 +33,6 @@ trait AdminGeneralTait
     }
 
     /**
-     * @When I go to the admin sources list page
-     */
-    public function iGoToTheAdminSourcesListPage()
-    {
-        $this->iVisitedPage('AdminSourcesListPage');
-    }
-
-    /**
      * @When I go to the admin opinion version list page
      */
     public function iGoToTheAdminOpinionVersionListPage()
