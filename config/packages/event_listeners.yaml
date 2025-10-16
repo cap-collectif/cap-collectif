@@ -127,11 +127,10 @@ services:
 
     Capco\AppBundle\EventListener\TranslatableEventSubscriber:
         arguments:
-            $translationFetchMode: 'EAGER'
-            $translatableFetchMode: 'EAGER'
+            $translationFetchMode: 'LAZY'
+            $translatableFetchMode: 'LAZY'
         tags:
             - { name: doctrine.event_subscriber }
-
 
     Capco\AppBundle\EventListener\ParticipationWorkflowSubscriber:
         autowire: true
