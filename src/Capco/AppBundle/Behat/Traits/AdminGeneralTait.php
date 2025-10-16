@@ -17,14 +17,6 @@ trait AdminGeneralTait
     }
 
     /**
-     * @When I go to the admin argument list page
-     */
-    public function iGoToTheAdminArgumentListPage()
-    {
-        $this->iVisitedPage('AdminContributionArgumentPage');
-    }
-
-    /**
      * @When I go to the admin blog post list page
      */
     public function iGoToTheAdminBlogPostListPage()
