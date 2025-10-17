@@ -6,6 +6,7 @@ use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
 use Psr\Log\LoggerInterface;
@@ -26,11 +27,16 @@ class DefaultController extends AbstractController
     {
         $user = $this->getUser();
 
+        if (!$user instanceof User) {
+            return $this->json([
+                'success' => false,
+            ]);
+        }
+
         if (!$user->isEmailConfirmed()) {
-            if ($request->getSession()) {
-                $request->getSession()->invalidate();
-            }
-            $tokenStorage->setToken(null);
+            $request->getSession()->invalidate();
+
+            $tokenStorage->setToken();
 
             if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
                 $logger->warning('Email already sent less than a minute ago.');
@@ -41,12 +47,6 @@ class DefaultController extends AbstractController
             return $this->json([
                 'success' => false,
                 'reason' => 'please-confirm-your-email-address-to-login',
-            ]);
-        }
-
-        if (!$user) {
-            return $this->json([
-                'success' => false,
             ]);
         }
 
