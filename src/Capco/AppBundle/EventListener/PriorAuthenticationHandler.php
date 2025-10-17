@@ -30,13 +30,11 @@ class PriorAuthenticationHandler
             if ($this->toggleManager->isActive('restrict_connection')) {
                 $data = json_decode($request->getContent(), true);
 
-                $email = $data['username'] ?? null;
+                $email = $data['username'];
                 if (!$email) {
                     $event->setResponse(
                         new JsonResponse(['reason' => 'Username must be provided.'], 401)
                     );
-
-                    return;
                 }
 
                 $ip = RequestGuesser::getClientIpFromRequest($request);
