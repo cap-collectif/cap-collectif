@@ -39,7 +39,7 @@ import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdatePro
 import ProposalStepStatuses from '@components/BackOffice/Steps/ProposalStep/ProposalStepStatuses'
 import PublicationInput from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { TabsVoteType } from '../SelectStep/SelectStepForm.utils'
-import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 export interface CollectStepFormProps {
   stepId: string

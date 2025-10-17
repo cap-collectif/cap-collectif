@@ -30,7 +30,7 @@ import { onBack } from '@components/BackOffice/Steps/utils'
 import { useDebateStep } from './DebateStepContext'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
-import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string

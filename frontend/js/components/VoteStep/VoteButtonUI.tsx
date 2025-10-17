@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { Box, CapUIFontSize, CapUIFontWeight, Flex, Text, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIFontWeight, Flex, Text, Tooltip, VoteButton as DSVoteButton } from '@cap-collectif/ui'
 import { useSelector } from 'react-redux'
 import type { GlobalState } from '~/types'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
-import { VoteButton as DSVoteButton } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 
 type Props = {

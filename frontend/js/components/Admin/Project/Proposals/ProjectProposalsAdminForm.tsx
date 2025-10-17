@@ -25,8 +25,6 @@ const ActivityInformationIcon = styled(props => <InformationIcon {...props} />)`
 `
 
 export const ProjectProposalsAdminForm = ({ intl }: Props) => {
-  console.log('ok', InformationIcon)
-
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">

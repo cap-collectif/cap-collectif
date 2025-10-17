@@ -406,15 +406,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                         </>
                       )}
 
-                      <FormControl
-                        name="newCategoryImage"
-                        control={control}
-                        width="100%"
-                        sx={{
-                          '.cap-uploader': { width: '100%', minWidth: 'unset' },
-                          '.cap-uploader > div ': { width: '100%' },
-                        }}
-                      >
+                      <FormControl name="newCategoryImage" control={control} width="100%">
                         <FormLabel
                           label={intl.formatMessage({
                             id: 'illustration',

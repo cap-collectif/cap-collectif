@@ -25,7 +25,7 @@ import { useOtherStep } from './OtherStepContext'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
-import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string

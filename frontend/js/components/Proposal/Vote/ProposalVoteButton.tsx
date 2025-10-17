@@ -12,7 +12,17 @@ import type {
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '../../../mutations/RemoveProposalSmsVoteMutation'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import { CapUIModalSize, Modal, toast } from '@cap-collectif/ui'
+import {
+  CapUIModalSize,
+  Modal,
+  toast,
+  Popover,
+  Button,
+  Flex,
+  Text,
+  CapUIFontWeight,
+  VoteButton as DSVoteButton,
+} from '@cap-collectif/ui'
 import type { ProposalVoteButton_step$key, ProposalVoteButton_step$data } from '~relay/ProposalVoteButton_step.graphql'
 // TODO @Mo remake this file with @cap-collectif/ui to replace tooltip that already doesn't work
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -22,7 +32,6 @@ import { VoteStepEvent, dispatchEvent } from '~/components/VoteStep/utils'
 import VoteButtonUI from '~/components/VoteStep/VoteButtonUI'
 import { State } from '~/types'
 import AddProposalVoteMutation from '~/mutations/AddProposalVoteMutation'
-import { Popover, Button, Flex, Text, CapUIFontWeight, VoteButton as DSVoteButton } from '@cap-collectif/ui'
 import Captcha from '~/components/Form/Captcha'
 import useIsMobile from '@shared/hooks/useIsMobile'
 

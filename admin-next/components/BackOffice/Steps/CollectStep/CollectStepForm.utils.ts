@@ -13,7 +13,7 @@ import { formatQuestions, formatQuestionsInput, mergeQuestionsAndJumpsBeforeSubm
 import { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { getVoteParameterInput, voteTypeForTabs } from '../utils'
 import { ProposalSort, StepStatusInput } from '@relay/UpdateCollectStepMutation.graphql'
-import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 export const getInitialValues = (
   step: CollectStepFormQuery$data['step'],

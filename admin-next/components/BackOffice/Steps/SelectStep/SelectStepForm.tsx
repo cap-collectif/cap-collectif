@@ -44,7 +44,7 @@ import ProposalStepStatuses, {
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { getVoteParameterInput } from '../utils'
-import { LogActionTypeEnum } from '@components/Steps/Shared/Enum/LogActionTypeEnum'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 export interface SelectStepFormProps {
   stepId: string

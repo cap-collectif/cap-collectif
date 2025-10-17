@@ -21,7 +21,7 @@ describe('Displays or not the page based on the viewer', () => {
   it('visits groups list when logged in as admin', () => {
     cy.directLoginAs('admin')
     AdminGroupsPage.visitGroupsList()
-    cy.get('.cap-table__tbody .cap-table__tr').should('have.length', 8)
+    cy.checkTableLength(8)
     cy.get('.cap-table__tbody .cap-table__tr')
       .eq(1)
       .within(() => {
@@ -45,7 +45,7 @@ describe('Displays or not the page based on the viewer', () => {
     cy.directLoginAs('admin')
     AdminGroupsPage.visitGroupsList()
     cy.get('div.cap-search').click({ force: true }).type('Agent')
-    cy.get('.cap-table__tbody .cap-table__tr').should('have.length', 1)
+    cy.checkTableLength(1)
     AdminGroupsPage.getRowCellByColumnIndex(0).should('contain', 'Agent de la ville')
   })
 })

@@ -131,8 +131,6 @@ export const ModalDebateOpinion: React.FC<Props> = ({ onClose, type, opinion: op
 
   const isCreating = !opinion
 
-  console.log(opinion)
-
   const defaultValues: FormValues = {
     title: opinion?.title ?? '',
     body: opinion?.body ?? '',

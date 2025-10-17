@@ -9,7 +9,7 @@ describe('Create a new group and add members to it', () => {
   it('creates a group', () => {
     cy.interceptGraphQLOperation({ operationName: 'CreateGroupMutation' })
     AdminGroupsPage.visitGroupsList()
-    cy.get('.cap-table__tbody .cap-table__tr').should('have.length', 8)
+    cy.checkTableLength(8)
     AdminGroupsPage.getOpenCreateGroupModalButton().click()
     cy.wait(300) // modal appearance animation time
     AdminGroupsPage.findModal().should('exist').and('be.visible').and('contain', 'information')
@@ -37,7 +37,7 @@ describe('Create a new group and add members to it', () => {
         AdminGroupsPage.getRowCellByColumnIndex(1).should('contain', 'Meufs fan de PHP')
         AdminGroupsPage.getRowCellByColumnIndex(2).should('contain', '2')
       })
-    cy.get('.cap-table__tbody .cap-table__tr').should('have.length', 9)
+    cy.checkTableLength(9)
     AdminGroupsPage.findModal().should('not.exist')
   })
 })

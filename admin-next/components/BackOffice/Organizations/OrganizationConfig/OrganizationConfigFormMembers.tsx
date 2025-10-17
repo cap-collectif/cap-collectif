@@ -88,7 +88,6 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
   const intl = useIntl()
   const organization = useFragment(FRAGMENT, orgRef)
   const membersList = getMemberList(organization)
-  console.log(membersList)
 
   const organizationRoles = [
     {
