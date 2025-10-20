@@ -71,7 +71,6 @@ app/test.db-journal
 /report/
 mails.txt
 dump.txt
-/jest
 /features/graphql-api/reports/junit/*
 
 

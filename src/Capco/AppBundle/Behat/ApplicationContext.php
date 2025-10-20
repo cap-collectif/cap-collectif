@@ -16,7 +16,6 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\AdminEventTrait;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
 use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
 use Capco\AppBundle\Behat\Traits\AdminProjectTrait;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
@@ -64,7 +63,6 @@ class ApplicationContext extends UserContext
     use AdminDashboardTait;
     use AdminEventTrait;
     use AdminGeneralTait;
-    use AdminOpinionTait;
     use AdminOpinionTypeTrait;
     use AdminProjectTrait;
     use AdminSectionTrait;
