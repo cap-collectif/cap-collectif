@@ -40,7 +40,7 @@
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:process_proposals --env=prod --quiet
 
 # At minute 0 past every 12th hour.
-0 */12 * * * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
+0 0 * * * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
 
 # Remind users to confirm their account every 15 minutes.
 */15 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod
@@ -67,8 +67,8 @@
 0 0 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:archiving-proposals --env=prod
 
 # Anonymize users at midnight.
-0 0 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:send_anonymize_users_reminder_email_command --env=prod
-0 0 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:anonymize_users_automated --env=prod
+0 1 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:send_anonymize_users_reminder_email_command --env=prod
+0 2 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:anonymize_users_automated --env=prod
 
 # Check queues with too many messages
 * * * * * /usr/local/bin/rabbitmq_queues_supervision >> /tmp/rabbitmq_queues_supervision.log
