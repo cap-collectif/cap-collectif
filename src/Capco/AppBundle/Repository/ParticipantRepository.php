@@ -555,9 +555,8 @@ class ParticipantRepository extends EntityRepository
             ->getDQL()
         ;
 
-        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder = $this->createQueryBuilder('participant');
         $query = $queryBuilder->select('participant')
-            ->from('CapcoAppBundle:Participant', 'participant')
             ->where(
                 $queryBuilder->expr()->in('participant.id', $subQuery)
             )
@@ -583,9 +582,8 @@ class ParticipantRepository extends EntityRepository
             ->getDQL()
         ;
 
-        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder = $this->createQueryBuilder('participant');
         $query = $queryBuilder->select('participant')
-            ->from('CapcoAppBundle:Participant', 'participant')
             ->where(
                 $queryBuilder->expr()->in('participant.id', $subQuery)
             )

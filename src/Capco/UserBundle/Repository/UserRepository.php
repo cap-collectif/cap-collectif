@@ -1925,10 +1925,9 @@ class UserRepository extends EntityRepository
 
         $subQueryDQL = $subQuery->getDQL();
 
-        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder = $this->createQueryBuilder('user');
 
         $query = $queryBuilder->select('user')
-            ->from('CapcoUserBundle:User', 'user')
             ->where(
                 $queryBuilder->expr()->in('user.id', $subQueryDQL)
             )
@@ -2201,9 +2200,8 @@ class UserRepository extends EntityRepository
             ->getDQL()
         ;
 
-        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder = $this->createQueryBuilder('user');
         $query = $queryBuilder->select('user')
-            ->from('CapcoUserBundle:User', 'user')
             ->where(
                 $queryBuilder->expr()->in('user.id', $subQuery)
             )
