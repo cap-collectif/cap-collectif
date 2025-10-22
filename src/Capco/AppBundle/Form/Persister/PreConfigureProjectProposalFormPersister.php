@@ -43,6 +43,9 @@ class PreConfigureProjectProposalFormPersister
             );
 
             if ($notifications) {
+                if ($viewer->isOrganizationMember()) {
+                    $notifications['email'] = $viewer->getEmail();
+                }
                 $this->updateProposalFormNotificationsConfigurationMutation->__invoke(
                     new Argument([
                         'input' => [
