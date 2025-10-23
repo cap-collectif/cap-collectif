@@ -92,4 +92,7 @@ export default new (class EventFormPage {
     this.cy.selectDSSelectFirstOption()
     this.moderationComment.type(reason)
   }
+  importCsvFile(filePath: string) {
+    this.cy.get('input[type="file"]').selectFile(filePath, { force: true })
+  }
 })()

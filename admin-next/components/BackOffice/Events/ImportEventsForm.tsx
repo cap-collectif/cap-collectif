@@ -171,6 +171,7 @@ const ImportEventsForm: React.FC<ImportEventsFormProps> = ({ setData }) => {
               id: 'page-media-add--loading',
             }),
           }}
+          isFullWidth
         />
 
         {loading && (

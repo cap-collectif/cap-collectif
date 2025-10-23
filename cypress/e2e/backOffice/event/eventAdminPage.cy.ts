@@ -16,7 +16,7 @@ describe('Event Admin Page', () => {
   before(() => {
     cy.task('enable:feature', 'multilangue')
   })
-  it('Create an event', () => {
+  it('creates an event', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapper_ViewerQuery' })
     cy.interceptGraphQLOperation({ operationName: 'AddEventMutation' })
@@ -57,7 +57,23 @@ describe('Event Admin Page', () => {
     EventFormPage.maxRegistrations.invoke('val').should('eq', eventJauge.toString())
   })
 
-  it('Delete an event', () => {
+  it('imports an event from a csv file', () => {
+    cy.directLoginAs('admin')
+    cy.interceptGraphQLOperation({ operationName: 'EventListQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'AddEventsMutation' })
+    cy.visit('/admin-next/events')
+    cy.wait('@EventListQuery', { timeout: 10000 })
+    cy.get('#AdminImportEventsButton-import').click()
+    const filePath = 'fixtures/events_to_import.csv'
+    EventFormPage.importCsvFile(filePath)
+    cy.wait('@AddEventsMutation', { timeout: 10000 })
+    cy.get('#AdminImportEventsButton-submit').click()
+    cy.get('p').contains('count-events-found {"num":1}').should('exist').and('be.visible')
+    cy.get('#AdminImportEventsButton-submit').click()
+    cy.get('div .cap-toast').contains('events-successfully-imported').should('exist').and('be.visible')
+  })
+
+  it('deletes an event', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
     cy.interceptGraphQLOperation({ operationName: 'EventListQuery' })
@@ -73,7 +89,7 @@ describe('Event Admin Page', () => {
     })
     cy.wait('@EventListQuery', { timeout: 15000 })
   })
-  it('Can moderate an event as a simple admin', () => {
+  it('can moderate an event as a simple admin', () => {
     cy.directLoginAs('admin')
     cy.task('enable:feature', 'allow_users_to_propose_events')
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
@@ -95,7 +111,7 @@ describe('Event Admin Page', () => {
     EventFormPage.togglePublicationAccordion()
     EventFormPage.moderationComment.invoke('val').should('eq', eventModerationReason)
   })
-  it('Cannot edit an already moderated event as a simple admin', () => {
+  it('cannot edit an already moderated event as a simple admin', () => {
     cy.directLoginAs('admin')
     cy.task('enable:feature', 'allow_users_to_propose_events')
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
@@ -106,7 +122,7 @@ describe('Event Admin Page', () => {
     EventFormPage.approveEventRadio.should('be.disabled')
     EventFormPage.frTitle.should('be.disabled')
   })
-  it('Can edit an already moderated event as a superAdmin', () => {
+  it('can edit an already moderated event as a superAdmin', () => {
     cy.directLoginAs('super_admin')
     cy.task('enable:feature', 'allow_users_to_propose_events')
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })

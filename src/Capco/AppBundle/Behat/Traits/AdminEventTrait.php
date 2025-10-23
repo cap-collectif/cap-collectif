@@ -10,14 +10,6 @@ use PHPUnit\Framework\Assert;
 trait AdminEventTrait
 {
     /**
-     * @When I go to the admin event list page
-     */
-    public function iGoToTheAdminEventListPage()
-    {
-        $this->iVisitedPage('AdminEventListPage');
-    }
-
-    /**
      * @When I go to the admin event create page
      */
     public function iGoToTheAdminEventCreatePage()
@@ -66,22 +58,6 @@ trait AdminEventTrait
     public function iCanSeeTheJitsiReplay()
     {
         $this->iWaitElementToAppearOnPage('#jitsi-replay-container');
-    }
-
-    /**
-     * @When I open the import events modal
-     */
-    public function iOpenTheImportEventsModal()
-    {
-        $this->getCurrentPage()->clickImportButton();
-    }
-
-    /**
-     * @Then I can confirm my events import
-     */
-    public function iConfirmMyEventImportInModal()
-    {
-        $this->getCurrentPage()->submitImportModal();
     }
 
     /**

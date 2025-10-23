@@ -127,18 +127,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * @When I go to the collect step IDF
-     */
-    public function iGoToTheCollectStepIDF()
-    {
-        $this->visitPageWithParams('collect page', [
-            'projectSlug' => 'budget-participatif-idf',
-            'stepSlug' => 'collecte-des-projets-idf-privee',
-        ]);
-        $this->iWait(1);
-    }
-
-    /**
      * @When I click the show all districts stats button
      */
     public function iClickTheShowAllDistrictsStatsButton()
