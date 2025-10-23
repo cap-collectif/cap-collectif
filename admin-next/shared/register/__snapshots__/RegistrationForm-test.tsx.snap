@@ -23,7 +23,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     <input
       aria-required="true"
       autocomplete="email"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id=":r0:"
       name="email"
       placeholder="email.placeholder"
@@ -50,7 +50,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         </span>
       </label>
       <div
-        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-fXqqsB hsfhbV ieLfuE cap-input-outer"
       >
         <input
           aria-required="true"
@@ -68,7 +68,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -168,7 +168,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     <input
       aria-required="true"
       autocomplete="username"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="username"
       minlength="2"
       name="username"
@@ -208,7 +208,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     </div>
     <input
       aria-required="false"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="responses.0.value"
       name="responses.0.value"
       type="text"
@@ -279,7 +279,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     <input
       aria-required="true"
       autocomplete="email"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id=":r9:"
       name="email"
       placeholder="email.placeholder"
@@ -306,7 +306,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         </span>
       </label>
       <div
-        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-fXqqsB hsfhbV ieLfuE cap-input-outer"
       >
         <input
           aria-required="true"
@@ -324,7 +324,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -424,7 +424,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     <input
       aria-required="true"
       autocomplete="username"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="username"
       minlength="2"
       name="username"
@@ -562,7 +562,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     </div>
     <input
       aria-required="false"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="responses.0.value"
       name="responses.0.value"
       type="text"
@@ -629,7 +629,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     <input
       aria-required="true"
       autocomplete="email"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id=":rj:"
       name="email"
       placeholder="email.placeholder"
@@ -656,7 +656,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         </span>
       </label>
       <div
-        class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+        class="sc-bcXGCL sc-fXqqsB hsfhbV ieLfuE cap-input-outer"
       >
         <input
           aria-required="true"
@@ -674,7 +674,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+            class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-input-icon"
             fill="none"
             height="1em"
             viewBox="0 0 12 10"
@@ -774,7 +774,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     <input
       aria-required="true"
       autocomplete="username"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="username"
       minlength="2"
       name="username"
@@ -805,7 +805,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     </label>
     <input
       autocomplete="postal-code"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id=":rp:"
       name="zipcode"
       type="text"
@@ -842,7 +842,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     </div>
     <input
       aria-required="false"
-      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
       id="responses.0.value"
       name="responses.0.value"
       type="text"

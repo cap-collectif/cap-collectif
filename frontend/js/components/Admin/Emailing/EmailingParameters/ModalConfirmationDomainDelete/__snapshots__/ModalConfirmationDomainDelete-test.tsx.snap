@@ -10,7 +10,7 @@ Array [
     aria-describedby="id-2"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-gsGkXq Button__ButtonInner-dXfNcJ hwdTNu iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-GKYOR Button__ButtonInner-dXfNcJ jBYhZD iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -26,7 +26,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ eUrHPA dpibyo AjyOr icon"
+      className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ kWkXyx dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -78,7 +78,7 @@ Array [
     aria-describedby="id-2"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-gsGkXq Button__ButtonInner-dXfNcJ hwdTNu iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-GKYOR Button__ButtonInner-dXfNcJ jBYhZD iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -94,7 +94,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ eUrHPA dpibyo AjyOr icon"
+      className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ kWkXyx dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -132,7 +132,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-gsGkXq bqCVAp Modal__ModalContainerInner-gRvBLO"
+        className="sc-GKYOR ljXjxI Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -141,7 +141,7 @@ Array [
         }
       >
         <div
-          className="sc-gsGkXq gLkppc Modal__ModalInner-fNGFsd"
+          className="sc-GKYOR bSNbIp Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -150,52 +150,52 @@ Array [
           }
         >
           <div
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY kCymiX"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY gCA-DSO"
           >
             <div
-              className="sc-gsGkXq Flex___StyledAppBox-SiGEY eyWWks ModalHeader___StyledFlex-hKIJSk YmlkP"
+              className="sc-GKYOR Flex___StyledAppBox-SiGEY gLrGJh ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <h2
-                className="sc-gsGkXq gnRzDX"
+                className="sc-GKYOR fCiPby"
               >
                 delete-confirmation
               </h2>
             </div>
             <button
-              className="sc-gsGkXq Button__ButtonInner-dXfNcJ kSBJTF iWxcUO"
+              className="sc-GKYOR Button__ButtonInner-dXfNcJ eGMGUY iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ lipHVK dpibyo AjyOr icon"
+                className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghyYHL dpibyo AjyOr icon"
               />
             </button>
           </div>
           <main
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY gAmygc"
             role="main"
           >
             <p
-              className="sc-gsGkXq cwfoqX"
+              className="sc-GKYOR Xa-dFm"
             >
               are-you-sure-to-delete-something
             </p>
           </main>
           <footer
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY cUDVRF frpAOM"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY iTSnNw frpAOM"
           >
             <div
-              className="sc-gsGkXq Flex___StyledAppBox-SiGEY fUBAQz crLbTm"
+              className="sc-GKYOR Flex___StyledAppBox-SiGEY cALyhS crLbTm"
             >
               <button
-                className="sc-gsGkXq Button__ButtonInner-dXfNcJ hdipVx lilFYw"
+                className="sc-GKYOR Button__ButtonInner-dXfNcJ ckCtUc lilFYw"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-gsGkXq Button__ButtonInner-dXfNcJ hdipVx fjccAb"
+                className="sc-GKYOR Button__ButtonInner-dXfNcJ ckCtUc fjccAb"
                 onClick={[Function]}
                 type="button"
               >

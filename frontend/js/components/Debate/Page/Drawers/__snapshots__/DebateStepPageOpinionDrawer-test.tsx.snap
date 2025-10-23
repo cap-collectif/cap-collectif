@@ -63,7 +63,7 @@ Array [
           </p>
           <div
             aria-label="Tag "
-            className="sc-bcXGCL llAuFc cap-tag"
+            className="sc-bcXGCL ixUxLE cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             title=""
@@ -175,7 +175,7 @@ Array [
           </p>
           <div
             aria-label="Tag "
-            className="sc-bcXGCL llAuFc cap-tag"
+            className="sc-bcXGCL ixUxLE cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             title=""

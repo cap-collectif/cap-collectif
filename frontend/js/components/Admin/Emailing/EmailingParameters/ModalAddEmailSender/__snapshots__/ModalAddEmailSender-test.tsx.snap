@@ -9,7 +9,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt egpGUm"
+    className="sc-GKYOR Button__ButtonInner-dXfNcJ dJXuik egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -51,7 +51,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt egpGUm"
+    className="sc-GKYOR Button__ButtonInner-dXfNcJ dJXuik egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -80,7 +80,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-gsGkXq bqCVAp Modal__ModalContainerInner-gRvBLO"
+        className="sc-GKYOR ljXjxI Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -89,7 +89,7 @@ Array [
         }
       >
         <div
-          className="sc-gsGkXq gLkppc Modal__ModalInner-fNGFsd"
+          className="sc-GKYOR bSNbIp Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -98,38 +98,38 @@ Array [
           }
         >
           <div
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY kCymiX"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY gCA-DSO"
           >
             <div
-              className="sc-gsGkXq Flex___StyledAppBox-SiGEY eyWWks ModalHeader___StyledFlex-hKIJSk YmlkP"
+              className="sc-GKYOR Flex___StyledAppBox-SiGEY gLrGJh ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <p
-                className="sc-gsGkXq Ednlr"
+                className="sc-GKYOR khxGAC"
               >
                 notification-email
               </p>
               <h2
-                className="sc-gsGkXq gnRzDX"
+                className="sc-GKYOR fCiPby"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-gsGkXq Button__ButtonInner-dXfNcJ kSBJTF iWxcUO"
+              className="sc-GKYOR Button__ButtonInner-dXfNcJ eGMGUY iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ lipHVK dpibyo AjyOr icon"
+                className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghyYHL dpibyo AjyOr icon"
               />
             </button>
           </div>
           <main
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY fNGjVh"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY gAmygc"
             role="main"
           >
             <div
-              className="sc-gsGkXq Flex___StyledAppBox-SiGEY flIdol ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
+              className="sc-GKYOR Flex___StyledAppBox-SiGEY juPXrg ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
             >
               <div
                 className="form-group"
@@ -291,20 +291,20 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-gsGkXq Flex___StyledAppBox-SiGEY cUDVRF"
+            className="sc-GKYOR Flex___StyledAppBox-SiGEY iTSnNw"
           >
             <div
-              className="sc-gsGkXq Flex___StyledAppBox-SiGEY fUBAQz crLbTm"
+              className="sc-GKYOR Flex___StyledAppBox-SiGEY cALyhS crLbTm"
             >
               <button
-                className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt jzOsGm"
+                className="sc-GKYOR Button__ButtonInner-dXfNcJ dJXuik jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-gsGkXq Button__ButtonInner-dXfNcJ lhYhSt erDeRS"
+                className="sc-GKYOR Button__ButtonInner-dXfNcJ lmaXfw erDeRS"
                 onClick={[Function]}
                 type="button"
               >

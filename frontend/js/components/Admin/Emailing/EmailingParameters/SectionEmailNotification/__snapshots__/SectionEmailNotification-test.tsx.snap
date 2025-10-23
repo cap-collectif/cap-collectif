@@ -6,24 +6,24 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-gsGkXq Flex___StyledAppBox-SiGEY fEhiDP crLbTm"
+    className="sc-GKYOR Flex___StyledAppBox-SiGEY haiMnW crLbTm"
   >
     <div
-      className="sc-gsGkXq Flex___StyledAppBox-SiGEY OxIuS gqpUzc"
+      className="sc-GKYOR Flex___StyledAppBox-SiGEY efnTTr gqpUzc"
     >
       <p
-        className="sc-gsGkXq lmKqqJ"
+        className="sc-GKYOR NeEtE"
       >
         notification-email
       </p>
       <p
-        className="sc-gsGkXq eOPPZm"
+        className="sc-GKYOR eoIhHD"
       >
         notification-email-explanation
       </p>
     </div>
     <div
-      className="sc-gsGkXq Flex___StyledAppBox-SiGEY egMET SectionEmailNotification__FieldContainer-gFowVC exZAvD"
+      className="sc-GKYOR Flex___StyledAppBox-SiGEY cgbGri SectionEmailNotification__FieldContainer-gFowVC exZAvD"
     >
       <div
         className="form-group"
@@ -56,7 +56,7 @@ Array [
         />
       </div>
       <div
-        className="sc-gsGkXq Flex___StyledAppBox-SiGEY fUBAQz crLbTm"
+        className="sc-GKYOR Flex___StyledAppBox-SiGEY cALyhS crLbTm"
       >
         <div
           className="form-group"
@@ -229,7 +229,7 @@ Array [
         aria-controls="id-1"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-gsGkXq Button__ButtonInner-dXfNcJ kEBnKt egpGUm"
+        className="sc-GKYOR Button__ButtonInner-dXfNcJ dJXuik egpGUm"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}

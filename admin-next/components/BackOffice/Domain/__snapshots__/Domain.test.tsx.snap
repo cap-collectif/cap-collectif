@@ -52,7 +52,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required="true"
-          class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
+          class="sc-bcXGCL sc-fXqqsB egzrup hJcGTY cap-input"
           disabled=""
           id="subDomain"
           name="subDomain"
@@ -120,11 +120,11 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
             >
               <div
                 aria-label="Tag custom.domain.com"
-                class="sc-bcXGCL cPzLeP cap-tag"
+                class="sc-bcXGCL bAGBdP cap-tag"
                 title="custom.domain.com"
               >
                 <span
-                  class="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL cCwupq cap-tag__label"
                 >
                   custom.domain.com
                 </span>
@@ -224,7 +224,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required="true"
-          class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
+          class="sc-bcXGCL sc-fXqqsB egzrup hJcGTY cap-input"
           disabled=""
           id="subDomain"
           name="subDomain"
@@ -288,7 +288,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             class="sc-bcXGCL dWgVIC cap-input-group"
           >
             <input
-              class="sc-bcXGCL sc-dwnPIk egzrup euPyfY cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup hJcGTY cap-input"
               id="customDomain"
               name="customDomain"
               placeholder="custom-domain-placeholder"

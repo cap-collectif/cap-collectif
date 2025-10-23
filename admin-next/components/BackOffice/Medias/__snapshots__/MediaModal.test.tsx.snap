@@ -14,14 +14,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
       style="opacity: 0;"
     >
       <div
-        class="sc-bcXGCL dtnFPI sc-fcCDYY cOPviG cap-modal"
+        class="sc-bcXGCL dtnFPI sc-fvEvfv dVyCbT cap-modal"
         style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
-        <header
+        <div
           class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
@@ -59,7 +59,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
               />
             </svg>
           </button>
-        </header>
+        </div>
         <div
           class="sc-bcXGCL ksxgKs cap-modal__body"
         >
@@ -77,7 +77,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag 200x200px"
-              class="sc-bcXGCL bcUGUs cap-tag"
+              class="sc-bcXGCL bSlWSg cap-tag"
               style="margin-left: 0px; margin-top: 0px;"
               title="200x200px"
             >
@@ -85,14 +85,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
             </div>
             <div
               aria-label="Tag 977ko"
-              class="sc-bcXGCL bcUGUs cap-tag"
+              class="sc-bcXGCL bSlWSg cap-tag"
               title="977ko"
             >
               977ko
             </div>
             <div
               aria-label="Tag png"
-              class="sc-bcXGCL bcUGUs cap-tag"
+              class="sc-bcXGCL bSlWSg cap-tag"
               title="png"
             >
               png
@@ -102,7 +102,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             class="sc-bcXGCL iOrCWg"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy kAXCTC hRxmzr cap-button"
+              class="sc-bcXGCL sc-gGvGpy kAXCTC lloSvI cap-button"
               style="margin-left: 0px; margin-top: 0px;"
               type="button"
             >

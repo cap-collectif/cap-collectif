@@ -21,14 +21,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
       style="opacity: 0;"
     >
       <div
-        class="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
+        class="sc-bcXGCL dRDYMK sc-fvEvfv iKfoPd cap-modal"
         style="z-index: 9000; opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
-        <header
+        <div
           class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
@@ -66,7 +66,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               />
             </svg>
           </button>
-        </header>
+        </div>
         <div
           class="sc-bcXGCL eqUaSq cap-modal__body"
         >
@@ -97,7 +97,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             <input
               aria-required="true"
               autocomplete="email"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id=":r0:"
               name="email"
               placeholder="email.placeholder"
@@ -124,7 +124,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 </span>
               </label>
               <div
-                class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+                class="sc-bcXGCL sc-fXqqsB hsfhbV ieLfuE cap-input-outer"
               >
                 <input
                   aria-required="true"
@@ -142,7 +142,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+                    class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-input-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 10"
@@ -242,7 +242,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             <input
               aria-required="true"
               autocomplete="username"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id="username"
               minlength="2"
               name="username"
@@ -282,7 +282,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </div>
             <input
               aria-required="false"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id="responses.0.value"
               name="responses.0.value"
               type="text"
@@ -337,7 +337,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           class="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC iugnuM cap-button"
             style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >
@@ -370,14 +370,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
       style="opacity: 0;"
     >
       <div
-        class="sc-bcXGCL dRDYMK sc-fcCDYY ksOTIU cap-modal"
+        class="sc-bcXGCL dRDYMK sc-fvEvfv iKfoPd cap-modal"
         style="z-index: 9000; opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
-        <header
+        <div
           class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
@@ -415,7 +415,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               />
             </svg>
           </button>
-        </header>
+        </div>
         <div
           class="sc-bcXGCL eqUaSq cap-modal__body"
         >
@@ -437,7 +437,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             <input
               aria-required="true"
               autocomplete="email"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id=":r9:"
               name="email"
               placeholder="email.placeholder"
@@ -464,7 +464,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 </span>
               </label>
               <div
-                class="sc-bcXGCL sc-dwnPIk hsfhbV eCNeCU cap-input-outer"
+                class="sc-bcXGCL sc-fXqqsB hsfhbV ieLfuE cap-input-outer"
               >
                 <input
                   aria-required="true"
@@ -482,7 +482,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-input-icon"
+                    class="sc-bcXGCL sc-oZHua dXTqeC hQQZty cap-icon cap-input-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 10"
@@ -582,7 +582,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             <input
               aria-required="true"
               autocomplete="username"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id="username"
               minlength="2"
               name="username"
@@ -622,7 +622,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             </div>
             <input
               aria-required="false"
-              class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+              class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
               id="responses.0.value"
               name="responses.0.value"
               type="text"
@@ -668,7 +668,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           class="sc-bcXGCL fMWhlA cap-modal__footer"
         >
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC iCdXwD cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC iugnuM cap-button"
             style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >

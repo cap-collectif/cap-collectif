@@ -74,7 +74,7 @@ exports[`<PostList /> should render correctly 1`] = `
               aria-controls=":r1:"
               aria-expanded="false"
               aria-haspopup="menu"
-              class="sc-bcXGCL sc-gGvGpy jRvDnT haoZBz cap-button cap-menu__disclosure"
+              class="sc-bcXGCL sc-gGvGpy jRvDnT fGfsfI cap-button cap-menu__disclosure"
               id=":r0:"
               type="button"
             >

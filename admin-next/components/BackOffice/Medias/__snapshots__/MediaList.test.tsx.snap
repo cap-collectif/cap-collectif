@@ -269,7 +269,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             >
               <div
                 aria-label="Tag 200x200px"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 style="margin-left: 0px; margin-top: 0px;"
                 title="200x200px"
               >
@@ -277,14 +277,14 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               </div>
               <div
                 aria-label="Tag 39ko"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 title="39ko"
               >
                 39ko
               </div>
               <div
                 aria-label="Tag png"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 title="png"
               >
                 png
@@ -553,7 +553,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             >
               <div
                 aria-label="Tag 100x300px"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 style="margin-left: 0px; margin-top: 0px;"
                 title="100x300px"
               >
@@ -561,14 +561,14 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               </div>
               <div
                 aria-label="Tag 29ko"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 title="29ko"
               >
                 29ko
               </div>
               <div
                 aria-label="Tag png"
-                class="sc-bcXGCL bcUGUs cap-tag"
+                class="sc-bcXGCL bSlWSg cap-tag"
                 title="png"
               >
                 png

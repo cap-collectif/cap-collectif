@@ -13,15 +13,15 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL inqKcp sc-fvEvfv cap-modal__overlay"
+      class="sc-bcXGCL inqKcp sc-jRwapC cap-modal__overlay"
       style="opacity: 0;"
     >
       <div
-        class="sc-bcXGCL guZZlV sc-fcCDYY cOPviG cap-modal privacy-policy"
+        class="sc-bcXGCL guZZlV sc-fvEvfv dVyCbT cap-modal privacy-policy"
         id="privacy-modal"
         style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
-        <header
+        <div
           class="sc-bcXGCL jJSzZW cap-modal__header privacy-policy"
         >
           <div
@@ -59,7 +59,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
               />
             </svg>
           </button>
-        </header>
+        </div>
         <div
           class="sc-bcXGCL eqUaSq cap-modal__body"
         >

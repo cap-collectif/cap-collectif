@@ -41,30 +41,30 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
             class="sc-bcXGCL ghfCja"
           >
             <div
-              class="sc-bcXGCL elcAYO sc-jTjVHl"
+              class="sc-bcXGCL elcAYO sc-cZFRsw"
             />
             <div
-              class="sc-bcXGCL hCCYrL sc-jTjVHl"
-            />
-          </div>
-          <div
-            class="sc-bcXGCL ghfCja"
-          >
-            <div
-              class="sc-bcXGCL elcAYO sc-jTjVHl"
-            />
-            <div
-              class="sc-bcXGCL hCCYrL sc-jTjVHl"
+              class="sc-bcXGCL hCCYrL sc-cZFRsw"
             />
           </div>
           <div
             class="sc-bcXGCL ghfCja"
           >
             <div
-              class="sc-bcXGCL elcAYO sc-jTjVHl"
+              class="sc-bcXGCL elcAYO sc-cZFRsw"
             />
             <div
-              class="sc-bcXGCL hCCYrL sc-jTjVHl"
+              class="sc-bcXGCL hCCYrL sc-cZFRsw"
+            />
+          </div>
+          <div
+            class="sc-bcXGCL ghfCja"
+          >
+            <div
+              class="sc-bcXGCL elcAYO sc-cZFRsw"
+            />
+            <div
+              class="sc-bcXGCL hCCYrL sc-cZFRsw"
             />
           </div>
         </div>
@@ -76,12 +76,12 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag Super theme"
-              class="sc-bcXGCL gLTLnG cap-tag"
+              class="sc-bcXGCL cZqeal cap-tag"
               title="Super theme"
             >
               <svg
                 aria-hidden="true"
-                class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 10"
@@ -98,7 +98,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
                 />
               </svg>
               <span
-                class="sc-bcXGCL lnyRPA cap-tag__label"
+                class="sc-bcXGCL cCwupq cap-tag__label"
               >
                 Super theme
               </span>
@@ -109,12 +109,12 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag Le tieks"
-              class="sc-bcXGCL gLTLnG cap-tag"
+              class="sc-bcXGCL cZqeal cap-tag"
               title="Le tieks"
             >
               <svg
                 aria-hidden="true"
-                class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 9 12"
@@ -137,7 +137,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
                 />
               </svg>
               <span
-                class="sc-bcXGCL lnyRPA cap-tag__label"
+                class="sc-bcXGCL cCwupq cap-tag__label"
               >
                 Le tieks
               </span>

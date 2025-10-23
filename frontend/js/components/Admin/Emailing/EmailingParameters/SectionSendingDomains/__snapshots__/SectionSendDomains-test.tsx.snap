@@ -6,26 +6,26 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-gsGkXq Flex___StyledAppBox-SiGEY fEhiDP crLbTm"
+    className="sc-GKYOR Flex___StyledAppBox-SiGEY haiMnW crLbTm"
   >
     <div
-      className="sc-gsGkXq Flex___StyledAppBox-SiGEY OxIuS"
+      className="sc-GKYOR Flex___StyledAppBox-SiGEY efnTTr"
     >
       <div
-        className="sc-gsGkXq Flex___StyledAppBox-SiGEY feHrhQ gqpUzc"
+        className="sc-GKYOR Flex___StyledAppBox-SiGEY cXlcup gqpUzc"
       >
         <p
-          className="sc-gsGkXq lmKqqJ"
+          className="sc-GKYOR NeEtE"
         >
           authentication-sender-domains-dkim-spf
         </p>
         <p
-          className="sc-gsGkXq eOPPZm"
+          className="sc-GKYOR eoIhHD"
         >
           authentication-sender-domains-explanation
            
           <a
-            className="sc-gsGkXq Link__LinkInner-jUMeyB jQFfTS"
+            className="sc-GKYOR Link__LinkInner-jUMeyB jQFfTS"
             href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
             rel="noopener noreferrer"
             target="blank"
@@ -38,7 +38,7 @@ Array [
         aria-controls="id-1"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-gsGkXq Button__ButtonInner-dXfNcJ fwcDW cYRsYv"
+        className="sc-GKYOR Button__ButtonInner-dXfNcJ cTnFWD cYRsYv"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}
@@ -70,51 +70,51 @@ Array [
       />
     </div>
     <div
-      className="sc-gsGkXq ddgViA"
+      className="sc-GKYOR bBbfQB"
     >
       <table
-        className="sc-gsGkXq lkYCKR"
+        className="sc-GKYOR jKmzmI"
       >
         <thead
-          className="sc-gsGkXq hZLgCo"
+          className="sc-GKYOR gzfTGx"
         >
           <tr
-            className="sc-gsGkXq Tr___StyledAppBox-hsTUSR kqvrPx"
+            className="sc-GKYOR Tr___StyledAppBox-hsTUSR kqvrPx"
           >
             <th
-              className="sc-gsGkXq kBAuXw"
+              className="sc-GKYOR fWESeJ"
             >
               global.domain
             </th>
             <th
-              className="sc-gsGkXq kBAuXw"
+              className="sc-GKYOR fWESeJ"
             >
               global.service
             </th>
             <th
-              className="sc-gsGkXq kBAuXw"
+              className="sc-GKYOR fWESeJ"
             >
               global.spf
             </th>
             <th
-              className="sc-gsGkXq kBAuXw"
+              className="sc-GKYOR fWESeJ"
             >
               global.dkim
             </th>
             <th
-              className="sc-gsGkXq kBAuXw"
+              className="sc-GKYOR fWESeJ"
             />
           </tr>
         </thead>
         <tbody
-          className="sc-gsGkXq jdShEc"
+          className="sc-GKYOR hsdXqd"
         >
           <tr
-            className="sc-gsGkXq Tr___StyledAppBox-hsTUSR kqvrPx"
+            className="sc-GKYOR Tr___StyledAppBox-hsTUSR kqvrPx"
             id="sender-email-domain-1"
           >
             <td
-              className="sc-gsGkXq Td___StyledAppBox-cCcTFr eDCpMH dthgpN"
+              className="sc-GKYOR Td___StyledAppBox-cCcTFr gWUlDC dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -124,7 +124,7 @@ Array [
               test.com
             </td>
             <td
-              className="sc-gsGkXq Td___StyledAppBox-cCcTFr eDCpMH dthgpN"
+              className="sc-GKYOR Td___StyledAppBox-cCcTFr gWUlDC dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -134,7 +134,7 @@ Array [
               Mailjet
             </td>
             <td
-              className="sc-gsGkXq Td___StyledAppBox-cCcTFr eDCpMH dthgpN"
+              className="sc-GKYOR Td___StyledAppBox-cCcTFr gWUlDC dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -142,11 +142,11 @@ Array [
               }
             >
               <IconMock
-                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ edzjlh dpibyo AjyOr icon"
+                className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ cpPrwI dpibyo AjyOr icon"
               />
             </td>
             <td
-              className="sc-gsGkXq Td___StyledAppBox-cCcTFr eDCpMH dthgpN"
+              className="sc-GKYOR Td___StyledAppBox-cCcTFr gWUlDC dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -154,11 +154,11 @@ Array [
               }
             >
               <IconMock
-                className="sc-gsGkXq Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ edzjlh dpibyo AjyOr icon"
+                className="sc-GKYOR Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ cpPrwI dpibyo AjyOr icon"
               />
             </td>
             <td
-              className="sc-gsGkXq Td___StyledAppBox-cCcTFr eDCpMH dthgpN"
+              className="sc-GKYOR Td___StyledAppBox-cCcTFr gWUlDC dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",

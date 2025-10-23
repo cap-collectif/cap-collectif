@@ -54,30 +54,30 @@ exports[`<Projects /> renders correctly 1`] = `
               class="sc-bcXGCL ljlYbx"
             >
               <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
               />
               <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
-              />
-            </div>
-            <div
-              class="sc-bcXGCL ljlYbx"
-            >
-              <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
-              />
-              <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
               />
             </div>
             <div
               class="sc-bcXGCL ljlYbx"
             >
               <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
               />
               <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
+              />
+            </div>
+            <div
+              class="sc-bcXGCL ljlYbx"
+            >
+              <div
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
+              />
+              <div
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
               />
             </div>
           </div>
@@ -118,18 +118,18 @@ exports[`<Projects /> renders correctly 1`] = `
               />
               <div
                 aria-label="Tag  global-archived"
-                class="sc-bcXGCL hkjXaC cap-tag"
+                class="sc-bcXGCL hGoVde cap-tag"
                 title=" global-archived"
               >
                 <span
-                  class="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL cCwupq cap-tag__label"
                 >
                    global-archived
                 </span>
               </div>
             </div>
             <div
-              class="sc-bcXGCL kkRGEJ cap-card-content"
+              class="sc-bcXGCL iBvfcJ cap-card-content"
             >
               <div
                 class="sc-bcXGCL bIZLTw"
@@ -150,12 +150,12 @@ exports[`<Projects /> renders correctly 1`] = `
               >
                 <div
                   aria-label="Tag 0 project.votes.widget.votes"
-                  class="sc-bcXGCL gTREYS cap-tag"
+                  class="sc-bcXGCL jofWkJ cap-tag"
                   title="0 project.votes.widget.votes"
                 >
                   <svg
                     aria-hidden="true"
-                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 32 28"
@@ -189,7 +189,7 @@ exports[`<Projects /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL cCwupq cap-tag__label"
                   >
                     0
                   </span>
@@ -201,12 +201,12 @@ exports[`<Projects /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 global.contribution"
-                  class="sc-bcXGCL gTREYS cap-tag"
+                  class="sc-bcXGCL jofWkJ cap-tag"
                   title="0 global.contribution"
                 >
                   <svg
                     aria-hidden="true"
-                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 14 13"
@@ -221,7 +221,7 @@ exports[`<Projects /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL cCwupq cap-tag__label"
                   >
                     0
                   </span>
@@ -233,12 +233,12 @@ exports[`<Projects /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 capco.section.metrics.participants"
-                  class="sc-bcXGCL gTREYS cap-tag"
+                  class="sc-bcXGCL jofWkJ cap-tag"
                   title="0 capco.section.metrics.participants"
                 >
                   <svg
                     aria-hidden="true"
-                    class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                    class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 13 14"
@@ -260,7 +260,7 @@ exports[`<Projects /> renders correctly 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-bcXGCL lnyRPA cap-tag__label"
+                    class="sc-bcXGCL cCwupq cap-tag__label"
                   >
                     0
                   </span>

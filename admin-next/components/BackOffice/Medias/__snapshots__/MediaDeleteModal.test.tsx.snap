@@ -14,14 +14,14 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL embsrb sc-fvEvfv cap-modal__overlay"
+      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
       style="opacity: 0;"
     >
       <div
-        class="sc-bcXGCL guZZlV sc-fcCDYY kmYErD cap-modal"
+        class="sc-bcXGCL guZZlV sc-fvEvfv hMLcrS cap-modal"
         style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
-        <header
+        <div
           class="sc-bcXGCL jJSzZW cap-modal__header"
         >
           <div
@@ -59,7 +59,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
               />
             </svg>
           </button>
-        </header>
+        </div>
         <div
           class="sc-bcXGCL eqUaSq cap-modal__body"
         >

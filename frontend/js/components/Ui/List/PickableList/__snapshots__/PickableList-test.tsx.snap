@@ -1,175 +1,169 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PickableList /> should render correctly 1`] = `
-Array [
+<div
+  class="styles__Container-hWGhdA ljdDnp"
+>
   <div
-    class="styles__Container-hWGhdA ljdDnp"
+    class="styles__Container-dhkwHq kdXIHH pickableList-header"
+  >
+    <input
+      class="all-rows-checkbox"
+      id="allRows"
+      type="checkbox"
+    />
+    <p>
+      Items
+    </p>
+  </div>
+  <div
+    class="styles__Container-jNJENz gimbCd"
   >
     <div
-      class="styles__Container-dhkwHq kdXIHH pickableList-header"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <input
-        class="all-rows-checkbox"
-        id="allRows"
         type="checkbox"
       />
-      <p>
-        Items
-      </p>
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #1
+        </p>
+      </div>
     </div>
     <div
-      class="styles__Container-jNJENz gimbCd"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
+      <input
+        type="checkbox"
+      />
       <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
-        <input
-          type="checkbox"
-        />
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #1
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <input
-          type="checkbox"
-        />
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #2
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <input
-          type="checkbox"
-        />
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #3
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <input
-          type="checkbox"
-        />
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #4
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <input
-          type="checkbox"
-        />
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #5
-          </p>
-        </div>
+        <p>
+          Je suis un bel item #2
+        </p>
       </div>
     </div>
-  </div>,
-  ");",
-]
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <input
+        type="checkbox"
+      />
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #3
+        </p>
+      </div>
+    </div>
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <input
+        type="checkbox"
+      />
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #4
+        </p>
+      </div>
+    </div>
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <input
+        type="checkbox"
+      />
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #5
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<PickableList /> should render correctly with header and row not selectable 1`] = `
-Array [
+<div
+  class="styles__Container-hWGhdA ljdDnp"
+>
   <div
-    class="styles__Container-hWGhdA ljdDnp"
+    class="styles__Container-dhkwHq kdXIHH pickableList-header"
+  >
+    <p>
+      Items
+    </p>
+  </div>
+  <div
+    class="styles__Container-jNJENz gimbCd"
   >
     <div
-      class="styles__Container-dhkwHq kdXIHH pickableList-header"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
-      <p>
-        Items
-      </p>
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #1
+        </p>
+      </div>
     </div>
     <div
-      class="styles__Container-jNJENz gimbCd"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #1
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #2
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #3
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #4
-          </p>
-        </div>
-      </div>
-      <div
-        class="styles__Container-fmDIgl iKKqeY pickableList-row"
-      >
-        <div
-          class="styles__ChildWrapper-gACLRm pickableList-row-content"
-        >
-          <p>
-            Je suis un bel item #5
-          </p>
-        </div>
+        <p>
+          Je suis un bel item #2
+        </p>
       </div>
     </div>
-  </div>,
-  ");",
-]
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #3
+        </p>
+      </div>
+    </div>
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #4
+        </p>
+      </div>
+    </div>
+    <div
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
+      >
+        <p>
+          Je suis un bel item #5
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`<PickableList /> should render correctly without header 1`] = `

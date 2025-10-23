@@ -249,7 +249,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              class="sc-bcXGCL eQscED cap-tag"
+              class="sc-bcXGCL cMcWwX cap-tag"
               title="public-everybody"
             >
               public-everybody
@@ -489,7 +489,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              class="sc-bcXGCL eQscED cap-tag"
+              class="sc-bcXGCL cMcWwX cap-tag"
               title="public-everybody"
             >
               public-everybody
@@ -729,7 +729,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              class="sc-bcXGCL eQscED cap-tag"
+              class="sc-bcXGCL cMcWwX cap-tag"
               title="public-everybody"
             >
               public-everybody
@@ -969,7 +969,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              class="sc-bcXGCL eQscED cap-tag"
+              class="sc-bcXGCL cMcWwX cap-tag"
               title="public-everybody"
             >
               public-everybody

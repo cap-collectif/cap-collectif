@@ -6,27 +6,27 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-gsGkXq Flex___StyledAppBox-SiGEY fEhiDP crLbTm"
+    className="sc-GKYOR Flex___StyledAppBox-SiGEY haiMnW crLbTm"
   >
     <div
-      className="sc-gsGkXq Flex___StyledAppBox-SiGEY OxIuS gqpUzc"
+      className="sc-GKYOR Flex___StyledAppBox-SiGEY efnTTr gqpUzc"
     >
       <p
-        className="sc-gsGkXq lmKqqJ"
+        className="sc-GKYOR NeEtE"
       >
         emailing-service
       </p>
       <p
-        className="sc-gsGkXq eOPPZm"
+        className="sc-GKYOR eoIhHD"
       >
         emailing-service-explanation
       </p>
     </div>
     <div
-      className="sc-gsGkXq Flex___StyledAppBox-SiGEY efiLly crLbTm"
+      className="sc-GKYOR Flex___StyledAppBox-SiGEY jVOoPP crLbTm"
     >
       <div
-        className="sc-gsGkXq Flex___StyledAppBox-SiGEY dGMilO"
+        className="sc-GKYOR Flex___StyledAppBox-SiGEY bzHLvj"
       >
         <div
           checked={false}
@@ -54,7 +54,7 @@ Array [
               width={19}
             />
             <IconMock
-              className="sc-gsGkXq keuWoA"
+              className="sc-GKYOR gwAZiB"
             />
           </label>
           <input
@@ -69,7 +69,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-gsGkXq Flex___StyledAppBox-SiGEY fmIZoB"
+        className="sc-GKYOR Flex___StyledAppBox-SiGEY erIUQs"
       >
         <div
           checked={true}
@@ -97,7 +97,7 @@ Array [
               width={19}
             />
             <IconMock
-              className="sc-gsGkXq keuWoA"
+              className="sc-GKYOR gwAZiB"
             />
           </label>
           <input
@@ -111,14 +111,14 @@ Array [
           />
         </div>
         <div
-          className="sc-gsGkXq Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl kiYMfh vtPwp fsbxdV"
+          className="sc-GKYOR Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl duEvBM vtPwp fsbxdV"
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           title="global.active"
         >
           <p
-            className="sc-gsGkXq hzzuJD Tag___StyledText-hFlneM dQIvA-d"
+            className="sc-GKYOR chJouq Tag___StyledText-hFlneM dQIvA-d"
           >
             global.active
           </p>

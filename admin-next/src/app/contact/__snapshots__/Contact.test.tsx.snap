@@ -127,7 +127,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       </p>
                     </label>
                     <input
-                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+                      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
                       id=":r0:"
                       minlength="2"
                       name="name"
@@ -153,7 +153,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     <input
                       aria-required="true"
                       autocomplete="email"
-                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+                      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
                       id=":r1:"
                       name="email"
                       placeholder="email.placeholder"
@@ -178,7 +178,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required="true"
-                      class="sc-bcXGCL sc-dwnPIk egzrup eCNeCU cap-input"
+                      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
                       id=":r2:"
                       minlength="2"
                       name="title"
@@ -208,7 +208,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     >
                       <textarea
                         aria-required="true"
-                        class="sc-bcXGCL sc-dwnPIk hTPOzI eCNeCU cap-textarea"
+                        class="sc-bcXGCL sc-fXqqsB hTPOzI ieLfuE cap-textarea"
                         id=":r3:"
                         minlength="2"
                         name="body"

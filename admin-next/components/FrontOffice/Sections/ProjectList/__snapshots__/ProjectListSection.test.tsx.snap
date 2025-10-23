@@ -24,30 +24,30 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               class="sc-bcXGCL ljlYbx"
             >
               <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
               />
               <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
-              />
-            </div>
-            <div
-              class="sc-bcXGCL ljlYbx"
-            >
-              <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
-              />
-              <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
               />
             </div>
             <div
               class="sc-bcXGCL ljlYbx"
             >
               <div
-                class="sc-bcXGCL kYfEQk sc-jTjVHl"
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
               />
               <div
-                class="sc-bcXGCL kSsnXv sc-jTjVHl"
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
+              />
+            </div>
+            <div
+              class="sc-bcXGCL ljlYbx"
+            >
+              <div
+                class="sc-bcXGCL kYfEQk sc-cZFRsw"
+              />
+              <div
+                class="sc-bcXGCL kSsnXv sc-cZFRsw"
               />
             </div>
           </div>
@@ -88,12 +88,12 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               />
               <div
                 aria-label="Tag  step.status.future"
-                class="sc-bcXGCL fzAvBd cap-tag"
+                class="sc-bcXGCL kQhHtN cap-tag"
                 title=" step.status.future"
               >
                 <svg
                   aria-hidden="true"
-                  class="sc-bcXGCL sc-oZHua inFJBW cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -109,19 +109,19 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   />
                 </svg>
                 <span
-                  class="sc-bcXGCL lnyRPA cap-tag__label"
+                  class="sc-bcXGCL cCwupq cap-tag__label"
                 >
                    step.status.future
                 </span>
               </div>
               <div
                 aria-label="Tag  restrictedaccess"
-                class="sc-bcXGCL ilaaKR cap-tag"
+                class="sc-bcXGCL iszUtR cap-tag"
                 title=" restrictedaccess"
               >
                 <svg
                   aria-hidden="true"
-                  class="sc-bcXGCL sc-oZHua kXzwFN cCzERh cap-icon cap-tag__leftIcon"
+                  class="sc-bcXGCL sc-oZHua coUWMR cCzERh cap-icon cap-tag__leftIcon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 12"
@@ -141,7 +141,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               </div>
             </div>
             <div
-              class="sc-bcXGCL kkRGEJ cap-card-content"
+              class="sc-bcXGCL iBvfcJ cap-card-content"
             >
               <div
                 class="sc-bcXGCL bIZLTw"

@@ -23,7 +23,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
       id="moderate-form"
     >
       <div
-        class="sc-gsGkXq form-group"
+        class="sc-GKYOR form-group"
       >
         <div
           class="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"

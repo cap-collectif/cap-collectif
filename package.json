@@ -160,7 +160,7 @@
         "@babel/preset-env": "^7.22.7",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
-        "@cap-collectif/ui": "6.0.3",
+        "@cap-collectif/ui": "6.0.4",
         "@cfaester/enzyme-adapter-react-18": "0.7.1",
         "@emotion/babel-preset-css-prop": "^11.11.0",
         "@emotion/cache": "^10.0.29",

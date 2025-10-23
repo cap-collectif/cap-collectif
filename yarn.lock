@@ -2985,10 +2985,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-6.0.3.tgz#0959f2481a0b0e5650923cd8b19aa266f38dbc2e"
-  integrity sha512-5SbnEkWSGeE3nmwFlmf6MGFiUAaTjBUPRnamE8DD5TxRM2LlLs3IJHCdJhJOZU4ERKVE0EO/l3+iDKxk8o1Wgg==
+"@cap-collectif/ui@6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-6.0.4.tgz#0227521f38af861133dd888176393c9131a06d4d"
+  integrity sha512-LA7yeK/11TpA43eevH6oGVFKQUTX6dARvE7OxZ67L/JvO6PMPLw89oyocz+S0hj2EU9QIkSf6mJvhSCD+J4/2g==
   dependencies:
     "@ariakit/react" "^0.4.17"
     "@styled-system/css" "^5.1.5"
