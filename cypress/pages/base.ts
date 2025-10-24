@@ -7,7 +7,7 @@ export default new (class Base {
     {
       path = '',
       operationName = '',
-      withIntercept = false,
+      withIntercept = true,
     }: { operationName: string; path?: string; withIntercept?: boolean } = {
       operationName: '',
     },
@@ -16,7 +16,7 @@ export default new (class Base {
     this.cy.visit(path)
     this.cy.wait(`@${operationName}`)
   }
-  reload({ operationName = '' }: { operationName?: string } = {}) {
+  reload({ operationName }: { operationName: string }) {
     this.cy.reload()
     this.cy.wait(`@${operationName}`)
   }

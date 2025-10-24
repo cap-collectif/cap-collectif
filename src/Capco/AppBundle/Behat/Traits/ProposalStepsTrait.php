@@ -366,22 +366,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a proposal not yet votable
-     */
-    public function iGoToAProposalNotYetVotable()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNotYetVotable);
-    }
-
-    /**
-     * @When I go to a proposal not votable anymore
-     */
-    public function iGoToAProposalNotVotableAnymore()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNotVotableAnymore);
-    }
-
-    /**
      * @Then there should be :nb proposals
      */
     public function thereShouldBeNbProposals(int $nb)
@@ -789,47 +773,11 @@ trait ProposalStepsTrait
     // ********************************** Proposal votes *************************************************
 
     /**
-     * @When I go to the votes details page
-     */
-    public function iGoToTheVotesDetailsPage()
-    {
-        $this->visitPageWithParams('project user votes page', self::$votesDetailsPageParams);
-    }
-
-    /**
-     * @When I got to the votes details page of project with requirements
-     */
-    public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
-    {
-        $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
-        $this->waitAndThrowOnFailure(10000, '$("#ProposalsUserVotesPage").length > 0');
-    }
-
-    /**
      * @When I go to a selection step with simple vote enabled
      */
     public function iGoToASelectionStepWithSimpleVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithSimpleVoteParams);
-    }
-
-    /**
-     * @When I go to a selection step with budget vote enabled
-     */
-    public function iGoToASelectionStepWithBudgetVoteEnabled()
-    {
-        $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteParams);
-    }
-
-    /**
-     * @When I go to a selection step with budget vote limited enabled
-     */
-    public function iGoToASelectionStepWithBudgetVoteLimitedEnabled()
-    {
-        $this->visitPageWithParams(
-            'selection page',
-            self::$selectionStepWithBudgetVoteLimitedParams
-        );
     }
 
     /**
@@ -846,15 +794,6 @@ trait ProposalStepsTrait
     public function iGoToAClosedSelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepClosed);
-    }
-
-    /**
-     * @When I go to a proposal with budget vote enabled
-     */
-    public function iGoToAProposalWithBudgetVoteEnabled()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
-        $this->iWaitElementToAppearOnPage('#proposal-page-tabs');
     }
 
     /**
