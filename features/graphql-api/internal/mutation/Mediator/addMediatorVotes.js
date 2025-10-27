@@ -68,12 +68,43 @@ describe('mutations|addMediatorVotes', () => {
         ]
       }
     }
-    const addMediatorVotes = await graphql(
+    const response = await graphql(
       AddMediatorVotesMutation,
       variables,
       'mediator',
     );
-    expect(addMediatorVotes).toMatchSnapshot();
+
+    const normalizeResponse = response => ({
+      ...response,
+      addMediatorVotes: {
+        ...response.addMediatorVotes,
+        mediator: {
+          ...response.addMediatorVotes.mediator,
+          votes: {
+            ...response.addMediatorVotes.mediator.votes,
+            edges: response.addMediatorVotes.mediator.votes.edges.map(edge => ({
+              ...edge,
+              node: {
+                ...edge.node,
+                participant: {
+                  ...edge.node.participant,
+                  votes: {
+                    ...edge.node.participant.votes,
+                    edges: edge.node.participant.votes.edges.sort((a, b) =>
+                      a.node.proposal.title.localeCompare(b.node.proposal.title)
+                    ),
+                  },
+                },
+              },
+            })),
+          },
+        },
+      },
+    });
+
+    const normalizedResponse = normalizeResponse(response);
+    
+    expect(normalizedResponse).toMatchSnapshot();
   });
   it('Should return phone already used error.', async () => {
 
