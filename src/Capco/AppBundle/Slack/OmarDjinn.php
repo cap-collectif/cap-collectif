@@ -7,33 +7,33 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 class OmarDjinn extends AbstractSlackMessager
 {
     public function __construct(
-        private readonly ?string $hook
+        private readonly ?string $hook,
+        private readonly string $instanceName
     ) {
     }
 
     public function sendBefore(EmailingCampaign $emailingCampaign): void
     {
         $this->send(
-            'Bonjour grands princes, la campagne ' .
-                $emailingCampaign->getName() .
-                ' doit être lancée à ' .
-                $emailingCampaign->getSendAt()->format('H:i:s') .
-                ", je vous préviens dès qu'elle est terminée."
+            sprintf(
+                'La campagne %s sur l\'instance %s doit être lancée à %s, je vous préviendrai dès qu\'elle est terminée.',
+                $emailingCampaign->getName(),
+                $this->instanceName,
+                $emailingCampaign->getSendAt()->format('H:i:s')
+            )
         );
     }
 
     public function sendAfter(int $count): void
     {
         $this->send(
-            'Merci de votre patience les kheys, la campagne a été envoyée à ' .
-                $count .
-                ' destinataires'
+            sprintf('Merci de votre patience ! La campagne a été envoyée à %s destinataires', $count)
         );
     }
 
     public function sendFail(string $errorMessage): void
     {
-        $this->send("Aie, ça s'est mal passé, vous devriez jeter un coup d'oeil");
+        $this->send('Une erreur est survenue ! Une intervention humaine est nécessaire pour débloquer la situation.');
         $this->send($errorMessage);
     }
 

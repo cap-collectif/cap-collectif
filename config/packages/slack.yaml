@@ -1,17 +1,18 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: true
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
 
-    Capco\AppBundle\Slack\:
-        resource: '%kernel.project_dir%/src/Capco/AppBundle/Slack/*'
+  Capco\AppBundle\Slack\:
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Slack/*'
 
-    Capco\AppBundle\Slack\JpecGhost:
-        arguments:
-            $hook: '%slack_jpec_ghost%'
-            $env: '%kernel.environment%'
+  Capco\AppBundle\Slack\JpecGhost:
+    arguments:
+      $hook: '%slack_jpec_ghost%'
+      $env: '%kernel.environment%'
 
-    Capco\AppBundle\Slack\OmarDjinn:
-        arguments:
-            $hook: '%slack_omar_djinn%'
+  Capco\AppBundle\Slack\OmarDjinn:
+    arguments:
+      $hook: '%slack_omar_djinn%'
+      $instanceName: '%instance_name%'
