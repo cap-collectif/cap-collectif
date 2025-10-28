@@ -398,10 +398,10 @@ export default createFragmentContainer(ParameterPage, {
       usersRefusing: users(first: 0, consentInternalCommunication: false) {
         totalCount
       }
-      participants(first: 0) {
+      participants(first: 0, emailConfirmed: true) {
           totalCount
       }
-      participantsRefusing: participants(first: 0, consentInternalCommunication: false) {
+      participantsRefusing: participants(first: 0, consentInternalCommunication: false, emailConfirmed: true) {
           totalCount
       }
       senderEmails {
