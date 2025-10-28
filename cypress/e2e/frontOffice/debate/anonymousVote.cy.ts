@@ -1,10 +1,12 @@
 import { DebatePage } from '~e2e-pages/index'
 
 describe('Debate - Anonymous vote', () => {
-  beforeEach(() => {
+  before(() => {
     cy.task('db:restore')
+  })
+  beforeEach(() => {
     DebatePage.visitCannabisDebate()
-    cy.wait(1000) // Anonymous captcha widget forces us to wait here
+    cy.wait(500) // Anonymous captcha widget forces us to wait here
   })
   it('should correctly vote for a debate', () => {
     cy.interceptGraphQLOperation({ operationName: 'AddDebateAnonymousVoteMutation' })

@@ -16,6 +16,7 @@ export { default as ProposalVoteListPage } from './proposal/proposalVoteListPage
 export { default as AdminGroupsPage } from './admin/userGroupsList'
 export { default as AdminModerationPage } from './admin/moderation'
 export { default as EventPage } from './event/eventPage'
+export { default as Event } from './event/event'
 export { default as AdminUserPage } from './admin/userProfile'
 export { default as AdminUserListPage } from './admin/userList'
 export { default as UserInvitePage } from './admin/userInvite'

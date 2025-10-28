@@ -1,4 +1,4 @@
-import { QuestionnairePage } from '~e2e-pages/index'
+import { Base, QuestionnairePage } from '~e2e-pages/index'
 
 type VisitOptions = {
   project: string
@@ -184,6 +184,24 @@ export default new (class QuestionnairePage {
     return this.visit({
       project: 'projet-pour-consolider-les-exports',
       questionnaire: 'questionnaire-export',
+    })
+  }
+
+  verifyQuestionsNotVisible(questions: string[]) {
+    questions.forEach(question => {
+      this.cy.contains(question).should('not.exist')
+    })
+  }
+
+  selectFromReactDropdown(selector: string, value: string) {
+    this.cy.get(`${selector} .react-select__control`).click({ force: true })
+    this.cy.get('.react-select__menu-portal').contains(value, { timeout: 10000 }).click({ force: true })
+  }
+
+  visitQuestionnaireConditional() {
+    Base.visit({
+      path: '/project/projet-avec-questionnaire/questionnaire/etape-de-questionnaire-avec-questionnaire-sauts-conditionnels/',
+      operationName: 'NavBarMenuQuery',
     })
   }
 })()

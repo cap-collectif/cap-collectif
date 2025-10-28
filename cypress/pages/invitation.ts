@@ -17,7 +17,7 @@ export default new (class InvitationPage {
     cy.get('div[id^=turnstile_captcha-]').should('exist')
     cy.confirmCaptcha()
     cy.wait(500) // wait for captcha, cannot be intercepted
-    cy.get('#confirm-register').click()
+    cy.get('#confirm-register').click({ force: true })
     cy.wait(500) // wait for redirect, can't figure out why intercepts are not working here
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     cy.get('#navbar-username').contains('RemChanDaiSki').should('exist').and('be.visible')

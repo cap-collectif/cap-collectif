@@ -8,22 +8,23 @@ export default new (class Base {
       path = '',
       operationName = '',
       withIntercept = true,
-    }: { operationName: string; path?: string; withIntercept?: boolean } = {
+      failOnStatusCode = true,
+    }: { operationName: string; path?: string; withIntercept?: boolean; failOnStatusCode?: boolean } = {
       operationName: '',
     },
   ) {
     if (withIntercept) cy.interceptGraphQLOperation({ operationName: operationName })
-    this.cy.visit(path)
-    this.cy.wait(`@${operationName}`)
+    this.cy.visit(path, { failOnStatusCode: failOnStatusCode })
+    this.cy.wait(`@${operationName}`, { timeout: 10000 })
   }
   reload({ operationName }: { operationName: string }) {
     this.cy.reload()
-    this.cy.wait(`@${operationName}`)
+    this.cy.wait(`@${operationName}`, { timeout: 10000 })
   }
 
   visitHomepage({
     lang = '',
-    withIntercept = false,
+    withIntercept = true,
     operationName = 'NavbarRightQuery',
   }: { lang?: string; withIntercept?: boolean; operationName?: string } = {}) {
     this.visit({ path: `${lang}/`, withIntercept, operationName })

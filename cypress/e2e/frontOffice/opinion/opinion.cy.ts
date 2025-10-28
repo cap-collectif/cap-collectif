@@ -1,4 +1,4 @@
-import { Base, OpinionPage } from '~e2e-pages/index'
+import { OpinionPage } from '~e2e-pages/index'
 
 describe('Opinion Page Tests', () => {
   before(() => {

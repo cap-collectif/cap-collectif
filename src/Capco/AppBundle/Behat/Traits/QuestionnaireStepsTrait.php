@@ -44,24 +44,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @When I go to a conditional questionnaire step
-     */
-    public function iGoToAConditionalQuestionnaireStep()
-    {
-        $this->visitPageWithParams('questionnaire page', self::$conditionalQuestionnaireStepParams);
-        $this->iWaitElementToAppearOnPage('.questionnaire-page', 10000);
-    }
-
-    /**
-     * @When I go to a closed questionnaire step
-     */
-    public function iGoToAClosedQuestionnaireStep()
-    {
-        $this->visitPageWithParams('questionnaire page', self::$questionnaireStepClosedParams);
-        $this->iWait(1);
-    }
-
-    /**
      * @When I go to a questionnaire step with no multiple replies allowed
      */
     public function iGoToAQuestionnaireStepWithNoMultipleRepliesAllowed()

@@ -26,14 +26,6 @@ trait AdminEventTrait
     }
 
     /**
-     * @When I go to event page with slug :eventSlug
-     */
-    public function iGoToTheEventPageWithSlug(string $eventSlug)
-    {
-        $this->visitPageWithParams('event page', ['slug' => $eventSlug]);
-    }
-
-    /**
      * @When I can participate in jitsi room
      */
     public function iCanParticipateInJitsiRoom()
@@ -79,27 +71,6 @@ trait AdminEventTrait
         $this->iWait(3);
         $page->find('css', '#event_author')->click();
         $page->find('css', '.react-select__menu-portal .react-select__option:first-child')->click();
-    }
-
-    /**
-     * @When I fill the address field
-     */
-    public function iFillAddressField()
-    {
-        $this->waitAndThrowOnFailure(3000, "$('#event_address').length > 0");
-        $this->fillField('event_address', 'La Force');
-        $this->waitAndThrowOnFailure(2000, "$('#list-suggestion > li:first-child').length > 0");
-        $this->iClickElement('#list-suggestion > li:first-child');
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I fill date field :id with value :value
-     */
-    public function iFillDateFieldWithValue(mixed $id, mixed $value)
-    {
-        $this->waitAndThrowOnFailure(3000, "$('{$id}').length > 0");
-        $this->ifillElementWithValue($id, $value);
     }
 
     /**

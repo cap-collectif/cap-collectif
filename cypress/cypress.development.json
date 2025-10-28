@@ -7,7 +7,7 @@
   "videoCompression": false,
   "retries": {
     "runMode": 0,
-    "openMode": 3
+    "openMode": 0
   },
   "reporter": "junit",
   "reporterOptions": {

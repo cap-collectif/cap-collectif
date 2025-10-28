@@ -60,6 +60,13 @@ context('Events list page', () => {
         EventPage.checkEventPreviewContains(/^evenementPasseSansDate.*/) // the text can be truncated so we're only trying to match the beginning
         cy.get('.card__title').should('not.contain.text', 'PHPTourDuFuture')
       })
+      describe('As anonymous', () => {
+        it('anonymous user can see events linked to a specific step', () => {
+          cy.task('enable:feature', 'calendar')
+          cy.visit('/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee')
+          EventPage.waitForEventPreviewsToAppear()
+        })
+      })
     })
   })
 

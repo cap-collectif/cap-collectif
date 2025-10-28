@@ -39,14 +39,18 @@ export default new (class OpinionPage {
     stepSlug,
     opinionTypeSlug,
     opinionSlug,
+    operationName = 'ArgumentListQuery',
+    withIntercept = true,
   }: {
     projectSlug: string
     stepSlug: string
     opinionTypeSlug: string
     opinionSlug: string
+    operationName?: string
+    withIntercept?: boolean
   }) {
     const path = `/projects/${projectSlug}/consultation/${stepSlug}/opinions/${opinionTypeSlug}/${opinionSlug}`
-    Base.visit({ path, operationName: 'ArgumentListQuery' })
+    Base.visit({ path, operationName, withIntercept })
   }
 
   getSingleOpinion() {
@@ -58,5 +62,80 @@ export default new (class OpinionPage {
   }
   getShareOpinionButton() {
     return this.cy.get('#opinion-share-button')
+  }
+
+  /* Versions */
+  visitVersionPage(operationName: string = 'ArgumentListQuery') {
+    Base.visit({
+      path: '/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1',
+      operationName: operationName,
+      failOnStatusCode: false,
+    })
+  }
+  visitVersionClosedPage(operationName: string = 'ArgumentListQuery') {
+    Base.visit({
+      path: '/projects/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51/versions/version-sur-une-etape-fermee',
+      operationName: operationName,
+    })
+  }
+  visitVersionWithVotesPage(operationName: string = 'ArgumentListQuery') {
+    Base.visit({
+      path: '/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2',
+      operationName: operationName,
+    })
+  }
+  visitVersionToEditPage(operationName: string = 'ArgumentListQuery') {
+    Base.visit({
+      path: '/projects/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/consultation/etape-participation-continue/opinions/premiere-section-encore-un-sous-titre/opinion-endless/versions/modification-16',
+      operationName: operationName,
+    })
+  }
+
+  visitOpinionArgument() {
+    this.visitOpinionsPage({
+      projectSlug: 'croissance-innovation-disruption',
+      stepSlug: 'collecte-des-avis',
+      opinionTypeSlug: 'les-causes',
+      opinionSlug: 'opinion-2',
+    })
+  }
+  visitOpinionClosed() {
+    this.visitOpinionsPage({
+      projectSlug: 'strategie-technologique-de-letat-et-services-publics',
+      stepSlug: 'collecte-des-avis-pour-une-meilleur-strategie',
+      opinionTypeSlug: 'les-causes',
+      opinionSlug: 'opinion-51',
+      operationName: 'OpinionPageQuery',
+    })
+  }
+  submitArgument({ content = '' }: { content: string }) {
+    this.cy.get(`#argument-form--FOR`).within(() => {
+      this.cy.get('textarea').type(content)
+      this.cy.interceptGraphQLOperation({ operationName: 'AddArgumentMutation' })
+      this.cy.get('button').click({ force: true })
+      this.cy.wait('@AddArgumentMutation', { timeout: 10000 })
+    })
+  }
+  editArgument({ content = '' }: { content: string }) {
+    this.cy.get('#edit-button').click({ force: true })
+    this.cy.get('#argument-form').within(() => {
+      this.cy.get('textarea').clear().type(content)
+      this.cy.get('[name="confirm"]').check({ force: true })
+    })
+    this.cy.interceptGraphQLOperation({ operationName: 'ChangeArgumentMutation' })
+    this.cy.get('#confirm-argument-update').click({ force: true })
+    this.cy.wait('@ChangeArgumentMutation', { timeout: 10000 })
+  }
+  editArgumentWithoutConfirm({ content = '' }: { content: string }) {
+    this.cy.get('#edit-button').click({ force: true })
+    this.cy.get('#argument-form').within(() => {
+      this.cy.get('textarea').clear().type(content)
+    })
+    this.cy.get('#confirm-argument-update').click({ force: true })
+    cy.get('#argument-form').should('contain', 'argument.constraints.confirm')
+  }
+  deleteArgument() {
+    this.cy.get('#delete-button').click({ force: true })
+    this.cy.get('#confirm-argument-delete').click({ force: true })
   }
 })()
