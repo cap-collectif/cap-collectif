@@ -79,7 +79,7 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
         </div>
         <div
           aria-hidden="false"
-          aria-label="carrousel.position {"position":1,"total":1}"
+          aria-label="carrousel.position"
           aria-roledescription="carrousel.slide"
           class="sc-bcXGCL fKHBjQ"
           role="group"
@@ -230,7 +230,7 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
             id="whats-new-items"
           >
             <div
-              aria-label="carrousel.position {"position":1,"total":1}"
+              aria-label="carrousel.position"
               aria-roledescription="carrousel.slide"
               class="sc-bcXGCL hVTsVt"
               id="whats-new-item-0"

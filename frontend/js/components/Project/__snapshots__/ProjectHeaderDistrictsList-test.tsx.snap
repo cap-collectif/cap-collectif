@@ -39,7 +39,7 @@ Array [
     >
       zone 1
        
-      and-count-other-areas {"count":4}
+      and-count-other-areas
     </p>
   </li>,
   <div
@@ -56,7 +56,7 @@ Array [
       <div
         data-testid="Header"
       >
-        count-area {"count":5}
+        count-area
       </div>
     </div>
     <div
@@ -147,7 +147,7 @@ Array [
     >
       zone 1
        
-      and-count-other-areas {"count":4}
+      and-count-other-areas
     </p>
   </li>,
   <div
@@ -164,7 +164,7 @@ Array [
       <div
         data-testid="Header"
       >
-        count-area {"count":5}
+        count-area
       </div>
     </div>
     <div
@@ -255,7 +255,7 @@ Array [
     >
       zone 1
        
-      and-count-other-areas {"count":4}
+      and-count-other-areas
     </p>
   </li>,
   <div
@@ -272,7 +272,7 @@ Array [
       <div
         data-testid="Header"
       >
-        count-area {"count":5}
+        count-area
       </div>
     </div>
     <div

@@ -35,7 +35,7 @@ Array [
           >
             •
           </span>
-          active.on.date {"date":"2 avr. 2021"}
+          active.on.date
         </div>
         <ul
           className="InlineList__Container-jBwJNT lbXmrW inline-list"
@@ -100,7 +100,7 @@ Array [
               }
               width={12}
             />
-            global.votes {"num":42}
+            global.votes
           </li>
           <li>
             <IconMock
@@ -117,7 +117,7 @@ Array [
               }
               width={12}
             />
-            synthesis.common.elements.nb {"num":42}
+            synthesis.common.elements.nb
           </li>
         </ul>
       </div>
@@ -180,7 +180,7 @@ Array [
           >
             •
           </span>
-          active.on.date {"date":"2 avr. 2021"}
+          active.on.date
         </div>
         <ul
           className="InlineList__Container-jBwJNT lbXmrW inline-list"
@@ -245,7 +245,7 @@ Array [
               }
               width={12}
             />
-            global.votes {"num":42}
+            global.votes
           </li>
           <li>
             <IconMock
@@ -262,7 +262,7 @@ Array [
               }
               width={12}
             />
-            synthesis.common.elements.nb {"num":42}
+            synthesis.common.elements.nb
           </li>
         </ul>
       </div>

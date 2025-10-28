@@ -180,7 +180,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                       aria-describedby=":r8:"
                       tabindex="0"
                     >
-                      count.block.daysLeft {"count":-442}
+                      count.block.daysLeft
                     </div>
                     <div
                       style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
@@ -234,7 +234,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                         <div
                           class="sc-bcXGCL bdghCN"
                         >
-                          fromDayToDay {"day":"16 oct. 2020, 00:00","anotherDay":"16 oct. 2021, 00:00"}
+                          fromDayToDay
                         </div>
                       </div>
                     </div>
@@ -336,7 +336,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                         <div
                           class="sc-bcXGCL bdghCN"
                         >
-                          frise-tooltip-text {"date":"11 septembre 2020"}
+                          frise-tooltip-text
                         </div>
                       </div>
                     </div>

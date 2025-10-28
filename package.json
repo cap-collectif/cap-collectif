@@ -297,7 +297,7 @@
         "react-google-recaptcha": "^1.0.5",
         "react-hook-form": "^7.19.5",
         "react-infinite-scroller": "^1.2.4",
-        "react-intl": "https://github.com/cap-collectif/react-intl#a224d16c7a37884328676e9608987601a7c26205",
+        "react-intl": "3.12.1",
         "react-intl-redux": "^2.0.2",
         "react-leaflet": "4.2.1",
         "react-leaflet-markercluster": "4.2.1",

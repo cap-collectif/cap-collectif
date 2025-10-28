@@ -458,7 +458,7 @@ Array [
         🗳️
       </span>
       <span>
-        thanks-for-your-vote {"instance":"CapCollectif"}
+        thanks-for-your-vote
       </span>
       <button
         class="sc-bcXGCL sc-gGvGpy FSQsA kUJvaZ cap-button"
@@ -557,7 +557,7 @@ Array [
           🗳️
         </span>
         <span>
-          thanks-for-your-vote {"instance":"CapCollectif"}
+          thanks-for-your-vote
         </span>
       </p>
     </div>

@@ -25,7 +25,7 @@ Array [
         }
         title=""
       >
-        count.daysUntil {"count":725}
+        count.daysUntil
       </div>
       <h2
         className="sc-bcXGCL hGuSeV cap-heading"

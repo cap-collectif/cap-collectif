@@ -98,7 +98,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         <div
           class=" ql-editor wysiwyg-render"
         >
-          email.propulsed.by.capco {"logoUrl":"/capco-logo-mail.png"}
+          email.propulsed.by.capco
         </div>
       </div>
     </div>

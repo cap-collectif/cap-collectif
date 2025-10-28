@@ -47,7 +47,7 @@ exports[`<District /> renders correctly 1`] = `
       <h4
         class="sc-bcXGCL QfKUy cap-heading"
       >
-        n_projects {"num":1}
+        n_projects
       </h4>
       <div
         class="sc-bcXGCL eYEFlv"

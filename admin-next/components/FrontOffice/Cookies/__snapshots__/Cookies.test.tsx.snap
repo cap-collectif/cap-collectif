@@ -58,18 +58,18 @@ exports[`<CookieContent /> renders correctly 1`] = `
       <div
         class=" ql-editor wysiwyg-render"
       >
-        cookies-page-texte-tmp-part1 {"platformLink":"http://localhost","cookieType":3}
+        cookies-page-texte-tmp-part1
       </div>
     </div>
     <div
       class=" ql-editor wysiwyg-render"
     >
-      cookies-page-texte-part1-2 {"platformLink":"http://localhost"}
+      cookies-page-texte-part1-2
     </div>
     <div
       class=" ql-editor wysiwyg-render"
     >
-      cookies-page-texte-tmp-part1-3 {"platformLink":"http://localhost","nbCookies":3}
+      cookies-page-texte-tmp-part1-3
     </div>
     <div
       class=" ql-editor wysiwyg-render"
@@ -79,7 +79,7 @@ exports[`<CookieContent /> renders correctly 1`] = `
     <div
       class=" ql-editor wysiwyg-render"
     >
-      cookies-page-texte-part2 {"platformLink":"http://localhost"}
+      cookies-page-texte-part2
     </div>
   </div>
 </DocumentFragment>

@@ -44,12 +44,12 @@ Array [
           <p
             className="sc-bcXGCL biRotf cap-text"
           >
-            shortcut.opinion {"num":42}
+            shortcut.opinion
           </p>
           <p
             className="sc-bcXGCL gybKdQ cap-text"
           >
-            vote-count-for-and-against {"for":42,"against":42}
+            vote-count-for-and-against
           </p>
         </div>
         <div

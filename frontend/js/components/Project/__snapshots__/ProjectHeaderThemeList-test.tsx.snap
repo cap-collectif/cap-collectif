@@ -33,7 +33,7 @@ Array [
     >
       Immobilier
        
-      and-count-other-themes {"count":3}
+      and-count-other-themes
     </p>
   </a>,
   <div
@@ -46,7 +46,7 @@ Array [
     <div
       data-testid="Header"
     >
-      count-themes {"count":4}
+      count-themes
     </div>
     <div
       data-testid="Body"
@@ -141,7 +141,7 @@ Array [
     >
       Immobilier
        
-      and-count-other-themes {"count":3}
+      and-count-other-themes
     </p>
   </a>,
   <div
@@ -154,7 +154,7 @@ Array [
     <div
       data-testid="Header"
     >
-      count-themes {"count":4}
+      count-themes
     </div>
     <div
       data-testid="Body"
@@ -249,7 +249,7 @@ Array [
     >
       Immobilier
        
-      and-count-other-themes {"count":3}
+      and-count-other-themes
     </p>
   </a>,
   <div
@@ -262,7 +262,7 @@ Array [
     <div
       data-testid="Header"
     >
-      count-themes {"count":4}
+      count-themes
     </div>
     <div
       data-testid="Body"

@@ -8,7 +8,9 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
       "defaultLocale": "en",
       "formatDate": [Function],
       "formatDateToParts": [Function],
+      "formatDisplayName": [Function],
       "formatHTMLMessage": [Function],
+      "formatList": [Function],
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatNumberToParts": [Function],
@@ -19,6 +21,8 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
       "formats": Object {},
       "formatters": Object {
         "getDateTimeFormat": [Function],
+        "getDisplayNames": [Function],
+        "getListFormat": [Function],
         "getMessageFormat": [Function],
         "getNumberFormat": [Function],
         "getPluralRules": [Function],
