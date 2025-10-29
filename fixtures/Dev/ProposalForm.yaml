@@ -527,3 +527,21 @@ Capco\AppBundle\Entity\ProposalForm:
         owner: '@user1'
         creator: '@user1'
         reference: 34
+    pfEmailingCollectVote:
+        id: pfEmailingCollectVote
+        title: Dépôt emailing (vote)
+        description: <stripslashes('\<p>\')>Dépôt emailing (vote)<stripslashes('\</p>\')>
+        step: '@collectStepVoteEmailing'
+        notificationsConfiguration: '@proposalFormCollectVote'
+        reference: 255
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+    pfEmailingCollectNoVote:
+        id: pfEmailingCollectNoVote
+        title: Dépôt emailing (no vote)
+        description: <stripslashes('\<p>\')>Dépôt emailing (no vote)<stripslashes('\</p>\')>
+        step: '@collectStepNoVoteEmailing'
+        notificationsConfiguration: '@proposalFormCollectNoVote'
+        reference: 256
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'

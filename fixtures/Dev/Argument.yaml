@@ -315,3 +315,33 @@ Capco\AppBundle\Entity\Argument:
         updatedAt: <(new \DateTime('2019-03-08'))>
         trashedAt: <(new \DateTime('2019-03-08'))>
         trashedReason: 'moderation-guideline-violation'
+    argEmailing1:
+        id: 'argEmailing1'
+        Opinion: '@opinionEmailing1'
+        type: 1
+        author: '@emailingUser16'
+        body: 'Pour :)'
+        publishedAt: <(new \DateTime('2025-08-25'))>
+        createdAt: <(new \DateTime('2025-08-25'))>
+        updatedAt: <(new \DateTime('2025-08-25'))>
+    argEmailing2:
+        id: 'argEmailing2'
+        Opinion: '@opinionEmailing1'
+        type: 0
+        author: '@emailingUser11'
+        body: 'Contre :('
+        publishedAt: <(new \DateTime('2025-08-25'))>
+        createdAt: <(new \DateTime('2025-08-25'))>
+        updatedAt: <(new \DateTime('2025-08-25'))>
+    argEmailing3:
+        id: 'argEmailing3'
+        Opinion: '@opinionEmailing1'
+        type: 0
+        author: '@emailingUser11'
+        body: 'Poubelle !'
+        trashedStatus: 'visible'
+        publishedAt: <(new \DateTime('2025-08-25'))>
+        createdAt: <(new \DateTime('2025-08-25'))>
+        updatedAt: <(new \DateTime('2025-08-25'))>
+        trashedAt: <(new \DateTime('2025-08-25'))>
+        trashedReason: 'moderation-guideline-violation'

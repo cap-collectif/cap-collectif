@@ -1408,3 +1408,47 @@ Capco\AppBundle\Entity\Proposal:
         undraftAt: $createdAt
         reference: <randomNumber(6, true)>
         updatedAt: $createdAt
+    proposalEmailingCollectVote1:
+        id: proposalEmailingCollectVote1
+        title: Proposition emailing 1 (vote au dépôt)
+        body: Proposition 1 pour la campagne emailing (vote au dépôt)
+        author: '@emailingAdmin'
+        proposalForm: '@pfEmailingCollectVote'
+        createdAt: <(new \DateTime('2025-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: 255
+        updatedAt: $createdAt
+    proposalEmailingCollectVote2:
+        id: proposalEmailingCollectVote2
+        title: Proposition emailing 2 (vote au dépôt)
+        body: Proposition 2 pour la campagne emailing (vote au dépôt)
+        author: '@emailingUser17'
+        proposalForm: '@pfEmailingCollectVote'
+        createdAt: <(new \DateTime('2025-07-05 15:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: 256
+        updatedAt: $createdAt
+    proposalEmailingSelectionVote1:
+        id: proposalEmailingSelectionVote1
+        title: Proposition emailing 1 (vote à la sélection)
+        body: Proposition 1 pour la campagne emailing (vote à la sélection)
+        author: '@emailingAdmin'
+        proposalForm: '@pfEmailingCollectNoVote'
+        createdAt: <(new \DateTime('2025-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: 257
+        updatedAt: $createdAt
+    proposalEmailingSelectionVote2:
+        id: proposalEmailingSelectionVote2
+        title: Proposition emailing 2 (vote à la sélection)
+        body: Proposition 2 pour la campagne emailing (vote à la sélection)
+        author: '@emailingUser15'
+        proposalForm: '@pfEmailingCollectNoVote'
+        createdAt: <(new \DateTime('2025-07-05 15:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: 258
+        updatedAt: $createdAt

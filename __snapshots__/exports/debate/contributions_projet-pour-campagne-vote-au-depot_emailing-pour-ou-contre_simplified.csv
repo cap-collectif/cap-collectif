@@ -1,0 +1,5 @@
+﻿export_contribution_argument_published_at,export_contribution_argument_author_id,export_contribution_argument_author_username,export_contribution_argument_author_user_type_name,export_contribution_argument_author_zip_code,export_contribution_argument_author_account,export_contribution_argument_content,export_contribution_argument_type,export_contribution_argument_vote_number
+"2025-08-05 09:09:00",emailingUser10,emailingUser10,emailingUser10,,Oui,"Moi j'aime bien être informé",export_contribution_argument_type_for,2
+"2025-08-05 09:09:00",emailingUser8,emailingUser8,emailingUser8,,Oui,"Laissez-moi tranquille",export_contribution_argument_type_against,3
+"2025-08-09 00:00:00",,,,,Non,Meuh,export_contribution_argument_type_against,0
+"2025-08-09 00:00:00",,,,,Non,Meh,export_contribution_argument_type_for,1

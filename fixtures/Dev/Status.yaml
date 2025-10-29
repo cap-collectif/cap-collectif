@@ -165,3 +165,27 @@ Capco\AppBundle\Entity\Status:
         position: 2
         step: '@collectStepProjectWithOwner'
         color: success
+    statusSelectionStepVoteEmailing:
+        id: statusSelectionStepVoteEmailing
+        name: SelectVote
+        position: 1
+        step: '@selectionStepVoteEmailing'
+        color: success
+    statusSelectionStepNoVoteEmailing:
+        id: statusSelectionStepNoVoteEmailing
+        name: SelectNoVote
+        position: 1
+        step: '@selectionStepNoVoteEmailing'
+        color: success
+    statusCollectStepVoteEmailing:
+        id: statusCollectStepVoteEmailing
+        name: CollectVote
+        position: 1
+        step: '@collectStepVoteEmailing'
+        color: success
+    statusCollectStepNoVoteEmailing:
+        id: statusCollectStepNoVoteEmailing
+        name: CollectNoVote
+        position: 1
+        step: '@collectStepNoVoteEmailing'
+        color: success

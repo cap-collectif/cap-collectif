@@ -107,7 +107,7 @@ describe('Internal|Query.arguments', () => {
   });
 
   it('fetches an empty page when offset exceeds total items', async () => {
-    let res = await graphql(ArgumentsQuery, { first: 1, after: "YXJyYXljb25uZWN0aW9uOjI2OA==" }, 'internal_admin');
+    let res = await graphql(ArgumentsQuery, { first: 1, after: "YXJyYXljb25uZWN0aW9uOjI3MQ==" /* arrayconnection:271 */ }, 'internal_admin');
     expect(res.arguments.edges).toHaveLength(0);
   });
 });

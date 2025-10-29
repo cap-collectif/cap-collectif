@@ -787,3 +787,35 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>
         consentInternalCommunication: true
+    emailingAdmin:
+        id: 'emailingAdmin'
+        username: emailingadmin
+        firstname: Emailing
+        lastname: Admin
+        email: emailing.admin@fake-email.com
+        phone: '+3300000000'
+        userType: '@UserTypeEmaling'
+        plainpassword: toto
+        roles:
+            - 'ROLE_SUPER_ADMIN'
+        biography: Je fais des campagnes de mails.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2025-01-01 17:00:00'))>
+        enabled: true
+        createdAt: <identity(new \DateTime('2025-01-01 17:00:00'))>
+        consentInternalCommunication: true
+
+    emailingUser{1..22}:
+        id: 'emailingUser<current()>'
+        username: emailingUser<current()>
+        email: <htmlentities('emailing.user')><current()><htmlentities('@fake-email.com')>
+        firstname: Emailing<current()>
+        lastname: User<current()>
+        userType: '@UserTypeEmaling'
+        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+        password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <identity(new \DateTime('2025-01-01 17:00:00'))>
+        consentInternalCommunication: true

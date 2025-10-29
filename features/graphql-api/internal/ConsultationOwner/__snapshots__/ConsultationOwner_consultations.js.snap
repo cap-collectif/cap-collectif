@@ -32,6 +32,11 @@ Object {
         },
         Object {
           "node": Object {
+            "title": "Consultation pour emailing",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "Consultation dans un projet qui a un administrateur de projet",
           },
         },
@@ -86,7 +91,7 @@ Object {
           },
         },
       ],
-      "totalCount": 16,
+      "totalCount": 17,
     },
   },
 }

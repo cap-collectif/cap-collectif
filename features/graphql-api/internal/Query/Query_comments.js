@@ -2,6 +2,7 @@
 const CommentsQuery = /* GraphQL */ `
   query comments($term: String, $first: Int, $after: String, $orderBy: CommentOrder) {
     comments(term: $term, first: $first, after: $after, orderBy: $orderBy) {
+      totalCount
       edges {
         node {
           __typename
@@ -29,7 +30,8 @@ const CommentsQuery = /* GraphQL */ `
 `;
 
 describe('Internal|Query.comments', () => {
-  beforeEach(async () => {
+  // these tests only Query Data so we can safely enable the multilangue toggle once before all
+  beforeAll(async () => {
     await global.enableFeatureFlag('multilangue');
   });
 
@@ -114,7 +116,7 @@ describe('Internal|Query.comments', () => {
   });
 
   it('fetches an empty page when offset exceeds total items', async () => {
-    let res = await graphql(CommentsQuery, { first: 1, after: "YXJyYXljb25uZWN0aW9uOjI1MQ==" }, 'internal_admin');
+    let res = await graphql(CommentsQuery, { first: 1, after: 'YXJyYXljb25uZWN0aW9uOjI1Mw==' /* arrayconnection:253 */ }, 'internal_admin');
     expect(res.comments.edges).toHaveLength(0);
   });
 });

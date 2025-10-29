@@ -321,3 +321,22 @@ Capco\AppBundle\Entity\OpinionType:
         defaultFilter: votes
         isEnabled: true
         consultation: '@consultationProjectWithOwner'
+    opinionTypeEmailingTypo:
+        id: opinionTypeEmailingTypo
+        title: Typo
+        position: 1
+        color: orange
+        defaultFilter: votes
+        isEnabled: true
+        sourceable: true
+        versionable: true
+        linkable: true
+        consultation: '@consultationEmailing'
+    opinionTypeEmailingLebowski:
+        id: opinionTypeEmailingLebowski
+        title: The Big Lebowski
+        position: 2
+        color: blue
+        defaultFilter: votes
+        isEnabled: true
+        consultation: '@consultationEmailing'

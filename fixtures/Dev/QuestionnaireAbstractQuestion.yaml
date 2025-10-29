@@ -747,3 +747,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireJumps'
         question: '@questionJump3'
         position: 3
+    qaqEmailingCampaign:
+        questionnaire: '@questionnaireEmailingCampaign'
+        question: '@simpleQuestionEmailingCampaign'
+        position: 1

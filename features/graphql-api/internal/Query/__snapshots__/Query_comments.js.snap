@@ -8,6 +8,42 @@ Object {
         "node": Object {
           "__typename": "Comment",
           "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Je suis d'accord avec moi-même",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "PENDING",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Passionnant",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
             "username": "supervisor",
           },
           "body": "Commentaire",
@@ -1766,47 +1802,12 @@ Object {
           "updatedAt": "2018-03-01 00:00:00",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "RXZlbnQ6ZXZlbnQx",
-            "url": "https://capco.test/events/event-with-registrations",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "UG9zdDpwb3N0MQ==",
-            "url": "https://capco.test/blog/post-fr-1",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 254,
   },
 }
 `;
@@ -3296,6 +3297,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjgx",
       "hasNextPage": false,
     },
+    "totalCount": 82,
   },
 }
 `;
@@ -5109,6 +5111,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 103,
   },
 }
 `;
@@ -6922,6 +6925,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 254,
   },
 }
 `;
@@ -8735,6 +8739,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 254,
   },
 }
 `;
@@ -8747,6 +8752,42 @@ Object {
         "node": Object {
           "__typename": "Comment",
           "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Je suis d'accord avec moi-même",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "PENDING",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Passionnant",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
             "username": "supervisor",
           },
           "body": "Commentaire",
@@ -10505,47 +10546,12 @@ Object {
           "updatedAt": "2018-03-01 00:00:00",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "RXZlbnQ6ZXZlbnQx",
-            "url": "https://capco.test/events/event-with-registrations",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "UG9zdDpwb3N0MQ==",
-            "url": "https://capco.test/blog/post-fr-1",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 254,
   },
 }
 `;
@@ -10558,6 +10564,42 @@ Object {
         "node": Object {
           "__typename": "Comment",
           "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Je suis d'accord avec moi-même",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "PENDING",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "emailingUser19",
+          },
+          "body": "Passionnant",
+          "createdAt": "2025-08-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxFbWFpbGluZ0NvbGxlY3RWb3RlMQ==",
+            "url": "https://capco.test/project/projet-pour-campagne-vote-au-depot/collect/collecte-des-propositions-pour-emailing-vote/proposals/proposition-emailing-1-vote-au-depot?_locale=fr-FR",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2025-08-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
             "username": "supervisor",
           },
           "body": "Commentaire",
@@ -12316,47 +12358,12 @@ Object {
           "updatedAt": "2018-03-01 00:00:00",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "RXZlbnQ6ZXZlbnQx",
-            "url": "https://capco.test/events/event-with-registrations",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "sfavot",
-          },
-          "body": "Commentaire n°12",
-          "createdAt": "2018-02-28 00:00:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "PUBLISHED",
-          "related": Object {
-            "id": "UG9zdDpwb3N0MQ==",
-            "url": "https://capco.test/blog/post-fr-1",
-          },
-          "trashedStatus": null,
-          "updatedAt": "2018-02-28 00:00:00",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
+    "totalCount": 254,
   },
 }
 `;

@@ -545,3 +545,30 @@ Capco\AppBundle\Entity\Project:
         visibility: 2
         owner: '@user1'
         creator: '@user1'
+    projectForEmailingCollectVote:
+        id: 'projectForEmailingCollectVote'
+        title: Projet pour campagne (vote au dépôt)
+        createdAt: <identity((new \DateTime('2025-07-03 06:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+    projectForEmailingSelectionVote:
+        id: 'projectForEmailingSelectionVote'
+        title: Projet pour campagne (vote à la sélection)
+        createdAt: <identity((new \DateTime('2025-07-03 06:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+    projectForEmailingConsultation:
+        id: 'projectForEmailingConsultation'
+        title: Projet pour campagne (consultation)
+        createdAt: <identity((new \DateTime('2025-07-03 06:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'

@@ -176,3 +176,19 @@ Capco\AppBundle\Entity\Selection:
         proposal: '@proposalWorkflowVote2-D'
         selectionStep: '@selectionStepWorkflowVote2'
         createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionEmailingCollectVote1:
+        proposal: '@proposalEmailingCollectVote1'
+        selectionStep: '@selectionStepNoVoteEmailing'
+        createdAt: <(new \DateTime('2025-08-15 08:00:00'))>
+    selectionEmailingCollectVote2:
+        proposal: '@proposalEmailingCollectVote2'
+        selectionStep: '@selectionStepNoVoteEmailing'
+        createdAt: <(new \DateTime('2025-08-15 08:00:00'))>
+    selectionEmailingSelectionVote1:
+        proposal: '@proposalEmailingSelectionVote1'
+        selectionStep: '@selectionStepVoteEmailing'
+        createdAt: <(new \DateTime('2025-08-15 08:00:00'))>
+    selectionEmailingSelectionVote2:
+        proposal: '@proposalEmailingSelectionVote2'
+        selectionStep: '@selectionStepVoteEmailing'
+        createdAt: <(new \DateTime('2025-08-15 08:00:00'))>

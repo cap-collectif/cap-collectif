@@ -83,3 +83,15 @@ Capco\AppBundle\Entity\Steps\DebateStep:
         startAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
         endAt: <identity((new \DateTime('2030-10-01')))>
         debateContent: 'Hey je suis un débat ouvert sans vote'
+    debateStepEmailing:
+        __construct: ['@debateEmailing']
+        isAnonymousParticipationAllowed: true
+        id: debateStepEmailing
+        title: 'Emailing : pour ou contre ?'
+        slug: emailing-pour-ou-contre
+        label: 'Emailing : pour ou contre ?'
+        body: 'Êtes-vous plutôt pour ou contre les emailings ?'
+        startAt: <identity((new \DateTime('2025-07-03 12:00:00')))>
+        endAt: <identity((new \DateTime('2025-08-31')))>
+        debateType: FACE_TO_FACE
+        debateContent: 'Hey je suis là pour avoir votre avis !'

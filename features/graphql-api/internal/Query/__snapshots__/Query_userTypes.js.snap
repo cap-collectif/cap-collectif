@@ -156,14 +156,33 @@ Object {
           ],
         },
       },
+      Object {
+        "node": Object {
+          "id": "VXNlclR5cGU6Ng==",
+          "media": null,
+          "name": "Manipulateur d'emails",
+          "translations": Array [
+            Object {
+              "locale": "EN_GB",
+              "name": "Email processor",
+              "slug": "emailprocessor",
+            },
+            Object {
+              "locale": "FR_FR",
+              "name": "Manipulateur d'emails",
+              "slug": "manipulateurdemails",
+            },
+          ],
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
       "hasNextPage": false,
       "hasPreviousPage": false,
       "startCursor": "YXJyYXljb25uZWN0aW9uOjA=",
     },
-    "totalCount": 5,
+    "totalCount": 6,
   },
 }
 `;

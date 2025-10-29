@@ -15,3 +15,5 @@ Capco\AppBundle\Entity\Debate\Debate:
         id: debateProjectAdmin
     debateOpenWithoutVote:
         id: debateOpenWithoutVote
+    debateEmailing:
+        id: debateEmailing

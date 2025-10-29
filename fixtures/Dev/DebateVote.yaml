@@ -123,3 +123,39 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         type: AGAINST
         publishedAt: <(new \DateTime('2015-01-01 09:04:00'))>
         createdAt: $publishedAt
+    # emailing
+    dvEmailingVoteFor1:
+        id: 14525
+        user: '@emailingAdmin'
+        debate: '@debateEmailing'
+        type: FOR
+        publishedAt: <(new \DateTime('2025-08-08 08:08:08'))>
+        createdAt: $publishedAt
+    dvEmailingVoteFor2:
+        id: 14526
+        user: '@emailingUser7'
+        debate: '@debateEmailing'
+        type: FOR
+        publishedAt: <(new \DateTime('2025-08-08 08:08:08'))>
+        createdAt: $publishedAt
+    dvEmailingVoteFor3:
+        id: 14527
+        user: '@emailingUser10'
+        debate: '@debateEmailing'
+        type: FOR
+        publishedAt: <(new \DateTime('2025-08-08 08:08:08'))>
+        createdAt: $publishedAt
+    dvEmailingVoteAgainst1:
+        id: 14528
+        user: '@emailingUser8'
+        debate: '@debateEmailing'
+        type: AGAINST
+        publishedAt: <(new \DateTime('2025-08-08 08:08:08'))>
+        createdAt: $publishedAt
+    dvEmailingVoteAgains2:
+        id: 14529
+        user: '@emailingUser6'
+        debate: '@debateEmailing'
+        type: AGAINST
+        publishedAt: <(new \DateTime('2025-08-08 08:08:08'))>
+        createdAt: $publishedAt

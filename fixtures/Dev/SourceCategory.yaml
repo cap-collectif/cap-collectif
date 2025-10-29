@@ -14,3 +14,6 @@ Capco\AppBundle\Entity\SourceCategory:
   sourcecategory5:
     id: sourcecategory5
     isEnabled: true
+  sourceCategoryEmailing:
+    id: sourceCategoryEmailing
+    isEnabled: true

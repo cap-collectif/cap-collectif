@@ -22,3 +22,27 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousArgument:
         createdAt: <(new \DateTime('2021-05-01 00:00:00'))>
         token: jesuisletokendudebateanonymousargumentagainst1
         email: 'jeannine1957@laposte.fr'
+    daaEmailingFor:
+        __construct: ['@debateEmailing']
+        id: daaEmailingFor
+        ipAddress: '1.1.1.1'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::FOR)>
+        body: 'Meh'
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        publishedAt: <(new \DateTime('2025-08-09 00:00:00'))>
+        createdAt: $publishedAt
+        token: daa_fake_token_for
+        email: 'fake.email.for@cap-collectif.com'
+        consentInternalCommunication: true
+    daaEmailingAgainst:
+        __construct: ['@debateEmailing']
+        id: daaEmailingAgainst
+        ipAddress: '2.2.2.2'
+        type: <(Capco\AppBundle\Enum\ForOrAgainstType::AGAINST)>
+        body: 'Meuh'
+        navigator: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
+        publishedAt: <(new \DateTime('2025-08-09 00:00:00'))>
+        createdAt: $publishedAt
+        token: daa_fake_token_against
+        email: 'fake.email.against@cap-collectif.com'
+        consentInternalCommunication: true

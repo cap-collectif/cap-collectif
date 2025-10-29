@@ -123,6 +123,12 @@ Scenario: GraphQL client wants to list sections
               "id":"opinionTypeCustomAccess"
            },
            {
+              "id":"opinionTypeEmailingLebowski"
+           },
+           {
+              "id":"opinionTypeEmailingTypo"
+           },
+           {
               "id":"opinionTypeEndless"
            },
            {

@@ -8,17 +8,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 2,
+            "totalCount": 6,
           },
-          "contributionsCount": 2,
+          "contributionsCount": 6,
           "contributors": Object {
             "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
-          "title": "BP avec archivage des propositions",
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
+          "title": "BP vote étape de dépôt",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 3,
           },
         },
       },
@@ -26,17 +26,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 6,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 6,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
-          "title": "BP avec étape personalisée ouverte",
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dWb3Rl",
+          "title": "BP vote parcours",
           "votes": Object {
-            "totalCount": 0,
+            "totalCount": 3,
           },
         },
       },
@@ -44,15 +44,15 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 4,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 4,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
-          "title": "Débats ouvert sans vote",
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dWb3RlMg==",
+          "title": "BP vote parcours min 2 max 2",
           "votes": Object {
             "totalCount": 0,
           },
@@ -64,13 +64,13 @@ Object {
           "contributions": Object {
             "totalCount": 2,
           },
-          "contributionsCount": 0,
+          "contributionsCount": 2,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",
-          "title": "Budget Participatif d'organisation",
+          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
+          "title": "BP avec archivage des propositions",
           "votes": Object {
             "totalCount": 0,
           },
@@ -87,8 +87,8 @@ Object {
             "totalCount": 0,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlNZQ==",
-          "title": "projectOrgaVisibilityMe",
+          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
+          "title": "BP avec étape personalisée ouverte",
           "votes": Object {
             "totalCount": 0,
           },
@@ -99,7 +99,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 51,
+    "totalCount": 54,
   },
 }
 `;
@@ -199,7 +199,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 45,
+    "totalCount": 48,
   },
 }
 `;
@@ -210,6 +210,60 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "title": "Projet pour campagne (vote à la sélection)",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 6,
+          },
+          "contributionsCount": 6,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
+          "title": "BP vote étape de dépôt",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 6,
+          },
+          "contributionsCount": 6,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dWb3Rl",
+          "title": "BP vote parcours",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 4,
@@ -227,7 +281,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -244,66 +298,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
-          "title": "BP avec étape personalisée ouverte",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
-          "title": "Débats ouvert sans vote",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 2,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 2,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",
-          "title": "Budget Participatif d'organisation",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 45,
+    "totalCount": 48,
   },
 }
 `;

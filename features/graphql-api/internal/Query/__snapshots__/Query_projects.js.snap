@@ -9,13 +9,43 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb2xsZWN0Vm90ZQ==",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote au dépôt)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb25zdWx0YXRpb24=",
+          "status": "CLOSED",
+          "title": "Projet pour campagne (consultation)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote à la sélection)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
           "status": "OPENED_PARTICIPATION",
           "title": "BP vote étape de dépôt",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -25,7 +55,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -35,7 +65,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -45,7 +75,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -55,7 +85,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -65,7 +95,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -75,7 +105,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -85,7 +115,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -95,7 +125,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -105,7 +135,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -115,7 +145,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": true,
@@ -125,7 +155,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -134,38 +164,8 @@ Object {
           "title": "Débat du mois",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Projet avec questionnaire anonyme",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Projet avec administrateur de projet",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
-          "status": "CLOSED",
-          "title": "Débat Wysiwyg",
-        },
-      },
     ],
-    "totalCount": 51,
+    "totalCount": 54,
   },
 }
 `;
@@ -199,13 +199,23 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb25zdWx0YXRpb24=",
+          "status": "CLOSED",
+          "title": "Projet pour campagne (consultation)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
           "status": "CLOSED",
           "title": "Débat du mois",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -215,7 +225,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -225,7 +235,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -235,7 +245,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -245,7 +255,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -255,7 +265,7 @@ Object {
         },
       },
     ],
-    "totalCount": 6,
+    "totalCount": 7,
   },
 }
 `;
@@ -269,13 +279,43 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb2xsZWN0Vm90ZQ==",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote au dépôt)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb25zdWx0YXRpb24=",
+          "status": "CLOSED",
+          "title": "Projet pour campagne (consultation)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote à la sélection)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
           "status": "OPENED_PARTICIPATION",
           "title": "BP vote étape de dépôt",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -285,7 +325,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -295,7 +335,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -305,7 +345,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -315,7 +355,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -325,7 +365,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -335,7 +375,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -345,7 +385,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -355,7 +395,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -365,7 +405,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -375,7 +415,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -385,7 +425,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -394,38 +434,8 @@ Object {
           "title": "Projet avec questionnaire anonyme",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Projet avec administrateur de projet",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
-          "status": "CLOSED",
-          "title": "Débat Wysiwyg",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0T2N1bHVzUXVlc3Q=",
-          "status": "FUTURE_WITHOUT_FINISHED_STEPS",
-          "title": "Débat sur l'Oculus Quest",
-        },
-      },
     ],
-    "totalCount": 50,
+    "totalCount": 53,
   },
 }
 `;
@@ -439,13 +449,33 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb2xsZWN0Vm90ZQ==",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote au dépôt)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote à la sélection)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
           "status": "OPENED_PARTICIPATION",
           "title": "BP vote étape de dépôt",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -455,7 +485,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -465,7 +495,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -475,7 +505,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -485,7 +515,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -495,7 +525,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -505,7 +535,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -515,7 +545,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -525,7 +555,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -535,7 +565,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -545,7 +575,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -555,7 +585,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -565,7 +595,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -574,28 +604,8 @@ Object {
           "title": "Projet pour consolider les exports",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Budget Participatif IdF",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Project Analyse",
-        },
-      },
     ],
-    "totalCount": 36,
+    "totalCount": 38,
   },
 }
 `;
@@ -609,13 +619,33 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb2xsZWN0Vm90ZQ==",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote au dépôt)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote à la sélection)",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dDb2xsZWN0Vm90ZQ==",
           "status": "OPENED_PARTICIPATION",
           "title": "BP vote étape de dépôt",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -625,7 +655,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -635,7 +665,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -645,7 +675,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -655,7 +685,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -665,7 +695,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -675,7 +705,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -685,7 +715,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -695,7 +725,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -705,7 +735,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -715,7 +745,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -725,7 +755,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -735,7 +765,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -744,28 +774,8 @@ Object {
           "title": "Débat sur le cannabis",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Projet pour consolider les exports",
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0SWRm",
-          "status": "OPENED_PARTICIPATION",
-          "title": "Budget Participatif IdF",
-        },
-      },
     ],
-    "totalCount": 37,
+    "totalCount": 39,
   },
 }
 `;

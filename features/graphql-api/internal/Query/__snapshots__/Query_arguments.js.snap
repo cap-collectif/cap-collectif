@@ -8,6 +8,48 @@ Object {
         "node": Object {
           "__typename": "Argument",
           "author": Object {
+            "username": "emailingUser16",
+          },
+          "body": "Pour :)",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Contre :(",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Poubelle !",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": "VISIBLE",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
             "username": "xlacot",
           },
           "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
@@ -1362,54 +1404,12 @@ Object {
           "trashedStatus": "INVISIBLE",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNTA=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-50",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNDk=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-49",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNDg=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-48",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
-    "totalCount": 269,
+    "totalCount": 272,
   },
 }
 `;
@@ -4250,7 +4250,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
-    "totalCount": 269,
+    "totalCount": 272,
   },
 }
 `;
@@ -5664,7 +5664,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
-    "totalCount": 269,
+    "totalCount": 272,
   },
 }
 `;
@@ -5673,6 +5673,48 @@ exports[`Internal|Query.arguments fetches the arguments list ordered by latest c
 Object {
   "arguments": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser16",
+          },
+          "body": "Pour :)",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Contre :(",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Poubelle !",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": "VISIBLE",
+        },
+      },
       Object {
         "node": Object {
           "__typename": "Argument",
@@ -7031,54 +7073,12 @@ Object {
           "trashedStatus": "INVISIBLE",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNTA=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-50",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNDk=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-49",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "xlacot",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uNDg=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-48",
-          },
-          "trashedStatus": "INVISIBLE",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
-    "totalCount": 269,
+    "totalCount": 272,
   },
 }
 `;
@@ -7087,6 +7087,48 @@ exports[`Internal|Query.arguments fetches the arguments list ordered by latest u
 Object {
   "arguments": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser16",
+          },
+          "body": "Pour :)",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Contre :(",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Argument",
+          "author": Object {
+            "username": "emailingUser11",
+          },
+          "body": "Poubelle !",
+          "related": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uRW1haWxpbmcx",
+            "url": "https://capco.test/consultations/projet-pour-campagne-consultation/consultation/etape-de-consultation-pour-emailing/opinions/typo/bonjuor",
+          },
+          "trashedStatus": "VISIBLE",
+        },
+      },
       Object {
         "node": Object {
           "__typename": "Argument",
@@ -8445,54 +8487,12 @@ Object {
           "trashedStatus": "VISIBLE",
         },
       },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "user",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uMzA=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-30",
-          },
-          "trashedStatus": "VISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "user",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uMzE=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-31",
-          },
-          "trashedStatus": "VISIBLE",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Argument",
-          "author": Object {
-            "username": "user",
-          },
-          "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
-          "related": Object {
-            "id": "T3BpbmlvbjpvcGluaW9uMzI=",
-            "url": "https://capco.test/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-32",
-          },
-          "trashedStatus": "VISIBLE",
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjk5",
       "hasNextPage": true,
     },
-    "totalCount": 269,
+    "totalCount": 272,
   },
 }
 `;

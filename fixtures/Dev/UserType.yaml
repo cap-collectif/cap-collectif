@@ -13,3 +13,5 @@ Capco\UserBundle\Entity\UserType:
     UserType5:
         id: 5
         media: '@UserTypeActivist'
+    UserTypeEmaling:
+        id: 6

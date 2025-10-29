@@ -80,6 +80,21 @@ Object {
       },
       Object {
         "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbkVtYWlsaW5n",
+          "sections": Array [
+            Object {
+              "title": "Typo",
+            },
+            Object {
+              "title": "The Big Lebowski",
+            },
+          ],
+          "title": "Consultation pour emailing",
+        },
+      },
+      Object {
+        "node": Object {
           "contribuable": true,
           "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvblByb2plY3RXaXRoT3duZXI=",
           "sections": Array [

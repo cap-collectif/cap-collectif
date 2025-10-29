@@ -7,6 +7,42 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "authors": Array [
+              Object {
+                "username": "emailingadmin",
+              },
+            ],
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "emailingadmin",
+              },
+            ],
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "emailingadmin",
+              },
+            ],
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [],
             "owner": Object {
               "username": "lbrunet",
@@ -521,7 +557,7 @@ Object {
           },
         },
       ],
-      "totalCount": 52,
+      "totalCount": 55,
     },
   },
 }
@@ -938,8 +974,26 @@ Object {
             "title": "BP vote parcours min 2 max 2",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2025-07-03 06:00:00",
+            "title": "Projet pour campagne (vote au dépôt)",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2025-07-03 06:00:00",
+            "title": "Projet pour campagne (consultation)",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2025-07-03 06:00:00",
+            "title": "Projet pour campagne (vote à la sélection)",
+          },
+        },
       ],
-      "totalCount": 52,
+      "totalCount": 55,
     },
   },
 }

@@ -65,9 +65,17 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
                 'CampaignWithUserGroup',
                 $this->userGroupExpectedRecipients(),
             ],
-            'campaign with project' => [
-                'CampaignWithProject',
-                $this->projectExpectedRecipients(),
+            'campaign with project (collect vote)' => [
+                'CampaignWithProjectCollectVote',
+                $this->projectCollectVoteExpectedRecipients(),
+            ],
+            'campaign with project (selection vote)' => [
+                'CampaignWithProjectSelectionVote',
+                $this->projectSelectionVoteExpectedRecipients(),
+            ],
+            'campaign with project (consultation)' => [
+                'CampaignWithProjectConsultation',
+                $this->projectConsultationExpectedRecipients(),
             ],
         ];
     }
@@ -1089,6 +1097,94 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
                 'username' => 'Valérie Masson Delmotte',
                 'email' => 'valerie.massondelmotte@cap-collectif.com',
             ],
+            [
+                'username' => 'emailingUser1',
+                'email' => 'emailing.user1@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser2',
+                'email' => 'emailing.user2@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser3',
+                'email' => 'emailing.user3@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser4',
+                'email' => 'emailing.user4@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser5',
+                'email' => 'emailing.user5@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser6',
+                'email' => 'emailing.user6@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser7',
+                'email' => 'emailing.user7@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser8',
+                'email' => 'emailing.user8@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser9',
+                'email' => 'emailing.user9@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser10',
+                'email' => 'emailing.user10@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser11',
+                'email' => 'emailing.user11@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser12',
+                'email' => 'emailing.user12@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser13',
+                'email' => 'emailing.user13@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser14',
+                'email' => 'emailing.user14@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser15',
+                'email' => 'emailing.user15@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser16',
+                'email' => 'emailing.user16@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser17',
+                'email' => 'emailing.user17@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser18',
+                'email' => 'emailing.user18@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser19',
+                'email' => 'emailing.user19@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser20',
+                'email' => 'emailing.user20@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser21',
+                'email' => 'emailing.user21@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser22',
+                'email' => 'emailing.user22@fake-email.com',
+            ],
         ];
     }
 
@@ -1114,158 +1210,116 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
     }
 
     /**
-     * @return array<int, array{username: string, email:string}>
+     * @return array<int, array{username: ?string, email:string}>
      */
-    private function projectExpectedRecipients(): array
+    private function projectCollectVoteExpectedRecipients(): array
     {
         return [
             [
-                'username' => 'lbrunet',
-                'email' => 'lbrunet@cap-collectif.com',
+                'username' => null,
+                'email' => 'fake.email.against@cap-collectif.com',
             ],
             [
-                'username' => 'user',
-                'email' => 'user@test.com',
+                'username' => null,
+                'email' => 'fake.email.for@cap-collectif.com',
             ],
             [
-                'username' => 'user10',
-                'email' => 'user10@cap-collectif.com',
+                'username' => 'emailingadmin',
+                'email' => 'emailing.admin@fake-email.com',
             ],
             [
-                'username' => 'user11',
-                'email' => 'user11@cap-collectif.com',
+                'username' => 'emailingUser10',
+                'email' => 'emailing.user10@fake-email.com',
             ],
             [
-                'username' => 'user12',
-                'email' => 'user12@cap-collectif.com',
+                'username' => 'emailingUser17',
+                'email' => 'emailing.user17@fake-email.com',
             ],
             [
-                'username' => 'user13',
-                'email' => 'user13@cap-collectif.com',
+                'username' => 'emailingUser18',
+                'email' => 'emailing.user18@fake-email.com',
             ],
             [
-                'username' => 'user14',
-                'email' => 'user14@cap-collectif.com',
+                'username' => 'emailingUser19',
+                'email' => 'emailing.user19@fake-email.com',
             ],
             [
-                'username' => 'user15',
-                'email' => 'user15@cap-collectif.com',
+                'username' => 'emailingUser20',
+                'email' => 'emailing.user20@fake-email.com',
             ],
             [
-                'username' => 'user16',
-                'email' => 'user16@cap-collectif.com',
+                'username' => 'emailingUser21',
+                'email' => 'emailing.user21@fake-email.com',
             ],
             [
-                'username' => 'user17',
-                'email' => 'user17@cap-collectif.com',
+                'username' => 'emailingUser22',
+                'email' => 'emailing.user22@fake-email.com',
             ],
             [
-                'username' => 'user18',
-                'email' => 'user18@cap-collectif.com',
+                'username' => 'emailingUser6',
+                'email' => 'emailing.user6@fake-email.com',
             ],
             [
-                'username' => 'user19',
-                'email' => 'user19@cap-collectif.com',
+                'username' => 'emailingUser7',
+                'email' => 'emailing.user7@fake-email.com',
             ],
             [
-                'username' => 'user20',
-                'email' => 'user20@cap-collectif.com',
+                'username' => 'emailingUser8',
+                'email' => 'emailing.user8@fake-email.com',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<int, array{username: string, email:string}>
+     */
+    private function projectSelectionVoteExpectedRecipients(): array
+    {
+        return [
+            [
+                'username' => 'emailingadmin',
+                'email' => 'emailing.admin@fake-email.com',
             ],
             [
-                'username' => 'user21',
-                'email' => 'user21@cap-collectif.com',
+                'username' => 'emailingUser13',
+                'email' => 'emailing.user13@fake-email.com',
             ],
             [
-                'username' => 'user22',
-                'email' => 'user22@cap-collectif.com',
+                'username' => 'emailingUser15',
+                'email' => 'emailing.user15@fake-email.com',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<int, array{username: string, email:string}>
+     */
+    private function projectConsultationExpectedRecipients(): array
+    {
+        return [
+            [
+                'username' => 'emailingadmin',
+                'email' => 'emailing.admin@fake-email.com',
             ],
             [
-                'username' => 'user23',
-                'email' => 'user23@cap-collectif.com',
+                'username' => 'emailingUser11',
+                'email' => 'emailing.user11@fake-email.com',
             ],
             [
-                'username' => 'user24',
-                'email' => 'user24@cap-collectif.com',
+                'username' => 'emailingUser12',
+                'email' => 'emailing.user12@fake-email.com',
             ],
             [
-                'username' => 'user25',
-                'email' => 'user25@cap-collectif.com',
+                'username' => 'emailingUser13',
+                'email' => 'emailing.user13@fake-email.com',
             ],
             [
-                'username' => 'user26',
-                'email' => 'user26@cap-collectif.com',
+                'username' => 'emailingUser15',
+                'email' => 'emailing.user15@fake-email.com',
             ],
             [
-                'username' => 'user27',
-                'email' => 'user27@cap-collectif.com',
-            ],
-            [
-                'username' => 'user28',
-                'email' => 'user28@cap-collectif.com',
-            ],
-            [
-                'username' => 'user29',
-                'email' => 'user29@cap-collectif.com',
-            ],
-            [
-                'username' => 'user30',
-                'email' => 'user30@cap-collectif.com',
-            ],
-            [
-                'username' => 'user31',
-                'email' => 'user31@cap-collectif.com',
-            ],
-            [
-                'username' => 'user32',
-                'email' => 'user32@cap-collectif.com',
-            ],
-            [
-                'username' => 'user33',
-                'email' => 'user33@cap-collectif.com',
-            ],
-            [
-                'username' => 'user34',
-                'email' => 'user34@cap-collectif.com',
-            ],
-            [
-                'username' => 'user35',
-                'email' => 'user35@cap-collectif.com',
-            ],
-            [
-                'username' => 'user36',
-                'email' => 'user36@cap-collectif.com',
-            ],
-            [
-                'username' => 'user37',
-                'email' => 'user37@cap-collectif.com',
-            ],
-            [
-                'username' => 'user38',
-                'email' => 'user38@cap-collectif.com',
-            ],
-            [
-                'username' => 'user39',
-                'email' => 'user39@cap-collectif.com',
-            ],
-            [
-                'username' => 'user40',
-                'email' => 'user40@cap-collectif.com',
-            ],
-            [
-                'username' => 'user6',
-                'email' => 'user6@cap-collectif.com',
-            ],
-            [
-                'username' => 'user7',
-                'email' => 'user7@cap-collectif.com',
-            ],
-            [
-                'username' => 'user8',
-                'email' => 'user8@cap-collectif.com',
-            ],
-            [
-                'username' => 'user9',
-                'email' => 'user9@cap-collectif.com',
+                'username' => 'emailingUser16',
+                'email' => 'emailing.user16@fake-email.com',
             ],
         ];
     }

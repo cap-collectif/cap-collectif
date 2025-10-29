@@ -149,12 +149,28 @@ Object {
         },
         Object {
           "node": Object {
+            "content": "<p>Campagne pour tout le monde</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Campagne pour tout le monde",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
             "content": "<p>Campagne avec internal list</p>",
             "mailingInternal": "REGISTERED",
             "mailingList": null,
             "object": "Campagne avec internal list",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -172,7 +188,7 @@ Object {
             },
             "object": "Campagne avec mailing list",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -183,15 +199,51 @@ Object {
         },
         Object {
           "node": Object {
-            "content": "<p>Campagne avec un projet</p>",
+            "content": "<p>Campagne avec projet (vote au dépôt)</p>",
             "mailingInternal": null,
             "mailingList": null,
-            "object": "Campagne avec un projet",
+            "object": "Campagne avec projet (vote au dépôt)",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": Object {
-              "title": "Croissance, innovation, disruption",
+              "title": "Projet pour campagne (vote au dépôt)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec projet (consultation)</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec projet (consultation)",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": Object {
+              "title": "Projet pour campagne (consultation)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec projet (vote à la sélection)</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec projet (vote à la sélection)",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": Object {
+              "title": "Projet pour campagne (vote à la sélection)",
             },
             "senderEmail": "assistance@cap-collectif.com",
             "senderName": "A. Sistance",
@@ -206,7 +258,7 @@ Object {
             "mailingList": null,
             "object": "Campagne avec groupe de users",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -216,7 +268,7 @@ Object {
           },
         },
       ],
-      "totalCount": 11,
+      "totalCount": 14,
     },
   },
 }
@@ -226,77 +278,8 @@ exports[`Internal.viewer.emailingCampaigns should get an admin own campaigns 1`]
 Object {
   "viewer": Object {
     "emailingCampaigns": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "content": "<p>Campagne avec internal list</p>",
-            "mailingInternal": "REGISTERED",
-            "mailingList": null,
-            "object": "Campagne avec internal list",
-            "owner": Object {
-              "username": "admin",
-            },
-            "project": null,
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "content": "<p>Campagne avec mailing list</p>",
-            "mailingInternal": null,
-            "mailingList": Object {
-              "name": "Coucou, tu veux voir ma liste ?",
-            },
-            "object": "Campagne avec mailing list",
-            "owner": Object {
-              "username": "admin",
-            },
-            "project": null,
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "content": "<p>Campagne avec un projet</p>",
-            "mailingInternal": null,
-            "mailingList": null,
-            "object": "Campagne avec un projet",
-            "owner": Object {
-              "username": "admin",
-            },
-            "project": Object {
-              "title": "Croissance, innovation, disruption",
-            },
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "content": "<p>Campagne avec groupe de users</p>",
-            "mailingInternal": null,
-            "mailingList": null,
-            "object": "Campagne avec groupe de users",
-            "owner": Object {
-              "username": "admin",
-            },
-            "project": null,
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-      ],
-      "totalCount": 4,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -393,12 +376,28 @@ Object {
         },
         Object {
           "node": Object {
+            "content": "<p>Campagne pour tout le monde</p>",
+            "mailingInternal": "REGISTERED",
+            "mailingList": null,
+            "object": "Campagne pour tout le monde",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": null,
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
             "content": "<p>Campagne avec internal list</p>",
             "mailingInternal": "REGISTERED",
             "mailingList": null,
             "object": "Campagne avec internal list",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -416,7 +415,7 @@ Object {
             },
             "object": "Campagne avec mailing list",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -427,15 +426,51 @@ Object {
         },
         Object {
           "node": Object {
-            "content": "<p>Campagne avec un projet</p>",
+            "content": "<p>Campagne avec projet (vote au dépôt)</p>",
             "mailingInternal": null,
             "mailingList": null,
-            "object": "Campagne avec un projet",
+            "object": "Campagne avec projet (vote au dépôt)",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": Object {
-              "title": "Croissance, innovation, disruption",
+              "title": "Projet pour campagne (vote au dépôt)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec projet (consultation)</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec projet (consultation)",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": Object {
+              "title": "Projet pour campagne (consultation)",
+            },
+            "senderEmail": "assistance@cap-collectif.com",
+            "senderName": "A. Sistance",
+            "status": "DRAFT",
+            "unlayerConf": null,
+          },
+        },
+        Object {
+          "node": Object {
+            "content": "<p>Campagne avec projet (vote à la sélection)</p>",
+            "mailingInternal": null,
+            "mailingList": null,
+            "object": "Campagne avec projet (vote à la sélection)",
+            "owner": Object {
+              "username": "emailingadmin",
+            },
+            "project": Object {
+              "title": "Projet pour campagne (vote à la sélection)",
             },
             "senderEmail": "assistance@cap-collectif.com",
             "senderName": "A. Sistance",
@@ -450,7 +485,7 @@ Object {
             "mailingList": null,
             "object": "Campagne avec groupe de users",
             "owner": Object {
-              "username": "admin",
+              "username": "emailingadmin",
             },
             "project": null,
             "senderEmail": "assistance@cap-collectif.com",
@@ -488,7 +523,7 @@ Object {
           },
         },
       ],
-      "totalCount": 11,
+      "totalCount": 14,
     },
   },
 }

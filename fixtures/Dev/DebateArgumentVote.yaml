@@ -39,3 +39,38 @@ Capco\AppBundle\Entity\Debate\DebateArgumentVote:
         debateArgument: '@debateConfinement198'
         publishedAt: <((new \DateTime('2020-01-01 00:00:00'))->modify("+ $current days"))>
         createdAt: $publishedAt
+    davEmailingFor1:
+        id: 100018
+        user: '@emailingAdmin'
+        ipAddress: '18.18.18.18'
+        debateArgument: '@daEmailingFor'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt
+    davEmailingFor2:
+        id: 100019
+        user: '@emailingUser5'
+        ipAddress: '18.18.18.18'
+        debateArgument: '@daEmailingFor'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt
+    davEmailingAgainst1:
+        id: 100020
+        user: '@emailingUser4'
+        ipAddress: '19.19.19.19'
+        debateArgument: '@daEmailingAgainst'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt
+    davEmailingAgainst2:
+        id: 100021
+        user: '@emailingUser3'
+        ipAddress: '19.19.19.19'
+        debateArgument: '@daEmailingAgainst'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt
+    davEmailingAgainst3:
+        id: 100022
+        user: '@emailingUser2'
+        ipAddress: '19.19.19.19'
+        debateArgument: '@daEmailingAgainst'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt

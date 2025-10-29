@@ -1011,3 +1011,28 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
         iaSentiment: 'POSITIVE'
         iaReadability: 11.11
+    responseEmailingCampaign1:
+        question: '@simpleQuestionEmailingCampaign'
+        reply: '@replyEmailingCampaign1'
+        value: Bonjour
+        createdAt: <(new \DateTime('2025-07-10 02:09:00'))>
+    responseEmailingCampaign2:
+        question: '@simpleQuestionEmailingCampaign'
+        reply: '@replyEmailingCampaign2'
+        value: Hello
+        createdAt: <(new \DateTime('2025-07-10 02:10:00'))>
+    responseEmailingCampaign3:
+        question: '@simpleQuestionEmailingCampaign'
+        reply: '@replyEmailingCampaign3'
+        value: Au revoir
+        createdAt: <(new \DateTime('2025-07-10 02:11:00'))>
+    responseEmailingCampaign4:
+        question: '@simpleQuestionEmailingCampaign'
+        reply: '@replyEmailingCampaign4'
+        value: Good bye
+        createdAt: <(new \DateTime('2025-07-10 02:12:00'))>
+    responseEmailingCampaign5:
+        question: '@simpleQuestionEmailingCampaign'
+        reply: '@replyEmailingCampaign5'
+        value: Meh je sais pas
+        createdAt: <(new \DateTime('2025-07-10 02:13:00'))>

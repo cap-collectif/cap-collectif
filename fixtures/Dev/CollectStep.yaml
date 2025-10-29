@@ -304,3 +304,23 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         voteType: 1
         votesMin: 3
         votesLimit: 5
+    collectStepVoteEmailing:
+        id: collectStepVoteEmailing
+        title: Collecte des propositions pour emailing (vote)
+        label: Collecte emailing (vote)
+        body: Ceci est une collecte pour emailing (vote)
+        timeless: false
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: <identity((new \DateTime('2023-09-25 12:00:00')))>
+        voteType: 1
+        defaultStatus: '@statusCollectStepVoteEmailing'
+    collectStepNoVoteEmailing:
+        id: collectStepNoVoteEmailing
+        title: Collecte des propositions pour emailing (no vote)
+        label: Collecte emailing (no vote)
+        body: Ceci est une collecte pour emailing (no vote)
+        timeless: false
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: <identity((new \DateTime('2023-09-25 12:00:00')))>
+        voteType: 0
+        defaultStatus: '@statusCollectStepNoVoteEmailing'

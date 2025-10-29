@@ -261,3 +261,15 @@ Capco\AppBundle\Entity\Questionnaire:
         creator: '@user1'
         createdAt: <(new \DateTime('2022-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationJumps'
+    questionnaireEmailingCampaign:
+        id: questionnaireEmailingCampaign
+        title: Questionnaire pour campagne emailing
+        step: '@qStepEmailing'
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+        createdAt: <(new \DateTime('2025-07-04'))>

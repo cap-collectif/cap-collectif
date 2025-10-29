@@ -7,6 +7,12 @@ Object {
       Object {
         "node": Object {
           "status": "CLOSED",
+          "title": "Projet pour campagne (consultation)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
           "title": "Débat du mois",
         },
       },
@@ -64,6 +70,18 @@ exports[`Internal project status OPENED_PARTICIPATION project 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote au dépôt)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour campagne (vote à la sélection)",
+        },
+      },
       Object {
         "node": Object {
           "status": "OPENED_PARTICIPATION",

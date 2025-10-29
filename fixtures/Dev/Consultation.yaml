@@ -80,3 +80,8 @@ Capco\AppBundle\Entity\Consultation:
         title: 'Consultation dans un projet qui a un administrateur de projet'
         step: '@cstepProjectOwner'
         position: 1
+    consultationEmailing:
+        id: consultationEmailing
+        title: 'Consultation pour emailing'
+        step: '@cstepEmailing'
+        position: 1

@@ -120,3 +120,10 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
         body: hey
         startAt: <(new \DateTime('2020-09-11'))>
         endAt: <(new \DateTime('2060-09-27'))>
+    qStepEmailing:
+        id: qStepEmailing
+        title: Questionnaire pour campagne emailing
+        label: Questionnaire campagne emailing
+        body: Ceci est un questionnaire pour une campagne emailing
+        startAt: <(new \DateTime('2025-07-04'))>
+        timeless: true

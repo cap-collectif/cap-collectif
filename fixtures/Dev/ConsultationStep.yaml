@@ -98,3 +98,11 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         body: Je suis une belle étape de consultation au sein d'un projet avec un administrateur de projet
         startAt: <identity((new \DateTime('2020-11-03 20:30:55')))>
         endAt: <identity((new \DateTime('2032-11-03 06:45:12')))>
+    cstepEmailing:
+        id: 'cstepEmailing'
+        title: 'Étape de consultation pour emailing'
+        label: Consultation
+        isEnabled: true
+        body: Cette consultation concerne les emailings
+        startAt: <identity((new \DateTime('2025-07-03 20:30:55')))>
+        endAt: <identity((new \DateTime('2025-09-03 06:45:12')))>

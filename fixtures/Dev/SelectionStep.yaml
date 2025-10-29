@@ -220,3 +220,23 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         body: Vote parcours
         votesMin: 2
         votesLimit: 2
+    selectionStepVoteEmailing:
+        id: selectionStepVoteEmailing
+        title: Sélection pour la campagne d'emailing (vote)
+        label: Sélection emailing (vote)
+        startAt: <identity((new \DateTime('2025-07-01')))>
+        timeless: true
+        isEnabled: true
+        voteType: 1
+        defaultStatus: '@statusSelectionStepVoteEmailing'
+        body: Faites votre sélection ! (vote)
+    selectionStepNoVoteEmailing:
+        id: selectionStepNoVoteEmailing
+        title: Sélection pour la campagne d'emailing (no vote)
+        label: Sélection emailing (no vote)
+        startAt: <identity((new \DateTime('2025-07-01')))>
+        timeless: true
+        isEnabled: true
+        voteType: 0
+        defaultStatus: '@statusSelectionStepNoVoteEmailing'
+        body: Faites votre sélection ! (no vote)

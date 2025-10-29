@@ -82,42 +82,75 @@ Capco\AppBundle\Entity\EmailingCampaign:
         name: 'Campagne avec mailing list'
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'A. Sistance'
-        owner: '@user4'
-        creator: '@user4'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
         status: 'DRAFT'
         object: 'Campagne avec mailing list'
         content: <stripslashes('\<p>\')>Campagne avec mailing list<stripslashes('\</p>\')>
         mailingList: '@longMailingList'
-    CampaignWithInternalList:
-        id: CampaignWithInternalList
-        name: 'Campagne avec internal list'
+    CampaignWithAllRegistered:
+        id: CampaignWithAllRegistered
+        name: 'Campagne pour tout le monde'
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'A. Sistance'
-        owner: '@user4'
-        creator: '@user4'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
         status: 'DRAFT'
-        object: 'Campagne avec internal list'
-        content: <stripslashes('\<p>\')>Campagne avec internal list<stripslashes('\</p>\')>
+        object: 'Campagne pour tout le monde'
+        content: <stripslashes('\<p>\')>Campagne pour tout le monde<stripslashes('\</p>\')>
         mailingInternal: 'REGISTERED'
     CampaignWithUserGroup:
         id: CampaignWithUserGroup
         name: 'Campagne avec groupe de users'
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'A. Sistance'
-        owner: '@user4'
-        creator: '@user4'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
         status: 'DRAFT'
         object: 'Campagne avec groupe de users'
         content: <stripslashes('\<p>\')>Campagne avec groupe de users<stripslashes('\</p>\')>
         emailingGroup: '@group1'
-    CampaignWithProject:
-        id: CampaignWithProject
-        name: 'Campagne avec un projet'
+    CampaignWithInternalList:
+        id: CampaignWithInternalList
+        name: 'Campagne avec internal list'
         senderEmail: 'assistance@cap-collectif.com'
         senderName: 'A. Sistance'
-        owner: '@user4'
-        creator: '@user4'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
         status: 'DRAFT'
-        object: 'Campagne avec un projet'
-        content: <stripslashes('\<p>\')>Campagne avec un projet<stripslashes('\</p>\')>
-        project: '@p1'
+        object: 'Campagne avec internal list'
+        content: <stripslashes('\<p>\')>Campagne avec internal list<stripslashes('\</p>\')>
+        mailingInternal: 'REGISTERED'
+    CampaignWithProjectCollectVote:
+        id: CampaignWithProjectCollectVote
+        name: 'Campagne avec projet (vote au dépôt)'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+        status: 'DRAFT'
+        object: 'Campagne avec projet (vote au dépôt)'
+        content: <stripslashes('\<p>\')>Campagne avec projet (vote au dépôt)<stripslashes('\</p>\')>
+        project: '@projectForEmailingCollectVote'
+    CampaignWithProjectSelectionVote:
+        id: CampaignWithProjectSelectionVote
+        name: 'Campagne avec projet (vote à la sélection)'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+        status: 'DRAFT'
+        object: 'Campagne avec projet (vote à la sélection)'
+        content: <stripslashes('\<p>\')>Campagne avec projet (vote à la sélection)<stripslashes('\</p>\')>
+        project: '@projectForEmailingSelectionVote'
+    CampaignWithProjectConsultation:
+        id: CampaignWithProjectConsultation
+        name: 'Campagne avec projet (consultation)'
+        senderEmail: 'assistance@cap-collectif.com'
+        senderName: 'A. Sistance'
+        owner: '@emailingAdmin'
+        creator: '@emailingAdmin'
+        status: 'DRAFT'
+        object: 'Campagne avec projet (consultation)'
+        content: <stripslashes('\<p>\')>Campagne avec projet (consultation)<stripslashes('\</p>\')>
+        project: '@projectForEmailingConsultation'

@@ -43,3 +43,11 @@ Capco\UserBundle\Entity\UserTypeTranslation:
         translatable: '@UserType1'
         locale: de-DE
         name: Bürger
+    UserTypeEmalingFR:
+        translatable: '@UserTypeEmaling'
+        locale: fr-FR
+        name: Manipulateur d'emails
+    UserTypeEmalingEN:
+        translatable: '@UserTypeEmaling'
+        locale: en-GB
+        name: Email processor

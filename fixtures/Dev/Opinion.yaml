@@ -358,3 +358,63 @@ Capco\AppBundle\Entity\Opinion:
         body: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
         author: '@user5'
         OpinionType: '@opinionTypeFirstInMultiForExport'
+
+    opinionEmailing1:
+        id: 'opinionEmailing1'
+        consultation: '@consultationEmailing'
+        title: Bonjuor.
+        body: <stripslashes('\<p>Il fait baeu.</p>\')>
+        author: '@emailingUser15'
+        OpinionType: '@opinionTypeEmailingTypo'
+        position: 1
+        createdAt: <(new \DateTime('2025-07-25 00:00:00'))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+
+    opinionEmailing2:
+        id: 'opinionEmailing2'
+        consultation: '@consultationEmailing'
+        title: Au revior.
+        body: <stripslashes('\<p>Il fait mohce.</p>\')>
+        author: '@emailingUser16'
+        OpinionType: '@opinionTypeEmailingTypo'
+        position: 2
+        createdAt: <(new \DateTime('2025-07-25 00:00:00'))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+
+    opinionEmailing3:
+        id: 'opinionEmailing3'
+        consultation: '@consultationEmailing'
+        title: Comment allez vuos ?
+        body: <stripslashes('\<p>Moi je vias bien.</p>\')>
+        author: '@emailingUser13'
+        OpinionType: '@opinionTypeEmailingTypo'
+        position: 3
+        createdAt: <(new \DateTime('2025-07-25 00:00:00'))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+
+    opinionEmailing4:
+        id: 'opinionEmailing4'
+        consultation: '@consultationEmailing'
+        title: That's just like, your opinion, man.
+        body: <stripslashes('\<p>Bon film</p>\')>
+        author: '@emailingUser15'
+        OpinionType: '@opinionTypeEmailingLebowski'
+        position: 4
+        createdAt: <(new \DateTime('2025-07-25 00:00:00'))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+
+    opinionEmailing5:
+        id: 'opinionEmailing5'
+        consultation: '@consultationEmailing'
+        title: Joel & Ethan Cohen
+        body: <stripslashes('\<p>Bon réals</p>\')>
+        author: '@emailingUser12'
+        OpinionType: '@opinionTypeEmailingLebowski'
+        position: 5
+        createdAt: <(new \DateTime('2025-07-25 00:00:00'))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt

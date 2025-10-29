@@ -175,3 +175,35 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2024-01-03'))>
         user: '@user1'
         isAccounted: true
+    psvEmailingSelectionVote1:
+        id: 1071
+        proposal: '@proposalEmailingSelectionVote1'
+        selectionStep: '@selectionStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingAdmin'
+        isAccounted: true
+    proposalSelectionVoteEmailingCampaign2:
+        id: 1072
+        proposal: '@proposalEmailingSelectionVote1'
+        selectionStep: '@selectionStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingUser16'
+        isAccounted: false
+    proposalSelectionVoteEmailingCampaign3:
+        id: 1073
+        proposal: '@proposalEmailingSelectionVote1'
+        selectionStep: '@selectionStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingUser13'
+        isAccounted: true
+    proposalSelectionVoteEmailingCampaign4:
+        id: 1074
+        proposal: '@proposalEmailingSelectionVote2'
+        selectionStep: '@selectionStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingUser15'
+        isAccounted: true

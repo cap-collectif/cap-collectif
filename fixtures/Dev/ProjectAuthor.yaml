@@ -179,3 +179,15 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2024-08-01 00:00:01'))>
         user: '@user1'
         project: '@projectWorkflowVote2'
+    pa46:
+        createdAt: <(new \DateTime('2025-07-03 06:00:00'))>
+        user: '@emailingAdmin'
+        project: '@projectForEmailingCollectVote'
+    pa47:
+        createdAt: <(new \DateTime('2025-07-03 06:00:00'))>
+        user: '@emailingAdmin'
+        project: '@projectForEmailingSelectionVote'
+    pa48:
+        createdAt: <(new \DateTime('2025-07-03 06:00:00'))>
+        user: '@emailingAdmin'
+        project: '@projectForEmailingConsultation'

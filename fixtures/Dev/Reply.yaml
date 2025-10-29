@@ -216,3 +216,43 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2017-03-01'))>
         updatedAt: <(new \DateTime('2017-03-01'))>
         participant: '@participant1'
+    replyEmailingCampaign1:
+        id: 'replyEmailingCampaign1'
+        draft: 0
+        questionnaire: '@questionnaireEmailingCampaign'
+        publishedAt: <(new \DateTime('2025-07-10'))>
+        createdAt: <(new \DateTime('2025-07-10'))>
+        updatedAt: <(new \DateTime('2025-07-10'))>
+        author: '@emailingUser20'
+    replyEmailingCampaign2:
+        id: 'replyEmailingCampaign2'
+        draft: 0
+        questionnaire: '@questionnaireEmailingCampaign'
+        publishedAt: <(new \DateTime('2025-07-10'))>
+        createdAt: <(new \DateTime('2025-07-10'))>
+        updatedAt: <(new \DateTime('2025-07-10'))>
+        author: '@emailingUser21'
+    replyEmailingCampaign3:
+        id: 'replyEmailingCampaign3'
+        draft: 1
+        questionnaire: '@questionnaireEmailingCampaign'
+        publishedAt: <(new \DateTime('2025-07-10'))>
+        createdAt: <(new \DateTime('2025-07-10'))>
+        updatedAt: <(new \DateTime('2025-07-10'))>
+        author: '@emailingUser22'
+    replyEmailingCampaign4:
+        id: 'replyEmailingCampaign4'
+        draft: 0
+        questionnaire: '@questionnaireEmailingCampaign'
+        publishedAt: <(new \DateTime('2025-07-10'))>
+        createdAt: <(new \DateTime('2025-07-10'))>
+        updatedAt: <(new \DateTime('2025-07-10'))>
+        participant: '@participantEmailingCampaign3'
+    replyEmailingCampaign5:
+        id: 'replyEmailingCampaign5'
+        draft: 1
+        questionnaire: '@questionnaireEmailingCampaign'
+        publishedAt: <(new \DateTime('2025-07-10'))>
+        createdAt: <(new \DateTime('2025-07-10'))>
+        updatedAt: <(new \DateTime('2025-07-10'))>
+        participant: '@participantEmailingCampaign4'

@@ -172,3 +172,23 @@ Capco\AppBundle\Entity\ProposalComment:
         updatedAt: <((new \DateTime('2017-02-01')))>
         moderationStatus: PENDING
         confirmationToken: randomToken
+    pcEmailing1:
+        id: 'pcEmailing1'
+        proposal: '@proposalEmailingCollectVote1'
+        author: '@emailingUser19'
+        body: Je suis d'accord avec moi-même
+        createdAt: <(new \DateTime('2025-08-01'))>
+        publishedAt: <(new \DateTime('2025-08-01'))>
+        updatedAt: <((new \DateTime('2025-08-01')))>
+        moderationStatus: PENDING
+        confirmationToken: fake_token_emailing_1
+    pcEmailing2:
+        id: 'pcEmailing2'
+        proposal: '@proposalEmailingCollectVote1'
+        author: '@emailingUser19'
+        body: Passionnant
+        createdAt: <(new \DateTime('2025-08-01'))>
+        publishedAt: <(new \DateTime('2025-08-01'))>
+        updatedAt: <((new \DateTime('2025-08-01')))>
+        moderationStatus: APPROVED
+        confirmationToken: fake_token_emailing_2

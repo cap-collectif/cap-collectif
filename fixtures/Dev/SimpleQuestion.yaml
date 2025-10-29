@@ -515,3 +515,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Q3
         type: 0
         temporaryId: 'a2bce3ce-0524-4884-a03a-4a9acea60dfe'
+    simpleQuestionEmailingCampaign:
+        id: 1406
+        title: Quelle est le meilleur moment pour une campagne emailing ?
+        type: 0 # text

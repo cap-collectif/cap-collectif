@@ -40,3 +40,47 @@ Capco\AppBundle\Entity\Participant:
         votes: []
         user: null
         createdAt: <identity((new \DateTime('2022-01-14')))>
+    participantEmailingCampaign1:
+        id: 'participantEmailingCampaign1'
+        firstname: Amélie
+        lastname: Campagne
+        email: amelis.campagne@cap-collectif.com
+        phone: '+3300000000'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('1990-07-01'))>
+        token: 'fakeTokenAmelieCampagne'
+        user: null
+        createdAt: <identity((new \DateTime('2024-01-14')))>
+    participantEmailingCampaign2:
+        id: 'participantEmailingCampaign2'
+        firstname: Émile
+        lastname: Campanil
+        email: emile.campanil@cap-collectif.com
+        phone: '+3300000000'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('2003-07-01'))>
+        token: 'fakeTokenEmileCampanil'
+        user: null
+        createdAt: <identity((new \DateTime('2024-01-14')))>
+    participantEmailingCampaign3:
+        id: 'participantEmailingCampaign3'
+        firstname: Émilie
+        lastname: Compte-Panille
+        email: emilie.compte-panille@cap-collectif.com
+        phone: '+3300000000'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('1997-07-01'))>
+        token: 'fakeTokenEmilieComptePanille'
+        user: null
+        createdAt: <identity((new \DateTime('2024-01-14')))>
+    participantEmailingCampaign4:
+        id: 'participantEmailingCampaign4'
+        firstname: Amel
+        lastname: Icampane
+        email: amel.icampane@cap-collectif.com
+        phone: '+3300000000'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('1999-07-01'))>
+        token: 'fakeTokenAmelIcampane'
+        user: null
+        createdAt: <identity((new \DateTime('2024-01-14')))>

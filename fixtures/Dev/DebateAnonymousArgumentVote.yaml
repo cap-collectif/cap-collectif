@@ -6,3 +6,10 @@ Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote:
         debateArgument: '@DebateAnonymousArgumentFor1'
         publishedAt: <(new \DateTime('2021-05-02 00:00:00'))>
         createdAt: $publishedAt
+    daavEmailingAgainst:
+        id: 12802
+        user: '@emailingUser1'
+        ipAddress: '19.19.19.19'
+        debateArgument: '@daaEmailingFor'
+        publishedAt: <(new \DateTime('2025-08-06 00:00:00'))>
+        createdAt: $publishedAt

@@ -135,3 +135,23 @@ Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfig
         onProposalNewsUpdate: false
         onProposalNewsDelete: false
         email: theo@cap-collectif.com
+    proposalFormCollectVote:
+        onCreate: false
+        onUpdate: false
+        onDelete: false
+        onCommentCreate: false
+        onCommentUpdate: false
+        onCommentDelete: false
+        onProposalNewsCreate: false
+        onProposalNewsUpdate: false
+        onProposalNewsDelete: false
+    proposalFormCollectNoVote:
+        onCreate: false
+        onUpdate: false
+        onDelete: false
+        onCommentCreate: false
+        onCommentUpdate: false
+        onCommentDelete: false
+        onProposalNewsCreate: false
+        onProposalNewsUpdate: false
+        onProposalNewsDelete: false

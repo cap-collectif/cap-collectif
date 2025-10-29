@@ -524,3 +524,40 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@ostep4'
         project: '@projectWithOnlyOtherStepOpen'
         position: 1
+
+    # emailing campaign
+    pasEmailingDebate:
+        id: pasEmailingDebate
+        step: '@debateStepEmailing'
+        project: '@projectForEmailingCollectVote'
+        position: 1
+    pasEmailingQuestionnaire:
+        id: pasEmailingQuestionnaire
+        step: '@qStepEmailing'
+        project: '@projectForEmailingCollectVote'
+        position: 2
+    pasEmailingCollectVote:
+        id: pasEmailingCollectVote
+        step: '@collectStepVoteEmailing'
+        project: '@projectForEmailingCollectVote'
+        position: 3
+    pasEmailingSelectionNoVote:
+        id: pasEmailingSelectionNoVote
+        step: '@selectionStepNoVoteEmailing'
+        project: '@projectForEmailingCollectVote'
+        position: 4
+    pasEmailingCollectNoVote:
+        id: pasEmailingCollectNoVote
+        step: '@collectStepNoVoteEmailing'
+        project: '@projectForEmailingSelectionVote'
+        position: 1
+    pasEmailingSelectionVote:
+        id: pasEmailingSelectionVote
+        step: '@selectionStepVoteEmailing'
+        project: '@projectForEmailingSelectionVote'
+        position: 2
+    pasEmailingConsultation:
+        id: pasEmailingConsultation
+        step: '@cstepEmailing'
+        project: '@projectForEmailingConsultation'
+        position: 1

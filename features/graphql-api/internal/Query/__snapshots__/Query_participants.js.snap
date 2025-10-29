@@ -28,8 +28,40 @@ Object {
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQz",
         },
       },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "__typename": "Participant",
+          "firstname": "Amélie",
+          "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnRFbWFpbGluZ0NhbXBhaWduMQ==",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "__typename": "Participant",
+          "firstname": "Émile",
+          "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnRFbWFpbGluZ0NhbXBhaWduMg==",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "__typename": "Participant",
+          "firstname": "Émilie",
+          "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnRFbWFpbGluZ0NhbXBhaWduMw==",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "node": Object {
+          "__typename": "Participant",
+          "firstname": "Amel",
+          "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnRFbWFpbGluZ0NhbXBhaWduNA==",
+        },
+      },
     ],
-    "totalCount": 3,
+    "totalCount": 7,
   },
 }
 `;

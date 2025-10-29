@@ -183,4 +183,35 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         createdAt: <(new \DateTime('2024-01-03'))>
         user: '@user1'
         isAccounted: true
-
+    pcvEmailingCollectVote1:
+        id: 2073
+        proposal: '@proposalEmailingCollectVote1'
+        collectStep: '@collectStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingAdmin'
+        isAccounted: true
+    pcvEmailingCollectVote2:
+        id: 2074
+        proposal: '@proposalEmailingCollectVote2'
+        collectStep: '@collectStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingUser17'
+        isAccounted: true
+    pcvEmailingCollectVote3:
+        id: 2075
+        proposal: '@proposalEmailingCollectVote2'
+        collectStep: '@collectStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        user: '@emailingUser18'
+        isAccounted: true
+    pcvEmailingCollectVote4:
+        id: 2076
+        proposal: '@proposalEmailingCollectVote2'
+        collectStep: '@collectStepVoteEmailing'
+        publishedAt: <(new \DateTime('2025-08-03'))>
+        createdAt: <(new \DateTime('2025-08-03'))>
+        participant: '@participantEmailingCampaign1'
+        isAccounted: false
