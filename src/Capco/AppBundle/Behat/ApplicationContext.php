@@ -302,22 +302,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Given I should see the shield
-     */
-    public function iShouldSeeTheShield()
-    {
-        $this->assertSession()->elementExists('css', '#shield-mode');
-    }
-
-    /**
-     * @Given I should not see the shield
-     */
-    public function iShouldNotSeeTheShield()
-    {
-        $this->assertSession()->elementNotExists('css', '#shield-mode');
-    }
-
-    /**
      * @Given I visited :pageName with:
      */
     public function iVisitedPageWith(mixed $pageName, TableNode $parameters)
@@ -1641,25 +1625,6 @@ class ApplicationContext extends UserContext
         }
 
         return null;
-    }
-
-    private function moveDraggableElementTo($element, $key)
-    {
-        // http://keycode.info/
-        $spaceBar = 32;
-        $page = $this->getCurrentPage();
-        $element = $page->find('css', $element);
-        $element->keyDown($spaceBar);
-        $element->keyPress($spaceBar);
-        $element->keyDown($key);
-        $element->keyPress(0);
-        $this->iWait(1);
-        $element->keyUp($key);
-        $element->keyUp($spaceBar);
-        // press spacebar again to validate
-        $element->keyDown($spaceBar);
-        $element->keyPress($spaceBar);
-        $element->keyUp($spaceBar);
     }
 
     private function scrollTo(string $direction = 'bot')

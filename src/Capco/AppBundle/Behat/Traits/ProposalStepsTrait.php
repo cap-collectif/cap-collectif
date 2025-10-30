@@ -904,14 +904,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I reorder my vote with :proposalId take place of proposal up
-     */
-    public function iReorderMyVoteWithProposal1TakePlaceOfProposalUp(string $proposalId)
-    {
-        $this->moveDraggableElementTo($proposalId, static::$arrowUp);
-    }
-
-    /**
      * @Then I should have :nb votes
      */
     public function iShouldHaveNbVotes(int $nb)
