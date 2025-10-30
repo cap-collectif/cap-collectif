@@ -1,9 +1,118 @@
 #!/bin/bash
+set -u
 
-service clamav-freshclam start
-sleep 30
-scan_result=$(clamscan --suppress-ok-results --remove=no --scan-archive=yes -r /var/www/public/media/default)
+# === Configuration ===
+SCAN_DIR="/var/www/public/media/default"
+LOG_DIR="/var/www/public/media/clamav-logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/scan_$(date +'%Y%m%d_%H%M%S').log"
+LAST_SCAN_DATE_PATH="$LOG_DIR/last_scan_date.txt"
+FRESHCLAM_WAIT=30
 
-if [[ $scan_result == *"FOUND"* ]]; then
-  curl -X POST -H 'Content-type: application/json' --data '{"text":"['"$SYMFONY_INSTANCE_NAME"'] Virus found in instance\n'"$scan_result"'"}' $SLACK_WEBHOOK_ANTIVIRUS
+clean_log_files() {
+  echo "[INFO] Suppression des anciens fichiers de logs vieux de plus d’un mois..." | tee -a "$LOG_FILE"
+  find "$LOG_DIR" -type f -name "scan_*.log" -mtime +30 -delete || true
+}
+
+start_freshclam() {
+      if ! pidof freshclam >/dev/null; then
+          echo "[INFO] Démarrage du service clamav-freshclam..." | tee -a "$LOG_FILE"
+            service clamav-freshclam start
+            echo "[INFO] Attente de $FRESHCLAM_WAIT secondes pour la mise à jour..." | tee -a "$LOG_FILE"
+            sleep "$FRESHCLAM_WAIT"
+      else
+          echo "[INFO] Le service clamav-freshclam est déjà actif." | tee -a "$LOG_FILE"
+      fi
+}
+
+stop_freshclam() {
+        echo "[INFO] Arrêt du service clamav-freshclam..." | tee -a "$LOG_FILE"
+        service clamav-freshclam stop
+}
+
+initialize_cache() {
+    if [[ ! -f "$LAST_SCAN_DATE_PATH" ]]; then
+        echo "[INFO] Premier scan, création du cache..." | tee -a "$LOG_FILE"
+        touch "$LAST_SCAN_DATE_PATH"
+        FIRST_SCAN=true
+    else
+        FIRST_SCAN=false
+    fi
+}
+
+scan_modified_files() {
+    echo "[INFO] Scan des fichiers nouveaux ou modifiés depuis le dernier passage..."
+
+    if [[ "$FIRST_SCAN" = true ]]; then
+        echo "[INFO] Premier scan de tous les fichiers..." | tee -a "$LOG_FILE"
+        scan_result=$(find "$SCAN_DIR" -type f -print0 | \
+            xargs -0 clamscan --log=$LOG_FILE --remove=no --scan-archive=yes -v 2>&1)
+    else
+        files_to_scan=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -print0)
+
+        if [[ -n "$files_to_scan" ]]; then
+            echo "[INFO] Scan des fichiers modifiés depuis le dernier passage..." | tee -a "$LOG_FILE"
+
+            scan_result=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -exec \
+                    clamscan --log=$LOG_FILE --remove=no --scan-archive=yes -v {} + 2>&1)
+        else
+            echo "[INFO] Aucun fichier à scanner."
+            scan_result="[INFO] Aucun fichier à scanner."
+        fi
+    fi
+
+    scan_exit_code=$?
+
+    if [[ $scan_exit_code -eq 1 ]]; then
+        echo "[ERROR] Virus détecté ! Cache non mis à jour. Voir $LOG_FILE" | tee -a "$LOG_FILE"
+
+        if [[ "$FIRST_SCAN" = true ]]; then
+          echo "Suppression du fichier $LAST_SCAN_DATE_PATH pour ré-initialiser le cache" | tee -a "$LOG_FILE"
+
+          rm $LAST_SCAN_DATE_PATH
+        fi
+
+        if [[ -n "${SLACK_WEBHOOK_ANTIVIRUS:-}" ]]; then
+            payload=$(printf '{"text":"[%s] Virus found in instance\n%s"}' "${SYMFONY_INSTANCE_NAME:-unknown}" "$scan_result")
+            curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_ANTIVIRUS" || true
+        fi
+
+        return 1
+    fi
+
+    if [[ $scan_exit_code -eq 2 ]]; then
+            echo "[ERROR] Une erreur innatendue est survenue pendant le scan des fichiers. Voir $LOG_FILE" | tee -a "$LOG_FILE"
+
+            if [[ -n "${SLACK_WEBHOOK_ANTIVIRUS:-}" ]]; then
+                payload=$(printf '{"text":"[%s] An unexpected error occured while scanning files \n%s"}' "${SYMFONY_INSTANCE_NAME:-unknown}" "$scan_result")
+                curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_ANTIVIRUS" || true
+            fi
+
+            return 1
+        fi
+
+    echo "[INFO] Scan terminé : aucun virus détecté." | tee -a "$LOG_FILE"
+
+    return 0
+}
+
+update_cache() {
+    touch "$LAST_SCAN_DATE_PATH"
+    echo "[INFO] Cache mis à jour ($LAST_SCAN_DATE_PATH touched)." | tee -a "$LOG_FILE"
+}
+
+# === Main ===
+clean_log_files
+
+start_freshclam
+initialize_cache
+
+if scan_modified_files; then
+    update_cache
+else
+    rc=$?
+    echo "[WARN] Scan non concluant (code $rc). Cache non modifié pour permettre réanalyse après correction." | tee -a "$LOG_FILE"
+    exit $rc
 fi
+
+stop_freshclam
