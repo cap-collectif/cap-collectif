@@ -227,16 +227,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given I open login modal
-     */
-    public function iOpenLoginModal()
-    {
-        $this->navigationContext->iVisitedPage('HomePage');
-        $home = $this->navigationContext->getPage('HomePage');
-        $home->openLoginModal();
-    }
-
-    /**
      * @Then I should be asked to confirm my email :email
      */
     public function iShouldBeAskedToConfirmMyEmail(string $email)
