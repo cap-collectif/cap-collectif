@@ -6,7 +6,6 @@ use Behat\Mink\Session;
 
 trait AdminTrait
 {
-    use AdminContactListTrait;
     use AdminGlobalDistrictTrait;
     use AdminPageTrait;
     use AdminProposalFormTrait;
