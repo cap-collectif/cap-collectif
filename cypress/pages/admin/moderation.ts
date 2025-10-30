@@ -41,4 +41,19 @@ export default new (class AdminModerationPage {
   get submitButton() {
     return this.cy.get('#confirm-proposal-merge-create')
   }
+
+  interceptRedirect({ path, redirectPath }: { path: string; redirectPath: string }) {
+    cy.interceptGraphQLOperation({ operationName: 'NavbarRightQuery' })
+    cy.intercept('GET', '/moderate/**').as('moderate')
+    cy.visit(path, {
+      failOnStatusCode: false,
+    })
+
+    cy.wait('@moderate', { timeout: 10000 }).then(interception => {
+      const redirectUrl = interception?.response?.headers['location'] ?? ''
+      cy.wrap(redirectUrl).should('equal', redirectPath)
+    })
+
+    cy.wait(`@NavbarRightQuery`, { timeout: 10000 })
+  }
 })()
