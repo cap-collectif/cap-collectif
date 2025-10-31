@@ -45,8 +45,7 @@ scan_modified_files() {
 
     if [[ "$FIRST_SCAN" = true ]]; then
         echo "[INFO] Premier scan de tous les fichiers..." | tee -a "$LOG_FILE"
-        scan_result=$(find "$SCAN_DIR" -type f -print0 | \
-            xargs -0 clamscan --log=$LOG_FILE --remove=no --scan-archive=yes -v 2>&1)
+        scan_result=$(clamscan -r --log="$LOG_FILE" --remove=no --scan-archive=yes -v "$SCAN_DIR" 2>&1)
     else
         files_to_scan=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -print0)
 
@@ -81,15 +80,15 @@ scan_modified_files() {
     fi
 
     if [[ $scan_exit_code -eq 2 ]]; then
-            echo "[ERROR] Une erreur innatendue est survenue pendant le scan des fichiers. Voir $LOG_FILE" | tee -a "$LOG_FILE"
+          echo "[ERROR] Une erreur innatendue est survenue pendant le scan des fichiers. Voir $LOG_FILE" | tee -a "$LOG_FILE"
 
-            if [[ -n "${SLACK_WEBHOOK_ANTIVIRUS:-}" ]]; then
-                payload=$(printf '{"text":"[%s] An unexpected error occured while scanning files \n%s"}' "${SYMFONY_INSTANCE_NAME:-unknown}" "$scan_result")
-                curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_ANTIVIRUS" || true
-            fi
+          if [[ -n "${SLACK_WEBHOOK_ANTIVIRUS:-}" ]]; then
+              payload=$(printf '{"text":"[%s] An unexpected error occured while scanning files \n%s"}' "${SYMFONY_INSTANCE_NAME:-unknown}" "$scan_result")
+              curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_ANTIVIRUS" || true
+          fi
 
-            return 1
-        fi
+          return 1
+      fi
 
     echo "[INFO] Scan terminé : aucun virus détecté." | tee -a "$LOG_FILE"
 
