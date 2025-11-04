@@ -1,20 +1,20 @@
-import React, { type FC } from 'react'
-import { useIntl } from 'react-intl'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
-  MultiStepModal,
-  Modal,
-  Heading,
+  Box,
   Button,
-  useMultiStepModal,
+  CapInputSize,
   CapUIIcon,
   FormLabel,
-  Box,
-  CapInputSize,
+  Heading,
+  Modal,
+  MultiStepModal,
+  useMultiStepModal,
 } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { graphql, useFragment } from 'react-relay'
 import { FillRequirementsModal_step$key } from '@relay/FillRequirementsModal_step.graphql'
+import React, { type FC } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 type FillRequirementsModalProps = {
   step: FillRequirementsModal_step$key
@@ -27,7 +27,7 @@ const STEP_FRAGMENT = graphql`
       edges {
         node {
           id
-            ... on FirstnameRequirement {
+          ... on FirstnameRequirement {
             __typename
           }
           ... on LastnameRequirement {
@@ -53,9 +53,8 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const ONLY_NUMBER_REGEX = /^(0|[1-9]\d*)(\.\d+)?$/;
-const ZIP_CODE_LENGTH = 5;
-
+const ONLY_NUMBER_REGEX = /^(0|[1-9]\d*)(\.\d+)?$/
+const ZIP_CODE_LENGTH = 5
 
 type RequirementType = 'CheckboxRequirement' | 'LastnameRequirement'
 
@@ -75,6 +74,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
   const { control, setValue } = useFormContext()
 
   const { goToNextStep, goToPreviousStep } = useMultiStepModal()
+  const id = React.useId()
 
   return (
     <>
@@ -89,7 +89,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
           {toggleRequirements.map(requirement => {
             if ((requirement.__typename as RequirementType) === 'LastnameRequirement') {
               return (
-                <FormControl name="lastname" control={control}>
+                <FormControl name="lastname" control={control} key={id}>
                   <FormLabel htmlFor="lastname" label={intl.formatMessage({ id: 'global.name' })} />
                   <FieldInput id="lastname" name="lastname" control={control} type="text" minLength={2} />
                 </FormControl>
@@ -97,7 +97,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
             }
             if (requirement.__typename === 'FirstnameRequirement') {
               return (
-                <FormControl name="firstname" control={control}>
+                <FormControl name="firstname" control={control} key={id}>
                   <FormLabel htmlFor="firstname" label={intl.formatMessage({ id: 'form.label_firstname' })} />
                   <FieldInput id="firstname" name="firstname" control={control} type="text" minLength={2} />
                 </FormControl>
@@ -105,7 +105,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
             }
             if (requirement.__typename === 'DateOfBirthRequirement') {
               return (
-                <FormControl name="dateOfBirth" control={control}>
+                <FormControl name="dateOfBirth" control={control} key={id}>
                   <FormLabel htmlFor="dateOfBirth" label={intl.formatMessage({ id: 'form.label_date_of_birth' })} />
                   <FieldInput id="dateOfBirth" name="dateOfBirth" control={control} type="date" />
                 </FormControl>
@@ -113,7 +113,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
             }
             if (requirement.__typename === 'PostalAddressRequirement') {
               return (
-                <FormControl name="address" control={control}>
+                <FormControl name="address" control={control} key={id}>
                   <FormLabel htmlFor="address" label={intl.formatMessage({ id: 'admin.fields.event.address' })} />
                   <FieldInput
                     id="address"
@@ -129,7 +129,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
             }
             if (requirement.__typename === 'ZipCodeRequirement') {
               return (
-                <FormControl name="zipCode" control={control}>
+                <FormControl name="zipCode" control={control} key={id}>
                   <FormLabel htmlFor="zipCode" label={intl.formatMessage({ id: 'admin.fields.event.address' })} />
                   <FieldInput
                     id="zipCode"
@@ -149,14 +149,10 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
                       validate: {
                         exact: v =>
                           v.length === ZIP_CODE_LENGTH ||
-                          intl.formatMessage(
-                            { id: 'characters-required' },
-                            { length: ZIP_CODE_LENGTH },
-                          ),
+                          intl.formatMessage({ id: 'characters-required' }, { length: ZIP_CODE_LENGTH }),
                       },
                     }}
                   />
-
                 </FormControl>
               )
             }

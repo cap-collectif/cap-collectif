@@ -1,11 +1,11 @@
-import { type FC } from 'react'
-import { useIntl } from 'react-intl'
-import { MultiStepModal, Modal, Heading, Button, useMultiStepModal, FormLabel, Box } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { graphql, useFragment } from 'react-relay'
+import { Box, Button, FormLabel, Heading, Modal, MultiStepModal, useMultiStepModal } from '@cap-collectif/ui'
 import { FillOptionalsModal_step$key } from '@relay/FillOptionalsModal_step.graphql'
 import * as React from 'react'
+import { type FC } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 type FillOptionalsModalProps = {
   step: FillOptionalsModal_step$key
@@ -27,7 +27,7 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const PHONE_LENGTH = 10;
+const PHONE_LENGTH = 10
 
 const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubmit, isNew }) => {
   const intl = useIntl()
@@ -35,6 +35,7 @@ const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubm
   const requirements = step.requirements.edges.map(edge => edge.node)
   const { control, formState, handleSubmit } = useFormContext()
   const { goToPreviousStep } = useMultiStepModal()
+  const id = React.useId()
 
   return (
     <>
@@ -53,7 +54,7 @@ const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubm
           {requirements.map(requirement => {
             if (requirement.__typename === 'PhoneRequirement') {
               return (
-                <FormControl name="phone" control={control}>
+                <FormControl name="phone" control={control} key={id}>
                   <FormLabel htmlFor="phone" label={intl.formatMessage({ id: 'filter.label_phone' })} />
                   <FieldInput
                     id="phone"
@@ -69,23 +70,22 @@ const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubm
                       },
                       validate: {
                         exact: v => {
-                          if (!v) return;
-                          return v.length === PHONE_LENGTH ||
-                          intl.formatMessage(
-                            { id: 'characters-required' },
-                            { length: PHONE_LENGTH },
+                          if (!v) return
+                          return (
+                            v.length === PHONE_LENGTH ||
+                            intl.formatMessage({ id: 'characters-required' }, { length: PHONE_LENGTH })
                           )
                         },
                         startWithZero: v => {
-                          if (!v) return;
+                          if (!v) return
                           return (
                             v.startsWith('06') ||
                             v.startsWith('07') ||
                             intl.formatMessage({
                               id: 'number-must-start-with-zero-six-or-seven',
                             })
-                          );
-                        }
+                          )
+                        },
                       },
                     }}
                   />

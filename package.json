@@ -366,7 +366,9 @@
         "http-cache-semantics": "^4.1.1",
         "minimatch": "^3.0.5",
         "semver": "^7.5.4",
-        "@types/react": "^18.2.0"
+        "@types/react": "^18.2.0",
+        "eslint-plugin-react": "7.37.5",
+        "eslint-plugin-jsx-a11y": "^6.10.2"
     },
     "devDependencies": {
         "@babel/preset-typescript": "^7.23.0",
@@ -392,9 +394,9 @@
         "eslint-plugin-graphql": "^4.0.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jest": "^22.9.0",
-        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-jsx-a11y": "^6.10.2",
         "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.21.3",
+        "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^4.2.0",
         "eslint-plugin-relay": "^1.8.3",
         "fast-xml-parser": "^4.2.5",
