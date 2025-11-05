@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|TestEmailingCampaign GraphQL admin tests a campaign 1`] = `
+Object {
+  "testEmailingCampaign": Object {
+    "error": null,
+    "html": Any<String>,
+  },
+}
+`;
+
+exports[`Internal|TestEmailingCampaign GraphQL project owner wants to test its campaign but not sendable 1`] = `
+Object {
+  "testEmailingCampaign": Object {
+    "error": "CANNOT_BE_SENT",
+    "html": null,
+  },
+}
+`;
+
+exports[`Internal|TestEmailingCampaign Organization admin tests a campaign 1`] = `
+Object {
+  "testEmailingCampaign": Object {
+    "error": null,
+    "html": Any<String>,
+  },
+}
+`;

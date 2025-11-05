@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin tries to update a campaign with date already past 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "TOO_LATE",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin tries to update its campaign with group 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "content": "",
+      "emailingGroup": Object {
+        "id": "R3JvdXA6Z3JvdXAy",
+      },
+      "mailingInternal": null,
+      "mailingList": null,
+      "name": "new name",
+      "object": "",
+      "sendAt": null,
+      "senderEmail": "new@cap-collectif.com",
+      "senderName": "new sender name",
+      "status": "DRAFT",
+      "unlayerConf": "",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin try to update a campaign already sent 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "NOT_EDITABLE",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin updates a campaign 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "content": "new content",
+      "emailingGroup": null,
+      "mailingInternal": "REGISTERED",
+      "mailingList": null,
+      "name": "new name",
+      "object": "new object",
+      "sendAt": "2060-01-01 00:00:00",
+      "senderEmail": "new@cap-collectif.com",
+      "senderName": "new sender name",
+      "status": "DRAFT",
+      "unlayerConf": "{\\"what\\": \\"configuration\\"}",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin updates a campaign with a mailing list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "content": "",
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": Object {
+        "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+      },
+      "name": "new name",
+      "object": "",
+      "sendAt": null,
+      "senderEmail": "new@cap-collectif.com",
+      "senderName": "new sender name",
+      "status": "DRAFT",
+      "unlayerConf": "",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin updates a campaign with both an internal list and a mailing list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "DOUBLE_LIST",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin updates a campaign with wrong non existing internal list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL admin updates a campaign with wrong non existing list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL project owner tries to update its campaign with another ones mailing list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL project owner tries to update its campaign with internal mailing list 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|UpdateEmailingCampaign GraphQL project owner updates its campaign 1`] = `
+Object {
+  "updateEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "content": "",
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": Object {
+        "id": "TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg==",
+      },
+      "name": "new name",
+      "object": "",
+      "sendAt": null,
+      "senderEmail": "new@cap-collectif.com",
+      "senderName": "new sender name",
+      "status": "DRAFT",
+      "unlayerConf": "",
+    },
+    "error": null,
+  },
+}
+`;

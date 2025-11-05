@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SendEmailingCampaign GraphQL admin plans a draft campaign 1`] = `
+Object {
+  "sendEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "status": "PLANNED",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|SendEmailingCampaign GraphQL admin send a draft campaign 1`] = `
+Object {
+  "sendEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "status": "SENT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|SendEmailingCampaign GraphQL admin tries send a campaign already sent 1`] = `
+Object {
+  "sendEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "CANNOT_BE_SENT",
+  },
+}
+`;
+
+exports[`Internal|SendEmailingCampaign GraphQL project owner tries to send its draft campaign but is not complete 1`] = `
+Object {
+  "sendEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "CANNOT_BE_SENT",
+  },
+}
+`;
+
+exports[`Internal|SendEmailingCampaign Organization admin send a draft campaign 1`] = `
+Object {
+  "sendEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "status": "SENT",
+    },
+    "error": null,
+  },
+}
+`;

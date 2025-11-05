@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DeleteEmailingCampaign GraphQL admin deletes a draft campaign and archives a sent campaign 1`] = `
+Object {
+  "deleteEmailingCampaigns": Object {
+    "archivedIds": Array [
+      "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvUmVtaW5kVG9Db25maXJt",
+    ],
+    "deletedIds": Array [
+      "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+    ],
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|DeleteEmailingCampaign GraphQL admin gives no id for deleting 1`] = `
+Object {
+  "deleteEmailingCampaigns": Object {
+    "archivedIds": Array [],
+    "deletedIds": Array [],
+    "error": "EMPTY",
+  },
+}
+`;
+
+exports[`Internal|DeleteEmailingCampaign GraphQL project owner deletes its draft campaign 1`] = `
+Object {
+  "deleteEmailingCampaigns": Object {
+    "archivedIds": Array [],
+    "deletedIds": Array [
+      "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvUHJvamVjdFdpdGhPd25lcg==",
+    ],
+    "error": null,
+  },
+}
+`;

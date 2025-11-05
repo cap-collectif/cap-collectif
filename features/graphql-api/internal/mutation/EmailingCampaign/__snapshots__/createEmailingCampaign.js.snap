@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Emailing campaign GraphQL admin creates a campaign from a group 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": Object {
+        "id": "R3JvdXA6Z3JvdXAy",
+      },
+      "mailingInternal": null,
+      "mailingList": null,
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "admin",
+      },
+      "project": null,
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL admin creates a campaign from a mailing list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": Object {
+        "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+        "isDeletable": false,
+      },
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "admin",
+      },
+      "project": null,
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL admin creates a campaign from an internal list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": null,
+      "mailingInternal": "REGISTERED",
+      "mailingList": null,
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "admin",
+      },
+      "project": null,
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL admin wants to create a campaign with a wrong mailing list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL admin wants to create a campaign with both group and organic list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "DOUBLE_LIST",
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner creates a campaign 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": null,
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "Théo QP",
+      },
+      "project": null,
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner creates a campaign from another project and get an error 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_PROJECT",
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner creates a campaign from its mailing list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": Object {
+        "id": "TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg==",
+        "isDeletable": false,
+      },
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "Théo QP",
+      },
+      "project": null,
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner creates a campaign from its project 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": Object {
+      "emailingGroup": null,
+      "mailingInternal": null,
+      "mailingList": null,
+      "name": "global.campaign.new",
+      "owner": Object {
+        "username": "Théo QP",
+      },
+      "project": Object {
+        "title": "Projet avec administrateur de projet",
+      },
+      "status": "DRAFT",
+    },
+    "error": null,
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner creates a campaign from other one mailing list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
+
+exports[`Internal|Emailing campaign GraphQL project owner wants to create a campaign from an internal list 1`] = `
+Object {
+  "createEmailingCampaign": Object {
+    "emailingCampaign": null,
+    "error": "ID_NOT_FOUND_MAILING_LIST",
+  },
+}
+`;
