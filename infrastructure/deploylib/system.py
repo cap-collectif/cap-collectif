@@ -87,7 +87,6 @@ def configure_vhosts(mode='symfony_bin'):
         'mail.cap.co',
         'kibana.cap.co',
         'rabbitmq.cap.co',
-        'cerebro.cap.co',
     ]
     localhost_domains = [
     ]

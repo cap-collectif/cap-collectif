@@ -103,18 +103,6 @@ services:
     ports:
       - '25:25'
 
-  # WE DONT need that for testing,
-  # Please fix nginx when they are not available
-  cerebro:
-    container_name: capco_cerebro_1
-    image: lmenezes/cerebro
-    links:
-      - elasticsearch
-    ports:
-      - '9000:9000'
-  #  volumes:
-  #    - ../services/cerebro:/opt/cerebro/conf
-
   kibana:
     container_name: capco_kibana_1
     image: docker.elastic.co/kibana/kibana-oss:7.0.0

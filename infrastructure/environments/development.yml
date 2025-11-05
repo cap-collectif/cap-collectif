@@ -7,7 +7,6 @@ services:
       - redis:redis
       - seleniumhub:selenium
       - mailcatcher:mailcatchersmtp
-      - cerebro:cerebro
       - nextjs
     environment:
       DOCKER_GID: 100
