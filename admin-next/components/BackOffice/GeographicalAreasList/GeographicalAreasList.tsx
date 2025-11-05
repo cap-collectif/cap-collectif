@@ -110,7 +110,7 @@ const GeographicalAreasList = () => {
             .map(edge => edge?.node)
             .filter(Boolean)
             .map(area => (
-              <ListCard.Item key={area?.id} sx={{ '> div': { opacity: 0 } }} _hover={{ '> div': { opacity: 1 } }}>
+              <ListCard.Item key={area?.id}>
                 <ListCard.Item.Label>
                   {area?.translations.find(t => t.locale === localeSelected.value)?.name ||
                     intl.formatMessage({ id: 'translation-not-available' })}

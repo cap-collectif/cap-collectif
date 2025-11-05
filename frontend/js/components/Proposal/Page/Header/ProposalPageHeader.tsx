@@ -183,10 +183,12 @@ const BackUrl = ({
 
   const fullUrl = `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`
 
-    const { btnTextColor, btnTextColorHover } = useSelector((state: GlobalState) => ({
-      btnTextColor: state.default.parameters['color.btn.ghost.base'],
-      btnTextColorHover: state.default.parameters['color.btn.ghost.hover'],
-    }))
+    const { linkColor, linkColorHover } = useSelector((state: GlobalState) => {
+      return {
+        linkColor: state.default.parameters['color.link.default'],
+        linkColorHover: state.default.parameters['color.link.hover'],
+      }
+    })
 
   const handleGoBack = () => {
     // !important: `fullUrl` won't work on mobile / mobile sized view
@@ -203,16 +205,24 @@ const BackUrl = ({
   }
 
   return (
-    <Link onClick={handleGoBack} sx={{cursor: 'pointer', textDecorationColor: btnTextColor, "&:hover": {
-      textDecorationColor: btnTextColorHover, "svg": {
-        color: btnTextColorHover
-      }, "p": {
-        color: btnTextColorHover,
-        textDecorationColor: btnTextColorHover,
-      }
-    }}}>
-      <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={btnTextColor} />
-        {tradKeyToBack && <Text color={btnTextColor}><FormattedMessage id={tradKeyToBack} /></Text>}
+    <Link onClick={handleGoBack}
+          sx={{
+                cursor: 'pointer',
+                textDecorationColor: linkColor,
+                "&:hover": {
+                  textDecorationColor: linkColorHover,
+                  "svg": {
+                    color: linkColorHover
+                  },
+                  "p": {
+                    color: linkColorHover,
+                    textDecorationColor: linkColorHover,
+                  }
+                }
+             }}
+    >
+      <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={linkColor} />
+        {tradKeyToBack && <Text color={linkColor}><FormattedMessage id={tradKeyToBack} /></Text>}
     </Link>
   )
 }

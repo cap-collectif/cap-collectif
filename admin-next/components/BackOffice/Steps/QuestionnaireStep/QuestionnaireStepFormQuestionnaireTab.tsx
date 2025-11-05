@@ -172,6 +172,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
               placeholder={intl.formatMessage({
                 id: 'questionnaire.explain_briefly',
               })}
+              bg='white'
             />
           </FormControl>
           <Text>{intl.formatMessage({ id: 'admin.fields.questionnaire.questions' })}</Text>
@@ -190,17 +191,12 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
               return (
                 <DragnDrop.Item draggableId={question.id} index={index} key={question.id}>
                   <ListCard.Item
-                    bg="white"
-                    borderRadius="normal"
-                    borderWidth="1px"
-                    borderColor="gray.200"
                     mb={1}
                     mt={1}
                     pl={isSubSection ? 6 : isSection ? 4 : hasSectionOrSubsectionBefore ? 8 : 4}
-                    sx={{ '.cap-buttonGroup': { opacity: 0 } }}
-                    _hover={{ '.cap-buttonGroup': { opacity: 1 } }}
                     draggable
                     width="100%"
+                    sx={{ '& > div' : {'backgroundColor': 'white !important'} }}
                   >
                     <Flex direction="column">
                       <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight={1.5}>

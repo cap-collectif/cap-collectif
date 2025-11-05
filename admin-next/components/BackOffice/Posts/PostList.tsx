@@ -115,6 +115,7 @@ const PostList: React.FC<PostListProps> = ({ viewer: viewerRef, postOwner, term,
                     variant="tertiary"
                     variantColor="hierarchy"
                     rightIcon={orderBy === 'DESC' ? CapUIIcon.ArrowDownO : CapUIIcon.ArrowUpO}
+                    sx={{backgroundColor: 'transparent !important'}}
                     {...styles}
                   >
                     <Text lineHeight="sm" style={{ whiteSpace: 'nowrap' }}>

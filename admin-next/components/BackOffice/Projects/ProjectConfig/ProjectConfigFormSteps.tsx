@@ -80,16 +80,12 @@ const ProjectConfigFormSteps: React.FC = () => {
                     // @ts-ignore https://github.com/cap-collectif/ui/issues/367
                     <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
                       <ListCard.Item
-                        bg="gray.100"
-                        borderRadius="normal"
-                        borderColor="gray.200"
+                        bg="white"
                         mb={1}
                         mt={1}
-                        py={2}
+                        pl={4}
                         draggable
                         width="100%"
-                        _hover={{ bg: 'gray.100' }}
-                        sx={{ borderWidth: '1px' }}
                       >
                         <Flex direction="column">
                           <Text
