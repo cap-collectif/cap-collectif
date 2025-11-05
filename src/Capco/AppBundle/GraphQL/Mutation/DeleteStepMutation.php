@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -81,12 +80,6 @@ class DeleteStepMutation implements MutationInterface
     private function deleteResource(AbstractStep $step): void
     {
         if ($step instanceof CollectStep) {
-            $this->em->remove($step->getProposalForm());
-
-            return;
-        }
-
-        if ($step instanceof SelectionStep) {
             $this->em->remove($step->getProposalForm());
 
             return;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SelectionStep.remove removes a selectionStep 1`] = `
+Object {
+  "deleteStep": Object {
+    "stepId": Any<String>,
+  },
+}
+`;
