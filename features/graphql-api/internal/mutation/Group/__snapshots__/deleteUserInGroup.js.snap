@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DeleteUserInGroup GraphQL client wants to remove a user from group 1`] = `
+Object {
+  "deleteUserInGroup": Object {
+    "group": Object {
+      "id": "R3JvdXA6Z3JvdXAy",
+      "users": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "VXNlcjp1c2VyNTIw",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "VXNlcjp1c2VyNTAz",
+            },
+          },
+        ],
+      },
+    },
+  },
+}
+`;

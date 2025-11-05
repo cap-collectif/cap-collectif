@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|updateGroup GraphQL client wants to update a group 1`] = `
+Object {
+  "updateGroup": Object {
+    "group": Object {
+      "description": "Nouvelle description",
+      "id": "R3JvdXA6Z3JvdXAy",
+      "title": "Nouveau titre",
+    },
+  },
+}
+`;
