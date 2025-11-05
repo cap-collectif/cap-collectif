@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateOfficialResponse GraphQL admin creates an officialResponse 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": null,
+    "officialResponse": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyU3B5bA==",
+        },
+      ],
+      "body": "<h3>Non.</h3><p>Cordialement</p>",
+      "isPublished": false,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateOfficialResponse GraphQL admin remove an author from an officialResponse 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": null,
+    "officialResponse": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyU3B5bA==",
+        },
+      ],
+      "body": "osef",
+      "isPublished": true,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateOfficialResponse GraphQL admin unpublish an officialResponse 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": null,
+    "officialResponse": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyU3B5bA==",
+        },
+      ],
+      "body": "<h3>Non.</h3><p>Cordialement</p>",
+      "isPublished": false,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateOfficialResponse GraphQL admin wants to create an officialResponse but gives no author 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": "NO_AUTHOR",
+    "officialResponse": null,
+  },
+}
+`;
+
+exports[`mutations.updateOfficialResponse GraphQL admin wants to create an officialResponse but wrong author id 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": "AUTHOR_NOT_FOUND",
+    "officialResponse": null,
+  },
+}
+`;
+
+exports[`mutations.updateOfficialResponse GraphQL admin wants to update an officialResponse but wrong id 1`] = `
+Object {
+  "updateOfficialResponse": Object {
+    "error": "ID_NOT_FOUND",
+    "officialResponse": null,
+  },
+}
+`;
