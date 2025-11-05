@@ -400,9 +400,6 @@
 }
 
 .has-vote-widget {
-    body {
-        padding-top: $navbar-height * 2;
-    }
 
     @media (min-width: $screen-md-min) {
         .sidebar {
