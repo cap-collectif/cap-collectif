@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.reviewEventMutation Admin approved an event in awaiting status 1`] = `
+Object {
+  "reviewEvent": Object {
+    "event": Object {
+      "_id": "eventCreateByAUserReviewAwaiting",
+      "review": Object {
+        "createdAt": "2015-01-14 00:00:00",
+        "refusedReason": "NONE",
+        "reviewer": Object {
+          "_id": "userAdmin",
+        },
+        "status": "APPROVED",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.reviewEventMutation Admin refused an event in awaiting status 1`] = `
+Object {
+  "reviewEvent": Object {
+    "event": Object {
+      "_id": "eventCreateByAUserReviewAwaiting",
+      "review": Object {
+        "createdAt": "2015-01-14 00:00:00",
+        "refusedReason": "SPAM",
+        "reviewer": Object {
+          "_id": "userAdmin",
+        },
+        "status": "REFUSED",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.reviewEventMutation Admin try to review an event ever approved 1`] = `
+Object {
+  "reviewEvent": Object {
+    "event": null,
+  },
+}
+`;
+
+exports[`mutations.reviewEventMutation SuperAdmin change review of event ever approved 1`] = `
+Object {
+  "reviewEvent": Object {
+    "event": Object {
+      "_id": "eventCreateByAUserReviewApproved",
+      "review": Object {
+        "createdAt": "2015-04-14 00:00:00",
+        "refusedReason": "SPAM",
+        "reviewer": Object {
+          "_id": "user1",
+        },
+        "status": "REFUSED",
+      },
+    },
+  },
+}
+`;
