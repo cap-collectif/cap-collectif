@@ -48,6 +48,9 @@ services:
   database:
     ports:
       - '3306:3306'
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
+      MYSQL_DATABASE: 'symfony'
     volumes:
       - /tmp:/tmp
 
