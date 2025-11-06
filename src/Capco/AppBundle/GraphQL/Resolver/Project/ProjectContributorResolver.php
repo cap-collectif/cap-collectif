@@ -42,9 +42,9 @@ class ProjectContributorResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(Project $project, ResolveInfo $info, ?Arg $args = null): ConnectionInterface
+    public function __invoke(Project $project, ?ResolveInfo $info = null, ?Arg $args = null): ConnectionInterface
     {
-        $requestedFields = $this->getRequestedFields($info);
+        $requestedFields = $info ? $this->getRequestedFields($info) : [];
 
         $this->isOnlyFetchingTotalCount = 1 === \count($requestedFields) && 'totalCount' === $requestedFields[0];
 
