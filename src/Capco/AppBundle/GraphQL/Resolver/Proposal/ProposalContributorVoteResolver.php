@@ -38,7 +38,7 @@ class ProposalContributorVoteResolver implements QueryInterface
         }
 
         if (!$step instanceof ProposalStepInterface) {
-            throw new \Exception('Step must implements ProposalStepInterface');
+            return null;
         }
 
         if ($step instanceof SelectionStep) {
