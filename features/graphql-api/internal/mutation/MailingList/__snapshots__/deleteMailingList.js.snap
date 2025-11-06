@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createMailingListMutation GraphQL admin wants to delete a mailing list 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [
+      "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
+    ],
+    "error": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL admin wants to delete a mailing list but provide no id 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [],
+    "error": "EMPTY_MAILING_LISTS",
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL admin wants to delete a mailing list but provide wrong id 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [],
+    "error": "ID_NOT_FOUND",
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL admin wants to delete a not deletable mailing list 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [],
+    "error": "NOT_DELETABLE",
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL project owner wants to delete its mailing list 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [
+      "TWFpbGluZ0xpc3Q6ZW1wdHlNYWlsaW5nTGlzdFdpdGhPd25lcg==",
+    ],
+    "error": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL project owner wants to delete other one mailing list 1`] = `
+Object {
+  "deleteMailingList": Object {
+    "deletedIds": Array [],
+    "error": "ID_NOT_FOUND",
+  },
+}
+`;

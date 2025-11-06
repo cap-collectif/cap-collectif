@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createMailingListMutation GraphQL admin wants to create a mailing list from project 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": null,
+    "mailingList": Object {
+      "isDeletable": true,
+      "name": "equipe tech",
+      "project": Object {
+        "title": "Solidarité Covid-19",
+      },
+      "users": Object {
+        "totalCount": 8,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL client wants to create a mailing but send no user ids 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": "EMPTY_USERS",
+    "mailingList": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL client wants to create a mailing but send wrong project id 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": "ID_NOT_FOUND_PROJECT",
+    "mailingList": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL client wants to create a mailing but send wrong user id 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": "ID_NOT_FOUND_USER",
+    "mailingList": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL project owner wants to create a mailing list from its project 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": null,
+    "mailingList": Object {
+      "isDeletable": true,
+      "name": "equipe tech",
+      "project": Object {
+        "title": "Projet avec administrateur de projet",
+      },
+      "users": Object {
+        "totalCount": 8,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL project owner wants to create a mailing list from other one project 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": "ID_NOT_FOUND_PROJECT",
+    "mailingList": null,
+  },
+}
+`;
+
+exports[`mutations.createMailingListMutation GraphQL project owner wants to create a mailing list without project 1`] = `
+Object {
+  "createMailingList": Object {
+    "error": null,
+    "mailingList": Object {
+      "isDeletable": true,
+      "name": "equipe tech",
+      "project": null,
+      "users": Object {
+        "totalCount": 8,
+      },
+    },
+  },
+}
+`;
