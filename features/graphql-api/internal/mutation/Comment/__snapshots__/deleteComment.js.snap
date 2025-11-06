@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteCommentMutation Author wants to delete his comment 1`] = `
+Object {
+  "deleteComment": Object {
+    "deletedCommentId": "Q29tbWVudDpldmVudENvbW1lbnQx",
+    "userErrors": Array [],
+  },
+}
+`;

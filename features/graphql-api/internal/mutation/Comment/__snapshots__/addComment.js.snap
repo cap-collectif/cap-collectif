@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addCommentMutation Admin wants to comment 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "userAdmin",
+        },
+        "authorEmail": null,
+        "authorName": null,
+        "body": "Ma super réponse",
+        "id": Any<String>,
+        "moderationStatus": "APPROVED",
+        "published": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation User wants to add a comment on a proposal 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "user5",
+        },
+        "authorEmail": null,
+        "authorName": null,
+        "body": "Tololo",
+        "id": Any<String>,
+        "moderationStatus": "APPROVED",
+        "published": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation User wants to comment when moderation is disabled 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "user5",
+        },
+        "authorEmail": null,
+        "authorName": null,
+        "body": "Ma super réponse",
+        "id": Any<String>,
+        "moderationStatus": "APPROVED",
+        "published": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation User wants to comment when moderation is enabled 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "user5",
+        },
+        "authorEmail": null,
+        "authorName": null,
+        "body": "Ma super réponse",
+        "id": Any<String>,
+        "moderationStatus": "PENDING",
+        "published": true,
+      },
+    },
+  },
+}
+`;

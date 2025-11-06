@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addCommentVoteMutation Logged in API client wants to vote for a comment 1`] = `
+Object {
+  "addCommentVote": Object {
+    "voteEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "user5",
+        },
+        "contribution": Object {
+          "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        },
+        "id": "910056",
+        "published": true,
+      },
+    },
+  },
+}
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.removeCommentVoteMutation Logged in API super admin wants to remove a vote for an comment 1`] = `
+Object {
+  "removeCommentVote": Object {
+    "contribution": Object {
+      "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+      "votes": Object {
+        "totalCount": 0,
+      },
+    },
+    "deletedVoteId": "Q29tbWVudFZvdGU6OTAwMDE=",
+  },
+}
+`;
