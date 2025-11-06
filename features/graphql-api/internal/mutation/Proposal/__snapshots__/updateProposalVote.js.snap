@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|update proposal vote Logged in API client wants to delete all votes 1`] = `
+Object {
+  "updateProposalVotes": Object {
+    "step": Object {
+      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+      "viewerVotes": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal|update proposal vote Logged in API client wants to reorder his votes 1`] = `
+Object {
+  "updateProposalVotes": Object {
+    "step": Object {
+      "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+      "viewerVotes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "proposal": Object {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+                "votes": Object {
+                  "totalPointsCount": 7,
+                },
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "proposal": Object {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+                "votes": Object {
+                  "totalPointsCount": 8,
+                },
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "proposal": Object {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+                "votes": Object {
+                  "totalPointsCount": 1,
+                },
+              },
+            },
+          },
+        ],
+        "totalCount": 3,
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal|update proposal vote Logged in API client wants to reorder his votes on question 1`] = `
+Object {
+  "updateProposalVotes": Object {
+    "step": Object {
+      "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFF1ZXN0aW9uVm90ZUF2ZWNDbGFzc2VtZW50",
+      "viewerVotes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "2054",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "2055",
+            },
+          },
+        ],
+        "totalCount": 2,
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal|update proposal vote Logged in API client wants to update with an anonymous vote 1`] = `
+Object {
+  "updateProposalVotes": Object {
+    "step": Object {
+      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+      "viewerVotes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "anonymous": true,
+              "id": "1053",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+    },
+  },
+}
+`;

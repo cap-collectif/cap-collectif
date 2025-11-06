@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|remove proposals to steps  Admin remove a step from two proposals, only one having it 1`] = `
+Object {
+  "removeProposalsFromSteps": Object {
+    "error": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "selections": Array [
+              Object {
+                "step": Object {
+                  "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+                },
+              },
+            ],
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "selections": Array [
+              Object {
+                "step": Object {
+                  "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+    "steps": Array [
+      Object {
+        "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg==",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|remove proposals to steps  Admin wants to remove a proposal not present in a step 1`] = `
+Object {
+  "removeProposalsFromSteps": Object {
+    "error": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "selections": Array [
+              Object {
+                "step": Object {
+                  "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+    "steps": Array [
+      Object {
+        "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg==",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|remove proposals to steps Admin sends step not matching the project or not a collect step and receives an error 1`] = `
+Object {
+  "removeProposalsFromSteps": Object {
+    "error": "NO_VALID_STEP",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "selections": Array [
+              Object {
+                "step": Object {
+                  "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
+    "steps": Array [],
+  },
+}
+`;
+
+exports[`Internal|remove proposals to steps Admin tries to remove an invalid proposal and receives an error 1`] = `
+Object {
+  "removeProposalsFromSteps": Object {
+    "error": "NO_VALID_PROPOSAL",
+    "proposals": Object {
+      "edges": Array [],
+    },
+    "steps": Array [],
+  },
+}
+`;
