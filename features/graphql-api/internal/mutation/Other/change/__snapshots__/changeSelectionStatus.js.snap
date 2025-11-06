@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Selection status GraphQL client wants to update proposal status 1`] = `
+Object {
+  "changeSelectionStatus": Object {
+    "proposal": Object {
+      "selections": Array [
+        Object {
+          "status": Object {
+            "id": "status1",
+          },
+          "step": Object {
+            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Selection status GraphQL client wants to update proposal status 2`] = `
+Object {
+  "changeSelectionStatus": Object {
+    "proposal": Object {
+      "selections": Array [
+        Object {
+          "status": null,
+          "step": Object {
+            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

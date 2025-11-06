@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Favicon GraphQL admin client wants to update the current favicon 1`] = `
+Object {
+  "siteFavicon": Object {
+    "id": Any<String>,
+    "keyname": "favicon",
+    "media": null,
+  },
+}
+`;
+
+exports[`Internal|Favicon GraphQL admin client wants to update the current favicon 2`] = `
+Object {
+  "changeSiteFavicon": Object {
+    "siteFavicon": Object {
+      "id": Any<String>,
+      "keyname": "favicon",
+      "media": Object {
+        "id": "media12",
+        "url": Any<String>,
+      },
+    },
+  },
+}
+`;
+
+exports[`Internal|Favicon GraphQL client who is not an admin wants to update the current favicon 1`] = `
+Object {
+  "siteFavicon": Object {
+    "id": Any<String>,
+    "keyname": "favicon",
+    "media": null,
+  },
+}
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Global district Admin wants to create a district in projects 1`] = `
+Object {
+  "createGlobalDistrict": Object {
+    "district": Object {
+      "background": Object {
+        "color": "#AAEEAA",
+        "opacity": 0.1,
+      },
+      "border": Object {
+        "color": "#AADDAA",
+        "opacity": 0.6,
+        "size": 2,
+      },
+      "displayedOnMap": true,
+      "geojson": null,
+      "id": Any<String>,
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "name": "Mon super quartier",
+        },
+      ],
+    },
+  },
+}
+`;

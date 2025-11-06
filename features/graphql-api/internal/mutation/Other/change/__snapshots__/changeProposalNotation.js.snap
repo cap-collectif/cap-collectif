@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Proposal notation GraphQL client wants note a proposal 1`] = `
+Object {
+  "changeProposalNotation": Object {
+    "proposal": Object {
+      "estimation": 1000,
+      "likers": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyMg==",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyMw==",
+        },
+      ],
+    },
+  },
+}
+`;

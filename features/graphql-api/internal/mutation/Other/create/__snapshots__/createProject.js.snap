@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createProject GraphQL client wants to create a project 1`] = `
+Object {
+  "createProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "username": "lbrunet",
+        },
+        Object {
+          "username": "admin",
+        },
+      ],
+      "id": Any<String>,
+      "owner": Object {
+        "username": "admin",
+      },
+      "visibility": "ADMIN",
+    },
+  },
+}
+`;
+
+exports[`createProject GraphQL client wants to create a project in english 1`] = `
+Object {
+  "createProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "username": "lbrunet",
+        },
+        Object {
+          "username": "admin",
+        },
+      ],
+      "id": Any<String>,
+      "owner": Object {
+        "username": "admin",
+      },
+      "visibility": "ADMIN",
+    },
+  },
+}
+`;
+
+exports[`createProject GraphQL client wants to create a project without type 1`] = `
+Object {
+  "createProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "username": "lbrunet",
+        },
+        Object {
+          "username": "admin",
+        },
+      ],
+      "id": Any<String>,
+      "owner": Object {
+        "username": "admin",
+      },
+      "visibility": "ADMIN",
+    },
+  },
+}
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Collect status GraphQL client wants to change proposal collect status 1`] = `
+Object {
+  "changeCollectStatus": Object {
+    "proposal": Object {
+      "status": Object {
+        "id": "status3",
+      },
+    },
+  },
+}
+`;

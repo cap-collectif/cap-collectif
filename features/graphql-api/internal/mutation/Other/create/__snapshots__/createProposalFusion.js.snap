@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Proposal fusion GraphQL admin wants to create a fusion 1`] = `
+Object {
+  "createProposalFusion": Object {
+    "proposal": Object {
+      "adminUrl": Any<String>,
+      "author": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+      },
+      "mergedFrom": Array [
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        },
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+        },
+      ],
+      "title": "Test fusion",
+    },
+  },
+}
+`;

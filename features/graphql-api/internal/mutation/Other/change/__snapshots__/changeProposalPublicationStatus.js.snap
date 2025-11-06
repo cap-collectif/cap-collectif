@@ -1,10 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.changeProposalPublicationStatus GraphQL client wants to trash a proposal 1`] = `
+Object {
+  "changeProposalPublicationStatus": Object {
+    "proposal": Object {
+      "publicationStatus": "TRASHED",
+      "trashedReason": "POPO",
+    },
+  },
+}
+`;
+
 exports[`mutations.changeProposalPublicationStatus should update the status to ARCHIVED 1`] = `
 Object {
   "changeProposalPublicationStatus": Object {
     "proposal": Object {
       "publicationStatus": "ARCHIVED",
+      "trashedReason": null,
     },
   },
 }

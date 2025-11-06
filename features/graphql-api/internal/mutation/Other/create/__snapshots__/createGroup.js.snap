@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Group GraphQL client wants to create a group 1`] = `
+Object {
+  "createGroup": Object {
+    "alreadyImportedUsers": Array [],
+    "group": Object {
+      "id": "R3JvdXA6",
+      "title": "Nouveau groupe",
+    },
+    "importedUsers": Array [
+      Object {
+        "email": "lbrunet@cap-collectif.com",
+      },
+    ],
+    "notFoundEmails": Array [
+      "unexistentEmail@cap-collectif.com",
+    ],
+  },
+}
+`;
