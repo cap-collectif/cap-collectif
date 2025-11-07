@@ -7,7 +7,6 @@ use Behat\Mink\Session;
 trait AdminTrait
 {
     use AdminGlobalDistrictTrait;
-    use AdminPageTrait;
     use AdminProposalFormTrait;
     use AdminProposalTrait;
     use AdminQuestionnaireTrait;
@@ -85,14 +84,5 @@ trait AdminTrait
         $session = $this->getSession();
         $windowNames = $session->getWindowNames();
         $session->switchToWindow($windowNames[$tabIndex]);
-    }
-
-    /**
-     * @When I go to the admin section list page
-     */
-    public function iGoToTheAdminSectionListPage()
-    {
-        $this->visitPageWithParams('admin section list page');
-        $this->waitAndThrowOnFailure(3000, "$('a.sonata-action-element').length > 0");
     }
 }
