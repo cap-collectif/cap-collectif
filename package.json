@@ -97,9 +97,6 @@
             "eslint --fix",
             "git add"
         ],
-        "features/**/*.feature": [
-            "gherkin-lint"
-        ],
         "*.{yml,yaml}": [
             "prettier --parser yaml --write"
         ],
@@ -229,7 +226,6 @@
         "font-color-contrast": "^1.0.3",
         "framer-motion": "^4.1.13",
         "geojson-geometries-lookup": "^0.5.0",
-        "gherkin-lint": "^3.3.0",
         "graphql": "^15.0.0",
         "graphql-request": "^1.8.2",
         "graphql-schema-linter": "^0.2.0",
