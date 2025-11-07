@@ -81,10 +81,10 @@ class AnonymizeUsersAutomatedCommand extends Command
 
     private function createMatchingUsersTemporaryTable(\DatetimeInterface $lastLoginLimit): void
     {
-        $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_users (id VARCHAR(255), email VARCHAR(255))');
+        $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_users (id VARCHAR(255) COLLATE utf8mb4_unicode_ci, email VARCHAR(255) COLLATE utf8mb4_unicode_ci)');
         $this->connection->executeStatement('CREATE UNIQUE INDEX idx_matching_users_email ON matching_users(email)');
         $this->connection->executeStatement(
-            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (last_login < :lastLoginLimit OR last_login IS NULL)",
+            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (u.last_login < :lastLoginLimit OR u.last_login IS NULL) AND u.anonymized_at IS NULL",
             ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')]
         );
     }
@@ -166,7 +166,8 @@ class AnonymizeUsersAutomatedCommand extends Command
                             u.birth_place = NULL,
                             u.username_canonical = 'Utilisateur supprimé',
                             u.slug = CONCAT('utilisateursupprime-', UUID()),
-                            u.updated_at = NOW()
+                            u.updated_at = NOW(),
+                            u.anonymized_at = NOW()
             SQL;
 
         $this->connection->executeStatement($sql);

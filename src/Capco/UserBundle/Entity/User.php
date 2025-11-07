@@ -139,6 +139,8 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
 
     private ?string $anonymizationReminderEmailToken = null;
 
+    private ?\Datetime $anonymizedAt = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -1331,6 +1333,18 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     public function setAnonymizationReminderEmailToken(?string $anonymizationReminderEmailToken): self
     {
         $this->anonymizationReminderEmailToken = $anonymizationReminderEmailToken;
+
+        return $this;
+    }
+
+    public function getAnonymizedAt(): ?\Datetime
+    {
+        return $this->anonymizedAt;
+    }
+
+    public function setAnonymizedAt(?\Datetime $anonymizedAt): self
+    {
+        $this->anonymizedAt = $anonymizedAt;
 
         return $this;
     }

@@ -2298,7 +2298,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.memberOfOrganizations', 'om')
             ->where("(u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%')
                 AND om IS NULL
-                AND u.lastLogin < :inactivityLimitDate
+                AND (u.lastLogin < :inactivityLimitDate OR u.lastLogin IS NULL)
                 AND u.email IS NOT NULL
                 AND u.anonymizationReminderEmailSentAt IS NULL
                 AND u.confirmationToken IS NULL

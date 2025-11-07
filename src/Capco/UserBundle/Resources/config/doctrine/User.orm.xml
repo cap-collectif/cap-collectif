@@ -217,6 +217,7 @@
                 <option name="default">0</option>
             </options>
         </field>
+        <field name="anonymizedAt" column="anonymized_at" type="datetime" nullable="true" />
     </entity>
 
 </doctrine-mapping>
