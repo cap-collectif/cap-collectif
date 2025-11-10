@@ -180,7 +180,8 @@ const Jodit = ({
         <JoditEditor
           ref={editor}
           value={value}
-          config={config} // eslint-disable-next-line jsx-a11y/tabindex-no-positive
+          config={config}
+          // @ts-ignore
           tabIndex={1}
           onChange={onChange}
         />

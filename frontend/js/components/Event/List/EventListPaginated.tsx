@@ -104,7 +104,6 @@ export const EventListPaginated = (props: Props) => {
               .map((node, key) => {
                 const highlighted = eventSelected && eventSelected === node.id
                 return (
-                  // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
                   <div key={key} onMouseOver={() => (width > bootstrapGrid.smMax ? onFocus(node.id) : null)}>
                     <EventPreview isHighlighted={Boolean(highlighted)} event={node} />
                   </div>
@@ -146,6 +145,7 @@ const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 })
 
+// @ts-ignore
 const container = connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(EventListPaginated)
 export default createPaginationContainer(
   container,

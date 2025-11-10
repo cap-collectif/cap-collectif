@@ -7,13 +7,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
   },
-  extends: [
-    'prettier',
-    'prettier/react',
-    'plugin:jest/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:relay/recommended',
-  ],
+  extends: ['prettier', 'prettier/react', 'plugin:jest/recommended', 'plugin:relay/recommended'],
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
@@ -22,7 +16,7 @@ module.exports = {
     },
     ecmaVersion: 2018,
   },
-  plugins: ['import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql', 'formatjs', '@typescript-eslint'],
+  plugins: ['import', 'react', 'react-hooks', 'jest', 'relay', 'graphql', 'formatjs', '@typescript-eslint'],
   globals: {
     $: true,
     FontFace: true,
@@ -88,10 +82,6 @@ module.exports = {
     'formatjs/no-offset': 'error',
     'formatjs/no-multiple-plurals': 'error',
     'formatjs/enforce-placeholders': 'error',
-    // TODO find a solution to activate this
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md#case-i-have-two-labels-for-the-same-input
-    'jsx-a11y/label-has-associated-control': 'off',
-    'jsx-a11y/no-autofocus': 'off',
     // TODO set this to error
     'prefer-promise-reject-errors': 'warn',
     'react-hooks/rules-of-hooks': 'error',
@@ -118,10 +108,6 @@ module.exports = {
         tagName: 'graphql',
       },
     ],
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/396
-    'jsx-a11y/href-no-hash': 'off',
-    // Deprecated: https://github.com/evcohen/eslint-plugin-jsx-a11y/releases/tag/v6.1.0
-    'jsx-a11y/label-has-for': 'off',
     'import/no-cycle': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
