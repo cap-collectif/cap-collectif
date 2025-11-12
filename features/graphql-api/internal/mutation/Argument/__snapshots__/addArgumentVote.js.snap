@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addArgumentVoteMutation Logged in API client wants to vote for an argument 1`] = `
+Object {
+  "addArgumentVote": Object {
+    "voteEdge": Object {
+      "node": Object {
+        "author": Object {
+          "_id": "user5",
+        },
+        "id": "910056",
+        "published": true,
+        "related": Object {
+          "id": "QXJndW1lbnQ6YXJndW1lbnQx",
+        },
+      },
+    },
+  },
+}
+`;

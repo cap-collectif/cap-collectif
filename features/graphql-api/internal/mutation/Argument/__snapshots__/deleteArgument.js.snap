@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteArgumentMutation Author wants to delete his argument 1`] = `
+Object {
+  "deleteArgument": Object {
+    "argumentable": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uMg==",
+    },
+  },
+}
+`;

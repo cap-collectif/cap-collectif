@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeArgumentMutation Author wants to update his argument 1`] = `
+Object {
+  "changeArgument": Object {
+    "argument": Object {
+      "body": "New Tololo",
+      "id": "QXJndW1lbnQ6YXJndW1lbnQx",
+    },
+  },
+}
+`;

@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addArgumentMutation User can't add more than 2 arguments in a minute 1`] = `
+Object {
+  "addArgument": Object {
+    "argument": null,
+    "argumentEdge": null,
+    "userErrors": Array [
+      Object {
+        "message": "You contributed too many times.",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.addArgumentMutation User wants to add an argument on an opinion 1`] = `
+Object {
+  "addArgument": Object {
+    "argument": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "body": "Tololo",
+      "id": Any<String>,
+      "published": true,
+      "type": "FOR",
+    },
+    "argumentEdge": Object {
+      "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+      "node": Object {
+        "id": Any<String>,
+      },
+    },
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.addArgumentMutation User wants to add an argument on an opinion without requirements 1`] = `
+Object {
+  "addArgument": Object {
+    "argument": null,
+    "argumentEdge": null,
+    "userErrors": Array [
+      Object {
+        "message": "You dont meets all the requirements.",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.addArgumentMutation User wants to add an argument on an uncontibuable opinion 1`] = `
+Object {
+  "addArgument": Object {
+    "argument": null,
+    "argumentEdge": null,
+    "userErrors": Array [
+      Object {
+        "message": "Can't add an argument to an uncontribuable argumentable.",
+      },
+    ],
+  },
+}
+`;

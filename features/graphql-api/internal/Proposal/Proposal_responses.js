@@ -1,6 +1,6 @@
 /* eslint-env jest */
 // TODO remove writes from tests.
-import '../../_setup';
+import '../../_setup'
 
 const ProposalResponsesQuery = /* GraphQL */ `
   query ProposalResponsesQuery($id: ID!, $isAuthenticated: Boolean!) {
@@ -34,7 +34,7 @@ const ProposalResponsesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProposalResponsesAnalystQuery = /* GraphQL */ `
   query ProposalResponsesQuery($id: ID!, $isAuthenticated: Boolean!) {
@@ -62,9 +62,9 @@ const ProposalResponsesAnalystQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
-const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwy';
+const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwy'
 
 describe('Proposal.responses array', () => {
   it("fetches only a proposal's public responses when not authenticated.", async () => {
@@ -79,10 +79,10 @@ describe('Proposal.responses array', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a proposal's private responses when author.", async () => {
     await Promise.all(
@@ -94,12 +94,12 @@ describe('Proposal.responses array', () => {
             isAuthenticated: true,
           },
           'internal_user',
-        );
-        expect(response).toMatchSnapshot(id);
-        expect(response.viewer.id).toBe(response.proposal.author.id);
+        )
+        expect(response).toMatchSnapshot(id)
+        expect(response.viewer.id).toBe(response.proposal.author.id)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a proposal's private responses when admin.", async () => {
     await Promise.all(
@@ -111,12 +111,12 @@ describe('Proposal.responses array', () => {
             isAuthenticated: true,
           },
           'internal_admin',
-        );
-        expect(response).toMatchSnapshot(id);
-        expect(response.viewer.isAdmin).toBe(true);
+        )
+        expect(response).toMatchSnapshot(id)
+        expect(response.viewer.isAdmin).toBe(true)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a proposal's private responses when evaluer on this proposal.", async () => {
     await Promise.all(
@@ -127,15 +127,15 @@ describe('Proposal.responses array', () => {
             id: id,
             isAuthenticated: true,
           },
-          'internal_evaluer',
-        );
-        expect(response).toMatchSnapshot(id);
+          'internal_kiroule',
+        )
+        expect(response).toMatchSnapshot(id)
         expect(response.proposal.evaluers[1].users.edges).toEqual(
           expect.arrayContaining([{ node: { id: response.viewer.id } }]),
-        );
+        )
       }),
-    );
-  });
+    )
+  })
 
   it("fetches only a proposal's public responses when user is evaluer but not on this proposal.", async () => {
     await Promise.all(
@@ -147,14 +147,14 @@ describe('Proposal.responses array', () => {
             isAuthenticated: true,
           },
           'internal_user_conseil_regional',
-        );
-        expect(response).toMatchSnapshot(id);
+        )
+        expect(response).toMatchSnapshot(id)
         expect(response.proposal.evaluers[1].users.edges).not.toEqual(
           expect.arrayContaining([{ node: { id: response.viewer.id } }]),
-        );
+        )
       }),
-    );
-  });
+    )
+  })
 
   it("fetches proposal's private responses when user is analyst on this proposal.", async () => {
     await Promise.all(
@@ -166,12 +166,10 @@ describe('Proposal.responses array', () => {
             isAuthenticated: true,
           },
           'internal_theo',
-        );
-        expect(response).toMatchSnapshot(id);
-        expect(response.proposal.analysts).toEqual(
-          expect.arrayContaining([{ id: response.viewer.id }]),
-        );
+        )
+        expect(response).toMatchSnapshot(id)
+        expect(response.proposal.analysts).toEqual(expect.arrayContaining([{ id: response.viewer.id }]))
       }),
-    );
-  });
-});
+    )
+  })
+})

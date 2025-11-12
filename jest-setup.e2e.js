@@ -117,8 +117,6 @@ global.graphql = (query, variables, client = 'anonymous') => {
       return authenticatedInternalRequest('aurelien@cap-collectif.com', 'toto', query, variables)
     case 'internal_decision_maker':
       return authenticatedInternalRequest('decisionmaker@cap-collectif.com', 'decisionmaker', query, variables)
-    case 'internal_evaluer':
-      return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables)
     case 'internal_admin':
       return authenticatedInternalRequest('admin@test.com', 'admin', query, variables)
     case 'internal_super_admin':
@@ -145,6 +143,8 @@ global.graphql = (query, variables, client = 'anonymous') => {
       return authenticatedInternalRequest('christophe.cassou@cap-collectif.com', 'toto', query, variables)
     case 'internal_omar':
       return authenticatedInternalRequest('omar@cap-collectif.com', 'toto', query, variables)
+    case 'internal_jean':
+      return authenticatedInternalRequest('jean@cap-collectif.com', 'toto', query, variables)
     case 'mediator':
       return authenticatedInternalRequest('mediator@cap-collectif.com', 'toto', query, variables)
     case 'internal':
