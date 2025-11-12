@@ -30,8 +30,8 @@ describe('Homepage', () => {
     })
 
     Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
-    cy.get('#footer-links').should('exist')
-    cy.contains('#footer-links', 'Développeurs').should('exist')
+    cy.get('.footer-links').should('exist')
+    cy.contains('.footer-links', 'Développeurs').should('exist')
   })
 
   it("shouldn't display links when features are disabled", () => {
@@ -45,7 +45,7 @@ describe('Homepage', () => {
     })
 
     Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
-    cy.get('#footer-links').should('exist')
-    cy.contains('#footer-links', 'Développeurs').should('not.exist')
+    cy.get('.footer-links').should('exist')
+    cy.contains('.footer-links', 'Développeurs').should('not.exist')
   })
 })

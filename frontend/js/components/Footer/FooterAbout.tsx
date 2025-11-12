@@ -15,36 +15,36 @@ type Props = {
 
 const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColor, backgroundColor }: Props) => {
   const getIconName = (item: string): string => {
-    return item === 'link-1' ? 'HYPERLINK' : item ? item.toUpperCase() : null
+    return item === 'link-1' ? 'LINK' : item ? item.toUpperCase() : null
   }
 
   return (
     <Flex
       backgroundColor={backgroundColor}
-      direction={'column'}
+      direction='column'
       color={textColor}
       p={[pxToRem(15), pxToRem(30), `${pxToRem(20)} ${pxToRem(40)}`]}
       m={0}
-      width={'100%'}
+      width='100%'
       gap={8}
     >
-      <Flex direction={'column'} gap={4} maxWidth={pxToRem(960)} margin="auto">
+      <Flex direction='column' gap={4} maxWidth={pxToRem(960)} margin="auto">
         {textTitle ? (
           <Heading
             as="h2"
             color={titleColor}
             fontSize={pxToRem(12)}
-            margin={'0 auto'}
+            margin='0 auto'
             px={4}
-            lineHeight={'unset'}
-            textAlign={'center'}
+            lineHeight='unset'
+            textAlign='center'
           >
             {textTitle}
           </Heading>
         ) : null}
         <Flex
-          justifyContent={'center'}
-          maxWidth={'100vw'}
+          justifyContent='center'
+          maxWidth='100vw'
           sx={{
             a: {
               fontWeight: CapUIFontWeight.Bold,
@@ -61,21 +61,21 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
         <Flex
           as="ul"
           gap={6}
-          justifyContent={'center'}
-          alignSelf={'center'}
-          ml={'auto'}
-          mr={'auto'}
+          justifyContent='center'
+          alignSelf='center'
+          ml='auto'
+          mr='auto'
           px={4}
-          flexWrap={'wrap'}
-          maxWidth={'100%'}
+          flexWrap='wrap'
+          maxWidth='100%'
           id="footer-social-networks"
         >
           {socialNetworks.map(socialNetwork => (
-            <Flex as="li" key={socialNetwork.title} width={'fit-content'} sx={{ listStyle: 'none' }}>
+            <Flex as="li" key={socialNetwork.title} width='fit-content' sx={{ listStyle: 'none' }}>
               <Link
                 href={socialNetwork.link}
                 className="external-link"
-                display={'flex'}
+                display='flex'
                 gap={1}
                 color="inherit"
                 sx={{

@@ -1,4 +1,4 @@
-import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
 import { Menu, MenuItem } from '@szhsin/react-menu'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -16,6 +16,8 @@ type Props = {
   backgroundColor?: string
   borderless?: boolean
   cookiesLanguage?: LocaleMap
+  withLabel?: boolean
+  iconLeft?: boolean
 }
 
 const SiteLanguageChangeButton = ({
@@ -25,9 +27,12 @@ const SiteLanguageChangeButton = ({
   textColor = 'black',
   backgroundColor = 'white',
   borderless = false,
+  withLabel = false,
+  iconLeft = true,
   cookiesLanguage,
 }: Props) => {
   const intl = useIntl()
+  const { space } = useTheme()
   const [currentLanguage, updateLanguage] = useState(
     cookiesLanguage ? cookiesLanguage : languageList.find(e => e.code === defaultLanguage),
   )
@@ -57,17 +62,20 @@ const SiteLanguageChangeButton = ({
             sx={{
               textTransform: 'capitalize',
             }}
-            minWidth="100%"
+            pl={iconLeft ? 0 : space.xs}
             maxWidth="100%"
             borderRadius="button"
           >
-            <Icon name={CapUIIcon.Earth} size={CapUIIconSize.Md} color="white" />
+            {iconLeft && <Icon name={CapUIIcon.Earth} size={CapUIIconSize.Md} color={textColor} />}
             <Flex>
-              <Box as="div" color={textColor} fontSize={CapUIFontSize.BodyLarge}>
-                <span>{intl.formatMessage({ id: currentLanguage.translationKey })}</span>
+              <Box as="div" color={textColor} fontSize={CapUIFontSize.BodyRegular}>
+                <span>
+                  {withLabel && intl.formatMessage({ id: 'footer.lang-selector.label' })}
+                  {intl.formatMessage({ id: currentLanguage.translationKey })}
+                </span>
               </Box>
             </Flex>
-            <Icon name={CapUIIcon.ArrowDownO} size={CapUIIconSize.Md} color="white" />
+            <Icon name={CapUIIcon.ArrowDownO} size={CapUIIconSize.Md} color={textColor} />
           </Flex>
         }
       >

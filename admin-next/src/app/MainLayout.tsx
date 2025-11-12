@@ -11,9 +11,9 @@ import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import ShieldPageWrapper from '@components/FrontOffice/Shield/ShieldPageWrapper'
 import CookieManager from '@components/FrontOffice/Cookies/CookieManager'
-import Footer from '@shared/footer/Footer'
 import { useCookies } from 'next-client-cookies'
 import { LOCALE_COOKIE } from '@shared/utils/cookies'
+import FooterWrapper from '@shared/footer/FooterWrapper'
 
 const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> = ({ children, SSRData }) => {
   const shield_mode = useFeatureFlag('shield_mode')
@@ -58,7 +58,7 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
           </Flex>
         </NavBarQuery>
         {children}
-        <Footer SSRData={SSRData} />
+        <FooterWrapper SSRData={SSRData} />
       </NavBarContextProvider>
       <CookieManager SSRData={SSRData} mode="BANNER" />
     </>

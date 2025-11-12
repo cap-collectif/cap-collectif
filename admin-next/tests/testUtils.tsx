@@ -9,6 +9,8 @@ import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { ReactPortal } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { TranslationLocale } from '@relay/layoutQuery.graphql'
+import { legacyCookieClient } from '@shared/utils/universalCookies'
+import CookieManager from '@components/FrontOffice/Cookies/CookieManager'
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5
@@ -194,6 +196,86 @@ export const mockedSSRData = {
   footerBody: {
     value: 'La démocratie et tout et tout',
   },
+}
+
+export const mockedFooterData = {
+  locales: [
+    {
+      code: 'FR_FR' as TranslationLocale,
+      isDefault: true,
+      isEnabled: true,
+      isPublished: true,
+      traductionKey: 'locale.fr',
+    },
+    {
+      code: 'EN_GB' as TranslationLocale,
+      isDefault: false,
+      isEnabled: true,
+      isPublished: true,
+      traductionKey: 'locale.en',
+    },
+  ],
+  fonts: [
+    {
+      name: 'OpenSans',
+      useAsBody: true,
+      useAsHeading: false,
+      isCustom: false,
+      file: { url: null },
+    },
+    {
+      name: 'IDF-font',
+      useAsBody: false,
+      useAsHeading: true,
+      isCustom: true,
+      file: { url: '/idf-font.zip' },
+    },
+  ],
+  footer: {
+    socialNetworks: [
+      {
+        title: 'X',
+        link: 'x.com/cap-collectif',
+        style: 'style',
+      },
+    ],
+    links: [
+      {
+        name: 'FAQ',
+        url: '/faq',
+      },
+      {
+        name: 'Contact',
+        url: '/contact',
+      },
+    ],
+    legals: {
+      cookies: true,
+      privacy: true,
+      legal: true,
+    },
+    cookiesPath: '/cookies',
+    legalPath: '/legals',
+    privacyPath: '/privacy',
+    textTitle: {
+      value: 'À Propos',
+    },
+    textBody: {
+      value: 'La démocratie et tout et tout',
+    },
+    titleColor: 'white',
+    textColor: 'white',
+    backgroundColor: '#2B2B2B',
+    linksColor: 'white',
+  },
+  cookies: legacyCookieClient(),
+  onLanguageChange: () => {},
+  defaultLanguage: {
+    code: 'FR_FR' as TranslationLocale,
+    traductionKey: 'locale.fr',
+  },
+  /* @ts-ignore only use those 2 */
+  cookieManager: <CookieManager SSRData={{ analytics: null, ads: null }} />,
 }
 
 export default MockProviders

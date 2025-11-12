@@ -21,7 +21,10 @@ import { ADS_COOKIE, ANALYTICS_COOKIE, FULL_CONSENT_COOKIE } from '@shared/utils
 import { evalCustomCode } from 'src/app/custom-code'
 
 type Props = {
-  SSRData: layoutQuery$data
+  SSRData: {
+    analytics: layoutQuery$data['analytics']
+    ads: layoutQuery$data['ads']
+  }
   cookieTrad?: string | null | undefined
   mode?: 'LINK' | 'BANNER'
 }

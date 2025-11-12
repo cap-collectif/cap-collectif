@@ -9,12 +9,12 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
     class="sc-bcXGCL hQdTwk"
   >
     <button
-      class="sc-bcXGCL grMYvS"
+      class="sc-bcXGCL eNwypM"
       id="language-change-button-dropdown"
     >
       <svg
         aria-hidden="true"
-        class="sc-bcXGCL sc-oZHua gqwGxG hQQZty cap-icon"
+        class="sc-bcXGCL sc-oZHua gbWOHM hQQZty cap-icon"
         fill="none"
         height="1em"
         viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
         class="sc-bcXGCL lcYpuI"
       >
         <div
-          class="sc-bcXGCL ghYbwf"
+          class="sc-bcXGCL ylsXr"
         >
           <span>
             french
@@ -39,7 +39,7 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
       </div>
       <svg
         aria-hidden="true"
-        class="sc-bcXGCL sc-oZHua gqwGxG hQQZty cap-icon"
+        class="sc-bcXGCL sc-oZHua gbWOHM hQQZty cap-icon"
         fill="none"
         height="1em"
         viewBox="0 0 12 7"

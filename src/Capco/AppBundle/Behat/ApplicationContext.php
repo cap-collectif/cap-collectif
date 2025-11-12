@@ -1162,8 +1162,8 @@ class ApplicationContext extends UserContext
      */
     public function iSelectLocaleInTheLanguageFooter(string $locale): void
     {
-        $this->iWaitElementToAppearOnPage('#footer-links #language-change-button-dropdown');
-        $this->iClickElement('#footer-links #language-change-button-dropdown');
+        $this->iWaitElementToAppearOnPage('.footer-links #language-change-button-dropdown');
+        $this->iClickElement('.footer-links #language-change-button-dropdown');
         $this->scrollTo('bot');
         $this->iWaitElementToAppearOnPage("#language-choice-{$locale}", 15);
         $this->iClickElement("#language-choice-{$locale}");

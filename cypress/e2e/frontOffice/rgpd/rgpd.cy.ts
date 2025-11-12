@@ -148,9 +148,9 @@ describe('Multilangue - gestion de la locale', () => {
 
   it('should allow an anonymous user to change the locale via the footer', () => {
     Base.visitHomepage()
-    cy.get('#footer-links').should('exist')
+    cy.get('.footer-links').should('exist')
     cy.getCookie('locale').should('not.exist')
-    cy.get('#footer-links').contains('french').should('exist')
+    cy.get('.footer-links').contains('french').should('exist')
 
     cy.get('#projects .cap-project-card').should('exist')
     cy.get('#proposals .row .card__title').should('exist')
@@ -164,9 +164,9 @@ describe('Multilangue - gestion de la locale', () => {
 
   it('should correctly change locale via footer on routes with parameters', () => {
     RGPDPage.visitProject()
-    cy.get('#footer-links').should('exist')
+    cy.get('.footer-links').should('exist')
     cy.getCookie('locale').should('not.exist')
-    cy.get('#footer-links').contains('french').should('exist')
+    cy.get('.footer-links').contains('french').should('exist')
 
     cy.get('.proposal__step-page .body__infos__content').should('exist')
     cy.scrollTo('bottom')

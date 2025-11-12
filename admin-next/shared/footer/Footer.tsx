@@ -1,184 +1,209 @@
-import React, { FC } from 'react'
-import { Box, CapUIFontSize, CapUIIcon, Flex, Heading, Icon, useTheme } from '@cap-collectif/ui'
-import { layoutQuery$data } from '@relay/layoutQuery.graphql'
-import { pxToRem } from '@shared/utils/pxToRem'
+import React, { FC, ReactNode } from 'react'
+import {
+  Box,
+  CapUIFontSize,
+  CapUIFontWeight,
+  CapUIIcon,
+  CapUIIconSize,
+  CapUILineHeight,
+  Flex,
+  Heading,
+  Icon,
+  Text,
+} from '@cap-collectif/ui'
+import { layoutQuery$data, TranslationLocale } from '@relay/layoutQuery.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-import CookieManager from '@components/FrontOffice/Cookies/CookieManager'
-import { useIntl } from 'react-intl'
+import { LOCALE_COOKIE } from '@shared/utils/cookies'
+import { CookieClient } from '@shared/utils/universalCookies'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import SiteLanguageChangeButton from '@shared/language/SiteLanguageChangeButton'
-import { formatCodeToLocale } from '@utils/locale-helper'
-import Fetcher from '@utils/fetch'
-import { useCookies } from 'next-client-cookies'
-import { LOCALE_COOKIE } from '@shared/utils/cookies'
-
-export const LinkSeparator = () => (
-  <Box as="span" px={2} display={['none', 'none', 'inline']}>
-    |
-  </Box>
-)
+import { useIntl } from 'react-intl'
+import { FooterBrand } from './FooterBrand'
+import { Cookies } from 'next-client-cookies'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 const getIconName = (item: string): string => {
-  return item === 'link-1' ? 'HYPERLINK' : item ? item.toUpperCase() : null
+  return item === 'link-1' ? 'SHARE_LINK' : item ? item.toUpperCase() + '_COLORED' : null
 }
 
-export const Footer: FC<{
-  SSRData: layoutQuery$data
-}> = ({ SSRData }) => {
-  const cookies = useCookies()
+type FooterProps = layoutQuery$data['footer'] & {
+  textTitle: {
+    value: string
+  }
+  textBody: {
+    value: string
+  }
+  textColor: string
+  backgroundColor: string
+}
 
-  const cookiesLocale = cookies?.get(LOCALE_COOKIE)
+export interface Locale {
+  code: TranslationLocale
+  translationKey: string
+}
 
+interface Props {
+  cookies: CookieClient | Cookies
+  footer: FooterProps
+  locales: Locale[]
+  onLanguageChange: (language: Locale) => void
+  defaultLanguage: Locale
+  cookieManager: ReactNode
+}
+
+export const Footer: FC<Props> = props => {
   const intl = useIntl()
   const multilangue = useFeatureFlag('multilangue')
-  const { footer, footerBody, footerTitle, locales: queryLocales, analytics, ads } = SSRData
-  const { colors } = useTheme()
+  const { cookies, locales, footer, onLanguageChange, defaultLanguage, cookieManager } = props
   const { socialNetworks, links, legalPath, legals, cookiesPath, privacyPath } = footer
-  const { siteColors } = useAppContext()
-  const { footerTextColor, footerTitleColor, footerBackgroundColor, footerLinksColor, footerBottomBackgroundColor } =
-    siteColors
 
-  const locales = queryLocales
-    .filter(l => l.isEnabled && l.isPublished)
-    .map(l => ({ translationKey: l.traductionKey, code: formatCodeToLocale(l.code) }))
+  const cookiesLocale = cookies?.get(LOCALE_COOKIE)
   const cookiesLanguage = locales.find(e => e.code === cookiesLocale)
-  const defaultLocale = queryLocales.find(e => e.isDefault)
-  const defaultLanguage = { code: formatCodeToLocale(defaultLocale.code), translationKey: defaultLocale.traductionKey }
-
-  const onLanguageChange = language => {
-    Fetcher.postToJson(`/change-locale/${language.code}`, {
-      // @ts-ignore the controller needs those params
-      routeName: null,
-      routeParams: [],
-    }).then(() => {
-      cookies.set('locale', language.code)
-      window.location.reload()
-    })
-  }
 
   return (
     <Box
       as="footer"
-      textAlign="center"
       role="contentinfo"
-      borderTop={`1px solid ${colors['neutral-gray'][150]}`}
+      bg={footer.backgroundColor}
+      color={footer.textColor}
+      justifyItems="center"
+      padding="lg"
       fontSize={CapUIFontSize.BodyLarge}
+      sx={{ a: { color: `${footer.textColor} !important` } }}
     >
-      <Box
-        m={0}
-        width="100%"
-        py={[4, 8]}
-        as="div"
-        bg={footerBackgroundColor}
-        color={footerTextColor}
-        sx={{ a: { color: footerTextColor }, 'a:hover': { color: footerTextColor } }}
-      >
-        <Box maxWidth={pxToRem(1280)} px={[4, 6]} margin="auto">
-          <Box textAlign="center" sx={{ a: { fontWeight: 'bold', cursor: 'pointer', color: 'inherit' } }}>
-            {footerTitle?.value ? (
-              <Heading as="h3" color={footerTitleColor} mb={2}>
-                {footerTitle?.value}
+      <Flex gap={['xl', 'xxl']} flexDirection={['column', 'row']} width="100%" maxWidth={pxToRem(1280)}>
+        <Flex flexDirection="column" justifyContent="space-between" gap="md" width="100%" maxWidth="500px">
+          <Box>
+            {footer.textTitle?.value ? (
+              <Heading
+                as="h3"
+                color={`${footer.textColor} !important`}
+                lineHeight={CapUILineHeight.M}
+                fontSize={CapUIFontSize.BodyLarge}
+                fontWeight={CapUIFontWeight.Normal}
+                sx={{ wordBreak: 'break-word' }}
+              >
+                {footer.textTitle?.value}
               </Heading>
             ) : null}
-            <WYSIWYGRender value={footerBody?.value} />
-          </Box>
-          {socialNetworks?.length ? (
-            <Flex justifyContent="center" mt={4}>
-              <Flex
-                as="ul"
-                alignItems="center"
-                sx={{ listStyle: 'none' }}
-                gap={2}
-                direction={['column', 'column', 'row']}
-              >
-                {socialNetworks.map(socialNetwork => (
-                  <li key={socialNetwork.title}>
-                    <Flex>
-                      <Icon name={getIconName(socialNetwork.style) as CapUIIcon} />
-                      <a href={socialNetwork.link}>
-                        <span>{` ${socialNetwork.title}`}</span>
-                      </a>
-                    </Flex>
-                  </li>
-                ))}
-              </Flex>
-            </Flex>
-          ) : null}
-        </Box>
-      </Box>
-      <Box
-        as="div"
-        backgroundColor={footerBottomBackgroundColor}
-        color={footerLinksColor}
-        sx={{ a: { color: footerLinksColor }, 'a:hover': { color: footerLinksColor } }}
-        id="footer-links"
-        py={[4, 6]}
-      >
-        <Flex direction="column" alignItems="center">
-          {links ? (
-            <Flex
-              as="ul"
-              sx={{ listStyle: 'none' }}
-              direction={['column', 'column', 'row']}
-              alignItems="center"
-              flexWrap="wrap"
-              justifyContent="center"
-              mb={4}
+            <Text
+              lineHeight="md"
+              color={`${footer.textColor} !important`}
+              fontSize={CapUIFontSize.BodySmall}
+              mt="xs"
+              sx={{ a: { textDecoration: 'underline' } }}
             >
-              {legals.cookies && (
-                <li>
-                  <a href={cookiesPath}>{intl.formatMessage({ id: 'cookies' })}</a>
-                </li>
-              )}
-              <li>
-                {legals.cookies && (analytics?.value || ads?.value) ? <LinkSeparator /> : null}
-                <CookieManager mode="LINK" SSRData={SSRData} display="inline" />
-              </li>
-              {legals.privacy && (
-                <li>
-                  {legals.cookies && <LinkSeparator />}
-                  <a href={privacyPath}>{intl.formatMessage({ id: 'privacy-policy' })}</a>
-                </li>
-              )}
-              {legals.legal && (
-                <li>
-                  {(legals.privacy || legals.cookies) && <LinkSeparator />}
-                  <a href={legalPath}>{intl.formatMessage({ id: 'legal-mentions' })}</a>
-                </li>
-              )}
-              {links
-                .filter(link => !!link)
-                .map((link, index) => (
-                  <li key={link.name}>
-                    {!index && (legals.legal || legals.privacy || legals.cookies) && <LinkSeparator />}
-                    <a href={link.url}>{link.name}</a>
-                    {index < links.length - 1 && <LinkSeparator />}
-                  </li>
-                ))}
-            </Flex>
-          ) : null}
-          {multilangue ? (
-            <SiteLanguageChangeButton
-              onChange={onLanguageChange}
-              languageList={locales}
-              defaultLanguage={defaultLanguage.code}
-              cookiesLanguage={cookiesLanguage}
-              backgroundColor={`${footerBottomBackgroundColor} !important`}
-              textColor={footerLinksColor}
-              borderless
-            />
-          ) : null}
-        </Flex>
-        <Box as="hr" mx="auto" my={[4, 6]} borderColor="neutral-gray.500" maxWidth={pxToRem(1280)} />
-        <Flex alignItems="center" justifyContent="center">
-          {intl.formatMessage({ id: 'powered_by' })}
-          <Box as="img" src="/favicon-64x64.png" alt="" width={5} height={5} mx={2} />
-          <Box as="a" color={footerLinksColor} href="https://cap-collectif.com" fontWeight="bold">
-            <span>Cap Collectif</span>
+              <WYSIWYGRender value={footer.textBody?.value} />
+            </Text>
+            {socialNetworks?.length ? (
+              <Flex mt="md">
+                <Flex
+                  as="ul"
+                  sx={{ listStyle: 'none', a: { fontSize: CapUIFontSize.BodyRegular, textDecoration: 'underline' } }}
+                  gap="md"
+                  flexWrap="wrap"
+                  direction="row"
+                >
+                  {socialNetworks.map(socialNetwork => (
+                    <li key={socialNetwork.title}>
+                      <Flex gap="xxs" alignItems="center">
+                        <Icon size={CapUIIconSize.Lg} name={getIconName(socialNetwork.style) as CapUIIcon} />
+                        <a href={socialNetwork.link} color={footer.textColor}>
+                          <span>{`${socialNetwork.title}`}</span>
+                        </a>
+                      </Flex>
+                    </li>
+                  ))}
+                </Flex>
+              </Flex>
+            ) : null}
+          </Box>
+          <Box display={['none', 'block']}>
+            <FooterBrand />
           </Box>
         </Flex>
-      </Box>
+        <Box width="100%">
+          <Heading as="h4" color={`${footer.textColor}!important`} fontSize={CapUIFontSize.BodyLarge}>
+            {intl.formatMessage({ id: 'other-links' })}
+          </Heading>
+          <Box
+            className="footer-links"
+            as="ul"
+            sx={{ listStyle: 'none' }}
+            mt="xs"
+            fontSize={CapUIFontSize.BodyRegular}
+            lineHeight={CapUILineHeight.M}
+            fontWeight={CapUIFontWeight.Semibold}
+            display="grid"
+            gridRowGap="xs"
+            gridColumnGap="md"
+            gridTemplateColumns="repeat(auto-fit, minmax(150px, auto))"
+          >
+            <li>
+              <a href="https://aide-utilisateurs.helpscoutdocs.com/">
+                {intl.formatMessage({ id: 'footer.links.need-help' })}
+              </a>
+            </li>
+            <li>
+              <a href="/pages/charte">{intl.formatMessage({ id: 'charter' })}</a>
+            </li>
+            {legals.privacy && (
+              <li>
+                <a href={privacyPath}>{intl.formatMessage({ id: 'privacy-policy' })}</a>
+              </li>
+            )}
+            {legals.legal && (
+              <li>
+                <a href={legalPath}>{intl.formatMessage({ id: 'legal-mentions' })}</a>
+              </li>
+            )}
+            {legals.cookies && (
+              <li>
+                <a href={cookiesPath}>{intl.formatMessage({ id: 'cookies' })}</a>
+              </li>
+            )}
+            <Box
+              as="li"
+              sx={{
+                '[class*=LinkSeparator]': { display: 'none' },
+                '#cookies-management[type=button]': {
+                  border: 'none',
+                  color: `${footer.textColor} !important`,
+                  fontWeight: CapUIFontWeight.Semibold,
+                },
+              }}
+            >
+              {cookieManager}
+            </Box>
+            {links &&
+              links
+                .filter(link => !!link)
+                .map(link => (
+                  <li key={link.name}>
+                    <a href={link.url}>{link.name}</a>
+                  </li>
+                ))}
+            {multilangue ? (
+              <Box as="li">
+                <SiteLanguageChangeButton
+                  onChange={onLanguageChange}
+                  languageList={locales}
+                  defaultLanguage={defaultLanguage.code}
+                  cookiesLanguage={cookiesLanguage}
+                  backgroundColor={`${footer.textColor} !important`}
+                  textColor={footer.backgroundColor}
+                  borderless
+                  withLabel
+                  iconLeft={false}
+                />
+              </Box>
+            ) : null}
+          </Box>
+        </Box>
+        <Box display={['block', 'none']}>
+          <FooterBrand />
+        </Box>
+      </Flex>
     </Box>
   )
 }

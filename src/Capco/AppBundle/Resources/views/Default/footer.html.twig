@@ -1,23 +1,24 @@
 {% set languageList = formatted_locales() %}
 {{ react_render_component('FooterApp', {
     'props': {
-        'currentRouteName': app.request.get('_route'),
-        'currentRouteParams': app.request.attributes.all,
-        'languageList': languageList,
-        'defaultLocale': app.request.getLocale(),
-        'textTitle': capco_site_parameter_value('footer.text.title'),
-        'textBody': capco_site_parameter_value('footer.text.body'),
-        'socialNetworks': getFooterSocialNetworks(),
-        'links': getFooterLinks(),
-        'legals': getLegalsPages(),
-        'titleColor': capco_site_color_value('color.footer.title'),
-        'textColor': capco_site_color_value('color.footer.text'),
-        'backgroundColor': capco_site_color_value('color.footer.bg'),
-        'linksBackgroundColor': capco_site_color_value('color.footer2.bg'),
-        'linksTextColor': capco_site_color_value('color.footer2.text'),
-        'cookiesPath': path('app_cookies', {'_locale': app.request.locale}),
-        'privacyPath': path('app_privacy', {'_locale': app.request.locale}),
-        'legalPath': path('app_legal', {'_locale': app.request.locale}),
+        'legacyMode': true,
+        'SSRData': {
+            footer: {
+                'socialNetworks': getFooterSocialNetworks(),
+                'links': getFooterLinks(),
+                'legals': getLegalsPages(),
+                'legalPath': path('app_legal', {'_locale': app.request.locale}),
+                'cookiesPath': path('app_cookies', {'_locale': app.request.locale}),
+                'privacyPath': path('app_privacy', {'_locale': app.request.locale}),
+                'textTitle': {value: capco_site_parameter_value('footer.text.title')},
+                'textBody': {value: capco_site_parameter_value('footer.text.body')},
+                textColor: capco_site_color_value('color.footer.text'),
+                backgroundColor: capco_site_color_value('color.footer.bg'),
+            },
+            'locales': languageList,
+            'currentRouteName': app.request.get('_route'),
+            'currentRouteParams': app.request.attributes.all,
+            'defaultLocale': app.request.getLocale(),
         }
-    })
-}}
+    }
+})}}
