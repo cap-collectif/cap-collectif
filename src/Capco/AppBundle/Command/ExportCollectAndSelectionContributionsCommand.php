@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -58,6 +59,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 'Export Contributions from Collect Step & Selection Step, contains only proposals from users validated accounts and published responses.'
             )
         ;
+        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -73,7 +75,18 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         $this->stopwatch->start('export_proposals', 'Memory usage - Execution time');
 
         $filesystem = $this->cleanTmpExportsFiles();
-        $steps = $this->abstractStepRepository->getAllStepsByCollectStepOrSelectionStep();
+
+        $steps = [];
+        if ($input->getOption('stepId')) {
+            /** * @var AbstractStep[] $steps  */
+            $step = $this->abstractStepRepository->find($input->getOption('stepId'));
+            if ($step instanceof AbstractStep) {
+                $steps[] = $step;
+            }
+        } else {
+            $steps = $this->abstractStepRepository->getAllStepsByCollectStepOrSelectionStep();
+        }
+
         $stepCount = \count($steps);
 
         $style->writeln(sprintf('Found %d step(s)', $stepCount));

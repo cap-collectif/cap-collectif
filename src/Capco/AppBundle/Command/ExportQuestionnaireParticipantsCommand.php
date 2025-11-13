@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -56,7 +57,11 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
 
         $style->note('Starting the export.');
 
-        $questionnaires = $this->questionnaireRepository->findAll();
+        if ($input->getOption('stepId')) {
+            $questionnaires = [$this->questionnaireRepository->find($input->getOption('stepId'))];
+        } else {
+            $questionnaires = $this->questionnaireRepository->findAll();
+        }
         $style->progressStart($count);
 
         /** @var Questionnaire $questionnaire */
@@ -87,5 +92,6 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
             ->setName('capco:export:questionnaire:participants')
             ->setDescription('Export questionnaire participants')
         ;
+        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 }

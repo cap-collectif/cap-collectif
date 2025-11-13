@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -75,7 +76,12 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
 
         $this->stopwatch->start('export_participants', 'Memory usage - Execution time');
         $filesystem = $this->cleanTmpExportsFiles();
-        $selectionSteps = $this->selectionStepRepository->findAll();
+
+        if ($input->getOption('stepId')) {
+            $selectionSteps = [$this->selectionStepRepository->find($input->getOption('stepId'))];
+        } else {
+            $selectionSteps = $this->selectionStepRepository->findAll();
+        }
 
         $tableSummary = (new Table($output))
             ->setHeaderTitle('Export Selection Step Participants')
@@ -119,6 +125,7 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         $this->setName(self::CAPCO_EXPORT_SELECTION_STEP_PARTICIPANTS)
             ->setDescription('Export selection step participants')
         ;
+        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     /**

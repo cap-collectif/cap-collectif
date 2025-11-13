@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -68,6 +69,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
                 'Export Contributions from Questionnaire. Exports contain only contributions from users with validated accounts and published responses.'
             )
         ;
+        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -92,7 +94,11 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             return 0;
         }
 
-        $questionnaireSteps = $this->questionnaireStepRepository->findAllNotEmpty();
+        if ($input->getOption('stepId')) {
+            $questionnaireSteps = [$this->questionnaireStepRepository->find($input->getOption('stepId'))];
+        } else {
+            $questionnaireSteps = $this->questionnaireStepRepository->findAllNotEmpty();
+        }
 
         $style->note('Starting the export.');
 
