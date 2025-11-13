@@ -2,16 +2,15 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Service\MediaManager;
-use Doctrine\DBAL\Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 #[AsCommand(
     name: 'capco:media:purge-unused',
@@ -28,27 +27,26 @@ class CapcoMediaPurgeUnusedCommand extends Command
         parent::__construct($name);
     }
 
-    /**
-     * Be careful, the first purge purgeMediasWithoutDatabaseRelation does net remove files
-     * from the file-system, so it have to be done before purgeFilesWithoutMedia.
-     */
+    protected function configure(): void
+    {
+        parent::configure();
+
+        $this->addOption(
+            name: 'force',
+            shortcut: 'f',
+            description: 'Deletes the files for real instead of just listing them.',
+        );
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Purging unused Media');
+        $io->title('Unused files purge');
 
         try {
-            $this->purgeMediasWithoutDatabaseRelation($io);
+            $this->purgeFilesWithoutMedia($io, $input->getOption('force'));
         } catch (\Throwable $e) {
-            $io->error(sprintf('Could not remove media: %s', $e->getMessage()));
-
-            return Command::FAILURE;
-        }
-
-        try {
-            $this->purgeFilesWithoutMedia($io);
-        } catch (\Throwable $e) {
-            $io->error(sprintf('Could not remove file from disk: %s', $e->getMessage()));
+            $io->error($e->getMessage());
 
             return Command::FAILURE;
         }
@@ -56,52 +54,69 @@ class CapcoMediaPurgeUnusedCommand extends Command
         return Command::SUCCESS;
     }
 
-    /**
-     * @throws Exception
-     */
-    private function purgeMediasWithoutDatabaseRelation(SymfonyStyle $io): void
+    private function purgeFilesWithoutMedia(SymfonyStyle $io, bool $force = false): void
     {
-        $io->info('Purging Media database entries without a database relation to another table');
-        $deletedCount = $this->mediaRepository->deleteUnusedMedia();
-        $io->success(sprintf('Deleted %d Media from database', $deletedCount));
-    }
+        $io->text("Looking for files that don't have a Media database entry...");
 
-    private function purgeFilesWithoutMedia(SymfonyStyle $io): void
-    {
-        $io->info("Purging files that don't have a Media database entry");
-
-        $deletedCount = 0;
         $this->finder
             ->in($this->projectRootDir . MediaManager::MEDIAS_PATH)
             ->files()
         ;
 
-        $fileNames = [];
+        $filesIndexedByName = [];
         foreach ($this->finder as $file) {
-            $fileNames[] = $file->getFilename();
-        }
+            // In the very rare but possible case that we find 2 files with the same name, we will require a human intervention
+            if (\array_key_exists($file->getFilename(), $filesIndexedByName)) {
+                throw new \RuntimeException('There are 2 files with the same name, please check it manually.');
+            }
 
-        // In the very rare but possible case that we find 2 files with the same name, we will require a human intervention
-        if (\count($fileNames) !== \count(array_unique($fileNames))) {
-            throw new \RuntimeException('There are 2 files with the same name, please check it manually.');
+            $filesIndexedByName[$file->getFilename()] = $file;
         }
 
         $medias = $this->mediaRepository->findBy([
-            'providerReference' => $fileNames,
+            'providerReference' => array_map(fn (SplFileInfo $file) => $file->getFilename(), $filesIndexedByName),
         ]);
 
-        // Be careful, the array_diff function will return the elements that are in the first array but not in the second array,
-        // so the order of the arguments is very important, otherwise we would delete te wrong files
-        $mediaReferences = array_map(fn (Media $media) => $media->getProviderReference(), $medias);
-        $filesToRemove = array_diff($fileNames, $mediaReferences);
-
-        foreach ($this->finder as $file) {
-            if (\in_array($file->getFilename(), $filesToRemove, true)) {
-                unlink($file->getRealPath());
-                ++$deletedCount;
-            }
+        // we now remove all the files from the array that have an entry in the database
+        // (unset function does not need to check if the key exists)
+        foreach ($medias as $media) {
+            unset($filesIndexedByName[$media->getProviderReference()]);
         }
 
-        $io->success(sprintf('Deleted %d files from file-system', $deletedCount));
+        $removed = [];
+        foreach ($filesIndexedByName as $file) {
+            // safety check, in case the file has been deleted between the start of the function and now:
+            if (!is_file($file->getRealPath())) {
+                continue;
+            }
+
+            if ($force) {
+                unlink($file->getRealPath());
+            }
+            $removed[] = [$file->getFilename()];
+        }
+
+        $count = \count($removed);
+        if (0 === $count) {
+            $io->info('No orphan files found.');
+
+            return;
+        }
+
+        $this->endMessage($io, $force, $count);
+
+        $io->table(['File name'], $removed);
+
+        $this->endMessage($io, $force, $count);
+    }
+
+    private function endMessage(SymfonyStyle $io, bool $force, int $count): void
+    {
+        if ($force) {
+            $io->success(sprintf('Deleted %d files from file-system', $count));
+        } else {
+            $io->info(sprintf('Found %d orphan files that could be deleted.', $count));
+            $io->note('Use the --force (-f) option to delete the files from the file-system.');
+        }
     }
 }
