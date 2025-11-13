@@ -59,7 +59,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 'Export Contributions from Collect Step & Selection Step, contains only proposals from users validated accounts and published responses.'
             )
         ;
-        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -76,13 +76,9 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
 
         $filesystem = $this->cleanTmpExportsFiles();
 
-        $steps = [];
         if ($input->getOption('stepId')) {
-            /** * @var AbstractStep[] $steps  */
             $step = $this->abstractStepRepository->find($input->getOption('stepId'));
-            if ($step instanceof AbstractStep) {
-                $steps[] = $step;
-            }
+            $steps = $step instanceof AbstractStep ? [$step] : [];
         } else {
             $steps = $this->abstractStepRepository->getAllStepsByCollectStepOrSelectionStep();
         }

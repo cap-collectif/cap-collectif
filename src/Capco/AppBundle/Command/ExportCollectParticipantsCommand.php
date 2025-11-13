@@ -78,7 +78,8 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         $filesystem = $this->cleanTmpExportsFiles();
 
         if ($input->getOption('stepId')) {
-            $collectSteps = [$this->stepRepository->find($input->getOption('stepId'))];
+            $step = $this->stepRepository->find($input->getOption('stepId'));
+            $collectSteps = $step ? [$step] : [];
         } else {
             $collectSteps = $this->stepRepository->getAllStepsByCollectStep();
         }
@@ -126,7 +127,7 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         $this->setName(self::CAPCO_EXPORT_COLLECT_STEP_PARTICIPANTS)
             ->setDescription('Export collect step participants')
         ;
-        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     /**

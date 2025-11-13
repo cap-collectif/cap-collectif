@@ -69,7 +69,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
                 'Export Contributions from Questionnaire. Exports contain only contributions from users with validated accounts and published responses.'
             )
         ;
-        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -95,7 +95,8 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
         }
 
         if ($input->getOption('stepId')) {
-            $questionnaireSteps = [$this->questionnaireStepRepository->find($input->getOption('stepId'))];
+            $questionnaireStep = $this->questionnaireStepRepository->find($input->getOption('stepId'));
+            $questionnaireSteps = $questionnaireStep ? [$questionnaireStep] : [];
         } else {
             $questionnaireSteps = $this->questionnaireStepRepository->findAllNotEmpty();
         }

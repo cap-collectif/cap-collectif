@@ -125,7 +125,7 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         $this->setName(self::CAPCO_EXPORT_SELECTION_STEP_PARTICIPANTS)
             ->setDescription('Export selection step participants')
         ;
-        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     /**

@@ -58,7 +58,8 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
         $style->note('Starting the export.');
 
         if ($input->getOption('stepId')) {
-            $questionnaires = [$this->questionnaireRepository->find($input->getOption('stepId'))];
+            $questionnaire = $this->questionnaireRepository->findOneBy(['step' => $input->getOption('stepId')]);
+            $questionnaires = $questionnaire ? [$questionnaire] : [];
         } else {
             $questionnaires = $this->questionnaireRepository->findAll();
         }
@@ -92,6 +93,6 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
             ->setName('capco:export:questionnaire:participants')
             ->setDescription('Export questionnaire participants')
         ;
-        $this->addOption(name: 'stepId', shortcut: null, mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 }
