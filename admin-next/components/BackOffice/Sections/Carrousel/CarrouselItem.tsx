@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
   Button,
@@ -12,11 +12,10 @@ import {
   Text,
   UPLOADER_SIZE,
 } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { useFormContext } from 'react-hook-form'
-import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
-import CarrouselSelects from './CarrouselSelects'
+import { FC, useCallback, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import {
   getCardLabel,
   MAX_DESC_LENGTH,
@@ -26,6 +25,7 @@ import {
   MAX_TITLE_LENGTH,
   SectionType,
 } from './Carrousel.utils'
+import CarrouselSelects from './CarrouselSelects'
 
 export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; type: SectionType }> = ({
   fieldBaseName,
@@ -80,6 +80,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                   placeholder={intl.formatMessage({
                     id: 'carrousel.placeholder.title',
                   })}
+                  variantColor="hierarchy"
                   maxLength={sectionType === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH}
                 />
               </FormControl>
@@ -95,6 +96,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                   placeholder={intl.formatMessage({
                     id: 'carrousel.placeholder.description',
                   })}
+                  variantColor="hierarchy"
                   maxLength={sectionType === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH}
                 />
               </FormControl>
@@ -111,6 +113,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                         id: 'carrousel.placeholder.btn',
                       })}
                       maxLength={MAX_LABEL_LENGTH}
+                      variantColor="hierarchy"
                     />
                   </FormControl>
                   <FormControl name={linkKey} control={control} isRequired={isDisplayed}>
@@ -123,6 +126,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                       placeholder={intl.formatMessage({
                         id: 'carrousel.placeholder.link',
                       })}
+                      variantColor="hierarchy"
                     />
                   </FormControl>
                 </Flex>
@@ -178,6 +182,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                 size={UPLOADER_SIZE.MD}
                 showThumbnail
                 uploadURI={UPLOAD_PATH}
+                variantColor="hierarchy"
               />
             </FormControl>
           </Flex>

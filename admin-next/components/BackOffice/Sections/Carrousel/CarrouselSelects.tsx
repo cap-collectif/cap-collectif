@@ -1,11 +1,13 @@
-import { FC } from 'react'
-import { AsyncSelect, FormLabel, Box } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { useFormContext } from 'react-hook-form'
-import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
+import { AsyncSelect, Box, FormLabel } from '@cap-collectif/ui'
+import { CarrouselSelectsQuery, CarrouselSelectsQuery$data } from '@relay/CarrouselSelectsQuery.graphql'
+import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
+import stripHTML from '@shared/utils/stripHTML'
 import { environment } from '@utils/relay-environement'
+import { FC } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { graphql } from 'react-relay'
-import { CarrouselSelectsQuery$data, CarrouselSelectsQuery } from '@relay/CarrouselSelectsQuery.graphql'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 import {
   getSelectLabel,
   MAX_DESC_LENGTH,
@@ -15,8 +17,6 @@ import {
   PrefillEntity,
   SectionType,
 } from './Carrousel.utils'
-import stripHTML from '@shared/utils/stripHTML'
-import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
 
 const QUERY = graphql`
   query CarrouselSelectsQuery(
@@ -168,6 +168,7 @@ export const CarrouselSelects: FC<{ fieldBaseName: string; sectionType: SectionT
               setValue(`${fieldBaseName}.endAt`, type === 'EVENT' ? value.endAt : undefined)
             }
           }}
+          variantColor="hierarchy"
         />
       </Box>
     </Box>

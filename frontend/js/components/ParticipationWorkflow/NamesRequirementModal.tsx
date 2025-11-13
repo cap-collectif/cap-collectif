@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { Box, useMultiStepModal, Button, FormLabel, CapInputSize } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import ModalLayout from './ModalLayout'
-import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
-import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
-import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
+import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
+import type { GlobalState } from '~/types'
+import ModalLayout from './ModalLayout'
+import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 
 type FormValues = Pick<WorkflowFormValues, 'firstname' | 'lastname'>
 
@@ -112,13 +112,27 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
           {showFirstname && (
             <FormControl name="firstname" control={control} isRequired>
               <FormLabel htmlFor="firstname" label={intl.formatMessage({ id: 'form.label_firstname' })} />
-              <FieldInput id="firstname" name="firstname" control={control} type="text" variantSize={CapInputSize.Md} />
+              <FieldInput
+                id="firstname"
+                name="firstname"
+                control={control}
+                type="text"
+                variantSize={CapInputSize.Md}
+                variantColor="hierarchy"
+              />
             </FormControl>
           )}
           {showLastname && (
             <FormControl name="lastname" control={control} isRequired>
               <FormLabel htmlFor="lastname" label={intl.formatMessage({ id: 'form.label_lastname' })} />
-              <FieldInput id="lastname" name="lastname" control={control} type="text" variantSize={CapInputSize.Md} />
+              <FieldInput
+                id="lastname"
+                name="lastname"
+                control={control}
+                type="text"
+                variantSize={CapInputSize.Md}
+                variantColor="hierarchy"
+              />
             </FormControl>
           )}
           <Button variantSize="big" justifyContent="center" width="100%" type="submit" isLoading={isLoading}>

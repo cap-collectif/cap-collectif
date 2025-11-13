@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { Box, useMultiStepModal, Button, FormLabel, CapInputSize } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import ModalLayout from './ModalLayout'
-import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
-import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
-import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
+import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
+import type { GlobalState } from '~/types'
+import ModalLayout from './ModalLayout'
+import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 
 type FormValues = Pick<WorkflowFormValues, 'address' | 'realAddress'>
 
@@ -132,6 +132,7 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
                 setValue('realAddress', add)
               }}
               variantSize={CapInputSize.Md}
+              variantColor="hierarchy"
               placeholder={intl.formatMessage({ id: 'searchbar.placeholder' })}
             />
           </FormControl>

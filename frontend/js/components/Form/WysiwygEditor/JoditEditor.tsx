@@ -1,10 +1,10 @@
-import React, { useRef, useMemo } from 'react'
+import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
 import JoditEditor from 'jodit-react'
-import { InsertMode, IJodit } from 'jodit/types'
+import { IJodit, InsertMode } from 'jodit/types'
+import { useMemo, useRef } from 'react'
+import { useIntl } from 'react-intl'
 import AppBox from '~/components/Ui/Primitives/AppBox'
 import localConfig from '~/config'
-import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
-import { useIntl } from 'react-intl'
 
 export type Props = {
   value?: any

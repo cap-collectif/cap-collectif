@@ -69,10 +69,10 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
             custom-domain-delete-confirmation-message
           </p>
           <label
-            class="sc-bcXGCL hICbbA"
+            class="sc-bcXGCL jxYKYl"
             for="agree-checkbox"
           >
-            <div
+            <span
               class="sc-bcXGCL dawbeU cap-checkbox"
               style="margin-left: 0px; margin-top: 0px;"
             >
@@ -81,12 +81,12 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
                 id="agree-checkbox"
                 type="checkbox"
               />
-              <div
-                class="sc-bcXGCL cCxzTy cap-checkbox__box"
+              <span
+                class="sc-bcXGCL blGjAA cap-checkbox__box"
               />
-            </div>
+            </span>
             <span
-              class="sc-bcXGCL fUXsiF cap-text"
+              class="sc-bcXGCL bMtSkN cap-text"
             >
               admin.project.delete.confirm
             </span>

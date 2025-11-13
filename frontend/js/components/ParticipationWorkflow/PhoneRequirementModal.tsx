@@ -1,20 +1,20 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { Box, useMultiStepModal, Button, FormLabel, Flex, InputGroup } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form'
-import ModalLayout from './ModalLayout'
+import { Box, Button, Flex, FormLabel, InputGroup, useMultiStepModal } from '@cap-collectif/ui'
+import CookieMonster from '@shared/utils/CookieMonster'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { useSelector } from 'react-redux'
+import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { useSendParticipantPhoneValidationCodeMutation } from '~/mutations/SendParticipantPhoneValidationCodeMutation'
 import { useSendSmsPhoneValidationCodeMutation } from '~/mutations/SendSmsPhoneValidationCodeMutation'
-import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
-import CookieMonster from '@shared/utils/CookieMonster'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
 import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
+import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
+import type { GlobalState } from '~/types'
+import ModalLayout from './ModalLayout'
 import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
-import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
-import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 
 type FormValues = Pick<WorkflowFormValues, 'phone' | 'countryCode'>
 
@@ -266,6 +266,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
                     id: 'select.country.placeholder',
                   })}
                   defaultValue="+33"
+                  variantColor="hierarchy"
                 />
               </FormControl>
               <FormControl name="phone" control={control} isRequired width="auto" flex={1}>
@@ -274,6 +275,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
                   name="phone"
                   control={control}
                   type="tel"
+                  variantColor="hierarchy"
                   rules={{
                     pattern: {
                       value: /^\d*$/,

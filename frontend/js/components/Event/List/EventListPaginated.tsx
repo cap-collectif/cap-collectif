@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
-import { Button, Row, Col } from 'react-bootstrap'
-import { formValueSelector } from 'redux-form'
-import type { RelayPaginationProp } from 'react-relay'
-import { graphql, createPaginationContainer } from 'react-relay'
 import classNames from 'classnames'
+import React, { useState } from 'react'
+import { Button, Col, Row } from 'react-bootstrap'
+import { FormattedMessage } from 'react-intl'
+import type { RelayPaginationProp } from 'react-relay'
+import { createPaginationContainer, graphql } from 'react-relay'
+import { formValueSelector } from 'redux-form'
 
-import styled from 'styled-components'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
+import { changeEventSelected } from '~/redux/modules/event'
+import type { Dispatch, FeatureToggles, GlobalState } from '~/types'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
+import { bootstrapGrid } from '~/utils/sizes'
+import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql'
 import EventPreview from '../EventPreview/EventPreview'
 import EventMap from '../Map/EventMap'
 import EventPagePassedEventsPreview from './EventPagePassedEventsPreview'
-import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql'
-import type { GlobalState, Dispatch, FeatureToggles } from '~/types'
-import { changeEventSelected } from '~/redux/modules/event'
-import { bootstrapGrid } from '~/utils/sizes'
+
 type OwnProps = {
   readonly query: EventListPaginated_query
   readonly relay: RelayPaginationProp

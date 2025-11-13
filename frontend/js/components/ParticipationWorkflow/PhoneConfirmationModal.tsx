@@ -1,21 +1,21 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { Box, useMultiStepModal, Button, toast } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import ModalLayout from './ModalLayout'
-import { useVerifyParticipantPhoneNumberMutation } from '~/mutations/VerifyParticipantPhoneNumberMutation'
-import { useVerifyUserPhoneNumberMutation } from '~/mutations/VerifyUserPhoneNumberMutation'
+import { Box, Button, toast, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
-import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
+import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { useSendParticipantPhoneValidationCodeMutation } from '~/mutations/SendParticipantPhoneValidationCodeMutation'
 import { useSendSmsPhoneValidationCodeMutation } from '~/mutations/SendSmsPhoneValidationCodeMutation'
 import { useValidatePhoneReusabilityMutation } from '~/mutations/ValidatePhoneReusabilityMutation'
-import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { useVerifyParticipantPhoneNumberMutation } from '~/mutations/VerifyParticipantPhoneNumberMutation'
+import { useVerifyUserPhoneNumberMutation } from '~/mutations/VerifyUserPhoneNumberMutation'
+import type { GlobalState } from '~/types'
 import { fakeTimer } from '~/utils/timer'
+import ModalLayout from './ModalLayout'
+import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 
 type FormValues = Pick<WorkflowFormValues, 'code'>
 
@@ -273,6 +273,7 @@ const PhoneConfirmationModal: React.FC = () => {
                   verifyCode(code)
                 }
               }}
+              variantColor="hierarchy"
             />
           </FormControl>
           <Button

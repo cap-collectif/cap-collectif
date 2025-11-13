@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
-import { Box, Button, CapInputSize, FormLabel, useMultiStepModal, toast, Text, Flex, Link } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useIntl } from 'react-intl'
-import { useFormContext } from 'react-hook-form'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
-import { useSendParticipantConsentInternalCommunicationEmailMutation } from '~/mutations/SendParticipantConsentInternalCommunicationEmailMutation'
+import { Box, Button, CapInputSize, Flex, FormLabel, Link, Text, toast, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
-import { CenteredLogoLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
+import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
+import { CenteredLogoLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { useSendParticipantConsentInternalCommunicationEmailMutation } from '~/mutations/SendParticipantConsentInternalCommunicationEmailMutation'
 import { GlobalState } from '~/types'
 
 type FormValues = {
@@ -48,7 +48,7 @@ const ConsentInternalCommunicationEmailModal = () => {
     return () => clearTimeout(timeout)
   }, [setFocus])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!hasRetryError) {
       return
     }
@@ -122,7 +122,14 @@ const ConsentInternalCommunicationEmailModal = () => {
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="email" control={control} isRequired>
             <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
-            <FieldInput id="email" name="email" control={control} type="email" variantSize={CapInputSize.Md} />
+            <FieldInput
+              id="email"
+              name="email"
+              control={control}
+              type="email"
+              variantSize={CapInputSize.Md}
+              variantColor="hierarchy"
+            />
           </FormControl>
           <Flex direction="column" width="100%" alignItems="center" mb={2}>
             {hasRetryError ? (

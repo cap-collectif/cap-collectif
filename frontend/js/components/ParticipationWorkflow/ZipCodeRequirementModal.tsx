@@ -1,17 +1,17 @@
-import React from 'react'
-import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
-import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
+import CookieMonster from '@shared/utils/CookieMonster'
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
+import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
+import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { useUpdateParticipantMutation } from '~/mutations/UpdateParticipantMutation'
 import { useUpdateProfilePersonalDataMutation } from '~/mutations/UpdateProfilePersonalDataMutation'
-import { useFormContext } from 'react-hook-form'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import CookieMonster from '@shared/utils/CookieMonster'
+import type { GlobalState } from '~/types'
 import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
-import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 
 type FormValues = Pick<WorkflowFormValues, 'zipCode'>
 
@@ -119,6 +119,7 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
               control={control}
               type="text"
               variantSize={CapInputSize.Md}
+              variantColor="hierarchy"
               placeholder="75100"
               maxLength={ZIP_CODE_LENGTH}
               rules={{

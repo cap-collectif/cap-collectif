@@ -292,10 +292,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             class="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              class="sc-bcXGCL hICbbA"
+              class="sc-bcXGCL jxYKYl"
               for="charte"
             >
-              <div
+              <span
                 class="sc-bcXGCL dawbeU cap-checkbox"
                 style="margin-left: 0px; margin-top: 0px;"
               >
@@ -308,10 +308,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   style="margin-left: 0px; margin-top: 0px;"
                   type="checkbox"
                 />
-                <div
-                  class="sc-bcXGCL cCxzTy cap-checkbox__box"
+                <span
+                  class="sc-bcXGCL blGjAA cap-checkbox__box"
                 />
-              </div>
+              </span>
               <span
                 class="sc-bcXGCL grQllb"
               >
@@ -632,10 +632,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             class="sc-bcXGCL fVgOgb cap-form-control"
           >
             <label
-              class="sc-bcXGCL hICbbA"
+              class="sc-bcXGCL jxYKYl"
               for="charte"
             >
-              <div
+              <span
                 class="sc-bcXGCL dawbeU cap-checkbox"
                 style="margin-left: 0px; margin-top: 0px;"
               >
@@ -648,10 +648,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   style="margin-left: 0px; margin-top: 0px;"
                   type="checkbox"
                 />
-                <div
-                  class="sc-bcXGCL cCxzTy cap-checkbox__box"
+                <span
+                  class="sc-bcXGCL blGjAA cap-checkbox__box"
                 />
-              </div>
+              </span>
               <span
                 class="sc-bcXGCL grQllb"
               >

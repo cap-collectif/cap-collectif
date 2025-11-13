@@ -1,25 +1,25 @@
 // @ts-nocheck
 
-import cn from 'classnames'
-import * as React from 'react'
-import { components, ControlProps, GroupBase } from 'react-select'
 import {
   Box,
   BoxPropsOf,
   CapInputSize,
+  CapUIFontSize,
   CapUIIcon,
   CapUIIconSize,
+  CapUILineHeight,
   Flex,
   Icon,
-  Spinner,
   Select,
-  useFormControl,
+  Spinner,
   Text,
-  CapUIFontSize,
-  CapUILineHeight,
+  useFormControl,
 } from '@cap-collectif/ui'
-import flags from './flags'
+import cn from 'classnames'
+import * as React from 'react'
+import { components, ControlProps, GroupBase } from 'react-select'
 import { COUNTRY_CODES } from './enums'
+import flags from './flags'
 
 export type FlagType = {
   name: string
@@ -38,52 +38,33 @@ export interface FlagSelectProps extends Omit<BoxPropsOf<'input'>, 'onChange'> {
   readonly isInvalid?: boolean
   readonly variantSize?: CapInputSize
   readonly uniqueCountry?: COUNTRY_CODES
+  readonly variantColor?: InputVariantColor
 }
 const flagsOptions: FlagOptionType[] = flags.map((flag: FlagType) => ({
   value: flag.country_code,
   label: (
     <Flex direction="row" spacing={2} align="center">
       <Box>{flag.flag}</Box>
-      <Text
-        color="gray.900"
-        fontSize={CapUIFontSize.BodyRegular}
-        lineHeight={CapUILineHeight.Normal}
-        m={0}
-        ml={2}
-      >
+      <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular} lineHeight={CapUILineHeight.Normal} m={0} ml={2}>
         {flag.country_code} (+{flag.dial_code})
       </Text>
     </Flex>
   ),
 }))
 
-export function Control<
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>,
->({ children, ...props }: ControlProps<Option, IsMulti, Group>) {
+export function Control<Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>({
+  children,
+  ...props
+}: ControlProps<Option, IsMulti, Group>) {
   const { isLoading } = props.selectProps
   return (
     <components.Control {...props}>
       {Array.isArray(children) && children[0]}
       {isLoading && <Spinner mr={2} color="blue.500" />}
       {!isLoading && !props.isDisabled && (
-        <Flex
-          mr={2}
-          direction="column"
-          style={{ cursor: 'pointer' }}
-          onClick={props.clearValue}
-        >
-          <Icon
-            name={CapUIIcon.ArrowUp}
-            size={CapUIIconSize.Xs}
-            color="gray.700"
-          />
-          <Icon
-            name={CapUIIcon.ArrowDown}
-            size={CapUIIconSize.Xs}
-            color="gray.700"
-          />
+        <Flex mr={2} direction="column" style={{ cursor: 'pointer' }} onClick={props.clearValue}>
+          <Icon name={CapUIIcon.ArrowUp} size={CapUIIconSize.Xs} color="gray.700" />
+          <Icon name={CapUIIcon.ArrowDown} size={CapUIIconSize.Xs} color="gray.700" />
         </Flex>
       )}
     </components.Control>
@@ -93,11 +74,12 @@ export function Control<
 const FlagSelect: React.FC<FlagSelectProps> = ({
   className,
   variantSize,
+  variantColor,
   uniqueCountry,
   onChange,
   value,
   ...props
-}: FlagSelectProps) => {
+}) => {
   const inputProps = useFormControl<HTMLInputElement>(props)
   const getUniqueCountryIndexByCountryCode = (CountryCode: string) =>
     flagsOptions.findIndex((flag: FlagOptionType) => flag.value === CountryCode)
@@ -113,8 +95,7 @@ const FlagSelect: React.FC<FlagSelectProps> = ({
           : value
           ? flagsOptions[
               getUniqueCountryIndexByCountryCode(
-                flags.find((flag: FlagOptionType) => flag.dial_code === value)
-                  .country_code,
+                flags.find((flag: FlagOptionType) => flag.dial_code === value).country_code,
               )
             ]
           : null
@@ -123,10 +104,9 @@ const FlagSelect: React.FC<FlagSelectProps> = ({
       components={{ Control }}
       className={cn('cap-phone-number-select', `${className}-select`)}
       onChange={value => {
-        onChange(
-          flags[getUniqueCountryIndexByCountryCode(value.value)].dial_code,
-        )
+        onChange(flags[getUniqueCountryIndexByCountryCode(value.value)].dial_code)
       }}
+      variantColor={variantColor}
     />
   )
 }

@@ -1,13 +1,13 @@
-import React from 'react'
-import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
-import { Box, Button, CapInputSize, Flex, FormLabel, Text, useMultiStepModal } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import { Box, Button, CapInputSize, Flex, FormLabel, Text, useMultiStepModal } from '@cap-collectif/ui'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { ACCOUNT_LOGIN_FORM_INDEX } from '~/components/ParticipationWorkflow/EmailAccountLoginForm'
 import { PARTICIPANT_CAPTCHA_INDEX } from '~/components/ParticipationWorkflow/EmailParticipantCaptcha'
-import { fakeTimer } from '~/utils/timer'
+import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { HideBackArrowLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { fakeTimer } from '~/utils/timer'
 
 type Props = {
   hideGoBackArrow: boolean
@@ -73,6 +73,7 @@ const EmailParticipantForm: React.FC<Props> = ({ hideGoBackArrow }) => {
               type="email"
               variantSize={CapInputSize.Md}
               placeholder={intl.formatMessage({ id: 'email.placeholder' })}
+              variantColor="hierarchy"
             />
           </FormControl>
           <Flex direction="column">
