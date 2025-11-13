@@ -1,6 +1,6 @@
 import React from 'react'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { FormLabel } from '@cap-collectif/ui'
+import { FormLabel, Text, CapUIFontSize, Box } from '@cap-collectif/ui'
 import { StepVisibilityTypeEnum } from '../CollectStep/CollectStepForm'
 import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
@@ -88,6 +88,23 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
           {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
         </FieldInput>
       </FormControl>
+
+      <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular}>{intl.formatMessage({ id: 'author-actions-restrictions' })}</Text>
+      <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>{intl.formatMessage({ id: 'proposal-author-actions-restrictions-help-text' })}</Text>
+
+      <Box mb={6}>
+        <FormControl name="preventProposalEdit" control={control} mb={0}>
+          <FieldInput id="preventProposalEdit" name="preventProposalEdit" control={control} type="checkbox">
+            {intl.formatMessage({ id: 'prevent-edit' })}
+          </FieldInput>
+        </FormControl>
+        <FormControl name="preventProposalDelete" control={control} mb={0}>
+          <FieldInput id="preventProposalDelete" name="preventProposalDelete" control={control} type="checkbox">
+            {intl.formatMessage({ id: 'prevent-delete' })}
+          </FieldInput>
+        </FormControl>
+      </Box>
+
       <FormControl name="stepVisibilityType" control={control} mb={6}>
         <FormLabel htmlFor="stepVisibilityType" label={intl.formatMessage({ id: 'project-visibility' })} />
         <FieldInput

@@ -308,3 +308,6 @@ InternalProposal:
                 description: 'The last step containing this proposal.'
                 type: 'ProposalStep!'
                 resolve: '@=value.getLastStepContainingProposal()'
+            access:
+                type: 'ProposalAccess!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAccessResolver", value, args, getUser())'

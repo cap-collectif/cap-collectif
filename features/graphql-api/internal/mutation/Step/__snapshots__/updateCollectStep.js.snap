@@ -17,6 +17,8 @@ Object {
       "label": "upated label",
       "mainView": "LIST",
       "metaDescription": "updated metadescription",
+      "preventProposalDelete": true,
+      "preventProposalEdit": true,
       "private": false,
       "publishedVoteDate": null,
       "requirements": Object {

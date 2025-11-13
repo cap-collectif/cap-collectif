@@ -5,6 +5,8 @@ const UpdateCollectStep = /* GraphQL*/ `
     mutation UpdateCollectStepMutation($input: UpdateCollectStepInput!) {
       updateCollectStep(input: $input) {
         collectStep {
+          preventProposalDelete
+          preventProposalEdit
           id
           title
           label
@@ -97,6 +99,8 @@ const input = {
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
   isCollectByEmailEnabled: false,
+  preventProposalDelete: true,
+  preventProposalEdit: true,
 };
 
 describe('mutations.updateCollectStep', () => {

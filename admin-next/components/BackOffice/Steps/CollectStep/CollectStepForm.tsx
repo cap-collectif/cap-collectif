@@ -173,7 +173,9 @@ export type FormValues = {
   }
   metaDescription: string
   customCode: string
-  isCollectByEmailEnabled
+  isCollectByEmailEnabled: boolean
+  preventProposalEdit: boolean
+  preventProposalDelete: boolean
 } & RequirementsFormValues
 
 const COLLECT_FRAGMENT = graphql`
@@ -182,6 +184,8 @@ const COLLECT_FRAGMENT = graphql`
       id
       ... on CollectStep {
         ...ProposalSettings_step
+        preventProposalEdit
+        preventProposalDelete
         title
         body
         label

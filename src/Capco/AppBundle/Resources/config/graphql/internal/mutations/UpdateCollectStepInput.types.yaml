@@ -93,5 +93,11 @@ UpdateCollectStepInput:
             isCollectByEmailEnabled:
                 type: 'Boolean!'
                 description: 'Whether or not collect by email is enabled.'
+            preventProposalEdit:
+                type: 'Boolean!'
+                description: 'Whether or not proposal edit is disabled after the step is closed.'
+            preventProposalDelete:
+                type: 'Boolean!'
+                description: 'Whether or not proposal delete is disabled after the step is closed.'
             operationType:
                 type: 'StepAdminUrlOperationType'

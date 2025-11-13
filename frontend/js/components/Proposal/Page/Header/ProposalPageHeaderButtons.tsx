@@ -1,4 +1,3 @@
-import { $PropertyType } from 'utility-types'
 import React, { useEffect } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 
@@ -19,14 +18,13 @@ import EditButton from '~/components/Form/EditButton'
 import DeleteButton from '~/components/Form/DeleteButton'
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
 import colors from '~/utils/colors'
-import type { Dispatch, State, User } from '~/types'
+import type { Dispatch } from '~/types'
 import ProposalEditModal from '../../Edit/ProposalEditModal'
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal'
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton'
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm'
 type ReduxProps = {
   readonly dispatch: Dispatch
-  readonly user?: $PropertyType<User, 'user'>
 }
 type Props = ReduxProps & {
   readonly proposal: ProposalPageHeaderButtons_proposal$data
@@ -80,12 +78,16 @@ const FixedButtons = styled.div`
     border-color: #dc3545;
   }
 `
-export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispatch, triggerRequirementsModal }: Props) => {
+export const ProposalPageHeaderButtons = ({ proposal, viewer, step, dispatch, triggerRequirementsModal }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const isAuthor = viewer && viewer.id === proposal?.author?.id
   const editable = proposal?.form?.contribuable || proposal?.contribuable
-  const canEditProposal = editable && user?.uniqueId === proposal?.author?.slug
   const hasExpiredRevisions = proposal?.expiredRevisions ? proposal.expiredRevisions.totalCount > 0 : false
+
+  const canDelete = proposal?.access?.canDelete
+  const canEdit = proposal?.access?.canEdit
+  const canEditProposal = editable && canEdit
+
   useEffect(() => {
     if ((canEditProposal || (hasExpiredRevisions && isAuthor)) && window.location.href.includes(EDIT_MODAL_ANCHOR)) {
       onOpen()
@@ -129,27 +131,35 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
             <ProposalReportButton proposal={proposal} disabled={!proposal} />
           </>
         )}
-        {isAuthor && (
+        {(canEdit || canDelete) && (
           <>
-            <EditButton
-              id="proposal-edit-button"
-              label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
-              author={{
-                uniqueId: proposal?.author?.slug,
-              }}
-              onClick={onOpen}
-              editable={editable}
-            />
-            <DeleteButton
-              id="proposal-delete-button"
-              author={{
-                uniqueId: proposal?.author?.slug,
-              }}
-              onClick={() => {
-                dispatch(openDeleteProposalModal())
-              }}
-              deletable={proposal?.form?.contribuable}
-            />
+            {
+              canEdit ? (
+                <EditButton
+                  id="proposal-edit-button"
+                  label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
+                  author={{
+                    uniqueId: proposal?.author?.slug,
+                  }}
+                  onClick={onOpen}
+                  editable={editable}
+                />
+              ) : null
+            }
+            {
+              canDelete ? (
+                <DeleteButton
+                  id="proposal-delete-button"
+                  author={{
+                    uniqueId: proposal?.author?.slug,
+                  }}
+                  onClick={() => {
+                    dispatch(openDeleteProposalModal())
+                  }}
+                  deletable={proposal?.form?.contribuable}
+                />
+              ) : null
+            }
           </>
         )}
         {proposal?.form?.canContact && !proposal.isArchived && (
@@ -169,11 +179,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  user: state.user.user,
-})
 
-const connector = connect(mapStateToProps, mapDispatchToProps)
+const connector = connect(null, mapDispatchToProps)
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`
     fragment ProposalPageHeaderButtons_viewer on User
@@ -224,6 +231,10 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       }
       isArchived
       publicationStatus
+      access {
+          canEdit
+          canDelete
+      }
       ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalVoteModal_proposal
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)

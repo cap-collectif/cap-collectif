@@ -2629,6 +2629,16 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
 
   """Whether or not collect by email is enabled."""
   isCollectByEmailEnabled: Boolean!
+
+  """
+  Whether or not users can edit their proposal after the step is closed.
+  """
+  preventProposalEdit: Boolean!
+
+  """
+  Whether or not users can delete their proposal after the step is closed.
+  """
+  preventProposalDelete: Boolean!
 }
 
 """A color on hexadecimal format (#DDDDDD)."""
@@ -12476,6 +12486,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The last step containing this proposal."""
   lastStepContainingProposal: ProposalStep!
+  access: ProposalAccess!
+}
+
+type ProposalAccess {
+  canEdit: Boolean!
+  canDelete: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -18787,6 +18803,12 @@ input UpdateCollectStepInput {
 
   """Whether or not collect by email is enabled."""
   isCollectByEmailEnabled: Boolean!
+
+  """Whether or not proposal edit is disabled after the step is closed."""
+  preventProposalEdit: Boolean!
+
+  """Whether or not proposal delete is disabled after the step is closed."""
+  preventProposalDelete: Boolean!
   operationType: StepAdminUrlOperationType
   clientMutationId: String
 }

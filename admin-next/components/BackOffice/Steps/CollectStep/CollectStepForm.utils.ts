@@ -33,6 +33,8 @@ export const getInitialValues = (
     startAt: step?.timeRange?.startAt ?? null,
     endAt: step?.timeRange?.endAt ?? null,
     timeless: step?.timeless ?? false,
+    preventProposalEdit: step?.preventProposalEdit ?? false,
+    preventProposalDelete: step?.preventProposalDelete ?? false,
     stepDurationType: {
       labels: stepDurationType,
     },
@@ -226,6 +228,8 @@ export const getCollectStepInput = (
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
     isCollectByEmailEnabled: formValues.isCollectByEmailEnabled ?? false,
+    preventProposalEdit: formValues.preventProposalEdit ?? false,
+    preventProposalDelete: formValues.preventProposalDelete ?? false,
     operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
     ...getRequirementsInput(formValues),
     ...getVoteParameterInput(formValues),

@@ -6,9 +6,11 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\Broker\Message;
@@ -22,15 +24,21 @@ class DeleteProposalMutation implements MutationInterface
         private readonly Publisher $publisher,
         private readonly Indexer $indexer,
         private readonly ProposalFormProposalsDataLoader $dataloader,
-        private readonly GlobalIdResolver $globalIdResolver
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ProposalAccessResolver $proposalAccessResolver,
     ) {
     }
 
     public function __invoke(string $proposalId, User $user): array
     {
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
-        if (!$proposal || !$proposal instanceof Proposal) {
+        if (!$proposal instanceof Proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
+        }
+
+        ['canDelete' => $canDelete] = $this->proposalAccessResolver->__invoke($proposal, new Argument(), $user);
+        if (!$canDelete) {
+            throw new UserError("Can't delete proposal");
         }
 
         $author = $proposal->getAuthor();

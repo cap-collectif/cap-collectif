@@ -104,6 +104,16 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
      */
     private bool $isCollectByEmailEnabled = false;
 
+    /**
+     * @ORM\Column(name="prevent_proposal_edit", type="boolean", nullable=false, options={"default":0})
+     */
+    private bool $preventProposalEdit = false;
+
+    /**
+     * @ORM\Column(name="prevent_proposal_delete", type="boolean", nullable=false, options={"default":0})
+     */
+    private bool $preventProposalDelete = false;
+
     public function __clone()
     {
         if ($this->id) {
@@ -270,6 +280,30 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
     public function setIsCollectByEmailEnabled(bool $isCollectByEmailEnabled): self
     {
         $this->isCollectByEmailEnabled = $isCollectByEmailEnabled;
+
+        return $this;
+    }
+
+    public function getPreventProposalEdit(): bool
+    {
+        return $this->preventProposalEdit;
+    }
+
+    public function setPreventProposalEdit(bool $preventProposalEdit): self
+    {
+        $this->preventProposalEdit = $preventProposalEdit;
+
+        return $this;
+    }
+
+    public function getPreventProposalDelete(): bool
+    {
+        return $this->preventProposalDelete;
+    }
+
+    public function setPreventProposalDelete(bool $preventProposalDelete): self
+    {
+        $this->preventProposalDelete = $preventProposalDelete;
 
         return $this;
     }

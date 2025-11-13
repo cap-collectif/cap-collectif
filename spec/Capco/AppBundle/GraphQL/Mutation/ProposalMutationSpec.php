@@ -9,11 +9,13 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Entity\ProposalSocialNetworks;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -55,7 +57,8 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalRepository $proposalRepository,
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
-        ProposalLikersDataLoader $proposalLikersDataLoader
+        ProposalLikersDataLoader $proposalLikersDataLoader,
+        ProposalAccessResolver $proposalAccessResolver,
     ) {
         $this->beConstructedWith(
             $logger,
@@ -71,7 +74,8 @@ class ProposalMutationSpec extends ObjectBehavior
             $proposalRepository,
             $publisher,
             $authorizationChecker,
-            $proposalLikersDataLoader
+            $proposalLikersDataLoader,
+            $proposalAccessResolver
         );
     }
 
@@ -96,7 +100,9 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalSocialNetworks $proposalSocialNetworks,
         Cache $cacheDriver,
         Configuration $configuration,
-        $wasDraft = true
+        CollectStep $step,
+        ProposalAccessResolver $proposalAccessResolver,
+        $wasDraft = true,
     ) {
         $this->setContainer($container);
 
@@ -107,6 +113,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
         $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
+
+        $proposalAccessResolver->__invoke($proposal, new Argument(), $user)->willreturn([
+            'canEdit' => true,
+        ]);
 
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
@@ -142,6 +152,9 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getProposalSocialNetworks()->willReturn($proposalSocialNetworks);
 
         $globalidResolver->resolve($values['id'], $user)->willReturn($proposal);
+
+        $proposal->getStep()->willReturn($step);
+        $step->getPreventProposalEdit()->willReturn(false);
 
         // we set the proposal as non draft
         $proposal
@@ -212,7 +225,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         Cache $cacheDriver,
         Configuration $configuration,
-        $wasDraft = false
+        CollectStep $step,
+        ProposalAccessResolver $proposalAccessResolver,
+        $wasDraft = false,
     ) {
         $this->setContainer($container);
 
@@ -221,7 +236,12 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['draft'] = false;
         $values['title'] = 'new title';
         $values['author'] = 'VXNlcix1c2VyNTAx';
+
         $user = $author;
+        $proposalAccessResolver->__invoke($proposal, new Argument(), $user)->willreturn([
+            'canEdit' => true,
+        ]);
+
         $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
@@ -283,6 +303,9 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposal->getLastModifiedAt()->willReturn(new \DateTime());
         $proposal->viewerIsAdminOrOwner($author)->willReturn(false);
+
+        $proposal->getStep()->willReturn($step);
+        $step->getPreventProposalEdit()->willReturn(false);
 
         $proposalForm->isUsingFacebook()->willReturn(false);
         $proposalForm->isUsingInstagram()->willReturn(false);
@@ -363,7 +386,9 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalSocialNetworks $proposalSocialNetworks,
         Manager $toggleManager,
         Cache $cacheDriver,
-        Configuration $configuration
+        Configuration $configuration,
+        CollectStep $step,
+        ProposalAccessResolver $proposalAccessResolver
     ) {
         $this->setContainer($container);
 
@@ -376,6 +401,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalAuthor->getUsername()->willReturn('aUser');
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
         $proposalAuthor->isAdmin()->willReturn(false);
+
+        $proposalAccessResolver->__invoke($proposal, new Argument(), $owner)->willreturn([
+            'canEdit' => true,
+        ]);
 
         $owner->getId()->willReturn('userThéo');
         $owner->getUsername()->willReturn('aUser');
@@ -417,6 +446,9 @@ class ProposalMutationSpec extends ObjectBehavior
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
             ->shouldBeCalled()
         ;
+
+        $proposal->getStep()->willReturn($step);
+        $step->getPreventProposalEdit()->willReturn(false);
 
         $globalidResolver->resolve($values['id'], $owner)->willReturn($proposal);
 
@@ -482,7 +514,9 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalSocialNetworks $proposalSocialNetworks,
         Manager $toggleManager,
         Cache $cacheDriver,
-        Configuration $configuration
+        Configuration $configuration,
+        CollectStep $step,
+        ProposalAccessResolver $proposalAccessResolver,
     ) {
         $this->setContainer($container);
 
@@ -496,6 +530,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalAuthor->getUsername()->willReturn('aUser');
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
         $proposalAuthor->isAdmin()->willReturn(false);
+
+        $proposalAccessResolver->__invoke($proposal, new Argument(), $admin)->willreturn([
+            'canEdit' => true,
+        ]);
 
         $admin->getId()->willReturn('userMaxime');
         $admin->getUsername()->willReturn('aUser');
@@ -533,6 +571,9 @@ class ProposalMutationSpec extends ObjectBehavior
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
             ->shouldBeCalled()
         ;
+
+        $proposal->getStep()->willReturn($step);
+        $step->getPreventProposalEdit()->willReturn(false);
 
         $globalidResolver->resolve($values['id'], $admin)->willReturn($proposal);
 

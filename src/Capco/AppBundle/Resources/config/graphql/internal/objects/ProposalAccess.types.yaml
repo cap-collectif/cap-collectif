@@ -1,0 +1,9 @@
+ProposalAccess:
+    type: object
+    config:
+        name: ProposalAccess
+        fields:
+            canEdit:
+                type: "Boolean!"
+            canDelete:
+                type: "Boolean!"

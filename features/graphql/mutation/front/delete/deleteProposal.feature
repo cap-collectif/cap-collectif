@@ -127,3 +127,5 @@ Scenario: GraphQL client wants delete a proposal
       }
   }
   """
+
+# If you need to add a test here add it to deleteProposal.js instead of here

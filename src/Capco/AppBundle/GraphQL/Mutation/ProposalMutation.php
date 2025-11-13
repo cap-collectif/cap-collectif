@@ -20,6 +20,7 @@ use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -65,6 +66,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         Publisher $publisher,
         protected AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProposalLikersDataLoader $proposalLikersDataLoader,
+        private readonly ProposalAccessResolver $proposalAccessResolver,
     ) {
         parent::__construct(
             $logger,
@@ -440,6 +442,12 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $viewer);
+
+        ['canEdit' => $canEdit] = $this->proposalAccessResolver->__invoke($proposal, new Argument(), $viewer);
+        if (!$canEdit) {
+            throw new UserError("Can't edit proposal");
+        }
+
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
             $this->logger->error($error);

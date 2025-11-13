@@ -60,4 +60,10 @@ InternalCollectStep:
             isCollectByEmailEnabled:
                 type: 'Boolean!'
                 description: 'Whether or not collect by email is enabled.'
+            preventProposalEdit:
+                type: 'Boolean!'
+                description: 'Whether or not users can edit their proposal after the step is closed.'
+            preventProposalDelete:
+                type: 'Boolean!'
+                description: 'Whether or not users can delete their proposal after the step is closed.'
 

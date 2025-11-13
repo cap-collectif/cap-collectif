@@ -3684,6 +3684,31 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
+                  "concreteType": "ProposalAccess",
+                  "kind": "LinkedField",
+                  "name": "access",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "canEdit",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "canDelete",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
                   "kind": "ScalarField",
                   "name": "bodyUsingJoditWysiwyg",
                   "storageKey": null,
@@ -8484,7 +8509,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "74086b605309646c0432ec662a7444c7",
+          "cacheID": "57ef229b7a76448511927d35b521c9e8",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9987,6 +10012,10 @@ fragment ProposalPageHeaderButtons_proposal_b300R on Proposal {
   }
   isArchived
   publicationStatus
+  access {
+    canEdit
+    canDelete
+  }
   ...ProposalVoteButtonWrapperFragment_proposal_2crCiI
   ...ProposalVoteModal_proposal
   ...ProposalFollowButton_proposal_39ngnn

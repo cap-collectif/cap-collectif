@@ -1,4 +1,4 @@
-import '../../_setup';
+import '../../resetDatabaseBeforeEach';
 
 const ChangeProposalContentMutation = /* GraphQL */ `
   mutation ChangeProposalContentMutation(
@@ -691,5 +691,19 @@ describe('mutations.changeProposalContentMutation', () => {
         'internal_kiroule',
       )
     ).resolves.toMatchSnapshot();
+  });
+
+  it('should not be able to update a proposal when preventProposalEdit is enabled in the step', async () => {
+    await global.runSQL('UPDATE step SET prevent_proposal_edit = 1 WHERE id = "collectstep1"')
+
+    await expect(graphql(
+      ChangeMoreProposalContentMutation,
+      {
+        "input": inputEdit
+      },
+      'internal_user',
+    )).rejects.toThrowError('Can\'t edit proposal')
+
+    await global.runSQL('UPDATE step SET prevent_proposal_edit = 0 WHERE id = "collectstep1"')
   });
 })
