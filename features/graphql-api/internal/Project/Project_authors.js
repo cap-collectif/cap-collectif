@@ -1,8 +1,6 @@
 /* eslint-dev jest*/
 const ProjectAuthorsQuery = /* GraphQL */ `
-  query ProjectAuthors(
-    $projectId: ID!
-  ) {
+  query ProjectAuthors($projectId: ID!) {
     project: node(id: $projectId) {
       id
       ... on Project {
@@ -12,7 +10,7 @@ const ProjectAuthorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.projects.authors', () => {
   it('Check its display logo organization for project', async () => {
@@ -24,6 +22,6 @@ describe('Internal.projects.authors', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 // TODO: when https://github.com/cap-collectif/platform/pull/12175 will be merged, the debate votes
 // count should reflect the change because we'll add both of the anonymous votes and the
@@ -21,12 +21,12 @@ const RemoveDebateAnonymousVoteMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|RemoveDebateAnonymousVote mutation', () => {
   it('should successfully remove an existing anonymous vote when the given hash is valid.', async () => {
     // AGAINST:jesuisunsupertokengenshinimpact1
-    const hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
+    const hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ=='
     const response = await graphql(
       RemoveDebateAnonymousVoteMutation,
       {
@@ -36,9 +36,9 @@ describe('Internal|RemoveDebateAnonymousVote mutation', () => {
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when the given hash is invalid.', async () => {
     const response = await graphql(
       RemoveDebateAnonymousVoteMutation,
@@ -49,12 +49,12 @@ describe('Internal|RemoveDebateAnonymousVote mutation', () => {
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should remove an existing anonymous vote and an argument', async () => {
-    const hash = 'Rk9SOmRlYmF0ZUFub255bW91c1ZvdGVUb2tlbjEzMDA0';
-    const argumentHash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const hash = 'Rk9SOmRlYmF0ZUFub255bW91c1ZvdGVUb2tlbjEzMDA0'
+    const argumentHash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ=='
     const response = await graphql(
       RemoveDebateAnonymousVoteMutation,
       {
@@ -65,7 +65,7 @@ describe('Internal|RemoveDebateAnonymousVote mutation', () => {
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

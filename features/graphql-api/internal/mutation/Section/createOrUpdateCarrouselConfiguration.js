@@ -1,9 +1,7 @@
-import '../../../_setup';
+import '../../../_setup'
 
 const createOrUpdateCarrouselConfigurationMutation = /* GraphQL */ `
-  mutation CreateOrUpdateCarrouselConfigurationMutation(
-    $input: CreateOrUpdateCarrouselConfigurationInput!
-  ) {
+  mutation CreateOrUpdateCarrouselConfigurationMutation($input: CreateOrUpdateCarrouselConfigurationInput!) {
     createOrUpdateCarrouselConfiguration(input: $input) {
       errorCode
       carrouselConfiguration {
@@ -33,7 +31,7 @@ const createOrUpdateCarrouselConfigurationMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const commonInputFields = {
   enabled: false,
@@ -63,28 +61,24 @@ const commonInputFields = {
       position: 2,
     },
   ],
-};
+}
 
 const inputSectionTypeCarrousel = {
   type: 'carrousel',
   ...commonInputFields,
-};
+}
 
 const inputSectionTypeCarrouselHighlighted = {
   type: 'carrouselHighlighted',
   ...commonInputFields,
-};
+}
 
 describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
   it('should create and update a CarrouselConfiguration for carrousel section type as admin', async () => {
     await expect(
-      graphql(
-        createOrUpdateCarrouselConfigurationMutation,
-        { input: inputSectionTypeCarrousel },
-        'internal_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+      graphql(createOrUpdateCarrouselConfigurationMutation, { input: inputSectionTypeCarrousel }, 'internal_admin'),
+    ).resolves.toMatchSnapshot()
+  })
   it('should not create more than 8 section carrousel items for carrousel section type', async () => {
     await expect(
       graphql(
@@ -129,17 +123,13 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should not create and update a CarrouselConfiguration for carrousel section type as user', async () => {
     await expect(
-      graphql(
-        createOrUpdateCarrouselConfigurationMutation,
-        { input: inputSectionTypeCarrousel },
-        'internal_user',
-      ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+      graphql(createOrUpdateCarrouselConfigurationMutation, { input: inputSectionTypeCarrousel }, 'internal_user'),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('should create and update a CarrouselConfiguration for carrousel highlighted section type as admin', async () => {
     await expect(
       graphql(
@@ -147,8 +137,8 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
         { input: inputSectionTypeCarrouselHighlighted },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should not create more than 8 section carrousel items for carrousel highlighted section type', async () => {
     await expect(
       graphql(
@@ -193,8 +183,8 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should not create and update a CarrouselConfiguration for carrousel highlighted section type as user', async () => {
     await expect(
       graphql(
@@ -202,6 +192,6 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
         { input: inputSectionTypeCarrouselHighlighted },
         'internal_user',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

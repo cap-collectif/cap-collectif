@@ -1,11 +1,6 @@
 /* eslint-env jest */
 const InternalEventsQuery = /* GraphQL */ `
-  query InternalEventsQuery(
-    $count: Int!
-    $cursor: String
-    $orderBy: EventOrder
-    $isFuture: Boolean
-  ) {
+  query InternalEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder, $isFuture: Boolean) {
     events(first: $count, after: $cursor, orderBy: $orderBy, isFuture: $isFuture) {
       totalCount
       pageInfo {
@@ -28,12 +23,10 @@ const InternalEventsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Query.events_review connection', () => {
   it('fetches all events enabled or approved', async () => {
-    await expect(
-      graphql(InternalEventsQuery, { count: 100 }, 'internal'),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalEventsQuery, { count: 100 }, 'internal')).resolves.toMatchSnapshot()
+  })
+})

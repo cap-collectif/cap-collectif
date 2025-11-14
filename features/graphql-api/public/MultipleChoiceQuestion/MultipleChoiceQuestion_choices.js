@@ -16,15 +16,10 @@ const MultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const PaginatedMultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
-  query PaginatedMultipleChoiceQuestionChoicesByTermQuery(
-    $id: ID!
-    $term: String
-    $cursor: String
-    $limit: Int
-  ) {
+  query PaginatedMultipleChoiceQuestionChoicesByTermQuery($id: ID!, $term: String, $cursor: String, $limit: Int) {
     question: node(id: $id) {
       ... on MultipleChoiceQuestion {
         choices(after: $cursor, term: $term, first: $limit) {
@@ -45,7 +40,7 @@ const PaginatedMultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('MultipleChoiceQuestion.choices array', () => {
   it("fetches a question's choices and the number of answers to each of them", async () => {
@@ -57,8 +52,8 @@ describe('MultipleChoiceQuestion.choices array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches a question's choices that match the given term and paginate the results", async () => {
     const variables = {
@@ -66,30 +61,24 @@ describe('MultipleChoiceQuestion.choices array', () => {
       term: 'sku',
       limit: 1,
       cursor: null,
-    };
-    const response1 = await graphql(
-      PaginatedMultipleChoiceQuestionChoicesQuery,
-      variables,
-      'internal',
-    );
-    const endCursor = response1.question.choices.pageInfo.endCursor;
-    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true);
-    expect(response1.question.choices.edges.length).toBe(1);
-    expect(response1.question.choices.edges[0].node.title).toMatch(/sku/);
+    }
+    const response1 = await graphql(PaginatedMultipleChoiceQuestionChoicesQuery, variables, 'internal')
+    const endCursor = response1.question.choices.pageInfo.endCursor
+    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true)
+    expect(response1.question.choices.edges.length).toBe(1)
+    expect(response1.question.choices.edges[0].node.title).toMatch(/sku/)
 
     const response2 = await graphql(
       PaginatedMultipleChoiceQuestionChoicesQuery,
       { ...variables, cursor: endCursor },
       'internal',
-    );
-    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false);
-    expect(response2.question.choices.edges.length).toBe(1);
-    expect(response2.question.choices.edges[0].node.title).toMatch(/sku/);
+    )
+    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false)
+    expect(response2.question.choices.edges.length).toBe(1)
+    expect(response2.question.choices.edges[0].node.title).toMatch(/sku/)
 
-    expect(response1.question.choices.edges[0].node.id).not.toBe(
-      response2.question.choices.edges[0].node.id,
-    );
-  });
+    expect(response1.question.choices.edges[0].node.id).not.toBe(response2.question.choices.edges[0].node.id)
+  })
 
   it("fetches a question's choices and paginate the results", async () => {
     const variables = {
@@ -97,21 +86,17 @@ describe('MultipleChoiceQuestion.choices array', () => {
       term: null,
       limit: 10,
       cursor: null,
-    };
-    const response1 = await graphql(
-      PaginatedMultipleChoiceQuestionChoicesQuery,
-      variables,
-      'internal',
-    );
-    const endCursor = response1.question.choices.pageInfo.endCursor;
-    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true);
-    expect(response1.question.choices.edges).toMatchSnapshot();
+    }
+    const response1 = await graphql(PaginatedMultipleChoiceQuestionChoicesQuery, variables, 'internal')
+    const endCursor = response1.question.choices.pageInfo.endCursor
+    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true)
+    expect(response1.question.choices.edges).toMatchSnapshot()
     const response2 = await graphql(
       PaginatedMultipleChoiceQuestionChoicesQuery,
       { ...variables, cursor: endCursor },
       'internal',
-    );
-    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false);
-    expect(response2.question.choices.edges).toMatchSnapshot();
-  });
-});
+    )
+    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false)
+    expect(response2.question.choices.edges).toMatchSnapshot()
+  })
+})

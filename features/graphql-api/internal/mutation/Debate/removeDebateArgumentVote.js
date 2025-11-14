@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 const RemoveDebateArgumentVoteMutation = /* GraphQL */ `
   mutation RemoveDebateArgumentVoteMutation($input: RemoveDebateArgumentVoteInput!) {
     removeDebateArgumentVote(input: $input) {
@@ -13,7 +13,7 @@ const RemoveDebateArgumentVoteMutation = /* GraphQL */ `
       deletedDebateArgumentVoteId
     }
   }
-`;
+`
 
 describe('Internal|Mutation.removeDebateArgumentVote', () => {
   it('try to remove vote with wrong argument id', async () => {
@@ -27,8 +27,8 @@ describe('Internal|Mutation.removeDebateArgumentVote', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('remove vote for an argument', async () => {
     await expect(
       graphql(
@@ -40,8 +40,8 @@ describe('Internal|Mutation.removeDebateArgumentVote', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('try to remove nonexistent vote for an argument', async () => {
     await expect(
       graphql(
@@ -53,6 +53,6 @@ describe('Internal|Mutation.removeDebateArgumentVote', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

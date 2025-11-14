@@ -18,7 +18,7 @@ const GroupMembersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.Group.members', () => {
   it('should fetch all members of a group ', async () => {
@@ -33,8 +33,8 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch first 2 members ', async () => {
     await expect(
       graphql(
@@ -47,8 +47,8 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch members with username spyl ', async () => {
     await expect(
       graphql(
@@ -61,8 +61,8 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch members with email msantostefano@cap-collectif.com ', async () => {
     await expect(
       graphql(
@@ -75,8 +75,8 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch with a null notInIds value', async () => {
     await expect(
       graphql(
@@ -90,8 +90,8 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch first member after lbrunet ', async () => {
     await expect(
       graphql(
@@ -104,6 +104,6 @@ describe('Internal.Group.members', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

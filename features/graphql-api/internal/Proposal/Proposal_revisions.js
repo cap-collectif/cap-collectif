@@ -16,7 +16,7 @@ const ProposalRevisionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.revisions', () => {
   it("fetches proposal's related revisions with state done", async () => {
@@ -29,8 +29,8 @@ describe('Internal.revisions', () => {
         },
         'internal_welcomatic',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it("fetches proposal's related revisions with state pending", async () => {
     await expect(
       graphql(
@@ -41,8 +41,8 @@ describe('Internal.revisions', () => {
         },
         'internal_welcomatic',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it("fetches all proposal's related revisions", async () => {
     await expect(
       graphql(
@@ -52,8 +52,8 @@ describe('Internal.revisions', () => {
         },
         'internal_welcomatic',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it("fetches all proposal's expired related revisions", async () => {
     await expect(
       graphql(
@@ -64,6 +64,6 @@ describe('Internal.revisions', () => {
         },
         'internal_welcomatic',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

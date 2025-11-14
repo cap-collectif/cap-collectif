@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateCollectStep = /* GraphQL*/ `
     mutation UpdateCollectStepMutation($input: UpdateCollectStepInput!) {
@@ -50,11 +50,11 @@ const UpdateCollectStep = /* GraphQL*/ `
         }
       }
     }
-`;
+`
 
 // Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx
-const stepId = toGlobalId('CollectStep', 'collectstep1');
-const proposalFormId = 'proposalForm1';
+const stepId = toGlobalId('CollectStep', 'collectstep1')
+const proposalFormId = 'proposalForm1'
 
 const input = {
   stepId: stepId,
@@ -101,12 +101,11 @@ const input = {
   isCollectByEmailEnabled: false,
   preventProposalDelete: true,
   preventProposalEdit: true,
-};
+}
 
 describe('mutations.updateCollectStep', () => {
   it('admin should be able to edit collectStep step.', async () => {
-    const response = await graphql(UpdateCollectStep, { input: { ...input } }, 'internal_admin');
-    expect(response).toMatchSnapshot();
-  });
-});
-
+    const response = await graphql(UpdateCollectStep, { input: { ...input } }, 'internal_admin')
+    expect(response).toMatchSnapshot()
+  })
+})

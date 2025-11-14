@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const SubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
   mutation SubscribeToEventAsRegistered($input: SubscribeToEventAsRegisteredInput!) {
@@ -9,7 +9,7 @@ const SubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 const SubscribeToEventAsNonRegisteredMutation = /* GraphQL*/ `
   mutation SubscribeToEventAsNonRegistered($input: SubscribeToEventAsNonRegisteredInput!) {
@@ -19,7 +19,7 @@ const SubscribeToEventAsNonRegisteredMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.subscribeToEvent', () => {
   it('admin wants to subscribe to an event.', async () => {
@@ -29,9 +29,9 @@ describe('mutations.subscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQz' },
       },
       'internal_admin',
-    );
-    expect(subscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(subscribeToEvent).toMatchSnapshot()
+  })
 
   it('theo wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
@@ -40,9 +40,9 @@ describe('mutations.subscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQx' },
       },
       'internal_theo',
-    );
-    expect(subscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(subscribeToEvent).toMatchSnapshot()
+  })
 
   it('user wants to subscribe to a registered event.', async () => {
     await expect(
@@ -53,8 +53,8 @@ describe('mutations.subscribeToEvent', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('Event is complete');
-  });
+    ).rejects.toThrowError('Event is complete')
+  })
 
   it('user wants to subscribe to a complete event.', async () => {
     await expect(
@@ -65,8 +65,8 @@ describe('mutations.subscribeToEvent', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('Event is complete');
-  });
+    ).rejects.toThrowError('Event is complete')
+  })
 
   it('user wants to subscribe to event as anonymous.', async () => {
     const subscribeToEvent = await graphql(
@@ -75,9 +75,9 @@ describe('mutations.subscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQx', private: true },
       },
       'internal_user_conseil_regional',
-    );
-    expect(subscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(subscribeToEvent).toMatchSnapshot()
+  })
 
   it('anonymous wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
@@ -86,9 +86,9 @@ describe('mutations.subscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQx', email: 'jpec@cap-collectif.com', username: 'Jpec' },
       },
       'internal',
-    );
-    expect(subscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(subscribeToEvent).toMatchSnapshot()
+  })
 
   it('anonymous wants to subscribe to event as anonymous.', async () => {
     const subscribeToEvent = await graphql(
@@ -102,9 +102,9 @@ describe('mutations.subscribeToEvent', () => {
         },
       },
       'internal',
-    );
-    expect(subscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(subscribeToEvent).toMatchSnapshot()
+  })
   it('anonymous wants to subscribe ever subscribed event.', async () => {
     await expect(
       graphql(
@@ -119,8 +119,8 @@ describe('mutations.subscribeToEvent', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('User is already registered for this event.');
-  });
+    ).rejects.toThrowError('User is already registered for this event.')
+  })
   it('anonymous wants to subscribe to a complete event.', async () => {
     await expect(
       graphql(
@@ -135,6 +135,6 @@ describe('mutations.subscribeToEvent', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Event is complete');
-  });
-});
+    ).rejects.toThrowError('Event is complete')
+  })
+})

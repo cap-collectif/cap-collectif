@@ -16,7 +16,7 @@ const ParticipantReplies = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Participant.Replies', () => {
   it('super admin should be able to fetch replies from participant', async () => {
@@ -28,6 +28,6 @@ describe('Internal|Participant.Replies', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

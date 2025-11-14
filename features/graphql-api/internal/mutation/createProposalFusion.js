@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const CreateProposalFusionMutation = /* GraphQL*/ `
   mutation CreateProposalFusionMutation(
@@ -11,7 +11,7 @@ const CreateProposalFusionMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.createProposalFusion', () => {
   // admin
@@ -26,7 +26,7 @@ describe('mutations.createProposalFusion', () => {
         },
       },
       'internal_admin',
-    );
-    expect(createProposalFusionMutation).toMatchSnapshot();
-  });
-});
+    )
+    expect(createProposalFusionMutation).toMatchSnapshot()
+  })
+})

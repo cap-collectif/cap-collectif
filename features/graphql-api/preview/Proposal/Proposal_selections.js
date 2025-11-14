@@ -21,7 +21,7 @@ const ProposalSelectionsPreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.Proposal_selections', () => {
   it('fetches selections related to a proposal', async () => {
@@ -33,6 +33,6 @@ describe('Preview.Proposal_selections', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

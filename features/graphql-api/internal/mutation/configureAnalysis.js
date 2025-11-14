@@ -1,5 +1,5 @@
 /* eslint-env jest*/
-import '../../_setup';
+import '../../_setup'
 
 const ConfigureAnalysisMutation = /* GraphQL */ `
   mutation ConfigureAnalysisMutation($input: ConfigureAnalysisInput!) {
@@ -28,7 +28,7 @@ const ConfigureAnalysisMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('mutations.configureAnalysis', () => {
   it('should modify specified analysis configuration', async () => {
@@ -47,15 +47,15 @@ describe('mutations.configureAnalysis', () => {
         },
       },
       'internal_admin',
-    );
+    )
     expect(modifyAnalysisConfiguration).toMatchSnapshot({
       configureAnalysis: {
         analysisConfiguration: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('should modify analysis configuration without moveToSelectionStepId', async () => {
     const modifyAnalysisConfiguration = await graphql(
@@ -72,15 +72,15 @@ describe('mutations.configureAnalysis', () => {
         },
       },
       'internal_admin',
-    );
+    )
     expect(modifyAnalysisConfiguration).toMatchSnapshot({
       configureAnalysis: {
         analysisConfiguration: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('should remove unfavourable status from analysisConfiguration', async () => {
     const modifyAnalysisConfiguration = await graphql(
@@ -97,13 +97,13 @@ describe('mutations.configureAnalysis', () => {
         },
       },
       'internal_admin',
-    );
+    )
     expect(modifyAnalysisConfiguration).toMatchSnapshot({
       configureAnalysis: {
         analysisConfiguration: {
           id: expect.any(String),
         },
       },
-    });
-  });
-});
+    })
+  })
+})

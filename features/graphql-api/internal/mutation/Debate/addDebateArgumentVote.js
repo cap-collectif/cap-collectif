@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddDebateArgumentVoteMutation = /* GraphQL */ `
   mutation AddDebateArgumentVoteMutation($input: AddDebateArgumentVoteInput!) {
@@ -23,7 +23,7 @@ const AddDebateArgumentVoteMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Mutation.addDebateArgumentVote', () => {
   it('try to vote with wrong argument id', async () => {
@@ -37,8 +37,8 @@ describe('Internal|Mutation.addDebateArgumentVote', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('vote for a debate argument', async () => {
     await expect(
       graphql(
@@ -50,8 +50,8 @@ describe('Internal|Mutation.addDebateArgumentVote', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('try to vote for an argument but already voted', async () => {
     await expect(
       graphql(
@@ -63,6 +63,6 @@ describe('Internal|Mutation.addDebateArgumentVote', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

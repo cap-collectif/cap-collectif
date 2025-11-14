@@ -30,7 +30,7 @@ const SelectionStepMediatorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 const SelectionStepMediatorsUernameQuery = /* GraphQL */ `
   query SelectionStepMediatorsUernameQuery($username: String) {
     node(id: "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==") {
@@ -49,14 +49,12 @@ const SelectionStepMediatorsUernameQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|SelectionStep.mediators', () => {
   it('fetches the mediators', async () => {
-    await expect(
-      graphql(SelectionStepMediatorsQuery, {}, 'internal_admin'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(SelectionStepMediatorsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
   it('fetches the mediators with username filter', async () => {
     await expect(
       graphql(
@@ -66,7 +64,7 @@ describe('Internal|SelectionStep.mediators', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot()
 
     await expect(
       graphql(
@@ -76,6 +74,6 @@ describe('Internal|SelectionStep.mediators', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

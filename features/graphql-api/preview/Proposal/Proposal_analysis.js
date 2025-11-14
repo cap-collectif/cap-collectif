@@ -43,7 +43,7 @@ const ProposalAnalysisPreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.proposals', () => {
   it("fetches proposal's related analysis data", async () => {
@@ -55,6 +55,6 @@ describe('Preview.proposals', () => {
         },
         'admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

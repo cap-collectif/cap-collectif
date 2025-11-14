@@ -26,7 +26,7 @@ const QuestionnaireAdminRepliesQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionnaireAdminStatusRepliesQuery = /** GraphQL */ `
   query QuestionnaireAdminReplies($term: String, $orderBy: ReplyOrder, $filterStatus: [ReplyStatus]) {
@@ -48,7 +48,7 @@ const QuestionnaireAdminStatusRepliesQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionnaireAdminOrderRepliesQuery = /** GraphQL */ `
   query QuestionnaireAdminReplies($term: String, $orderBy: ReplyOrder, $filterStatus: [ReplyStatus]) {
@@ -70,20 +70,18 @@ const QuestionnaireAdminOrderRepliesQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variables = {
   term: null,
   orderBy: { field: 'CREATED_AT', direction: 'DESC' },
   filterStatus: ['PUBLISHED', 'NOT_PUBLISHED', 'DRAFT', 'PENDING'],
-};
+}
 
 describe('Internal|Questionnaire.adminReplies', () => {
   it('should fetch all replies given all status filters', async () => {
-    await expect(
-      graphql(QuestionnaireAdminRepliesQuery, variables, 'internal_admin'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(QuestionnaireAdminRepliesQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
+  })
   it('should only fetch published replies', async () => {
     await expect(
       graphql(
@@ -94,8 +92,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should only fetch draft replies', async () => {
     await expect(
       graphql(
@@ -106,8 +104,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should only fetch unpublished replies', async () => {
     await expect(
       graphql(
@@ -118,8 +116,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should only fetch pending replies', async () => {
     await expect(
       graphql(
@@ -130,8 +128,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch empty replies when no filters given', async () => {
     await expect(
       graphql(
@@ -142,8 +140,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should only fetch replies authored by admin', async () => {
     await expect(
       graphql(
@@ -154,8 +152,8 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should fetch replies ordered by updatedAt ASC', async () => {
     await expect(
       graphql(
@@ -166,6 +164,6 @@ describe('Internal|Questionnaire.adminReplies', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

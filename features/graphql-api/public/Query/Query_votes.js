@@ -5,10 +5,10 @@ const InternalQuery = /* GraphQL */ `
       totalCount
     }
   }
-`;
+`
 
 describe('Internal|Query.votes', () => {
   it('fetches total number of votes', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateCASSSOConfiguration = /* GraphQL */ `
   mutation CreateCASSSOConfigurationMutation($input: CreateCASSSOConfigurationInput!) {
@@ -14,7 +14,7 @@ const CreateCASSSOConfiguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UpdateCASSSOConfuguration = /* GraphQL */ `
   mutation UpdateCASSSOConfigurationMutation($input: UpdateCASSSOConfigurationInput!) {
@@ -29,7 +29,7 @@ const UpdateCASSSOConfuguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DeleteSSOConfiguration = /* GraphQL */ `
   mutation DeleteSSOConfigurationMutation($input: DeleteSSOConfigurationInput!) {
@@ -37,10 +37,10 @@ const DeleteSSOConfiguration = /* GraphQL */ `
       deletedSsoConfigurationId
     }
   }
-`;
+`
 
 describe('Internal|SSO|CAS', () => {
-  let createdId;
+  let createdId
 
   it('Creates a config as super admin', async () => {
     const creationResult = await graphql(
@@ -51,10 +51,10 @@ describe('Internal|SSO|CAS', () => {
           casVersion: 'v2',
           casCertificate: '--- TEST CREATE CONFIG CERTIFICATE ---',
           casServerUrl: 'https://test.dev/cas',
-        }
+        },
       },
-      'internal_super_admin'
-    );
+      'internal_super_admin',
+    )
 
     expect(creationResult).toMatchSnapshot({
       createCASSSOConfiguration: {
@@ -62,10 +62,10 @@ describe('Internal|SSO|CAS', () => {
           id: expect.any(String),
         },
       },
-    });
+    })
 
-    createdId = creationResult.createCASSSOConfiguration.ssoConfiguration.id;
-  });
+    createdId = creationResult.createCASSSOConfiguration.ssoConfiguration.id
+  })
 
   it('Updates a config as super admin', async () => {
     await expect(
@@ -78,18 +78,18 @@ describe('Internal|SSO|CAS', () => {
             casVersion: 'v3',
             casCertificate: '--- CERTIFICATE UPDATED ---',
             casServerUrl: 'https://new.url.com/cas',
-          }
+          },
         },
-        'internal_super_admin'
-      )
+        'internal_super_admin',
+      ),
     ).resolves.toMatchSnapshot({
       updateCASSSOConfiguration: {
         ssoConfiguration: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('Deletes a config as admin only', async () => {
     await expect(
@@ -98,16 +98,16 @@ describe('Internal|SSO|CAS', () => {
         {
           input: {
             id: createdId,
-          }
+          },
         },
-        'internal_admin'
-      )
+        'internal_admin',
+      ),
     ).resolves.toMatchSnapshot({
       deleteSSOConfiguration: {
         deletedSsoConfigurationId: expect.any(String),
       },
-    });
-  });
+    })
+  })
 
   it('Tries to create a config as admin only', async () => {
     await expect(
@@ -119,12 +119,12 @@ describe('Internal|SSO|CAS', () => {
             casVersion: 'v1',
             casCertificate: 'youpie',
             casServerUrl: 'https://test.dev/cas',
-          }
+          },
         },
-        'internal_admin'
-      )
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+        'internal_admin',
+      ),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('Tries to update a config as admin only', async () => {
     await expect(
@@ -137,10 +137,10 @@ describe('Internal|SSO|CAS', () => {
             casVersion: 'v3',
             casCertificate: '---osef---',
             casServerUrl: 'https://osef.com/cas',
-          }
+          },
         },
-        'internal_admin'
-      )
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+        'internal_admin',
+      ),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

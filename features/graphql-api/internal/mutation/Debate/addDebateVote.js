@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddDebateVoteMutation = /* GraphQL */ `
   mutation AddDebateVoteMutation($input: AddDebateVoteInput!) {
@@ -26,7 +26,7 @@ const AddDebateVoteMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const AddDebateVoteAndGetOriginMutation = /* GraphQL */ `
   mutation AddDebateVoteMutation($input: AddDebateVoteInput!) {
@@ -37,7 +37,7 @@ const AddDebateVoteAndGetOriginMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|addDebateVote mutation', () => {
   it('Add and update a debate vote.', async () => {
@@ -50,7 +50,7 @@ describe('Internal|addDebateVote mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(response).toMatchSnapshot({
       addDebateVote: {
@@ -60,7 +60,7 @@ describe('Internal|addDebateVote mutation', () => {
           publishedAt: expect.any(String),
         },
       },
-    });
+    })
 
     const updateResponse = await graphql(
       AddDebateVoteMutation,
@@ -71,7 +71,7 @@ describe('Internal|addDebateVote mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(updateResponse).toMatchSnapshot({
       addDebateVote: {
@@ -82,10 +82,10 @@ describe('Internal|addDebateVote mutation', () => {
           publishedAt: expect.any(String),
         },
       },
-    });
+    })
     // The previous vote id must correspond to the deleted vote.
-    expect(response.addDebateVote.debateVote.id).toBe(updateResponse.addDebateVote.previousVoteId);
-  });
+    expect(response.addDebateVote.debateVote.id).toBe(updateResponse.addDebateVote.previousVoteId)
+  })
 
   it('Add a vote by widget.', async () => {
     const response = await graphql(
@@ -98,7 +98,7 @@ describe('Internal|addDebateVote mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(response).toMatchSnapshot({
       addDebateVote: {
@@ -107,6 +107,6 @@ describe('Internal|addDebateVote mutation', () => {
           widgetOriginUrl: 'www.lejournaldesdebats.fr',
         },
       },
-    });
-  });
-});
+    })
+  })
+})

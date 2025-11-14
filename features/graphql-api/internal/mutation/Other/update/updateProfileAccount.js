@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdateProfileAccountEmailMutation = /* GraphQL*/ `
   mutation UpdateProfileAccountEmailMutation($input: UpdateProfileAccountEmailInput!) {
@@ -11,7 +11,7 @@ const UpdateProfileAccountEmailMutation = /* GraphQL*/ `
       error
     }
   }
-`;
+`
 
 const UpdateProfileAccountLocaleMutation = /* GraphQL */ `
   mutation UpdateProfileAccountLocaleMutation($input: UpdateProfileAccountLocaleInput!) {
@@ -22,7 +22,7 @@ const UpdateProfileAccountLocaleMutation = /* GraphQL */ `
       error
     }
   }
-`;
+`
 
 describe('mutations.updateProfileAccountEmail', () => {
   it('should  update user email', async () => {
@@ -35,9 +35,9 @@ describe('mutations.updateProfileAccountEmail', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateEmail).toMatchSnapshot();
-  });
+    )
+    expect(updateEmail).toMatchSnapshot()
+  })
 
   it('should not update user email, cause of bad password', async () => {
     const updateEmail = await graphql(
@@ -49,9 +49,9 @@ describe('mutations.updateProfileAccountEmail', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateEmail).toMatchSnapshot();
-  });
+    )
+    expect(updateEmail).toMatchSnapshot()
+  })
   it('should not update user email, cause of email ever used', async () => {
     const updateEmail = await graphql(
       UpdateProfileAccountEmailMutation,
@@ -62,12 +62,12 @@ describe('mutations.updateProfileAccountEmail', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateEmail).toMatchSnapshot();
-  });
+    )
+    expect(updateEmail).toMatchSnapshot()
+  })
 
   it('should not update user email, cause bad email', async () => {
-    await enableFeatureFlag('restrict_registration_via_email_domain');
+    await enableFeatureFlag('restrict_registration_via_email_domain')
     const updateEmail = await graphql(
       UpdateProfileAccountEmailMutation,
       {
@@ -77,10 +77,10 @@ describe('mutations.updateProfileAccountEmail', () => {
         },
       },
       'internal_user',
-    );
-    await disableFeatureFlag('restrict_registration_via_email_domain');
-    expect(updateEmail).toMatchSnapshot();
-  });
+    )
+    await disableFeatureFlag('restrict_registration_via_email_domain')
+    expect(updateEmail).toMatchSnapshot()
+  })
 
   it('should update user is locale', async () => {
     const updateLocale = await graphql(
@@ -91,7 +91,7 @@ describe('mutations.updateProfileAccountEmail', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateLocale).toMatchSnapshot();
-  });
-});
+    )
+    expect(updateLocale).toMatchSnapshot()
+  })
+})

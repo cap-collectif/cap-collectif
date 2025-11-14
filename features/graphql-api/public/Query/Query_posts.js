@@ -29,12 +29,12 @@ const query = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.posts array', () => {
   it('fetches the posts with their translations', async () => {
-    await expect(graphql(query, null, 'internal')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(query, null, 'internal')).resolves.toMatchSnapshot()
+  })
 
   it('fetches the posts filtered by theme with their translations', async () => {
     await expect(
@@ -45,8 +45,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the posts filtered by project with their translations', async () => {
     await expect(
@@ -57,8 +57,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the posts filtered by theme and project with their translations', async () => {
     await expect(
@@ -70,8 +70,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the posts ordered by published date ascending with their translations', async () => {
     await expect(
@@ -82,8 +82,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the posts ordered by published date descending with their translations', async () => {
     await expect(
@@ -94,8 +94,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the first 2 posts with their translations', async () => {
     await expect(
@@ -106,8 +106,8 @@ describe('Internal|Query.posts array', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the first 3 posts after one specific post with their translations', async () => {
     await expect(
@@ -115,10 +115,10 @@ describe('Internal|Query.posts array', () => {
         query,
         {
           first: 3,
-          after: 'YXJyYXljb25uZWN0aW9uOjA='
+          after: 'YXJyYXljb25uZWN0aW9uOjA=',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

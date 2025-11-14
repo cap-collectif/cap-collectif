@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const Jimp = require('jimp');
+const Jimp = require('jimp')
 
 // Media is not part of Node interface
 const CropMediaMutation = /* GraphQL */ `
@@ -10,11 +10,11 @@ const CropMediaMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Crop Media', () => {
   it('it fetches the url of the cropped media', async () => {
-    const mediaId = 'gymnase';
+    const mediaId = 'gymnase'
     const cropMediaResponse = await graphql(
       CropMediaMutation,
       {
@@ -33,10 +33,10 @@ describe('Crop Media', () => {
         },
       },
       'internal_admin',
-    );
+    )
     return Jimp.read(cropMediaResponse.cropMedia.media.url).then(image => {
-      expect(image.bitmap.width).toBe(150);
-      expect(image.bitmap.height).toBe(200);
-    });
-  });
-});
+      expect(image.bitmap.width).toBe(150)
+      expect(image.bitmap.height).toBe(200)
+    })
+  })
+})

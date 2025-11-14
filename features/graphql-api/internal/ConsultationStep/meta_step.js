@@ -12,7 +12,7 @@ const MetaStepNavigationBoxQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query step related module', () => {
   it('fetches the correct related module when in a ConsultationStep (consultation)', async () => {
@@ -25,9 +25,9 @@ describe('Internal|Query step related module', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})
 
 // In the future, we would test other modules for example by doing
 

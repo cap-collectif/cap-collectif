@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteDebateArgumentMutation = /* GraphQL */ `
   mutation DeleteDebateArgumentMutation($input: DeleteDebateArgumentInput!, $count: Int) {
@@ -23,10 +23,10 @@ const DeleteDebateArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Mutation.deleteDebateArgument', () => {
-  const deletedDebateArgumentId = toGlobalId('DebateArgument', 'debateArgument2');
+  const deletedDebateArgumentId = toGlobalId('DebateArgument', 'debateArgument2')
   it('Remove debate argument', async () => {
     const response = await graphql(
       DeleteDebateArgumentMutation,
@@ -37,12 +37,12 @@ describe('Internal|Mutation.deleteDebateArgument', () => {
         count: 10,
       },
       'internal_theo',
-    );
+    )
     expect(
       response.deleteDebateArgument.debate.arguments.edges
         .map(edge => edge.node)
         .map(node => node.id)
         .includes(deletedDebateArgumentId),
-    ).toBe(false);
-  });
-});
+    ).toBe(false)
+  })
+})

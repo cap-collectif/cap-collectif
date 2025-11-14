@@ -31,18 +31,14 @@ const ViewerProjectsMediatorQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.viewer.projectsMediator', () => {
   beforeEach(async () => {
-    await global.enableFeatureFlag('mediator');
-  });
+    await global.enableFeatureFlag('mediator')
+  })
   it('should fetch mediators projects, steps and votes', async () => {
-    const response = await graphql(
-      ViewerProjectsMediatorQuery,
-      {},
-      'mediator',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    const response = await graphql(ViewerProjectsMediatorQuery, {}, 'mediator')
+    expect(response).toMatchSnapshot()
+  })
+})

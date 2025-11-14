@@ -1,6 +1,6 @@
 /* eslint-env jest */
 // TODO remove writes from tests.
-import '../../_setup';
+import '../../_setup'
 
 const InternalQuery = /* GraphQL */ `
   query ViewerAssignedProjectsToAnalyse {
@@ -33,7 +33,7 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const InternalSortProposalQuery = /* GraphQL */ `
   query ViewerAssignedProjectsToAnalyse(
@@ -68,7 +68,7 @@ const InternalSortProposalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const AssignedViewerProposalsByProjectQuery = /* GraphQL */ `
   query AssignedViewerProposalsByProjectQuery($projectId: ID!, $state: ProposalTaskState) {
@@ -89,21 +89,21 @@ const AssignedViewerProposalsByProjectQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
   it('fetches all analyst, supervisors and decisionMakers assigned to my projects; Logged as supervisor', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal_supervisor')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(InternalQuery, {}, 'internal_supervisor')).resolves.toMatchSnapshot()
+  })
   it('fetches all analyst, supervisors and decisionMakers assigned to my projects; Logged as decision maker', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal_decision_maker')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(InternalQuery, {}, 'internal_decision_maker')).resolves.toMatchSnapshot()
+  })
   it('fetches all analyst, supervisors and decisionMakers assigned to my projects; Logged as analyst', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal_analyst')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(InternalQuery, {}, 'internal_analyst')).resolves.toMatchSnapshot()
+  })
   it('fetches all analyst, supervisors and decisionMakers assigned to my projects; Logged as admin', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal_admin')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(InternalQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals in state DONE; Logged as supervisor', async () => {
     await expect(
@@ -118,8 +118,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals in state TODO; Logged as supervisor', async () => {
     await expect(
@@ -134,8 +134,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches all proposals; Logged as supervisor', async () => {
     await expect(
       graphql(
@@ -149,8 +149,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals sort by category; Logged as supervisor', async () => {
     await expect(
@@ -165,8 +165,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals sort by decisionMaker; Logged as supervisor', async () => {
     await expect(
@@ -181,8 +181,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals sort by district; Logged as supervisor', async () => {
     await expect(
@@ -197,8 +197,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all proposals sort by analysts; Logged as supervisor', async () => {
     await expect(
@@ -213,8 +213,8 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned TODO proposal by project", async () => {
     await expect(
@@ -226,6 +226,6 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
         },
         'internal_theo',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

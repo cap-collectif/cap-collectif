@@ -16,13 +16,10 @@ const QuestionnaireOwnerQuestionnairesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionnaireOwnerQuestionnaireQueryFilterByQuery = /* GraphQL */ `
-  query QuestionnaireOwnerQuestionnaireQueryFilterByQuery(
-    $affiliations: [QuestionnaireAffiliation!]
-    $query: String
-  ) {
+  query QuestionnaireOwnerQuestionnaireQueryFilterByQuery($affiliations: [QuestionnaireAffiliation!], $query: String) {
     viewer {
       questionnaires(affiliations: $affiliations, query: $query) {
         totalCount
@@ -39,7 +36,7 @@ const QuestionnaireOwnerQuestionnaireQueryFilterByQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionnaireOwnerQuestionnaireQueryOrderBy = /* GraphQL */ `
   query QuestionnaireOwnerQuestionnaireQueryOrderBy(
@@ -62,7 +59,7 @@ const QuestionnaireOwnerQuestionnaireQueryOrderBy = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionnaireOwnerQuestionnaireQueryAvailableOnly = /* GraphQL */ `
   query QuestionnaireOwnerQuestionnaireQueryAvailableOnly($availableOnly: Boolean) {
@@ -78,7 +75,7 @@ const QuestionnaireOwnerQuestionnaireQueryAvailableOnly = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.viewer.questionnaires', () => {
   it('should correctly fetch questionnaires that a user owns when given the `OWNER` affiliations', async () => {
@@ -88,14 +85,14 @@ describe('Internal.viewer.questionnaires', () => {
         affiliations: ['OWNER'],
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.questionnaires.totalCount).toBe(4);
-    expect(response.viewer.questionnaires.edges).toHaveLength(4);
-    expect(response.viewer.questionnaires.edges[0].node.owner.username).toBe('Théo QP');
-    expect(response.viewer.questionnaires.edges[1].node.owner.username).toBe('Théo QP');
-    expect(response.viewer.questionnaires.edges[2].node.owner.username).toBe('Théo QP');
-  });
+    expect(response.viewer.questionnaires.totalCount).toBe(4)
+    expect(response.viewer.questionnaires.edges).toHaveLength(4)
+    expect(response.viewer.questionnaires.edges[0].node.owner.username).toBe('Théo QP')
+    expect(response.viewer.questionnaires.edges[1].node.owner.username).toBe('Théo QP')
+    expect(response.viewer.questionnaires.edges[2].node.owner.username).toBe('Théo QP')
+  })
 
   it('should correctly fetch all questionnaires if no affiliations given.', async () => {
     const response = await graphql(
@@ -104,11 +101,11 @@ describe('Internal.viewer.questionnaires', () => {
         affiliations: null,
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.questionnaires.totalCount).toBe(29);
-    expect(response.viewer.questionnaires.edges).toHaveLength(29);
-  });
+    expect(response.viewer.questionnaires.totalCount).toBe(29)
+    expect(response.viewer.questionnaires.edges).toHaveLength(29)
+  })
 
   it('should correctly filter questionnaires by a given `query`', async () => {
     const response = await graphql(
@@ -118,11 +115,11 @@ describe('Internal.viewer.questionnaires', () => {
         query: 'Questionnaire visible',
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.questionnaires.totalCount).toBe(2);
-    expect(response.viewer.questionnaires.edges).toHaveLength(2);
-  });
+    expect(response.viewer.questionnaires.totalCount).toBe(2)
+    expect(response.viewer.questionnaires.edges).toHaveLength(2)
+  })
 
   it('should correctly fetch all questionnaires if given `query` is empty', async () => {
     const response = await graphql(
@@ -132,11 +129,11 @@ describe('Internal.viewer.questionnaires', () => {
         query: '',
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.questionnaires.totalCount).toBe(4);
-    expect(response.viewer.questionnaires.edges).toHaveLength(4);
-  });
+    expect(response.viewer.questionnaires.totalCount).toBe(4)
+    expect(response.viewer.questionnaires.edges).toHaveLength(4)
+  })
 
   it('should correctly order questionnaires by a given field and direction', async () => {
     const response = await graphql(
@@ -146,15 +143,15 @@ describe('Internal.viewer.questionnaires', () => {
         orderBy: { field: 'CREATED_AT', direction: 'ASC' },
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.questionnaires.totalCount).toBe(4);
-    expect(response.viewer.questionnaires.edges).toHaveLength(4);
+    expect(response.viewer.questionnaires.totalCount).toBe(4)
+    expect(response.viewer.questionnaires.edges).toHaveLength(4)
 
-    expect(response.viewer.questionnaires.edges[0].node.createdAt).toBe('2019-09-11 00:00:00');
-    expect(response.viewer.questionnaires.edges[1].node.createdAt).toBe('2020-09-11 00:00:00');
-    expect(response.viewer.questionnaires.edges[2].node.createdAt).toBe('2020-09-11 00:00:00');
-  });
+    expect(response.viewer.questionnaires.edges[0].node.createdAt).toBe('2019-09-11 00:00:00')
+    expect(response.viewer.questionnaires.edges[1].node.createdAt).toBe('2020-09-11 00:00:00')
+    expect(response.viewer.questionnaires.edges[2].node.createdAt).toBe('2020-09-11 00:00:00')
+  })
 
   it('should correctly fetch all available questionnaires.', async () => {
     await expect(
@@ -165,6 +162,6 @@ describe('Internal.viewer.questionnaires', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

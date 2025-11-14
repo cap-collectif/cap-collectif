@@ -8,13 +8,7 @@ const appLogQuery = /* GraphQL */ `
     $dateRange: DateRange
     $orderBy: AppLogOrder
   ) {
-    appLog(
-      actionType: $actionType
-      userRole: $userRole
-      term: $term
-      orderBy: $orderBy
-      dateRange: $dateRange
-    ) {
+    appLog(actionType: $actionType, userRole: $userRole, term: $term, orderBy: $orderBy, dateRange: $dateRange) {
       edges {
         node {
           user {
@@ -30,12 +24,12 @@ const appLogQuery = /* GraphQL */ `
       oldestLoggedAt
     }
   }
-`;
+`
 
 describe('Query.appLog connection', () => {
   it('fetches app logs without arguments', async () => {
-    await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with SHOW action type', async () => {
     await expect(
@@ -46,8 +40,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with CREATE action type', async () => {
     await expect(
@@ -58,8 +52,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with DELETE action type', async () => {
     await expect(
@@ -70,8 +64,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with EDIT action type', async () => {
     await expect(
@@ -82,8 +76,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with EXPORT action type', async () => {
     await expect(
@@ -94,8 +88,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with dates between startedAt and endedAt', async () => {
     await expect(
@@ -109,8 +103,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with created_at order DESC', async () => {
     await expect(
@@ -124,8 +118,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with SUPER_ADMIN user role', async () => {
     await expect(
@@ -136,8 +130,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with ADMIN user role', async () => {
     await expect(
@@ -148,8 +142,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with all arguments', async () => {
     await expect(
@@ -170,8 +164,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with username term', async () => {
     await expect(
@@ -182,8 +176,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with user email term', async () => {
     await expect(
@@ -194,8 +188,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with ip term', async () => {
     await expect(
@@ -206,8 +200,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with ORGANIZATION_ADMIN', async () => {
     await expect(
@@ -218,8 +212,8 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches app logs with ORGANIZATION_MEMBER', async () => {
     await expect(
@@ -230,6 +224,6 @@ describe('Query.appLog connection', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

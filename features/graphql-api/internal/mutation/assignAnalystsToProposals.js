@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const AssignAnalystsToProposalsMutation = /* GraphQL*/ `
   mutation AssignAnalystsToProposalsMutation($input: AssignAnalystsToProposalsInput!) {
@@ -24,7 +24,7 @@ const AssignAnalystsToProposalsMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.assignAnalystsToProposals', () => {
   // admin
@@ -35,9 +35,9 @@ describe('mutations.assignAnalystsToProposals', () => {
         input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], analystIds: ['VXNlcjp1c2VyMzQ='] },
       },
       'internal_admin',
-    );
-    expect(assignAnalystsToProposals).toMatchSnapshot();
-  });
+    )
+    expect(assignAnalystsToProposals).toMatchSnapshot()
+  })
 
   it('admin should assign a user as Analysts to a list of proposals.', async () => {
     const assignAnalystsToProposals = await graphql(
@@ -49,9 +49,9 @@ describe('mutations.assignAnalystsToProposals', () => {
         },
       },
       'internal_admin',
-    );
-    expect(assignAnalystsToProposals).toMatchSnapshot();
-  });
+    )
+    expect(assignAnalystsToProposals).toMatchSnapshot()
+  })
 
   it('should not assign more 10 users as Analysts to a proposal, logged as admin', async () => {
     const cantAssignMore10AnalystsToProposals = await graphql(
@@ -76,9 +76,9 @@ describe('mutations.assignAnalystsToProposals', () => {
         },
       },
       'internal_admin',
-    );
-    expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot();
-  });
+    )
+    expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot()
+  })
 
   it('should assign 1 user as an Analyst to a proposal that currently has 9 analysts, logged as admin', async () => {
     const cantAssignMore10AnalystsToProposals = await graphql(
@@ -86,15 +86,13 @@ describe('mutations.assignAnalystsToProposals', () => {
       {
         input: {
           proposalIds: [toGlobalId('Proposal', 'proposalIdf1')],
-          analystIds: [
-            toGlobalId('User', 'user170'),
-          ],
+          analystIds: [toGlobalId('User', 'user170')],
         },
       },
       'internal_admin',
-    );
-    expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot();
-  });
+    )
+    expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot()
+  })
 
   // decision maker
   it('should assign a user as Analysts to proposals, logged as decision maker.', async () => {
@@ -107,10 +105,10 @@ describe('mutations.assignAnalystsToProposals', () => {
         },
       },
       'internal_decision_maker',
-    );
+    )
 
-    expect(assignAnalystsToProposalsLoggedAsDecionMaker).toMatchSnapshot();
-  });
+    expect(assignAnalystsToProposalsLoggedAsDecionMaker).toMatchSnapshot()
+  })
 
   it('should assign a user as Analysts to proposals, logged as supervisor', async () => {
     const assignAnalystsToProposalsLoggedAsSupervisor = await graphql(
@@ -122,10 +120,10 @@ describe('mutations.assignAnalystsToProposals', () => {
         },
       },
       'internal_supervisor',
-    );
+    )
 
-    expect(assignAnalystsToProposalsLoggedAsSupervisor).toMatchSnapshot();
-  });
+    expect(assignAnalystsToProposalsLoggedAsSupervisor).toMatchSnapshot()
+  })
 
   it('should not assign a user as Analysts to a proposal, logged as user.', async () => {
     const assignAnalystsToProposalsLoggedAsUser = await graphql(
@@ -134,9 +132,9 @@ describe('mutations.assignAnalystsToProposals', () => {
         input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], analystIds: ['VXNlcjp1c2VyNTE2'] },
       },
       'internal_user',
-    );
-    expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot();
-  });
+    )
+    expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot()
+  })
 
   it('should assign a user as Analysts to a proposal, logged as analyst.', async () => {
     const assignAnalystsToProposalsLoggedAsUser = await graphql(
@@ -148,7 +146,7 @@ describe('mutations.assignAnalystsToProposals', () => {
         },
       },
       'internal_analyst2',
-    );
-    expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot();
-  });
-});
+    )
+    expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot()
+  })
+})

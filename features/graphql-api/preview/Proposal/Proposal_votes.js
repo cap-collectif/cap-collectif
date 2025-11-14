@@ -25,7 +25,7 @@ const ProposalVotesPreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.Proposal_votes', () => {
   it("fetches votes's related to a proposal", async () => {
@@ -37,6 +37,6 @@ describe('Preview.Proposal_votes', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

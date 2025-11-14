@@ -23,7 +23,7 @@ const UserVersionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.opinionVersions connection', () => {
   it("fetches a user's opinionVersions when authenticated.", async () => {
@@ -38,10 +38,10 @@ describe('User.opinionVersions connection', () => {
             },
             'internal_admin',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's public versions.", async () => {
     await Promise.all(
@@ -55,8 +55,8 @@ describe('User.opinionVersions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

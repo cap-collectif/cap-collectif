@@ -1,5 +1,5 @@
 /*eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const mutation = /* GraphQL */ `
   mutation CreateProposalForm($input: CreateProposalFormInput!) {
@@ -13,7 +13,7 @@ const mutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal | createProposalForm', () => {
   it('create proposalForm', async () => {
@@ -25,7 +25,7 @@ describe('Internal | createProposalForm', () => {
         },
       },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

@@ -61,7 +61,7 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
   query ProposalStepProposalsQuery($id: ID!, $count: Int!, $after: String) {
@@ -97,7 +97,7 @@ const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|ProposalStep.proposals connection', () => {
   it('fetches published proposals associated to a collect step with a cursor ordered by comments count DESC', async () => {
@@ -107,12 +107,12 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: [{field: 'COMMENTS', direction: 'DESC'}],
+          orderBy: [{ field: 'COMMENTS', direction: 'DESC' }],
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a collect step with a cursor ordered by comments count ASC', async () => {
     await expect(
@@ -121,12 +121,12 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: [{field: 'COMMENTS', direction: 'ASC'}],
+          orderBy: [{ field: 'COMMENTS', direction: 'ASC' }],
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a collect step with a cursor ordered by old published', async () => {
     await expect(
@@ -139,8 +139,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a collect step with a cursor', async () => {
     await expect(
@@ -153,8 +153,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches proposals with most points associated to a collect step with a cursor', async () => {
     await expect(
@@ -167,8 +167,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches proposals with most votes associated to a collect step with a cursor', async () => {
     await expect(
       graphql(
@@ -180,8 +180,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a collect step and a status "En cours" with a cursor', async () => {
     await expect(
@@ -195,8 +195,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a question collect step with a cursor', async () => {
     await expect(
@@ -209,8 +209,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a SelectionStep with a cursor', async () => {
     await expect(
@@ -223,8 +223,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a SelectionStep and a status "Soumis au vote" with a cursor', async () => {
     await expect(
@@ -238,8 +238,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a SelectionStep and a district "Beauregard" with a cursor', async () => {
     await expect(
@@ -253,8 +253,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a SelectionStep and a category "Aménagement" with a cursor', async () => {
     await expect(
@@ -268,8 +268,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published proposals associated to a SelectionStep with paginated commentables after cursor with exact count', async () => {
     await expect(
@@ -282,8 +282,8 @@ describe('Internal|ProposalStep.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it(
     'fetches published proposals associated to a SelectionStep with paginated commentables after cursor with less ' +
@@ -299,9 +299,9 @@ describe('Internal|ProposalStep.proposals connection', () => {
           },
           'internal',
         ),
-      ).resolves.toMatchSnapshot();
+      ).resolves.toMatchSnapshot()
     },
-  );
+  )
 
   it(
     'fetches published proposals associated to a SelectionStep with paginated commentables after cursor with more ' +
@@ -317,7 +317,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           },
           'internal',
         ),
-      ).resolves.toMatchSnapshot();
+      ).resolves.toMatchSnapshot()
     },
-  );
-});
+  )
+})

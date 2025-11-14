@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 describe('Internal|ShieldConfig', () => {
   it('Updates a shield config as admin', async () => {
@@ -52,6 +52,6 @@ describe('Internal|ShieldConfig', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

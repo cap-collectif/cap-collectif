@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdateProjectSlug = /* GraphQL*/ `
     mutation UpdateProjectSlugMutation(
@@ -13,12 +13,12 @@ const UpdateProjectSlug = /* GraphQL*/ `
             errorCode
         }
     }
-`;
+`
 
 const input = {
   projectId: 'UHJvamVjdDpwcm9qZWN0MQ==',
   slug: 'toto 1234 éééà',
-};
+}
 
 describe('mutations.createEvent', () => {
   it('should update slug', async () => {
@@ -30,8 +30,8 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('should return PROJECT_NOT_FOUND errorCode', async () => {
     await expect(
       graphql(
@@ -44,6 +44,6 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

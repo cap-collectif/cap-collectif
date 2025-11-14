@@ -15,7 +15,7 @@ const ConsultationListBoxQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ConsultationPropositionBoxQuery = /* GraphQL */ `
   query ConsultationPropositionBoxQuery($consultationStepId: ID!, $consultationSlug: String!) {
@@ -29,7 +29,7 @@ const ConsultationPropositionBoxQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ConsultationStepCountersQuery = /* GraphQL */ `
   query ConsultationCountersQuery($consultationStepId: ID!) {
@@ -46,7 +46,7 @@ const ConsultationStepCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query step.consultations connection', () => {
   it('fetches the correct consultations', async () => {
@@ -58,9 +58,9 @@ describe('Internal|Query step.consultations connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})
 
 describe('Internal|Query step.consultation', () => {
   it('fetches the correct first consultation by slug of the step', async () => {
@@ -73,8 +73,8 @@ describe('Internal|Query step.consultation', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches the correct second consultation by slug of the step', async () => {
     await expect(
       graphql(
@@ -85,9 +85,9 @@ describe('Internal|Query step.consultation', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})
 
 describe('Internal|Query step', () => {
   it('fetches the correct contributions count for a given consultation step', async () => {
@@ -99,6 +99,6 @@ describe('Internal|Query step', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

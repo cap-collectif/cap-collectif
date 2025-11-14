@@ -16,7 +16,7 @@ const QuestionResponsesCivicIAQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Question.civicIA', () => {
   it('fail to get civicIA analysis if not admin', async () => {
@@ -31,8 +31,8 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get civicIA analysis on responses', async () => {
     await expect(
       graphql(
@@ -45,8 +45,8 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get civicIA analysis on negative responses', async () => {
     await expect(
       graphql(
@@ -59,8 +59,8 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get civicIA analysis on responses, ordered by readability', async () => {
     await expect(
       graphql(
@@ -76,8 +76,8 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get civicIA analysis on responses, ordered by category', async () => {
     await expect(
       graphql(
@@ -93,8 +93,8 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get civicIA analysis on responses, filtered by category', async () => {
     await expect(
       graphql(
@@ -107,6 +107,6 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

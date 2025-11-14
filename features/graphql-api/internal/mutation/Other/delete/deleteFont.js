@@ -1,7 +1,7 @@
 /* eslint-env jest */
-import path from 'path';
-import fs from 'fs';
-import '../../../../_setup';
+import path from 'path'
+import fs from 'fs'
+import '../../../../_setup'
 
 const DeleteFontMutation = /* GraphQL */ `
   mutation DeleteFontMutation($input: DeleteFontInput!) {
@@ -12,18 +12,18 @@ const DeleteFontMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|deleteFont mutation', () => {
   it('should delete a custom added font', async () => {
-    const file = fs.readFileSync(path.join(__dirname, '../../__files__/lato.zip'));
-    const FormData = require('form-data');
-    const form = new FormData();
+    const file = fs.readFileSync(path.join(__dirname, '../../__files__/lato.zip'))
+    const FormData = require('form-data')
+    const form = new FormData()
     form.append('file', file, {
       contentType: 'application/zip',
       name: 'file',
       filename: 'Lato.zip',
-    });
+    })
     const uploadFontResponse = await (
       await fetch('https://capco.test/login_check', {
         headers: {
@@ -40,9 +40,9 @@ describe('Internal|deleteFont mutation', () => {
           body: form,
         }),
       )
-    ).json();
+    ).json()
 
-    const newFontId = uploadFontResponse.id;
+    const newFontId = uploadFontResponse.id
 
     const response = await graphql(
       DeleteFontMutation,
@@ -52,10 +52,10 @@ describe('Internal|deleteFont mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.deleteFont.deletedFontId).toBe(newFontId);
-  });
+    expect(response.deleteFont.deletedFontId).toBe(newFontId)
+  })
 
   it('should throw an error when trying to delete a non-custom font', async () => {
     const response = await graphql(
@@ -66,8 +66,8 @@ describe('Internal|deleteFont mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.deleteFont.userErrors[0].message).toBe('Tried to remove a non-custom font.');
-  });
-});
+    expect(response.deleteFont.userErrors[0].message).toBe('Tried to remove a non-custom font.')
+  })
+})

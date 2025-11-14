@@ -8,10 +8,10 @@ const FontsQuery = /* GraphQL */ `
       useAsHeading
     }
   }
-`;
+`
 
 describe('Internal|Query fonts', () => {
   it('fetches the available fonts', async () => {
-    await expect(graphql(FontsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(FontsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
+})

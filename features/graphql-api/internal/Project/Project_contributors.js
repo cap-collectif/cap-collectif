@@ -12,29 +12,22 @@ const ProjectContributorsQuery = /* GraphQL */ `
     project: node(id: $projectId) {
       id
       ... on Project {
-        contributors(
-          userType: $userTypeId
-          step: $stepId
-          vip: $isVip
-          first: 5
-          orderBy: $orderBy
-          term: $term
-        ) {
+        contributors(userType: $userTypeId, step: $stepId, vip: $isVip, first: 5, orderBy: $orderBy, term: $term) {
           totalCount
           edges {
             node {
               id
-              ...on User {
-                  userType {
-                      id
-                  }
-                  vip
-                  contributions(contribuableId: $contribuableId, includeTrashed: true) {
-                      totalCount
-                  }
-                  votes(contribuableId: $contribuableId) {
-                      totalCount
-                  }
+              ... on User {
+                userType {
+                  id
+                }
+                vip
+                contributions(contribuableId: $contribuableId, includeTrashed: true) {
+                  totalCount
+                }
+                votes(contribuableId: $contribuableId) {
+                  totalCount
+                }
               }
             }
           }
@@ -42,7 +35,7 @@ const ProjectContributorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectContributorsConsentQuery = /* GraphQL */ `
   query ProjectContributors($projectId: ID!) {
@@ -51,8 +44,8 @@ const ProjectContributorsConsentQuery = /* GraphQL */ `
         contributors {
           edges {
             node {
-              ...on User {
-                  consentInternalCommunication
+              ... on User {
+                consentInternalCommunication
               }
             }
           }
@@ -60,7 +53,7 @@ const ProjectContributorsConsentQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.projects.contributors', () => {
   it('fetches contributors filtered by project, step, user type, vip', async () => {
@@ -76,8 +69,8 @@ describe('Internal.projects.contributors', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches contributors filtered by project, step', async () => {
     await expect(
@@ -90,8 +83,8 @@ describe('Internal.projects.contributors', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches contributors sorted by their activities desc', async () => {
     await expect(
@@ -105,8 +98,8 @@ describe('Internal.projects.contributors', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches contributors sorted by their activities asc', async () => {
     await expect(
@@ -114,14 +107,14 @@ describe('Internal.projects.contributors', () => {
         ProjectContributorsQuery,
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',// CollectStep:collectstep1
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           orderBy: { field: 'ACTIVITY', direction: 'ASC' },
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches contributors that match term parameter', async () => {
     const response = await graphql(
@@ -132,10 +125,10 @@ describe('Internal.projects.contributors', () => {
         term: 'sf',
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-    expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyMg==');
-  });
+    )
+    expect(response).toMatchSnapshot()
+    expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyMg==')
+  })
 
   it('fetches contributors that match term, step, userType, vip', async () => {
     const response = await graphql(
@@ -149,10 +142,10 @@ describe('Internal.projects.contributors', () => {
         term: 'msantos',
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-    expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyV2VsY29tYXR0aWM=');
-  });
+    )
+    expect(response).toMatchSnapshot()
+    expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyV2VsY29tYXR0aWM=')
+  })
 
   it('fetches contributors on debate project', async () => {
     await expect(
@@ -164,8 +157,8 @@ describe('Internal.projects.contributors', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('cannot fetch contributors that match email if user not admin', async () => {
     const response = await graphql(
@@ -177,9 +170,9 @@ describe('Internal.projects.contributors', () => {
         term: 'jolicode',
       },
       'internal_user',
-    );
-    expect(response.project.contributors.totalCount).toBe(0);
-  });
+    )
+    expect(response.project.contributors.totalCount).toBe(0)
+  })
 
   it('project owner checks the internal communication consent of contributors', async () => {
     await expect(
@@ -190,6 +183,6 @@ describe('Internal.projects.contributors', () => {
         },
         'internal_theo',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

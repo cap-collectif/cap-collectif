@@ -11,11 +11,10 @@ const ProjectsExcludePresentationStepQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.project.steps', () => {
   it('should exclude presentation step if excludePresentationStep is set to true', async () => {
-
     await expect(
       graphql(
         ProjectsExcludePresentationStepQuery,
@@ -25,7 +24,7 @@ describe('Internal.project.steps', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).resolves.toMatchSnapshot()
 
     await expect(
       graphql(
@@ -36,8 +35,6 @@ describe('Internal.project.steps', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-
-  });
-
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

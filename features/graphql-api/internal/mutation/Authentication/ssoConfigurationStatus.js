@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const ToggleSSOConfigurationStatus = /* GraphQL */ `
   mutation ToggleSSOConfigurationStatusMutation($input: ToggleSSOConfigurationStatusInput!) {
@@ -11,24 +11,20 @@ const ToggleSSOConfigurationStatus = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const cases = [
   ['facebook', 'FacebookSSOConfiguration'],
   ['franceConnect', 'FranceConnectSSOConfiguration'],
   ['ssoOauth2', 'Oauth2SSOConfiguration'],
   ['cas', 'CASSSOConfiguration'],
-];
+]
 
 describe('Internal|ssoConfigurationStatus', () => {
   test.each(cases)('Toggles twice the status of %s as admin', async (ssoId, ssoType) => {
-    const ssoConfigurationId = global.toGlobalId(ssoType, ssoId);
+    const ssoConfigurationId = global.toGlobalId(ssoType, ssoId)
 
-    const firstResult = await graphql(
-      ToggleSSOConfigurationStatus,
-      { input: { ssoConfigurationId } },
-      'internal_admin'
-    );
+    const firstResult = await graphql(ToggleSSOConfigurationStatus, { input: { ssoConfigurationId } }, 'internal_admin')
 
     expect(firstResult).toMatchSnapshot({
       toggleSSOConfigurationStatus: {
@@ -36,15 +32,15 @@ describe('Internal|ssoConfigurationStatus', () => {
           enabled: expect.any(Boolean),
         },
       },
-    });
+    })
 
-    const firstEnabled = firstResult.toggleSSOConfigurationStatus.ssoConfiguration.enabled;
+    const firstEnabled = firstResult.toggleSSOConfigurationStatus.ssoConfiguration.enabled
 
     const secondResult = await graphql(
       ToggleSSOConfigurationStatus,
       { input: { ssoConfigurationId } },
-      'internal_admin'
-    );
+      'internal_admin',
+    )
 
     expect(secondResult).toMatchSnapshot({
       toggleSSOConfigurationStatus: {
@@ -52,8 +48,8 @@ describe('Internal|ssoConfigurationStatus', () => {
           enabled: expect.any(Boolean),
         },
       },
-    });
+    })
 
-    expect(secondResult.toggleSSOConfigurationStatus.ssoConfiguration.enabled).toBe(!firstEnabled);
-  });
-});
+    expect(secondResult.toggleSSOConfigurationStatus.ssoConfiguration.enabled).toBe(!firstEnabled)
+  })
+})

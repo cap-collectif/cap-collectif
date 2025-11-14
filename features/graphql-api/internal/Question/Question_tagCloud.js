@@ -33,7 +33,7 @@ const QuestionTagCloudQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Question.tagCloud', () => {
   it('does fetch tag cloud data from question', async () => {
@@ -46,6 +46,6 @@ describe('Internal|Question.tagCloud', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UnfollowGlobalDistrictMutation = /* GraphQL*/ `
     mutation ($input: UnfollowGlobalDistrictInput!) {
@@ -18,11 +18,11 @@ const UnfollowGlobalDistrictMutation = /* GraphQL*/ `
             errorCode
         }
     }
-`;
+`
 
 const input = {
   globalDistrictId: 'globalDistrict6',
-};
+}
 
 describe('mutations.globalDistrict', () => {
   it('should unfollow to a global district', async () => {
@@ -32,9 +32,9 @@ describe('mutations.globalDistrict', () => {
         input,
       },
       'internal_maxidev',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 
   it('should return an error DISTRICT_NOT_FOUND', async () => {
     const response = await graphql(
@@ -45,7 +45,7 @@ describe('mutations.globalDistrict', () => {
         },
       },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

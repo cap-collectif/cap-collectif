@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const ToggleFeatureMutation = /* GraphQL */ `
   mutation toggleFeatureMutation($input: ToggleFeatureInput!) {
@@ -10,22 +10,14 @@ const ToggleFeatureMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const successCases = [
-  [
-    'disables a feature as super-admin',
-    'internal_super_admin',
-    { type: 'login_facebook', enabled: false },
-  ],
-  [
-    'enables a feature as super-admin',
-    'internal_super_admin',
-    { type: 'login_facebook', enabled: true },
-  ],
+  ['disables a feature as super-admin', 'internal_super_admin', { type: 'login_facebook', enabled: false }],
+  ['enables a feature as super-admin', 'internal_super_admin', { type: 'login_facebook', enabled: true }],
   ['enables a feature as admin', 'internal_admin', { type: 'login_facebook', enabled: true }],
   ['disables a feature as admin', 'internal_admin', { type: 'login_facebook', enabled: false }],
-];
+]
 
 const failureCases = [
   [
@@ -46,7 +38,7 @@ const failureCases = [
     { type: 'login_facebook', enabled: false },
     'Access denied to this field.',
   ],
-];
+]
 
 const superAdminOnly = [
   'login_openid',
@@ -56,48 +48,32 @@ const superAdminOnly = [
   'remind_user_account_confirmation',
   'sso_by_pass_auth',
   'oauth2_switch_user',
-];
+]
 
 describe('Internal|toggleFeature', () => {
   test.each(successCases)('%s', async (_label, user, input) => {
-    await expect(graphql(ToggleFeatureMutation, { input }, user)).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(ToggleFeatureMutation, { input }, user)).resolves.toMatchSnapshot()
+  })
 
   test.each(failureCases)('%s', async (_label, user, input, error) => {
-    await expect(graphql(ToggleFeatureMutation, { input }, user)).rejects.toThrowError(error);
-  });
+    await expect(graphql(ToggleFeatureMutation, { input }, user)).rejects.toThrowError(error)
+  })
 
   test.each(superAdminOnly)('Toggles %s as super-admin', async feature => {
     await expect(
-      graphql(
-        ToggleFeatureMutation,
-        { input: { type: feature, enabled: true } },
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot();
+      graphql(ToggleFeatureMutation, { input: { type: feature, enabled: true } }, 'internal_super_admin'),
+    ).resolves.toMatchSnapshot()
     await expect(
-      graphql(
-        ToggleFeatureMutation,
-        { input: { type: feature, enabled: false } },
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+      graphql(ToggleFeatureMutation, { input: { type: feature, enabled: false } }, 'internal_super_admin'),
+    ).resolves.toMatchSnapshot()
+  })
 
   test.each(superAdminOnly)('Tries to toggle %s as admin', async feature => {
     await expect(
-      graphql(
-        ToggleFeatureMutation,
-        { input: { type: feature, enabled: true } },
-        'internal_admin',
-      ),
-    ).rejects.toThrowError('Access denied to this field.');
+      graphql(ToggleFeatureMutation, { input: { type: feature, enabled: true } }, 'internal_admin'),
+    ).rejects.toThrowError('Access denied to this field.')
     await expect(
-      graphql(
-        ToggleFeatureMutation,
-        { input: { type: feature, enabled: false } },
-        'internal_admin',
-      ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+      graphql(ToggleFeatureMutation, { input: { type: feature, enabled: false } }, 'internal_admin'),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

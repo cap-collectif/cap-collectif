@@ -20,12 +20,12 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=',
   geoBoundingBox: null,
-};
+}
 
 describe('Internal|SelectionStep.proposals location argument', () => {
   it('fetches the proposals from a selection step filtered by a given bounding box', async () => {
@@ -47,6 +47,6 @@ describe('Internal|SelectionStep.proposals location argument', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

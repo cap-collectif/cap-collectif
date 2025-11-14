@@ -9,12 +9,7 @@ const UserContributionsQuery = /* GraphQL */ `
   ) {
     node(id: $id) {
       ... on User {
-        contributions(
-          contribuableId: $contribuableId
-          type: $type
-          orderBy: $orderBy
-          first: $first
-        ) {
+        contributions(contribuableId: $contribuableId, type: $type, orderBy: $orderBy, first: $first) {
           totalCount
           edges {
             node {
@@ -26,7 +21,7 @@ const UserContributionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.contributions connection', () => {
   it("fetches a user's published, non-draft, non-trashed contributions by project", async () => {
@@ -56,10 +51,10 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.user);
+        ).resolves.toMatchSnapshot(item.user)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's published, non-draft, non-trashed contributions by step", async () => {
     await Promise.all(
@@ -79,10 +74,10 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.user);
+        ).resolves.toMatchSnapshot(item.user)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's published, non-draft, non-trashed contributions by consultation", async () => {
     await Promise.all(
@@ -102,10 +97,10 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.user);
+        ).resolves.toMatchSnapshot(item.user)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's published, non-draft, non-trashed contributions of different types", async () => {
     await Promise.all(
@@ -125,10 +120,10 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.user);
+        ).resolves.toMatchSnapshot(item.user)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's published, non-draft, non-trashed contributions of different types on contribuable", async () => {
     await Promise.all(
@@ -149,8 +144,8 @@ describe('User.contributions connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(item.user);
+        ).resolves.toMatchSnapshot(item.user)
       }),
-    );
-  });
-});
+    )
+  })
+})

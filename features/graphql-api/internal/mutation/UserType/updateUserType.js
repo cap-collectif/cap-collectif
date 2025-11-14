@@ -1,4 +1,4 @@
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateUserTypeMutation = /* GraphQL */ `
   mutation UpdateUserTypesMutation($input: UpdateUserTypeInput!) {
@@ -16,10 +16,10 @@ const UpdateUserTypeMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('mutations.updateUserType', () => {
-  const userTypeGlobalId = 'VXNlclR5cGU6NA=='; // UserType:4
+  const userTypeGlobalId = 'VXNlclR5cGU6NA==' // UserType:4
   // the media:user-type-nonprofit and id:4 should be in the fixtures
   it('updates a user type', async () => {
     await expect(
@@ -39,8 +39,8 @@ describe('mutations.updateUserType', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   // the id:4 should be in the fixtures
   it('tries to update a user type with a non-existing media', async () => {
@@ -61,8 +61,8 @@ describe('mutations.updateUserType', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('This value is not valid.');
-  });
+    ).rejects.toThrowError('This value is not valid.')
+  })
 
   // the id:4 should be in the fixtures
   it('tries to update a user type with a basic user', async () => {
@@ -82,8 +82,8 @@ describe('mutations.updateUserType', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   // the id:4 should be in the fixtures
   it('tries to update a user type without being authenticated', async () => {
@@ -103,6 +103,6 @@ describe('mutations.updateUserType', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

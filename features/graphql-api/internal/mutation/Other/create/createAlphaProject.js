@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const CreateAlphaProjectGroupMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
@@ -16,7 +16,7 @@ const CreateAlphaProjectGroupMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const CreateAlphaProjectMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
@@ -128,7 +128,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const CreateAlphaProjectWithOwnerMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
@@ -145,7 +145,7 @@ const CreateAlphaProjectWithOwnerMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const BASE_PROJECT = {
   title: 'Je suis un projet simple',
@@ -163,7 +163,7 @@ const BASE_PROJECT = {
   coverFilterOpacityPercent: 60,
   headerType: 'FULL_WIDTH',
   archived: false,
-};
+}
 
 const BASE_SELECTION_STEP = {
   type: 'SELECTION',
@@ -181,7 +181,7 @@ const BASE_SELECTION_STEP = {
   publishedVoteDate: '2030-01-01 00:00:00',
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
-};
+}
 
 const BASE_DEBATE_STEP = {
   type: 'DEBATE',
@@ -194,7 +194,7 @@ const BASE_DEBATE_STEP = {
   label: 'DebateStep',
   debateType: 'FACE_TO_FACE',
   debateContent: '',
-};
+}
 
 const BASE_PRESENTATION_STEP = {
   type: 'PRESENTATION',
@@ -203,7 +203,7 @@ const BASE_PRESENTATION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape PresentationStep",
   label: 'PresentationStep',
-};
+}
 
 const BASE_COLLECT_STEP = {
   type: 'COLLECT',
@@ -221,7 +221,7 @@ const BASE_COLLECT_STEP = {
   mainView: 'GRID',
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
-};
+}
 
 describe('Internal|createAlphaProject simple mutations', () => {
   it('create a project without any steps', async () => {
@@ -239,8 +239,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project without any steps and with 3 districts', async () => {
     await expect(
@@ -249,7 +249,11 @@ describe('Internal|createAlphaProject simple mutations', () => {
         {
           input: {
             ...BASE_PROJECT,
-            districts: [toGlobalId('District', 'globalDistrict2'), toGlobalId('District', 'globalDistrict3')  , toGlobalId('District', 'globalDistrict4')],
+            districts: [
+              toGlobalId('District', 'globalDistrict2'),
+              toGlobalId('District', 'globalDistrict3'),
+              toGlobalId('District', 'globalDistrict4'),
+            ],
           },
         },
         'internal_admin',
@@ -279,8 +283,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           },
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only an "OtherStep" step', async () => {
     await expect(
@@ -315,8 +319,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only an "PresentationStep" step', async () => {
     await expect(
@@ -342,8 +346,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only an "RankingStep" step', async () => {
     await expect(
@@ -379,8 +383,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "ConsultationStep" step', async () => {
     await expect(
@@ -418,8 +422,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "CollectStep" step', async () => {
     await expect(
@@ -446,8 +450,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "SelectionStep" step', async () => {
     await expect(
@@ -474,8 +478,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "QuestionnaireStep" step', async () => {
     await expect(
@@ -512,8 +516,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "RankingStep" step', async () => {
     const query = graphql(
@@ -535,7 +539,7 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
+    )
     await expect(query).resolves.toMatchSnapshot({
       createAlphaProject: {
         project: {
@@ -547,8 +551,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "DebateStep" step', async () => {
     const query = graphql(
@@ -561,7 +565,7 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
+    )
     await expect(query).resolves.toMatchSnapshot({
       createAlphaProject: {
         project: {
@@ -576,8 +580,8 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with only a "DebateStep" step with articles', async () => {
     const query = graphql(
@@ -602,7 +606,7 @@ describe('Internal|createAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
+    )
     await expect(query).resolves.toMatchSnapshot({
       createAlphaProject: {
         project: {
@@ -631,9 +635,9 @@ describe('Internal|createAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
-});
+    })
+  })
+})
 
 describe('Internal|createAlphaProject complex mutations', () => {
   it('create a project with a CollectStep that contains requirements and SelectionStep that contains statuses', async () => {
@@ -673,7 +677,7 @@ describe('Internal|createAlphaProject complex mutations', () => {
         },
       },
       'internal_admin',
-    );
+    )
     await expect(query).resolves.toMatchSnapshot({
       createAlphaProject: {
         project: {
@@ -698,8 +702,8 @@ describe('Internal|createAlphaProject complex mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('create a project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses', async () => {
     const query = graphql(
@@ -753,7 +757,7 @@ describe('Internal|createAlphaProject complex mutations', () => {
         },
       },
       'internal_admin',
-    );
+    )
     await expect(query).resolves.toMatchSnapshot({
       createAlphaProject: {
         project: {
@@ -784,9 +788,9 @@ describe('Internal|createAlphaProject complex mutations', () => {
           ],
         },
       },
-    });
-  });
-});
+    })
+  })
+})
 
 it('create a project with group of users as visibility', async () => {
   const query = graphql(
@@ -800,7 +804,7 @@ it('create a project with group of users as visibility', async () => {
       },
     },
     'internal_admin',
-  );
+  )
   await expect(query).resolves.toMatchSnapshot({
     createAlphaProject: {
       project: {
@@ -814,31 +818,23 @@ it('create a project with group of users as visibility', async () => {
         },
       },
     },
-  });
-});
+  })
+})
 
 describe('access control', () => {
   it('should create a project when the user is a project admin', async () => {
-    const response = await graphql(
-      CreateAlphaProjectWithOwnerMutation,
-      { input: { ...BASE_PROJECT } },
-      'internal_theo',
-    );
-    expect(response.createAlphaProject.project.owner.username).toStrictEqual('Théo QP');
-  });
+    const response = await graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_theo')
+    expect(response.createAlphaProject.project.owner.username).toStrictEqual('Théo QP')
+  })
 
   it('should create a project when the user is a project admin and should be the author', async () => {
-    const response = await graphql(
-      CreateAlphaProjectWithOwnerMutation,
-      { input: { ...BASE_PROJECT } },
-      'internal_theo',
-    );
-    expect(response.createAlphaProject.project.authors).toStrictEqual([{ username: 'Théo QP' }]);
-  });
+    const response = await graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_theo')
+    expect(response.createAlphaProject.project.authors).toStrictEqual([{ username: 'Théo QP' }])
+  })
 
   it('should not create a project when user is a not a project admin', async () => {
     await expect(
       graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_saitama'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

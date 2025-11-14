@@ -1,4 +1,4 @@
-  //* eslint-env jest */
+//* eslint-env jest */
 const SelectionStepProposalsQuery = /* GraphQL */ `
   query SelectionStepProposalsQuery($id: ID!, $userType: ID, $status: ID, $excludeViewerVotes: Boolean) {
     node(id: $id) {
@@ -23,7 +23,7 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
               votes {
                 edges {
                   node {
-                    ...on ProposalVote {
+                    ... on ProposalVote {
                       author {
                         id
                         email
@@ -38,13 +38,13 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
   userType: 1,
   status: null,
-};
+}
 
 describe('Preview|SelectionStep.proposals', () => {
   it('fetches the proposals from a selection step with status 4 & type 1 filters', async () => {
@@ -57,8 +57,8 @@ describe('Preview|SelectionStep.proposals', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the proposals from a selection step with status 5 & type 1 filters', async () => {
     await expect(
@@ -66,10 +66,10 @@ describe('Preview|SelectionStep.proposals', () => {
         SelectionStepProposalsQuery,
         {
           ...variables,
-          status: 'status5'
+          status: 'status5',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const assignDecisionMakerToProposalsMutation = /* GraphQL*/ `
   mutation ($input: AssignDecisionMakerToProposalsInput!) {
@@ -20,7 +20,7 @@ const assignDecisionMakerToProposalsMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.assignDecisionMakerToProposals', () => {
   // admin
@@ -34,9 +34,9 @@ describe('mutations.assignDecisionMakerToProposals', () => {
         },
       },
       'internal_admin',
-    );
-    expect(assignDecisionMakerToProposals).toMatchSnapshot();
-  });
+    )
+    expect(assignDecisionMakerToProposals).toMatchSnapshot()
+  })
 
   it('admin should assign a user as decision maker to a list of proposals.', async () => {
     const assignDecisionMakerToListOfProposals = await graphql(
@@ -48,9 +48,9 @@ describe('mutations.assignDecisionMakerToProposals', () => {
         },
       },
       'internal_admin',
-    );
-    expect(assignDecisionMakerToListOfProposals).toMatchSnapshot();
-  });
+    )
+    expect(assignDecisionMakerToListOfProposals).toMatchSnapshot()
+  })
 
   it('admin should change decision maker to proposal.', async () => {
     const assignNewDecisionMakerToProposals = await graphql(
@@ -62,9 +62,9 @@ describe('mutations.assignDecisionMakerToProposals', () => {
         },
       },
       'internal_admin',
-    );
-    expect(assignNewDecisionMakerToProposals).toMatchSnapshot();
-  });
+    )
+    expect(assignNewDecisionMakerToProposals).toMatchSnapshot()
+  })
 
   it('admin should revoke decision maker to proposal.', async () => {
     const revokeDecisionMakerToProposals = await graphql(
@@ -73,7 +73,7 @@ describe('mutations.assignDecisionMakerToProposals', () => {
         input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], decisionMakerId: null },
       },
       'internal_admin',
-    );
-    expect(revokeDecisionMakerToProposals).toMatchSnapshot();
-  });
-});
+    )
+    expect(revokeDecisionMakerToProposals).toMatchSnapshot()
+  })
+})

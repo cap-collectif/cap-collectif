@@ -5,10 +5,10 @@ const InternalQuery = /* GraphQL */ `
       id
     }
   }
-`;
+`
 
 describe('Internal|Query.availableConsultations', () => {
   it('fetches consultations without step', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+  })
+})

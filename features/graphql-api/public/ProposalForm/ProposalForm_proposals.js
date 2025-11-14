@@ -17,7 +17,7 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|ProposalForm.proposals', () => {
   it('fetches proposals ordered by biggest number of comments', async () => {
@@ -29,6 +29,6 @@ describe('Internal|ProposalForm.proposals', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -27,7 +27,7 @@ const UserAwaitingOrRefusedEventsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.awaitingOrRefusedEvents connection', () => {
   it("fetches a user's event in awaiting or refused review status", async () => {
@@ -42,8 +42,8 @@ describe('User.awaitingOrRefusedEvents connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

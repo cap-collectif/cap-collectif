@@ -25,7 +25,7 @@ const AnalysisConfigurationQuery = /** GraphQL */ `
       }
     } 
   }
-`;
+`
 
 describe('ProposalForm.analysisConfiguration', () => {
   it("does not fetch proposal form's analysis configuration when authenticated as user", async () => {
@@ -37,6 +37,6 @@ describe('ProposalForm.analysisConfiguration', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

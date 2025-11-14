@@ -17,7 +17,7 @@ const QuestionnaireStepContributorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|QuestionnaireStep.contributors connection', () => {
   it('fetches the contributors of a questionnaire step', async () => {
@@ -29,6 +29,6 @@ describe('Preview|QuestionnaireStep.contributors connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

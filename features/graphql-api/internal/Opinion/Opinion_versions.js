@@ -19,7 +19,7 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal Opinion_versions', () => {
   it('fetches versions of an opinion', async () => {
@@ -30,9 +30,9 @@ describe('Internal Opinion_versions', () => {
         count: 10,
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 
   it('fetches versions of an opinion with right count', async () => {
     const response = await graphql(
@@ -42,9 +42,9 @@ describe('Internal Opinion_versions', () => {
         count: 2,
       },
       'internal',
-    );
-    expect(response.opinion.versions.edges.length).toBe(2);
-  });
+    )
+    expect(response.opinion.versions.edges.length).toBe(2)
+  })
 
   it('fetches versions of an opinion in restricted project when autorized', async () => {
     const response = await graphql(
@@ -54,7 +54,7 @@ describe('Internal Opinion_versions', () => {
         count: 10,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

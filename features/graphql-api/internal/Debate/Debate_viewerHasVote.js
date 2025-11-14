@@ -10,7 +10,7 @@ const DebateViewerHasVoteQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.viewerHasVote bool', () => {
   it('fetches debate not voted by viewer', async () => {
@@ -22,8 +22,8 @@ describe('Internal|Debate.viewerHasVote bool', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches debate voted by viewer', async () => {
     await expect(
@@ -34,6 +34,6 @@ describe('Internal|Debate.viewerHasVote bool', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

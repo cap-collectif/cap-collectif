@@ -16,7 +16,7 @@ const ProjectCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.project counters', () => {
   it('fetches participations counters by project', async () => {
@@ -28,6 +28,6 @@ describe('Internal.project counters', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

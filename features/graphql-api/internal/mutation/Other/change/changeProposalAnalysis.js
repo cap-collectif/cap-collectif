@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const ChangeProposalAnalysisMutation = /* GraphQL*/ `
   mutation ChangeProposalAnalysisMutation($input: ChangeProposalAnalysisInput!) {
@@ -23,7 +23,7 @@ const ChangeProposalAnalysisMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 const AnalyseProposalAnalysisMutation = /* GraphQL */ `
   mutation AnalyseProposalAnalysis($input: AnalyseProposalAnalysisInput!) {
@@ -45,7 +45,7 @@ const AnalyseProposalAnalysisMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const responses = [
   {
@@ -96,7 +96,7 @@ const responses = [
     question: 'UXVlc3Rpb246MTM4Mw==',
     value: null,
   },
-];
+]
 
 describe('mutations.changeProposalAnalysis', () => {
   it("should not create the proposal's analysis when authenticated as user", async () => {
@@ -109,9 +109,9 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       'internal_user',
-    );
-    expect(createAnalysis).toMatchSnapshot();
-  });
+    )
+    expect(createAnalysis).toMatchSnapshot()
+  })
 
   it("should not create the proposal's analysis if the decision has already been given", async () => {
     const createAnalysis = await graphql(
@@ -123,9 +123,9 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       'internal_analyst',
-    );
-    expect(createAnalysis).toMatchSnapshot();
-  });
+    )
+    expect(createAnalysis).toMatchSnapshot()
+  })
 
   it("should create successfully the proposal's analysis", async () => {
     const createAnalysis = await graphql(
@@ -146,15 +146,15 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       'internal_analyst',
-    );
+    )
     expect(createAnalysis).toMatchSnapshot({
       changeProposalAnalysis: {
         analysis: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it("should analyse successfully the proposal's analysis", async () => {
     const analyseAnalysis = await graphql(
@@ -176,15 +176,15 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       'internal_analyst',
-    );
+    )
     expect(analyseAnalysis).toMatchSnapshot({
       analyseProposalAnalysis: {
         analysis: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('should change successfully the newly created analysis with missing responses to required questions', async () => {
     const analyseCreatedAnalysis = await graphql(
@@ -196,15 +196,15 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       { email: 'jpec@cap-collectif.com', password: 'toto' },
-    );
+    )
     expect(analyseCreatedAnalysis).toMatchSnapshot({
       changeProposalAnalysis: {
         analysis: {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('should not analyse the analysis with missing required responses to required questions', async () => {
     const analyseProposalAnalysis = await graphql(
@@ -217,13 +217,13 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       { email: 'jpec@cap-collectif.com', password: 'toto' },
-    );
+    )
     expect(analyseProposalAnalysis).toMatchSnapshot({
       analyseProposalAnalysis: {
         analysis: null,
       },
-    });
-  });
+    })
+  })
 
   it('should successfully analyse the analysis with required responses to required questions', async () => {
     const analyseCreatedAnalysis = await graphql(
@@ -285,13 +285,13 @@ describe('mutations.changeProposalAnalysis', () => {
         },
       },
       { email: 'jpec@cap-collectif.com', password: 'toto' },
-    );
+    )
     expect(analyseCreatedAnalysis).toMatchSnapshot({
       analyseProposalAnalysis: {
         analysis: {
           id: expect.any(String),
         },
       },
-    });
-  });
-});
+    })
+  })
+})

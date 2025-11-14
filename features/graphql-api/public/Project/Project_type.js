@@ -10,12 +10,10 @@ const ProjectTypesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Project.type', () => {
   it('fetches the types of a project', async () => {
-    await expect(
-      graphql(ProjectTypesQuery, { id: toGlobalId('Project', 'project1') }),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(ProjectTypesQuery, { id: toGlobalId('Project', 'project1') })).resolves.toMatchSnapshot()
+  })
+})

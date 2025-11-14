@@ -1,9 +1,5 @@
 const ProposalVoteMiniumQuery = /* GraphQL */ `
-  query ProposalVoteMiniumQuery(
-    $id: ID!
-    $includeNotAccounted: Boolean!
-    $includeUnpublished: Boolean!
-  ) {
+  query ProposalVoteMiniumQuery($id: ID!, $includeNotAccounted: Boolean!, $includeUnpublished: Boolean!) {
     proposal: node(id: $id) {
       ... on Proposal {
         allVotes: votes(first: 0, includeNotAccounted: false, includeUnpublished: false) {
@@ -11,25 +7,21 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
           edges {
             node {
               id
-              ...on ProposalVote {
-                  isAccounted
-                  published
+              ... on ProposalVote {
+                isAccounted
+                published
               }
             }
           }
         }
-        votes(
-          first: 100
-          includeNotAccounted: $includeNotAccounted
-          includeUnpublished: $includeUnpublished
-        ) {
+        votes(first: 100, includeNotAccounted: $includeNotAccounted, includeUnpublished: $includeUnpublished) {
           totalCount
           edges {
             node {
               id
-              ...on ProposalVote {
-                  isAccounted
-                  published
+              ... on ProposalVote {
+                isAccounted
+                published
               }
             }
           }
@@ -37,7 +29,7 @@ const ProposalVoteMiniumQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.Proposal_votes', () => {
   it("fetches a proposal's accounted votes.", async () => {
@@ -51,8 +43,8 @@ describe('Internal.Proposal_votes', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches a proposal's votes including not accounted.", async () => {
     await expect(
@@ -65,8 +57,8 @@ describe('Internal.Proposal_votes', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches a proposal's votes including not accounted and unpublished.", async () => {
     await expect(
@@ -79,6 +71,6 @@ describe('Internal.Proposal_votes', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

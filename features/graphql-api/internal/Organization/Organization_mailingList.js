@@ -21,7 +21,7 @@ const OrganizationMailingList = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.MailingList', () => {
   it('organization admin should be able to fetch all mailingList from organization', async () => {
@@ -33,6 +33,6 @@ describe('Internal|Organization.MailingList', () => {
         },
         'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

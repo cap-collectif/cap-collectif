@@ -12,7 +12,7 @@ const UserInvitationsAvailabilitySearch = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|UserInvitationsAvailabilitySearch', () => {
   it('should fetch the already used email addresses among the given ones', async () => {
@@ -24,8 +24,8 @@ describe('Internal|UserInvitationsAvailabilitySearch', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should not fetch already used email addresses among the new ones', async () => {
     await expect(
@@ -36,6 +36,6 @@ describe('Internal|UserInvitationsAvailabilitySearch', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

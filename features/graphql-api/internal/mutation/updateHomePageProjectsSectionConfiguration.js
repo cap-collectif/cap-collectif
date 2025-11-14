@@ -1,4 +1,4 @@
-import '../../_setup';
+import '../../_setup'
 
 const UpdateHomePageProjectsSectionConfigurationMutation = /* GraphQL */ `
   mutation UpdateHomePageProjectsSectionConfigurationMutation(
@@ -22,40 +22,41 @@ const UpdateHomePageProjectsSectionConfigurationMutation = /* GraphQL */ `
         }
       }
     }
-  }`;
+  }
+`
 
 const inputMostRecentDisplayMode = {
-  "position": 3,
-  "displayMode": "MOST_RECENT",
-  "nbObjects": 2,
-  "enabled": true,
-  "projects": [],
-  "translations": [
+  position: 3,
+  displayMode: 'MOST_RECENT',
+  nbObjects: 2,
+  enabled: true,
+  projects: [],
+  translations: [
     {
-      "locale": "fr-FR",
-      "title": "titre",
-      "teaser": "sous titre"
-    }
-  ]
+      locale: 'fr-FR',
+      title: 'titre',
+      teaser: 'sous titre',
+    },
+  ],
 }
 
 const inputCustomDisplayMode = {
-  "position": 3,
-  "displayMode": "CUSTOM",
-  "nbObjects": 2,
-  "enabled": true,
-  "projects": [
-    "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
-    "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
-    "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw=="
+  position: 3,
+  displayMode: 'CUSTOM',
+  nbObjects: 2,
+  enabled: true,
+  projects: [
+    'UHJvamVjdDpwcm9qZWN0Rm9vZA==',
+    'UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=',
+    'UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==',
   ],
-  "translations": [
+  translations: [
     {
-      "locale": "fr-FR",
-      "title": "titre",
-      "teaser": "sous titre"
-    }
-  ]
+      locale: 'fr-FR',
+      title: 'titre',
+      teaser: 'sous titre',
+    },
+  ],
 }
 
 describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
@@ -65,18 +66,14 @@ describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
         UpdateHomePageProjectsSectionConfigurationMutation,
         { input: inputMostRecentDisplayMode },
         'internal_admin',
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
   it('should update a HomePageProjectsSectionConfiguration with CUSTOM displayMode', async () => {
     await expect(
-      graphql(
-        UpdateHomePageProjectsSectionConfigurationMutation,
-        { input: inputCustomDisplayMode },
-        'internal_admin',
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      graphql(UpdateHomePageProjectsSectionConfigurationMutation, { input: inputCustomDisplayMode }, 'internal_admin'),
+    ).resolves.toMatchSnapshot()
+  })
   it('should delete a project with CUSTOM displayMode', async () => {
     // add custom projects
     await graphql(
@@ -89,14 +86,14 @@ describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
     await expect(
       graphql(
         UpdateHomePageProjectsSectionConfigurationMutation,
-        { input: {
+        {
+          input: {
             ...inputCustomDisplayMode,
-            projects: [
-              "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
-              "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",]
-          } },
+            projects: ['UHJvamVjdDpwcm9qZWN0Rm9vZA==', 'UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ='],
+          },
+        },
         'internal_admin',
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
 })

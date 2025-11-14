@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateSelectionStep = /* GraphQL*/ `
     mutation UpdateSelectionStepMutation($input: UpdateSelectionStepInput!) {
@@ -47,10 +47,10 @@ const UpdateSelectionStep = /* GraphQL*/ `
         }
       }
     }
-`;
+`
 
 // U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==
-const stepId = toGlobalId('SelectionStep', 'selectionstep1');
+const stepId = toGlobalId('SelectionStep', 'selectionstep1')
 
 const input = {
   stepId: stepId,
@@ -93,12 +93,12 @@ const input = {
   secretBallot: false,
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
-  allowingProgressSteps: true
-};
+  allowingProgressSteps: true,
+}
 
 describe('mutations.updateSelectionStep', () => {
   it('admin should be able to edit selectionStep step.', async () => {
-    const response = await graphql(UpdateSelectionStep, { input: { ...input } }, 'internal_admin');
-    expect(response).toMatchSnapshot();
-  });
-});
+    const response = await graphql(UpdateSelectionStep, { input: { ...input } }, 'internal_admin')
+    expect(response).toMatchSnapshot()
+  })
+})

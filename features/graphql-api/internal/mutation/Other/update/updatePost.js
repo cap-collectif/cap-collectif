@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdatePostMutation = /* GraphQL*/ `
   mutation UpdatePost($input: UpdatePostInput!) {
@@ -39,13 +39,13 @@ const UpdatePostMutation = /* GraphQL*/ `
       errorCode
     }
   }
-`;
+`
 
 const translation = {
   title: 'Titre !',
   body: '<p>Mon article</p>',
   locale: 'FR_FR',
-};
+}
 
 const requiredInput = {
   id: toGlobalId('Post', 'post1'),
@@ -54,11 +54,11 @@ const requiredInput = {
   publishedAt: '2020-06-05 12:15:30',
   isPublished: true,
   commentable: true,
-  authors: [toGlobalId('User','userTheo')],
+  authors: [toGlobalId('User', 'userTheo')],
   projects: [],
   proposals: [],
   themes: [],
-};
+}
 
 const optionnalInput = {
   ...requiredInput,
@@ -73,7 +73,7 @@ const optionnalInput = {
   proposals: ['UHJvcG9zYWw6cHJvcG9zYWwx', 'UHJvcG9zYWw6cHJvcG9zYWwxMDg='],
   themes: ['theme4'],
   media: 'media1',
-};
+}
 
 describe('mutations.updatePost', () => {
   it('admin should update a post with required fields.', async () => {
@@ -83,9 +83,9 @@ describe('mutations.updatePost', () => {
         input: requiredInput,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 
   it('admin should update a post with optional fields.', async () => {
     const response = await graphql(
@@ -94,9 +94,9 @@ describe('mutations.updatePost', () => {
         input: optionnalInput,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 
   it('admin should have an error when submitting an invalid form.', async () => {
     const response = await graphql(
@@ -105,17 +105,17 @@ describe('mutations.updatePost', () => {
         input: { ...requiredInput, publishedAt: '2020' },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.updatePost.post).toBe(null);
-    expect(response.updatePost.errorCode).toBe('INVALID_FORM');
-  });
+    expect(response.updatePost.post).toBe(null)
+    expect(response.updatePost.errorCode).toBe('INVALID_FORM')
+  })
 
   it('admin should have an error when attempting to update a unknown post.', async () => {
     await expect(
       graphql(UpdatePostMutation, { input: { ...requiredInput, id: 'abc' } }, 'internal_admin'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('response body should be html_purified to prevent XSS attack.', async () => {
     const response = await graphql(
@@ -133,15 +133,15 @@ describe('mutations.updatePost', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.updatePost.post.body).toBe('');
-    expect(response.updatePost.errorCode).toBe(null);
-  });
+    expect(response.updatePost.post.body).toBe('')
+    expect(response.updatePost.errorCode).toBe(null)
+  })
 
   it('should return NOT_AUTHORIZED errorCode if project admin user attempt to update a post that he does not own', async () => {
-    await expect(
-      graphql(UpdatePostMutation, { input: requiredInput }, 'internal_theo'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    await expect(graphql(UpdatePostMutation, { input: requiredInput }, 'internal_theo')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
+})

@@ -7,7 +7,7 @@ const DebateArgumentViewerDidAuthorQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.viewerDidAuthor bool', () => {
   it('fetches if viewer is the argument author', async () => {
@@ -19,8 +19,8 @@ describe('Internal|Debate.viewerDidAuthor bool', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches if viewer is the argument author', async () => {
     await expect(
@@ -31,6 +31,6 @@ describe('Internal|Debate.viewerDidAuthor bool', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

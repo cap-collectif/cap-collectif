@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UnsubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
   mutation UnsubscribeToEventAsRegistered($input: UnsubscribeToEventAsRegisteredInput!) {
@@ -9,7 +9,7 @@ const UnsubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.unsubscribeToEvent', () => {
   it('admin wants to unsubscribe from event.', async () => {
@@ -19,9 +19,9 @@ describe('mutations.unsubscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQ0' },
       },
       'internal_spylou',
-    );
-    expect(unsubscribeToEvent).toMatchSnapshot();
-  });
+    )
+    expect(unsubscribeToEvent).toMatchSnapshot()
+  })
 
   it('user wants to unsubscribe from event.', async () => {
     const unsubscribeToEvent = await graphql(
@@ -30,7 +30,7 @@ describe('mutations.unsubscribeToEvent', () => {
         input: { eventId: 'RXZlbnQ6ZXZlbnQ0' },
       },
       'internal_saitama',
-    );
-    expect(unsubscribeToEvent).toMatchSnapshot();
-  });
-});
+    )
+    expect(unsubscribeToEvent).toMatchSnapshot()
+  })
+})

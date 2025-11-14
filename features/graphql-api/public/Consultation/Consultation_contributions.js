@@ -39,14 +39,10 @@ const ConsultationListContribtionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const InternalQuery = /* GraphQL */ `
-  query InternalQuery(
-    $consultationId: ID!
-    $orderBy: ContributionOrder!
-    $includeTrashed: Boolean!
-  ) {
+  query InternalQuery($consultationId: ID!, $orderBy: ContributionOrder!, $includeTrashed: Boolean!) {
     node(id: $consultationId) {
       ... on Consultation {
         id
@@ -88,7 +84,7 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Consultation.contributions connection', () => {
   it('fetches the contributions of a consultation ordered by publication date DESC', async () => {
@@ -101,8 +97,8 @@ describe('Preview|Consultation.contributions connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the contributions of a consultation ordered by publication date ASC', async () => {
     await expect(
@@ -114,8 +110,8 @@ describe('Preview|Consultation.contributions connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the contributions of a consultation ordered by creation date DESC', async () => {
     await expect(
@@ -127,8 +123,8 @@ describe('Preview|Consultation.contributions connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the contributions of a consultation ordered by creation date ASC', async () => {
     await expect(
@@ -140,8 +136,8 @@ describe('Preview|Consultation.contributions connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the contributions of a consultation including trashed', async () => {
     await expect(
@@ -154,6 +150,6 @@ describe('Preview|Consultation.contributions connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

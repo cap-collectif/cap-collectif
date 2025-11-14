@@ -11,7 +11,7 @@ const ProjectFirstDebateStepQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectFirstCollectStepQuery = /* GraphQL */ `
   query ProjectFirstCollectStepQuery($id: ID!) {
@@ -24,7 +24,7 @@ const ProjectFirstCollectStepQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectFirstAnalysisStepQuery = /* GraphQL */ `
   query ProjectFirstAnalysisStepQuery($id: ID!) {
@@ -37,7 +37,7 @@ const ProjectFirstAnalysisStepQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Project.firstStep ', () => {
   it('should return the first debate step of a project with a debate step', async () => {
@@ -47,12 +47,10 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectCannabis'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstDebateStep).not.toBeNull();
-    expect(response.project.firstDebateStep.id).toBe(
-      toGlobalId('DebateStep', 'debateStepCannabis'),
-    );
-  });
+    )
+    expect(response.project.firstDebateStep).not.toBeNull()
+    expect(response.project.firstDebateStep.id).toBe(toGlobalId('DebateStep', 'debateStepCannabis'))
+  })
 
   it('should return null for the first debate step of a project without a debate step', async () => {
     const response = await graphql(
@@ -61,9 +59,9 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectIdf'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstDebateStep).toBeNull();
-  });
+    )
+    expect(response.project.firstDebateStep).toBeNull()
+  })
   it('should return the first collect step of a project with a collect step', async () => {
     const response = await graphql(
       ProjectFirstCollectStepQuery,
@@ -71,10 +69,10 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectIdf'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstCollectStep).not.toBeNull();
-    expect(response.project.firstCollectStep.id).toBe(toGlobalId('CollectStep', 'collectstepIdf'));
-  });
+    )
+    expect(response.project.firstCollectStep).not.toBeNull()
+    expect(response.project.firstCollectStep.id).toBe(toGlobalId('CollectStep', 'collectstepIdf'))
+  })
 
   it('should return null for the first collect step of a project without a collect step', async () => {
     const response = await graphql(
@@ -83,9 +81,9 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectCannabis'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstCollectStep).toBeNull();
-  });
+    )
+    expect(response.project.firstCollectStep).toBeNull()
+  })
   it('should return the first analysis step of a project with a analysis step', async () => {
     const response = await graphql(
       ProjectFirstAnalysisStepQuery,
@@ -93,12 +91,10 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectIdf'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstAnalysisStep).not.toBeNull();
-    expect(response.project.firstAnalysisStep.id).toBe(
-      toGlobalId('SelectionStep', 'selectionStepIdfAnalyse'),
-    );
-  });
+    )
+    expect(response.project.firstAnalysisStep).not.toBeNull()
+    expect(response.project.firstAnalysisStep.id).toBe(toGlobalId('SelectionStep', 'selectionStepIdfAnalyse'))
+  })
 
   it('should return null for the first analysis step of a project without a analysis step', async () => {
     const response = await graphql(
@@ -107,7 +103,7 @@ describe('Internal|Project.firstStep ', () => {
         id: toGlobalId('Project', 'projectCannabis'),
       },
       'internal_admin',
-    );
-    expect(response.project.firstAnalysisStep).toBeNull();
-  });
-});
+    )
+    expect(response.project.firstAnalysisStep).toBeNull()
+  })
+})

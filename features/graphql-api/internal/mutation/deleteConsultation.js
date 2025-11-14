@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const DeleteConsultation = /* GraphQL*/ `
   mutation DeleteConsultation($input: DeleteConsultationInput!) {
@@ -7,11 +7,11 @@ const DeleteConsultation = /* GraphQL*/ `
       deletedConsultationId
     }
   }
-`;
+`
 
 const input = {
-  id: toGlobalId('Consultation', '1stConsultationMultiConsultationStep') //Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==
-};
+  id: toGlobalId('Consultation', '1stConsultationMultiConsultationStep'), //Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==
+}
 
 describe('mutations.deleteConsultation', () => {
   it('should delete a consultation as an admin', async () => {
@@ -21,7 +21,7 @@ describe('mutations.deleteConsultation', () => {
         input,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 })

@@ -12,7 +12,7 @@ const EventMediaQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Media.url', () => {
   it('it fetches a media url', async () => {
@@ -26,8 +26,8 @@ describe('Media.url', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

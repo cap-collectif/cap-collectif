@@ -25,7 +25,7 @@ const DebateOpinionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.opinions connection', () => {
   it('fetches opinions associated to a debate with a cursor', async () => {
@@ -39,6 +39,6 @@ describe('Internal|Debate.opinions connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

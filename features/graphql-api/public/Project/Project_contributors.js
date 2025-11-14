@@ -20,12 +20,12 @@ const ProjectContributorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Project.contributors connection', () => {
   it('fetches the contributiors of a project', async () => {
     await expect(
       graphql(ProjectContributorsQuery, { id: 'UHJvamVjdDpwcm9qZWN0MQ==' }, 'internal'),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

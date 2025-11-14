@@ -1,12 +1,6 @@
 /* eslint-env jest */
 const DebateVotesQuery = /* GraphQL */ `
-  query DebateVotesQuery(
-    $id: ID!
-    $count: Int!
-    $cursor: String
-    $type: ForOrAgainstValue
-    $isPublished: Boolean
-  ) {
+  query DebateVotesQuery($id: ID!, $count: Int!, $cursor: String, $type: ForOrAgainstValue, $isPublished: Boolean) {
     node(id: $id) {
       ... on Debate {
         votes(first: $count, after: $cursor, type: $type, isPublished: $isPublished) {
@@ -39,7 +33,7 @@ const DebateVotesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateVotesCountersQuery = /* GraphQL */ `
   query DebateVotesCountersQuery($id: ID!, $isPublished: Boolean) {
@@ -57,7 +51,7 @@ const DebateVotesCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateVoteIPQuery = /* GraphQL */ `
   query DebateVoteIPQuery($id: ID!) {
@@ -74,7 +68,7 @@ const DebateVoteIPQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateVoteOriginQuery = /* GraphQL */ `
   query DebateVoteIPQuery($id: ID!) {
@@ -92,7 +86,7 @@ const DebateVoteOriginQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.Votes connection', () => {
   it('fetches 5 first votes associated to a debate with a cursor', async () => {
@@ -106,8 +100,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches 5 next votes associated to a debate with a cursor', async () => {
     await expect(
@@ -120,8 +114,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes associated to a debate and a FOR type with a cursor', async () => {
     await expect(
@@ -135,8 +129,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes associated to a debate and an AGAINST type with a cursor', async () => {
     await expect(
@@ -150,8 +144,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should not fetch unpublished only votes associated to a debate when client is not an admin', async () => {
     const response = await graphql(
@@ -162,10 +156,10 @@ describe('Internal|Debate.Votes connection', () => {
         isPublished: false,
       },
       'internal',
-    );
-    const votes = response.node.votes.edges.map(edge => edge.node);
-    expect(votes.every(v => v.published === true)).toBe(true);
-  });
+    )
+    const votes = response.node.votes.edges.map(edge => edge.node)
+    expect(votes.every(v => v.published === true)).toBe(true)
+  })
 
   it('should fetch unpublished only votes associated to a debate when client is an admin', async () => {
     const response = await graphql(
@@ -176,10 +170,10 @@ describe('Internal|Debate.Votes connection', () => {
         isPublished: false,
       },
       'internal_admin',
-    );
-    const votes = response.node.votes.edges.map(edge => edge.node);
-    expect(votes.every(v => v.published === false)).toBe(true);
-  });
+    )
+    const votes = response.node.votes.edges.map(edge => edge.node)
+    expect(votes.every(v => v.published === false)).toBe(true)
+  })
 
   it('fetches all votes counters associated to a debate when client is an admin', async () => {
     await expect(
@@ -191,8 +185,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published votes counters associated to a debate', async () => {
     await expect(
@@ -204,8 +198,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches unpublished votes counters associated to a debate when client is an admin', async () => {
     await expect(
@@ -217,8 +211,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes ip associated to a debate without rights', async () => {
     await expect(
@@ -230,8 +224,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes ip associated to a debate', async () => {
     await expect(
@@ -243,8 +237,8 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes origin', async () => {
     await expect(
@@ -256,6 +250,6 @@ describe('Internal|Debate.Votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

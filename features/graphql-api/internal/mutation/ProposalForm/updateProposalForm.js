@@ -1,5 +1,5 @@
 /*eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const mutation = /* GraphQL */ `
   mutation UpdateProposalForm($input: UpdateProposalFormInput!) {
@@ -70,7 +70,7 @@ const mutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const defaultInput = {
   proposalFormId: 'proposalForm1',
@@ -98,8 +98,7 @@ const defaultInput = {
   usingIllustration: true,
   descriptionMandatory: true,
   objectType: 'PROPOSAL',
-  mapCenter:
-    '[{"geometry":{"location_type":"GEOMETRIC_CENTER","location":{"lat":"42","lng":"0"}}}]',
+  mapCenter: '[{"geometry":{"location_type":"GEOMETRIC_CENTER","location":{"lat":"42","lng":"0"}}}]',
   zoomMap: 0,
   commentable: true,
   costable: true,
@@ -154,7 +153,7 @@ const defaultInput = {
   usingInstagram: true,
   usingLinkedIn: true,
   usingYoutube: true,
-};
+}
 
 describe('Internal | updateProposalForm', () => {
   it('project admin cannot update someone else proposalForm', async () => {
@@ -166,20 +165,20 @@ describe('Internal | updateProposalForm', () => {
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('project admin update his proposalForm', async () => {
-    let input = defaultInput;
-    input.proposalFormId = 'proposalFormWithOwner';
+    let input = defaultInput
+    input.proposalFormId = 'proposalFormWithOwner'
     const response = await graphql(
       mutation,
       {
         input: input,
       },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin update someone else proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -187,9 +186,9 @@ describe('Internal | updateProposalForm', () => {
         input: defaultInput,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin update custom fields of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -219,9 +218,9 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin delete first question choice of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -273,9 +272,9 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin delete first question of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -318,9 +317,9 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin delete first district of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -344,9 +343,9 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin delete first category of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -368,8 +367,8 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-  });
+    )
+  })
   it('admin update view configuration of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -381,9 +380,9 @@ describe('Internal | updateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin cannot disable all views of a proposalForm', async () => {
     await expect(
       graphql(
@@ -398,6 +397,6 @@ describe('Internal | updateProposalForm', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('No view is active. At least one must be selected');
-  });
-});
+    ).rejects.toThrowError('No view is active. At least one must be selected')
+  })
+})

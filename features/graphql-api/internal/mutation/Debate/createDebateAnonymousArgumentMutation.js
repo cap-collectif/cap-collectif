@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateDebateAnonymousArgumentMutation = /* GraphQL */ `
   mutation CreateDebateAnonymousArgumentMutation($input: CreateDebateAnonymousArgumentInput!) {
@@ -16,7 +16,7 @@ const CreateDebateAnonymousArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|CreateDebateAnonymousArgument', () => {
   it('try to create argument with wrong debate id', async () => {
@@ -34,8 +34,8 @@ describe('Internal|CreateDebateAnonymousArgument', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('try to create a second argument', async () => {
     await expect(
@@ -51,8 +51,8 @@ describe('Internal|CreateDebateAnonymousArgument', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('create argument', async () => {
     await expect(
@@ -69,8 +69,8 @@ describe('Internal|CreateDebateAnonymousArgument', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('create argument and consent', async () => {
     await expect(
@@ -88,6 +88,6 @@ describe('Internal|CreateDebateAnonymousArgument', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

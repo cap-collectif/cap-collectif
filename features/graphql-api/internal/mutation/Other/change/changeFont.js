@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const ChangeFontMutation = /* GraphQL */ `
   mutation ChangeFontMutation($input: ChangeFontInput!) {
@@ -12,12 +12,12 @@ const ChangeFontMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|changeFont mutation', () => {
   it('sets Courier as a heading font and Geneva as a body font', async () => {
-    const courierId = toGlobalId('Font', 'courierFont');
-    const genevaId = toGlobalId('Font', 'genevaFont');
+    const courierId = toGlobalId('Font', 'courierFont')
+    const genevaId = toGlobalId('Font', 'genevaFont')
 
     const response = await graphql(
       ChangeFontMutation,
@@ -28,10 +28,10 @@ describe('Internal|changeFont mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.changeFont.fonts.find(f => f.id === courierId).useAsHeading).toBe(true);
-    expect(response.changeFont.fonts.find(f => f.id === genevaId).useAsBody).toBe(true);
-    expect(response).toMatchSnapshot();
-  });
-});
+    expect(response.changeFont.fonts.find(f => f.id === courierId).useAsHeading).toBe(true)
+    expect(response.changeFont.fonts.find(f => f.id === genevaId).useAsBody).toBe(true)
+    expect(response).toMatchSnapshot()
+  })
+})

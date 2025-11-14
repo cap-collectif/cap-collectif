@@ -30,10 +30,10 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.globalDistricts', () => {
   it('fetches all project districts', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+  })
+})

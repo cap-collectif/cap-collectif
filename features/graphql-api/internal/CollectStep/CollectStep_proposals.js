@@ -17,7 +17,7 @@ const CollectStepProposalsArchivedQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|CollectStep.proposals connection', () => {
   it('fetches archived proposals of a collect step', async () => {
@@ -25,34 +25,34 @@ describe('Internal|CollectStep.proposals connection', () => {
       graphql(
         CollectStepProposalsArchivedQuery,
         {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
-          "state": "ARCHIVED"
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==',
+          state: 'ARCHIVED',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches archived and non archived proposals of a collect step', async () => {
     await expect(
       graphql(
         CollectStepProposalsArchivedQuery,
         {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches non archived proposals of a collect step', async () => {
     await expect(
       graphql(
         CollectStepProposalsArchivedQuery,
         {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
-          "state": "PUBLISHED"
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==',
+          state: 'PUBLISHED',
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

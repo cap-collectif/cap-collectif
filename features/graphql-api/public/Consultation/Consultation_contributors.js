@@ -17,7 +17,7 @@ const ConsultationListContribtionsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Consultation.contributors connection', () => {
   it('fetches the contributors of a consultation', async () => {
@@ -29,6 +29,6 @@ describe('Preview|Consultation.contributors connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

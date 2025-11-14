@@ -16,7 +16,7 @@ const MultipleChoiceQuestionResponsesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const QuestionChoiceResponsesQuery = /* GraphQL */ `
   query QuestionResponsesQuery($id: ID!) {
@@ -43,7 +43,7 @@ const QuestionChoiceResponsesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('MultipleChoiceQuestion.responses array', () => {
   it("fetches a multiple choice question's responses", async () => {
@@ -58,10 +58,10 @@ describe('MultipleChoiceQuestion.responses array', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       },
-    );
-  });
+    )
+  })
 
   it("fetches a multiple choice question's responses with textValue", async () => {
     await expect(
@@ -72,6 +72,6 @@ describe('MultipleChoiceQuestion.responses array', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

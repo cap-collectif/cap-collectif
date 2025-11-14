@@ -56,7 +56,7 @@ const DebateArgumentsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateArgumentsCountersQuery = /* GraphQL */ `
   query DebateArgumentsCountersQuery($id: ID!) {
@@ -83,7 +83,7 @@ const DebateArgumentsCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateArgumentsIPQuery = /* GraphQL */ `
   query DebateArgumentsQuery($id: ID!) {
@@ -108,7 +108,7 @@ const DebateArgumentsIPQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.arguments connection', () => {
   it('fetches arguments associated to a debate with a cursor', async () => {
@@ -123,8 +123,8 @@ describe('Internal|Debate.arguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('sort arguments associated to a debate by their number of votes', async () => {
     await expect(
@@ -141,8 +141,8 @@ describe('Internal|Debate.arguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches counters associated to a debate', async () => {
     await expect(
@@ -153,8 +153,8 @@ describe('Internal|Debate.arguments connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches ips of arguments and argumentVotes associated to a debate', async () => {
     await expect(
@@ -165,8 +165,8 @@ describe('Internal|Debate.arguments connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches ips of arguments and argumentVotes associated to a debate without rights', async () => {
     await expect(
@@ -177,6 +177,6 @@ describe('Internal|Debate.arguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

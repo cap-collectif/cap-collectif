@@ -21,7 +21,7 @@ const DebateArticlesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DebateArticlesCountersQuery = /* GraphQL */ `
   query DebateArticlesCountersQuery($id: ID!) {
@@ -33,10 +33,10 @@ const DebateArticlesCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.articles connection', () => {
-  const debateId = toGlobalId('Debate', 'debateCannabis');
+  const debateId = toGlobalId('Debate', 'debateCannabis')
 
   it('fetches 2 first articles associated to a debate with a cursor', async () => {
     await expect(
@@ -49,8 +49,8 @@ describe('Internal|Debate.articles connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches 1 next articles associated to a debate with a cursor', async () => {
     await expect(
@@ -63,8 +63,8 @@ describe('Internal|Debate.articles connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches votes counters associated to a debate', async () => {
     await expect(
@@ -75,6 +75,6 @@ describe('Internal|Debate.articles connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

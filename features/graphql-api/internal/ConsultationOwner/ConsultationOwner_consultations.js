@@ -12,17 +12,10 @@ const ConsultationOwnerConsultationQuery = /* GraphQL */ `
       }
     }
   }
-`;
-
+`
 
 describe('Internal.consultationOwner.consultations', () => {
   it('should fetch all consultations as an admin', async () => {
-    await expect(
-      graphql(
-        ConsultationOwnerConsultationQuery,
-        {},
-        'internal_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(ConsultationOwnerConsultationQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
 })

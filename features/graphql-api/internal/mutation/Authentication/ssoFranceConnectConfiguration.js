@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateFranceConnectSSOConfiguration = /* GraphQL */ `
   mutation ($input: UpdateFranceConnectSSOConfigurationInput!) {
@@ -19,7 +19,7 @@ const UpdateFranceConnectSSOConfiguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const testingConfig = {
   input: {
@@ -36,7 +36,7 @@ const testingConfig = {
     preferred_username: false,
     secret: 'INSERT_A_REAL_SECRET',
   },
-};
+}
 
 const productionConfig = {
   input: {
@@ -53,8 +53,7 @@ const productionConfig = {
     preferred_username: false,
     secret: 'INSERT_A_REAL_SECRET',
   },
-};
-
+}
 
 describe('Internal|SSO|FranceConnect', () => {
   it('Updates a config as super admin', async () => {
@@ -66,8 +65,8 @@ describe('Internal|SSO|FranceConnect', () => {
           redirectUri: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('Updates a config and turn it to production as super admin', async () => {
     await expect(
@@ -78,12 +77,12 @@ describe('Internal|SSO|FranceConnect', () => {
           redirectUri: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('Tries to update the configuration as admin only', async () => {
-    await expect(
-      graphql(UpdateFranceConnectSSOConfiguration, testingConfig, 'internal_admin'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    await expect(graphql(UpdateFranceConnectSSOConfiguration, testingConfig, 'internal_admin')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
+})

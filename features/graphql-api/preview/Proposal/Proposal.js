@@ -19,11 +19,11 @@ const ProposalPreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.proposals', () => {
   it("fetches proposal's data", async () => {
-    await global.enableFeatureFlag('public_api');
+    await global.enableFeatureFlag('public_api')
     await expect(
       graphql(
         ProposalPreviewData,
@@ -32,6 +32,6 @@ describe('Preview.proposals', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

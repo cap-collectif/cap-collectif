@@ -79,7 +79,7 @@ const AnalyticsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ExternalAnalyticsQuery = /* GraphQL */ `
   query ExternalAnalyticsQuery($filter: QueryAnalyticsFilter!) {
@@ -92,7 +92,7 @@ const ExternalAnalyticsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Analytics', () => {
   it('fetches analytics data', async () => {
@@ -104,8 +104,8 @@ describe('Internal|Analytics', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches analytics data by project', async () => {
     await expect(
@@ -120,9 +120,9 @@ describe('Internal|Analytics', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})
 
 describe('External|Analytics', () => {
   it('fetches external analytics data filtered by url', async () => {
@@ -134,6 +134,6 @@ describe('External|Analytics', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

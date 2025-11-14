@@ -10,7 +10,7 @@ const ProjectStatusQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal project status', () => {
   it('OPENED_PARTICIPATION project', async () => {
@@ -22,8 +22,8 @@ describe('Internal project status', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('CLOSED_PARTICIPATION project', async () => {
     await expect(
@@ -34,8 +34,8 @@ describe('Internal project status', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('FUTURE_PARTICIPATION project', async () => {
     await expect(
@@ -46,6 +46,6 @@ describe('Internal project status', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

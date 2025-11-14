@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteOrganization = /* GraphQL*/ `
   mutation DeleteOrganization($input: DeleteOrganizationInput!) {
@@ -47,49 +47,44 @@ const DeleteOrganization = /* GraphQL*/ `
       errorCode
     }
   }
-`;
+`
 
 const input = {
-  "organizationId": global.toGlobalId('Organization', 'organization2'),
+  organizationId: global.toGlobalId('Organization', 'organization2'),
 }
 
 describe('mutations.updateOrganization', () => {
   it('admin should be able to delete organization and organization should be anonymized', async () => {
-    const response = await graphql(
-      DeleteOrganization,
-      {input},
-      'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    const response = await graphql(DeleteOrganization, { input }, 'internal_admin')
+    expect(response).toMatchSnapshot()
+  })
   it('admin organization should not be able to delete organization', async () => {
-    await expect(
-      graphql(DeleteOrganization, {input}, 'internal_valerie'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    await expect(graphql(DeleteOrganization, { input }, 'internal_valerie')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
       DeleteOrganization,
       {
         input: {
-          organizationId: "abc"
-        }
+          organizationId: 'abc',
+        },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should return ORGANIZATION_ALREADY_ANONYMIZED errorCode', async () => {
     const response = await graphql(
       DeleteOrganization,
       {
         input: {
-          organizationId: toGlobalId('Organization', 'organizationDeleted')
-        }
+          organizationId: toGlobalId('Organization', 'organizationDeleted'),
+        },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 })
-

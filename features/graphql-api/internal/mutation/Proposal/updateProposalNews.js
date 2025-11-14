@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const updateProposalNews = /* GraphQL */ `
   mutation updateProposalNews($input: UpdateProposalNewsInput!) {
@@ -16,7 +16,7 @@ const updateProposalNews = /* GraphQL */ `
       errorCode
     }
   }
-`;
+`
 
 describe('Internal|update proposal news', () => {
   const input = {
@@ -25,16 +25,15 @@ describe('Internal|update proposal news', () => {
       {
         locale: 'FR_FR',
         title: 'Un nouveau titre',
-        body:
-          'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
+        body: 'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
         abstract: 'un résumé',
       },
     ],
-  };
+  }
   it('update proposal news', async () => {
-    const response = await graphql(updateProposalNews, { input }, 'internal_ian');
-    expect(response).toMatchSnapshot();
-  });
+    const response = await graphql(updateProposalNews, { input }, 'internal_ian')
+    expect(response).toMatchSnapshot()
+  })
 
   it('fail to update proposal news, cause of user not is not author', async () => {
     const response = await graphql(
@@ -46,17 +45,16 @@ describe('Internal|update proposal news', () => {
             {
               locale: 'FR_FR',
               title: 'J essaie de modifier le titre',
-              body:
-                'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
+              body: 'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
               abstract: 'un résumé',
             },
           ],
         },
       },
       'internal_user',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 
   it('fail to update proposal news, cause post not found', async () => {
     const response = await graphql(
@@ -68,15 +66,14 @@ describe('Internal|update proposal news', () => {
             {
               locale: 'FR_FR',
               title: 'Post not found',
-              body:
-                'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
+              body: 'This is the result of many years of fake news. So we have to fight against fake news. Algorithms create filter bubbles that persevere with fake news and conspiracy.',
               abstract: 'un résumé',
             },
           ],
         },
       },
       'internal_user',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

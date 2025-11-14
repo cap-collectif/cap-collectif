@@ -12,11 +12,11 @@ const MajorityQuestionVotesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|MajorityQuestions_votes', () => {
   it('it fetches a majority question with its votesCount and its categories', async () => {
-    const id = 'UXVlc3Rpb246MTM4NQ==';
+    const id = 'UXVlc3Rpb246MTM4NQ=='
     await expect(
       graphql(
         MajorityQuestionVotesQuery,
@@ -25,6 +25,6 @@ describe('Internal|MajorityQuestions_votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot(id);
-  });
-});
+    ).resolves.toMatchSnapshot(id)
+  })
+})

@@ -25,18 +25,18 @@ const ProposalAnalysisComments = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('ProposalAnalysis.comments', () => {
-  it("should fetch analysis comments", async () => {
+  it('should fetch analysis comments', async () => {
     await expect(
       graphql(
         ProposalAnalysisComments,
         {
-            id: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
+          id: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

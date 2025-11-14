@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateSmsOrderMutation = /* GraphQL*/ `
     mutation CreateSmsOrder($input: CreateSmsOrderInput!) {
@@ -10,14 +10,13 @@ const CreateSmsOrderMutation = /* GraphQL*/ `
             }
         }
     }
-`;
+`
 
 const input = {
-  amount: 2000
-};
+  amount: 2000,
+}
 
 describe('mutations.createSmsOrder', () => {
-
   it('should create an sms order', async () => {
     await expect(
       graphql(
@@ -30,9 +29,9 @@ describe('mutations.createSmsOrder', () => {
     ).resolves.toMatchSnapshot({
       createSmsOrder: {
         smsOrder: {
-          id: expect.any(String)
-        }
-      }
-    });
-  });
-});
+          id: expect.any(String),
+        },
+      },
+    })
+  })
+})

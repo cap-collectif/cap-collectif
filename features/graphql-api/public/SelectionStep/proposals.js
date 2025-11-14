@@ -49,7 +49,7 @@ const ProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Query.proposals connection', () => {
   it('fetches proposals order by revision asc and revision state in pending', async () => {
@@ -59,11 +59,11 @@ describe('Preview|Query.proposals connection', () => {
         {
           id: toGlobalId('SelectionStep', 'selectionStepIdfAnalyse'),
           count: 100,
-          orderBy: [{field: 'REVISION_AT', direction: 'ASC'}],
+          orderBy: [{ field: 'REVISION_AT', direction: 'ASC' }],
           draft: false,
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

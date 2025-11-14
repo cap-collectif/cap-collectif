@@ -17,7 +17,7 @@ const ProjectOwnerProjectsAffiliationsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectOwnerProjectsSearchQuery = /* GraphQL */ `
   query ProjectOwnerProjectsQuery($query: String) {
@@ -32,7 +32,7 @@ const ProjectOwnerProjectsSearchQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectOwnerProjectsOrderQuery = /* GraphQL */ `
   query ProjectOwnerProjectsQuery($order: ProjectOwnerProjectOrder) {
@@ -48,7 +48,7 @@ const ProjectOwnerProjectsOrderQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.viewer.projects', () => {
   it('should correctly fetch projects that a user owns when given the `OWNER` affiliations', async () => {
@@ -58,12 +58,12 @@ describe('Internal.viewer.projects', () => {
         affiliations: ['OWNER'],
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.projects.totalCount).toBe(2);
-    expect(response.viewer.projects.edges).toHaveLength(2);
-    expect(response.viewer.projects.edges[0].node.owner.username).toBe('Théo QP');
-  });
+    expect(response.viewer.projects.totalCount).toBe(2)
+    expect(response.viewer.projects.edges).toHaveLength(2)
+    expect(response.viewer.projects.edges[0].node.owner.username).toBe('Théo QP')
+  })
 
   it('should fetch all projects when no affiliations given', async () => {
     await expect(
@@ -74,8 +74,8 @@ describe('Internal.viewer.projects', () => {
         },
         'internal_theo',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter projects by a given search query', async () => {
     await expect(
@@ -86,8 +86,8 @@ describe('Internal.viewer.projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should sort projects by a given field and direction', async () => {
     await expect(
@@ -101,8 +101,8 @@ describe('Internal.viewer.projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter project by author', async () => {
     await expect(
@@ -113,6 +113,6 @@ describe('Internal.viewer.projects', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

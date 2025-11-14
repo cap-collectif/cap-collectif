@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddAnalysisStep = /* GraphQL*/ `
     mutation AddAnalysisStep($input: AddStepInput!) {
@@ -25,7 +25,7 @@ const AddAnalysisStep = /* GraphQL*/ `
             }
         }
     }
-`;
+`
 
 describe('mutations.addAnalysisStepMutation', () => {
   it('admin should be able to add analysis step.', async () => {
@@ -33,23 +33,23 @@ describe('mutations.addAnalysisStepMutation', () => {
       AddAnalysisStep,
       { input: { projectId: toGlobalId('Project', 'project9') } },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin project should be able to add analysis step.', async () => {
     const response = await graphql(
       AddAnalysisStep,
       { input: { projectId: toGlobalId('Project', 'projectWithOwner') } },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('orga member should be able to add analysis step.', async () => {
     const response = await graphql(
       AddAnalysisStep,
       { input: { projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') } },
       'internal_christophe',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

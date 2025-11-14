@@ -43,7 +43,7 @@ const ProjectAdminAnalysisTabQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.ProjectAdminAnalysisTab', () => {
   it('fetches proposals assigned to specific analysts, supervisor, decisionMaker', async () => {
@@ -58,12 +58,12 @@ describe('Internal|Query.ProjectAdminAnalysisTab', () => {
           analysts: [toGlobalId('User', 'userMaxime'), toGlobalId('User', 'userAgui')],
           supervisor: toGlobalId('User', 'userSpyl'),
           decisionMaker: toGlobalId('User', 'userMaximeQA'),
-          progressStatus: 'TODO'
+          progressStatus: 'TODO',
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches proposals with progressStatus filter "en cours"', async () => {
     await expect(
@@ -77,12 +77,12 @@ describe('Internal|Query.ProjectAdminAnalysisTab', () => {
           analysts: null,
           supervisor: null,
           decisionMaker: null,
-          progressStatus: 'IN_PROGRESS'
+          progressStatus: 'IN_PROGRESS',
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches proposals assigned to specific analysts, supervisor, decisionMaker and with progressStatus filter "en cours"', async () => {
     await expect(
@@ -96,10 +96,10 @@ describe('Internal|Query.ProjectAdminAnalysisTab', () => {
           analysts: [toGlobalId('User', 'userMaxime'), toGlobalId('User', 'userTheo')],
           supervisor: toGlobalId('User', 'userSpyl'),
           decisionMaker: toGlobalId('User', 'userMaximeQA'),
-          progressStatus: 'IN_PROGRESS'
+          progressStatus: 'IN_PROGRESS',
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

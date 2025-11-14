@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateAnonymousReplyMutation = /* GraphQL*/ `
     mutation UpdateAnonymousReplyMutation($input: UpdateAnonymousReplyInput!) {
@@ -15,7 +15,7 @@ const UpdateAnonymousReplyMutation = /* GraphQL*/ `
             }
         }
     }
-`;
+`
 
 const input = {
   replyId: toGlobalId('Reply', 'replyAnonymous1'),
@@ -26,7 +26,7 @@ const input = {
       question: 'UXVlc3Rpb246MTQwMw==',
     },
   ],
-};
+}
 
 describe('mutations.updateAnonymousReply', () => {
   it('should update an anonymous reply', async () => {
@@ -36,10 +36,10 @@ describe('mutations.updateAnonymousReply', () => {
         input,
       },
       'internal',
-    );
+    )
 
-    expect(response).toMatchSnapshot();
-  });
+    expect(response).toMatchSnapshot()
+  })
 
   it('should throw an error when participant token is not found', async () => {
     await expect(
@@ -53,6 +53,6 @@ describe('mutations.updateAnonymousReply', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Given token does not match corresponding Participant');
-  });
-});
+    ).rejects.toThrowError('Given token does not match corresponding Participant')
+  })
+})

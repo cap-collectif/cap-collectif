@@ -52,7 +52,7 @@ const OpenDataRepliesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const AllRepliesQuery = /* GraphQL */ `
   query AllRepliesQuery(
@@ -64,12 +64,7 @@ const AllRepliesQuery = /* GraphQL */ `
   ) {
     node(id: $id) {
       ... on Questionnaire {
-        replies(
-          first: $count
-          after: $cursor
-          includeDraft: $includeDraft
-          includeUnpublished: $includeUnpublished
-        ) {
+        replies(first: $count, after: $cursor, includeDraft: $includeDraft, includeUnpublished: $includeUnpublished) {
           totalCount
           pageInfo {
             hasNextPage
@@ -89,7 +84,7 @@ const AllRepliesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const AllRepliesCountersQuery = /* GraphQL */ `
   query AllRepliesCountersQuery($id: ID!) {
@@ -101,11 +96,7 @@ const AllRepliesCountersQuery = /* GraphQL */ `
         publishedAndDraftReplies: replies(first: 0, includeDraft: true, includeUnpublished: false) {
           totalCount
         }
-        publishedAndUnpublishedReplies: replies(
-          first: 0
-          includeDraft: false
-          includeUnpublished: true
-        ) {
+        publishedAndUnpublishedReplies: replies(first: 0, includeDraft: false, includeUnpublished: true) {
           totalCount
         }
         publishedReplies: replies(first: 0) {
@@ -114,7 +105,7 @@ const AllRepliesCountersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Questionnaire.replies connection', () => {
   it('fetches the first hundred published replies with a cursor', async () => {
@@ -123,8 +114,8 @@ describe('Preview|Questionnaire.replies connection', () => {
         id: toGlobalId('Questionnaire', 'questionnaire1'),
         count: 100,
       }),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the first hundred replies including draft and unpublished with a cursor as an admin', async () => {
     await expect(
@@ -138,8 +129,8 @@ describe('Preview|Questionnaire.replies connection', () => {
         },
         'admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches all replies counters as an admin', async () => {
     await expect(
@@ -150,8 +141,8 @@ describe('Preview|Questionnaire.replies connection', () => {
         },
         'admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches published counters only as anonymous', async () => {
     await expect(
@@ -162,6 +153,6 @@ describe('Preview|Questionnaire.replies connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

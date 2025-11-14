@@ -18,7 +18,7 @@ const SupervisedProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.supervisedProposals', () => {
   it("fetches user's supervised proposals when authenticated as supervisor.", async () => {
@@ -30,8 +30,8 @@ describe('User.supervisedProposals', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("does not fetches user's supervised proposals when authenticated as user", async () => {
     await expect(
@@ -42,9 +42,9 @@ describe('User.supervisedProposals', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})
 
 const ProposalSupervisorRelatedQuery = /* GraphQL */ `
   query ProposalSupervisorRelatedQuery($id: ID!) {
@@ -65,7 +65,7 @@ const ProposalSupervisorRelatedQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Proposal.supervisor|assessment|viewerCanEvaluate', () => {
   it("fetches proposal's supervisor|assessment|viewerCanEvaluate authenticated as supervisor", async () => {
@@ -77,8 +77,8 @@ describe('Proposal.supervisor|assessment|viewerCanEvaluate', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches proposal's supervisor|assessment|viewerCanEvaluate authenticated as user.", async () => {
     await expect(
@@ -89,6 +89,6 @@ describe('Proposal.supervisor|assessment|viewerCanEvaluate', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

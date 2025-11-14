@@ -16,7 +16,7 @@ const ProposalCategoryPreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.Proposal_category', () => {
   it('fetches category related to a proposal', async () => {
@@ -28,6 +28,6 @@ describe('Preview.Proposal_category', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

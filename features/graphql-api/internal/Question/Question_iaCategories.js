@@ -9,7 +9,7 @@ const QuestionIaCategoriesQuery = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Question.iaCategories', () => {
   it('fail to get iaCategories if not admin', async () => {
@@ -22,8 +22,8 @@ describe('Internal|Question.iaCategories', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get iaCategories', async () => {
     await expect(
       graphql(
@@ -34,8 +34,8 @@ describe('Internal|Question.iaCategories', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get 2 most used iaCategories', async () => {
     await expect(
       graphql(
@@ -46,6 +46,6 @@ describe('Internal|Question.iaCategories', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

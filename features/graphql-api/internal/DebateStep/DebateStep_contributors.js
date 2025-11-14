@@ -21,7 +21,7 @@ const DebateStepContributorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.contributors connection', () => {
   it('fetches debate step contributors', async () => {
@@ -35,8 +35,8 @@ describe('Internal|Debate.contributors connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches debate step contributors with cursor', async () => {
     await expect(
       graphql(
@@ -48,6 +48,6 @@ describe('Internal|Debate.contributors connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

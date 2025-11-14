@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteDebateAnonymousArgumentMutation = /* GraphQL */ `
   mutation DeleteDebateAnonymousArgumentMutation($input: DeleteDebateAnonymousArgumentInput!) {
@@ -11,12 +11,12 @@ const DeleteDebateAnonymousArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|DeleteDebateAnonymousArgument mutation', () => {
   it('should successfully delete an existing anonymous argument when the given hash is valid.', async () => {
     // FOR / jesuisletokendudebateanonymousargumentfor1
-    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ=='
     const response = await graphql(
       DeleteDebateAnonymousArgumentMutation,
       {
@@ -26,9 +26,9 @@ describe('Internal|DeleteDebateAnonymousArgument mutation', () => {
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when the given hash is valid.', async () => {
     const response = await graphql(
       DeleteDebateAnonymousArgumentMutation,
@@ -39,7 +39,7 @@ describe('Internal|DeleteDebateAnonymousArgument mutation', () => {
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

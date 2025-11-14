@@ -3,7 +3,7 @@ const CollectStepRequirementsParticipantsQuery = /* GraphQL */ `
   query CollectStepRequirementsParticipantsQuery($id: ID!, $token: String!) {
     node(id: $id) {
       id
-      ...on CollectStep {
+      ... on CollectStep {
         id
         title
         requirements {
@@ -11,16 +11,16 @@ const CollectStepRequirementsParticipantsQuery = /* GraphQL */ `
             node {
               __typename
               participantMeetsTheRequirement(token: $token)
-              ...on FirstnameRequirement {
+              ... on FirstnameRequirement {
                 participantValue(token: $token)
               }
-              ...on LastnameRequirement {
+              ... on LastnameRequirement {
                 participantValue(token: $token)
               }
-              ...on PhoneRequirement {
+              ... on PhoneRequirement {
                 participantValue(token: $token)
               }
-              ...on DateOfBirthRequirement {
+              ... on DateOfBirthRequirement {
                 participantDateOfBirth(token: $token)
               }
             }
@@ -29,7 +29,7 @@ const CollectStepRequirementsParticipantsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|CollectStep.requirements connection', () => {
   it('fetches requirements for a participant', async () => {
@@ -37,13 +37,11 @@ describe('Internal|CollectStep.requirements connection', () => {
       graphql(
         CollectStepRequirementsParticipantsQuery,
         {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
-          "token": "fakeToken1"
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==',
+          token: 'fakeToken1',
         },
-        'internal'
+        'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
-
-
+    ).resolves.toMatchSnapshot()
+  })
+})

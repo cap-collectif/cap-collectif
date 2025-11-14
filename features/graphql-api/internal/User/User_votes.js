@@ -76,7 +76,7 @@ const UserVotesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UserVotesMinQuery = /* GraphQL */ `
   query UserVotesMinQuery($id: ID!, $onlyAccounted: Boolean!) {
@@ -94,7 +94,7 @@ const UserVotesMinQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.votes connection', () => {
   it("fetches a user's votes as super admin.", async () => {
@@ -109,10 +109,10 @@ describe('User.votes connection', () => {
             },
             'internal_super_admin',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's public votes as anonymous.", async () => {
     await Promise.all(
@@ -126,10 +126,10 @@ describe('User.votes connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it("fetches a user's public votes as admin.", async () => {
     await Promise.all(
@@ -144,10 +144,10 @@ describe('User.votes connection', () => {
             },
             'internal_admin',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it('fetches a users public votes as author.', async () => {
     await Promise.all(
@@ -162,10 +162,10 @@ describe('User.votes connection', () => {
             },
             'internal_saitama',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
+    )
+  })
 
   it('fetches user votes on a specific project', async () => {
     await expect(
@@ -178,8 +178,8 @@ describe('User.votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches user votes on specific step', async () => {
     await expect(
@@ -192,8 +192,8 @@ describe('User.votes connection', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches user votes including some not accounted', async () => {
     await expect(
@@ -205,8 +205,8 @@ describe('User.votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches user votes accounted', async () => {
     await expect(
@@ -218,6 +218,6 @@ describe('User.votes connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

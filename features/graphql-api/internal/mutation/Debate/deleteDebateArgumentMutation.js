@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteDebateArgumentMutation = /* GraphQL */ `
   mutation DeleteDebateArgumentMutation($input: DeleteDebateArgumentInput!) {
@@ -8,7 +8,7 @@ const DeleteDebateArgumentMutation = /* GraphQL */ `
       deletedDebateArgumentId
     }
   }
-`;
+`
 
 describe('Internal|DeleteDebateArgument', () => {
   it('try to delete argument with wrong id', async () => {
@@ -22,8 +22,8 @@ describe('Internal|DeleteDebateArgument', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('try to delete argument of someone else', async () => {
     await expect(
       graphql(
@@ -35,8 +35,8 @@ describe('Internal|DeleteDebateArgument', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('delete argument', async () => {
     await expect(
       graphql(
@@ -48,8 +48,8 @@ describe('Internal|DeleteDebateArgument', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('admin delete argument of someone else', async () => {
     await expect(
       graphql(
@@ -61,6 +61,6 @@ describe('Internal|DeleteDebateArgument', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

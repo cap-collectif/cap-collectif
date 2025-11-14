@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteAnonymousReplyMutation = /* GraphQL*/ `
     mutation DeleteAnonymousReplyMutation($input: DeleteAnonymousReplyInput!) {
@@ -10,7 +10,7 @@ const DeleteAnonymousReplyMutation = /* GraphQL*/ `
             replyId
         }
     }
-`;
+`
 
 describe('mutations.deleteAnonymousReply', () => {
   it('should throw an error when participant token is not found', async () => {
@@ -25,8 +25,8 @@ describe('mutations.deleteAnonymousReply', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Given token does not match corresponding Participant');
-  });
+    ).rejects.toThrowError('Given token does not match corresponding Participant')
+  })
 
   it('should delete an anonymous reply', async () => {
     const response = await graphql(
@@ -38,8 +38,8 @@ describe('mutations.deleteAnonymousReply', () => {
         },
       },
       'internal',
-    );
+    )
 
-    expect(response).toMatchSnapshot();
-  });
-});
+    expect(response).toMatchSnapshot()
+  })
+})

@@ -15,14 +15,14 @@ const ProjectQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variables = {
   count: 16,
   cursor: null,
   archived: null,
   status: null,
-};
+}
 
 const ProjectSearchQuery = /* GraphQL */ `
   query ProjectQuery($term: String) {
@@ -34,11 +34,11 @@ const ProjectSearchQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variablesSearchByProjectTitle = {
   term: 'proposition',
-};
+}
 
 const ProjectSearchByCreatorUsernameQuery = /* GraphQL */ `
   query ProjectQuery($term: String) {
@@ -55,11 +55,11 @@ const ProjectSearchByCreatorUsernameQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variablesByProjectCreatorUsername = {
   term: 'welcomattic',
-};
+}
 
 const ProjectSearchByOwnerUsernameQuery = /* GraphQL */ `
   query ProjectQuery($term: String) {
@@ -76,16 +76,16 @@ const ProjectSearchByOwnerUsernameQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const variablesByProjectOwnerUsername = {
   term: 'GIEC',
-};
+}
 
 describe('Internal|Query projects', () => {
   it('fetches all projects', async () => {
-    await expect(graphql(ProjectQuery, variables, 'internal_admin')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(ProjectQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
+  })
 
   it('fetches archived projects', async () => {
     await expect(
@@ -97,8 +97,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches non archived projects', async () => {
     await expect(
@@ -110,8 +110,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches opened projects', async () => {
     await expect(
@@ -123,8 +123,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches opened participation projects', async () => {
     await expect(
@@ -136,8 +136,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches closed projects', async () => {
     await expect(
@@ -149,8 +149,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('search by project title', async () => {
     await expect(
@@ -162,8 +162,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('search by project creator username', async () => {
     await expect(
@@ -175,8 +175,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('search by project owner username', async () => {
     await expect(
@@ -188,8 +188,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('search by project organization creator username', async () => {
     await expect(
@@ -201,8 +201,8 @@ describe('Internal|Query projects', () => {
         },
         'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('search by project organization owner username', async () => {
     await expect(
@@ -214,6 +214,6 @@ describe('Internal|Query projects', () => {
         },
         'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

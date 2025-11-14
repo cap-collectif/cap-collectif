@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateProposalSocialNetworksMutation = /* GraphQL */ `
   mutation UpdateProposalSocialNetworksMutation($input: UpdateProposalSocialNetworksInput!) {
@@ -12,7 +12,7 @@ const UpdateProposalSocialNetworksMutation = /* GraphQL */ `
       errorCode
     }
   }
-`;
+`
 
 describe('Internal | Update proposal social networks without sn', () => {
   it('update proposal sn', async () => {
@@ -25,9 +25,9 @@ describe('Internal | Update proposal social networks without sn', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateProposalSocialNetwork).toMatchSnapshot();
-  });
+    )
+    expect(updateProposalSocialNetwork).toMatchSnapshot()
+  })
 
   it('Update proposal social networks with existing sn', async () => {
     const updateProposalWithSocialNetwork = await graphql(
@@ -39,9 +39,9 @@ describe('Internal | Update proposal social networks without sn', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateProposalWithSocialNetwork).toMatchSnapshot();
-  });
+    )
+    expect(updateProposalWithSocialNetwork).toMatchSnapshot()
+  })
   it('remove twitter url on proposal social networks with existing sn', async () => {
     const updateProposalWithSocialNetwork = await graphql(
       UpdateProposalSocialNetworksMutation,
@@ -52,7 +52,7 @@ describe('Internal | Update proposal social networks without sn', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateProposalWithSocialNetwork).toMatchSnapshot();
-  });
-});
+    )
+    expect(updateProposalWithSocialNetwork).toMatchSnapshot()
+  })
+})

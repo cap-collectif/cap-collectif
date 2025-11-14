@@ -1,4 +1,4 @@
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateUserTypeMutation = /* GraphQL */ `
   mutation CreateUserTypesMutation($input: CreateUserTypeInput!) {
@@ -12,7 +12,7 @@ const CreateUserTypeMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UserTypesQuery = /* GraphQL */ `
   query {
@@ -28,7 +28,7 @@ const UserTypesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const creationSnapshotPattern = {
   createUserType: {
@@ -36,19 +36,19 @@ const creationSnapshotPattern = {
       id: expect.any(String),
     },
   },
-};
+}
 
 const queryObjectPattern = {
   userTypes: {
     edges: expect.any(Array),
   },
-};
+}
 
 describe('mutations.createUserType', () => {
   it('creates a new user type', async () => {
-    const before = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(before).toMatchObject(queryObjectPattern);
-    const beforeCount = before.userTypes.edges.length;
+    const before = await graphql(UserTypesQuery, null, 'internal_admin')
+    expect(before).toMatchObject(queryObjectPattern)
+    const beforeCount = before.userTypes.edges.length
 
     const result = await graphql(
       CreateUserTypeMutation,
@@ -67,22 +67,20 @@ describe('mutations.createUserType', () => {
         },
       },
       'internal_admin',
-    );
-    expect(result).toMatchSnapshot(creationSnapshotPattern);
+    )
+    expect(result).toMatchSnapshot(creationSnapshotPattern)
 
-    const after = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(after).toMatchObject(queryObjectPattern);
-    expect(after.userTypes.edges).toHaveLength(beforeCount + 1);
-    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(
-      true,
-    );
-  });
+    const after = await graphql(UserTypesQuery, null, 'internal_admin')
+    expect(after).toMatchObject(queryObjectPattern)
+    expect(after.userTypes.edges).toHaveLength(beforeCount + 1)
+    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(true)
+  })
 
   // the user-type-nonprofit should be in the fixtures
   it('creates a new user type with a media', async () => {
-    const before = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(before).toMatchObject(queryObjectPattern);
-    const beforeCount = before.userTypes.edges.length;
+    const before = await graphql(UserTypesQuery, null, 'internal_admin')
+    expect(before).toMatchObject(queryObjectPattern)
+    const beforeCount = before.userTypes.edges.length
 
     const result = await graphql(
       CreateUserTypeMutation,
@@ -98,16 +96,14 @@ describe('mutations.createUserType', () => {
         },
       },
       'internal_admin',
-    );
-    expect(result).toMatchSnapshot(creationSnapshotPattern);
+    )
+    expect(result).toMatchSnapshot(creationSnapshotPattern)
 
-    const after = await graphql(UserTypesQuery, null, 'internal_admin');
-    expect(after).toMatchObject(queryObjectPattern);
-    expect(after.userTypes.edges).toHaveLength(beforeCount + 1);
-    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(
-      true,
-    );
-  });
+    const after = await graphql(UserTypesQuery, null, 'internal_admin')
+    expect(after).toMatchObject(queryObjectPattern)
+    expect(after.userTypes.edges).toHaveLength(beforeCount + 1)
+    expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(true)
+  })
 
   it('creates a new user type with a non-existing media', async () => {
     await expect(
@@ -126,8 +122,8 @@ describe('mutations.createUserType', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('This value is not valid.');
-  });
+    ).rejects.toThrowError('This value is not valid.')
+  })
 
   it('tries to create a user type as a basic user', async () => {
     await expect(
@@ -145,8 +141,8 @@ describe('mutations.createUserType', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('tries to create a user type while being unauthenticated', async () => {
     await expect(
@@ -164,6 +160,6 @@ describe('mutations.createUserType', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

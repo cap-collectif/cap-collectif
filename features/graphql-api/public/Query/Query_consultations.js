@@ -14,10 +14,10 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.consultations', () => {
   it('fetches all consultations', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+  })
+})

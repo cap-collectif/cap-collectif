@@ -1,9 +1,7 @@
-import '../../_setup';
+import '../../_setup'
 
 const UpdateProposalVotesWithoutVotesMutation = /* GraphQL */ `
-  mutation UpdateProposalVotesMutation(
-    $input: UpdateProposalVotesInput!
-  ) {
+  mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {
     updateProposalVotes(input: $input) {
       step {
         id
@@ -14,12 +12,11 @@ const UpdateProposalVotesWithoutVotesMutation = /* GraphQL */ `
         }
       }
     }
-  }`;
+  }
+`
 
 const UpdateProposalVotesWithVotesMutation = /* GraphQL */ `
-  mutation UpdateProposalVotesMutation(
-    $input: UpdateProposalVotesInput!
-  ) {
+  mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {
     updateProposalVotes(input: $input) {
       step {
         id
@@ -29,7 +26,7 @@ const UpdateProposalVotesWithVotesMutation = /* GraphQL */ `
             edges {
               node {
                 id
-                ...on ProposalVote {
+                ... on ProposalVote {
                   anonymous
                 }
               }
@@ -38,13 +35,11 @@ const UpdateProposalVotesWithVotesMutation = /* GraphQL */ `
         }
       }
     }
-  }`;
+  }
+`
 
 const UpdateProposalVotesWithVotesOrderedMutation = /* GraphQL */ `
-  mutation UpdateProposalVotesMutation(
-    $input: UpdateProposalVotesInput!
-    $stepId: ID!
-    $isAuthenticated: Boolean!) {
+  mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!, $stepId: ID!, $isAuthenticated: Boolean!) {
     updateProposalVotes(input: $input) {
       step {
         id
@@ -63,7 +58,8 @@ const UpdateProposalVotesWithVotesOrderedMutation = /* GraphQL */ `
         }
       }
     }
-  }`;
+  }
+`
 
 const UpdateProposalVotesWithVotesOrderedOnQuestionMutation = /* GraphQL */ `
   mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {
@@ -82,64 +78,59 @@ const UpdateProposalVotesWithVotesOrderedOnQuestionMutation = /* GraphQL */ `
         }
       }
     }
-  }`;
+  }
+`
 
 const inputVotesEmpty = {
-  "step": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
-  "votes": []
+  step: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==',
+  votes: [],
 }
 
 const inputWithAnonymousVote = {
-  "step": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
-  "votes": [
-    { "id": "1053", "anonymous": true }
-  ]
+  step: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==',
+  votes: [{ id: '1053', anonymous: true }],
 }
 
 const inputWithVotes = {
-  "step": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
-  "votes": [
+  step: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==',
+  votes: [
     {
-      "id": "2052",
-      "anonymous": false
+      id: '2052',
+      anonymous: false,
     },
     {
-      "id": "2053",
-      "anonymous": false
+      id: '2053',
+      anonymous: false,
     },
     {
-      "id": "2051",
-      "anonymous": false
-    }
-  ]
+      id: '2051',
+      anonymous: false,
+    },
+  ],
 }
 
-const stepId = "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA=="
+const stepId = 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA=='
 
 const isAuthenticated = true
 
 const inputWithAnonymousVotes = {
-  "step": "Q29sbGVjdFN0ZXA6Y29sbGVjdFF1ZXN0aW9uVm90ZUF2ZWNDbGFzc2VtZW50",
-  "votes": [
-    { "id": "2054", "anonymous": false },
-    { "id": "2055", "anonymous": false }
-  ]
+  step: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFF1ZXN0aW9uVm90ZUF2ZWNDbGFzc2VtZW50',
+  votes: [
+    { id: '2054', anonymous: false },
+    { id: '2055', anonymous: false },
+  ],
 }
 
 describe('mutations.updateProposalVotesMutation', () => {
   const user = {
     email: 'user@test.com',
     password: 'user',
-  };
+  }
   it('wants to delete everything as user anonymous votes included', async () => {
     await expect(
-      graphql(
-        UpdateProposalVotesWithVotesMutation,
-        { input: inputWithAnonymousVote },
-        user,
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      graphql(UpdateProposalVotesWithVotesMutation, { input: inputWithAnonymousVote }, user),
+    ).resolves.toMatchSnapshot()
+  })
   it('wants to reorder his votes as user', async () => {
     await expect(
       graphql(
@@ -147,30 +138,26 @@ describe('mutations.updateProposalVotesMutation', () => {
         {
           input: inputWithVotes,
           stepId: stepId,
-          isAuthenticated: isAuthenticated
+          isAuthenticated: isAuthenticated,
         },
         user,
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
   it('wants to reorder votes on question as user', async () => {
     await expect(
       graphql(
         UpdateProposalVotesWithVotesOrderedOnQuestionMutation,
         {
-          input: inputWithAnonymousVotes
+          input: inputWithAnonymousVotes,
         },
         user,
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
   it('wants to delete everything as user', async () => {
     await expect(
-      graphql(
-        UpdateProposalVotesWithoutVotesMutation,
-        { input: inputVotesEmpty },
-        user,
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      graphql(UpdateProposalVotesWithoutVotesMutation, { input: inputVotesEmpty }, user),
+    ).resolves.toMatchSnapshot()
+  })
 })

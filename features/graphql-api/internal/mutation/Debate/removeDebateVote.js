@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const RemoveDebateVoteMutation = /* GraphQL */ `
   mutation RemoveDebateVoteMutation($input: RemoveDebateVoteInput!) {
@@ -28,7 +28,7 @@ const RemoveDebateVoteMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|RemoveDebateVote mutation', () => {
   it('Remove a debate vote.', async () => {
@@ -40,9 +40,9 @@ describe('Internal|RemoveDebateVote mutation', () => {
         },
       },
       'internal_spylou',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('Throw unknown debate.', async () => {
     const response = await graphql(
       RemoveDebateVoteMutation,
@@ -52,9 +52,9 @@ describe('Internal|RemoveDebateVote mutation', () => {
         },
       },
       'internal_spylou',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('Throw no vote found.', async () => {
     const response = await graphql(
       RemoveDebateVoteMutation,
@@ -64,9 +64,9 @@ describe('Internal|RemoveDebateVote mutation', () => {
         },
       },
       'internal_user',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('Throw closed debate.', async () => {
     const response = await graphql(
       RemoveDebateVoteMutation,
@@ -76,7 +76,7 @@ describe('Internal|RemoveDebateVote mutation', () => {
         },
       },
       'internal_spylou',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

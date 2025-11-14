@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdateQuestionnaireNotificationConfigurationMutation = /* GraphQL */ `
   mutation UpdateQuestionnaireNotificationConfigurationMutation(
@@ -17,7 +17,7 @@ const UpdateQuestionnaireNotificationConfigurationMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () => {
   it('should update correctly', async () => {
@@ -35,8 +35,8 @@ describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () =>
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should throw an access denied if a project admin user attempt to update a questionnaire notification configuration that he does not own', async () => {
     await expect(
@@ -53,8 +53,8 @@ describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () =>
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('should throw an access denied when questionnaire does not exist', async () => {
     await expect(
@@ -71,6 +71,6 @@ describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () =>
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdateQuestionnaireChoicesMutation = /* GraphQL */ `
   mutation UpdateQuestionnaireConfiguration($input: UpdateQuestionnaireConfigurationInput!) {
@@ -21,7 +21,7 @@ const UpdateQuestionnaireChoicesMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UpdateQuestionnaireMutation = /* GraphQL */ `
   mutation UpdateQuestionnaireMutation($input: UpdateQuestionnaireConfigurationInput!) {
@@ -36,19 +36,19 @@ const UpdateQuestionnaireMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|updateQuestionnaireConfiguration mutation', () => {
   it('Add over 1000 choices and some duplicates choices', async () => {
-    const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=';
-    const generatedChoices = [];
+    const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA='
+    const generatedChoices = []
     for (var i = 0; i < 1000; i++) {
       generatedChoices.push({
         color: null,
         description: null,
         image: null,
         title: 'mon choix ' + i,
-      });
+      })
     }
     const response = await graphql(
       UpdateQuestionnaireChoicesMutation,
@@ -73,7 +73,7 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(response).toMatchSnapshot({
       updateQuestionnaireConfiguration: {
@@ -92,19 +92,19 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
           isIndexationDone: true,
         },
       },
-    });
-  });
+    })
+  })
 
   it('Add over 1500 choices and some duplicates choices', async () => {
-    const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQWRtaW4=';
-    const generatedChoices = [];
+    const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQWRtaW4='
+    const generatedChoices = []
     for (var i = 0; i < 1600; i++) {
       generatedChoices.push({
         color: null,
         description: null,
         image: null,
         title: 'mon choix ' + i,
-      });
+      })
     }
     const response = await graphql(
       UpdateQuestionnaireChoicesMutation,
@@ -128,11 +128,9 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(
-      response.updateQuestionnaireConfiguration.questionnaire.questions[0].choices.totalCount,
-    ).toBe(0);
+    expect(response.updateQuestionnaireConfiguration.questionnaire.questions[0].choices.totalCount).toBe(0)
     expect(response).toMatchSnapshot({
       updateQuestionnaireConfiguration: {
         questionnaire: {
@@ -140,8 +138,8 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
           questions: [{ choices: { edges: [], totalCount: 0 } }],
         },
       },
-    });
-  });
+    })
+  })
 
   it('should update correctly', async () => {
     const response = await graphql(
@@ -154,12 +152,12 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.updateQuestionnaireConfiguration.questionnaire.title).toBe('test');
-    expect(response.updateQuestionnaireConfiguration.questionnaire.description).toBe('<p>abc</p>');
-    expect(response.updateQuestionnaireConfiguration.questionnaire.owner).toBe(null);
-  });
+    expect(response.updateQuestionnaireConfiguration.questionnaire.title).toBe('test')
+    expect(response.updateQuestionnaireConfiguration.questionnaire.description).toBe('<p>abc</p>')
+    expect(response.updateQuestionnaireConfiguration.questionnaire.owner).toBe(null)
+  })
 
   it('should throw an access denied if a project admin user attempt to update a questionnaire that he does not own', async () => {
     await expect(
@@ -173,8 +171,8 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('should throw an access denied when questionnaire does not exist', async () => {
     await expect(
@@ -188,6 +186,6 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

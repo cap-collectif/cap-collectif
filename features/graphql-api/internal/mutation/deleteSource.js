@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const DeleteSource = /* GraphQL*/ `
   mutation DeleteSource($input: DeleteSourceInput!) {
@@ -7,11 +7,11 @@ const DeleteSource = /* GraphQL*/ `
       deletedSourceId
     }
   }
-`;
+`
 
 const input = {
-  sourceId: toGlobalId('Source', 'source6') //U291cmNlOnNvdXJjZTY=
-};
+  sourceId: toGlobalId('Source', 'source6'), //U291cmNlOnNvdXJjZTY=
+}
 
 describe('mutations.deleteSource', () => {
   it('should delete a Source as an admin', async () => {
@@ -21,7 +21,7 @@ describe('mutations.deleteSource', () => {
         input,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 })

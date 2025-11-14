@@ -30,15 +30,10 @@ const ProjectsPublicQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectsInternalQuery = /* GraphQL */ `
-  query ProjectsInternalQuery(
-    $count: Int!
-    $cursor: String
-    $orderBy: ProjectOrder
-    $term: String
-  ) {
+  query ProjectsInternalQuery($count: Int!, $cursor: String, $orderBy: ProjectOrder, $term: String) {
     projects(first: $count, after: $cursor, term: $term, orderBy: $orderBy) {
       totalCount
       pageInfo {
@@ -59,7 +54,7 @@ const ProjectsInternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectsThemeQuery = /* GraphQL */ `
   query ProjectsThemeQuery($count: Int!, $cursor: String, $theme: ID) {
@@ -75,7 +70,7 @@ const ProjectsThemeQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectsTypeQuery = /* GraphQL */ `
   query ProjectsTypeQuery($count: Int!, $cursor: String, $type: ID) {
@@ -91,7 +86,7 @@ const ProjectsTypeQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectsAuthorsQuery = /* GraphQL */ `
   query ProjectsAuthorsQuery($count: Int!, $cursor: String, $authorId: ID!) {
@@ -107,7 +102,7 @@ const ProjectsAuthorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectsDistrictsQuery = /* GraphQL */ `
   query ProjectsDistrictsQuery($count: Int!, $cursor: String, $districtId: ID!) {
@@ -129,7 +124,7 @@ const ProjectsDistrictsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Query.projects connection', () => {
   it('fetches the public projects with a cursor', async () => {
@@ -138,8 +133,8 @@ describe('Preview|Query.projects connection', () => {
         count: 5,
         cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
       }),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public and private projects with a cursor', async () => {
     await expect(
@@ -151,8 +146,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects ordered by latest', async () => {
     await expect(
@@ -164,8 +159,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects with a specific theme', async () => {
     await expect(
@@ -177,8 +172,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects with a specific author', async () => {
     await expect(
@@ -190,8 +185,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects with a specific district', async () => {
     await expect(
@@ -203,8 +198,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects with a specific type', async () => {
     await expect(
@@ -216,8 +211,8 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the public projects containing a specific term', async () => {
     await expect(
@@ -229,6 +224,6 @@ describe('Preview|Query.projects connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

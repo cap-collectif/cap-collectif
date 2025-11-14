@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const TrashMutation = /* GraphQL */ `
   mutation TrashMutation($input: TrashInput!) {
@@ -12,7 +12,7 @@ const TrashMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Trash', () => {
   it('try to trash non trashable entity', async () => {
@@ -28,8 +28,8 @@ describe('Internal|Trash', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('trash argument', async () => {
     await expect(
       graphql(
@@ -43,6 +43,6 @@ describe('Internal|Trash', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -52,7 +52,7 @@ const UserArgumentsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UserArgumentPaginationAfterQuery = /* GraphQL */ `
   query UserArgumentPaginationQuery($count: Int!, $cursor: String) {
@@ -71,7 +71,7 @@ const UserArgumentPaginationAfterQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('User.arguments connection', () => {
   it("fetches a user's arguments", async () => {
@@ -86,11 +86,11 @@ describe('User.arguments connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})
 
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly after a user's arguments", async () => {
@@ -108,8 +108,8 @@ describe('User.arguments connection pagination', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot('user1:after:' + cursor);
+        ).resolves.toMatchSnapshot('user1:after:' + cursor)
       }),
-    );
-  });
-});
+    )
+  })
+})

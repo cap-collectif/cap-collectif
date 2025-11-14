@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const UpdateDebateOpinionMutation = /* GraphQL */ `
   mutation UpdateDebateOpinionMutation($input: UpdateDebateOpinionInput!) {
@@ -19,7 +19,7 @@ const UpdateDebateOpinionMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|UpdateDebateOpinion mutation', () => {
   it('Update a debate opinion.', async () => {
@@ -35,10 +35,10 @@ describe('Internal|UpdateDebateOpinion mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response).toMatchSnapshot();
-  });
+    expect(response).toMatchSnapshot()
+  })
 
   it('Update partially a debate opinion.', async () => {
     const response = await graphql(
@@ -50,8 +50,8 @@ describe('Internal|UpdateDebateOpinion mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response).toMatchSnapshot();
-  });
-});
+    expect(response).toMatchSnapshot()
+  })
+})

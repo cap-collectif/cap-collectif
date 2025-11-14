@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateDebateArgumentMutation = /* GraphQL */ `
   mutation UpdateDebateArgumentMutation($input: UpdateDebateArgumentInput!) {
@@ -17,7 +17,7 @@ const UpdateDebateArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|UpdateDebateArgument', () => {
   it('try to update argument with wrong argument id', async () => {
@@ -32,8 +32,8 @@ describe('Internal|UpdateDebateArgument', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('update argument', async () => {
     await expect(
       graphql(
@@ -46,6 +46,6 @@ describe('Internal|UpdateDebateArgument', () => {
         },
         'internal_theo',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

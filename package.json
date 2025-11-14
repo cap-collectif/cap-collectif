@@ -37,7 +37,7 @@
         "lint": "eslint --cache --fix --report-unused-disable-directives frontend/js --ext .ts --ext .tsx",
         "bundlesize": "bundlewatch",
         "bundlewatch": "bundlewatch",
-        "prettier:js": "prettier --parser flow --no-error-on-unmatched-pattern --write '{features/graphql-api,frontend/js}/**/*.js'",
+        "prettier:js": "prettier --parser typescript --no-error-on-unmatched-pattern --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:ts": "prettier --parser typescript --no-error-on-unmatched-pattern --write 'admin-next/**/*.{ts,tsx}'",
         "prettier:yaml": "prettier --parser yaml --no-error-on-unmatched-pattern --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js && yarn run prettier:ts && yarn run prettier:yaml",

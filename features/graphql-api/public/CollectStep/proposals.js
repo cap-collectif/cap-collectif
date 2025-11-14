@@ -59,7 +59,7 @@ const OpenDataProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProposalsWithDraftQuery = /* GraphQL */ `
   query OpenDataProposalsQuery(
@@ -98,7 +98,7 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Query.proposals connection', () => {
   it('fetches the first hundred proposals with a cursor', async () => {
@@ -112,8 +112,8 @@ describe('Preview|Query.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the first hundred proposals (including drafted) with a cursor', async () => {
     await expect(
@@ -127,6 +127,6 @@ describe('Preview|Query.proposals connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

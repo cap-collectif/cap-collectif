@@ -7,7 +7,7 @@ const DebateViewerHasArgumentQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.viewerHasArgument bool', () => {
   it('fetches if viewer has given an argument', async () => {
@@ -19,8 +19,8 @@ describe('Internal|Debate.viewerHasArgument bool', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches if viewer has given an argument', async () => {
     await expect(
@@ -31,6 +31,6 @@ describe('Internal|Debate.viewerHasArgument bool', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

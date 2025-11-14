@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateDebateArgumentMutation = /* GraphQL */ `
   mutation CreateDebateArgumentMutation($input: CreateDebateArgumentInput!) {
@@ -20,7 +20,7 @@ const CreateDebateArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|CreateDebateArgument', () => {
   it('try to create argument with wrong debate id', async () => {
@@ -36,8 +36,8 @@ describe('Internal|CreateDebateArgument', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('create argument', async () => {
     await expect(
@@ -52,8 +52,8 @@ describe('Internal|CreateDebateArgument', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('try to create argument but already done', async () => {
     await expect(
@@ -68,6 +68,6 @@ describe('Internal|CreateDebateArgument', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddSmsCreditMutation = /* GraphQL*/ `
     mutation AddSmsCreditMutation($input: AddSmsCreditInput!) {
@@ -11,9 +11,9 @@ const AddSmsCreditMutation = /* GraphQL*/ `
         errorCode
       }
     }
-`;
+`
 
-const input = {amount: 5000, smsOrder: "U21zT3JkZXI6c21zT3JkZXIy"};
+const input = { amount: 5000, smsOrder: 'U21zT3JkZXI6c21zT3JkZXIy' }
 
 describe('mutations.addSmsCredit', () => {
   it('should create an sms credit', async () => {
@@ -28,11 +28,11 @@ describe('mutations.addSmsCredit', () => {
     ).resolves.toMatchSnapshot({
       addSmsCredit: {
         smsCredit: {
-          id: expect.any(String)
-        }
-      }
-    });
-  });
+          id: expect.any(String),
+        },
+      },
+    })
+  })
   it('should return ORDER_ALREADY_PROCESSED errorCode', async () => {
     await expect(
       graphql(
@@ -42,6 +42,6 @@ describe('mutations.addSmsCredit', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

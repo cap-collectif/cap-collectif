@@ -13,10 +13,10 @@ const PagesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.pages array', () => {
   it('fetches the first hundred pages with a cursor', async () => {
-    await expect(graphql(PagesQuery, { count: 100 }, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(PagesQuery, { count: 100 }, 'internal')).resolves.toMatchSnapshot()
+  })
+})

@@ -13,14 +13,7 @@ const ProjectProposalQuery = /* GraphQL */ `
       __typename
       id
       ... on Project {
-        proposals(
-          first: $count
-          category: $category
-          district: $district
-          step: $step
-          status: $status
-          term: $term
-        ) {
+        proposals(first: $count, category: $category, district: $district, step: $step, status: $status, term: $term) {
           totalCount
           edges {
             node {
@@ -49,7 +42,7 @@ const ProjectProposalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectProposalTermSearchQuery = /* GraphQL */ `
   query getProjectProposals(
@@ -65,14 +58,7 @@ const ProjectProposalTermSearchQuery = /* GraphQL */ `
       __typename
       id
       ... on Project {
-        proposals(
-          first: $count
-          category: $category
-          district: $district
-          step: $step
-          status: $status
-          term: $term
-        ) {
+        proposals(first: $count, category: $category, district: $district, step: $step, status: $status, term: $term) {
           totalCount
 
           edges {
@@ -98,7 +84,7 @@ const ProjectProposalTermSearchQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const ProjectProposalTotalCountQuery = /* GraphQL */ `
   query getProjectProposalsTotalCount(
@@ -127,7 +113,7 @@ const ProjectProposalTotalCountQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.projects.proposals', () => {
   it('fetches proposals filtered by none category, district, status', async () => {
@@ -142,12 +128,12 @@ describe('Internal.projects.proposals', () => {
         status: 'NONE',
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-    expect(response.project.proposals.edges[0].node.district).toBe(null);
-    expect(response.project.proposals.edges[0].node.category).toBe(null);
-    expect(response.project.proposals.edges[0].node.status).toBe(null);
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+    expect(response.project.proposals.edges[0].node.district).toBe(null)
+    expect(response.project.proposals.edges[0].node.category).toBe(null)
+    expect(response.project.proposals.edges[0].node.status).toBe(null)
+  })
 
   it('fetches proposals filtered by step and status', async () => {
     await expect(
@@ -163,8 +149,8 @@ describe('Internal.projects.proposals', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches project proposal's total count (draft)", async () => {
     const response = await graphql(
@@ -174,9 +160,9 @@ describe('Internal.projects.proposals', () => {
         state: 'DRAFT',
       },
       'internal_admin',
-    );
-    expect(response.project.proposals.totalCount).toBe(1);
-  });
+    )
+    expect(response.project.proposals.totalCount).toBe(1)
+  })
 
   it("fetches project proposal's total count (published)", async () => {
     const response = await graphql(
@@ -186,9 +172,9 @@ describe('Internal.projects.proposals', () => {
         state: 'PUBLISHED',
       },
       'internal_admin',
-    );
-    expect(response.project.proposals.totalCount).toBe(8);
-  });
+    )
+    expect(response.project.proposals.totalCount).toBe(8)
+  })
 
   it("fetches project proposal's total count (all)", async () => {
     const response = await graphql(
@@ -198,9 +184,9 @@ describe('Internal.projects.proposals', () => {
         state: 'ALL',
       },
       'internal_admin',
-    );
-    expect(response.project.proposals.totalCount).toBe(10);
-  });
+    )
+    expect(response.project.proposals.totalCount).toBe(10)
+  })
 
   it("fetches project proposal's total count (trashed)", async () => {
     const response = await graphql(
@@ -210,9 +196,9 @@ describe('Internal.projects.proposals', () => {
         state: 'TRASHED',
       },
       'internal_admin',
-    );
-    expect(response.project.proposals.totalCount).toBe(1);
-  });
+    )
+    expect(response.project.proposals.totalCount).toBe(1)
+  })
 
   it("search project's proposals by given theme", async () => {
     const response = await graphql(
@@ -223,9 +209,9 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   it("search project's proposals with theme value NONE", async () => {
     const response = await graphql(
@@ -236,9 +222,9 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   //========= TERM TESTS ==========//
 
@@ -252,9 +238,9 @@ describe('Internal.projects.proposals', () => {
         count: 10,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   it("should return project's proposals with public responses which contains objectValue that matches the given term, ordered by score", async () => {
     const response = await graphql(
@@ -266,9 +252,9 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   it("shouldn't return proposals with private responses that matches the given term", async () => {
     const response = await graphql(
@@ -280,9 +266,9 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   it("should return project's proposal with district that matches the given term, ordered by score", async () => {
     const response = await graphql(
@@ -294,9 +280,9 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
 
   it("should return project's proposals with address that matches the given term, ordered by score", async () => {
     const response = await graphql(
@@ -308,7 +294,7 @@ describe('Internal.projects.proposals', () => {
         count: 5,
       },
       'internal_admin',
-    );
-    expect(response.project.proposals).toMatchSnapshot();
-  });
-});
+    )
+    expect(response.project.proposals).toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddAnonymousReplyMutation = /* GraphQL*/ `
     mutation AddAnonymousReplyMutation($input: AddAnonymousReplyInput!) {
@@ -15,24 +15,24 @@ const AddAnonymousReplyMutation = /* GraphQL*/ `
             errorCode
         }
     }
-`;
+`
 
 const input = {
-  "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
-  "responses": [
+  questionnaireId: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz',
+  responses: [
     {
-      "value": "abc",
-      "question": "UXVlc3Rpb246MTQwMw=="
-    }
-  ]
-};
+      value: 'abc',
+      question: 'UXVlc3Rpb246MTQwMw==',
+    },
+  ],
+}
 
 const propertyMatchers = {
   addAnonymousReply: {
     reply: {
-      id: expect.any(String)
+      id: expect.any(String),
     },
-    participantToken: expect.any(String)
+    participantToken: expect.any(String),
   },
 }
 
@@ -43,9 +43,9 @@ describe('mutations.addAnonymousReply', () => {
       {
         input,
       },
-      'internal'
-    );
+      'internal',
+    )
 
-    expect(response).toMatchSnapshot(propertyMatchers);
-  });
-});
+    expect(response).toMatchSnapshot(propertyMatchers)
+  })
+})

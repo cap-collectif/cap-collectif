@@ -40,7 +40,7 @@ const InternalQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.ssoConfigurations', () => {
   it('fetches all configurations', async () => {
@@ -52,14 +52,14 @@ describe('Internal|Query.ssoConfigurations', () => {
               casVersion: expect.any(String),
               casCertificate: expect.any(String),
               casServerUrl: expect.any(String),
-              name: 'CAS'
+              name: 'CAS',
             },
           },
           {
             node: {
               clientId: expect.any(String),
               secret: expect.any(String),
-              name: 'Facebook'
+              name: 'Facebook',
             },
           },
           {
@@ -67,7 +67,7 @@ describe('Internal|Query.ssoConfigurations', () => {
               clientId: expect.any(String),
               secret: expect.any(String),
               redirectUri: expect.any(String),
-              name: 'France Connect'
+              name: 'France Connect',
             },
           },
           {
@@ -79,11 +79,11 @@ describe('Internal|Query.ssoConfigurations', () => {
               userInfoUrl: expect.any(String),
               redirectUri: expect.any(String),
               logoutUrl: expect.any(String),
-              name: 'Oauth2'
+              name: 'Oauth2',
             },
           },
         ],
       },
-    });
-  });
-});
+    })
+  })
+})

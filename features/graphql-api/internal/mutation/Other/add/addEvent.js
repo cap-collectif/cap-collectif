@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const AddEventMutation = /* GraphQL*/ `
     mutation ($input: AddEventInput!) {
@@ -43,7 +43,7 @@ const AddEventMutation = /* GraphQL*/ `
             }
         }
     }
-`;
+`
 
 const input = {
   startAt: '2018-03-07 00:00:00',
@@ -64,7 +64,7 @@ const input = {
       metaDescription: 'metaDescription',
     },
   ],
-};
+}
 
 describe('mutations.createEvent', () => {
   it('should create an event as project admin', async () => {
@@ -74,11 +74,11 @@ describe('mutations.createEvent', () => {
         input,
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.addEvent.eventEdge.node.owner.username).toBe('Théo QP');
-    expect(response.addEvent.eventEdge.node.author.username).toBe('Théo QP');
-  });
+    expect(response.addEvent.eventEdge.node.owner.username).toBe('Théo QP')
+    expect(response.addEvent.eventEdge.node.author.username).toBe('Théo QP')
+  })
 
   it('should create an event', async () => {
     await expect(
@@ -89,8 +89,8 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should create an event with measurable registration', async () => {
     await expect(
@@ -105,8 +105,8 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should not create an event with measurable registration', async () => {
     await expect(
@@ -121,11 +121,11 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError();
-  });
+    ).rejects.toThrowError()
+  })
 
   it('should create an event as organization', async () => {
-    const organizationId = toGlobalId('Organization', 'organization2');
+    const organizationId = toGlobalId('Organization', 'organization2')
     await expect(
       graphql(
         AddEventMutation,
@@ -140,6 +140,6 @@ describe('mutations.createEvent', () => {
         },
         'internal_christophe',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

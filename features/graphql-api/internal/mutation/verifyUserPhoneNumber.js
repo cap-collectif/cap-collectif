@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const VerifyUserPhoneNumberMutation = /* GraphQL */ `
   mutation VerifyUserPhoneNumber($input: VerifyUserPhoneNumberInput!) {
@@ -11,7 +11,7 @@ const VerifyUserPhoneNumberMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|verifyUserPhoneNumber mutation', () => {
   it('should return PHONE_ALREADY_CONFIRMED errorCode', async () => {
@@ -25,6 +25,6 @@ describe('Internal|verifyUserPhoneNumber mutation', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

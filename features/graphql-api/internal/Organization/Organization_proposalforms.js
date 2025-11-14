@@ -25,7 +25,7 @@ const OrganizationProposalForms = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.ProposalForms', () => {
   it('organization admin should be able to fetch all proposalForms from organization', async () => {
@@ -34,22 +34,22 @@ describe('Internal|Organization.ProposalForms', () => {
         OrganizationProposalForms,
         {
           organizationId: toGlobalId('Organization', 'organization2'),
-          availableOnly: false
+          availableOnly: false,
         },
-        'internal_valerie'
+        'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('organization admin should be able to fetch all proposalForms from organization not attached to a step ', async () => {
     await expect(
       graphql(
         OrganizationProposalForms,
         {
           organizationId: toGlobalId('Organization', 'organization2'),
-          availableOnly: true
+          availableOnly: true,
         },
-        'internal_valerie'
+        'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 })

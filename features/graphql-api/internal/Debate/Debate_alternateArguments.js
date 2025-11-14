@@ -1,11 +1,6 @@
 /* eslint-env jest */
 const DebateAlternateArgumentsQuery = /* GraphQL */ `
-  query DebateAlternateArgumentsQuery(
-    $id: ID!
-    $orderBy: DebateArgumentOrder
-    $first: Int!
-    $after: String
-  ) {
+  query DebateAlternateArgumentsQuery($id: ID!, $orderBy: DebateArgumentOrder, $first: Int!, $after: String) {
     node(id: $id) {
       ... on Debate {
         alternateArguments(first: $first, after: $after, orderBy: $orderBy) {
@@ -33,7 +28,7 @@ const DebateAlternateArgumentsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Debate.alternateArguments connection', () => {
   it('fetches alternate arguments associated to a debate without a cursor', async () => {
@@ -48,8 +43,8 @@ describe('Internal|Debate.alternateArguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches alternate arguments associated to a debate with a cursor', async () => {
     await expect(
@@ -64,8 +59,8 @@ describe('Internal|Debate.alternateArguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('sort alternate arguments associated to a debate by their number of votes', async () => {
     await expect(
@@ -82,6 +77,6 @@ describe('Internal|Debate.alternateArguments connection', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

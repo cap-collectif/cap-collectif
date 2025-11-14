@@ -1,7 +1,7 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
-const DENIED_ERROR_MESSAGE = 'Access denied to this field';
+const DENIED_ERROR_MESSAGE = 'Access denied to this field'
 
 const CancelUserInvitationsMutation = /* GraphQL */ `
   mutation CancelUserInvitationsMutation($input: CancelUserInvitationsInput!) {
@@ -9,24 +9,22 @@ const CancelUserInvitationsMutation = /* GraphQL */ `
       cancelledInvitationsIds
     }
   }
-`;
+`
 
 describe('Internal|cancelUserInvitations mutation access control', () => {
   const input = {
     invitationsEmails: ['blablapookie@pookie.com', 'danslside@pookie.com'],
-  };
+  }
   it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
-    expect.assertions(1);
-    await expect(
-      graphql(CancelUserInvitationsMutation, { input }, 'internal_admin'),
-    ).resolves.not.toBeNull();
-  });
-});
+    expect.assertions(1)
+    await expect(graphql(CancelUserInvitationsMutation, { input }, 'internal_admin')).resolves.not.toBeNull()
+  })
+})
 
 describe('Internal|cancelUserInvitations mutation', () => {
   it('should cancel user invitations', async () => {
-    const remInvitationId = toGlobalId('UserInvite', 'remInvitation');
-    const ramInvitationId = toGlobalId('UserInvite', 'ramInvitation');
+    const remInvitationId = toGlobalId('UserInvite', 'remInvitation')
+    const ramInvitationId = toGlobalId('UserInvite', 'ramInvitation')
 
     const response = await graphql(
       CancelUserInvitationsMutation,
@@ -36,10 +34,10 @@ describe('Internal|cancelUserInvitations mutation', () => {
         },
       },
       'internal_super_admin',
-    );
+    )
 
-    expect(response.cancelUserInvitations.cancelledInvitationsIds.length).toBe(2);
-    expect(response.cancelUserInvitations.cancelledInvitationsIds[0]).toBe(remInvitationId);
-    expect(response.cancelUserInvitations.cancelledInvitationsIds[1]).toBe(ramInvitationId);
-  });
-});
+    expect(response.cancelUserInvitations.cancelledInvitationsIds.length).toBe(2)
+    expect(response.cancelUserInvitations.cancelledInvitationsIds[0]).toBe(remInvitationId)
+    expect(response.cancelUserInvitations.cancelledInvitationsIds[1]).toBe(ramInvitationId)
+  })
+})

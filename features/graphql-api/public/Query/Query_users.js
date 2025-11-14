@@ -1,6 +1,6 @@
 /* eslint-env jest */
 // TODO remove writes from tests.
-import '../../_setup';
+import '../../_setup'
 
 const OpenDataUsersQuery = /* GraphQL */ `
   query OpenDataUsersQuery($count: Int!, $cursor: String) {
@@ -45,7 +45,7 @@ const OpenDataUsersQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|Query.users connection', () => {
   it('fetches the first hundred users with a cursor', async () => {
@@ -57,8 +57,8 @@ describe('Preview|Query.users connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches the next three users with a cursor', async () => {
     await expect(
       graphql(
@@ -69,8 +69,8 @@ describe('Preview|Query.users connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches the five last users', async () => {
     await expect(
       graphql(
@@ -89,8 +89,8 @@ describe('Preview|Query.users connection', () => {
         {},
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fetches the five first users, including super admins.', async () => {
     await expect(
@@ -110,6 +110,6 @@ describe('Preview|Query.users connection', () => {
         {},
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const PROJECT_FRAGMENT = /* GraphQL */ `
   fragment Project_informations on Project {
@@ -121,7 +121,7 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const CreateAlphaProjectMutation = /* GraphQL */ `
   ${PROJECT_FRAGMENT}
@@ -133,7 +133,7 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UpdateAlphaProjectMutation = /* GraphQL */ `
   ${PROJECT_FRAGMENT}
@@ -145,7 +145,7 @@ const UpdateAlphaProjectMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const PROJECT_GROUP_FRAGMENT = /* GraphQL */ `
   fragment Project_informations on Project {
@@ -157,7 +157,7 @@ const PROJECT_GROUP_FRAGMENT = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UpdateAlphaProjectGroupMutation = /* GraphQL */ `
   ${PROJECT_GROUP_FRAGMENT}
@@ -169,7 +169,7 @@ const UpdateAlphaProjectGroupMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const BASE_PROJECT = {
   title: 'Je suis un projet simple',
@@ -185,7 +185,7 @@ const BASE_PROJECT = {
   steps: [],
   districts: [],
   archived: false,
-};
+}
 
 const BASE_SELECTION_STEP = {
   type: 'SELECTION',
@@ -203,7 +203,7 @@ const BASE_SELECTION_STEP = {
   publishedVoteDate: '2030-01-01 00:00:00',
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
-};
+}
 
 const BASE_PRESENTATION_STEP = {
   type: 'PRESENTATION',
@@ -212,7 +212,7 @@ const BASE_PRESENTATION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape PresentationStep",
   label: 'PresentationStep',
-};
+}
 
 const BASE_DEBATE_STEP = {
   type: 'DEBATE',
@@ -223,7 +223,7 @@ const BASE_DEBATE_STEP = {
   label: 'DebateStep',
   debateType: 'FACE_TO_FACE',
   debateContent: '',
-};
+}
 
 const BASE_COLLECT_STEP = {
   type: 'COLLECT',
@@ -241,7 +241,7 @@ const BASE_COLLECT_STEP = {
   mainView: 'GRID',
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
-};
+}
 
 describe('Internal|updateAlphaProject simple mutations', () => {
   it('update a newly created project and add a new PresentationStep', async () => {
@@ -251,8 +251,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -264,8 +264,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -277,8 +277,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add a new OtherStep', async () => {
     const createResponse = await graphql(
@@ -287,8 +287,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -309,8 +309,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -322,8 +322,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add a new RankingStep', async () => {
     const createResponse = await graphql(
@@ -332,8 +332,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -354,8 +354,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -367,8 +367,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add a new ConsultationStep', async () => {
     const createResponse = await graphql(
@@ -377,8 +377,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -401,8 +401,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -414,8 +414,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add two districts', async () => {
     const createResponse = await graphql(
@@ -424,8 +424,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -437,8 +437,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -459,8 +459,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           },
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add five districts then remove two', async () => {
     const createResponse = await graphql(
@@ -469,8 +469,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -488,8 +488,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -525,18 +525,22 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           },
         },
       },
-    });
+    })
     const deleteTwoDistrictsResponse = await graphql(
       UpdateAlphaProjectMutation,
       {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy', 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0', 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2'],
+          districts: [
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2',
+          ],
         },
       },
       'internal_admin',
-    );
+    )
     expect(deleteTwoDistrictsResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -562,8 +566,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           },
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add a new CollectStep', async () => {
     const createResponse = await graphql(
@@ -572,8 +576,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -585,8 +589,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -598,8 +602,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('update a newly created project and add a new QuestionnaireStep', async () => {
     const createResponse = await graphql(
@@ -608,8 +612,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -631,8 +635,8 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -644,9 +648,9 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           ],
         },
       },
-    });
-  });
-});
+    })
+  })
+})
 
 describe('Internal|updateAlphaProject complex mutations', () => {
   it('update a newly created project and add a CollectStep that contains requirements and SelectionStep that contains statuses', async () => {
@@ -656,8 +660,8 @@ describe('Internal|updateAlphaProject complex mutations', () => {
         input: BASE_PROJECT,
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -696,8 +700,8 @@ describe('Internal|updateAlphaProject complex mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -722,8 +726,8 @@ describe('Internal|updateAlphaProject complex mutations', () => {
           ],
         },
       },
-    });
-  });
+    })
+  })
 
   it('creates a new project with a simple PresentationStep, CollectStep that contains requirements and statuses and SelectionStep that contains statuses and then update the requirements and statuses positions', async () => {
     const createResponse = await graphql(
@@ -777,27 +781,22 @@ describe('Internal|updateAlphaProject complex mutations', () => {
         },
       },
       'internal_admin',
-    );
-    const projectId = createResponse.createAlphaProject.project.id;
-    const firstStepId = createResponse.createAlphaProject.project.steps[0].id;
+    )
+    const projectId = createResponse.createAlphaProject.project.id
+    const firstStepId = createResponse.createAlphaProject.project.steps[0].id
 
-    const secondStepId = createResponse.createAlphaProject.project.steps[1].id;
-    const firstStatusSecondStepId =
-      createResponse.createAlphaProject.project.steps[1].statuses[0].id;
-    const secondStatusSecondStepId =
-      createResponse.createAlphaProject.project.steps[1].statuses[1].id;
-    const thirdStatusSecondStepId =
-      createResponse.createAlphaProject.project.steps[1].statuses[2].id;
+    const secondStepId = createResponse.createAlphaProject.project.steps[1].id
+    const firstStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[0].id
+    const secondStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[1].id
+    const thirdStatusSecondStepId = createResponse.createAlphaProject.project.steps[1].statuses[2].id
     const firstRequirementSecondStepId =
-      createResponse.createAlphaProject.project.steps[1].requirements.edges[0].node.id;
+      createResponse.createAlphaProject.project.steps[1].requirements.edges[0].node.id
     const secondRequirementSecondStepId =
-      createResponse.createAlphaProject.project.steps[1].requirements.edges[1].node.id;
+      createResponse.createAlphaProject.project.steps[1].requirements.edges[1].node.id
 
-    const thirdStepId = createResponse.createAlphaProject.project.steps[2].id;
-    const firstStatusThirdStepId =
-      createResponse.createAlphaProject.project.steps[2].statuses[0].id;
-    const secondStatusThirdStepId =
-      createResponse.createAlphaProject.project.steps[2].statuses[1].id;
+    const thirdStepId = createResponse.createAlphaProject.project.steps[2].id
+    const firstStatusThirdStepId = createResponse.createAlphaProject.project.steps[2].statuses[0].id
+    const secondStatusThirdStepId = createResponse.createAlphaProject.project.steps[2].statuses[1].id
 
     const updateResponse = await graphql(
       UpdateAlphaProjectMutation,
@@ -863,34 +862,24 @@ describe('Internal|updateAlphaProject complex mutations', () => {
         },
       },
       'internal_admin',
-    );
-    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
-    expect(updateResponse.updateAlphaProject.project.steps[0].id).toBe(firstStepId);
+    )
+    expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
+    expect(updateResponse.updateAlphaProject.project.steps[0].id).toBe(firstStepId)
 
-    expect(updateResponse.updateAlphaProject.project.steps[1].id).toBe(secondStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[0].id).toBe(
-      thirdStatusSecondStepId,
-    );
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[1].id).toBe(
-      firstStatusSecondStepId,
-    );
-    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[2].id).toBe(
-      secondStatusSecondStepId,
-    );
+    expect(updateResponse.updateAlphaProject.project.steps[1].id).toBe(secondStepId)
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[0].id).toBe(thirdStatusSecondStepId)
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[1].id).toBe(firstStatusSecondStepId)
+    expect(updateResponse.updateAlphaProject.project.steps[1].statuses[2].id).toBe(secondStatusSecondStepId)
     expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[0].node.id).toBe(
       secondRequirementSecondStepId,
-    );
+    )
     expect(updateResponse.updateAlphaProject.project.steps[1].requirements.edges[1].node.id).toBe(
       firstRequirementSecondStepId,
-    );
+    )
 
-    expect(updateResponse.updateAlphaProject.project.steps[2].id).toBe(thirdStepId);
-    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[0].id).toBe(
-      secondStatusThirdStepId,
-    );
-    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[1].id).toBe(
-      firstStatusThirdStepId,
-    );
+    expect(updateResponse.updateAlphaProject.project.steps[2].id).toBe(thirdStepId)
+    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[0].id).toBe(secondStatusThirdStepId)
+    expect(updateResponse.updateAlphaProject.project.steps[2].statuses[1].id).toBe(firstStatusThirdStepId)
     expect(updateResponse).toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -921,9 +910,9 @@ describe('Internal|updateAlphaProject complex mutations', () => {
           ],
         },
       },
-    });
-  });
-});
+    })
+  })
+})
 
 it('update a newly created project and add a group', async () => {
   const createResponse = await graphql(
@@ -932,8 +921,8 @@ it('update a newly created project and add a group', async () => {
       input: BASE_PROJECT,
     },
     'internal_admin',
-  );
-  const projectId = createResponse.createAlphaProject.project.id;
+  )
+  const projectId = createResponse.createAlphaProject.project.id
 
   const updateResponse = await graphql(
     UpdateAlphaProjectGroupMutation,
@@ -946,8 +935,8 @@ it('update a newly created project and add a group', async () => {
       },
     },
     'internal_admin',
-  );
-  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+  )
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
   expect(updateResponse).toMatchSnapshot({
     updateAlphaProject: {
       project: {
@@ -961,8 +950,8 @@ it('update a newly created project and add a group', async () => {
         },
       },
     },
-  });
-});
+  })
+})
 
 it('update a newly created project and add a minimum vote number', async () => {
   const createResponse = await graphql(
@@ -973,8 +962,8 @@ it('update a newly created project and add a minimum vote number', async () => {
       },
     },
     'internal_admin',
-  );
-  const projectId = createResponse.createAlphaProject.project.id;
+  )
+  const projectId = createResponse.createAlphaProject.project.id
 
   const updateResponse = await graphql(
     UpdateAlphaProjectMutation,
@@ -992,9 +981,9 @@ it('update a newly created project and add a minimum vote number', async () => {
       },
     },
     'internal_admin',
-  );
-  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
-});
+  )
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
+})
 
 it('update a newly created project and add a new DebateStep', async () => {
   const createResponse = await graphql(
@@ -1003,8 +992,8 @@ it('update a newly created project and add a new DebateStep', async () => {
       input: BASE_PROJECT,
     },
     'internal_admin',
-  );
-  const projectId = createResponse.createAlphaProject.project.id;
+  )
+  const projectId = createResponse.createAlphaProject.project.id
 
   const updateResponse = await graphql(
     UpdateAlphaProjectMutation,
@@ -1016,8 +1005,8 @@ it('update a newly created project and add a new DebateStep', async () => {
       },
     },
     'internal_admin',
-  );
-  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+  )
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
   expect(updateResponse).toMatchSnapshot({
     updateAlphaProject: {
       project: {
@@ -1032,8 +1021,8 @@ it('update a newly created project and add a new DebateStep', async () => {
         ],
       },
     },
-  });
-});
+  })
+})
 
 it('update an existing project with a DebateStep to add a PresentationStep', async () => {
   const updateResponse = await graphql(
@@ -1042,14 +1031,11 @@ it('update an existing project with a DebateStep to add a PresentationStep', asy
       input: {
         projectId: toGlobalId('Project', 'projectCannabis'),
         ...BASE_PROJECT,
-        steps: [
-          BASE_PRESENTATION_STEP,
-          { ...BASE_DEBATE_STEP, id: toGlobalId('DebateStep', 'debateStepCannabis') },
-        ],
+        steps: [BASE_PRESENTATION_STEP, { ...BASE_DEBATE_STEP, id: toGlobalId('DebateStep', 'debateStepCannabis') }],
       },
     },
     'internal_admin',
-  );
+  )
   expect(updateResponse).toMatchSnapshot({
     updateAlphaProject: {
       project: {
@@ -1061,8 +1047,8 @@ it('update an existing project with a DebateStep to add a PresentationStep', asy
         ],
       },
     },
-  });
-});
+  })
+})
 
 describe('project access control', () => {
   const BASE_INPUT = {
@@ -1158,15 +1144,15 @@ describe('project access control', () => {
     ],
     locale: null,
     archived: false,
-  };
+  }
   it('should update a project with an owner when user is a project admin and the owner', async () => {
     const response = await graphql(
       UpdateAlphaProjectMutation,
       { input: { ...BASE_INPUT, projectId: toGlobalId('Project', 'projectWithOwner') } },
       'internal_theo',
-    );
-    expect(response.updateAlphaProject).not.toBeNull();
-  });
+    )
+    expect(response.updateAlphaProject).not.toBeNull()
+  })
 
   it('should not update a project with an owner when user is a project admin and not the owner', async () => {
     await expect(
@@ -1175,8 +1161,8 @@ describe('project access control', () => {
         { input: { ...BASE_INPUT, projectId: toGlobalId('Project', 'projectIdf3') } },
         'internal_kiroule',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('should not update a project when user is a project admin and set the project visibility to `ADMIN`', async () => {
     await expect(
@@ -1191,8 +1177,8 @@ describe('project access control', () => {
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('should not update the owner when admin edit a owned project ', async () => {
     const response = await graphql(
@@ -1204,10 +1190,10 @@ describe('project access control', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.updateAlphaProject.project.owner.username).toBe('Théo QP');
-  });
+    expect(response.updateAlphaProject.project.owner.username).toBe('Théo QP')
+  })
 
   it('should update a collectStep with proposalArchivedTime and proposalArchivedUnitTime ', async () => {
     await expect(
@@ -1216,14 +1202,12 @@ describe('project access control', () => {
         {
           input: {
             ...BASE_PROJECT,
-            steps: [
-              {...BASE_COLLECT_STEP, proposalArchivedTime: 2, proposalArchivedUnitTime: 'DAYS'}
-            ],
+            steps: [{ ...BASE_COLLECT_STEP, proposalArchivedTime: 2, proposalArchivedUnitTime: 'DAYS' }],
             projectId: toGlobalId('Project', 'projectProposalArchiving'),
           },
         },
         'internal_admin',
-      )
+      ),
     ).resolves.toMatchSnapshot({
       updateAlphaProject: {
         project: {
@@ -1235,6 +1219,6 @@ describe('project access control', () => {
           ],
         },
       },
-    });
-  });
-});
+    })
+  })
+})

@@ -36,10 +36,10 @@ const UserTypes = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query.userTypes', () => {
   it('fetches all user types', async () => {
-    await expect(graphql(UserTypes, null, 'internal_admin')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(UserTypes, null, 'internal_admin')).resolves.toMatchSnapshot()
+  })
+})

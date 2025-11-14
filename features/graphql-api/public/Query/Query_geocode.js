@@ -6,7 +6,7 @@ const GeoCodeQueryQuery = /* GraphQL */ `
       formatted
     }
   }
-`;
+`
 
 describe('Internal|Query.geocode connection', () => {
   it('fetches the not found address from lat lng', async () => {
@@ -17,8 +17,8 @@ describe('Internal|Query.geocode connection', () => {
         longitude: -991.3,
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-    expect(response.geocode).toBeNull();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+    expect(response.geocode).toBeNull()
+  })
+})

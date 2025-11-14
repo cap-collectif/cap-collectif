@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const revokeAnalystsToProposalsMutation = /* GraphQL*/ `
   mutation revokeAnalystsToProposalsMutation($input: RevokeAnalystsToProposalsInput!) {
@@ -29,7 +29,7 @@ const revokeAnalystsToProposalsMutation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 describe('mutations.revokeAnalystsToProposalsMutation logged as admin', () => {
   it('should revoke a list of analysts to a proposal.', async () => {
@@ -42,9 +42,9 @@ describe('mutations.revokeAnalystsToProposalsMutation logged as admin', () => {
         },
       },
       'internal_admin',
-    );
-    expect(revokeAllAnalystToProposals).toMatchSnapshot();
-  });
+    )
+    expect(revokeAllAnalystToProposals).toMatchSnapshot()
+  })
 
   it('should revoke all analyst to a proposal.', async () => {
     const revokeAllAnalystToProposals = await graphql(
@@ -53,7 +53,7 @@ describe('mutations.revokeAnalystsToProposalsMutation logged as admin', () => {
         input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMDk='], analystIds: [] },
       },
       'internal_admin',
-    );
-    expect(revokeAllAnalystToProposals).toMatchSnapshot();
-  });
-});
+    )
+    expect(revokeAllAnalystToProposals).toMatchSnapshot()
+  })
+})

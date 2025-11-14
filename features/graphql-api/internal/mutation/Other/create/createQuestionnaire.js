@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const CreateQuestionnaireMutation = /* GraphQL */ `
   mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!) {
@@ -14,7 +14,7 @@ const CreateQuestionnaireMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.viewer.posts', () => {
   it('should create a questionnaire', async () => {
@@ -27,11 +27,11 @@ describe('Internal.viewer.posts', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.createQuestionnaire.questionnaire.title).toBe('questionnaire title');
-    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('admin');
-  });
+    expect(response.createQuestionnaire.questionnaire.title).toBe('questionnaire title')
+    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('admin')
+  })
 
   it('should create a questionnaire with an owner', async () => {
     const response = await graphql(
@@ -43,10 +43,10 @@ describe('Internal.viewer.posts', () => {
         },
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('Théo QP');
-  });
+    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('Théo QP')
+  })
 
   it('should create a questionnaire as organization', async () => {
     const response = await graphql(
@@ -55,12 +55,12 @@ describe('Internal.viewer.posts', () => {
         input: {
           type: 'QUESTIONNAIRE',
           title: 'questionnaire title',
-          owner: toGlobalId('Organization', 'organization2') // T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=
+          owner: toGlobalId('Organization', 'organization2'), // T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=
         },
       },
       'internal_valerie',
-    );
+    )
 
-    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('GIEC');
-  });
-});
+    expect(response.createQuestionnaire.questionnaire.owner.username).toBe('GIEC')
+  })
+})

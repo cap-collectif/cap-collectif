@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const CreateProposalAnalysisComment = /* GraphQL*/ `
   mutation CreateProposalAnalysisComment($input: CreateProposalAnalysisCommentInput!) {
@@ -12,76 +12,75 @@ const CreateProposalAnalysisComment = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 const input = {
-  "proposalAnalysisId": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMQ==",
-  "body": "body du commentaire"
-};
-
+  proposalAnalysisId: 'UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMQ==',
+  body: 'body du commentaire',
+}
 
 describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
   it('assigned supervisor should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
       {
-        input
+        input,
       },
       'internal_supervisor',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('assigned analyst should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
       {
-        input
+        input,
       },
       'internal_analyst',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('assigned decision maker should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
       {
-        input
+        input,
       },
       'internal_decision_maker',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('supervisor not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(
         CreateProposalAnalysisComment,
         {
-          input
+          input,
         },
         'internal_supervisor2',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('analyst not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(
         CreateProposalAnalysisComment,
         {
-          input
+          input,
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('decision maker not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(
         CreateProposalAnalysisComment,
         {
-          input
+          input,
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

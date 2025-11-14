@@ -16,7 +16,7 @@ const ProposalThemePreviewData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview.Proposal_theme', () => {
   it('fetches theme related to a proposal', async () => {
@@ -28,6 +28,6 @@ describe('Preview.Proposal_theme', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

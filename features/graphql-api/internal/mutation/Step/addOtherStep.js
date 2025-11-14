@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddOtherStep = /* GraphQL*/ `
   mutation AddOtherStep($input: AddStepInput!) {
@@ -16,25 +16,25 @@ describe('mutations.addOtherStepMutation', () => {
   it('admin should be able to add other step.', async () => {
     const response = await graphql(
       AddOtherStep,
-      {input: { projectId: toGlobalId('Project', 'project9')}},
+      { input: { projectId: toGlobalId('Project', 'project9') } },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin project should be able to add other step.', async () => {
     const response = await graphql(
       AddOtherStep,
-      {input: { projectId: toGlobalId('Project', 'projectWithOwner') }},
+      { input: { projectId: toGlobalId('Project', 'projectWithOwner') } },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('orga member should be able to add other step.', async () => {
     const response = await graphql(
       AddOtherStep,
-      {input: { projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') }},
+      { input: { projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') } },
       'internal_christophe',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

@@ -1,5 +1,5 @@
 /*eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const mutation = /* GraphQL */ `
   mutation DeleteProposalForm($input: DeleteProposalFormInput!) {
@@ -7,7 +7,7 @@ const mutation = /* GraphQL */ `
       deletedProposalFormId
     }
   }
-`;
+`
 
 describe('Internal | deleteProposalForm', () => {
   it('cannot delete non existing ProposalForm', async () => {
@@ -21,8 +21,8 @@ describe('Internal | deleteProposalForm', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('NOT_FOUND');
-  });
+    ).rejects.toThrowError('NOT_FOUND')
+  })
   it('cannot delete someone else ProposalForm', async () => {
     await expect(
       graphql(
@@ -34,8 +34,8 @@ describe('Internal | deleteProposalForm', () => {
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('delete own ProposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -45,9 +45,9 @@ describe('Internal | deleteProposalForm', () => {
         },
       },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('cannot delete someone else ProposalForm if admin', async () => {
     const response = await graphql(
       mutation,
@@ -57,7 +57,7 @@ describe('Internal | deleteProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

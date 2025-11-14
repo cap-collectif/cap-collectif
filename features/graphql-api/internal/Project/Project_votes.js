@@ -10,7 +10,7 @@ const ProjectVotesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.project.votes', () => {
   it('Retrieve project votes total count', async () => {
@@ -23,8 +23,8 @@ describe('Internal.project.votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Retrieve project anonymous votes total count', async () => {
     await expect(
@@ -36,8 +36,8 @@ describe('Internal.project.votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Retrieve project non anonymous votes total count', async () => {
     await expect(
@@ -49,8 +49,8 @@ describe('Internal.project.votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Retrieve project votes total count with multiple debates', async () => {
     await expect(
@@ -62,8 +62,8 @@ describe('Internal.project.votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Retrieve project anonymous proposal sms votes total count', async () => {
     await expect(
@@ -75,6 +75,6 @@ describe('Internal.project.votes', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

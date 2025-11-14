@@ -9,7 +9,7 @@ const ProposalAnalystsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.analysts', () => {
   it("fetches proposal's related analysts when authenticated as analyst.", async () => {
@@ -21,8 +21,8 @@ describe('Internal.analysts', () => {
         },
         'internal_analyst',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("does not fetches proposal's related analysts when authenticated as user.", async () => {
     await expect(
@@ -33,6 +33,6 @@ describe('Internal.analysts', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

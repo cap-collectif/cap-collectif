@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const CreateConsultation = /* GraphQL*/ `
   mutation CreateConsultation($input: CreateConsultationInput!) {
@@ -9,11 +9,11 @@ const CreateConsultation = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 const input = {
-  title: 'my new consultation'
-};
+  title: 'my new consultation',
+}
 
 describe('mutations.createConsultation', () => {
   it('should create a consultation as an admin', async () => {
@@ -23,7 +23,7 @@ describe('mutations.createConsultation', () => {
         input,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
 })

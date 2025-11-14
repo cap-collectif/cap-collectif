@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateProposalMutation = /* GraphQL */ `
   mutation ChangeProposalContent($input: ChangeProposalContentInput!) {
@@ -12,7 +12,7 @@ const UpdateProposalMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal | Update proposal content', () => {
   it('update proposal body with authorized iframe.', async () => {
@@ -21,14 +21,13 @@ describe('Internal | Update proposal content', () => {
       {
         input: {
           id: 'UHJvcG9zYWw6cHJvcG9zYWw5MA==',
-          body:
-            '<iframe class="ql-video" frameborder="0" src="https://www.youtube.com/embed/qCNu_vJNLMQ?showinfo=0"></iframe>',
+          body: '<iframe class="ql-video" frameborder="0" src="https://www.youtube.com/embed/qCNu_vJNLMQ?showinfo=0"></iframe>',
         },
       },
       'internal_admin',
-    );
-    expect(updateProposal).toMatchSnapshot();
-  });
+    )
+    expect(updateProposal).toMatchSnapshot()
+  })
 
   it('update proposal body with unauthorized iframe.', async () => {
     const updateProposal = await graphql(
@@ -36,14 +35,13 @@ describe('Internal | Update proposal content', () => {
       {
         input: {
           id: 'UHJvcG9zYWw6cHJvcG9zYWw5MA==',
-          body:
-            '<iframe class="ql-video" frameborder="0" src="https://www.hackers.com/embed/qCNu_vJNLMQ?showinfo=0"></iframe>',
+          body: '<iframe class="ql-video" frameborder="0" src="https://www.hackers.com/embed/qCNu_vJNLMQ?showinfo=0"></iframe>',
         },
       },
       'internal_admin',
-    );
-    expect(updateProposal).toMatchSnapshot();
-  });
+    )
+    expect(updateProposal).toMatchSnapshot()
+  })
 
   it('update proposal with rs', async () => {
     const updateProposal = await graphql(
@@ -66,7 +64,7 @@ describe('Internal | Update proposal content', () => {
         },
       },
       'internal_user',
-    );
-    expect(updateProposal).toMatchSnapshot();
-  });
-});
+    )
+    expect(updateProposal).toMatchSnapshot()
+  })
+})

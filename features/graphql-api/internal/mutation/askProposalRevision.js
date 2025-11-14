@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup';
+import '../../_setup'
 
 const AskProposalRevisionMutation = /* GraphQL*/ `
   mutation askProposalRevision($input: AskProposalRevisionInput!) {
@@ -23,8 +23,8 @@ const AskProposalRevisionMutation = /* GraphQL*/ `
       }
     }
   }
-`;
-const DENIED_ERROR_MESSAGE = 'Access denied to this field.';
+`
+const DENIED_ERROR_MESSAGE = 'Access denied to this field.'
 
 describe('mutations.askProposalRevision', () => {
   // admin
@@ -40,9 +40,9 @@ describe('mutations.askProposalRevision', () => {
         },
       },
       'internal_admin',
-    );
-    expect(askProposalRevisionMutation).toMatchSnapshot();
-  });
+    )
+    expect(askProposalRevisionMutation).toMatchSnapshot()
+  })
   it('admin should ask a revision on proposal,even if date expires after analyse step end.', async () => {
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
@@ -55,9 +55,9 @@ describe('mutations.askProposalRevision', () => {
         },
       },
       'internal_admin',
-    );
-    expect(askProposalRevisionMutation).toMatchSnapshot();
-  });
+    )
+    expect(askProposalRevisionMutation).toMatchSnapshot()
+  })
   // user
   it('user should not ask a revision on proposal.', async () => {
     await expect(
@@ -73,8 +73,8 @@ describe('mutations.askProposalRevision', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
-  });
+    ).rejects.toThrowError(DENIED_ERROR_MESSAGE)
+  })
   // anonym
   it('anonym should not ask a revision on proposal.', async () => {
     await expect(
@@ -90,6 +90,6 @@ describe('mutations.askProposalRevision', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
-  });
-});
+    ).rejects.toThrowError(DENIED_ERROR_MESSAGE)
+  })
+})

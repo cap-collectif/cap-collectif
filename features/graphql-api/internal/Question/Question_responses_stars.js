@@ -14,7 +14,7 @@ const QuestionResponsesStars = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 const starResponseMutation = /** GraphQL */ `
   mutation StarResponseMutation($input: StarResponseInput!) {
@@ -25,7 +25,7 @@ const starResponseMutation = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 const unstarResponseMutation = /** GraphQL */ `
   mutation UnstarResponseMutation($input: UnstarResponseInput!) {
@@ -36,7 +36,7 @@ const unstarResponseMutation = /** GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Question.stars', () => {
   it('fail to get stars if not project admin', async () => {
@@ -48,8 +48,8 @@ describe('Internal|Question.stars', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('get stars on responses', async () => {
     await expect(
       graphql(
@@ -59,8 +59,8 @@ describe('Internal|Question.stars', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('fail to star a response already starred', async () => {
     const starResponse = await graphql(
@@ -71,9 +71,9 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(starResponse).toMatchSnapshot();
-  });
+    )
+    expect(starResponse).toMatchSnapshot()
+  })
   it('fail to unstar a response not previously starred', async () => {
     const unstarResponse = await graphql(
       unstarResponseMutation,
@@ -83,9 +83,9 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(unstarResponse).toMatchSnapshot();
-  });
+    )
+    expect(unstarResponse).toMatchSnapshot()
+  })
   it('fail to star a response on wrong id', async () => {
     const starResponse = await graphql(
       starResponseMutation,
@@ -95,9 +95,9 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(starResponse).toMatchSnapshot();
-  });
+    )
+    expect(starResponse).toMatchSnapshot()
+  })
   it('fail to unstar a response on wrong id', async () => {
     const unstarResponse = await graphql(
       unstarResponseMutation,
@@ -107,9 +107,9 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(unstarResponse).toMatchSnapshot();
-  });
+    )
+    expect(unstarResponse).toMatchSnapshot()
+  })
 
   it('star a response', async () => {
     const starResponse = await graphql(
@@ -120,9 +120,9 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(starResponse).toMatchSnapshot();
-  });
+    )
+    expect(starResponse).toMatchSnapshot()
+  })
   it('unstar a response', async () => {
     const unstarResponse = await graphql(
       unstarResponseMutation,
@@ -132,7 +132,7 @@ describe('Internal|Question.stars', () => {
         },
       },
       'internal_admin',
-    );
-    expect(unstarResponse).toMatchSnapshot();
-  });
-});
+    )
+    expect(unstarResponse).toMatchSnapshot()
+  })
+})

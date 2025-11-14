@@ -37,7 +37,7 @@ const ProposalPaperVotesData = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.proposals', () => {
   it("fetches proposal's paper votes", async () => {
@@ -50,6 +50,6 @@ describe('Internal.proposals', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

@@ -16,7 +16,7 @@ const OrganizationProjectsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.Projects', () => {
   it('anonymous should be able to fetch public projects from organization', async () => {
@@ -24,45 +24,45 @@ describe('Internal|Organization.Projects', () => {
       graphql(
         OrganizationProjectsQuery,
         {
-          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
         },
-        'internal'
+        'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('orga member should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
         OrganizationProjectsQuery,
         {
-          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
         },
-        'internal_valerie'
+        'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('admin should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
         OrganizationProjectsQuery,
         {
-          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
         },
-        'internal_admin'
+        'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('super admin should be able to fetch projects from organization', async () => {
     await expect(
       graphql(
         OrganizationProjectsQuery,
         {
-          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=' // Organization:organization2
+          organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
         },
-        'internal_super_admin'
+        'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('orga member should be able to filter projects by title', async () => {
     await expect(
@@ -70,10 +70,10 @@ describe('Internal|Organization.Projects', () => {
         OrganizationProjectsQuery,
         {
           organizationId: 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=', // Organization:organization2
-          query: 'Budget'
+          query: 'Budget',
         },
         'internal_valerie',
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
 })

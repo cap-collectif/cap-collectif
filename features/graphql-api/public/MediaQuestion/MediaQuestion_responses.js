@@ -19,7 +19,7 @@ const MediaQuestionResponsesQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('MediaQuestion.responses array', () => {
   it("it fetches a media question's responses", async () => {
@@ -33,8 +33,8 @@ describe('MediaQuestion.responses array', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

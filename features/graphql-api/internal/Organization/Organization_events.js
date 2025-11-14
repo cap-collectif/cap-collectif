@@ -15,7 +15,7 @@ const OrganizationEvents = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.Events', () => {
   it('anonymous should be able to fetch approved projects from organization', async () => {
@@ -25,32 +25,32 @@ describe('Internal|Organization.Events', () => {
         {
           organizationId: toGlobalId('Organization', 'organization1'),
         },
-        'internal'
+        'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('orga member should be able to fetch deleted events', async () => {
     await expect(
       graphql(
         OrganizationEvents,
         {
           organizationId: toGlobalId('Organization', 'organization1'),
-          status: 'DELETED'
+          status: 'DELETED',
         },
-        'internal_omar'
+        'internal_omar',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('orga member should be able to fetch events filtered by query', async () => {
     await expect(
       graphql(
         OrganizationEvents,
         {
           organizationId: toGlobalId('Organization', 'organization1'),
-          search: 'supprimé'
+          search: 'supprimé',
         },
-        'internal_omar'
+        'internal_omar',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

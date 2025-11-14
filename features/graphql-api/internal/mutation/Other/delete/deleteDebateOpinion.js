@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../../_setup'
 
 const DeleteDebateOpinionMutation = /* GraphQL */ `
   mutation DeleteDebateOpinionMutation($input: DeleteDebateOpinionInput!) {
@@ -11,7 +11,7 @@ const DeleteDebateOpinionMutation = /* GraphQL */ `
       errorCode
     }
   }
-`;
+`
 
 describe('Internal|DeleteDebateOpinion mutation', () => {
   it('Delete a debate opinion.', async () => {
@@ -23,7 +23,7 @@ describe('Internal|DeleteDebateOpinion mutation', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

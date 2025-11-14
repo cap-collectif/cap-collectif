@@ -22,7 +22,7 @@ const OrganizationPendingOrganizationInvitation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.PendingOrganizationInvitation', () => {
   it('admin should be able to fetch invitations', async () => {
@@ -34,8 +34,8 @@ describe('Internal|Organization.PendingOrganizationInvitation', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('organization member with role admin should be able to fetch invitations', async () => {
     await expect(
       graphql(
@@ -45,8 +45,8 @@ describe('Internal|Organization.PendingOrganizationInvitation', () => {
         },
         'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('organization member with role user should not be able to fetch invitations', async () => {
     await expect(
       graphql(
@@ -56,6 +56,6 @@ describe('Internal|Organization.PendingOrganizationInvitation', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

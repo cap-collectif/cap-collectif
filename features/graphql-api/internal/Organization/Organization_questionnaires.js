@@ -2,7 +2,7 @@
 const OrganizationQuestionnaires = /* GraphQL */ `
   query OrganizationQuestionnaires($organizationId: ID!, $availableOnly: Boolean!) {
     node(id: $organizationId) {
-      ...on Organization {
+      ... on Organization {
         questionnaires(availableOnly: $availableOnly) {
           totalCount
           edges {
@@ -20,7 +20,7 @@ const OrganizationQuestionnaires = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Organization.Questionnaires', () => {
   it('organization admin should be able to fetch all questionnaires from organization', async () => {
@@ -29,22 +29,22 @@ describe('Internal|Organization.Questionnaires', () => {
         OrganizationQuestionnaires,
         {
           organizationId: toGlobalId('Organization', 'organization2'),
-          availableOnly: false
+          availableOnly: false,
         },
-        'internal_valerie'
+        'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('organization admin should be able to fetch all questionnaires from organization not attached to a step ', async () => {
     await expect(
       graphql(
         OrganizationQuestionnaires,
         {
           organizationId: toGlobalId('Organization', 'organization2'),
-          availableOnly: true
+          availableOnly: true,
         },
-        'internal_valerie'
+        'internal_valerie',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 })

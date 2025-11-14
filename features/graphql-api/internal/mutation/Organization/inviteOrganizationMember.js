@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const InviteOrganizationMember = /* GraphQL */ `
   mutation InviteOrganizationMember($input: InviteOrganizationMemberInput!) {
@@ -14,12 +14,12 @@ const InviteOrganizationMember = /* GraphQL */ `
       errorCode
     }
   }
-`;
+`
 
 const input = {
   organizationId: toGlobalId('Organization', 'organization1'),
   role: 'USER',
-};
+}
 
 describe('Internal|inviteOrganizationMember mutation', () => {
   it('should invite an unregistered user', async () => {
@@ -32,10 +32,10 @@ describe('Internal|inviteOrganizationMember mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
-    expect(response).toMatchSnapshot();
-  });
+    expect(response).toMatchSnapshot()
+  })
   it('should return USER_NOT_ONLY_ROLE_USER errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,
@@ -46,9 +46,9 @@ describe('Internal|inviteOrganizationMember mutation', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_NOT_ONLY_ROLE_USER');
-  });
+    )
+    expect(response.inviteOrganizationMember.errorCode).toBe('USER_NOT_ONLY_ROLE_USER')
+  })
 
   it('should return USER_ALREADY_INVITED errorCode', async () => {
     const response = await graphql(
@@ -61,9 +61,9 @@ describe('Internal|inviteOrganizationMember mutation', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_INVITED');
-  });
+    )
+    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_INVITED')
+  })
 
   it('should return USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION errorCode', async () => {
     const response = await graphql(
@@ -76,9 +76,9 @@ describe('Internal|inviteOrganizationMember mutation', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION');
-  });
+    )
+    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION')
+  })
 
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
@@ -91,7 +91,7 @@ describe('Internal|inviteOrganizationMember mutation', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response.inviteOrganizationMember.errorCode).toBe('ORGANIZATION_NOT_FOUND');
-  });
-});
+    )
+    expect(response.inviteOrganizationMember.errorCode).toBe('ORGANIZATION_NOT_FOUND')
+  })
+})

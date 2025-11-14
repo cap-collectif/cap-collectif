@@ -26,7 +26,7 @@ const ProposalDecisionQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Proposal.decision', () => {
   it("fetches proposal's decision when authenticated as decision-maker.", async () => {
@@ -38,8 +38,8 @@ describe('Proposal.decision', () => {
         },
         'internal_decision_maker',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("does not fetches proposal's decision when authenticated as user", async () => {
     await expect(
@@ -50,8 +50,8 @@ describe('Proposal.decision', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches proposal's decision when authenticated as supervisor who's not assigned to the proposal", async () => {
     await expect(
@@ -62,8 +62,8 @@ describe('Proposal.decision', () => {
         },
         'internal_supervisor',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches proposal's decision when authenticated as supervisor", async () => {
     await expect(
@@ -74,8 +74,8 @@ describe('Proposal.decision', () => {
         },
         'internal_supervisor2',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches proposal's decision when authenticated as administrator", async () => {
     await expect(
@@ -86,6 +86,6 @@ describe('Proposal.decision', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

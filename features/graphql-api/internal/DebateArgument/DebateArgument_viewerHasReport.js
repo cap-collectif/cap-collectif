@@ -7,7 +7,7 @@ const DebateViewerHasReportQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|DebateArgument.viewerHasReport bool', () => {
   it('fetches if viewer has report an argument', async () => {
@@ -19,8 +19,8 @@ describe('Internal|DebateArgument.viewerHasReport bool', () => {
         },
         'internal_spylou',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches if viewer has report an argument', async () => {
     await expect(
       graphql(
@@ -30,6 +30,6 @@ describe('Internal|DebateArgument.viewerHasReport bool', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

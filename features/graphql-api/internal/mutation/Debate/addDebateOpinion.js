@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddDebateOpinionMutation = /* GraphQL */ `
   mutation AddDebateOpinionMutation($input: AddDebateOpinionInput!) {
@@ -19,7 +19,7 @@ const AddDebateOpinionMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|addDebateOpinion mutation', () => {
   it('Add a debate opinion.', async () => {
@@ -29,14 +29,13 @@ describe('Internal|addDebateOpinion mutation', () => {
         input: {
           debateId: toGlobalId('Debate', 'debateCannabis'),
           title: 'Je suis pour',
-          body:
-            '<strong>Légaliser le cannabis</strong>, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler.',
+          body: '<strong>Légaliser le cannabis</strong>, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler.',
           author: toGlobalId('User', 'user5'),
           type: 'FOR',
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(response).toMatchSnapshot({
       addDebateOpinion: {
@@ -44,12 +43,12 @@ describe('Internal|addDebateOpinion mutation', () => {
           id: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('Add a debate opinion with an iframe.', async () => {
     const body =
-      'oh allez <iframe class="ql-video" src="https://www.youtube.com/embed/NRWem9fpByg?showinfo=0" frameborder="0"></iframe>';
+      'oh allez <iframe class="ql-video" src="https://www.youtube.com/embed/NRWem9fpByg?showinfo=0" frameborder="0"></iframe>'
     const response = await graphql(
       AddDebateOpinionMutation,
       {
@@ -62,7 +61,7 @@ describe('Internal|addDebateOpinion mutation', () => {
         },
       },
       'internal_admin',
-    );
+    )
 
     expect(response).toMatchSnapshot({
       addDebateOpinion: {
@@ -71,6 +70,6 @@ describe('Internal|addDebateOpinion mutation', () => {
           body: body,
         },
       },
-    });
-  });
-});
+    })
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const AddOrganization = /* GraphQL*/ `
   mutation AddOrganization($input: AddOrganizationInput!) {
@@ -10,15 +10,15 @@ const AddOrganization = /* GraphQL*/ `
       }
     }
   }
-`;
+`
 
 const input = {
-  "translations": [
+  translations: [
     {
-      "title": "Titre organization",
-      "body": "Description",
-      "locale": "FR_FR"
-    }
+      title: 'Titre organization',
+      body: 'Description',
+      locale: 'FR_FR',
+    },
   ],
 }
 
@@ -27,21 +27,20 @@ describe('mutations.addOrganization', () => {
     const response = await graphql(
       AddOrganization,
       {
-        input
+        input,
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('admin organization should not be able to add organization', async () => {
-    await expect(
-      graphql(AddOrganization, { input }, 'internal_valerie'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    await expect(graphql(AddOrganization, { input }, 'internal_valerie')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
   it('organization member with role user should not be able to add organization', async () => {
-    await expect(
-      graphql(AddOrganization, { input }, 'internal_user'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    await expect(graphql(AddOrganization, { input }, 'internal_user')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
 })
-

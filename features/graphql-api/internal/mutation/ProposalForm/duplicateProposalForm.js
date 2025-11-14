@@ -1,5 +1,5 @@
 /*eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const duplicateProposalFormMutation = /* GraphQl */ `
   mutation DuplicateProposalForm($input: DuplicateProposalFormInput!) {
@@ -12,7 +12,7 @@ const duplicateProposalFormMutation = /* GraphQl */ `
       }
     }
   }
-`;
+`
 
 describe('Internal | duplicateProposalForm', () => {
   it('cannot duplicate if not owner', async () => {
@@ -26,8 +26,8 @@ describe('Internal | duplicateProposalForm', () => {
         },
         'internal_theo',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
   it('duplicate own proposalForm', async () => {
     const response = await graphql(
       duplicateProposalFormMutation,
@@ -37,9 +37,9 @@ describe('Internal | duplicateProposalForm', () => {
         },
       },
       'internal_theo',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('duplicate someone else proposalForm as admin', async () => {
     const response = await graphql(
       duplicateProposalFormMutation,
@@ -49,7 +49,7 @@ describe('Internal | duplicateProposalForm', () => {
         },
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})

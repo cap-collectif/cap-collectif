@@ -1,14 +1,9 @@
 /* eslint-env jest */
 // TODO remove writes from tests.
-import '../../_setup';
+import '../../_setup'
 
 const ProjectViewerAssignedProposalsQuery = /* GraphQL */ `
-  query getProjectViewerAssignedProposals(
-    $projectId: ID!
-    $category: ID
-    $district: ID
-    $term: String
-  ) {
+  query getProjectViewerAssignedProposals($projectId: ID!, $category: ID, $district: ID, $term: String) {
     project: node(id: $projectId) {
       __typename
       id
@@ -40,7 +35,7 @@ const ProjectViewerAssignedProposalsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Project.viewerAssignedProposals', () => {
   it("fetches viewer's assigned proposals by project, category (NONE)", async () => {
@@ -53,8 +48,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project, category (pCategoryIdf2).", async () => {
     await expect(
@@ -66,8 +61,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project, district (NONE).", async () => {
     await expect(
@@ -79,8 +74,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project, district (districtIdf2).", async () => {
     await expect(
@@ -92,8 +87,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project, district (districtIdf2), category (NONE).", async () => {
     const response = await graphql(
@@ -104,9 +99,9 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         category: 'NONE',
       },
       { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
-    );
-    expect(response.project.viewerAssignedProposals.totalCount).toBe(0);
-  });
+    )
+    expect(response.project.viewerAssignedProposals.totalCount).toBe(0)
+  })
 
   it("fetches viewer's assigned proposals by project, district (NONE), category (pCategoryIdf2).", async () => {
     const response = await graphql(
@@ -117,9 +112,9 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         category: 'pCategoryIdf2',
       },
       { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
-    );
-    expect(response.project.viewerAssignedProposals.totalCount).toBe(0);
-  });
+    )
+    expect(response.project.viewerAssignedProposals.totalCount).toBe(0)
+  })
 
   it("fetches viewer's assigned proposals by project, theme (NONE).", async () => {
     await expect(
@@ -131,8 +126,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project that match search term.", async () => {
     await expect(
@@ -144,8 +139,8 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'theo@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches viewer's assigned proposals by project that match search term and district.", async () => {
     await expect(
@@ -158,6 +153,6 @@ describe('Internal|Project.viewerAssignedProposals', () => {
         },
         { email: 'theo@cap-collectif.com', password: 'toto' },
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

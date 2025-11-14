@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const CreateOauth2SSOConfiguration = /* GraphQL */ `
   mutation CreateOauth2SSOConfigurationMutation($input: CreateOauth2SSOConfigurationInput!) {
@@ -18,7 +18,7 @@ const CreateOauth2SSOConfiguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const UpdateOauth2SSOConfiguration = /* GraphQL */ `
   mutation UpdateOauth2SSOConfigurationMutation($input: UpdateOauth2SSOConfigurationInput!) {
@@ -37,7 +37,7 @@ const UpdateOauth2SSOConfiguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const DeleteSSOConfiguration = /* GraphQL */ `
   mutation DeleteSSOConfigurationMutation($input: DeleteSSOConfigurationInput!) {
@@ -45,12 +45,12 @@ const DeleteSSOConfiguration = /* GraphQL */ `
       deletedSsoConfigurationId
     }
   }
-`;
+`
 
-const fixtureId = global.toGlobalId('Oauth2SSOConfiguration', 'ssoOauth2');
+const fixtureId = global.toGlobalId('Oauth2SSOConfiguration', 'ssoOauth2')
 
 describe('Internal|SSO|Oauth2', () => {
-  let createdId;
+  let createdId
 
   it('Creates a config as super admin', async () => {
     const creationResult = await graphql(
@@ -70,7 +70,7 @@ describe('Internal|SSO|Oauth2', () => {
         },
       },
       'internal_super_admin',
-    );
+    )
 
     expect(creationResult).toMatchSnapshot({
       createOauth2SSOConfiguration: {
@@ -79,10 +79,10 @@ describe('Internal|SSO|Oauth2', () => {
           redirectUri: expect.any(String),
         },
       },
-    });
+    })
 
-    createdId = creationResult.createOauth2SSOConfiguration.ssoConfiguration.id;
-  });
+    createdId = creationResult.createOauth2SSOConfiguration.ssoConfiguration.id
+  })
 
   it('Deletes a config as admin only', async () => {
     await expect(
@@ -99,8 +99,8 @@ describe('Internal|SSO|Oauth2', () => {
       deleteSSOConfiguration: {
         deletedSsoConfigurationId: expect.any(String),
       },
-    });
-  });
+    })
+  })
 
   it('Updates a config as super admin', async () => {
     await expect(
@@ -129,8 +129,8 @@ describe('Internal|SSO|Oauth2', () => {
           redirectUri: expect.any(String),
         },
       },
-    });
-  });
+    })
+  })
 
   it('Tries to create a config as admin only', async () => {
     await expect(
@@ -152,8 +152,8 @@ describe('Internal|SSO|Oauth2', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 
   it('Tries to update a config as admin only', async () => {
     await expect(
@@ -176,6 +176,6 @@ describe('Internal|SSO|Oauth2', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+})

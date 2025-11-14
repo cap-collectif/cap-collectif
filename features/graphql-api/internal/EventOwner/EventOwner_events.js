@@ -16,7 +16,7 @@ const EventOwnerEventsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const EventOwnerEventsSearchQuery = /* GraphQL */ `
   query EventOwnerEventsSearchQuery($query: String) {
@@ -35,7 +35,7 @@ const EventOwnerEventsSearchQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const EventOwnerEventsOrderQuery = /* GraphQL */ `
   query EventOwnerEventsOrderQuery($order: EventOrder) {
@@ -55,7 +55,7 @@ const EventOwnerEventsOrderQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const EventOwnerEventsFilterQuery = /* GraphQL */ `
   query EventOwnerEventsFilterQuery($filter: EventStatus) {
@@ -72,7 +72,7 @@ const EventOwnerEventsFilterQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const EventOwnerEventsByAuthorQuery = /* GraphQL */ `
   query EventOwnerEventsByAuthorQuery($id: ID!, $onlyWhenAuthor: Boolean) {
@@ -97,7 +97,7 @@ const EventOwnerEventsByAuthorQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal.EventOwner.events', () => {
   it('should correctly fetch events that a user owns when given the `OWNER` affiliations', async () => {
@@ -107,12 +107,12 @@ describe('Internal.EventOwner.events', () => {
         affiliations: ['OWNER'],
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.events.totalCount).toBe(1);
-    expect(response.viewer.events.edges).toHaveLength(1);
-    expect(response.viewer.events.edges[0].node.owner.username).toBe('Théo QP');
-  });
+    expect(response.viewer.events.totalCount).toBe(1)
+    expect(response.viewer.events.edges).toHaveLength(1)
+    expect(response.viewer.events.edges[0].node.owner.username).toBe('Théo QP')
+  })
 
   it('should correctly fetch all events if no affiliations given', async () => {
     const response = await graphql(
@@ -121,11 +121,11 @@ describe('Internal.EventOwner.events', () => {
         affiliations: null,
       },
       'internal_theo',
-    );
+    )
 
-    expect(response.viewer.events.totalCount).toBe(25);
-    expect(response.viewer.events.edges).toHaveLength(25);
-  });
+    expect(response.viewer.events.totalCount).toBe(25)
+    expect(response.viewer.events.edges).toHaveLength(25)
+  })
 
   it('should filter by a given query', async () => {
     const response = await graphql(
@@ -134,12 +134,12 @@ describe('Internal.EventOwner.events', () => {
         query: 'SymfonyLive',
       },
       'internal_admin',
-    );
+    )
 
-    expect(response.viewer.events.totalCount).toBe(1);
-    expect(response.viewer.events.edges).toHaveLength(1);
-    expect(response.viewer.events.edges[0].node.title).toBe('SymfonyLive Paris');
-  });
+    expect(response.viewer.events.totalCount).toBe(1)
+    expect(response.viewer.events.edges).toHaveLength(1)
+    expect(response.viewer.events.edges[0].node.title).toBe('SymfonyLive Paris')
+  })
 
   it('should order by a given field and direction ', async () => {
     await expect(
@@ -153,8 +153,8 @@ describe('Internal.EventOwner.events', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter by `APPROVED` status  ', async () => {
     await expect(
@@ -165,8 +165,8 @@ describe('Internal.EventOwner.events', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter by `AWAITING` status  ', async () => {
     await expect(
@@ -177,8 +177,8 @@ describe('Internal.EventOwner.events', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter by `REFUSED` status  ', async () => {
     await expect(
@@ -189,8 +189,8 @@ describe('Internal.EventOwner.events', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('should filter by `DELETED` status  ', async () => {
     await expect(
@@ -201,8 +201,8 @@ describe('Internal.EventOwner.events', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it("fetches a user's events", async () => {
     await Promise.all(
@@ -216,8 +216,8 @@ describe('Internal.EventOwner.events', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const DeleteCarrouselElement = /* GraphQL*/ `
   mutation deleteCarrouselElement($input: DeleteCarrouselElementInput!) {
@@ -7,11 +7,11 @@ const DeleteCarrouselElement = /* GraphQL*/ `
       deletedCarrouselElementId
     }
   }
-`;
+`
 
 const input = {
-  "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQx"
-};
+  id: 'U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQx',
+}
 
 describe('mutations.deleteCarrouselElement', () => {
   it('should delete a deleteCarrouselElement as an admin', async () => {
@@ -22,9 +22,9 @@ describe('mutations.deleteCarrouselElement', () => {
           input,
         },
         'internal_admin',
-      )
-    ).resolves.toMatchSnapshot();
-  });
+      ),
+    ).resolves.toMatchSnapshot()
+  })
   it('should not delete a deleteCarrouselElement as user', async () => {
     await expect(
       graphql(
@@ -33,7 +33,7 @@ describe('mutations.deleteCarrouselElement', () => {
           input,
         },
         'internal_user',
-      )
-    ).rejects.toThrowError('Access denied to this field.');
-  });
+      ),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
 })

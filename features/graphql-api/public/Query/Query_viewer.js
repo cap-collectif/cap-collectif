@@ -17,20 +17,20 @@ const ViewerQuery = /* GraphQL */ `
       deletedAccountAt
     }
   }
-`;
+`
 
 describe('Public|Query.viewer', () => {
   it('fetches an admin', async () => {
-    await expect(graphql(ViewerQuery, null, 'admin')).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(ViewerQuery, null, 'admin')).resolves.toMatchSnapshot()
+  })
 
   it('can not access if not authenticated', async () => {
-    await expect(graphql(ViewerQuery, null, 'anonymous')).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    await expect(graphql(ViewerQuery, null, 'anonymous')).rejects.toThrowError('Access denied to this field.')
+  })
+})
 
 describe('Internal|Query.viewer', () => {
   it('fetches admin@test.com when using internal_admin client ', async () => {
-    await expect(graphql(ViewerQuery, null, 'internal_admin')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(ViewerQuery, null, 'internal_admin')).resolves.toMatchSnapshot()
+  })
+})

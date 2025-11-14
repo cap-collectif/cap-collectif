@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const UpdateFacebookSSOConfiguration = /* GraphQL */ `
   mutation UpdateFacebookSSOConfigurationMutation($input: UpdateFacebookSSOConfigurationInput!) {
@@ -13,7 +13,7 @@ const UpdateFacebookSSOConfiguration = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const input = {
   input: {
@@ -21,18 +21,16 @@ const input = {
     secret: '53cr37',
     enabled: false,
   },
-};
+}
 
 describe('Internal|SSO|Facebook', () => {
   it('Updates a config as super admin', async () => {
-    await expect(
-      graphql(UpdateFacebookSSOConfiguration, input, 'internal_super_admin'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(UpdateFacebookSSOConfiguration, input, 'internal_super_admin')).resolves.toMatchSnapshot()
+  })
 
   it('Tries to update a config as admin', async () => {
-    await expect(
-      graphql(UpdateFacebookSSOConfiguration, input, 'internal_admin'),
-    ).rejects.toThrowError('Access denied to this field.');
-  });
-});
+    await expect(graphql(UpdateFacebookSSOConfiguration, input, 'internal_admin')).rejects.toThrowError(
+      'Access denied to this field.',
+    )
+  })
+})

@@ -16,7 +16,7 @@ const EventReviewQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Event.review', () => {
   it('it fetches an event review', async () => {
@@ -36,8 +36,8 @@ describe('Event.review', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id);
+        ).resolves.toMatchSnapshot(id)
       }),
-    );
-  });
-});
+    )
+  })
+})

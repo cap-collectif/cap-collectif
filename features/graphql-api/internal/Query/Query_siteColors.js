@@ -6,10 +6,10 @@ const InternalQuery = /* GraphQL */ `
       value
     }
   }
-`;
+`
 
 describe('Internal|Query.siteColors', () => {
   it('fetches all site colors.', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+  })
+})

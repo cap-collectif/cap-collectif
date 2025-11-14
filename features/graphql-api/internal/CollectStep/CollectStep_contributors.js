@@ -17,7 +17,7 @@ const CollectStepContributorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Preview|CollectStep.contributors connection', () => {
   it('fetches the contributors of a collect step', async () => {
@@ -29,6 +29,6 @@ describe('Preview|CollectStep.contributors connection', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

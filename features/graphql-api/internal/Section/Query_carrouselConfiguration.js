@@ -29,7 +29,7 @@ const carrouselConfigurationQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 const carrouselHighlightedConfigurationQuery = /* GraphQL */ `
   query carrouselHighlightedConfigurationQuery {
@@ -60,30 +60,22 @@ const carrouselHighlightedConfigurationQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|Query carrouselConfiguration', () => {
   it('Get Carrousel Section Configuration as admin', async () => {
-    await expect(
-      graphql(carrouselConfigurationQuery, {}, 'internal_admin'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(carrouselConfigurationQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
 
   it('Get Carrousel Section Configuration as user', async () => {
-    await expect(
-      graphql(carrouselConfigurationQuery, {}, 'internal_user'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(carrouselConfigurationQuery, {}, 'internal_user')).resolves.toMatchSnapshot()
+  })
 
   it('Get Carrousel Highlighted Section Configuration as admin', async () => {
-    await expect(
-      graphql(carrouselHighlightedConfigurationQuery, {}, 'internal_admin'),
-    ).resolves.toMatchSnapshot();
-  });
+    await expect(graphql(carrouselHighlightedConfigurationQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
+  })
 
   it('Get Carrousel Highlighted Section Configuration as user', async () => {
-    await expect(
-      graphql(carrouselHighlightedConfigurationQuery, {}, 'internal_user'),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    await expect(graphql(carrouselHighlightedConfigurationQuery, {}, 'internal_user')).resolves.toMatchSnapshot()
+  })
+})

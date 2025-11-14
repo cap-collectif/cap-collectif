@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup';
+import '../../../_setup'
 
 const SendConfirmationEmailDebateAnonymousArgumentMutation = /* GraphQL */ `
   mutation SendConfirmationEmailDebateAnonymousArgumentMutation(
@@ -12,12 +12,12 @@ const SendConfirmationEmailDebateAnonymousArgumentMutation = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () => {
   it('should successfully send again confirmation email.', async () => {
     // AGAINST / jesuisletokendudebateanonymousargumentagainst1
-    const hash = 'QUdBSU5TVDpqZXN1aXNsZXRva2VuZHVkZWJhdGVhbm9ueW1vdXNhcmd1bWVudGFnYWluc3Qx';
+    const hash = 'QUdBSU5TVDpqZXN1aXNsZXRva2VuZHVkZWJhdGVhbm9ueW1vdXNhcmd1bWVudGFnYWluc3Qx'
     const response = await graphql(
       SendConfirmationEmailDebateAnonymousArgumentMutation,
       {
@@ -27,12 +27,12 @@ describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () =>
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when the debate is unknown.', async () => {
     // FOR / jesuisletokendudebateanonymousargumentfor1
-    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ=='
     const response = await graphql(
       SendConfirmationEmailDebateAnonymousArgumentMutation,
       {
@@ -42,12 +42,12 @@ describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () =>
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when the debate is closed.', async () => {
     // FOR / jesuisletokendudebateanonymousargumentfor1
-    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ=='
     const response = await graphql(
       SendConfirmationEmailDebateAnonymousArgumentMutation,
       {
@@ -57,9 +57,9 @@ describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () =>
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when the given hash is invalid.', async () => {
     const response = await graphql(
       SendConfirmationEmailDebateAnonymousArgumentMutation,
@@ -70,12 +70,12 @@ describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () =>
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
+    )
+    expect(response).toMatchSnapshot()
+  })
   it('should error when argument is already published.', async () => {
     // FOR / jesuisletokendudebateanonymousargumentfor1
-    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
+    const hash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ=='
     const response = await graphql(
       SendConfirmationEmailDebateAnonymousArgumentMutation,
       {
@@ -85,7 +85,7 @@ describe('Internal|SendConfirmationEmailDebateAnonymousArgument mutation', () =>
         },
       },
       'internal',
-    );
-    expect(response).toMatchSnapshot();
-  });
-});
+    )
+    expect(response).toMatchSnapshot()
+  })
+})
