@@ -7,7 +7,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
     },
   },
-  extends: ['prettier', 'prettier/react', 'plugin:jest/recommended', 'plugin:relay/recommended'],
+  extends: ['prettier', 'plugin:jest/recommended', 'plugin:relay/recommended'],
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
