@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateAlphaProjectMutation GraphQL admin wants to update step with another questionnaire 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "steps": Array [
+        Object {},
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==",
+            "title": "Questionnaire visible par un owner sans step",
+          },
+          "title": "Questionnaire des JO 2024",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+            "title": "Questionnaire de test",
+          },
+          "title": "Questionnaire",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
+            "title": "El famoso questionnaire a branche",
+          },
+          "title": "Etape de questionnaire avec questionnaire sauts conditionnels",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBzMg==",
+            "title": "Questionnaire saut conditionnel (tous les champs)",
+          },
+          "title": "Essais de sauts conditionnels",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMw==",
+            "title": "Questionnaire dans une étape fermée",
+          },
+          "title": "Etape de questionnaire fermée",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlTG90Q2hvaWNlcw==",
+            "title": "Que choisir?",
+          },
+          "title": "Questionnaire avec beaucoup de choix",
+        },
+        Object {
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
+            "title": "Votre condition requise favorite",
+          },
+          "title": "Questionnaire avec des conditions requises",
+        },
+      ],
+    },
+  },
+}
+`;

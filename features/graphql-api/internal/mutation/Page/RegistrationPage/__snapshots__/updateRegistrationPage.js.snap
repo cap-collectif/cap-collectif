@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateRegistrationPage GraphQL admin wants to update registration page code 1`] = `
+Object {
+  "updateRegistrationPage": Object {
+    "customcode": "<script>console.log('Bonjour');</script>",
+  },
+}
+`;

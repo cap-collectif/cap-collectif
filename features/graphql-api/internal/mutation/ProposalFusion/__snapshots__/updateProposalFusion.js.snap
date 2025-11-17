@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProposalFusionMutation GraphQL admin wants to update a fusion 1`] = `
+Object {
+  "updateProposalFusion": Object {
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "mergedFrom": Array [
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+        },
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+        },
+      ],
+    },
+    "removedMergedFrom": Array [],
+  },
+}
+`;
+
+exports[`mutations.updateProposalFusionMutation GraphQL admin wants to update a fusion 2`] = `
+Object {
+  "updateProposalFusion": Object {
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "mergedFrom": Array [
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+        },
+        Object {
+          "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+        },
+      ],
+    },
+    "removedMergedFrom": Array [
+      Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      },
+    ],
+  },
+}
+`;

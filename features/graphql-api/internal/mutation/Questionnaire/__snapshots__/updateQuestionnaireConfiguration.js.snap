@@ -1,0 +1,1350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to delete a condition in a logic jump of a question in a questionnaire with jumps 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Est expedita eum eos cupiditate. Adipisci dignissimos est pariatur nulla voluptatem.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
+      "questions": Array [
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Hap",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Noel",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjQ=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Hap ou Noel ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Le gange",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Le nil",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "La seine",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "L'Amazone",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDU=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246NDU=",
+                  },
+                },
+              ],
+              "id": "logicjump1",
+            },
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjQ=",
+                  },
+                },
+              ],
+              "id": "logicjump2",
+            },
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjQ=",
+                  },
+                },
+              ],
+              "id": "logicjump3",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Votre fleuve préféré",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDY=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "JVC",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Tesla",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Cisla",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjU=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Par qui Hap a t-il été créé ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjY=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjY=",
+                  },
+                },
+              ],
+              "id": "logicjump10",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Hap est-il un homme bon ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oki",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "mdr g pas lu",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non baka",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mjc=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Noel a t-il un rapport avec la fête de Noël ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Rouge",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Vert",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Bleu",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mjg=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "De quelle couleur est le chapeau de Noël ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Marvel",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "DC",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzE=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MzE=",
+                  },
+                },
+              ],
+              "id": "logicjump4",
+            },
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MzE=",
+                  },
+                },
+              ],
+              "id": "logicjump5",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Plutôt Marvel ou DC ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzI=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Superman ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzM=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Batman ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzQ=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Supergirl ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzU=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Iron Man ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui c un bo chauve ténébreux",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "OUI",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzY=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Luke Cage ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "ui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "nn",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzc=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Thor ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oki",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Doki",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzg=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "C'est la fin mais j'affiche quand même des choix",
+          "type": "select",
+        },
+      ],
+      "title": "El famoso questionnaire a branche",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to delete a logic jump of a question in a questionnaire with jumps 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Est expedita eum eos cupiditate. Adipisci dignissimos est pariatur nulla voluptatem.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlV2l0aEp1bXBz",
+      "questions": Array [
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Hap",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Noel",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjQ=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Hap ou Noel ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Le gange",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Le nil",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "La seine",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "L'Amazone",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDU=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjQ=",
+                  },
+                },
+              ],
+              "id": "logicjump2",
+            },
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjQ=",
+                  },
+                },
+              ],
+              "id": "logicjump3",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Votre fleuve préféré",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDY=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "JVC",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Tesla",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Cisla",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjU=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Par qui Hap a t-il été créé ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MjY=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MjY=",
+                  },
+                },
+              ],
+              "id": "logicjump10",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Hap est-il un homme bon ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oki",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "mdr g pas lu",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Comment ça ce n'est pas un homme bon, comment oses-tu ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non baka",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mjc=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Noel a t-il un rapport avec la fête de Noël ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Rouge",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Vert",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Bleu",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mjg=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "De quelle couleur est le chapeau de Noël ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Marvel",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "DC",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzE=",
+          "jumps": Array [
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MzE=",
+                  },
+                },
+              ],
+              "id": "logicjump4",
+            },
+            Object {
+              "conditions": Array [
+                Object {
+                  "operator": "IS",
+                  "question": Object {
+                    "id": "UXVlc3Rpb246MzE=",
+                  },
+                },
+              ],
+              "id": "logicjump5",
+            },
+          ],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "Plutôt Marvel ou DC ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzI=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Superman ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzM=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Batman ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzQ=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Supergirl ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Non",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzU=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Iron Man ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui c un bo chauve ténébreux",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "OUI",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246MzY=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Luke Cage ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "ui",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "nn",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzc=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "T'aimes bien Thor ?",
+          "type": "select",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Oki",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "Doki",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246Mzg=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "C'est la fin mais j'affiche quand même des choix",
+          "type": "select",
+        },
+      ],
+      "title": "El famoso questionnaire a branche",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to delete first question 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+      "questions": Array [
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "premier choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "deuxième choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "troisième choix",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "J'ai plusieurs choix?",
+          "type": "radio",
+        },
+      ],
+      "title": "Questionnaire non rattaché",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to delete first question choice 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+      "questions": Array [
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": null,
+          "id": "UXVlc3Rpb246MTMxNQ==",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": false,
+          "title": "Je n'ai pas de projet?",
+          "type": "text",
+        },
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "deuxième choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "troisième choix",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "J'ai plusieurs choix?",
+          "type": "radio",
+        },
+      ],
+      "title": "Questionnaire non rattaché",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to edit first question 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+      "questions": Array [
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "premier choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "deuxième choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "troisième choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "color": null,
+                  "title": "quatrième choix",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "J'ai plusieurs choix?",
+          "type": "radio",
+        },
+      ],
+      "title": "Questionnaire non rattaché",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to edit first question with valid color 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+      "questions": Array [
+        Object {
+          "__typename": "MultipleChoiceQuestion",
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "color": "#ff0000",
+                  "title": "premier choix",
+                },
+              },
+            ],
+          },
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDk=",
+          "jumps": Array [],
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "J'ai plusieurs choix?",
+          "type": "radio",
+        },
+      ],
+      "title": "Questionnaire non rattaché",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to reorder questions 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "Tester c'est douter",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+      "questions": Array [
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": "text",
+          "id": "UXVlc3Rpb246NjY2",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Luffy ou Zoro ?",
+          "type": "text",
+        },
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": "text",
+          "id": "UXVlc3Rpb246NA==",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Hé salut les amis ! C'est david lafarge pokemon comment allez-vous ?",
+          "type": "text",
+        },
+      ],
+      "title": "Questionnaire de test",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireConfigurationMutation GraphQL admin wants to update a questionnaire 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>New description</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+      "questions": Array [
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": "Décrivez dans les grandes lignes le budget de votre proposition",
+          "id": "UXVlc3Rpb246NA==",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Evaluez le coût de votre proposition",
+          "type": "textarea",
+        },
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": null,
+          "id": "UXVlc3Rpb246NjY2",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "ça roule ?",
+          "type": "textarea",
+        },
+        Object {
+          "__typename": "SimpleQuestion",
+          "helpText": null,
+          "id": "UXVlc3Rpb246MTMxMw==",
+          "jumps": Array [],
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Un nombre stp",
+          "type": "number",
+        },
+      ],
+      "title": "New title",
+    },
+  },
+}
+`;

@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateQuestionnaireMutation GraphQL admin wants to delete first question 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+      "questions": Array [
+        Object {
+          "choices": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                  "title": "premier choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNg==",
+                  "title": "deuxième choix",
+                },
+              },
+              Object {
+                "node": Object {
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNw==",
+                  "title": "troisième choix",
+                },
+              },
+            ],
+          },
+          "description": null,
+          "helpText": null,
+          "id": "UXVlc3Rpb246NDk=",
+          "kind": "multiple_choice",
+          "private": false,
+          "required": false,
+          "title": "J'ai plusieurs choix?",
+          "type": "radio",
+        },
+      ],
+      "title": "Questionnaire non rattaché",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireMutation GraphQL admin wants to reorder questions 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>New description</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+      "questions": Array [
+        Object {
+          "description": "<p><strong>Youpla</strong></p>",
+          "helpText": "text",
+          "id": "UXVlc3Rpb246NjY2",
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Luffy ou Zoro ?",
+          "type": "text",
+        },
+        Object {
+          "description": "Ceci est un test",
+          "helpText": "text",
+          "id": "UXVlc3Rpb246NA==",
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Hé salut les amis ! C'est david lafarge pokemon comment allez-vous ?",
+          "type": "text",
+        },
+      ],
+      "title": "New title",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateQuestionnaireMutation GraphQL admin wants to update a questionnaire 1`] = `
+Object {
+  "updateQuestionnaireConfiguration": Object {
+    "questionnaire": Object {
+      "description": "<p>New description</p>",
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+      "questions": Array [
+        Object {
+          "description": null,
+          "helpText": "Décrivez dans les grandes lignes le budget de votre proposition",
+          "id": "UXVlc3Rpb246NA==",
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Evaluez le coût de votre proposition",
+          "type": "textarea",
+        },
+        Object {
+          "description": null,
+          "helpText": null,
+          "id": "UXVlc3Rpb246NjY2",
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "ça roule ?",
+          "type": "textarea",
+        },
+        Object {
+          "description": null,
+          "helpText": null,
+          "id": "UXVlc3Rpb246MTMxMw==",
+          "kind": "simple",
+          "private": false,
+          "required": true,
+          "title": "Un nombre stp",
+          "type": "number",
+        },
+      ],
+      "title": "New title",
+    },
+  },
+}
+`;

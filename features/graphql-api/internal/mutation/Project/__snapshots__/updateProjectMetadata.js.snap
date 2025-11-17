@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProjectMetadataMutation GraphQL admin wants to update a project metadata 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "cover": Object {
+        "id": "media2",
+      },
+      "districts": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz",
+              "name": "Centre ville",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0",
+              "name": "Îles de Nantes",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1",
+              "name": "Hauts pavés Saint-Félix",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2",
+              "name": "Malakoff Saint-Donation",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q3",
+              "name": "Dervallières Zola",
+            },
+          },
+        ],
+      },
+      "id": "UHJvamVjdDpwcm9qZWN0Mg==",
+      "publishedAt": "2014-12-30 00:00:00",
+      "themes": Array [
+        Object {
+          "id": "theme1",
+          "title": "Immobilier",
+        },
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Stratégie technologique de l'Etat et services publics",
+      "video": "rthwrht",
+    },
+  },
+}
+`;

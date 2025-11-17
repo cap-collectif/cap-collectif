@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateSiteParameter GraphQL admin adds a new email as reception email 1`] = `
+Object {
+  "updateSiteParameter": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "keyname": "admin.mail.notifications.receive_address",
+      "value": "receipt@mail.fr",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateSiteParameter GraphQL admin update sender name 1`] = `
+Object {
+  "updateSiteParameter": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "keyname": "admin.mail.notifications.send_name",
+      "value": "envoyeur",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateSiteParameter GraphQL admin wants to add a bad email as reception email 1`] = `
+Object {
+  "updateSiteParameter": Object {
+    "errorCode": "INVALID_VALUE",
+    "siteParameter": null,
+  },
+}
+`;
