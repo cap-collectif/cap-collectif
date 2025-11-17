@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.selectSenderEmail Admin select a SenderEmail 1`] = `
+Object {
+  "selectSenderEmail": Object {
+    "errorCode": null,
+    "senderEmail": Object {
+      "isDefault": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.selectSenderEmail Admin tries to select a non existing SenderEmail 1`] = `
+Object {
+  "selectSenderEmail": Object {
+    "errorCode": "UNKNOWN_SENDER_EMAIL",
+    "senderEmail": null,
+  },
+}
+`;

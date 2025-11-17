@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ExternalServiceConfiguration Admin updates configuration 1`] = `
+Object {
+  "updateExternalServiceConfiguration": Object {
+    "error": null,
+    "externalServiceConfiguration": Object {
+      "value": "mailjet",
+    },
+  },
+}
+`;
+
+exports[`Internal|ExternalServiceConfiguration Admin wants to update configuration but provides invalid value 1`] = `
+Object {
+  "updateExternalServiceConfiguration": Object {
+    "error": "INVALID_VALUE",
+    "externalServiceConfiguration": Object {
+      "value": "mandrill",
+    },
+  },
+}
+`;

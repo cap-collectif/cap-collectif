@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|updateLocaleStatus GraphQL admin wants to update status of two locales 1`] = `
+Object {
+  "updateLocaleStatus": Object {
+    "locales": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "locale-de-DE",
+            "isDefault": false,
+            "isEnabled": true,
+            "isPublished": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "locale-es-ES",
+            "isDefault": false,
+            "isEnabled": true,
+            "isPublished": false,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

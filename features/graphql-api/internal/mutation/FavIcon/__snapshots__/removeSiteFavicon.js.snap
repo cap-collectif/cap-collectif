@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.removeSiteFavicon GraphQL admin client wants to remove the current favicon 1`] = `
+Object {
+  "removeSiteFavicon": Object {
+    "siteFavicon": Object {
+      "id": Any<String>,
+      "keyname": "favicon",
+      "media": null,
+    },
+  },
+}
+`;

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateContactPage Admin wants to create a new traduction of contact page informations in english 1`] = `
+Object {
+  "updateContactPage": Object {
+    "customcode": null,
+    "description": null,
+    "title": "I am the new new title",
+  },
+}
+`;
+
+exports[`mutations.updateContactPage Admin wants to update contact page informations in english 1`] = `
+Object {
+  "updateContactPage": Object {
+    "customcode": null,
+    "description": null,
+    "title": "I am the new title",
+  },
+}
+`;
+
+exports[`mutations.updateContactPage Admin wants to update contact page informations. 1`] = `
+Object {
+  "updateContactPage": Object {
+    "customcode": "",
+    "description": "<p>Je suis la nouvelle description</p>",
+    "title": "Je suis le nouveau titre",
+  },
+}
+`;

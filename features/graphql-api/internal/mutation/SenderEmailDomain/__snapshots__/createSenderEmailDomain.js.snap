@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createSenderEmailDomain Admin adds a new SenderEmailDomain 1`] = `
+Object {
+  "createSenderEmailDomain": Object {
+    "errorCode": null,
+    "senderEmailDomain": Object {
+      "dkimValidation": false,
+      "service": "MANDRILL",
+      "spfValidation": false,
+      "value": "cap-individuel.com",
+    },
+  },
+}
+`;
+
+exports[`mutations.createSenderEmailDomain Admin wants to add a new SenderEmailDomain but already exists 1`] = `
+Object {
+  "createSenderEmailDomain": Object {
+    "errorCode": "ALREADY_EXIST",
+    "senderEmailDomain": null,
+  },
+}
+`;

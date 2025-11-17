@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeSiteFavicon GraphQL admin client wants to edit the current favicon 1`] = `
+Object {
+  "changeSiteFavicon": Object {
+    "siteFavicon": Object {
+      "id": "1",
+      "keyname": "favicon",
+      "media": Object {
+        "id": "media12",
+        "url": Any<String>,
+      },
+    },
+  },
+}
+`;

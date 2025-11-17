@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteSenderEmailDomain Admin deletes a SenderEmailDomain 1`] = `
+Object {
+  "deleteSenderEmailDomain": Object {
+    "deletedId": "mailjetElysee",
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.deleteSenderEmailDomain Admin tries to delete an used SenderEmailDomain 1`] = `
+Object {
+  "deleteSenderEmailDomain": Object {
+    "deletedId": null,
+    "errorCode": "DOMAIN_USED",
+  },
+}
+`;

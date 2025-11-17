@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createSenderEmail Admin adds a new SenderEmail 1`] = `
+Object {
+  "createSenderEmail": Object {
+    "errorCode": null,
+    "senderEmail": Object {
+      "address": "juan@cap-collectif.com",
+      "domain": "cap-collectif.com",
+      "isDefault": false,
+      "locale": "juan",
+    },
+  },
+}
+`;
+
+exports[`mutations.createSenderEmail Admin tries to add a SenderEmail without adding domain first 1`] = `
+Object {
+  "createSenderEmail": Object {
+    "errorCode": "INVALID_DOMAIN",
+    "senderEmail": null,
+  },
+}
+`;
+
+exports[`mutations.createSenderEmail Admin tries to add an already existing SenderEmail 1`] = `
+Object {
+  "createSenderEmail": Object {
+    "errorCode": "ALREADY_EXIST",
+    "senderEmail": null,
+  },
+}
+`;
