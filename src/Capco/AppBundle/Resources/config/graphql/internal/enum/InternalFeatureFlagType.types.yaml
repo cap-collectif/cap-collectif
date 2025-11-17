@@ -165,6 +165,9 @@ InternalFeatureFlagType:
             new_vote_step:
                 value: !php/const Capco\AppBundle\Toggle\Manager::new_vote_step
                 description: 'Whether or not new voting step is enabled'
+            new_new_vote_step:
+                value: !php/const Capco\AppBundle\Toggle\Manager::new_new_vote_step
+                description: 'Whether or not new voting step is enabled'
             mediator:
                 value: !php/const Capco\AppBundle\Toggle\Manager::mediator
                 description: 'Whether or not votes can be added by mediators'

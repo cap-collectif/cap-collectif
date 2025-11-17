@@ -1,4 +1,5 @@
 import { GlobalTheme } from '@shared/navbar/NavBar.utils'
+import { pxToRem } from '@shared/utils/pxToRem'
 import { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFonts: string; titleFonts: string }>`
@@ -64,6 +65,7 @@ export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFon
       &:hover {
         color: ${linkHoverColor};
         text-decoration: underline;
+        cursor: pointer;
       }
     }
 
@@ -82,6 +84,132 @@ export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFon
       position: absolute !important;
       width: 1px !important;
       white-space: nowrap !important;
+    }
+
+    .sr-only-focusable:focus {
+      clip: auto !important;
+      clip-path: none !important;
+      height: auto !important;
+      margin: auto !important;
+      overflow: visible !important;
+      width: auto !important;
+      white-space: normal !important;
+    }
+  `}
+`
+
+export const LeafletStyles = createGlobalStyle`
+  ${() => css`
+    .marker-cluster div {
+      width: ${pxToRem(30)};
+      height: ${pxToRem(30)};
+      margin-left: ${pxToRem(5)};
+      margin-top: ${pxToRem(5)};
+      text-align: center;
+      border-radius: 100%;
+      color: white;
+      font-size: ${pxToRem(14)};
+      font-weight: 600;
+    }
+    .marker-cluster span {
+      line-height: ${pxToRem(30)};
+    }
+    .marker-cluster {
+      background-clip: padding-box;
+      border-radius: 20px;
+    }
+    .marker-cluster-small,
+    .marker-cluster-medium,
+    .marker-cluster-large {
+      background: rgba(69, 69, 69, 0.5);
+    }
+    .marker-cluster-small div,
+    .marker-cluster-medium div,
+    .marker-cluster-large div {
+      background: #454545;
+    }
+
+    .leaflet-container a {
+      color: inherit;
+    }
+
+    .location-circle circle {
+      animation: leaflet-control-locate-throb 2s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
+    }
+
+    @keyframes leaflet-control-locate-throb {
+      from {
+        transform: scale(0.75, 0.75);
+        opacity: 0.5;
+      }
+      to {
+        transform: scale(2, 2);
+        opacity: 0;
+      }
+    }
+
+    .preview-icn svg:nth-child(1) {
+      height: 30px;
+      width: 30px;
+      max-height: none;
+      max-width: none;
+      padding: 0;
+    }
+
+    .preview-icn svg:nth-child(2) {
+      position: absolute;
+      top: 3px;
+      left: 8px;
+      height: 15px;
+      width: 15px;
+      max-height: none;
+      max-width: none;
+      pointer-events: none;
+    }
+
+    .preview-icn.active svg,
+    .preview-icn > svg:hover,
+    .preview-icn > svg:hover + svg {
+      animation: expand-pin 0.1s forwards;
+    }
+
+    @keyframes expand-pin {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.2);
+      }
+    }
+
+    // Leaflet doesn't allow to natively center elements
+    // https://github.com/Leaflet/Leaflet/issues/8358
+
+    .leaflet-bottom.leaflet-left {
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+
+    @media (max-width: 767px) {
+      .leaflet-bottom.leaflet-left {
+        transform: translate(-50%, -20px);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .leaflet-bottom.leaflet-left {
+        top: 1.7rem;
+      }
+      .leaflet-bottom.leaflet-left * {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+
+    @media (min-width: 1366px) {
+      .leaflet-bottom.leaflet-left {
+        width: max-content;
+      }
     }
   `}
 `

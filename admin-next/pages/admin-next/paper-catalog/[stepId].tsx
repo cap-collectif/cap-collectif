@@ -9,7 +9,7 @@ import { StepIdQuery } from '@relay/StepIdQuery.graphql'
 import { Flex, Spinner, CapUIIconSize, Box, Button, CapUIIcon, Heading, Icon } from '@cap-collectif/ui'
 import ProposalCard from '@components/BackOffice/Proposal/ProposalCard'
 import styled from 'styled-components'
-import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
+import { ProposalCard_catalogPaper_proposal$key } from '@relay/ProposalCard_catalogPaper_proposal.graphql'
 
 export interface PaperCatalogPageProps {
   stepId: string
@@ -22,7 +22,7 @@ export const QUERY = graphql`
         proposals(first: 10000, orderBy: [{ field: CATEGORY, direction: DESC }, { field: COST, direction: ASC }]) {
           edges {
             node {
-              ...ProposalCard_proposal
+              ...ProposalCard_catalogPaper_proposal
               district {
                 name
               }
@@ -119,7 +119,7 @@ const PaperCatalogPage: React.FC<PaperCatalogPageProps> = ({ stepId }) => {
                 {area}
               </Heading>
             </Flex>
-            {groupedByAreaProposals[area].map((proposal: ProposalCard_proposal$key, idx: number) => {
+            {groupedByAreaProposals[area].map((proposal: ProposalCard_catalogPaper_proposal$key, idx: number) => {
               if (!proposal) return null
               return <ProposalCard key={idx} proposal={proposal} className={idx && !((idx + 1) % 4) ? 'break' : ''} />
             })}

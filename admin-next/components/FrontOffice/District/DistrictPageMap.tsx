@@ -124,7 +124,6 @@ const DistrictPageMap = ({ geojson }: Props) => {
         zoom={13}
         zoomControl={false}
         dragging={false}
-        tap={false}
         center={[0, 0]}
         doubleClickZoom={false}
         touchZoom={false}

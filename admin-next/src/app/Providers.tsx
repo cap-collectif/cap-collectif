@@ -4,7 +4,7 @@ import { AppProvider } from '@components/BackOffice/AppProvider/AppProvider'
 import NoSSR from '@utils/NoSSR'
 import getEnvironment from '@utils/relay-environement'
 import { domAnimation, LazyMotion } from 'framer-motion'
-import { FC, Suspense, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { IntlProvider } from 'react-intl'
 import { RelayEnvironmentProvider } from 'react-relay'
 import { FeatureFlags, IntlType, ViewerSession } from 'types'
@@ -121,14 +121,11 @@ export default function Providers({
           siteColors={siteColors}
           mapToken={SSRData?.mapToken}
         >
-          {/** Our first Suspense before our theme is loaded */}
-          <Suspense fallback={null}>
-            <NoSSR>
-              <UIProviderWithTheme SSRData={SSRData} captchaKey={captchaKey}>
-                <MainLayout SSRData={SSRData}>{children}</MainLayout>
-              </UIProviderWithTheme>
-            </NoSSR>
-          </Suspense>
+          <NoSSR>
+            <UIProviderWithTheme SSRData={SSRData} captchaKey={captchaKey}>
+              <MainLayout SSRData={SSRData}>{children}</MainLayout>
+            </UIProviderWithTheme>
+          </NoSSR>
         </AppProvider>
       </IntlProvider>
     </RelayEnvironmentProvider>

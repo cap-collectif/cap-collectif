@@ -91,6 +91,7 @@ export const features: FeatureFlags = {
   paper_vote: false,
   versions: false,
   new_vote_step: false,
+  new_new_vote_step: false,
   turnstile_captcha: false,
   mediator: false,
   online_help: false,

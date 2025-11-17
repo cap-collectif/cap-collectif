@@ -75,6 +75,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   moderation_comment: false,
   unstable__new_create_project: false,
   new_vote_step: false,
+  new_new_vote_step: false,
   mediator: false,
   online_help: false,
   full_proposal_card: false,

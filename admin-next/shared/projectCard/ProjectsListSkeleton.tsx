@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Flex, Grid, AbstractCard, Skeleton, GridProps } from '@cap-collectif/ui'
 import { pxToRem } from '@shared/utils/pxToRem'
 
-type Props = {
+type Props = GridProps & {
   count: number
   templateColumns?: string | Array<string>
 } & GridProps

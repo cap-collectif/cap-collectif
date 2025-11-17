@@ -220,6 +220,9 @@ Object {
       "type": "new_vote_step",
     },
     Object {
+      "type": "new_new_vote_step",
+    },
+    Object {
       "type": "mediator",
     },
     Object {

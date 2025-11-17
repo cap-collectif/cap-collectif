@@ -13,14 +13,14 @@ import {
   Tag,
   BoxProps,
 } from '@cap-collectif/ui'
-import type { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
+import type { ProposalCard_catalogPaper_proposal$key } from '@relay/ProposalCard_catalogPaper_proposal.graphql'
 import CategoryBackground from './CategoryBackground'
 import { useIntl } from 'react-intl'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import stripHTML from '@shared/utils/stripHTML'
 
 const FRAGMENT = graphql`
-  fragment ProposalCard_proposal on Proposal {
+  fragment ProposalCard_catalogPaper_proposal on Proposal {
     id
     title
     url
@@ -135,7 +135,7 @@ export const ProposalCard = ({
   className,
 }: {
   className: string
-  proposal: ProposalCard_proposal$key
+  proposal: ProposalCard_catalogPaper_proposal$key
 }) => {
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const intl = useIntl()

@@ -84,6 +84,7 @@ class Manager
     final public const moderation_comment = 'moderation_comment';
     final public const unstable__new_create_project = 'unstable__new_create_project';
     final public const new_vote_step = 'new_vote_step';
+    final public const new_new_vote_step = 'new_new_vote_step';
     final public const mediator = 'mediator';
     final public const online_help = 'online_help';
     final public const full_proposal_card = 'full_proposal_card';
@@ -210,6 +211,7 @@ class Manager
         self::moderation_comment,
         self::unstable__new_create_project,
         self::new_vote_step,
+        self::new_new_vote_step,
         self::mediator,
         self::online_help,
         self::full_proposal_card,
