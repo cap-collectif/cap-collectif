@@ -18,7 +18,6 @@ def linux_docker_install(force=False):
         return
 
     run('curl -sSL https://get.docker.com/ | sh')
-    run('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
     run('sudo apt-get install unrar')
 
 

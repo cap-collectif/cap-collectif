@@ -1,5 +1,4 @@
 [packages]
-docker-compose = ">=1.23.0"
 docker = "*"
 PyYAML = "<5.4"
 Fabric = "*"
