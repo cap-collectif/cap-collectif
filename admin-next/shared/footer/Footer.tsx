@@ -139,24 +139,6 @@ export const Footer: FC<Props> = props => {
             gridColumnGap="md"
             gridTemplateColumns="repeat(auto-fit, minmax(150px, auto))"
           >
-            <li>
-              <a href="https://aide-utilisateurs.helpscoutdocs.com/">
-                {intl.formatMessage({ id: 'footer.links.need-help' })}
-              </a>
-            </li>
-            <li>
-              <a href="/pages/charte">{intl.formatMessage({ id: 'charter' })}</a>
-            </li>
-            {legals.privacy && (
-              <li>
-                <a href={privacyPath}>{intl.formatMessage({ id: 'privacy-policy' })}</a>
-              </li>
-            )}
-            {legals.legal && (
-              <li>
-                <a href={legalPath}>{intl.formatMessage({ id: 'legal-mentions' })}</a>
-              </li>
-            )}
             {legals.cookies && (
               <li>
                 <a href={cookiesPath}>{intl.formatMessage({ id: 'cookies' })}</a>
@@ -175,6 +157,19 @@ export const Footer: FC<Props> = props => {
             >
               {cookieManager}
             </Box>
+            {legals.privacy && (
+              <li>
+                <a href={privacyPath}>{intl.formatMessage({ id: 'privacy-policy' })}</a>
+              </li>
+            )}
+            {legals.legal && (
+              <li>
+                <a href={legalPath}>{intl.formatMessage({ id: 'legal-mentions' })}</a>
+              </li>
+            )}
+            <li>
+              <a href="/pages/charte">{intl.formatMessage({ id: 'charter' })}</a>
+            </li>
             {links &&
               links
                 .filter(link => !!link)

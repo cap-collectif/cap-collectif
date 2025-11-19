@@ -181,18 +181,14 @@ exports[`<Footer /> renders correctly 1`] = `
         >
           <li>
             <a
-              href="https://aide-utilisateurs.helpscoutdocs.com/"
+              href="/cookies"
             >
-              footer.links.need-help
+              cookies
             </a>
           </li>
-          <li>
-            <a
-              href="/pages/charte"
-            >
-              charter
-            </a>
-          </li>
+          <li
+            class="sc-bcXGCL dnvEMZ"
+          />
           <li>
             <a
               href="/privacy"
@@ -209,14 +205,11 @@ exports[`<Footer /> renders correctly 1`] = `
           </li>
           <li>
             <a
-              href="/cookies"
+              href="/pages/charte"
             >
-              cookies
+              charter
             </a>
           </li>
-          <li
-            class="sc-bcXGCL dnvEMZ"
-          />
           <li>
             <a
               href="/faq"
