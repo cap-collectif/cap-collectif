@@ -53,7 +53,7 @@ InternalWithProposals:
                     orderBy:
                         type: '[InternalProposalOrder]'
                         description: 'Ordering options for proposals returned from the connection.'
-                        defaultValue: [ { field: 'PUBLISHED_AT', direction: 'ASC' } ]
+                        defaultValue: [{ field: 'PUBLISHED_AT', direction: 'ASC' }]
                     excludeViewerVotes:
                         type: 'Boolean'
                         defaultValue: false

@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\District\AbstractDistrict:
                     ElasticsearchProposalNestedDistrict,
                     ElasticsearchProjectNestedProjectDistrictPositioner,
                     ElasticsearchEvent,
-                    Events
+                    Events,
                 ]
         name:
             groups: [Districts, Proposals, Elasticsearch, ElasticsearchProposalNestedDistrict]

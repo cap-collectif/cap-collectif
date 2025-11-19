@@ -1,15 +1,15 @@
 Capco\UserBundle\Entity\UserType:
-  exclusion_policy: ALL
-  properties:
-    id:
-      expose: true
-      type: integer
-      groups: [Default, UsersInfos, Elasticsearch]
-    slug:
-      expose: true
-      type: string
-      groups: [Default, UsersInfos]
-    name:
-      expose: true
-      type: string
-      groups: [Default, UsersInfos]
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Default, UsersInfos, Elasticsearch]
+        slug:
+            expose: true
+            type: string
+            groups: [Default, UsersInfos]
+        name:
+            expose: true
+            type: string
+            groups: [Default, UsersInfos]

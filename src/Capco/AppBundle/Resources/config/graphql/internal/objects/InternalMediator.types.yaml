@@ -3,7 +3,7 @@ InternalMediator:
     inherits:
         - Node
     config:
-        description: "User assigned to a project who can add votes in behalf of offline users."
+        description: 'User assigned to a project who can add votes in behalf of offline users.'
         name: Mediator
         interfaces:
             - Node

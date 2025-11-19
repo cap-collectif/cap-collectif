@@ -81,11 +81,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response16:
         question: '@xQuestion9'
         proposalEvaluation: '@proposalEvaluation1'
-        value:
-            {
-                'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'],
-                'other': null,
-            }
+        value: { 'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'], 'other': null }
         createdAt: <(new \DateTime('2021-01-01 02:16:00'))>
     response17:
         question: '@xQuestion10'
@@ -140,12 +136,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response26:
         question: '@xQuestion9'
         proposalEvaluation: '@proposalEvaluation3'
-        value:
-            {
-                'labels':
-                    ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'],
-                'other': null,
-            }
+        value: { 'labels': ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'], 'other': null }
         createdAt: <(new \DateTime('2021-01-01 02:27:00'))>
     response27:
         question: '@xQuestion10'
@@ -766,8 +757,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud4:
         question: '@xQuestion1'
         reply: '@replyTagCloud2'
-        value:
-            { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Three Kingdoms ' }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Total War: Three Kingdoms ' }
         createdAt: <(new \DateTime('2021-01-01 04:10:00'))>
 
     responseTagCloud5:
@@ -878,11 +868,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud20:
         question: '@xQuestion1'
         reply: '@replyTagCloud10'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. J',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. J' }
         createdAt: <(new \DateTime('2021-01-01 04:21:00'))>
 
     responseTagCloud21:
@@ -896,11 +882,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud22:
         question: '@xQuestion1'
         reply: '@replyTagCloud11'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. T',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. T' }
         createdAt: <(new \DateTime('2021-01-01 04:23:00'))>
 
     responseTagCloud23:
@@ -915,11 +897,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud24:
         question: '@xQuestion1'
         reply: '@replyTagCloud12'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. M',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. M' }
         createdAt: <(new \DateTime('2021-01-01 04:25:00'))>
 
     responseTagCloud25:
@@ -933,11 +911,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud26:
         question: '@xQuestion1'
         reply: '@replyTagCloud13'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. B',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. B' }
         createdAt: <(new \DateTime('2021-01-01 04:27:00'))>
 
     responseTagCloud27:
@@ -951,11 +925,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud28:
         question: '@xQuestion1'
         reply: '@replyTagCloud14'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. G',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. G' }
         createdAt: <(new \DateTime('2021-01-01 05:28:00'))>
 
     responseTagCloud29:
@@ -970,11 +940,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     responseTagCloud30:
         question: '@xQuestion1'
         reply: '@replyTagCloud15'
-        value:
-            {
-                'labels': ['Athlétisme', 'Sports collectifs'],
-                'other': 'Bon chance Agui pour le nuage de mots. !',
-            }
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. !' }
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
     responseAnonymousQuestionnaire1:
         question: '@simpleQuestionAnonymousQuestionnaire'

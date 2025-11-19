@@ -22,8 +22,7 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         moveToSelectionStep: '@selectionStepIdfVote'
         createdAt: <(new \DateTime('2020-01-01 02:00:00'))>
         updatedAt: $createdAt
-        body:
-            'Commençons cette nouvelle année par la présentation d’un outil mais très performant. le QQOQC(C)P !
+        body: 'Commençons cette nouvelle année par la présentation d’un outil mais très performant. le QQOQC(C)P !
 
             Le QQOQCCP (Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi), appelé aussi méthode du questionnement est un outil d’aide à la résolution de problèmes comportant une liste quasi exhaustive d’informations sur la situation.
 

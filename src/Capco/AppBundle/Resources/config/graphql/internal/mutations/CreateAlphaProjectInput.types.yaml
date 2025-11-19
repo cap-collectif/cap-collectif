@@ -73,4 +73,4 @@ CreateAlphaProjectInput:
                 description: 'if it is archived'
             address:
                 type: 'String'
-                description: 'The project address, geocoded by google'            
+                description: 'The project address, geocoded by google'

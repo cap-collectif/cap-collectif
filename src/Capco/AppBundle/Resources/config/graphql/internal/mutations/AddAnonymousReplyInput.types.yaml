@@ -1,14 +1,14 @@
 AddAnonymousReplyInput:
-  type: relay-mutation-input
-  config:
-    description: 'Create an anonymous reply'
-    fields:
-      questionnaireId:
-        type: 'ID!'
-        description: 'The id of the questionnaire'
-      responses:
-        type: '[ResponseInput!]!'
-        description: 'The responses to the questionnaire questions'
-      participantToken:
-        type: 'String'
-        description: 'Token of existing participant.'
+    type: relay-mutation-input
+    config:
+        description: 'Create an anonymous reply'
+        fields:
+            questionnaireId:
+                type: 'ID!'
+                description: 'The id of the questionnaire'
+            responses:
+                type: '[ResponseInput!]!'
+                description: 'The responses to the questionnaire questions'
+            participantToken:
+                type: 'String'
+                description: 'Token of existing participant.'

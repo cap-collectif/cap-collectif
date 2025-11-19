@@ -9,4 +9,3 @@ CheckboxRequirementInput:
             value:
                 type: 'Boolean!'
                 description: 'The updated value of the requirement.'
-

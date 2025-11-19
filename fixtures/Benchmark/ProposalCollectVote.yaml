@@ -1,61 +1,61 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
-  proposal1votes{1..500}:
-    id: 10000<current()>
-    proposal: '@proposal1'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposal2votes{1..400}:
-    id: 20000<current()>
-    proposal: '@proposal2'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposal3votes{1..100}:
-    id: 30000<current()>
-    proposal: '@proposal3'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposal4votes{1..200}:
-    id: 40000<current()>
-    proposal: '@proposal4'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposal5votes{1..200}:
-    id: 50000<current()>
-    proposal: '@proposal5'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom1{1..500}:
-    id: 60000<current()>
-    proposal: '@proposal<numberBetween(6, 100)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom2{1..500}:
-    id: 70000<current()>
-    proposal: '@proposal<numberBetween(101, 200)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom3{1..500}:
-    id: 80000<current()>
-    proposal: '@proposal<numberBetween(201, 300)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom4{1..500}:
-    id: 90000<current()>
-    proposal: '@proposal<numberBetween(301, 400)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom5{1..500}:
-    id: 100000<current()>
-    proposal: '@proposal<numberBetween(401, 500)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
+    proposal1votes{1..500}:
+        id: 10000<current()>
+        proposal: '@proposal1'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposal2votes{1..400}:
+        id: 20000<current()>
+        proposal: '@proposal2'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposal3votes{1..100}:
+        id: 30000<current()>
+        proposal: '@proposal3'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposal4votes{1..200}:
+        id: 40000<current()>
+        proposal: '@proposal4'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposal5votes{1..200}:
+        id: 50000<current()>
+        proposal: '@proposal5'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposalVotesRandom1{1..500}:
+        id: 60000<current()>
+        proposal: '@proposal<numberBetween(6, 100)>'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposalVotesRandom2{1..500}:
+        id: 70000<current()>
+        proposal: '@proposal<numberBetween(101, 200)>'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposalVotesRandom3{1..500}:
+        id: 80000<current()>
+        proposal: '@proposal<numberBetween(201, 300)>'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposalVotesRandom4{1..500}:
+        id: 90000<current()>
+        proposal: '@proposal<numberBetween(301, 400)>'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>
+    proposalVotesRandom5{1..500}:
+        id: 100000<current()>
+        proposal: '@proposal<numberBetween(401, 500)>'
+        collectStep: '@collectstep1'
+        user: '@voter<current()>'
+        publishedAt: <(new \DateTime())>

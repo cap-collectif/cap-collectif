@@ -1,14 +1,14 @@
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
-  validationRule1:
-    __factory: { create: [min, 2] }
+    validationRule1:
+        __factory: { create: [min, 2] }
 
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
-  xQuestion1:
-    id: 1664
-    title: Classez vos choix
-    slug: classez-vos-choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
-    required: true
-    type: 6
-    randomQuestionChoices: true
-    validationRule: '@validationRule1'
+    xQuestion1:
+        id: 1664
+        title: Classez vos choix
+        slug: classez-vos-choix
+        helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+        required: true
+        type: 6
+        randomQuestionChoices: true
+        validationRule: '@validationRule1'

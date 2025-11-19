@@ -9,4 +9,3 @@ DeleteStepInput:
                 type: 'Boolean!'
                 defaultValue: false
                 description: 'If true also delete the related proposal form/questionnaire/consultation'
-

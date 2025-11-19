@@ -5,4 +5,3 @@ DeleteStepPayload:
             stepId:
                 type: 'ID!'
                 description: 'The deleted step ID.'
-

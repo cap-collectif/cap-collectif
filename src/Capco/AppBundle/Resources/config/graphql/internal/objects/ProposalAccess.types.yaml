@@ -4,6 +4,6 @@ ProposalAccess:
         name: ProposalAccess
         fields:
             canEdit:
-                type: "Boolean!"
+                type: 'Boolean!'
             canDelete:
-                type: "Boolean!"
+                type: 'Boolean!'

@@ -1,8 +1,8 @@
 InternalEventDistrictPositionerConnection:
-  type: relay-connection
-  config:
-    name: EventDistrictPositionerConnection
-    nodeType: InternalEventDistrictPositioner!
-    connectionFields:
-      totalCount:
-        type: Int!
+    type: relay-connection
+    config:
+        name: EventDistrictPositionerConnection
+        nodeType: InternalEventDistrictPositioner!
+        connectionFields:
+            totalCount:
+                type: Int!

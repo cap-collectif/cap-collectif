@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\EventTranslation:
-  event1_fr:
-    translatable: '@event1'
-    locale: fr-FR
-    title: Exemple d’événement
-    body: <stripslashes('\<p> Ceci est le détail de l’événement</p>\')>
+    event1_fr:
+        translatable: '@event1'
+        locale: fr-FR
+        title: Exemple d’événement
+        body: <stripslashes('\<p> Ceci est le détail de l’événement</p>\')>

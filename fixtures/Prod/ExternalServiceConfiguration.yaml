@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\ExternalServiceConfiguration:
-  Mailer:
-    type: 'mailer'
-    value: 'mandrill'
+    Mailer:
+        type: 'mailer'
+        value: 'mandrill'

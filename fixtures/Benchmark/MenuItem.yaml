@@ -1,25 +1,25 @@
 Capco\AppBundle\Entity\MenuItem:
-  MenuItem1:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 1
-    parent: null
-    menu: 1
+    MenuItem1:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 1
+        parent: null
+        menu: 1
 
-  MenuItem3:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 3
-    parent: null
-    menu: 1
+    MenuItem3:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 3
+        parent: null
+        menu: 1
 
-  MenuItem12:
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 3
-    parent: null
-    menu: 1
-    associatedFeatures: [calendar]
+    MenuItem12:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 0
+        position: 3
+        parent: null
+        menu: 1
+        associatedFeatures: [calendar]

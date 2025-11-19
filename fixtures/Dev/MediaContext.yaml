@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\Context:
-  MediaContext1:
-    id: default
-    name: Default
-    enabled: true
-  MediaContext2:
-    id: sources
-    name: Sources
-    enabled: true
+    MediaContext1:
+        id: default
+        name: Default
+        enabled: true
+    MediaContext2:
+        id: sources
+        name: Sources
+        enabled: true

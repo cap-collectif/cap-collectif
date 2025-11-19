@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Debate\DebateArticle:
         updatedAt: <identity((new \DateTime('2020-10-01')))>
     canabisArticleOuestFrance1:
         id: 'canabisArticleOuestFrance1'
-        title: "Cannabis thérapeutique : des médicaments sous forme d’huiles, gélules et fleurs séchées expérimentés"
+        title: 'Cannabis thérapeutique : des médicaments sous forme d’huiles, gélules et fleurs séchées expérimentés'
         debate: '@debateCannabis'
         origin: Ouest France
         description: |
@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Debate\DebateArticle:
         updatedAt: <identity((new \DateTime('2020-10-01')))>
     canabisArticleOuestFrance2:
         id: 'canabisArticleOuestFrance2'
-        title: "Cannabis thérapeutique. Les premières expérimentations autorisées par décret"
+        title: 'Cannabis thérapeutique. Les premières expérimentations autorisées par décret'
         debate: '@debateCannabis'
         origin: Ouest France
         description: |

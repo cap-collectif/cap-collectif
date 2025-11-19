@@ -1,9 +1,9 @@
 Capco\UserBundle\Entity\UserType:
-  UserType1:
-    id: 1
-  UserType2:
-    id: 2
-  UserType3:
-    id: 3
-  UserType4:
-    id: 4
+    UserType1:
+        id: 1
+    UserType2:
+        id: 2
+    UserType3:
+        id: 3
+    UserType4:
+        id: 4

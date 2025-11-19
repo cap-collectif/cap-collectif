@@ -317,11 +317,7 @@ services:
 
     Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator:
         decorates: Doctrine\Migrations\Version\DbalMigrationFactory
-        arguments:
-            [
-                '@Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator.inner',
-                '@service_container',
-            ]
+        arguments: ['@Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator.inner', '@service_container']
 
     Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClient:
         arguments:

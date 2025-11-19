@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\RegistrationForm:
-  registrationForm:
-    id: 'registrationForm'
-    bottomTextDisplayed: true
-    topTextDisplayed: true
+    registrationForm:
+        id: 'registrationForm'
+        bottomTextDisplayed: true
+        topTextDisplayed: true

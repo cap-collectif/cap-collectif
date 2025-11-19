@@ -70,4 +70,3 @@ InternalParticipant:
             isEmailConfirmed:
                 type: 'Boolean!'
                 description: 'Wether or not the participant has confirmed his email.'
-

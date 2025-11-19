@@ -13,8 +13,7 @@ InternalVersion:
     config:
         name: Version
         description: 'A version of contribution'
-        interfaces:
-            [Sourceable, Reportable, Argumentable, ContributionWithAuthor, EditableContribution]
+        interfaces: [Sourceable, Reportable, Argumentable, ContributionWithAuthor, EditableContribution]
         fields:
             url:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", value)'

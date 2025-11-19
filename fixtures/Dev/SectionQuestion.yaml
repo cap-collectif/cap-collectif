@@ -1,48 +1,48 @@
 Capco\AppBundle\Entity\Questions\SectionQuestion:
-  sectionquestion{1..3}:
-    id: 30<current()>
-    title: Nouvelle section <current()>
-    description: ma super description <current()>
-    type: 10
-  sectionIdfGrandProjet:
-    id: 350
-    title: Grand Projet
-    type: 10
-    alwaysJumpDestinationQuestion: '@sectionIdfInfoGrandProjet'
-  sectionIdfInfoGrandProjet:
-    id: 304
-    level: 1
-    title: Informations complémentaires sur mon projet
-    type: 10
-    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo1'
-  sectionIdfPorteurGrandProjet:
-    id: 305
-    level: 1
-    title: Informations sur le porteur de projet
-    type: 10
-    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectPorteur1'
-  sectionIdfProjectLocal:
-    id: 351
-    title: Projet local
-    type: 10
-    alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
-  sectionIdfPorteurProjectLocal:
-    id: 306
-    title: Informations sur le porteur de projet
-    type: 10
-    level: 1
-    alwaysJumpDestinationQuestion: '@xQuestionIdfProjetLocal1'
-  sectionIdfInfoProjectLocal:
-    id: 307
-    title: Informations complémentaires sur mon projet
-    type: 10
-    level: 1
-    alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo1'
-  sectionEvalIdf1:
-    id: 308
-    title: Contrôle d'éligibilité du candidat et cohérence des documents
-    type: 10
-  sectionEvalIdf2:
-    id: 309
-    title: Éligibilité du projet
-    type: 10
+    sectionquestion{1..3}:
+        id: 30<current()>
+        title: Nouvelle section <current()>
+        description: ma super description <current()>
+        type: 10
+    sectionIdfGrandProjet:
+        id: 350
+        title: Grand Projet
+        type: 10
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoGrandProjet'
+    sectionIdfInfoGrandProjet:
+        id: 304
+        level: 1
+        title: Informations complémentaires sur mon projet
+        type: 10
+        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo1'
+    sectionIdfPorteurGrandProjet:
+        id: 305
+        level: 1
+        title: Informations sur le porteur de projet
+        type: 10
+        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectPorteur1'
+    sectionIdfProjectLocal:
+        id: 351
+        title: Projet local
+        type: 10
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
+    sectionIdfPorteurProjectLocal:
+        id: 306
+        title: Informations sur le porteur de projet
+        type: 10
+        level: 1
+        alwaysJumpDestinationQuestion: '@xQuestionIdfProjetLocal1'
+    sectionIdfInfoProjectLocal:
+        id: 307
+        title: Informations complémentaires sur mon projet
+        type: 10
+        level: 1
+        alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo1'
+    sectionEvalIdf1:
+        id: 308
+        title: Contrôle d'éligibilité du candidat et cohérence des documents
+        type: 10
+    sectionEvalIdf2:
+        id: 309
+        title: Éligibilité du projet
+        type: 10

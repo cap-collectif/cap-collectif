@@ -18,7 +18,7 @@ PreviewWithProposals:
                     orderBy:
                         type: '[PreviewProposalOrder]'
                         description: 'Ordering options for proposals returned from the connection.'
-                        defaultValue: [ { field: 'PUBLISHED_AT', direction: 'ASC' } ]
+                        defaultValue: [{ field: 'PUBLISHED_AT', direction: 'ASC' }]
                     includeDraft:
                         type: 'Boolean'
                         description: '(ROLE_ADMIN only) Select also draft proposals.'

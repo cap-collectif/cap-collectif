@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\Page:
-  page1:
-    id: page1
-    createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
-    customCode: '&lt;Custom code&lt;/div&gt;'
-    media: '@GiecLogo'
-    cover: '@GiecLogo'
-  page2:
-    id: page2
-    createdAt: <(new \DateTime('2017-02-21 05:00:00'))>
+    page1:
+        id: page1
+        createdAt: <(new \DateTime('2017-02-21 04:00:00'))>
+        customCode: '&lt;Custom code&lt;/div&gt;'
+        media: '@GiecLogo'
+        cover: '@GiecLogo'
+    page2:
+        id: page2
+        createdAt: <(new \DateTime('2017-02-21 05:00:00'))>

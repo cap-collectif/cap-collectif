@@ -13,10 +13,7 @@ Capco\AppBundle\Entity\Consultation:
                 ]
         getOwner:
             serialized_name: owner
-            groups:
-              [
-                  Elasticsearch
-              ]
+            groups: [Elasticsearch]
         elasticsearchTypeName:
             serialized_name: objectType
             groups: [Elasticsearch]

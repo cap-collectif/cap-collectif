@@ -26,7 +26,6 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Reply']
 
-
     Capco\AppBundle\Repository\ArgumentVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
@@ -192,9 +191,9 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Proposal']
         calls:
-            -   method: setLogger
-                arguments:
-                    - '@monolog.logger.export'
+            - method: setLogger
+              arguments:
+                  - '@monolog.logger.export'
 
     Capco\AppBundle\Repository\ProposalSelectionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -298,9 +297,9 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoUserBundle:User']
         calls:
-            -   method: setLogger
-                arguments:
-                    - '@monolog.logger.export'
+            - method: setLogger
+              arguments:
+                  - '@monolog.logger.export'
 
     Capco\AppBundle\Repository\UserNotificationsConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -979,10 +978,10 @@ services:
         arguments: ['CapcoAppBundle:OpinionAppendix']
 
     Capco\AppBundle\Repository\EventTranslationRepository:
-        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        tags: [ 'repository.manager' ]
-        arguments: [ 'CapcoAppBundle:EventTranslation' ]
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:EventTranslation']
 
     Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository:
         public: true
@@ -997,7 +996,7 @@ services:
         arguments: ['CapcoAppBundle:CollectStepImapServerConfig']
 
     Capco\AppBundle\Repository\AppLogRepository:
-        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        tags: [ 'repository.manager' ]
-        arguments: [ 'CapcoAppBundle:AppLog' ]
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:AppLog']

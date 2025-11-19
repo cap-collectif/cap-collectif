@@ -12,7 +12,7 @@ capco_admin:
     options: { i18n: false }
 
 admin_area:
-    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin
     options: { i18n: false }
 
@@ -130,7 +130,7 @@ capco_user:
     prefix: /
 
 _liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+    resource: '@LiipImagineBundle/Resources/config/routing.yaml'
     options: { i18n: false }
 
 facebook_login:

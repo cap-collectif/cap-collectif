@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\District\ProposalDistrict:
-  district1:
-    id: district1
-    form: '@proposalForm1'
-  district2:
-    id: district2
-    form: '@proposalForm1'
+    district1:
+        id: district1
+        form: '@proposalForm1'
+    district2:
+        id: district2
+        form: '@proposalForm1'

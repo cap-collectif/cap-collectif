@@ -1,176 +1,176 @@
 Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
-  ljconditionHapGood:
-    id: ljconditionHapGood
-    position: 1
-    operator: IS
-    question: '@xQuestionIsHapGood'
-    value: '@questionchoiceHapBonNon'
-  ljconditionNoel:
-    id: ljconditionNoel
-    position: 1
-    operator: IS
-    question: '@xQuestionHapNoel'
-    value: '@questionchoiceNoel'
-  ljconditionFleuveHap:
-    id: ljconditionFleuveHap
-    position: 1
-    operator: IS
-    question: '@xQuestionHapNoel'
-    value: '@questionchoiceHap'
-  ljconditionFleuveHapLg1:
-    id: ljconditionFleuveHapLg1
-    position: 1
-    operator: IS
-    question: '@xQuestionHapNoel'
-    value: '@questionchoiceHap'
-  ljconditionFleuveGange:
-    id: ljconditionFleuveGange
-    position: 2
-    operator: IS
-    question: '@xQuestionFavoriteFleuve'
-    value: '@questionchoiceLeGange'
-  ljconditionMarvel:
-    id: ljconditionMarvel
-    position: 1
-    operator: IS
-    question: '@xQuestionMarvelOrDc'
-    value: '@questionchoiceMarvelOrDcMarvel'
-  ljconditionDc:
-    id: ljconditionDc
-    position: 1
-    operator: IS
-    question: '@xQuestionMarvelOrDc'
-    value: '@questionchoiceMarvelOrDcDc'
-  ljconditionRadio:
-    id: ljconditionRadio
-    position: 1
-    operator: IS
-    question: '@ljxQuestionRadio'
-    value: '@ljQuestionChoiceIsARadio'
-  ljconditionSelect:
-    id: ljconditionSelect
-    position: 1
-    operator: IS_NOT
-    question: '@ljxQuestionSelect'
-    value: '@ljQuestionChoiceIsASelect'
-  ljconditionButton:
-    id: ljconditionButton
-    position: 1
-    operator: IS
-    question: '@ljxQuestionButton'
-    value: '@ljQuestionChoiceIsntAButton'
-  ljconditionCheckbox:
-    id: ljconditionCheckbox
-    position: 1
-    operator: IS_NOT
-    question: '@ljxQuestionCheckbox'
-    value: '@ljQuestionChoiceIsntACheckbox'
-  ljconditionHapGoodProposalForm15:
-    id: ljconditionHapGoodProposalForm15
-    position: 1
-    operator: IS
-    question: '@xQuestionIsHapGoodProposalForm15'
-    value: '@qChoiceHapBonNonProposalForm15'
-  ljconditionNoelProposalForm15:
-    id: ljconditionNoelProposalForm15
-    position: 1
-    operator: IS
-    question: '@xQuestionHapNoelProposalForm15'
-    value: '@questionchoiceNoelProposalForm15'
-  ljconditionFleuveHapProposalForm15:
-    id: ljconditionFleuveHapProposalForm15
-    position: 1
-    operator: IS
-    question: '@xQuestionHapNoelProposalForm15'
-    value: '@questionchoiceHapProposalForm15'
-  ljconditionFleuveGangeProposalForm15:
-    id: ljconditionFleuveGangeProposalForm15
-    position: 2
-    operator: IS
-    question: '@xQuestionFavoriteFleuveProposalForm15'
-    value: '@questionchoiceLeGangeProposalForm15'
-  ljconditionMarvelProposalForm15:
-    id: ljconditionMarvelProposalForm15
-    position: 1
-    operator: IS
-    question: '@xQuestionMarvelOrDcProposalForm15'
-    value: '@qChoiceMarvelOrDcMarvelPForm15'
-  ljconditionDcProposalForm15:
-    id: ljconditionDcProposalForm15
-    position: 1
-    operator: IS
-    question: '@xQuestionMarvelOrDcProposalForm15'
-    value: '@qChoiceMarvelOrDcDcProposalForm15'
-  ljcIdfProjectLocal:
-    id: ljcIdfProjectLocal
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfGrandOrLocal'
-    value: '@questionchoiceIdf1'
-  ljcIdfProjectGrand:
-    id: ljcIdfProjectGrand
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfGrandOrLocal'
-    value: '@questionchoiceIdf2'
-  ljcIdfProjectLocalAssociation:
-    id: ljcIdfProjectLocalAssociation
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocal1'
-    value: '@idfProjetLocal1ChoiceAssociation'
-  ljcIdfProjectLocalAssociationSiret:
-    id: ljcIdfProjectLocalAssociationSiret
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocalAssociation1'
-    value: '@idfProjetLocalAssociation1Choice1'
-  ljcIdfProjectLocalAssociationWithoutSiret:
-    id: ljcIdfProjectLocalAssociationNoSiret
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocalAssociation1'
-    value: '@idfProjetLocalAssociation1Choice2'
-  ljcIdfProjectLocalAssociationRna:
-    id: ljcIdfProjectLocalAssociationRna
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfPLocalAssocWithoutSiret1'
-    value: '@idfProjetLocalAssocWithoutSiret1Yes'
-  ljcIdfProjectLocalAssocWithoutRna:
-    id: ljcIdfProjectLocalAssociationNoRna
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfPLocalAssocWithoutSiret1'
-    value: '@idfProjetLocalAssocWithoutSiret1No'
+    ljconditionHapGood:
+        id: ljconditionHapGood
+        position: 1
+        operator: IS
+        question: '@xQuestionIsHapGood'
+        value: '@questionchoiceHapBonNon'
+    ljconditionNoel:
+        id: ljconditionNoel
+        position: 1
+        operator: IS
+        question: '@xQuestionHapNoel'
+        value: '@questionchoiceNoel'
+    ljconditionFleuveHap:
+        id: ljconditionFleuveHap
+        position: 1
+        operator: IS
+        question: '@xQuestionHapNoel'
+        value: '@questionchoiceHap'
+    ljconditionFleuveHapLg1:
+        id: ljconditionFleuveHapLg1
+        position: 1
+        operator: IS
+        question: '@xQuestionHapNoel'
+        value: '@questionchoiceHap'
+    ljconditionFleuveGange:
+        id: ljconditionFleuveGange
+        position: 2
+        operator: IS
+        question: '@xQuestionFavoriteFleuve'
+        value: '@questionchoiceLeGange'
+    ljconditionMarvel:
+        id: ljconditionMarvel
+        position: 1
+        operator: IS
+        question: '@xQuestionMarvelOrDc'
+        value: '@questionchoiceMarvelOrDcMarvel'
+    ljconditionDc:
+        id: ljconditionDc
+        position: 1
+        operator: IS
+        question: '@xQuestionMarvelOrDc'
+        value: '@questionchoiceMarvelOrDcDc'
+    ljconditionRadio:
+        id: ljconditionRadio
+        position: 1
+        operator: IS
+        question: '@ljxQuestionRadio'
+        value: '@ljQuestionChoiceIsARadio'
+    ljconditionSelect:
+        id: ljconditionSelect
+        position: 1
+        operator: IS_NOT
+        question: '@ljxQuestionSelect'
+        value: '@ljQuestionChoiceIsASelect'
+    ljconditionButton:
+        id: ljconditionButton
+        position: 1
+        operator: IS
+        question: '@ljxQuestionButton'
+        value: '@ljQuestionChoiceIsntAButton'
+    ljconditionCheckbox:
+        id: ljconditionCheckbox
+        position: 1
+        operator: IS_NOT
+        question: '@ljxQuestionCheckbox'
+        value: '@ljQuestionChoiceIsntACheckbox'
+    ljconditionHapGoodProposalForm15:
+        id: ljconditionHapGoodProposalForm15
+        position: 1
+        operator: IS
+        question: '@xQuestionIsHapGoodProposalForm15'
+        value: '@qChoiceHapBonNonProposalForm15'
+    ljconditionNoelProposalForm15:
+        id: ljconditionNoelProposalForm15
+        position: 1
+        operator: IS
+        question: '@xQuestionHapNoelProposalForm15'
+        value: '@questionchoiceNoelProposalForm15'
+    ljconditionFleuveHapProposalForm15:
+        id: ljconditionFleuveHapProposalForm15
+        position: 1
+        operator: IS
+        question: '@xQuestionHapNoelProposalForm15'
+        value: '@questionchoiceHapProposalForm15'
+    ljconditionFleuveGangeProposalForm15:
+        id: ljconditionFleuveGangeProposalForm15
+        position: 2
+        operator: IS
+        question: '@xQuestionFavoriteFleuveProposalForm15'
+        value: '@questionchoiceLeGangeProposalForm15'
+    ljconditionMarvelProposalForm15:
+        id: ljconditionMarvelProposalForm15
+        position: 1
+        operator: IS
+        question: '@xQuestionMarvelOrDcProposalForm15'
+        value: '@qChoiceMarvelOrDcMarvelPForm15'
+    ljconditionDcProposalForm15:
+        id: ljconditionDcProposalForm15
+        position: 1
+        operator: IS
+        question: '@xQuestionMarvelOrDcProposalForm15'
+        value: '@qChoiceMarvelOrDcDcProposalForm15'
+    ljcIdfProjectLocal:
+        id: ljcIdfProjectLocal
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfGrandOrLocal'
+        value: '@questionchoiceIdf1'
+    ljcIdfProjectGrand:
+        id: ljcIdfProjectGrand
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfGrandOrLocal'
+        value: '@questionchoiceIdf2'
+    ljcIdfProjectLocalAssociation:
+        id: ljcIdfProjectLocalAssociation
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocal1'
+        value: '@idfProjetLocal1ChoiceAssociation'
+    ljcIdfProjectLocalAssociationSiret:
+        id: ljcIdfProjectLocalAssociationSiret
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocalAssociation1'
+        value: '@idfProjetLocalAssociation1Choice1'
+    ljcIdfProjectLocalAssociationWithoutSiret:
+        id: ljcIdfProjectLocalAssociationNoSiret
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocalAssociation1'
+        value: '@idfProjetLocalAssociation1Choice2'
+    ljcIdfProjectLocalAssociationRna:
+        id: ljcIdfProjectLocalAssociationRna
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfPLocalAssocWithoutSiret1'
+        value: '@idfProjetLocalAssocWithoutSiret1Yes'
+    ljcIdfProjectLocalAssocWithoutRna:
+        id: ljcIdfProjectLocalAssociationNoRna
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfPLocalAssocWithoutSiret1'
+        value: '@idfProjetLocalAssocWithoutSiret1No'
 
-  ljcIdfProjectLocalEntreprise:
-    id: ljcIdfProjectLocalEntreprise
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocal1'
-    value: '@idfProjetLocal1ChoiceEntreprise'
-  ljcIdfProjectLocalOrgPublic:
-    id: ljcIdfProjectLocalOrgPublic
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocal1'
-    value: '@idfProjetLocal1ChoiceOrgPub'
-  ljcIdfProjectLocalOrgPriv:
-    id: ljcIdfProjectLocalOrgPriv
-    position: 1
-    operator: IS
-    question: '@xQuestionIdfProjetLocal1'
-    value: '@idfProjetLocal1ChoiceOrgPriv'
-  ljcLogicjumpQ1-1:
-    id: ljcLogicjumpQ1-1
-    position: 1
-    operator: IS
-    question: '@questionJump1'
-    value: '@questionChoiceJumpQuestionR2'
-  ljcLogicjumpQ1-2:
-    id: ljcLogicjumpQ1-2
-    position: 2
-    operator: IS
-    question: '@questionJump1'
-    value: '@questionChoiceJumpQuestionR3'
+    ljcIdfProjectLocalEntreprise:
+        id: ljcIdfProjectLocalEntreprise
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocal1'
+        value: '@idfProjetLocal1ChoiceEntreprise'
+    ljcIdfProjectLocalOrgPublic:
+        id: ljcIdfProjectLocalOrgPublic
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocal1'
+        value: '@idfProjetLocal1ChoiceOrgPub'
+    ljcIdfProjectLocalOrgPriv:
+        id: ljcIdfProjectLocalOrgPriv
+        position: 1
+        operator: IS
+        question: '@xQuestionIdfProjetLocal1'
+        value: '@idfProjetLocal1ChoiceOrgPriv'
+    ljcLogicjumpQ1-1:
+        id: ljcLogicjumpQ1-1
+        position: 1
+        operator: IS
+        question: '@questionJump1'
+        value: '@questionChoiceJumpQuestionR2'
+    ljcLogicjumpQ1-2:
+        id: ljcLogicjumpQ1-2
+        position: 2
+        operator: IS
+        question: '@questionJump1'
+        value: '@questionChoiceJumpQuestionR3'

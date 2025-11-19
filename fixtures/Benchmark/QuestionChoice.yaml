@@ -1,25 +1,25 @@
 Capco\AppBundle\Entity\QuestionChoice:
-  questionchoice1:
-    id: questionchoice1
-    title: Choix 1
-    position: 1
-    description: Description
-    question: '@xQuestion1'
-  questionchoice2:
-    id: questionchoice2
-    title: Choix 2
-    position: 2
-    description: Description
-    question: '@xQuestion1'
-  questionchoice3:
-    id: questionchoice3
-    title: Choix 3
-    position: 3
-    description: Description
-    question: '@xQuestion1'
-  questionchoice4:
-    id: questionchoice4
-    title: Choix 4
-    position: 4
-    description: Description
-    question: '@xQuestion1'
+    questionchoice1:
+        id: questionchoice1
+        title: Choix 1
+        position: 1
+        description: Description
+        question: '@xQuestion1'
+    questionchoice2:
+        id: questionchoice2
+        title: Choix 2
+        position: 2
+        description: Description
+        question: '@xQuestion1'
+    questionchoice3:
+        id: questionchoice3
+        title: Choix 3
+        position: 3
+        description: Description
+        question: '@xQuestion1'
+    questionchoice4:
+        id: questionchoice4
+        title: Choix 4
+        position: 4
+        description: Description
+        question: '@xQuestion1'

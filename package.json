@@ -39,7 +39,7 @@
         "bundlewatch": "bundlewatch",
         "prettier:js": "prettier --parser typescript --no-error-on-unmatched-pattern --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:ts": "prettier --parser typescript --no-error-on-unmatched-pattern --write 'admin-next/**/*.{ts,tsx}'",
-        "prettier:yaml": "prettier --parser yaml --no-error-on-unmatched-pattern --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
+        "prettier:yaml": "prettier --parser yaml --no-error-on-unmatched-pattern --write '**/*.{yml,yaml}' --ignore-path .gitignore",
         "prettier": "yarn run prettier:js && yarn run prettier:ts && yarn run prettier:yaml",
         "precommit": "lint-staged",
         "cy:open": "yarn --cwd cypress cy:open",

@@ -1,98 +1,98 @@
 Capco\AppBundle\Entity\SiteImage:
-  SiteImage1:
-    keyname: image.logo
-    category: settings.appearance
-    media: '@Logo'
-    isEnabled: true
-    position: 1
-  SiteImage2:
-    keyname: image.header
-    category: pages.homepage
-    media: '@Header'
-    isEnabled: true
-    position: 2
-  SiteImage3:
-    keyname: homepage.picto
-    category: pages.homepage
-    isEnabled: false
-    isSocialNetworkThumbnail: true
-    position: 3
-  SiteImage4:
-    keyname: image.default_avatar
-    category: settings.appearance
-    media: null
-    isEnabled: true
-    position: 4
-  SiteImage5:
-    keyname: image.votes_bar
-    category: settings.appearance
-    media: '@MediaVotesBar'
-    isEnabled: true
-    position: 5
-  SiteImageShield:
-    keyname: image.shield
-    category: pages.shield
-    media: '@Logo'
-    isEnabled: true
-    position: 1
-  SiteImageBlogPicto:
-    keyname: blog.picto
-    category: pages.blog
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 6
-  SiteImageEventPicto:
-    keyname: events.picto
-    category: pages.events
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 7
-  SiteImageIdeasPicto:
-    keyname: ideas.picto
-    category: pages.ideas
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 8
-  SiteImageThemesPicto:
-    keyname: themes.picto
-    category: pages.themes
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 9
-  SiteImageProjectsPicto:
-    keyname: projects.picto
-    category: pages.projects
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 10
-  SiteImageMembersPicto:
-    keyname: members.picto
-    category: pages.members
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 11
-  SiteImageContactPicto:
-    keyname: contact.picto
-    category: pages.contact
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 12
-  SiteImageTrashIdeasPicto:
-    keyname: ideas_trash.picto
-    category: pages.ideas_trash
-    media: '@Picto'
-    isSocialNetworkThumbnail: true
-    isEnabled: true
-    position: 13
-  SiteImageSiteFavicon:
-    keyname: favicon
-    category: global
-    isEnabled: true
-    position: 1
+    SiteImage1:
+        keyname: image.logo
+        category: settings.appearance
+        media: '@Logo'
+        isEnabled: true
+        position: 1
+    SiteImage2:
+        keyname: image.header
+        category: pages.homepage
+        media: '@Header'
+        isEnabled: true
+        position: 2
+    SiteImage3:
+        keyname: homepage.picto
+        category: pages.homepage
+        isEnabled: false
+        isSocialNetworkThumbnail: true
+        position: 3
+    SiteImage4:
+        keyname: image.default_avatar
+        category: settings.appearance
+        media: null
+        isEnabled: true
+        position: 4
+    SiteImage5:
+        keyname: image.votes_bar
+        category: settings.appearance
+        media: '@MediaVotesBar'
+        isEnabled: true
+        position: 5
+    SiteImageShield:
+        keyname: image.shield
+        category: pages.shield
+        media: '@Logo'
+        isEnabled: true
+        position: 1
+    SiteImageBlogPicto:
+        keyname: blog.picto
+        category: pages.blog
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 6
+    SiteImageEventPicto:
+        keyname: events.picto
+        category: pages.events
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 7
+    SiteImageIdeasPicto:
+        keyname: ideas.picto
+        category: pages.ideas
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 8
+    SiteImageThemesPicto:
+        keyname: themes.picto
+        category: pages.themes
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 9
+    SiteImageProjectsPicto:
+        keyname: projects.picto
+        category: pages.projects
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 10
+    SiteImageMembersPicto:
+        keyname: members.picto
+        category: pages.members
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 11
+    SiteImageContactPicto:
+        keyname: contact.picto
+        category: pages.contact
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 12
+    SiteImageTrashIdeasPicto:
+        keyname: ideas_trash.picto
+        category: pages.ideas_trash
+        media: '@Picto'
+        isSocialNetworkThumbnail: true
+        isEnabled: true
+        position: 13
+    SiteImageSiteFavicon:
+        keyname: favicon
+        category: global
+        isEnabled: true
+        position: 1

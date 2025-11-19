@@ -1,114 +1,114 @@
 version: '3.8'
 
 services:
-  application:
-    container_name: capco_application_1
-    build:
-      context: ../services/local
-      args:
-        DOCKER_BUILDKIT: 1
-      cache_from:
-        - 'capco-application'
-    ports:
-      - '443:443'
-      - '1337:1337'
-      - '1664:1664'
-      - '5672:5672'
-      - '8181:8181'
-      - '8686:8686'
-      - '1234:1234'
-    environment:
-      TERM: xterm
-      SYMFONY_INSTANCE_NAME: dev
-      SYMFONY_DATABASE_HOST: database
-      SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
-      SYMFONY_ELASTICSEARCH_HOST: elasticsearch
-      SYMFONY_REDIS_HOST: redis
-      SYMFONY_SAML_SP: dev
-      SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
-      SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
-    volumes:
-      - /var/www/public/media
-      - /var/www/public/export
-      - /var/www/var/cache
-      - /var/www/var/logs
-    links:
-      - database:database
-      - elasticsearch:elasticsearch
-      - redis:redis
-      - seleniumhub:selenium
-      - mailcatcher:mailcatchersmtp
-    extra_hosts: # Used to ban varnish cache and blackfire
-      - 'capco.test:0.0.0.0'
-      - 'capco.dev:0.0.0.0'
+    application:
+        container_name: capco_application_1
+        build:
+            context: ../services/local
+            args:
+                DOCKER_BUILDKIT: 1
+            cache_from:
+                - 'capco-application'
+        ports:
+            - '443:443'
+            - '1337:1337'
+            - '1664:1664'
+            - '5672:5672'
+            - '8181:8181'
+            - '8686:8686'
+            - '1234:1234'
+        environment:
+            TERM: xterm
+            SYMFONY_INSTANCE_NAME: dev
+            SYMFONY_DATABASE_HOST: database
+            SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
+            SYMFONY_ELASTICSEARCH_HOST: elasticsearch
+            SYMFONY_REDIS_HOST: redis
+            SYMFONY_SAML_SP: dev
+            SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
+            SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
+        volumes:
+            - /var/www/public/media
+            - /var/www/public/export
+            - /var/www/var/cache
+            - /var/www/var/logs
+        links:
+            - database:database
+            - elasticsearch:elasticsearch
+            - redis:redis
+            - seleniumhub:selenium
+            - mailcatcher:mailcatchersmtp
+        extra_hosts: # Used to ban varnish cache and blackfire
+            - 'capco.test:0.0.0.0'
+            - 'capco.dev:0.0.0.0'
 
-  database:
-    container_name: capco_database_1
-    image: mariadb:10.3
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
+    database:
+        container_name: capco_database_1
+        image: mariadb:10.3
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
 
-  redis:
-    container_name: redis_1
-    image: redis:3
-    ports:
-      - '6379:6379'
+    redis:
+        container_name: redis_1
+        image: redis:3
+        ports:
+            - '6379:6379'
 
-  elasticsearch:
-    container_name: capco_elasticsearch_1
-    build:
-      context: '../services/elasticsearch'
-      cache_from:
-        - 'capco_elasticsearch'
-    environment:
-      - cluster.name='%SYMFONY_ELASTICSEARCH_INDEX'
-      - bootstrap.memory_lock=true
-      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    # mem_limit: 1g
+    elasticsearch:
+        container_name: capco_elasticsearch_1
+        build:
+            context: '../services/elasticsearch'
+            cache_from:
+                - 'capco_elasticsearch'
+        environment:
+            - cluster.name='%SYMFONY_ELASTICSEARCH_INDEX'
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        # mem_limit: 1g
 
-  seleniumhub:
-    container_name: capco_seleniumhub_1
-    image:
-      selenium/hub:4.1.2
-      # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md
-      # You can browse http://0.0.0.0:4444/ui/ to check available browsers
-    ports:
-      - '4442:4442'
-      - '4443:4443'
-      - '4444:4444'
+    seleniumhub:
+        container_name: capco_seleniumhub_1
+        image:
+            selenium/hub:4.1.2
+            # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md
+            # You can browse http://0.0.0.0:4444/ui/ to check available browsers
+        ports:
+            - '4442:4442'
+            - '4443:4443'
+            - '4444:4444'
 
-  chrome:
-    container_name: capco_chrome_1
-    image: selenium/node-chrome:4.1.2
-    environment:
-      - TZ='Europe/Paris'
-      - SE_EVENT_BUS_HOST=seleniumhub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    links:
-      - seleniumhub:seleniumhub
-      - application:capco.test
-    depends_on:
-      - seleniumhub
-    shm_size: 2gb
+    chrome:
+        container_name: capco_chrome_1
+        image: selenium/node-chrome:4.1.2
+        environment:
+            - TZ='Europe/Paris'
+            - SE_EVENT_BUS_HOST=seleniumhub
+            - SE_EVENT_BUS_PUBLISH_PORT=4442
+            - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+        links:
+            - seleniumhub:seleniumhub
+            - application:capco.test
+        depends_on:
+            - seleniumhub
+        shm_size: 2gb
 
-  mailcatcher:
-    container_name: capco_mailcatcher_1
-    # or image:djfarrelly/maildev in dev
-    image: jderusse/mailcatcher:latest
-    ports:
-      - '25:25'
+    mailcatcher:
+        container_name: capco_mailcatcher_1
+        # or image:djfarrelly/maildev in dev
+        image: jderusse/mailcatcher:latest
+        ports:
+            - '25:25'
 
-  kibana:
-    container_name: capco_kibana_1
-    image: docker.elastic.co/kibana/kibana-oss:7.0.0
-    links:
-      - elasticsearch
-    ports:
-      - '5601:5601'
-  # volumes:
-  #     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    kibana:
+        container_name: capco_kibana_1
+        image: docker.elastic.co/kibana/kibana-oss:7.0.0
+        links:
+            - elasticsearch
+        ports:
+            - '5601:5601'
+    # volumes:
+    #     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml

@@ -1,31 +1,31 @@
 tests:
-    "Production settings":
-        path: "/.*"                                 # run the assertions for all HTTP requests
+    'Production settings':
+        path: '/.*' # run the assertions for all HTTP requests
         assertions:
-          - "metrics.twig.compile.count == 0"
-          - "metrics.symfony.config_check.count == 0"
-          - "(metrics.doctrine.annotations.read.count + metrics.doctrine.dql.parsed.count + metrics.doctrine.entities.metadata.count) == 0"
-          - "metrics.assetic.controller.calls.count == 0"
-    "Pages should be fast enough":
-        path: "/.*"                                 # run the assertions for all HTTP requests
+            - 'metrics.twig.compile.count == 0'
+            - 'metrics.symfony.config_check.count == 0'
+            - '(metrics.doctrine.annotations.read.count + metrics.doctrine.dql.parsed.count + metrics.doctrine.entities.metadata.count) == 0'
+            - 'metrics.assetic.controller.calls.count == 0'
+    'Pages should be fast enough':
+        path: '/.*' # run the assertions for all HTTP requests
         assertions:
-            - "main.wall_time < 100ms"              # wall clock time is less than 100ms
-    "Pages should not read yaml":
-        path: "/.*"                                 # run the assertions for all HTTP requests
+            - 'main.wall_time < 100ms' # wall clock time is less than 100ms
+    'Pages should not read yaml':
+        path: '/.*' # run the assertions for all HTTP requests
         assertions:
-            - "metrics.symfony.yaml.reads.count == 0"
-    "Pages should not send mail synchronously":
-        path: "/.*"
+            - 'metrics.symfony.yaml.reads.count == 0'
+    'Pages should not send mail synchronously':
+        path: '/.*'
         assertions:
-            - "metrics.emails.sent.count == 0"
+            - 'metrics.emails.sent.count == 0'
 
-    "Commands should be fast enough":
-        command: ".*"                               # run the assertions for all CLI commands
+    'Commands should be fast enough':
+        command: '.*' # run the assertions for all CLI commands
         assertions:
-            - "main.wall_time < 2s"                 # wall clock time is less than 2s
-    "Homepage should not hit the DB":
-        path: "/"                                   # only apply the assertions for the homepage
+            - 'main.wall_time < 2s' # wall clock time is less than 2s
+    'Homepage should not hit the DB':
+        path: '/' # only apply the assertions for the homepage
         assertions:
-            - "metrics.sql.queries.count == 0"      # no SQL statements executed
-            - "main.peak_memory < 10mb"             # memory does not exceed 10mb
-            - "metrics.output.network_out < 100kb"  # the response size is less than 100kb
+            - 'metrics.sql.queries.count == 0' # no SQL statements executed
+            - 'main.peak_memory < 10mb' # memory does not exceed 10mb
+            - 'metrics.output.network_out < 100kb' # the response size is less than 100kb

@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\EventTranslation:
-  event{1..500}_fr:
-    locale: fr-FR
-    translatable: '@event<current()>'
-    id: 'event<current()>_fr'
-    title: <text(20)>
-    slug: 'event<current()>'
-    body: <text(300)>
+    event{1..500}_fr:
+        locale: fr-FR
+        translatable: '@event<current()>'
+        id: 'event<current()>_fr'
+        title: <text(20)>
+        slug: 'event<current()>'
+        body: <text(300)>

@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\Steps\OtherStep:
-  cstep2:
-    title: Etape personnalisée
-    label: Etape personnalisée
-    isEnabled: true
-    startAt: <(new \DateTime('now'))>
-    endAt: <dateTimeBetween('now', '+10days')>
-    body: <stripslashes("\<p> Choisissez dans l’administration les différentes étapes qui constituent votre projet. Voici les étapes de base à utiliser par projet participatif :</p>\<p>\<b>Étapes d\'une consultation\</b> \<ul> \<li> étape de consultation (créer une structure au préalable)\</li>\<li> étape de synthèse\</li>\<li> étape de classement\</li>\</ul>\<b>Étapes d\'un budget participatif, d\'un appel à projets, d\'interpellations oud\'uneboite à idées\</b>\<ul>\<li> étape de dépôt (créer un formulaire au préalable) \</li>\<li> étape de sélection \</li>\</ul>\<b>Étapes d\'un questionnaire\</b>\<ul>\<li>étape de questionnaire (créer unquestionnaire au préalable)\</li>\</ul>\<b>Étapes pour toutes les applications\</b>\<ul>\<li>étape de présentation\</li>\</ul>\</p>\")>
+    cstep2:
+        title: Etape personnalisée
+        label: Etape personnalisée
+        isEnabled: true
+        startAt: <(new \DateTime('now'))>
+        endAt: <dateTimeBetween('now', '+10days')>
+        body: <stripslashes("\<p> Choisissez dans l’administration les différentes étapes qui constituent votre projet. Voici les étapes de base à utiliser par projet participatif :</p>\<p>\<b>Étapes d\'une consultation\</b> \<ul> \<li> étape de consultation (créer une structure au préalable)\</li>\<li> étape de synthèse\</li>\<li> étape de classement\</li>\</ul>\<b>Étapes d\'un budget participatif, d\'un appel à projets, d\'interpellations oud\'uneboite à idées\</b>\<ul>\<li> étape de dépôt (créer un formulaire au préalable) \</li>\<li> étape de sélection \</li>\</ul>\<b>Étapes d\'un questionnaire\</b>\<ul>\<li>étape de questionnaire (créer unquestionnaire au préalable)\</li>\</ul>\<b>Étapes pour toutes les applications\</b>\<ul>\<li>étape de présentation\</li>\</ul>\</p>\")>

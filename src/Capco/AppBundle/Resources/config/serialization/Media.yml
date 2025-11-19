@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\Media:
-  attributes:
-    id:
-      groups: [Default]
+    attributes:
+        id:
+            groups: [Default]

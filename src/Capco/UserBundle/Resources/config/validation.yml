@@ -1,68 +1,54 @@
 Capco\UserBundle\Entity\User:
-  constraints:
-    - Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestions:
-        {
-          message: proposal.missing_required_responses,
-          formField: registrationForm,
-          groups: [registration],
-        }
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        { fields: email, message: already_used_email, groups: [registration] }
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        { fields: phone, message: already_used_phone, groups: [registration, profile] }
-  properties:
-    username:
-      - NotBlank: { message: username.blank, groups: [registration, registrationAdmin, profile] }
-      - Length:
-          { min: 2, max: 128, minMessage: username.minMessage, groups: [registration, profile] }
-    biography:
-      - Length: { max: 1000, groups: [profile] }
-    plainPassword:
-      - NotBlank: { message: password.blank, groups: [registration] }
-      - Length: { min: 8, max: 72, minMessage: password.minMessage, groups: [registration] }
-    email:
-      - NotBlank: { message: email.blank, groups: [registration, registrationAdmin] }
-      - Email: { message: email.invalid, groups: [registration, registrationAdmin] }
-      - Capco\AppBundle\Validator\Constraints\NotThrowableEmail:
-          { message: email.throwable, groups: [registration] }
-      - Capco\AppBundle\Validator\Constraints\CheckEmailDomain: { groups: [registration] }
-    twitterUrl:
-      - Url: { groups: [profile] }
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl:
-          { social_network: twitter, groups: [profile] }
-    facebookUrl:
-      - Url: { groups: [profile] }
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl:
-          { social_network: facebook, groups: [profile] }
-    linkedInUrl:
-      - Url: { groups: [profile] }
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl:
-          { social_network: linkedIn, groups: [profile] }
-    media:
-      - Valid: ~
-    websiteUrl:
-      - Url: { groups: [profile] }
-    zipCode:
-      - Length:
-          {
-            min: 0,
-            max: 10,
-            minMessage: user.register.invalid_zip_code,
-            maxMessage: user.register.invalid_zip_code,
-            groups: [profile],
-          }
-    phone:
-      - Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber:
-          { groups: [registration, profile] }
+    constraints:
+        - Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestions:
+              { message: proposal.missing_required_responses, formField: registrationForm, groups: [registration] }
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              { fields: email, message: already_used_email, groups: [registration] }
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              { fields: phone, message: already_used_phone, groups: [registration, profile] }
+    properties:
+        username:
+            - NotBlank: { message: username.blank, groups: [registration, registrationAdmin, profile] }
+            - Length: { min: 2, max: 128, minMessage: username.minMessage, groups: [registration, profile] }
+        biography:
+            - Length: { max: 1000, groups: [profile] }
+        plainPassword:
+            - NotBlank: { message: password.blank, groups: [registration] }
+            - Length: { min: 8, max: 72, minMessage: password.minMessage, groups: [registration] }
+        email:
+            - NotBlank: { message: email.blank, groups: [registration, registrationAdmin] }
+            - Email: { message: email.invalid, groups: [registration, registrationAdmin] }
+            - Capco\AppBundle\Validator\Constraints\NotThrowableEmail:
+                  { message: email.throwable, groups: [registration] }
+            - Capco\AppBundle\Validator\Constraints\CheckEmailDomain: { groups: [registration] }
+        twitterUrl:
+            - Url: { groups: [profile] }
+            - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
+        facebookUrl:
+            - Url: { groups: [profile] }
+            - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
+        linkedInUrl:
+            - Url: { groups: [profile] }
+            - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: linkedIn, groups: [profile] }
+        media:
+            - Valid: ~
+        websiteUrl:
+            - Url: { groups: [profile] }
+        zipCode:
+            - Length:
+                  {
+                      min: 0,
+                      max: 10,
+                      minMessage: user.register.invalid_zip_code,
+                      maxMessage: user.register.invalid_zip_code,
+                      groups: [profile],
+                  }
+        phone:
+            - Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber: { groups: [registration, profile] }
 
 FOS\UserBundle\Form\Model\ChangePassword:
-  properties:
-    new:
-      - NotBlank: { message: fos_user.new_password.blank, groups: [ChangePassword, ResetPassword] }
-      - Length:
-          {
-            min: 8,
-            max: 72,
-            minMessage: fos_user.new_password.short,
-            groups: [ChangePassword, ResetPassword],
-          }
+    properties:
+        new:
+            - NotBlank: { message: fos_user.new_password.blank, groups: [ChangePassword, ResetPassword] }
+            - Length:
+                  { min: 8, max: 72, minMessage: fos_user.new_password.short, groups: [ChangePassword, ResetPassword] }

@@ -1,33 +1,33 @@
 Capco\AppBundle\Entity\OpinionVersionVote:
-  opinionVersionVote{1..50}:
-    id: 7000<current()>
-    opinionVersion: '@version2'
-    value: 1
-    user: '@user<current()>'
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
-    updatedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
-  opinionVersionVote51:
-    id: 700051
-    opinionVersion: '@version11'
-    value: 0
-    user: '@userNotConfirmedWithContributions'
-    publishedAt: <(new \DateTime('2016-01-01'))>
-    updatedAt: <(new \DateTime('2016-01-01'))>
-    createdAt: <(new \DateTime('2016-01-01'))>
-  opinionVersionVote52:
-    id: 700052
-    opinionVersion: '@version17'
-    value: 1
-    user: '@user2'
-    publishedAt: <(new \DateTime('2016-01-02'))>
-    updatedAt: <(new \DateTime('2016-01-02'))>
-    createdAt: <(new \DateTime('2016-01-02'))>
-  opinionVersionVote53:
-    id: 700053
-    opinionVersion: '@version18'
-    value: 1
-    user: '@user4'
-    publishedAt: <(new \DateTime('2016-01-03'))>
-    updatedAt: <(new \DateTime('2016-01-03'))>
-    createdAt: <(new \DateTime('2016-01-03'))>
+    opinionVersionVote{1..50}:
+        id: 7000<current()>
+        opinionVersion: '@version2'
+        value: 1
+        user: '@user<current()>'
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+        updatedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+    opinionVersionVote51:
+        id: 700051
+        opinionVersion: '@version11'
+        value: 0
+        user: '@userNotConfirmedWithContributions'
+        publishedAt: <(new \DateTime('2016-01-01'))>
+        updatedAt: <(new \DateTime('2016-01-01'))>
+        createdAt: <(new \DateTime('2016-01-01'))>
+    opinionVersionVote52:
+        id: 700052
+        opinionVersion: '@version17'
+        value: 1
+        user: '@user2'
+        publishedAt: <(new \DateTime('2016-01-02'))>
+        updatedAt: <(new \DateTime('2016-01-02'))>
+        createdAt: <(new \DateTime('2016-01-02'))>
+    opinionVersionVote53:
+        id: 700053
+        opinionVersion: '@version18'
+        value: 1
+        user: '@user4'
+        publishedAt: <(new \DateTime('2016-01-03'))>
+        updatedAt: <(new \DateTime('2016-01-03'))>
+        createdAt: <(new \DateTime('2016-01-03'))>

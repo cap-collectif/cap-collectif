@@ -1,14 +1,14 @@
 Capco\AppBundle\Entity\Proposal:
-  proposal{1..500}:
-    id: 'proposal<current()>'
-    title: 'proposal<current()>'
-    slug: 'proposal-<current()>'
-    body: <text(300)>
-    author: '@voter<numberBetween(1, 1000)>'
-    proposalForm: '@proposalForm1'
-    status: '@status<numberBetween(1, 2)>'
-    category: '@pCategory<numberBetween(1, 4)>'
-    publishedAt: <(new \DateTime())>
-    createdAt: <(new \DateTime())>
-    reference: <current()>
-    undraftAt: $publishedAt
+    proposal{1..500}:
+        id: 'proposal<current()>'
+        title: 'proposal<current()>'
+        slug: 'proposal-<current()>'
+        body: <text(300)>
+        author: '@voter<numberBetween(1, 1000)>'
+        proposalForm: '@proposalForm1'
+        status: '@status<numberBetween(1, 2)>'
+        category: '@pCategory<numberBetween(1, 4)>'
+        publishedAt: <(new \DateTime())>
+        createdAt: <(new \DateTime())>
+        reference: <current()>
+        undraftAt: $publishedAt

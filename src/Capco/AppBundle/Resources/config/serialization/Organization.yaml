@@ -18,15 +18,7 @@ Capco\AppBundle\Entity\Organization\Organization:
             groups: [Default, sonata_api_read, sonata_api_write, sonata_search, OrganizationsInfos]
         username:
             type: string
-            groups:
-                [
-                    Default,
-                    Elasticsearch,
-                    sonata_api_read,
-                    sonata_api_write,
-                    sonata_search,
-                    OrganizationsInfos,
-                ]
+            groups: [Default, Elasticsearch, sonata_api_read, sonata_api_write, sonata_search, OrganizationsInfos]
         getUsername:
             serialized_name: displayName
             type: string

@@ -66,4 +66,3 @@ InternalCollectStep:
             preventProposalDelete:
                 type: 'Boolean!'
                 description: 'Whether or not users can delete their proposal after the step is closed.'
-

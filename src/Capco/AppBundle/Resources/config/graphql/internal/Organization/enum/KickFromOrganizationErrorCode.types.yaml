@@ -10,4 +10,3 @@ KickFromOrganizationErrorCode:
             USER_NOT_MEMBER:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\Organization\KickFromOrganizationMutation::USER_NOT_MEMBER
                 description: 'User not found or not a member of the organization.'
-

@@ -16,7 +16,13 @@ services:
         public: true
         lazy: true
         arguments:
-            $config: { host: '%elasticsearch_host%', port: '9200', username: '%elasticsearch_username%' ,password: '%elasticsearch_password%' }
+            $config:
+                {
+                    host: '%elasticsearch_host%',
+                    port: '9200',
+                    username: '%elasticsearch_username%',
+                    password: '%elasticsearch_password%',
+                }
             $logger: '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
             $debug: '%kernel.debug%'
 
@@ -43,7 +49,7 @@ services:
         public: true
         lazy: true
         arguments:
-            $config: {host: '%elasticsearch_host%', port: '9200'}
+            $config: { host: '%elasticsearch_host%', port: '9200' }
 
     Elastica\Cluster: ~
 

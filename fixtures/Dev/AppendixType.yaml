@@ -1,13 +1,13 @@
 Capco\AppBundle\Entity\AppendixType:
-  appendixType1:
-    id: '1'
-    title: Exposé des motifs
-    helpText: Rentrez ici l'exposé des motifs.
-  appendixType2:
-    id: '2'
-    title: Étude d'impact
-    helpText: Rentrez ici l'étude d'impact.
-  appendixType3:
-    id: '3'
-    title: Exposé des mensonges
-    helpText: Rentrez ici un peu de vérité.
+    appendixType1:
+        id: '1'
+        title: Exposé des motifs
+        helpText: Rentrez ici l'exposé des motifs.
+    appendixType2:
+        id: '2'
+        title: Étude d'impact
+        helpText: Rentrez ici l'étude d'impact.
+    appendixType3:
+        id: '3'
+        title: Exposé des mensonges
+        helpText: Rentrez ici un peu de vérité.

@@ -1,11 +1,11 @@
 DeleteCarrouselElementPayload:
-  type: relay-mutation-payload
-  config:
-    description: "Payload of deleteCarrouselConfiguration mutation."
-    fields:
-      deletedCarrouselElementId:
-        type: ID!
-        description: "The ID of the deleted CarrouselConfiguration."
-      errorCode:
-        type: DeleteCarrouselElementErrorCode
-        description: "Global ID doesn't exist or user doesn't have the permission to delete the CarrouselConfiguration."
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of deleteCarrouselConfiguration mutation.'
+        fields:
+            deletedCarrouselElementId:
+                type: ID!
+                description: 'The ID of the deleted CarrouselConfiguration.'
+            errorCode:
+                type: DeleteCarrouselElementErrorCode
+                description: "Global ID doesn't exist or user doesn't have the permission to delete the CarrouselConfiguration."

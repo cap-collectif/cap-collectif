@@ -2,7 +2,7 @@ import fs from 'fs'
 import fetch from 'node-fetch'
 import chalk from 'chalk'
 
-const LOCO_READ_ONLY_KEY = process.env.LOCO_READ_ONLY_KEY
+const SYMFONY_LOCO_READ_ONLY_KEY = process.env.SYMFONY_LOCO_READ_ONLY_KEY
 
 const locales = ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN']
 const domains = ['CapcoAppBundle', 'SonataAdminBundle', 'messages']
@@ -14,7 +14,7 @@ async function main() {
     console.log(`[${chalk.green(locale)}]: Downloading up to date xlf and JSON files…`)
 
     await fetch(
-      `https://localise.biz:443/api/export/locale/${locale}.xlf?format=symfony&no-comments=true&key=${LOCO_READ_ONLY_KEY}`,
+      `https://localise.biz:443/api/export/locale/${locale}.xlf?format=symfony&no-comments=true&key=${SYMFONY_LOCO_READ_ONLY_KEY}`,
     ).then(res => {
       for (const domain of domains) {
         const xlf = fs.createWriteStream(`translations/${domain}+intl-icu.${locale}.xlf`)
@@ -23,7 +23,7 @@ async function main() {
     })
 
     await fetch(
-      `https://localise.biz:443/api/export/locale/${locale}.json?&no-folding=true&no-comments=true&key=${LOCO_READ_ONLY_KEY}`,
+      `https://localise.biz:443/api/export/locale/${locale}.json?&no-folding=true&no-comments=true&key=${SYMFONY_LOCO_READ_ONLY_KEY}`,
       {
         headers: {
           'User-Agent': 'Capco',

@@ -1,23 +1,23 @@
 Capco\AppBundle\Entity\ContactForm\ContactFormTranslation:
-  ContactFormTranslation1:
-    id: contactFormTranslation1
-    translatable: '@ContactForm1'
-    locale: 'fr-FR'
-    title: Contact form 1
-    body: <stripslashes('\<p>This is a contact form body</p>\')>
-    slug: contact-form-2
-    confidentiality: Confidentiality
-  ContactFormTranslation2:
-    id: contactFormTranslation2
-    translatable: '@ContactForm2'
-    locale: 'fr-FR'
-    title: Contact form 2
-    body: <stripslashes('\<p>This is another contact form body</p>')>
-    slug: contact-form-2
-    confidentiality: On vend vos données !
-  ContactFormTranslation3:
-    id: contactFormTranslation3
-    translatable: '@ContactForm3'
-    locale: 'fr-FR'
-    title: Formulaire de contact avec confidentiality null
-    body: <stripslashes('\<p></p>\')>
+    ContactFormTranslation1:
+        id: contactFormTranslation1
+        translatable: '@ContactForm1'
+        locale: 'fr-FR'
+        title: Contact form 1
+        body: <stripslashes('\<p>This is a contact form body</p>\')>
+        slug: contact-form-2
+        confidentiality: Confidentiality
+    ContactFormTranslation2:
+        id: contactFormTranslation2
+        translatable: '@ContactForm2'
+        locale: 'fr-FR'
+        title: Contact form 2
+        body: <stripslashes('\<p>This is another contact form body</p>')>
+        slug: contact-form-2
+        confidentiality: On vend vos données !
+    ContactFormTranslation3:
+        id: contactFormTranslation3
+        translatable: '@ContactForm3'
+        locale: 'fr-FR'
+        title: Formulaire de contact avec confidentiality null
+        body: <stripslashes('\<p></p>\')>

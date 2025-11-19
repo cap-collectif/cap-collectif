@@ -1,8 +1,8 @@
 Capco\AppBundle\Entity\SourceCategory:
-  attributes:
-    id:
-      groups: [Categories, Elasticsearch]
-    title:
-      groups: [Categories]
-    slug:
-      groups: [Categories]
+    attributes:
+        id:
+            groups: [Categories, Elasticsearch]
+        title:
+            groups: [Categories]
+        slug:
+            groups: [Categories]

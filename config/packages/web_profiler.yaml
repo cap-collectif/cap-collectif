@@ -1,8 +1,8 @@
 when@dev:
-   web_profiler:
-       toolbar: true
-       intercept_redirects: false
-       excluded_ajax_paths:  '^/((index|app(_[\w]+)?)\.php/)?_wdt'
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
+        excluded_ajax_paths: '^/((index|app(_[\w]+)?)\.php/)?_wdt'
 
 when@test:
     web_profiler:

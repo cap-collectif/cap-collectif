@@ -1,28 +1,28 @@
 Capco\AppBundle\Entity\FooterSocialNetwork:
-  FooterSocialNetwork1:
-    title: Facebook
-    link: https://www.facebook.com/coucou.capco
-    position: 1
-    isEnabled: true
-    style: facebook
+    FooterSocialNetwork1:
+        title: Facebook
+        link: https://www.facebook.com/coucou.capco
+        position: 1
+        isEnabled: true
+        style: facebook
 
-  FooterSocialNetwork2:
-    title: X
-    link: https://x.com/CapCollectif
-    position: 2
-    isEnabled: true
-    style: x
+    FooterSocialNetwork2:
+        title: X
+        link: https://x.com/CapCollectif
+        position: 2
+        isEnabled: true
+        style: x
 
-  FooterSocialNetwork3:
-    title: Linkedin
-    link: http://linkedin.com
-    position: 3
-    isEnabled: false
-    style: linkedin
+    FooterSocialNetwork3:
+        title: Linkedin
+        link: http://linkedin.com
+        position: 3
+        isEnabled: false
+        style: linkedin
 
-  FooterSocialNetwork5:
-    title: Flux RSS
-    link: '#'
-    position: 5
-    isEnabled: false
-    style: rss
+    FooterSocialNetwork5:
+        title: Flux RSS
+        link: '#'
+        position: 5
+        isEnabled: false
+        style: rss

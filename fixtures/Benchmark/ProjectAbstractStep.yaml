@@ -1,26 +1,26 @@
 Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
-  pas1:
-    id: pas1
-    step: '@questionnaireStep1'
-    project: '@project1'
-    position: 1
-  pas2:
-    id: pas2
-    step: '@cstep1'
-    project: '@project2'
-    position: 1
-  pas3:
-    id: pas3
-    step: '@collectstep1'
-    project: '@project3'
-    position: 1
-  pas4:
-    id: pas4
-    step: '@selectionstep1'
-    project: '@project3'
-    position: 2
-  pasDebate1:
-    id: pasDebate1
-    step: '@debateStepCannabis'
-    project: '@projectDebate'
-    position: 2
+    pas1:
+        id: pas1
+        step: '@questionnaireStep1'
+        project: '@project1'
+        position: 1
+    pas2:
+        id: pas2
+        step: '@cstep1'
+        project: '@project2'
+        position: 1
+    pas3:
+        id: pas3
+        step: '@collectstep1'
+        project: '@project3'
+        position: 1
+    pas4:
+        id: pas4
+        step: '@selectionstep1'
+        project: '@project3'
+        position: 2
+    pasDebate1:
+        id: pasDebate1
+        step: '@debateStepCannabis'
+        project: '@projectDebate'
+        position: 2

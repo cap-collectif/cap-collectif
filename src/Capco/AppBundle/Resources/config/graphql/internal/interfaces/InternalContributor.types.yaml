@@ -1,53 +1,52 @@
 InternalContributor:
-  type: interface
-  inherits:
-    - Node
-  config:
-    name: Contributor
-    resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ContributorTypeResolver", value)'
-    fields:
-      id:
-        description: 'The ID of an object'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Contributor
-      username:
-        type: 'String'
-      email:
-        type: 'String'
-      firstname:
-        type: 'String'
-      lastname:
-        type: 'String'
-      phone:
-        type: 'String'
-      phoneConfirmed:
-        type: 'Boolean!'
-      postalAddress:
-        type: 'PreviewGoogleMapsAddress'
-      dateOfBirth:
-        type: 'DateTime'
-      zipCode:
-        type: 'String'
-      userIdentificationCode:
-        type: 'String'
-        resolve: '@=value.getUserIdentificationCodeValue()'
-        description: "The contributor identification code value"
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      consentInternalCommunication:
-        type: 'Boolean'
-        description: 'Wether or not the contributor consent to receive internal communication.'
-      votes:
-        type: 'InternalVoteConnection!'
-        argsBuilder: 'Relay::ForwardConnection'
-        args:
-          contribuableId:
-            type: 'ID'
-            description: 'The id of the contribuable entity (Project, Step)'
-      avatarUrl:
-        type: 'URI'
-        description: "The contributor's public avatar URL."
-        resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorAvatarUrlResolver", value)'
-
+    type: interface
+    inherits:
+        - Node
+    config:
+        name: Contributor
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ContributorTypeResolver", value)'
+        fields:
+            id:
+                description: 'The ID of an object'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Contributor
+            username:
+                type: 'String'
+            email:
+                type: 'String'
+            firstname:
+                type: 'String'
+            lastname:
+                type: 'String'
+            phone:
+                type: 'String'
+            phoneConfirmed:
+                type: 'Boolean!'
+            postalAddress:
+                type: 'PreviewGoogleMapsAddress'
+            dateOfBirth:
+                type: 'DateTime'
+            zipCode:
+                type: 'String'
+            userIdentificationCode:
+                type: 'String'
+                resolve: '@=value.getUserIdentificationCodeValue()'
+                description: 'The contributor identification code value'
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'
+            consentInternalCommunication:
+                type: 'Boolean'
+                description: 'Wether or not the contributor consent to receive internal communication.'
+            votes:
+                type: 'InternalVoteConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    contribuableId:
+                        type: 'ID'
+                        description: 'The id of the contribuable entity (Project, Step)'
+            avatarUrl:
+                type: 'URI'
+                description: "The contributor's public avatar URL."
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorAvatarUrlResolver", value)'

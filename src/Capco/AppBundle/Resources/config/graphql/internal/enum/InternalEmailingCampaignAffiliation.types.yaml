@@ -5,5 +5,5 @@ InternalEmailingCampaignAffiliation:
         description: 'The affiliation of a user to an emailing campaign'
         values:
             OWNER:
-                value:  !php/const Capco\AppBundle\Enum\EmailingCampaignAffiliation::OWNER
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignAffiliation::OWNER
                 description: 'Emailing campaigns that are owned by the authenticated user.'

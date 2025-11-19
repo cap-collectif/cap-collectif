@@ -1,26 +1,26 @@
 Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration:
-  franceConnect:
-    id: 'franceConnect'
-    name: 'France Connect'
-    enabled: true
-    ##
-    ## You have to configure :
-    ##   
-    ## callback URLs : 
-    ##  - https://capco.dev/login/check-franceconnect
-    ##  - https://capco.test/login/check-franceconnect
-    ##  - https://capco.prod/login/check-franceconnect
-    ## 
-    ## logout URLs : 
-    ## - https://capco.dev
-    ## - https://capco.test
-    ## - https://capco.prod
-    ##
-    clientId: <{default_france_connect_client_id}>
-    secret: <{default_france_connect_client_secret}>
-    authorizationUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize'
-    accessTokenUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token'
-    userInfoUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo'
-    logoutUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/logout'
-    environment: 'TESTING'
-    ssoType: 'franceconnect'
+    franceConnect:
+        id: 'franceConnect'
+        name: 'France Connect'
+        enabled: true
+        ##
+        ## You have to configure :
+        ##
+        ## callback URLs :
+        ##  - https://capco.dev/login/check-franceconnect
+        ##  - https://capco.test/login/check-franceconnect
+        ##  - https://capco.prod/login/check-franceconnect
+        ##
+        ## logout URLs :
+        ## - https://capco.dev
+        ## - https://capco.test
+        ## - https://capco.prod
+        ##
+        clientId: <{default_france_connect_client_id}>
+        secret: <{default_france_connect_client_secret}>
+        authorizationUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize'
+        accessTokenUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token'
+        userInfoUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo'
+        logoutUrl: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/logout'
+        environment: 'TESTING'
+        ssoType: 'franceconnect'

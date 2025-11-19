@@ -1,15 +1,15 @@
 Contribution:
-  type: interface
-  inherits:
-    - Node
-  config:
-    name: Contribution
-    description: 'A contribution with an author'
-    resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
-    fields:
-      related:
-        type: 'Contribution'
-        description: 'Return the related contribution if the contribution is related to another.'
-      url:
-        type: 'URI!'
-        description: 'Url of the contribution'
+    type: interface
+    inherits:
+        - Node
+    config:
+        name: Contribution
+        description: 'A contribution with an author'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
+        fields:
+            related:
+                type: 'Contribution'
+                description: 'Return the related contribution if the contribution is related to another.'
+            url:
+                type: 'URI!'
+                description: 'Url of the contribution'

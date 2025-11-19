@@ -1,36 +1,36 @@
 Capco\AppBundle\Entity\District\ProjectDistrictPositioner:
-  projectDistrictPositioner1:
-    id: projectDistrictPositioner1
-    project: '@p1'
-    district: '@globalDistrict1'
-    position: 0
-  projectDistrictPositioner2:
-    id: projectDistrictPositioner2
-    district: '@globalDistrict2'
-    position: 1
-    project: '@p1'
-  projectDistrictPositioner3:
-    id: projectDistrictPositioner3
-    project: '@p2'
-    district: '@globalDistrict3'
-    position: 0
-  projectDistrictPositioner4:
-    id: projectDistrictPositioner4
-    project: '@p2'
-    district: '@globalDistrict4'
-    position: 1
-  projectDistrictPositioner5:
-    id: projectDistrictPositioner5
-    project: '@p2'
-    district: '@globalDistrict5'
-    position: 2
-  projectDistrictPositioner6:
-    id: projectDistrictPositioner6
-    project: '@p2'
-    district: '@globalDistrict6'
-    position: 3
-  projectDistrictPositioner7:
-    id: projectDistrictPositioner7
-    project: '@p2'
-    district: '@globalDistrict7'
-    position: 4
+    projectDistrictPositioner1:
+        id: projectDistrictPositioner1
+        project: '@p1'
+        district: '@globalDistrict1'
+        position: 0
+    projectDistrictPositioner2:
+        id: projectDistrictPositioner2
+        district: '@globalDistrict2'
+        position: 1
+        project: '@p1'
+    projectDistrictPositioner3:
+        id: projectDistrictPositioner3
+        project: '@p2'
+        district: '@globalDistrict3'
+        position: 0
+    projectDistrictPositioner4:
+        id: projectDistrictPositioner4
+        project: '@p2'
+        district: '@globalDistrict4'
+        position: 1
+    projectDistrictPositioner5:
+        id: projectDistrictPositioner5
+        project: '@p2'
+        district: '@globalDistrict5'
+        position: 2
+    projectDistrictPositioner6:
+        id: projectDistrictPositioner6
+        project: '@p2'
+        district: '@globalDistrict6'
+        position: 3
+    projectDistrictPositioner7:
+        id: projectDistrictPositioner7
+        project: '@p2'
+        district: '@globalDistrict7'
+        position: 4

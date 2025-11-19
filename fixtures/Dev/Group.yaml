@@ -1,49 +1,49 @@
 Capco\AppBundle\Entity\Group:
-  group1:
-    id: group1
-    title: Super-administrateur
-    description: Droits d'administration complet
-    createdAt: <(new \DateTime('2017-01-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-01 00:00:00'))>
-  group2:
-    id: group2
-    title: Agent de la ville
-    description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-01-02 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-02 00:00:00'))>
-  group3:
-    id: group3
-    title: Utilisateurs
-    description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-01-03 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-03 00:00:00'))>
-  group4:
-    id: group4
-    title: Comité de suvi
-    description: Lorem ipsum dolor sit amet sapien estiam
-    createdAt: <(new \DateTime('2017-01-04 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-04 00:00:00'))>
-  group5:
-    id: group5
-    title: Direction Culture
-    description: Droits qui concernent la direction de culture
-    createdAt: <(new \DateTime('2017-01-05 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-05 00:00:00'))>
-  group6:
-    id: group6
-    title: Projet 2
-    description: Droits sur le projet 2
-    createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
-  group7:
-    id: group7
-    title: Evaluers on proposal2
-    description: Evaluers on proposal2
-    createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
-  group8:
-    id: group8
-    title: Evaluers on proposal3
-    description: Evaluers on proposal3
-    createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
-    updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
+    group1:
+        id: group1
+        title: Super-administrateur
+        description: Droits d'administration complet
+        createdAt: <(new \DateTime('2017-01-01 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-01 00:00:00'))>
+    group2:
+        id: group2
+        title: Agent de la ville
+        description: Lorem ipsum dolor sit amet sapien estiam
+        createdAt: <(new \DateTime('2017-01-02 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-02 00:00:00'))>
+    group3:
+        id: group3
+        title: Utilisateurs
+        description: Lorem ipsum dolor sit amet sapien estiam
+        createdAt: <(new \DateTime('2017-01-03 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-03 00:00:00'))>
+    group4:
+        id: group4
+        title: Comité de suvi
+        description: Lorem ipsum dolor sit amet sapien estiam
+        createdAt: <(new \DateTime('2017-01-04 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-04 00:00:00'))>
+    group5:
+        id: group5
+        title: Direction Culture
+        description: Droits qui concernent la direction de culture
+        createdAt: <(new \DateTime('2017-01-05 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-05 00:00:00'))>
+    group6:
+        id: group6
+        title: Projet 2
+        description: Droits sur le projet 2
+        createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
+    group7:
+        id: group7
+        title: Evaluers on proposal2
+        description: Evaluers on proposal2
+        createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>
+    group8:
+        id: group8
+        title: Evaluers on proposal3
+        description: Evaluers on proposal3
+        createdAt: <(new \DateTime('2017-01-06 00:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-06 00:00:00'))>

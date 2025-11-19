@@ -72,10 +72,7 @@ services:
             - { name: validator.constraint_validator, alias: geojson.validator }
     Capco\AdminBundle\Validator\Constraints\LessThanIfMetaDescriptionValidator:
         tags:
-            - {
-                  name: validator.constraint_validator,
-                  alias: less_than_if_meta_description.validator,
-              }
+            - { name: validator.constraint_validator, alias: less_than_if_meta_description.validator }
     Capco\AppBundle\Validator\Constraints\HasUserGroupIfVisibilityGroupValidator:
         tags:
             - { name: validator.constraint_validator, alias: has_user_group_if_mandatory.validator }
@@ -90,10 +87,7 @@ services:
             - { name: validator.constraint_validator, alias: map_center.validator }
     Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashValidator:
         tags:
-            - {
-                  name: validator.constraint_validator,
-                  alias: check_debate_anonymous_participation_hash.validator,
-              }
+            - { name: validator.constraint_validator, alias: check_debate_anonymous_participation_hash.validator }
 
     Capco\AppBundle\Validator\Constraints\CheckIdentificationCodeValidator:
         tags:
@@ -117,7 +111,4 @@ services:
 
     Capco\AppBundle\Validator\Constraints\PendingOrganizationInvitationValidator:
         tags:
-            - {
-                  name: validator.constraint_validator,
-                  alias: pending_organization_invitation.validator,
-              }
+            - { name: validator.constraint_validator, alias: pending_organization_invitation.validator }

@@ -2,13 +2,7 @@ Capco\AppBundle\Entity\Proposal:
     exclusion_policy: ALL
     attributes:
         id:
-            groups:
-                [
-                    Proposals,
-                    ElasticsearchProposal,
-                    ElasticsearchNestedProposal,
-                    ElasticsearchVoteNestedProposal,
-                ]
+            groups: [Proposals, ElasticsearchProposal, ElasticsearchNestedProposal, ElasticsearchVoteNestedProposal]
         getSelectionVotes:
             serialized_name: selection_votes
             groups: [ElasticsearchProposal]

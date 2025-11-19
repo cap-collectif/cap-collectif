@@ -1,77 +1,77 @@
 services:
-  application:
-    links:
-      - database:database
-      - elasticsearch:elasticsearch
-      - kibana:kibana
-      - redis:redis
-      - seleniumhub:selenium
-      - mailcatcher:mailcatchersmtp
-      - nextjs
-    environment:
-      DOCKER_GID: 100
-      BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
-      BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
-      BLACKFIRE_LOG_LEVEL: 1
-      BLACKFIRE_LOG_FILE: /tmp/blackfire.log
-      BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
-      BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
-      SYMFONY_INSTANCE_NAME: dev
-      SYMFONY_REDIS_PREFIX: dev
-      PHP_XDEBUG_ENABLED: 0
-    hostname: capco.dev
-    volumes:
-      - ../../:/var/www
-      - /tmp:/tmp
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/local/bin/docker:/usr/bin/docker
-      - /etc/localtime:/etc/localtime:ro
-      - php_sf_cache:/var/www/var/cache
+    application:
+        links:
+            - database:database
+            - elasticsearch:elasticsearch
+            - kibana:kibana
+            - redis:redis
+            - seleniumhub:selenium
+            - mailcatcher:mailcatchersmtp
+            - nextjs
+        environment:
+            DOCKER_GID: 100
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_LOG_LEVEL: 1
+            BLACKFIRE_LOG_FILE: /tmp/blackfire.log
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
+            SYMFONY_INSTANCE_NAME: dev
+            SYMFONY_REDIS_PREFIX: dev
+            PHP_XDEBUG_ENABLED: 0
+        hostname: capco.dev
+        volumes:
+            - ../../:/var/www
+            - /tmp:/tmp
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /usr/local/bin/docker:/usr/bin/docker
+            - /etc/localtime:/etc/localtime:ro
+            - php_sf_cache:/var/www/var/cache
 
-  nextjs:
-    container_name: capco_nextjs_1
-    image: 'node:18'
-    user: 'node'
-    working_dir: /var/www/admin-next
-    links:
-      - redis:redis
-    environment:
-      - NODE_ENV=development
-      - SYMFONY_ENV=dev
-      - SYMFONY_REDIS_HOST=redis
-    volumes:
-      - ../../:/var/www
-    ports:
-      - '3000:3000'
-    command: ./run.sh
+    nextjs:
+        container_name: capco_nextjs_1
+        image: 'node:18'
+        user: 'node'
+        working_dir: /var/www/admin-next
+        links:
+            - redis:redis
+        environment:
+            - NODE_ENV=development
+            - SYMFONY_ENV=dev
+            - SYMFONY_REDIS_HOST=redis
+        volumes:
+            - ../../:/var/www
+        ports:
+            - '3000:3000'
+        command: ./run.sh
 
-  database:
-    ports:
-      - '3306:3306'
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
-      MYSQL_DATABASE: 'symfony'
-    volumes:
-      - /tmp:/tmp
+    database:
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'True'
+            MYSQL_DATABASE: 'symfony'
+        volumes:
+            - /tmp:/tmp
 
-  elasticsearch:
-    build: ../services/elasticsearch
-    environment:
-      - cluster.name=capco
-      - bootstrap.memory_lock=true
-      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    # mem_limit: 1g
-    ports:
-      - '9200:9200'
+    elasticsearch:
+        build: ../services/elasticsearch
+        environment:
+            - cluster.name=capco
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        # mem_limit: 1g
+        ports:
+            - '9200:9200'
 
-  chrome:
-    ports:
-      # Port is used for VNC only
-      - '5900:5900'
+    chrome:
+        ports:
+            # Port is used for VNC only
+            - '5900:5900'
 
 volumes:
-  php_sf_cache:
+    php_sf_cache:

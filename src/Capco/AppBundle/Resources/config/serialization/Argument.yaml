@@ -1,8 +1,7 @@
 Capco\AppBundle\Entity\Argument:
     attributes:
         id:
-            groups:
-                [ElasticsearchVoteNestedArgument, Opinions, OpinionVersions, ElasticsearchArgument]
+            groups: [ElasticsearchVoteNestedArgument, Opinions, OpinionVersions, ElasticsearchArgument]
         body:
             groups: [Opinions, OpinionVersions, ElasticsearchArgument]
         voteType:

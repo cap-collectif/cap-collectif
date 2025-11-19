@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\EmailDomain:
-  domain1:
-    value: jolicode.com
-    registrationForm: '@registrationForm'
-  domain2:
-    value: cap-collectif.com
-    registrationForm: '@registrationForm'
+    domain1:
+        value: jolicode.com
+        registrationForm: '@registrationForm'
+    domain2:
+        value: cap-collectif.com
+        registrationForm: '@registrationForm'

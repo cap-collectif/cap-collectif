@@ -1,10 +1,10 @@
 UpdateParticipantRequirementInput:
-  type: relay-mutation-input
-  config:
-    description: 'Input type of UpdateRequirement.'
-    fields:
-      values:
-        type: '[CheckboxRequirementInput]!'
-      participantToken:
-        type: 'String!'
-        description: 'The participant token.'
+    type: relay-mutation-input
+    config:
+        description: 'Input type of UpdateRequirement.'
+        fields:
+            values:
+                type: '[CheckboxRequirementInput]!'
+            participantToken:
+                type: 'String!'
+                description: 'The participant token.'

@@ -1,4 +1,4 @@
 matchers:
-  - spec\Matcher\BeAConnectionMatcher
-  - spec\Matcher\BeAnEmptyConnectionMatcher
-  - spec\Matcher\BeAnEmptyCollectionMatcher
+    - spec\Matcher\BeAConnectionMatcher
+    - spec\Matcher\BeAnEmptyConnectionMatcher
+    - spec\Matcher\BeAnEmptyCollectionMatcher

@@ -30,4 +30,3 @@ InternalMenuItem:
             translations:
                 type: '[InternalMenuItemTranslation!]!'
                 description: 'The available translations for the menu item.'
-

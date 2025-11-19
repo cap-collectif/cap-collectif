@@ -1,26 +1,26 @@
 Capco\AppBundle\Entity\ProposalForm:
-  proposalForm1:
-    id: proposalForm1
-    title: Le grand débat
-    slug: 'le-grand-debat'
-    description: <text(100)>
-    step: '@collectstep1'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration1'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    districtMandatory: true
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    usingAddress: false
-    proposalInAZoneRequired: false
-    zoomMap: 12
-    mapCenter: '[{"address_components":[{"long_name":"Rennes","short_name":"Rennes","types":["locality", "political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Rennes,France","geometry":{"location":{"lat":48.117266,"lng":-1.6777926},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
-    reference: 1
-    evaluationForm: '@questionnaire1'
-    allowAknowledge: true
+    proposalForm1:
+        id: proposalForm1
+        title: Le grand débat
+        slug: 'le-grand-debat'
+        description: <text(100)>
+        step: '@collectstep1'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration1'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        districtMandatory: true
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        usingAddress: false
+        proposalInAZoneRequired: false
+        zoomMap: 12
+        mapCenter: '[{"address_components":[{"long_name":"Rennes","short_name":"Rennes","types":["locality", "political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Rennes,France","geometry":{"location":{"lat":48.117266,"lng":-1.6777926},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
+        reference: 1
+        evaluationForm: '@questionnaire1'
+        allowAknowledge: true

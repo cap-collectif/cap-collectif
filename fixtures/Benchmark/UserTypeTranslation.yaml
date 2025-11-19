@@ -1,46 +1,46 @@
 Capco\UserBundle\Entity\UserTypeTranslation:
-  UserType1fr:
-    translatable: '@UserType1'
-    locale: fr-FR
-    name: Citoyen
-    slug: citoyen
-  UserType2fr:
-    translatable: '@UserType2'
-    locale: fr-FR
-    name: Organisation à but lucratif
-    slug: organisation
-  UserType3fr:
-    translatable: '@UserType3'
-    locale: fr-FR
-    name: Organisation à but non lucratif
-    slug: organisation-2
-  UserType4fr:
-    translatable: '@UserType4'
-    locale: fr-FR
-    name: Institution
-    slug: institution
-  UserType1en:
-    translatable: '@UserType1'
-    locale: en-GB
-    name: Citizen
-    slug: citizen
-  UserType2en:
-    translatable: '@UserType2'
-    locale: en-GB
-    name: Nonprofit organisation
-    slug: nonprofit
-  UserType3en:
-    translatable: '@UserType3'
-    locale: en-GB
-    name: Business
-    slug: business
-  UserType4en:
-    translatable: '@UserType4'
-    locale: en-GB
-    name: Institution
-    slug: institution-3
-  UserType1de:
-    translatable: '@UserType1'
-    locale: de-DE
-    name: Bürger
-    slug: burger
+    UserType1fr:
+        translatable: '@UserType1'
+        locale: fr-FR
+        name: Citoyen
+        slug: citoyen
+    UserType2fr:
+        translatable: '@UserType2'
+        locale: fr-FR
+        name: Organisation à but lucratif
+        slug: organisation
+    UserType3fr:
+        translatable: '@UserType3'
+        locale: fr-FR
+        name: Organisation à but non lucratif
+        slug: organisation-2
+    UserType4fr:
+        translatable: '@UserType4'
+        locale: fr-FR
+        name: Institution
+        slug: institution
+    UserType1en:
+        translatable: '@UserType1'
+        locale: en-GB
+        name: Citizen
+        slug: citizen
+    UserType2en:
+        translatable: '@UserType2'
+        locale: en-GB
+        name: Nonprofit organisation
+        slug: nonprofit
+    UserType3en:
+        translatable: '@UserType3'
+        locale: en-GB
+        name: Business
+        slug: business
+    UserType4en:
+        translatable: '@UserType4'
+        locale: en-GB
+        name: Institution
+        slug: institution-3
+    UserType1de:
+        translatable: '@UserType1'
+        locale: de-DE
+        name: Bürger
+        slug: burger

@@ -32,8 +32,7 @@ settings:
                 char_filter: ['html_strip']
             capco_french:
                 tokenizer: icu_tokenizer
-                filter:
-                    ['lowercase', 'icu_folding', 'french_elision', 'french_stop', 'french_stemmer']
+                filter: ['lowercase', 'icu_folding', 'french_elision', 'french_stop', 'french_stemmer']
                 char_filter: ['html_strip']
             tag_cloud:
                 type: stop
