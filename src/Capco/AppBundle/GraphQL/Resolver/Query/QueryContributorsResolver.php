@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Client\OccitanieClient;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -15,7 +14,6 @@ class QueryContributorsResolver implements QueryInterface
 
     public function __construct(
         private readonly UserSearch $userSearch,
-        private readonly OccitanieClient $occitanieClient
     ) {
     }
 
@@ -29,15 +27,6 @@ class QueryContributorsResolver implements QueryInterface
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount) {
             $value = $this->userSearch->getAllContributors($offset, $limit);
             $totalCount = (int) $value['totalCount'];
-
-            $instanceName = getenv('SYMFONY_INSTANCE_NAME');
-
-            if (
-                'occitanie-preprod' !== $instanceName
-                && str_contains($instanceName, 'occitanie')
-            ) {
-                $totalCount = $this->occitanieClient->getUserCounters();
-            }
 
             return $value['results'];
         });
