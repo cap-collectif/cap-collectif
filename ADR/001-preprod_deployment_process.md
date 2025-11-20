@@ -86,15 +86,15 @@ Seules certaines personnes peuvent forcer le push sur preprod. Cette liste peut 
 - Aller sur les PRs ayant le label [Go to preprod](https://github.com/cap-collectif/platform/pulls?q=is%3Aopen+is%3Apr+label%3A%22Go+to+preprod%22)
 - Merger la PR ayant le label en cliquant sur le bouton "Squash and merge"
 
-![Squash and merge PR](./squash_and_merge_pr.png)
+![Squash and merge PR](./assets/squash_and_merge_pr.png)
 
 - une fois mergé, aller sur la branche preprod et vérifier qu'une ci tourne bien sur la branche
 
-![Check pr ci](./check_pr_ci.png)
+![Check pr ci](./assets/check_pr_ci.png)
 
 - une fois la recette validée, il faut activer le github action pour merger le code de preprod dans master en allant dans l'onglet `Actions`
 
-![Actions tab](./actions_tab.png)
+![Actions tab](./assets/actions_tab.png)
 
 - Cliquer sur `Merge preprod branch into master` dans le menu à gauche de la page puis cliquer sur `Run workflow` à droite de la page et `Run workflow`.
 
@@ -102,7 +102,7 @@ La branche sélectionnée doit être `preprod` (branche par défaut).
 
 Si le job est vert alors le merge a fonctionné. Dans le cas contraire une intervention manuelle est nécessaire pour débugger le soucis.
 
-![execute github actions](./execute_github_action.png)
+![execute github actions](./assets/execute_github_action.png)
 
 ### Résolutions :
 
