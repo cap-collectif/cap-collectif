@@ -1,22 +1,21 @@
-import * as React from 'react'
-import { IntlShape, useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
 import {
   Button,
   ButtonGroup,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
   CapUIModalSize,
   Heading,
+  InfoMessage,
   Modal,
   Text,
-  toast,
-  InfoMessage,
-  CapUIFontSize,
 } from '@cap-collectif/ui'
 import type { ModalConfirmationDelete_consultation$key } from '@relay/ModalConfirmationDelete_consultation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import DeleteConsultationMutation from 'mutations/DeleteConsultationMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import * as React from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 type Props = {
   consultation: ModalConfirmationDelete_consultation$key
@@ -51,10 +50,7 @@ const deleteConsultation = async (
 
   try {
     await DeleteConsultationMutation.commit({ input, connections: [connectionName] })
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'consultation-successfully-deleted' }),
-    })
+    successToast(intl.formatMessage({ id: 'consultation-successfully-deleted' }))
   } catch (error) {
     mutationErrorToast(intl)
   }

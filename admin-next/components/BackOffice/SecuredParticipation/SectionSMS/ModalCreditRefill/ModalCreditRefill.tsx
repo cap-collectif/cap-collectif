@@ -1,5 +1,3 @@
-import { FC, useState } from 'react'
-import { IntlShape, useIntl } from 'react-intl'
 import {
   Button,
   CapUIFontSize,
@@ -11,14 +9,15 @@ import {
   Modal,
   Tag,
   Text,
-  toast,
 } from '@cap-collectif/ui'
+import CreateSmsOrderMutation from '@mutations/CreateSmsOrderMutation'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import { SegmentedControl } from '@ui/SegmentedControl'
 import { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem'
 import { formatBigNumber } from '@utils/format-number'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import CreateSmsOrderMutation from '@mutations/CreateSmsOrderMutation'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { FC, useState } from 'react'
+import { IntlShape, useIntl } from 'react-intl'
 
 const submitOrder = (creditCount: SegmentedControlValue, intl: IntlShape) => {
   const input = {
@@ -32,10 +31,7 @@ const submitOrder = (creditCount: SegmentedControlValue, intl: IntlShape) => {
       return mutationErrorToast(intl)
     }
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'order-sent-contact-soon' }),
-    })
+    successToast(intl.formatMessage({ id: 'order-sent-contact-soon' }))
   })
 }
 

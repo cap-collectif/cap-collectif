@@ -1,9 +1,9 @@
+import { Button, CapUIModalSize, Heading, Modal, Text } from '@cap-collectif/ui'
 import { FC } from 'react'
-import { Button, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
 import { IntlShape, useIntl } from 'react-intl'
 
 import DeleteGlobalDistrictMutation from '@mutations/DeleteGlobalDistrictMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 
 const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boolean): void => {
   DeleteGlobalDistrictMutation.commit({
@@ -12,10 +12,7 @@ const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boole
     if (!response?.deleteGlobalDistrict?.deletedDistrictId) {
       return mutationErrorToast(intl)
     }
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'area-deleted' }),
-    })
+    successToast(intl.formatMessage({ id: 'area-deleted' }))
     if (fromDistrict) window.location.href = '/admin-next/geographical-areas'
   })
 }

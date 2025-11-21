@@ -1,23 +1,23 @@
-import * as React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Flex, toast } from '@cap-collectif/ui'
-import PostFormSide from './PostFormSide'
-import PostForm from './PostForm'
-import { useLazyLoadQuery, graphql, GraphQLTaggedNode } from 'react-relay'
+import { Flex } from '@cap-collectif/ui'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { BreadCrumbItemType } from '@components/BackOffice/BreadCrumb/BreadCrumbItem'
+import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
+import { Option } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
+import useUrlState from '@hooks/useUrlState'
+import CreatePostMutation from '@mutations/CreatePostMutation'
+import UpdatePostMutation from '@mutations/UpdatePostMutation'
 import { PostFormWrapperQuery, PostFormWrapperQuery$data } from '@relay/PostFormWrapperQuery.graphql'
 import { PostFormWrapper_OrganizationQuery } from '@relay/PostFormWrapper_OrganizationQuery.graphql'
 import { PostFormWrapper_ProposalQuery } from '@relay/PostFormWrapper_ProposalQuery.graphql'
+import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
 import moment from 'moment'
-import { PostFormValues, RelatedContent, Locale } from './Post.type'
-import { Option } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import CreatePostMutation from '@mutations/CreatePostMutation'
-import UpdatePostMutation from '@mutations/UpdatePostMutation'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-import useUrlState from '@hooks/useUrlState'
-import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { BreadCrumbItemType } from '@components/BackOffice/BreadCrumb/BreadCrumbItem'
+import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay'
+import { Locale, PostFormValues, RelatedContent } from './Post.type'
+import PostForm from './PostForm'
+import PostFormSide from './PostFormSide'
 import { getSelectedOptions } from './utils'
 
 type PostFormWrapperProps = {
@@ -282,17 +282,11 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
       })
         .then(response => {
           if (response.createPost.errorCode) {
-            toast({
-              variant: 'danger',
-              content: intl.formatMessage({ id: 'global.saving.error' }),
-            })
+            dangerToast(intl.formatMessage({ id: 'global.saving.error' }))
             setIsLoading(false)
             return
           }
-          toast({
-            variant: 'success',
-            content: intl.formatMessage({ id: 'post-successfully-created' }),
-          })
+          successToast(intl.formatMessage({ id: 'post-successfully-created' }))
           const newPostId = response?.createPost?.post?.id
           window.location.href = `post?id=${newPostId}`
         })
@@ -309,23 +303,14 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
         .then(response => {
           if (response.updatePost.errorCode) {
             if (response.updatePost.errorCode === 'INVALID_FORM') {
-              toast({
-                variant: 'danger',
-                content: intl.formatMessage({ id: 'invalid-model' }),
-              })
+              dangerToast(intl.formatMessage({ id: 'invalid-model' }))
             } else {
-              toast({
-                variant: 'danger',
-                content: intl.formatMessage({ id: 'global.saving.error' }),
-              })
+              dangerToast(intl.formatMessage({ id: 'global.saving.error' }))
             }
             setIsLoading(false)
             return
           }
-          toast({
-            variant: 'success',
-            content: intl.formatMessage({ id: 'post-successfully-updated' }),
-          })
+          successToast(intl.formatMessage({ id: 'post-successfully-updated' }))
           setIsLoading(false)
         })
         .catch(() => {

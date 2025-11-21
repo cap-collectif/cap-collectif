@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FieldInput, FormControl, UploaderValue } from '@cap-collectif/form'
 import {
   Accordion,
   Button,
@@ -14,22 +14,21 @@ import {
   Switch,
   Tag,
   Text,
-  toast,
   UPLOADER_SIZE,
 } from '@cap-collectif/ui'
+import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation'
+import UpdateShieldAdminFormMutation, { toggleShield } from '@mutations/UpdateShieldAdminFormMutation'
+import type { ShieldQuery, ShieldQuery$data } from '@relay/ShieldQuery.graphql'
+import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
+import { successToast } from '@shared/utils/toasts'
+import { UPLOAD_PATH } from '@utils/config'
+import { createOrReplaceTranslation, formatCodeToLocale } from '@utils/locale-helper'
+import { FC, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { IntlShape, useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import type { ShieldQuery, ShieldQuery$data } from '@relay/ShieldQuery.graphql'
-import UpdateShieldAdminFormMutation, { toggleShield } from '@mutations/UpdateShieldAdminFormMutation'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useForm } from 'react-hook-form'
-import { createOrReplaceTranslation, formatCodeToLocale } from '@utils/locale-helper'
-import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation'
-import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
-import { useNavBarContext } from '../NavBar/NavBar.context'
-import { UPLOAD_PATH } from '@utils/config'
 import { useAppContext } from '../AppProvider/App.context'
-import { UploaderValue } from '@cap-collectif/form'
+import { useNavBarContext } from '../NavBar/NavBar.context'
 
 type MenuLocaleValue = {
   label: string
@@ -92,10 +91,7 @@ const onSubmit = (
     },
   }).then(() => {
     setLoading(false)
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'global-saved' }),
-    })
+    successToast(intl.formatMessage({ id: 'global-saved' }))
   })
 }
 

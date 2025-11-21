@@ -1,4 +1,3 @@
-import { FC, useState, Suspense } from 'react'
 import {
   Button,
   ButtonQuickAction,
@@ -9,15 +8,15 @@ import {
   Modal,
   Spinner,
   Text,
-  toast,
 } from '@cap-collectif/ui'
-import { FormattedHTMLMessage, IntlShape, useIntl } from 'react-intl'
 import type { IdentificationCodesListDeleteModal_userIdentificationCodeList$key } from '@relay/IdentificationCodesListDeleteModal_userIdentificationCodeList.graphql'
+import { FC, Suspense, useState } from 'react'
+import { FormattedHTMLMessage, IntlShape, useIntl } from 'react-intl'
 
-import { graphql, useFragment } from 'react-relay'
 import DeleteUserIdentificationCodeListMutation from '@mutations/DeleteUserIdentificationCodeListMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { graphql, useFragment } from 'react-relay'
 import IdentificationCodesListDeleteModalWarningProjects from './IdentificationCodesListDeleteModalWarningProjects'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const FRAGMENT = graphql`
   fragment IdentificationCodesListDeleteModal_userIdentificationCodeList on UserIdentificationCodeList {
@@ -34,10 +33,7 @@ const deleteList = (id: string, connectionName: string, intl: IntlShape): void =
       return mutationErrorToast(intl)
     }
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'confirmation-delete-list' }),
-    })
+    successToast(intl.formatMessage({ id: 'confirmation-delete-list' }))
   })
 }
 

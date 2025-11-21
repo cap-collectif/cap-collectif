@@ -1,9 +1,10 @@
+import { Box, Button, ButtonGroup, CapUIModalSize, Heading, Modal, Text } from '@cap-collectif/ui'
+import { AddEventsInput } from '@relay/AddEventsMutation.graphql'
+import { successToast } from '@shared/utils/toasts'
+import AddEventsMutation from 'mutations/AddEventsMutation'
 import * as React from 'react'
 import { FormattedHTMLMessage, IntlShape, useIntl } from 'react-intl'
-import { Button, ButtonGroup, CapUIModalSize, Heading, Modal, toast, Text, Box } from '@cap-collectif/ui'
 import ImportEventsForm from './ImportEventsForm'
-import AddEventsMutation from 'mutations/AddEventsMutation'
-import { AddEventsInput } from '@relay/AddEventsMutation.graphql'
 
 export const getHeaders = (intl: IntlShape) => {
   return {
@@ -36,10 +37,7 @@ export const onSubmit = (data: AddEventsInput, onClose: () => void, intl: IntlSh
 
   return AddEventsMutation.commit({ input }).then(() => {
     onClose()
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'events-successfully-imported' }),
-    })
+    successToast(intl.formatMessage({ id: 'events-successfully-imported' }))
   })
 }
 

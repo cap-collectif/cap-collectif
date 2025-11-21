@@ -1,15 +1,16 @@
-import * as React from 'react'
-import { useIntl, IntlShape } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import ModalConfirmationDelete from './ModalConfirmationDelete'
+import { ButtonGroup, ButtonQuickAction, CapUIIcon, Link, Table } from '@cap-collectif/ui'
 import type {
   ProposalFormItem_proposalForm$data,
   ProposalFormItem_proposalForm$key,
 } from '@relay/ProposalFormItem_proposalForm.graphql'
-import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { Table, Link, ButtonQuickAction, ButtonGroup, toast, CapUIIcon } from '@cap-collectif/ui'
 import { ProposalFormItem_viewer$key } from '@relay/ProposalFormItem_viewer.graphql'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { successToast } from '@shared/utils/toasts'
+import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutation'
+import * as React from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import ModalConfirmationDelete from './ModalConfirmationDelete'
 
 export type Viewer = ProposalFormItem_proposalForm$data['owner']
 export type Creator = ProposalFormItem_proposalForm$data['creator']
@@ -83,10 +84,7 @@ const duplicateProposalForm = (
       return mutationErrorToast(intl)
     }
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'proposal-form-successfully-duplicated' }),
-    })
+    successToast(intl.formatMessage({ id: 'proposal-form-successfully-duplicated' }))
   })
 }
 

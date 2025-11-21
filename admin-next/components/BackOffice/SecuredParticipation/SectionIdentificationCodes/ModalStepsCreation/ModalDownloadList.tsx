@@ -1,20 +1,20 @@
-import type { FC } from 'react'
-import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import {
+  Button,
   CapUISpotIcon,
   CapUISpotIconSize,
   Flex,
+  Heading,
   headingStyles,
+  Modal,
   SpotIcon,
   Text,
-  Modal,
-  Heading,
-  Button,
-  toast,
   useMultiStepModal,
 } from '@cap-collectif/ui'
-import getFileDownloadUrl from '../FileDownload'
 import { CreateUserIdentificationCodeListMutation$data } from '@relay/CreateUserIdentificationCodeListMutation.graphql'
+import { successToast } from '@shared/utils/toasts'
+import type { FC } from 'react'
+import { FormattedHTMLMessage, useIntl } from 'react-intl'
+import getFileDownloadUrl from '../FileDownload'
 
 type ModalDownloadListProps = {
   codesCount: number
@@ -30,10 +30,7 @@ const ModalDownloadList: FC<ModalDownloadListProps> = ({ codesCount, response })
       getFileDownloadUrl(response?.createUserIdentificationCodeList?.userIdentificationCodeList?.id || ''),
       '_blank',
     )
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'downloaded-list-please-communicate' }),
-    })
+    successToast(intl.formatMessage({ id: 'downloaded-list-please-communicate' }))
     hide()
   }
 

@@ -1,14 +1,14 @@
-import type { FC } from 'react'
-import { IntlShape, useIntl } from 'react-intl'
-import { Button, CapUIFontWeight, CapUIModalSize, Heading, Modal, Select, Text, toast } from '@cap-collectif/ui'
-import { graphql, useFragment } from 'react-relay'
-import type { ModalProcessRequest_smsOrder$key } from '@relay/ModalProcessRequest_smsOrder.graphql'
-import { formatBigNumber } from '@utils/format-number'
-import { PACKAGE_LIST } from '../ModalCreditRefill/ModalCreditRefill'
-import type { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Button, CapUIFontWeight, CapUIModalSize, Heading, Modal, Select, Text } from '@cap-collectif/ui'
 import AddSmsCreditMutation from '@mutations/AddSmsCreditMutation'
 import DeleteSmsOrderMutation from '@mutations/DeleteSmsOrderMutation'
+import type { ModalProcessRequest_smsOrder$key } from '@relay/ModalProcessRequest_smsOrder.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import type { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem'
+import { formatBigNumber } from '@utils/format-number'
+import type { FC } from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { PACKAGE_LIST } from '../ModalCreditRefill/ModalCreditRefill'
 
 const FRAGMENT = graphql`
   fragment ModalProcessRequest_smsOrder on SmsOrder {
@@ -30,10 +30,7 @@ const addSmsCredit = (creditCount: SegmentedControlValue, orderId: string, intl:
       return mutationErrorToast(intl)
     }
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'credit-recharge-success-message' }, { creditCount }),
-    })
+    successToast(intl.formatMessage({ id: 'credit-recharge-success-message' }, { creditCount }))
   })
 }
 
@@ -55,10 +52,7 @@ const deleteSmsOrder = (
       return mutationErrorToast(intl)
     }
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'delete-sms-order-success-message' }, { creditCount }),
-    })
+    successToast(intl.formatMessage({ id: 'delete-sms-order-success-message' }, { creditCount }))
   })
 }
 

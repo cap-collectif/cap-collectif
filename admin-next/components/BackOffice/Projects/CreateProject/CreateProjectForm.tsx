@@ -1,23 +1,23 @@
-import React, { useEffect, useRef } from 'react'
-import { Box, Button, CapUIFontSize, FormLabel, Text, toast } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { graphql, useFragment } from 'react-relay'
-import UserListField from '../../Form/UserListField'
-import formatSubmitted from '@utils/format-submitted'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Box, Button, CapUIFontSize, FormLabel, Text } from '@cap-collectif/ui'
 import CreateProjectMutation from '@mutations/CreateProjectMutation'
-import { CreateProjectForm_viewer$key } from '@relay/CreateProjectForm_viewer.graphql'
-import { useNavBarContext } from '../../NavBar/NavBar.context'
-import { getParticipatoryBudgetInput } from './ConfigureParticipatoryBudgetInput'
-import { getParticipatoryBudgetAnalysisInput } from './ConfigureParticipatoryBudgetAnalysisInput'
-import { getPublicInquiryInput } from './ConfigurePublicInquiryInput'
 import PreConfigureProjectMutation from '@mutations/PreConfigureProjectMutation'
+import { CreateProjectForm_viewer$key } from '@relay/CreateProjectForm_viewer.graphql'
 import { CreateProjectMutation$data } from '@relay/CreateProjectMutation.graphql'
 import { PreConfigureProjectMutation$data, ProjectVisibility } from '@relay/PreConfigureProjectMutation.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import formatSubmitted from '@utils/format-submitted'
+import React, { useEffect, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import UserListField from '../../Form/UserListField'
+import { useNavBarContext } from '../../NavBar/NavBar.context'
+import { getParticipatoryBudgetAnalysisInput } from './ConfigureParticipatoryBudgetAnalysisInput'
+import { getParticipatoryBudgetInput } from './ConfigureParticipatoryBudgetInput'
 import { getPublicConsultationInput } from './ConfigurePublicConsultationInput'
+import { getPublicInquiryInput } from './ConfigurePublicInquiryInput'
 
 type ParticipatoryBudget = 'PARTICIPATORY_BUDGET'
 
@@ -216,10 +216,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
 
     if (!project) return mutationErrorToast(intl)
 
-    toast({
-      variant: 'success',
-      content: intl.formatMessage({ id: 'project-successfully-created' }),
-    })
+    successToast(intl.formatMessage({ id: 'project-successfully-created' }))
 
     const adminUrl = project.adminAlphaUrl
     if (adminUrl) {
