@@ -48,6 +48,7 @@ class CapcoCollectEmailProposalsCommand extends Command
         private readonly TokenGenerator $tokenGenerator,
         private readonly Filesystem $filesystem,
         private readonly Manager $manager,
+        private readonly string $projectRootDir,
         private ?SymfonyStyle $io = null,
         ?string $name = null
     ) {
@@ -196,7 +197,7 @@ class CapcoCollectEmailProposalsCommand extends Command
         }
 
         $medias = new ArrayCollection();
-        $mediasPublicPath = 'public/media/default/0001/01';
+        $mediasPublicPath = $this->projectRootDir . '/public/media/default/0001/01';
 
         foreach ($attachments as $attachment) {
             $filename = $attachment->filename;
@@ -218,8 +219,9 @@ class CapcoCollectEmailProposalsCommand extends Command
     private function saveMedias(AttachmentCollection $attachments): ArrayCollection
     {
         $medias = new ArrayCollection();
+        $mediasPublicPath = $this->projectRootDir . '/public/media/default/0001/01';
+
         foreach ($attachments as $attachment) {
-            $mediasPublicPath = 'public/media/default/0001/01';
             $filename = $attachment->filename;
             $attachment->save($mediasPublicPath, $filename);
             $media = $this->mediaManager->createImageFromPath("{$mediasPublicPath}/{$filename}", $filename);
