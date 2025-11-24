@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
-use Behat\Mink\Session;
-
 trait AdminTrait
 {
     use AdminGlobalDistrictTrait;
@@ -55,15 +53,6 @@ trait AdminTrait
     }
 
     /**
-     * @When I go to the admin user project :project page
-     */
-    public function iGoToTheAdminProjectPage(string $project)
-    {
-        $this->visitPageWithParams('admin project page', ['project' => $project]);
-        $this->waitAndThrowOnFailure(3000, "$('#project-metadata-admin-form').length > 0");
-    }
-
-    /**
      * @Then I click on button :selector
      */
     public function iClickOnButton(string $selector)
@@ -73,16 +62,5 @@ trait AdminTrait
             ->find('css', $selector)
             ->click()
         ;
-    }
-
-    /**
-     * @Then I switch to window :tabIndex
-     */
-    public function iSwitchToWindow(int $tabIndex): void
-    {
-        /** @var Session $session */
-        $session = $this->getSession();
-        $windowNames = $session->getWindowNames();
-        $session->switchToWindow($windowNames[$tabIndex]);
     }
 }
