@@ -80,7 +80,8 @@ class OauthUserProviderSpec extends ObjectBehavior
             $redisCache,
             $flashBag,
             $translator,
-            $session
+            $session,
+            'instanceName',
         );
     }
 
@@ -277,6 +278,7 @@ class OauthUserProviderSpec extends ObjectBehavior
             ->willReturn($user)
         ;
         $user->getId()->willReturn('<some uuid>');
+        $user->getUsername()->willReturn('existing_username');
 
         // Here we assert right values are set for the user.
         $user
@@ -358,6 +360,7 @@ class OauthUserProviderSpec extends ObjectBehavior
         $ressourceOwner->isRefreshingUserInformationsAtEveryLogin()->willReturn(true);
         $userRepository->findByAccessTokenOrUsername('openid_access_token', 'openid_id')->willReturn($user);
         $user->getId()->willReturn('<some uuid>');
+        $user->getUsername()->willReturn(null);
         $user->setOpenId('openid_id')->shouldBeCalled()->willReturn($user);
         $user->setOpenIdAccessToken('openid_access_token')->shouldBeCalled()->willReturn($user);
         $user->setUsername('openid_user')->shouldBeCalled()->willReturn($user);

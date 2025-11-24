@@ -10,6 +10,8 @@ class OccitanieMapping implements MappingInterface
             'identifier' => 'sub',
             'email' => 'email',
             'nickname' => 'preferred_username',
+            'firstname' => 'given_name',
+            'lastname' => 'family_name',
         ];
     }
 }

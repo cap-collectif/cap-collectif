@@ -51,7 +51,8 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         private readonly RedisCache $redisCache,
         private readonly FlashBagInterface $flashBag,
         private readonly TranslatorInterface $translator,
-        private readonly SessionInterface $session
+        private readonly SessionInterface $session,
+        private readonly string $instanceName
     ) {
         $this->properties = array_merge($this->properties, $properties);
     }
@@ -276,7 +277,8 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
             $email = $serviceName . '_' . $response->getUsername();
         }
         $user = $viewer instanceof User ? $viewer : $this->findUser($response, $email);
-        $username = $this->getUsername($response);
+
+        $username = $user?->getUsername() ?? $this->getUsername($response);
 
         if (null === $user) {
             $this->isNewUser = true;
@@ -322,13 +324,23 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
 
     private function getUsername(UserResponseInterface $response): string
     {
-        $username = '';
-        if ($response->getNickname()) {
-            $username = $response->getNickname();
-        } elseif ($response->getFirstName() && $response->getLastName()) {
-            $username = $response->getFirstName() . ' ' . $response->getLastName();
+        $nickname = $response->getNickname();
+
+        if ($nickname) {
+            return trim($nickname);
         }
 
-        return trim($username);
+        $firstName = $response->getFirstName();
+        $lastName = $response->getLastName();
+
+        if (!$firstName || !$lastName) {
+            return '';
+        }
+
+        if (str_contains($this->instanceName, 'occitanie')) {
+            return sprintf('%s%s%s', strtoupper(substr($firstName, 0, 1)), strtoupper(substr($lastName, 0, 1)), substr(bin2hex(random_bytes(2)), 0, 4));
+        }
+
+        return trim("{$firstName} {$lastName}");
     }
 }

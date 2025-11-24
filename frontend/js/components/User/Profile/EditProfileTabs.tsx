@@ -9,12 +9,12 @@ import AccountBox from './AccountBox'
 import type { State, FeatureToggles } from '../../../types'
 import NotificationsForm from './NotificationsForm'
 import FollowingsTab from '../Following/FollowingsTab'
-import type { EditProfileTabs_viewer } from '~relay/EditProfileTabs_viewer.graphql'
+import type { EditProfileTabs_viewer$key } from '~relay/EditProfileTabs_viewer.graphql'
 import '~relay/EditProfileTabs_viewer.graphql'
 import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from '../UserLink'
 import ChangePasswordForm from './ChangePasswordForm'
-import PersonalData, { occitanieUrl, occitaniePreprodUrl } from './PersonalData'
+import PersonalData from './PersonalData'
 import Profile from './Profile'
 import ChangeUsername from './ChangeUsername'
 import Media from '../../Ui/Medias/Media/Media'
@@ -28,7 +28,7 @@ type Props = {
   readonly features: FeatureToggles
   readonly loginWithOpenId: boolean
   readonly languageList: Array<LocaleMap>
-  readonly viewer: EditProfileTabs_viewer
+  readonly viewer: EditProfileTabs_viewer$key
 }
 type TabKey = 'profile' | 'account' | 'personal-data' | 'password' | 'notifications' | 'followings'
 export const getHashKey = (hash: string): TabKey => {
@@ -59,15 +59,11 @@ export const getHashKey = (hash: string): TabKey => {
   return 'account'
 }
 
-const getDefaultActiveKey = (viewerSsoAllowToUpdateUsername: boolean): TabKey => {
+const getDefaultActiveKey = (): TabKey => {
   const hash = config.canUseDOM ? window.location.hash : null
 
   if (hash) {
     return getHashKey(hash)
-  }
-
-  if (!viewerSsoAllowToUpdateUsername) {
-    return 'account'
   }
 
   return 'profile'
@@ -76,12 +72,9 @@ const getDefaultActiveKey = (viewerSsoAllowToUpdateUsername: boolean): TabKey =>
 export class EditProfileTabs extends Component<Props> {
   render() {
     const { viewer, features, loginWithOpenId, languageList } = this.props
-    // TODO this will be added to API, one day.
-    const viewerSsoAllowToUpdateUsername = window.location.hostname !== occitanieUrl && window.location.hostname !== occitaniePreprodUrl
-    // TODO this will be added to API, one day.
     const viewerSsoAllowToUpdatePassword = !loginWithOpenId && viewer.hasPassword
     return (
-      <Tab.Container id="account-tabs" defaultActiveKey={getDefaultActiveKey(viewerSsoAllowToUpdateUsername)}>
+      <Tab.Container id="account-tabs" defaultActiveKey={getDefaultActiveKey()}>
         <Row className="clearfix">
           <Col sm={4} md={3}>
             <Panel id="panel-account">
@@ -97,14 +90,12 @@ export class EditProfileTabs extends Component<Props> {
               </Panel.Heading>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>
-                  {viewerSsoAllowToUpdateUsername && (
-                    <NavItem eventKey="profile" href="#profile">
-                      <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
-                        <span className="icon cap-id-8" />
-                        <Text as="h2" color={colors.primaryColor}><FormattedMessage id="user.profile.title"/></Text>
-                      </ListGroupItem>
-                    </NavItem>
-                  )}
+                  <NavItem eventKey="profile" href="#profile">
+                    <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className="icon cap-id-8" />
+                      <Text as="h2" color={colors.primaryColor}><FormattedMessage id="user.profile.title"/></Text>
+                    </ListGroupItem>
+                  </NavItem>
                   <NavItem eventKey="account" href="#account">
                     <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                       <span className="icon cap-setting-gear" />

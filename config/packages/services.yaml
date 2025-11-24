@@ -103,6 +103,7 @@ services:
         autowire: true
         arguments:
             $properties: { facebook: facebook_id }
+            $instanceName: '%env(SYMFONY_INSTANCE_NAME)%'
 
     Capco\UserBundle\Security\Core\User\SamlUserProvider: ~
 

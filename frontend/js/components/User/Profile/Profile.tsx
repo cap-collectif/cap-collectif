@@ -206,7 +206,6 @@ export const Profile = ({
                 component={component}
                 required
                 type="text"
-                disabled={window.location.hostname === occitanieUrl}
                 id="profile-form-username"
                 divClassName="col-sm-6"
               />

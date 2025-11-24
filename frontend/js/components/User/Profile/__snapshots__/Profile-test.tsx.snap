@@ -105,7 +105,6 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
-            disabled={false}
             divClassName="col-sm-6"
             id="profile-form-username"
             name="username"
@@ -457,7 +456,6 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
-            disabled={false}
             divClassName="col-sm-6"
             id="profile-form-username"
             name="username"

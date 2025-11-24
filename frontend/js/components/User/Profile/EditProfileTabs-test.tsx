@@ -43,18 +43,6 @@ describe('<EditProfileTabs />', () => {
     const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />)
     expect(wrapper).toMatchSnapshot()
   })
-  it("should not render profile tab, if sso doesn't allow to update username", () => {
-    mockUrl('https://jeparticipe.laregioncitoyenne.fr/fr/profile/edit-profile')
-    const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />)
-    expect(window.location.hostname).toEqual('jeparticipe.laregioncitoyenne.fr')
-    expect(wrapper.find('[href="#profile"]').length).toEqual(0)
-    expect(
-      wrapper.find({
-        defaultActiveKey: 'account',
-      }).length,
-    ).toEqual(1)
-    expect(wrapper).toMatchSnapshot()
-  })
   it('should render all tabs except profile, password and account (OpenID)', () => {
     const wrapper = shallow(<EditProfileTabs {...propsWithOpenIdAndNotProfiles} {...globalProps} />)
     expect(wrapper).toMatchSnapshot()
