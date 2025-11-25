@@ -61,6 +61,7 @@ class MediaManager
         return $media;
     }
 
+    // @todo Refactor this method : https://github.com/cap-collectif/platform/issues/19089
     public function createImageFromPath(
         string $path,
         ?string $mediaName = null,

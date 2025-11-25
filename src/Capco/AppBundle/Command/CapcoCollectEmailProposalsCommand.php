@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CollectStepImapServerConfig;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -12,6 +13,7 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Imap\Exception\FolderNotFoundException;
 use Capco\AppBundle\Imap\ImapClient;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -43,6 +45,7 @@ class CapcoCollectEmailProposalsCommand extends Command
         private readonly EntityManagerInterface $em,
         private readonly Indexer $indexer,
         private readonly MediaManager $mediaManager,
+        private readonly MediaProvider $mediaProvider,
         private readonly CollectStepRepository $collectStepRepository,
         private readonly TranslatorInterface $translator,
         private readonly TokenGenerator $tokenGenerator,
@@ -223,8 +226,18 @@ class CapcoCollectEmailProposalsCommand extends Command
 
         foreach ($attachments as $attachment) {
             $filename = $attachment->filename;
+
+            $media = new Media();
+            $media->setProviderName(MediaProvider::class);
+            $media->setSize($attachment->getSize());
+            $media->setContentType($attachment->getMimeType());
+            $media->setContext('default');
+            $media->setEnabled(true);
+            $media->setName($filename);
+            $media->setProviderReference(sprintf('%s.%s', $this->mediaProvider->generateId($media), $attachment->getExtension()));
+
             $attachment->save($mediasPublicPath, $filename);
-            $media = $this->mediaManager->createImageFromPath("{$mediasPublicPath}/{$filename}", $filename);
+
             $this->em->persist($media);
             $medias->add($media);
         }
