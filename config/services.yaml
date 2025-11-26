@@ -62,7 +62,6 @@ parameters:
     twilio_default_verify_service_id: '%env(SYMFONY_TWILIO_DEFAULT_VERIFY_SERVICE_ID)%'
     orange_client_id: '%env(SYMFONY_ORANGE_API_CLIENT_ID)%'
     orange_client_secret: '%env(SYMFONY_ORANGE_API_CLIENT_SECRET)%'
-    loco_read_only_key: '%env(SYMFONY_LOCO_READ_ONLY_KEY)%'
     default_super_admin_password: '%env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD)%'
     default_facebook_client_id: '%env(SYMFONY_DEFAULT_FACEBOOK_CLIENT_ID)%'
     default_facebook_secret: '%env(SYMFONY_DEFAULT_FACEBOOK_SECRET)%'
@@ -222,4 +221,3 @@ parameters:
     env(SYMFONY_ORANGE_API_CLIENT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_API_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME): '900'
-    env(SYMFONY_LOCO_READ_ONLY_KEY): 'INSERT_A_REAL_SECRET'

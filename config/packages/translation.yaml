@@ -1,9 +1,0 @@
-# Fetch xlf files from Loco: CapcoAppBundle.{locale}.xlf and validators.{locale}.xlf
-translation_adapter_loco:
-    projects:
-        cap-collectif:
-            # This key provides read-only access to our translations.
-            # It's suitable for deployment scripts and sharing download links with colleagues.
-            # So we can keep it here.
-            api_key: '%loco_read_only_key%'
-            domains: ['CapcoAppBundle', 'validators']

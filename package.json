@@ -20,7 +20,7 @@
         "build-relay-schema": "relay-compiler",
         "build-relay-schema:watch": "relay-compiler --watch",
         "trad-analyser": "node --experimental-modules trad-analyser.mjs --max-same 816 --max-unused 858",
-        "fetch-translations": "node --experimental-modules -r dotenv/config ./fetch_translations.mjs dotenv_config_path=.env.local",
+        "fetch-translations": "node -r dotenv/config ./fetch_translations.mjs dotenv_config_path=.env.local",
         "trad": "yarn run fetch-translations",
         "email-snapshots": "node ./email-snapshots",
         "compile-graphql": "pipenv run fab local.qa.compile-graphql",

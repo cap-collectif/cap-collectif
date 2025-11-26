@@ -265,18 +265,6 @@
             "config/packages/httplug.yaml"
         ]
     },
-    "php-translation/loco-adapter": {
-        "version": "0.11",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.8",
-            "ref": "c97545d1c229338606d881294eceeb4cdc993777"
-        },
-        "files": [
-            "config/packages/php_translation_loco_adapter.yaml"
-        ]
-    },
     "php-translation/symfony-bundle": {
         "version": "0.12",
         "recipe": {
