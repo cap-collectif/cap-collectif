@@ -3,6 +3,7 @@ import { Base } from '~e2e-pages/index'
 describe('Blog page', () => {
   before(() => {
     cy.task('db:restore')
+    cy.task('disable:feature', 'shield_mode')
   })
   beforeEach(() => {
     cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })

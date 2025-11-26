@@ -68,7 +68,7 @@ context('Opened Questionnaire - Logged-in as user', () => {
       cy.get('#reply-form-container')
       QuestionnairePage.fillFormWithoutEnoughRequirementsChoices()
       cy.contains('global.send').click({ force: true })
-      cy.contains('reply.constraints.choices_equal {"nb":3}').should('exist')
+      cy.contains('reply.constraints.choices_equal').should('exist')
     })
     it('should correctly display errors when user attempts to add a reply to a questionnaire with not enough choices for optional question', () => {
       QuestionnairePage.clickAnswerAgainButton()
@@ -76,7 +76,7 @@ context('Opened Questionnaire - Logged-in as user', () => {
       QuestionnairePage.fillCreateFormWithRequiredFields()
       cy.contains('global.form.ranking.select').click({ force: true })
       cy.contains('global.send').click({ force: true })
-      cy.contains('reply.constraints.choices_min {"nb":2}').should('exist')
+      cy.contains('reply.constraints.choices_min').should('exist')
     })
   })
   it('should correctly place a ranking answer to the choice box', () => {

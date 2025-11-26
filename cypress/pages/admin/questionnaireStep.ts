@@ -113,7 +113,7 @@ export default new (class AdminQuestionnaireStepPage {
   }
 
   getFromModelTab() {
-    return cy.get('label.cCxBQb > span')
+    return cy.get('label[for="MODEL"]')
   }
   getFromModelTabListInput() {
     return cy.get('div.cap-async-select__input-container')

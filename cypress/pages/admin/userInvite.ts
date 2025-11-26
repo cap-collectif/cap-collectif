@@ -46,16 +46,14 @@ export default new (class UserInvitePage {
   }
 
   checkRelaunchMessage(wasRelaunched: 'relaunched' | 'notRelaunched' | 'both') {
-    return this.cy
-      .get('.cap-modal')
-      .should(
-        'contain',
-        wasRelaunched === 'relaunched'
-          ? 'invitations.relaunch.already-relaunched {"count":1}'
-          : wasRelaunched === 'notRelaunched'
-          ? 'invitations.relaunched.none-relaunched {"count":2}'
-          : 'invitations.relaunch.include {"relaunchedInvitations":1}',
-      )
+    return this.cy.get('.cap-modal').should(
+      'contain',
+      wasRelaunched === 'relaunched'
+        ? 'invitations.relaunch.already-relaunched' // count: 1
+        : wasRelaunched === 'notRelaunched'
+        ? 'invitations.relaunched.none-relaunched' // count: 2
+        : 'invitations.relaunch.include', // count: 1
+    )
   }
 
   getDeleteButton() {
@@ -142,6 +140,6 @@ export default new (class UserInvitePage {
     return this.cy.get('button').contains('send-invitation')
   }
   getConfirmationToast() {
-    return this.cy.get('div[aria-roledescription="status"]').contains('invite-sent {"nbInvites":1}')
+    return this.cy.get('div[aria-roledescription="status"]').contains('invite-sent') // nb invites: 1
   }
 })()

@@ -84,7 +84,6 @@ describe('Events feature', () => {
     Base.visit({
       path: '/events/event-with-registrations',
       operationName: 'CommentSectionQuery',
-      withIntercept: true,
     })
 
     cy.get('#CommentForm').should('exist')
@@ -100,12 +99,13 @@ describe('Events feature', () => {
   })
 
   it('should display create button if feature enable and should ask for login', () => {
+    cy.task('disable:feature', 'allow_users_to_propose_events')
     cy.interceptGraphQLOperation({ operationName: 'EventRefetchRefetchQuery' })
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
     cy.get('#btn-create-event').should('not.exist')
 
     cy.task('enable:feature', 'allow_users_to_propose_events')
-    Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery', withIntercept: false })
+    Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
     cy.get('#btn-create-event').click({ force: true })
     cy.get('#login-popover').should('exist')
   })
@@ -114,7 +114,6 @@ describe('Events feature', () => {
     Base.visit({
       path: '/events/event-with-registrations',
       operationName: 'CommentSectionQuery',
-      withIntercept: true,
     })
     cy.get('#CommentForm').should('exist')
 
@@ -139,7 +138,6 @@ describe('Events feature', () => {
     Base.visit({
       path: '/events/event-with-registrations',
       operationName: 'CommentSectionQuery',
-      withIntercept: true,
     })
 
     cy.get('#CommentForm').should('exist')

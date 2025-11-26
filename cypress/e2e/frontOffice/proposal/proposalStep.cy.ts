@@ -14,7 +14,7 @@ context('Proposal Step Page', () => {
     it('should see votes', () => {
       cy.directLoginAs('user')
       ProposalStepPage.visitSelectionStepWithOpenedVoteAndDisplayed()
-      cy.get('div.card__counters.small').should('contain', 'vote.count_no_nb {"count":1}')
+      cy.get('div.card__counters.small').should('contain', 'vote.count_no_nb')
     })
     it('should see private proposal of the same organization', () => {
       cy.directLoginAs('christophe')

@@ -2,16 +2,17 @@ describe('Anonymous wants to see the profile of a user', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'profiles')
+    cy.task('disable:feature', 'multilangue')
 
     // TODO: investigate why when logged in as user, the #profile-source section is not displayed
     // cy.directLoginAs('user')
   })
 
   it('should display various elements on the user profile', () => {
-    cy.interceptGraphQLOperation({ operationName: 'SourcePageQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'UserAvatarAppQuery' })
     // We visit two different profiles to view all the possible sections that are not all present on the same profile
-    cy.visit('/fr/profile/admin')
-    cy.wait('@SourcePageQuery', { timeout: 10000 })
+    cy.visit('/profile/admin')
+    cy.wait('@UserAvatarAppQuery', { timeout: 10000 })
     cy.get('#profile-argument').within(() => {
       cy.get('.list-group-item').should('have.length.greaterThan', 0)
     })
@@ -29,8 +30,8 @@ describe('Anonymous wants to see the profile of a user', () => {
     })
 
     // Second profile
-    cy.visit('/fr/profile/sfavot')
-    cy.wait('@SourcePageQuery', { timeout: 10000 })
+    cy.visit('/profile/sfavot')
+    cy.wait('@UserAvatarAppQuery', { timeout: 10000 })
     cy.get('#profile-source').within(() => {
       cy.get('.list-group-item__opinion').should('have.length.greaterThan', 0)
     })

@@ -1,7 +1,6 @@
 describe('User profile types page', () => {
   before(() => {
-    // ? NOTE: not restoring DB here since we only check that the page and content loads and is visible, and we don't perform mutations.
-    // ? Restoring DB would make the test slower and is not necessary at this point.
+    cy.task('db:restore')
     cy.task('enable:feature', 'user_type')
   })
 

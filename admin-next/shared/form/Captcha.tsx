@@ -39,7 +39,8 @@ const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange, style
       return null
     }
     // @ts-ignore TURNSTILE_PUBLIC_KEY not on DOM by default
-    const siteKey = window.TURNSTILE_PUBLIC_KEY
+    const siteKey = isTest ? '1x00000000000000000000AA' : window.TURNSTILE_PUBLIC_KEY
+
     return (
       <Turnstile
         // @ts-ignore wait for React19 for better ref handling

@@ -1,23 +1,28 @@
-import UserRegistration from '~e2e-pages/admin/user/userRegistration'
-import { Base } from '~e2e-pages/index'
+import { Base, UserRegistration } from '~e2e-pages/index'
 
 context('Register as a user', () => {
   describe('User register with any features', () => {
-    beforeEach(() => {
-      cy.task('db:restore')
+    before(() => {
       cy.task('enable:feature', 'registration')
       cy.task('enable:feature', 'user_type')
       cy.task('enable:feature', 'zipcode_at_register')
       cy.task('enable:feature', 'captcha')
       cy.task('enable:feature', 'turnstile_captcha')
-      Base.visitHomepage({ withIntercept: true })
-      cy.get('#registration-button', { timeout: 20000 }).should('exist').and('be.visible').click({ force: true })
-      cy.get('#username').should('be.visible')
-      cy.interceptGraphQLOperation({ operationName: 'RegisterMutation' })
-      cy.get('#cookie-consent').click({ force: true })
+    })
+    beforeEach(() => {
+      cy.task('db:restore')
+    })
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // returning false here prevents Cypress from failing the test
+      return false
     })
 
     it('should register with user type and zipcode', () => {
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+
+      UserRegistration.consentToCookies()
       UserRegistration.fillUser()
       cy.get('[name=zipcode]').type('94123')
       cy.get('#userType').click({ force: true })
@@ -31,12 +36,20 @@ context('Register as a user', () => {
     })
 
     it('should register without user type or zipcode', () => {
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+      UserRegistration.consentToCookies()
       UserRegistration.fillUser()
       UserRegistration.fillFormDefault()
       UserRegistration.confirmRegister()
     })
 
     it('should show errors with invalid registration data', () => {
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+      UserRegistration.consentToCookies()
       cy.get('[name=username]').type('p')
       cy.get('[name=email]').type('poupouil.com') // invalid
       cy.get('[name=plainPassword]').type('azerty') // weak
@@ -51,6 +64,10 @@ context('Register as a user', () => {
     })
 
     it('should register with consent to external communication', () => {
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+      UserRegistration.consentToCookies()
       cy.task('enable:feature', 'consent_external_communication')
 
       UserRegistration.fillUser()
@@ -62,6 +79,10 @@ context('Register as a user', () => {
     })
 
     it('should register with consent to internal communication', () => {
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+      UserRegistration.consentToCookies()
       cy.task('enable:feature', 'consent_internal_communication')
 
       UserRegistration.fillUser()

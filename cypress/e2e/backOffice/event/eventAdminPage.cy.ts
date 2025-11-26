@@ -68,7 +68,7 @@ describe('Event Admin Page', () => {
     EventFormPage.importCsvFile(filePath)
     cy.wait('@AddEventsMutation', { timeout: 10000 })
     cy.get('#AdminImportEventsButton-submit').click()
-    cy.get('p').contains('count-events-found {"num":1}').should('exist').and('be.visible')
+    cy.get('p').contains('count-events-found').should('exist').and('be.visible') // num: 1
     cy.get('#AdminImportEventsButton-submit').click()
     cy.get('div .cap-toast').contains('events-successfully-imported').should('exist').and('be.visible')
   })

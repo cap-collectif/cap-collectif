@@ -26,10 +26,9 @@ describe('Homepage', () => {
     Base.visit({
       path: '/admin/features/developer_documentation/switch',
       operationName: 'AdminRightNavbarAppQuery',
-      withIntercept: true,
     })
 
-    Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
+    Base.visitHomepage({ operationName: 'NavBarMenuQuery' })
     cy.get('.footer-links').should('exist')
     cy.contains('.footer-links', 'Développeurs').should('exist')
   })
@@ -41,10 +40,9 @@ describe('Homepage', () => {
     Base.visit({
       path: '/admin/features/developer_documentation/switch',
       operationName: 'AdminRightNavbarAppQuery',
-      withIntercept: true,
     })
 
-    Base.visitHomepage({ operationName: 'NavBarMenuQuery', withIntercept: true })
+    Base.visitHomepage({ operationName: 'NavBarMenuQuery' })
     cy.get('.footer-links').should('exist')
     cy.contains('.footer-links', 'Développeurs').should('not.exist')
   })

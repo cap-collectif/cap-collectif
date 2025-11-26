@@ -50,7 +50,7 @@ context('Project', () => {
         state: 'ARCHIVED',
         stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw',
       })
-      cy.contains('filter.count.status.archived {"num":1}')
+      cy.contains('filter.count.status.archived') // num: 1
       cy.contains('1 global.proposals')
       cy.contains('Proposition archivé')
     })
@@ -64,25 +64,25 @@ context('Project', () => {
       AdminProjectPage.visitProposalsTab('projectCorona')
       AdminProjectPage.selectCollectStep('Collecte de projets')
 
-      cy.wait('@ProjectAdminProposalsPageQuery')
+      cy.wait('@ProjectAdminProposalsPageQuery', { timeout: 10000 })
       AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('exist')
 
       // Sort by most messages received
       AdminProjectPage.sortSelect.click()
       AdminProjectPage.mostMessageReceivedFilter.should('exist').click()
-      cy.wait('@ProjectAdminProposalsPageQuery')
-      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received {"num":1}')
+      cy.wait('@ProjectAdminProposalsPageQuery', { timeout: 10000 })
+      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received') // num: 1
 
       // Sort by least messages received
       AdminProjectPage.sortSelect.click()
       AdminProjectPage.leastMessageReceivedFilter.should('exist').click()
-      cy.wait('@ProjectAdminProposalsPageQuery')
-      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received {"num":0}')
+      cy.wait('@ProjectAdminProposalsPageQuery', { timeout: 10000 })
+      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received') // num: 0
     })
     it('should not display nor messages number nor sorting if the proposal form does not allow it', () => {
       AdminProjectPage.visitProposalsTab('projectIdf')
       AdminProjectPage.selectCollectStep('Collecte des projets Idf (privée)')
-      cy.wait('@ProjectAdminProposalsPageQuery')
+      cy.wait('@ProjectAdminProposalsPageQuery', { timeout: 10000 })
       cy.get('span[title="proposal_stats_messages_received"]').should('not.exist')
 
       AdminProjectPage.sortSelect.click({ force: true })

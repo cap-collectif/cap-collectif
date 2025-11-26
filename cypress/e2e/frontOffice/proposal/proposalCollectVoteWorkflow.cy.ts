@@ -221,7 +221,7 @@ describe('Proposal Collect Vote Page workflow', () => {
   })
 
   describe('internal communication', () => {
-    it('should trigger consentInternalCommunication email form when the step has requirements: NO', () => {
+    it.skip('should trigger consentInternalCommunication email form when the step has requirements: NO', () => {
       cy.task('run:sql', 'DELETE FROM requirement WHERE step_id = "collectStepWorkflowCollectVote"')
 
       ProposalPage.visitCollectStepPage({

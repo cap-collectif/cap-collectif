@@ -1,6 +1,7 @@
 import { DebatePage } from '~e2e-pages/index'
 
-describe('Debate -Logged-in vote', () => {
+// ------------------- AS LOGGED-IN USER -------------------
+describe('Debate - Logged-in vote', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('user')

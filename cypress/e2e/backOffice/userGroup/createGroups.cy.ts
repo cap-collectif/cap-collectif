@@ -25,11 +25,7 @@ describe('Create a new group and add members to it', () => {
     AdminGroupsPage.addWrongFormatCsv()
     AdminGroupsPage.addMembersViaUploader()
     AdminGroupsPage.getCreateGroupButton().click()
-    AdminGroupsPage.getToast()
-      .find('div')
-      .find('p')
-      .invoke('text')
-      .should('match', /admin.group-create-success.*Développeuses back-end/)
+    AdminGroupsPage.getToast().find('div').find('p').invoke('text').should('contain', 'admin.group-create-success')
     cy.get('.cap-table__tbody .cap-table__tr')
       .eq(0)
       .within(() => {

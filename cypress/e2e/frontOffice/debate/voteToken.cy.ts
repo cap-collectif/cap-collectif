@@ -35,7 +35,6 @@ describe('Vote Token', () => {
       Base.visit({
         path: '/voteByToken?token=debateVoteToken1&value=FOR',
         operationName: 'NavBarMenuQuery',
-        withIntercept: false,
       })
 
       cy.get('.flash-notif').should('be.visible').and('contain.text', 'already-used-token')

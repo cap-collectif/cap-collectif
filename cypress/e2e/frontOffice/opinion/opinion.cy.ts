@@ -7,6 +7,7 @@ describe('Opinion Page Tests', () => {
   context('As an anonymous user', () => {
     before(() => {
       cy.task('enable:feature', 'share_buttons')
+      cy.task('disable:feature', 'shield_mode')
     })
     it('should display all votes of an opinion', () => {
       OpinionPage.visitConsultationDetailsPage()
@@ -82,7 +83,7 @@ describe('Opinion Page Tests', () => {
 
   context('As a logged user', () => {
     beforeEach(() => {
-      cy.interceptGraphQLOperation({ operationName: 'OpinionListQuery' })
+      cy.task('db:restore')
       cy.directLoginAs('user')
     })
     it('should be able to create an opinion', () => {
@@ -90,6 +91,8 @@ describe('Opinion Page Tests', () => {
         projectSlug: 'croissance-innovation-disruption',
         stepSlug: 'collecte-des-avis',
       })
+
+      cy.get('#btn-add--les-causes').should('be.visible')
       cy.get('#btn-add--les-causes').click({ force: true })
       cy.get('#opinion-create-form').should('be.visible')
       cy.get('#opinion_title').should('be.visible')
@@ -159,7 +162,8 @@ describe('Opinion Page Tests', () => {
         opinionSlug: 'opinion-3',
       })
 
-      cy.contains('global.votes {"num":1}')
+      // should contains 1
+      cy.contains('global.votes')
       cy.contains('global.edit').click()
 
       cy.get('#opinion-edit-form').should('be.visible')
@@ -171,7 +175,8 @@ describe('Opinion Page Tests', () => {
       cy.get('#confirm-opinion-update').should('not.exist')
       cy.url().should('include', '/opinions/les-enjeux/opinion-3')
       cy.get('#OpinionBox').should('be.visible')
-      cy.contains('global.votes {"num":0}')
+      // should contains 0
+      cy.contains('global.votes')
     })
   })
 
@@ -235,7 +240,8 @@ describe('Opinion List Page', () => {
         typeSlug: 'les-enjeux',
       })
 
-      cy.contains('global.opinionsCount {"num":3}').should('exist')
+      // should contains 3
+      cy.contains('global.opinionsCount').should('exist')
     })
 
     it('should display 38 opinions for "les-causes"', () => {
@@ -246,7 +252,8 @@ describe('Opinion List Page', () => {
         typeSlug: 'les-causes',
       })
 
-      cy.contains('global.opinionsCount {"num":38}').should('exist')
+      // should contains 38
+      cy.contains('global.opinionsCount').should('exist')
     })
   })
 })

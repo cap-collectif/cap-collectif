@@ -155,3 +155,13 @@ Cypress.Commands.add('logout', () => {
   cy.clearCookie('PHPSESSID')
   Cypress.session.clearAllSavedSessions()
 })
+
+Cypress.Commands.add('isLoggedIn', () => {
+  cy.get('header[role="banner"] button#login-button').should('not.exist')
+  cy.get('#navbar-username').should('exist')
+})
+
+Cypress.Commands.add('isLoggedOut', () => {
+  cy.get('header[role="banner"] button#login-button').contains('global.login').should('exist')
+  cy.get('#navbar-username').should('not.exist')
+})

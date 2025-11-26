@@ -7,7 +7,7 @@ describe('Newsletter', () => {
   })
   beforeEach(() => {
     cy.interceptGraphQLOperation({ operationName: 'SubscribeNewsletterMutation' })
-    Base.visitHomepage({ withIntercept: true })
+    Base.visitHomepage()
   })
 
   it('User wants to subscribe to newsletter, without captcha', () => {

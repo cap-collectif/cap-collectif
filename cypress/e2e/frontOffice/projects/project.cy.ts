@@ -220,11 +220,12 @@ describe('Project', () => {
   })
 
   describe('when admin accesses own project', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('admin')
     })
     it('displays project and allows editing', () => {
+      cy.task('enable:feature', 'unstable__new_create_project')
       Base.visit({
         path: '/project/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/collect/collecte-des-propositions-pour-la-capcobeer',
         operationName: 'ProposalListViewRefetchQuery',
@@ -313,7 +314,6 @@ describe('Project', () => {
       Base.visit({
         path: '/project/projet-avec-beaucoup-dopinions/collect/collecte-des-propositions-avec-questions-qui-va-etre-jetee',
         operationName: 'ProposalListViewRefetchQuery',
-        withIntercept: false,
       })
       cy.contains('Proposition qui va être jetée').should('not.exist')
     })

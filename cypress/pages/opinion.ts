@@ -40,17 +40,15 @@ export default new (class OpinionPage {
     opinionTypeSlug,
     opinionSlug,
     operationName = 'ArgumentListQuery',
-    withIntercept = true,
   }: {
     projectSlug: string
     stepSlug: string
     opinionTypeSlug: string
     opinionSlug: string
     operationName?: string
-    withIntercept?: boolean
   }) {
     const path = `/projects/${projectSlug}/consultation/${stepSlug}/opinions/${opinionTypeSlug}/${opinionSlug}`
-    Base.visit({ path, operationName, withIntercept })
+    Base.visit({ path, operationName })
   }
 
   getSingleOpinion() {
@@ -65,26 +63,26 @@ export default new (class OpinionPage {
   }
 
   /* Versions */
-  visitVersionPage(operationName: string = 'ArgumentListQuery') {
+  visitVersionPage(operationName = 'ArgumentListQuery') {
     Base.visit({
       path: '/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1',
       operationName: operationName,
       failOnStatusCode: false,
     })
   }
-  visitVersionClosedPage(operationName: string = 'ArgumentListQuery') {
+  visitVersionClosedPage(operationName = 'ArgumentListQuery') {
     Base.visit({
       path: '/projects/strategie-technologique-de-letat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51/versions/version-sur-une-etape-fermee',
       operationName: operationName,
     })
   }
-  visitVersionWithVotesPage(operationName: string = 'ArgumentListQuery') {
+  visitVersionWithVotesPage(operationName = 'ArgumentListQuery') {
     Base.visit({
       path: '/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2',
       operationName: operationName,
     })
   }
-  visitVersionToEditPage(operationName: string = 'ArgumentListQuery') {
+  visitVersionToEditPage(operationName = 'ArgumentListQuery') {
     Base.visit({
       path: '/projects/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/consultation/etape-participation-continue/opinions/premiere-section-encore-un-sous-titre/opinion-endless/versions/modification-16',
       operationName: operationName,

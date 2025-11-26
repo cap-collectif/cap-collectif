@@ -1,5 +1,6 @@
 import { DebatePage } from '~e2e-pages/index'
 
+// ------------------- DEBATE PAGE IS DISPLAYED -------------------
 describe('Debate', () => {
   it('should correctly show a debate', () => {
     DebatePage.visitCannabisDebate()

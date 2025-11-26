@@ -2,6 +2,7 @@ describe('Email confirmation', () => {
   before(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'registration')
+    cy.task('disable:feature', 'shield_mode')
   })
   it('should confirm email for not confirmed user', () => {
     cy.visit('/account/email_confirmation/azertyuiop')

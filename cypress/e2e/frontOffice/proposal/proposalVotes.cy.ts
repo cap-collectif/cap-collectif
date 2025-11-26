@@ -15,16 +15,15 @@ context('Votes from selection step page', () => {
       operationName: 'ProposalListViewRefetchQuery',
     })
 
-    cy.get('.proposal-preview')
-      .last()
-      .then(intercept => {
-        cy.wrap(intercept).find('.card__counters__value').contains('2')
-        cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
-        cy.get('.toasts-container--top div').should('contain', 'vote.add_success')
-        cy.wrap(intercept).find('.card__counters__value').contains('3')
-        cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
-        cy.wrap(intercept).find('.card__counters__value').contains('2')
-      })
+    // eslint-disable-next-line jest/valid-expect-in-promise
+    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwy').then(intercept => {
+      cy.wrap(intercept).find('.card__counters__value').contains('2')
+      cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
+      cy.get('.toasts-container--top div').should('contain', 'vote.add_success')
+      cy.wrap(intercept).find('.card__counters__value').contains('3')
+      cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
+      cy.wrap(intercept).find('.card__counters__value').contains('2').should('exist').and('be.visible')
+    })
   })
 
   it('should disable vote button when user has not enough credits in budget vote step', () => {
@@ -35,11 +34,7 @@ context('Votes from selection step page', () => {
       stepSlug: 'selection-avec-vote-selon-le-budget',
       operationName: 'ProposalListViewRefetchQuery',
     })
-    cy.get('.proposal-preview')
-      .last()
-      .then(intercept => {
-        cy.wrap(intercept).find('.proposal__button__vote.disabled').should('exist')
-      })
+    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWw4').find('.proposal__button__vote.disabled').should('exist')
   })
 
   it('should disable vote button when user has reached limit in selection step', () => {
@@ -105,13 +100,9 @@ context('Votes management page', () => {
       operationName: 'ProposalListViewRefetchQuery',
     })
 
-    cy.get('.proposal-preview')
-      .last()
-      .then(intercept => {
-        cy.wrap(intercept).find('.card__counters__value').contains('47')
-        cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
-        cy.wrap(intercept).find('.card__counters__value').contains('46')
-      })
+    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('47')
+    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.proposal__button__vote').click({ force: true })
+    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('46')
   })
 
   /* cypress cannot test this behaviour with react-beautiful-dnd because it doesn't use browser drag and drop behaviour */

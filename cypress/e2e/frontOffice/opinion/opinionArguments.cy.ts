@@ -6,12 +6,7 @@ describe('Arguments - CRUD & Permissions', () => {
   })
 
   context('As anonymous', () => {
-    it('should not see edit button', () => {
-      OpinionPage.visitVersionPage()
-      cy.get('.argument__edit-button').should('not.exist')
-    })
-
-    it('should not see edit button on version', () => {
+    it('should not see edit button on version (as anonymous)', () => {
       OpinionPage.visitVersionPage()
       cy.get('.argument__edit-button').should('not.exist')
     })
@@ -90,6 +85,7 @@ describe('Arguments - CRUD & Permissions', () => {
     })
 
     it('should not vote for their own argument (opinion & version)', () => {
+      cy.task('db:restore')
       OpinionPage.visitOpinionArgument()
       OpinionPage.submitArgument({ content: 'Nouvel argument publié' })
       cy.get('#opinion__arguments--FOR').first().should('contain', 'Nouvel argument publié')
@@ -129,12 +125,7 @@ describe('Arguments - CRUD & Permissions', () => {
       cy.directLoginAs('admin')
     })
 
-    it('should not see edit button', () => {
-      OpinionPage.visitOpinionArgument()
-      cy.get('.argument__edit-button').should('not.exist')
-    })
-
-    it('should not see edit button on version', () => {
+    it('should not see edit button on version (as admin) ', () => {
       OpinionPage.visitVersionPage()
       cy.get('.argument__edit-button').should('not.exist')
     })

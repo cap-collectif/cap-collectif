@@ -25,7 +25,7 @@ describe('User invitation as admin', () => {
     UserInvitePage.getGoToRoleStepButton().click()
     UserInvitePage.selectGroup()
     UserInvitePage.getGoToConfirmationStepButton().click()
-    cy.get('div').contains('"nbGroups":1').should('exist')
+    cy.get('div').contains('user-invite.sending-confirmation.body.groups').should('exist')
     UserInvitePage.getSendInvitationButton().click()
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.wait('@InviteUserMutation', { timeout: 5000 }).then(req => {

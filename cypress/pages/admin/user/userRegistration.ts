@@ -3,7 +3,16 @@ export default new (class UserRegistration {
     return cy
   }
 
+  clickRegistrationButton() {
+    cy.get('#registration-button', { timeout: 20000 }).should('exist').and('be.visible').click({ force: true })
+  }
+
+  consentToCookies() {
+    cy.get('#cookie-consent').click({ force: true })
+  }
+
   confirmRegister() {
+    cy.interceptGraphQLOperation({ operationName: 'RegisterMutation' })
     cy.get('[name=charte]').check({ force: true })
 
     cy.get('#confirm-login').click({ force: true })

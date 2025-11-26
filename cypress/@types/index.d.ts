@@ -57,6 +57,8 @@ declare namespace Cypress {
     openDSSelect(selector: string, async?: boolean): Chainable<any>
     checkAccessDenied(url: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
+    isLoggedIn(): Chainable<any>
+    isLoggedOut(): Chainable<any>
     confirmCaptcha(): Chainable<void>
     getByDataCy(name: string): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>

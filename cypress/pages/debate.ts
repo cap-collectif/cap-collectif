@@ -9,19 +9,26 @@ export default new (class DebatePage {
   }
 
   get forButton() {
-    this.cy.wait(1000)
-    return this.cy.contains('button', 'global.for')
+    return this.cy.contains('button', 'global.for', { timeout: 1000 })
   }
 
   get againstButton() {
     this.cy.wait(1000)
-    return this.cy.contains('button', 'global.against')
+    return this.cy.contains('button', 'global.against', { timeout: 1000 })
+  }
+
+  clickOnVoteForButton() {
+    return this.forButton.click({ force: true })
+  }
+
+  clickOnVoteAgainstButton() {
+    return this.againstButton.click({ force: true })
   }
 
   visit({ project, debate }: VisitOptions) {
     this.cy.interceptGraphQLOperation({ operationName: 'DebateStepPageQuery' })
     this.cy.visit(`/project/${project}/debate/${debate}`)
-    return this.cy.wait('@DebateStepPageQuery')
+    return this.cy.wait('@DebateStepPageQuery', { timeout: 10000 })
   }
 
   visitCannabisDebate() {

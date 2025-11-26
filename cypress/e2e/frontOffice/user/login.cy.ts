@@ -1,19 +1,13 @@
 import { Base, Login } from '~e2e-pages/index'
 
 describe('Login Feature', () => {
-  before(() => {
-    cy.task('db:restore')
-  })
   beforeEach(() => {
-    cy.logout()
+    cy.task('db:restore')
+    Base.visitHomepage()
+    Login.openLoginModal()
   })
 
   context('Password Reset', () => {
-    before(() => {
-      Base.visitHomepage()
-      Login.openLoginModal()
-    })
-
     it('should display confirmation message when user requests password reset', () => {
       Login.clickOnForgetPassword()
 

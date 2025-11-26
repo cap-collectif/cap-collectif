@@ -3,30 +3,28 @@ export default new (class Base {
     return cy
   }
 
-  visit(
-    {
-      path = '',
-      operationName = '',
-      withIntercept = true,
-      failOnStatusCode = true,
-    }: { operationName: string; path?: string; withIntercept?: boolean; failOnStatusCode?: boolean } = {
-      operationName: '',
-    },
-  ) {
-    if (withIntercept) cy.interceptGraphQLOperation({ operationName: operationName })
+  visit({
+    path = '',
+    operationName = '',
+    failOnStatusCode = true,
+  }: {
+    operationName: string
+    path?: string
+    failOnStatusCode?: boolean
+  }) {
+    if (operationName) this.cy.interceptGraphQLOperation({ operationName })
     this.cy.visit(path, { failOnStatusCode: failOnStatusCode })
-    this.cy.wait(`@${operationName}`, { timeout: 10000 })
-  }
-  reload({ operationName }: { operationName: string }) {
-    this.cy.reload()
-    this.cy.wait(`@${operationName}`, { timeout: 10000 })
+    if (operationName) {
+      this.cy.wait(`@${operationName}`, { timeout: 10000 })
+    }
   }
 
-  visitHomepage({
-    lang = '',
-    withIntercept = true,
-    operationName = 'NavbarRightQuery',
-  }: { lang?: string; withIntercept?: boolean; operationName?: string } = {}) {
-    this.visit({ path: `${lang}/`, withIntercept, operationName })
+  reload({ operationName, timeout }: { operationName: string; timeout?: number }) {
+    this.cy.reload()
+    this.cy.wait(`@${operationName}`, { timeout: timeout ?? 10000 })
+  }
+
+  visitHomepage({ lang = '', operationName = 'NavbarRightQuery' }: { lang?: string; operationName?: string } = {}) {
+    this.visit({ path: `${lang}/`, operationName })
   }
 })()

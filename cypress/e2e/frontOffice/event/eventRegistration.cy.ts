@@ -24,7 +24,7 @@ describe('Event Registration', () => {
       Event.openRegistrationModal()
       Event.fillRegistration()
 
-      Base.visitHomepage({ withIntercept: true })
+      Base.visitHomepage()
       Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
 
       Event.openRegistrationModal()

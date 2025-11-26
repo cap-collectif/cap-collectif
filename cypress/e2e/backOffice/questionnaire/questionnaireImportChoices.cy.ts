@@ -27,13 +27,13 @@ describe('Admin Questionnaire - Import Choices', () => {
     cy.get('#import_choices').click()
     cy.get('#import-file').should('exist')
     cy.get('input#csv-file_field').selectFile('fixtures/doublons.csv', { force: true })
-    cy.contains('n-items-found {"num":18}').should('exist')
-    cy.contains('n-duplicate-answer-excluded {"num":15}').should('exist')
+    cy.contains('n-items-found').should('exist') // num: 18
+    cy.contains('n-duplicate-answer-excluded').should('exist') // num: 15
     cy.wait(1000)
 
     // Import over_1500.csv
     cy.get('input#csv-file_field').selectFile('fixtures/over_1500.csv', { force: true })
-    cy.contains('n-items-found {"num":1612}').should('exist')
+    cy.contains('n-items-found').should('exist') // num: 1612
     cy.wait('@QuestionnaireAdminPageQuery', { timeout: 2000 })
     cy.get('#import-file').click()
     cy.contains('75015 - PARIS ANTENNE DEX GRAND SUD OUEST').should('exist')

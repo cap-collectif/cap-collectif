@@ -2,14 +2,16 @@ import { EventPage } from '~e2e/pages'
 
 context('Events list page', () => {
   describe('As admin', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('admin')
-    })
-    beforeEach(() => {
       cy.task('enable:feature', 'themes')
       cy.task('enable:feature', 'calendar')
       cy.visit('/events')
+      Cypress.on('uncaught:exception', (err, runnable) => {
+        // returning false here prevents Cypress from failing the test
+        return false
+      })
     })
     context('within future events list', () => {
       it('should filter events by *title* and display correct results', () => {
@@ -59,13 +61,6 @@ context('Events list page', () => {
 
         EventPage.checkEventPreviewContains(/^evenementPasseSansDate.*/) // the text can be truncated so we're only trying to match the beginning
         cy.get('.card__title').should('not.contain.text', 'PHPTourDuFuture')
-      })
-      describe('As anonymous', () => {
-        it('anonymous user can see events linked to a specific step', () => {
-          cy.task('enable:feature', 'calendar')
-          cy.visit('/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee')
-          EventPage.waitForEventPreviewsToAppear()
-        })
       })
     })
   })

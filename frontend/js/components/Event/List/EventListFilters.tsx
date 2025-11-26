@@ -11,7 +11,7 @@ import { createFragmentContainer } from 'react-relay'
 import select from '../../Form/Select'
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types'
 import config from '../../../config'
-import component from '../../Form/Field'
+import DebouncedReduxFormField from '../../Form/DebouncedReduxFormField'
 import { changeEventMobileListView } from '../../../redux/modules/event'
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn'
 import FiltersContainer from '../../Filters/FiltersContainer'
@@ -182,7 +182,7 @@ export const EventListFilters = ({
           aria-haspopup="true"
           aria-controls="event-search-input-listbox"
           addonAfter={<i className="cap cap-magnifier" />}
-          component={component}
+          component={DebouncedReduxFormField}
           placeholder={intl.formatMessage({
             id: 'search.form.placeholder.term',
           })}
@@ -322,7 +322,7 @@ export const EventListFilters = ({
               id="event-search-input"
               name="search"
               type="text"
-              component={component}
+              component={DebouncedReduxFormField}
               placeholder={intl.formatMessage({
                 id: 'search.form.placeholder.term',
               })}

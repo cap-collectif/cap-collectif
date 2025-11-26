@@ -66,6 +66,7 @@ context('Proposal Page', () => {
         .should('exist')
         .should('be.visible')
         .should('contain', 'document.pdf')
+      // eslint-disable-next-line jest/valid-expect-in-promise
       cy.get('#confirm-proposal-edit')
         .click()
         .then(() => {
@@ -84,8 +85,8 @@ context('Proposal Page', () => {
       cy.get('#ProposalFormContactModal-replyEmail').type('john.doe@email.test')
       cy.get('#ProposalFormContactModal-message').type('Hello, I am John Doe')
       cy.get('#ProposalFormContactModal-submit').click()
-      cy.wait('@ContactProposalAuthorMutation')
-      cy.contains('message-sent-with-success').should('exist')
+      cy.wait('@ContactProposalAuthorMutation', { timeout: 10000 })
+      cy.contains('message-sent-with-success').should('exist').and('be.visible')
     })
   })
   it('should be possible to see every private proposal as a member of an organization', () => {

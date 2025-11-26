@@ -9,6 +9,7 @@ describe('Contact page', () => {
   before(() => {
     cy.task('db:restore')
     cy.task('disable:feature', 'captcha')
+    cy.task('disable:feature', 'shield_mode')
   })
   beforeEach(() => {
     cy.visit('/contact')
