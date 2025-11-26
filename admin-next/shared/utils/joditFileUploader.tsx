@@ -5,15 +5,14 @@ import StatusBar from '@uppy/status-bar'
 import FileInput from '@uppy/file-input'
 
 import fr from '@uppy/locales/lib/fr_FR'
-
-export const FILE_UPLOAD_POPUP_OPENED = 'file_upload_popup_opened'
-const barTarget = 'uppyStatusBar'
-const fileInput = 'uppyFileInput'
-
 import { onElementAvailable } from '@shared/navbar/NavBar.utils'
 import { ALLOWED_MIMETYPES_WITH_ARCHIVES } from './acceptedFiles'
 import { IntlShape } from 'react-intl'
 import { toast } from '@cap-collectif/ui'
+
+export const FILE_UPLOAD_POPUP_OPENED = 'file_upload_popup_opened'
+const barTarget = 'uppyStatusBar'
+const fileInput = 'uppyFileInput'
 
 const SIZE_LIMIT = 104857600 // 100Mo
 
@@ -54,7 +53,20 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
           toast({ variant: 'danger', content: intl.formatMessage({ id: 'error.size_too_big' }, { size: '100Mo' }) })
           return false
         }
-        return null
+
+        // Some special characters are forbidden by tus-php : https://github.com/ankitpokhrel/tus-php/blob/main/src/Request.php#L238
+        // We remove it from the file name to complete the upload
+        // to see replacements : https://regex101.com/r/lLkUG5/1
+        const cleanFileName = currentFile.name
+          .replace(/\.\.\//g, '')
+          .replace(/['"&\/\\?#:!]/g, '')
+          .trim()
+
+        currentFile.meta = {
+          name: cleanFileName,
+        }
+
+        return currentFile
       },
     })
       .use(FileInput, { target: `#${fileInput}` })
