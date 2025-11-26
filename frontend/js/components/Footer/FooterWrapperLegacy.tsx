@@ -57,12 +57,7 @@ export default ({ SSRData }: Props) => {
     locales,
     onLanguageChange,
     defaultLanguage,
-    cookieManager: (
-      <CookieManagerModal
-        isLink
-        separator={footer.legals.cookies || footer.legals.privacy || footer.legals.legal ? '|' : ''}
-      />
-    ),
+    cookieManager: <CookieManagerModal isLink color={footer.textColor} />,
   }
 
   return <Footer {...data} />

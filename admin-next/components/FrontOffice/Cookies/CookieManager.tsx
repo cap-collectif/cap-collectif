@@ -5,6 +5,7 @@ import {
   Box,
   BoxProps,
   Button,
+  CapUIFontWeight,
   CapUIModalSize,
   Flex,
   Heading,
@@ -128,9 +129,16 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
   }
 
   return (
-    <Box display={display}>
+    <Box as="li" display={display}>
       {isLink ? (
-        <Box as="button" type="button" id="cookies-management" onClick={onOpen} {...rest}>
+        <Box
+          as="button"
+          type="button"
+          id="cookies-management"
+          fontWeight={CapUIFontWeight.Semibold}
+          onClick={onOpen}
+          {...rest}
+        >
           {intl.formatMessage({ id: cookieTrad || 'cookies-management' })}
         </Box>
       ) : showBanner ? (

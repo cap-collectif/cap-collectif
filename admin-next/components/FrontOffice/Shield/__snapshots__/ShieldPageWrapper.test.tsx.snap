@@ -80,17 +80,17 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         <span>
           •
         </span>
-        <div
+        <li
           class="sc-bcXGCL keKWCf"
         >
           <button
-            class="sc-bcXGCL keKWCf"
+            class="sc-bcXGCL fFxubO"
             id="cookies-management"
             type="button"
           >
             cookies-management
           </button>
-        </div>
+        </li>
       </div>
       <div
         class="sc-bcXGCL dzojIf capco-powered"

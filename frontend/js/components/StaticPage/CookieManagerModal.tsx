@@ -9,17 +9,17 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import type { State } from '~/types'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
-import { LinkSeparator, CookieBanner, ButtonParameters, ButtonDecline, ButtonAccept } from './CookieManagerModal.style'
+import { CookieBanner, ButtonParameters, ButtonDecline, ButtonAccept } from './CookieManagerModal.style'
 import { CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
 
 type Props = {
   readonly analyticsJs: string | null | undefined
   readonly adJs: string | null | undefined
-  readonly separator?: string
+  readonly color: string
   readonly cookieTrad?: string | null | undefined
   readonly isLink?: boolean
 }
-export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTrad, separator }: Props) => {
+export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTrad, color }: Props) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const cookie = React.useRef(null)
@@ -55,11 +55,17 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
   }
 
   return (
-    <div className="cookie-manager">
+    <li className="cookie-manager">
       {isLink ? (
         <div>
-          {separator && <LinkSeparator>{separator} </LinkSeparator>}
-          <Button variant="link" bsStyle="link" className="p-0" id="cookies-management" onClick={onOpen}>
+          <Button
+            variant="link"
+            bsStyle="link"
+            className="p-0"
+            id="cookies-management"
+            style={{ color: color, 'font-weight': '600' }}
+            onClick={onOpen}
+          >
             <FormattedMessage id={cookieTrad || 'cookies-management'} />
           </Button>
         </div>
@@ -134,7 +140,7 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
           </button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </li>
   )
 }
 

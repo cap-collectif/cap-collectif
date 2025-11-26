@@ -69,7 +69,6 @@ export const Footer: FC<Props> = props => {
       justifyItems="center"
       padding="lg"
       fontSize={CapUIFontSize.BodyLarge}
-      sx={{ a: { color: `${footer.textColor} !important` } }}
     >
       <Flex gap={['xl', 'xxl']} flexDirection={['column', 'row']} width="100%" maxWidth={pxToRem(1280)}>
         <Flex flexDirection="column" justifyContent="space-between" gap="md" width="100%" maxWidth="500px">
@@ -77,7 +76,7 @@ export const Footer: FC<Props> = props => {
             {footer.textTitle?.value ? (
               <Heading
                 as="h3"
-                color={`${footer.textColor} !important`}
+                color={footer.textColor}
                 lineHeight={CapUILineHeight.M}
                 fontSize={CapUIFontSize.BodyLarge}
                 fontWeight={CapUIFontWeight.Normal}
@@ -87,30 +86,36 @@ export const Footer: FC<Props> = props => {
               </Heading>
             ) : null}
             <Text
-              lineHeight="md"
-              color={`${footer.textColor} !important`}
+              lineHeight="S"
+              color={footer.textColor}
               fontSize={CapUIFontSize.BodySmall}
               mt="xs"
-              sx={{ a: { textDecoration: 'underline' } }}
+              sx={{
+                'a:not(.btn)': {
+                  color: footer.textColor,
+                  textDecoration: 'underline',
+                  '&:hover': { color: footer.textColor },
+                },
+              }}
             >
               <WYSIWYGRender value={footer.textBody?.value} />
             </Text>
             {socialNetworks?.length ? (
               <Flex mt="md">
-                <Flex
-                  as="ul"
-                  sx={{ listStyle: 'none', a: { fontSize: CapUIFontSize.BodyRegular, textDecoration: 'underline' } }}
-                  gap="md"
-                  flexWrap="wrap"
-                  direction="row"
-                >
+                <Flex as="ul" gap="md" flexWrap="wrap" direction="row" sx={{ listStyle: 'none' }}>
                   {socialNetworks.map(socialNetwork => (
                     <li key={socialNetwork.title}>
                       <Flex gap="xxs" alignItems="center">
                         <Icon size={CapUIIconSize.Lg} name={getIconName(socialNetwork.style) as CapUIIcon} />
-                        <a href={socialNetwork.link} color={footer.textColor}>
+                        <Box
+                          as="a"
+                          color={footer.textColor}
+                          fontSize={CapUIFontSize.BodyRegular}
+                          sx={{ textDecoration: 'underline' }}
+                          href={socialNetwork.link}
+                        >
                           <span>{`${socialNetwork.title}`}</span>
-                        </a>
+                        </Box>
                       </Flex>
                     </li>
                   ))}
@@ -118,18 +123,17 @@ export const Footer: FC<Props> = props => {
               </Flex>
             ) : null}
           </Box>
-          <Box display={['none', 'block']}>
+          <Box display={['none', 'block']} sx={{ a: { color: footer.textColor } }}>
             <FooterBrand />
           </Box>
         </Flex>
         <Box width="100%">
-          <Heading as="h4" color={`${footer.textColor}!important`} fontSize={CapUIFontSize.BodyLarge}>
+          <Heading as="h4" color={footer.textColor} fontSize={CapUIFontSize.BodyLarge}>
             {intl.formatMessage({ id: 'other-links' })}
           </Heading>
           <Box
             className="footer-links"
             as="ul"
-            sx={{ listStyle: 'none' }}
             mt="xs"
             fontSize={CapUIFontSize.BodyRegular}
             lineHeight={CapUILineHeight.M}
@@ -138,25 +142,14 @@ export const Footer: FC<Props> = props => {
             gridRowGap="xs"
             gridColumnGap="md"
             gridTemplateColumns="repeat(auto-fit, minmax(150px, auto))"
+            sx={{ listStyle: 'none', a: { color: footer.textColor } }}
           >
             {legals.cookies && (
               <li>
                 <a href={cookiesPath}>{intl.formatMessage({ id: 'cookies' })}</a>
               </li>
             )}
-            <Box
-              as="li"
-              sx={{
-                '[class*=LinkSeparator]': { display: 'none' },
-                '#cookies-management[type=button]': {
-                  border: 'none',
-                  color: `${footer.textColor} !important`,
-                  fontWeight: CapUIFontWeight.Semibold,
-                },
-              }}
-            >
-              {cookieManager}
-            </Box>
+            {cookieManager}
             {legals.privacy && (
               <li>
                 <a href={privacyPath}>{intl.formatMessage({ id: 'privacy-policy' })}</a>
@@ -185,7 +178,7 @@ export const Footer: FC<Props> = props => {
                   languageList={locales}
                   defaultLanguage={defaultLanguage.code}
                   cookiesLanguage={cookiesLanguage}
-                  backgroundColor={`${footer.textColor} !important`}
+                  backgroundColor={footer.textColor}
                   textColor={footer.backgroundColor}
                   borderless
                   withLabel
@@ -195,7 +188,7 @@ export const Footer: FC<Props> = props => {
             ) : null}
           </Box>
         </Box>
-        <Box display={['block', 'none']}>
+        <Box display={['block', 'none']} sx={{ a: { color: footer.textColor } }}>
           <FooterBrand />
         </Box>
       </Flex>

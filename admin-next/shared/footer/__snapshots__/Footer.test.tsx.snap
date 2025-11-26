@@ -6,7 +6,7 @@ exports[`<Footer /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <footer
-    class="sc-bcXGCL hekSun"
+    class="sc-bcXGCL bIdJHI"
     role="contentinfo"
   >
     <div
@@ -19,12 +19,12 @@ exports[`<Footer /> renders correctly 1`] = `
           class="sc-bcXGCL keKWCf"
         >
           <h3
-            class="sc-bcXGCL BANpl cap-heading"
+            class="sc-bcXGCL lgoFwA cap-heading"
           >
             À Propos
           </h3>
           <p
-            class="sc-bcXGCL cVdzOB cap-text"
+            class="sc-bcXGCL gTAibA cap-text"
           />
           <div
             class=" ql-editor wysiwyg-render"
@@ -36,7 +36,7 @@ exports[`<Footer /> renders correctly 1`] = `
             class="sc-bcXGCL ljxGQo"
           >
             <ul
-              class="sc-bcXGCL fPmuzj"
+              class="sc-bcXGCL hkyuMy"
             >
               <li>
                 <div
@@ -47,7 +47,7 @@ exports[`<Footer /> renders correctly 1`] = `
                     class="sc-bcXGCL sc-oZHua gzkypG fzfEdP cap-icon"
                   />
                   <a
-                    color="white"
+                    class="sc-bcXGCL fhmLqw"
                     href="x.com/cap-collectif"
                   >
                     <span>
@@ -60,7 +60,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </div>
         </div>
         <div
-          class="sc-bcXGCL dxRviN"
+          class="sc-bcXGCL bVbpT"
         >
           <a
             class="sc-bcXGCL fjrJsl"
@@ -172,12 +172,12 @@ exports[`<Footer /> renders correctly 1`] = `
         class="sc-bcXGCL gGWHIo"
       >
         <h4
-          class="sc-bcXGCL dzprQU cap-heading"
+          class="sc-bcXGCL hAtLJx cap-heading"
         >
           other-links
         </h4>
         <ul
-          class="sc-bcXGCL cOqYux footer-links"
+          class="sc-bcXGCL bqSwQX footer-links"
         >
           <li>
             <a
@@ -186,9 +186,6 @@ exports[`<Footer /> renders correctly 1`] = `
               cookies
             </a>
           </li>
-          <li
-            class="sc-bcXGCL dnvEMZ"
-          />
           <li>
             <a
               href="/privacy"
@@ -227,7 +224,7 @@ exports[`<Footer /> renders correctly 1`] = `
         </ul>
       </div>
       <div
-        class="sc-bcXGCL gvrKHd"
+        class="sc-bcXGCL fLBqOj"
       >
         <a
           class="sc-bcXGCL fjrJsl"
