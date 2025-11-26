@@ -1,10 +1,10 @@
-import { IntlShape } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import DeleteStepMutation from '@mutations/DeleteStepMutation'
 import { CollectStepFormQuery$data } from '@relay/CollectStepFormQuery.graphql'
 import { SelectStepFormQuery$data } from '@relay/SelectStepFormQuery.graphql'
-import { FormValues as SelectFormValues } from './SelectStep/SelectStepForm'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { IntlShape } from 'react-intl'
 import { FormValues as CollectFormValues } from './CollectStep/CollectStepForm'
+import { FormValues as SelectFormValues } from './SelectStep/SelectStepForm'
 
 export const onBack = async (
   adminAlphaUrl: string | null | undefined,
@@ -12,10 +12,6 @@ export const onBack = async (
   stepId: string,
   intl: IntlShape,
 ) => {
-  if (!adminAlphaUrl) {
-    return
-  }
-
   if (isEditing) {
     window.location.href = adminAlphaUrl
     return
@@ -23,7 +19,7 @@ export const onBack = async (
 
   try {
     await DeleteStepMutation.commit({ input: { stepId, deleteRelatedResource: true } })
-    window.location.href = adminAlphaUrl
+    window.location.href = `${adminAlphaUrl}/create-step`
   } catch (error) {
     return mutationErrorToast(intl)
   }
