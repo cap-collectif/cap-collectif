@@ -1,7 +1,7 @@
 import { OpinionPage } from '~e2e-pages/index'
 
 describe('Opinion Page Tests', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
   context('As an anonymous user', () => {

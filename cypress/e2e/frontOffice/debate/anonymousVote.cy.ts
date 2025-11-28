@@ -2,10 +2,8 @@ import { DebatePage } from '~e2e-pages/index'
 
 // ------------------- AS ANONYMOUS USER -------------------
 describe('Debate - Anonymous vote', () => {
-  before(() => {
-    cy.task('db:restore')
-  })
   beforeEach(() => {
+    cy.task('db:restore')
     DebatePage.visitCannabisDebate()
     cy.wait(1000) // Anonymous captcha widget forces us to wait here
   })

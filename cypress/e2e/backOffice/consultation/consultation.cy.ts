@@ -2,7 +2,7 @@ import { Base } from '~e2e-pages/index'
 
 // ------------------------ CREATE CONSULTATION AS ADMIN ------------------------
 context('Create a consultation as admin', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 
@@ -21,7 +21,7 @@ const adminSectionPagePath = '/admin/capco/app/section/sectionMetrics/edit'
 
 // ------------------------ LOGGED IN AS ADMIN ------------------------
 context('Logged in as ADMIN, should see some elements and not see others', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 
@@ -68,7 +68,7 @@ context('Logged in as ADMIN, should see some elements and not see others', () =>
 
 // ------------------------ LOGGED IN AS SUPER ADMIN ------------------------
 context('Logged in as SUPER ADMIN, should see more elements than as ADMIN', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

@@ -1,10 +1,8 @@
 import { Base, EventPage } from '~e2e/pages'
 
 describe('Event Page - Event author want to export guests list', () => {
-  before(() => {
-    cy.task('db:restore')
-  })
   beforeEach(() => {
+    cy.task('db:restore')
     cy.task('enable:feature', 'calendar')
     cy.task('enable:feature', 'allow_users_to_propose_events')
     cy.task('enable:feature', 'export')

@@ -7,11 +7,11 @@ describe('Contact page', () => {
   }
 
   before(() => {
-    cy.task('db:restore')
     cy.task('disable:feature', 'captcha')
     cy.task('disable:feature', 'shield_mode')
   })
   beforeEach(() => {
+    cy.task('db:restore')
     cy.visit('/contact')
     cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x', { timeout: 10000 })
   })

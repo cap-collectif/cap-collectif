@@ -1,7 +1,7 @@
 import { AdminModerationPage, Base } from '~e2e-pages/index'
 
 describe('Moderation', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
   context('Unauthorized moderation attempts', () => {

@@ -1,7 +1,9 @@
 describe('Log in & Log out - Logged-in vote', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'profiles')
+  })
+  beforeEach(() => {
+    cy.task('db:restore')
   })
   it('should show a login button and no logout button if not connected', () => {
     cy.visit('/legal')

@@ -2,10 +2,10 @@ import { Base } from '~e2e-pages/index'
 
 describe('Newsletter', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'newsletter')
   })
   beforeEach(() => {
+    cy.task('db:restore')
     cy.interceptGraphQLOperation({ operationName: 'SubscribeNewsletterMutation' })
     Base.visitHomepage()
   })
@@ -23,6 +23,14 @@ describe('Newsletter', () => {
   it('User wants to subscribe to newsletter with existing email', () => {
     cy.task('disable:feature', 'captcha')
     cy.task('disable:feature', 'turnstile_captcha')
+
+    cy.get('#newsletter_subscription_email').type('iwantsomenews@gmail.com')
+    cy.contains('global.register').click({ force: true })
+    cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
+    cy.wait('@SubscribeNewsletterMutation', { timeout: 10000 })
+    cy.contains('homepage.newsletter.success')
+
+    cy.reload()
 
     cy.get('#newsletter_subscription_email').type('iwantsomenews@gmail.com')
     cy.contains('global.register').click({ force: true })

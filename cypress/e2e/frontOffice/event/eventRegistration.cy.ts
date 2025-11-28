@@ -3,7 +3,7 @@ import { Base, Event } from '~e2e-pages/index'
 describe('Event Registration', () => {
   const eventUrl = `/events/event-with-registrations`
 
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

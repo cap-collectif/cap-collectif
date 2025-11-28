@@ -1,7 +1,7 @@
 import { Base } from '~e2e-pages/index'
 
 context('Projects Features', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

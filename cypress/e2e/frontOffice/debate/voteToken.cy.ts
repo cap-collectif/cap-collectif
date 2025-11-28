@@ -2,7 +2,7 @@ import { Base } from '~e2e-pages/index'
 
 describe('Vote Token', () => {
   describe('when user votes with a valid token', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('db:restore')
     })
 
@@ -23,7 +23,7 @@ describe('Vote Token', () => {
   })
 
   describe('when user attempts to vote twice', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('db:restore')
     })
 
@@ -42,7 +42,7 @@ describe('Vote Token', () => {
   })
 
   describe('when user has already voted', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('db:restore')
     })
 

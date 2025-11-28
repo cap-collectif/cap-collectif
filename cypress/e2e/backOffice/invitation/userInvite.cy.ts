@@ -1,7 +1,7 @@
 import { UserInvitePage } from '~e2e-pages/index'
 
 describe('User invitation as admin', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 
@@ -108,10 +108,10 @@ describe('User invitation as admin', () => {
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     cy.wait('@inviteQuery', { timeout: 5000 })
-    UserInvitePage.getInvitationRows().should('have.length', 14)
+    UserInvitePage.getInvitationRows().should('have.length', 13)
     UserInvitePage.getQuickActionDeleteButton().click()
     cy.wait('@CancelUserInvitationsMutation', { timeout: 5000 })
-    UserInvitePage.getInvitationRows().should('have.length', 13)
+    UserInvitePage.getInvitationRows().should('have.length', 12)
   })
 
   it('deletes invitations by checking boxes and clicking the delete button', () => {
@@ -133,7 +133,7 @@ describe('User invitation as admin', () => {
 })
 
 describe('User invitation as super-admin', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

@@ -1,8 +1,6 @@
 describe('Argument', () => {
-  before(() => {
-    cy.task('db:restore')
-  })
   beforeEach(() => {
+    cy.task('db:restore')
     cy.directLoginAs('admin')
   })
   it('Logged in user wants to vote for an argument on an opinion then delete his vote', () => {

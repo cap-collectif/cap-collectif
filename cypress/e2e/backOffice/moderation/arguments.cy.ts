@@ -1,5 +1,5 @@
 describe('Contributions BO - arguments page', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('admin')
   })

@@ -9,8 +9,10 @@ const linkedProposal = 'Proposition non archivé'
 
 describe('CRUD', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'multilangue')
+  })
+  beforeEach(() => {
+    cy.task('db:restore')
   })
 
   it('Views post list', () => {

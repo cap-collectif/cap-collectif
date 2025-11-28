@@ -30,11 +30,8 @@ describe('Opinion versions actions', () => {
   })
 
   context('As an admin', () => {
-    before(() => {
-      cy.task('db:restore')
-    })
-
     beforeEach(() => {
+      cy.task('db:restore')
       cy.directLoginAs('admin')
     })
     it('should prevent a non-author from seeing delete button', () => {

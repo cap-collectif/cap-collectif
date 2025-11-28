@@ -6,6 +6,11 @@ describe('Shield Mode', () => {
     cy.task('disable:feature', 'registration')
   })
 
+  after(() => {
+    cy.task('disable:feature', 'shield_mode')
+    cy.task('enable:feature', 'registration')
+  })
+
   context('@database - Anonymous user authentication', () => {
     it('should see shield, cannot register but can connect', () => {
       Base.visitHomepage({ operationName: 'ShieldPageQuery' })

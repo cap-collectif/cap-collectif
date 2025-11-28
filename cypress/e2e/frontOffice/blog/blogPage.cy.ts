@@ -2,10 +2,10 @@ import { Base } from '~e2e-pages/index'
 
 describe('Blog page', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('disable:feature', 'shield_mode')
   })
   beforeEach(() => {
+    cy.task('db:restore')
     cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
     cy.interceptGraphQLOperation({ operationName: 'PostListSectionFiltersQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldFrontOfficeQuery' })
@@ -34,12 +34,14 @@ describe('Blog page', () => {
 
 describe('Blog', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'blog')
     Cypress.on('uncaught:exception', (err, runnable) => {
       // returning false here prevents Cypress from failing the test
       return false
     })
+  })
+  beforeEach(() => {
+    cy.task('db:restore')
   })
 
   describe('Anonymous wants to comment a blogpost', () => {

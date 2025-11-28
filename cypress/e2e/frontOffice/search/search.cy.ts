@@ -7,10 +7,10 @@ describe('Search Feature', () => {
   const resultsListSelector = 'ul.search__results li'
 
   before(() => {
-    cy.task('db:restore')
     cy.task('enable:feature', 'search')
   })
   beforeEach(() => {
+    cy.task('db:restore')
     Base.visit({ path: searchUrl, operationName: 'NavbarRightQuery' })
   })
 

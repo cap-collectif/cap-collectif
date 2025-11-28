@@ -1,5 +1,5 @@
 describe('Custom page', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
   it('User wants to see a custom page in french', () => {

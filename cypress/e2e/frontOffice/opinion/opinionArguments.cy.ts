@@ -1,7 +1,7 @@
 import { OpinionPage } from '~e2e-pages/index'
 
 describe('Arguments - CRUD & Permissions', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

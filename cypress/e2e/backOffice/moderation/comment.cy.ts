@@ -1,5 +1,5 @@
 describe('Comments moderation', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

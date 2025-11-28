@@ -1,7 +1,7 @@
 import { AdminGroupsPage } from 'cypress/pages/index'
 
 describe('Displays or not the page based on the viewer', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 

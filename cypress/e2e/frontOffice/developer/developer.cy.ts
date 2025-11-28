@@ -2,9 +2,11 @@ import { Base } from '~e2e-pages/index'
 
 describe('Developer', () => {
   before(() => {
-    cy.task('db:restore')
     cy.task('disable:feature', 'shield_mode')
     cy.task('enable:feature', 'developer_documentation')
+  })
+  beforeEach(() => {
+    cy.task('db:restore')
   })
 
   it('An anonymous user wants to visit the developer page', () => {

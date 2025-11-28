@@ -1,7 +1,7 @@
 import { ContactPageBO } from '~e2e/pages'
 
 describe('Contact page logged as admin', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
 
@@ -65,11 +65,11 @@ describe('Contact page logged as admin', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     ContactPageBO.visitContactPage()
-    cy.get('.list-group-item').contains('Je suis un titre MAJ').should('exist')
+    cy.get('.list-group-item').contains('Contact form 1').should('exist')
 
     cy.get("[id^='DeleteContact-']").contains('global.delete').first().click()
     cy.get('#delete-modal-button-delete').click()
-    cy.get('.list-group-item').contains('Je suis un titre MAJ').should('not.exist')
+    cy.get('.list-group-item').contains('Contact form 1').should('not.exist')
   })
 
   it('displays an error when title is empty', () => {

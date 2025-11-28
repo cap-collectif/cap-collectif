@@ -1,5 +1,5 @@
 describe('Admin access to BO & project settings', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('admin')
   })

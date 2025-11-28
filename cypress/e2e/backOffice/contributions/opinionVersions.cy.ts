@@ -1,5 +1,5 @@
 describe('Contributions BO - opinion versions list page', () => {
-  before(() => {
+  beforeEach(() => {
     cy.task('db:restore')
   })
   it('displays admin opinion list page ', () => {
