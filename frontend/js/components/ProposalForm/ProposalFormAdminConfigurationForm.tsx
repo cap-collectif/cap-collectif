@@ -29,6 +29,7 @@ import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
 import { styleGuideColors } from '~/utils/colors'
 import Heading from '~ui/Primitives/Heading'
+import { proposalStepObjectTypeOptions } from '@shared/constants/proposalStepObjectType'
 
 type RelayProps = {
   readonly proposalForm: ProposalFormAdminConfigurationForm_proposalForm$data
@@ -50,11 +51,6 @@ type Props = RelayProps &
     readonly features: FeatureToggles
     readonly descriptionUsingJoditWysiwyg?: boolean | null | undefined
   }
-const TYPE_PROPOSAL_FORM = {
-  PROPOSAL: 'PROPOSAL',
-  QUESTION: 'QUESTION',
-  OPINION: 'OPINION',
-}
 export const formName = 'proposal-form-admin-configuration'
 // TODO type `FormValues`
 export const validate = (values: Record<string, any>) => {
@@ -438,6 +434,8 @@ export const ProposalFormAdminConfigurationForm = ({
       <FormattedMessage id="global.optional" />
     </span>
   )
+  const objectTypeOptions = proposalStepObjectTypeOptions(intl)
+
   return (
     <form onSubmit={handleSubmit} id="proposalFormVote">
       <div className="box box-primary container-fluid mt-10">
@@ -462,26 +460,7 @@ export const ProposalFormAdminConfigurationForm = ({
             component={select}
             id="proposal_form_objectType"
             label={<FormattedMessage id="object-deposited" />}
-            options={[
-              {
-                value: TYPE_PROPOSAL_FORM.PROPOSAL,
-                label: intl.formatMessage({
-                  id: 'global.proposal',
-                }),
-              },
-              {
-                value: TYPE_PROPOSAL_FORM.QUESTION,
-                label: intl.formatMessage({
-                  id: 'admin.fields.response.question',
-                }),
-              },
-              {
-                value: TYPE_PROPOSAL_FORM.OPINION,
-                label: intl.formatMessage({
-                  id: 'global.review',
-                }),
-              },
-            ]}
+            options={objectTypeOptions}
           />
           <Field
             name="description"

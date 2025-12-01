@@ -8,6 +8,8 @@ import { graphql, useFragment } from 'react-relay'
 import CollectStepImapConfig from '@components/BackOffice/Steps/CollectStep/CollectStepImapConfig'
 import CollectStepImapConfigForm from '@components/BackOffice/Steps/CollectStep/CollectStepImapConfigForm'
 import { ProposalSettings_step$key } from '@relay/ProposalSettings_step.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { proposalStepObjectTypeOptions } from '@shared/constants/proposalStepObjectType'
 
 const STEP_FRAGMENT = graphql`
   fragment ProposalSettings_step on ProposalStep {
@@ -25,6 +27,7 @@ type Props = {
 
 const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
   const step = useFragment(STEP_FRAGMENT, stepRef)
+  const newVoteStep = useFeatureFlag('new_new_vote_step')
   const intl = useIntl()
   const { control } = useFormContext()
 
@@ -77,6 +80,8 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
     },
   ]
 
+  const objectTypeOptions = proposalStepObjectTypeOptions(intl)
+
   return (
     <>
       <CollectStepImapConfig>
@@ -89,8 +94,12 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
         </FieldInput>
       </FormControl>
 
-      <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular}>{intl.formatMessage({ id: 'author-actions-restrictions' })}</Text>
-      <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>{intl.formatMessage({ id: 'proposal-author-actions-restrictions-help-text' })}</Text>
+      <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular}>
+        {intl.formatMessage({ id: 'author-actions-restrictions' })}
+      </Text>
+      <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>
+        {intl.formatMessage({ id: 'proposal-author-actions-restrictions-help-text' })}
+      </Text>
 
       <Box mb={6}>
         <FormControl name="preventProposalEdit" control={control} mb={0}>
@@ -148,6 +157,29 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
           defaultOptions
         />
       </FormControl>
+      {newVoteStep && (
+        <FormControl name="objectType" control={control}>
+          <Box as="p" fontSize={CapUIFontSize.BodySmall}>
+            {intl.formatMessage({
+              id: 'proposal.step.fields.object_type.label',
+            })}
+          </Box>
+          <FormLabel
+            htmlFor="objectType"
+            label={intl.formatMessage({
+              id: 'proposal.step.fields.object_type.notice',
+            })}
+          />
+          <FieldInput
+            id="objectType"
+            name="objectType"
+            control={control}
+            type="select"
+            options={objectTypeOptions}
+            defaultValue={objectTypeOptions[0].value}
+          />
+        </FormControl>
+      )}
       <FormControl name="defaultStatus" control={control} maxWidth="256px">
         <FormLabel
           htmlFor="defaultStatus"

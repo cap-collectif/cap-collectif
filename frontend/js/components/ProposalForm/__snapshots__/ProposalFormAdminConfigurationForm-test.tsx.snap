@@ -50,16 +50,40 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         options={
           Array [
             Object {
-              "label": "global.proposal",
-              "value": "PROPOSAL",
+              "label": "proposal.step.object_type.proposition",
+              "value": "PROPOSITION",
             },
             Object {
-              "label": "admin.fields.response.question",
+              "label": "proposal.step.object_type.project",
+              "value": "PROJECT",
+            },
+            Object {
+              "label": "proposal.step.object_type.mission",
+              "value": "MISSION",
+            },
+            Object {
+              "label": "proposal.step.object_type.opinion",
+              "value": "OPINION",
+            },
+            Object {
+              "label": "proposal.step.object_type.idea",
+              "value": "IDEA",
+            },
+            Object {
+              "label": "proposal.step.object_type.question",
               "value": "QUESTION",
             },
             Object {
-              "label": "global.review",
-              "value": "OPINION",
+              "label": "proposal.step.object_type.reporting",
+              "value": "REPORTING",
+            },
+            Object {
+              "label": "proposal.step.object_type.testimony",
+              "value": "TESTIMONY",
+            },
+            Object {
+              "label": "proposal.step.object_type.picture",
+              "value": "PICTURE",
             },
           ]
         }
@@ -957,16 +981,40 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
         options={
           Array [
             Object {
-              "label": "global.proposal",
-              "value": "PROPOSAL",
+              "label": "proposal.step.object_type.proposition",
+              "value": "PROPOSITION",
             },
             Object {
-              "label": "admin.fields.response.question",
+              "label": "proposal.step.object_type.project",
+              "value": "PROJECT",
+            },
+            Object {
+              "label": "proposal.step.object_type.mission",
+              "value": "MISSION",
+            },
+            Object {
+              "label": "proposal.step.object_type.opinion",
+              "value": "OPINION",
+            },
+            Object {
+              "label": "proposal.step.object_type.idea",
+              "value": "IDEA",
+            },
+            Object {
+              "label": "proposal.step.object_type.question",
               "value": "QUESTION",
             },
             Object {
-              "label": "global.review",
-              "value": "OPINION",
+              "label": "proposal.step.object_type.reporting",
+              "value": "REPORTING",
+            },
+            Object {
+              "label": "proposal.step.object_type.testimony",
+              "value": "TESTIMONY",
+            },
+            Object {
+              "label": "proposal.step.object_type.picture",
+              "value": "PICTURE",
             },
           ]
         }
@@ -1866,16 +1914,40 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
         options={
           Array [
             Object {
-              "label": "global.proposal",
-              "value": "PROPOSAL",
+              "label": "proposal.step.object_type.proposition",
+              "value": "PROPOSITION",
             },
             Object {
-              "label": "admin.fields.response.question",
+              "label": "proposal.step.object_type.project",
+              "value": "PROJECT",
+            },
+            Object {
+              "label": "proposal.step.object_type.mission",
+              "value": "MISSION",
+            },
+            Object {
+              "label": "proposal.step.object_type.opinion",
+              "value": "OPINION",
+            },
+            Object {
+              "label": "proposal.step.object_type.idea",
+              "value": "IDEA",
+            },
+            Object {
+              "label": "proposal.step.object_type.question",
               "value": "QUESTION",
             },
             Object {
-              "label": "global.review",
-              "value": "OPINION",
+              "label": "proposal.step.object_type.reporting",
+              "value": "REPORTING",
+            },
+            Object {
+              "label": "proposal.step.object_type.testimony",
+              "value": "TESTIMONY",
+            },
+            Object {
+              "label": "proposal.step.object_type.picture",
+              "value": "PICTURE",
             },
           ]
         }
