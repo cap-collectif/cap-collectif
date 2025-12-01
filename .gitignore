@@ -110,6 +110,7 @@ nohup.out
 
 # env files
 /.env.local.backup
+/benchmarks/.env
 
 # phpunit
 /.phpunit.cache
