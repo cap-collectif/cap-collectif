@@ -1,11 +1,11 @@
-import * as React from 'react'
 import { Button, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import AddUsersToGroupFromEmailMutation from '@mutations/AddUsersToGroupFromEmailMutation'
-import ImportMembersUploader from '../csv-import/ImportMembersUploader'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useDisclosure } from '@liinkiing/react-hooks'
+import AddUsersToGroupFromEmailMutation from '@mutations/AddUsersToGroupFromEmailMutation'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import ImportMembersUploader from '../csv-import/ImportMembersUploader'
 
 type Props = {
   groupTitle: string

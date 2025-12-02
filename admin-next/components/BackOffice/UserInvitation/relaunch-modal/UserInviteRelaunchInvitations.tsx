@@ -1,8 +1,8 @@
+import { Button, CapUIIcon, CapUIModalSize, Flex, Heading, Modal, Radio, Text } from '@cap-collectif/ui'
+import RelaunchUserInvitationsMutation from '@mutations/RelaunchUserInvitationsMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import * as React from 'react'
 import { IntlShape, useIntl } from 'react-intl'
-import RelaunchUserInvitationsMutation from '@mutations/RelaunchUserInvitationsMutation'
-import { Button, CapUIIcon, Flex, toast, Text, Modal, Heading, CapUIModalSize, Radio } from '@cap-collectif/ui'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { UserInvite } from '../UserInvite.type'
 
 type Props = {
@@ -31,10 +31,7 @@ export const UserInviteRelaunchInvitations = ({ invitations }: Props): JSX.Eleme
     const input = { emails }
     await RelaunchUserInvitationsMutation.commit({ input })
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'invite-sent' }, { nbInvites: emails.length }),
-        })
+        successToast(intl.formatMessage({ id: 'invite-sent' }, { nbInvites: emails.length }))
       })
       .catch(() => {
         mutationErrorToast(intl)

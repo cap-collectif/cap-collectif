@@ -1,27 +1,27 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { IntlShape, useIntl } from 'react-intl'
-import { ForOrAgainstValue } from '@relay/DebateOpinion_debateOpinion.graphql'
-import { ModalDebateOpinion_opinion$key } from '@relay/ModalDebateOpinion_opinion.graphql'
-import { ModalDebateOpinion_debate$key } from '@relay/ModalDebateOpinion_debate.graphql'
-import AddDebateOpinionMutation from '@mutations/AddDebateOpinionMutation'
-import UpdateDebateOpinionMutation from '@mutations/UpdateDebateOpinionMutation'
-import { formatConnectionPath } from '@utils/relay'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
-  Modal,
   Button,
   ButtonGroup,
-  Tag,
-  Heading,
   CapUIModalSize,
-  FormLabel,
   FormErrorMessage,
+  FormLabel,
+  Heading,
+  Modal,
+  Tag,
 } from '@cap-collectif/ui'
-import { Controller, useForm } from 'react-hook-form'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import Jodit from '@components/BackOffice/Form/TextEditor/Jodit'
 import UserListField from '@components/BackOffice/Form/UserListField'
+import AddDebateOpinionMutation from '@mutations/AddDebateOpinionMutation'
+import UpdateDebateOpinionMutation from '@mutations/UpdateDebateOpinionMutation'
+import { ForOrAgainstValue } from '@relay/DebateOpinion_debateOpinion.graphql'
+import { ModalDebateOpinion_debate$key } from '@relay/ModalDebateOpinion_debate.graphql'
+import { ModalDebateOpinion_opinion$key } from '@relay/ModalDebateOpinion_opinion.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import { formatConnectionPath } from '@utils/relay'
+import * as React from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 type Props = {
   opinion: ModalDebateOpinion_opinion$key | null

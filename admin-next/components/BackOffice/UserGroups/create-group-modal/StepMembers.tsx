@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Button,
   Divider,
@@ -7,19 +7,18 @@ import {
   FormLabel,
   Heading,
   MultiStepModal,
-  toast,
   useMultiStepModal,
 } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { FieldInput, FormControl } from '@cap-collectif/form'
 import CreateGroupMutation from '@mutations/CreateGroupMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { splitEmailsFromString } from '@shared/utils/emailsInput'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { isEmail } from '@shared/utils/validators'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import ImportMembersUploader from '../csv-import/ImportMembersUploader'
 import { CreateGroupFormProps, CsvEmails } from '../UserGroups.type'
 import { MAX_EMAILS } from '../utils'
-import { isEmail } from '@shared/utils/validators'
-import { useFormContext } from 'react-hook-form'
-import ImportMembersUploader from '../csv-import/ImportMembersUploader'
-import { splitEmailsFromString } from '@shared/utils/emailsInput'
 
 type Props = {
   connectionId: string
@@ -99,10 +98,7 @@ export const StepMembers: React.FC<Props> = ({ connectionId }) => {
     try {
       await CreateGroupMutation.commit(createGroupInput)
 
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'admin.group-create-success' }, { groupName: data.groupName }),
-      })
+      successToast(intl.formatMessage({ id: 'admin.group-create-success' }, { groupName: data.groupName }))
       hide()
       reset()
     } catch (err) {

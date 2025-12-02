@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { FormProvider, useForm } from 'react-hook-form'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 
 type FormValues = {
   email: string

@@ -1,18 +1,18 @@
-import * as React from 'react'
-import { ConnectionHandler } from 'relay-runtime'
-import { useIntl } from 'react-intl'
-import { Button, ButtonGroup, CapUIIcon, CapUIModalSize, FormLabel, Heading, Modal, toast } from '@cap-collectif/ui'
-import CreateQuestionnaireMutation from 'mutations/CreateQuestionnaireMutation'
-import { graphql, useFragment } from 'react-relay'
-import { useForm } from 'react-hook-form'
-import { CreateFormModal_viewer$key } from '@relay/CreateFormModal_viewer.graphql'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { useAppContext } from '../AppProvider/App.context'
-import CreateProposalFormMutation from '@mutations/CreateProposalFormMutation'
-import { FormTypes } from './FormListPage'
+import { Button, ButtonGroup, CapUIIcon, CapUIModalSize, FormLabel, Heading, Modal } from '@cap-collectif/ui'
 import CreateConsultationMutation from '@mutations/CreateConsultationMutation'
+import CreateProposalFormMutation from '@mutations/CreateProposalFormMutation'
+import { CreateFormModal_viewer$key } from '@relay/CreateFormModal_viewer.graphql'
 import { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import CreateQuestionnaireMutation from 'mutations/CreateQuestionnaireMutation'
+import * as React from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { ConnectionHandler } from 'relay-runtime'
+import { useAppContext } from '../AppProvider/App.context'
+import { FormTypes } from './FormListPage'
 
 const formName = 'form-create-form'
 
@@ -155,10 +155,7 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
           return mutationErrorToast(intl)
         }
 
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'questionnaire-successfully-created' }),
-        })
+        successToast(intl.formatMessage({ id: 'questionnaire-successfully-created' }))
 
         const adminUrl = response.createQuestionnaire?.questionnaire?.adminUrl
         if (adminUrl) {
@@ -188,10 +185,7 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
           return mutationErrorToast(intl)
         }
 
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'proposal-form-successfully-created' }),
-        })
+        successToast(intl.formatMessage({ id: 'proposal-form-successfully-created' }))
 
         const adminUrl = response.createProposalForm?.proposalForm.adminUrl
         if (adminUrl) {
@@ -219,10 +213,7 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
           return mutationErrorToast(intl)
         }
 
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'consultation-successfully-created' }),
-        })
+        successToast(intl.formatMessage({ id: 'consultation-successfully-created' }))
 
         const adminUrl = response.createConsultation?.consultation.adminUrl
         if (adminUrl) {

@@ -1,6 +1,6 @@
-import { IntlShape } from 'react-intl'
-import { toast } from '@cap-collectif/ui'
 import saveAs from '@shared/utils/filesaver'
+import { dangerToast } from '@shared/utils/toasts'
+import { IntlShape } from 'react-intl'
 
 const downloadCSV = async (
   url: string,
@@ -37,12 +37,7 @@ const downloadCSV = async (
       return
     }
 
-    toast({
-      variant: 'danger',
-      content: intl.formatMessage({
-        id: errorTranslationKey,
-      }),
-    })
+    dangerToast(intl.formatMessage({ id: errorTranslationKey }))
   }
 }
 

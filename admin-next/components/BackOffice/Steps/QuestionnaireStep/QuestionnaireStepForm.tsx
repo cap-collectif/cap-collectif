@@ -1,38 +1,28 @@
-import React, { useEffect } from 'react'
-import {
-  Accordion,
-  Box,
-  Button,
-  CapUIAccordionColor,
-  CapUIFontSize,
-  Flex,
-  FormLabel,
-  Text,
-  toast,
-} from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { FormProvider, useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import UpdateQuestionnaireStepMutation from '@mutations/UpdateQuestionnaireStepMutation'
-import TextEditor from '../../Form/TextEditor/TextEditor'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { QuestionnaireStepFormQuery } from '@relay/QuestionnaireStepFormQuery.graphql'
-import { UpdateQuestionnaireStepInput } from '@relay/UpdateQuestionnaireStepMutation.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, FormLabel, Text } from '@cap-collectif/ui'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
 import QuestionnaireStepRequirementsTabs from '@components/BackOffice/Requirements/QuestionnaireStepRequirementsTabs'
 import { getRequirementsInput, RequirementsFormValues } from '@components/BackOffice/Requirements/Requirements'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { onBack } from '@components/BackOffice/Steps/utils'
+import useUrlState from '@hooks/useUrlState'
+import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
+import UpdateQuestionnaireStepMutation from '@mutations/UpdateQuestionnaireStepMutation'
+import { QuestionnaireStepFormQuery } from '@relay/QuestionnaireStepFormQuery.graphql'
+import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
+import { UpdateQuestionnaireStepInput } from '@relay/UpdateQuestionnaireStepMutation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import React, { useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import TextEditor from '../../Form/TextEditor/TextEditor'
+import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
+import StepDurationInput from '../Shared/StepDurationInput'
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters'
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab'
 import { formatQuestionsInput, getDefaultValues, mergeQuestionsAndJumpsBeforeSubmit, Questionnaire } from './utils'
-import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
-import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
-import { onBack } from '@components/BackOffice/Steps/utils'
-import useUrlState from '@hooks/useUrlState'
-import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
-import StepDurationInput from '../Shared/StepDurationInput'
-import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
 
 type Props = {
   stepId: string
@@ -260,10 +250,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             },
           })
             .then(q => {
-              toast({
-                variant: 'success',
-                content: intl.formatMessage({ id: 'global.changes.saved' }),
-              })
+              successToast(intl.formatMessage({ id: 'global.changes.saved' }))
               if (!isEditing) {
                 return (window.location.href = `/admin-next/project/${project?.id}`)
               }

@@ -1,23 +1,13 @@
-import * as React from 'react'
-import {
-  Button,
-  ButtonQuickAction,
-  CapUIIcon,
-  CapUIModalSize,
-  Flex,
-  Heading,
-  Modal,
-  Text,
-  toast,
-} from '@cap-collectif/ui'
-import { pxToRem } from '@shared/utils/pxToRem'
-import { useIntl } from 'react-intl'
-import DeleteGroupMutation from '@mutations/DeleteGroupMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Flex, Heading, Modal, Text } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
+import DeleteGroupMutation from '@mutations/DeleteGroupMutation'
+import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { RefetchFnDynamic } from 'react-relay'
 import { OperationType } from 'relay-runtime'
-import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
 
 type Props = {
   button: 'regular' | 'quick-action'
@@ -47,10 +37,7 @@ export const DeleteGroupModal: React.FC<Props> = ({
       connectionId: [connectionId],
     })
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'admin.group-deletion-success' }),
-        })
+        successToast(intl.formatMessage({ id: 'admin.group-deletion-success' }))
         setIsLoading(false)
       })
       .catch(() => {

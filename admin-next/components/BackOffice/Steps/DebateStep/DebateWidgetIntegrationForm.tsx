@@ -1,11 +1,12 @@
-import React from 'react'
-import { Box, CapUIFontSize, CapUIIcon, Flex, FormLabel, Icon, Input, Text, toast, Tooltip } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useIntl } from 'react-intl'
-import { useForm } from 'react-hook-form'
-import { getBaseUrl } from 'config'
-import { graphql, useFragment } from 'react-relay'
+import { Box, CapUIFontSize, CapUIIcon, Flex, FormLabel, Icon, Input, Text, Tooltip } from '@cap-collectif/ui'
 import { DebateWidgetIntegrationForm_debate$key } from '@relay/DebateWidgetIntegrationForm_debate.graphql'
+import { infoToast } from '@shared/utils/toasts'
+import { getBaseUrl } from 'config'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 type Props = {
   debate: DebateWidgetIntegrationForm_debate$key
@@ -121,10 +122,7 @@ const DebateWidgetIntegrationForm: React.FC<Props> = ({ debate: debateRef }) => 
                 icon: CapUIIcon.Duplicate,
                 onClick: () =>
                   navigator.clipboard.writeText(getWidgetUrl()).then(() => {
-                    toast({
-                      variant: 'info',
-                      content: intl.formatMessage({ id: 'copied-link' }),
-                    })
+                    infoToast(intl.formatMessage({ id: 'copied-link' }))
                   }),
                 label: intl.formatMessage({ id: 'copy-link' }),
               },

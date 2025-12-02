@@ -1,11 +1,11 @@
+import { Button, ButtonGroup, CapUIModalSize, Checkbox, Heading, headingStyles, Modal, Text } from '@cap-collectif/ui'
+import { DeleteCustomDomainModal_siteSettings$key } from '@relay/DeleteCustomDomainModal_siteSettings.graphql'
 import * as React from 'react'
-import { Button, ButtonGroup, CapUIModalSize, Text, Modal, Heading, headingStyles, Checkbox } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { DeleteCustomDomainModal_siteSettings$key } from '@relay/DeleteCustomDomainModal_siteSettings.graphql'
 
+import { mutationErrorToast } from '@shared/utils/toasts'
 import DeleteCustomDomainMutation from 'mutations/DeleteCustomDomainMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 type Props = {
   siteSettings: DeleteCustomDomainModal_siteSettings$key

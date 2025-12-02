@@ -1,4 +1,3 @@
-import * as React from 'react'
 import {
   Box,
   Button,
@@ -10,22 +9,22 @@ import {
   Spinner,
   TabBar,
   Table,
-  toast,
 } from '@cap-collectif/ui'
+import { useDisclosure } from '@liinkiing/react-hooks'
+import UpdateGroupMutation from '@mutations/UpdateGroupMutation'
+import { EditGroupModal_group$key } from '@relay/EditGroupModal_group.graphql'
+import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import * as React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
-import { pxToRem } from '@shared/utils/pxToRem'
-import MembersModalTab from './MembersModalTab'
-import SettingsModalTab from './SettingsModalTab'
-import DeleteGroupModal from '../delete-group-modal/DeleteGroupModal'
-import { UpdateGroupFormProps } from '../UserGroups.type'
-import UpdateGroupMutation from '@mutations/UpdateGroupMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { useDisclosure } from '@liinkiing/react-hooks'
-import { UserGroupsList_query$key } from '@relay/UserGroupsList_query.graphql'
 import { graphql, RefetchFnDynamic, useFragment } from 'react-relay'
 import { OperationType } from 'relay-runtime'
-import { EditGroupModal_group$key } from '@relay/EditGroupModal_group.graphql'
+import DeleteGroupModal from '../delete-group-modal/DeleteGroupModal'
+import { UpdateGroupFormProps } from '../UserGroups.type'
+import MembersModalTab from './MembersModalTab'
+import SettingsModalTab from './SettingsModalTab'
 
 type Props = {
   group: EditGroupModal_group$key
@@ -83,10 +82,7 @@ export const EditGroupModal: React.FC<Props> = ({ group: groupRef, refetch, term
 
     await UpdateGroupMutation.commit(updateGroupInfoInput)
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'admin.update.successful' }),
-        })
+        successToast(intl.formatMessage({ id: 'admin.update.successful' }))
 
         reset({
           title: data.title,

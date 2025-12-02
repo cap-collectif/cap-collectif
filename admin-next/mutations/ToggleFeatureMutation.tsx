@@ -1,15 +1,15 @@
-import { graphql } from 'react-relay'
-import { environment } from 'utils/relay-environement'
-import commitMutation from './commitMutation'
-import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
   ToggleFeatureMutation,
   ToggleFeatureMutation$data,
   ToggleFeatureMutation$variables,
 } from '@relay/ToggleFeatureMutation.graphql'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
 import { IntlShape } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { graphql } from 'react-relay'
+import { GraphQLTaggedNode } from 'relay-runtime'
+import { environment } from 'utils/relay-environement'
+import commitMutation from './commitMutation'
 
 const mutation = graphql`
   mutation ToggleFeatureMutation($input: ToggleFeatureInput!) @raw_response_type {

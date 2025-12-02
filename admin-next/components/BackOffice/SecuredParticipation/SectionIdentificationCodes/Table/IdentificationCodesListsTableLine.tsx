@@ -1,10 +1,11 @@
+import { ButtonGroup, ButtonQuickAction, CapUIIcon, Table } from '@cap-collectif/ui'
+import type { IdentificationCodesListsTableLine_userIdentificationCodeList$key } from '@relay/IdentificationCodesListsTableLine_userIdentificationCodeList.graphql'
+import { successToast } from '@shared/utils/toasts'
 import type { FC } from 'react'
 import { useIntl } from 'react-intl'
-import { ButtonGroup, ButtonQuickAction, CapUIIcon, Table, toast } from '@cap-collectif/ui'
+import { graphql, useFragment } from 'react-relay'
 import IdentificationCodesListDeleteModal from '../DeleteModal/IdentificationCodesListDeleteModal'
 import getFileDownloadUrl from '../FileDownload'
-import { graphql, useFragment } from 'react-relay'
-import type { IdentificationCodesListsTableLine_userIdentificationCodeList$key } from '@relay/IdentificationCodesListsTableLine_userIdentificationCodeList.graphql'
 
 const FRAGMENT = graphql`
   fragment IdentificationCodesListsTableLine_userIdentificationCodeList on UserIdentificationCodeList {
@@ -38,12 +39,7 @@ const IdentificationCodesListsTableLine: FC<IdentificationCodesListsTableLinePro
           <ButtonQuickAction
             onClick={() => {
               window.open(getFileDownloadUrl(userIdentificationCodeList.id), '_blank')
-              toast({
-                variant: 'success',
-                content: intl.formatMessage({
-                  id: 'downloaded-list-please-communicate',
-                }),
-              })
+              successToast(intl.formatMessage({ id: 'downloaded-list-please-communicate' }))
             }}
             icon={CapUIIcon.Download}
             label={intl.formatMessage({ id: 'global.download' })}

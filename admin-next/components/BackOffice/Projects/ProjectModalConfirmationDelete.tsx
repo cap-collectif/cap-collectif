@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { useIntl, IntlShape, FormattedHTMLMessage } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import { toast, Button, Modal, Heading, Text, ButtonGroup, Menu, CapUIModalSize, Checkbox } from '@cap-collectif/ui'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Button, ButtonGroup, CapUIModalSize, Checkbox, Heading, Menu, Modal, Text } from '@cap-collectif/ui'
 import type { ProjectModalConfirmationDelete_project$key } from '@relay/ProjectModalConfirmationDelete_project.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import DeleteProjectMutation from 'mutations/DeleteProjectMutation'
+import * as React from 'react'
+import { FormattedHTMLMessage, IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 interface ProjectModalConfirmationDeleteProps {
   project: ProjectModalConfirmationDelete_project$key
@@ -27,12 +27,7 @@ const deleteProject = (projectId: string, hide: () => void, intl: IntlShape, con
   }
   hide()
   return DeleteProjectMutation.commit({ input, connections: [connectionName] })
-    .then(() =>
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'project-successfully-deleted' }),
-      }),
-    )
+    .then(() => successToast(intl.formatMessage({ id: 'project-successfully-deleted' })))
     .catch(() => mutationErrorToast(intl))
 }
 

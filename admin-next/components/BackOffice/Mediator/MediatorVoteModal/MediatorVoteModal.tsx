@@ -1,18 +1,17 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { MultiStepModal, CapUIModalSize, toast } from '@cap-collectif/ui'
-import SelectProposalsModal from './SelectProposalsModal'
-import { FormProvider, useForm } from 'react-hook-form'
-import { ConnectionHandler, graphql, useLazyLoadQuery } from 'react-relay'
-import { MediatorVoteModal_REQUIREMENTS_Query } from '@relay/MediatorVoteModal_REQUIREMENTS_Query.graphql'
-import FillRequirementsModal from './FillRequirementsModal'
-import FillOptionalsModal from './FillOptionalsModal'
+import { CapUIModalSize, MultiStepModal } from '@cap-collectif/ui'
 import AddMediatorVotesMutation from '@mutations/AddMediatorVotesMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
-import { MediatorVoteModal_EDIT_Query } from '@relay/MediatorVoteModal_EDIT_Query.graphql'
-import moment, { Moment } from 'moment'
 import UpdateMediatorVotesMutation from '@mutations/UpdateMediatorVotesMutation'
+import { MediatorVoteModal_EDIT_Query } from '@relay/MediatorVoteModal_EDIT_Query.graphql'
+import { MediatorVoteModal_REQUIREMENTS_Query } from '@relay/MediatorVoteModal_REQUIREMENTS_Query.graphql'
+import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import moment, { Moment } from 'moment'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { ConnectionHandler, graphql, useLazyLoadQuery } from 'react-relay'
+import FillOptionalsModal from './FillOptionalsModal'
+import FillRequirementsModal from './FillRequirementsModal'
+import SelectProposalsModal from './SelectProposalsModal'
 
 type Props = {
   onClose: () => void
@@ -79,15 +78,12 @@ const MediatorVoteModal = ({
 
   const query = useLazyLoadQuery<MediatorVoteModal_REQUIREMENTS_Query>(REQUIREMENTS_QUERY, { stepId })
 
-
   const methods = useForm<FormValues>({
     mode: 'onChange',
     defaultValues,
   })
 
   const { handleSubmit, setError } = methods
-
-
 
   const onSubmit = async ({ votes, ...data }: FormValues) => {
     const connectionName = ConnectionHandler.getConnectionID(mediatorId, 'ParticipantList_participants', {
@@ -109,7 +105,7 @@ const MediatorVoteModal = ({
       return JSON.stringify([JSONaddress])
     }
 
-    const phone = data.phone ? data.phone.replace(/^0/, "+33") : null
+    const phone = data.phone ? data.phone.replace(/^0/, '+33') : null
 
     const participantInfos = {
       dateOfBirth: data.dateOfBirth?.format('YYYY-MM-DD HH:mm:ss') || null,
@@ -144,12 +140,12 @@ const MediatorVoteModal = ({
           connectionName,
         )
 
-        const errors = response.addMediatorVotes.errors ?? [];
-        errors.forEach(({field, message}) => {
-          setError(field as fieldKeys, {type: 'manual', message})
+        const errors = response.addMediatorVotes.errors ?? []
+        errors.forEach(({ field, message }) => {
+          setError(field as fieldKeys, { type: 'manual', message })
         })
 
-        if(errors.length > 0) return;
+        if (errors.length > 0) return
       } else {
         const response = await UpdateMediatorVotesMutation.commit({
           input: {
@@ -159,27 +155,23 @@ const MediatorVoteModal = ({
           mediatorId,
         })
 
-        const errors = response.updateMediatorVotes.errors ?? [];
-        errors.forEach(({field, message}) => {
-          setError(field as fieldKeys, {type: 'manual', message})
+        const errors = response.updateMediatorVotes.errors ?? []
+        errors.forEach(({ field, message }) => {
+          setError(field as fieldKeys, { type: 'manual', message })
         })
 
-        if(errors.length > 0) return;
+        if (errors.length > 0) return
       }
 
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({
-          id: participantId ? 'mediator.participant_updated' : 'mediator.participant_added',
-        }),
-      })
+      successToast(
+        intl.formatMessage({ id: participantId ? 'mediator.participant_updated' : 'mediator.participant_added' }),
+      )
       onClose()
     } catch {
       mutationErrorToast(intl)
       onClose()
     }
   }
-
 
   if (!query) return null
 
@@ -313,7 +305,10 @@ export const MediatorVoteModalEdit = ({ token, ...props }: Props) => {
     email: participant.email,
     firstname: (requirements.find(r => r.__typename === 'FirstnameRequirement') as Requirement)?.participantValue,
     lastname: (requirements.find(r => r.__typename === 'LastnameRequirement') as Requirement)?.participantValue,
-    phone: (requirements.find(r => r.__typename === 'PhoneRequirement') as Requirement)?.participantValue?.replace(/^(\+33)/, "0"),
+    phone: (requirements.find(r => r.__typename === 'PhoneRequirement') as Requirement)?.participantValue?.replace(
+      /^(\+33)/,
+      '0',
+    ),
     dateOfBirth: dateOfBirth ? moment(dateOfBirth) : null,
     address: (requirements.find(r => r.__typename === 'PostalAddressRequirement') as AddressRequirement)
       ?.participantAddress?.formatted,

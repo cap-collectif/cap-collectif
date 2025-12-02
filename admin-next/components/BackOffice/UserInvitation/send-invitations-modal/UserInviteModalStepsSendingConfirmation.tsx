@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
   Button,
@@ -9,16 +8,15 @@ import {
   Heading,
   MultiStepModal,
   Text,
-  toast,
   useMultiStepModal,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFormContext } from 'react-hook-form'
 import InviteUserMutation, { INVITE_USERS_MAX_RESULTS } from '@mutations/InviteUserMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { splitEmailsFromString } from '@shared/utils/emailsInput'
-import { CsvEmails, UserInviteFormProps } from '../UserInvite.type'
 import { InviteUsersRole } from '@relay/InviteUserMutation.graphql'
+import { splitEmailsFromString } from '@shared/utils/emailsInput'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { CsvEmails, UserInviteFormProps } from '../UserInvite.type'
 
 type Props = {
   id: string
@@ -94,10 +92,7 @@ const UserInviteModalStepsSendingConfirmation = ({ id, label }: Props): JSX.Elem
             response.inviteUsers.newInvitations.length
 
           if (actuallySentInvitations > 0) {
-            toast({
-              variant: 'success',
-              content: intl.formatMessage({ id: 'invite-sent' }, { nbInvites: actuallySentInvitations }),
-            })
+            successToast(intl.formatMessage({ id: 'invite-sent' }, { nbInvites: actuallySentInvitations }))
           }
         })
         // #endregion

@@ -1,15 +1,4 @@
-import React, { useEffect } from 'react'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { SectionOrderBy, ConsultationStepFormQuery } from '@relay/ConsultationStepFormQuery.graphql'
-import { IntlShape, useIntl } from 'react-intl'
-import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
-import {
-  getDefaultRequirements,
-  getRequirementsInput,
-  RequirementsFormValues,
-} from '@components/BackOffice/Requirements/Requirements'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Accordion,
   Box,
@@ -21,22 +10,32 @@ import {
   FormLabel,
   Spinner,
   Text,
-  toast,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
-import ConsultationStepConsultations from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepConsultations'
-import UpdateConsultationStep from '@mutations/UpdateConsultationStep'
-import CreateOrUpdateConsultationMutation from '@mutations/CreateOrUpdateConsultationMutation'
-import { UpdateConsultationStepInput } from '@relay/UpdateConsultationStepMutation.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.graphql'
+import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import ConsultationStepRequirementsTabs from '@components/BackOffice/Requirements/ConsultationStepRequirementsTabs'
-import { onBack } from '@components/BackOffice/Steps/utils'
-import { useConsultationStep } from './ConsultationStepContext'
-import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
-import StepDurationInput from '../Shared/StepDurationInput'
+import {
+  getDefaultRequirements,
+  getRequirementsInput,
+  RequirementsFormValues,
+} from '@components/BackOffice/Requirements/Requirements'
+import ConsultationStepConsultations from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepConsultations'
+import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { onBack } from '@components/BackOffice/Steps/utils'
+import CreateOrUpdateConsultationMutation from '@mutations/CreateOrUpdateConsultationMutation'
+import UpdateConsultationStep from '@mutations/UpdateConsultationStep'
+import { ConsultationStepFormQuery, SectionOrderBy } from '@relay/ConsultationStepFormQuery.graphql'
+import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.graphql'
+import { UpdateConsultationStepInput } from '@relay/UpdateConsultationStepMutation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import React, { useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import StepDurationInput from '../Shared/StepDurationInput'
+import { useConsultationStep } from './ConsultationStepContext'
 
 type Props = {
   stepId: string
@@ -345,10 +344,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         input: updateStepInput,
       })
 
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'consultation-saved' }),
-      })
+      successToast(intl.formatMessage({ id: 'consultation-saved' }))
 
       if (!isEditing) {
         return (window.location.href = `/admin-next/project/${project?.id}`)

@@ -1,6 +1,3 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
-import { useDisclosure } from '@liinkiing/react-hooks'
 import {
   Box,
   BoxProps,
@@ -13,13 +10,16 @@ import {
   Modal,
   Switch,
   Text,
-  toast,
 } from '@cap-collectif/ui'
+import { useDisclosure } from '@liinkiing/react-hooks'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
-import CookieBanner from './CookieBanner'
-import { useCookies } from 'next-client-cookies'
 import { ADS_COOKIE, ANALYTICS_COOKIE, FULL_CONSENT_COOKIE } from '@shared/utils/cookies'
+import { successToast } from '@shared/utils/toasts'
+import { useCookies } from 'next-client-cookies'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { evalCustomCode } from 'src/app/custom-code'
+import CookieBanner from './CookieBanner'
 
 type Props = {
   SSRData: {
@@ -90,10 +90,7 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
 
   const onSuccess = () => {
     setShowBanner(false)
-    toast({
-      content: intl.formatMessage({ id: 'your-settings-have-been-saved-successfully' }),
-      variant: 'success',
-    })
+    successToast(intl.formatMessage({ id: 'your-settings-have-been-saved-successfully' }))
   }
 
   const saveCookie = () => {

@@ -1,24 +1,22 @@
-import React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { FormattedHTMLMessage, useIntl } from 'react-intl'
-import type { UpdateSlugModal_project$key } from '@relay/UpdateSlugModal_project.graphql'
-import { useForm } from 'react-hook-form'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
-  Modal,
-  Text,
-  Flex,
-  toast,
-  CapUIModalSize,
   Button,
-  FormLabel,
   ButtonGroup,
   CapUIIcon,
+  CapUIModalSize,
+  Flex,
+  FormLabel,
   Heading,
+  Modal,
+  Text,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import UpdateProjectSlugMutation from '@mutations/UpdateProjectSlugMutation'
+import type { UpdateSlugModal_project$key } from '@relay/UpdateSlugModal_project.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { useForm } from 'react-hook-form'
+import { FormattedHTMLMessage, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 const FRAGMENT = graphql`
   fragment UpdateSlugModal_project on Project {
@@ -58,12 +56,7 @@ const UpdateSlugModal = ({ project: projectFragment, onClose }: Props) => {
       if (response.updateProjectSlug?.errorCode) {
         return mutationErrorToast(intl)
       }
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({
-          id: 'your-slug-has-been-updated',
-        }),
-      })
+      successToast(intl.formatMessage({ id: 'your-slug-has-been-updated' }))
     })
   }
   const {

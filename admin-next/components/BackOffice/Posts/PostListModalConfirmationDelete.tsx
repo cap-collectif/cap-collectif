@@ -1,9 +1,3 @@
-import * as React from 'react'
-import type { IntlShape } from 'react-intl'
-import { useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import DeletePostMutation from 'mutations/DeletePostMutation'
 import {
   Button,
   ButtonGroup,
@@ -14,9 +8,14 @@ import {
   Heading,
   Modal,
   Text,
-  toast,
 } from '@cap-collectif/ui'
 import { PostListModalConfirmationDelete_post$key } from '@relay/PostListModalConfirmationDelete_post.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import DeletePostMutation from 'mutations/DeletePostMutation'
+import * as React from 'react'
+import type { IntlShape } from 'react-intl'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 export interface PostListModalConfirmationDeleteProps {
   post: PostListModalConfirmationDelete_post$key
@@ -36,12 +35,7 @@ const deletePost = (postId: string, hide: () => void, intl: IntlShape, connectio
   }
   hide()
   return DeletePostMutation.commit({ input, connections: [connectionName] })
-    .then(() =>
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'post-successfully-deleted' }),
-      }),
-    )
+    .then(() => successToast(intl.formatMessage({ id: 'post-successfully-deleted' })))
     .catch(() => mutationErrorToast(intl))
 }
 

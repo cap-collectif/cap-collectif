@@ -1,10 +1,10 @@
-import { useState, FC } from 'react'
 import { Button, CapUIModalSize, Checkbox, Heading, Modal, Text } from '@cap-collectif/ui'
+import DeleteSSOConfigurationMutation from '@mutations/DeleteSSOConfigurationMutation'
+import type { ModalOpenIDDelete_ssoConfiguration$key } from '@relay/ModalOpenIDDelete_ssoConfiguration.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import { FC, useState } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import type { ModalOpenIDDelete_ssoConfiguration$key } from '@relay/ModalOpenIDDelete_ssoConfiguration.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import DeleteSSOConfigurationMutation from '@mutations/DeleteSSOConfigurationMutation'
 
 type ModalOpenIDDeleteProps = {
   readonly ssoConfiguration: ModalOpenIDDelete_ssoConfiguration$key

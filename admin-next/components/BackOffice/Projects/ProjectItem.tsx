@@ -1,25 +1,14 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
-import type { IntlShape } from 'react-intl'
-import {
-  toast,
-  Table,
-  Link,
-  Text,
-  Flex,
-  ButtonQuickAction,
-  Menu,
-  Tag,
-  CapUIIcon,
-  CapUIIconSize,
-} from '@cap-collectif/ui'
+import { ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex, Link, Menu, Table, Tag, Text } from '@cap-collectif/ui'
 import type { ProjectItem_project$data, ProjectItem_project$key } from '@relay/ProjectItem_project.graphql'
+import { ProjectItem_viewer$key } from '@relay/ProjectItem_viewer.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import ProjectModalConfirmationDelete from 'components/BackOffice/Projects/ProjectModalConfirmationDelete'
 import ProjectModalExportSteps from 'components/BackOffice/Projects/ProjectModalExportSteps'
 import DuplicateProjectMutation from 'mutations/DuplicateProjectMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { ProjectItem_viewer$key } from '@relay/ProjectItem_viewer.graphql'
+import * as React from 'react'
+import type { IntlShape } from 'react-intl'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 interface ProjectItemProps {
   project: ProjectItem_project$key
@@ -89,12 +78,7 @@ const onDuplicate = (intl: IntlShape, duplicatedProject: ProjectItem_project$dat
     duplicatedProject,
     intl,
   )
-    .then(() =>
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'project.successfully.duplicated' }),
-      }),
-    )
+    .then(() => successToast(intl.formatMessage({ id: 'project.successfully.duplicated' })))
     .catch(() => mutationErrorToast(intl))
 }
 const ProjectItem: React.FC<ProjectItemProps> = ({

@@ -1,13 +1,22 @@
-import * as React from 'react'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { useIntl } from 'react-intl'
+import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, Text } from '@cap-collectif/ui'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, Text, toast } from '@cap-collectif/ui'
-import ProposalFormForm from '@components/BackOffice/Steps/CollectStep/ProposalFormForm'
 import ProposalStepRequirementsTabs from '@components/BackOffice/Requirements/ProposalStepRequirementsTabs'
-import ProposalStepVoteTabsForm from '@components/BackOffice/Steps/ProposalStep/ProposalStepVoteTabsForm'
 import { RequirementsFormValues } from '@components/BackOffice/Requirements/Requirements'
+import RequirementsTabsSkeleton from '@components/BackOffice/Requirements/RequirementsTabsSkeleton'
+import {
+  getCollectStepInput,
+  getInitialValues,
+  getProposalFormUpdateVariablesInput,
+} from '@components/BackOffice/Steps/CollectStep/CollectStepForm.utils'
+import ProposalFormForm from '@components/BackOffice/Steps/CollectStep/ProposalFormForm'
+import ProposalStepStatuses from '@components/BackOffice/Steps/ProposalStep/ProposalStepStatuses'
+import ProposalStepVoteTabsForm from '@components/BackOffice/Steps/ProposalStep/ProposalStepVoteTabsForm'
+import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import PublicationInput from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { onBack } from '@components/BackOffice/Steps/utils'
+import { yupResolver } from '@hookform/resolvers/yup'
+import UpdateCollectStepMutation from '@mutations/UpdateCollectStepMutation'
+import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import {
   CollectStepFormQuery,
   MainView,
@@ -16,30 +25,21 @@ import {
   ProposalStepVoteType,
 } from '@relay/CollectStepFormQuery.graphql'
 import { ProposalFormForm_step$key } from '@relay/ProposalFormForm_step.graphql'
-import RequirementsTabsSkeleton from '@components/BackOffice/Requirements/RequirementsTabsSkeleton'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import {
-  getCollectStepInput,
-  getInitialValues,
-  getProposalFormUpdateVariablesInput,
-} from '@components/BackOffice/Steps/CollectStep/CollectStepForm.utils'
-import UpdateCollectStepMutation from '@mutations/UpdateCollectStepMutation'
-import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { FormTabsEnum, useCollectStep } from './CollectStepContext'
-import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
-import { onBack } from '@components/BackOffice/Steps/utils'
-import LabelInput from '../Shared/LabelInput'
-import BodyInput from '../Shared/BodyInput'
-import StepDurationInput from '../Shared/StepDurationInput'
-import ProposalSettings from '../ProposalStep/ProposalSettings'
-import { formatQuestions } from '../QuestionnaireStep/utils'
 import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdateProposalFormMutation.graphql'
-import ProposalStepStatuses from '@components/BackOffice/Steps/ProposalStep/ProposalStepStatuses'
-import PublicationInput from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { mutationErrorToast, successToast, warningToast } from '@shared/utils/toasts'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import * as yup from 'yup'
+import ProposalSettings from '../ProposalStep/ProposalSettings'
+import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
+import { formatQuestions } from '../QuestionnaireStep/utils'
 import { TabsVoteType } from '../SelectStep/SelectStepForm.utils'
-import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import BodyInput from '../Shared/BodyInput'
+import LabelInput from '../Shared/LabelInput'
+import StepDurationInput from '../Shared/StepDurationInput'
+import { FormTabsEnum, useCollectStep } from './CollectStepContext'
 
 export interface CollectStepFormProps {
   stepId: string
@@ -516,18 +516,13 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           setValue('form_model.questionnaire', questionnaire as Questionnaire)
 
           if (response.updateCollectStep.proposalStepSplitViewWasDisabled) {
-            toast({
-              variant: 'warning',
-              content:
-                intl.formatMessage({ id: 'admin.update.successful' }) +
+            warningToast(
+              intl.formatMessage({ id: 'admin.update.successful' }) +
                 '<br/>' +
                 intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
-            })
+            )
           } else {
-            toast({
-              variant: 'success',
-              content: intl.formatMessage({ id: 'admin.update.successful' }),
-            })
+            successToast(intl.formatMessage({ id: 'admin.update.successful' }))
           }
 
           if (!isEditing) {

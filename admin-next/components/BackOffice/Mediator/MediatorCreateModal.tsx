@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { Box, Button, CapUIModalSize, FormLabel, Heading, Modal } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import { Box, Button, CapUIModalSize, FormLabel, Heading, Modal } from '@cap-collectif/ui'
 import UserListField from '@components/BackOffice/Form/UserListField'
+import { mutationErrorToast } from '@shared/utils/toasts'
 import AddMediatorsMutation from 'mutations/AddMediatorsMutation'
+import { FC } from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 
 type MediatorCreateModalProps = {
   onClose: () => void

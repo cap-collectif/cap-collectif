@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
   Button,
@@ -20,23 +19,24 @@ import {
   Tooltip,
   UPLOADER_SIZE,
 } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
+import ProposalFormCategoryBackgroundPreview from '@components/BackOffice/Steps/CollectStep/ProposalFormCategoryBackgroundPreview'
 import ProposalFormCategoryColor from '@components/BackOffice/Steps/CollectStep/ProposalFormCategoryColor'
 import ProposalFormCategoryIcon from '@components/BackOffice/Steps/CollectStep/ProposalFormCategoryIcon'
-import ProposalFormCategoryBackgroundPreview from '@components/BackOffice/Steps/CollectStep/ProposalFormCategoryBackgroundPreview'
-import dynamic from 'next/dynamic'
-import { graphql, useFragment } from 'react-relay'
-import { ProposalFormAdminCategoriesModal_query$key } from '@relay/ProposalFormAdminCategoriesModal_query.graphql'
 import HandleProposalFormCategoryImageMutation from '@mutations/HandleProposalFormCategoryImageMutation'
+import { ProposalFormAdminCategoriesModal_query$key } from '@relay/ProposalFormAdminCategoriesModal_query.graphql'
+import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
+import dynamic from 'next/dynamic'
+import * as React from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 
 import {
   AvailableProposalCategoryColor,
   AvailableProposalCategoryIcon,
 } from '@relay/UpdateProposalFormMutation.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
 import { UPLOAD_PATH } from '@utils/config'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const ProposalFormCategoryPinPreview = dynamic(() => import('./ProposalFormCategoryPinPreview'), {
   ssr: false,

@@ -1,24 +1,23 @@
-import * as React from 'react'
-import { IntlShape, useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
 import {
   Button,
   ButtonGroup,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
   CapUIModalSize,
   Heading,
+  InfoMessage,
   Modal,
   Text,
-  toast,
-  InfoMessage,
-  CapUIFontSize,
 } from '@cap-collectif/ui'
 import type { ModalConfirmationDelete_questionnaire$key } from '@relay/ModalConfirmationDelete_questionnaire.graphql'
-import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { useAppContext } from '../AppProvider/App.context'
 import { QuestionnaireType } from '@relay/QuestionnaireListQuery.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation'
+import * as React from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { useAppContext } from '../AppProvider/App.context'
 
 type Props = {
   questionnaire: ModalConfirmationDelete_questionnaire$key
@@ -56,10 +55,7 @@ const deleteQuestionnaire = (
 
   return DeleteQuestionnaireMutation.commit({ input, connections: [connectionName] }, isAdmin, types)
     .then(() => {
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'questionnaire-successfully-deleted' }),
-      })
+      successToast(intl.formatMessage({ id: 'questionnaire-successfully-deleted' }))
     })
     .catch(() => {
       return mutationErrorToast(intl)

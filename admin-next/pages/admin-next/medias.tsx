@@ -1,23 +1,23 @@
-import * as React from 'react'
-import { graphql, PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay'
-import { useIntl } from 'react-intl'
-import { Button, CapUIIcon, CapUIIconSize, Flex, Search, Spinner, toast } from '@cap-collectif/ui'
-import { NextPage } from 'next'
-import { PageProps } from 'types'
-import TablePlaceholder from '@ui/Table/TablePlaceholder'
-import withPageAuthRequired from '@utils/withPageAuthRequired'
-import type { mediasQuery as mediasQueryType } from '@relay/mediasQuery.graphql'
-import MediaList from '@components/BackOffice/Medias/MediaList'
-import Layout from '@components/BackOffice/Layout/Layout'
-import { View } from '@components/BackOffice/Medias/utils'
+import { Button, CapUIIcon, CapUIIconSize, Flex, Search, Spinner } from '@cap-collectif/ui'
 import DropzoneWrapper from '@components/BackOffice/Dropzone/DropzoneWrapper'
+import Layout from '@components/BackOffice/Layout/Layout'
+import MediaList from '@components/BackOffice/Medias/MediaList'
+import { View } from '@components/BackOffice/Medias/utils'
+import type { mediasQuery as mediasQueryType } from '@relay/mediasQuery.graphql'
 import { ALLOWED_MIMETYPES, MAX_FILE_SIZE } from '@shared/utils/acceptedFiles'
-import Fetcher, { json } from '@utils/fetch'
 import debounce from '@shared/utils/debounce-promise'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { useSearchParams } from 'next/navigation'
-import { FileRejection } from 'react-dropzone'
+import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import TablePlaceholder from '@ui/Table/TablePlaceholder'
 import ViewButton from '@ui/ViewButton/ViewButton'
+import Fetcher, { json } from '@utils/fetch'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import { NextPage } from 'next'
+import { useSearchParams } from 'next/navigation'
+import * as React from 'react'
+import { FileRejection } from 'react-dropzone'
+import { useIntl } from 'react-intl'
+import { graphql, PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay'
+import { PageProps } from 'types'
 
 export const MediaListPageQuery = graphql`
   query mediasQuery($count: Int!, $cursor: String, $term: String) {
@@ -38,7 +38,7 @@ const MediaListPage: React.FC<{ queryReference: PreloadedQuery<mediasQueryType> 
 
   React.useEffect(() => {
     if (search === 'OK') {
-      toast({ variant: 'success', content: intl.formatMessage({ id: 'files-uploaded' }) })
+      successToast(intl.formatMessage({ id: 'files-uploaded' }))
       window.history.pushState('', '', '/admin-next/medias')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,13 +73,9 @@ const MediaListPage: React.FC<{ queryReference: PreloadedQuery<mediasQueryType> 
     switch (code) {
       case 'file-invalid-type':
       case 'file-too-large':
-        toast({
-          variant: 'danger',
-          content: intl.formatMessage(
-            { id: code },
-            { fileName: name, extension: type, size: (size / 1000000).toFixed(2) },
-          ),
-        })
+        dangerToast(
+          intl.formatMessage({ id: code }, { fileName: name, extension: type, size: (size / 1000000).toFixed(2) }),
+        )
         break
       default:
         mutationErrorToast(intl)

@@ -1,9 +1,8 @@
-import React from 'react'
-import { Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
+import { Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Heading, Modal, Text } from '@cap-collectif/ui'
 import DeleteParticipantMutation from '@mutations/DeleteParticipantMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 export const mediatorFragment = graphql`
   fragment DeleteParticipantModal_mediator on Mediator {
@@ -30,12 +29,7 @@ const DeleteParticipantModal = ({ mediator: mediatorRef, participant: participan
           participantToken: participant.token,
         },
       })
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({
-          id: 'participant-deleted-successfully',
-        }),
-      })
+      successToast(intl.formatMessage({ id: 'participant-deleted-successfully' }))
       hide()
     } catch (error) {
       return mutationErrorToast(intl)

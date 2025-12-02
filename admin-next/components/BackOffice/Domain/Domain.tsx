@@ -1,27 +1,26 @@
-import { FC } from 'react'
-import { useIntl } from 'react-intl'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
-  Text,
-  Flex,
-  Heading,
-  FormLabel,
-  InputGroup,
   Button,
-  FormGuideline,
-  Tag,
   CapUILineHeight,
+  Flex,
+  FormGuideline,
+  FormLabel,
+  Heading,
+  InputGroup,
+  Tag,
+  Text,
   Tooltip,
-  toast,
 } from '@cap-collectif/ui'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { DomainQuery } from '@relay/DomainQuery.graphql'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useForm } from 'react-hook-form'
-import UpdateCustomDomainMutation from 'mutations/UpdateCustomDomainMutation'
-import DeleteCustomDomainModal from './DeleteCustomDomainModal'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { DomainQuery } from '@relay/DomainQuery.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import UpdateCustomDomainMutation from 'mutations/UpdateCustomDomainMutation'
+import { FC } from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import DeleteCustomDomainModal from './DeleteCustomDomainModal'
 
 type FormValues = {
   subDomain: string
@@ -96,10 +95,7 @@ const Domain: FC = () => {
         return mutationErrorToast(intl)
       }
       if (siteSettings?.status === 'ACTIVE' && siteSettings.customDomain) {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'custom.domain.redirect' }, { customDomain: siteSettings.customDomain }),
-        })
+        successToast(intl.formatMessage({ id: 'custom.domain.redirect' }, { customDomain: siteSettings.customDomain }))
         // we add a timeout to let the user see the toast and not redirect him too quickly
         setTimeout(() => {
           window.location.href = `https://${siteSettings.customDomain}`

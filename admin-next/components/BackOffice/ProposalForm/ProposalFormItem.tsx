@@ -4,8 +4,7 @@ import type {
   ProposalFormItem_proposalForm$key,
 } from '@relay/ProposalFormItem_proposalForm.graphql'
 import { ProposalFormItem_viewer$key } from '@relay/ProposalFormItem_viewer.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { successToast } from '@shared/utils/toasts'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutation'
 import * as React from 'react'
 import { IntlShape, useIntl } from 'react-intl'

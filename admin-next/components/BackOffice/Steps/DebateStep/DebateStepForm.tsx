@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Accordion,
   Box,
   Button,
   CapUIAccordionColor,
-  Tabs,
+  CapUIFontSize,
+  CapUIIcon,
   Flex,
   FormLabel,
-  Text,
-  CapUIIcon,
-  Switch,
   Input,
-  toast,
-  CapUIFontSize,
+  Switch,
+  Tabs,
+  Text,
 } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import UpdateDebateStepMutation from '@mutations/UpdateDebateStepMutation'
-import TextEditor from '../../Form/TextEditor/TextEditor'
-import DebateWidgetIntegrationForm from '@components/BackOffice/Steps/DebateStep/DebateWidgetIntegrationForm'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { DebateStepFormQuery, DebateType } from '@relay/DebateStepFormQuery.graphql'
-import FaceToFace from './FaceToFace'
-import { UpdateDebateStepInput } from '@relay/UpdateDebateStepMutation.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { onBack } from '@components/BackOffice/Steps/utils'
-import { useDebateStep } from './DebateStepContext'
-import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
-import StepDurationInput from '../Shared/StepDurationInput'
+import DebateWidgetIntegrationForm from '@components/BackOffice/Steps/DebateStep/DebateWidgetIntegrationForm'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { onBack } from '@components/BackOffice/Steps/utils'
+import UpdateDebateStepMutation from '@mutations/UpdateDebateStepMutation'
+import { DebateStepFormQuery, DebateType } from '@relay/DebateStepFormQuery.graphql'
+import { UpdateDebateStepInput } from '@relay/UpdateDebateStepMutation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import React, { useEffect } from 'react'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import TextEditor from '../../Form/TextEditor/TextEditor'
+import StepDurationInput from '../Shared/StepDurationInput'
+import { useDebateStep } from './DebateStepContext'
+import FaceToFace from './FaceToFace'
 
 type Props = {
   stepId: string
@@ -231,10 +230,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     try {
       await UpdateDebateStepMutation.commit({ input })
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'global.saved' }),
-      })
+      successToast(intl.formatMessage({ id: 'global.saved' }))
       if (!isEditing) {
         return (window.location.href = `/admin-next/project/${project?.id}`)
       }

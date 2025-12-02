@@ -1,9 +1,8 @@
-import * as React from 'react'
+import { Button, ButtonGroup, CapUIModalSize, Heading, Modal, Text } from '@cap-collectif/ui'
+import DeletePostMutation from '@mutations/DeletePostMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
-import { Button, ButtonGroup, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import DeletePostMutation from '@mutations/DeletePostMutation'
 
 type Props = {
   readonly title: string
@@ -20,10 +19,7 @@ const deletePost = async (postId: string, hide: () => void, intl: IntlShape) => 
     connections: [],
   })
     .then(() => {
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'post-successfully-deleted' }),
-      })
+      successToast(intl.formatMessage({ id: 'post-successfully-deleted' }))
       window.location.href = '/admin-next/posts'
     })
     .catch(() => mutationErrorToast(intl))

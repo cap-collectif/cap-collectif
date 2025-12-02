@@ -1,12 +1,6 @@
-import { FC, Suspense, useEffect, useMemo, useState } from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import { FormProvider, useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
-import debounce from '@shared/utils/debounce-promise'
-import withPageAuthRequired from '@utils/withPageAuthRequired'
 import Layout from '@components/BackOffice/Layout/Layout'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import CarrouselContent from '@components/BackOffice/Sections/Carrousel/CarrouselContent'
 import {
   FormValues,
   getInitialValues,
@@ -18,13 +12,19 @@ import {
   MAX_TITLE_LENGTH,
   SectionType,
 } from '@components/BackOffice/Sections/Carrousel/Carrousel.utils'
+import CarrouselContent from '@components/BackOffice/Sections/Carrousel/CarrouselContent'
 import CarrouselParameters from '@components/BackOffice/Sections/Carrousel/CarrouselParameters'
-import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import DeleteCarrouselElement from '@mutations/DeleteCarrouselElement'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import CreateOrUpdateCarrouselConfigurationMutation from '@mutations/CreateOrUpdateCarrouselConfigurationMutation'
+import DeleteCarrouselElement from '@mutations/DeleteCarrouselElement'
+import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
+import debounce from '@shared/utils/debounce-promise'
 import { isGlobalId } from '@shared/utils/fromGlobalId'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import { FC, Suspense, useEffect, useMemo, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
 
 const formName = 'carousel_section_configuration_form'
 

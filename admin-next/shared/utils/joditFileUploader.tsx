@@ -1,14 +1,14 @@
-import { Jodit } from 'jodit/types'
 import Uppy from '@uppy/core'
-import Tus from '@uppy/tus'
-import StatusBar from '@uppy/status-bar'
 import FileInput from '@uppy/file-input'
+import StatusBar from '@uppy/status-bar'
+import Tus from '@uppy/tus'
+import { Jodit } from 'jodit/types'
 
 import fr from '@uppy/locales/lib/fr_FR'
 import { onElementAvailable } from '@shared/navbar/NavBar.utils'
-import { ALLOWED_MIMETYPES_WITH_ARCHIVES } from './acceptedFiles'
 import { IntlShape } from 'react-intl'
-import { toast } from '@cap-collectif/ui'
+import { ALLOWED_MIMETYPES_WITH_ARCHIVES } from './acceptedFiles'
+import { dangerToast } from './toasts'
 
 export const FILE_UPLOAD_POPUP_OPENED = 'file_upload_popup_opened'
 const barTarget = 'uppyStatusBar'
@@ -41,16 +41,13 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
       restrictions: { maxNumberOfFiles: 1, allowedFileTypes: ALLOWED_MIMETYPES_WITH_ARCHIVES },
       onBeforeFileAdded: currentFile => {
         if (!ALLOWED_MIMETYPES_WITH_ARCHIVES.includes(currentFile.type)) {
-          toast({
-            variant: 'danger',
-            content: intl.formatMessage({ id: 'error.format_not_handled' }, { formats }),
-          })
+          dangerToast(intl.formatMessage({ id: 'error.format_not_handled' }, { formats }))
           editor.e.fire('closeAllPopups')
           return false
         }
         if (currentFile?.size > SIZE_LIMIT) {
           editor.e.fire('closeAllPopups')
-          toast({ variant: 'danger', content: intl.formatMessage({ id: 'error.size_too_big' }, { size: '100Mo' }) })
+          dangerToast(intl.formatMessage({ id: 'error.size_too_big' }, { size: '100Mo' }))
           return false
         }
 

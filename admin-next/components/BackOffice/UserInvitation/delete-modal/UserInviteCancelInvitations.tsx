@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { FormattedHTMLMessage, useIntl } from 'react-intl'
-import { Button, CapUIIcon, Flex, toast, Modal, Heading, CapUIModalSize } from '@cap-collectif/ui'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { Button, CapUIIcon, CapUIModalSize, Flex, Heading, Modal } from '@cap-collectif/ui'
 import CancelUserInvitationsMutation from '@mutations/CancelUserInvitationsMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { FormattedHTMLMessage, useIntl } from 'react-intl'
 
 type Props = {
   readonly invitations: Array<string>
@@ -18,10 +17,7 @@ export const UserInviteCancelInvitations = ({ invitations }: Props): JSX.Element
           invitationsEmails,
         },
       })
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'invite-deleted' }, { nbInvites: invitationsEmails.length }),
-      })
+      successToast(intl.formatMessage({ id: 'invite-deleted' }, { nbInvites: invitationsEmails.length }))
     } catch {
       mutationErrorToast(intl)
     }

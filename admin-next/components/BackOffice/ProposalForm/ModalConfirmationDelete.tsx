@@ -1,20 +1,19 @@
-import * as React from 'react'
-import { useIntl, IntlShape } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import type { ModalConfirmationDelete_proposalForm$key } from '@relay/ModalConfirmationDelete_proposalForm.graphql'
-import DeleteProposalFormMutation from 'mutations/DeleteProposalFormMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import {
   Button,
-  Modal,
-  Heading,
-  Text,
-  ButtonQuickAction,
   ButtonGroup,
-  toast,
+  ButtonQuickAction,
   CapUIIcon,
   CapUIModalSize,
+  Heading,
+  Modal,
+  Text,
 } from '@cap-collectif/ui'
+import type { ModalConfirmationDelete_proposalForm$key } from '@relay/ModalConfirmationDelete_proposalForm.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import DeleteProposalFormMutation from 'mutations/DeleteProposalFormMutation'
+import * as React from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 import { useAppContext } from '../AppProvider/App.context'
 
 type ModalConfirmationDeleteProps = {
@@ -43,10 +42,7 @@ const deleteProposalForm = (
 
   return DeleteProposalFormMutation.commit({ input, connections: [connectionName] }, isAdmin)
     .then(() => {
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'proposal-form-successfully-deleted' }),
-      })
+      successToast(intl.formatMessage({ id: 'proposal-form-successfully-deleted' }))
     })
     .catch(() => {
       return mutationErrorToast(intl)

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Box,
   Button,
@@ -15,26 +15,25 @@ import {
   Modal,
   Select,
   Text,
-  toast,
   UPLOADER_SIZE,
 } from '@cap-collectif/ui'
-import { pxToRem } from '@shared/utils/pxToRem'
-import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { FormControl, FieldInput } from '@cap-collectif/form'
-import { FormProvider, useForm } from 'react-hook-form'
 import CreateUserTypeMutation from '@mutations/CreateUserTypeMutation'
-import { TranslationLocale } from '@relay/NavBarQuery.graphql'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { UserTypeModal_LocalesQuery } from '@relay/UserTypeModal_LocalesQuery.graphql'
-import UpdateUserTypeMutation from '@mutations/UpdateUserTypeMutation'
-import { getExistingTranslations } from './utils'
-import { getDefaultLocale, getFormattedPlatformLocales } from '@shared/utils/platformLanguages'
 import DeleteUserTypeMutation from '@mutations/DeleteUserTypeMutation'
-import { UPLOAD_PATH } from '@utils/config'
+import UpdateUserTypeMutation from '@mutations/UpdateUserTypeMutation'
+import { TranslationLocale } from '@relay/NavBarQuery.graphql'
+import { UserTypeModal_LocalesQuery } from '@relay/UserTypeModal_LocalesQuery.graphql'
 import { UserTypesList_query$data } from '@relay/UserTypesList_query.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { getDefaultLocale, getFormattedPlatformLocales } from '@shared/utils/platformLanguages'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { UPLOAD_PATH } from '@utils/config'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import { getExistingTranslations } from './utils'
 
 type Props = {
   context?: 'create' | 'edit'
@@ -155,10 +154,7 @@ export const UserTypeModal: React.FC<Props> = ({ context = 'create', userTypeDat
 
     try {
       await DeleteUserTypeMutation.commit(deleteMutationInput)
-      toast({
-        variant: 'danger',
-        content: intl.formatMessage({ id: 'admin.user-types.delete-success' }),
-      })
+      dangerToast(intl.formatMessage({ id: 'admin.user-types.delete-success' }))
     } catch (err) {
       mutationErrorToast(intl)
       return
@@ -206,9 +202,8 @@ export const UserTypeModal: React.FC<Props> = ({ context = 'create', userTypeDat
           // so we have to reload the page to see the type and its media
           window.location.reload()
         }
-        toast({
-          variant: 'success',
-          content: intl.formatMessage(
+        successToast(
+          intl.formatMessage(
             { id: 'admin.user-types.create-success' },
             {
               type:
@@ -217,7 +212,7 @@ export const UserTypeModal: React.FC<Props> = ({ context = 'create', userTypeDat
                 '',
             },
           ),
-        })
+        )
       } catch (err) {
         mutationErrorToast(intl)
       }
@@ -238,10 +233,7 @@ export const UserTypeModal: React.FC<Props> = ({ context = 'create', userTypeDat
           // so we have to reload the page to see the type and its media
           window.location.reload()
         }
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'global.changes.saved' }),
-        })
+        successToast(intl.formatMessage({ id: 'global.changes.saved' }))
       } catch (err) {
         mutationErrorToast(intl)
       }

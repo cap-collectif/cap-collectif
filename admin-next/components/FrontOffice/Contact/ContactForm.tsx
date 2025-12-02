@@ -1,4 +1,4 @@
-import { Box, Button, CapInputSize, CapUIFontSize, CapUILineHeight, FormLabel, Text, toast } from '@cap-collectif/ui'
+import { Box, Button, CapInputSize, CapUIFontSize, CapUILineHeight, FormLabel, Text } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import SendContactFormMutation from '@mutations/SendContactFormMutation'
 import { pageContactContentQuery$data } from '@relay/pageContactContentQuery.graphql'
@@ -7,7 +7,7 @@ import { FieldInput, FormControl } from '@shared/cap-collectif/form/src'
 import Captcha from '@shared/form/Captcha'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -42,7 +42,7 @@ export const ContactForm: FC<{
     })
       .then(() => {
         reset(defaultValues)
-        toast({ content: intl.formatMessage({ id: 'contact.email.sent_success' }), variant: 'success' })
+        successToast(intl.formatMessage({ id: 'contact.email.sent_success' }))
         return
       })
       .catch(() => {

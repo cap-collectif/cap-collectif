@@ -1,40 +1,39 @@
-import * as React from 'react'
-import L from 'leaflet'
-import { useIntl, IntlShape } from 'react-intl'
-import { FormProvider, useForm } from 'react-hook-form'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import dynamic from 'next/dynamic'
-import {
-  Flex,
-  Heading,
-  Menu,
-  CapUIIcon,
-  FormLabel,
-  Button,
-  Switch,
-  Spinner,
-  toast,
-  FormGuideline,
-  Box,
-  UPLOADER_SIZE,
-  Text,
-  Icon,
-  CapUIIconSize,
-  Link,
-  CapUIFontSize,
-} from '@cap-collectif/ui'
-import { GeographicalAreaFormQuery } from '@relay/GeographicalAreaFormQuery.graphql'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { createOrReplaceTranslation, formatCodeToLocale } from '@utils/locale-helper'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import GeographicalAreaDeleteModal from 'components/BackOffice/GeographicalAreasList/GeographicalAreaDeleteModal'
+import {
+  Box,
+  Button,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUIIconSize,
+  Flex,
+  FormGuideline,
+  FormLabel,
+  Heading,
+  Icon,
+  Link,
+  Menu,
+  Spinner,
+  Switch,
+  Text,
+  UPLOADER_SIZE,
+} from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import CreateGlobalDistrictMutation from '@mutations/CreateGlobalDistrictMutation'
-import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import UpdateGlobalDistrictMutation from '@mutations/UpdateGlobalDistrictMutation'
+import { GeographicalAreaFormQuery } from '@relay/GeographicalAreaFormQuery.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import { UPLOAD_PATH } from '@utils/config'
+import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet'
+import { createOrReplaceTranslation, formatCodeToLocale } from '@utils/locale-helper'
 import TextEditor from 'components/BackOffice/Form/TextEditor/TextEditor'
+import GeographicalAreaDeleteModal from 'components/BackOffice/GeographicalAreasList/GeographicalAreaDeleteModal'
+import L from 'leaflet'
+import dynamic from 'next/dynamic'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
 
 const GeographicalAreaMap = dynamic(() => import('./GeographicalAreaMap'), { ssr: false })
 
@@ -105,10 +104,7 @@ const onSubmit = (
       input,
     })
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'zone-geo-created' }),
-        })
+        successToast(intl.formatMessage({ id: 'zone-geo-created' }))
         setIsLoading(false)
         window.location.href = '/admin-next/geographical-areas'
       })
@@ -123,10 +119,7 @@ const onSubmit = (
       },
     })
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'zone-geo-modified' }),
-        })
+        successToast(intl.formatMessage({ id: 'zone-geo-modified' }))
         setIsLoading(false)
       })
       .catch(() => {

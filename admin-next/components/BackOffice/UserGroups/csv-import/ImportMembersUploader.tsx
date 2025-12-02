@@ -1,11 +1,11 @@
-import * as React from 'react'
 import { Flex, FormGuideline, FormLabel, Link, Text, Uploader } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import CsvImportResult from './CsvImportResult'
-import { csvEmailsDefaultValue, getInputFromFile } from '../utils'
-import { useFormContext } from 'react-hook-form'
 import CreateGroupMutation from '@mutations/CreateGroupMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { csvEmailsDefaultValue, getInputFromFile } from '../utils'
+import CsvImportResult from './CsvImportResult'
 
 type Props = {
   existingGroupName?: string // If the import is from the edit group modal, we need to get the groupName for the dry run mutation that checks availability

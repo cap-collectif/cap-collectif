@@ -1,31 +1,31 @@
-import * as React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Flex, toast } from '@cap-collectif/ui'
-import EventFormSide from './EventFormSide'
-import EventForm from './EventForm'
-import * as yup from 'yup'
+import { Flex } from '@cap-collectif/ui'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { BreadCrumbItemType } from '@components/BackOffice/BreadCrumb/BreadCrumbItem'
+import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
+import { Locale } from '@components/BackOffice/Posts/Post.type'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useLazyLoadQuery, graphql, GraphQLTaggedNode } from 'react-relay'
+import AddEventMutation from '@mutations/AddEventMutation'
+import ChangeEventMutation from '@mutations/ChangeEventMutation'
+import ReviewEventMutation from '@mutations/ReviewEventMutation'
 import {
   EventFormWrapperQuery,
   EventFormWrapperQuery$data,
   EventReviewStatus,
 } from '@relay/EventFormWrapperQuery.graphql'
 import { EventFormWrapper_ViewerQuery } from '@relay/EventFormWrapper_ViewerQuery.graphql'
-import moment from 'moment'
-import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import AddEventMutation from '@mutations/AddEventMutation'
-import ChangeEventMutation from '@mutations/ChangeEventMutation'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { BreadCrumbItemType } from '@components/BackOffice/BreadCrumb/BreadCrumbItem'
-import { DisabledParams, EventFormValues, formatTranslations, getInitialValues, RegistrationType } from './utils'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { DeepWriteable, Locales } from 'types'
-import { Locale } from '@components/BackOffice/Posts/Post.type'
-import ReviewEventMutation from '@mutations/ReviewEventMutation'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
+import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import moment from 'moment'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay'
+import { DeepWriteable, Locales } from 'types'
+import * as yup from 'yup'
+import EventForm from './EventForm'
+import EventFormSide from './EventFormSide'
+import { DisabledParams, EventFormValues, formatTranslations, getInitialValues, RegistrationType } from './utils'
 
 type EventFormWrapperProps = {
   eventId?: string
@@ -259,16 +259,10 @@ const EventFormWrapper = ({ eventId, eventData }: EventFormWrapperProps) => {
       })
         .then(response => {
           if (response.addEvent.userErrors.length) {
-            toast({
-              variant: 'danger',
-              content: intl.formatMessage({ id: 'global.saving.error' }),
-            })
+            dangerToast(intl.formatMessage({ id: 'global.saving.error' }))
             return
           }
-          toast({
-            variant: 'success',
-            content: intl.formatMessage({ id: 'event-successfully-created' }),
-          })
+          successToast(intl.formatMessage({ id: 'event-successfully-created' }))
           const newEventId = response?.addEvent?.eventEdge?.node?.id
           window.location.href = `event?id=${newEventId}`
         })
@@ -293,10 +287,7 @@ const EventFormWrapper = ({ eventId, eventData }: EventFormWrapperProps) => {
       })
         .then(response => {
           if (response.changeEvent.userErrors.length) {
-            toast({
-              variant: 'danger',
-              content: intl.formatMessage({ id: 'global.saving.error' }),
-            })
+            dangerToast(intl.formatMessage({ id: 'global.saving.error' }))
             return
           }
           if (
@@ -311,17 +302,10 @@ const EventFormWrapper = ({ eventId, eventData }: EventFormWrapperProps) => {
             })
               .then(reviewResponse => {
                 if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) mutationErrorToast(intl)
-                toast({
-                  variant: 'success',
-                  content: intl.formatMessage({ id: 'event-successfully-updated' }),
-                })
+                successToast(intl.formatMessage({ id: 'event-successfully-updated' }))
               })
               .catch(() => mutationErrorToast(intl))
-          } else
-            toast({
-              variant: 'success',
-              content: intl.formatMessage({ id: 'event-successfully-updated' }),
-            })
+          } else successToast(intl.formatMessage({ id: 'event-successfully-updated' }))
         })
         .catch(() => {
           mutationErrorToast(intl)

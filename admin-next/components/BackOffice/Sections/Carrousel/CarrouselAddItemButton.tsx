@@ -1,9 +1,10 @@
-import { Button, CapUIIcon, Menu, toast } from '@cap-collectif/ui'
+import { Button, CapUIIcon, Menu } from '@cap-collectif/ui'
+import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
+import { dangerToast } from '@shared/utils/toasts'
 import { FC } from 'react'
 import { UseFieldArrayPrepend } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { FormValues, SectionType } from './Carrousel.utils'
-import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
 
 export const CarrouselAddItemButton: FC<{
   prepend: UseFieldArrayPrepend<FormValues, 'carrouselElements'>
@@ -14,16 +15,9 @@ export const CarrouselAddItemButton: FC<{
 
   const onClick = (type: CarrouselElementType) => {
     if (cannotAddMoreFields)
-      toast({
-        variant: 'danger',
-        content: (
-          <>
-            {intl.formatMessage({ id: 'section.max_elem' })}
-            <br />
-            {intl.formatMessage({ id: 'section.please_delete' })}
-          </>
-        ),
-      })
+      dangerToast(
+        intl.formatMessage({ id: 'section.max_elem' }) + '<br />' + intl.formatMessage({ id: 'section.please_delete' }),
+      )
     else
       prepend({
         type,

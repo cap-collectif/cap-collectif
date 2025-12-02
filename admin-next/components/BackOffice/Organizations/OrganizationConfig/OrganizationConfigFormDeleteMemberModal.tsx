@@ -1,4 +1,3 @@
-import * as React from 'react'
 import {
   Button,
   ButtonGroup,
@@ -9,13 +8,14 @@ import {
   headingStyles,
   Modal,
 } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
-import KickFromOrganizationMutation from '@mutations/KickFromOrganizationMutation'
-import { graphql, useFragment } from 'react-relay'
-import { OrganizationConfigFormDeleteMemberModal_organization$key } from '@relay/OrganizationConfigFormDeleteMemberModal_organization.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { formatConnectionPath } from '@utils/relay'
 import DeleteOrganizationInvitationMutation from '@mutations/DeleteOrganizationInvitationMutation'
+import KickFromOrganizationMutation from '@mutations/KickFromOrganizationMutation'
+import { OrganizationConfigFormDeleteMemberModal_organization$key } from '@relay/OrganizationConfigFormDeleteMemberModal_organization.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import { formatConnectionPath } from '@utils/relay'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 export interface OrganizationConfigFormDeleteMemberModalProps {
   userName: string
   status: 'ACCEPTED' | 'PENDING'

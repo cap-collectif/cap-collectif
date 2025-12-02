@@ -1,8 +1,8 @@
+import { Button, CapUIModalSize, Heading, Modal, Text } from '@cap-collectif/ui'
+import DeleteMediaAdminMutation from '@mutations/DeleteMediaAdminMutation'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import { useState, type FC } from 'react'
 import { useIntl } from 'react-intl'
-import { Modal, Heading, CapUIModalSize, Button, Text, toast } from '@cap-collectif/ui'
-import DeleteMediaAdminMutation from '@mutations/DeleteMediaAdminMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 interface MediaDeleteModalProps {
   onClose: () => void
@@ -24,10 +24,7 @@ const MediaDeleteModal: FC<MediaDeleteModalProps> = ({ onClose, medias, connecti
     })
       .then(() => {
         setIsSubmitting(false)
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'media-deleted' }, { num: medias.length }),
-        })
+        successToast(intl.formatMessage({ id: 'media-deleted' }, { num: medias.length }))
         onClose()
       })
       .catch(() => {

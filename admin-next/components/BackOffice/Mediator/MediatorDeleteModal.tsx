@@ -1,8 +1,8 @@
-import { FC, useState } from 'react'
 import { Button, CapUIModalSize, Checkbox, Heading, Modal, Text } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
+import { mutationErrorToast } from '@shared/utils/toasts'
 import DeleteMediatorMutation from 'mutations/DeleteMediatorMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { FC, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 export type MediatorInfos = {
   id: string

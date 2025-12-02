@@ -1,31 +1,21 @@
-import React, { useEffect } from 'react'
-import { useIntl } from 'react-intl'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
-import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
-import { FormProvider, useForm } from 'react-hook-form'
-import {
-  Accordion,
-  Box,
-  Button,
-  CapUIAccordionColor,
-  CapUIFontSize,
-  Flex,
-  FormLabel,
-  Text,
-  toast,
-} from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, FormLabel, Text } from '@cap-collectif/ui'
 import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
-import withPageAuthRequired from '@utils/withPageAuthRequired'
-import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { onBack } from '@components/BackOffice/Steps/utils'
-import { useOtherStep } from './OtherStepContext'
-import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
-import StepDurationInput from '../Shared/StepDurationInput'
+import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
+import { onBack } from '@components/BackOffice/Steps/utils'
+import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
+import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import React, { useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import StepDurationInput from '../Shared/StepDurationInput'
+import { useOtherStep } from './OtherStepContext'
 
 type Props = {
   stepId: string
@@ -167,10 +157,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       if (!response.updateOtherStep) {
         return mutationErrorToast(intl)
       }
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'global.saved' }),
-      })
+      successToast(intl.formatMessage({ id: 'global.saved' }))
       if (!isEditing) {
         return (window.location.href = `/admin-next/project/${project?.id}`)
       }

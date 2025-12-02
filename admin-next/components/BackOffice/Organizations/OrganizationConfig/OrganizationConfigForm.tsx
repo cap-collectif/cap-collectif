@@ -1,18 +1,18 @@
-import * as React from 'react'
-import { Button, Flex, toast } from '@cap-collectif/ui'
-import { FormProvider, useForm } from 'react-hook-form'
-import OrganizationConfigFormGeneral from './OrganizationConfigFormGeneral'
-import { useIntl } from 'react-intl'
-import OrganizationConfigFormSide from './OrganizationConfigFormSide'
-import OrganizationConfigFormMembers from './OrganizationConfigFormMembers'
-import { getInitialValues } from './OrganizationConfigForm.utils'
+import { Button, Flex } from '@cap-collectif/ui'
 import UpdateOrganizationMutation from '@mutations/UpdateOrganizationMutation'
-import { UpdateOrganizationInput } from '@relay/UpdateOrganizationMutation.graphql'
-import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
-import { OrganizationConfigFormQuery } from '@relay/OrganizationConfigFormQuery.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import OrganizationConfigFormDeleteOrganizationModal from './OrganizationConfigFormDeleteOrganizationModal'
 import { OrganizationConfigForm_organization$key } from '@relay/OrganizationConfigForm_organization.graphql'
+import { OrganizationConfigFormQuery } from '@relay/OrganizationConfigFormQuery.graphql'
+import { UpdateOrganizationInput } from '@relay/UpdateOrganizationMutation.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import * as React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { getInitialValues } from './OrganizationConfigForm.utils'
+import OrganizationConfigFormDeleteOrganizationModal from './OrganizationConfigFormDeleteOrganizationModal'
+import OrganizationConfigFormGeneral from './OrganizationConfigFormGeneral'
+import OrganizationConfigFormMembers from './OrganizationConfigFormMembers'
+import OrganizationConfigFormSide from './OrganizationConfigFormSide'
 
 export interface OrganizationConfigFormProps {
   organization: OrganizationConfigForm_organization$key
@@ -111,10 +111,7 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({ organiz
     }
     UpdateOrganizationMutation.commit({ input })
       .then(() => {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'global.changes.saved' }),
-        })
+        successToast(intl.formatMessage({ id: 'global.changes.saved' }))
       })
       .catch(() => mutationErrorToast(intl))
   }

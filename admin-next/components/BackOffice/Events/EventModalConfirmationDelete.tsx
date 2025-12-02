@@ -1,7 +1,3 @@
-import * as React from 'react'
-import { useIntl, IntlShape } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import {
   Button,
   ButtonGroup,
@@ -12,12 +8,15 @@ import {
   Heading,
   Modal,
   Text,
-  toast,
 } from '@cap-collectif/ui'
-import DeleteEventMutation from 'mutations/DeleteEventMutation'
-import type { EventModalConfirmationDelete_event$key } from '@relay/EventModalConfirmationDelete_event.graphql'
-import { EventAffiliations } from './EventList'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import type { EventModalConfirmationDelete_event$key } from '@relay/EventModalConfirmationDelete_event.graphql'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import DeleteEventMutation from 'mutations/DeleteEventMutation'
+import * as React from 'react'
+import { IntlShape, useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { EventAffiliations } from './EventList'
 
 type Props = {
   disclosure?: React.ReactNode
@@ -44,10 +43,7 @@ const deleteEvent = (
   hide()
   return DeleteEventMutation.commit({ input, affiliations })
     .then(() => {
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'event-successfully-deleted' }),
-      })
+      successToast(intl.formatMessage({ id: 'event-successfully-deleted' }))
       if (onDelete) onDelete()
     })
     .catch(() => mutationErrorToast(intl))

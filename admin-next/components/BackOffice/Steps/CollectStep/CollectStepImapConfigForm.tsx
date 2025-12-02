@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { Box, Button, Flex, FormLabel, Tag } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import { Box, Button, Flex, FormLabel, Tag } from '@cap-collectif/ui'
+import { useSaveImapConfigMutation } from '@mutations/SaveImapConfigMutation'
+import { CollectStepImapConfigForm_collectStep$key } from '@relay/CollectStepImapConfigForm_collectStep.graphql'
+import { SaveImapConfigErrorCode, SaveImapConfigInput } from '@relay/SaveImapConfigMutation.graphql'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { CollectStepImapConfigForm_collectStep$key } from '@relay/CollectStepImapConfigForm_collectStep.graphql'
-import { useSaveImapConfigMutation } from '@mutations/SaveImapConfigMutation'
-import { SaveImapConfigErrorCode, SaveImapConfigInput } from '@relay/SaveImapConfigMutation.graphql'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 type Props = {
   step: CollectStepImapConfigForm_collectStep$key

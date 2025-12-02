@@ -1,32 +1,31 @@
-import * as React from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
+  AbstractCard,
   Button,
   CapUISpotIcon,
   CapUISpotIconSize,
-  AbstractCard,
   Flex,
   Heading,
   InputGroup,
   SpotIcon,
   Table,
-  Text,
   Tag,
-  toast,
+  Text,
   Tooltip,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
 import InviteOrganizationMemberMutation from '@mutations/InviteOrganizationMember'
-import { formatConnectionPath } from '@utils/relay'
-import OrganizationConfigFormDeleteMemberModal from './OrganizationConfigFormDeleteMemberModal'
-import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { graphql, useFragment } from 'react-relay'
 import {
   OrganizationConfigFormMembers_organization$key,
   OrganizationMemberRole,
 } from '@relay/OrganizationConfigFormMembers_organization.graphql'
+import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { formatConnectionPath } from '@utils/relay'
+import * as React from 'react'
+import { useForm } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 import { getMemberList } from './OrganizationConfigForm.utils'
+import OrganizationConfigFormDeleteMemberModal from './OrganizationConfigFormDeleteMemberModal'
 
 export interface OrganizationConfigFormMembersProps {
   organization: OrganizationConfigFormMembers_organization$key
@@ -122,41 +121,21 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
     })
       .then(response => {
         if (response.inviteOrganizationMember?.errorCode === 'USER_ALREADY_MEMBER') {
-          toast({
-            variant: 'danger',
-            content: intl.formatMessage({
-              id: 'USER_ALREADY_MEMBER',
-            }),
-          })
+          dangerToast(intl.formatMessage({ id: 'USER_ALREADY_MEMBER' }))
         }
         if (response.inviteOrganizationMember?.errorCode === 'USER_NOT_ONLY_ROLE_USER') {
-          toast({
-            variant: 'danger',
-            content: intl.formatMessage({
-              id: 'organization-invitation-user-not-only-user-error',
-            }),
-          })
+          dangerToast(intl.formatMessage({ id: 'organization-invitation-user-not-only-user-error' }))
         }
         if (response.inviteOrganizationMember?.errorCode === 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION') {
-          toast({
-            variant: 'danger',
-            content: intl.formatMessage({
-              id: 'this-user-cannot-join-the-organization',
-            }),
-          })
+          dangerToast(intl.formatMessage({ id: 'this-user-cannot-join-the-organization' }))
         }
         if (!response?.inviteOrganizationMember?.errorCode) {
-          toast({
-            variant: 'success',
-            content: intl.formatMessage(
-              {
-                id: 'organization.member.invite.success.toast',
-              },
-              {
-                User: response?.inviteOrganizationMember?.invitation?.user?.username || values?.memberEmail,
-              },
+          successToast(
+            intl.formatMessage(
+              { id: 'organization.member.invite.success.toast' },
+              { User: response?.inviteOrganizationMember?.invitation?.user?.username || values?.memberEmail },
             ),
-          })
+          )
         }
       })
       .catch(() => {
