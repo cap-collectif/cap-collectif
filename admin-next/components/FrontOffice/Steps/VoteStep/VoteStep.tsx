@@ -8,7 +8,6 @@ import { VoteStepQuery } from '@relay/VoteStepQuery.graphql'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE } from '@shared/utils/cookies'
-import { useVoteStepContext, VoteStepContextProvider } from './VoteStepContext'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import { pageProjectStepMetadataQuery$data } from '@relay/pageProjectStepMetadataQuery.graphql'
 import { evalCustomCode } from 'src/app/custom-code'
@@ -16,6 +15,7 @@ import { LeafletStyles } from 'src/app/styles'
 import { getOrderByArgs } from './utils'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { useQueryState } from 'nuqs'
 
 type Props = {
   stepSlug: string
@@ -33,9 +33,9 @@ const QUERY = graphql`
 `
 
 export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, projectSlug }) => {
-  const {
-    filters: { term, sort },
-  } = useVoteStepContext()
+  const [term] = useQueryState('term')
+  const [sort] = useQueryState('sort')
+
   const data = useLazyLoadQuery<VoteStepQuery>(QUERY, {
     stepSlug,
     projectSlug,
@@ -63,15 +63,14 @@ export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, pro
 export const VoteStep: React.FC<
   Props & { customCode?: string; prefetchedStep: pageProjectStepMetadataQuery$data['step'] }
 > = ({ stepSlug, projectSlug, prefetchedStep, customCode }) => {
-
-  const new_new_vote_step = useFeatureFlag('new_new_vote_step');
+  const new_new_vote_step = useFeatureFlag('new_new_vote_step')
 
   if (!new_new_vote_step) {
-    return <p>new_new_vote_step feature toggle must be enabled</p>;
+    return <p>new_new_vote_step feature toggle must be enabled</p>
   }
 
   const { setBreadCrumbItems } = useNavBarContext()
-  const { project, label, form, __typename, votable } = prefetchedStep
+  const { project, label, form, __typename } = prefetchedStep
   const cookies = useCookies()
   const isMobile = useIsMobile()
   const intl = useIntl()
@@ -99,13 +98,7 @@ export const VoteStep: React.FC<
     <>
       {hasMapView ? <LeafletStyles /> : null}
       <React.Suspense fallback={isMobile ? null : <VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
-        <VoteStepContextProvider
-          hasMapView={hasMapView}
-          isStepVotable={votable}
-          isCollectStep={__typename === 'CollectStep'}
-        >
-          {isMobile ? null : <VoteStepWeb stepSlug={stepSlug} projectSlug={projectSlug} token={token} />}
-        </VoteStepContextProvider>
+        <VoteStepWeb stepSlug={stepSlug} projectSlug={projectSlug} token={token} />
       </React.Suspense>
     </>
   )

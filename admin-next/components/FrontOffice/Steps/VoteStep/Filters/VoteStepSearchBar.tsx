@@ -2,13 +2,14 @@ import { CapInputSize, Search } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import debounce from '@shared/utils/debounce-promise'
-import { useVoteStepContext } from '../VoteStepContext'
+import { useQueryState } from 'nuqs'
 
 const VoteStepSearchBar = () => {
   const intl = useIntl()
-  const { filters, setFilters } = useVoteStepContext()
-  const { term } = filters
-  const onTermChange = debounce((value: string) => setFilters('term', value || ''), 400)
+  const [term, setTerm] = useQueryState('term')
+
+  const onTermChange = debounce((value: string) => setTerm(value || ''), 400)
+
   return (
     <Search
       variantSize={CapInputSize.Md}

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, Button, CapUIFontSize, Flex, Text, useTheme } from '@cap-collectif/ui'
-import { useVoteStepContext } from './VoteStepContext'
+import { useQueryStates } from 'nuqs'
 
 const VoteStepEmptyList = ({
   isMapMobileView = false,
@@ -10,22 +10,29 @@ const VoteStepEmptyList = ({
   isMapMobileView?: boolean
   noData?: boolean
 }) => {
-  const { setFilters } = useVoteStepContext()
   const intl = useIntl()
   const { colors } = useTheme()
+  const [, setFilters] = useQueryStates(
+    {
+      term: null,
+      sort: null,
+      userType: null,
+      theme: null,
+      category: null,
+      district: null,
+      status: null,
+      latlng: null,
+      latlngBounds: null,
+    },
+    {
+      history: 'push',
+    },
+  )
 
   const fill = colors.primary.base
 
   const resetFilters = () => {
-    setFilters('sort', '')
-    setFilters('userType', '')
-    setFilters('theme', '')
-    setFilters('category', '')
-    setFilters('district', '')
-    setFilters('status', '')
-    setFilters('latlng', '')
-    setFilters('latlngBounds', '')
-    setFilters('term', '')
+    setFilters(null)
   }
 
   return (

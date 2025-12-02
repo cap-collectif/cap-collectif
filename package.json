@@ -259,6 +259,7 @@
         "moment-timezone": "^0.5.45",
         "moment-timezone-data-webpack-plugin": "^1.5.1",
         "now": "19.2.0",
+        "nuqs": "^2.8.1",
         "papaparse": "^5.2.0",
         "postcss": "7",
         "postcss-loader": "3",

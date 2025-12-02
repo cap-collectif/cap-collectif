@@ -5,11 +5,11 @@ import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_pro
 import { pxToRem } from '@shared/utils/pxToRem'
 import StepLinkedEvents from '../StepLinkedEvents'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { useVoteStepContext } from './VoteStepContext'
 import VoteStepFiltersWeb from './Filters/VoteStepFiltersWeb'
 import VoteStepProposalsList from './VoteStepProposalsList'
 import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import VoteStepMap from './Map/VoteStepMap'
+import { parseAsInteger, useQueryState } from 'nuqs'
 
 type Props = {
   step: VoteStepWebLayout_proposalStep$key
@@ -29,6 +29,7 @@ const FRAGMENT = graphql`
     # geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
+    __typename
     ...VoteStepProposalsList_proposalStep @arguments(count: $count, term: $term, orderBy: $orderBy)
     ...VoteStepMap_proposalStep @arguments(count: $count, term: $term, orderBy: $orderBy)
     ...VoteStepFiltersWeb_proposalStep
@@ -40,6 +41,7 @@ const FRAGMENT = graphql`
       id
       objectType
       contribuable
+      isMapViewEnabled
       # ...ProposalCreateModal_proposalForm
     }
   }
@@ -48,13 +50,15 @@ const FRAGMENT = graphql`
 export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
+  const hasMapView = step.form?.isMapViewEnabled
 
-  const { isStepVotable, hasMapView, isMapHidden, isMapExpanded } = useVoteStepContext()
+  const [isMapShown] = useQueryState('map_shown', parseAsInteger)
+  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger)
 
   const templateColumns = 'repeat(auto-fit, minmax(300px, 1fr))'
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
-  const mapStickyPositionFromTop = isStepVotable ? 156 : 88
+  const mapStickyPositionFromTop = step.votable ? 156 : 88
   // We add bottom padding, otherwise the map is fullsize minus its top position
   const mapHeight = `calc(100vh - ${pxToRem(mapStickyPositionFromTop + 24)})`
 
@@ -73,7 +77,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
         </Box>
         <Box>
           <Flex justifyContent="space-between" gap="lg">
-            {!isMapExpanded ? (
+            {isMapExpanded ? (
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
@@ -86,7 +90,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                 </React.Suspense>
               </Box>
             ) : null}
-            {hasMapView && !isMapHidden ? (
+            {hasMapView && isMapShown ? (
               <Box flex="1 1 0" position="sticky" top={pxToRem(mapStickyPositionFromTop)} height={mapHeight}>
                 <VoteStepMap
                   step={step}

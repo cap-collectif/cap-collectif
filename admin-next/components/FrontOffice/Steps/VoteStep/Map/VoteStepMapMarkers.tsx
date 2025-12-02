@@ -18,7 +18,7 @@ import convertIconToDs from '@shared/utils/convertIconToDs'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { VoteStepMapMarkers_proposalStep$key } from '@relay/VoteStepMapMarkers_proposalStep.graphql'
-import { useVoteStepContext } from '../VoteStepContext'
+import { parseAsInteger, useQueryState } from 'nuqs'
 
 export const mapId = 'cap-vote-step-map'
 export const MAX_MAP_ZOOM = 18
@@ -87,8 +87,8 @@ const MARKERS_FRAGMENT = graphql`
 
 const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
   const { colors } = useTheme()
-  const { isMapExpanded } = useVoteStepContext()
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(MARKERS_FRAGMENT, stepKey)
+  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger)
 
   useEffect(() => {
     if (hasNext) loadNext(50)

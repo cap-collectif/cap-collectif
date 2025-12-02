@@ -1,9 +1,10 @@
 import { Button } from '@cap-collectif/ui'
 import { FC } from 'react'
-import VoteStepMapContainer, { mapId, VoteStepMapPlaceholder } from './VoteStepMapContainer'
+import VoteStepMapContainer, { mapId } from './VoteStepMapContainer'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepMap_proposalStep$key } from '@relay/VoteStepMap_proposalStep.graphql'
 import { useIntl } from 'react-intl'
+import VoteStepMapPlaceholder from './VoteStepMapPlaceholder'
 
 const FRAGMENT = graphql`
   fragment VoteStepMap_proposalStep on ProposalStep

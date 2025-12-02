@@ -14,6 +14,7 @@ import { graphql } from 'relay-runtime'
 import Fetcher from '@utils/fetch'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import { formatCookiesForServer } from '@shared/utils/cookies'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 export const layoutQuery = graphql`
   query layoutQuery {
@@ -162,7 +163,7 @@ export default async function RootLayout({
             SSRData={SSRData}
             captchaKey={captchaKey}
           >
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
           </Providers>
         </CookiesProvider>
       </body>

@@ -1,35 +1,19 @@
-'use client'
 import 'leaflet/dist/leaflet.css'
 
-import { Box, Flex, FlexProps } from '@cap-collectif/ui'
+import { Box } from '@cap-collectif/ui'
 import { CapcoTileLayer, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
-import { FC, Suspense, useState } from 'react'
-import { MapContainer, Popup, useMapEvents } from 'react-leaflet'
+import { FC, Suspense } from 'react'
+import { MapContainer } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
-import { useVoteStepContext } from '../VoteStepContext'
 import useIsMobile from '@shared/hooks/useIsMobile'
-import ProposalForm from '../ProposalForm/ProposalForm'
 import VoteStepMapMarkers from './VoteStepMapMarkers'
 import LocateAndZoomControl, { ChangeSizeButton } from '@components/FrontOffice/Leaflet/LocateAndZoomControl'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import MapCustomEvents from './VoteStepMapCustomEvents'
 
 export const mapId = 'cap-vote-step-map'
 export const MAX_MAP_ZOOM = 18
-
-export const VoteStepMapPlaceholder: FC<FlexProps> = ({ children, ...rest }) => {
-  return (
-    <Flex
-      borderRadius="xs"
-      height="100%"
-      sx={{ background: 'url(/map_placeholder.jpg)', backgroundSize: 'cover' }}
-      alignItems="center"
-      justifyContent="center"
-      {...rest}
-    >
-      {children}
-    </Flex>
-  )
-}
 
 const FRAGMENT = graphql`
   fragment VoteStepMapContainer_proposalStep on ProposalStep
@@ -45,6 +29,7 @@ const FRAGMENT = graphql`
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
+    ...VoteStepMapCustomEvents_proposalStep
     ...VoteStepMapMarkers_proposalStep
       @arguments(
         count: $count
@@ -60,7 +45,6 @@ const FRAGMENT = graphql`
       )
     __typename
     form {
-      contribuable
       mapCenter {
         lat
         lng
@@ -72,29 +56,13 @@ const FRAGMENT = graphql`
 
 type Props = { step: VoteStepMapContainer_proposalStep$key }
 
-const MapCustomEvents: FC<{ contribuable: boolean }> = ({ contribuable }) => {
-  const [position, setPosition] = useState(null)
-
-  const { isCollectStep } = useVoteStepContext()
-
-  useMapEvents({
-    click(e) {
-      setPosition(e.latlng)
-    },
-  })
-
-  return position && isCollectStep ? (
-    <Popup position={position}>
-      <ProposalForm disabled={!contribuable} initialPosition={position} />
-    </Popup>
-  ) : null
-}
-
 const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
   const step = useFragment<VoteStepMapContainer_proposalStep$key>(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
-  const { filters, isMapExpanded, setIsMapExpanded } = useVoteStepContext()
-  const { latlng, latlngBounds } = filters
+  const [latlngBounds] = useQueryState('latlngBounds')
+  const [latlng] = useQueryState('latlng')
+  const [isMapExpanded, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
+
   const filterBounds = parseLatLngBounds(latlngBounds || '')
   const { form } = step
 
@@ -124,13 +92,13 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
         }}
         zoomControl={false}
       >
-        <MapCustomEvents contribuable={form?.contribuable} />
+        <MapCustomEvents step={step} />
         <Suspense fallback={null}>
           <VoteStepMapMarkers step={step} />
         </Suspense>
         <CapcoTileLayer />
         <LocateAndZoomControl>
-          <ChangeSizeButton onClick={() => setIsMapExpanded(!isMapExpanded)} />
+          <ChangeSizeButton onClick={() => setIsMapExpanded(isMapExpanded == 1 ? 0 : 1)} />
         </LocateAndZoomControl>
       </MapContainer>
     </Box>
