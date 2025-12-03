@@ -1,26 +1,26 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
-  Flex,
-  FormLabel,
-  Text,
-  UPLOADER_SIZE,
-  Button,
-  Tabs,
-  Heading,
-  Switch,
   Accordion,
+  Button,
   CapUIAccordionColor,
   CapUIFontSize,
+  Flex,
+  FormLabel,
+  Heading,
+  Switch,
+  Tabs,
+  Text,
+  UPLOADER_SIZE,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFormContext } from 'react-hook-form'
-import { UPLOAD_PATH } from '@utils/config'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import DurationInput from '@components/BackOffice/Form/DurationInput'
+import SubmitButtons from '@components/BackOffice/Form/SubmitButtons'
 import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
 import { UserListField } from '@components/BackOffice/Form/UserListField'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-import SubmitButtons from '@components/BackOffice/Form/SubmitButtons'
-import DurationInput from '@components/BackOffice/Form/DurationInput'
+import { UPLOAD_PATH } from '@utils/config'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { EventModalConfirmationDelete } from './EventModalConfirmationDelete'
 import { DisabledParams, EventFormValues, isFieldDisabled, RegistrationType } from './utils'
 
@@ -30,7 +30,7 @@ type EventFormProps = {
   disabledParams: DisabledParams
 }
 
-const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR', disabledParams }: EventFormProps) => {
+const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR', disabledParams }) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext<EventFormValues>()
   const { viewerSession } = useAppContext()
@@ -55,14 +55,13 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
     >
       <Flex direction="row" alignItems="flex-start" spacing={6} justify="space-between">
         <Flex direction="column" width="70%">
-          <FormControl name={`${currentLocale}-title`} control={control} key={`${currentLocale}-title`} isRequired>
+          <FormControl name={`${currentLocale}-title`} control={control} key={`${currentLocale}-title`}>
             <FormLabel htmlFor={`${currentLocale}-title`} label={intl.formatMessage({ id: 'global.title' })} />
             <FieldInput
               type="text"
               name={`${currentLocale}-title`}
               id={`${currentLocale}-title`}
               control={control}
-              required
               disabled={isDisabled}
             />
           </FormControl>
@@ -127,6 +126,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
               uploadURI={UPLOAD_PATH}
               showThumbnail
               isFullWidth
+              variantColor="default"
             />
           </FormControl>
         </Flex>

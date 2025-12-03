@@ -159,38 +159,55 @@ const EventFormWrapper = ({ eventId, eventData }: EventFormWrapperProps) => {
 
   const defaultValues = getInitialValues(isNewEvent, owner, defaultLocale.code as Locales, eventData)
 
+  const requiredMessage = intl.formatMessage({ id: 'global.required' })
+
   const methods = useForm<EventFormValues>({
     mode: 'onSubmit',
     defaultValues,
     resolver: yupResolver(
-      yup.object().shape({
-        projects: yup.array().when([], {
-          is: () => !!organization || (isProjectAdmin && !isAdmin),
-          then: yup.array().required(intl.formatMessage({ id: 'global.required' })),
-          otherwise: yup.array().notRequired(),
-        }),
-        startAt: yup
-          .string()
-          .required(intl.formatMessage({ id: 'global.required' }))
-          .test((value, context) => {
-            if (!value && context.parent.endAt)
-              return context.createError({ message: intl.formatMessage({ id: 'global.required' }) })
-            return true
-          })
-          .nullable(),
-        endAt: yup
-          .string()
-          .test((value, context) => {
-            if (value && context.parent.startAt && !moment(context.parent.startAt).isBefore(value))
-              return context.createError({ message: intl.formatMessage({ id: 'event-before-date-error' }) })
-            return true
-          })
-          .nullable(),
-      }),
+      (() => {
+        // require title/body only for the default locale (fallback to first platform locale)
+        const localeFields: Record<string, any> = {}
+        const defaultCode = defaultLocale?.code ?? platformLocales?.[0]?.code
+        if (defaultCode) {
+          const keyTitle = `${defaultCode}-title`
+          const keyBody = `${defaultCode}-body`
+          localeFields[keyTitle] = yup.string().required(requiredMessage)
+          localeFields[keyBody] = yup
+            .string()
+            .nullable()
+            .test('is-not-empty-wysiwyg', requiredMessage, value => !isWYSIWYGContentEmpty(value))
+        }
+
+        return yup.object().shape({
+          ...localeFields,
+          projects: yup.array().when([], {
+            is: () => !!organization || (isProjectAdmin && !isAdmin),
+            then: yup.array().required(requiredMessage),
+            otherwise: yup.array().notRequired(),
+          }),
+          startAt: yup
+            .string()
+            .required(requiredMessage)
+            .test((value, context) => {
+              if (!value && context.parent.endAt) return context.createError({ message: requiredMessage })
+              return true
+            })
+            .nullable(),
+          endAt: yup
+            .string()
+            .test((value, context) => {
+              if (value && context.parent.startAt && !moment(context.parent.startAt).isBefore(value))
+                return context.createError({ message: intl.formatMessage({ id: 'event-before-date-error' }) })
+              return true
+            })
+            .nullable(),
+        })
+      })(),
     ),
   })
 
-  const { watch, handleSubmit, setError } = methods
+  const { watch, handleSubmit } = methods
 
   const title = watch(`${currentLocale}-title`)
   const { setBreadCrumbItems } = useNavBarContext()
@@ -240,17 +257,6 @@ const EventFormWrapper = ({ eventId, eventData }: EventFormWrapperProps) => {
         !Number.isNaN(data.maxRegistrations)
           ? Number(data.maxRegistrations)
           : null,
-    }
-
-    const currentBody = data[`${currentLocale}-body`]
-
-    const isEmptyBody = isWYSIWYGContentEmpty(currentBody)
-
-    if (isEmptyBody) {
-      setError(`${currentLocale}-body`, {
-        message: intl.formatMessage({ id: 'global.required' }),
-      })
-      return Promise.resolve()
     }
 
     if (isNewEvent) {
