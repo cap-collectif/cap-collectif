@@ -403,5 +403,6 @@
         "typescript": "^5.8.3",
         "vscode-apollo-relay": "^1.5.2",
         "yarn-audit-fix": "^10.1.1"
-    }
+    },
+    "packageManager": "yarn@1.22.22"
 }
