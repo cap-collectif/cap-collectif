@@ -19,8 +19,9 @@ import { CarrouselElementType } from '@relay/CarrouselQuery.graphql'
 import { DefaultEventCover, DefaultPostCover, DefaultProjectCover, DefaultThemeCover } from './DefaultCovers'
 import moment from 'moment'
 
-export const SECTION_TITLE_MAX_LENGTH = 20
+export const SECTION_TITLE_MAX_LENGTH = 11
 const ITEM_TITLE_MAX_LENGTH = 45
+
 type ItemDate = { startAt: string; endAt?: string | null }
 
 export const getPlaceholder = (type: CarrouselElementType) => {

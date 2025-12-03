@@ -5,12 +5,6 @@ Capco\AppBundle\Entity\Section\Section:
         nbObjects: null
         enabled: true
         associatedFeatures: []
-    SectionHighlighted:
-        type: highlight
-        position: 2
-        nbObjects: null
-        enabled: true
-        associatedFeatures: []
     SectionVideos:
         type: videos
         position: 3
@@ -72,12 +66,6 @@ Capco\AppBundle\Entity\Section\Section:
         id: 'sectionProjectsMap'
         type: projectsMap
         position: 12
-        nbObjects: null
-        enabled: false
-        associatedFeatures: []
-    SectionCarrouselHighlighted:
-        type: carrouselHighlighted
-        position: 2
         nbObjects: null
         enabled: false
         associatedFeatures: []

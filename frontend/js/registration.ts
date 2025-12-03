@@ -4,7 +4,6 @@ import CustomProjectsListApp from './startup/CustomProjectsListApp'
 import NavbarApp from './startup/NavbarAppClient'
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient'
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp'
-import CarouselApp from './startup/CarouselApp'
 import MetricsApp from './startup/MetricsApp'
 import OpinionPageApp from './startup/OpinionPageApp'
 import CommentSectionApp from './startup/CommentSectionApp'
@@ -81,7 +80,7 @@ import AccessDeniedApp from './startup/AccessDeniedApp'
 import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp'
 import NewsLetterPageApp from './startup/NewsLetterPageApp'
 import CarrouselApp from './startup/CarrouselApp'
-import RequirementsPageApp from './startup/RequirementsPageApp';
+import RequirementsPageApp from './startup/RequirementsPageApp'
 import UserAvatarApp from './startup/UserAvatarApp'
 
 ReactOnRails.registerStore({
@@ -106,7 +105,6 @@ ReactOnRails.register({
   SectionPageApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
-  CarouselApp,
   MetricsApp,
   AnalysisPageApp,
   OpinionPageApp,
@@ -157,20 +155,20 @@ ReactOnRails.register({
   RequirementsPageApp,
   UserAvatarApp,
 
-    /* # COMPONENTS INTE CLIENT # */
-    CalendarApp,
-    EngagementListApp,
-    AccordionApp,
-    ConsultationStepApp,
-    ProposalPreviewApp,
-    DebatePreviewApp,
-    UserSliderApp,
-    GlobalStepApp,
-    HomeHeaderApp,
-    ImageSliderApp,
-    ParticipationTutorialApp,
-    ParticipationMotivationApp,
-    DebateCardApp,
-    WhatsNewApp,
-    IDFGeoSearchBarApp,
+  /* # COMPONENTS INTE CLIENT # */
+  CalendarApp,
+  EngagementListApp,
+  AccordionApp,
+  ConsultationStepApp,
+  ProposalPreviewApp,
+  DebatePreviewApp,
+  UserSliderApp,
+  GlobalStepApp,
+  HomeHeaderApp,
+  ImageSliderApp,
+  ParticipationTutorialApp,
+  ParticipationMotivationApp,
+  DebateCardApp,
+  WhatsNewApp,
+  IDFGeoSearchBarApp,
 })

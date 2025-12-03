@@ -186,9 +186,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="contenus">
                 <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.content" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  {isAdmin && (
-                    <SidebarLink text="admin.label.highlighted" href="/admin/capco/app/highlightedcontent/list" />
-                  )}
                   {isAdmin && <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />}
                   {(isAdmin || isProjectAdmin || isOrganizationMember) && (
                     <SidebarLink text="admin.label.post" href="/admin-next/posts" />
@@ -298,12 +295,12 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.emailing_parameters && isAdmin ? (
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}
-                  {(isAdmin || isSuperAdmin) &&
+                  {(isAdmin || isSuperAdmin) && (
                     <SidebarLink
-                    text="admin.label.newsletter_subscription"
-                    href="/admin/capco/app/newslettersubscription/list"
+                      text="admin.label.newsletter_subscription"
+                      href="/admin/capco/app/newslettersubscription/list"
                     />
-                  }
+                  )}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

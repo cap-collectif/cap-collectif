@@ -1,11 +1,4 @@
 Capco\AppBundle\Entity\Section\Section:
-    SectionHighlighted:
-        id: 'sectionHighlighted'
-        type: highlight
-        position: 1
-        nbObjects: null
-        enabled: true
-        associatedFeatures: []
     SectionIntro:
         id: 'sectionIntro'
         type: introduction

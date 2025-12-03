@@ -1,10 +1,4 @@
-Capco\AppBundle\Entity\Section\SectionTranslation:
-    SectionHighlightedFr:
-        locale: fr-FR
-        translatable: '@SectionHighlighted'
-        title: A la une
-        teaser: null
-        body: null
+    Capco\AppBundle\Entity\Section\SectionTranslation:
     SectionIntroFr:
         locale: fr-FR
         translatable: '@SectionIntro'
@@ -63,12 +57,6 @@ Capco\AppBundle\Entity\Section\SectionTranslation:
         locale: fr-FR
         translatable: '@SectionProposals'
         title: Mise en avant d'une étape de collecte
-        teaser: null
-        body: null
-    SectionHighlightedEn:
-        locale: en-GB
-        translatable: '@SectionHighlighted'
-        title: Highlighted
         teaser: null
         body: null
     SectionIntroEn:
@@ -146,13 +134,13 @@ Capco\AppBundle\Entity\Section\SectionTranslation:
     SectionCarrouselHighlightedFr:
         locale: fr-FR
         translatable: '@SectionCarrouselHighlighted'
-        title: '(Nouveau) A la une'
+        title: 'A la une'
         teaser: null
         body: null
     SectionCarrouselHighlightedEn:
         locale: en-GB
         translatable: '@SectionCarrouselHighlighted'
-        title: '(New) Highlighted'
+        title: 'Highlighted'
         teaser: null
         body: null
     SectionCarrouselFr:

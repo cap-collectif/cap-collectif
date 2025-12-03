@@ -58,12 +58,6 @@
         "rolesRequired": [],
         "items": [
             {
-                "title": "admin.label.highlighted",
-                "href": "/admin/capco/app/highlightedcontent/list",
-                "rolesRequired": ["admin"],
-                "featuresRequired": []
-            },
-            {
                 "title": "admin.label.theme",
                 "href": "/admin/capco/app/theme/list",
                 "rolesRequired": ["admin"],
