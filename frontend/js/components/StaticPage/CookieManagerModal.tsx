@@ -55,9 +55,9 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
   }
 
   return (
-    <li className="cookie-manager">
+    <>
       {isLink ? (
-        <div>
+        <li>
           <Button
             variant="link"
             bsStyle="link"
@@ -68,48 +68,50 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
           >
             <FormattedMessage id={cookieTrad || 'cookies-management'} />
           </Button>
-        </div>
+        </li>
       ) : (
-        <CookieBanner id="cookie-banner" className="cookie-banner">
-          <Flex direction="column" spacing={2} className="cookie-text-wrapper">
-            <Text>
-              {intl.formatMessage({
-                id: 'cookies-text',
-              })}
-            </Text>
+        <div>
+          <CookieBanner id="cookie-banner" className="cookie-banner">
+            <Flex direction="column" spacing={2} className="cookie-text-wrapper">
+              <Text>
+                {intl.formatMessage({
+                  id: 'cookies-text',
+                })}
+              </Text>
 
-            <ButtonParameters id="cookies-parameters" onClick={onOpen}>
-              {intl.formatMessage({
-                id: 'setup-cookies',
-              })}
-            </ButtonParameters>
-          </Flex>
+              <ButtonParameters id="cookies-parameters" onClick={onOpen}>
+                {intl.formatMessage({
+                  id: 'setup-cookies',
+                })}
+              </ButtonParameters>
+            </Flex>
 
-          <div className="cookie-button">
-            <ButtonDecline
-              id="cookie-decline-button"
-              onClick={() => {
-                CookieMonster.doNotConsiderFullConsent(true)
-              }}
-            >
-              {intl.formatMessage({
-                id: 'decline-optional-cookies',
-              })}
-            </ButtonDecline>
+            <div className="cookie-button">
+              <ButtonDecline
+                id="cookie-decline-button"
+                onClick={() => {
+                  CookieMonster.doNotConsiderFullConsent(true)
+                }}
+              >
+                {intl.formatMessage({
+                  id: 'decline-optional-cookies',
+                })}
+              </ButtonDecline>
 
-            <ButtonAccept
-              id="cookie-consent"
-              className="btn-cookie-consent"
-              onClick={() => {
-                CookieMonster.considerFullConsent()
-              }}
-            >
-              {intl.formatMessage({
-                id: 'accept-everything',
-              })}
-            </ButtonAccept>
-          </div>
-        </CookieBanner>
+              <ButtonAccept
+                id="cookie-consent"
+                className="btn-cookie-consent"
+                onClick={() => {
+                  CookieMonster.considerFullConsent()
+                }}
+              >
+                {intl.formatMessage({
+                  id: 'accept-everything',
+                })}
+              </ButtonAccept>
+            </div>
+          </CookieBanner>
+        </div>
       )}
 
       <Modal
@@ -140,7 +142,7 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
           </button>
         </Modal.Footer>
       </Modal>
-    </li>
+    </>
   )
 }
 

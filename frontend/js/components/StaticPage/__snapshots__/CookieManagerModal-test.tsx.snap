@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CookieManagerModal /> should render correctly 1`] = `
-<li
-  className="cookie-manager"
->
-  <div>
+<Fragment>
+  <li>
     <Button
       active={false}
       block={false}
@@ -27,7 +25,7 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
         values={Object {}}
       />
     </Button>
-  </div>
+  </li>
   <Modal
     ariaLabel="cookies-management"
     className="modal-cookie-manager"
@@ -79,5 +77,5 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
       </button>
     </Component>
   </Modal>
-</li>
+</Fragment>
 `;

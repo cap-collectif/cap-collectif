@@ -90,7 +90,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
   <div
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
-  <li
+  <div
     class="sc-bcXGCL keKWCf"
   >
     <div
@@ -133,7 +133,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
         </button>
       </div>
     </div>
-  </li>
+  </div>
 </DocumentFragment>
 `;
 

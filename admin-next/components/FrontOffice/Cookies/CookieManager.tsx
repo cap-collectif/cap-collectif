@@ -126,24 +126,28 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
   }
 
   return (
-    <Box as="li" display={display}>
+    <>
       {isLink ? (
-        <Box
-          as="button"
-          type="button"
-          id="cookies-management"
-          fontWeight={CapUIFontWeight.Semibold}
-          onClick={onOpen}
-          {...rest}
-        >
-          {intl.formatMessage({ id: cookieTrad || 'cookies-management' })}
+        <Box as="li">
+          <Box
+            as="button"
+            type="button"
+            id="cookies-management"
+            fontWeight={CapUIFontWeight.Semibold}
+            onClick={onOpen}
+            {...rest}
+          >
+            {intl.formatMessage({ id: cookieTrad || 'cookies-management' })}
+          </Box>
         </Box>
       ) : showBanner ? (
-        <CookieBanner
-          onOpen={onOpen}
-          onRefuse={() => onBannerAction('false')}
-          onAccept={() => onBannerAction('true')}
-        />
+        <Box display={display}>
+          <CookieBanner
+            onOpen={onOpen}
+            onRefuse={() => onBannerAction('false')}
+            onAccept={() => onBannerAction('true')}
+          />
+        </Box>
       ) : null}
 
       {isOpen ? (
@@ -226,7 +230,7 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
           </Modal.Footer>
         </Modal>
       ) : null}
-    </Box>
+    </>
   )
 }
 
