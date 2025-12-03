@@ -56,7 +56,7 @@ export const getVoteParameterInput = ({ _voteTypeForTabs, ...values }: SelectFor
   return {
     voteType: !isAdvanced ? _voteTypeForTabs : hasBudgetToggle ? 'BUDGET' : 'SIMPLE',
     budget: isAdvanced && hasBudgetToggle ? parseInt(String(values.budget)) : null,
-    votesHelpText: isAdvanced ? values.votesHelpText : null,
+    votesHelpText: values.votesHelpText,
     votesMin: isAdvanced && values.votesMin ? parseInt(String(values.votesMin)) : null,
     votesLimit: isAdvanced && values.votesLimit ? parseInt(String(values.votesLimit)) : null,
     votesRanking: isAdvanced ? values.votesRanking ?? false : false,

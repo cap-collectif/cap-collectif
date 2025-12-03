@@ -66,9 +66,23 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
       </Tabs.ButtonList>
       <Tabs.PanelList>
         <Tabs.Panel>
-          {intl.formatMessage({
-            id: 'admin.select.step.simple.vote.prompt',
-          })}
+          <Text mb={2}>
+            {intl.formatMessage({
+              id: 'admin.select.step.simple.vote.prompt',
+            })}
+          </Text>
+          <FormProvider {...formMethods}>
+            <TextEditor
+              variantColor="hierarchy"
+              name="votesHelpText"
+              label={intl.formatMessage({
+                id: 'admin.fields.step.votesHelpText',
+              })}
+              platformLanguage={defaultLocale}
+              selectedLanguage={defaultLocale}
+              placeholder={intl.formatMessage({ id: 'vote-help' })}
+            />
+          </FormProvider>
         </Tabs.Panel>
         <Tabs.Panel>
           <Flex direction="column" gap={4}>
