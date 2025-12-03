@@ -41,16 +41,14 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
     <ListCard.Item
       data-cy={`${sectionFormKey}-section-item`}
       className="section-item"
-      bg="white"
       borderRadius="normal"
       border="1px"
       mb={1}
       mt={1}
-      sx={{ '.cap-buttonGroup': { opacity: 0 } }}
-      _hover={{ '.cap-buttonGroup': { opacity: 1 } }}
       draggable
       width="100%"
       pl={`${offset}px`}
+      sx={{ '& > div': { backgroundColor: 'white !important' } }}
     >
       <Flex direction="column">
         <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight="normal">
