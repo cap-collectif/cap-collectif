@@ -29,6 +29,7 @@ export type ToggleRequirement = {
 
 const REQUIREMENT_STEP_FRAGMENT = graphql`
   fragment Requirements_requirementStep on RequirementStep {
+    __typename
     requirements {
       edges {
         node {
@@ -232,7 +233,11 @@ const Requirements: React.FC<Props> = ({ requirementStep: requirementStepRef }) 
 
   return (
     <Box>
-      <RequirementsReason />
+      {
+        step.__typename === 'ConsultationStep' && (
+          <RequirementsReason />
+        )
+      }
       <ToggleRequirementsList toggleRequirements={toggleRequirements} />
       <CheckBoxRequirementsList />
     </Box>
