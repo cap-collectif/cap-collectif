@@ -1,4 +1,4 @@
-    Capco\AppBundle\Entity\Section\SectionTranslation:
+Capco\AppBundle\Entity\Section\SectionTranslation:
     SectionIntroFr:
         locale: fr-FR
         translatable: '@SectionIntro'
