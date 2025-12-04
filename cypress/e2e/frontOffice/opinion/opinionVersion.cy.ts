@@ -26,7 +26,7 @@ describe('Opinion versions actions', () => {
     cy.get('#confirm-opinion-delete', { timeout: 15000 }).should('exist').should('be.visible').click({ force: true })
 
     OpinionPage.visitVersionPage('NavBarMenuQuery')
-    cy.contains("Désolé une erreur s'est produite… Réessayez plus tard.").should('be.visible')
+    cy.contains('error.404.title').should('be.visible')
   })
 
   context('As an admin', () => {
