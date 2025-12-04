@@ -85,10 +85,11 @@ class CreateProjectMutation implements MutationInterface
             $this->em->flush();
 
             $this->actionLogger->logGraphQLMutation(
-                $owner,
-                LogActionType::CREATE,
-                sprintf('le projet %s', $arguments['title']),
-                $project->getId()
+                user: $viewer,
+                actionType: LogActionType::CREATE,
+                description: sprintf('le projet %s', $arguments['title']),
+                entityType: Project::class,
+                entityId: $project->getId()
             );
         } catch (DriverException $e) {
             $this->logger->error(

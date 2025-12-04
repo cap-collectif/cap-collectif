@@ -125,9 +125,10 @@ class PreConfigureProjectMutation implements MutationInterface
         $this->indexer->finishBulk();
 
         $this->actionLogger->logGraphQLMutation(
-            $owner,
+            $project->getCreator(),
             LogActionType::CREATE,
             sprintf('le projet %s', $title),
+            Project::class,
             $project->getId()
         );
 
