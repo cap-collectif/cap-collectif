@@ -1,9 +1,9 @@
-import React from 'react'
 import { ButtonQuickAction, CapUIFontSize, CapUIIcon, Flex, ListCard, Text } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
 import ConsultationSectionModal from '@components/BackOffice/Steps/ConsultationStep/ConsultationSectionModal'
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { UseFieldArrayRemove } from 'react-hook-form/dist/types/fieldArray'
+import { useIntl } from 'react-intl'
 
 type Props = {
   depth: number
@@ -64,7 +64,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
           {section?.title}
         </Text>
       </Flex>
-      <Flex>
+      <Flex gap="sm">
         <ConsultationSectionModal
           sectionFormKey={sectionFormKey}
           disclosure={
@@ -73,9 +73,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
               data-cy={`${sectionFormKey}-edit-button`}
               variantColor="primary"
               icon={CapUIIcon.Pencil}
-              label={intl.formatMessage({
-                id: 'global.edit',
-              })}
+              label={intl.formatMessage({ id: 'global.edit' })}
               type="button"
             />
           }
@@ -84,9 +82,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
           <ButtonQuickAction
             tooltipZIndex={2}
             data-cy={`${sectionFormKey}-delete-button`}
-            onClick={() => {
-              removeSection(index)
-            }}
+            onClick={() => removeSection(index)}
             variantColor="danger"
             icon={CapUIIcon.Trash}
             label={intl.formatMessage({

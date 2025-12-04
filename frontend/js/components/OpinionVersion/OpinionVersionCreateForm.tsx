@@ -1,17 +1,17 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { graphql, createFragmentContainer } from 'react-relay'
 import { connect } from 'react-redux'
+import { createFragmentContainer, graphql } from 'react-relay'
 import { Field, reduxForm } from 'redux-form'
-import renderInput from '../Form/Field'
-import {
-  startCreatingOpinionVersion,
-  closeOpinionVersionCreateModal,
-  cancelCreatingOpinionVersion,
-} from '../../redux/modules/opinion'
-import AddVersionMutation from '../../mutations/AddVersionMutation'
-import type { State, Dispatch } from '../../types'
 import type { OpinionVersionCreateForm_opinion } from '~relay/OpinionVersionCreateForm_opinion.graphql'
+import AddVersionMutation from '../../mutations/AddVersionMutation'
+import {
+  cancelCreatingOpinionVersion,
+  closeOpinionVersionCreateModal,
+  startCreatingOpinionVersion,
+} from '../../redux/modules/opinion'
+import type { Dispatch, State } from '../../types'
+import renderInput from '../Form/Field'
 
 export const formName = 'opinion-version-create'
 type FormValues = {
@@ -53,7 +53,7 @@ const validate = ({ body, title, comment }: FormValues, props: Props) => {
     errors.body = 'opinion.version.body_error'
   }
 
-  if (title && title.length < 2) {
+  if (!title || title?.length < 2) {
     errors.title = 'global.required'
   }
 
