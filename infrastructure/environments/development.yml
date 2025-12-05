@@ -30,7 +30,7 @@ services:
 
     nextjs:
         container_name: capco_nextjs_1
-        image: 'node:18'
+        image: 'node:20.19'
         user: 'node'
         working_dir: /var/www/admin-next
         links:
