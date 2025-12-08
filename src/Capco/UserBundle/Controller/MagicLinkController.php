@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -53,38 +54,59 @@ class MagicLinkController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
-        $participationCookies = $request->get('participationCookies');
-        $decryptedParticipationCookies = $this->encryptor->decryptData($participationCookies);
-        $cookies = json_decode($decryptedParticipationCookies, true);
-
-        $decryptedReplyCookie = ($cookies['replyCookie'] ?? null) ? $this->encryptor->decryptData($cookies['replyCookie']) : null;
-        $decryptedParticipantCookie = ($cookies['participantCookie'] ?? null) ? $this->encryptor->decryptData($cookies['participantCookie']) : null;
-
-        if ($decryptedParticipantCookie) {
-            try {
-                $participant = $this->participantHelper->getParticipantByToken($decryptedParticipantCookie);
-            } catch (ParticipantNotFoundException) {
-                $this->addFlash('danger', $this->translator->trans('invalid-token'));
-
-                return $this->redirectToRoute('app_homepage');
-            }
-
-            $this->tokenStorage->setToken($securityToken);
-            $viewer = $this->tokenStorage->getToken()->getUser();
-
-            $this->votesReconcilier->reconcile($participant, $viewer);
-
-            if ($decryptedReplyCookie) {
-                $this->replyReconcilier->reconcile($participant, $viewer);
-            }
-
-            $this->em->remove($participant);
-            $this->em->flush();
+        $errorResponse = $this->handleParticipationCookies($request, $securityToken);
+        if ($errorResponse) {
+            return $errorResponse;
         }
 
         $event = new InteractiveLoginEvent($request, $securityToken);
         $this->eventDispatcher->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
 
         return $redirectUrl ? $this->redirect($redirectUrl) : $this->redirectToRoute('app_homepage');
+    }
+
+    private function handleParticipationCookies(Request $request, TokenInterface $securityToken): ?Response
+    {
+        $participationCookies = $request->get('participationCookies');
+        if (!$participationCookies) {
+            return null;
+        }
+
+        $decryptedParticipationCookies = $this->encryptor->decryptData($participationCookies);
+        $cookies = json_decode($decryptedParticipationCookies, true);
+
+        $decryptedParticipantCookie = ($cookies['participantCookie'] ?? null)
+            ? $this->encryptor->decryptData($cookies['participantCookie'])
+            : null;
+
+        if (!$decryptedParticipantCookie) {
+            return null;
+        }
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($decryptedParticipantCookie);
+        } catch (ParticipantNotFoundException) {
+            $this->addFlash('danger', $this->translator->trans('invalid-token'));
+
+            return $this->redirectToRoute('app_homepage');
+        }
+
+        $this->tokenStorage->setToken($securityToken);
+        $viewer = $this->tokenStorage->getToken()->getUser();
+
+        $this->votesReconcilier->reconcile($participant, $viewer);
+
+        $decryptedReplyCookie = ($cookies['replyCookie'] ?? null)
+            ? $this->encryptor->decryptData($cookies['replyCookie'])
+            : null;
+
+        if ($decryptedReplyCookie) {
+            $this->replyReconcilier->reconcile($participant, $viewer);
+        }
+
+        $this->em->remove($participant);
+        $this->em->flush();
+
+        return null;
     }
 }
