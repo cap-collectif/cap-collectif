@@ -1,0 +1,60 @@
+'use client'
+import { Box, Flex } from '@cap-collectif/ui'
+import ProposalStepUserVotesInfos from './ProposalStepUserVotesInfos'
+
+const ProposalContainer = () => {
+  return (
+    <Box sx={{ background: 'grey' }}>
+      <p>Default</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="minMaxRanking" proposalGoal={3} proposalProgress={0} proposalMax={5} />
+        <ProposalStepUserVotesInfos type="minMaxRanking" proposalGoal={3} proposalProgress={1} proposalMax={5} />
+        <ProposalStepUserVotesInfos type="minMaxRanking" proposalGoal={3} proposalProgress={2} proposalMax={5} />
+        <ProposalStepUserVotesInfos type="minMaxRanking" proposalGoal={3} proposalProgress={3} proposalMax={5} />
+        <ProposalStepUserVotesInfos type="minMaxRanking" proposalGoal={3} proposalProgress={5} proposalMax={5} />
+      </Flex>
+      <p>Min</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="min" proposalGoal={3} proposalProgress={0} />
+        <ProposalStepUserVotesInfos type="min" proposalGoal={3} proposalProgress={1} />
+        <ProposalStepUserVotesInfos type="min" proposalGoal={3} proposalProgress={2} />
+        <ProposalStepUserVotesInfos type="min" proposalGoal={3} proposalProgress={3} />
+      </Flex>
+      <p>Max</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="max" proposalGoal={3} proposalProgress={0} />
+        <ProposalStepUserVotesInfos type="max" proposalGoal={3} proposalProgress={1} />
+        <ProposalStepUserVotesInfos type="max" proposalGoal={3} proposalProgress={2} />
+        <ProposalStepUserVotesInfos type="max" proposalGoal={3} proposalProgress={3} />
+      </Flex>
+      <p>Budget</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="budget" proposalGoal={3} proposalProgress={0} amount={30000} />
+        <ProposalStepUserVotesInfos type="budget" proposalGoal={3} proposalProgress={1} amount={30000} />
+      </Flex>
+      <p>Budget min max</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="budgetMinMax" proposalGoal={3} proposalProgress={0} amount={30000} />
+        <ProposalStepUserVotesInfos type="budgetMinMax" proposalGoal={3} proposalProgress={1} amount={30000} />
+        <ProposalStepUserVotesInfos type="budgetMinMax" proposalGoal={3} proposalProgress={2} amount={30000} />
+        <ProposalStepUserVotesInfos type="budgetMinMax" proposalGoal={3} proposalProgress={3} amount={30000} />
+      </Flex>
+      <p>Threshold</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="threshold" proposalGoal={3} proposalProgress={0} amount={100} />
+      </Flex>
+      <p>Simple</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="simple" proposalGoal={3} proposalProgress={0} />
+        <ProposalStepUserVotesInfos type="simple" proposalGoal={3} proposalProgress={1} />
+      </Flex>
+      <p>Max ranking</p>
+      <Flex gap={'xs'} overflowX={'auto'}>
+        <ProposalStepUserVotesInfos type="maxRanking" proposalGoal={3} proposalProgress={0} />
+        <ProposalStepUserVotesInfos type="maxRanking" proposalGoal={3} proposalProgress={1} />
+        <ProposalStepUserVotesInfos type="maxRanking" proposalGoal={3} proposalProgress={2} />
+      </Flex>
+    </Box>
+  )
+}
+export default ProposalContainer

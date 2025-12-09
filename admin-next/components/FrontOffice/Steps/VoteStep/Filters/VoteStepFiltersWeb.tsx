@@ -3,9 +3,9 @@ import VoteStepSearchBar from './VoteStepSearchBar'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepFiltersWeb_proposalStep$key } from '@relay/VoteStepFiltersWeb_proposalStep.graphql'
 import { Box, Button, CapUIIcon, Flex } from '@cap-collectif/ui'
-import { pxToRem } from '@shared/utils/pxToRem'
 import ProposalForm from '../ProposalForm/ProposalForm'
 import { parseAsInteger, useQueryState } from 'nuqs'
+import ProposalStepUserVotesInfos from '@shared/proposal/ProposalStepUserVotesInfos'
 
 type Props = {
   step: VoteStepFiltersWeb_proposalStep$key
@@ -13,6 +13,7 @@ type Props = {
 
 const FRAGMENT = graphql`
   fragment VoteStepFiltersWeb_proposalStep on ProposalStep {
+    ...ProposalStepUserVotesInfos_proposalStep
     __typename
     open
     votable
@@ -59,9 +60,7 @@ const VoteStepFiltersWeb: React.FC<Props> = ({ step: stepKey }) => {
       </Flex>
       {step.votable ? (
         <Box flex="1 1 0">
-          <Flex align="center" justify="center" height={pxToRem(104)} border="1px solid blue">
-            TODO : VOTE COMPONENT
-          </Flex>
+          <ProposalStepUserVotesInfos step={step} />
         </Box>
       ) : null}
     </Flex>
