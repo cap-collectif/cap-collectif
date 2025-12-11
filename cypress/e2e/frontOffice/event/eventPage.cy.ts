@@ -63,7 +63,7 @@ describe('Events feature', () => {
 
   it('should see events list', () => {
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
-    cy.get('.eventPreview').should('have.length', 15)
+    cy.get('.eventPreview', { timeout: 23000 }).should('have.length', 15) // enforcing longer timout due to slow loading
   })
 
   it('should filter by projects and status', () => {

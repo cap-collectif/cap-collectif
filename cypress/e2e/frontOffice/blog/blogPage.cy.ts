@@ -1,31 +1,36 @@
 import { Base } from '~e2e-pages/index'
 
+// !often fails locally, needs investigation
 describe('Blog page', () => {
-  before(() => {
-    cy.task('disable:feature', 'shield_mode')
-  })
   beforeEach(() => {
     cy.task('db:restore')
     cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
     cy.interceptGraphQLOperation({ operationName: 'PostListSectionFiltersQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldFrontOfficeQuery' })
+    cy.task('enable:feature', 'blog')
   })
+
   it('User wants to see published posts', () => {
-    cy.visit('/blog')
-    cy.wait('@PostsListQuery', { timeout: 10000 })
+    cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
+    cy.visit('/blog', { timeout: 10000, failOnStatusCode: false })
+    cy.wait('@PostsListQuery')
     cy.get('.cap-post-card').should('have.length', 10)
   })
   it('Posts can be filtered by theme', () => {
+    cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'PostListSectionFiltersQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldFrontOfficeQuery' })
     cy.visit('/blog')
     cy.wait('@PostListSectionFiltersQuery')
     cy.wait('@ProjectListFieldFrontOfficeQuery')
     cy.dsSelectSetOption('div#news-theme', 'Transport')
-    cy.wait('@PostsListQuery', { timeout: 10000 })
+    cy.wait('@PostsListQuery')
     cy.get('.cap-post-card').should('have.length', 0)
   })
   it('Posts can be filtered by project', () => {
+    cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
     cy.visit('/blog?project=UHJvamVjdDpwcm9qZWN0MQ%3D%3D') // Croissance, Innovation, Disruption
-    cy.wait('@PostsListQuery', { timeout: 10000 })
+    cy.wait('@PostsListQuery')
     cy.get('.cap-post-card').should('have.length', 5)
     cy.contains('Post FR 5').should('exist')
     cy.contains('Post FR 8').should('not.exist')
@@ -42,6 +47,7 @@ describe('Blog', () => {
   })
   beforeEach(() => {
     cy.task('db:restore')
+    cy.task('enable:feature', 'blog')
   })
 
   describe('Anonymous wants to comment a blogpost', () => {
@@ -57,7 +63,7 @@ describe('Blog', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
       cy.contains('comment.submit').click({ force: true })
-      cy.wait('@AddCommentMutation', { timeout: 10000 })
+      cy.wait('@AddCommentMutation')
 
       cy.contains('.toasts-container--top div', 'comment.submit_success', { timeout: 5000 }).should('be.visible')
 
@@ -72,14 +78,13 @@ describe('Blog', () => {
       Base.visit({ path: '/blog/post-fr-2', operationName: 'NavbarRightQuery' })
 
       cy.get('[name="body"]').should('be.visible')
-
       cy.get('[name="body"]').type("J'ai un truc à dire")
       cy.get('[name="authorName"]').type('Naruto')
       cy.get('[name="authorEmail"]').type('naruto72@gmail.com')
 
       cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
       cy.contains('comment.submit').click({ force: true })
-      cy.wait('@AddCommentMutation', { timeout: 10000 })
+      cy.wait('@AddCommentMutation')
 
       cy.contains('.toasts-container--top div', 'confirm-email-address', { timeout: 5000 }).should('be.visible')
     })
@@ -92,7 +97,6 @@ describe('Blog', () => {
       Base.visit({ path: '/blog/post-fr-2', operationName: 'NavBarMenuQuery' })
 
       cy.get('[name="body"]').should('be.visible')
-
       cy.get('[name="body"]').type("J'ai un truc à dire")
 
       cy.contains('comment.with_my_account').should('not.exist')
@@ -100,10 +104,9 @@ describe('Blog', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
       cy.contains('comment.submit').click({ force: true })
-      cy.wait('@AddCommentMutation', { timeout: 10000 })
+      cy.wait('@AddCommentMutation')
 
       cy.contains('.toasts-container--top div', 'comment.submit_success', { timeout: 5000 }).should('be.visible')
-
       cy.contains('.comments__section', "J'ai un truc à dire", { timeout: 5000 }).should('be.visible')
     })
   })

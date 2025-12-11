@@ -2,6 +2,8 @@ import { DebatePage } from '~e2e-pages/index'
 
 // ------------------- AS ANONYMOUS USER -------------------
 describe('Debate - Anonymous vote', () => {
+  // !captcha validation is highly flaky in this test
+  // it has to be this much for now
   beforeEach(() => {
     cy.task('db:restore')
     DebatePage.visitCannabisDebate()
@@ -11,6 +13,7 @@ describe('Debate - Anonymous vote', () => {
     cy.interceptGraphQLOperation({ operationName: 'AddDebateAnonymousVoteMutation' })
     DebatePage.clickOnVoteForButton()
     cy.contains('publish-anonymous-debate-vote-bot').should('exist')
+    cy.wait(1000) // wait for the captcha
     cy.confirmCaptcha()
     cy.wait(1000) // wait for the captcha
 
@@ -22,6 +25,7 @@ describe('Debate - Anonymous vote', () => {
     cy.interceptGraphQLOperation({ operationName: 'AddDebateAnonymousVoteMutation' })
     DebatePage.clickOnVoteAgainstButton()
     cy.contains('publish-anonymous-debate-vote-bot').should('exist')
+    cy.wait(1000) // wait for the captcha
     cy.confirmCaptcha()
     cy.wait(1000) // wait for the captcha
 

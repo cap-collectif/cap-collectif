@@ -1,4 +1,4 @@
-import { ProposalPage, ProposalVoteListPage, ParticipationWorkflowPage, ProjectHeaderPage } from '~e2e/pages'
+import { ParticipationWorkflowPage, ProjectHeaderPage, ProposalPage, ProposalVoteListPage } from '~e2e/pages'
 
 describe('Proposal Selection Vote Page workflow', () => {
   beforeEach(() => {
@@ -14,9 +14,9 @@ describe('Proposal Selection Vote Page workflow', () => {
       })
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = true
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteC', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteC', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -73,9 +73,9 @@ describe('Proposal Selection Vote Page workflow', () => {
       })
       const userAuhtenticationState = 'LOGGED_IN'
       const isAnonymous = false
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteC', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteC', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -121,9 +121,9 @@ describe('Proposal Selection Vote Page workflow', () => {
       })
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = false
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteC', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteC', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -174,9 +174,9 @@ describe('Proposal Selection Vote Page workflow', () => {
       })
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = false
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteC', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteC', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -229,9 +229,9 @@ describe('Proposal Selection Vote Page workflow', () => {
         step: 'vote-parcours-min-3-max-5',
       })
       const userAuhtenticationState = 'ANONYMOUS'
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteC', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteC', userAuhtenticationState)
 
       ParticipationWorkflowPage.fillConsentInternalCommunicationEmail({ email: 'johndoe@gmail.com' })
     })
@@ -245,9 +245,9 @@ describe('Proposal Selection Vote Page workflow', () => {
       })
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = false
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -293,9 +293,9 @@ describe('Proposal Selection Vote Page workflow', () => {
         step: 'vote-parcours-min-3-max-5',
       })
       const userAuhtenticationState = 'ANONYMOUS'
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState)
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState)
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState)
 
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
 
@@ -316,11 +316,11 @@ describe('Proposal Selection Vote Page workflow', () => {
         project: 'bp-vote-parcours-min-2-max-2',
         step: 'vote-parcours-min-2-max-2',
       })
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVote2-A', 'LOGGED_IN')
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVote2-A', 'LOGGED_IN')
       ProposalVoteListPage.getVoteWidgetCounter().should('have.text', 1)
       cy.logout()
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVote2-B', 'ANONYMOUS')
-      ProposalVoteListPage.validateVotMin('proposalWorkflowVote2-C', 'ANONYMOUS')
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVote2-B', 'ANONYMOUS')
+      ProposalVoteListPage.validateVoteMin('proposalWorkflowVote2-C', 'ANONYMOUS')
       cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
       ParticipationWorkflowPage.loginWithCredentials({
         email: 'lbrunet@cap-collectif.com',
@@ -356,11 +356,11 @@ describe('Proposal Selection Vote Page workflow', () => {
           project: 'bp-vote-parcours',
           step: 'vote-parcours-min-3-max-5',
         })
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', 'LOGGED_IN')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', 'LOGGED_IN')
         cy.logout()
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', 'ANONYMOUS')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'ANONYMOUS')
 
         ParticipationWorkflowPage.loginWithCredentials({
           email: 'pierre@cap-collectif.com',
@@ -390,10 +390,10 @@ describe('Proposal Selection Vote Page workflow', () => {
           project: 'bp-vote-parcours',
           step: 'vote-parcours-min-3-max-5',
         })
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', 'LOGGED_IN')
         cy.logout()
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', 'ANONYMOUS')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'ANONYMOUS')
 
         ParticipationWorkflowPage.loginWithCredentials({
           email: 'pierre@cap-collectif.com',
@@ -420,7 +420,7 @@ describe('Proposal Selection Vote Page workflow', () => {
           step: 'vote-parcours-min-3-max-5',
         })
         ProposalVoteListPage.validateSimpleVote('proposalWorkflowVoteF', 'LOGGED_IN')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'LOGGED_IN', true)
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'LOGGED_IN', true)
         cy.logout()
         ProposalVoteListPage.validateSimpleVote('proposalWorkflowVoteD', 'ANONYMOUS')
 
@@ -449,8 +449,8 @@ describe('Proposal Selection Vote Page workflow', () => {
           step: 'vote-parcours-min-3-max-5',
         })
         ProposalVoteListPage.validateSimpleVote('proposalWorkflowVoteF', 'LOGGED_IN')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'LOGGED_IN', true)
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', 'LOGGED_IN', true)
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'LOGGED_IN', true)
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', 'LOGGED_IN', true)
         cy.logout()
         ProposalVoteListPage.validateSimpleVote('proposalWorkflowVoteE', 'ANONYMOUS')
 
@@ -494,14 +494,14 @@ describe('Proposal Selection Vote Page workflow', () => {
           project: 'bp-vote-parcours',
           step: 'vote-parcours-min-3-max-5',
         })
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', 'LOGGED_IN')
         ProposalVoteListPage.getBugdetSpent().contains('600')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteB', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteB', 'LOGGED_IN')
         ProposalVoteListPage.getBugdetSpent().contains('700')
         cy.logout()
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', 'ANONYMOUS')
         ProposalVoteListPage.getBugdetSpent().contains('200')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'ANONYMOUS')
 
         ParticipationWorkflowPage.loginWithCredentials({
           email: 'pierre@cap-collectif.com',
@@ -530,12 +530,12 @@ describe('Proposal Selection Vote Page workflow', () => {
           project: 'bp-vote-parcours',
           step: 'vote-parcours-min-3-max-5',
         })
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteA', 'LOGGED_IN')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteA', 'LOGGED_IN')
         ProposalVoteListPage.getBugdetSpent().contains('600')
         cy.logout()
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', 'ANONYMOUS')
         ProposalVoteListPage.getBugdetSpent().contains('200')
-        ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', 'ANONYMOUS')
+        ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', 'ANONYMOUS')
 
         ParticipationWorkflowPage.loginWithCredentials({
           email: 'pierre@cap-collectif.com',
@@ -572,9 +572,9 @@ describe.skip('Counters', () => {
     })
     const userAuhtenticationState = 'LOGGED_IN'
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
 
     ProposalVoteListPage.getProposalCounter('proposalWorkflowVoteE').contains('1')
     ProposalVoteListPage.getProposalCounter('proposalWorkflowVoteF').contains('1')
@@ -612,9 +612,9 @@ describe.skip('Counters', () => {
     })
     const userAuhtenticationState = 'LOGGED_IN'
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
 
     ParticipationWorkflowPage.fillBirthDate({
       isAnonymous: false,
@@ -743,11 +743,11 @@ describe.skip('Counters', () => {
     })
     const userAuhtenticationState = 'ANONYMOUS'
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState)
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState)
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
 
     ParticipationWorkflowPage.fillConsentInternalCommunicationEmail({ email: null })
 
@@ -783,11 +783,11 @@ describe.skip('Counters', () => {
     })
     const userAuhtenticationState = 'ANONYMOUS'
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState)
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState)
     ProjectHeaderPage.getProjectContributorsCounter().contains('1')
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState)
 
     ParticipationWorkflowPage.fillBirthDate({
       isAnonymous: true,
@@ -921,9 +921,9 @@ describe('votes ranking', () => {
       step: 'vote-parcours-min-3-max-5',
     })
     const userAuhtenticationState = 'ANONYMOUS'
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState, true)
 
     ParticipationWorkflowPage.fillBirthDate({
       isAnonymous: true,
@@ -950,9 +950,9 @@ describe('votes ranking', () => {
       step: 'vote-parcours-min-3-max-5',
     })
     const userAuhtenticationState = 'ANONYMOUS'
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState, true)
 
     ParticipationWorkflowPage.fillConsentInternalCommunicationEmail({ email: null })
 
@@ -985,9 +985,9 @@ describe('votes ranking', () => {
       step: 'vote-parcours-min-3-max-5',
     })
     const userAuhtenticationState = 'LOGGED_IN'
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState, true)
 
     ParticipationWorkflowPage.fillBirthDate({
       isAnonymous: false,
@@ -1016,9 +1016,9 @@ describe('votes ranking', () => {
       step: 'vote-parcours-min-3-max-5',
     })
     const userAuhtenticationState = 'LOGGED_IN'
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteE', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteF', userAuhtenticationState, true)
-    ProposalVoteListPage.validateVotMin('proposalWorkflowVoteD', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteE', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteF', userAuhtenticationState, true)
+    ProposalVoteListPage.validateVoteMin('proposalWorkflowVoteD', userAuhtenticationState, true)
 
     ProjectHeaderPage.getVotesPointsCounter('proposalWorkflowVoteE').contains('5')
     ProjectHeaderPage.getVotesPointsCounter('proposalWorkflowVoteF').contains('4')

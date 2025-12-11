@@ -4,10 +4,10 @@ describe('Arguments - CRUD & Permissions', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
-
   context('As anonymous', () => {
     it('should not see edit button on version (as anonymous)', () => {
       OpinionPage.visitVersionPage()
+      cy.isLoggedOut()
       cy.get('.argument__edit-button').should('not.exist')
     })
 
@@ -27,7 +27,8 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should create a published argument in an opinion', () => {
       OpinionPage.visitOpinionArgument()
-      cy.get('#opinion__arguments--FOR').should('contain', 'count-arguments-for')
+      cy.isLoggedIn()
+      cy.get('#opinion__arguments--FOR').invoke('text').should('contain', 'count-arguments-for')
 
       OpinionPage.submitArgument({ content: 'Nouvel argument publié' })
       cy.get('#opinion__arguments--FOR').should('contain', 'Nouvel argument publié')
@@ -53,6 +54,7 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should update argument and loses votes', () => {
       OpinionPage.visitOpinionArgument()
+      OpinionPage.submitArgument({ content: 'Argument à modifier' })
 
       OpinionPage.editArgument({ content: 'Argument mis à jour' })
 
@@ -63,6 +65,8 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should update argument in version and loses votes', () => {
       OpinionPage.visitVersionPage()
+      OpinionPage.submitArgument({ content: 'Argument version à modifier' })
+
       OpinionPage.editArgument({ content: 'Màj argument version' })
 
       cy.get('.toasts-container--top div').should('contain', 'alert.success.update.argument')
@@ -72,6 +76,8 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should delete argument from opinion', () => {
       OpinionPage.visitOpinionArgument()
+      OpinionPage.submitArgument({ content: 'Argument à supprimer' })
+
       OpinionPage.deleteArgument()
 
       cy.get('.toasts-container--top div').should('contain', 'alert.success.delete.argument')
@@ -79,21 +85,22 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should delete their argument from version', () => {
       OpinionPage.visitVersionPage()
+      OpinionPage.submitArgument({ content: 'Argument version à supprimer' })
+
       OpinionPage.deleteArgument()
 
       cy.get('.toasts-container--top div').should('contain', 'alert.success.delete.argument')
     })
 
     it('should not vote for their own argument (opinion & version)', () => {
-      cy.task('db:restore')
       OpinionPage.visitOpinionArgument()
       OpinionPage.submitArgument({ content: 'Nouvel argument publié' })
       cy.get('#opinion__arguments--FOR').first().should('contain', 'Nouvel argument publié')
       cy.get('.opinion__votes-button > button').should('be.disabled')
 
       OpinionPage.visitVersionPage()
-      OpinionPage.submitArgument({ content: 'Nouvel argument publié' })
-      cy.get('#opinion__arguments--FOR').first().should('contain', 'Nouvel argument publié')
+      OpinionPage.submitArgument({ content: 'Nouvel argument publié version' })
+      cy.get('#opinion__arguments--FOR').first().should('contain', 'Nouvel argument publié version')
       cy.get('.opinion__votes-button > button').should('be.disabled')
     })
 
@@ -127,6 +134,7 @@ describe('Arguments - CRUD & Permissions', () => {
 
     it('should not see edit button on version (as admin) ', () => {
       OpinionPage.visitVersionPage()
+      cy.isLoggedIn()
       cy.get('.argument__edit-button').should('not.exist')
     })
 
@@ -146,7 +154,9 @@ describe('Arguments - CRUD & Permissions', () => {
       cy.get('#report-form').should('be.visible')
       cy.get('#reportType').select('1')
       cy.get('#reportBody').type('Contenu offensant')
+      cy.interceptGraphQLOperation({ operationName: 'ReportMutation' })
       cy.get('#report-button-submit').click({ force: true })
+      cy.wait('@ReportMutation')
 
       cy.get('.toasts-container--top div').should('contain', 'alert.success.report.argument')
     })

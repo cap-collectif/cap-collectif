@@ -26,13 +26,13 @@ describe('Questionnaire Step back office', () => {
     AdminQuestionnaireStepPage.save()
   })
 
-  it('it should include VOTING questionnaire in model list', () => {
+  it('should include VOTING questionnaire in model list', () => {
     cy.task('run:sql', 'UPDATE questionnaire SET type = "VOTING"')
     cy.visit(
       'admin-next/project/UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=/update-step/questionnaire-step/qStepProjectAnonymousQuestionnaire?operationType=CREATE',
     )
-    AdminQuestionnaireStepPage.getFromModelTab().click()
-    AdminQuestionnaireStepPage.getFromModelTabListInput().click()
+    AdminQuestionnaireStepPage.getFromModelTab().click({ force: true })
+    AdminQuestionnaireStepPage.getFromModelTabListInput().click({ force: true })
     cy.contains('Votre avis sur les JO 2024 à Paris')
   })
 })

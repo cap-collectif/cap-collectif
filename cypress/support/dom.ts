@@ -5,10 +5,11 @@ Cypress.Commands.add('confirmCaptcha', () => {
     const $recaptcha = win.document.querySelector("iframe[src*='recaptcha']")
     if ($recaptcha) {
       // @ts-ignore
-      $recaptcha.contentDocument.getElementById('recaptcha-token').click()
+      $recaptcha.contentDocument.getElementById('recaptcha-token', { timeout: 10000 }).click({ force: true })
     }
     const $captcha = win.document.querySelector("iframe[src*='turnstile']")
     if ($captcha) {
+      // @ts-ignore
       cy.get($captcha.contentDocument.getElementById('success')).should('be.visible')
     }
   })

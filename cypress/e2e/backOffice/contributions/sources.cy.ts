@@ -7,7 +7,7 @@ describe('Contributions BO - sources page', () => {
   it('views sources page when logged in as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     cy.visit('/admin/capco/app/source/list')
-    cy.wait('@AdminRightNavbarAppQuery', { timeout: 10000 }).its('response.statusCode').should('not.eq', 500)
+    cy.wait('@AdminRightNavbarAppQuery').its('response.statusCode').should('not.eq', 500)
     cy.get('table tr').should('have.length.greaterThan', 20)
   })
 })

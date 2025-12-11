@@ -113,27 +113,40 @@ export default new (class OpinionPage {
       this.cy.get('button').click({ force: true })
       this.cy.wait('@AddArgumentMutation', { timeout: 10000 })
     })
+    this.cy.get('#opinion__arguments--FOR').should('exist').and('be.visible').invoke('text').should('contain', content)
   }
+
   editArgument({ content = '' }: { content: string }) {
     this.cy.get('#edit-button').click({ force: true })
-    this.cy.get('#argument-form').within(() => {
-      this.cy.get('textarea').clear().type(content)
-      this.cy.get('[name="confirm"]').check({ force: true })
-    })
+    this.cy
+      .get('#argument-form')
+      .should('be.visible')
+      .within(() => {
+        this.cy.get('textarea').clear().type(content)
+        this.cy.get('[name="confirm"]').check({ force: true })
+      })
     this.cy.interceptGraphQLOperation({ operationName: 'ChangeArgumentMutation' })
     this.cy.get('#confirm-argument-update').click({ force: true })
     this.cy.wait('@ChangeArgumentMutation', { timeout: 10000 })
+    this.cy.get('.opinion__text').should('exist').and('be.visible').invoke('text').should('contain', content)
   }
+
   editArgumentWithoutConfirm({ content = '' }: { content: string }) {
     this.cy.get('#edit-button').click({ force: true })
-    this.cy.get('#argument-form').within(() => {
-      this.cy.get('textarea').clear().type(content)
-    })
+    this.cy
+      .get('#argument-form')
+      .should('be.visible')
+      .within(() => {
+        this.cy.get('textarea').clear().type(content)
+      })
     this.cy.get('#confirm-argument-update').click({ force: true })
-    cy.get('#argument-form').should('contain', 'argument.constraints.confirm')
+    this.cy.get('#argument-form').should('contain', 'argument.constraints.confirm')
   }
+
   deleteArgument() {
     this.cy.get('#delete-button').click({ force: true })
+    this.cy.interceptGraphQLOperation({ operationName: 'DeleteArgumentMutation' })
     this.cy.get('#confirm-argument-delete').click({ force: true })
+    this.cy.wait('@DeleteArgumentMutation')
   }
 })()

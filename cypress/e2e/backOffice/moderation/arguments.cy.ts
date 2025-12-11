@@ -11,7 +11,7 @@ describe('Contributions BO - arguments page', () => {
       // returning false here prevents Cypress from failing the test
       return false
     })
-    cy.wait('@AdminRightNavbarAppQuery', { timeout: 10000 }).its('response.statusCode').should('not.eq', 500)
+    cy.wait('@AdminRightNavbarAppQuery').its('response.statusCode').should('not.eq', 500)
     cy.get('table tr').should('have.length.greaterThan', 20)
   })
 })

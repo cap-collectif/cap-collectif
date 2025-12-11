@@ -47,7 +47,7 @@ export default new (class ProposalVoteListPage {
     return this.cy.get('#contributors-count')
   }
 
-  validateVotMin(proposalId: string, userAuthenticationState: UserAuthenticationState, hasVotesRanking = false) {
+  validateVoteMin(proposalId: string, userAuthenticationState: UserAuthenticationState, hasVotesRanking = false) {
     this.addVoteMutation(userAuthenticationState).intercept()
     if (hasVotesRanking) {
       this.updateVotesMutation(userAuthenticationState).intercept()

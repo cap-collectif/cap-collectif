@@ -9,7 +9,7 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    return cy.wait('@inviteQuery', { timeout: 5000 }).then(req => {
+    return cy.wait('@inviteQuery').then(req => {
       expect(req.response?.statusCode).not.eq(500)
     })
   })
@@ -19,7 +19,7 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    cy.wait('@inviteQuery', { timeout: 5000 })
+    cy.wait('@inviteQuery')
     UserInvitePage.getInviteButton().click()
     UserInvitePage.addEmailToInvite()
     UserInvitePage.getGoToRoleStepButton().click()
@@ -28,7 +28,7 @@ describe('User invitation as admin', () => {
     cy.get('div').contains('user-invite.sending-confirmation.body.groups').should('exist')
     UserInvitePage.getSendInvitationButton().click()
     // eslint-disable-next-line jest/valid-expect-in-promise
-    cy.wait('@InviteUserMutation', { timeout: 5000 }).then(req => {
+    cy.wait('@InviteUserMutation').then(req => {
       expect(req.response?.body?.data?.inviteUsers?.newInvitations).to.have.length(1)
       expect(req.response?.statusCode).not.eq(500)
     })
@@ -40,10 +40,10 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    cy.wait('@inviteQuery', { timeout: 5000 })
+    cy.wait('@inviteQuery')
     UserInvitePage.openInvitationModal()
     UserInvitePage.addCsvFile('correct')
-    cy.wait('@ImportMembersUploader_UsersAvailabilityQuery', { timeout: 5000 })
+    cy.wait('@ImportMembersUploader_UsersAvailabilityQuery')
     UserInvitePage.checkResultBanners('correct')
   })
 
@@ -52,7 +52,7 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    cy.wait('@inviteQuery', { timeout: 5000 })
+    cy.wait('@inviteQuery')
     UserInvitePage.openInvitationModal()
     UserInvitePage.addCsvFile('wrong-format')
     UserInvitePage.checkResultBanners('wrong-format')
@@ -63,7 +63,7 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'RelaunchUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    cy.wait('@inviteQuery', { timeout: 5000 })
+    cy.wait('@inviteQuery')
     UserInvitePage.getRelaunchButton().should('not.exist')
     UserInvitePage.getExpiredRows().should('have.length', 3)
 
@@ -96,7 +96,7 @@ describe('User invitation as admin', () => {
     UserInvitePage.getRelaunchButton().should('not.have.attr', 'disabled')
     UserInvitePage.confirmRelaunch()
     // eslint-disable-next-line jest/valid-expect-in-promise
-    cy.wait('@RelaunchUserInvitationsMutation', { timeout: 5000 }).then(req => {
+    cy.wait('@RelaunchUserInvitationsMutation').then(req => {
       return expect(req.response?.statusCode).not.eq(500)
     })
     UserInvitePage.getExpiredRows().should('have.length', 0)
@@ -107,10 +107,10 @@ describe('User invitation as admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'CancelUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
-    cy.wait('@inviteQuery', { timeout: 5000 })
+    cy.wait('@inviteQuery')
     UserInvitePage.getInvitationRows().should('have.length', 13)
     UserInvitePage.getQuickActionDeleteButton().click()
-    cy.wait('@CancelUserInvitationsMutation', { timeout: 5000 })
+    cy.wait('@CancelUserInvitationsMutation')
     UserInvitePage.getInvitationRows().should('have.length', 12)
   })
 
@@ -125,7 +125,7 @@ describe('User invitation as admin', () => {
     UserInvitePage.getDeleteButton().should('exist').click()
     UserInvitePage.confirmDelete()
     // eslint-disable-next-line jest/valid-expect-in-promise
-    cy.wait('@CancelUserInvitationsMutation', { timeout: 5000 }).then(req => {
+    cy.wait('@CancelUserInvitationsMutation').then(req => {
       return expect(req.response?.statusCode).not.eq(500)
     })
     UserInvitePage.getInvitationRows().should('have.length', 1)
@@ -141,7 +141,7 @@ describe('User invitation as super-admin', () => {
     cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.directLoginAs('super_admin')
     UserInvitePage.visitInviteUser()
-    return cy.wait('@inviteQuery', { timeout: 5000 }).then(req => {
+    return cy.wait('@inviteQuery').then(req => {
       expect(req.response?.statusCode).not.eq(500)
     })
   })
