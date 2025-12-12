@@ -5,7 +5,6 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useCookies } from 'next-client-cookies'
 import { useIntl } from 'react-intl'
 import { VoteStepQuery } from '@relay/VoteStepQuery.graphql'
-import useIsMobile from '@shared/hooks/useIsMobile'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE } from '@shared/utils/cookies'
 import VoteStepWebLayout from './VoteStepWebLayout'
@@ -72,7 +71,6 @@ export const VoteStep: React.FC<
   const { setBreadCrumbItems } = useNavBarContext()
   const { project, label, form, __typename } = prefetchedStep
   const cookies = useCookies()
-  const isMobile = useIsMobile()
   const intl = useIntl()
   const token = cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)
     ? JSON.parse(atob(cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)))
@@ -97,7 +95,7 @@ export const VoteStep: React.FC<
   return (
     <>
       {hasMapView ? <LeafletStyles /> : null}
-      <React.Suspense fallback={isMobile ? null : <VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
+      <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
         <VoteStepWeb stepSlug={stepSlug} projectSlug={projectSlug} token={token} />
       </React.Suspense>
     </>

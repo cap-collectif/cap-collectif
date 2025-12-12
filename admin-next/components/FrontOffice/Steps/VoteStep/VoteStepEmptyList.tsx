@@ -1,91 +1,55 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, Button, CapUIFontSize, Flex, Text, useTheme } from '@cap-collectif/ui'
-import { useQueryStates } from 'nuqs'
+import { parseAsString, useQueryStates } from 'nuqs'
+import { checkIfAllFiltersAreNull } from '@shared/utils/filtersHelper'
 
-const VoteStepEmptyList = ({
-  isMapMobileView = false,
-  noData = false,
-}: {
-  isMapMobileView?: boolean
-  noData?: boolean
-}) => {
+const filterParsers = {
+  term: parseAsString,
+  sort: parseAsString,
+  userType: parseAsString,
+  theme: parseAsString,
+  category: parseAsString,
+  district: parseAsString,
+  status: parseAsString,
+  latlng: parseAsString,
+  latlngBounds: parseAsString,
+}
+
+const VoteStepEmptyList: React.FC = () => {
   const intl = useIntl()
   const { colors } = useTheme()
-  const [, setFilters] = useQueryStates(
-    {
-      term: null,
-      sort: null,
-      userType: null,
-      theme: null,
-      category: null,
-      district: null,
-      status: null,
-      latlng: null,
-      latlngBounds: null,
-    },
-    {
-      history: 'push',
-    },
-  )
+  const [filters, setFilters] = useQueryStates(filterParsers, {
+    history: 'push',
+  })
 
+  /* We need it for svg color */
   const fill = colors.primary.base
 
   const resetFilters = () => {
     setFilters(null)
   }
 
+  const hasData = !checkIfAllFiltersAreNull(filters)
+
   return (
     <Flex
-      p={6}
-      mx={[isMapMobileView ? 0 : 4, 0]}
+      p="md"
+      mx={[4, 0]}
       bg="white"
       border="none"
       borderRadius="accordion"
       alignItems="center"
-      direction={['column-reverse', 'row-reverse']}
-      justifyContent="space-between"
-      mt={['7rem', 0]}
-      position={isMapMobileView ? 'absolute' : 'relative'}
-      bottom={isMapMobileView ? 0 : 'unset'}
+      direction={['column', 'row']}
+      gap="lg"
+      position="relative"
+      bottom="unset"
       zIndex={1}
     >
-      <Box width={noData ? '100%' : ''}>
-        <Text as="h2" role="status" mb={1} fontSize={CapUIFontSize.Headline} fontWeight="700" color="neutral-gray.900">
-          {intl.formatMessage({
-            id: noData ? 'proposal.empty' : 'no-result-on-search',
-          })}
-        </Text>
-        {!noData ? (
-          <>
-            <Text as="p" fontSize={CapUIFontSize.BodyRegular}>
-              {intl.formatMessage({
-                id: 'try-new-keywords',
-              })}
-            </Text>
-            <Button
-              type="button"
-              onClick={resetFilters}
-              py={[3, isMapMobileView ? 3 : 1]}
-              mt={5}
-              variant="secondary"
-              variantColor="primary"
-              width={['100%', isMapMobileView ? '100%' : 'unset']}
-              justifyContent="center"
-            >
-              {intl.formatMessage({
-                id: 'start-over',
-              })}
-            </Button>
-          </>
-        ) : null}
-      </Box>
-      <Box width="100%" maxHeight="15rem" textAlign="center" mb={[6, 0]}>
+      <Box textAlign="center" p="xs">
         <svg
+          width="100%"
           height="100%"
-          style={{
-            maxHeight: '15rem',
-          }}
           viewBox="0 0 202 139"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -662,6 +626,23 @@ const VoteStepEmptyList = ({
             fill="#2B2B2B"
           />
         </svg>
+      </Box>
+      <Box width={!hasData ? '100%' : ''} p="md">
+        <Text as="h2" role="status" mb="xxs" color="text.primary" fontSize={CapUIFontSize.Headline} fontWeight="700">
+          {intl.formatMessage({
+            id: !hasData ? 'front.proposal.empty-list' : 'no-result-on-search',
+          })}
+        </Text>
+        {hasData ? (
+          <>
+            <Text as="p" fontSize={CapUIFontSize.BodyLarge}>
+              {intl.formatMessage({ id: 'try-new-keywords' })}
+            </Text>
+            <Button onClick={resetFilters} variantSize="small" variant="secondary" mt="md">
+              {intl.formatMessage({ id: 'start-over' })}
+            </Button>
+          </>
+        ) : null}
       </Box>
     </Flex>
   )

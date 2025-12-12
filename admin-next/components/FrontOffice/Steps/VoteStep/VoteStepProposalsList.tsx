@@ -4,6 +4,7 @@ import { graphql, usePaginationFragment } from 'react-relay'
 import { VoteStepProposalsList_proposalStep$key } from '@relay/VoteStepProposalsList_proposalStep.graphql'
 import ProposalCard from '@components/FrontOffice/ProposalCard/ProposalCard'
 import VoteStepEmptyList from './VoteStepEmptyList'
+import { useQueryState } from 'nuqs'
 
 type Props = { step: VoteStepProposalsList_proposalStep$key; templateColumns: string }
 
@@ -51,13 +52,13 @@ const PROPOSALS_FRAGMENT = graphql`
 
 export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, templateColumns }) => {
   const { data } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
-
   const proposalsLength = data?.proposals?.edges?.length
+  const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
 
   return proposalsLength ? (
-    <Grid templateColumns={['1fr', templateColumns]} gap="lg">
+    <Grid templateColumns={listView === 'grid' ? ['1fr', templateColumns] : '1fr'} gap="lg">
       {data.proposals.edges.map(({ node }) => (
-        <ProposalCard key={node.id} proposal={node} primaryInfoTag="h2" minWidth="unset" />
+        <ProposalCard key={node.id} proposal={node} />
       ))}
     </Grid>
   ) : (

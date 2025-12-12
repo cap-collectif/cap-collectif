@@ -55,7 +55,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger)
 
-  const templateColumns = 'repeat(auto-fit, minmax(300px, 1fr))'
+  const templateColumns = 'repeat(auto-fit, minmax(300px, 2fr))'
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
   const mapStickyPositionFromTop = step.votable ? 156 : 88

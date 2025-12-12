@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-// import { useIntl } from 'react-intl'
-// import { formatCounter, renderTag } from './ProjectCard.utils'
 import {
   BoxProps,
   Card,
@@ -10,14 +8,13 @@ import {
   CardCoverPlaceholder,
   CardCover,
   CardContent,
-  // CardTagList,
   CardProps,
 } from '@cap-collectif/ui'
-// import htmlDecode from '@shared/utils/htmlDecode'
-// import { getSrcSet } from '@shared/ui/Image'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import stripHTML from '@shared/utils/stripHTML'
 import convertIconToDs from '@shared/utils/convertIconToDs'
+import { useQueryState } from 'nuqs'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = BoxProps & {
   proposal: ProposalCard_proposal$key
@@ -48,7 +45,6 @@ const FRAGMENT = graphql`
 `
 
 export const ProposalCard = ({ proposal: proposalKey, primaryInfoTag, ...props }: Props) => {
-  // const intl = useIntl()
   const proposal = useFragment(FRAGMENT, proposalKey)
   const { id, title, url, media, summary, body, category } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
@@ -57,8 +53,17 @@ export const ProposalCard = ({ proposal: proposalKey, primaryInfoTag, ...props }
   const proposalIcon = category?.icon ? convertIconToDs(category?.icon) : CapUIIcon.BubbleO
   const proposalColor = category?.color || 'primary.base'
 
+  const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
+
   return (
-    <Card id={`cap-proposal-card-${id}`} className="cap-proposal-card" {...props}>
+    <Card
+      id={`cap-proposal-card-${id}`}
+      className="cap-proposal-card"
+      format={listView === 'grid' ? 'vertical' : 'horizontal'}
+      maxWidth={listView === 'grid' ? ['unset', pxToRem(460), pxToRem(394)] : 'unset'}
+      minWidth="unset"
+      {...props}
+    >
       <CardCover>
         {proposalCover ? (
           <CardCoverImage /*{...getSrcSet(proposalCover)}*/ src={proposalCover} />
@@ -67,7 +72,7 @@ export const ProposalCard = ({ proposal: proposalKey, primaryInfoTag, ...props }
         )}
         {/* {renderTag(project, intl)} */}
       </CardCover>
-      <CardContent primaryInfo={title} secondaryInfo={summaryOrBodyExcerpt} href={url} primaryInfoTag={primaryInfoTag}>
+      <CardContent primaryInfo={title} secondaryInfo={summaryOrBodyExcerpt} href={url} primaryInfoTag={'h2'}>
         TODO : les compteurs
         {/* {showCounters ? (
           <CardTagList>
