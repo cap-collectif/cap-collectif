@@ -77,7 +77,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
         </Box>
         <Box>
           <Flex justifyContent="space-between" gap="lg">
-            {isMapExpanded ? (
+            {!isMapExpanded ? (
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
