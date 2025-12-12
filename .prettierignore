@@ -3,3 +3,4 @@ __generated__
 package.json
 app/config/config.yml
 src/Capco/AppBundle/Resources/config/services/graphql_resolvers.yml
+.vscode/keybindings.json

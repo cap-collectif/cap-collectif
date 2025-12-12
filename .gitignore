@@ -96,6 +96,10 @@ graphql.config.json
 .history
 .vscode
 
+## Shared VSCode settings not ignored
+!.vscode/tasks.json
+!.vscode/keybindings.json
+
 # Sublime Text Project Manager
 *.sublime-project
 
