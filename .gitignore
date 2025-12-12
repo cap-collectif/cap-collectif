@@ -112,6 +112,10 @@ nohup.out
 /.env.local.backup
 /benchmarks/.env
 
+# k6 benchmark reports
+/benchmarks/k6/reports/*
+!/benchmarks/k6/reports/.gitkeep
+
 # phpunit
 /.phpunit.cache
 
