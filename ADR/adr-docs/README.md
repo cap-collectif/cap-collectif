@@ -22,6 +22,7 @@ L'ADR est là pour pallier ce problème.
 ### Comment utiliser le dossier ADR ?
 
 1. **Créer un nouveau fichier** dans le dossier `ADR` pour chaque décision importante.
+Ce fichier doit suivre le format suivant : `001-file_name_snakecase.md`
 
 2. **Suivre une structure simple**, par exemple :
    - **Titre** : résumé de la décision  
