@@ -177,8 +177,6 @@ class ImportConsultationFromCsvCommand extends Command
         $caches = $this->preloadData($rowsArray, $consultationStep, $output);
 
         $defaultConsultation = $consultationStep?->getFirstConsultation();
-        $consultationStepId = $consultationStep?->getId();
-        $defaultConsultationId = $defaultConsultation?->getId();
 
         $progress = new ProgressBar($output, \count($rowsArray));
         $progress->start();
@@ -230,15 +228,6 @@ class ImportConsultationFromCsvCommand extends Command
 
             if (0 === $processedCount % $batchSize) {
                 $this->em->flush();
-                $this->em->clear(); // Clear to free memory
-
-                // Reload entities that we still need
-                if ($consultationStepId) {
-                    $consultationStep = $this->consultationStepRepository->find($consultationStepId);
-                }
-                if ($defaultConsultationId) {
-                    $defaultConsultation = $this->consultationRepository->find($defaultConsultationId);
-                }
             }
         }
 
