@@ -15,6 +15,8 @@ import path from 'path'
 import * as util from 'util'
 import * as cp from 'child_process'
 
+import { mailcatcherTasks } from './mailcatcher'
+
 const exec = util.promisify(cp.exec)
 
 const env = process.env.CI ? 'ci' : 'local'
@@ -131,6 +133,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.timeEnd('run_command')
       return Promise.resolve(null)
     },
+    ...mailcatcherTasks,
   })
   on('before:run', async () => {
     console.log('Saving database…')

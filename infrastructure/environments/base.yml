@@ -24,6 +24,7 @@ services:
             SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
             SYMFONY_ELASTICSEARCH_HOST: elasticsearch
             SYMFONY_REDIS_HOST: redis
+            SYMFONY_MAILER_URL: smtp://mailcatchersmtp:25
             SYMFONY_SAML_SP: dev
             SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
             SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
@@ -102,6 +103,7 @@ services:
         image: jderusse/mailcatcher:latest
         ports:
             - '25:25'
+            - '1080:80'
 
     kibana:
         container_name: capco_kibana_1

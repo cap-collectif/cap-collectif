@@ -3,6 +3,7 @@ import { Base, Login } from '~e2e-pages/index'
 describe('Login Feature', () => {
   beforeEach(() => {
     cy.task('db:restore')
+    cy.purgeEmails()
     Base.visitHomepage()
     Login.openLoginModal()
   })
@@ -19,17 +20,18 @@ describe('Login Feature', () => {
 
       cy.contains('resetting-check-email').should('be.visible')
       cy.contains('user@test.com').should('be.visible')
+
+      cy.openMailTo('user@test.com')
+      cy.mailShouldContain('email-content-resetting-password')
     })
   })
 
   context('Login Attempts with Turnstile CAPTCHA', () => {
-    before(() => {
+    it('should show Turnstile CAPTCHA after 5 failed login attempts', () => {
       cy.task('enable:feature', 'restrict_connection')
       cy.task('enable:feature', 'captcha')
       cy.task('enable:feature', 'turnstile_captcha')
-    })
 
-    it('should show Turnstile CAPTCHA after 5 failed login attempts', () => {
       Base.visitHomepage()
       Login.openLoginModal()
 
@@ -50,17 +52,19 @@ describe('Login Feature', () => {
       Login.submitLogin()
 
       cy.contains('registration.constraints.captcha.invalid').should('be.visible')
+
+      cy.task('disable:feature', 'restrict_connection')
+      cy.task('disable:feature', 'captcha')
+      cy.task('disable:feature', 'turnstile_captcha')
     })
   })
 
   context('Login Attempts with Google reCAPTCHA', () => {
-    before(() => {
+    it('should show Google reCAPTCHA after 5 failed login attempts', () => {
       cy.task('enable:feature', 'restrict_connection')
       cy.task('enable:feature', 'captcha')
       cy.task('disable:feature', 'turnstile_captcha')
-    })
 
-    it('should show Google reCAPTCHA after 5 failed login attempts', () => {
       Base.visitHomepage()
       Login.openLoginModal()
 
@@ -83,6 +87,10 @@ describe('Login Feature', () => {
       Login.submitLogin()
 
       cy.contains('registration.constraints.captcha.invalid').should('be.visible')
+
+      cy.task('disable:feature', 'restrict_connection')
+      cy.task('disable:feature', 'captcha')
+      cy.task('enable:feature', 'turnstile_captcha')
     })
   })
 })

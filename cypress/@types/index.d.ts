@@ -43,6 +43,15 @@ declare namespace Cypress {
     | 'christophe'
     | 'spyl'
     | 'agui'
+  interface MailcatcherMessage {
+    id: number
+    sender: string
+    recipients: string[]
+    subject: string
+    source: string
+    size: string
+    created_at: string
+  }
   interface cy {
     appendOperationToGraphQLFetch(): void
   }
@@ -69,5 +78,9 @@ declare namespace Cypress {
     setCapInputDate(index: number, date: string): Chainable<any>
     setCapInputDateTime(index: number, date: string): Chainable<any>
     checkTableLength(length: number): Chainable<any>
+    purgeEmails(): Chainable<null>
+    openMailTo(email: string): Chainable<MailcatcherMessage>
+    mailShouldContain(text: string): Chainable<void>
+    getMailCount(): Chainable<number>
   }
 }

@@ -14,6 +14,7 @@
 // ***********************************************************
 
 import './commands'
+import './mailcatcher'
 
 beforeEach(() => {
   cy.appendOperationToGraphQLFetch()
