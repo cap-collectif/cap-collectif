@@ -183,8 +183,7 @@ sub vcl_backend_response {
         # Remove Set-Cookie header to allow caching
         unset beresp.http.Set-Cookie;
 
-        # Set a reasonable TTL (e.g., 5 minutes)
-        set beresp.ttl = 5m;
+        set beresp.ttl = 1m;
 
         # Override backend cache control headers
         unset beresp.http.Cache-Control;
