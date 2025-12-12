@@ -129,6 +129,11 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    Capco\AppBundle\EventListener\AuthCacheSubscriber:
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }
+
     Capco\AppBundle\EventListener\MediaSubscriber:
         tags:
             - { name: doctrine.event_subscriber }

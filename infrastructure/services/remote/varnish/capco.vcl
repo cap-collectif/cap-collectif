@@ -23,8 +23,45 @@ sub vcl_recv {
   # https://httpoxy.org/#fix-now
   unset req.http.proxy;
 
+  # Only cache requests to eelv
+  if (req.http.host == "projet.lesecologistes.fr") {
+    # Continue to caching logic
+  } else {
+    return (pass);
+  }
+
+
+  # Normalize Accept-Language to supported locales to improve cache hit ratio.
+  # Supported locales: en-GB, fr-FR, es-ES, de-DE, nl-NL, sv-SE, eu-EU, oc-OC, ur-IN
+  # Without this, each unique Accept-Language header creates a separate cache entry.
+  if (req.http.Accept-Language) {
+    if (req.http.Accept-Language ~ "^fr" || req.http.Accept-Language ~ ",\s*fr") {
+      set req.http.Accept-Language = "fr-FR";
+    } else if (req.http.Accept-Language ~ "^es" || req.http.Accept-Language ~ ",\s*es") {
+      set req.http.Accept-Language = "es-ES";
+    } else if (req.http.Accept-Language ~ "^de" || req.http.Accept-Language ~ ",\s*de") {
+      set req.http.Accept-Language = "de-DE";
+    } else if (req.http.Accept-Language ~ "^nl" || req.http.Accept-Language ~ ",\s*nl") {
+      set req.http.Accept-Language = "nl-NL";
+    } else if (req.http.Accept-Language ~ "^sv" || req.http.Accept-Language ~ ",\s*sv") {
+      set req.http.Accept-Language = "sv-SE";
+    } else if (req.http.Accept-Language ~ "^eu" || req.http.Accept-Language ~ ",\s*eu") {
+      set req.http.Accept-Language = "eu-EU";
+    } else if (req.http.Accept-Language ~ "^oc" || req.http.Accept-Language ~ ",\s*oc") {
+      set req.http.Accept-Language = "oc-OC";
+    } else if (req.http.Accept-Language ~ "^ur" || req.http.Accept-Language ~ ",\s*ur") {
+      set req.http.Accept-Language = "ur-IN";
+    } else {
+      # Default to English for any other language
+      set req.http.Accept-Language = "en-GB";
+    }
+  } else {
+    set req.http.Accept-Language = "en-GB";
+  }
+
   # This is to make sure that clients can not change the caching behavior of our VCL by sending non-standard headers with the request.
   unset req.http.X-Body-Len;
+  unset req.http.X-User-Logged-In;
 
   # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
@@ -74,7 +111,7 @@ sub vcl_recv {
   # Remove all cookies except the Symfony or SimpleSAML session.
   if (req.http.Cookie) {
     cookie.parse(req.http.Cookie);
-    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,locale,AnonymousAuthenticatedWithConfirmedPhone,CapcoAnonReply,CapcoParticipant");
+    cookie.keep("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,locale,CapcoAnonReply,CapcoParticipant");
     set req.http.cookie = cookie.get_string();
 
     if (req.http.Cookie == "") {
@@ -86,12 +123,6 @@ sub vcl_recv {
   # Only cache POST GraphQL internal API requests.
   if (req.method == "POST" && req.url ~ "graphql/internal$") {
 
-        # Skip cache if viewer is authenticated.
-        if (req.http.Cookie) {
-            # std.log("Skipping cache because viewer is authenticated.");
-            return (pass);
-        }
-
         # Will store up to 500 kilobytes of request body.
         std.cache_req_body(500KB);
         set req.http.X-Body-Len = bodyaccess.len_req_body();
@@ -100,11 +131,6 @@ sub vcl_recv {
         if (req.http.X-Body-Len == "-1") {
             # Too big to cache
             # std.log("Skipping cache because body is too big.");
-            return (pass);
-        }
-
-        # skip cache because user is verified by phone number
-        if (req.http.cookie ~ "AnonymousAuthenticatedWithConfirmedPhone") {
             return (pass);
         }
 
@@ -142,8 +168,35 @@ sub vcl_backend_fetch {
     }
 }
 
+# Called after the response headers are successfully retrieved from the backend.
+sub vcl_backend_response {
+    # Don't cache responses for authenticated users
+    # The backend sets X-User-Logged-In: 1 for authenticated users
+    if (beresp.http.X-User-Logged-In == "1") {
+        set beresp.uncacheable = true;
+        set beresp.ttl = 0s;
+        return (deliver);
+    }
+
+    # For unauthenticated users (X-User-Logged-In: 0), enable caching
+    if (beresp.http.X-User-Logged-In == "0" && !(bereq.http.Cookie ~ "CapcoParticipant=")) {
+        # Remove Set-Cookie header to allow caching
+        unset beresp.http.Set-Cookie;
+
+        # Set a reasonable TTL (e.g., 5 minutes)
+        set beresp.ttl = 5m;
+
+        # Override backend cache control headers
+        unset beresp.http.Cache-Control;
+        unset beresp.http.Expires;
+    }
+}
+
 # Remove from response headers verbose things such as Varnish version.
 sub vcl_deliver {
+    # Remove the X-User-Logged-In header before sending to client
+    unset resp.http.X-User-Logged-In;
+
     unset resp.http.Via;
     return(deliver);
 }
