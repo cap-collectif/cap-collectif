@@ -59,6 +59,7 @@ class ConsultationRepository extends EntityRepository
             ->setParameter('cs', $cs)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->orderBy('c.createdAt', 'ASC')
         ;
 
         return new Paginator($query);
