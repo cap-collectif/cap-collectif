@@ -21,7 +21,7 @@ describe('Group deletion from the users groups page', () => {
       })
     cy.wait(300) // modal appearance animation time
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
-    cy.wait('@DeleteGroupMutation', { timeout: 10000 })
+    cy.wait('@DeleteGroupMutation')
     AdminGroupsPage.checkToast('admin.group-deletion-success')
     cy.get('.cap-table__tbody').should('not.contain', 'Agent de la ville')
     cy.checkTableLength(7)
@@ -33,7 +33,7 @@ describe('Group deletion from the users groups page', () => {
     AdminGroupsPage.openEditModal()
     AdminGroupsPage.getDeleteButtonFromEditModal().click()
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
-    cy.wait('@DeleteGroupMutation', { timeout: 10000 })
+    cy.wait('@DeleteGroupMutation')
     AdminGroupsPage.getToast().contains('admin.group-deletion-success').should('exist')
     cy.checkTableLength(7)
     cy.get('admin.users.edit-group').should('not.exist')

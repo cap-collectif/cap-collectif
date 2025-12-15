@@ -12,7 +12,7 @@ describe('Anonymous wants to see the profile of a user', () => {
     cy.interceptGraphQLOperation({ operationName: 'UserAvatarAppQuery' })
     // We visit two different profiles to view all the possible sections that are not all present on the same profile
     cy.visit('/profile/admin')
-    cy.wait('@UserAvatarAppQuery', { timeout: 10000 })
+    cy.wait('@UserAvatarAppQuery')
     cy.get('#profile-argument').within(() => {
       cy.get('.list-group-item').should('have.length.greaterThan', 0)
     })
@@ -31,7 +31,7 @@ describe('Anonymous wants to see the profile of a user', () => {
 
     // Second profile
     cy.visit('/profile/sfavot')
-    cy.wait('@UserAvatarAppQuery', { timeout: 10000 })
+    cy.wait('@UserAvatarAppQuery')
     cy.get('#profile-source').within(() => {
       cy.get('.list-group-item__opinion').should('have.length.greaterThan', 0)
     })

@@ -12,7 +12,8 @@ describe('Blog page', () => {
 
   it('User wants to see published posts', () => {
     cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
-    cy.visit('/blog', { timeout: 10000, failOnStatusCode: false })
+    cy.visit('/blog', { failOnStatusCode: false })
+
     cy.wait('@PostsListQuery')
     cy.get('.cap-post-card').should('have.length', 10)
   })
@@ -65,9 +66,9 @@ describe('Blog', () => {
       cy.contains('comment.submit').click({ force: true })
       cy.wait('@AddCommentMutation')
 
-      cy.contains('.toasts-container--top div', 'comment.submit_success', { timeout: 5000 }).should('be.visible')
+      cy.contains('.toasts-container--top div', 'comment.submit_success').should('be.visible')
 
-      cy.contains('.comments__section', "J'ai un truc à dire", { timeout: 5000 }).should('be.visible')
+      cy.contains('.comments__section', "J'ai un truc à dire").should('be.visible')
     })
   })
 
@@ -106,8 +107,8 @@ describe('Blog', () => {
       cy.contains('comment.submit').click({ force: true })
       cy.wait('@AddCommentMutation')
 
-      cy.contains('.toasts-container--top div', 'comment.submit_success', { timeout: 5000 }).should('be.visible')
-      cy.contains('.comments__section', "J'ai un truc à dire", { timeout: 5000 }).should('be.visible')
+      cy.contains('.toasts-container--top div', 'comment.submit_success').should('be.visible')
+      cy.contains('.comments__section', "J'ai un truc à dire").should('be.visible')
     })
   })
 })

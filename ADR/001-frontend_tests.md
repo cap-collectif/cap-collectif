@@ -47,6 +47,8 @@ Le `db:restore` est obligatoire avant chaque suite de tests afin d'assurer que c
 - Centraliser les fonctions support dans `cypress/support/` et utiliser celles déjà existantes.
 --> permet d'éviter de réinventer la roue lors d'interactions, et de rendre les tests plus courts et lisibles.
 
+- si on active un feature toggle au début de la suite de tests, le désactiver pour éviter des effets de bord sur d'autres tests.
+
 
 ## Documentation
 https://www.cypress.io
@@ -76,9 +78,10 @@ cy.wait('@QueryName', { timeout: 10000 }) // le moment venu, on demande à Cypre
 ```
 
 Note : par le passé, on avait énormément de tests "flaky", c'est-à-dire qui pouvaient échouer sur un même commit --> il fallait relancer la suite de tests entière pour une requête trop lente.
-Pour le moment (novembre 2025), on force un timeout volontairement élevé pour éviter cela.
-Le temps n'est pas le temps qui est attendu, si l'API répond avant les 10000ms, le test continue.
-Il est impératif de conserver ces timeouts le temps d'améliorer les performances, afin de ne pas avoir de nouveaux tests flaky.
+Pour le moment (novembre 2025), on force un timeout volontairement élevé pour éviter cela. Il est défini à 15 secondes dans `cypress.config.ts` avec la clé suivante : `requestTimeout`.
+Si l'API répond avant le timeout défini, le test continue et n'attend pas la fin du timeout.
+On peut également mettre un timeout personnalisé (cf exemple ci-dessus)
+
 
 Il est inutile d'attendre toutes les queries, intercepter et attendre la dernière suffit, puisqu'elles sont toujours lancées dans le même ordre.
 

@@ -20,7 +20,7 @@ describe('Search Feature', () => {
     cy.get(searchInputSelector).type('article')
     cy.get('.btn[type="submit"]').click({ force: true })
 
-    cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    cy.wait('@NavbarRightQuery')
     cy.get(resultCountSelector).should('contain', '12')
   })
 
@@ -28,7 +28,7 @@ describe('Search Feature', () => {
     cy.get(searchInputSelector).type('coucou')
     cy.get('input[value=argument]').click({ force: true })
 
-    cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    cy.wait('@NavbarRightQuery')
     cy.get(resultsListSelector).should('have.length', '3')
 
     cy.get('.search-result__preview').first().should('contain', 'Coucou, je suis un bel argument !')
@@ -36,7 +36,7 @@ describe('Search Feature', () => {
 
     cy.get('#search_sort').select('date')
 
-    cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    cy.wait('@NavbarRightQuery')
 
     cy.get('.search-result__preview').first().should('contain', 'Coucou, je suis un bel argument !')
     cy.get('.search-result__preview').eq(1).should('contain', 'Coucou, je suis un bel argument !')

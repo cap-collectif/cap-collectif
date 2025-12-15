@@ -63,31 +63,19 @@ context('Register as a user', () => {
       cy.get('#charte-error').should('exist')
     })
 
-    it('should register with consent to external communication', () => {
-      Base.visitHomepage()
-      UserRegistration.clickRegistrationButton()
-      cy.get('#username').should('be.visible')
-      UserRegistration.consentToCookies()
+    it('should register with consent to external & internal communication', () => {
       cy.task('enable:feature', 'consent_external_communication')
-
-      UserRegistration.fillUser()
-      UserRegistration.fillFormDefault()
-
-      cy.get('[name="consentExternalCommunication"]').check({ force: true })
-
-      UserRegistration.confirmRegister()
-    })
-
-    it('should register with consent to internal communication', () => {
-      Base.visitHomepage()
-      UserRegistration.clickRegistrationButton()
-      cy.get('#username').should('be.visible')
-      UserRegistration.consentToCookies()
       cy.task('enable:feature', 'consent_internal_communication')
 
+      Base.visitHomepage()
+      UserRegistration.clickRegistrationButton()
+      cy.get('#username').should('be.visible')
+      UserRegistration.consentToCookies()
+
       UserRegistration.fillUser()
       UserRegistration.fillFormDefault()
 
+      cy.get('#consent-external-communication').check({ force: true })
       cy.get('[name="consentInternalCommunication"]').check({ force: true })
 
       UserRegistration.confirmRegister()

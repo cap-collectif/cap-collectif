@@ -6,7 +6,7 @@ export default new (class ContactPageBO {
   visitContactPage() {
     cy.interceptGraphQLOperation({ operationName: 'ContactAdminPageAppQuery' })
     cy.visit('/admin/contact/list')
-    cy.wait('@ContactAdminPageAppQuery', { timeout: 10000 }).its('response.statusCode').should('not.eq', 500)
+    cy.wait('@ContactAdminPageAppQuery').its('response.statusCode').should('not.eq', 500)
   }
 
   saveChanges() {

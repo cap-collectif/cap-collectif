@@ -41,7 +41,7 @@ describe('Contact page logged as admin', () => {
 
     cy.get('#CreateContactAdminForm-submit-create-contact').should('exist').click()
     cy.scrollTo('bottom')
-    cy.get('.global-loading', { timeout: 10000 }).should('not.exist')
+    cy.get('.global-loading').should('not.exist')
 
     cy.get('.list-group-item').should('have.length.at.least', 4)
   })
@@ -65,11 +65,12 @@ describe('Contact page logged as admin', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     ContactPageBO.visitContactPage()
-    cy.get('.list-group-item').contains('Contact form 1').should('exist')
-
+    cy.get('div.list-group span.list-group-item').should('have.length', 3)
+    cy.get('div.list-group').contains('Contact form 1').should('exist')
     cy.get("[id^='DeleteContact-']").contains('global.delete').first().click()
     cy.get('#delete-modal-button-delete').click()
-    cy.get('.list-group-item').contains('Contact form 1').should('not.exist')
+    cy.get('div.list-group').contains('Contact form 1').should('not.exist')
+    cy.get('div.list-group span.list-group-item').should('have.length', 2)
   })
 
   it('displays an error when title is empty', () => {

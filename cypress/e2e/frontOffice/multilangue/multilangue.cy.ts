@@ -28,7 +28,7 @@ describe('Multilangue', () => {
     cy.task('enable:feature', 'multilangue')
     cy.visit('/en')
     Multilangue.visitProjectsPage()
-    cy.wait('@ProjectsListQuery', { timeout: 1000 })
+    cy.wait('@ProjectsListQuery')
     cy.url().should('include', '/en/projects')
     cy.get('section.projects-list-section').should('exist').and('be.visible').and('have.length.greaterThan', 10)
     cy.getCookie('locale').should('have.property', 'value', 'en-GB')
@@ -92,7 +92,7 @@ describe('Multilangue', () => {
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-fr-FR').click({ force: true })
     cy.get('#language-header-continue-button').click({ force: true })
-    cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    cy.wait('@NavbarRightQuery')
     Cypress.Cookies.debug(true)
     cy.document().its('cookie').should('include', 'locale=fr-FR')
   })
@@ -113,7 +113,7 @@ describe('Multilangue', () => {
     cy.getCookie('locale').should('not.exist')
     cy.get('#changeLanguageProposalContainer').should('be.visible')
     cy.get('#language-header-close').click({ force: true })
-    Base.reload({ operationName: 'NavbarRightQuery', timeout: 15000 })
+    Base.reload({ operationName: 'NavbarRightQuery' })
     cy.getCookie('locale').should('exist')
     cy.get('#changeLanguageProposalContainer').should('not.exist')
 
@@ -134,7 +134,7 @@ describe('Multilangue', () => {
     cy.get('#cookie-consent').click({ force: true }) // Otherwise the footer is hidden and fail test
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-de-DE').click({ force: true })
-    cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    cy.wait('@NavbarRightQuery')
     cy.document().its('cookie').should('include', 'locale=de-DE')
   })
 
@@ -152,7 +152,7 @@ describe('Multilangue', () => {
     cy.get('#display__language-menuList').should('exist')
     cy.get('#react-select-2-option-0').click({ force: true })
     cy.get('#edit-account-profile-button').click({ force: true })
-    cy.wait('@NavBarMenuQuery', { timeout: 10000 })
+    cy.wait('@NavBarMenuQuery')
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 
@@ -170,7 +170,7 @@ describe('Multilangue', () => {
     cy.get('#cookie-consent').click({ force: true }) // Otherwise the footer is hidden and fail test
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-de-DE').click({ force: true })
-    cy.wait('@ProposalListViewRefetchQuery', { timeout: 10000 })
+    cy.wait('@ProposalListViewRefetchQuery')
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 })

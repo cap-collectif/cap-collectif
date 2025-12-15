@@ -7,35 +7,35 @@ describe('Newsletter', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.interceptGraphQLOperation({ operationName: 'SubscribeNewsletterMutation' })
+  })
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from failing the test
+    return false
+  })
+
+  it('correctly handles subscribing, for non-subscribed and subscribed emails, without captcha', () => {
+    cy.task('disable:feature', 'captcha')
+    cy.task('disable:feature', 'turnstile_captcha')
+
+    // Subscribing with a non-subscribed email should work the first time
     Base.visitHomepage()
-  })
-
-  it('User wants to subscribe to newsletter, without captcha', () => {
-    cy.task('disable:feature', 'captcha')
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.get('#newsletter_subscription_email').type('iwantsomenews@gmail.com')
     cy.contains('global.register').click({ force: true })
-    cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
-    cy.wait('@SubscribeNewsletterMutation', { timeout: 10000 })
-    cy.contains('homepage.newsletter.success')
-  })
+    cy.get('registration.constraints.captcha.invalid').should('not.exist')
 
-  it('User wants to subscribe to newsletter with existing email', () => {
-    cy.task('disable:feature', 'captcha')
-    cy.task('disable:feature', 'turnstile_captcha')
+    cy.wait('@SubscribeNewsletterMutation')
+    cy.contains('homepage.newsletter.success').should('exist').and('be.visible')
 
-    cy.get('#newsletter_subscription_email').type('iwantsomenews@gmail.com')
-    cy.contains('global.register').click({ force: true })
-    cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
-    cy.wait('@SubscribeNewsletterMutation', { timeout: 10000 })
-    cy.contains('homepage.newsletter.success')
-
+    // reload page after successfully subscribing
     cy.reload()
 
+    // after reload, try subscribing again:
+    // it should not work since the email is already registered now
     cy.get('#newsletter_subscription_email').type('iwantsomenews@gmail.com')
     cy.contains('global.register').click({ force: true })
     cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
-    cy.wait('@SubscribeNewsletterMutation', { timeout: 10000 })
+    cy.wait('@SubscribeNewsletterMutation')
     cy.contains('newsletter.already_subscribed')
   })
 
@@ -43,11 +43,7 @@ describe('Newsletter', () => {
     cy.task('enable:feature', 'captcha')
     cy.task('enable:feature', 'turnstile_captcha')
 
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      // returning false here prevents Cypress from failing the test
-      return false
-    })
-
+    Base.visitHomepage()
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')
     cy.contains('global.register').click({ force: true })
     cy.contains('registration.constraints.captcha.invalid').should('be.visible')
@@ -57,13 +53,14 @@ describe('Newsletter', () => {
     cy.task('enable:feature', 'captcha')
     cy.task('enable:feature', 'turnstile_captcha')
 
+    Base.visitHomepage()
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')
     cy.confirmCaptcha()
-    cy.wait(5000)
+    cy.wait(1500) // captcha takes longer to proceed
 
     cy.contains('global.register').click({ force: true })
     cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
-    cy.wait('@SubscribeNewsletterMutation', { timeout: 10000 })
+    cy.wait('@SubscribeNewsletterMutation')
     cy.contains('homepage.newsletter.success')
   })
 })

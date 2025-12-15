@@ -1,18 +1,22 @@
+import { Base } from '~e2e-pages/index'
+
 describe('Organization Invitation Redirects', () => {
   before(() => {
     cy.task('enable:feature', 'organizations')
   })
+  beforeEach(() => {
+    cy.task('db:restore')
+  })
 
   it('should redirect to homepage with invalid token message when token is invalid', () => {
-    cy.interceptGraphQLOperation({ operationName: 'NavBarMenuQuery' })
     cy.directLoginAs('user')
-    cy.visit('/invitation/organization/token2')
-    cy.wait('@NavBarMenuQuery', { timeout: 10000 })
+    Base.visit({ path: '/invitation/organization/token2', operationName: 'NavBarMenuQuery' })
+
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     cy.get('div.alert').should('exist').and('be.visible').and('contain', 'invalid-token')
   })
 
-  it('should redirect to projects page when token is valid for mauriau', () => {
+  it('should redirect to projects page when token is valid', () => {
     // login as mauriau to use their invitation token
     cy.intercept('POST', '/login_check').as('LoginRequest')
     cy.url().then(url => {
@@ -29,8 +33,7 @@ describe('Organization Invitation Redirects', () => {
       cy.get('input[name="password"]').type(password, { force: true })
       cy.root().submit()
     })
-    cy.wait('@LoginRequest', { timeout: 10000 })
-
+    cy.wait('@LoginRequest')
     cy.visit('/invitation/organization/token2')
     cy.url().should('include', '/admin-next/projects')
   })

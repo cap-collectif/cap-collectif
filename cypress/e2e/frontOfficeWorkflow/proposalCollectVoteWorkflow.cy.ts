@@ -12,6 +12,7 @@ describe('Proposal Collect Vote Page workflow', () => {
         project: 'bp-vote-etape-de-depot',
         step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
       })
+      cy.isLoggedOut()
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = true
       ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuhtenticationState)
@@ -72,6 +73,7 @@ describe('Proposal Collect Vote Page workflow', () => {
         project: 'bp-vote-etape-de-depot',
         step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
       })
+      cy.isLoggedIn()
       const userAuhtenticationState = 'LOGGED_IN'
       const isAnonymous = false
       ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuhtenticationState)
@@ -121,6 +123,7 @@ describe('Proposal Collect Vote Page workflow', () => {
         project: 'bp-vote-etape-de-depot',
         step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
       })
+      cy.isLoggedOut()
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = false
       ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuhtenticationState)
@@ -247,6 +250,7 @@ describe('Proposal Collect Vote Page workflow', () => {
         project: 'bp-vote-etape-de-depot',
         step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
       })
+      cy.isLoggedOut()
       const userAuhtenticationState = 'ANONYMOUS'
       const isAnonymous = false
       ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuhtenticationState)
@@ -284,6 +288,9 @@ describe('Proposal Collect Vote Page workflow', () => {
       ParticipationWorkflowPage.fillCheckboxes({
         isAnonymous,
       })
+
+      cy.wait('@ValidateContributionMutation')
+
       ProposalVoteListPage.getVoteWidgetCounter().should('have.text', 4)
 
       ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteA').contains('voted')
@@ -307,6 +314,7 @@ describe('Proposal Collect Vote Page workflow', () => {
         email: 'lbrunet@cap-collectif.com',
         password: 'toto',
       })
+
       ProposalVoteListPage.getVoteWidgetCounter().should('have.text', 3)
 
       ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteA').contains('voted')
@@ -364,6 +372,9 @@ describe('Proposal Collect Vote Page workflow', () => {
       ParticipationWorkflowPage.fillCheckboxes({
         isAnonymous,
       })
+
+      cy.wait('@ValidateContributionMutation')
+
       ProposalVoteListPage.getVoteWidgetCounter().should('have.text', 2)
 
       ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteB').contains('voted')

@@ -1,7 +1,9 @@
 describe('Email confirmation', () => {
   before(() => {
     cy.task('enable:feature', 'registration')
-    cy.task('disable:feature', 'shield_mode')
+  })
+  beforeEach(() => {
+    cy.task('db:restore')
   })
   beforeEach(() => {
     cy.task('db:restore')

@@ -37,7 +37,7 @@ describe('Shield Mode', () => {
     cy.contains('button', 'login_me').click()
 
     cy.get('#login-error').should('be.visible')
-    cy.contains('please-confirm-your-email-address-to-login', { timeout: 5000 }).should('be.visible')
+    cy.contains('please-confirm-your-email-address-to-login').should('be.visible')
   })
 
   // -------------------- Registration with shield enabled --------------------
@@ -49,7 +49,7 @@ describe('Shield Mode', () => {
     cy.get('#shield-agent').should('be.visible')
     cy.get('#registration-button').should('be.visible')
 
-    cy.contains('registration', { timeout: 5000 }).should('be.visible')
+    cy.contains('registration').should('be.visible')
   })
 
   after(() => {

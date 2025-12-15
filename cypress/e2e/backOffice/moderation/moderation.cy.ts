@@ -52,7 +52,7 @@ describe('Moderation', () => {
 
       cy.contains('the-proposal-has-been-successfully-moved-to-the-trash').should('be.visible')
 
-      cy.get('.has-chart', { timeout: 10000 }).should('be.visible').and('contain', 'in-the-trash')
+      cy.get('.has-chart').should('be.visible').and('contain', 'in-the-trash')
     })
   })
 
@@ -100,11 +100,11 @@ describe('Moderation', () => {
         failOnStatusCode: false,
       })
 
-      cy.wait('@moderate', { timeout: 10000 }).then(interception => {
+      cy.wait('@moderate').then(interception => {
         cy.wrap(interception?.response?.statusCode).should('equal', 302)
       })
 
-      cy.wait('@ArgumentListQuery', { timeout: 10000 }).its('response.statusCode').should('eq', 200)
+      cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
     })
   })
 })

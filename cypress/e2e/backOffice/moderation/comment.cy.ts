@@ -11,7 +11,7 @@ describe('Comments moderation', () => {
       // returning false here prevents Cypress from failing the test
       return false
     })
-    cy.wait('@AdminRightNavbarAppQuery', { timeout: 10000 })
+    cy.wait('@AdminRightNavbarAppQuery')
     cy.get('a').contains('global.contenu').should('exist').and('be.visible')
     cy.get('table tbody tr').should('have.length.greaterThan', 23)
   })

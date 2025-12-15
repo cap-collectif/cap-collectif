@@ -10,7 +10,7 @@ describe('Conditional Questionnaire', () => {
     it('displays correct conditional questions based on selections', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
       cy.contains('Votre fleuve préféré').should('be.visible')
 
       QuestionnairePage.verifyQuestionsNotVisible([
@@ -68,7 +68,7 @@ describe('Conditional Questionnaire', () => {
     it('displays correct conditional questions based on selections', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
       cy.contains('Votre fleuve préféré').should('be.visible')
 
       QuestionnairePage.verifyQuestionsNotVisible([
@@ -126,7 +126,7 @@ describe('Conditional Questionnaire', () => {
     it('updates displayed questions correctly', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
 
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses0', 'Hap')
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses1', 'Le gange')
@@ -169,7 +169,7 @@ describe('Conditional Questionnaire', () => {
     it('updates displayed questions correctly', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
 
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses0', 'Hap')
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses1', 'Le gange')
@@ -211,7 +211,7 @@ describe('Conditional Questionnaire', () => {
     it('displays nested conditional question', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
 
       QuestionnairePage.verifyQuestionsNotVisible([
         "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)",
@@ -256,7 +256,7 @@ describe('Conditional Questionnaire', () => {
     it('updates displayed questions correctly', () => {
       QuestionnairePage.visitQuestionnaireConditional()
 
-      cy.contains('Hap ou Noel ?', { timeout: 8000 }).should('be.visible')
+      cy.contains('Hap ou Noel ?').should('be.visible')
 
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses0', 'Hap')
       QuestionnairePage.selectFromReactDropdown('#CreateReplyForm-responses1', 'Le gange')

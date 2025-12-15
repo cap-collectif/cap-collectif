@@ -6,7 +6,6 @@ describe('User invitation as admin', () => {
   })
 
   it('views user invitation page when logged in as admin', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     return cy.wait('@inviteQuery').then(req => {
@@ -16,7 +15,6 @@ describe('User invitation as admin', () => {
 
   it('invites new users, and adds them to a group', () => {
     cy.interceptGraphQLOperation({ operationName: 'InviteUserMutation' })
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     cy.wait('@inviteQuery')
@@ -36,7 +34,6 @@ describe('User invitation as admin', () => {
   })
 
   it('gets the correct results after uploading a correct .csv file', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -48,7 +45,6 @@ describe('User invitation as admin', () => {
   })
 
   it("gets the correct results after uploading a .csv file that's not properly formatted", () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -59,7 +55,6 @@ describe('User invitation as admin', () => {
   })
 
   it('sends another invitation to users whose invitation expired', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
     cy.interceptGraphQLOperation({ operationName: 'RelaunchUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -103,7 +98,7 @@ describe('User invitation as admin', () => {
   })
 
   it('deletes invitations with quick action delete button', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
+    cy.task('db:restore') // restore to have all invitations and not be impacted by previous tests
     cy.interceptGraphQLOperation({ operationName: 'CancelUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -115,7 +110,7 @@ describe('User invitation as admin', () => {
   })
 
   it('deletes invitations by checking boxes and clicking the delete button', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
+    cy.task('db:restore') // restore to have all invitations and not be impacted by previous tests
     cy.interceptGraphQLOperation({ operationName: 'CancelUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -133,16 +128,10 @@ describe('User invitation as admin', () => {
 })
 
 describe('User invitation as super-admin', () => {
-  beforeEach(() => {
-    cy.task('db:restore')
-  })
-
   it('views user invitation page when logged in as super_admin', () => {
-    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
+    cy.task('db:restore')
+
     cy.directLoginAs('super_admin')
-    UserInvitePage.visitInviteUser()
-    return cy.wait('@inviteQuery').then(req => {
-      expect(req.response?.statusCode).not.eq(500)
-    })
+    UserInvitePage.visitInviteUser(true)
   })
 })

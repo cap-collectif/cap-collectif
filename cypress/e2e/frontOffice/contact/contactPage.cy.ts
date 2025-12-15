@@ -13,7 +13,7 @@ describe('Contact page', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.visit('/contact')
-    cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x', { timeout: 10000 })
+    cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x')
   })
 
   it('correctly sends a message via the first form', () => {

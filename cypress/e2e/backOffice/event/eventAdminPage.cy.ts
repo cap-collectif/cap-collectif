@@ -13,7 +13,7 @@ describe('Event Admin Page', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
-  before(() => {
+  beforeEach(() => {
     cy.task('enable:feature', 'multilangue')
   })
   it('creates an event', () => {
@@ -25,7 +25,7 @@ describe('Event Admin Page', () => {
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ThemeListFieldQuery' })
     EventFormPage.visitNewEventPage()
-    cy.wait('@EventFormWrapper_ViewerQuery', { timeout: 15000 })
+    cy.wait('@EventFormWrapper_ViewerQuery')
     EventFormPage.fillTitle(eventTitle)
     EventFormPage.fillBody(eventBody)
     EventFormPage.fillStartDate('2025-12-31')
@@ -33,12 +33,12 @@ describe('Event Admin Page', () => {
     EventFormPage.chooseRegistrationType('PLATFORM')
     EventFormPage.toggleIsMeasurable()
     EventFormPage.fillParticipantsJauge(eventJauge)
-    cy.wait('@ProjectListFieldQuery', { timeout: 15000 })
-    cy.wait('@DistrictListFieldQuery', { timeout: 15000 })
-    cy.wait('@ThemeListFieldQuery', { timeout: 15000 })
+    cy.wait('@ProjectListFieldQuery')
+    cy.wait('@DistrictListFieldQuery')
+    cy.wait('@ThemeListFieldQuery')
     EventFormPage.selectEntity('themes')
     EventFormPage.selectEntity('projects')
-    cy.wait('@StepListFieldQuery', { timeout: 15000 })
+    cy.wait('@StepListFieldQuery')
     EventFormPage.selectEntity('steps')
     EventFormPage.selectEntity('districts')
     EventFormPage.toggleAdvancedAccordion()
@@ -46,8 +46,8 @@ describe('Event Admin Page', () => {
     EventFormPage.fillCustomCode(eventCode)
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
     EventFormPage.clickCreateAndPublishButton()
-    cy.wait('@AddEventMutation', { timeout: 15000 })
-    cy.wait('@EventFormWrapperQuery', { timeout: 15000 })
+    cy.wait('@AddEventMutation')
+    cy.wait('@EventFormWrapperQuery')
     EventFormPage.frTitle.invoke('val').should('eq', eventTitle)
     EventFormPage.frBody.contains(eventBody)
     EventFormPage.toggleAdvancedAccordion()
@@ -62,11 +62,11 @@ describe('Event Admin Page', () => {
     cy.interceptGraphQLOperation({ operationName: 'EventListQuery' })
     cy.interceptGraphQLOperation({ operationName: 'AddEventsMutation' })
     cy.visit('/admin-next/events')
-    cy.wait('@EventListQuery', { timeout: 10000 })
+    cy.wait('@EventListQuery')
     cy.get('#AdminImportEventsButton-import').click()
     const filePath = 'fixtures/events_to_import.csv'
     EventFormPage.importCsvFile(filePath)
-    cy.wait('@AddEventsMutation', { timeout: 10000 })
+    cy.wait('@AddEventsMutation')
     cy.get('#AdminImportEventsButton-submit').click()
     cy.get('p').contains('count-events-found').should('exist').and('be.visible') // num: 1
     cy.get('#AdminImportEventsButton-submit').click()
@@ -87,7 +87,7 @@ describe('Event Admin Page', () => {
       // eslint-disable-next-line jest/valid-expect
       expect(interception?.response?.body.data.deleteEvent.deletedEventId).to.equal(awaitingEventId)
     })
-    cy.wait('@EventListQuery', { timeout: 15000 })
+    cy.wait('@EventListQuery')
   })
   it('can moderate an event as a simple admin', () => {
     cy.directLoginAs('admin')

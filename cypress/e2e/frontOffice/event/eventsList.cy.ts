@@ -26,7 +26,7 @@ context('Events list page as admin', () => {
 
       EventPage.getEventPreviews().and('have.length', 2)
 
-      cy.get('.card__title').contains(/Event with\s*registrations/, { timeout: 5000 })
+      cy.get('.card__title').contains(/Event with\s*registrations/)
       cy.get('.card__title').should('not.contain.text', 'ParisWeb2015')
     })
   })

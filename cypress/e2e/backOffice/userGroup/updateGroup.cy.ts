@@ -34,7 +34,7 @@ describe("Update a group's info and members", () => {
     // go back to members tab and save changes
     AdminGroupsPage.getModalTab('members').click()
     AdminGroupsPage.getSaveButton().click()
-    cy.wait('@UpdateGroupMutation', { timeout: 10000 })
+    cy.wait('@UpdateGroupMutation')
     AdminGroupsPage.findEditGroupModal().should('not.exist')
 
     // check that updates are applied
@@ -51,7 +51,7 @@ describe("Update a group's info and members", () => {
     AdminGroupsPage.addMembersViaSelect()
     AdminGroupsPage.importCsvFromEditModal()
     AdminGroupsPage.getSaveButton().click()
-    cy.wait('@AddUsersToGroupFromEmailMutation', { timeout: 10000 })
+    cy.wait('@AddUsersToGroupFromEmailMutation')
     AdminGroupsPage.findEditGroupModal().should('not.exist')
     // todo: fixme after mutations are merged and behavior is as expected
     // AdminGroupsPage.getAmountOfMembers(2).should('contain', '130')

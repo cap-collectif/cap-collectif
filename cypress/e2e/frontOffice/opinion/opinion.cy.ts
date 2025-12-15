@@ -5,7 +5,7 @@ describe('Opinion Page Tests', () => {
     cy.task('db:restore')
   })
   context('As an anonymous user', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('enable:feature', 'share_buttons')
       cy.task('disable:feature', 'shield_mode')
     })
@@ -29,7 +29,7 @@ describe('Opinion Page Tests', () => {
         stepSlug: 'elaboration-de-la-loi',
       })
       OpinionPage.getSingleOpinion().find('.card__title a').click()
-      cy.wait('@OpinionPageQuery', { timeout: 10000 })
+      cy.wait('@OpinionPageQuery')
       OpinionPage.getShareOpinionButton().click()
 
       cy.get('.share-button-dropdown').should('exist').and('be.visible')
@@ -74,7 +74,7 @@ describe('Opinion Page Tests', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'OpinionListPaginatedQuery' })
       cy.get('#OpinionListPaginated-loadmore').click()
-      cy.wait('@OpinionListPaginatedQuery', { timeout: 10000 })
+      cy.wait('@OpinionListPaginatedQuery')
 
       cy.get('#OpinionListPaginated-end-pagination').should('exist')
       cy.get('.opinion-list-rendered').children().should('have.length', 72)
@@ -101,7 +101,7 @@ describe('Opinion Page Tests', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ArgumentListQuery' })
       cy.get('[id="confirm-opinion-create"]').click({ force: true })
-      cy.wait('@ArgumentListQuery', { timeout: 10000 })
+      cy.wait('@ArgumentListQuery')
 
       cy.url().should(
         'include',

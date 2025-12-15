@@ -11,7 +11,7 @@ describe('Admin access to BO & project settings', () => {
       // returning false here prevents Cypress from failing the test
       return false
     })
-    cy.wait('@AdminRightNavbarAppQuery', { timeout: 10000 }).its('response.statusCode').should('not.eq', 500)
+    cy.wait('@AdminRightNavbarAppQuery').its('response.statusCode').should('not.eq', 500)
     cy.get('error.500').should('not.exist')
   })
   it('finds non-generated fonts', () => {

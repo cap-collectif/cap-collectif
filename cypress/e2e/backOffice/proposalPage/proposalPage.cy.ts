@@ -15,13 +15,13 @@ describe('Project Page BO', () => {
     })
     cy.contains('loading-success')
     AdminProjectPage.mergeRows()
-    cy.wait('@CreateProposalFusionMutation', { timeout: 15000 })
+    cy.wait('@CreateProposalFusionMutation')
     AdminProjectPage.visitContributionsPage({
       projectSlug: 'projectOrgaVisibilityAdminAndMe',
       state: 'PUBLISHED',
       stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBPcmdhMg==',
     })
-    cy.wait('@ProjectAdminProposalsPageQuery', { timeout: 15000 })
+    cy.wait('@ProjectAdminProposalsPageQuery')
     cy.get('.merge-tag').its('length').should('be.gte', 2)
   })
 })

@@ -23,10 +23,10 @@ describe('Opinion versions actions', () => {
     cy.directLoginAs('user')
     OpinionPage.visitVersionPage()
 
-    cy.get('.loader', { timeout: 10000 }).should('not.exist')
+    cy.get('.loader').should('not.exist')
 
     cy.get('#opinion-delete').should('exist').click({ force: true })
-    cy.get('#confirm-opinion-delete', { timeout: 15000 }).should('exist').should('be.visible').click({ force: true })
+    cy.get('#confirm-opinion-delete').should('exist').should('be.visible').click({ force: true })
 
     OpinionPage.visitVersionPage('NavBarMenuQuery')
     cy.contains('error.404.title').should('be.visible')
@@ -55,7 +55,7 @@ describe('Opinion versions actions', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ChangeVersionMutation' })
       cy.get('#opinion-version-edit-update').should('exist').click({ force: true })
-      cy.wait('@ChangeVersionMutation', { timeout: 10000 })
+      cy.wait('@ChangeVersionMutation')
 
       cy.contains('Updated title').should('be.visible')
       cy.contains('Updated body').should('be.visible')

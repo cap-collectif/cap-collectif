@@ -34,7 +34,7 @@ describe('Admin Questionnaire - Import Choices', () => {
     // Import over_1500.csv
     cy.get('input#csv-file_field').selectFile('fixtures/over_1500.csv', { force: true })
     cy.contains('n-items-found').should('exist') // num: 1612
-    cy.wait('@QuestionnaireAdminPageQuery', { timeout: 2000 })
+    cy.wait('@QuestionnaireAdminPageQuery')
     cy.get('#import-file').click()
     cy.contains('75015 - PARIS ANTENNE DEX GRAND SUD OUEST').should('exist')
 

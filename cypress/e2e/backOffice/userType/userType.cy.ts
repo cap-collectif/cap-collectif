@@ -11,7 +11,7 @@ describe('User profile types page', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'userTypes_Query' })
     cy.visit('/admin-next/user-types')
-    cy.wait('@userTypes_Query', { timeout: 10000 }).its('response.statusCode').should('not.eq', 500)
+    cy.wait('@userTypes_Query').its('response.statusCode').should('not.eq', 500)
     cy.get('.user-type-card').should('have.length.greaterThan', 0)
   })
 })

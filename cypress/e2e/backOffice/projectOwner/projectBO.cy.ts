@@ -26,7 +26,7 @@ context('Project Owner', () => {
       cy.wait('@ProjectAdminAnalysisTabQuery')
       cy.wait('@ProjectAdminContributionsPageQuery')
 
-      cy.contains('global.saved', { timeout: 10000 })
+      cy.contains('global.saved')
     })
     it('should allow a project admin to add his questionnaire', () => {
       cy.interceptGraphQLOperation({ operationName: 'ProjectAdminQuestionnaireStepFormQuestionnairesQuery' })
@@ -46,7 +46,7 @@ context('Project Owner', () => {
       cy.wait('@UpdateProjectAlphaMutation')
       cy.wait('@ProjectAdminContributionsPageQuery')
 
-      cy.contains('global.saved', { timeout: 10000 })
+      cy.contains('global.saved')
     })
   })
   describe('Authorization', () => {

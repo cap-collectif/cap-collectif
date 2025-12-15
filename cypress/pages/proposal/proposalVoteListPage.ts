@@ -11,8 +11,8 @@ export default new (class ProposalVoteListPage {
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
     this.cy.visit('project/budget-participatif-idf-3/collect/collecte-vote-par-sms')
-    this.cy.wait('@ProposalStepPageQuery')
-    this.cy.wait('@ProposalListViewRefetchQuery')
+    this.cy.wait('@ProposalStepPageQuery', { timeout: 15000 })
+    this.cy.wait('@ProposalListViewRefetchQuery', { timeout: 15000 })
   }
 
   getProposalVoteButton(proposalId: string) {

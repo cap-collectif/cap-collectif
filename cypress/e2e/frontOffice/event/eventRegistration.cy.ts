@@ -1,50 +1,45 @@
 import { Base, Event } from '~e2e-pages/index'
 
-describe('Event Registration', () => {
-  const eventUrl = `/events/event-with-registrations`
+const eventUrl = `/events/event-with-registrations`
 
+context('Event registration as anonymous user', () => {
   beforeEach(() => {
     cy.task('db:restore')
+    cy.task('enable:feature', 'calendar')
+    Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
   })
 
-  context('Anonymous user registration', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'calendar')
-      Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
-    })
+  it('allows anonymous user to register with visible name', () => {
+    Event.openRegistrationModal()
+    Event.fillRegistration()
 
-    it('should allow anonymous user to register with visible name', () => {
-      Event.openRegistrationModal()
-      Event.fillRegistration()
-
-      cy.contains('event_registration.create.register_success').should('exist', { timeout: 10000 })
-    })
-
-    it('should block registration with already registered email', () => {
-      Event.openRegistrationModal()
-      Event.fillRegistration()
-
-      Base.visitHomepage()
-      Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
-
-      Event.openRegistrationModal()
-      Event.fillRegistration()
-
-      cy.get('#email-error').should('exist')
-    })
+    cy.contains('event_registration.create.register_success').should('exist').and('be.visible')
   })
 
-  context('Logged in user registration', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'calendar')
-      cy.directLoginAs('user')
-      Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
-    })
+  it('prevents registration with already registered email', () => {
+    Event.openRegistrationModal()
+    Event.fillRegistration()
 
-    it('should allow logged in user to register with one click', () => {
-      Event.openRegistrationModal()
-      cy.contains('event_registration.create.register_success').should('exist', { timeout: 10000 })
-      cy.contains('event_registration.unsubscribe').should('exist', { timeout: 10000 })
-    })
+    Base.visitHomepage()
+    Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
+
+    Event.openRegistrationModal()
+    Event.fillRegistration()
+
+    cy.get('#email-error').should('exist').and('be.visible')
+  })
+})
+
+context('Event registration as logged in user', () => {
+  before(() => {
+    cy.task('enable:feature', 'calendar')
+    cy.directLoginAs('user')
+  })
+
+  it('should allow logged in user to register with one click', () => {
+    Base.visit({ path: eventUrl, operationName: 'CommentSectionQuery' })
+    Event.openRegistrationModal()
+    cy.contains('event_registration.create.register_success').should('be.visible')
+    cy.contains('event_registration.unsubscribe').should('be.visible')
   })
 })

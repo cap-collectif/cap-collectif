@@ -28,7 +28,7 @@ export default new (class DebatePage {
   visit({ project, debate }: VisitOptions) {
     this.cy.interceptGraphQLOperation({ operationName: 'DebateStepPageQuery' })
     this.cy.visit(`/project/${project}/debate/${debate}`)
-    return this.cy.wait('@DebateStepPageQuery', { timeout: 10000 })
+    return this.cy.wait('@DebateStepPageQuery')
   }
 
   visitCannabisDebate() {

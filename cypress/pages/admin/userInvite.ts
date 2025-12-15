@@ -6,8 +6,13 @@ export default new (class UserInvitePage {
   pathInviteUser() {
     return `admin-next/invite`
   }
-  visitInviteUser() {
-    return this.cy.visit(this.pathInviteUser())
+  visitInviteUser(checkStatusCode = false) {
+    this.cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
+    this.cy.visit(this.pathInviteUser())
+    if (checkStatusCode) {
+      // ensure the page loads correctly
+      this.cy.wait('@inviteQuery').its('response.statusCode').should('not.eq', 500)
+    }
   }
   clickAllRowsCheckbox(action: 'check' | 'uncheck') {
     return action === 'check' ? this.cy.get('#allRows').check() : this.cy.get('#allRows').uncheck()

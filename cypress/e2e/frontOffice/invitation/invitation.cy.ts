@@ -4,13 +4,14 @@ describe('User invitation', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
-  before(() => {
+  beforeEach(() => {
+    // Enable features
     cy.task('enable:feature', 'registration')
     cy.task('enable:feature', 'user_type')
     cy.task('enable:feature', 'zipcode_at_register')
     cy.task('enable:feature', 'captcha')
     cy.task('enable:feature', 'turnstile_captcha')
-
+    // Disable features
     cy.task('disable:feature', 'login_facebook')
     cy.task('disable:feature', 'login_saml')
     cy.task('disable:feature', 'login_cas')

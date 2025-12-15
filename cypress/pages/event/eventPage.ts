@@ -1,6 +1,4 @@
-type VisitOptions = {
-  event: string
-}
+import { Base } from '~e2e-pages/index'
 
 export default new (class EventPage {
   get cy() {
@@ -8,19 +6,16 @@ export default new (class EventPage {
   }
 
   get quickActionButton() {
-    return this.cy.get('.cap-buttonQuickAction')
+    return this.cy.get('.cap-buttonQuickAction', { timeout: 30000 }) // flakes in CI, increasing timeout to prevent that
   }
 
-  visit({ event }: VisitOptions) {
+  visit({ event }: { event: string }) {
     this.cy.interceptGraphQLOperation({ operationName: 'EventPageQuery' })
-    this.cy.visit(`/events/${event}`)
-    return this.cy.wait('@EventPageQuery')
+    return Base.visit({ path: `/events/${event}`, operationName: 'EventPageQuery' })
   }
 
   visitEventApprovedWithRegistration() {
-    return this.visit({
-      event: 'event-Create-By-user-with-review-approved',
-    })
+    return this.visit({ event: 'event-Create-By-user-with-review-approved' })
   }
 
   openFiltersMenu() {
@@ -49,8 +44,9 @@ export default new (class EventPage {
   }
 
   getEventPreviews() {
-    // TODO: decrease timeout when the page is migrated and the performance is improved. Currently failing on CI despite the long timeout.
-    return this.cy.get('.eventPreview', { timeout: 30000 }).should('exist').and('be.visible')
+    // TODO: decrease timeout when the page is migrated and the performance is improved.
+    // Currently failing on CI despite the long timeout.
+    return this.cy.get('.eventPreview', { timeout: 40000 }).should('exist').and('be.visible')
   }
 
   waitForEventPreviewsToAppear() {

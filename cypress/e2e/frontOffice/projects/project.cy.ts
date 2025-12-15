@@ -2,7 +2,7 @@ import { Base } from '~e2e-pages/index'
 
 describe('Project', () => {
   describe('when filtering projects with theme page', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('enable:feature', 'themes')
       cy.task('enable:feature', 'projects_form')
     })
@@ -18,7 +18,7 @@ describe('Project', () => {
   })
 
   describe('when viewing presentation step', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('enable:feature', 'blog')
     })
 
@@ -32,7 +32,7 @@ describe('Project', () => {
   })
 
   describe('when viewing project posts menu', () => {
-    before(() => {
+    beforeEach(() => {
       cy.task('enable:feature', 'blog')
     })
 
@@ -98,7 +98,7 @@ describe('Project', () => {
         failOnStatusCode: false,
       })
 
-      cy.contains('global.login', { timeout: 15000 }).should('be.visible')
+      cy.contains('global.login').should('be.visible')
     })
   })
 
@@ -124,7 +124,7 @@ describe('Project', () => {
         failOnStatusCode: false,
       })
 
-      cy.contains('global.login', { timeout: 15000 }).should('be.visible')
+      cy.contains('global.login').should('be.visible')
     })
   })
 
@@ -162,7 +162,6 @@ describe('Project', () => {
     before(() => {
       cy.task('enable:feature', 'projects_form')
     })
-
     beforeEach(() => {
       cy.directLoginAs('super_admin')
     })
@@ -201,9 +200,7 @@ describe('Project', () => {
         path: '/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin',
         operationName: 'ProposalListViewRefetchQuery',
       })
-      cy.contains('Un avenir meilleur pour les nains de jardins (custom access)', { timeout: 10000 }).should(
-        'be.visible',
-      )
+      cy.contains('Un avenir meilleur pour les nains de jardins (custom access)').should('be.visible')
     })
   })
 
@@ -215,7 +212,7 @@ describe('Project', () => {
         operationName: 'ProposalListViewRefetchQuery',
       })
 
-      cy.contains('only-visible-by-administrators', { timeout: 5000 }).should('be.visible')
+      cy.contains('only-visible-by-administrators').should('be.visible')
     })
   })
 
@@ -232,7 +229,7 @@ describe('Project', () => {
       })
 
       cy.get('#authors-credit').should('contain.text', 'admin')
-      cy.contains('global.draft.only_visible_by_you', { timeout: 3000 }).should('be.visible')
+      cy.contains('global.draft.only_visible_by_you').should('be.visible')
       cy.contains('action_edit').click({ force: true })
       cy.url().should('include', '/admin-next/project')
     })
@@ -298,7 +295,7 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ProposalAdminPageQuery' })
       cy.visit('/admin/capco/app/proposal/proposal105/edit')
-      cy.wait('@ProposalAdminPageQuery', { timeout: 10000 })
+      cy.wait('@ProposalAdminPageQuery')
 
       cy.get('#proposal-admin-page-tabs-tab-6').click({ force: true })
 
@@ -307,9 +304,9 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalPublicationStatusMutation' })
       cy.get('[id="proposal-change-state"]').click({ force: true })
-      cy.wait('@ChangeProposalPublicationStatusMutation', { timeout: 10000 })
+      cy.wait('@ChangeProposalPublicationStatusMutation')
 
-      cy.contains('global.saved', { timeout: 5000 }).should('be.visible')
+      cy.contains('global.saved').should('be.visible')
 
       Base.visit({
         path: '/project/projet-avec-beaucoup-dopinions/collect/collecte-des-propositions-avec-questions-qui-va-etre-jetee',
@@ -334,13 +331,13 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ProposalFormAdminAnalysisConfigurationFormQuery' })
       cy.get('#link-tab-new-analysis').click({ force: true })
-      cy.wait('@ProposalFormAdminAnalysisConfigurationFormQuery', { timeout: 10000 })
+      cy.wait('@ProposalFormAdminAnalysisConfigurationFormQuery')
 
       cy.get('#step_now').click({ force: true })
 
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormAnalysisConfigurationMutation' })
       cy.get('#analysis-configuration-submit').click({ force: true })
-      cy.wait('@UpdateProposalFormAnalysisConfigurationMutation', { timeout: 10000 })
+      cy.wait('@UpdateProposalFormAnalysisConfigurationMutation')
 
       Base.visit({
         path: '/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-siret',
@@ -351,7 +348,7 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalDecisionMutation' })
       cy.get('.edit-analysis-icon').click({ force: true })
-      cy.wait('@ChangeProposalDecisionMutation', { timeout: 10000 })
+      cy.wait('@ChangeProposalDecisionMutation')
 
       cy.get('#validate-proposal-decision-button').click({ force: true })
       cy.get('.saving').should('be.visible')
@@ -378,13 +375,13 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ProposalFormAdminAnalysisConfigurationFormQuery' })
       cy.get('#link-tab-new-analysis').click({ force: true })
-      cy.wait('@ProposalFormAdminAnalysisConfigurationFormQuery', { timeout: 10000 })
+      cy.wait('@ProposalFormAdminAnalysisConfigurationFormQuery')
 
       cy.get('#step_now').click({ force: true })
 
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormAnalysisConfigurationMutation' })
       cy.get('#analysis-configuration-submit').click({ force: true })
-      cy.wait('@UpdateProposalFormAnalysisConfigurationMutation', { timeout: 10000 })
+      cy.wait('@UpdateProposalFormAnalysisConfigurationMutation')
 
       Base.visit({
         path: '/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public',
@@ -394,13 +391,13 @@ describe('Project', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalAssessmentMutation' })
       cy.get('.edit-analysis-icon').click({ force: true })
-      cy.wait('@ChangeProposalAssessmentMutation', { timeout: 10000 })
+      cy.wait('@ChangeProposalAssessmentMutation')
 
       cy.get('.jodit-wysiwyg').type("J'apprécie a moitié garçon")
       cy.get('#label-radio-status-FAVOURABLE').click({ force: true })
 
       cy.get('#validate-proposal-assessment-button').click({ force: true })
-      cy.wait('@ChangeProposalAssessmentMutation', { timeout: 10000 })
+      cy.wait('@ChangeProposalAssessmentMutation')
 
       cy.get('#confirm-assessment-button').click({ force: true })
       cy.get('.saving').should('be.visible')

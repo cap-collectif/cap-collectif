@@ -19,6 +19,6 @@ export default new (class Login {
   clickOnForgetPassword() {
     this.cy.interceptGraphQLOperation({ operationName: 'NavbarRightQuery' })
     this.cy.contains('a', 'global.forgot_password').click({ force: true })
-    this.cy.wait('@NavbarRightQuery', { timeout: 10000 })
+    this.cy.wait('@NavbarRightQuery')
   }
 })()

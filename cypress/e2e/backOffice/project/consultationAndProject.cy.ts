@@ -45,7 +45,7 @@ context('Projects Features', () => {
 
       cy.interceptGraphQLOperation({ operationName: 'NavBarMenuQuery' })
       cy.contains('button', 'action_show').click({ force: true })
-      cy.wait('@NavBarMenuQuery', { timeout: 10000 })
+      cy.wait('@NavBarMenuQuery')
     })
 
     it("should allow another admin to see admin's project in BO", () => {
