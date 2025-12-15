@@ -54,6 +54,8 @@ class MagicLinkController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
+        $this->tokenStorage->setToken($securityToken);
+
         $errorResponse = $this->handleParticipationCookies($request, $securityToken);
         if ($errorResponse) {
             return $errorResponse;
