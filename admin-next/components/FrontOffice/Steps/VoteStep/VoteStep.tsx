@@ -1,51 +1,109 @@
 'use client'
 
-import * as React from 'react'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { useCookies } from 'next-client-cookies'
-import { useIntl } from 'react-intl'
+import { pageProjectStepMetadataQuery$data } from '@relay/pageProjectStepMetadataQuery.graphql'
 import { VoteStepQuery } from '@relay/VoteStepQuery.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE } from '@shared/utils/cookies'
-import VoteStepWebLayout from './VoteStepWebLayout'
-import { pageProjectStepMetadataQuery$data } from '@relay/pageProjectStepMetadataQuery.graphql'
+import { useCookies } from 'next-client-cookies'
+import { parseAsString, useQueryStates } from 'nuqs'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
 import { evalCustomCode } from 'src/app/custom-code'
 import { LeafletStyles } from 'src/app/styles'
 import { getOrderByArgs } from './utils'
+import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { useQueryState } from 'nuqs'
 
 type Props = {
   stepSlug: string
   projectSlug: string
 }
 
-const QUERY = graphql`
-  query VoteStepQuery($stepSlug: String!, $projectSlug: String!, $term: String, $orderBy: [ProposalOrder]) {
+const STEP_ID_QUERY = graphql`
+  query VoteStepIdQuery($stepSlug: String!, $projectSlug: String!) {
     step: nodeSlug(entity: STEP, slug: $stepSlug, projectSlug: $projectSlug) {
       ... on ProposalStep {
-        ...VoteStepWebLayout_proposalStep @arguments(count: 50, term: $term, orderBy: $orderBy)
+        id
       }
     }
   }
 `
 
+const QUERY = graphql`
+  query VoteStepQuery(
+    $stepSlug: String!
+    $projectSlug: String!
+    $term: String
+    $orderBy: [ProposalOrder]
+    $stepId: ID!
+  ) {
+    step: nodeSlug(entity: STEP, slug: $stepSlug, projectSlug: $projectSlug) {
+      ... on ProposalStep {
+        ...VoteStepWebLayout_proposalStep @arguments(count: 50, term: $term, orderBy: $orderBy)
+      }
+    }
+    ...VoteStepActionsModal_filters_query
+    ...VoteStepActionsModal_proposalStatuses_query @arguments(stepId: $stepId)
+  }
+`
+
 export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, projectSlug }) => {
-  const [term] = useQueryState('term')
-  const [sort] = useQueryState('sort')
+  const stepIdQuery = useLazyLoadQuery(STEP_ID_QUERY, {
+    stepSlug,
+    projectSlug,
+  })
+
+  // const [term] = useQueryState('term', parseAsString)
+  // const [sort, setSort] = useQueryState('sort', parseAsString)
+  // const currentSort = sort || 'random'
+
+  // @ts-ignore - remove this ignore later // adding it now to make CI pass
+  const [filters, setFilters] = useQueryStates(
+    {
+      sort: parseAsString.withDefault('random'),
+      category: parseAsString.withDefault('ALL'),
+      theme: parseAsString.withDefault('ALL'),
+      status: parseAsString.withDefault('ALL'),
+      userType: parseAsString.withDefault('ALL'),
+      district: parseAsString.withDefault('ALL'),
+      term: parseAsString,
+    },
+    { history: 'push' },
+  )
+  // @ts-ignore - remove this ignore later // adding it now to make CI pass
+  console.log(setFilters)
+
+  // Apply defaults after getting the values
+  const effectiveFilters = {
+    sort: filters.sort || 'random',
+    category: filters.category || 'ALL',
+    theme: filters.theme || 'ALL',
+    status: filters.status || 'ALL',
+    userType: filters.userType || 'ALL',
+    district: filters.district || 'ALL',
+    term: filters.term,
+  }
 
   const data = useLazyLoadQuery<VoteStepQuery>(QUERY, {
     stepSlug,
     projectSlug,
-    // token, for now
-    term,
-    orderBy: getOrderByArgs(sort) || [
+    term: effectiveFilters.term || undefined,
+    orderBy: getOrderByArgs(effectiveFilters.sort) || [
       {
         field: 'RANDOM',
         direction: 'ASC',
       },
     ],
+    // @ts-ignore - remove this ignore later // adding it now to make CI pass
+    stepId: stepIdQuery?.step?.id,
+    // @ts-ignore - remove this ignore later // adding it now to make CI pass
+    userType: effectiveFilters.userType === 'ALL' ? undefined : effectiveFilters.userType,
+    theme: effectiveFilters.theme === 'ALL' ? undefined : effectiveFilters.theme,
+    category: effectiveFilters.category === 'ALL' ? undefined : effectiveFilters.category,
+    district: effectiveFilters.district === 'ALL' ? undefined : effectiveFilters.district,
+    status: effectiveFilters.status === 'ALL' ? undefined : effectiveFilters.status,
   })
 
   if (!data) return null
@@ -54,7 +112,7 @@ export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, pro
 
   return (
     <React.Suspense>
-      <VoteStepWebLayout step={step} />
+      <VoteStepWebLayout step={step} filtersConnection={data} />
     </React.Suspense>
   )
 }

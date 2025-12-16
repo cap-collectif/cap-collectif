@@ -32,7 +32,16 @@ const renderProposals = (proposals, step, viewer, participant) => (
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          .map((node, key) => <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} isSPA={false} participant={participant} />)}
+          .map((node, key) => (
+            <ProposalPreview
+              key={key}
+              proposal={node}
+              step={step}
+              viewer={viewer}
+              isSPA={false}
+              participant={participant}
+            />
+          ))}
     </ul>
   </Row>
 )

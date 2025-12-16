@@ -17,11 +17,13 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import { bootstrapGrid } from '~/utils/sizes'
 import ProposalImageContainer from '~/components/Proposal/Preview/ProposalImageContainer'
+import { ProposalPreview_participant$data } from '~relay/ProposalPreview_participant.graphql'
+
 type Props = {
   readonly proposal: ProposalPreview_proposal
   readonly step: ProposalPreview_step | null | undefined
   readonly viewer: ProposalPreview_viewer | null | undefined
-  readonly participant: ProposalPreview_participant | null | undefined
+  readonly participant: ProposalPreview_participant$data | null | undefined
   readonly features: FeatureToggles
   readonly isSPA?: boolean
 }
@@ -58,7 +60,6 @@ const getCategoryImage = (proposal: ProposalPreview_proposal) => {
 export class ProposalPreview extends React.Component<Props> {
   render() {
     const { proposal, step, viewer, features, isSPA, participant } = this.props
-    
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
@@ -100,7 +101,13 @@ export class ProposalPreview extends React.Component<Props> {
               </>
             )
           ) : null}
-          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} isSPA={isSPA} participant={participant} />
+          <ProposalPreviewBody
+            proposal={proposal}
+            step={step}
+            viewer={viewer}
+            isSPA={isSPA}
+            participant={participant}
+          />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           <ProposalPreviewStatus proposal={proposal} />
         </ProposalCard>

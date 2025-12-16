@@ -1,18 +1,22 @@
 import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
+import { VoteStepActionsModal_filters_query$key } from '@relay/VoteStepActionsModal_filters_query.graphql'
+import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
+import useIsMobile from '@shared/hooks/useIsMobile'
+import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
-import { pxToRem } from '@shared/utils/pxToRem'
 import StepLinkedEvents from '../StepLinkedEvents'
-import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import VoteStepFiltersWeb from './Filters/VoteStepFiltersWeb'
-import VoteStepProposalsList from './VoteStepProposalsList'
-import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
+import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
 import VoteStepMap from './Map/VoteStepMap'
-import { parseAsInteger, useQueryState } from 'nuqs'
+import VoteStepListHeader from './VoteStepListHeader'
+import VoteStepProposalsList from './VoteStepProposalsList'
 
 type Props = {
   step: VoteStepWebLayout_proposalStep$key
+  filtersConnection: VoteStepActionsModal_filters_query$key
 }
 
 const FRAGMENT = graphql`
@@ -21,18 +25,28 @@ const FRAGMENT = graphql`
     count: { type: "Int!" }
     # cursor: { type: "String" }
     orderBy: { type: "[ProposalOrder]" }
-    # userType: { type: "ID" }
-    # theme: { type: "ID" }
-    # category: { type: "ID" }
-    # district: { type: "ID" }
-    # status: { type: "ID" }
+    userType: { type: "ID" }
+    theme: { type: "ID" }
+    category: { type: "ID" }
+    district: { type: "ID" }
+    status: { type: "ID" }
     # geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
     __typename
     ...VoteStepProposalsList_proposalStep @arguments(count: $count, term: $term, orderBy: $orderBy)
-    ...VoteStepMap_proposalStep @arguments(count: $count, term: $term, orderBy: $orderBy)
-    ...VoteStepFiltersWeb_proposalStep
+    ...VoteStepMap_proposalStep
+      @arguments(
+        count: $count
+        term: $term
+        orderBy: $orderBy
+        userType: $userType
+        theme: $theme
+        category: $category
+        district: $district
+        status: $status
+      )
+    ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
     body
     open
@@ -42,13 +56,14 @@ const FRAGMENT = graphql`
       objectType
       contribuable
       isMapViewEnabled
-      # ...ProposalCreateModal_proposalForm
+      ...VoteStepMobileActions_proposalForm_query
     }
   }
 `
 
-export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
+export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConnection }) => {
   const step = useFragment(FRAGMENT, stepKey)
+  const isMobile = useIsMobile()
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
   const hasMapView = step.form?.isMapViewEnabled
 
@@ -72,10 +87,13 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
           </AbstractCard>
           ---- Les brouillons ----
         </Flex>
-        <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
-          <VoteStepFiltersWeb step={step} />
-        </Box>
-        <Box>
+        {(!isMobile || (isMobile && isMapShown)) && (
+          <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
+            <VoteStepListHeader step={step} filtersConnection={filtersConnection} />
+          </Box>
+        )}
+
+        <Box mb="md">
           <Flex justifyContent="space-between" gap="lg">
             {!isMapExpanded ? (
               <Box flex="2 1 0">
@@ -102,6 +120,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
           </Flex>
         </Box>
       </Box>
+      {isMobile && <StepVoteMobileActions form={step.form} />}
     </Box>
   )
 }

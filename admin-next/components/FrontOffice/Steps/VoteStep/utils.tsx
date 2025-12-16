@@ -15,7 +15,7 @@ export const getOrderByArgs = (sort: string | null) => {
     },
     comments: {
       field: 'COMMENTS',
-      direction: 'ASC',
+      direction: 'DESC',
     },
     expensive: {
       field: 'COST',

@@ -1,4 +1,3 @@
-import React, { FC, ReactNode } from 'react'
 import {
   Box,
   CapUIFontSize,
@@ -13,14 +12,15 @@ import {
 } from '@cap-collectif/ui'
 import { layoutQuery$data, TranslationLocale } from '@relay/layoutQuery.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { LOCALE_COOKIE } from '@shared/utils/cookies'
-import { CookieClient } from '@shared/utils/universalCookies'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import SiteLanguageChangeButton from '@shared/language/SiteLanguageChangeButton'
+import { LOCALE_COOKIE } from '@shared/utils/cookies'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { CookieClient } from '@shared/utils/universalCookies'
+import { Cookies } from 'next-client-cookies'
+import React, { FC, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 import { FooterBrand } from './FooterBrand'
-import { Cookies } from 'next-client-cookies'
-import { pxToRem } from '@shared/utils/pxToRem'
 
 const getIconName = (item: string): string => {
   return item === 'link-1' ? 'SHARE_LINK' : item ? item.toUpperCase() + '_COLORED' : null
