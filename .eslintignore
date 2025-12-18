@@ -1,6 +1,7 @@
 __generated__
 node_modules
 features
+benchmarks
 
 # Ignore WYSIWYG files (because we uninstall draft-js & his friends, its too heavy)
 frontend/js/components/AdminEditor/**/*.ts
