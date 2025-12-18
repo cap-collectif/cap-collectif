@@ -161,3 +161,11 @@ export const parseLatLngBounds = (latlngBounds: string) => {
     return null
   }
 }
+
+export const exportLatLngBounds = (bounds: string) => {
+  const parsedBounds = L.latLngBounds(JSON.parse(bounds))
+  return {
+    topLeft: parsedBounds.getNorthWest(),
+    bottomRight: parsedBounds.getSouthEast(),
+  }
+}

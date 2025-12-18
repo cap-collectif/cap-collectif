@@ -25,27 +25,19 @@ const FRAGMENT = graphql`
     count: { type: "Int!" }
     # cursor: { type: "String" }
     orderBy: { type: "[ProposalOrder]" }
-    userType: { type: "ID" }
-    theme: { type: "ID" }
-    category: { type: "ID" }
-    district: { type: "ID" }
-    status: { type: "ID" }
-    # geoBoundingBox: { type: "GeoBoundingBox" }
+    # userType: { type: "ID" }
+    # theme: { type: "ID" }
+    # category: { type: "ID" }
+    # district: { type: "ID" }
+    # status: { type: "ID" }
+    geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
     __typename
-    ...VoteStepProposalsList_proposalStep @arguments(count: $count, term: $term, orderBy: $orderBy)
+    ...VoteStepProposalsList_proposalStep
+      @arguments(count: $count, term: $term, orderBy: $orderBy, geoBoundingBox: $geoBoundingBox)
     ...VoteStepMap_proposalStep
-      @arguments(
-        count: $count
-        term: $term
-        orderBy: $orderBy
-        userType: $userType
-        theme: $theme
-        category: $category
-        district: $district
-        status: $status
-      )
+      @arguments(count: $count, term: $term, orderBy: $orderBy, geoBoundingBox: $geoBoundingBox)
     ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
     body
@@ -61,16 +53,16 @@ const FRAGMENT = graphql`
   }
 `
 
+const TEMPLATE_COLUMNS = 'repeat(auto-fit, minmax(300px, 1fr))'
+
 export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConnection }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
+
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
-  const hasMapView = step.form?.isMapViewEnabled
 
-  const [isMapShown] = useQueryState('map_shown', parseAsInteger)
-  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger)
-
-  const templateColumns = 'repeat(auto-fit, minmax(300px, 2fr))'
+  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
+  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
   const mapStickyPositionFromTop = step.votable ? 156 : 88
@@ -95,21 +87,26 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConne
 
         <Box mb="md">
           <Flex justifyContent="space-between" gap="lg">
-            {!isMapExpanded ? (
+            {(!isMapExpanded && !isMobile) || (isMobile && !isMapShown) ? (
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
                     <Box width="100%">
-                      <ProjectsListPlaceholder count={10} templateColumns={templateColumns} mt={0} />
+                      <ProjectsListPlaceholder count={10} templateColumns={TEMPLATE_COLUMNS} mt={0} />
                     </Box>
                   }
                 >
-                  <VoteStepProposalsList step={step} templateColumns={templateColumns} />
+                  <VoteStepProposalsList step={step} templateColumns={TEMPLATE_COLUMNS} />
                 </React.Suspense>
               </Box>
             ) : null}
-            {hasMapView && isMapShown ? (
-              <Box flex="1 1 0" position="sticky" top={pxToRem(mapStickyPositionFromTop)} height={mapHeight}>
+            {step.form?.isMapViewEnabled && isMapShown ? (
+              <Box
+                flex={`0 1 ${pxToRem(395)}`}
+                position="sticky"
+                top={pxToRem(mapStickyPositionFromTop)}
+                height={mapHeight}
+              >
                 <VoteStepMap
                   step={step}
                   showMapPlaceholder={showMapPlaceholder}

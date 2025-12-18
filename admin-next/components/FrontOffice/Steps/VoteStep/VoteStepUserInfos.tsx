@@ -12,7 +12,7 @@ import {
 import { FC, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { StepUserVotesInfos_proposalStep$key } from '@relay/StepUserVotesInfos_proposalStep.graphql'
+import { VoteStepUserInfos_proposalStep$key } from '@relay/VoteStepUserInfos_proposalStep.graphql'
 import VoteStepUserVotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
 
 const contentTypes = [
@@ -28,11 +28,11 @@ const contentTypes = [
 export type StepUserVotesType = typeof contentTypes[number]
 
 interface Props {
-  step: StepUserVotesInfos_proposalStep$key
+  step: VoteStepUserInfos_proposalStep$key
 }
 
 const FRAGMENT = graphql`
-  fragment StepUserVotesInfos_proposalStep on ProposalStep {
+  fragment VoteStepUserInfos_proposalStep on ProposalStep {
     ...VotesPopup_proposalStep
     voteType
     budget
@@ -45,7 +45,7 @@ const FRAGMENT = graphql`
   }
 `
 
-const StepUserVotesInfos: FC<Props> = ({ step: stepKey }) => {
+const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const intl = useIntl()
 
@@ -156,4 +156,4 @@ const StepUserVotesInfos: FC<Props> = ({ step: stepKey }) => {
     </Box>
   )
 }
-export default StepUserVotesInfos
+export default VoteStepUserInfos

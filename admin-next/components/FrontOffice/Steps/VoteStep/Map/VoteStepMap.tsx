@@ -57,7 +57,7 @@ export const VoteStepMap: FC<Props> = ({ showMapPlaceholder, removePlaceholderAn
       {showMapPlaceholder ? (
         <VoteStepMapPlaceholder>
           <Button variant="secondary" variantSize="big" onClick={removePlaceholderAndShowMap} id={mapId}>
-            Afficher la carte
+            {intl.formatMessage({ id: 'map.display' })}
           </Button>
         </VoteStepMapPlaceholder>
       ) : (

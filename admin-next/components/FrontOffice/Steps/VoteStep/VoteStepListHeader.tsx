@@ -7,6 +7,7 @@ import { graphql, useFragment } from 'react-relay'
 import VoteStepSearchBar from './Filters/VoteStepSearchBar'
 import VoteStepListActions from './ListActions/VoteStepListActions'
 import ProposalForm from './ProposalForm/ProposalForm'
+import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
   step: VoteStepListHeader_proposalStep$key
@@ -21,6 +22,7 @@ const FRAGMENT = graphql`
       contribuable
       ...VoteStepListActions_proposalForm
     }
+    ...VoteStepUserInfos_proposalStep
   }
 `
 
@@ -38,10 +40,8 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, filtersConnection 
         <VoteStepListActions form={step.form} filtersConnection={filtersConnection} />
       </Box>
       {step.votable ? (
-        <Box flex="1 1 0">
-          <Flex align="center" justify="center" height={pxToRem(104)} border="1px solid blue">
-            TODO : VOTE COMPONENT
-          </Flex>
+        <Box flex={`0 1 ${pxToRem(395)}`} position="relative" minHeight={pxToRem(116)}>
+          <VoteStepUserInfos step={step} />
         </Box>
       ) : null}
     </Flex>

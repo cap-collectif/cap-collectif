@@ -80,7 +80,15 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
   const zoom = urlCenter ? 14 : filterBounds && !isMobile ? null : form?.zoomMap || 10
 
   return (
-    <Box height="100%" borderRadius="xs" overflow="hidden">
+    <Box
+      height="100%"
+      borderRadius="xs"
+      overflow="hidden"
+      sx={{
+        '.leaflet-card-popup .leaflet-popup-content-wrapper': { borderRadius: '8px' },
+        '.leaflet-card-popup .leaflet-popup-content': { margin: 0 },
+      }}
+    >
       <MapContainer
         id={mapId}
         center={center}

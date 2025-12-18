@@ -9,6 +9,7 @@ import {
   CardCover,
   CardContent,
   CardProps,
+  CapUIShadow,
 } from '@cap-collectif/ui'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import stripHTML from '@shared/utils/stripHTML'
@@ -20,6 +21,7 @@ type Props = BoxProps & {
   proposal: ProposalCard_proposal$key
   format?: CardProps['format']
   primaryInfoTag?: React.ElementType
+  active?: boolean
 }
 
 const FRAGMENT = graphql`
@@ -44,7 +46,7 @@ const FRAGMENT = graphql`
   }
 `
 
-export const ProposalCard = ({ proposal: proposalKey, primaryInfoTag, ...props }: Props) => {
+export const ProposalCard: React.FC<Props> = ({ proposal: proposalKey, primaryInfoTag, active, ...props }) => {
   const proposal = useFragment(FRAGMENT, proposalKey)
   const { id, title, url, media, summary, body, category } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
@@ -58,10 +60,11 @@ export const ProposalCard = ({ proposal: proposalKey, primaryInfoTag, ...props }
   return (
     <Card
       id={`cap-proposal-card-${id}`}
-      className="cap-proposal-card"
       format={listView === 'grid' ? 'vertical' : 'horizontal'}
       maxWidth={listView === 'grid' ? ['unset', pxToRem(460), pxToRem(394)] : 'unset'}
       minWidth="unset"
+      className={'cap-proposal-card' + (active ? ' active' : '')}
+      sx={{ boxShadow: active ? CapUIShadow.Small : 'inherit' }}
       {...props}
     >
       <CardCover>
