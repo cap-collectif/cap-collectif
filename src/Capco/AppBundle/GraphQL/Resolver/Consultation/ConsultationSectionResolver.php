@@ -28,7 +28,7 @@ class ConsultationSectionResolver implements QueryInterface
             // define ordering closure, using preferred comparison method/field
             usort(
                 $sectionsArray,
-                fn ($first, $second) => (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1
+                fn ($first, $second) => (int) $first->getPosition() <=> (int) $second->getPosition()
             );
         }
 

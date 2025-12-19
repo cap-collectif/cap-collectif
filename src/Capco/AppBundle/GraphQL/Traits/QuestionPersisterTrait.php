@@ -96,12 +96,12 @@ trait QuestionPersisterTrait
         // we must reorder arguments datas to match database order (used in the symfony form)
         usort($arguments['questions'], static function ($a, $b) use ($questionsOrderedByIdInDb) {
             if (isset($a['question']['id'], $b['question']['id'])) {
-                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
+                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) <=>
                     array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
             }
 
             //@todo respect the user order, for now we just put new items at the end
-            return isset($a['question']['id']) ? false : true;
+            return isset($a['question']['id']) ? -1 : 1;
         });
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {

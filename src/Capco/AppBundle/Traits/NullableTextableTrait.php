@@ -17,9 +17,9 @@ trait NullableTextableTrait
         return $this->body;
     }
 
-    public function getBodyText()
+    public function getBodyText(): string
     {
-        return strip_tags($this->body);
+        return strip_tags($this->body ?? '');
     }
 
     public function setBody(?string $body = null): self

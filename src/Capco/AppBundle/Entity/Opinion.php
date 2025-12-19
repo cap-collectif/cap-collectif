@@ -442,10 +442,8 @@ class Opinion implements EntityInterface, OpinionContributionInterface, Displaya
         $iterator = $this->appendices->getIterator();
         $appendicesArray = iterator_to_array($iterator);
 
-        usort($appendicesArray, fn ($a, $b) => $this->getPositionForAppendixType($a->getAppendixType()) <
-            $this->getPositionForAppendixType($b->getAppendixType())
-            ? -1
-            : 1);
+        usort($appendicesArray, fn ($a, $b) => $this->getPositionForAppendixType($a->getAppendixType()) <=>
+            $this->getPositionForAppendixType($b->getAppendixType()));
 
         return $appendicesArray;
     }

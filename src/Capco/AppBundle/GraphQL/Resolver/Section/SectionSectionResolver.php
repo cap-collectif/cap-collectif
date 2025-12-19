@@ -17,7 +17,7 @@ class SectionSectionResolver implements QueryInterface
         // define ordering closure, using preferred comparison method/field
         usort(
             $typeChildren,
-            fn ($first, $second) => (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1
+            fn ($first, $second) => (int) $first->getPosition() <=> (int) $second->getPosition()
         );
 
         return $typeChildren;

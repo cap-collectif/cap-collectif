@@ -146,7 +146,7 @@ class IndexBuilder
             ];
         }
         // Newest first
-        usort($indexes, static fn ($a, $b) => $a['date'] < $b['date']);
+        usort($indexes, static fn ($a, $b) => $b['date'] <=> $a['date']);
 
         return $indexes[0]['name'];
     }

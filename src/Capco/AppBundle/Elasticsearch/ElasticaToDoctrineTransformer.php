@@ -103,7 +103,7 @@ class ElasticaToDoctrineTransformer
                     $a::getElasticsearchTypeName() .
                         '#' .
                         $propertyAccessor->getValue($a, $identifier)
-                ] >
+                ] <=>
                     $idPos[
                         $b::getElasticsearchTypeName() .
                             '#' .
@@ -111,7 +111,7 @@ class ElasticaToDoctrineTransformer
                     ];
             }
 
-            return $idPos[$a[$identifier]] > $idPos[$b[$identifier]];
+            return $idPos[$a[$identifier]] <=> $idPos[$b[$identifier]];
         });
 
         return $objects;

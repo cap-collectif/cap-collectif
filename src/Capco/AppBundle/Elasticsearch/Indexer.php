@@ -88,7 +88,7 @@ class Indexer
         $classes = $this->getClassesToIndex();
 
         $classesOrdered = array_values($classes);
-        usort($classesOrdered, fn ($a, $b) => \call_user_func($a . '::getElasticsearchPriority') >
+        usort($classesOrdered, fn ($a, $b) => \call_user_func($a . '::getElasticsearchPriority') <=>
             \call_user_func($b . '::getElasticsearchPriority'));
 
         foreach ($classesOrdered as $class) {

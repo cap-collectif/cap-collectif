@@ -168,7 +168,7 @@ class ReplySearch extends Search
 
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false));
+        usort($results, static fn ($a, $b) => array_search($a->getId(), $ids, false) <=> array_search($b->getId(), $ids, false));
 
         $this->addGeoIpData($results, $informations);
 
