@@ -160,9 +160,6 @@ export const Footer: FC<Props> = props => {
                 <a href={legalPath}>{intl.formatMessage({ id: 'legal-mentions' })}</a>
               </li>
             )}
-            <li>
-              <a href="/pages/charte">{intl.formatMessage({ id: 'charter' })}</a>
-            </li>
             {links &&
               links
                 .filter(link => !!link)
