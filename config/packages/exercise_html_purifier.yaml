@@ -4,6 +4,7 @@ exercise_html_purifier:
         user:
             config:
                 HTML.SafeIframe: true
+                Attr.AllowedFrameTargets: ['_blank']
                 URI.SafeIframeRegexp: "#^(https?:)?//(www\\.youtube(?:-nocookie)?\\.com/embed/|player\\.vimeo\\.com/video/)#"
         admin:
             config:
