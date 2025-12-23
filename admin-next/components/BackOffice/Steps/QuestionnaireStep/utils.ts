@@ -11,7 +11,17 @@ export type Questionnaire = {
   questionnaireId: string
   title: string
   description: string
-  questions: Array<QuestionInput>
+  questions: Array<
+    QuestionInput & {
+      responses?: {
+        edges?: Array<{
+          node: {
+            id: string
+          }
+        }>
+      }
+    }
+  >
   questionsWithJumps: Array<any>
 }
 
@@ -240,6 +250,7 @@ export const formatQuestionsInput = (
         position: undefined,
         choices: undefined,
         destinationJumps: undefined,
+        responses: undefined,
       },
     }
     if (multipleChoiceQuestions.indexOf(question.type) !== -1 && typeof question.choices !== 'undefined') {

@@ -87,6 +87,13 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
           description
           questions {
             id
+            responses(first: 1) {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
             ...responsesHelper_adminQuestion @relay(mask: false)
           }
           questionsWithJumps: questions(filter: JUMPS_ONLY) {

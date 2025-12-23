@@ -29,6 +29,7 @@ import uuid from '@shared/utils/uuid'
 import QuestionnaireListField from '@components/BackOffice/Form/QuestionnaireListField'
 import debounce from '@shared/utils/debounce-promise'
 import stripHTML from '@shared/utils/stripHTML'
+import { DeleteQuestionButton } from '@components/BackOffice/Steps/QuestionnaireStep/DeleteQuestionButton'
 
 const QuestionnaireCreationTypeEnum = {
   NEW: 'NEW',
@@ -172,7 +173,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
               placeholder={intl.formatMessage({
                 id: 'questionnaire.explain_briefly',
               })}
-              bg='white'
+              bg="white"
             />
           </FormControl>
           <Text>{intl.formatMessage({ id: 'admin.fields.questionnaire.questions' })}</Text>
@@ -196,7 +197,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     pl={isSubSection ? 6 : isSection ? 4 : hasSectionOrSubsectionBefore ? 8 : 4}
                     draggable
                     width="100%"
-                    sx={{ '& > div' : {'backgroundColor': 'white !important'} }}
+                    sx={{ '& > div': { backgroundColor: 'white !important' } }}
                   >
                     <Flex direction="column">
                       <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight={1.5}>
@@ -246,9 +247,9 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                         }}
                         type="button"
                       />
-                      <ButtonQuickAction
-                        tooltipZIndex={2}
-                        onClick={() => {
+                      <DeleteQuestionButton
+                        hasResponses={(questionsValues[index]?.responses?.edges?.length ?? 0) > 0}
+                        onDelete={() => {
                           remove(index)
                           const jumpIndex = questionsWithJumpsValues.findIndex((q: QuestionIds) => {
                             if (q.id === questionsValues[index]?.id) return true
@@ -264,17 +265,12 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                             }
                             return false
                           })
-                          if (jumpIndex !== -1)
+                          if (jumpIndex !== -1) {
                             dispatchEvent('removeJump', {
                               index: jumpIndex,
                             })
+                          }
                         }}
-                        variantColor="danger"
-                        icon={CapUIIcon.Trash}
-                        label={intl.formatMessage({
-                          id: 'global.delete',
-                        })}
-                        type="button"
                       />
                     </ButtonGroup>
                   </ListCard.Item>
