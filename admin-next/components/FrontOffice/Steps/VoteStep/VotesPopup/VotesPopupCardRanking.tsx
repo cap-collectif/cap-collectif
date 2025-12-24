@@ -49,7 +49,7 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
   const vote = useFragment(VOTE_FRAGMENT, voteKey)
   const step = useFragment(STEP_FRAGMENT, stepKey)
   const [commitUpdateVotes, isLoading] = useMutation(UPDATE_VOTES_MUTATION)
-  const maxPoints = step.votesLimit ?? step.votesMin
+  const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
   const updateVoteRanking = (votes, voteId, delta) => {
     votes.sort((a, b) => a.node.ranking - b.node.ranking)
@@ -63,7 +63,7 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
       votes[voteIndex] = votes[voteIndex - 1]
       votes[voteIndex - 1] = voteTmp
     }
-    votes.map((edge, i) => (edge.node.ranking = i))
+    votes.forEach((edge, i) => (edge.node.ranking = i))
     return votes
   }
 

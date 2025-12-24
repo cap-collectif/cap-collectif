@@ -4,16 +4,18 @@ import {
   CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
+  CapUIModalSize,
   CircularStep,
   Flex,
+  Heading,
   Icon,
-  Tooltip,
+  Modal,
 } from '@cap-collectif/ui'
-import { FC, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepUserInfos_proposalStep$key } from '@relay/VoteStepUserInfos_proposalStep.graphql'
-import VoteStepUserVotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
+import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
 
 const contentTypes = [
   'minMaxRanking',
@@ -50,6 +52,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
 
   const [isVotePopupOpen, setIsVotePopupOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const type = (step.voteType?.toLowerCase() as StepUserVotesType) ?? 'simple'
   const proposalProgress = step.viewerVotes?.totalCount ?? 0
@@ -106,31 +109,63 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   }
 
   const titleValue = () => (proposalGoal ? proposalGoal - proposalProgress : undefined)
-  const descriptionValue = () => step.budget ?? proposalProgress
+  const descriptionValue = useMemo(() => step.budget ?? proposalProgress, [step.budget, proposalProgress])
 
-  const progressValue = () => (100 * proposalProgress) / proposalLimit
+  const targetProgress = (100 * proposalProgress) / proposalLimit
+  const [animatedProgress, setAnimatedProgress] = useState(targetProgress)
+  const animationRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const duration = 500
+    const startTime = performance.now()
+    const startValue = animatedProgress
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const easeOut = 1 - Math.pow(1 - progress, 3)
+      const currentValue = startValue + (targetProgress - startValue) * easeOut
+
+      setAnimatedProgress(currentValue)
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate)
+      }
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [targetProgress])
 
   return (
     <Box
-      boxShadow={isVotePopupOpen ? 'medium' : 'none'}
+      boxShadow="medium"
       backgroundColor="white"
       borderRadius="xs"
       position={isVotePopupOpen ? 'absolute' : 'relative'}
       padding="md"
       width="100%"
+      maxHeight="100vh"
     >
       <Flex gap="md" alignItems="center">
-        <CircularStep icon={CapUIIcon.ThumbUp} progress={progressValue()} variantSize="medium" />
+        <CircularStep icon={CapUIIcon.ThumbUp} progress={animatedProgress} variantSize="medium" />
         <Box color="text.primary" fontSize={CapUIFontSize.BodyLarge} flex="1">
           <Box fontWeight={CapUIFontWeight.Semibold}>
             {intl.formatMessage({ id: `proposal.step.user.votes.infos.title.${titleKey()}` }, { n: titleValue() })}
           </Box>
-          <p>
-            {intl.formatMessage(
-              { id: `proposal.step.user.votes.infos.desc.${descriptionKey()}` },
-              { n: descriptionValue() },
-            )}
-          </p>
+          {descriptionValue !== 0 && type === 'simple' && (
+            <Box as="p">
+              {intl.formatMessage(
+                { id: `proposal.step.user.votes.infos.desc.${descriptionKey()}` },
+                { n: descriptionValue },
+              )}
+            </Box>
+          )}
           <Button
             variantSize="small"
             variant="tertiary"
@@ -145,13 +180,28 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
       </Flex>
       {isVotePopupOpen && (
         <Box mt="lg">
-          <VoteStepUserVotesPopup step={step} />
+          <VotesPopup step={step} />
         </Box>
       )}
       <Box alignSelf="flex-start" position="absolute" top="9px" right="7px">
-        <Tooltip label={step.votesHelpText}>
+        <Button variant="tertiary" variantSize="small" onClick={() => setIsModalOpen(true)}>
           <Icon name={CapUIIcon.Info} color="primary.base" />
-        </Tooltip>
+        </Button>
+        <Modal
+          show={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          hideCloseButton={false}
+          size={CapUIModalSize.Md}
+          ariaLabel={intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
+        >
+          <Modal.Header>
+            <Heading>{intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}</Heading>
+          </Modal.Header>
+          <Modal.Body>{step.votesHelpText}</Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsModalOpen(false)}>{intl.formatMessage({ id: 'global.close' })}</Button>
+          </Modal.Footer>
+        </Modal>
       </Box>
     </Box>
   )

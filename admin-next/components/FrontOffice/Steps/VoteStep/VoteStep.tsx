@@ -16,30 +16,9 @@ import { getOrderByArgs } from './utils'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 
-type Props = {
-  stepSlug: string
-  projectSlug: string
-}
-
-const STEP_ID_QUERY = graphql`
-  query VoteStepIdQuery($stepSlug: String!, $projectSlug: String!) {
-    step: nodeSlug(entity: STEP, slug: $stepSlug, projectSlug: $projectSlug) {
-      ... on ProposalStep {
-        id
-      }
-    }
-  }
-`
-
 const QUERY = graphql`
-  query VoteStepQuery(
-    $stepSlug: String!
-    $projectSlug: String!
-    $term: String
-    $orderBy: [ProposalOrder]
-    $stepId: ID!
-  ) {
-    step: nodeSlug(entity: STEP, slug: $stepSlug, projectSlug: $projectSlug) {
+  query VoteStepQuery($term: String, $orderBy: [ProposalOrder], $stepId: ID!) {
+    step: node(id: $stepId) {
       ... on ProposalStep {
         ...VoteStepWebLayout_proposalStep @arguments(count: 50, term: $term, orderBy: $orderBy)
       }
@@ -49,12 +28,7 @@ const QUERY = graphql`
   }
 `
 
-export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, projectSlug }) => {
-  const stepIdQuery = useLazyLoadQuery(STEP_ID_QUERY, {
-    stepSlug,
-    projectSlug,
-  })
-
+export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepId }) => {
   // const [term] = useQueryState('term', parseAsString)
   // const [sort, setSort] = useQueryState('sort', parseAsString)
   // const currentSort = sort || 'random'
@@ -87,8 +61,7 @@ export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, pro
   }
 
   const data = useLazyLoadQuery<VoteStepQuery>(QUERY, {
-    stepSlug,
-    projectSlug,
+    stepId: stepId,
     term: effectiveFilters.term || undefined,
     orderBy: getOrderByArgs(effectiveFilters.sort) || [
       {
@@ -96,8 +69,6 @@ export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, pro
         direction: 'ASC',
       },
     ],
-    // @ts-ignore - remove this ignore later // adding it now to make CI pass
-    stepId: stepIdQuery?.step?.id,
     // @ts-ignore - remove this ignore later // adding it now to make CI pass
     userType: effectiveFilters.userType === 'ALL' ? undefined : effectiveFilters.userType,
     theme: effectiveFilters.theme === 'ALL' ? undefined : effectiveFilters.theme,
@@ -117,9 +88,10 @@ export const VoteStepWeb: React.FC<Props & { token: string }> = ({ stepSlug, pro
   )
 }
 
-export const VoteStep: React.FC<
-  Props & { customCode?: string; prefetchedStep: pageProjectStepMetadataQuery$data['step'] }
-> = ({ stepSlug, projectSlug, prefetchedStep, customCode }) => {
+export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProjectStepMetadataQuery$data['step'] }> = ({
+  prefetchedStep,
+  customCode,
+}) => {
   const new_new_vote_step = useFeatureFlag('new_new_vote_step')
 
   if (!new_new_vote_step) {
@@ -154,7 +126,7 @@ export const VoteStep: React.FC<
     <>
       {hasMapView ? <LeafletStyles /> : null}
       <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
-        <VoteStepWeb stepSlug={stepSlug} projectSlug={projectSlug} token={token} />
+        <VoteStepWeb stepId={prefetchedStep.id} token={token} />
       </React.Suspense>
     </>
   )

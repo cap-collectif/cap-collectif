@@ -7,7 +7,13 @@ import VoteStepEmptyList from './VoteStepEmptyList'
 import { useQueryState } from 'nuqs'
 import { exportLatLngBounds } from '@utils/leaflet'
 
-type Props = { step: VoteStepProposalsList_proposalStep$key; templateColumns: string }
+type TemplateColumns = {
+  base: string
+  tablet: string
+  desktop: string
+}
+
+type Props = { step: VoteStepProposalsList_proposalStep$key; templateColumns: TemplateColumns }
 
 const PROPOSALS_FRAGMENT = graphql`
   fragment VoteStepProposalsList_proposalStep on ProposalStep
@@ -101,8 +107,11 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
 
   const proposalsLength = data?.proposals?.edges?.length
 
+  const gridTemplateColumns =
+    listView === 'grid' ? [templateColumns.base, templateColumns.tablet, templateColumns.desktop] : '1fr'
+
   return proposalsLength ? (
-    <Grid templateColumns={listView === 'grid' ? ['1fr', templateColumns] : '1fr'} gap="lg">
+    <Grid templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
       {data.proposals.edges.map(({ node }) => (
         <Box
           key={node.id}

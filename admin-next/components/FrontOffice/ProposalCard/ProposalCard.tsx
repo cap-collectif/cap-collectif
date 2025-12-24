@@ -15,7 +15,6 @@ import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import stripHTML from '@shared/utils/stripHTML'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import { useQueryState } from 'nuqs'
-import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = BoxProps & {
   proposal: ProposalCard_proposal$key
@@ -61,7 +60,6 @@ export const ProposalCard: React.FC<Props> = ({ proposal: proposalKey, primaryIn
     <Card
       id={`cap-proposal-card-${id}`}
       format={listView === 'grid' ? 'vertical' : 'horizontal'}
-      maxWidth={listView === 'grid' ? ['unset', pxToRem(460), pxToRem(394)] : 'unset'}
       minWidth="unset"
       className={'cap-proposal-card' + (active ? ' active' : '')}
       sx={{ boxShadow: active ? CapUIShadow.Small : 'inherit' }}

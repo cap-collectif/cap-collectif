@@ -1,44 +1,70 @@
 import { Box, CapUIIcon, Flex } from '@cap-collectif/ui'
-import { VoteStepMobileActions_proposalForm_query$key } from '@relay/VoteStepMobileActions_proposalForm_query.graphql'
+import { VoteStepMobileActions_proposalStep$key } from '@relay/VoteStepMobileActions_proposalStep.graphql'
 import { parseAsInteger, useQueryState } from 'nuqs'
+import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import VoteStepMobileFilters from '../Filters/VoteStepMobileFilters'
 import StepVoteMobileActionBtn from './VoteStepMobileActionBtn'
 
+type ActiveAction = 'search' | 'collect' | 'vote' | 'map' | null
+
 interface Props {
-  form: VoteStepMobileActions_proposalForm_query$key
+  step: VoteStepMobileActions_proposalStep$key
 }
 
 const FRAGMENT = graphql`
-  fragment VoteStepMobileActions_proposalForm_query on ProposalForm {
-    isMapViewEnabled
+  fragment VoteStepMobileActions_proposalStep on ProposalStep {
+    votable
+    form {
+      isMapViewEnabled
+    }
   }
 `
 
-const StepVoteMobileActions: React.FC<Props> = ({ form: formKey }) => {
+const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
-  const form = useFragment(FRAGMENT, formKey)
+  const step = useFragment(FRAGMENT, stepKey)
+  const [activeAction, setActiveAction] = useState<ActiveAction>(null)
 
   const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
-  const hasMapView = form?.isMapViewEnabled
+
+  const handleActionClick = (action: ActiveAction) => {
+    if (action === 'map') {
+      setIsMapShown(isMapShown === 1 ? 0 : 1)
+    }
+    setActiveAction(prev => (prev === action ? null : action))
+  }
 
   return (
     <Box position="sticky" zIndex={1} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
       <Flex width="100%">
-        <StepVoteMobileActionBtn icon={CapUIIcon.Search}>
+        <StepVoteMobileActionBtn
+          icon={CapUIIcon.Search}
+          isActive={activeAction === 'search'}
+          onClick={() => handleActionClick('search')}
+        >
           {intl.formatMessage({ id: 'global.search.label' })}
         </StepVoteMobileActionBtn>
-        <StepVoteMobileActionBtn icon={CapUIIcon.Add}>
+        <StepVoteMobileActionBtn
+          icon={CapUIIcon.Add}
+          isActive={activeAction === 'collect'}
+          onClick={() => handleActionClick('collect')}
+        >
           {intl.formatMessage({ id: 'global.collect' })}
         </StepVoteMobileActionBtn>
-        <StepVoteMobileActionBtn icon={CapUIIcon.ThumbUpO}>
-          {intl.formatMessage({ id: 'global.vote' })}
-        </StepVoteMobileActionBtn>
-        {hasMapView && (
+        {step.votable && (
+          <StepVoteMobileActionBtn
+            icon={CapUIIcon.ThumbUpO}
+            isActive={activeAction === 'vote'}
+            onClick={() => handleActionClick('vote')}
+          >
+            {intl.formatMessage({ id: 'global.vote' })}
+          </StepVoteMobileActionBtn>
+        )}
+        {step.form.isMapViewEnabled && (
           <StepVoteMobileActionBtn
             icon={isMapShown ? CapUIIcon.PinO : CapUIIcon.Grid}
-            onClick={() => setIsMapShown(isMapShown === 1 ? 0 : 1)}
+            onClick={() => handleActionClick('map')}
           >
             {isMapShown
               ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
@@ -46,7 +72,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ form: formKey }) => {
           </StepVoteMobileActionBtn>
         )}
       </Flex>
-      <VoteStepMobileFilters />
+      {/* <VoteStepMobileFilters /> */}
     </Box>
   )
 }

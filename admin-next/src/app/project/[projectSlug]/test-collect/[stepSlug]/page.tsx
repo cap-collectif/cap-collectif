@@ -108,7 +108,7 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
         <div id="step-page-code" className="cap-custom-code" dangerouslySetInnerHTML={{ __html: step?.customCode }} />
       ) : null}
       <section id={`vote-step-page-${step?.id}`}>
-        <VoteStep stepSlug={stepSlug} projectSlug={projectSlug} prefetchedStep={step} customCode={step.customCode} />
+        <VoteStep prefetchedStep={step} customCode={step.customCode} />
       </section>
       <ProjectShowTrash projectSlug={projectSlug} />
     </>

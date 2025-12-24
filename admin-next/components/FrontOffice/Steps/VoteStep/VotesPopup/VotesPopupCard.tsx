@@ -1,4 +1,4 @@
-import { Button, CapUIIcon, Card, CardContent, CardCoverPlaceholder, Flex, Icon } from '@cap-collectif/ui'
+import { Button, CapUIIcon, Card, CardContent, CardCoverPlaceholder, Flex, Icon, useTheme } from '@cap-collectif/ui'
 import { FC } from 'react'
 import VotesPopupCardRanking from './VotesPopupCardRanking'
 import { graphql, useFragment, useMutation } from 'react-relay'
@@ -35,6 +35,7 @@ const REMOVE_VOTE_MUTATION = graphql`
       step {
         id
         viewerVotes {
+          totalCount
           edges {
             node {
               id
@@ -55,6 +56,8 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   const step = useFragment(STEP_FRAGMENT, stepKey)
   const [commitRemoveVote] = useMutation(REMOVE_VOTE_MUTATION)
 
+  const { colors } = useTheme()
+
   const removeVote = () => {
     const voteId = vote.id
 
@@ -73,6 +76,8 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
         const edges = connection.getLinkedRecords('edges') || []
         const newEdges = edges.filter(edge => edge?.getLinkedRecord('node')?.getDataID() !== voteId)
         connection.setLinkedRecords(newEdges, 'edges')
+        const currentCount = connection.getValue('totalCount') as number
+        connection.setValue(currentCount - 1, 'totalCount')
       },
       updater: store => {
         store.delete(voteId)
@@ -81,13 +86,18 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   }
 
   return (
-    <Flex gap="sm" width="100%" pl="xs" py="xs">
+    <Flex gap="sm" width="100%" pl="xs" py="xs" alignItems="center">
       {step.votesRanking && <VotesPopupCardRanking vote={vote} step={step} />}
       <Card format="horizontal" p="0" _hover={{ boxShadow: 'none' }}>
         {!step.votesRanking && <CardCoverPlaceholder flex="1" />}
         <CardContent flex="1" primaryInfo={vote.proposal.title} />
       </Card>
-      <Button variant="tertiary" variantColor="hierarchy" onClick={removeVote}>
+      <Button
+        variant="tertiary"
+        variantColor="hierarchy"
+        onClick={removeVote}
+        sx={{ '&:hover': { color: colors.danger.base + '!important' } }}
+      >
         <Icon name={CapUIIcon.TrashO} />
       </Button>
     </Flex>

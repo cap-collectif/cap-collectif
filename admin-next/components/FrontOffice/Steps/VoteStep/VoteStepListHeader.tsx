@@ -32,7 +32,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, filtersConnection 
 
   return (
     <Flex gap="lg" width="100%" align="start">
-      <Box gap="xl" width="100%" flex="2 1 0">
+      <Box width="100%" flex="2 1 0">
         <Flex gap="xl" width="100%">
           {step.form && isCollectStep ? <ProposalForm disabled={!step.form.contribuable} /> : null}
           <VoteStepSearchBar />

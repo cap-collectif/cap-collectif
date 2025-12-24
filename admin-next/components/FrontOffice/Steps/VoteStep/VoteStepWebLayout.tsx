@@ -40,6 +40,7 @@ const FRAGMENT = graphql`
       @arguments(count: $count, term: $term, orderBy: $orderBy, geoBoundingBox: $geoBoundingBox)
     ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
+    ...VoteStepMobileActions_proposalStep
     body
     open
     votable
@@ -48,12 +49,19 @@ const FRAGMENT = graphql`
       objectType
       contribuable
       isMapViewEnabled
-      ...VoteStepMobileActions_proposalForm_query
     }
   }
 `
 
-const TEMPLATE_COLUMNS = 'repeat(auto-fit, minmax(300px, 1fr))'
+// Grid columns based on map visibility:
+// - Mobile: always 1 column
+// - Tablet: 2 columns without map, 1 column with map
+// - Desktop: 3 columns without map, 2 columns with map
+const getTemplateColumns = (isMapVisible: boolean) => ({
+  base: '1fr',
+  tablet: isMapVisible ? '1fr' : 'repeat(2, 1fr)',
+  desktop: isMapVisible ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+})
 
 export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConnection }) => {
   const step = useFragment(FRAGMENT, stepKey)
@@ -79,11 +87,15 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConne
           </AbstractCard>
           ---- Les brouillons ----
         </Flex>
-        {(!isMobile || (isMobile && isMapShown)) && (
+        {!isMobile ? (
           <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
             <VoteStepListHeader step={step} filtersConnection={filtersConnection} />
           </Box>
-        )}
+        ) : step.votable ? (
+          <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
+            TODO : VOTE COMPONENT
+          </Box>
+        ) : null}
 
         <Box mb="md">
           <Flex justifyContent="space-between" gap="lg">
@@ -92,11 +104,18 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConne
                 <React.Suspense
                   fallback={
                     <Box width="100%">
-                      <ProjectsListPlaceholder count={10} templateColumns={TEMPLATE_COLUMNS} mt={0} />
+                      <ProjectsListPlaceholder
+                        count={10}
+                        templateColumns={(() => {
+                          const cols = getTemplateColumns(!!isMapShown)
+                          return [cols.base, cols.tablet, cols.desktop]
+                        })()}
+                        mt={0}
+                      />
                     </Box>
                   }
                 >
-                  <VoteStepProposalsList step={step} templateColumns={TEMPLATE_COLUMNS} />
+                  <VoteStepProposalsList step={step} templateColumns={getTemplateColumns(!!isMapShown)} />
                 </React.Suspense>
               </Box>
             ) : null}
@@ -117,7 +136,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConne
           </Flex>
         </Box>
       </Box>
-      {isMobile && <StepVoteMobileActions form={step.form} />}
+      {isMobile && <StepVoteMobileActions step={step} />}
     </Box>
   )
 }
