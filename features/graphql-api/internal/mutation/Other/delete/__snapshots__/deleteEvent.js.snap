@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteEvent Logged in API admin wants delete his event 1`] = `
+Object {
+  "deleteEvent": Object {
+    "deletedEventId": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
+    "event": Object {
+      "author": null,
+      "commentable": false,
+      "comments": Object {
+        "totalCount": 0,
+      },
+      "deletedAt": Any<String>,
+      "googleMapsAddress": null,
+      "media": null,
+      "participants": Object {
+        "totalCount": 0,
+      },
+      "projects": Array [],
+      "review": null,
+      "themes": Array [],
+      "timeRange": Object {
+        "endAt": null,
+        "startAt": "2027-11-14 00:00:00",
+      },
+      "translations": Array [
+        Object {
+          "body": "",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteEvent Logged in API client wants delete his event 1`] = `
+Object {
+  "deleteEvent": Object {
+    "deletedEventId": "RXZlbnQ6ZXZlbnQx",
+    "event": Object {
+      "author": null,
+      "commentable": false,
+      "comments": Object {
+        "totalCount": 0,
+      },
+      "deletedAt": Any<String>,
+      "googleMapsAddress": null,
+      "media": null,
+      "participants": Object {
+        "totalCount": 0,
+      },
+      "projects": Array [],
+      "review": null,
+      "themes": Array [],
+      "timeRange": Object {
+        "endAt": null,
+        "startAt": "2032-03-01 00:00:00",
+      },
+      "translations": Array [
+        Object {
+          "body": "",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteEvent Logged in API super admin wants delete his event 1`] = `
+Object {
+  "deleteEvent": Object {
+    "deletedEventId": "RXZlbnQ6ZXZlbnQx",
+    "event": Object {
+      "author": null,
+      "commentable": false,
+      "comments": Object {
+        "totalCount": 0,
+      },
+      "deletedAt": Any<String>,
+      "googleMapsAddress": null,
+      "media": null,
+      "participants": Object {
+        "totalCount": 0,
+      },
+      "projects": Array [],
+      "review": null,
+      "themes": Array [],
+      "timeRange": Object {
+        "endAt": null,
+        "startAt": "2032-03-01 00:00:00",
+      },
+      "translations": Array [
+        Object {
+          "body": "",
+        },
+      ],
+    },
+  },
+}
+`;

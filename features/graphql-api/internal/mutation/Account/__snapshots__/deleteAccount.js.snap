@@ -1,0 +1,453 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteAccount User who decides to hard delete his account should have his content deleted in open projects. 1`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTIy",
+            },
+            "body": "<p>We will do a grat gymnasium, i swear !</p>",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+            "published": true,
+            "title": "Renovation of the gymnasium",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "<p>On va en faire un beau gymnase, promis :)</p>",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "title": "Rénovation du gymnase",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "title": "Installation de bancs sur la place de la mairie",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:19",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "published": true,
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "<p>TODO</p>",
+            "createdAt": "2017-02-01 00:07:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "published": true,
+            "title": "Proposition pas encore votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 00:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "published": true,
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 09:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "published": true,
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+      ],
+      "totalCount": 8,
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User who decides to hard delete his account should have his content deleted in open projects. 2`] = `
+Object {
+  "deleteAccount": Object {
+    "userId": "VXNlcjp1c2VyNQ==",
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User who decides to hard delete his account should have his content deleted in open projects. 3`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTIy",
+            },
+            "body": "<p>We will do a grat gymnasium, i swear !</p>",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+            "published": true,
+            "title": "Renovation of the gymnasium",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "title": "Installation de bancs sur la place de la mairie",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:19",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "published": true,
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "<p>TODO</p>",
+            "createdAt": "2017-02-01 00:07:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "published": true,
+            "title": "Proposition pas encore votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 00:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "published": true,
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 09:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "published": true,
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+      ],
+      "totalCount": 8,
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User who decides to soft delete his account should not have his content kept in open projects. 1`] = `
+Object {
+  "deleteAccount": Object {
+    "userId": "VXNlcjp1c2VyNQ==",
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User who decides to soft delete his account should not have his content kept in open projects. 2`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTIy",
+            },
+            "body": "<p>We will do a grat gymnasium, i swear !</p>",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+            "published": true,
+            "title": "Renovation of the gymnasium",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "<p>On va en faire un beau gymnase, promis :)</p>",
+            "createdAt": "2017-02-01 00:03:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "published": true,
+            "title": "Rénovation du gymnase",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "published": true,
+            "title": "Installation de bancs sur la place de la mairie",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNw==",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 00:04:19",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+            "published": true,
+            "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "<p>TODO</p>",
+            "createdAt": "2017-02-01 00:07:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+            "published": true,
+            "title": "Proposition pas encore votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 00:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+            "published": true,
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            },
+            "body": "Insert Long Text here",
+            "createdAt": "2017-02-01 09:08:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "published": true,
+            "title": "Ravalement de la façade de la bibliothèque municipale",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "body": "TODO",
+            "createdAt": "2018-04-02 00:00:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+            "published": true,
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+      ],
+      "totalCount": 8,
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User5 who decides to hard delete his account should have his content anonymised (closed step). 1`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 09:40:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+            "published": true,
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 09:50:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
+            "published": true,
+            "title": "Proposition plus votable 2",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User5 who decides to hard delete his account should have his content anonymised (closed step). 2`] = `
+Object {
+  "deleteAccount": Object {
+    "userId": "VXNlcjp1c2VyNQ==",
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User5 who decides to hard delete his account should have his content anonymised (closed step). 3`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "deleted-content-by-author",
+            "createdAt": "2017-02-01 09:40:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+            "published": true,
+            "title": "deleted-title",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "deleted-content-by-author",
+            "createdAt": "2017-02-01 09:50:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
+            "published": true,
+            "title": "deleted-title",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User5 who decides to soft delete his account should have his content kept readable (closed step). 1`] = `
+Object {
+  "deleteAccount": Object {
+    "userId": "VXNlcjp1c2VyNQ==",
+  },
+}
+`;
+
+exports[`mutations.deleteAccount User5 who decides to soft delete his account should have his content kept readable (closed step). 2`] = `
+Object {
+  "step": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 09:40:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+            "published": true,
+            "title": "Proposition plus votable",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "body": "TODO",
+            "createdAt": "2017-02-01 09:50:00",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
+            "published": true,
+            "title": "Proposition plus votable 2",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

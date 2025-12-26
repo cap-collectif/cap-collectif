@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for a proposal 1`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": null,
+    "vote": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "id": Any<String>,
+      "isAccounted": true,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      },
+      "published": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for a proposal anonymously 1`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": null,
+    "vote": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "id": Any<String>,
+      "isAccounted": true,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      },
+      "published": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for a proposal in a not contribuable selection step 1`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": "CONTRIBUTION_NOT_ALLOWED",
+    "vote": null,
+  },
+}
+`;
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for a question in a step with requirements 1`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": null,
+    "vote": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "id": Any<String>,
+      "isAccounted": true,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cXVlc3Rpb24x",
+      },
+      "published": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for proposals until his votes are taken into account 1`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": null,
+    "vote": Object {
+      "author": Object {
+        "_id": "userAdmin",
+      },
+      "id": Any<String>,
+      "isAccounted": false,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzI=",
+      },
+      "published": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.addProposalVote Logged in API client wants to vote for proposals until his votes are taken into account 2`] = `
+Object {
+  "addProposalVote": Object {
+    "errorCode": null,
+    "vote": Object {
+      "author": Object {
+        "_id": "userAdmin",
+      },
+      "id": Any<String>,
+      "isAccounted": true,
+      "proposal": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzE=",
+      },
+      "published": true,
+    },
+  },
+}
+`;

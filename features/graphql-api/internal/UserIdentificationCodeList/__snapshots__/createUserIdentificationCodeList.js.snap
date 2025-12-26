@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.userIdentificationCodeListMutation API admin creates a list 1`] = `
+Object {
+  "createUserIdentificationCodeList": Object {
+    "userIdentificationCodeList": Object {
+      "alreadyUsedCount": 0,
+      "codesCount": 4,
+      "id": Any<String>,
+      "name": "La team backend",
+    },
+  },
+}
+`;
+
+exports[`mutations.userIdentificationCodeListMutation API admin creates a list with 8 length code 1`] = `
+Object {
+  "createUserIdentificationCodeList": Object {
+    "userIdentificationCodeList": Object {
+      "alreadyUsedCount": 0,
+      "codesCount": 4,
+      "id": Any<String>,
+      "name": "La team backend",
+    },
+  },
+}
+`;

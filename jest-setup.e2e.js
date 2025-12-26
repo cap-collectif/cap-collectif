@@ -145,6 +145,8 @@ global.graphql = (query, variables, client = 'anonymous') => {
       return authenticatedInternalRequest('omar@cap-collectif.com', 'toto', query, variables)
     case 'internal_jean':
       return authenticatedInternalRequest('jean@cap-collectif.com', 'toto', query, variables)
+    case 'internal_agui':
+      return authenticatedInternalRequest('julien.aguilar@cap-collectif.com', 'toto', query, variables)
     case 'mediator':
       return authenticatedInternalRequest('mediator@cap-collectif.com', 'toto', query, variables)
     case 'internal':

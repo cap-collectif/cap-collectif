@@ -1,3 +1,5 @@
+import '../../resetDatabaseBeforeEach'
+
 /* eslint-env jest */
 const UserVotesQuery = /* GraphQL */ `
   query UserVotesQuery($id: ID!, $count: Int, $cursor: String, $contribuableId: ID) {

@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createEvent Admin wants to change an event 1`] = `
+Object {
+  "changeEvent": Object {
+    "event": Object {
+      "_id": "event1",
+      "author": Object {
+        "_id": "user5",
+        "username": "user",
+      },
+      "body": "Tout le monde est invité",
+      "commentable": true,
+      "googleMapsAddress": Object {
+        "formatted": "111 Rue Georges Clemenceau, 69110 Sainte-Foy-lès-Lyon, France",
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Rue Georges Clemenceau\\",\\"short_name\\":\\"Rue Georges Clemenceau\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"short_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rh\\\\u00f4ne\\",\\"short_name\\":\\"Rh\\\\u00f4ne\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"short_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69110\\",\\"short_name\\":\\"69110\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\\\\u00e8s-Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.7417672,\\"lng\\":4.8058097},\\"location_type\\":\\"RANGE_INTERPOLATED\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":45.74311618029149,\\"lng\\":4.807158680291503},\\"southwest\\":{\\"lat\\":45.74041821970849,\\"lng\\":4.804460719708498}}},\\"place_id\\":\\"Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8\\",\\"types\\":[\\"street_address\\"]}]",
+      },
+      "id": "RXZlbnQ6ZXZlbnQx",
+      "isMeasurable": false,
+      "maxRegistrations": 60,
+      "owner": Object {
+        "username": "user",
+      },
+      "projects": Array [
+        Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        },
+      ],
+      "review": null,
+      "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme1",
+        },
+        Object {
+          "id": "theme2",
+        },
+      ],
+      "timeRange": Object {
+        "endAt": "2018-05-16 00:00:00",
+        "startAt": "2018-04-07 00:00:00",
+      },
+      "title": "Rencontre avec les habitants",
+      "url": "https://capco.test/events/event-with-registrations",
+    },
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.createEvent Admin wants to change an event to add steps 1`] = `
+Object {
+  "changeEvent": Object {
+    "event": Object {
+      "_id": "event1",
+      "author": Object {
+        "_id": "user5",
+        "username": "user",
+      },
+      "body": "Tout le monde est invité",
+      "commentable": true,
+      "googleMapsAddress": Object {
+        "formatted": "111 Rue Georges Clemenceau, 69110 Sainte-Foy-lès-Lyon, France",
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Rue Georges Clemenceau\\",\\"short_name\\":\\"Rue Georges Clemenceau\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"short_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rh\\\\u00f4ne\\",\\"short_name\\":\\"Rh\\\\u00f4ne\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"short_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69110\\",\\"short_name\\":\\"69110\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\\\\u00e8s-Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.7417672,\\"lng\\":4.8058097},\\"location_type\\":\\"RANGE_INTERPOLATED\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":45.74311618029149,\\"lng\\":4.807158680291503},\\"southwest\\":{\\"lat\\":45.74041821970849,\\"lng\\":4.804460719708498}}},\\"place_id\\":\\"Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8\\",\\"types\\":[\\"street_address\\"]}]",
+      },
+      "id": "RXZlbnQ6ZXZlbnQx",
+      "isMeasurable": false,
+      "maxRegistrations": 60,
+      "owner": Object {
+        "username": "user",
+      },
+      "projects": Array [
+        Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        },
+      ],
+      "review": null,
+      "steps": Array [
+        Object {
+          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+        },
+        Object {
+          "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme1",
+        },
+        Object {
+          "id": "theme2",
+        },
+      ],
+      "timeRange": Object {
+        "endAt": Any<String>,
+        "startAt": "2018-03-07 00:00:00",
+      },
+      "title": "Rencontre avec les habitants",
+      "url": "https://capco.test/events/event-with-registrations",
+    },
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.createEvent Admin wants to change an event with external to register 1`] = `
+Object {
+  "changeEvent": Object {
+    "event": Object {
+      "_id": "event1",
+      "author": Object {
+        "_id": "user5",
+        "username": "user",
+      },
+      "body": "Tout le monde est invité",
+      "commentable": true,
+      "googleMapsAddress": Object {
+        "formatted": "111 Rue Georges Clemenceau, 69110 Sainte-Foy-lès-Lyon, France",
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Rue Georges Clemenceau\\",\\"short_name\\":\\"Rue Georges Clemenceau\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"short_name\\":\\"Sainte-Foy-l\\\\u00e8s-Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rh\\\\u00f4ne\\",\\"short_name\\":\\"Rh\\\\u00f4ne\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"short_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69110\\",\\"short_name\\":\\"69110\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Rue Georges Clemenceau, 69110 Sainte-Foy-l\\\\u00e8s-Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.7417672,\\"lng\\":4.8058097},\\"location_type\\":\\"RANGE_INTERPOLATED\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":45.74311618029149,\\"lng\\":4.807158680291503},\\"southwest\\":{\\"lat\\":45.74041821970849,\\"lng\\":4.804460719708498}}},\\"place_id\\":\\"Ej4xMTEgUnVlIEdlb3JnZXMgQ2xlbWVuY2VhdSwgNjkxMTAgU2FpbnRlLUZveS1sw6hzLUx5b24sIEZyYW5jZSIaEhgKFAoSCQ_BwZLB6_RHESAaJ_l8KGIrEG8\\",\\"types\\":[\\"street_address\\"]}]",
+      },
+      "id": "RXZlbnQ6ZXZlbnQx",
+      "isMeasurable": false,
+      "maxRegistrations": 60,
+      "owner": Object {
+        "username": "user",
+      },
+      "projects": Array [
+        Object {
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        },
+      ],
+      "review": null,
+      "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme1",
+        },
+        Object {
+          "id": "theme2",
+        },
+      ],
+      "timeRange": Object {
+        "endAt": "2018-05-16 00:00:00",
+        "startAt": "2018-04-07 00:00:00",
+      },
+      "title": "Rencontre avec les habitants",
+      "url": "https://capco.test/events/event-with-registrations",
+    },
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.createEvent User wants to change an event 1`] = `
+Object {
+  "changeEvent": Object {
+    "event": null,
+    "userErrors": Array [
+      Object {
+        "message": "You are not authorized to add customCode field.",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.createEvent User wants to change his refused event 1`] = `
+Object {
+  "changeEvent": Object {
+    "event": Object {
+      "_id": "eventCreateByAUserReviewRefused",
+      "author": Object {
+        "_id": "user5",
+        "username": "user",
+      },
+      "body": "Tout le monde est invité",
+      "commentable": true,
+      "googleMapsAddress": Object {
+        "formatted": "103 Grande Rue de la Croix-Rousse, 69004 Lyon, France",
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"103\\",\\"short_name\\":\\"103\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Grande Rue de la Croix-Rousse\\",\\"short_name\\":\\"Grande Rue de la Croix-Rousse\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rh\\\\u00f4ne\\",\\"short_name\\":\\"Rh\\\\u00f4ne\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"short_name\\":\\"Auvergne-Rh\\\\u00f4ne-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69004\\",\\"short_name\\":\\"69004\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"103 Grande Rue de la Croix-Rousse, 69004 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.7817345,\\"lng\\":4.8305811},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":45.78308348029149,\\"lng\\":4.831930080291502},\\"southwest\\":{\\"lat\\":45.7803855197085,\\"lng\\":4.829232119708498}}},\\"place_id\\":\\"ChIJjTMnvR_r9EcRYmk8W0oMmC0\\",\\"plus_code\\":{\\"compound_code\\":\\"QRJJ+M6 Lyon, France\\",\\"global_code\\":\\"8FQ6QRJJ+M6\\"},\\"types\\":[\\"street_address\\"]}]",
+      },
+      "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==",
+      "isMeasurable": false,
+      "maxRegistrations": null,
+      "owner": Object {
+        "username": "user",
+      },
+      "projects": Array [],
+      "review": Object {
+        "createdAt": "2015-06-14 00:00:00",
+        "reviewer": Object {
+          "id": "VXNlcjp1c2VyTWF4aW1l",
+          "username": "mauriau",
+        },
+        "status": "AWAITING",
+      },
+      "steps": Array [],
+      "themes": Array [],
+      "timeRange": Object {
+        "endAt": null,
+        "startAt": "2018-03-07 00:00:00",
+      },
+      "title": "Rencontre avec les habitants",
+      "url": "https://capco.test/events/event-create-by-user-with-review-refused",
+    },
+    "userErrors": Array [],
+  },
+}
+`;

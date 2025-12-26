@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteSource Author wants to delete his source 1`] = `
+Object {
+  "deleteSource": Object {
+    "deletedSourceId": "U291cmNlOnNvdXJjZTE=",
+    "sourceable": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uMw==",
+    },
+  },
+}
+`;
+
+exports[`mutations.deleteSource should delete a Source as an admin 1`] = `
+Object {
+  "deleteSource": Object {
+    "deletedSourceId": "U291cmNlOnNvdXJjZTY=",
+    "sourceable": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uMw==",
+    },
+  },
+}
+`;

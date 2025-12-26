@@ -31,8 +31,8 @@ const UpdateGlobalDistrictMutation = /* GraphQL*/ `
     }
 `
 
-describe('mutations.addProposalVoteMutation', () => {
-  it('admin should ask a revision on proposal.', async () => {
+describe('mutations.updateGlobalDistrictMutation', () => {
+  it('Admin can update a global district', async () => {
     await expect(
       graphql(
         UpdateGlobalDistrictMutation,

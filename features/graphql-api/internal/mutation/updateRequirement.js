@@ -33,9 +33,48 @@ describe('mutations.updateRequirementMutation', () => {
     console.log(JSON.stringify({ input }))
     await expect(graphql(UpdateRequirementMutation, { input: input }, 'internal_user')).resolves.toMatchSnapshot()
   })
+
   it('wants to decline a requirement as user', async () => {
     await expect(
       graphql(UpdateRequirementMutation, { input: inputWithNoRequirement }, 'internal_user'),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('Logged in API client wants to accept a requirement', async () => {
+    await expect(
+      graphql(
+        UpdateRequirementMutation,
+        {
+          input: {
+            values: [
+              {
+                requirementId: 'UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz',
+                value: true,
+              },
+            ],
+          },
+        },
+        'internal_user',
+      ),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('Logged in API client wants to decline a requirement', async () => {
+    await expect(
+      graphql(
+        UpdateRequirementMutation,
+        {
+          input: {
+            values: [
+              {
+                requirementId: 'UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz',
+                value: false,
+              },
+            ],
+          },
+        },
+        'internal_user',
+      ),
     ).resolves.toMatchSnapshot()
   })
 })

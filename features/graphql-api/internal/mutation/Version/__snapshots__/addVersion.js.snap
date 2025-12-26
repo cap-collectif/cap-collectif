@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addVersionMutation User wants to add a version on an opinion 1`] = `
+Object {
+  "addVersion": Object {
+    "userErrors": Array [],
+    "version": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "id": Any<String>,
+      "published": true,
+    },
+    "versionEdge": Object {
+      "cursor": Any<String>,
+      "node": Object {
+        "id": Any<String>,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addVersionMutation User wants to add an argument on an uncontibuable opinion 1`] = `
+Object {
+  "addVersion": Object {
+    "userErrors": Array [
+      Object {
+        "message": "Can't add a version to an uncontributable opinion.",
+      },
+    ],
+    "version": null,
+    "versionEdge": null,
+  },
+}
+`;

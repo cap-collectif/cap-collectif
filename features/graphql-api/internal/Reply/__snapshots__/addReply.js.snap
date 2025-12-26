@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addUserReplyMutation User wants to add a reply 1`] = `
+Object {
+  "addUserReply": Object {
+    "errorCode": null,
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+    },
+    "reply": Object {
+      "completionStatus": "COMPLETED",
+      "id": Any<String>,
+      "published": true,
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mg==",
+          },
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM=",
+          },
+          "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Embêter Maxime\\"}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTQ=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTU=",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTY=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTg=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTk=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAx",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAy",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM4NQ==",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mzk0NA==",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.addUserReplyMutation User wants to add an answer without fulfilling the requirements, it should set completionStatus to MISSING_REQUIREMENTS 1`] = `
+Object {
+  "addUserReply": Object {
+    "errorCode": null,
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxQXZlY0Rlc0NvbmRpdGlvbnNSZXF1aXNlcw==",
+    },
+    "reply": Object {
+      "completionStatus": "MISSING_REQUIREMENTS",
+      "id": Any<String>,
+      "published": false,
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mzk0NQ==",
+          },
+          "value": "{\\"labels\\":[\\"Nom\\"]}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTQwMg==",
+          },
+          "value": null,
+        },
+      ],
+    },
+  },
+}
+`;

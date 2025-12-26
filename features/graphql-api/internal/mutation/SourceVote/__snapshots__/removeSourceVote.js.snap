@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.removeSourceVote Logged in API client wants to vote for a comment 1`] = `
+Object {
+  "removeSourceVote": Object {
+    "deletedVoteId": "60003",
+  },
+}
+`;

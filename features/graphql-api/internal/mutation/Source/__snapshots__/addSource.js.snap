@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addSource User wants to add a source on an opinion 1`] = `
+Object {
+  "addSource": Object {
+    "source": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "body": "<div>Jai un corps mais pas de bras :'(</div>",
+      "category": Object {
+        "id": "sourcecategory2",
+      },
+      "id": Any<String>,
+      "link": "http://google.com",
+      "published": true,
+      "title": "Je suis une source",
+    },
+    "sourceEdge": Object {
+      "cursor": Any<String>,
+      "node": Object {
+        "id": Any<String>,
+      },
+    },
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.addSource User wants to add a source on an uncontributable 1`] = `
+Object {
+  "addSource": Object {
+    "source": null,
+    "sourceEdge": null,
+    "userErrors": Array [
+      Object {
+        "message": "Can't add an source to an uncontributable sourceable.",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.addSource User wants to add a source without meeting all requirements 1`] = `
+Object {
+  "addSource": Object {
+    "source": null,
+    "sourceEdge": null,
+    "userErrors": Array [
+      Object {
+        "message": "You dont meets all the requirements.",
+      },
+    ],
+  },
+}
+`;

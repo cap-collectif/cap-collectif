@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.AddOpinionVoteMutation Logged in API client wants to update an existing vote 1`] = `
+Object {
+  "addOpinionVote": Object {
+    "previousVoteId": "T3BpbmlvblZvdGU6NA==",
+    "vote": Object {
+      "author": Object {
+        "_id": "userAdmin",
+      },
+      "id": Any<String>,
+      "published": true,
+      "related": Object {
+        "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.AddOpinionVoteMutation Logged in API client wants to vote for an opinion 1`] = `
+Object {
+  "addOpinionVote": Object {
+    "previousVoteId": "T3BpbmlvblZvdGU6NQ==",
+    "vote": Object {
+      "author": Object {
+        "_id": "user5",
+      },
+      "id": Any<String>,
+      "published": true,
+      "related": Object {
+        "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+      },
+    },
+  },
+}
+`;

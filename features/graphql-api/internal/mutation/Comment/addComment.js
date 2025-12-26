@@ -9,6 +9,9 @@ const AddCommentMutation = /* GraphQL*/ `
             id
             published
             body
+            parent {
+              id
+            }
             moderationStatus
             author {
               _id
@@ -110,6 +113,83 @@ describe('mutations.addCommentMutation', () => {
           },
         },
         'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot({
+      addComment: {
+        commentEdge: {
+          node: {
+            id: expect.any(String),
+          },
+        },
+      },
+    })
+  })
+
+  it('Anonymous wants to add a comment on a blog post', async () => {
+    await expect(
+      graphql(
+        AddCommentMutation,
+        {
+          input: {
+            commentableId: 'UHJvcG9zYWw6cHJvcG9zYWwx',
+            body: 'Je suis un super contenu',
+            authorName: 'Je suis anonyme',
+            authorEmail: 'anonyme@cap-collectif.com',
+          },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot({
+      addComment: {
+        commentEdge: {
+          node: {
+            id: expect.any(String),
+          },
+        },
+      },
+    })
+  })
+
+  it('Anonymous wants to add a comment on a blog post when moderation is enabled', async () => {
+    await global.enableFeatureFlag('moderation_comment')
+
+    await expect(
+      graphql(
+        AddCommentMutation,
+        {
+          input: {
+            commentableId: 'UHJvcG9zYWw6cHJvcG9zYWwx',
+            body: 'Je suis un super contenu',
+            authorName: 'Je suis anonyme',
+            authorEmail: 'anonyme@cap-collectif.com',
+          },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot({
+      addComment: {
+        commentEdge: {
+          node: {
+            id: expect.any(String),
+          },
+        },
+      },
+    })
+  })
+
+  it('Anonymous wants to add an anwer to a comment', async () => {
+    await expect(
+      graphql(
+        AddCommentMutation,
+        {
+          input: {
+            commentableId: 'Q29tbWVudDpldmVudENvbW1lbnQx',
+            authorName: 'Kéké',
+            authorEmail: 'vivele94@cap-collectif.com',
+            body: 'Ma super réponse',
+          },
+        },
+        'internal',
       ),
     ).resolves.toMatchSnapshot({
       addComment: {

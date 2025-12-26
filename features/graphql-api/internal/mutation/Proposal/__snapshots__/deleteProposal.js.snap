@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|delete proposal GraphQL client wants delete a proposal 1`] = `
+Object {
+  "deleteProposal": Object {
+    "proposal": Object {
+      "deletedAt": Any<String>,
+      "id": Any<String>,
+      "publicationStatus": "DELETED",
+    },
+  },
+}
+`;
+
+exports[`Internal|delete proposal User GraphQL client can delete his proposal 1`] = `
+Object {
+  "deleteProposal": Object {
+    "proposal": Object {
+      "deletedAt": Any<String>,
+      "id": Any<String>,
+      "publicationStatus": "DELETED",
+    },
+  },
+}
+`;

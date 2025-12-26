@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.updateRequirementMutation Logged in API client wants to accept a requirement 1`] = `
+Object {
+  "updateRequirement": Object {
+    "requirements": Array [
+      Object {
+        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+        "viewerMeetsTheRequirement": true,
+      },
+    ],
+  },
+}
+`;
+
+exports[`mutations.updateRequirementMutation Logged in API client wants to decline a requirement 1`] = `
+Object {
+  "updateRequirement": Object {
+    "requirements": Array [
+      Object {
+        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+        "viewerMeetsTheRequirement": false,
+      },
+    ],
+  },
+}
+`;
+
 exports[`mutations.updateRequirementMutation wants to accept a requirement as user 1`] = `
 Object {
   "updateRequirement": Object {

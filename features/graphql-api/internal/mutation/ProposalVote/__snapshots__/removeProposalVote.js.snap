@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.removeProposalVote Logged in API client wants to remove a vote 1`] = `
+Object {
+  "removeProposalVote": Object {
+    "areRemainingVotesAccounted": true,
+    "previousVoteId": "1051",
+  },
+}
+`;
+
+exports[`mutations.removeProposalVote Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore 1`] = `
+Object {
+  "removeProposalVote": Object {
+    "areRemainingVotesAccounted": true,
+    "previousVoteId": Any<String>,
+  },
+}
+`;
+
+exports[`mutations.removeProposalVote Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore 2`] = `
+Object {
+  "removeProposalVote": Object {
+    "areRemainingVotesAccounted": false,
+    "previousVoteId": Any<String>,
+  },
+}
+`;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteVersionMutation Author wants to delete his version 1`] = `
+Object {
+  "deleteVersion": Object {
+    "deletedVersionId": "VmVyc2lvbjp2ZXJzaW9uMQ==",
+    "opinion": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+    },
+  },
+}
+`;

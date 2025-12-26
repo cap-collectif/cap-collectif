@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteGlobalDistrict Admin can delete a project district 1`] = `
+Object {
+  "deleteGlobalDistrict": Object {
+    "deletedDistrictId": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
+    "userErrors": Array [],
+  },
+}
+`;
+
+exports[`mutations.deleteGlobalDistrict Admin should receive an error when deleting an unknown project district 1`] = `
+Object {
+  "deleteGlobalDistrict": Object {
+    "deletedDistrictId": null,
+    "userErrors": Array [
+      Object {
+        "message": "Unknown project district with id: wrongDistrictId",
+      },
+    ],
+  },
+}
+`;

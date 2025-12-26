@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`mutations.deleteSource should delete a Source as an admin 1`] = `
-Object {
-  "deleteSource": Object {
-    "deletedSourceId": "U291cmNlOnNvdXJjZTY=",
-  },
-}
-`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteUserIdentification API admin wants to delete a list 1`] = `
+Object {
+  "deleteUserIdentificationCodeList": Object {
+    "deletedUserIdentificationCodeListId": "VXNlcklkZW50aWZpY2F0aW9uQ29kZUxpc3Q6bmV3TGlzdA==",
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.deleteUserIdentification API admin wants to delete a list but wrong id 1`] = `
+Object {
+  "deleteUserIdentificationCodeList": Object {
+    "deletedUserIdentificationCodeListId": null,
+    "errorCode": "NOT_FOUND",
+  },
+}
+`;

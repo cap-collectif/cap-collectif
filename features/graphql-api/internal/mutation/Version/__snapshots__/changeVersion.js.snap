@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeVersionMutation Author wants to update his version 1`] = `
+Object {
+  "changeVersion": Object {
+    "version": Object {
+      "body": "New Tololo",
+      "id": "VmVyc2lvbjp2ZXJzaW9uMQ==",
+      "updatedAt": Any<String>,
+    },
+  },
+}
+`;

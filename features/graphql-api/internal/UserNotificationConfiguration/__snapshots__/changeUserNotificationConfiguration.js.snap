@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeUserNotificationConfigurationMutation GraphQL client wants to modify a user notifications configuration 1`] = `
+Object {
+  "changeUserNotificationsConfiguration": Object {
+    "user": Object {
+      "consentExternalCommunication": false,
+      "consentInternalCommunication": false,
+      "notificationsConfiguration": Object {
+        "onProposalCommentMail": false,
+      },
+    },
+  },
+}
+`;

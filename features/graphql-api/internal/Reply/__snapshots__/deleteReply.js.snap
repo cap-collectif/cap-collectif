@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteUserReplyMutation User can delete his reply 1`] = `
+Object {
+  "deleteUserReply": Object {
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+    },
+    "replyId": "UmVwbHk6cmVwbHk1",
+  },
+}
+`;

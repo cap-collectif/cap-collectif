@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.cancelEmailChange User successfully cancel email change 1`] = `
+Object {
+  "cancelEmailChange": Object {
+    "success": true,
+  },
+}
+`;

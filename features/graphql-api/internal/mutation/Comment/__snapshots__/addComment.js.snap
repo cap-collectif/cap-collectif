@@ -13,7 +13,69 @@ Object {
         "body": "Ma super réponse",
         "id": Any<String>,
         "moderationStatus": "APPROVED",
+        "parent": Object {
+          "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        },
         "published": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation Anonymous wants to add a comment on a blog post 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": null,
+        "authorEmail": "anonyme@cap-collectif.com",
+        "authorName": "Je suis anonyme",
+        "body": "Je suis un super contenu",
+        "id": Any<String>,
+        "moderationStatus": "PENDING",
+        "parent": null,
+        "published": false,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation Anonymous wants to add a comment on a blog post when moderation is enabled 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": null,
+        "authorEmail": "anonyme@cap-collectif.com",
+        "authorName": "Je suis anonyme",
+        "body": "Je suis un super contenu",
+        "id": Any<String>,
+        "moderationStatus": "PENDING",
+        "parent": null,
+        "published": false,
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.addCommentMutation Anonymous wants to add an anwer to a comment 1`] = `
+Object {
+  "addComment": Object {
+    "commentEdge": Object {
+      "node": Object {
+        "author": null,
+        "authorEmail": "vivele94@cap-collectif.com",
+        "authorName": "Kéké",
+        "body": "Ma super réponse",
+        "id": Any<String>,
+        "moderationStatus": "PENDING",
+        "parent": Object {
+          "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        },
+        "published": false,
       },
     },
   },
@@ -33,6 +95,7 @@ Object {
         "body": "Tololo",
         "id": Any<String>,
         "moderationStatus": "APPROVED",
+        "parent": null,
         "published": true,
       },
     },
@@ -53,6 +116,9 @@ Object {
         "body": "Ma super réponse",
         "id": Any<String>,
         "moderationStatus": "APPROVED",
+        "parent": Object {
+          "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        },
         "published": true,
       },
     },
@@ -73,6 +139,9 @@ Object {
         "body": "Ma super réponse",
         "id": Any<String>,
         "moderationStatus": "PENDING",
+        "parent": Object {
+          "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+        },
         "published": true,
       },
     },

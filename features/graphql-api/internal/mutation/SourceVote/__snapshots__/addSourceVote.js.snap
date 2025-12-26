@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addSourceVote Logged in API client wants to vote for a source 1`] = `
+Object {
+  "addSourceVote": Object {
+    "voteEdge": Object {
+      "node": Object {
+        "id": Any<String>,
+        "published": true,
+      },
+    },
+  },
+}
+`;

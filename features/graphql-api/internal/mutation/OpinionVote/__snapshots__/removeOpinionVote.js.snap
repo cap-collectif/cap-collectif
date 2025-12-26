@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.removeOpinionVote Logged in API client wants to remove a vote 1`] = `
+Object {
+  "removeOpinionVote": Object {
+    "contribution": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+    },
+    "deletedVoteId": "T3BpbmlvblZvdGU6NA==",
+  },
+}
+`;

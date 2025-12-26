@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow an opinion with current user and check if opinion if followed 1`] = `
+Object {
+  "followOpinion": Object {
+    "opinion": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uNw==",
+      "viewerFollowingConfiguration": "MINIMAL",
+    },
+  },
+}
+`;
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow an opinion with current user and check if opinion if followed 2`] = `
+Object {
+  "viewer": Object {
+    "followingOpinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNw==",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow then unfollow an opinion with current user 1`] = `
+Object {
+  "followOpinion": Object {
+    "opinion": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uMTA=",
+      "viewerFollowingConfiguration": "MINIMAL",
+    },
+  },
+}
+`;
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow then unfollow an opinion with current user 2`] = `
+Object {
+  "viewer": Object {
+    "followingOpinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uMTA=",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNg==",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNw==",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow then unfollow an opinion with current user 3`] = `
+Object {
+  "unfollowOpinion": Object {
+    "opinion": Object {
+      "id": "T3BpbmlvbjpvcGluaW9uMTA=",
+    },
+  },
+}
+`;
+
+exports[`Internal followOpinionMutation GraphQL client wants to follow then unfollow an opinion with current user 4`] = `
+Object {
+  "viewer": Object {
+    "followingOpinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNg==",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNw==",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

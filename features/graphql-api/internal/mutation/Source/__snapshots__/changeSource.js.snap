@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeSource Author wants to update his source 1`] = `
+Object {
+  "changeSource": Object {
+    "source": Object {
+      "body": "New Tololo",
+      "id": "U291cmNlOnNvdXJjZTE=",
+      "updatedAt": Any<String>,
+    },
+  },
+}
+`;

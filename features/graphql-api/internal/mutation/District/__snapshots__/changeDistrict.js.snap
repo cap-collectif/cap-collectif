@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeDistrict GraphQL client wants to change district of a proposal 1`] = `
+Object {
+  "changeDistrict": Object {
+    "district": Object {
+      "displayedOnMap": false,
+      "geojson": null,
+      "name": "New name",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeDistrict GraphQL client wants to change district of a proposal and use a valid geoJson 1`] = `
+Object {
+  "changeDistrict": Object {
+    "district": Object {
+      "displayedOnMap": false,
+      "geojson": "{\\"type\\": \\"Feature\\", \\"properties\\": { \\"name\\": \\"a point\\"}, \\"geometry\\": {\\"type\\": \\"Point\\", \\"coordinates\\": [7.2874, 48.4165]}}",
+      "name": "New name",
+    },
+  },
+}
+`;
