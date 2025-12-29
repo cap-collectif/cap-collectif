@@ -86,7 +86,7 @@ yarn test-e2e-mutations       # Mutations only
 yarn test-e2e-types -u        # Update query snapshots
 yarn test-e2e-mutations -u    # Update mutation snapshots
 
-# Cypress (E2E tests) ✅ Active - requires cypress/.env.local with NEXT_PUBLIC_SYMFONY_ENV=test
+# Cypress (E2E tests) ✅ Active - requires admin-next/.env.local with NEXT_PUBLIC_SYMFONY_ENV=test
 yarn cy:open                  # Open Cypress UI
 yarn cy:run                   # Run Cypress tests
 
@@ -319,7 +319,7 @@ yarn lint                     # ESLint
 ```
 Or from root: `yarn cy:open`, `yarn cy:run`
 
-> **Important**: To run Cypress tests locally with proper test environment, create `cypress/.env.local` with:
+> **Important**: To run Cypress tests locally with proper test environment, ensure `admin-next/.env.local` contains:
 ```
 NEXT_PUBLIC_SYMFONY_ENV=test
 ```
