@@ -13,21 +13,21 @@ describe('Contact page', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.visit('/contact')
-    cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x')
+    cy.get('[id^="accordion-button"]', { timeout: 10000 })
   })
 
   it('correctly sends a message via the first form', () => {
     cy.visit('/contact')
-    cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x')
+    cy.get('[id^="accordion-button"]')
     fillForm('Marie Lopez', 'enjoyphoenix@gmail.com', 'Partenariat', 'Lorem ipsum')
-    cy.contains('global.send').click({ force: true })
+    cy.get('button[type="submit"]').click({ force: true })
     cy.get('.toasts-container--top div').should('contain', 'contact.email.sent_success')
   })
   it('cannot send a message via the first form with field errors', () => {
     cy.visit('/contact')
-    cy.get('button#accordion-button-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x')
+    cy.get('[id^="accordion-button"]')
     fillForm('', 'enjoyphoenixbadmail.com', '', '')
-    cy.contains('global.send').click({ force: true })
+    cy.get('button[type="submit"]').click({ force: true })
     cy.get('div#email-error').should('contain', 'global.constraints.email.invalid')
     cy.get('div#title-error').should('contain', 'fill-field')
     cy.get('div#body-error').should('contain', 'fill-field')

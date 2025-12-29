@@ -69,7 +69,7 @@ export default new (class PostFormPage {
     this.cy.get('[id^="react-select"][id*="option"]').contains(projectTitleElement).click()
   }
   switchToEnglish() {
-    this.cy.get('button').contains('capco.module.multilangue').should('be.visible').click()
+    this.cy.contains('capco.module.multilangue').should('be.visible').click()
     this.cy.wait(100)
     this.selectLocale.should('exist').and('be.visible').click()
     this.cy.get('.cap-select__option', { timeout: 4000 }).contains('english').should('be.visible').click()

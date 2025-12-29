@@ -17,7 +17,7 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({ defaultLocal
   const { control } = useFormContext()
 
   return (
-    <Accordion color={CapUIAccordionColor.Transparent}>
+    <Accordion color={CapUIAccordionColor.white}>
       <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
         <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
         <Accordion.Panel>

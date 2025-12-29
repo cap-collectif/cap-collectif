@@ -21,7 +21,7 @@ export interface OrganizationConfigFormSideProps {
 const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({ control }) => {
   const intl = useIntl()
   return (
-    <Accordion allowMultiple size={CapUIAccordionSize.Sm}>
+    <Accordion allowMultiple size={CapUIAccordionSize.sm}>
       <Accordion.Item id="volet-1">
         <Accordion.Button>{intl.formatMessage({ id: 'organisation.form.logo.banner' })}</Accordion.Button>
         <Accordion.Panel>

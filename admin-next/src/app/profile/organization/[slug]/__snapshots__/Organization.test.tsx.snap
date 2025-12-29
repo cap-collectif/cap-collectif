@@ -48,7 +48,7 @@ exports[`<Organization /> renders correctly 1`] = `
             class="sc-bcXGCL cLxXtn"
           >
             <div
-              class="sc-bcXGCL OjKfJ cap-card cap-project-card"
+              class="sc-bcXGCL jxvmrc cap-card cap-project-card"
               id="cap-project-card-project-id-1"
             >
               <div
@@ -241,7 +241,7 @@ exports[`<Organization /> renders correctly 1`] = `
               menu.news
             </h2>
             <div
-              class="sc-bcXGCL iJgpxu cap-card"
+              class="sc-bcXGCL jQSowP cap-card"
             >
               <div
                 class="sc-bcXGCL hztmdy cap-card-cover"
@@ -320,7 +320,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </button>
             </div>
             <div
-              class="sc-bcXGCL iJgpxu cap-card"
+              class="sc-bcXGCL jQSowP cap-card"
               style="display: none;"
             >
               <div

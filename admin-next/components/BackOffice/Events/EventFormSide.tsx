@@ -73,7 +73,7 @@ const EventFormSide: React.FC<PostFormSideProps> = ({
   return (
     <Accordion
       allowMultiple
-      size={CapUIAccordionSize.Sm}
+      size={CapUIAccordionSize.sm}
       sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}
       defaultAccordion={['place']}
     >

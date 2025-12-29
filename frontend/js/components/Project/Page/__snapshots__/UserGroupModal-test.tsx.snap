@@ -62,7 +62,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu cITHqt cap-button btn-md p-0"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu hOLoFx cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -219,7 +219,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu cITHqt cap-button btn-md p-0"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu hOLoFx cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -376,7 +376,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu cITHqt cap-button btn-md p-0"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu hOLoFx cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"

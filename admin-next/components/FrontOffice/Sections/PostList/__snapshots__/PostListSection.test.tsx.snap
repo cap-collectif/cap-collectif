@@ -61,7 +61,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
         class="sc-bcXGCL jhFiXu post-list-section-posts"
       >
         <div
-          class="sc-bcXGCL iXnXIj cap-card cap-post-card"
+          class="sc-bcXGCL klmZNu cap-card cap-post-card"
           id="cap-post-card-post1"
         >
           <div

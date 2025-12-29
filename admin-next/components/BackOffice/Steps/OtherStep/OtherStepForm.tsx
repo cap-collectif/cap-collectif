@@ -216,7 +216,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               required: false,
             }}
           />
-          <Accordion color={CapUIAccordionColor.Transparent}>
+          <Accordion color={CapUIAccordionColor.white}>
             <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
               <Accordion.Panel>

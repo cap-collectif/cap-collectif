@@ -574,8 +574,9 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           <Box>
             <Box mb={4}>
               <Accordion
-                color={CapUIAccordionColor.Transparent}
+                color={CapUIAccordionColor.white}
                 defaultAccordion={[intl.formatMessage({ id: 'proposal-form' })]}
+                sx={{ summary: { pl: 0 } }}
               >
                 <Accordion.Item
                   id={intl.formatMessage({ id: 'proposal-form' })}
@@ -593,16 +594,12 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                     />
                   </Accordion.Panel>
                 </Accordion.Item>
-              </Accordion>
-              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
                   <Accordion.Panel>
                     <ProposalStepVoteTabsForm defaultLocale={defaultLocale} formMethods={formMethods} />
                   </Accordion.Panel>
                 </Accordion.Item>
-              </Accordion>
-              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                   <Accordion.Panel>
@@ -611,16 +608,12 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                     </React.Suspense>
                   </Accordion.Panel>
                 </Accordion.Item>
-              </Accordion>
-              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'status.plural' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'status.plural' })}</Accordion.Button>
                   <Accordion.Panel>
                     <ProposalStepStatuses formMethods={formMethods} query={query} />
                   </Accordion.Panel>
                 </Accordion.Item>
-              </Accordion>
-              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}>
                   <Accordion.Button>
                     {intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}
@@ -629,8 +622,6 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                     <ProposalSettings step={step} />
                   </Accordion.Panel>
                 </Accordion.Item>
-              </Accordion>
-              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
                   <Accordion.Panel>

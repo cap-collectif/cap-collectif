@@ -352,7 +352,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
           </Tabs>
           <StepDurationInput />
           <Box>
-            <Accordion color={CapUIAccordionColor.Transparent}>
+            <Accordion color={CapUIAccordionColor.white}>
               <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
                 <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                 <Accordion.Panel>
@@ -387,7 +387,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               </Accordion.Item>
             </Accordion>
             {isEditing && debate && (
-              <Accordion color={CapUIAccordionColor.Transparent}>
+              <Accordion color={CapUIAccordionColor.white}>
                 <Accordion.Item id={intl.formatMessage({ id: 'integration-parameter' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'integration-parameter' })}</Accordion.Button>
                   <Accordion.Panel>
@@ -396,7 +396,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 </Accordion.Item>
               </Accordion>
             )}
-            <Accordion color={CapUIAccordionColor.Transparent}>
+            <Accordion color={CapUIAccordionColor.white}>
               <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
                 <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
                 <Accordion.Panel>

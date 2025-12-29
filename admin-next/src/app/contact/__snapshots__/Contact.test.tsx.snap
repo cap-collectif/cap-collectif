@@ -48,18 +48,22 @@ exports[`<Contact /> renders correctly 1`] = `
           class="sc-bcXGCL hSvFdA"
         >
           <div
-            class="sc-bcXGCL gkMwg"
+            class="sc-bcXGCL gwZFMb"
           >
-            <div
-              class="sc-bcXGCL gwLuHb cap-accordion__item"
+            <details
+              class="sc-bcXGCL fzWTwc cap-accordion__item"
               id="contactForm1"
+              name="accordion-white-md"
+              open=""
+              style="margin-left: 0px; margin-top: 0px;"
             >
-              <button
+              <summary
                 aria-controls="accordion-panel-contactForm1"
+                aria-disabled="false"
                 aria-expanded="true"
-                class="sc-bcXGCL isrhRD cap-accordion__button"
+                class="sc-bcXGCL iJOtMm cap-accordion__button"
                 id="accordion-button-contactForm1"
-                type="button"
+                role="button"
               >
                 <svg
                   aria-hidden="true"
@@ -76,16 +80,16 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  class="sc-bcXGCL dfvBVw cap-text"
+                  class="sc-bcXGCL kxBQAH cap-text"
                 >
                   For a project
                 </p>
-              </button>
+              </summary>
               <div
                 aria-labelledby="accordion-button-contactForm1"
-                class="sc-bcXGCL hvhhfr cap-accordion__panel"
+                class="sc-bcXGCL hKmmIO cap-accordion__panel"
                 id="accordion-panel-contactForm1"
-                role="group"
+                role="region"
                 style="opacity: 0; height: 0px;"
               >
                 <div
@@ -226,25 +230,28 @@ exports[`<Contact /> renders correctly 1`] = `
                   </button>
                 </form>
               </div>
-            </div>
+            </details>
           </div>
           <div
-            class="sc-bcXGCL gkMwg"
+            class="sc-bcXGCL gwZFMb"
           >
-            <div
-              class="sc-bcXGCL jJplVC cap-accordion__item"
+            <details
+              class="sc-bcXGCL fzWTwc cap-accordion__item"
               id="contactForm2"
+              name="accordion-white-md"
+              style="margin-left: 0px; margin-top: 0px;"
             >
-              <button
+              <summary
                 aria-controls="accordion-panel-contactForm2"
+                aria-disabled="false"
                 aria-expanded="false"
-                class="sc-bcXGCL isrhRD cap-accordion__button"
+                class="sc-bcXGCL iJOtMm cap-accordion__button"
                 id="accordion-button-contactForm2"
-                type="button"
+                role="button"
               >
                 <svg
                   aria-hidden="true"
-                  class="sc-bcXGCL sc-oZHua iNqQTh hQQZty cap-icon"
+                  class="sc-bcXGCL sc-oZHua lahxhj hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 8 12"
@@ -257,12 +264,12 @@ exports[`<Contact /> renders correctly 1`] = `
                   />
                 </svg>
                 <p
-                  class="sc-bcXGCL dfvBVw cap-text"
+                  class="sc-bcXGCL kxBQAH cap-text"
                 >
                   For another request
                 </p>
-              </button>
-            </div>
+              </summary>
+            </details>
           </div>
         </div>
       </div>

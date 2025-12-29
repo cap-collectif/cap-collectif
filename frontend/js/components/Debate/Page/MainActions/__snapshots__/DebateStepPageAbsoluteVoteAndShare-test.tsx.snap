@@ -509,7 +509,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-gGvGpy FSQsA kUJvaZ cap-button"
+            className="sc-bcXGCL sc-gGvGpy FSQsA dTrLjF cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -619,7 +619,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-gGvGpy FSQsA kUJvaZ cap-button"
+            className="sc-bcXGCL sc-gGvGpy FSQsA dTrLjF cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1194,7 +1194,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-gGvGpy FSQsA kUJvaZ cap-button"
+            className="sc-bcXGCL sc-gGvGpy FSQsA dTrLjF cap-button"
             onClick={[Function]}
             type="button"
           >

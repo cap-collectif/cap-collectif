@@ -109,7 +109,7 @@ const SectionAdditionalSettingsModal: React.FC<Props> = ({ sectionFormKey, onSuc
               </FieldInput>
             </FormControl>
           </Box>
-          <Accordion color={CapUIAccordionColor.Transparent}>
+          <Accordion color={CapUIAccordionColor.white}>
             <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
               <Accordion.Panel>

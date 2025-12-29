@@ -149,7 +149,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
         />
       </FormControl>
       <DurationInput disabled={isDisabled} startAt={{ required: true }} />
-      <Accordion color={CapUIAccordionColor.Transparent} m={0} mt={-4}>
+      <Accordion color={CapUIAccordionColor.white} m={0} mt={-4}>
         <Accordion.Item id="registration">
           <Accordion.Button>{intl.formatMessage({ id: 'global.registration' })}</Accordion.Button>
           <Accordion.Panel>

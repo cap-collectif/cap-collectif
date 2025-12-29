@@ -399,7 +399,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
           <ConsultationStepConsultations query={query} />
 
-          <Accordion color={CapUIAccordionColor.Transparent}>
+          <Accordion color={CapUIAccordionColor.white}>
             <Accordion.Item
               id={intl.formatMessage({ id: 'required-infos-to-participate' })}
               onMouseEnter={() => {

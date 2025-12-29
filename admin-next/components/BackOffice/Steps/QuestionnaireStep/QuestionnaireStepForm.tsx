@@ -333,7 +333,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             defaultLocale={defaultLocale}
             setHelpMessage={setHelpMessage}
           />
-          <Accordion color={CapUIAccordionColor.Transparent}>
+          <Accordion color={CapUIAccordionColor.white}>
             <Accordion.Item
               id={intl.formatMessage({ id: 'required-infos-to-participate' })}
               onMouseEnter={() => {

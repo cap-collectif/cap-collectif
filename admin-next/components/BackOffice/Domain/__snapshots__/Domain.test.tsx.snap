@@ -130,7 +130,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                 </span>
                 <button
                   aria-label="Remove custom.domain.com"
-                  class="sc-bcXGCL sc-gGvGpy hrfuWy cITHqt cap-button cap-tag__closeButton"
+                  class="sc-bcXGCL sc-gGvGpy hrfuWy hOLoFx cap-button cap-tag__closeButton"
                   tabindex="0"
                   type="button"
                 >

@@ -45,7 +45,7 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
 
   return (
     <>
-      <Accordion allowMultiple size={CapUIAccordionSize.Md} sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}>
+      <Accordion allowMultiple size={CapUIAccordionSize.md} sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}>
         <Accordion.Item id="publication" position="relative">
           <ProjectConfigFormPublication locales={locales} project={project} />
         </Accordion.Item>

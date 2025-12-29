@@ -360,7 +360,7 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{
 
   return (
     <Accordion
-      color={CapUIAccordionColor.Transparent}
+      color={CapUIAccordionColor.white}
       defaultAccordion={[intl.formatMessage({ id: 'global.questionnaire' })]}
     >
       <Accordion.Item

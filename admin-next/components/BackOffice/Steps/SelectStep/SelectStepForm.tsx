@@ -466,7 +466,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           <StepDurationInput />
           <Box>
             <Accordion
-              color={CapUIAccordionColor.Transparent}
+              color={CapUIAccordionColor.white}
               defaultAccordion={defaultOpenAccordion(step.subType as SelectionStepSubTypes)}
               allowMultiple
             >

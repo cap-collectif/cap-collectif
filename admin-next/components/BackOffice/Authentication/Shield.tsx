@@ -126,7 +126,7 @@ const Shield: FC = () => {
   }, [localeSelected])
 
   return (
-    <Accordion defaultAccordion="advanced-settings" color={CapUIAccordionColor.White} width="30%">
+    <Accordion defaultAccordion="advanced-settings" color={CapUIAccordionColor.white} width="30%">
       <Accordion.Item id="advanced-settings">
         <Accordion.Button>{intl.formatMessage({ id: 'advanced-setttings' })}</Accordion.Button>
         <Accordion.Panel spacing={6}>

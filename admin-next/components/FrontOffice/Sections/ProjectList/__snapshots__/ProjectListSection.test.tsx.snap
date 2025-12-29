@@ -64,7 +64,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
           class="sc-bcXGCL cpoarP"
         >
           <div
-            class="sc-bcXGCL iOvkUf cap-card cap-project-card"
+            class="sc-bcXGCL okVYu cap-card cap-project-card"
             id="cap-project-card-project1"
           >
             <div

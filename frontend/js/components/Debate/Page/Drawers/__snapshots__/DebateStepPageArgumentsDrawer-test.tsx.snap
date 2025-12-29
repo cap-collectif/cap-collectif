@@ -151,7 +151,7 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh dTrLjF cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
@@ -265,7 +265,7 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh dTrLjF cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
@@ -379,7 +379,7 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-gGvGpy hrLlGh kUJvaZ cap-button"
+                          className="sc-bcXGCL sc-gGvGpy hrLlGh dTrLjF cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"

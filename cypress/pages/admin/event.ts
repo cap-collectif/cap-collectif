@@ -62,13 +62,13 @@ export default new (class EventFormPage {
     this.maxRegistrations.type(count.toString())
   }
   toggleRegistrationAccordion() {
-    this.cy.get('button#accordion-button-registration').click({ force: true })
+    this.cy.get('#accordion-button-registration').click({ force: true })
   }
   toggleAdvancedAccordion() {
-    this.cy.get('button#accordion-button-advanced').click({ force: true })
+    this.cy.get('#accordion-button-advanced').click({ force: true })
   }
   togglePublicationAccordion() {
-    this.cy.get('button#accordion-button-publication').click({ force: true })
+    this.cy.get('#accordion-button-publication').click({ force: true })
   }
   selectEntity(entity: 'themes' | 'projects' | 'steps' | 'districts') {
     this.cy.openDSSelect(`#${entity}`, true)

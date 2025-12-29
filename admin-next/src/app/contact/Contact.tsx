@@ -58,7 +58,7 @@ export const Contact: FC<Props> = ({ data }) => {
               return isMultiForm ? (
                 <Accordion
                   key={contactForm.id}
-                  color={CapUIAccordionColor.Transparent}
+                  color={CapUIAccordionColor.white}
                   defaultAccordion={!idx && contactForm.id}
                 >
                   <Accordion.Item id={contactForm.id}>
