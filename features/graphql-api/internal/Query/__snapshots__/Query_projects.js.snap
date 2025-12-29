@@ -165,7 +165,7 @@ Object {
         },
       },
     ],
-    "totalCount": 54,
+    "totalCount": 55,
   },
 }
 `;
@@ -435,7 +435,7 @@ Object {
         },
       },
     ],
-    "totalCount": 53,
+    "totalCount": 54,
   },
 }
 `;
@@ -806,6 +806,14 @@ Object {
             "creator": Object {
               "username": "welcomattic",
             },
+            "title": "Twilight est un bon film (custom access)",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
             "title": "Projet externe",
           },
         },
@@ -834,6 +842,14 @@ Object {
               "username": "welcomattic",
             },
             "title": "Projet avec questionnaire",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Twilight est un bon film (custom access)",
           },
         },
         Object {

@@ -232,11 +232,18 @@ class CloneStepService
 
         $projectVisibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
 
+        $owner = $clonedProject->getOwner();
+        $organization = $viewer->getOrganization();
+        $ownerIsOrganization = null !== $owner && null !== $organization && $owner === $organization;
+
         if (
             $clonedProject->getCreator()?->getId() === $viewer->getId()
-            || $clonedProject->getOwner() === $viewer->getOrganization()
+            || $ownerIsOrganization
         ) {
             $projectVisibility = ProjectVisibilityMode::VISIBILITY_ME;
+        }
+
+        if (ProjectVisibilityMode::VISIBILITY_CUSTOM === $originalProject->getVisibility()) {
             $clonedProject->setRestrictedViewerGroups(new ArrayCollection());
         }
 

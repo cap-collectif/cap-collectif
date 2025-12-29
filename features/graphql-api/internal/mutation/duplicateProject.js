@@ -205,11 +205,28 @@ describe('Internal | duplicateProject', () => {
           id: 'UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==', // ProjectWithCustomAccess
         },
       },
-      'internal_super_admin',
+      'internal_admin',
     )
     const newProject = duplicateProjectResponse.duplicateProject.newProject
 
     expect(newProject.visibility).toBe('ME')
+
+    expect(newProject.restrictedViewers.totalCount).toBe(0)
+  })
+
+  it('should duplicate project with restricted groups, it should switch to visibility ADMIN and remove groups', async () => {
+    const duplicateProjectResponse = await graphql(
+      DuplicateProjectMutation,
+      {
+        input: {
+          id: 'UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2VzczI=', // ProjectWithCustomAccess2
+        },
+      },
+      'internal_super_admin',
+    )
+    const newProject = duplicateProjectResponse.duplicateProject.newProject
+
+    expect(newProject.visibility).toBe('ADMIN')
 
     expect(newProject.restrictedViewers.totalCount).toBe(0)
   })

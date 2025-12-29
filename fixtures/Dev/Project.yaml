@@ -572,3 +572,14 @@ Capco\AppBundle\Entity\Project:
         visibility: 2
         owner: '@emailingAdmin'
         creator: '@emailingAdmin'
+    project28:
+        id: 'ProjectWithCustomAccess2'
+        title: Twilight est un bon film (custom access)
+        creator: '@userWelcomattic'
+        projectType: '@projectType7'
+        themes: ['@theme2']
+        createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
+        visibility: 3
+        restrictedViewerGroups: ['@group2', '@group3']
