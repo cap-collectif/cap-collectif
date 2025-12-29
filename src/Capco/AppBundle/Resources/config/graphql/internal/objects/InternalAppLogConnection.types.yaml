@@ -12,3 +12,6 @@ InternalAppLogConnection:
             oldestLoggedAt:
                 type: DateTime!
                 description: 'oldest logged action'
+            userRoles:
+                type: "[AppLogUserRole!]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\AppLogUserRoleResolver")'

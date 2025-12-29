@@ -14,7 +14,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class AppLogResolver implements QueryInterface
 {
     public function __construct(
-        private readonly AppLogRepository $appLogRepository
+        private readonly AppLogRepository $appLogRepository,
     ) {
     }
 

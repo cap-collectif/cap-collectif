@@ -18,6 +18,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -40,6 +44,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -62,6 +70,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -84,6 +96,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -117,6 +133,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -194,6 +214,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -216,6 +240,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -238,6 +266,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -293,6 +325,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -315,6 +351,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -392,6 +432,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -414,6 +458,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -436,6 +484,94 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with organizations and project_admin feature flags enabled 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with organizations feature flag enabled 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs with project_admin feature flag enabled 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ROLE_PROJECT_ADMIN",
+    ],
   },
 }
 `;
@@ -458,6 +594,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -480,6 +620,10 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
   },
 }
 `;
@@ -557,6 +701,11 @@ Object {
     ],
     "newestLoggedAt": "2025-07-01 12:02:00",
     "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ROLE_PROJECT_ADMIN",
+    ],
   },
 }
 `;

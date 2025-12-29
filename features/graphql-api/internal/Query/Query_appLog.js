@@ -20,14 +20,21 @@ const appLogQuery = /* GraphQL */ `
           actionType
         }
       }
+      userRoles
       newestLoggedAt
       oldestLoggedAt
     }
   }
 `
+afterEach(async () => {
+  await global.disableFeatureFlag('organizations')
+  await global.disableFeatureFlag('project_admin')
+})
 
 describe('Query.appLog connection', () => {
   it('fetches app logs without arguments', async () => {
+    await global.enableFeatureFlag('project_admin')
+
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
   })
 
@@ -216,6 +223,49 @@ describe('Query.appLog connection', () => {
   })
 
   it('fetches app logs with ORGANIZATION_MEMBER', async () => {
+    await expect(
+      graphql(
+        appLogQuery,
+        {
+          userRole: 'ORGANIZATION_MEMBER',
+        },
+        'internal_super_admin',
+      ),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('fetches app logs with organizations feature flag enabled', async () => {
+    await global.enableFeatureFlag('organizations')
+
+    await expect(
+      graphql(
+        appLogQuery,
+        {
+          userRole: 'ORGANIZATION_MEMBER',
+        },
+        'internal_super_admin',
+      ),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('fetches app logs with project_admin feature flag enabled', async () => {
+    await global.enableFeatureFlag('project_admin')
+
+    await expect(
+      graphql(
+        appLogQuery,
+        {
+          userRole: 'ORGANIZATION_MEMBER',
+        },
+        'internal_super_admin',
+      ),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('fetches app logs with organizations and project_admin feature flags enabled', async () => {
+    await global.enableFeatureFlag('organizations')
+    await global.enableFeatureFlag('project_admin')
+
     await expect(
       graphql(
         appLogQuery,

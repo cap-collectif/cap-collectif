@@ -1037,6 +1037,7 @@ type AppLogConnection {
 
   """oldest logged action"""
   oldestLoggedAt: DateTime!
+  userRoles: [AppLogUserRole!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!

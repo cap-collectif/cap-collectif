@@ -113,3 +113,6 @@ services:
         arguments:
             $defaultMapboxPublicToken: '%mapbox_public_key%'
             $defaultMapboxSecretKey: '%mapbox_secret_key%'
+
+    Capco\AppBundle\GraphQL\Resolver\Query\AppLogUserRoleResolver:
+        public: true

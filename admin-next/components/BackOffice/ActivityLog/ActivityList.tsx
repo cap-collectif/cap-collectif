@@ -5,7 +5,7 @@ import { useLayoutContext } from '@components/BackOffice/Layout/Layout.context'
 import EmptyMessage from './EmptyMessage'
 import { graphql, usePaginationFragment } from 'react-relay'
 import type { ActivityList_query$key } from '@relay/ActivityList_query.graphql'
-import { actionMenuFilterItems, CONNECTION_NODES_PER_PAGE, getLogActionType, userRoleFilterItems } from './utils'
+import { CONNECTION_NODES_PER_PAGE, getLogActionType, userRoleFilterItems } from './utils'
 import { LogActionType, AppLogOrder, AppLogUserRole } from '@relay/ActivityLogPageQuery.graphql'
 
 const FRAGMENT = graphql`
@@ -42,6 +42,7 @@ const FRAGMENT = graphql`
           }
         }
       }
+      userRoles
       pageInfo {
         endCursor
         hasNextPage
@@ -98,6 +99,14 @@ export const ActivityList: React.FC<Props> = ({
     }
   }
 
+  const filteredItems = userRoleFilterItems.filter(
+    item => item.value === 'ALL' || appLog.userRoles.includes(item.value as AppLogUserRole),
+  )
+  const selectedUserRoleItem = userRoleFilterItems.find(item => item.value === userRole)
+  const userRoleMenuLabel = selectedUserRoleItem
+    ? intl.formatMessage({ id: selectedUserRoleItem.label })
+    : intl.formatMessage({ id: 'roles.user' })
+
   return (
     <Table
       emptyMessage={!isLoadingNext && logs.length === 0 ? <EmptyMessage onReset={onReset} /> : null}
@@ -125,18 +134,14 @@ export const ActivityList: React.FC<Props> = ({
             </Flex>
           </Table.Th>
           <Table.Th noPlaceholder>
-            <Table.Menu
-              label={intl.formatMessage({
-                id: 'roles.user',
-              })}
-            >
+            <Table.Menu label={userRoleMenuLabel}>
               <Table.Menu.OptionGroup
                 value={userRole}
                 onChange={setUserRole}
                 type="radio"
                 title={intl.formatMessage({ id: 'action_show' })}
               >
-                {userRoleFilterItems.map(option => (
+                {filteredItems.map(option => (
                   <Table.Menu.OptionItem key={option.value} value={option.value}>
                     {intl.formatMessage({ id: option.label })}
                   </Table.Menu.OptionItem>
@@ -156,7 +161,7 @@ export const ActivityList: React.FC<Props> = ({
                 type="radio"
                 title={intl.formatMessage({ id: 'action_show' })}
               >
-                {actionMenuFilterItems.map(option => (
+                {filteredItems.map(option => (
                   <Table.Menu.OptionItem key={option.value} value={option.value}>
                     {intl.formatMessage({ id: option.label })}
                   </Table.Menu.OptionItem>
