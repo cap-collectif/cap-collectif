@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useFragment, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import css from '@styled-system/css'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { Box, Button, Heading, Text, Tag, AbstractCard, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.graphql'
@@ -122,9 +121,9 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
               width="100%"
               height={10}
               display="block"
-              css={css({
+              sx={{
                 background: 'linear-gradient(to bottom, rgba(255,255,255,0.1) 5%, white 25%)',
-              })}
+              }}
             >
               <FormattedMessage id="capco.module.read_more" />
             </Button>

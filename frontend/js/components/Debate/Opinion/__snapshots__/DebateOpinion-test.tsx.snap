@@ -2,39 +2,342 @@
 
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 Array [
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL ghJpbt cap-abstract-card"
+  .c0 {
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E8EBED;
+  background-color: #fff;
+  flex: 1;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c0 .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c1 {
+  background-color: #E4F9E9;
+  color: #165A26;
+  --current-shadow-color: tag.shadowColor.success;
+  position: absolute!important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding-left: 0.57142857rem;
+  padding-right: 0.57142857rem;
+  padding-top: 0.28571429rem;
+  padding-bottom: 0.28571429rem;
+  font-size: 0.92857143rem;
+  font-weight: 400;
+  overflow: hidden;
+  gap: 0.28571429rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c1:hover {
+  cursor: default;
+  background: #E4F9E9;
+}
+
+.c1:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c2 {
+  text-transform: uppercase;
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: sm;
+  font-size: 0.78571429rem;
+  font-weight: 700;
+}
+
+.c2:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c3 {
+  position: absolute;
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%);
+  width: 100%;
+  height: 4.57142857rem;
+  bottom: 0;
+}
+
+.c3:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c4 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin: 1.71428571rem;
+  margin-top: 3.42857143rem;
+}
+
+.c4:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: row;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin-bottom: 1.42857143rem;
+}
+
+.c5>* {
+  margin-left: 1.71428571rem;
+}
+
+.c5>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c5:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  background-color: #FAFCFF;
+  color: #FFC61A;
+  border-color: #FFC61A;
+  margin-right: 0.57142857rem;
+  align-self: flex-start;
+  border: 2px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.c7:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c9 {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c9:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c10 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c10:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c11 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+}
+
+.c11:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c12 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 19px;
+  color: #5E5E5E;
+  font-size: 1.00000000rem;
+}
+
+.c12:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c13 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c13>* {
+  margin-top: 0.85714286rem;
+}
+
+.c13>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c13:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c14 {
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.28571429rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  margin: 0;
+}
+
+.c14:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c15 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+}
+
+.c15:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c8 {
+  user-select: none;
+  font-size: 2.35714286rem;
+  line-height: 2.28571429rem;
+  width: 5.14285714rem;
+  height: 5.14285714rem;
+  min-width: 5.14285714rem;
+  min-height: 5.14285714rem;
+  max-width: 5.14285714rem;
+  max-height: 5.14285714rem;
+}
+
+.c6 {
+  position: relative;
+}
+
+.c6 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -0;
+  right: -5px;
+}
+
+<div
+    className="c0 cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL enXodl cap-tag"
+      className="c1 cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL KgSYF cap-text"
+        className="c2 cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL vKvFG"
+      className="c3"
     />
     <div
-      className="sc-bcXGCL eiUVZV"
+      className="c4"
     >
       <div
-        className="sc-bcXGCL gJEVDa"
+        className="c5"
       >
         <span
-          className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
+          className="c6"
           hasBadge={false}
           style={
             Object {
@@ -44,35 +347,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
+            className="c7 c8 cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL fUNjxh"
+              className="c9"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL gkMwg"
+          className="c10"
         >
           <p
-            className="sc-bcXGCL iCvqfB cap-text"
+            className="c11 cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL ilQWDZ cap-text"
+            className="c12 cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ghdPxh"
+        className="c13"
       >
         <h4
-          className="sc-bcXGCL bXwsiw cap-heading"
+          className="c14 cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -83,7 +386,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL kxBQAH cap-text"
+          className="c15 cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -105,39 +408,342 @@ Array [
 
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 Array [
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL ghJpbt cap-abstract-card"
+  .c0 {
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E8EBED;
+  background-color: #fff;
+  flex: 1;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c0 .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c1 {
+  background-color: #E4F9E9;
+  color: #165A26;
+  --current-shadow-color: tag.shadowColor.success;
+  position: absolute!important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding-left: 0.57142857rem;
+  padding-right: 0.57142857rem;
+  padding-top: 0.28571429rem;
+  padding-bottom: 0.28571429rem;
+  font-size: 0.92857143rem;
+  font-weight: 400;
+  overflow: hidden;
+  gap: 0.28571429rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c1:hover {
+  cursor: default;
+  background: #E4F9E9;
+}
+
+.c1:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c2 {
+  text-transform: uppercase;
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: sm;
+  font-size: 0.78571429rem;
+  font-weight: 700;
+}
+
+.c2:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c3 {
+  position: absolute;
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%);
+  width: 100%;
+  height: 4.57142857rem;
+  bottom: 0;
+}
+
+.c3:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c4 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin: 1.71428571rem;
+  margin-top: 3.42857143rem;
+}
+
+.c4:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: row;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin-bottom: 1.42857143rem;
+}
+
+.c5>* {
+  margin-left: 1.71428571rem;
+}
+
+.c5>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c5:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  background-color: #FAFCFF;
+  color: #FFC61A;
+  border-color: #FFC61A;
+  margin-right: 0.57142857rem;
+  align-self: flex-start;
+  border: 2px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.c7:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c9 {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c9:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c10 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c10:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c11 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+}
+
+.c11:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c12 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 19px;
+  color: #5E5E5E;
+  font-size: 1.00000000rem;
+}
+
+.c12:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c13 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c13>* {
+  margin-top: 0.85714286rem;
+}
+
+.c13>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c13:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c14 {
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.28571429rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  margin: 0;
+}
+
+.c14:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c15 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+}
+
+.c15:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c8 {
+  user-select: none;
+  font-size: 2.35714286rem;
+  line-height: 2.28571429rem;
+  width: 5.14285714rem;
+  height: 5.14285714rem;
+  min-width: 5.14285714rem;
+  min-height: 5.14285714rem;
+  max-width: 5.14285714rem;
+  max-height: 5.14285714rem;
+}
+
+.c6 {
+  position: relative;
+}
+
+.c6 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -0;
+  right: -5px;
+}
+
+<div
+    className="c0 cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL enXodl cap-tag"
+      className="c1 cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL KgSYF cap-text"
+        className="c2 cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL vKvFG"
+      className="c3"
     />
     <div
-      className="sc-bcXGCL eiUVZV"
+      className="c4"
     >
       <div
-        className="sc-bcXGCL gJEVDa"
+        className="c5"
       >
         <span
-          className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
+          className="c6"
           hasBadge={false}
           style={
             Object {
@@ -147,35 +753,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
+            className="c7 c8 cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL fUNjxh"
+              className="c9"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL gkMwg"
+          className="c10"
         >
           <p
-            className="sc-bcXGCL iCvqfB cap-text"
+            className="c11 cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL ilQWDZ cap-text"
+            className="c12 cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ghdPxh"
+        className="c13"
       >
         <h4
-          className="sc-bcXGCL bXwsiw cap-heading"
+          className="c14 cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -186,7 +792,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL kxBQAH cap-text"
+          className="c15 cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -208,36 +814,325 @@ Array [
 
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 Array [
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL fwhnyr cap-abstract-card"
+  .c0 {
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E8EBED;
+  background-color: #fff;
+  flex: 1;
+  max-height: 2000px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c0 .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c1 {
+  background-color: #E4F9E9;
+  color: #165A26;
+  --current-shadow-color: tag.shadowColor.success;
+  position: absolute!important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding-left: 0.57142857rem;
+  padding-right: 0.57142857rem;
+  padding-top: 0.28571429rem;
+  padding-bottom: 0.28571429rem;
+  font-size: 0.92857143rem;
+  font-weight: 400;
+  overflow: hidden;
+  gap: 0.28571429rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c1:hover {
+  cursor: default;
+  background: #E4F9E9;
+}
+
+.c1:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c2 {
+  text-transform: uppercase;
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: sm;
+  font-size: 0.78571429rem;
+  font-weight: 700;
+}
+
+.c2:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c3 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin: 1.71428571rem;
+  margin-top: 3.42857143rem;
+}
+
+.c3:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c4 {
+  display: flex;
+  flex-direction: row;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin-bottom: 1.42857143rem;
+}
+
+.c4>* {
+  margin-left: 1.71428571rem;
+}
+
+.c4>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c4:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c6 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  background-color: #FAFCFF;
+  color: #FFC61A;
+  border-color: #FFC61A;
+  margin-right: 0.57142857rem;
+  align-self: flex-start;
+  border: 2px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.c6:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c8 {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c8:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c9 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c9:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c10 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+}
+
+.c10:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c11 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 19px;
+  color: #5E5E5E;
+  font-size: 1.00000000rem;
+}
+
+.c11:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c12 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c12>* {
+  margin-top: 0.85714286rem;
+}
+
+.c12>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c12:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c13 {
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.28571429rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  margin: 0;
+}
+
+.c13:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c14 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+}
+
+.c14:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c7 {
+  user-select: none;
+  font-size: 2.35714286rem;
+  line-height: 2.28571429rem;
+  width: 5.14285714rem;
+  height: 5.14285714rem;
+  min-width: 5.14285714rem;
+  min-height: 5.14285714rem;
+  max-width: 5.14285714rem;
+  max-height: 5.14285714rem;
+}
+
+.c5 {
+  position: relative;
+}
+
+.c5 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -0;
+  right: -5px;
+}
+
+<div
+    className="c0 cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL enXodl cap-tag"
+      className="c1 cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL KgSYF cap-text"
+        className="c2 cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL eiUVZV"
+      className="c3"
     >
       <div
-        className="sc-bcXGCL gJEVDa"
+        className="c4"
       >
         <span
-          className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
+          className="c5"
           hasBadge={false}
           style={
             Object {
@@ -247,35 +1142,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
+            className="c6 c7 cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL fUNjxh"
+              className="c8"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL gkMwg"
+          className="c9"
         >
           <p
-            className="sc-bcXGCL iCvqfB cap-text"
+            className="c10 cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL ilQWDZ cap-text"
+            className="c11 cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ghdPxh"
+        className="c12"
       >
         <h4
-          className="sc-bcXGCL bXwsiw cap-heading"
+          className="c13 cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -286,7 +1181,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL kxBQAH cap-text"
+          className="c14 cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -308,39 +1203,415 @@ Array [
 
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 Array [
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL ghJpbt cap-abstract-card"
+  .c0 {
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E8EBED;
+  background-color: #fff;
+  flex: 1;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c0 .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c1 {
+  background-color: #E4F9E9;
+  color: #165A26;
+  --current-shadow-color: tag.shadowColor.success;
+  position: absolute!important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding-left: 0.57142857rem;
+  padding-right: 0.57142857rem;
+  padding-top: 0.28571429rem;
+  padding-bottom: 0.28571429rem;
+  font-size: 0.92857143rem;
+  font-weight: 400;
+  overflow: hidden;
+  gap: 0.28571429rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c1:hover {
+  cursor: default;
+  background: #E4F9E9;
+}
+
+.c1:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c2 {
+  text-transform: uppercase;
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: sm;
+  font-size: 0.78571429rem;
+  font-weight: 700;
+}
+
+.c2:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c3 {
+  position: absolute;
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%);
+  width: 100%;
+  height: 4.57142857rem;
+  bottom: 0;
+}
+
+.c3:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c4 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin: 1.71428571rem;
+  margin-top: 3.42857143rem;
+}
+
+.c4:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: row;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin-bottom: 1.42857143rem;
+}
+
+.c5>* {
+  margin-left: 1.71428571rem;
+}
+
+.c5>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c5:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  background-color: #FAFCFF;
+  color: #FFC61A;
+  border-color: #FFC61A;
+  margin-right: 0.57142857rem;
+  align-self: flex-start;
+  border: 2px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.c7:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c9 {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c9:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c10 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c10:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c11 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+}
+
+.c11:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c12 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 19px;
+  color: #5E5E5E;
+  font-size: 1.00000000rem;
+}
+
+.c12:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c13 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c13>* {
+  margin-top: 0.85714286rem;
+}
+
+.c13>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c13:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c14 {
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.28571429rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  margin: 0;
+}
+
+.c14:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c15 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+}
+
+.c15:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c16 {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 5%, white 25%);
+  display: block;
+  align-items: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  border: none;
+  border-radius: 0.28571429rem;
+  background-color: transparent;
+  padding-left: 1.14285714rem;
+  padding-right: 1.14285714rem;
+  padding-top: 0.85714286rem;
+  padding-bottom: 0.85714286rem;
+  align-self: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.42857143rem;
+}
+
+.c16:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c17 {
+  outline: none;
+  text-decoration: underline;
+  color: #006CE0;
+}
+
+.c17:disabled {
+  cursor: not-allowed;
+}
+
+.c17[data-loading="true"] {
+  cursor: wait;
+}
+
+.c17 .cap-icon.cap-button-icon {
+  color: #006CE0;
+}
+
+.c17:hover {
+  color: #0051A8;
+}
+
+.c17:hover .cap-icon.cap-button-icon {
+  color: #0051A8;
+}
+
+.c17:disabled {
+  text-decoration: none;
+  color: #8AC2FF;
+}
+
+.c17:disabled .cap-icon.cap-button-icon {
+  color: #8AC2FF;
+}
+
+.c17[data-loading="true"] {
+  text-decoration: underline;
+  color: #006CE0;
+}
+
+.c17[data-loading="true"] .cap-icon.cap-button-icon {
+  color: #006CE0;
+}
+
+.c8 {
+  user-select: none;
+  font-size: 2.35714286rem;
+  line-height: 2.28571429rem;
+  width: 5.14285714rem;
+  height: 5.14285714rem;
+  min-width: 5.14285714rem;
+  min-height: 5.14285714rem;
+  max-width: 5.14285714rem;
+  max-height: 5.14285714rem;
+}
+
+.c6 {
+  position: relative;
+}
+
+.c6 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -0;
+  right: -5px;
+}
+
+<div
+    className="c0 cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL enXodl cap-tag"
+      className="c1 cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL KgSYF cap-text"
+        className="c2 cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL vKvFG"
+      className="c3"
     />
     <div
-      className="sc-bcXGCL eiUVZV"
+      className="c4"
     >
       <div
-        className="sc-bcXGCL gJEVDa"
+        className="c5"
       >
         <span
-          className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
+          className="c6"
           hasBadge={false}
           style={
             Object {
@@ -350,35 +1621,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
+            className="c7 c8 cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL fUNjxh"
+              className="c9"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL gkMwg"
+          className="c10"
         >
           <p
-            className="sc-bcXGCL iCvqfB cap-text"
+            className="c11 cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL ilQWDZ cap-text"
+            className="c12 cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ghdPxh"
+        className="c13"
       >
         <h4
-          className="sc-bcXGCL bXwsiw cap-heading"
+          className="c14 cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -389,7 +1660,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL kxBQAH cap-text"
+          className="c15 cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -404,7 +1675,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-gGvGpy dXuIGx hOLoFx cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="c16 c17 cap-button"
           onClick={[Function]}
           type="button"
         >
@@ -418,36 +1689,398 @@ Array [
 
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 Array [
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+  .c0 {
+  position: fixed;
+  pointer-events: none;
+  flex-direction: column;
+  z-index: 10000;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+<div
+    className="c0 toasts-container toasts-container--top"
   />,
-  <div
-    className="sc-bcXGCL fwhnyr cap-abstract-card"
+  .c0 {
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E8EBED;
+  background-color: #fff;
+  flex: 1;
+  max-height: 2000px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c0 .ql-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.c0:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c1 {
+  background-color: #E4F9E9;
+  color: #165A26;
+  --current-shadow-color: tag.shadowColor.success;
+  position: absolute!important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding-left: 0.57142857rem;
+  padding-right: 0.57142857rem;
+  padding-top: 0.28571429rem;
+  padding-bottom: 0.28571429rem;
+  font-size: 0.92857143rem;
+  font-weight: 400;
+  overflow: hidden;
+  gap: 0.28571429rem;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.c1:hover {
+  cursor: default;
+  background: #E4F9E9;
+}
+
+.c1:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c2 {
+  text-transform: uppercase;
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: sm;
+  font-size: 0.78571429rem;
+  font-weight: 700;
+}
+
+.c2:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c3 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin: 1.71428571rem;
+  margin-top: 3.42857143rem;
+}
+
+.c3:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c4 {
+  display: flex;
+  flex-direction: row;
+  font-family: Open Sans,system-ui,sans-serif;
+  margin-bottom: 1.42857143rem;
+}
+
+.c4>* {
+  margin-left: 1.71428571rem;
+}
+
+.c4>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c4:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c6 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  background-color: #FAFCFF;
+  color: #FFC61A;
+  border-color: #FFC61A;
+  margin-right: 0.57142857rem;
+  align-self: flex-start;
+  border: 2px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.c6:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c8 {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c8:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c9 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c9:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c10 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+}
+
+.c10:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c11 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 19px;
+  color: #5E5E5E;
+  font-size: 1.00000000rem;
+}
+
+.c11:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c12 {
+  display: flex;
+  flex-direction: column;
+  font-family: Open Sans,system-ui,sans-serif;
+}
+
+.c12>* {
+  margin-top: 0.85714286rem;
+}
+
+.c12>*:first-child {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.c12:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c13 {
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.28571429rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  margin: 0;
+}
+
+.c13:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c14 {
+  font-family: Open Sans,system-ui,sans-serif;
+  line-height: 1.71428571rem;
+}
+
+.c14:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c15 {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 5%, white 25%);
+  display: block;
+  align-items: center;
+  font-family: Open Sans,system-ui,sans-serif;
+  font-size: 1.00000000rem;
+  font-weight: 600;
+  line-height: 1.71428571rem;
+  border: none;
+  border-radius: 0.28571429rem;
+  background-color: transparent;
+  padding-left: 1.14285714rem;
+  padding-right: 1.14285714rem;
+  padding-top: 0.85714286rem;
+  padding-bottom: 0.85714286rem;
+  align-self: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.42857143rem;
+}
+
+.c15:focus-visible:not(.cap-input,.cap-textarea,.cap-input-number,.cap-color-picker,.cap-menu__list,.cap-menu__item) {
+  outline: 2px #fff solid;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #0051A8;
+}
+
+.c16 {
+  outline: none;
+  text-decoration: underline;
+  color: #006CE0;
+}
+
+.c16:disabled {
+  cursor: not-allowed;
+}
+
+.c16[data-loading="true"] {
+  cursor: wait;
+}
+
+.c16 .cap-icon.cap-button-icon {
+  color: #006CE0;
+}
+
+.c16:hover {
+  color: #0051A8;
+}
+
+.c16:hover .cap-icon.cap-button-icon {
+  color: #0051A8;
+}
+
+.c16:disabled {
+  text-decoration: none;
+  color: #8AC2FF;
+}
+
+.c16:disabled .cap-icon.cap-button-icon {
+  color: #8AC2FF;
+}
+
+.c16[data-loading="true"] {
+  text-decoration: underline;
+  color: #006CE0;
+}
+
+.c16[data-loading="true"] .cap-icon.cap-button-icon {
+  color: #006CE0;
+}
+
+.c7 {
+  user-select: none;
+  font-size: 2.35714286rem;
+  line-height: 2.28571429rem;
+  width: 5.14285714rem;
+  height: 5.14285714rem;
+  min-width: 5.14285714rem;
+  min-height: 5.14285714rem;
+  max-width: 5.14285714rem;
+  max-height: 5.14285714rem;
+}
+
+.c5 {
+  position: relative;
+}
+
+.c5 .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -0;
+  right: -5px;
+}
+
+<div
+    className="c0 cap-abstract-card"
   >
     <div
       aria-label="Tag "
-      className="sc-bcXGCL enXodl cap-tag"
+      className="c1 cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       title=""
     >
       <span
-        className="sc-bcXGCL KgSYF cap-text"
+        className="c2 cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL eiUVZV"
+      className="c3"
     >
       <div
-        className="sc-bcXGCL gJEVDa"
+        className="c4"
       >
         <span
-          className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
+          className="c5"
           hasBadge={false}
           style={
             Object {
@@ -457,35 +2090,35 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL qWMyx sc-fbYNKQ qltGU cap-avatar"
+            className="c6 c7 cap-avatar"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL fUNjxh"
+              className="c8"
               src="<mock-value-for-field-\\"avatarUrl\\">"
             />
           </div>
         </span>
         <div
-          className="sc-bcXGCL gkMwg"
+          className="c9"
         >
           <p
-            className="sc-bcXGCL iCvqfB cap-text"
+            className="c10 cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL ilQWDZ cap-text"
+            className="c11 cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL ghdPxh"
+        className="c12"
       >
         <h4
-          className="sc-bcXGCL bXwsiw cap-heading"
+          className="c13 cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -496,7 +2129,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL kxBQAH cap-text"
+          className="c14 cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -511,7 +2144,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-gGvGpy dXuIGx hOLoFx cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="c15 c16 cap-button"
           onClick={[Function]}
           type="button"
         >

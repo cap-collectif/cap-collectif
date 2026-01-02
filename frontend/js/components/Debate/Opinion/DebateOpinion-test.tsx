@@ -1,5 +1,6 @@
 /* eslint-env jest */
 import * as React from 'react'
+import 'jest-styled-components'
 import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'

@@ -334,663 +334,663 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         </option>
         <option
           key="0"
+          value={2026}
+        >
+          2026
+        </option>
+        <option
+          key="1"
           value={2025}
         >
           2025
         </option>
         <option
-          key="1"
+          key="2"
           value={2024}
         >
           2024
         </option>
         <option
-          key="2"
+          key="3"
           value={2023}
         >
           2023
         </option>
         <option
-          key="3"
+          key="4"
           value={2022}
         >
           2022
         </option>
         <option
-          key="4"
+          key="5"
           value={2021}
         >
           2021
         </option>
         <option
-          key="5"
+          key="6"
           value={2020}
         >
           2020
         </option>
         <option
-          key="6"
+          key="7"
           value={2019}
         >
           2019
         </option>
         <option
-          key="7"
+          key="8"
           value={2018}
         >
           2018
         </option>
         <option
-          key="8"
+          key="9"
           value={2017}
         >
           2017
         </option>
         <option
-          key="9"
+          key="10"
           value={2016}
         >
           2016
         </option>
         <option
-          key="10"
+          key="11"
           value={2015}
         >
           2015
         </option>
         <option
-          key="11"
+          key="12"
           value={2014}
         >
           2014
         </option>
         <option
-          key="12"
+          key="13"
           value={2013}
         >
           2013
         </option>
         <option
-          key="13"
+          key="14"
           value={2012}
         >
           2012
         </option>
         <option
-          key="14"
+          key="15"
           value={2011}
         >
           2011
         </option>
         <option
-          key="15"
+          key="16"
           value={2010}
         >
           2010
         </option>
         <option
-          key="16"
+          key="17"
           value={2009}
         >
           2009
         </option>
         <option
-          key="17"
+          key="18"
           value={2008}
         >
           2008
         </option>
         <option
-          key="18"
+          key="19"
           value={2007}
         >
           2007
         </option>
         <option
-          key="19"
+          key="20"
           value={2006}
         >
           2006
         </option>
         <option
-          key="20"
+          key="21"
           value={2005}
         >
           2005
         </option>
         <option
-          key="21"
+          key="22"
           value={2004}
         >
           2004
         </option>
         <option
-          key="22"
+          key="23"
           value={2003}
         >
           2003
         </option>
         <option
-          key="23"
+          key="24"
           value={2002}
         >
           2002
         </option>
         <option
-          key="24"
+          key="25"
           value={2001}
         >
           2001
         </option>
         <option
-          key="25"
+          key="26"
           value={2000}
         >
           2000
         </option>
         <option
-          key="26"
+          key="27"
           value={1999}
         >
           1999
         </option>
         <option
-          key="27"
+          key="28"
           value={1998}
         >
           1998
         </option>
         <option
-          key="28"
+          key="29"
           value={1997}
         >
           1997
         </option>
         <option
-          key="29"
+          key="30"
           value={1996}
         >
           1996
         </option>
         <option
-          key="30"
+          key="31"
           value={1995}
         >
           1995
         </option>
         <option
-          key="31"
+          key="32"
           value={1994}
         >
           1994
         </option>
         <option
-          key="32"
+          key="33"
           value={1993}
         >
           1993
         </option>
         <option
-          key="33"
+          key="34"
           value={1992}
         >
           1992
         </option>
         <option
-          key="34"
+          key="35"
           value={1991}
         >
           1991
         </option>
         <option
-          key="35"
+          key="36"
           value={1990}
         >
           1990
         </option>
         <option
-          key="36"
+          key="37"
           value={1989}
         >
           1989
         </option>
         <option
-          key="37"
+          key="38"
           value={1988}
         >
           1988
         </option>
         <option
-          key="38"
+          key="39"
           value={1987}
         >
           1987
         </option>
         <option
-          key="39"
+          key="40"
           value={1986}
         >
           1986
         </option>
         <option
-          key="40"
+          key="41"
           value={1985}
         >
           1985
         </option>
         <option
-          key="41"
+          key="42"
           value={1984}
         >
           1984
         </option>
         <option
-          key="42"
+          key="43"
           value={1983}
         >
           1983
         </option>
         <option
-          key="43"
+          key="44"
           value={1982}
         >
           1982
         </option>
         <option
-          key="44"
+          key="45"
           value={1981}
         >
           1981
         </option>
         <option
-          key="45"
+          key="46"
           value={1980}
         >
           1980
         </option>
         <option
-          key="46"
+          key="47"
           value={1979}
         >
           1979
         </option>
         <option
-          key="47"
+          key="48"
           value={1978}
         >
           1978
         </option>
         <option
-          key="48"
+          key="49"
           value={1977}
         >
           1977
         </option>
         <option
-          key="49"
+          key="50"
           value={1976}
         >
           1976
         </option>
         <option
-          key="50"
+          key="51"
           value={1975}
         >
           1975
         </option>
         <option
-          key="51"
+          key="52"
           value={1974}
         >
           1974
         </option>
         <option
-          key="52"
+          key="53"
           value={1973}
         >
           1973
         </option>
         <option
-          key="53"
+          key="54"
           value={1972}
         >
           1972
         </option>
         <option
-          key="54"
+          key="55"
           value={1971}
         >
           1971
         </option>
         <option
-          key="55"
+          key="56"
           value={1970}
         >
           1970
         </option>
         <option
-          key="56"
+          key="57"
           value={1969}
         >
           1969
         </option>
         <option
-          key="57"
+          key="58"
           value={1968}
         >
           1968
         </option>
         <option
-          key="58"
+          key="59"
           value={1967}
         >
           1967
         </option>
         <option
-          key="59"
+          key="60"
           value={1966}
         >
           1966
         </option>
         <option
-          key="60"
+          key="61"
           value={1965}
         >
           1965
         </option>
         <option
-          key="61"
+          key="62"
           value={1964}
         >
           1964
         </option>
         <option
-          key="62"
+          key="63"
           value={1963}
         >
           1963
         </option>
         <option
-          key="63"
+          key="64"
           value={1962}
         >
           1962
         </option>
         <option
-          key="64"
+          key="65"
           value={1961}
         >
           1961
         </option>
         <option
-          key="65"
+          key="66"
           value={1960}
         >
           1960
         </option>
         <option
-          key="66"
+          key="67"
           value={1959}
         >
           1959
         </option>
         <option
-          key="67"
+          key="68"
           value={1958}
         >
           1958
         </option>
         <option
-          key="68"
+          key="69"
           value={1957}
         >
           1957
         </option>
         <option
-          key="69"
+          key="70"
           value={1956}
         >
           1956
         </option>
         <option
-          key="70"
+          key="71"
           value={1955}
         >
           1955
         </option>
         <option
-          key="71"
+          key="72"
           value={1954}
         >
           1954
         </option>
         <option
-          key="72"
+          key="73"
           value={1953}
         >
           1953
         </option>
         <option
-          key="73"
+          key="74"
           value={1952}
         >
           1952
         </option>
         <option
-          key="74"
+          key="75"
           value={1951}
         >
           1951
         </option>
         <option
-          key="75"
+          key="76"
           value={1950}
         >
           1950
         </option>
         <option
-          key="76"
+          key="77"
           value={1949}
         >
           1949
         </option>
         <option
-          key="77"
+          key="78"
           value={1948}
         >
           1948
         </option>
         <option
-          key="78"
+          key="79"
           value={1947}
         >
           1947
         </option>
         <option
-          key="79"
+          key="80"
           value={1946}
         >
           1946
         </option>
         <option
-          key="80"
+          key="81"
           value={1945}
         >
           1945
         </option>
         <option
-          key="81"
+          key="82"
           value={1944}
         >
           1944
         </option>
         <option
-          key="82"
+          key="83"
           value={1943}
         >
           1943
         </option>
         <option
-          key="83"
+          key="84"
           value={1942}
         >
           1942
         </option>
         <option
-          key="84"
+          key="85"
           value={1941}
         >
           1941
         </option>
         <option
-          key="85"
+          key="86"
           value={1940}
         >
           1940
         </option>
         <option
-          key="86"
+          key="87"
           value={1939}
         >
           1939
         </option>
         <option
-          key="87"
+          key="88"
           value={1938}
         >
           1938
         </option>
         <option
-          key="88"
+          key="89"
           value={1937}
         >
           1937
         </option>
         <option
-          key="89"
+          key="90"
           value={1936}
         >
           1936
         </option>
         <option
-          key="90"
+          key="91"
           value={1935}
         >
           1935
         </option>
         <option
-          key="91"
+          key="92"
           value={1934}
         >
           1934
         </option>
         <option
-          key="92"
+          key="93"
           value={1933}
         >
           1933
         </option>
         <option
-          key="93"
+          key="94"
           value={1932}
         >
           1932
         </option>
         <option
-          key="94"
+          key="95"
           value={1931}
         >
           1931
         </option>
         <option
-          key="95"
+          key="96"
           value={1930}
         >
           1930
         </option>
         <option
-          key="96"
+          key="97"
           value={1929}
         >
           1929
         </option>
         <option
-          key="97"
+          key="98"
           value={1928}
         >
           1928
         </option>
         <option
-          key="98"
+          key="99"
           value={1927}
         >
           1927
         </option>
         <option
-          key="99"
+          key="100"
           value={1926}
         >
           1926
         </option>
         <option
-          key="100"
+          key="101"
           value={1925}
         >
           1925
         </option>
         <option
-          key="101"
+          key="102"
           value={1924}
         >
           1924
         </option>
         <option
-          key="102"
+          key="103"
           value={1923}
         >
           1923
         </option>
         <option
-          key="103"
+          key="104"
           value={1922}
         >
           1922
         </option>
         <option
-          key="104"
+          key="105"
           value={1921}
         >
           1921
         </option>
         <option
-          key="105"
+          key="106"
           value={1920}
         >
           1920
         </option>
         <option
-          key="106"
+          key="107"
           value={1919}
         >
           1919
         </option>
         <option
-          key="107"
+          key="108"
           value={1918}
         >
           1918
         </option>
         <option
-          key="108"
+          key="109"
           value={1917}
         >
           1917
-        </option>
-        <option
-          key="109"
-          value={1916}
-        >
-          1916
         </option>
       </select>
     </div>
@@ -1332,663 +1332,663 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         </option>
         <option
           key="0"
+          value={2026}
+        >
+          2026
+        </option>
+        <option
+          key="1"
           value={2025}
         >
           2025
         </option>
         <option
-          key="1"
+          key="2"
           value={2024}
         >
           2024
         </option>
         <option
-          key="2"
+          key="3"
           value={2023}
         >
           2023
         </option>
         <option
-          key="3"
+          key="4"
           value={2022}
         >
           2022
         </option>
         <option
-          key="4"
+          key="5"
           value={2021}
         >
           2021
         </option>
         <option
-          key="5"
+          key="6"
           value={2020}
         >
           2020
         </option>
         <option
-          key="6"
+          key="7"
           value={2019}
         >
           2019
         </option>
         <option
-          key="7"
+          key="8"
           value={2018}
         >
           2018
         </option>
         <option
-          key="8"
+          key="9"
           value={2017}
         >
           2017
         </option>
         <option
-          key="9"
+          key="10"
           value={2016}
         >
           2016
         </option>
         <option
-          key="10"
+          key="11"
           value={2015}
         >
           2015
         </option>
         <option
-          key="11"
+          key="12"
           value={2014}
         >
           2014
         </option>
         <option
-          key="12"
+          key="13"
           value={2013}
         >
           2013
         </option>
         <option
-          key="13"
+          key="14"
           value={2012}
         >
           2012
         </option>
         <option
-          key="14"
+          key="15"
           value={2011}
         >
           2011
         </option>
         <option
-          key="15"
+          key="16"
           value={2010}
         >
           2010
         </option>
         <option
-          key="16"
+          key="17"
           value={2009}
         >
           2009
         </option>
         <option
-          key="17"
+          key="18"
           value={2008}
         >
           2008
         </option>
         <option
-          key="18"
+          key="19"
           value={2007}
         >
           2007
         </option>
         <option
-          key="19"
+          key="20"
           value={2006}
         >
           2006
         </option>
         <option
-          key="20"
+          key="21"
           value={2005}
         >
           2005
         </option>
         <option
-          key="21"
+          key="22"
           value={2004}
         >
           2004
         </option>
         <option
-          key="22"
+          key="23"
           value={2003}
         >
           2003
         </option>
         <option
-          key="23"
+          key="24"
           value={2002}
         >
           2002
         </option>
         <option
-          key="24"
+          key="25"
           value={2001}
         >
           2001
         </option>
         <option
-          key="25"
+          key="26"
           value={2000}
         >
           2000
         </option>
         <option
-          key="26"
+          key="27"
           value={1999}
         >
           1999
         </option>
         <option
-          key="27"
+          key="28"
           value={1998}
         >
           1998
         </option>
         <option
-          key="28"
+          key="29"
           value={1997}
         >
           1997
         </option>
         <option
-          key="29"
+          key="30"
           value={1996}
         >
           1996
         </option>
         <option
-          key="30"
+          key="31"
           value={1995}
         >
           1995
         </option>
         <option
-          key="31"
+          key="32"
           value={1994}
         >
           1994
         </option>
         <option
-          key="32"
+          key="33"
           value={1993}
         >
           1993
         </option>
         <option
-          key="33"
+          key="34"
           value={1992}
         >
           1992
         </option>
         <option
-          key="34"
+          key="35"
           value={1991}
         >
           1991
         </option>
         <option
-          key="35"
+          key="36"
           value={1990}
         >
           1990
         </option>
         <option
-          key="36"
+          key="37"
           value={1989}
         >
           1989
         </option>
         <option
-          key="37"
+          key="38"
           value={1988}
         >
           1988
         </option>
         <option
-          key="38"
+          key="39"
           value={1987}
         >
           1987
         </option>
         <option
-          key="39"
+          key="40"
           value={1986}
         >
           1986
         </option>
         <option
-          key="40"
+          key="41"
           value={1985}
         >
           1985
         </option>
         <option
-          key="41"
+          key="42"
           value={1984}
         >
           1984
         </option>
         <option
-          key="42"
+          key="43"
           value={1983}
         >
           1983
         </option>
         <option
-          key="43"
+          key="44"
           value={1982}
         >
           1982
         </option>
         <option
-          key="44"
+          key="45"
           value={1981}
         >
           1981
         </option>
         <option
-          key="45"
+          key="46"
           value={1980}
         >
           1980
         </option>
         <option
-          key="46"
+          key="47"
           value={1979}
         >
           1979
         </option>
         <option
-          key="47"
+          key="48"
           value={1978}
         >
           1978
         </option>
         <option
-          key="48"
+          key="49"
           value={1977}
         >
           1977
         </option>
         <option
-          key="49"
+          key="50"
           value={1976}
         >
           1976
         </option>
         <option
-          key="50"
+          key="51"
           value={1975}
         >
           1975
         </option>
         <option
-          key="51"
+          key="52"
           value={1974}
         >
           1974
         </option>
         <option
-          key="52"
+          key="53"
           value={1973}
         >
           1973
         </option>
         <option
-          key="53"
+          key="54"
           value={1972}
         >
           1972
         </option>
         <option
-          key="54"
+          key="55"
           value={1971}
         >
           1971
         </option>
         <option
-          key="55"
+          key="56"
           value={1970}
         >
           1970
         </option>
         <option
-          key="56"
+          key="57"
           value={1969}
         >
           1969
         </option>
         <option
-          key="57"
+          key="58"
           value={1968}
         >
           1968
         </option>
         <option
-          key="58"
+          key="59"
           value={1967}
         >
           1967
         </option>
         <option
-          key="59"
+          key="60"
           value={1966}
         >
           1966
         </option>
         <option
-          key="60"
+          key="61"
           value={1965}
         >
           1965
         </option>
         <option
-          key="61"
+          key="62"
           value={1964}
         >
           1964
         </option>
         <option
-          key="62"
+          key="63"
           value={1963}
         >
           1963
         </option>
         <option
-          key="63"
+          key="64"
           value={1962}
         >
           1962
         </option>
         <option
-          key="64"
+          key="65"
           value={1961}
         >
           1961
         </option>
         <option
-          key="65"
+          key="66"
           value={1960}
         >
           1960
         </option>
         <option
-          key="66"
+          key="67"
           value={1959}
         >
           1959
         </option>
         <option
-          key="67"
+          key="68"
           value={1958}
         >
           1958
         </option>
         <option
-          key="68"
+          key="69"
           value={1957}
         >
           1957
         </option>
         <option
-          key="69"
+          key="70"
           value={1956}
         >
           1956
         </option>
         <option
-          key="70"
+          key="71"
           value={1955}
         >
           1955
         </option>
         <option
-          key="71"
+          key="72"
           value={1954}
         >
           1954
         </option>
         <option
-          key="72"
+          key="73"
           value={1953}
         >
           1953
         </option>
         <option
-          key="73"
+          key="74"
           value={1952}
         >
           1952
         </option>
         <option
-          key="74"
+          key="75"
           value={1951}
         >
           1951
         </option>
         <option
-          key="75"
+          key="76"
           value={1950}
         >
           1950
         </option>
         <option
-          key="76"
+          key="77"
           value={1949}
         >
           1949
         </option>
         <option
-          key="77"
+          key="78"
           value={1948}
         >
           1948
         </option>
         <option
-          key="78"
+          key="79"
           value={1947}
         >
           1947
         </option>
         <option
-          key="79"
+          key="80"
           value={1946}
         >
           1946
         </option>
         <option
-          key="80"
+          key="81"
           value={1945}
         >
           1945
         </option>
         <option
-          key="81"
+          key="82"
           value={1944}
         >
           1944
         </option>
         <option
-          key="82"
+          key="83"
           value={1943}
         >
           1943
         </option>
         <option
-          key="83"
+          key="84"
           value={1942}
         >
           1942
         </option>
         <option
-          key="84"
+          key="85"
           value={1941}
         >
           1941
         </option>
         <option
-          key="85"
+          key="86"
           value={1940}
         >
           1940
         </option>
         <option
-          key="86"
+          key="87"
           value={1939}
         >
           1939
         </option>
         <option
-          key="87"
+          key="88"
           value={1938}
         >
           1938
         </option>
         <option
-          key="88"
+          key="89"
           value={1937}
         >
           1937
         </option>
         <option
-          key="89"
+          key="90"
           value={1936}
         >
           1936
         </option>
         <option
-          key="90"
+          key="91"
           value={1935}
         >
           1935
         </option>
         <option
-          key="91"
+          key="92"
           value={1934}
         >
           1934
         </option>
         <option
-          key="92"
+          key="93"
           value={1933}
         >
           1933
         </option>
         <option
-          key="93"
+          key="94"
           value={1932}
         >
           1932
         </option>
         <option
-          key="94"
+          key="95"
           value={1931}
         >
           1931
         </option>
         <option
-          key="95"
+          key="96"
           value={1930}
         >
           1930
         </option>
         <option
-          key="96"
+          key="97"
           value={1929}
         >
           1929
         </option>
         <option
-          key="97"
+          key="98"
           value={1928}
         >
           1928
         </option>
         <option
-          key="98"
+          key="99"
           value={1927}
         >
           1927
         </option>
         <option
-          key="99"
+          key="100"
           value={1926}
         >
           1926
         </option>
         <option
-          key="100"
+          key="101"
           value={1925}
         >
           1925
         </option>
         <option
-          key="101"
+          key="102"
           value={1924}
         >
           1924
         </option>
         <option
-          key="102"
+          key="103"
           value={1923}
         >
           1923
         </option>
         <option
-          key="103"
+          key="104"
           value={1922}
         >
           1922
         </option>
         <option
-          key="104"
+          key="105"
           value={1921}
         >
           1921
         </option>
         <option
-          key="105"
+          key="106"
           value={1920}
         >
           1920
         </option>
         <option
-          key="106"
+          key="107"
           value={1919}
         >
           1919
         </option>
         <option
-          key="107"
+          key="108"
           value={1918}
         >
           1918
         </option>
         <option
-          key="108"
+          key="109"
           value={1917}
         >
           1917
-        </option>
-        <option
-          key="109"
-          value={1916}
-        >
-          1916
         </option>
       </select>
     </div>
