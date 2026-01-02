@@ -59,6 +59,24 @@ Cap Collectif is a civic participation SaaS platform built with:
 5. **New voters**: Register in voters.yaml
 6. **New DataLoaders**: Configure in graphql_dataloaders.yaml with cachePrefix
 
+## ⚠️ Critical Preconditions
+
+Before running certain commands, **ALWAYS verify** these critical preconditions:
+
+### Cypress E2E Tests
+
+**Before running `yarn cy:open` or `yarn cy:run`**, ensure that `admin-next/.env.local` contains:
+```
+NEXT_PUBLIC_SYMFONY_ENV=test
+```
+
+**Actions required:**
+- Check if the file exists and contains the variable (uncommented)
+- If missing or commented, add/uncomment it
+- If the file doesn't exist, create it with this variable
+
+> **Why:** Cypress tests require the test environment to be configured in Next.js. Without this variable, tests will fail or run against the wrong environment.
+
 ## Common Commands
 
 ### Build & Development
@@ -319,10 +337,7 @@ yarn lint                     # ESLint
 ```
 Or from root: `yarn cy:open`, `yarn cy:run`
 
-> **Important**: To run Cypress tests locally with proper test environment, ensure `admin-next/.env.local` contains:
-```
-NEXT_PUBLIC_SYMFONY_ENV=test
-```
+> **Important**: See [Critical Preconditions](#️-critical-preconditions) section above for required environment setup before running Cypress tests.
 
 ### packages/ (Internal Tools)
 - **packages/trad-hook/**: Translation verification tool
