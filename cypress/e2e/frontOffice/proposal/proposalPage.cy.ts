@@ -77,6 +77,7 @@ context('Proposal Page', () => {
         })
     })
     it('is possible to contact the author of a proposal', () => {
+      cy.task('enable:feature', 'captcha')
       cy.interceptGraphQLOperation({ operationName: 'ContactProposalAuthorMutation' })
       ProposalPage.visitContactableProposalPage()
       cy.get('#ProposalContactModal-show-button').click()

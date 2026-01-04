@@ -12,7 +12,8 @@ class CaptchaChecker
         protected HttpClientInterface $client,
         protected Manager $toggle,
         protected string $turnstilePrivateKey,
-        protected string $recaptchaPrivateKey
+        protected string $recaptchaPrivateKey,
+        protected string $environment
     ) {
     }
 
@@ -21,6 +22,10 @@ class CaptchaChecker
      */
     public function __invoke(string $captcha, string $ip): bool
     {
+        if ('test' === $this->environment) {
+            return true;
+        }
+
         if ($this->toggle->isActive(Manager::turnstile_captcha)) {
             $response = $this->client->request(
                 'POST',

@@ -256,6 +256,7 @@ services:
         arguments:
             $turnstilePrivateKey: '%turnstile_private_key%'
             $recaptchaPrivateKey: '%recaptcha_private_key%'
+            $environment: '%kernel.environment%'
 
     Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
         autowire: true
