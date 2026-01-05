@@ -1,0 +1,317 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.revokeAnalystsToProposalsMutation should not revoke all analyst to a proposal, logged as decision maker. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": "IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyMjY=",
+                "username": "user26",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "decisionmaker",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should not revoke all analyst to a proposal, logged as supervisor. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": "IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyMjY=",
+                "username": "user26",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "supervisor",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should not revoke list analyst to a proposal, logged as decision maker. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": "IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyMjY=",
+                "username": "user26",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "decisionmaker",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should not revoke list analyst to a proposal, logged as supervisor. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": "IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyMjY=",
+                "username": "user26",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "supervisor",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should revoke all analyst to a proposal, logged as user. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": "ACCESS_DENIED_TO_ASSIGN_ANALYST",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": null,
+            "analysts": null,
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "user",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should revoke an analyst to a proposal, logged as decision maker. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "decisionmaker",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation should revoke an analyst to a proposal, logged as supervisor. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                "username": "analyst",
+              },
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": false,
+      "username": "supervisor",
+    },
+  },
+}
+`;

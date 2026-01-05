@@ -1,6 +1,6 @@
 /* eslint-env jest */
-// Lightweight setup: DB restore only (no ES)
-// For tests requiring ES, use _setupWithES.js instead
+// Full setup: DB + ES restore
+// Use this for tests that query ES-backed fields (proposals, contributions, contributors, votes, arguments)
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
@@ -16,4 +16,13 @@ beforeEach(async () => {
   }
   console.log('Successfully restored database !')
   console.timeEnd('restore_db')
+
+  console.log('Restoring ElasticSearch snapshot…')
+  console.time('restore_es')
+  const { stderrEs } = await exec('fab ' + env + '.qa.restore-es-snapshot')
+  if (stderrEs) {
+    console.error(`error: ${stderrEs}`)
+  }
+  console.log('Successfully restored ES !')
+  console.timeEnd('restore_es')
 })

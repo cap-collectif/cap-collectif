@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|UpdateDebateOpinion mutation Update a debate opinion. 1`] = `
+Object {
+  "updateDebateOpinion": Object {
+    "debateOpinion": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyNQ==",
+      },
+      "body": "Questionnaire non rattaché",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "id": "RGViYXRlT3BpbmlvbjpkZWJhdGVDYW5uYWJpc09waW5pb24x",
+      "title": "Questionnaire non rattaché",
+      "type": "FOR",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Internal|UpdateDebateOpinion mutation Update partially a debate opinion. 1`] = `
+Object {
+  "updateDebateOpinion": Object {
+    "debateOpinion": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyQm9iTWFybGV5",
+      },
+      "body": "<p>Légaliser le cannabis, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler, contrôler sa production, sa qualité mais aussi sa distribution que ce soit pour des objectifs thérapeutiques ou récréatifs. Mais c’est surtout <strong>réduire drastiquement</strong> son trafic et les délits associés. Pour être efficace la légalisation devra être absolument accompagnée par des mesures sociales en faveur des familles qui ne survivent souvent que grâce au trafic de cannabis.</p><p><br></p><iframe class=\\"ql-video\\" frameborder=\\"0\\" allowfullscreen=\\"true\\" src=\\"https://www.youtube.com/embed/FNcLyk7B6xw?showinfo=0\\"></iframe><p><br></p>",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "id": "RGViYXRlT3BpbmlvbjpkZWJhdGVDYW5uYWJpc09waW5pb24x",
+      "title": "Je suis pour",
+      "type": "AGAINST",
+    },
+    "errorCode": null,
+  },
+}
+`;

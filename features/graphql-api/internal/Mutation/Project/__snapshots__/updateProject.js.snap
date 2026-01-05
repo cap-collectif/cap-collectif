@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProjectMutation GraphQL admin wants to add a locale to a project 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "address": null,
+      "authors": Array [
+        Object {
+          "createdAt": "2015-01-04 00:00:00",
+          "email": "admin@test.com",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "locale": Object {
+        "code": "EN_GB",
+      },
+      "title": "Croissance, innovation, disruption",
+      "type": Object {
+        "title": "project.types.interpellation",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProjectMutation GraphQL admin wants to remove locale from a project 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "address": null,
+      "authors": Array [
+        Object {
+          "createdAt": "2015-01-04 00:00:00",
+          "email": "admin@test.com",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "locale": null,
+      "title": "Croissance, innovation, disruption",
+      "type": Object {
+        "title": "project.types.interpellation",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProjectMutation GraphQL admin wants to update a project and add an author 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "address": Object {
+        "formatted": "155 Boulevard Saint-Germain, 75006 Paris, France",
+      },
+      "authors": Array [
+        Object {
+          "createdAt": "2015-01-01 00:00:00",
+          "email": "lbrunet@cap-collectif.com",
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "createdAt": "2015-01-02 00:00:00",
+          "email": "sfavot@cap-collectif.com",
+          "id": "VXNlcjp1c2VyMg==",
+          "username": "sfavot",
+        },
+        Object {
+          "createdAt": "2015-01-04 00:00:00",
+          "email": "admin@test.com",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+        Object {
+          "createdAt": "2022-08-02 00:00:00",
+          "email": "ipcc-sec@wmo.int",
+          "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+          "username": "GIEC",
+        },
+      ],
+      "locale": null,
+      "title": "thisisnotatestupdated",
+      "type": Object {
+        "title": "global.consultation",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProjectMutation GraphQL admin wants to update a project and delete an author 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "address": null,
+      "authors": Array [
+        Object {
+          "createdAt": "2015-01-02 00:00:00",
+          "email": "sfavot@cap-collectif.com",
+          "id": "VXNlcjp1c2VyMg==",
+          "username": "sfavot",
+        },
+      ],
+      "locale": null,
+      "title": "thisisnotatestupdated",
+      "type": Object {
+        "title": "global.consultation",
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProjectMutation GraphQL admin wants to update a project without type 1`] = `
+Object {
+  "updateProject": Object {
+    "project": Object {
+      "address": null,
+      "authors": Array [
+        Object {
+          "createdAt": "2015-01-01 00:00:00",
+          "email": "lbrunet@cap-collectif.com",
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "createdAt": "2015-01-02 00:00:00",
+          "email": "sfavot@cap-collectif.com",
+          "id": "VXNlcjp1c2VyMg==",
+          "username": "sfavot",
+        },
+        Object {
+          "createdAt": "2015-01-04 00:00:00",
+          "email": "admin@test.com",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "locale": null,
+      "title": "thisisnotatestupdated",
+      "type": null,
+    },
+  },
+}
+`;

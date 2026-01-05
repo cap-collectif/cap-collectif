@@ -1,6 +1,4 @@
 /* eslint-env jest */
-// TODO remove writes from tests.
-import '../../_setup'
 
 const OpenDataUsersQuery = /* GraphQL */ `
   query OpenDataUsersQuery($count: Int!, $cursor: String) {

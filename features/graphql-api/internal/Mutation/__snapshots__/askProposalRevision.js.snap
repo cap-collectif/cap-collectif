@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.askProposalRevision admin should ask a revision on proposal,even if date expires after analyse step end. 1`] = `
+Object {
+  "askProposalRevision": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+      "revisions": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "author": Object {
+                "username": "admin",
+              },
+              "body": "<p>Blablabla</p>",
+              "expiresAt": "2130-11-14 11:59:30",
+              "reason": "Le champs cout est incomplet !",
+              "state": "PENDING",
+            },
+          },
+          Object {
+            "node": Object {
+              "author": Object {
+                "username": "Max de la QA",
+              },
+              "body": "<p>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.</p>",
+              "expiresAt": "2030-05-23 00:05:01",
+              "reason": "Manque le cout",
+              "state": "PENDING",
+            },
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`mutations.askProposalRevision admin should ask a revision on proposal. 1`] = `
+Object {
+  "askProposalRevision": Object {
+    "errorCode": null,
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+      "revisions": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "author": Object {
+                "username": "admin",
+              },
+              "body": "Blablabla",
+              "expiresAt": "2030-11-14 11:59:30",
+              "reason": "Le champs cout est incomplet !",
+              "state": "PENDING",
+            },
+          },
+          Object {
+            "node": Object {
+              "author": Object {
+                "username": "Max de la QA",
+              },
+              "body": "<p>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.</p>",
+              "expiresAt": "2030-05-23 00:05:01",
+              "reason": "Manque le cout",
+              "state": "PENDING",
+            },
+          },
+        ],
+      },
+    },
+  },
+}
+`;
