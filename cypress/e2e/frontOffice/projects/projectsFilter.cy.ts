@@ -33,7 +33,7 @@ context('Projects', () => {
       cy.directLoginAs('super_admin')
       ProjectsPage.visit('/projects')
       ProjectsPage.searchByTitle('custom')
-      ProjectsPage.assertProjectsCardLength(1)
+      ProjectsPage.assertProjectsCardLength(2)
       cy.contains('Un avenir meilleur pour les nains de jardins (custom access)').should('exist')
     })
     it('should correctly filter by status', () => {
