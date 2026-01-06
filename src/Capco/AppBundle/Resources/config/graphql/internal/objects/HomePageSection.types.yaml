@@ -1,0 +1,62 @@
+HomePageSection:
+    type: object
+    config:
+        name: HomePageSection
+        description: 'A home page section'
+        interfaces:
+            - Node
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the section.'
+            type:
+                type: 'String!'
+                description: 'The type of the section (e.g. highlight, introduction, videos, projects, themes, news, events, newsletter, social-networks, proposals, custom, metrics).'
+            position:
+                type: 'Int!'
+                description: 'The position of the section on the home page.'
+            title:
+                type: 'String'
+                description: 'The title of the section.'
+            teaser:
+                type: 'String'
+                description: 'The teaser text of the section.'
+            body:
+                type: 'String'
+                description: 'The body content of the section.'
+            nbObjects:
+                type: 'Int'
+                description: 'The number of objects to display in the section.'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether the section is enabled.'
+            displayMode:
+                type: 'String!'
+                description: 'The display mode for the section (e.g. MOST_RECENT, CUSTOM).'
+            metricsToDisplayBasics:
+                type: 'Boolean!'
+                description: 'Whether to display basic metrics.'
+            metricsToDisplayEvents:
+                type: 'Boolean!'
+                description: 'Whether to display event metrics.'
+            metricsToDisplayProjects:
+                type: 'Boolean!'
+                description: 'Whether to display project metrics.'
+            centerLatitude:
+                type: 'Float'
+                description: 'The center latitude for map sections.'
+            centerLongitude:
+                type: 'Float'
+                description: 'The center longitude for map sections.'
+            zoomMap:
+                type: 'Float'
+                description: 'The zoom level for map sections.'
+            isLegendEnabledOnImage:
+                type: 'Boolean!'
+                description: 'Whether legend is enabled on images.'
+            createdAt:
+                type: 'DateTime!'
+                description: 'The creation date of the section.'
+            updatedAt:
+                type: 'DateTime!'
+                description: 'The last update date of the section.'

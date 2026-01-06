@@ -1,0 +1,13 @@
+HomePageSectionOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of home page sections can be ordered upon return.'
+        fields:
+            field:
+                type: 'HomePageSectionOrderField!'
+                defaultValue: !php/const Capco\AppBundle\Enum\HomePageSectionOrderField::POSITION
+                description: The field to order home page sections by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::ASC
+                description: The ordering direction.

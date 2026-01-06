@@ -2,7 +2,7 @@ import { SectionIdCarrouselQuery$data } from '@relay/SectionIdCarrouselQuery.gra
 import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
 
 export type FormValues = {
-  position: number
+  position: string
   enabled: boolean
   isLegendEnabledOnImage: boolean
   preventReSubmit?: boolean
@@ -35,16 +35,14 @@ export type PrefillEntity = {
 
 export type SectionType = 'carrousel' | 'carrouselHighlighted'
 
+const SECTION_TITLE_MAX_LENGTH = 11
+
 export const isValid = (value: FormValues, type: SectionType) => {
-  if (type === 'carrouselHighlighted' && (!value.title || value.title?.length > 11)) return false
-  if (value.preventReSubmit || !value.position || !Number.isInteger(value.position) || value.position < 1) return false
+  if (type === 'carrouselHighlighted' && (!value.title || value.title?.length > SECTION_TITLE_MAX_LENGTH)) return false
+  if (value.preventReSubmit || !value.position || parseInt(value.position) < 1) return false
   if (
     value.carrouselElements.every(element => {
-      return (
-        element.title &&
-        ((element.buttonLabel && element.redirectLink) || element.type !== 'CUSTOM') &&
-        (element.image || type === 'carrouselHighlighted')
-      )
+      return element.title && ((element.buttonLabel && element.redirectLink) || element.type !== 'CUSTOM')
     })
   )
     return true
@@ -87,6 +85,7 @@ export const getInitialValues = (
 ) => {
   return {
     ...carrouselConfiguration,
+    position: carrouselConfiguration.position.toString(),
     carrouselElements:
       carrouselConfiguration.carrouselElements?.edges
         ?.map(({ node }) => ({

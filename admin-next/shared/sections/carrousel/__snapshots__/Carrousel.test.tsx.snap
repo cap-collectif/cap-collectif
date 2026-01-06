@@ -7,7 +7,7 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
   />
   <section
     aria-label="menu.news"
-    aria-roledescription="global.carrousel"
+    aria-roledescription="global.scrolling-header"
     class="sc-bcXGCL bGwxQV"
     id="carrousel"
   >

@@ -398,6 +398,24 @@ InternalQuery:
                     user:
                         type: 'ID'
                         description: 'Filter by contributor of section.'
+            homePageSections:
+                type: 'HomePageSectionConnection!'
+                description: 'List all home page sections.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryHomePageSectionsResolver", args)'
+                args:
+                    enabled:
+                        type: 'Boolean'
+                        description: 'Filter by enabled status. true = enabled only, false = disabled only, null = all sections.'
+                        defaultValue: null
+                    orderBy:
+                        type: 'HomePageSectionOrder'
+                        defaultValue:
+                            {
+                                field: !php/const Capco\AppBundle\Enum\HomePageSectionOrderField::POSITION,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::ASC,
+                            }
+                        description: 'Ordering options for home page sections returning from the connection.'
             medias:
                 type: 'MediaConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

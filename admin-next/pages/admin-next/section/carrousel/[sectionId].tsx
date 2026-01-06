@@ -14,22 +14,21 @@ import {
 } from '@components/BackOffice/Sections/Carrousel/Carrousel.utils'
 import CarrouselContent from '@components/BackOffice/Sections/Carrousel/CarrouselContent'
 import CarrouselParameters from '@components/BackOffice/Sections/Carrousel/CarrouselParameters'
-import CreateOrUpdateCarrouselConfigurationMutation from '@mutations/CreateOrUpdateCarrouselConfigurationMutation'
-import DeleteCarrouselElement from '@mutations/DeleteCarrouselElement'
-import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
 import debounce from '@shared/utils/debounce-promise'
-import { isGlobalId } from '@shared/utils/fromGlobalId'
 import { mutationErrorToast } from '@shared/utils/toasts'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { FC, Suspense, useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
+import CreateOrUpdateCarrouselConfigurationMutation from '@mutations/CreateOrUpdateCarrouselConfigurationMutation'
 
 const formName = 'carousel_section_configuration_form'
 
 export const QUERY = graphql`
   query SectionIdCarrouselQuery($type: String = "carrousel") {
+    ...CarrouselParameters_query
     carrouselConfiguration(type: $type) {
       position
       title
@@ -61,7 +60,8 @@ export const QUERY = graphql`
 `
 
 export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType }> = ({ type = 'carrousel' }) => {
-  const { carrouselConfiguration } = useLazyLoadQuery<SectionIdCarrouselQuery>(QUERY, { type })
+  const query = useLazyLoadQuery<SectionIdCarrouselQuery>(QUERY, { type })
+  const { carrouselConfiguration } = query
 
   const intl = useIntl()
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
@@ -73,9 +73,8 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
     defaultValues: getInitialValues(carrouselConfiguration),
   })
 
-  const { handleSubmit, watch, resetField, reset, setValue } = methods
+  const { handleSubmit, watch, reset, setValue } = methods
 
-  const carrouselElements = watch('carrouselElements')
   const preventReSubmit = watch('preventReSubmit')
   const title = watch('title')
 
@@ -88,7 +87,9 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
         href: '/admin/capco/app/section/list',
       },
       {
-        title: intl.formatMessage({ id: type === 'carrousel' ? 'global.carrousel' : title ? title : 'global.title' }),
+        title: intl.formatMessage({
+          id: type === 'carrousel' ? 'global.scrolling-header' : title ? title : 'global.title',
+        }),
         href: '',
       },
     ])
@@ -109,6 +110,7 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
         type,
         ...values,
         title: type === 'carrousel' ? undefined : values.title,
+        position: parseInt(values.position),
         carrouselElements: values.carrouselElements.map((element, position) => ({
           ...element,
           title: element.title?.slice(0, type === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH),
@@ -168,31 +170,6 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
     [],
   )
 
-  const onDelete = (id: string) => {
-    if (!isGlobalId(id)) {
-      resetField('carrouselElements', {
-        defaultValue: carrouselElements.filter(e => !!e.id),
-      })
-      return
-    }
-    setIsSubmitting(true)
-    DeleteCarrouselElement.commit({ input: { id } })
-      .then(({ deleteCarrouselElement }) => {
-        if (deleteCarrouselElement?.deletedCarrouselElementId) {
-          resetField('carrouselElements', {
-            defaultValue: carrouselElements.filter(e => e.id !== deleteCarrouselElement.deletedCarrouselElementId),
-          })
-        } else {
-          mutationErrorToast(intl)
-          return setIsSubmitting(false)
-        }
-      })
-      .catch(() => {
-        mutationErrorToast(intl)
-        return setIsSubmitting(false)
-      })
-  }
-
   return (
     <Flex
       as="form"
@@ -205,15 +182,14 @@ export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType 
       <FormProvider {...methods}>
         <Flex direction="row" width="100%" spacing={6}>
           <Flex direction="column" spacing={6} width="70%">
-            <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
+            <Flex p={8} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
               <CarrouselContent
-                onDelete={onDelete}
                 title={type === 'carrouselHighlighted' ? carrouselConfiguration.title : null}
                 type={type}
               />
             </Flex>
           </Flex>
-          <CarrouselParameters type={type} />
+          <CarrouselParameters type={type} query={query} />
         </Flex>
       </FormProvider>
     </Flex>

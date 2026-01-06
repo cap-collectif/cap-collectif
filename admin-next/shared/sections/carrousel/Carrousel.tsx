@@ -71,7 +71,7 @@ const CarrouselFullView: FC<{ mode?: Mode; items: Item[] } & BoxProps> = ({ mode
     <Box
       as="section"
       id="carrousel"
-      aria-roledescription={intl.formatMessage({ id: 'global.carrousel' })}
+      aria-roledescription={intl.formatMessage({ id: 'global.scrolling-header' })}
       aria-label={intl.formatMessage({ id: 'menu.news' })}
       width="100%"
       overflow="hidden"

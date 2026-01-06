@@ -1,30 +1,47 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { Flex, FormLabel, Heading, Link } from '@cap-collectif/ui'
+import { Button, Flex, FormLabel, Heading } from '@cap-collectif/ui'
 import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { SectionType } from './Carrousel.utils'
+import * as React from 'react'
+import { useFragment, graphql } from 'react-relay'
+import { CarrouselParameters_query$key } from '@relay/CarrouselParameters_query.graphql'
 
 export const SECTION_TITLE_MAX_LENGTH = 11
 
-export const CarrouselParameters: FC<{ type: SectionType }> = ({ type }) => {
+
+const QUERY_FRAGMENT = graphql`
+  fragment CarrouselParameters_query on Query {
+    homePageSections(enabled: null) {
+      totalCount
+    }
+  }
+`
+
+export const CarrouselParameters: FC<{ type: SectionType, query: CarrouselParameters_query$key }> = ({ type, query: queryRef }) => {
   const intl = useIntl()
   const { control } = useFormContext()
+  const query = useFragment(QUERY_FRAGMENT, queryRef)
+
+  const positionOptions = Array.from({ length: query.homePageSections.totalCount }, (_, i) => ({
+    label: String(i + 1),
+    value: String(i + 1),
+  }))
+
   return (
     <Flex direction="column" spacing={6} width="30%">
       <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion" position="relative">
         <Flex color="blue.500" position="absolute" right={6} top={6}>
-          <Link
+          <Button
             href="/"
             target="_blank"
             ml={1}
             fontWeight={600}
-            sx={{
-              textDecoration: 'none !important',
-            }}
+            as="a"
           >
             {intl.formatMessage({ id: 'global.preview' })}
-          </Link>
+          </Button>
         </Flex>
         <Heading as="h4" color="blue.800" fontWeight="600">
           {intl.formatMessage({ id: 'global-customization' })}
@@ -47,15 +64,10 @@ export const CarrouselParameters: FC<{ type: SectionType }> = ({ type }) => {
           <FormControl name="position" control={control} isRequired>
             <FormLabel label={intl.formatMessage({ id: 'section-admin-display-order' })} />
             <FieldInput
-              type="number"
-              name="position"
+              type="select"
               control={control}
-              min={1}
-              step="1"
-              rules={{
-                validate: value =>
-                  (Number.isInteger(value) && value > 0) || intl.formatMessage({ id: 'must-be-positive-integer' }),
-              }}
+              name="position"
+              options={positionOptions}
             />
           </FormControl>
           <FormControl
@@ -71,7 +83,7 @@ export const CarrouselParameters: FC<{ type: SectionType }> = ({ type }) => {
             <FormControl
               name="isLegendEnabledOnImage"
               control={control}
-              sx={{ label: { justifyContent: 'space-between', span: { flex: '1' } } }}
+              sx={{ label: { justifyContent: 'space-between' } }}
             >
               <FieldInput
                 id="isLegendEnabledOnImage"

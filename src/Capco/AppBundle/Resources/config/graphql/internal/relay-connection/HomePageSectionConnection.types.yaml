@@ -1,0 +1,7 @@
+HomePageSectionConnection:
+    type: relay-connection
+    config:
+        nodeType: HomePageSection!
+        connectionFields:
+            totalCount:
+                type: Int!

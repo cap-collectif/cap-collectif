@@ -8008,6 +8008,111 @@ input HomePageProjectsSectionConfigurationTranslationInput {
   clientMutationId: String
 }
 
+"""A home page section"""
+type HomePageSection implements Node {
+  """The id of the section."""
+  id: ID!
+
+  """
+  The type of the section (e.g. highlight, introduction, videos, projects,
+  themes, news, events, newsletter, social-networks, proposals, custom,
+  """
+  type: String!
+
+  """The position of the section on the home page."""
+  position: Int!
+
+  """The title of the section."""
+  title: String
+
+  """The teaser text of the section."""
+  teaser: String
+
+  """The body content of the section."""
+  body: String
+
+  """The number of objects to display in the section."""
+  nbObjects: Int
+
+  """Whether the section is enabled."""
+  enabled: Boolean!
+
+  """The display mode for the section (e.g. MOST_RECENT, CUSTOM)."""
+  displayMode: String!
+
+  """Whether to display basic metrics."""
+  metricsToDisplayBasics: Boolean!
+
+  """Whether to display event metrics."""
+  metricsToDisplayEvents: Boolean!
+
+  """Whether to display project metrics."""
+  metricsToDisplayProjects: Boolean!
+
+  """The center latitude for map sections."""
+  centerLatitude: Float
+
+  """The center longitude for map sections."""
+  centerLongitude: Float
+
+  """The zoom level for map sections."""
+  zoomMap: Float
+
+  """Whether legend is enabled on images."""
+  isLegendEnabledOnImage: Boolean!
+
+  """The creation date of the section."""
+  createdAt: DateTime!
+
+  """The last update date of the section."""
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type HomePageSectionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [HomePageSectionEdge]
+}
+
+"""An edge in a connection."""
+type HomePageSectionEdge {
+  """The item at the end of the edge."""
+  node: HomePageSection!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of home page sections can be ordered upon return."""
+input HomePageSectionOrder {
+  """The field to order home page sections by."""
+  field: HomePageSectionOrderField! = POSITION
+
+  """The ordering direction."""
+  direction: OrderDirection! = ASC
+}
+
+"""Properties by which home page sections can be ordered"""
+enum HomePageSectionOrderField {
+  """Allows ordering a list of home page sections by position."""
+  POSITION
+
+  """
+  Allows ordering a list of home page sections by when they have been created.
+  """
+  CREATED_AT
+
+  """
+  Allows ordering a list of home page sections by when they have been updated.
+  """
+  UPDATED_AT
+}
+
 """A string containing an IP address."""
 scalar IP
 
@@ -14334,6 +14439,27 @@ type Query {
     """Filter by contributor of section."""
     user: ID
   ): [Section!]!
+
+  """List all home page sections."""
+  homePageSections(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Filter by enabled status. true = enabled only, false = disabled only, null = all sections.
+    """
+    enabled: Boolean = null
+
+    """
+    Ordering options for home page sections returning from the connection.
+    """
+    orderBy: HomePageSectionOrder = {field: POSITION, direction: ASC}
+  ): HomePageSectionConnection!
 
   """List all medias"""
   medias(

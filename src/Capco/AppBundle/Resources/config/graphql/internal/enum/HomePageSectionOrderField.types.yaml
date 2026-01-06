@@ -1,0 +1,14 @@
+HomePageSectionOrderField:
+    type: enum
+    config:
+        description: 'Properties by which home page sections can be ordered'
+        values:
+            POSITION:
+                value: !php/const Capco\AppBundle\Enum\HomePageSectionOrderField::POSITION
+                description: 'Allows ordering a list of home page sections by position.'
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\HomePageSectionOrderField::CREATED_AT
+                description: 'Allows ordering a list of home page sections by when they have been created.'
+            UPDATED_AT:
+                value: !php/const Capco\AppBundle\Enum\HomePageSectionOrderField::UPDATED_AT
+                description: 'Allows ordering a list of home page sections by when they have been updated.'

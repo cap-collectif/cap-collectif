@@ -14,7 +14,7 @@ import {
 } from '@cap-collectif/ui'
 import { UPLOAD_PATH } from '@utils/config'
 import { FC, useCallback, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, UseFieldArrayRemove } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import {
   getCardLabel,
@@ -26,16 +26,21 @@ import {
   SectionType,
 } from './Carrousel.utils'
 import CarrouselSelects from './CarrouselSelects'
+import DeleteCarrouselElement from '@mutations/DeleteCarrouselElement'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import { isGlobalId } from '@shared/utils/fromGlobalId'
 
-export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; type: SectionType }> = ({
-  fieldBaseName,
-  onDelete,
-  type: sectionType,
-}) => {
+export const CarrouselItem: FC<{
+  fieldBaseName: string
+  index: number
+  remove: UseFieldArrayRemove
+  type: SectionType
+}> = ({ fieldBaseName, index, remove, type: sectionType }) => {
   const intl = useIntl()
   const { watch, control } = useFormContext()
   const { title, description, type, image, isDisplayed, id, defaultIsOpen } = watch(fieldBaseName)
   const [isOpen, setIsOpen] = useState(!id || defaultIsOpen)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const titleKey = `${fieldBaseName}.title`
   const descKey = `${fieldBaseName}.description`
@@ -52,6 +57,27 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
       }
     }, 10)
   }, [])
+
+  const onDelete = () => {
+    if (!isGlobalId(id)) {
+      remove(index)
+      return
+    }
+    setIsDeleting(true)
+    DeleteCarrouselElement.commit({ input: { id } })
+      .then(({ deleteCarrouselElement }) => {
+        if (deleteCarrouselElement?.deletedCarrouselElementId) {
+          remove(index)
+        } else {
+          mutationErrorToast(intl)
+          setIsDeleting(false)
+        }
+      })
+      .catch(() => {
+        mutationErrorToast(intl)
+        setIsDeleting(false)
+      })
+  }
 
   if (isOpen)
     return (
@@ -92,7 +118,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                   id={descKey}
                   name={descKey}
                   control={control}
-                  type={sectionType === 'carrousel' ? 'text' : 'textarea'}
+                  type={'textarea'}
                   placeholder={intl.formatMessage({
                     id: 'carrousel.placeholder.description',
                   })}
@@ -102,7 +128,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
               </FormControl>
               {type === 'CUSTOM' ? (
                 <Flex gap={4}>
-                  <FormControl name={btnKey} control={control} isRequired={isDisplayed}>
+                  <FormControl name={btnKey} control={control} isRequired={isDisplayed} sx={{ flexBasis: '50%' }}>
                     <FormLabel htmlFor={btnKey} label={intl.formatMessage({ id: 'section.button_label' })} />
                     <FieldInput
                       id={btnKey}
@@ -149,6 +175,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                   leftIcon={CapUIIcon.TrashO}
                   type="button"
                   onClick={onDelete}
+                  isLoading={isDeleting}
                 >
                   {intl.formatMessage({ id: 'global.delete' })}
                 </Button>
@@ -165,13 +192,11 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                   </Text>
                 ) : null}
               </FormLabel>
-              {sectionType === 'carrouselHighlighted' ? (
-                <FormGuideline>
-                  {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png' })}{' '}
-                  {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '1mo' })}
-                  {intl.formatMessage({ id: 'specific-ratio' }, { ratio: '4:3' })}
-                </FormGuideline>
-              ) : null}
+              <FormGuideline>
+                {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png' })}{' '}
+                {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '1mo' })}
+                {intl.formatMessage({ id: 'specific-ratio' }, { ratio: '4:3' })}
+              </FormGuideline>
               <FieldInput
                 id={imageKey}
                 name={imageKey}
@@ -205,9 +230,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
       alignItems="center"
       bg="gray.100"
       borderRadius="accordion"
-      py={4}
-      pr={6}
-      pl={2}
+      p={6}
     >
       <Flex alignItems="center">
         <Icon name={CapUIIcon.Drag} color="neutral-gray.700" />
@@ -220,12 +243,12 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
             src={image?.url}
             borderRadius="normal"
             ml={2}
-            mr={6}
+            mr={4}
             sx={{ objectFit: 'cover' }}
           />
         ) : null}
         <Box>
-          <Box fontSize={CapUIFontSize.Caption}>{intl.formatMessage({ id: getCardLabel(type) })}</Box>
+          <Box fontSize={CapUIFontSize.BodyRegular}>{intl.formatMessage({ id: getCardLabel(type) })}</Box>
           <Text as="h4" fontWeight="semibold">
             {title}
           </Text>
@@ -238,6 +261,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
         onClick={() => setIsOpen(true)}
         label={intl.formatMessage({ id: 'global.edit' })}
         type="button"
+        alignSelf="flex-start"
       />
     </Flex>
   )

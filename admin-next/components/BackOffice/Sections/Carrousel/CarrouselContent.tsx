@@ -5,17 +5,11 @@ import { Box, DragnDrop } from '@cap-collectif/ui'
 import { CarrouselAddItemButton } from './CarrouselAddItemButton'
 import CarrouselItem from './CarrouselItem'
 import { FormValues, SectionType } from './Carrousel.utils'
-import { useIntl } from 'react-intl'
 
-export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: string; type: SectionType }> = ({
-  onDelete,
-  title,
-  type,
-}) => {
+export const CarrouselContent: FC<{ title?: string; type: SectionType }> = ({ title, type }) => {
   const { watch, control } = useFormContext<FormValues>()
-  const intl = useIntl()
 
-  const { fields, move, prepend } = useFieldArray<FormValues, 'carrouselElements'>({
+  const { fields, move, prepend, remove } = useFieldArray<FormValues, 'carrouselElements'>({
     control,
     name: 'carrouselElements',
   })
@@ -34,14 +28,7 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: stri
     move(result.source.index, result.destination.index)
   }
 
-  if (!controlledFields.length)
-    return (
-      <CarrouselEmptyList
-        prepend={prepend}
-        title={title ? `"${title}"` : intl.formatMessage({ id: 'global.carrousel' })}
-        type={type}
-      />
-    )
+  if (!controlledFields.length) return <CarrouselEmptyList prepend={prepend} title={title} type={type} />
 
   return (
     <Box>
@@ -52,11 +39,7 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: stri
           <DragnDrop.List droppableId="carrouselElements">
             {controlledFields.map((element, index) => (
               <DragnDrop.Item draggableId={element.id} index={index} key={element.id}>
-                <CarrouselItem
-                  fieldBaseName={`carrouselElements.${index}`}
-                  onDelete={() => onDelete(element.id)}
-                  type={type}
-                />
+                <CarrouselItem fieldBaseName={`carrouselElements.${index}`} index={index} remove={remove} type={type} />
               </DragnDrop.Item>
             ))}
           </DragnDrop.List>
@@ -64,8 +47,6 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: stri
       ) : null}
     </Box>
   )
-
-  return
 }
 
 export default CarrouselContent
