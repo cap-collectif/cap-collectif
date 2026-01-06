@@ -35,12 +35,75 @@ exports[`<PostItem /> should render correctly 1`] = `
       </a>
     </div>
   </div>
-  global.published04/08/2021
+  <p
+    aria-describedby=":r0:"
+    class="sc-bcXGCL gaflrn cap-text"
+    tabindex="0"
+  >
+    global-planned
+  </p>
+  <div
+    style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+  >
+    <div
+      class="cap-tooltip"
+      data-dialog=""
+      data-placing="true"
+      hidden=""
+      id=":r0:"
+      role="tooltip"
+      style="position: relative; z-index: 1800; display: none;"
+      tabindex="-1"
+    >
+      <div
+        aria-hidden="true"
+        style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+      >
+        <svg
+          display="block"
+          viewBox="0 0 30 30"
+        >
+          <g
+            transform="rotate(180 15 15)"
+          >
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              fill="none"
+              mask="url(#:r9:)"
+            />
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              stroke="none"
+            />
+            <mask
+              id=":r9:"
+              maskUnits="userSpaceOnUse"
+            >
+              <rect
+                fill="white"
+                height="30"
+                stroke="black"
+                width="60"
+                x="-15"
+                y="0"
+              />
+            </mask>
+          </g>
+        </svg>
+      </div>
+      <div
+        class="sc-bcXGCL bdghCN"
+      >
+        Invalid Date
+      </div>
+    </div>
+  </div>
+  04/08/2021
   <div
     class="sc-bcXGCL hcHFdL"
   >
     <button
-      aria-describedby=":r0:"
+      aria-describedby=":r3:"
       aria-label="global.preview"
       class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
     >
@@ -74,7 +137,7 @@ exports[`<PostItem /> should render correctly 1`] = `
         data-dialog=""
         data-placing="true"
         hidden=""
-        id=":r0:"
+        id=":r3:"
         role="tooltip"
         style="position: relative; z-index: 1800; display: none;"
         tabindex="-1"
@@ -93,14 +156,14 @@ exports[`<PostItem /> should render correctly 1`] = `
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 fill="none"
-                mask="url(#:r6:)"
+                mask="url(#:ra:)"
               />
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 stroke="none"
               />
               <mask
-                id=":r6:"
+                id=":ra:"
                 maskUnits="userSpaceOnUse"
               >
                 <rect
@@ -124,7 +187,7 @@ exports[`<PostItem /> should render correctly 1`] = `
     </div>
     <button
       aria-controls="id-g"
-      aria-describedby=":r3:"
+      aria-describedby=":r6:"
       aria-expanded="false"
       aria-haspopup="dialog"
       aria-label="admin.global.delete"
@@ -154,7 +217,7 @@ exports[`<PostItem /> should render correctly 1`] = `
         data-dialog=""
         data-placing="true"
         hidden=""
-        id=":r3:"
+        id=":r6:"
         role="tooltip"
         style="position: relative; z-index: 1800; display: none;"
         tabindex="-1"
@@ -173,14 +236,14 @@ exports[`<PostItem /> should render correctly 1`] = `
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 fill="none"
-                mask="url(#:r7:)"
+                mask="url(#:rb:)"
               />
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 stroke="none"
               />
               <mask
-                id=":r7:"
+                id=":rb:"
                 maskUnits="userSpaceOnUse"
               >
                 <rect
@@ -251,12 +314,75 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
       </a>
     </div>
   </div>
-  global.published04/08/2021
+  <p
+    aria-describedby=":rc:"
+    class="sc-bcXGCL gaflrn cap-text"
+    tabindex="0"
+  >
+    global-planned
+  </p>
+  <div
+    style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
+  >
+    <div
+      class="cap-tooltip"
+      data-dialog=""
+      data-placing="true"
+      hidden=""
+      id=":rc:"
+      role="tooltip"
+      style="position: relative; z-index: 1800; display: none;"
+      tabindex="-1"
+    >
+      <div
+        aria-hidden="true"
+        style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+      >
+        <svg
+          display="block"
+          viewBox="0 0 30 30"
+        >
+          <g
+            transform="rotate(180 15 15)"
+          >
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              fill="none"
+              mask="url(#:rl:)"
+            />
+            <path
+              d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+              stroke="none"
+            />
+            <mask
+              id=":rl:"
+              maskUnits="userSpaceOnUse"
+            >
+              <rect
+                fill="white"
+                height="30"
+                stroke="black"
+                width="60"
+                x="-15"
+                y="0"
+              />
+            </mask>
+          </g>
+        </svg>
+      </div>
+      <div
+        class="sc-bcXGCL bdghCN"
+      >
+        Invalid Date
+      </div>
+    </div>
+  </div>
+  04/08/2021
   <div
     class="sc-bcXGCL hcHFdL"
   >
     <button
-      aria-describedby=":r8:"
+      aria-describedby=":rf:"
       aria-label="global.preview"
       class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
     >
@@ -290,7 +416,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
         data-dialog=""
         data-placing="true"
         hidden=""
-        id=":r8:"
+        id=":rf:"
         role="tooltip"
         style="position: relative; z-index: 1800; display: none;"
         tabindex="-1"
@@ -309,14 +435,14 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 fill="none"
-                mask="url(#:re:)"
+                mask="url(#:rm:)"
               />
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 stroke="none"
               />
               <mask
-                id=":re:"
+                id=":rm:"
                 maskUnits="userSpaceOnUse"
               >
                 <rect
@@ -340,7 +466,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
     </div>
     <button
       aria-controls="id-g"
-      aria-describedby=":rb:"
+      aria-describedby=":ri:"
       aria-expanded="false"
       aria-haspopup="dialog"
       aria-label="admin.global.delete"
@@ -370,7 +496,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
         data-dialog=""
         data-placing="true"
         hidden=""
-        id=":rb:"
+        id=":ri:"
         role="tooltip"
         style="position: relative; z-index: 1800; display: none;"
         tabindex="-1"
@@ -389,14 +515,14 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 fill="none"
-                mask="url(#:rf:)"
+                mask="url(#:rn:)"
               />
               <path
                 d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                 stroke="none"
               />
               <mask
-                id=":rf:"
+                id=":rn:"
                 maskUnits="userSpaceOnUse"
               >
                 <rect

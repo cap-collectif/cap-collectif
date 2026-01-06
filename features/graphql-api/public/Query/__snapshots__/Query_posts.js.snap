@@ -79,7 +79,7 @@ Object {
         },
       },
     ],
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;
@@ -192,7 +192,7 @@ Object {
         },
       },
     ],
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;
@@ -1077,41 +1077,6 @@ Object {
       },
       Object {
         "node": Object {
-          "enTitle": "Post EN 9",
-          "frTitle": "Post FR 9",
-          "id": "UG9zdDpwb3N0OQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0Mg==",
-              "title": "Stratégie technologique de l'Etat et services publics",
-            },
-          ],
-          "publishedAt": "2018-11-05 00:00:00",
-          "themes": Array [
-            Object {
-              "id": "theme2",
-              "title": "Justice",
-            },
-          ],
-          "title": "Post FR 9",
-          "translations": Array [
-            Object {
-              "abstract": "Abstract of post EN 9",
-              "body": "Body of post EN 9",
-              "locale": "EN_GB",
-              "title": "Post EN 9",
-            },
-            Object {
-              "abstract": "Résumé du post FR 9",
-              "body": "Contenu du post FR 9",
-              "locale": "FR_FR",
-              "title": "Post FR 9",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "enTitle": "Post EN 10",
           "frTitle": "Post FR 10",
           "id": "UG9zdDpwb3N0MTA=",
@@ -1321,7 +1286,7 @@ Object {
         },
       },
     ],
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;
@@ -1542,41 +1507,6 @@ Object {
       },
       Object {
         "node": Object {
-          "enTitle": "Post EN 9",
-          "frTitle": "Post FR 9",
-          "id": "UG9zdDpwb3N0OQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0Mg==",
-              "title": "Stratégie technologique de l'Etat et services publics",
-            },
-          ],
-          "publishedAt": "2018-11-05 00:00:00",
-          "themes": Array [
-            Object {
-              "id": "theme2",
-              "title": "Justice",
-            },
-          ],
-          "title": "Post FR 9",
-          "translations": Array [
-            Object {
-              "abstract": "Abstract of post EN 9",
-              "body": "Body of post EN 9",
-              "locale": "EN_GB",
-              "title": "Post EN 9",
-            },
-            Object {
-              "abstract": "Résumé du post FR 9",
-              "body": "Contenu du post FR 9",
-              "locale": "FR_FR",
-              "title": "Post FR 9",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "enTitle": "Post EN 1",
           "frTitle": "Post FR 1",
           "id": "UG9zdDpwb3N0MQ==",
@@ -1856,7 +1786,7 @@ Object {
         },
       },
     ],
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;
@@ -2077,41 +2007,6 @@ Object {
       },
       Object {
         "node": Object {
-          "enTitle": "Post EN 9",
-          "frTitle": "Post FR 9",
-          "id": "UG9zdDpwb3N0OQ==",
-          "projects": Array [
-            Object {
-              "id": "UHJvamVjdDpwcm9qZWN0Mg==",
-              "title": "Stratégie technologique de l'Etat et services publics",
-            },
-          ],
-          "publishedAt": "2018-11-05 00:00:00",
-          "themes": Array [
-            Object {
-              "id": "theme2",
-              "title": "Justice",
-            },
-          ],
-          "title": "Post FR 9",
-          "translations": Array [
-            Object {
-              "abstract": "Abstract of post EN 9",
-              "body": "Body of post EN 9",
-              "locale": "EN_GB",
-              "title": "Post EN 9",
-            },
-            Object {
-              "abstract": "Résumé du post FR 9",
-              "body": "Contenu du post FR 9",
-              "locale": "FR_FR",
-              "title": "Post FR 9",
-            },
-          ],
-        },
-      },
-      Object {
-        "node": Object {
           "enTitle": "Post EN 1",
           "frTitle": "Post FR 1",
           "id": "UG9zdDpwb3N0MQ==",
@@ -2391,7 +2286,7 @@ Object {
         },
       },
     ],
-    "totalCount": 15,
+    "totalCount": 14,
   },
 }
 `;

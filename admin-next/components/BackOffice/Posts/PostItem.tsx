@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
+import moment from 'moment'
 import {
   ButtonQuickAction,
   CapUIFontSize,
@@ -32,6 +33,7 @@ const FRAGMENT = graphql`
       username
     }
     isPublished
+    publishedAt
     updatedAt
     owner {
       username
@@ -76,6 +78,18 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
   const project = post.relatedContent.filter(content => content.__typename === 'Project')[0]
 
   const themes = post.relatedContent.filter(content => content.__typename === 'Theme')
+
+  const now = moment().format('YYYY-MM-DD HH:mm:ss')
+  const isPlanned = post.isPublished && post.publishedAt > now
+
+  const getPublishedLabelKey = () => {
+    if (isPlanned) return 'global-planned'
+    if (post.isPublished) return 'global.published'
+    return 'global.no.published'
+  }
+
+  const publishedLabelKey = getPublishedLabelKey()
+
   return (
     <React.Fragment>
       <Table.Td>
@@ -133,9 +147,19 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
         </Flex>
       </Table.Td>
       <Table.Td>
-        {post.isPublished
-          ? intl.formatMessage({ id: 'global.published' })
-          : intl.formatMessage({ id: 'global.no.published' })}
+        {isPlanned ? (
+          <Tooltip
+            label={intl.formatDate(post.publishedAt, {
+              day: 'numeric',
+              month: 'numeric',
+              year: 'numeric',
+            })}
+          >
+            <Text width="fit-content">{intl.formatMessage({ id: publishedLabelKey })}</Text>
+          </Tooltip>
+        ) : (
+          <Text>{intl.formatMessage({ id: publishedLabelKey })}</Text>
+        )}
       </Table.Td>
       <Table.Td>
         {post.updatedAt &&

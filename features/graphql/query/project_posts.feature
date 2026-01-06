@@ -32,7 +32,7 @@ Scenario: GraphQL user get posts linked to project
     "data":{
       "node":{
         "posts":{
-          "totalCount": 5,
+          "totalCount": 4,
           "edges": [
             {
               "node": {
@@ -43,9 +43,9 @@ Scenario: GraphQL user get posts linked to project
             },
             {
               "node": {
-                "title": "Post FR 9",
+                "title": "Post FR 6",
                 "isPublished": true,
-                "publishedAt": "2018-11-05 00:00:00"
+                "publishedAt": "2018-11-03 00:00:00"
               }
             }
           ]

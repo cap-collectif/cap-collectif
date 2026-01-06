@@ -30,6 +30,15 @@ describe('<PostList />', () => {
               url: 'https://localhost/blog/post-fr-13',
             },
           },
+          {
+            node: {
+              id: 'UG9zdDpwb3N0OQ==',
+              title: 'Post FR 9',
+              url: 'https://localhost/blog/post-fr-9',
+              isPublished: true,
+              publishedAt: '2070-11-05 00:00:00',
+            },
+          },
         ],
       },
       isAdmin: true,

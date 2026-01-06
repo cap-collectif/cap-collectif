@@ -255,7 +255,7 @@ exports[`<EventList /> should render correctly 1`] = `
             class="sc-bcXGCL TOCat cap-table__td"
             style="white-space: initial;"
           >
-            03/01/2015
+            global.no.published
           </td>
           <td
             class="sc-bcXGCL TOCat cap-table__td"
@@ -426,7 +426,7 @@ exports[`<EventList /> should render correctly 1`] = `
             class="sc-bcXGCL TOCat cap-table__td"
             style="white-space: initial;"
           >
-            01/01/2015
+            global.no.published
           </td>
           <td
             class="sc-bcXGCL TOCat cap-table__td"
@@ -495,7 +495,7 @@ exports[`<EventList /> should render correctly 1`] = `
             class="sc-bcXGCL TOCat cap-table__td"
             style="white-space: initial;"
           >
-            06/01/2015
+            global.no.published
           </td>
           <td
             class="sc-bcXGCL TOCat cap-table__td"

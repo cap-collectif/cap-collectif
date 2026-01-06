@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\Post:
     post9:
         id: 'post9'
         isPublished: true
-        publishedAt: <identity((new \DateTime('2018-11-05 00:00:00')))>
+        publishedAt: <identity((new \DateTime('2070-11-05 00:00:00')))>
         creator: '@user5'
         media: null
         projects: ['@p2']

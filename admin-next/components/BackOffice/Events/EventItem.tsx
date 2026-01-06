@@ -25,6 +25,7 @@ type Props = {
 
 const FRAGMENT = graphql`
   fragment EventItem_event on Event {
+    enabled
     id
     title
     reviewStatus
@@ -162,12 +163,13 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, viewer: viewerFragme
         <Table.Td>{event.owner && <Text fontSize={CapUIFontSize.BodyRegular}>{event.owner.username}</Text>}</Table.Td>
       ) : null}
       <Table.Td>
-        {event.createdAt &&
-          intl.formatDate(event.createdAt, {
-            day: 'numeric',
-            month: 'numeric',
-            year: 'numeric',
-          })}
+        {event.enabled && event.createdAt
+          ? intl.formatDate(event.createdAt, {
+              day: 'numeric',
+              month: 'numeric',
+              year: 'numeric',
+            })
+          : intl.formatMessage({ id: 'global.no.published' })}
       </Table.Td>
       <Table.Td>
         <Flex direction="row" justify="space-evenly" gap={2}>

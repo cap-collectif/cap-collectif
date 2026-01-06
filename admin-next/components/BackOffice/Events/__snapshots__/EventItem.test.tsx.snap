@@ -35,7 +35,7 @@ exports[`<EventItem /> should render correctly 1`] = `
   >
     &lt;mock-value-for-field-"username"&gt;
   </a>
-  03/01/2015
+  global.no.published
   <div
     class="sc-bcXGCL hcHFdL"
   >
@@ -157,7 +157,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
   >
     &lt;mock-value-for-field-"username"&gt;
   </a>
-  03/01/2015
+  global.no.published
   <div
     class="sc-bcXGCL hcHFdL"
   >
