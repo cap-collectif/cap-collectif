@@ -129,9 +129,7 @@ export const ProjectCard = ({ project: projectKey, primaryInfoTag, ...props }: P
             {((project.isParticipantsCounterDisplayable || (isExternal && externalParticipantsCount)) &&
               formatCounter(
                 CapUIIcon.UserO,
-                isExternal
-                  ? externalParticipantsCount || 0
-                  : project.contributors.totalCount,
+                isExternal ? externalParticipantsCount || 0 : project.contributors.totalCount,
                 intl.formatMessage({ id: 'capco.section.metrics.participants' }),
               )) ||
               null}

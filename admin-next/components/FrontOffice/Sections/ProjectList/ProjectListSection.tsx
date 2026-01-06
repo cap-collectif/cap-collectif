@@ -12,6 +12,7 @@ import ProjectsListPlaceholder, { ProjectsListFiltersPlaceholder } from '@shared
 import { pxToRem } from '@shared/utils/pxToRem'
 import { ProjectOrderField } from '@relay/ProjectListSectionQuery.graphql'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { useFocusOnLoadMore } from '@shared/hooks/useFocusOnLoadMore'
 
 const OVERFLOW_HEIGHT = 184
 
@@ -65,6 +66,13 @@ export const ProjectListSectionList: FC<{
 }> = ({ query: queryKey }) => {
   const intl = useIntl()
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(ProjectListSectionListQuery, queryKey)
+  const projectIds = data.projects?.edges?.map(({ node }) => node.id) ?? []
+  const { markPendingFocus } = useFocusOnLoadMore({
+    itemIds: projectIds,
+    isLoadingNext,
+    idPrefix: 'cap-project-card-',
+    focusSelector: 'a',
+  })
 
   return (
     <Box className="project-list-section-projects" mt={[0, pxToRem(-OVERFLOW_HEIGHT)]}>
@@ -81,7 +89,10 @@ export const ProjectListSectionList: FC<{
               <Button
                 variant="primary"
                 variantSize="medium"
-                onClick={() => loadNext(20)}
+                onClick={() => {
+                  markPendingFocus()
+                  loadNext(20)
+                }}
                 mt="xl"
                 disabled={isLoadingNext}
               >

@@ -13,6 +13,7 @@ import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import PostCard from './PostCard'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { OVERFLOW_HEIGHT, PostListSkeleton } from './PostListSkeleton'
+import { useFocusOnLoadMore } from '@shared/hooks/useFocusOnLoadMore'
 
 // TODO on query with backend ready
 export const PostListSectionListQuery = graphql`
@@ -50,7 +51,15 @@ export const PostListSectionList: FC<PostListSectionListProps> = ({ query: query
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(PostListSectionListQuery, queryKey)
 
   const postTotalCount = data?.posts?.totalCount
-  const posts = data?.posts?.edges?.map(({ node }) => node)
+  const posts = data?.posts?.edges?.map(({ node }) => node) ?? []
+  const postIds = posts.map(post => post.id)
+
+  const { markPendingFocus } = useFocusOnLoadMore({
+    itemIds: postIds,
+    isLoadingNext,
+    idPrefix: 'cap-post-card-',
+    focusSelector: 'a',
+  })
 
   return (
     <Box className="post-list-section-posts" mt={[0, pxToRem(-OVERFLOW_HEIGHT)]}>
@@ -83,7 +92,10 @@ export const PostListSectionList: FC<PostListSectionListProps> = ({ query: query
               <Button
                 variant="primary"
                 variantSize="medium"
-                onClick={() => loadNext(count)}
+                onClick={() => {
+                  markPendingFocus()
+                  loadNext(count)
+                }}
                 mt="xl"
                 disabled={isLoadingNext}
                 justifyContent={['center', 'unset']}
