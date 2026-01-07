@@ -50,7 +50,8 @@
     "workspaces": [
         "packages/*",
         "admin-next",
-        "cypress"
+        "cypress",
+        "scripts"
     ],
     "engines": {
         "node": ">=20.19.6"
