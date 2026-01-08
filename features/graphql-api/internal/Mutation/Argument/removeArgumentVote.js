@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupWithES'
 
 const RemoveArgumentVoteMutation = /* GraphQL*/ `
     mutation ($input: RemoveArgumentVoteInput!) {
