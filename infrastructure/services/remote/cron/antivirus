@@ -45,7 +45,7 @@ scan_modified_files() {
 
     if [[ "$FIRST_SCAN" = true ]]; then
         echo "[INFO] Premier scan de tous les fichiers..." | tee -a "$LOG_FILE"
-        scan_result=$(clamscan -r --log="$LOG_FILE" --remove=no --scan-archive=yes -v "$SCAN_DIR" 2>&1)
+        scan_result=$(clamscan -r --log="$LOG_FILE" --remove=yes --scan-archive=yes -v "$SCAN_DIR" 2>&1)
     else
         files_to_scan=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -print0)
 
@@ -53,7 +53,7 @@ scan_modified_files() {
             echo "[INFO] Scan des fichiers modifiés depuis le dernier passage..." | tee -a "$LOG_FILE"
 
             scan_result=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -exec \
-                    clamscan --log=$LOG_FILE --remove=no --scan-archive=yes -v {} + 2>&1)
+                    clamscan --log=$LOG_FILE --remove=yes --scan-archive=yes -v {} + 2>&1)
         else
             echo "[INFO] Aucun fichier à scanner."
             scan_result="[INFO] Aucun fichier à scanner."

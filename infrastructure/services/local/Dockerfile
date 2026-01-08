@@ -199,6 +199,7 @@ RUN apt-get clean && \
 
 # Install gosu binary (needs wget and ca-certificates).
 ENV GOSU_VERSION 1.10
+ENV SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS=1
 RUN set -ex; \
 	dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
 	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \

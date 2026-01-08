@@ -186,3 +186,6 @@ InternalFeatureFlagType:
             user_anonymization_automated:
                 value: !php/const Capco\AppBundle\Toggle\Manager::user_anonymization_automated
                 description: 'Whether or not user anonymization automated is enabled'
+            antivirus:
+                value: !php/const Capco\AppBundle\Toggle\Manager::antivirus
+                description: 'Whether or not sync antivirus is enabled'

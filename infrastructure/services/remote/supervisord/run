@@ -28,4 +28,15 @@ do
 done
 
 echo "[$(date -u)][SUPERVISORD] Started!"
+
+# Check if antivirus feature flag is active
+ANTIVIRUS_ACTIVE=$(php /var/www/bin/console capco:toggle:isActive antivirus --env=prod 2>/dev/null || echo "false")
+
+if [[ "$ANTIVIRUS_ACTIVE" == "true" ]]; then
+    echo "[$(date -u)][SUPERVISORD] Antivirus feature active, clamd will be started"
+    sed -i 's/autostart=false/autostart=true/' /etc/supervisord/clamd.conf
+else
+    echo "[$(date -u)][SUPERVISORD] Antivirus feature not active, clamd will not be started"
+fi
+
 exec supervisord --configuration=/etc/supervisord/supervisord.conf --loglevel=warn

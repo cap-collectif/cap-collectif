@@ -28,6 +28,7 @@ type State = {
   error: string
   size: string
 }
+
 export class ImageUpload extends React.Component<Props, State> {
   static defaultProps = {
     id: '',
@@ -69,6 +70,13 @@ export class ImageUpload extends React.Component<Props, State> {
           this.uncheckDelete()
           const newValue = multiple ? [...value, newFile] : newFile
           onChange(newValue)
+        })
+        .catch(error => {
+          if (error.response?.errorCode === 'VIRUS_DETECTED') {
+            this.setState({
+              error: 'upload.virus.detected',
+            })
+          }
         })
     }
   }
@@ -219,4 +227,5 @@ export class ImageUpload extends React.Component<Props, State> {
     )
   }
 }
+
 export default ImageUpload

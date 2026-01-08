@@ -294,6 +294,18 @@
                 }
             },
             {
+                "title": "Antivirus",
+                "description": "description.group.antivirus",
+                "onlySuperAdmin": true,
+                "items": {
+                    "antivirus": {
+                        "title": "admin.label.antivirus",
+                        "description": "antivirus.group.antivirus",
+                        "onlySuperAdmin": true
+                    }
+                }
+            },
+            {
                 "title": "admin.group.developer",
                 "description": "description.group.developer",
                 "onlySuperAdmin": true,

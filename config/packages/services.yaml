@@ -30,6 +30,15 @@ services:
     Capco\AppBundle\Factory\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Factory/*'
 
+    Capco\AppBundle\Antivirus\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Antivirus/*'
+
+    Capco\AppBundle\EventListener\AntivirusToggleSubscriber:
+        arguments:
+            $environment: '%kernel.environment%'
+        tags:
+            - { name: kernel.event_subscriber }
+
     Capco\AppBundle\EventListener\ToggleSubscriber:
         tags:
             - { name: kernel.event_subscriber }

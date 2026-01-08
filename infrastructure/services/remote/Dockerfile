@@ -145,8 +145,12 @@ RUN set -x \
 # Install varnish
 RUN apt-get install -y varnish varnish-modules
 
-# Install antivirus deamon
-RUN apt-get install -y clamav
+# Install ClamAV antivirus daemon
+RUN apt-get install -y clamav-daemon clamav-freshclam && \
+    mkdir -p /var/run/clamav && \
+    chown clamav:clamav /var/run/clamav && \
+    sed -i 's/^LocalSocket .*$/LocalSocket \/var\/run\/clamav\/clamd.sock/' /etc/clamav/clamd.conf && \
+    freshclam || true
 
 # Install Supervisor
 RUN apt-get install -y supervisor

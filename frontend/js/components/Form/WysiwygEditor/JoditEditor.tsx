@@ -5,6 +5,7 @@ import { useMemo, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import AppBox from '~/components/Ui/Primitives/AppBox'
 import localConfig from '~/config'
+import { dangerToast } from '@shared/utils/toasts'
 
 export type Props = {
   value?: any
@@ -108,13 +109,21 @@ const getConfig = (
       headers: {},
       prepareData: data => {
         data.append('file', data.getAll('files[0]')[0])
-        data.delete('file[0')
+        data.delete('file[0]')
       },
       isSuccess: resp => {
+        const msg = resp?.data?.messages?.[0] ?? null
+
+        if (!resp.success && msg instanceof Error && msg?.message === 'Bad Request') {
+          dangerToast(intl.formatMessage({ id: 'upload.virus.detected' }))
+          // error is handled with the toast so we return true to skip entering into getMessage method
+          return true
+        }
+
         return !resp.errorCode
       },
-      getMsg: resp => {
-        return resp.msg.join !== undefined ? resp.msg.join(' ') : resp.msg
+      getMessage: () => {
+        return intl.formatMessage({ id: 'error-has-occurred' })
       },
       process: resp => {
         return {

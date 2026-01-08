@@ -7319,6 +7319,9 @@ enum FeatureFlagType {
 
   """Whether or not user anonymization automated is enabled"""
   user_anonymization_automated
+
+  """Whether or not sync antivirus is enabled"""
+  antivirus
 }
 
 """A field error mapped to a form"""

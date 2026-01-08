@@ -63,7 +63,8 @@ const Dropzone = ({
           url: res.url,
         }))
     })
-    await Promise.all(promisesUpload).then((values: Array<FileInfo>) => {
+    try {
+      const values = await Promise.all(promisesUpload)
       const newValue = multiple && value && value.length > 0 ? [...value, ...values] : values
       setLoading(false)
       onChange(newValue)
@@ -71,7 +72,15 @@ const Dropzone = ({
       setTimeout(() => {
         setLoaderDisplay(false)
       }, TIMEOUT_LOADER_DISPLAY)
-    })
+    } catch (error) {
+      if (error.response?.errorCode === 'VIRUS_DETECTED') {
+        setError(['upload.virus.detected'])
+      } else {
+        setError(errors.DEFAULT)
+      }
+      setLoading(false)
+      setLoaderDisplay(false)
+    }
   }
 
   return (

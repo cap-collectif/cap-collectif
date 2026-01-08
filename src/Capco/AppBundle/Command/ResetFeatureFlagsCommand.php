@@ -100,6 +100,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate(Manager::noindex_on_profiles);
         $this->manager->activate(Manager::paper_vote);
         $this->manager->activate(Manager::emailing_group);
+        $this->manager->activate(Manager::antivirus);
 
         if ('test' === $this->env) {
             $this->manager->activate(Manager::votes_min);
@@ -150,6 +151,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate(Manager::emailing_group);
             $this->manager->deactivate(Manager::organizations);
             $this->manager->deactivate(Manager::mediator);
+            $this->manager->deactivate(Manager::antivirus);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

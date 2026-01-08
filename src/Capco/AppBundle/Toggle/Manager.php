@@ -91,6 +91,7 @@ class Manager
     final public const multi_consultations = 'multi_consultations';
     final public const collect_proposals_by_email = 'collect_proposals_by_email';
     final public const user_anonymization_automated = 'user_anonymization_automated';
+    final public const antivirus = 'antivirus';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -126,6 +127,7 @@ class Manager
         self::multi_consultations,
         self::collect_proposals_by_email,
         self::user_anonymization_automated,
+        self::antivirus,
     ];
 
     final public const SUPER_ADMIN_ALLOWED_FEATURES = [
@@ -218,6 +220,7 @@ class Manager
         self::multi_consultations,
         self::collect_proposals_by_email,
         self::user_anonymization_automated,
+        self::antivirus,
     ];
 
     protected Context $context;

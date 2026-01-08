@@ -82,6 +82,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   collect_proposals_by_email: false,
   user_anonymization_automated: false,
   new_project_card: false,
+  antivirus: false,
 }
 
 const getRedisFeatureFlagKey = (flag: string) => {
