@@ -2,7 +2,7 @@
 import { FC, useState } from 'react'
 import { Popup, useMapEvents } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
-import ProposalForm from '../ProposalForm/ProposalForm'
+import ProposalCreateModal from '../ProposalForm/ProposalCreateModal'
 import { VoteStepMapCustomEvents_proposalStep$key } from '@relay/VoteStepMapCustomEvents_proposalStep.graphql'
 
 interface Props {
@@ -14,6 +14,7 @@ const FRAGMENT = graphql`
     __typename
     form {
       contribuable
+      ...ProposalCreateModal_proposalForm
     }
   }
 `
@@ -29,10 +30,14 @@ const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey }) => {
     },
   })
 
-  return position && isCollectStep ? (
+  if (!position || !isCollectStep || !step.form) {
+    return null
+  }
+
+  return (
     <Popup position={position}>
-      <ProposalForm disabled={!step.form.contribuable} initialPosition={position} />
+      <ProposalCreateModal disabled={!step.form.contribuable} proposalForm={step.form} />
     </Popup>
-  ) : null
+  )
 }
 export default VoteStepMapCustomEvents

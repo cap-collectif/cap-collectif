@@ -30,7 +30,8 @@
     "react-relay": "^18.2.0",
     "redis": "^4.0.0",
     "relay-compiler": "^18.2.0",
-    "relay-runtime": "^18.2.0"
+    "relay-runtime": "^18.2.0",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -39,9 +40,9 @@
     "@types/html-truncate": "^1.2.2",
     "@types/jest": "^27.0.1",
     "@types/papaparse": "^5.3.2",
-    "@types/react": "^19.1.12",
+    "@types/react": "^18.3.0",
     "@types/react-beautiful-dnd": "^13.1.4",
-    "@types/react-dom": "^19.1.9",
+    "@types/react-dom": "^18.3.0",
     "@types/react-relay": "^18.2.0",
     "@types/relay-runtime": "18.2.5",
     "@types/styled-components": "^5.1.15",

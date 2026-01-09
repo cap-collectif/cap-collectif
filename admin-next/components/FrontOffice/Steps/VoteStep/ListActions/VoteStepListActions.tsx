@@ -23,7 +23,7 @@ const FRAGMENT = graphql`
     form {
       isMapViewEnabled
       usingCategories
-      categories {
+      categories(order: ALPHABETICAL) {
         id
         name
       }

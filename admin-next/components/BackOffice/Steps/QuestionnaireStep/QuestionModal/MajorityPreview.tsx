@@ -1,16 +1,8 @@
-import * as React from 'react'
-import { useIntl } from 'react-intl'
 import { Box, CapUIFontSize, Flex, Text } from '@cap-collectif/ui'
+import MajorityQuestion from '@shared/ui/MajorityQuestion/MajorityQuestion'
+import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
-
-export const COLORS = [
-  { label: 'very-well', color: '#33691e' },
-  { label: 'global-well', color: '#43a047' },
-  { label: 'global-well-enough', color: '#ffc107' },
-  { label: 'global-passable', color: '#ff9800' },
-  { label: 'global-not-passable', color: '#b71c1c' },
-  { label: 'global-reject', color: '#212121' },
-]
+import { useIntl } from 'react-intl'
 
 const MajorityPreview: React.FC = () => {
   const intl = useIntl()
@@ -27,24 +19,7 @@ const MajorityPreview: React.FC = () => {
         <Text fontWeight="600" mb={2} fontSize={CapUIFontSize.Headline}>
           {title || ''}
         </Text>
-        <Flex borderRadius="normal" overflow="hidden" width="100%">
-          {COLORS.map((majority, idx) => (
-            <Flex
-              py={1}
-              bg={majority.color}
-              color="white"
-              fontWeight={600}
-              key={idx}
-              fontSize={[CapUIFontSize.Caption, CapUIFontSize.Caption, CapUIFontSize.BodySmall]}
-              justifyContent="center"
-              alignItems="center"
-              textAlign="center"
-              flex="1"
-            >
-              {intl.formatMessage({ id: majority.label })}
-            </Flex>
-          ))}
-        </Flex>
+        <MajorityQuestion asPreview />
       </Flex>
     </Box>
   )
