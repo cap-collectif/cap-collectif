@@ -1,11 +1,10 @@
 import { Box, Button, CapUIIcon, Flex, Tag } from '@cap-collectif/ui'
-import { VoteStepActionsModal_filters_query$key } from '@relay/VoteStepActionsModal_filters_query.graphql'
-import { VoteStepListActions_proposalForm$key } from '@relay/VoteStepListActions_proposalForm.graphql'
+import { VoteStepListActions_proposalStep$key } from '@relay/VoteStepListActions_proposalStep.graphql'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import VoteStepActionsModal from './VoteStepActionsModal'
+import VoteStepFiltersModal from '../Filters/VoteStepFiltersModal'
 import ListActionsQuickFilter, { QuickFilter } from './VoteStepQuickFilter'
 
 interface ListViewButton {
@@ -15,33 +14,35 @@ interface ListViewButton {
 }
 
 interface Props {
-  form: VoteStepListActions_proposalForm$key
-  filtersConnection: VoteStepActionsModal_filters_query$key
+  step: VoteStepListActions_proposalStep$key
 }
 
 const FRAGMENT = graphql`
-  fragment VoteStepListActions_proposalForm on ProposalForm {
-    isMapViewEnabled
-    usingCategories
-    categories {
-      id
-      name
+  fragment VoteStepListActions_proposalStep on ProposalStep {
+    id
+    form {
+      isMapViewEnabled
+      usingCategories
+      categories {
+        id
+        name
+      }
+      usingThemes
     }
-    usingThemes
   }
 `
 
-const VoteStepListActions: React.FC<Props> = ({ form: formKey, filtersConnection }) => {
+const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const { width } = useWindowWidth()
 
-  const form = useFragment(FRAGMENT, formKey)
+  const step = useFragment(FRAGMENT, stepKey)
 
   const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
   const [listView, setListView] = useQueryState('list_view', { defaultValue: 'grid' })
   const [, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
 
-  const hasMapView = form?.isMapViewEnabled
+  const hasMapView = step.form?.isMapViewEnabled
 
   const quickFilterButtons: QuickFilter[] = [
     {
@@ -95,7 +96,7 @@ const VoteStepListActions: React.FC<Props> = ({ form: formKey, filtersConnection
           </Tag>
         ))}
       </Box>
-      <VoteStepActionsModal form={form} filtersConnection={filtersConnection} />
+      <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView ? (
         <Box flex="none">

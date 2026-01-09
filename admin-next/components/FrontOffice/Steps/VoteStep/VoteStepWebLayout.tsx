@@ -1,5 +1,4 @@
 import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
-import { VoteStepActionsModal_filters_query$key } from '@relay/VoteStepActionsModal_filters_query.graphql'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
@@ -16,28 +15,46 @@ import VoteStepProposalsList from './VoteStepProposalsList'
 
 type Props = {
   step: VoteStepWebLayout_proposalStep$key
-  filtersConnection: VoteStepActionsModal_filters_query$key
 }
 
 const FRAGMENT = graphql`
   fragment VoteStepWebLayout_proposalStep on ProposalStep
   @argumentDefinitions(
     count: { type: "Int!" }
-    # cursor: { type: "String" }
     orderBy: { type: "[ProposalOrder]" }
-    # userType: { type: "ID" }
-    # theme: { type: "ID" }
-    # category: { type: "ID" }
-    # district: { type: "ID" }
-    # status: { type: "ID" }
+    userType: { type: "ID" }
+    theme: { type: "ID" }
+    category: { type: "ID" }
+    district: { type: "ID" }
+    status: { type: "ID" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
     __typename
     ...VoteStepProposalsList_proposalStep
-      @arguments(count: $count, term: $term, orderBy: $orderBy, geoBoundingBox: $geoBoundingBox)
+      @arguments(
+        count: $count
+        term: $term
+        orderBy: $orderBy
+        userType: $userType
+        theme: $theme
+        category: $category
+        district: $district
+        status: $status
+        geoBoundingBox: $geoBoundingBox
+      )
     ...VoteStepMap_proposalStep
-      @arguments(count: $count, term: $term, orderBy: $orderBy, geoBoundingBox: $geoBoundingBox)
+      @arguments(
+        count: $count
+        term: $term
+        orderBy: $orderBy
+        userType: $userType
+        theme: $theme
+        category: $category
+        district: $district
+        status: $status
+        geoBoundingBox: $geoBoundingBox
+      )
     ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
     ...VoteStepMobileActions_proposalStep
@@ -63,7 +80,7 @@ const getTemplateColumns = (isMapVisible: boolean) => ({
   desktop: isMapVisible ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
 })
 
-export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConnection }) => {
+export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
 
@@ -89,7 +106,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, filtersConne
         </Flex>
         {!isMobile ? (
           <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
-            <VoteStepListHeader step={step} filtersConnection={filtersConnection} />
+            <VoteStepListHeader step={step} />
           </Box>
         ) : step.votable ? (
           <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">

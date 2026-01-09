@@ -4,6 +4,7 @@ import { parseAsInteger, useQueryState } from 'nuqs'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
+import VoteStepMobileFiltersModal from '../Filters/VoteStepMobileFiltersModal'
 import StepVoteMobileActionBtn from './VoteStepMobileActionBtn'
 
 type ActiveAction = 'search' | 'collect' | 'vote' | 'map' | null
@@ -14,6 +15,7 @@ interface Props {
 
 const FRAGMENT = graphql`
   fragment VoteStepMobileActions_proposalStep on ProposalStep {
+    id
     votable
     form {
       isMapViewEnabled
@@ -38,13 +40,11 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
   return (
     <Box position="sticky" zIndex={1} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
       <Flex width="100%">
-        <StepVoteMobileActionBtn
-          icon={CapUIIcon.Search}
+        <VoteStepMobileFiltersModal
+          stepId={step.id}
           isActive={activeAction === 'search'}
-          onClick={() => handleActionClick('search')}
-        >
-          {intl.formatMessage({ id: 'global.search.label' })}
-        </StepVoteMobileActionBtn>
+          onButtonClick={() => handleActionClick('search')}
+        />
         <StepVoteMobileActionBtn
           icon={CapUIIcon.Add}
           isActive={activeAction === 'collect'}
@@ -72,7 +72,6 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
           </StepVoteMobileActionBtn>
         )}
       </Flex>
-      {/* <VoteStepMobileFilters /> */}
     </Box>
   )
 }

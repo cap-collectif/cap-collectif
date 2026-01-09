@@ -1,17 +1,18 @@
-import * as React from 'react'
 import { Accordion, CapUIAccordionColor, CapUIAccordionSize, CapUIFontSize, Flex, Text } from '@cap-collectif/ui'
-import VoteStepFilterRadioGroup from '~/components/VoteStep/Filters/VoteStepFilterRadioGroup'
-import VoteStepFilterButtons from '~/components/VoteStep/Filters/VoteStepFilterButtons'
-import type { Filters } from './useVoteStepFilters'
-import './useVoteStepFilters'
 import { pxToRem } from '@shared/utils/pxToRem'
+import * as React from 'react'
+import { FC } from 'react'
+import VoteStepFilterButtons from '~/components/VoteStep/Filters/VoteStepFilterButtons'
+import VoteStepFilterRadioGroup from '~/components/VoteStep/Filters/VoteStepFilterRadioGroup'
+import './useVoteStepFilters'
+import type { Filters } from './useVoteStepFilters'
 
 type Props = {
   filters: Filters
   isMobile: boolean
 }
 
-const VoteStepFiltersAccordions = ({ filters, isMobile }: Props) => {
+const VoteStepFiltersAccordions: FC<Props> = ({ filters, isMobile }) => {
   const getOpenAccordions = React.useCallback(() => {
     const currentUrl = window.location.href
     const urlParams = new URL(currentUrl).searchParams

@@ -1,10 +1,36 @@
-import { VoteStepFilters_Query } from '@relay/VoteStepFilters_Query.graphql'
+import { useVoteStepFilters_Query } from '@relay/useVoteStepFilters_Query.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 
+export type FilterState = {
+  sort: string | null
+  category: string | null
+  theme: string | null
+  status: string | null
+  userType: string | null
+  district: string | null
+  contributor: string | null
+  term: string | null
+  latlng: string | null
+  latlngBounds: string | null
+}
+
+export const DEFAULT_FILTERS: FilterState = {
+  sort: 'random',
+  category: 'ALL',
+  theme: 'ALL',
+  status: 'ALL',
+  userType: 'ALL',
+  district: 'ALL',
+  contributor: 'ALL',
+  term: null,
+  latlng: null,
+  latlngBounds: null,
+}
+
 const QUERY = graphql`
-  query VoteStepFilters_Query($stepId: ID!) {
+  query useVoteStepFilters_Query($stepId: ID!) {
     step: node(id: $stepId) {
       ... on ProposalStep {
         canDisplayBallot
@@ -75,12 +101,10 @@ type ReturnType = {
 
 export const useVoteStepFilters = (stepId: string): ReturnType => {
   const intl = useIntl()
-  const data = useLazyLoadQuery<VoteStepFilters_Query>(QUERY, { stepId }, { fetchPolicy: 'store-or-network' })
+  const data = useLazyLoadQuery<useVoteStepFilters_Query>(QUERY, { stepId }, { fetchPolicy: 'store-or-network' })
 
   const themes = data?.themes || []
   const userTypes = data?.userTypes?.edges?.map(edge => edge.node) || []
-  console.log('themes', themes)
-  console.log('userTypes', userTypes)
 
   const userTypeEnabled = useFeatureFlag('user_type')
   const districtsEnabled = useFeatureFlag('districts')
@@ -90,12 +114,13 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
   const { step } = data
   const { form } = step
   const { proposals } = step
-  const allOption = {
-    id: '',
-    title: intl.formatMessage({
-      id: 'global.all',
+
+  const generateAllOption = (translationKey: string) => ({
+    id: 'ALL',
+    name: intl.formatMessage({
+      id: translationKey,
     }),
-  }
+  })
 
   const getSortOptions = () => {
     const orderByVotes = step.voteType !== 'DISABLED'
@@ -198,35 +223,35 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     },
     userType: {
       isEnabled: userTypeEnabled && userTypes.length > 0,
-      options: [allOption, ...userTypes],
+      options: [generateAllOption('global.select_types'), ...userTypes],
       label: intl.formatMessage({
         id: 'global.contributors',
       }),
     },
     theme: {
       isEnabled: (themesEnabled && form?.usingThemes && (themes?.length ?? 0) > 0) ?? false,
-      options: [allOption, ...themes],
+      options: [generateAllOption('global.select_themes'), ...themes],
       label: intl.formatMessage({
         id: 'main-theme',
       }),
     },
     category: {
       isEnabled: (form?.usingCategories && (form?.categories?.length ?? 0) > 0) ?? false,
-      options: form?.categories ? [allOption, ...form?.categories] : [],
+      options: form?.categories ? [generateAllOption('global.select_categories'), ...form?.categories] : [],
       label: intl.formatMessage({
         id: 'secondary-theme',
       }),
     },
     district: {
       isEnabled: districtsEnabled && (form?.districts?.length ?? 0) > 0,
-      options: form?.districts ? [allOption, ...form?.districts] : [],
+      options: form?.districts ? [generateAllOption('global.select_districts'), ...form?.districts] : [],
       label: intl.formatMessage({
         id: 'proposal_form.districts',
       }),
     },
     status: {
       isEnabled: (step.statuses?.length ?? 0) > 0,
-      options: step.statuses ? [allOption, ...step.statuses] : [],
+      options: step.statuses ? [generateAllOption('global.select_statuses'), ...step.statuses] : [],
       label: intl.formatMessage({
         id: 'global.statuses',
       }),

@@ -17,24 +17,36 @@ import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 
 const QUERY = graphql`
-  query VoteStepQuery($term: String, $orderBy: [ProposalOrder], $stepId: ID!) {
+  query VoteStepQuery(
+    $term: String
+    $orderBy: [ProposalOrder]
+    $stepId: ID!
+    $userType: ID
+    $theme: ID
+    $category: ID
+    $district: ID
+    $status: ID
+  ) {
     step: node(id: $stepId) {
       ... on ProposalStep {
-        ...VoteStepWebLayout_proposalStep @arguments(count: 50, term: $term, orderBy: $orderBy)
+        ...VoteStepWebLayout_proposalStep
+          @arguments(
+            count: 50
+            term: $term
+            orderBy: $orderBy
+            userType: $userType
+            theme: $theme
+            category: $category
+            district: $district
+            status: $status
+          )
       }
     }
-    ...VoteStepActionsModal_filters_query
-    ...VoteStepActionsModal_proposalStatuses_query @arguments(stepId: $stepId)
   }
 `
 
 export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepId }) => {
-  // const [term] = useQueryState('term', parseAsString)
-  // const [sort, setSort] = useQueryState('sort', parseAsString)
-  // const currentSort = sort || 'random'
-
-  // @ts-ignore - remove this ignore later // adding it now to make CI pass
-  const [filters, setFilters] = useQueryStates(
+  const [filters] = useQueryStates(
     {
       sort: parseAsString.withDefault('random'),
       category: parseAsString.withDefault('ALL'),
@@ -46,8 +58,6 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepI
     },
     { history: 'push' },
   )
-  // @ts-ignore - remove this ignore later // adding it now to make CI pass
-  console.log(setFilters)
 
   // Apply defaults after getting the values
   const effectiveFilters = {
@@ -69,7 +79,6 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepI
         direction: 'ASC',
       },
     ],
-    // @ts-ignore - remove this ignore later // adding it now to make CI pass
     userType: effectiveFilters.userType === 'ALL' ? undefined : effectiveFilters.userType,
     theme: effectiveFilters.theme === 'ALL' ? undefined : effectiveFilters.theme,
     category: effectiveFilters.category === 'ALL' ? undefined : effectiveFilters.category,
@@ -83,7 +92,7 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepI
 
   return (
     <React.Suspense>
-      <VoteStepWebLayout step={step} filtersConnection={data} />
+      <VoteStepWebLayout step={step} />
     </React.Suspense>
   )
 }

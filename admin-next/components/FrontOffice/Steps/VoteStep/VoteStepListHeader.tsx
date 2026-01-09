@@ -1,5 +1,4 @@
 import { Box, Flex } from '@cap-collectif/ui'
-import { VoteStepActionsModal_filters_query$key } from '@relay/VoteStepActionsModal_filters_query.graphql'
 import { VoteStepListHeader_proposalStep$key } from '@relay/VoteStepListHeader_proposalStep.graphql'
 import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
@@ -11,7 +10,6 @@ import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
   step: VoteStepListHeader_proposalStep$key
-  filtersConnection: VoteStepActionsModal_filters_query$key
 }
 
 const FRAGMENT = graphql`
@@ -20,13 +18,13 @@ const FRAGMENT = graphql`
     votable
     form {
       contribuable
-      ...VoteStepListActions_proposalForm
     }
+    ...VoteStepListActions_proposalStep
     ...VoteStepUserInfos_proposalStep
   }
 `
 
-const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, filtersConnection }) => {
+const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isCollectStep = step.__typename === 'CollectStep'
 
@@ -37,7 +35,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, filtersConnection 
           {step.form && isCollectStep ? <ProposalForm disabled={!step.form.contribuable} /> : null}
           <VoteStepSearchBar />
         </Flex>
-        <VoteStepListActions form={step.form} filtersConnection={filtersConnection} />
+        <VoteStepListActions step={step} />
       </Box>
       {step.votable ? (
         <Box flex={`0 1 ${pxToRem(395)}`} position="relative" minHeight={pxToRem(116)}>
