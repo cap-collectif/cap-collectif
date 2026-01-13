@@ -85,8 +85,6 @@ parameters:
     occitanie_base_url: '%env(SYMFONY_OCCITANIE_BASE_URL)%'
     slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
     slack_omar_djinn: '%env(SLACK_OMAR_DJINN)%'
-    panther_url: '%env(SYMFONY_PANTHER_URL)%'
-    panther_token: '%env(SYMFONY_PANTHER_TOKEN)%'
     cas_verify_url_profile: '%env(SYMFONY_CAS_VERIFY_URL_PROFILE)%'
     cas_certificate_directory: '%env(SYMFONY_CAS_CERTIFICATE_DIRECTORY)%'
     default_oauth_client_id: '%env(SYMFONY_DEFAULT_OAUTH_CLIENT_ID)%'
@@ -176,8 +174,6 @@ parameters:
     env(SYMFONY_APP_VERSION): 'dev'
     env(SLACK_JPEC_GHOST): null
     env(SLACK_OMAR_DJINN): null
-    env(SYMFONY_PANTHER_URL): 'INSERT_A_REAL_SECRET'
-    env(SYMFONY_PANTHER_TOKEN): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_SESSION_LIFETIME_SECONDS): '86400' # in seconds, 86400 = 24 hours
     env(SYMFONY_SESSION_TIMEOUT_SECONDS): '7200' # in seconds, 7200 = two hours
     env(SYMFONY_ANONYMIZATION_INACTIVITY_DAYS): '365' # 1 year

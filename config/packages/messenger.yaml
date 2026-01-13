@@ -2,4 +2,12 @@ framework:
     messenger:
         reset_on_message: true
         transports:
-            async: 'amqp://%env(SYMFONY_RABBITMQ_LOGIN)%:%env(SYMFONY_RABBITMQ_PASSWORD)%@%env(SYMFONY_RABBITMQ_HOST)%:%env(SYMFONY_RABBITMQ_PORT)%'
+            async:
+                dsn: 'amqp://%env(SYMFONY_RABBITMQ_LOGIN)%:%env(SYMFONY_RABBITMQ_PASSWORD)%@%env(SYMFONY_RABBITMQ_HOST)%:%env(SYMFONY_RABBITMQ_PORT)%'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+                    max_delay: 0
+        routing:
+            Capco\AppBundle\Message\DebateArticleCrawlerMessage: async

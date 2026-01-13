@@ -4,8 +4,6 @@ namespace Capco\AppBundle;
 
 final class CapcoAppBundleMessagesTypes
 {
-    public const DEBATE_ARTICLE_CRAWLER = 'debate_article.crawler';
-
     public const USER_INVITE_INVITATION = 'user_invite.invitation';
     public const USER_INVITE_INVITATION_BY_ORGANIZATION = 'user_invite.invitation_by_organization';
     public const USER_INVITE_CHECK = 'user_invite.check';

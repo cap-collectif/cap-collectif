@@ -2,18 +2,17 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
+use Capco\AppBundle\Message\DebateArticleCrawlerMessage;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class DebateArticleListener
 {
     public function __construct(
-        private readonly Publisher $publisher,
+        private readonly MessageBusInterface $messageBus,
         private readonly LoggerInterface $logger
     ) {
     }
@@ -21,36 +20,40 @@ class DebateArticleListener
     public function postPersist(DebateArticle $entity, LifecycleEventArgs $args): void
     {
         try {
-            $this->publisher->publish(
-                CapcoAppBundleMessagesTypes::DEBATE_ARTICLE_CRAWLER,
-                new Message(
-                    json_encode([
-                        'id' => $entity->getId(),
-                        'url' => $entity->getUrl(),
-                    ])
+            $this->messageBus->dispatch(
+                message: new DebateArticleCrawlerMessage(
+                    debateArticleId: $entity->getId()
                 )
             );
-        } catch (\RuntimeException) {
-            $this->logger->error(self::class . ': could not publish to rabbitmq.');
+        } catch (\Throwable $exception) {
+            $this->logger->error(
+                message: self::class . ': could not dispatch debate article crawler message.',
+                context: [
+                    'debateArticleId' => $entity->getId(),
+                    'exception' => $exception,
+                ]
+            );
         }
     }
 
-    public function preUpdate(DebateArticle $entity, PreUpdateEventArgs $event)
+    public function preUpdate(DebateArticle $entity, PreUpdateEventArgs $event): void
     {
         try {
-            if ($event->hasChangedField('url')) {
-                $this->publisher->publish(
-                    CapcoAppBundleMessagesTypes::DEBATE_ARTICLE_CRAWLER,
-                    new Message(
-                        json_encode([
-                            'id' => $entity->getId(),
-                            'url' => $event->getNewValue('url'),
-                        ])
+            if ($event->hasChangedField(field: 'url')) {
+                $this->messageBus->dispatch(
+                    message: new DebateArticleCrawlerMessage(
+                        debateArticleId: $entity->getId()
                     )
                 );
             }
-        } catch (\RuntimeException) {
-            $this->logger->error(self::class . ': could not publish to rabbitmq.');
+        } catch (\Throwable $exception) {
+            $this->logger->error(
+                message: self::class . ': could not dispatch debate article crawler message.',
+                context: [
+                    'debateArticleId' => $entity->getId(),
+                    'exception' => $exception,
+                ]
+            );
         }
     }
 }

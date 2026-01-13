@@ -1,6 +1,0 @@
-services:
-    Capco\AppBundle\Crawler\PantherServiceCaller:
-        arguments:
-            $pantherUrl: '%panther_url%'
-            $pantherToken: '%panther_token%'
-        public: true

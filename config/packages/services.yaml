@@ -503,6 +503,9 @@ services:
     Capco\AppBundle\MessageHandler\:
         resource: '../../src/Capco/AppBundle/MessageHandler'
 
+    Capco\AppBundle\Crawler\:
+        resource: '../../src/Capco/AppBundle/Crawler'
+
     Symfony\Component\Finder\Finder:
         class: Symfony\Component\Finder\Finder
 
