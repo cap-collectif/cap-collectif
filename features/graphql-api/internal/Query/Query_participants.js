@@ -21,7 +21,10 @@ const variables = {
 }
 
 describe('Internal|Query participants', () => {
-  it('fetches all participants', async () => {
+  it('fetches all participants as admin', async () => {
     await expect(graphql(ParticipantsQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
+  })
+  it('fetches all participants as organization member', async () => {
+    await expect(graphql(ParticipantsQuery, variables, 'internal_christophe')).resolves.toMatchSnapshot()
   })
 })

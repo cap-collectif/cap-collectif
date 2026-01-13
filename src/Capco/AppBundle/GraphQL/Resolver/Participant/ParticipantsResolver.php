@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 
 use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -32,5 +33,14 @@ class ParticipantsResolver implements QueryInterface
         $totalCount = $this->participantRepository->countWithFilters($consentInternalCommunication, $emailConfirmed);
 
         return $paginator->auto($args, $totalCount);
+    }
+
+    public function isGranted(?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        return $viewer->hasBackOfficeAccess();
     }
 }

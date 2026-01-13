@@ -659,7 +659,7 @@ InternalQuery:
             participants:
                 type: 'ParticipantConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver").isGranted(getUser())'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", args)'
                 args:
                     consentInternalCommunication:

@@ -98,6 +98,10 @@ class CreateMailingListMutation implements MutationInterface
                 throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_USER);
             }
 
+            if (!$contributor->isConsentInternalCommunication() || !empty($contributor->getConfirmationToken())) {
+                continue;
+            }
+
             $users[] = $contributor;
         }
         if (empty($users)) {
