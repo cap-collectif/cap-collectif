@@ -12,8 +12,6 @@ import {
   ButtonQuickAction,
   Text,
   Box,
-  Accordion,
-  CapUIAccordionColor,
   CapUIFontSize,
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
@@ -344,7 +342,7 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{
   isEditing: boolean
   defaultLocale?: string
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
-}> = ({ isEditing, defaultLocale, setHelpMessage }) => {
+}> = ({ isEditing, defaultLocale }) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext()
 
@@ -358,58 +356,40 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{
     setValue(`${MODEL}questionnaire.questionsWithJumps`, formatJumpsToTmp(newValue.questionnaire.questionsWithJumps))
   }
 
-  return (
-    <Accordion
-      color={CapUIAccordionColor.white}
-      defaultAccordion={[intl.formatMessage({ id: 'global.questionnaire' })]}
-    >
-      <Accordion.Item
-        id={intl.formatMessage({ id: 'global.questionnaire' })}
-        onMouseEnter={() => {
-          setHelpMessage('step.create.questionnaire.helpText')
-        }}
-        onMouseLeave={() => setHelpMessage(null)}
-      >
-        <Accordion.Button>{intl.formatMessage({ id: 'global.questionnaire' })}</Accordion.Button>
-        <Accordion.Panel>
-          {!isEditing ? (
-            <Tabs mb={6}>
-              <Tabs.ButtonList ariaLabel="questionnaireType">
-                <Tabs.Button id={QuestionnaireCreationTypeEnum.NEW} onClick={() => setValue('isUsingModel', false)}>
-                  {intl.formatMessage({ id: 'global.new' })}
-                </Tabs.Button>
-                <Tabs.Button id={QuestionnaireCreationTypeEnum.MODEL} onClick={() => setValue('isUsingModel', true)}>
-                  {intl.formatMessage({ id: 'from_model' })}
-                </Tabs.Button>
-              </Tabs.ButtonList>
-              <Tabs.PanelList>
-                <Tabs.Panel>
-                  <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
-                </Tabs.Panel>
-                <Tabs.Panel>
-                  <FormControl name="questionnaireModel" control={control} isRequired={isUsingModel}>
-                    <FormLabel
-                      htmlFor="questionnaireModel"
-                      label={intl.formatMessage({
-                        id: 'global.questionnaire',
-                      })}
-                    />
-                    <QuestionnaireListField name="questionnaireModel" control={control} onChange={onChange} />
-                  </FormControl>
-                  {questionnaireModel ? (
-                    <QuestionnaireStepFormQuestionnaire key="model" model defaultLocale={defaultLocale} />
-                  ) : null}
-                </Tabs.Panel>
-              </Tabs.PanelList>
-            </Tabs>
-          ) : (
-            <Box bg="gray.100" p={6} mb={6} borderRadius="accordion">
-              <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
-            </Box>
-          )}
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
+  return !isEditing ? (
+    <Tabs mb={6}>
+      <Tabs.ButtonList ariaLabel="questionnaireType">
+        <Tabs.Button id={QuestionnaireCreationTypeEnum.NEW} onClick={() => setValue('isUsingModel', false)}>
+          {intl.formatMessage({ id: 'global.new' })}
+        </Tabs.Button>
+        <Tabs.Button id={QuestionnaireCreationTypeEnum.MODEL} onClick={() => setValue('isUsingModel', true)}>
+          {intl.formatMessage({ id: 'from_model' })}
+        </Tabs.Button>
+      </Tabs.ButtonList>
+      <Tabs.PanelList>
+        <Tabs.Panel>
+          <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
+        </Tabs.Panel>
+        <Tabs.Panel>
+          <FormControl name="questionnaireModel" control={control} isRequired={isUsingModel}>
+            <FormLabel
+              htmlFor="questionnaireModel"
+              label={intl.formatMessage({
+                id: 'global.questionnaire',
+              })}
+            />
+            <QuestionnaireListField name="questionnaireModel" control={control} onChange={onChange} />
+          </FormControl>
+          {questionnaireModel ? (
+            <QuestionnaireStepFormQuestionnaire key="model" model defaultLocale={defaultLocale} />
+          ) : null}
+        </Tabs.Panel>
+      </Tabs.PanelList>
+    </Tabs>
+  ) : (
+    <Box bg="gray.100" p={6} mb={6} borderRadius="accordion">
+      <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
+    </Box>
   )
 }
 

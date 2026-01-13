@@ -577,6 +577,8 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 color={CapUIAccordionColor.white}
                 defaultAccordion={[intl.formatMessage({ id: 'proposal-form' })]}
                 sx={{ summary: { pl: 0 } }}
+                allowMultiple
+                spacing={'md'}
               >
                 <Accordion.Item
                   id={intl.formatMessage({ id: 'proposal-form' })}

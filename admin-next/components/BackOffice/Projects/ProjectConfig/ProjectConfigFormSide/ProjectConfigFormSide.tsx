@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Accordion, CapUIAccordionSize } from '@cap-collectif/ui'
+import { Accordion, CapUIAccordionColor, CapUIAccordionSize } from '@cap-collectif/ui'
 import { ProjectConfigFormSide_query$key } from '@relay/ProjectConfigFormSide_query.graphql'
 import { ProjectConfigFormSide_project$key } from '@relay/ProjectConfigFormSide_project.graphql'
 import { graphql, useFragment } from 'react-relay'
@@ -45,7 +45,7 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
 
   return (
     <>
-      <Accordion allowMultiple size={CapUIAccordionSize.md} sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}>
+      <Accordion allowMultiple size={CapUIAccordionSize.md} color={CapUIAccordionColor.white}>
         <Accordion.Item id="publication" position="relative">
           <ProjectConfigFormPublication locales={locales} project={project} />
         </Accordion.Item>

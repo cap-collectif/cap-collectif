@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Accordion, CapUIIcon, Flex, FormLabel, Icon, Link, Box, Input } from '@cap-collectif/ui'
+import { Accordion, CapUIIcon, Flex, FormLabel, Icon, Link, Box, Input, CapUIFontSize, Text } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { ProjectConfigFormPublication_project$key } from '@relay/ProjectConfigFormPublication_project.graphql'
 import { useDisclosure } from '@liinkiing/react-hooks'
@@ -36,21 +36,23 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
 
   return (
     <>
-      <Flex color="blue.500" position="absolute" right={6} top={6}>
-        <Icon name={CapUIIcon.Eye} />
-        <Link
-          href={url ?? ''}
-          target="_blank"
-          ml={1}
-          fontWeight={600}
-          sx={{
-            textDecoration: 'none !important',
-          }}
-        >
-          {intl.formatMessage({ id: 'global.preview' })}
-        </Link>
-      </Flex>
-      <Accordion.Button>{intl.formatMessage({ id: 'global.publication' })}</Accordion.Button>
+      <Accordion.Button>
+        <Text>{intl.formatMessage({ id: 'global.publication' })}</Text>
+        <Flex fontSize={CapUIFontSize.BodyRegular} color="blue.500" position="absolute" right={6} top={6}>
+          <Icon name={CapUIIcon.Eye} />
+          <Link
+            href={url ?? ''}
+            target="_blank"
+            ml={1}
+            fontWeight={600}
+            sx={{
+              textDecoration: 'none !important',
+            }}
+          >
+            {intl.formatMessage({ id: 'global.preview' })}
+          </Link>
+        </Flex>
+      </Accordion.Button>
       <Accordion.Panel>
         <FormControl name="publishedAt" control={control}>
           <FormLabel label={intl.formatMessage({ id: 'global.updated.date' })} />

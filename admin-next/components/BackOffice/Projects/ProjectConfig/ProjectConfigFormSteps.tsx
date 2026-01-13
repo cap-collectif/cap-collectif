@@ -79,14 +79,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                   return (
                     // @ts-ignore https://github.com/cap-collectif/ui/issues/367
                     <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
-                      <ListCard.Item
-                        bg="white"
-                        mb={1}
-                        mt={1}
-                        pl={4}
-                        draggable
-                        width="100%"
-                      >
+                      <ListCard.Item mb={1} mt={1} pl={4} draggable>
                         <Flex direction="column">
                           <Text
                             color="gray.500"

@@ -469,6 +469,8 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
               color={CapUIAccordionColor.white}
               defaultAccordion={defaultOpenAccordion(step.subType as SelectionStepSubTypes)}
               allowMultiple
+              spacing="md"
+              sx={{ summary: { pl: 0 } }}
             >
               {step.subType === 'VOTE' && (
                 <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>

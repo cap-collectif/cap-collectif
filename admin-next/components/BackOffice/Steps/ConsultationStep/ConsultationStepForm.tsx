@@ -397,9 +397,19 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
           />
           <StepDurationInput />
 
-          <ConsultationStepConsultations query={query} />
-
-          <Accordion color={CapUIAccordionColor.white}>
+          <Accordion
+            color={CapUIAccordionColor.white}
+            defaultAccordion={['consultations']}
+            allowMultiple
+            sx={{ summary: { pl: 0 } }}
+            spacing="md"
+          >
+            <Accordion.Item id="consultations">
+              <Accordion.Button>{intl.formatMessage({ id: 'consultations' })}</Accordion.Button>
+              <Accordion.Panel>
+                <ConsultationStepConsultations query={query} />
+              </Accordion.Panel>
+            </Accordion.Item>
             <Accordion.Item
               id={intl.formatMessage({ id: 'required-infos-to-participate' })}
               onMouseEnter={() => {

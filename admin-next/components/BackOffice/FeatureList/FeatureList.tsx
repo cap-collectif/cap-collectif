@@ -61,8 +61,8 @@ const FeatureList: FC = () => {
         placeholder={intl.formatMessage({ id: 'global.menu.search' })}
       />
 
-      <Box bg="white" borderRadius="8px">
-        <Accordion defaultAccordion="general" allowMultiple>
+      <Box borderRadius="8px">
+        <Accordion defaultAccordion="general" allowMultiple color="white">
           {featureItemsFiltered.map(featureItem => (
             <Accordion.Item id={featureItem.id} key={featureItem.id}>
               <Accordion.Button>{intl.formatMessage({ id: featureItem.title })}</Accordion.Button>

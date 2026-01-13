@@ -95,6 +95,9 @@ graphql.config.json
 # VSCode History file
 .history
 .vscode
+# Shared VSCode settings not ignored
+!.vscode/tasks.json
+!.vscode/keybindings.json
 
 ## Shared VSCode settings not ignored
 !.vscode/tasks.json

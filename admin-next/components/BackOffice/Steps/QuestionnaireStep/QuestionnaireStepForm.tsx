@@ -328,12 +328,29 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             selectedLanguage={defaultLocale}
           />
           <StepDurationInput />
-          <QuestionnaireStepFormQuestionnaireTab
-            isEditing={isEditing}
-            defaultLocale={defaultLocale}
-            setHelpMessage={setHelpMessage}
-          />
-          <Accordion color={CapUIAccordionColor.white}>
+          <Accordion
+            color={CapUIAccordionColor.white}
+            defaultAccordion={[intl.formatMessage({ id: 'global.questionnaire' })]}
+            allowMultiple
+            spacing="md"
+            sx={{ summary: { pl: 0 } }}
+          >
+            <Accordion.Item
+              id={intl.formatMessage({ id: 'global.questionnaire' })}
+              onMouseEnter={() => {
+                setHelpMessage('step.create.questionnaire.helpText')
+              }}
+              onMouseLeave={() => setHelpMessage(null)}
+            >
+              <Accordion.Button>{intl.formatMessage({ id: 'global.questionnaire' })}</Accordion.Button>
+              <Accordion.Panel>
+                <QuestionnaireStepFormQuestionnaireTab
+                  isEditing={isEditing}
+                  defaultLocale={defaultLocale}
+                  setHelpMessage={setHelpMessage}
+                />
+              </Accordion.Panel>
+            </Accordion.Item>
             <Accordion.Item
               id={intl.formatMessage({ id: 'required-infos-to-participate' })}
               onMouseEnter={() => {
@@ -346,12 +363,17 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 <QuestionnaireStepRequirementsTabs formMethods={formMethods} questionnaireStep={step} />
               </Accordion.Panel>
             </Accordion.Item>
+            <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
+              <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
+              <Accordion.Panel>
+                <QuestionnaireStepOptionalParameters
+                  isEditing={isEditing}
+                  defaultLocale={defaultLocale}
+                  selectedLocale={defaultLocale}
+                />
+              </Accordion.Panel>
+            </Accordion.Item>
           </Accordion>
-          <QuestionnaireStepOptionalParameters
-            isEditing={isEditing}
-            defaultLocale={defaultLocale}
-            selectedLocale={defaultLocale}
-          />
           <PublicationInput fieldName="isEnabled" />
           <Flex mt={6}>
             <Button
