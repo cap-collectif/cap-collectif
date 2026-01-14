@@ -23,7 +23,10 @@ class SiteParameterRepository extends EntityRepository
         return 'SiteParameterRepository_getValue_resultcache_' . $locale . $keyname;
     }
 
-    public function getValuesIfEnabled(string $locale): array
+    /**
+     * @return SiteParameter[]
+     */
+    public function getValues(string $locale): array
     {
         return $this->getEntityManager()
             ->createQueryBuilder()
@@ -34,8 +37,6 @@ class SiteParameterRepository extends EntityRepository
             ->groupBy('p.keyname')
             ->setParameter('locale', $locale)
             ->getQuery()
-            ->useQueryCache(true)
-            ->enableResultCache(60, self::getValuesIfEnabledCacheKey($locale))
             ->getResult()
         ;
     }

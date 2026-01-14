@@ -73,8 +73,11 @@ class UpdateContactPageMutation implements MutationInterface
         }
 
         $this->em->flush();
+
         foreach ($updated as $dbKey) {
-            $this->cache->delete(SiteParameterRuntime::getCacheKey($dbKey, $this->locale));
+            $cacheKey = SiteParameterRuntime::getCacheKey($dbKey, $this->locale);
+
+            $this->cache->delete($cacheKey);
             $data = $this->resolver->getValue($dbKey, $this->locale);
             /** @var CacheItemInterface $cachedItem */
             $cachedItem = $this->cache->getItem(

@@ -28,16 +28,6 @@ const OpenDataEventsQuery = /* GraphQL */ `
             userType {
               name
             }
-            responses {
-              edges {
-                node {
-                  ... on ValueResponse {
-                    value
-                    formattedValue
-                  }
-                }
-              }
-            }
           }
         }
       }

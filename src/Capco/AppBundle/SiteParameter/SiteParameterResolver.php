@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\SiteParameter;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Toggle\Manager;
@@ -11,18 +12,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class SiteParameterResolver
 {
     protected $parameters;
-    protected $toggleManager;
-    protected $entityManager;
-    protected $requestStack;
 
     public function __construct(
-        Manager $toggleManager,
-        EntityManagerInterface $entityManager,
-        RequestStack $requestStack
+        private readonly Manager $toggleManager,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RequestStack $requestStack,
+        private readonly RedisCache $cache
     ) {
-        $this->toggleManager = $toggleManager;
-        $this->entityManager = $entityManager;
-        $this->requestStack = $requestStack;
     }
 
     public function getValue(string $key, ?string $locale = null, ?string $defaultValue = null)
@@ -47,12 +43,10 @@ class SiteParameterResolver
             $locale = $this->getDefaultLocale();
         }
 
-        if (!$this->parameters) {
-            $this->parameters = $this->entityManager
-                ->getRepository(SiteParameter::class)
-                ->getValuesIfEnabled($locale)
-            ;
-        }
+        $cacheKey = 'site_parameters_' . $locale;
+        $this->parameters = $this->cache->get($cacheKey, fn () => $this->entityManager
+            ->getRepository(SiteParameter::class)
+            ->getValues($locale));
 
         if (!isset($this->parameters[$key])) {
             return html_entity_decode($defaultValue ?? '');
