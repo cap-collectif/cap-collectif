@@ -36,9 +36,9 @@ type Props = {
   triggerRequirementsModal: (voteId: string) => void
 }
 const Header = styled.header`
-    border-bottom: 1px solid ${colors.lightGray};
-    padding-bottom: 30px;
-    background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.lightGray};
+  padding-bottom: 30px;
+  background-color: ${colors.white};
 
   > div {
     width: 100%;
@@ -47,11 +47,11 @@ const Header = styled.header`
     background-color: ${colors.white};
     padding-top: 25px;
 
-        > .default-header {
-            border-radius: 20px;
-            overflow: hidden;
-            height: 310px;
-            position: relative;
+    > .default-header {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 310px;
+      position: relative;
 
       > svg {
         position: absolute;
@@ -60,97 +60,97 @@ const Header = styled.header`
         z-index: 2;
       }
 
-            #background {
-                position: initial;
-                height: 100%;
-            }
-        }
-
-        @media (max-width: ${mediaQueryMobile.maxWidth}) {
-            padding-top: 0;
-
-            > .default-header {
-                border-radius: 0;
-            }
-
-            #background {
-                margin-left: -10%;
-            }
-        }
+      #background {
+        position: initial;
+        height: 100%;
+      }
     }
-`
-const Cover = styled(Image)`
-    width: 100%;
-    height: 310px;
-    border-radius: 6px;
-    object-fit: cover;
 
     @media (max-width: ${mediaQueryMobile.maxWidth}) {
+      padding-top: 0;
+
+      > .default-header {
         border-radius: 0;
+      }
+
+      #background {
+        margin-left: -10%;
+      }
     }
+  }
+`
+const Cover = styled(Image)`
+  width: 100%;
+  height: 310px;
+  border-radius: 6px;
+  object-fit: cover;
+
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    border-radius: 0;
+  }
 `
 const Informations = styled.div`
-    margin: 15px;
+  margin: 15px;
 
-    @media (min-width: ${bootstrapGrid.mdMin}px) {
-        max-width: 587px;
-        margin: 0;
-        margin-top: 15px;
-    }
+  @media (min-width: ${bootstrapGrid.mdMin}px) {
+    max-width: 587px;
+    margin: 0;
+    margin-top: 15px;
+  }
 
-    h1 {
-        font-size: 30px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        color: ${colors.darkText};
-        word-break: break-word;
-    }
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: ${colors.darkText};
+    word-break: break-word;
+  }
 `
 const About = styled.div`
-    margin-left: 5px;
+  margin-left: 5px;
 
-    div:first-child {
-        font-weight: 600;
-    }
+  div:first-child {
+    font-weight: 600;
+  }
 `
 const HeaderActions = styled.div`
-    z-index: 3;
-    position: absolute;
-    margin: 20px;
+  z-index: 3;
+  position: absolute;
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 910px;
+  max-width: calc(100% - 20px);
+
+  > a,
+  #side-analysis-open-button {
+    text-decoration: none;
+    background: #fff;
     display: flex;
-    justify-content: space-between;
-    width: 910px;
-    max-width: calc(100% - 20px);
+    align-items: center;
+    padding: 3px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+    border: none;
+    color: ${colors.primaryColor};
+    height: 29px;
+    span {
+      margin-left: 5px;
+    }
+  }
+
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    width: 200px;
+
+    span {
+      display: none;
+    }
 
     > a,
     #side-analysis-open-button {
-        text-decoration: none;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        padding: 3px 15px;
-        border-radius: 20px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-        border: none;
-        color: ${colors.primaryColor};
-        height: 29px;
-        span {
-            margin-left: 5px;
-        }
+      padding: 3px 10px;
     }
-
-    @media (max-width: ${mediaQueryMobile.maxWidth}) {
-        width: 200px;
-
-        span {
-            display: none;
-        }
-
-        > a,
-        #side-analysis-open-button {
-            padding: 3px 10px;
-        }
-    }
+  }
 `
 
 const AvatarPlaceholder = () => (
@@ -183,12 +183,12 @@ const BackUrl = ({
 
   const fullUrl = `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`
 
-    const { linkColor, linkColorHover } = useSelector((state: GlobalState) => {
-      return {
-        linkColor: state.default.parameters['color.link.default'],
-        linkColorHover: state.default.parameters['color.link.hover'],
-      }
-    })
+  const { linkColor, linkColorHover } = useSelector((state: GlobalState) => {
+    return {
+      linkColor: state.default.parameters['color.link.default'],
+      linkColorHover: state.default.parameters['color.link.hover'],
+    }
+  })
 
   const handleGoBack = () => {
     // !important: `fullUrl` won't work on mobile / mobile sized view
@@ -205,37 +205,42 @@ const BackUrl = ({
   }
 
   return (
-    <Link onClick={handleGoBack}
-          sx={{
-                cursor: 'pointer',
-                textDecorationColor: linkColor,
-                "&:hover": {
-                  textDecorationColor: linkColorHover,
-                  "svg": {
-                    color: linkColorHover
-                  },
-                  "p": {
-                    color: linkColorHover,
-                    textDecorationColor: linkColorHover,
-                  }
-                }
-             }}
+    <Link
+      onClick={handleGoBack}
+      sx={{
+        cursor: 'pointer',
+        textDecorationColor: linkColor,
+        '&:hover': {
+          textDecorationColor: linkColorHover,
+          svg: {
+            color: linkColorHover,
+          },
+          p: {
+            color: linkColorHover,
+            textDecorationColor: linkColorHover,
+          },
+        },
+      }}
     >
       <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={linkColor} />
-        {tradKeyToBack && <Text color={linkColor}><FormattedMessage id={tradKeyToBack} /></Text>}
+      {tradKeyToBack && (
+        <Text color={linkColor}>
+          <FormattedMessage id={tradKeyToBack} />
+        </Text>
+      )}
     </Link>
   )
 }
 
 export const ProposalPageHeader = ({
-   proposal,
-   step,
-   viewer,
-   hasAnalysingButton,
-   onAnalysisClick,
-   shouldDisplayPictures,
-   platformLocale,
-   triggerRequirementsModal
+  proposal,
+  step,
+  viewer,
+  hasAnalysingButton,
+  onAnalysisClick,
+  shouldDisplayPictures,
+  platformLocale,
+  triggerRequirementsModal,
 }: Props) => {
   const isMobile = useIsMobile()
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
@@ -243,52 +248,67 @@ export const ProposalPageHeader = ({
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
-  const { state } = useLocation<{ stepUrl?: string; stepId?: string, from?: string }>()
+  const { state } = useLocation<{ stepUrl?: string; stepId?: string; from?: string }>()
   const createdDate = (
-    <FormattedDate value={moment(date) as unknown as Date} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
+    <FormattedDate
+      value={moment(date) as unknown as Date}
+      day="numeric"
+      month="long"
+      year="numeric"
+      hour="numeric"
+      minute="numeric"
+    />
   )
   const modified = moment(proposal?.updatedAt).diff(proposal?.createdAt, 'seconds') > 1
 
   const getGoBackButtonLabel = () => {
     return proposal?.form.objectType === 'PROPOSAL' && isInterpellationContextFromProposal(proposal)
-    ? 'interpellation.back'
-    : proposal?.form.objectType === 'PROPOSAL'
-    ? 'proposal.back'
-    : proposal?.form.objectType === 'OPINION'
-    ? 'opinions-list'
-    : proposal?.form.objectType === 'QUESTION'
-    ? 'questions-list'
-    : null
+      ? 'interpellation.back'
+      : proposal?.form.objectType === 'PROPOSAL'
+      ? 'proposal.back'
+      : proposal?.form.objectType === 'OPINION'
+      ? 'opinions-list'
+      : proposal?.form.objectType === 'QUESTION'
+      ? 'questions-list'
+      : null
   }
 
   const proposalIllustrationInitialValues = {
     media: proposal?.media || null,
   }
 
-
   const getGoBackUrl = (): string => {
     const lastStepContainingProposalUrl = proposal?.lastStepContainingProposal?.url
+    const baseUrl = getBaseUrl()
 
     // 1- If the user comes from the "my votes" view, we redirect them to the last step the proposal is in
-    const comesFromVotesView = (state?.from && state.from?.includes('view=votes')) || (document?.referrer && document.referrer.includes('view=votes'))
+    const comesFromVotesView =
+      (state?.from && state.from?.includes('view=votes')) ||
+      (document?.referrer && document.referrer.includes('view=votes'))
     if (comesFromVotesView && lastStepContainingProposalUrl) {
-      return lastStepContainingProposalUrl.replace(getBaseUrl(), '') || ''
+      return lastStepContainingProposalUrl.replace(baseUrl, '') || ''
     }
 
     // 2- If the user comes from a step, the link should redirect there
     // this works for the new vote step ("vue IDF")
     if (state?.from) {
-      return state.from.replace(getBaseUrl(), '')
+      return state.from.replace(baseUrl, '')
     }
-    // this works for the old vote step
+
+    // 3- Check document.referrer, but only if it points to a valid step page
     if (document.referrer) {
-      return document.referrer.replace(getBaseUrl(), '') || ''
-
+      const referrerPath = document.referrer.replace(baseUrl, '')
+      const currentPath = window.location.pathname
+      // Only use referrer if it's not the current page
+      const isCurrentPage = referrerPath === currentPath || referrerPath === currentPath + window.location.search
+      if (!isCurrentPage && referrerPath) {
+        return referrerPath
+      }
     }
 
-    // 3- If the user comes from a link, we want to redirect to the last step the proposal is in
+    // 4- Fallback: redirect to the last step the proposal is in
     if (lastStepContainingProposalUrl) {
-      return lastStepContainingProposalUrl.replace(getBaseUrl(), '')
+      return lastStepContainingProposalUrl.replace(baseUrl, '')
     }
 
     return ''
@@ -355,7 +375,7 @@ export const ProposalPageHeader = ({
                 focusable={false}
               />
             )}
-            <CategoryBackground color={color} viewBox={isMobile? "0 0 75 75" :"0 0 230 75"} />
+            <CategoryBackground color={color} viewBox={isMobile ? '0 0 75 75' : '0 0 230 75'} />
           </div>
         )}
         <Informations>
@@ -383,7 +403,12 @@ export const ProposalPageHeader = ({
             </Flex>
           </Skeleton>
         </Informations>
-        <ProposalPageHeaderButtons proposal={proposal} step={step} viewer={viewer} triggerRequirementsModal={triggerRequirementsModal} />
+        <ProposalPageHeaderButtons
+          proposal={proposal}
+          step={step}
+          viewer={viewer}
+          triggerRequirementsModal={triggerRequirementsModal}
+        />
       </div>
     </Header>
   )
@@ -397,25 +422,33 @@ const mapStateToProps = (state: GlobalState) => ({
 const container = connect(mapStateToProps)(ProposalPageHeader)
 export default createFragmentContainer(container, {
   viewer: graphql`
-      fragment ProposalPageHeader_viewer on User
-      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
-          ...ProposalPageHeaderButtons_viewer @arguments(stepId: $stepId, hasVotableStep: $hasVotableStep)
-      }
+    fragment ProposalPageHeader_viewer on User
+    @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
+      ...ProposalPageHeaderButtons_viewer @arguments(stepId: $stepId, hasVotableStep: $hasVotableStep)
+    }
   `,
   step: graphql`
-      fragment ProposalPageHeader_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
-          ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-      }
+    fragment ProposalPageHeader_step on ProposalStep
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+      ...ProposalPageHeaderButtons_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    }
   `,
   proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, proposalRevisionsEnabled: { type: "Boolean!" }, token: { type: "String" }) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+      token: { type: "String" }
+    ) {
       id
       ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
       ...ProposalPageHeaderButtons_proposal
-        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled, token: $token)
+        @arguments(
+          isAuthenticated: $isAuthenticated
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
+          token: $token
+        )
       title
       media {
         url
