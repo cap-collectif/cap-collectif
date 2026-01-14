@@ -56,6 +56,13 @@ class ResetPasswordMutation implements MutationInterface
                 $user->getPlainPassword()
             );
             $user->setPassword($password);
+
+            if (!$user->isEmailConfirmed()) {
+                $user->setEnabled(true);
+                $user->setConfirmationToken(null);
+                $user->setConfirmedAccountAt(new \DateTime());
+            }
+
             $this->em->flush();
             $flashBag = $this->session->getFlashBag();
             if ($flashBag) {

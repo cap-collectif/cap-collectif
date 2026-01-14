@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
 class ResettingController extends AbstractController
 {
@@ -38,8 +39,8 @@ class ResettingController extends AbstractController
         private readonly UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
         private readonly UserPasswordEncoderInterface $userPasswordEncoder,
         private readonly TranslatorInterface $translator,
-        private readonly \Twig\Environment $twig,
-        private readonly LoginManagerInterface $loginManager
+        private readonly Environment $twig,
+        private readonly LoginManagerInterface $loginManager,
     ) {
     }
 
@@ -71,6 +72,13 @@ class ResettingController extends AbstractController
                 $user->getPlainPassword()
             );
             $user->setPassword($password);
+
+            if (!$user->isEmailConfirmed()) {
+                $user->setEnabled(true);
+                $user->setConfirmationToken(null);
+                $user->setConfirmedAccountAt(new \DateTime());
+            }
+
             $this->getDoctrine()
                 ->getManager()
                 ->flush()
