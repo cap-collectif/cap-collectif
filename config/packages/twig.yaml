@@ -107,3 +107,10 @@ services:
 
     Capco\AppBundle\Twig\SiteParameterRuntime:
         public: true
+
+    Capco\AppBundle\Twig\DevUsersRuntime:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $environment: '%kernel.environment%'
+        tags:
+            - { name: twig.runtime }

@@ -1,0 +1,161 @@
+{% if app.environment == 'dev' %}
+{% set devUsers = dev_users() %}
+{% if devUsers is not empty %}
+<style>
+    #development-banner {
+        background-color: #ffb559;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1051;
+        padding: 0.5em 1em;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    #development-banner button {
+        padding: 0.3em 0.8em;
+        color: #fff;
+        background-color: #0061dd;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background-color 0.15s;
+    }
+
+    #development-banner button:hover:not(:disabled) {
+        background-color: #004db3;
+    }
+
+    #development-banner button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    #development-banner button.close-btn {
+        padding: 0.2em 0.6em;
+        background-color: transparent;
+        color: #333;
+    }
+
+    #development-banner button.close-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    #development-banner button.logout-btn {
+        background-color: #dc3545;
+    }
+
+    #development-banner button.logout-btn:hover {
+        background-color: #b02a37;
+    }
+
+    #development-banner select {
+        padding: 0.3em 0.5em;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 13px;
+        max-width: 300px;
+    }
+
+    #development-banner .label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    #development-banner .current-user {
+        color: #333;
+        font-size: 13px;
+    }
+</style>
+<script>
+(() => {
+    const users = {{ devUsers|json_encode|raw }};
+    const userEntries = Object.entries(users);
+    let selectedUserKey = userEntries[0]?.[0];
+    const isLoggedIn = {{ app.user ? 'true' : 'false' }};
+    const currentUserEmail = {{ app.user ? ("'" ~ app.user.email ~ "'")|raw : 'null' }};
+
+    const banner = document.createElement('div');
+    banner.id = 'development-banner';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.textContent = '✕';
+    closeBtn.onclick = () => banner.remove();
+
+    const label = document.createElement('span');
+    label.className = 'label';
+    label.textContent = 'Local Dev';
+
+    if (isLoggedIn) {
+        const currentUserSpan = document.createElement('span');
+        currentUserSpan.className = 'current-user';
+        currentUserSpan.textContent = currentUserEmail;
+
+        const logoutBtn = document.createElement('button');
+        logoutBtn.className = 'logout-btn';
+        logoutBtn.textContent = 'Log out';
+        logoutBtn.onclick = () => {
+            window.location.href = '/logout';
+        };
+
+        banner.append(closeBtn, logoutBtn, currentUserSpan, label);
+    } else {
+        const loginBtn = document.createElement('button');
+        loginBtn.textContent = 'Log in';
+        loginBtn.onclick = async () => {
+            const { email, password } = users[selectedUserKey];
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+
+            try {
+                const response = await fetch('/login_check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: email, password }),
+                    credentials: 'same-origin'
+                });
+
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    throw new Error(`Status ${response.status}`);
+                }
+            } catch (error) {
+                alert(`Login failed: ${error.message}`);
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Log in';
+            }
+        };
+
+        const select = document.createElement('select');
+        for (const [key, { username, role, email }] of userEntries) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = `${username} (${role}) - ${email}`;
+            select.appendChild(option);
+        }
+        select.onchange = (e) => { selectedUserKey = e.target.value; };
+
+        banner.append(closeBtn, loginBtn, select, label);
+    }
+
+    const mount = () => {
+        const wrapper = document.querySelector('#app-wrapper');
+        wrapper?.prepend(banner);
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', mount);
+    } else {
+        mount();
+    }
+})();
+</script>
+{% endif %}
+{% endif %}
