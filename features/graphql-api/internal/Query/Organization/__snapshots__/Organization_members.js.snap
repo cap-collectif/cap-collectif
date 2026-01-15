@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Organization.Members GraphQL admin wants to get all members of an organization 1`] = `
+Object {
+  "organization": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
+              "username": "user101",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
+              "username": "user6",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "ADMIN",
+            "user": Object {
+              "username": "Dev null",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
+              "username": "Omar <3 Rem",
+            },
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+    "title": "Communauté de commune de Parthenay",
+  },
+}
+`;
+
+exports[`Internal|Organization.Members GraphQL anonymous wants to get all members of an organization 1`] = `
+Object {
+  "organization": Object {
+    "members": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "title": "Communauté de commune de Parthenay",
+  },
+}
+`;
+
+exports[`Internal|Organization.Members GraphQL user not organization admin wants to get all members of an organization 1`] = `
+Object {
+  "organization": Object {
+    "members": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "title": "Communauté de commune de Parthenay",
+  },
+}
+`;
