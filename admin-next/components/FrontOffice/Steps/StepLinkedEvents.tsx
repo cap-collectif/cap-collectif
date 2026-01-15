@@ -16,7 +16,7 @@ const FRAGMENT = graphql`
     eventsFuture: events(orderBy: { field: START_AT, direction: DESC }, isFuture: true) {
       totalCount
     }
-    eventsPast: events(isFuture: false) {
+    eventsPast: events(orderBy: { field: START_AT, direction: DESC }, isFuture: false) {
       totalCount
     }
   }
@@ -25,6 +25,9 @@ const FRAGMENT = graphql`
 export const StepLinkedEvents: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
+
+  if (undefined === step.eventsFuture || step.eventsPast || step.eventsWithoutFilters) return null
+
   const statusFilter = step.eventsFuture.totalCount > 0 ? 'theme.show.status.future' : 'finished'
   const [filter, setFilter] = useState(statusFilter)
   const totalCount =

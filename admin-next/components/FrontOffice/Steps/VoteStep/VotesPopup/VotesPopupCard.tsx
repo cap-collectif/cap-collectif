@@ -1,9 +1,10 @@
 import { Button, CapUIIcon, Card, CardContent, CardCoverPlaceholder, Flex, Icon, useTheme } from '@cap-collectif/ui'
 import { FC } from 'react'
 import VotesPopupCardRanking from './VotesPopupCardRanking'
-import { graphql, useFragment, useMutation } from 'react-relay'
+import { graphql, useFragment } from 'react-relay'
 import { VotesPopupCard_proposalStep$key } from '@relay/VotesPopupCard_proposalStep.graphql'
 import { VotesPopupCard_proposalVote$key } from '@relay/VotesPopupCard_proposalVote.graphql'
+import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
 
 interface Props {
   step: VotesPopupCard_proposalStep$key
@@ -29,59 +30,19 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const REMOVE_VOTE_MUTATION = graphql`
-  mutation VotesPopupCardRemoveVoteMutation($input: RemoveProposalVoteInput!) {
-    removeProposalVote(input: $input) {
-      step {
-        id
-        viewerVotes {
-          totalCount
-          edges {
-            node {
-              id
-            }
-          }
-        }
-      }
-      proposal {
-        id
-      }
-      previousVoteId
-    }
-  }
-`
-
 const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   const vote = useFragment(VOTE_FRAGMENT, voteKey)
   const step = useFragment(STEP_FRAGMENT, stepKey)
-  const [commitRemoveVote] = useMutation(REMOVE_VOTE_MUTATION)
 
   const { colors } = useTheme()
 
   const removeVote = () => {
-    const voteId = vote.id
-
-    commitRemoveVote({
-      variables: {
-        input: {
-          proposalId: vote.proposal.id,
-          stepId: step.id,
-        },
+    RemoveProposalVoteMutation.commit({
+      input: {
+        proposalId: vote.proposal.id,
+        stepId: step.id,
       },
-      optimisticUpdater: store => {
-        const stepRecord = store.get(step.id)
-        if (!stepRecord) return
-        const connection = stepRecord.getLinkedRecord('viewerVotes')
-        if (!connection) return
-        const edges = connection.getLinkedRecords('edges') || []
-        const newEdges = edges.filter(edge => edge?.getLinkedRecord('node')?.getDataID() !== voteId)
-        connection.setLinkedRecords(newEdges, 'edges')
-        const currentCount = connection.getValue('totalCount') as number
-        connection.setValue(currentCount - 1, 'totalCount')
-      },
-      updater: store => {
-        store.delete(voteId)
-      },
+      stepId: step.id,
     })
   }
 

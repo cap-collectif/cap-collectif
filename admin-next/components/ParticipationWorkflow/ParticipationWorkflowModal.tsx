@@ -6,36 +6,35 @@ import BirthdayRequirementModal from './BirthdayRequirementModal'
 import AddressRequirementModal from './AddressRequirementModal'
 import NamesRequirementModal from './NamesRequirementModal'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import { ParticipationWorkflowModalQuery } from '~relay/ParticipationWorkflowModalQuery.graphql'
-import { useSelector } from 'react-redux'
-import type { GlobalState } from '~/types'
+import { ParticipationWorkflowModalQuery } from '@relay/ParticipationWorkflowModalQuery.graphql'
 import CookieMonster from '@shared/utils/CookieMonster'
-import ContributionValidationModal from '~/components/ParticipationWorkflow/ContributionValidationModal'
-import CheckboxesRequirementModal from '~/components/ParticipationWorkflow/CheckboxesRequirementModal'
-import FranceConnectRequirementModal from '~/components/ParticipationWorkflow/FranceConnectRequirementModal'
-import CaptchaModal from '~/components/ParticipationWorkflow/CaptchaModal'
-import { ParticipationWorkflowContextProvider } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
-import ZipCodeRequirementModal from '~/components/ParticipationWorkflow/ZipCodeRequirementModal'
+import ContributionValidationModal from './ContributionValidationModal'
+import CheckboxesRequirementModal from './CheckboxesRequirementModal'
+import FranceConnectRequirementModal from './FranceConnectRequirementModal'
+import CaptchaModal from './CaptchaModal'
+import { ParticipationWorkflowContextProvider } from './ParticipationWorkflowContext'
+import ZipCodeRequirementModal from './ZipCodeRequirementModal'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AddressComplete } from '@cap-collectif/form'
-import EmailParticipantForm from '~/components/ParticipationWorkflow/EmailParticipantForm'
-import EmailParticipantCheckEmail from '~/components/ParticipationWorkflow/EmailParticipantCheckEmail'
-import LoginChoices from '~/components/ParticipationWorkflow/LoginChoices'
-import EmailAccountLoginForm from '~/components/ParticipationWorkflow/EmailAccountLoginForm'
-import EmailAccountLoginSSOForm from '~/components/ParticipationWorkflow/EmailAccountLoginSSOForm'
-import EmailMagicLinkForm from '~/components/ParticipationWorkflow/EmailMagicLinkForm'
-import EmailMagicLinkCheckEmail from '~/components/ParticipationWorkflow/EmailMagicLinkCheckEmail'
-import EmailParticipantCaptcha from '~/components/ParticipationWorkflow/EmailParticipantCaptcha'
-import EmailMagicLinkCaptcha from '~/components/ParticipationWorkflow/EmailMagicLinkCaptcha'
-import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
+import EmailParticipantForm from './EmailParticipantForm'
+import EmailParticipantCheckEmail from './EmailParticipantCheckEmail'
+import LoginChoices from './LoginChoices'
+import EmailAccountLoginForm from './EmailAccountLoginForm'
+import EmailAccountLoginSSOForm from './EmailAccountLoginSSOForm'
+import EmailMagicLinkForm from './EmailMagicLinkForm'
+import EmailMagicLinkCheckEmail from './EmailMagicLinkCheckEmail'
+import EmailParticipantCaptcha from './EmailParticipantCaptcha'
+import EmailMagicLinkCaptcha from './EmailMagicLinkCaptcha'
+import ModalSkeleton from './ModalSkeleton'
 import { useIntl } from 'react-intl'
-import ConsentInternalCommunicationEmailModal from '~/components/ParticipationWorkflow/ConsentInternalCommunicationEmailModal'
-import ConsentInternalCommunicationModal from '~/components/ParticipationWorkflow/ConsentInternalCommunicationModal'
+import ConsentInternalCommunicationEmailModal from './ConsentInternalCommunicationEmailModal'
+import ConsentInternalCommunicationModal from './ConsentInternalCommunicationModal'
 import { useEffect } from 'react'
-// import { onUnload } from '~/components/Reply/Form/ReplyForm'
-import IdentificationCodeRequirementModal from '~/components/ParticipationWorkflow/IdentificationCodeRequirementModal'
-import ConsentPrivacyPolicyRequirementModal from '~/components/ParticipationWorkflow/ConsentPrivacyPolicyRequirementModal'
+import { onUnload } from './utils/onUnload'
+import IdentificationCodeRequirementModal from './IdentificationCodeRequirementModal'
+import ConsentPrivacyPolicyRequirementModal from './ConsentPrivacyPolicyRequirementModal'
 import moment from 'moment'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type Props = {
   stepId: string
@@ -156,7 +155,8 @@ const getParticipantToken = (): string | null => {
 }
 
 const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId }) => {
-  const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
+  const { viewerSession } = useAppContext()
+  const isAuthenticated = !!viewerSession
   const participantToken = getParticipantToken()
   const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
     stepId,
@@ -175,14 +175,14 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
   const logo = siteImage?.media ?? null
 
   const contributionUrl = step?.url ?? '/'
-  const requirementsUrl = contribution?.requirementsUrl as string
+  const requirementsUrl = contribution?.__typename !== '%other' ? (contribution?.requirementsUrl as string) : ''
   const contributionTypeName = contribution?.__typename as string
 
   useEffect(() => {
     clearToasts()
 
     // dirty way to remove it like this but no other choice if we want to keep it in ReplyForm, it could be handled differently when reply form will be merged into workflow
-    // window.removeEventListener('beforeunload', onUnload)
+    window.removeEventListener('beforeunload', onUnload)
   }, [])
 
   const requirements = step?.requirements?.edges?.map(edge => edge.node).map(node => node) ?? []
@@ -290,7 +290,8 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     r => !['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename),
   )
 
-  const hasMetAllRequirements = filteredRequirements.length === 0 && contribution?.completionStatus === 'COMPLETED'
+  const completionStatus = contribution?.__typename !== '%other' ? contribution?.completionStatus : null
+  const hasMetAllRequirements = filteredRequirements.length === 0 && completionStatus === 'COMPLETED'
   const email = viewer?.email ?? participant?.email
   const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication
 

@@ -24,7 +24,7 @@ type Props = {
 }
 
 // eslint-disable-next-line react/display-name
-const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange, style, disabled = false }, ref) => {
+export const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange, style, disabled = false }, ref) => {
   const captcha = React.useRef(null)
   const turnstile_captcha = useFeatureFlag('turnstile_captcha')
 

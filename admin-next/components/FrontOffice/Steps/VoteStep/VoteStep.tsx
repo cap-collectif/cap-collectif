@@ -15,6 +15,7 @@ import { LeafletStyles } from 'src/app/styles'
 import { getOrderByArgs } from './utils'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 const QUERY = graphql`
   query VoteStepQuery(
@@ -26,8 +27,10 @@ const QUERY = graphql`
     $category: ID
     $district: ID
     $status: ID
+    $isAuthenticated: Boolean!
   ) {
     step: node(id: $stepId) {
+      id
       ... on ProposalStep {
         ...VoteStepWebLayout_proposalStep
           @arguments(
@@ -39,6 +42,7 @@ const QUERY = graphql`
             category: $category
             district: $district
             status: $status
+            isAuthenticated: $isAuthenticated
           )
       }
     }
@@ -46,6 +50,8 @@ const QUERY = graphql`
 `
 
 export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepId }) => {
+  const { viewerSession } = useAppContext()
+
   const [filters] = useQueryStates(
     {
       sort: parseAsString.withDefault('random'),
@@ -79,6 +85,7 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepI
         direction: 'ASC',
       },
     ],
+    isAuthenticated: viewerSession !== null,
     userType: effectiveFilters.userType === 'ALL' ? undefined : effectiveFilters.userType,
     theme: effectiveFilters.theme === 'ALL' ? undefined : effectiveFilters.theme,
     category: effectiveFilters.category === 'ALL' ? undefined : effectiveFilters.category,

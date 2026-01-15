@@ -11,7 +11,7 @@ import {
   Icon,
   Modal,
 } from '@cap-collectif/ui'
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepUserInfos_proposalStep$key } from '@relay/VoteStepUserInfos_proposalStep.graphql'
@@ -43,6 +43,13 @@ const FRAGMENT = graphql`
     votesHelpText
     viewerVotes {
       totalCount
+      edges {
+        node {
+          proposal {
+            estimation
+          }
+        }
+      }
     }
   }
 `
@@ -54,12 +61,15 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const [isVotePopupOpen, setIsVotePopupOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // Fallback to 'simple' but has to be changed later with the real step type
   const type = (step.voteType?.toLowerCase() as StepUserVotesType) ?? 'simple'
-  const proposalProgress = step.viewerVotes?.totalCount ?? 0
+
+  const currentBudget = step.viewerVotes.edges.reduce((acc, edge) => acc + edge.node.proposal.estimation, 0)
+  const proposalProgress = type == 'budget' ? currentBudget : step.viewerVotes?.totalCount ?? 0
   const proposalGoal = step.votesMin
   const proposalMax = step.votesLimit
 
-  const proposalLimit = proposalMax ?? proposalGoal
+  const proposalLimit = type == 'budget' ? step.budget : proposalMax ?? proposalGoal
   const isEnded = proposalProgress === proposalLimit
   const isValidated = proposalProgress === proposalGoal
 
@@ -109,7 +119,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   }
 
   const titleValue = () => (proposalGoal ? proposalGoal - proposalProgress : undefined)
-  const descriptionValue = useMemo(() => step.budget ?? proposalProgress, [step.budget, proposalProgress])
+  const descriptionValue = () => (step.budget !== null ? proposalLimit - currentBudget : proposalProgress)
 
   const targetProgress = (100 * proposalProgress) / proposalLimit
   const [animatedProgress, setAnimatedProgress] = useState(targetProgress)
@@ -158,11 +168,11 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
           <Box fontWeight={CapUIFontWeight.Semibold}>
             {intl.formatMessage({ id: `proposal.step.user.votes.infos.title.${titleKey()}` }, { n: titleValue() })}
           </Box>
-          {descriptionValue !== 0 && type === 'simple' && (
+          {descriptionValue() !== 0 && (
             <Box as="p">
               {intl.formatMessage(
                 { id: `proposal.step.user.votes.infos.desc.${descriptionKey()}` },
-                { n: descriptionValue },
+                { n: descriptionValue() },
               )}
             </Box>
           )}

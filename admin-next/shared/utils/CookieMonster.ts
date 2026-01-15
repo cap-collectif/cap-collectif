@@ -1,5 +1,47 @@
 /* eslint-disable */
 // @ts-nocheck
+import { legacyCookieClient } from './universalCookies'
+
+// Use global Cookies if available (set by frontend/js/app.ts), otherwise use legacyCookieClient
+const getCookies = () => {
+  if (typeof window !== 'undefined' && (window as any).Cookies) {
+    return (window as any).Cookies
+  }
+  if (typeof document !== 'undefined') {
+    return legacyCookieClient()
+  }
+  // SSR fallback - return no-op
+  return {
+    get: () => undefined,
+    set: () => {},
+    remove: () => {},
+    getJSON: () => undefined,
+  }
+}
+
+// Proxy object to lazily access cookies
+const Cookies = {
+  get: (key: string) => getCookies().get(key),
+  set: (key: string, value: string, options?: any) => getCookies().set(key, value, options),
+  remove: (key: string) => getCookies().remove?.(key) || getCookies().delete?.(key),
+  delete: (key: string) => getCookies().remove?.(key) || getCookies().delete?.(key),
+  getJSON: (key: string) => {
+    const cookies = getCookies()
+    if (cookies.getJSON) {
+      return cookies.getJSON(key)
+    }
+    const value = cookies.get(key)
+    if (value) {
+      try {
+        return JSON.parse(value)
+      } catch {
+        return value
+      }
+    }
+    return undefined
+  },
+}
+
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes'
 const DEBATE_ANONYMOUS_ARGUMENTS_NAME = 'CapcoAnonArguments'
 const REPLY_ANONYMOUS_NAME = 'CapcoAnonReply'
@@ -253,7 +295,7 @@ class CookieMonster {
   }
 
   getParticipantCookie = () => {
-    return Cookies.get(PARTICIPANT_NAME);
+    return Cookies.get(PARTICIPANT_NAME)
   }
 
   isDoNotTrackActive = () => {

@@ -13,7 +13,11 @@ type TemplateColumns = {
   desktop: string
 }
 
-type Props = { step: VoteStepProposalsList_proposalStep$key; templateColumns: TemplateColumns }
+type Props = {
+  step: VoteStepProposalsList_proposalStep$key;
+  templateColumns: TemplateColumns
+  triggerRequirementModal: (id: string) => void
+}
 
 const PROPOSALS_FRAGMENT = graphql`
   fragment VoteStepProposalsList_proposalStep on ProposalStep
@@ -28,8 +32,10 @@ const PROPOSALS_FRAGMENT = graphql`
     status: { type: "ID" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
+    isAuthenticated: { type: "Boolean!" }
   )
   @refetchable(queryName: "VoteStepWebLayoutQuery") {
+    id
     proposals(
       first: $count
       after: $cursor
@@ -46,18 +52,18 @@ const PROPOSALS_FRAGMENT = graphql`
         key: "ProposalsList_proposals"
         filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "geoBoundingBox"]
       ) {
-      __id
       edges {
         node {
           id
-          ...ProposalCard_proposal
+          ...ProposalCard_proposal @arguments(isAuthenticated: $isAuthenticated)
         }
       }
     }
+    ...ProposalCard_step @arguments(isAuthenticated: $isAuthenticated)
   }
 `
 
-export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, templateColumns }) => {
+export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, templateColumns, triggerRequirementModal }) => {
   const { data, refetch } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
 
   const [latlngBounds] = useQueryState('latlngBounds')
@@ -119,7 +125,14 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
             itemRefs.current[node.id] = el
           }}
         >
-          <ProposalCard proposal={node} primaryInfoTag="h2" minWidth="unset" active={node.id === selectedId} />
+          <ProposalCard
+            proposal={node}
+            step={data}
+            primaryInfoTag="h2"
+            minWidth="unset"
+            active={node.id === selectedId}
+            triggerRequirementModal={triggerRequirementModal}
+          />
         </Box>
       ))}
     </Grid>

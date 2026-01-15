@@ -2,9 +2,7 @@ import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
-import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
-import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import StepLinkedEvents from '../StepLinkedEvents'
@@ -12,6 +10,12 @@ import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
 import VoteStepMap from './Map/VoteStepMap'
 import VoteStepListHeader from './VoteStepListHeader'
 import VoteStepProposalsList from './VoteStepProposalsList'
+import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import { createPortal } from 'react-dom'
+import { Suspense } from 'react'
+import ModalSkeleton from '@components/ParticipationWorkflow/ModalSkeleton'
+import ParticipationWorkflowModal from '@components/ParticipationWorkflow/ParticipationWorkflowModal'
 
 type Props = {
   step: VoteStepWebLayout_proposalStep$key
@@ -29,7 +33,9 @@ const FRAGMENT = graphql`
     status: { type: "ID" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
+    isAuthenticated: { type: "Boolean!" }
   ) {
+    id
     __typename
     ...VoteStepProposalsList_proposalStep
       @arguments(
@@ -42,6 +48,7 @@ const FRAGMENT = graphql`
         district: $district
         status: $status
         geoBoundingBox: $geoBoundingBox
+        isAuthenticated: $isAuthenticated
       )
     ...VoteStepMap_proposalStep
       @arguments(
@@ -57,6 +64,7 @@ const FRAGMENT = graphql`
       )
     ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
+    id
     ...VoteStepMobileActions_proposalStep
     body
     open
@@ -86,13 +94,30 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
 
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
 
-  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
+  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(step.form?.isMapViewEnabled ? 1 : 0))
+  const [contributionId, setContributionId] = React.useState(null)
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
   const mapStickyPositionFromTop = step.votable ? 156 : 88
   // We add bottom padding, otherwise the map is fullsize minus its top position
   const mapHeight = `calc(100vh - ${pxToRem(mapStickyPositionFromTop + 24)})`
+
+  // TODO : when parcours dépôt is merged replace with <ParticipationWork /> abstraction
+  if (contributionId) {
+    return createPortal(
+      <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
+        <Suspense fallback={<ModalSkeleton />}>
+          <ParticipationWorkflowModal stepId={step.id} contributionId={contributionId} />
+        </Suspense>
+      </Box>,
+      document.body,
+    )
+  }
+
+  const triggerRequirementModal = (id: string) => {
+    setContributionId(id)
+  }
 
   return (
     <Box backgroundColor="neutral-gray.50">
@@ -132,7 +157,11 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                     </Box>
                   }
                 >
-                  <VoteStepProposalsList step={step} templateColumns={getTemplateColumns(!!isMapShown)} />
+                  <VoteStepProposalsList
+                    step={step}
+                    templateColumns={getTemplateColumns(!!isMapShown)}
+                    triggerRequirementModal={triggerRequirementModal}
+                  />
                 </React.Suspense>
               </Box>
             ) : null}
