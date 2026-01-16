@@ -186,16 +186,17 @@ export const CarrouselItem: FC<{
                 htmlFor={imageKey}
                 label={intl.formatMessage({ id: sectionType === 'carrousel' ? 'illustration' : 'image.header' })}
               >
-                {sectionType === 'carrouselHighlighted' ? (
-                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                ) : null}
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
+                  {intl.formatMessage({ id: 'global.optional' })}
+                </Text>
               </FormLabel>
               <FormGuideline>
                 {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png' })}{' '}
                 {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '1mo' })}
-                {intl.formatMessage({ id: 'specific-ratio' }, { ratio: '4:3' })}
+                {intl.formatMessage(
+                  { id: 'specific-ratio' },
+                  { ratio: sectionType === 'carrouselHighlighted' ? '4:3' : '3:1' },
+                )}
               </FormGuideline>
               <FieldInput
                 id={imageKey}
