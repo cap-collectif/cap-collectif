@@ -99,10 +99,6 @@ graphql.config.json
 !.vscode/tasks.json
 !.vscode/keybindings.json
 
-## Shared VSCode settings not ignored
-!.vscode/tasks.json
-!.vscode/keybindings.json
-
 # Sublime Text Project Manager
 *.sublime-project
 
@@ -132,6 +128,9 @@ nohup.out
 patch
 
 tsconfig.tsbuildinfo
+
+# claude local config
+.claude/settings.local.json
 
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
