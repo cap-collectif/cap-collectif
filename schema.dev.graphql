@@ -2546,6 +2546,9 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
   votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
+
+  """Enabled vote types for the step."""
+  voteTypes: [ProposalStepVoteTypeValue!]!
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
@@ -13779,6 +13782,9 @@ interface ProposalStep implements NodeSlug {
   votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
+
+  """Enabled vote types for the step."""
+  voteTypes: [ProposalStepVoteTypeValue!]!
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
@@ -13882,6 +13888,18 @@ enum ProposalStepVoteType {
   DISABLED
   SIMPLE
   BUDGET
+}
+
+"""Vote types enabled on a proposal step."""
+enum ProposalStepVoteTypeValue {
+  MAX
+  MIN
+  THRESHOLD
+  BUDGET
+  RANKING
+  SECRET_BALLOT
+  SIMPLE
+  DISABLED
 }
 
 """Possible values of a proposal's state."""
@@ -17125,6 +17143,9 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
   votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
+
+  """Enabled vote types for the step."""
+  voteTypes: [ProposalStepVoteTypeValue!]!
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int

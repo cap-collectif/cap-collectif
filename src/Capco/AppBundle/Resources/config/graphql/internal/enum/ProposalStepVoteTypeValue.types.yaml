@@ -1,0 +1,21 @@
+ProposalStepVoteTypeValue:
+    type: enum
+    config:
+        description: 'Vote types enabled on a proposal step.'
+        values:
+            MAX:
+                value: 'MAX'
+            MIN:
+                value: 'MIN'
+            THRESHOLD:
+                value: 'THRESHOLD'
+            BUDGET:
+                value: 'BUDGET'
+            RANKING:
+                value: 'RANKING'
+            SECRET_BALLOT:
+                value: 'SECRET_BALLOT'
+            SIMPLE:
+                value: 'SIMPLE'
+            DISABLED:
+                value: 'DISABLED'

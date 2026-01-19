@@ -20,6 +20,10 @@ ProposalStep:
                 type: 'Int'
             voteType:
                 type: 'ProposalStepVoteType!'
+            voteTypes:
+                type: '[ProposalStepVoteTypeValue!]!'
+                description: 'Enabled vote types for the step.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\ProposalStepVoteTypesResolver", value)'
             votable:
                 type: 'Boolean!'
             votesHelpText:
