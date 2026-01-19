@@ -57,6 +57,9 @@ class ExportHeaders
     public const EXPORT_PROPOSAL_ADDRESS_LAT = 'export_proposal_address_lat';
     public const EXPORT_PROPOSAL_ADDRESS_LNG = 'export_proposal_address_lng';
     public const EXPORT_PROPOSAL_DISTRICT_NAME = 'export_proposal_district_name';
+    public const EXPORT_USER_TOTAL_VOTES = 'export_user_total_votes';
+    public const EXPORT_USER_TOTAL_PROPOSALS = 'export_user_total_proposals';
+    public const EXPORT_USER_VOTES_PROPOSAL_IDS = 'user_votes_proposal_ids';
     public const EXPORT_PROPOSAL_ESTIMATION = 'export_proposal_estimation';
     public const EXPORT_PROPOSAL_ILLUSTRATION = 'export_proposal_illustration';
     public const EXPORT_PROPOSAL_LINK = 'export_proposal_link';

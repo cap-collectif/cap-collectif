@@ -22,4 +22,17 @@ class UserUrlResolver implements QueryInterface
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
+
+    public function getBySlug(string $slug): ?string
+    {
+        if ('' !== $slug) {
+            return null;
+        }
+
+        return $this->router->generate(
+            'capco_user_profile_show_all',
+            ['slug' => $slug],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+    }
 }

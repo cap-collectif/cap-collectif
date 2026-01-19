@@ -7,12 +7,11 @@ use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ProposalNewsCommentVote extends BaseNormalizer implements NormalizerInterface
+class ProposalNewsCommentVoteNormalizer extends BaseNormalizer implements NormalizerInterface
 {
     private const EXPORT_CONTRIBUTION_TYPE_NAME = 'export_contribution_type_proposal_news_comment_vote';
 
     public function __construct(
-        private readonly ProposalNormalizer $proposalNormalizer,
         TranslatorInterface $translator
     ) {
         parent::__construct($translator);
@@ -51,17 +50,8 @@ class ProposalNewsCommentVote extends BaseNormalizer implements NormalizerInterf
             ];
         }
 
-        $proposalNormalized = $this->proposalNormalizer->normalize(
-            $context['proposal'],
-            null,
-            [
-                'step' => $context['step'],
-                BaseNormalizer::EXPORT_VARIANT => $variant,
-                'questionsResponses' => $context['questionsResponses'],
-            ]
-        );
-        $proposalNormalized[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
+        $fullExportData[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
-        return $this->translateHeaders(array_merge((array) $proposalNormalized, $fullExportData), array_keys($context['questionsResponses']));
+        return $this->translateHeaders(array_merge($fullExportData, array_keys($context['questionsResponses'])));
     }
 }

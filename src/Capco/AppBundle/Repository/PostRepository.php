@@ -404,6 +404,24 @@ class PostRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @return iterable<Post>
+     */
+    public function findByProposal(Proposal $proposal): iterable
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->innerJoin('p.proposals', 'proposal')
+            ->where('proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+        ;
+
+        $posts = $qb->getQuery()->getResult();
+
+        foreach ($posts as $post) {
+            yield $post;
+        }
+    }
+
     protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

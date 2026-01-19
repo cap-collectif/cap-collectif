@@ -17,7 +17,6 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
     private const EXPORT_CONTRIBUTION_TYPE_NAME = 'export_contribution_type_proposal_vote';
 
     public function __construct(
-        private readonly ProposalNormalizer $proposalNormalizer,
         TranslatorInterface $translator
     ) {
         parent::__construct($translator);
@@ -58,17 +57,6 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
             $position = $object->getPosition();
         }
 
-        $proposalNormalized = $this->proposalNormalizer->normalize(
-            $object->getProposal(),
-            null,
-            [
-                'step' => $context['step'],
-                'questionsResponses' => $context['questionsResponses'],
-                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED,
-            ],
-        );
-        $proposalNormalized[self::EXPORT_PROPOSAL_VOTES_ID] = $object->getId();
-        $proposalNormalized[self::EXPORT_PROPOSAL_VOTES_RANKING] = null !== $position ? $position + 1 : null;
         if ($isFullExport) {
             $fullExportData = [
                 self::EXPORT_PROPOSAL_VOTES_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
@@ -85,8 +73,10 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
             ];
         }
 
-        $proposalNormalized[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
+        $fullExportData[self::EXPORT_PROPOSAL_VOTES_ID] = $object->getId();
+        $fullExportData[self::EXPORT_PROPOSAL_VOTES_RANKING] = null !== $position ? $position + 1 : null;
+        $fullExportData[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
-        return $this->translateHeaders(array_merge((array) $proposalNormalized, $fullExportData), array_keys($context['questionsResponses']));
+        return $this->translateHeaders(array_merge($fullExportData, array_keys($context['questionsResponses'])));
     }
 }

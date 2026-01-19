@@ -81,11 +81,12 @@ trait CommandTestTrait
     }
 
     /**
-     * @param array<int, string> $outputDirs
+     * @param array<int, string>          $outputDirs
+     * @param array<string,  int|string > $customOptions
      *
      * @return array<string, bool|string>
      */
-    private function executeCommand(string $name, array $outputDirs = [self::OUTPUT_DIRECTORY]): array
+    private function executeCommand(string $name, array $outputDirs = [self::OUTPUT_DIRECTORY], array $customOptions = []): array
     {
         $application = new Application(self::$kernel);
 
@@ -97,6 +98,7 @@ trait CommandTestTrait
             'command' => $command->getName(),
             '--delimiter' => ',',
             '--force' => InputOption::VALUE_NONE,
+            ...$customOptions,
         ];
 
         $commandTester->execute($options);

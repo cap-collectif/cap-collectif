@@ -12,7 +12,6 @@ class ProposalCommentNormalizer extends BaseNormalizer implements NormalizerInte
     private const EXPORT_CONTRIBUTION_TYPE_NAME = 'export_contribution_type_proposal_comment';
 
     public function __construct(
-        private readonly ProposalNormalizer $proposalNormalizer,
         TranslatorInterface $translator
     ) {
         parent::__construct($translator);
@@ -57,18 +56,8 @@ class ProposalCommentNormalizer extends BaseNormalizer implements NormalizerInte
             ];
         }
 
-        $proposal = $object->getProposal();
-        $proposalNormalized = $this->proposalNormalizer->normalize(
-            $proposal,
-            null,
-            [
-                'step' => $context['step'],
-                BaseNormalizer::EXPORT_VARIANT => $variant,
-                'questionsResponses' => $context['questionsResponses'],
-            ]
-        );
-        $proposalNormalized[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
+        $fullExportData[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
-        return $this->translateHeaders(array_merge((array) $proposalNormalized, $fullExportData), array_keys($context['questionsResponses']));
+        return $this->translateHeaders($fullExportData, array_keys($context['questionsResponses']));
     }
 }

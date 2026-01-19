@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
@@ -99,53 +100,6 @@ class ProposalRepository extends EntityRepository
             ->enableResultCache(60, self::getOneBySlugCacheKey($slug))
             ->getOneOrNullResult()
         ;
-    }
-
-    /**
-     * @param class-string<CollectStep|SelectionStep> $collectStepOrSelectionStep
-     *
-     * @return Proposal[]
-     */
-    public function getProposalsByCollectStepOrSelectionStep(
-        string $stepId,
-        string $collectStepOrSelectionStep,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
-        $qb = $this->createQueryBuilder('p')
-            ->select(null === $limit && null === $offset ? 'p.id' : 'p')
-        ;
-
-        switch ($collectStepOrSelectionStep) {
-            case CollectStep::class:
-                $qb->innerJoin('p.proposalForm', 'pf')
-                    ->innerJoin('pf.step', 's')
-                    ->andWhere('s.id = :stepId')
-                    ->setParameter('stepId', $stepId)
-                ;
-
-                break;
-
-            case SelectionStep::class:
-                $qb->innerJoin('p.selections', 'selections')
-                    ->innerJoin('selections.selectionStep', 'ss')
-                    ->andWhere('ss.id = :stepId')
-                    ->setParameter('stepId', $stepId)
-                ;
-
-                break;
-
-            default:
-                throw new \InvalidArgumentException('Invalid step type');
-        }
-
-        if (null !== $limit && null !== $offset) {
-            $qb->setFirstResult($offset)
-                ->setMaxResults($limit)
-            ;
-        }
-
-        return (null === $limit && null === $offset) ? array_column($qb->getQuery()->getScalarResult(), 'id') : $qb->getQuery()->getResult();
     }
 
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
@@ -919,6 +873,30 @@ class ProposalRepository extends EntityRepository
             || $this->hasNewProposalComment($step, $proposalsIds, $mostRecentFileModificationDate);
     }
 
+    /**
+     * @return iterable<Proposal>
+     */
+    public function getProposalsByProposalStep(ProposalStepInterface $step): iterable
+    {
+        $qb = $this->getProposalByProposalStepQueryBuilder($step);
+
+        return $qb
+            ->getQuery()
+            ->toIterable()
+        ;
+    }
+
+    public function countProposalsByProposalStep(ProposalStepInterface $step): int
+    {
+        $qb = $this->getProposalByProposalStepQueryBuilder($step);
+        $qb->select('COUNT(p)');
+
+        return (int) $qb
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -936,6 +914,25 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
         ;
+    }
+
+    private function getProposalByProposalStepQueryBuilder(ProposalStepInterface $step): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($step instanceof SelectionStep) {
+            $qb->innerJoin('CapcoAppBundle:Selection', 's', 'WITH', 's.proposal = p.id')
+                ->where('s.selectionStep = :step')
+            ;
+        } elseif ($step instanceof CollectStep) {
+            $qb->innerJoin('p.proposalForm', 'pf')
+                ->where('pf.step = :step')
+            ;
+        }
+
+        $qb->setParameter('step', $step);
+
+        return $qb;
     }
 
     // This return the query used to retrieve all the proposals of an author the logged user can see.

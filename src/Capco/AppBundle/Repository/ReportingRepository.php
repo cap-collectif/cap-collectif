@@ -262,4 +262,30 @@ class ReportingRepository extends EntityRepository
             ->getSingleScalarResult()
         ;
     }
+
+    /**
+     * @return iterable<Reporting>
+     */
+    public function findByProposal(Proposal $proposal): iterable
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+        ;
+
+        return $qb->getQuery()->toIterable();
+    }
+
+    /**
+     * @return iterable<Reporting>
+     */
+    public function findByComment(Comment $comment): iterable
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.Comment = :comment')
+            ->setParameter('comment', $comment)
+        ;
+
+        return $qb->getQuery()->toIterable();
+    }
 }

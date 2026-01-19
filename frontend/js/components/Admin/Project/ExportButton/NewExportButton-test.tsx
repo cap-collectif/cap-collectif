@@ -5,7 +5,7 @@ import NewExportButton from './NewExportButton'
 
 describe('<NewExportButton/>', () => {
   const defaultProps = {
-    onChange: jest.fn(),
+    onChange: jest.fn().mockResolvedValue(undefined),
     linkHelp: 'http://help.com',
     disabled: false,
     exportableSteps: [

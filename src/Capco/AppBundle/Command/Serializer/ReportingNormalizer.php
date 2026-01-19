@@ -14,7 +14,6 @@ class ReportingNormalizer extends BaseNormalizer implements NormalizerInterface,
 
     public function __construct(
         TranslatorInterface $translator,
-        private readonly ProposalNormalizer $proposalNormalizer
     ) {
         parent::__construct($translator);
     }
@@ -53,17 +52,9 @@ class ReportingNormalizer extends BaseNormalizer implements NormalizerInterface,
                 self::EXPORT_PROPOSAL_REPORTINGS_AUTHOR_USER_TYPE_NAME => $author?->getUserType()?->getName(),
             ];
         }
-        $proposalNormalized = $this->proposalNormalizer->normalize(
-            $object->getProposal(),
-            null,
-            [
-                'step' => $context['step'],
-                BaseNormalizer::EXPORT_VARIANT => $variant,
-                'questionsResponses' => $context['questionsResponses'],
-            ]
-        );
-        $proposalNormalized[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
-        return $this->translateHeaders(array_merge((array) $proposalNormalized, $fullExportData), array_keys($context['questionsResponses']));
+        $fullExportData[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
+
+        return $this->translateHeaders(array_merge($fullExportData, array_keys($context['questionsResponses'])));
     }
 }

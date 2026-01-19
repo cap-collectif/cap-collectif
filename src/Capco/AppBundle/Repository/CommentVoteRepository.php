@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -77,5 +78,20 @@ class CommentVoteRepository extends EntityRepository
             ->andWhere('c.published = true')
             ->setParameter(':voter', $voter)
         ;
+    }
+
+    /**
+     * @return iterable<CommentVote>
+     */
+    public function findByProposal(Proposal $proposal): iterable
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->join('CapcoAppBundle:ProposalComment', 'c', 'WITH', 'v.comment = c')
+            ->join('CapcoAppBundle:Proposal', 'p', 'WITH', 'c.proposal = p')
+            ->where('p = :proposal')
+            ->setParameter('proposal', $proposal)
+        ;
+
+        return $qb->getQuery()->toIterable();
     }
 }

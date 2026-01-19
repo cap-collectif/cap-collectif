@@ -8,7 +8,7 @@ import { ButtonInformation } from './ExportButton.style'
 import { Button, CapUIIcon, Flex, Menu, Text } from '@cap-collectif/ui'
 
 type Props = {
-  onChange: (newValue: string | string[]) => void
+  onChange: (newValue: string | string[]) => Promise<void>
   linkHelp: string
   disabled?: boolean
   exportableSteps: ReadonlyArray<
@@ -33,11 +33,26 @@ const CustomOptionItem = styled(Menu.OptionItem)`
 
 const NewExportButton = ({ onChange, linkHelp, exportableSteps, disabled }: Props) => {
   const intl = useIntl()
+  const [isLoading, setIsLoading] = React.useState(false)
+  const handleChange = async (newValue: string | string[]) => {
+    setIsLoading(true)
+    try {
+      await onChange(newValue)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   return (
     <Menu
       placement="bottom-start"
       disclosure={
-        <Button disabled={disabled} rightIcon={CapUIIcon.ArrowDownO} variantSize="small" variant="primary">
+        <Button
+          disabled={disabled}
+          isLoading={isLoading}
+          rightIcon={CapUIIcon.ArrowDownO}
+          variantSize="small"
+          variant="primary"
+        >
           {intl.formatMessage({
             id: 'global.export',
           })}
@@ -46,7 +61,7 @@ const NewExportButton = ({ onChange, linkHelp, exportableSteps, disabled }: Prop
     >
       <Menu.List mt={0} maxWidth={300}>
         <Menu.OptionGroup
-          onChange={onChange}
+          onChange={handleChange}
           type="radio"
           uppercase={false}
           titleBackgroundColor={colors.paleGrey}

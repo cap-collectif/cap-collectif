@@ -70,6 +70,7 @@ import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminPr
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { colorsData } from '~/utils/colors'
+import downloadCSV from '~/components/Utils/downloadCSV'
 import {
   Button,
   CapUIIcon,
@@ -1041,9 +1042,9 @@ export const ProjectAdminProposals = ({
             {viewerIsAdmin && project.exportableSteps && (
               <NewExportButton
                 disabled={!hasProposals}
-                onChange={(stepSlug: string | string[]) => {
+                onChange={async (stepSlug: string | string[]) => {
                   if (typeof stepSlug === 'string') {
-                    window.open(`/projects/${project.slug}/step/${stepSlug ?? ''}/download`, '_blank')
+                    await downloadCSV(`/projects/${project.slug}/step/${stepSlug}/download`, intl)
                   }
                 }}
                 exportableSteps={project.exportableSteps}

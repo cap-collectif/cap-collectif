@@ -15,7 +15,6 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
     private const EXPORT_CONTRIBUTION_TYPE_NAME = 'export_contribution_type_proposal_news';
 
     public function __construct(
-        private readonly ProposalNormalizer $proposalNormalizer,
         TranslatorInterface $translator
     ) {
         parent::__construct($translator);
@@ -39,6 +38,7 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
 
         $variant = BaseNormalizer::getVariantFromContext($context);
         $isFullExport = ExportVariantsEnum::isFull($variant);
+        $proposalId = $context['proposalId'];
 
         /** @var Post $object */
         $postAuthors = $object->getAuthors();
@@ -68,7 +68,7 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
         /** @var Proposal $proposal */
         $proposal = $object
             ->getProposals()
-            ->filter(fn ($proposal) => $proposal->getId() === $object->proposalId)
+            ->filter(fn ($proposal) => $proposal->getId() === $proposalId)
             ->first()
         ;
 
@@ -95,17 +95,8 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
             ];
         }
 
-        $proposalNormalized = $this->proposalNormalizer->normalize(
-            $context['proposal'],
-            null,
-            [
-                'step' => $context['step'],
-                BaseNormalizer::EXPORT_VARIANT => $variant,
-                'questionsResponses' => $context['questionsResponses'],
-            ]
-        );
-        $proposalNormalized[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
+        $fullExportData[self::EXPORT_CONTRIBUTION_TYPE] = $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME);
 
-        return $this->translateHeaders(array_merge((array) $proposalNormalized, $fullExportData), array_keys($context['questionsResponses']));
+        return $this->translateHeaders(array_merge($fullExportData, array_keys($context['questionsResponses'])));
     }
 }

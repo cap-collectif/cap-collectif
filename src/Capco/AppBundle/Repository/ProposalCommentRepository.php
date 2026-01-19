@@ -170,6 +170,16 @@ class ProposalCommentRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return iterable<ProposalComment>
+     */
+    public function findByProposal(Proposal $proposal): iterable
+    {
+        $qb = $this->getByCommentableQueryBuilder(commentable: $proposal, excludeAnswers: false, viewer: null);
+
+        return $qb->getQuery()->toIterable();
+    }
+
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
         return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');

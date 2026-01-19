@@ -860,6 +860,103 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return iterable<array<string, mixed>>
+     */
+    public function exportVotesByProposalAndStep(SelectionStep $step, Proposal $proposal): iterable
+    {
+        $sql = <<<'SQL'
+                        select v.created_at, v.publishedAt, v.published, v.is_accounted, v.private, v.id vote_id, v.position
+                           ,(IFNULL(u.id, participant.id)) author_id,
+                            (IFNULL(u.username, participant.username)) author_username,
+                            (IFNULL(u.email, participant.email)) author_email,
+                            (IFNULL(u.confirmation_token, participant.confirmation_token)) author_email_confirmed,
+                            (IFNULL(u.consent_internal_communication, participant.consent_internal_communication)) author_consent_internal_communication,
+                            (IFNULL(u.phone, participant.phone)) author_phone,
+                            (IFNULL(u.phone_confirmed, participant.phone_confirmed)) author_phone_confirmed,
+                            (IFNULL(u.firstname, participant.firstname)) author_firstname,
+                            (IFNULL(u.lastname, participant.lastname)) author_lastname,
+                            (IFNULL(u.date_of_birth, participant.date_of_birth)) author_date_of_birth,
+                            (IFNULL(u.slug, '')) author_slug,
+                            (IFNULL(u.zip_code, participant.zip_code)) author_zip_code,
+                            (IFNULL(JSON_EXTRACT(u.postal_address, '$[0].formatted_address'), JSON_EXTRACT(participant.postal_address, '$[0].formatted_address'))) author_postal_address,
+                            (IFNULL(u.city, '')) author_city,
+                            (IFNULL(u.user_identification_code, '')) author_identification_code,
+                            u.user_type_id,
+                           user_type_translation.name user_type_name
+                            from votes v
+                            join proposal p on v.proposal_id = p.id
+                            left join fos_user u on v.voter_id = u.id
+                            left join user_type_translation on user_type_translation.translatable_id = u.user_type_id and user_type_translation.locale = u.locale
+                            left join participant on v.participant_id = participant.id
+                            where v.is_accounted = 1 and v.published = 1 and p.id = :proposal and v.selection_step_id = :stepId
+            SQL;
+
+        $connection = $this->_em->getConnection();
+
+        $stmt = $connection->executeQuery($sql, ['proposal' => $proposal->getId(), 'stepId' => $step->getId()]);
+
+        $rows = $stmt->fetchAllAssociative();
+
+        foreach ($rows as $row) {
+            yield $row;
+        }
+    }
+
+    /**
+     * Get aggregated statistics (vote counts and proposal counts) per user for a SelectionStep.
+     *
+     * @return array{votes: array<string, int>, proposals: array<string, int>}
+     */
+    public function getUserStatsForStep(SelectionStep $step): array
+    {
+        $connection = $this->_em->getConnection();
+
+        // Only count votes if voting is enabled on this step
+        $votesMap = [];
+        if ($step->isVotable()) {
+            $votesSql = <<<'SQL'
+                    SELECT
+                        IFNULL(v.voter_id, v.participant_id) as user_id,
+                        COUNT(*) as total_votes
+                    FROM votes v
+                    WHERE v.selection_step_id = :step_id
+                      AND v.is_accounted = 1
+                      AND v.published = 1
+                    GROUP BY IFNULL(v.voter_id, v.participant_id)
+                SQL;
+
+            $votesResult = $connection->executeQuery($votesSql, ['step_id' => $step->getId()])->fetchAllAssociative();
+            foreach ($votesResult as $row) {
+                $votesMap[(string) $row['user_id']] = (int) $row['total_votes'];
+            }
+        }
+
+        // Count proposals per user for this step
+        $proposalsSql = <<<'SQL'
+                SELECT
+                    p.author_id as user_id,
+                    COUNT(*) as total_proposals
+                FROM proposal p
+                INNER JOIN selection s ON s.proposal_id = p.id
+                WHERE s.selection_step_id = :step_id
+                  AND p.deleted_at IS NULL
+                  AND p.published = 1
+                GROUP BY p.author_id
+            SQL;
+
+        $proposalsResult = $connection->executeQuery($proposalsSql, ['step_id' => $step->getId()])->fetchAllAssociative();
+        $proposalsMap = [];
+        foreach ($proposalsResult as $row) {
+            $proposalsMap[(string) $row['user_id']] = (int) $row['total_proposals'];
+        }
+
+        return [
+            'votes' => $votesMap,
+            'proposals' => $proposalsMap,
+        ];
+    }
+
     private function findByParticipantQueryBuilder(
         Participant $participant,
         ?Mediator $mediator = null,

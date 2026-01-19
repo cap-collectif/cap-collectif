@@ -100,6 +100,24 @@ class PostCommentRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return iterable<PostComment>
+     */
+    public function findByPost(Post $post): iterable
+    {
+        $qb = $this->createQueryBuilder('pc')
+            ->join('pc.post', 'p')
+            ->where('p = :post')
+            ->setParameter('post', $post)
+        ;
+
+        $postComments = $qb->getQuery()->getResult();
+
+        foreach ($postComments as $postComment) {
+            yield $postComment;
+        }
+    }
+
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
         return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');

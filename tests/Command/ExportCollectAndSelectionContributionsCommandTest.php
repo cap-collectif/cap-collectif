@@ -3,6 +3,7 @@
 namespace Capco\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -81,8 +82,12 @@ class ExportCollectAndSelectionContributionsCommandTest extends KernelTestCase
         }
 
         $actualOutputs = $this->executeCommand(
-            self::CAPCO_EXPORT_COLLECT_SELECTION_CONTRIBUTIONS,
-            array_values(self::OUTPUT_DIRECTORIES_STEP_TYPE)
+            name: self::CAPCO_EXPORT_COLLECT_SELECTION_CONTRIBUTIONS,
+            outputDirs: array_values(self::OUTPUT_DIRECTORIES_STEP_TYPE),
+            customOptions: [
+                '--selectionSteps' => InputOption::VALUE_NONE,
+                '--collectSteps' => InputOption::VALUE_NONE,
+            ]
         );
 
         $completedFileNames = $this->getCompletedFileNames(self::FULL_SUFFIX, array_merge(...array_values(self::EXPECTED_FILE_NAMES)));
