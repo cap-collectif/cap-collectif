@@ -759,11 +759,19 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         $selectionSteps = [];
         $collectSteps = [];
         if ($input->getOption('selectionSteps')) {
-            $selectionSteps = $this->selectionStepRepository->findAll();
+            foreach ($this->selectionStepRepository->findAll() as $step) {
+                try {
+                    if ($step->getProposalForm()) {
+                        $selectionSteps[] = $step;
+                    }
+                } catch (\RuntimeException) {
+                    continue;
+                }
+            }
         }
 
         if ($input->getOption('collectSteps')) {
-            $collectSteps = $this->collectStepRepository->findAll();
+            $collectSteps = $this->collectStepRepository->findWithProposalForm();
         }
 
         return [...$selectionSteps, ...$collectSteps];

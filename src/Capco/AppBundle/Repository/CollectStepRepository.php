@@ -110,6 +110,18 @@ class CollectStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<CollectStep>
+     */
+    public function findWithProposalForm(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->join('s.proposalForm', 'f')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')
