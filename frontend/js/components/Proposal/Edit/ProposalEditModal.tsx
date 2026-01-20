@@ -18,7 +18,6 @@ import { ProposalRevisionItem } from '~/shared/ProposalRevision/Modal/ProposalRe
 import { pxToRem } from '~/utils/styles/mixins'
 import ResetCss from '~/utils/ResetCss'
 import Collapsable from '~ui/Collapsable'
-import { mediaQueryMobile } from '~/utils/sizes'
 import colors from '~/styles/modules/colors'
 import ProposalOtherPanelsModal from '../Create/ProposalOtherPanelsModal'
 import ProposalErrorModal from '~/components/Proposal/Create/ProposalErrorModal'
@@ -74,11 +73,11 @@ const ProposalRevisionsList = styled.ul`
       padding: 0;
     }
     .body-collapse {
-      width: 840px;
+      width: 100%;
+      max-width: 840px;
       margin-top: 10px;
-      @media (max-width: ${mediaQueryMobile.maxWidth}) {
-        width: auto;
-      }
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
   }
   & > li + li {

@@ -55,7 +55,7 @@ const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div
       color: #fff !important;
       font-size: 14px;
       text-decoration: ${checked ? 'underline' : 'none'};
-      padding: ${asPreview ? '4px 24px' : '8px 24px'};
+      padding: ${asPreview ? '4px 14px' : '8px 14px'};
     }
 
     input {
