@@ -1,30 +1,30 @@
+import { useDisclosure, useResize } from '@liinkiing/react-hooks'
+import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import debounce from 'debounce-promise'
 import React, { useState } from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
+import { Glyphicon, InputGroup } from 'react-bootstrap'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import { Glyphicon, InputGroup } from 'react-bootstrap'
-import { useDisclosure, useResize } from '@liinkiing/react-hooks'
-import debounce from 'debounce-promise'
-import { reduxForm, formValueSelector, change, Field, SubmissionError } from 'redux-form'
-import type { ProposalAssessmentFormPanel_proposal$data } from '~relay/ProposalAssessmentFormPanel_proposal.graphql'
-import colors from '~/utils/colors'
-import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import type { GlobalState, Dispatch } from '~/types'
-import { bootstrapGrid } from '~/utils/sizes'
+import { createFragmentContainer, graphql } from 'react-relay'
+import { change, Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form'
 import component from '~/components/Form/Field'
-import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
+import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel'
 import { TYPE_FORM } from '~/constants/FormConstants'
-import { Validation, ValidateButton, AnalysisForm } from './ProposalAnalysisFormPanel'
 import ChangeProposalAssessmentMutation from '~/mutations/ChangeProposalAssessmentMutation'
 import EvaluateProposalAssessmentMutation from '~/mutations/EvaluateProposalAssessmentMutation'
-import type { SubmittingState } from './ProposalFormSwitcher'
-import './ProposalFormSwitcher'
 import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision'
 import { RevisionButton } from '~/shared/ProposalRevision/styles'
-import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel'
+import type { Dispatch, GlobalState } from '~/types'
+import colors from '~/utils/colors'
+import { bootstrapGrid } from '~/utils/sizes'
+import type { ProposalAssessmentFormPanel_proposal$data } from '~relay/ProposalAssessmentFormPanel_proposal.graphql'
+import { AnalysisForm, ValidateButton, Validation } from './ProposalAnalysisFormPanel'
 import { getStatus } from './ProposalAnalysisPanel'
-import { IN_PROGRESS_KEY, TODO_KEY, getLabelData } from './ProposalAnalysisUserRow'
+import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
+import { getLabelData, IN_PROGRESS_KEY, TODO_KEY } from './ProposalAnalysisUserRow'
 import ProposalAssessmentConfirmModal from './ProposalAssessmentConfirmModal'
+import './ProposalFormSwitcher'
+import type { SubmittingState } from './ProposalFormSwitcher'
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE'
 
@@ -35,7 +35,6 @@ type Props = ReduxFormFormProps & {
   proposalRevisionsEnabled: boolean
   onValidate: (arg0: SubmittingState, arg1: boolean | null | undefined) => void
   costEstimationEnabled: boolean
-  officialResponse: string | null | undefined
 }
 export type FormValues = {
   body: string
@@ -98,7 +97,6 @@ export const ProposalAssessmentFormPanel = ({
   costEstimationEnabled,
   disabled,
   proposal,
-  officialResponse,
   proposalRevisionsEnabled,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus)
@@ -175,6 +173,7 @@ export const ProposalAssessmentFormPanel = ({
             component={component}
           />
         </AnalysisForm>
+        {/* @ts-ignore: legacy, won't be fixed */}
         <Validation isLarge={isLarge}>
           <Field
             onChange={() => setStatus('FAVOURABLE')}
@@ -217,7 +216,7 @@ export const ProposalAssessmentFormPanel = ({
           </Field>
           <ValidateButton
             id="validate-proposal-assessment-button"
-            disabled={disabled || (!status && !initialStatus) || !officialResponse}
+            disabled={disabled || (!status && !initialStatus)}
             type="button"
             onClick={() => {
               if (hasOngoingAnalysis) {
