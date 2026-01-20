@@ -1478,7 +1478,7 @@ class ApplicationContext extends UserContext
      */
     public function selectOptionAccessible(string $select, string $option): void
     {
-        $selector = "{$select} .select__option button[value={$option}]";
+        $selector = "{$select} .select__option button[value='{$option}']";
         $this->iClickElement($selector);
     }
 

@@ -12,6 +12,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @method null|UserType find($id, $lockMode = null, $lockVersion = null)
@@ -37,7 +38,13 @@ class UserTypeRepository extends EntityRepository
             ->setParameter('locale', $locale)
         ;
 
-        return $qb->getQuery()->getArrayResult();
+        $results = $qb->getQuery()->getArrayResult();
+
+        // Encode IDs as Global IDs for GraphQL compatibility
+        return array_map(fn ($userType) => [
+            'id' => GlobalId::toGlobalId('UserType', $userType['id']),
+            'name' => $userType['name'],
+        ], $results);
     }
 
     /**

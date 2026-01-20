@@ -749,7 +749,7 @@ class ProposalSearch extends Search
         }
 
         if (isset($providedFilters['types'])) {
-            $filters['author.userType.id'] = $providedFilters['types'];
+            $filters['author.userType.id'] = GlobalIdResolver::getDecodedId($providedFilters['types'])['id'];
         }
         if (
             isset($providedFilters['category'])

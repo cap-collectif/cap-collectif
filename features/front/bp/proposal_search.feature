@@ -4,7 +4,7 @@ Feature: Proposals step filters and search
 Scenario: Initialize filters from URL parameters
   Given features user_type, districts are enabled
   And I am logged in as admin
-  And I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee?category=pCategoryIdf1&district=RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy&status=statusIdfCollect1&type=4"
+  And I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee?category=pCategoryIdf1&district=RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy&status=statusIdfCollect1&type=VXNlclR5cGU6NA=="
   Then The proposals category filter option "Espaces verts et biodiversité" should be selected
   Then The proposals district filter option "Val de marne (94)" should be selected
   Then The proposals status filter option "Nouveau projet" should be selected
@@ -34,9 +34,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply cont
   Given features themes, districts, user_type are enabled
   And I go to an open collect step
   Then there should be 8 proposals
-  And I change the proposals contributor type filter to "1"
+  And I change the proposals contributor type filter to "VXNlclR5cGU6MQ=="
   Then there should be 8 proposals
-  And I change the proposals contributor type filter to "4"
+  And I change the proposals contributor type filter to "VXNlclR5cGU6NA=="
   Then there should be 0 proposals
 
 @elasticsearch

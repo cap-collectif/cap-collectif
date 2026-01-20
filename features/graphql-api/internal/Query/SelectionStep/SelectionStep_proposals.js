@@ -42,7 +42,7 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
 
 const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
-  userType: 1,
+  userType: 'VXNlclR5cGU6MQ==',
   status: null,
 }
 
