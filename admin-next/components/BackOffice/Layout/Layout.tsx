@@ -119,7 +119,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
 
           {!hideSidebar ? <SideBar /> : null}
 
-          <Flex direction="column" width="100%" bg="gray.100">
+          <Flex direction="column" width="100%" minWidth={0} bg="gray.100">
             <React.Suspense fallback={<NavBarPlaceholder />}>
               <NavBar title={navTitle} data={navData} />
             </React.Suspense>
