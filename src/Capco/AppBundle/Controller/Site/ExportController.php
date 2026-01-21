@@ -1009,25 +1009,17 @@ class ExportController extends Controller
             }
         }
 
-        $user = $this->getUser();
-        $isProjectAdmin = $user->isOnlyProjectAdmin();
-
-        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename(
-            $step,
-            '.csv',
-            $isProjectAdmin
-        );
-
+        $filenameCsv = $this->contributionsFilePathResolver->getFullExportPath($step);
         $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
-        $isCSV = file_exists($this->exportDir . $filenameCsv);
-        $filename = $isCSV ? $filenameCsv : $filenameXlsx;
+        $isCSV = file_exists($filenameCsv);
+        $filename = $isCSV ? $this->contributionsFilePathResolver->getFileName($step, ExportVariantsEnum::FULL) : $filenameXlsx;
         $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
             $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
 
-            $response = $this->file($this->exportDir . $filename, $filename);
+            $response = $this->file($filenameCsv, $filename);
             $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
             return $response;
