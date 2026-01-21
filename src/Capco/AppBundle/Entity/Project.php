@@ -11,7 +11,6 @@ use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -1119,17 +1118,6 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             'ElasticsearchProjectNestedAuthor',
             'ElasticsearchProjectNestedProjectDistrictPositioner',
         ];
-    }
-
-    public function hasVotableStep(): bool
-    {
-        foreach ($this->steps as $step) {
-            if ($step->getStep() instanceof VotableInterface) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public function getVisibility(): int

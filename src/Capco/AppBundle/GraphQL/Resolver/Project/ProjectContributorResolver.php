@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -39,6 +40,7 @@ class ProjectContributorResolver implements QueryInterface
         private readonly ConnectionBuilderInterface $connectionBuilder,
         private readonly ParticipantRepository $participantRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
+        private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
     ) {
     }
 
@@ -96,6 +98,9 @@ class ProjectContributorResolver implements QueryInterface
 
                     [$participantsContributors, $participantsCount, $participantsCursors] = $this->getParticipants($project, $providedFilters['step'], $providedFilters['term']);
 
+                    // Count debate anonymous votes (legacy system without Participant entity)
+                    $debateAnonymousCount = $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
+
                     $cursors = array_merge($response->getCursors(), $participantsCursors);
                     $response->setCursors($cursors);
 
@@ -103,7 +108,8 @@ class ProjectContributorResolver implements QueryInterface
 
                     $response->setEntities($allContributors);
                     // Set the totalCount here because of the else statement below.
-                    $totalCount = $response->getTotalCount() + $participantsCount;
+                    // Include: Users + Participants (modern) + DebateAnonymous (legacy - votes only)
+                    $totalCount = $response->getTotalCount() + $participantsCount + $debateAnonymousCount;
                     $response->setTotalCount($totalCount);
 
                     return $response;
@@ -178,7 +184,7 @@ class ProjectContributorResolver implements QueryInterface
 
     private function getAnonymousCount(Project $project): int
     {
-        if (!$project->hasVotableStep() || $project->isExternal()) {
+        if ($project->isExternal()) {
             return 0;
         }
 
@@ -198,6 +204,9 @@ class ProjectContributorResolver implements QueryInterface
                 );
             }
         }
+
+        // Add debate anonymous votes
+        $anonymousCount += $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
 
         return $anonymousCount;
     }
