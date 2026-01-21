@@ -1,7 +1,7 @@
-import { CapUIIcon, Icon, toast, Text, CapUIFontWeight, Button, Tooltip, Tag } from '@cap-collectif/ui'
+import { CapUIIcon, Icon, Text, CapUIFontWeight, Button, Tooltip, Tag } from '@cap-collectif/ui'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
-import { useState, useCallback } from 'react'
+import { useCallback } from 'react'
 import { VoteButton_proposal$key } from '@relay/VoteButton_proposal.graphql'
 import { VoteButton_step$key } from '@relay/VoteButton_step.graphql'
 import AddProposalVoteMutation from '@mutations/AddProposalVoteMutation'
@@ -62,41 +62,22 @@ const STEP_FRAGMENT = graphql`
  * When requirements are not met after reaching votesMin, displays an alert.
  * TODO: Integrate ParticipationWorkflowModal when migrated to admin-next.
  */
-export const VoteButton: React.FC<Props> = ({
-  proposal: proposalRef,
-  step: stepRef,
-  disabled: externalDisabled = false,
-  triggerRequirementModal,
-}) => {
+export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepRef, triggerRequirementModal }) => {
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const { viewerSession } = useAppContext()
   const intl = useIntl()
-  const [isLoading, setIsLoading] = useState(false)
 
   const hasIncompleteVote = proposal.viewerVote?.completionStatus === 'MISSING_REQUIREMENTS'
   const votesMin = step.votesMin ?? 0
   const viewerMeetsRequirements = step.requirements?.viewerMeetsTheRequirements
-
-  const hasReachedVotesLimit = step.votesLimit != null && step.viewerVotes?.totalCount >= step.votesLimit
-  const exceedsBudget =
-    step.budget != null &&
-    step.viewerVotes?.creditsLeft != null &&
-    (proposal.estimation ?? 0) > step.viewerVotes?.creditsLeft
-
-  const isDisabled =
-    externalDisabled ||
-    !step.open ||
-    (hasReachedVotesLimit && !proposal.viewerHasVote) ||
-    (exceedsBudget && !proposal.viewerHasVote) ||
-    isLoading
-
   const votesCount = proposal.votes?.totalCount ?? 0
+
+  const viewerVotesCount = step.viewerVotes?.totalCount ?? 0
+  const hasReachedVotesLimit = step.votesLimit != null && viewerVotesCount >= step.votesLimit && !proposal.viewerHasVote
 
   const addVote = useCallback(async () => {
     if (!step?.id || !proposal?.id) return
-
-    setIsLoading(true)
     try {
       const response = await AddProposalVoteMutation.commit(
         {
@@ -107,6 +88,15 @@ export const VoteButton: React.FC<Props> = ({
           stepId: step.id,
         },
         viewerSession != null,
+        {
+          proposalId: proposal.id,
+          stepId: step.id,
+          currentVotesCount: votesCount,
+          currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
+          currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
+          proposalEstimation: proposal.estimation ?? null,
+          votesMin: step.votesMin ?? null,
+        },
       )
 
       const errorCode = response?.addProposalVote?.errorCode
@@ -122,55 +112,48 @@ export const VoteButton: React.FC<Props> = ({
         triggerRequirementModal(response.addProposalVote.vote.id)
         return
       }
-
-      if (hasNowReachedVotesMin) {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({ id: 'vote.add_success' }),
-        })
-      }
     } catch (error) {
       mutationErrorToast(intl)
-    } finally {
-      setIsLoading(false)
+    }
+  }, [step?.id, proposal?.id, intl, viewerMeetsRequirements, votesMin, step.viewerVotes?.totalCount, viewerSession])
+
+  const deleteVote = useCallback(async () => {
+    if (!step?.id || !proposal?.id) return
+    try {
+      await RemoveProposalVoteMutation.commit(
+        {
+          input: {
+            proposalId: proposal.id,
+            stepId: step.id,
+          },
+          stepId: step.id,
+        },
+        {
+          proposalId: proposal.id,
+          stepId: step.id,
+          voteId: proposal.viewerVote?.id ?? null,
+          currentVotesCount: votesCount,
+          currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
+          currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
+          proposalEstimation: proposal.estimation ?? null,
+          votesMin: step.votesMin ?? null,
+        },
+      )
+    } catch (error) {
+      mutationErrorToast(intl)
     }
   }, [
     step?.id,
     proposal?.id,
+    proposal.viewerVote?.id,
     intl,
-    viewerMeetsRequirements,
-    votesMin,
+    votesCount,
     step.viewerVotes?.totalCount,
-    viewerSession,
+    step.viewerVotes?.creditsLeft,
+    proposal.estimation,
   ])
 
-  const deleteVote = useCallback(async () => {
-    if (!step?.id || !proposal?.id) return
-
-    setIsLoading(true)
-    try {
-      await RemoveProposalVoteMutation.commit({
-        input: {
-          proposalId: proposal.id,
-          stepId: step.id,
-        },
-        stepId: step.id,
-      })
-
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: 'vote.delete_success' }),
-      })
-    } catch (error) {
-      mutationErrorToast(intl)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [step?.id, proposal?.id, intl])
-
   const onClick = useCallback(async () => {
-    if (isDisabled || isLoading) return
-
     // User has an incomplete vote from a previous session, re-trigger requirements
     if (hasIncompleteVote) {
       triggerRequirementModal(proposal.viewerVote.id)
@@ -182,7 +165,7 @@ export const VoteButton: React.FC<Props> = ({
     } else {
       await addVote()
     }
-  }, [isDisabled, isLoading, hasIncompleteVote, proposal.viewerHasVote, addVote, deleteVote, triggerRequirementModal])
+  }, [hasIncompleteVote, proposal.viewerHasVote, addVote, deleteVote, triggerRequirementModal])
 
   const tooltipLabel =
     votesCount > 0
@@ -221,10 +204,10 @@ export const VoteButton: React.FC<Props> = ({
     <Button
       onClick={onClick}
       variant={proposal.viewerHasVote ? 'primary' : 'secondary'}
-      disabled={isDisabled}
       aria-label={intl.formatMessage({ id: proposal.viewerHasVote ? 'global.delete' : 'global.add' })}
       height="32px"
       leftIcon={CapUIIcon.ThumbUp}
+      disabled={hasReachedVotesLimit}
     >
       <Text fontWeight={CapUIFontWeight.Semibold}>
         {step.canDisplayBallot ? (

@@ -18,6 +18,10 @@ const VOTE_FRAGMENT = graphql`
     proposal {
       id
       title
+      estimation
+      votes {
+        totalCount
+      }
     }
   }
 `
@@ -27,6 +31,16 @@ const STEP_FRAGMENT = graphql`
     id
     ...VotesPopupCardRanking_step
     votesRanking
+    votesMin
+    viewerVotes {
+      totalCount
+      creditsLeft
+      edges {
+        node {
+          id
+        }
+      }
+    }
   }
 `
 
@@ -37,20 +51,32 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   const { colors } = useTheme()
 
   const removeVote = () => {
-    RemoveProposalVoteMutation.commit({
-      input: {
-        proposalId: vote.proposal.id,
+    RemoveProposalVoteMutation.commit(
+      {
+        input: {
+          proposalId: vote.proposal.id,
+          stepId: step.id,
+        },
         stepId: step.id,
       },
-      stepId: step.id,
-    })
+      {
+        proposalId: vote.proposal.id,
+        stepId: step.id,
+        voteId: vote.id,
+        currentVotesCount: vote.proposal.votes?.totalCount ?? 0,
+        currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
+        currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
+        proposalEstimation: vote.proposal.estimation ?? null,
+        votesMin: step.votesMin ?? null,
+      },
+    )
   }
 
   return (
     <Flex gap="sm" width="100%" pl="xs" py="xs" alignItems="center">
       {step.votesRanking && <VotesPopupCardRanking vote={vote} step={step} />}
       <Card format="horizontal" p="0" _hover={{ boxShadow: 'none' }}>
-        {!step.votesRanking && <CardCoverPlaceholder flex="1" />}
+        {!step.votesRanking && <CardCoverPlaceholder flex="1" maxHeight="83px" />}
         <CardContent flex="1" primaryInfo={vote.proposal.title} />
       </Card>
       <Button

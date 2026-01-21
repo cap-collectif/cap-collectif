@@ -28,17 +28,19 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const [activeAction, setActiveAction] = useState<ActiveAction>(null)
 
+  // Mobile: map hidden by default, shown when map_shown=1
   const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
+  const isMapVisible = isMapShown === 1
 
   const handleActionClick = (action: ActiveAction) => {
     if (action === 'map') {
-      setIsMapShown(isMapShown === 1 ? 0 : 1)
+      setIsMapShown(isMapVisible ? null : 1)
     }
     setActiveAction(prev => (prev === action ? null : action))
   }
 
   return (
-    <Box position="sticky" zIndex={1} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
+    <Box position="fixed" zIndex={2000} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
       <Flex width="100%">
         <VoteStepMobileFiltersModal
           stepId={step.id}
@@ -63,10 +65,10 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
         )}
         {step.form.isMapViewEnabled && (
           <StepVoteMobileActionBtn
-            icon={isMapShown ? CapUIIcon.PinO : CapUIIcon.Grid}
+            icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
             onClick={() => handleActionClick('map')}
           >
-            {isMapShown
+            {isMapVisible
               ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
               : intl.formatMessage({ id: 'global.card' })}
           </StepVoteMobileActionBtn>

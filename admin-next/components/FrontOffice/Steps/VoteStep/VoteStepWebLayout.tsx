@@ -16,6 +16,7 @@ import { createPortal } from 'react-dom'
 import { Suspense } from 'react'
 import ModalSkeleton from '@components/ParticipationWorkflow/ModalSkeleton'
 import ParticipationWorkflowModal from '@components/ParticipationWorkflow/ParticipationWorkflowModal'
+import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
   step: VoteStepWebLayout_proposalStep$key
@@ -66,6 +67,7 @@ const FRAGMENT = graphql`
     ...StepLinkedEvents_step
     id
     ...VoteStepMobileActions_proposalStep
+    ...VoteStepUserInfos_proposalStep
     body
     open
     votable
@@ -92,11 +94,14 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
 
+  const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
 
-  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(step.form?.isMapViewEnabled ? 1 : 0))
-  const [contributionId, setContributionId] = React.useState(null)
+  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
+  // Mobile: map hidden by default, only shown when map_shown=1 explicitly in URL
+  const [mobileMapShown] = useQueryState('map_shown', parseAsInteger)
+  const isMobileMapVisible = isMobile && mobileMapShown === 1
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
   const mapStickyPositionFromTop = step.votable ? 156 : 88
@@ -134,14 +139,14 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
             <VoteStepListHeader step={step} />
           </Box>
         ) : step.votable ? (
-          <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
-            TODO : VOTE COMPONENT
+          <Box flex={`0 1 100%`} position="relative" minHeight={pxToRem(116)}>
+            <VoteStepUserInfos step={step} />
           </Box>
         ) : null}
 
         <Box mb="md">
           <Flex justifyContent="space-between" gap="lg">
-            {(!isMapExpanded && !isMobile) || (isMobile && !isMapShown) ? (
+            {(!isMapExpanded && !isMobile) || isMobile ? (
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
@@ -149,7 +154,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                       <ProjectsListPlaceholder
                         count={10}
                         templateColumns={(() => {
-                          const cols = getTemplateColumns(!!isMapShown)
+                          const cols = getTemplateColumns(step.form.isMapViewEnabled && !isMobile && isMapShown !== 0)
                           return [cols.base, cols.tablet, cols.desktop]
                         })()}
                         mt={0}
@@ -159,13 +164,13 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                 >
                   <VoteStepProposalsList
                     step={step}
-                    templateColumns={getTemplateColumns(!!isMapShown)}
+                    templateColumns={getTemplateColumns(step.form.isMapViewEnabled && !isMobile && isMapShown !== 0)}
                     triggerRequirementModal={triggerRequirementModal}
                   />
                 </React.Suspense>
               </Box>
             ) : null}
-            {step.form?.isMapViewEnabled && isMapShown ? (
+            {step.form?.isMapViewEnabled && isMapShown !== 0 && !isMobile ? (
               <Box
                 flex={`0 1 ${pxToRem(395)}`}
                 position="sticky"
@@ -181,6 +186,11 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
             ) : null}
           </Flex>
         </Box>
+        {step.form?.isMapViewEnabled && isMobileMapVisible ? (
+          <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={1999} backgroundColor="white">
+            <VoteStepMap step={step} showMapPlaceholder={false} removePlaceholderAndShowMap={() => {}} />
+          </Box>
+        ) : null}
       </Box>
       {isMobile && <StepVoteMobileActions step={step} />}
     </Box>

@@ -1,5 +1,4 @@
 import {
-  Box,
   CapUIIcon,
   CapUIIconSize,
   Card,
@@ -10,7 +9,7 @@ import {
   Icon,
   useTheme,
 } from '@cap-collectif/ui'
-import { FC, useMemo, useRef } from 'react'
+import { FC, memo, useEffect, useMemo, useRef } from 'react'
 import L from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import { renderToString } from 'react-dom/server'
@@ -47,22 +46,31 @@ type ProposalMarkerProps = {
   proposal: ProposalMarker_proposal$key
 }
 
-const ProposalMarker: FC<ProposalMarkerProps> = ({ proposal: proposalKey }) => {
+const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKey }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const { colors } = useTheme()
   const isMobile = useIsMobile()
 
-  if (!proposal || !proposal.address?.lat || !proposal.address?.lng) return null
+  const markerRef = useRef<L.Marker>(null)
 
-  const updateSelectedId = (id: string | null) => {
-    window.dispatchEvent(new CustomEvent('proposal-selected', { detail: id }))
-  }
+  useEffect(() => {
+    if (isMobile) return
+    const handler = (e: CustomEvent<string | null>) => {
+      if (markerRef.current?.getPopup()?.isOpen()) return
+      const iconElement = markerRef.current?.getElement()
+      if (e.detail === proposal.id) {
+        iconElement?.classList.add('active')
+      } else {
+        iconElement?.classList.remove('active')
+      }
+    }
+    window.addEventListener('proposal-card-hover', handler as EventListener)
+    return () => window.removeEventListener('proposal-card-hover', handler as EventListener)
+  }, [proposal.id])
 
   const icon = proposal.category?.icon
   const iconSize = 30
   const proposalCover = proposal.media?.url || proposal.category?.categoryImage?.image?.url
-
-  const markerRef = useRef<L.Marker>(null)
 
   const markerIcon = useMemo(() => {
     return L.divIcon({
@@ -83,6 +91,8 @@ const ProposalMarker: FC<ProposalMarkerProps> = ({ proposal: proposalKey }) => {
     })
   }, [icon, proposal.category?.color, colors])
 
+  if (!proposal || !proposal.address?.lat || !proposal.address?.lng) return null
+
   return (
     <Marker
       ref={markerRef}
@@ -91,40 +101,26 @@ const ProposalMarker: FC<ProposalMarkerProps> = ({ proposal: proposalKey }) => {
       eventHandlers={{
         popupopen: () => {
           markerRef.current?.getElement()?.classList.add('active')
-          updateSelectedId(proposal.id)
+          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
         },
         popupclose: () => {
           markerRef.current?.getElement()?.classList.remove('active')
-          updateSelectedId(null)
+          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
         },
         mouseover: () => {
           markerRef.current?.getElement()?.classList.add('active')
+          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
         },
         mouseout: () => {
-          if (markerRef.current?.getPopup().isOpen()) return
+          if (markerRef.current?.getPopup()?.isOpen()) return
           markerRef.current?.getElement()?.classList.remove('active')
+          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
         },
       }}
     >
-      {isMobile ? (
-        <Box position="absolute" left="0" bottom="md" width="100%" px="md" zIndex={9999}>
-          <Card format="horizontal">
-            <CardCover>
-              {proposalCover ? (
-                <CardCoverImage src={proposalCover} />
-              ) : (
-                <CardCoverPlaceholder
-                  icon={icon ? convertIconToDs(icon) : CapUIIcon.BubbleO}
-                  color={proposal.category?.color || 'primary.base'}
-                />
-              )}
-            </CardCover>
-            <CardContent primaryInfo={proposal.title} href={proposal.url} />
-          </Card>
-        </Box>
-      ) : (
+      {!isMobile && (
         <Popup className="leaflet-card-popup">
-          <Card format="horizontal">
+          <Card format="horizontal" maxHeight="83px">
             <CardCover>
               {proposalCover ? (
                 <CardCoverImage src={proposalCover} />
@@ -142,5 +138,7 @@ const ProposalMarker: FC<ProposalMarkerProps> = ({ proposal: proposalKey }) => {
     </Marker>
   )
 }
+
+const ProposalMarker = memo(ProposalMarkerComponent)
 
 export default ProposalMarker

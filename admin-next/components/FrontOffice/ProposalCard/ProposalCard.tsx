@@ -121,7 +121,9 @@ export const ProposalCard: React.FC<Props> = ({
         <CardTagList>
           <Flex justifyContent="space-between" align="center" width="100%">
             <Flex align="center" gap="md">
-              <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
+              {step.votable ? (
+                <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
+              ) : null}
               {step.budget !== null ? (
                 <Tag variantColor="infoGray" transparent>
                   <Icon name={CapUIIcon.Budget} />

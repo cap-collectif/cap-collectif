@@ -1,9 +1,11 @@
-import { FC, useEffect, useMemo } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { VoteStepMapMarkers_proposalStep$key } from '@relay/VoteStepMapMarkers_proposalStep.graphql'
 import VoteStepMapBoundsHandler from './VoteStepMapBoundsHandler'
 import ProposalMarker from './ProposalMarker'
+import useIsMobile from '@shared/hooks/useIsMobile'
+import MobileProposalCard from './MobileProposalCard'
 
 type Props = { step: VoteStepMapMarkers_proposalStep$key }
 
@@ -46,6 +48,7 @@ const MARKERS_FRAGMENT = graphql`
             lng
           }
           ...ProposalMarker_proposal
+          ...MobileProposalCard_proposal
         }
       }
     }
@@ -54,10 +57,20 @@ const MARKERS_FRAGMENT = graphql`
 
 const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(MARKERS_FRAGMENT, stepKey)
+  const isMobile = useIsMobile()
+  const [selectedProposalId, setSelectedProposalId] = useState<string | null>(null)
 
   useEffect(() => {
     if (hasNext) loadNext(50)
   }, [hasNext, isLoadingNext, loadNext])
+
+  // Listen to proposal-selected event (only for mobile card display)
+  useEffect(() => {
+    if (!isMobile) return
+    const handler = (e: CustomEvent<string | null>) => setSelectedProposalId(e.detail)
+    window.addEventListener('proposal-selected', handler as EventListener)
+    return () => window.removeEventListener('proposal-selected', handler as EventListener)
+  }, [isMobile])
 
   const proposals = useMemo(
     () =>
@@ -66,6 +79,16 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
         .filter(node => !!(node?.address && node.address.lat && node.address.lng)) || [],
     [data.entity.edges],
   )
+
+  const selectedProposal = useMemo(
+    () => proposals.find(p => p.id === selectedProposalId),
+    [proposals, selectedProposalId],
+  )
+
+  const handleMobileCardClose = () => {
+    setSelectedProposalId(null)
+    window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
+  }
 
   if (!proposals?.length) return null
 
@@ -83,6 +106,9 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
           <ProposalMarker key={proposal.id} proposal={proposal} />
         ))}
       </MarkerClusterGroup>
+      {isMobile && selectedProposal && (
+        <MobileProposalCard proposal={selectedProposal} onClose={handleMobileCardClose} />
+      )}
     </>
   )
 }

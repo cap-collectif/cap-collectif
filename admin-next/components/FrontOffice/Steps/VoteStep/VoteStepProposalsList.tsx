@@ -68,11 +68,17 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
 
   const [latlngBounds] = useQueryState('latlngBounds')
   const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
+  const [isMapShown] = useQueryState('map_shown')
 
   const itemRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
   const debounceTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
   const [selectedId, setSelectedId] = React.useState<string | null>(null)
+
+  const handlerMouseOver = (id: string, content: string | null) => {
+    if (id === selectedId) return
+    window.dispatchEvent(new CustomEvent('proposal-card-hover', { detail: content }))
+  }
 
   React.useEffect(() => {
     if (latlngBounds === null) return
@@ -111,6 +117,11 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
     }
   }, [selectedId])
 
+  // Reset selection when map is hidden or list view changes
+  React.useEffect(() => {
+    setSelectedId(null)
+  }, [isMapShown, listView])
+
   const proposalsLength = data?.proposals?.edges?.length
 
   const gridTemplateColumns =
@@ -124,6 +135,8 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
           ref={el => {
             itemRefs.current[node.id] = el
           }}
+          onMouseEnter={() => handlerMouseOver(node.id, node.id)}
+          onMouseLeave={() => handlerMouseOver(node.id, null)}
         >
           <ProposalCard
             proposal={node}

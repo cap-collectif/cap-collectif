@@ -22,6 +22,8 @@ const FRAGMENT = graphql`
     id
     form {
       isMapViewEnabled
+      isGridViewEnabled
+      isListViewEnabled
       usingCategories
       categories(order: ALPHABETICAL) {
         id
@@ -38,11 +40,17 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
 
   const step = useFragment(FRAGMENT, stepKey)
 
-  const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
-  const [listView, setListView] = useQueryState('list_view', { defaultValue: 'grid' })
-  const [, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
-
   const hasMapView = step.form?.isMapViewEnabled
+  const hasGridView = step.form?.isGridViewEnabled ?? true
+  const hasListView = step.form?.isListViewEnabled ?? true
+  const hasBothViews = hasGridView && hasListView
+
+  // Determine default view based on enabled views
+  const defaultView = hasGridView ? 'grid' : 'list'
+
+  const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
+  const [listView, setListView] = useQueryState('list_view', { defaultValue: defaultView })
+  const [, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
 
   const quickFilterButtons: QuickFilter[] = [
     {
@@ -76,26 +84,28 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
           ))}
         </Flex>
       )}
-      <Box>
-        {listViewButtons().map(viewButton => (
-          <Tag
-            key={viewButton.id}
-            variantColor="info"
-            variantSize="medium"
-            transparent={listView !== viewButton.id}
-            label={viewButton.icon}
-            sx={{
-              cursor: 'pointer',
-              '&:first-child': { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
-              '&:last-child': { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 },
-            }}
-            onClick={() => setListView(viewButton.id)}
-          >
-            <Tag.LeftIcon name={viewButton.icon} />
-            {width <= 1024 && <Tag.Label>{viewButton.label}</Tag.Label>}
-          </Tag>
-        ))}
-      </Box>
+      {hasBothViews && (
+        <Box>
+          {listViewButtons().map(viewButton => (
+            <Tag
+              key={viewButton.id}
+              variantColor="info"
+              variantSize="medium"
+              transparent={listView !== viewButton.id}
+              label={viewButton.icon}
+              sx={{
+                cursor: 'pointer',
+                '&:first-child': { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
+                '&:last-child': { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 },
+              }}
+              onClick={() => setListView(viewButton.id)}
+            >
+              <Tag.LeftIcon name={viewButton.icon} />
+              {(width <= 1024 || !isMapShown) && <Tag.Label>{viewButton.label}</Tag.Label>}
+            </Tag>
+          ))}
+        </Box>
+      )}
       <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView ? (
@@ -108,7 +118,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               setIsMapShown(isMapShown === 1 ? 0 : 1)
             }}
           >
-            {isMapShown ? intl.formatMessage({ id: 'map.hide' }) : intl.formatMessage({ id: 'map.display' })}
+            {isMapShown !== 0 ? intl.formatMessage({ id: 'map.hide' }) : intl.formatMessage({ id: 'map.display' })}
           </Button>
         </Box>
       ) : null}
