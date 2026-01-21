@@ -25,7 +25,7 @@ class CategoryImage implements EntityInterface
     protected $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      * @Assert\Valid()
      */
