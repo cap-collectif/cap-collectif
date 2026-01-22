@@ -1,9 +1,12 @@
-{% if app.environment == 'dev' %}
+{% set isQa = is_qa_environment() %}
+{% if app.environment == 'dev' or isQa %}
 {% set devUsers = dev_users() %}
 {% if devUsers is not empty %}
+{% set envLabel = isQa ? 'QA' : 'Local Dev' %}
+{% set envColor = isQa ? '#59b5ff' : '#ffb559' %}
 <style>
     #development-banner {
-        background-color: #ffb559;
+        background-color: {{ envColor }};
         position: fixed;
         bottom: 0;
         left: 0;
@@ -79,6 +82,7 @@
     let selectedUserKey = userEntries[0]?.[0];
     const isLoggedIn = {{ app.user ? 'true' : 'false' }};
     const currentUserEmail = {{ app.user ? ("'" ~ app.user.email ~ "'")|raw : 'null' }};
+    const envLabel = {{ envLabel|json_encode|raw }};
 
     const banner = document.createElement('div');
     banner.id = 'development-banner';
@@ -90,7 +94,7 @@
 
     const label = document.createElement('span');
     label.className = 'label';
-    label.textContent = 'Local Dev';
+    label.textContent = envLabel;
 
     if (isLoggedIn) {
         const currentUserSpan = document.createElement('span');

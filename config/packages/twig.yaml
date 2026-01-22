@@ -112,5 +112,6 @@ services:
         arguments:
             $projectDir: '%kernel.project_dir%'
             $environment: '%kernel.environment%'
+            $requestStack: '@request_stack'
         tags:
             - { name: twig.runtime }

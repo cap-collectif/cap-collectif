@@ -12,6 +12,8 @@ class DevUsersExtension extends AbstractExtension
         return [
             // @phpstan-ignore-next-line Twig runtime pattern - known false positive
             new TwigFunction('dev_users', [DevUsersRuntime::class, 'getDevUsers']),
+            // @phpstan-ignore-next-line Twig runtime pattern - known false positive
+            new TwigFunction('is_qa_environment', [DevUsersRuntime::class, 'isQaEnvironment']),
         ];
     }
 }
