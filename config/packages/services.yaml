@@ -43,6 +43,10 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    Capco\AppBundle\EventListener\SiteParameterCacheSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
 
