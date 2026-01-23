@@ -1,2 +1,7 @@
 export const isWYSIWYGContentEmpty = (content?: string) =>
-  content === null || content === undefined || content === '<p><br></p>' || content === '&nbsp;' || content === ''
+  content === null ||
+  content === undefined ||
+  content === '<p><br></p>' ||
+  content === '<p><br /></p>' ||
+  content === '&nbsp;' ||
+  content === ''

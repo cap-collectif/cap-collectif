@@ -1,8 +1,9 @@
-import { ProposalCreateModal_proposalForm$data } from '@relay/ProposalCreateModal_proposalForm.graphql'
+import { ProposalFormModal_proposalForm$data } from '@relay/ProposalFormModal_proposalForm.graphql'
+import { IntlShape } from 'react-intl'
 import * as z from 'zod'
-import { ResponseValue } from './ProposalCreateModal.type'
+import { ResponseValue } from './ProposalFormModal.type'
 
-export type Question = ProposalCreateModal_proposalForm$data['questions'][number]
+export type Question = ProposalFormModal_proposalForm$data['questions'][number]
 
 /**
  * Type guard to check if a response value is a select field response (object with value/label)
@@ -11,29 +12,38 @@ const isSelectResponse = (value: ResponseValue['value']): value is { value: stri
   return typeof value === 'object' && value !== null && 'value' in value && !Array.isArray(value)
 }
 
-export const createProposalSchema = (proposalForm: ProposalCreateModal_proposalForm$data) => {
+export const createProposalSchema = (proposalForm: ProposalFormModal_proposalForm$data, intl: IntlShape) => {
+  const requiredMessage = intl.formatMessage({ id: 'fill-field' })
+  const invalidUrlMessage = intl.formatMessage({ id: 'global.constraints.url.invalid' }) // todo: translation key
+
+  // Helper to validate URLs - empty string is valid, non-empty must be valid URL
+  const urlSchema = z
+    .string()
+    .transform(val => val.trim())
+    .pipe(z.union([z.literal(''), z.string().url({ message: invalidUrlMessage })]))
+
   return z.object({
-    title: z.string().min(1, 'Title is required'),
+    title: z.string().min(1, { message: requiredMessage }),
     summary: z.string().optional(),
 
     body:
       proposalForm.usingDescription && proposalForm.descriptionMandatory
-        ? z.string().min(1, 'Description is required')
+        ? z.string().min(1, { message: requiredMessage })
         : z.string().optional(),
 
     theme:
       proposalForm.usingThemes && proposalForm.themeMandatory
-        ? z.string().min(1, 'Theme is required')
+        ? z.string().min(1, { message: requiredMessage })
         : z.string().optional(),
 
     category:
       proposalForm.usingCategories && proposalForm.categoryMandatory
-        ? z.string().min(1, 'Category is required')
+        ? z.string().min(1, { message: requiredMessage })
         : z.string().optional(),
 
     district:
       proposalForm.usingDistrict && proposalForm.districtMandatory
-        ? z.string().min(1, 'District is required')
+        ? z.string().min(1, { message: requiredMessage })
         : z.string().optional(),
 
     address: z.string().optional(),
@@ -51,6 +61,10 @@ export const createProposalSchema = (proposalForm: ProposalCreateModal_proposalF
             z.string(), // text, textarea, editor, radio, button, number, siret, rna, majority
             z.array(z.string()), // checkbox (array of choice IDs), ranking (ordered array of choice IDs)
             z.object({ value: z.string(), label: z.string() }), // select (object format)
+            z.object({
+              labels: z.array(z.string()),
+              other: z.string().nullable(),
+            }), // radio/checkbox/button with isOtherAllowed
             z.null(), // unanswered
           ])
           .nullable()
@@ -60,13 +74,13 @@ export const createProposalSchema = (proposalForm: ProposalCreateModal_proposalF
     ),
 
     // Social networks / External links (conditionally shown based on proposalForm config)
-    // All are optional but validate URL format when provided
-    webPageUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-    facebookUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-    twitterUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-    instagramUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-    youtubeUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-    linkedInUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
+    // All are optional, empty strings are valid, non-empty must be valid URLs
+    webPageUrl: urlSchema.optional(),
+    facebookUrl: urlSchema.optional(),
+    twitterUrl: urlSchema.optional(),
+    instagramUrl: urlSchema.optional(),
+    youtubeUrl: urlSchema.optional(),
+    linkedInUrl: urlSchema.optional(),
   })
 }
 

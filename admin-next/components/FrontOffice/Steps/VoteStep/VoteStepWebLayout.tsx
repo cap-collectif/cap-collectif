@@ -1,21 +1,22 @@
 import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
+import ModalSkeleton from '@components/ParticipationWorkflow/ModalSkeleton'
+import ParticipationWorkflowModal from '@components/ParticipationWorkflow/ParticipationWorkflowModal'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
+import { Suspense } from 'react'
+import { createPortal } from 'react-dom'
 import { graphql, useFragment } from 'react-relay'
 import StepLinkedEvents from '../StepLinkedEvents'
 import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
 import VoteStepMap from './Map/VoteStepMap'
+import ProposalDrafts from './ProposalDrafts/ProposalDrafts'
 import VoteStepListHeader from './VoteStepListHeader'
 import VoteStepProposalsList from './VoteStepProposalsList'
-import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
-import { parseAsInteger, useQueryState } from 'nuqs'
-import { createPortal } from 'react-dom'
-import { Suspense } from 'react'
-import ModalSkeleton from '@components/ParticipationWorkflow/ModalSkeleton'
-import ParticipationWorkflowModal from '@components/ParticipationWorkflow/ParticipationWorkflowModal'
 import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
@@ -68,6 +69,7 @@ const FRAGMENT = graphql`
     id
     ...VoteStepMobileActions_proposalStep
     ...VoteStepUserInfos_proposalStep
+    ...ProposalDrafts_step
     body
     open
     votable
@@ -132,7 +134,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
           <AbstractCard width="100%" border="none" backgroundColor="white">
             <WYSIWYGRender value={step.body} />
           </AbstractCard>
-          ---- Les brouillons ----
+          <ProposalDrafts step={step} />
         </Flex>
         {!isMobile ? (
           <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">

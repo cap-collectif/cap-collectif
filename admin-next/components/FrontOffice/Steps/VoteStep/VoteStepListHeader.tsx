@@ -5,7 +5,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import VoteStepSearchBar from './Filters/VoteStepSearchBar'
 import VoteStepListActions from './ListActions/VoteStepListActions'
-import ProposalCreateModal from './ProposalForm/ProposalCreateModal'
+import ProposalFormModal from './ProposalForm/ProposalFormModal'
 import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
@@ -14,11 +14,12 @@ type Props = {
 
 const FRAGMENT = graphql`
   fragment VoteStepListHeader_proposalStep on ProposalStep {
+    id
     __typename
     votable
     form {
       contribuable
-      ...ProposalCreateModal_proposalForm
+      ...ProposalFormModal_proposalForm
     }
     ...VoteStepListActions_proposalStep
     ...VoteStepUserInfos_proposalStep
@@ -34,7 +35,12 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
       <Box width="100%" flex="2 1 0">
         <Flex gap="xl" width="100%">
           {step.form && isCollectStep ? (
-            <ProposalCreateModal disabled={!step.form.contribuable} proposalForm={step.form} />
+            <ProposalFormModal
+              mode="create"
+              disabled={!step.form.contribuable}
+              proposalForm={step.form}
+              stepId={step.id}
+            />
           ) : null}
           <VoteStepSearchBar />
         </Flex>

@@ -1,10 +1,10 @@
-import { ProposalCreateModal_proposalForm$key } from '@relay/ProposalCreateModal_proposalForm.graphql'
 import { Control } from 'react-hook-form'
 
 /**
  * Response value for a question in the proposal form.
  * Different question types use different value formats:
- * - text/textarea/editor/radio/button/number/siret/rna/majority: string
+ * - text/textarea/editor/number/siret/rna/majority: string
+ * - radio/button: string (choice ID)
  * - checkbox: string[] (array of choice IDs)
  * - ranking: string[] (ordered array of choice IDs)
  * - select: { value: string; label: string } (object with value and label)
@@ -33,10 +33,16 @@ export type FormValues = {
   linkedInUrl?: string
 }
 
+export type ChoiceImage = {
+  id: string
+  url: string
+} | null
+
 export type ButtonChoice = {
   id: string
   label: string
   color?: string | null
+  image?: ChoiceImage
 }
 
 export type ButtonChoicesProps = {
@@ -48,6 +54,7 @@ export type ButtonChoicesProps = {
 export type RankingChoice = {
   id: string
   label: string
+  image?: ChoiceImage
 }
 
 export type RankingChoicesProps = {
@@ -56,7 +63,19 @@ export type RankingChoicesProps = {
   choices: RankingChoice[]
 }
 
-export type Props = {
-  disabled: boolean
-  proposalForm: ProposalCreateModal_proposalForm$key
+export type MultipleChoiceChoice = {
+  id: string
+  label: string
+  description?: string | null
+  image?: { id: string; url: string } | null
+}
+
+export type MultipleChoiceQuestionProps = {
+  name: string
+  // Using Control<any> because the field name is dynamic (e.g., "responses.0.value")
+  // and TypeScript cannot infer the exact path at compile time
+  control: Control<any>
+  choices: MultipleChoiceChoice[]
+  isOtherAllowed?: boolean
+  isMultiple?: boolean
 }
