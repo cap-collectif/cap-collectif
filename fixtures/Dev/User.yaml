@@ -220,7 +220,7 @@ Capco\UserBundle\Entity\User:
         roles:
             - 'ROLE_USER'
         media: null
-        confirmationToken: azertyuiop
+        confirmationToken: azertyuiopqsdfghjklmwxcvbn1234567890ABCDEFG
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 1 hours"))>
 
@@ -235,7 +235,7 @@ Capco\UserBundle\Entity\User:
         roles:
             - 'ROLE_USER'
         media: null
-        confirmationToken: oklmoklm
+        confirmationToken: oklmoklmqsdfghjklmwxcvbn1234567890ABCDEFGHI
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days")->modify("+ 2 hours"))>
 
@@ -295,7 +295,7 @@ Capco\UserBundle\Entity\User:
         roles:
             - 'ROLE_ADMIN'
         media: null
-        confirmationToken: check-my-email-token
+        confirmationToken: check-my-email-token-with-more-characters-1
         resetPasswordToken: reset-my-password-token
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 13 days"))>
         subscribedToProposalNews: true

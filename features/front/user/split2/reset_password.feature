@@ -4,7 +4,7 @@ Feature: Resetting forgotten password
 @database
 Scenario: Admin wants to enable his account and set his password
   Given features "registration", "profiles" are enabled
-  And I go to "/account/email_confirmation/check-my-email-token"
+  And I go to "/account/email_confirmation/check-my-email-token-with-more-characters-1"
   Then I should be redirected to "/resetting/reset/reset-my-password-token"
   And I wait "#reset-content-confirm" to appear on current page
   When I fill in the following:

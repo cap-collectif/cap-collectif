@@ -9,7 +9,7 @@ describe('Email confirmation', () => {
     cy.task('db:restore')
   })
   it('should confirm email for not confirmed user', () => {
-    cy.visit('/account/email_confirmation/azertyuiop')
+    cy.visit('/account/email_confirmation/azertyuiopqsdfghjklmwxcvbn1234567890ABCDEFG')
     cy.get('#navbar-username').should('exist').and('be.visible').and('contain', 'user_not_confirmed')
     cy.get('#alert-email-not-confirmed').should('not.exist')
   })

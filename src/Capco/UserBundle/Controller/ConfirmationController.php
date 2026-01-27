@@ -55,9 +55,9 @@ class ConfirmationController extends Controller
     }
 
     /**
-     * @Route("/account/email_confirmation/{token}/{stepId}", name="account_confirm_email_step", options={"i18n" = false})
-     * @Route("/account/email_confirmation/{token}", name="account_confirm_email", options={"i18n" = false})
-     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", options={"i18n" = false})
+     * @Route("/account/email_confirmation/{token}", name="account_confirm_email", requirements={"token"="[A-Za-z0-9\-_]{43}"}, options={"i18n" = false})
+     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", requirements={"token"="[A-Za-z0-9\-_]{43}"}, options={"i18n" = false})
+     * @Route("/account/email_confirmation/{token}/{stepId}", name="account_confirm_email_step", requirements={"token"="[A-Za-z0-9\-_]{43}", "stepId"="[A-Za-z0-9+/=]+"}, options={"i18n" = false})
      */
     public function emailAction(string $token, ?string $stepId = null): RedirectResponse
     {
