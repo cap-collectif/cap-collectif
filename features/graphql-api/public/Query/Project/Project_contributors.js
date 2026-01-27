@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ProjectContributorsQuery = /* GraphQL */ `
   query ProjectContributorsQuery($id: ID!) {
     project: node(id: $id) {

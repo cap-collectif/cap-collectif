@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddEvaluationFromToProposalMutation = /* GraphQL */ `
   mutation SetEvaluationFormInProposalFormMutation($input: SetEvaluationFormInProposalFormInput!) {

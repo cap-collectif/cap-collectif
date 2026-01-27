@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const createOrUpdateCarrouselConfigurationMutation = /* GraphQL */ `
   mutation CreateOrUpdateCarrouselConfigurationMutation($input: CreateOrUpdateCarrouselConfigurationInput!) {

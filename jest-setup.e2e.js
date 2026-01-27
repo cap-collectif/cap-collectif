@@ -10,6 +10,8 @@ const ENDPOINT = HOSTNAME + '/graphql'
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
+const phpContainerName = 'capco_application_1'
+
 const env = process.env.CI ? 'ci' : 'local'
 
 const GraphQLClient = require('graphql-request').GraphQLClient
@@ -76,20 +78,28 @@ const unAuthenticatedInternalRequest = (query, variables) => {
   }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')))
 }
 
-global.enableFeatureFlag = async name => {
-  console.log(`Enabling feature flag "${name}"...`)
-  await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=test`)
-  console.log(`Successfully enabled "${name}"`)
-}
-
 global.runSQL = async sql => {
   await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
 }
 
+global.enableFeatureFlag = async name => {
+  console.log(`Enabling feature flag "${name}"...`)
+  await exec(`docker exec ${phpContainerName} php features/graphql-api/feature-flag-toggler.php enable ${name}`)
+  console.log(`Successfully enabled "${name}"`)
+}
+
 global.disableFeatureFlag = async name => {
   console.log(`Disabling feature flag "${name}"...`)
-  await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`)
+  await exec(
+    `docker exec ${phpContainerName} php features/graphql-api/feature-flag-toggler.php disable ${name}`
+  )
   console.log(`Successfully disabled "${name}"`)
+}
+
+global.resetFeatureFlags = async () => {
+  console.log(`Resetting feature flags...`)
+  await exec(`docker exec ${phpContainerName} php features/graphql-api/feature-flags-resetter.php`)
+  console.log(`Successfully reset feature flags`)
 }
 
 global.graphql = (query, variables, client = 'anonymous') => {

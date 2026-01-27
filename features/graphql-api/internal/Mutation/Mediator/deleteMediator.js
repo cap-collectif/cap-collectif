@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const DeleteMediatorMutation = /* GraphQL*/ `
   mutation DeleteMediator($input: DeleteMediatorInput!) {
@@ -10,9 +10,7 @@ const DeleteMediatorMutation = /* GraphQL*/ `
 `
 
 describe('mutations|deleteMediator', () => {
-  beforeEach(async () => {
-    await global.enableFeatureFlag('mediator')
-  })
+  
   it('admin should be able to delete a mediator.', async () => {
     const variables = {
       input: {

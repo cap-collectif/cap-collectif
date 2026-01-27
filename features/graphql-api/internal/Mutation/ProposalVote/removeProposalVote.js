@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const RemoveProposalVote = /* GraphQL*/ `
   mutation ($input: RemoveProposalVoteInput!) {
@@ -57,7 +57,6 @@ describe('mutations.removeProposalVote', () => {
   })
 
   it('Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore', async () => {
-    await global.enableFeatureFlag('votes_min')
 
     await expect(
       graphql(

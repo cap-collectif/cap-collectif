@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const UpdateAlphaProjectMutation = /* GraphQL*/ `
     mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
@@ -49,7 +49,6 @@ describe('mutations.updateAlphaProjectMutation', () => {
   })
 
   it('GraphQL admin wants to update project with votesMin greater than votesLimit', async () => {
-    await global.enableFeatureFlag('votes_min')
 
     await expect(
       graphql(
@@ -99,7 +98,6 @@ describe('mutations.updateAlphaProjectMutation', () => {
   })
 
   it('GraphQL admin wants to update project with votesMin below 1', async () => {
-    await global.enableFeatureFlag('votes_min')
 
     await expect(
       graphql(

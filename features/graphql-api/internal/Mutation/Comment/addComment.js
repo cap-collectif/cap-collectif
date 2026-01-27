@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddCommentMutation = /* GraphQL*/ `
     mutation ($input: AddCommentInput!) {
@@ -26,7 +26,6 @@ const AddCommentMutation = /* GraphQL*/ `
 
 describe('mutations.addCommentMutation', () => {
   it('User wants to add a comment on a proposal', async () => {
-    await global.disableFeatureFlag('moderation_comment')
 
     await expect(
       graphql(
@@ -73,10 +72,10 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
+    await global.resetFeatureFlags()
   })
 
   it('User wants to comment when moderation is disabled', async () => {
-    await global.disableFeatureFlag('moderation_comment')
 
     await expect(
       graphql(
@@ -123,6 +122,7 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
+    await global.resetFeatureFlags()
   })
 
   it('Anonymous wants to add a comment on a blog post', async () => {
@@ -175,6 +175,7 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
+    await global.resetFeatureFlags()
   })
 
   it('Anonymous wants to add an anwer to a comment', async () => {

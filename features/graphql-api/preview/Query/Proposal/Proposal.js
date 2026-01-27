@@ -1,3 +1,6 @@
+/* eslint-env jest */
+import '../../../_setupES'
+
 const ProposalPreviewData = /* GraphQL */ `
   query ProposalPreviewDataQuery($collectStepId: ID!) {
     node(id: $collectStepId) {
@@ -23,7 +26,6 @@ const ProposalPreviewData = /* GraphQL */ `
 
 describe('Preview.proposals', () => {
   it("fetches proposal's data", async () => {
-    await global.enableFeatureFlag('public_api')
     await expect(
       graphql(
         ProposalPreviewData,

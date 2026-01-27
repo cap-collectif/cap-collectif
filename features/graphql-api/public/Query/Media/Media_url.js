@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 // Media is not part of Node interface
 const EventMediaQuery = /* GraphQL */ `
   query EventMediaQuery($id: ID!) {

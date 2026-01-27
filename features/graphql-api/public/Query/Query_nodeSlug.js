@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const Query_nodeSlugOrganization = /* GraphQL */ `
   query nodeSlugOrganization($entity: SluggableEntity!, $slug: String!) {
     nodeSlug(entity: $entity, slug: $slug) {

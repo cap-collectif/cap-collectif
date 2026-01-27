@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const CreateUserTypeMutation = /* GraphQL */ `
   mutation CreateUserTypesMutation($input: CreateUserTypeInput!) {

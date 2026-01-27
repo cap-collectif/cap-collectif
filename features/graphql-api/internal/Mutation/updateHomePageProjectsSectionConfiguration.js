@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const UpdateHomePageProjectsSectionConfigurationMutation = /* GraphQL */ `
   mutation UpdateHomePageProjectsSectionConfigurationMutation(

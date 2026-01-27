@@ -1,5 +1,6 @@
 /* eslint-env jest */
-import '../../../../_setupWithES'
+import '../../../../_setupDB'
+import '../../../../_setupES'
 
 const UpdateQuestionnaireChoicesMutation = /* GraphQL */ `
   mutation UpdateQuestionnaireConfiguration($input: UpdateQuestionnaireConfigurationInput!) {

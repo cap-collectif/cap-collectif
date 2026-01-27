@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup'
+import '../../../../_setupDB'
 
 const CreatePostMutation = /* GraphQL*/ `
   mutation CreatePost($input: CreatePostInput!) {

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup'
+import '../../_setupDB'
 
 const AskProposalRevisionMutation = /* GraphQL*/ `
   mutation askProposalRevision($input: AskProposalRevisionInput!) {
@@ -29,7 +29,6 @@ const DENIED_ERROR_MESSAGE = 'Access denied to this field.'
 describe('mutations.askProposalRevision', () => {
   // admin
   it('admin should ask a revision on proposal.', async () => {
-    await enableFeatureFlag('proposal_revisions')
 
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
@@ -45,10 +44,8 @@ describe('mutations.askProposalRevision', () => {
     )
     expect(askProposalRevisionMutation).toMatchSnapshot()
 
-    await disableFeatureFlag('proposal_revisions')
   })
   it('admin should ask a revision on proposal,even if date expires after analyse step end.', async () => {
-    await enableFeatureFlag('proposal_revisions')
 
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
@@ -64,7 +61,6 @@ describe('mutations.askProposalRevision', () => {
     )
     expect(askProposalRevisionMutation).toMatchSnapshot()
 
-    await disableFeatureFlag('proposal_revisions')
   })
   // user
   it('user should not ask a revision on proposal.', async () => {

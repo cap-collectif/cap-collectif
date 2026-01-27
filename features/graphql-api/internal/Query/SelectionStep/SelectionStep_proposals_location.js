@@ -1,4 +1,6 @@
 //* eslint-env jest */
+import '../../../_setupES'
+
 const SelectionStepProposalsQuery = /* GraphQL */ `
   query SelectionStepProposalsQuery($id: ID!, $geoBoundingBox: GeoBoundingBox) {
     node(id: $id) {

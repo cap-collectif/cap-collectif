@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const UpdateSelectionStep = /* GraphQL*/ `
     mutation UpdateSelectionStepMutation($input: UpdateSelectionStepInput!) {

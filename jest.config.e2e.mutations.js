@@ -2,16 +2,17 @@
 module.exports = {
   roots: ['<rootDir>/features/graphql-api', '<rootDir>/jest'],
   testPathIgnorePatterns: [
-    '<rootDir>/features/graphql-api/_setup.js',
-    '<rootDir>/features/graphql-api/_setupWithES.js',
-    '<rootDir>/features/graphql-api/enablePublicApi.js',
+    '<rootDir>/features/graphql-api/_setupDB.js',
+    '<rootDir>/features/graphql-api/_setupES.js',
+    '<rootDir>/features/graphql-api/_setupFeatureFlags.js',
+    '<rootDir>/features/graphql-api/_setupPublicApi.js',
   ],
   testEnvironment: 'node',
   testMatch: ['<rootDir>/features/graphql-api/**/Mutation/**/*.js'],
   transform: {
     '.*': 'babel-jest',
   },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.e2e.js', '<rootDir>/features/graphql-api/enablePublicApi.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.e2e.js'],
   globalSetup: '<rootDir>/jest-setup-global.e2e.js',
   snapshotFormat: {
     escapeString: true,

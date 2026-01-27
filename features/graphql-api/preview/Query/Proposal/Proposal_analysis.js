@@ -1,3 +1,6 @@
+/* eslint-env jest */
+import '../../../_setupES'
+
 const ProposalAnalysisPreviewData = /* GraphQL */ `
   query getProposalsAnalysisPreviewData($collectStepId: ID!) {
     node(id: $collectStepId) {

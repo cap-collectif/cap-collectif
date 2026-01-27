@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const UserContributionsQuery = /* GraphQL */ `
   query UserContributionsCountByAuthorAndTypeQuery(
     $id: ID!

@@ -31,9 +31,7 @@ const CommentsQuery = /* GraphQL */ `
 
 describe('Internal|Query.comments', () => {
   // these tests only Query Data so we can safely enable the multilangue toggle once before all
-  beforeAll(async () => {
-    await global.enableFeatureFlag('multilangue')
-  })
+  
 
   it('fetches list of comments', async () => {
     await expect(graphql(CommentsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()

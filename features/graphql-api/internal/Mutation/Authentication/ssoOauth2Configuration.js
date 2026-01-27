@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const CreateOauth2SSOConfiguration = /* GraphQL */ `
   mutation CreateOauth2SSOConfigurationMutation($input: CreateOauth2SSOConfigurationInput!) {

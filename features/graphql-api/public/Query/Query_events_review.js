@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const InternalEventsQuery = /* GraphQL */ `
   query InternalEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder, $isFuture: Boolean) {
     events(first: $count, after: $cursor, orderBy: $orderBy, isFuture: $isFuture) {

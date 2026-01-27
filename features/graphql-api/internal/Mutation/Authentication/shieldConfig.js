@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 describe('Internal|ShieldConfig', () => {
   it('Updates a shield config as admin', async () => {

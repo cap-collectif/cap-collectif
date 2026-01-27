@@ -1,6 +1,5 @@
 /* eslint-env jest */
-// Lightweight setup: DB restore only (no ES)
-// For tests requiring ES, use _setupWithES.js instead
+// Database reset - use this for tests that mutate the database
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 

@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const Query = /* GraphQL */ `
   query NotificationsFromQuery {
     notificationsFromEmail

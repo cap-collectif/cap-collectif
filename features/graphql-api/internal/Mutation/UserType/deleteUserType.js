@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const DeleteUserTypeMutation = /* GraphQL */ `
   mutation DeleteUserTypeMutation($input: DeleteUserTypeInput!) {

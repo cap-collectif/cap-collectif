@@ -21,6 +21,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -47,6 +50,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -73,6 +79,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -99,6 +108,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -136,6 +148,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -217,6 +232,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -243,6 +261,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -269,6 +290,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -328,6 +352,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -354,6 +381,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -435,6 +465,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -461,6 +494,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -487,89 +523,8 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
-    ],
-  },
-}
-`;
-
-exports[`Query.appLog connection fetches app logs with organizations and project_admin feature flags enabled 1`] = `
-Object {
-  "appLog": Object {
-    "edges": Array [
-      Object {
-        "node": Object {
-          "actionType": "EXPORT",
-          "createdAt": "2025-07-01 11:59:00",
-          "description": "les données des utilisateurs",
-          "ip": "127.0.0.2",
-          "user": Object {
-            "username": "Valérie Masson Delmotte",
-          },
-        },
-      },
-    ],
-    "newestLoggedAt": "2025-07-01 12:02:00",
-    "oldestLoggedAt": "2025-01-01 00:00:00",
-    "userRoles": Array [
-      "ROLE_ADMIN",
-      "ROLE_SUPER_ADMIN",
       "ORGANIZATION_ADMIN",
       "ORGANIZATION_MEMBER",
-      "ROLE_PROJECT_ADMIN",
-    ],
-  },
-}
-`;
-
-exports[`Query.appLog connection fetches app logs with organizations feature flag enabled 1`] = `
-Object {
-  "appLog": Object {
-    "edges": Array [
-      Object {
-        "node": Object {
-          "actionType": "EXPORT",
-          "createdAt": "2025-07-01 11:59:00",
-          "description": "les données des utilisateurs",
-          "ip": "127.0.0.2",
-          "user": Object {
-            "username": "Valérie Masson Delmotte",
-          },
-        },
-      },
-    ],
-    "newestLoggedAt": "2025-07-01 12:02:00",
-    "oldestLoggedAt": "2025-01-01 00:00:00",
-    "userRoles": Array [
-      "ROLE_ADMIN",
-      "ROLE_SUPER_ADMIN",
-      "ORGANIZATION_ADMIN",
-      "ORGANIZATION_MEMBER",
-    ],
-  },
-}
-`;
-
-exports[`Query.appLog connection fetches app logs with project_admin feature flag enabled 1`] = `
-Object {
-  "appLog": Object {
-    "edges": Array [
-      Object {
-        "node": Object {
-          "actionType": "EXPORT",
-          "createdAt": "2025-07-01 11:59:00",
-          "description": "les données des utilisateurs",
-          "ip": "127.0.0.2",
-          "user": Object {
-            "username": "Valérie Masson Delmotte",
-          },
-        },
-      },
-    ],
-    "newestLoggedAt": "2025-07-01 12:02:00",
-    "oldestLoggedAt": "2025-01-01 00:00:00",
-    "userRoles": Array [
-      "ROLE_ADMIN",
-      "ROLE_SUPER_ADMIN",
       "ROLE_PROJECT_ADMIN",
     ],
   },
@@ -597,6 +552,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -623,6 +581,9 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
+      "ROLE_PROJECT_ADMIN",
     ],
   },
 }
@@ -704,7 +665,255 @@ Object {
     "userRoles": Array [
       "ROLE_ADMIN",
       "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
       "ROLE_PROJECT_ADMIN",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs without organizations and project_admin feature flags 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs without organizations feature flag 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ROLE_PROJECT_ADMIN",
+    ],
+  },
+}
+`;
+
+exports[`Query.appLog connection fetches app logs without project_admin feature flag 1`] = `
+Object {
+  "appLog": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "actionType": "DELETE",
+          "createdAt": "2025-07-01 12:02:00",
+          "description": "l'étape Collecte des questions chez youpie du projet Questions/Responses",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "admin",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "welcomattic",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EXPORT",
+          "createdAt": "2025-07-01 11:59:00",
+          "description": "les données des utilisateurs",
+          "ip": "127.0.0.2",
+          "user": Object {
+            "username": "Valérie Masson Delmotte",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "EDIT",
+          "createdAt": "2025-06-01 18:35:00",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "xlacot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "CREATE",
+          "createdAt": "2025-06-01 15:32:18",
+          "description": "Formulaire de questionnaire du projet Je suis un projet",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "sfavot",
+          },
+        },
+      },
+      Object {
+        "node": Object {
+          "actionType": "SHOW",
+          "createdAt": "2025-01-01 00:00:00",
+          "description": "Page Liste des utilisateurs",
+          "ip": "127.0.0.1",
+          "user": Object {
+            "username": "lbrunet",
+          },
+        },
+      },
+    ],
+    "newestLoggedAt": "2025-07-01 12:02:00",
+    "oldestLoggedAt": "2025-01-01 00:00:00",
+    "userRoles": Array [
+      "ROLE_ADMIN",
+      "ROLE_SUPER_ADMIN",
+      "ORGANIZATION_ADMIN",
+      "ORGANIZATION_MEMBER",
     ],
   },
 }

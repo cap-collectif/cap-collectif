@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const ProjectTypesQuery = /* GraphQL */ `
   query ProjectTypesQuery($id: ID!) {
     project: node(id: $id) {

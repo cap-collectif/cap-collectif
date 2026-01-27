@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const ProjectStepsQuery = /* GraphQL */ `
   query ProjectStepsQuery($id: ID!) {
     project: node(id: $id) {

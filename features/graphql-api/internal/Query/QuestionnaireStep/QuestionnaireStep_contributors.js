@@ -1,4 +1,6 @@
 //* eslint-env jest */
+import '../../../_setupES'
+
 const QuestionnaireStepContributorsQuery = /* GraphQL */ `
   query QuestionnaireStepContributorsQuery($id: ID!) {
     node(id: $id) {

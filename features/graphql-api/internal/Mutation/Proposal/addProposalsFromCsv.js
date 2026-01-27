@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddProposalsFromCsvMutation = /* GraphQL */ `
   mutation AddProposalsFromCsvMutation($input: AddProposalsFromCsvInput!) {

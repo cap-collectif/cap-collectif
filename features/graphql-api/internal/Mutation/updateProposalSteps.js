@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const ChangeProposalProgressStepsMutation = /* GraphQL */ `
   mutation ChangeProposalProgressStepsMutation($input: ChangeProposalProgressStepsInput!) {

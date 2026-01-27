@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const InternalQuery = /* GraphQL */ `
   query InternalQuery {
     availableConsultations {

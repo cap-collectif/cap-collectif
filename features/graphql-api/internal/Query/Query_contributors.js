@@ -1,4 +1,6 @@
 //* eslint-env jest */
+// This query does NOT need setupES because ContributorsResolver uses SQL and not ES
+
 const ContributorsQuery = /* GraphQL */ `
   query ContributorsQuery($search: ContributorSearchInput, $roles: [ContributorsRole]!, $order: ContributorOrder) {
     contributors(search: $search, roles: $roles, orderBy: $order) {

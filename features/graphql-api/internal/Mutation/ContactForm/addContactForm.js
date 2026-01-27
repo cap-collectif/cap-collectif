@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddContactFormMutation = /* GraphQL */ `
   mutation AddContactForm($input: AddContactFormInput!) {

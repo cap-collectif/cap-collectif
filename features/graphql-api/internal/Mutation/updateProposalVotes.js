@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const UpdateProposalVotesWithoutVotesMutation = /* GraphQL */ `
   mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {

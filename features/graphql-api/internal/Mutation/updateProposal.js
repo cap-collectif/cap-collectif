@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const ChangeProposalContentMutation = /* GraphQL */ `
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!) {
@@ -637,23 +637,16 @@ describe('mutations.changeProposalContentMutation', () => {
     ).resolves.toMatchSnapshot()
   })
   it('wants to edit a proposal as super admin', async () => {
-    await global.enableFeatureFlag('districts')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(ChangeProposalContentAsSuperAdminMutation, { input: inputSuperAdmin }, 'internal_super_admin'),
     ).resolves.toMatchSnapshot()
   })
   it('wants to update a and published a draft proposal as admin', async () => {
-    await global.enableFeatureFlag('districts')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(ChangeProposalContentDraftMutation, { input: inputDraft }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
   it('tries to update his proposal in revision as pierre', async () => {
-    await global.enableFeatureFlag('districts')
-    await global.enableFeatureFlag('themes')
-    await global.enableFeatureFlag('proposal_revisions')
     await expect(
       graphql(ChangeProposalContentRevisionMutation, { input: inputRevision }, 'internal_kiroule'),
     ).resolves.toMatchSnapshot()

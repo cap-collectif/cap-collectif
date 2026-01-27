@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const UserAwaitingOrRefusedEventsQuery = /* GraphQL */ `
   query UserEventsQuery($id: ID!, $count: Int!, $cursor: String) {
     node(id: $id) {

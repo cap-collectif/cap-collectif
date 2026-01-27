@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const MultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
   query MultipleChoiceQuestionQuery($id: ID!) {
     node(id: $id) {

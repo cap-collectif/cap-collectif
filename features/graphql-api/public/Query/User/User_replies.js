@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const UserRepliesQuery = /* GraphQL */ `
   query UserRepliesQuery($id: ID!) {
     node(id: $id) {

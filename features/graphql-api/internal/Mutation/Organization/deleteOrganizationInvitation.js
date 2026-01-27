@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const DeleteOrganizationInvitation = /* GraphQL */ `
   mutation DeleteOrganizationInvitation($input: DeleteOrganizationInvitationInput!) {

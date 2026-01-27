@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup'
+import '../../_setupDB'
 
 const AssignAnalystsToProposalsMutation = /* GraphQL*/ `
   mutation AssignAnalystsToProposalsMutation($input: AssignAnalystsToProposalsInput!) {

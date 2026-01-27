@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const UpdateCivicIAMutation = /* GraphQL */ `
   mutation UpdateCivicIAMutation($input: UpdateCivicIAInput!) {

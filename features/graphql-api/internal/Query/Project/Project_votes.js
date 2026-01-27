@@ -1,4 +1,6 @@
 /* eslint-dev jest*/
+import '../../../_setupES'
+
 const ProjectVotesQuery = /* GraphQL */ `
   query ProjectCounters($projectId: ID!, $anonymous: Boolean) {
     project: node(id: $projectId) {

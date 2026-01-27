@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const ViewerQuery = /* GraphQL */ `
   query ViewerQuery {
     viewer {

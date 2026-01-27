@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ProposalStepProposalsQuery = /* GraphQL */ `
   query ProposalStepProposalsQuery(
     $id: ID!

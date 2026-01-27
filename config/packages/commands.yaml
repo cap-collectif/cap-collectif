@@ -54,8 +54,6 @@ services:
             $name: 'capco:user_archives:delete'
 
     Capco\AppBundle\Command\ResetFeatureFlagsCommand:
-        arguments:
-            $name: 'capco:reset-feature-flags'
 
     Capco\AppBundle\Command\ResetDefaultLocaleCommand:
         arguments:

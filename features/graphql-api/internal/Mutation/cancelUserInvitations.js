@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup'
+import '../../_setupDB'
 
 const DENIED_ERROR_MESSAGE = 'Access denied to this field'
 

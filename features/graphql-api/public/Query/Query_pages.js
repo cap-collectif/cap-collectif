@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const PagesQuery = /* GraphQL */ `
   query PagesQuery {
     pages {

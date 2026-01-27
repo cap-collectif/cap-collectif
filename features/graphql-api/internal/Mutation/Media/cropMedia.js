@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 const Jimp = require('jimp')
 
 // Media is not part of Node interface

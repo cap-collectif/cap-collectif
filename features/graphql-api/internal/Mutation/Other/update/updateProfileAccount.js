@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup'
+import '../../../../_setupDB'
 
 const UpdateProfileAccountEmailMutation = /* GraphQL*/ `
   mutation UpdateProfileAccountEmailMutation($input: UpdateProfileAccountEmailInput!) {
@@ -67,7 +67,7 @@ describe('mutations.updateProfileAccountEmail', () => {
   })
 
   it('should not update user email, cause bad email', async () => {
-    await enableFeatureFlag('restrict_registration_via_email_domain')
+    await global.enableFeatureFlag('restrict_registration_via_email_domain')
     const updateEmail = await graphql(
       UpdateProfileAccountEmailMutation,
       {
@@ -78,8 +78,8 @@ describe('mutations.updateProfileAccountEmail', () => {
       },
       'internal_user',
     )
-    await disableFeatureFlag('restrict_registration_via_email_domain')
     expect(updateEmail).toMatchSnapshot()
+    await global.resetFeatureFlags()
   })
 
   it('should update user is locale', async () => {

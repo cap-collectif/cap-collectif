@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ProjectProposalsQuery = /* GraphQL */ `
   query ProjectProposalsQuery($id: ID!, $isAuthenticated: Boolean!) {
     viewer @include(if: $isAuthenticated) {

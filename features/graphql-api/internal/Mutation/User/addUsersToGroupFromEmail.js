@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddUsersToGroupFromEmailMutation = /* GraphQL */ `
   mutation AddUsersToGroupFromEmail($input: AddUsersToGroupFromEmailInput!) {

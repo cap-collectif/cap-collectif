@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const OpenDataEventsQuery = /* GraphQL */ `
   query OpenDataEventsQuery($count: Int!, $cursor: String, $orderBy: EventOrder) {
     events(first: $count, after: $cursor, orderBy: $orderBy) {

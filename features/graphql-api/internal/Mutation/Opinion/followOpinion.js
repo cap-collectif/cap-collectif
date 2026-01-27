@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 /* eslint-env jest */
 const FollowOpinionMutation = /* GraphQL */ `

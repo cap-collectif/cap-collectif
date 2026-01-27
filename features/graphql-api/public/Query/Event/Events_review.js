@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const EventReviewQuery = /* GraphQL */ `
   query EventReviewQuery($id: ID!) {
     node(id: $id) {

@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const OpenDataProposalsQuery = /* GraphQL */ `
   query OpenDataProposalsQuery(
     $id: ID!

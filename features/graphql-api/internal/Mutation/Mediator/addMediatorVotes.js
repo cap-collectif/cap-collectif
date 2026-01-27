@@ -1,5 +1,6 @@
 /* eslint-env jest */
-import '../../../_setupWithES'
+import '../../../_setupDB'
+import '../../../_setupES'
 
 const AddMediatorVotesMutation = /* GraphQL*/ `
   mutation AddMediatorVotes($input: AddMediatorVotesInput!) {
@@ -44,9 +45,7 @@ const AddMediatorVotesMutation = /* GraphQL*/ `
 `
 
 describe('mutations|addMediatorVotes', () => {
-  beforeEach(async () => {
-    await global.enableFeatureFlag('mediator')
-  })
+  
   it('Mediator add votes.', async () => {
     const variables = {
       input: {

@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddReplyMutation = /* GraphQL */ `
   mutation ($input: AddUserReplyInput!) {

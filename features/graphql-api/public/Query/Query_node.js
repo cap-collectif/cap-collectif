@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const NodeQuery = /* GraphQL */ `
   query NodeQuery($id: ID!) {
     node(id: $id) {

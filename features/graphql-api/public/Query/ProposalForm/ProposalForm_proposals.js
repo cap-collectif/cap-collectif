@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const InternalQuery = /* GraphQL */ `
   query InternalQuery($proposalForm: ID!) {
     proposalForm: node(id: $proposalForm) {

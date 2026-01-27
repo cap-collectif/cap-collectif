@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setup'
+import '../../_setupDB'
 
 const TrashMutation = /* GraphQL */ `
   mutation TrashMutation($input: TrashInput!) {

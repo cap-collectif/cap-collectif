@@ -1,5 +1,6 @@
 /* eslint-env jest */
-import '../../../_setupWithES'
+import '../../../_setupDB'
+import '../../../_setupES'
 
 const UpdateMediatorVotesMutation = /* GraphQL*/ `
   mutation UpdateMediatorVotes($input: UpdateMediatorVotesInput!) {
@@ -34,9 +35,7 @@ const UpdateMediatorVotesMutation = /* GraphQL*/ `
 `
 
 describe('mutations|updateMediatorVotes', () => {
-  beforeEach(async () => {
-    await global.enableFeatureFlag('mediator')
-  })
+  
 
   it('Mediator update votes participant Infos and remove one proposal.', async () => {
     const variables = {

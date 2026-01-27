@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddEventsMutation = /* GraphQL */ `
   mutation ($input: AddEventInput!) {
@@ -114,6 +114,7 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
+    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event with bad date', async () => {
@@ -141,6 +142,7 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
+    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event with 2 registration type', async () => {
@@ -167,6 +169,7 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
+    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event', async () => {
@@ -208,5 +211,6 @@ describe('mutations.addEventMutation', () => {
         },
       },
     })
+    await global.resetFeatureFlags()
   })
 })

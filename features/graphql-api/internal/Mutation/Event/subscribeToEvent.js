@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const SubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
   mutation SubscribeToEventAsRegistered($input: SubscribeToEventAsRegisteredInput!) {

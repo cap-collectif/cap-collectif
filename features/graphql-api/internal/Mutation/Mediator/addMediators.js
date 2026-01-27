@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddMediatorsMutation = /* GraphQL*/ `
   mutation AddMediators($input: AddMediatorsInput!) {
@@ -23,9 +23,7 @@ const AddMediatorsMutation = /* GraphQL*/ `
 `
 
 describe('mutations|addMediators', () => {
-  beforeEach(async () => {
-    await global.enableFeatureFlag('mediator')
-  })
+  
   it('admin add users as mediator.', async () => {
     const variables = {
       input: {

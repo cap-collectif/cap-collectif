@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const deleteProposalMutation = /* GraphQL */ `
   mutation ($input: DeleteProposalInput!) {
@@ -29,8 +29,6 @@ describe('Internal|delete proposal', () => {
   })
 
   it('User GraphQL client can delete his proposal', async () => {
-    await global.enableFeatureFlag('themes')
-    await global.enableFeatureFlag('districts')
 
     await expect(
       graphql(

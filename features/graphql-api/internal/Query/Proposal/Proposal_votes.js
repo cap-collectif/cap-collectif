@@ -1,3 +1,6 @@
+/* eslint-env jest */
+import '../../../_setupES'
+
 const ProposalVoteMiniumQuery = /* GraphQL */ `
   query ProposalVoteMiniumQuery($id: ID!, $includeNotAccounted: Boolean!, $includeUnpublished: Boolean!) {
     proposal: node(id: $id) {

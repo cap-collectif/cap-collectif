@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const GeoCodeQueryQuery = /* GraphQL */ `
   query GeoCodeQuery($latitude: Float!, $longitude: Float!) {
     geocode(latitude: $latitude, longitude: $longitude) {

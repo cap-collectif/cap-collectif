@@ -1,4 +1,6 @@
 //* eslint-env jest */
+import '../../../_setupES'
+
 const CollectStepContributorsQuery = /* GraphQL */ `
   query CollectStepContributorsQuery($id: ID!) {
     node(id: $id) {

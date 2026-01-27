@@ -1,4 +1,4 @@
-import '../../_setup'
+import '../../_setupDB'
 
 const UpdateUserMutation = /* GraphQL */ `
   mutation UpdateUserMutation($input: UpdateUserInput!) {
@@ -78,9 +78,7 @@ const input = {
 }
 
 describe('mutations.updateUserMutation', () => {
-  beforeEach(async () => {
-    await global.enableFeatureFlag('user_type')
-  })
+  
 
   it('should update user', async () => {
     await expect(graphql(UpdateUserMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()

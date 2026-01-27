@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const TestEmailingCampaignMutation = /* GraphQL */ `
   mutation ($input: TestEmailingCampaignInput!) {

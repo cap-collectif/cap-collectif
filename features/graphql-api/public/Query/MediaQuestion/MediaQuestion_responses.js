@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const MediaQuestionResponsesQuery = /* GraphQL */ `
   query MediaQuestionResponsesQuery($id: ID!) {
     node(id: $id) {

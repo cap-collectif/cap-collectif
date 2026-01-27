@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const ToggleFeatureMutation = /* GraphQL */ `
   mutation toggleFeatureMutation($input: ToggleFeatureInput!) {

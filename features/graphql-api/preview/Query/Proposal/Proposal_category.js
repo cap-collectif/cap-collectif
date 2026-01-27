@@ -1,3 +1,6 @@
+/* eslint-env jest */
+import '../../../_setupES'
+
 const ProposalCategoryPreviewData = /* GraphQL */ `
   query ProposalCategoryPreviewData($collectStepId: ID!) {
     node(id: $collectStepId) {

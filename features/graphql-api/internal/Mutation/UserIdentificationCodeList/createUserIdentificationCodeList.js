@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const UserIdentificationCodeListMutation = /* GraphQL */ `
   mutation ($input: CreateUserIdentificationCodeListInput!) {

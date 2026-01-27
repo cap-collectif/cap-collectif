@@ -1,9 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
-
-beforeEach(async () => {
-  await global.enableFeatureFlag('emailing')
-})
+import '../../../_setupDB'
 
 const CreateSenderEmailDomainMutation = /* GraphQL*/ `
     mutation ($input: CreateSenderEmailDomainInput!) {

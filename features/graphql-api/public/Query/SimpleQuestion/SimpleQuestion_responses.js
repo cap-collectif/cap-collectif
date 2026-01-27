@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const SimpleQuestionResponsesQuery = /* GraphQL */ `
   query SimpleQuestionResponsesQuery($id: ID!) {
     node(id: $id) {

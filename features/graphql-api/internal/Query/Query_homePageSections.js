@@ -47,50 +47,30 @@ const HomePageSectionsQuery = /* GraphQL */ `
 
 describe('Internal|Query.homePageSections', () => {
   it('fetches all home page sections (enabled: null)', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(HomePageSectionsQuery, { enabled: null }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('fetches only enabled home page sections (enabled: true)', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(HomePageSectionsQuery, { enabled: true }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('fetches only disabled home page sections (enabled: false)', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(HomePageSectionsQuery, { enabled: false }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('fetches home page sections with pagination (first 3)', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(HomePageSectionsQuery, { enabled: null, first: 3 }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('fetches home page sections with pagination (next page)', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     const firstPage = await graphql(
       HomePageSectionsQuery,
       { enabled: null, first: 3 },
@@ -108,10 +88,6 @@ describe('Internal|Query.homePageSections', () => {
   })
 
   it('fetches home page sections ordered by position DESC', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(
         HomePageSectionsQuery,
@@ -125,10 +101,6 @@ describe('Internal|Query.homePageSections', () => {
   })
 
   it('fetches home page sections ordered by created date DESC', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(
         HomePageSectionsQuery,
@@ -142,10 +114,6 @@ describe('Internal|Query.homePageSections', () => {
   })
 
   it('fetches home page sections ordered by updated date ASC', async () => {
-    await global.enableFeatureFlag('calendar')
-    await global.enableFeatureFlag('blog')
-    await global.enableFeatureFlag('newsletter')
-    await global.enableFeatureFlag('themes')
     await expect(
       graphql(
         HomePageSectionsQuery,

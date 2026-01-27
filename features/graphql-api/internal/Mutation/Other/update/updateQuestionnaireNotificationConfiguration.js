@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup'
+import '../../../../_setupDB'
 
 const UpdateQuestionnaireNotificationConfigurationMutation = /* GraphQL */ `
   mutation UpdateQuestionnaireNotificationConfigurationMutation(

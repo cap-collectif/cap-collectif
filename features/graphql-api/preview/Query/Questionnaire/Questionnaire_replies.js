@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const OpenDataRepliesQuery = /* GraphQL */ `
   query OpenDataRepliesQuery($id: ID!, $count: Int!, $cursor: String) {
     node(id: $id) {

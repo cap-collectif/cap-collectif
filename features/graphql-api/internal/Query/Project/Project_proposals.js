@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ProjectProposalQuery = /* GraphQL */ `
   query getProjectProposals(
     $projectId: ID!

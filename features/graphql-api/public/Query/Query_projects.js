@@ -1,5 +1,6 @@
 /* eslint-env jest */
 /* eslint-disable flowtype/require-valid-file-annotation */
+
 const ProjectsPublicQuery = /* GraphQL */ `
   query ProjectsPublicQuery($count: Int!, $cursor: String) {
     projects(first: $count, after: $cursor) {

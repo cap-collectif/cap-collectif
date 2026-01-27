@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup'
+import '../../../../_setupDB'
 
 const DeleteProjectMutation = /* GraphQL */ `
   mutation DeleteProject($input: DeleteProjectInput!) {

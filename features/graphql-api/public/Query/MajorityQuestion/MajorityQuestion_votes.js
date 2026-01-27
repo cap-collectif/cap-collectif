@@ -1,4 +1,5 @@
 /* eslint-env jest */
+
 const MajorityQuestionVotesQuery = /* GraphQL */ `
   query MajorityQuestionVotesQuery($id: ID!) {
     node(id: $id) {

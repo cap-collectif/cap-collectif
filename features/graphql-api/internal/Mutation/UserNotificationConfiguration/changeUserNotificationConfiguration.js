@@ -1,4 +1,4 @@
-import '../../../_setup'
+import '../../../_setupDB'
 
 const ChangeUserNotificationConfigurationMutation = /* GraphQL */ `
   mutation ($input: ChangeUserNotificationsConfigurationInput!) {

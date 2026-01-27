@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ConsultationListContribtionsQuery = /* GraphQL */ `
   query ConsultationListContributionsQuery($consultationId: ID!, $orderBy: ContributionOrder!) {
     node(id: $consultationId) {

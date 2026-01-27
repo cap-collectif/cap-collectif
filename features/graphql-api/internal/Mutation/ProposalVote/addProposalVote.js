@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const AddProposalVoteMutation = /* GraphQL*/ `
   mutation ($input: AddProposalVoteInput!) {
@@ -176,7 +176,6 @@ describe('mutations.addProposalVote', () => {
   })
 
   it('Logged in API client wants to vote for proposals until his votes are taken into account', async () => {
-    await global.enableFeatureFlag('votes_min')
 
     // First vote - not yet accounted (minimum not reached)
     await expect(

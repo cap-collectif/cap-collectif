@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setup'
+import '../../../_setupDB'
 
 const DeleteMailingListMutation = /* GraphQL*/ `
     mutation ($input: DeleteMailingListInput!) {

@@ -1,5 +1,6 @@
 /* eslint-env jest */
-import '../../../_setupWithES'
+import '../../../_setupDB'
+import '../../../_setupES'
 
 // TODO: when https://github.com/cap-collectif/platform/pull/12175 will be merged, the debate votes
 // count should reflect the change because we'll add both of the anonymous votes and the

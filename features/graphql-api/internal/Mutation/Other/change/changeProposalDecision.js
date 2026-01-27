@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../../_setup'
+import '../../../../_setupDB'
 
 const ChangeProposalDecisionMutation = /* GraphQL */ `
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {

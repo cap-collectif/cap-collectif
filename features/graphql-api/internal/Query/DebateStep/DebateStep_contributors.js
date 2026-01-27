@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const DebateStepContributorsQuery = /* GraphQL */ `
   query DebateStepContributors($id: ID!, $count: Int!, $cursor: String) {
     node(id: $id) {

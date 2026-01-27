@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const ProjectAdminAnalysisTabQuery = /* GraphQL */ `
   query ProjectAdminAnalysisTabQuery(
     $projectId: ID!

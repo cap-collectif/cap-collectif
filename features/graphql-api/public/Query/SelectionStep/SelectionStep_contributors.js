@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../../_setupES'
+
 const SelectionStepContributorsQuery = /* GraphQL */ `
   query SelectionStepContributorsQuery($id: ID!, $count: Int) {
     selectionStep: node(id: $id) {
