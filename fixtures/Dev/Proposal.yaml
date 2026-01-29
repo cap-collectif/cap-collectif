@@ -844,6 +844,22 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2020-02-01 00:00:07'))>
         updatedAt: <(new \DateTime('2020-02-01 00:00:07'))>
         status: '@statusIdfCollect1'
+    proposalIdfTrashedDraft:
+        id: proposalIdfTrashedDraft
+        title: Mon projet brouillon mis à la corbeille
+        body: Ce brouillon a été mis à la corbeille
+        author: '@userIan'
+        draft: true
+        trashedStatus: 'visible'
+        trashedReason: 'Brouillon supprimé'
+        trashedAt: <(new \DateTime('2020-02-01 00:00:11'))>
+        proposalForm: '@proposalformIdf'
+        reference: 11
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        createdAt: <(new \DateTime('2020-02-01 00:00:10'))>
+        updatedAt: <(new \DateTime('2020-02-01 00:00:10'))>
+        status: '@statusIdfCollect1'
     proposalIdf8:
         id: proposalIdf8
         title: Mon projet qui ne sera pas analysé

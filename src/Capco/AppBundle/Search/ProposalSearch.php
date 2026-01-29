@@ -794,8 +794,7 @@ class ProposalSearch extends Search
 
                 case ProposalsState::DRAFT:
                     $filters['draft'] = true;
-                    unset($filters['published']);
-                    $filters['trashed'] = false;
+                    unset($filters['published'], $filters['trashed']);
                     $filters['archived'] = false;
 
                     break;

@@ -55,11 +55,6 @@ class MediaProvider
         return $this->generateId($media) . '.' . $media->getBinaryContent()->guessExtension();
     }
 
-    public function generateId(Media $media): string
-    {
-        return sha1($media->getName() . uniqid() . random_int(11111, 99999));
-    }
-
     protected function setFileContents(Media $media, ?string $contents = null): void
     {
         $file = $this->getOrGenerateReferenceFile($media);
@@ -86,6 +81,11 @@ class MediaProvider
     protected function getDirectoryPath(Media $media): string
     {
         return $media->getContext() . '/0001/01';
+    }
+
+    protected function generateId(Media $media): string
+    {
+        return sha1($media->getName() . uniqid() . random_int(11111, 99999));
     }
 
     protected function prefixSlash(string $path): string

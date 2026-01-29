@@ -154,7 +154,7 @@ describe('Internal.projects.proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
-  it("fetches project proposal's total count (draft)", async () => {
+  it("fetches project proposal's total count (draft) including trashed drafts", async () => {
     const response = await graphql(
       ProjectProposalTotalCountQuery,
       {
@@ -163,7 +163,7 @@ describe('Internal.projects.proposals', () => {
       },
       'internal_admin',
     )
-    expect(response.project.proposals.totalCount).toBe(1)
+    expect(response.project.proposals.totalCount).toBe(2)
   })
 
   it("fetches project proposal's total count (published)", async () => {
@@ -187,7 +187,8 @@ describe('Internal.projects.proposals', () => {
       },
       'internal_admin',
     )
-    expect(response.project.proposals.totalCount).toBe(10)
+
+    expect(response.project.proposals.totalCount).toBe(11)
   })
 
   it("fetches project proposal's total count (trashed)", async () => {
