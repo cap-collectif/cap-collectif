@@ -8,6 +8,10 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Process\Process;
 
+/**
+ * @deprecated
+ * @see MailjetClientV2
+ */
 class MailjetClient
 {
     final public const BASE_URL = 'https://api.mailjet.com/v3/REST/';

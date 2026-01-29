@@ -71,7 +71,7 @@ export const ModalInternalMembers = ({ show, onClose, type }: Props) => {
           `}
           variables={{
             count: USERS_PAGINATION,
-            emailConfirmed: type === 'REGISTERED' ? null : type === 'CONFIRMED',
+            emailConfirmed: type !== 'NOT_CONFIRMED',
           }}
           render={({ error, props, retry }) =>
             renderInternalMembers({

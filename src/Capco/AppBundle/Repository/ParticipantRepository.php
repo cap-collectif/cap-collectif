@@ -436,23 +436,6 @@ class ParticipantRepository extends EntityRepository
         return $qb;
     }
 
-    /**
-     * @return array<Participant>
-     */
-    public function getFromInternalList(
-        bool $includeUnsubscribed = false,
-    ): array {
-        $qb = $this->createQueryBuilder('p');
-        $qb->select('p')->where('p.email IS NOT NULL');
-        $qb->andWhere('p.confirmationToken IS NULL');
-
-        if (!$includeUnsubscribed) {
-            $qb->andWhere('p.consentInternalCommunication = 1');
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findWithContributionsByProjectAndParticipant(Project $project, Participant $participant): bool
     {
         $em = $this->getEntityManager();

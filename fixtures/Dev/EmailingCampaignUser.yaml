@@ -6,3 +6,63 @@ Capco\AppBundle\Entity\EmailingCampaignUser:
         emailingCampaign: '@CampaignToCovidParticipants'
         user: '@user4'
         sentAt: <identity((new \DateTime('2023-01-01')))>
+
+    emailingCampaignUser3:
+        emailingCampaign: '@CampaignWithMailingList'
+        user: '@userMickael'
+        sentAt: <identity((new \DateTime('2025-07-03')))>
+    emailingCampaignUser4:
+        emailingCampaign: '@CampaignWithMailingList'
+        user: '@userAgui'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Sent)>
+    emailingCampaignUser5:
+        emailingCampaign: '@CampaignWithMailingList'
+        user: '@userTheo'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Error)>
+
+    emailingCampaignUser6:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        user: '@ChristopheCassou'
+        sentAt: <identity((new \DateTime('2025-07-03')))>
+    emailingCampaignUser7:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        user: '@user10'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Sent)>
+    emailingCampaignUser8:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        user: '@user100'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Error)>
+
+    emailingCampaignUser9:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        participant: '@emailingParticipant5'
+        sentAt: <identity((new \DateTime('2025-07-03')))>
+    emailingCampaignUser10:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        participant: '@emailingParticipant6'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Sent)>
+    emailingCampaignUser11:
+        emailingCampaign: '@CampaignWithAllRegistered'
+        participant: '@emailingParticipant7'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Error)>
+
+    emailingCampaignUser12:
+        emailingCampaign: '@CampaignWithUserGroup'
+        user: '@emailingAdmin'
+        sentAt: <identity((new \DateTime('2025-07-03')))>
+    emailingCampaignUser13:
+        emailingCampaign: '@CampaignWithUserGroup'
+        user: '@emailingUser1'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Sent)>
+    emailingCampaignUser14:
+        emailingCampaign: '@CampaignWithUserGroup'
+        user: '@emailingUser2'
+        sentAt: <identity(new \DateTime('2025-07-03'))>
+        status: <identity(Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus::Error)>

@@ -102,6 +102,7 @@ export const features: FeatureToggles = {
   online_help: false,
   multi_consultations: false,
   full_proposal_card: false,
+  mailjet_sandbox: false,
 }
 export const initialState: State = {
   themes: [],

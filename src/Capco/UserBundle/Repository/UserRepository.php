@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateVote;
+use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Opinion;
@@ -19,9 +20,11 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ContributorsRole;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Mailer\Enum\RecipientType;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -163,18 +166,33 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getRegisteredCount(): int
+    /**
+     * @throws Exception
+     *
+     * @return array<int, array<string, ?string>>
+     */
+    public function getRecipientDataByGroup(EmailingCampaign $emailingCampaign, ?int $limit = 1000): array
     {
-        // TODO why do we need DISTINCT ?
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('count(DISTINCT u.id)');
-        $qb->andWhere('u.confirmationToken IS NULL');
+        $sql =
+            'SELECT u.id, u.username, u.email, u.locale, null as token, :userType as type
+            FROM fos_user u
+            INNER JOIN user_in_group ug ON ug.user_id = u.id
+            LEFT JOIN emailing_campaign_user ecu ON ecu.emailing_campaign_id = :emailingCampaign AND ecu.user_id = u.id
+            WHERE u.email IS NOT NULL
+            AND u.consent_internal_communication = 1
+            AND u.confirmation_token IS NULL
+            AND ug.group_id = :groupId
+            AND ecu.id IS NULL';
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult()
-        ;
+        if (null !== $limit && $limit > 0) {
+            $sql .= ' LIMIT ' . $limit;
+        }
+
+        return $this->getEntityManager()->getConnection()->fetchAllAssociative($sql, [
+            'emailingCampaign' => $emailingCampaign->getId(),
+            'groupId' => $emailingCampaign->getEmailingGroup()->getId(),
+            'userType' => RecipientType::User->value,
+        ]);
     }
 
     /**
@@ -697,7 +715,8 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
-        $dql = sprintf('SELECT u.id, count(distinct s) AS sources_count
+        $dql = sprintf(
+            'SELECT u.id, count(distinct s) AS sources_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -713,7 +732,9 @@ class UserRepository extends EntityRepository
             (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
           %s
-          GROUP BY u.id', $hasUsersConfirmed);
+          GROUP BY u.id',
+            $hasUsersConfirmed
+        );
         $query = $em
             ->createQuery($dql)
             ->setParameter('step', $step)
@@ -726,7 +747,8 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
-        $dql = sprintf('SELECT u.id, count(distinct a) AS arguments_count
+        $dql = sprintf(
+            'SELECT u.id, count(distinct a) AS arguments_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -742,7 +764,9 @@ class UserRepository extends EntityRepository
             (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
           %s
-          GROUP BY u.id', $hasUsersConfirmed);
+          GROUP BY u.id',
+            $hasUsersConfirmed
+        );
         $query = $em
             ->createQuery($dql)
             ->setParameter('step', $step)
@@ -910,7 +934,8 @@ class UserRepository extends EntityRepository
     {
         $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
         $em = $this->getEntityManager();
-        $dql = sprintf('SELECT u.id, count(distinct av) AS arguments_votes_count
+        $dql = sprintf(
+            'SELECT u.id, count(distinct av) AS arguments_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -927,7 +952,9 @@ class UserRepository extends EntityRepository
             (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
           %s
-          GROUP BY av.user', $hasUsersConfirmed);
+          GROUP BY av.user',
+            $hasUsersConfirmed
+        );
         $query = $em
             ->createQuery($dql)
             ->setParameter('step', $step)
@@ -940,7 +967,8 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
-        $dql = sprintf('SELECT u.id, count(distinct sv) AS sources_votes_count
+        $dql = sprintf(
+            'SELECT u.id, count(distinct sv) AS sources_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
@@ -957,7 +985,9 @@ class UserRepository extends EntityRepository
             (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
           %s
-          GROUP BY sv.user', $hasUsersConfirmed);
+          GROUP BY sv.user',
+            $hasUsersConfirmed
+        );
         $query = $em
             ->createQuery($dql)
             ->setParameter('step', $step)
@@ -1366,25 +1396,6 @@ class UserRepository extends EntityRepository
     public function getAllAdmin(): array
     {
         return $this->findByRole('ROLE_ADMIN');
-    }
-
-    public function getFromInternalList(
-        bool $includeUnsubscribed = false,
-        bool $includeSuperAdmin = false
-    ): array {
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('u')->where('u.email IS NOT NULL');
-        $qb->andWhere('u.enabled = 1');
-
-        if (!$includeUnsubscribed) {
-            $qb->andWhere('u.consentInternalCommunication = 1');
-        }
-
-        if (!$includeSuperAdmin) {
-            $qb->andWhere('u.roles NOT LIKE :role')->setParameter('role', '%ROLE_SUPER_ADMIN%');
-        }
-
-        return $qb->getQuery()->getResult();
     }
 
     public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
@@ -2296,13 +2307,15 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('PARTIAL u.{id, email, anonymizationReminderEmailToken}')
             ->leftJoin('u.memberOfOrganizations', 'om')
-            ->where("(u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%')
+            ->where(
+                "(u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%')
                 AND om IS NULL
                 AND (u.lastLogin < :inactivityLimitDate OR u.lastLogin IS NULL)
                 AND u.email IS NOT NULL
                 AND u.anonymizationReminderEmailSentAt IS NULL
                 AND u.confirmationToken IS NULL
-            ")
+            "
+            )
             ->setMaxResults($limit)
         ;
 

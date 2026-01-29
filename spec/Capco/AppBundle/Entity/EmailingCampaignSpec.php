@@ -4,8 +4,8 @@ namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\MailingList;
-use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
+use Capco\AppBundle\Mailer\Enum\EmailingCampaignInternalList;
 use PhpSpec\ObjectBehavior;
 
 class EmailingCampaignSpec extends ObjectBehavior

@@ -58,7 +58,7 @@ abstract class AbstractUserToken
         return $this;
     }
 
-    private static function generateToken(): string
+    public static function generateToken(): string
     {
         return bin2hex(random_bytes(self::TOKEN_LENGTH));
     }

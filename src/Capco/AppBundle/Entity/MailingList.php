@@ -96,21 +96,6 @@ class MailingList implements EntityInterface, Ownerable, CreatableInterface
         return $this;
     }
 
-    public function getUsersWithValidEmail(bool $consentInternalOnly = false): Collection
-    {
-        $usersWithValidEmail = new ArrayCollection();
-        foreach ($this->mailingListUsers as $mailingListUser) {
-            $contributor = $mailingListUser->getContributor();
-            if ($contributor->getEmail()
-              && (!$consentInternalOnly || $contributor->isConsentInternalCommunication())
-            ) {
-                $usersWithValidEmail->add($contributor);
-            }
-        }
-
-        return $usersWithValidEmail;
-    }
-
     public function getProject(): ?Project
     {
         return $this->project;

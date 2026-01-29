@@ -51,6 +51,7 @@ Capco\AppBundle\Entity\Participant:
         token: 'fakeTokenAmelieCampagne'
         user: null
         createdAt: <identity((new \DateTime('2024-01-14')))>
+        consentInternalCommunication: true
     participantEmailingCampaign2:
         id: 'participantEmailingCampaign2'
         firstname: Émile
@@ -62,6 +63,7 @@ Capco\AppBundle\Entity\Participant:
         token: 'fakeTokenEmileCampanil'
         user: null
         createdAt: <identity((new \DateTime('2024-01-14')))>
+        consentInternalCommunication: true
     participantEmailingCampaign3:
         id: 'participantEmailingCampaign3'
         firstname: Émilie
@@ -73,6 +75,7 @@ Capco\AppBundle\Entity\Participant:
         token: 'fakeTokenEmilieComptePanille'
         user: null
         createdAt: <identity((new \DateTime('2024-01-14')))>
+        consentInternalCommunication: true
     participantEmailingCampaign4:
         id: 'participantEmailingCampaign4'
         firstname: Amel
@@ -84,3 +87,15 @@ Capco\AppBundle\Entity\Participant:
         token: 'fakeTokenAmelIcampane'
         user: null
         createdAt: <identity((new \DateTime('2024-01-14')))>
+    emailingParticipant{5..7}:
+        id: 'emailingParticipant<current()>'
+        firstname: Emailing
+        lastname: Participant<current()>
+        email: <htmlentities('emailing.participant')><current()><htmlentities('@fake-email.com')>
+        phone: '+3300000000'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('1999-07-01'))>
+        token: 'fakeTokenEmailingParticipant<current()>'
+        user: null
+        createdAt: <identity((new \DateTime('2024-01-14')))>
+        consentInternalCommunication: true

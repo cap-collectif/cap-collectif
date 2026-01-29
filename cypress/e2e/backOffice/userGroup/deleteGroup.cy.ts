@@ -9,7 +9,7 @@ describe('Group deletion from the users groups page', () => {
   it('deletes a group from the groups list', () => {
     cy.interceptGraphQLOperation({ operationName: 'DeleteGroupMutation' })
     AdminGroupsPage.visitGroupsList()
-    cy.checkTableLength(8)
+    cy.checkTableLength(9)
     cy.get('.cap-table__tbody .cap-table__tr')
       .eq(1)
       .within(() => {
@@ -24,7 +24,7 @@ describe('Group deletion from the users groups page', () => {
     cy.wait('@DeleteGroupMutation')
     AdminGroupsPage.checkToast('admin.group-deletion-success')
     cy.get('.cap-table__tbody').should('not.contain', 'Agent de la ville')
-    cy.checkTableLength(7)
+    cy.checkTableLength(8)
   })
 
   it('deletes a group from the edit group modal', () => {
@@ -35,7 +35,7 @@ describe('Group deletion from the users groups page', () => {
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
     cy.wait('@DeleteGroupMutation')
     AdminGroupsPage.getToast().contains('admin.group-deletion-success').should('exist')
-    cy.checkTableLength(7)
+    cy.checkTableLength(8)
     cy.get('admin.users.edit-group').should('not.exist')
     cy.get('.cap-table__tbody').should('not.contain', 'Utilisateurs')
   })

@@ -1,6 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Enum;
+namespace Capco\AppBundle\Mailer\Enum;
+
+use Capco\AppBundle\Mailer\Exception\MailerLogicException;
 
 class EmailingCampaignInternalList
 {
@@ -21,7 +23,7 @@ class EmailingCampaignInternalList
     public static function checkIsValid(string $value): void
     {
         if (!self::isValid($value)) {
-            throw new \Exception("{$value} is not a valid emailing campaign internal list");
+            throw new MailerLogicException(sprintf('%s is not a valid emailing campaign internal list', $value));
         }
     }
 }

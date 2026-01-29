@@ -7325,6 +7325,7 @@ enum FeatureFlagType {
 
   """Whether or not sync antivirus is enabled"""
   antivirus
+  mailjet_sandbox
 }
 
 """A field error mapped to a form"""

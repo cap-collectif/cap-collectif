@@ -13,10 +13,10 @@ const USERS_FRAGMENT = graphql`
   fragment InternalMembers_query_users on Query
   @argumentDefinitions(emailConfirmed: { type: "Boolean" }, count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "InternalMembersPaginationQuery") {
-    refusingMembers: users(consentInternalCommunication: false) {
+    refusingMembers: users(consentInternalCommunication: false, emailConfirmed: $emailConfirmed, superAdmin: true) {
       totalCount
     }
-    members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true)
+    members: users(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true, superAdmin: true)
       @connection(key: "InternalMembers_members") {
       pageInfo {
         hasNextPage
@@ -35,7 +35,7 @@ const PARTICIPANTS_FRAGMENT = graphql`
   fragment InternalMembers_query_participants on Query
   @argumentDefinitions(emailConfirmed: { type: "Boolean" }, count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "InternalParticipantsPaginationQuery") {
-    refusingParticipants: participants(consentInternalCommunication: false) {
+    refusingParticipants: participants(consentInternalCommunication: false, emailConfirmed: $emailConfirmed) {
       totalCount
     }
     participants(first: $count, after: $cursor, emailConfirmed: $emailConfirmed, consentInternalCommunication: true)

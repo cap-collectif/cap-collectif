@@ -92,6 +92,7 @@ class Manager
     final public const collect_proposals_by_email = 'collect_proposals_by_email';
     final public const user_anonymization_automated = 'user_anonymization_automated';
     final public const antivirus = 'antivirus';
+    final public const mailjet_sandbox = 'mailjet_sandbox';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -138,6 +139,7 @@ class Manager
         self::remind_user_account_confirmation,
         self::sso_by_pass_auth,
         self::oauth2_switch_user,
+        self::mailjet_sandbox,
     ];
 
     public static $toggles = [
@@ -221,6 +223,7 @@ class Manager
         self::collect_proposals_by_email,
         self::user_anonymization_automated,
         self::antivirus,
+        self::mailjet_sandbox,
     ];
 
     protected Context $context;

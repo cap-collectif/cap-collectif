@@ -59,6 +59,7 @@ class FeaturesCategoryResolver
                     Manager::http_redirects,
                     Manager::emailing,
                     Manager::emailing_parameters,
+                    Manager::mailjet_sandbox,
                     Manager::proposal_revisions,
                     Manager::import_proposals,
                     Manager::analytics_page,

@@ -19,9 +19,11 @@ import {
   NavContainer,
   TitleContainer,
 } from './Header.style'
-import type { Header_emailingCampaign } from '~relay/Header_emailingCampaign.graphql'
+import type { Header_emailingCampaign$data } from '~relay/Header_emailingCampaign.graphql'
 import type { GlobalState } from '~/types'
 import Tooltip from '~ds/Tooltip/Tooltip'
+import InfoMessage from '~ds/InfoMessage/InfoMessage'
+import { State } from '~/redux/modules/default'
 export const PATHS = {
   PARAMETER: '/',
   CONTENT: '/content',
@@ -38,10 +40,12 @@ type Error = {
 type ReduxProps = {
   title: string
   submitting: boolean
-  errors: Record<string, Error>
+  errors: Record<string, Error>,
+  user: GlobalState['user'],
+  features: State['features']
 }
 type Props = ReduxProps & {
-  emailingCampaign: Header_emailingCampaign
+  emailingCampaign: Header_emailingCampaign$data
   disabled: boolean
   showError: boolean
   setModalCancelOpen: (arg0: boolean) => void
@@ -54,6 +58,8 @@ export const Header = ({
   disabled,
   setModalCancelOpen,
   submitting,
+  user,
+  features,
 }: Props) => {
   const intl = useIntl()
   const { status } = emailingCampaign
@@ -62,6 +68,7 @@ export const Header = ({
   const [maxWidthTitle, setMaxWidthTitle] = React.useState<number>(widthWindow)
   const [titleFocus, setTitleFocus] = React.useState<boolean>(false)
   const refTitle = React.useRef<HTMLDivElement | null>(null)
+  const isSuperAdmin = user ? user.isSuperAdmin : false
   React.useEffect(() => {
     if (refTitle.current && title) {
       // Adapt input width to content width
@@ -119,6 +126,18 @@ export const Header = ({
           >
             <span>{title}</span>
           </div>
+        )}
+
+        {isSuperAdmin && (
+          <InfoMessage variant={features?.mailjet_sandbox === true ? 'info' : 'danger'}>
+            <InfoMessage.Content>
+              {intl.formatMessage({
+                id: `emailing-mailjet-sandbox-${features?.mailjet_sandbox === true ? 'on' : 'off'}`,
+              })}
+              &nbsp;
+              <a href="/admin-next/features">Mailjet Sandbox</a>
+            </InfoMessage.Content>
+          </InfoMessage>
         )}
 
         {status === 'DRAFT' && (
@@ -217,6 +236,8 @@ export const Header = ({
 }
 
 const mapStateToProps = (state: GlobalState) => ({
+  user: state.user,
+  features: state.default.features,
   title: selectorForm(state, 'title') || '',
   errors: getFormSyncErrors(formName)(state),
   submitting: isSubmitting(formName)(state),

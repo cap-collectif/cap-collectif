@@ -101,6 +101,7 @@ export const features: FeatureFlags = {
   user_anonymization_automated: false,
   new_project_card: false,
   antivirus: false,
+  mailjet_sandbox: false,
 }
 
 const environment = {

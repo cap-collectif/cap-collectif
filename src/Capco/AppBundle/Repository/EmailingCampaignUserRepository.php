@@ -3,38 +3,52 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Entity\EmailingCampaignUser;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Mailer\Enum\RecipientType;
+use Capco\AppBundle\Mailer\Model\EmailCampaignRecipient;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Uid\Uuid;
 
 class EmailingCampaignUserRepository extends EntityRepository
 {
-    public function countAllByEmailingCampaign(EmailingCampaign $emailingCampaign): int
-    {
-        $qb = $this->createQueryBuilder('ecu')
-            ->select('COUNT(ecu.emailingCampaign)')
-            ->where('ecu.emailingCampaign = :emailingCampaign')
-            ->setParameter('emailingCampaign', $emailingCampaign)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult() ?? 0;
-    }
-
     /**
-     * @return ArrayCollection<int, EmailingCampaignUser>
+     * @param EmailCampaignRecipient[] $recipients
+     *
+     * @throws DBALException
      */
-    public function findUnsentByEmailingCampaign(EmailingCampaign $emailingCampaign, int $maxResults = 0): ArrayCollection
+    public function saveFromRecipients(EmailingCampaign $emailingCampaign, array $recipients): void
     {
-        $qb = $this->createQueryBuilder('ecu')
-            ->where('ecu.emailingCampaign = :emailingCampaign')
-            ->andWhere('ecu.sentAt IS NULL')
-            ->setParameter('emailingCampaign', $emailingCampaign)
-        ;
-        if ($maxResults > 0) {
-            $qb->setMaxResults($maxResults);
-        }
-        $results = $qb->getQuery()->getResult();
+        $sql = ' INSERT INTO emailing_campaign_user (id, emailing_campaign_id, user_id, participant_id, sent_at, status) VALUES ';
 
-        return new ArrayCollection($results);
+        $valuesSQL = [];
+        $uuidParams = [];
+        $userIdParams = [];
+        $participantIdParams = [];
+        $statusParams = [];
+
+        foreach ($recipients as $i => $recipient) {
+            $valuesSQL[] = sprintf(' (:uuid_%d, :campaignId, :userId_%d, :participantId_%d, NOW(), :status_%d) ', $i, $i, $i, $i);
+
+            $uuidParams['uuid_' . $i] = Uuid::v4()->__toString();
+
+            $userIdParams['userId_' . $i] = RecipientType::User === $recipient->getType()
+                ? $recipient->getId()
+                : null;
+
+            $participantIdParams['participantId_' . $i] = RecipientType::User === $recipient->getType()
+                ? null
+                : $recipient->getId();
+
+            $statusParams['status_' . $i] = $recipient->getStatusToSave()->value;
+        }
+
+        $sql .= implode(',', $valuesSQL);
+        $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'campaignId' => $emailingCampaign->getId(),
+            ...$uuidParams,
+            ...$userIdParams,
+            ...$participantIdParams,
+            ...$statusParams,
+        ]);
     }
 }

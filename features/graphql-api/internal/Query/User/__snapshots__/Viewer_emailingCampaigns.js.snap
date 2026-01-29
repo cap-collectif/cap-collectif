@@ -165,22 +165,6 @@ Object {
         },
         Object {
           "node": Object {
-            "content": "<p>Campagne avec internal list</p>",
-            "mailingInternal": "REGISTERED",
-            "mailingList": null,
-            "object": "Campagne avec internal list",
-            "owner": Object {
-              "username": "emailingadmin",
-            },
-            "project": null,
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-        Object {
-          "node": Object {
             "content": "<p>Campagne avec mailing list</p>",
             "mailingInternal": null,
             "mailingList": Object {
@@ -268,7 +252,7 @@ Object {
           },
         },
       ],
-      "totalCount": 14,
+      "totalCount": 13,
     },
   },
 }
@@ -380,22 +364,6 @@ Object {
             "mailingInternal": "REGISTERED",
             "mailingList": null,
             "object": "Campagne pour tout le monde",
-            "owner": Object {
-              "username": "emailingadmin",
-            },
-            "project": null,
-            "senderEmail": "assistance@cap-collectif.com",
-            "senderName": "A. Sistance",
-            "status": "DRAFT",
-            "unlayerConf": null,
-          },
-        },
-        Object {
-          "node": Object {
-            "content": "<p>Campagne avec internal list</p>",
-            "mailingInternal": "REGISTERED",
-            "mailingList": null,
-            "object": "Campagne avec internal list",
             "owner": Object {
               "username": "emailingadmin",
             },
@@ -523,7 +491,7 @@ Object {
           },
         },
       ],
-      "totalCount": 14,
+      "totalCount": 13,
     },
   },
 }

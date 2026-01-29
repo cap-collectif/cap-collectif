@@ -20,7 +20,8 @@ import Tag from '~ds/Tag/Tag'
 import Button from '~ds/Button/Button'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import Skeleton from '~ds/Skeleton'
-import type { GlobalState } from '~/types'
+import type { FeatureToggles, GlobalState } from '~/types'
+import InfoMessage from '~ds/InfoMessage/InfoMessage'
 
 const listMailingList = ({
   error,
@@ -52,7 +53,9 @@ export const createQueryVariables = (
 export const EmailingListPage = () => {
   const { parameters, dispatch } = useDashboardMailingListContext()
   const { user } = useSelector((state: GlobalState) => state.user)
+  const features: FeatureToggles = useSelector((state: GlobalState) => state.default.features)
   const isAdmin = user ? user.isAdmin : false
+  const isSuperAdmin = user ? user.isSuperAdmin : false
   const intl = useIntl()
   React.useEffect(() => {
     dispatch({
@@ -70,6 +73,18 @@ export const EmailingListPage = () => {
             })}
           </Tag>
         </Flex>
+
+        {isSuperAdmin && (
+          <InfoMessage variant={features?.mailjet_sandbox === true ? 'info' : 'danger'}>
+            <InfoMessage.Content>
+              {intl.formatMessage({
+                id: `emailing-mailjet-sandbox-${features?.mailjet_sandbox === true ? 'on' : 'off'}`,
+              })}
+              &nbsp;
+              <a href="/admin-next/features">Mailjet Sandbox</a>
+            </InfoMessage.Content>
+          </InfoMessage>
+        )}
 
         <Button
           leftIcon={ICON_NAME.CIRCLE_INFO}

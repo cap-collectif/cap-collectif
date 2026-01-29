@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Mailer\Exception\MailerLogicException;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
@@ -126,7 +127,7 @@ class MailerFactory
             return AbstractEmailingCampaignMessage::class;
         }
 
-        throw new MailerException("{$class} is not an known type of message");
+        throw new MailerLogicException(sprintf('%s is not an known type of message', $class));
     }
 
     private function setModerationLinks(AbstractModeratorMessage $message, $moderable): void

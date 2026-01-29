@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
-use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
+use Capco\AppBundle\Mailer\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;

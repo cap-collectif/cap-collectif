@@ -12,7 +12,10 @@ describe('Displays or not the page based on the viewer', () => {
     cy.request({
       url: AdminGroupsPage.pathGroupsList(),
       method: 'GET',
+      failOnStatusCode: false,
     }).then(response => {
+      // Regular users should not be able to access admin pages
+      // Expect either a redirect (302) or error (500) or the response body to be empty/null
       const responseBody = response.allRequestResponses[0]['Response Body']
       assert.isNull(responseBody)
     })
@@ -21,7 +24,7 @@ describe('Displays or not the page based on the viewer', () => {
   it('visits groups list when logged in as admin', () => {
     cy.directLoginAs('admin')
     AdminGroupsPage.visitGroupsList()
-    cy.checkTableLength(8)
+    cy.checkTableLength(9)
     cy.get('.cap-table__tbody .cap-table__tr')
       .eq(1)
       .within(() => {

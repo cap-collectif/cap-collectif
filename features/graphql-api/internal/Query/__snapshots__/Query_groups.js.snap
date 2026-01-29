@@ -76,8 +76,17 @@ Object {
           "title": "Evaluers on proposal3",
         },
       },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "node": Object {
+          "members": Object {
+            "totalCount": 5,
+          },
+          "title": "Destinataires",
+        },
+      },
     ],
-    "totalCount": 8,
+    "totalCount": 9,
   },
 }
 `;
@@ -105,7 +114,7 @@ Object {
         },
       },
     ],
-    "totalCount": 8,
+    "totalCount": 9,
   },
 }
 `;
@@ -124,7 +133,7 @@ Object {
         },
       },
     ],
-    "totalCount": 8,
+    "totalCount": 9,
   },
 }
 `;
@@ -152,7 +161,7 @@ Object {
         },
       },
     ],
-    "totalCount": 8,
+    "totalCount": 9,
   },
 }
 `;

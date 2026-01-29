@@ -109,18 +109,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         status: 'DRAFT'
         object: 'Campagne avec groupe de users'
         content: <stripslashes('\<p>\')>Campagne avec groupe de users<stripslashes('\</p>\')>
-        emailingGroup: '@group1'
-    CampaignWithInternalList:
-        id: CampaignWithInternalList
-        name: 'Campagne avec internal list'
-        senderEmail: 'assistance@cap-collectif.com'
-        senderName: 'A. Sistance'
-        owner: '@emailingAdmin'
-        creator: '@emailingAdmin'
-        status: 'DRAFT'
-        object: 'Campagne avec internal list'
-        content: <stripslashes('\<p>\')>Campagne avec internal list<stripslashes('\</p>\')>
-        mailingInternal: 'REGISTERED'
+        emailingGroup: '@groupEmailing'
     CampaignWithProjectCollectVote:
         id: CampaignWithProjectCollectVote
         name: 'Campagne avec projet (vote au dépôt)'

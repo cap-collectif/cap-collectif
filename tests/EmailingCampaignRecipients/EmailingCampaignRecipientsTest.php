@@ -3,8 +3,7 @@
 namespace Capco\Tests\EmailingCampaignRecipients;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
-use Capco\AppBundle\Mailer\EmailingCampaignSender;
+use Capco\AppBundle\Mailer\Recipient\RecipientsProvider;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -35,11 +34,14 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
         ;
         $this->assertInstanceOf(EmailingCampaign::class, $campaign);
 
-        $recipients = $container->get(EmailingCampaignSender::class)->getRecipients($campaign);
-        $recipientsData = $recipients->map(fn (ContributorInterface $contributor) => [
-            'username' => $contributor->getUsername(),
-            'email' => $contributor->getEmail(),
-        ])->toArray();
+        $recipientsData = [];
+        $recipientsPage = $container->get(RecipientsProvider::class)->getRecipients($campaign);
+        foreach ($recipientsPage as $recipient) {
+            $recipientsData[] = [
+                'username' => $recipient->getUsername(),
+                'email' => $recipient->getEmail(),
+            ];
+        }
 
         $this->assertEquals(
             $this->sortRecipients($expectedRecipients),
@@ -57,9 +59,9 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
                 'CampaignWithMailingList',
                 $this->mailingListExpectedRecipients(),
             ],
-            'campaign with internal list' => [
-                'CampaignWithInternalList',
-                $this->internalListExpectedRecipients(),
+            'campaign with all registred users' => [
+                'CampaignWithAllRegistered',
+                $this->allRegistredExpectedRecipients(),
             ],
             'campaign with user group' => [
                 'CampaignWithUserGroup',
@@ -116,18 +118,6 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
     private function mailingListExpectedRecipients(): array
     {
         return [
-            [
-                'email' => 'julien.aguilar@cap-collectif.com',
-                'username' => 'Agui',
-            ],
-            [
-                'username' => 'Dev null',
-                'email' => 'mickael@cap-collectif.com',
-            ],
-            [
-                'username' => 'Théo QP',
-                'email' => 'theo@cap-collectif.com',
-            ],
             [
                 'username' => 'Vince',
                 'email' => 'vincent@cap-collectif.com',
@@ -280,22 +270,46 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
     }
 
     /**
-     * @return array<int, array{username: string, email: string}>
+     * @return array<int, array{username: ?string, email: string}>
      */
-    private function internalListExpectedRecipients(): array
+    private function allRegistredExpectedRecipients(): array
     {
         return [
             [
-                'username' => 'Christophe Cassou',
-                'email' => 'christophe.cassou@cap-collectif.com',
+                'username' => 'emailingadmin',
+                'email' => 'emailing.admin@fake-email.com',
             ],
             [
-                'username' => 'user10',
-                'email' => 'user10@cap-collectif.com',
+                'username' => 'lbrunet',
+                'email' => 'lbrunet@cap-collectif.com',
             ],
             [
-                'username' => 'user100',
-                'email' => 'user100@cap-collectif.com',
+                'username' => 'mauriau',
+                'email' => 'maxime.auriau@cap-collectif.com',
+            ],
+            [
+                'username' => 'myriam',
+                'email' => 'myriam@cap-collectif.com',
+            ],
+            [
+                'username' => 'spyl',
+                'email' => 'aurelien@cap-collectif.com',
+            ],
+            [
+                'username' => 'Vince',
+                'email' => 'vincent@cap-collectif.com',
+            ],
+            [
+                'username' => null,
+                'email' => 'amelis.campagne@cap-collectif.com',
+            ],
+            [
+                'username' => null,
+                'email' => 'emile.campanil@cap-collectif.com',
+            ],
+            [
+                'username' => null,
+                'email' => 'emilie.compte-panille@cap-collectif.com',
             ],
             [
                 'username' => 'user101',
@@ -1195,16 +1209,12 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
     {
         return [
             [
-                'username' => 'lbrunet',
-                'email' => 'lbrunet@cap-collectif.com',
+                'username' => 'emailingUser3',
+                'email' => 'emailing.user3@fake-email.com',
             ],
             [
-                'username' => 'user',
-                'email' => 'user@test.com',
-            ],
-            [
-                'username' => 'spyl',
-                'email' => 'aurelien@cap-collectif.com',
+                'username' => 'emailingUser4',
+                'email' => 'emailing.user4@fake-email.com',
             ],
         ];
     }
@@ -1215,6 +1225,10 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
     private function projectCollectVoteExpectedRecipients(): array
     {
         return [
+            [
+                'username' => null,
+                'email' => 'emilie.compte-panille@cap-collectif.com',
+            ],
             [
                 'username' => null,
                 'email' => 'fake.email.against@cap-collectif.com',
@@ -1312,6 +1326,10 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
             [
                 'username' => 'emailingUser13',
                 'email' => 'emailing.user13@fake-email.com',
+            ],
+            [
+                'username' => 'emailingUser14',
+                'email' => 'emailing.user14@fake-email.com',
             ],
             [
                 'username' => 'emailingUser15',

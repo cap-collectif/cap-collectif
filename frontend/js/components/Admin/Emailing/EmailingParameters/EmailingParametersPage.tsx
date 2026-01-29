@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useIntl } from 'react-intl'
 import type { PreloadedQuery, GraphQLTaggedNode } from 'react-relay'
 import { usePreloadedQuery, graphql } from 'react-relay'
 import Flex from '~ui/Primitives/Layout/Flex'
@@ -10,6 +9,9 @@ import SectionSendingDomains from '~/components/Admin/Emailing/EmailingParameter
 import { headingStyles } from '~ui/Primitives/Heading'
 import { FontWeight } from '~ui/Primitives/constants'
 import Text from '~ui/Primitives/Text'
+import type { FeatureToggles, GlobalState } from '~/types'
+import InfoMessage from '~ds/InfoMessage/InfoMessage'
+import { useSelector } from 'react-redux'
 
 type Props = {
   queryReference: PreloadedQuery<EmailingParametersPageQueryType>
@@ -41,13 +43,30 @@ const EmailingParametersPage = ({ queryReference }: Props): JSX.Element => {
   const intl = useIntl()
   const query = usePreloadedQuery<EmailingParametersPageQueryType>(EmailingParametersPageQuery, queryReference)
   const defaultSenderEmail = query.senderEmails.find(senderEmail => senderEmail.isDefault)
+  const { user } = useSelector((state: GlobalState) => state.user)
+  const features: FeatureToggles = useSelector((state: GlobalState) => state.default.features)
+  const isSuperAdmin = user ? user.isSuperAdmin : false
   return (
     <Flex direction="column">
-      <Text color="blue.800" {...headingStyles.h4} fontWeight={FontWeight.Semibold} px={6} py={4} bg="white">
-        {intl.formatMessage({
-          id: 'global.params',
-        })}
-      </Text>
+      <Flex direction="row" justify="space-between" bg="white" py={4} px={6}>
+        <Text color="blue.800" {...headingStyles.h4} fontWeight={FontWeight.Semibold}>
+          {intl.formatMessage({
+            id: 'global.params',
+          })}
+        </Text>
+
+        {isSuperAdmin && (
+          <InfoMessage variant={features?.mailjet_sandbox === true ? 'info' : 'danger'}>
+            <InfoMessage.Content>
+              {intl.formatMessage({
+                id: `emailing-mailjet-sandbox-${features?.mailjet_sandbox === true ? 'on' : 'off'}`,
+              })}
+              &nbsp;
+              <a href="/admin-next/features">Mailjet Sandbox</a>
+            </InfoMessage.Content>
+          </InfoMessage>
+        )}
+      </Flex>
 
       <Flex direction="column" spacing={6} p={6}>
         <SectionEmailingService externalServiceConfiguration={query.externalServiceConfiguration} />

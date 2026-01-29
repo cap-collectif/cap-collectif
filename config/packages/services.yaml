@@ -18,6 +18,8 @@ services:
             $hwiHttpClient: '@hwi_oauth.http_client'
             $hwiStorage: '@hwi_oauth.storage.session'
             $timezoneDetector: '@Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector'
+            $mailjetPublicKey: '%mailjet_public_key%'
+            $mailjetPrivateKey: '%mailjet_private_key%'
 
     Capco\AppBundle\Search\AnalyticsSearch: ~
 
@@ -334,6 +336,7 @@ services:
         decorates: Doctrine\Migrations\Version\DbalMigrationFactory
         arguments: ['@Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator.inner', '@service_container']
 
+    Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClientV2: ~
     Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClient:
         arguments:
             $publicKey: '%mailjet_public_key%'
@@ -521,3 +524,7 @@ services:
     Capco\AppBundle\Logger\ActionLogger: ~
 
     Capco\AppBundle\GraphQL\GraphQLRequestedFields:
+    Capco\AppBundle\Mailer\Recipient\ContributorsFetcher: ~
+    Capco\AppBundle\Mailer\Recipient\ProjectRecipientsFetcher: ~
+    Capco\AppBundle\Mailer\Recipient\RecipientsProvider: ~
+    Capco\AppBundle\Mailer\Recipient\MessageBuilder: ~

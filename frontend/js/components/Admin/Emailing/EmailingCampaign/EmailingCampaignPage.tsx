@@ -16,7 +16,8 @@ import Button from '~ds/Button/Button'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import { createQueryVariables } from './utils'
 import Skeleton from '~ds/Skeleton'
-import type { GlobalState } from '~/types'
+import type { FeatureToggles, GlobalState } from '~/types'
+import InfoMessage from '~ds/InfoMessage/InfoMessage'
 
 const listCampaign = ({
   error,
@@ -47,7 +48,9 @@ export const EmailingCampaignPage = () => {
   const { parameters, dispatch } = useDashboardCampaignContext()
   const intl = useIntl()
   const { user } = useSelector((state: GlobalState) => state.user)
+  const features: FeatureToggles = useSelector((state: GlobalState) => state.default.features)
   const isAdmin = user ? user.isAdmin : false
+  const isSuperAdmin = user ? user.isSuperAdmin : false
   React.useEffect(() => {
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',
@@ -64,6 +67,18 @@ export const EmailingCampaignPage = () => {
             })}
           </Tag>
         </Flex>
+
+        {isSuperAdmin && (
+          <InfoMessage variant={features?.mailjet_sandbox === true ? 'info' : 'danger'}>
+            <InfoMessage.Content>
+              {intl.formatMessage({
+                id: `emailing-mailjet-sandbox-${features?.mailjet_sandbox === true ? 'on' : 'off'}`,
+              })}
+              &nbsp;
+              <a href="/admin-next/features">Mailjet Sandbox</a>
+            </InfoMessage.Content>
+          </InfoMessage>
+        )}
 
         <Button
           leftIcon={ICON_NAME.CIRCLE_INFO}

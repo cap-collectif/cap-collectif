@@ -243,6 +243,9 @@ Object {
     Object {
       "type": "antivirus",
     },
+    Object {
+      "type": "mailjet_sandbox",
+    },
   ],
 }
 `;

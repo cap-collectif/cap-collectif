@@ -392,10 +392,10 @@ export default createFragmentContainer(ParameterPage, {
   `,
   query: graphql`
     fragment Parameter_query on Query {
-      users(first: 0) {
+      users(first: 0, emailConfirmed: true, superAdmin: true) {
         totalCount
       }
-      usersRefusing: users(first: 0, consentInternalCommunication: false) {
+      usersRefusing: users(first: 0, consentInternalCommunication: false, emailConfirmed: true, superAdmin: true) {
         totalCount
       }
       participants(first: 0, emailConfirmed: true) {

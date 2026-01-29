@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Mailer\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

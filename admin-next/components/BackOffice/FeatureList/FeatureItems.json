@@ -330,6 +330,11 @@
                         "description": "",
                         "onlySuperAdmin": false
                     },
+                    "mailjet_sandbox": {
+                        "title": "capco.module.mailjet_sandbox",
+                        "description": "description.module.mailjet_sandbox",
+                        "onlySuperAdmin": true
+                    },
                     "emailing_parameters": {
                         "title": "capco.module.emailing_parameters",
                         "description": "description.module.emailing_parameters",

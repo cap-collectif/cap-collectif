@@ -1,7 +1,5 @@
 {% extends "@CapcoMail/standardLayoutNew.html.twig" %}
 
-{% set baseUrl = url('app_homepage') %}
-
 {% block core_mail %}
     <div class="ql-editor">
         {{ content|raw }}
@@ -10,16 +8,22 @@
 
 {% block footer_mail %}
     <div>
-        <p style="margin: 0;">{{ 'email.notification.footer.subscribe.to'|trans({'{siteName}': siteName,'{siteUrl}': url('app_homepage'),}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        {% block subscribed_part %}
+            <p style="margin: 0;">{{ 'email.notification.footer.subscribe.to'|trans({'{siteName}': siteName,'{siteUrl}': url('app_homepage'),}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        {% endblock %}
 
         <p style="margin: 0 0 18px 0;">
-            {{ 'click-here-to-unsubscribe'|trans({'{unsubscribeUrl}': unsubscribeUrl,}, 'CapcoAppBundle', user_locale) | raw }}
+            {% block unsubscribe_part %}
+                {{ 'click-here-to-unsubscribe'|trans({'{unsubscribeUrl}': unsubscribeUrl,}, 'CapcoAppBundle', user_locale) | raw }}
+            {% endblock %}
         </p>
 
         <p style="text-align: center;">
-            {{ 'email.propulsed.by.capco'|trans({
-                '{logoUrl}': url('app_homepage') ~ asset('capco-logo-mail.png'),
-            }, 'CapcoAppBundle', user_locale) | raw }}
+            {% block signature_part %}
+                {{ 'email.propulsed.by.capco'|trans({
+                    '{logoUrl}': url('app_homepage') ~ asset('capco-logo-mail.png'),
+                }, 'CapcoAppBundle', user_locale) | raw }}
+            {% endblock %}
         </p>
     </div>
 {% endblock %}

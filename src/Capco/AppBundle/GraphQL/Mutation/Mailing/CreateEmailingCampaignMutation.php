@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Mailer\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Mailer\SenderEmailResolver;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EmailingCampaignVoter;

@@ -1,0 +1,13 @@
+{% extends "@CapcoMail/campaign.html.twig" %}
+
+{% block subscribed_part %}
+    {% verbatim %}{{var:subscribedPart}}{% endverbatim %}
+{% endblock %}
+
+{% block unsubscribe_part %}
+    {% verbatim %}{{var:unsubscribePart}}{% endverbatim %}
+{% endblock %}
+
+{% block signature_part %}
+    {% verbatim %}{{var:signaturePart}}{% endverbatim %}
+{% endblock %}

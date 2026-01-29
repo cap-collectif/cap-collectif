@@ -2,226 +2,258 @@
 
 namespace Capco\AppBundle\Mailer;
 
-use Capco\AppBundle\Entity\ActionToken;
+use Capco\AppBundle\Entity\AbstractUserToken;
 use Capco\AppBundle\Entity\EmailingCampaign;
-use Capco\AppBundle\Entity\EmailingCampaignUser;
-use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
-use Capco\AppBundle\Entity\Participant;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
-use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectEmailableContributorsResolver;
-use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
-use Capco\AppBundle\Manager\TokenManager;
+use Capco\AppBundle\Mailer\Enum\EmailingCampaignUserStatus;
+use Capco\AppBundle\Mailer\Enum\RecipientType;
+use Capco\AppBundle\Mailer\Exception\MailerExternalServiceException;
+use Capco\AppBundle\Mailer\Model\EmailCampaignRecipient;
+use Capco\AppBundle\Mailer\Recipient\MessageBuilder;
+use Capco\AppBundle\Mailer\Recipient\RecipientsProvider;
+use Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClientV2;
+use Capco\AppBundle\Repository\ActionTokenRepository;
 use Capco\AppBundle\Repository\EmailingCampaignUserRepository;
-use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
-use GraphQL\Error\UserError;
+use Mailjet\Response as MailjetResponse;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment as TemplateEngine;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
+/**
+ * This class is responsible for sending emailing campaigns via Mailjet.
+ * To be able to process a lot of emails :
+ * - We do things in batch instead of just doing it one by one in a loop.
+ * - We don't always use entitites to store data.
+ */
 class EmailingCampaignSender
 {
     public function __construct(
-        private readonly MailerService $mailerService,
-        private readonly UserRepository $userRepository,
         private readonly SiteParameterResolver $siteParams,
         private readonly RouterInterface $router,
-        private readonly TokenManager $tokenManager,
-        private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver,
-        private readonly EntityManagerInterface $em,
+        private readonly RecipientsProvider $recipientsProvider,
         private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository,
+        private readonly TemplateEngine $templateEngine,
+        private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
-        private readonly ParticipantRepository $participantRepository,
+        private readonly MailjetClientV2 $mailjetClient,
+        private readonly ActionTokenRepository $actionTokenRepository,
+        private readonly MessageBuilder $messageBuilder,
     ) {
     }
 
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     * @throws Exception
+     */
     public function send(EmailingCampaign $emailingCampaign): int
     {
-        $batchSize = 500;
-        $totalCount = 0;
+        // Initialisation of everything that does not need to be in the loop to improve performance by doing them only once
+        $siteName = $this->siteParams->getValue('global.site.fullname');
+        $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $htmlPart = $this->buildHtmlPart($emailingCampaign, $siteName, $siteUrl);
+        $basePayload = $this->getBasePayload($emailingCampaign);
+        // end
 
+        $totalRecipientsProcessed = 0;
         do {
-            $emailingCampaignUsers = $this->getEmailingCampaignUsersUnsent($emailingCampaign, $batchSize);
-            $this->logger->debug('$totalCount: ' . $totalCount);
-            $this->logger->debug(sprintf('Memory: %s', memory_get_usage(true)));
+            $recipientsPage = $this->recipientsProvider->getRecipients(
+                emailingCampaign: $emailingCampaign,
+                limit: MailjetClientV2::MAX_RECIPIENTS,
+            );
 
-            $count = 0;
-            /** * @var EmailingCampaignUser $emailingCampaignUser  */
-            foreach ($emailingCampaignUsers as $emailingCampaignUser) {
-                ++$count;
-                $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getContributor());
+            $recipientsCount = \count($recipientsPage);
+            if (0 === $recipientsCount) {
+                break;
+            }
+            $totalRecipientsProcessed += $recipientsCount;
 
-                $emailingCampaignUser->setSentAt(new \DateTime());
-                $this->em->persist($emailingCampaignUser);
-                if (0 === $count % 50) {
-                    $this->em->flush();
+            $this->enrichRecipientsWithActionTokenInfo($recipientsPage);
+
+            /**
+             * In case there is a problem for one recipient, with the try catch we can still send emails to the rest of the current chunk.
+             */
+            $messages = [];
+            foreach ($recipientsPage as $recipientFromPage) {
+                try {
+                    $messages[] = $this->messageBuilder->buildOneMessage(
+                        emailingCampaign: $emailingCampaign,
+                        recipientFromPage: $recipientFromPage,
+                        htmlPart: $htmlPart,
+                        siteName: $siteName,
+                        siteUrl: $siteUrl,
+                    );
+
+                    $recipientFromPage->setStatusToSave(EmailingCampaignUserStatus::Sent);
+                } catch (\Throwable $throwable) {
+                    $recipientFromPage->setStatusToSave(EmailingCampaignUserStatus::Error);
+                    $this->logger->error(
+                        message: sprintf('Unable to process recipient: %s', $throwable->getMessage()),
+                        context: [
+                            'recipient' => [
+                                'id' => $recipientFromPage->getId(),
+                                'email' => $recipientFromPage->getEmail(),
+                            ],
+                            'campaign' => [
+                                'id' => $emailingCampaign->getId(),
+                                'name' => $emailingCampaign->getName(),
+                            ],
+                        ]
+                    );
                 }
             }
-            $this->em->flush();
 
-            $totalCount += $emailingCampaignUsers->count();
-        } while (0 < $emailingCampaignUsers->count());
+            if (empty($messages)) {
+                continue;
+            }
 
-        $this->setCampaignAsSent($emailingCampaign);
+            try {
+                $mailjetResponse = $this->mailjetClient->post([
+                    'Messages' => $messages,
+                    ...$basePayload,
+                ]);
 
-        return $totalCount;
+                if (true !== $mailjetResponse->success()) {
+                    throw new MailerExternalServiceException('Mailjet API returned an error.');
+                }
+
+                $this->processMaijetSuccess($emailingCampaign, $recipientsPage);
+            } catch (\Throwable $throwable) {
+                $this->processMailjetFailure(
+                    emailingCampaign: $emailingCampaign,
+                    recipientsPage: $recipientsPage,
+                    throwable: $throwable,
+                    mailjetResponse: $mailjetResponse ?? null,
+                );
+            }
+        } while (MailjetClientV2::MAX_RECIPIENTS === $recipientsCount);
+
+        $emailingCampaign->setSendAt(new \DateTime());
+        $emailingCampaign->setStatus(EmailingCampaignStatus::SENT);
+        $this->entityManager->flush();
+
+        return $totalRecipientsProcessed;
     }
 
     /**
-     * @return ArrayCollection<int, EmailingCampaignUser>
+     * @param EmailCampaignRecipient[] $recipients
+     *
+     * @throws Exception
      */
-    public function getEmailingCampaignUsersUnsent(EmailingCampaign $emailingCampaign, int $maxResults = 0): ArrayCollection
+    private function enrichRecipientsWithActionTokenInfo(array $recipients): void
     {
-        $allRecipients = $this->getRecipients($emailingCampaign);
+        $filteredRecipients = array_filter($recipients, fn (EmailCampaignRecipient $recipient) => RecipientType::User === $recipient->getType());
 
-        $emailingCampaignUsersCount = $this->emailingCampaignUserRepository->countAllByEmailingCampaign($emailingCampaign);
+        if (empty($filteredRecipients)) {
+            return;
+        }
 
-        if (0 === $emailingCampaignUsersCount) {
-            $emailingCampaignUsers = new ArrayCollection();
-            foreach ($allRecipients as $recipient) {
-                $emailingCampaignUser = (new EmailingCampaignUser())->setEmailingCampaign($emailingCampaign);
-                if ($recipient instanceof User) {
-                    $emailingCampaignUser->setUser($recipient);
-                } elseif ($recipient instanceof Participant) {
-                    $emailingCampaignUser->setParticipant($recipient);
-                }
+        $actionTokensAvailable = $this->actionTokenRepository->getUnsubscribeTokensFromRecipients($filteredRecipients);
 
-                $emailingCampaignUsers->add($emailingCampaignUser);
-                $this->em->persist($emailingCampaignUser);
+        foreach ($filteredRecipients as $recipient) {
+            $recipientHasToken = isset($actionTokensAvailable[$recipient->getId()]);
+            if ($recipientHasToken) {
+                $recipient->setActionToken($actionTokensAvailable[$recipient->getId()]['token'] ?? null);
+                $recipient->setResetConsuptionDate($actionTokensAvailable[$recipient->getId()]['reset_date']);
+
+                continue;
             }
-            $this->em->flush();
+            $recipient->setActionToken(AbstractUserToken::generateToken());
+            $recipient->setCreateTokenInDatabase(true);
         }
-
-        return $this->emailingCampaignUserRepository->findUnsentByEmailingCampaign($emailingCampaign, $maxResults);
     }
 
-    // todo this method is made public by the issue implementing the tests: #18817
-    // todo it will be refactoed as a separate service in the Mailjet implementation: #18611
-    public function getRecipients(EmailingCampaign $emailingCampaign): Collection
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    private function buildHtmlPart(EmailingCampaign $emailingCampaign, int|string $siteName, string $siteUrl): string
     {
-        if ($emailingCampaign->getMailingList()) {
-            return $emailingCampaign->getMailingList()->getUsersWithValidEmail(true);
-        }
-        if ($emailingCampaign->getMailingInternal()) {
-            return $this->getRecipientsFromInternalList();
-        }
-        if ($emailingCampaign->getEmailingGroup()) {
-            return $this->getRecipientsFromUserGroup($emailingCampaign->getEmailingGroup());
-        }
-        if ($emailingCampaign->getProject()) {
-            return $this->getRecipientsFromProject($emailingCampaign->getProject());
-        }
-
-        throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
-    }
-
-    private function createAndSendMessage(
-        EmailingCampaign $emailingCampaign,
-        ContributorInterface $recipient
-    ): void {
-        $message = new EmailingCampaignMessage($emailingCampaign, [
-            'baseUrl' => $this->router->generate(
-                'app_homepage',
-                [],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            ),
-            'siteUrl' => $this->router->generate(
-                'app_homepage',
-                [],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            ),
-            'unsubscribeUrl' => $this->getUnsubscribeUrl($recipient),
-            'siteName' => $this->siteParams->getValue('global.site.fullname'),
+        return $this->templateEngine->render('@CapcoMail/campaignMailjet.html.twig', [
+            'content' => $emailingCampaign->getContent(),
+            'siteName' => $siteName,
+            'baseUrl' => $siteUrl,
         ]);
-
-        $message->addRecipient(
-            $recipient->getEmail(),
-            $recipient->getLocale() ?? null,
-            $recipient->getUsername()
-        );
-
-        $this->mailerService->sendMessage($message);
     }
 
-    private function setCampaignAsSent(EmailingCampaign $emailingCampaign): EmailingCampaign
+    // We ignore missingType.iterableValue because the messages structure depends on the MailJet API
+    // @phpstan-ignore missingType.iterableValue
+    private function getBasePayload(EmailingCampaign $emailingCampaign): array
     {
-        $emailingCampaign->setSendAt(new \DateTime());
-        $emailingCampaign->setStatus(EmailingCampaignStatus::SENT);
-
-        return $emailingCampaign;
+        return [
+            'Globals' => [
+                'From' => [
+                    'Email' => $emailingCampaign->getSenderEmail(),
+                    'Name' => $emailingCampaign->getSenderName(),
+                ],
+                'Subject' => $emailingCampaign->getObject(),
+                'CustomCampaign' => sprintf('%s (%s)', $emailingCampaign->getName(), $emailingCampaign->getId()),
+                'DeduplicateCampaign' => true,
+            ],
+        ];
     }
 
-    private function getUnsubscribeUrl(ContributorInterface $contributor): string
+    /**
+     * @param EmailCampaignRecipient[] $recipientsPage
+     *
+     * @throws Exception
+     */
+    private function processMaijetSuccess(EmailingCampaign $emailingCampaign, array $recipientsPage): void
     {
-        if ($contributor instanceof User) {
-            $parameters = [
-                'token' => $this->tokenManager
-                    ->getOrCreateActionToken($contributor, ActionToken::UNSUBSCRIBE)
-                    ->getToken(),
+        $this->actionTokenRepository->saveNewTokensFromRecipients($recipientsPage);
+        $this->actionTokenRepository->resetConsumptionDateFromRecipients($recipientsPage);
+        $this->emailingCampaignUserRepository->saveFromRecipients($emailingCampaign, $recipientsPage);
+    }
+
+    /**
+     * @param EmailCampaignRecipient[] $recipientsPage
+     *
+     * @throws Exception
+     */
+    private function processMailjetFailure(
+        EmailingCampaign $emailingCampaign,
+        array $recipientsPage,
+        ?\Throwable $throwable = null,
+        ?MailjetResponse $mailjetResponse = null
+    ): void {
+        $context = [
+            'campaign' => [
+                'id' => $emailingCampaign->getId(),
+                'name' => $emailingCampaign->getName(),
+            ],
+        ];
+
+        if (null !== $mailjetResponse) {
+            $context['mailjetResponse'] = [
+                'reasonPhrase' => $mailjetResponse->getReasonPhrase(),
+                'status' => $mailjetResponse->getStatus(),
+                'body' => $mailjetResponse->getBody(),
             ];
-            $route = 'capco_app_action_token';
-        } elseif ($contributor instanceof Participant) {
-            $parameters = [
-                'token' => $contributor->getToken(),
-                'email' => $contributor->getEmail(),
-            ];
-            $route = 'capco_app_unsubscribe_anonymous';
-        } else {
-            throw new \Exception('Contributor must be either Participant or User');
         }
 
-        return $this->router->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
-    private function getRecipientsFromInternalList(): Collection
-    {
-        $users = $this->userRepository->getFromInternalList();
-        $participants = $this->participantRepository->getFromInternalList();
-
-        $contributors = array_merge($users, $participants);
-
-        return new ArrayCollection($contributors);
-    }
-
-    private function getRecipientsFromUserGroup(Group $group): Collection
-    {
-        return new ArrayCollection(
-            ($users = $this->userRepository->getUsersInGroup($group, 0, 1000, true))
-        );
-    }
-
-    private function getRecipientsFromProject(Project $project): Collection
-    {
-        $participantsData = $this->projectEmailableContributorsResolver->getContributors(
-            $project,
-            null,
-            null
-        );
-        $participants = new ArrayCollection();
-        foreach ($participantsData as $participantsDatum) {
-            $email = $participantsDatum['email'];
-
-            $user = $this->userRepository->findOneByEmail($email);
-            $participant = $this->participantRepository->findOneByEmail($email);
-
-            $contributor = $user ?? $participant;
-
-            if (null === $contributor) {
-                $contributor = new User();
-                $contributor->setEmail($email);
-                $contributor->setPassword($participantsDatum['token']);
-            }
-            $participants->add($contributor);
+        if (null !== $throwable) {
+            $context['exception'] = [
+                'message' => $throwable->getMessage(),
+                'code' => $throwable->getCode(),
+            ];
         }
 
-        return $participants;
+        $this->logger->error(
+            message: 'Error while sending emailing campaign via mailjet.',
+            context: $context
+        );
+        foreach ($recipientsPage as $recipientFromPage) {
+            $recipientFromPage->setStatusToSave(EmailingCampaignUserStatus::Error);
+        }
+        $this->emailingCampaignUserRepository->saveFromRecipients($emailingCampaign, $recipientsPage);
     }
 }

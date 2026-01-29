@@ -189,3 +189,5 @@ InternalFeatureFlagType:
             antivirus:
                 value: !php/const Capco\AppBundle\Toggle\Manager::antivirus
                 description: 'Whether or not sync antivirus is enabled'
+            mailjet_sandbox:
+                value: !php/const Capco\AppBundle\Toggle\Manager::mailjet_sandbox

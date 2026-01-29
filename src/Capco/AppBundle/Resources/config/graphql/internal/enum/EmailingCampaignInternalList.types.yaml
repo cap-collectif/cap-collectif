@@ -4,5 +4,5 @@ EmailingCampaignInternalList:
         description: 'The available automated emailing lists'
         values:
             REGISTERED:
-                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::REGISTERED
+                value: !php/const Capco\AppBundle\Mailer\Enum\EmailingCampaignInternalList::REGISTERED
                 description: 'All users registered.'

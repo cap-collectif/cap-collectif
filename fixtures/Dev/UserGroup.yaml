@@ -117,3 +117,25 @@ Capco\AppBundle\Entity\UserGroup:
         id: userGroup202
         user: '@duplicatesUserConnectedFranceConnect'
         group: '@group8'
+
+    # Emailing
+    userGroupEmailing1:
+        id: userGroupEmailing1
+        user: '@emailingAdmin'
+        group: '@groupEmailing'
+    userGroupEmailing2:
+        id: userGroupEmailing2
+        user: '@emailingUser1'
+        group: '@groupEmailing'
+    userGroupEmailing3:
+        id: userGroupEmailing3
+        user: '@emailingUser2'
+        group: '@groupEmailing'
+    userGroupEmailing4:
+        id: userGroupEmailing4
+        user: '@emailingUser3'
+        group: '@groupEmailing'
+    userGroupEmailing5:
+        id: userGroupEmailing5
+        user: '@emailingUser4'
+        group: '@groupEmailing'

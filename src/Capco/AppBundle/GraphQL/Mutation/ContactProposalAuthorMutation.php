@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalStatistics;
 use Capco\AppBundle\Enum\ContactProposalAuthorErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Mailer\MailerException;
+use Capco\AppBundle\Mailer\Exception\MailerExternalServiceException;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -98,7 +98,7 @@ class ContactProposalAuthorMutation implements MutationInterface
         );
 
         if (!$sent) {
-            throw new MailerException('Le message n\'a pas pu être envoyé.');
+            throw new MailerExternalServiceException('Le message n\'a pas pu être envoyé.');
         }
 
         if (!$proposal->getStatistics()) {

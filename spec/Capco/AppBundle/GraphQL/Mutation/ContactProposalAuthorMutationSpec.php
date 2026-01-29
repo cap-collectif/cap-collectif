@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalStatistics;
 use Capco\AppBundle\Enum\ContactProposalAuthorErrorCode;
 use Capco\AppBundle\GraphQL\Mutation\ContactProposalAuthorMutation;
-use Capco\AppBundle\Mailer\MailerException;
+use Capco\AppBundle\Mailer\Exception\MailerExternalServiceException;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -127,7 +127,7 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
                 'email' => 'fake-email',
             ],
             'senderMessage' => 'fake-message',
-        ], $user)->willThrow(new MailerException());
+        ], $user)->willThrow(new MailerExternalServiceException());
 
         $this->__invoke($argument)->shouldReturn(['error' => ContactProposalAuthorErrorCode::SENDING_FAILED]);
     }
