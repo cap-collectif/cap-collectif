@@ -1,6 +1,7 @@
 import * as React from 'react'
 import type { PreloadedQuery, GraphQLTaggedNode } from 'react-relay'
 import { usePreloadedQuery, graphql } from 'react-relay'
+import { useIntl } from 'react-intl'
 import Flex from '~ui/Primitives/Layout/Flex'
 import SectionEmailingService from './SectionEmailingService/SectionEmailingService'
 import SectionEmailNotification from './SectionEmailNotification/SectionEmailNotification'

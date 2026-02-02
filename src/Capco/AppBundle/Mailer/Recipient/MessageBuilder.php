@@ -139,7 +139,7 @@ class MessageBuilder
             ],
             replace: [
                 $unsubscribeToken,
-                $recipient->getEmail(),
+                rawurlencode($recipient->getEmail()),
             ],
             subject: $baseUrl
         );

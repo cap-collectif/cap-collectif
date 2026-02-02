@@ -238,7 +238,7 @@ class ProjectRecipientsFetcher
                 p.email,
                 p.locale,
                 pas.project_id,
-                null as token,
+                p.token as token,
                 :participantType AS type
             FROM
                 project_abstractstep pas
@@ -550,7 +550,7 @@ class ProjectRecipientsFetcher
                 p.email,
                 p.locale,
                 project_abstractstep.project_id,
-                null AS token,
+                p.token as token,
                 :participantType AS type
             FROM
                 project_abstractstep
@@ -646,7 +646,7 @@ class ProjectRecipientsFetcher
                 p.email,
                 p.locale,
                 pas.project_id,
-                null AS token,
+                p.token as token,
                 :participantType AS type
             FROM
                 project_abstractstep pas
@@ -718,7 +718,7 @@ class ProjectRecipientsFetcher
                 p.email,
                 p.locale,
                 pas.project_id,
-                null AS token,
+                p.token as token,
                 :participantType AS type
             FROM
                 project_abstractstep pas
