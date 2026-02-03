@@ -123,6 +123,11 @@ class Participant implements EntityInterface, ContributorInterface, \Stringable
     private ?\Datetime $lastContributedAt = null;
 
     /**
+     * @ORM\Column(name="anonymized_at", type="datetime", nullable=true)
+     */
+    private ?\DateTime $anonymizedAt = null;
+
+    /**
      * @ORM\OneToMany (targetEntity=EmailingCampaignUser::class, mappedBy="participant")
      */
     private Collection $emailingCampaignUsers;
@@ -472,5 +477,17 @@ class Participant implements EntityInterface, ContributorInterface, \Stringable
     {
         // will be fixed when rebasing parcours dépôt
         return new ArrayCollection();
+    }
+
+    public function getAnonymizedAt(): ?\DateTime
+    {
+        return $this->anonymizedAt;
+    }
+
+    public function setAnonymizedAt(?\DateTime $anonymizedAt): self
+    {
+        $this->anonymizedAt = $anonymizedAt;
+
+        return $this;
     }
 }
