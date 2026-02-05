@@ -1,97 +1,87 @@
-import { Box, Button, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
-import Image from '@shared/ui/Image'
+import { Box, CapUIFontWeight, Flex } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useController } from 'react-hook-form'
 import { ButtonChoicesProps } from '../ProposalFormModal.type'
 
-const ButtonChoices: React.FC<ButtonChoicesProps> = ({ name, control, choices }) => {
+type ButtonStylesParams = {
+  isSelected: boolean
+  hasColor: boolean
+  color: string | null
+  showDisabledStyle?: boolean
+}
+
+const getButtonStyles = ({ isSelected, hasColor, color, showDisabledStyle = false }: ButtonStylesParams) => {
+  // No color: black border, white bg (unselected) / black bg + white text (selected)
+  // With color: use the color for border and bg when selected
+  const activeColor = hasColor ? color : 'black'
+
+  if (showDisabledStyle) {
+    return { backgroundColor: 'gray.200', borderColor: 'gray.200', textColor: 'gray.800' }
+  }
+
+  return {
+    backgroundColor: isSelected ? activeColor : 'white',
+    borderColor: activeColor,
+    textColor: isSelected ? 'white' : activeColor,
+  }
+}
+
+const ButtonChoices: React.FC<ButtonChoicesProps> = ({
+  name,
+  control,
+  choices,
+  groupedResponsesEnabled = false,
+  responseColorsDisabled = false,
+}) => {
   const { field } = useController({ name, control })
 
   const handleSelect = (choiceId: string) => {
-    // Toggle selection - if already selected, deselect; otherwise select
     const newValue = field.value === choiceId ? null : choiceId
     field.onChange(newValue)
   }
 
-  const hasImages = choices.some(choice => choice.image?.url)
+  const hasSelection = !!field.value
 
-  // If choices have images, render as image cards
-  if (hasImages) {
-    return (
-      <Flex gap={4} wrap="wrap">
-        {choices.map(choice => {
-          const isSelected = field.value === choice.id
-          const bgColor = choice.color || 'primary.500'
-
-          return (
-            <Box
-              key={choice.id}
-              as="button"
-              type="button"
-              onClick={() => handleSelect(choice.id)}
-              p={2}
-              borderRadius="normal"
-              border="2px solid"
-              borderColor={isSelected ? bgColor : 'gray.200'}
-              bg={isSelected ? 'primary.100' : 'white'}
-              textAlign="center"
-              width="180px"
-              style={{ cursor: 'pointer' }}
-              _hover={{ borderColor: bgColor }}
-            >
-              {choice.image?.url ? (
-                <Image
-                  src={choice.image.url}
-                  alt={choice.label}
-                  width="100%"
-                  height="100px"
-                  borderRadius="normal"
-                  mb={2}
-                  style={{ objectFit: 'cover' }}
-                />
-              ) : (
-                <Box
-                  width="100%"
-                  height="100px"
-                  borderRadius="normal"
-                  mb={2}
-                  bg="gray.100"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon name={CapUIIcon.Picture} color="gray.400" size={CapUIIconSize.Lg} />
-                </Box>
-              )}
-              <Text fontWeight={isSelected ? '600' : '400'}>{choice.label}</Text>
-            </Box>
-          )
-        })}
-      </Flex>
-    )
-  }
-
-  // Default button rendering without images
   return (
-    <Flex gap={2} wrap="wrap">
-      {choices.map(choice => {
+    <Flex gap={groupedResponsesEnabled ? 0 : 2} wrap="wrap">
+      {choices.map((choice, index) => {
         const isSelected = field.value === choice.id
-        const bgColor = choice.color || '#3182CE'
+        const hasColor = !!choice.color && !responseColorsDisabled
+        const showDisabledStyle = groupedResponsesEnabled && hasSelection && !isSelected
+
+        const { backgroundColor, borderColor, textColor } = getButtonStyles({
+          isSelected,
+          hasColor,
+          color: choice.color,
+          showDisabledStyle,
+        })
+
+        const isFirst = index === 0
+        const isLast = index === choices.length - 1
 
         return (
-          <Button
+          <Box
             key={choice.id}
+            as="button"
             type="button"
-            variant={isSelected ? 'primary' : 'secondary'}
             onClick={() => handleSelect(choice.id)}
-            style={{
-              backgroundColor: isSelected ? bgColor : 'transparent',
-              borderColor: bgColor,
-              color: isSelected ? 'white' : bgColor,
-            }}
+            px={4}
+            py={2}
+            bg={backgroundColor}
+            border="1px solid"
+            borderColor={borderColor}
+            color={textColor}
+            fontWeight={CapUIFontWeight.Semibold}
+            borderRadius={groupedResponsesEnabled ? 0 : 'button'}
+            borderTopLeftRadius={groupedResponsesEnabled && isFirst ? '4px' : undefined}
+            borderBottomLeftRadius={groupedResponsesEnabled && isFirst ? '4px' : undefined}
+            borderTopRightRadius={groupedResponsesEnabled && isLast ? '4px' : undefined}
+            borderBottomRightRadius={groupedResponsesEnabled && isLast ? '4px' : undefined}
+            marginLeft={groupedResponsesEnabled && !isFirst ? '-1px' : undefined}
+            style={{ cursor: 'pointer' }}
           >
             {choice.label}
-          </Button>
+          </Box>
         )
       })}
     </Flex>

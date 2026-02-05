@@ -21,11 +21,12 @@ import VoteStepSearchBar from './VoteStepSearchBar'
 
 type Props = {
   stepId: string
+  proposalsCount: number
   isActive?: boolean
   onButtonClick?: () => void
 }
 
-const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, isActive = false, onButtonClick }) => {
+const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, isActive = false, onButtonClick }) => {
   const intl = useIntl()
   const { filters } = useVoteStepFilters(stepId)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
@@ -88,7 +89,7 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, isActive = false,
           </Heading>
         </Modal.Header>
         <Modal.Body spacing={5}>
-          <VoteStepSearchBar />
+          <VoteStepSearchBar proposalsCount={proposalsCount} />
           <Box mt="md">
             <VoteStepFiltersAccordions
               filters={filters}

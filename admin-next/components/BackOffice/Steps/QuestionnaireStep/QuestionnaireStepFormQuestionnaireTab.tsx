@@ -178,7 +178,6 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
         </>
       ) : null}
       {questions.length ? (
-        // @ts-ignore
         <DragnDrop onDragEnd={onDragEnd} backgroundColor="red">
           <DragnDrop.List droppableId="questions">
             {questions.map((question, index) => {
@@ -195,7 +194,6 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     pl={isSubSection ? 6 : isSection ? 4 : hasSectionOrSubsectionBefore ? 8 : 4}
                     draggable
                     width="100%"
-                    sx={{ '& > div': { backgroundColor: 'white !important' } }}
                   >
                     <Flex direction="column">
                       <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight={1.5}>

@@ -20,6 +20,7 @@ interface Props {
 const FRAGMENT = graphql`
   fragment VoteStepListActions_proposalStep on ProposalStep {
     id
+    votable
     form {
       isMapViewEnabled
       isGridViewEnabled
@@ -45,7 +46,6 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   const hasListView = step.form?.isListViewEnabled ?? true
   const hasBothViews = hasGridView && hasListView
 
-  // Determine default view based on enabled views
   const defaultView = hasGridView ? 'grid' : 'list'
 
   const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
@@ -76,8 +76,8 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   ]
 
   return (
-    <Flex width="100%" mt="lg" justify="space-between" align="center">
-      {width > 1024 && (
+    <Flex width="100%" justify="space-between" align="center">
+      {width > 1024 && step.votable && (
         <Flex gap="md">
           {quickFilterButtons.map((filter, index) => (
             <ListActionsQuickFilter key={`quick-filter-${index}`} quickFilterBtn={filter} />

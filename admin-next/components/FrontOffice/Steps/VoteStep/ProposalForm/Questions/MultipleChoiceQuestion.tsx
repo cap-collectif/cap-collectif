@@ -6,6 +6,7 @@ import * as React from 'react'
 import { useController } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { MultipleChoiceChoice, MultipleChoiceQuestionProps } from '../ProposalFormModal.type'
+import { getValidationMessageId } from '../utils'
 
 /**
  * Radio and Checkbox questions
@@ -16,6 +17,7 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
   choices,
   isOtherAllowed,
   isMultiple = false,
+  validationRule,
 }) => {
   const { field } = useController({ name, control })
   const otherValueField = useController({ name: `${name}-other-value`, control })
@@ -55,8 +57,23 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
 
   const ChoiceGroupQuestion = isMultiple ? Checkbox : Radio
 
+  const validationHint = React.useMemo(() => {
+    if (validationRule) {
+      return intl.formatMessage({ id: getValidationMessageId(validationRule.type) }, { nb: validationRule.number })
+    }
+    if (isMultiple) {
+      return intl.formatMessage({ id: 'several-possible-answers' })
+    }
+    return null
+  }, [validationRule, isMultiple, intl])
+
   return (
     <Flex direction="column" gap={groupHasImages ? 4 : 1}>
+      {validationHint && (
+        <Text color="gray.600" fontSize="sm" fontStyle="italic">
+          {validationHint}
+        </Text>
+      )}
       {allChoices.map(choice => {
         const selected = isSelected(choice.id)
         const isOther = 'isOther' in choice && choice.isOther

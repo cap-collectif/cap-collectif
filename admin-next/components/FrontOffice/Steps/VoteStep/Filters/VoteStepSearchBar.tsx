@@ -1,10 +1,14 @@
 import { CapInputSize, Search } from '@cap-collectif/ui'
-import * as React from 'react'
-import { useIntl } from 'react-intl'
 import debounce from '@shared/utils/debounce-promise'
 import { useQueryState } from 'nuqs'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
 
-const VoteStepSearchBar = () => {
+type Props = {
+  proposalsCount: number
+}
+
+const VoteStepSearchBar: React.FC<Props> = ({ proposalsCount }) => {
   const intl = useIntl()
   const [term, setTerm] = useQueryState('term')
 
@@ -20,9 +24,7 @@ const VoteStepSearchBar = () => {
       value={term}
       autoFocus
       inputTitle={intl.formatMessage({ id: 'global.search_proposal' })}
-      placeholder={intl.formatMessage({
-        id: 'vote.step.search',
-      })}
+      placeholder={intl.formatMessage({ id: 'front.vote-step.search-proposals' }, { n: proposalsCount })}
     />
   )
 }

@@ -17,6 +17,9 @@ const FRAGMENT = graphql`
   fragment VoteStepMobileActions_proposalStep on ProposalStep {
     id
     votable
+    allProposals: proposals {
+      totalCount
+    }
     form {
       isMapViewEnabled
     }
@@ -44,6 +47,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
       <Flex width="100%">
         <VoteStepMobileFiltersModal
           stepId={step.id}
+          proposalsCount={step.allProposals?.totalCount ?? 0}
           isActive={activeAction === 'search'}
           onButtonClick={() => handleActionClick('search')}
         />

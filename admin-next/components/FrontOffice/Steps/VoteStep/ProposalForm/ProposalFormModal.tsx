@@ -1,41 +1,51 @@
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import {
-  Box,
-  Button,
-  CapInputSize,
-  CapUIFontSize,
-  CapUIIcon,
-  CapUIIconSize,
-  CapUIModalSize,
-  Flex,
-  FormGuideline,
-  FormLabel,
-  Heading,
-  Modal,
-  Spinner,
-  Text,
-  UPLOADER_SIZE,
-} from '@cap-collectif/ui'
-import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
+import { Button, CapUIIcon, CapUIModalSize, Flex, Heading, Modal } from '@cap-collectif/ui'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { yupResolver } from '@hookform/resolvers/yup'
 import ChangeProposalContentMutation from '@mutations/ChangeProposalContentMutation'
 import CreateProposalMutation from '@mutations/CreateProposalMutation'
-import MajorityQuestion from '@shared/ui/MajorityQuestion/MajorityQuestion'
+import { ProposalFormModalThemesQuery } from '@relay/ProposalFormModalThemesQuery.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { isResponseValueEmpty } from '@shared/utils/isResponseValueEmpty'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
-import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
-import { UPLOAD_PATH } from '@utils/config'
-import { formatConnectionPath } from '@utils/relay'
+import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import * as React from 'react'
-import { Controller, FormProvider, useForm, useWatch } from 'react-hook-form'
+import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
+import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
 import { SubmitButtonType } from '../VoteStep.type'
 import ExternalLinks from './ExternalLinks'
-import { FormValues } from './ProposalFormModal.type'
-import ButtonChoices from './Questions/ButtonChoices'
-import MultipleChoiceQuestion from './Questions/MultipleChoiceQuestion'
-import RankingChoices from './Questions/RankingChoices'
-import { getAvailableQuestionIds } from './utils'
+import {
+  AddressInput,
+  CategoryInput,
+  DescriptionInput,
+  DistrictInput,
+  IllustrationInput,
+  SummaryInput,
+  ThemeInput,
+  TitleInput,
+} from './Inputs'
+import { CreateModeProps, EditModeProps, FormValues } from './ProposalFormModal.type'
+import QuestionField from './Questions/QuestionField'
+import {
+  createProposalSchema,
+  getAvailableQuestionIds,
+  getChoiceLabelById,
+  parseResponseValue,
+  validateCheckboxRules,
+} from './utils'
+
+const THEMES_QUERY = graphql`
+  query ProposalFormModalThemesQuery {
+    themes {
+      id
+      title
+    }
+    platformLocales: availableLocales(includeDisabled: false) {
+      code
+      isDefault
+    }
+  }
+`
 
 const PROPOSAL_FORM_FRAGMENT = graphql`
   fragment ProposalFormModal_proposalForm on ProposalForm {
@@ -102,8 +112,19 @@ const PROPOSAL_FORM_FRAGMENT = graphql`
           }
         }
       }
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
+      }
       ... on MultipleChoiceQuestion {
         isOtherAllowed
+        groupedResponsesEnabled
+        responseColorsDisabled
+        validationRule {
+          type
+          number
+        }
         choices(allowRandomize: true) {
           edges {
             node {
@@ -175,58 +196,39 @@ const PROPOSAL_FRAGMENT = graphql`
   }
 `
 
-type CreateModeProps = {
-  mode: 'create'
-  disabled: boolean
-  proposalForm: any
-  stepId: string
-  proposal?: never
-  onClose?: never
-}
-
-type EditModeProps = {
-  mode: 'edit'
-  proposal: any
-  proposalForm: any
-  onClose: () => void
-  disabled?: never
-  stepId?: never
-}
-
 type Props = CreateModeProps | EditModeProps
-
-const parseResponseValue = (response: any) => {
-  if (!response) return null
-
-  if (response.medias) {
-    return response.medias.map((m: any) => ({ id: m.id, name: m.name, url: m.url }))
-  }
-
-  if (response.value !== undefined) {
-    // Try to parse JSON for array values (checkbox, ranking)
-    if (typeof response.value === 'string') {
-      try {
-        const parsed = JSON.parse(response.value)
-        if (Array.isArray(parsed)) {
-          return parsed
-        }
-      } catch {
-        // Not JSON, return as-is
-      }
-    }
-    return response.value
-  }
-
-  return null
-}
 
 const ProposalFormModal: React.FC<Props> = props => {
   const { mode, proposalForm: proposalFormKey } = props
   const intl = useIntl()
+  const { viewerSession } = useAppContext()
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
   const addressJsonRef = React.useRef<any>(null)
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
+
+  // Initialize addressJsonRef with existing address data when editing
+  React.useEffect(() => {
+    if (mode === 'edit' && proposal?.address?.json) {
+      try {
+        const addressArray = JSON.parse(proposal.address.json)
+        if (Array.isArray(addressArray) && addressArray.length > 0) {
+          addressJsonRef.current = addressArray[0]
+        }
+      } catch (err) {
+        // Invalid JSON, ignore
+      }
+    }
+  }, [mode, proposal?.address?.json])
+  const themesEnabled = useFeatureFlag('themes')
+  const themesData = useLazyLoadQuery<ProposalFormModalThemesQuery>(
+    THEMES_QUERY,
+    {},
+    { fetchPolicy: 'store-or-network' },
+  )
+  const themes = themesData?.themes ?? []
+  const platformLocales = themesData?.platformLocales ?? []
+  const defaultLocale = platformLocales.find(locale => locale.isDefault)?.code ?? 'FR_FR'
 
   const defaultValues = React.useMemo(() => {
     if (mode === 'edit' && proposal) {
@@ -234,6 +236,21 @@ const ProposalFormModal: React.FC<Props> = props => {
       proposal.responses?.forEach((response: any) => {
         if (response.question?.id) {
           responsesMap.set(response.question.id, response)
+        }
+      })
+
+      // Parse responses and collect "other" values
+      const parsedResponses: { question: string; value: any }[] = []
+      const otherValues: Record<string, string> = {}
+
+      proposalForm.questions.forEach((question: any, idx: number) => {
+        const parsed = parseResponseValue(responsesMap.get(question.id), question)
+        parsedResponses.push({
+          question: question.id,
+          value: parsed.value,
+        })
+        if (parsed.otherValue) {
+          otherValues[`responses.${idx}.value-other-value`] = parsed.otherValue
         }
       })
 
@@ -246,16 +263,14 @@ const ProposalFormModal: React.FC<Props> = props => {
         district: proposal.district?.id || '',
         address: proposal.address?.formatted || '',
         media: proposal.media ? { id: proposal.media.id, url: proposal.media.url } : null,
-        responses: proposalForm.questions.map((question: any) => ({
-          question: question.id,
-          value: parseResponseValue(responsesMap.get(question.id)),
-        })),
+        responses: parsedResponses,
         webPageUrl: proposal.webPageUrl || '',
         facebookUrl: proposal.facebookUrl || '',
         twitterUrl: proposal.twitterUrl || '',
         instagramUrl: proposal.instagramUrl || '',
         youtubeUrl: proposal.youtubeUrl || '',
         linkedInUrl: proposal.linkedInUrl || '',
+        ...otherValues,
       }
     }
 
@@ -285,12 +300,16 @@ const ProposalFormModal: React.FC<Props> = props => {
   const methods = useForm<FormValues>({
     mode: 'onChange',
     defaultValues,
+    resolver: yupResolver(createProposalSchema(proposalForm, intl)),
   })
 
   const {
     control,
     handleSubmit,
     reset,
+    getValues,
+    setValue,
+    setError,
     formState: { isSubmitting },
   } = methods
 
@@ -301,13 +320,90 @@ const ProposalFormModal: React.FC<Props> = props => {
     [proposalForm.questions, watchedResponses],
   )
 
+  const validateRequiredQuestions = (data: FormValues): boolean => {
+    let isValid = true
+    const errorMessage = intl.formatMessage({ id: 'fill-field' })
+
+    proposalForm.questions.forEach((question: any, idx: number) => {
+      if (!question.required) return
+      if (!availableQuestionIds.has(question.id)) return
+
+      const value = data.responses[idx]?.value
+
+      const isEmpty =
+        value === null ||
+        value === undefined ||
+        value === '' ||
+        (Array.isArray(value) && value.length === 0) ||
+        isWYSIWYGContentEmpty(value as string)
+
+      if (isEmpty) {
+        const fieldName = `responses.${idx}.value` as any
+        setValue(fieldName, value, { shouldTouch: true })
+        setError(fieldName, { type: 'manual', message: errorMessage })
+        isValid = false
+      }
+    })
+
+    return isValid
+  }
+
+  const touchErrorFields = () => {
+    const errors = methods.formState.errors
+    Object.entries(errors).forEach(([key, error]) => {
+      if (key === 'responses') return
+      setValue(key as any, getValues(key as any), { shouldTouch: true })
+      if (error?.message) {
+        setError(key as any, { type: 'manual', message: error.message as string })
+      }
+    })
+  }
+
+  const handleSaveAsDraft = (hide?: () => void) => {
+    handleSubmit(
+      data => {
+        onSubmit(data, true, hide)
+      },
+      () => touchErrorFields(),
+    )()
+  }
+
+  const validateCheckboxQuestions = (data: FormValues): boolean => {
+    // Build responses with other values for validation
+    const responsesWithOther = data.responses.map((response, idx) => ({
+      ...response,
+      'value-other-value': getValues(`responses.${idx}.value-other-value` as any) as string | undefined,
+    }))
+
+    const checkboxErrors = validateCheckboxRules(proposalForm.questions, responsesWithOther, availableQuestionIds, intl)
+
+    checkboxErrors.forEach(error => {
+      // Touch the field so the error is displayed (FormControl checks touched state in onChange mode)
+      setValue(error.fieldName as any, getValues(error.fieldName as any), { shouldTouch: true })
+      setError(error.fieldName as any, { type: 'manual', message: error.message })
+    })
+
+    return checkboxErrors.length === 0
+  }
+
+  const handlePublish = async (hide?: () => void) => {
+    const isSchemaValid = await methods.trigger()
+    if (!isSchemaValid) touchErrorFields()
+    const data = getValues() as FormValues
+    const areRequiredValid = validateRequiredQuestions(data)
+    const areCheckboxRulesValid = validateCheckboxQuestions(data)
+    if (!isSchemaValid || !areRequiredValid || !areCheckboxRulesValid) return
+    handleSubmit(validData => onSubmit(validData, false, hide))()
+  }
+
   const onSubmit = async (data: FormValues, isDraft = false, hide?: () => void) => {
     try {
       const formattedResponses = data.responses
         .filter(response => {
           if (!availableQuestionIds.has(response.question)) return false
-          const question = proposalForm.questions.find((q: any) => q.id === response.question)
-          if (!question?.required && isResponseValueEmpty(response.value)) {
+          // For drafts, only send responses that have actual values
+          // For publish, also include required questions (validation ensures they have values)
+          if (isResponseValueEmpty(response.value)) {
             return false
           }
           return true
@@ -323,6 +419,68 @@ const ProposalFormModal: React.FC<Props> = props => {
           }
 
           let formattedValue = response.value
+
+          // Handle select questions - need to convert ID to label
+          if (question?.type === 'select' && typeof formattedValue === 'string') {
+            const label = getChoiceLabelById(question, formattedValue)
+            return {
+              question: response.question,
+              value: label || formattedValue,
+            }
+          }
+
+          // Handle radio questions - single choice, format as { labels: [label], other: value }
+          if (question?.type === 'radio' && typeof formattedValue === 'string') {
+            const questionIdx = proposalForm.questions.findIndex((q: any) => q.id === question.id)
+            const otherValue = getValues(`responses.${questionIdx}.value-other-value` as any) as string | undefined
+            if (formattedValue === 'other') {
+              return {
+                question: response.question,
+                value: JSON.stringify({ labels: [], other: otherValue || null }),
+              }
+            }
+            const label = getChoiceLabelById(question, formattedValue)
+            return {
+              question: response.question,
+              value: JSON.stringify({ labels: label ? [label] : [], other: null }),
+            }
+          }
+
+          // Handle checkbox questions - multiple choices, format as { labels: [...], other: value }
+          if (question?.type === 'checkbox' && Array.isArray(formattedValue)) {
+            const questionIdx = proposalForm.questions.findIndex((q: any) => q.id === question.id)
+            const otherValue = getValues(`responses.${questionIdx}.value-other-value` as any) as string | undefined
+            const hasOther = formattedValue.includes('other')
+            const labels = formattedValue
+              .filter((id: string) => id !== 'other')
+              .map((id: string) => getChoiceLabelById(question, id))
+              .filter(Boolean) as string[]
+            return {
+              question: response.question,
+              value: JSON.stringify({ labels, other: hasOther ? otherValue || null : null }),
+            }
+          }
+
+          // Handle button questions - format as { labels: [label], other: null }
+          if (question?.type === 'button' && typeof formattedValue === 'string') {
+            const label = getChoiceLabelById(question, formattedValue)
+            return {
+              question: response.question,
+              value: JSON.stringify({ labels: label ? [label] : [], other: null }),
+            }
+          }
+
+          // Handle ranking questions - format as { labels: [...], other: null }
+          if (question?.type === 'ranking' && Array.isArray(formattedValue)) {
+            const labels = formattedValue
+              .map((id: string) => getChoiceLabelById(question, id))
+              .filter(Boolean) as string[]
+            return {
+              question: response.question,
+              value: JSON.stringify({ labels, other: null }),
+            }
+          }
+
           if (typeof formattedValue === 'object' && formattedValue !== null && 'value' in formattedValue) {
             formattedValue = (formattedValue as { value: string }).value
           }
@@ -335,28 +493,29 @@ const ProposalFormModal: React.FC<Props> = props => {
 
       const formattedAddress = addressJsonRef.current ? JSON.stringify([addressJsonRef.current]) : null
 
-      if (mode === 'edit' && proposal) {
-        const input = {
-          id: proposal.id,
-          draft: isDraft,
-          title: data.title,
-          ...(data.body !== undefined && { body: data.body }),
-          ...(data.summary && { summary: data.summary }),
-          ...(data.theme && { theme: data.theme }),
-          ...(data.category && { category: data.category }),
-          ...(data.district && { district: data.district }),
-          ...(formattedAddress && { address: formattedAddress }),
-          ...(data.media && { media: data.media.id }),
-          ...(formattedResponses.length > 0 && { responses: formattedResponses }),
-          ...(data.webPageUrl && { webPageUrl: data.webPageUrl }),
-          ...(data.facebookUrl && { facebookUrl: data.facebookUrl }),
-          ...(data.twitterUrl && { twitterUrl: data.twitterUrl }),
-          ...(data.instagramUrl && { instagramUrl: data.instagramUrl }),
-          ...(data.youtubeUrl && { youtubeUrl: data.youtubeUrl }),
-          ...(data.linkedInUrl && { linkedInUrl: data.linkedInUrl }),
-        }
+      const input = {
+        draft: isDraft,
+        title: data.title,
+        ...(!isWYSIWYGContentEmpty(data.body) && { body: data.body }),
+        ...(data.summary && { summary: data.summary }),
+        ...(data.theme && { theme: data.theme }),
+        ...(data.category && { category: data.category }),
+        ...(data.district && { district: data.district }),
+        ...(formattedAddress && { address: formattedAddress }),
+        ...(data.media && { media: data.media.id }),
+        ...(formattedResponses.length > 0 && { responses: formattedResponses }),
+        ...(data.webPageUrl && { webPageUrl: data.webPageUrl }),
+        ...(data.facebookUrl && { facebookUrl: data.facebookUrl }),
+        ...(data.twitterUrl && { twitterUrl: data.twitterUrl }),
+        ...(data.instagramUrl && { instagramUrl: data.instagramUrl }),
+        ...(data.youtubeUrl && { youtubeUrl: data.youtubeUrl }),
+        ...(data.linkedInUrl && { linkedInUrl: data.linkedInUrl }),
+      }
 
-        const response = await ChangeProposalContentMutation.commit({ input })
+      if (mode === 'edit' && proposal) {
+        const editModeInput = { id: proposal.id, ...input }
+
+        const response = await ChangeProposalContentMutation.commit({ input: editModeInput })
 
         if (response.changeProposalContent?.proposal) {
           successToast(
@@ -368,36 +527,19 @@ const ProposalFormModal: React.FC<Props> = props => {
           props.onClose()
         }
       } else {
-        const input = {
-          proposalFormId: proposalForm.id,
-          draft: isDraft,
-          title: data.title,
-          ...(data.body && { body: data.body }),
-          ...(data.summary && { summary: data.summary }),
-          ...(data.theme && { theme: data.theme }),
-          ...(data.category && { category: data.category }),
-          ...(data.district && { district: data.district }),
-          ...(formattedAddress && { address: formattedAddress }),
-          ...(data.media && { media: data.media.id }),
-          ...(formattedResponses.length > 0 && { responses: formattedResponses }),
-          ...(data.webPageUrl && { webPageUrl: data.webPageUrl }),
-          ...(data.facebookUrl && { facebookUrl: data.facebookUrl }),
-          ...(data.twitterUrl && { twitterUrl: data.twitterUrl }),
-          ...(data.instagramUrl && { instagramUrl: data.instagramUrl }),
-          ...(data.youtubeUrl && { youtubeUrl: data.youtubeUrl }),
-          ...(data.linkedInUrl && { linkedInUrl: data.linkedInUrl }),
-        }
+        const createModeInput = { proposalFormId: proposalForm.id, ...input }
 
-        const connectionId = formatConnectionPath([props.stepId], 'ProposalsList_proposals')
         const response = await CreateProposalMutation.commit({
-          input,
-          connections: isDraft ? [] : [connectionId],
+          variables: {
+            input: createModeInput,
+            stepId: props.stepId,
+            isAuthenticated: viewerSession != null,
+          },
           stepId: props.stepId,
         })
 
         if (response.createProposal.userErrors?.length > 0) {
-          const errorMessage = response.createProposal.userErrors.map(e => e.message).join(', ')
-          return dangerToast(errorMessage)
+          return mutationErrorToast(intl)
         }
 
         if (response.createProposal?.proposal) {
@@ -416,12 +558,6 @@ const ProposalFormModal: React.FC<Props> = props => {
     }
   }
 
-  const getTitleLabel = () => {
-    if (proposalForm.objectType === 'PROPOSAL') return 'global.title'
-    if (proposalForm.objectType === 'OPINION') return 'opinion-title'
-    return 'title'
-  }
-
   const renderFormContent = (hide?: () => void) => (
     <FormProvider {...methods}>
       <Modal.Header>
@@ -429,153 +565,64 @@ const ProposalFormModal: React.FC<Props> = props => {
       </Modal.Header>
       <Modal.Body>
         <Flex as="form" direction="column" gap={4}>
-          {/* Title */}
-          <FormControl name="title" control={control}>
-            <FormLabel htmlFor="title" label={intl.formatMessage({ id: getTitleLabel() })} />
-            <FieldInput type="text" control={control} name="title" id="title" />
-            {proposalForm.titleHelpText && (
-              <Text color="text.tertiary" fontSize="sm" mt={1}>
-                {proposalForm.titleHelpText}
-              </Text>
-            )}
-          </FormControl>
+          <TitleInput
+            control={control}
+            objectType={proposalForm.objectType}
+            titleHelpText={proposalForm.titleHelpText}
+          />
 
-          {/* Summary */}
           {proposalForm.usingSummary && (
-            <FormControl name="summary" control={control}>
-              <FormLabel htmlFor="summary" label={intl.formatMessage({ id: 'global.summary' })} />
-              <FieldInput type="textarea" control={control} name="summary" id="summary" maxLength={140} />
-              {proposalForm.summaryHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.summaryHelpText}
-                </Text>
-              )}
-            </FormControl>
+            <SummaryInput control={control} summaryHelpText={proposalForm.summaryHelpText} />
           )}
 
-          {/* Category */}
+          {/* Themes */}
+          {themesEnabled && proposalForm.usingThemes && themes.length > 0 && (
+            <ThemeInput
+              control={control}
+              themes={themes}
+              themeHelpText={proposalForm.themeHelpText}
+              themeMandatory={proposalForm.themeMandatory}
+            />
+          )}
+
           {proposalForm.usingCategories && proposalForm.categories.length > 0 && (
-            <FormControl name="category" control={control}>
-              <FormLabel htmlFor="category" label={intl.formatMessage({ id: 'global.category' })} />
-              <FieldInput
-                type="select"
-                control={control}
-                name="category"
-                id="category"
-                placeholder={intl.formatMessage({ id: 'proposal.select.category' })}
-                options={proposalForm.categories.map((cat: any) => ({
-                  label: cat.name,
-                  value: cat.id,
-                }))}
-              />
-              {proposalForm.categoryHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.categoryHelpText}
-                </Text>
-              )}
-            </FormControl>
+            <CategoryInput
+              control={control}
+              categories={proposalForm.categories}
+              categoryHelpText={proposalForm.categoryHelpText}
+            />
           )}
 
-          {/* Address */}
           {proposalForm.usingAddress && (
-            <FormControl name="address" control={control}>
-              <FormLabel label={intl.formatMessage({ id: 'proposal_form.address' })} htmlFor="address" />
-              <Flex align="center" gap={2} p={2} border="1px solid" borderColor="gray.200" borderRadius="normal">
-                <Spinner size={CapUIIconSize.Sm} />
-                <Text color="text.tertiary" fontSize="sm">
-                  {intl.formatMessage({ id: 'global.loading' })}
-                </Text>
-              </Flex>
-              {proposalForm.addressHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.addressHelpText}
-                </Text>
-              )}
-            </FormControl>
+            <AddressInput
+              control={control}
+              addressHelpText={proposalForm.addressHelpText}
+              showLocateButton={mode === 'create'}
+              onAddressChange={address => {
+                addressJsonRef.current = address
+              }}
+            />
           )}
 
-          {/* Locate on map button - only in create mode */}
-          {mode === 'create' && proposalForm.usingAddress && (
-            <Button variant="link" variantColor="primary" pl={0} pt={0}>
-              {intl.formatMessage({ id: 'front.proposal.locate-on-map' })}
-            </Button>
-          )}
-
-          {/* District */}
           {proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
-            <FormControl name="district" control={control} isRequired={proposalForm.districtMandatory}>
-              <FormLabel htmlFor="district" label={intl.formatMessage({ id: 'proposal.district' })} />
-              <FieldInput
-                type="select"
-                control={control}
-                name="district"
-                id="district"
-                placeholder={intl.formatMessage({ id: 'proposal.select.district' })}
-                options={proposalForm.districts.map((district: any) => ({
-                  label: district.name,
-                  value: district.id,
-                }))}
-              />
-              {proposalForm.districtHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.districtHelpText}
-                </Text>
-              )}
-            </FormControl>
+            <DistrictInput
+              control={control}
+              districts={proposalForm.districts}
+              districtHelpText={proposalForm.districtHelpText}
+              districtMandatory={proposalForm.districtMandatory}
+            />
           )}
 
-          {/* Description/Body */}
           {proposalForm.usingDescription && (
-            <Box>
-              <TextEditor
-                label={intl.formatMessage({ id: 'proposal.body' })}
-                name="body"
-                id="body"
-                placeholder={intl.formatMessage({ id: 'admin.content.start-writing' })}
-                required={proposalForm.descriptionMandatory}
-                noModalAdvancedEditor
-                platformLanguage="FR_FR"
-                selectedLanguage="FR_FR"
-              />
-              {proposalForm.descriptionHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.descriptionHelpText}
-                </Text>
-              )}
-            </Box>
+            <DescriptionInput
+              descriptionMandatory={proposalForm.descriptionMandatory}
+              descriptionHelpText={proposalForm.descriptionHelpText}
+              defaultLocale={defaultLocale}
+            />
           )}
 
-          {/* Illustration */}
           {proposalForm.usingIllustration && (
-            <FormControl name="media" control={control}>
-              <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'proposal.media' })}>
-                <Text fontSize={CapUIFontSize.BodySmall} color="text.tertiary" lineHeight={1}>
-                  {intl.formatMessage({ id: 'global.optional' })}
-                </Text>
-              </FormLabel>
-              <Text fontSize={CapUIFontSize.BodySmall} color="text.tertiary" lineHeight={1}>
-                {intl.formatMessage({ id: 'front.proposal-form.illustration-help-text' })}
-              </Text>
-              <FieldInput
-                isFullWidth
-                variantColor="default"
-                type="uploader"
-                control={control}
-                name="media"
-                id="media"
-                format=".jpg,.jpeg,.png"
-                maxFiles={1}
-                maxSize={4000000}
-                showThumbnail
-                size={UPLOADER_SIZE.LG}
-                uploadURI={UPLOAD_PATH}
-              />
-              {proposalForm.illustrationHelpText && (
-                <Text color="text.tertiary" fontSize="sm" mt={1}>
-                  {proposalForm.illustrationHelpText}
-                </Text>
-              )}
-            </FormControl>
+            <IllustrationInput control={control} illustrationHelpText={proposalForm.illustrationHelpText} />
           )}
 
           {/* Questions */}
@@ -584,228 +631,9 @@ const ProposalFormModal: React.FC<Props> = props => {
               return null
             }
 
-            const name = `responses.${idx}.value`
-            const { type, title, helpText, description } = question
-
-            const renderQuestionLabel = () => (
-              <>
-                <FormLabel htmlFor={name} label={title} />
-                {helpText && <FormGuideline>{helpText}</FormGuideline>}
-                {description && !isWYSIWYGContentEmpty(description) && (
-                  <Text color="text.tertiary" fontSize="sm" mb={2} dangerouslySetInnerHTML={{ __html: description }} />
-                )}
-              </>
+            return (
+              <QuestionField key={question.id} question={question} name={`responses.${idx}.value`} control={control} />
             )
-
-            switch (type) {
-              case 'text':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput type="text" control={control} name={name} id={name} variantSize={CapInputSize.Md} />
-                  </FormControl>
-                )
-              case 'textarea':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput type="textarea" control={control} name={name} id={name} rows={4} />
-                  </FormControl>
-                )
-              case 'editor':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput type="textarea" control={control} name={name} id={name} rows={6} />
-                  </FormControl>
-                )
-              case 'select':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput
-                      type="select"
-                      control={control}
-                      name={name}
-                      id={name}
-                      options={
-                        question.choices?.edges
-                          ?.filter((edge: any) => edge?.node)
-                          .map(({ node }: any) => ({
-                            value: node.id,
-                            label: node.title,
-                          })) || []
-                      }
-                    />
-                  </FormControl>
-                )
-              case 'radio': {
-                const choices =
-                  question.choices?.edges
-                    ?.filter((edge: any) => edge?.node)
-                    .map(({ node }: any) => ({
-                      id: node.id,
-                      label: node.title,
-                      description: node.description,
-                      image: node.image,
-                    })) || []
-
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <MultipleChoiceQuestion
-                      name={name}
-                      control={control}
-                      choices={choices}
-                      isOtherAllowed={question?.isOtherAllowed ?? false}
-                    />
-                  </FormControl>
-                )
-              }
-              case 'button':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <ButtonChoices
-                      name={name}
-                      control={control}
-                      choices={
-                        question.choices?.edges
-                          ?.filter((edge: any) => edge?.node)
-                          .map(({ node }: any) => ({
-                            id: node.id,
-                            label: node.title,
-                            color: node.color,
-                            image: node.image,
-                          })) || []
-                      }
-                    />
-                  </FormControl>
-                )
-              case 'checkbox': {
-                const choices =
-                  question.choices?.edges
-                    ?.filter((edge: any) => edge?.node)
-                    .map(({ node }: any) => ({
-                      id: node.id,
-                      label: node.title,
-                      description: node.description,
-                      image: node.image,
-                    })) || []
-
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <MultipleChoiceQuestion
-                      name={name}
-                      control={control}
-                      choices={choices}
-                      isOtherAllowed={question?.isOtherAllowed ?? false}
-                      isMultiple
-                    />
-                  </FormControl>
-                )
-              }
-              case 'ranking':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <RankingChoices
-                      name={name}
-                      control={control}
-                      choices={
-                        question.choices?.edges
-                          ?.filter((edge: any) => edge?.node)
-                          .map(({ node }: any) => ({
-                            id: node.id,
-                            label: node.title,
-                            image: node.image,
-                          })) || []
-                      }
-                    />
-                  </FormControl>
-                )
-              case 'number':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput type="number" control={control} name={name} id={name} />
-                  </FormControl>
-                )
-              case 'medias':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput
-                      isFullWidth
-                      type="uploader"
-                      control={control}
-                      name={name}
-                      id={name}
-                      format=".jpg,.jpeg,.png,.pdf,.doc,.docx"
-                      maxFiles={5}
-                      maxSize={8000000}
-                      showThumbnail
-                      size={UPLOADER_SIZE.LG}
-                      uploadURI={UPLOAD_PATH}
-                    />
-                  </FormControl>
-                )
-              case 'siret':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput
-                      type="text"
-                      control={control}
-                      name={name}
-                      id={name}
-                      placeholder="12345678901234"
-                      maxLength={14}
-                      variantSize={CapInputSize.Md}
-                    />
-                  </FormControl>
-                )
-              case 'rna':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <FieldInput
-                      type="text"
-                      control={control}
-                      name={name}
-                      id={name}
-                      placeholder="W123456789"
-                      maxLength={10}
-                      variantSize={CapInputSize.Md}
-                    />
-                  </FormControl>
-                )
-              case 'majority':
-                return (
-                  <FormControl key={question.id} name={name} control={control}>
-                    {renderQuestionLabel()}
-                    <Controller
-                      name={name as any}
-                      control={control}
-                      render={({ field }) => (
-                        <MajorityQuestion
-                          selectedValue={typeof field.value === 'string' ? field.value : null}
-                          onChange={field.onChange}
-                        />
-                      )}
-                    />
-                  </FormControl>
-                )
-              case 'section':
-                return (
-                  <Heading key={question.id} as="h3" fontSize="lg" mt={4} mb={2}>
-                    {title}
-                  </Heading>
-                )
-              default:
-                return null
-            }
           })}
 
           {/* Social Media / External Links */}
@@ -827,7 +655,7 @@ const ProposalFormModal: React.FC<Props> = props => {
           isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
           onClick={() => {
             submitButtonRef.current = 'save-as-draft'
-            handleSubmit(data => onSubmit(data, true, hide))()
+            handleSaveAsDraft(hide)
           }}
         >
           {intl.formatMessage({ id: 'global.save_as_draft' })}
@@ -840,7 +668,7 @@ const ProposalFormModal: React.FC<Props> = props => {
           isLoading={isSubmitting && submitButtonRef.current === 'publish'}
           onClick={() => {
             submitButtonRef.current = 'publish'
-            handleSubmit(data => onSubmit(data, false, hide))()
+            handlePublish(hide)
           }}
         >
           {intl.formatMessage({ id: mode === 'edit' ? 'global.publish' : 'front.collect.submit-proposal' })}

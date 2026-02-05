@@ -1,5 +1,23 @@
 import { Control } from 'react-hook-form'
 
+export type CreateModeProps = {
+  mode: 'create'
+  disabled: boolean
+  proposalForm: any
+  stepId: string
+  proposal?: never
+  onClose?: never
+}
+
+export type EditModeProps = {
+  mode: 'edit'
+  proposal: any
+  proposalForm: any
+  onClose: () => void
+  disabled?: never
+  stepId?: never
+}
+
 /**
  * Response value for a question in the proposal form.
  * Different question types use different value formats:
@@ -49,6 +67,8 @@ export type ButtonChoicesProps = {
   name: string
   control: Control<any>
   choices: ButtonChoice[]
+  groupedResponsesEnabled?: boolean
+  responseColorsDisabled?: boolean
 }
 
 export type RankingChoice = {
@@ -70,6 +90,11 @@ export type MultipleChoiceChoice = {
   image?: { id: string; url: string } | null
 }
 
+export type ValidationRule = {
+  type: 'MIN' | 'MAX' | 'EQUAL'
+  number: number
+}
+
 export type MultipleChoiceQuestionProps = {
   name: string
   // Using Control<any> because the field name is dynamic (e.g., "responses.0.value")
@@ -78,4 +103,10 @@ export type MultipleChoiceQuestionProps = {
   choices: MultipleChoiceChoice[]
   isOtherAllowed?: boolean
   isMultiple?: boolean
+  validationRule?: ValidationRule | null
+}
+
+export type ParsedResponse = {
+  value: any
+  otherValue?: string | null
 }

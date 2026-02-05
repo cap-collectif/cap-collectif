@@ -17,6 +17,9 @@ const FRAGMENT = graphql`
     id
     __typename
     votable
+    allProposals: proposals {
+      totalCount
+    }
     form {
       contribuable
       ...ProposalFormModal_proposalForm
@@ -33,18 +36,20 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
   return (
     <Flex gap="lg" width="100%" align="start">
       <Box width="100%" flex="2 1 0">
-        <Flex gap="xl" width="100%">
-          {step.form && isCollectStep ? (
-            <ProposalFormModal
-              mode="create"
-              disabled={!step.form.contribuable}
-              proposalForm={step.form}
-              stepId={step.id}
-            />
-          ) : null}
-          <VoteStepSearchBar />
+        <Flex gap="xl" width="100%" alignItems="center" direction={!step.votable ? 'row' : 'column'}>
+          <Flex gap="md" width="100%" align="center" justifyContent="flex-start">
+            {step.form && isCollectStep ? (
+              <ProposalFormModal
+                mode="create"
+                disabled={!step.form.contribuable}
+                proposalForm={step.form}
+                stepId={step.id}
+              />
+            ) : null}
+            <VoteStepSearchBar proposalsCount={step.allProposals?.totalCount ?? 0} />
+          </Flex>
+          <VoteStepListActions step={step} />
         </Flex>
-        <VoteStepListActions step={step} />
       </Box>
       {step.votable ? (
         <Box flex={`0 1 ${pxToRem(395)}`} position="relative" minHeight={pxToRem(116)}>

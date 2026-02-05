@@ -129,7 +129,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   return (
     <Box backgroundColor="neutral-gray.50">
       <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={8} px={[4, 6]}>
-        <Flex direction="column" gap="xxl" mb="xl">
+        <Flex direction="column" gap="md" mb="xl">
           <StepLinkedEvents step={step} />
           <AbstractCard width="100%" border="none" backgroundColor="white">
             <WYSIWYGRender value={step.body} />

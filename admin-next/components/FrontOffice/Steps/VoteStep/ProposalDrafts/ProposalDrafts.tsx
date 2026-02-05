@@ -1,7 +1,23 @@
-import { Box, CapUIFontSize, CapUIRadius, Heading, ListCard } from '@cap-collectif/ui'
+import {
+  Button,
+  CapUIFontSize,
+  CapUIFontWeight,
+  CapUIIcon,
+  CapUIIconSize,
+  CapUILineHeight,
+  Card,
+  CardCover,
+  CardCoverImage,
+  CardCoverPlaceholder,
+  Divider,
+  Flex,
+  Icon,
+  Text,
+} from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { ProposalDraftsQuery as ProposalDraftsQueryType } from '@relay/ProposalDraftsQuery.graphql'
 import { ProposalDrafts_step$data, ProposalDrafts_step$key } from '@relay/ProposalDrafts_step.graphql'
+import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
@@ -15,6 +31,9 @@ const FRAGMENT = graphql`
   fragment ProposalDrafts_step on ProposalStep {
     id
     __typename
+    timeRange {
+      isOpen
+    }
     form {
       id
       ...ProposalFormModal_proposalForm
@@ -31,6 +50,9 @@ const QUERY = graphql`
             node {
               id
               title
+              media {
+                url
+              }
               ...ProposalFormModal_proposal
             }
           }
@@ -70,37 +92,71 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
 
   return (
     <>
-      <Box width="100%" bg="white" p={6} borderRadius={CapUIRadius.Card}>
-        <Heading as="h4" fontSize={CapUIFontSize.Headline} fontWeight={600} mb={4}>
-          {intl.formatMessage({ id: 'global.draft.your_draft' })}
-        </Heading>
-        <ListCard>
-          {drafts.map(edge => {
-            if (!edge?.node) return null
-            const draft = edge.node
-            return (
-              <ListCard.Item
-                as="li"
-                key={draft.id}
-                sx={{ cursor: 'pointer' }}
-                tabIndex={0}
-                onKeyUp={e => {
-                  if (e.key === ' ' || e.key === 'Enter') {
-                    setSelectedProposal(draft)
-                    setIsEditModalOpen(true)
-                  }
-                }}
+      <Flex alignItems="center" lineHeight={CapUILineHeight.Normal} gap={2}>
+        <Icon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} lineHeight={CapUILineHeight.Normal} alignSelf="center" />
+        <Text as="h4" fontSize={CapUIFontSize.BodyRegular} fontWeight={600} lineHeight={CapUILineHeight.Normal}>
+          {intl.formatMessage({ id: 'front.proposal.your-drafts' })}
+        </Text>
+        <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary" lineHeight={CapUILineHeight.Normal}>
+          {intl.formatMessage({ id: 'global.draft.only_visible_by_you' })}
+        </Text>
+        <Divider flex={1}> </Divider>
+      </Flex>
+      {drafts.map(edge => {
+        if (!edge?.node) return null
+        const draft = edge.node
+        return (
+          <Card
+            as="li"
+            key={draft.id}
+            sx={{ cursor: 'pointer' }}
+            tabIndex={0}
+            onKeyUp={e => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                setSelectedProposal(draft)
+                setIsEditModalOpen(true)
+              }
+            }}
+            display="flex"
+            // @ts-ignore
+            flexDirection="row"
+            gap="md"
+            // todo: card format horizontal size S after UI 6.0.10 release
+          >
+            <CardCover width={pxToRem(100)} height={pxToRem(66)}>
+              {draft.media?.url ? (
+                <CardCoverImage src={draft.media.url} />
+              ) : (
+                // todo: update when DS 6.0.10 is merged to match design
+                <CardCoverPlaceholder icon={CapUIIcon.PictureO} color="neutral-gray.lighter" />
+              )}
+            </CardCover>
+            <Flex direction="column">
+              <Text
+                fontSize={CapUIFontSize.BodyRegular}
+                fontWeight={CapUIFontWeight.Semibold}
+                lineHeight={CapUILineHeight.M}
+              >
+                {draft.title}
+              </Text>
+              <Button
+                variant="link"
+                color="text.secondary"
+                p={0}
+                fontSize={CapUIFontSize.BodyRegular}
+                fontWeight={CapUIFontWeight.Normal}
+                lineHeight={CapUILineHeight.M}
                 onClick={() => {
                   setSelectedProposal(draft)
                   setIsEditModalOpen(true)
                 }}
               >
-                <ListCard.Item.Label fontSize={CapUIFontSize.BodySmall}>{draft.title}</ListCard.Item.Label>
-              </ListCard.Item>
-            )
-          })}
-        </ListCard>
-      </Box>
+                {intl.formatMessage({ id: 'front.proposal.keep-editing' })}
+              </Button>
+            </Flex>
+          </Card>
+        )
+      })}
 
       {isEditModalOpen && selectedProposal && (
         <ProposalFormModal
@@ -125,6 +181,8 @@ const ProposalDrafts: React.FC<Props> = ({ step: stepKey }) => {
   // Only CollectStep has viewerProposalDrafts
   if (step.__typename !== 'CollectStep') return null
   if (!step.form) return null
+  // Don't display drafts section when step is closed
+  if (!step.timeRange.isOpen) return null
 
   return (
     <React.Suspense fallback={null}>

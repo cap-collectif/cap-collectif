@@ -31,8 +31,7 @@
     "react-relay": "^18.2.0",
     "redis": "^4.0.0",
     "relay-compiler": "^18.2.0",
-    "relay-runtime": "^18.2.0",
-    "zod": "^4.3.5"
+    "relay-runtime": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
