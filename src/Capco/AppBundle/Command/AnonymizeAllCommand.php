@@ -27,6 +27,30 @@ class AnonymizeAllCommand extends Command
     private const DEFAULT_BATCH_SIZE = 1000;
     private const MAX_RECORDS = 1_000_000;
     private const STOP_WATCH_EVENT = 'ANONYMIZE_ALL';
+    private const PERSONAL_DATA_QUESTION_KEYWORDS = [
+        'nom',
+        'nom de famille',
+        'prenom',
+        'prénom',
+        'prénom(s)',
+        'telephone',
+        'téléphone',
+        'tel',
+        'numéro de tel',
+        'numéro de téléphone',
+        'date de naissance',
+        'naissance',
+        'adresse',
+        'adresse postale',
+        'adresse email',
+        'adresse e-mail',
+        'ton 06',
+        'email',
+        'e-mail',
+        'courriel',
+        'mail',
+        'contact',
+    ];
 
     private readonly Connection $connection;
 
@@ -113,6 +137,8 @@ class AnonymizeAllCommand extends Command
 
             $usersCount = $this->countUsersForAnonymization($includeAdmins, $forceReanonymize);
             $participantsCount = $this->countParticipantsForAnonymization($forceReanonymize);
+            $usersResponsesCount = $this->countPersonalDataResponsesForUsers($includeAdmins, $forceReanonymize);
+            $participantsResponsesCount = $this->countPersonalDataResponsesForParticipants($forceReanonymize);
             $totalCount = $usersCount + $participantsCount;
 
             if (0 === $totalCount) {
@@ -121,7 +147,15 @@ class AnonymizeAllCommand extends Command
                 return Command::SUCCESS;
             }
 
-            $this->displayPreview($io, $usersCount, $participantsCount, $includeAdmins, $forceReanonymize);
+            $this->displayPreview(
+                $io,
+                $usersCount,
+                $participantsCount,
+                $usersResponsesCount,
+                $participantsResponsesCount,
+                $includeAdmins,
+                $forceReanonymize
+            );
 
             if ($isDryRun) {
                 $io->success('Dry-run complete. Run without --dry-run to execute.');
@@ -167,14 +201,92 @@ class AnonymizeAllCommand extends Command
         return (int) $this->connection->fetchOne($sql);
     }
 
-    private function displayPreview(SymfonyStyle $io, int $usersCount, int $participantsCount, bool $includeAdmins, bool $forceReanonymize): void
+    private function countPersonalDataResponsesForUsers(bool $includeAdmins, bool $forceReanonymize): int
     {
+        $condition = $this->buildPersonalDataQuestionTitleSqlCondition();
+        $params = $this->buildPersonalDataQuestionTitleSqlParameters();
+        $sql = <<<SQL
+            SELECT COUNT(*)
+            FROM response r
+            JOIN reply rp ON rp.id = r.reply_id
+            JOIN question q ON q.id = r.question_id
+            JOIN fos_user u ON u.id = rp.author_id
+            WHERE r.response_type = 'value'
+            AND {$condition}
+            SQL;
+
+        if (!$forceReanonymize) {
+            $sql .= ' AND u.anonymized_at IS NULL';
+        }
+
+        if (!$includeAdmins) {
+            $sql .= " AND u.roles NOT LIKE '%ROLE_ADMIN%' AND u.roles NOT LIKE '%ROLE_SUPER_ADMIN%'";
+        }
+
+        return (int) $this->connection->fetchOne($sql, $params);
+    }
+
+    private function countPersonalDataResponsesForParticipants(bool $forceReanonymize): int
+    {
+        $condition = $this->buildPersonalDataQuestionTitleSqlCondition();
+        $params = $this->buildPersonalDataQuestionTitleSqlParameters();
+        $sql = <<<SQL
+            SELECT COUNT(*)
+            FROM response r
+            JOIN reply rp ON rp.id = r.reply_id
+            JOIN question q ON q.id = r.question_id
+            JOIN participant p ON p.id = rp.participant_id
+            WHERE r.response_type = 'value'
+            AND {$condition}
+            SQL;
+
+        if (!$forceReanonymize) {
+            $sql .= ' AND p.anonymized_at IS NULL';
+        }
+
+        return (int) $this->connection->fetchOne($sql, $params);
+    }
+
+    private function buildPersonalDataQuestionTitleSqlCondition(): string
+    {
+        $conditions = [];
+        foreach (self::PERSONAL_DATA_QUESTION_KEYWORDS as $index => $keyword) {
+            $conditions[] = sprintf('LOWER(q.title) LIKE :keyword_%d', $index);
+        }
+
+        return '(' . implode(' OR ', $conditions) . ')';
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function buildPersonalDataQuestionTitleSqlParameters(): array
+    {
+        $params = [];
+        foreach (self::PERSONAL_DATA_QUESTION_KEYWORDS as $index => $keyword) {
+            $params[sprintf('keyword_%d', $index)] = '%' . mb_strtolower($keyword, 'UTF-8') . '%';
+        }
+
+        return $params;
+    }
+
+    private function displayPreview(
+        SymfonyStyle $io,
+        int $usersCount,
+        int $participantsCount,
+        int $usersResponsesCount,
+        int $participantsResponsesCount,
+        bool $includeAdmins,
+        bool $forceReanonymize
+    ): void {
         $io->title('DRY-RUN PREVIEW');
         $io->table(
             ['Metric', 'Value'],
             [
                 ['Users to anonymize', number_format($usersCount)],
                 ['Participants to anonymize', number_format($participantsCount)],
+                ['Responses to anonymize (users)', number_format($usersResponsesCount)],
+                ['Responses to anonymize (participants)', number_format($participantsResponsesCount)],
                 ['Total', number_format($usersCount + $participantsCount)],
                 ['Admins included', $includeAdmins ? 'Yes' : 'No (use --include-admins to include)'],
                 ['Re-anonymize already anonymized', $forceReanonymize ? 'Yes' : 'No (use --force-reanonymize to include)'],
@@ -467,6 +579,8 @@ class AnonymizeAllCommand extends Command
         $this->deleteMailingListUsersForUsers();
         $this->deleteOrganizationMembers();
         $this->detachUserMedias();
+        $anonymizedResponses = $this->anonymizePersonalDataResponsesForUsersBatch();
+        $this->logSuccess(sprintf('OK | Responses anonymized (users batch): %d', $anonymizedResponses));
         $this->anonymizeUsers();
     }
 
@@ -498,6 +612,23 @@ class AnonymizeAllCommand extends Command
     {
         $sql = 'UPDATE fos_user u JOIN matching_users_batch mu ON u.id = mu.id SET u.media_id = NULL';
         $this->connection->executeStatement($sql);
+    }
+
+    private function anonymizePersonalDataResponsesForUsersBatch(): int
+    {
+        $condition = $this->buildPersonalDataQuestionTitleSqlCondition();
+        $params = $this->buildPersonalDataQuestionTitleSqlParameters();
+        $sql = <<<SQL
+            UPDATE response r
+            JOIN reply rp ON rp.id = r.reply_id
+            JOIN matching_users_batch mu ON mu.id = rp.author_id
+            JOIN question q ON q.id = r.question_id
+            SET r.value = NULL
+            WHERE r.response_type = 'value'
+            AND {$condition}
+            SQL;
+
+        return (int) $this->connection->executeStatement($sql, $params);
     }
 
     private function anonymizeUsers(): void
@@ -592,6 +723,8 @@ class AnonymizeAllCommand extends Command
         $this->deleteEmailingCampaignUsers();
         $this->deleteMailingListUsersForParticipants();
         $this->detachUserIdentificationCodes();
+        $anonymizedResponses = $this->anonymizePersonalDataResponsesForParticipantsBatch();
+        $this->logSuccess(sprintf('OK | Responses anonymized (participants batch): %d', $anonymizedResponses));
         $this->anonymizeParticipants();
     }
 
@@ -617,6 +750,23 @@ class AnonymizeAllCommand extends Command
     {
         $sql = 'UPDATE participant p JOIN matching_participants_batch mp ON p.id = mp.id SET p.user_identification_code = NULL';
         $this->connection->executeStatement($sql);
+    }
+
+    private function anonymizePersonalDataResponsesForParticipantsBatch(): int
+    {
+        $condition = $this->buildPersonalDataQuestionTitleSqlCondition();
+        $params = $this->buildPersonalDataQuestionTitleSqlParameters();
+        $sql = <<<SQL
+            UPDATE response r
+            JOIN reply rp ON rp.id = r.reply_id
+            JOIN matching_participants_batch mp ON mp.id = rp.participant_id
+            JOIN question q ON q.id = r.question_id
+            SET r.value = NULL
+            WHERE r.response_type = 'value'
+            AND {$condition}
+            SQL;
+
+        return (int) $this->connection->executeStatement($sql, $params);
     }
 
     private function anonymizeParticipants(): void
