@@ -22,6 +22,8 @@ const FRAGMENT = graphql`
     }
     form {
       isMapViewEnabled
+      isGridViewEnabled
+      isListViewEnabled
     }
   }
 `
@@ -67,16 +69,17 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
             {intl.formatMessage({ id: 'global.vote' })}
           </StepVoteMobileActionBtn>
         )}
-        {step.form.isMapViewEnabled && (
-          <StepVoteMobileActionBtn
-            icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
-            onClick={() => handleActionClick('map')}
-          >
-            {isMapVisible
-              ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
-              : intl.formatMessage({ id: 'global.card' })}
-          </StepVoteMobileActionBtn>
-        )}
+        {step.form.isMapViewEnabled &&
+          (step.form.isGridViewEnabled !== false || step.form.isListViewEnabled !== false) && (
+            <StepVoteMobileActionBtn
+              icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
+              onClick={() => handleActionClick('map')}
+            >
+              {isMapVisible
+                ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
+                : intl.formatMessage({ id: 'global.card' })}
+            </StepVoteMobileActionBtn>
+          )}
       </Flex>
     </Box>
   )

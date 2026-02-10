@@ -78,6 +78,8 @@ const FRAGMENT = graphql`
       objectType
       contribuable
       isMapViewEnabled
+      isGridViewEnabled
+      isListViewEnabled
     }
   }
 `
@@ -98,6 +100,8 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
 
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
+
+  const isMapOnlyView = step.form?.isMapViewEnabled && !step.form?.isGridViewEnabled && !step.form?.isListViewEnabled
 
   const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
@@ -148,7 +152,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
 
         <Box mb="md">
           <Flex justifyContent="space-between" gap="lg">
-            {(!isMapExpanded && !isMobile) || isMobile ? (
+            {((!isMapExpanded && !isMobile) || isMobile) && !isMapOnlyView ? (
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
@@ -172,9 +176,9 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                 </React.Suspense>
               </Box>
             ) : null}
-            {step.form?.isMapViewEnabled && isMapShown !== 0 && !isMobile ? (
+            {step.form?.isMapViewEnabled && (isMapOnlyView || isMapShown !== 0) && !isMobile ? (
               <Box
-                flex={`0 1 ${pxToRem(395)}`}
+                flex={isMapOnlyView ? '1 1 100%' : `0 1 ${pxToRem(395)}`}
                 position="sticky"
                 top={pxToRem(mapStickyPositionFromTop)}
                 height={mapHeight}
@@ -188,7 +192,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
             ) : null}
           </Flex>
         </Box>
-        {step.form?.isMapViewEnabled && isMobileMapVisible ? (
+        {step.form?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
           <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={1999} backgroundColor="white">
             <VoteStepMap step={step} showMapPlaceholder={false} removePlaceholderAndShowMap={() => {}} />
           </Box>

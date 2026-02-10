@@ -42,8 +42,8 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
 
   const hasMapView = step.form?.isMapViewEnabled
-  const hasGridView = step.form?.isGridViewEnabled ?? true
-  const hasListView = step.form?.isListViewEnabled ?? true
+  const hasGridView = step.form?.isGridViewEnabled
+  const hasListView = step.form?.isListViewEnabled
   const hasBothViews = hasGridView && hasListView
 
   const defaultView = hasGridView ? 'grid' : 'list'
@@ -108,7 +108,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       )}
       <VoteStepFiltersModal stepId={step.id} />
 
-      {hasMapView ? (
+      {hasMapView && (hasGridView || hasListView) ? (
         <Box flex="none">
           <Button
             variant="tertiary"
