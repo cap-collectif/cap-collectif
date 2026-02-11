@@ -34,21 +34,26 @@ class EnvironmentPresets
 
     public const PROD = [
         ...self::COMMON,
+        Manager::consent_internal_communication,
         Manager::export,
+        Manager::helpscout_beacon,
         Manager::members_list,
         Manager::multi_consultations,
         Manager::new_project_card,
         Manager::newsletter,
         Manager::noindex_on_profiles,
-        Manager::online_help,
         Manager::phone_confirmation,
+        Manager::project_trash,
+        Manager::remind_user_account_confirmation,
         Manager::report_browers_errors_to_sentry,
         Manager::reporting,
         Manager::restrict_connection,
         Manager::secure_password,
         Manager::sentry_log,
+        Manager::shield_mode,
         Manager::share_buttons,
         Manager::twilio,
+        Manager::versions,
     ];
 
     public const TEST = [
