@@ -3,6 +3,7 @@ import NavBarQuery from '@shared/navbar/NavBarQuery'
 import { Flex, Spinner } from '@cap-collectif/ui'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
 import NavbarRightQuery from '@shared/navbar/NavbarRightQuery'
+import { ErrorBoundary } from 'react-error-boundary'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { NavBarContextProvider } from '@shared/navbar/NavBar.context'
@@ -50,7 +51,9 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
           <Flex alignItems="center" justifyContent="center">
             <Suspense fallback={<Spinner m="auto" />}>
               {session?.viewerSession ? (
-                <NavBarMenu currentLanguage={currentLanguage ?? 'fr-FR'} />
+                <ErrorBoundary fallback={<NavbarRightQuery fullWidth={isMobile} />}>
+                  <NavBarMenu currentLanguage={currentLanguage ?? 'fr-FR'} />
+                </ErrorBoundary>
               ) : (
                 <NavbarRightQuery fullWidth={isMobile} />
               )}

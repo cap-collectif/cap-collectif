@@ -145,7 +145,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
             <VoteStepListHeader step={step} />
           </Box>
         ) : step.votable ? (
-          <Box flex={`0 1 100%`} position="relative" minHeight={pxToRem(116)}>
+          <Box flex={`0 1 100%`} position="relative" minHeight={pxToRem(116)} pb={4}>
             <VoteStepUserInfos step={step} />
           </Box>
         ) : null}

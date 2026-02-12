@@ -94,8 +94,8 @@ export const ProposalCard: React.FC<Props> = ({
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
 
   const proposalCover = media?.url || category?.categoryImage?.image?.url
-  const proposalIcon = category?.icon ? convertIconToDs(category?.icon) : CapUIIcon.CommentO
-  const proposalColor = category?.color || 'neutral-gray.base'
+  const proposalIcon = category?.icon ? convertIconToDs(category?.icon) : undefined
+  const proposalColor = category?.color || undefined
   const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
   const [listView] = useQueryState('list_view', { defaultValue: 'grid' })

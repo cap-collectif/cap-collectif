@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import VoteStepMobileFiltersModal from '../Filters/VoteStepMobileFiltersModal'
+import ProposalFormModal from '../ProposalForm/ProposalFormModal'
+import VoteStepMobileVotesModal from '../VotesPopup/VoteStepMobileVotesModal'
 import StepVoteMobileActionBtn from './VoteStepMobileActionBtn'
 
 type ActiveAction = 'search' | 'collect' | 'vote' | 'map' | null
@@ -16,6 +18,7 @@ interface Props {
 const FRAGMENT = graphql`
   fragment VoteStepMobileActions_proposalStep on ProposalStep {
     id
+    __typename
     votable
     allProposals: proposals {
       totalCount
@@ -24,13 +27,17 @@ const FRAGMENT = graphql`
       isMapViewEnabled
       isGridViewEnabled
       isListViewEnabled
+      contribuable
+      ...ProposalFormModal_proposalForm
     }
+    ...VoteStepMobileVotesModal_proposalStep
   }
 `
 
 const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
+  const isCollectStep = step.__typename === 'CollectStep'
   const [activeAction, setActiveAction] = useState<ActiveAction>(null)
 
   // Mobile: map hidden by default, shown when map_shown=1
@@ -41,7 +48,11 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
     if (action === 'map') {
       setIsMapShown(isMapVisible ? null : 1)
     }
-    setActiveAction(prev => (prev === action ? null : action))
+    if (action == 'vote') {
+      setActiveAction(prev => (prev === action ? null : action))
+    } else {
+      setActiveAction(null)
+    }
   }
 
   return (
@@ -53,21 +64,21 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
           isActive={activeAction === 'search'}
           onButtonClick={() => handleActionClick('search')}
         />
-        <StepVoteMobileActionBtn
-          icon={CapUIIcon.Add}
-          isActive={activeAction === 'collect'}
-          onClick={() => handleActionClick('collect')}
-        >
-          {intl.formatMessage({ id: 'global.collect' })}
-        </StepVoteMobileActionBtn>
+        {step.form && isCollectStep && (
+          <ProposalFormModal
+            mode="create"
+            disabled={!step.form.contribuable}
+            proposalForm={step.form}
+            stepId={step.id}
+            onButtonClick={() => handleActionClick('collect')}
+          />
+        )}
         {step.votable && (
-          <StepVoteMobileActionBtn
-            icon={CapUIIcon.ThumbUpO}
+          <VoteStepMobileVotesModal
+            step={step}
             isActive={activeAction === 'vote'}
-            onClick={() => handleActionClick('vote')}
-          >
-            {intl.formatMessage({ id: 'global.vote' })}
-          </StepVoteMobileActionBtn>
+            onButtonClick={() => handleActionClick('vote')}
+          />
         )}
         {step.form.isMapViewEnabled &&
           (step.form.isGridViewEnabled !== false || step.form.isListViewEnabled !== false) && (

@@ -36,8 +36,8 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
   return (
     <Flex gap="lg" width="100%" align="start">
       <Box width="100%" flex="2 1 0">
-        <Flex gap="xl" width="100%" alignItems="center" direction={!step.votable ? 'row' : 'column'}>
-          <Flex gap="md" width="100%" align="center" justifyContent="flex-start">
+        <Flex gap="xl" width="100%" alignItems="stretch" direction={!step.votable ? 'row' : 'column'}>
+          <Flex gap="md" alignItems="stretch" justifyContent="flex-start" flexGrow={1} flexShrink={0}>
             {step.form && isCollectStep ? (
               <ProposalFormModal
                 mode="create"

@@ -7,6 +7,7 @@ export type CreateModeProps = {
   stepId: string
   proposal?: never
   onClose?: never
+  onButtonClick?: () => void
 }
 
 export type EditModeProps = {

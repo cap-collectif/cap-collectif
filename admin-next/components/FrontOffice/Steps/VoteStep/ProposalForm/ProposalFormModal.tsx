@@ -1,4 +1,18 @@
-import { Button, CapUIIcon, CapUIModalSize, Flex, Heading, Modal } from '@cap-collectif/ui'
+import {
+  Box,
+  Button,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUIIconSize,
+  CapUILineHeight,
+  CapUIModalSize,
+  Flex,
+  Heading,
+  Icon,
+  Modal,
+} from '@cap-collectif/ui'
+import { useDisclosure } from '@liinkiing/react-hooks'
+import useIsMobile from '@shared/hooks/useIsMobile'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChangeProposalContentMutation from '@mutations/ChangeProposalContentMutation'
@@ -40,9 +54,8 @@ const THEMES_QUERY = graphql`
       id
       title
     }
-    platformLocales: availableLocales(includeDisabled: false) {
+    defaultLocale {
       code
-      isDefault
     }
   }
 `
@@ -206,6 +219,8 @@ type Props = CreateModeProps | EditModeProps
 const ProposalFormModal: React.FC<Props> = props => {
   const { mode, proposalForm: proposalFormKey } = props
   const intl = useIntl()
+  const isMobile = useIsMobile()
+  const { onOpen, onClose: onDisclosureClose } = useDisclosure(false)
   const { viewerSession } = useAppContext()
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
@@ -232,8 +247,7 @@ const ProposalFormModal: React.FC<Props> = props => {
     { fetchPolicy: 'store-or-network' },
   )
   const themes = themesData?.themes ?? []
-  const platformLocales = themesData?.platformLocales ?? []
-  const defaultLocale = platformLocales.find(locale => locale.isDefault)?.code ?? 'FR_FR'
+  const defaultLocale = themesData?.defaultLocale?.code ?? 'FR_FR'
 
   const defaultValues = React.useMemo(() => {
     if (mode === 'edit' && proposal) {
@@ -364,13 +378,18 @@ const ProposalFormModal: React.FC<Props> = props => {
     })
   }
 
-  const handleSaveAsDraft = (hide?: () => void) => {
-    handleSubmit(
-      data => {
-        onSubmit(data, true, hide)
-      },
-      () => touchErrorFields(),
-    )()
+  const handleSaveAsDraft = async (hide?: () => void) => {
+    const data = getValues() as FormValues
+    const requiredMessage = intl.formatMessage({ id: 'fill-field' })
+
+    // For drafts, only validate the title (minimum required)
+    if (!data.title || data.title.trim() === '') {
+      setValue('title', data.title, { shouldTouch: true })
+      setError('title', { type: 'manual', message: requiredMessage })
+      return
+    }
+
+    await onSubmit(data, true, hide)
   }
 
   const validateCheckboxQuestions = (data: FormValues): boolean => {
@@ -574,7 +593,7 @@ const ProposalFormModal: React.FC<Props> = props => {
       <Modal.Header>
         <Heading>{intl.formatMessage({ id: mode === 'edit' ? 'global.edit' : 'proposal.add' })}</Heading>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body pt={4}>
         <Flex as="form" direction="column" gap={4}>
           <TitleInput
             control={control}
@@ -700,6 +719,46 @@ const ProposalFormModal: React.FC<Props> = props => {
         hideOnClickOutside={false}
       >
         {renderFormContent()}
+      </Modal>
+    )
+  }
+
+  const handleMobileOpen = () => {
+    onOpen()
+    props.onButtonClick?.()
+  }
+
+  const handleMobileClose = () => {
+    reset()
+    onDisclosureClose()
+  }
+
+  if (isMobile) {
+    return (
+      <Modal
+        disclosure={
+          <Button
+            variant={'tertiary'}
+            flexDirection="column"
+            flex="1 0 0"
+            onClick={handleMobileOpen}
+            disabled={props.disabled}
+          >
+            <Icon name={CapUIIcon.Add} size={CapUIIconSize.Md} />
+            <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
+              {intl.formatMessage({ id: 'global.collect' })}
+            </Box>
+          </Button>
+        }
+        ariaLabel={intl.formatMessage({ id: 'proposal.submit' })}
+        size={CapUIModalSize.Fullscreen}
+        onClose={handleMobileClose}
+        fullSizeOnMobile
+        alwaysOpenInPortal
+        hideOnClickOutside={false}
+        zIndex={2001}
+      >
+        {renderFormContent(handleMobileClose)}
       </Modal>
     )
   }

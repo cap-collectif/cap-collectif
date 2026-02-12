@@ -1,4 +1,4 @@
-import { Box, Button, CapUIIcon, Flex, Tag } from '@cap-collectif/ui'
+import { Box, Button, CapUIIcon, Flex, Tag, useTheme } from '@cap-collectif/ui'
 import { VoteStepListActions_proposalStep$key } from '@relay/VoteStepListActions_proposalStep.graphql'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 import { parseAsInteger, useQueryState } from 'nuqs'
@@ -38,6 +38,7 @@ const FRAGMENT = graphql`
 const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const { width } = useWindowWidth()
+  const { colors } = useTheme()
 
   const step = useFragment(FRAGMENT, stepKey)
 
@@ -76,9 +77,9 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   ]
 
   return (
-    <Flex width="100%" justify="space-between" align="center">
+    <Flex flexGrow={step.votable ? 1 : 0} flexShrink={0} justify="space-between" align="stretch" height={40}>
       {width > 1024 && step.votable && (
-        <Flex gap="md">
+        <Flex gap={width >= 1200 ? 'md' : 'xs'}>
           {quickFilterButtons.map((filter, index) => (
             <ListActionsQuickFilter key={`quick-filter-${index}`} quickFilterBtn={filter} />
           ))}
@@ -93,7 +94,12 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               variantSize="medium"
               transparent={listView !== viewButton.id}
               label={viewButton.icon}
+              color={colors.primary.base}
+              aria-label={`Vue ${viewButton.label}`}
+              height="100%"
+              justifyContent="center"
               sx={{
+                aspectRatio: width <= 1024 ? 'none' : '1 / 1',
                 cursor: 'pointer',
                 '&:first-child': { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
                 '&:last-child': { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 },
@@ -101,16 +107,18 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               onClick={() => setListView(viewButton.id)}
             >
               <Tag.LeftIcon name={viewButton.icon} />
-              {(width <= 1024 || !isMapShown) && <Tag.Label>{viewButton.label}</Tag.Label>}
+              {(width <= 1024 || (!isMapShown && !step.votable)) && <Tag.Label>{viewButton.label}</Tag.Label>}
             </Tag>
           ))}
         </Box>
       )}
+
       <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView && (hasGridView || hasListView) ? (
         <Box flex="none">
           <Button
+            height="100%"
             variant="tertiary"
             leftIcon={CapUIIcon.Pin}
             onClick={() => {

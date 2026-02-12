@@ -6,6 +6,7 @@ import {
   CapUIIconSize,
   CapUILineHeight,
   Card,
+  CardContent,
   CardCover,
   CardCoverImage,
   CardCoverPlaceholder,
@@ -13,6 +14,7 @@ import {
   Flex,
   Icon,
   Text,
+  useTheme,
 } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { ProposalDraftsQuery as ProposalDraftsQueryType } from '@relay/ProposalDraftsQuery.graphql'
@@ -53,6 +55,10 @@ const QUERY = graphql`
               media {
                 url
               }
+              category {
+                icon
+                color
+              }
               ...ProposalFormModal_proposal
             }
           }
@@ -70,6 +76,7 @@ type ProposalDraftsListProps = {
 
 const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthenticated, proposalForm }) => {
   const intl = useIntl()
+  const { colors } = useTheme()
   const [selectedProposal, setSelectedProposal] = React.useState<any>(null)
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false)
 
@@ -107,45 +114,29 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
         const draft = edge.node
         return (
           <Card
-            as="li"
             key={draft.id}
-            sx={{ cursor: 'pointer' }}
             tabIndex={0}
-            onKeyUp={e => {
-              if (e.key === ' ' || e.key === 'Enter') {
-                setSelectedProposal(draft)
-                setIsEditModalOpen(true)
-              }
-            }}
-            display="flex"
-            // @ts-ignore
-            flexDirection="row"
-            gap="md"
-            // todo: card format horizontal size S after UI 6.0.10 release
+            hasButton
+            format="horizontal"
+            maxWidth={pxToRem(320)}
+            sx={{ alignItems: 'flex-start!important' }}
           >
             <CardCover width={pxToRem(100)} height={pxToRem(66)}>
               {draft.media?.url ? (
                 <CardCoverImage src={draft.media.url} />
               ) : (
-                // todo: update when DS 6.0.10 is merged to match design
-                <CardCoverPlaceholder icon={CapUIIcon.PictureO} color="neutral-gray.lighter" />
+                <CardCoverPlaceholder
+                  icon={draft.category?.icon as CapUIIcon | undefined}
+                  color={draft.category?.color ?? undefined}
+                />
               )}
             </CardCover>
-            <Flex direction="column">
-              <Text
-                fontSize={CapUIFontSize.BodyRegular}
-                fontWeight={CapUIFontWeight.Semibold}
-                lineHeight={CapUILineHeight.M}
-              >
-                {draft.title}
-              </Text>
+            <CardContent primaryInfo={draft.title} gap={0}>
               <Button
                 variant="link"
-                color="text.secondary"
                 p={0}
-                fontSize={CapUIFontSize.BodyRegular}
                 fontWeight={CapUIFontWeight.Normal}
-                lineHeight={CapUILineHeight.M}
+                sx={{ color: `${colors.text.secondary}!important` }}
                 onClick={() => {
                   setSelectedProposal(draft)
                   setIsEditModalOpen(true)
@@ -153,7 +144,7 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
               >
                 {intl.formatMessage({ id: 'front.proposal.keep-editing' })}
               </Button>
-            </Flex>
+            </CardContent>
           </Card>
         )
       })}

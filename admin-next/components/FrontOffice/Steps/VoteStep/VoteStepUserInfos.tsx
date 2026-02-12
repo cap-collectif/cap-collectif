@@ -10,12 +10,15 @@ import {
   Heading,
   Icon,
   Modal,
+  useTheme,
 } from '@cap-collectif/ui'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepUserInfos_proposalStep$key } from '@relay/VoteStepUserInfos_proposalStep.graphql'
 import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
+import useIsMobile from '@shared/hooks/useIsMobile'
 
 const contentTypes = [
   'minMaxRanking',
@@ -57,9 +60,10 @@ const FRAGMENT = graphql`
 const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const intl = useIntl()
+  const isMobile = useIsMobile()
+  const { colors } = useTheme()
 
   const [isVotePopupOpen, setIsVotePopupOpen] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Fallback to 'simple' but has to be changed later with the real step type
   const type = (step.voteType?.toLowerCase() as StepUserVotesType) ?? 'simple'
@@ -121,49 +125,21 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const titleValue = () => (proposalGoal ? proposalGoal - proposalProgress : undefined)
   const descriptionValue = () => (step.budget !== null ? proposalLimit - currentBudget : proposalProgress)
 
-  const targetProgress = (100 * proposalProgress) / proposalLimit
-  const [animatedProgress, setAnimatedProgress] = useState(targetProgress)
-  const animationRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    const duration = 500
-    const startTime = performance.now()
-    const startValue = animatedProgress
-
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const easeOut = 1 - Math.pow(1 - progress, 3)
-      const currentValue = startValue + (targetProgress - startValue) * easeOut
-
-      setAnimatedProgress(currentValue)
-
-      if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animate)
-      }
-    }
-
-    animationRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [targetProgress])
+  const progress = (100 * proposalProgress) / proposalLimit
 
   return (
     <Box
-      boxShadow="medium"
+      boxShadow={isMobile ? 'none' : 'medium'}
       backgroundColor="white"
       borderRadius="xs"
       position={isVotePopupOpen ? 'absolute' : 'relative'}
       padding="md"
       width="100%"
       maxHeight="100vh"
+      zIndex={1}
     >
       <Flex gap="md" alignItems="center">
-        <CircularStep icon={CapUIIcon.ThumbUp} progress={animatedProgress} variantSize="medium" />
+        <CircularStep icon={CapUIIcon.ThumbUp} progress={progress} variantSize="medium" />
         <Box color="text.primary" fontSize={CapUIFontSize.BodyLarge} flex="1">
           <Box fontWeight={CapUIFontWeight.Semibold}>
             {intl.formatMessage({ id: `proposal.step.user.votes.infos.title.${titleKey()}` }, { n: titleValue() })}
@@ -176,16 +152,18 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
               )}
             </Box>
           )}
-          <Button
-            variantSize="small"
-            variant="tertiary"
-            marginTop="xxs"
-            paddingLeft="0"
-            rightIcon={isVotePopupOpen ? CapUIIcon.ArrowUpO : CapUIIcon.ArrowDownO}
-            onClick={() => setIsVotePopupOpen(!isVotePopupOpen)}
-          >
-            {intl.formatMessage({ id: `proposal.step.user.votes.infos.btn.${buttonKey()}` })}
-          </Button>
+          {!isMobile ? (
+            <Button
+              variantSize="small"
+              variant="tertiary"
+              marginTop="xxs"
+              paddingLeft="0"
+              rightIcon={isVotePopupOpen ? CapUIIcon.ArrowUpO : CapUIIcon.ArrowDownO}
+              onClick={() => setIsVotePopupOpen(!isVotePopupOpen)}
+            >
+              {intl.formatMessage({ id: `proposal.step.user.votes.infos.btn.${buttonKey()}` })}
+            </Button>
+          ) : null}
         </Box>
       </Flex>
       {isVotePopupOpen && (
@@ -193,26 +171,39 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
           <VotesPopup step={step} />
         </Box>
       )}
-      <Box alignSelf="flex-start" position="absolute" top="9px" right="7px">
-        <Button variant="tertiary" variantSize="small" onClick={() => setIsModalOpen(true)}>
-          <Icon name={CapUIIcon.Info} color="primary.base" />
-        </Button>
-        <Modal
-          show={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          hideCloseButton={false}
-          size={CapUIModalSize.Md}
-          ariaLabel={intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
-        >
-          <Modal.Header>
-            <Heading>{intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}</Heading>
-          </Modal.Header>
-          <Modal.Body>{step.votesHelpText}</Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setIsModalOpen(false)}>{intl.formatMessage({ id: 'global.close' })}</Button>
-          </Modal.Footer>
-        </Modal>
-      </Box>
+      {step.votesHelpText ? (
+        <Box alignSelf="flex-start" position="absolute" top={isMobile ? '0px' : '9px'} right={isMobile ? '0px' : '7px'}>
+          <Modal
+            disclosure={
+              <Button variant="tertiary" variantSize="small">
+                <Icon name={CapUIIcon.Info} color="primary.base" />
+              </Button>
+            }
+            hideCloseButton={false}
+            size={CapUIModalSize.Md}
+            ariaLabel={intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
+          >
+            {({ hide }) => (
+              <>
+                <Modal.Header>
+                  <Heading as="h2" color={`${colors.text.secondary}!important`}>
+                    {/* Needs !important otherwise it's overridden by the default color u_U */}
+                    {intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
+                  </Heading>
+                </Modal.Header>
+                <Modal.Body>
+                  <WYSIWYGRender value={step.votesHelpText} />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variantSize="big" onClick={hide}>
+                    {intl.formatMessage({ id: 'global.close' })}
+                  </Button>
+                </Modal.Footer>
+              </>
+            )}
+          </Modal>
+        </Box>
+      ) : null}
     </Box>
   )
 }
