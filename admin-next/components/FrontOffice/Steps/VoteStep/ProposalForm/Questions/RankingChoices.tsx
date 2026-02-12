@@ -72,7 +72,7 @@ const RankingChoices: React.FC<RankingChoicesProps> = ({ name, control, choices 
           <DragnDrop.List droppableId="available" direction="horizontal" minHeight="100px">
             {availableChoices.map((choice, index) => (
               <DragnDrop.Item key={choice.id} draggableId={choice.id} index={index}>
-                <ListCard.Item mb={2} bg="white" draggable>
+                <ListCard.Item mb={2} draggable>
                   <Flex direction="column" gap={2}>
                     <Text fontWeight="600">{choice.label}</Text>
                     {choice.image?.url && (

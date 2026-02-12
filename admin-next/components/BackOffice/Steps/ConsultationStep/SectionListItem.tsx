@@ -48,7 +48,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
       draggable
       width="100%"
       pl={`${offset}px`}
-      sx={{ '& > div': { backgroundColor: 'white !important' } }}
+      variantColor="hierarchy"
     >
       <Flex direction="column">
         <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight="normal">
