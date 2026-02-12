@@ -120,6 +120,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
             value={term}
             inputId={searchID}
             width={isMobile ? '100%' : null}
+            variantColor="hierarchy"
           />
         </Flex>
         {hasThemes ? (
@@ -137,6 +138,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
                 id: 'global.select_themes',
               })}
               inputId={themeID}
+              variantColor="hierarchy"
             />
           </Flex>
         ) : null}
@@ -155,6 +157,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
                 id: 'all-the-authors',
               })}
               inputId={authorID}
+              variantColor="hierarchy"
             />
           </Flex>
         ) : null}
