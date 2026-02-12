@@ -1,7 +1,11 @@
-import type { DraggableLocation } from 'react-beautiful-dnd'
-import 'react-beautiful-dnd'
 import type { Field } from '~/components/Form/Form.type'
 import '~/components/Form/Form.type'
+
+// Type compatible with both react-beautiful-dnd and pragmatic-drag-and-drop
+export type DraggableLocation = {
+  droppableId: string
+  index: number
+}
 
 export const reorder = (list: Array<Record<string, any>>, startIndex: number, endIndex: number) => {
   const result = [...list]

@@ -85,6 +85,7 @@ Array [
   padding-bottom: 0.28571429rem;
   font-size: 0.92857143rem;
   font-weight: 400;
+  line-height: 1.14285714rem;
   overflow: hidden;
   gap: 0.28571429rem;
   border-bottom-left-radius: 0;
@@ -491,6 +492,7 @@ Array [
   padding-bottom: 0.28571429rem;
   font-size: 0.92857143rem;
   font-weight: 400;
+  line-height: 1.14285714rem;
   overflow: hidden;
   gap: 0.28571429rem;
   border-bottom-left-radius: 0;
@@ -897,6 +899,7 @@ Array [
   padding-bottom: 0.28571429rem;
   font-size: 0.92857143rem;
   font-weight: 400;
+  line-height: 1.14285714rem;
   overflow: hidden;
   gap: 0.28571429rem;
   border-bottom-left-radius: 0;
@@ -1286,6 +1289,7 @@ Array [
   padding-bottom: 0.28571429rem;
   font-size: 0.92857143rem;
   font-weight: 400;
+  line-height: 1.14285714rem;
   overflow: hidden;
   gap: 0.28571429rem;
   border-bottom-left-radius: 0;
@@ -1772,6 +1776,7 @@ Array [
   padding-bottom: 0.28571429rem;
   font-size: 0.92857143rem;
   font-weight: 400;
+  line-height: 1.14285714rem;
   overflow: hidden;
   gap: 0.28571429rem;
   border-bottom-left-radius: 0;

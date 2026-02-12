@@ -27,8 +27,14 @@ type Props = ReduxFormFormProps & {
 export const validate = ({ steps }: StepTypes) => {
   const errors: any = {}
 
+  if (!steps || !Array.isArray(steps)) {
+    return errors
+  }
+
+  const validSteps = steps.filter(s => s && s.title)
+
   /* AbstractStep */
-  const titles = steps.map(s => s.title.toLowerCase())
+  const titles = validSteps.map(s => s.title.toLowerCase())
 
   if (titles.some((item, index) => titles.indexOf(item) !== index)) {
     errors.steps = {
@@ -37,7 +43,7 @@ export const validate = ({ steps }: StepTypes) => {
   }
 
   /* QuestionnaireStep */
-  const questionnaires = steps.filter(s => s.__typename === 'QuestionnaireStep').map(s => s.questionnaire?.value)
+  const questionnaires = validSteps.filter(s => s.__typename === 'QuestionnaireStep').map(s => s.questionnaire?.value)
 
   if (questionnaires.some((item, index) => questionnaires.indexOf(item) !== index)) {
     errors.steps = {

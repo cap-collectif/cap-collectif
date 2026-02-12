@@ -404,36 +404,41 @@ const validate = (values: FormValues) => {
     restrictedViewerGroups,
     visibility,
   } = values
+
+  const stepsErrors = validateSteps({ steps: steps || [] })
+  const contentErrors = validateContent({
+    title,
+    authors,
+    projectType,
+    video,
+    themes,
+    districts,
+    cover,
+    metaDescription,
+  })
+  const externalErrors = validateExternal({
+    externalLink,
+    externalVotesCount,
+    isExternal,
+    externalParticipantsCount,
+    externalContributionsCount,
+  })
+  const publishErrors = validatePublish({
+    publishedAt,
+    locale,
+    archived,
+  })
+  const accessErrors = validateProjectAccessAdmin({
+    restrictedViewerGroups,
+    visibility,
+  })
+
   return {
-    ...validateSteps({
-      steps,
-    }),
-    ...validateContent({
-      title,
-      authors,
-      projectType,
-      video,
-      themes,
-      districts,
-      cover,
-      metaDescription,
-    }),
-    ...validateExternal({
-      externalLink,
-      externalVotesCount,
-      isExternal,
-      externalParticipantsCount,
-      externalContributionsCount,
-    }),
-    ...validatePublish({
-      publishedAt,
-      locale,
-      archived,
-    }),
-    ...validateProjectAccessAdmin({
-      restrictedViewerGroups,
-      visibility,
-    }),
+    ...stepsErrors,
+    ...contentErrors,
+    ...externalErrors,
+    ...publishErrors,
+    ...accessErrors,
   }
 }
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, ButtonToolbar, Col, Row } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
-import type { DroppableProvided } from 'react-beautiful-dnd'
-import 'react-beautiful-dnd'
 
 import styled from 'styled-components'
 import { change } from 'redux-form'
@@ -97,7 +95,6 @@ const getIdFromQuestionType = (type: QuestionTypeValue, level: number | null | u
 
 type Props = {
   readonly index: number
-  readonly provided: DroppableProvided
   readonly handleClickEdit: (index: number, type: QuestionTypeValue, level: number | null | undefined) => void
   readonly handleClickDelete: (index: number, type: QuestionTypeValue, level: number | null | undefined) => void
   readonly handleDeleteQuestionRow: (index: number) => void
@@ -146,7 +143,6 @@ export const QuestionAdmin = ({
   handleClickEdit,
   handleClickDelete,
   index,
-  provided,
   dispatch,
   formName,
   questions,
@@ -301,7 +297,6 @@ export const QuestionAdmin = ({
           </ButtonToolbar>
         </ActionIconWrapper>
       </Col>
-      {provided.placeholder}
     </Row>
   )
 }

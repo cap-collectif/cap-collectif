@@ -1,21 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectStepAdminItem /> renders correctly 1`] = `
-<PublicDraggable
-  draggableId="1"
-  index={0}
-  key="1"
+<ProjectStepAdminItem__DraggableWrapper
+  isDragging={false}
 >
-  <Component />
-</PublicDraggable>
+  <ProjectStepAdminItem__Item
+    key="0"
+  >
+    <Relay(ProjectStepAdminItemStep)
+      fields={
+        Object {
+          "length": 0,
+          "map": [Function],
+          "remove": [MockFunction],
+        }
+      }
+      formName="oui"
+      hasIdentificationCodeLists={true}
+      index={0}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+      step={
+        Object {
+          "__typename": "typeTest",
+          "debateType": "FACE_TO_FACE",
+          "hasOpinionsFilled": false,
+          "id": "1",
+          "label": "label",
+          "slug": "urlTest",
+          "title": "testStep",
+          "url": "urlTest",
+        }
+      }
+    />
+  </ProjectStepAdminItem__Item>
+</ProjectStepAdminItem__DraggableWrapper>
 `;
 
 exports[`<ProjectStepAdminItem /> renders correctly without id 1`] = `
-<PublicDraggable
-  draggableId="new-step-0"
-  index={0}
-  key="null"
+<ProjectStepAdminItem__DraggableWrapper
+  isDragging={false}
 >
-  <Component />
-</PublicDraggable>
+  <ProjectStepAdminItem__Item
+    key="0"
+  >
+    <Relay(ProjectStepAdminItemStep)
+      fields={
+        Object {
+          "length": 0,
+          "map": [Function],
+          "remove": [MockFunction],
+        }
+      }
+      formName="oui"
+      hasIdentificationCodeLists={true}
+      index={0}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+      step={
+        Object {
+          "__typename": "typeTest",
+          "debateType": "FACE_TO_FACE",
+          "hasOpinionsFilled": false,
+          "id": null,
+          "label": "label",
+          "slug": "urlTest",
+          "title": "testStep",
+          "url": "urlTest",
+        }
+      }
+    />
+  </ProjectStepAdminItem__Item>
+</ProjectStepAdminItem__DraggableWrapper>
 `;

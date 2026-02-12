@@ -77,7 +77,7 @@ export function StepVotesFields(
       currentStep: getFormValues(stepFormName)(globalState),
     }
   })
-  const stepWithProposalArchivedConfigured = steps.find(step => step.proposalArchivedTime > 0)
+  const stepWithProposalArchivedConfigured = steps?.find(step => step?.proposalArchivedTime > 0)
   const [canConfigureProposalArchived] = React.useState(() => {
     if (!stepWithProposalArchivedConfigured) {
       return true

@@ -85,9 +85,7 @@ context('Opened Questionnaire - Logged-in as user', () => {
     cy.get('#reply-form-container')
     QuestionnairePage.fillCreateFormWithRequiredFields()
     cy.contains('global.form.ranking.select').click({ force: true })
-    cy.get('#ranking__selection [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg==').contains(
-      'Choix 1',
-    )
+    cy.get('#ranking__selection [draggable="true"]').contains('Choix 1')
   })
 })
 

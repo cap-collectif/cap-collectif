@@ -1,32 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Item /> should render correctly 1`] = `
-<PublicDraggable
-  draggableId="1"
-  index={0}
-  key="1"
+<Itemstyle__ItemContainer
+  aria-labelledby="drag-instructions"
+  isEmpty={false}
+  style={
+    Object {
+      "cursor": "grab",
+      "opacity": 1,
+    }
+  }
 >
-  <Component />
-</PublicDraggable>
+  <Icon
+    className="icon-menu"
+    name="menu"
+  />
+  Bonjour
+</Itemstyle__ItemContainer>
 `;
 
 exports[`<Item /> should render correctly when empty 1`] = `
-<PublicDraggable
-  draggableId="1"
-  index={0}
-  isDragDisabled={true}
-  key="1"
->
-  <Component />
-</PublicDraggable>
+<Itemstyle__ItemContainer
+  aria-labelledby="drag-instructions"
+  isEmpty={true}
+  style={
+    Object {
+      "cursor": "default",
+      "opacity": 1,
+    }
+  }
+/>
 `;
 
 exports[`<Item /> should render correctly with other props 1`] = `
-<PublicDraggable
-  draggableId="2"
-  index={2}
-  key="2"
+<Itemstyle__ItemContainer
+  aria-labelledby="drag-instructions"
+  isEmpty={false}
+  style={
+    Object {
+      "cursor": "grab",
+      "opacity": 1,
+    }
+  }
 >
-  <Component />
-</PublicDraggable>
+  <Icon
+    className="icon-menu"
+    name="menu"
+  />
+  Bonjour 2
+</Itemstyle__ItemContainer>
 `;

@@ -6,8 +6,7 @@ import styled from 'styled-components'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap'
-import type { DropResult, DroppableProvided } from 'react-beautiful-dnd'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { formValueSelector, arrayMove } from 'redux-form'
 import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql'
@@ -55,6 +54,9 @@ const List = styled(ListGroup).attrs({})`
     border-bottom: 1px solid #ddd !important;
   }
 `
+
+const DroppableContainer = styled.div``
+
 type Props = {
   fields: {
     length: number
@@ -72,47 +74,52 @@ type Props = {
   query: ProjectStepAdminList_query
 }
 export function ProjectStepAdminList(props: Props) {
-  const onDragEnd = (result: DropResult) => {
-    const { dispatch, formName } = props
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const { dispatch, formName, fields, steps, meta, project, hasIdentificationCodeLists, query } = props
 
-    // dropped outside the list
-    if (!result.destination) {
-      return
-    }
+  React.useEffect(() => {
+    const cleanup = monitorForElements({
+      canMonitor: ({ source }) => source.data.type === 'step',
+      onDrop: ({ source, location }) => {
+        const destination = location.current.dropTargets[0]
+        if (!destination) return
 
-    dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index))
-  }
+        const sourceData = source.data as { type: string; index: number }
+        const destData = destination.data as { type: string; index: number }
 
-  const { fields, steps, formName, meta, project, hasIdentificationCodeLists, query } = props
+        if (sourceData.type !== 'step' || destData.type !== 'step') return
+
+        if (sourceData.index !== destData.index) {
+          dispatch(arrayMove(formName, 'steps', sourceData.index, destData.index))
+        }
+      },
+    })
+
+    return cleanup
+  }, [dispatch, formName])
+
   return (
     <>
       <List>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided: DroppableProvided) => (
-              <div ref={provided.innerRef}>
-                {fields.length === 0 && (
-                  <NoStepsPlaceholder>
-                    <FormattedMessage id="no-step" />
-                  </NoStepsPlaceholder>
-                )}
-                {fields.map((field: string, index: number) => (
-                  <ProjectStepAdminItem
-                    key={index}
-                    step={steps[index]}
-                    index={index}
-                    fields={fields}
-                    formName={formName}
-                    project={project}
-                    hasIdentificationCodeLists={hasIdentificationCodeLists}
-                    query={query}
-                  />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <DroppableContainer ref={containerRef}>
+          {fields.length === 0 && (
+            <NoStepsPlaceholder>
+              <FormattedMessage id="no-step" />
+            </NoStepsPlaceholder>
+          )}
+          {fields.map((field: string, index: number) => (
+            <ProjectStepAdminItem
+              key={index}
+              step={steps[index]}
+              index={index}
+              fields={fields}
+              formName={formName}
+              project={project}
+              hasIdentificationCodeLists={hasIdentificationCodeLists}
+              query={query}
+            />
+          ))}
+        </DroppableContainer>
       </List>
       {meta?.error && (
         <ErrorMessage id="steps-error">

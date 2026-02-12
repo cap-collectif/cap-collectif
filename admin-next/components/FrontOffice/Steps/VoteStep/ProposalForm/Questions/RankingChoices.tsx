@@ -1,7 +1,7 @@
 import { Box, Button, CapUIIcon, CapUIIconSize, DragnDrop, Flex, Icon, ListCard, Text } from '@cap-collectif/ui'
 import Image from '@shared/ui/Image'
 import * as React from 'react'
-import type { DropResult } from 'react-beautiful-dnd'
+import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
 import { useController } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { RankingChoice, RankingChoicesProps } from '../ProposalFormModal.type'
@@ -69,7 +69,7 @@ const RankingChoices: React.FC<RankingChoicesProps> = ({ name, control, choices 
           <Text fontWeight="600" mb={2}>
             {intl.formatMessage({ id: 'global.form.ranking.pickBox.title' })}
           </Text>
-          <DragnDrop.List droppableId="available" direction="horizontal" minHeight="100px">
+          <DragnDrop.List droppableId="available" minHeight="100px">
             {availableChoices.map((choice, index) => (
               <DragnDrop.Item key={choice.id} draggableId={choice.id} index={index}>
                 <ListCard.Item mb={2} draggable>
@@ -109,7 +109,7 @@ const RankingChoices: React.FC<RankingChoicesProps> = ({ name, control, choices 
           <Text fontWeight="600" mb={2}>
             {intl.formatMessage({ id: 'global.form.ranking.choiceBox.title' })}
           </Text>
-          <DragnDrop.List droppableId="ranked" direction="vertical" minHeight="100px">
+          <DragnDrop.List droppableId="ranked" minHeight="100px">
             {rankedChoices.map((choice, index) => (
               <DragnDrop.Item key={choice.id} draggableId={`ranked-${choice.id}`} index={index}>
                 <ListCard.Item mb={2} bg="primary.100" borderColor="primary.500" draggable>

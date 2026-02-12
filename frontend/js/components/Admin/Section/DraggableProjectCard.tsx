@@ -1,5 +1,5 @@
-import React from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import React, { useEffect, useRef, useState } from 'react'
+import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import * as S from './HomePageProjectsSectionConfigurationPage.style'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
@@ -24,31 +24,60 @@ const imagePlaceholder = (
 )
 
 const DraggableProjectCard = ({ project, index, removeProject }: Props) => {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = useState(false)
+
+  useEffect(() => {
+    const element = cardRef.current
+    if (!element) return
+
+    const cleanupDraggable = draggable({
+      element,
+      getInitialData: () => ({
+        id: project.id,
+        index,
+      }),
+      onDragStart: () => setIsDragging(true),
+      onDrop: () => setIsDragging(false),
+    })
+
+    const cleanupDropTarget = dropTargetForElements({
+      element,
+      getData: () => ({
+        id: project.id,
+        index,
+      }),
+    })
+
+    return () => {
+      cleanupDraggable()
+      cleanupDropTarget()
+    }
+  }, [project.id, index])
+
   return (
-    <Draggable key={project.id} draggableId={project.id} index={index}>
-      {provided => (
-        <S.ProjectCardCustom
-          justifyContent="space-between"
-          alignItems="center"
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <Flex alignItems="center">
-            <Icon name="DRAG" size="lg" />
-            <div>
-              {project.cover === null ? imagePlaceholder : <Image src={project?.cover?.url} alt={project.value} />}
-            </div>
-            <Text maxWidth={16} mx={4} color="gray.900">
-              {project.value}
-            </Text>
-          </Flex>
-          <S.ProjectCardCustomDeleteIcon onClick={() => removeProject(project.id)} className="delete-icon">
-            <Icon name="TRASH" size="md" />
-          </S.ProjectCardCustomDeleteIcon>
-        </S.ProjectCardCustom>
-      )}
-    </Draggable>
+    <S.ProjectCardCustom
+      justifyContent="space-between"
+      alignItems="center"
+      ref={cardRef}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: 'grab',
+      }}
+    >
+      <Flex alignItems="center">
+        <Icon name="DRAG" size="lg" />
+        <div>
+          {project.cover === null ? imagePlaceholder : <Image src={project?.cover?.url} alt={project.value} />}
+        </div>
+        <Text maxWidth={16} mx={4} color="gray.900">
+          {project.value}
+        </Text>
+      </Flex>
+      <S.ProjectCardCustomDeleteIcon onClick={() => removeProject(project.id)} className="delete-icon">
+        <Icon name="TRASH" size="md" />
+      </S.ProjectCardCustomDeleteIcon>
+    </S.ProjectCardCustom>
   )
 }
 

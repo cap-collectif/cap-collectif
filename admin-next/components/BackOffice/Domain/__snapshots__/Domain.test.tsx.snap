@@ -120,11 +120,11 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
             >
               <div
                 aria-label="Tag custom.domain.com"
-                class="sc-bcXGCL bAGBdP cap-tag"
+                class="sc-bcXGCL jerPOv cap-tag"
                 title="custom.domain.com"
               >
                 <span
-                  class="sc-bcXGCL cCwupq cap-tag__label"
+                  class="sc-bcXGCL iXxauC cap-tag__label"
                 >
                   custom.domain.com
                 </span>

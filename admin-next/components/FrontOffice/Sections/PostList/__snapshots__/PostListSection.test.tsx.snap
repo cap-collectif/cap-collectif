@@ -61,15 +61,15 @@ exports[`<PostListSection /> should render correctly 1`] = `
         class="sc-bcXGCL jhFiXu post-list-section-posts"
       >
         <div
-          class="sc-bcXGCL klmZNu cap-card cap-post-card"
+          class="sc-bcXGCL eHRonD cap-card cap-post-card"
           id="cap-post-card-post1"
         >
           <div
-            class="sc-bcXGCL hztmdy cap-card-cover"
+            class="sc-bcXGCL jcmCEk cap-card-cover"
           >
             <img
               alt=""
-              class="sc-bcXGCL khbwMK"
+              class="sc-bcXGCL PIRyg"
               loading="lazy"
               sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
               srcset="
@@ -91,7 +91,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
               class="sc-bcXGCL bIZLTw"
             >
               <h3
-                class="sc-bcXGCL gThejf cap-card-primaryInfo"
+                class="sc-bcXGCL KPlZn cap-card-primaryInfo"
               >
                 <a
                   class="sc-bcXGCL kZMHwF cap-card-link"
@@ -106,7 +106,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
             >
               <div
                 aria-label="Tag Invalid Date (export_proposal_news_published_at)"
-                class="sc-bcXGCL jofWkJ cap-tag"
+                class="sc-bcXGCL krZafx cap-tag"
                 title="Invalid Date (export_proposal_news_published_at)"
               >
                 <svg
@@ -127,7 +127,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
                   />
                 </svg>
                 <span
-                  class="sc-bcXGCL cCwupq cap-tag__label"
+                  class="sc-bcXGCL iXxauC cap-tag__label"
                 >
                   Invalid Date
                 </span>
@@ -139,7 +139,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
               </div>
               <div
                 aria-label="Tag <mock-value-for-field-"title"> (export_proposal_news_themes)"
-                class="sc-bcXGCL jofWkJ cap-tag"
+                class="sc-bcXGCL krZafx cap-tag"
                 title="<mock-value-for-field-"title"> (export_proposal_news_themes)"
               >
                 <svg
@@ -161,7 +161,7 @@ exports[`<PostListSection /> should render correctly 1`] = `
                   />
                 </svg>
                 <span
-                  class="sc-bcXGCL cCwupq cap-tag__label"
+                  class="sc-bcXGCL iXxauC cap-tag__label"
                 >
                   &lt;mock-value-for-field-"title"&gt;
                 </span>

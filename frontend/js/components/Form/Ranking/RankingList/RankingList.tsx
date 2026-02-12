@@ -1,7 +1,6 @@
 import { $Values } from 'utility-types'
 import React, { useState, useEffect } from 'react'
-import type { DropResult, DragUpdate } from 'react-beautiful-dnd'
-import 'react-beautiful-dnd'
+import type { DropResult, DragUpdate } from '~/components/Ui/DragnDrop/Context/Context'
 import isEqual from 'lodash/isEqual'
 import { useIntl } from 'react-intl'
 import Context from '~/components/Ui/DragnDrop/Context/Context'

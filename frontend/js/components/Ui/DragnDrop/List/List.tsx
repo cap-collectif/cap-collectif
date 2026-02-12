@@ -1,9 +1,9 @@
 import * as React from 'react'
-import type { DroppableProvided } from 'react-beautiful-dnd'
-import { Droppable } from 'react-beautiful-dnd'
+import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl'
 import ListContainer, { ListItemContainer } from './List.style'
 import Title, { TYPE } from '~/components/Ui/Title/Title'
+import { DragnDropContext } from '../Context/Context'
 
 type ListProps = {
   id: string
@@ -24,6 +24,31 @@ const List = ({
   isCombineOnly,
   hasPositionDisplayed,
 }: ListProps) => {
+  const listRef = React.useRef<HTMLUListElement>(null)
+  const context = React.useContext(DragnDropContext)
+
+  React.useEffect(() => {
+    const element = listRef.current
+    if (!element || isDisabled) return
+
+    if (context) {
+      context.registerDroppable(id, element)
+    }
+
+    const cleanup = dropTargetForElements({
+      element,
+      getData: () => ({ droppableId: id }),
+      canDrop: () => !isDisabled,
+    })
+
+    return () => {
+      cleanup()
+      if (context) {
+        context.unregisterDroppable(id)
+      }
+    }
+  }, [id, isDisabled, context])
+
   return (
     <ListContainer hasPositionDisplayed={hasPositionDisplayed} id={id}>
       {title && (
@@ -31,52 +56,47 @@ const List = ({
           <FormattedMessage id={title} />
         </Title>
       )}
-      <Droppable
-        droppableId={id}
-        isDropDisabled={isDisabled}
-        isCombineEnabled={isCombineEnabled}
-        isCombineOnly={isCombineOnly}
-      >
-        {(provided: DroppableProvided) => (
-          <ul className="wrapper-item-container" ref={provided.innerRef} {...provided.droppableProps}>
-            {children.map((child, i: string) => {
-              let points = false
+      <ul className="wrapper-item-container" ref={listRef}>
+        {React.Children.toArray(children).map((child, i) => {
+          const childElement = child as React.ReactElement
+          let points: number | false = false
 
-              if (
-                child.props &&
-                child.props.children &&
-                child.props.children.props &&
-                child.props.children.props.step
-              ) {
-                const availablePoints = Array.from(
-                  {
-                    length: child.props.children.props.step.votesLimit,
-                  },
-                  (v, l) => child.props.children.props.step.votesLimit - l,
-                )
-                points = availablePoints ? availablePoints[child.props.position] : false
-              }
+          if (
+            childElement.props &&
+            childElement.props.children &&
+            childElement.props.children.props &&
+            childElement.props.children.props.step
+          ) {
+            const availablePoints = Array.from(
+              {
+                length: childElement.props.children.props.step.votesLimit,
+              },
+              (_, l) => childElement.props.children.props.step.votesLimit - l,
+            )
+            points = availablePoints ? availablePoints[childElement.props.position] : false
+          }
 
-              return (
-                <ListItemContainer key={i}>
-                  {hasPositionDisplayed && points && (
-                    <span className="item__position__point">
-                      <FormattedHTMLMessage
-                        id="item-point"
-                        values={{
-                          num: points,
-                        }}
-                      />
-                    </span>
-                  )}
-                  {child}
-                </ListItemContainer>
-              )
-            })}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
+          return (
+            <ListItemContainer key={i}>
+              {hasPositionDisplayed && points && (
+                <span className="item__position__point">
+                  <FormattedHTMLMessage
+                    id="item-point"
+                    values={{
+                      num: points,
+                    }}
+                  />
+                </span>
+              )}
+              {React.cloneElement(childElement, {
+                droppableId: id,
+                isCombineEnabled,
+                isCombineOnly,
+              })}
+            </ListItemContainer>
+          )
+        })}
+      </ul>
     </ListContainer>
   )
 }

@@ -1,11 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Context /> should render correctly 1`] = `
-<DragDropContext
-  onDragEnd={[Function]}
+<ContextProvider
+  value={
+    Object {
+      "getDroppableItems": [Function],
+      "isDisabled": undefined,
+      "onDragEnd": [Function],
+      "onDragStart": undefined,
+      "onDragUpdate": undefined,
+      "registerDraggable": [Function],
+      "registerDroppable": [Function],
+      "unregisterDraggable": [Function],
+      "unregisterDroppable": [Function],
+    }
+  }
 >
   <Contextstyle__ContextContainer>
     Bonjour
   </Contextstyle__ContextContainer>
-</DragDropContext>
+</ContextProvider>
 `;

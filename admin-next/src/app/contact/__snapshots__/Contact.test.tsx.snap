@@ -53,7 +53,7 @@ exports[`<Contact /> renders correctly 1`] = `
             <details
               class="sc-bcXGCL fzWTwc cap-accordion__item"
               id="contactForm1"
-              name="accordion-white-md"
+              name="accordion-:r0:"
               open=""
               style="margin-left: 0px; margin-top: 0px;"
             >
@@ -115,7 +115,7 @@ exports[`<Contact /> renders correctly 1`] = `
                   >
                     <label
                       class="sc-bcXGCL jfvNeV cap-form-label"
-                      for=":r0:"
+                      for=":r1:"
                       style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
@@ -132,37 +132,11 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
-                      id=":r0:"
+                      id=":r1:"
                       minlength="2"
                       name="name"
                       type="text"
                       value=""
-                    />
-                  </div>
-                  <div
-                    class="sc-bcXGCL hhSHam cap-form-control"
-                  >
-                    <label
-                      class="sc-bcXGCL jfvNeV cap-form-label"
-                      for=":r1:"
-                      style="margin-left: 0px; margin-top: 0px;"
-                    >
-                      <span
-                        class="sc-bcXGCL dQChsN cap-text"
-                        style="margin-left: 0px; margin-top: 0px;"
-                      >
-                        global.email
-                      </span>
-                    </label>
-                    <input
-                      aria-required="true"
-                      autocomplete="email"
-                      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
-                      id=":r1:"
-                      name="email"
-                      placeholder="email.placeholder"
-                      required=""
-                      type="email"
                     />
                   </div>
                   <div
@@ -177,13 +151,39 @@ exports[`<Contact /> renders correctly 1`] = `
                         class="sc-bcXGCL dQChsN cap-text"
                         style="margin-left: 0px; margin-top: 0px;"
                       >
+                        global.email
+                      </span>
+                    </label>
+                    <input
+                      aria-required="true"
+                      autocomplete="email"
+                      class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
+                      id=":r2:"
+                      name="email"
+                      placeholder="email.placeholder"
+                      required=""
+                      type="email"
+                    />
+                  </div>
+                  <div
+                    class="sc-bcXGCL hhSHam cap-form-control"
+                  >
+                    <label
+                      class="sc-bcXGCL jfvNeV cap-form-label"
+                      for=":r3:"
+                      style="margin-left: 0px; margin-top: 0px;"
+                    >
+                      <span
+                        class="sc-bcXGCL dQChsN cap-text"
+                        style="margin-left: 0px; margin-top: 0px;"
+                      >
                         object
                       </span>
                     </label>
                     <input
                       aria-required="true"
                       class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
-                      id=":r2:"
+                      id=":r3:"
                       minlength="2"
                       name="title"
                       placeholder="placeholder.object"
@@ -197,7 +197,7 @@ exports[`<Contact /> renders correctly 1`] = `
                   >
                     <label
                       class="sc-bcXGCL jfvNeV cap-form-label"
-                      for=":r3:"
+                      for=":r4:"
                       style="margin-left: 0px; margin-top: 0px;"
                     >
                       <span
@@ -213,7 +213,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       <textarea
                         aria-required="true"
                         class="sc-bcXGCL sc-fXqqsB hTPOzI ieLfuE cap-textarea"
-                        id=":r3:"
+                        id=":r4:"
                         minlength="2"
                         name="body"
                         placeholder="contact_form.message"
@@ -238,7 +238,7 @@ exports[`<Contact /> renders correctly 1`] = `
             <details
               class="sc-bcXGCL fzWTwc cap-accordion__item"
               id="contactForm2"
-              name="accordion-white-md"
+              name="accordion-:r5:"
               style="margin-left: 0px; margin-top: 0px;"
             >
               <summary

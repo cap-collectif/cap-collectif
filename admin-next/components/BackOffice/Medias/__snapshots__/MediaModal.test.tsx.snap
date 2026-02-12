@@ -77,7 +77,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag 200x200px"
-              class="sc-bcXGCL bSlWSg cap-tag"
+              class="sc-bcXGCL LLLgE cap-tag"
               style="margin-left: 0px; margin-top: 0px;"
               title="200x200px"
             >
@@ -85,14 +85,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
             </div>
             <div
               aria-label="Tag 977ko"
-              class="sc-bcXGCL bSlWSg cap-tag"
+              class="sc-bcXGCL LLLgE cap-tag"
               title="977ko"
             >
               977ko
             </div>
             <div
               aria-label="Tag png"
-              class="sc-bcXGCL bSlWSg cap-tag"
+              class="sc-bcXGCL LLLgE cap-tag"
               title="png"
             >
               png

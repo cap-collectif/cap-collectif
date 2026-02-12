@@ -6,8 +6,7 @@ import { injectIntl } from 'react-intl'
 import { reduxForm, FieldArray, arrayMove } from 'redux-form'
 import { connect } from 'react-redux'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { DragStart, DropResult, DragUpdate, DraggableStateSnapshot, ResponderProvided } from 'react-beautiful-dnd'
-import 'react-beautiful-dnd'
+import type { DropResult, DragStart, DragUpdate, ResponderProvided } from '~/components/Ui/DragnDrop/Context/Context'
 import ProposalUserVoteItem from './ProposalUserVoteItem'
 import type { ProposalsUserVotesTable_step$data } from '~relay/ProposalsUserVotesTable_step.graphql'
 import type { ProposalsUserVotesTable_votes$data } from '~relay/ProposalsUserVotesTable_votes.graphql'
@@ -27,7 +26,6 @@ type Props = ReduxFormFormProps &
     dispatch: Dispatch
     onSubmit: () => void
     deletable: boolean
-    snapshot: DraggableStateSnapshot
     intl: IntlShape
     isDropDisabled?: boolean
     features: FeatureToggles

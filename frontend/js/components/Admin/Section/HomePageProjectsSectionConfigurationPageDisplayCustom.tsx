@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import React, { useEffect, useRef, useState } from 'react'
+import { monitorForElements, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import Select from 'react-select'
 import { change } from 'redux-form'
 import { useDispatch } from 'react-redux'
@@ -90,22 +90,42 @@ function HomePageProjectsSectionConfigurationPageDisplayCustom({
     }
   })
   const ref = useRef<typeof Select>()
+  const droppableRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
   const intl = useIntl()
   const [projects, setProjects] = useState<Projects>([])
   const [error, setError] = useState<string | null>(null)
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
-  const onDragEnd = useCallback(
-    result => {
-      if (!result.destination) {
-        return
-      }
 
-      const updatedItems = reorder(projects, result.source.index, result.destination.index)
-      setProjects(updatedItems)
-    },
-    [projects],
-  )
+  useEffect(() => {
+    const cleanup = monitorForElements({
+      onDrop: ({ source, location }) => {
+        const destination = location.current.dropTargets[0]
+        if (!destination) return
+
+        const sourceData = source.data as { index: number }
+        const destData = destination.data as { index: number }
+
+        if (sourceData.index !== destData.index) {
+          setProjects(prevProjects => reorder(prevProjects, sourceData.index, destData.index))
+        }
+      },
+    })
+
+    return cleanup
+  }, [])
+
+  useEffect(() => {
+    const element = droppableRef.current
+    if (!element) return
+
+    const cleanup = dropTargetForElements({
+      element,
+      getData: () => ({ droppableId: 'droppable-1' }),
+    })
+
+    return cleanup
+  }, [])
 
   const removeProject = (removedProjectId: string): void => {
     const updatedProjects = projects.filter(({ id }) => removedProjectId !== id)
@@ -192,20 +212,13 @@ function HomePageProjectsSectionConfigurationPageDisplayCustom({
       />
       {projects.length === 0 && <AppBox mt={4}>{cardPlaceholder}</AppBox>}
       {error && <Text color="gray.500">{error}</Text>}
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable-1" type="PROJECTS">
-          {provided => (
-            <div className="m-4" ref={provided.innerRef} {...provided.droppableProps}>
-              {projects.map((project, index) => {
-                return (
-                  <DraggableProjectCard project={project} index={index} removeProject={removeProject} key={index} />
-                )
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className="m-4" ref={droppableRef}>
+        {projects.map((project, index) => {
+          return (
+            <DraggableProjectCard project={project} index={index} removeProject={removeProject} key={project.id} />
+          )
+        })}
+      </div>
     </>
   )
 }

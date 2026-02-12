@@ -48,15 +48,15 @@ exports[`<Organization /> renders correctly 1`] = `
             class="sc-bcXGCL cLxXtn"
           >
             <div
-              class="sc-bcXGCL jxvmrc cap-card cap-project-card"
+              class="sc-bcXGCL bPhmsP cap-card cap-project-card"
               id="cap-project-card-project-id-1"
             >
               <div
-                class="sc-bcXGCL lkRzAG cap-card-cover"
+                class="sc-bcXGCL GpBia cap-card-cover"
               >
                 <img
                   alt=""
-                  class="sc-bcXGCL khbwMK"
+                  class="sc-bcXGCL PIRyg"
                   loading="lazy"
                   sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
                   srcset="
@@ -72,11 +72,11 @@ exports[`<Organization /> renders correctly 1`] = `
                 />
                 <div
                   aria-label="Tag  global-archived"
-                  class="sc-bcXGCL hGoVde cap-tag"
+                  class="sc-bcXGCL kZxQcy cap-tag"
                   title=" global-archived"
                 >
                   <span
-                    class="sc-bcXGCL cCwupq cap-tag__label"
+                    class="sc-bcXGCL iXxauC cap-tag__label"
                   >
                      global-archived
                   </span>
@@ -89,7 +89,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   class="sc-bcXGCL bIZLTw"
                 >
                   <h3
-                    class="sc-bcXGCL bpFsRd cap-card-primaryInfo"
+                    class="sc-bcXGCL jNeRBZ cap-card-primaryInfo"
                   >
                     <a
                       class="sc-bcXGCL kZMHwF cap-card-link"
@@ -104,7 +104,7 @@ exports[`<Organization /> renders correctly 1`] = `
                 >
                   <div
                     aria-label="Tag 0 project.votes.widget.votes"
-                    class="sc-bcXGCL jofWkJ cap-tag"
+                    class="sc-bcXGCL krZafx cap-tag"
                     title="0 project.votes.widget.votes"
                   >
                     <svg
@@ -143,7 +143,7 @@ exports[`<Organization /> renders correctly 1`] = `
                       />
                     </svg>
                     <span
-                      class="sc-bcXGCL cCwupq cap-tag__label"
+                      class="sc-bcXGCL iXxauC cap-tag__label"
                     >
                       0
                     </span>
@@ -155,7 +155,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   </div>
                   <div
                     aria-label="Tag 0 global.contribution"
-                    class="sc-bcXGCL jofWkJ cap-tag"
+                    class="sc-bcXGCL krZafx cap-tag"
                     title="0 global.contribution"
                   >
                     <svg
@@ -175,7 +175,7 @@ exports[`<Organization /> renders correctly 1`] = `
                       />
                     </svg>
                     <span
-                      class="sc-bcXGCL cCwupq cap-tag__label"
+                      class="sc-bcXGCL iXxauC cap-tag__label"
                     >
                       0
                     </span>
@@ -187,7 +187,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   </div>
                   <div
                     aria-label="Tag 0 capco.section.metrics.participants"
-                    class="sc-bcXGCL jofWkJ cap-tag"
+                    class="sc-bcXGCL krZafx cap-tag"
                     title="0 capco.section.metrics.participants"
                   >
                     <svg
@@ -214,7 +214,7 @@ exports[`<Organization /> renders correctly 1`] = `
                       />
                     </svg>
                     <span
-                      class="sc-bcXGCL cCwupq cap-tag__label"
+                      class="sc-bcXGCL iXxauC cap-tag__label"
                     >
                       0
                     </span>
@@ -241,14 +241,14 @@ exports[`<Organization /> renders correctly 1`] = `
               menu.news
             </h2>
             <div
-              class="sc-bcXGCL jQSowP cap-card"
+              class="sc-bcXGCL kLYTKq cap-card"
             >
               <div
-                class="sc-bcXGCL hztmdy cap-card-cover"
+                class="sc-bcXGCL jcmCEk cap-card-cover"
               >
                 <img
                   alt=""
-                  class="sc-bcXGCL khbwMK"
+                  class="sc-bcXGCL PIRyg"
                   loading="lazy"
                   sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
                   srcset="
@@ -270,7 +270,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   class="sc-bcXGCL bIZLTw"
                 >
                   <h3
-                    class="sc-bcXGCL gThejf cap-card-primaryInfo"
+                    class="sc-bcXGCL KPlZn cap-card-primaryInfo"
                   >
                     <a
                       class="sc-bcXGCL kZMHwF cap-card-link"
@@ -320,11 +320,11 @@ exports[`<Organization /> renders correctly 1`] = `
               </button>
             </div>
             <div
-              class="sc-bcXGCL jQSowP cap-card"
+              class="sc-bcXGCL kLYTKq cap-card"
               style="display: none;"
             >
               <div
-                class="sc-bcXGCL kdufIR cap-card-cover"
+                class="sc-bcXGCL cQnSnr cap-card-cover"
               >
                 <div
                   class="sc-bcXGCL eJQvyz"
@@ -348,7 +348,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   class="sc-bcXGCL bIZLTw"
                 >
                   <h3
-                    class="sc-bcXGCL gThejf cap-card-primaryInfo"
+                    class="sc-bcXGCL KPlZn cap-card-primaryInfo"
                   >
                     <a
                       class="sc-bcXGCL kZMHwF cap-card-link"

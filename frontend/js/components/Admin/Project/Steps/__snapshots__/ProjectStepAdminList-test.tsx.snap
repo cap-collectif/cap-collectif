@@ -3,24 +3,14 @@
 exports[`<ProjectStepAdminList /> renders correctly 1`] = `
 <Fragment>
   <ProjectStepAdminList__List>
-    <DragDropContext
-      onDragEnd={[Function]}
-    >
-      <Connect(Droppable)
-        direction="vertical"
-        droppableId="droppable"
-        getContainerForClone={[Function]}
-        ignoreContainerClipping={false}
-        isCombineEnabled={false}
-        isCombineOnly={false}
-        isDropDisabled={false}
-        mode="standard"
-        renderClone={null}
-        type="DEFAULT"
-      >
-        <Component />
-      </Connect(Droppable)>
-    </DragDropContext>
+    <ProjectStepAdminList__DroppableContainer>
+      <ProjectAdminFormstyle__NoStepsPlaceholder>
+        <FormattedMessage
+          id="no-step"
+          values={Object {}}
+        />
+      </ProjectAdminFormstyle__NoStepsPlaceholder>
+    </ProjectStepAdminList__DroppableContainer>
   </ProjectStepAdminList__List>
 </Fragment>
 `;

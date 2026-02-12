@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box, DragnDrop } from '@cap-collectif/ui'
+import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import SectionListItem from '@components/BackOffice/Steps/ConsultationStep/SectionListItem'
 import { FormValues } from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepForm'
-import { DropResult } from 'react-beautiful-dnd'
 
 type Props = {
   sectionsFormKey: string
@@ -41,7 +41,7 @@ const SectionsRecursive: React.FC<Props> = ({ sectionsFormKey, depth = 0, index 
     return (
       <Box>
         <DragnDrop onDragEnd={onDragEnd}>
-          <DragnDrop.List droppableId={formKey}>
+          <DragnDrop.List droppableId={formKey} data-cy={`${formKey}-sections-list`}>
             {sections.map((section, index) => {
               const hasSubSections = (section?.sections?.length ?? 0) > 0
               return (
@@ -63,7 +63,7 @@ const SectionsRecursive: React.FC<Props> = ({ sectionsFormKey, depth = 0, index 
   }
 
   return (
-    <Box data-cy="sections-list">
+    <Box data-cy={`${formKey}-sections-list`}>
       {sections.map((section, index) => {
         const hasSubSections = (section?.sections?.length ?? 0) > 0
         return (

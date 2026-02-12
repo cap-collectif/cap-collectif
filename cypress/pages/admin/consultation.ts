@@ -52,7 +52,7 @@ export default new (class AdminConsultationPage {
       selector += `[aria-labelledby=${type}-${consultationIndex}] `
     }
 
-    selector += `[data-rbd-droppable-id="consultations.${consultationIndex}.sections"]`
+    selector += `[data-cy="consultations.${consultationIndex}.sections-sections-list"]`
     return cy.get(selector)
   }
 

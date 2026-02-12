@@ -4,9 +4,8 @@ import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap'
-import type { DropResult, DraggableProvided, DroppableProvided } from 'react-beautiful-dnd'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { arrayMove, Field, change, arrayRemove } from 'redux-form'
+import { monitorForElements, draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
+import { Field, change, arrayRemove } from 'redux-form'
 import { Flex, Text } from '@cap-collectif/ui'
 import toggle from '~/components/Form/Toggle'
 import InputRequirement from '~/components/Ui/Form/InputRequirement'
@@ -60,7 +59,7 @@ const requirementFactory = (
 
 export const formatRequirements = (requirements: Array<Requirement>) =>
   requirements
-    .filter(r => r.checked !== false)
+    .filter(r => r && r.checked !== false)
     .map<Requirement>(r => ({
       ...r,
       uniqueId: undefined,
@@ -200,6 +199,280 @@ export function createRequirements(
   })
   return requirements
 }
+
+type RequirementItemProps = {
+  requirement: Requirement
+  index: number
+  field: string
+  formName: string
+  requirements: Array<Requirement>
+  fcAllowedData: FranceConnectAllowedData
+  isFranceConnectConfigured: boolean
+  enableFranceConnect: boolean | null | undefined
+  hasPhoneVerifiedEnabled: boolean
+  phoneVerifiedRequirement: Requirement
+  phoneVerifiedRequirementIndex: number
+  hasFeatureTwilio: boolean
+  onInputCheck: (value: boolean, field: string, requirement: Requirement) => void
+  onInputChange: (value: string, field: string, requirement: Requirement) => void
+  onInputDelete: (index: number) => void
+  dispatch: Dispatch
+  setEnableFranceConnect: (value: boolean | null | undefined) => void
+}
+
+const RequirementItem = ({
+  requirement,
+  index,
+  field,
+  formName,
+  requirements,
+  fcAllowedData,
+  isFranceConnectConfigured,
+  enableFranceConnect,
+  hasPhoneVerifiedEnabled,
+  phoneVerifiedRequirement,
+  phoneVerifiedRequirementIndex,
+  hasFeatureTwilio,
+  onInputCheck,
+  onInputChange,
+  onInputDelete,
+  dispatch,
+  setEnableFranceConnect,
+}: RequirementItemProps) => {
+  const intl = useIntl()
+  const itemRef = React.useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = React.useState(false)
+
+  const hasPhoneVerifiedDisplay = requirement.type === 'PHONE' && requirement.checked
+  let requirementExist = false
+
+  if (requirement.type in fcAllowedData && typeof fcAllowedData[requirement.type] !== 'undefined') {
+    requirementExist = fcAllowedData[requirement.type]
+  }
+
+  const isToggle = requirement.type !== 'CHECKBOX'
+  const id = `requirement.${requirement.id || requirement.uniqueId || ''}`
+  const fcRequirement = ['LASTNAME', 'FIRSTNAME', 'DATE_OF_BIRTH']
+
+  const lastNameRequirement = requirements.filter(r => r && r.type === 'LASTNAME')
+  const firstNameRequirement = requirements.filter(r => r && r.type === 'FIRSTNAME')
+  const birthDateRequirement = requirements.filter(r => r && r.type === 'DATE_OF_BIRTH')
+
+  React.useEffect(() => {
+    if (requirement.type === 'FRANCE_CONNECT') {
+      setEnableFranceConnect(requirement.checked)
+    }
+  }, [requirement.type, requirement.checked, setEnableFranceConnect])
+
+  React.useEffect(() => {
+    const element = itemRef.current
+    if (!element) return
+
+    const cleanupDraggable = draggable({
+      element,
+      getInitialData: () => ({
+        type: 'requirement',
+        id,
+        index,
+      }),
+      onDragStart: () => setIsDragging(true),
+      onDrop: () => setIsDragging(false),
+    })
+
+    const cleanupDropTarget = dropTargetForElements({
+      element,
+      getData: () => ({
+        type: 'requirement',
+        id,
+        index,
+      }),
+      canDrop: ({ source }) => source.data.type === 'requirement',
+    })
+
+    return () => {
+      cleanupDraggable()
+      cleanupDropTarget()
+    }
+  }, [id, index])
+
+  return (
+    <div ref={itemRef} style={{ opacity: isDragging ? 0.5 : 1, cursor: 'grab' }}>
+      <RequirementDragItem key={index}>
+        <i className="cap cap-android-menu" />
+        {isToggle ? (
+          <Field
+            id={`requirement-${index}`}
+            name={requirement.label}
+            className={requirement.type}
+            component={toggle}
+            disabled={requirement.disabled}
+            props={{
+              input: {
+                value: requirement.checked,
+                name: requirement.type,
+                onChange: () => {
+                  if (requirement.type === 'FRANCE_CONNECT') {
+                    setEnableFranceConnect(requirement.checked)
+
+                    if (lastNameRequirement && fcAllowedData.LASTNAME === true) {
+                      Array.from(requirements).forEach(function (r, rIndex) {
+                        if (r.type === 'LASTNAME') {
+                          dispatch(
+                            change(formName, `requirements[${rIndex}]`, {
+                              ...r,
+                              checked: false,
+                              disabled: !requirement.checked,
+                            }),
+                          )
+                        }
+                      })
+                    }
+
+                    if (firstNameRequirement && fcAllowedData.FIRSTNAME === true) {
+                      Array.from(requirements).forEach(function (r, rIndex) {
+                        if (r.type === 'FIRSTNAME') {
+                          dispatch(
+                            change(formName, `requirements[${rIndex}]`, {
+                              ...r,
+                              checked: false,
+                              disabled: !requirement.checked,
+                            }),
+                          )
+                        }
+                      })
+                    }
+
+                    if (birthDateRequirement && fcAllowedData.DATE_OF_BIRTH === true) {
+                      Array.from(requirements).forEach(function (r, rIndex) {
+                        if (r.type === 'DATE_OF_BIRTH') {
+                          dispatch(
+                            change(formName, `requirements[${rIndex}]`, {
+                              ...r,
+                              checked: false,
+                              disabled: !requirement.checked,
+                            }),
+                          )
+                        }
+                      })
+                    }
+                  }
+
+                  if (requirement.type === 'PHONE') {
+                    // When PhoneRequirement is unchecked
+                    if (requirement.checked && phoneVerifiedRequirementIndex > 0) {
+                      onInputCheck(
+                        false,
+                        `requirements[${phoneVerifiedRequirementIndex}]`,
+                        phoneVerifiedRequirement,
+                      )
+                    }
+                  }
+
+                  onInputCheck(!requirement.checked, field, requirements[index])
+                },
+              },
+            }}
+            label={
+              <p
+                style={{
+                  marginBottom: 0,
+                  color: `${requirement.disabled ? '#707070' : 'inherit'}`,
+                }}
+              >
+                <FormattedMessage id={requirement.label || ''} />
+              </p>
+            }
+          />
+        ) : (
+          <>
+            <CheckboxPlaceholder>
+              <i className="fa fa-check" />
+            </CheckboxPlaceholder>
+            <Field
+              name={field}
+              component={InputRequirement}
+              props={{
+                placeholder: intl.formatMessage({
+                  id: 'enter-label',
+                }),
+                onChange: (value: string) => {
+                  onInputChange(value, field, requirements[index])
+                },
+                onDelete: () => {
+                  onInputDelete(index)
+                },
+                initialValue: requirement.label,
+              }}
+            />
+          </>
+        )}
+        {isFranceConnectConfigured &&
+          fcRequirement.indexOf(requirement.type) !== -1 &&
+          requirementExist &&
+          enableFranceConnect && (
+            <Flex ml="auto" width="23%" className="fcHelp">
+              <Text as="span" fontSize="11px" fontFamily="Open Sans" fontWeight={400}>
+                {intl.formatMessage({
+                  id: 'data-collected-by-france-connect',
+                })}
+              </Text>
+            </Flex>
+          )}
+        {requirement.disabled && requirement.type === 'IDENTIFICATION_CODE' && (
+          <InfoMessage variant="info" ml="auto">
+            <InfoMessage.Title withIcon>
+              <FormattedHTMLMessage
+                id="identification-code-create-reminder"
+                values={{
+                  url: '/admin-next/secured-participation',
+                }}
+              />
+            </InfoMessage.Title>
+          </InfoMessage>
+        )}
+      </RequirementDragItem>
+      {hasPhoneVerifiedEnabled && phoneVerifiedRequirement && (
+        <RequirementSubItem
+          isHidden={!(hasPhoneVerifiedDisplay && phoneVerifiedRequirement)}
+          isLast={phoneVerifiedRequirementIndex === requirements.length - 1}
+        >
+          <Field
+            type="checkbox"
+            id={`requirement-${phoneVerifiedRequirement.type}`}
+            disabled={phoneVerifiedRequirement.disabled || !hasFeatureTwilio}
+            component={component}
+            name={`requirements[${phoneVerifiedRequirementIndex}]`}
+            props={{
+              input: {
+                checked: phoneVerifiedRequirement.checked,
+                name: phoneVerifiedRequirement.type,
+                onChange: () => {
+                  onInputCheck(
+                    !phoneVerifiedRequirement.checked,
+                    `requirements[${phoneVerifiedRequirementIndex}]`,
+                    phoneVerifiedRequirement,
+                  )
+                },
+              },
+            }}
+          >
+            <p
+              style={{
+                marginBottom: 0,
+                color: `${requirement.disabled ? '#707070' : 'inherit'}`,
+              }}
+            >
+              {intl.formatMessage({
+                id: phoneVerifiedRequirement?.label || '',
+              })}
+            </p>
+          </Field>
+        </RequirementSubItem>
+      )}
+    </div>
+  )
+}
+
 export function StepRequirementsList({
   dispatch,
   formName,
@@ -212,21 +485,6 @@ export function StepRequirementsList({
   isFranceConnectConfigured,
   stepType,
 }: Props) {
-  const intl = useIntl()
-
-  const onDragEnd = (result: DropResult) => {
-    // dropped outside the list
-    if (!result.destination) {
-      return
-    }
-
-    dispatch(arrayMove(formName, 'requirements', result.source.index, result.destination.index))
-  }
-
-  const lastNameRequirement = requirements.filter(r => r && r.type === 'LASTNAME')
-  const firstNameRequirement = requirements.filter(r => r && r.type === 'FIRSTNAME')
-  const birthDateRequirement = requirements.filter(r => r && r.type === 'DATE_OF_BIRTH')
-  const fcRequirement = ['LASTNAME', 'FIRSTNAME', 'DATE_OF_BIRTH']
   const [enableFranceConnect, setEnableFranceConnect] = React.useState<boolean | null | undefined>(null)
 
   /* # Requirement => Phone verified # */
@@ -234,220 +492,63 @@ export function StepRequirementsList({
   const hasPhoneVerifiedEnabled = stepType === 'CollectStep' || stepType === 'SelectionStep' || stepType === 'QuestionnaireStep'
   const phoneVerifiedRequirementIndex = requirements.findIndex(requirement => requirement.type === 'PHONE_VERIFIED')
   const phoneVerifiedRequirement = requirements[phoneVerifiedRequirementIndex]
+
+  React.useEffect(() => {
+    const cleanup = monitorForElements({
+      canMonitor: ({ source }) => source.data.type === 'requirement',
+      onDrop: ({ source, location }) => {
+        const destination = location.current.dropTargets[0]
+        if (!destination) return
+
+        const sourceData = source.data as { type: string; index: number }
+        const destData = destination.data as { type: string; index: number }
+
+        if (sourceData.type !== 'requirement' || destData.type !== 'requirement') return
+
+        if (sourceData.index !== destData.index) {
+          // Use change instead of arrayMove to avoid undefined elements
+          const reordered = [...requirements]
+          const [removed] = reordered.splice(sourceData.index, 1)
+          reordered.splice(destData.index, 0, removed)
+          dispatch(change(formName, 'requirements', reordered))
+        }
+      },
+    })
+
+    return cleanup
+  }, [dispatch, formName, requirements])
+
   return (
     <ListGroup>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppableRequirement">
-          {(provided: DroppableProvided) => (
-            <div ref={provided.innerRef}>
-              {fields.map((field: string, index: number) => {
-                const requirement = requirements[index]
-                if (!requirement || requirement.type === 'PHONE_VERIFIED') return
-                const hasPhoneVerifiedDisplay = requirement.type === 'PHONE' && requirement.checked
-                let requirementExist = false
+      <div>
+        {fields.map((field: string, index: number) => {
+          const requirement = requirements[index]
+          if (!requirement || requirement.type === 'PHONE_VERIFIED') return null
 
-                // Cannot get fcAllowedData[requirement.type] because property CHECKBOX is missing in FranceConnectAllowedData [1].
-                if (requirement.type in fcAllowedData && typeof fcAllowedData[requirement.type] !== 'undefined') {
-                  requirementExist = fcAllowedData[requirement.type]
-                }
-
-                const isToggle = requirement.type !== 'CHECKBOX'
-                const id = `requirement.${requirement.id || requirement.uniqueId || ''}`
-
-                if (requirement.type === 'FRANCE_CONNECT') {
-                  setEnableFranceConnect(requirement.checked)
-                }
-
-                return (
-                  <Draggable key={id} draggableId={id} index={index}>
-                    {(providedDraggable: DraggableProvided) => (
-                      <div
-                        ref={providedDraggable.innerRef}
-                        {...providedDraggable.draggableProps}
-                        {...providedDraggable.dragHandleProps}
-                      >
-                        <RequirementDragItem key={index}>
-                          <i className="cap cap-android-menu" />
-                          {isToggle ? (
-                            <Field
-                              id={`requirement-${index}`}
-                              name={requirement.label}
-                              className={requirement.type}
-                              component={toggle}
-                              disabled={requirement.disabled}
-                              props={{
-                                input: {
-                                  value: requirement.checked,
-                                  name: requirement.type,
-                                  onChange: () => {
-                                    if (requirement.type === 'FRANCE_CONNECT') {
-                                      setEnableFranceConnect(requirement.checked)
-
-                                      if (lastNameRequirement && fcAllowedData.LASTNAME === true) {
-                                        Array.from(requirements).forEach(function (r, rIndex) {
-                                          if (r.type === 'LASTNAME') {
-                                            dispatch(
-                                              change(formName, `requirements[${rIndex}]`, {
-                                                ...r,
-                                                checked: false,
-                                                disabled: !requirement.checked,
-                                              }),
-                                            )
-                                          }
-                                        })
-                                      }
-
-                                      if (firstNameRequirement && fcAllowedData.FIRSTNAME === true) {
-                                        Array.from(requirements).forEach(function (r, rIndex) {
-                                          if (r.type === 'FIRSTNAME') {
-                                            dispatch(
-                                              change(formName, `requirements[${rIndex}]`, {
-                                                ...r,
-                                                checked: false,
-                                                disabled: !requirement.checked,
-                                              }),
-                                            )
-                                          }
-                                        })
-                                      }
-
-                                      if (birthDateRequirement && fcAllowedData.DATE_OF_BIRTH === true) {
-                                        Array.from(requirements).forEach(function (r, rIndex) {
-                                          if (r.type === 'DATE_OF_BIRTH') {
-                                            dispatch(
-                                              change(formName, `requirements[${rIndex}]`, {
-                                                ...r,
-                                                checked: false,
-                                                disabled: !requirement.checked,
-                                              }),
-                                            )
-                                          }
-                                        })
-                                      }
-                                    }
-
-                                    if (requirement.type === 'PHONE') {
-                                      // When PhoneRequirement is unchecked
-                                      if (requirement.checked && phoneVerifiedRequirementIndex > 0) {
-                                        onInputCheck(
-                                          false,
-                                          `requirements[${phoneVerifiedRequirementIndex}]`,
-                                          phoneVerifiedRequirement,
-                                        )
-                                      }
-                                    }
-
-                                    onInputCheck(!requirement.checked, field, requirements[index])
-                                  },
-                                },
-                              }}
-                              label={
-                                <p
-                                  style={{
-                                    marginBottom: 0,
-                                    color: `${requirement.disabled ? '#707070' : 'inherit'}`,
-                                  }}
-                                >
-                                  <FormattedMessage id={requirement.label || ''} />
-                                </p>
-                              }
-                            />
-                          ) : (
-                            <>
-                              <CheckboxPlaceholder>
-                                <i className="fa fa-check" />
-                              </CheckboxPlaceholder>
-                              <Field
-                                name={field}
-                                component={InputRequirement}
-                                props={{
-                                  placeholder: intl.formatMessage({
-                                    id: 'enter-label',
-                                  }),
-                                  onChange: (value: string) => {
-                                    onInputChange(value, field, requirements[index])
-                                  },
-                                  onDelete: () => {
-                                    onInputDelete(index)
-                                  },
-                                  initialValue: requirement.label,
-                                }}
-                              />
-                            </>
-                          )}
-                          {isFranceConnectConfigured &&
-                            fcRequirement.indexOf(requirement.type) !== -1 &&
-                            requirementExist &&
-                            enableFranceConnect && (
-                              <Flex ml="auto" width="23%" className="fcHelp">
-                                <Text as="span" fontSize="11px" fontFamily="Open Sans" fontWeight={400}>
-                                  {intl.formatMessage({
-                                    id: 'data-collected-by-france-connect',
-                                  })}
-                                </Text>
-                              </Flex>
-                            )}
-                          {requirement.disabled && requirement.type === 'IDENTIFICATION_CODE' && (
-                            <InfoMessage variant="info" ml="auto">
-                              <InfoMessage.Title withIcon>
-                                <FormattedHTMLMessage
-                                  id="identification-code-create-reminder"
-                                  values={{
-                                    url: '/admin-next/secured-participation',
-                                  }}
-                                />
-                              </InfoMessage.Title>
-                            </InfoMessage>
-                          )}
-                        </RequirementDragItem>
-                        {hasPhoneVerifiedEnabled && phoneVerifiedRequirement && (
-                          <RequirementSubItem
-                            isHidden={!(hasPhoneVerifiedDisplay && phoneVerifiedRequirement)}
-                            isLast={phoneVerifiedRequirementIndex === requirements.length - 1}
-                          >
-                            <Field
-                              type="checkbox"
-                              id={`requirement-${phoneVerifiedRequirement.type}`}
-                              disabled={phoneVerifiedRequirement.disabled || !hasFeatureTwilio}
-                              component={component}
-                              name={`requirements[${phoneVerifiedRequirementIndex}]`}
-                              props={{
-                                input: {
-                                  checked: phoneVerifiedRequirement.checked,
-                                  name: phoneVerifiedRequirement.type,
-                                  onChange: () => {
-                                    onInputCheck(
-                                      !phoneVerifiedRequirement.checked,
-                                      `requirements[${phoneVerifiedRequirementIndex}]`,
-                                      phoneVerifiedRequirement,
-                                    )
-                                  },
-                                },
-                              }}
-                            >
-                              <p
-                                style={{
-                                  marginBottom: 0,
-                                  color: `${requirement.disabled ? '#707070' : 'inherit'}`,
-                                }}
-                              >
-                                {intl.formatMessage({
-                                  id: phoneVerifiedRequirement?.label || '',
-                                })}
-                              </p>
-                            </Field>
-                          </RequirementSubItem>
-                        )}
-                      </div>
-                    )}
-                  </Draggable>
-                )
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+          return (
+            <RequirementItem
+              key={`requirement.${requirement.id || requirement.uniqueId || index}`}
+              requirement={requirement}
+              index={index}
+              field={field}
+              formName={formName}
+              requirements={requirements}
+              fcAllowedData={fcAllowedData}
+              isFranceConnectConfigured={isFranceConnectConfigured}
+              enableFranceConnect={enableFranceConnect}
+              hasPhoneVerifiedEnabled={hasPhoneVerifiedEnabled}
+              phoneVerifiedRequirement={phoneVerifiedRequirement}
+              phoneVerifiedRequirementIndex={phoneVerifiedRequirementIndex}
+              hasFeatureTwilio={hasFeatureTwilio}
+              onInputCheck={onInputCheck}
+              onInputChange={onInputChange}
+              onInputDelete={onInputDelete}
+              dispatch={dispatch}
+              setEnableFranceConnect={setEnableFranceConnect}
+            />
+          )
+        })}
+      </div>
     </ListGroup>
   )
 }

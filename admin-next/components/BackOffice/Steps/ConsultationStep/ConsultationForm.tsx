@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button, CapUIFontSize, Flex, FormLabel, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
+import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
 import { useIntl } from 'react-intl'
@@ -7,7 +8,6 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import SectionsRecursive from '@components/BackOffice/Steps/ConsultationStep/SectionsRecursive'
 import { UseFieldArrayRemove } from 'react-hook-form/dist/types/fieldArray'
 import { getDefaultSection } from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepForm'
-import { DropResult } from 'react-beautiful-dnd'
 
 type Props = {
   consultationFormKey: string
