@@ -211,6 +211,7 @@ const QuestionField: React.FC<Props> = ({ question, name, control }) => {
             name={name}
             id={name}
             format=".jpg,.jpeg,.png,.pdf,.doc,.docx"
+            multiple
             maxFiles={5}
             maxSize={8000000}
             showThumbnail

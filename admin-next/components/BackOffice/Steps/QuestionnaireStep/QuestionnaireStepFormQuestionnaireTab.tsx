@@ -194,6 +194,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     pl={isSubSection ? 6 : isSection ? 4 : hasSectionOrSubsectionBefore ? 8 : 4}
                     draggable
                     width="100%"
+                    variantColor="hierarchy"
                   >
                     <Flex direction="column">
                       <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight={1.5}>

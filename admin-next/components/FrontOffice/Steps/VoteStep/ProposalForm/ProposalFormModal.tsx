@@ -411,10 +411,16 @@ const ProposalFormModal: React.FC<Props> = props => {
         .map(response => {
           const question = proposalForm.questions.find((q: any) => q.id === response.question)
 
-          if (question?.type === 'medias' && Array.isArray(response.value)) {
+          if (question?.type === 'medias') {
+            let medias: string[] = []
+            if (Array.isArray(response.value)) {
+              medias = response.value.map((media: any) => (typeof media === 'object' ? media.id : media))
+            } else if (response.value && typeof response.value === 'object' && 'id' in response.value) {
+              medias = [(response.value as any).id]
+            }
             return {
               question: response.question,
-              medias: response.value.map((media: any) => (typeof media === 'object' ? media.id : media)),
+              medias,
             }
           }
 
