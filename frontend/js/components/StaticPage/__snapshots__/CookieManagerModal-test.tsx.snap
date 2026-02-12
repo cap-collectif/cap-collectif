@@ -15,7 +15,7 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
       style={
         Object {
           "color": undefined,
-          "font-weight": "600",
+          "fontWeight": "600",
         }
       }
       variant="link"

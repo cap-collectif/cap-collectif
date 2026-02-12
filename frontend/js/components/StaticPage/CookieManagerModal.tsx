@@ -63,7 +63,7 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
             bsStyle="link"
             className="p-0"
             id="cookies-management"
-            style={{ color: color, 'font-weight': '600' }}
+            style={{ color: color, fontWeight: '600' }}
             onClick={onOpen}
           >
             <FormattedMessage id={cookieTrad || 'cookies-management'} />

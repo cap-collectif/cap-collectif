@@ -29,6 +29,10 @@ const MediaBody = styled(Media.Body)`
     }
   }
 `
+const OpinionText = styled.p`
+  word-break: break-word;
+  overflow-wrap: break-word;
+`
 export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
     isProfile: false,
@@ -104,7 +108,7 @@ export class ArgumentItem extends React.Component<Props> {
           </MediaBody>
           <div className="opinion__body">
             <TrashedMessage contribution={argument}>
-              <p className="opinion__text">
+              <OpinionText className="opinion__text">
                 <Linkify
                   properties={{
                     className: 'external-link',
@@ -112,7 +116,7 @@ export class ArgumentItem extends React.Component<Props> {
                 >
                   {translateContent(htmlDecode(argument.body))}
                 </Linkify>
-              </p>
+              </OpinionText>
             </TrashedMessage>
             <ArgumentButtons argument={argument} />
           </div>
