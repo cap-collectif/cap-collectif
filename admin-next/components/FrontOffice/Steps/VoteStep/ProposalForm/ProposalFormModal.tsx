@@ -65,6 +65,11 @@ const PROPOSAL_FORM_FRAGMENT = graphql`
     categoryHelpText
     usingAddress
     addressHelpText
+    proposalInAZoneRequired
+    mapCenter {
+      lat
+      lng
+    }
     usingDistrict
     districtMandatory
     districtHelpText
@@ -607,6 +612,8 @@ const ProposalFormModal: React.FC<Props> = props => {
               onAddressChange={address => {
                 addressJsonRef.current = address
               }}
+              currentAddress={addressJsonRef.current}
+              mapCenter={proposalForm.mapCenter}
             />
           )}
 
