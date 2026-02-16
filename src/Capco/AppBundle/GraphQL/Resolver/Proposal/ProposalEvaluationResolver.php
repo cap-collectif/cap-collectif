@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
+use FOS\UserBundle\Util\TokenGenerator;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -24,10 +25,12 @@ class ProposalEvaluationResolver implements QueryInterface
         private ProposalViewerIsAnEvaluerResolver $isViewerAnEvaluerResolver,
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        TokenGenerator $tokenGenerator
     ) {
         $this->abstractQuestionRepository = $abstractQuestionRepository;
         $this->abstractResponseRepository = $abstractResponseRepository;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function __invoke(

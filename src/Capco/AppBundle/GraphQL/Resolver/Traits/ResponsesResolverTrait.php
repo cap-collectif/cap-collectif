@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use FOS\UserBundle\Util\TokenGenerator;
 
 trait ResponsesResolverTrait
 {
@@ -26,6 +27,10 @@ trait ResponsesResolverTrait
      * @var AbstractResponseRepository
      */
     private $abstractResponseRepository;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
     public function filterVisibleResponses(
         iterable $responses,
@@ -131,6 +136,9 @@ trait ResponsesResolverTrait
             } else {
                 $response = new ValueResponse();
             }
+            // Transient responses are not persisted, so we assign a random token
+            // to avoid Relay global ID collisions between multiple empty responses.
+            $response->setId($this->tokenGenerator->generateToken());
             $response->setQuestion($question);
             $responses->add($response);
         }

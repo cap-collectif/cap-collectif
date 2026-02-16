@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use FOS\UserBundle\Util\TokenGenerator;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
@@ -16,10 +17,12 @@ class ReplyResponsesResolver implements QueryInterface
     public function __construct(
         private LoggerInterface $logger,
         AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository
+        AbstractResponseRepository $abstractResponseRepository,
+        TokenGenerator $tokenGenerator
     ) {
         $this->abstractQuestionRepository = $abstractQuestionRepository;
         $this->abstractResponseRepository = $abstractResponseRepository;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function __invoke(Reply $reply, $viewer, \ArrayObject $context): iterable

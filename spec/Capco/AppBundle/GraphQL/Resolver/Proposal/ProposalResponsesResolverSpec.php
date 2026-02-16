@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Util\TokenGenerator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -22,13 +23,15 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenGenerator $tokenGenerator
     ): void {
         $this->beConstructedWith(
             $abstractQuestionRepository,
             $abstractResponseRepository,
             $viewerIsAnEvaluer,
-            $authorizationChecker
+            $authorizationChecker,
+            $tokenGenerator
         );
     }
 

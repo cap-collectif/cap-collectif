@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Util\TokenGenerator;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
@@ -19,9 +20,15 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
     public function let(
         LoggerInterface $logger,
         AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository
+        AbstractResponseRepository $abstractResponseRepository,
+        TokenGenerator $tokenGenerator
     ) {
-        $this->beConstructedWith($logger, $abstractQuestionRepository, $abstractResponseRepository);
+        $this->beConstructedWith(
+            $logger,
+            $abstractQuestionRepository,
+            $abstractResponseRepository,
+            $tokenGenerator
+        );
     }
 
     public function it_is_initializable(): void
