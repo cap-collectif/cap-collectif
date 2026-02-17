@@ -130,6 +130,9 @@ export const NavBarMenuContent = ({
   const isMobile = width < 1133
 
   const logout = () => {
+    if (typeof window !== 'undefined' && window.Beacon) {
+      window.Beacon('logout', { endActiveChat: true })
+    }
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`
   }
 

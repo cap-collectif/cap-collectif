@@ -8,6 +8,7 @@ declare global {
     MAPBOX_PUBLIC_TOKEN: string | null
     MAPBOX_PUBLIC_STYLE_OWNER: string | null
     MAPBOX_PUBLIC_STYLE_ID: string | null
+    Beacon?: (method: string, options?: Record<string, unknown>) => void
   }
   type ReactRelayReadyState = {
     error: Error | null | undefined

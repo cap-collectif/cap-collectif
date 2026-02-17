@@ -76,7 +76,6 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
                 type="text/javascript"
                 dangerouslySetInnerHTML={{
                   __html: `
-                            window.Beacon('logout', { endActiveChat: true });
                             window.Beacon('init', '224da0d3-665b-400b-9fc8-812e9e1ff8b8');
                             window.Beacon('identify', {
                                 name: '${viewerSession.username}',
@@ -99,7 +98,6 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
                 type="text/javascript"
                 dangerouslySetInnerHTML={{
                   __html: `
-                            window.Beacon('logout', { endActiveChat: true });
                             window.Beacon('init', '9f14ea62-acc2-4523-9fd8-d8a0b5a5225c')
                             window.Beacon('identify', {
                                 name: '${viewerSession.username}',

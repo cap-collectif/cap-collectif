@@ -60,7 +60,15 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
   const intl = useIntl()
   const hasMultilangue = useFeatureFlag('multilangue')
   const helpScoutBeacon = useFeatureFlag('helpscout_beacon')
+  const onlineHelp = useFeatureFlag('online_help')
   const { saving, breadCrumbItems, preview } = useNavBarContext()
+
+  const handleLogout = () => {
+    if ((helpScoutBeacon || onlineHelp) && typeof window !== 'undefined' && window.Beacon) {
+      window.Beacon('logout', { endActiveChat: true })
+    }
+    window.location.href = `${getBaseUrlWithAdminNextSupport()}/logout`
+  }
   const localeFromCookie = intl.locale
   const localeSelected =
     availableLocales.find(locale =>
@@ -176,7 +184,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
               <Icon name={CapUIIcon.Home} color="gray.500" />
               <Text ml={1}>{intl.formatMessage({ id: 'global.platform' })}</Text>
             </Menu.Item>
-            <Menu.Item onClick={() => (window.location.href = `${getBaseUrlWithAdminNextSupport()}/logout`)}>
+            <Menu.Item onClick={handleLogout}>
               <Icon name={CapUIIcon.Logout} color="gray.500" />
               <Text ml={1}>{intl.formatMessage({ id: 'global-disconnect' })}</Text>
             </Menu.Item>

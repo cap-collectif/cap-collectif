@@ -34,53 +34,64 @@ export const ProfileInfo = styled.div`
     object-fit: cover;
   }
 `
-export const UserBlockProfile = ({ query }: Props) => (
-  <>
-    <MenuListItem
-      as="div"
-      style={{
-        padding: 0,
-      }}
-    >
-      <ProfileInfo>
-        {!query.user.media ? (
-          <Image src={query.user.media?.url} alt="admin profile" />
-        ) : (
-          <DefaultAvatar size={60} className="img-circle avatar" />
-        )}
-        <div>{query.user.displayName}</div>
-      </ProfileInfo>
-    </MenuListItem>
-    {query.user.isAdmin && (
+export const UserBlockProfile = ({ query }: Props) => {
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (typeof window !== 'undefined' && (window as any).Beacon) {
+      ;(window as any).Beacon('logout', { endActiveChat: true })
+    }
+    window.location.href = `${window.location.protocol}//${window.location.host}/logout`
+  }
+
+  return (
+    <>
       <MenuListItem
         as="div"
         style={{
           padding: 0,
         }}
       >
-        <IconLinkBar noBorderTop color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
-          <ProfileNeutralIcon color={colors.darkText} />
+        <ProfileInfo>
+          {!query.user.media ? (
+            <Image src={query.user.media?.url} alt="admin profile" />
+          ) : (
+            <DefaultAvatar size={60} className="img-circle avatar" />
+          )}
+          <div>{query.user.displayName}</div>
+        </ProfileInfo>
+      </MenuListItem>
+      {query.user.isAdmin && (
+        <MenuListItem
+          as="div"
+          style={{
+            padding: 0,
+          }}
+        >
+          <IconLinkBar noBorderTop color={colors.darkText} message="navbar.profile" url={query.user.adminUrl}>
+            <ProfileNeutralIcon color={colors.darkText} />
+          </IconLinkBar>
+        </MenuListItem>
+      )}
+
+      <MenuListItem
+        as="div"
+        style={{
+          padding: 0,
+        }}
+        onClick={handleLogout}
+      >
+        <IconLinkBar
+          noBorderTop
+          color={colors.dangerColor}
+          message="global-disconnect"
+          url={`${window.location.protocol}//${window.location.host}/logout`}
+        >
+          <PowerButtonIcon color={colors.dangerColor} />
         </IconLinkBar>
       </MenuListItem>
-    )}
-
-    <MenuListItem
-      as="div"
-      style={{
-        padding: 0,
-      }}
-    >
-      <IconLinkBar
-        noBorderTop
-        color={colors.dangerColor}
-        message="global-disconnect"
-        url={`${window.location.protocol}//${window.location.host}/logout`}
-      >
-        <PowerButtonIcon color={colors.dangerColor} />
-      </IconLinkBar>
-    </MenuListItem>
-  </>
-)
+    </>
+  )
+}
 export default createFragmentContainer(UserBlockProfile, {
   query: graphql`
     fragment UserBlockProfile_query on Query {
