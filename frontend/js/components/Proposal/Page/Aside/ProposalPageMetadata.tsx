@@ -65,7 +65,7 @@ export const MetadataRow = ({
       <Icon name={name} size={size} color={color} />
     </CategoryCircledIcon>
 
-    <Box ml="15px">
+    <Box ml="15px" minWidth={0}>
       <MetadataPlaceHolder ready={ready}>{children}</MetadataPlaceHolder>
     </Box>
   </Element>
@@ -159,17 +159,17 @@ export const ProposalPageMetadata = ({
           )}
           {!proposal || (showThemes && proposal?.theme?.title) ? (
             <MetadataRow name={ICON_NAME.tag} size={10} color={colors.primaryColor} ready={!!proposal}>
-              <Text>{proposal?.theme?.title || ''}</Text>
+              <Text sx={{ wordBreak: 'break-word' }}>{proposal?.theme?.title || ''}</Text>
             </MetadataRow>
           ) : null}
           {!proposal || (showCategories && proposal?.category) ? (
             <MetadataRow name={ICON_NAME.tag} size={10} color={colors.primaryColor} ready={!!proposal}>
-              <Text>{proposal?.category?.name || ''}</Text>
+              <Text sx={{ wordBreak: 'break-word' }}>{proposal?.category?.name || ''}</Text>
             </MetadataRow>
           ) : null}
           {!proposal || (showDistricts && proposal?.district) ? (
             <MetadataRow name={ICON_NAME.pin} size={10} color={colors.primaryColor} ready={!!proposal}>
-              <Text>{proposal?.district?.name || ''}</Text>
+              <Text sx={{ wordBreak: 'break-word' }}>{proposal?.district?.name || ''}</Text>
             </MetadataRow>
           ) : null}
           {!proposal || (estimation !== null && typeof estimation !== 'undefined') ? (

@@ -11,7 +11,13 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
       ready={true}
       size={10}
     >
-      <Text>
+      <Text
+        sx={
+          Object {
+            "wordBreak": "break-word",
+          }
+        }
+      >
         Nom de la catégorie
       </Text>
     </MetadataRow>
@@ -21,7 +27,13 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
       ready={true}
       size={10}
     >
-      <Text>
+      <Text
+        sx={
+          Object {
+            "wordBreak": "break-word",
+          }
+        }
+      >
         Nom du quartier
       </Text>
     </MetadataRow>
