@@ -153,8 +153,6 @@ const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props)
         let phone
 
         switch (errorCode) {
-
-
           case 'PHONE_INVALID_LENGTH':
             phone = intl.formatMessage({
               id: 'phone.validation.length',
@@ -251,14 +249,18 @@ type PersonalDataState = {
   day: number | null | undefined
 }
 export const getSsoTradKey = (): string => {
-  if (window.location.hostname === occitanieUrl || window.location.hostname === occitaniePreprodUrl){
+  if (window.location.hostname === occitanieUrl || window.location.hostname === occitaniePreprodUrl) {
     return 'data-sso-occitanie'
   }
 
   return 'data-from-FranceConnect'
 }
 export const isSsoFcOrOccitanie = (isFranceConnectAccount: boolean) => {
-  return (window.location.hostname === occitanieUrl || window.location.hostname === occitaniePreprodUrl) || isFranceConnectAccount
+  return (
+    window.location.hostname === occitanieUrl ||
+    window.location.hostname === occitaniePreprodUrl ||
+    isFranceConnectAccount
+  )
 }
 export class PersonalData extends Component<Props, PersonalDataState> {
   deleteField = (target: string): void => {
@@ -504,7 +506,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           )}
                         </div>
                       )}
-                      { currentValues.dateOfBirth !== null && (
+                      {currentValues.dateOfBirth !== null && (
                         <div>
                           <div className="horizontal_field_with_border_top">
                             <Field
@@ -755,7 +757,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                         </div>
                       )}
-                      {!!currentValues.userIdentificationCode && (
+                      {!currentValues.userIdentificationCode && (
                         <div className="horizontal_field_with_border_top">
                           <label className="col-sm-3 control-label" htmlFor="personal-data-form-code">
                             <FormattedMessage id="identification_code" />
@@ -772,8 +774,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             <Text
                               as="div"
                               className="col-sm-4 col-xs-12 code-privacy"
-                              marginLeft="190px"
-                              width="max-content"
+                              marginLeft={[0, 190]}
                               color={styleGuideColors.gray900}
                             >
                               <FormattedHTMLMessage id="verificationCodeHelp" />
