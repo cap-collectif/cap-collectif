@@ -137,11 +137,17 @@ class LocaleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('l');
         $qb->select('l.code')
             ->where('l.code LIKE :firstPartOfCode')
-            ->setParameter('firstPartOfCode', substr($userCode, 0, 2))
+            ->setParameter('firstPartOfCode', sprintf('%s%%', substr($userCode, 0, 2)))
         ;
 
         try {
-            return $qb->getQuery()->getOneOrNullResult();
+            $result = $qb->getQuery()->getOneOrNullResult();
+
+            if (\is_array($result) && isset($result['code'])) {
+                return $result['code'];
+            }
+
+            return \is_string($result) ? $result : null;
         } catch (NonUniqueResultException) {
             //todo handle request for en-AUS while we have en-US and en-GB
         }

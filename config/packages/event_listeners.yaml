@@ -74,6 +74,9 @@ services:
         autowire: true
         tags:
             - kernel.event_subscriber
+    Capco\AppBundle\EventListener\LocaleCookieSubscriber:
+        tags:
+            - kernel.event_subscriber
     Capco\AppBundle\EventListener\LocalizedEntityUpdateSubscriber:
         autowire: true
         tags:

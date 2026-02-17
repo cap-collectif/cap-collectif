@@ -12,9 +12,17 @@ type Props = JoditProp & {
   formName?: string
 }
 
-const EditorSwitcher = ({ initialContent, clientConfig, ...props }: Props) => {
+const EditorSwitcher = ({ initialContent, clientConfig, selectedLanguage, ...props }: Props) => {
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
-  return <Jodit {...props} value={initialContent} currentLanguage={currentLanguage} clientConfig={clientConfig} />
+  return (
+    <Jodit
+      {...props}
+      value={initialContent}
+      currentLanguage={currentLanguage}
+      selectedLanguage={selectedLanguage ?? currentLanguage}
+      clientConfig={clientConfig}
+    />
+  )
 }
 
 export default EditorSwitcher

@@ -1,7 +1,7 @@
 import { pageHomePageMetadataQuery$data } from '@relay/pageHomePageMetadataQuery.graphql'
-import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { graphql } from 'relay-runtime'
+import { ssrGraphqlWithLocale } from './server/ssr-graphql-with-locale'
 import Home from './Home'
 
 export const METADATA_QUERY = graphql`
@@ -16,7 +16,7 @@ export const METADATA_QUERY = graphql`
 `
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = await Fetcher.ssrGraphql<pageHomePageMetadataQuery$data>(METADATA_QUERY, {})
+  const { title, description } = await ssrGraphqlWithLocale<pageHomePageMetadataQuery$data>(METADATA_QUERY, {})
 
   return {
     title: `${title?.value || 'Cap Collectif'}`,

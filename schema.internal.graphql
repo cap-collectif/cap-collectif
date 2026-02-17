@@ -8363,6 +8363,9 @@ type Locale {
   """The IETF reference code for the locale"""
   code: TranslationLocale!
 
+  """The IETF reference code for the locale as fr-FR format"""
+  codeFormatted: String!
+
   """True if admins can use this locale"""
   isEnabled: Boolean!
 
@@ -10104,7 +10107,10 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
   id: ID!
 
   """The organization's public name."""
-  username: String!
+  username(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
 
   """Get all posts that the organization owns."""
   posts(
@@ -10615,7 +10621,10 @@ type Page implements NodeSlug & UniformResourceLocatable {
   translations: [PageTranslation!]!
   media: Media
   cover: Media
-  metaDescription: String
+  metaDescription(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
   customCode: String
   translationBySlug(slug: String!): PageTranslation!
 }

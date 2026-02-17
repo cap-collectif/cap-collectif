@@ -24,6 +24,8 @@ const SideBar: FC<SideBarProps> = () => {
   const { viewerSession, appVersion } = useAppContext()
   const { fold } = useSideBarContext()
   const intl = useIntl()
+  const localePrefix = intl.locale.split(/[-_]/)[0].toLowerCase()
+  const platformUrl = `${getBaseUrlWithAdminNextSupport()}/${localePrefix}`
   const allFeatureFlags = useAllFeatureFlags()
   const { isAdmin, isSuperAdmin, isAdminOrganization, organization, isOrganizationMember } = viewerSession
 
@@ -43,7 +45,7 @@ const SideBar: FC<SideBarProps> = () => {
   return (
     <SideBarUI>
       <SideBarUI.Header>
-        <Box as="a" href={getBaseUrlWithAdminNextSupport()} target="_blank">
+        <Box as="a" href={platformUrl} target="_blank">
           <LogoCapco height={6} />
         </Box>
       </SideBarUI.Header>

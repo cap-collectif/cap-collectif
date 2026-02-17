@@ -107,19 +107,24 @@ class MenuItemResolver
      */
     public function getMenuUrl(MenuItem $item, Request $request): string
     {
-        $locale = $request->getLocale();
+        $locale = $this->resolveLocale($request);
         if ($item->getPage()) {
+            $slug = $item->getPage()->getSlug($locale, true);
+            if (!$slug) {
+                return '';
+            }
+
             return $this->router->generate('app_page_show', [
-                'slug' => $item
-                    ->getPage()
-                    ->translate()
-                    ->getSlug(),
+                'slug' => $slug,
                 '_locale' => $locale,
             ]);
         }
-        $url = $item->getLink(null, true);
+        $url = $item->getLink($locale, true) ?? '';
         if ('/' === $url) {
             return $this->router->generate('app_homepage', ['_locale' => $locale]);
+        }
+        if ('' === $url) {
+            return '';
         }
 
         $constraint = new Url([
@@ -129,7 +134,7 @@ class MenuItemResolver
         $errorList = $this->validator->validate($url, $constraint);
 
         if (0 === \count($errorList)) {
-            return $url ?? '';
+            return $url;
         }
 
         $routeMatch = $this->router->match("/{$url}");
@@ -167,5 +172,10 @@ class MenuItemResolver
         $fixedLink = '/' . $link;
 
         return $link === $current || str_ends_with((string) $current, $fixedLink);
+    }
+
+    private function resolveLocale(Request $request): string
+    {
+        return $request->getLocale();
     }
 }

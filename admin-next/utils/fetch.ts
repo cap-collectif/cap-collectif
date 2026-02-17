@@ -51,12 +51,17 @@ const Fetcher = {
     variables?: U,
     Cookie: string = '',
     cache: RequestCache = 'no-store',
+    locale?: string,
   ): Promise<T> {
     const ENV = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
     const isProd = ENV === 'prod'
-    const URL = isProd
+    let URL = isProd
       ? 'http://127.0.0.1/graphql/internal'
       : `http://capco.${ENV === 'dev' ? 'dev' : 'test'}:8080/graphql/internal`
+
+    if (locale) {
+      URL += `?tl=${encodeURIComponent(locale)}`
+    }
 
     return fetch(URL, {
       cache,

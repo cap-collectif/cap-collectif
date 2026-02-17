@@ -559,13 +559,25 @@ class CookieMonster {
     return end.getTime() - start.getTime()
   }
   setLocale = (locale: string) => {
-    this.setCookieWithExpirationDate(
-      locale,
-      'locale',
-      this.getTimeDifference({
-        month: 13,
-      }),
-    )
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return
+    }
+
+    const secureAttr = window.location.protocol === 'https:' ? '; secure' : ''
+    const expired = 'Thu, 01 Jan 1970 00:00:00 GMT'
+    const domains = new Set([window.location.host, `.${window.location.host}`, '.capco.dev'])
+    const paths = ['/', '/admin-next']
+
+    paths.forEach(path => {
+      document.cookie = `locale=; expires=${expired}; path=${path}; samesite=Strict${secureAttr}`
+      domains.forEach(domain => {
+        document.cookie = `locale=; expires=${expired}; path=${path}; domain=${domain}; samesite=Strict${secureAttr}`
+      })
+    })
+
+    const expireIn13Months = new Date()
+    expireIn13Months.setMonth(expireIn13Months.getMonth() + 13)
+    document.cookie = `locale=${encodeURIComponent(locale)}; expires=${expireIn13Months.toUTCString()}; path=/; samesite=Strict${secureAttr}`
   }
   getLocale = () => {
     return Cookies.getJSON('locale')

@@ -5,10 +5,12 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\Enum\TranslationLocale;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -42,15 +44,19 @@ class FooterRuntime implements RuntimeExtensionInterface
 
     public function getFooterLinks(): array
     {
+        $request = $this->requestStack->getCurrentRequest();
+        if (!$request) {
+            return [];
+        }
+        $locale = $this->resolveLocale($request);
         $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        return array_map(fn ($page) => [
-            'name' => $page->getTitle(),
-            'url' => $this->menuItemResolver->getMenuUrl(
-                $page,
-                $this->requestStack->getCurrentRequest()
-            ),
+        $links = array_map(fn (MenuItem $menuItem) => [
+            'name' => $this->resolveMenuItemTitle($menuItem, $locale),
+            'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
         ], $pages);
+
+        return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));
     }
 
     public function isNextLinkEnabled(array $links, int $index): bool
@@ -110,5 +116,37 @@ class FooterRuntime implements RuntimeExtensionInterface
         }
 
         return $cachedItem->get();
+    }
+
+    private function resolveLocale(Request $request): string
+    {
+        $queryLocale = $request->query->get('tl');
+        if (\is_string($queryLocale) && TranslationLocale::isValid($queryLocale)) {
+            return $queryLocale;
+        }
+
+        $cookieLocale = $request->cookies->get('locale');
+        if (\is_string($cookieLocale) && TranslationLocale::isValid($cookieLocale)) {
+            return $cookieLocale;
+        }
+
+        return $request->getLocale();
+    }
+
+    private function resolveMenuItemTitle(MenuItem $menuItem, string $locale): string
+    {
+        $title = $menuItem->getTitle($locale, true);
+        if (\is_string($title) && '' !== trim($title)) {
+            return $title;
+        }
+
+        if ($menuItem->getPage()) {
+            $pageTitle = $menuItem->getPage()->getTitle($locale);
+            if (\is_string($pageTitle) && '' !== trim($pageTitle)) {
+                return $pageTitle;
+            }
+        }
+
+        return '';
     }
 }

@@ -98,6 +98,13 @@ const disappearTransition = () => {
 const ChangeLanguageOnWebsiteHeader = React.forwardRef<HTMLDivElement, Props>(
   ({ onChange, onClose, languageList, defaultLanguage, localeChoiceTranslations }: Props, ref: any) => {
     const [currentLanguage, updateLanguage] = useState(languageList.find(e => e.code === defaultLanguage))
+    const currentLanguageRef = React.useRef(currentLanguage)
+
+    const onLanguageSelect = (language: LocaleMap) => {
+      updateLanguage(language)
+      currentLanguageRef.current = language
+    }
+
     if (!currentLanguage) return null
     const localChoiceTrans = localeChoiceTranslations.find(localeChoice => localeChoice.code === currentLanguage.code)
     return (
@@ -112,7 +119,7 @@ const ChangeLanguageOnWebsiteHeader = React.forwardRef<HTMLDivElement, Props>(
                 id="language-header-change-button"
                 languageList={languageList}
                 defaultLanguage={defaultLanguage}
-                onChange={updateLanguage}
+                onChange={onLanguageSelect}
                 backgroundColor="rgba(255, 255, 255, 0.15) !important" // TODO: Remove this when we'll stop using bootstrap
                 textColor="#FFF"
               />
@@ -121,7 +128,7 @@ const ChangeLanguageOnWebsiteHeader = React.forwardRef<HTMLDivElement, Props>(
                 variant="primary"
                 ml={[2, 5]}
                 variantColor="primary"
-                onClick={() => onChange(currentLanguage)}
+                onClick={() => onChange(currentLanguageRef.current)}
               >
                 <span>{localChoiceTrans && localChoiceTrans.label}</span>
               </Button>

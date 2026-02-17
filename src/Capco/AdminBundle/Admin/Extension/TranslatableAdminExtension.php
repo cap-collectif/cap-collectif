@@ -98,8 +98,14 @@ class TranslatableAdminExtension extends AbstractAdminExtension
 
     private function setLocale(AdminInterface $admin, $object): void
     {
+        $locale = $this->getTranslatableLocale($admin);
+
         if (method_exists($object, 'setLocale')) {
-            $object->setLocale($this->getTranslatableLocale($admin));
+            $object->setLocale($locale);
+        } elseif (method_exists($object, 'setCurrentLocale')) {
+            $object->setCurrentLocale($locale);
+        } elseif (method_exists($object, 'setTranslatableLocale')) {
+            $object->setTranslatableLocale($locale);
         }
     }
 

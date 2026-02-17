@@ -13,6 +13,9 @@ Locale:
             code:
                 type: 'TranslationLocale!'
                 description: 'The IETF reference code for the locale'
+            codeFormatted:
+                type: 'String!'
+                description: 'The IETF reference code for the locale as fr-FR format'
             isEnabled:
                 type: 'Boolean!'
                 description: 'True if admins can use this locale'

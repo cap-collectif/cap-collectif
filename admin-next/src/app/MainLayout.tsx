@@ -15,6 +15,8 @@ import CookieManager from '@components/FrontOffice/Cookies/CookieManager'
 import { useCookies } from 'next-client-cookies'
 import { LOCALE_COOKIE } from '@shared/utils/cookies'
 import FooterWrapper from '@shared/footer/FooterWrapper'
+import { usePathname } from 'next/navigation'
+import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper'
 
 const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> = ({ children, SSRData }) => {
   const shield_mode = useFeatureFlag('shield_mode')
@@ -22,6 +24,7 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
   const isMobile = useIsMobile()
   const cookies = useCookies()
   const { locales } = SSRData
+  const pathname = usePathname()
   const cookiesLocale = cookies?.get(LOCALE_COOKIE)
 
   // See this https://github.com/vercel/next.js/issues/11109
@@ -41,7 +44,28 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
       </>
     )
 
-  const currentLanguage = cookiesLocale ? cookiesLocale : locales.find(l => l.isDefault)?.code
+  const normalizeLocale = (locale?: string | null): string => (locale || '').replace(/_/g, '-')
+  const getLocalePrefix = (localeCode: string): string => normalizeLocale(localeCode).split('-')[0].toLowerCase()
+  const availableLocales = locales
+    .filter(locale => locale.isEnabled && locale.isPublished)
+    .map(locale => formatCodeToLocale(locale.code))
+  const pathPrefix = pathname?.split('/').filter(Boolean)[0]?.toLowerCase() ?? ''
+  const pathLocale = availableLocales.find(localeCode => getLocalePrefix(localeCode) === pathPrefix)
+  const defaultLocale = locales.find(locale => locale.isDefault)
+  const currentLanguage =
+    pathLocale || normalizeLocale(cookiesLocale) || (defaultLocale ? formatCodeToLocale(defaultLocale.code) : 'fr-FR')
+
+  useEffect(() => {
+    if (!pathLocale) {
+      return
+    }
+
+    if (normalizeLocale(cookiesLocale) === normalizeLocale(pathLocale)) {
+      return
+    }
+
+    setLocaleCookie(pathLocale, availableLocales)
+  }, [availableLocales, cookiesLocale, pathLocale])
 
   return (
     <>

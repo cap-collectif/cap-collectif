@@ -10,7 +10,8 @@
  and for SiteParameter is `isTranslatable` is true
  because some are translatable and not others
 #}
-{% if is_translatable(admin.class) %}
+{% set translatableTarget = object is not null ? object : admin.class %}
+{% if is_translatable(translatableTarget) %}
     {% set currentLocale = object.traductionKey|default(null) %}
     {% set availableLocales = [] %}
 

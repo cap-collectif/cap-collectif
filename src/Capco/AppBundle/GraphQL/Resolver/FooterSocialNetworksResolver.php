@@ -3,11 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FooterSocialNetworksResolver
@@ -21,7 +24,8 @@ class FooterSocialNetworksResolver
         protected SiteParameterRepository $siteParameterRepository,
         protected RedisCache $cache,
         protected MenuItemResolver $menuItemResolver,
-        protected RequestStack $requestStack
+        protected RequestStack $requestStack,
+        private readonly GraphQLLocaleResolver $localeResolver
     ) {
     }
 
@@ -30,15 +34,19 @@ class FooterSocialNetworksResolver
      */
     public function getFooterLinks(): array
     {
+        $request = $this->requestStack->getCurrentRequest();
+        if (!$request) {
+            return [];
+        }
+        $locale = $this->resolveLocale($request);
         $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        return array_map(fn ($page) => [
-            'name' => $page->getTitle(),
-            'url' => $this->menuItemResolver->getMenuUrl(
-                $page,
-                $this->requestStack->getCurrentRequest()
-            ),
+        $links = array_map(fn (MenuItem $menuItem) => [
+            'name' => $this->resolveMenuItemTitle($menuItem, $locale),
+            'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
         ], $pages);
+
+        return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));
     }
 
     public static function generateFooterLegalCacheKey(string $locale): string
@@ -96,5 +104,27 @@ class FooterSocialNetworksResolver
         }
 
         return $cachedItem->get();
+    }
+
+    private function resolveLocale(Request $request): string
+    {
+        return $this->localeResolver->resolveFromRequest($request);
+    }
+
+    private function resolveMenuItemTitle(MenuItem $menuItem, string $locale): string
+    {
+        $title = $menuItem->getTitle($locale, true);
+        if (\is_string($title) && '' !== trim($title)) {
+            return $title;
+        }
+
+        if ($menuItem->getPage()) {
+            $pageTitle = $menuItem->getPage()->getTitle($locale);
+            if (\is_string($pageTitle) && '' !== trim($pageTitle)) {
+                return $pageTitle;
+            }
+        }
+
+        return '';
     }
 }

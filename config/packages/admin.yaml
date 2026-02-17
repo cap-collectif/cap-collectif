@@ -663,7 +663,11 @@ services:
 
     Capco\AdminBundle\Resolver\FeaturesCategoryResolver: ~
 
-    Capco\AdminBundle\EventListener\LocaleSwitcherListener: ~
+    Capco\AdminBundle\EventListener\LocaleSwitcherListener:
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sonata.admin.edit.form.top, method: onBlock }
+            - { name: kernel.event_listener, event: sonata.block.event.sonata.admin.show.top, method: onBlock }
+            - { name: kernel.event_listener, event: sonata.block.event.sonata.admin.list.table.top, method: onBlock }
 
     Capco\AdminBundle\Twig\FeaturesCategoryExtension: ~
 
@@ -679,7 +683,9 @@ services:
 
     Capco\AdminBundle\Block\HelpBlockService: ~
 
-    Capco\AdminBundle\Block\LocaleSwitcherBlockService: ~
+    Capco\AdminBundle\Block\LocaleSwitcherBlockService:
+        tags:
+            - { name: sonata.block }
 
     Capco\AdminBundle\Twig\VarsExtension: ~
 

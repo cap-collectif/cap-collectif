@@ -33,6 +33,7 @@ InternalPage:
                 resolve: '@=value.getCover()'
             metaDescription:
                 type: 'String'
+                argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getMetaDescription(args["locale"])'
             customCode:
                 type: 'String'

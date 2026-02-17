@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import cookie from 'cookie'
-import CookieHelper from './cookie-helper'
 import { IncomingMessage } from 'http'
 import { Locale } from 'types'
+import { setCookie } from 'nookies'
 
 const LOCALE_COOKIE_NAME = 'locale'
 
@@ -16,10 +16,59 @@ export function getLocaleFromReq(req: IncomingMessage): Locale | undefined | nul
   return null
 }
 
-export function setLocaleCookie(locale: string): void {
-  // since admin-next is a different domain than the normal one we need to force the path to be `/` so we don't duplicate the `locale` cookie
-  CookieHelper.setCookie(LOCALE_COOKIE_NAME, locale, {
+const getLocalePrefix = (localeCode: string): string => localeCode.split(/[-_]/)[0].toLowerCase()
+
+const buildLegacyPathCandidates = (pathname: string, availableLocales: ReadonlyArray<string>): Set<string> => {
+  const paths = new Set<string>(['/', '/admin-next'])
+  const pathParts = pathname.split('/').filter(Boolean)
+
+  for (let i = 1; i <= pathParts.length; i += 1) {
+    paths.add(`/${pathParts.slice(0, i).join('/')}`)
+  }
+
+  availableLocales.forEach(localeCode => {
+    paths.add(`/${getLocalePrefix(localeCode)}/admin-next`)
+  })
+
+  return paths
+}
+
+const buildLegacyDomainCandidates = (hostname: string): Set<string> => {
+  const domains = new Set<string>(['.capco.dev'])
+  if (hostname) {
+    domains.add(hostname)
+    domains.add(`.${hostname}`)
+  }
+
+  return domains
+}
+
+export function setLocaleCookie(locale: string, availableLocales: ReadonlyArray<string> = []): void {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return
+  }
+
+  const secureAttr = window.location.protocol === 'https:' ? '; secure' : ''
+  const expired = 'Thu, 01 Jan 1970 00:00:00 GMT'
+  const pathCandidates = buildLegacyPathCandidates(window.location.pathname, availableLocales)
+  const domainCandidates = buildLegacyDomainCandidates(window.location.hostname)
+
+  pathCandidates.forEach(path => {
+    document.cookie = `${LOCALE_COOKIE_NAME}=; expires=${expired}; path=${path}; samesite=strict${secureAttr}`
+
+    domainCandidates.forEach(domain => {
+      document.cookie = `${LOCALE_COOKIE_NAME}=; expires=${expired}; path=${path}; domain=${domain}; samesite=strict${secureAttr}`
+    })
+  })
+
+  const expiresAt = new Date()
+  expiresAt.setFullYear(expiresAt.getFullYear() + 1)
+
+  setCookie(null, LOCALE_COOKIE_NAME, locale, {
+    expires: expiresAt,
     path: '/',
+    secure: window.location.protocol === 'https:',
+    sameSite: 'strict',
   })
 }
 

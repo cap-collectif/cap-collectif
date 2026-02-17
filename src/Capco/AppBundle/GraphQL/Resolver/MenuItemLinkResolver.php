@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
@@ -13,7 +14,8 @@ class MenuItemLinkResolver implements QueryInterface
 {
     public function __construct(
         private readonly RouterInterface $router,
-        private readonly ValidatorInterface $validator
+        private readonly ValidatorInterface $validator,
+        private readonly GraphQLLocaleResolver $localeResolver
     ) {
     }
 
@@ -22,13 +24,15 @@ class MenuItemLinkResolver implements QueryInterface
         RequestStack $requestStack
     ): string {
         $request = $requestStack->getCurrentRequest();
-        $locale = $request->getLocale();
+        $locale = $this->localeResolver->resolveFromRequest($request);
         if ($item->getPage()) {
+            $slug = $item->getPage()->getSlug($locale, true);
+            if (!$slug) {
+                return '';
+            }
+
             return $this->router->generate('app_page_show', [
-                'slug' => $item
-                    ->getPage()
-                    ->translate()
-                    ->getSlug(),
+                'slug' => $slug,
                 '_locale' => $locale,
             ]);
         }

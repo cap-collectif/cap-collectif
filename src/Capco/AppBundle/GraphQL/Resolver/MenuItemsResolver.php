@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,7 +13,8 @@ class MenuItemsResolver implements QueryInterface
 {
     public function __construct(
         private readonly MenuItemRepository $menuItemRepository,
-        private readonly Manager $manager
+        private readonly Manager $manager,
+        private readonly GraphQLLocaleResolver $localeResolver
     ) {
     }
 
@@ -57,6 +59,8 @@ class MenuItemsResolver implements QueryInterface
      */
     private function filterNullableTitle(array $items): array
     {
-        return array_filter($items, fn ($item) => $item->getTitle());
+        $locale = $this->localeResolver->resolve();
+
+        return array_filter($items, fn (MenuItem $item): bool => null !== $item->getTitle($locale, true));
     }
 }

@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import District from './District'
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { pageDistrictMetadataQuery$data } from '@relay/pageDistrictMetadataQuery.graphql'
 import { notFound } from 'next/navigation'
 import { removeAccents } from '@shared/utils/removeAccents'
+import { ssrGraphqlWithLocale } from '../../server/ssr-graphql-with-locale'
 
 const METADATA_QUERY = graphql`
   query pageDistrictMetadataQuery($districtSlug: String!) {
@@ -28,7 +28,7 @@ type Params = { params: { slug: string } }
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const initialSlug = (await params).slug
   const slug = removeAccents(decodeURI(initialSlug))
-  const { district, title } = await Fetcher.ssrGraphql<pageDistrictMetadataQuery$data>(METADATA_QUERY, {
+  const { district, title } = await ssrGraphqlWithLocale<pageDistrictMetadataQuery$data>(METADATA_QUERY, {
     districtSlug: slug,
   })
 

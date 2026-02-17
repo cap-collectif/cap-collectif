@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { pageProjectsMetadataQuery$data } from '@relay/pageProjectsMetadataQuery.graphql'
+import { getRequestLocale } from '../server/request-locale'
+import { ssrGraphqlWithLocale } from '../server/ssr-graphql-with-locale'
 import Projects from './Projects'
 
 const METADATA_QUERY = graphql`
@@ -36,9 +37,11 @@ const METADATA_QUERY = graphql`
 `
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { pageTitle, siteTitle, description, siteImage } = await Fetcher.ssrGraphql<pageProjectsMetadataQuery$data>(
+  const requestLocale = getRequestLocale()
+  const { pageTitle, siteTitle, description, siteImage } = await ssrGraphqlWithLocale<pageProjectsMetadataQuery$data>(
     METADATA_QUERY,
     {},
+    { locale: requestLocale },
   )
 
   const title = pageTitle?.value ?? siteTitle?.value ?? 'Cap Collectif'
@@ -57,8 +60,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const requestLocale = getRequestLocale()
   const { customCode, pageTitle, body, secondaryBody, pagination } =
-    await Fetcher.ssrGraphql<pageProjectsMetadataQuery$data>(METADATA_QUERY, {})
+    await ssrGraphqlWithLocale<pageProjectsMetadataQuery$data>(
+      METADATA_QUERY,
+      {},
+      { locale: requestLocale },
+    )
   const bodyValue = body?.value
   const secBodyValue = secondaryBody?.value
 

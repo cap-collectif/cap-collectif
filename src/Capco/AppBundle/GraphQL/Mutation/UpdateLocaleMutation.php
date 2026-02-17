@@ -17,7 +17,13 @@ class UpdateLocaleMutation implements MutationInterface
         $locale = $input->offsetGet('locale');
 
         $request = $requestStack->getCurrentRequest();
-        $request->getSession()->set('_locale', $locale);
+        if (null !== $request) {
+            $request->setLocale($locale);
+
+            if ($request->hasSession()) {
+                $request->getSession()->set('_locale', $locale);
+            }
+        }
 
         return ['locale' => $locale];
     }

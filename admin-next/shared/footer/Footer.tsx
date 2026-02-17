@@ -20,6 +20,7 @@ import { CookieClient } from '@shared/utils/universalCookies'
 import { Cookies } from 'next-client-cookies'
 import React, { FC, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
+import { usePathname } from 'next/navigation'
 import { FooterBrand } from './FooterBrand'
 
 const getIconName = (item: string): string => {
@@ -38,7 +39,7 @@ type FooterProps = layoutQuery$data['footer'] & {
 }
 
 export interface Locale {
-  code: TranslationLocale
+  code: TranslationLocale | string
   translationKey: string
 }
 
@@ -56,9 +57,17 @@ export const Footer: FC<Props> = props => {
   const multilangue = useFeatureFlag('multilangue')
   const { cookies, locales, footer, onLanguageChange, defaultLanguage, cookieManager } = props
   const { socialNetworks, links, legalPath, legals, cookiesPath, privacyPath } = footer
+  const pathname = usePathname()
 
+  const normalizeLocale = (locale?: string | null): string =>
+    (locale || '').replace(/_/g, '-').toLowerCase()
+  const getLocalePrefix = (localeCode: string): string => normalizeLocale(localeCode).split('-')[0] || ''
+
+  const pathPrefix = pathname?.split('/').filter(Boolean)[0]?.toLowerCase() ?? ''
+  const pathLocale = locales.find(locale => getLocalePrefix(locale.code) === pathPrefix)?.code
   const cookiesLocale = cookies?.get(LOCALE_COOKIE)
-  const cookiesLanguage = locales.find(e => e.code === cookiesLocale)
+  const currentLocale = pathLocale || cookiesLocale
+  const cookiesLanguage = locales.find(locale => normalizeLocale(locale.code) === normalizeLocale(currentLocale))
 
   return (
     <Box

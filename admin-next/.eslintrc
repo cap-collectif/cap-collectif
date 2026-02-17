@@ -1,14 +1,33 @@
 {
-    "extends": ["next", "next/core-web-vitals"],
-    "rules": {
-        "react/display-name": "warn",
-        "react/no-unescaped-entities": "off",
-        "jsx-a11y/accessible-emoji": "warn",
-        "react-hooks/rules-of-hooks": "warn",
-        "@next/next/no-img-element": "off",
-        "@next/next/no-sync-scripts": "warn",
-        "prefer-destructuring": "off",
-        "import/no-anonymous-default-export": "off",
-        "relay/no-future-added-value": "off"
-    }    
+  "extends": ["next", "next/core-web-vitals"],
+  "rules": {
+    "react/display-name": "warn",
+    "react/no-unescaped-entities": "off",
+    "jsx-a11y/accessible-emoji": "warn",
+    "react-hooks/rules-of-hooks": "warn",
+    "@next/next/no-img-element": "off",
+    "@next/next/no-sync-scripts": "warn",
+    "prefer-destructuring": "off",
+    "import/no-anonymous-default-export": "off",
+    "relay/no-future-added-value": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/app/**/*.{ts,tsx}"],
+      "excludedFiles": ["src/app/server/ssr-graphql-with-locale.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@utils/fetch",
+                "message": "Use src/app/server/ssr-graphql-with-locale for SSR GraphQL data fetching in App Router files."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

@@ -2,30 +2,24 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\Resolver\RequestLocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\FormatDateTrait;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
     use FormatDateTrait;
-    protected $siteParameters;
-    protected $toggleManager;
-    protected $entityManager;
 
     public function __construct(
-        SiteParameterResolver $siteParameters,
-        Manager $toggleManager,
-        EntityManagerInterface $entityManager
+        private readonly SiteParameterResolver $siteParameters,
+        private readonly Manager $toggleManager,
+        private readonly RequestLocaleResolver $requestLocaleResolver
     ) {
-        $this->siteParameters = $siteParameters;
-        $this->toggleManager = $toggleManager;
-        $this->entityManager = $entityManager;
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -37,11 +31,10 @@ class LocaleSubscriber implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        $inputLocale = null;
-        if ($this->toggleManager->isActive('multilangue') && $request->getLocale()) {
-            $inputLocale = $request->getLocale();
-        }
-        $request->setLocale($this->getValidLocale($inputLocale));
+        $resolvedLocale = $this->requestLocaleResolver->resolve($request);
+        $request->setLocale($resolvedLocale);
+        $request->attributes->set('_locale', $resolvedLocale);
+        $this->persistLocale($request, $resolvedLocale);
     }
 
     public static function getSubscribedEvents()
@@ -52,8 +45,19 @@ class LocaleSubscriber implements EventSubscriberInterface
         ];
     }
 
-    private function getValidLocale(?string $inputLocale): string
+    private function persistLocale(Request $request, string $locale): void
     {
-        return $this->entityManager->getRepository(Locale::class)->getValidCode($inputLocale);
+        if (!$this->toggleManager->isActive(Manager::multilangue)) {
+            return;
+        }
+
+        if (!$request->hasSession()) {
+            return;
+        }
+
+        $session = $request->getSession();
+        if ($session->get('_locale') !== $locale) {
+            $session->set('_locale', $locale);
+        }
     }
 }

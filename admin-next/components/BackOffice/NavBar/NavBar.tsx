@@ -66,6 +66,9 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
     availableLocales.find(locale =>
       localeFromCookie ? localeFromCookie === formatCodeToLocale(locale.code) : locale.isDefault,
     ) || availableLocales[0]
+  const availableLocaleCodes = availableLocales.map(locale => formatCodeToLocale(locale.code))
+  const platformLocalePrefix = formatCodeToLocale(localeSelected.code).split('-')[0].toLowerCase()
+  const platformUrl = `${getBaseUrlWithAdminNextSupport()}/${platformLocalePrefix}`
 
   const isMediator = viewer.isMediator
 
@@ -114,14 +117,16 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
                     key={locale.id}
                     onClick={() => {
                       const formattedLocale = formatCodeToLocale(locale.code)
+                      setLocaleCookie(formattedLocale, availableLocaleCodes)
                       UpdateLocaleMutation.commit({
                         input: {
                           locale: formattedLocale,
                         },
-                      }).then(() => {
-                        setLocaleCookie(formattedLocale)
-                        window.location.reload()
                       })
+                        .catch(() => null)
+                        .finally(() => {
+                          window.location.reload()
+                        })
                     }}
                     value={{
                       value: locale.id,
@@ -167,7 +172,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
               <Icon name={CapUIIcon.User} color="gray.500" />
               <Text ml={1}>{intl.formatMessage({ id: 'navbar.profile' })}</Text>
             </Menu.Item>
-            <Menu.Item onClick={() => (window.location.href = getBaseUrlWithAdminNextSupport())}>
+            <Menu.Item onClick={() => (window.location.href = platformUrl)}>
               <Icon name={CapUIIcon.Home} color="gray.500" />
               <Text ml={1}>{intl.formatMessage({ id: 'global.platform' })}</Text>
             </Menu.Item>

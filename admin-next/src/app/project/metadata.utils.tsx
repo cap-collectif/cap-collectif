@@ -1,8 +1,8 @@
 import { metadataStepQuery$data } from '@relay/metadataStepQuery.graphql'
 import { removeAccents } from '@shared/utils/removeAccents'
-import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { graphql } from 'relay-runtime'
+import { ssrGraphqlWithLocale } from '../server/ssr-graphql-with-locale'
 
 export const STEP_METADATA_QUERY = graphql`
   query metadataStepQuery($slug: String!, $projectSlug: String) {
@@ -33,7 +33,7 @@ export const getStepPageMetadata = async function ({ params }: Params): Promise<
   const slug = removeAccents(decodeURI(stepSlug))
   const projectSlug = removeAccents(decodeURI(ps))
 
-  const { siteTitle, step } = await Fetcher.ssrGraphql<metadataStepQuery$data>(STEP_METADATA_QUERY, {
+  const { siteTitle, step } = await ssrGraphqlWithLocale<metadataStepQuery$data>(STEP_METADATA_QUERY, {
     slug,
     projectSlug,
   })

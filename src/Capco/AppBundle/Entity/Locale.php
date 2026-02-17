@@ -67,6 +67,11 @@ class Locale implements EntityInterface, \Stringable
         return $this->code;
     }
 
+    public function getCodeFormatted(): string
+    {
+        return $this->code;
+    }
+
     public function isEnabled(): bool
     {
         return $this->enabled;

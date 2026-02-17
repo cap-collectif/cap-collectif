@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\PageRepository;
+use Capco\AppBundle\Router\DefaultPatternGenerationStrategy;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +36,9 @@ class LocaleController extends AbstractController
         $user = $this->getUser();
 
         $requestBody = json_decode($request->getContent(), true);
-        $routeName = $requestBody['routeName'] ?? 'app_homepage';
+        // Optional: allow clients to send the current path so we can return a locale-prefixed URL.
+        $currentPath = $requestBody['currentPath'] ?? null;
+        $routeName = $requestBody['routeName'] ?? null;
         $params = $requestBody['routeParams'] ?? [];
 
         $keptParams = $params['_route_params'] ?? [];
@@ -46,10 +49,15 @@ class LocaleController extends AbstractController
             $this->checkLocaleIsPublished($localeCode);
         }
         self::updateRequestLocale($request, $localeCode);
-        $keptParams['_locale'] = $localeCode;
-
-        $this->handlePageSlug($routeName, $keptParams);
-        $redirectPath = $this->getRedirectPath($routeName, $keptParams);
+        $redirectPath = $this->getRedirectPathFromCurrentPath($currentPath, $localeCode);
+        if (!$redirectPath) {
+            if (!$routeName) {
+                $routeName = 'app_homepage';
+            }
+            $keptParams['_locale'] = $localeCode;
+            $this->handlePageSlug($routeName, $keptParams);
+            $redirectPath = $this->getRedirectPath($routeName, $keptParams);
+        }
 
         return new JsonResponse([
             'locale' => $localeCode,
@@ -123,5 +131,62 @@ class LocaleController extends AbstractController
         }
 
         return false;
+    }
+
+    private function getRedirectPathFromCurrentPath(?string $currentPath, string $localeCode): ?string
+    {
+        if (!\is_string($currentPath) || '' === $currentPath) {
+            return null;
+        }
+
+        $parsed = parse_url($currentPath);
+        if (false === $parsed) {
+            return null;
+        }
+        $path = $parsed['path'] ?? '/';
+        if ('' === $path) {
+            $path = '/';
+        }
+        if ('/' !== $path[0]) {
+            $path = '/' . ltrim($path, '/');
+        }
+
+        $prefixes = $this->getAvailableLocalePrefixes();
+        $parts = array_values(array_filter(
+            explode('/', $path),
+            static fn (string $value): bool => '' !== $value
+        ));
+        if (isset($parts[0]) && \in_array($parts[0], $prefixes, true)) {
+            array_shift($parts);
+        }
+
+        $basePath = '/' . implode('/', $parts);
+        if ('/' === $basePath) {
+            $basePath = '';
+        }
+        $prefix = DefaultPatternGenerationStrategy::getLocalePrefix($localeCode);
+        $localizedPath = '/' . $prefix . $basePath;
+
+        if (isset($parsed['query']) && '' !== $parsed['query']) {
+            $localizedPath .= '?' . $parsed['query'];
+        }
+        if (isset($parsed['fragment']) && '' !== $parsed['fragment']) {
+            $localizedPath .= '#' . $parsed['fragment'];
+        }
+
+        return $localizedPath;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getAvailableLocalePrefixes(): array
+    {
+        $prefixes = array_map(
+            fn ($locale) => DefaultPatternGenerationStrategy::getLocalePrefix($locale->getCode()),
+            $this->localeRepository->findPublishedLocales()
+        );
+
+        return array_values(array_unique($prefixes));
     }
 }

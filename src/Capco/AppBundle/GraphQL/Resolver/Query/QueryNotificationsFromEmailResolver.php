@@ -2,13 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryNotificationsFromEmailResolver implements QueryInterface
 {
     public function __construct(
-        private readonly SiteParameterRepository $repository
+        private readonly SiteParameterRepository $repository,
+        private readonly GraphQLLocaleResolver $localeResolver
     ) {
     }
 
@@ -18,6 +20,6 @@ class QueryNotificationsFromEmailResolver implements QueryInterface
             'keyname' => 'admin.mail.notifications.send_address',
         ]);
 
-        return $siteParameter ? $siteParameter->getValue() : null;
+        return $siteParameter ? $siteParameter->getValue($this->localeResolver->resolve()) : null;
     }
 }

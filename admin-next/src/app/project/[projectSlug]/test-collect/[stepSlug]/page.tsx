@@ -1,12 +1,12 @@
 /* eslint-disable relay/unused-fields */
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { pageProjectStepMetadataQuery$data } from '@relay/pageProjectStepMetadataQuery.graphql'
 import { notFound } from 'next/navigation'
 import { removeAccents } from '@shared/utils/removeAccents'
 import VoteStep from '@components/FrontOffice/Steps/VoteStep/VoteStep'
 import ProjectShowTrash from '@components/FrontOffice/ProjectTrash/ProjectShowTrash'
+import { ssrGraphqlWithLocale } from '../../../../server/ssr-graphql-with-locale'
 
 export const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
   query pageProjectStepMetadataQuery($slug: String!, $projectSlug: String) {
@@ -50,7 +50,7 @@ export const getCollectAndSelectionStepPageMetadata = async function ({ params }
   const slug = removeAccents(decodeURI(stepSlug))
   const projectSlug = removeAccents(decodeURI(ps))
 
-  const { siteTitle, step } = await Fetcher.ssrGraphql<pageProjectStepMetadataQuery$data>(
+  const { siteTitle, step } = await ssrGraphqlWithLocale<pageProjectStepMetadataQuery$data>(
     COLLECT_SELECTION_STEP_METADATA_QUERY,
     {
       slug,
@@ -95,7 +95,7 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
   const slug = removeAccents(decodeURI(stepSlug))
   const projectSlug = removeAccents(decodeURI(ps))
 
-  const { step } = await Fetcher.ssrGraphql<pageProjectStepMetadataQuery$data>(COLLECT_SELECTION_STEP_METADATA_QUERY, {
+  const { step } = await ssrGraphqlWithLocale<pageProjectStepMetadataQuery$data>(COLLECT_SELECTION_STEP_METADATA_QUERY, {
     slug,
     projectSlug,
   })

@@ -11,10 +11,10 @@ import getViewerJsonFromRedisSession from '@utils/session-decoder'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { getTheme } from '@shared/navbar/NavBar.utils'
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
-import { formatCookiesForServer } from '@shared/utils/cookies'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { getRequestLocale } from './server/request-locale'
+import { ssrGraphqlWithLocale } from './server/ssr-graphql-with-locale'
 
 export const layoutQuery = graphql`
   query layoutQuery {
@@ -59,6 +59,7 @@ export const layoutQuery = graphql`
       isPublished
       code
       traductionKey
+      codeFormatted
     }
     shieldImage: siteImage(keyname: "image.shield") {
       media {
@@ -130,14 +131,14 @@ export default async function RootLayout({
   }
 
   const featureFlags = await getFeatureFlags()
-  const locale = cookieStore.get('locale')?.value
+  const locale = getRequestLocale()
 
   const intl: IntlType = {
-    locale: (locale as Locale) || Locale.frFR,
+    locale,
     messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
   }
 
-  const SSRData = await Fetcher.ssrGraphql<layoutQuery$data>(layoutQuery, null, formatCookiesForServer(cookieStore))
+  const SSRData = await ssrGraphqlWithLocale<layoutQuery$data>(layoutQuery, null, { locale })
 
   if (!SSRData) throw new Error('Something went wrong')
 
@@ -150,7 +151,7 @@ export default async function RootLayout({
   const captchaKey = process.env.SYMFONY_TURNSTILE_PUBLIC_KEY
 
   return (
-    <html lang={locale || 'fr'} style={{ fontSize: 14 }}>
+    <html lang={locale.split('-')[0] || 'fr'} style={{ fontSize: 14 }}>
       {favicon?.media?.url ? <link rel="icon" href={favicon?.media?.url} sizes="any" /> : null}
       <body>
         <CookiesProvider>

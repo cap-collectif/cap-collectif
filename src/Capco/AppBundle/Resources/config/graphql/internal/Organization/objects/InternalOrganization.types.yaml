@@ -61,6 +61,7 @@ InternalOrganization:
             username:
                 type: 'String!'
                 description: "The organization's public name."
+                argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getTitle(args["locale"], true)'
             isViewer:
                 type: 'Boolean!'

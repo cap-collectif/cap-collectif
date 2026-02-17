@@ -8,21 +8,25 @@ use Capco\AppBundle\Locale\PublishedLocalesDataloader;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Twig\BrowserLanguageRuntime;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\HeaderBag;
+use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @mixin BrowserLanguageRuntime
+ */
 class BrowserLanguageRuntimeSpec extends ObjectBehavior
 {
     public function let(
         Manager $manager,
         PublishedLocalesDataloader $dataloader,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
-    ) {
+    ): void {
         $this->beConstructedWith($manager, $dataloader, $defaultLocaleCodeDataloader);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(BrowserLanguageRuntime::class);
     }
@@ -31,7 +35,8 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         Request $request,
         Manager $manager,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
-    ) {
+    ): void {
+        $request->attributes = new ParameterBag();
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
         $manager->isActive(Manager::multilangue)->willReturn(false);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
@@ -39,13 +44,14 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
 
     public function it_get_browser_language_with_cookie_en_GB(
         Request $request,
-        ParameterBag $bag,
         Manager $manager,
         PublishedLocalesDataloader $dataloader
-    ) {
-        $bag->has('locale')->willReturn(true);
-        $bag->get('locale')->willReturn('en-GB');
-        $request->cookies = $bag;
+    ): void {
+        $request->attributes = new ParameterBag();
+        $request->get('_locale')->willReturn(null);
+        $request->getPathInfo()->willReturn(null);
+        $request->getLocale()->willReturn('ja-JP');
+        $request->cookies = new InputBag(['locale' => 'en-GB']);
         $availableLocales = [
             new Locale('fr-FR', 'french'),
             new Locale('en-GB', 'english'),
@@ -57,14 +63,38 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         $this->getBrowserLanguage($request)->shouldReturn('en-GB');
     }
 
+    public function it_get_browser_language_prioritizes_cookie_over_request_locale(
+        Request $request,
+        Manager $manager,
+        PublishedLocalesDataloader $dataloader
+    ): void {
+        $request->attributes = new ParameterBag();
+        $request->get('_locale')->willReturn(null);
+        $request->getPathInfo()->willReturn(null);
+        $request->getLocale()->willReturn('en-GB');
+        $request->cookies = new InputBag(['locale' => 'fr-FR']);
+        $dataloader
+            ->__invoke(null)
+            ->willReturn([
+                new Locale('fr-FR', 'french'),
+                new Locale('en-GB', 'english'),
+            ])
+        ;
+        $manager->isActive(Manager::multilangue)->willReturn(true);
+
+        $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
+    }
+
     public function it_get_browser_language_without_cookie(
         Request $request,
         Manager $manager,
         PublishedLocalesDataloader $dataloader,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
-        ParameterBag $bag,
         HeaderBag $headerBag
-    ) {
+    ): void {
+        $request->attributes = new ParameterBag();
+        $request->get('_locale')->willReturn(null);
+        $request->getPathInfo()->willReturn(null);
         $availableLocales = [
             new Locale('fr-FR', 'french'),
             new Locale('en-GB', 'english'),
@@ -75,9 +105,9 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         $dataloader->__invoke(null)->willReturn($availableLocales);
         $manager->isActive(Manager::multilangue)->willReturn(true);
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
+        $request->getLocale()->willReturn('ja-JP');
 
-        $bag->has('locale')->willReturn(false);
-        $request->cookies = $bag;
+        $request->cookies = new InputBag();
         $headerBag->set(
             'Accept-Language',
             'fr-FR,fr;q=0.9,ja;q=0.8,en-US;q=0.7,en;q=0.6,ja-JP;q=0.5,nl;q=0.4'
@@ -92,9 +122,11 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         Manager $manager,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
         PublishedLocalesDataloader $dataloader,
-        ParameterBag $bag,
         HeaderBag $headerBag
-    ) {
+    ): void {
+        $request->attributes = new ParameterBag();
+        $request->get('_locale')->willReturn(null);
+        $request->getPathInfo()->willReturn(null);
         $availableLocales = [
             new Locale('fr-FR', 'french'),
             new Locale('en-GB', 'english'),
@@ -103,10 +135,11 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         ];
 
         $dataloader->__invoke(null)->willReturn($availableLocales);
-        $bag->has('locale')->willReturn(true);
-        // This locale unfortunately does not yet exist.
-        $bag->get('locale')->willReturn('jp-EC');
-        $request->cookies = $bag;
+        $request->getLocale()->willReturn('ja-JP');
+        $request->cookies = new InputBag([
+            // This locale unfortunately does not yet exist.
+            'locale' => 'jp-EC',
+        ]);
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
         $headerBag->set(
             'Accept-Language',
@@ -123,9 +156,11 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
         Manager $manager,
         PublishedLocalesDataloader $dataloader,
-        ParameterBag $bag,
         HeaderBag $headerBag
-    ) {
+    ): void {
+        $request->attributes = new ParameterBag();
+        $request->get('_locale')->willReturn(null);
+        $request->getPathInfo()->willReturn(null);
         $dataloader
             ->__invoke(null)
             ->willReturn([
@@ -135,10 +170,11 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
                 new Locale('de-DE', 'deutsch'),
             ])
         ;
-        $bag->has('locale')->willReturn(true);
-        // This locale does exist but is not currently published in our platform
-        $bag->get('locale')->willReturn('ja-JP');
-        $request->cookies = $bag;
+        $request->getLocale()->willReturn('ja-JP');
+        $request->cookies = new InputBag([
+            // This locale does exist but is not currently published in our platform
+            'locale' => 'ja-JP',
+        ]);
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
         $headerBag->set(
             'Accept-Language',

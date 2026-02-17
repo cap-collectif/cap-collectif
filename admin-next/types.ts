@@ -45,7 +45,7 @@ export type FeatureFlags = Omit<
 export type IntlType = {
   locale: Locale
   messages: {
-    [key: string]: string
+    [key: string]: string | { one: string; other: string }
   }
 }
 

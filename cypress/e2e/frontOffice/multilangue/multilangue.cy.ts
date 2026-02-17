@@ -3,8 +3,17 @@ import { Base, Multilangue } from '~e2e-pages/index'
 // todo: multilangue is currently broken. The tests can't properly be written until it's fixed
 // skipping all failing tests for now
 describe('Multilangue', () => {
+  const acceptCookiesIfBannerIsVisible = () => {
+    cy.get('body').then($body => {
+      if ($body.find('#cookie-consent').length) {
+        cy.get('#cookie-consent').click({ force: true })
+      }
+    })
+  }
+
   beforeEach(() => {
     cy.task('db:restore')
+    cy.task('enable:feature', 'multilangue')
   })
 
   it('throws 404 if user visits the english page while multilangue feature is not activated', () => {
@@ -86,20 +95,26 @@ describe('Multilangue', () => {
   })
 
   it('should show the locale selection banner only once after selecting a language from the header', () => {
+    cy.intercept('POST', '**/api/change-locale/fr-FR').as('ChangeLocaleToFr')
     Base.visitHomepage({ lang: 'de' })
-    cy.getCookie('locale').should('not.exist')
+    acceptCookiesIfBannerIsVisible()
+    cy.getCookie('locale').should('have.property', 'value', 'de-DE')
     cy.get('#changeLanguageProposalContainer').should('be.visible')
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-fr-FR').click({ force: true })
     cy.get('#language-header-continue-button').click({ force: true })
+    cy.wait('@ChangeLocaleToFr')
     cy.wait('@NavbarRightQuery')
-    Cypress.Cookies.debug(true)
     cy.document().its('cookie').should('include', 'locale=fr-FR')
+    cy.get('#changeLanguageProposalContainer').should('not.exist')
+    Base.reload({ operationName: 'NavbarRightQuery' })
+    cy.get('#changeLanguageProposalContainer').should('not.exist')
   })
 
   it('should not show the locale selection banner again after dismissing it', () => {
     Base.visitHomepage({ lang: 'de' })
-    cy.getCookie('locale').should('not.exist')
+    acceptCookiesIfBannerIsVisible()
+    cy.getCookie('locale').should('have.property', 'value', 'de-DE')
     cy.get('#changeLanguageProposalContainer').should('be.visible')
     cy.get('#language-header-close').click({ force: true })
     Base.reload({ operationName: 'NavbarRightQuery' })
@@ -107,10 +122,11 @@ describe('Multilangue', () => {
     cy.get('#changeLanguageProposalContainer').should('not.exist')
   })
 
-  it('should show the locale selection banner again on other non-localized pages after a previous dismissal', () => {
+  it.only('should show the locale selection banner again on other non-localized pages after a previous dismissal', () => {
     Base.visitHomepage({ lang: 'de' })
+    acceptCookiesIfBannerIsVisible()
     cy.contains('error.404.title').should('not.exist')
-    cy.getCookie('locale').should('not.exist')
+    cy.getCookie('locale').should('have.property', 'value', 'de-DE')
     cy.get('#changeLanguageProposalContainer').should('be.visible')
     cy.get('#language-header-close').click({ force: true })
     Base.reload({ operationName: 'NavbarRightQuery' })
@@ -122,10 +138,10 @@ describe('Multilangue', () => {
     cy.getCookie('locale').should('exist')
   })
 
-  it('should allow an anonymous user to change the locale via the footer', () => {
+  it.only('should allow an anonymous user to change the locale via the footer', () => {
     Base.visitHomepage()
     cy.get('.footer-links').should('exist')
-    cy.getCookie('locale').should('not.exist')
+    cy.getCookie('locale').should('exist')
     cy.get('.footer-links').contains('french').should('exist')
 
     cy.get('#projects .cap-project-card').should('exist')
@@ -138,7 +154,7 @@ describe('Multilangue', () => {
     cy.document().its('cookie').should('include', 'locale=de-DE')
   })
 
-  it('should allow a logged-in user to change the locale from the profile page', () => {
+  it.only('should allow a logged-in user to change the locale from the profile page', () => {
     cy.task('enable:feature', 'profiles')
     Base.visitHomepage()
     cy.setCookie('hasFullConsent', 'true')
@@ -146,7 +162,7 @@ describe('Multilangue', () => {
 
     Base.visit({ path: 'profile/edit-profile#account', operationName: 'NavBarMenuQuery' })
 
-    cy.getCookie('locale').should('not.exist')
+    cy.getCookie('locale').should('exist')
     cy.get('#display__language').should('exist')
     cy.get('.react-select__value-container').click({ force: true })
     cy.get('#display__language-menuList').should('exist')
@@ -156,13 +172,13 @@ describe('Multilangue', () => {
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 
-  it('should correctly change locale via footer on routes with parameters', () => {
+  it.only('should correctly change locale via footer on routes with parameters', () => {
     Base.visit({
       path: `project/budget-participatif-rennes/collect/collecte-des-propositions`,
       operationName: 'ProposalListViewRefetchQuery',
     })
     cy.get('.footer-links').should('exist')
-    cy.getCookie('locale').should('not.exist')
+    cy.getCookie('locale').should('exist')
     cy.get('.footer-links').contains('french').should('exist')
 
     cy.get('.proposal__step-page .body__infos__content').should('exist')

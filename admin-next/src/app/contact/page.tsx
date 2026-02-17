@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { pageContactMetadataQuery$data } from '@relay/pageContactMetadataQuery.graphql'
 import { pageContactContentQuery$data } from '@relay/pageContactContentQuery.graphql'
+import { ssrGraphqlWithLocale } from '../server/ssr-graphql-with-locale'
 import Contact from './Contact'
 
 const METADATA_QUERY = graphql`
@@ -25,7 +25,7 @@ const METADATA_QUERY = graphql`
 `
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, metaDescription, media, contactPageTitle } = await Fetcher.ssrGraphql<pageContactMetadataQuery$data>(
+  const { title, metaDescription, media, contactPageTitle } = await ssrGraphqlWithLocale<pageContactMetadataQuery$data>(
     METADATA_QUERY,
     {},
   )
@@ -66,7 +66,7 @@ const QUERY = graphql`
 `
 
 export default async function Page() {
-  const data = await Fetcher.ssrGraphql<pageContactContentQuery$data>(QUERY, {})
+  const data = await ssrGraphqlWithLocale<pageContactContentQuery$data>(QUERY, {})
 
   return (
     <>

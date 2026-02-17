@@ -1,10 +1,10 @@
 import { graphql } from 'relay-runtime'
 import Organization from './Organization'
-import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
 import { notFound } from 'next/navigation'
 import { removeAccents } from '@shared/utils/removeAccents'
+import { ssrGraphqlWithLocale } from '../../../server/ssr-graphql-with-locale'
 
 const METADATA_QUERY = graphql`
   query pageOrganizationMetadataQuery($organizationSlug: String!) {
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   const slug = removeAccents(decodeURI(initialSlug))
 
-  const { organization, title: siteTitle } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(
+  const { organization, title: siteTitle } = await ssrGraphqlWithLocale<pageOrganizationMetadataQuery$data>(
     METADATA_QUERY,
     {
       organizationSlug: slug,
@@ -74,7 +74,7 @@ export default async function Page({ params }: Params) {
 
   const slug = removeAccents(decodeURI(initialSlug))
 
-  const { organization } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(METADATA_QUERY, {
+  const { organization } = await ssrGraphqlWithLocale<pageOrganizationMetadataQuery$data>(METADATA_QUERY, {
     organizationSlug: slug,
   })
 

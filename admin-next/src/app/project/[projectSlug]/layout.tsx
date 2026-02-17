@@ -1,11 +1,11 @@
 /* eslint-disable relay/must-colocate-fragment-spreads */
 /* eslint-disable relay/unused-fields */
 import { graphql } from 'relay-runtime'
-import Fetcher from '@utils/fetch'
 import { layoutProjectQuery$data } from '@relay/layoutProjectQuery.graphql'
 import { removeAccents } from '@shared/utils/removeAccents'
 import ProjectHeader from '@components/FrontOffice/ProjectHeader/ProjectHeader'
 import { notFound } from 'next/navigation'
+import { ssrGraphqlWithLocale } from '../../server/ssr-graphql-with-locale'
 
 export const layoutQuery = graphql`
   query layoutProjectQuery($projectSlug: String!) {
@@ -65,7 +65,7 @@ export default async function ProjectLayout({
   const { projectSlug } = await params
 
   const slug = removeAccents(decodeURI(projectSlug))
-  const data = await Fetcher.ssrGraphql<layoutProjectQuery$data>(layoutQuery, {
+  const data = await ssrGraphqlWithLocale<layoutProjectQuery$data>(layoutQuery, {
     projectSlug: slug,
   })
 
