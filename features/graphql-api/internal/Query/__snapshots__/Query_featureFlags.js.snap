@@ -37,9 +37,6 @@ Object {
       "type": "graphql_introspection",
     },
     Object {
-      "type": "votes_min",
-    },
-    Object {
       "type": "login_facebook",
     },
     Object {
@@ -49,7 +46,7 @@ Object {
       "type": "login_cas",
     },
     Object {
-      "type": "login_openid",
+      "type": "votes_min",
     },
     Object {
       "type": "privacy_policy",
@@ -80,12 +77,6 @@ Object {
     },
     Object {
       "type": "registration",
-    },
-    Object {
-      "type": "phone_confirmation",
-    },
-    Object {
-      "type": "reporting",
     },
     Object {
       "type": "restrict_registration_via_email_domain",
@@ -160,6 +151,12 @@ Object {
       "type": "sentry_log",
     },
     Object {
+      "type": "login_openid",
+    },
+    Object {
+      "type": "versions",
+    },
+    Object {
       "type": "multilangue",
     },
     Object {
@@ -167,6 +164,12 @@ Object {
     },
     Object {
       "type": "report_browers_errors_to_sentry",
+    },
+    Object {
+      "type": "phone_confirmation",
+    },
+    Object {
+      "type": "reporting",
     },
     Object {
       "type": "emailing",

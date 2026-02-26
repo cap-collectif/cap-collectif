@@ -18,11 +18,6 @@
                         "description": "description.module.profiles",
                         "onlySuperAdmin": false
                     },
-                    "noindex_on_profiles": {
-                        "title": "capco.module.noindex_on_profiles",
-                        "description": "description.module.noindex_on_profiles",
-                        "onlySuperAdmin": true
-                    },
                     "export_legacy_users": {
                         "title": "capco.module.export_legacy_users",
                         "description": "",
@@ -134,11 +129,6 @@
                         "description": "description.module.pictures_proposals",
                         "onlySuperAdmin": false
                     },
-                    "display_pictures_in_event_list": {
-                        "title": "capco.module.pictures_events",
-                        "description": "description.module.pictures_events",
-                        "onlySuperAdmin": false
-                    },
                     "display_map": {
                         "title": "capco.module.display_map",
                         "description": "description.module.display_map",
@@ -153,33 +143,6 @@
                         "title": "capco.module.search",
                         "description": "description.module.search",
                         "onlySuperAdmin": true
-                    },
-                    "http_redirects": {
-                        "title": "capco.module.http_redirects",
-                        "description": "description.module.http_redirects",
-                        "onlySuperAdmin": true
-                    }
-                }
-            },
-            {
-                "title": "admin.group.content",
-                "description": "description.group.content",
-                "onlySuperAdmin": false,
-                "items": {
-                    "blog": {
-                        "title": "capco.module.blog",
-                        "description": "description.module.blog",
-                        "onlySuperAdmin": false
-                    },
-                    "calendar": {
-                        "title": "capco.module.calendar",
-                        "description": "description.module.calendar",
-                        "onlySuperAdmin": false
-                    },
-                    "themes": {
-                        "title": "capco.module.themes",
-                        "description": "description.module.themes",
-                        "onlySuperAdmin": false
                     }
                 }
             }
@@ -194,78 +157,9 @@
                 "description": "description.group.collect-step",
                 "onlySuperAdmin": false,
                 "items": {
-                    "districts": {
-                        "title": "global.district",
-                        "description": "description.module.district",
-                        "onlySuperAdmin": false
-                    },
-                    "votes_min": {
-                        "title": "capco.module.vote_min",
-                        "description": "description.module.vote_min",
-                        "onlySuperAdmin": false
-                    },
                     "mediator": {
                         "title": "global.mediator",
                         "description": "description.module.mediator",
-                        "onlySuperAdmin": false
-                    }
-                }
-            },
-            {
-                "title": "global.questionnaire",
-                "description": "description.group.questionnaire",
-                "onlySuperAdmin": true,
-                "items": {
-                    "questionnaire_result": {
-                        "title": "capco.module.questionnaire_result",
-                        "description": "description.module.questionnaire_result",
-                        "onlySuperAdmin": false
-                    }
-                }
-            },
-            {
-                "title": "global.consultation",
-                "description": "description.group.consultation",
-                "onlySuperAdmin": false,
-                "items": {
-                    "consultation_plan": {
-                        "title": "capco.module.consultation_plan",
-                        "description": "description.module.consultation_plan",
-                        "onlySuperAdmin": false
-                    },
-                    "versions": {
-                        "title": "capco.module.versions",
-                        "description": "description.module.versions",
-                        "onlySuperAdmin": false
-                    },
-                    "multi_consultations": {
-                        "title": "capco.module.multi_consultation",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    }
-                }
-            },
-            {
-                "title": "global.external_services",
-                "description": "description.group.external-services",
-                "onlySuperAdmin": true,
-                "items": {
-                    "twilio": {
-                        "title": "capco.module.twilio",
-                        "description": "description.module.twilio",
-                        "onlySuperAdmin": false
-                    }
-                }
-            },
-            {
-                "title": "capco.module.emailing",
-                "description": "emailing-tool-description",
-                "onlySuperAdmin": false,
-                "featuresRequired": ["emailing"],
-                "items": {
-                    "emailing_group": {
-                        "title": "admin.label.group",
-                        "description": "emailing-group-description",
                         "onlySuperAdmin": false
                     }
                 }
@@ -310,23 +204,8 @@
                 "description": "description.group.developer",
                 "onlySuperAdmin": true,
                 "items": {
-                    "sentry_log": {
-                        "title": "capco.module.sentry_log",
-                        "description": "description.module.sentry_log",
-                        "onlySuperAdmin": false
-                    },
-                    "report_browers_errors_to_sentry": {
-                        "title": "capco.module.report_browers_errors_to_sentry",
-                        "description": "description.module.report_browers_errors_to_sentry",
-                        "onlySuperAdmin": false
-                    },
                     "analytics_page": {
                         "title": "capco.module.analytics_page",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
-                    "emailing": {
-                        "title": "capco.module.emailing",
                         "description": "",
                         "onlySuperAdmin": false
                     },
@@ -335,28 +214,8 @@
                         "description": "description.module.mailjet_sandbox",
                         "onlySuperAdmin": true
                     },
-                    "emailing_parameters": {
-                        "title": "capco.module.emailing_parameters",
-                        "description": "description.module.emailing_parameters",
-                        "onlySuperAdmin": false
-                    },
                     "project_admin": {
                         "title": "capco.module.project_admin",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
-                    "import_proposals": {
-                        "title": "capco.module.import_proposals",
-                        "description": "description.module.import_proposals",
-                        "onlySuperAdmin": false
-                    },
-                    "proposal_revisions": {
-                        "title": "capco.module.proposal_revisions",
-                        "description": "description.module.proposal_revisions",
-                        "onlySuperAdmin": false
-                    },
-                    "paper_vote": {
-                        "title": "capco.module.paper_vote",
                         "description": "",
                         "onlySuperAdmin": false
                     },
