@@ -12,6 +12,7 @@ export type FormValues = {
   accessTokenUrl: string
   userInfoUrl: string
   logoutUrl: string | null
+  postLogoutRedirectUri: string | null
   clientId: string
   secret: string
   profileUrl: string | null
@@ -86,6 +87,28 @@ const FormConfiguration: FC = () => {
         <FieldInput
           id="logoutUrl"
           name="logoutUrl"
+          control={control}
+          type="text"
+          rules={{
+            pattern: {
+              value: REGEX_URL,
+              message: intl.formatMessage({ id: 'source.constraints.link' }),
+            },
+          }}
+        />
+      </FormControl>
+
+      <FormControl name="postLogoutRedirectUri" control={control}>
+        <FormLabel
+          htmlFor="postLogoutRedirectUri"
+          label={intl.formatMessage({
+            id: 'admin.authentication.post-logout-redirect-uri',
+            defaultMessage: 'Post logout redirect URI',
+          })}
+        />
+        <FieldInput
+          id="postLogoutRedirectUri"
+          name="postLogoutRedirectUri"
           control={control}
           type="text"
           rules={{

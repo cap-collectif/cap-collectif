@@ -11,6 +11,6 @@ class OccitanieReferrerResolver implements ReferrerInterface
 
     public function getRefererForLogout(): string
     {
-        return 'redirect_uri';
+        return 'post_logout_redirect_uri';
     }
 }

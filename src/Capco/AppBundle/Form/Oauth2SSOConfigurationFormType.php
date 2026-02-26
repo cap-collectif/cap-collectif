@@ -27,6 +27,7 @@ class Oauth2SSOConfigurationFormType extends AbstractType
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
             ->add('profileUrl', UrlType::class)
             ->add('logoutUrl', UrlType::class)
+            ->add('postLogoutRedirectUri', UrlType::class)
         ;
     }
 

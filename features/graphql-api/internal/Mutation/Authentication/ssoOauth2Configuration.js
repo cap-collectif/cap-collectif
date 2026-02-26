@@ -14,6 +14,7 @@ const CreateOauth2SSOConfiguration = /* GraphQL */ `
         accessTokenUrl
         userInfoUrl
         logoutUrl
+        postLogoutRedirectUri
         redirectUri
       }
     }
@@ -33,6 +34,7 @@ const UpdateOauth2SSOConfiguration = /* GraphQL */ `
         accessTokenUrl
         userInfoUrl
         logoutUrl
+        postLogoutRedirectUri
         redirectUri
       }
     }
@@ -66,6 +68,7 @@ describe('Internal|SSO|Oauth2', () => {
           accessTokenUrl: 'https://test.dev/token',
           userInfoUrl: 'https://test.dev/userinfo',
           logoutUrl: 'https://test.dev/logout',
+          postLogoutRedirectUri: 'https://test.dev/post-logout',
           profileUrl: 'https://test.dev/account',
         },
       },
@@ -96,6 +99,7 @@ describe('Internal|SSO|Oauth2', () => {
           accessTokenUrl: 'https://test.dev/token',
           userInfoUrl: 'https://test.dev/userinfo',
           logoutUrl: 'https://test.dev/logout',
+          postLogoutRedirectUri: 'https://test.dev/post-logout',
           profileUrl: 'https://test.dev/account',
         },
       },
@@ -137,6 +141,7 @@ describe('Internal|SSO|Oauth2', () => {
             accessTokenUrl: 'INSERT_A_REAL_SECRET',
             userInfoUrl: 'INSERT_A_REAL_SECRET',
             logoutUrl: 'INSERT_A_REAL_SECRET',
+            postLogoutRedirectUri: 'INSERT_A_REAL_SECRET',
             profileUrl: 'INSERT_A_REAL_SECRET',
           },
         },
@@ -166,6 +171,7 @@ describe('Internal|SSO|Oauth2', () => {
             accessTokenUrl: 'https://test.dev/token',
             userInfoUrl: 'https://test.dev/userinfo',
             logoutUrl: 'https://test.dev/logout',
+            postLogoutRedirectUri: 'https://test.dev/post-logout',
             profileUrl: 'https://test.dev/account',
           },
         },
@@ -190,6 +196,7 @@ describe('Internal|SSO|Oauth2', () => {
             accessTokenUrl: 'INSERT_A_REAL_SECRET',
             userInfoUrl: 'INSERT_A_REAL_SECRET',
             logoutUrl: 'INSERT_A_REAL_SECRET',
+            postLogoutRedirectUri: 'INSERT_A_REAL_SECRET',
             profileUrl: 'INSERT_A_REAL_SECRET',
           },
         },

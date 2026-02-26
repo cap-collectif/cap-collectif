@@ -24,6 +24,7 @@ const FRAGMENT = graphql`
     enabled
     clientId
     logoutUrl
+    postLogoutRedirectUri
     profileUrl
     userInfoUrl
     accessTokenUrl
@@ -47,6 +48,7 @@ const onSubmit = (
     enabled: isEditing ? ssoEnabled : true,
     clientId: data.clientId,
     logoutUrl: data.logoutUrl,
+    postLogoutRedirectUri: data.postLogoutRedirectUri,
     profileUrl: data.profileUrl,
     userInfoUrl: data.userInfoUrl,
     accessTokenUrl: data.accessTokenUrl,
@@ -87,6 +89,7 @@ const ModalOpenIDConfiguration: FC<ModalOpenIDConfigurationProps> = ({
           enabled: ssoConfiguration.enabled,
           clientId: ssoConfiguration.clientId,
           logoutUrl: ssoConfiguration.logoutUrl,
+          postLogoutRedirectUri: ssoConfiguration.postLogoutRedirectUri,
           profileUrl: ssoConfiguration.profileUrl,
           userInfoUrl: ssoConfiguration.userInfoUrl,
           accessTokenUrl: ssoConfiguration.accessTokenUrl,

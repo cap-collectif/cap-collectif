@@ -15,6 +15,7 @@ const InternalQuery = /* GraphQL */ `
             accessTokenUrl
             userInfoUrl
             logoutUrl
+            postLogoutRedirectUri
             redirectUri
           }
           ... on FranceConnectSSOConfiguration {
@@ -74,11 +75,13 @@ describe('Internal|Query.ssoConfigurations', () => {
             node: {
               clientId: expect.any(String),
               secret: expect.any(String),
+              enabled: expect.any(Boolean),
               authorizationUrl: expect.any(String),
               accessTokenUrl: expect.any(String),
               userInfoUrl: expect.any(String),
               redirectUri: expect.any(String),
               logoutUrl: expect.any(String),
+              postLogoutRedirectUri: null,
               name: 'Oauth2',
             },
           },

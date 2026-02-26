@@ -42,6 +42,11 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
      */
     protected $logoutUrl;
 
+    /**
+     * @ORM\Column(name="post_logout_redirect_uri", type="text", nullable=true)
+     */
+    protected ?string $postLogoutRedirectUri = null;
+
     public function __construct()
     {
         $this->ssoType = SSOType::OAUTH2;
@@ -122,5 +127,17 @@ class Oauth2SSOConfiguration extends AbstractSSOConfiguration
     public function getSsoType(): string
     {
         return SSOType::OAUTH2;
+    }
+
+    public function getPostLogoutRedirectUri(): ?string
+    {
+        return $this->postLogoutRedirectUri;
+    }
+
+    public function setPostLogoutRedirectUri(?string $postLogoutRedirectUri = null): self
+    {
+        $this->postLogoutRedirectUri = $postLogoutRedirectUri;
+
+        return $this;
     }
 }

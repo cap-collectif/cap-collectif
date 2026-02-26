@@ -4029,6 +4029,9 @@ input CreateOauth2SSOConfigurationInput {
   """Logout URL."""
   logoutUrl: URI
 
+  """Post logout redirect URI."""
+  postLogoutRedirectUri: URI
+
   """Profile URL on the SSO side."""
   profileUrl: URI
 
@@ -9675,6 +9678,9 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   """Logout URL."""
   logoutUrl: URI
+
+  """Post logout redirect URI."""
+  postLogoutRedirectUri: URI
 
   """Redirect URI callback."""
   redirectUri: URI!
@@ -19645,6 +19651,9 @@ input UpdateOauth2SSOConfigurationInput {
 
   """Logout URL."""
   logoutUrl: URI
+
+  """Post logout redirect URI."""
+  postLogoutRedirectUri: URI
 
   """Profile URL on the SSO side."""
   profileUrl: URI

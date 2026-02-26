@@ -2,8 +2,8 @@
 
 namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
-use Capco\Capco\UserBundle\OpenID\ReferrerResolver\KeycloakReferrerResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,16 +29,16 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequestInterface $responseWithRequest
     ): RedirectResponseWithRequestInterface {
         $token = $this->tokenStorage->getToken();
-        $user = $this->tokenStorage->getToken()->getUser();
+        $user = $token?->getUser();
         $sessionId = $responseWithRequest
             ->getRequest()
             ->getSession()
             ->getId()
         ;
-        if ($token && $token instanceof OAuthToken && 'openid' === $token->getResourceOwnerName()) {
-            $oauth2 = $this->repository->findASsoByType('oauth2');
+        if ($token instanceof OAuthToken && 'openid' === $token->getResourceOwnerName()) {
+            $oauth2 = $this->repository->findOneByType('oauth2', true);
 
-            if ($oauth2 && $oauth2->isDisconnectSsoOnLogout()) {
+            if ($oauth2 instanceof Oauth2SSOConfiguration && $oauth2->isDisconnectSsoOnLogout()) {
                 $logoutURL = $this->resourceOwner->getOption('logout_url');
                 $homepageUrl = $this->router->generate(
                     'app_homepage',
@@ -51,8 +51,9 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                         $this->refererResolver->getRefererParameterForLogout() => $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
                     ];
                 } else {
+                    $postLogoutRedirectUri = $oauth2->getPostLogoutRedirectUri() ?: $homepageUrl;
                     $parameters = [
-                        $this->refererResolver->getRefererParameterForLogout() => $homepageUrl,
+                        $this->refererResolver->getRefererParameterForLogout() => $postLogoutRedirectUri,
                     ];
                     if ($user instanceof User && $sessionId) {
                         $user->removeOpenIdSessionFromUserSession($sessionId);
@@ -60,15 +61,20 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                     }
                 }
 
-                if ($this->refererResolver->getRefererResolver() instanceof KeycloakReferrerResolver) {
-                    $parameters['id_token_hint'] = $token->getRawToken()['id_token'];
-                }
+                $parameters['client_id'] = $oauth2->getClientId();
 
-                $responseWithRequest->setResponse(
-                    new RedirectResponse(
-                        $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
-                    )
+                $session = $responseWithRequest->getRequest()->getSession();
+                $sessionName = $session->getName();
+                $session->remove('theToken');
+                $session->invalidate();
+
+                $response = new RedirectResponse(
+                    $logoutURL . '?' . http_build_query($parameters, '', '&') ?? '/'
                 );
+                $response->headers->clearCookie($sessionName, '/');
+                $response->headers->clearCookie('REMEMBERME', '/');
+
+                $responseWithRequest->setResponse($response);
             }
         }
 

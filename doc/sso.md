@@ -13,6 +13,12 @@ OpenID
 ---
 <!-- you need to install mermaid on your IDE -->
 
+Configuration de logout (OpenID):
+- `logoutUrl` reste l'URL de déconnexion du provider.
+- `postLogoutRedirectUri` est maintenant configurable en backoffice (champ optionnel).
+- Si `postLogoutRedirectUri` est vide, fallback automatique sur la homepage.
+- En mode switch-user (`/logout?ssoSwitchUser=true`), le comportement existant est conservé.
+
 Au clique sur le bouton se connecter
 ```mermaid
 

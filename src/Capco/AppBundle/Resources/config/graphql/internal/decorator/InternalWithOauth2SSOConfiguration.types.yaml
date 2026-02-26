@@ -20,6 +20,9 @@ InternalWithOauth2SSOConfiguration:
             logoutUrl:
                 type: 'URI'
                 description: 'Logout URL.'
+            postLogoutRedirectUri:
+                type: 'URI'
+                description: 'Post logout redirect URI.'
             profileUrl:
                 type: 'URI'
                 description: 'Profile URL on the SSO side.'

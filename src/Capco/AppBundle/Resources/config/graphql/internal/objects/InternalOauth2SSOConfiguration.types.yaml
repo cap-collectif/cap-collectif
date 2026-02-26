@@ -38,6 +38,9 @@ InternalOauth2SSOConfiguration:
             logoutUrl:
                 type: 'URI'
                 description: 'Logout URL.'
+            postLogoutRedirectUri:
+                type: 'URI'
+                description: 'Post logout redirect URI.'
             redirectUri:
                 type: 'URI!'
                 description: 'Redirect URI callback.'
