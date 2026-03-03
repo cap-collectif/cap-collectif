@@ -24,9 +24,11 @@ const SideBar: FC<SideBarProps> = () => {
   const { viewerSession, appVersion } = useAppContext()
   const { fold } = useSideBarContext()
   const intl = useIntl()
-  const localePrefix = intl.locale.split(/[-_]/)[0].toLowerCase()
-  const platformUrl = `${getBaseUrlWithAdminNextSupport()}/${localePrefix}`
   const allFeatureFlags = useAllFeatureFlags()
+  const localePrefix = intl.locale.split(/[-_]/)[0].toLowerCase()
+  const platformUrl = allFeatureFlags.multilangue
+    ? `${getBaseUrlWithAdminNextSupport()}/${localePrefix}`
+    : getBaseUrlWithAdminNextSupport()
   const { isAdmin, isSuperAdmin, isAdminOrganization, organization, isOrganizationMember } = viewerSession
 
   const sideBarItemsFiltered = useMemo(

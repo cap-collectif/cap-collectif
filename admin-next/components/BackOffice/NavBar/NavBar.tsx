@@ -76,7 +76,9 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
     ) || availableLocales[0]
   const availableLocaleCodes = availableLocales.map(locale => formatCodeToLocale(locale.code))
   const platformLocalePrefix = formatCodeToLocale(localeSelected.code).split('-')[0].toLowerCase()
-  const platformUrl = `${getBaseUrlWithAdminNextSupport()}/${platformLocalePrefix}`
+  const platformUrl = hasMultilangue
+    ? `${getBaseUrlWithAdminNextSupport()}/${platformLocalePrefix}`
+    : getBaseUrlWithAdminNextSupport()
 
   const isMediator = viewer.isMediator
 
