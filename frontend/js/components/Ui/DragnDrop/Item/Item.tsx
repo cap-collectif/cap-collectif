@@ -65,13 +65,29 @@ const Item = ({
       )
     }
 
-    // If combine is enabled, also make this item a drop target
     if (isCombineEnabled || isCombineOnly) {
+      // Combine mode: drop target with draggableId triggers combine logic in Context
       cleanups.push(
         dropTargetForElements({
           element,
           getData: () => ({
             draggableId: id,
+            droppableId,
+            index: position,
+          }),
+          canDrop: ({ source }) => {
+            // Don't allow dropping on itself
+            const sourceData = source.data as { draggableId: string }
+            return sourceData.draggableId !== id
+          },
+        }),
+      )
+    } else {
+      // Reorder mode: drop target without draggableId so Context computes destination by index
+      cleanups.push(
+        dropTargetForElements({
+          element,
+          getData: () => ({
             droppableId,
             index: position,
           }),
