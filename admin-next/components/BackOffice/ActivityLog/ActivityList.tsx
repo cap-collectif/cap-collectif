@@ -5,7 +5,7 @@ import { useLayoutContext } from '@components/BackOffice/Layout/Layout.context'
 import EmptyMessage from './EmptyMessage'
 import { graphql, usePaginationFragment } from 'react-relay'
 import type { ActivityList_query$key } from '@relay/ActivityList_query.graphql'
-import { CONNECTION_NODES_PER_PAGE, getLogActionType, userRoleFilterItems } from './utils'
+import { CONNECTION_NODES_PER_PAGE, getLogActionType, userRoleFilterItems, actionMenuFilterItems } from './utils'
 import { LogActionType, AppLogOrder, AppLogUserRole } from '@relay/ActivityLogPageQuery.graphql'
 
 const FRAGMENT = graphql`
@@ -159,9 +159,9 @@ export const ActivityList: React.FC<Props> = ({
                 value={actionType}
                 onChange={setActionType}
                 type="radio"
-                title={intl.formatMessage({ id: 'action_show' })}
+                title={intl.formatMessage({ id: 'filter-by' })}
               >
-                {filteredItems.map(option => (
+                {actionMenuFilterItems.map(option => (
                   <Table.Menu.OptionItem key={option.value} value={option.value}>
                     {intl.formatMessage({ id: option.label })}
                   </Table.Menu.OptionItem>
