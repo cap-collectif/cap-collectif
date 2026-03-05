@@ -21,6 +21,10 @@ class AuthCacheSubscriber implements EventSubscriberInterface
 
     public function onKernelResponse(ResponseEvent $event): void
     {
+        if ('projet.lesecologistes.fr' !== $event->getRequest()->getHost()) {
+            return;
+        }
+
         $token = $this->tokenStorage->getToken();
 
         $isAuthenticated =
