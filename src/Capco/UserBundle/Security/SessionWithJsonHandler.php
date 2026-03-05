@@ -65,39 +65,39 @@ class SessionWithJsonHandler extends RedisSessionHandler
 
         $this->acquireLock($sessionId);
 
-        $encodedData = $this->encode($data, $viewer);
-        $result = parent::write($sessionId, $encodedData);
+        try {
+            $encodedData = $this->encode($data, $viewer);
 
-        $this->releaseLock($sessionId);
-
-        return $result;
+            return parent::write($sessionId, $encodedData);
+        } finally {
+            $this->releaseLock($sessionId);
+        }
     }
 
     public function read($sessionId): string
     {
         $this->acquireLock($sessionId);
 
-        $encodedSession = parent::read($sessionId);
+        try {
+            $encodedSession = parent::read($sessionId);
 
-        // @regex https://regex101.com/r/MCcyPm/1
-        $pattern = '/"last_user_activity":(\d+)/';
+            // @regex https://regex101.com/r/MCcyPm/1
+            $pattern = '/"last_user_activity":(\d+)/';
 
-        if (preg_match($pattern, $encodedSession, $matches)) {
-            $currentTime = time();
+            if (preg_match($pattern, $encodedSession, $matches)) {
+                $currentTime = time();
 
-            if ($currentTime - (int) $matches[1] > $this->sessionTimeout) {
-                $this->destroy($sessionId);
-                $this->doDestroy($sessionId);
+                if ($currentTime - (int) $matches[1] > $this->sessionTimeout) {
+                    $this->destroy($sessionId);
 
-                return '';
+                    return '';
+                }
             }
+
+            return $this->decode($encodedSession);
+        } finally {
+            $this->releaseLock($sessionId);
         }
-
-        $decodedSession = $this->decode($encodedSession);
-
-        $this->releaseLock($sessionId);
-
-        return $decodedSession;
     }
 
     public function encode(string $rawPhpSession, ?User $viewer): string
