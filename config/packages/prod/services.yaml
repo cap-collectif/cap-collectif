@@ -3,6 +3,7 @@ imports:
 
 framework:
     profiler:
+        enabled: false
         collect: false
     http_client:
         scoped_clients: ~
