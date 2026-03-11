@@ -128,6 +128,15 @@ interface AbstractDebateVote {
   widgetOriginUrl: URI
 }
 
+"""Available action button labels"""
+enum ActionButtonLabel {
+  """Represents a vote button label."""
+  VOTE
+
+  """Represents a support button label."""
+  SUPPORT
+}
+
 """Available errors on `AddAnonymousReply` mutation."""
 enum AddAnonymousReplyErrorCode {
   """The submited reply is not valid."""
@@ -2552,6 +2561,12 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
+
+  """Represents a vote button icon"""
+  voteButtonIcon: VoteButtonIcon!
+
+  """Represents an action button label"""
+  actionButtonLabel: ActionButtonLabel!
   statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
@@ -13804,6 +13819,8 @@ interface ProposalStep implements NodeSlug {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
+  voteButtonIcon: VoteButtonIcon!
+  actionButtonLabel: ActionButtonLabel!
   statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
@@ -17165,6 +17182,8 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
+  voteButtonIcon: VoteButtonIcon!
+  actionButtonLabel: ActionButtonLabel!
   statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
@@ -18883,6 +18902,8 @@ type UpdateCivicIAPayload {
 }
 
 input UpdateCollectStepInput {
+  actionButtonLabel: ActionButtonLabel! = 
+
   """The proposalForm linked to the step."""
   proposalForm: ID!
 
@@ -18951,6 +18972,7 @@ input UpdateCollectStepInput {
   """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
   voteThreshold: Int
+  voteButtonIcon: VoteButtonIcon! = 
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
@@ -22533,6 +22555,39 @@ interface Vote {
 
   """The participant of the contribution."""
   participant: Participant
+}
+
+"""Available vote button icons"""
+enum VoteButtonIcon {
+  """Represents a thumb up icon."""
+  THUMB_UP
+
+  """Represents a hand voting icon."""
+  HAND_VOTING
+
+  """Represents a ballot box icon."""
+  BALLOT_BOX
+
+  """Represents a menu arrow up icon."""
+  MENU_ARROW_UP
+
+  """Represents a shopping basket heart icon"""
+  SHOPPING_BASKET_HEART
+
+  """Represents a money bag icon"""
+  MONEY_BAG
+
+  """Represents a money piggy icon"""
+  MONEY_PIGGY
+
+  """Represents a hand holding heart icon"""
+  HAND_HOLDING_HEART
+
+  """Represents a heart icon"""
+  HEART
+
+  """Represents a rating star icon"""
+  RATING_STAR
 }
 
 """A connection to a list of items."""

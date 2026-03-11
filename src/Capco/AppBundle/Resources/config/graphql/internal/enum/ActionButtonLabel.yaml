@@ -1,0 +1,11 @@
+ActionButtonLabel:
+    type: enum
+    config:
+        description: 'Available action button labels'
+        values:
+            VOTE:
+                value: !php/const Capco\AppBundle\Enum\ActionButtonLabel::VOTE
+                description: 'Represents a vote button label.'
+            SUPPORT:
+                value: !php/const Capco\AppBundle\Enum\ActionButtonLabel::SUPPORT
+                description: 'Represents a support button label.'

@@ -47,6 +47,8 @@ const UpdateCollectStep = /* GraphQL*/ `
             }
           }
           isSecretBallot
+          actionButtonLabel
+          voteButtonIcon
         }
       }
     }
@@ -101,11 +103,28 @@ const input = {
   isCollectByEmailEnabled: false,
   preventProposalDelete: true,
   preventProposalEdit: true,
+  actionButtonLabel: 'VOTE',
+  voteButtonIcon: 'THUMB_UP',
+}
+
+const updateCollectStepWithVoteIconAndButtonLabelInput = {
+  ...input,
+  actionButtonLabel: 'SUPPORT',
+  voteButtonIcon: 'MONEY_BAG',
 }
 
 describe('mutations.updateCollectStep', () => {
   it('admin should be able to edit collectStep step.', async () => {
     const response = await graphql(UpdateCollectStep, { input: { ...input } }, 'internal_admin')
+    expect(response).toMatchSnapshot()
+  })
+
+  it('admin should be able to edit action button label and vote button icon in collectStep step.', async () => {
+    const response = await graphql(
+      UpdateCollectStep,
+      { input: { ...updateCollectStepWithVoteIconAndButtonLabelInput } },
+      'internal_admin',
+    )
     expect(response).toMatchSnapshot()
   })
 })

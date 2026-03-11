@@ -10,7 +10,9 @@ use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Enum\ActionButtonLabel;
 use Capco\AppBundle\Enum\ProposalSort;
+use Capco\AppBundle\Enum\VoteButtonIcon;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
@@ -103,6 +105,16 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
      * @ORM\Column(name="is_collect_by_email_enabled", type="boolean", nullable=false, options={"default":0})
      */
     private bool $isCollectByEmailEnabled = false;
+
+    /**
+     * @ORM\Column(name="vote_button_icon", type="string", nullable=false, options={"default": "THUMB_UP"})
+     */
+    private string $voteButtonIcon = VoteButtonIcon::THUMB_UP;
+
+    /**
+     * @ORM\Column(name="action_button_label", type="string", nullable=false, options={"default": "VOTE"})
+     */
+    private string $actionButtonLabel = ActionButtonLabel::VOTE;
 
     /**
      * @ORM\Column(name="prevent_proposal_edit", type="boolean", nullable=false, options={"default":0})
@@ -280,6 +292,30 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
     public function setIsCollectByEmailEnabled(bool $isCollectByEmailEnabled): self
     {
         $this->isCollectByEmailEnabled = $isCollectByEmailEnabled;
+
+        return $this;
+    }
+
+    public function getVoteButtonIcon(): string
+    {
+        return $this->voteButtonIcon;
+    }
+
+    public function setVoteButtonIcon(string $voteButtonIcon = VoteButtonIcon::THUMB_UP): self
+    {
+        $this->voteButtonIcon = $voteButtonIcon;
+
+        return $this;
+    }
+
+    public function getActionButtonLabel(): string
+    {
+        return $this->actionButtonLabel;
+    }
+
+    public function setActionButtonLabel(string $actionButtonLabel = ActionButtonLabel::VOTE): self
+    {
+        $this->actionButtonLabel = $actionButtonLabel;
 
         return $this;
     }

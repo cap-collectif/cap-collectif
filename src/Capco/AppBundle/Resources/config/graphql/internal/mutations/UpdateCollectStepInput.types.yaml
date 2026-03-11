@@ -2,6 +2,9 @@ UpdateCollectStepInput:
     type: relay-mutation-input
     config:
         fields:
+            actionButtonLabel:
+                type: 'ActionButtonLabel!'
+                defaultValue: 'VOTE'
             proposalForm:
                 type: 'ID!'
                 description: 'The proposalForm linked to the step.'
@@ -72,6 +75,9 @@ UpdateCollectStepInput:
                 description: 'If enabled, allow voters to order their votes by point'
             voteThreshold:
                 type: 'Int'
+            voteButtonIcon:
+                type: 'VoteButtonIcon!'
+                defaultValue: 'THUMB_UP'
             publishedVoteDate:
                 type: 'DateTime'
                 description: 'If not null, the date to display vote count'

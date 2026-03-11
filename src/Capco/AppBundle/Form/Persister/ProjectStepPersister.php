@@ -14,7 +14,9 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ActionButtonLabel;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Enum\VoteButtonIcon;
 use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\Form\Step\DebateStepFormType;
@@ -72,6 +74,8 @@ class ProjectStepPersister
                 $this->removeStepInPreviousQuestionnaire($step, $dbSteps);
             }
             if ('collect' === $step['type']) {
+                $step['actionButtonLabel'] ??= ActionButtonLabel::VOTE;
+                $step['voteButtonIcon'] ??= VoteButtonIcon::THUMB_UP;
                 $this->removeAnalysisConfigurationInPreviousCollectStep($step, $dbSteps);
             }
             unset($step['id']);

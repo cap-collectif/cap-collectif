@@ -60,6 +60,13 @@ InternalCollectStep:
             isCollectByEmailEnabled:
                 type: 'Boolean!'
                 description: 'Whether or not collect by email is enabled.'
+            actionButtonLabel:
+                type: 'ActionButtonLabel!'
+                description: 'Represents an action button label'
+            voteButtonIcon:
+                type: 'VoteButtonIcon!'
+                description: 'Represents a vote button icon'
+
             preventProposalEdit:
                 type: 'Boolean!'
                 description: 'Whether or not users can edit their proposal after the step is closed.'

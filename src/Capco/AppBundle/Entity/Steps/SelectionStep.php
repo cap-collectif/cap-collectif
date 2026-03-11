@@ -11,8 +11,10 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Enum\ActionButtonLabel;
 use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Enum\SelectionStepSubTypes;
+use Capco\AppBundle\Enum\VoteButtonIcon;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
@@ -118,6 +120,16 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
      * @ORM\OneToMany(targetEntity=ProposalSelectionVote::class, mappedBy="selectionStep")
      */
     private Collection $selectionVotes;
+
+    /**
+     * @ORM\Column(name="vote_button_icon", type="string", nullable=false, options={"default": "THUMB_UP"})
+     */
+    private string $voteButtonIcon = VoteButtonIcon::THUMB_UP;
+
+    /**
+     * @ORM\Column(name="action_button_label", type="string", nullable=false, options={"default": "VOTE"})
+     */
+    private ?string $actionButtonLabel = ActionButtonLabel::VOTE;
 
     public function __construct()
     {
@@ -324,6 +336,30 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         if (!$this->selectionVotes->contains($selectionVote)) {
             $this->selectionVotes->add($selectionVote);
         }
+
+        return $this;
+    }
+
+    public function getVoteButtonIcon(): string
+    {
+        return $this->voteButtonIcon;
+    }
+
+    public function setVoteButtonIcon(string $voteButtonIcon = VoteButtonIcon::THUMB_UP): self
+    {
+        $this->voteButtonIcon = $voteButtonIcon;
+
+        return $this;
+    }
+
+    public function getActionButtonLabel(): string
+    {
+        return $this->actionButtonLabel;
+    }
+
+    public function setActionButtonLabel(string $actionButtonLabel = ActionButtonLabel::VOTE): self
+    {
+        $this->actionButtonLabel = $actionButtonLabel;
 
         return $this;
     }

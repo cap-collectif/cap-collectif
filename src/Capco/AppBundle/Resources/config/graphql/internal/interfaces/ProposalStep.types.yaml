@@ -30,6 +30,10 @@ ProposalStep:
                 type: 'String'
             voteThreshold:
                 type: 'Int'
+            voteButtonIcon:
+                type: 'VoteButtonIcon!'
+            actionButtonLabel:
+                type: 'ActionButtonLabel!'
             statuses:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusesResolver", value)'
                 type: '[ProposalStepStatus!]!'

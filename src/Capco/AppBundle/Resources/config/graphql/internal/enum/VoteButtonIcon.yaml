@@ -1,0 +1,35 @@
+VoteButtonIcon:
+    type: enum
+    config:
+        description: 'Available vote button icons'
+        values:
+            THUMB_UP:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::THUMB_UP
+                description: 'Represents a thumb up icon.'
+            HAND_VOTING:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::HAND_VOTING
+                description: 'Represents a hand voting icon.'
+            BALLOT_BOX:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::BALLOT_BOX
+                description: 'Represents a ballot box icon.'
+            MENU_ARROW_UP:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::MENU_ARROW_UP
+                description: 'Represents a menu arrow up icon.'
+            SHOPPING_BASKET_HEART:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::SHOPPING_BASKET_HEART
+                description: 'Represents a shopping basket heart icon'
+            MONEY_BAG:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::MONEY_BAG
+                description: 'Represents a money bag icon'
+            MONEY_PIGGY:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::MONEY_PIGGY
+                description: 'Represents a money piggy icon'
+            HAND_HOLDING_HEART:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::HAND_HOLDING_HEART
+                description: 'Represents a hand holding heart icon'
+            HEART:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::HEART
+                description: 'Represents a heart icon'
+            RATING_STAR:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::RATING_STAR
+                description: 'Represents a rating star icon'
