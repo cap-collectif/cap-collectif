@@ -1,11 +1,11 @@
-import React, { useRef, useMemo, forwardRef } from 'react'
-import dynamic from 'next/dynamic'
 import { Box, InputProps, useTheme } from '@cap-collectif/ui'
-import { getApiUrl } from 'config'
-import { Jodit as IJodit } from 'jodit/types'
 import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
 import '@uppy/core/dist/style.min.css'
 import '@uppy/status-bar/dist/style.min.css'
+import { getApiUrl } from 'config'
+import { Jodit as IJodit } from 'jodit/types'
+import dynamic from 'next/dynamic'
+import React, { forwardRef, useMemo, useRef } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 
 const Editor = dynamic(() => import('./JoditImport'), {
@@ -53,6 +53,7 @@ const limitedConf = [
   'redo',
   '|',
   'hr',
+  'fullsize',
 ]
 
 const getConfig = (
@@ -99,6 +100,7 @@ const getConfig = (
         '|',
         'hr',
         'source',
+        'fullsize',
       ]
   return {
     toolbarSticky: true,
