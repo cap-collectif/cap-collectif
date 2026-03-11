@@ -5,7 +5,7 @@ Object {
   "addConsultationStep": Object {
     "step": Object {
       "__typename": "ConsultationStep",
-      "body": "Espace de participation",
+      "body": "Module de participation",
       "enabled": true,
       "label": "Consultation",
       "opinionTypes": Array [
@@ -36,7 +36,7 @@ Object {
   "addConsultationStep": Object {
     "step": Object {
       "__typename": "ConsultationStep",
-      "body": "Espace de participation",
+      "body": "Module de participation",
       "enabled": true,
       "label": "Consultation",
       "opinionTypes": Array [
@@ -67,7 +67,7 @@ Object {
   "addConsultationStep": Object {
     "step": Object {
       "__typename": "ConsultationStep",
-      "body": "Espace de participation",
+      "body": "Module de participation",
       "enabled": true,
       "label": "Consultation",
       "opinionTypes": Array [
