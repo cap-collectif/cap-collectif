@@ -107,7 +107,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               onClick={() => setListView(viewButton.id)}
             >
               <Tag.LeftIcon name={viewButton.icon} />
-              {(width <= 1024 || (!isMapShown && !step.votable)) && <Tag.Label>{viewButton.label}</Tag.Label>}
+              {width <= 1024 && step.votable && <Tag.Label>{viewButton.label}</Tag.Label>}
             </Tag>
           ))}
         </Box>
