@@ -56,3 +56,7 @@ InternalFranceConnectSSOConfiguration:
                 type: 'Boolean!'
                 description: 'Is France Connect completely configured'
                 access: "@=hasRole('ROLE_ADMIN')"
+            useV2:
+                type: 'Boolean!'
+                description: 'Use FranceConnect v2?'
+                access: "@=hasRole('ROLE_ADMIN')"

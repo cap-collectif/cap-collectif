@@ -14,16 +14,17 @@ use Capco\UserBundle\Handler\UserInvitationHandler;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use Capco\UserBundle\OpenID\OpenIDResourceOwner;
 use Capco\UserBundle\Repository\UserRepository;
+use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
 use Doctrine\Common\Util\ClassUtils;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\OAuth\State\State;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -49,9 +50,8 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         private readonly TokenStorageInterface $tokenStorage,
         private readonly RequestStack $requestStack,
         private readonly RedisCache $redisCache,
-        private readonly FlashBagInterface $flashBag,
         private readonly TranslatorInterface $translator,
-        private readonly SessionInterface $session,
+        private readonly RouterInterface $router,
         private readonly string $instanceName
     ) {
         $this->properties = array_merge($this->properties, $properties);
@@ -74,6 +74,37 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $setterId = 'openid' === $service ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';
 
+        if ('franceconnect' === $service && $user instanceof User) {
+            $userInfoData = $response->getData();
+            $emailFromFranceConnect = $userInfoData['email'] ?? null;
+            $idToken = $response->getOAuthToken()->getRawToken()['id_token'] ?? null;
+            $request = $this->requestStack->getCurrentRequest();
+
+            if (
+                null !== $user->getEmail()
+                && null !== $emailFromFranceConnect
+                && $emailFromFranceConnect !== $user->getEmail()
+            ) {
+                if ($request) {
+                    $homepageUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
+                    $profileUrl = $this->router->generate('capco_profile_edit', [], RouterInterface::ABSOLUTE_URL) . '#account';
+                    FranceConnectLogoutHandler::storeImmediateFranceConnectSession(
+                        $request,
+                        \is_string($idToken) ? $idToken : '',
+                        $homepageUrl
+                    );
+                    FranceConnectLogoutHandler::storeAfterLogoutRedirectUrl($request, $profileUrl);
+                }
+                $this->requestStack
+                    ->getSession()
+                    ->getFlashBag()
+                    ->add('danger', $this->translator->trans('france-connect-error-retrieving-user-info'))
+                ;
+
+                return;
+            }
+        }
+
         //we "disconnect" previously connected users
         if (null !== ($previousUser = $this->findUser($response, $email))) {
             $previousUser->{$setterId}(null);
@@ -84,6 +115,17 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         //we connect current user
         $user->{$setterId}($response->getUsername());
         $user->{$setterToken}($response->getAccessToken());
+        if ('franceconnect' === $service && $user instanceof User) {
+            $idToken = $response->getOAuthToken()->getRawToken()['id_token'] ?? null;
+            $user->setFranceConnectIdToken($idToken);
+            $request = $this->requestStack->getCurrentRequest();
+            if ($request && \is_string($idToken) && '' !== $idToken) {
+                FranceConnectLogoutHandler::storeFranceConnectSession(
+                    $request,
+                    $idToken
+                );
+            }
+        }
         $this->userManager->updateUser($user);
     }
 
@@ -122,14 +164,14 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
     ): User {
         $userInfoData = $userResponse->getData();
         $firstName = ucfirst(strtolower((string) $userInfoData['given_name']));
-        if ($allowedData['given_name']) {
+        if (!empty($allowedData['given_name'])) {
             $user->setFirstName($firstName);
         }
-        if ($allowedData['family_name']) {
+        if (!empty($allowedData['family_name'])) {
             $user->setLastName($userInfoData['family_name']);
         }
 
-        if ($allowedData['birthdate']) {
+        if (!empty($allowedData['birthdate'])) {
             $birthday = (null !== $userInfoData['birthdate'])
                 ? \DateTime::createFromFormat('Y-m-d', $userInfoData['birthdate'])
                 : null;
@@ -138,12 +180,12 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
             }
             $user->setDateOfBirth($birthday);
         }
-        if ($allowedData['birthplace']) {
-            if (isset($userInfoData['birthplace'])) {
+        if (!empty($allowedData['birthplace'])) {
+            if (!empty($userInfoData['birthplace'])) {
                 $user->setBirthPlace($userInfoData['birthplace']);
             }
         }
-        if ($allowedData['gender']) {
+        if (!empty($allowedData['gender'])) {
             $gender = 'o';
 
             if ('female' === $userInfoData['gender']) {
@@ -154,12 +196,12 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
             }
             $user->setGender($gender);
         }
-        if ($allowedData['email'] && !$user->getEmail()) {
+        if (!empty($allowedData['email']) && !$user->getEmail()) {
             $user->setEmail($userInfoData['email']);
         }
 
         if (!$user->getUsername()) {
-            if ($allowedData['preferred_username'] && !empty($userInfoData['preferred_username'])) {
+            if (!empty($allowedData['preferred_username']) && !empty($userInfoData['preferred_username'])) {
                 $user->setUsername($userInfoData['preferred_username']);
             } else {
                 $user->setUsername($userInfoData['family_name'] . ' ' . $firstName);
@@ -193,21 +235,17 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
                 default:
                     $this->logger->error(sprintf('Unexpected error while logging with "%service": "%s"', $service, $errorMessage));
 
-                    $message = $this->translator->trans(
-                        'france-connect-connection-error',
-                        [],
-                        'CapcoAppBundle'
-                    );
+                    $message = $this->translator->trans('france-connect-connection-error');
             }
 
-            $this->flashBag->add('danger', $message);
+            $this->requestStack->getSession()->getFlashBag()->add('danger', $message);
 
-            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error'));
         }
     }
 
     /**
-     * @throws FranceConnectAuthenticationException
+     * @throws FranceConnectAuthenticationException|InvalidArgumentException
      */
     public function verifyFranceConnectStateAndNonce(UserResponseInterface $response): void
     {
@@ -218,16 +256,16 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $tokenParts = explode('.', (string) $franceConnectJwtToken);
         $tokenPayload = json_decode(base64_decode($tokenParts[1]), true) ?? null;
         $nonce = $tokenPayload['nonce'] ?? null;
-        $this->session->remove(FranceConnectOptionsModifier::SESSION_FRANCE_CONNECT_STATE_KEY);
+        $this->requestStack->getSession()->remove(FranceConnectOptionsModifier::SESSION_FRANCE_CONNECT_STATE_KEY);
 
         /** * @var CacheItem $fcTokens  */
         $fcTokens = $this->redisCache
-            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
+            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->requestStack->getSession()->getId())
         ;
 
         if (!$fcTokens->isHit()) {
             // Redis token has expired or does not exist.
-            $this->flashBag->add(
+            $this->requestStack->getSession()->getFlashBag()->add(
                 'danger',
                 $this->translator->trans(
                     'france-connect-connection-timeout',
@@ -236,20 +274,20 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
                 )
             );
 
-            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error'));
         }
 
         $tokenData = $fcTokens->get();
 
         if ($tokenData['nonce'] !== $nonce || $tokenData['state'] !== $csrf) {
             // State or nonce are wrong: it might be a fraudulent attempt.
-            $this->flashBag->add(
+            $this->requestStack->getSession()->getFlashBag()->add(
                 'danger',
-                $this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle')
+                $this->translator->trans('france-connect-connection-error')
             );
             $this->logger->error('state or nonce token does not match the one given by the server');
 
-            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error'));
         }
     }
 
@@ -265,8 +303,8 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
 
     private function getUser(UserResponseInterface $response, ?User $viewer = null): User
     {
-        $ressourceOwner = $response->getResourceOwner();
-        $serviceName = $ressourceOwner->getName();
+        $resourceOwner = $response->getResourceOwner();
+        $serviceName = $resourceOwner->getName();
 
         $email =
             $response->getEmail() ??
@@ -295,9 +333,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';
 
-        if ('openid' === $serviceName && $ressourceOwner instanceof OpenIDResourceOwner) {
+        if ('openid' === $serviceName && $resourceOwner instanceof OpenIDResourceOwner) {
             $needMapping =
-                $this->isNewUser || $ressourceOwner->isRefreshingUserInformationsAtEveryLogin();
+                $this->isNewUser || $resourceOwner->isRefreshingUserInformationsAtEveryLogin();
             if ($needMapping) {
                 $user->setUsername($username);
                 $user->setEmail($email);
@@ -307,13 +345,22 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         if (
             'franceconnect' === $serviceName
             && $user instanceof User
-            && ($this->isNewUser || !$user->getFranceConnectId())
         ) {
-            $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
+            if ($this->isNewUser || !$user->getFranceConnectId()) {
+                $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
 
-            // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
-            $user = $this->mapFranceConnectData($user, $response, $fcConfig->getAllowedData());
-            $user->setFranceConnectIdToken($response->getOAuthToken()->getRawToken()['id_token']);
+                // in next time, we can associate franceConnect after manually create account, so we have to dissociate if it's a new account or not
+                $user = $this->mapFranceConnectData($user, $response, $fcConfig->getAllowedData());
+            }
+            $idToken = $response->getOAuthToken()->getRawToken()['id_token'] ?? null;
+            $user->setFranceConnectIdToken($idToken);
+            $request = $this->requestStack->getCurrentRequest();
+            if ($request && \is_string($idToken) && '' !== $idToken) {
+                FranceConnectLogoutHandler::storeFranceConnectSession(
+                    $request,
+                    $idToken
+                );
+            }
         }
 
         $user->{$setterId}($response->getUsername());

@@ -6,6 +6,7 @@ use Capco\AppBundle\Enum\UpdateUserEmailErrorCode;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProfileAccountEmailMutation;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Security\RateLimiter;
+use Capco\AppBundle\Service\User\AccountConfirmationSender;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -39,7 +40,8 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         EmailDomainRepository $emailDomainRepository,
         Manager $toggleManager,
         TokenGeneratorInterface $tokenGenerator,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        AccountConfirmationSender $accountConfirmationSender
     ) {
         $this->beConstructedWith(
             $em,
@@ -52,7 +54,8 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
             $emailDomainRepository,
             $toggleManager,
             $tokenGenerator,
-            $rateLimiter
+            $rateLimiter,
+            $accountConfirmationSender
         );
     }
 
@@ -111,6 +114,11 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
             ->willReturn(false)
         ;
         $viewer
+            ->isFranceConnectAccount()
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+        $viewer
             ->getId()
             ->shouldBeCalled()
             ->willReturn('abc123')
@@ -146,6 +154,11 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
             ->willReturn(false)
         ;
         $viewer
+            ->isFranceConnectAccount()
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+        $viewer
             ->getId()
             ->shouldBeCalled()
             ->willReturn('abc123')
@@ -167,6 +180,76 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $payload['error']->shouldBe(UpdateUserEmailErrorCode::ALREADY_USED_EMAIL);
     }
 
+    public function it_should_not_publish_password_change_if_email_is_already_used_for_france_connect_user(
+        UserRepository $userRepository,
+        RateLimiter $rateLimiter,
+        FormFactoryInterface $formFactory,
+        FormInterface $createPasswordForm,
+        Publisher $publisher,
+        UserManager $userManager,
+        AccountConfirmationSender $accountConfirmationSender,
+        Arg $args,
+        User $existingUser,
+        User $viewer
+    ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
+        $args->getArrayCopy()->willReturn([
+            'email' => 'someone@email.com',
+            'passwordConfirm' => 'anything',
+        ]);
+        $viewer
+            ->hasPassword()
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+        $viewer
+            ->isFranceConnectAccount()
+            ->shouldBeCalled()
+            ->willReturn(true)
+        ;
+        $viewer
+            ->getId()
+            ->shouldBeCalled()
+            ->willReturn('abc123')
+        ;
+
+        $createPasswordForm
+            ->submit(['plainPassword' => 'anything'], false)
+            ->shouldBeCalled()
+            ->willReturn(true)
+        ;
+        $createPasswordForm
+            ->isValid()
+            ->shouldBeCalled()
+            ->willReturn(true)
+        ;
+        $formFactory
+            ->create(Argument::type('string'), null, ['csrf_protection' => false])
+            ->shouldBeCalled()
+            ->willReturn($createPasswordForm)
+        ;
+
+        $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
+            ->willReturn(true)
+        ;
+        $userRepository
+            ->findOneByEmail('someone@email.com')
+            ->shouldBeCalled()
+            ->willReturn($existingUser)
+        ;
+
+        $viewer->setPlainPassword(Argument::any())->shouldNotBeCalled();
+        $userManager->updateUser($viewer)->shouldNotBeCalled();
+        $publisher->publish(Argument::cetera())->shouldNotBeCalled();
+        $accountConfirmationSender->sendIfNeeded($viewer)->shouldNotBeCalled();
+
+        $payload = $this->__invoke($args, $viewer);
+        $payload->shouldHaveCount(1);
+        $payload['error']->shouldBe(UpdateUserEmailErrorCode::ALREADY_USED_EMAIL);
+    }
+
     public function it_should_check_email_domain(
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
@@ -182,6 +265,11 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         ]);
         $viewer
             ->hasPassword()
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+        $viewer
+            ->isFranceConnectAccount()
             ->shouldBeCalled()
             ->willReturn(false)
         ;
@@ -236,6 +324,11 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         ]);
         $viewer
             ->hasPassword()
+            ->shouldBeCalled()
+            ->willReturn(false)
+        ;
+        $viewer
+            ->isFranceConnectAccount()
             ->shouldBeCalled()
             ->willReturn(false)
         ;

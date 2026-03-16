@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
+import { FranceConnectButton, getButtonLinkForType } from '@shared/login/LoginSocialButton'
+import { default as Icon, ICON_NAME, default as SocialIcon } from '@shared/ui/LegacyIcons/Icon'
+import CookieMonster from '@shared/utils/CookieMonster'
+import { pxToRem } from '@shared/utils/pxToRem'
+import React, { useEffect, useState } from 'react'
+import { Button, ListGroupItem, Panel } from 'react-bootstrap'
 import type { IntlShape } from 'react-intl'
-import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl'
-import { graphql, createFragmentContainer } from 'react-relay'
+import { FormattedHTMLMessage, FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import { Button, Panel, ListGroupItem } from 'react-bootstrap'
+import { createFragmentContainer, graphql } from 'react-relay'
 import {
+  Field,
   formValueSelector,
   hasSubmitFailed,
   hasSubmitSucceeded,
@@ -12,38 +18,32 @@ import {
   isPristine,
   isSubmitting,
   isValid,
-  SubmissionError,
   reduxForm,
+  SubmissionError,
   submit,
-  Field,
 } from 'redux-form'
-
 import styled from 'styled-components'
-import colors from '~/utils/colors'
-import { isEmail } from '../../../services/Validator'
-import renderComponent from '../../Form/Field'
-import AlertForm from '../../Alert/AlertForm'
-import type { State, Dispatch, FeatureToggles, ReduxStoreSSOConfiguration } from '../../../types'
 import select from '~/components/Form/Select'
-import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 import ConfirmPasswordModal, { passwordForm } from '~/components/User/ConfirmPasswordModal'
-import { resendConfirmation, cancelEmailChange, accountForm as formName } from '~/redux/modules/user'
 import DeleteAccountModal from '~/components/User/DeleteAccountModal'
-import type { AccountForm_viewer } from '~relay/AccountForm_viewer.graphql'
-import CookieMonster from '@shared/utils/CookieMonster'
+import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal'
 import UpdateProfileAccountEmailMutation from '~/mutations/UpdateProfileAccountEmailMutation'
 import UpdateProfileAccountLocaleMutation from '~/mutations/UpdateProfileAccountLocaleMutation'
+import { cancelEmailChange, accountForm as formName, resendConfirmation } from '~/redux/modules/user'
+import colors from '~/utils/colors'
+import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
+import Tooltip from '~ds/Tooltip/Tooltip'
+import type { AccountForm_viewer } from '~relay/AccountForm_viewer.graphql'
 import type {
   UpdateProfileAccountLocaleMutationResponse as LocaleResponse,
   TranslationLocale,
 } from '~relay/UpdateProfileAccountLocaleMutation.graphql'
-import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
+import { isEmail } from '../../../services/Validator'
+import type { Dispatch, FeatureToggles, ReduxStoreSSOConfiguration, State } from '../../../types'
+import AlertForm from '../../Alert/AlertForm'
+import renderComponent from '../../Form/Field'
 import ListGroup from '../../Ui/List/ListGroup'
-import SocialIcon from '@shared/ui/LegacyIcons/Icon'
-import { getButtonLinkForType } from '@shared/login/LoginSocialButton'
-import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import Tooltip from '~ds/Tooltip/Tooltip'
+
 type RelayProps = {
   viewer: AccountForm_viewer
 }
@@ -121,8 +121,7 @@ export const onSubmit = (
 
   if (
     input.email &&
-    ((input.passwordConfirm && props.viewer.hasPassword) ||
-      (props.viewer.isFranceConnectAccount && !props.viewer.hasPassword))
+    (props.viewer.hasPassword || (props.viewer.isFranceConnectAccount && !props.viewer.hasPassword))
   ) {
     return UpdateProfileAccountEmailMutation.commit({
       input,
@@ -173,6 +172,11 @@ export const onSubmit = (
             _error: 'user.confirm.wrong_password',
           })
         }
+        if (response.error === 'PASSWORD_NOT_VALID') {
+          throw new SubmissionError({
+            _error: 'fos_user.password.not_valid',
+          })
+        }
 
         if (response.error === 'ALREADY_USED_EMAIL') {
           throw new SubmissionError({
@@ -209,7 +213,8 @@ const AccountContainer = styled.div`
 `
 const FooterContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 `
 const SsoDiv = styled.div`
   display: flex;
@@ -262,7 +267,29 @@ const AssociateLink = styled.a<{
   text-align: center;
   cursor: pointer;
 `
-export const AccountForm = ({
+const FcContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  > span {
+    font-size: 12px;
+    color: ${colors.gray};
+  }
+`
+const FcBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+`
+const StyledFranceConnectButton = styled(FranceConnectButton)`
+  margin: 0;
+  margin-right: auto;
+  width: auto;
+  svg {
+    height: 100%;
+  }
+`
+export const AccountForm: React.FC<Props> = ({
   intl,
   features,
   initialValues,
@@ -279,11 +306,25 @@ export const AccountForm = ({
   viewer,
   loginWithOpenId,
   ssoList,
-}: Props) => {
+}) => {
   const [showConfirmPasswordModal, setConfirmPasswordModal] = useState(false)
+  const [isConfirmPasswordPending, setConfirmPasswordPending] = useState(false)
+  const [hasCreatedLocalPassword, setHasCreatedLocalPassword] = useState(false)
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
   const [showDissociateSsoModal, setShowDissociateSsoModal] = useState(false)
+  const [isHover, seIsHover] = useState<boolean>(false)
+  const viewerHasPassword = viewer.hasPassword || hasCreatedLocalPassword
+
   const isFacebookLoginEnabled = ssoList.filter(sso => sso.ssoType === 'facebook').length > 0
+
+  useEffect(() => {
+    if (isConfirmPasswordPending && !submitting && (submitSucceeded || submitFailed)) {
+      if (submitSucceeded && viewer.isFranceConnectAccount && !viewer.hasPassword) {
+        setHasCreatedLocalPassword(true)
+      }
+      setConfirmPasswordPending(false)
+    }
+  }, [isConfirmPasswordPending, submitting, submitSucceeded, submitFailed, viewer.hasPassword, viewer.isFranceConnectAccount])
 
   const _renderLanguageSection = () => {
     if (features.multilangue) {
@@ -376,7 +417,7 @@ export const AccountForm = ({
       return false
     }
 
-    return !viewer.hasPassword
+    return !viewerHasPassword
   }
 
   const footer = (
@@ -402,12 +443,7 @@ export const AccountForm = ({
             )}
           </Button>
         )}
-        <Button
-          id="delete-account-profile-button"
-          bsStyle="danger"
-          onClick={() => setShowDeleteAccountModal(true)}
-          className="ml-15"
-        >
+        <Button id="delete-account-profile-button" bsStyle="danger" onClick={() => setShowDeleteAccountModal(true)}>
           <FormattedMessage id="delete-account" />
         </Button>
       </FooterContainer>
@@ -455,7 +491,17 @@ export const AccountForm = ({
               {_renderLanguageSection()}
               <ConfirmPasswordModal
                 show={showConfirmPasswordModal}
-                handleClose={() => setConfirmPasswordModal(false)}
+                handleClose={() => {
+                  setConfirmPasswordModal(false)
+                  setConfirmPasswordPending(false)
+                }}
+                onConfirm={() => {
+                  setConfirmPasswordPending(true)
+                  setConfirmPasswordModal(false)
+                  dispatch(submit(formName))
+                }}
+                isFranceConnectAccount={viewer.isFranceConnectAccount}
+                hasPassword={viewerHasPassword}
               />
               {viewer.newEmailToConfirm && (
                 <div className="col-sm-6 col-sm-offset-3">
@@ -500,15 +546,26 @@ export const AccountForm = ({
               </span>
               <ListGroup className="mt-10">
                 {features.login_franceconnect && (
-                  <ListGroupItem className="bgc-fa h-70">
-                    <SsoDiv>
-                      <SsoIcon type="franceConnect">
-                        <SocialIcon className="loginIcon" name="franceConnectIcon" />
-                      </SsoIcon>
-                      <span>
-                        <b>FranceConnect</b>
-                        <br />
-                        {viewer.isFranceConnectAccount ? (
+                  <ListGroupItem
+                    className="bgc-fa h-70"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      flexWrap: 'wrap',
+                      justifyContent: 'flex-start',
+                      width: 'fit-content',
+                      marginBottom: pxToRem(8),
+                    }}
+                  >
+                    <FcBlock>
+                      {viewer.isFranceConnectAccount && (
+                        <>
+                          <SsoDiv>
+                            <FcContent>
+                              <b>FranceConnect</b>
+                              <FormattedMessage id="fc-title" />
+                            </FcContent>
+                          </SsoDiv>
                           <a
                             href="https://tableaudebord.franceconnect.gouv.fr/"
                             target="_blank"
@@ -516,30 +573,39 @@ export const AccountForm = ({
                           >
                             <FormattedMessage id="fc-archive-connection" />
                           </a>
-                        ) : (
+                          <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
+                        </>
+                      )}
+                      {!viewer.isFranceConnectAccount && (
+                        <>
+                          <SsoDiv>
+                            <FcContent>
+                              <b>FranceConnect</b>
+                              <FormattedMessage id="fc-title" />
+                            </FcContent>
+                          </SsoDiv>
+                          <StyledFranceConnectButton
+                            justifyContent="center"
+                            style={{ height: pxToRem(40), marginTop: pxToRem(8), marginBottom: pxToRem(8) }}
+                          >
+                            <a
+                              href={`${window && window.location.origin}/profile/franceconnect/associate`}
+                              title="franceConnect"
+                              onMouseEnter={() => seIsHover(true)}
+                              onMouseLeave={() => seIsHover(false)}
+                            >
+                              <SocialIcon
+                                className="loginIcon"
+                                name={isHover ? 'franceConnectHover' : 'franceConnect'}
+                              />
+                            </a>
+                          </StyledFranceConnectButton>
                           <a href="https://franceconnect.gouv.fr/" target="_blank" rel="noopener noreferrer">
                             Qu’est-ce-que FranceConnect ?
                           </a>
-                        )}
-                      </span>
-                    </SsoDiv>
-                    <>
-                      {!viewer.isFranceConnectAccount ? (
-                        <AssociateLink
-                          bcd="rgba(3, 136, 204, 0.08)"
-                          color="rgb(0, 140, 214)"
-                          href={getButtonLinkForType(
-                            'franceConnect',
-                            `${window && window.location.origin + window.location.pathname}`,
-                          )}
-                          title="franceConnect"
-                        >
-                          <FormattedMessage id="global-link" />
-                        </AssociateLink>
-                      ) : (
-                        <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
+                        </>
                       )}
-                    </>
+                    </FcBlock>
                   </ListGroupItem>
                 )}
                 {isFacebookLoginEnabled && (
@@ -592,7 +658,7 @@ const mapStateToProps = (state: State, props: Props) => {
     features: state.default.features,
     newEmailToConfirm: props.viewer.newEmailToConfirm,
     newEmail: formValueSelector(formName)(state, 'email'),
-    passwordConfirm: formValueSelector(passwordForm)(state, 'password'),
+    passwordConfirm: formValueSelector(passwordForm)(state, 'passwordConfirm'),
     language: formValueSelector(formName)(state, 'language'),
     pristine: isPristine(formName)(state),
     valid: isValid(formName)(state),

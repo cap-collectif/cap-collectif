@@ -258,6 +258,9 @@ WORKDIR /usr/local/bin/
 RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
 RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 
+#New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
+RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates
+
 # Create Working dir with good rights
 RUN mkdir -p /var/www \
     && chown capco:capco /var/www \

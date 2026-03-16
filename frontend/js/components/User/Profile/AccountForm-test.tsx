@@ -1,9 +1,14 @@
 /* eslint-env jest */
 import React from 'react'
 import { shallow } from 'enzyme'
-import { AccountForm } from './AccountForm'
+import { AccountForm, onSubmit } from './AccountForm'
 import { features } from '~/redux/modules/default'
 import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks'
+import UpdateProfileAccountEmailMutation from '~/mutations/UpdateProfileAccountEmailMutation'
+
+jest.mock('~/mutations/UpdateProfileAccountEmailMutation', () => ({
+  commit: jest.fn(),
+}))
 
 describe('<AccountForm />', () => {
   const defaultViewer = {
@@ -65,5 +70,39 @@ describe('<AccountForm />', () => {
   it('should render with button to delete account only', () => {
     const wrapper = shallow(<AccountForm {...props} loginWithOpenId newEmailToConfirm="new-email@test.com" />)
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('should submit email mutation for france connect user without password even if passwordConfirm is empty', async () => {
+    ;(UpdateProfileAccountEmailMutation.commit as jest.Mock).mockResolvedValue({
+      updateProfileAccountEmail: {
+        viewer: {
+          id: 'viewer-id',
+        },
+      },
+    })
+
+    await onSubmit(
+      {
+        email: 'new-email@test.com',
+        language: 'fr-FR',
+        passwordConfirm: '',
+      },
+      props.dispatch,
+      {
+        ...props,
+        viewer: {
+          ...defaultViewer,
+          hasPassword: false,
+          isFranceConnectAccount: true,
+        },
+      },
+    )
+
+    expect(UpdateProfileAccountEmailMutation.commit).toHaveBeenCalledWith({
+      input: {
+        email: 'new-email@test.com',
+        passwordConfirm: '',
+      },
+    })
   })
 })

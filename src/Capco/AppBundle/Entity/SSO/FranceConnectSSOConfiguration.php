@@ -18,11 +18,28 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         EnumSSOEnvironmentType::PRODUCTION => 'https://app.franceconnect.gouv.fr',
     ];
 
+    final public const ENDPOINTS_V2 = [
+        // https://docs.partenaires.franceconnect.gouv.fr/fs/fs-technique/fs-technique-env-fc/
+        // TODO: to remove after all instances migrated on espace partenaire
+        // endpoint pour instance non créée sur l'espace partenaire
+        EnumSSOEnvironmentType::DEV => 'https://fcp-low.integ01.dev-franceconnect.fr',
+        // endpoint pour instance créée sur l'espace partenaire
+        EnumSSOEnvironmentType::TESTING => 'https://fcp-low.sbx.dev-franceconnect.fr',
+        EnumSSOEnvironmentType::PRODUCTION => 'https://oidc.franceconnect.gouv.fr',
+    ];
+
     final public const ROUTES = [
         'authorizationUrl' => '/api/v1/authorize',
         'accessTokenUrl' => '/api/v1/token',
         'userInfoUrl' => '/api/v1/userinfo',
         'logoutUrl' => '/api/v1/logout',
+    ];
+
+    final public const ROUTES_V2 = [
+        'authorizationUrl' => '/api/v2/authorize',
+        'accessTokenUrl' => '/api/v2/token',
+        'userInfoUrl' => '/api/v2/userinfo',
+        'logoutUrl' => '/api/v2/session/end',
     ];
 
     /**
@@ -55,6 +72,8 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
      */
     protected $logoutUrl = '/api/v1/logout';
 
+    protected ?bool $useV2 = null;
+
     /**
      * @ORM\Column(name="allowed_data", type="array", nullable=false)
      */
@@ -67,6 +86,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
         'birthcountry' => false,
         'email' => true,
         'preferred_username' => false,
+        'useV2' => false,
     ];
 
     public function __construct()
@@ -80,6 +100,7 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
             'birthcountry' => false,
             'email' => true,
             'preferred_username' => false,
+            'useV2' => false,
         ];
         $this->ssoType = SSOType::FRANCE_CONNECT;
         $this->setAllowedData($allowedData);
@@ -214,6 +235,21 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
     public function setLogoutUrl(?string $logoutUrl = null): self
     {
         $this->logoutUrl = $logoutUrl;
+
+        return $this;
+    }
+
+    public function isUseV2(): bool
+    {
+        return $this->useV2 ??
+            str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::DEV])
+            || str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::TESTING])
+            || str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::PRODUCTION]);
+    }
+
+    public function setUseV2(bool $useV2): self
+    {
+        $this->useV2 = $useV2;
 
         return $this;
     }

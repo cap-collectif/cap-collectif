@@ -57,6 +57,7 @@ const commit = (
           logoutUrl: '',
           allowedData: getAllowedData(variables),
           enabled: true,
+          useV2: variables.input.useV2,
         },
       },
     },

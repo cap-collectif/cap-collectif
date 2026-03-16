@@ -13,6 +13,9 @@ InternalUpdateFranceConnectSSOConfigurationInput:
             environment:
                 type: 'SSOEnvironment!'
                 description: 'Environment mode.'
+            useV2:
+                type: 'Boolean!'
+                defaultValue: false
             given_name:
                 type: 'Boolean!'
             family_name:

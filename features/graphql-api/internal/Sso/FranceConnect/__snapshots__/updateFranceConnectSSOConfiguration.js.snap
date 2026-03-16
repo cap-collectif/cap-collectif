@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SSO.FranceConnect Admin wants to update France Connect configuration and turn it to production mode 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://oidc.franceconnect.gouv.fr/api/v2/token",
+      "allowedData": Array [
+        "given_name",
+        "family_name",
+        "birthdate",
+        "gender",
+        "email",
+      ],
+      "authorizationUrl": "https://oidc.franceconnect.gouv.fr/api/v2/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "PRODUCTION",
+      "logoutUrl": "https://oidc.franceconnect.gouv.fr/api/v2/session/end",
+      "secret": "INSERT_A_REAL_SECRET",
+      "useV2": true,
+      "userInfoUrl": "https://oidc.franceconnect.gouv.fr/api/v2/userinfo",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO.FranceConnect Admin wants to update France Connect configuration and turn it to production mode with v1 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://app.franceconnect.gouv.fr/api/v1/token",
+      "allowedData": Array [
+        "given_name",
+        "family_name",
+        "birthdate",
+        "gender",
+        "email",
+      ],
+      "authorizationUrl": "https://app.franceconnect.gouv.fr/api/v1/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "PRODUCTION",
+      "logoutUrl": "https://app.franceconnect.gouv.fr/api/v1/logout",
+      "secret": "INSERT_A_REAL_SECRET",
+      "useV2": false,
+      "userInfoUrl": "https://app.franceconnect.gouv.fr/api/v1/userinfo",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO.FranceConnect Admin wants to update France Connect configuration with v1 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
+      "allowedData": Array [
+        "given_name",
+        "family_name",
+        "birthdate",
+        "gender",
+        "email",
+      ],
+      "authorizationUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "TESTING",
+      "logoutUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
+      "secret": "INSERT_A_REAL_SECRET",
+      "useV2": false,
+      "userInfoUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
+    },
+  },
+}
+`;
+
+exports[`Internal|SSO.FranceConnect Admin wants to update France Connect configuration with v2 1`] = `
+Object {
+  "updateFranceConnectSSOConfiguration": Object {
+    "fcConfiguration": Object {
+      "accessTokenUrl": "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/token",
+      "allowedData": Array [
+        "given_name",
+        "family_name",
+        "birthdate",
+        "gender",
+        "email",
+      ],
+      "authorizationUrl": "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/authorize",
+      "clientId": "account",
+      "enabled": true,
+      "environment": "TESTING",
+      "logoutUrl": "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/session/end",
+      "secret": "INSERT_A_REAL_SECRET",
+      "useV2": true,
+      "userInfoUrl": "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/userinfo",
+    },
+  },
+}
+`;

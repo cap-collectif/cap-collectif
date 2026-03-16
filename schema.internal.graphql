@@ -7650,6 +7650,9 @@ type FranceConnectSSOConfiguration implements Node & SSOConfiguration {
 
   """Is France Connect completely configured"""
   isCompletelyConfigured: Boolean!
+
+  """Use FranceConnect v2?"""
+  useV2: Boolean!
 }
 
 """3 possible values"""
@@ -19387,6 +19390,7 @@ input UpdateFranceConnectSSOConfigurationInput {
 
   """Environment mode."""
   environment: SSOEnvironment!
+  useV2: Boolean! = false
   given_name: Boolean!
   family_name: Boolean!
   birthdate: Boolean!
@@ -20924,6 +20928,9 @@ type UpdateUserAccountPayload {
 enum UpdateUserEmailErrorCode {
   """You must specify your password to update your email."""
   SPECIFY_PASSWORD
+
+  """The provided password is not valid."""
+  PASSWORD_NOT_VALID
 
   """Already used email."""
   ALREADY_USED_EMAIL

@@ -57,6 +57,7 @@ describe('<ProposalFollowButton />', () => {
   afterEach(() => {
     clearSupportForPortals()
   })
+
   describe('<TestProposalFollowButton />', () => {
     it('should render a button to unfollow a proposal when viewer is following ', () => {
       testComponentTree = ReactTestRenderer.create(<TestProposalFollowButton isAuthenticated />)

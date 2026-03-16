@@ -4,11 +4,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\AvailableSso;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Service\User\AccountConfirmationSender;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\CreatePasswordFormType;
 use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
-use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequest;
-use Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -16,10 +15,8 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RemoveSsoConnectionMutation implements MutationInterface
@@ -32,9 +29,9 @@ class RemoveSsoConnectionMutation implements MutationInterface
         private readonly Publisher $publisher,
         private readonly LoggerInterface $logger,
         private readonly FormFactoryInterface $formFactory,
-        private readonly TokenStorageInterface $tokenStorage,
         private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler,
-        private readonly RouterInterface $router
+        private readonly RouterInterface $router,
+        private readonly AccountConfirmationSender $accountConfirmationSender
     ) {
     }
 
@@ -76,25 +73,15 @@ class RemoveSsoConnectionMutation implements MutationInterface
                     ])
                 )
             );
+
+            if (AvailableSso::FRANCE_CONNECT === $values['service']) {
+                $this->accountConfirmationSender->sendIfNeeded($viewer);
+            }
         }
 
         $request = $requests->getCurrentRequest();
-        $response = null;
-        if ($request) {
-            $profileUrl = $this->router->generate(
-                'capco_profile_edit',
-                [],
-                RouterInterface::ABSOLUTE_URL
-            );
-            $redirect = new RedirectResponse($profileUrl);
-            $response = new RedirectResponseWithRequest($request, $redirect);
-        }
         $redirectUrl = null;
         if (AvailableSso::FRANCE_CONNECT === $values['service']) {
-            $currentToken = $this->tokenStorage->getToken();
-            $theToken = $request->getSession()->get('theToken');
-            LogoutSuccessHandler::setOauthTokenFromSession($currentToken, $theToken);
-
             $viewer->setFirstname(null);
             $viewer->setLastname(null);
             $viewer->setAddress(null);
@@ -104,10 +91,25 @@ class RemoveSsoConnectionMutation implements MutationInterface
             $viewer->setBirthPlace(null);
             $viewer->setDateOfBirth(null);
             $viewer->setGender(null);
-            if ($response) {
-                $response = $this->franceConnectLogoutHandler->handle($response);
-                $redirectUrl = $response->getResponse()->getTargetUrl();
+            if ($request) {
+                $redirectUrl = $this->router->generate(
+                    'capco_profile_edit',
+                    [],
+                    RouterInterface::ABSOLUTE_URL
+                ) . '#account';
+
+                if ($viewer->getFranceConnectIdToken()) {
+                    FranceConnectLogoutHandler::storeAfterLogoutRedirectUrl($request, $redirectUrl);
+                    $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl(
+                        $viewer,
+                        null,
+                        $request
+                    );
+                }
+
+                FranceConnectLogoutHandler::clearFranceConnectSession($request);
             }
+            $viewer->setFranceConnectIdToken(null);
         }
 
         $this->userManager->updateUser($viewer);

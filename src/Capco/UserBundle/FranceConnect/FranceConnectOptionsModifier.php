@@ -14,7 +14,7 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
 {
     final public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
     final public const SESSION_FRANCE_CONNECT_STATE_KEY = 'FranceConnect_state';
-    final public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 5;
+    final public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 20;
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
 
     public function __construct(
@@ -69,7 +69,7 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
 
         /** * @var CacheItem $ssoConfigurationCachedItem  */
         $ssoConfigurationCachedItem = $this->redisCache->getItem(
-            self::REDIS_CACHE_KEY . '-' . $resourceOwner->getName() . '-' . $this->session->getId()
+            self::REDIS_CACHE_KEY . '-' . $this->session->getId()
         );
 
         if (!$ssoConfigurationCachedItem->isHit()) {
@@ -91,6 +91,7 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
                         'authorization_url' => $newSsoConfiguration->getAuthorizationUrl(),
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
                         'logout_url' => $newSsoConfiguration->getLogoutUrl(),
+                        'use_authorization_to_get_token' => !$newSsoConfiguration->isUseV2(),
                     ])
                     ->expiresAfter($this->redisCache::ONE_DAY)
                 ;

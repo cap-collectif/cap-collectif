@@ -32,7 +32,7 @@ class JWT
         }
     }
 
-    public function getSignature(): array
+    public function getSignature(): ?string
     {
         return $this->signature;
     }

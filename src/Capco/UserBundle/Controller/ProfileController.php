@@ -79,6 +79,57 @@ class ProfileController extends Controller
     }
 
     /**
+     * @Route("/franceconnect/associate", name="capco_profile_franceconnect_associate", options={"i18n" = false})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function franceConnectAssociateAction(Request $request): RedirectResponse
+    {
+        FranceConnectLogoutHandler::clearFranceConnectSession($request);
+        if ($request->hasSession()) {
+            $request->getSession()->remove(FranceConnectLogoutHandler::SESSION_AFTER_LOGOUT_REDIRECT_URL_KEY);
+        }
+
+        $callbackUrl = $this->router->generate(
+            'capco_profile_franceconnect_association_return',
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        return $this->redirect(
+            $this->router->generate(
+                'hwi_oauth_service_redirect',
+                [
+                    'service' => 'franceconnect',
+                    '_destination' => $callbackUrl,
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
+        );
+    }
+
+    /**
+     * @Route("/franceconnect/association-return", name="capco_profile_franceconnect_association_return", options={"i18n" = false})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function franceConnectAssociationReturnAction(Request $request): RedirectResponse
+    {
+        $profileUrl = $this->router->generate('capco_profile_edit', [], UrlGeneratorInterface::ABSOLUTE_URL) . '#account';
+
+        if (
+            $request->hasSession()
+            && (bool) $request->getSession()->get(FranceConnectLogoutHandler::SESSION_IMMEDIATE_LOGOUT_REQUIRED_KEY, false)
+        ) {
+            FranceConnectLogoutHandler::storeAfterLogoutRedirectUrl($request, $profileUrl);
+            $logoutUrl = $this->franceConnectLogoutHandler->getLogoutUrl(null, null, $request);
+            FranceConnectLogoutHandler::clearFranceConnectSession($request);
+
+            return $this->redirect($logoutUrl);
+        }
+
+        return $this->redirect($profileUrl);
+    }
+
+    /**
      * @Route("/followings/{token}", name="capco_profile_followings_login")
      */
     public function loginAndShowEditFollowingsAction(Request $request, string $token)
@@ -423,8 +474,16 @@ class ProfileController extends Controller
         );
 
         $user = $this->getUser();
-        if ($user->isFranceConnectAccount()) {
-            $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($user);
+        if (
+            $user->getFranceConnectIdToken()
+            || (
+                $request->hasSession()
+                && (bool) $request->getSession()->get(FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, false)
+            )
+        ) {
+            FranceConnectLogoutHandler::storeAfterLogoutRedirectUrl($request, $redirectUrl);
+            $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($user, null, $request);
+            FranceConnectLogoutHandler::clearFranceConnectSession($request);
         }
 
         $this->deleteAccountMutation->deleteAccount($type, $user);

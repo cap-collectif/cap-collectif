@@ -7,10 +7,12 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Security\RateLimiter;
+use Capco\AppBundle\Service\User\AccountConfirmationSender;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
+use Capco\UserBundle\Form\Type\CreatePasswordFormType;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -38,7 +40,8 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         private readonly EmailDomainRepository $emailDomainRepository,
         private readonly Manager $toggleManager,
         private readonly TokenGeneratorInterface $tokenGenerator,
-        private readonly RateLimiter $rateLimiter
+        private readonly RateLimiter $rateLimiter,
+        private readonly AccountConfirmationSender $accountConfirmationSender
     ) {
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
@@ -51,11 +54,57 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         $newEmailToConfirm = $arguments['email'];
         $password = $arguments['passwordConfirm'];
         $encoder = $this->encoderFactory->getEncoder($viewer);
+        $hasPassword = $viewer->hasPassword();
+        $shouldPersistNewPassword = false;
+        $isPasswordValid = false;
+
+        if (true === $hasPassword) {
+            $isPasswordValid = $encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt());
+
+            // Some accounts are hashed with algorithms that can be validated natively.
+            if (
+                !$isPasswordValid
+                && \is_string($viewer->getPassword())
+                && '' !== $viewer->getPassword()
+                && \is_string($password)
+                && '' !== $password
+            ) {
+                $isPasswordValid = password_verify($password, $viewer->getPassword());
+            }
+        }
+
+        $validateNewPassword = function () use ($password): ?array {
+            $createPasswordForm = $this->formFactory->create(CreatePasswordFormType::class, null, [
+                'csrf_protection' => false,
+            ]);
+            $createPasswordForm->submit(
+                [
+                    'plainPassword' => $password,
+                ],
+                false
+            );
+
+            if (!$createPasswordForm->isValid()) {
+                return ['error' => UpdateUserEmailErrorCode::PASSWORD_NOT_VALID];
+            }
+
+            return null;
+        };
+
         if (
-            $viewer->hasPassword()
-            && !$encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt())
+            true === $hasPassword
+            && !$isPasswordValid
         ) {
             return ['error' => UpdateUserEmailErrorCode::SPECIFY_PASSWORD];
+        }
+        if (false === $hasPassword) {
+            if ($this->isFranceConnectAccount($viewer)) {
+                $error = $validateNewPassword();
+                if ($error) {
+                    return $error;
+                }
+                $shouldPersistNewPassword = true;
+            }
         }
 
         $this->rateLimiter->setLimit(3);
@@ -89,19 +138,56 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
 
         // We generate a confirmation token to validate the new email
         $token = $this->tokenGenerator->generateToken();
+        $viewer->setNewEmailConfirmationToken($token);
+
+        if ($shouldPersistNewPassword) {
+            $viewer->setPlainPassword($password);
+        }
+
+        $this->userManager->updateUser($viewer);
+
+        if ($shouldPersistNewPassword) {
+            $this->publisher->publish(
+                'user.password',
+                new Message(
+                    $this->encodeMessagePayload([
+                        'userId' => $viewer->getId(),
+                    ])
+                )
+            );
+            $this->accountConfirmationSender->sendIfNeeded($viewer);
+        }
 
         $this->publisher->publish(
             'user.email',
             new Message(
-                json_encode([
+                $this->encodeMessagePayload([
                     'userId' => $viewer->getId(),
                 ])
             )
         );
 
-        $viewer->setNewEmailConfirmationToken($token);
-        $this->userManager->updateUser($viewer);
-
         return ['viewer' => $viewer];
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function encodeMessagePayload(array $payload): string
+    {
+        try {
+            return json_encode($payload, \JSON_THROW_ON_ERROR);
+        } catch (\JsonException $exception) {
+            throw new \RuntimeException('Unable to encode message payload.', 0, $exception);
+        }
+    }
+
+    private function isFranceConnectAccount(User $viewer): bool
+    {
+        try {
+            return $viewer->isFranceConnectAccount();
+        } catch (\Throwable) {
+            return false;
+        }
     }
 }

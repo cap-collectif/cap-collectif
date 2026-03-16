@@ -7,6 +7,9 @@ InternalUpdateUserEmailErrorCode:
             SPECIFY_PASSWORD:
                 value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::SPECIFY_PASSWORD
                 description: 'You must specify your password to update your email.'
+            PASSWORD_NOT_VALID:
+                value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::PASSWORD_NOT_VALID
+                description: 'The provided password is not valid.'
             ALREADY_USED_EMAIL:
                 value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::ALREADY_USED_EMAIL
                 description: 'Already used email.'

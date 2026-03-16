@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         cacheResultFile=".phpunit.cache/test-results"
-         executionOrder="depends,defects"
-         forceCoversAnnotation="true"
-         beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         convertDeprecationsToExceptions="true"
-         verbose="true">
-    <testsuites>
-        <testsuite name="default">
-            <directory>tests</directory>
-        </testsuite>
-        <testsuite name="Unit Tests">
-            <directory>tests/UnitTests</directory>
-        </testsuite>
-    </testsuites>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="vendor/autoload.php" cacheResultFile=".phpunit.cache/test-results" executionOrder="depends,defects" forceCoversAnnotation="true" beStrictAboutCoversAnnotation="true" beStrictAboutOutputDuringTests="true" beStrictAboutTodoAnnotatedTests="true" convertDeprecationsToExceptions="true" verbose="true">
+<coverage processUncoveredFiles="true">
+    <include>
+        <directory suffix=".php">src</directory>
+    </include>
+    <report>
+        <html outputDirectory="coverage/php/phpunit"/>
+        <php outputFile="coverage/php/phpunit-php.cov"/>
+    </report>
+</coverage>
+<testsuites>
+    <testsuite name="default">
+        <directory>tests</directory>
+    </testsuite>
+    <testsuite name="Unit Tests">
+        <directory>tests/UnitTests</directory>
+    </testsuite>
+</testsuites>
+<logging/>
+<php>
+    <env name="KERNEL_CLASS" value="App\Kernel"/>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-php" target="coverage/php/phpunit-php.cov" />
-        <log type="coverage-html" target="coverage/php/phpunit" />
-    </logging>
-
-    <php>
-        <env name="KERNEL_CLASS" value="App\Kernel" />
-
-        <!-- ###+ symfony/messenger ### -->
-        <!-- Choose one of the transports below -->
-        <!-- MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages -->
-        <!-- MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages -->
-        <env name="MESSENGER_TRANSPORT_DSN" value="doctrine://default?auto_setup=0"/>
-        <!-- ###- symfony/messenger ### -->
-    </php>
+    <!-- ###+ symfony/messenger ### -->
+    <!-- Choose one of the transports below -->
+    <!-- MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages -->
+    <!-- MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages -->
+    <env name="MESSENGER_TRANSPORT_DSN" value="doctrine://default?auto_setup=0"/>
+    <!-- ###- symfony/messenger ### -->
+</php>
 </phpunit>

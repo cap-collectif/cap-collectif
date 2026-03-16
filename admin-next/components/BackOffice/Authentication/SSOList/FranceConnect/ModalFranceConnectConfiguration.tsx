@@ -24,6 +24,7 @@ const FRAGMENT = graphql`
     logoutUrl
     allowedData
     enabled
+    useV2
   }
 `
 
@@ -37,6 +38,7 @@ const onSubmit = (
   return UpdateFranceConnectSSOConfigurationMutation.commit({
     input: {
       environment: data.environment ? 'TESTING' : 'PRODUCTION',
+      useV2: data.useV2,
       clientId: data.clientId,
       secret: data.secret,
       given_name: data.given_name || false,
@@ -67,6 +69,7 @@ const ModalFranceConnectConfiguration: FC<ModalFranceConnectConfigurationProps> 
     ssoConfiguration && isEditing
       ? {
           environment: ssoConfiguration.environment === 'TESTING',
+          useV2: ssoConfiguration.useV2,
           clientId: ssoConfiguration.clientId,
           secret: ssoConfiguration.secret,
           logoutUrl: ssoConfiguration.logoutUrl,

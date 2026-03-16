@@ -8,6 +8,7 @@ import { FormControl, FieldInput } from '@cap-collectif/form'
 
 export type FormValues = {
   environment: boolean
+  useV2: boolean
   clientId: string
   secret: string
   redirectUri: string
@@ -70,6 +71,14 @@ const FormConfiguration: FC = () => {
 
   return (
     <Flex as="form" direction="column" spacing={3} id={formName}>
+      <FormControl name="useV2" control={control}>
+        <FieldInput id="useV2" name="useV2" control={control} type="checkbox">
+          {intl.formatMessage({
+            id: 'use-france-connect-v2',
+          })}
+        </FieldInput>
+      </FormControl>
+
       <FormControl name="clientId" control={control} isRequired>
         <FormLabel htmlFor="clientId" label={intl.formatMessage({ id: 'client-id' })} />
         <FieldInput id="clientId" name="clientId" control={control} type="text" minLength={2} />

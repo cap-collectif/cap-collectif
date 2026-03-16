@@ -155,6 +155,8 @@ services:
 
     Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
 
+    Capco\UserBundle\Jwt\Jwt: ~
+
     Capco\UserBundle\Facebook\FacebookOptionsModifier: ~
 
     Capco\UserBundle\OpenID\OpenIDExtraMapper:
@@ -445,6 +447,9 @@ services:
                 'paths': []
             $name: 'franceconnect'
             $optionsModifier: '@Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier'
+
+    Capco\UserBundle\FranceConnect\FranceConnectResourceOwner:
+        alias: hwi_oauth.resource_owner.franceconnect
 
     hwi_oauth.resource_owner.openid:
         class: 'Capco\UserBundle\OpenID\OpenIDResourceOwner'

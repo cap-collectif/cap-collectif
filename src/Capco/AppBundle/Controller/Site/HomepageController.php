@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\Resolver\SectionResolver;
 use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
+use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -30,6 +31,11 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request): Response
     {
+        $afterLogoutRedirectUrl = FranceConnectLogoutHandler::consumeAfterLogoutRedirectUrl($request);
+        if (null !== $afterLogoutRedirectUrl) {
+            return $this->redirect($afterLogoutRedirectUrl);
+        }
+
         $locale = $request->getLocale();
         $sections = $this->sectionResolver->getDisplayableEnabledOrdered();
         $eventsCount = $this->eventsResolver
