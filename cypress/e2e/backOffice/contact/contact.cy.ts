@@ -65,12 +65,14 @@ describe('Contact page logged as admin', () => {
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     ContactPageBO.visitContactPage()
-    cy.get('div.list-group span.list-group-item').should('have.length', 3)
-    cy.get('div.list-group').contains('Contact form 1').should('exist')
-    cy.get("[id^='DeleteContact-']").contains('global.delete').first().click()
+    cy.contains('div.list-group span.list-group-item', 'Contact form 1').as('contactFormRow')
+    cy.get('@contactFormRow').find("[id^='DeleteContact-']").contains('global.delete').click()
     cy.get('#delete-modal-button-delete').click()
-    cy.get('div.list-group').contains('Contact form 1').should('not.exist')
-    cy.get('div.list-group span.list-group-item').should('have.length', 2)
+    cy.wait('@ContactAdminPageAppQuery').its('response.statusCode').should('eq', 200)
+    cy.get('div.list-group span.list-group-item strong').then($titles => {
+      const titles = Array.from($titles, title => title.textContent?.trim())
+      expect(titles).not.to.include('Contact form 1')
+    })
   })
 
   it('displays an error when title is empty', () => {

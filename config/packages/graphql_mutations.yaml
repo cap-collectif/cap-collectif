@@ -19,7 +19,7 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ContactFormMutation.php}'
 
     #follwoing mutations are legacy : now we make on mutation file for each mutation
     Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
@@ -48,6 +48,29 @@ services:
             - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
             - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
             - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
+
+    Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
+        tags:
+            - {
+                  name: overblog_graphql.mutation,
+                  alias: 'Capco\AppBundle\GraphQL\Mutation\ContactFormMutation::send',
+                  method: 'send',
+              }
+            - {
+                  name: overblog_graphql.mutation,
+                  alias: 'Capco\AppBundle\GraphQL\Mutation\ContactFormMutation::add',
+                  method: 'add',
+              }
+            - {
+                  name: overblog_graphql.mutation,
+                  alias: 'Capco\AppBundle\GraphQL\Mutation\ContactFormMutation::remove',
+                  method: 'remove',
+              }
+            - {
+                  name: overblog_graphql.mutation,
+                  alias: 'Capco\AppBundle\GraphQL\Mutation\ContactFormMutation::update',
+                  method: 'update',
+              }
 
     Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService:
         arguments:

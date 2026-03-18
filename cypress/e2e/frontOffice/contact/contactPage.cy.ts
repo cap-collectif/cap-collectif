@@ -19,8 +19,11 @@ describe('Contact page', () => {
   it('correctly sends a message via the first form', () => {
     cy.visit('/contact')
     cy.get('[id^="accordion-button"]')
+    cy.interceptGraphQLOperation({ operationName: 'SendContactFormMutation' })
     fillForm('Marie Lopez', 'enjoyphoenix@gmail.com', 'Partenariat', 'Lorem ipsum')
     cy.get('button[type="submit"]').click({ force: true })
+    cy.wait('@SendContactFormMutation').its('response.statusCode').should('eq', 200)
+    cy.get('@SendContactFormMutation').its('response.body.errors').should('be.undefined')
     cy.get('.toasts-container--top div').should('contain', 'contact.email.sent_success')
   })
   it('cannot send a message via the first form with field errors', () => {
