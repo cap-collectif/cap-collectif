@@ -1,12 +1,13 @@
+import { Button, CapUIIcon, Flex, InlineSelect, Menu, Text } from '@cap-collectif/ui'
+import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { graphql, createFragmentContainer } from 'react-relay'
-import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
-import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
+import { createFragmentContainer, graphql } from 'react-relay'
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context'
+import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
 import type { ArgumentHeaderTab_debate } from '~relay/ArgumentHeaderTab_debate.graphql'
 import type { ArgumentHeaderTab_debateStep } from '~relay/ArgumentHeaderTab_debateStep.graphql'
-import { CapUIIcon, Flex, Menu, Button, Text, InlineSelect } from '@cap-collectif/ui'
+import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
 type Props = {
   debate: ArgumentHeaderTab_debate
   debateStep: ArgumentHeaderTab_debateStep
@@ -87,14 +88,14 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
                   id: 'filter-arguments',
                 })}
               >
-                <Menu.OptionItem value="FOR">
+                <Menu.OptionItem value="FOR" style={{ display: 'flex', gap: pxToRem(8) }}>
                   <Text color="gray.900">
                     {intl.formatMessage({
                       id: 'global.for',
                     })}
                   </Text>
                 </Menu.OptionItem>
-                <Menu.OptionItem value="AGAINST">
+                <Menu.OptionItem value="AGAINST" style={{ display: 'flex', gap: pxToRem(8) }}>
                   <Text color="gray.900">
                     {intl.formatMessage({
                       id: 'global.against',

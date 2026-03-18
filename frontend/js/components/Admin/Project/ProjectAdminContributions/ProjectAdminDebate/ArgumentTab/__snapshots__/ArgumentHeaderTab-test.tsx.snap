@@ -59,6 +59,12 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
             }
           >
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="FOR"
             >
               <Text
@@ -68,6 +74,12 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
               </Text>
             </Component>
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="AGAINST"
             >
               <Text
@@ -152,6 +164,12 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
             }
           >
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="FOR"
             >
               <Text
@@ -161,6 +179,12 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
               </Text>
             </Component>
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="AGAINST"
             >
               <Text
@@ -245,6 +269,12 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
             }
           >
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="FOR"
             >
               <Text
@@ -254,6 +284,12 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
               </Text>
             </Component>
             <Component
+              style={
+                Object {
+                  "display": "flex",
+                  "gap": "0.571rem",
+                }
+              }
               value="AGAINST"
             >
               <Text
