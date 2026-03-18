@@ -10,7 +10,12 @@ const FRAGMENT = graphql`
   fragment OrganizationPagePostList_organization on Organization
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "OrganizationPagePostListPaginationQuery") {
-    posts(first: $count, after: $cursor, hideUnpublishedPosts: true)
+    posts(
+      first: $count
+      after: $cursor
+      hideUnpublishedPosts: true
+      orderBy: { field: PUBLISHED_AT, direction: DESC }
+    )
       @connection(key: "OrganizationPagePostList_posts") {
       edges {
         node {

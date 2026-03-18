@@ -23,6 +23,7 @@ class PostRepository extends EntityRepository
     private const ORDERS = [
         'UPDATED_AT' => 'updatedAt',
         'CREATED_AT' => 'createdAt',
+        'PUBLISHED_AT' => 'publishedAt',
     ];
 
     public function getPublishedPostsByProposal(Proposal $proposal): array
