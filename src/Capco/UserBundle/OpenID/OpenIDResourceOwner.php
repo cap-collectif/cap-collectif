@@ -73,7 +73,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     public function isUsingAuthorizationHeaderToGetAccessToken(): bool
     {
         return match ($this->getInstanceName()) {
-            'pe', 'parlons-energies' => true,
+            'pe', 'parlons-energies', 'catp' => true,
             default => false,
         };
     }
@@ -83,6 +83,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         return match ($this->getInstanceName()) {
             'carpentras' => 'openid email family_name given_name',
+            'catp' => 'openid profile',
             'pe', 'parlons-energies' => 'openid email givenName',
             default => 'openid email profile',
         };

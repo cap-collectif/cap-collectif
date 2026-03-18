@@ -5,6 +5,7 @@ namespace Capco\UserBundle\OpenID;
 use Capco\UserBundle\OpenID\Mapping\AixMarseilleUnivMapping;
 use Capco\UserBundle\OpenID\Mapping\CarpentrasMapping;
 use Capco\UserBundle\OpenID\Mapping\CndpMapping;
+use Capco\UserBundle\OpenID\Mapping\CreditAgricoleMapping;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
 use Capco\UserBundle\OpenID\Mapping\DevOpenIDMapping;
 use Capco\UserBundle\OpenID\Mapping\DijonMapping;
@@ -26,6 +27,7 @@ class OpenIDPathMapper
             'parlons-energies', 'pe' => new EdfMapping(),
             'occitanie', 'occitanie-dedicated', 'occitanie-preprod' => new OccitanieMapping(),
             'nantes' => new NantesMapping(),
+            'catp' => new CreditAgricoleMapping(),
             'decathlon-preprod', 'nl-decathlon', 'decathlon' => new DecathlonMapping(),
             'grand-lyon', 'grand-lyon-preprod' => new GrandLyonMapping(),
             'carpentras' => new CarpentrasMapping(),
