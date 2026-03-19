@@ -20,8 +20,9 @@ import { useIntl } from 'react-intl'
 import { MediaList_query$key } from '@relay/MediaList_query.graphql'
 import moment from 'moment'
 import copy from 'copy-to-clipboard'
+import saveAs from '@shared/utils/filesaver'
 import MediaModal from './MediaModal'
-import { convertFileSize, isImage, Media, MediaTags, TableHead, View } from './utils'
+import { convertFileSize, getDownloadFilename, isImage, Media, MediaTags, TableHead, View } from './utils'
 import { useLayoutContext } from '@components/BackOffice/Layout/Layout.context'
 import EmptyMessage from '@ui/Table/EmptyMessage'
 import MediaDeleteModal from './MediaDeleteModal'
@@ -86,6 +87,10 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
     }
     firstRendered.current = true
   }, [term, refetch])
+
+  const downloadMedia = React.useCallback((media: Media) => {
+    saveAs(media.url, getDownloadFilename(media))
+  }, [])
 
   return (
     <>
@@ -198,6 +203,14 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                           icon={CapUIIcon.Link}
                           label={intl.formatMessage({ id: isCopied ? 'copied-link' : 'copy-link' })}
                         />
+                        {!isImage(media.providerReference) ? (
+                          <ButtonQuickAction
+                            onClick={() => downloadMedia(media)}
+                            variantColor="primary"
+                            icon={CapUIIcon.Download}
+                            label={intl.formatMessage({ id: 'global.download' })}
+                          />
+                        ) : null}
                         <ButtonQuickAction
                           onClick={() => {
                             setSelectedMediasToDelete([media.id])
@@ -297,6 +310,14 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                           icon={CapUIIcon.Link}
                           label={intl.formatMessage({ id: isCopied ? 'copied-link' : 'copy-link' })}
                         />
+                        {!isImage(media.providerReference) ? (
+                          <ButtonQuickAction
+                            onClick={() => downloadMedia(media)}
+                            variantColor="primary"
+                            icon={CapUIIcon.Download}
+                            label={intl.formatMessage({ id: 'global.download' })}
+                          />
+                        ) : null}
                         <ButtonQuickAction
                           onClick={() => setSelectedMediasToDelete([media.id])}
                           variantColor="danger"

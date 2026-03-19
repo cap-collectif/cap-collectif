@@ -5,7 +5,23 @@ import { useIntl } from 'react-intl'
 export type Media = MediaList_query$data['medias']['edges'][0]['node']
 export type View = 'LIST' | 'GRID'
 
-export const getFileExtension = (filename: string): string => filename.split('.').pop()
+export const getFileExtension = (filename: string): string => filename.split('.').pop() || ''
+
+export const getDownloadFilename = (media: Media): string => {
+  const mediaName = media?.name?.trim()
+  const providerExtension = getFileExtension(media.providerReference)
+  const hasExtension = Boolean(mediaName && /\.[^./\\]+$/.test(mediaName))
+
+  if (!mediaName) {
+    return media.providerReference
+  }
+
+  if (hasExtension || !providerExtension) {
+    return mediaName
+  }
+
+  return `${mediaName}.${providerExtension}`
+}
 
 export const isImage = (filename: string): boolean =>
   ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'svg', 'gif', 'webp'].includes(getFileExtension(filename))

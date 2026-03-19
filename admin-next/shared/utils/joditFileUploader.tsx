@@ -19,6 +19,30 @@ const SIZE_LIMIT = 104857600 // 100Mo
 const formats =
   '.png, .svg, .gif, .jp(e)g, .webp, .doc, .docx, .odt, .txt, .pdf, .xls, .xlsx, .ods, .csv, .ppt, .pptx, .zip, .rar, .7z, .gz, .tar, .bz2'
 
+const getExtensionFromUrl = (url?: string): string => {
+  const pathWithoutQuery = url?.split('?')[0]?.split('#')[0] || ''
+  const lastSegment = pathWithoutQuery.split('/').pop() || ''
+  const extension = lastSegment.split('.').pop()
+
+  return extension && extension !== lastSegment ? `.${extension}` : ''
+}
+
+export const getJoditDownloadFilename = (name?: string | null, url?: string): string => {
+  const trimmedName = name?.trim() || ''
+  const hasExtension = /\.[^./\\]+$/.test(trimmedName)
+  const extensionFromUrl = getExtensionFromUrl(url)
+
+  if (!trimmedName) {
+    return `download${extensionFromUrl}`
+  }
+
+  if (hasExtension || !extensionFromUrl) {
+    return trimmedName
+  }
+
+  return `${trimmedName}${extensionFromUrl}`
+}
+
 export const joditFileUploader = {
   tooltip: 'Insert file',
   icon: 'file',
@@ -86,10 +110,13 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
           }
 
           if (editor.selection) {
+            const filename = getJoditDownloadFilename(this?.metadata?.name, fileUrl)
+            const downloadAriaLabel = `${intl.formatMessage({ id: 'global.download' })} - ${filename}`
             const elm = editor.createInside.element('a')
             elm.setAttribute('href', fileUrl)
-            // eslint-disable-next-line prefer-destructuring
-            elm.textContent = this.metadata.name
+            elm.setAttribute('download', filename)
+            elm.setAttribute('aria-label', downloadAriaLabel)
+            elm.textContent = filename
             editor.selection.insertNode(elm)
           }
           editor.e.fire('closeAllPopups')
