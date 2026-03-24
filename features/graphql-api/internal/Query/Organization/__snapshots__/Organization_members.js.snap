@@ -7,22 +7,6 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "role": "USER",
-            "user": Object {
-              "username": "user101",
-            },
-          },
-        },
-        Object {
-          "node": Object {
-            "role": "USER",
-            "user": Object {
-              "username": "user6",
-            },
-          },
-        },
-        Object {
-          "node": Object {
             "role": "ADMIN",
             "user": Object {
               "username": "Dev null",
@@ -34,6 +18,22 @@ Object {
             "role": "USER",
             "user": Object {
               "username": "Omar <3 Rem",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
+              "username": "user101",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
+              "username": "user6",
             },
           },
         },

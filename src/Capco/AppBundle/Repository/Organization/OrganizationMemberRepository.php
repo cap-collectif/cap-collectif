@@ -20,7 +20,10 @@ class OrganizationMemberRepository extends EntityRepository
         ?int $offset = null
     ): array {
         return $this->createQueryBuilder('o')
+            ->leftJoin('o.user', 'u')
             ->where('o.organization = :organization')
+            ->orderBy('u.username', 'ASC')
+            ->addOrderBy('o.id', 'ASC')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->setParameter('organization', $organization)
