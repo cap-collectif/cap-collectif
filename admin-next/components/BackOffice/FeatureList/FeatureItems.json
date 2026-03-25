@@ -96,6 +96,11 @@
                         "description": "",
                         "onlySuperAdmin": true
                     },
+                    "new_project_page": {
+                        "title": "New project page",
+                        "description": "",
+                        "onlySuperAdmin": true
+                    },
                     "new_vote_step": {
                         "title": "capco.module.new_vote_step",
                         "description": "",

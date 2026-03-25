@@ -106,6 +106,7 @@ export const config = {
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/admin-next/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/profile/organization/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/project-district/:path*',
+    '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/test-project/:projectSlug',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/pages/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/contact',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/projects',

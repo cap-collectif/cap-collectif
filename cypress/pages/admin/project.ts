@@ -31,17 +31,6 @@ export default new (class AdminProjectPage {
     this.cy.visit(url)
   }
 
-  assertProposalsAndProgressStatusLengthOnAnalysisTab(expectedProgressStatus: string, expectedLength: number) {
-    this.cy.get('div.pickableList-row').should('have.length', expectedLength)
-    this.cy.get('button.analysis-status-container span').should('have.length', expectedLength)
-    for (let i = 0; i < expectedLength; i++) {
-      this.cy
-        .get(`div:nth-child(${i + 1}) > div > div > button span.ml-5`)
-        .contains(expectedProgressStatus)
-        .should('exist')
-    }
-  }
-
   visit(projectName: string) {
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })

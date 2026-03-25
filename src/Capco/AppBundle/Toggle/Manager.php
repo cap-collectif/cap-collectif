@@ -93,6 +93,7 @@ class Manager
     final public const user_anonymization_automated = 'user_anonymization_automated';
     final public const antivirus = 'antivirus';
     final public const mailjet_sandbox = 'mailjet_sandbox';
+    final public const new_project_page = 'new_project_page';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -140,6 +141,7 @@ class Manager
         self::sso_by_pass_auth,
         self::oauth2_switch_user,
         self::mailjet_sandbox,
+        self::new_project_page,
     ];
 
     public static $toggles = [
@@ -225,6 +227,7 @@ class Manager
         self::user_anonymization_automated,
         self::antivirus,
         self::mailjet_sandbox,
+        self::new_project_page,
     ];
 
     protected Context $context;

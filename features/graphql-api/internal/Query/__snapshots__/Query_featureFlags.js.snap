@@ -249,6 +249,9 @@ Object {
     Object {
       "type": "mailjet_sandbox",
     },
+    Object {
+      "type": "new_project_page",
+    },
   ],
 }
 `;

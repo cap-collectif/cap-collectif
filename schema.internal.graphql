@@ -7323,6 +7323,9 @@ enum FeatureFlagType {
   """Whether or not new voting step is enabled"""
   new_new_vote_step
 
+  """Whether or not the new project page is enabled"""
+  new_project_page
+
   """Whether or not votes can be added by mediators"""
   mediator
 

@@ -102,6 +102,7 @@ export const features: FeatureFlags = {
   new_project_card: false,
   antivirus: false,
   mailjet_sandbox: false,
+  new_project_page: false,
 }
 
 const environment = {

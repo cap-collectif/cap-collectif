@@ -85,6 +85,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   new_project_card: false,
   antivirus: false,
   mailjet_sandbox: false,
+  new_project_page: false,
 }
 
 type FeatureFlags = Omit<
