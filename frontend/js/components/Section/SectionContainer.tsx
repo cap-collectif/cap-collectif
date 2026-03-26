@@ -37,10 +37,12 @@ export class SectionContainer extends Component<Props> {
     return (
       <div className="row">
         <h2 className="h2">{title}</h2>
-        <p className="block">{teaser}</p>
-        <p className="block">
-          <WYSIWYGRender value={body} />
-        </p>
+        {teaser && <p className="block">{teaser}</p>}
+        {body && (
+          <p className="block">
+            <WYSIWYGRender value={body} />
+          </p>
+        )}
         <QueryRenderer
           variables={{}}
           environment={environment}
