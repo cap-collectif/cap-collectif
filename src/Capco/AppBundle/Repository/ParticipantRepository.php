@@ -417,6 +417,26 @@ class ParticipantRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult() > 0;
     }
 
+    /**
+     * @param array<int, string> $ids
+     *
+     * @return array<Participant>
+     */
+    public function hydrateFromIdsOrdered(array $ids): array
+    {
+        if ([] === $ids) {
+            return [];
+        }
+
+        $qb = $this->createQueryBuilder('participant');
+        $qb->where('participant.id IN (:ids)')
+            ->addOrderBy('FIELD(participant.id, :ids)')
+            ->setParameter('ids', $ids)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getParticipantsWithFiltersQueryBuilder(QueryBuilder $qb, ?bool $consentInternalCommunication = null, ?bool $emailConfirmed = null): QueryBuilder
     {
         if (null !== $consentInternalCommunication) {
