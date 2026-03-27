@@ -17460,6 +17460,9 @@ type SendParticipantConsentInternalCommunicationEmailPayload {
 Available errors for an `SendParticipantEmailWorkflowErrorCode` mutation.
 """
 enum SendParticipantEmailWorkflowErrorCode {
+  """The email is already confirmed"""
+  EMAIL_ALREADY_CONFIRMED
+
   """The email has already been sent recently"""
   EMAIL_RECENTLY_SENT
 }

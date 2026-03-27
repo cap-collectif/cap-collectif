@@ -27,8 +27,16 @@ final class ParticipantNotifier extends BaseNotifier
 
     public function sendEmailConfirmation(Participant $participant, string $redirectUrl, string $participationCookies): void
     {
-        if (null === $participant->getConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' participant confirmation token must exist');
+        if (null === $participant->getNewEmailToConfirm()) {
+            $this->logger->error(__METHOD__ . ' participant new email must exist');
+
+            return;
+        }
+
+        if (null === $participant->getNewEmailConfirmationToken()) {
+            $this->logger->error(__METHOD__ . ' participant new email confirmation token must exist');
+
+            return;
         }
 
         $this->mailer->createAndSendMessage(
