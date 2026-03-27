@@ -21,7 +21,8 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         private readonly OpenIDReferrerResolver $refererResolver,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly AbstractSSOConfigurationRepository $repository,
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
+        private readonly string $instanceName
     ) {
     }
 
@@ -62,6 +63,11 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                 }
 
                 $parameters['client_id'] = $oauth2->getClientId();
+
+                $idToken = $token->getRawToken()['id_token'] ?? null;
+                if (str_contains($this->instanceName, 'occitanie') && $idToken) {
+                    $parameters['id_token_hint'] = $idToken;
+                }
 
                 $session = $responseWithRequest->getRequest()->getSession();
                 $sessionName = $session->getName();

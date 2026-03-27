@@ -35,7 +35,8 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
             $referrerResolver,
             $tokenStorage,
             $repository,
-            $em
+            $em,
+            'instanceName'
         );
 
         $this->shouldHaveType(OpenIDLogoutHandler::class);
@@ -56,7 +57,8 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
             $referrerResolver,
             $tokenStorage,
             $repository,
-            $em
+            $em,
+            'instanceName'
         );
 
         $oauth2 = (new Oauth2SSOConfiguration())
@@ -120,7 +122,8 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
             $referrerResolver,
             $tokenStorage,
             $repository,
-            $em
+            $em,
+            'instanceName'
         );
 
         $oauth2 = (new Oauth2SSOConfiguration())->setDisconnectSsoOnLogout(true);
@@ -174,7 +177,8 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
             $referrerResolver,
             $tokenStorage,
             $repository,
-            $em
+            $em,
+            'instanceName'
         );
 
         $oauth2 = (new Oauth2SSOConfiguration())

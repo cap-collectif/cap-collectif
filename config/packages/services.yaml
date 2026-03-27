@@ -181,6 +181,7 @@ services:
     Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler:
         arguments:
             $resourceOwner: '@hwi_oauth.resource_owner.openid'
+            $instanceName: '%env(SYMFONY_INSTANCE_NAME)%'
 
     Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler:
         lazy: true
