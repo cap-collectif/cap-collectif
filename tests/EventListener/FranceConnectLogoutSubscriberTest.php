@@ -15,7 +15,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \FranceConnectLogoutSubscriber
+ *
+ * @uses \FranceConnectLogoutHandler::clearFranceConnectSession
  */
 class FranceConnectLogoutSubscriberTest extends TestCase
 {

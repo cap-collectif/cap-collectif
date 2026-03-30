@@ -186,6 +186,12 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     private $posts;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectTab", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private Collection $tabs;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
@@ -291,6 +297,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->tabs = new ArrayCollection();
         $this->projectDistrictPositioners = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->publishedAt = new \DateTime();
@@ -657,6 +664,29 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     public function removePost(Post $post)
     {
         $this->posts->removeElement($post);
+
+        return $this;
+    }
+
+    public function getTabs(): Collection
+    {
+        return $this->tabs;
+    }
+
+    public function addTab(ProjectTab $tab): self
+    {
+        $tab->setProject($this);
+
+        if (!$this->tabs->contains($tab)) {
+            $this->tabs->add($tab);
+        }
+
+        return $this;
+    }
+
+    public function removeTab(ProjectTab $tab): self
+    {
+        $this->tabs->removeElement($tab);
 
         return $this;
     }
