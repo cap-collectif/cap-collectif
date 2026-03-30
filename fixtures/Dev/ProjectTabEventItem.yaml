@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\ProjectTabEventItem:
+    projectTabEventItem1:
+        id: 'projectTabEventItem1'
+        projectTab: '@projectTabEventsP1'
+        event: '@event2'
+        position: 1
+    projectTabEventItem2:
+        id: 'projectTabEventItem2'
+        projectTab: '@projectTabEventsP1'
+        event: '@event1'
+        position: 2

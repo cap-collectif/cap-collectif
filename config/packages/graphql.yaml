@@ -112,6 +112,10 @@ overblog_graphql:
                     - InternalOrganizationTranslation
                     - InternalParticipant
                     - InternalMenuItem
+                    - InternalProjectTabPresentation
+                    - InternalProjectTabNews
+                    - InternalProjectTabEvents
+                    - InternalProjectTabCustom
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement
@@ -159,6 +163,10 @@ overblog_graphql:
                     - InternalProposalVoteConnection
                     - InternalOrganization
                     - InternalOrganizationTranslation
+                    - InternalProjectTabPresentation
+                    - InternalProjectTabNews
+                    - InternalProjectTabEvents
+                    - InternalProjectTabCustom
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement

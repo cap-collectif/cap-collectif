@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.project.tabs returns all project tabs with ordered content 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "tabs": Array [
+      Object {
+        "__typename": "ProjectTabEvents",
+        "enabled": true,
+        "events": Array [
+          Object {
+            "id": "RXZlbnQ6ZXZlbnQy",
+            "title": "PHPTourDuFuture",
+          },
+          Object {
+            "id": "RXZlbnQ6ZXZlbnQx",
+            "title": "Event with registrations",
+          },
+        ],
+        "id": "UHJvamVjdFRhYjpwcm9qZWN0VGFiRXZlbnRzUDE=",
+        "position": 1,
+        "slug": "evenements",
+        "title": "Événements",
+        "type": "EVENTS",
+      },
+      Object {
+        "__typename": "ProjectTabPresentation",
+        "body": "<p>Contenu de présentation</p>",
+        "enabled": true,
+        "id": "UHJvamVjdFRhYjpwcm9qZWN0VGFiUHJlc2VudGF0aW9uUDE=",
+        "position": 2,
+        "slug": "presentation",
+        "title": "Présentation",
+        "type": "PRESENTATION",
+      },
+      Object {
+        "__typename": "ProjectTabNews",
+        "enabled": true,
+        "id": "UHJvamVjdFRhYjpwcm9qZWN0VGFiTmV3c1Ax",
+        "news": Array [
+          Object {
+            "id": "UG9zdDpwb3N0Mg==",
+            "title": "Post FR 2",
+          },
+          Object {
+            "id": "UG9zdDpwb3N0MQ==",
+            "title": "Post FR 1",
+          },
+        ],
+        "position": 3,
+        "slug": "actualites",
+        "title": "Actualités",
+        "type": "NEWS",
+      },
+      Object {
+        "__typename": "ProjectTabCustom",
+        "body": "<p>Contenu personnalisé</p>",
+        "enabled": false,
+        "id": "UHJvamVjdFRhYjpwcm9qZWN0VGFiQ3VzdG9tUDE=",
+        "position": 4,
+        "slug": "infos-pratiques",
+        "title": "Infos pratiques",
+        "type": "CUSTOM",
+      },
+    ],
+  },
+}
+`;

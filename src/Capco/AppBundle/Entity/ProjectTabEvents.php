@@ -39,6 +39,24 @@ class ProjectTabEvents extends ProjectTab
         return $this->eventItems;
     }
 
+    /**
+     * @return array<Event>
+     */
+    public function getEvents(): array
+    {
+        $events = [];
+        foreach ($this->eventItems as $eventItem) {
+            $event = $eventItem->getEvent();
+            if (!$event instanceof Event) {
+                continue;
+            }
+
+            $events[] = $event;
+        }
+
+        return $events;
+    }
+
     public function addEventItem(ProjectTabEventItem $eventItem): self
     {
         $eventItem->setProjectTab($this);

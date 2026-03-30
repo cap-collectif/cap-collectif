@@ -1,0 +1,22 @@
+InternalProjectTab:
+    type: interface
+    config:
+        name: ProjectTab
+        description: 'A configurable tab displayed on the project page.'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTabTypeResolver", value)'
+        fields:
+            id:
+                type: 'ID!'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ProjectTab
+            title:
+                type: 'String!'
+            slug:
+                type: 'String!'
+            enabled:
+                type: 'Boolean!'
+            type:
+                type: 'InternalProjectTabType!'
+            position:
+                type: 'Int!'

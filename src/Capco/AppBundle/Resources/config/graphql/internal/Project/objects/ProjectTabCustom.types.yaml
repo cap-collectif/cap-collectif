@@ -1,0 +1,11 @@
+InternalProjectTabCustom:
+    type: object
+    inherits:
+        - InternalProjectTab
+    config:
+        name: ProjectTabCustom
+        interfaces:
+            - InternalProjectTab
+        fields:
+            body:
+                type: 'String'

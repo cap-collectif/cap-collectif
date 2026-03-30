@@ -1,0 +1,14 @@
+InternalProjectTabType:
+    type: enum
+    config:
+        name: ProjectTabType
+        description: 'The possible types for a project tab.'
+        values:
+            PRESENTATION:
+                value: !php/const Capco\AppBundle\Enum\ProjectTabType::PRESENTATION
+            NEWS:
+                value: !php/const Capco\AppBundle\Enum\ProjectTabType::NEWS
+            EVENTS:
+                value: !php/const Capco\AppBundle\Enum\ProjectTabType::EVENTS
+            CUSTOM:
+                value: !php/const Capco\AppBundle\Enum\ProjectTabType::CUSTOM

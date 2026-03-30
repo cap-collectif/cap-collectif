@@ -11838,6 +11838,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): Int!
+  tabs: [ProjectTab!]!
 
   """Slug of a project"""
   slug: String!
@@ -12253,6 +12254,73 @@ input ProjectStepInput {
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
+}
+
+"""A configurable tab displayed on the project page."""
+interface ProjectTab {
+  """The ID of an object"""
+  id: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  type: ProjectTabType!
+  position: Int!
+}
+
+"""A configurable tab displayed on the project page."""
+type ProjectTabCustom implements ProjectTab {
+  """The ID of an object"""
+  id: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  type: ProjectTabType!
+  position: Int!
+  body: String
+}
+
+"""A configurable tab displayed on the project page."""
+type ProjectTabEvents implements ProjectTab {
+  """The ID of an object"""
+  id: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  type: ProjectTabType!
+  position: Int!
+  events: [Event!]!
+}
+
+"""A configurable tab displayed on the project page."""
+type ProjectTabNews implements ProjectTab {
+  """The ID of an object"""
+  id: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  type: ProjectTabType!
+  position: Int!
+  news: [Post!]!
+}
+
+"""A configurable tab displayed on the project page."""
+type ProjectTabPresentation implements ProjectTab {
+  """The ID of an object"""
+  id: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  type: ProjectTabType!
+  position: Int!
+  body: String
+}
+
+"""The possible types for a project tab."""
+enum ProjectTabType {
+  PRESENTATION
+  NEWS
+  EVENTS
+  CUSTOM
 }
 
 """Label of a Project."""

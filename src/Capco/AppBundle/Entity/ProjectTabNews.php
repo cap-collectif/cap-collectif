@@ -39,6 +39,24 @@ class ProjectTabNews extends ProjectTab
         return $this->newsItems;
     }
 
+    /**
+     * @return array<Post>
+     */
+    public function getNews(): array
+    {
+        $news = [];
+        foreach ($this->newsItems as $newsItem) {
+            $post = $newsItem->getPost();
+            if (!$post instanceof Post) {
+                continue;
+            }
+
+            $news[] = $post;
+        }
+
+        return $news;
+    }
+
     public function addNewsItem(ProjectTabNewsItem $newsItem): self
     {
         $newsItem->setProjectTab($this);

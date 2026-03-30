@@ -87,6 +87,8 @@ InternalProject:
                         defaultValue: false
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", value, args)'
                 type: '[InternalStep!]!'
+            tabs:
+                type: '[InternalProjectTab!]!'
             cover:
                 type: 'InternalMedia'
             authors:

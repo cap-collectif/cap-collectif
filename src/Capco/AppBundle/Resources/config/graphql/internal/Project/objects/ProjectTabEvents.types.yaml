@@ -1,0 +1,11 @@
+InternalProjectTabEvents:
+    type: object
+    inherits:
+        - InternalProjectTab
+    config:
+        name: ProjectTabEvents
+        interfaces:
+            - InternalProjectTab
+        fields:
+            events:
+                type: '[InternalEvent!]!'

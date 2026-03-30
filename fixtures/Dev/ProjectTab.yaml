@@ -1,0 +1,37 @@
+Capco\AppBundle\Entity\ProjectTabPresentation:
+    projectTabPresentationP1:
+        id: 'projectTabPresentationP1'
+        project: '@p1'
+        title: 'Présentation'
+        slug: 'presentation'
+        enabled: true
+        position: 2
+        body: <stripslashes('\<p>Contenu de présentation</p>\')>
+
+Capco\AppBundle\Entity\ProjectTabNews:
+    projectTabNewsP1:
+        id: 'projectTabNewsP1'
+        project: '@p1'
+        title: 'Actualités'
+        slug: 'actualites'
+        enabled: true
+        position: 3
+
+Capco\AppBundle\Entity\ProjectTabEvents:
+    projectTabEventsP1:
+        id: 'projectTabEventsP1'
+        project: '@p1'
+        title: 'Événements'
+        slug: 'evenements'
+        enabled: true
+        position: 1
+
+Capco\AppBundle\Entity\ProjectTabCustom:
+    projectTabCustomP1:
+        id: 'projectTabCustomP1'
+        project: '@p1'
+        title: 'Infos pratiques'
+        slug: 'infos-pratiques'
+        enabled: false
+        position: 4
+        body: <stripslashes('\<p>Contenu personnalisé</p>\')>

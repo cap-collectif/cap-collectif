@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\ProjectTabNewsItem:
+    projectTabNewsItem1:
+        id: 'projectTabNewsItem1'
+        projectTab: '@projectTabNewsP1'
+        post: '@post2'
+        position: 1
+    projectTabNewsItem2:
+        id: 'projectTabNewsItem2'
+        projectTab: '@projectTabNewsP1'
+        post: '@post1'
+        position: 2

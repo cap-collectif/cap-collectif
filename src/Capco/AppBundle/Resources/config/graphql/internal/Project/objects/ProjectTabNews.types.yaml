@@ -1,0 +1,11 @@
+InternalProjectTabNews:
+    type: object
+    inherits:
+        - InternalProjectTab
+    config:
+        name: ProjectTabNews
+        interfaces:
+            - InternalProjectTab
+        fields:
+            news:
+                type: '[InternalPost!]!'

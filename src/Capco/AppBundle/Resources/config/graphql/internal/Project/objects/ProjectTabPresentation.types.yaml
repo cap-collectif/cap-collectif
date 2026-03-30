@@ -1,0 +1,11 @@
+InternalProjectTabPresentation:
+    type: object
+    inherits:
+        - InternalProjectTab
+    config:
+        name: ProjectTabPresentation
+        interfaces:
+            - InternalProjectTab
+        fields:
+            body:
+                type: 'String'

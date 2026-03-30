@@ -81,6 +81,7 @@ class GlobalIdResolver
         'Reply',
         'ContactForm',
         'Project',
+        'ProjectTab',
         'Oauth2SSOConfiguration',
         'FranceConnectSSOConfiguration',
         'CASSSOConfiguration',
