@@ -61,6 +61,9 @@ const PROPOSAL_FRAGMENT = graphql`
       ranking
     }
     estimation
+    form {
+      usingIllustration
+    }
     ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated)
   }
 `
@@ -90,7 +93,7 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const step = useFragment(STEP_FRAGMENT, stepFragment)
-  const { id, title, url, media, summary, body, category } = proposal
+  const { id, title, url, media, summary, body, category, form } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
 
   const proposalCover = media?.url || category?.categoryImage?.image?.url
@@ -110,13 +113,15 @@ export const ProposalCard: React.FC<Props> = ({
       sx={{ boxShadow: active ? CapUIShadow.Small : 'inherit' }}
       {...props}
     >
-      <CardCover>
-        {proposalCover ? (
-          <CardCoverImage src={proposalCover} />
-        ) : (
-          <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
-        )}
-      </CardCover>
+      {form.usingIllustration ? (
+        <CardCover alignSelf="stretch" height="initial">
+          {proposalCover ? (
+            <CardCoverImage src={proposalCover} />
+          ) : (
+            <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
+          )}
+        </CardCover>
+      ) : null}
       <CardContent primaryInfo={title} secondaryInfo={summaryOrBodyExcerpt} href={url} primaryInfoTag={'h2'}>
         <CardTagList>
           <Flex justifyContent="space-between" align="center" width="100%">
