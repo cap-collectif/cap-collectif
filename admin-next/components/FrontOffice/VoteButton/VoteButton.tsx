@@ -71,9 +71,15 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const hasIncompleteVote = proposal.viewerVote?.completionStatus === 'MISSING_REQUIREMENTS'
   const votesMin = step.votesMin ?? 0
   const viewerMeetsRequirements = step.requirements?.viewerMeetsTheRequirements
-  const votesCount = proposal.votes?.totalCount ?? 0
-
   const viewerVotesCount = step.viewerVotes?.totalCount ?? 0
+
+  // When the viewer has a valid counted vote, show at least 1.
+  // This handles the case where the server vote count update is async (message queue)
+  // and the count hasn't been reflected yet after a page reload.
+  const isViewerVoteAccounted =
+    !!proposal.viewerHasVote && !hasIncompleteVote && (votesMin === 0 || viewerVotesCount >= votesMin)
+  const rawVotesCount = proposal.votes?.totalCount ?? 0
+  const votesCount = isViewerVoteAccounted ? Math.max(rawVotesCount, 1) : rawVotesCount
   const hasReachedVotesLimit = step.votesLimit != null && viewerVotesCount >= step.votesLimit && !proposal.viewerHasVote
 
   const addVote = useCallback(async () => {
@@ -88,15 +94,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
           stepId: step.id,
         },
         viewerSession != null,
-        {
-          proposalId: proposal.id,
-          stepId: step.id,
-          currentVotesCount: votesCount,
-          currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
-          currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
-          proposalEstimation: proposal.estimation ?? null,
-          votesMin: step.votesMin ?? null,
-        },
       )
 
       const errorCode = response?.addProposalVote?.errorCode
