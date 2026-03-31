@@ -85,6 +85,9 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
           ))}
         </Flex>
       )}
+
+      <VoteStepFiltersModal stepId={step.id} />
+
       {hasBothViews && (
         <Box>
           {listViewButtons().map(viewButton => (
@@ -112,8 +115,6 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
           ))}
         </Box>
       )}
-
-      <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView && (hasGridView || hasListView) ? (
         <Box flex="none">
