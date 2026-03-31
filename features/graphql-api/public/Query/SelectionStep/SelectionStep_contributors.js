@@ -27,8 +27,24 @@ const SelectionStepContributorsQuery = /* GraphQL */ `
 
 describe('SelectionStep.contributors', () => {
   it('returns the top 5 of contributors', async () => {
-    await expect(
-      graphql(SelectionStepContributorsQuery, { id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==', count: 5 }, 'internal'),
-    ).resolves.toMatchSnapshot()
+    const response = await graphql(
+      SelectionStepContributorsQuery,
+      { id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==', count: 5 },
+      'internal',
+    )
+
+    expect({
+      ...response,
+      selectionStep: {
+        ...response.selectionStep,
+        contributors: {
+          ...response.selectionStep.contributors,
+          pageInfo: {
+            ...response.selectionStep.contributors.pageInfo,
+            endCursor: '<opaque-cursor>',
+          },
+        },
+      },
+    }).toMatchSnapshot()
   })
 })

@@ -400,6 +400,26 @@ class ParticipantRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param array<int, string> $ids
+     *
+     * @return array<Participant>
+     */
+    public function hydrateFromIdsOrdered(array $ids): array
+    {
+        if ([] === $ids) {
+            return [];
+        }
+
+        $qb = $this->createQueryBuilder('participant');
+        $qb->where('participant.id IN (:ids)')
+            ->addOrderBy('FIELD(participant.id, :ids)')
+            ->setParameter('ids', $ids)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function hasNewParticipantsForAQuestionnaire(Questionnaire $questionnaire, \DateTime $mostRecentFileModificationDate): bool
     {
         $qb = $this->createQueryBuilder('p')
