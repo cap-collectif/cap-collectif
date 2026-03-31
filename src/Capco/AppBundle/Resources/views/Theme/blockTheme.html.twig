@@ -3,12 +3,13 @@
 
         {%  if theme.media %}
             <a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}" alt="{{ theme.translate.title }}">
-                <img
-                    title={{ theme.translate.title }}
-                    alt=""
-                    src={{ media_public_url(theme.media, 'default_theme') }}
-                    style="max-width:100%;height:200px;"
-                />
+                <div class="theme__image-wrapper">
+                    <img
+                        title={{ theme.translate.title }}
+                        alt=""
+                        src={{ media_public_url(theme.media, 'default_theme') }}
+                    />
+                </div>
             </a>
         {% else %}
             <a class="bg__wrapper" href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}" alt="{{ theme.translate.title }}">
