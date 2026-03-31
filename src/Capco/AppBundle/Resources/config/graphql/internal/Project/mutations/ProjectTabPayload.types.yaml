@@ -1,0 +1,9 @@
+ProjectTabPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of project tab create and update mutations.'
+        fields:
+            projectTab:
+                type: 'InternalProjectTab'
+            errorCode:
+                type: 'ProjectTabMutationErrorCode'

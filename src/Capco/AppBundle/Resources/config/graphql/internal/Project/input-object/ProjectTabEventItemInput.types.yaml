@@ -1,0 +1,9 @@
+ProjectTabEventItemInput:
+    type: input-object
+    config:
+        name: ProjectTabEventItemInput
+        fields:
+            id:
+                type: 'ID!'
+            position:
+                type: 'Int!'

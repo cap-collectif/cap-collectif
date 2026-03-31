@@ -3821,6 +3821,15 @@ type CreateConsultationPayload {
   clientMutationId: String
 }
 
+input CreateCustomProjectTabInput {
+  projectId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  body: String
+  clientMutationId: String
+}
+
 """Available errors for a `createDebateAnonymousArgument` mutation."""
 enum CreateDebateAnonymousArgumentErrorCode {
   """No `Debate` match your id."""
@@ -3944,6 +3953,15 @@ type CreateEmailingCampaignPayload {
   clientMutationId: String
 }
 
+input CreateEventsProjectTabInput {
+  projectId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  eventItems: [ProjectTabEventItemInput!]
+  clientMutationId: String
+}
+
 input CreateGlobalDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -4022,6 +4040,15 @@ type CreateMailingListPayload {
 
   """The error code, if any"""
   error: String
+  clientMutationId: String
+}
+
+input CreateNewsProjectTabInput {
+  projectId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  newsItems: [ProjectTabNewsItemInput!]
   clientMutationId: String
 }
 
@@ -4264,6 +4291,15 @@ input CreatePostTranslationInput {
 
   """the locale of the translation"""
   locale: TranslationLocale!
+  clientMutationId: String
+}
+
+input CreatePresentationProjectTabInput {
+  projectId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  body: String
   clientMutationId: String
 }
 
@@ -6055,6 +6091,17 @@ input DeleteProjectInput {
 type DeleteProjectPayload {
   """The deleted project id"""
   deletedProjectId: ID
+  clientMutationId: String
+}
+
+input DeleteProjectTabInput {
+  tabId: ID!
+  clientMutationId: String
+}
+
+type DeleteProjectTabPayload {
+  deletedProjectTabId: ID
+  errorCode: ProjectTabMutationErrorCode
   clientMutationId: String
 }
 
@@ -9536,6 +9583,16 @@ type Mutation {
   addSmsCredit(input: AddSmsCreditInput!): AddSmsCreditPayload
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
   updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
+  createPresentationProjectTab(input: CreatePresentationProjectTabInput!): ProjectTabPayload
+  createNewsProjectTab(input: CreateNewsProjectTabInput!): ProjectTabPayload
+  createEventsProjectTab(input: CreateEventsProjectTabInput!): ProjectTabPayload
+  createCustomProjectTab(input: CreateCustomProjectTabInput!): ProjectTabPayload
+  updatePresentationProjectTab(input: UpdatePresentationProjectTabInput!): ProjectTabPayload
+  updateNewsProjectTab(input: UpdateNewsProjectTabInput!): ProjectTabPayload
+  updateEventsProjectTab(input: UpdateEventsProjectTabInput!): ProjectTabPayload
+  updateCustomProjectTab(input: UpdateCustomProjectTabInput!): ProjectTabPayload
+  deleteProjectTab(input: DeleteProjectTabInput!): DeleteProjectTabPayload
+  reorderProjectTabs(input: ReorderProjectTabsInput!): ReorderProjectTabsPayload
   updateCivicIA(input: UpdateCivicIAInput!): UpdateCivicIAPayload
   starResponse(input: StarResponseInput!): StarResponsePayload
   unstarResponse(input: UnstarResponseInput!): UnstarResponsePayload
@@ -12279,6 +12336,11 @@ type ProjectTabCustom implements ProjectTab {
   body: String
 }
 
+input ProjectTabEventItemInput {
+  id: ID!
+  position: Int!
+}
+
 """A configurable tab displayed on the project page."""
 type ProjectTabEvents implements ProjectTab {
   """The ID of an object"""
@@ -12291,6 +12353,21 @@ type ProjectTabEvents implements ProjectTab {
   events: [Event!]!
 }
 
+"""Available errors on project tab mutations."""
+enum ProjectTabMutationErrorCode {
+  PROJECT_NOT_FOUND
+  PROJECT_TAB_NOT_FOUND
+  SLUG_ALREADY_EXISTS
+  PRESENTATION_ALREADY_EXISTS
+  BODY_REQUIRED
+  NEWS_ITEMS_REQUIRED
+  EVENT_ITEMS_REQUIRED
+  INVALID_NEWS_ITEMS
+  INVALID_EVENT_ITEMS
+  INVALID_TAB_TYPE
+  INVALID_REORDER
+}
+
 """A configurable tab displayed on the project page."""
 type ProjectTabNews implements ProjectTab {
   """The ID of an object"""
@@ -12301,6 +12378,17 @@ type ProjectTabNews implements ProjectTab {
   type: ProjectTabType!
   position: Int!
   news: [Post!]!
+}
+
+input ProjectTabNewsItemInput {
+  id: ID!
+  position: Int!
+}
+
+type ProjectTabPayload {
+  projectTab: ProjectTab
+  errorCode: ProjectTabMutationErrorCode
+  clientMutationId: String
 }
 
 """A configurable tab displayed on the project page."""
@@ -16075,6 +16163,18 @@ type RemoveSsoPayload {
   clientMutationId: String
 }
 
+input ReorderProjectTabsInput {
+  projectId: ID!
+  tabIds: [ID!]!
+  clientMutationId: String
+}
+
+type ReorderProjectTabsPayload {
+  project: Project
+  errorCode: ProjectTabMutationErrorCode
+  clientMutationId: String
+}
+
 """Represents a user answer to a questionnaire."""
 type Reply implements Node & Publishable & Contribution & Draftable {
   """The ID of an object"""
@@ -19226,6 +19326,15 @@ type UpdateCustomDomainPayload {
   clientMutationId: String
 }
 
+input UpdateCustomProjectTabInput {
+  tabId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  body: String
+  clientMutationId: String
+}
+
 """Available errors for an `updateDebateArgument` mutation."""
 enum UpdateDebateArgumentErrorCode {
   """No `DebateArgument` match your id."""
@@ -19385,6 +19494,15 @@ type UpdateEmailingCampaignPayload {
 
   """The error code, if any"""
   error: UpdateEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
+input UpdateEventsProjectTabInput {
+  tabId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  eventItems: [ProjectTabEventItemInput!]
   clientMutationId: String
 }
 
@@ -19730,6 +19848,15 @@ input UpdateNewProjectInput {
 
 type UpdateNewProjectPayload {
   project: Project!
+  clientMutationId: String
+}
+
+input UpdateNewsProjectTabInput {
+  tabId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  newsItems: [ProjectTabNewsItemInput!]
   clientMutationId: String
 }
 
@@ -20098,6 +20225,15 @@ type UpdatePostPayload {
 
   """Available errorCode for updatePost mutation"""
   errorCode: UpdatePostErrorCode
+  clientMutationId: String
+}
+
+input UpdatePresentationProjectTabInput {
+  tabId: ID!
+  title: String!
+  slug: String!
+  enabled: Boolean!
+  body: String
   clientMutationId: String
 }
 

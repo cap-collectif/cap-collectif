@@ -1,0 +1,7 @@
+DeleteProjectTabInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteProjectTab mutation.'
+        fields:
+            tabId:
+                type: 'ID!'

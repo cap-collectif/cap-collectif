@@ -1,0 +1,15 @@
+UpdatePresentationProjectTabInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updatePresentationProjectTab mutation.'
+        fields:
+            tabId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            slug:
+                type: 'String!'
+            enabled:
+                type: 'Boolean!'
+            body:
+                type: 'String'

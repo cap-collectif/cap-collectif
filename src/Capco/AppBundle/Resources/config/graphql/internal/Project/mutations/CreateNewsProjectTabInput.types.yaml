@@ -1,0 +1,15 @@
+CreateNewsProjectTabInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createNewsProjectTab mutation.'
+        fields:
+            projectId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            slug:
+                type: 'String!'
+            enabled:
+                type: 'Boolean!'
+            newsItems:
+                type: '[ProjectTabNewsItemInput!]'

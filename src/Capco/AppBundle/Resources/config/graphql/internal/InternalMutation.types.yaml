@@ -1604,6 +1604,76 @@ InternalMutation:
                     inputType: UpdateProjectSlugInput
                     payloadType: UpdateProjectSlugPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectSlugMutation", args, getUser())'
+            createPresentationProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreatePresentationProjectTabMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreatePresentationProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreatePresentationProjectTabMutation", args, getUser())'
+            createNewsProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateNewsProjectTabMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateNewsProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateNewsProjectTabMutation", args, getUser())'
+            createEventsProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateEventsProjectTabMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateEventsProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateEventsProjectTabMutation", args, getUser())'
+            createCustomProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateCustomProjectTabMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateCustomProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\CreateCustomProjectTabMutation", args, getUser())'
+            updatePresentationProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdatePresentationProjectTabMutation").isGranted(args["input"]["tabId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePresentationProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdatePresentationProjectTabMutation", args, getUser())'
+            updateNewsProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateNewsProjectTabMutation").isGranted(args["input"]["tabId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateNewsProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateNewsProjectTabMutation", args, getUser())'
+            updateEventsProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateEventsProjectTabMutation").isGranted(args["input"]["tabId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateEventsProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateEventsProjectTabMutation", args, getUser())'
+            updateCustomProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateCustomProjectTabMutation").isGranted(args["input"]["tabId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateCustomProjectTabInput
+                    payloadType: ProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\UpdateCustomProjectTabMutation", args, getUser())'
+            deleteProjectTab:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\DeleteProjectTabMutation").isGranted(args["input"]["tabId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteProjectTabInput
+                    payloadType: DeleteProjectTabPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\DeleteProjectTabMutation", args, getUser())'
+            reorderProjectTabs:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\ReorderProjectTabsMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ReorderProjectTabsInput
+                    payloadType: ReorderProjectTabsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectTab\\ReorderProjectTabsMutation", args, getUser())'
             updateCivicIA:
                 access: '@=hasRole("ROLE_ADMIN")'
                 builder: 'Relay::Mutation'

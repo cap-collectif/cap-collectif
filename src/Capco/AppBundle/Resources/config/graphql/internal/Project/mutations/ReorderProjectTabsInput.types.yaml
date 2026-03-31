@@ -1,0 +1,9 @@
+ReorderProjectTabsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of reorderProjectTabs mutation.'
+        fields:
+            projectId:
+                type: 'ID!'
+            tabIds:
+                type: '[ID!]!'

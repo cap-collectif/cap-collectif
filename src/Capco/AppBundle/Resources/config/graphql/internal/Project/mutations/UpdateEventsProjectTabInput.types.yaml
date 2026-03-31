@@ -1,0 +1,15 @@
+UpdateEventsProjectTabInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateEventsProjectTab mutation.'
+        fields:
+            tabId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            slug:
+                type: 'String!'
+            enabled:
+                type: 'Boolean!'
+            eventItems:
+                type: '[ProjectTabEventItemInput!]'

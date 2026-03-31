@@ -1,0 +1,28 @@
+ProjectTabMutationErrorCode:
+    type: enum
+    config:
+        name: ProjectTabMutationErrorCode
+        description: 'Available errors on project tab mutations.'
+        values:
+            PROJECT_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::PROJECT_NOT_FOUND
+            PROJECT_TAB_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::PROJECT_TAB_NOT_FOUND
+            SLUG_ALREADY_EXISTS:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::SLUG_ALREADY_EXISTS
+            PRESENTATION_ALREADY_EXISTS:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::PRESENTATION_ALREADY_EXISTS
+            BODY_REQUIRED:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::BODY_REQUIRED
+            NEWS_ITEMS_REQUIRED:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::NEWS_ITEMS_REQUIRED
+            EVENT_ITEMS_REQUIRED:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::EVENT_ITEMS_REQUIRED
+            INVALID_NEWS_ITEMS:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_NEWS_ITEMS
+            INVALID_EVENT_ITEMS:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_EVENT_ITEMS
+            INVALID_TAB_TYPE:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_TAB_TYPE
+            INVALID_REORDER:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_REORDER

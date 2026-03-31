@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.projectTabs creates a custom tab 1`] = `
+Object {
+  "createCustomProjectTab": Object {
+    "errorCode": null,
+    "projectTab": Object {
+      "__typename": "ProjectTabCustom",
+      "body": "<p>Contenu de bloc</p>",
+      "enabled": false,
+      "position": 5,
+      "slug": "nouveau-bloc",
+      "title": "Nouveau bloc",
+      "type": "CUSTOM",
+    },
+  },
+}
+`;
+
+exports[`mutations.projectTabs reorders tabs 1`] = `
+Object {
+  "reorderProjectTabs": Object {
+    "errorCode": null,
+    "project": Object {
+      "tabs": Array [
+        Object {
+          "position": 1,
+          "slug": "actualites",
+        },
+        Object {
+          "position": 2,
+          "slug": "presentation",
+        },
+        Object {
+          "position": 3,
+          "slug": "evenements",
+        },
+        Object {
+          "position": 4,
+          "slug": "infos-pratiques",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.projectTabs updates a custom tab 1`] = `
+Object {
+  "updateCustomProjectTab": Object {
+    "errorCode": null,
+    "projectTab": Object {
+      "__typename": "ProjectTabCustom",
+      "body": "<p>Contenu mis à jour</p>",
+      "enabled": true,
+      "position": 4,
+      "slug": "infos-utiles",
+      "title": "Infos utiles",
+      "type": "CUSTOM",
+    },
+  },
+}
+`;
