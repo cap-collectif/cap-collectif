@@ -64,7 +64,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     public function isRefreshingUserInformationsAtEveryLogin(): bool
     {
         return match ($this->getInstanceName()) {
-            'occitanie', 'occitanie-dedicated', 'occitanie-preprod' => true,
+            'occitanie', 'occitanie-dedicated', 'occitanie-preprod', 'catp' => true,
             default => false,
         };
     }
@@ -83,7 +83,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         return match ($this->getInstanceName()) {
             'carpentras' => 'openid email family_name given_name',
-            'catp' => 'openid profile',
+            'catp' => 'openid profile user-id user-ca',
             'pe', 'parlons-energies' => 'openid email givenName',
             default => 'openid email profile',
         };
@@ -97,7 +97,9 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             EnvHelper::get('SYMFONY_INSTANCE_NAME')
         ))->getOpenIDMapping();
 
-        $content = JWT::getPayloadFromJWT($accessToken['access_token']);
+        $content = $this->isCatpInstance()
+            ? $this->resolveTokenPayload($accessToken)
+            : JWT::getPayloadFromJWT($accessToken['access_token']);
 
         if (null === $content && $this->options['use_bearer_authorization']) {
             $content = $this->httpRequest(
@@ -211,8 +213,61 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         return $this->instanceName;
     }
 
+    private function isCatpInstance(): bool
+    {
+        return 'catp' === $this->getInstanceName();
+    }
+
     private function generateNonce(): string
     {
         return md5(microtime(true) . uniqid('', true));
+    }
+
+    /**
+     * @param array<string, mixed> $accessToken
+     *
+     * @return null|array<string, mixed>
+     */
+    private function resolveTokenPayload(array $accessToken): ?array
+    {
+        $content = $this->decodeJwtPayload($accessToken['access_token'] ?? null);
+        $idTokenPayload = $this->decodeJwtPayload($accessToken['id_token'] ?? null);
+
+        if (null === $idTokenPayload) {
+            return $content;
+        }
+
+        return $this->mergeMissingClaims($content, $idTokenPayload);
+    }
+
+    /**
+     * @return null|array<string, mixed>
+     */
+    private function decodeJwtPayload(mixed $token): ?array
+    {
+        if (!\is_string($token) || '' === $token) {
+            return null;
+        }
+
+        return JWT::getPayloadFromJWT($token);
+    }
+
+    /**
+     * @param null|array<string, mixed> $content
+     * @param array<string, mixed>      $fallbackClaims
+     *
+     * @return array<string, mixed>
+     */
+    private function mergeMissingClaims(?array $content, array $fallbackClaims): array
+    {
+        $mergedClaims = $content ?? [];
+
+        foreach ($fallbackClaims as $claim => $value) {
+            if (!\array_key_exists($claim, $mergedClaims) || null === $mergedClaims[$claim] || '' === $mergedClaims[$claim]) {
+                $mergedClaims[$claim] = $value;
+            }
+        }
+
+        return $mergedClaims;
     }
 }

@@ -67,7 +67,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
             }
         }
 
-        $email = $response->getEmail() ?: $response->getUsername();
+        $email = $this->isCatpInstance()
+            ? ($this->getCatpEmailFromResponse($response) ?: $response->getUsername())
+            : ($response->getEmail() ?: $response->getUsername());
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
@@ -306,9 +308,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $resourceOwner = $response->getResourceOwner();
         $serviceName = $resourceOwner->getName();
 
-        $email =
-            $response->getEmail() ??
-            ($response->getData()['mail'] ?? ($response->getData()['email'] ?? null));
+        $email = $this->isCatpInstance()
+            ? $this->getCatpEmailFromResponse($response)
+            : ($response->getEmail() ?? ($response->getData()['mail'] ?? ($response->getData()['email'] ?? null)));
         $ssoIsFacebookOrOpenId = \in_array($serviceName, ['facebook', 'openid']);
 
         if (!$email && !$ssoIsFacebookOrOpenId) {
@@ -389,5 +391,32 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         }
 
         return trim("{$firstName} {$lastName}");
+    }
+
+    private function isCatpInstance(): bool
+    {
+        return 'catp' === $this->instanceName;
+    }
+
+    private function getCatpEmailFromResponse(UserResponseInterface $response): ?string
+    {
+        $data = $response->getData();
+        $data = \is_array($data) ? $data : [];
+
+        $candidateEmails = [
+            $response->getEmail(),
+            $data['mail'] ?? null,
+            $data['email'] ?? null,
+            $data['other email'] ?? null,
+            $data['other_email'] ?? null,
+        ];
+
+        foreach ($candidateEmails as $candidateEmail) {
+            if (\is_string($candidateEmail) && '' !== trim($candidateEmail)) {
+                return trim($candidateEmail);
+            }
+        }
+
+        return null;
     }
 }
