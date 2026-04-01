@@ -13,6 +13,7 @@ const QUERY = graphql`
         ...ProjectPageLayout_project
       }
     }
+    ...ProjectPageLayout_query
   }
 `
 
@@ -25,7 +26,7 @@ const ProjectPageRender: React.FC<Props> = ({ projectSlug }) => {
 
   if (!data.project) return null
 
-  return <ProjectPageLayout project={data.project} />
+  return <ProjectPageLayout project={data.project} query={data} />
 }
 
 const ProjectPage: React.FC<Props> = ({ projectSlug }) => {
