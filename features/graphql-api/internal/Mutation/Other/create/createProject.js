@@ -13,6 +13,14 @@ const CreateProjectMutation = /* GraphQL */ `
           username
         }
         visibility
+        tabs {
+          __typename
+          title
+          slug
+          enabled
+          type
+          position
+        }
       }
     }
   }

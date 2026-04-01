@@ -5,6 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectTab;
+use Capco\AppBundle\Entity\ProjectTabEvents;
+use Capco\AppBundle\Entity\ProjectTabNews;
+use Capco\AppBundle\Entity\ProjectTabPresentation;
 use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
@@ -27,10 +31,17 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CreateProjectMutation implements MutationInterface
 {
     use MutationTrait;
+
+    private const DEFAULT_TABS = [
+        ['title' => 'Présentation', 'position' => 1, 'class' => ProjectTabPresentation::class],
+        ['title' => 'Actualités', 'position' => 2, 'class' => ProjectTabNews::class],
+        ['title' => 'Événements', 'position' => 3, 'class' => ProjectTabEvents::class],
+    ];
 
     public function __construct(
         private readonly EntityManagerInterface $em,
@@ -40,7 +51,8 @@ class CreateProjectMutation implements MutationInterface
         private readonly ProjectAuthorTransformer $transformer,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Indexer $indexer,
-        private readonly ActionLogger $actionLogger
+        private readonly ActionLogger $actionLogger,
+        private readonly SluggerInterface $slugger
     ) {
     }
 
@@ -80,6 +92,11 @@ class CreateProjectMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        $this->createDefaultTabs($project);
+
+        $connection = $this->em->getConnection();
+        $connection->beginTransaction();
+
         try {
             $this->em->persist($project);
             $this->em->flush();
@@ -91,34 +108,36 @@ class CreateProjectMutation implements MutationInterface
                 entityType: Project::class,
                 entityId: $project->getId()
             );
-        } catch (DriverException $e) {
-            $this->logger->error(
-                __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
-            );
 
-            throw new BadRequestHttpException('Sorry, please retry.');
-        }
+            $this->transformer->setProject($project);
 
-        $this->transformer->setProject($project);
+            $form = $this->formFactory->create(ProjectAuthorsFormType::class, $project);
+            $form->submit(['authors' => $this->transformer->transformUsers($dataAuthors)], false);
 
-        $form = $this->formFactory->create(ProjectAuthorsFormType::class, $project);
+            if (!$form->isValid()) {
+                $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
-        $form->submit(['authors' => $this->transformer->transformUsers($dataAuthors)], false);
+                throw GraphQLException::fromFormErrors($form);
+            }
 
-        if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
-
-            throw GraphQLException::fromFormErrors($form);
-        }
-
-        try {
             $this->em->flush();
+            $connection->commit();
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()
             );
 
+            if ($connection->isTransactionActive()) {
+                $connection->rollBack();
+            }
+
             throw new BadRequestHttpException('Sorry, please retry.');
+        } catch (\Throwable $e) {
+            if ($connection->isTransactionActive()) {
+                $connection->rollBack();
+            }
+
+            throw $e;
         }
 
         $this->indexer->index(ClassUtils::getClass($project), $project->getId());
@@ -130,5 +149,22 @@ class CreateProjectMutation implements MutationInterface
     public function isGranted(): bool
     {
         return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
+    }
+
+    private function createDefaultTabs(Project $project): void
+    {
+        foreach (self::DEFAULT_TABS as $defaultTab) {
+            /** @var class-string<ProjectTab> $projectTabClass */
+            $projectTabClass = $defaultTab['class'];
+            $projectTab = (new $projectTabClass())
+                ->setTitle($defaultTab['title'])
+                ->setSlug($this->slugger->slug($defaultTab['title'])->lower()->toString())
+                ->setEnabled(true)
+                ->setPosition($defaultTab['position'])
+                ->setProject($project)
+            ;
+
+            $project->addTab($projectTab);
+        }
     }
 }
