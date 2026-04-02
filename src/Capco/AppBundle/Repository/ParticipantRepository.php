@@ -216,24 +216,37 @@ class ParticipantRepository extends EntityRepository
                 {$where}
         ";
         } else {
+            $whereClause = '';
+            if ($term) {
+                $whereClause = ' AND (p.firstname LIKE :term OR p.lastname LIKE :term OR p.email LIKE :term)';
+            }
+
             $sql = "
-                    SELECT COUNT(DISTINCT p.id)
-                    FROM (SELECT p.id
-                      FROM participant p
-                               JOIN project_abstractstep pas ON pas.project_id = :projectId
-                               JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
-                               JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = s.id OR v.collect_step_id = s.id) AND
-                                               v.completion_status = 'COMPLETED' AND v.is_accounted = 1
-                               {$where}
-                      UNION
-                      SELECT p.id
-                      FROM participant p
-                               JOIN project_abstractstep pas ON pas.project_id = :projectId
-                               JOIN step s ON pas.step_id = s.id AND s.step_type IN ('questionnaire')
-                               JOIN reply r ON r.participant_id = p.id AND r.completion_status = 'COMPLETED'
-                               JOIN questionnaire q ON r.questionnaire_id = q.id AND s.id = q.step_id
-                               {$where}
-                      ) AS p
+                    SELECT COUNT(p.id)
+                    FROM participant p
+                    WHERE (
+                        EXISTS(
+                            SELECT 1
+                            FROM project_abstractstep pas
+                            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                            JOIN votes v ON v.participant_id = p.id
+                                AND (v.selection_step_id = s.id OR v.collect_step_id = s.id)
+                                AND v.completion_status = 'COMPLETED'
+                                AND v.is_accounted = 1
+                            WHERE pas.project_id = :projectId
+                        )
+                        OR EXISTS(
+                            SELECT 1
+                            FROM project_abstractstep pas
+                            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('questionnaire')
+                            JOIN questionnaire q ON s.id = q.step_id
+                            JOIN reply r ON r.participant_id = p.id
+                                AND r.questionnaire_id = q.id
+                                AND r.completion_status = 'COMPLETED'
+                            WHERE pas.project_id = :projectId
+                        )
+                    )
+                    {$whereClause}
         ";
         }
 
