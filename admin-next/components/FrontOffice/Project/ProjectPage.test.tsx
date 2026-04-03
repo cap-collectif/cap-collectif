@@ -20,6 +20,11 @@ jest.mock('./ProjectPageLayout', () => ({
   default: ({ project }) => <div>{project.title}</div>,
 }))
 
+jest.mock('@shared/hooks/useFeatureFlag', () => ({
+  __esModule: true,
+  default: () => true,
+}))
+
 describe('ProjectPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()

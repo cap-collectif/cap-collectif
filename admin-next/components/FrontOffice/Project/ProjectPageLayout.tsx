@@ -2,10 +2,12 @@
 
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
+import { Box, Flex } from '@cap-collectif/ui'
 import { ProjectPageLayout_project$key } from '@relay/ProjectPageLayout_project.graphql'
 import { ProjectPageLayout_query$key } from '@relay/ProjectPageLayout_query.graphql'
-import { Box } from '@cap-collectif/ui'
 import ProjectPageHero from './ProjectPageHero'
+import ParticipationSteps from './ParticipationSteps'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
   project: ProjectPageLayout_project$key
@@ -17,6 +19,7 @@ const FRAGMENT = graphql`
     id
     title
     ...ProjectPageHero_project
+    ...ParticipationSteps_project
   }
 `
 
@@ -34,6 +37,19 @@ const ProjectPageLayout: React.FC<Props> = ({ project, query: queryKey }) => {
   return (
     <Box>
       <ProjectPageHero project={data} query={queryData} />
+      <Flex gap="xl" alignItems="flex-start" maxWidth={pxToRem(1280)} width="100%" margin="auto" px="lg">
+        <Box flex="1" bg="gray.100" borderRadius="normal" p="lg">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <p key={i} style={{ marginBottom: '1rem' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur.
+            </p>
+          ))}
+        </Box>
+        <ParticipationSteps project={data} />
+      </Flex>
     </Box>
   )
 }
