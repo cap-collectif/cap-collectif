@@ -49,6 +49,8 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   const [displayMode, setDisplayMode] = React.useState(step?.mainView)
   const intl = useIntl()
   const calendar = useFeatureFlag('calendar')
+  const new_project_page = useFeatureFlag('new_project_page')
+
   const showVotesWidget = step && step.slug && step.votable && step.state === 'OPENED'
   React.useEffect(() => {
     if (!displayMode && step?.mainView) setDisplayMode(step?.mainView)
@@ -121,7 +123,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
             </p>
           </div>
         ) : null}
-        <StepPageHeader step={step} />
+        {!new_project_page && <StepPageHeader step={step} />}
         {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
         {isAuthenticated && <UnpublishedProposalListView step={step} viewer={viewer} />}
         {relatedMediatorProjectId && step.votable && step.state === 'OPENED' ? (

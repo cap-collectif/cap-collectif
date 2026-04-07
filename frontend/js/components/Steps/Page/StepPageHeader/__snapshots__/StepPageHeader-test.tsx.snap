@@ -14,7 +14,7 @@ Array [
       I am a title
     </h2>
     <div
-      className="mb-30 project__step-dates "
+      className="mb-30 project__step-dates"
     >
       <div
         className="mr-15 d-ib"
@@ -44,7 +44,7 @@ Array [
       I am a title
     </h2>
     <div
-      className="mb-30 project__step-dates "
+      className="mb-30 project__step-dates"
     >
       <div
         className="mr-15 d-ib"
@@ -74,7 +74,7 @@ Array [
       I am a title
     </h2>
     <div
-      className="mb-30 project__step-dates "
+      className="mb-30 project__step-dates"
     >
       <div
         className="mr-15 d-ib"
@@ -104,7 +104,7 @@ Array [
       I am a title
     </h2>
     <div
-      className="mb-30 project__step-dates "
+      className="mb-30 project__step-dates"
     >
       <div
         className="mr-15 d-ib"
@@ -134,7 +134,7 @@ Array [
       I am a title
     </h2>
     <div
-      className="mb-30 project__step-dates "
+      className="mb-30 project__step-dates"
     >
       <div
         className="mr-15 d-ib"

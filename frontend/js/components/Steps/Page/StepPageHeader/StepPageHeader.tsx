@@ -8,6 +8,7 @@ import BodyInfos from '~/components/Ui/Boxes/BodyInfos'
 import { isInterpellationContextFromStep, isOpinionFormStep } from '~/utils/interpellationLabelHelper'
 import StepPageHeaderContainer from './StepPageHeader.style'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import StepPageHeaderNew from './StepPageHeaderNew'
 
 type Props = {
   step: StepPageHeader_step$key
@@ -23,17 +24,95 @@ const FRAGMENT = graphql`
       startAt
       endAt
     }
+    project {
+      slug
+      cover {
+        url
+      }
+    }
+    eventsFuture: events(orderBy: { field: START_AT, direction: DESC }, isFuture: true) {
+      totalCount
+    }
+    ... on ConsultationStep {
+      votes {
+        totalCount
+      }
+      contributions {
+        totalCount
+      }
+      contributors {
+        totalCount
+      }
+    }
+    ... on CollectStep {
+      allProposals: proposals(first: 0) {
+        totalCount
+      }
+      contributors {
+        totalCount
+      }
+    }
     ... on SelectionStep {
-      voteThreshold
       votable
+      voteThreshold
       canDisplayBallot
+      allProposals: proposals(first: 0) {
+        totalCount
+      }
+      contributors {
+        totalCount
+      }
       ...interpellationLabelHelper_step @relay(mask: false)
+    }
+    ... on QuestionnaireStep {
+      contributors {
+        totalCount
+      }
+    }
+    ... on DebateStep {
+      contributors {
+        totalCount
+      }
     }
   }
 `
 export const StepPageHeader = ({ step: stepFragment }: Props) => {
   const step = useFragment(FRAGMENT, stepFragment)
-  const unstable__new_create_project = useFeatureFlag('unstable__new_create_project')
+  const new_page_project = useFeatureFlag('new_project_page')
+
+  if (new_page_project) {
+    const votesCount = step.__typename === 'ConsultationStep' ? (step.votes?.totalCount ?? null) : null
+    const contributionsCount =
+      step.__typename === 'ConsultationStep'
+        ? (step.contributions?.totalCount ?? null)
+        : step.__typename === 'CollectStep' || step.__typename === 'SelectionStep'
+        ? (step.allProposals?.totalCount ?? null)
+        : null
+    const participantsCount =
+      step.__typename === 'ConsultationStep' ||
+      step.__typename === 'CollectStep' ||
+      step.__typename === 'SelectionStep' ||
+      step.__typename === 'QuestionnaireStep' ||
+      step.__typename === 'DebateStep'
+        ? (step.contributors?.totalCount ?? null)
+        : null
+
+    return (
+      <StepPageHeaderNew
+        title={step.title}
+        body={step.body}
+        state={step.state}
+        timeless={step.timeless}
+        timeRange={step.timeRange}
+        projectUrl={step.project?.slug ? `/test-project/${step.project.slug}` : undefined}
+        coverUrl={step.project?.cover?.url}
+        votesCount={votesCount}
+        contributionsCount={contributionsCount}
+        participantsCount={participantsCount}
+        eventsCount={step.eventsFuture?.totalCount ?? 0}
+      />
+    )
+  }
 
   const stepIsParticipative = () => {
     return (
@@ -47,8 +126,8 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
 
   return (
     <StepPageHeaderContainer>
-      {unstable__new_create_project ? null : <h2 className="h2">{step.title}</h2>}
-      <div className={`mb-30 project__step-dates ${unstable__new_create_project ? 'mt-30' : ''}`}>
+      <h2 className="h2">{step.title}</h2>
+      <div className="mb-30 project__step-dates">
         {(step.timeRange.startAt || step.timeRange.endAt) && (
           <div className="mr-15 d-ib">
             <i className="cap cap-calendar-2-1" />{' '}

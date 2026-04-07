@@ -56,13 +56,15 @@
 {% block jumbotron %} {% endblock %}
 
 {% block body %}
-      {% if shouldDisplayProjectHeader %}
+      {% block project_header %}
+    {% if shouldDisplayProjectHeader %}
         <section>
             <div class="container" style='padding: 0;'>
                 {% include '@CapcoApp/Project/show_title.html.twig' %}
             </div>
         </section>
     {% endif %}
+    {% endblock %}
 
 
     {% block stepNavigation %}{% endblock %}

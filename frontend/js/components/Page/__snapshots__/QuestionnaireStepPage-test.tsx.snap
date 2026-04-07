@@ -805,16 +805,162 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                               "storageKey": null,
                             },
                             Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Project",
+                              "kind": "LinkedField",
+                              "name": "project",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "slug",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "cover",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
                               "abstractKey": null,
                               "kind": "InlineFragment",
                               "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "voteThreshold",
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "ConsultationStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": "allProposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
+                                  "concreteType": "ProposalConnection",
+                                  "kind": "LinkedField",
+                                  "name": "proposals",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "proposals(first:0)",
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "CollectStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
@@ -826,7 +972,56 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "voteThreshold",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "canDisplayBallot",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "allProposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
+                                  "concreteType": "ProposalConnection",
+                                  "kind": "LinkedField",
+                                  "name": "proposals",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "proposals(first:0)",
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ContributorConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
                                 Object {
@@ -899,6 +1094,56 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 },
                               ],
                               "type": "SelectionStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "QuestionnaireStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "DebateStep",
                             },
                           ],
                           "type": "Step",
@@ -2206,7 +2451,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "470635fea9fda0d667e091b6fda81c44",
+          "cacheID": "b733e744584c1936ad62c83f4041cf61",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2571,10 +2816,46 @@ fragment StepPageHeader_step on Step {
     startAt
     endAt
   }
+  project {
+    slug
+    cover {
+      url
+      id
+    }
+    id
+  }
+  eventsFuture: events(orderBy: {field: START_AT, direction: DESC}, isFuture: true) {
+    totalCount
+  }
+  ... on ConsultationStep {
+    votes {
+      totalCount
+    }
+    contributions {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
+  }
+  ... on CollectStep {
+    allProposals: proposals(first: 0) {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
+  }
   ... on SelectionStep {
-    voteThreshold
     votable
+    voteThreshold
     canDisplayBallot
+    allProposals: proposals(first: 0) {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
@@ -2588,6 +2869,16 @@ fragment StepPageHeader_step on Step {
         }
         id
       }
+    }
+  }
+  ... on QuestionnaireStep {
+    contributors {
+      totalCount
+    }
+  }
+  ... on DebateStep {
+    contributors {
+      totalCount
     }
   }
 }
@@ -3457,16 +3748,162 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                               "storageKey": null,
                             },
                             Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Project",
+                              "kind": "LinkedField",
+                              "name": "project",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "slug",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "cover",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
                               "abstractKey": null,
                               "kind": "InlineFragment",
                               "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "voteThreshold",
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "ConsultationStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": "allProposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
+                                  "concreteType": "ProposalConnection",
+                                  "kind": "LinkedField",
+                                  "name": "proposals",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "proposals(first:0)",
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "CollectStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
                                 Object {
                                   "alias": null,
                                   "args": null,
@@ -3478,7 +3915,56 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "voteThreshold",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "canDisplayBallot",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "allProposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
+                                  "concreteType": "ProposalConnection",
+                                  "kind": "LinkedField",
+                                  "name": "proposals",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "proposals(first:0)",
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ContributorConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
                                   "storageKey": null,
                                 },
                                 Object {
@@ -3551,6 +4037,56 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 },
                               ],
                               "type": "SelectionStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "QuestionnaireStep",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "UserConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributors",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "DebateStep",
                             },
                           ],
                           "type": "Step",
@@ -4858,7 +5394,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "470635fea9fda0d667e091b6fda81c44",
+          "cacheID": "b733e744584c1936ad62c83f4041cf61",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -5223,10 +5759,46 @@ fragment StepPageHeader_step on Step {
     startAt
     endAt
   }
+  project {
+    slug
+    cover {
+      url
+      id
+    }
+    id
+  }
+  eventsFuture: events(orderBy: {field: START_AT, direction: DESC}, isFuture: true) {
+    totalCount
+  }
+  ... on ConsultationStep {
+    votes {
+      totalCount
+    }
+    contributions {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
+  }
+  ... on CollectStep {
+    allProposals: proposals(first: 0) {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
+  }
   ... on SelectionStep {
-    voteThreshold
     votable
+    voteThreshold
     canDisplayBallot
+    allProposals: proposals(first: 0) {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
@@ -5240,6 +5812,16 @@ fragment StepPageHeader_step on Step {
         }
         id
       }
+    }
+  }
+  ... on QuestionnaireStep {
+    contributors {
+      totalCount
+    }
+  }
+  ... on DebateStep {
+    contributors {
+      totalCount
     }
   }
 }

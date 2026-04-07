@@ -20,15 +20,27 @@ import { ProjectTrash } from './ProjectStepPageAppTrash'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import VoteStepPage from '~/components/VoteStep/VoteStepPage'
 import Loader from '../components/Ui/FeedbacksIndicators/Loader'
+import { StepPageHeaderRenderer } from './StepPageHeaderApp'
 
 const ProjectHeader = ({
   projectId,
   platformLocale,
+  stepId,
 }: {
   readonly projectId: string
   readonly platformLocale: string
+  readonly stepId?: string
 }) => {
   const { state } = useLocation()
+  const new_project_page = useFeatureFlag('new_project_page')
+
+  if (new_project_page && stepId) {
+    return (
+      <Suspense fallback={null}>
+        <StepPageHeaderRenderer stepId={stepId} />
+      </Suspense>
+    )
+  }
 
   return (
     <section>
@@ -79,13 +91,13 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
     <>
       <Switch>
         <Route exact path={`${baseUrl}/project/:projectSlug/presentation/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
           <Suspense fallback={<BasicStepFallback />}>
             <PresentationStepPage stepId={props.stepId} />
           </Suspense>
         </Route>
         <Route path={`${baseUrl}/project/:projectSlug/questionnaire/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
           <section className="section--alt">
             <div
               className="container"
@@ -102,7 +114,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
           </section>
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/debate/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
           <section
             style={{
               background: '#f7f7f7',
@@ -116,7 +128,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
           <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} />
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/step/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
           <Suspense fallback={<BasicStepFallback />}>
             <CustomStepPage stepId={props.stepId} />
           </Suspense>
@@ -131,7 +143,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
           {new_vote_step ? (
             <>
               <ScrollToTop />
-              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
               <Suspense
                 fallback={
                   <div className="row">
@@ -150,7 +162,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             </>
           ) : (
             <>
-              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
               <section className="section--alt">
                 <div className="container">
                   <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
@@ -173,7 +185,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
           <ScrollToTop />
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} />
           <VoteStepPage stepId={props.stepId} projectId={props.projectId} isMapView={!!props.isMapView} />
         </Route>
       </Switch>

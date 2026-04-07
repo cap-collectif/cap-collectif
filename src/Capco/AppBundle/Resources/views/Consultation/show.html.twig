@@ -23,6 +23,14 @@
 
 {% block jumbotron %}{% endblock %}
 
+{% block project_header %}
+    {% if is_feature_enabled('new_project_page') %}
+        {{ react_render_component('StepPageHeaderApp', { 'props': { 'stepId': stepProps.id } }) }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block stepNavigation %}
     {% if currentStep.consultations.count > 1 %}
         <div class="meta__step__navigation sticky">

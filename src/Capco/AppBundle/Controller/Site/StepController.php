@@ -431,6 +431,7 @@ class StepController extends Controller
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
                     : null,
+                'stepId' => GlobalId::toGlobalId('QuestionnaireStep', $step->getId()),
                 'projectSlug' => $project->getSlug(),
                 'projectId' => GlobalId::toGlobalId('Project', $project->getId()),
                 'platformLocale' => $this->localeRepo->getDefaultCode(),

@@ -74,6 +74,7 @@ import DebateWidgetAccessDeniedApp from '~/startup/DebateWidgetAccessDeniedApp'
 import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp'
 import ChartModalApp from '~/startup/ChartModalApp'
 import ProjectStepPageApp from './startup/ProjectStepPageApp'
+import StepPageHeaderApp from './startup/StepPageHeaderApp'
 import ProjectsMapViewApp from './startup/ProjectsMapViewApp'
 import AccessDeniedAuthApp from './startup/AccessDeniedAuthApp'
 import AccessDeniedApp from './startup/AccessDeniedApp'
@@ -147,6 +148,7 @@ ReactOnRails.register({
   UserUnsubscribePageApp,
   ChartModalApp,
   ProjectStepPageApp,
+  StepPageHeaderApp,
   ProjectsMapViewApp,
   AccessDeniedAuthApp,
   AccessDeniedApp,
