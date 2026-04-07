@@ -29,6 +29,8 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
   const intl = useIntl()
   const { control } = useFormContext()
   const hasFeatureMultilangue = useFeatureFlag('multilangue')
+  const isNewProjectPage = useFeatureFlag('new_project_page')
+
   const project = useFragment(PROJECT_FRAGMENT, projectRef)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
@@ -38,20 +40,22 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
     <>
       <Accordion.Button>
         <Text>{intl.formatMessage({ id: 'global.publication' })}</Text>
-        <Flex fontSize={CapUIFontSize.BodyRegular} color="blue.500" position="absolute" right={6} top={6}>
-          <Icon name={CapUIIcon.Eye} />
-          <Link
-            href={url ?? ''}
-            target="_blank"
-            ml={1}
-            fontWeight={600}
-            sx={{
-              textDecoration: 'none !important',
-            }}
-          >
-            {intl.formatMessage({ id: 'global.preview' })}
-          </Link>
-        </Flex>
+        {!isNewProjectPage && (
+          <Flex fontSize={CapUIFontSize.BodyRegular} color="blue.500" position="absolute" right={6} top={6}>
+            <Icon name={CapUIIcon.Eye} />
+            <Link
+              href={url ?? ''}
+              target="_blank"
+              ml={1}
+              fontWeight={600}
+              sx={{
+                textDecoration: 'none !important',
+              }}
+            >
+              {intl.formatMessage({ id: 'global.preview' })}
+            </Link>
+          </Flex>
+        )}
       </Accordion.Button>
       <Accordion.Panel>
         <FormControl name="publishedAt" control={control}>

@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { FormProvider, useFormContext } from 'react-hook-form'
-import { CapUIFontSize, Flex, FormLabel, Heading, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUIIcon, Flex, FormLabel, Heading, Icon, Link, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { ProjectConfigFormGeneral_query$key } from '@relay/ProjectConfigFormGeneral_query.graphql'
+import { ProjectConfigFormGeneral_project$key } from '@relay/ProjectConfigFormGeneral_project.graphql'
 import TextEditor from 'components/BackOffice/Form/TextEditor/TextEditor'
 import UserListField from '../../Form/UserListField'
 import { UPLOAD_PATH } from '@utils/config'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface ProjectConfigFormGeneralProps {
   query: ProjectConfigFormGeneral_query$key
+  project: ProjectConfigFormGeneral_project$key | null
 }
 
 const QUERY_FRAGMENT = graphql`
@@ -30,9 +33,19 @@ const QUERY_FRAGMENT = graphql`
   }
 `
 
-const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ query: queryRef }) => {
+const PROJECT_FRAGMENT = graphql`
+  fragment ProjectConfigFormGeneral_project on Project {
+    url
+  }
+`
+
+const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({
+  query: queryRef,
+  project: projectRef,
+}) => {
   const intl = useIntl()
   const query = useFragment(QUERY_FRAGMENT, queryRef)
+  const project = useFragment(PROJECT_FRAGMENT, projectRef)
   const defaultLocale = query.availableLocales.find(locale => locale.isDefault)
 
   const isAdmin = query?.viewer?.isAdmin
@@ -40,14 +53,67 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
   const methods = useFormContext()
 
   const { control } = methods
+  const isNewProjectPage = useFeatureFlag('new_project_page')
 
   return (
     <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
-      <Heading as="h4" fontWeight="semibold" color="blue.800">
-        {intl.formatMessage({ id: 'global.general' })}
-      </Heading>
+      <Flex alignItems="center" justifyContent="space-between">
+        <Heading as="h4" fontWeight="semibold" color="blue.800">
+          {intl.formatMessage({ id: 'global.general' })}
+        </Heading>
+        {isNewProjectPage && project?.url ? (
+          <Flex fontSize={CapUIFontSize.BodyRegular} color="blue.500">
+            <Icon name={CapUIIcon.Eye} />
+            <Link
+              href={project.url}
+              target="_blank"
+              ml={1}
+              fontWeight={600}
+              sx={{
+                textDecoration: 'none !important',
+              }}
+            >
+              {intl.formatMessage({ id: 'global.preview' })}
+            </Link>
+          </Flex>
+        ) : null}
+      </Flex>
+
       <Flex direction="column" spacing={3}>
         <Flex spacing={6}>
+          {isNewProjectPage ? (
+            <FormControl
+              name="cover"
+              control={control}
+              width="40%"
+              mt={-1}
+              spacing={0}
+              sx={{
+                '& *': { minWidth: 'unset !important', maxWidth: '100%' },
+                '.cap-uploader > div': { height: '190px' },
+              }}
+            >
+              <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
+                  {intl.formatMessage({ id: 'global.optional' })}
+                </Text>
+              </FormLabel>
+              <FieldInput
+                type="uploader"
+                name="cover"
+                control={control}
+                format=".jpg,.jpeg,.png"
+                maxSize={8000000}
+                minResolution={{
+                  width: 800,
+                  height: 500,
+                }}
+                size={UPLOADER_SIZE.LG}
+                uploadURI={UPLOAD_PATH}
+                showThumbnail
+              />
+            </FormControl>
+          ) : null}
           <Flex direction="column" spacing={1} width="60%">
             <FormControl name="title" control={control} isRequired>
               <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'global.title' })} />
@@ -99,37 +165,39 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
               />
             </FormControl>
           </Flex>
-          <FormControl
-            name="cover"
-            control={control}
-            width="40%"
-            mt={-1}
-            spacing={0}
-            sx={{
-              '& *': { minWidth: 'unset !important', maxWidth: '100%' },
-              '.cap-uploader > div': { height: '190px' },
-            }}
-          >
-            <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
-              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
-                {intl.formatMessage({ id: 'global.optional' })}
-              </Text>
-            </FormLabel>
-            <FieldInput
-              type="uploader"
+          {!isNewProjectPage ? (
+            <FormControl
               name="cover"
               control={control}
-              format=".jpg,.jpeg,.png"
-              maxSize={8000000}
-              minResolution={{
-                width: 800,
-                height: 500,
+              width="40%"
+              mt={-1}
+              spacing={0}
+              sx={{
+                '& *': { minWidth: 'unset !important', maxWidth: '100%' },
+                '.cap-uploader > div': { height: '190px' },
               }}
-              size={UPLOADER_SIZE.LG}
-              uploadURI={UPLOAD_PATH}
-              showThumbnail
-            />
-          </FormControl>
+            >
+              <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
+                  {intl.formatMessage({ id: 'global.optional' })}
+                </Text>
+              </FormLabel>
+              <FieldInput
+                type="uploader"
+                name="cover"
+                control={control}
+                format=".jpg,.jpeg,.png"
+                maxSize={8000000}
+                minResolution={{
+                  width: 800,
+                  height: 500,
+                }}
+                size={UPLOADER_SIZE.LG}
+                uploadURI={UPLOAD_PATH}
+                showThumbnail
+              />
+            </FormControl>
+          ) : null}
         </Flex>
         <FormProvider {...methods}>
           <TextEditor

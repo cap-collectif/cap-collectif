@@ -104,6 +104,7 @@ const FRAGMENT = graphql`
       label: traductionKey
     }
     url
+    ...ProjectConfigFormGeneral_project
     steps(excludePresentationStep: true) {
       id
       label
@@ -246,7 +247,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
         <FormProvider {...methods}>
           <Flex direction="row" width="100%" spacing={6}>
             <Flex direction="column" spacing={6} width="70%">
-              <ProjectConfigFormGeneral query={query} />
+              <ProjectConfigFormGeneral query={query} project={project} />
               <ProjectConfigFormSteps />
             </Flex>
             <Flex direction="column" spacing={6} width="30%">
