@@ -112,7 +112,7 @@ export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojson
 
   if (districts) {
     geoJsons = districts
-      .filter(d => d.geojson && (d.displayedOnMap || getAllGeojsons))
+      .filter(d => d && d.geojson && (d.displayedOnMap || getAllGeojsons))
       .map<GeoJson>(d => ({
         district: parseGeoJson(d),
         style: {
@@ -123,6 +123,7 @@ export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojson
         id: d.id,
         slug: d.slug,
       }))
+      .filter(geoJson => geoJson.district !== null)
   }
 
   return geoJsons
