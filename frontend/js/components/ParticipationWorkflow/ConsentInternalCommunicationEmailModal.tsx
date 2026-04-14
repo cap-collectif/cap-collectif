@@ -120,7 +120,7 @@ const ConsentInternalCommunicationEmailModal = () => {
         showConfetti
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
-          <FormControl name="email" control={control} isRequired>
+          <FormControl name="email" control={control}>
             <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput
               id="email"
