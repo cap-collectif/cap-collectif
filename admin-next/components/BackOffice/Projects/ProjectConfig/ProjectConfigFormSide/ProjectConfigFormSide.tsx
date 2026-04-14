@@ -7,7 +7,9 @@ import ProjectConfigFormParameters from './ProjectConfigFormParameters'
 import ProjectConfigFormAccess from './ProjectConfigFormAccess'
 import ProjectConfigFormPublication from './ProjectConfigFormPublication'
 import ProjectConfigFormExternal from './ProjectConfigFormExternal'
+import ProjectConfigFormSteps from '../ProjectConfigFormSteps'
 import { useIntl } from 'react-intl'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface ProjectConfigFormSideProps {
   query: ProjectConfigFormSide_query$key
@@ -37,6 +39,7 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
   const intl = useIntl()
   const query = useFragment(QUERY_FRAGMENT, queryRef)
   const project = useFragment(PROJECT_FRAGMENT, projectRef)
+  const isNewProjectPage = useFeatureFlag('new_project_page')
 
   const locales = query.availableLocales.map(u => ({
     value: u.value,
@@ -45,7 +48,17 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
 
   return (
     <>
-      <Accordion allowMultiple size={CapUIAccordionSize.md} color={CapUIAccordionColor.white}>
+      <Accordion
+        allowMultiple
+        defaultAccordion={['steps']}
+        size={CapUIAccordionSize.md}
+        color={CapUIAccordionColor.white}
+      >
+        {isNewProjectPage && (
+          <Accordion.Item id="steps">
+            <ProjectConfigFormSteps />
+          </Accordion.Item>
+        )}
         <Accordion.Item id="publication" position="relative">
           <ProjectConfigFormPublication locales={locales} project={project} />
         </Accordion.Item>

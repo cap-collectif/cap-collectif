@@ -17,6 +17,7 @@ import { FormValues, getInitialValues } from './ProjectConfigForm.utils'
 import ProjectConfigFormGeneral from './ProjectConfigFormGeneral'
 import ProjectConfigFormSide from './ProjectConfigFormSide/ProjectConfigFormSide'
 import ProjectConfigFormSteps from './ProjectConfigFormSteps'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export type ProjectConfigFormProps = {
   project: ProjectConfigForm_project$key
@@ -124,6 +125,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
   const project = useFragment(FRAGMENT, projectRef)
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const isNewProjectPage = useFeatureFlag('new_project_page')
 
   const methods = useForm<FormValues>({
     mode: 'onChange',
@@ -248,7 +250,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
           <Flex direction="row" width="100%" spacing={6}>
             <Flex direction="column" spacing={6} width="70%">
               <ProjectConfigFormGeneral query={query} project={project} />
-              <ProjectConfigFormSteps />
+              {!isNewProjectPage && <ProjectConfigFormSteps />}
             </Flex>
             <Flex direction="column" spacing={6} width="30%">
               <ProjectConfigFormSide query={query} project={project} />
