@@ -38,6 +38,7 @@ Symlinks: `CLAUDE.md` and `GEMINI.md` point to this file.
 | `001-frontend_packages_management.md` | Package management for frontend |
 | `001-custom_code.md` | Custom code guidelines |
 | `001-translation_keys_naming_convention.md` | Translation key naming conventions |
+| `001-map_stack_maplibre_openstreetmap.md` | Migration from Mapbox to MapLibre/OpenStreetMap |
 
 Each ADR contains: Context, Decision, Alternatives considered, and Consequences. Templates in `ADR/adr-docs/`.
 

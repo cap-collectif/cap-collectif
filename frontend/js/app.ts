@@ -295,30 +295,6 @@ global.App = ($ => {
     })
   }
 
-  const showMap = containerId => {
-    const mapElement = document.getElementById(containerId)
-    const lat = mapElement.getAttribute('data-lat')
-    const lng = mapElement.getAttribute('data-lng')
-    mapboxgl.accessToken = config.mapProviders.MAPBOX.publicToken
-    // Map
-    const mapOptions = {
-      center: [lng, lat],
-      zoom: 15,
-      container: containerId,
-      style: 'mapbox://styles/mapbox/streets-v10',
-    }
-    const map = new mapboxgl.Map(mapOptions)
-    map.addControl(new mapboxgl.NavigationControl())
-    // Marker
-    const el = document.createElement('div')
-    el.className = 'marker'
-    el.style.backgroundImage = 'url(/svg/marker.svg)'
-    el.style.backgroundSize = 'cover'
-    el.style.width = '40px'
-    el.style.height = '40px'
-    new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(map)
-  }
-
   const makeSidebar = options => {
     // Fix containers
     const containers = `${options.container} .container`
@@ -414,7 +390,6 @@ global.App = ($ => {
     checkButton,
     video,
     externalLinks,
-    showMap,
     makeSidebar,
     carousel,
     customModal,

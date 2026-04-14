@@ -36,6 +36,7 @@ export const MapContainer = styled.div`
   .map {
     width: 70%;
     height: 350px;
+    overflow: hidden;
     ${MAIN_BORDER_RADIUS};
     margin-right: 10px;
     z-index: 0;

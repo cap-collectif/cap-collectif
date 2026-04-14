@@ -28,11 +28,6 @@ services:
         arguments:
             $config: { host: '%elasticsearch_host%', port: '%elasticsearch_port%' }
 
-    Capco\AppBundle\Command\GenerateMapProviderPublicToken:
-        arguments:
-            $mapboxSecretKey: '%mapbox_secret_key%'
-            $instanceName: '%instance_name%'
-
     Capco\AppBundle\Command\LoadProdDataCommand:
         arguments:
             $name: 'capco:load-prod-data'

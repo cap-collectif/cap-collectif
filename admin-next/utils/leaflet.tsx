@@ -1,8 +1,10 @@
-import useMapTokens from '@hooks/useMapTokens'
-import React from 'react'
-import { TileLayer } from 'react-leaflet'
+import React, { useEffect } from 'react'
+import { useMap } from 'react-leaflet'
 import L from 'leaflet'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import '@maplibre/maplibre-gl-leaflet'
+import 'maplibre-gl/dist/maplibre-gl.css'
+
+const MAP_STYLE_URL = '/map-style.json'
 
 export type District = {
   id: string
@@ -76,7 +78,7 @@ export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojson
 
   if (districts) {
     geoJsons = districts
-      .filter(d => d.geojson && (d.displayedOnMap || getAllGeojsons))
+      .filter(d => d && d.geojson && (d.displayedOnMap || getAllGeojsons))
       .map(d => ({
         district: parseGeoJson(d),
         style: {
@@ -92,39 +94,24 @@ export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojson
   return geoJsons
 }
 
-export type MapToken = {
-  readonly styleOwner: string | null
-  readonly styleId: string | null
-  readonly publicToken: string | null
-} | null
+const MapLibreTileLayer = () => {
+  const map = useMap()
 
-export const getMapboxUrl = (mapTokens: MapToken) => {
-  return mapTokens
-    ? `https://api.mapbox.com/styles/v1/${mapTokens.styleOwner}/${mapTokens.styleId}/tiles/256/{z}/{x}/{y}?access_token=${mapTokens.publicToken}`
-    : null
+  useEffect(() => {
+    const gl = L.maplibreGL({
+      style: MAP_STYLE_URL,
+    }).addTo(map)
+
+    return () => {
+      gl.remove()
+    }
+  }, [map])
+
+  return null
 }
 
-export const CapcoTileLayerLegacy = () => {
-  const mapTokens = useMapTokens()
-  return (
-    <TileLayer
-      // @ts-ignore
-      attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-      url={getMapboxUrl(mapTokens) || ''}
-    />
-  )
-}
-
-export const CapcoTileLayer = () => {
-  const { mapToken } = useAppContext()
-  return (
-    <TileLayer
-      // @ts-ignore
-      attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-      url={getMapboxUrl(mapToken) || ''}
-    />
-  )
-}
+export const CapcoTileLayerLegacy = () => <MapLibreTileLayer />
+export const CapcoTileLayer = () => <MapLibreTileLayer />
 
 export const parseLatLng = (latlng: string) => {
   try {

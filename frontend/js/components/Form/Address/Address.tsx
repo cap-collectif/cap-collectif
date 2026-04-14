@@ -29,7 +29,7 @@ const Address = ({
   allowReset = true,
   showSearchBar = true,
 }: Props) => {
-  const [address, setAddress] = React.useState(initialValue)
+  const [address, setAddress] = React.useState(initialValue || '')
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true)
   const intl = useIntl()
   const hasReset = allowReset && !!address
@@ -93,12 +93,12 @@ const Address = ({
 
   const onReset = () => {
     if (getAddress) getAddress(null)
-    setAddress(null)
+    setAddress('')
     onChange(null)
   }
 
   React.useEffect(() => {
-    setAddress(initialValue)
+    setAddress(initialValue || '')
   }, [initialValue])
 
   return (

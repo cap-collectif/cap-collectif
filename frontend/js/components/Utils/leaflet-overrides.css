@@ -1,0 +1,10 @@
+/* Prevent global link styles from overriding Leaflet zoom control buttons.
+   .leaflet-bar only wraps zoom controls, not attribution links. */
+.leaflet-bar a,
+.leaflet-bar a:hover  {
+  text-decoration: none;
+}
+
+.leaflet-bar a span {
+  color: #444;
+}

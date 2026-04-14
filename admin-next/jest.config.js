@@ -19,6 +19,8 @@ const customJestConfig = {
     '^styles/(.*)$': '<rootDir>/styles/$1',
     '~(.*)$': '<rootDir>/../frontend/js/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
+    '^maplibre-gl$': '<rootDir>/__mocks__/maplibre-gl.js',
+    '^@maplibre/maplibre-gl-leaflet$': '<rootDir>/__mocks__/maplibre-gl-leaflet.js',
   },
   testRegex: ['\\.test.ts$', '\\.test.tsx$', '\\-test.ts$', '\\-test.tsx$'],
   clearMocks: true,

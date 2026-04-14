@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { useLeafletContext } from '@react-leaflet/core'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import L from 'leaflet'
 import AppBox from '~ui/Primitives/AppBox'
 import Toast from '~/components/DesignSystem/Toast/Toast'
@@ -50,8 +50,8 @@ const ProposalMapOutOfAreaPane = ({ content }: Props): null => {
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-out-of-area')
-        const root = ReactDOM.createRoot(div)
-        root.render(Pane(content), div)
+        const root = createRoot(div)
+        root.render(Pane(content))
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation)
         return div
       },

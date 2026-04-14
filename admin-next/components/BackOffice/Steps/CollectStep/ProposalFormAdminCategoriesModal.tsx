@@ -117,11 +117,6 @@ const CATEGORIES_MODAL_FRAGMENT = graphql`
         type: contentType
       }
     }
-    mapToken(provider: MAPBOX) {
-      publicToken
-      styleId
-      styleOwner
-    }
   }
 `
 

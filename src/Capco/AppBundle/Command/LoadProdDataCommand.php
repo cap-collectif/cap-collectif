@@ -15,7 +15,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\Entity\Opinion;
@@ -163,7 +162,6 @@ class LoadProdDataCommand extends Command
             OpinionType::class,
             OpinionAppendix::class,
             MultipleChoiceQuestionLogicJumpCondition::class,
-            MapToken::class,
             LogicJump::class,
             Event::class,
             ContactForm::class,

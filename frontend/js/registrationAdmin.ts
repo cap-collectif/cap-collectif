@@ -8,7 +8,6 @@ import ContactAdminPageApp from '~/startup/ContactAdminPageApp'
 import RegistrationAdminApp from '~/startup/RegistrationAdminApp'
 import ProposalAdminPageApp from '~/startup/ProposalAdminPageApp'
 import UserAdminPageApp from '~/startup/UserAdminPageApp'
-import MapAdminPageApp from '~/startup/MapAdminPageApp'
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp'
 import ProjectAdminApp from '~/startup/ProjectAdminApp'
 import GlobalDistrictAdminApp from '~/startup/GlobalDistrictAdminApp'
@@ -42,7 +41,6 @@ ReactOnRails.register({
   ProposalAdminPageApp,
   UserAdminPageApp,
   ProposalCreateFusionButtonApp,
-  MapAdminPageApp,
   LocaleAdminPageApp,
   ProjectAdminApp,
   GlobalDistrictAdminApp,

@@ -24,7 +24,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\Entity\Opinion;
@@ -258,13 +257,6 @@ class ReinitCommand extends Command
 
         $this->loadFixtures($output, $this->env);
 
-        if ('prod' === $this->env) {
-            $this->io->info('Start generate map token');
-
-            $this->runCommands(['capco:generate:map-token' => ['provider' => 'MAPBOX']], $output);
-            $this->io->info('End generate map token');
-        }
-
         $this->io->info('Database is ready!');
 
         if (!$input->getOption('no-toggles')) {
@@ -410,7 +402,6 @@ class ReinitCommand extends Command
             OpinionType::class,
             OpinionAppendix::class,
             MultipleChoiceQuestionLogicJumpCondition::class,
-            MapToken::class,
             LogicJump::class,
             Event::class,
             ContactForm::class,

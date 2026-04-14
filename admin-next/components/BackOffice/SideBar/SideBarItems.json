@@ -203,12 +203,6 @@
                 "featuresRequired": []
             },
             {
-                "title": "admin.fields.proposal_form.map",
-                "href": "/admin/map/list",
-                "rolesRequired": [],
-                "featuresRequired": []
-            },
-            {
                 "title": "global-languages",
                 "href": "/admin/locale/list",
                 "rolesRequired": [],

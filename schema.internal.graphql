@@ -1946,42 +1946,6 @@ type ChangeFontPayload {
   clientMutationId: String
 }
 
-input ChangeMapProviderTokenInput {
-  """The name of the provider the new token will be set"""
-  provider: MapTokenProvider!
-
-  """The new public token"""
-  publicToken: String
-
-  """The new secret token"""
-  secretToken: String
-  clientMutationId: String
-}
-
-type ChangeMapProviderTokenPayload {
-  """The newly map token"""
-  mapToken: MapToken
-  clientMutationId: String
-}
-
-input ChangeMapStyleInput {
-  """The ID of the map token to modify the style"""
-  mapTokenId: ID!
-
-  """The new style owner"""
-  styleOwner: String!
-
-  """The new style ID"""
-  styleId: ID!
-  clientMutationId: String
-}
-
-type ChangeMapStylePayload {
-  """The newly map token"""
-  mapToken: MapToken
-  clientMutationId: String
-}
-
 input ChangeProposalAnalysisInput {
   """The id of the proposal to analyse."""
   proposalId: ID!
@@ -8803,82 +8767,6 @@ type MajorityQuestion implements Question & Node {
   totalVotesCount: Int!
 }
 
-"""A map token used for connecting external services with our maps"""
-type MapToken implements Node {
-  """The ID of an object"""
-  id: ID!
-
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
-  """The public token"""
-  publicToken: String!
-
-  """The secret token"""
-  secretToken: String
-
-  """The corresponding provider in which belongs the token"""
-  provider: MapTokenProvider
-
-  """
-  The style id associated to this map token (available only if a style is applied)
-  """
-  styleId: ID
-
-  """
-  The style owner associated to this map token (available only if a style is applied)
-  """
-  styleOwner: String
-
-  """The available styles associated to this map token"""
-  styles(
-    """Filter the styles by its visibility"""
-    visibility: MapTokenStyleVisibility
-  ): [MapTokenStyle]
-  createdAt: DateTime!
-  updatedAt: DateTime
-}
-
-"""The provider for a map token"""
-enum MapTokenProvider {
-  """Used for Mapbox service provider"""
-  MAPBOX
-}
-
-"""A map token style"""
-type MapTokenStyle {
-  id: ID!
-
-  """The name of the style"""
-  name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime
-
-  """The version of the style"""
-  version: Int!
-
-  """The preview url of the style"""
-  previewUrl: URI!
-
-  """Does the style is the current one applied to the whole website?"""
-  isCurrent: Boolean!
-
-  """The owner of the style"""
-  owner: String!
-
-  """The visibility of the style"""
-  visibility: MapTokenStyleVisibility!
-}
-
-"""The visibility of a style for a map token"""
-enum MapTokenStyleVisibility {
-  """The style is public"""
-  PUBLIC
-
-  """The style is private"""
-  PRIVATE
-}
-
 """A media"""
 type Media implements UniformResourceLocatable {
   """The URL to this resource."""
@@ -9304,8 +9192,6 @@ type Mutation {
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
   deleteEvent(input: DeleteEventInput!): DeleteEventPayload
   deleteAccountByEmail(input: DeleteAccountByEmailInput!): DeleteAccountByEmailPayload
-  changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
-  changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   removeSiteFavicon(input: RemoveSiteFaviconInput!): RemoveSiteFaviconPayload
   changeSiteFavicon(input: ChangeSiteFaviconInput!): ChangeSiteFaviconPayload
   reviewEvent(input: ReviewEventInput!): ReviewEventPayload
@@ -14468,20 +14354,6 @@ type Query {
     """Filter by title."""
     title: String = null
   ): [Theme!]!
-
-  """Get the available map tokens"""
-  mapTokens: [MapToken!]!
-
-  """Search a particular map token by its provider"""
-  mapToken(
-    """The map provider"""
-    provider: MapTokenProvider!
-
-    """
-    Whether or not resolves the default map tokens if no custom tokens are specified
-    """
-    includeDefault: Boolean = true
-  ): MapToken
 
   """Get the current favicon"""
   siteFavicon: SiteImage!

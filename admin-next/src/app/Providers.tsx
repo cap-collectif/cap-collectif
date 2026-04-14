@@ -115,12 +115,7 @@ export default function Providers({
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
       {/** @ts-expect-error MAJ react-intl */}
       <IntlProvider locale={intl.locale} messages={intl.messages}>
-        <AppProvider
-          viewerSession={viewerSession}
-          appVersion={appVersion}
-          siteColors={siteColors}
-          mapToken={SSRData?.mapToken}
-        >
+        <AppProvider viewerSession={viewerSession} appVersion={appVersion} siteColors={siteColors}>
           <NoSSR>
             <UIProviderWithTheme SSRData={SSRData} captchaKey={captchaKey}>
               <MainLayout SSRData={SSRData}>{children}</MainLayout>

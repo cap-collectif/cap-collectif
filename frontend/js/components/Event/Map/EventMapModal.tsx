@@ -58,7 +58,7 @@ const EventMapModal = ({ onClose, query: queryKey }: Props): JSX.Element => {
       })}
       width="80vw"
     >
-      <Modal.Body p={0}>
+      <Modal.Body p={0} style={{ height: '60vh' }}>
         <LeafletMap
           key="modal-map"
           query={query}

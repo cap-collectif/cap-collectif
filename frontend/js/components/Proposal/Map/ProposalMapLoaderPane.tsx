@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useLeafletContext } from '@react-leaflet/core'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import L from 'leaflet'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'
@@ -60,8 +60,8 @@ const ProposalMapLoaderPane = ({ hasError, retry }: Props): null => {
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-loader')
-        const root = ReactDOM.createRoot(div)
-        root.render(Pane(hasError, retry, isOffline, intl), div)
+        const root = createRoot(div)
+        root.render(Pane(hasError, retry, isOffline, intl))
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation)
         return div
       },

@@ -56,7 +56,6 @@ class GlobalIdResolver
         'UserType',
         'Questionnaire',
         'Consultation',
-        'MapToken',
         'Requirement',
         'ConsultationStep',
         'OtherStep',

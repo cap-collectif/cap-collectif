@@ -234,7 +234,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     href="/admin/capco/app/footersocialnetwork/list"
                   />
                   <SidebarLink text="admin.label.project_district" href="/admin-next/geographical-areas" />
-                  <SidebarLink text="admin.fields.proposal_form.map" href="/admin/map/list" />
                   {features.multilangue && <SidebarLink text="global-languages" href="/admin/locale/list" />}
                   {features.http_redirects && <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />}
                   <SidebarLink text="website-icon" href="/admin/favicon/list" />

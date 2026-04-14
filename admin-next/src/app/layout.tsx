@@ -106,11 +106,6 @@ export const layoutQuery = graphql`
     footerBody: siteParameter(keyname: "footer.text.body") {
       value
     }
-    mapToken(provider: MAPBOX) {
-      publicToken
-      styleId
-      styleOwner
-    }
     ...ChartModal_query
     ...RegistrationModal_query
   }

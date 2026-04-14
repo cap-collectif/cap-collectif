@@ -18,7 +18,6 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\MailingList;
-use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\Opinion;
@@ -251,9 +250,6 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);
-        }
-        if ($node instanceof MapToken) {
-            return $this->typeResolver->resolve('MapToken');
         }
         if ($node instanceof Oauth2SSOConfiguration) {
             return $this->typeResolver->resolve('InternalOauth2SSOConfiguration');

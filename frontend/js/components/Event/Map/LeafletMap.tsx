@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { MapContainer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, Marker, Popup, ZoomControl } from 'react-leaflet'
 import { useSelector, useDispatch } from 'react-redux'
 import { graphql } from 'relay-runtime'
 import { FormattedMessage } from 'react-intl'
@@ -171,13 +171,26 @@ export const LeafletMap = ({
       })
   }
 
+  const bounds = L.latLngBounds(markersGroup)
+
+  React.useEffect(() => {
+    if (!isFullScreen) return
+    // Leaflet doesn't detect container size changes from modal animations.
+    // invalidateSize() forces tile recalculation, then fitBounds restores the view.
+    const timer = setTimeout(() => {
+      mapRef.current?.invalidateSize()
+      if (bounds.isValid()) {
+        mapRef.current?.fitBounds(formatBounds(bounds))
+      }
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [isFullScreen]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const getLocation = () => {
     window.navigator.geolocation.getCurrentPosition(position => {
       if (position) mapRef.current?.flyTo({ lat: position.coords.latitude, lng: position.coords.longitude }, 18)
     })
   }
-
-  const bounds = L.latLngBounds(markersGroup)
   return (
     <div
       style={{
@@ -203,7 +216,7 @@ export const LeafletMap = ({
         bounds={bounds.isValid() ? formatBounds(bounds) : undefined}
         zoom={defaultMapOptions.zoom}
         maxZoom={MAX_MAP_ZOOM}
-        preferCanvas
+        zoomControl={false}
         id="event-map"
         className={isFullScreen ? 'fullscreen' : null}
         style={
@@ -223,6 +236,7 @@ export const LeafletMap = ({
         ref={mapRef}
       >
         <CapcoTileLayer />
+        <ZoomControl position="topleft" />
         <MarkerClusterGroup
           spiderfyOnMaxZoom
           showCoverageOnHover={false}

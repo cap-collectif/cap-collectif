@@ -69,8 +69,6 @@ parameters:
     default_france_connect_client_secret: '%env(SYMFONY_DEFAULT_FRANCE_CONNECT_CLIENT_SECRET)%'
     sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
     google_map_public_key: '%env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY)%'
-    mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
-    mapbox_public_key: '%env(SYMFONY_MAPBOX_PUBLIC_KEY)%'
     google_maps_key_server: '%env(SYMFONY_GOOGLE_MAP_SERVER_KEY)%'
     mandrill_api_key: '%env(SYMFONY_MANDRILL_API_KEY)%'
     mailjet_public_key: '%env(SYMFONY_MAILJET_PUBLIC_KEY)%'
@@ -204,8 +202,6 @@ parameters:
     env(SYMFONY_OPENID_TEST_USERNAME): 'test'
     env(SYMFONY_OPENID_TEST_PASSWORD): 'test'
     # Other
-    env(SYMFONY_MAPBOX_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
-    env(SYMFONY_MAPBOX_SECRET_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_MAILJET_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_MAILJET_PRIVATE_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_MANDRILL_API_KEY): 'INSERT_A_REAL_SECRET'

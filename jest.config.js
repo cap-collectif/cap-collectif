@@ -25,6 +25,8 @@ module.exports = {
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',
     '\\.(css|less)$': 'identity-obj-proxy',
+    '^@maplibre/maplibre-gl-leaflet$': '<rootDir>/__mocks__/maplibre-gl-leaflet.js',
+    '^maplibre-gl$': '<rootDir>/__mocks__/maplibre-gl.js',
     '\\.(ttf|woff|woff2)$': '<rootDir>/__mocks__/font.js',
   },
   coverageReporters: ['text', 'json-summary', 'lcov', 'clover', 'json'],

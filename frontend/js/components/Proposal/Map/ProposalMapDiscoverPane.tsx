@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { useLeafletContext } from '@react-leaflet/core'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import L from 'leaflet'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import AppBox from '~ui/Primitives/AppBox'
@@ -42,13 +42,12 @@ const ProposalMapDiscoverPane = ({ handleClose, type = 'CLICK' }: Props): null =
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-discover')
-        const root = ReactDOM.createRoot(div)
+        const root = createRoot(div)
         root.render(
           Pane({
             intl,
             type,
           }),
-          div,
         )
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation)
         div.addEventListener('click', handleClose)

@@ -5,9 +5,6 @@ declare global {
     locale: string
     intl_messages: string
     __REDUX_DEVTOOLS_EXTENSION__: Function
-    MAPBOX_PUBLIC_TOKEN: string | null
-    MAPBOX_PUBLIC_STYLE_OWNER: string | null
-    MAPBOX_PUBLIC_STYLE_ID: string | null
     Beacon?: (method: string, options?: Record<string, unknown>) => void
   }
   type ReactRelayReadyState = {
