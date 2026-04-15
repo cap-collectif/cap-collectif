@@ -1,0 +1,12 @@
+HttpRedirectErrorCode:
+    type: enum
+    config:
+        name: HttpRedirectErrorCode
+        description: 'The available errors for URL redirects.'
+        values:
+            DUPLICATE_URL:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectErrorCode::DUPLICATE_URL
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectErrorCode::NOT_FOUND
+            INVALID_URL:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectErrorCode::INVALID_URL

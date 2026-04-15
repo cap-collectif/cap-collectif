@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\HttpRedirect;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Mediator;
@@ -172,6 +173,9 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof Group) {
             return $this->typeResolver->resolve('Group');
+        }
+        if ($node instanceof HttpRedirect) {
+            return $this->typeResolver->resolve('InternalHttpRedirect');
         }
 
         if ($node instanceof SelectionStep) {

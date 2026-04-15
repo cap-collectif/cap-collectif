@@ -1,0 +1,10 @@
+CreateHttpRedirectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            redirect:
+                type: 'InternalHttpRedirect'
+                description: 'The created redirect.'
+            errorCode:
+                type: 'HttpRedirectErrorCode'
+                description: 'The available errors if any.'

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,19 +41,8 @@ class PageController extends Controller
             return $this->render('@CapcoApp/Page/charter.html.twig', ['body' => $body]);
         }
 
-        if (!$pageTranslation) {
-            throw $this->createNotFoundException($this->translator->trans('page.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        $page = $pageTranslation->getTranslatable();
-
-        if (!$page->getIsEnabled()) {
-            throw $this->createNotFoundException($this->translator->trans('page.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        return [
-            'page' => $page,
-            'pageTranslation' => $pageTranslation,
-        ];
+        // Custom pages are rendered by Next.js. Symfony keeps the route only
+        // to preserve URL generation and locale resolution before handing off.
+        return new Response('', Response::HTTP_I_AM_A_TEAPOT);
     }
 }

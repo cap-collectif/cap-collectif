@@ -1,0 +1,7 @@
+DeleteHttpRedirectInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The redirect ID.'

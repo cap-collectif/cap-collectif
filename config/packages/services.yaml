@@ -32,6 +32,15 @@ services:
     Capco\AppBundle\Factory\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Factory/*'
 
+    Capco\AppBundle\HttpRedirect\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/HttpRedirect/*'
+        exclude:
+            - '%kernel.project_dir%/src/Capco/AppBundle/HttpRedirect/ResolvedHttpRedirect.php'
+
+    Capco\AppBundle\HttpRedirect\HttpRedirectRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 250 }
+
     Capco\AppBundle\Antivirus\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Antivirus/*'
 
@@ -279,6 +288,27 @@ services:
     Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
         autowire: true
         class: 'Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
+
+    Capco\AppBundle\Cache\SameRequestCache: ~
+
+    capco.http_redirect.cache:
+        class: Capco\AppBundle\Cache\RedisCache
+        arguments:
+            $redisClient: '@snc_redis.default'
+            $namespace: '%redis_prefix%http_redirect_resolve'
+
+    Capco\AppBundle\HttpRedirect\HttpRedirectResolver:
+        arguments:
+            $httpRedirectCache: '@capco.http_redirect.cache'
+
+    Capco\AppBundle\HttpRedirect\HttpRedirectUrlNormalizer:
+        arguments:
+            $routerRequestContextHost: '%router.request_context.host%'
+            $requestStack: '@request_stack'
+
+    Capco\AppBundle\HttpRedirect\HttpRedirectCacheInvalidator:
+        arguments:
+            $httpRedirectCache: '@capco.http_redirect.cache'
 
     Capco\AppBundle\RedirectionIO\RequestResponseListener:
         decorates: 'RedirectionIO\Client\ProxySymfony\EventListener\RequestResponseListener'

@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -288,9 +289,9 @@ class ProfileController extends Controller
             throw $this->createNotFoundException();
         }
 
-        return [
-            'organization' => $organization,
-        ];
+        // Organization profile pages are rendered by Next.js. Symfony keeps
+        // the route to preserve URL generation before handing off.
+        return new Response('', Response::HTTP_I_AM_A_TEAPOT);
     }
 
     /**

@@ -235,7 +235,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   />
                   <SidebarLink text="admin.label.project_district" href="/admin-next/geographical-areas" />
                   {features.multilangue && <SidebarLink text="global-languages" href="/admin/locale/list" />}
-                  {features.http_redirects && <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />}
+                  <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />
                   <SidebarLink text="website-icon" href="/admin/favicon/list" />
                   <SidebarLink text="global-typeface" href="/admin/font/list" />
                   <SidebarLink text="admin.label.settings.global" href="/admin/settings/settings.global/list" />

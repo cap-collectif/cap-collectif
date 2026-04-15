@@ -12,7 +12,9 @@ use Capco\AppBundle\Repository\ThemeTranslationRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,10 +30,16 @@ class BlogController extends Controller
      * @param null|mixed $theme
      * @param null|mixed $project
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array|RedirectResponse|Response
      */
     public function indexAction(Request $request, mixed $page, $theme = null, $project = null)
     {
+        if ('GET' === $request->getMethod() && preg_match('#^/(?:(?:en|fr|es|de|nl|sv|eu|oc|ur)/)?blog/?$#', $request->getPathInfo())) {
+            // The blog landing page is rendered by Next.js. Symfony keeps the
+            // route only to preserve URL generation before handing off.
+            return new Response('', Response::HTTP_I_AM_A_TEAPOT);
+        }
+
         $currentUrl = $this->generateUrl('app_blog');
 
         $form = $this->createForm(PostSearchType::class, null, [

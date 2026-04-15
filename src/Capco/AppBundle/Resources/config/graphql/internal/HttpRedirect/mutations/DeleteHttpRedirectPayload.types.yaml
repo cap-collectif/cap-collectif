@@ -1,0 +1,10 @@
+DeleteHttpRedirectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedRedirectId:
+                type: 'ID'
+                description: 'The deleted redirect ID.'
+            errorCode:
+                type: 'HttpRedirectErrorCode'
+                description: 'The available errors if any.'

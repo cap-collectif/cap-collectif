@@ -212,7 +212,7 @@
                 "title": "domain.and.url",
                 "href": "/admin-next/domain-url",
                 "rolesRequired": [],
-                "featuresRequired": ["http_redirects"]
+                "featuresRequired": []
             },
             {
                 "title": "website-icon",

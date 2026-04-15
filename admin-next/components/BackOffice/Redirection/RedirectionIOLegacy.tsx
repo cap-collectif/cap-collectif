@@ -1,5 +1,4 @@
 import * as React from 'react'
-import withPageAuthRequired from '@utils/withPageAuthRequired'
 import {
   Box,
   Text,
@@ -14,7 +13,7 @@ import {
 } from '@cap-collectif/ui'
 import { useIntl, FormattedHTMLMessage } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import { RedirectionIOQuery } from '@relay/RedirectionIOQuery.graphql'
+import type { RedirectionIOLegacyQuery } from '@relay/RedirectionIOLegacyQuery.graphql'
 import { useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import UpdateRedirectIOProjectKeyMutation from 'mutations/UpdateRedirectIOProjectKeyMutation'
@@ -23,8 +22,8 @@ type FormValues = {
   projectKey: string | null
 }
 
-export const QUERY = graphql`
-  query RedirectionIOQuery($keyname: String!) {
+const QUERY = graphql`
+  query RedirectionIOLegacyQuery($keyname: String!) {
     projectKey: siteParameter(keyname: $keyname) {
       value
       id
@@ -34,16 +33,16 @@ export const QUERY = graphql`
 
 const formName = 'shorten-url-form'
 
-const RedirectionIO: React.FC = () => {
+const RedirectionIOLegacy: React.FC = () => {
   const intl = useIntl()
-  const query = useLazyLoadQuery<RedirectionIOQuery>(QUERY, {
+  const query = useLazyLoadQuery<RedirectionIOLegacyQuery>(QUERY, {
     keyname: 'redirectionio.project.id',
   })
 
   if (!query?.projectKey) return null
 
   const initialValues: FormValues = {
-    projectKey: query?.projectKey?.value,
+    projectKey: query.projectKey.value,
   }
 
   const { handleSubmit, formState, control, watch } = useForm<FormValues>({
@@ -58,6 +57,7 @@ const RedirectionIO: React.FC = () => {
     const input = {
       projectId: values.projectKey,
     }
+
     return UpdateRedirectIOProjectKeyMutation.commit({ input })
   }
 
@@ -144,9 +144,7 @@ const RedirectionIO: React.FC = () => {
                     target="_blank"
                     href="https://redirection.io/documentation/user-documentation/what-are-organizations-and-projects"
                   >
-                    {intl.formatMessage({
-                      id: 'activate-redirection-service-step2-link',
-                    })}
+                    {intl.formatMessage({ id: 'activate-redirection-service-step2-link' })}
                   </Button>
                 ),
               },
@@ -196,6 +194,4 @@ const RedirectionIO: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired
-
-export default RedirectionIO
+export default RedirectionIOLegacy

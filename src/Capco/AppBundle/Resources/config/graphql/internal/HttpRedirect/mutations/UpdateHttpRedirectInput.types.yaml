@@ -1,0 +1,19 @@
+UpdateHttpRedirectInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The redirect ID.'
+            sourceUrl:
+                type: 'String!'
+                description: 'The platform URL to redirect.'
+            destinationUrl:
+                type: 'String!'
+                description: 'The destination URL.'
+            duration:
+                type: 'HttpRedirectDuration!'
+                description: 'Whether the redirect is temporary or permanent.'
+            redirectType:
+                type: 'HttpRedirectType'
+                description: 'Whether this entry is a redirection or a URL shortening.'

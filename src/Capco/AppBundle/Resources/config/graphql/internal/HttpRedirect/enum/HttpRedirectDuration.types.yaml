@@ -1,0 +1,10 @@
+HttpRedirectDuration:
+    type: enum
+    config:
+        name: HttpRedirectDuration
+        description: 'Defines how long a redirect should last.'
+        values:
+            TEMPORARY:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectDuration::TEMPORARY
+            PERMANENT:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectDuration::PERMANENT

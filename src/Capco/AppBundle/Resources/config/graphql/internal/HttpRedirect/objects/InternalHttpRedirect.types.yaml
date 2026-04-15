@@ -1,0 +1,37 @@
+InternalHttpRedirect:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: HttpRedirect
+        description: 'A URL redirect managed in the admin.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: HttpRedirect
+            sourceUrl:
+                type: 'String!'
+                description: 'The platform URL that will be redirected.'
+                resolve: '@=value.getSourceUrl()'
+            destinationUrl:
+                type: 'String!'
+                description: 'The destination URL for the redirect.'
+                resolve: '@=value.getDestinationUrl()'
+            duration:
+                type: 'HttpRedirectDuration!'
+                description: 'Whether the redirect is temporary or permanent.'
+                resolve: '@=value.getDuration()'
+            redirectType:
+                type: 'HttpRedirectType!'
+                description: 'Whether this entry is a redirection or a URL shortening.'
+                resolve: '@=value.getRedirectType()'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime'
+                resolve: '@=value.getUpdatedAt()'

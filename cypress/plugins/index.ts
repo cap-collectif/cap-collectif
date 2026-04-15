@@ -18,6 +18,7 @@ import * as cp from 'child_process'
 import { mailcatcherTasks } from './mailcatcher'
 
 const exec = util.promisify(cp.exec)
+const execFile = util.promisify(cp.execFile)
 
 const env = process.env.CI ? 'ci' : 'local'
 
@@ -120,8 +121,8 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       return Promise.resolve(null)
     },
     'run:sql': async (sql: string) => {
-      console.log(`fab ${env}.app.sql --sql="${sql}" --environment=test`)
-      await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+      console.log(`fab ${env}.app.sql --sql=<redacted> --environment=test`)
+      await execFile('fab', [`${env}.app.sql`, `--sql=${sql}`, '--environment=test'])
       return Promise.resolve(null)
     },
     'run:command': async (name: string) => {

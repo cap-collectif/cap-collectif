@@ -161,6 +161,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Comment']
 
+    Capco\AppBundle\Repository\HttpRedirectRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:HttpRedirect']
+
     Capco\AppBundle\Repository\PostCommentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

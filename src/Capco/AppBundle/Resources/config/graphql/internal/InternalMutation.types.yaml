@@ -996,6 +996,27 @@ InternalMutation:
                     inputType: InternalUpdateRedirectIOProjectIdInput
                     payloadType: InternalUpdateRedirectIOProjectIdPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRedirectIOProjectIdMutation", args)'
+            createHttpRedirect:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateHttpRedirectInput
+                    payloadType: CreateHttpRedirectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HttpRedirect\\CreateHttpRedirectMutation", args)'
+            updateHttpRedirect:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateHttpRedirectInput
+                    payloadType: UpdateHttpRedirectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HttpRedirect\\UpdateHttpRedirectMutation", args)'
+            deleteHttpRedirect:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteHttpRedirectInput
+                    payloadType: DeleteHttpRedirectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HttpRedirect\\DeleteHttpRedirectMutation", args)'
             revokeAnalystsToProposals:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

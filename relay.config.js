@@ -8,6 +8,7 @@ module.exports = {
   artifactDirectory: './frontend/js/__generated__/~relay',
   exclude: [
     '**/node_modules/**',
+    '**/cypress/screenshots/**',
     '**/__mocks__/**',
     '**/__generated__/**',
     '**/admin-next/components/**',

@@ -1,0 +1,10 @@
+UpdateHttpRedirectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            redirect:
+                type: 'InternalHttpRedirect'
+                description: 'The updated redirect.'
+            errorCode:
+                type: 'HttpRedirectErrorCode'
+                description: 'The available errors if any.'

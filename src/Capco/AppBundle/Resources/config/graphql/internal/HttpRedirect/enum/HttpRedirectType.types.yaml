@@ -1,0 +1,10 @@
+HttpRedirectType:
+    type: enum
+    config:
+        name: HttpRedirectType
+        description: 'Defines the type of URL rule.'
+        values:
+            REDIRECTION:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectType::REDIRECTION
+            URL_SHORTENING:
+                value: !php/const Capco\AppBundle\Enum\HttpRedirectType::URL_SHORTENING

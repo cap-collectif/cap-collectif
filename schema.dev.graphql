@@ -3981,6 +3981,30 @@ type CreateGroupPayload {
   clientMutationId: String
 }
 
+input CreateHttpRedirectInput {
+  """The platform URL to redirect."""
+  sourceUrl: String!
+
+  """The destination URL."""
+  destinationUrl: String!
+
+  """Whether the redirect is temporary or permanent."""
+  duration: HttpRedirectDuration
+
+  """Whether this entry is a redirection or a URL shortening."""
+  redirectType: HttpRedirectType = REDIRECTION
+  clientMutationId: String
+}
+
+type CreateHttpRedirectPayload {
+  """The created redirect."""
+  redirect: HttpRedirect
+
+  """The available errors if any."""
+  errorCode: HttpRedirectErrorCode
+  clientMutationId: String
+}
+
 input CreateMailingListInput {
   """The name of the list"""
   name: String!
@@ -5901,6 +5925,21 @@ input DeleteGroupInput {
 
 type DeleteGroupPayload {
   deletedGroupId: ID!
+  clientMutationId: String
+}
+
+input DeleteHttpRedirectInput {
+  """The redirect ID."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteHttpRedirectPayload {
+  """The deleted redirect ID."""
+  deletedRedirectId: ID
+
+  """The available errors if any."""
+  errorCode: HttpRedirectErrorCode
   clientMutationId: String
 }
 
@@ -8155,6 +8194,65 @@ enum HomePageSectionOrderField {
   UPDATED_AT
 }
 
+"""A URL redirect managed in the admin."""
+type HttpRedirect implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The platform URL that will be redirected."""
+  sourceUrl: String!
+
+  """The destination URL for the redirect."""
+  destinationUrl: String!
+
+  """Whether the redirect is temporary or permanent."""
+  duration: HttpRedirectDuration!
+
+  """Whether this entry is a redirection or a URL shortening."""
+  redirectType: HttpRedirectType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A connection to a list of items."""
+type HttpRedirectConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [HttpRedirectEdge]
+}
+
+"""Defines how long a redirect should last."""
+enum HttpRedirectDuration {
+  TEMPORARY
+  PERMANENT
+}
+
+"""An edge in a connection."""
+type HttpRedirectEdge {
+  """The item at the end of the edge."""
+  node: HttpRedirect!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for URL redirects."""
+enum HttpRedirectErrorCode {
+  DUPLICATE_URL
+  NOT_FOUND
+  INVALID_URL
+}
+
+"""Defines the type of URL rule."""
+enum HttpRedirectType {
+  REDIRECTION
+  URL_SHORTENING
+}
+
 """A string containing an IP address."""
 scalar IP
 
@@ -9327,6 +9425,9 @@ type Mutation {
   assignDecisionMakerToProposals(input: AssignDecisionMakerToProposalsInput!): AssignDecisionMakerToProposalsPayload
   configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
   updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
+  createHttpRedirect(input: CreateHttpRedirectInput!): CreateHttpRedirectPayload
+  updateHttpRedirect(input: UpdateHttpRedirectInput!): UpdateHttpRedirectPayload
+  deleteHttpRedirect(input: DeleteHttpRedirectInput!): DeleteHttpRedirectPayload
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
   assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
@@ -14705,6 +14806,17 @@ type Query {
   """Get site settings."""
   siteSettings: SiteSettings
 
+  """List all HTTP redirects."""
+  httpRedirects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): HttpRedirectConnection!
+
   """Get list of sms orders."""
   smsOrders(
     """
@@ -19597,6 +19709,33 @@ type UpdateHomePageProjectsSectionConfigurationPayload {
 
   """An unsuccessful mutation will return an error."""
   errorCode: UpdateHomePageProjectsSectionConfigurationErrorCode
+  clientMutationId: String
+}
+
+input UpdateHttpRedirectInput {
+  """The redirect ID."""
+  id: ID!
+
+  """The platform URL to redirect."""
+  sourceUrl: String!
+
+  """The destination URL."""
+  destinationUrl: String!
+
+  """Whether the redirect is temporary or permanent."""
+  duration: HttpRedirectDuration!
+
+  """Whether this entry is a redirection or a URL shortening."""
+  redirectType: HttpRedirectType
+  clientMutationId: String
+}
+
+type UpdateHttpRedirectPayload {
+  """The updated redirect."""
+  redirect: HttpRedirect
+
+  """The available errors if any."""
+  errorCode: HttpRedirectErrorCode
   clientMutationId: String
 }
 

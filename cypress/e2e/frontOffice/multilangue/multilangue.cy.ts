@@ -122,7 +122,7 @@ describe('Multilangue', () => {
     cy.get('#changeLanguageProposalContainer').should('not.exist')
   })
 
-  it.only('should show the locale selection banner again on other non-localized pages after a previous dismissal', () => {
+  it('should show the locale selection banner again on other non-localized pages after a previous dismissal', () => {
     Base.visitHomepage({ lang: 'de' })
     acceptCookiesIfBannerIsVisible()
     cy.contains('error.404.title').should('not.exist')
@@ -138,7 +138,7 @@ describe('Multilangue', () => {
     cy.getCookie('locale').should('exist')
   })
 
-  it.only('should allow an anonymous user to change the locale via the footer', () => {
+  it('should allow an anonymous user to change the locale via the footer', () => {
     Base.visitHomepage()
     cy.get('.footer-links').should('exist')
     cy.getCookie('locale').should('exist')
@@ -154,7 +154,7 @@ describe('Multilangue', () => {
     cy.document().its('cookie').should('include', 'locale=de-DE')
   })
 
-  it.only('should allow a logged-in user to change the locale from the profile page', () => {
+  it('should allow a logged-in user to change the locale from the profile page', () => {
     cy.task('enable:feature', 'profiles')
     Base.visitHomepage()
     cy.setCookie('hasFullConsent', 'true')
@@ -172,7 +172,7 @@ describe('Multilangue', () => {
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 
-  it.only('should correctly change locale via footer on routes with parameters', () => {
+  it('should correctly change locale via footer on routes with parameters', () => {
     Base.visit({
       path: `project/budget-participatif-rennes/collect/collecte-des-propositions`,
       operationName: 'ProposalListViewRefetchQuery',

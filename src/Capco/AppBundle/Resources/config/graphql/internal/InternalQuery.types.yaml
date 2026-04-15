@@ -604,6 +604,12 @@ InternalQuery:
                 description: 'Get site settings.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
+            httpRedirects:
+                type: 'HttpRedirectConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all HTTP redirects.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\HttpRedirect\\HttpRedirectListResolver", args)'
             smsOrders:
                 type: 'SmsOrderConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

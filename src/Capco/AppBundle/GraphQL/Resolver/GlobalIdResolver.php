@@ -105,6 +105,7 @@ class GlobalIdResolver
         'SectionCarrouselElement',
         'Media',
         'AbstractVote',
+        'HttpRedirect',
     ];
 
     private const CUSTOM_REPOSITORY_RESOLVER = [

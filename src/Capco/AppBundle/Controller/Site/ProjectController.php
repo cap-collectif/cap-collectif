@@ -207,24 +207,11 @@ class ProjectController extends Controller
      * @Route("/projects", name="app_project", options={"i18n" = true})
      * @Template("@CapcoApp/Project/index.html.twig")
      */
-    public function indexAction(Request $request)
+    public function indexAction(): Response
     {
-        $parameters = [];
-        $form = $this->createForm(ProjectSearchType::class);
-        $form->submit($request->query->all());
-
-        if ($form->isValid()) {
-            $parameters = $form->getData();
-            $parameters['type'] = $parameters['type'] ? $parameters['type']->getId() : null;
-
-            if (isset($parameters['theme'])) {
-                $parameters['theme'] = $parameters['theme'] ? $parameters['theme']->getId() : null;
-            }
-        }
-
-        $limit = (int) $this->siteParameterResolver->getValue('projects.pagination');
-
-        return ['params' => $parameters, 'limit' => $limit];
+        // The projects index page is rendered by Next.js. Symfony keeps the
+        // route only to preserve URL generation before handing off.
+        return new Response('', Response::HTTP_I_AM_A_TEAPOT);
     }
 
     /**

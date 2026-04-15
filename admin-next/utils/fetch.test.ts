@@ -24,7 +24,7 @@ describe('Fetcher.ssrGraphql', () => {
     )
 
     expect(global.fetch).toHaveBeenCalledTimes(1)
-    expect((global.fetch as jest.Mock).mock.calls[0][0]).toBe('http://capco.test:8080/graphql/internal')
+    expect((global.fetch as jest.Mock).mock.calls[0][0]).toBe('http://application:8080/graphql/internal')
     expect((global.fetch as jest.Mock).mock.calls[0][1]).toMatchObject({
       headers: expect.objectContaining({
         Cookie: 'locale=en-GB',

@@ -31,6 +31,9 @@ services:
         public: true
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 250 }
+    Capco\AppBundle\EventListener\NextPublicAppFallbackListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: -250 }
     Capco\AppBundle\GraphQL\EventListener\ErrorHandler:
         autowire: true
         tags:

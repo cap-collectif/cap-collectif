@@ -18,7 +18,6 @@ class EnvironmentPresets
         Manager::emailing_group,
         Manager::emailing_parameters,
         Manager::graphql_introspection,
-        Manager::http_redirects,
         Manager::import_proposals,
         Manager::indexation,
         Manager::paper_vote,

@@ -1,0 +1,7 @@
+HttpRedirectConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalHttpRedirect!
+        connectionFields:
+            totalCount:
+                type: Int!

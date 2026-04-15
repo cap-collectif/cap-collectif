@@ -1,0 +1,17 @@
+CreateHttpRedirectInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            sourceUrl:
+                type: 'String!'
+                description: 'The platform URL to redirect.'
+            destinationUrl:
+                type: 'String!'
+                description: 'The destination URL.'
+            duration:
+                type: 'HttpRedirectDuration'
+                description: 'Whether the redirect is temporary or permanent.'
+            redirectType:
+                type: 'HttpRedirectType'
+                defaultValue: !php/const Capco\AppBundle\Enum\HttpRedirectType::REDIRECTION
+                description: 'Whether this entry is a redirection or a URL shortening.'

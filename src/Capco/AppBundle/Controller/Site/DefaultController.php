@@ -80,15 +80,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="app_contact")
-     * @Template("@CapcoApp/Contact/list.html.twig")
-     */
-    public function contactAction(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * @Route("/cookies-page", name="app_cookies")
      * @Template("@CapcoApp/Default/cookies.html.twig")
      */

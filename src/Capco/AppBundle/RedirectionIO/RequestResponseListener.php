@@ -19,18 +19,18 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
 class RequestResponseListener
 {
-    private $excludedPrefixes;
-
+    /**
+     * @param iterable<object> $circuitBreakers
+     */
     public function __construct(
         private readonly Manager $toggleManager,
         private readonly Client $client,
         private readonly bool $allowMatchOnResponse = false,
         private readonly iterable $circuitBreakers = []
     ) {
-        $this->excludedPrefixes = [];
     }
 
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$this->toggleManager->isActive('http_redirects')) {
             return;
@@ -68,7 +68,7 @@ class RequestResponseListener
             );
     }
 
-    public function onKernelResponse(ResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event): void
     {
         /** @var Response $rioResponse */
         $rioResponse = $event->getRequest()->attributes->get('redirectionio_response');
@@ -96,7 +96,7 @@ class RequestResponseListener
             );
     }
 
-    public function onKernelTerminate(TerminateEvent $event)
+    public function onKernelTerminate(TerminateEvent $event): void
     {
         foreach ($this->circuitBreakers as $circuitBreaker) {
             if ($circuitBreaker->shouldNotProcessRequest($event->getRequest())) {
@@ -133,7 +133,7 @@ class RequestResponseListener
         return new MatchCommand($request);
     }
 
-    private function createSdkRequest(SymfonyRequest $symfonyRequest)
+    private function createSdkRequest(SymfonyRequest $symfonyRequest): Request
     {
         return new Request(
             $symfonyRequest->getHttpHost(),
@@ -144,13 +144,13 @@ class RequestResponseListener
         );
     }
 
-    private function getFullPath(SymfonyRequest $symfonyRequest)
+    private function getFullPath(SymfonyRequest $symfonyRequest): string
     {
         if (null === ($requestUri = $symfonyRequest->getRequestUri())) {
             return '/';
         }
 
-        if ('' !== $requestUri && '/' !== $requestUri[0]) {
+        if ('/' !== $requestUri[0]) {
             $requestUri = '/' . $requestUri;
         }
 
@@ -164,17 +164,6 @@ class RequestResponseListener
             return '/';
         }
 
-        return (string) $pathInfo;
-    }
-
-    private function isExcludedPrefix($url): bool
-    {
-        foreach ($this->excludedPrefixes as $excludedPrefix) {
-            if (str_starts_with((string) $url, (string) $excludedPrefix)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $pathInfo;
     }
 }

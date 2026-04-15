@@ -55,9 +55,7 @@ const Fetcher = {
   ): Promise<T> {
     const ENV = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
     const isProd = ENV === 'prod'
-    let URL = isProd
-      ? 'http://127.0.0.1/graphql/internal'
-      : `http://capco.${ENV === 'dev' ? 'dev' : 'test'}:8080/graphql/internal`
+    let URL = isProd ? 'http://127.0.0.1/graphql/internal' : 'http://application:8080/graphql/internal'
 
     if (locale) {
       URL += `?tl=${encodeURIComponent(locale)}`
