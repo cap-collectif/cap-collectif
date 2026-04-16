@@ -9,7 +9,10 @@ import colors from '~/utils/colors'
 import config from '~/config'
 import type { StepEventsList_step$key } from '~relay/StepEventsList_step.graphql'
 import { useIntl } from 'react-intl'
-const settingsSlider = {
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { Flex } from '@cap-collectif/ui'
+
+const legacySettingsSlider = {
   dots: false,
   infinite: false,
   speed: 500,
@@ -29,9 +32,18 @@ const settingsSlider = {
   ),
 }
 
+const newSettingsSlider = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  arrows: false,
+}
+
 type Props = {
   readonly step: StepEventsList_step$key
   readonly filter: string
+  readonly sliderRef?: React.RefObject<Slider>
+  readonly vertical?: boolean
 }
 
 const FRAGMENT = graphql`
@@ -57,7 +69,8 @@ const FRAGMENT = graphql`
   }
 `
 
-export const StepEventsList = ({ step: stepKey, filter }: Props) => {
+export const StepEventsList = ({ step: stepKey, filter, sliderRef, vertical }: Props) => {
+  const isNewProjectPage = useFeatureFlag('new_project_page')
   const [step, refetch] = useRefetchableFragment(FRAGMENT, stepKey)
   const intl = useIntl()
 
@@ -82,20 +95,30 @@ export const StepEventsList = ({ step: stepKey, filter }: Props) => {
     return intl.formatMessage({ id: 'no_events_message' })
   }
 
+  const eventNodes = events.edges
+    .filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+
+  if (vertical) {
+    return (
+      <Flex direction="column" gap={4}>
+        {eventNodes.map(event => (
+          <ProjectEventPreview event={event as any} key={event.id} vertical />
+        ))}
+      </Flex>
+    )
+  }
+
+  const sliderSettings = isNewProjectPage
+    ? { ...newSettingsSlider, slidesToShow: 1.667 }
+    : { ...legacySettingsSlider, slidesToShow: events.totalCount === 1 ? 1 : 2, arrows: events.totalCount > 2 && !config.isMobile }
+
   return (
-    <Slider
-      {...{
-        ...settingsSlider,
-        slidesToShow: config.isMobile || events.totalCount === 1 ? 1 : 2,
-        arrows: events.totalCount > 2 && !config.isMobile,
-      }}
-    >
-      {events.edges &&
-        events.edges
-          .filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map(event => <ProjectEventPreview event={event} key={event.id} />)}
+    <Slider ref={sliderRef} {...sliderSettings}>
+      {eventNodes.map(event => (
+        <ProjectEventPreview event={event as any} key={event.id} />
+      ))}
     </Slider>
   )
 }

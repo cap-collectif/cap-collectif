@@ -522,38 +522,6 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
-                                          "concreteType": null,
-                                          "kind": "LinkedField",
-                                          "name": "author",
-                                          "plural": false,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "__typename",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "username",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "id",
-                                              "storageKey": null,
-                                            },
-                                          ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
                                           "kind": "ScalarField",
                                           "name": "guestListEnabled",
                                           "storageKey": null,
@@ -586,9 +554,90 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "concreteType": "Media",
+                                          "kind": "LinkedField",
+                                          "name": "media",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": Array [
+                                                Object {
+                                                  "kind": "Literal",
+                                                  "name": "format",
+                                                  "value": "reference",
+                                                },
+                                              ],
+                                              "kind": "ScalarField",
+                                              "name": "url",
+                                              "storageKey": "url(format:\\"reference\\")",
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": "Theme",
+                                          "kind": "LinkedField",
+                                          "name": "themes",
+                                          "plural": true,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "title",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": "GoogleMapsAddress",
                                           "kind": "LinkedField",
                                           "name": "googleMapsAddress",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "json",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "__typename",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": null,
+                                          "kind": "LinkedField",
+                                          "name": "author",
                                           "plural": false,
                                           "selections": Array [
                                             Object {
@@ -602,7 +651,14 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                               "alias": null,
                                               "args": null,
                                               "kind": "ScalarField",
-                                              "name": "json",
+                                              "name": "username",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
                                               "storageKey": null,
                                             },
                                           ],
@@ -2451,7 +2507,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "b733e744584c1936ad62c83f4041cf61",
+          "cacheID": "e81c023b6670afa14db0dc470d70bab7",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2508,19 +2564,28 @@ fragment ProjectEventPreview_event on Event {
   id
   title
   url
-  author {
-    __typename
-    username
-    id
-  }
   guestListEnabled
   timeRange {
     startAt
     endAt
   }
+  media {
+    url(format: \\"reference\\")
+    id
+  }
+  themes {
+    id
+    title
+  }
   googleMapsAddress {
+    json
     __typename
     ...TagCity_address
+  }
+  author {
+    __typename
+    username
+    id
   }
 }
 
@@ -3465,38 +3530,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                         Object {
                                           "alias": null,
                                           "args": null,
-                                          "concreteType": null,
-                                          "kind": "LinkedField",
-                                          "name": "author",
-                                          "plural": false,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "__typename",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "username",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "id",
-                                              "storageKey": null,
-                                            },
-                                          ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
                                           "kind": "ScalarField",
                                           "name": "guestListEnabled",
                                           "storageKey": null,
@@ -3529,9 +3562,90 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "concreteType": "Media",
+                                          "kind": "LinkedField",
+                                          "name": "media",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": Array [
+                                                Object {
+                                                  "kind": "Literal",
+                                                  "name": "format",
+                                                  "value": "reference",
+                                                },
+                                              ],
+                                              "kind": "ScalarField",
+                                              "name": "url",
+                                              "storageKey": "url(format:\\"reference\\")",
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": "Theme",
+                                          "kind": "LinkedField",
+                                          "name": "themes",
+                                          "plural": true,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "title",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": "GoogleMapsAddress",
                                           "kind": "LinkedField",
                                           "name": "googleMapsAddress",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "json",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "__typename",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": null,
+                                          "kind": "LinkedField",
+                                          "name": "author",
                                           "plural": false,
                                           "selections": Array [
                                             Object {
@@ -3545,7 +3659,14 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                               "alias": null,
                                               "args": null,
                                               "kind": "ScalarField",
-                                              "name": "json",
+                                              "name": "username",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
                                               "storageKey": null,
                                             },
                                           ],
@@ -5394,7 +5515,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "b733e744584c1936ad62c83f4041cf61",
+          "cacheID": "e81c023b6670afa14db0dc470d70bab7",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -5451,19 +5572,28 @@ fragment ProjectEventPreview_event on Event {
   id
   title
   url
-  author {
-    __typename
-    username
-    id
-  }
   guestListEnabled
   timeRange {
     startAt
     endAt
   }
+  media {
+    url(format: \\"reference\\")
+    id
+  }
+  themes {
+    id
+    title
+  }
   googleMapsAddress {
+    json
     __typename
     ...TagCity_address
+  }
+  author {
+    __typename
+    username
+    id
   }
 }
 

@@ -42,8 +42,7 @@ exports[`<ProjectEventPreview /> should render correctly 1`] = `
         <Relay(TagCity)
           address={
             Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+              "json": "[{\\"formatted_address\\":\\"Nantes, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":47.2184,\\"lng\\":-1.5536},\\"location_type\\":\\"APPROXIMATE\\"},\\"types\\":[\\"locality\\"],\\"address_components\\":[{\\"long_name\\":\\"Nantes\\",\\"short_name\\":\\"Nantes\\",\\"types\\":[\\"locality\\"]}]}]",
             }
           }
           size="16px"
@@ -99,8 +98,7 @@ exports[`<ProjectEventPreview /> should render correctly no passed event 1`] = `
         <Relay(TagCity)
           address={
             Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+              "json": "[{\\"formatted_address\\":\\"Nantes, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":47.2184,\\"lng\\":-1.5536},\\"location_type\\":\\"APPROXIMATE\\"},\\"types\\":[\\"locality\\"],\\"address_components\\":[{\\"long_name\\":\\"Nantes\\",\\"short_name\\":\\"Nantes\\",\\"types\\":[\\"locality\\"]}]}]",
             }
           }
           size="16px"
@@ -166,8 +164,7 @@ exports[`<ProjectEventPreview /> should render correctly passed event 1`] = `
         <Relay(TagCity)
           address={
             Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+              "json": "[{\\"formatted_address\\":\\"Nantes, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":47.2184,\\"lng\\":-1.5536},\\"location_type\\":\\"APPROXIMATE\\"},\\"types\\":[\\"locality\\"],\\"address_components\\":[{\\"long_name\\":\\"Nantes\\",\\"short_name\\":\\"Nantes\\",\\"types\\":[\\"locality\\"]}]}]",
             }
           }
           size="16px"
@@ -232,8 +229,7 @@ exports[`<ProjectEventPreview /> should render correctly when guest enabled 1`] 
         <Relay(TagCity)
           address={
             Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+              "json": "[{\\"formatted_address\\":\\"Nantes, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":47.2184,\\"lng\\":-1.5536},\\"location_type\\":\\"APPROXIMATE\\"},\\"types\\":[\\"locality\\"],\\"address_components\\":[{\\"long_name\\":\\"Nantes\\",\\"short_name\\":\\"Nantes\\",\\"types\\":[\\"locality\\"]}]}]",
             }
           }
           size="16px"
@@ -281,8 +277,7 @@ exports[`<ProjectEventPreview /> should render correctly when no date 1`] = `
         <Relay(TagCity)
           address={
             Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+              "json": "[{\\"formatted_address\\":\\"Nantes, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":47.2184,\\"lng\\":-1.5536},\\"location_type\\":\\"APPROXIMATE\\"},\\"types\\":[\\"locality\\"],\\"address_components\\":[{\\"long_name\\":\\"Nantes\\",\\"short_name\\":\\"Nantes\\",\\"types\\":[\\"locality\\"]}]}]",
             }
           }
           size="16px"

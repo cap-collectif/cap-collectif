@@ -2,22 +2,30 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { ProjectEventPreview } from './ProjectEventPreview'
-import { $refType, $fragmentRefs } from '~/mocks'
+import { $refType } from '~/mocks'
 
 const baseEvent = {
   ' $refType': $refType,
+  ' $fragmentType': 'ProjectEventPreview_event' as any,
   id: 'eventId',
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
   url: '#',
-  author: null,
   guestListEnabled: false,
   timeRange: {
     startAt: '2030-03-10 00:00:00',
     endAt: '2030-03-11 00:00:00',
   },
+  media: null,
+  themes: [],
   googleMapsAddress: {
-    __typename: 'GoogleMapsAddress',
-    ' $fragmentRefs': $fragmentRefs,
+    json: JSON.stringify([
+      {
+        formatted_address: 'Nantes, France',
+        geometry: { location: { lat: 47.2184, lng: -1.5536 }, location_type: 'APPROXIMATE' },
+        types: ['locality'],
+        address_components: [{ long_name: 'Nantes', short_name: 'Nantes', types: ['locality'] }],
+      },
+    ]),
   },
 }
 const event = {
