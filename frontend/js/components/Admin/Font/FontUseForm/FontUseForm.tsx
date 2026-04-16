@@ -34,12 +34,19 @@ const TYPE_USAGE: {
   body: 'body',
 }
 
-const onChange = (type: $Values<typeof TYPE_USAGE>, id: string, fonts: FontAdminContent_fonts, intl) => {
-  const currentFont: Record<string, any> = fonts.find(f => (type === TYPE_USAGE.heading ? f.useAsBody : f.useAsHeading))
-  const input = {
-    heading: type === TYPE_USAGE.heading ? id : currentFont.id,
-    body: type === TYPE_USAGE.body ? id : currentFont.id,
+export const getFontChangeInput = (type: $Values<typeof TYPE_USAGE>, id: string, fonts: FontAdminContent_fonts) => {
+  const currentBodyFont = fonts.find(f => f.useAsBody)
+  const currentHeadingFont = fonts.find(f => f.useAsHeading)
+
+  return {
+    heading: type === TYPE_USAGE.heading ? id : currentHeadingFont?.id || id,
+    body: type === TYPE_USAGE.body ? id : currentBodyFont?.id || id,
   }
+}
+
+const onChange = (type: $Values<typeof TYPE_USAGE>, id: string, fonts: FontAdminContent_fonts, intl) => {
+  const input = getFontChangeInput(type, id, fonts)
+
   return ChangeFontMutation.commit({
     input,
   })
