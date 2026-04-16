@@ -19,7 +19,9 @@ import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import TextEditor from '../../Form/TextEditor/TextEditor'
 import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
+import CoverImageInput from '../Shared/CoverImageInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters'
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab'
 import { formatQuestionsInput, getDefaultValues, mergeQuestionsAndJumpsBeforeSubmit, Questionnaire } from './utils'
@@ -42,6 +44,7 @@ export type FormValues = {
   metaDescription: string | null
   footer: string | null
   customCode: string | null
+  cover: string | null
   stepDurationType?: {
     labels: Array<string>
   }
@@ -205,6 +208,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { handleSubmit, formState, control, reset } = formMethods
   const { isSubmitting, isValid } = formState
+  const newProjectPage = useFeatureFlag('new_project_page')
 
   const onSubmit = async ({
     questionnaire: CURRENTquestionnaire,
@@ -219,6 +223,8 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     delete values.temporaryJump
 
     const questionnaire = isUsingModel && !isEditing ? MODELquestionnaire : CURRENTquestionnaire
+
+    delete values.cover
 
     const stepInput: UpdateQuestionnaireStepInput = {
       ...values,
@@ -300,33 +306,38 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       </Text>
       <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...formMethods}>
-          <FormControl
-            name="label"
-            control={control}
-            isRequired
-            mb={6}
-            onFocus={() => {
-              setHelpMessage('step.create.label.helpText')
-            }}
-            onBlur={() => {
-              setHelpMessage(null)
-            }}
-          >
-            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-            <FieldInput
-              id="label"
-              name="label"
-              control={control}
-              type="text"
-              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-            />
-          </FormControl>
-          <TextEditor
-            name="body"
-            label={intl.formatMessage({ id: 'step-description' })}
-            platformLanguage={defaultLocale}
-            selectedLanguage={defaultLocale}
-          />
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <FormControl
+                name="label"
+                control={control}
+                isRequired
+                mb={6}
+                onFocus={() => {
+                  setHelpMessage('step.create.label.helpText')
+                }}
+                onBlur={() => {
+                  setHelpMessage(null)
+                }}
+              >
+                <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+                <FieldInput
+                  id="label"
+                  name="label"
+                  control={control}
+                  type="text"
+                  placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+                />
+              </FormControl>
+              <TextEditor
+                name="body"
+                label={intl.formatMessage({ id: 'step-description' })}
+                platformLanguage={defaultLocale}
+                selectedLanguage={defaultLocale}
+              />
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <StepDurationInput />
           <Accordion
             color={CapUIAccordionColor.white}

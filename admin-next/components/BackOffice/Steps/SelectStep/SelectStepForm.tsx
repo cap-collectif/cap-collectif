@@ -11,8 +11,10 @@ import ProposalStepStatuses, {
 import ProposalStepVoteTabsForm from '@components/BackOffice/Steps/ProposalStep/ProposalStepVoteTabsForm'
 import { getDefaultValues, TabsVoteType } from '@components/BackOffice/Steps/SelectStep/SelectStepForm.utils'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import CoverImageInput from '@components/BackOffice/Steps/Shared/CoverImageInput'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { onBack } from '@components/BackOffice/Steps/utils'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { yupResolver } from '@hookform/resolvers/yup'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import UpdateSelectionStepMutation from '@mutations/UpdateSelectionStep'
@@ -102,6 +104,7 @@ export type FormValues = {
   }
   metaDescription: string
   customCode: string
+  cover: string | null
 } & RequirementsFormValues
 
 const SELECTION_QUERY = graphql`
@@ -378,6 +381,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
   })
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting, isValid } = formState
+  const newProjectPage = useFeatureFlag('new_project_page')
 
   const sortOptions = [
     {
@@ -435,34 +439,39 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       </Text>
       <FormProvider {...formMethods}>
         <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)} gap={6}>
-          <FormControl
-            name="label"
-            control={control}
-            isRequired
-            mb={6}
-            onFocus={() => {
-              setHelpMessage('step.create.label.helpText')
-            }}
-            onBlur={() => {
-              setHelpMessage(null)
-            }}
-          >
-            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-            <FieldInput
-              id="label"
-              name="label"
-              control={control}
-              type="text"
-              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-            />
-          </FormControl>
-          <TextEditor
-            name="body"
-            label={intl.formatMessage({ id: 'step-description' })}
-            platformLanguage={defaultLocale}
-            selectedLanguage={defaultLocale}
-            advancedEditor
-          />
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <FormControl
+                name="label"
+                control={control}
+                isRequired
+                mb={6}
+                onFocus={() => {
+                  setHelpMessage('step.create.label.helpText')
+                }}
+                onBlur={() => {
+                  setHelpMessage(null)
+                }}
+              >
+                <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+                <FieldInput
+                  id="label"
+                  name="label"
+                  control={control}
+                  type="text"
+                  placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+                />
+              </FormControl>
+              <TextEditor
+                name="body"
+                label={intl.formatMessage({ id: 'step-description' })}
+                platformLanguage={defaultLocale}
+                selectedLanguage={defaultLocale}
+                advancedEditor
+              />
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <StepDurationInput />
           <Box>
             <Accordion

@@ -36,10 +36,12 @@ import ProposalSettings from '../ProposalStep/ProposalSettings'
 import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
 import { formatQuestions } from '../QuestionnaireStep/utils'
 import { TabsVoteType } from '../SelectStep/SelectStepForm.utils'
+import CoverImageInput from '../Shared/CoverImageInput'
 import BodyInput from '../Shared/BodyInput'
 import LabelInput from '../Shared/LabelInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { FormTabsEnum, useCollectStep } from './CollectStepContext'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface CollectStepFormProps {
   stepId: string
@@ -176,6 +178,7 @@ export type FormValues = {
   isCollectByEmailEnabled: boolean
   preventProposalEdit: boolean
   preventProposalDelete: boolean
+  cover: string | null
 } & RequirementsFormValues
 
 const COLLECT_FRAGMENT = graphql`
@@ -445,6 +448,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
 
   const { operationType, setOperationType, selectedTab, proposalFormKey } = useCollectStep()
   const isEditing = operationType === 'EDIT'
+  const newProjectPage = useFeatureFlag('new_project_page')
 
   const createStepLink = `/admin-next/project/${project?.id}/create-step`
   const getBreadCrumbItems = () => {
@@ -568,8 +572,13 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           {intl.formatMessage({ id: 'customize-your-collect-step' })}
         </Text>
         <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)} gap={6}>
-          <LabelInput setHelpMessage={setHelpMessage} />
-          <BodyInput isEditing={isEditing} />
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <LabelInput setHelpMessage={setHelpMessage} />
+              <BodyInput isEditing={isEditing} />
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <StepDurationInput />
           <Box>
             <Box mb={4}>

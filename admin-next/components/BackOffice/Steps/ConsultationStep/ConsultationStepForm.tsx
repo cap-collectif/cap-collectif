@@ -22,8 +22,10 @@ import {
 import ConsultationStepConsultations from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepConsultations'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import CoverImageInput from '@components/BackOffice/Steps/Shared/CoverImageInput'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { onBack } from '@components/BackOffice/Steps/utils'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CreateOrUpdateConsultationMutation from '@mutations/CreateOrUpdateConsultationMutation'
 import UpdateConsultationStep from '@mutations/UpdateConsultationStep'
 import { ConsultationStepFormQuery, SectionOrderBy } from '@relay/ConsultationStepFormQuery.graphql'
@@ -68,6 +70,7 @@ export type FormValues = {
   }
   metaDescription: string | null
   customCode: string | null
+  cover: string | null
   stepDurationType?: {
     labels: Array<string>
   }
@@ -264,6 +267,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       metaDescription: step?.metaDescription ?? '',
       customCode: step?.customCode ?? '',
+      cover: null,
       // @ts-ignore relay stuff
       requirements: getDefaultRequirements(step),
       requirementsReason: step?.requirements?.reason ?? '',
@@ -289,10 +293,12 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting, isValid } = formState
+  const newProjectPage = useFeatureFlag('new_project_page')
 
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
+    delete values.cover
 
     const consultations = values.consultations.map((consultation, consultationIndex) => {
       const sections = consultation.sections.map((section, sectionIndex) => {
@@ -368,33 +374,38 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       </Text>
       <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...formMethods}>
-          <FormControl
-            name="label"
-            control={control}
-            isRequired
-            mb={6}
-            onFocus={() => {
-              setHelpMessage('step.create.label.helpText')
-            }}
-            onBlur={() => {
-              setHelpMessage(null)
-            }}
-          >
-            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-            <FieldInput
-              id="label"
-              name="label"
-              control={control}
-              type="text"
-              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-            />
-          </FormControl>
-          <TextEditor
-            name="body"
-            label={intl.formatMessage({ id: 'step-description' })}
-            platformLanguage={defaultLocale}
-            selectedLanguage={defaultLocale}
-          />
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <FormControl
+                name="label"
+                control={control}
+                isRequired
+                mb={6}
+                onFocus={() => {
+                  setHelpMessage('step.create.label.helpText')
+                }}
+                onBlur={() => {
+                  setHelpMessage(null)
+                }}
+              >
+                <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+                <FieldInput
+                  id="label"
+                  name="label"
+                  control={control}
+                  type="text"
+                  placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+                />
+              </FormControl>
+              <TextEditor
+                name="body"
+                label={intl.formatMessage({ id: 'step-description' })}
+                platformLanguage={defaultLocale}
+                selectedLanguage={defaultLocale}
+              />
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <StepDurationInput />
 
           <Accordion

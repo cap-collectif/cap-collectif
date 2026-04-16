@@ -4,8 +4,10 @@ import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
 import { LogActionTypeEnum } from '@components/BackOffice/Steps/Shared/Enum/LogActionTypeEnum'
+import CoverImageInput from '@components/BackOffice/Steps/Shared/CoverImageInput'
 import PublicationInput, { EnabledEnum } from '@components/BackOffice/Steps/Shared/PublicationInput'
 import { onBack } from '@components/BackOffice/Steps/utils'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
@@ -36,6 +38,7 @@ type FormValues = {
   }
   metaDescription: string
   customCode: string | null
+  cover: string | null
 }
 
 export const QUERY = graphql`
@@ -128,6 +131,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       metaDescription: step.metaDescription ?? '',
       customCode: step.customCode ?? '',
+      cover: null,
     }
   }
 
@@ -138,9 +142,11 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting } = formState
+  const newProjectPage = useFeatureFlag('new_project_page')
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
+    delete values.cover
 
     const input = {
       ...values,
@@ -179,37 +185,44 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       </Text>
       <FormProvider {...formMethods}>
         <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
-          <FormControl
-            mb={6}
-            name="label"
-            control={control}
-            isRequired
-            onFocus={() => {
-              setHelpMessage('step.create.label.helpText')
-            }}
-            onBlur={() => {
-              setHelpMessage(null)
-            }}
-          >
-            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-            <FieldInput
-              id="label"
-              name="label"
-              control={control}
-              type="text"
-              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-            />
-          </FormControl>
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <FormControl
+                mb={6}
+                name="label"
+                control={control}
+                isRequired
+                onFocus={() => {
+                  setHelpMessage('step.create.label.helpText')
+                }}
+                onBlur={() => {
+                  setHelpMessage(null)
+                }}
+              >
+                <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+                <FieldInput
+                  id="label"
+                  name="label"
+                  control={control}
+                  type="text"
+                  placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+                />
+              </FormControl>
 
-          <TextEditor
-            name="body"
-            label={intl.formatMessage({ id: 'step-description' })}
-            platformLanguage={defaultLocale?.code}
-            selectedLanguage="fr"
-            buttonLabels={{
-              submit: isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'global.add' }),
-            }}
-          />
+              <TextEditor
+                name="body"
+                label={intl.formatMessage({ id: 'step-description' })}
+                platformLanguage={defaultLocale?.code}
+                selectedLanguage="fr"
+                buttonLabels={{
+                  submit: isEditing
+                    ? intl.formatMessage({ id: 'global.edit' })
+                    : intl.formatMessage({ id: 'global.add' }),
+                }}
+              />
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <StepDurationInput
             canChooseDurationType
             startAt={{

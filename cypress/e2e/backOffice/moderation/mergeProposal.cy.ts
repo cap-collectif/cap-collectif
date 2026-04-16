@@ -2,6 +2,7 @@ import { AdminModerationPage } from '~e2e-pages/index'
 
 describe('User Admin - Merge proposals', () => {
   beforeEach(() => {
+    cy.task('db:restore')
     cy.directLoginAs('admin')
   })
   it('Logged in admin wants create a proposal from a merge of 2 proposals', () => {

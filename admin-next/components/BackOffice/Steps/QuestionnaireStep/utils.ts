@@ -294,6 +294,7 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     metaDescription: step?.metaDescription ?? '',
     footer: step?.footer ?? '',
     customCode: step?.customCode ?? '',
+    cover: null,
     questionnaire: {
       questionnaireId: step?.questionnaire?.id ?? '',
       title: step?.questionnaire?.title ?? '',

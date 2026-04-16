@@ -68,6 +68,7 @@ export const getDefaultValues = (
     },
     metaDescription: step?.metaDescription || '',
     customCode: step?.customCode || '',
+    cover: null,
     enabled: {
       labels: stepEnabledType,
     },

@@ -27,8 +27,10 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import TextEditor from '../../Form/TextEditor/TextEditor'
+import CoverImageInput from '../Shared/CoverImageInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { useDebateStep } from './DebateStepContext'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import FaceToFace from './FaceToFace'
 
 type Props = {
@@ -55,6 +57,7 @@ type FormValues = {
   isAnonymousParticipationAllowed: boolean
   metaDescription: string | null
   customCode: string | null
+  cover: string | null
   debateType: DebateType
   debateContent: string
   stepDurationType?: {
@@ -191,6 +194,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
       metaDescription: step?.metaDescription ?? '',
       customCode: step?.customCode ?? '',
+      cover: null,
       debateType: step?.debateType ?? DebateTypeEnum.WYSIWYG,
       debateContent: step?.debateContent ?? '',
       articles,
@@ -204,6 +208,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { handleSubmit, formState, control, watch, setValue, register } = formMethods
   const { isSubmitting } = formState
+  const newProjectPage = useFeatureFlag('new_project_page')
 
   const { fields: articles, append } = useFieldArray({
     control,
@@ -218,6 +223,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
+    delete values.cover
     const articles = values.articles.filter(article => !!article.url)
 
     const input: UpdateDebateStepInput = {
@@ -252,27 +258,32 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       </Text>
       <FormProvider {...formMethods}>
         <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
-          <FormControl
-            name="label"
-            control={control}
-            isRequired
-            mb={6}
-            onFocus={() => {
-              setHelpMessage('step.create.label.helpText')
-            }}
-            onBlur={() => {
-              setHelpMessage(null)
-            }}
-          >
-            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-            <FieldInput
-              id="label"
-              name="label"
-              control={control}
-              type="text"
-              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-            />
-          </FormControl>
+          <Flex spacing={6} alignItems="flex-start">
+            <Box flex="1">
+              <FormControl
+                name="label"
+                control={control}
+                isRequired
+                mb={6}
+                onFocus={() => {
+                  setHelpMessage('step.create.label.helpText')
+                }}
+                onBlur={() => {
+                  setHelpMessage(null)
+                }}
+              >
+                <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+                <FieldInput
+                  id="label"
+                  name="label"
+                  control={control}
+                  type="text"
+                  placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+                />
+              </FormControl>
+            </Box>
+            {newProjectPage && <CoverImageInput />}
+          </Flex>
           <FormControl name="title" control={control} isRequired mb={6}>
             <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'debate.question' })} />
             <FieldInput
