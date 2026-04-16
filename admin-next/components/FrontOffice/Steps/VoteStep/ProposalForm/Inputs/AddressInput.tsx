@@ -54,6 +54,7 @@ const AddressInput: React.FC<Props> = ({
             id="address"
             placeholder={intl.formatMessage({ id: 'proposal_form.address' })}
             getAddress={onAddressChange}
+            width="100%"
           />
         ) : (
           <Flex align="center" gap={2} p={2} border="1px solid" borderColor="gray.200" borderRadius="normal">

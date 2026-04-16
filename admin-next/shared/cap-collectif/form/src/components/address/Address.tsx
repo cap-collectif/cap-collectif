@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { forwardRef } from 'react'
-import { Dropdown, Input, InputProps } from '@cap-collectif/ui'
+import { Box, CapUIIcon, Dropdown, Icon, Input, InputProps } from '@cap-collectif/ui'
 import cn from 'classnames'
 import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete'
 
@@ -45,15 +45,19 @@ const Address = forwardRef<HTMLInputElement, AddressProps>(
       <PlacesAutocomplete value={value} onChange={onChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <>
-            <Input
-              ref={ref}
-              width={width}
-              {...getInputProps({
-                placeholder: placeholder,
-                className: cn('cap-address__input', className),
-              })}
-              {...props}
-            />
+            <Box position="relative">
+              <Icon name={CapUIIcon.Search} position="absolute" left="xxs" top="xxs" />
+              <Input
+                ref={ref}
+                width={width}
+                pl="28px!important"
+                {...getInputProps({
+                  placeholder: placeholder,
+                  className: cn('cap-address__input', className),
+                })}
+                {...props}
+              />
+            </Box>
             {suggestions.length > 0 && (
               <Dropdown zIndex={1000} width={width} className={cn('cap-address__dropdown', className)}>
                 {suggestions.map(suggestion => {
