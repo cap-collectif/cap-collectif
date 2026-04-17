@@ -5,6 +5,7 @@ import Providers from '@utils/providers'
 import GlobalCSS from '../styles/GlobalCSS'
 import { getOnlyLanguage } from '@utils/locale-helper'
 import { PageProps } from 'types'
+import { NuqsAdapter } from 'nuqs/adapters/next/pages'
 
 // We use this component to only render when window is available (it's used by our Redux store)
 const SafeHydrate: FC<{ children?: React.ReactNode }> = ({ children }) => {
@@ -24,17 +25,19 @@ function MyApp({ Component, pageProps }: AppProps<PageProps>) {
   }
 
   return (
-    <SafeHydrate>
-      <Providers
-        featureFlags={pageProps.featureFlags}
-        intl={pageProps.intl}
-        viewerSession={pageProps.viewerSession}
-        appVersion={pageProps.appVersion}
-      >
-        <GlobalCSS />
-        <Component {...pageProps} />
-      </Providers>
-    </SafeHydrate>
+    <NuqsAdapter>
+      <SafeHydrate>
+        <Providers
+          featureFlags={pageProps.featureFlags}
+          intl={pageProps.intl}
+          viewerSession={pageProps.viewerSession}
+          appVersion={pageProps.appVersion}
+        >
+          <GlobalCSS />
+          <Component {...pageProps} />
+        </Providers>
+      </SafeHydrate>
+    </NuqsAdapter>
   )
 }
 
