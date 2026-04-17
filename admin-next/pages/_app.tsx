@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import type { AppProps } from 'next/app'
 import moment from 'moment'
+import { NuqsAdapter } from 'nuqs/adapters/next/pages'
 import Providers from '@utils/providers'
 import GlobalCSS from '../styles/GlobalCSS'
 import { getOnlyLanguage } from '@utils/locale-helper'

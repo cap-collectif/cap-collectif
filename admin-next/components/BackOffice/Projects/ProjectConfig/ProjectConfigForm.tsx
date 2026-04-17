@@ -18,6 +18,7 @@ import ProjectConfigFormGeneral from './ProjectConfigFormGeneral'
 import ProjectConfigFormSide from './ProjectConfigFormSide/ProjectConfigFormSide'
 import ProjectConfigFormSteps from './ProjectConfigFormSteps'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import ProjectConfigFormTabs from './ProjectConfigFormTabs'
 
 export type ProjectConfigFormProps = {
   project: ProjectConfigForm_project$key
@@ -114,6 +115,7 @@ const FRAGMENT = graphql`
     customCode
     ...ProjectConfigFormSide_project
     ...ProjectTabs_project
+    ...ProjectConfigFormTabs_project
   }
 `
 
@@ -122,10 +124,10 @@ const formName = 'project_config_form'
 const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectRef }) => {
   const intl = useIntl()
   const query = useLazyLoadQuery<ProjectConfigFormQuery>(QUERY, {})
+  const isNewProjectPageEnabled = useFeatureFlag('new_project_page')
   const project = useFragment(FRAGMENT, projectRef)
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
   const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const isNewProjectPage = useFeatureFlag('new_project_page')
 
   const methods = useForm<FormValues>({
     mode: 'onChange',
@@ -244,15 +246,16 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
         direction="column"
         alignItems="flex-start"
         width={'100%'}
-        spacing={6}
+        spacing="lg"
       >
         <FormProvider {...methods}>
-          <Flex direction="row" width="100%" spacing={6}>
-            <Flex direction="column" spacing={6} width="70%">
+          <Flex direction="row" width="100%" spacing="lg">
+            <Flex direction="column" spacing="lg" width="70%" borderRadius="accordion" bg="white">
               <ProjectConfigFormGeneral query={query} project={project} />
-              {!isNewProjectPage && <ProjectConfigFormSteps />}
+              {!isNewProjectPageEnabled && <ProjectConfigFormSteps />}
+              {isNewProjectPageEnabled && <ProjectConfigFormTabs project={project} />}
             </Flex>
-            <Flex direction="column" spacing={6} width="30%">
+            <Flex direction="column" spacing="lg" width="30%">
               <ProjectConfigFormSide query={query} project={project} />
             </Flex>
           </Flex>

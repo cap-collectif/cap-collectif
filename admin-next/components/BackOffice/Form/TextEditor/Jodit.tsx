@@ -188,7 +188,7 @@ const Jodit = ({
         '.jodit-status-bar,.jodit-ui-group,.jodit-toolbar__box': { display: 'none' },
         '.jodit-workplace': { borderTopLeftRadius: radii.normal, borderTopRightRadius: radii.normal },
         '.jodit-wysiwyg': {
-          padding: `${space.sm} !important`,
+          padding: `${space.lg} !important`,
           paddingTop: `${space.xxs} !important`,
           paddingBottom: `${space.xxs} !important`,
           maxHeight: '100px',

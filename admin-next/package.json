@@ -16,6 +16,8 @@
     "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --artifactDirectory ./__generated__ --watch"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.7.9",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.1.0",
     "@babel/preset-react": "^7.14.5",
     "@react-google-maps/api": "^2.20.8",
     "cookie": "^0.4.1",

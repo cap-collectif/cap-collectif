@@ -91,11 +91,9 @@ abstract class AbstractProjectTabPersister
         }
 
         $body = $input->offsetExists('body') ? $input->offsetGet('body') : null;
-        if (null === $body || '' === trim((string) $body)) {
-            return self::BODY_REQUIRED;
+        if (null !== $body && '' !== trim((string) $body)) {
+            $projectTab->setBody((string) $body);
         }
-
-        $projectTab->setBody((string) $body);
 
         return null;
     }
