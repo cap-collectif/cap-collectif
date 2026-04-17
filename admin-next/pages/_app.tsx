@@ -1,12 +1,11 @@
-import type { FC } from 'react'
-import type { AppProps } from 'next/app'
-import moment from 'moment'
-import { NuqsAdapter } from 'nuqs/adapters/next/pages'
-import Providers from '@utils/providers'
-import GlobalCSS from '../styles/GlobalCSS'
 import { getOnlyLanguage } from '@utils/locale-helper'
-import { PageProps } from 'types'
+import Providers from '@utils/providers'
+import moment from 'moment'
+import type { AppProps } from 'next/app'
 import { NuqsAdapter } from 'nuqs/adapters/next/pages'
+import type { FC } from 'react'
+import { PageProps } from 'types'
+import GlobalCSS from '../styles/GlobalCSS'
 
 // We use this component to only render when window is available (it's used by our Redux store)
 const SafeHydrate: FC<{ children?: React.ReactNode }> = ({ children }) => {
