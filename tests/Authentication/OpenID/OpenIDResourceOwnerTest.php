@@ -79,7 +79,7 @@ final class OpenIDResourceOwnerTest extends TestCase
     /**
      * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
      */
-    public function testGetUserInformationMergesMissingClaimsFromIdToken(): void
+    public function testGetUserInformationCompletesMissingClaimsWithIdTokenPayload(): void
     {
         $this->httpClientMock->expects($this->never())->method('sendRequest');
 
@@ -90,6 +90,7 @@ final class OpenIDResourceOwnerTest extends TestCase
             ]),
             'id_token' => $this->generateJwt([
                 'sub' => 'openid_id',
+                'given_name' => 'Jeanne',
                 'family_name' => 'Michel',
                 'other email' => 'jean.michel+other@ca-ts.fr',
             ]),
@@ -105,7 +106,7 @@ final class OpenIDResourceOwnerTest extends TestCase
     /**
      * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
      */
-    public function testGetUserInformationKeepsLegacyWorkflowOutsideCatp(): void
+    public function testGetUserInformationCompletesMissingClaimsWithIdTokenOutsideCatp(): void
     {
         $resourceOwner = $this->createOpenIDResourceOwner('capco');
 
@@ -118,14 +119,15 @@ final class OpenIDResourceOwnerTest extends TestCase
             ]),
             'id_token' => $this->generateJwt([
                 'sub' => 'openid_id',
+                'given_name' => 'Jeanne',
                 'family_name' => 'Michel',
                 'other email' => 'jean.michel+other@ca-ts.fr',
             ]),
         ]);
 
         self::assertSame('Jean', $userInformation->getData()['given_name']);
-        self::assertArrayNotHasKey('family_name', $userInformation->getData());
-        self::assertArrayNotHasKey('other email', $userInformation->getData());
+        self::assertSame('Michel', $userInformation->getData()['family_name']);
+        self::assertSame('jean.michel+other@ca-ts.fr', $userInformation->getData()['other email']);
     }
 
     /**
@@ -135,17 +137,39 @@ final class OpenIDResourceOwnerTest extends TestCase
     {
         $this->httpClientMock->expects($this->never())->method('sendRequest');
 
+        $idToken = $this->generateJwt([
+            'sub' => 'openid_id',
+            'other email' => 'jean.michel+other@ca-ts.fr',
+        ]);
         $userInformation = $this->openIDResourceOwner->getUserInformation([
             'access_token' => 'opaque-access-token',
-            'id_token' => $this->generateJwt([
-                'sub' => 'openid_id',
-                'other email' => 'jean.michel+other@ca-ts.fr',
-            ]),
+            'id_token' => $idToken,
         ]);
 
         self::assertSame('openid_id', $userInformation->getData()['sub']);
         self::assertSame('jean.michel+other@ca-ts.fr', $userInformation->getData()['other email']);
-        self::assertSame('opaque-access-token', $userInformation->getAccessToken());
+        self::assertSame($idToken, $userInformation->getAccessToken());
+    }
+
+    /**
+     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
+     */
+    public function testGetUserInformationUsesAccessTokenWhenIdTokenIsMissing(): void
+    {
+        $this->httpClientMock->expects($this->never())->method('sendRequest');
+
+        $accessToken = $this->generateJwt([
+            'sub' => 'openid_id',
+            'given_name' => 'Jean',
+            'family_name' => 'Michel',
+        ]);
+        $userInformation = $this->openIDResourceOwner->getUserInformation([
+            'access_token' => $accessToken,
+        ]);
+
+        self::assertSame('Jean', $userInformation->getData()['given_name']);
+        self::assertSame('Michel', $userInformation->getData()['family_name']);
+        self::assertSame($accessToken, $userInformation->getAccessToken());
     }
 
     /**

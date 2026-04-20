@@ -64,7 +64,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     public function isRefreshingUserInformationsAtEveryLogin(): bool
     {
         return match ($this->getInstanceName()) {
-            'occitanie', 'occitanie-dedicated', 'occitanie-preprod', 'catp' => true,
+            'occitanie', 'occitanie-dedicated', 'occitanie-preprod', 'catp', 'cd59' => true,
             default => false,
         };
     }
@@ -97,23 +97,24 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             EnvHelper::get('SYMFONY_INSTANCE_NAME')
         ))->getOpenIDMapping();
 
-        $content = $this->isCatpInstance()
+        $resolvedAccessToken = $this->resolveAccessToken($accessToken);
+        $content = isset($accessToken['id_token'])
             ? $this->resolveTokenPayload($accessToken)
             : JWT::getPayloadFromJWT($accessToken['access_token']);
 
-        if (null === $content && $this->options['use_bearer_authorization']) {
+        if (null === $content && $this->options['use_bearer_authorization'] && null !== $resolvedAccessToken) {
             $content = $this->httpRequest(
                 $this->normalizeUrl($this->options['infos_url'], $extraParameters),
                 null,
-                ['Authorization' => 'Bearer ' . $accessToken['access_token']]
+                ['Authorization' => 'Bearer ' . $resolvedAccessToken]
             );
         }
 
-        if (null === $content) {
+        if (null === $content && null !== $resolvedAccessToken) {
             $content = $this->doGetUserInformationRequest(
                 $this->normalizeUrl(
                     $this->options['infos_url'],
-                    array_merge([$this->options['attr_name'] => $accessToken['access_token']], $extraParameters)
+                    array_merge([$this->options['attr_name'] => $resolvedAccessToken], $extraParameters)
                 )
             );
         }
@@ -121,7 +122,11 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         $response = $this->getUserResponse();
         $response->setData($content instanceof ResponseInterface ? $content->getBody() : $content);
         $response->setResourceOwner($this);
-        $response->setOAuthToken(new OAuthToken($accessToken));
+        $responseToken = $accessToken;
+        if (null !== $resolvedAccessToken) {
+            $responseToken['access_token'] = $resolvedAccessToken;
+        }
+        $response->setOAuthToken(new OAuthToken($responseToken));
 
         return $response;
     }
@@ -149,6 +154,16 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         }
 
         return parent::getAuthorizationUrl($redirectUri, $extraParameters);
+    }
+
+    /**
+     * @param array{access_token?: string, id_token?: string} $accessToken
+     */
+    public function resolveAccessToken(array $accessToken): ?string
+    {
+        $tokenField = $this->getTokenField($accessToken);
+
+        return null !== $tokenField ? $accessToken[$tokenField] : null;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
@@ -213,9 +228,20 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         return $this->instanceName;
     }
 
-    private function isCatpInstance(): bool
+    /**
+     * @param array{access_token?: string, id_token?: string} $accessToken
+     */
+    private function getTokenField(array $accessToken): ?string
     {
-        return 'catp' === $this->getInstanceName();
+        if (isset($accessToken['id_token'])) {
+            return 'id_token';
+        }
+
+        if (isset($accessToken['access_token'])) {
+            return 'access_token';
+        }
+
+        return null;
     }
 
     private function generateNonce(): string
@@ -224,9 +250,9 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * @param array<string, mixed> $accessToken
+     * @param array{access_token?: string, id_token?: string} $accessToken
      *
-     * @return null|array<string, mixed>
+     * @return null|array<string, null|scalar>
      */
     private function resolveTokenPayload(array $accessToken): ?array
     {
@@ -241,11 +267,11 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * @return null|array<string, mixed>
+     * @return null|array<string, null|scalar>
      */
-    private function decodeJwtPayload(mixed $token): ?array
+    private function decodeJwtPayload(?string $token): ?array
     {
-        if (!\is_string($token) || '' === $token) {
+        if (null === $token || '' === $token) {
             return null;
         }
 
@@ -253,10 +279,10 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * @param null|array<string, mixed> $content
-     * @param array<string, mixed>      $fallbackClaims
+     * @param null|array<string, null|scalar> $content
+     * @param array<string, null|scalar>      $fallbackClaims
      *
-     * @return array<string, mixed>
+     * @return array<string, null|scalar>
      */
     private function mergeMissingClaims(?array $content, array $fallbackClaims): array
     {

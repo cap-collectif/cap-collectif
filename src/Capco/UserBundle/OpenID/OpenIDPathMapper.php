@@ -4,6 +4,7 @@ namespace Capco\UserBundle\OpenID;
 
 use Capco\UserBundle\OpenID\Mapping\AixMarseilleUnivMapping;
 use Capco\UserBundle\OpenID\Mapping\CarpentrasMapping;
+use Capco\UserBundle\OpenID\Mapping\Cd59Mapping;
 use Capco\UserBundle\OpenID\Mapping\CndpMapping;
 use Capco\UserBundle\OpenID\Mapping\CreditAgricoleMapping;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
@@ -33,6 +34,7 @@ class OpenIDPathMapper
             'carpentras' => new CarpentrasMapping(),
             'paris-dedicated' => new ParisMapping(),
             'aix-marseille-univ' => new AixMarseilleUnivMapping(),
+            'cd59' => new Cd59Mapping(),
             'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium',
             'participer-debat-gravelines', 'participer-debat-fessenheim',
             'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp', 'pngmdr', 'newlceo-cndp' => new CndpMapping(),

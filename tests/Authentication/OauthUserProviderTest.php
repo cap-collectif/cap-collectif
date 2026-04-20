@@ -15,10 +15,14 @@ use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use Capco\UserBundle\OpenID\OpenIDResourceOwner;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Security\Core\User\OauthUserProvider;
+use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
+use DateTime;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use const JSON_THROW_ON_ERROR;
+use JsonException;
 use PHPUnit\Framework\MockObject\Exception as MockException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -61,7 +65,7 @@ final class OauthUserProviderTest extends TestCase
 
     /**
      * @throws MockException
-     * @throws \JsonException
+     * @throws JsonException
      */
     protected function setUp(): void
     {
@@ -83,7 +87,7 @@ final class OauthUserProviderTest extends TestCase
         $this->resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
         $this->tokenMock = $this->createMock(TokenInterface::class);
 
-        $state = urlencode(base64_encode((string) json_encode(['csrf_token' => '12345'], \JSON_THROW_ON_ERROR)));
+        $state = urlencode(base64_encode((string) json_encode(['csrf_token' => '12345'], JSON_THROW_ON_ERROR)));
         $request = new Request();
         $request->query->set('state', $state);
         $request->setSession($this->sessionMock);
@@ -133,6 +137,43 @@ final class OauthUserProviderTest extends TestCase
         $this->assertSame('openid_user', $user->getUsername());
         $this->assertEquals('openid_user@test.com', $user->getEmail());
         $this->assertTrue($user->isEnabled());
+    }
+
+    /**
+     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
+     *
+     * @throws MockException
+     */
+    public function testLoadsNewOpenidUserUsingIdTokenAsAccessToken(): void
+    {
+        /** @var UserResponseInterface&MockObject $responseMock */
+        $responseMock = $this->createMock(UserResponseInterface::class);
+        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
+        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
+        /** @var TokenInterface&MockObject $tokenMock */
+        $tokenMock = $this->createMock(TokenInterface::class);
+        $user = new User();
+
+        $this->generateGenericOpenIdResponseWithData(
+            $responseMock,
+            $resourceOwnerMock,
+            ['email' => 'test@test.com'],
+            'openid_user@test.com',
+            ['id_token' => 'openid_id_token', 'access_token' => 'openid_access_token']
+        );
+        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
+        $tokenMock->method('getUser')->willReturn(null);
+        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_id_token', 'openid_id')
+            ->willReturn(null)
+        ;
+        $this->userRepositoryMock->method('findOneByEmail')->with('openid_user@test.com')->willReturn(null);
+        $this->userManagerMock->method('createUser')->willReturn($user);
+        $this->extraMapperMock->method('map')->with($user, $responseMock);
+        $this->userManagerMock->method('updateUser')->with($user);
+
+        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
+
+        $this->assertSame('openid_id_token', $user->getOpenIdAccessToken());
     }
 
     /**
@@ -393,6 +434,46 @@ final class OauthUserProviderTest extends TestCase
      *
      * @throws MockException
      */
+    public function testConnectUsesIdTokenAsAccessToken(): void
+    {
+        /** @var UserResponseInterface&MockObject $responseMock */
+        $responseMock = $this->createMock(UserResponseInterface::class);
+        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
+        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
+        $user = new User();
+
+        $this->generateGenericOpenIdResponseWithData(
+            $responseMock,
+            $resourceOwnerMock,
+            ['email' => 'openid_user@test.com'],
+            'openid_user@test.com',
+            ['id_token' => 'openid_id_token', 'access_token' => 'openid_access_token']
+        );
+        $this->userRepositoryMock->expects($this->once())
+            ->method('findByAccessTokenOrUsername')
+            ->with('openid_id_token', 'openid_id')
+            ->willReturn(null)
+        ;
+        $this->userRepositoryMock->expects($this->once())
+            ->method('findOneByEmail')
+            ->with('openid_user@test.com')
+            ->willReturn(null)
+        ;
+        $this->userManagerMock->expects($this->once())
+            ->method('updateUser')
+            ->with($user)
+        ;
+
+        $this->oauthUserProvider->connect($user, $responseMock);
+
+        $this->assertSame('openid_id_token', $user->getOpenIdAccessToken());
+    }
+
+    /**
+     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::connect
+     *
+     * @throws MockException
+     */
     public function testConnectKeepsLegacyEmailLookupOutsideCatp(): void
     {
         /** @var UserResponseInterface&MockObject $responseMock */
@@ -458,7 +539,7 @@ final class OauthUserProviderTest extends TestCase
         $user->setId('some-uuid')
             ->setFirstname('toto')
             ->setLastname('ala')
-            ->setDateOfBirth(new \DateTime('1992-12-12'))
+            ->setDateOfBirth(new DateTime('1992-12-12'))
             ->setGender('m')
             ->setEmail('viewer@email.com')
             ->setUsername('toto')
@@ -510,11 +591,11 @@ final class OauthUserProviderTest extends TestCase
         $currentUser->method('getEmail')->willReturn('local@email.com');
         $this->sessionMock->expects($this->exactly(5))->method('set')
             ->withConsecutive(
-                [\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, true],
-                [\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_ID_TOKEN_KEY, 'fc-id-token'],
-                [\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_POST_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/'],
-                [\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_IMMEDIATE_LOGOUT_REQUIRED_KEY, true],
-                [\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_AFTER_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/profile/edit-profile#account']
+                [FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, true],
+                [FranceConnectLogoutHandler::SESSION_ID_TOKEN_KEY, 'fc-id-token'],
+                [FranceConnectLogoutHandler::SESSION_POST_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/'],
+                [FranceConnectLogoutHandler::SESSION_IMMEDIATE_LOGOUT_REQUIRED_KEY, true],
+                [FranceConnectLogoutHandler::SESSION_AFTER_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/profile/edit-profile#account']
             )
         ;
 
@@ -704,7 +785,7 @@ final class OauthUserProviderTest extends TestCase
         $data['preferred_username'] = 'toto_fc_username';
 
         $responseMock->method('getData')->willReturn($data);
-        $birthday = \DateTime::createFromFormat('Y-m-d', $data['birthdate']) ?: null;
+        $birthday = DateTime::createFromFormat('Y-m-d', $data['birthdate']) ?: null;
         if ($birthday) {
             $birthday->setTime(0, 0);
         }
@@ -756,7 +837,7 @@ final class OauthUserProviderTest extends TestCase
         $user->setFirstname('TOTO_AVANT');
         $user->setLastname('ALA');
         $user->setUsername('initial_username');
-        $user->setDateOfBirth(\DateTime::createFromFormat('Y-m-d', '1990-10-10'));
+        $user->setDateOfBirth(DateTime::createFromFormat('Y-m-d', '1990-10-10'));
         $user->setGender('mal');
         $user->setEmail('totoala@ferme.com');
 
@@ -859,23 +940,34 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, mixed>       $data
+     * @param null|array<string, string> $rawToken
      */
     private function generateGenericOpenIdResponseWithData(
         UserResponseInterface & MockObject $response,
         OpenIDResourceOwner & MockObject $ressourceOwner,
         array $data,
-        ?string $email
+        ?string $email,
+        ?array $rawToken = null
     ): void {
+        /** @var OAuthToken&MockObject $oAuthTokenMock */
+        $oAuthTokenMock = $this->createMock(OAuthToken::class);
+        if (null === $rawToken) {
+            $rawToken = ['access_token' => 'openid_access_token'];
+        }
+
         $ressourceOwner->method('getName')->willReturn('openid');
+        $ressourceOwner->method('resolveAccessToken')->with($rawToken)->willReturn($rawToken['id_token'] ?? $rawToken['access_token'] ?? null);
         $response->method('getEmail')->willReturn($email);
         $response->method('getNickname')->willReturn('openid_user');
         $response->method('getAccessToken')->willReturn('openid_access_token');
         $response->method('getUsername')->willReturn('openid_id');
         $response->method('getResourceOwner')->willReturn($ressourceOwner);
+        $response->method('getOAuthToken')->willReturn($oAuthTokenMock);
         $response->method('getLastName')->willReturn('Smith');
         $response->method('getFirstName')->willReturn('jean');
         $response->method('getData')->willReturn($data);
+        $oAuthTokenMock->method('getRawToken')->willReturn($rawToken);
     }
 
     private function createOauthUserProvider(string $instanceName = 'capco'): OauthUserProvider

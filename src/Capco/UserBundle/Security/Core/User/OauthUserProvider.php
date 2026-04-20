@@ -75,6 +75,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $setter = 'set' . ucfirst($service);
         $setterId = 'openid' === $service ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';
+        $accessToken = $this->resolveAccessToken($response);
 
         if ('franceconnect' === $service && $user instanceof User) {
             $userInfoData = $response->getData();
@@ -116,7 +117,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
 
         //we connect current user
         $user->{$setterId}($response->getUsername());
-        $user->{$setterToken}($response->getAccessToken());
+        $user->{$setterToken}($accessToken);
         if ('franceconnect' === $service && $user instanceof User) {
             $idToken = $response->getOAuthToken()->getRawToken()['id_token'] ?? null;
             $user->setFranceConnectIdToken($idToken);
@@ -295,8 +296,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
 
     private function findUser(UserResponseInterface $response, ?string $email = null): ?User
     {
+        $accessToken = $this->resolveAccessToken($response);
         $user = $this->userRepository->findByAccessTokenOrUsername(
-            $response->getAccessToken(),
+            $accessToken,
             $response->getUsername()
         );
 
@@ -334,6 +336,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $setter = 'set' . ucfirst($serviceName);
         $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';
+        $accessToken = $this->resolveAccessToken($response);
 
         if ('openid' === $serviceName && $resourceOwner instanceof OpenIDResourceOwner) {
             $needMapping =
@@ -366,9 +369,26 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         }
 
         $user->{$setterId}($response->getUsername());
-        $user->{$setterToken}($response->getAccessToken());
+        $user->{$setterToken}($accessToken);
 
         return $user;
+    }
+
+    private function resolveAccessToken(UserResponseInterface $response): ?string
+    {
+        $resourceOwner = $response->getResourceOwner();
+
+        if ($resourceOwner instanceof OpenIDResourceOwner) {
+            $oAuthToken = $response->getOAuthToken();
+            if (null !== $oAuthToken) {
+                $rawToken = $oAuthToken->getRawToken();
+                if (\is_array($rawToken)) {
+                    return $resourceOwner->resolveAccessToken($rawToken);
+                }
+            }
+        }
+
+        return $response->getAccessToken();
     }
 
     private function getUsername(UserResponseInterface $response): string
