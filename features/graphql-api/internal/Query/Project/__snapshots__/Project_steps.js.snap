@@ -4,21 +4,29 @@ exports[`Internal.project.steps should exclude presentation step if excludePrese
 Object {
   "project": Object {
     "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "stepDisplayType": "NUMBERED_LIST",
     "steps": Array [
       Object {
         "__typename": "PresentationStep",
+        "cover": null,
         "title": "Présentation",
       },
       Object {
         "__typename": "ConsultationStep",
+        "cover": null,
         "title": "Collecte des avis",
       },
       Object {
         "__typename": "OtherStep",
+        "cover": Object {
+          "id": "media1",
+          "name": "Titre du média 1",
+        },
         "title": "Proposition",
       },
       Object {
         "__typename": "RankingStep",
+        "cover": null,
         "title": "Classement des propositions et modifications",
       },
     ],
@@ -30,17 +38,24 @@ exports[`Internal.project.steps should exclude presentation step if excludePrese
 Object {
   "project": Object {
     "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "stepDisplayType": "NUMBERED_LIST",
     "steps": Array [
       Object {
         "__typename": "ConsultationStep",
+        "cover": null,
         "title": "Collecte des avis",
       },
       Object {
         "__typename": "OtherStep",
+        "cover": Object {
+          "id": "media1",
+          "name": "Titre du média 1",
+        },
         "title": "Proposition",
       },
       Object {
         "__typename": "RankingStep",
+        "cover": null,
         "title": "Classement des propositions et modifications",
       },
     ],

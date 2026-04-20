@@ -11,7 +11,7 @@ trait CoverTrait
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    protected ?Media $cover;
+    protected ?Media $cover = null;
 
     public function getCover(): ?Media
     {

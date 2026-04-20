@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\Form\Step;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Form\RequirementType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Capco\AppBundle\Validator\Constraints\CheckboxRequirementHasLabel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,6 +39,10 @@ abstract class AbstractStepFormType extends AbstractType
             ])
             ->add('metaDescription')
             ->add('customCode')
+            ->add('cover', EntityType::class, [
+                'required' => false,
+                'class' => Media::class,
+            ])
             ->add('isEnabled')
             ->add('requirementsReason')
             ->add('requirements', OrderedCollectionType::class, [

@@ -2378,6 +2378,9 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -3236,6 +3239,9 @@ type ConsultationStep implements NodeSlug & Node & Step & RequirementStep {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's cover"""
+  cover: Media
 
   """The step's slug"""
   slug: String
@@ -5447,6 +5453,9 @@ type DebateStep implements NodeSlug & Step & Node {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's cover"""
+  cover: Media
 
   """The step's slug"""
   slug: String
@@ -10635,6 +10644,9 @@ type OtherStep implements NodeSlug & Node & Step {
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -11562,6 +11574,9 @@ type PresentationStep implements NodeSlug & Node & Step {
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -11968,6 +11983,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The header's format of the project."""
   headerType: ProjectHeaderType
+
+  """The project's participation step display mode."""
+  stepDisplayType: StepDisplayType!
 
   """The cover filter opacity percent value."""
   coverFilterOpacityPercent: Int
@@ -13821,6 +13839,9 @@ interface ProposalStep implements NodeSlug {
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -15493,6 +15514,9 @@ type QuestionnaireStep implements NodeSlug & Node & Step & RequirementStep {
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -15629,6 +15653,9 @@ type RankingStep implements NodeSlug & Node & Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's cover"""
+  cover: Media
 
   """The step's slug"""
   slug: String
@@ -17193,6 +17220,9 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -18371,6 +18401,9 @@ interface Step implements NodeSlug {
   """The step's custom code"""
   customCode: String
 
+  """The step's cover"""
+  cover: Media
+
   """The step's slug"""
   slug: String
 
@@ -18411,6 +18444,15 @@ interface Step implements NodeSlug {
 enum StepAdminUrlOperationType {
   CREATE
   EDIT
+}
+
+"""Describe the project's step display mode."""
+enum StepDisplayType {
+  """Display participation steps as a bulleted list."""
+  BULLETTED_LIST
+
+  """Display participation steps as a numbered list."""
+  NUMBERED_LIST
 }
 
 """Ways in which lists of steps can be ordered upon return."""
@@ -19077,6 +19119,9 @@ input UpdateCollectStepInput {
   """The step description."""
   body: String
 
+  """The step cover."""
+  cover: ID
+
   """Is the body using Jodit Wysiwyg."""
   bodyUsingJoditWysiwyg: Boolean!
 
@@ -19186,6 +19231,9 @@ input UpdateConsultationStepInput {
 
   """The step description."""
   body: String
+
+  """The step cover."""
+  cover: ID
 
   """When the step start."""
   startAt: DateTime
@@ -19392,6 +19440,9 @@ input UpdateDebateStepInput {
   startAt: DateTime
   endAt: DateTime
   body: HTML
+
+  """The step cover."""
+  cover: ID
   metaDescription: String
   customCode: String
   isEnabled: Boolean!
@@ -19838,6 +19889,7 @@ input UpdateNewProjectInput {
   opinionCanBeFollowed: Boolean!
   steps: [ID!]!
   headerType: ProjectHeaderType
+  stepDisplayType: StepDisplayType
   coverFilterOpacityPercent: Int
 
   """The locale id of the project. Null if visible by all languages"""
@@ -20082,6 +20134,9 @@ input UpdateOtherStepInput {
 
   """The step description."""
   body: String
+
+  """The step cover."""
+  cover: ID
 
   """When the step start."""
   startAt: DateTime
@@ -20452,6 +20507,9 @@ input UpdateProjectInput {
 
   """The project's image"""
   cover: ID
+
+  """The project's participation step display mode"""
+  stepDisplayType: StepDisplayType
 
   """The project's video"""
   video: String
@@ -20845,6 +20903,9 @@ input UpdateQuestionnaireStepInput {
   """The step description."""
   body: String
 
+  """The step cover."""
+  cover: ID
+
   """When the step start."""
   startAt: DateTime
 
@@ -20951,6 +21012,9 @@ input UpdateSelectionStepInput {
 
   """The step description."""
   body: String
+
+  """The step cover."""
+  cover: ID
 
   """Is the body using Jodit Wysiwyg."""
   bodyUsingJoditWysiwyg: Boolean!

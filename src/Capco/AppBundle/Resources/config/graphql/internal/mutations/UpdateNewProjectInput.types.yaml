@@ -68,6 +68,8 @@ UpdateNewProjectInput:
                 type: '[ID!]!'
             headerType:
                 type: 'ProjectHeaderType'
+            stepDisplayType:
+                type: 'StepDisplayType'
             coverFilterOpacityPercent:
                 type: 'Int'
             locale:

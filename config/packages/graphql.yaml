@@ -106,6 +106,7 @@ overblog_graphql:
                     - InternalMediaResponse
                     - InternalOauth2SSOConfiguration
                     - InternalMajorityQuestion
+                    - StepDisplayType
                     - InternalTimeRange
                     - InternalProposalVoteConnection
                     - InternalOrganization
@@ -159,6 +160,7 @@ overblog_graphql:
                     - InternalMediaResponse
                     - InternalOauth2SSOConfiguration
                     - InternalMajorityQuestion
+                    - StepDisplayType
                     - InternalTimeRange
                     - InternalProposalVoteConnection
                     - InternalOrganization

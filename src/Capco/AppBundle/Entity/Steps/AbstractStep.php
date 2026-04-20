@@ -17,6 +17,7 @@ use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
+use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -52,6 +53,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface, TimeRangeable, SluggableInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
+    use CoverTrait;
     use CustomCodeTrait;
     use DateHelperTrait;
     use MetaDescriptionTrait;

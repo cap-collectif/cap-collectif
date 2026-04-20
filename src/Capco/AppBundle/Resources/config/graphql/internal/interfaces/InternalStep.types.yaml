@@ -42,6 +42,9 @@ InternalStep:
             customCode:
                 description: "The step's custom code"
                 type: 'String'
+            cover:
+                description: "The step's cover"
+                type: 'InternalMedia'
             slug:
                 description: "The step's slug"
                 type: 'String'

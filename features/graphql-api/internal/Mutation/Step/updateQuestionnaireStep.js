@@ -6,6 +6,10 @@ const UpdateQuestionnaireStep = /* GraphQL*/ `
     updateQuestionnaireStep(input: $input) {
       questionnaireStep {
         id
+        cover {
+          id
+          name
+        }
         title
         label
         body
@@ -41,6 +45,7 @@ const input = {
   stepId: stepId,
   label: 'updated label',
   body: 'updated body',
+  cover: 'media2',
   startAt: '2023-01-03 16:29:17',
   endAt: '2024-01-03 16:29:17',
   timeless: false,
@@ -48,6 +53,7 @@ const input = {
   metaDescription: 'updated metadescription',
   customCode: 'updated custom code',
   footer: 'updated footer',
+  operationType: 'EDIT',
   requirements: [
     {
       type: 'FIRSTNAME',

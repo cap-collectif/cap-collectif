@@ -4,9 +4,14 @@ const ProjectsExcludePresentationStepQuery = /* GraphQL */ `
     project: node(id: $projectId) {
       id
       ... on Project {
+        stepDisplayType
         steps(excludePresentationStep: $excludePresentationStep) {
           __typename
           title
+          cover {
+            id
+            name
+          }
         }
       }
     }

@@ -6,6 +6,10 @@ Object {
     "step": Object {
       "adminUrl": "/admin-next/project/UHJvamVjdDpwcm9qZWN0MQ==/update-step/other-step/T3RoZXJTdGVwOm9zdGVwMQ==",
       "body": "updated body",
+      "cover": Object {
+        "id": "media2",
+        "name": "Titre du média 2",
+      },
       "customCode": "updated custom code",
       "enabled": false,
       "label": "updated label",

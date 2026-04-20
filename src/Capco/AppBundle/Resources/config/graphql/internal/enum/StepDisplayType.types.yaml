@@ -1,0 +1,11 @@
+StepDisplayType:
+    type: enum
+    config:
+        description: "Describe the project's step display mode."
+        values:
+            BULLETTED_LIST:
+                value: !php/const Capco\AppBundle\Enum\StepDisplayType::BULLETTED_LIST
+                description: 'Display participation steps as a bulleted list.'
+            NUMBERED_LIST:
+                value: !php/const Capco\AppBundle\Enum\StepDisplayType::NUMBERED_LIST
+                description: 'Display participation steps as a numbered list.'

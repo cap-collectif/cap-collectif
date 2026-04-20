@@ -5,6 +5,10 @@ Object {
   "updateQuestionnaireStep": Object {
     "questionnaireStep": Object {
       "body": "updated body",
+      "cover": Object {
+        "id": "media2",
+        "name": "Titre du média 2",
+      },
       "customCode": "updated custom code",
       "enabled": true,
       "footer": "updated footer",

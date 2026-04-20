@@ -5,6 +5,10 @@ const UpdateDebateStepMutation = /* GraphQL*/ `
   mutation UpdateDebateStepMutation($input: UpdateDebateStepInput!) {
     updateDebateStep(input: $input) {
             debateStep {
+                cover {
+                    id
+                    name
+                }
                 title
                 label
                 body
@@ -39,6 +43,7 @@ const input = {
   id: 'RGViYXRlU3RlcDpkZWJhdGVTdGVwQ2FubmFiaXM=',
   label: 'Débatzz',
   body: 'body',
+  cover: 'media2',
   title: 'Pour ou contre la légalisation du Cannabis ?',
   startAt: '2023-10-01 14:00:00',
   endAt: '2037-10-01 12:00:00',

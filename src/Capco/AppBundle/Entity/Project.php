@@ -22,6 +22,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\StepDisplayType;
 use Capco\AppBundle\Enum\VoteType;
 use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
@@ -244,6 +245,11 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
      * @ORM\Column(name="header_type", type="string", nullable=false)
      */
     private $headerType = ProjectHeaderType::FULL_WIDTH;
+
+    /**
+     * @ORM\Column(name="step_display_type", type="string", nullable=false, options={"default": "numbered_list"})
+     */
+    private string $stepDisplayType = StepDisplayType::NUMBERED_LIST;
 
     /**
      * @ORM\Column(name="cover_filter_opacity_percent", type="integer", nullable=false)
@@ -1083,6 +1089,22 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             throw new \InvalidArgumentException('Invalid header type.');
         }
         $this->headerType = $headerType;
+
+        return $this;
+    }
+
+    public function getStepDisplayType(): string
+    {
+        return $this->stepDisplayType;
+    }
+
+    public function setStepDisplayType(string $stepDisplayType): self
+    {
+        if (!\in_array($stepDisplayType, StepDisplayType::getAvailableTypes(), true)) {
+            throw new \InvalidArgumentException('Invalid step display type.');
+        }
+
+        $this->stepDisplayType = $stepDisplayType;
 
         return $this;
     }

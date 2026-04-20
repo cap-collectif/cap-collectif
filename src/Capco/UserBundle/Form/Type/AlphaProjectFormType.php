@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectHeaderType;
+use Capco\AppBundle\Enum\StepDisplayType;
 use Capco\AppBundle\Form\Persister\GlobalDistrictsPersister;
 use Capco\AppBundle\Form\Subscriber\GlobalDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
@@ -52,6 +53,12 @@ class AlphaProjectFormType extends AbstractType
                 'choices' => ProjectHeaderType::getAvailableTypes(),
                 'preferred_choices' => ProjectHeaderType::FULL_WIDTH,
                 'empty_data' => ProjectHeaderType::FULL_WIDTH,
+                'required' => false,
+            ])
+            ->add('stepDisplayType', ChoiceType::class, [
+                'choices' => StepDisplayType::getAvailableTypes(),
+                'preferred_choices' => StepDisplayType::NUMBERED_LIST,
+                'empty_data' => StepDisplayType::NUMBERED_LIST,
                 'required' => false,
             ])
             ->add('coverFilterOpacityPercent', NumberType::class, [

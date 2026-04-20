@@ -6,6 +6,10 @@ const UpdateSelectionStep = /* GraphQL*/ `
       updateSelectionStep(input: $input) {
         selectionStep {
           id
+          cover {
+            id
+            name
+          }
           title
           label
           body
@@ -56,6 +60,7 @@ const input = {
   stepId: stepId,
   label: 'updated label',
   body: 'updated body',
+  cover: 'media2',
   bodyUsingJoditWysiwyg: true,
   timeless: true,
   startAt: '2024-03-30 11:22:00',

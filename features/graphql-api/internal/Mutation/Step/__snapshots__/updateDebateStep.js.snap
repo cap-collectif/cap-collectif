@@ -5,6 +5,10 @@ Object {
   "updateDebateStep": Object {
     "debateStep": Object {
       "body": "body",
+      "cover": Object {
+        "id": "media2",
+        "name": "Titre du média 2",
+      },
       "customCode": "custom code",
       "debate": Object {
         "articles": Object {

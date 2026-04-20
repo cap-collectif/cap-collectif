@@ -10,6 +10,10 @@ const UpdateOtherStep = /* GraphQL*/ `
         label
         slug
         body
+        cover {
+          id
+          name
+        }
         metaDescription
         enabled
         customCode
@@ -26,12 +30,14 @@ const UpdateOtherStep = /* GraphQL*/ `
 const input = {
   label: 'updated label',
   body: 'updated body',
+  cover: 'media2',
   isEnabled: false,
   metaDescription: 'updated metadescription',
   customCode: 'updated custom code',
   startAt: '2023-01-03 16:29:17',
   endAt: '2023-01-03 16:29:17',
   timeless: false,
+  operationType: 'EDIT',
   stepId: toGlobalId('OtherStep', 'ostep1'), // T3RoZXJTdGVwOm9zdGVwMQ==
 }
 

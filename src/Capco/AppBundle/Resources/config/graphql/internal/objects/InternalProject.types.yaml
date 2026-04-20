@@ -209,6 +209,9 @@ InternalProject:
             headerType:
                 type: 'ProjectHeaderType'
                 description: "The header's format of the project."
+            stepDisplayType:
+                type: 'StepDisplayType!'
+                description: "The project's participation step display mode."
             coverFilterOpacityPercent:
                 type: 'Int'
                 description: 'The cover filter opacity percent value.'

@@ -8,10 +8,12 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\StepDisplayType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,6 +61,12 @@ class UpdateProjectFormType extends AbstractType
             ->add('cover', EntityType::class, [
                 'required' => false,
                 'class' => Media::class,
+            ])
+            ->add('stepDisplayType', ChoiceType::class, [
+                'choices' => StepDisplayType::getAvailableTypes(),
+                'preferred_choices' => StepDisplayType::NUMBERED_LIST,
+                'empty_data' => StepDisplayType::NUMBERED_LIST,
+                'required' => false,
             ])
             ->add('video', TextType::class, [
                 'required' => false,

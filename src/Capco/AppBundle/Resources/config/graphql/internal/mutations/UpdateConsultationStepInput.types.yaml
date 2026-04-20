@@ -11,6 +11,9 @@ UpdateConsultationStepInput:
             body:
                 type: 'String'
                 description: 'The step description.'
+            cover:
+                type: 'ID'
+                description: 'The step cover.'
             startAt:
                 type: 'DateTime'
                 description: 'When the step start.'

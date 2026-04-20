@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Enum\LogActionType;
-use Capco\AppBundle\Form\OtherStepType;
+use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -45,7 +45,7 @@ class UpdateOtherStepMutation implements MutationInterface
 
         unset($data['stepId'], $data['operationType']);
 
-        $form = $this->formFactory->create(OtherStepType::class, $step);
+        $form = $this->formFactory->create(OtherStepFormType::class, $step);
         $form->submit($data, false);
 
         if (!$form->isValid()) {

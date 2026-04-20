@@ -14,6 +14,9 @@ UpdateDebateStepInput:
                 type: 'DateTime'
             body:
                 type: 'HTML'
+            cover:
+                type: 'ID'
+                description: 'The step cover.'
             metaDescription:
                 type: 'String'
             customCode:

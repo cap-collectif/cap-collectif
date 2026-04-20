@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateConsultationStep admin should be able to edit consultationStep step. 1`] = `
+Object {
+  "updateConsultationStep": Object {
+    "consultationStep": Object {
+      "body": "updated consultation body",
+      "cover": Object {
+        "id": "media2",
+        "name": "Titre du média 2",
+      },
+      "customCode": "updated consultation custom code",
+      "enabled": true,
+      "id": "Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=",
+      "label": "updated consultation label",
+      "metaDescription": "updated consultation metadescription",
+      "timeRange": Object {
+        "endAt": "2024-01-03 16:29:17",
+        "startAt": "2023-01-03 16:29:17",
+      },
+      "timeless": false,
+      "title": "Collecte des avis",
+    },
+  },
+}
+`;

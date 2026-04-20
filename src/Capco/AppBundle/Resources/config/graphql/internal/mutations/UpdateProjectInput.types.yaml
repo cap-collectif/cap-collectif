@@ -24,6 +24,9 @@ UpdateProjectInput:
             cover:
                 type: 'ID'
                 description: "The project's image"
+            stepDisplayType:
+                type: 'StepDisplayType'
+                description: "The project's participation step display mode"
             video:
                 type: 'String'
                 description: "The project's video"

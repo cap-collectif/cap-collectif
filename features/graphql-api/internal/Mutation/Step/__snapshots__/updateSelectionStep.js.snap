@@ -8,6 +8,10 @@ Object {
       "body": "updated body",
       "bodyUsingJoditWysiwyg": true,
       "budget": 30000,
+      "cover": Object {
+        "id": "media2",
+        "name": "Titre du média 2",
+      },
       "customCode": "updated custom code",
       "defaultSort": "old",
       "defaultStatus": null,

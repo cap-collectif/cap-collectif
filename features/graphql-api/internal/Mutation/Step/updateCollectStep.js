@@ -5,6 +5,10 @@ const UpdateCollectStep = /* GraphQL*/ `
     mutation UpdateCollectStepMutation($input: UpdateCollectStepInput!) {
       updateCollectStep(input: $input) {
         collectStep {
+          cover {
+            id
+            name
+          }
           preventProposalDelete
           preventProposalEdit
           id
@@ -62,6 +66,7 @@ const input = {
   stepId: stepId,
   label: 'upated label',
   body: 'updated body',
+  cover: 'media2',
   bodyUsingJoditWysiwyg: true,
   timeless: true,
   startAt: '2024-03-30 11:22:00',
