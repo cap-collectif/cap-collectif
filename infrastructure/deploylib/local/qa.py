@@ -51,6 +51,12 @@ def phpspec(ctx, desc='false'):
 
 
 @task
+def phpunit(ctx, filter='false'):
+    environments.local()
+    qa.phpunit(filter)
+
+
+@task
 def purge_rabbitmq(ctx):
     environments.local()
     qa.purge_rabbitmq()

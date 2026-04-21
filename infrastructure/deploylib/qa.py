@@ -32,13 +32,17 @@ def phpspec(desc='false'):
             'php -d memory_limit=-1 bin/phpspec run --no-code-generation',
             'application', Config.www_app)
 
-def phpunit():
-     command('php -d memory_limit=-1 bin/phpunit --configuration=phpunit.xml --color --testdox', 'application', Config.www_app)
+def phpunit(filter='false'):
+    "Run PHPUnit tests"
+    cmd = 'php -d memory_limit=-1 bin/phpunit --configuration=phpunit.xml --color --testdox'
+    if filter != 'false':
+        cmd += ' --filter=' + filter
+    command(cmd, 'application', Config.www_app)
 
 def compile_graphql():
-    "Compile GraphQL PHP code"
-    run('php -d memory_limit=-1 bin/console graphql:compile --no-debug')
-    run('composer dump-autoload')
+    "Compile GraphQL PHP code - runs inside the application container to use the container's PHP version (8.1)"
+    command('php -d memory_limit=-1 bin/console graphql:compile --no-debug', 'application', Config.www_app)
+    command('COMPOSER_MEMORY_LIMIT=-1 composer dump-autoload', 'application', Config.www_app)
 
 
 def graphql_schemas(checkSame=False):

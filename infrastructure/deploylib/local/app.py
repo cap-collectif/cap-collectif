@@ -19,6 +19,12 @@ def cmd(ctx, commandName='', environment='dev'):
     environments.local()
     app.cmd(commandName, environment)
 
+
+@task
+def composer(ctx, composerCommand='install'):
+    environments.local()
+    app.composer(composerCommand)
+
 @task
 def sql(ctx, sql='', environment='dev'):
     environments.local()

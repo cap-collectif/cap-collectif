@@ -128,12 +128,12 @@ SYMFONY_ORANGE_API_CLIENT_SECRET=INSERT_A_REAL_SECRET
 
 
 def prepare_php(environment='dev'):
-    "Prepare PHP"
-    run('composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress')
-    run('php -d memory_limit=-1 bin/console graphql:compile')
-    run('composer dump-autoload --optimize --apcu')
-    run('php -d memory_limit=-1 bin/console cache:warmup --no-optional-warmers --env=' + environment)
-    run('php -d memory_limit=-1 bin/console assets:install public --symlink --env=' + environment)
+    "Prepare PHP - runs inside the application container to use the container's PHP version (8.1)"
+    command('COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress', 'application', Config.www_app)
+    command('php -d memory_limit=-1 bin/console graphql:compile', 'application', Config.www_app)
+    command('COMPOSER_MEMORY_LIMIT=-1 composer dump-autoload --optimize --apcu', 'application', Config.www_app)
+    command('php -d memory_limit=-1 bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', Config.www_app)
+    command('php -d memory_limit=-1 bin/console assets:install public --symlink --env=' + environment, 'application', Config.www_app)
 
 
 def deploy(environment='dev', user='capco', mode='symfony_bin'):
@@ -205,6 +205,11 @@ def clear_cache(environment='dev'):
 def cmd(commandName='', environment='dev'):
     "Executing Symfony command"
     command('php -d memory_limit=-1 bin/console ' + commandName + ' --no-interaction --env=' + environment, 'application', Config.www_app, 'root')
+
+
+def composer(composerCommand='install'):
+    "Run a Composer command inside the application container - uses container PHP 8.1"
+    command('COMPOSER_MEMORY_LIMIT=-1 composer ' + composerCommand, 'application', Config.www_app)
 
 def sql(sql='', environment='dev'):
     "Executing SQL command"
