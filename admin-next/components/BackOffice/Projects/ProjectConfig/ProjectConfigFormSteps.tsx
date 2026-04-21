@@ -25,6 +25,7 @@ import DeleteModal from './DeleteModal'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { FormValues } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
+import { StepDisplayType } from '@relay/UpdateNewProjectMutation.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const getWordingStep = (type: string) =>
@@ -34,10 +35,11 @@ const getStepUri = (type: string) => `${type.slice(0, -4).toLowerCase()}-step`
 
 const ProjectConfigFormSteps: React.FC = () => {
   const intl = useIntl()
-  const { control, watch } = useFormContext<FormValues>()
+  const { control, watch, setValue } = useFormContext<FormValues>()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [indexToDelete, setIndexToDelete] = React.useState(0)
-  const [stepDisplayMode, setStepDisplayMode] = React.useState<'flat' | 'chronological'>('flat')
+  const stepDisplayType = watch('stepDisplayType')
+  const [pendingMode, setPendingMode] = React.useState<StepDisplayType>(stepDisplayType)
   const stepsValues = watch('steps')
   const { viewerSession } = useAppContext()
   const isNewProjectPage = useFeatureFlag('new_project_page')
@@ -179,10 +181,10 @@ const ProjectConfigFormSteps: React.FC = () => {
                       <Modal.Body>
                         <Text mb={4}>{intl.formatMessage({ id: 'back.project-step.select-step' })}</Text>
                         <Flex gap={8} direction="row">
-                          {(['flat', 'chronological'] as const).map(mode => {
-                            const isSelected = stepDisplayMode === mode
+                          {(['BULLETTED_LIST', 'NUMBERED_LIST'] as const).map(mode => {
+                            const isSelected = pendingMode === mode
                             const modeSteps =
-                              mode === 'flat'
+                              mode === 'BULLETTED_LIST'
                                 ? ['questionnaire_step', 'ideas_box_step', 'vote_step']
                                 : ['collect_step', 'analysis_step', 'vote_step']
                             return (
@@ -198,7 +200,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                 borderRadius="normal"
                                 p={6}
                                 sx={{ cursor: 'pointer' }}
-                                onClick={() => setStepDisplayMode(mode)}
+                                onClick={() => setPendingMode(mode)}
                               >
                                 {/* Header */}
                                 <Flex align="center" justify="center" gap={1}>
@@ -237,7 +239,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                           lineHeight={CapUILineHeight.M}
                                           color="gray.700"
                                         >
-                                          {mode === 'chronological' ? `${index + 1}. ` : ''}
+                                          {mode === 'NUMBERED_LIST' ? `${index + 1}. ` : ''}
                                           {intl.formatMessage({ id: step })}
                                         </Text>
                                         <Flex align="center" justify="center" width="24px" height="24px" p={2}>
@@ -258,7 +260,11 @@ const ProjectConfigFormSteps: React.FC = () => {
                                     textAlign="center"
                                     flex={1}
                                   >
-                                    {intl.formatMessage({ id: `back.project-step.mode-${mode}.description` })}
+                                    {intl.formatMessage({
+                                      id: `back.project-step.mode-${
+                                        mode === 'NUMBERED_LIST' ? 'numbered' : 'flat'
+                                      }.description`,
+                                    })}
                                   </Text>
                                 </Flex>
 
@@ -268,7 +274,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                   name="stepDisplayMode"
                                   value={mode}
                                   checked={isSelected}
-                                  onChange={() => setStepDisplayMode(mode)}
+                                  onChange={() => setPendingMode(mode)}
                                 >
                                   {''}
                                 </Radio>
@@ -278,10 +284,26 @@ const ProjectConfigFormSteps: React.FC = () => {
                         </Flex>
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button variant="secondary" variantColor="primary" variantSize="big" onClick={hide}>
+                        <Button
+                          variant="secondary"
+                          variantColor="primary"
+                          variantSize="big"
+                          onClick={() => {
+                            setPendingMode(stepDisplayType)
+                            hide()
+                          }}
+                        >
                           {intl.formatMessage({ id: 'global.back' })}
                         </Button>
-                        <Button variant="primary" variantColor="primary" variantSize="big" onClick={hide}>
+                        <Button
+                          variant="primary"
+                          variantColor="primary"
+                          variantSize="big"
+                          onClick={() => {
+                            setValue('stepDisplayType', pendingMode, { shouldDirty: true })
+                            hide()
+                          }}
+                        >
                           {intl.formatMessage({ id: 'global.validate' })}
                         </Button>
                       </Modal.Footer>

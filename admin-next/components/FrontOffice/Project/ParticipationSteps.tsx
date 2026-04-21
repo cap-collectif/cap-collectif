@@ -15,6 +15,7 @@ import {
   Card,
   CardContent,
   CardCover,
+  CardCoverImage,
   CardTagList,
   Flex,
   Icon,
@@ -24,6 +25,7 @@ import {
 import { useIntl } from 'react-intl'
 import { ParticipationSteps_project$key } from '@relay/ParticipationSteps_project.graphql'
 import stripHTML from '@shared/utils/stripHTML'
+import { getSrcSet } from '@shared/ui/Image'
 
 type Props = {
   project: ParticipationSteps_project$key
@@ -32,12 +34,16 @@ type Props = {
 
 const FRAGMENT = graphql`
   fragment ParticipationSteps_project on Project {
+    stepDisplayType
     steps {
       id
       title
       state
       url
       body
+      cover {
+        url
+      }
       timeRange {
         remainingTime {
           days
@@ -52,8 +58,7 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey, isWide = fal
   const project = useFragment(FRAGMENT, projectKey)
   const intl = useIntl()
 
-  /* TODO: Add real field when API is ready */
-  const showStepsOrder = false
+  const showStepsOrder = project.stepDisplayType === 'NUMBERED_LIST'
 
   if (!project.steps.length) return null
 
@@ -110,44 +115,47 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey, isWide = fal
             {intl.formatMessage({ id: 'front.project.participation-steps.title' })}
           </Text>
         </Flex>
-        <Accordion
-          defaultAccordion={openedStepIds}
-          allowMultiple
-          color={CapUIAccordionColor.default}
-          direction="column"
-          gap="md"
-        >
-          {project.steps.map(step => {
+        <Accordion allowMultiple defaultAccordion={openedStepIds} color={CapUIAccordionColor.white}>
+          {project.steps.map((step, index) => {
+            const { id, cover, body, title, state, url } = step
             const remainingTimeLabel = getRemainingTimeLabel(step.timeRange.remainingTime)
-            const strippedBody = step.body ? stripHTML(step.body) : null
+            const strippedBody = body ? stripHTML(body) : null
 
             return (
-              <Accordion.Item key={step.id} id={step.id} mt={0}>
-                <Accordion.Button>
-                  <Text
-                    fontWeight={CapUIFontWeight.Normal}
-                    fontSize={CapUIFontSize.Headline}
-                    lineHeight={CapUILineHeight.M}
-                  >
-                    {/* TODO: display step position when position field is added to the Step GraphQL type */}
-                    {showStepsOrder ? `${step.id + 1}. ` : ''}
-                    {step.title}
-                  </Text>
+              <Accordion.Item
+                key={id}
+                id={id}
+                sx={{
+                  '&[open]': {
+                    boxShadow: 'small',
+                  },
+                }}
+                _hover={{ boxShadow: 'small' }}
+              >
+                <Accordion.Button
+                  fontWeight={CapUIFontWeight.Normal}
+                  fontSize={CapUIFontSize.Headline}
+                  lineHeight={CapUILineHeight.M}
+                >
+                  {showStepsOrder ? `${index + 1}. ` : ''}
+                  {title}
                 </Accordion.Button>
                 <Accordion.Panel ml={0}>
                   <Card format={isWide ? 'horizontal' : 'vertical'}>
-                    <CardCover>
-                      {/* TODO: display step cover image when media field is added to the Step GraphQL type */}
-                      {getStatusTag(step.state)}
-                    </CardCover>
-                    <CardContent primaryInfo={step.title} secondaryInfo={strippedBody ?? undefined} href={step.url}>
+                    {cover?.url ? (
+                      <CardCover>
+                        <CardCoverImage {...getSrcSet(cover.url)} />
+                        {getStatusTag(state)}
+                      </CardCover>
+                    ) : null}
+                    <CardContent primaryInfo={title} secondaryInfo={strippedBody ?? undefined} href={url}>
                       <CardTagList>
                         <Button variant="primary" variantSize="medium" as="span">
-                          {step.state === 'OPENED'
+                          {state === 'OPENED'
                             ? intl.formatMessage({ id: 'project.preview.action.participe' })
                             : intl.formatMessage({ id: 'global.access' })}
                         </Button>
-                        {step.state === 'OPENED' && remainingTimeLabel && (
+                        {state === 'OPENED' && remainingTimeLabel && (
                           <Tag variantColor="infoGray" transparent>
                             <Tag.LeftIcon name={CapUIIcon.ClockO} />
                             <Tag.Label>{remainingTimeLabel}</Tag.Label>

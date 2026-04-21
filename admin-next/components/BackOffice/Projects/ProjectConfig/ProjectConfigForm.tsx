@@ -59,6 +59,7 @@ const FRAGMENT = graphql`
       type: contentType
       url(format: "reference")
     }
+    stepDisplayType
     canEnableProposalStepSplitView
     isProposalStepSplitViewEnabled
     video
@@ -147,6 +148,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     setIsSubmitting(true)
     const input = {
       ...values,
+      stepDisplayType: values.stepDisplayType,
       cover: values?.cover?.id || null,
       steps: values.steps.map(s => s.id),
       themes: values.themes.map(t => t.value),

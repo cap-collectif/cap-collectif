@@ -1,5 +1,6 @@
 import { IntlShape } from 'react-intl'
 import { ProjectConfigForm_project$data } from '@relay/ProjectConfigForm_project.graphql'
+import { StepDisplayType } from '@relay/UpdateNewProjectMutation.graphql'
 import { MultipleRadioValue } from '@cap-collectif/form'
 import moment from 'moment'
 
@@ -40,8 +41,9 @@ export type FormValues = {
   externalContributionsCount: number | null
   externalVotesCount: number | null
   addressText?: string | null
-  steps: Array<{ id: string; label: string, __typename: string }>
+  steps: Array<{ id: string; label: string; __typename: string }>
   customCode?: string | null
+  stepDisplayType: StepDisplayType
 }
 
 export const getInitialValues = (project: ProjectConfigForm_project$data, intl: IntlShape): FormValues => ({
@@ -86,4 +88,5 @@ export const getInitialValues = (project: ProjectConfigForm_project$data, intl: 
       : null,
   steps: project?.steps ? project.steps.map(s => ({ ...s })) : [],
   customCode: project ? project.customCode : null,
+  stepDisplayType: project?.stepDisplayType ?? 'BULLETTED_LIST',
 })
