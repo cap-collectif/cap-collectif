@@ -135,6 +135,7 @@ class ValidateContributionMutation implements MutationInterface
         $contribution->setPublishedAt(new \DateTime());
 
         if ($contribution instanceof Reply) {
+            $this->em->flush();
             $this->replyCounterIndexer->syncIndex($contribution);
         }
 

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
@@ -14,6 +13,7 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ReplyCounterIndexer;
 use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -38,7 +38,7 @@ class AddAnonymousReplyMutation extends ReplyMutation implements MutationInterfa
         private readonly RequestGuesserInterface $requestGuesser,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly Publisher $publisher,
-        private readonly Indexer $indexer,
+        private readonly ReplyCounterIndexer $replyCounterIndexer,
         private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
         private readonly ParticipantHelper $participantHelper,
         private readonly ReplyRepository $replyRepository,
@@ -81,7 +81,7 @@ class AddAnonymousReplyMutation extends ReplyMutation implements MutationInterfa
             $replyAnonymous->setCompletedStatus();
         }
 
-        $replyAnonymous->setParticipant($participant);
+        $participant->addReply($replyAnonymous);
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . $form->getErrors(true, false));
@@ -106,8 +106,7 @@ class AddAnonymousReplyMutation extends ReplyMutation implements MutationInterfa
             ];
         }
 
-        $this->indexer->index(Reply::class, $replyAnonymous->getId());
-        $this->indexer->finishBulk();
+        $this->replyCounterIndexer->syncIndex($replyAnonymous);
 
         if ($questionnaire->isNotifyResponseCreate() || $replyAnonymous->getParticipantEmail()) {
             $this->publisher->publish(

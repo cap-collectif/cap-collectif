@@ -133,6 +133,9 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 $this->process($entity->getRelated(), false);
             }
         }
+        if ($entity instanceof AbstractVote && $entity->getParticipant()) {
+            $this->addToMessageStack($entity->getParticipant());
+        }
         if ($entity instanceof Event && $entity->getProjects()->count() > 0) {
             foreach ($entity->getProjects() as $project) {
                 $this->process($project, false);
@@ -178,6 +181,9 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 foreach ($responses as $response) {
                     $this->process($response, false);
                 }
+            }
+            if ($entity->getParticipant()) {
+                $this->addToMessageStack($entity->getParticipant());
             }
         }
 

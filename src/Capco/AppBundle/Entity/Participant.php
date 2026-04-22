@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Repository\ParticipantRepository;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="participant")
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements EntityInterface, ContributorInterface, \Stringable
+class Participant implements EntityInterface, ContributorInterface, IndexableInterface, \Stringable
 {
     use ContributorTrait;
     use TimestampableTrait;
@@ -489,5 +490,28 @@ class Participant implements EntityInterface, ContributorInterface, \Stringable
         $this->anonymizedAt = $anonymizedAt;
 
         return $this;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->votes->count() > 0 || $this->replies->count() > 0;
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 100;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'participant';
+    }
+
+    /**
+     * @return array<string>
+     */
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['ElasticsearchParticipant'];
     }
 }

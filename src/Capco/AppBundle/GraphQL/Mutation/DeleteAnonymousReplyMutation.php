@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -33,13 +34,24 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         $reply = $this->getReply($args);
 
         $replyId = $args->offsetGet('replyId');
+        $replyDatabaseId = $reply->getId();
         $questionnaire = $reply->getQuestionnaire();
+        $participant = $reply->getParticipant();
 
-        $this->indexer->remove(Reply::class, $reply->getId());
-        $this->indexer->finishBulk();
+        if ($participant instanceof Participant) {
+            $participant->removeReply($reply);
+        }
 
         $this->em->remove($reply);
         $this->em->flush();
+
+        $this->indexer->remove(Reply::class, $replyDatabaseId);
+        $this->indexer->finishBulk();
+
+        if ($participant instanceof Participant) {
+            $this->indexer->index(Participant::class, $participant->getId());
+            $this->indexer->finishBulk();
+        }
 
         if ($questionnaire && $questionnaire->isNotifyResponseDelete()) {
             $step = $reply->getStep();

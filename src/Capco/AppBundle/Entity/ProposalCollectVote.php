@@ -116,7 +116,7 @@ class ProposalCollectVote extends AbstractProposalVote implements ExportableCont
 
     public function getProject(): ?Project
     {
-        return $this->getProposal() ? $this->getProposal()->getProject() : null;
+        return $this->getStep()?->getProject();
     }
 
     public static function getElasticsearchSerializationGroups(): array

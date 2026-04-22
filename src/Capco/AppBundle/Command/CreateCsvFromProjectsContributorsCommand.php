@@ -119,45 +119,44 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 
             $totalCount = Arr::path($project, 'data.contributors.totalCount');
             $progress = new ProgressBar($output, (int) $totalCount);
+            /** @var list<array{id: string, __typename?: ?string}> $userContributors */
+            $userContributors = [];
+            /** @var list<array{id: string, __typename?: ?string}> $participantContributors */
+            $participantContributors = [];
 
             $this->connectionTraversor->traverse(
                 $project,
                 'contributors',
-                function ($edge) use ($progress) {
-                    $contributor = $edge['node'];
-                    $row = array_map(
-                        $this->exportUtils->parseCellValue(...),
-                        [
-                            $contributor['id'],
-                            $contributor['email'],
-                            $contributor['username'] ?? null,
-                            ($contributor['userType'] ?? null) ? $contributor['userType']['name'] : null,
-                            $contributor['createdAt'],
-                            $contributor['updatedAt'] ?? null,
-                            $contributor['lastLogin'] ?? null,
-                            $contributor['rolesText'] ?? null,
-                            $contributor['consentInternalCommunication'] ?? null,
-                            $contributor['enabled'] ?? null,
-                            $contributor['isEmailConfirmed'] ?? null,
-                            $contributor['locked'] ?? null,
-                            $contributor['phoneConfirmed'] ?? null,
-                            $contributor['gender'] ?? null,
-                            $contributor['dateOfBirth'],
-                            $contributor['websiteUrl'] ?? null,
-                            $contributor['biography'] ?? null,
-                            $contributor['address'] ?? null,
-                            $contributor['zipCode'] ?? null,
-                            $contributor['city'] ?? null,
-                            $contributor['phone'],
-                            $contributor['url'] ?? null,
-                            $contributor['userIdentificationCode'],
-                        ]
-                    );
-                    $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
-                    $progress->advance();
+                function ($edge) use (&$userContributors, &$participantContributors) {
+                    if (!isset($edge['node']) || !\is_array($edge['node'])) {
+                        $this->logger->warning('Skipping contributor export edge with null node.', [
+                            'edge' => $edge,
+                        ]);
+
+                        return;
+                    }
+
+                    /** @var array{id: string, __typename?: ?string} $node */
+                    $node = $edge['node'];
+
+                    if ($this->isParticipantContributor($node)) {
+                        $participantContributors[] = $node;
+
+                        return;
+                    }
+
+                    $userContributors[] = $node;
                 },
                 fn ($pageInfo) => $this->getContributorsProjectGraphQLQuery($id, $pageInfo['endCursor'])
             );
+
+            foreach ($userContributors as $contributor) {
+                $this->writeContributorRow($contributor, $progress);
+            }
+
+            foreach ($participantContributors as $contributor) {
+                $this->writeContributorRow($contributor, $progress);
+            }
             $this->executeSnapshot($input, $output, $fileName);
 
             $this->writer->close();
@@ -168,6 +167,56 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         $output->writeln('All projects contributors have been successfully exported!');
 
         return 0;
+    }
+
+    /**
+     * @param array{id: string, __typename?: ?string} $contributor
+     */
+    private function isParticipantContributor(array $contributor): bool
+    {
+        if (($contributor['__typename'] ?? null) === 'Participant') {
+            return true;
+        }
+
+        return 'Participant' === GlobalId::fromGlobalId($contributor['id'])['type'];
+    }
+
+    /**
+     * @param array<string, mixed> $contributor
+     */
+    private function writeContributorRow(array $contributor, ProgressBar $progress): void
+    {
+        $row = array_map(
+            $this->exportUtils->parseCellValue(...),
+            [
+                $contributor['id'],
+                $contributor['email'],
+                $contributor['username'] ?? null,
+                ($contributor['userType'] ?? null) ? $contributor['userType']['name'] : null,
+                $contributor['createdAt'],
+                $contributor['updatedAt'] ?? null,
+                $contributor['lastLogin'] ?? null,
+                $contributor['rolesText'] ?? null,
+                $contributor['consentInternalCommunication'] ?? null,
+                $contributor['enabled'] ?? null,
+                $contributor['isEmailConfirmed'] ?? null,
+                $contributor['locked'] ?? null,
+                $contributor['phoneConfirmed'] ?? null,
+                $contributor['gender'] ?? null,
+                $contributor['dateOfBirth'],
+                $contributor['websiteUrl'] ?? null,
+                $contributor['biography'] ?? null,
+                $contributor['address'] ?? null,
+                $contributor['zipCode'] ?? null,
+                $contributor['city'] ?? null,
+                $contributor['phone'],
+                $contributor['url'] ?? null,
+                $contributor['userIdentificationCode'],
+            ]
+        );
+
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
+        $progress->advance();
     }
 
     private function getContributorsProjectGraphQLQuery(
@@ -186,7 +235,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                         node(id: "{$projectId}") {
                             ... on Project {
                                 slug
-                                contributors(first: 100{$userCursor}) {
+                                contributors(first: 100, orderBy: { field: CREATED_AT, direction: DESC }{$userCursor}) {
                                   totalCount
                                   pageInfo {
                                     startCursor
@@ -196,6 +245,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                                   edges {
                                     cursor
                                     node {
+                                      __typename
                                       {$contributorFragment}
                                       ...on User {
                                         {$userFragment}

@@ -463,36 +463,45 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "Participant",
             "consentInternalCommunication": false,
           },
         },
         Object {
           "node": Object {
+            "__typename": "User",
+            "consentInternalCommunication": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "User",
             "consentInternalCommunication": true,
           },
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "consentInternalCommunication": true,
           },
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "consentInternalCommunication": true,
           },
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "consentInternalCommunication": true,
           },
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "consentInternalCommunication": true,
           },
-        },
-        Object {
-          "node": Object {},
         },
       ],
     },

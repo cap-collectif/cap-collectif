@@ -646,6 +646,25 @@ class ParticipantRepository extends EntityRepository
         return ($qb->getQuery()->getSingleScalarResult() ?? 0) > 0;
     }
 
+    /**
+     * @param array<string> $ids
+     *
+     * @return array<Participant>
+     */
+    public function hydrateFromIds(array $ids): array
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function findWithRepliesQueryBuilder(Project $project, ?QuestionnaireStep $step = null, ?string $term = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('p')

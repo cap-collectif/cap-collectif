@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -35,6 +36,7 @@ class DeleteRepliesMutation implements MutationInterface
         $deletedIds = [];
         $replyIdsToRemoveFromIndex = [];
         $userIdsToReIndex = [];
+        $participantIdsToReIndex = [];
         foreach ($replyGlobalIds as $replyGlobalId) {
             $reply = $this->globalIdResolver->resolve($replyGlobalId);
 
@@ -51,6 +53,11 @@ class DeleteRepliesMutation implements MutationInterface
             $author = $reply->getAuthor();
             if ($author instanceof User) {
                 $userIdsToReIndex[] = $author->getId();
+            }
+
+            $participant = $reply->getParticipant();
+            if ($participant instanceof Participant) {
+                $participantIdsToReIndex[] = $participant->getId();
             }
 
             try {
@@ -79,6 +86,14 @@ class DeleteRepliesMutation implements MutationInterface
                 $this->indexer->index(User::class, $userId);
             } catch (\Throwable $e) {
                 $this->logger->error(sprintf('Error while re-indexing user (id: %s): %s', $userId, $e->getMessage()));
+            }
+        }
+
+        foreach ($participantIdsToReIndex as $participantId) {
+            try {
+                $this->indexer->index(Participant::class, $participantId);
+            } catch (\Throwable $e) {
+                $this->logger->error(sprintf('Error while re-indexing participant (id: %s): %s', $participantId, $e->getMessage()));
             }
         }
         $this->indexer->finishBulk();

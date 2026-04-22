@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Service;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\UserBundle\Entity\User;
@@ -27,6 +28,11 @@ class ReplyCounterIndexer
 
         if ($contributor instanceof User) {
             $this->indexer->index(User::class, $contributor->getId());
+            $this->indexer->finishBulk();
+        }
+
+        if ($contributor instanceof Participant) {
+            $this->indexer->index(Participant::class, $contributor->getId());
             $this->indexer->finishBulk();
         }
     }

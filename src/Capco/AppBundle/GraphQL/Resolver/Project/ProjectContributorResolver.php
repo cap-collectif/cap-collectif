@@ -6,17 +6,10 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\GraphQLRequestedFields;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
-use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Search\UserSearch;
-use Capco\AppBundle\Service\ProjectContributorSearch;
-use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
-use GraphQL\Type\Definition\ResolveInfo;
+use Capco\AppBundle\Search\ContributorSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -26,26 +19,20 @@ use Psr\Log\LoggerInterface;
 
 class ProjectContributorResolver implements QueryInterface
 {
-    use ResolverTrait;
-
     public function __construct(
-        private readonly GraphQLRequestedFields $graphQLRequestedFields,
-        private readonly UserSearch $userSearch,
-        private readonly ProjectContributorSearch $projectContributorSearch,
+        private readonly ContributorSearch $contributorSearch,
         private readonly LoggerInterface $logger,
         private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        private readonly GlobalIdResolver $globalIdResolver,
-        private readonly ParticipantRepository $participantRepository,
-        private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
         private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
     ) {
     }
 
-    public function __invoke(Project $project, ?ResolveInfo $info = null, ?Arg $args = null): ConnectionInterface
+    /**
+     * @param mixed $info GraphQL ResolveInfo (not used, but passed by GraphQL schema)
+     */
+    public function __invoke(Project $project, mixed $info = null, ?Arg $args = null): ConnectionInterface
     {
-        $isOnlyFetchingTotalCount = $info ? $this->graphQLRequestedFields->isOnlyFetchingTotalCount($info) : false;
-
         $totalCount = 0;
         if (!$args) {
             $args = new Arg([
@@ -80,44 +67,18 @@ class ProjectContributorResolver implements QueryInterface
                 $project,
                 $orderBy,
                 $providedFilters,
-                $isOnlyFetchingTotalCount,
                 &$totalCount
             ) {
                 try {
-                    if ($isOnlyFetchingTotalCount) {
-                        $response = $this->userSearch->getContributorByProject(
-                            $project,
-                            $orderBy,
-                            $providedFilters,
-                            0,
-                            $cursor
-                        );
-
-                        $participantsCount = $this->getParticipantsCount(
-                            $project,
-                            $providedFilters['step'],
-                            $providedFilters['term']
-                        );
-                        $debateAnonymousCount = $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject(
-                            $project
-                        );
-
-                        $totalCount = $response->getTotalCount() + $participantsCount + $debateAnonymousCount;
-                        $response->setTotalCount($totalCount);
-
-                        return $response;
-                    }
-
-                    $response = $this->projectContributorSearch->findContributors(
+                    $response = $this->contributorSearch->getContributorsByProject(
                         $project,
-                        $providedFilters,
                         $orderBy,
+                        $providedFilters,
                         $limit,
                         $cursor
                     );
                     $totalCount = $response->getTotalCount()
                         + $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
-                    $response->setTotalCount($totalCount);
 
                     return $response;
                 } catch (\RuntimeException $exception) {
@@ -139,21 +100,6 @@ class ProjectContributorResolver implements QueryInterface
         $connection->setTotalCount($totalCount);
 
         return $connection;
-    }
-
-    private function getParticipantsCount(Project $project, ?string $stepId = null, ?string $term = null): int
-    {
-        $step = $stepId ? $this->globalIdResolver->resolve($stepId) : null;
-
-        if (!$stepId && !$term) {
-            return $this->projectParticipantsTotalCountCacheHandler->updateTotalCount(
-                updateCallable: fn () => $this->participantRepository->countWithContributionsByProject($project),
-                project: $project,
-                conditionCallBack: static fn ($cachedItem): bool => !$cachedItem->isHit()
-            );
-        }
-
-        return $this->participantRepository->countWithContributionsByProject($project, $step, $term);
     }
 
     private function getAnonymousCount(Project $project): int
@@ -179,7 +125,6 @@ class ProjectContributorResolver implements QueryInterface
             }
         }
 
-        // Add debate anonymous votes
         $anonymousCount += $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
 
         return $anonymousCount;

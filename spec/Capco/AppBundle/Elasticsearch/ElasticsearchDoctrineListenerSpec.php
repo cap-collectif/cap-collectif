@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -93,6 +94,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         Reply $reply,
         ValueResponse $response,
+        Participant $participant,
         User $author,
         AbstractResponseRepository $responseRepository
     ): void {
@@ -101,9 +103,11 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $response->getReply()->willReturn($reply);
 
         $author->getId()->willReturn('user1');
+        $participant->getId()->willReturn('participant1');
 
         $reply->getId()->willReturn('reply1');
         $reply->getAuthor()->willReturn($author);
+        $reply->getParticipant()->willReturn($participant);
         $responseRepository->getByReply($reply)->willReturn([$response]);
         $args->getObject()->willReturn($reply);
         $this->handleEvent($args);
@@ -137,10 +141,20 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
                 \JSON_THROW_ON_ERROR
             )
         );
+        $participantMessage = new Message(
+            json_encode(
+                [
+                    'class' => $participant->getWrappedObject()::class,
+                    'id' => 'participant1',
+                ],
+                \JSON_THROW_ON_ERROR
+            )
+        );
 
         $listener->addToMessageStack($replyMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($userMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($responseMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($participantMessage, 1)->shouldBeCalledOnce();
     }
 
     public function it_index_a_project(
@@ -308,16 +322,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         LifecycleEventArgs $args,
         ProposalCollectVote $vote,
         Proposal $proposal,
+        Participant $participant,
         User $voteAuthor
     ): void {
         $proposal->getId()->willReturn('proposal1');
         $proposal->getComments()->willReturn(new ArrayCollection());
 
         $voteAuthor->getId()->willReturn('user1');
+        $participant->getId()->willReturn('participant1');
 
         $vote->getId()->willReturn('proposalCollectVote1');
         $vote->getRelated()->willReturn($proposal);
         $vote->getAuthor()->willReturn($voteAuthor);
+        $vote->getParticipant()->willReturn($participant);
         $args->getObject()->willReturn($vote);
         $this->handleEvent($args);
 
@@ -339,8 +356,15 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
                 'id' => 'user1',
             ])
         );
+        $participantMessage = new Message(
+            (string) json_encode([
+                'class' => $participant->getWrappedObject()::class,
+                'id' => 'participant1',
+            ])
+        );
         $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($voteAuthorMessage, 1)->shouldBeCalledOnce();
+        $listener->addToMessageStack($participantMessage, 1)->shouldBeCalledOnce();
         $listener->addToMessageStack($proposalCollectVoteMessage, 1)->shouldBeCalledOnce();
     }
 

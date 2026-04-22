@@ -46,7 +46,8 @@ const ProjectContributorsConsentQuery = /* GraphQL */ `
         contributors {
           edges {
             node {
-              ... on User {
+              ... on Contributor {
+                __typename
                 consentInternalCommunication
               }
             }
