@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\GroupCreateType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -20,6 +22,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 class GroupMutation implements MutationInterface
 {
     use MutationTrait;
+
+    final public const LAST_RESTRICTED_VIEWER_GROUP = 'LAST_RESTRICTED_VIEWER_GROUP';
 
     public function __construct(
         private readonly LoggerInterface $logger,
@@ -132,6 +136,9 @@ class GroupMutation implements MutationInterface
         if (!$group->isDeletable() && !$isGroupUsedInCampaign) {
             throw new UserError(sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId));
         }
+        if ($this->wouldLeaveCustomProjectsWithoutGroups($group)) {
+            return ['deletedGroupId' => null, 'errorCode' => self::LAST_RESTRICTED_VIEWER_GROUP];
+        }
 
         try {
             $this->entityManager->remove($group);
@@ -143,7 +150,7 @@ class GroupMutation implements MutationInterface
             throw new UserError('Can\'t delete this group.');
         }
 
-        return ['deletedGroupId' => $groupId];
+        return ['deletedGroupId' => $groupId, 'errorCode' => null];
     }
 
     /**
@@ -191,5 +198,20 @@ class GroupMutation implements MutationInterface
         );
 
         $this->entityManager->flush();
+    }
+
+    private function wouldLeaveCustomProjectsWithoutGroups(Group $group): bool
+    {
+        /** @var Project $project */
+        foreach ($group->getProjectsVisibleByTheGroup() as $project) {
+            if (
+                ProjectVisibilityMode::VISIBILITY_CUSTOM === $project->getVisibility()
+                && 1 >= $project->getRestrictedViewerGroups()->count()
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

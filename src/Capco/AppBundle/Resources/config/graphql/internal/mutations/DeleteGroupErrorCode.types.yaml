@@ -1,0 +1,9 @@
+DeleteGroupErrorCode:
+    type: enum
+    config:
+        name: DeleteGroupErrorCode
+        description: 'Available errors for a `deleteGroup` mutation.'
+        values:
+            LAST_RESTRICTED_VIEWER_GROUP:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\GroupMutation::LAST_RESTRICTED_VIEWER_GROUP
+                description: 'The group cannot be deleted because it is the last restricted viewer group of a custom visibility project.'

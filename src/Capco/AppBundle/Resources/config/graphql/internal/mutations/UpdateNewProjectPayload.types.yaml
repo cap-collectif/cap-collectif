@@ -3,4 +3,7 @@ UpdateNewProjectPayload:
     config:
         fields:
             project:
-                type: 'InternalProject!'
+                type: 'InternalProject'
+            errorCode:
+                type: 'UpdateNewProjectErrorCode'
+                description: 'Errors for updateNewProject mutation.'

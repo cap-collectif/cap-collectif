@@ -5926,6 +5926,14 @@ type DeleteGlobalDistrictPayload {
   clientMutationId: String
 }
 
+"""Available errors for a `deleteGroup` mutation."""
+enum DeleteGroupErrorCode {
+  """
+  The group cannot be deleted because it is the last restricted viewer group of a custom visibility project.
+  """
+  LAST_RESTRICTED_VIEWER_GROUP
+}
+
 input DeleteGroupInput {
   """The group id"""
   groupId: ID!
@@ -5933,7 +5941,10 @@ input DeleteGroupInput {
 }
 
 type DeleteGroupPayload {
-  deletedGroupId: ID!
+  deletedGroupId: ID
+
+  """Errors for deleteGroup mutation."""
+  errorCode: DeleteGroupErrorCode
   clientMutationId: String
 }
 
@@ -19825,6 +19836,14 @@ type UpdateMediatorVotesPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `updateNewProject` mutation."""
+enum UpdateNewProjectErrorCode {
+  """
+  A custom visibility project requires at least one restricted viewer group.
+  """
+  NO_GROUP_WHEN_MANDATORY
+}
+
 input UpdateNewProjectInput {
   projectId: ID!
 
@@ -19910,7 +19929,10 @@ input UpdateNewProjectInput {
 }
 
 type UpdateNewProjectPayload {
-  project: Project!
+  project: Project
+
+  """Errors for updateNewProject mutation."""
+  errorCode: UpdateNewProjectErrorCode
   clientMutationId: String
 }
 

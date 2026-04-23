@@ -3,4 +3,7 @@ DeleteGroupPayload:
     config:
         fields:
             deletedGroupId:
-                type: 'ID!'
+                type: 'ID'
+            errorCode:
+                type: 'DeleteGroupErrorCode'
+                description: 'Errors for deleteGroup mutation.'

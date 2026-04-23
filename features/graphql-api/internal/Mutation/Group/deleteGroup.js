@@ -25,7 +25,7 @@ describe('mutations|deleteGroup', () => {
   it('admin should be able to delete a group.', async () => {
     const variables = {
       input: {
-        groupId: 'R3JvdXA6Z3JvdXAy', // group2
+        groupId: 'R3JvdXA6Z3JvdXA0', // group4
       },
     }
     const deleteGroup = await graphql(DeleteGroupMutation, variables, 'internal_admin')

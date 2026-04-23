@@ -39,6 +39,8 @@ class UpdateNewProjectMutation implements MutationInterface
     use HtmlSanitizationHelperTrait;
     use MutationTrait;
 
+    final public const NO_GROUP_WHEN_MANDATORY = 'NO_GROUP_WHEN_MANDATORY';
+
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly LoggerInterface $logger,
@@ -63,6 +65,9 @@ class UpdateNewProjectMutation implements MutationInterface
 
         $this->setAuthors($arguments, $viewer, $project);
         $this->setRestrictedViewerGroups($arguments);
+        if ($this->shouldHaveGroupsButDoesnt($arguments)) {
+            return ['project' => null, 'errorCode' => self::NO_GROUP_WHEN_MANDATORY];
+        }
         $this->setDistricts($arguments, $project);
         $hasDescription = $this->handleDescription($arguments, $project);
         $this->handleSteps($arguments, $project, $viewer, $hasDescription);
@@ -102,7 +107,7 @@ class UpdateNewProjectMutation implements MutationInterface
             throw new BadRequestHttpException('Sorry, please retry.');
         }
 
-        return ['project' => $project];
+        return ['project' => $project, 'errorCode' => null];
     }
 
     public function getProject(string $projectId, User $viewer): Project
@@ -303,5 +308,22 @@ class UpdateNewProjectMutation implements MutationInterface
         }
 
         $project->setIsProposalStepSplitViewEnabled($isProposalStepSplitViewEnabled);
+    }
+
+    /**
+     * @param array<string, mixed> $arguments
+     */
+    private function shouldHaveGroupsButDoesnt(array $arguments): bool
+    {
+        if (
+            !\array_key_exists('visibility', $arguments)
+            || ProjectVisibilityMode::VISIBILITY_CUSTOM !== $arguments['visibility']
+        ) {
+            return false;
+        }
+
+        return !\array_key_exists('restrictedViewerGroups', $arguments)
+            || !\is_array($arguments['restrictedViewerGroups'])
+            || 0 === \count($arguments['restrictedViewerGroups']);
     }
 }

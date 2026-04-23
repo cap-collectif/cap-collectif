@@ -12,6 +12,7 @@ const mutation = graphql`
   mutation DeleteGroupMutation($input: DeleteGroupInput!, $connectionId: [ID!]!) {
     deleteGroup(input: $input) {
       deletedGroupId @deleteEdge(connections: $connectionId)
+      errorCode
     }
   }
 ` as GraphQLTaggedNode

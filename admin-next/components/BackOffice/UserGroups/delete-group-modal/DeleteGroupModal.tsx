@@ -32,24 +32,39 @@ export const DeleteGroupModal: React.FC<Props> = ({
 
   const handleDeleteGroup = async (): Promise<void> => {
     setIsLoading(true)
-    await DeleteGroupMutation.commit({
-      input: { groupId },
-      connectionId: [connectionId],
-    })
-      .then(() => {
-        successToast(intl.formatMessage({ id: 'admin.group-deletion-success' }))
-        setIsLoading(false)
+    try {
+      const response = await DeleteGroupMutation.commit({
+        input: { groupId },
+        connectionId: [connectionId],
       })
-      .catch(() => {
+      const errorCode = (response.deleteGroup as { errorCode?: string | null } | null | undefined)?.errorCode
+
+      if (errorCode === 'LAST_RESTRICTED_VIEWER_GROUP') {
+        mutationErrorToast(intl, intl.formatMessage({ id: 'admin.group.delete.last-restricted-viewer-group' }))
+        refetch({ term })
+
+        return
+      }
+
+      if (errorCode) {
         mutationErrorToast(intl)
-      })
+        refetch({ term })
 
-    setIsLoading(false)
-    refetch({ term })
-    onClose()
+        return
+      }
 
-    if (closeParentModal) {
-      closeParentModal()
+      successToast(intl.formatMessage({ id: 'admin.group-deletion-success' }))
+      refetch({ term })
+      onClose()
+
+      if (closeParentModal) {
+        closeParentModal()
+      }
+    } catch {
+      mutationErrorToast(intl)
+      refetch({ term })
+    } finally {
+      setIsLoading(false)
     }
   }
 

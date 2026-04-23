@@ -1,0 +1,9 @@
+UpdateNewProjectErrorCode:
+    type: enum
+    config:
+        name: UpdateNewProjectErrorCode
+        description: 'Available errors for an `updateNewProject` mutation.'
+        values:
+            NO_GROUP_WHEN_MANDATORY:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateNewProjectMutation::NO_GROUP_WHEN_MANDATORY
+                description: 'A custom visibility project requires at least one restricted viewer group.'

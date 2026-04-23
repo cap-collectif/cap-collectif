@@ -11,6 +11,7 @@ import {
 const mutation = graphql`
   mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
     updateNewProject(input: $input) {
+      errorCode
       project {
         title
         url

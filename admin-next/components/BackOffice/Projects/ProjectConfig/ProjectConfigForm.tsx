@@ -129,10 +129,15 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
   const project = useFragment(FRAGMENT, projectRef)
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const initialValues = React.useMemo(() => getInitialValues(project, intl), [project, intl])
+  const lastSavedRestrictedViewerGroupsRef = React.useRef<FormValues['restrictedViewerGroups']>(
+    initialValues.restrictedViewerGroups.map(group => ({ ...group })),
+  )
+  const isRestoringValuesRef = React.useRef(false)
 
   const methods = useForm<FormValues>({
     mode: 'onChange',
-    defaultValues: getInitialValues(project, intl),
+    defaultValues: initialValues,
     resolver: yupResolver(
       yup.object().shape({
         externalLink: yup.string().when('isExternal', {
@@ -144,7 +149,8 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     ),
   })
 
-  const onSubmit = ({ isExternal, addressText, ...values }: FormValues) => {
+  const onSubmit = (formValues: FormValues) => {
+    const { isExternal, addressText, ...values } = formValues
     setIsSubmitting(true)
     const input = {
       ...values,
@@ -170,7 +176,32 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     }
 
     return UpdateNewProjectMutation.commit({ input })
-      .then(() => {
+      .then(response => {
+        const errorCode = (response.updateNewProject as { errorCode?: string | null } | null | undefined)?.errorCode
+
+        if (errorCode === 'NO_GROUP_WHEN_MANDATORY') {
+          mutationErrorToast(intl, intl.formatMessage({ id: 'admin.group.delete.last-restricted-viewer-group' }))
+          isRestoringValuesRef.current = true
+          setValue(
+            'restrictedViewerGroups',
+            lastSavedRestrictedViewerGroupsRef.current.map(group => ({ ...group })),
+          )
+          setTimeout(() => {
+            isRestoringValuesRef.current = false
+          }, 0)
+          setIsSubmitting(false)
+
+          return
+        }
+
+        if (errorCode) {
+          mutationErrorToast(intl)
+          setIsSubmitting(false)
+
+          return
+        }
+
+        lastSavedRestrictedViewerGroupsRef.current = formValues.restrictedViewerGroups.map(group => ({ ...group }))
         setIsSubmitting(false)
       })
       .catch(e => {
@@ -211,6 +242,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
 
   React.useEffect(() => {
     watch((value, { name }) => {
+      if (isRestoringValuesRef.current) return
       if (
         name === 'visibility' &&
         !value?.restrictedViewerGroups?.length &&
