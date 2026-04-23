@@ -5,7 +5,7 @@ FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$' | grep -
 
 if [ "$FILES" ]; then
     echo "Analyse PHPStan des fichiers PHP modifiés..."
-    php -dmemory_limit=-1 bin/phpstan analyse -c phpstan.neon $FILES
+    docker exec -w /var/www "${DOCKER_PHP_CONTAINER:-capco_application_1}" php -d memory_limit=-1 bin/phpstan analyse -c phpstan.neon $FILES
     if [ $? != 0 ]; then
         echo "PHPStan a détecté des problèmes."
         exit 1

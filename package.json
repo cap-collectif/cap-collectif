@@ -101,8 +101,8 @@
             "prettier --parser yaml --write"
         ],
         "*.php": [
-            "./bin/rector process --config=rector.php",
-            "./bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose",
+            "./scripts/docker-pre-commit-hook.sh ./bin/rector process --config=rector.php",
+            "./scripts/docker-pre-commit-hook.sh ./bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose",
             "./pre-commit-phpstan.sh",
             "git add"
         ],
@@ -111,7 +111,7 @@
             "git add"
         ],
         "*.twig": [
-            "php -d memory_limit=-1 bin/console lint:twig"
+            "./scripts/docker-pre-commit-hook.sh php -d memory_limit=-1 bin/console lint:twig"
         ]
     },
     "bundlewatch": [
