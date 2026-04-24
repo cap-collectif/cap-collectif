@@ -2,47 +2,23 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\PageTranslation;
-use Capco\AppBundle\Repository\SiteParameterRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/pages")
  */
 class PageController extends Controller
 {
-    public function __construct(
-        private readonly SiteParameterRepository $siteParameterRepository,
-        private readonly TranslatorInterface $translator
-    ) {
-    }
-
     /**
      * @Route("/{slug}", name="app_page_show", options={"i18n" = true})
-     * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
-     * @Template("@CapcoApp/Page/show.html.twig")
      */
-    public function showAction(Request $request, ?PageTranslation $pageTranslation = null)
+    public function showAction(): Response
     {
-        $slugCharter = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));
-
-        if (null === $pageTranslation && $request->get('slug') === $slugCharter) {
-            $body = $this->siteParameterRepository->getValue('charter.body', $request->getLocale());
-            if (null === $body) {
-                throw $this->createNotFoundException($this->translator->trans('page.error.not_found', [], 'CapcoAppBundle'));
-            }
-
-            return $this->render('@CapcoApp/Page/charter.html.twig', ['body' => $body]);
-        }
-
-        // Custom pages are rendered by Next.js. Symfony keeps the route only
-        // to preserve URL generation and locale resolution before handing off.
+        // Symfony still owns this route so the rest of the app can generate
+        // locale-aware /pages/{slug} URLs. nginx then forwards this 418
+        // response to the public Next.js app, which renders the page.
         return new Response('', Response::HTTP_I_AM_A_TEAPOT);
     }
 }

@@ -30,6 +30,12 @@ describe('Public Next routes smoke test', () => {
     cy.contains('FAQ FR').should('exist')
   })
 
+  it('renders the charter page', () => {
+    cy.request('/pages/charte').its('status').should('eq', 200)
+    cy.visit('/pages/charte')
+    cy.get('#charter-page', { timeout: 10000 }).should('exist')
+  })
+
   it('renders a project district page', () => {
     cy.request('/project-district/premier-quartier').its('status').should('eq', 200)
     cy.visit('/project-district/premier-quartier')
