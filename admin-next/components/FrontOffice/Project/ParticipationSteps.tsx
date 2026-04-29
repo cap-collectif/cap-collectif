@@ -102,7 +102,7 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey, isWide = fal
   }
 
   return (
-    <Box width="40%" alignSelf="stretch">
+    <Box width={['100%', isWide ? '100%' : '40%']} alignSelf="stretch">
       <Box position={!isWide ? 'sticky' : undefined} top={!isWide ? 0 : undefined} py="lg">
         <Flex alignItems="center" justifyContent={!isWide ? 'center' : 'flex-start'} gap="xs" mb="md">
           <Icon name={CapUIIcon.UserO} size={CapUIIconSize.Xl} color="blue.500" />
@@ -148,7 +148,21 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey, isWide = fal
                         {getStatusTag(state)}
                       </CardCover>
                     ) : null}
-                    <CardContent primaryInfo={title} secondaryInfo={strippedBody ?? undefined} href={url}>
+                    <CardContent
+                      primaryInfo={title}
+                      secondaryInfo={strippedBody ?? undefined}
+                      href={url}
+                      sx={
+                        {
+                          '& .cap-card-primaryInfo ~ div': {
+                            overflow: 'hidden',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 5,
+                            WebkitBoxOrient: 'vertical',
+                          },
+                        } as any
+                      }
+                    >
                       <CardTagList>
                         <Button variant="primary" variantSize="medium" as="span">
                           {state === 'OPENED'

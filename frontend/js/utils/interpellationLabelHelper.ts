@@ -78,23 +78,14 @@ const StepFragment = {
   `,
 }
 type ProposalStep = {
-  readonly form:
-    | {
-        readonly objectType: ProposalFormObjectType
-      }
-    | null
-    | undefined
-  readonly project:
-    | {
-        readonly type:
-          | {
-              readonly title: string
-            }
-          | null
-          | undefined
-      }
-    | null
-    | undefined
+  readonly form?: {
+    readonly objectType: ProposalFormObjectType
+  } | null
+  readonly project?: {
+    readonly type?: {
+      readonly title: string
+    } | null
+  } | null
 }
 export const isInterpellationContextFromProposal = (proposal: Proposal | null | undefined): boolean => {
   return !!(

@@ -24,6 +24,7 @@ import {
 } from '@cap-collectif/ui'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { useIntl } from 'react-intl'
+import useIsMobile from '@shared/hooks/useIsMobile'
 
 const FRAGMENT = graphql`
   fragment ProjectPageEventsTab_project on Project {
@@ -78,6 +79,7 @@ const formatDateRange = (startAt: string | null | undefined, endAt: string | nul
 
 const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
   const intl = useIntl()
+  const isMobile = useIsMobile()
 
   const renderStatusTag = () => {
     if (!event.guestListEnabled) return null
@@ -97,7 +99,7 @@ const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
   const statusTag = renderStatusTag()
 
   return (
-    <Card format="horizontal">
+    <Card format={isMobile ? 'vertical' : 'horizontal'}>
       <CardCover>
         <Box position="relative" width="100%" height="100%">
           {event.media?.url ? (

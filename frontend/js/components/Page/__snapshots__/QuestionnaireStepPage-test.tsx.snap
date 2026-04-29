@@ -900,6 +900,223 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "paperVotesTotalCount",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "opinions",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "OPINION",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"OPINION\\")",
+                                },
+                                Object {
+                                  "alias": "opinionVersions",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "OPINIONVERSION",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"OPINIONVERSION\\")",
+                                },
+                                Object {
+                                  "alias": "sources",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "SOURCE",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"SOURCE\\")",
+                                },
+                                Object {
+                                  "alias": "replies",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "REPLY",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"REPLY\\")",
+                                },
+                                Object {
+                                  "alias": "argument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "ARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"ARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "debateArgument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "DEBATEARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"DEBATEARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "debateAnonymousArgument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "DEBATEANONYMOUSARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"DEBATEANONYMOUSARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "proposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "PROPOSAL",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"PROPOSAL\\")",
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -1168,6 +1385,49 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Questionnaire",
+                                  "kind": "LinkedField",
+                                  "name": "questionnaire",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "multipleRepliesAllowed",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "ReplyConnection",
+                                      "kind": "LinkedField",
+                                      "name": "replies",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "totalCount",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -2507,7 +2767,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e81c023b6670afa14db0dc470d70bab7",
+          "cacheID": "0a196ecd6c557f810f3d15c3b20ac6f6",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2887,6 +3147,34 @@ fragment StepPageHeader_step on Step {
       url
       id
     }
+    votes {
+      totalCount
+    }
+    paperVotesTotalCount
+    opinions: contributions(type: OPINION) {
+      totalCount
+    }
+    opinionVersions: contributions(type: OPINIONVERSION) {
+      totalCount
+    }
+    sources: contributions(type: SOURCE) {
+      totalCount
+    }
+    replies: contributions(type: REPLY) {
+      totalCount
+    }
+    argument: contributions(type: ARGUMENT) {
+      totalCount
+    }
+    debateArgument: contributions(type: DEBATEARGUMENT) {
+      totalCount
+    }
+    debateAnonymousArgument: contributions(type: DEBATEANONYMOUSARGUMENT) {
+      totalCount
+    }
+    proposals: contributions(type: PROPOSAL) {
+      totalCount
+    }
     id
   }
   eventsFuture: events(orderBy: {field: START_AT, direction: DESC}, isFuture: true) {
@@ -2939,6 +3227,13 @@ fragment StepPageHeader_step on Step {
   ... on QuestionnaireStep {
     contributors {
       totalCount
+    }
+    questionnaire {
+      multipleRepliesAllowed
+      replies {
+        totalCount
+      }
+      id
     }
   }
   ... on DebateStep {
@@ -3908,6 +4203,223 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                   ],
                                   "storageKey": null,
                                 },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "paperVotesTotalCount",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "opinions",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "OPINION",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"OPINION\\")",
+                                },
+                                Object {
+                                  "alias": "opinionVersions",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "OPINIONVERSION",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"OPINIONVERSION\\")",
+                                },
+                                Object {
+                                  "alias": "sources",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "SOURCE",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"SOURCE\\")",
+                                },
+                                Object {
+                                  "alias": "replies",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "REPLY",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"REPLY\\")",
+                                },
+                                Object {
+                                  "alias": "argument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "ARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"ARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "debateArgument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "DEBATEARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"DEBATEARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "debateAnonymousArgument",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "DEBATEANONYMOUSARGUMENT",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"DEBATEANONYMOUSARGUMENT\\")",
+                                },
+                                Object {
+                                  "alias": "proposals",
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "type",
+                                      "value": "PROPOSAL",
+                                    },
+                                  ],
+                                  "concreteType": "ContributionConnection",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "contributions(type:\\"PROPOSAL\\")",
+                                },
                               ],
                               "storageKey": null,
                             },
@@ -4176,6 +4688,49 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Questionnaire",
+                                  "kind": "LinkedField",
+                                  "name": "questionnaire",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "multipleRepliesAllowed",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "ReplyConnection",
+                                      "kind": "LinkedField",
+                                      "name": "replies",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "totalCount",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
                                       "storageKey": null,
                                     },
                                   ],
@@ -5515,7 +6070,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "e81c023b6670afa14db0dc470d70bab7",
+          "cacheID": "0a196ecd6c557f810f3d15c3b20ac6f6",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -5895,6 +6450,34 @@ fragment StepPageHeader_step on Step {
       url
       id
     }
+    votes {
+      totalCount
+    }
+    paperVotesTotalCount
+    opinions: contributions(type: OPINION) {
+      totalCount
+    }
+    opinionVersions: contributions(type: OPINIONVERSION) {
+      totalCount
+    }
+    sources: contributions(type: SOURCE) {
+      totalCount
+    }
+    replies: contributions(type: REPLY) {
+      totalCount
+    }
+    argument: contributions(type: ARGUMENT) {
+      totalCount
+    }
+    debateArgument: contributions(type: DEBATEARGUMENT) {
+      totalCount
+    }
+    debateAnonymousArgument: contributions(type: DEBATEANONYMOUSARGUMENT) {
+      totalCount
+    }
+    proposals: contributions(type: PROPOSAL) {
+      totalCount
+    }
     id
   }
   eventsFuture: events(orderBy: {field: START_AT, direction: DESC}, isFuture: true) {
@@ -5947,6 +6530,13 @@ fragment StepPageHeader_step on Step {
   ... on QuestionnaireStep {
     contributors {
       totalCount
+    }
+    questionnaire {
+      multipleRepliesAllowed
+      replies {
+        totalCount
+      }
+      id
     }
   }
   ... on DebateStep {

@@ -3,7 +3,22 @@ import { FormattedMessage } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import RemainingTime from '~/components/Utils/RemainingTime'
 import DatesInterval from '~/components/Utils/DatesInterval'
-import type { StepPageHeader_step$key } from '~relay/StepPageHeader_step.graphql'
+import type { StepPageHeader_step$data, StepPageHeader_step$key } from '~relay/StepPageHeader_step.graphql'
+
+type _Project = NonNullable<StepPageHeader_step$data['project']>
+
+export type VotesTooltipData = {
+  numeric: _Project['votes']['totalCount']
+  paper: _Project['paperVotesTotalCount']
+}
+
+export type ContributionsTooltipData = {
+  opinions: _Project['opinions']['totalCount']
+  opinionVersions: _Project['opinionVersions']['totalCount']
+  arguments: _Project['argument']['totalCount']
+  sources: _Project['sources']['totalCount']
+  replies: _Project['replies']['totalCount']
+}
 import BodyInfos from '~/components/Ui/Boxes/BodyInfos'
 import { isInterpellationContextFromStep, isOpinionFormStep } from '~/utils/interpellationLabelHelper'
 import StepPageHeaderContainer from './StepPageHeader.style'
@@ -28,6 +43,34 @@ const FRAGMENT = graphql`
       slug
       cover {
         url
+      }
+      votes {
+        totalCount
+      }
+      paperVotesTotalCount
+      opinions: contributions(type: OPINION) {
+        totalCount
+      }
+      opinionVersions: contributions(type: OPINIONVERSION) {
+        totalCount
+      }
+      sources: contributions(type: SOURCE) {
+        totalCount
+      }
+      replies: contributions(type: REPLY) {
+        totalCount
+      }
+      argument: contributions(type: ARGUMENT) {
+        totalCount
+      }
+      debateArgument: contributions(type: DEBATEARGUMENT) {
+        totalCount
+      }
+      debateAnonymousArgument: contributions(type: DEBATEANONYMOUSARGUMENT) {
+        totalCount
+      }
+      proposals: contributions(type: PROPOSAL) {
+        totalCount
       }
     }
     eventsFuture: events(orderBy: { field: START_AT, direction: DESC }, isFuture: true) {
@@ -68,6 +111,12 @@ const FRAGMENT = graphql`
       contributors {
         totalCount
       }
+      questionnaire {
+        multipleRepliesAllowed
+        replies {
+          totalCount
+        }
+      }
     }
     ... on DebateStep {
       contributors {
@@ -81,20 +130,67 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
   const new_page_project = useFeatureFlag('new_project_page')
 
   if (new_page_project) {
-    const votesCount = step.__typename === 'ConsultationStep' ? (step.votes?.totalCount ?? null) : null
+    const isSelectionStepVotable =
+      step.__typename === 'SelectionStep' && step.votable === true && step.canDisplayBallot === true
+
+    // Votes: ConsultationStep uses step-level votes; SelectionStep (votable) uses project-level votes
+    const numericVotesCount =
+      step.__typename === 'ConsultationStep'
+        ? step.votes?.totalCount ?? 0
+        : isSelectionStepVotable
+        ? step.project?.votes?.totalCount ?? 0
+        : 0
+    const paperVotesCount = isSelectionStepVotable ? step.project?.paperVotesTotalCount ?? 0 : 0
+    const votesCount =
+      step.__typename === 'ConsultationStep'
+        ? step.votes?.totalCount ?? null
+        : isSelectionStepVotable
+        ? numericVotesCount + paperVotesCount
+        : null
+
+    // Contributions: ConsultationStep total contributions; CollectStep/SelectionStep (non-votable) proposals
     const contributionsCount =
       step.__typename === 'ConsultationStep'
-        ? (step.contributions?.totalCount ?? null)
-        : step.__typename === 'CollectStep' || step.__typename === 'SelectionStep'
-        ? (step.allProposals?.totalCount ?? null)
+        ? step.contributions?.totalCount ?? null
+        : step.__typename === 'CollectStep' || (step.__typename === 'SelectionStep' && !isSelectionStepVotable)
+        ? step.allProposals?.totalCount ?? null
         : null
+
     const participantsCount =
       step.__typename === 'ConsultationStep' ||
       step.__typename === 'CollectStep' ||
       step.__typename === 'SelectionStep' ||
       step.__typename === 'QuestionnaireStep' ||
       step.__typename === 'DebateStep'
-        ? (step.contributors?.totalCount ?? null)
+        ? step.contributors?.totalCount ?? null
+        : null
+
+    // Replies: QuestionnaireStep only, when multipleRepliesAllowed
+    const repliesCount =
+      step.__typename === 'QuestionnaireStep' && step.questionnaire?.multipleRepliesAllowed
+        ? step.questionnaire.replies?.totalCount ?? null
+        : null
+
+    // Tooltip for ConsultationStep contributions breakdown (project-level per type)
+    const { project } = step
+    const contributionsTooltipData =
+      step.__typename === 'ConsultationStep' && project
+        ? {
+            opinions: (project.opinions?.totalCount ?? 0) + (project.proposals?.totalCount ?? 0),
+            opinionVersions: project.opinionVersions?.totalCount ?? 0,
+            arguments:
+              (project.argument?.totalCount ?? 0) +
+              (project.debateArgument?.totalCount ?? 0) +
+              (project.debateAnonymousArgument?.totalCount ?? 0),
+            sources: project.sources?.totalCount ?? 0,
+            replies: project.replies?.totalCount ?? 0,
+          }
+        : null
+
+    // Tooltip for SelectionStep votes breakdown (numeric vs paper)
+    const votesTooltipData =
+      isSelectionStepVotable && (numericVotesCount > 0 || paperVotesCount > 0)
+        ? { numeric: numericVotesCount, paper: paperVotesCount }
         : null
 
     return (
@@ -109,7 +205,10 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
         votesCount={votesCount}
         contributionsCount={contributionsCount}
         participantsCount={participantsCount}
+        repliesCount={repliesCount}
         eventsCount={step.eventsFuture?.totalCount ?? 0}
+        contributionsTooltipData={contributionsTooltipData}
+        votesTooltipData={votesTooltipData}
       />
     )
   }

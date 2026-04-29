@@ -31,7 +31,7 @@ const ProjectPageCustomTab: React.FC<Props> = ({ project: projectRef, activeTab 
   const tab = project.tabs.find(t => t.id === activeTab)
 
   return (
-    <Box maxWidth={pxToRem(1280)} mx="auto" px={['md', 'lg']} py="xl">
+    <Box maxWidth={pxToRem(1280)} mx="auto" px={['md', 'lg']} py="xl" color="text.primary">
       <WYSIWYGRender value={(tab && 'body' in tab ? tab.body : null) ?? ''} />
     </Box>
   )

@@ -21,28 +21,31 @@ import {
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
+import { isTabVisible } from './ProjectTabs.utils'
 
 const FRAGMENT = graphql`
   fragment ProjectPageTabsMobile_project on Project {
-    steps {
+    tabs {
       id
+      slug
       title
-      __typename
       enabled
-      body
-      events(first: 100) {
-        edges {
-          node {
-            id
-            title
-            url
-          }
+      type
+      ... on ProjectTabPresentation {
+        body
+      }
+      ... on ProjectTabCustom {
+        body
+      }
+      ... on ProjectTabNews {
+        news {
+          id
+          title
+          url
         }
       }
-    }
-    posts(first: 100) {
-      edges {
-        node {
+      ... on ProjectTabEvents {
+        events {
           id
           title
           url
@@ -84,6 +87,7 @@ const TabSection: React.FC<TabSectionProps> = ({ title, hasViewMore, previewCont
             size={CapUIModalSize.Md}
             fullSizeOnMobile
             ariaLabel={title}
+            alwaysOpenInPortal
             disclosure={
               <Button variant="tertiary" rightIcon={CapUIIcon.LongArrowRight}>
                 {intl.formatMessage({ id: 'global.more' })}
@@ -92,10 +96,12 @@ const TabSection: React.FC<TabSectionProps> = ({ title, hasViewMore, previewCont
           >
             {({ hide }) => (
               <>
-                <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+                <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })} p="lg">
                   <Heading>{title}</Heading>
                 </Modal.Header>
-                <Modal.Body>{modalContent}</Modal.Body>
+                <Modal.Body p="lg" mt="lg">
+                  {modalContent}
+                </Modal.Body>
                 <Modal.Footer>
                   <Button variant="primary" variantColor="primary" variantSize="big" onClick={hide} width="100%">
                     {intl.formatMessage({ id: 'global.back' })}
@@ -111,6 +117,19 @@ const TabSection: React.FC<TabSectionProps> = ({ title, hasViewMore, previewCont
   )
 }
 
+const WYSIWYGModalContent = ({ body }) => (
+  <Box overflow="hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}>
+    <WYSIWYGRender value={body ?? ''} />
+  </Box>
+)
+const EventsPostsModalContent = ({ items }) => (
+  <Flex direction="column" gap="md">
+    {items.map(item => (
+      <ItemCardCompact key={item.id} item={item} />
+    ))}
+  </Flex>
+)
+
 type Props = {
   project: ProjectPageTabsMobile_project$key
 }
@@ -119,60 +138,55 @@ const ProjectPageTabsMobile: React.FC<Props> = ({ project: projectRef }) => {
   const intl = useIntl()
   const project = useFragment(FRAGMENT, projectRef)
 
-  const enabledSteps = project.steps.filter(s => s.enabled)
-  const posts = project.posts.edges?.flatMap(edge => (edge?.node ? [edge.node] : [])) ?? []
-  const allEvents = project.steps.flatMap(
-    step => step.events.edges?.flatMap(edge => (edge?.node ? [edge.node] : [])) ?? [],
-  )
+  const visibleTabs = project.tabs.filter(isTabVisible)
+
+  if (visibleTabs.length === 0) return null
 
   return (
-    <Flex direction="column" gap="md" px="md" py="lg">
-      {enabledSteps.map(step => {
-        const bodyPreview = (
-          <Box overflow="hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}>
-            <WYSIWYGRender value={step.body ?? ''} />
-          </Box>
-        )
+    <Flex direction="column" gap="md" px="md" py="lg" width="100%">
+      {visibleTabs.map(tab => {
+        if (tab.type === 'EVENTS' && (!tab.events || tab.events.length === 0)) return null
+        if (tab.type === 'NEWS' && (!tab.news || tab.news.length === 0)) return null
+
+        const title =
+          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM'
+            ? tab.title
+            : tab.type === 'EVENTS'
+            ? intl.formatMessage({ id: 'global.events' })
+            : intl.formatMessage({ id: 'global.news' })
+
+        const hasViewMore =
+          !!tab.body || (tab.type === 'NEWS' && tab.news.length > 1) || (tab.type === 'EVENTS' && tab.events.length > 1)
+
+        const previewContent =
+          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM' ? (
+            <Box
+              overflow="hidden"
+              style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}
+              color="text.primary"
+            >
+              <WYSIWYGRender value={tab.body ?? ''} />
+            </Box>
+          ) : (
+            <ItemCardCompact item={tab.type === 'EVENTS' ? tab.events[0] : tab.news[0]} />
+          )
+        const modalContent =
+          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM' ? (
+            <WYSIWYGModalContent body={tab.body} />
+          ) : (
+            <EventsPostsModalContent items={tab.type === 'EVENTS' ? tab.events : tab.news} />
+          )
+
         return (
           <TabSection
-            key={step.id}
-            title={step.title}
-            hasViewMore={!!step.body}
-            previewContent={bodyPreview}
-            modalContent={<WYSIWYGRender value={step.body ?? ''} />}
+            key={tab.id}
+            title={title}
+            hasViewMore={hasViewMore}
+            previewContent={previewContent}
+            modalContent={modalContent}
           />
         )
       })}
-
-      {allEvents.length > 0 && (
-        <TabSection
-          title={intl.formatMessage({ id: 'global.events' })}
-          hasViewMore={allEvents.length >= 2}
-          previewContent={allEvents[0] ? <ItemCardCompact item={allEvents[0]} /> : null}
-          modalContent={
-            <Flex direction="column" gap="md">
-              {allEvents.map(event => (
-                <ItemCardCompact key={event.id} item={event} />
-              ))}
-            </Flex>
-          }
-        />
-      )}
-
-      {posts.length > 0 && (
-        <TabSection
-          title={intl.formatMessage({ id: 'menu.news' })}
-          hasViewMore={posts.length >= 2}
-          previewContent={posts[0] ? <ItemCardCompact item={posts[0]} /> : null}
-          modalContent={
-            <Flex direction="column" gap="md">
-              {posts.map(post => (
-                <ItemCardCompact key={post.id} item={post} />
-              ))}
-            </Flex>
-          }
-        />
-      )}
     </Flex>
   )
 }

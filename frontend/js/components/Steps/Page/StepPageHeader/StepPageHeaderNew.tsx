@@ -6,6 +6,7 @@ import {
   CapUIFontSize,
   CapUIIcon,
   CapUIIconSize,
+  CapUILineHeight,
   CapUIModalSize,
   CardCoverPlaceholder,
   Flex,
@@ -14,8 +15,10 @@ import {
   Modal,
   Tag,
   Text,
+  Tooltip,
 } from '@cap-collectif/ui'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
+import type { ContributionsTooltipData, VotesTooltipData } from './StepPageHeader'
 
 type StepState = 'OPENED' | 'CLOSED' | 'FUTURE'
 
@@ -33,7 +36,10 @@ type Props = {
   votesCount?: number | null
   contributionsCount?: number | null
   participantsCount?: number | null
+  repliesCount?: number | null
   eventsCount?: number
+  contributionsTooltipData?: ContributionsTooltipData | null
+  votesTooltipData?: VotesTooltipData | null
 }
 
 const StepPageHeaderNew: React.FC<Props> = ({
@@ -47,7 +53,10 @@ const StepPageHeaderNew: React.FC<Props> = ({
   votesCount,
   contributionsCount,
   participantsCount,
+  repliesCount,
   eventsCount = 0,
+  contributionsTooltipData,
+  votesTooltipData,
 }) => {
   const intl = useIntl()
   const bodyRef = React.useRef<HTMLDivElement>(null)
@@ -194,20 +203,142 @@ const StepPageHeaderNew: React.FC<Props> = ({
             {/* Counters */}
             <Flex direction="row" wrap="wrap" gap={4} align="center">
               {votesCount !== null && votesCount !== undefined && (
-                <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
-                  <Icon name={CapUIIcon.ThumbUp} size={CapUIIconSize.Sm} color="text.secondary" />
-                  <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
-                    {intl.formatNumber(votesCount)} {intl.formatMessage({ id: 'global.vote' })}
-                  </Text>
-                </Flex>
+                votesTooltipData && (votesTooltipData.numeric > 0 || votesTooltipData.paper > 0) ? (
+                  <Tooltip
+                    label={
+                      <Box padding={1} textAlign="center">
+                        {votesTooltipData.numeric > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage({ id: 'numeric-votes-count' }, { num: votesTooltipData.numeric })}
+                          </Text>
+                        )}
+                        {votesTooltipData.paper > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage({ id: 'paper-votes-count' }, { num: votesTooltipData.paper })}
+                          </Text>
+                        )}
+                      </Box>
+                    }
+                  >
+                    <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
+                      <Icon name={CapUIIcon.ThumbUp} size={CapUIIconSize.Sm} color="text.secondary" />
+                      <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                        {intl.formatNumber(votesCount)} {intl.formatMessage({ id: 'global.vote' })}
+                      </Text>
+                    </Flex>
+                  </Tooltip>
+                ) : (
+                  <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
+                    <Icon name={CapUIIcon.ThumbUp} size={CapUIIconSize.Sm} color="text.secondary" />
+                    <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                      {intl.formatNumber(votesCount)} {intl.formatMessage({ id: 'global.vote' })}
+                    </Text>
+                  </Flex>
+                )
               )}
               {contributionsCount !== null && contributionsCount !== undefined && (
-                <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
-                  <Icon name={CapUIIcon.BubbleO} size={CapUIIconSize.Sm} color="text.secondary" />
-                  <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
-                    {intl.formatNumber(contributionsCount)} {intl.formatMessage({ id: 'global.contribution' })}
-                  </Text>
-                </Flex>
+                contributionsTooltipData &&
+                (contributionsTooltipData.opinions > 0 ||
+                  contributionsTooltipData.opinionVersions > 0 ||
+                  contributionsTooltipData.arguments > 0 ||
+                  contributionsTooltipData.sources > 0 ||
+                  contributionsTooltipData.replies > 0) ? (
+                  <Tooltip
+                    label={
+                      <Box padding={1} textAlign="center">
+                        {contributionsTooltipData.opinions > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage(
+                              { id: 'proposal-count' },
+                              { count: contributionsTooltipData.opinions },
+                            )}
+                          </Text>
+                        )}
+                        {contributionsTooltipData.opinionVersions > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage(
+                              { id: 'amendment-count' },
+                              { count: contributionsTooltipData.opinionVersions },
+                            )}
+                          </Text>
+                        )}
+                        {contributionsTooltipData.arguments > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage(
+                              { id: 'argument-count' },
+                              { count: contributionsTooltipData.arguments },
+                            )}
+                          </Text>
+                        )}
+                        {contributionsTooltipData.sources > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage(
+                              { id: 'source-count' },
+                              { count: contributionsTooltipData.sources },
+                            )}
+                          </Text>
+                        )}
+                        {contributionsTooltipData.replies > 0 && (
+                          <Text
+                            textAlign="center"
+                            lineHeight={CapUILineHeight.S}
+                            fontSize={CapUIFontSize.Caption}
+                            marginBottom={0}
+                          >
+                            {intl.formatMessage(
+                              { id: 'answer-count' },
+                              { count: contributionsTooltipData.replies },
+                            )}
+                          </Text>
+                        )}
+                      </Box>
+                    }
+                  >
+                    <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
+                      <Icon name={CapUIIcon.BubbleO} size={CapUIIconSize.Sm} color="text.secondary" />
+                      <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                        {intl.formatNumber(contributionsCount)} {intl.formatMessage({ id: 'global.contribution' })}
+                      </Text>
+                    </Flex>
+                  </Tooltip>
+                ) : (
+                  <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
+                    <Icon name={CapUIIcon.BubbleO} size={CapUIIconSize.Sm} color="text.secondary" />
+                    <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                      {intl.formatNumber(contributionsCount)} {intl.formatMessage({ id: 'global.contribution' })}
+                    </Text>
+                  </Flex>
+                )
               )}
               {participantsCount !== null && participantsCount !== undefined && (
                 <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
@@ -215,6 +346,14 @@ const StepPageHeaderNew: React.FC<Props> = ({
                   <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
                     {intl.formatNumber(participantsCount)}{' '}
                     {intl.formatMessage({ id: 'project.show.meta.info.contributors' })}
+                  </Text>
+                </Flex>
+              )}
+              {repliesCount !== null && repliesCount !== undefined && (
+                <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
+                  <Icon name={CapUIIcon.FileO} size={CapUIIconSize.Sm} color="text.secondary" />
+                  <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                    {intl.formatNumber(repliesCount)} {intl.formatMessage({ id: 'reply.count_no_nb' }, { count: repliesCount })}
                   </Text>
                 </Flex>
               )}

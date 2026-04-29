@@ -14,6 +14,8 @@ import ProjectPageTabsMobile from './ProjectPageTabsMobile'
 import { useQueryState } from 'nuqs'
 import ParticipationSteps from './ParticipationSteps'
 import { pxToRem } from '@shared/utils/pxToRem'
+import useWindowWidth from '@shared/hooks/useWindowWidth'
+import { isTabVisible } from './ProjectTabs.utils'
 
 type Props = {
   project: ProjectPageLayout_project$key
@@ -55,17 +57,12 @@ const QUERY_FRAGMENT = graphql`
   }
 `
 
-const isTabVisible = (tab: { enabled: boolean; news?: ReadonlyArray<unknown>; events?: ReadonlyArray<unknown> }) => {
-  if (!tab.enabled) return false
-  if (tab.news !== undefined) return tab.news.length > 0
-  if (tab.events !== undefined) return tab.events.length > 0
-  return true
-}
-
 // Refonte page projet (#19461)
 const ProjectPageLayout: React.FC<Props> = ({ project, query: queryKey }) => {
   const data = useFragment(FRAGMENT, project)
   const queryData = useFragment(QUERY_FRAGMENT, queryKey)
+
+  const { width } = useWindowWidth()
 
   const visibleTabs = data.tabs.filter(isTabVisible)
   const firstTabId = visibleTabs[0]?.id ?? ''
@@ -84,8 +81,16 @@ const ProjectPageLayout: React.FC<Props> = ({ project, query: queryKey }) => {
     <Box>
       <ProjectPageHero project={data} query={queryData} />
       {/* Desktop: sticky tab bar + tab content */}
-      <Box display={['none', 'block']}>
-        <Flex gap="xl" alignItems="flex-start" maxWidth={pxToRem(1280)} width="100%" margin="auto" px="lg">
+      <Flex
+        gap="xl"
+        alignItems="flex-start"
+        maxWidth={pxToRem(1280)}
+        flexWrap={['wrap', 'nowrap']}
+        width="100%"
+        margin="auto"
+        px={['md', 'lg']}
+      >
+        {visibleTabs.length > 0 && width >= 768 && (
           <Box flex="1">
             <ProjectPageTabBar
               project={data}
@@ -94,14 +99,10 @@ const ProjectPageLayout: React.FC<Props> = ({ project, query: queryKey }) => {
             />
             {renderTabContent()}
           </Box>
-          <ParticipationSteps project={data} />
-        </Flex>
-      </Box>
-      {/* Mobile: sections as panels with "View more" modals */}
-      <Box display={['block', 'none']}>
-        <ParticipationSteps project={data} />
-        <ProjectPageTabsMobile project={data} />
-      </Box>
+        )}
+        <ParticipationSteps project={data} isWide={visibleTabs.length === 0} />
+        {width <= 767 && <ProjectPageTabsMobile project={data} />}
+      </Flex>
     </Box>
   )
 }
