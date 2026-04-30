@@ -15,6 +15,7 @@ const mutation = graphql`
       project {
         title
         url
+        stepDisplayType
       }
     }
   }

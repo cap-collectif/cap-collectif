@@ -132,74 +132,67 @@ const ProjectPageHero: React.FC<Props> = ({ project: projectKey, query: queryKey
   }
 
   return (
-    <Box backgroundColor="white" as="header" role="banner">
-      <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" p="md">
-        <Card format={isMobile ? 'vertical' : 'horizontal'}>
-          <CardCover>
-            {cover?.url ? (
-              <CardCoverImage
-                {...getSrcSet(cover.url)}
-                alt=""
-                loading="eager"
-                sizes="(max-width: 640px) 640px, 960px"
-              />
-            ) : (
-              <CardCoverPlaceholder icon={CapUIIcon.FolderO} color="primary.base" />
+    <Box backgroundColor="white" as="header" role="banner" maxWidth={pxToRem(1280)} width="100%" margin="auto">
+      <Card format={isMobile ? 'vertical' : 'horizontal'} sx={{ '.cap-card-content': { justifyContent: 'center' } }}>
+        <CardCover>
+          {cover?.url ? (
+            <CardCoverImage {...getSrcSet(cover.url)} alt="" loading="eager" sizes="(max-width: 640px) 640px, 960px" />
+          ) : (
+            <CardCoverPlaceholder icon={CapUIIcon.FolderO} color="primary.base" sx={{ aspectRatio: '3/2' }} />
+          )}
+          {renderStatusTag()}
+        </CardCover>
+        <CardContent primaryInfo={title} primaryInfoTag="h1">
+          {/* Stats (votes, contributions, participants) */}
+          <ProjectPageHeroStats project={project} />
+
+          {/* Location, themes, authors */}
+          <CardTagList>
+            {address?.formatted && (
+              <Tag transparent variantColor="infoGray" px={0}>
+                <Tag.LeftIcon name={CapUIIcon.PinO} />
+                <Tag.Label>{address.formatted}</Tag.Label>
+              </Tag>
             )}
-            {renderStatusTag()}
-          </CardCover>
-          <CardContent primaryInfo={title} primaryInfoTag="h1">
-            {/* Stats (votes, contributions, participants) */}
-            <ProjectPageHeroStats project={project} />
-
-            {/* Location, themes, authors */}
-            <CardTagList>
-              {address?.formatted && (
-                <Tag transparent variantColor="infoGray" px={0}>
+            {districts?.edges?.map(edge =>
+              edge?.node ? (
+                <Tag key={edge.node.id} transparent variantColor="infoGray" px={0}>
                   <Tag.LeftIcon name={CapUIIcon.PinO} />
-                  <Tag.Label>{address.formatted}</Tag.Label>
+                  <Tag.Label>{edge.node.name}</Tag.Label>
                 </Tag>
-              )}
-              {districts?.edges?.map(edge =>
-                edge?.node ? (
-                  <Tag key={edge.node.id} transparent variantColor="infoGray" px={0}>
-                    <Tag.LeftIcon name={CapUIIcon.PinO} />
-                    <Tag.Label>{edge.node.name}</Tag.Label>
-                  </Tag>
-                ) : null,
-              )}
-              {themes?.map(theme => (
-                <Tag key={theme.id} transparent variantColor="infoGray" px={0}>
-                  <Tag.LeftIcon name={CapUIIcon.FolderO} />
-                  <Tag.Label>{theme.title}</Tag.Label>
-                </Tag>
-              ))}
-              {authors?.map(author => (
-                <Tag key={author.id} transparent variantColor="infoGray" px={0}>
-                  <Avatar
-                    size="xs"
-                    name={author.username ?? ''}
-                    src={(author as any).media?.url || defaultAvatar?.media?.url}
-                    mr={1}
-                  />
-                  <Tag.Label>
-                    {profiles || author.__typename === 'Organization' ? (
-                      <Box as="a" href={author.url} color="primary.darker">
-                        {author.username}
-                      </Box>
-                    ) : (
-                      author.username
-                    )}
-                  </Tag.Label>
-                </Tag>
-              ))}
-            </CardTagList>
+              ) : null,
+            )}
+            {themes?.map(theme => (
+              <Tag key={theme.id} transparent variantColor="infoGray" px={0}>
+                <Tag.LeftIcon name={CapUIIcon.FolderO} />
+                <Tag.Label>{theme.title}</Tag.Label>
+              </Tag>
+            ))}
+            {authors?.map(author => (
+              <Tag key={author.id} transparent variantColor="infoGray" px={0}>
+                <Avatar
+                  size="xs"
+                  name={author.username ?? ''}
+                  src={(author as any).media?.url || defaultAvatar?.media?.url}
+                  mr={1}
+                />
+                <Tag.Label>
+                  {profiles || author.__typename === 'Organization' ? (
+                    <Box as="a" href={author.url} color="primary.darker">
+                      {author.username}
+                    </Box>
+                  ) : (
+                    author.username
+                  )}
+                </Tag.Label>
+              </Tag>
+            ))}
+          </CardTagList>
 
-            {/* Social sharing */}
-            <ShareButtons url={url} title={title} position="relative" marginTop={0} />
-          </CardContent>
-        </Card>
-      </Box>
+          {/* Social sharing */}
+          <ShareButtons url={url} title={title} position="relative" marginTop={0} />
+        </CardContent>
+      </Card>
     </Box>
   )
 }

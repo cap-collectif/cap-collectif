@@ -11,6 +11,8 @@ import CreateCustomProjectTabMutation from '@mutations/CreateCustomProjectTabMut
 import UpdateCustomProjectTabMutation from '@mutations/UpdateCustomProjectTabMutation'
 import UpdateEventsProjectTabMutation from '@mutations/UpdateEventsProjectTabMutation'
 import UpdateNewsProjectTabMutation from '@mutations/UpdateNewsProjectTabMutation'
+import { EventsTabContent_tab$key } from '@relay/EventsTabContent_tab.graphql'
+import { NewsTabContent_tab$key } from '@relay/NewsTabContent_tab.graphql'
 import UpdatePresentationProjectTabMutation from '@mutations/UpdatePresentationProjectTabMutation'
 import DeleteProjectTabMutation from '@mutations/DeleteProjectTabMutation'
 import ReorderProjectTabsMutation from '@mutations/ReorderProjectTabsMutation'
@@ -18,7 +20,7 @@ import DraggableTab from './DraggableTab'
 import NewsTabContent from './NewsTabContent'
 import EventsTabContent from './EventsTabContent'
 import { parseAsString, useQueryState } from 'nuqs'
-import { Tab, Edge } from './types'
+import { SavedValues, Edge } from './types'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
@@ -31,17 +33,30 @@ const FRAGMENT = graphql`
     id
     tabs {
       id
-      title
       slug
-      enabled
       type
       position
+      title
+      enabled
       ... on ProjectTabCustom {
         body
       }
       ... on ProjectTabPresentation {
         body
       }
+      ... on ProjectTabEvents {
+        events {
+          id
+        }
+        ...EventsTabContent_tab
+      }
+      ... on ProjectTabNews {
+        news {
+          id
+        }
+        ...NewsTabContent_tab
+      }
+      ...DraggableTab_tab
     }
   }
 `
@@ -53,17 +68,28 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   const { setSaving } = useNavBarContext()
   const project = useFragment(FRAGMENT, projectRef)
 
-  const initialTabs = React.useMemo(
-    () => [...(project.tabs ?? [])].sort((a, b) => a.position - b.position) as Tab[],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+  // Display order of tab IDs — drives drag-and-drop optimistically while project.tabs is the Relay source of truth.
+  const [tabOrder, setTabOrder] = React.useState<string[]>(() =>
+    [...(project.tabs ?? [])].sort((a, b) => a.position - b.position).map(t => t.id),
   )
 
-  const [tabs, setTabs] = React.useState<Tab[]>(initialTabs)
-  const [activeTabSlug, setActiveTabSlug] = useQueryState('tab', parseAsString.withDefault(initialTabs[0]?.slug ?? ''))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const initialSlug = React.useMemo(() => [...(project.tabs ?? [])].sort((a, b) => a.position - b.position)[0]?.slug ?? '', [])
+  const [activeTabSlug, setActiveTabSlug] = useQueryState('tab', parseAsString.withDefault(initialSlug))
+
   const [tabContents, setTabContents] = React.useState<Record<string, string>>(() =>
-    Object.fromEntries(initialTabs.filter(t => (t as any).body != null).map(t => [t.id, (t as any).body as string])),
+    Object.fromEntries(
+      (project.tabs ?? []).filter(t => (t as any).body != null).map(t => [t.id, (t as any).body as string]),
+    ),
   )
+
+  // Relay fragment refs and data indexed by tab id — updates when project.tabs changes via store updaters.
+  const tabMap = React.useMemo(
+    () => Object.fromEntries((project.tabs ?? []).map(t => [t.id, t])),
+    [project.tabs],
+  )
+
+  const [isAddingTab, setIsAddingTab] = React.useState(false)
 
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = React.useState(false)
@@ -92,6 +118,7 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   React.useEffect(() => {
     return monitorForElements({
       onDrop: ({ source, location }) => {
+        if (source.data.type !== 'tab') return
         const destination = location.current.dropTargets[0]
         if (!destination) return
 
@@ -103,31 +130,31 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
         if (sourceIndex < newIndex) newIndex -= 1
         if (sourceIndex === newIndex) return
 
-        const reordered = [...tabs]
+        const reordered = [...tabOrder]
         const [moved] = reordered.splice(sourceIndex, 1)
         reordered.splice(newIndex, 0, moved)
-        setTabs(reordered)
+        setTabOrder(reordered)
 
         ReorderProjectTabsMutation.commit({
-          input: { projectId: project.id, tabIds: reordered.map(t => t.id) },
+          input: { projectId: project.id, tabIds: reordered },
         }).catch(() => {
-          setTabs(tabs)
+          setTabOrder(tabOrder)
           mutationErrorToast(intl)
         })
       },
     })
-  }, [tabs, project.id, intl])
+  }, [tabOrder, project.id, intl])
 
-  const activeTab = tabs.find(t => t.slug === activeTabSlug) ?? tabs[0]
+  const activeTab = tabMap[tabOrder.find(id => tabMap[id]?.slug === activeTabSlug) ?? tabOrder[0]]
   const isWysiwyg = activeTab?.type === 'PRESENTATION' || activeTab?.type === 'CUSTOM'
 
   const activeTabRef = React.useRef(activeTab)
   activeTabRef.current = activeTab
 
   const debouncedSaveBody = React.useRef(
-    debounce(async (_tab: Tab, body: string) => {
+    debounce(async (body: string) => {
       const tab = activeTabRef.current
-      if (!tab || tab.id.startsWith('temp-')) return
+      if (!tab) return
       setSaving(true)
       try {
         if (tab.type === 'CUSTOM') {
@@ -150,69 +177,94 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   const handleAddTab = async () => {
     const title = intl.formatMessage({ id: 'back.project.tab.new' })
     const baseSlug = 'nouvel-onglet'
-    const existingSlugs = new Set(tabs.map(t => t.slug))
+    const existingSlugs = new Set((project.tabs ?? []).map(t => t.slug))
     let slug = baseSlug
     let i = 2
     while (existingSlugs.has(slug)) {
       slug = `${baseSlug}-${i++}`
     }
 
-    const tempId = `temp-${Date.now()}`
-    const tempTab: Tab = {
-      id: tempId,
-      title,
-      slug,
-      enabled: false,
-      type: 'CUSTOM',
-      position: tabs.length,
-    }
-    setTabs(prev => [...prev, tempTab])
-    setActiveTabSlug(slug)
-
+    setIsAddingTab(true)
     try {
-      const result = await CreateCustomProjectTabMutation.commit({
-        input: { projectId: project.id, title, slug, enabled: false },
-      })
+      const result = await CreateCustomProjectTabMutation.commit(
+        { input: { projectId: project.id, title, slug, enabled: false } },
+        {
+          updater: store => {
+            const payload = store.getRootField('createCustomProjectTab')
+            const newTab = payload?.getLinkedRecord('projectTab')
+            if (!newTab) return
+            const projectRecord = store.get(project.id)
+            if (!projectRecord) return
+            const currentTabs = projectRecord.getLinkedRecords('tabs') ?? []
+            projectRecord.setLinkedRecords([...currentTabs, newTab], 'tabs')
+          },
+        },
+      )
       const created = result.createCustomProjectTab?.projectTab
+      const errorCode = result.createCustomProjectTab?.errorCode
+      if (errorCode) {
+        mutationErrorToast(intl)
+        return
+      }
       if (created) {
-        setTabs(prev => prev.map(t => (t.id === tempId ? { ...t, id: created.id } : t)))
+        setTabOrder(prev => [...prev, created.id])
         setActiveTabSlug(created.slug)
+        requestAnimationFrame(() => {
+          const el = scrollRef.current
+          if (el) el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' })
+        })
       }
     } catch {
-      setTabs(prev => prev.filter(t => t.id !== tempId))
-      setActiveTabSlug(tabs[0]?.slug ?? null)
       mutationErrorToast(intl)
+    } finally {
+      setIsAddingTab(false)
     }
   }
 
-  const handleSaved = async (updated: Tab) => {
-    const body = tabContents[updated.id] ?? ''
+  const handleSaved = async ({ id, title, slug, enabled }: SavedValues) => {
+    const tab = tabMap[id]
+    if (!tab) return
+    const body = tabContents[id] ?? ''
     try {
-      switch (updated.type) {
+      switch (tab.type) {
         case 'CUSTOM':
           await UpdateCustomProjectTabMutation.commit({
-            input: { tabId: updated.id, title: updated.title, slug: updated.slug, enabled: updated.enabled, body },
+            input: { tabId: id, title, slug, enabled, body },
           })
           break
         case 'PRESENTATION':
           await UpdatePresentationProjectTabMutation.commit({
-            input: { tabId: updated.id, title: updated.title, slug: updated.slug, enabled: updated.enabled, body },
+            input: { tabId: id, title, slug, enabled, body },
           })
           break
         case 'EVENTS':
           await UpdateEventsProjectTabMutation.commit({
-            input: { tabId: updated.id, title: updated.title, slug: updated.slug, enabled: updated.enabled },
+            input: {
+              tabId: id,
+              title,
+              slug,
+              enabled,
+              eventItems: ((tabMap[id] as any).events ?? []).map((e: any, i: number) => ({ id: e.id, position: i + 1 })),
+            },
           })
           break
         case 'NEWS':
           await UpdateNewsProjectTabMutation.commit({
-            input: { tabId: updated.id, title: updated.title, slug: updated.slug, enabled: updated.enabled },
+            input: {
+              tabId: id,
+              title,
+              slug,
+              enabled,
+              newsItems: ((tabMap[id] as any).news ?? []).map((n: any, i: number) => ({ id: n.id, position: i + 1 })),
+            },
           })
           break
         default:
           break
       }
-      setTabs(prev => prev.map(t => (t.id === updated.id ? updated : t)))
+      // Relay updates project.tabs automatically via store normalization.
+      // Sync active slug in case the user renamed it.
+      if (tab.slug === activeTabSlug) setActiveTabSlug(slug)
     } catch {
       mutationErrorToast(intl)
     }
@@ -220,10 +272,25 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
 
   const handleDeleted = async (tabId: string) => {
     try {
-      await DeleteProjectTabMutation.commit({ input: { tabId } })
-      const remaining = tabs.filter(t => t.id !== tabId)
-      setTabs(remaining)
-      setActiveTabSlug(remaining[0]?.slug ?? null)
+      await DeleteProjectTabMutation.commit(
+        { input: { tabId } },
+        {
+          updater: store => {
+            const projectRecord = store.get(project.id)
+            if (!projectRecord) return
+            const currentTabs = projectRecord.getLinkedRecords('tabs') ?? []
+            projectRecord.setLinkedRecords(
+              currentTabs.filter(t => t.getDataID() !== tabId),
+              'tabs',
+            )
+          },
+        },
+      )
+      const remaining = tabOrder.filter(id => id !== tabId)
+      setTabOrder(remaining)
+      if (tabMap[tabId]?.slug === activeTabSlug) {
+        setActiveTabSlug(tabMap[remaining[0]]?.slug ?? null)
+      }
     } catch {
       mutationErrorToast(intl)
     }
@@ -266,17 +333,21 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
               '&::-webkit-scrollbar': { display: 'none' },
             }}
           >
-            {tabs.map((tab, index) => (
-              <DraggableTab
-                key={tab.id}
-                tab={tab}
-                index={index}
-                isActive={tab.slug === activeTabSlug}
-                onSelect={slug => setActiveTabSlug(slug)}
-                onSaved={handleSaved}
-                onDeleted={handleDeleted}
-              />
-            ))}
+            {tabOrder.map((id, index) => {
+              const tabRef = tabMap[id]
+              if (!tabRef) return null
+              return (
+                <DraggableTab
+                  key={id}
+                  tab={tabRef}
+                  index={index}
+                  isActive={tabRef.slug === activeTabSlug}
+                  onSelect={slug => setActiveTabSlug(slug)}
+                  onSaved={handleSaved}
+                  onDeleted={handleDeleted}
+                />
+              )
+            })}
           </Flex>
           {canScrollRight && (
             <Box
@@ -298,7 +369,14 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
               <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} />
             </Box>
           )}
-          <Button variant="tertiary" leftIcon={CapUIIcon.Add} onClick={handleAddTab} type="button">
+          <Button
+            variant="tertiary"
+            leftIcon={CapUIIcon.Add}
+            onClick={handleAddTab}
+            type="button"
+            isLoading={isAddingTab}
+            disabled={tabOrder.length >= 10 || isAddingTab}
+          >
             {intl.formatMessage({ id: 'back.project.tab.add' })}
           </Button>
         </Flex>
@@ -312,14 +390,14 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
               value={tabContents[activeTab?.id] ?? ''}
               onChange={value => {
                 setTabContents(prev => ({ ...prev, [activeTab.id]: value }))
-                debouncedSaveBody(activeTab, value)
+                debouncedSaveBody(value)
               }}
               platformLanguage="fr"
             />
           ) : activeTab?.type === 'NEWS' ? (
-            <NewsTabContent />
+            <NewsTabContent tab={activeTab as unknown as NewsTabContent_tab$key} />
           ) : activeTab?.type === 'EVENTS' ? (
-            <EventsTabContent />
+            <EventsTabContent tab={activeTab as unknown as EventsTabContent_tab$key} />
           ) : null}
         </Box>
       </Flex>

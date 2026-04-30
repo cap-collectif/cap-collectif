@@ -32,6 +32,8 @@ abstract class AbstractProjectTabPersister
     public const INVALID_EVENT_ITEMS = 'INVALID_EVENT_ITEMS';
     public const INVALID_TAB_TYPE = 'INVALID_TAB_TYPE';
     public const INVALID_REORDER = 'INVALID_REORDER';
+    public const TAB_LIMIT_REACHED = 'TAB_LIMIT_REACHED';
+    public const MAX_TABS = 10;
 
     public function __construct(
         protected readonly EntityManagerInterface $em,

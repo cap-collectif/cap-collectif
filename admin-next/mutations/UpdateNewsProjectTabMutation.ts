@@ -18,6 +18,12 @@ const mutation = graphql`
         enabled
         type
         position
+        ... on ProjectTabNews {
+          news {
+            id
+            title
+          }
+        }
       }
       errorCode
     }

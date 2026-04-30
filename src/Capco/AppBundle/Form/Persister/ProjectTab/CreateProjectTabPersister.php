@@ -22,6 +22,10 @@ class CreateProjectTabPersister extends AbstractProjectTabPersister
             return ['projectTab' => null, 'errorCode' => self::PROJECT_NOT_FOUND];
         }
 
+        if (\count($project->getTabs()) >= self::MAX_TABS) {
+            return ['projectTab' => null, 'errorCode' => self::TAB_LIMIT_REACHED];
+        }
+
         /** @var ProjectTab $projectTab */
         $projectTab = new $projectTabClass();
         $projectTab

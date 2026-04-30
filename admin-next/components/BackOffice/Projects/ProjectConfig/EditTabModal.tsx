@@ -20,19 +20,33 @@ import {
 } from '@cap-collectif/ui'
 import { useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { EditTabModal_tab$key } from '@relay/EditTabModal_tab.graphql'
+import { SavedValues } from './ProjectConfigFormTabs/types'
 
-type Tab = {
-  id: string
-  title: string
-  slug: string
-  enabled: boolean
-  type: string
-  position: number
-}
+const titleToSlug = (title: string): string =>
+  title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 255) || 'onglet'
+
+const FRAGMENT = graphql`
+  fragment EditTabModal_tab on ProjectTab {
+    id
+    title
+    slug
+    enabled
+    type
+    position
+  }
+`
 
 type Props = {
-  tab: Tab
-  onSaved: (updated: Tab) => Promise<void>
+  tab: EditTabModal_tab$key
+  onSaved: (values: SavedValues) => Promise<void>
   onDeleted: (tabId: string) => Promise<void>
 }
 
@@ -108,8 +122,10 @@ const PopoverPanel = ({ anchorRef, onClose, children }: PopoverPanelProps) => {
   )
 }
 
-const EditTabPopover = ({ tab, onSaved, onDeleted }: Props) => {
+const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
   const intl = useIntl()
+  const tab = useFragment(FRAGMENT, tabRef)
+
   const [open, setOpen] = React.useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false)
   const anchorRef = React.useRef<HTMLSpanElement>(null)
@@ -137,8 +153,9 @@ const EditTabPopover = ({ tab, onSaved, onDeleted }: Props) => {
 
   const onSubmit = async (formValues: FormValues) => {
     setIsSubmitting(true)
+    const slug = formValues.title !== tab.title ? titleToSlug(formValues.title) : tab.slug
     try {
-      await onSaved({ ...tab, title: formValues.title, enabled: formValues.enabled })
+      await onSaved({ id: tab.id, title: formValues.title, slug, enabled: formValues.enabled })
       toast({ content: intl.formatMessage({ id: 'global.saved' }), variant: 'success' })
       closePopover()
     } finally {
@@ -185,22 +202,28 @@ const EditTabPopover = ({ tab, onSaved, onDeleted }: Props) => {
                       />
                     </Flex>
                   </Flex>
-                  <Flex justify="space-between" gap="md" width="100%">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      variantColor="danger"
-                      leftIcon={CapUIIcon.Trash}
-                      isLoading={isDeleting}
-                      disabled={isSubmitting || isDeleting}
-                      onClick={e => {
-                        e.stopPropagation()
-                        closePopover()
-                        setDeleteModalOpen(true)
-                      }}
-                    >
-                      {intl.formatMessage({ id: 'global.delete' })}
-                    </Button>
+                  <Flex
+                    justify={tab.type === 'NEWS' || tab.type === 'EVENTS' ? 'flex-end' : 'space-between'}
+                    gap="md"
+                    width="100%"
+                  >
+                    {tab.type !== 'NEWS' && tab.type !== 'EVENTS' && (
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        variantColor="danger"
+                        leftIcon={CapUIIcon.Trash}
+                        isLoading={isDeleting}
+                        disabled={isSubmitting || isDeleting}
+                        onClick={e => {
+                          e.stopPropagation()
+                          closePopover()
+                          setDeleteModalOpen(true)
+                        }}
+                      >
+                        {intl.formatMessage({ id: 'global.delete' })}
+                      </Button>
+                    )}
                     <Button
                       type="submit"
                       variant="primary"

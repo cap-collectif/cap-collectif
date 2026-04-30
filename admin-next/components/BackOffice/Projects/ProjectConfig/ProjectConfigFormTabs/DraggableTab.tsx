@@ -1,60 +1,47 @@
 import * as React from 'react'
-import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
-import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
-import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine'
+import { graphql, useFragment } from 'react-relay'
+import { DraggableTab_tab$key } from '@relay/DraggableTab_tab.graphql'
 import TabItem from './TabItem'
-import { Tab, Edge } from './types'
+import { Edge, SavedValues } from './types'
+import useDraggableElement from './useDraggableElement'
+
+const FRAGMENT = graphql`
+  fragment DraggableTab_tab on ProjectTab {
+    id
+    ...TabItem_tab
+  }
+`
 
 type DraggableTabProps = {
-  tab: Tab
+  tab: DraggableTab_tab$key
   index: number
   isActive: boolean
-  onSelect: (id: string) => void
-  onSaved: (updated: Tab) => Promise<void>
+  onSelect: (slug: string) => void
+  onSaved: (values: SavedValues) => Promise<void>
   onDeleted: (tabId: string) => Promise<void>
 }
 
-const DraggableTab: React.FC<DraggableTabProps> = ({ tab, index, isActive, onSelect, onSaved, onDeleted }) => {
-  const tabRef = React.useRef<HTMLDivElement>(null)
+const DraggableTab: React.FC<DraggableTabProps> = ({ tab: tabRef, index, isActive, onSelect, onSaved, onDeleted }) => {
+  const tab = useFragment(FRAGMENT, tabRef)
+
+  const elementRef = React.useRef<HTMLDivElement>(null)
   const dragHandleRef = React.useRef<HTMLSpanElement>(null)
-  const [dropEdge, setDropEdge] = React.useState<Edge | null>(null)
 
-  React.useEffect(() => {
-    const el = tabRef.current
-    const handle = dragHandleRef.current
-    if (!el && !isActive) return
-
-    const cleanups: Array<() => void> = [
-      dropTargetForElements({
-        element: el,
-        getData: ({ input }) =>
-          attachClosestEdge({ id: tab.id, index }, { input, element: el, allowedEdges: ['left', 'right'] }),
-        onDragEnter: ({ self }) => setDropEdge(extractClosestEdge(self.data) as Edge),
-        onDrag: ({ self }) => setDropEdge(extractClosestEdge(self.data) as Edge),
-        onDragLeave: () => setDropEdge(null),
-        onDrop: () => setDropEdge(null),
-      }),
-    ]
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element: el,
-          dragHandle: handle,
-          getInitialData: () => ({ id: tab.id, index }),
-        }),
-      )
-    }
-
-    return combine(...cleanups)
-  }, [tab.id, index, isActive])
+  const { dropEdge } = useDraggableElement({
+    id: tab.id,
+    index,
+    type: 'tab',
+    allowedEdges: ['left', 'right'],
+    elementRef,
+    handleRef: dragHandleRef,
+  })
 
   return (
-    <div ref={tabRef}>
+    <div ref={elementRef}>
       <TabItem
         tab={tab}
         isActive={isActive}
-        dropEdge={dropEdge}
+        dropEdge={dropEdge as Edge | null}
         onSelect={onSelect}
         onSaved={onSaved}
         onDeleted={onDeleted}

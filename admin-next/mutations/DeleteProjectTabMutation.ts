@@ -1,7 +1,7 @@
 import { graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
-import { GraphQLTaggedNode } from 'relay-runtime'
+import { GraphQLTaggedNode, MutationConfig } from 'relay-runtime'
 import type {
   DeleteProjectTabMutation,
   DeleteProjectTabMutation$variables,
@@ -17,10 +17,14 @@ const mutation = graphql`
   }
 ` as GraphQLTaggedNode
 
-const commit = (variables: DeleteProjectTabMutation$variables): Promise<DeleteProjectTabMutation$data> =>
+const commit = (
+  variables: DeleteProjectTabMutation$variables,
+  config?: Partial<MutationConfig<DeleteProjectTabMutation>>,
+): Promise<DeleteProjectTabMutation$data> =>
   commitMutation<DeleteProjectTabMutation>(environment, {
     mutation,
     variables,
+    ...config,
   })
 
 export default { commit }

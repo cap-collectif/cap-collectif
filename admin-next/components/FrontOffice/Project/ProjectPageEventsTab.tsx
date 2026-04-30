@@ -28,32 +28,31 @@ import useIsMobile from '@shared/hooks/useIsMobile'
 
 const FRAGMENT = graphql`
   fragment ProjectPageEventsTab_project on Project {
-    steps {
-      events(first: 100) {
-        edges {
-          node {
+    tabs {
+      id
+      ... on ProjectTabEvents {
+        events {
+          id
+          title
+          url
+          timeRange {
+            startAt
+            endAt
+          }
+          googleMapsAddress {
+            formatted
+          }
+          themes {
             id
             title
-            url
-            timeRange {
-              startAt
-              endAt
-            }
-            googleMapsAddress {
-              formatted
-            }
-            themes {
-              id
-              title
-            }
-            media {
-              url
-            }
-            guestListEnabled
-            isEventRegistrationComplete
-            isMeasurable
-            availableRegistration
           }
+          media {
+            url
+          }
+          guestListEnabled
+          isEventRegistrationComplete
+          isMeasurable
+          availableRegistration
         }
       }
     }
@@ -62,11 +61,10 @@ const FRAGMENT = graphql`
 
 type Props = {
   project: ProjectPageEventsTab_project$key
+  activeTab: string
 }
 
-type EventNode = NonNullable<
-  NonNullable<ProjectPageEventsTab_project$data['steps'][number]['events']['edges']>[number]
->['node']
+type EventNode = NonNullable<ProjectPageEventsTab_project$data['tabs'][number]['events']>[number]
 
 const formatDateRange = (startAt: string | null | undefined, endAt: string | null | undefined): string => {
   if (!startAt) return ''
@@ -140,9 +138,10 @@ const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
   )
 }
 
-const ProjectPageEventsTab: React.FC<Props> = ({ project: projectRef }) => {
+const ProjectPageEventsTab: React.FC<Props> = ({ project: projectRef, activeTab }) => {
   const data = useFragment(FRAGMENT, projectRef)
-  const events = data.steps.flatMap(step => step.events.edges?.flatMap(edge => (edge?.node ? [edge.node] : [])) ?? [])
+  const tab = data.tabs.find(t => t.id === activeTab)
+  const events = (tab?.events ?? []) as ReadonlyArray<EventNode>
 
   return (
     <Box maxWidth={pxToRem(1280)} mx="auto" px={['md', 'lg']} py="xl">

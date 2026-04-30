@@ -26,3 +26,5 @@ ProjectTabMutationErrorCode:
                 value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_TAB_TYPE
             INVALID_REORDER:
                 value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::INVALID_REORDER
+            TAB_LIMIT_REACHED:
+                value: !php/const Capco\AppBundle\Form\Persister\ProjectTab\AbstractProjectTabPersister::TAB_LIMIT_REACHED

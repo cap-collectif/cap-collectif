@@ -29,11 +29,13 @@ import { getSrcSet } from '@shared/ui/Image'
 
 type Props = {
   project: ParticipationSteps_project$key
-  isWide?: boolean
 }
 
 const FRAGMENT = graphql`
   fragment ParticipationSteps_project on Project {
+    tabs {
+      enabled
+    }
     stepDisplayType
     steps {
       id
@@ -54,9 +56,11 @@ const FRAGMENT = graphql`
   }
 `
 
-const ParticipationSteps: React.FC<Props> = ({ project: projectKey, isWide = false }) => {
+const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
   const project = useFragment(FRAGMENT, projectKey)
   const intl = useIntl()
+
+  const isWide = project.tabs.filter(tab => tab.enabled).length === 0
 
   const showStepsOrder = project.stepDisplayType === 'NUMBERED_LIST'
 

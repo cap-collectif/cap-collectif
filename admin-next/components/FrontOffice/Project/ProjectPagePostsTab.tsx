@@ -24,9 +24,10 @@ import { pxToRem } from '@shared/utils/pxToRem'
 
 const FRAGMENT = graphql`
   fragment ProjectPagePostsTab_project on Project {
-    posts(first: 100) {
-      edges {
-        node {
+    tabs {
+      id
+      ... on ProjectTabNews {
+        news {
           id
           title
           url
@@ -47,9 +48,10 @@ const FRAGMENT = graphql`
 
 type Props = {
   project: ProjectPagePostsTab_project$key
+  activeTab: string
 }
 
-type PostNode = NonNullable<NonNullable<ProjectPagePostsTab_project$data['posts']['edges']>[number]>['node']
+type PostNode = NonNullable<ProjectPagePostsTab_project$data['tabs'][number]['news']>[number]
 
 const PostCard: React.FC<{ post: PostNode }> = ({ post }) => {
   const date = post.publishedAt
@@ -87,9 +89,10 @@ const PostCard: React.FC<{ post: PostNode }> = ({ post }) => {
   )
 }
 
-const ProjectPagePostsTab: React.FC<Props> = ({ project: projectRef }) => {
+const ProjectPagePostsTab: React.FC<Props> = ({ project: projectRef, activeTab }) => {
   const data = useFragment(FRAGMENT, projectRef)
-  const posts = data.posts.edges?.flatMap(edge => (edge?.node ? [edge.node] : [])) ?? []
+  const tab = data.tabs.find(t => t.id === activeTab)
+  const posts = (tab?.news ?? []) as ReadonlyArray<PostNode>
 
   return (
     <Box maxWidth={pxToRem(1280)} mx="auto" px={['md', 'lg']} py="xl">

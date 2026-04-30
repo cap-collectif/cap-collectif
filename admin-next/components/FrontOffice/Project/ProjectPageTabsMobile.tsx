@@ -13,6 +13,7 @@ import {
   Card,
   CardContent,
   CardCover,
+  CardCoverImage,
   CardCoverPlaceholder,
   Flex,
   Heading,
@@ -31,6 +32,7 @@ const FRAGMENT = graphql`
       title
       enabled
       type
+      __typename
       ... on ProjectTabPresentation {
         body
       }
@@ -42,6 +44,9 @@ const FRAGMENT = graphql`
           id
           title
           url
+          media {
+            url
+          }
         }
       }
       ... on ProjectTabEvents {
@@ -49,18 +54,25 @@ const FRAGMENT = graphql`
           id
           title
           url
+          media {
+            url
+          }
         }
       }
     }
   }
 `
 
-type CompactItem = { id: string; title: string; url: string }
+type CompactItem = { id: string; title: string; url: string; media?: { url: string } | null }
 
 const ItemCardCompact: React.FC<{ item: CompactItem }> = ({ item }) => (
   <Card format="horizontal">
     <CardCover>
-      <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" />
+      {item.media?.url ? (
+        <CardCoverImage src={item.media.url} />
+      ) : (
+        <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" />
+      )}
     </CardCover>
     <CardContent primaryInfo={item.title} href={item.url} />
   </Card>
@@ -117,11 +129,34 @@ const TabSection: React.FC<TabSectionProps> = ({ title, hasViewMore, previewCont
   )
 }
 
-const WYSIWYGModalContent = ({ body }) => (
-  <Box overflow="hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}>
-    <WYSIWYGRender value={body ?? ''} />
-  </Box>
-)
+const WYSIWYGTabSection: React.FC<{ title: string; body: string | null | undefined }> = ({ title, body }) => {
+  const clampRef = React.useRef<HTMLDivElement>(null)
+  const [hasViewMore, setHasViewMore] = React.useState(false)
+
+  React.useEffect(() => {
+    const el = clampRef.current
+    if (el) setHasViewMore(el.scrollHeight > el.clientHeight)
+  }, [body])
+
+  return (
+    <TabSection
+      title={title}
+      hasViewMore={hasViewMore}
+      previewContent={
+        <Box color="text.primary">
+          <div
+            ref={clampRef}
+            style={{ overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}
+          >
+            <WYSIWYGRender value={body ?? ''} />
+          </div>
+        </Box>
+      }
+      modalContent={<WYSIWYGRender value={body ?? ''} />}
+    />
+  )
+}
+
 const EventsPostsModalContent = ({ items }) => (
   <Flex direction="column" gap="md">
     {items.map(item => (
@@ -135,8 +170,8 @@ type Props = {
 }
 
 const ProjectPageTabsMobile: React.FC<Props> = ({ project: projectRef }) => {
-  const intl = useIntl()
   const project = useFragment(FRAGMENT, projectRef)
+  const intl = useIntl()
 
   const visibleTabs = project.tabs.filter(isTabVisible)
 
@@ -148,42 +183,25 @@ const ProjectPageTabsMobile: React.FC<Props> = ({ project: projectRef }) => {
         if (tab.type === 'EVENTS' && (!tab.events || tab.events.length === 0)) return null
         if (tab.type === 'NEWS' && (!tab.news || tab.news.length === 0)) return null
 
+        if (tab.type === 'PRESENTATION' || tab.type === 'CUSTOM') {
+          return <WYSIWYGTabSection key={tab.id} title={tab.title} body={tab.body} />
+        }
+
         const title =
-          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM'
-            ? tab.title
-            : tab.type === 'EVENTS'
+          tab.type === 'EVENTS'
             ? intl.formatMessage({ id: 'global.events' })
             : intl.formatMessage({ id: 'global.news' })
 
         const hasViewMore =
-          !!tab.body || (tab.type === 'NEWS' && tab.news.length > 1) || (tab.type === 'EVENTS' && tab.events.length > 1)
-
-        const previewContent =
-          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM' ? (
-            <Box
-              overflow="hidden"
-              style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 6 }}
-              color="text.primary"
-            >
-              <WYSIWYGRender value={tab.body ?? ''} />
-            </Box>
-          ) : (
-            <ItemCardCompact item={tab.type === 'EVENTS' ? tab.events[0] : tab.news[0]} />
-          )
-        const modalContent =
-          tab.type === 'PRESENTATION' || tab.type === 'CUSTOM' ? (
-            <WYSIWYGModalContent body={tab.body} />
-          ) : (
-            <EventsPostsModalContent items={tab.type === 'EVENTS' ? tab.events : tab.news} />
-          )
+          (tab.type === 'NEWS' && tab.news.length > 1) || (tab.type === 'EVENTS' && tab.events.length > 1)
 
         return (
           <TabSection
             key={tab.id}
             title={title}
             hasViewMore={hasViewMore}
-            previewContent={previewContent}
-            modalContent={modalContent}
+            previewContent={<ItemCardCompact item={tab.type === 'EVENTS' ? tab.events[0] : tab.news[0]} />}
+            modalContent={<EventsPostsModalContent items={tab.type === 'EVENTS' ? tab.events : tab.news} />}
           />
         )
       })}

@@ -10,20 +10,34 @@ import {
   Icon,
   Text,
 } from '@cap-collectif/ui'
+import { graphql, useFragment } from 'react-relay'
+import { TabItem_tab$key } from '@relay/TabItem_tab.graphql'
 import EditTabPopover from '../EditTabModal'
-import { Tab, Edge } from './types'
+import { Edge, SavedValues } from './types'
+
+const FRAGMENT = graphql`
+  fragment TabItem_tab on ProjectTab {
+    id
+    title
+    slug
+    enabled
+    ...EditTabModal_tab
+  }
+`
 
 type TabItemProps = {
-  tab: Tab
+  tab: TabItem_tab$key
   isActive: boolean
   dropEdge: Edge | null
-  onSelect: (id: string) => void
-  onSaved: (updated: Tab) => Promise<void>
+  onSelect: (slug: string) => void
+  onSaved: (values: SavedValues) => Promise<void>
   onDeleted: (tabId: string) => Promise<void>
   dragHandleRef: React.RefObject<HTMLSpanElement>
 }
 
-const TabItem: React.FC<TabItemProps> = ({ tab, isActive, dropEdge, onSelect, onSaved, onDeleted, dragHandleRef }) => {
+const TabItem: React.FC<TabItemProps> = ({ tab: tabRef, isActive, dropEdge, onSelect, onSaved, onDeleted, dragHandleRef }) => {
+  const tab = useFragment(FRAGMENT, tabRef)
+
   return (
     <Flex
       align="center"

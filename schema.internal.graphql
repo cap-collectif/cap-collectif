@@ -12382,6 +12382,7 @@ enum ProjectTabMutationErrorCode {
   INVALID_EVENT_ITEMS
   INVALID_TAB_TYPE
   INVALID_REORDER
+  TAB_LIMIT_REACHED
 }
 
 """A configurable tab displayed on the project page."""

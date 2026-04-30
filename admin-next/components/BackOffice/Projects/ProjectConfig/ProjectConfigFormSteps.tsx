@@ -105,7 +105,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                       id: 'global.edit',
                     })}
                     onClick={() => {
-                      window.location.href += `/update-step/${getStepUri(stepsValues[index].__typename)}/${
+                      window.location.href = `${window.location.pathname}/update-step/${getStepUri(stepsValues[index].__typename)}/${
                         stepsValues[index].id
                       }`
                     }}
@@ -315,7 +315,7 @@ const ProjectConfigFormSteps: React.FC = () => {
             <Button
               variant="secondary"
               leftIcon={CapUIIcon.Add}
-              onClick={() => (window.location.href += '/create-step')}
+              onClick={() => (window.location.href = `${window.location.pathname}/create-step`)}
               ml="auto"
             >
               {intl.formatMessage({ id: 'global.add' })}
@@ -335,7 +335,7 @@ const ProjectConfigFormSteps: React.FC = () => {
             <Button
               variant="secondary"
               leftIcon={CapUIIcon.Add}
-              onClick={() => (window.location.href += '/create-step')}
+              onClick={() => (window.location.href = `${window.location.pathname}/create-step`)}
             >
               {intl.formatMessage({ id: 'global.add' })}
             </Button>
