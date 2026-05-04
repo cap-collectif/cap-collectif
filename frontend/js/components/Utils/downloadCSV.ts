@@ -5,7 +5,15 @@ import saveAs from '@shared/utils/filesaver'
 const downloadCSV = async (url: string, intl: IntlShape) => {
   const response = await fetch(url)
 
-  if (response.ok) {
+  if (response.status === 202) {
+    const { errorTranslationKey } = await response.json()
+    toast({
+      variant: 'info',
+      content: intl.formatMessage({
+        id: errorTranslationKey,
+      }),
+    })
+  } else if (response.ok) {
     const contentDisposition = response.headers.get('content-disposition')
     let filename = ''
 

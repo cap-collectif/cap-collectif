@@ -42,7 +42,7 @@ class OpinionArgumentNormalizer extends BaseNormalizer implements NormalizerInte
             self::EXPORT_CONTRIBUTION_ARGUMENTS_ID => $object->getId(),
             self::EXPORT_CONTRIBUTION_ARGUMENTS_RELATED_ID => $object->getOpinion()->getId(),
             self::EXPORT_CONTRIBUTION_ARGUMENTS_AUTHOR_ID => $author ? $author->getId() : null,
-            self::EXPORT_CONTRIBUTION_ARGUMENTS_TYPE => $object->getType(),
+            self::EXPORT_CONTRIBUTION_ARGUMENTS_TYPE => $this->translator->trans($object->getTypeAsString()),
             self::EXPORT_CONTRIBUTION_ARGUMENTS_BODY => $object->getBody(),
             self::EXPORT_CONTRIBUTION_ARGUMENTS_URL => $this->argumentUrlResolver->__invoke($object),
         ];

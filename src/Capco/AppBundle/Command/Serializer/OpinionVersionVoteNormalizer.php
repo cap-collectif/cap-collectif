@@ -39,6 +39,7 @@ class OpinionVersionVoteNormalizer extends BaseNormalizer implements NormalizerI
 
         $opinionVersionVoteArray = [
             self::EXPORT_CONTRIBUTION_VOTES_ID => $object->getId(),
+            self::EXPORT_CONTRIBUTION_VOTES_RELATED_ID => $object->getRelated()->getId(),
             self::EXPORT_CONTRIBUTION_VOTES_AUTHOR_ID => $author?->getId(),
             self::EXPORT_CONTRIBUTION_VOTES_VALUE => $this->translator->trans($voteValue),
         ];

@@ -234,6 +234,7 @@ class ExportDebateCommand extends BaseExportCommand
     ): void {
         $output->writeln("<info>Generating {$type} of debate {$debateId}...</info>");
         $path = $this->getPath($debateId, $type, $projectAdmin);
+        $this->ensureExportDirectory($path);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
 

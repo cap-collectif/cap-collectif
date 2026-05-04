@@ -31,3 +31,19 @@ Capco\AppBundle\Entity\OpinionVersionVote:
         publishedAt: <(new \DateTime('2016-01-03'))>
         updatedAt: <(new \DateTime('2016-01-03'))>
         createdAt: <(new \DateTime('2016-01-03'))>
+    opinionVersionVote54:
+        id: 700054
+        opinionVersion: '@versionMultiConsultExport1'
+        value: 1
+        user: '@user4'
+        publishedAt: <(new \DateTime('2020-04-03 03:00:00'))>
+        updatedAt: $publishedAt
+        createdAt: $publishedAt
+    opinionVersionVote55:
+        id: 700055
+        opinionVersion: '@versionMultiConsultExport1'
+        value: -1
+        user: '@user5'
+        publishedAt: <(new \DateTime('2020-04-03 04:00:00'))>
+        updatedAt: $publishedAt
+        createdAt: $publishedAt

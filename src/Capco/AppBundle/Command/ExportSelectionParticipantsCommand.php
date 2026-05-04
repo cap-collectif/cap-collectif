@@ -133,10 +133,14 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
      */
     private function getFilePaths(SelectionStep $step): array
     {
-        return [
+        $filePaths = [
             ExportVariantsEnum::FULL->value => $this->participantFilePathResolver->getFullExportPath($step),
             ExportVariantsEnum::SIMPLIFIED->value => $this->participantFilePathResolver->getSimplifiedExportPath($step),
         ];
+
+        $this->ensureExportDirectories($filePaths);
+
+        return $filePaths;
     }
 
     private function exportUsersByBatch(InputInterface $input, SelectionStep $step): int

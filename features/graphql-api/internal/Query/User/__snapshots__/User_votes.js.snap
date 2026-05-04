@@ -89,6 +89,32 @@ Object {
     "votes": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntpOjA7aToxNTg1ODc1NjAwMDAwO2k6MTtzOjY6IjcwMDA1NCI7fQ==",
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU0",
+            "related": Object {
+              "id": "VmVyc2lvbjp2ZXJzaW9uTXVsdGlDb25zdWx0RXhwb3J0MQ==",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTg1NzgyMDAwMDAwO2k6MTtzOjI6Ijk1Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTU=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uTXVsdGlDb25zdWx0RXhwb3J0UHJvcG9zYWwx",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
           "node": Object {
             "id": "T3BpbmlvblZvdGU6ODk=",
@@ -127,38 +153,12 @@ Object {
             },
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
-          "node": Object {
-            "id": "1001",
-            "related": Object {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-              "project": Object {
-                "_id": "project6",
-                "visibility": "PUBLIC",
-              },
-            },
-          },
-        },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
-          "node": Object {
-            "id": "2003",
-            "related": Object {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
-              "project": Object {
-                "_id": "project9",
-                "visibility": "PUBLIC",
-              },
-            },
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
+        "endCursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
         "hasNextPage": true,
       },
-      "totalCount": 17,
+      "totalCount": 19,
     },
   },
 }
@@ -170,6 +170,32 @@ Object {
     "votes": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntpOjA7aToxNTg1ODc1NjAwMDAwO2k6MTtzOjY6IjcwMDA1NCI7fQ==",
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU0",
+            "related": Object {
+              "id": "VmVyc2lvbjp2ZXJzaW9uTXVsdGlDb25zdWx0RXhwb3J0MQ==",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTg1NzgyMDAwMDAwO2k6MTtzOjI6Ijk1Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTU=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uTXVsdGlDb25zdWx0RXhwb3J0UHJvcG9zYWwx",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
           "node": Object {
             "id": "T3BpbmlvblZvdGU6ODk=",
@@ -208,40 +234,12 @@ Object {
             },
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg3NjQ2MDAwMDAwO2k6MTtzOjU6IjYwMDA1Ijt9",
-          "node": Object {
-            "id": "60005",
-            "related": Object {
-              "id": "U291cmNlOnNvdXJjZTQ1",
-              "related": Object {
-                "nullable": Object {
-                  "_id": "ProjectAccessibleForAdminOnly",
-                  "visibility": "ADMIN",
-                },
-              },
-            },
-          },
-        },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
-          "node": Object {
-            "id": "1001",
-            "related": Object {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-              "project": Object {
-                "_id": "project6",
-                "visibility": "PUBLIC",
-              },
-            },
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+        "endCursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
         "hasNextPage": true,
       },
-      "totalCount": 21,
+      "totalCount": 23,
     },
   },
 }
@@ -253,6 +251,32 @@ Object {
     "votes": Object {
       "edges": Array [
         Object {
+          "cursor": "YToyOntpOjA7aToxNTg1ODc1NjAwMDAwO2k6MTtzOjY6IjcwMDA1NCI7fQ==",
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU0",
+            "related": Object {
+              "id": "VmVyc2lvbjp2ZXJzaW9uTXVsdGlDb25zdWx0RXhwb3J0MQ==",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTg1NzgyMDAwMDAwO2k6MTtzOjI6Ijk1Ijt9",
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTU=",
+            "related": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uTXVsdGlDb25zdWx0RXhwb3J0UHJvcG9zYWwx",
+              "nullable": Object {
+                "_id": "projectExport",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
           "cursor": "YToyOntpOjA7aToxNTUxNDk5MjAyMDAwO2k6MTtzOjI6Ijg5Ijt9",
           "node": Object {
             "id": "T3BpbmlvblZvdGU6ODk=",
@@ -291,38 +315,12 @@ Object {
             },
           },
         },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
-          "node": Object {
-            "id": "1001",
-            "related": Object {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-              "project": Object {
-                "_id": "project6",
-                "visibility": "PUBLIC",
-              },
-            },
-          },
-        },
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
-          "node": Object {
-            "id": "2003",
-            "related": Object {
-              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
-              "project": Object {
-                "_id": "project9",
-                "visibility": "PUBLIC",
-              },
-            },
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
+        "endCursor": "YToyOntpOjA7aToxNTE5ODY2MDAwMDAwO2k6MTtzOjI6Ijg0Ijt9",
         "hasNextPage": true,
       },
-      "totalCount": 20,
+      "totalCount": 22,
     },
   },
 }
@@ -342,6 +340,18 @@ Object {
         Object {
           "node": Object {
             "id": "1064",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU1",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTY=",
             "isAccounted": true,
           },
         },
@@ -484,7 +494,7 @@ Object {
           },
         },
       ],
-      "totalCount": 25,
+      "totalCount": 27,
     },
   },
 }
@@ -504,6 +514,18 @@ Object {
         Object {
           "node": Object {
             "id": "1064",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU1",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTY=",
             "isAccounted": true,
           },
         },
@@ -652,7 +674,7 @@ Object {
           },
         },
       ],
-      "totalCount": 26,
+      "totalCount": 28,
     },
   },
 }

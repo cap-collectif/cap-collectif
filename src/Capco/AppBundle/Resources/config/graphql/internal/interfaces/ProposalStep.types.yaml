@@ -76,3 +76,6 @@ ProposalStep:
             proposalArchivedUnitTime:
                 type: 'ProposalArchivedUnitTime!'
                 description: 'The unit chosen to set the archived duration can be either MONTHS or DAYS'
+            exportVotesUrls:
+                type: '[StepExportUrl]'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportVotesUrlsResolver", value)'

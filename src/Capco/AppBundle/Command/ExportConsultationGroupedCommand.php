@@ -21,6 +21,7 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Service\CsvDataFormatter;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -92,6 +94,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         OpinionVote::class => ExportHeaders::EXPORT_CONTRIBUTION_TYPE_OPINION_VOTE,
         Argument::class => ExportHeaders::EXPORT_CONTRIBUTION_TYPE_ARGUMENT,
         OpinionVersion::class => ExportHeaders::EXPORT_CONTRIBUTION_TYPE_OPINION_VERSION,
+        OpinionVersionVote::class => 'export_contribution_type_opinion_version_vote',
     ];
 
     protected static $defaultName = 'capco:export:consultation:grouped';
@@ -125,6 +128,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
                 'Export Votes consultation contributions, contains only contributions from users validated accounts.'
             )
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -139,7 +143,13 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
 
         $this->stopwatch->start('export_consultation_grouped', 'Memory usage - Execution time');
 
-        $stepCount = $this->consultationStepRepository->count([]);
+        $consultationSteps = null;
+        if ($input->getOption('stepId')) {
+            $step = $this->consultationStepRepository->find($input->getOption('stepId'));
+            $consultationSteps = $step ? [$step] : [];
+        }
+
+        $stepCount = $consultationSteps ? \count($consultationSteps) : $this->consultationStepRepository->count([]);
 
         if (0 === $stepCount) {
             $style->error('No consultation step found');
@@ -155,11 +165,15 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
             ->setStyle('box-double')
             ->setHeaders(['Consultation', 'Contribution(s) exported', 'File path'])
         ;
+        $delimiterOption = $input->getOption('delimiter');
+        $delimiter = \is_string($delimiterOption) && '' !== $delimiterOption
+            ? $delimiterOption
+            : self::DEFAULT_CSV_DELIMITER;
 
-        $consultationSteps = $this->consultationStepRepository->findAllConsultations();
+        $consultationSteps ??= $this->consultationStepRepository->findAllConsultations();
 
         foreach ($consultationSteps as $consultationStep) {
-            $contributionCount = $this->processConsultationStep($consultationStep, $style);
+            $contributionCount = $this->processConsultationStep($consultationStep, $style, $delimiter);
 
             if ($contributionCount > 0) {
                 $path = $this->contributionsFilePathResolver->getGroupedExportPath($consultationStep);
@@ -194,8 +208,11 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         return Command::SUCCESS;
     }
 
-    private function processConsultationStep(ConsultationStep $consultationStep, SymfonyStyle $style): int
-    {
+    private function processConsultationStep(
+        ConsultationStep $consultationStep,
+        SymfonyStyle $style,
+        string $delimiter
+    ): int {
         $opinionCount = $this->opinionRepository->getOpinionsByConsultationStepWithUserConfirmedCount($consultationStep);
 
         if (0 === $opinionCount) {
@@ -203,6 +220,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         }
 
         $path = $this->contributionsFilePathResolver->getGroupedExportPath($consultationStep);
+        $this->ensureExportDirectory($path);
         $handle = fopen($path, 'w');
 
         if (!$handle) {
@@ -211,7 +229,8 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
 
         $translatedHeaderKeys = array_map(fn ($header) => $this->translator->trans($header), self::HEADER_KEYS);
 
-        fputcsv($handle, $translatedHeaderKeys);
+        $this->writeUtf8Bom($handle);
+        fputcsv($handle, $translatedHeaderKeys, $delimiter);
 
         $totalContributions = 0;
         $processed = 0;
@@ -219,6 +238,10 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         $opinions = $this->opinionRepository->getOpinionsByConsultationStepWithUserConfirmedIterator($consultationStep);
 
         foreach ($opinions as $opinion) {
+            if ($opinion->isTrashed()) {
+                continue;
+            }
+
             $contributions = $this->getAllContributionsFromOpinionByBatch($opinion, $style);
             $totalContributions += \count($contributions);
 
@@ -226,7 +249,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
                 $opinionArray = $this->buildRowData($contribution, $consultationStep);
 
                 if ($opinionArray) {
-                    fputcsv($handle, array_values($opinionArray));
+                    fputcsv($handle, array_values($opinionArray), $delimiter);
                 }
             }
 
@@ -247,7 +270,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
      * @return null|array<string, mixed>
      */
     private function buildRowData(
-        Argument|Opinion|OpinionVersion|OpinionVote $contribution,
+        Argument|Opinion|OpinionVersion|OpinionVersionVote|OpinionVote $contribution,
         ConsultationStep $consultationStep
     ): ?array {
         $opinionArray = array_fill_keys(self::HEADER_KEYS, null);
@@ -262,6 +285,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         return match ($contribution::class) {
             Opinion::class => $this->setProposalData($opinionArray, $contribution, $consultationStep),
             OpinionVote::class => $this->setOpinionVoteData($opinionArray, $contribution),
+            OpinionVersionVote::class => $this->setOpinionVoteData($opinionArray, $contribution),
             OpinionVersion::class => $this->setVersionData($opinionArray, $contribution, $consultationStep),
             Argument::class => $this->setArgumentData($opinionArray, $contribution),
             default => null
@@ -282,29 +306,39 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_BODY_TEXT] = $opinion->getBodyText();
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_URL] = $this->opinionUrlResolver->__invoke($opinion);
 
-        $votes = $opinion->getVotes();
-        $arguments = $opinion->getArguments();
-
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT] = $votes->count();
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_OK] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, 1);
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_MITIGE] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, 0);
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_NOK] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, -1);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT] = $this->getVoteCountPerOpinion($opinion, $consultationStep);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_OK] = $this->getVoteCountPerOpinion($opinion, $consultationStep, OpinionVote::VOTE_OK);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_MITIGE] = $this->getVoteCountPerOpinion($opinion, $consultationStep, OpinionVote::VOTE_MITIGE);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_COUNT_NOK] = $this->getVoteCountPerOpinion($opinion, $consultationStep, OpinionVote::VOTE_NOK);
 
         $arguments = $opinion->getArguments();
-
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT] = $arguments->count();
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, 1);
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, 0);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT] = $this->getArgumentCountPerOpinion($arguments, $consultationStep);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, Argument::TYPE_FOR);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST] = $this->getArgumentCountPerOpinion($arguments, $consultationStep, Argument::TYPE_AGAINST);
 
         return $opinionArray;
     }
 
-    private function getArgumentCountPerOpinion(Collection $arguments, ConsultationStep $consultationStep, int $filterValue): int
+    private function getVoteCountPerOpinion(Opinion $opinion, ConsultationStep $consultationStep, ?int $filterValue = null): int
     {
+        $filterClosure = fn (OpinionVote $vote) => null !== $vote->getStep()
+            && $vote->getStep()->getId() === $consultationStep->getId()
+            && $vote->getIsAccounted()
+            && (null === $filterValue || $vote->getValue() === $filterValue);
+
+        return $opinion->getVotes()->filter($filterClosure)->count();
+    }
+
+    private function getArgumentCountPerOpinion(
+        Collection $arguments,
+        ConsultationStep $consultationStep,
+        ?int $filterValue = null
+    ): int {
         $filterClosure = fn (Argument $argument) => null !== $argument->getStep()
             && $argument->getStep()->getId() === $consultationStep->getId()
             && $argument->isPublished()
-            && $argument->getType() === $filterValue;
+            && !$argument->isTrashed()
+            && (null === $filterValue || $argument->getType() === $filterValue);
 
         return $arguments->filter($filterClosure)->count();
     }
@@ -318,13 +352,13 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
     {
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_ID] = $version->getId();
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_TITLE] = $version->getTitle();
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_EXPLANATION] = $version->getComment();
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_EXPLANATION] = Text::htmlToString((string) $version->getComment());
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_BODY_TEXT] = $version->getBodyText();
 
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT] = $version->getVotes()->count();
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_OK] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, 1);
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_MITIGE] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, 0);
-        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_NOK] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, -1);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT] = $this->getVoteCountPerOpinionVersion($version, $consultationStep);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_OK] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, OpinionVersionVote::VOTE_OK);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_MITIGE] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, OpinionVersionVote::VOTE_MITIGE);
+        $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_NOK] = $this->getVoteCountPerOpinionVersion($version, $consultationStep, OpinionVersionVote::VOTE_NOK);
 
         return $opinionArray;
     }
@@ -375,9 +409,12 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
      *
      * @return array<string, mixed>
      */
-    private function setOpinionVoteData(array $opinionArray, OpinionVote $contribution): array
+    private function setOpinionVoteData(array $opinionArray, OpinionVote|OpinionVersionVote $contribution): array
     {
-        $voteValue = OpinionVote::$voteTypesLabels[$contribution->getValue()];
+        $voteTypesLabels = $contribution instanceof OpinionVersionVote
+            ? OpinionVersionVote::$voteTypesLabels
+            : OpinionVote::$voteTypesLabels;
+        $voteValue = $voteTypesLabels[$contribution->getValue()];
 
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_ID] = $contribution->getId();
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_VOTES_RELATED_ID] = $contribution->getRelated()->getId();
@@ -386,18 +423,18 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         return $opinionArray;
     }
 
-    private function getVoteCountPerOpinionVersion(OpinionVersion $opinionVersion, ConsultationStep $consultationStep, int $filterValue): int
+    private function getVoteCountPerOpinionVersion(OpinionVersion $opinionVersion, ConsultationStep $consultationStep, ?int $filterValue = null): int
     {
         $filterClosure = fn (OpinionVersionVote $vote) => null !== $vote->getStep()
             && $vote->getStep()->getId() === $consultationStep->getId()
             && $vote->getIsAccounted()
-            && ($vote->getValue() === $filterValue);
+            && (null === $filterValue || $vote->getValue() === $filterValue);
 
         return $opinionVersion->getVotes()->filter($filterClosure)->count();
     }
 
     /**
-     * @return Argument[]|Opinion[]|OpinionVersion[]|OpinionVote[]
+     * @return Argument[]|Opinion[]|OpinionVersion[]|OpinionVersionVote[]|OpinionVote[]
      */
     private function getAllContributionsFromOpinionByBatch(Opinion $opinion, SymfonyStyle $style): array
     {
@@ -418,7 +455,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         $opinionArguments = $this->batchProcessor->processQueryInBatches(
             Argument::class,
             'a',
-            'a.opinion = :opinion AND a.published = true AND au.confirmationToken IS NULL',
+            'a.opinion = :opinion AND a.published = true AND a.trashedAt IS NULL AND au.confirmationToken IS NULL',
             ['opinion' => $opinion],
             5000,
             $style,
@@ -431,7 +468,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         $opinionVersions = $this->batchProcessor->processQueryInBatches(
             OpinionVersion::class,
             'ov',
-            'ov.parent = :opinion AND ov.published = true AND a.confirmationToken IS NULL',
+            'ov.parent = :opinion AND ov.published = true AND ov.trashedAt IS NULL AND a.confirmationToken IS NULL',
             ['opinion' => $opinion],
             5000,
             $style,
@@ -440,12 +477,30 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
             'a',
         );
 
-        $contributions = [
-            [$opinion],
-            $opinionVotes,
-            $opinionArguments,
-            $opinionVersions,
-        ];
+        $contributions = [[$opinion], $opinionVotes, $opinionArguments];
+        /** @var array<Argument|Opinion|OpinionVersion|OpinionVersionVote|OpinionVote> $allContributions */
+        $allContributions = [$opinion, ...$opinionVotes, ...$opinionArguments];
+        foreach ($opinionVersions as $opinionVersion) {
+            /** @var OpinionVersionVote[] $opinionVersionVotes */
+            $opinionVersionVotes = $this->batchProcessor->processQueryInBatches(
+                OpinionVersionVote::class,
+                'ovv',
+                'ovv.opinionVersion = :opinionVersion AND ovv.published = true AND u.confirmationToken IS NULL',
+                ['opinionVersion' => $opinionVersion],
+                5000,
+                $style,
+                null,
+                'ovv.user',
+                'u',
+            );
+
+            $contributions[] = [$opinionVersion];
+            $contributions[] = $opinionVersionVotes;
+            $allContributions[] = $opinionVersion;
+            foreach ($opinionVersionVotes as $opinionVersionVote) {
+                $allContributions[] = $opinionVersionVote;
+            }
+        }
 
         foreach ($contributions as $contributionType => $contributionArray) {
             $countContributionsByType = \count($contributionArray);
@@ -454,11 +509,16 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
             }
         }
 
-        return array_merge(
-            [$opinion],
-            $opinionVotes,
-            $opinionArguments,
-            $opinionVersions,
-        );
+        return $allContributions;
+    }
+
+    /**
+     * Excel auto-detects UTF-8 when BOM is present.
+     *
+     * @param resource $handle
+     */
+    private function writeUtf8Bom($handle): void
+    {
+        fwrite($handle, "\xEF\xBB\xBF");
     }
 }

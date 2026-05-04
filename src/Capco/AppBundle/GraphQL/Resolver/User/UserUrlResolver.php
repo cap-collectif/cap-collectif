@@ -25,7 +25,7 @@ class UserUrlResolver implements QueryInterface
 
     public function getBySlug(string $slug): ?string
     {
-        if ('' !== $slug) {
+        if ('' === $slug) {
             return null;
         }
 

@@ -11,11 +11,6 @@ use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectMediatorsProposalsVotesCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
-use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
-use Capco\AppBundle\Command\CreateStepContributorsCommand;
-use Capco\AppBundle\Command\ExportDebateCommand;
-use Capco\AppBundle\Command\ExportDebateContributionsCommand;
-use Capco\AppBundle\Command\Service\CronTimeInterval;
 use Capco\AppBundle\Command\Service\FilePathResolver\AppLogFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
@@ -36,12 +31,13 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\DebateRepository;
-use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\AppBundle\Service\ExportOnDemandAvailability;
+use Capco\AppBundle\Service\ExportOnDemandManager;
+use Capco\AppBundle\Service\ExportOnDemandRequest;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,15 +50,12 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -73,6 +66,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExportController extends Controller
 {
+    private const EXPORT_LOG_DESCRIPTION_CONTRIBUTIONS = 'contributions';
+    private const EXPORT_LOG_DESCRIPTION_PARTICIPANTS = 'participants';
+    private const EXPORT_LOG_DESCRIPTION_GROUPED = 'regroupées';
+    private const EXPORT_LOG_DESCRIPTION_VOTES = 'de vote';
+
     public function __construct(
         private readonly GraphQlAclListener $aclListener,
         private readonly ConnectionTraversor $connectionTraversor,
@@ -87,13 +85,10 @@ class ExportController extends Controller
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
         private readonly AppLogFilePathResolver $appLogFilePathResolver,
         private readonly VotesFilePathResolver $votesFilePathResolver,
-        private readonly SessionInterface $session,
-        private readonly CronTimeInterval $cronTimeInterval,
+        private readonly ExportOnDemandManager $exportOnDemandManager,
         private readonly string $exportDir,
         private readonly string $locale,
-        private readonly string $projectDir,
         private readonly ActionLogger $actionLogger,
-        private readonly DebateRepository $debateRepository,
     ) {
     }
 
@@ -242,23 +237,22 @@ class ExportController extends Controller
         }
 
         $fileName = CreateCsvFromEventParticipantsCommand::getFilename($event->getSlug());
-        if (file_exists($this->exportDir . $fileName)) {
-            $response = $this->file($this->exportDir . $fileName, $fileName);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-            return $response;
+        $filePath = $this->exportDir . $fileName;
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: 'capco:export:events:participants',
+            commandOptions: ['eventId' => $event->getId()],
+            filePath: $filePath,
+            fileName: $fileName
+        );
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
         }
 
-        $this->flashBag->add(
-            'danger',
-            $this->translator->trans(
-                'project_contributors.download.not_yet_generated',
-                [],
-                'CapcoAppBundle'
-            )
-        );
+        $response = $this->file($filePath, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
-        return $this->redirect($request->headers->get('referer'));
+        return $response;
     }
 
     /**
@@ -270,14 +264,19 @@ class ExportController extends Controller
     {
         $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($project->getSlug());
 
-        if (!file_exists($this->exportDir . $fileName)) {
-            return new JsonResponse(
-                ['errorTranslationKey' => 'project_contributors.download.not_yet_generated'],
-                404
-            );
+        $filePath = $this->exportDir . $fileName;
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: 'capco:export:projects-contributors',
+            commandOptions: ['projectId' => $project->getId()],
+            filePath: $filePath,
+            fileName: $fileName
+        );
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
         }
 
-        $response = $this->file($this->exportDir . $fileName, $fileName);
+        $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         $this->actionLogger->logExport($this->getUser(), sprintf('participants du projet %s', $project->getTitle()));
@@ -286,10 +285,10 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-step-contributors/{stepId}/download-consultation", name="app_export_step_contributors_download_consultation", options={"i18n" = false})
+     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function downloadConsultationParticipantAction(Request $request, string $stepId): Response
+    public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
     {
         $id = GlobalId::fromGlobalId($stepId);
         if ($id && isset($id['id'])) {
@@ -323,130 +322,48 @@ class ExportController extends Controller
             $fileName
         );
 
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
-            ;
+        if ($this->isExportEmailDownload($request)) {
+            if (!file_exists($filePath)) {
+                return new JsonResponse(['errorTranslationKey' => 'project.download.not_yet_generated'], 404);
+            }
 
-            $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
+            $response = $this->file($filePath);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+            $this->logStepParticipantsExport($step);
 
-            return $this->redirect($redirectUrl);
+            return $response;
         }
+
+        if (!file_exists($filePath)) {
+            $exportCommand = $this->getStepContributorsExportCommand($step);
+            if (null === $exportCommand) {
+                return new JsonResponse(
+                    ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                    404
+                );
+            }
+
+            [
+                'commandName' => $commandName,
+                'commandOptions' => $commandOptions,
+            ] = $exportCommand;
+
+            $pendingResponse = $this->handleOnDemandExport(
+                request: $request,
+                commandName: $commandName,
+                commandOptions: $commandOptions,
+                filePath: $filePath,
+                fileName: $fileName
+            );
+
+            if ($pendingResponse instanceof Response) {
+                return $pendingResponse;
+            }
+        }
+
+        $this->logStepParticipantsExport($step);
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
-     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
-     * @Security("is_granted('ROLE_USER')")
-     */
-    public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
-    {
-        $id = GlobalId::fromGlobalId($stepId);
-        if ($id && isset($id['id'])) {
-            $stepId = $id['id'];
-        }
-
-        /** @var null|AbstractStep $step */
-        $step = $this->abstractStepRepository->find($stepId);
-        if (!$step) {
-            $this->logger->error('An error occured while downloading the csv file', [
-                'stepId' => $stepId,
-            ]);
-
-            throw new BadRequestHttpException('You must provide a valid step id.');
-        }
-
-        $organization = $this->getUser()->getOrganization();
-        $projectOwner = $step->getProject()->getOwner();
-        if ($organization && ($projectOwner !== $organization)) {
-            throw new AccessException();
-        }
-
-        // TODO remove this if after all export participants has been merged
-        if ($step instanceof QuestionnaireStep || $step instanceof CollectStep || $step instanceof SelectionStep) {
-            $isSimplified = 'true' === $request->query->get('simplified');
-            $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-            $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
-            $filePath = sprintf(
-                '%s%s/%s',
-                $this->exportDir,
-                $step->getType(),
-                $fileName
-            );
-            if (!file_exists($filePath)) {
-                $this->session
-                    ->getFlashBag()
-                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
-                ;
-
-                $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
-
-                return $this->redirect($redirectUrl);
-            }
-
-            $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
-
-            $response = $this->file($filePath, $fileName);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-            return $response;
-        }
-
-        // TODO remove this if after all export participants has been merged
-        if ($step instanceof DebateStep) {
-            $organization = $this->getUser()?->getOrganization();
-            $projectOwner = $step->getProject()?->getOwner();
-            if ($organization && ($projectOwner !== $organization)) {
-                throw new AccessException();
-            }
-
-            $isSimplified = 'true' === $request->query->get('simplified');
-            $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-            $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
-            $filePath = sprintf(
-                '%s%s/%s',
-                $this->exportDir,
-                'debate',
-                $fileName
-            );
-
-            if (!file_exists($filePath)) {
-                $this->session
-                    ->getFlashBag()
-                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(38))
-                ;
-
-                return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
-            }
-            $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
-
-            $response = $this->file($filePath, $fileName);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-            return $response;
-        }
-
-        $fileName = CreateStepContributorsCommand::getFilename($step);
-        $absolutePath = $this->exportDir . $fileName;
-
-        $filesystem = new Filesystem();
-        if (!$filesystem->exists($absolutePath)) {
-            $this->logger->error('File not found', [
-                'filename' => $absolutePath,
-            ]);
-
-            return new JsonResponse(['errorTranslationKey' => 'file.not-found'], 404);
-        }
-        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
-
-        $response = $this->file($absolutePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
@@ -461,70 +378,20 @@ class ExportController extends Controller
         $fileName = $this->appLogFilePathResolver->getFileName();
         $filePath = $this->appLogFilePathResolver->getExportPath();
 
-        if (!file_exists($filePath)) {
-            return new JsonResponse(
-                ['errorTranslationKey' => $this->cronTimeInterval->getRemainingCronExecutionTime(58)],
-                404
-            );
-        }
-
-        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
-
-        $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
-     * @Route("/export-step-contributors/{stepId}/download-collect", name="app_export_step_contributors_download_collect", options={"i18n" = false})
-     * @Security("is_granted('ROLE_USER')")
-     */
-    public function downloadCollectParticipantAction(Request $request, string $stepId): Response
-    {
-        $id = GlobalId::fromGlobalId($stepId);
-        if ($id && isset($id['id'])) {
-            $stepId = $id['id'];
-        }
-
-        /** @var null|AbstractStep $step */
-        $step = $this->abstractStepRepository->find($stepId);
-        if (!$step) {
-            $this->logger->error('An error occured while downloading the csv file', [
-                'stepId' => $stepId,
-            ]);
-
-            throw new BadRequestHttpException('You must provide a valid step id.');
-        }
-
-        $organization = $this->getUser()?->getOrganization();
-        $projectOwner = $step->getProject()?->getOwner();
-        if ($organization && ($projectOwner !== $organization)) {
-            throw new AccessException();
-        }
-
-        $isSimplified = 'true' === $request->query->get('simplified');
-        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-        $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
-        $filePath = sprintf(
-            '%s%s/%s',
-            $this->exportDir,
-            'collect',
-            $fileName
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: 'capco:export:app-logs',
+            commandOptions: [],
+            filePath: $filePath,
+            fileName: $fileName
         );
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(38))
-            ;
-
-            return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
         }
+
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
-        $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
+        $this->actionLogger->logExport($this->getUser(), 'logs applicatifs');
 
         $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
@@ -694,233 +561,6 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
-     * @Security("is_granted('ROLE_PROJECT_ADMIN')")
-     */
-    public function downloadArgumentsAction(
-        Request $request,
-        string $debateId,
-        string $type
-    ): Response {
-        $debateId = GlobalId::fromGlobalId($debateId)['id'];
-        $debate = $this->debateRepository->findOneBy(['id' => $debateId]);
-
-        $user = $this->getUser();
-        $isProjectAdmin = $user->isOnlyProjectAdmin();
-
-        $fileName = ExportDebateCommand::getFilename($debateId, $type, $isProjectAdmin);
-        $filePath = $this->projectDir . '/public/export/' . $fileName;
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->translator->trans('project.download.not_yet_generated'))
-            ;
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $response = $this->file($filePath, $date . '_' . $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $debate->getStep()->getTitle(), $debate->getProject()->getTitle()));
-
-        return $response;
-    }
-
-    /**
-     * @Route("/debate/{debateId}/download-contributions/{type}", name="app_debate_contributions_download", options={"i18n" = false})
-     * @Security("is_granted('ROLE_PROJECT_ADMIN')")
-     */
-    public function downloadDebateContributionAction(
-        Request $request,
-        string $debateId,
-        DebateRepository $debateRepository
-    ): Response {
-        $debateId = GlobalId::fromGlobalId($debateId)['id'];
-        $debate = $debateRepository->find($debateId);
-
-        $isSimplified = 'true' === $request->query->get('simplified');
-        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-        $fileName = $this->contributionsFilePathResolver->getFileName($debate->getStep(), $variant);
-        $filePath = sprintf(
-            '%s%s/%s',
-            $this->exportDir,
-            ExportDebateContributionsCommand::STEP_FOLDER,
-            $fileName
-        );
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(58))
-            ;
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $debate->getStep()->getTitle(), $debate->getProject()->getTitle()));
-
-        $response = $this->file($filePath, $date . '_' . $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
-     * @Route("/debate/{debateStepId}/download-votes/{type}", name="app_debate_votes_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_PROJECT_ADMIN')")
-     */
-    public function downloadDebateVoteAction(
-        Request $request,
-        string $debateStepId,
-        DebateStepRepository $debateStepRepository
-    ): Response {
-        $id = GlobalId::fromGlobalId($debateStepId);
-        if ($id && isset($id['id'])) {
-            $debateStepId = $id['id'];
-        }
-
-        $debateStep = $debateStepRepository->find($debateStepId);
-
-        if (!$debateStep) {
-            $this->logger->error('An error occured while downloading the csv file', [
-                'debateStepId' => $debateStepId,
-            ]);
-
-            throw new BadRequestHttpException('You must provide a valid debate Step id.');
-        }
-
-        $variant = 'true' === $request->query->get('simplified') ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-        $fileName = $this->votesFilePathResolver->getFileName($debateStep, $variant);
-        $filePath = sprintf(
-            '%s%s/%s',
-            $this->exportDir,
-            ExportDebateContributionsCommand::STEP_FOLDER,
-            $fileName
-        );
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(53))
-            ;
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $response = $this->file($filePath, $date . '_' . $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
-     * @Route("/export-step-contributors/{stepId}/download-selection", name="app_export_step_contributors_download_selection", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function downloadSelectionParticipantAction(Request $request, string $stepId): Response
-    {
-        $id = GlobalId::fromGlobalId($stepId);
-        if ($id && isset($id['id'])) {
-            $stepId = $id['id'];
-        }
-
-        /** @var null|AbstractStep $step */
-        $step = $this->abstractStepRepository->find($stepId);
-        if (!$step) {
-            $this->logger->error('An error occured while downloading the csv file', [
-                'stepId' => $stepId,
-            ]);
-
-            throw new BadRequestHttpException('You must provide a valid step id.');
-        }
-
-        $organization = $this->getUser()->getOrganization();
-        $projectOwner = $step->getProject()->getOwner();
-        if ($organization && ($projectOwner !== $organization)) {
-            throw new AccessException();
-        }
-
-        $isSimplified = 'true' === $request->query->get('simplified');
-        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-        $fileName = $this->participantsFilePathResolver->getFileName($step, $variant);
-        $filePath = sprintf(
-            '%s%s/%s',
-            $this->exportDir,
-            'selection',
-            $fileName
-        );
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(9))
-            ;
-
-            return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
-        }
-
-        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
-
-        $this->actionLogger->logExport($this->getUser(), sprintf('participants de l\'étape %s du projet %s', $step->getTitle(), $step->getProject()->getTitle()));
-
-        $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
-     * @Route("/projects/{projectSlug}/step/{stepSlug}/download-consultation", name="app_project_download_consultation", options={"i18n" = false})
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
-     *
-     * @return BinaryFileResponse|RedirectResponse
-     */
-    public function downloadConsultationContributionAction(Request $request, Project $project, ConsultationStep $step)
-    {
-        $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
-
-        $isSimplified = 'true' === $request->query->get('simplified');
-        $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;
-
-        $fileName = $this->contributionsFilePathResolver->getFileName($step, $variant);
-        $filePath = sprintf(
-            '%s%s/%s',
-            $this->exportDir,
-            $step->getType(),
-            $fileName
-        );
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime())
-            ;
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-
-        $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
-
-        $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
-    }
-
-    /**
      * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
      * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
      */
@@ -943,15 +583,14 @@ class ExportController extends Controller
 
             return $response;
         } catch (FileNotFoundException) {
-            // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
-
-            $flashBag->add(
-                'danger',
-                $this->translator->trans('project.download.not_yet_generated')
+            $pendingResponse = $this->handleOnDemandExport(
+                request: $request,
+                commandName: 'capco:export:questionnaire:contributions',
+                commandOptions: ['stepId' => $questionnaireStep->getId()],
+                filePath: $filePath
             );
 
-            return $this->redirect($request->headers->get('referer'));
+            return $pendingResponse ?? $this->redirect($request->headers->get('referer'));
         }
     }
 
@@ -967,68 +606,153 @@ class ExportController extends Controller
     public function downloadAction(Request $request, Project $project, AbstractStep $step): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
-        // TODO remove this if after all export contributions has been merged
-        if ($step instanceof QuestionnaireStep) {
-            $filePath = 'true' === $request->query->get('simplified')
-                ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
-                : $this->contributionsFilePathResolver->getFullExportPath($step);
+        $filePath = match (true) {
+            'true' === $request->query->get('simplified') && 'true' === $request->query->get('votes') => $this->votesFilePathResolver->getSimplifiedExportPath($step),
+            'true' === $request->query->get('simplified') => $this->contributionsFilePathResolver->getSimplifiedExportPath($step),
+            'true' === $request->query->get('grouped') => $this->contributionsFilePathResolver->getGroupedExportPath($step),
+            default => $this->contributionsFilePathResolver->getFullExportPath($step)
+        };
 
-            try {
-                $response = $this->file($filePath);
-                $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-                $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
-
-                return $response;
-            } catch (FileNotFoundException) {
-                return new JsonResponse(
-                    ['errorTranslationKey' => 'project.download.not_yet_generated'],
-                    404
-                );
+        if ($this->isExportEmailDownload($request)) {
+            if (!file_exists($filePath)) {
+                return new JsonResponse(['errorTranslationKey' => 'project.download.not_yet_generated'], 404);
             }
-        }
 
-        // TODO remove this if after all export contributions has been merged
-        if ($step instanceof CollectStep || $step instanceof SelectionStep) {
-            $filePath = 'true' === $request->query->get('simplified')
-                ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
-                : $this->contributionsFilePathResolver->getFullExportPath($step);
-
-            try {
-                $response = $this->file($filePath);
-                $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-                $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
-
-                return $response;
-            } catch (FileNotFoundException) {
-                return new JsonResponse(
-                    ['errorTranslationKey' => $this->cronTimeInterval->getRemainingCronExecutionTime(48)],
-                    404
-                );
-            }
-        }
-
-        $filenameCsv = $this->contributionsFilePathResolver->getFullExportPath($step);
-        $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
-
-        $isCSV = file_exists($filenameCsv);
-        $filename = $isCSV ? $this->contributionsFilePathResolver->getFileName($step, ExportVariantsEnum::FULL) : $filenameXlsx;
-        $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
-
-        try {
-            $this->actionLogger->logExport($this->getUser(), sprintf('contributions de l\'étape %s du projet %s', $step->getTitle(), $project->getTitle()));
-
-            $response = $this->file($filenameCsv, $filename);
-            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
+            $response = $this->file($filePath);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+            $this->logStepContributionsExport($request, $step);
 
             return $response;
-        } catch (FileNotFoundException) {
-            return new JsonResponse(
-                ['errorTranslationKey' => 'project.download.not_yet_generated'],
-                404
-            );
         }
+
+        [
+            'commandName' => $commandName,
+            'commandOptions' => $commandOptions,
+        ] = $this->getProjectStepExportCommand($request, $step);
+
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: $commandName,
+            commandOptions: $commandOptions,
+            filePath: $filePath
+        );
+
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
+        }
+
+        $response = $this->file($filePath);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $this->logStepContributionsExport($request, $step);
+
+        return $response;
+    }
+
+    /**
+     * @return null|array{commandName: string, commandOptions: array<string, mixed>}
+     */
+    private function getStepContributorsExportCommand(AbstractStep $step): ?array
+    {
+        return match ($step->getType()) {
+            CollectStep::TYPE => [
+                'commandName' => 'capco:export:collect:participants',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            SelectionStep::TYPE => [
+                'commandName' => 'capco:export:selection:participants',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            ConsultationStep::TYPE => [
+                'commandName' => 'capco:export:consultation:participants',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            QuestionnaireStep::TYPE => [
+                'commandName' => 'capco:export:questionnaire:participants',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            DebateStep::TYPE => $this->getDebateParticipantsExportCommand($step),
+            default => null,
+        };
+    }
+
+    /**
+     * @return array{commandName: string, commandOptions: array<string, mixed>}
+     */
+    private function getDebateParticipantsExportCommand(AbstractStep $step): array
+    {
+        if (!$step instanceof DebateStep) {
+            throw new \LogicException(sprintf('Unexpected step class "%s" for debate participants export.', get_debug_type($step)));
+        }
+
+        $debate = $step->getDebate();
+        if (null === $debate) {
+            throw new BadRequestHttpException(sprintf('Debate step "%s" has no debate.', $step->getId()));
+        }
+
+        return [
+            'commandName' => 'capco:export:debate:participants',
+            'commandOptions' => ['debateId' => $debate->getId()],
+        ];
+    }
+
+    /**
+     * @return array{commandName: string, commandOptions: array<string, mixed>}
+     */
+    private function getProjectStepExportCommand(Request $request, AbstractStep $step): array
+    {
+        $isVotesExport = 'true' === $request->query->get('votes') && 'true' === $request->query->get('simplified');
+        $isGroupedExport = 'true' === $request->query->get('grouped');
+
+        return match ($step->getType()) {
+            CollectStep::TYPE, SelectionStep::TYPE => [
+                'commandName' => $isVotesExport ? 'capco:export:collect-selection:votes' : 'capco:export:collect-selection:contributions',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            ConsultationStep::TYPE => [
+                'commandName' => $isGroupedExport ? 'capco:export:consultation:grouped' : 'capco:export:consultation:contributions',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            QuestionnaireStep::TYPE => [
+                'commandName' => 'capco:export:questionnaire:contributions',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ],
+            DebateStep::TYPE => $this->getDebateExportCommand($step, $isVotesExport, $isGroupedExport),
+            default => throw new BadRequestHttpException(sprintf('Step type "%s" is not exportable.', $step->getType())),
+        };
+    }
+
+    /**
+     * @return array{commandName: string, commandOptions: array<string, mixed>}
+     */
+    private function getDebateExportCommand(AbstractStep $step, bool $isVotesExport, bool $isGroupedExport): array
+    {
+        if (!$step instanceof DebateStep) {
+            throw new \LogicException(sprintf('Unexpected step class "%s" for debate export.', get_debug_type($step)));
+        }
+
+        if ($isVotesExport) {
+            return [
+                'commandName' => 'capco:export:debate:votes',
+                'commandOptions' => ['debateStepId' => $step->getId()],
+            ];
+        }
+
+        if ($isGroupedExport) {
+            return [
+                'commandName' => 'capco:export:debate-grouped',
+                'commandOptions' => ['stepId' => $step->getId()],
+            ];
+        }
+
+        $debate = $step->getDebate();
+        if (null === $debate) {
+            throw new BadRequestHttpException(sprintf('Debate step "%s" has no debate.', $step->getId()));
+        }
+
+        return [
+            'commandName' => 'capco:export:debate:contributions',
+            'commandOptions' => ['debateId' => $debate->getId()],
+        ];
     }
 
     private function getEventContributorsGraphQLQuery(
@@ -1085,5 +809,81 @@ class ExportController extends Controller
             $input->setInteractive(false);
             $application->find($key)->run($input, $output);
         }
+    }
+
+    /**
+     * @param array<string, mixed> $commandOptions
+     */
+    private function handleOnDemandExport(
+        Request $request,
+        string $commandName,
+        array $commandOptions,
+        string $filePath,
+        ?string $fileName = null,
+    ): ?Response {
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            throw new AccessDeniedException();
+        }
+
+        $exportRequest = new ExportOnDemandRequest(
+            commandName: $commandName,
+            commandOptions: $commandOptions,
+            filePath: $filePath,
+            downloadUrl: $request->getUri(),
+            user: $user,
+            fileName: $fileName
+        );
+
+        $availability = $this->exportOnDemandManager->ensureExportAvailable($exportRequest);
+
+        if (ExportOnDemandAvailability::AVAILABLE === $availability) {
+            return null;
+        }
+
+        if (ExportOnDemandAvailability::EMPTY === $availability) {
+            return new JsonResponse(['errorTranslationKey' => 'export.empty'], 202);
+        }
+
+        if (ExportOnDemandAvailability::FAILED === $availability) {
+            return new JsonResponse(['errorTranslationKey' => 'global.saving.error'], 500);
+        }
+
+        return new JsonResponse(['errorTranslationKey' => 'export.requested'], 202);
+    }
+
+    private function isExportEmailDownload(Request $request): bool
+    {
+        return \in_array($request->query->get('fromEmail'), ['1', 'true'], true);
+    }
+
+    private function logStepParticipantsExport(AbstractStep $step): void
+    {
+        $this->actionLogger->logExport(
+            $this->getUser(),
+            sprintf("%s de l'étape %s", self::EXPORT_LOG_DESCRIPTION_PARTICIPANTS, $step->getTitle())
+        );
+    }
+
+    private function logStepContributionsExport(Request $request, AbstractStep $step): void
+    {
+        $this->actionLogger->logExport(
+            $this->getUser(),
+            sprintf("%s de l'étape %s", $this->getStepContributionsExportLogDescription($request), $step->getTitle())
+        );
+    }
+
+    private function getStepContributionsExportLogDescription(Request $request): string
+    {
+        if ('true' === $request->query->get('grouped')) {
+            return self::EXPORT_LOG_DESCRIPTION_GROUPED;
+        }
+
+        if ('true' === $request->query->get('votes') && 'true' === $request->query->get('simplified')) {
+            return self::EXPORT_LOG_DESCRIPTION_VOTES;
+        }
+
+        return self::EXPORT_LOG_DESCRIPTION_CONTRIBUTIONS;
     }
 }

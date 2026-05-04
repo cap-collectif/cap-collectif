@@ -388,7 +388,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <div
-                  aria-label="delete-confirmation"
+                  aria-label="import-list"
                   aria-modal="true"
                   data-dialog="true"
                   hidden=""
@@ -628,7 +628,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <div
-                  aria-label="delete-confirmation"
+                  aria-label="import-list"
                   aria-modal="true"
                   data-dialog="true"
                   hidden=""
@@ -868,7 +868,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <div
-                  aria-label="delete-confirmation"
+                  aria-label="import-list"
                   aria-modal="true"
                   data-dialog="true"
                   hidden=""
@@ -1108,7 +1108,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <div
-                  aria-label="delete-confirmation"
+                  aria-label="import-list"
                   aria-modal="true"
                   data-dialog="true"
                   hidden=""

@@ -68,6 +68,18 @@ describe('<ProjectItem />', () => {
           id: 'pasMultiConsultation1',
         },
       ],
+      steps: [
+        {
+          __typename: 'ConsultationStep',
+          id: 'step1',
+          title: 'Collecte des avis pour une meilleur stratégie',
+        },
+        {
+          __typename: 'DebateStep',
+          id: 'step2',
+          title: 'Étape de multi-consultation',
+        },
+      ],
       __typename: 'Project',
     }),
     User: () => ({
@@ -177,6 +189,18 @@ describe('<ProjectItem />', () => {
               id: 'pasMultiConsultation1',
             },
           ],
+          steps: [
+            {
+              __typename: 'ConsultationStep',
+              id: 'step1',
+              title: 'Collecte des avis pour une meilleur stratégie',
+            },
+            {
+              __typename: 'DebateStep',
+              id: 'step2',
+              title: 'Étape de multi-consultation',
+            },
+          ],
           __typename: 'Project',
         }),
       }),
@@ -232,6 +256,18 @@ describe('<ProjectItem />', () => {
                 exportContributorsUrl: 'https://capco.dev/export-step-contributors/multiCstep1?_locale=fr-FR',
               },
               id: 'pasMultiConsultation1',
+            },
+          ],
+          steps: [
+            {
+              __typename: 'ConsultationStep',
+              id: 'step1',
+              title: 'Collecte des avis pour une meilleur stratégie',
+            },
+            {
+              __typename: 'DebateStep',
+              id: 'step2',
+              title: 'Étape de multi-consultation',
             },
           ],
           __typename: 'Project',

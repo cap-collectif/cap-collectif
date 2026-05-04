@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ExportHeaders;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRolesTextResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
@@ -74,7 +75,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
         if (isset($context['step']) && $context['step']->isVotable()) {
             $userArray[self::EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP] = $this->getParticipantVoteCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP] = $this->getProposalCountPerStep($object, $context['step']);
-            $userArray[self::EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);
+            $userArray[ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);
         }
 
         return $this->translateHeaders($userArray);
@@ -173,9 +174,9 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
         };
 
         $votedProposalReferences = $contributor->getVotes()->filter($filterClosure)->map(
-            fn (AbstractVote $vote) => $vote->getProposal() ? $vote->getProposal()->getReference() : null
+            fn (AbstractVote $vote) => $vote->getProposal() ? $vote->getProposal()->getFullReference() : null
         )->toArray();
 
-        return implode(',', $votedProposalReferences);
+        return implode(',', array_filter($votedProposalReferences));
     }
 }

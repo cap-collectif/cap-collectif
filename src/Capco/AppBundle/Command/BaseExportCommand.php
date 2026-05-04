@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
+use Capco\AppBundle\Traits\ExportDirectoryGuardTrait;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseExportCommand extends Command
 {
+    use ExportDirectoryGuardTrait;
+
     final public const DEFAULT_CSV_DELIMITER = ';';
     protected bool $snapshot;
 

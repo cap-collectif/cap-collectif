@@ -8,9 +8,11 @@ use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -23,6 +25,7 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
         ExportUtils $exportUtils,
         private readonly Manager $toggleManager,
         private readonly DebateRepository $debateRepository,
+        private readonly DebateStepRepository $debateStepRepository,
         private readonly DebateParticipantExporter $exporter,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
         private readonly string $projectRootDir
@@ -40,7 +43,17 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
             return 1;
         }
 
-        $count = $this->debateRepository->count([]);
+        $debates = null;
+        if ($input->getOption('stepId')) {
+            $debateStep = $this->debateStepRepository->find($input->getOption('stepId'));
+            $debate = $debateStep ? $debateStep->getDebate() : null;
+            $debates = $debate ? [$debate] : [];
+        } elseif ($input->getOption('debateId')) {
+            $debate = $this->debateRepository->find($input->getOption('debateId'));
+            $debates = $debate ? [$debate] : [];
+        }
+
+        $count = $debates ? \count($debates) : $this->debateRepository->count([]);
 
         if (0 === $count) {
             $style->error('No debate found');
@@ -52,7 +65,7 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
 
         $style->note('Starting the export.');
 
-        $debates = $this->debateRepository->findAll();
+        $debates ??= $this->debateRepository->findAll();
         $style->progressStart($count);
 
         foreach ($debates as $debate) {
@@ -62,6 +75,10 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
                 continue;
             }
 
+            $this->ensureExportDirectories([
+                ExportVariantsEnum::FULL->value => $this->participantsFilePathResolver->getFullExportPath($debateStep),
+                ExportVariantsEnum::SIMPLIFIED->value => $this->participantsFilePathResolver->getSimplifiedExportPath($debateStep),
+            ]);
             $this->exporter->initializeStyle($style);
             $this->exporter->exportDebateParticipants($debateStep, $input->getOption('delimiter'));
             $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep, ExportVariantsEnum::FULL));
@@ -82,5 +99,7 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
             ->setName('capco:export:debate:participants')
             ->setDescription('Export debate participants')
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate step.');
+        $this->addOption(name: 'debateId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate.');
     }
 }

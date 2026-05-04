@@ -29,8 +29,14 @@ const PROJECT_FRAGMENT = graphql`
       step {
         label
         __typename
-        exportStepUrl
-        exportContributorsUrl
+        exportContributionsUrls {
+            url
+            variant
+        }
+        exportContributorsUrls {
+            url
+            variant
+        }
       }
     }
   }
@@ -66,12 +72,12 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({ proje
       .map(step => {
         return [
           {
-            id: step?.step?.exportStepUrl,
+            id: step?.step?.exportContributionsUrls?.find(item => item.variant === 'full')?.url,
             useIdAsValue: true,
             label: getSteptrad(step),
           },
           {
-            id: step?.step?.exportContributorsUrl,
+            id: step?.step?.exportContributorsUrls?.find(item => item.variant === 'full')?.url,
             useIdAsValue: true,
             label: (
               <FormattedHTMLMessage

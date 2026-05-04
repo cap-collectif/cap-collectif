@@ -171,7 +171,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         </p>
       </button>
       <div
-        aria-label="delete-confirmation"
+        aria-label="import-list"
         aria-modal="true"
         data-dialog="true"
         hidden=""
@@ -381,7 +381,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         </p>
       </button>
       <div
-        aria-label="delete-confirmation"
+        aria-label="import-list"
         aria-modal="true"
         data-dialog="true"
         hidden=""
@@ -760,7 +760,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         </p>
       </button>
       <div
-        aria-label="delete-confirmation"
+        aria-label="import-list"
         aria-modal="true"
         data-dialog="true"
         hidden=""

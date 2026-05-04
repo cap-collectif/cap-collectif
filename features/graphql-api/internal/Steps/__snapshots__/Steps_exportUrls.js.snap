@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Step exports urls fetches export urls for CollectStep 1`] = `
+Object {
+  "node": Object {
+    "exportContributionsUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/collecte-des-propositions/download?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/collecte-des-propositions/download?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportContributorsUrls": Array [
+      Object {
+        "url": "https://capco.test/export-step-contributors/Y29sbGVjdDpjb2xsZWN0c3RlcDE=?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/export-step-contributors/Y29sbGVjdDpjb2xsZWN0c3RlcDE=?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportGroupedUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/collecte-des-propositions/download?grouped=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportVotesUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/collecte-des-propositions/download?votes=true&simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Step exports urls fetches export urls for ConsultationStep 1`] = `
+Object {
+  "node": Object {
+    "exportContributionsUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/croissance-innovation-disruption/step/collecte-des-avis/download?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/projects/croissance-innovation-disruption/step/collecte-des-avis/download?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportContributorsUrls": Array [
+      Object {
+        "url": "https://capco.test/export-step-contributors/Y29uc3VsdGF0aW9uOmNzdGVwMQ==?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/export-step-contributors/Y29uc3VsdGF0aW9uOmNzdGVwMQ==?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportGroupedUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/croissance-innovation-disruption/step/collecte-des-avis/download?grouped=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Step exports urls fetches export urls for DebateStep 1`] = `
+Object {
+  "node": Object {
+    "exportContributionsUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/debat-sur-le-cannabis/step/pour-ou-contre-la-legalisation-du-cannabis/download?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/projects/debat-sur-le-cannabis/step/pour-ou-contre-la-legalisation-du-cannabis/download?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportContributorsUrls": Array [
+      Object {
+        "url": "https://capco.test/export-step-contributors/ZGViYXRlOmRlYmF0ZVN0ZXBDYW5uYWJpcw==?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/export-step-contributors/ZGViYXRlOmRlYmF0ZVN0ZXBDYW5uYWJpcw==?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportGroupedUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/debat-sur-le-cannabis/step/pour-ou-contre-la-legalisation-du-cannabis/download?grouped=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportVotesUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/debat-sur-le-cannabis/step/pour-ou-contre-la-legalisation-du-cannabis/download?votes=true&simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Step exports urls fetches export urls for QuestionnaireStep 1`] = `
+Object {
+  "node": Object {
+    "exportContributionsUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/projet-avec-questionnaire/step/questionnaire-des-jo-2024/download?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/projects/projet-avec-questionnaire/step/questionnaire-des-jo-2024/download?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportContributorsUrls": Array [
+      Object {
+        "url": "https://capco.test/export-step-contributors/cXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlc3RlcDE=?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/export-step-contributors/cXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlc3RlcDE=?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportGroupedUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/projet-avec-questionnaire/step/questionnaire-des-jo-2024/download?grouped=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Step exports urls fetches export urls for SelectionStep 1`] = `
+Object {
+  "node": Object {
+    "exportContributionsUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/selection/download?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/selection/download?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportContributorsUrls": Array [
+      Object {
+        "url": "https://capco.test/export-step-contributors/c2VsZWN0aW9uOnNlbGVjdGlvbnN0ZXAx?_locale=fr-FR",
+        "variant": "full",
+      },
+      Object {
+        "url": "https://capco.test/export-step-contributors/c2VsZWN0aW9uOnNlbGVjdGlvbnN0ZXAx?simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportGroupedUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/selection/download?grouped=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+    "exportVotesUrls": Array [
+      Object {
+        "url": "https://capco.test/projects/budget-participatif-rennes/step/selection/download?votes=true&simplified=true&_locale=fr-FR",
+        "variant": "simplified",
+      },
+    ],
+  },
+}
+`;

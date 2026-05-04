@@ -1,0 +1,9 @@
+StepExportUrl:
+    type: object
+    config:
+        name: StepExportUrl
+        fields:
+            variant:
+                type: 'String!'
+            url:
+                type: 'URI!'

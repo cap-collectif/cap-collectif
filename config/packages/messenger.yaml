@@ -11,3 +11,5 @@ framework:
                     max_delay: 0
         routing:
             Capco\AppBundle\Message\DebateArticleCrawlerMessage: async
+            Capco\AppBundle\Message\ExportOnDemandMessage: async
+            Capco\AppBundle\Message\ExportReadyEmailMessage: async

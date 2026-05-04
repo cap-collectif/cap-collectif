@@ -2399,8 +2399,9 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -2577,6 +2578,7 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
   The unit chosen to set the archived duration can be either MONTHS or DAYS
   """
   proposalArchivedUnitTime: ProposalArchivedUnitTime!
+  exportVotesUrls: [StepExportUrl]
   private: Boolean!
   defaultStatus: ProposalStepStatus
 
@@ -3263,8 +3265,9 @@ type ConsultationStep implements NodeSlug & Node & Step & RequirementStep {
 
   """The project"""
   project: Project!
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -5475,8 +5478,9 @@ type DebateStep implements NodeSlug & Step & Node {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -5518,6 +5522,7 @@ type DebateStep implements NodeSlug & Step & Node {
 
   """Does the debate allow anonymous users to participate?"""
   isAnonymousParticipationAllowed: Boolean!
+  exportVotesUrls: [StepExportUrl]
 }
 
 enum DebateType {
@@ -10676,8 +10681,9 @@ type OtherStep implements NodeSlug & Node & Step {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -11606,8 +11612,9 @@ type PresentationStep implements NodeSlug & Node & Step {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -13872,8 +13879,9 @@ interface ProposalStep implements NodeSlug {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -14046,6 +14054,7 @@ interface ProposalStep implements NodeSlug {
   The unit chosen to set the archived duration can be either MONTHS or DAYS
   """
   proposalArchivedUnitTime: ProposalArchivedUnitTime!
+  exportVotesUrls: [StepExportUrl]
 }
 
 type ProposalStepPaperVoteCounter {
@@ -15547,8 +15556,9 @@ type QuestionnaireStep implements NodeSlug & Node & Step & RequirementStep {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -15687,8 +15697,9 @@ type RankingStep implements NodeSlug & Node & Step {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -17253,8 +17264,9 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -17427,6 +17439,7 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
   The unit chosen to set the archived duration can be either MONTHS or DAYS
   """
   proposalArchivedUnitTime: ProposalArchivedUnitTime!
+  exportVotesUrls: [StepExportUrl]
   position: Int!
 
   """
@@ -18434,8 +18447,9 @@ interface Step implements NodeSlug {
     isFuture: Boolean
   ): EventConnection!
   project: Project
-  exportStepUrl: URI
-  exportContributorsUrl: URI
+  exportContributionsUrls: [StepExportUrl]
+  exportContributorsUrls: [StepExportUrl]
+  exportGroupedUrls: [StepExportUrl]
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Mediators assigned to this step."""
@@ -18465,6 +18479,11 @@ enum StepDisplayType {
 
   """Display participation steps as a numbered list."""
   NUMBERED_LIST
+}
+
+type StepExportUrl {
+  variant: String!
+  url: URI!
 }
 
 """Ways in which lists of steps can be ordered upon return."""

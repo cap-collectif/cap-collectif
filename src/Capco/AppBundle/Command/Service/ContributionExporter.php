@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Command\Service\FilePathResolver\AbstractFilePathResolver;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -55,7 +56,10 @@ class ContributionExporter
     {
         $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::FULL, $append);
         $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::SIMPLIFIED, $append);
-        $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::GROUPED, $append);
+
+        if ($step instanceof QuestionnaireStep) {
+            $this->write($step, $contributions, $withHeaders, ExportVariantsEnum::GROUPED, $append);
+        }
     }
 
     protected function setDelimiter(?string $delimiter): void

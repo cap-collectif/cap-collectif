@@ -906,29 +906,42 @@ class ProposalSelectionVoteRepository extends EntityRepository
     /**
      * Get aggregated statistics (vote counts and proposal counts) per user for a SelectionStep.
      *
-     * @return array{votes: array<string, int>, proposals: array<string, int>}
+     * @return array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>}
      */
     public function getUserStatsForStep(SelectionStep $step): array
     {
         $connection = $this->_em->getConnection();
 
-        // Only count votes if voting is enabled on this step
         $votesMap = [];
+        $votedProposalReferencesMap = [];
         if ($step->isVotable()) {
+            $votesOrderBy = $step->isVotesRanking()
+                ? "COALESCE(v.position, 999999) ASC, v.created_at ASC, CONCAT(pf.reference, '-', p.reference) ASC"
+                : "v.created_at ASC, CONCAT(pf.reference, '-', p.reference) ASC";
+
             $votesSql = <<<'SQL'
                     SELECT
                         IFNULL(v.voter_id, v.participant_id) as user_id,
-                        COUNT(*) as total_votes
+                        COUNT(*) as total_votes,
+                        GROUP_CONCAT(
+                            CONCAT(pf.reference, '-', p.reference)
+                            ORDER BY %s
+                            SEPARATOR ','
+                        ) as voted_proposal_references
                     FROM votes v
+                    INNER JOIN proposal p ON v.proposal_id = p.id
+                    INNER JOIN proposal_form pf ON p.proposal_form_id = pf.id
                     WHERE v.selection_step_id = :step_id
                       AND v.is_accounted = 1
                       AND v.published = 1
                     GROUP BY IFNULL(v.voter_id, v.participant_id)
                 SQL;
 
+            $votesSql = sprintf($votesSql, $votesOrderBy);
             $votesResult = $connection->executeQuery($votesSql, ['step_id' => $step->getId()])->fetchAllAssociative();
             foreach ($votesResult as $row) {
                 $votesMap[(string) $row['user_id']] = (int) $row['total_votes'];
+                $votedProposalReferencesMap[(string) $row['user_id']] = (string) ($row['voted_proposal_references'] ?? '');
             }
         }
 
@@ -954,6 +967,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return [
             'votes' => $votesMap,
             'proposals' => $proposalsMap,
+            'votedProposalReferences' => $votedProposalReferencesMap,
         ];
     }
 

@@ -16,6 +16,7 @@ use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -58,6 +59,7 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
                 'Create csv file of contributions from consultation step data.'
             )
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -72,7 +74,14 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
 
         $this->stopwatch->start('export_consultation_contributions', 'Memory usage - Execution time');
 
-        $stepCount = $this->consultationStepRepository->count([]);
+        if ($input->getOption('stepId')) {
+            $consultationStep = $this->consultationStepRepository->find($input->getOption('stepId'));
+            $consultationSteps = $consultationStep ? [$consultationStep] : [];
+        } else {
+            $consultationSteps = null;
+        }
+
+        $stepCount = $consultationSteps ? \count($consultationSteps) : $this->consultationStepRepository->count([]);
 
         if (0 === $stepCount) {
             $style->error('No consultation step found');
@@ -92,14 +101,7 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
             ->setHeaders(['Step', 'Opinion(s) contributions exported'])
         ;
 
-        $offset = 0;
-        do {
-            $consultationSteps = $this->consultationStepRepository->findBy([], null, self::CONSULTATION_STEP_BATCH_SIZE, $offset);
-
-            if (empty($consultationSteps)) {
-                break;
-            }
-
+        if (null !== $consultationSteps) {
             foreach ($consultationSteps as $consultationStep) {
                 $this->consultationContributionsExporter->initializeStyle($style);
                 $filePaths = $this->getFilePaths($consultationStep);
@@ -114,10 +116,34 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
 
                 $this->finalizeExportFiles($filesystem, $consultationStep, $filePaths, $style, $input, $output);
             }
+        } else {
+            $offset = 0;
+            do {
+                $consultationSteps = $this->consultationStepRepository->findBy([], null, self::CONSULTATION_STEP_BATCH_SIZE, $offset);
 
-            $this->entityManager->clear();
-            $offset += self::CONSULTATION_STEP_BATCH_SIZE;
-        } while (self::CONSULTATION_STEP_BATCH_SIZE === \count($consultationSteps));
+                if (empty($consultationSteps)) {
+                    break;
+                }
+
+                foreach ($consultationSteps as $consultationStep) {
+                    $this->consultationContributionsExporter->initializeStyle($style);
+                    $filePaths = $this->getFilePaths($consultationStep);
+                    $opinionsExported = $this->exportConsultationStepOpinionsByBatch(
+                        $input,
+                        $consultationStep,
+                        $filePaths
+                    );
+
+                    $totalOpinions += $opinionsExported;
+                    $tableSummary->addRows([[$consultationStep->getTitle(), $opinionsExported], new TableSeparator()]);
+
+                    $this->finalizeExportFiles($filesystem, $consultationStep, $filePaths, $style, $input, $output);
+                }
+
+                $this->entityManager->clear();
+                $offset += self::CONSULTATION_STEP_BATCH_SIZE;
+            } while (self::CONSULTATION_STEP_BATCH_SIZE === \count($consultationSteps));
+        }
 
         $tableSummary->setFooterTitle('Total Opinions: ' . $totalOpinions);
         $tableSummary->render();
@@ -142,10 +168,14 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
      */
     private function getFilePaths(ConsultationStep $consultationStep): array
     {
-        return [
+        $filePaths = [
             ExportVariantsEnum::FULL->value => $this->contributionsFilePathResolver->getFullExportPath($consultationStep),
             ExportVariantsEnum::SIMPLIFIED->value => $this->contributionsFilePathResolver->getSimplifiedExportPath($consultationStep),
         ];
+
+        $this->ensureExportDirectories($filePaths);
+
+        return $filePaths;
     }
 
     /**

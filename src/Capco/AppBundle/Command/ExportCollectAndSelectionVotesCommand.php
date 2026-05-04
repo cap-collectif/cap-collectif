@@ -24,6 +24,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -79,11 +80,13 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
                 'Export Votes from Collect Step & Selection Step, contains only proposals from users validated accounts and published responses.'
             )
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given collect or selection step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
+        $this->assertProjectRootDirIsConfigured();
 
         if (!$input->getOption('force') && !$this->toggleManager->isActive('export')) {
             $style->error('Please enable "export" feature to run this command');
@@ -93,7 +96,7 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
 
         $this->stopwatch->start('export_votes', 'Memory usage - Execution time');
 
-        $steps = $this->getSteps();
+        $steps = $this->getSteps($input);
         $stepCount = \count($steps);
 
         $style->writeln(sprintf('Found %d step(s)', $stepCount));
@@ -106,18 +109,24 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
         ;
 
         $translatedHeaderKeys = array_map(fn ($header) => $this->translator->trans($header), self::HEADER_KEYS);
+        $delimiterOption = $input->getOption('delimiter');
+        $delimiter = \is_string($delimiterOption) && '' !== $delimiterOption
+            ? $delimiterOption
+            : self::DEFAULT_CSV_DELIMITER;
 
         $totalVotes = 0;
 
         foreach ($steps as $step) {
             $path = $this->votesFilePathResolver->getSimplifiedExportPath($step);
+            $this->ensureExportDirectory($path);
 
             $handle = fopen($path, 'w');
             if (!$handle) {
                 return Command::FAILURE;
             }
 
-            fputcsv($handle, $translatedHeaderKeys);
+            $this->writeUtf8Bom($handle);
+            fputcsv($handle, $translatedHeaderKeys, $delimiter);
 
             $votes = $this->getVotes($step);
             $votesTotalCount = $this->getVotesCount($step);
@@ -139,15 +148,15 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
                 $proposal = $vote->getProposal();
                 fputcsv($handle, [
                     $proposal->getId(),
-                    $proposal->getReference(),
+                    $proposal->getFullReference(),
                     $proposal->getTitle(),
                     $this->proposalUrlResolver->__invoke($proposal),
                     $vote->getId(),
-                    $vote->getPosition(),
+                    $vote->getPosition() + 1,
                     $this->csvDataFormatter->getNullableDatetime($vote->getPublishedAt()),
                     $this->csvDataFormatter->getReadableBoolean($vote->isPrivate()),
                     $vote->getContributor()->getId(),
-                ]);
+                ], $delimiter);
 
                 if (($votesCount % self::BATCH_SIZE) === 0) {
                     $this->em->clear();
@@ -192,6 +201,16 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
     }
 
     /**
+     * Excel auto-detects UTF-8 when BOM is present.
+     *
+     * @param resource $handle
+     */
+    private function writeUtf8Bom($handle): void
+    {
+        fwrite($handle, "\xEF\xBB\xBF");
+    }
+
+    /**
      * @return iterable< ProposalSelectionVote|ProposalCollectVote >
      */
     private function getVotes(AbstractStep $step): iterable
@@ -215,11 +234,31 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
     /**
      * @return array< CollectStep|SelectionStep >
      */
-    private function getSteps(): array
+    private function getSteps(InputInterface $input): array
     {
+        if ($input->getOption('stepId')) {
+            $stepId = (string) $input->getOption('stepId');
+            $selectionStep = $this->selectionStepRepository->find($stepId);
+            $collectStep = $this->collectStepRepository->find($stepId);
+            $step = $selectionStep ?? $collectStep;
+
+            if (!$step instanceof CollectStep && !$step instanceof SelectionStep) {
+                throw new \InvalidArgumentException(sprintf('Step "%s" should be a collect or selection step.', $stepId));
+            }
+
+            return [$step];
+        }
+
         $selectionSteps = $this->selectionStepRepository->findWithVotes();
         $collectSteps = $this->collectStepRepository->findWithVotes();
 
         return array_merge($selectionSteps, $collectSteps);
+    }
+
+    private function assertProjectRootDirIsConfigured(): void
+    {
+        if ('' === $this->projectRootDir) {
+            throw new \RuntimeException('Project root dir should not be empty.');
+        }
     }
 }

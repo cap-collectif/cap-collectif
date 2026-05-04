@@ -73,6 +73,11 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
                 continue;
             }
 
+            $this->ensureExportDirectories([
+                ExportVariantsEnum::FULL->value => $this->participantsFilePathResolver->getFullExportPath($questionnaireStep),
+                ExportVariantsEnum::SIMPLIFIED->value => $this->participantsFilePathResolver->getSimplifiedExportPath($questionnaireStep),
+            ]);
+
             $this->exporter->initializeStyle($style);
             $this->exporter->exportQuestionnaireParticipants($questionnaire, $input->getOption('delimiter'));
             $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($questionnaireStep, ExportVariantsEnum::FULL));

@@ -42,6 +42,7 @@ const commit = (
           url: '',
           exportContributorsUrl: '',
           exportableSteps: [],
+          steps: [],
           owner: {
             __typename: '',
             id: owner?.value || '',

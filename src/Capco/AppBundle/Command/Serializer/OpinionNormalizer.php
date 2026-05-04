@@ -175,6 +175,7 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
         $versions = $object->getVersions();
         $userType = $author?->getUserType();
         $opinionTypeConsultation = $opinionType?->getConsultation();
+        $visibleArgumentsCount = $this->getArgumentCountPerOpinion($object, $object->getStep(), null, true);
 
         $opinionArray = [
             self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME),
@@ -190,9 +191,9 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
             self::EXPORT_CONTRIBUTION_VOTES_COUNT_OK => $isVotable ? $this->getVoteCountPerOpinion($object, $object->getStep(), 1) : 0,
             self::EXPORT_CONTRIBUTION_VOTES_COUNT_MITIGE => $isVotable ? $this->getVoteCountPerOpinion($object, $object->getStep(), 0) : 0,
             self::EXPORT_CONTRIBUTION_VOTES_COUNT_NOK => $isVotable ? $this->getVoteCountPerOpinion($object, $object->getStep(), -1) : 0,
-            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT => $arguments->count(),
-            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR => $this->getArgumentCountPerOpinion($object, $object->getStep(), 1),
-            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST => $this->getArgumentCountPerOpinion($object, $object->getStep(), -1),
+            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT => $visibleArgumentsCount,
+            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR => $this->getArgumentCountPerOpinion($object, $object->getStep(), Argument::TYPE_FOR, true),
+            self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST => $this->getArgumentCountPerOpinion($object, $object->getStep(), Argument::TYPE_AGAINST, true),
             self::EXPORT_CONTRIBUTION_VOTES_ID => null,
             self::EXPORT_CONTRIBUTION_VOTES_RELATED_ID => null,
             self::EXPORT_CONTRIBUTION_VOTES_AUTHOR_ID => null,
@@ -237,8 +238,8 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
                 self::EXPORT_CONTRIBUTION_VOTES_COUNT_MITIGE => $isVotable ? $this->getVoteCountPerOpinion($object, $object->getStep(), 0) : 0,
                 self::EXPORT_CONTRIBUTION_VOTES_COUNT_NOK => $isVotable ? $this->getVoteCountPerOpinion($object, $object->getStep(), -1) : 0,
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT => $arguments->count(),
-                self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR => $this->getArgumentCountPerOpinion($object, $object->getStep(), 1),
-                self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST => $this->getArgumentCountPerOpinion($object, $object->getStep(), -1),
+                self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_FOR => $this->getArgumentCountPerOpinion($object, $object->getStep(), Argument::TYPE_FOR),
+                self::EXPORT_CONTRIBUTION_ARGUMENTS_COUNT_AGAINST => $this->getArgumentCountPerOpinion($object, $object->getStep(), Argument::TYPE_AGAINST),
                 self::EXPORT_CONTRIBUTION_SOURCES_COUNT => $sources->count(),
                 self::EXPORT_CONTRIBUTION_VERSIONS_COUNT => $versions->count(),
                 self::EXPORT_CONTRIBUTION_CONTEXT_ELEMENT_TITLE => null,
@@ -300,12 +301,17 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
         return $this->translateHeaders($opinionArray);
     }
 
-    private function getArgumentCountPerOpinion(Opinion $opinion, ConsultationStep $consultationStep, int $filterValue): int
-    {
+    private function getArgumentCountPerOpinion(
+        Opinion $opinion,
+        ConsultationStep $consultationStep,
+        ?int $filterValue = null,
+        bool $excludeTrashed = false
+    ): int {
         $filterClosure = fn (Argument $argument) => null !== $argument->getStep()
             && $argument->getStep()->getId() === $consultationStep->getId()
             && $argument->isPublished()
-            && $argument->getType() === $filterValue;
+            && (!$excludeTrashed || !$argument->isTrashed())
+            && (null === $filterValue || $argument->getType() === $filterValue);
 
         return $opinion->getArguments()->filter($filterClosure)->count();
     }

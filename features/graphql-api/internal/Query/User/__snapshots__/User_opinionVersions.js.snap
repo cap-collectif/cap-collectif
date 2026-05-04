@@ -60,7 +60,7 @@ Object {
         "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "hasNextPage": true,
       },
-      "totalCount": 9,
+      "totalCount": 10,
     },
   },
 }
@@ -258,7 +258,7 @@ Object {
         "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "hasNextPage": true,
       },
-      "totalCount": 9,
+      "totalCount": 10,
     },
   },
 }

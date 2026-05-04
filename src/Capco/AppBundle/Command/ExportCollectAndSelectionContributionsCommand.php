@@ -178,7 +178,6 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         ExportHeaders::EXPORT_PROPOSAL_REPORTINGS_AUTHOR_USER_TYPE_NAME,
     ];
     private const SIMPLIFIED_HEADER_KEYS = [
-        ExportHeaders::EXPORT_CONTRIBUTION_TYPE,
         ExportHeaders::EXPORT_PROPOSAL_ID,
         ExportHeaders::EXPORT_PROPOSAL_PUBLISHED_AT,
         ExportHeaders::EXPORT_PROPOSAL_REFERENCE,
@@ -262,8 +261,18 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         ExportHeaders::EXPORT_PROPOSAL_VOTES_CREATED_AT,
     ];
 
+    /**
+     * @var array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>}
+     */
+    private const EMPTY_USER_STATS = [
+        'votes' => [],
+        'proposals' => [],
+        'votedProposalReferences' => [],
+    ];
+
     protected static $defaultName = 'capco:export:collect-selection:contributions';
 
+    // @phpstan-ignore-next-line
     private readonly string $projectRootDir;
     private string $delimiter = self::DEFAULT_CSV_DELIMITER;
 
@@ -371,10 +380,10 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
             $userStats = match (true) {
                 $step instanceof SelectionStep => $this->proposalSelectionVoteRepository->getUserStatsForStep($step),
                 $step instanceof CollectStep => $this->proposalCollectVoteRepository->getUserStatsForStep($step),
-                default => ['votes' => [], 'proposals' => []],
+                default => self::EMPTY_USER_STATS,
             };
 
-            /** * @var Proposal $proposal */
+            /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
                 // compute FULL proposal once
                 $proposalFullData = $this->proposalNormalizer->normalize(
@@ -396,6 +405,10 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     $variant = ExportVariantsEnum::from($variant);
                     $handle = $config['handle'];
                     $headers = $config['headers'];
+
+                    if (ExportVariantsEnum::SIMPLIFIED === $variant && !$this->shouldExportProposalInSimplifiedVariant($proposal)) {
+                        continue;
+                    }
 
                     $proposalData = $this->getProposalByVariant(
                         variant: $variant,
@@ -519,7 +532,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     variant: $variant,
                     proposalData: $proposalData,
                     contributor: $author,
-                    userStats: ['votes' => [], 'proposals' => []],
+                    userStats: self::EMPTY_USER_STATS,
                     step: $step
                 );
 
@@ -562,9 +575,9 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
     }
 
     /**
-     * @param array<string, array{handle: resource, headers: array<string>}>  $variants
-     * @param array<string, mixed>                                            $proposalData
-     * @param array{votes: array<string, int>, proposals: array<string, int>} $userStats
+     * @param array<string, array{handle: resource, headers: array<string>}>                                                  $variants
+     * @param array<string, mixed>                                                                                            $proposalData
+     * @param array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>} $userStats
      */
     private function exportProposalVotes(
         array $variants,
@@ -622,7 +635,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     variant: $variant,
                     proposalData: $proposalData,
                     contributor: $author,
-                    userStats: ['votes' => [], 'proposals' => []],
+                    userStats: self::EMPTY_USER_STATS,
                     step: $step
                 );
 
@@ -670,7 +683,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     variant: $variant,
                     proposalData: $proposalData,
                     contributor: $author,
-                    userStats: ['votes' => [], 'proposals' => []],
+                    userStats: self::EMPTY_USER_STATS,
                     step: $step
                 );
 
@@ -717,7 +730,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     variant: $variant,
                     proposalData: $proposalData,
                     contributor: $author,
-                    userStats: ['votes' => [], 'proposals' => []],
+                    userStats: self::EMPTY_USER_STATS,
                     step: $step
                 );
 
@@ -817,18 +830,22 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
             $baseKeys = array_values(array_diff($baseKeys, self::VOTE_DEPENDENT_HEADERS));
         }
 
+        $insertAfterKey = \in_array($variant, [ExportVariantsEnum::SIMPLIFIED, ExportVariantsEnum::GROUPED], true)
+            ? ExportHeaders::EXPORT_PROPOSAL_STATUS_NAME
+            : ExportHeaders::EXPORT_PROPOSAL_DISTRICT_NAME;
+
         $headers = $this->array_merge_after_key(
             $baseKeys,
             $questionsKeys,
-            ExportHeaders::EXPORT_PROPOSAL_DISTRICT_NAME
+            $insertAfterKey
         );
 
         return array_map(fn ($header) => $this->translator->trans($header), $headers);
     }
 
     /**
-     * @param array<string, mixed>                                            $proposalData
-     * @param array{votes: array<string, int>, proposals: array<string, int>} $userStats
+     * @param array<string, mixed>                                                                                            $proposalData
+     * @param array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>} $userStats
      *
      * @return array<string, mixed>
      */
@@ -845,12 +862,14 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 function () use ($contributor, $variant, $step, $userStats, $proposalData) {
                     $userData = $this->participantNormalizer->normalize(object: $contributor, context: [
                         BaseNormalizer::EXPORT_VARIANT => $variant,
+                        'step' => $step,
                     ]);
 
                     $authorId = $contributor->getId();
 
                     if ($step->isVotable()) {
                         $userData[$this->translator->trans(ExportHeaders::EXPORT_USER_TOTAL_VOTES)] = $userStats['votes'][$authorId] ?? 0;
+                        $userData[$this->translator->trans(ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS)] = $userStats['votedProposalReferences'][$authorId] ?? '';
                     }
 
                     $userData[$this->translator->trans(ExportHeaders::EXPORT_USER_TOTAL_PROPOSALS)] = $userStats['proposals'][$authorId] ?? 0;
@@ -864,6 +883,18 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
     private function getFormattedMemoryUsage(): string
     {
         return round(memory_get_usage() / 1048576, 2) . ' MB';
+    }
+
+    private function shouldExportProposalInSimplifiedVariant(Proposal $proposal): bool
+    {
+        $author = $proposal->getAuthor();
+
+        return null !== $author
+            && $author->isEmailConfirmed()
+            && $proposal->isPublished()
+            && !$proposal->isDraft()
+            && !$proposal->isTrashed()
+            && !$proposal->isDeleted();
     }
 
     /**
@@ -932,13 +963,5 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 'filename' => $groupedExportPathFilename,
             ],
         ];
-    }
-
-    private function ensureExportDirectory(string $filePath): void
-    {
-        $directory = \dirname($filePath);
-        if (!is_dir($directory) && !@mkdir($directory, 0755, true) && !is_dir($directory)) {
-            throw new \RuntimeException("Cannot create export directory: {$directory}");
-        }
     }
 }

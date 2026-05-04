@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\Command;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Finder\Finder;
 
@@ -66,6 +68,33 @@ class ExportCollectAndSelectionVotesCommandTest extends KernelTestCase
             self::EXPECTED_DIRECTORY . '/collect' => $simplifiedFileNames,
             self::EXPECTED_DIRECTORY . '/selection' => $simplifiedFileNames,
         ]);
+    }
+
+    public function testCommandWithStepIdOption(): void
+    {
+        foreach (self::OUTPUT_DIRECTORIES_STEP_TYPE as $outputDir) {
+            $this->emptyOutputDirectory($outputDir);
+        }
+
+        $doctrine = self::getContainer()->get('doctrine');
+        /** @var array<int, CollectStep> $collectSteps */
+        $collectSteps = $doctrine->getRepository(CollectStep::class)->findWithVotes();
+        /** @var array<int, SelectionStep> $selectionSteps */
+        $selectionSteps = $doctrine->getRepository(SelectionStep::class)->findWithVotes();
+
+        $step = $collectSteps[0] ?? $selectionSteps[0] ?? null;
+
+        $this->assertNotNull($step);
+
+        $actualOutputs = $this->executeCommand(
+            self::CAPCO_EXPORT_COLLECT_SELECTION_VOTES,
+            array_values(self::OUTPUT_DIRECTORIES_STEP_TYPE),
+            [
+                '--stepId' => $step->getId(),
+            ]
+        );
+
+        $this->assertCount(1, $actualOutputs);
     }
 
     /**

@@ -4,7 +4,7 @@ import { loadQuery, RelayEnvironmentProvider } from 'relay-hooks'
 import { formValueSelector } from 'redux-form'
 import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom'
 import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import type { ProjectAdminContent_project$data } from '~relay/ProjectAdminContent_project.graphql'
 import '~relay/ProjectAdminContent_project.graphql'
 import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query.graphql'
@@ -25,7 +25,6 @@ import ProjectAdminParticipantTab, {
   initialVariables as queryVariableParticipant,
   queryParticipant,
 } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipantTab'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context'
 import { ProjectAdminParticipantsProvider } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context'
 import ProjectAdminContributionsPage, {
@@ -37,7 +36,9 @@ import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContribu
 import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import htmlDecode from '~/components/Utils/htmlDecode'
+import ExportModal from '~/components/Admin/Project/Export/ExportModal'
 import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
+import { Button, CapUIIcon, Flex } from '@cap-collectif/ui'
 
 type Props = {
   readonly viewerIsAdmin: boolean
@@ -212,6 +213,7 @@ export const ProjectAdminContent = ({
   viewerIsAdmin,
   query,
 }: Props) => {
+  const intl = useIntl()
   const location = useLocation()
   const [title, setTitle] = useState<string>(project.title)
   const path = getProjectAdminBaseUrl(project._id)
@@ -341,13 +343,27 @@ export const ProjectAdminContent = ({
   return (
     <div className="d-flex">
       <Header>
-        <div>
+        <Flex>
           <h1>{htmlDecode(title)}</h1>
-          <a href={project.url} target="_blank" rel="noopener noreferrer">
-            <Icon name={ICON_NAME.externalLink} size="14px" />
-            <FormattedMessage id="global.preview" />
-          </a>
-        </div>
+          <Flex spacing={1}>
+            <ExportModal project={project} />
+            <Button
+              as="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="tertiary"
+              variantColor="primary"
+              variantSize="small"
+              leftIcon={CapUIIcon.Preview}
+              color="#006CE0 !important"
+              href={project.url}
+            >
+              {intl.formatMessage({
+                id: 'global.preview',
+              })}
+            </Button>
+          </Flex>
+        </Flex>
 
         <NavContainer>
           {links.map((link, idx) => (
@@ -447,6 +463,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
         totalCount
       }
       ...ProjectAdminForm_project
+      ...ExportModal_project
     }
   `,
   query: graphql`

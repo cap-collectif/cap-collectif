@@ -21,6 +21,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
@@ -29,6 +30,11 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ConsultationContributionExporter extends ContributionExporter
 {
+    /**
+     * @var array<string, array<string, bool>>
+     */
+    private array $writtenExportVariants = [];
+
     public function __construct(
         protected EntityManagerInterface $entityManager,
         private readonly OpinionNormalizer $opinionNormalizer,
@@ -58,7 +64,7 @@ class ConsultationContributionExporter extends ContributionExporter
         bool $append
     ): void {
         $this->setDelimiter($delimiter);
-        $this->exportContributionsInBatches($opinions, $consultationStep, $append);
+        $this->exportContributionsInBatches($opinions, $consultationStep);
     }
 
     /**
@@ -66,14 +72,8 @@ class ConsultationContributionExporter extends ContributionExporter
      */
     private function exportContributionsInBatches(
         array $opinions,
-        ConsultationStep $consultationStep,
-        bool $append
+        ConsultationStep $consultationStep
     ): void {
-        $withHeader = true;
-        if ($append) {
-            $withHeader = false;
-        }
-
         $progressBar = $this->style->createProgressBar(\count($opinions));
         $progressBar->setFormat(
             "\n%current%/%max% processed proposal(s)  [%bar%] %percent%%" .
@@ -87,11 +87,14 @@ class ConsultationContributionExporter extends ContributionExporter
         $totalEntities = 0;
         foreach ($opinions as $opinion) {
             $contributions = $this->getAllContributionsFromOpinionByBatch($opinion, $totalEntities);
+            $simplifiedContributions = array_values(array_filter(
+                $contributions,
+                fn (object $contribution) => $this->isVisibleInSimplifiedExport($contribution)
+            ));
             $memUse = round(memory_get_usage() / 1000000, 2) . 'MB';
             $this->style->writeln(sprintf('Total Contributions Processed for current Opinion: %d (memory used: %s)', \count($contributions), $memUse));
-            $this->exportContributions($contributions, $consultationStep, $withHeader, $append);
+            $this->exportContributionVariants($contributions, $simplifiedContributions, $consultationStep);
 
-            $withHeader = false;
             $progressBar->setMessage($memUse, 'memory_used');
             $progressBar->setMessage((string) $totalEntities, 'total_processed');
             $progressBar->advance();
@@ -285,5 +288,68 @@ class ConsultationContributionExporter extends ContributionExporter
             $opinionSources,
             $opinionSourceReports,
         );
+    }
+
+    /**
+     * @param array<ExportableContributionInterface> $fullContributions
+     * @param array<ExportableContributionInterface> $simplifiedContributions
+     */
+    private function exportContributionVariants(
+        array $fullContributions,
+        array $simplifiedContributions,
+        ConsultationStep $consultationStep
+    ): void {
+        $this->writeVariant($consultationStep, $fullContributions, ExportVariantsEnum::FULL);
+        $this->writeVariant($consultationStep, $simplifiedContributions, ExportVariantsEnum::SIMPLIFIED);
+    }
+
+    /**
+     * @param array<ExportableContributionInterface> $contributions
+     */
+    private function writeVariant(
+        ConsultationStep $consultationStep,
+        array $contributions,
+        ExportVariantsEnum $variant
+    ): void {
+        if ([] === $contributions) {
+            return;
+        }
+
+        $stepId = $consultationStep->getId();
+        $hasWrittenVariant = $this->writtenExportVariants[$stepId][$variant->value] ?? false;
+        $withHeader = !$hasWrittenVariant;
+
+        $this->write($consultationStep, $contributions, $withHeader, $variant, $hasWrittenVariant);
+        $this->writtenExportVariants[$stepId][$variant->value] = true;
+    }
+
+    private function isVisibleInSimplifiedExport(object $contribution): bool
+    {
+        return !$this->isContributionOrRelatedContributionTrashed($contribution);
+    }
+
+    private function isContributionOrRelatedContributionTrashed(object $contribution): bool
+    {
+        if (method_exists($contribution, 'isTrashed') && true === $contribution->isTrashed()) {
+            return true;
+        }
+
+        if (method_exists($contribution, 'getRelated')) {
+            $relatedContribution = $contribution->getRelated();
+        } elseif (method_exists($contribution, 'getOpinion')) {
+            $relatedContribution = $contribution->getOpinion();
+        } elseif (method_exists($contribution, 'getParent')) {
+            $relatedContribution = $contribution->getParent();
+        } elseif (method_exists($contribution, 'getOpinionVersion')) {
+            $relatedContribution = $contribution->getOpinionVersion();
+        } else {
+            $relatedContribution = null;
+        }
+
+        if (\is_object($relatedContribution)) {
+            return $this->isContributionOrRelatedContributionTrashed($relatedContribution);
+        }
+
+        return false;
     }
 }

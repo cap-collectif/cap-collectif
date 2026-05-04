@@ -114,6 +114,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->contributionsFilePathResolver->getSimplifiedExportPath($questionnaireStep);
             $paths[ExportVariantsEnum::FULL->value] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
             $paths[ExportVariantsEnum::GROUPED->value] = $this->contributionsFilePathResolver->getGroupedExportPath($questionnaireStep);
+            $this->ensureExportDirectories($paths);
 
             $this->questionnaireContributionExporter->exportQuestionnaireContributions(
                 $questionnaireStep,

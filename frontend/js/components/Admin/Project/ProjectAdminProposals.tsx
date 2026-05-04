@@ -62,7 +62,6 @@ import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisPro
 import ImportButton from '~/components/Admin/Project/ImportButton/ImportButton'
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal'
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql'
-import NewExportButton from '~/components/Admin/Project/ExportButton/NewExportButton'
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine'
 import useToastingMachine from '~/utils/hooks/useToastingMachine'
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
@@ -70,7 +69,6 @@ import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminPr
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { colorsData } from '~/utils/colors'
-import downloadCSV from '~/components/Utils/downloadCSV'
 import {
   Button,
   CapUIIcon,
@@ -1039,18 +1037,6 @@ export const ProjectAdminProposals = ({
                   />
                 </>
               )}
-            {viewerIsAdmin && project.exportableSteps && (
-              <NewExportButton
-                disabled={!hasProposals}
-                onChange={async (stepSlug: string | string[]) => {
-                  if (typeof stepSlug === 'string') {
-                    await downloadCSV(`/projects/${project.slug}/step/${stepSlug}/download`, intl)
-                  }
-                }}
-                exportableSteps={project.exportableSteps}
-                linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-              />
-            )}
           </ButtonGroup>
         </Flex>
 
@@ -1216,14 +1202,14 @@ const container = createPaginationContainer(
         count: { type: "Int!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
         cursor: { type: "String" }
-        orderBy: { type: "[ProposalOrder!]", defaultValue: [{ field: PUBLISHED_AT, direction: DESC }] }
-        state: { type: "ProposalsState!", defaultValue: ALL }
-        category: { type: "ID", defaultValue: null }
-        district: { type: "ID", defaultValue: null }
-        theme: { type: "ID", defaultValue: null }
-        status: { type: "ID", defaultValue: null }
-        step: { type: "ID", defaultValue: null }
-        term: { type: "String", defaultValue: null }
+        orderBy: { type: "[ProposalOrder!]" }
+        state: { type: "ProposalsState!" }
+        category: { type: "ID" }
+        district: { type: "ID" }
+        theme: { type: "ID" }
+        status: { type: "ID" }
+        step: { type: "ID" }
+        term: { type: "String" }
       ) {
         id
         title
@@ -1231,6 +1217,7 @@ const container = createPaginationContainer(
         slug
         type {
           title
+          id
         }
         exportableSteps @include(if: $viewerIsAdmin) {
           position
@@ -1246,8 +1233,6 @@ const container = createPaginationContainer(
           id
           title
           label
-          # ProposalStep could be used here for CollectStep & SelectionStep
-          # but relay-hooks doesn't retrieve this in store when preloading
           ... on CollectStep {
             votable
             votesRanking
@@ -1305,14 +1290,11 @@ const container = createPaginationContainer(
           status: $status
           step: $step
           term: $term
-        )
-          @connection(
-            key: "ProjectAdminProposals_proposals"
-            filters: ["orderBy", "state", "category", "district", "theme", "status", "step", "term"]
-          ) {
+        ) @connection(key: "ProjectAdminProposals_proposals", filters: ["orderBy", "state", "category", "district", "theme", "status", "step", "term"]) {
           totalCount
           pageInfo {
             hasNextPage
+            endCursor
           }
           edges {
             node {
@@ -1351,6 +1333,7 @@ const container = createPaginationContainer(
                   id
                   title
                 }
+                id
               }
               selections {
                 step {
@@ -1430,7 +1413,6 @@ const container = createPaginationContainer(
         $term: String
       ) {
         project: node(id: $projectId) {
-          id
           ...ProjectAdminProposals_project
             @arguments(
               viewerIsAdmin: $viewerIsAdmin

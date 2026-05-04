@@ -25,9 +25,9 @@ class ProposalVoteExporter
     }
 
     /**
-     * @param array<string, array{handle: resource, headers: array<string>}>  $variants
-     * @param array<string, mixed>                                            $proposalData
-     * @param array{votes: array<string, int>, proposals: array<string, int>} $userStats
+     * @param array<string, array{handle: resource, headers: array<string>}>                                                  $variants
+     * @param array<string, mixed>                                                                                            $proposalData
+     * @param array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>} $userStats
      */
     public function exportProposalVotes(
         array $variants,
@@ -113,8 +113,8 @@ class ProposalVoteExporter
     }
 
     /**
-     * @param array{votes: array<string, int>, proposals: array<string, int>} $userStats
-     * @param null|array<string, string>                                      $translatedKeys
+     * @param array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>} $userStats
+     * @param null|array<string, string>                                                                                      $translatedKeys
      *
      * @return null|array<string, mixed>
      */

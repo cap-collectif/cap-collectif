@@ -66,15 +66,14 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
         $step = $context['step'];
 
         if ($step instanceof SelectionStep) {
+            $statusName = null;
             foreach ($object->getSelections() as $selection) {
                 if ($selection->getStep()->getId() === $step->getId()) {
                     $statusName = $selection->getStatus()?->getName();
+
+                    break;
                 }
             }
-        }
-
-        if (null === $statusName) {
-            $statusName = $object->getStatus()?->getName();
         }
 
         $district = $object->getDistrict();
@@ -131,7 +130,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
             self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME),
             self::EXPORT_PROPOSAL_ID => $object->getId(),
             self::EXPORT_PROPOSAL_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
-            self::EXPORT_PROPOSAL_REFERENCE => sprintf('"%s"', $object->getFullReference()),
+            self::EXPORT_PROPOSAL_REFERENCE => $object->getFullReference(),
             self::EXPORT_PROPOSAL_TITLE => $object->getTitle(),
             self::EXPORT_PROPOSAL_SUMMARY => $object->getSummary(),
             self::EXPORT_PROPOSAL_DESCRIPTION => $object->getBodyText(),

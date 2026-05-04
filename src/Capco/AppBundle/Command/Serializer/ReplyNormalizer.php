@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
@@ -75,27 +77,32 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
             $responseArray = array_merge($responseArray, $fullUserArray);
         } elseif ($isGrouped) {
             $contributorData = $this->participantNormalizer->getParticipantPersonnalData($contributor);
-            $responseArray = array_merge($contributorData, $responseArray);
+            $responseArray = array_merge(
+                $contributorData,
+                [
+                    self::EXPORT_CONTRIBUTION_ID => $object->getId(),
+                    self::EXPORT_CONTRIBUTION_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
+                ]
+            );
         }
 
-        $keyCounters = [];
+        $orderedQuestionColumns = $this->getOrderedQuestionColumns($object->getQuestionnaire());
+        if ([] !== $orderedQuestionColumns) {
+            $responseArray = array_merge($responseArray, array_fill_keys(array_values($orderedQuestionColumns), null));
+        }
 
         /** @var AbstractResponse $response */
         foreach ($object->getResponses() as $response) {
-            $questionTitle = $response->getQuestion()?->getTitle();
-            if (null === $questionTitle) {
+            $question = $response->getQuestion();
+            if (null === $question) {
                 continue;
             }
 
-            if (!isset($keyCounters[$questionTitle])) {
-                $keyCounters[$questionTitle] = 0;
+            $questionId = (string) $question->getId();
+            $questionTitle = $orderedQuestionColumns[$questionId] ?? $question->getTitle();
+            if (null === $questionTitle) {
+                continue;
             }
-
-            if ($keyCounters[$questionTitle] > 0) {
-                $questionTitle = sprintf('%s (%d)', $questionTitle, $keyCounters[$questionTitle]);
-            }
-
-            ++$keyCounters[$response->getQuestion()?->getTitle()];
 
             if ($response instanceof MediaResponse) {
                 $mediaUrls = array_map(
@@ -111,5 +118,44 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
         }
 
         return $this->translateHeaders($responseArray);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function getOrderedQuestionColumns(?Questionnaire $questionnaire): array
+    {
+        if (null === $questionnaire) {
+            return [];
+        }
+
+        $orderedQuestionColumns = [];
+        $titleCounters = [];
+
+        foreach ($questionnaire->getQuestions() as $questionnaireAbstractQuestion) {
+            $question = $questionnaireAbstractQuestion->getQuestion();
+            if (!$question instanceof AbstractQuestion) {
+                continue;
+            }
+
+            $questionTitle = $question->getTitle();
+            if (null === $questionTitle) {
+                continue;
+            }
+
+            if (!isset($titleCounters[$questionTitle])) {
+                $titleCounters[$questionTitle] = 0;
+            }
+
+            $columnName = $titleCounters[$questionTitle] > 0
+                ? sprintf('%s (%d)', $questionTitle, $titleCounters[$questionTitle])
+                : $questionTitle;
+
+            ++$titleCounters[$questionTitle];
+
+            $orderedQuestionColumns[(string) $question->getId()] = $columnName;
+        }
+
+        return $orderedQuestionColumns;
     }
 }

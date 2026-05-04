@@ -6,6 +6,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Enum\ExportHeaders;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
@@ -18,36 +19,38 @@ use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
     private const USER_HEADERS = [
-        'id',
-        'email',
-        'userName',
-        'typeName',
-        'createdAt',
-        'updatedAt',
-        'lastLogin',
-        'rolesText',
-        'consentInternalCommunication',
-        'enabled',
-        'isEmailConfirmed',
-        'locked',
-        'phoneConfirmed',
-        'gender',
-        'dateOfBirth',
-        'websiteUrl',
-        'biography',
-        'address',
-        'zipCode',
-        'city',
-        'phone',
-        'profileUrl',
-        'userIdentificationCode',
+        ExportHeaders::EXPORT_PARTICIPANT_USER_ID,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_EMAIL,
+        ExportHeaders::EXPORT_PARTICIPANT_USERNAME,
+        ExportHeaders::EXPORT_PARTICIPANT_TYPE,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_CREATED_AT,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_UPDATED_AT,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_LAST_LOGIN,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_ROLES_TEXT,
+        ExportHeaders::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_ENABLED,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_IS_EMAIL_CONFIRMED,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_LOCKED,
+        ExportHeaders::EXPORT_PARTICIPANT_USER_IS_PHONE_CONFIRMED,
+        ExportHeaders::EXPORT_PARTICIPANT_GENDER,
+        ExportHeaders::EXPORT_PARTICIPANT_DATE_OF_BIRTH,
+        ExportHeaders::EXPORT_PARTICIPANT_WEBSITE_URL,
+        ExportHeaders::EXPORT_PARTICIPANT_BIOGRAPHY,
+        ExportHeaders::EXPORT_PARTICIPANT_POSTAL_ADDRESS,
+        ExportHeaders::EXPORT_PARTICIPANT_ZIP_CODE,
+        ExportHeaders::EXPORT_PARTICIPANT_CITY,
+        ExportHeaders::EXPORT_PARTICIPANT_PHONE,
+        ExportHeaders::EXPORT_PARTICIPANT_PROFILE_URL,
+        ExportHeaders::EXPORT_PARTICIPANT_IDENTIFICATION_CODE,
     ];
     /**
      * @var WriterInterface
@@ -64,7 +67,8 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         protected Manager $toggleManager,
         string $projectRootDir,
         protected ProjectRepository $projectRepository,
-        protected LoggerInterface $logger
+        protected LoggerInterface $logger,
+        private readonly TranslatorInterface $translator
     ) {
         $listener->disableAcl();
         $this->projectRootDir = $projectRootDir;
@@ -83,6 +87,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         $this->setName('capco:export:projects-contributors')->setDescription(
             'Create csv file from projects contributors data'
         );
+        $this->addOption(name: 'projectId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given project.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -91,7 +96,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             return 1;
         }
 
-        $projects = $this->projectRepository->findAllIdsWithSlugs();
+        $projects = $this->getProjects($input);
         foreach ($projects as $data) {
             $id = GlobalId::toGlobalId('Project', $data['id']);
 
@@ -110,7 +115,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
             );
 
-            $this->writer->addRow(WriterEntityFactory::createRowFromArray(self::USER_HEADERS));
+            $this->writer->addRow(WriterEntityFactory::createRowFromArray($this->getTranslatedHeaders()));
 
             if (!isset($project['data'])) {
                 $this->logger->error('GraphQL Query Error: ' . $project['error']);
@@ -164,7 +169,11 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             $progress->finish();
         }
 
-        $output->writeln('All projects contributors have been successfully exported!');
+        $output->writeln(
+            1 === \count($projects)
+            ? 'Project contributors have been successfully exported!'
+            : 'All projects contributors have been successfully exported!'
+        );
 
         return 0;
     }
@@ -187,7 +196,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
     private function writeContributorRow(array $contributor, ProgressBar $progress): void
     {
         $row = array_map(
-            $this->exportUtils->parseCellValue(...),
+            fn ($value) => $this->exportUtils->parseCellValue($this->translateBooleanValue($value)),
             [
                 $contributor['id'],
                 $contributor['email'],
@@ -217,6 +226,27 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 
         $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
         $progress->advance();
+    }
+
+    /**
+     * @return array<int, array{id: string, slug: string}>
+     */
+    private function getProjects(InputInterface $input): array
+    {
+        $projectId = $input->getOption('projectId');
+        if (!$projectId) {
+            return $this->projectRepository->findAllIdsWithSlugs();
+        }
+
+        $project = $this->projectRepository->find($projectId);
+        if (null === $project) {
+            throw new \InvalidArgumentException(sprintf('Project "%s" could not be found.', $projectId));
+        }
+
+        return [[
+            'id' => $project->getId(),
+            'slug' => $project->getSlug(),
+        ]];
     }
 
     private function getContributorsProjectGraphQLQuery(
@@ -257,5 +287,22 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                         }
                     }
             EOF;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function getTranslatedHeaders(): array
+    {
+        return array_map(fn (string $header) => $this->translator->trans($header), self::USER_HEADERS);
+    }
+
+    private function translateBooleanValue(mixed $value): mixed
+    {
+        if (!\is_bool($value)) {
+            return $value;
+        }
+
+        return $this->translator->trans($value ? 'global.yes' : 'global.no');
     }
 }

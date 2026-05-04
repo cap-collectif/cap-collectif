@@ -104,3 +104,13 @@ Capco\AppBundle\Entity\OpinionVersion:
         parent: '@opinion57'
         comment: <stripslashes('\<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>\')>
         ranking: 4
+    versionMultiConsultExport1:
+        id: 'versionMultiConsultExport1'
+        publishedAt: <(new \DateTime('2020-04-03 02:00:00'))>
+        createdAt: <(new \DateTime('2020-04-03 02:00:00'))>
+        title: Amendement accentué
+        body: '<stripslashes(''\<p>Texte amendé avec caractères spéciaux : été, naïf, élève.</p>\'')>'
+        author: '@user2'
+        parent: '@opinionMultiConsultExportNew'
+        comment: <stripslashes('\<p>Explication de l’amendement été &amp; naïf</p>\')>
+        ranking: 1

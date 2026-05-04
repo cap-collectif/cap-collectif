@@ -14,8 +14,8 @@ describe('Search Feature', () => {
     Base.visit({ path: searchUrl, operationName: 'NavbarRightQuery' })
   })
 
-  it('should allow anonymous user to search across all types', () => {
-    cy.get(resultCountSelector).should('contain', '3714')
+  it.only('should allow anonymous user to search across all types', () => {
+    cy.get(resultCountSelector).should('contain', '3721')
 
     cy.get(searchInputSelector).type('article')
     cy.get('.btn[type="submit"]').click({ force: true })

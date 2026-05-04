@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -54,21 +55,21 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
             return 0;
         }
 
+        $consultationSteps = null;
+        if ($input->getOption('stepId')) {
+            $step = $this->consultationRepository->find($input->getOption('stepId'));
+            $consultationSteps = $step ? [$step] : [];
+        }
+
+        $count = $consultationSteps ? \count($consultationSteps) : $count;
+
         $style->writeln(sprintf('Found %d consultations steps', $count));
 
         $style->note('Starting the export.');
         $style->progressStart($count);
-        $offset = 0;
         $batchSize = ConsultationParticipantExporter::BATCH_SIZE;
 
-        do {
-            $consultationSteps = $this->consultationRepository
-                ->getPaginator($batchSize, $offset)
-                ->getQuery()
-                ->getResult()
-            ;
-
-            /** @var ConsultationStep $consultationStep */
+        if (null !== $consultationSteps) {
             foreach ($consultationSteps as $consultationStep) {
                 $this->exporter->initializeStyle($style);
                 $participantsIds = $this->userRepository->getParticipantsIdsConfirmedForAConsultation($consultationStep);
@@ -80,6 +81,7 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
 
                 $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($consultationStep);
                 $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($consultationStep);
+                $this->ensureExportDirectories($paths);
 
                 $this->exporter->exportConsultationParticipants(
                     $participantsIds,
@@ -92,10 +94,45 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
                 $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::SIMPLIFIED));
                 $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::FULL));
             }
-            $this->entityManager->clear();
+        } else {
+            $offset = 0;
+            do {
+                $consultationSteps = $this->consultationRepository
+                    ->getPaginator($batchSize, $offset)
+                    ->getQuery()
+                    ->getResult()
+                ;
 
-            $offset += $batchSize;
-        } while (\count($consultationSteps) > 0);
+                /** @var ConsultationStep $consultationStep */
+                foreach ($consultationSteps as $consultationStep) {
+                    $this->exporter->initializeStyle($style);
+                    $participantsIds = $this->userRepository->getParticipantsIdsConfirmedForAConsultation($consultationStep);
+                    if ([] === $participantsIds) {
+                        $style->progressAdvance();
+
+                        continue;
+                    }
+
+                    $paths[ExportVariantsEnum::SIMPLIFIED->value] = $this->participantsFilePathResolver->getSimplifiedExportPath($consultationStep);
+                    $paths[ExportVariantsEnum::FULL->value] = $this->participantsFilePathResolver->getFullExportPath($consultationStep);
+                    $this->ensureExportDirectories($paths);
+
+                    $this->exporter->exportConsultationParticipants(
+                        $participantsIds,
+                        $paths,
+                        $input->getOption('delimiter')
+                    );
+
+                    $style->progressAdvance();
+
+                    $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::SIMPLIFIED));
+                    $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($consultationStep, ExportVariantsEnum::FULL));
+                }
+                $this->entityManager->clear();
+
+                $offset += $batchSize;
+            } while (\count($consultationSteps) > 0);
+        }
 
         $style->progressFinish();
 
@@ -110,5 +147,6 @@ class ExportConsultationParticipantsCommand extends BaseExportCommand
             ->setName('capco:export:consultation:participants')
             ->setDescription('Export consultation participants')
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only generate this step.');
     }
 }

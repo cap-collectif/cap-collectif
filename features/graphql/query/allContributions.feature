@@ -1,7 +1,7 @@
 @allContributions
 Feature: Comment
 
-Scenario: GraphQL admin want to get all contributions
+Scenario: GraphQL admin wants to get all contributions
   Given I send a GraphQL POST request:
   """
   {
@@ -15,7 +15,7 @@ Scenario: GraphQL admin want to get all contributions
   """
   {
     "data": {
-      "allContributions": 1373
+      "allContributions": 1376
     }
   }
   """

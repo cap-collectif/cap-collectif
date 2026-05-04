@@ -9,8 +9,8 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Enum\ExportHeaders;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
-use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\Service\CsvDataFormatter;
 use Capco\AppBundle\Toggle\Manager;
@@ -22,6 +22,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -71,10 +72,10 @@ class ExportDebateGroupedCommand extends BaseExportCommand
         private readonly EntityManagerInterface $em,
         private readonly TranslatorInterface $translator,
         private readonly DebateRepository $debateRepository,
+        private readonly DebateStepRepository $debateStepRepository,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly UserUrlResolver $userUrlResolver,
         private readonly DebateVoteRepository $debateVoteRepository,
-        private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
         private readonly CsvDataFormatter $csvDataFormatter,
         private readonly LoggerInterface $logger,
     ) {
@@ -91,6 +92,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
                 'Export Votes debate contributions, contains only contributions from users validated accounts.'
             )
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate step.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -105,7 +107,14 @@ class ExportDebateGroupedCommand extends BaseExportCommand
 
         $this->stopwatch->start('export_debate_grouped', 'Memory usage - Execution time');
 
-        $debateCount = $this->debateRepository->count([]);
+        $debates = null;
+        if ($input->getOption('stepId')) {
+            $debateStep = $this->debateStepRepository->find($input->getOption('stepId'));
+            $debate = $debateStep ? $debateStep->getDebate() : null;
+            $debates = $debate ? [$debate] : [];
+        }
+
+        $debateCount = $debates ? \count($debates) : $this->debateRepository->count([]);
 
         if (0 === $debateCount) {
             $style->error('No debate found');
@@ -123,22 +132,28 @@ class ExportDebateGroupedCommand extends BaseExportCommand
         ;
 
         $translatedHeaderKeys = array_map(fn (string $header) => $this->translator->trans($header), self::HEADER_KEYS);
+        $delimiterOption = $input->getOption('delimiter');
+        $delimiter = \is_string($delimiterOption) && '' !== $delimiterOption
+            ? $delimiterOption
+            : self::DEFAULT_CSV_DELIMITER;
 
         $totalArguments = 0;
 
-        $debates = $this->debateRepository->findAll();
+        $debates ??= $this->debateRepository->findAll();
 
         foreach ($debates as $debate) {
             $step = $debate->getStep();
 
             $path = $this->contributionsFilePathResolver->getGroupedExportPath($step);
+            $this->ensureExportDirectory($path);
 
             $handle = fopen($path, 'w');
             if (!$handle) {
                 return Command::FAILURE;
             }
 
-            fputcsv($handle, $translatedHeaderKeys);
+            $this->writeUtf8Bom($handle);
+            fputcsv($handle, $translatedHeaderKeys, $delimiter);
 
             $arguments = $this->debateRepository->getDebateArgumentsConfirmedToIterable($debate);
             $anonymousArguments = $this->debateRepository->getDebateAnonymousArgumentsConfirmedToIterable($debate);
@@ -162,8 +177,8 @@ class ExportDebateGroupedCommand extends BaseExportCommand
             $progressBar->setOverwrite(false);
 
             try {
-                $argumentsCount = $this->insertArgumentsIntoCsv($arguments, $handle, $style);
-                $anonymousArgumentsCount = $this->insertAnonymousArgumentsIntoCsv($anonymousArguments, $handle, $style);
+                $argumentsCount = $this->insertArgumentsIntoCsv($arguments, $handle, $style, $delimiter);
+                $anonymousArgumentsCount = $this->insertAnonymousArgumentsIntoCsv($anonymousArguments, $handle, $style, $delimiter);
             } catch (\Exception $e) {
                 $this->logger->error(sprintf('An error occured during generation of csv file %s : %s', $path, $e->getMessage()));
 
@@ -218,7 +233,8 @@ class ExportDebateGroupedCommand extends BaseExportCommand
     private function insertArgumentsIntoCsv(
         iterable $arguments,
         mixed $handle,
-        SymfonyStyle $style
+        SymfonyStyle $style,
+        string $delimiter
     ): int {
         $style->newLine(2);
 
@@ -247,7 +263,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
                 ExportHeaders::EXPORT_PARTICIPANT_PROFILE_URL => $this->userUrlResolver->__invoke($author),
                 ExportHeaders::EXPORT_PARTICIPANT_IDENTIFICATION_CODE => $author->getUserIdentificationCode()?->getIdentificationCode(),
                 ExportHeaders::EXPORT_VOTE_PUBLISHED_AT => null !== $vote ? $this->csvDataFormatter->getNullableDatetime($vote->getPublishedAt()) : null,
-                ExportHeaders::EXPORT_VOTE_TYPE => $vote?->getVoteTypeName(),
+                ExportHeaders::EXPORT_VOTE_TYPE => null !== $vote ? $this->getTranslatedVoteType($vote->getType()) : null,
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT => $this->csvDataFormatter->getNullableDatetime($argument->getPublishedAt()),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ACCOUNT => $this->csvDataFormatter->getReadableBoolean(true),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_CONTENT => $argument->getBodyText(),
@@ -255,7 +271,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_VOTE_NUMBER => $argument->getVotes()->count(),
             ];
 
-            $hasBeenInserted = fputcsv($handle, array_values($csvData));
+            $hasBeenInserted = fputcsv($handle, array_values($csvData), $delimiter);
 
             if (!$hasBeenInserted) {
                 throw new \RuntimeException(sprintf('An error occured while writing argument in the file : %s', json_encode($csvData)));
@@ -278,16 +294,14 @@ class ExportDebateGroupedCommand extends BaseExportCommand
     private function insertAnonymousArgumentsIntoCsv(
         iterable $anonymousArguments,
         mixed $handle,
-        SymfonyStyle $style
+        SymfonyStyle $style,
+        string $delimiter
     ): int {
         $style->newLine(2);
 
         $anonymousArgumentsCount = 0;
 
         foreach ($anonymousArguments as $anonymousArgument) {
-            $votes = $this->debateAnonymousVoteRepository->hydrateFromIds([$anonymousArgument->getDebate()->getId()]);
-            $vote = $votes[0] ?? null;
-
             $csvData = [
                 ExportHeaders::EXPORT_PARTICIPANT_USER_ID => null,
                 ExportHeaders::EXPORT_PARTICIPANT_USERNAME => $anonymousArgument->getUsername(),
@@ -304,8 +318,11 @@ class ExportDebateGroupedCommand extends BaseExportCommand
                 ExportHeaders::EXPORT_PARTICIPANT_CITY => null,
                 ExportHeaders::EXPORT_PARTICIPANT_PROFILE_URL => null,
                 ExportHeaders::EXPORT_PARTICIPANT_IDENTIFICATION_CODE => null,
-                ExportHeaders::EXPORT_VOTE_PUBLISHED_AT => null !== $vote ? $this->csvDataFormatter->getNullableDatetime($vote->getPublishedAt()) : null,
-                ExportHeaders::EXPORT_VOTE_TYPE => $vote?->getVoteType(),
+                // Anonymous arguments do not keep a stable relation to the anonymous vote entity.
+                // We export the vote data from the argument itself because the anonymous flow
+                // publishes an argument only after the participant has selected a vote type.
+                ExportHeaders::EXPORT_VOTE_PUBLISHED_AT => $this->csvDataFormatter->getNullableDatetime($anonymousArgument->getPublishedAt()),
+                ExportHeaders::EXPORT_VOTE_TYPE => $this->getTranslatedVoteType($anonymousArgument->getType()),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT => $this->csvDataFormatter->getNullableDatetime($anonymousArgument->getPublishedAt()),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ACCOUNT => $this->csvDataFormatter->getReadableBoolean(false),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_CONTENT => $anonymousArgument->getBodyText(),
@@ -313,7 +330,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_VOTE_NUMBER => $anonymousArgument->getVotes()->count(),
             ];
 
-            $hasBeenInserted = fputcsv($handle, array_values($csvData));
+            $hasBeenInserted = fputcsv($handle, array_values($csvData), $delimiter);
 
             if (!$hasBeenInserted) {
                 throw new \RuntimeException(sprintf('An error occured while writing argument in the file : %s', json_encode($csvData)));
@@ -327,5 +344,22 @@ class ExportDebateGroupedCommand extends BaseExportCommand
         }
 
         return $anonymousArgumentsCount;
+    }
+
+    /**
+     * Excel auto-detects UTF-8 when BOM is present.
+     *
+     * @param resource $handle
+     */
+    private function writeUtf8Bom($handle): void
+    {
+        fwrite($handle, "\xEF\xBB\xBF");
+    }
+
+    private function getTranslatedVoteType(string $voteType): ?string
+    {
+        return isset(ExportHeaders::EXPORT_VOTE_TYPES[$voteType])
+            ? $this->translator->trans(ExportHeaders::EXPORT_VOTE_TYPES[$voteType])
+            : null;
     }
 }

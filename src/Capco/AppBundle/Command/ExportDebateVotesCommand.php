@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -40,7 +41,14 @@ class ExportDebateVotesCommand extends BaseExportCommand
             return 1;
         }
 
-        $count = $this->debateStepRepository->count([]);
+        $debateSteps = null;
+        $stepId = $input->getOption('stepId') ?: $input->getOption('debateStepId');
+        if ($stepId) {
+            $debateStep = $this->debateStepRepository->find($stepId);
+            $debateSteps = $debateStep ? [$debateStep] : [];
+        }
+
+        $count = $debateSteps ? \count($debateSteps) : $this->debateStepRepository->count([]);
 
         if (0 === $count) {
             $style->error('No debate found');
@@ -52,7 +60,7 @@ class ExportDebateVotesCommand extends BaseExportCommand
 
         $style->note('Starting the export.');
 
-        $debateSteps = $this->debateStepRepository->findAll();
+        $debateSteps ??= $this->debateStepRepository->findAll();
         $style->progressStart($count);
 
         foreach ($debateSteps as $debateStep) {
@@ -61,6 +69,10 @@ class ExportDebateVotesCommand extends BaseExportCommand
                 continue;
             }
 
+            $this->ensureExportDirectories([
+                ExportVariantsEnum::FULL->value => $this->votesFilePathResolver->getFullExportPath($debateStep),
+                ExportVariantsEnum::SIMPLIFIED->value => $this->votesFilePathResolver->getSimplifiedExportPath($debateStep),
+            ]);
             $this->exporter->initializeStyle($style);
             $this->exporter->exportDebateVotes($debate, $debateStep, $input->getOption('delimiter'));
             $this->executeSnapshot($input, $output, 'debate/' . $this->votesFilePathResolver->getFileName($debateStep, ExportVariantsEnum::FULL));
@@ -81,5 +93,7 @@ class ExportDebateVotesCommand extends BaseExportCommand
             ->setName('capco:export:debate:votes')
             ->setDescription('Export debate votes')
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate step.');
+        $this->addOption(name: 'debateStepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate step.');
     }
 }

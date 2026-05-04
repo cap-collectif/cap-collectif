@@ -3,7 +3,7 @@ import type { ProjectItem_project$data, ProjectItem_project$key } from '@relay/P
 import { ProjectItem_viewer$key } from '@relay/ProjectItem_viewer.graphql'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import ProjectModalConfirmationDelete from 'components/BackOffice/Projects/ProjectModalConfirmationDelete'
-import ProjectModalExportSteps from 'components/BackOffice/Projects/ProjectModalExportSteps'
+import ExportModal from 'components/BackOffice/Projects/Export/ExportModal'
 import DuplicateProjectMutation from 'mutations/DuplicateProjectMutation'
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
@@ -50,7 +50,7 @@ const PROJECT_FRAGMENT = graphql`
       id
     }
     ...ProjectModalConfirmationDelete_project
-    ...ProjectModalExportSteps_project
+    ...ExportModal_project
   }
 `
 
@@ -184,7 +184,14 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
               <Text> {intl.formatMessage({ id: 'action_show' })} </Text>
             </Menu.Item>
             {(!!project.exportContributorsUrl || (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
-              <ProjectModalExportSteps project={project} />
+              <ExportModal
+                project={project}
+                disclosure={
+                  <Menu.Item closeOnSelect={false}>
+                    <Text> {intl.formatMessage({ id: 'project.download.button' })} </Text>
+                  </Menu.Item>
+                }
+              />
             )}
             {canDuplicate && (
               <Menu.Item

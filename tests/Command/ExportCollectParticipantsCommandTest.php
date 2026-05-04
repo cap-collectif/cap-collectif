@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ExportCollectParticipantsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
+
     final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports/collect';
     final public const EXPECTED_FILE_NAMES = [
         'participants_bp-avec-vote-classement_collecte-avec-vote-classement-limite',
@@ -24,10 +25,36 @@ class ExportCollectParticipantsCommandTest extends KernelTestCase
     final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
     final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/collect';
     final public const COMMAND = 'capco:export:collect:participants';
+    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_STEP_ID = 'collectstep1';
+    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT =
+        'participants_budget-participatif-rennes_collecte-des-propositions_simplified.csv';
+    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_FULL_EXPORT =
+        'participants_budget-participatif-rennes_collecte-des-propositions.csv';
 
     protected function setUp(): void
     {
         self::bootKernel();
+    }
+
+    public function testSimplifiedExportExcludesUsersWithOnlyDraftOrTrashedProposals(): void
+    {
+        $this->emptyOutputDirectory();
+
+        $actualOutputs = $this->executeCommand(self::COMMAND, [self::OUTPUT_DIRECTORY], [
+            '--stepId' => self::BUDGET_PARTICIPATIF_RENNES_COLLECT_STEP_ID,
+        ]);
+
+        $this->assertArrayHasKey(self::BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT, $actualOutputs);
+        $this->assertArrayHasKey(self::BUDGET_PARTICIPATIF_RENNES_COLLECT_FULL_EXPORT, $actualOutputs);
+
+        $simplifiedExport = $actualOutputs[self::BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT];
+        $fullExport = $actualOutputs[self::BUDGET_PARTICIPATIF_RENNES_COLLECT_FULL_EXPORT];
+
+        $this->assertIsString($simplifiedExport);
+        $this->assertIsString($fullExport);
+
+        $this->assertStringNotContainsString('userSpyl,spyl,aurelien@cap-collectif.com', $simplifiedExport);
+        $this->assertStringContainsString('userSpyl,spyl,aurelien@cap-collectif.com', $fullExport);
     }
 
     public function testCommand(): void

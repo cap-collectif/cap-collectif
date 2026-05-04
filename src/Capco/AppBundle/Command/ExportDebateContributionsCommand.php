@@ -7,10 +7,12 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolv
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -27,6 +29,7 @@ class ExportDebateContributionsCommand extends BaseExportCommand
         ExportUtils $exportUtils,
         private readonly Manager $toggleManager,
         private readonly DebateRepository $debateRepository,
+        private readonly DebateStepRepository $debateStepRepository,
         private readonly DebateContributionExporter $debateContributionExporter,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly EntityManagerInterface $entityManager,
@@ -47,7 +50,17 @@ class ExportDebateContributionsCommand extends BaseExportCommand
             return 1;
         }
 
-        $count = $this->debateRepository->count([]);
+        $debates = null;
+        if ($input->getOption('stepId')) {
+            $debateStep = $this->debateStepRepository->find($input->getOption('stepId'));
+            $debate = $debateStep ? $debateStep->getDebate() : null;
+            $debates = $debate ? [$debate] : [];
+        } elseif ($input->getOption('debateId')) {
+            $debate = $this->debateRepository->find($input->getOption('debateId'));
+            $debates = $debate ? [$debate] : [];
+        }
+
+        $count = $debates ? \count($debates) : $this->debateRepository->count([]);
 
         if (0 === $count) {
             $style->error('No debate found');
@@ -59,13 +72,14 @@ class ExportDebateContributionsCommand extends BaseExportCommand
 
         $style->note('Starting the export.');
 
-        $offset = 0;
-        $batchSize = DebateContributionExporter::BATCH_SIZE;
         $this->stopwatch->start('export_proposals');
-        do {
-            $debates = $this->debateRepository->findDebateByAllArgumentsWithConfirmedUser($offset, $batchSize);
+        if (null !== $debates) {
             foreach ($debates as $debate) {
                 $this->debateContributionExporter->initializeStyle($style);
+                $this->ensureExportDirectories([
+                    ExportVariantsEnum::SIMPLIFIED->value => $this->contributionsFilePathResolver->getSimplifiedExportPath($debate->getStep()),
+                    ExportVariantsEnum::FULL->value => $this->contributionsFilePathResolver->getFullExportPath($debate->getStep()),
+                ]);
                 $this->debateContributionExporter->exportDebateContributions(
                     $debate,
                     $output,
@@ -83,9 +97,38 @@ class ExportDebateContributionsCommand extends BaseExportCommand
                     self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), ExportVariantsEnum::FULL)
                 );
             }
-            $this->entityManager->clear();
-            $offset += $batchSize;
-        } while (\count($debates) > 0);
+        } else {
+            $offset = 0;
+            $batchSize = DebateContributionExporter::BATCH_SIZE;
+            do {
+                $debates = $this->debateRepository->findDebateByAllArgumentsWithConfirmedUser($offset, $batchSize);
+                foreach ($debates as $debate) {
+                    $this->debateContributionExporter->initializeStyle($style);
+                    $this->ensureExportDirectories([
+                        ExportVariantsEnum::SIMPLIFIED->value => $this->contributionsFilePathResolver->getSimplifiedExportPath($debate->getStep()),
+                        ExportVariantsEnum::FULL->value => $this->contributionsFilePathResolver->getFullExportPath($debate->getStep()),
+                    ]);
+                    $this->debateContributionExporter->exportDebateContributions(
+                        $debate,
+                        $output,
+                        $input->getOption('delimiter')
+                    );
+
+                    $this->executeSnapshot(
+                        $input,
+                        $output,
+                        self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), ExportVariantsEnum::SIMPLIFIED)
+                    );
+                    $this->executeSnapshot(
+                        $input,
+                        $output,
+                        self::STEP_FOLDER . $this->contributionsFilePathResolver->getFileName($debate->getStep(), ExportVariantsEnum::FULL)
+                    );
+                }
+                $this->entityManager->clear();
+                $offset += $batchSize;
+            } while (\count($debates) > 0);
+        }
 
         $this->stopwatch->stop('export_proposals');
         $monitoreMemoryAndTime = $this->stopwatch
@@ -110,5 +153,7 @@ class ExportDebateContributionsCommand extends BaseExportCommand
             ->setName(self::CAPCO_EXPORT_DEBATE_CONTRIBUTIONS)
             ->setDescription('Export debate contributions')
         ;
+        $this->addOption(name: 'stepId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate step.');
+        $this->addOption(name: 'debateId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given debate.');
     }
 }

@@ -175,3 +175,19 @@ Capco\AppBundle\Entity\OpinionVote:
         publishedAt: <(new \DateTime('2025-07-25 00:00:00'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+    opinionVote95:
+        id: 95
+        Opinion: '@opinionMultiConsultExportProposal1'
+        value: 1
+        user: '@user4'
+        publishedAt: <(new \DateTime('2020-04-02 01:00:00'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    opinionVote96:
+        id: 96
+        Opinion: '@opinionMultiConsultExportNew'
+        value: -1
+        user: '@user5'
+        publishedAt: <(new \DateTime('2020-04-03 01:00:00'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt

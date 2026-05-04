@@ -37,9 +37,9 @@ class ExportProposalVoteGroupedDataTransformer
     }
 
     /**
-     * @param array<string, mixed>                                            $vote
-     * @param array{votes: array<string, int>, proposals: array<string, int>} $userStats
-     * @param array<string, string>                                           $translatedKeys
+     * @param array<string, mixed>                                                                                            $vote
+     * @param array{votes: array<string, int>, proposals: array<string, int>, votedProposalReferences: array<string, string>} $userStats
+     * @param array<string, string>                                                                                           $translatedKeys
      *
      * @return array<string, mixed>
      */
@@ -63,6 +63,7 @@ class ExportProposalVoteGroupedDataTransformer
             $translatedKeys['author_profile_url'] => $this->userUrlResolver->getBySlug($vote['author_slug']),
             $translatedKeys['author_identification_code'] => $vote['author_identification_code'],
             $translatedKeys['author_total_proposals'] => $userStats['proposals'][$authorId] ?? 0,
+            $translatedKeys['voted_proposal_references'] => $userStats['votedProposalReferences'][$authorId] ?? '',
             $translatedKeys['contribution_type'] => $contributionTypeTranslated,
         ];
 
@@ -99,6 +100,7 @@ class ExportProposalVoteGroupedDataTransformer
             'author_profile_url' => $this->translator->trans(ExportHeaders::EXPORT_PARTICIPANT_PROFILE_URL),
             'author_identification_code' => $this->translator->trans(ExportHeaders::EXPORT_PARTICIPANT_IDENTIFICATION_CODE),
             'author_total_proposals' => $this->translator->trans(ExportHeaders::EXPORT_USER_TOTAL_PROPOSALS),
+            'voted_proposal_references' => $this->translator->trans(ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS),
             'contribution_type' => $this->translator->trans(ExportHeaders::EXPORT_CONTRIBUTION_TYPE),
         ];
 

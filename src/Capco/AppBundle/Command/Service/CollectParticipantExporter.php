@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\UserBundle\Entity\User;
@@ -71,11 +72,9 @@ class CollectParticipantExporter extends ParticipantExporter
                     }
                 }
 
-                $proposals = $this->step->getProposalForm()?->getProposals();
-
-                if ($proposals) {
+                if ($participant instanceof User) {
                     return $participant->getProposals()->exists(
-                        fn ($key, $proposal) => $proposals->contains($proposal)
+                        fn ($key, Proposal $proposal) => $this->shouldExportProposalInSimplifiedVariant($proposal)
                     );
                 }
 
@@ -112,5 +111,18 @@ class CollectParticipantExporter extends ParticipantExporter
             [$this->participantNormalizer],
             [new CsvEncoder()]
         );
+    }
+
+    private function shouldExportProposalInSimplifiedVariant(Proposal $proposal): bool
+    {
+        if (null === $this->step) {
+            return false;
+        }
+
+        return $proposal->getProposalForm()->getStep()?->getId() === $this->step->getId()
+            && $proposal->isPublished()
+            && !$proposal->isDraft()
+            && !$proposal->isTrashed()
+            && !$proposal->isDeleted();
     }
 }

@@ -359,6 +359,26 @@ Capco\AppBundle\Entity\Opinion:
         author: '@user5'
         OpinionType: '@opinionTypeFirstInMultiForExport'
 
+    opinionMultiConsultExportProposal1:
+        id: 'opinionMultiConsultExportProposal1'
+        createdAt: <(new \DateTime('2020-04-02 00:00:00'))>
+        publishedAt: $createdAt
+        consultation: '@multiConsult1'
+        title: 'Proposition consultation 1'
+        body: <stripslashes('\<p>Proposition avec un seul vote favorable.</p>\')>
+        author: '@user2'
+        OpinionType: '@opinionTypeFirstInMultiForExport'
+
+    opinionMultiConsultExportNew:
+        id: 'opinionMultiConsultExportNew'
+        createdAt: <(new \DateTime('2020-04-03 00:00:00'))>
+        publishedAt: $createdAt
+        consultation: '@multiConsult1'
+        title: 'New proposition'
+        body: <stripslashes('\<p>Proposition avec un vote défavorable et un amendement.</p>\')>
+        author: '@user3'
+        OpinionType: '@opinionTypeFirstInMultiForExport'
+
     opinionEmailing1:
         id: 'opinionEmailing1'
         consultation: '@consultationEmailing'
