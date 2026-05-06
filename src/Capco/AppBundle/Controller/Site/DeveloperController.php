@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Cache\RedisCache;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectType;
@@ -13,18 +12,13 @@ use GraphQL\Type\Definition\UnionType;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DeveloperController extends Controller
 {
-    final public const CACHE_KEY = 'DeveloperController';
-
     public function __construct(
-        private readonly AdapterInterface $cache,
         private readonly TypeResolver $typeResolver
     ) {
     }
@@ -70,180 +64,186 @@ class DeveloperController extends Controller
         $category = null,
         $type = null
     ) {
-        $cachedItem = $this->cache->getItem(self::CACHE_KEY);
-        if (!$cachedItem->isHit()) {
-            $this->typeResolver->setCurrentSchemaName('public');
+        $this->typeResolver->setCurrentSchemaName('public');
 
-            $selection = null;
+        $selection = null;
 
-            $scalars = [];
-            $objects = [];
-            $interfaces = [];
-            $enums = [];
-            $unions = [];
-            $input_objects = [];
-            $query = null;
-            $mutation = null;
+        $scalars = [];
+        $objects = [];
+        $interfaces = [];
+        $enums = [];
+        $unions = [];
+        $input_objects = [];
+        $query = null;
+        $mutation = null;
 
-            // Public types with Preview types should be here :
-            $blackList = [
-                'PublicQuery',
-                'PublicQuestionnaire',
-                'PublicUser',
-                'PublicProject',
-                'PublicConsultation',
-                'PublicUserConnection',
-            ];
+        // Public types with Preview types should be here :
+        $blackList = [
+            'PublicQuery',
+            'PublicQuestionnaire',
+            'PublicUser',
+            'PublicProject',
+            'PublicConsultation',
+            'PublicUserConnection',
+        ];
 
-            // Public types hard to guess :
-            $publicWhiteList = [
-                'OrderDirection',
-                'Trashable',
-                'TrashableStatus',
-                'NotPublishedReason',
-                'UniformResourceLocatable',
-                'UserError',
-                'PageInfo',
-                'Node',
-                'String',
-                'Int',
-                'Float',
-                'Boolean',
-                'ID',
-                'HTML',
-                'Email',
-                'DateTime',
-                'URI',
-            ];
+        // Public types hard to guess :
+        $publicWhiteList = [
+            'OrderDirection',
+            'Trashable',
+            'TrashableStatus',
+            'NotPublishedReason',
+            'UniformResourceLocatable',
+            'UserError',
+            'PageInfo',
+            'Node',
+            'String',
+            'Int',
+            'Float',
+            'Boolean',
+            'ID',
+            'HTML',
+            'Email',
+            'DateTime',
+            'URI',
+        ];
 
-            foreach ($this->typeResolver->getSolutions() as $solutionID => $solution) {
-                $aliases = $this->typeResolver->getSolutionAliases($solutionID);
+        $projectDir = $parameters->get('kernel.project_dir');
+        $publicSchemaTypeNames = $this->getSchemaTypeNames($projectDir . '/schema.public.graphql');
+        $previewSchemaTypeNames = $this->getSchemaTypeNames($projectDir . '/schema.preview.graphql');
 
-                $existsInPreviewDirectory =
-                    (new Finder())
-                        ->files()
-                        ->name($aliases[0] . '.types.yaml')
-                        ->in([
-                            $parameters->get('kernel.project_dir') .
-                            '/src/Capco/AppBundle/Resources/config/graphql/preview/',
-                        ])
-                        ->count() > 0;
-                $existsInPublicDirectory =
-                    (new Finder())
-                        ->files()
-                        ->name($aliases[0] . '.types.yaml')
-                        ->in([
-                            $parameters->get('kernel.project_dir') .
-                            '/src/Capco/AppBundle/Resources/config/graphql/public/',
-                        ])
-                        ->count() > 0;
+        foreach ($this->typeResolver->getSolutions() as $solutionID => $solution) {
+            $aliases = $this->typeResolver->getSolutionAliases($solutionID);
+            $alias = (string) $aliases[0];
+            $solutionName = (string) $solution->name;
 
-                // We set info about preview
-                $solution->{'preview'} = false;
-                if (str_starts_with((string) $aliases[0], 'Preview') || $existsInPreviewDirectory) {
-                    $solution->{'preview'} = true;
-                    $solution->{'previewHasAPublicType'} = \in_array(
-                        str_replace('Preview', 'Public', (string) $aliases[0]),
-                        $blackList
-                    );
+            $existsInPublicSchema =
+                isset($publicSchemaTypeNames[$solutionName])
+                || isset($publicSchemaTypeNames[$alias]);
+            $existsInPreviewSchema =
+                isset($previewSchemaTypeNames[$solutionName])
+                || isset($previewSchemaTypeNames[$alias]);
+            $existsOnlyInPreviewSchema = $existsInPreviewSchema && !$existsInPublicSchema;
+
+            // We set info about preview
+            $solution->{'preview'} = false;
+            if (str_starts_with($alias, 'Preview') || $existsOnlyInPreviewSchema) {
+                $solution->{'preview'} = true;
+                $solution->{'previewHasAPublicType'} = \in_array(
+                    str_replace('Preview', 'Public', $alias),
+                    $blackList
+                );
+            }
+
+            // We remove everything in black list
+            if (\in_array($alias, $blackList)) {
+                continue;
+            }
+
+            // We remove everything not in public or preview schema
+            if (
+                !\in_array($alias, $publicWhiteList)
+                && false === $solution->{'preview'}
+                && !str_starts_with($alias, 'Public')
+                && !$existsInPublicSchema
+            ) {
+                continue;
+            }
+
+            // We hydrate current selection
+            if (($type && $solution->name === $type) || 'query' === $category) {
+                if ($solution->{'preview'}) {
+                    $publicSelection = $this->typeResolver->getSolutions()[
+                        str_replace('Preview', 'Public', $solutionID)
+                    ] ?? null;
+                    $solution->{'publicSelection'} = $publicSelection;
                 }
+                $selection = $solution;
+            }
 
-                // We remove everything in black list
-                if (\in_array($aliases[0], $blackList)) {
-                    continue;
-                }
-
-                // We remove everything not in public or preview schema
-                if (
-                    !\in_array($aliases[0], $publicWhiteList)
-                    && false === $solution->{'preview'}
-                    && !str_starts_with((string) $aliases[0], 'Public')
-                    && (!$existsInPreviewDirectory && !$existsInPublicDirectory)
-                ) {
-                    continue;
-                }
-
-                // We hydrate current selection
-                if (($type && $solution->name === $type) || 'query' === $category) {
+            if ($solution instanceof EnumType) {
+                $enums[] = $solution;
+            } elseif ($solution instanceof ScalarType) {
+                $scalars[] = $solution;
+            } elseif ($solution instanceof UnionType) {
+                $unions[] = $solution;
+            } elseif ($solution instanceof InterfaceType) {
+                $interfaces[] = $solution;
+            } elseif ($solution instanceof InputObjectType) {
+                $input_objects[] = $solution;
+            } elseif ($solution instanceof ObjectType) {
+                // Special types
+                if ('Query' === $solution->name) {
+                    // We display PreviewQuery
                     if ($solution->{'preview'}) {
-                        $publicSelection = $this->typeResolver->getSolutions()[
-                            str_replace('Preview', 'Public', $solutionID)
-                        ] ?? null;
-                        $solution->{'publicSelection'} = $publicSelection;
+                        $query = $solution;
                     }
-                    $selection = $solution;
+
+                    continue;
                 }
+                if ('Mutation' === $solution->name) {
+                    $mutation = $solution;
 
-                if ($solution instanceof EnumType) {
-                    $enums[] = $solution;
-                } elseif ($solution instanceof ScalarType) {
-                    $scalars[] = $solution;
-                } elseif ($solution instanceof UnionType) {
-                    $unions[] = $solution;
-                } elseif ($solution instanceof InterfaceType) {
-                    $interfaces[] = $solution;
-                } elseif ($solution instanceof InputObjectType) {
-                    $input_objects[] = $solution;
-                } elseif ($solution instanceof ObjectType) {
-                    // Special types
-                    if ('Query' === $solution->name) {
-                        // We display PreviewQuery
-                        if ($solution->{'preview'}) {
-                            $query = $solution;
-                        }
+                    // We hydrate current selection for mutations.
+                    if ('mutation' === $category && $type) {
+                        $selection = array_values(
+                            array_filter($mutation->getFields(), fn (FieldDefinition $field) => $field->name == $type)
+                        )[0];
+                    }
 
-                        continue;
-                    }
-                    if ('Mutation' === $solution->name) {
-                        $mutation = $solution;
-
-                        // We hydrate current selection for mutations.
-                        if ('mutation' === $category && $type) {
-                            $selection = array_values(
-                                array_filter($mutation->getFields(), fn (FieldDefinition $field) => $field->name == $type)
-                            )[0];
-                        }
-
-                        continue;
-                    }
-                    // We exclude Payload
-                    if (str_contains($solution->name, 'Payload')) {
-                        continue;
-                    }
-                    // We exclude Edge
-                    if (str_contains($solution->name, 'Edge')) {
-                        continue;
-                    }
-                    // We exclude Connection
-                    if (str_contains($solution->name, 'Connection')) {
-                        continue;
-                    }
-                    $objects[] = $solution;
+                    continue;
                 }
+                // We exclude Payload
+                if (str_contains($solution->name, 'Payload')) {
+                    continue;
+                }
+                // We exclude Edge
+                if (str_contains($solution->name, 'Edge')) {
+                    continue;
+                }
+                // We exclude Connection
+                if (str_contains($solution->name, 'Connection')) {
+                    continue;
+                }
+                $objects[] = $solution;
             }
-
-            // If we could not find the the requested type, let's throw a 404.
-            if ($type && !$selection) {
-                throw $this->createNotFoundException('The requested type could not be found: ' . $type);
-            }
-
-            $data = [
-                'selection' => $selection,
-                'category' => $category,
-                'query' => $query,
-                'unions' => $unions,
-                'input_objects' => $input_objects,
-                'enums' => $enums,
-                'interfaces' => $interfaces,
-                'objects' => $objects,
-                'scalars' => $scalars,
-                'mutation' => $mutation,
-            ];
-
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_DAY);
-            $this->cache->save($cachedItem);
         }
 
-        return $cachedItem->get();
+        // If we could not find the the requested type, let's throw a 404.
+        if ($type && !$selection) {
+            throw $this->createNotFoundException('The requested type could not be found: ' . $type);
+        }
+
+        return [
+            'selection' => $selection,
+            'category' => $category,
+            'query' => $query,
+            'unions' => $unions,
+            'input_objects' => $input_objects,
+            'enums' => $enums,
+            'interfaces' => $interfaces,
+            'objects' => $objects,
+            'scalars' => $scalars,
+            'mutation' => $mutation,
+        ];
+    }
+
+    /**
+     * @return array<string, true>
+     */
+    private function getSchemaTypeNames(string $schemaPath): array
+    {
+        $schema = file_get_contents($schemaPath);
+        if (false === $schema) {
+            return [];
+        }
+
+        preg_match_all(
+            '/^(?:type|interface|enum|union|input|scalar)\s+([_A-Za-z][_0-9A-Za-z]*)\b/m',
+            $schema,
+            $matches
+        );
+
+        return array_fill_keys($matches[1], true);
     }
 }

@@ -127,7 +127,7 @@
     {% if category == "query" %}
     <h2>{{query.name}}</h2>
     <p>The <a href="https://facebook.github.io/graphql/#sec-Type-System">query type</a> defines GraphQL operations that retrieve data from the server.</p>
-    {% for field in query.fields|usort if 'Connection' in field.type.toString %}
+    {% for field in query.fields|usort if 'Connection' in field.getType.toString %}
         {% if loop.first %}
         <h3>
             Connections
@@ -135,7 +135,7 @@
         {% endif %}
         {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field, 'parent': query} %}
     {% endfor %}
-    {% for field in query.fields|usort if 'Connection' not in field.type.toString %}
+    {% for field in query.fields|usort if 'Connection' not in field.getType.toString %}
         {% if loop.first %}
         <h3>
             Fields
@@ -153,7 +153,7 @@
         <span class="label label-info">ROLE_ADMIN</span>
         {% endif %}
         </h2>
-        {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
+        {% if selection.getType.getNullableType(selection.getType).preview is defined and selection.getType.getNullableType(selection.getType).preview %}
             {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
         {# TODO we need to fix GraphQLBundle to handle descriptions on mutations #}
@@ -165,7 +165,7 @@
         <h3>
             Payload fields
         </h3>
-        {% for payloadField in selection.type.fields|usort if payloadField.name != "clientMutationId" %}
+        {% for payloadField in selection.getType.fields|usort if payloadField.name != "clientMutationId" %}
          {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
         {% else %}
