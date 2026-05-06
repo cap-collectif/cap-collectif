@@ -334,31 +334,29 @@ class ExportController extends Controller
             return $response;
         }
 
-        if (!file_exists($filePath)) {
-            $exportCommand = $this->getStepContributorsExportCommand($step);
-            if (null === $exportCommand) {
-                return new JsonResponse(
-                    ['errorTranslationKey' => 'project.download.not_yet_generated'],
-                    404
-                );
-            }
-
-            [
-                'commandName' => $commandName,
-                'commandOptions' => $commandOptions,
-            ] = $exportCommand;
-
-            $pendingResponse = $this->handleOnDemandExport(
-                request: $request,
-                commandName: $commandName,
-                commandOptions: $commandOptions,
-                filePath: $filePath,
-                fileName: $fileName
+        $exportCommand = $this->getStepContributorsExportCommand($step);
+        if (null === $exportCommand) {
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                404
             );
+        }
 
-            if ($pendingResponse instanceof Response) {
-                return $pendingResponse;
-            }
+        [
+            'commandName' => $commandName,
+            'commandOptions' => $commandOptions,
+        ] = $exportCommand;
+
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: $commandName,
+            commandOptions: $commandOptions,
+            filePath: $filePath,
+            fileName: $fileName
+        );
+
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
         }
 
         $this->logStepParticipantsExport($step);
