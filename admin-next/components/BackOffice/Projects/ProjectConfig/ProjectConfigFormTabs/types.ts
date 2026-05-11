@@ -5,6 +5,6 @@ export type { ProjectTabType } from '@relay/EditTabModal_tab.graphql'
 
 export type TabState = Pick<ProjectConfigFormTabs_project$data['tabs'][number], 'id' | 'slug' | 'type' | 'position' | 'title'>
 
-export type SavedValues = Pick<EditTabModal_tab$data, 'id' | 'title' | 'slug' | 'enabled'>
+export type SavedValues = Pick<EditTabModal_tab$data, 'id' | 'title' | 'enabled'>
 
 export type Edge = 'left' | 'right'

@@ -24,15 +24,6 @@ import { graphql, useFragment } from 'react-relay'
 import { EditTabModal_tab$key } from '@relay/EditTabModal_tab.graphql'
 import { SavedValues } from './ProjectConfigFormTabs/types'
 
-const titleToSlug = (title: string): string =>
-  title
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 255) || 'onglet'
-
 const FRAGMENT = graphql`
   fragment EditTabModal_tab on ProjectTab {
     id
@@ -153,9 +144,8 @@ const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
 
   const onSubmit = async (formValues: FormValues) => {
     setIsSubmitting(true)
-    const slug = formValues.title !== tab.title ? titleToSlug(formValues.title) : tab.slug
     try {
-      await onSaved({ id: tab.id, title: formValues.title, slug, enabled: formValues.enabled })
+      await onSaved({ id: tab.id, title: formValues.title, enabled: formValues.enabled })
       toast({ content: intl.formatMessage({ id: 'global.saved' }), variant: 'success' })
       closePopover()
     } finally {

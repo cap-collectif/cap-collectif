@@ -145,8 +145,7 @@ describe('mutations.projectTabs', () => {
       {
         input: {
           projectId,
-          title: 'Un onglet',
-          slug: 'presentation',
+          title: 'Présentation',
           enabled: false,
           body: '<p>Body</p>',
         },
@@ -165,7 +164,6 @@ describe('mutations.projectTabs', () => {
         input: {
           projectId,
           title: 'Présentation bis',
-          slug: 'presentation-bis',
           enabled: true,
           body: '<p>Body</p>',
         },
@@ -185,7 +183,6 @@ describe('mutations.projectTabs', () => {
           input: {
             projectId,
             title: 'Nouveau bloc',
-            slug: 'Nouveau bloc',
             enabled: false,
             body: '<p>Contenu de bloc</p>',
           },
@@ -202,7 +199,6 @@ describe('mutations.projectTabs', () => {
         input: {
           projectId,
           title: 'Actus 2',
-          slug: 'actus-2',
           enabled: true,
         },
       },
@@ -221,7 +217,6 @@ describe('mutations.projectTabs', () => {
           input: {
             tabId: customTabId,
             title: 'Infos utiles',
-            slug: 'Infos Utiles',
             enabled: true,
             body: '<p>Contenu mis à jour</p>',
           },
@@ -238,7 +233,6 @@ describe('mutations.projectTabs', () => {
         input: {
           tabId: customTabId,
           title: 'Titre',
-          slug: 'titre',
           enabled: true,
           body: '<p>Body</p>',
         },
@@ -257,7 +251,6 @@ describe('mutations.projectTabs', () => {
         input: {
           tabId: newsTabId,
           title: 'Actualités',
-          slug: 'actualites',
           enabled: true,
           newsItems: [
             { id: post1Id, position: 1 },
@@ -279,7 +272,6 @@ describe('mutations.projectTabs', () => {
         input: {
           tabId: newsTabId,
           title: 'Actualités',
-          slug: 'actualites',
           enabled: true,
           newsItems: [
             { id: post1Id, position: 1 },
@@ -301,7 +293,6 @@ describe('mutations.projectTabs', () => {
         input: {
           tabId: eventsTabId,
           title: 'Événements',
-          slug: 'evenements',
           enabled: true,
           eventItems: [
             { id: event1Id, position: 1 },
@@ -323,7 +314,6 @@ describe('mutations.projectTabs', () => {
         input: {
           tabId: eventsTabId,
           title: 'Événements',
-          slug: 'evenements',
           enabled: true,
           eventItems: [
             { id: event1Id, position: 1 },

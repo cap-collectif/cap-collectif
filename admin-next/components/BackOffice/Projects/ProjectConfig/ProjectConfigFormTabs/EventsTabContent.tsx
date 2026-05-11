@@ -64,7 +64,6 @@ const EventsTabContent: React.FC<EventsTabContentProps> = ({ tab: tabRef }) => {
         input: {
           tabId: tab.id,
           title: tab.title,
-          slug: tab.slug,
           enabled: tab.enabled,
           eventItems: items.map((item, i) => ({ id: item.id, position: i + 1 })),
         },

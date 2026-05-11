@@ -7,8 +7,6 @@ CreateEventsProjectTabInput:
                 type: 'ID!'
             title:
                 type: 'String!'
-            slug:
-                type: 'String!'
             enabled:
                 type: 'Boolean!'
             eventItems:

@@ -74,7 +74,10 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   )
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialSlug = React.useMemo(() => [...(project.tabs ?? [])].sort((a, b) => a.position - b.position)[0]?.slug ?? '', [])
+  const initialSlug = React.useMemo(
+    () => [...(project.tabs ?? [])].sort((a, b) => a.position - b.position)[0]?.slug ?? '',
+    [],
+  )
   const [activeTabSlug, setActiveTabSlug] = useQueryState('tab', parseAsString.withDefault(initialSlug))
 
   const [tabContents, setTabContents] = React.useState<Record<string, string>>(() =>
@@ -84,10 +87,7 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   )
 
   // Relay fragment refs and data indexed by tab id — updates when project.tabs changes via store updaters.
-  const tabMap = React.useMemo(
-    () => Object.fromEntries((project.tabs ?? []).map(t => [t.id, t])),
-    [project.tabs],
-  )
+  const tabMap = React.useMemo(() => Object.fromEntries((project.tabs ?? []).map(t => [t.id, t])), [project.tabs])
 
   const [isAddingTab, setIsAddingTab] = React.useState(false)
 
@@ -159,11 +159,11 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
       try {
         if (tab.type === 'CUSTOM') {
           await UpdateCustomProjectTabMutation.commit({
-            input: { tabId: tab.id, title: tab.title, slug: tab.slug, enabled: tab.enabled, body },
+            input: { tabId: tab.id, title: tab.title, enabled: tab.enabled, body },
           })
         } else if (tab.type === 'PRESENTATION') {
           await UpdatePresentationProjectTabMutation.commit({
-            input: { tabId: tab.id, title: tab.title, slug: tab.slug, enabled: tab.enabled, body },
+            input: { tabId: tab.id, title: tab.title, enabled: tab.enabled, body },
           })
         }
       } catch {
@@ -175,19 +175,12 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   ).current
 
   const handleAddTab = async () => {
-    const title = intl.formatMessage({ id: 'back.project.tab.new' })
-    const baseSlug = 'nouvel-onglet'
-    const existingSlugs = new Set((project.tabs ?? []).map(t => t.slug))
-    let slug = baseSlug
-    let i = 2
-    while (existingSlugs.has(slug)) {
-      slug = `${baseSlug}-${i++}`
-    }
+    const title = intl.formatMessage({ id: 'back.project.tab.new' }) + project.tabs?.length
 
     setIsAddingTab(true)
     try {
       const result = await CreateCustomProjectTabMutation.commit(
-        { input: { projectId: project.id, title, slug, enabled: false } },
+        { input: { projectId: project.id, title, enabled: false } },
         {
           updater: store => {
             const payload = store.getRootField('createCustomProjectTab')
@@ -221,50 +214,60 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
     }
   }
 
-  const handleSaved = async ({ id, title, slug, enabled }: SavedValues) => {
+  const handleSaved = async ({ id, title, enabled }: SavedValues) => {
     const tab = tabMap[id]
     if (!tab) return
     const body = tabContents[id] ?? ''
+    let newSlug: string | null | undefined
     try {
       switch (tab.type) {
-        case 'CUSTOM':
-          await UpdateCustomProjectTabMutation.commit({
-            input: { tabId: id, title, slug, enabled, body },
+        case 'CUSTOM': {
+          const result = await UpdateCustomProjectTabMutation.commit({
+            input: { tabId: id, title, enabled, body },
           })
+          newSlug = result.updateCustomProjectTab?.projectTab?.slug
           break
-        case 'PRESENTATION':
-          await UpdatePresentationProjectTabMutation.commit({
-            input: { tabId: id, title, slug, enabled, body },
+        }
+        case 'PRESENTATION': {
+          const result = await UpdatePresentationProjectTabMutation.commit({
+            input: { tabId: id, title, enabled, body },
           })
+          newSlug = result.updatePresentationProjectTab?.projectTab?.slug
           break
-        case 'EVENTS':
-          await UpdateEventsProjectTabMutation.commit({
+        }
+        case 'EVENTS': {
+          const result = await UpdateEventsProjectTabMutation.commit({
             input: {
               tabId: id,
               title,
-              slug,
               enabled,
-              eventItems: ((tabMap[id] as any).events ?? []).map((e: any, i: number) => ({ id: e.id, position: i + 1 })),
+              eventItems: ((tabMap[id] as any).events ?? []).map((e: any, i: number) => ({
+                id: e.id,
+                position: i + 1,
+              })),
             },
           })
+          newSlug = result.updateEventsProjectTab?.projectTab?.slug
           break
-        case 'NEWS':
-          await UpdateNewsProjectTabMutation.commit({
+        }
+        case 'NEWS': {
+          const result = await UpdateNewsProjectTabMutation.commit({
             input: {
               tabId: id,
               title,
-              slug,
               enabled,
               newsItems: ((tabMap[id] as any).news ?? []).map((n: any, i: number) => ({ id: n.id, position: i + 1 })),
             },
           })
+          newSlug = result.updateNewsProjectTab?.projectTab?.slug
           break
+        }
         default:
           break
       }
       // Relay updates project.tabs automatically via store normalization.
       // Sync active slug in case the user renamed it.
-      if (tab.slug === activeTabSlug) setActiveTabSlug(slug)
+      if (tab.slug === activeTabSlug && newSlug) setActiveTabSlug(newSlug)
     } catch {
       mutationErrorToast(intl)
     }

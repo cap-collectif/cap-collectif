@@ -64,7 +64,7 @@ abstract class AbstractProjectTabPersister
 
     protected function validateCommonFields(ProjectTab $projectTab, Argument $input, ?ProjectTab $excludedTab = null): ?string
     {
-        $normalizedSlug = $this->normalizeSlug((string) $input->offsetGet('slug'));
+        $normalizedSlug = $this->normalizeSlug((string) $input->offsetGet('title'));
 
         if ($this->getProjectTabRepository()->isSlugUsedInProject($projectTab->getProject(), $normalizedSlug, $excludedTab)) {
             return self::SLUG_ALREADY_EXISTS;

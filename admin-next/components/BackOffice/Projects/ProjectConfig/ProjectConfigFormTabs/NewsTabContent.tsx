@@ -64,7 +64,6 @@ const NewsTabContent: React.FC<NewsTabContentProps> = ({ tab: tabRef }) => {
         input: {
           tabId: tab.id,
           title: tab.title,
-          slug: tab.slug,
           enabled: tab.enabled,
           newsItems: items.map((item, i) => ({ id: item.id, position: i + 1 })),
         },
