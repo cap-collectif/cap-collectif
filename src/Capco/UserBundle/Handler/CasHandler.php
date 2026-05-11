@@ -127,8 +127,31 @@ class CasHandler
         return [
             'host' => parse_url($serverUrl, \PHP_URL_HOST),
             'port' => parse_url($serverUrl, \PHP_URL_PORT) ?? $defaultPort,
-            'path' => parse_url($serverUrl, \PHP_URL_PATH),
+            'path' => $this->normalizeServerPath((string) parse_url($serverUrl, \PHP_URL_PATH)),
         ];
+    }
+
+    private function normalizeServerPath(string $path): string
+    {
+        $trimmedPath = rtrim($path, '/');
+
+        if ('' === $trimmedPath) {
+            return '';
+        }
+
+        do {
+            $pathWasUpdated = false;
+
+            foreach (['/login', '/logout'] as $endpoint) {
+                if (str_ends_with($trimmedPath, $endpoint)) {
+                    $trimmedPath = substr($trimmedPath, 0, -\strlen($endpoint));
+                    $trimmedPath = rtrim($trimmedPath, '/');
+                    $pathWasUpdated = true;
+                }
+            }
+        } while ($pathWasUpdated && '' !== $trimmedPath);
+
+        return $trimmedPath;
     }
 
     private function getConfiguration(): CASSSOConfiguration
