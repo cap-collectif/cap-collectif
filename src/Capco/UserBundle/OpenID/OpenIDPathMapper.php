@@ -37,7 +37,7 @@ class OpenIDPathMapper
             'cd59' => new Cd59Mapping(),
             'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium',
             'participer-debat-gravelines', 'participer-debat-fessenheim',
-            'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp', 'pngmdr', 'newlceo-cndp' => new CndpMapping(),
+            'participer-debat-bugey', 'participer-debat-fos', 'rte-cndp', 'pngmdr', 'newlceo-cndp', 'cern-cndp' => new CndpMapping(),
             'dijon' => new DijonMapping(),
             'nimes', 'nimes-metropole' => new NimesMapping(),
             default => new DevOpenIDMapping(),

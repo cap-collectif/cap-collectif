@@ -175,7 +175,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             'carpentras', 'catp', 'debatpenly', 'debateauidf', 'debatdsf',
             'participer-debat-lithium', 'participer-debat-gravelines',
             'participer-debat-fessenheim', 'participer-debat-bugey',
-            'participer-debat-fos', 'rte-cndp', 'pngmdr', 'newlceo-cndp' => $resolver
+            'participer-debat-fos', 'rte-cndp', 'pngmdr', 'newlceo-cndp', 'cern-cndp' => $resolver
                 ->setDefaults([
                     'state' => null,
                     'csrf' => true,
