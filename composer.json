@@ -62,7 +62,7 @@
         "limenius/react-renderer": "^5.0",
         "mailchimp/transactional": "^1.0",
         "mailjet/mailjet-apiv3-php": "^1.5",
-        "mandrill/mandrill": "^1.0",
+        "macroactive/mandrill": "^1.0.59",
         "mattketmo/email-checker": "^2.0",
         "maximal/emoji": "^1.7",
         "odolbeau/phone-number-bundle": "^3.0",
