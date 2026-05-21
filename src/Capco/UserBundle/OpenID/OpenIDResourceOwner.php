@@ -233,12 +233,15 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
      */
     private function getTokenField(array $accessToken): ?string
     {
-        if (isset($accessToken['id_token'])) {
-            return 'id_token';
-        }
+        $tokenFields = match ($this->getInstanceName()) {
+            'catp', 'cd59' => ['id_token', 'access_token'],
+            default => ['access_token', 'id_token'],
+        };
 
-        if (isset($accessToken['access_token'])) {
-            return 'access_token';
+        foreach ($tokenFields as $tokenField) {
+            if (isset($accessToken[$tokenField])) {
+                return $tokenField;
+            }
         }
 
         return null;
