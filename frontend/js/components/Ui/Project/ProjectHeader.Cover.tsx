@@ -141,7 +141,6 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
   <Box
     className="projectHeader__coverImage"
     width={['100%', '405px']}
-    borderRadius={[0, 'accordion']}
     overflow="hidden"
     minHeight="270px"
     maxHeight="315px"
@@ -155,8 +154,8 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
       src={src}
       alt=""
       width={['100%', '405px']}
-      height="100%"
       minHeight="270px"
+      borderRadius={[0, 'accordion']}
       loading="eager"
       style={{
         objectFit: 'cover',
