@@ -385,6 +385,8 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
+                $isSimplifiedOrGroupedProposalExportable = $this->shouldExportProposalInSimplifiedOrGroupedVariant($proposal);
+
                 // compute FULL proposal once
                 $proposalFullData = $this->proposalNormalizer->normalize(
                     object: $proposal,
@@ -406,7 +408,10 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     $handle = $config['handle'];
                     $headers = $config['headers'];
 
-                    if (ExportVariantsEnum::SIMPLIFIED === $variant && !$this->shouldExportProposalInSimplifiedVariant($proposal)) {
+                    if (
+                        \in_array($variant, [ExportVariantsEnum::SIMPLIFIED, ExportVariantsEnum::GROUPED], true)
+                        && !$isSimplifiedOrGroupedProposalExportable
+                    ) {
                         continue;
                     }
 
@@ -423,7 +428,13 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 $this->exportProposalComments(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData);
                 $this->exportProposalCommentsVotes(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData);
                 $this->exportProposalReportings(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData);
-                $this->exportProposalVotes(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData, userStats: $userStats);
+                $this->exportProposalVotes(
+                    variants: $this->getProposalVoteVariants($variants, $isSimplifiedOrGroupedProposalExportable),
+                    proposal: $proposal,
+                    step: $step,
+                    proposalData: $proposalFullData,
+                    userStats: $userStats
+                );
                 $this->exportProposalNews(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData);
 
                 if (($proposalCount % self::BATCH_SIZE) === 0) {
@@ -594,6 +605,22 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
             userStats: $userStats,
             delimiter: $this->delimiter
         );
+    }
+
+    /**
+     * @param array<string, array{handle: resource, headers: array<string>, filename: string}> $variants
+     *
+     * @return array<string, array{handle: resource, headers: array<string>, filename: string}>
+     */
+    private function getProposalVoteVariants(array $variants, bool $isSimplifiedOrGroupedProposalExportable): array
+    {
+        if ($isSimplifiedOrGroupedProposalExportable) {
+            return $variants;
+        }
+
+        unset($variants[ExportVariantsEnum::GROUPED->value]);
+
+        return $variants;
     }
 
     /**
@@ -885,7 +912,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         return round(memory_get_usage() / 1048576, 2) . ' MB';
     }
 
-    private function shouldExportProposalInSimplifiedVariant(Proposal $proposal): bool
+    private function shouldExportProposalInSimplifiedOrGroupedVariant(Proposal $proposal): bool
     {
         $author = $proposal->getAuthor();
 

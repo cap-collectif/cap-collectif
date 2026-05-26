@@ -28,7 +28,7 @@ type ChooseStepModalProps = {
 const PROJECT_FRAGMENT = graphql`
   fragment ChooseStepModal_project on Project {
     title
-    steps {
+    steps(excludePresentationStep: true) {
       id
       title
       __typename
@@ -86,7 +86,7 @@ const ChooseStepModal: FC<ChooseStepModalProps> = ({ project: projectRef, export
         <Flex direction={'column'} alignItems={'center'}>
           <RadioGroup spacing={4}>
             {stepOptions
-              .filter(step => step.__typename !== 'PresentationStep')
+              .filter(step => step.__typename !== 'PresentationStep' && step.__typename !== 'OtherStep')
               .map(step => (
                 <ChooseStepRadioOption
                   key={step.id}

@@ -21,7 +21,7 @@ export type ExportProps = {
 
 const FRAGMENT = graphql`
   fragment ExportModal_project on Project {
-    steps {
+    exportSteps: steps(excludePresentationStep: true) {
       __typename
       id
       ... on ProposalStep {
@@ -39,7 +39,9 @@ const ExportModal: FC<ExportModalProps> = ({ project: projectRef }) => {
   const project = useFragment(FRAGMENT, projectRef)
   const [exportParams, setExportParams] = useState<ExportProps>({ step: null, selectedData: [], format: null })
 
-  const currentStep = project.steps.find(step => step.id === exportParams.step)
+  const currentStep = project.exportSteps
+    .filter(step => step.__typename !== 'PresentationStep' && step.__typename !== 'OtherStep')
+    .find(step => step.id === exportParams.step)
   const isCurrentStepVotable = currentStep?.votable === true || currentStep?.__typename === 'DebateStep'
 
   return (

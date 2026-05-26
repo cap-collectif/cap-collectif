@@ -26,7 +26,6 @@ import ProjectAdminParticipant from '../ProjectAdminParticipant/ProjectAdminPart
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 import { HeaderContainer, ButtonSendMail } from './ProjetAdminParticipants.style'
 import NoParticipant from '~/components/Admin/Project/ProjectAdminParticipantTab/NoParticipant/NoParticipant'
-import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton'
 import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminParticipants_project.graphql'
 import colors from '~/styles/modules/colors'
 import ModalCreateMailingList from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList'
@@ -245,7 +244,7 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
   )
 }
 
-export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer }: Props) => {
+export const ProjectAdminParticipants = ({ project, relay, viewer }: Props) => {
   const { parameters, status, dispatch } = useProjectAdminParticipantsContext()
   const { selectedRows } = usePickableList()
   const refusingCount = countSelectedNotConsenting(project, selectedRows)
@@ -267,29 +266,6 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
     >
       <AnalysisPickableListContainer>
         <HeaderContainer>
-          {viewerIsAdmin && project.exportableSteps && (
-            <ExportButton
-              hasMarginRight
-              disabled={!hasParticipants}
-              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-              onChange={stepId => {
-                window.open(`/export-step-contributors/${stepId}`, '_blank')
-              }}
-            >
-              {project.exportableSteps.filter(Boolean).map(({ step }) => {
-                if (step.contributors && step.contributors.totalCount > 0) {
-                  return (
-                    <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
-                      {step.title}
-                    </DropdownSelect.Choice>
-                  )
-                }
-
-                return null
-              })}
-            </ExportButton>
-          )}
-
           <ClearableInput
             id="search"
             name="search"
@@ -391,37 +367,6 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
           __typename
           id
           title
-        }
-        exportableSteps @include(if: $viewerIsAdmin) {
-          step {
-            id
-            title
-            ... on DebateStep {
-              contributors {
-                totalCount
-              }
-            }
-            ... on ConsultationStep {
-              contributors {
-                totalCount
-              }
-            }
-            ... on CollectStep {
-              contributors {
-                totalCount
-              }
-            }
-            ... on SelectionStep {
-              contributors {
-                totalCount
-              }
-            }
-            ... on QuestionnaireStep {
-              contributors {
-                totalCount
-              }
-            }
-          }
         }
         participants: contributors(
           first: $count

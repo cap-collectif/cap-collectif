@@ -33,7 +33,7 @@ type ExportStep = {
 
 type ExportProject = {
   readonly exportContributorsUrl?: string | null
-  readonly steps: ReadonlyArray<ExportStep>
+  readonly exportSteps: ReadonlyArray<ExportStep>
 }
 
 type ChooseDataFormatModalProps = {
@@ -53,7 +53,7 @@ const PROJECT_FRAGMENT = graphql`
         title
         slug
         exportContributorsUrl
-        steps {
+        exportSteps: steps(excludePresentationStep: true) {
             __typename
             id
             slug
@@ -117,12 +117,12 @@ export const resolveExportUrls = (project: ExportProject, exportParams: ExportPr
   }
 
   if (stepId === 'all') {
-    return project.steps
-      .filter(step => step.__typename !== 'PresentationStep')
+    return project.exportSteps
+      .filter(step => step.__typename !== 'PresentationStep' && step.__typename !== 'OtherStep')
       .flatMap(step => getStepExportUrls(step, selectedData, format))
   }
 
-  const step = project.steps.find(currentStep => currentStep.id === stepId)
+  const step = project.exportSteps.find(currentStep => currentStep.id === stepId)
 
   return getStepExportUrls(step, selectedData, format)
 }

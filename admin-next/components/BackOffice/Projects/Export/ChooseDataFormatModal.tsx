@@ -52,7 +52,7 @@ const PROJECT_FRAGMENT = graphql`
   fragment ChooseDataFormatModal_project on Project {
     title
     exportContributorsUrl
-    steps {
+    steps(excludePresentationStep: true) {
       __typename
       id
       exportContributorsUrls {
@@ -116,7 +116,7 @@ export const resolveExportUrls = (project: ExportProject, exportParams: ExportPr
 
   if (stepId === 'all') {
     return project.steps
-      .filter(step => step.__typename !== 'PresentationStep')
+      .filter(step => step.__typename !== 'PresentationStep' && step.__typename !== 'OtherStep')
       .flatMap(step => getStepExportUrls(step, selectedData, format))
   }
 

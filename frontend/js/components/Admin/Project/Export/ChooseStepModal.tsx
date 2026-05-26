@@ -28,7 +28,7 @@ type ChooseStepModalProps = {
 const PROJECT_FRAGMENT = graphql`
     fragment ChooseStepModal_project on Project {
         title
-        steps {
+        exportSteps: steps(excludePresentationStep: true) {
             id
             title
             __typename
@@ -39,11 +39,11 @@ const PROJECT_FRAGMENT = graphql`
 const ChooseStepModal: FC<ChooseStepModalProps> = ({ project: projectRef, exportParams, setExportParams }) => {
   const intl = useIntl()
   const project = useFragment(PROJECT_FRAGMENT, projectRef);
-  const {steps} = project;
+  const {exportSteps} = project;
 
   // Add an additional "all steps" option
   const stepOptions = [
-    ...steps,
+    ...exportSteps,
     {
       id: 'all',
       title: `${intl.formatMessage({
@@ -90,7 +90,7 @@ const ChooseStepModal: FC<ChooseStepModalProps> = ({ project: projectRef, export
         <Flex direction={'column'} alignItems={'center'}>
           <RadioGroup spacing={4}>
             {stepOptions
-              .filter(step => step.__typename !== 'PresentationStep')
+              .filter(step => step.__typename !== 'PresentationStep' && step.__typename !== 'OtherStep')
               .map(step => (
                 <ChooseStepRadioOption step={step} exportParams={exportParams} handleOnChange={handleOnChange} />
               ))}

@@ -63,12 +63,15 @@ class ExportCollectAndSelectionContributionsCommandTest extends KernelTestCase
     ];
     public const FULL_SUFFIX = '.csv';
     public const SIMPLIFIED_SUFFIX = '_simplified.csv';
+    public const GROUPED_SUFFIX = '_grouped.csv';
     public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
     public const OUTPUT_DIRECTORIES_STEP_TYPE = [
         'collect' => self::OUTPUT_DIRECTORY . '/collect',
         'selection' => self::OUTPUT_DIRECTORY . '/selection',
     ];
     public const CAPCO_EXPORT_COLLECT_SELECTION_CONTRIBUTIONS = 'capco:export:collect-selection:contributions';
+    private const COLLECT_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS = 'contributions_budget-participatif-rennes_collecte-des-propositions_grouped.csv';
+    private const SELECTION_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS = 'contributions_budget-participatif-rennes_fermee_grouped.csv';
 
     protected function setUp(): void
     {
@@ -92,11 +95,26 @@ class ExportCollectAndSelectionContributionsCommandTest extends KernelTestCase
 
         $completedFileNames = $this->getCompletedFileNames(self::FULL_SUFFIX, array_merge(...array_values(self::EXPECTED_FILE_NAMES)));
         $simplifiedFileNames = $this->getCompletedFileNames(self::SIMPLIFIED_SUFFIX, array_merge(...array_values(self::EXPECTED_FILE_NAMES)));
+        $groupedFileNames = $this->getCompletedFileNames(self::GROUPED_SUFFIX, array_merge(...array_values(self::EXPECTED_FILE_NAMES)));
 
         $this->assertOutputs($actualOutputs, [
-            self::EXPECTED_DIRECTORY . '/collect' => $completedFileNames,
-            self::EXPECTED_DIRECTORY . '/selection' => $simplifiedFileNames,
+            self::EXPECTED_DIRECTORY . '/collect' => [...$completedFileNames, ...$groupedFileNames],
+            self::EXPECTED_DIRECTORY . '/selection' => [...$simplifiedFileNames, ...$groupedFileNames],
         ]);
+
+        $this->assertArrayHasKey(self::COLLECT_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS, $actualOutputs);
+        $collectGroupedOutput = $actualOutputs[self::COLLECT_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS];
+        $this->assertIsString($collectGroupedOutput);
+        $this->assertStringNotContainsString('proposalDraftWithNotConfirmedAuthor', $collectGroupedOutput);
+        $this->assertStringNotContainsString('proposalTrashedVisible1', $collectGroupedOutput);
+        $this->assertStringNotContainsString('proposalTrashedInvisible1', $collectGroupedOutput);
+
+        $this->assertArrayHasKey(self::SELECTION_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS, $actualOutputs);
+        $selectionGroupedOutput = $actualOutputs[self::SELECTION_GROUPED_OUTPUT_WITH_EXCLUDED_PROPOSALS];
+        $this->assertIsString($selectionGroupedOutput);
+        $this->assertStringNotContainsString('proposal106', $selectionGroupedOutput);
+        $this->assertStringNotContainsString('115-1106', $selectionGroupedOutput);
+        $this->assertStringNotContainsString('1075', $selectionGroupedOutput);
     }
 
     /**

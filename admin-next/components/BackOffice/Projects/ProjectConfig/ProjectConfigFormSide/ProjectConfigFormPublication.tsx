@@ -40,14 +40,17 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
     <>
       <Accordion.Button>
         <Text>{intl.formatMessage({ id: 'global.publication' })}</Text>
-        {!isNewProjectPage && (
+        {!isNewProjectPage && url ? (
           <Flex fontSize={CapUIFontSize.BodyRegular} color="blue.500" position="absolute" right={6} top={6}>
             <Icon name={CapUIIcon.Eye} />
             <Link
-              href={url ?? ''}
+              href={url}
               target="_blank"
               ml={1}
               fontWeight={600}
+              onClick={event => {
+                event.stopPropagation()
+              }}
               sx={{
                 textDecoration: 'none !important',
               }}
@@ -55,7 +58,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
               {intl.formatMessage({ id: 'global.preview' })}
             </Link>
           </Flex>
-        )}
+        ) : null}
       </Accordion.Button>
       <Accordion.Panel>
         <FormControl name="publishedAt" control={control}>

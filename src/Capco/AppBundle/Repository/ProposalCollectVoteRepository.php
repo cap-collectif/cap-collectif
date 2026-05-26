@@ -728,10 +728,16 @@ class ProposalCollectVoteRepository extends EntityRepository
                         ) as voted_proposal_references
                     FROM votes v
                     INNER JOIN proposal p ON v.proposal_id = p.id
+                    INNER JOIN fos_user proposal_author ON p.author_id = proposal_author.id
                     INNER JOIN proposal_form pf ON p.proposal_form_id = pf.id
                     WHERE v.collect_step_id = :step_id
                       AND v.is_accounted = 1
                       AND v.published = 1
+                      AND proposal_author.confirmation_token IS NULL
+                      AND p.deleted_at IS NULL
+                      AND p.is_draft = 0
+                      AND p.trashed_at IS NULL
+                      AND p.published = 1
                     GROUP BY IFNULL(v.voter_id, v.participant_id)
                 SQL;
 
@@ -748,9 +754,13 @@ class ProposalCollectVoteRepository extends EntityRepository
                     p.author_id as user_id,
                     COUNT(*) as total_proposals
                 FROM proposal p
+                INNER JOIN fos_user proposal_author ON p.author_id = proposal_author.id
                 INNER JOIN proposal_form pf ON p.proposal_form_id = pf.id
                 WHERE pf.step_id = :step_id
+                  AND proposal_author.confirmation_token IS NULL
                   AND p.deleted_at IS NULL
+                  AND p.is_draft = 0
+                  AND p.trashed_at IS NULL
                   AND p.published = 1
                 GROUP BY p.author_id
             SQL;
