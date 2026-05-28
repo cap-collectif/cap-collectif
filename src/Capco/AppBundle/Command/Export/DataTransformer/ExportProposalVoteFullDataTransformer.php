@@ -19,6 +19,11 @@ class ExportProposalVoteFullDataTransformer
      */
     public function transformProposal(array $proposal): array
     {
+        $proposalReferenceKey = $this->translator->trans(ExportHeaders::EXPORT_PROPOSAL_REFERENCE);
+        if (\array_key_exists($proposalReferenceKey, $proposal)) {
+            $proposal[$proposalReferenceKey] = $this->quoteReferenceValue($proposal[$proposalReferenceKey]);
+        }
+
         return $proposal;
     }
 
@@ -69,5 +74,10 @@ class ExportProposalVoteFullDataTransformer
             'ranking' => $this->translator->trans(ExportHeaders::EXPORT_PROPOSAL_VOTES_RANKING),
             'contribution_type' => $this->translator->trans(ExportHeaders::EXPORT_CONTRIBUTION_TYPE),
         ];
+    }
+
+    private function quoteReferenceValue(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 }

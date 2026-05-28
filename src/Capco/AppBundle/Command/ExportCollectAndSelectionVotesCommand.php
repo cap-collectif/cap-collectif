@@ -148,7 +148,7 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
                 $proposal = $vote->getProposal();
                 fputcsv($handle, [
                     $proposal->getId(),
-                    $proposal->getFullReference(),
+                    $this->quoteReferenceValue($proposal->getFullReference()),
                     $proposal->getTitle(),
                     $this->proposalUrlResolver->__invoke($proposal),
                     $vote->getId(),
@@ -208,6 +208,11 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
     private function writeUtf8Bom($handle): void
     {
         fwrite($handle, "\xEF\xBB\xBF");
+    }
+
+    private function quoteReferenceValue(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 
     /**

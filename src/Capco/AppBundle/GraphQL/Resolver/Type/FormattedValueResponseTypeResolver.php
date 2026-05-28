@@ -37,6 +37,10 @@ class FormattedValueResponseTypeResolver implements QueryInterface
                 );
             }
 
+            if ($question && AbstractQuestion::QUESTION_TYPE_EDITOR === $question->getType()) {
+                return Text::htmlToCsvText($response->getValue());
+            }
+
             return Text::htmlToString($response->getValue());
         }
 

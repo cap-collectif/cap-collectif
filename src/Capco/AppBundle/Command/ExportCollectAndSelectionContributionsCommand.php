@@ -774,11 +774,23 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
     private function fputcsv_assoc($handle, array $data, array $header): bool|int
     {
         $row = [];
+        $headersToQuote = [
+            $this->translator->trans(ExportHeaders::EXPORT_PROPOSAL_REFERENCE),
+            $this->translator->trans(ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS),
+            $this->translator->trans(ExportHeaders::EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS),
+        ];
+
         foreach ($header as $col) {
-            $row[] = $data[$col] ?? null;
+            $value = $data[$col] ?? null;
+            $row[] = \in_array($col, $headersToQuote, true) ? $this->quoteReferenceValue($value) : $value;
         }
 
         return fputcsv($handle, $row, $this->delimiter);
+    }
+
+    private function quoteReferenceValue(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 
     /**

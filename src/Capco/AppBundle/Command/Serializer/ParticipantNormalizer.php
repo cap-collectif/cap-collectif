@@ -75,7 +75,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
         if (isset($context['step']) && $context['step']->isVotable()) {
             $userArray[self::EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP] = $this->getParticipantVoteCountPerStep($object, $context['step']);
             $userArray[self::EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP] = $this->getProposalCountPerStep($object, $context['step']);
-            $userArray[ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS] = $this->getVotedProposalReferencesPerStep($object, $context['step']);
+            $userArray[ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS] = $this->quoteReferenceValue($this->getVotedProposalReferencesPerStep($object, $context['step']));
         }
 
         return $this->translateHeaders($userArray);
@@ -178,5 +178,10 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
         )->toArray();
 
         return implode(',', array_filter($votedProposalReferences));
+    }
+
+    private function quoteReferenceValue(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 }

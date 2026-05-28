@@ -44,6 +44,31 @@ final class Text
         return iconv('UTF-8', 'UTF-8//IGNORE', $str);
     }
 
+    public static function htmlToCsvText(?string $str): string
+    {
+        if (null === $str || '' === $str) {
+            return '';
+        }
+
+        $str = str_replace(["\r\n", "\r"], "\n", $str);
+        $str = html_entity_decode($str, \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+        $str = preg_replace_callback('/<ol\b[^>]*>(.*?)<\/ol>/is', static fn (array $matches) => self::formatHtmlList($matches[1], true), $str);
+        $str = preg_replace_callback('/<ul\b[^>]*>(.*?)<\/ul>/is', static fn (array $matches) => self::formatHtmlList($matches[1], false), (string) $str);
+        $str = preg_replace_callback('/<li\b[^>]*>(.*?)<\/li>/is', static fn (array $matches) => "\n- " . self::htmlListItemToText($matches[1]), (string) $str);
+        $str = preg_replace('/<br\s*\/?>/i', "\n", (string) $str);
+        $str = preg_replace('/<\/(p|div|section|article|header|footer|h[1-6]|blockquote|pre|tr)>/i', "\n", (string) $str);
+        $str = preg_replace('/<(p|div|section|article|header|footer|h[1-6]|blockquote|pre|tr)\b[^>]*>/i', "\n", (string) $str);
+        $str = html_entity_decode(strip_tags((string) $str), \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+        $str = preg_replace('/\x{00A0}/u', ' ', $str);
+        $str = preg_replace('/[ \t]+/', ' ', (string) $str);
+        $str = preg_replace('/ *\n */', "\n", (string) $str);
+        $str = preg_replace("/\n{3,}/", "\n\n", (string) $str);
+
+        $text = iconv('UTF-8', 'UTF-8//IGNORE', trim((string) $str));
+
+        return false === $text ? '' : $text;
+    }
+
     public static function unslug(string $slug): string
     {
         return ucfirst(str_replace('-', ' ', $slug));
@@ -83,5 +108,33 @@ final class Text
         return \is_array(json_decode($value, true)) && \JSON_ERROR_NONE == json_last_error()
             ? true
             : false;
+    }
+
+    private static function formatHtmlList(string $html, bool $ordered): string
+    {
+        preg_match_all('/<li\b[^>]*>(.*?)<\/li>/is', $html, $matches);
+
+        $items = [];
+        foreach ($matches[1] as $index => $item) {
+            $text = self::htmlListItemToText($item);
+            if ('' === $text) {
+                continue;
+            }
+
+            $items[] = ($ordered ? ($index + 1) . '. ' : '- ') . $text;
+        }
+
+        return $items ? "\n" . implode("\n", $items) . "\n" : '';
+    }
+
+    private static function htmlListItemToText(string $html): string
+    {
+        $html = preg_replace('/<br\s*\/?>/i', "\n", $html);
+        $text = html_entity_decode(strip_tags((string) $html), \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+        $text = preg_replace('/\x{00A0}/u', ' ', $text);
+        $text = preg_replace('/[ \t]+/', ' ', (string) $text);
+        $text = preg_replace('/ *\n */', "\n", (string) $text);
+
+        return trim((string) $text);
     }
 }

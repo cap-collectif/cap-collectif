@@ -1,7 +1,4 @@
 ﻿export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
-proposalWorkflowVoteA,32-600509,"Proposition A",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-a,1068,1,"2024-01-03 00:00:00",Non,user1
-proposalWorkflowVoteB,32-760144,"Proposition B",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-b,1069,1,"2024-01-03 00:00:00",Non,user1
-proposalWorkflowVoteC,32-370076,"Proposition C",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-c,1070,1,"2024-01-03 00:00:00",Non,user1
-proposalWorkflowVoteB,32-760144,"Proposition B",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-b,910056,1,"2026-03-17 17:56:50",Oui,a42a38b6-151f-11f1-9350-9a0d57bf857a
-proposalWorkflowVoteE,32-479830,"Proposition E",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-e,910057,1,"2026-03-17 17:56:56",Oui,a42a38b6-151f-11f1-9350-9a0d57bf857a
-proposalWorkflowVoteD,32-430750,"Proposition D",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-d,910058,1,"2026-03-17 17:57:00",Oui,a42a38b6-151f-11f1-9350-9a0d57bf857a
+proposalWorkflowVoteA,"""32-600509""","Proposition A",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-a,1068,1,"2024-01-03 00:00:00",Non,user1
+proposalWorkflowVoteB,"""32-760144""","Proposition B",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-b,1069,1,"2024-01-03 00:00:00",Non,user1
+proposalWorkflowVoteC,"""32-370076""","Proposition C",https://capco.dev/project/bp-vote-parcours/collect/collecte-des-propositions-parcours/proposals/proposition-c,1070,1,"2024-01-03 00:00:00",Non,user1

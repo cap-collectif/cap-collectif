@@ -33,7 +33,13 @@ class ExportProposalVoteGroupedDataTransformer
             ]
         ));
 
-        return array_intersect_key($proposal, $proposalHeadersToKeep);
+        $proposal = array_intersect_key($proposal, $proposalHeadersToKeep);
+        $proposalReferenceKey = $this->translator->trans(ExportHeaders::EXPORT_PROPOSAL_REFERENCE);
+        if (\array_key_exists($proposalReferenceKey, $proposal)) {
+            $proposal[$proposalReferenceKey] = $this->quoteReferenceValue($proposal[$proposalReferenceKey]);
+        }
+
+        return $proposal;
     }
 
     /**
@@ -63,7 +69,7 @@ class ExportProposalVoteGroupedDataTransformer
             $translatedKeys['author_profile_url'] => $this->userUrlResolver->getBySlug($vote['author_slug']),
             $translatedKeys['author_identification_code'] => $vote['author_identification_code'],
             $translatedKeys['author_total_proposals'] => $userStats['proposals'][$authorId] ?? 0,
-            $translatedKeys['voted_proposal_references'] => $userStats['votedProposalReferences'][$authorId] ?? '',
+            $translatedKeys['voted_proposal_references'] => $this->quoteReferenceValue($userStats['votedProposalReferences'][$authorId] ?? ''),
             $translatedKeys['contribution_type'] => $contributionTypeTranslated,
         ];
 
@@ -114,5 +120,10 @@ class ExportProposalVoteGroupedDataTransformer
         }
 
         return $keys;
+    }
+
+    private function quoteReferenceValue(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 }

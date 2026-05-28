@@ -29,12 +29,12 @@ class EnvironmentPresets
         Manager::turnstile_captcha,
         Manager::unstable__new_create_project,
         Manager::votes_min,
+        Manager::export,
     ];
 
     public const PROD = [
         ...self::COMMON,
         Manager::consent_internal_communication,
-        Manager::export,
         Manager::helpscout_beacon,
         Manager::members_list,
         Manager::multi_consultations,
@@ -59,7 +59,6 @@ class EnvironmentPresets
         ...self::COMMON,
         Manager::consent_internal_communication,
         Manager::developer_documentation,
-        Manager::export,
         Manager::external_project,
         Manager::login_facebook,
         Manager::mailjet_sandbox,

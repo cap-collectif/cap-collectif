@@ -18,6 +18,7 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver;
 use Capco\AppBundle\Utils\Map;
+use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -133,7 +134,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
             self::EXPORT_PROPOSAL_REFERENCE => $object->getFullReference(),
             self::EXPORT_PROPOSAL_TITLE => $object->getTitle(),
             self::EXPORT_PROPOSAL_SUMMARY => $object->getSummary(),
-            self::EXPORT_PROPOSAL_DESCRIPTION => $object->getBodyText(),
+            self::EXPORT_PROPOSAL_DESCRIPTION => Text::htmlToCsvText($object->getBody()),
             self::EXPORT_PROPOSAL_AUTHOR_ID => $author?->getId(),
             self::EXPORT_PROPOSAL_VOTES_TOTAL_COUNT => $totalPaperCount + $totalDigitalCount,
             self::EXPORT_PROPOSAL_VOTES_DIGITAL_COUNT => $totalDigitalCount,

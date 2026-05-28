@@ -104,7 +104,7 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
             $orderedArray = array_flip($headerKeys);
             $orderedArray['proposal_id'] = GlobalId::toGlobalId('Proposal', $projectMediatorsProposalsVote['proposal_id']);
             $orderedArray['proposal_title'] = $projectMediatorsProposalsVote['title'];
-            $orderedArray['proposal_reference'] = $projectMediatorsProposalsVote['reference'];
+            $orderedArray['proposal_reference'] = $this->quoteProposalReference($projectMediatorsProposalsVote['reference']);
             $orderedArray['proposal_url'] = $projectMediatorsProposalsVote['proposal_url'];
             $orderedArray['vote_id'] = $projectMediatorsProposalsVote['vote_id'];
             $orderedArray['vote_date'] = $projectMediatorsProposalsVote['created_at'];
@@ -132,6 +132,11 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         $output->writeln('All projects mediators proposals votes have been successfully exported!');
 
         return 0;
+    }
+
+    private function quoteProposalReference(mixed $value): mixed
+    {
+        return null === $value || '' === $value ? $value : '"' . $value . '"';
     }
 
     private function getHeaders(): array

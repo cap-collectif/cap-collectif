@@ -1,8 +1,8 @@
 ﻿export_proposal_id,export_proposal_reference,export_proposal_title,export_proposal_link,export_proposal_votes_id,export_proposal_votes_ranking,export_proposal_votes_published_at,export_proposal_votes_anonymous,export_proposal_votes_author_id
-proposal24,1337-1,"Proposition 1",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-1,2051,3,"2015-03-01 00:00:51",Non,user5
-proposal25,1337-2,"Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2052,2,"2015-03-01 00:00:52",Non,user5
-proposal26,1337-3,"Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2053,1,"2015-03-01 00:00:53",Non,user5
-proposal25,1337-2,"Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2059,2,"2015-03-01 00:00:56",Non,userMaxime
-proposal26,1337-3,"Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2060,1,"2015-03-01 00:00:57",Non,userMaxime
-proposal25,1337-2,"Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2061,1,"2015-03-01 00:00:58",Non,user2
-proposal26,1337-3,"Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2062,2,"2015-03-01 00:00:59",Non,user2
+proposal24,"""1337-1""","Proposition 1",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-1,2051,3,"2015-03-01 00:00:51",Non,user5
+proposal25,"""1337-2""","Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2052,2,"2015-03-01 00:00:52",Non,user5
+proposal26,"""1337-3""","Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2053,1,"2015-03-01 00:00:53",Non,user5
+proposal25,"""1337-2""","Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2059,2,"2015-03-01 00:00:56",Non,userMaxime
+proposal26,"""1337-3""","Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2060,1,"2015-03-01 00:00:57",Non,userMaxime
+proposal25,"""1337-2""","Proposition 2",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-2,2061,1,"2015-03-01 00:00:58",Non,user2
+proposal26,"""1337-3""","Proposition 3",https://capco.dev/project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite/proposals/proposition-3,2062,2,"2015-03-01 00:00:59",Non,user2
