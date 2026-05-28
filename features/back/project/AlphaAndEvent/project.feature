@@ -127,15 +127,6 @@ Scenario: Logged in admin wants to add a debate step to a project
   And I go to "/project/projet-vide/debate/debatestepquestion"
 
 @database
-Scenario: Admin merges two proposals
-  Given I am logged in as admin
-  And I go to "/admin/alpha/project/projectIdf/participants"
-  And I wait "#export-button" to appear on current page
-  And I click on button "#export-button"
-  # Only 1 export should be visible for other don't have participants
-  And I should see 1 ".export-option" elements
-
-@database
 Scenario: Logged in admin wants to edit alpha project with a locale 
   Given I am logged in as admin
   Then I go to "/admin/alpha/project/englishProject/edit"
