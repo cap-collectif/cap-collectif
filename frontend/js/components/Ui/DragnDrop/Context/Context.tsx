@@ -15,6 +15,7 @@ export type DropResult = {
   combine?: {
     draggableId: string
     droppableId: string
+    index?: number
   } | null
   reason?: 'DROP' | 'CANCEL'
 }
@@ -32,6 +33,7 @@ export type DragUpdate = {
   combine?: {
     draggableId: string
     droppableId: string
+    index?: number
   } | null
 }
 
@@ -60,6 +62,7 @@ type ContextProps = {
 }
 
 type DragnDropContextType = {
+  contextId: string
   isDisabled?: boolean
   onDragEnd: OnDragEndResponder
   onDragUpdate?: OnDragUpdateResponder
@@ -71,9 +74,46 @@ type DragnDropContextType = {
   unregisterDraggable: (droppableId: string, draggableId: string) => void
 }
 
+type DropTarget = {
+  element?: Element
+  data: Record<string, any>
+}
+
 export const DragnDropContext = React.createContext<DragnDropContextType | null>(null)
 
+let dragnDropContextCount = 0
+
+const getContextDropTarget = (dropTargets: Array<DropTarget>, contextId: string, sourceDraggableId: string) => {
+  const contextDropTargets = dropTargets.filter(dropTarget => dropTarget.data.contextId === contextId)
+
+  return (
+    contextDropTargets.find(
+      dropTarget =>
+        dropTarget.data.draggableId !== sourceDraggableId &&
+        (dropTarget.data.draggableId || typeof dropTarget.data.index === 'number'),
+    ) ??
+    contextDropTargets.find(dropTarget => dropTarget.data.draggableId !== sourceDraggableId) ??
+    contextDropTargets[0]
+  )
+}
+
+const getDropTargetIndex = (dropTarget: DropTarget, clientY?: number) => {
+  if (typeof dropTarget.data.index === 'number') return dropTarget.data.index
+  if (typeof clientY !== 'number' || !(dropTarget.element instanceof HTMLElement)) return null
+
+  const children = Array.from(dropTarget.element.children)
+  const index = children.findIndex(child => {
+    const rect = child.getBoundingClientRect()
+    return clientY < rect.top + rect.height / 2
+  })
+
+  if (index !== -1) return index
+
+  return children.length > 0 ? children.length - 1 : null
+}
+
 const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }: ContextProps) => {
+  const [contextId] = React.useState(() => `dragndrop-context-${dragnDropContextCount++}`)
   const droppablesRef = React.useRef<Map<string, HTMLElement>>(new Map())
   const draggablesRef = React.useRef<Map<string, Map<string, number>>>(new Map())
 
@@ -109,8 +149,11 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
     if (isDisabled) return
 
     const cleanup = monitorForElements({
+      canMonitor: ({ source }) => source.data.contextId === contextId,
       onDragStart: ({ source }) => {
-        const sourceData = source.data as { draggableId: string; droppableId: string; index: number }
+        const sourceData = source.data as { contextId?: string; draggableId: string; droppableId: string; index: number }
+        if (sourceData.contextId !== contextId) return
+
         if (onDragStart) {
           const provided: ResponderProvided = {
             announce: (message: string) => {
@@ -148,11 +191,13 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
       onDrag: ({ source, location }) => {
         if (!onDragUpdate) return
 
-        const sourceData = source.data as { draggableId: string; droppableId: string; index: number }
-        const { dropTargets } = location.current
+        const sourceData = source.data as { contextId?: string; draggableId: string; droppableId: string; index: number }
+        if (sourceData.contextId !== contextId) return
 
-        if (dropTargets.length > 0) {
-          const targetData = dropTargets[0].data as { droppableId: string; index?: number; draggableId?: string }
+        const dropTarget = getContextDropTarget(location.current.dropTargets, contextId, sourceData.draggableId)
+
+        if (dropTarget) {
+          const targetData = dropTarget.data as { droppableId: string; index?: number; draggableId?: string }
 
           const provided: ResponderProvided = {
             announce: () => {},
@@ -171,6 +216,7 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
                 combine: {
                   draggableId: targetData.draggableId,
                   droppableId: targetData.droppableId,
+                  index: targetData.index,
                 },
               },
               provided
@@ -185,7 +231,7 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
                 },
                 destination: {
                   droppableId: targetData.droppableId,
-                  index: targetData.index ?? 0,
+                  index: getDropTargetIndex(dropTarget, location.current.input?.clientY) ?? 0,
                 },
                 combine: null,
               },
@@ -195,8 +241,10 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
         }
       },
       onDrop: ({ source, location }) => {
-        const sourceData = source.data as { draggableId: string; droppableId: string; index: number }
-        const { dropTargets } = location.current
+        const sourceData = source.data as { contextId?: string; draggableId: string; droppableId: string; index: number }
+        if (sourceData.contextId !== contextId) return
+
+        const dropTarget = getContextDropTarget(location.current.dropTargets, contextId, sourceData.draggableId)
 
         const provided: ResponderProvided = {
           announce: (message: string) => {
@@ -219,7 +267,7 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
           },
         }
 
-        if (dropTargets.length === 0) {
+        if (!dropTarget) {
           onDragEnd(
             {
               draggableId: sourceData.draggableId,
@@ -235,7 +283,7 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
           return
         }
 
-        const targetData = dropTargets[0].data as { droppableId: string; index?: number; draggableId?: string }
+        const targetData = dropTarget.data as { droppableId: string; index?: number; draggableId?: string }
 
         // Check if we're combining (dropping onto another draggable)
         if (targetData.draggableId && targetData.draggableId !== sourceData.draggableId) {
@@ -250,13 +298,14 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
               combine: {
                 draggableId: targetData.draggableId,
                 droppableId: targetData.droppableId,
+                index: targetData.index,
               },
               reason: 'DROP',
             },
             provided
           )
         } else {
-          const destinationIndex = targetData.index ?? sourceData.index
+          const destinationIndex = getDropTargetIndex(dropTarget, location.current.input?.clientY) ?? sourceData.index
           onDragEnd(
             {
               draggableId: sourceData.draggableId,
@@ -277,10 +326,11 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
     })
 
     return cleanup
-  }, [onDragEnd, onDragUpdate, onDragStart, isDisabled])
+  }, [onDragEnd, onDragUpdate, onDragStart, isDisabled, contextId])
 
   const contextValue = React.useMemo(
     () => ({
+      contextId,
       isDisabled,
       onDragEnd,
       onDragUpdate,
@@ -291,7 +341,7 @@ const Context = ({ children, onDragEnd, onDragUpdate, onDragStart, isDisabled }:
       registerDraggable,
       unregisterDraggable,
     }),
-    [isDisabled, onDragEnd, onDragUpdate, onDragStart, registerDroppable, unregisterDroppable, getDroppableItems, registerDraggable, unregisterDraggable]
+    [contextId, isDisabled, onDragEnd, onDragUpdate, onDragStart, registerDroppable, unregisterDroppable, getDroppableItems, registerDraggable, unregisterDraggable]
   )
 
   return (

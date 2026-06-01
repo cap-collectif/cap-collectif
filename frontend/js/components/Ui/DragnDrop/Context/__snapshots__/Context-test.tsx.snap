@@ -4,6 +4,7 @@ exports[`<Context /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
+      "contextId": "dragndrop-context-0",
       "getDroppableItems": [Function],
       "isDisabled": undefined,
       "onDragEnd": [Function],

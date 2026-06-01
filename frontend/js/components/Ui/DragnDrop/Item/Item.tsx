@@ -55,6 +55,7 @@ const Item = ({
         draggable({
           element,
           getInitialData: () => ({
+            contextId: context?.contextId,
             draggableId: id,
             droppableId,
             index: position,
@@ -71,14 +72,15 @@ const Item = ({
         dropTargetForElements({
           element,
           getData: () => ({
+            contextId: context?.contextId,
             draggableId: id,
             droppableId,
             index: position,
           }),
           canDrop: ({ source }) => {
             // Don't allow dropping on itself
-            const sourceData = source.data as { draggableId: string }
-            return sourceData.draggableId !== id
+            const sourceData = source.data as { contextId?: string; draggableId: string }
+            return sourceData.contextId === context?.contextId && sourceData.draggableId !== id
           },
         }),
       )
@@ -88,13 +90,14 @@ const Item = ({
         dropTargetForElements({
           element,
           getData: () => ({
+            contextId: context?.contextId,
             droppableId,
             index: position,
           }),
           canDrop: ({ source }) => {
             // Don't allow dropping on itself
-            const sourceData = source.data as { draggableId: string }
-            return sourceData.draggableId !== id
+            const sourceData = source.data as { contextId?: string; draggableId: string }
+            return sourceData.contextId === context?.contextId && sourceData.draggableId !== id
           },
         }),
       )

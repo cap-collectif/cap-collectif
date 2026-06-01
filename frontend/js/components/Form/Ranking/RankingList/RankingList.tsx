@@ -1,5 +1,5 @@
 import { $Values } from 'utility-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import type { DropResult, DragUpdate } from '~/components/Ui/DragnDrop/Context/Context'
 import isEqual from 'lodash/isEqual'
 import { useIntl } from 'react-intl'
@@ -8,7 +8,6 @@ import List from '~/components/Ui/DragnDrop/List/List'
 import Item from '~/components/Ui/DragnDrop/Item/Item'
 import RankingLabel from '../RankingLabel/RankingLabel'
 import RankingListContainer from './RankingList.style'
-import usePrevious from '~/utils/hooks/usePrevious'
 import { swap, moveItemOnAvailable, moveItem, formatDataDraggable } from '~/utils/dragNdrop'
 import config from '~/config'
 import type { FieldsProps } from '../Ranking'
@@ -67,16 +66,26 @@ const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) =
       ? fillRankingWithEmpty(formSelection, totalChoice)
       : fillOnlyEmpty(formChoices.length),
   )
-  const previousSelection = usePrevious({
-    selection,
-  })
+  const pendingSelectionRef = useRef<Array<Field> | null>(null)
+  const emitSelectionChange = useCallback(
+    nextSelection => {
+      const clearSelection = nextSelection.filter(Boolean)
+      pendingSelectionRef.current = clearSelection
+      onChange(clearSelection)
+    },
+    [onChange],
+  )
+
   useEffect(() => {
     const clearSelection = selection.filter(Boolean)
     const clearChoices = choices.filter(Boolean)
-    const clearPreviousSelection = previousSelection && previousSelection.selection.filter(Boolean)
 
-    if (!isEqual(clearSelection, clearPreviousSelection)) {
-      return onChange(clearSelection)
+    if (pendingSelectionRef.current) {
+      if (isEqual(formSelection, pendingSelectionRef.current)) {
+        pendingSelectionRef.current = null
+      } else {
+        return
+      }
     }
 
     if (!isEqual(clearSelection, formSelection)) {
@@ -94,34 +103,39 @@ const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) =
           : [...Array(formSelection && formSelection.length).fill(null)],
       )
     }
-  }, [selection, choices, onChange, formSelection, formChoices, totalChoice, previousSelection])
+  }, [selection, choices, formSelection, formChoices, totalChoice])
 
   const getList = (listId: string) => (listId === ID_LIST.CHOICES ? choices : selection)
 
-  const getDestinationIndex = (list, draggableIdDestination) => {
+  const getDestinationIndex = (list, draggableIdDestination, targetIndex) => {
+    if (typeof targetIndex === 'number') return targetIndex
+
     let destinationIndex = list.findIndex(item => item && item.id === draggableIdDestination)
 
     // empty destination
     if (destinationIndex === -1) {
-      destinationIndex = Number(draggableIdDestination.match(/\d/g))
+      destinationIndex = Number(draggableIdDestination.match(/-(\d+)$/)?.[1])
     }
 
     return destinationIndex
   }
 
   const onSwap = (source, combine) => {
-    const { draggableId: draggableIdDestination } = combine
+    const { draggableId: draggableIdDestination, index: targetIndex } = combine
     const currentList = getList(source.droppableId)
-    const destinationIndex = getDestinationIndex(currentList, draggableIdDestination)
+    const destinationIndex = getDestinationIndex(currentList, draggableIdDestination, targetIndex)
     const items = swap(currentList, source.index, destinationIndex)
-    if (source.droppableId === ID_LIST.SELECTION) setSelection(items)
+    if (source.droppableId === ID_LIST.SELECTION) {
+      setSelection(items)
+      emitSelectionChange(items)
+    }
     if (source.droppableId === ID_LIST.CHOICES) setChoices(items)
   }
 
   const onDragInOtherList = (source, combine) => {
-    const { draggableId: draggableIdDestination, droppableId: droppableIdDestination } = combine
+    const { draggableId: draggableIdDestination, droppableId: droppableIdDestination, index: targetIndex } = combine
     const destinationList = getList(combine.droppableId)
-    const destinationIndex = getDestinationIndex(destinationList, draggableIdDestination)
+    const destinationIndex = getDestinationIndex(destinationList, draggableIdDestination, targetIndex)
     const formatedDestination = formatDataDraggable(destinationIndex, droppableIdDestination)
     const listUpdated: ListItems = moveItem(
       getList(source.droppableId),
@@ -132,6 +146,20 @@ const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) =
     )
     setChoices(listUpdated[ID_LIST.CHOICES])
     setSelection(listUpdated[ID_LIST.SELECTION])
+    emitSelectionChange(listUpdated[ID_LIST.SELECTION])
+  }
+
+  const moveToDestination = (source, destination) => {
+    const listUpdated: ListItems = moveItem(
+      getList(source.droppableId),
+      getList(destination.droppableId),
+      source,
+      destination,
+      dataForm.choices.length,
+    )
+    setChoices(listUpdated[ID_LIST.CHOICES])
+    setSelection(listUpdated[ID_LIST.SELECTION])
+    emitSelectionChange(listUpdated[ID_LIST.SELECTION])
   }
 
   const onDragEnd = (result: DropResult) => {
@@ -148,8 +176,16 @@ const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) =
     if (destination && source.droppableId === destination.droppableId) {
       const currentList = getList(source.droppableId)
       const items = swap(currentList, source.index, destination.index)
-      if (source.droppableId === ID_LIST.SELECTION) setSelection(items)
+      if (source.droppableId === ID_LIST.SELECTION) {
+        setSelection(items)
+        emitSelectionChange(items)
+      }
       if (source.droppableId === ID_LIST.CHOICES) setChoices(items)
+    }
+
+    // from list to another one without combine target
+    if (destination && source.droppableId !== destination.droppableId) {
+      moveToDestination(source, destination)
     }
 
     // from list to another one
@@ -165,6 +201,7 @@ const RankingList = ({ dataForm, isDisabled, onChange, id }: RankingListProps) =
     const listUpdated: ListItems = moveItemOnAvailable(getList(from), getList(to), source, to)
     setChoices(listUpdated[ID_LIST.CHOICES])
     setSelection(listUpdated[ID_LIST.SELECTION])
+    emitSelectionChange(listUpdated[ID_LIST.SELECTION])
     setPreviewDraggable(null)
   }
 

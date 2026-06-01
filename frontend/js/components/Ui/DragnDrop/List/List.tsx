@@ -37,8 +37,8 @@ const List = ({
 
     const cleanup = dropTargetForElements({
       element,
-      getData: () => ({ droppableId: id }),
-      canDrop: () => !isDisabled,
+      getData: () => ({ contextId: context?.contextId, droppableId: id }),
+      canDrop: ({ source }) => !isDisabled && source.data.contextId === context?.contextId,
     })
 
     return () => {
