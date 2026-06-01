@@ -10,6 +10,10 @@ import type {
 } from '@relay/DuplicateProjectMutation.graphql'
 import type { ProjectItem_project$data } from '@relay/ProjectItem_project.graphql'
 
+type ProjectSteps = NonNullable<
+  NonNullable<DuplicateProjectMutation['rawResponse']['duplicateProject']>['newProject']
+>['steps']
+
 const mutation = graphql`
   mutation DuplicateProjectMutation($input: DuplicateProjectInput!, $connections: [ID!]!) @raw_response_type {
     duplicateProject(input: $input) {
@@ -24,22 +28,26 @@ const commit = (
   variables: DuplicateProjectMutation$variables,
   projectDuplicated: ProjectItem_project$data,
   intl: IntlShape,
-): Promise<DuplicateProjectMutation$data> =>
-  commitMutation<DuplicateProjectMutation>(environment, {
+): Promise<DuplicateProjectMutation$data> => {
+  const duplicatedProject = projectDuplicated as ProjectItem_project$data & { steps?: ProjectSteps }
+
+  return commitMutation<DuplicateProjectMutation>(environment, {
     mutation,
     variables,
     optimisticResponse: {
       duplicateProject: {
         // @ts-ignore see with @AlexTea
         newProject: {
-          ...projectDuplicated,
+          ...duplicatedProject,
           id: new Date().toISOString(),
-          title: `${intl.formatMessage({ id: 'copy-of' })} ${projectDuplicated.title}`,
+          title: `${intl.formatMessage({ id: 'copy-of' })} ${duplicatedProject.title}`,
           publishedAt: new Date().toISOString(),
           contributions: { totalCount: 0 },
+          steps: duplicatedProject.steps ?? [],
         },
       },
     },
   })
+}
 
 export default { commit }
