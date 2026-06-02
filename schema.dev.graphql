@@ -3797,6 +3797,7 @@ type CreateConsultationPayload {
 input CreateCustomProjectTabInput {
   projectId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   body: String
   clientMutationId: String
@@ -3928,6 +3929,7 @@ type CreateEmailingCampaignPayload {
 input CreateEventsProjectTabInput {
   projectId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   eventItems: [ProjectTabEventItemInput!]
   clientMutationId: String
@@ -4041,6 +4043,7 @@ type CreateMailingListPayload {
 input CreateNewsProjectTabInput {
   projectId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   newsItems: [ProjectTabNewsItemInput!]
   clientMutationId: String
@@ -4291,6 +4294,7 @@ input CreatePostTranslationInput {
 input CreatePresentationProjectTabInput {
   projectId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   body: String
   clientMutationId: String
@@ -19388,6 +19392,7 @@ type UpdateCustomDomainPayload {
 input UpdateCustomProjectTabInput {
   tabId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   body: String
   clientMutationId: String
@@ -19561,6 +19566,7 @@ type UpdateEmailingCampaignPayload {
 input UpdateEventsProjectTabInput {
   tabId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   eventItems: [ProjectTabEventItemInput!]
   clientMutationId: String
@@ -19953,6 +19959,7 @@ type UpdateNewProjectPayload {
 input UpdateNewsProjectTabInput {
   tabId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   newsItems: [ProjectTabNewsItemInput!]
   clientMutationId: String
@@ -20332,6 +20339,7 @@ type UpdatePostPayload {
 input UpdatePresentationProjectTabInput {
   tabId: ID!
   title: String!
+  slug: String!
   enabled: Boolean!
   body: String
   clientMutationId: String
