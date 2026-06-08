@@ -53,7 +53,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 continue;
             }
             if (!$this->isUserEmailValid($user)) {
-                $this->logger->error(
+                $this->logger->warning(
                     sprintf(
                         '%s doesn\'t have a valid email %s',
                         $user->getUsername(),

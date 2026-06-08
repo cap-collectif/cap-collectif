@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FollowerRepository extends EntityRepository
@@ -116,9 +117,11 @@ class FollowerRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('f')
             ->leftJoin('f.proposal', 'p')
+            ->join('f.user', 'u')
             ->andWhere('p.deletedAt IS NULL')
             ->andWhere('f.proposal IS NOT NULL')
         ;
+        $this->filterAnonymizedUsers($qb);
 
         return $qb->getQuery()->getResult();
     }
@@ -130,10 +133,17 @@ class FollowerRepository extends EntityRepository
     {
         $qd = $this->createQueryBuilder('f')
             ->leftJoin('f.opinion', 'o')
+            ->join('f.user', 'u')
             ->andWhere('f.opinion IS NOT NULL')
             ->andWhere('o.published = 1')
         ;
+        $this->filterAnonymizedUsers($qd);
 
         return $qd->getQuery()->getResult();
+    }
+
+    private function filterAnonymizedUsers(QueryBuilder $qb): void
+    {
+        $qb->andWhere('u.anonymizedAt IS NULL');
     }
 }
