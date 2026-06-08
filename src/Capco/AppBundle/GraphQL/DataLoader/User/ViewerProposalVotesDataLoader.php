@@ -207,14 +207,17 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private function resolve(?User $user, Argument $args): ConnectionInterface
     {
         try {
-            if (!$user && !$args->offsetGet('token')) {
-                return ConnectionBuilder::empty();
-            }
-
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user);
 
             if (!$step) {
                 return ConnectionBuilder::empty();
+            }
+
+            if (!$user && !$args->offsetGet('token')) {
+                return ConnectionBuilder::empty([
+                    'creditsSpent' => 0,
+                    'creditsLeft' => $step->getBudget(),
+                ]);
             }
 
             if (!$user && $args->offsetGet('token')) {
