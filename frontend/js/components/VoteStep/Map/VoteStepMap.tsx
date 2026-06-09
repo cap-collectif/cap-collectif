@@ -55,6 +55,21 @@ type Props = {
   disabled: boolean
 }
 
+type ProposalFormContributionState = {
+  readonly contribuable?: boolean | null
+} | null | undefined
+
+export const isProposalCreationAvailableOnMap = (
+  stepKind: string | null | undefined,
+  proposalForm: ProposalFormContributionState,
+): boolean => stepKind === 'collect' && Boolean(proposalForm?.contribuable)
+
+export const shouldRenderProposalCreatePopup = (
+  stepKind: string | null | undefined,
+  proposalForm: ProposalFormContributionState,
+  popoverLatLng: L.LatLng | null,
+): boolean => isProposalCreationAvailableOnMap(stepKind, proposalForm) && Boolean(popoverLatLng)
+
 const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment VoteStepMap_step on ProposalStep
   @argumentDefinitions(
@@ -220,11 +235,10 @@ export const VoteStepMap = ({
   const proposalForm = data.form
   const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
-  const [popoverLatLng, setPopoverLatLng] = useState({
-    lat: 0,
-    lng: 0,
-  })
-  const isCollectStep = data.form && data.kind === 'collect'
+  const [popoverLatLng, setPopoverLatLng] = useState<L.LatLng | null>(null)
+  const isCollectStep = data.kind === 'collect'
+  const canCreateProposalOnMap = isProposalCreationAvailableOnMap(data.kind, proposalForm)
+  const shouldDisplayProposalCreatePopup = shouldRenderProposalCreatePopup(data.kind, proposalForm, popoverLatLng)
   const geoJsons = formatGeoJsons(proposalForm.districts)
 
   useEffect(() => {
@@ -249,18 +263,21 @@ export const VoteStepMap = ({
 
   return (
     <>
-      <ProposalCreateModal
-        title="proposal.add"
-        fullSizeOnMobile
-        proposalForm={proposalForm}
-        show={isOpen}
-        onClose={onClose}
-        onOpen={async () => {
-          const geoAddr = await getAddressFromLatLng(popoverLatLng)
-          dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
-          dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr))
-        }}
-      />
+      {isCollectStep && proposalForm ? (
+        <ProposalCreateModal
+          title="proposal.add"
+          fullSizeOnMobile
+          proposalForm={proposalForm}
+          show={isOpen}
+          onClose={onClose}
+          onOpen={async () => {
+            if (!popoverLatLng) return
+            const geoAddr = await getAddressFromLatLng(popoverLatLng)
+            dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
+            dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr))
+          }}
+        />
+      ) : null}
       <MapContainer>
         <Map
           id="map"
@@ -285,31 +302,28 @@ export const VoteStepMap = ({
           <MapCustomEvents
             handleMapPositionChange={handleMapPositionChange}
             setPopoverLatLng={setPopoverLatLng}
-            contribuable={proposalForm?.contribuable && isCollectStep}
+            contribuable={canCreateProposalOnMap}
             setSelectedProposal={setSelectedProposal}
             filterBounds={filterBounds}
           />
           <CapcoTileLayer />
-          <Popup
-            ref={popupRef}
-            key="popup-proposal"
-            position={popoverLatLng}
-            autoPan={false}
-            className="popup-proposal"
-          >
-            <LoginOverlay placement="top">
-              <Button
-                opacity={!proposalForm?.contribuable ? 0.5 : 1}
-                variantSize="small"
-                onClick={onOpen}
-                disabled={!proposalForm?.contribuable}
-              >
-                {intl.formatMessage({
-                  id: 'proposal.add',
-                })}
-              </Button>
-            </LoginOverlay>
-          </Popup>
+          {shouldDisplayProposalCreatePopup && popoverLatLng ? (
+            <Popup
+              ref={popupRef}
+              key="popup-proposal"
+              position={popoverLatLng}
+              autoPan={false}
+              className="popup-proposal"
+            >
+              <LoginOverlay placement="top">
+                <Button variantSize="small" onClick={onOpen}>
+                  {intl.formatMessage({
+                    id: 'proposal.add',
+                  })}
+                </Button>
+              </LoginOverlay>
+            </Popup>
+          ) : null}
           <MarkerClusterGroup
             spiderfyOnMaxZoom
             showCoverageOnHover={false}
