@@ -18,6 +18,7 @@ class Manager
     final public const calendar = 'calendar';
     final public const captcha = 'captcha';
     final public const turnstile_captcha = 'turnstile_captcha';
+    final public const captchetat = 'captchetat';
     final public const consent_external_communication = 'consent_external_communication';
     final public const developer_documentation = 'developer_documentation';
     final public const public_api = 'public_api';
@@ -144,6 +145,7 @@ class Manager
         self::oauth2_switch_user,
         self::mailjet_sandbox,
         self::new_project_page,
+        self::captchetat,
     ];
 
     public static $toggles = [
@@ -231,6 +233,7 @@ class Manager
         self::antivirus,
         self::mailjet_sandbox,
         self::new_project_page,
+        self::captchetat,
     ];
 
     protected Context $context;

@@ -255,6 +255,9 @@ Object {
     Object {
       "type": "new_project_page",
     },
+    Object {
+      "type": "captchetat",
+    },
   ],
 }
 `;

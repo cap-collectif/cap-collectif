@@ -13,6 +13,10 @@ type Props = {
     stepId: string
     contributionId: string
     contributionTypeName: string
+    captchaError: string | null
+    setCaptchaError: (captchaError: string | null) => void
+    captchaStepIndex: number | null
+    setCaptchaStepIndex: (captchaStepIndex: number | null) => void
   }
 }
 
@@ -27,6 +31,10 @@ type Context = {
   stepId: string
   contributionId: string
   contributionTypeName: string
+  captchaError: string | null
+  setCaptchaError: (captchaError: string | null) => void
+  captchaStepIndex: number | null
+  setCaptchaStepIndex: (captchaStepIndex: number | null) => void
 } | null
 
 export const ParticipationWorkflowContext = React.createContext<Context>(null)

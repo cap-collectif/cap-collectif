@@ -6,15 +6,17 @@ import ModalLayout from './ModalLayout'
 import { fakeTimer } from './utils/timer'
 import BinocularsSVG from './assets/BinocularsSVG'
 import { CenteredLogoLayout } from './ModalLayoutHeader'
+import { useParticipationWorkflow } from './ParticipationWorkflowContext'
 
 type Props = {
-  onCaptchaSuccess?: () => void
+  onCaptchaSuccess?: (captcha: string) => void
   children?: React.ReactNode
 }
 
 const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
   const intl = useIntl()
-  const { goToNextStep } = useMultiStepModal()
+  const { currentStep, goToNextStep } = useMultiStepModal()
+  const { captchaError, setCaptchaError, setCaptchaStepIndex } = useParticipationWorkflow()
 
   const title = intl.formatMessage({ id: 'participation-workflow.verification' })
   const info = intl.formatMessage({ id: 'participation-workflow.no_robot' })
@@ -22,10 +24,11 @@ const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
   const captchaRef = React.useRef(null)
 
   React.useEffect(() => {
+    setCaptchaStepIndex(currentStep)
     if (captchaRef.current) {
       captchaRef.current.focus()
     }
-  }, [])
+  }, [currentStep, setCaptchaStepIndex])
 
   return (
     <ModalLayout
@@ -44,15 +47,21 @@ const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
             }}
             onChange={async value => {
               if (!value) return
+              setCaptchaError(null)
 
               if (onCaptchaSuccess) {
-                onCaptchaSuccess()
+                onCaptchaSuccess(value)
                 return
               }
               await fakeTimer()
               goToNextStep()
             }}
           />
+          {captchaError ? (
+            <Text mt={2} color="red.800" fontSize={CapUIFontSize.BodySmall} role="alert">
+              {intl.formatMessage({ id: captchaError })}
+            </Text>
+          ) : null}
         </Box>
         {children ? children : null}
         <Flex justifyContent="center">

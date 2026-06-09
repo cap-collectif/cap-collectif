@@ -53,6 +53,8 @@ export const features: FeatureToggles = {
   privacy_policy: false,
   members_list: false,
   captcha: false,
+  turnstile_captcha: false,
+  captchetat: false,
   questionnaire_result: false,
   consent_external_communication: false,
   consent_internal_communication: false,

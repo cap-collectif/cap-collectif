@@ -69,6 +69,8 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
 
   // @ts-expect-error TURNSTILE_PUBLIC_KEY doesn't exist on generic window type
   window.TURNSTILE_PUBLIC_KEY = captchaKey
+  // @ts-expect-error CAPTCHETAT_BACKEND_URL doesn't exist on generic window type
+  window.CAPTCHETAT_BACKEND_URL = '/api/captchetat-proxy'
 
   useEffect(() => {
     evalCustomCode(customCode?.value)

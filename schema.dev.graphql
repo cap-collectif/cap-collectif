@@ -7295,6 +7295,11 @@ enum FeatureFlagType {
 
   """Whether to use Turnstile captcha instead of Google Recaptcha"""
   turnstile_captcha
+
+  """
+  Whether to use Captchetat (French government captcha) instead of Google Recaptcha
+  """
+  captchetat
   consent_external_communication
   developer_documentation
   public_api
@@ -22474,6 +22479,9 @@ input ValidateContributionInput {
   The ID of the contribution, It can be either a Reply a Vote or a Proposal
   """
   contributionId: ID!
+
+  """The Captchetat verification payload."""
+  captcha: String
   clientMutationId: String
 }
 

@@ -57,6 +57,7 @@ export type FormValues = {
   }
   userIdentificationCode: string
   consentPrivacyPolicy: boolean
+  captcha: string
 }
 
 export const QUERY = graphql`
@@ -269,12 +270,15 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
       : convertPhone(phoneRequirement?.participantValue),
     birthday: moment('2000-01-01 00:00:00', 'YYYY-MM-DD HH:mm:ss'),
     countryCode: '+33',
+    captcha: '',
   }
 
   const formMethods = useForm<FormValues>({
     defaultValues,
     mode: 'onBlur',
   })
+  const [captchaError, setCaptchaError] = React.useState<string | null>(null)
+  const [captchaStepIndex, setCaptchaStepIndex] = React.useState<number | null>(null)
 
   const isMeetingEmailRequirement = emailRequirement?.isMeetingTheRequirement ?? false
   const isMeetingSSORequirement = ssoRequirement?.isMeetingTheRequirement ?? false
@@ -306,7 +310,18 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
 
   return (
     <ParticipationWorkflowContextProvider
-      value={{ stepId, contributionUrl, logo, requirementsUrl, contributionId, contributionTypeName }}
+      value={{
+        stepId,
+        contributionUrl,
+        logo,
+        requirementsUrl,
+        contributionId,
+        contributionTypeName,
+        captchaError,
+        setCaptchaError,
+        captchaStepIndex,
+        setCaptchaStepIndex,
+      }}
     >
       <FormProvider {...formMethods}>
         <MultiStepModal
@@ -406,7 +421,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
               return <FranceConnectRequirementModal key={__typename} hideGoBackArrow={hideGoBackArrow} />
             }
           })}
-          {!emailRequirement && !isAuthenticated && !hasMetAllRequirements && <CaptchaModal />}
+          {(!emailRequirement || isMeetingEmailRequirement) && !hasMetAllRequirements && <CaptchaModal />}
           {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionId} />}
           {!email && !consentInternalCommunication && <ConsentInternalCommunicationEmailModal />}
           {email && !consentInternalCommunication && <ConsentInternalCommunicationModal />}

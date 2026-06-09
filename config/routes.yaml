@@ -77,6 +77,12 @@ capco_api_sso:
         _format: json
     options: { i18n: false }
 
+capco_api_captchetat:
+    resource: '@CapcoAppBundle/Controller/Api/CaptchetatProxyController.php'
+    type: annotation
+    prefix: /api
+    options: { i18n: false }
+
 # App
 capco_app:
     resource: '@CapcoAppBundle/Controller/Site'

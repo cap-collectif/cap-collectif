@@ -101,6 +101,11 @@ parameters:
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
     turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
     turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
+    captchetat_client_id: '%env(SYMFONY_CAPTCHETAT_CLIENT_ID)%'
+    captchetat_client_secret: '%env(SYMFONY_CAPTCHETAT_CLIENT_SECRET)%'
+    captchetat_token_url: '%env(SYMFONY_CAPTCHETAT_TOKEN_URL)%'
+    captchetat_api_url: '%env(SYMFONY_CAPTCHETAT_API_URL)%'
+    captchetat_validate_url: '%env(SYMFONY_CAPTCHETAT_VALIDATE_URL)%'
     magiclinks_duration_in_minutes: '%env(int:SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
     session_lifetime_seconds: '%env(int:SYMFONY_SESSION_LIFETIME_SECONDS)%'
     session_timeout_seconds: '%env(int:SYMFONY_SESSION_TIMEOUT_SECONDS)%'
@@ -157,6 +162,11 @@ parameters:
     # /!\ In production you must use your own tokens /!\
     env(SYMFONY_TURNSTILE_PUBLIC_KEY): '1x00000000000000000000AA'
     env(SYMFONY_TURNSTILE_PRIVATE_KEY): '1x0000000000000000000000000000000AA'
+    env(SYMFONY_CAPTCHETAT_CLIENT_ID): ''
+    env(SYMFONY_CAPTCHETAT_CLIENT_SECRET): ''
+    env(SYMFONY_CAPTCHETAT_TOKEN_URL): 'https://sandbox-oauth.piste.gouv.fr/api/oauth/token'
+    env(SYMFONY_CAPTCHETAT_API_URL): 'https://sandbox-api.piste.gouv.fr/piste/captchetat/v2/simple-captcha-endpoint'
+    env(SYMFONY_CAPTCHETAT_VALIDATE_URL): 'https://sandbox-api.piste.gouv.fr/piste/captchetat/v2/valider-captcha'
     # To be deleted
     # Todo inject only on occitanie instance with service pass
     env(SYMFONY_OCCITANIE_USERNAME): 'INSERT_A_REAL_SECRET'

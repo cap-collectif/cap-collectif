@@ -283,7 +283,16 @@ services:
         arguments:
             $turnstilePrivateKey: '%turnstile_private_key%'
             $recaptchaPrivateKey: '%recaptcha_private_key%'
+            $captchetatClientId: '%captchetat_client_id%'
+            $captchetatClientSecret: '%captchetat_client_secret%'
+            $captchetatTokenUrl: '%captchetat_token_url%'
+            $captchetatValidateUrl: '%captchetat_validate_url%'
             $environment: '%kernel.environment%'
+
+    Capco\AppBundle\Controller\Api\CaptchetatProxyController:
+        arguments:
+            $captchetatClientId: '%captchetat_client_id%'
+            $captchetatApiUrl: '%captchetat_api_url%'
 
     Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
         autowire: true

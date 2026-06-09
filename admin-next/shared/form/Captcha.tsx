@@ -7,6 +7,7 @@ import getBaseUrl from '../utils/getBaseUrl'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Box, CapUIFontSize } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
+import CaptchetatCaptcha from './CaptchetatCaptcha'
 
 const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement)
 const isTest = getBaseUrl() === 'https://capco.test'
@@ -17,6 +18,14 @@ const isTest = getBaseUrl() === 'https://capco.test'
  */
 const CAPTCHA_TEST_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 const CAPTCHA_PROD_KEY = '6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC'
+const HAS_FILLED_CAPTCHA_STORAGE_KEY = 'hasFilledCaptcha'
+
+const markCaptchaAsFilled = () => {
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem(HAS_FILLED_CAPTCHA_STORAGE_KEY, JSON.stringify(true))
+  }
+}
+
 type Props = {
   onChange: (captcha: string) => void
   style?: Record<string, any>
@@ -26,10 +35,27 @@ type Props = {
 // eslint-disable-next-line react/display-name
 export const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange, style, disabled = false }, ref) => {
   const captcha = React.useRef(null)
+  const captchetat = useFeatureFlag('captchetat')
   const turnstile_captcha = useFeatureFlag('turnstile_captcha')
 
   if (disabled) {
     return null
+  }
+
+  if (captchetat) {
+    return (
+      <CaptchetatCaptcha
+        // @ts-ignore wait for React19 for better ref handling
+        ref={ref}
+        onChange={captcha => {
+          if (captcha) {
+            markCaptchaAsFilled()
+          }
+          onChange(captcha)
+        }}
+        style={style}
+      />
+    )
   }
 
   if (turnstile_captcha) {
@@ -73,7 +99,9 @@ export const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange
         ...style,
       }}
       sitekey={isTest ? CAPTCHA_TEST_KEY : CAPTCHA_PROD_KEY}
-      onChange={onChange}
+      onChange={captcha => {
+        onChange(captcha)
+      }}
     />
   )
 })

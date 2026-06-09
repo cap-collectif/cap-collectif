@@ -275,6 +275,8 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     defaultValues,
     mode: 'onBlur',
   })
+  const [captchaError, setCaptchaError] = React.useState<string | null>(null)
+  const [captchaStepIndex, setCaptchaStepIndex] = React.useState<number | null>(null)
 
   const isMeetingEmailRequirement = emailRequirement?.isMeetingTheRequirement ?? false
   const isMeetingSSORequirement = ssoRequirement?.isMeetingTheRequirement ?? false
@@ -307,7 +309,18 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
 
   return (
     <ParticipationWorkflowContextProvider
-      value={{ stepId, contributionUrl, logo, requirementsUrl, contributionId, contributionTypeName }}
+      value={{
+        stepId,
+        contributionUrl,
+        logo,
+        requirementsUrl,
+        contributionId,
+        contributionTypeName,
+        captchaError,
+        setCaptchaError,
+        captchaStepIndex,
+        setCaptchaStepIndex,
+      }}
     >
       <FormProvider {...formMethods}>
         <MultiStepModal

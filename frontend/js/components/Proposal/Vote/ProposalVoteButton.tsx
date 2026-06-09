@@ -11,7 +11,7 @@ import type {
 } from '~relay/ProposalVoteButton_proposal.graphql'
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '../../../mutations/RemoveProposalSmsVoteMutation'
-import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import {
   CapUIModalSize,
   Modal,
@@ -48,6 +48,15 @@ type Props = ParentProps & {
   hasVoted: boolean
   triggerRequirementsModal: (voteId: string) => void
 }
+
+const getHasFilledCaptcha = () => {
+  if (typeof localStorage === 'undefined') return false
+
+  const hasFilledCaptcha = localStorage.getItem('hasFilledCaptcha')
+
+  return hasFilledCaptcha ? JSON.parse(hasFilledCaptcha) === true : false
+}
+
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalVoteButton_proposal on Proposal
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }, token: { type: "String" }) {
@@ -109,8 +118,6 @@ const deleteVote = (
         proposalId: proposal.id,
         stepId: currentStep.id,
       },
-      isAuthenticated,
-      token: null,
     })
       .then(response => {
         dispatchEvent(VoteStepEvent.RemoveVote, {
@@ -119,9 +126,7 @@ const deleteVote = (
         toast({
           variant: 'success',
           content:
-            response.removeProposalVote &&
-            response.removeProposalVote.step &&
-            isInterpellationContextFromStep(response.removeProposalVote.step)
+            response.removeProposalVote && isInterpellationContextFromProposal(proposal)
               ? intl.formatMessage({
                   id: 'support.delete_success',
                 })
@@ -167,9 +172,7 @@ const deleteVote = (
       toast({
         variant: 'success',
         content:
-          response.removeProposalSmsVote &&
-          response.removeProposalSmsVote.step &&
-          isInterpellationContextFromStep(response.removeProposalSmsVote.step)
+          response.removeProposalSmsVote && isInterpellationContextFromProposal(proposal)
             ? intl.formatMessage({
                 id: 'support.delete_success',
               })
@@ -209,10 +212,7 @@ const ProposalVoteButton = ({
 
   const isMobile = useIsMobile()
 
-  const hasFilledCaptcha = JSON.parse(localStorage.getItem('hasFilledCaptcha'))
-  const setHasFilledCaptcha = () => {
-    localStorage.setItem('hasFilledCaptcha', JSON.stringify(true))
-  }
+  const [hasFilledCaptcha, setHasFilledCaptcha] = React.useState(getHasFilledCaptcha)
 
   const { votesMin } = currentStep
   const participantToken = CookieMonster.getParticipantCookie()
@@ -386,6 +386,13 @@ const ProposalVoteButton = ({
     }
   }
 
+  const handleCaptchaChange = async (value: any) => {
+    if (!value) return
+
+    setHasFilledCaptcha(true)
+    await onButtonClick()
+  }
+
   if (!isAuthenticated && isMeetingRequirements && !hasVoted && !hasFilledCaptcha) {
     if (isMobile) {
       return (
@@ -429,13 +436,7 @@ const ProposalVoteButton = ({
           </Modal.Header>
           <Modal.Body>
             <Flex justifyContent="center">
-              <Captcha
-                onChange={async (value: any) => {
-                  if (!value) return
-                  setHasFilledCaptcha()
-                  await onButtonClick()
-                }}
-              />
+              <Captcha onChange={handleCaptchaChange} />
             </Flex>
           </Modal.Body>
         </Modal>
@@ -476,13 +477,7 @@ const ProposalVoteButton = ({
           </span>
         </Popover.Header>
         <Popover.Body>
-          <Captcha
-            onChange={async (value: any) => {
-              if (!value) return
-              setHasFilledCaptcha()
-              await onButtonClick()
-            }}
-          />
+          <Captcha onChange={handleCaptchaChange} />
         </Popover.Body>
       </Popover>
     )

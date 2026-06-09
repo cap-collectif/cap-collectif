@@ -152,6 +152,9 @@ const FeatureList: FC = () => {
                                   <Switch
                                     id={`toggle-${featureFlagName}`}
                                     checked={allFeatureFlags[featureFlagName]}
+                                    disabled={featureFlagData.conflictsWith?.some(
+                                      conflictingFlag => allFeatureFlags[conflictingFlag],
+                                    )}
                                     onChange={e =>
                                       toggleFeatureFlag(
                                         featureFlagName,

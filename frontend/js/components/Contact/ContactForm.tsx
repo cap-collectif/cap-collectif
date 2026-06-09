@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { reduxForm, Field, submit, SubmissionError } from 'redux-form'
+import { reduxForm, Field, formValueSelector, submit, SubmissionError } from 'redux-form'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import component from '../Form/Field'
@@ -20,8 +20,10 @@ type Props = OwnProps & {
   intl: IntlShape
   dispatch: Dispatch
   addCaptchaField: boolean
+  isCaptchetatEnabled: boolean
   user?: Record<string, any>
   confidentiality?: string | null | undefined
+  captchaValue?: string | null
 }
 type FormValues = {
   body: string
@@ -85,10 +87,13 @@ export class ContactForm extends React.Component<Props> {
         <FormattedMessage id="global.optional" />
       </span>
     )
-    const { dispatch, contactForm, addCaptchaField, submitting, intl } = this.props
-    
+    const { dispatch, contactForm, addCaptchaField, isCaptchetatEnabled, submitting, intl, captchaValue } = this.props
+    const isCaptchaRequired = addCaptchaField && isCaptchetatEnabled && window && window.location.host !== 'capco.test'
+
     // get unique IDs even if the form is used multiple times on the same page
-    const { contactForm: { id: contactFormId } } = this.props
+    const {
+      contactForm: { id: contactFormId },
+    } = this.props
     return (
       <div className="contact__form">
         <div className="block--bordered p-10">
@@ -102,7 +107,7 @@ export class ContactForm extends React.Component<Props> {
             }
             component={component}
             type="text"
-            id={"group_name" + contactFormId}
+            id={'group_name' + contactFormId}
           />
           <Field
             name="email"
@@ -112,14 +117,14 @@ export class ContactForm extends React.Component<Props> {
             })}
             component={component}
             type="email"
-            id={"group_email" + contactFormId}
+            id={'group_email' + contactFormId}
           />
           <Field
             name="title"
             label={<FormattedMessage id="object" />}
             component={component}
             type="text"
-            id={"group_object" + contactFormId}
+            id={'group_object' + contactFormId}
           />
           <Field
             name="body"
@@ -128,13 +133,13 @@ export class ContactForm extends React.Component<Props> {
             component={component}
             autosize={false}
             type="textarea"
-            id={"global.description" + contactFormId}
+            id={'global.description' + contactFormId}
           />
           {addCaptchaField && <Field id="captcha" component={component} name="captcha" type="captcha" />}
           <SubmitButton
             id="confirm-opinion-create"
             label={submitting ? 'global.loading' : 'global.send'}
-            disabled={submitting}
+            disabled={submitting || (isCaptchaRequired && !captchaValue)}
             style={{
               width: '100%',
             }}
@@ -158,15 +163,21 @@ export class ContactForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
-  addCaptchaField: state.default.features.captcha,
-  form: `contact-form-${props.contactForm.id}`,
-  user: state.user.user,
-  initialValues: {
-    name: state.user.user ? state.user.user.username : '',
-    email: state.user.user ? state.user.user.email : '',
-  },
-})
+const mapStateToProps = (state: GlobalState, props: OwnProps) => {
+  const formName = `contact-form-${props.contactForm.id}`
+
+  return {
+    addCaptchaField: state.default.features.captcha,
+    isCaptchetatEnabled: state.default.features.captchetat,
+    captchaValue: formValueSelector(formName)(state, 'captcha'),
+    form: formName,
+    user: state.user.user,
+    initialValues: {
+      name: state.user.user ? state.user.user.username : '',
+      email: state.user.user ? state.user.user.email : '',
+    },
+  }
+}
 
 const form = injectIntl(
   connect(mapStateToProps)(

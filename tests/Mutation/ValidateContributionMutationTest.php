@@ -105,6 +105,7 @@ class ValidateContributionMutationTest extends TestCase
         $redirectUrl = 'redirectUrl';
         $args = new Argument(['input' => [
             'contributionId' => $contributionId,
+            'captcha' => 'captcha-token',
         ]]);
 
         $this->globalIdResolver->method('resolve')->with($contributionId)->willreturn($this->reply);
@@ -208,6 +209,7 @@ class ValidateContributionMutationTest extends TestCase
         $args = new Argument(['input' => [
             'token' => $token,
             'contributionId' => $contributionId,
+            'captcha' => 'captcha-token',
         ]]);
 
         $this->participantHelper->method('getParticipantByToken')->with($token)->willReturn($this->participant);

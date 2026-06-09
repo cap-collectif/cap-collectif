@@ -82,7 +82,7 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
         return mutationErrorToast(intl)
       },
     })
-  }, [commit, intl, contributionId, token, successTranslationKey, hasNextStep, goToNextStep])
+  }, [commit, intl, contributionId, token, currentStep, successTranslationKey, hasNextStep, goToNextStep])
 
   return (
     <ModalLayout

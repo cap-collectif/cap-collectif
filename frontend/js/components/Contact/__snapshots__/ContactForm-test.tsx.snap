@@ -180,7 +180,6 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       type="captcha"
     />
     <Connect(SubmitButton)
-      disabled={false}
       id="confirm-opinion-create"
       label="global.send"
       onSubmit={[Function]}

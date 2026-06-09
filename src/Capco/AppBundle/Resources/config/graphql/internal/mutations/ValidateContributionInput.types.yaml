@@ -9,3 +9,6 @@ ValidateContributionInput:
             contributionId:
                 type: 'ID!'
                 description: 'The ID of the contribution, It can be either a Reply a Vote or a Proposal'
+            captcha:
+                type: 'String'
+                description: 'The Captchetat verification payload.'

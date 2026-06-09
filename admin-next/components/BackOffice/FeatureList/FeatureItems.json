@@ -237,7 +237,14 @@
                     "turnstile_captcha": {
                         "title": "turnstile_captcha",
                         "description": "",
-                        "onlySuperAdmin": false
+                        "onlySuperAdmin": false,
+                        "conflictsWith": ["captchetat"]
+                    },
+                    "captchetat": {
+                        "title": "captchetat",
+                        "description": "",
+                        "onlySuperAdmin": true,
+                        "conflictsWith": ["turnstile_captcha"]
                     },
                     "secure_password": {
                         "title": "capco.module.secure_password",

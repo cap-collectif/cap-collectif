@@ -17,6 +17,9 @@ InternalFeatureFlagType:
             turnstile_captcha:
                 value: !php/const Capco\AppBundle\Toggle\Manager::turnstile_captcha
                 description: 'Whether to use Turnstile captcha instead of Google Recaptcha'
+            captchetat:
+                value: !php/const Capco\AppBundle\Toggle\Manager::captchetat
+                description: 'Whether to use Captchetat (French government captcha) instead of Google Recaptcha'
             consent_external_communication:
                 value: !php/const Capco\AppBundle\Toggle\Manager::consent_external_communication
             developer_documentation:

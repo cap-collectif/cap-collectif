@@ -13,6 +13,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   members_list: false,
   captcha: false,
   turnstile_captcha: false,
+  captchetat: false,
   questionnaire_result: false,
   consent_external_communication: false,
   consent_internal_communication: false,

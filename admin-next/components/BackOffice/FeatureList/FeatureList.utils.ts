@@ -8,6 +8,7 @@ export type Item = {
   description: string
   onlySuperAdmin: boolean
   dependOf?: FeatureFlagType[]
+  conflictsWith?: FeatureFlagType[]
 }
 
 export type Items = {

@@ -50,6 +50,8 @@ export type FeatureToggles = {
   questionnaire_result: boolean | null | undefined
   calendar: boolean | null | undefined
   captcha: boolean | null | undefined
+  turnstile_captcha: boolean | null | undefined
+  captchetat: boolean | null | undefined
   consent_external_communication: boolean | null | undefined
   consent_internal_communication: boolean | null | undefined
   login_facebook: boolean | null | undefined

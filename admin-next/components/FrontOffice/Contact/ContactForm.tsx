@@ -21,6 +21,7 @@ export const ContactForm: FC<{
   const intl = useIntl()
   const { viewerSession } = useAppContext()
   const captcha = useFeatureFlag('captcha')
+  const captchetat = useFeatureFlag('captchetat')
 
   const defaultValues = { name: viewerSession?.username || '', email: viewerSession?.email, title: '', body: '' }
 
@@ -33,8 +34,10 @@ export const ContactForm: FC<{
     control,
     reset,
     handleSubmit,
+    watch,
     formState: { isSubmitting },
   } = methods
+  const captchaValue = watch('captcha')
 
   const onSubmit = async (values: FormData) => {
     await SendContactFormMutation.commit({
@@ -105,6 +108,7 @@ export const ContactForm: FC<{
         width={['100%', 'auto']}
         justifyContent="center"
         type="submit"
+        disabled={captcha && captchetat && !captchaValue}
       >
         {intl.formatMessage({ id: 'global.send' })}
       </Button>
