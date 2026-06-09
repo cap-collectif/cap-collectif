@@ -97,6 +97,7 @@ export type FeatureToggles = {
   analytics_page: boolean | null | undefined
   project_admin: boolean | null | undefined
   http_redirects: boolean | null | undefined
+  idf_project_header: boolean | null | undefined
   noindex_on_profiles: boolean | null | undefined
   twilio: boolean | null | undefined
   paper_vote: boolean | null | undefined

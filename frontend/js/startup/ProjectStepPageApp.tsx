@@ -26,10 +26,12 @@ const ProjectHeader = ({
   projectId,
   platformLocale,
   stepId,
+  showCounters,
 }: {
   readonly projectId: string
   readonly platformLocale: string
   readonly stepId?: string
+  readonly showCounters?: boolean
 }) => {
   const { state } = useLocation()
   const new_project_page = useFeatureFlag('new_project_page')
@@ -54,6 +56,7 @@ const ProjectHeader = ({
           projectId={projectId}
           platformLocale={platformLocale}
           currentStepId={state?.stepId}
+          showCounters={showCounters}
         />
       </div>
     </section>
@@ -87,6 +90,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const showTrash = useFeatureFlag('project_trash')
   const new_vote_step = useFeatureFlag('new_vote_step')
+  const idf_project_header = useFeatureFlag('idf_project_header')
   return (
     <>
       <Switch>
@@ -181,6 +185,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
           ]}
         >
           <ScrollToTop />
+          {idf_project_header && <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} stepId={props.stepId} showCounters={false} />}
           <ProposalPage currentVotableStepId={props.currentVotableStepId} platformLocale={platformLocale} />
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>

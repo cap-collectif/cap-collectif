@@ -72,6 +72,7 @@ class Manager
     final public const emailing_group = 'emailing_group';
     final public const proposal_revisions = 'proposal_revisions';
     final public const new_project_card = 'new_project_card';
+    final public const idf_project_header = 'idf_project_header';
     final public const export_legacy_users = 'export_legacy_users';
     final public const import_proposals = 'import_proposals';
     final public const analytics_page = 'analytics_page';
@@ -120,6 +121,7 @@ class Manager
         self::graphql_introspection,
         self::developer_documentation,
         self::new_project_card,
+        self::idf_project_header,
         self::paper_vote,
         self::projects_form,
         self::project_trash,
@@ -206,6 +208,7 @@ class Manager
         self::emailing_group,
         self::proposal_revisions,
         self::new_project_card,
+        self::idf_project_header,
         self::export_legacy_users,
         self::import_proposals,
         self::analytics_page,

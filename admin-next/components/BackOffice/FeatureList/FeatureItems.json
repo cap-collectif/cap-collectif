@@ -139,6 +139,11 @@
                         "description": "description.module.display_map",
                         "onlySuperAdmin": false
                     },
+                    "idf_project_header": {
+                        "title": "capco.module.idf_project_header",
+                        "description": "description.module.idf_project_header",
+                        "onlySuperAdmin": true
+                    },
                     "read_more": {
                         "title": "capco.module.read_more",
                         "description": "description.module.read_more",

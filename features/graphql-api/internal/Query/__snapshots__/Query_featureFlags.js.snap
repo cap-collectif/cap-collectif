@@ -187,6 +187,9 @@ Object {
       "type": "new_project_card",
     },
     Object {
+      "type": "idf_project_header",
+    },
+    Object {
       "type": "export_legacy_users",
     },
     Object {

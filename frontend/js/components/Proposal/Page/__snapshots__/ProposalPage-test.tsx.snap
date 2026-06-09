@@ -866,6 +866,88 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "isVotesCounterDisplayable",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isContributionsCounterDisplayable",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isParticipantsCounterDisplayable",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ContributionConnection",
+                      "kind": "LinkedField",
+                      "name": "contributions",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ContributorConnection",
+                      "kind": "LinkedField",
+                      "name": "contributors",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "VoteConnection",
+                      "kind": "LinkedField",
+                      "name": "votes",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "paperVotesTotalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "url",
                       "storageKey": null,
                     },
@@ -8509,7 +8591,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "57ef229b7a76448511927d35b521c9e8",
+          "cacheID": "c57c11bb9cb2af92963e8a99da3c4d32",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8952,6 +9034,22 @@ fragment NewsCard_post on Post {
   }
   publishedAt
   body
+}
+
+fragment ProjectHeaderIdf_project on Project {
+  isVotesCounterDisplayable
+  isContributionsCounterDisplayable
+  isParticipantsCounterDisplayable
+  contributions {
+    totalCount
+  }
+  contributors {
+    totalCount
+  }
+  votes {
+    totalCount
+  }
+  paperVotesTotalCount
 }
 
 fragment ProposalAnalysisCommentCreateForm_proposalAnalysis on ProposalAnalysis {
@@ -10078,6 +10176,15 @@ fragment ProposalPageHeader_proposal_b300R on Proposal {
     }
     id
   }
+  project {
+    title
+    ...ProjectHeaderIdf_project
+    id
+    type {
+      title
+      id
+    }
+  }
   lastStepContainingProposal {
     __typename
     url
@@ -10086,13 +10193,6 @@ fragment ProposalPageHeader_proposal_b300R on Proposal {
   currentVotableStep {
     __typename
     slug
-    id
-  }
-  project {
-    type {
-      title
-      id
-    }
     id
   }
 }

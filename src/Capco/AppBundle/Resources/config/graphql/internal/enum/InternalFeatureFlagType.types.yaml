@@ -124,6 +124,9 @@ InternalFeatureFlagType:
             new_project_card:
                 value: !php/const Capco\AppBundle\Toggle\Manager::new_project_card
                 description: 'Whether or not the new project card is active.'
+            idf_project_header:
+                value: !php/const Capco\AppBundle\Toggle\Manager::idf_project_header
+                description: 'Whether or not the IDF project header is enabled.'
             export_legacy_users:
                 value: !php/const Capco\AppBundle\Toggle\Manager::export_legacy_users
                 description: 'Secret export of users.'

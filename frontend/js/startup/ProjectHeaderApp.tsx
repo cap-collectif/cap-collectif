@@ -20,8 +20,9 @@ export type Props = {
   readonly isConsultation?: boolean
   readonly platformLocale: string
   readonly currentStepId?: string
+  readonly showCounters?: boolean
 }
-export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platformLocale, currentStepId }: Props) => {
+export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platformLocale, currentStepId, showCounters }: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
     <Providers resetCSS={false} designSystem>
@@ -61,6 +62,7 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platform
                   isConsultation={isConsultation}
                   platformLocale={platformLocale}
                   currentStepId={currentStepId}
+                  showCounters={showCounters}
                 />
               )}
             </Skeleton>
@@ -70,13 +72,14 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platform
     </Providers>
   )
 }
-export default ({ projectId, isConsultation, platformLocale, currentStepId }: Props) => (
+export default ({ projectId, isConsultation, platformLocale, currentStepId, showCounters }: Props) => (
   <Providers>
     <ProjectHeaderQueryRenderer
       projectId={projectId}
       isConsultation={isConsultation}
       platformLocale={platformLocale}
       currentStepId={currentStepId}
+      showCounters={showCounters}
     />
   </Providers>
 )

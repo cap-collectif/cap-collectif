@@ -7351,6 +7351,9 @@ enum FeatureFlagType {
   """Whether or not the new project card is active."""
   new_project_card
 
+  """Whether or not the IDF project header is enabled."""
+  idf_project_header
+
   """Secret export of users."""
   export_legacy_users
 

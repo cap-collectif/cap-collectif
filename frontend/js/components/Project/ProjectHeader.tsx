@@ -1,19 +1,21 @@
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import ProjectStepTabs from '@shared/projectFrise/ProjectStepTabs'
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 import { graphql, useFragment } from 'react-relay'
-import ProjectHeaderDistrictsList from '~/components/Project/ProjectHeaderDistrictsList'
+import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderAuthorList'
 import ProjectRestrictedAccessFragment from '~/components/Project/Page/ProjectRestrictedAccessFragment'
+import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag'
 import ProjectHeaderBlocks from '~/components/Project/ProjectHeaderBlocks'
+import ProjectHeaderDistrictsList from '~/components/Project/ProjectHeaderDistrictsList'
+import ProjectHeaderIdf from '~/components/Project/ProjectHeaderIdf'
 import ProjectHeaderShareButtons from '~/components/Project/ProjectHeaderShareButtons'
+import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList'
+import htmlDecode from '~/components/Utils/htmlDecode'
+import { GlobalState } from '~/types'
+import { insertCustomCode } from '~/utils/customCode'
 import type { ProjectHeader_project$key } from '~relay/ProjectHeader_project.graphql'
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader'
-import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderAuthorList'
-import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList'
-import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag'
-import htmlDecode from '~/components/Utils/htmlDecode'
-import { insertCustomCode } from '~/utils/customCode'
-import ProjectStepTabs from '@shared/projectFrise/ProjectStepTabs'
-import { useSelector } from 'react-redux'
-import { GlobalState } from '~/types'
 import { RouterWrapper } from '~ui/Project/ProjectHeader.Frise'
 
 const FRAGMENT = graphql`
@@ -41,6 +43,7 @@ const FRAGMENT = graphql`
     customCode
     ...ProjectHeaderAuthorList_project
     ...ProjectHeaderBlocks_project
+    ...ProjectHeaderIdf_project
     ...ProjectHeaderDistrictsList_project
     ...ProjectStepTabs_project
     ...ProjectRestrictedAccessFragment_project @arguments(count: $count, cursor: $cursor)
@@ -51,16 +54,30 @@ export type Props = {
   readonly isConsultation?: boolean
   readonly platformLocale: string
   readonly currentStepId?: string
+  readonly showCounters?: boolean
 }
 
-const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId }: Props): JSX.Element => {
+const ProjectHeader = ({
+  project,
+  isConsultation,
+  platformLocale,
+  currentStepId,
+  showCounters,
+}: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
   const projectStepId = useSelector((state: GlobalState) => state.project.currentProjectStepById)
   const mainColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
+  const isIdfProjectHeader = useFeatureFlag('idf_project_header')
 
   React.useEffect(() => {
     insertCustomCode(data?.customCode, 'projectCustomCode') // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.id])
+
+  if (isIdfProjectHeader) {
+    return (
+      <ProjectHeaderIdf project={data} title={data.title} showCounters={showCounters ?? data.hasParticipativeStep} />
+    )
+  }
 
   const renderCover = () => {
     if (data.video) {
@@ -81,9 +98,11 @@ const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId 
 
   return (
     <ProjectHeaderLayout>
+      {/*<p>cover</p>*/}
       <ProjectHeaderLayout.Cover isArchived={data.archived}>
         <ProjectHeaderLayout.Content>
           <ProjectHeaderAuthorList project={data} />
+          {/* @ts-ignore: legacy code, won't be fixed */}
           <ProjectHeaderLayout.Title>{htmlDecode(data.title)} </ProjectHeaderLayout.Title>
           {data.hasParticipativeStep && <ProjectHeaderBlocks project={data} />}
           <ProjectHeaderLayout.Info>
@@ -98,12 +117,14 @@ const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId 
         <ProjectRestrictedAccessFragment project={data} />
         {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTag />}
       </ProjectHeaderLayout.Cover>
+      {/*<p>stepTabs</p>*/}
       <ProjectStepTabs
         mainColor={mainColor}
         project={data}
         isConsultation={isConsultation}
         platformLocale={platformLocale}
         currentStepId={currentStepId ?? projectStepId}
+        // @ts-ignore: legacy code, won't be fixed
         wrapper={RouterWrapper}
         marginBottom={[-8, -13]}
         marginTop={3}

@@ -92,6 +92,7 @@ export const features: FeatureToggles = {
   import_proposals: false,
   analytics_page: false,
   http_redirects: false,
+  idf_project_header: false,
   project_admin: false,
   noindex_on_profiles: false,
   twilio: false,

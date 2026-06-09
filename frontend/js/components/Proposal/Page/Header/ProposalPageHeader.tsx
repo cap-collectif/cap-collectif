@@ -23,6 +23,8 @@ import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
 import Image from '~ui/Primitives/Image'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import ProjectHeaderIdf from '~/components/Project/ProjectHeaderIdf'
 
 type Props = {
   title: string | null | undefined
@@ -243,6 +245,7 @@ export const ProposalPageHeader = ({
   triggerRequirementsModal,
 }: Props) => {
   const isMobile = useIsMobile()
+  const isIdfProjectHeader = useFeatureFlag('idf_project_header')
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
   const icon = shouldDisplayPictures ? proposal?.category?.icon : null
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
@@ -316,6 +319,7 @@ export const ProposalPageHeader = ({
 
   return (
     <Header id="ProposalPageHeader">
+      {isIdfProjectHeader && <ProjectHeaderIdf project={proposal?.project ?? null} title={proposal?.project?.title} showCounters={false} />}
       <div>
         <HeaderActions>
           <BackUrl
@@ -478,6 +482,10 @@ export default createFragmentContainer(container, {
           url
           state
         }
+      }
+      project {
+        title
+        ...ProjectHeaderIdf_project
       }
       lastStepContainingProposal {
         url

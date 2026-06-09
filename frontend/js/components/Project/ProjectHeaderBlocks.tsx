@@ -5,7 +5,7 @@ import moment from 'moment'
 import { Text, Box } from '@cap-collectif/ui'
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader'
 import type { ProjectHeaderBlocks_project$key } from '~relay/ProjectHeaderBlocks_project.graphql'
-const FRAGMENT = graphql`
+export const FRAGMENT = graphql`
   fragment ProjectHeaderBlocks_project on Project {
     isVotesCounterDisplayable
     isContributionsCounterDisplayable
@@ -60,9 +60,10 @@ const FRAGMENT = graphql`
 `
 export type Props = {
   readonly project: ProjectHeaderBlocks_project$key
+  readonly showDaysLeft?: boolean
 }
 
-const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
+const ProjectHeaderBlocks = ({ project, showDaysLeft = true }: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
   const intl = useIntl()
   const {
@@ -266,7 +267,7 @@ const ProjectHeaderBlocks = ({ project }: Props): JSX.Element => {
 
   return (
     <ProjectHeaderLayout.Blocks>
-      {getDaysLeftBlock()}
+      {showDaysLeft ? getDaysLeftBlock() : null}
       {isContributionsCounterDisplayable && (
         <ProjectHeaderLayout.Block
           contentId="contributions-count"
