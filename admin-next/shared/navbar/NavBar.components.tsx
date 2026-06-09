@@ -1,9 +1,9 @@
+import { Box, BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
+import { pxToRem } from '@shared/utils/pxToRem'
+import { Menu, MenuItem } from '@szhsin/react-menu'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
-import { Menu, MenuItem } from '@szhsin/react-menu'
-import { pxToRem } from '@shared/utils/pxToRem'
-import { useNavBarContext, LinkProps } from './NavBar.context'
+import { LinkProps, useNavBarContext } from './NavBar.context'
 import { unescapeHTML } from './NavBar.utils'
 
 const isCurrent = href => typeof window && (href === window?.location?.href || href === window?.location?.pathname)
@@ -182,6 +182,7 @@ export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height:
       height={isBigLogo ? pxToRem(88) : pxToRem(33)}
       my={isBigLogo ? 4 : 0}
       sx={{
+        '>a:focus': { outline: 'none' },
         '>a:focus-visible': { boxShadow: 'none' },
         '>a:focus-visible > img': {
           boxShadow: `0 0 0 4px ${focusColor}`,
@@ -276,7 +277,11 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
                   fontWeight={isCurrentPage ? 'semibold' : 'normal'}
                   aria-current={isCurrentPage ? 'page' : undefined}
                   color="neutral-gray.900"
-                  sx={{ textDecoration: isCurrentPage ? 'none' : 'underline' }}
+                  sx={{
+                    textDecoration: isCurrentPage ? 'none' : 'underline',
+                    '&:focus': { outline: 'none' },
+                    '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+                  }}
                   _hover={{
                     textDecoration: isCurrentPage ? 'none' : 'underline',
                     color: 'primary.base',

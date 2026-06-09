@@ -11,10 +11,10 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
     class="sc-bcXGCL hHvZtB frise"
   >
     <ul
-      class="sc-bcXGCL eOinCi frise__stepList"
+      class="sc-bcXGCL kfBfPW frise__stepList"
     >
       <div
-        class="slick-slider sc-1269a2e2-0 jelkre slick-initialized"
+        class="slick-slider sc-e313a7f-0 dUQVAC slick-initialized"
       >
         <div
           class="slick-list"

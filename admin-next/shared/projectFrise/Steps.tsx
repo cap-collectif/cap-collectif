@@ -1,10 +1,10 @@
 import { Box, CapUIIcon, CapUIIconSize, Heading, Icon, Modal } from '@cap-collectif/ui'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { cleanChildren } from '@shared/utils/cleanChildren'
 import { hexToRgb } from '@shared/utils/colors'
 import { cloneElement, FC, useEffect, useRef } from 'react'
-import styled from 'styled-components'
 import Slider from 'react-slick'
-import { cleanChildren } from '@shared/utils/cleanChildren'
+import styled from 'styled-components'
 
 const StepsContainer = styled(Slider)<{
   RGBPrimary: any
@@ -165,6 +165,10 @@ export const Steps: FC<StepsProps> = ({ children, modalTitle, currentStepIndex, 
         backgroundColor="white"
         height={11}
         p={0}
+        sx={{
+          'a:focus': { outline: 'none' },
+          'a:focus-visible': { outline: '2px solid', outlineColor: 'primary.base' },
+        }}
       >
         <StepsContainer RGBPrimary={RGBPrimary} ref={sliderEle} {...settings}>
           {validChildren.map((child, index) =>
@@ -197,6 +201,10 @@ export const Steps: FC<StepsProps> = ({ children, modalTitle, currentStepIndex, 
         overflow="hidden"
         height={11}
         p={0}
+        sx={{
+          'a:focus': { outline: 'none' },
+          'a:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
       >
         {/** @ts-ignore */}
         <Modal
