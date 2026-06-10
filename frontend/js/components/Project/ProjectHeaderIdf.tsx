@@ -64,6 +64,7 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
     ].filter(Boolean) as Array<{ label: string; value: number }>
   }, [data])
 
+  // used to make the header take up all the page width and not just the container width
   React.useEffect(() => {
     const header = document.querySelector('.projectHeaderIdf')
     if (!header) {

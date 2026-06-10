@@ -1,30 +1,28 @@
-import React from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl'
-import { connect, useSelector } from 'react-redux'
+import { Box, Button, CapUIIcon, CapUIIconSize, Flex, Icon, Link, Skeleton, Text } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import moment from 'moment'
+import useIsMobile from '@shared/hooks/useIsMobile'
 import convertIconToDs from '@shared/utils/convertIconToDs'
-import styled from 'styled-components'
-import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize, Link, Text } from '@cap-collectif/ui'
+import moment from 'moment'
+import React from 'react'
+import { FormattedDate, FormattedMessage, useIntl } from 'react-intl'
+import { connect, useSelector } from 'react-redux'
+import { createFragmentContainer, graphql } from 'react-relay'
 import { useLocation, useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
+import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
+import UserAvatar from '~/components/User/UserAvatar'
 import { getBaseUrl } from '~/config'
-import colors from '~/utils/colors'
-import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
 import type { GlobalState } from '~/types'
+import colors from '~/utils/colors'
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
+import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
+import { bootstrapGrid, mediaQueryMobile } from '~/utils/sizes'
 import type { ProposalPageHeader_proposal$data } from '~relay/ProposalPageHeader_proposal.graphql'
 import type { ProposalPageHeader_step$data } from '~relay/ProposalPageHeader_step.graphql'
 import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_viewer.graphql'
-import UserAvatar from '~/components/User/UserAvatar'
-import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
-import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
-import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
 import Image from '~ui/Primitives/Image'
-import useIsMobile from '@shared/hooks/useIsMobile'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import ProjectHeaderIdf from '~/components/Project/ProjectHeaderIdf'
+import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
 
 type Props = {
   title: string | null | undefined
@@ -245,7 +243,6 @@ export const ProposalPageHeader = ({
   triggerRequirementsModal,
 }: Props) => {
   const isMobile = useIsMobile()
-  const isIdfProjectHeader = useFeatureFlag('idf_project_header')
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
   const icon = shouldDisplayPictures ? proposal?.category?.icon : null
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
@@ -319,7 +316,6 @@ export const ProposalPageHeader = ({
 
   return (
     <Header id="ProposalPageHeader">
-      {isIdfProjectHeader && <ProjectHeaderIdf project={proposal?.project ?? null} title={proposal?.project?.title} showCounters={false} />}
       <div>
         <HeaderActions>
           <BackUrl
