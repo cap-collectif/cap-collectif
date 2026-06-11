@@ -11,6 +11,7 @@ import {
   useMultiStepModal,
 } from '@cap-collectif/ui'
 import { FillRequirementsModal_step$key } from '@relay/FillRequirementsModal_step.graphql'
+import { ONLY_NUMBER_REGEX } from '@shared/utils/validators'
 import React, { type FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -53,7 +54,6 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const ONLY_NUMBER_REGEX = /^(0|[1-9]\d*)(\.\d+)?$/
 const ZIP_CODE_LENGTH = 5
 
 type RequirementType = 'CheckboxRequirement' | 'LastnameRequirement'

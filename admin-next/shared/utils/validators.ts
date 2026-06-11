@@ -32,3 +32,5 @@ export const checkRNA = (input: string): boolean => {
   const results = regex.exec(input)
   return !!results && results[0] === input
 }
+
+export const ONLY_NUMBER_REGEX = /^\d+$/

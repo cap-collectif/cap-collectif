@@ -1,6 +1,7 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
+import { ONLY_NUMBER_REGEX } from '@shared/utils/validators'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -87,8 +88,6 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       updateParticipant(zipCode)
     }
   }
-
-  const ONLY_NUMBER_REGEX = /^(0|[1-9]\d*)(\.\d+)?$/
 
   return (
     <>
