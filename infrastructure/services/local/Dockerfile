@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:bullseye AS base
+FROM debian:bookworm AS base
 
 ENV PHP_VERSION 8.1
 
@@ -19,6 +19,7 @@ RUN apt-get update && \
         wget \
         libicu-dev \
         gnupg2 \
+        dirmngr \
         ca-certificates \
         dnsutils \
         vim \
@@ -27,7 +28,7 @@ RUN apt-get update && \
 # Install php
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bookworm main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
         php${PHP_VERSION}-apcu \
@@ -129,24 +130,8 @@ RUN set -eux; \
 ENV YARN_VERSION 1.22.10
 
 RUN set -ex \
-  && for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-    6D98490C6F1ACDDD448E45954F77679369475BAA \
-  ; do \
-    gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key" || \
-    gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
-    gpg --batch --keyserver hkps://pgp.mit.edu --recv-keys "$key" ; \
-    gpg --batch --list-keys "$key" > /dev/null ; \
-  done \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
-  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && mkdir -p /opt \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  # smoke test
+  && corepack enable \
+  && corepack prepare "yarn@${YARN_VERSION}" --activate \
   && yarn --version
 
 RUN yarn global add pm2
@@ -167,19 +152,65 @@ RUN yarn global add pm2
 #COPY blackfire/blackfire-php.ini /etc/php/${PHP_VERSION}/fpm/conf.d/92-blackfire-config.ini
 #COPY blackfire/blackfire-php.ini /etc/php/${PHP_VERSION}/cli/conf.d/92-blackfire-config.ini
 
-# Install RabbitMQ
-RUN apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
-    tee /etc/apt/sources.list.d/rabbitmq.list
-
-## Team RabbitMQ's main signing key
-RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA" && \
-    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"  && \
-    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E" && \
-    add-apt-repository 'deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu/ bionic main' && \
-    add-apt-repository 'deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main'
-
-## Install rabbitmq-server and its dependencies
-RUN apt-get install rabbitmq-server -y --fix-missing && \
+# Install RabbitMQ.
+# Team RabbitMQ's Debian Erlang repository only ships amd64 packages.
+# For local arm64 builds we provision Erlang from Launchpad instead,
+# while still installing rabbitmq-server from Team RabbitMQ's repository.
+RUN set -eux; \
+    dpkgArch="$(dpkg --print-architecture)"; \
+    curl -1sLf "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA" | gpg --dearmor | tee /usr/share/keyrings/com.rabbitmq.team.gpg > /dev/null; \
+    if [ "$dpkgArch" = "arm64" ]; then \
+        apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"; \
+        apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E"; \
+        printf '%s\n' \
+            '## Modern Erlang/OTP releases for arm64' \
+            'deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main' \
+            '' \
+            '## Latest RabbitMQ releases' \
+            'deb [signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main' \
+            'deb [signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb2.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main' \
+            > /etc/apt/sources.list.d/rabbitmq.list; \
+        printf '%s\n' \
+            'Package: erlang*' \
+            'Pin: origin ppa.launchpad.net' \
+            'Pin-Priority: 1001' \
+            > /etc/apt/preferences.d/erlang; \
+    else \
+        printf '%s\n' \
+            '## Modern Erlang/OTP releases' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-erlang/debian/bookworm bookworm main' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb2.rabbitmq.com/rabbitmq-erlang/debian/bookworm bookworm main' \
+            '' \
+            '## Latest RabbitMQ releases' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main' \
+            'deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb2.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main' \
+            > /etc/apt/sources.list.d/rabbitmq.list; \
+        printf '%s\n' \
+            'Package: erlang*' \
+            'Pin: origin RabbitMQ' \
+            'Pin-Priority: 1001' \
+            > /etc/apt/preferences.d/erlang; \
+    fi; \
+    apt-get update -y; \
+    apt-get install -y \
+        erlang-base \
+        erlang-asn1 \
+        erlang-crypto \
+        erlang-eldap \
+        erlang-ftp \
+        erlang-inets \
+        erlang-mnesia \
+        erlang-os-mon \
+        erlang-parsetools \
+        erlang-public-key \
+        erlang-runtime-tools \
+        erlang-snmp \
+        erlang-ssl \
+        erlang-syntax-tools \
+        erlang-tftp \
+        erlang-tools \
+        erlang-xmerl; \
+    apt-get install rabbitmq-server -y --fix-missing; \
     rabbitmq-plugins enable rabbitmq_management
 
 # Install nginx, mysql client and redis client

@@ -1,10 +1,10 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV PHP_VERSION 8.1
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
-RUN echo "deb [trusted=yes] http://repo.olvycloud.com/mariadb/10.3/bullseye /" >> /etc/apt/sources.list.d/mariadb.list
+RUN echo "deb [trusted=yes] http://repo.olvycloud.com/mariadb/10.3/bookworm /" >> /etc/apt/sources.list.d/mariadb.list
 
 # Install basic
 RUN set -x \
@@ -30,7 +30,7 @@ RUN set -x \
         locales \
         gnupg2 \
         dirmngr \
-        netcat \
+        netcat-traditional \
         vim \
         nginx \
         nginx-common \
@@ -44,7 +44,7 @@ ENV LANG C.UTF-8
 # Install php8.1
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bookworm main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php${PHP_VERSION}-apcu \
@@ -124,15 +124,27 @@ RUN cd / && \
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # Install RabbitMQ
-RUN apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
-    tee /etc/apt/sources.list.d/rabbitmq.list
+#Prerequisites already installed
+#RUN apt-get install curl gnupg apt-transport-https -y
 
-## Team RabbitMQ's main signing key
-RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA" && \
-    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"  && \
-    apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F6609E60DC62814E" && \
-    add-apt-repository 'deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu/ bionic main' && \
-    add-apt-repository 'deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main'
+## Team RabbitMQ's signing key
+RUN curl -1sLf "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA" | gpg --dearmor |  tee /usr/share/keyrings/com.rabbitmq.team.gpg > /dev/null
+
+## Add apt repositories maintained by Team RabbitMQ
+RUN tee /etc/apt/sources.list.d/rabbitmq.list <<EOF
+## Modern Erlang/OTP releases
+##
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-erlang/debian/bookworm bookworm main
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb2.rabbitmq.com/rabbitmq-erlang/debian/bookworm bookworm main
+
+## Latest RabbitMQ releases
+##
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb2.rabbitmq.com/rabbitmq-server/debian/bookworm bookworm main
+EOF
+
+## Update package indices
+RUN apt-get update -y
 
 ## Install rabbitmq-server and its dependencies
 RUN apt-get install rabbitmq-server -y --fix-missing && \

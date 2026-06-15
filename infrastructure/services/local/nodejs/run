@@ -13,7 +13,7 @@ cd /var/www/admin-next
 if [[ -n "$CI" ]]; then
     # Launch `/admin-next` only for cypress tests
     if [[ "$CIRCLE_JOB" == *"cypress"* ]]; then
-        exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- local-build-and-serve
+        exec pm2 start --no-daemon bash --name "admin-next" -- -lc "yarn local-build-and-serve"
     else
         exec sleep 10
     fi
