@@ -68,7 +68,7 @@ class UpdateAnonymousProposalVotesMutation implements MutationInterface
             }
             if ($voteInput) {
                 $vote->setPrivate($voteInput['anonymous']);
-                if ($step->canContribute(null) && $step->isVotesRanking()) {
+                if ($step->canContribute() && $step->isVotesRanking()) {
                     $vote->setPosition(array_search($voteInput, $votesInput, true));
                 }
             } else {

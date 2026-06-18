@@ -81,6 +81,30 @@ const UpdateProposalVotesWithVotesOrderedOnQuestionMutation = /* GraphQL */ `
   }
 `
 
+const UpdateProposalVotesWithVotesOrderedAfterResetMutation = /* GraphQL */ `
+  mutation UpdateProposalVotesMutation($input: UpdateProposalVotesInput!) {
+    updateProposalVotes(input: $input) {
+      step {
+        id
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+          totalCount
+          edges {
+            node {
+              id
+              ... on ProposalVote {
+                ranking
+                proposal {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 const inputVotesEmpty = {
   step: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==',
   votes: [],
@@ -159,5 +183,41 @@ describe('mutations.updateProposalVotesMutation', () => {
     await expect(
       graphql(UpdateProposalVotesWithoutVotesMutation, { input: inputVotesEmpty }, user),
     ).resolves.toMatchSnapshot()
+  })
+
+  it('rewrites ranking positions from the input order', async () => {
+    await global.runSQL('UPDATE votes SET position = NULL WHERE id IN (2051, 2052, 2053)')
+
+    await expect(
+      graphql(UpdateProposalVotesWithVotesOrderedAfterResetMutation, { input: inputWithVotes }, user),
+    ).resolves.toMatchObject({
+      updateProposalVotes: {
+        step: {
+          viewerVotes: {
+            totalCount: 3,
+            edges: [
+              {
+                node: {
+                  ranking: 0,
+                  proposal: { id: toGlobalId('Proposal', 'proposal25') },
+                },
+              },
+              {
+                node: {
+                  ranking: 1,
+                  proposal: { id: toGlobalId('Proposal', 'proposal26') },
+                },
+              },
+              {
+                node: {
+                  ranking: 2,
+                  proposal: { id: toGlobalId('Proposal', 'proposal24') },
+                },
+              },
+            ],
+          },
+        },
+      },
+    })
   })
 })

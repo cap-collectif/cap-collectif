@@ -20,6 +20,22 @@ const AddProposalVoteMutation = /* GraphQL*/ `
   }
 `
 
+const AddProposalVoteWithRankingMutation = /* GraphQL */ `
+  mutation ($input: AddProposalVoteInput!) {
+    addProposalVote(input: $input) {
+      vote {
+        id
+        ranking
+        completionStatus
+        isAccounted
+        proposal {
+          id
+        }
+      }
+    }
+  }
+`
+
 describe('mutations.addProposalVote', () => {
   it('Logged in API client wants to vote for a proposal anonymously', async () => {
     await expect(
@@ -215,6 +231,36 @@ describe('mutations.addProposalVote', () => {
         vote: {
           id: expect.any(String),
           isAccounted: true,
+        },
+      },
+    })
+  })
+
+  it('assigns the next ranking position when adding a vote without reordering votes', async () => {
+    await global.runSQL(
+      'DELETE FROM votes WHERE voter_id = "userMaxime" AND proposal_id = "proposal24" AND collect_step_id = "collectstepVoteClassement"',
+    )
+
+    await expect(
+      graphql(
+        AddProposalVoteWithRankingMutation,
+        {
+          input: {
+            stepId: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+            proposalId: toGlobalId('Proposal', 'proposal24'),
+          },
+        },
+        'internal_maxidev',
+      ),
+    ).resolves.toMatchObject({
+      addProposalVote: {
+        vote: {
+          ranking: 2,
+          completionStatus: 'MISSING_REQUIREMENTS',
+          isAccounted: false,
+          proposal: {
+            id: toGlobalId('Proposal', 'proposal24'),
+          },
         },
       },
     })

@@ -144,8 +144,8 @@ class AddProposalVoteMutation implements MutationInterface
             ->setProposal($proposal)
         ;
 
-        if ($step->isVotesRanking() && 0 === $countUserVotes) {
-            $vote->setPosition(0);
+        if ($step->isVotesRanking()) {
+            $vote->setPosition($countUserVotes);
         }
 
         $this->removePendingVotes($step, $user);

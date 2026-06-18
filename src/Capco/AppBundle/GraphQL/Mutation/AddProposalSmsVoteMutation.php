@@ -155,8 +155,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
             ->setPrivate($input->offsetGet('anonymously'))
         ;
 
-        if ($step->isVotesRanking() && 0 === $countParticipantsVotes) {
-            $vote->setPosition(0);
+        if ($step->isVotesRanking()) {
+            $vote->setPosition($countParticipantsVotes);
         }
 
         $this->removePendingVotes($step, $participant);
