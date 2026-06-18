@@ -72,6 +72,12 @@ UpdateSelectionStepInput:
                 description: 'If enabled, allow voters to order their votes by point'
             voteThreshold:
                 type: 'Int'
+            voteButtonIcon:
+                type: 'VoteButtonIcon!'
+                defaultValue: 'thumb_up'
+            actionButtonLabel:
+                type: 'ActionButtonLabel!'
+                defaultValue: 'vote'
             publishedVoteDate:
                 type: 'DateTime'
                 description: 'If not null, the date to display vote count'

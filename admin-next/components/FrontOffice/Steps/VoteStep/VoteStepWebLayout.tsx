@@ -90,7 +90,7 @@ const FRAGMENT = graphql`
 // - Desktop: 3 columns without map, 2 columns with map
 const getTemplateColumns = (isMapVisible: boolean) => ({
   base: '1fr',
-  tablet: isMapVisible ? '1fr' : 'repeat(2, 1fr)',
+  tablet: isMapVisible ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
   desktop: isMapVisible ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
 })
 
@@ -101,12 +101,16 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
 
-  const isMapOnlyView = step.form?.isMapViewEnabled && !step.form?.isGridViewEnabled && !step.form?.isListViewEnabled
-
   const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
   // Mobile: map hidden by default, only shown when map_shown=1 explicitly in URL
   const [mobileMapShown] = useQueryState('map_shown', parseAsInteger)
+
+  if (!step) return null
+
+  const isMapOnlyView =
+    isMapExpanded || (step.form?.isMapViewEnabled && !step.form?.isGridViewEnabled && !step.form?.isListViewEnabled)
+
   const isMobileMapVisible = isMobile && mobileMapShown === 1
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
@@ -160,7 +164,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                       <ProjectsListPlaceholder
                         count={10}
                         templateColumns={(() => {
-                          const cols = getTemplateColumns(step.form.isMapViewEnabled && !isMobile && isMapShown !== 0)
+                          const cols = getTemplateColumns(step.form?.isMapViewEnabled && !isMobile && isMapShown !== 0)
                           return [cols.base, cols.tablet, cols.desktop]
                         })()}
                         mt={0}
@@ -170,7 +174,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                 >
                   <VoteStepProposalsList
                     step={step}
-                    templateColumns={getTemplateColumns(step.form.isMapViewEnabled && !isMobile && isMapShown !== 0)}
+                    templateColumns={getTemplateColumns(step.form?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
                     triggerRequirementModal={triggerRequirementModal}
                   />
                 </React.Suspense>

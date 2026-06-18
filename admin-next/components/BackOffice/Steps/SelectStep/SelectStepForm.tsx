@@ -105,6 +105,8 @@ export type FormValues = {
   metaDescription: string
   customCode: string
   cover: string | null
+  voteBtnIcon: string | undefined
+  voteBtnAction: string | undefined
 } & RequirementsFormValues
 
 const SELECTION_QUERY = graphql`
@@ -184,6 +186,8 @@ const SELECTION_QUERY = graphql`
         isSecretBallot
         proposalArchivedTime
         proposalArchivedUnitTime
+        voteButtonIcon
+        actionButtonLabel
         ...Requirements_requirementStep @relay(mask: false)
         requirements {
           reason
@@ -332,6 +336,8 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
           allowingProgressSteps: values.allowingProgressSteps,
+          voteButtonIcon: values.voteBtnIcon,
+          actionButtonLabel: values.voteBtnAction?.toUpperCase(),
           operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
           ...getVoteParameterInput(values),
           ...getRequirementsInput(values),

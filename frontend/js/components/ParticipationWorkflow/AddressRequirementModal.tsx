@@ -134,6 +134,7 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
               variantSize={CapInputSize.Md}
               variantColor="hierarchy"
               placeholder={intl.formatMessage({ id: 'searchbar.placeholder' })}
+              width="100%"
             />
           </FormControl>
           <Button variantSize="big" justifyContent="center" width="100%" type="submit" isLoading={isLoading}>

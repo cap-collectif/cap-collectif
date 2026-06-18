@@ -1,10 +1,22 @@
-import { Button, CapUIIcon, Card, CardContent, CardCoverPlaceholder, Flex, Icon, useTheme } from '@cap-collectif/ui'
+import {
+  Button,
+  CapUIIcon,
+  Card,
+  CardContent,
+  CardCover,
+  CardCoverImage,
+  CardCoverPlaceholder,
+  Flex,
+  Icon,
+  useTheme,
+} from '@cap-collectif/ui'
 import { FC } from 'react'
 import VotesPopupCardRanking from './VotesPopupCardRanking'
 import { graphql, useFragment } from 'react-relay'
 import { VotesPopupCard_proposalStep$key } from '@relay/VotesPopupCard_proposalStep.graphql'
 import { VotesPopupCard_proposalVote$key } from '@relay/VotesPopupCard_proposalVote.graphql'
 import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
+import convertIconToDs from '@shared/utils/convertIconToDs'
 
 interface Props {
   step: VotesPopupCard_proposalStep$key
@@ -21,6 +33,21 @@ const VOTE_FRAGMENT = graphql`
       estimation
       votes {
         totalCount
+      }
+      media {
+        url
+      }
+      category {
+        icon
+        color
+        categoryImage {
+          image {
+            url
+          }
+        }
+      }
+      form {
+        usingIllustration
       }
     }
   }
@@ -50,6 +77,11 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
 
   const { colors } = useTheme()
 
+  const { proposal } = vote
+  const proposalCover = proposal.media?.url || proposal.category?.categoryImage?.image?.url
+  const proposalIcon = proposal.category?.icon ? convertIconToDs(proposal.category.icon) : undefined
+  const proposalColor = proposal.category?.color || undefined
+
   const removeVote = () => {
     RemoveProposalVoteMutation.commit(
       {
@@ -76,7 +108,15 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
     <Flex gap="sm" width="100%" pl="xs" py="xs" alignItems="center">
       {step.votesRanking && <VotesPopupCardRanking vote={vote} step={step} />}
       <Card format="horizontal" p="0" _hover={{ boxShadow: 'none' }}>
-        {!step.votesRanking && <CardCoverPlaceholder flex="1" maxHeight="83px" />}
+        {!step.votesRanking && (proposal.form?.usingIllustration || (proposalIcon && proposalCover)) ? (
+          <CardCover alignSelf="stretch" height="initial">
+            {proposalCover ? (
+              <CardCoverImage src={proposalCover} />
+            ) : (
+              <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
+            )}
+          </CardCover>
+        ) : null}
         <CardContent flex="1" primaryInfo={vote.proposal.title} />
       </Card>
       <Button

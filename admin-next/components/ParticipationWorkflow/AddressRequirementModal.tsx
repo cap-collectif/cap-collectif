@@ -1,9 +1,12 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
+import { useJsApiLoader } from '@react-google-maps/api'
 import CookieMonster from '@shared/utils/CookieMonster'
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+
+const GOOGLE_MAPS_LIBRARIES: 'places'[] = ['places']
 import { HideBackArrowLayout } from './ModalLayoutHeader'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useUpdateParticipantMutation } from './mutations/UpdateParticipantMutation'
@@ -23,6 +26,15 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
   const intl = useIntl()
   const { viewerSession } = useAppContext()
   const isAuthenticated = !!viewerSession?.id
+
+  const isAlreadyLoaded = typeof window !== 'undefined' && !!window.google?.maps?.places
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
+    libraries: GOOGLE_MAPS_LIBRARIES,
+  })
+
+  const isMapsReady = isAlreadyLoaded || isLoaded
 
   const updateParticipantMutation = useUpdateParticipantMutation()
   const updateProfilePersonalDataMutation = useUpdateProfilePersonalDataMutation()
@@ -122,19 +134,22 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="address" control={control} isRequired>
             <FormLabel htmlFor="address" label={intl.formatMessage({ id: 'form.label-postal-Address' })} />
-            <FieldInput
-              id="address"
-              name="address"
-              required
-              control={control}
-              type="address"
-              getAddress={add => {
-                setValue('realAddress', add)
-              }}
-              variantSize={CapInputSize.Md}
-              variantColor="hierarchy"
-              placeholder={intl.formatMessage({ id: 'searchbar.placeholder' })}
-            />
+            {isMapsReady && (
+              <FieldInput
+                id="address"
+                name="address"
+                required
+                control={control}
+                type="address"
+                getAddress={add => {
+                  setValue('realAddress', add)
+                }}
+                variantSize={CapInputSize.Md}
+                variantColor="hierarchy"
+                placeholder={intl.formatMessage({ id: 'searchbar.placeholder' })}
+                width="100%"
+              />
+            )}
           </FormControl>
           <Button variantSize="big" justifyContent="center" width="100%" type="submit" isLoading={isLoading}>
             {intl.formatMessage({ id: 'global.continue' })}

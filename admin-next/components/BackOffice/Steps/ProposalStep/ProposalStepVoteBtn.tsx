@@ -63,7 +63,7 @@ const ProposalStepVoteBtn: React.FC<ProposalStepVoteBtnProps> = () => {
                 id={`btn-action-${action}`}
                 name={`btn-action`}
                 value={action}
-                defaultChecked={action === selectedAction}
+                checked={action === selectedAction}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue('voteBtnAction', e.target.value)}
               >
                 {intl.formatMessage({ id: `step.vote.btn.action.${action}` })}

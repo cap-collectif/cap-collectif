@@ -1,6 +1,8 @@
 import { CapUIFontWeight, CapUIIcon, Tag, Tooltip, useTheme } from '@cap-collectif/ui'
+import { VoteStepQuickFilter_proposalStep$key } from '@relay/VoteStepQuickFilter_proposalStep.graphql'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 import { useQueryState } from 'nuqs'
+import { graphql, useFragment } from 'react-relay'
 
 export interface QuickFilter {
   label: string
@@ -10,10 +12,19 @@ export interface QuickFilter {
 
 interface Props {
   quickFilterBtn: QuickFilter
+  step: VoteStepQuickFilter_proposalStep$key
 }
 
-const ListActionsQuickFilter: React.FC<Props> = ({ quickFilterBtn }) => {
-  const [sort, setSort] = useQueryState('sort')
+const FRAGMENT = graphql`
+  fragment VoteStepQuickFilter_proposalStep on ProposalStep {
+    defaultSort
+  }
+`
+
+const ListActionsQuickFilter: React.FC<Props> = ({ quickFilterBtn, step: stepKey }) => {
+  const step = useFragment(FRAGMENT, stepKey)
+  const defaultSort = step.defaultSort?.toLowerCase() ?? null
+  const [sort, setSort] = useQueryState('sort', { defaultValue: defaultSort })
   const { colors } = useTheme()
   const { width } = useWindowWidth()
 
@@ -33,6 +44,7 @@ const ListActionsQuickFilter: React.FC<Props> = ({ quickFilterBtn }) => {
   ) : (
     <Tooltip label={quickFilterBtn.label}>
       <Tag
+        tooltipLabel={quickFilterBtn.label}
         variantColor="info"
         variantSize="medium"
         transparent={true}

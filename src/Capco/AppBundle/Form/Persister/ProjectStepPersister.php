@@ -78,6 +78,10 @@ class ProjectStepPersister
                 $step['voteButtonIcon'] ??= VoteButtonIcon::THUMB_UP;
                 $this->removeAnalysisConfigurationInPreviousCollectStep($step, $dbSteps);
             }
+            if ('selection' === $step['type'] && $entity instanceof SelectionStep) {
+                $step['actionButtonLabel'] ??= $entity->getActionButtonLabel();
+                $step['voteButtonIcon'] ??= $entity->getVoteButtonIcon();
+            }
             unset($step['id']);
             if ('collect' === $step['type'] || 'selection' === $step['type']) {
                 self::setDefaultMainViewIfNeeded($step, $project);

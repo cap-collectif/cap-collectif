@@ -21,6 +21,7 @@ const FRAGMENT = graphql`
   fragment VoteStepListActions_proposalStep on ProposalStep {
     id
     votable
+    ...VoteStepQuickFilter_proposalStep
     form {
       isMapViewEnabled
       isGridViewEnabled
@@ -81,12 +82,10 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       {width > 1024 && step.votable && (
         <Flex gap={width >= 1200 ? 'md' : 'xs'}>
           {quickFilterButtons.map((filter, index) => (
-            <ListActionsQuickFilter key={`quick-filter-${index}`} quickFilterBtn={filter} />
+            <ListActionsQuickFilter key={`quick-filter-${index}`} quickFilterBtn={filter} step={step} />
           ))}
         </Flex>
       )}
-
-      <VoteStepFiltersModal stepId={step.id} />
 
       {hasBothViews && (
         <Box>
@@ -115,6 +114,8 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
           ))}
         </Box>
       )}
+
+      <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView && (hasGridView || hasListView) ? (
         <Box flex="none">

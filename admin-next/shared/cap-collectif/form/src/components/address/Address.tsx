@@ -45,11 +45,11 @@ const Address = forwardRef<HTMLInputElement, AddressProps>(
       <PlacesAutocomplete value={value} onChange={onChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <>
-            <Box position="relative">
+            <Box position="relative" width={width}>
               <Icon name={CapUIIcon.Search} position="absolute" left="xxs" top="xxs" />
               <Input
                 ref={ref}
-                width={width}
+                width="100%"
                 pl="28px!important"
                 {...getInputProps({
                   placeholder: placeholder,

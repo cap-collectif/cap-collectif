@@ -4,7 +4,7 @@ UpdateCollectStepInput:
         fields:
             actionButtonLabel:
                 type: 'ActionButtonLabel!'
-                defaultValue: 'VOTE'
+                defaultValue: 'vote'
             proposalForm:
                 type: 'ID!'
                 description: 'The proposalForm linked to the step.'
@@ -80,7 +80,7 @@ UpdateCollectStepInput:
                 type: 'Int'
             voteButtonIcon:
                 type: 'VoteButtonIcon!'
-                defaultValue: 'THUMB_UP'
+                defaultValue: 'thumb_up'
             publishedVoteDate:
                 type: 'DateTime'
                 description: 'If not null, the date to display vote count'

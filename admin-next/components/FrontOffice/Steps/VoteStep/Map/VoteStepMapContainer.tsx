@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css'
 
 import { Box } from '@cap-collectif/ui'
 import { CapcoTileLayer, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
-import { FC, Suspense } from 'react'
+import { FC, Suspense, useState } from 'react'
 import { MapContainer } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
@@ -11,6 +11,7 @@ import VoteStepMapMarkers from './VoteStepMapMarkers'
 import LocateAndZoomControl, { ChangeSizeButton } from '@components/FrontOffice/Leaflet/LocateAndZoomControl'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import MapCustomEvents from './VoteStepMapCustomEvents'
+import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
 
 export const mapId = 'cap-vote-step-map'
 export const MAX_MAP_ZOOM = 18
@@ -62,6 +63,7 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
   const [latlngBounds] = useQueryState('latlngBounds')
   const [latlng] = useQueryState('latlng')
   const [isMapExpanded, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
+  const [showDiscoverPane, setShowDiscoverPane] = useState(true)
 
   const filterBounds = parseLatLngBounds(latlngBounds || '')
   const { form } = step
@@ -101,6 +103,9 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
         zoomControl={false}
       >
         <MapCustomEvents step={step} />
+        {showDiscoverPane && step.__typename === 'CollectStep' && (
+          <ProposalMapDiscoverPane handleClose={() => setShowDiscoverPane(false)} />
+        )}
         <Suspense fallback={null}>
           <VoteStepMapMarkers step={step} />
         </Suspense>

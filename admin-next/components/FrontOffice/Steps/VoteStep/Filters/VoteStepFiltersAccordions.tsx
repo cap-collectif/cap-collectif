@@ -54,7 +54,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
         </Accordion.Panel>
       </Accordion.Item>
 
-      {filters.category.isEnabled ? (
+      {filters.category.isEnabled && filters.category.options.length > 0 ? (
         <Accordion.Item id="categories">
           <Accordion.Button p={0} pb={1}>
             <Text
@@ -84,7 +84,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
         </Accordion.Item>
       ) : null}
 
-      {filters.theme.options.length > 0 ? (
+      {filters.theme.isEnabled && filters.theme.options.length > 0 ? (
         <Accordion.Item id="themes">
           <Accordion.Button p={0} pb={1}>
             <Text

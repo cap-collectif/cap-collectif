@@ -179,6 +179,8 @@ export type FormValues = {
   preventProposalEdit: boolean
   preventProposalDelete: boolean
   cover: string | null
+  voteBtnIcon: string | undefined
+  voteBtnAction: string | undefined
 } & RequirementsFormValues
 
 const COLLECT_FRAGMENT = graphql`
@@ -361,6 +363,8 @@ const COLLECT_FRAGMENT = graphql`
         budget
         publishedVoteDate
         isSecretBallot
+        voteButtonIcon
+        actionButtonLabel
         proposalArchivedTime
         proposalArchivedUnitTime
         ...Requirements_requirementStep @relay(mask: false)

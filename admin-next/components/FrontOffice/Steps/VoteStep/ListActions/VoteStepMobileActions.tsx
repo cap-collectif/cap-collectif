@@ -80,8 +80,8 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
             onButtonClick={() => handleActionClick('vote')}
           />
         )}
-        {step.form.isMapViewEnabled &&
-          (step.form.isGridViewEnabled !== false || step.form.isListViewEnabled !== false) && (
+        {step.form?.isMapViewEnabled &&
+          (step.form?.isGridViewEnabled !== false || step.form?.isListViewEnabled !== false) && (
             <StepVoteMobileActionBtn
               icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
               onClick={() => handleActionClick('map')}

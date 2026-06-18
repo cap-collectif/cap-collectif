@@ -367,6 +367,18 @@ const ProposalFormModal: React.FC<Props> = props => {
     return isValid
   }
 
+  const scrollToFirstError = () => {
+    requestAnimationFrame(() => {
+      const dialog = document.querySelector('[role="dialog"]')
+      const firstError =
+        (dialog?.querySelector('[aria-invalid="true"]') as HTMLElement) ??
+        (document.querySelector('[aria-invalid="true"]') as HTMLElement)
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    })
+  }
+
   const touchErrorFields = () => {
     const errors = methods.formState.errors
     Object.entries(errors).forEach(([key, error]) => {
@@ -416,7 +428,10 @@ const ProposalFormModal: React.FC<Props> = props => {
     const data = getValues() as FormValues
     const areRequiredValid = validateRequiredQuestions(data)
     const areCheckboxRulesValid = validateCheckboxQuestions(data)
-    if (!isSchemaValid || !areRequiredValid || !areCheckboxRulesValid) return
+    if (!isSchemaValid || !areRequiredValid || !areCheckboxRulesValid) {
+      scrollToFirstError()
+      return
+    }
     handleSubmit(validData => onSubmit(validData, false, hide))()
   }
 

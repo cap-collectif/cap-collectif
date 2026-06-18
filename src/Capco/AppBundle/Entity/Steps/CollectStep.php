@@ -107,12 +107,12 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
     private bool $isCollectByEmailEnabled = false;
 
     /**
-     * @ORM\Column(name="vote_button_icon", type="string", nullable=false, options={"default": "THUMB_UP"})
+     * @ORM\Column(name="vote_button_icon", type="string", nullable=false, options={"default": "thumb_up"})
      */
     private string $voteButtonIcon = VoteButtonIcon::THUMB_UP;
 
     /**
-     * @ORM\Column(name="action_button_label", type="string", nullable=false, options={"default": "VOTE"})
+     * @ORM\Column(name="action_button_label", type="string", nullable=false, options={"default": "vote"})
      */
     private string $actionButtonLabel = ActionButtonLabel::VOTE;
 

@@ -4,11 +4,14 @@ namespace Capco\AppBundle\Form\Step;
 
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ActionButtonLabel;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Enum\VoteButtonIcon;
 use Capco\AppBundle\Form\StatusFormType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,6 +50,8 @@ class SelectionStepFormType extends AbstractStepFormType
             ])
             ->add('proposalArchivedTime')
             ->add('proposalArchivedUnitTime')
+            ->add('actionButtonLabel', TextType::class, ['data' => ActionButtonLabel::VOTE])
+            ->add('voteButtonIcon', TextType::class, ['data' => VoteButtonIcon::THUMB_UP])
         ;
     }
 

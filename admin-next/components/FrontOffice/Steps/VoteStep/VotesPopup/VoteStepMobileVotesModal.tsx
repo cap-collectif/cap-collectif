@@ -69,6 +69,7 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
       hideCloseButton
       alwaysOpenInPortal
       hideOnClickOutside={false}
+      zIndex={2000}
     >
       <Modal.Body pt="md">
         <VoteStepUserInfos step={step} />

@@ -72,5 +72,7 @@ export const getDefaultValues = (
     enabled: {
       labels: stepEnabledType,
     },
+    voteBtnIcon: step?.voteButtonIcon,
+    voteBtnAction: step?.actionButtonLabel?.toLowerCase() ?? 'vote',
   }
 }

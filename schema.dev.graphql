@@ -19140,7 +19140,7 @@ type UpdateCivicIAPayload {
 }
 
 input UpdateCollectStepInput {
-  actionButtonLabel: ActionButtonLabel! = 
+  actionButtonLabel: ActionButtonLabel! = VOTE
 
   """The proposalForm linked to the step."""
   proposalForm: ID!
@@ -19213,7 +19213,7 @@ input UpdateCollectStepInput {
   """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
   voteThreshold: Int
-  voteButtonIcon: VoteButtonIcon! = 
+  voteButtonIcon: VoteButtonIcon! = THUMB_UP
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime
@@ -21114,6 +21114,8 @@ input UpdateSelectionStepInput {
   """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
   voteThreshold: Int
+  voteButtonIcon: VoteButtonIcon! = THUMB_UP
+  actionButtonLabel: ActionButtonLabel! = VOTE
 
   """If not null, the date to display vote count"""
   publishedVoteDate: DateTime

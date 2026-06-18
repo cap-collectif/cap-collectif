@@ -11,6 +11,8 @@ import {
   CardProps,
   CapUIShadow,
   CardTagList,
+  CardStatusTag,
+  CardTagLabel,
   Flex,
   Icon,
   Text,
@@ -60,6 +62,10 @@ const PROPOSAL_FRAGMENT = graphql`
     viewerVote(step: $stepId) {
       ranking
     }
+    status(step: $stepId) {
+      name
+      color
+    }
     estimation
     form {
       usingIllustration
@@ -83,6 +89,16 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
+const STATUS_COLOR_MAP: Record<string, 'info' | 'infoGray' | 'success' | 'warning' | 'danger'> = {
+  INFO: 'info',
+  PRIMARY: 'info',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  CAUTION: 'warning',
+  DANGER: 'danger',
+  DEFAULT: 'infoGray',
+}
+
 export const ProposalCard: React.FC<Props> = ({
   proposal: proposalKey,
   step: stepFragment,
@@ -93,7 +109,7 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const step = useFragment(STEP_FRAGMENT, stepFragment)
-  const { id, title, url, media, summary, body, category, form } = proposal
+  const { id, title, url, media, summary, body, category, form, status } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
 
   const proposalCover = media?.url || category?.categoryImage?.image?.url
@@ -109,20 +125,43 @@ export const ProposalCard: React.FC<Props> = ({
       format={listView === 'grid' ? 'vertical' : 'horizontal'}
       hasButton={step?.votable}
       minWidth="unset"
+      variantSize="medium"
+      height={listView === 'list' ? 224 : '100%'}
       className={'cap-proposal-card' + (active ? ' active' : '')}
       sx={{ boxShadow: active ? CapUIShadow.Small : 'inherit' }}
       {...props}
     >
-      {form.usingIllustration ? (
-        <CardCover alignSelf="stretch" height="initial">
+      {listView === 'grid' || form?.usingIllustration || (proposalIcon && proposalCover) ? (
+        <CardCover alignSelf="stretch" maxWidth={listView === 'list' ? 288 : 'auto'} height="initial">
           {proposalCover ? (
             <CardCoverImage src={proposalCover} />
           ) : (
             <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
           )}
+          {status ? (
+            <CardStatusTag variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'}>
+              <CardTagLabel>{status.name}</CardTagLabel>
+            </CardStatusTag>
+          ) : null}
         </CardCover>
       ) : null}
-      <CardContent primaryInfo={title} secondaryInfo={summaryOrBodyExcerpt} href={url} primaryInfoTag={'h2'}>
+      <CardContent
+        primaryInfo={title}
+        secondaryInfo={summaryOrBodyExcerpt}
+        href={url}
+        primaryInfoTag={'h2'}
+        flex={1}
+        sx={
+          {
+            '& .cap-card-primaryInfo ~ div': {
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+            },
+          } as any
+        }
+      >
         <CardTagList>
           <Flex justifyContent="space-between" align="center" width="100%">
             <Flex align="center" gap="md">

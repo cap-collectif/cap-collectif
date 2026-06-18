@@ -9,6 +9,16 @@ import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
 import { mutationErrorToast } from '@shared/utils/toasts'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
+// Converts GraphQL VoteButtonIcon enum value (SCREAMING_SNAKE_CASE) to the matching CapUIIcon key (PascalCase)
+const getVoteButtonIcon = (icon: string | null | undefined): CapUIIcon => {
+  if (!icon) return CapUIIcon.ThumbUp
+  const pascalCase = icon
+    .split('_')
+    .map(w => w[0] + w.slice(1).toLowerCase())
+    .join('')
+  return (CapUIIcon as Record<string, CapUIIcon>)[pascalCase] ?? CapUIIcon.ThumbUp
+}
+
 type Props = {
   proposal: VoteButton_proposal$key
   step: VoteButton_step$key
@@ -45,6 +55,8 @@ const STEP_FRAGMENT = graphql`
     }
     voteThreshold
     canDisplayBallot
+    voteButtonIcon
+    actionButtonLabel
     requirements @include(if: $isAuthenticated) {
       viewerMeetsTheRequirements
     }
@@ -197,13 +209,18 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     return <Tooltip label={tooltipLabel}>{tagContent}</Tooltip>
   }
 
+  const isSupport = step.actionButtonLabel === 'SUPPORT'
+  const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
+  const votedTextId = isSupport ? 'global.support' : 'front.proposal.voted-for'
+  const voteTextId = isSupport ? 'global.support.for' : 'global.vote.for'
+
   const buttonContent = (
     <Button
       onClick={onClick}
       variant={proposal.viewerHasVote ? 'primary' : 'secondary'}
       aria-label={intl.formatMessage({ id: proposal.viewerHasVote ? 'global.delete' : 'global.add' })}
       height="32px"
-      leftIcon={CapUIIcon.ThumbUp}
+      leftIcon={voteIcon}
       disabled={hasReachedVotesLimit}
     >
       <Text fontWeight={CapUIFontWeight.Semibold}>
@@ -213,7 +230,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
             {step.voteThreshold ? ` / ${step.voteThreshold}` : ''}
           </>
         ) : (
-          intl.formatMessage({ id: proposal.viewerHasVote ? 'front.proposal.voted-for' : 'global.vote.for' })
+          intl.formatMessage({ id: proposal.viewerHasVote ? votedTextId : voteTextId })
         )}
       </Text>
     </Button>

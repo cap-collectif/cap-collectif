@@ -33,7 +33,7 @@ const VotesPopup: FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
 
   return (
-    <Flex width="100%" overflowY="auto" justifyContent="flex-start" flexDirection="column" gap="md">
+    <Flex width="100%" justifyContent="flex-start" flexDirection="column" gap="md">
       {/* We must spread because the relay proxy does not support the sort method */}
       {step.viewerVotes.edges.length > 0 ? (
         [...step.viewerVotes.edges]

@@ -119,7 +119,7 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
       }}
     >
       {!isMobile && (
-        <Popup className="leaflet-card-popup">
+        <Popup className="leaflet-card-popup" closeButton={false}>
           <Card format="horizontal" maxHeight="83px">
             <CardCover>
               {proposalCover ? (
