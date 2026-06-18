@@ -26,12 +26,19 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class QuestionJumpsHandler
 {
     use QuestionPersisterTrait;
+
     private readonly EntityManagerInterface $em;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly AbstractQuestionRepository $abstractQuestionRepo;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly LoggerInterface $logger;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly ValidatorInterface $colorValidator;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    // @phpstan-ignore property.onlyWritten (read by QuestionPersisterTrait)
     private readonly Indexer $indexer;
 
     public function __construct(
@@ -68,7 +75,7 @@ class QuestionJumpsHandler
             return;
         }
 
-        if (!$this->hasJumps($questions)) {
+        if (!$this->hasJumps($questions) && !$this->entityHasJumps($entity)) {
             return;
         }
 
@@ -101,10 +108,10 @@ class QuestionJumpsHandler
         }
 
         foreach ($questionnaire['questions'] as &$questionData) {
-            unset($questionData['question']['alwaysJumpDestinationQuestion']);
-            if (!empty($questionData['question']['jumps'])) {
-                unset($questionData['question']['jumps']);
+            if (!\array_key_exists('question', $questionData)) {
+                continue;
             }
+            unset($questionData['question']['alwaysJumpDestinationQuestion'], $questionData['question']['jumps']);
         }
     }
 
@@ -119,6 +126,18 @@ class QuestionJumpsHandler
             }
 
             if ($questionData['question']['jumps'] ?? null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function entityHasJumps(QuestionsInterface $entity): bool
+    {
+        foreach ($entity->getQuestions() as $qaq) {
+            $question = $qaq->getQuestion();
+            if (!$question->getJumps()->isEmpty() || $question->hasAlwaysJumpDestinationQuestion()) {
                 return true;
             }
         }
@@ -141,7 +160,7 @@ class QuestionJumpsHandler
         }
 
         $formType = $isQuestionnaire ? QuestionnaireConfigurationUpdateType::class : ProposalFormUpdateType::class;
-        $type = $isQuestionnaire ? 'questionnaire' : 'proposalForm';
+        $type = $isQuestionnaire ? 'questionnaire' : 'proposal';
 
         if ($isQuestionnaire && $arguments['questionnaireId']) {
             unset($arguments['questionnaireId']);
