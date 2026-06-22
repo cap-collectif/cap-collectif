@@ -47,7 +47,6 @@ class Reply implements EntityInterface, Publishable, DraftableInterface, Contrib
     use CompletionStatusTrait;
     use DraftableTrait;
     use HasResponsesTrait;
-    use HasResponsesTrait;
     use PrivatableTrait;
     use PublishableTrait;
     use TimestampableTrait;

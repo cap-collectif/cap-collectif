@@ -28,6 +28,7 @@ trait HasResponsesTrait
                 }
 
                 $currentResponse->setUpdatedAt(new \DateTime());
+                $this->setUpdatedAt(new \DateTime());
 
                 return $this;
             }
