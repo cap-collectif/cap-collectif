@@ -61,7 +61,7 @@ contexts:
 
     - name: Users
       terms:
-          - name: Utilisateur "ROLE_USER"
+          - name: Utilisateur "USER"
             definition: Toute personne qui se crée un compte sur une plateforme Capco.
           - name: Créateur de projet "ROLE_PROJECT_ADMIN"
             definition: |
@@ -138,7 +138,7 @@ contexts:
             definition: le vote est activé sur l'étape mais aucune modalité de vote n'a été activée en plus
           - name: VoteType::BUDGET -> vote avancé (terme à changer car couvre le type de vote avancé et pas seulement budget)
             definition: |
-                Enveloppe globale €€€ (montant renseigné au moment de l'activation de ce vote), permet à l'utilisateur 
+                Enveloppe global ( renseigné au moment de l'activation de ce vote), permet à l'utilisateur 
                 de voter tant qu'il n'a pas utilisé tout son budget en votant pour des propositions chiffrées
           - name: votes_limit
             definition: Nombre de votes que peut attribuer un utilisateur au maximum dans l'étape
