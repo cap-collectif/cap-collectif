@@ -61,7 +61,7 @@ contexts:
 
     - name: Users
       terms:
-          - name: Utilisateur "ROLE_USER"
+          - name: Utilisateur "USER"
             definition: Toute personne qui se crée un compte sur une plateforme Capco.
           - name: Créateur de projet "ROLE_PROJECT_ADMIN"
             definition: |
