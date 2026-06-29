@@ -23,7 +23,7 @@
     "cookie": "^0.4.1",
     "framer-motion": "^11.0.10",
     "graphql-tag": "^2.12.6",
-    "next": "14.2.25",
+    "next": "14.2.35",
     "next-client-cookies": "^1.1.1",
     "nookies": "^2.5.2",
     "nuqs": "^2.8.1",
