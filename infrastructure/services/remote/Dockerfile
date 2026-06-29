@@ -240,7 +240,7 @@ RUN set -eux; \
   node --version; \
   npm --version
 
-ENV YARN_VERSION 1.22.10
+ENV YARN_VERSION 1.22.13
 
 RUN set -ex \
   && for key in \
