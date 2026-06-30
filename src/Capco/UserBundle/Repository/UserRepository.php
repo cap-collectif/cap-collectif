@@ -2300,22 +2300,24 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * @return User[]
+     * @return array<int, array{id: string, email: string, anonymizationReminderEmailToken: string}>
      */
     public function findInactiveUsersEmailAndAnonToken(\DatetimeInterface $inactivityLimitDate, int $limit): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->select('PARTIAL u.{id, email, anonymizationReminderEmailToken}')
+            ->select('u.id, u.email, u.anonymizationReminderEmailToken')
             ->leftJoin('u.memberOfOrganizations', 'om')
             ->where(
                 "(u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%')
                 AND om IS NULL
                 AND (u.lastLogin < :inactivityLimitDate OR u.lastLogin IS NULL)
                 AND u.email IS NOT NULL
+                AND u.anonymizationReminderEmailToken IS NOT NULL
                 AND u.anonymizationReminderEmailSentAt IS NULL
                 AND u.confirmationToken IS NULL
             "
             )
+            ->orderBy('u.id', 'ASC')
             ->setMaxResults($limit)
         ;
 
@@ -2323,19 +2325,19 @@ class UserRepository extends EntityRepository
             'inactivityLimitDate' => $inactivityLimitDate->format('Y-m-d H:i:s'),
         ]);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
-     * @param string[] $emails
+     * @param string[] $userIds
      */
-    public function updateAnonymizationReminderEmailSentAt(array $emails): void
+    public function updateAnonymizationReminderEmailSentAt(array $userIds): void
     {
         $conn = $this->getEntityManager()->getConnection();
-        $placeholders = array_map(fn ($i) => ":email{$i}", array_keys($emails));
-        $params = array_combine($placeholders, $emails);
+        $placeholders = array_map(fn ($i) => ":id{$i}", array_keys($userIds));
+        $params = array_combine($placeholders, $userIds);
 
-        $sql = 'UPDATE fos_user SET anonymization_reminder_email_sent_at = NOW() WHERE email IN (' . implode(', ', $placeholders) . ')';
+        $sql = 'UPDATE fos_user SET anonymization_reminder_email_sent_at = NOW() WHERE id IN (' . implode(', ', $placeholders) . ')';
 
         $conn->executeStatement($sql, $params);
     }

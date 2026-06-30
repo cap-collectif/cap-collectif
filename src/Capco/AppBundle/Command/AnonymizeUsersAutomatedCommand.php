@@ -48,6 +48,7 @@ class AnonymizeUsersAutomatedCommand extends Command
         $stopwatch->start(self::STOP_WATCH_EVENT);
 
         $this->createMatchingUsersTemporaryTable($dateLimit);
+        $this->createMatchingParticipantsTemporaryTable($dateLimit);
 
         $io->info('Start Deleting Medias');
         $this->deleteMedias();
@@ -64,8 +65,26 @@ class AnonymizeUsersAutomatedCommand extends Command
         $io->info('Start Deleting Newsletter Subscription');
         $this->deleteNewsletterSubscription();
 
+        $io->info('Start Anonymizing Debate App Data');
+        $this->deleteDebateVoteToken();
+        $this->anonymizeDebateAnonymousArgument($dateLimit);
+        $this->anonymizeDebateArgument();
+        $this->anonymizeDebateVote();
+
         $io->info('Start Anonymizing Users');
         $this->anonymizeUser();
+
+        $io->info('Start Deleting Participant Phone Verification Sms');
+        $this->deleteParticipantPhoneVerificationSms();
+
+        $io->info('Start Deleting Participant Mailing List User');
+        $this->deleteParticipantMailingListUser();
+
+        $io->info('Start Deleting Participant Newsletter Subscription');
+        $this->deleteParticipantNewsletterSubscription();
+
+        $io->info('Start Anonymizing Participants');
+        $this->anonymizeParticipant();
 
         $io->success('Anonymization completed');
 
@@ -86,6 +105,17 @@ class AnonymizeUsersAutomatedCommand extends Command
         $this->connection->executeStatement(
             "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (u.last_login < :lastLoginLimit OR u.last_login IS NULL) AND u.anonymized_at IS NULL",
             ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')]
+        );
+    }
+
+    private function createMatchingParticipantsTemporaryTable(\DatetimeInterface $lastContributedAtLimit): void
+    {
+        $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_participants (id VARCHAR(255) COLLATE utf8mb4_unicode_ci, email VARCHAR(255) COLLATE utf8mb4_unicode_ci)');
+        $this->connection->executeStatement('CREATE INDEX idx_matching_participants_id ON matching_participants(id)');
+        $this->connection->executeStatement('CREATE INDEX idx_matching_participants_email ON matching_participants(email)');
+        $this->connection->executeStatement(
+            'INSERT INTO matching_participants SELECT p.id, p.email FROM participant p WHERE p.last_contributed_at < :lastContributedAtLimit AND p.anonymized_at IS NULL',
+            ['lastContributedAtLimit' => $lastContributedAtLimit->format('Y-m-d H:i:s')]
         );
     }
 
@@ -118,6 +148,60 @@ class AnonymizeUsersAutomatedCommand extends Command
     private function deleteMailingListUser(): void
     {
         $sql = 'DELETE mlu FROM mailing_list_user mlu  JOIN matching_users mu ON mu.id = mlu.user_id';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function deleteParticipantPhoneVerificationSms(): void
+    {
+        $sql = 'DELETE ppvs FROM participant_phone_verification_sms ppvs JOIN matching_participants mp ON mp.id = ppvs.participant_id';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function deleteParticipantMailingListUser(): void
+    {
+        $sql = 'DELETE mlu FROM mailing_list_user mlu JOIN matching_participants mp ON mp.id = mlu.participant_id';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function deleteParticipantNewsletterSubscription(): void
+    {
+        $sql = 'DELETE ns FROM newsletter_subscription ns JOIN matching_participants mp ON mp.email = ns.email';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function deleteDebateVoteToken(): void
+    {
+        $sql = 'DELETE dvt FROM debate_vote_token dvt JOIN matching_users mu ON mu.id = dvt.user_id';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function anonymizeDebateArgument(): void
+    {
+        $sql = 'UPDATE debate_argument da JOIN matching_users mu ON mu.id = da.author_id SET da.ip_address = NULL, da.navigator = NULL';
+        $this->connection->executeStatement($sql);
+    }
+
+    private function anonymizeDebateAnonymousArgument(\DatetimeInterface $dateLimit): void
+    {
+        $sql = <<<'SQL'
+            UPDATE debate_anonymous_argument daa
+            SET
+                daa.email = '',
+                daa.username = 'Utilisateur supprimé',
+                daa.ip_address = NULL,
+                daa.navigator = NULL,
+                daa.consent_internal_communication = FALSE
+            WHERE daa.created_at < :dateLimit
+            SQL;
+        $this->connection->executeStatement($sql, ['dateLimit' => $dateLimit->format('Y-m-d H:i:s')]);
+    }
+
+    private function anonymizeDebateVote(): void
+    {
+        $sql = "UPDATE votes v
+                JOIN matching_users mu ON mu.id = v.voter_id
+                SET v.ip_address = NULL, v.navigator = NULL
+                WHERE v.voteType IN ('debate', 'debateArgument', 'debateAnonymousArgument')";
         $this->connection->executeStatement($sql);
     }
 
@@ -168,6 +252,38 @@ class AnonymizeUsersAutomatedCommand extends Command
                             u.slug = CONCAT('utilisateursupprime-', UUID()),
                             u.updated_at = NOW(),
                             u.anonymized_at = NOW()
+            SQL;
+
+        $this->connection->executeStatement($sql);
+    }
+
+    private function anonymizeParticipant(): void
+    {
+        $sql = <<<'SQL'
+                        UPDATE participant p
+                        JOIN matching_participants mp ON mp.id = p.id
+                        SET
+                            p.email = NULL,
+                            p.lastname = NULL,
+                            p.firstname = NULL,
+                            p.phone = NULL,
+                            p.postal_address = NULL,
+                            p.zip_code = NULL,
+                            p.date_of_birth = NULL,
+                            p.username = 'Utilisateur supprimé',
+                            p.phone_confirmed = FALSE,
+                            p.email_confirmation_sent_at = NULL,
+                            p.new_email_to_confirm = NULL,
+                            p.new_email_confirmation_token = NULL,
+                            p.confirmation_token = NULL,
+                            p.locale = NULL,
+                            p.consent_sms_communication = FALSE,
+                            p.consent_internal_communication = FALSE,
+                            p.consent_privacy_policy = FALSE,
+                            p.last_contributed_at = NULL,
+                            p.user_identification_code = NULL,
+                            p.updated_at = NOW(),
+                            p.anonymized_at = NOW()
             SQL;
 
         $this->connection->executeStatement($sql);

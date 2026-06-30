@@ -302,7 +302,26 @@ class ConfirmationController extends Controller
 
         $user = $this->userRepo->findOneBy(['anonymizationReminderEmailToken' => $token]);
 
-        if (!$user) {
+        if ($user) {
+            $user->setLastLogin(new \DateTime());
+            $user->setAnonymizationReminderEmailSentAt(null);
+            $this->em->flush();
+
+            $flashBag->add(
+                'success',
+                $this->translator->trans(
+                    'preserve-data-toast-message',
+                    [],
+                    'CapcoAppBundle'
+                )
+            );
+
+            return $response;
+        }
+
+        $participant = $this->participantRepository->findOneBy(['anonymizationReminderEmailToken' => $token]);
+
+        if (!$participant) {
             $flashBag->add(
                 'danger',
                 $this->translator->trans(
@@ -315,8 +334,8 @@ class ConfirmationController extends Controller
             return $response;
         }
 
-        $user->setLastLogin(new \DateTime());
-        $user->setAnonymizationReminderEmailSentAt(null);
+        $participant->setLastContributedAt(new \DateTime());
+        $participant->setAnonymizationReminderEmailSentAt(null);
         $this->em->flush();
 
         $flashBag->add(

@@ -63,6 +63,45 @@ class ParticipantRepository extends EntityRepository
     }
 
     /**
+     * @return array<int, array{id: string, email: string, anonymizationReminderEmailToken: string}>
+     */
+    public function findInactiveParticipantsEmailAndAnonToken(\DatetimeInterface $inactivityLimitDate, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id, p.email, p.anonymizationReminderEmailToken')
+            ->andWhere('p.lastContributedAt IS NOT NULL')
+            ->andWhere('p.lastContributedAt < :inactivityLimitDate')
+            ->andWhere('p.email IS NOT NULL')
+            ->andWhere('p.anonymizationReminderEmailToken IS NOT NULL')
+            ->andWhere('p.anonymizationReminderEmailSentAt IS NULL')
+            ->andWhere('p.confirmationToken IS NULL')
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults($limit)
+            ->setParameter('inactivityLimitDate', $inactivityLimitDate->format('Y-m-d H:i:s'))
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param string[] $participantIds
+     */
+    public function updateAnonymizationReminderEmailSentAt(array $participantIds): void
+    {
+        if ([] === $participantIds) {
+            return;
+        }
+
+        $conn = $this->getEntityManager()->getConnection();
+        $placeholders = array_map(fn ($i) => ":id{$i}", array_keys($participantIds));
+        $params = array_combine($placeholders, $participantIds);
+
+        $sql = 'UPDATE participant SET anonymization_reminder_email_sent_at = NOW() WHERE id IN (' . implode(', ', $placeholders) . ')';
+
+        $conn->executeStatement($sql, $params);
+    }
+
+    /**
      * @throws ORMException
      * @throws OptimisticLockException
      */

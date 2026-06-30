@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Message\MailSingleRecipientMessage;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Twig\SiteImageRuntime;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -32,6 +34,7 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
         private readonly int $anonymizationInactivityDays,
         private readonly int $anonymizationInactivityEmailReminderDays,
         private readonly UserRepository $userRepository,
+        private readonly ParticipantRepository $participantRepository,
         private readonly Environment $twig,
         private readonly RouterInterface $router,
         private readonly LocaleResolver $localeResolver,
@@ -41,6 +44,7 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
         private readonly LoggerInterface $logger,
         private readonly MessageBusInterface $bus,
         private readonly SiteImageRuntime $siteImageRuntime,
+        private readonly EntityManagerInterface $entityManager,
     ) {
         parent::__construct();
     }
@@ -89,9 +93,11 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
 
         $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
         $subject = $this->translator->trans('user-anonymization-email-subject');
+        $templateBase = $this->getTemplateBase();
 
         $count = 0;
         $delayInMs = 0;
+        $nextDelayThreshold = $apiLimitPerHour;
 
         while (true) {
             $inactiveUsers = $this->userRepository->findInactiveUsersEmailAndAnonToken(
@@ -99,8 +105,13 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
                 limit: $batchSize
             );
 
-            if (empty($inactiveUsers)) {
-                $io->info('Emails sent successfully to all inactive users.');
+            $inactiveParticipants = $this->participantRepository->findInactiveParticipantsEmailAndAnonToken(
+                inactivityLimitDate: $inactivityLimitDate,
+                limit: $batchSize
+            );
+
+            if (empty($inactiveUsers) && empty($inactiveParticipants)) {
+                $io->info('Emails sent successfully to all inactive users and participants.');
 
                 return Command::SUCCESS;
             }
@@ -108,9 +119,9 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
             foreach ($inactiveUsers as $user) {
                 $message = new MailSingleRecipientMessage(
                     senderEmail: $senderEmail,
-                    recipientEmail: $user->getEmail(),
+                    recipientEmail: $user['email'],
                     subject: $subject,
-                    htmlContent: $this->getTemplateContent($user->getAnonymizationReminderEmailToken()),
+                    htmlContent: $this->getTemplateContent($user['anonymizationReminderEmailToken'], $templateBase),
                 );
 
                 $this->bus->dispatch($message, [
@@ -118,26 +129,86 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
                 ]);
             }
 
-            $emails = array_map(fn ($user) => $user->getEmail(), $inactiveUsers);
-            $this->updateAnonymizationReminderEmailSentAt($emails);
+            foreach ($inactiveParticipants as $participant) {
+                $message = new MailSingleRecipientMessage(
+                    senderEmail: $senderEmail,
+                    recipientEmail: $participant['email'],
+                    subject: $subject,
+                    htmlContent: $this->getTemplateContent($participant['anonymizationReminderEmailToken'], $templateBase),
+                );
 
-            $count += $batchSize;
-
-            if (0 === $count % $apiLimitPerHour) {
-                $delayInMs += $delayIncrementInMs;
+                $this->bus->dispatch($message, [
+                    new DelayStamp($delayInMs),
+                ]);
             }
+
+            if (!empty($inactiveUsers)) {
+                $userIds = array_map(fn ($user) => $user['id'], $inactiveUsers);
+                $this->updateAnonymizationReminderEmailSentAt($userIds);
+            }
+
+            if (!empty($inactiveParticipants)) {
+                $participantIds = array_map(fn ($participant) => $participant['id'], $inactiveParticipants);
+                $this->updateParticipantAnonymizationReminderEmailSentAt($participantIds);
+            }
+
+            $count += \count($inactiveUsers) + \count($inactiveParticipants);
+
+            while ($count >= $nextDelayThreshold) {
+                $delayInMs += $delayIncrementInMs;
+                $nextDelayThreshold += $apiLimitPerHour;
+            }
+
+            $this->entityManager->clear();
         }
     }
 
     /**
-     * @param string[] $emails
+     * @param string[] $userIds
      */
-    private function updateAnonymizationReminderEmailSentAt(array $emails): void
+    private function updateAnonymizationReminderEmailSentAt(array $userIds): void
     {
-        $this->userRepository->updateAnonymizationReminderEmailSentAt($emails);
+        $this->userRepository->updateAnonymizationReminderEmailSentAt($userIds);
     }
 
-    private function getTemplateContent(string $token): string
+    /**
+     * @param string[] $participantIds
+     */
+    private function updateParticipantAnonymizationReminderEmailSentAt(array $participantIds): void
+    {
+        $this->participantRepository->updateAnonymizationReminderEmailSentAt($participantIds);
+    }
+
+    /**
+     * @param array{
+     *     siteName: string|null,
+     *     logo: string|null,
+     *     baseUrl: string,
+     *     user_locale: string|null,
+     *     day: int
+     * } $templateBase
+     */
+    private function getTemplateContent(string $token, array $templateBase): string
+    {
+        $preserveDataUrl = $this->router->generate('preserve_account_data', [
+            'token' => $token,
+        ], RouterInterface::ABSOLUTE_URL);
+
+        return $this->twig->render('@CapcoMail/anonymizationReminderEmail.html.twig', array_merge($templateBase, [
+            'preserveDataUrl' => $preserveDataUrl,
+        ]));
+    }
+
+    /**
+     * @return array{
+     *     siteName: string|null,
+     *     logo: string|null,
+     *     baseUrl: string,
+     *     user_locale: string|null,
+     *     day: int
+     * }
+     */
+    private function getTemplateBase(): array
     {
         $baseUrl = $this->router->generate(
             'app_homepage',
@@ -145,21 +216,12 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
             RouterInterface::ABSOLUTE_URL
         );
 
-        $preserveDataUrl = $this->router->generate('preserve_account_data', [
-            'token' => $token,
-        ], RouterInterface::ABSOLUTE_URL);
-
-        $logo = $this->siteImageRuntime->getAppLogoUrl();
-
-        $siteName = $this->siteParams->getValue('global.site.fullname');
-
-        return $this->twig->render('@CapcoMail/anonymizationReminderEmail.html.twig', [
-            'siteName' => $siteName,
-            'logo' => $logo,
+        return [
+            'siteName' => $this->siteParams->getValue('global.site.fullname'),
+            'logo' => $this->siteImageRuntime->getAppLogoUrl(),
             'baseUrl' => $baseUrl,
-            'preserveDataUrl' => $preserveDataUrl,
             'user_locale' => $this->translator->getLocale(),
             'day' => $this->anonymizationInactivityEmailReminderDays,
-        ]);
+        ];
     }
 }

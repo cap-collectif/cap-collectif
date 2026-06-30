@@ -190,8 +190,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
         $hasAlreadyParticipatedInThisProject = $this->participantRepository->findWithContributionsByProjectAndParticipant($step->getProject(), $participant);
 
         try {
-            $this->em->flush();
             $participant->setLastContributedAt(new \DateTime());
+            $this->em->flush();
             $this->proposalVotesDataLoader->invalidate($proposal);
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);

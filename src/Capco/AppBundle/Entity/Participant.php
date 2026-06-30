@@ -14,6 +14,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Table(name="participant")
@@ -59,6 +60,21 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
      * @ORM\Column(name="token", type="string", length=255)
      */
     private string $token;
+
+    /**
+     * @ORM\Column(name="anonymization_reminder_email_sent_at", type="datetime", nullable=true)
+     */
+    private ?\DateTime $anonymizationReminderEmailSentAt = null;
+
+    /**
+     * @ORM\Column(name="anonymization_reminder_email_token", type="string", length=255, nullable=true)
+     */
+    private ?string $anonymizationReminderEmailToken = null;
+
+    /**
+     * @ORM\Column(name="anonymized_at", type="datetime", nullable=true)
+     */
+    private ?\Datetime $anonymizedAt = null;
 
     /**
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
@@ -124,11 +140,6 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     private ?\Datetime $lastContributedAt = null;
 
     /**
-     * @ORM\Column(name="anonymized_at", type="datetime", nullable=true)
-     */
-    private ?\DateTime $anonymizedAt = null;
-
-    /**
      * @ORM\OneToMany (targetEntity=EmailingCampaignUser::class, mappedBy="participant")
      */
     private Collection $emailingCampaignUsers;
@@ -139,6 +150,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         $this->votes = new ArrayCollection();
         $this->participantPhoneVerificationSms = new ArrayCollection();
         $this->mediatorParticipantSteps = new ArrayCollection();
+        $this->anonymizationReminderEmailToken = Uuid::v4()->toRfc4122();
     }
 
     public function __toString(): string
@@ -205,6 +217,30 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getAnonymizationReminderEmailSentAt(): ?\DateTime
+    {
+        return $this->anonymizationReminderEmailSentAt;
+    }
+
+    public function setAnonymizationReminderEmailSentAt(?\DateTime $anonymizationReminderEmailSentAt): self
+    {
+        $this->anonymizationReminderEmailSentAt = $anonymizationReminderEmailSentAt;
+
+        return $this;
+    }
+
+    public function getAnonymizationReminderEmailToken(): ?string
+    {
+        return $this->anonymizationReminderEmailToken;
+    }
+
+    public function setAnonymizationReminderEmailToken(?string $anonymizationReminderEmailToken): self
+    {
+        $this->anonymizationReminderEmailToken = $anonymizationReminderEmailToken;
 
         return $this;
     }
