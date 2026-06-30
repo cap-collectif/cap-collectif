@@ -29,7 +29,6 @@ use Capco\AppBundle\Repository\PostCommentRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
@@ -301,7 +300,6 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         private readonly PostCommentRepository $postCommentRepository,
         private readonly ProposalNewsCommentNormalizer $proposalNewsCommentNormalizer,
         private readonly ProposalNewsCommentVoteNormalizer $proposalNewsCommentVoteNormalizer,
-        private readonly ProposalFormRepository $proposalFormRepository,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly ParticipantNormalizer $participantNormalizer,
         private readonly AbstractStepRepository $abstractStepRepository,
@@ -382,6 +380,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 $step instanceof CollectStep => $this->proposalCollectVoteRepository->getUserStatsForStep($step),
                 default => self::EMPTY_USER_STATS,
             };
+            $questionsResponses = $step->getProposalForm()?->getRealQuestions()?->toArray() ?? [];
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
@@ -393,7 +392,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                     context: [
                         BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL,
                         'step' => $step,
-                        'questionsResponses' => $this->proposalFormRepository->getQuestionsResponsesByProposalsIds([$proposal->getId()]),
+                        'questionsResponses' => $questionsResponses,
                     ]
                 );
 
