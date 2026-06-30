@@ -16,7 +16,7 @@ module.exports = {
     },
     ecmaVersion: 2018,
   },
-  plugins: ['import', 'react', 'react-hooks', 'jest', 'relay', 'graphql', 'formatjs', '@typescript-eslint'],
+  plugins: ['import', 'react', 'react-hooks', 'jest', 'relay', '@graphql-eslint', 'formatjs', '@typescript-eslint'],
   globals: {
     $: true,
     FontFace: true,
@@ -86,28 +86,6 @@ module.exports = {
     'prefer-promise-reject-errors': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
-    'graphql/named-operations': [
-      'error',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-      },
-    ],
-    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6094
-    'graphql/template-strings': [
-      'warn',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-      },
-    ],
-    'graphql/no-deprecated-fields': [
-      'warn',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-      },
-    ],
     'import/no-cycle': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
@@ -166,4 +144,36 @@ module.exports = {
     // No large Snapshots
     'jest/no-large-snapshots': 'warn',
   },
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      processor: '@graphql-eslint/graphql',
+    },
+    {
+      files: ['*.graphql', '**/*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      rules: {
+        '@graphql-eslint/no-anonymous-operations': 'error',
+        '@graphql-eslint/executable-definitions': 'warn',
+        '@graphql-eslint/fields-on-correct-type': 'warn',
+        '@graphql-eslint/fragments-on-composite-type': 'warn',
+        '@graphql-eslint/known-argument-names': 'warn',
+        '@graphql-eslint/known-type-names': 'warn',
+        '@graphql-eslint/no-deprecated': 'warn',
+        '@graphql-eslint/no-duplicate-fields': 'warn',
+        '@graphql-eslint/no-fragment-cycles': 'warn',
+        '@graphql-eslint/one-field-subscriptions': 'warn',
+        '@graphql-eslint/overlapping-fields-can-be-merged': 'warn',
+        '@graphql-eslint/possible-fragment-spread': 'warn',
+        '@graphql-eslint/unique-argument-names': 'warn',
+        '@graphql-eslint/unique-directive-names-per-location': 'warn',
+        '@graphql-eslint/unique-input-field-names': 'warn',
+        '@graphql-eslint/unique-variable-names': 'warn',
+        '@graphql-eslint/value-literals-of-correct-type': 'warn',
+        '@graphql-eslint/variables-are-input-types': 'warn',
+        '@graphql-eslint/variables-in-allowed-position': 'warn',
+      },
+    },
+  ],
 }

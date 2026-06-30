@@ -17,7 +17,7 @@
     "author": "Cap-Collectif",
     "dependencies": {
         "cross-env": "^7.0.3",
-        "cypress": "^12.7.0",
+        "cypress": "^13.17.0",
         "eslint": "^7.22.0",
         "fs-extra": "^9.1.0"
     },

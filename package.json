@@ -370,6 +370,7 @@
     "devDependencies": {
         "@babel/preset-typescript": "^7.23.0",
         "@babel/runtime-corejs3": "^7.28.4",
+        "@graphql-eslint/eslint-plugin": "^3.20.1",
         "@prettier/plugin-php": "^0.16.0",
         "@types/body-scroll-lock": "^3.1.0",
         "@types/geojson": "^7946.0.10",
@@ -389,7 +390,6 @@
         "eslint-import-resolver-alias": "^1.1.2",
         "eslint-import-resolver-typescript": "^3.6.1",
         "eslint-plugin-formatjs": "^1.5.0",
-        "eslint-plugin-graphql": "^4.0.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jest": "^22.9.0",
         "eslint-plugin-prettier": "^3.3.1",

@@ -1,4 +1,4 @@
-import { AdminGroupsPage } from 'cypress/pages/index'
+import { AdminGroupsPage } from '../../../pages/index'
 
 describe("Update a group's info and members", () => {
   beforeEach(() => {

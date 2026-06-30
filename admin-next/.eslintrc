@@ -13,6 +13,10 @@
   },
   "overrides": [
     {
+      "files": ["*.graphql", "**/*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin"
+    },
+    {
       "files": ["src/app/**/*.{ts,tsx}"],
       "excludedFiles": ["src/app/server/ssr-graphql-with-locale.ts"],
       "rules": {

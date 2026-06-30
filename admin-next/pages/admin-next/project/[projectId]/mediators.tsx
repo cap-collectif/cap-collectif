@@ -1,4 +1,3 @@
-/* eslint-disable graphql/template-strings */
 /* eslint-disable relay/unused-fields */
 // We need __id in order to update the connection on add and delete mutations
 import React, { useEffect, useState } from 'react'

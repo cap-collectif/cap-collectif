@@ -1,4 +1,4 @@
-import { EventFormPage } from 'cypress/pages/index'
+import { EventFormPage } from '../../../pages/index'
 
 const approvedEventId = 'RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ='
 const awaitingEventId = 'RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc='

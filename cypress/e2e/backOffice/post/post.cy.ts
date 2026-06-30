@@ -1,4 +1,4 @@
-import { PostFormPage } from 'cypress/pages/index'
+import { PostFormPage } from '../../../pages/index'
 
 export const englishBody = 'I love cats!'
 

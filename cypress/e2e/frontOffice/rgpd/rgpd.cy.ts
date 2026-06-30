@@ -1,4 +1,4 @@
-import { Base } from 'cypress/pages/index'
+import { Base } from '../../../pages/index'
 
 describe('rgpd', () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { AdminGroupsPage } from 'cypress/pages/index'
+import { AdminGroupsPage } from '../../../pages/index'
 
 describe('Group deletion from the users groups page', () => {
   beforeEach(() => {

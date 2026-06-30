@@ -1,4 +1,4 @@
-import { AdminGroupsPage } from 'cypress/pages/index'
+import { AdminGroupsPage } from '../../../pages/index'
 
 describe('Create a new group and add members to it', () => {
   beforeEach(() => {
