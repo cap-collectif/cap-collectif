@@ -10,7 +10,10 @@
 # Recalculate users counters from scratch at 04:00.
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:compute:users-counters --force --env=prod
 
-# Export jobs removed; exports are generated on demand.
+# Export jobs removed; exports are generated on demand, except analysis exports
+# still downloaded from pre-generated files in the legacy project analysis admin.
+33 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --env=prod --quiet
+39 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --only-decisions --env=prod --quiet
 
 # Process analysis at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:process_proposals --env=prod --quiet
