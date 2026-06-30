@@ -1,15 +1,13 @@
+import { useDisclosure } from '@liinkiing/react-hooks'
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import { useDisclosure } from '@liinkiing/react-hooks'
-import Menu from '../DesignSystem/Menu/Menu'
+import type { ChartsRef } from '~/components/Questionnaire/QuestionnaireAdminResults'
+import QuestionnaireAdminResultsPdfModal from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal'
 import Button from '~ds/Button/Button'
-import { ICON_NAME } from '~ds/Icon/Icon'
-import Text from '~ui/Primitives/Text'
+// @ts-ignore
 import type { QuestionnaireAdminResultsExportMenu_questionnaire } from '~relay/QuestionnaireAdminResultsExportMenu_questionnaire.graphql'
 import type { QuestionTypeValue } from '~relay/QuestionnaireAdminResults_questionnaire.graphql'
-import QuestionnaireAdminResultsPdfModal from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal'
-import type { ChartsRef } from '~/components/Questionnaire/QuestionnaireAdminResults'
 export type Translations = {
   readonly attendee: string
   readonly particpationAllowed: string
@@ -56,30 +54,9 @@ const QuestionnaireAdminResultsExportMenu = ({ questionnaire, logoUrl, chartsRef
   const uniqueChartsRef = [...new Map(chartsRef.filter(item => item.ref).map(item => [item.id, item])).values()]
   return (
     <>
-      <Menu>
-        <Menu.Button>
-          <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variant="primary" variantSize="small">
-            <FormattedMessage id="global.export" />
-          </Button>
-        </Menu.Button>
-        <Menu.List>
-          <Menu.ListItem>
-            <Text as="a" href={questionnaire.exportResultsUrl} width="100%" height="100%">
-              <FormattedMessage id="spreadsheet-csv" />
-            </Text>
-          </Menu.ListItem>
-          <Menu.ListItem
-            onClick={() => {
-              onOpen()
-            }}
-            closeOnSelect={false}
-          >
-            <Text width="100%" height="100%">
-              <FormattedMessage id="pdf-file" />
-            </Text>
-          </Menu.ListItem>
-        </Menu.List>
-      </Menu>
+      <Button variant="primary" variantSize="small" onClick={onOpen} height="fit-content">
+        <FormattedMessage id="global.export-as-pdf" />
+      </Button>
       {isOpen && (
         <QuestionnaireAdminResultsPdfModal
           onClose={onClose}

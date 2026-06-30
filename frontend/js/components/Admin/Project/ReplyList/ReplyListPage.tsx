@@ -1,14 +1,14 @@
+import { Button, CapUIIcon, Flex } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { useHistory } from 'react-router-dom'
-import ReplyList from './ReplyList'
 import type { ReplyListPage_questionnaireStep$key } from '~relay/ReplyListPage_questionnaireStep.graphql'
-import Input from '~ui/Form/Input/Input'
-import Loader from '~ui/FeedbacksIndicators/Loader'
-import ReplyListPlaceholder from './ReplyListPlaceholder'
 import { ReplyListPage_viewer$key } from '~relay/ReplyListPage_viewer.graphql'
-import { Button, CapUIIcon, Flex } from '@cap-collectif/ui'
+import Loader from '~ui/FeedbacksIndicators/Loader'
+import Input from '~ui/Form/Input/Input'
+import ReplyList from './ReplyList'
+import ReplyListPlaceholder from './ReplyListPlaceholder'
 type Props = {
   readonly questionnaireStep: ReplyListPage_questionnaireStep$key
   readonly viewer: ReplyListPage_viewer$key
@@ -82,25 +82,13 @@ const ReplyListPage = ({
             type="text"
             name="term"
             id="search-questionnaire"
+            // @ts-ignore legacy typing which won't be fixed
             onChange={(e: React.SyntheticEvent<HTMLInputElement>) => setTerm(e.target.value)}
             value={term}
             placeholder={`${intl.formatMessage({
               id: 'search.by.author',
             })}...`}
           />
-          <Button
-            variant="secondary"
-            variantSize="small"
-            onClick={() => {
-              if (step?.questionnaire?.exportResultsUrl) {
-                window.location.href = step?.questionnaire?.exportResultsUrl
-              }
-            }}
-          >
-            {intl.formatMessage({
-              id: 'global.export',
-            })}
-          </Button>
         </Flex>
         <React.Suspense fallback={<ReplyListPlaceholder />}>
           {step?.questionnaire && (
