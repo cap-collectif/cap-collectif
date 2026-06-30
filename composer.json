@@ -80,7 +80,6 @@
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "predis/predis": "^1.0",
         "qandidate/toggle-bundle": "^1.5",
-        "redirectionio/proxy-symfony": "^0.3",
         "ruflin/elastica": "^7.3",
         "sendinblue/api-v3-sdk": "^7.4",
         "sensio/framework-extra-bundle": "^6.2",

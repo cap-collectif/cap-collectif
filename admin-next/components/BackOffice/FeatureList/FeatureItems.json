@@ -261,11 +261,6 @@
                         "description": "",
                         "onlySuperAdmin": false
                     },
-                    "http_redirects": {
-                        "title": "capco.module.http_redirects",
-                        "description": "",
-                        "onlySuperAdmin": true
-                    },
                     "api_sendinblue": {
                         "title": "capco.module.api_sendinblue",
                         "description": "",

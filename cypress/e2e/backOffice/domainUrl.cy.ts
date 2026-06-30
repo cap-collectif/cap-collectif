@@ -3,7 +3,6 @@ describe('Domain URL back office', () => {
 
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'http_redirects')
     cy.task(
       'run:sql',
       'DELETE FROM http_redirect WHERE source_url IN ("/projects", "/manual-redirection-check", "/manual-short-check")',

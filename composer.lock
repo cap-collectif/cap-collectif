@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5914ae885d7ff46a1193451157bc6092",
+    "content-hash": "bb28b9e9759450e724c36b8da29fcc29",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -10074,128 +10074,6 @@
                 }
             ],
             "time": "2023-11-16T16:16:50+00:00"
-        },
-        {
-            "name": "redirectionio/proxy-sdk",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/redirectionio/proxy-sdk-php.git",
-                "reference": "64c278f1da4356c6d5425f254b79cee0b848460b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/redirectionio/proxy-sdk-php/zipball/64c278f1da4356c6d5425f254b79cee0b848460b",
-                "reference": "64c278f1da4356c6d5425f254b79cee0b848460b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "psr/log": "^1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.10",
-                "monolog/monolog": "^1.24",
-                "symfony/phpunit-bridge": "^4.1",
-                "symfony/process": "^3.4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RedirectionIO\\Client\\Sdk\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grégoire Pineau",
-                    "email": "lyrixx@lyrixx.info"
-                },
-                {
-                    "name": "Quentin Brunet",
-                    "email": "hello@quentinbrunet.com"
-                },
-                {
-                    "name": "redirection.io",
-                    "email": "support@redirection.io"
-                }
-            ],
-            "description": "PHP common code for redirection.io proxy",
-            "support": {
-                "issues": "https://github.com/redirectionio/proxy-sdk-php/issues",
-                "source": "https://github.com/redirectionio/proxy-sdk-php/tree/public/make-persist-configurable"
-            },
-            "abandoned": true,
-            "time": "2019-11-07T07:38:43+00:00"
-        },
-        {
-            "name": "redirectionio/proxy-symfony",
-            "version": "v0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/redirectionio/proxy-symfony.git",
-                "reference": "424ec3168233417da24a85f367e898f10af5156e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/redirectionio/proxy-symfony/zipball/424ec3168233417da24a85f367e898f10af5156e",
-                "reference": "424ec3168233417da24a85f367e898f10af5156e",
-                "shasum": ""
-            },
-            "require": {
-                "redirectionio/proxy-sdk": "0.4.*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "symfony/http-foundation": "^3.4",
-                "symfony/http-kernel": "^3.4",
-                "symfony/phpunit-bridge": "^4.1",
-                "symfony/process": "^3.4"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RedirectionIO\\Client\\ProxySymfony\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grégoire Pineau",
-                    "email": "lyrixx@lyrixx.info"
-                },
-                {
-                    "name": "Quentin Brunet",
-                    "email": "hello@quentinbrunet.com"
-                },
-                {
-                    "name": "redirection.io",
-                    "email": "support@redirection.io"
-                }
-            ],
-            "description": "RedirectionIO Proxy for Symfony",
-            "support": {
-                "issues": "https://github.com/redirectionio/proxy-symfony/issues",
-                "source": "https://github.com/redirectionio/proxy-symfony/tree/v0.3.1"
-            },
-            "abandoned": true,
-            "time": "2020-11-16T13:51:40+00:00"
         },
         {
             "name": "robrichards/xmlseclibs",

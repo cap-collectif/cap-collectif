@@ -1,6 +1,4 @@
 parameters:
-    agent_tcp: 'tcp://127.0.0.1:10301'
-    agent_unix: 'unix:///var/run/redirectionio_agent.sock'
     traits:
         selflinkable:
             interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
@@ -92,7 +90,6 @@ parameters:
     default_oauth_access_user_info_url: '%env(SYMFONY_DEFAULT_OAUTH_USER_INFO_URL)%'
     default_oauth_logout_url: '%env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL)%'
     default_oauth_profile_url: '%env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL)%'
-    default_redirectionio_project_id: '%env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID)%'
     sendinblue_api_key: '%env(SYMFONY_SENDINBLUE_API_KEY)%'
     sendinblue_nl_list_id: '%env(SYMFONY_SENDINBLUE_NL_LIST_ID)%'
     sendinblue_secret: '%env(SYMFONY_SENDINBLUE_SECRET)%'
@@ -208,7 +205,6 @@ parameters:
     env(SYMFONY_DEFAULT_OAUTH_USER_INFO_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_DEFAULT_OAUTH_LOGOUT_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_DEFAULT_OAUTH_PROFILE_URL): 'INSERT_A_REAL_SECRET'
-    env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_OPENID_TEST_USERNAME): 'test'
     env(SYMFONY_OPENID_TEST_PASSWORD): 'test'
     # Other

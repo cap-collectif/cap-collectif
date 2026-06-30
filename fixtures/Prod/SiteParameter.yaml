@@ -418,12 +418,6 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 0
         type: 0
 
-    SiteParameterRedirectionIOProjectId:
-        keyname: redirectionio.project.id
-        category: pages.redirection
-        value: ''
-        position: 0
-        type: 0
     SiteParameterAdminHotJarId:
         keyname: admin.analytics.hotjarid
         category: settings.global

@@ -186,7 +186,6 @@ COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabb
 COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
 COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
 COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
-COPY infrastructure/services/remote/redirectionio/run          /etc/service/redirectionio/run
 
 # Configuration
 COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
@@ -201,10 +200,6 @@ COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/
 COPY infrastructure/services/remote/rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
-COPY infrastructure/services/remote/redirectionio/agent.yml        /etc/redirectionio/agent.yml
-
-# Cache storage for rules
-VOLUME /var/lib/redirectionio
 
 # Binaries / Scripts
 COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin                /usr/local/bin/rabbitmqadmin
@@ -264,11 +259,6 @@ RUN set -ex \
   && yarn --version
 
 RUN yarn global add pm2
-
-# RedirectionIO
-WORKDIR /usr/local/bin/
-RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
-RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
 RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates

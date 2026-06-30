@@ -7,7 +7,6 @@ use Capco\AppBundle\Enum\HttpRedirectType;
 use Capco\AppBundle\HttpRedirect\HttpRedirectRequestListener;
 use Capco\AppBundle\HttpRedirect\HttpRedirectResolver;
 use Capco\AppBundle\HttpRedirect\ResolvedHttpRedirection;
-use Capco\AppBundle\Toggle\Manager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,30 +19,19 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class HttpRedirectRequestListenerTest extends TestCase
 {
-    private MockObject & Manager $toggleManager;
     private MockObject & HttpRedirectResolver $httpRedirectResolver;
     private HttpRedirectRequestListener $listener;
 
     protected function setUp(): void
     {
-        $this->toggleManager = $this->createMock(Manager::class);
         $this->httpRedirectResolver = $this->createMock(HttpRedirectResolver::class);
-        $this->listener = new HttpRedirectRequestListener(
-            $this->toggleManager,
-            $this->httpRedirectResolver
-        );
+        $this->listener = new HttpRedirectRequestListener($this->httpRedirectResolver);
     }
 
-    public function testItSkipsResolutionWhenFeatureFlagIsEnabled(): void
+    public function testItSkipsResolutionForSubRequests(): void
     {
-        $event = $this->createRequestEvent(Request::create('/projects'));
+        $event = $this->createRequestEvent(Request::create('/projects'), HttpKernelInterface::SUB_REQUEST);
 
-        $this->toggleManager
-            ->expects(self::once())
-            ->method('isActive')
-            ->with('http_redirects')
-            ->willReturn(true)
-        ;
         $this->httpRedirectResolver->expects(self::never())->method('resolve');
 
         $this->listener->onKernelRequest($event);
@@ -56,12 +44,6 @@ class HttpRedirectRequestListenerTest extends TestCase
         $request = Request::create('/projects');
         $event = $this->createRequestEvent($request);
 
-        $this->toggleManager
-            ->expects(self::once())
-            ->method('isActive')
-            ->with('http_redirects')
-            ->willReturn(false)
-        ;
         $this->httpRedirectResolver
             ->expects(self::once())
             ->method('resolve')
@@ -82,12 +64,12 @@ class HttpRedirectRequestListenerTest extends TestCase
         self::assertSame('https://capco.dev/test', $response->headers->get('Location'));
     }
 
-    private function createRequestEvent(Request $request): RequestEvent
+    private function createRequestEvent(Request $request, int $requestType = HttpKernelInterface::MAIN_REQUEST): RequestEvent
     {
         return new RequestEvent(
             $this->createMock(HttpKernelInterface::class),
             $request,
-            HttpKernelInterface::MAIN_REQUEST
+            $requestType
         );
     }
 }

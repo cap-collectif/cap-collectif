@@ -64,7 +64,6 @@ class Manager
     final public const login_openid = 'login_openid';
     final public const versions = 'versions';
     final public const multilangue = 'multilangue';
-    final public const http_redirects = 'http_redirects';
     final public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     final public const phone_confirmation = 'phone_confirmation';
     final public const reporting = 'reporting';
@@ -201,7 +200,6 @@ class Manager
         self::login_openid,
         self::versions,
         self::multilangue,
-        self::http_redirects,
         self::report_browers_errors_to_sentry,
         self::phone_confirmation,
         self::reporting,

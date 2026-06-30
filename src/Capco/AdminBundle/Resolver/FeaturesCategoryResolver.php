@@ -56,7 +56,6 @@ class FeaturesCategoryResolver
                     Manager::login_cas,
                     Manager::login_franceconnect,
                     Manager::report_browers_errors_to_sentry,
-                    Manager::http_redirects,
                     Manager::emailing,
                     Manager::emailing_parameters,
                     Manager::mailjet_sandbox,

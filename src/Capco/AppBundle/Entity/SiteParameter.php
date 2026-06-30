@@ -46,7 +46,6 @@ class SiteParameter implements EntityInterface, TranslatableInterface, \Stringab
         'global.timezone',
         'global.site.embed_js',
         'events.map.country',
-        'redirectionio.project.id',
     ];
 
     final public const TYPE_SIMPLE_TEXT = 0;

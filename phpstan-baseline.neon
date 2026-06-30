@@ -11231,11 +11231,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Site/OpinionController.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\PageController\\:\\:showAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/PageController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\ProjectController\\:\\:downloadProjectAnalysisAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/ProjectController.php
@@ -17412,7 +17407,7 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:getResponsesArray\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 2
+			count: 1
 			path: src/Capco/AppBundle/Entity/Reply.php
 
 		-
@@ -25251,11 +25246,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireStepMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateRedirectIOProjectIdMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateRedirectIOProjectIdMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateRegistrationFormCommunicationMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateRegistrationFormCommunicationMutation.php
@@ -26267,16 +26257,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:isAdminOrAuthorized\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectContributorResolver\\:\\:preventNullableViewer\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectContributorResolver.php
 
@@ -32274,186 +32254,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Publishable\\\\DoctrineListener\\:\\:setPublishedStatus\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Publishable/DoctrineListener.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:__construct\\(\\) has parameter \\$debug with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:__construct\\(\\) has parameter \\$timeout with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:box\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:box\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:box\\(\\) has parameter \\$defaultReturnValue with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:box\\(\\) has parameter \\$method with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:disconnect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:disconnect\\(\\) has parameter \\$connection with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:disconnect\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doConnect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doConnect\\(\\) has parameter \\$options with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doConnect\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doGet\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doGet\\(\\) has parameter \\$connection with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doGet\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doRequest\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doSend\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doSend\\(\\) has parameter \\$connection with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doSend\\(\\) has parameter \\$content with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:doSend\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:getConnection\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has parameter \\$file with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has parameter \\$line with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has parameter \\$message with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has parameter \\$type with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:request\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{\\$this\\(Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\), mixed\\} given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function stream_set_blocking expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Parameter \\#2 \\$enable of function stream_set_blocking expects bool, int given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:\\$connections has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:\\$currentConnection has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:\\$currentConnectionName has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Static method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\ProjectKeyDataloader\\:\\:\\$projectKey has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/ProjectKeyDataloader.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between false and string will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractLogicJumpConditionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"

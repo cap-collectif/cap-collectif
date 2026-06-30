@@ -254,11 +254,6 @@ RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
 
 
-#RedirectionIO
-WORKDIR /usr/local/bin/
-RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
-RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
-
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
 RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates
 
@@ -272,7 +267,6 @@ COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 # COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
-COPY redirectionio/run          /etc/service/redirectionio/run
 COPY nodejs/run                 /etc/service/nodejs/run
 
 # Configuration
@@ -292,10 +286,7 @@ COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY supervisord/                   /etc/supervisord
-COPY redirectionio/agent.yml        /etc/redirectionio/agent.yml
 
-# Cache storage for rules
-VOLUME /var/lib/redirectionio
 # Volume for log / cache ...
 VOLUME /var/www/var/cache
 VOLUME /var/www/var/logs

@@ -989,13 +989,6 @@ InternalMutation:
                     payloadType: ConfigureAnalysisPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ConfigureAnalysisMutation", args, getUser())'
 
-            updateRedirectIOKey:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: InternalUpdateRedirectIOProjectIdInput
-                    payloadType: InternalUpdateRedirectIOProjectIdPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRedirectIOProjectIdMutation", args)'
             createHttpRedirect:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

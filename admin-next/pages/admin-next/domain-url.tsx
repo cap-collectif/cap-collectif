@@ -4,14 +4,11 @@ import Layout from '@components/BackOffice/Layout/Layout'
 import { Suspense } from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import CustomRedirection from '@components/BackOffice/Redirection/CustomRedirection'
-import RedirectionIOLegacy from '@components/BackOffice/Redirection/RedirectionIOLegacy'
 import Domain from '@components/BackOffice/Domain/Domain'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const DomainUrl: FC = () => {
   const intl = useIntl()
-  const hasHttpRedirects = useFeatureFlag('http_redirects')
 
   return (
     <Layout navTitle={intl.formatMessage({ id: 'domain.and.url' })}>
@@ -23,7 +20,7 @@ const DomainUrl: FC = () => {
         }
       >
         <Domain />
-        {hasHttpRedirects ? <RedirectionIOLegacy /> : <CustomRedirection />}
+        <CustomRedirection />
       </Suspense>
     </Layout>
   )

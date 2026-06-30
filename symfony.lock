@@ -318,18 +318,6 @@
             "config/packages/qandidate_toggle.yaml"
         ]
     },
-    "redirectionio/proxy-symfony": {
-        "version": "0.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.2",
-            "ref": "9bcaef9a03d6f49a93b342cd87045688a04b7316"
-        },
-        "files": [
-            "config/packages/redirectionio.yaml"
-        ]
-    },
     "sensio/framework-extra-bundle": {
         "version": "6.2",
         "recipe": {

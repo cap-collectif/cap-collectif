@@ -75,7 +75,6 @@ export const features: FeatureFlags = {
   organizations: false,
   import_proposals: false,
   analytics_page: false,
-  http_redirects: false,
   idf_project_header: false,
   project_admin: false,
   noindex_on_profiles: false,

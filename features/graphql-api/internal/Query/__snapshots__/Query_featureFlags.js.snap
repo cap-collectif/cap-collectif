@@ -160,9 +160,6 @@ Object {
       "type": "multilangue",
     },
     Object {
-      "type": "http_redirects",
-    },
-    Object {
       "type": "report_browers_errors_to_sentry",
     },
     Object {

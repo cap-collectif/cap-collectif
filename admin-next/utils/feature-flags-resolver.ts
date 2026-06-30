@@ -53,7 +53,6 @@ export const defaultFeatureFlags: FeatureFlags = {
   proposal_revisions: false,
   import_proposals: false,
   analytics_page: false,
-  http_redirects: false,
   idf_project_header: false,
   project_admin: false,
   developer_documentation: false,

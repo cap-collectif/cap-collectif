@@ -7339,7 +7339,6 @@ enum FeatureFlagType {
   external_project
   sentry_log
   multilangue
-  http_redirects
   report_browers_errors_to_sentry
   login_saml
   login_cas
@@ -9453,7 +9452,6 @@ type Mutation {
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
   assignDecisionMakerToProposals(input: AssignDecisionMakerToProposalsInput!): AssignDecisionMakerToProposalsPayload
   configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
-  updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
   createHttpRedirect(input: CreateHttpRedirectInput!): CreateHttpRedirectPayload
   updateHttpRedirect(input: UpdateHttpRedirectInput!): UpdateHttpRedirectPayload
   deleteHttpRedirect(input: DeleteHttpRedirectInput!): DeleteHttpRedirectPayload
@@ -20979,18 +20977,6 @@ input UpdateQuestionnaireStepInput {
 type UpdateQuestionnaireStepPayload {
   """The updated step."""
   questionnaireStep: QuestionnaireStep!
-  clientMutationId: String
-}
-
-input UpdateRedirectIOProjectIdInput {
-  """The project ID used for the project."""
-  projectId: ID!
-  clientMutationId: String
-}
-
-type UpdateRedirectIOProjectIdPayload {
-  """The saved project key."""
-  projectId: String
   clientMutationId: String
 }
 

@@ -98,8 +98,6 @@ InternalFeatureFlagType:
                 value: !php/const Capco\AppBundle\Toggle\Manager::sentry_log
             multilangue:
                 value: !php/const Capco\AppBundle\Toggle\Manager::multilangue
-            http_redirects:
-                value: !php/const Capco\AppBundle\Toggle\Manager::http_redirects
             report_browers_errors_to_sentry:
                 value: !php/const Capco\AppBundle\Toggle\Manager::report_browers_errors_to_sentry
             login_saml:

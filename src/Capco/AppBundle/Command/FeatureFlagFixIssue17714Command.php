@@ -37,7 +37,6 @@ class FeatureFlagFixIssue17714Command extends Command
             // PERSONNALISATION
             // Affichage
             $this->featureFlagManager->activate(Manager::display_pictures_in_event_list); // Illustrations vignettes évènements
-            $this->featureFlagManager->activate(Manager::http_redirects); // URL personalisée
 
             // Contenus
             $this->featureFlagManager->activate(Manager::blog); // Actualités

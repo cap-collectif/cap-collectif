@@ -294,10 +294,6 @@ services:
             $captchetatClientId: '%captchetat_client_id%'
             $captchetatApiUrl: '%captchetat_api_url%'
 
-    Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
-        autowire: true
-        class: 'Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
-
     Capco\AppBundle\Cache\SameRequestCache: ~
 
     capco.http_redirect.cache:
@@ -318,22 +314,6 @@ services:
     Capco\AppBundle\HttpRedirect\HttpRedirectCacheInvalidator:
         arguments:
             $httpRedirectCache: '@capco.http_redirect.cache'
-
-    Capco\AppBundle\RedirectionIO\RequestResponseListener:
-        decorates: 'RedirectionIO\Client\ProxySymfony\EventListener\RequestResponseListener'
-        arguments:
-            - '@Capco\AppBundle\Toggle\Manager'
-            - '@Capco\AppBundle\RedirectionIO\Client'
-
-    Capco\AppBundle\RedirectionIO\Client:
-        decorates: 'RedirectionIO\Client\Sdk\Client'
-        arguments:
-            - '@Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
-            - '@logger'
-            - '@Capco\AppBundle\Toggle\Manager'
-            - 20000
-            - '%agent_tcp%'
-            - '%agent_unix%'
 
     Capco\AppBundle\Manager\AnalysisConfigurationManager: ~
 

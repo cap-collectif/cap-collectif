@@ -1,9 +1,0 @@
-InternalUpdateRedirectIOProjectIdPayload:
-    type: relay-mutation-payload
-    config:
-        name: UpdateRedirectIOProjectIdPayload
-        description: 'The payload of the UpdateRedirectIOProjectId'
-        fields:
-            projectId:
-                type: 'String'
-                description: 'The saved project key.'
