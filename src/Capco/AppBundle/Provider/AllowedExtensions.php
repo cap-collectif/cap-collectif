@@ -4,11 +4,8 @@ namespace Capco\AppBundle\Provider;
 
 interface AllowedExtensions
 {
-    public const ALLOWED_EXTENSIONS_IMAGE = ['png', 'svg', 'webp', 'gif', 'jpeg', 'jpg', 'jfif'];
-
     public const ALLOWED_MIMETYPES_IMAGE = [
         'image/png', // .png
-        'image/svg+xml', // .svg
         'image/gif', // .gif
         'image/jpeg', // .jpeg .jpg
         'image/webp', // .webp
@@ -35,5 +32,19 @@ interface AllowedExtensions
         'application/vnd.oasis.opendocument.text', // .odt
         'application/vnd.oasis.opendocument.presentation', // .odp
         'application/vnd.oasis.opendocument.spreadsheet', // .ods
+    ];
+
+    public const ALLOWED_MIMETYPES_WITH_ARCHIVES = [
+        ...self::ALLOWED_MIMETYPES,
+        'application/x-zip-compressed',
+        'application/x-tar',
+        'application/x-7z-compressed',
+        'application/x-7z',
+        'application/x-rar-compressed',
+        'application/x-rar',
+        'application/x-bzip',
+        'application/x-bzip2',
+        'application/gzip',
+        'application/x-gzip',
     ];
 }

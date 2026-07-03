@@ -36,4 +36,27 @@ class MediaManagerTest extends TestCase
 
         yield [5000000000000, '4.5 To'];
     }
+
+    public function testAssertMimeTypeIsAllowedRejectsSvgMimeType(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('INVALID_FILE_TYPE');
+
+        MediaManager::assertMimeTypeIsAllowed('image/svg+xml');
+    }
+
+    public function testAssertMimeTypeIsAllowedRejectsUnknownMimeType(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('INVALID_FILE_TYPE');
+
+        MediaManager::assertMimeTypeIsAllowed('application/x-unknown');
+    }
+
+    public function testAssertMimeTypeIsAllowedAcceptsAllowedMimeType(): void
+    {
+        MediaManager::assertMimeTypeIsAllowed('image/png');
+
+        self::addToAssertionCount(1);
+    }
 }

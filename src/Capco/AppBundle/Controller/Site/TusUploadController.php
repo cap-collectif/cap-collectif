@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\AppBundle\Validator\Constraints\MaxFolderSize;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -48,6 +50,13 @@ class TusUploadController extends AbstractController
 
         $server->event()->addListener(UploadCreated::NAME, function (TusEvent $event) use ($validator, $logger) {
             $file = $event->getFile();
+            $metadata = $file->details()['metadata'] ?? [];
+
+            try {
+                MediaManager::assertMimeTypeIsAllowed($metadata['filetype'] ?? null, AllowedExtensions::ALLOWED_MIMETYPES_WITH_ARCHIVES);
+            } catch (\RuntimeException $exception) {
+                throw new BadRequestHttpException($exception->getMessage(), $exception);
+            }
 
             $violations = $validator->validate($file, [
                 new MaxFolderSize(),
@@ -73,6 +82,15 @@ class TusUploadController extends AbstractController
             $file = $event->getFile();
             $path = $file->getFilePath();
             $name = $file->getName();
+            $mimeType = is_file($path) ? mime_content_type($path) : null;
+
+            try {
+                MediaManager::assertMimeTypeIsAllowed(false !== $mimeType ? $mimeType : null, AllowedExtensions::ALLOWED_MIMETYPES_WITH_ARCHIVES);
+            } catch (\RuntimeException $exception) {
+                $filesystem->remove($path);
+
+                throw new BadRequestHttpException($exception->getMessage(), $exception);
+            }
 
             $media = $mediaManager->createImageFromPath(path: $path, mediaName: $name, createFile: false);
             $em->persist($media);

@@ -221,7 +221,7 @@ const Shield: FC = () => {
                   type="uploader"
                   name="logo"
                   control={control}
-                  format=".jpg,.jpeg,.png,.svg"
+                  format=".jpg,.jpeg,.png"
                   maxSize={204800}
                   size={UPLOADER_SIZE.MD}
                   uploadURI={UPLOAD_PATH}

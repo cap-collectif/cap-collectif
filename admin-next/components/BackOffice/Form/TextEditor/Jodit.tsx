@@ -1,5 +1,12 @@
 import { Box, InputProps, useTheme } from '@cap-collectif/ui'
-import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
+import {
+  FILE_UPLOAD_POPUP_OPENED,
+  joditFileUploader,
+  joditUploadFormats,
+  linktooltip,
+  uppyListener,
+} from '@shared/utils/joditFileUploader'
+import { dangerToast } from '@shared/utils/toasts'
 import '@uppy/core/dist/style.min.css'
 import '@uppy/status-bar/dist/style.min.css'
 import { getApiUrl } from 'config'
@@ -123,10 +130,14 @@ const getConfig = (
         data.delete('file[0]')
       },
       isSuccess: (resp: any) => {
-        return !resp.errorCode
+        return resp?.success !== false && !resp?.errorCode
       },
-      getMsg: (resp: any) => {
-        return resp.msg.join !== undefined ? resp.msg.join(' ') : resp.msg
+      getMessage: (resp: any) => {
+        if (Array.isArray(resp?.msg)) {
+          return resp.msg.join(' ')
+        }
+
+        return resp?.errorCode || resp?.msg || resp?.data?.messages?.[0]?.message || 'error.format_not_handled'
       },
       process: (resp: any) => {
         return {
@@ -136,11 +147,11 @@ const getConfig = (
           msg: resp.msg,
         }
       },
-      error: (e: any) => {
-        console.error(e)
+      error: () => {
+        dangerToast(intl.formatMessage({ id: 'error.format_not_handled' }, { formats: joditUploadFormats }))
       },
-      defaultHandlerError: (resp: any) => {
-        console.error(resp)
+      defaultHandlerError: () => {
+        dangerToast(intl.formatMessage({ id: 'error.format_not_handled' }, { formats: joditUploadFormats }))
       },
       defaultHandlerSuccess: (data: any) => {
         if (editor.current && editor.current.component) {

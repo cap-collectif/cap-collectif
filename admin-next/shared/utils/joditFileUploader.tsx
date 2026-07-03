@@ -16,8 +16,8 @@ const fileInput = 'uppyFileInput'
 
 const SIZE_LIMIT = 104857600 // 100Mo
 
-const formats =
-  '.png, .svg, .gif, .jp(e)g, .webp, .doc, .docx, .odt, .txt, .pdf, .xls, .xlsx, .ods, .csv, .ppt, .pptx, .zip, .rar, .7z, .gz, .tar, .bz2'
+export const joditUploadFormats =
+  '.png, .gif, .jp(e)g, .webp, .doc, .docx, .odt, .txt, .pdf, .xls, .xlsx, .ods, .csv, .ppt, .pptx, .zip, .rar, .7z, .gz, .tar, .bz2'
 
 const getExtensionFromUrl = (url?: string): string => {
   const pathWithoutQuery = url?.split('?')[0]?.split('#')[0] || ''
@@ -65,7 +65,7 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
       restrictions: { maxNumberOfFiles: 1, allowedFileTypes: ALLOWED_MIMETYPES_WITH_ARCHIVES },
       onBeforeFileAdded: currentFile => {
         if (!ALLOWED_MIMETYPES_WITH_ARCHIVES.includes(currentFile.type)) {
-          dangerToast(intl.formatMessage({ id: 'error.format_not_handled' }, { formats }))
+          dangerToast(intl.formatMessage({ id: 'error.format_not_handled' }, { formats: joditUploadFormats }))
           editor.e.fire('closeAllPopups')
           return false
         }
@@ -84,7 +84,9 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
           .trim()
 
         currentFile.meta = {
+          ...currentFile.meta,
           name: cleanFileName,
+          type: currentFile.type,
         }
 
         return currentFile

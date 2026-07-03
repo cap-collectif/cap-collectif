@@ -203,7 +203,7 @@ export const CarrouselItem: FC<{
                 name={imageKey}
                 control={control}
                 type="uploader"
-                format=".jpg,.jpeg,.png,.svg"
+                format=".jpg,.jpeg,.png"
                 maxSize={1000000}
                 size={UPLOADER_SIZE.MD}
                 showThumbnail

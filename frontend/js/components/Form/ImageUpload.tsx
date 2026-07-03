@@ -27,6 +27,8 @@ type Props = {
 type State = {
   error: string
   size: string
+  fileName: string
+  extension: string
 }
 
 export class ImageUpload extends React.Component<Props, State> {
@@ -47,7 +49,15 @@ export class ImageUpload extends React.Component<Props, State> {
     this.state = {
       error: '',
       size: '',
+      fileName: '',
+      extension: '',
     }
+  }
+
+  getFileExtension = (file: File): string => {
+    const extension = file.name.split('.').pop()
+
+    return extension && extension !== file.name ? extension : file.type
   }
 
   onDrop = (acceptedFiles: Array<File>) => {
@@ -75,6 +85,12 @@ export class ImageUpload extends React.Component<Props, State> {
           if (error.response?.errorCode === 'VIRUS_DETECTED') {
             this.setState({
               error: 'upload.virus.detected',
+            })
+          } else {
+            this.setState({
+              error: 'file-invalid-type',
+              fileName: file.name,
+              extension: this.getFileExtension(file),
             })
           }
         })
@@ -106,7 +122,7 @@ export class ImageUpload extends React.Component<Props, State> {
 
   render() {
     const { className, id, multiple, accept, maxSize, minSize, disablePreview, value, disabled } = this.props
-    const { error, size } = this.state
+    const { error, size, fileName, extension } = this.state
     const classes = {
       'image-uploader': true,
     }
@@ -152,9 +168,12 @@ export class ImageUpload extends React.Component<Props, State> {
             minSize={minSize}
             maxSize={maxSize}
             onDropRejected={(fileRejections: Array<FileRejection>) => {
+              const [{ file, errors }] = fileRejections
               this.setState({
-                error: fileRejections[0].errors[0].code,
-                size: (fileRejections[0].file.size / 1000000).toPrecision(2),
+                error: errors[0].code,
+                size: (file.size / 1000000).toPrecision(2),
+                fileName: file.name,
+                extension: this.getFileExtension(file),
               })
             }}
             disablePreview={disablePreview}
@@ -218,6 +237,8 @@ export class ImageUpload extends React.Component<Props, State> {
                 id={error}
                 values={{
                   size,
+                  fileName,
+                  extension,
                 }}
               />
             </AppBox>

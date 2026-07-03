@@ -17,7 +17,6 @@ exports[`<FileUpload /> should render correctly 1`] = `
     accept={
       Array [
         "image/png",
-        "image/svg+xml",
         "image/gif",
         "image/jpeg",
         "image/webp",
@@ -112,7 +111,6 @@ exports[`<FileUpload /> should render correctly when disabled 1`] = `
     accept={
       Array [
         "image/png",
-        "image/svg+xml",
         "image/gif",
         "image/jpeg",
         "image/webp",
@@ -207,7 +205,6 @@ exports[`<FileUpload /> should render correctly when in questionnaire form 1`] =
     accept={
       Array [
         "image/png",
-        "image/svg+xml",
         "image/gif",
         "image/jpeg",
         "image/webp",
@@ -302,7 +299,6 @@ exports[`<FileUpload /> should render correctly when no value 1`] = `
     accept={
       Array [
         "image/png",
-        "image/svg+xml",
         "image/gif",
         "image/jpeg",
         "image/webp",

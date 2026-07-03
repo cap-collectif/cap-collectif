@@ -1,6 +1,5 @@
 export const ALLOWED_IMAGE_MIMETYPES = [
   'image/png', // .png
-  'image/svg+xml', // .svg
   'image/gif', // .gif
   'image/jpeg', // .jpeg .jpg
   'image/webp', // .webp

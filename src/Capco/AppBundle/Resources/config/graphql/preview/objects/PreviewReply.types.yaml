@@ -5,9 +5,11 @@ PreviewReply:
         - PublicPublishable
         - Timestampable
         - Draftable
+        - Contribution
     config:
         interfaces:
             - Node
+            - Contribution
         name: Reply
         description: 'Represents a user answer to a questionnaire.'
         fields:
@@ -20,6 +22,9 @@ PreviewReply:
                 type: '[PreviewResponse]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
                 description: 'The responses of the reply.'
+            url:
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", value)'
+                description: 'The url of the reply.'
             author:
                 type: 'PreviewUser!'
                 description: 'The author of the contribution.'

@@ -108,6 +108,23 @@ const AllRepliesCountersQuery = /* GraphQL */ `
   }
 `
 
+const ReplyContributionFieldsQuery = /* GraphQL */ `
+  query ReplyContributionFieldsQuery($id: ID!) {
+    node(id: $id) {
+      ... on Reply {
+        related {
+          id
+        }
+        url
+        ... on Contribution {
+          contributionId: id
+          contributionUrl: url
+        }
+      }
+    }
+  }
+`
+
 describe('Preview|Questionnaire.replies connection', () => {
   it('fetches the first hundred published replies with a cursor', async () => {
     await expect(
@@ -151,6 +168,18 @@ describe('Preview|Questionnaire.replies connection', () => {
         AllRepliesCountersQuery,
         {
           id: toGlobalId('Questionnaire', 'questionnaire1'),
+        },
+        'preview',
+      ),
+    ).resolves.toMatchSnapshot()
+  })
+
+  it('exposes replies as contributions in the preview schema', async () => {
+    await expect(
+      graphql(
+        ReplyContributionFieldsQuery,
+        {
+          id: toGlobalId('Reply', 'replyAnonymous2'),
         },
         'preview',
       ),

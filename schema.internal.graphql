@@ -16212,7 +16212,7 @@ type ReorderProjectTabsPayload {
 }
 
 """Represents a user answer to a questionnaire."""
-type Reply implements Node & Publishable & Contribution & Draftable {
+type Reply implements Node & Contribution & Publishable & Draftable {
   """The ID of an object"""
   id: ID!
 
@@ -16240,6 +16240,14 @@ type Reply implements Node & Publishable & Contribution & Draftable {
   """Identifies when the entity was undraft at."""
   undraftAt: DateTime
 
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the reply."""
+  url: URI!
+
   """The responses of the reply."""
   responses: [Response]!
 
@@ -16251,14 +16259,6 @@ type Reply implements Node & Publishable & Contribution & Draftable {
 
   """Whether or not the current viewer can update the reply."""
   viewerCanUpdate: Boolean!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The url of the reply."""
-  url: URI!
 
   """Identifies the form where the contribution was submitted."""
   questionnaire: Questionnaire!

@@ -120,6 +120,18 @@ class MediaManager
         return 0 === $violationsCount;
     }
 
+    /**
+     * @param string[] $allowedMimeTypes
+     */
+    public static function assertMimeTypeIsAllowed(?string $mimeType, array $allowedMimeTypes = AllowedExtensions::ALLOWED_MIMETYPES): void
+    {
+        $mimeType = strtolower((string) $mimeType);
+
+        if (!\in_array($mimeType, $allowedMimeTypes, true)) {
+            throw new \RuntimeException('INVALID_FILE_TYPE');
+        }
+    }
+
     public static function formatBytes(int $bytes): string
     {
         $units = ['O', 'Ko', 'Mo', 'Go', 'To'];

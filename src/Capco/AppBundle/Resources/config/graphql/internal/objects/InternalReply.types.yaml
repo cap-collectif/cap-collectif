@@ -5,13 +5,11 @@ InternalReply:
         - Deletable
         - Draftable
         - Updatable
-        - Contribution
         - UniformResourceLocatable
     config:
         name: Reply
         interfaces:
             - PublicPublishable
-            - Contribution
             - Draftable
         description: 'Represents a user answer to a questionnaire.'
         fields:

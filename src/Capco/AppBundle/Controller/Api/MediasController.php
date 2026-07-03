@@ -31,7 +31,7 @@ class MediasController extends AbstractController
         try {
             $uploadedFile = $this->getFile($request);
         } catch (\RuntimeException $exception) {
-            return $this->json(['errorCode' => $exception->getMessage()]);
+            return $this->json(['errorCode' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
         $scanResult = $this->antivirusScanner->scanAndDeleteIfInfected($uploadedFile->getPathname());
@@ -62,7 +62,7 @@ class MediasController extends AbstractController
         try {
             $uploadedFile = $this->getFile($request);
         } catch (\RuntimeException $exception) {
-            return $this->json(['errorCode' => $exception->getMessage()]);
+            return $this->json(['errorCode' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
         $scanResult = $this->antivirusScanner->scanAndDeleteIfInfected($uploadedFile->getPathname());

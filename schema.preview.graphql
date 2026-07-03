@@ -1687,7 +1687,7 @@ type QuestionnaireStep implements Node & Step {
 }
 
 """Represents a user answer to a questionnaire."""
-type Reply implements Node {
+type Reply implements Node & Contribution {
   """The ID of an object"""
   id: ID!
 
@@ -1714,6 +1714,14 @@ type Reply implements Node {
 
   """Identifies when the entity was undraft at."""
   undraftAt: DateTime
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The url of the reply."""
+  url: URI!
 
   """The responses of the reply."""
   responses: [Response]!
