@@ -399,6 +399,7 @@ class ApiContext extends ApplicationContext
         $this->response = $this->client->request($method, $url, [
             'headers' => [],
             'exceptions' => false,
+            'http_errors' => false,
             'multipart' => $body,
         ]);
     }
