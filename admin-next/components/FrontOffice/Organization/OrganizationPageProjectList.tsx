@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { graphql, usePaginationFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
+import { Button, CapUIFontSize, Flex, Grid, Heading } from '@cap-collectif/ui'
 import type { OrganizationPageProjectList_organization$key } from '@relay/OrganizationPageProjectList_organization.graphql'
-import { Flex, Button, Heading, Grid, CapUIFontSize } from '@cap-collectif/ui'
 import ProjectCard from '@shared/projectCard/ProjectCard'
 import { pxToRem } from '@shared/utils/pxToRem'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, usePaginationFragment } from 'react-relay'
 
 const FRAGMENT = graphql`
   fragment OrganizationPageProjectList_organization on Organization
@@ -55,7 +55,7 @@ export const OrganizationPageProjectList = ({ organization, fullSizeLayout }: Pr
       </Grid>
       {hasNext ? (
         <Flex mt={2} width="100%">
-          <Button variant="tertiary" margin="auto" onClick={() => loadNext(20)}>
+          <Button variant="secondary" margin="auto" onClick={() => loadNext(20)}>
             {intl.formatMessage({
               id: 'global.more',
             })}

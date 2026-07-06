@@ -1,20 +1,20 @@
-import * as React from 'react'
-import { Accordion, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
-import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFormContext } from 'react-hook-form'
-import ThemeListField from '@components/BackOffice/Form/ThemeListField'
-import ProjectListField from '@components/BackOffice/Form/ProjectListField'
+import { Accordion, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import DistrictListField from '@components/BackOffice/Form/DistrictListField'
+import AdvancedSidePanel from '@components/BackOffice/Form/Panels/AdvancedSidePanel'
 import MultilangueSidePanel from '@components/BackOffice/Form/Panels/MultilangueSidePanel'
 import PublicationSidePanel from '@components/BackOffice/Form/Panels/PublicationSidePanel'
-import { Locale } from '@components/BackOffice/Posts/Post.type'
-import AdvancedSidePanel from '@components/BackOffice/Form/Panels/AdvancedSidePanel'
-import DistrictListField from '@components/BackOffice/Form/DistrictListField'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import ProjectListField from '@components/BackOffice/Form/ProjectListField'
 import StepListField from '@components/BackOffice/Form/StepListField'
-import { DisabledParams, EventFormValues, getRefusedReasons, isFieldDisabled, ModerationStatus } from './utils'
+import ThemeListField from '@components/BackOffice/Form/ThemeListField'
+import { Locale } from '@components/BackOffice/Posts/Post.type'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 import { Locales } from 'types'
+import { DisabledParams, EventFormValues, getRefusedReasons, isFieldDisabled, ModerationStatus } from './utils'
 
 type PostFormSideProps = {
   availableLocales: Locale[]
@@ -73,9 +73,10 @@ const EventFormSide: React.FC<PostFormSideProps> = ({
   return (
     <Accordion
       allowMultiple
-      size={CapUIAccordionSize.sm}
+      size={CapUIAccordionSize.md}
       sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}
       defaultAccordion={['place']}
+      color="white"
     >
       <Accordion.Item id="place" position="relative">
         <Accordion.Button>

@@ -1,6 +1,4 @@
-import * as React from 'react'
-import { Control } from 'react-hook-form'
-import { FormValues } from './OrganizationConfigForm'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import {
   Accordion,
   CapUIAccordionSize,
@@ -10,9 +8,11 @@ import {
   Text,
   UPLOADER_SIZE,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
+import * as React from 'react'
+import { Control } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import { FormValues } from './OrganizationConfigForm'
 
 export interface OrganizationConfigFormSideProps {
   control: Control<FormValues>
@@ -21,7 +21,7 @@ export interface OrganizationConfigFormSideProps {
 const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({ control }) => {
   const intl = useIntl()
   return (
-    <Accordion allowMultiple size={CapUIAccordionSize.sm}>
+    <Accordion allowMultiple size={CapUIAccordionSize.sm} color="white">
       <Accordion.Item id="volet-1">
         <Accordion.Button>{intl.formatMessage({ id: 'organisation.form.logo.banner' })}</Accordion.Button>
         <Accordion.Panel>

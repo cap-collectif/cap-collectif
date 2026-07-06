@@ -1,21 +1,16 @@
-import * as React from 'react'
-import { graphql, usePaginationFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
+import { Button, CapUIFontSize, Flex, Heading } from '@cap-collectif/ui'
 import type { OrganizationPagePostList_organization$key } from '@relay/OrganizationPagePostList_organization.graphql'
-import { Flex, Heading, Button, CapUIFontSize } from '@cap-collectif/ui'
-import OrganizationPostCard from './OrganizationPostCard'
 import { pxToRem } from '@shared/utils/pxToRem'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, usePaginationFragment } from 'react-relay'
+import OrganizationPostCard from './OrganizationPostCard'
 
 const FRAGMENT = graphql`
   fragment OrganizationPagePostList_organization on Organization
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "OrganizationPagePostListPaginationQuery") {
-    posts(
-      first: $count
-      after: $cursor
-      hideUnpublishedPosts: true
-      orderBy: { field: PUBLISHED_AT, direction: DESC }
-    )
+    posts(first: $count, after: $cursor, hideUnpublishedPosts: true, orderBy: { field: PUBLISHED_AT, direction: DESC })
       @connection(key: "OrganizationPagePostList_posts") {
       edges {
         node {
@@ -48,7 +43,7 @@ export const OrganizationPagePostList = ({ organization }: Props) => {
       ))}
       {hasNext ? (
         <Flex width="100%">
-          <Button variant="tertiary" margin="auto" onClick={() => loadNext(3)}>
+          <Button variant="secondary" margin="auto" onClick={() => loadNext(3)}>
             {intl.formatMessage({
               id: 'global.more',
             })}

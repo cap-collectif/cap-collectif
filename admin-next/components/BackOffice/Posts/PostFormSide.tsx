@@ -1,15 +1,15 @@
-import * as React from 'react'
-import { Accordion, CapInputSize, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
-import { Locale } from './Post.type'
-import { Option } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
-import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFormContext } from 'react-hook-form'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import ThemeListField from '@components/BackOffice/Form/ThemeListField'
-import ProjectListField from '@components/BackOffice/Form/ProjectListField'
-import useUrlState from '@hooks/useUrlState'
+import { Accordion, CapInputSize, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import ProjectListField from '@components/BackOffice/Form/ProjectListField'
+import ThemeListField from '@components/BackOffice/Form/ThemeListField'
+import { Option } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
+import useUrlState from '@hooks/useUrlState'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { Locale } from './Post.type'
 
 type PostFormSideProps = {
   availableLocales: Locale[]
@@ -60,9 +60,10 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
   return (
     <Accordion
       allowMultiple
-      size={CapUIAccordionSize.sm}
+      size={CapUIAccordionSize.md}
       sx={{ '.cap-accordion__button p': { fontWeight: 600 } }}
       defaultAccordion={['place']}
+      color="white"
     >
       <Accordion.Item id="place" position="relative">
         <Accordion.Button>

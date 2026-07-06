@@ -1,10 +1,10 @@
+import { Button, Flex } from '@cap-collectif/ui'
+import type { OrganizationPageEventList_organization$key } from '@relay/OrganizationPageEventList_organization.graphql'
 import * as React from 'react'
-import { graphql, usePaginationFragment } from 'react-relay'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import type { OrganizationPageEventList_organization$key } from '@relay/OrganizationPageEventList_organization.graphql'
+import { graphql, usePaginationFragment } from 'react-relay'
 import EventCard from './EventCard'
-import { Button, Flex } from '@cap-collectif/ui'
 
 const FRAGMENT = graphql`
   fragment OrganizationPageEventList_organization on Organization
@@ -56,7 +56,7 @@ export const OrganizationPageEventList = ({ organization, filter }: Props) => {
       ))}
       {hasNext ? (
         <Flex width="100%">
-          <Button margin="auto" onClick={() => loadNext(3)} variant="tertiary">
+          <Button margin="auto" onClick={() => loadNext(3)} variant="secondary">
             {intl.formatMessage({
               id: 'global.more',
             })}

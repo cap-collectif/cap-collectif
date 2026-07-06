@@ -20,6 +20,7 @@ type Props = {
 const organizationQuery = graphql`
   query OrganizationQuery(
     $organizationSlug: String!
+    $countProjects: Int!
     $count: Int!
     $cursorProjects: String
     $cursorPosts: String
@@ -42,7 +43,7 @@ const organizationQuery = graphql`
         eventsFuture: events(isFuture: true, hideDeletedEvents: true, hideUnpublishedEvents: true) {
           totalCount
         }
-        ...OrganizationPageProjectList_organization @arguments(count: $count, cursor: $cursorProjects)
+        ...OrganizationPageProjectList_organization @arguments(count: $countProjects, cursor: $cursorProjects)
         ...OrganizationPageEventList_organization @arguments(count: $count, cursor: $cursorEvents, isFuture: $isFuture)
         ...OrganizationPagePostList_organization @arguments(count: $count, cursor: $cursorPosts)
       }
@@ -55,6 +56,7 @@ export const OrganizationRender: FC<Props> = ({ slug }) => {
   const { setBreadCrumbItems } = useNavBarContext()
   const query = useLazyLoadQuery<OrganizationQuery>(organizationQuery, {
     organizationSlug: slug,
+    countProjects: 4,
     count: 3,
     cursorProjects: null,
     cursorPosts: null,
