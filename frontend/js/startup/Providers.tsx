@@ -13,13 +13,22 @@ import { theme } from '~/styles/theme'
 import { analytics } from './analytics'
 import environment from '../createRelayEnvironment'
 
+const SENTRY_IGNORED_BROWSER_ERROR_MESSAGES = [
+  'ResizeObserver loop limit exceeded',
+  'ResizeObserver loop completed with undelivered notifications',
+]
+
+export const isMissingBrowserObjectUpdateRejection = (event: Record<string, any>): boolean =>
+  event?.exception?.values?.some(
+    ({ value }: { value?: string }) =>
+      value?.includes('Object Not Found Matching Id:') && value.includes('MethodName:update, ParamCount:4'),
+  ) ?? false
+
 if (typeof window !== 'undefined' && window.sentryDsn) {
   Sentry.init({
     dsn: window.sentryDsn,
-    ignoreErrors: [
-      'ResizeObserver loop limit exceeded',
-      'ResizeObserver loop completed with undelivered notifications',
-    ],
+    ignoreErrors: SENTRY_IGNORED_BROWSER_ERROR_MESSAGES,
+    beforeSend: event => (isMissingBrowserObjectUpdateRejection(event) ? null : event),
   })
 }
 
