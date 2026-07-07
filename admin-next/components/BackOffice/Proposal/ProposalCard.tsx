@@ -18,6 +18,7 @@ import CategoryBackground from './CategoryBackground'
 import { useIntl } from 'react-intl'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import stripHTML from '@shared/utils/stripHTML'
+import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
 
 const FRAGMENT = graphql`
   fragment ProposalCard_catalogPaper_proposal on Proposal {
@@ -28,9 +29,12 @@ const FRAGMENT = graphql`
     summary
     body
     author {
+      username
       displayName
-      media {
-        url
+      ... on User {
+        media {
+          url
+        }
       }
     }
     address {
@@ -143,6 +147,7 @@ export const ProposalCard = ({
   if (!proposal) return null
 
   const { media, author, category, title, address, summary, body, reference, url, estimation } = proposal
+  const authorName = getProposalAuthorDisplayName(author)
 
   const summaryOrBodyExcerpt = stripHTML(summary ?? body ?? '') || ''
 
@@ -217,7 +222,7 @@ export const ProposalCard = ({
               truncateAt={40}
               justifyContent="end"
             >
-              {author.displayName.toLocaleLowerCase()}
+              {authorName}
             </IconAndText>
           </Flex>
         </Flex>

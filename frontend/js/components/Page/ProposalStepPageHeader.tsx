@@ -13,7 +13,6 @@ import {
 import type { Dispatch, GlobalState } from '~/types'
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql'
 import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal'
-import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { formName } from '../Proposal/Form/ProposalForm'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
@@ -21,8 +20,9 @@ import type { ProposalViewMode } from '~/redux/modules/proposal'
 type Props = {
   step: ProposalStepPageHeader_step
   displayMode: ProposalViewMode | null | undefined
+  contributorConsentPrivacyPolicy?: boolean | null
 }
-export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
+export const ProposalStepPageHeader = ({ step, displayMode, contributorConsentPrivacyPolicy }: Props) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const isMobile = useIsMobile()
@@ -71,6 +71,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
         show={isOpen}
         onClose={onClose}
         onOpen={() => dispatch(reset(formName))}
+        contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
       />
       <div id="proposal-step-page-header">
         <h3 className="h3 d-ib mb-15">
@@ -119,26 +120,24 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
             className={isMobile ? '' : 'pull-right'}
             display={displayMode === 'MAP' && isMobile ? 'none' : 'block'}
           >
-            <LoginOverlay>
-              <Button
-                m="auto"
-                maxWidth="300px"
-                disabled={!step.form?.contribuable}
-                opacity={!step.form?.contribuable ? 0.5 : 1}
-                bg={`${btnBgColor} !important`}
-                color={`${btnTextColor} !important`}
-                variantSize={isMobile ? 'big' : 'small'}
-                onClick={onOpen}
-                id="add-proposal"
-                width={['100%', '']}
-                textAlign="center"
-                display="block"
-              >
-                {intl.formatMessage({
-                  id: titleTradKey,
-                })}
-              </Button>
-            </LoginOverlay>
+            <Button
+              m="auto"
+              maxWidth="300px"
+              disabled={!step.form?.contribuable}
+              opacity={!step.form?.contribuable ? 0.5 : 1}
+              bg={`${btnBgColor} !important`}
+              color={`${btnTextColor} !important`}
+              variantSize={isMobile ? 'big' : 'small'}
+              onClick={onOpen}
+              id="add-proposal"
+              width={['100%', '']}
+              textAlign="center"
+              display="block"
+            >
+              {intl.formatMessage({
+                id: titleTradKey,
+              })}
+            </Button>
           </Box>
         )}
       </div>
@@ -149,7 +148,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
   step: graphql`
     fragment ProposalStepPageHeader_step on ProposalStep {
       id
-      allProposals: proposals(first: 0) {
+      allProposals: proposals(first: 0, participantToken: $token) {
         totalCount
         fusionCount
       }
@@ -163,6 +162,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         category: $category
         status: $status
         userType: $userType
+        participantToken: $token
         state: $state
       ) @connection(key: "ProposalStepPageHeader_proposals", filters: []) {
         totalCount

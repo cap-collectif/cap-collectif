@@ -75,6 +75,8 @@ Capco\AppBundle\Entity\Proposal:
             groups: [ElasticsearchCommentNestedProposal, ElasticsearchProposalNestedProject]
         published:
             groups: [ElasticsearchProposal]
+        completionStatus:
+            groups: [ElasticsearchProposal]
         getProposalAnalystsArray:
             serialized_name: proposalAnalysts
             groups: [ElasticsearchProposal]

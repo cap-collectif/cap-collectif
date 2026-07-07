@@ -184,7 +184,7 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         $countParticipants = 0;
 
         do {
-            $participants = $this->participantRepository->findVotersForCollect($step, $offset, self::BATCH_SIZE);
+            $participants = $this->participantRepository->findVotersAndProposalForCollect($step, $offset, self::BATCH_SIZE);
 
             if (empty($participants)) {
                 break;

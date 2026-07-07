@@ -13,6 +13,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -40,7 +41,7 @@ class AskProposalRevisionMutation implements MutationInterface
     ) {
     }
 
-    public function __invoke(Arg $input, $viewer): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);
         $this->preventNullableViewer($viewer);
@@ -54,6 +55,11 @@ class AskProposalRevisionMutation implements MutationInterface
 
             return $this->generateErrorPayload(ProposalStatementErrorCode::NON_EXISTING_PROPOSAL);
         }
+
+        if (null === $proposal->getAuthor()?->getEmail()) {
+            return $this->generateErrorPayload(ProposalStatementErrorCode::PROPOSAL_AUTHOR_HAS_NO_EMAIL);
+        }
+
         $proposalRevision = new ProposalRevision();
         $proposalRevision->setProposal($proposal)->setAuthor($viewer);
         $proposal->addRevision($proposalRevision);

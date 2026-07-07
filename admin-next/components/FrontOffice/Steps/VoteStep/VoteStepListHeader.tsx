@@ -10,6 +10,7 @@ import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
   step: VoteStepListHeader_proposalStep$key
+  onWorkflowTrigger?: (contributionId: string) => void
 }
 
 const FRAGMENT = graphql`
@@ -29,7 +30,7 @@ const FRAGMENT = graphql`
   }
 `
 
-const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
+const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, onWorkflowTrigger }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isCollectStep = step.__typename === 'CollectStep'
 
@@ -44,6 +45,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey }) => {
                 disabled={!step.form.contribuable}
                 proposalForm={step.form}
                 stepId={step.id}
+                onWorkflowTrigger={onWorkflowTrigger}
               />
             ) : null}
             <VoteStepSearchBar proposalsCount={step.allProposals?.totalCount ?? 0} />

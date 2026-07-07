@@ -35,7 +35,6 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
 
-        $stepId = $input->offsetGet('stepId');
         unset($this->arguments['stepId']);
 
         $isUpdatingFromBO = isset($this->arguments[self::USER_ID]);

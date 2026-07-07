@@ -4,9 +4,12 @@ namespace Capco\Tests\Normalizer\Proposal;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ProposalNormalizer;
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
+use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
@@ -72,6 +75,57 @@ class ProposalNormalizerTest extends KernelTestCase
         );
 
         $this->assertEquals($expectedDataNormalized, $result);
+    }
+
+    public function testExportProposalNormalizerWithParticipantAuthor(): void
+    {
+        $proposalUrlResolverMock = $this->createMock(ProposalUrlResolver::class);
+        $mediaUrlResolverMock = $this->createMock(MediaUrlResolver::class);
+        $mapMock = $this->createMock(Map::class);
+        $formattedValueResponseTypeResolverMock = $this->createMock(FormattedValueResponseTypeResolver::class);
+        $proposalResponsesResolverMock = $this->createMock(ProposalResponsesResolver::class);
+        $translator = new Translator('fr_FR');
+
+        $normalizer = new ProposalNormalizer(
+            $proposalUrlResolverMock,
+            $mediaUrlResolverMock,
+            $formattedValueResponseTypeResolverMock,
+            $proposalResponsesResolverMock,
+            $mapMock,
+            $translator
+        );
+
+        $participant = $this->createConfiguredMock(Participant::class, [
+            'getId' => 'participant1',
+            'getUsername' => 'participant-author',
+            'isEmailConfirmed' => true,
+            'getEmail' => 'participant-author@example.com',
+        ]);
+        $proposal = $this->createConfiguredMock(Proposal::class, [
+            'getAuthor' => $participant,
+            'getId' => 'proposal1',
+            'getFullReference' => '1-1',
+            'getTitle' => 'Participant proposal',
+            'getBodyText' => 'Body',
+            'getPublicationStatus' => ProposalPublicationStatus::PUBLISHED,
+        ]);
+
+        $stepMock = $this->createMock(CollectStep::class);
+        $stepMock->method('isVotable')->willReturn(false);
+
+        $result = $normalizer->normalize(
+            $proposal,
+            null,
+            [
+                'step' => $stepMock,
+                'questionsResponses' => [],
+                BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL,
+            ]
+        );
+
+        $this->assertSame($participant->getId(), $result['export_proposal_author_id']);
+        $this->assertNull($result['export_proposal_author_user_type_id']);
+        $this->assertNull($result['export_proposal_author_user_type_name']);
     }
 
     /**

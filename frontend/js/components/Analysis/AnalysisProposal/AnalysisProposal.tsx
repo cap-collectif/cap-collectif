@@ -25,6 +25,7 @@ import { TagContainer } from '~ui/Labels/Tag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Text from '~ui/Primitives/Text'
 import Flex from '~ui/Primitives/Layout/Flex'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 type Props = {
   proposal: AnalysisProposal_proposal
   isVoteRanking?: boolean
@@ -120,7 +121,7 @@ const AnalysisProposal = ({
 
         <ProposalListRowInformations>
           <p>
-            #{proposal.reference} • {proposal.author.username}
+            #{proposal.reference} • {getProposalAuthorDisplayName(proposal.author)}
             {proposal.publishedAt && (
               <React.Fragment>
                 {' '}
@@ -359,6 +360,7 @@ export default createFragmentContainer(AnalysisProposal, {
       author {
         id
         username
+        displayName
       }
       district {
         id

@@ -168,6 +168,9 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
             "id": "assessmentid2",
             "officialResponse": "ueueueueueue",
           },
+          "author": Object {
+            "email": "toto@toto.com",
+          },
           "decision": Object {
             "estimatedCost": 43,
             "isApproved": true,
@@ -355,6 +358,9 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
               "estimatedCost": null,
               "id": "assessmentid2",
               "officialResponse": "ueueueueueue",
+            },
+            "author": Object {
+              "email": "toto@toto.com",
             },
             "decision": Object {
               "estimatedCost": 43,

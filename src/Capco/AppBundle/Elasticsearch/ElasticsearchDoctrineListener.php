@@ -110,6 +110,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             && ($entity instanceof Authorable
                 || ($entity instanceof Contribution && method_exists($entity, 'getAuthor')))
             && $entity->getAuthor()
+            && $entity->getAuthor() instanceof IndexableInterface
         ) {
             $this->addToMessageStack($entity->getAuthor());
         }

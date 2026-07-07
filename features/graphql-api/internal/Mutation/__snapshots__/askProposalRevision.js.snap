@@ -73,3 +73,21 @@ Object {
   },
 }
 `;
+
+exports[`mutations.askProposalRevision should not ask if proposal has no author. 1`] = `
+Object {
+  "askProposalRevision": Object {
+    "errorCode": "PROPOSAL_AUTHOR_HAS_NO_EMAIL",
+    "proposal": null,
+  },
+}
+`;
+
+exports[`mutations.askProposalRevision should not ask if proposal's author has no email. 1`] = `
+Object {
+  "askProposalRevision": Object {
+    "errorCode": "PROPOSAL_AUTHOR_HAS_NO_EMAIL",
+    "proposal": null,
+  },
+}
+`;

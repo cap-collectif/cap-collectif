@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
@@ -20,6 +21,7 @@ class ParticipantType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
+            ->add('username')
             ->add('email')
             ->add('dateOfBirth', DateTimeType::class, [
                 'widget' => 'single_text',
@@ -36,6 +38,9 @@ class ParticipantType extends AbstractType
                 'class' => UserIdentificationCode::class,
                 'invalid_message' => CheckIdentificationCode::BAD_CODE,
                 'constraints' => [new CheckIdentificationCode()],
+            ])
+            ->add('media', EntityType::class, [
+                'class' => Media::class,
             ])
         ;
     }

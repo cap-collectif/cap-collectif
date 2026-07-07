@@ -10,6 +10,8 @@ UpdateParticipantInput:
                 type: 'String'
             lastname:
                 type: 'String'
+            username:
+                type: 'String'
             postalAddress:
                 type: 'String'
             dateOfBirth:
@@ -24,3 +26,5 @@ UpdateParticipantInput:
                 type: 'Boolean'
             userIdentificationCode:
                 type: 'String'
+            media:
+                type: 'ID'

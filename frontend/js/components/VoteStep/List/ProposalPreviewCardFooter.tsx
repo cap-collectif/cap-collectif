@@ -22,8 +22,10 @@ const FRAGMENT = graphql`
     body
     author {
       displayName
-      media {
-        url
+      ...on User {
+        media {
+          url
+        }
       }
     }
     votes(stepId: $stepId, first: 0) {

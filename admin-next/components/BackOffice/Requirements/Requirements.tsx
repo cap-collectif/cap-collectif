@@ -139,7 +139,7 @@ export const config: Record<
   EmailVerifiedRequirement: {
     title: 'user_email',
     apiTypename: 'EMAIL_VERIFIED',
-    tooltip: 'verified-by-code-sent-by-email'
+    tooltip: 'verified-by-code-sent-by-email',
   },
   ZipCodeRequirement: {
     title: 'user.register.zipcode',
@@ -231,14 +231,12 @@ const Requirements: React.FC<Props> = ({ requirementStep: requirementStepRef }) 
 
   const toggleRequirements = getToggleRequirements(step)
 
+  const isCollectStep = step.__typename === 'CollectStep'
+
   return (
     <Box>
-      {
-        step.__typename === 'ConsultationStep' && (
-          <RequirementsReason />
-        )
-      }
-      <ToggleRequirementsList toggleRequirements={toggleRequirements} />
+      {step.__typename === 'ConsultationStep' && <RequirementsReason />}
+      <ToggleRequirementsList toggleRequirements={toggleRequirements} isCollectStep={isCollectStep} />
       <CheckBoxRequirementsList />
     </Box>
   )

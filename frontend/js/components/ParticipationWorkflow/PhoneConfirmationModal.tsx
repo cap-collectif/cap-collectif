@@ -35,7 +35,6 @@ const PhoneConfirmationModal: React.FC = () => {
     handleSubmit,
     watch,
     setError,
-    formState: { isValid },
     setFocus,
   } = useFormContext()
 
@@ -281,7 +280,6 @@ const PhoneConfirmationModal: React.FC = () => {
             justifyContent="center"
             width="100%"
             type="submit"
-            disabled={!isValid}
             isLoading={verifyCodeIsLoading}
           >
             {intl.formatMessage({ id: 'global.continue' })}

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import type { GlobalState } from '~/types'
 import { CenteredLogoLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
 
 type FormValues = {
   email: string
@@ -36,14 +37,18 @@ const ConsentInternalCommunicationModal = () => {
   const isMobile = useIsMobile()
 
   const getRedirectUrl = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'your-participation-is-confirmed' })
-    return `${contributionUrl}?toast=${toastConfig}`
+    return buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'your-participation-is-confirmed',
+    })
   }
   const redirectUrl = getRedirectUrl()
 
   const redirectOnSubscribtion = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'thank-you-you-are-subscribed-to-newsletter' })
-    window.location.href = `${contributionUrl}?toast=${toastConfig}`
+    window.location.href = buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'thank-you-you-are-subscribed-to-newsletter',
+    })
   }
 
   const updateUser = () => {

@@ -54,6 +54,15 @@ Object {
             "title": "project title - Formulaire de dépôt",
           },
           "label": "Dépôt des projets",
+          "requirements": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "__typename": "EmailVerifiedRequirement",
+                },
+              },
+            ],
+          },
           "slug": "depot-des-projets",
           "title": "Dépôt des projets",
         },

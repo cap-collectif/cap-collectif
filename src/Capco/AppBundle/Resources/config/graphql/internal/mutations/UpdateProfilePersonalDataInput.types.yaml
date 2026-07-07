@@ -6,6 +6,9 @@ UpdateProfilePersonalDataInput:
             userId:
                 type: 'ID'
                 description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+            username:
+                type: 'String'
+                description: 'Your username'
             firstname:
                 type: 'String'
                 description: 'Your firstname'
@@ -54,3 +57,5 @@ UpdateProfilePersonalDataInput:
                 type: 'Boolean'
             consentPrivacyPolicy:
                 type: 'Boolean'
+            media:
+                type: 'ID'

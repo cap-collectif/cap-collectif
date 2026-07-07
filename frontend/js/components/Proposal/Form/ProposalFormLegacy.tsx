@@ -46,6 +46,7 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
 import DsButton from '~ds/Button/Button'
 import { toast } from '~/components/DesignSystem/Toast'
 import { mapOpenPopup } from '~/components/Proposal/Map/Map.events'
+import CookieMonster from '@shared/utils/CookieMonster'
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormLegacyAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
@@ -206,9 +207,17 @@ const onSubmit = (
     throw new SubmissionError(errors)
   }
 
+  const participantToken = CookieMonster.getParticipantCookie()
+  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+
   if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: { ...data, id: proposal.id },
+      input: {
+        ...data,
+        id: proposal.id,
+        participantToken: isAuthenticated ? undefined : participantToken,
+        emailToken: isAuthenticated ? undefined : emailToken,
+      },
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
     })
       .then(response => {

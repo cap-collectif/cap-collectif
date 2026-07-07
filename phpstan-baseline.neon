@@ -22341,11 +22341,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/AnalyseProposalAnalysisMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AskProposalRevisionMutation\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AskProposalRevisionMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AskProposalRevisionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AskProposalRevisionMutation.php
@@ -24236,21 +24231,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:changeCollectStatus\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:changeCollectStatus\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:changeContent\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:changeContent\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
@@ -24368,11 +24348,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
 			count: 4
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Parameter \\#2 \\$author of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:shouldBeDraft\\(\\) expects Capco\\\\UserBundle\\\\Entity\\\\User, Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null given\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
 		-
@@ -25094,11 +25069,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateProposalFusionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateProposalFusionMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateProposalIllustrationMutation\\:\\:__invoke\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateProposalIllustrationMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateProposalIllustrationMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -26496,11 +26466,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
 
 		-
-			message: "#^Parameter \\#2 \\$author of method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalResponsesResolver\\:\\:filterVisibleResponses\\(\\) expects Capco\\\\UserBundle\\\\Entity\\\\User, Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalResponsesResolver\\:\\:\\$analysisRelatedVoter has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
@@ -27178,11 +27143,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$elements of class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection constructor expects array\\<TKey of \\(int\\|string\\), T\\>, iterable given\\.$#"
 			count: 3
-			path: src/Capco/AppBundle/GraphQL/Resolver/Reply/ReplyResponsesResolver.php
-
-		-
-			message: "#^Parameter \\#2 \\$author of method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Reply\\\\ReplyResponsesResolver\\:\\:filterVisibleResponses\\(\\) expects Capco\\\\UserBundle\\\\Entity\\\\User, Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null given\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reply/ReplyResponsesResolver.php
 
 		-
@@ -32007,11 +31967,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalNotifier\\:\\:onUpdate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/ProposalNotifier.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalNotifier\\:\\:onUpdateStatus\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/ProposalNotifier.php
 

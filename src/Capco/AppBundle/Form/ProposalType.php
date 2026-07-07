@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\District\AbstractDistrict;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -58,6 +59,9 @@ class ProposalType extends AbstractType
                 'purify_html_profile' => 'user',
             ])
             ->add('bodyUsingJoditWysiwyg')
+            ->add('participant', RelayNodeType::class, [
+                'class' => Participant::class,
+            ])
         ;
 
         if ($this->toggleManager->isActive(Manager::themes) && $form->isUsingThemes()) {

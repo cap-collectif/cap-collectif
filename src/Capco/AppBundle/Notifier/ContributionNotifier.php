@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Contribution\ContributionModerationMessage;
 use Capco\AppBundle\Model\Contribution;
@@ -24,13 +25,16 @@ final class ContributionNotifier extends BaseNotifier
 
     public function onModeration(Contribution $contribution)
     {
-        if ($contribution->getAuthor()) {
-            $this->mailer->createAndSendMessage(
-                ContributionModerationMessage::class,
-                $contribution,
-                ['trashURL' => $this->urlResolver->getObjectUrl($contribution, true)],
-                $contribution->getAuthor()
-            );
+        $author = $contribution->getAuthor();
+        if (!$author instanceof ContributorInterface || !$author->getEmail()) {
+            return;
         }
+
+        $this->mailer->createAndSendMessage(
+            ContributionModerationMessage::class,
+            $contribution,
+            ['trashURL' => $this->urlResolver->getObjectUrl($contribution, true)],
+            $author
+        );
     }
 }

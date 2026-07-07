@@ -141,29 +141,27 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
       }
       zIndex={1000}
     >
-      <Connect(LoginOverlay)>
-        <Button
-          bg="undefined !important"
-          color="undefined !important"
-          disabled={false}
-          display="block"
-          id="add-proposal"
-          m="auto"
-          maxWidth="300px"
-          onClick={[Function]}
-          opacity={1}
-          textAlign="center"
-          variantSize="small"
-          width={
-            Array [
-              "100%",
-              "",
-            ]
-          }
-        >
-          interpellation.add
-        </Button>
-      </Connect(LoginOverlay)>
+      <Button
+        bg="undefined !important"
+        color="undefined !important"
+        disabled={false}
+        display="block"
+        id="add-proposal"
+        m="auto"
+        maxWidth="300px"
+        onClick={[Function]}
+        opacity={1}
+        textAlign="center"
+        variantSize="small"
+        width={
+          Array [
+            "100%",
+            "",
+          ]
+        }
+      >
+        interpellation.add
+      </Button>
     </Box>
   </div>
 </Fragment>
@@ -310,29 +308,27 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       }
       zIndex={1000}
     >
-      <Connect(LoginOverlay)>
-        <Button
-          bg="undefined !important"
-          color="undefined !important"
-          disabled={false}
-          display="block"
-          id="add-proposal"
-          m="auto"
-          maxWidth="300px"
-          onClick={[Function]}
-          opacity={1}
-          textAlign="center"
-          variantSize="small"
-          width={
-            Array [
-              "100%",
-              "",
-            ]
-          }
-        >
-          proposal.add
-        </Button>
-      </Connect(LoginOverlay)>
+      <Button
+        bg="undefined !important"
+        color="undefined !important"
+        disabled={false}
+        display="block"
+        id="add-proposal"
+        m="auto"
+        maxWidth="300px"
+        onClick={[Function]}
+        opacity={1}
+        textAlign="center"
+        variantSize="small"
+        width={
+          Array [
+            "100%",
+            "",
+          ]
+        }
+      >
+        proposal.add
+      </Button>
     </Box>
   </div>
 </Fragment>

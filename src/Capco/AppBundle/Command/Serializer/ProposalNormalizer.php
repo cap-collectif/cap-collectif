@@ -162,8 +162,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
         $proposalArray = array_merge($proposalSimplified, $formatQuestionsResponses, $proposalSimplifiedSecondPart);
 
         if ($isFullExport) {
-            /** @var User $author */
-            $author = $object->getAuthor();
+            $authorUserType = $author instanceof User ? $author->getUserType() : null;
             unset(
                 $proposalArray[self::EXPORT_PROPOSAL_VOTES_ID],
                 $proposalArray[self::EXPORT_PROPOSAL_VOTES_RANKING]
@@ -178,8 +177,8 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
                 self::EXPORT_PROPOSAL_AUTHOR_USERNAME => $author->getUsername(),
                 self::EXPORT_PROPOSAL_AUTHOR_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($author->isEmailConfirmed()),
                 self::EXPORT_PROPOSAL_AUTHOR_EMAIL => $author->getEmail(),
-                self::EXPORT_PROPOSAL_AUTHOR_USER_TYPE_ID => $author->getUserType()?->getId(),
-                self::EXPORT_PROPOSAL_AUTHOR_USER_TYPE_NAME => $author->getUserType()?->getName(),
+                self::EXPORT_PROPOSAL_AUTHOR_USER_TYPE_ID => $authorUserType?->getId(),
+                self::EXPORT_PROPOSAL_AUTHOR_USER_TYPE_NAME => $authorUserType?->getName(),
                 self::EXPORT_PROPOSAL_OFFICIAL_RESPONSE => $object->getOfficialResponse()?->getBodyText(),
                 self::EXPORT_PROPOSAL_VOTES_ID => null,
                 self::EXPORT_PROPOSAL_VOTES_RANKING => null,

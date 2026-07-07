@@ -22,6 +22,7 @@ export type User = {
   readonly isPhoneConfirmed: boolean
   readonly isEvaluerOnLegacyTool: boolean
   readonly isEvaluerOnNewTool: boolean
+  readonly consentPrivacyPolicy: boolean
   readonly phone: string
   readonly isAdmin: boolean
   readonly isSuperAdmin: boolean
@@ -74,6 +75,7 @@ export type State = {
         readonly isOrganizationMember: boolean
         readonly isAdminOrganization: boolean
         readonly organizationId: string | null
+        readonly consentPrivacyPolicy: boolean
         readonly email: string
         readonly newEmailToConfirm: string | null | undefined
         readonly media:

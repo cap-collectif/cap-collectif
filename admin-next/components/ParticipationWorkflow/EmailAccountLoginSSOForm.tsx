@@ -1,8 +1,6 @@
 import React from 'react'
 import ModalLayout from './ModalLayout'
 import { graphql, useFragment } from 'react-relay'
-import { useSelector } from 'react-redux'
-import type { GlobalState } from './types'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { Box, useMultiStepModal } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
@@ -10,12 +8,19 @@ import SSOButton from './components/SSOButton/SSOButton'
 import { EmailAccountLoginSSOForm_colors$key } from '@relay/EmailAccountLoginSSOForm_colors.graphql'
 import { PARTICIPANT_FORM_INDEX } from './EmailParticipantForm'
 import { useParticipationWorkflow } from './ParticipationWorkflowContext'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { LoginSocialButtonType } from '@shared/login/LoginSocialButton'
 
 type Props = {
   children?: React.ReactNode
   colors: EmailAccountLoginSSOForm_colors$key
   modalTitle?: string
   modalInfo?: string
+}
+
+type WorkflowSSO = {
+  ssoType: LoginSocialButtonType
+  name: string
 }
 
 const COLORS_FRAGMENT = graphql`
@@ -29,6 +34,7 @@ export const ACCOUNT_LOGIN_SSO_FORM_INDEX = 5
 
 const EmailAccountLoginSSOForm: React.FC<Props> = ({ children, colors: colorsRef, modalTitle, modalInfo }) => {
   const colors = useFragment(COLORS_FRAGMENT, colorsRef)
+  const { siteColors } = useAppContext()
 
   const { setCurrentStep } = useMultiStepModal()
 
@@ -50,7 +56,7 @@ const EmailAccountLoginSSOForm: React.FC<Props> = ({ children, colors: colorsRef
     }
   }, [])
 
-  let ssoList: any = useSelector<GlobalState>(state => state.default.ssoList)
+  let ssoList: WorkflowSSO[] = []
 
   if (isCasEnabled) {
     ssoList = [...ssoList, { ssoType: 'cas', name: 'cas' }]
@@ -59,16 +65,9 @@ const EmailAccountLoginSSOForm: React.FC<Props> = ({ children, colors: colorsRef
     ssoList = [...ssoList, { ssoType: 'saml', name: 'saml' }]
   }
 
-  const { defaultPrimaryColor, defaultColorText } = useSelector((state: GlobalState) => {
-    return {
-      defaultPrimaryColor: state.default.parameters['color.btn.primary.bg'],
-      defaultColorText: state.default.parameters['color.btn.primary.text'],
-    }
-  })
+  const primaryColor = colors.find(color => color.keyname === 'color.btn.primary.bg')?.value || siteColors?.primaryColor
 
-  const primaryColor = colors.find(color => color.keyname === 'color.btn.primary.bg')?.value || defaultPrimaryColor
-
-  const btnTextColor = colors.find(color => color.keyname === 'color.btn.primary.text')?.value || defaultColorText
+  const btnTextColor = colors.find(color => color.keyname === 'color.btn.primary.text')?.value || siteColors?.primaryLabel
 
   return (
     <ModalLayout

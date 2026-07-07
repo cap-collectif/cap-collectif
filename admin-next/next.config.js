@@ -9,6 +9,8 @@ const nextConfig = {
   basePath: '',
   env: {
     PRODUCTION: String(process.env.SYMFONY_ENV === 'prod'),
+    SYMFONY_TURNSTILE_PUBLIC_KEY: process.env.SYMFONY_TURNSTILE_PUBLIC_KEY,
+    NEXT_PUBLIC_SYMFONY_TURNSTILE_PUBLIC_KEY: process.env.SYMFONY_TURNSTILE_PUBLIC_KEY,
   },
   i18n: {
     defaultLocale: 'fr-FR',

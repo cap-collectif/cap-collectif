@@ -5,7 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalRevision;
@@ -20,15 +23,20 @@ use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionRepository;
 use Capco\AppBundle\Repository\StatusRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use DateTime;
@@ -44,6 +52,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ProposalMutation extends CreateProposalMutation implements ContainerAwareInterface
 {
@@ -66,6 +75,12 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         Publisher $publisher,
         protected AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProposalLikersDataLoader $proposalLikersDataLoader,
+        ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver,
+        ParticipantHelper $participantHelper,
+        ParticipantRepository $participantRepository,
+        ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        TokenGeneratorInterface $tokenGenerator,
         private readonly ProposalAccessResolver $proposalAccessResolver,
     ) {
         parent::__construct(
@@ -80,7 +95,13 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             $toggleManager,
             $responsesFormatter,
             $proposalRepository,
-            $publisher
+            $publisher,
+            $participantIsMeetingRequirementsResolver,
+            $viewerIsMeetingRequirementsResolver,
+            $participantHelper,
+            $participantRepository,
+            $participantsTotalCountCacheHandler,
+            $tokenGenerator
         );
     }
 
@@ -181,8 +202,15 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         return ['proposal' => $proposal];
     }
 
-    public function changeCollectStatus(string $proposalId, $user, ?string $statusId = null): array
+    /**
+     * @return array{ proposal: Proposal }
+     */
+    public function changeCollectStatus(Argument $arguments, ?User $user = null): array
     {
+        $this->formatInput($arguments);
+        $values = $arguments->getArrayCopy();
+        $statusId = $values['statusId'] ?? null;
+        $proposalId = $values['proposalId'] ?? null;
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
         if (!$proposal) {
             throw new UserError('Cant find the proposal');
@@ -190,22 +218,20 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
         $status = null;
         if ($statusId) {
-            $status = $this->container->get(StatusRepository::class)->find($statusId);
+            $status = $this->container->get(StatusRepository::class)?->find($statusId);
         }
         $proposal->setStatus($status);
         $this->em->flush();
 
-        $body = json_encode([
-            'proposalId' => $proposal->getId(),
-            'date' => new DateTime(),
-        ]);
-
-        if ($body) {
-            $this->publisher->publish(
-                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
-                new Message($body)
-            );
-        }
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+            new Message(
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                    'date' => new DateTime(),
+                ], \JSON_THROW_ON_ERROR)
+            )
+        );
 
         $this->invalidateCache($proposal);
 
@@ -434,19 +460,18 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, $viewer): array
+    public function changeContent(Argument $input, ?User $viewer = null): array
     {
         $this->formatInput($input);
-        $viewer = $this->preventNullableViewer($viewer);
         $values = $input->getArrayCopy();
+        $emailToken = $values['emailToken'] ?? null;
+        $participantToken = $values['participantToken'] ?? null;
+        if ($participantToken) {
+            $participantToken = base64_decode((string) $participantToken);
+        }
 
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $viewer);
-
-        ['canEdit' => $canEdit] = $this->proposalAccessResolver->__invoke($proposal, new Argument(), $viewer);
-        if (!$canEdit) {
-            throw new UserError("Can't edit proposal");
-        }
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
@@ -454,11 +479,57 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
             throw new UserError($error);
         }
+
+        $proposalForm = $proposal->getProposalForm();
+        $proposalParticipant = null;
+
+        ['canEdit' => $canEdit] = $this->proposalAccessResolver->__invoke($proposal, new Argument([
+            'participantToken' => $participantToken,
+            'emailToken' => $emailToken,
+        ]), $viewer);
+
+        if (!$canEdit) {
+            throw new UserError("Can't edit proposal");
+        }
+
+        if (!$viewer) {
+            $missingTokens = !$emailToken && !$participantToken;
+
+            if ($missingTokens) {
+                return [
+                    'userErrors' => [
+                        [
+                            'message' => 'Authentication is required to update a proposal, ' .
+                                'or you must provide a token that matches the proposal’s participant token or email token.',
+                        ],
+                    ],
+                    'shouldTriggerWorkflow' => false,
+                ];
+            }
+
+            /** @var ?Participant $proposalParticipant */
+            $proposalParticipant = $proposal->getParticipant();
+            $validParticipantToken = $participantToken && $participantToken === $proposalParticipant?->getToken();
+            $validEmailToken = $emailToken && $emailToken === $proposal->getEmailToken();
+            if (!$validParticipantToken && !$validEmailToken) {
+                return [
+                    'userErrors' => [
+                        [
+                            'message' => 'The provided token does not match the proposal’s participant token or email token.',
+                        ],
+                    ],
+                    'shouldTriggerWorkflow' => false,
+                ];
+            }
+        }
+
         if (isset($values['likers'])) {
             foreach ($values['likers'] as &$userGlobalId) {
                 $userGlobalId = GlobalIdResolver::getDecodedId($userGlobalId)['id'];
             }
         }
+
+        $shouldTriggerWorkflow = $this->getShouldTriggerWorkflow($proposalForm, $viewer ?? $proposalParticipant);
 
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
@@ -475,10 +546,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             : [];
         $wasInRevision = $proposalRevisionsEnabled && $proposal->isInRevision();
 
-        $author = $proposal->getAuthor();
+        $author = $proposalParticipant ?? $proposal->getAuthor();
 
-        unset($values['id']); // This only useful to retrieve the proposal
-        $proposalForm = $proposal->getProposalForm();
+        unset($values['participantToken'], $values['emailToken'], $values['id']);
 
         $draft = false;
 
@@ -493,17 +563,39 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+            'proposalHasParticipant' => (bool) $proposalParticipant,
         ]);
 
-        if (!$viewer->isAdmin()) {
+        // Handle author/participant update directly with entity setters (admin only)
+        $authorEntity = null;
+        if ($viewer?->isAdmin() && isset($values['author'])) {
+            $authorId = $values['author'];
+            $decodedAuthor = GlobalIdResolver::getDecodedId($authorId);
+
+            if (isset($decodedAuthor['type'])) {
+                // Resolve the actual entity
+                $authorEntity = $this->globalIdResolver->resolve($authorId, $viewer);
+
+                if (!$authorEntity) {
+                    throw new UserError(sprintf('Unknown author with id "%s"', $authorId));
+                }
+            }
+
+            // Remove from form values - we'll handle it manually
+            unset($values['author']);
+        }
+
+        if (!$viewer?->isAdmin()) {
             if (isset($values['author'])) {
                 $error = 'Only a user with role ROLE_ADMIN can update an author.';
                 $this->logger->error($error);
-                // For now we only log an error and unset the submitted value…
                 unset($values['author']);
             }
-            $form->remove('author');
         }
+
+        // Remove author and participant from form since we handle them manually
+        $form->remove('author');
+        $form->remove('participant');
 
         $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
@@ -511,6 +603,13 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         if (!$form->isValid()) {
             $this->handleErrors($form);
         }
+
+        // Apply author/participant update using setContributor
+        // It automatically handles both User and Participant types with mutual exclusivity
+        if ($authorEntity instanceof ContributorInterface) {
+            $proposal->setContributor($authorEntity);
+        }
+
         $now = new DateTime();
         if ($viewer === $author) {
             $proposal->setUpdatedAt($now);
@@ -555,7 +654,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
-        return ['proposal' => $proposal];
+        return ['proposal' => $proposal, 'shouldTriggerWorkflow' => $shouldTriggerWorkflow];
     }
 
     /** TODO use social networks validator */
@@ -655,7 +754,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     private function shouldBeDraft(
         Proposal $proposal,
-        User $author,
+        Author $author,
         array &$values,
         bool $wasDraft,
         bool &$draft
@@ -677,5 +776,14 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     private function getProposal(string $id, ?User $viewer): ?Proposal
     {
         return $this->globalIdResolver->resolve($id, $viewer);
+    }
+
+    private function getShouldTriggerWorkflow(ProposalForm $proposalForm, ContributorInterface $contributor): bool
+    {
+        $consentInternalCommunication = $contributor->isConsentInternalCommunication();
+        $username = $contributor->getUsername();
+        $proposalCount = $this->proposalRepository->getProposalCountByStepAndContributor($proposalForm->getStep(), $contributor);
+
+        return (!$consentInternalCommunication || !$username) && 1 === $proposalCount;
     }
 }

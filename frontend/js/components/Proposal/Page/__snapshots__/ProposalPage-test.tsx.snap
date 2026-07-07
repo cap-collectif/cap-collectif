@@ -13,12 +13,22 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
+              "name": "emailToken",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
               "name": "hasVotableStep",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "participantToken",
             },
             Object {
               "defaultValue": null,
@@ -35,11 +45,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               "kind": "LocalArgument",
               "name": "stepId",
             },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "token",
-            },
           ],
           "kind": "Fragment",
           "metadata": null,
@@ -49,6 +54,11 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               "args": Array [
                 Object {
                   "kind": "Variable",
+                  "name": "emailToken",
+                  "variableName": "emailToken",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "hasVotableStep",
                   "variableName": "hasVotableStep",
                 },
@@ -56,6 +66,11 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   "kind": "Variable",
                   "name": "isAuthenticated",
                   "variableName": "isAuthenticated",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "participantToken",
+                  "variableName": "participantToken",
                 },
                 Object {
                   "kind": "Variable",
@@ -71,11 +86,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   "kind": "Variable",
                   "name": "stepId",
                   "variableName": "stepId",
-                },
-                Object {
-                  "kind": "Variable",
-                  "name": "token",
-                  "variableName": "token",
                 },
               ],
               "kind": "FragmentSpread",
@@ -115,7 +125,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "61ae6358103170e04b6a2df1f37e8a59",
+        "hash": "93e2bbcc82d0c7bb725b035b00d36351",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -147,7 +157,12 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "token",
+              "name": "participantToken",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "emailToken",
             },
           ],
           "kind": "Operation",
@@ -156,6 +171,11 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             Object {
               "alias": "proposal",
               "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "participantToken",
+                  "variableName": "participantToken",
+                },
                 Object {
                   "kind": "Variable",
                   "name": "slug",
@@ -184,7 +204,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "concreteType": "User",
+                  "concreteType": null,
                   "kind": "LinkedField",
                   "name": "likers",
                   "plural": true,
@@ -193,47 +213,65 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "id",
+                      "name": "__typename",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "displayName",
+                      "name": "id",
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "UserType",
-                      "kind": "LinkedField",
-                      "name": "userType",
-                      "plural": false,
+                      "abstractKey": "__isContributor",
+                      "kind": "TypeDiscriminator",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
                       "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "name",
+                          "name": "url",
                           "storageKey": null,
                         },
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
+                          "name": "vip",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "UserType",
+                          "kind": "LinkedField",
+                          "name": "userType",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
                           "storageKey": null,
                         },
                       ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "url",
-                      "storageKey": null,
+                      "type": "User",
                     },
                     Object {
                       "alias": null,
@@ -246,22 +284,15 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "vip",
+                      "name": "avatarUrl",
                       "storageKey": null,
                     },
                     Object {
-                      "abstractKey": "__isContributor",
-                      "kind": "InlineFragment",
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "avatarUrl",
-                          "storageKey": null,
-                        },
-                      ],
-                      "type": "Contributor",
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "displayName",
+                      "storageKey": null,
                     },
                   ],
                   "storageKey": null,
@@ -1952,13 +1983,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "canContact",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "contribuable",
                       "storageKey": null,
                     },
@@ -3338,7 +3362,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "kind": "Variable",
                       "name": "token",
-                      "variableName": "token",
+                      "variableName": "participantToken",
                     },
                   ],
                   "concreteType": "ProposalVote",
@@ -3366,11 +3390,18 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "concreteType": "User",
+                  "concreteType": null,
                   "kind": "LinkedField",
                   "name": "author",
                   "plural": false,
                   "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "__typename",
+                      "storageKey": null,
+                    },
                     Object {
                       "alias": null,
                       "args": null,
@@ -3382,7 +3413,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "slug",
+                      "name": "username",
                       "storageKey": null,
                     },
                     Object {
@@ -3393,53 +3424,50 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "username",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "condition": "isAuthenticated",
-                      "kind": "Condition",
-                      "passingValue": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isViewer",
-                          "storageKey": null,
-                        },
-                      ],
-                    },
-                    Object {
-                      "abstractKey": "__isContributor",
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "avatarUrl",
+                          "name": "slug",
                           "storageKey": null,
                         },
                         Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "condition": "isAuthenticated",
+                          "kind": "Condition",
+                          "passingValue": true,
                           "selections": Array [
                             Object {
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "url",
+                              "name": "isViewer",
                               "storageKey": null,
                             },
                           ],
-                          "type": "User",
                         },
                       ],
-                      "type": "Contributor",
+                      "type": "User",
+                    },
+                    Object {
+                      "abstractKey": "__isContributor",
+                      "kind": "TypeDiscriminator",
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "avatarUrl",
+                      "storageKey": null,
                     },
                   ],
                   "storageKey": null,
@@ -3751,21 +3779,18 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 },
                 Object {
                   "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "url",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "contribuable",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "emailToken",
+                      "variableName": "emailToken",
+                    },
+                    Object {
+                      "kind": "Variable",
+                      "name": "participantToken",
+                      "variableName": "participantToken",
+                    },
+                  ],
                   "concreteType": "ProposalAccess",
                   "kind": "LinkedField",
                   "name": "access",
@@ -3786,6 +3811,27 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "storageKey": null,
                     },
                   ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "url",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "canContactAuthor",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "contribuable",
                   "storageKey": null,
                 },
                 Object {
@@ -5615,6 +5661,24 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": null,
+                      "kind": "LinkedField",
+                      "name": "author",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "email",
                           "storageKey": null,
                         },
                       ],
@@ -8261,7 +8325,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             Object {
                               "kind": "Variable",
                               "name": "token",
-                              "variableName": "token",
+                              "variableName": "participantToken",
                             },
                           ],
                           "concreteType": "ProposalVoteConnection",
@@ -8431,7 +8495,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 Object {
                                   "kind": "Variable",
                                   "name": "token",
-                                  "variableName": "token",
+                                  "variableName": "participantToken",
                                 },
                               ],
                               "kind": "ScalarField",
@@ -8591,7 +8655,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c57c11bb9cb2af92963e8a99da3c4d32",
+          "cacheID": "edba064a139a7b1b82751c4dee0bdcc5",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8602,9 +8666,10 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
   $stepId: ID!
   $isAuthenticated: Boolean!
   $proposalRevisionsEnabled: Boolean!
-  $token: String
+  $participantToken: String
+  $emailToken: String
 ) {
-  ...ProposalPageLogic_query_4aPrgF
+  ...ProposalPageLogic_query_1sMXKW
   step: node(id: $stepId) @include(if: $hasVotableStep) {
     __typename
     id
@@ -9144,6 +9209,11 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
       id
     }
   }
+  author {
+    __typename
+    email
+    id
+  }
   form {
     analysisConfiguration {
       id
@@ -9338,6 +9408,11 @@ fragment ProposalAssessmentFormPanel_proposal_2uwUKI on Proposal {
     }
     id
   }
+  author {
+    __typename
+    email
+    id
+  }
 }
 
 fragment ProposalChangeAddressModal_proposalForm on ProposalForm {
@@ -9423,6 +9498,11 @@ fragment ProposalDecisionFormPanel_proposal_2uwUKI on Proposal {
     }
     id
   }
+  author {
+    __typename
+    email
+    id
+  }
 }
 
 fragment ProposalDeleteModal_proposal on Proposal {
@@ -9473,6 +9553,7 @@ fragment ProposalDetailEstimation_proposal on Proposal {
 fragment ProposalDetailLikersLabel_proposal on Proposal {
   id
   likers {
+    __typename
     id
   }
 }
@@ -9480,22 +9561,26 @@ fragment ProposalDetailLikersLabel_proposal on Proposal {
 fragment ProposalDetailLikersModal_proposal on Proposal {
   id
   likers {
+    __typename
     ...UserAvatar_user
     id
     displayName
-    userType {
-      name
-      id
-    }
-    url
     username
-    vip
+    ... on User {
+      url
+      vip
+      userType {
+        name
+        id
+      }
+    }
   }
 }
 
 fragment ProposalDetailLikers_proposal on Proposal {
   id
   likers {
+    __typename
     id
   }
   ...ProposalDetailLikersLabel_proposal
@@ -10076,7 +10161,11 @@ fragment ProposalPageFusionInformations_proposal on Proposal {
   }
 }
 
-fragment ProposalPageHeaderButtons_proposal_b300R on Proposal {
+fragment ProposalPageHeaderButtons_proposal_m7Ywi on Proposal {
+  access(participantToken: $participantToken, emailToken: $emailToken) {
+    canEdit
+    canDelete
+  }
   id
   url
   title
@@ -10091,10 +10180,15 @@ fragment ProposalPageHeaderButtons_proposal_b300R on Proposal {
     totalCount
   }
   author {
+    __typename
     id
-    slug
+    username
     displayName
+    ... on User {
+      slug
+    }
   }
+  canContactAuthor
   contribuable
   form {
     step {
@@ -10104,17 +10198,12 @@ fragment ProposalPageHeaderButtons_proposal_b300R on Proposal {
       }
       id
     }
-    canContact
     contribuable
     id
   }
   isArchived
   publicationStatus
-  access {
-    canEdit
-    canDelete
-  }
-  ...ProposalVoteButtonWrapperFragment_proposal_2crCiI
+  ...ProposalVoteButtonWrapperFragment_proposal_3IH2WL
   ...ProposalVoteModal_proposal
   ...ProposalFollowButton_proposal_39ngnn
   ...ProposalReportButton_proposal_39ngnn
@@ -10122,11 +10211,11 @@ fragment ProposalPageHeaderButtons_proposal_b300R on Proposal {
   ...ProposalDeleteModal_proposal
 }
 
-fragment ProposalPageHeaderButtons_step_2uzqnG on ProposalStep {
+fragment ProposalPageHeaderButtons_step_477vzn on ProposalStep {
   __isProposalStep: __typename
   open
-  ...ProposalVoteButtonWrapperFragment_step_2uzqnG
-  ...ProposalVoteModal_step_3Q7IHq
+  ...ProposalVoteButtonWrapperFragment_step_477vzn
+  ...ProposalVoteModal_step_1DdykU
 }
 
 fragment ProposalPageHeaderButtons_viewer_3VJ3TV on User {
@@ -10134,11 +10223,11 @@ fragment ProposalPageHeaderButtons_viewer_3VJ3TV on User {
   ...ProposalVoteButtonWrapperFragment_viewer_Q37Wz @include(if: $hasVotableStep)
 }
 
-fragment ProposalPageHeader_proposal_b300R on Proposal {
+fragment ProposalPageHeader_proposal_m7Ywi on Proposal {
   id
   ...TrashedMessage_contribution
   ...UnpublishedLabel_publishable
-  ...ProposalPageHeaderButtons_proposal_b300R
+  ...ProposalPageHeaderButtons_proposal_m7Ywi
   title
   media {
     url
@@ -10157,9 +10246,13 @@ fragment ProposalPageHeader_proposal_b300R on Proposal {
     id
   }
   author {
+    __typename
     username
-    isViewer @include(if: $isAuthenticated)
+    displayName
     ...UserAvatar_user
+    ... on User {
+      isViewer @include(if: $isAuthenticated)
+    }
     id
   }
   createdAt
@@ -10197,9 +10290,9 @@ fragment ProposalPageHeader_proposal_b300R on Proposal {
   }
 }
 
-fragment ProposalPageHeader_step_2uzqnG on ProposalStep {
+fragment ProposalPageHeader_step_477vzn on ProposalStep {
   __isProposalStep: __typename
-  ...ProposalPageHeaderButtons_step_2uzqnG
+  ...ProposalPageHeaderButtons_step_477vzn
 }
 
 fragment ProposalPageHeader_viewer_4ESFbG on User {
@@ -10219,7 +10312,7 @@ fragment ProposalPageLocalisation_proposal on Proposal {
   }
 }
 
-fragment ProposalPageLogic_query_4aPrgF on Query {
+fragment ProposalPageLogic_query_1sMXKW on Query {
   viewer @include(if: $isAuthenticated) {
     id
     ...ProposalAnalysisPanel_viewer
@@ -10234,21 +10327,21 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
       title
       url
     }
-    ...ProposalPageHeader_step_2uzqnG
+    ...ProposalPageHeader_step_477vzn
     ...ProposalPageTabs_step
-    ...ProposalVoteBasketWidget_step_3Q7IHq
+    ...ProposalVoteBasketWidget_step_1DdykU
     id
   }
-  proposal: proposalFromSlug(slug: $proposalSlug) {
+  proposal: proposalFromSlug(slug: $proposalSlug, participantToken: $participantToken) {
     ...ProposalPageAside_proposal_Q37Wz
     ...ProposalDraftAlert_proposal
-    ...ProposalPageMainContent_proposal_2uzqnG
+    ...ProposalPageMainContent_proposal_477vzn
     ...ProposalPageAlert_proposal
     ...ProposalPageTabs_proposal
     ...ProposalPageVotes_proposal
     ...ProposalPageBlog_proposal
     ...ProposalPageFollowers_proposal
-    ...ProposalPageHeader_proposal_b300R
+    ...ProposalPageHeader_proposal_m7Ywi
     ...ProposalPageMainAside_proposal_Q37Wz @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal_2uwUKI @include(if: $isAuthenticated)
     viewerCanDecide @include(if: $isAuthenticated)
@@ -10309,7 +10402,7 @@ fragment ProposalPageMainAside_proposal_Q37Wz on Proposal {
   }
 }
 
-fragment ProposalPageMainContent_proposal_2uzqnG on Proposal {
+fragment ProposalPageMainContent_proposal_477vzn on Proposal {
   ...ProposalPageFusionInformations_proposal
   ...ProposalPageOfficialAnswer_proposal
   ...ProposalPageDescription_proposal
@@ -10318,7 +10411,7 @@ fragment ProposalPageMainContent_proposal_2uzqnG on Proposal {
   ...ProposalPageMainAside_proposal_Q37Wz
   ...ProposalPageNews_proposal_39ngnn
   ...ProposalPageDiscussions_proposal
-  ...ProposalVoteButtonWrapperFragment_proposal_2crCiI
+  ...ProposalVoteButtonWrapperFragment_proposal_3IH2WL
   ...ProposalPageComments_proposal
   ...ProposalReportButton_proposal_39ngnn
 }
@@ -10333,6 +10426,7 @@ fragment ProposalPageMetadata_proposal on Proposal {
     id
   }
   likers {
+    __typename
     id
   }
   category {
@@ -10486,6 +10580,7 @@ fragment ProposalPageVotes_proposal on Proposal {
 fragment ProposalReportButton_proposal_39ngnn on Proposal {
   id
   author {
+    __typename
     id
   }
   viewerHasReport @include(if: $isAuthenticated)
@@ -10786,9 +10881,9 @@ fragment ProposalViewDecisionPanel_proposal on Proposal {
   }
 }
 
-fragment ProposalVoteBasketWidget_step_3Q7IHq on ProposalStep {
+fragment ProposalVoteBasketWidget_step_1DdykU on ProposalStep {
   __isProposalStep: __typename
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
   }
   project {
@@ -10816,7 +10911,7 @@ fragment ProposalVoteBasketWidget_viewer_2r3fA4 on User {
   }
 }
 
-fragment ProposalVoteButtonWrapperFragment_proposal_2crCiI on Proposal {
+fragment ProposalVoteButtonWrapperFragment_proposal_3IH2WL on Proposal {
   id
   title
   estimation
@@ -10829,7 +10924,7 @@ fragment ProposalVoteButtonWrapperFragment_proposal_2crCiI on Proposal {
     completionStatus
     id
   }
-  contributorVote(step: $stepId, token: $token) {
+  contributorVote(step: $stepId, token: $participantToken) {
     completionStatus
     id
   }
@@ -10844,17 +10939,17 @@ fragment ProposalVoteButtonWrapperFragment_proposal_2crCiI on Proposal {
     objectType
     id
   }
-  ...ProposalVoteButton_proposal_2crCiI
+  ...ProposalVoteButton_proposal_3IH2WL
 }
 
-fragment ProposalVoteButtonWrapperFragment_step_2uzqnG on ProposalStep {
+fragment ProposalVoteButtonWrapperFragment_step_477vzn on ProposalStep {
   __isProposalStep: __typename
   id
   votesLimit
   voteType
   budget
   open
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
     edges {
       node {
@@ -10865,7 +10960,7 @@ fragment ProposalVoteButtonWrapperFragment_step_2uzqnG on ProposalStep {
       }
     }
   }
-  ...ProposalVoteButton_step_2uzqnG
+  ...ProposalVoteButton_step_477vzn
   ...VoteButtonOverlay_step
 }
 
@@ -10877,7 +10972,7 @@ fragment ProposalVoteButtonWrapperFragment_viewer_Q37Wz on User {
   }
 }
 
-fragment ProposalVoteButton_proposal_2crCiI on Proposal {
+fragment ProposalVoteButton_proposal_3IH2WL on Proposal {
   id
   title
   project {
@@ -10899,7 +10994,7 @@ fragment ProposalVoteButton_proposal_2crCiI on Proposal {
     ...UnpublishedTooltip_publishable
   }
   paper: paperVotesTotalCount(stepId: $stepId)
-  contributorVote(step: $stepId, token: $token) {
+  contributorVote(step: $stepId, token: $participantToken) {
     id
     completionStatus
   }
@@ -10908,18 +11003,18 @@ fragment ProposalVoteButton_proposal_2crCiI on Proposal {
   }
 }
 
-fragment ProposalVoteButton_step_2uzqnG on ProposalStep {
+fragment ProposalVoteButton_step_477vzn on ProposalStep {
   __isProposalStep: __typename
   id
   votesRanking
   votesMin
   votesLimit
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
   }
   requirements {
     viewerMeetsTheRequirements @include(if: $isAuthenticated)
-    participantMeetsTheRequirements(token: $token)
+    participantMeetsTheRequirements(token: $participantToken)
     edges {
       node {
         __typename
@@ -10933,7 +11028,7 @@ fragment ProposalVoteModal_proposal on Proposal {
   id
 }
 
-fragment ProposalVoteModal_step_3Q7IHq on ProposalStep {
+fragment ProposalVoteModal_step_1DdykU on ProposalStep {
   __isProposalStep: __typename
   id
   votesRanking
@@ -10947,7 +11042,7 @@ fragment ProposalVoteModal_step_3Q7IHq on ProposalStep {
       id
     }
   }
-  ...VoteMinAlert_step_3Q7IHq
+  ...VoteMinAlert_step_1DdykU
   isSecretBallot
   canDisplayBallot
   publishedVoteDate
@@ -10955,18 +11050,18 @@ fragment ProposalVoteModal_step_3Q7IHq on ProposalStep {
     objectType
     id
   }
-  ...ProposalsUserVotesTable_step_3Q7IHq
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  ...ProposalsUserVotesTable_step_1DdykU
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     ...ProposalsUserVotesTable_votes
     totalCount
   }
 }
 
-fragment ProposalsUserVotesTable_step_3Q7IHq on ProposalStep {
+fragment ProposalsUserVotesTable_step_1DdykU on ProposalStep {
   __isProposalStep: __typename
   id
   votesRanking
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
   }
   votesLimit
@@ -11053,9 +11148,9 @@ fragment VoteButtonOverlay_step on ProposalStep {
   votesLimit
 }
 
-fragment VoteMinAlert_step_3Q7IHq on ProposalStep {
+fragment VoteMinAlert_step_1DdykU on ProposalStep {
   __isProposalStep: __typename
-  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
   }
   votesMin
@@ -11081,12 +11176,13 @@ fragment VoteMinAlert_step_3Q7IHq on ProposalStep {
   render={[Function]}
   variables={
     Object {
+      "emailToken": null,
       "hasVotableStep": true,
       "isAuthenticated": false,
+      "participantToken": undefined,
       "proposalRevisionsEnabled": false,
       "proposalSlug": undefined,
       "stepId": "stepid",
-      "token": undefined,
     }
   }
 />

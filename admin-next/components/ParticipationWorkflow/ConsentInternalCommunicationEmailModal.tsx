@@ -2,15 +2,15 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, Flex, FormLabel, Link, Text, toast, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
 import React from 'react'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
-import { useSelector } from 'react-redux'
 import ModalLayout from './ModalLayout'
 import { CenteredLogoLayout } from './ModalLayoutHeader'
 import { useParticipationWorkflow } from './ParticipationWorkflowContext'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useSendParticipantConsentInternalCommunicationEmailMutation } from './mutations/SendParticipantConsentInternalCommunicationEmailMutation'
-import { GlobalState } from './types'
+import { buildToastUrl } from './utils/buildToastUrl'
 
 type FormValues = {
   email: string
@@ -30,8 +30,8 @@ const ConsentInternalCommunicationEmailModal = () => {
   const { isLoading, commit } = sendParticipantConsentInternalCommunicationEmailMutation
 
   const { control, handleSubmit, setFocus } = useFormContext<FormValues>()
-
-  const linkColor = useSelector((state: GlobalState) => state.default.parameters['color.link.default'])
+  const { siteColors } = useAppContext()
+  const linkColor = siteColors?.linkColor ?? 'inherit'
 
   const buttonRef = React.useRef(null)
 
@@ -66,8 +66,10 @@ const ConsentInternalCommunicationEmailModal = () => {
   }, [remainingSecondsUntilRetry, hasRetryError])
 
   const getRedirectUrl = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'your-participation-is-confirmed' })
-    return `${contributionUrl}?toast=${toastConfig}`
+    return buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'your-participation-is-confirmed',
+    })
   }
 
   const redirectUrl = getRedirectUrl()

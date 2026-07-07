@@ -11,19 +11,19 @@ import type {
 } from '~relay/CreateProposalMutation.graphql'
 
 const mutation = graphql`
-  mutation CreateProposalMutation($input: CreateProposalInput!, $stepId: ID!) {
+  mutation CreateProposalMutation($input: CreateProposalInput!, $stepId: ID!, $isAuthenticated: Boolean!) {
     createProposal(input: $input) {
       proposal {
         ...DraftProposalPreview_proposal @relay(mask: false)
         ...ProposalEditModal_proposal @arguments(proposalRevisionsEnabled: false)
-        ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: true, isProfileView: false)
+        ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, isProfileView: false)
         ...ProposalLeafletMap_proposals
-        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: true)
+        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         id
         url
         publicationStatus
         reference
-        ...ProposalMapSelectedView_proposal @arguments(stepId: $stepId, isAuthenticated: true)
+        ...ProposalMapSelectedView_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         id
         address {
           lat
@@ -35,9 +35,14 @@ const mutation = graphql`
         }
         ...interpellationLabelHelper_proposal @relay(mask: false)
       }
+      proposalId: proposal {
+        id
+      }
       userErrors {
         message
       }
+      shouldTriggerWorkflow
+      participantToken
     }
   }
 `
@@ -100,6 +105,42 @@ const commit = (
         if (proposalHeaderConnection) {
           const proposalsCount = parseInt(proposalHeaderConnection.getValue('totalCount'), 10)
           proposalHeaderConnection.setValue(proposalsCount + 1, 'totalCount')
+        }
+
+        const projectProxy = proposal.getLinkedRecord('project') || stepProxy.getLinkedRecord('project')
+
+        if (projectProxy) {
+          const contributions = projectProxy.getLinkedRecord('contributions')
+
+          if (contributions) {
+            const contributionsCount = Number(contributions.getValue('totalCount') || 0)
+            contributions.setValue(contributionsCount + 1, 'totalCount')
+          }
+
+          const formProxy = proposal.getLinkedRecord('form')
+          const objectType = formProxy?.getValue('objectType')
+
+          if (objectType === 'OPINION') {
+            const opinions = projectProxy.getLinkedRecord('opinions', {
+              type: 'OPINION',
+            })
+
+            if (opinions) {
+              const opinionsCount = Number(opinions.getValue('totalCount') || 0)
+              opinions.setValue(opinionsCount + 1, 'totalCount')
+            }
+          }
+
+          if (objectType === 'PROPOSAL') {
+            const proposals = projectProxy.getLinkedRecord('proposals', {
+              type: 'PROPOSAL',
+            })
+
+            if (proposals) {
+              const proposalsCount = Number(proposals.getValue('totalCount') || 0)
+              proposals.setValue(proposalsCount + 1, 'totalCount')
+            }
+          }
         }
 
         if (gridConnection) {

@@ -70,7 +70,7 @@ InternalProposal:
                         type: 'ID'
                         description: 'Used to get the status on a selection step.'
             likers:
-                type: '[InternalUser!]!'
+                type: '[InternalContributor!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalLikersResolver", value)'
             estimation:
                 type: 'Float'
@@ -86,7 +86,7 @@ InternalProposal:
             district:
                 type: 'InternalProposalDistrict'
             author:
-                type: 'InternalUser!'
+                type: 'InternalContributor!'
             deletedAt:
                 type: 'DateTime'
                 description: 'The delete date.'
@@ -266,7 +266,7 @@ InternalProposal:
             revisions:
                 type: 'ProposalRevisionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('proposal_revisions')"
+                access: "hasFeatureFlag('proposal_revisions')"
                 description: "The proposal's related revision in pending state."
                 args:
                     state:
@@ -308,6 +308,20 @@ InternalProposal:
                 description: 'The last step containing this proposal.'
                 type: 'ProposalStep!'
                 resolve: '@=value.getLastStepContainingProposal()'
+            completionStatus:
+                type: 'ContributionCompletionStatus!'
+                description: 'The contribution status wether or not the participant/user has meet all requirements'
             access:
-                type: 'ProposalAccess!'
+                type: 'ProposalAccess'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAccessResolver", value, args, getUser())'
+                args:
+                    participantToken:
+                        type: 'String'
+                        description: 'Token of the participant'
+                    emailToken:
+                        type: 'String'
+                        description: 'Token of the email'
+            requirementsUrl:
+                type: 'URI'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\RequirementsUrlResolver", value)'
+                description: 'The url to the requirements workflow.'

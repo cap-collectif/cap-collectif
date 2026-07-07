@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -38,6 +39,8 @@ use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
 use Capco\Manager\RepositoryManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -45,6 +48,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
@@ -146,7 +150,9 @@ class GlobalIdResolver
         private readonly ContainerInterface $container,
         private readonly LoggerInterface $logger,
         private readonly EntityManagerInterface $entityManager,
-        private readonly RepositoryManager $repositoryManager
+        private readonly RepositoryManager $repositoryManager,
+        private readonly RequestStack $requestStack,
+        private readonly ParticipantHelper $participantHelper
     ) {
     }
 
@@ -346,7 +352,7 @@ class GlobalIdResolver
             }
 
             if ($node instanceof Proposal) {
-                return $node->viewerCanSee($user);
+                return $node->viewerCanSee($user) || $this->participantCanSeeProposal($node, $user);
             }
             if ($node instanceof $object) {
                 return $node->canDisplay($user);
@@ -358,6 +364,31 @@ class GlobalIdResolver
         }
 
         return true;
+    }
+
+    private function participantCanSeeProposal(Proposal $proposal, ?User $user): bool
+    {
+        if ($user || $proposal->isDeleted() || !$proposal->getParticipant()) {
+            return false;
+        }
+
+        $participantToken = $this->requestStack
+            ->getCurrentRequest()
+            ?->cookies
+            ->get(ParticipationCookieManager::PARTICIPANT_COOKIE)
+        ;
+
+        if (!$participantToken) {
+            return false;
+        }
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException) {
+            return false;
+        }
+
+        return $participant?->getId() === $proposal->getParticipant()->getId();
     }
 
     /**

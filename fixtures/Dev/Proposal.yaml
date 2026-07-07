@@ -19,6 +19,8 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
         undraftAt: $publishedAt
         moderationToken: 'proposalToken1'
+        participant: '@participant1'
+        emailToken: 'fakeEmailToken1'
     deletedProposal1:
         likers: ['@user1', '@user2']
         evaluers: ['@group1']

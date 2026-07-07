@@ -6,6 +6,33 @@ exports[`<VisibilityBox /> renders children if not enabled 1`] = `
 />
 `;
 
+exports[`<VisibilityBox /> renders children if participant is resolved 1`] = `
+<div
+  className="PrivateList"
+>
+  <p
+    id="privateInfo"
+  >
+    <i
+      className="glyphicon glyphicon-lock"
+    />
+    <strong>
+      <FormattedMessage
+        id="global.private"
+        values={Object {}}
+      />
+    </strong>
+  </p>
+  <div
+    className="PrivateList__box"
+  >
+    <div
+      className="foo"
+    />
+  </div>
+</div>
+`;
+
 exports[`<VisibilityBox /> renders children if user is logged 1`] = `
 <div
   className="PrivateList"
@@ -16,7 +43,6 @@ exports[`<VisibilityBox /> renders children if user is logged 1`] = `
     <i
       className="glyphicon glyphicon-lock"
     />
-     
     <strong>
       <FormattedMessage
         id="global.private"

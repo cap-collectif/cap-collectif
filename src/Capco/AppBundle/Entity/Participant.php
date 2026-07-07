@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Repository\ParticipantRepository;
@@ -20,7 +21,7 @@ use Symfony\Component\Uid\Uuid;
  * @ORM\Table(name="participant")
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements EntityInterface, ContributorInterface, IndexableInterface, \Stringable
+class Participant implements EntityInterface, ContributorInterface, IndexableInterface, \Stringable, Author
 {
     use ContributorTrait;
     use TimestampableTrait;
@@ -130,9 +131,21 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     private ?\DateTimeInterface $updatedAt = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private ?Media $media = null;
+
+    /**
      * @ORM\Column(name="consent_privacy_policy", type="boolean", options={"default" : 0})
      */
     private bool $consentPrivacyPolicy = false;
+
+    /**
+     * @var Collection<int, Proposal>
+     * @ORM\OneToMany(targetEntity=Proposal::class, mappedBy="participant", cascade={"persist"})
+     */
+    private Collection $proposals;
 
     /**
      * @ORM\Column(name="last_contributed_at", type="datetime", nullable=true)
@@ -151,6 +164,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         $this->participantPhoneVerificationSms = new ArrayCollection();
         $this->mediatorParticipantSteps = new ArrayCollection();
         $this->anonymizationReminderEmailToken = Uuid::v4()->toRfc4122();
+        $this->proposals = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -424,6 +438,15 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         return $this;
     }
 
+    public function getDisplayName(): string
+    {
+        if ($this->username) {
+            return $this->username;
+        }
+
+        return 'Anonyme';
+    }
+
     public function getConsentSmsCommunication(): bool
     {
         return $this->consentSmsCommunication;
@@ -453,6 +476,18 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         $this->updatedAt = new \DateTime();
     }
 
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): self
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
     public function isConsentPrivacyPolicy(): bool
     {
         return $this->consentPrivacyPolicy;
@@ -461,6 +496,33 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     public function setConsentPrivacyPolicy(bool $consentPrivacyPolicy): self
     {
         $this->consentPrivacyPolicy = $consentPrivacyPolicy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Proposal>
+     */
+    public function getProposals(): Collection
+    {
+        return $this->proposals;
+    }
+
+    public function addProposal(Proposal $proposal): self
+    {
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals[] = $proposal;
+            $proposal->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposal(Proposal $proposal): self
+    {
+        if ($this->proposals->removeElement($proposal) && $proposal->getParticipant() === $this) {
+            $proposal->setParticipant(null);
+        }
 
         return $this;
     }
@@ -502,18 +564,6 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         $this->lastContributedAt = $lastContributedAt;
 
         return $this;
-    }
-
-    public function getMedia(): ?Media
-    {
-        // will be fixed when rebasing parcours dépôt
-        return null;
-    }
-
-    public function getProposals(): Collection
-    {
-        // will be fixed when rebasing parcours dépôt
-        return new ArrayCollection();
     }
 
     public function getAnonymizedAt(): ?\DateTime

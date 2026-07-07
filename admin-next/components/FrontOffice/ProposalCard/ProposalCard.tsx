@@ -24,6 +24,7 @@ import convertIconToDs from '@shared/utils/convertIconToDs'
 import { useQueryState } from 'nuqs'
 import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
 import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
+import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
 
 type Props = BoxProps & {
   proposal: ProposalCard_proposal$key
@@ -58,6 +59,7 @@ const PROPOSAL_FRAGMENT = graphql`
     }
     author {
       username
+      displayName
     }
     viewerVote(step: $stepId) {
       ranking
@@ -109,6 +111,7 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const step = useFragment(STEP_FRAGMENT, stepFragment)
+  const authorName = getProposalAuthorDisplayName(proposal.author)
   const { id, title, url, media, summary, body, category, form, status } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
 
@@ -190,7 +193,7 @@ export const ProposalCard: React.FC<Props> = ({
             {proposal?.author ? (
               <Tag variantColor="infoGray" transparent>
                 <Icon name={CapUIIcon.UserO} />
-                <Text>{proposal?.author?.username}</Text>
+                <Text>{authorName}</Text>
               </Tag>
             ) : null}
           </Flex>

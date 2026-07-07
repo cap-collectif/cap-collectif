@@ -14,9 +14,17 @@ type HeaderProps = {
   intl: IntlShape
   onClose: () => void
   isMobile: boolean
+  optional?: boolean
 }
 
-export const DefaultLayout: React.FC<HeaderProps> = ({ logo, goBackCallback, isMobile, onClose, intl }) => {
+export const DefaultLayout: React.FC<HeaderProps> = ({
+  logo,
+  goBackCallback,
+  isMobile,
+  onClose,
+  intl,
+  optional = false,
+}) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px">
       <Box ml={6} display={['none', 'block']}>
@@ -53,7 +61,9 @@ export const DefaultLayout: React.FC<HeaderProps> = ({ logo, goBackCallback, isM
           >
             {isMobile
               ? intl.formatMessage({ id: 'participation-workflow.validation' })
-              : intl.formatMessage({ id: 'participation-workflow.requirements' })}
+              : intl.formatMessage({
+                  id: optional ? 'participation-workflow.not_required' : 'participation-workflow.requirements',
+                })}
           </Heading>
           <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700">
             {intl.formatMessage({ id: 'participation-workflow.validation' })}
@@ -75,7 +85,7 @@ export const CenteredLogoLayout = ({ logo }: Pick<HeaderProps, 'logo'>) => {
   )
 }
 
-export const HideBackArrowLayout: React.FC<HeaderProps> = ({ logo, isMobile, onClose, intl }) => {
+export const HideBackArrowLayout: React.FC<HeaderProps> = ({ logo, isMobile, onClose, intl, optional = false }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px">
       <Box ml={6} display={['none', 'block']}>
@@ -104,7 +114,9 @@ export const HideBackArrowLayout: React.FC<HeaderProps> = ({ logo, isMobile, onC
           >
             {isMobile
               ? intl.formatMessage({ id: 'participation-workflow.validation' })
-              : intl.formatMessage({ id: 'participation-workflow.requirements' })}
+              : intl.formatMessage({
+                  id: optional ? 'participation-workflow.not_required' : 'participation-workflow.requirements',
+                })}
           </Heading>
           <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700">
             {intl.formatMessage({ id: 'participation-workflow.validation' })}

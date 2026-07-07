@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
@@ -16,7 +17,7 @@ trait ContributionRepositoryTrait
      * @return array<int, object>
      */
     public function findCreatedSinceIntervalByAuthor(
-        User $author,
+        ContributorInterface $author,
         string $interval,
         string $authorField = 'author'
     ): array {

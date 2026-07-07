@@ -111,7 +111,7 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="zipCode" control={control} isRequired>
-            <FormLabel htmlFor="zipCode" label={intl.formatMessage({ id: 'user_zipCode' })} />
+            <FormLabel fontWeight={[400, 600]} htmlFor="zipCode" label={intl.formatMessage({ id: 'user_zipCode' })} />
             <FieldInput
               id="zipCode"
               name="zipCode"

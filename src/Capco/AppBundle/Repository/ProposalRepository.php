@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -209,6 +211,38 @@ class ProposalRepository extends EntityRepository
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('proposal.publishedAt', $direction);
         }
+
+        return new Paginator($qb);
+    }
+
+    public function countProposalsByFormAndParticipant(ProposalForm $form, Participant $participant): int
+    {
+        return (int) $this->qbProposalsByFormAndParticipant($form, $participant)
+            ->select('COUNT(proposal.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function getProposalsByFormAndParticipant(
+        ProposalForm $form,
+        Participant $participant,
+        int $first,
+        int $offset,
+        string $field,
+        string $direction = 'DESC'
+    ): Paginator {
+        $qb = $this->qbProposalsByFormAndParticipant($form, $participant)
+            ->setFirstResult($first)
+            ->setMaxResults($offset)
+        ;
+
+        match ($field) {
+            'PUBLISHED_AT' => $qb->addOrderBy('proposal.publishedAt', $direction),
+            'CREATED_AT' => $qb->addOrderBy('proposal.createdAt', $direction),
+            'COST' => $qb->addOrderBy('proposal.estimation', $direction),
+            default => $qb->addOrderBy('proposal.publishedAt', 'DESC'),
+        };
 
         return new Paginator($qb);
     }
@@ -861,6 +895,29 @@ class ProposalRepository extends EntityRepository
         }
     }
 
+    public function getProposalCountByStepAndContributor(CollectStep $step, ContributorInterface $contributor): int
+    {
+        $qb = $this->createQueryBuilder('proposal')
+            ->select('COUNT(proposal.id)')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+            ->leftJoin('proposalForm.step', 'step')
+            ->andWhere('proposalForm.step = :step')
+            ->setParameter('step', $step)
+        ;
+
+        if ($contributor instanceof Participant) {
+            $qb->andWhere('proposal.participant = :participant')
+                ->setParameter('participant', $contributor)
+            ;
+        } else {
+            $qb->andWhere('proposal.author = :author')
+                ->setParameter('author', $contributor)
+            ;
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     /**
      * @param Proposal[] $proposals
      */
@@ -1050,6 +1107,16 @@ class ProposalRepository extends EntityRepository
             ->andWhere('userGroup.user = :user')
             ->setParameter('form', $form)
             ->setParameter('user', $user)
+        ;
+    }
+
+    private function qbProposalsByFormAndParticipant(ProposalForm $form, Participant $participant): QueryBuilder
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->andWhere('proposal.proposalForm = :form')
+            ->andWhere('proposal.participant = :participant')
+            ->setParameter('form', $form)
+            ->setParameter('participant', $participant)
         ;
     }
 

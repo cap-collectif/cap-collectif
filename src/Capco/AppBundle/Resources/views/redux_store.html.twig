@@ -38,6 +38,7 @@
             'isAdminOrganization': app.user.isAdminOrganization,
             'isEvaluerOnLegacyTool': app.user.isEvaluerOnLegacyTool,
             'isEvaluerOnNewTool': viewerCanSeeEvaluationsPageResolver.__invoke(app.user),
+            'consentPrivacyPolicy': app.user.consentPrivacyPolicy,
             'email': app.user.email,
             'newEmailToConfirm': app.user.newEmailToConfirm,
             'media': app.user.media

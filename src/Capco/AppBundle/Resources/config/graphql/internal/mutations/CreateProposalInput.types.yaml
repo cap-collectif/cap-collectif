@@ -41,3 +41,6 @@ CreateProposalInput:
             media:
                 type: 'ID'
                 description: 'The media id to illustrate'
+            participantToken:
+                type: 'String'
+                description: 'The participant token'

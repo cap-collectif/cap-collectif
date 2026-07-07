@@ -26,6 +26,7 @@ import { getBaseUrlFromProposalUrl } from '~/utils/router'
 import { Link, ACTIVE_COLOR, VoteStepEvent, dispatchEvent, cardWidthListView, cardWidthMapView } from '../utils'
 import stripHtml from '@shared/utils/stripHTML'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 
 import ProposalPreviewCardFooter from './ProposalPreviewCardFooter'
 
@@ -39,9 +40,12 @@ const FRAGMENT = graphql`
     summary
     body
     author {
+      username
       displayName
-      media {
-        url
+      ...on User {
+        media {
+          url
+        }
       }
     }
     category {
@@ -151,12 +155,13 @@ export const ProposalPreviewCard = ({
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)
   const step = useFragment(FRAGMENT_STEP, stepFragment)
+  const authorName = getProposalAuthorDisplayName(proposal?.author)
   const isCompleteView = useFeatureFlag('full_proposal_card')
 
   const { projectSlug } = useParams<{ projectSlug?: string }>()
   if (!proposal || !step) return null
 
-  const { media, author, category, title, summary, body, status, district, currentVotableStep } = proposal
+  const { media, category, title, summary, body, status, district, currentVotableStep } = proposal
 
   const { viewerVotes } = step
 
@@ -199,7 +204,7 @@ export const ProposalPreviewCard = ({
                 {status?.name}
               </Tag>
             ) : null}
-            {!isCompleteView ? <Proposal.Content.Header.Author author={author.displayName} /> : null}
+            {!isCompleteView ? <Proposal.Content.Header.Author author={authorName} /> : null}
             {isCompleteView ? (
               <>
                 {district ? <Proposal.Content.Header.Author author={district.name} icon={CapUIIcon.PinO} /> : null}
@@ -245,7 +250,7 @@ export const ProposalPreviewCard = ({
             step={step}
             stepId={stepId}
           />
-          {isCompleteView ? <Proposal.Content.Header.Author author={author.displayName} mt={4} /> : null}
+          {isCompleteView ? <Proposal.Content.Header.Author author={authorName} mt={4} /> : null}
         </Flex>
       </Proposal.Content>
       {showImage ? (

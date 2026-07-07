@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reply;
@@ -60,6 +61,8 @@ class RequirementsUrlResolver implements QueryInterface
         $type = null;
         if ($contribution instanceof Reply) {
             $type = 'Reply';
+        } elseif ($contribution instanceof Proposal) {
+            $type = 'Proposal';
         } elseif ($contribution instanceof ProposalSelectionVote || $contribution instanceof ProposalCollectVote) {
             $type = 'AbstractVote';
         }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -34,7 +35,7 @@ trait ResponsesResolverTrait
 
     public function filterVisibleResponses(
         iterable $responses,
-        User $author,
+        ?Author $author,
         $viewer,
         \ArrayObject $context,
         bool $isLegacyAnalyst = false,

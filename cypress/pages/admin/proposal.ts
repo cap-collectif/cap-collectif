@@ -31,6 +31,30 @@ export default new (class AdminproposalPage {
     return this.cy.get('#proposal-admin-edit-responses1')
   }
 
+  get statusTab() {
+    return this.cy.get('#proposal-admin-page-tabs-tab-6')
+  }
+
+  get statusTabPane() {
+    return this.cy.get('#proposal-admin-page-tabs-pane-6')
+  }
+
+  publicationStatusInput(status: string) {
+    return this.cy.get(
+      `#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="${status}"]`,
+    )
+  }
+
+  selectPublicationStatus(status: string) {
+    this.publicationStatusInput(status).next('span').click()
+  }
+
+  saveStatus() {
+    this.cy
+      .get('#proposal-admin-page-tabs-pane-6 button[type="submit"].btn.btn-primary')
+      .click()
+  }
+
   fillProposalInputs(title: string, summary: string, body: string, response: string, privateResponse: string) {
     this.proposalTitleInput.clear().type(title)
     this.proposalSummaryInput.clear().type(summary)

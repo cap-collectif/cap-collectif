@@ -9,6 +9,7 @@ import { openDeleteProposalModal } from '~/redux/modules/proposal'
 import type { ProposalPageHeaderButtons_proposal$data } from '~relay/ProposalPageHeaderButtons_proposal.graphql'
 import type { ProposalPageHeaderButtons_step$data } from '~relay/ProposalPageHeaderButtons_step.graphql'
 import type { ProposalPageHeaderButtons_viewer$data } from '~relay/ProposalPageHeaderButtons_viewer.graphql'
+import type { ProposalPageHeaderButtons_participant$data } from '~relay/ProposalPageHeaderButtons_participant.graphql'
 import ProposalVoteButtonWrapperFragment from '~/components/Proposal/Vote/ProposalVoteButtonWrapperFragment'
 import ProposalFollowButton from '~/components/Proposal/Follow/ProposalFollowButton'
 import ProposalVoteModal from '~/components/Proposal/Vote/ProposalVoteModal'
@@ -23,6 +24,7 @@ import ProposalEditModal from '../../Edit/ProposalEditModal'
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal'
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton'
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 type ReduxProps = {
   readonly dispatch: Dispatch
 }
@@ -30,6 +32,7 @@ type Props = ReduxProps & {
   readonly proposal: ProposalPageHeaderButtons_proposal$data
   readonly step: ProposalPageHeaderButtons_step$data | null | undefined
   readonly viewer: ProposalPageHeaderButtons_viewer$data | null | undefined
+  readonly participant: ProposalPageHeaderButtons_participant$data | null | undefined
   readonly triggerRequirementsModal: (voteId: string) => void
 }
 const Buttons = styled.div`
@@ -78,24 +81,31 @@ const FixedButtons = styled.div`
     border-color: #dc3545;
   }
 `
-export const ProposalPageHeaderButtons = ({ proposal, viewer, step, dispatch, triggerRequirementsModal }: Props) => {
+export const ProposalPageHeaderButtons = ({
+  proposal,
+  viewer,
+  step,
+  participant,
+  dispatch,
+  triggerRequirementsModal,
+}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const isAuthor = viewer && viewer.id === proposal?.author?.id
+  const isParticipant = !viewer
   const editable = proposal?.form?.contribuable || proposal?.contribuable
-  const hasExpiredRevisions = proposal?.expiredRevisions ? proposal.expiredRevisions.totalCount > 0 : false
-
-  const canDelete = proposal?.access?.canDelete
-  const canEdit = proposal?.access?.canEdit
+  const hasPendingRevisions = proposal?.pendingRevisions ? proposal.pendingRevisions.totalCount > 0 : false
+  const opinionCanBeFollowed = proposal?.form?.step?.project?.opinionCanBeFollowed
+  const hasVotableStep = !!proposal?.currentVotableStep
+  const canDelete = isParticipant ? proposal?.access?.canDelete : isAuthor
+  const canEdit = isParticipant ? proposal?.access?.canEdit : isAuthor
   const canEditProposal = editable && canEdit
+  const hasExpiredRevisions = proposal?.expiredRevisions ? proposal.expiredRevisions.totalCount > 0 : false
 
   useEffect(() => {
     if ((canEditProposal || (hasExpiredRevisions && isAuthor)) && window.location.href.includes(EDIT_MODAL_ANCHOR)) {
       onOpen()
     }
   }, [hasExpiredRevisions, canEditProposal, onOpen, isAuthor])
-  const hasPendingRevisions = proposal?.pendingRevisions ? proposal.pendingRevisions.totalCount > 0 : false
-  const opinionCanBeFollowed = proposal?.form?.step?.project?.opinionCanBeFollowed
-  const hasVotableStep = !!proposal?.currentVotableStep
 
   return (
     <Buttons>
@@ -110,6 +120,7 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, step, dispatch, tr
                 proposal={proposal}
                 step={step}
                 viewer={viewer}
+                participant={participant}
                 disabled={!proposal}
                 id="proposal-vote-btn"
                 triggerRequirementsModal={triggerRequirementsModal}
@@ -133,37 +144,34 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, step, dispatch, tr
         )}
         {(canEdit || canDelete) && (
           <>
-            {
-              canEdit ? (
-                <EditButton
-                  id="proposal-edit-button"
-                  label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
-                  author={{
-                    uniqueId: proposal?.author?.slug,
-                  }}
-                  onClick={onOpen}
-                  editable={editable}
-                />
-              ) : null
-            }
-            {
-              canDelete ? (
-                <DeleteButton
-                  id="proposal-delete-button"
-                  author={{
-                    uniqueId: proposal?.author?.slug,
-                  }}
-                  onClick={() => {
-                    dispatch(openDeleteProposalModal())
-                  }}
-                  deletable={proposal?.form?.contribuable}
-                />
-              ) : null
-            }
+            {canEdit ? (
+              <EditButton
+                id="proposal-edit-button"
+                label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
+                author={{
+                  uniqueId: proposal?.author?.slug,
+                }}
+                onClick={onOpen}
+                editable={canEdit && editable}
+                canEdit
+              />
+            ) : null}
+            {canDelete ? (
+              <DeleteButton
+                id="proposal-delete-button"
+                author={{
+                  uniqueId: proposal?.author?.slug,
+                }}
+                onClick={() => {
+                  dispatch(openDeleteProposalModal())
+                }}
+                deletable={proposal?.form?.contribuable && canDelete}
+              />
+            ) : null}
           </>
         )}
-        {proposal?.form?.canContact && !proposal.isArchived && (
-          <ProposalContactButton proposalId={proposal.id} authorName={proposal.author.displayName} />
+        {proposal?.canContactAuthor && !proposal.isArchived && (
+          <ProposalContactButton proposalId={proposal.id} authorName={getProposalAuthorDisplayName(proposal.author)} />
         )}
       </>
       {proposal?.publicationStatus !== 'DRAFT' && step && (
@@ -179,7 +187,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-
 const connector = connect(null, mapDispatchToProps)
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`
@@ -189,6 +196,13 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ...ProposalVoteButtonWrapperFragment_viewer
         @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
         @include(if: $hasVotableStep)
+    }
+  `,
+  participant: graphql`
+    fragment ProposalPageHeaderButtons_participant on Participant
+    @argumentDefinitions(stepId: { type: "ID!" }, hasVotableStep: { type: "Boolean", defaultValue: true }) {
+      id
+      ...ProposalVoteButtonWrapperFragment_participant @arguments(stepId: $stepId) @include(if: $hasVotableStep)
     }
   `,
   step: graphql`
@@ -201,7 +215,16 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   `,
   proposal: graphql`
     fragment ProposalPageHeaderButtons_proposal on Proposal
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, proposalRevisionsEnabled: { type: "Boolean!" }, token: {type: "String"}) {
+    @argumentDefinitions(
+      isAuthenticated: { type: "Boolean!" }
+      proposalRevisionsEnabled: { type: "Boolean!" }
+      token: { type: "String" }
+      emailToken: { type: "String" }
+    ) {
+      access(participantToken: $token, emailToken: $emailToken) {
+        canEdit
+        canDelete
+      }
       id
       url
       title
@@ -216,9 +239,13 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       }
       author {
         id
-        slug
+        username
         displayName
+        ... on User {
+          slug
+        }
       }
+      canContactAuthor
       contribuable
       form {
         step {
@@ -226,16 +253,12 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
             opinionCanBeFollowed
           }
         }
-        canContact
         contribuable
       }
       isArchived
       publicationStatus
-      access {
-          canEdit
-          canDelete
-      }
-      ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
       ...ProposalVoteModal_proposal
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)

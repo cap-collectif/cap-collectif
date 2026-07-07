@@ -13,6 +13,7 @@ type ActiveAction = 'search' | 'collect' | 'vote' | 'map' | null
 
 interface Props {
   step: VoteStepMobileActions_proposalStep$key
+  onWorkflowTrigger?: (contributionId: string) => void
 }
 
 const FRAGMENT = graphql`
@@ -34,7 +35,7 @@ const FRAGMENT = graphql`
   }
 `
 
-const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
+const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigger }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
   const isCollectStep = step.__typename === 'CollectStep'
@@ -71,6 +72,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey }) => {
             proposalForm={step.form}
             stepId={step.id}
             onButtonClick={() => handleActionClick('collect')}
+            onWorkflowTrigger={onWorkflowTrigger}
           />
         )}
         {step.votable && (

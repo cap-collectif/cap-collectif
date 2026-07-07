@@ -7,11 +7,8 @@ import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapper
 import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVote_proposal.graphql'
 import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql'
 import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql'
-import { createPortal } from 'react-dom'
-import { Box } from '@cap-collectif/ui'
-import { Suspense } from 'react'
-import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
-import ParticipationWorkflowModal from '~/components/ParticipationWorkflow/ParticipationWorkflowModal'
+
+import ParticipationWorkflow from '~/components/ParticipationWorkflow/ParticipationWorkflow'
 
 type Props = {
   proposal: ProposalPreviewVote_proposal$key
@@ -78,17 +75,7 @@ export const ProposalPreviewVote: React.FC<Props> = ({
   }
 
   if (showRequirementsModal && voteId) {
-    return createPortal(
-      <Box width="100%" height="100%" position="absolute" top={0} left={0}>
-        <Suspense fallback={<ModalSkeleton />}>
-          <ParticipationWorkflowModal
-            stepId={step.id}
-            contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)}
-          />
-        </Suspense>
-      </Box>,
-      document.body,
-    )
+    return <ParticipationWorkflow stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
   }
 
   return (

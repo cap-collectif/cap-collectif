@@ -34,7 +34,10 @@ class ParticipationCookieManager
         $encryptedReplyCookie = $this->getEncryptedCookie(self::REPLY_COOKIE);
         $encryptedParticipantCookie = $this->getEncryptedCookie(self::PARTICIPANT_COOKIE);
 
-        $json = json_encode(['replyCookie' => $encryptedReplyCookie, 'participantCookie' => $encryptedParticipantCookie]);
+        $json = json_encode([
+            'replyCookie' => $encryptedReplyCookie,
+            'participantCookie' => $encryptedParticipantCookie,
+        ], \JSON_THROW_ON_ERROR);
 
         return $this->encryptor->encryptData($json);
     }

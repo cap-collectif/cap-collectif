@@ -1,17 +1,20 @@
 import React from 'react'
 import { Box, Flex, useMultiStepModal } from '@cap-collectif/ui'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { useSelector } from 'react-redux'
-import { getButtonLinkForType } from '@shared/login/LoginSocialButton'
+import { getButtonLinkForType, LoginSocialButtonType } from '@shared/login/LoginSocialButton'
 import { ACCOUNT_LOGIN_FORM_INDEX } from './EmailAccountLoginForm'
 import { ACCOUNT_FRANCE_CONNECT_INDEX } from './FranceConnectRequirementModal'
 import { ACCOUNT_LOGIN_SSO_FORM_INDEX } from './EmailAccountLoginSSOForm'
 import { useParticipationWorkflow } from './ParticipationWorkflowContext'
 import LoginChoicesSVG from './assets/LoginChoicesSVG'
-import type { GlobalState } from './types'
 
 type Props = {
   selected: 'ACCOUNT_LOGIN_FORM' | 'ACCOUNT_LOGIN_FRANCE_CONNECT_FORM' | 'ACCOUNT_LOGIN_SSO_FORM'
+}
+
+type WorkflowSSO = {
+  ssoType: LoginSocialButtonType
+  name: string
 }
 
 const Button = ({ onClick, children }) => {
@@ -30,9 +33,7 @@ const LoginChoices: React.FC<Props> = ({ selected }) => {
   const isLoginSamlEnabled = useFeatureFlag('login_saml')
   const { requirementsUrl } = useParticipationWorkflow()
 
-  let ssoList = useSelector((state: GlobalState) => state.default.ssoList).filter(
-    sso => ['franceconnect', 'facebook'].includes(sso.ssoType) === false,
-  )
+  let ssoList: WorkflowSSO[] = []
 
   if (isCasEnabled) {
     ssoList = [...ssoList, { ssoType: 'cas', name: 'cas' }]

@@ -125,7 +125,7 @@
         },
         {
             "path": "./public/js/admin.js",
-            "maxSize": "250 KB"
+            "maxSize": "650 KB"
         },
         {
             "path": "./public/js/front.js",
@@ -133,7 +133,7 @@
         },
         {
             "path": "./public/js/commons.js",
-            "maxSize": "1200 KB"
+            "maxSize": "1300 KB"
         },
         {
             "path": "./public/js/app.js",

@@ -21,6 +21,14 @@ describe('<VisibilityBox />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  it('renders children if participant is resolved', () => {
+    const wrapper = shallow(
+      <VisibilityBox enabled participant={{}} {...props}>
+        <div className="foo" />
+      </VisibilityBox>,
+    )
+    expect(wrapper).toMatchSnapshot()
+  })
   it('renders jumbotron if user is not logged', () => {
     const wrapper = shallow(
       <VisibilityBox enabled user={null} {...props}>

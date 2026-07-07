@@ -16,6 +16,7 @@ type HeaderProps = {
   intl: IntlShape
   onClose: () => void
   isMobile: boolean
+  optional?: boolean
 }
 
 const ModalLayout = ({
@@ -28,6 +29,7 @@ const ModalLayout = ({
   textBlockOrder = [0, 0],
   header,
   showConfetti = false,
+  optional = false,
 }: {
   onClose: () => void
   hideGoBackArrow?: boolean
@@ -38,6 +40,7 @@ const ModalLayout = ({
   textBlockOrder?: [number, number]
   header?: (headerProps: HeaderProps) => React.ReactNode
   showConfetti?: boolean
+  optional?: boolean
 }) => {
   const { goToPreviousStep } = useMultiStepModal()
   const intl = useIntl()
@@ -60,13 +63,20 @@ const ModalLayout = ({
     <>
       <MultiStepModal.Header>
         {header ? (
-          header({ goBackCallback, logo, intl, onClose, isMobile })
+          header({ goBackCallback, logo, intl, onClose, isMobile, optional })
         ) : (
-          <HeaderLayout intl={intl} logo={logo} onClose={onClose} goBackCallback={goBackCallback} isMobile={isMobile} />
+          <HeaderLayout
+            intl={intl}
+            logo={logo}
+            onClose={onClose}
+            goBackCallback={goBackCallback}
+            isMobile={isMobile}
+            optional={optional}
+          />
         )}
       </MultiStepModal.Header>
       {showConfetti && <Confetti />}
-      <MultiStepModal.Body bg="neutral-gray.50">
+      <MultiStepModal.Body bg="neutral-gray.50" sx={{ overscrollBehavior: 'contain' }}>
         <Flex
           sx={{
             '.cap-form-label p': { marginBottom: 0, fontWeight: 400 },

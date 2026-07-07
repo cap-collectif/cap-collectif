@@ -3,4 +3,10 @@ ChangeProposalContentPayload:
     config:
         fields:
             proposal:
-                type: 'InternalProposal!'
+                type: 'InternalProposal'
+            shouldTriggerWorkflow:
+                type: 'Boolean!'
+                description: 'Whether the workflow should be triggered'
+            userErrors:
+                type: '[UserError!]'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

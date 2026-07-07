@@ -2,25 +2,15 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Form\Type\RelayNodeType;
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProposalAdminType extends ProposalType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add(
-                'author',
-                RelayNodeType::class,
-                ['class' => User::class],
-                [
-                    'required' => false,
-                    'choice_label' => 'id',
-                ]
-            )
             ->add('estimation', MoneyType::class, [
                 'currency' => 'EUR',
             ])
@@ -30,5 +20,13 @@ class ProposalAdminType extends ProposalType
         ;
 
         parent::buildForm($builder, $options);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'proposalHasParticipant' => false,
+        ]);
     }
 }

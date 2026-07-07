@@ -15,9 +15,11 @@ type Props = {
   show: boolean
   isDeleting: boolean
   dispatch: Dispatch
+  isAuthenticated?: boolean
 }
-export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Props) => {
+export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch, isAuthenticated }: Props) => {
   const intl = useIntl()
+
   if (!proposal) return null
   return (
     <div>
@@ -69,7 +71,7 @@ export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Pr
             id="confirm-proposal-delete"
             isSubmitting={isDeleting}
             onSubmit={() => {
-              deleteProposal(proposal.id, dispatch, intl)
+              deleteProposal(proposal.id, dispatch, intl, isAuthenticated)
             }}
             label="global.removeDefinitively"
             bsStyle="danger"
@@ -83,6 +85,7 @@ export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Pr
 const mapStateToProps = (state: State) => ({
   isDeleting: state.proposal.isDeleting,
   show: state.proposal.showDeleteModal,
+  isAuthenticated: !!state.user.user,
 })
 
 const container = connect(mapStateToProps)(ProposalDeleteModal)

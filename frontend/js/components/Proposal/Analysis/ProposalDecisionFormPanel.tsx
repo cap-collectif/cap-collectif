@@ -25,6 +25,7 @@ import './ProposalFormSwitcher'
 import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision'
 import { RevisionButton } from '~/shared/ProposalRevision/styles'
 import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel'
+import { Tooltip } from '@cap-collectif/ui'
 
 const PostWrapper = styled.div`
   margin-top: 10px;
@@ -101,6 +102,9 @@ export const ProposalDecisionFormPanel = ({
   const isLarge = width < bootstrapGrid.mdMax
   const refusedReasons = proposal?.form.analysisConfiguration?.unfavourableStatuses || []
   const effectiveDate = proposal?.form.analysisConfiguration?.effectiveDate
+
+  const hasEmail = !!proposal.author.email
+
   return (
     <>
       <form id={formName}>
@@ -247,11 +251,21 @@ export const ProposalDecisionFormPanel = ({
           </ValidateButton>
           {proposalRevisionsEnabled && (
             <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
-              {openModal => (
-                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                  <FormattedMessage id="request.author.review" />
-                </RevisionButton>
-              )}
+              {openModal =>
+                hasEmail ? (
+                  <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                    <FormattedMessage id="request.author.review" />
+                  </RevisionButton>
+                ) : (
+                  <Tooltip label={intl.formatMessage({ id: 'proposal.revision.impossible_email' })}>
+                    <div>
+                      <RevisionButton disabled id="proposal-analysis-revision" type="button">
+                        <FormattedMessage id="request.author.review" />
+                      </RevisionButton>
+                    </div>
+                  </Tooltip>
+                )
+              }
             </ProposalRevision>
           )}
         </Validation>
@@ -322,6 +336,9 @@ export default createFragmentContainer(container, {
             label: name
           }
         }
+      }
+      author {
+        email
       }
     }
   `,

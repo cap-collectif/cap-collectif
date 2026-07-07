@@ -246,7 +246,7 @@ user_not_confirmed,user_not_confirmed,user_not_confirmed@test.com,Non,Utilisateu
 userKiroule,ptondereau,pierre@cap-collectif.com,Oui,"Utilisateur|Créateur de projet","2015-01-12 00:00:00",,,Oui,"2015-01-13 00:00:00","Evaluers on proposal2, Utilisateurs",Non,,Pierre,Tondereau,,,,,,,Citoyen,Non,Non,
 user504,"user avec un nom très long comme par exemple conseil régional de machin truc",conseilregional@test.com,Oui,Utilisateur,"2015-01-11 00:00:00",,,Oui,,"Evaluers on proposal3",Non,,prenom,nom,,,,,,,Citoyen,Non,Non,
 user503,disabled,disabled@test.com,Oui,Utilisateur,"2015-01-10 00:00:00",,,Non,,"Agent de la ville",Non,,disabled,disabled,,,,,,,Citoyen,Non,Non,
-user5,user,user@test.com,Oui,Utilisateur,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Oui,"2016-01-05 00:00:00",Super-administrateur,Non,f,Utilisateur,authentifier,"1996-03-01 00:00:00",,,,,,Citoyen,Oui,Non,DK2AZ554
+user5,user,user@test.com,Oui,Utilisateur,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Oui,"2016-01-05 00:00:00",Super-administrateur,Non,f,Utilisateur,authentifier,"1996-03-01 00:00:00",,,"26 Rue Claude Tillier, 75012 Paris, France",,,Citoyen,Oui,Non,DK2AZ554
 adminCapco,adminpro,admin@cap-collectif.com,Oui,Administrateur|Utilisateur,"2015-01-05 00:00:00",,,Oui,,,Non,,Administrateur,authentifier,,,,,,,Citoyen,Non,Non,
 userAdmin,admin,admin@test.com,Oui,Administrateur|Utilisateur,"2015-01-04 00:00:00",,,Oui,,"Utilisateurs, Projet 2",Non,,Administrateur,authentifier,,,,"26 Rue Claude Tillier, 75012 Paris, France",,,Citoyen,Non,Non,
 user511,user_without_phone,user_without_phone@test.com,Oui,Utilisateur,"2015-01-01 00:00:00",,,Oui,,,Non,,user_without_phone,user_without_phone,,,,,,,Citoyen,Non,Non,

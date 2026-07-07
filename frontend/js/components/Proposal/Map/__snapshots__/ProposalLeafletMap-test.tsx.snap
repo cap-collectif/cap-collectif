@@ -72,20 +72,16 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       }
     >
-      <Connect(LoginOverlay)
-        placement="top"
+      <Button
+        bg="#4EE323 !important"
+        color="##FFF !important"
+        disabled={false}
+        onClick={[Function]}
+        opacity={1}
+        variantSize="small"
       >
-        <Button
-          bg="#4EE323 !important"
-          color="##FFF !important"
-          disabled={false}
-          onClick={[Function]}
-          opacity={1}
-          variantSize="small"
-        >
-          proposal.add
-        </Button>
-      </Connect(LoginOverlay)>
+        proposal.add
+      </Button>
     </Popup>
     <Component
       maxClusterRadius={30}
@@ -356,20 +352,16 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       }
     >
-      <Connect(LoginOverlay)
-        placement="top"
+      <Button
+        bg="#4EE323 !important"
+        color="##FFF !important"
+        disabled={false}
+        onClick={[Function]}
+        opacity={1}
+        variantSize="small"
       >
-        <Button
-          bg="#4EE323 !important"
-          color="##FFF !important"
-          disabled={false}
-          onClick={[Function]}
-          opacity={1}
-          variantSize="small"
-        >
-          proposal.add
-        </Button>
-      </Connect(LoginOverlay)>
+        proposal.add
+      </Button>
     </Popup>
     <Component
       maxClusterRadius={30}

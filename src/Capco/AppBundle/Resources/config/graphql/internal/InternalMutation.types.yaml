@@ -355,14 +355,12 @@ InternalMutation:
                     payloadType: ChangeProposalPublicationStatusPayload
                     mutateAndGetPayload: "@=mutation('changeProposalPublicationStatus', args, getUser())"
             changeProposalContent:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["id"], getUser(), "changeContent")'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: ChangeProposalContentInput
                     payloadType: ChangeProposalContentPayload
                     mutateAndGetPayload: "@=mutation('changeProposalContent', args, getUser())"
             createProposal:
-                access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateProposalInput
@@ -479,7 +477,7 @@ InternalMutation:
                 builderConfig:
                     inputType: ChangeCollectStatusInput
                     payloadType: ChangeCollectStatusPayload
-                    mutateAndGetPayload: "@=mutation('changeCollectStatus', value['proposalId'], getUser(), value['statusId'])"
+                    mutateAndGetPayload: "@=mutation('changeCollectStatus', args, getUser())"
             changeProposalProgressSteps:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "changeProposalProgressSteps")'
                 builder: 'Relay::Mutation'
@@ -509,12 +507,11 @@ InternalMutation:
                     payloadType: ApplyProposalStatusPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\ApplyProposalStatusMutation", args, getUser())'
             deleteProposal:
-                access: '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteProposalInput
                     payloadType: DeleteProposalPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalMutation", value["proposalId"], getUser())'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalMutation", args, getUser())'
             updateRegistrationForm:
                 access: "@=hasRole('ROLE_SUPER_ADMIN')"
                 builder: 'Relay::Mutation'

@@ -15,6 +15,7 @@ type Variables = ChangeProposalPublicationStatusMutationVariables & {
   parametersConnection?: ProjectAdminPageParameters
   parentConnectionId?: string
   readonly author: {
+    readonly __typename?: string
     readonly id: string
     readonly isEmailConfirmed: boolean | null | undefined
     readonly email: string | null | undefined
@@ -106,7 +107,11 @@ const commit = (variables: Variables): Promise<ChangeProposalPublicationStatusMu
     optimisticResponse: {
       changeProposalPublicationStatus: {
         proposal: {
-          author: variables.author,
+          __typename: 'Proposal',
+          author: {
+            __typename: variables.author.__typename ?? 'User',
+            ...variables.author,
+          },
           deletedAt: null,
           id: variables.input.proposalId,
           publicationStatus: variables.input.publicationStatus,

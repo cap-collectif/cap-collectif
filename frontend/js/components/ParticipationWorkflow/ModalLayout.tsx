@@ -16,6 +16,7 @@ type HeaderProps = {
   intl: IntlShape
   onClose: () => void
   isMobile: boolean
+  optional?: boolean
 }
 
 const ModalLayout = ({
@@ -28,6 +29,7 @@ const ModalLayout = ({
   textBlockOrder = [0, 0],
   header,
   showConfetti = false,
+  optional,
 }: {
   onClose: () => void
   hideGoBackArrow?: boolean
@@ -38,6 +40,7 @@ const ModalLayout = ({
   textBlockOrder?: [number, number]
   header?: (headerProps: HeaderProps) => React.ReactNode
   showConfetti?: boolean
+  optional?: boolean
 }) => {
   const { goToPreviousStep } = useMultiStepModal()
   const intl = useIntl()
@@ -60,13 +63,20 @@ const ModalLayout = ({
     <>
       <MultiStepModal.Header>
         {header ? (
-          header({ goBackCallback, logo, intl, onClose, isMobile })
+          header({ goBackCallback, logo, intl, onClose, isMobile, optional })
         ) : (
-          <HeaderLayout intl={intl} logo={logo} onClose={onClose} goBackCallback={goBackCallback} isMobile={isMobile} />
+          <HeaderLayout
+            intl={intl}
+            logo={logo}
+            onClose={onClose}
+            goBackCallback={goBackCallback}
+            isMobile={isMobile}
+            optional={optional}
+          />
         )}
       </MultiStepModal.Header>
       {showConfetti && <Confetti />}
-      <MultiStepModal.Body bg="neutral-gray.50">
+      <MultiStepModal.Body bg="neutral-gray.50" sx={{ overscrollBehavior: 'contain' }}>
         <Flex
           sx={{
             '.cap-form-label p': { marginBottom: 0, fontWeight: 400 },
@@ -89,12 +99,12 @@ const ModalLayout = ({
         >
           <Box order={textBlockOrder} width={isMobile ? '100%' : 'auto'}>
             <Box
-              mb={isMobile ? '4px' : 4}
+              mb={isMobile ? '4px' : 2}
               width="100%"
               fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplaySmall]}
               textAlign={['left', 'center']}
               fontWeight={[600, 400]}
-              color="neutral-gray.900"
+              color="text.primary"
             >
               {title}
             </Box>
@@ -102,7 +112,7 @@ const ModalLayout = ({
               <Text
                 sx={{ marginBottom: '16px !important' }}
                 textAlign={['left', 'center']}
-                color="neutral-gray.700"
+                color="text.secondary"
                 fontSize={CapUIFontSize.BodyRegular}
                 lineHeight="normal"
               >

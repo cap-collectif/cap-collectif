@@ -6,9 +6,12 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +33,7 @@ class ProposalController extends Controller
         private readonly ProposalRepository $proposalRepository,
         private readonly TranslatorInterface $translator,
         private readonly EntityManagerInterface $em,
+        private readonly ParticipantHelper $participantHelper,
     ) {
     }
 
@@ -51,12 +55,14 @@ class ProposalController extends Controller
         Proposal $proposal
     ) {
         $viewer = $this->getUser();
+        $viewer = $viewer instanceof User ? $viewer : null;
+        $participantCanSeeProposal = $this->participantCanSeeProposal($request, $proposal, $viewer);
 
-        if ($proposal->isDraft() && $proposal->getAuthor() !== $viewer) {
+        if ($proposal->isDraft() && $proposal->getAuthor() !== $viewer && !$participantCanSeeProposal) {
             throw new NotFoundHttpException(sprintf('The proposal `%s` is in draft state and current user is not the creator.', $proposal->getId()));
         }
 
-        if (!$proposal->viewerCanSee($viewer)) {
+        if (!$proposal->viewerCanSee($viewer) && !$participantCanSeeProposal) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -162,5 +168,25 @@ class ProposalController extends Controller
         ];
 
         return $this->redirectToRoute('app_project_show_proposal', $routeParams);
+    }
+
+    private function participantCanSeeProposal(Request $request, Proposal $proposal, ?User $viewer): bool
+    {
+        if ($viewer || $proposal->isDeleted() || !$proposal->getParticipant()) {
+            return false;
+        }
+
+        $participantToken = $request->cookies->get(ParticipationCookieManager::PARTICIPANT_COOKIE);
+        if (!$participantToken) {
+            return false;
+        }
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException) {
+            return false;
+        }
+
+        return $participant?->getId() === $proposal->getParticipant()->getId();
     }
 }

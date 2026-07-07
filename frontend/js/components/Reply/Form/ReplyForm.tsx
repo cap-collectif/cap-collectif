@@ -45,12 +45,9 @@ import Captcha from '~/components/Form/Captcha'
 import { SPACES_SCALES } from '~/styles/theme/base'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
-import ParticipationWorkflowModal from '../../ParticipationWorkflow/ParticipationWorkflowModal'
-import { Box, Text, toast } from '@cap-collectif/ui'
+import { Text, toast } from '@cap-collectif/ui'
 import { css } from 'styled-components'
-import { Suspense } from 'react'
-import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
-import { createPortal } from 'react-dom'
+import ParticipationWorkflow from '~/components/ParticipationWorkflow/ParticipationWorkflow'
 
 type Props = ReduxFormFormProps & {
   readonly questionnaire: ReplyForm_questionnaire$data
@@ -467,14 +464,7 @@ export class ReplyForm extends React.Component<Props, State> {
     }
 
     if (showRequirementsModal) {
-      return createPortal(
-        <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
-          <Suspense fallback={<ModalSkeleton />}>
-            <ParticipationWorkflowModal stepId={step.id} contributionId={replyId} />
-          </Suspense>
-        </Box>,
-        document.body,
-      )
+        return <ParticipationWorkflow stepId={step.id} contributionId={replyId} />
     }
 
     return (

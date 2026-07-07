@@ -10,6 +10,7 @@ import ReplyValidationSVG from '~/components/ParticipationWorkflow/assets/ReplyV
 import VoteValidationSVG from '~/components/ParticipationWorkflow/assets/VoteValidationSVG'
 import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
 import { CenteredLogoLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
+import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
 
 type Props = {
   contributionId: string
@@ -37,6 +38,12 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
       svg: <VoteValidationSVG />,
       successTranslationKey: 'your-participation-is-confirmed',
     },
+    Proposal: {
+      title: intl.formatMessage({ id: 'participation-workflow.validation' }),
+      info: intl.formatMessage({ id: 'it-is-a-good-choice' }),
+      svg: <ReplyValidationSVG />,
+      successTranslationKey: 'your-participation-is-confirmed',
+    },
   }
 
   const { title, info, svg: SVG, successTranslationKey } = config[contributionTypeName]
@@ -54,18 +61,18 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
           for (const error of errors) {
-            if (error.message === 'Step closed') {
+            if(error.message === 'Step closed') {
               toast({
                 variant: 'danger',
-                content: intl.formatMessage({ id: 'error-contribution-validation' }),
+                content: intl.formatMessage({ id: 'error-contribution-validation' })
               })
               setTimeout(() => {
-                window.location.href = '/'
+                window.location.href = '/';
               }, 1000)
-              return
+              return;
             }
           }
-          return mutationErrorToast(intl)
+          return mutationErrorToast(intl);
         }
 
         await fakeTimer(800)
@@ -75,8 +82,10 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
           return
         }
 
-        const toastConfig = JSON.stringify({ variant: 'success', message: `${successTranslationKey}` })
-        window.location.href = `${response?.validateContribution?.redirectUrl}?toast=${toastConfig}`
+        window.location.href = buildToastUrl(response?.validateContribution?.redirectUrl, {
+          variant: 'success',
+          message: successTranslationKey,
+        })
       },
       onError: () => {
         return mutationErrorToast(intl)

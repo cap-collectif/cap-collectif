@@ -1404,6 +1404,9 @@ enum AskProposalRevisionErrorCode {
 
   """The provided values are not valid."""
   INVALID_FORM
+
+  """The author of the proposal does not have an associated email."""
+  PROPOSAL_AUTHOR_HAS_NO_EMAIL
 }
 
 input AskProposalRevisionInput {
@@ -2049,11 +2052,23 @@ input ChangeProposalContentInput {
   media: ID
   estimation: Float
   likers: [ID!]
+
+  """The participant token"""
+  participantToken: String
+
+  """The email token"""
+  emailToken: String
   clientMutationId: String
 }
 
 type ChangeProposalContentPayload {
-  proposal: Proposal!
+  proposal: Proposal
+
+  """Whether the workflow should be triggered"""
+  shouldTriggerWorkflow: Boolean!
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]
   clientMutationId: String
 }
 
@@ -2476,6 +2491,11 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+
+    """
+    Token of the participant used to filter private collect step proposals.
+    """
+    participantToken: String
     reference: String
 
     """Affiliation options for proposals returned from the connection."""
@@ -3557,6 +3577,9 @@ interface ContributionWithAuthor {
 interface Contributor {
   """The ID of an object"""
   id: ID!
+
+  """The contributor's display name."""
+  displayName: String!
   username: String
   email: String
   firstname: String
@@ -4406,6 +4429,9 @@ input CreateProposalFromBackOfficeInput {
 
   """The media id to illustrate"""
   media: ID
+
+  """The participant token"""
+  participantToken: String
   clientMutationId: String
 
   """The proposal author"""
@@ -4486,12 +4512,21 @@ input CreateProposalInput {
 
   """The media id to illustrate"""
   media: ID
+
+  """The participant token"""
+  participantToken: String
   clientMutationId: String
 }
 
 type CreateProposalPayload {
   """The created proposal, if everything goes well !"""
   proposal: Proposal
+
+  """The participant token"""
+  participantToken: String
+
+  """Whether the workflow should be triggered"""
+  shouldTriggerWorkflow: Boolean!
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]
@@ -6144,6 +6179,9 @@ type DeleteProposalFormPayload {
 input DeleteProposalInput {
   """The proposal id"""
   proposalId: ID!
+
+  """The participant token"""
+  participantToken: String
   clientMutationId: String
 }
 
@@ -10758,6 +10796,9 @@ type PageTranslation {
 type Participant implements Node & Contributor {
   """The ID of an object."""
   id: ID!
+
+  """The contributor's display name."""
+  displayName: String!
   username: String
   email: String
   firstname: String
@@ -10836,6 +10877,9 @@ type Participant implements Node & Contributor {
 
   """Wether or not the participant consent the privacy policy."""
   consentPrivacyPolicy: Boolean!
+
+  """The participant media."""
+  media: Media
 
   """Wether or not the participant has confirmed his email."""
   isEmailConfirmed: Boolean!
@@ -11825,6 +11869,11 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+
+    """
+    Token of the participant used to filter private collect step proposals.
+    """
+    participantToken: String
     reference: String
 
     """Affiliation options for proposals returned from the connection."""
@@ -12606,7 +12655,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   title: String!
 
   """Identifies the author of the contribution."""
-  author: User!
+  author: Contributor!
 
   """Identifies the body of the proposal."""
   body: HTML
@@ -12697,7 +12746,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     """Used to get the status on a selection step."""
     step: ID
   ): ProposalStepStatus
-  likers: [User!]!
+  likers: [Contributor!]!
   estimation: Float
   media: Media
   district: ProposalDistrict
@@ -12820,7 +12869,21 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The last step containing this proposal."""
   lastStepContainingProposal: ProposalStep!
-  access: ProposalAccess!
+
+  """
+  The contribution status wether or not the participant/user has meet all requirements
+  """
+  completionStatus: ContributionCompletionStatus!
+  access(
+    """Token of the participant"""
+    participantToken: String
+
+    """Token of the email"""
+    emailToken: String
+  ): ProposalAccess
+
+  """The url to the requirements workflow."""
+  requirementsUrl: URI
 }
 
 type ProposalAccess {
@@ -13217,6 +13280,11 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+
+    """
+    Token of the participant used to filter private collect step proposals.
+    """
+    participantToken: String
     reference: String
 
     """Affiliation options for proposals returned from the connection."""
@@ -13958,6 +14026,11 @@ interface ProposalStep implements NodeSlug {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+
+    """
+    Token of the participant used to filter private collect step proposals.
+    """
+    participantToken: String
     reference: String
 
     """Affiliation options for proposals returned from the connection."""
@@ -14459,7 +14532,7 @@ type Query {
   ): GlobalDistrictConnection!
 
   """Lookup a proposal from its unique slug."""
-  proposalFromSlug(slug: String!): Proposal
+  proposalFromSlug(slug: String!, participantToken: String): Proposal
 
   """Lookup pages."""
   pages: [Page!]!
@@ -14548,7 +14621,7 @@ type Query {
 
     """If true, retrieve only users that created an event."""
     authorsOfEventOnly: Boolean = false
-  ): [User]
+  ): [Contributor]
   consultationSteps(
     """
     If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.
@@ -17343,6 +17416,11 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+
+    """
+    Token of the participant used to filter private collect step proposals.
+    """
+    participantToken: String
     reference: String
 
     """Affiliation options for proposals returned from the connection."""
@@ -20244,6 +20322,7 @@ input UpdateParticipantInput {
   token: String!
   firstname: String
   lastname: String
+  username: String
   postalAddress: String
   dateOfBirth: DateTime
   phone: String
@@ -20251,6 +20330,7 @@ input UpdateParticipantInput {
   consentInternalCommunication: Boolean
   consentPrivacyPolicy: Boolean
   userIdentificationCode: String
+  media: ID
   clientMutationId: String
 }
 
@@ -20423,6 +20503,9 @@ input UpdateProfilePersonalDataInput {
   """
   userId: ID
 
+  """Your username"""
+  username: String
+
   """Your firstname"""
   firstname: String
 
@@ -20467,6 +20550,7 @@ input UpdateProfilePersonalDataInput {
   stepId: ID
   consentInternalCommunication: Boolean
   consentPrivacyPolicy: Boolean
+  media: ID
   clientMutationId: String
 }
 

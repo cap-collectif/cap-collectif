@@ -110,7 +110,7 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(login)}>
           <FormControl name="email" control={control} isRequired>
-            <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
+            <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput
               id="email"
               name="email"
@@ -121,7 +121,11 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
             />
           </FormControl>
           <FormControl name="password" control={control} isRequired>
-            <FormLabel htmlFor="password" label={intl.formatMessage({ id: 'global.password' })} />
+            <FormLabel
+              fontWeight={[400, 600]}
+              htmlFor="password"
+              label={intl.formatMessage({ id: 'global.password' })}
+            />
             <FieldInput
               id="password"
               name="password"

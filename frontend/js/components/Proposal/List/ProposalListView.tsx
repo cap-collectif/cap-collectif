@@ -106,6 +106,7 @@ type Props = {
   displayMap: boolean
   displayMode: ProposalViewMode
   count: number
+  contributorConsentPrivacyPolicy?: boolean | null
 }
 type State = {
   isRefetching: boolean
@@ -166,7 +167,17 @@ export class ProposalListView extends React.Component<Props, State> {
   }
 
   render() {
-    const { displayMap, geoJsons, defaultMapOptions, step, viewer, displayMode, participant, count } = this.props
+    const {
+      displayMap,
+      geoJsons,
+      defaultMapOptions,
+      step,
+      viewer,
+      displayMode,
+      participant,
+      count,
+      contributorConsentPrivacyPolicy,
+    } = this.props
     const { hasRefetchError, isRefetching } = this.state
 
     
@@ -190,6 +201,7 @@ export class ProposalListView extends React.Component<Props, State> {
         viewer={viewer}
         participant={participant}
         displayMode={displayMode}
+        contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
       />
     )
   }

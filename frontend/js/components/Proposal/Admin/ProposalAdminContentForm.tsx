@@ -7,7 +7,7 @@ import { Field, FieldArray, formValueSelector, reduxForm, SubmissionError, submi
 import { createFragmentContainer, graphql } from 'react-relay'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
-import { Button, ButtonToolbar, Glyphicon, ListGroup, ListGroupItem, Panel } from 'react-bootstrap'
+import { Button, Glyphicon, ListGroup, ListGroupItem, Panel } from 'react-bootstrap'
 import memoize from 'lodash/memoize'
 
 import styled from 'styled-components'
@@ -34,12 +34,14 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { pxToRem } from '~/utils/styles/mixins'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Card from '~ds/Card/Card'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
 import AppBox from '~ui/Primitives/AppBox'
 import Heading from '~ui/Primitives/Heading'
+import Tooltip from '~ds/Tooltip/Tooltip'
 import {
   fbRegEx,
   linkedInRegEx,
@@ -438,6 +440,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       </span>
     )
     const { showEditFusionModal } = this.state
+
+    const hasEmail = !!proposal.author?.email
+    const isParticipant = proposal.author?.__typename === 'Participant'
+
     return (
       <>
         <>
@@ -538,7 +544,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 }
               />
               <UserListField
-                disabled={!isAdmin}
+                disabled={!isAdmin || isParticipant}
                 id="proposal-admin-author"
                 name="author"
                 ariaControls="ProposalAdminContentForm-filter-user-listbox"
@@ -897,7 +903,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             </NotationCard>
           </Flex>
           <>
-            <ButtonToolbar className="box-content__toolbar">
+            <Flex spacing={4} className="box-content__toolbar">
               <SubmitButton
                 type="submit"
                 id="proposal_admin_content_save"
@@ -908,22 +914,33 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 }}
                 label={submitting ? 'global.loading' : 'global.save'}
               />
-              {features.proposal_revisions && (
-                <ProposalRevision proposal={proposal} isAdminView>
-                  {openModal => (
-                    <RevisionButton
-                      className="bg-white"
-                      bsStyle="link"
-                      id="proposal_admin_content_revision"
-                      onClick={openModal}
-                    >
-                      {intl.formatMessage({
-                        id: 'request.author.review',
-                      })}
-                    </RevisionButton>
-                  )}
-                </ProposalRevision>
-              )}
+              {features.proposal_revisions &&
+                (hasEmail ? (
+                  <ProposalRevision proposal={proposal} isAdminView>
+                    {openModal => (
+                      <RevisionButton
+                        className="bg-white"
+                        bsStyle="link"
+                        id="proposal_admin_content_revision"
+                        onClick={openModal}
+                      >
+                        {intl.formatMessage({
+                          id: 'request.author.review',
+                        })}
+                      </RevisionButton>
+                    )}
+                  </ProposalRevision>
+                ) : (
+                  <Tooltip label={intl.formatMessage({ id: 'proposal.revision.impossible_email' })}>
+                    <div>
+                      <RevisionButton disabled className="bg-white" bsStyle="link" id="proposal_admin_content_revision">
+                        {intl.formatMessage({
+                          id: 'request.author.review',
+                        })}
+                      </RevisionButton>
+                    </div>
+                  </Tooltip>
+                ))}
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -931,7 +948,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 submitFailed={submitFailed}
                 submitting={submitting}
               />
-            </ButtonToolbar>
+            </Flex>
           </>
         </form>
       </>
@@ -964,7 +981,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
       summary: proposal.summary,
       author: {
         value: proposal.author.id,
-        label: proposal.author.displayName,
+        label: getProposalAuthorDisplayName(proposal.author),
       },
       theme:
         state.default.features.themes && proposal.form.usingThemes
@@ -1030,8 +1047,11 @@ export default createFragmentContainer(container, {
         }
       }
       author {
+        __typename
         id
         displayName
+        email
+        username
       }
       theme {
         id

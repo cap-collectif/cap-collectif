@@ -110,8 +110,10 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
           trashedAt
           trashedReason
           author {
-            ...userInfos
-            userType{name}
+            ...on User {
+                ...userInfos
+                userType{name}
+            }
           }
           status{
             name

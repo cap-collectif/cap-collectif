@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
@@ -26,6 +29,7 @@ use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
+use Capco\AppBundle\Traits\CompletionStatusTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
@@ -66,14 +70,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasAddressIfMandatory()
- * @CapcoAssert\HasAuthor()
  */
-class Proposal implements EntityInterface, Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ExportableContributionInterface, \Stringable
+class Proposal implements EntityInterface, Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ContributionInterface, ExportableContributionInterface, \Stringable
 {
     use AddressableTrait;
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
     use CommentableWithoutCounterTrait;
+    use CompletionStatusTrait;
     use DraftableTrait;
     use FollowableTrait;
     use HasResponsesTrait;
@@ -333,6 +337,11 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     private bool $isArchived = false;
 
     /**
+     * @ORM\Column(name="email_token", type="text", length=255, nullable=true)
+     */
+    private ?string $emailToken = null;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalStatistics", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private ?ProposalStatistics $statistics = null;
@@ -341,6 +350,12 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
      * @ORM\Column(name="consent_internal_communication_token", type="string", nullable=true)
      */
     private ?string $consentInternalCommunicationToken = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="proposals")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private ?Participant $participant = null;
 
     public function __construct()
     {
@@ -368,6 +383,11 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New proposal';
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author ?? $this->participant;
     }
 
     public function getKind(): string
@@ -1727,5 +1747,52 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
         }
 
         return $selections->last()->getSelectionStep();
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->emailToken;
+    }
+
+    public function setEmailToken(?string $emailToken): self
+    {
+        $this->emailToken = $emailToken;
+
+        return $this;
+    }
+
+    public function getContributor(): ?ContributorInterface
+    {
+        return $this->author ?? $this->participant;
+    }
+
+    public function setContributor(ContributorInterface $contributor): self
+    {
+        if ($contributor instanceof User) {
+            $this->setParticipant(null);
+            $this->setAuthor($contributor);
+
+            return $this;
+        }
+        if ($contributor instanceof Participant) {
+            $this->setParticipant($contributor);
+            $this->setAuthor(null);
+
+            return $this;
+        }
+
+        return $this;
     }
 }

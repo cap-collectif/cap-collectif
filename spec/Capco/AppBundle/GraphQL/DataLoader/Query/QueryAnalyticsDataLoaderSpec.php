@@ -114,7 +114,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         PromiseAdapterInterface $promiseFactory,
         CloudflareElasticClient $cloudflareElasticClient,
         ResultSet $multiResultSet,
-        \Elastica\ResultSet $resultSetA
+        \Elastica\ResultSet $resultSetA,
+        \Elastica\Response $responseA
     ) {
         $keys = [
             [
@@ -128,6 +129,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
             ],
         ];
 
+        $resultSetA->getResponse()->willReturn($responseA);
+        $responseA->hasError()->willReturn(false);
         $resultSetA->getAggregation('visitors_per_interval')->willReturn(['buckets' => []]);
         $resultSetA->getAggregation('unique_visitors')->willReturn(['value' => 10]);
 
@@ -150,6 +153,113 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $promiseFactory
             ->createAll(
                 Argument::that(fn (array $results): bool => array_keys($results[0]) == ['visitors'])
+            )
+            ->shouldBeCalled()
+            ->willReturn($promise)
+        ;
+
+        $this->all($keys)->shouldReturn($promise);
+    }
+
+    public function it_ignores_external_result_set_errors(
+        PromiseAdapterInterface $promiseFactory,
+        CloudflareElasticClient $cloudflareElasticClient,
+        ResultSet $multiResultSet,
+        \Elastica\ResultSet $resultSetA,
+        \Elastica\Response $responseA
+    ) {
+        $keys = [
+            [
+                'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
+                    DateTimeInterface::ATOM
+                ),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'projectId' => null,
+                'requestedFields' => ['visitors'],
+                'topContributorsCount' => 5,
+            ],
+        ];
+
+        $resultSetA->getResponse()->willReturn($responseA);
+        $responseA->hasError()->willReturn(true);
+        $responseA->getData()->willReturn([
+            'error' => ['type' => 'index_not_found_exception'],
+            'status' => 404,
+        ]);
+        $resultSetA->getAggregation('visitors_per_interval')->shouldNotBeCalled();
+
+        $multiResultSet->getResultSets()->willReturn([
+            'visitors' => $resultSetA,
+        ]);
+
+        $cloudflareElasticClient
+            ->getExternalAnalyticsResultSet(
+                Argument::any(),
+                Argument::any(),
+                null,
+                $keys[0]['requestedFields']
+            )
+            ->shouldBeCalled()
+            ->willReturn($multiResultSet)
+        ;
+
+        $promise = new Promise(null, new SyncPromiseAdapter());
+        $promiseFactory
+            ->createAll(
+                Argument::that(fn (array $results): bool => null === $results[0]['visitors'])
+            )
+            ->shouldBeCalled()
+            ->willReturn($promise)
+        ;
+
+        $this->all($keys)->shouldReturn($promise);
+    }
+
+    public function it_ignores_traffic_sources_result_set_errors(
+        PromiseAdapterInterface $promiseFactory,
+        CloudflareElasticClient $cloudflareElasticClient,
+        ResultSet $multiResultSet,
+        \Elastica\ResultSet $resultSetA,
+        \Elastica\Response $responseA
+    ) {
+        $keys = [
+            [
+                'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
+                    DateTimeInterface::ATOM
+                ),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'projectId' => null,
+                'requestedFields' => ['trafficSources'],
+                'topContributorsCount' => 5,
+            ],
+        ];
+
+        $multiResultSet->hasError()->willReturn(true);
+        $multiResultSet->getResultSets()->willReturn([
+            'DIRECT' => $resultSetA,
+        ]);
+        $resultSetA->getResponse()->willReturn($responseA);
+        $responseA->hasError()->willReturn(true);
+        $responseA->getData()->willReturn([
+            'error' => ['type' => 'index_not_found_exception'],
+            'status' => 404,
+        ]);
+        $resultSetA->getTotalHits()->shouldNotBeCalled();
+
+        $cloudflareElasticClient
+            ->getTrafficSourcesAnalyticsResultSet(
+                Argument::any(),
+                Argument::any(),
+                null
+            )
+            ->shouldBeCalled()
+            ->willReturn($multiResultSet)
+        ;
+
+        $promise = new Promise(null, new SyncPromiseAdapter());
+        $promiseFactory
+            ->createAll(
+                Argument::that(fn (array $results): bool => null === $results[0]['trafficSources'])
             )
             ->shouldBeCalled()
             ->willReturn($promise)

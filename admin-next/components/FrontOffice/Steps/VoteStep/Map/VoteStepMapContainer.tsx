@@ -55,9 +55,12 @@ const FRAGMENT = graphql`
   }
 `
 
-type Props = { step: VoteStepMapContainer_proposalStep$key }
+type Props = {
+  step: VoteStepMapContainer_proposalStep$key
+  onWorkflowTrigger?: (contributionId: string) => void
+}
 
-const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
+const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) => {
   const step = useFragment<VoteStepMapContainer_proposalStep$key>(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
   const [latlngBounds] = useQueryState('latlngBounds')
@@ -102,7 +105,7 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey }) => {
         }}
         zoomControl={false}
       >
-        <MapCustomEvents step={step} />
+        <MapCustomEvents step={step} onWorkflowTrigger={onWorkflowTrigger} />
         {showDiscoverPane && step.__typename === 'CollectStep' && (
           <ProposalMapDiscoverPane handleClose={() => setShowDiscoverPane(false)} />
         )}

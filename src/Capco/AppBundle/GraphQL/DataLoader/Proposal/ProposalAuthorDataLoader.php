@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\UserBundle\Entity\User;
@@ -77,7 +78,7 @@ class ProposalAuthorDataLoader extends BatchDataLoader
         ];
     }
 
-    private function resolve(Proposal $proposal): User
+    private function resolve(Proposal $proposal): Author
     {
         return $proposal->getAuthor();
     }

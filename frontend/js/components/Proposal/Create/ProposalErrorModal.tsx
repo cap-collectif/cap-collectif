@@ -22,6 +22,7 @@ import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql'
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql'
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import CookieMonster from '@shared/utils/CookieMonster'
 type Props = {
   readonly onClose: () => void
   readonly resetModalState: () => void
@@ -31,6 +32,7 @@ type Props = {
   readonly proposalForm: ProposalErrorModal_proposalForm$key
   readonly proposal: ProposalErrorModal_proposal$key
   readonly onSubmitFailed: () => void
+  readonly isAuthenticated?: boolean
 }
 
 const saveProposal = (
@@ -42,10 +44,18 @@ const saveProposal = (
   dispatch: Dispatch,
   onClose: () => void,
   onSubmitFailed: () => void,
+  isAuthenticated?: boolean,
 ) => {
+  const participantToken = CookieMonster.getParticipantCookie()
+  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+
   if (data.proposalFormId) {
     return CreateProposalMutation.commit({
-      input: { ...data, proposalFormId: proposalForm.id },
+      input: {
+        ...data,
+        proposalFormId: proposalForm.id,
+        participantToken: isAuthenticated ? undefined : participantToken,
+      },
       stepId: proposalForm.step?.id || '',
     })
       .then(response => {
@@ -115,7 +125,12 @@ const saveProposal = (
 
   if (data.id) {
     return ChangeProposalContentMutation.commit({
-      input: { ...data, id: proposal.id },
+      input: {
+        ...data,
+        id: proposal.id,
+        participantToken: isAuthenticated ? undefined : participantToken,
+        emailToken: isAuthenticated ? undefined : emailToken,
+      },
       proposalRevisionsEnabled,
     })
       .then(response => {
@@ -166,6 +181,7 @@ const ProposalErrorModal = ({
   proposalForm: proposalFormFragment,
   proposal: proposalFragment,
   onSubmitFailed,
+  isAuthenticated,
 }: Props): JSX.Element => {
   const intl = useIntl()
   const dispatch: Dispatch = useDispatch()
@@ -181,7 +197,12 @@ const ProposalErrorModal = ({
               😓
             </span>
           </Text>
-          <Text textAlign="center" fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]} fontWeight={600} mb={2}>
+          <Text
+            textAlign="center"
+            fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
+            fontWeight={600}
+            mb={2}
+          >
             {intl.formatMessage({
               id: 'error.title.damn',
             })}
@@ -227,6 +248,7 @@ const ProposalErrorModal = ({
                   dispatch,
                   onClose,
                   onSubmitFailed,
+                  isAuthenticated,
                 )
               }
 
@@ -245,6 +267,7 @@ const ProposalErrorModal = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
+  isAuthenticated: !!state.user.user,
 })
 
 export default connect(mapStateToProps)(ProposalErrorModal)

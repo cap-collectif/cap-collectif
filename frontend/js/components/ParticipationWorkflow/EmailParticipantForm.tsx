@@ -65,7 +65,7 @@ const EmailParticipantForm: React.FC<Props> = ({ hideGoBackArrow }) => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="email" control={control} isRequired>
-            <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
+            <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput
               id="email"
               name="email"

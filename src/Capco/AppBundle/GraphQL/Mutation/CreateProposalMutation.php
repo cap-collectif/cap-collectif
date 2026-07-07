@@ -6,17 +6,24 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -25,11 +32,13 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class CreateProposalMutation implements MutationInterface
 {
@@ -47,15 +56,46 @@ class CreateProposalMutation implements MutationInterface
         protected Manager $toggleManager,
         protected ResponsesFormatter $responsesFormatter,
         protected ProposalRepository $proposalRepository,
-        protected Publisher $publisher
+        protected Publisher $publisher,
+        protected readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        protected readonly ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver,
+        protected readonly ParticipantHelper $participantHelper,
+        protected readonly ParticipantRepository $participantRepository,
+        protected readonly ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        protected readonly TokenGeneratorInterface $tokenGenerator,
     ) {
     }
 
-    public function __invoke(Argument $input, User $user): array
+    /**
+     * @throws \JsonException
+     */
+    public function __invoke(Argument $input, ?User $user = null): array
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
-        $proposalForm = $this->getProposalForm($values, $user);
+
+        $participantToken = $values['participantToken'] ?? null;
+        $contributor = $user ?: $this->participantHelper->getOrCreateParticipant($participantToken);
+
+        $proposalForm = $this->getProposalForm($values, $contributor);
+        $stepId = $proposalForm->getStep()?->getId();
+        $argsRequirements = new Argument(['stepId' => GlobalId::toGlobalId('AbstractStep', $stepId)]);
+        if ($contributor instanceof User) {
+            $isViewerMeetingRequirementsOrIsParticipantMeetingRequirements = $this->viewerIsMeetingRequirementsResolver->__invoke(
+                $argsRequirements,
+                $contributor
+            );
+        } else {
+            $isViewerMeetingRequirementsOrIsParticipantMeetingRequirements = $this->participantIsMeetingRequirementsResolver->__invoke(
+                $contributor,
+                $argsRequirements
+            );
+        }
+
+        if (isset($values['participantToken'])) {
+            unset($values['participantToken']);
+        }
+
         unset($values['proposalFormId']); // This only useful to retrieve the proposalForm
         $draft = false;
         if (isset($values['draft'])) {
@@ -65,36 +105,79 @@ class CreateProposalMutation implements MutationInterface
 
         if (
             \count(
-                $this->proposalRepository->findCreatedSinceIntervalByAuthor($user, 'PT1M')
+                $this->proposalRepository->findCreatedSinceIntervalByAuthor(
+                    $contributor,
+                    'PT1M',
+                    $contributor instanceof User ? 'author' : 'participant'
+                )
             ) >= 2
         ) {
             $this->logger->error('You contributed too many times.');
             $error = ['message' => 'You contributed too many times.'];
 
-            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error], 'shouldTriggerWorkflow' => false];
         }
 
         $proposal = $this->createAndIndexProposal(
             $values,
             $proposalForm,
-            $user,
-            $user,
-            $draft
+            $draft,
+            ProposalType::class,
+            $contributor
         );
+        $shouldTriggerWorkflow = null;
+        if (!$isViewerMeetingRequirementsOrIsParticipantMeetingRequirements) {
+            $proposal->setMissingRequirementsStatus();
+            $shouldTriggerWorkflow = true;
+        } else {
+            $proposal->setCompletedStatus();
+        }
 
-        if (false === json_encode(['proposalId' => $proposal->getId()])) {
+        if ($contributor instanceof Participant) {
+            $contributor->setLastContributedAt(new \DateTime());
+        }
+
+        $project = $proposalForm->getStep()?->getProject();
+        $hasAlreadyParticipatedInThisProject = true;
+        if ($contributor instanceof Participant && $project) {
+            $hasAlreadyParticipatedInThisProject = $this->participantRepository
+                ->findWithContributionsByProjectAndParticipant($project, $contributor)
+            ;
+        }
+
+        $this->em->flush();
+
+        if ($contributor instanceof Participant && $project && !$draft) {
+            $this->participantsTotalCountCacheHandler->incrementTotalCount(
+                project: $project,
+                conditionCallBack: fn ($cachedItem) => $cachedItem->isHit()
+                    && $isViewerMeetingRequirementsOrIsParticipantMeetingRequirements
+                    && !$hasAlreadyParticipatedInThisProject
+            );
+        }
+
+        if (null === $shouldTriggerWorkflow) {
+            $shouldTriggerWorkflow = $this->getShouldTriggerWorkflow($proposalForm, $contributor);
+        }
+
+        $messageBody = json_encode(['proposalId' => $proposal->getId()]);
+        if (false === $messageBody) {
             throw new UserError('Could not encode proposalId.');
         }
 
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
-            new Message(json_encode(['proposalId' => $proposal->getId()]))
-        );
+        if (false === $shouldTriggerWorkflow) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
+                new Message($messageBody)
+            );
+        }
 
-        return ['proposal' => $proposal];
+        $participantToken = $contributor instanceof Participant ? $contributor->getToken() : null;
+
+        return ['proposal' => $proposal, 'participantToken' => $participantToken, 'shouldTriggerWorkflow' => $shouldTriggerWorkflow];
     }
 
-    protected function getProposalForm(array $values, User $user): ProposalForm
+    protected function getProposalForm(array $values, ?ContributorInterface $contributor = null): ProposalForm
     {
         /** @var null|ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($values['proposalFormId']);
@@ -105,7 +188,8 @@ class CreateProposalMutation implements MutationInterface
             throw new UserError($error);
         }
 
-        if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
+        /** @var ContributorInterface $contributor */
+        if (!$this->canContributeToStep($contributor, $proposalForm)) {
             throw new UserError('You can no longer contribute to this collect step.');
         }
 
@@ -115,24 +199,34 @@ class CreateProposalMutation implements MutationInterface
     protected function createAndIndexProposal(
         array $values,
         ProposalForm $proposalForm,
-        User $user,
-        User $author,
         bool $draft,
-        string $formType = ProposalType::class
+        string $formType,
+        ContributorInterface $contributor
     ): Proposal {
         $values = $this->fixValues($values, $proposalForm);
         $proposal = new Proposal();
-        $follower = new Follower();
-        $follower->setUser($user);
-        $follower->setProposal($proposal);
-        $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
+        $follower = null;
+        if ($contributor instanceof User) {
+            $follower = new Follower();
+            $follower->setUser($contributor);
+            $follower->setProposal($proposal);
+            $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
+        }
+
+        if ($contributor instanceof Participant) {
+            $values['participant'] = $contributor;
+        }
 
         $proposal
             ->setDraft($draft)
-            ->setAuthor($author)
+            ->setAuthor($contributor)
+            ->setEmailToken($this->tokenGenerator->generateToken())
             ->setProposalForm($proposalForm)
-            ->addFollower($follower)
         ;
+
+        if ($contributor instanceof User) {
+            $proposal->addFollower($follower);
+        }
 
         if (isset($values['publishedAt'])) {
             $publishedAt =
@@ -151,23 +245,28 @@ class CreateProposalMutation implements MutationInterface
         }
 
         $values = ProposalMutation::hydrateSocialNetworks($values, $proposal, $proposalForm, true);
-        $this->linkProposalAuthorToResponses($author, $values);
+        if ($contributor instanceof Author) {
+            $this->linkProposalAuthorToResponses($contributor, $values);
+        }
 
         $form = $this->formFactory->create($formType, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        $this->logger->info(__METHOD__ . json_encode($values));
+        $this->logger->info(__METHOD__ . json_encode($values, \JSON_THROW_ON_ERROR));
         $form->submit($values);
 
         if (!$form->isValid()) {
             $this->handleErrors($form);
         }
-        $this->em->persist($follower);
+        if ($contributor instanceof User) {
+            $this->em->persist($follower);
+        }
         $this->em->persist($proposal);
-        $this->em->flush();
-        $this->redisStorageHelper->recomputeUserCounters($user);
+        if ($contributor instanceof User) {
+            $this->redisStorageHelper->recomputeUserCounters($contributor);
+        }
 
         // Synchronously index
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
@@ -234,15 +333,34 @@ class CreateProposalMutation implements MutationInterface
     }
 
     /**
-     * @param Author|User          $author
      * @param array<string, mixed> $values
      */
-    protected function linkProposalAuthorToResponses($author, array &$values): void
+    protected function linkProposalAuthorToResponses(Author $author, array &$values): void
     {
+        $contributorKey = $author instanceof Participant ? 'participant' : 'user';
+
         if (isset($values['responses'])) {
             foreach ($values['responses'] as $key => $ignored) {
-                $values['responses'][$key]['user'] = $author->getId();
+                $values['responses'][$key][$contributorKey] = $author->getId();
             }
         }
+    }
+
+    private function canContributeToStep(ContributorInterface $contributor, ProposalForm $proposalForm): bool
+    {
+        return match (true) {
+            $contributor instanceof Participant => $proposalForm->getStep()?->isOpen() ?? false,
+            $contributor instanceof User => $proposalForm->canContribute($contributor) || $contributor->isAdmin(),
+            default => false,
+        };
+    }
+
+    private function getShouldTriggerWorkflow(ProposalForm $proposalForm, ContributorInterface $contributor): bool
+    {
+        $consentInternalCommunication = $contributor->isConsentInternalCommunication();
+        $username = $contributor->getUsername();
+        $proposalCount = $this->proposalRepository->getProposalCountByStepAndContributor($proposalForm->getStep(), $contributor);
+
+        return (!$consentInternalCommunication || !$username) && 1 === $proposalCount;
     }
 }

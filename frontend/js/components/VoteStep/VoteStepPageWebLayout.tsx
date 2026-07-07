@@ -33,7 +33,18 @@ type Props = {
 const FILTERS_WIDTH = '23.3rem'
 
 const QUERY = graphql`
-  fragment VoteStepPageWebLayout_query on Query @argumentDefinitions(stepId: { type: "ID!" }) {
+  fragment VoteStepPageWebLayout_query on Query
+  @argumentDefinitions(
+    stepId: { type: "ID!" }
+    participantToken: { type: "String" }
+    isAuthenticated: { type: "Boolean!" }
+  ) {
+    viewer @include(if: $isAuthenticated) {
+      consentPrivacyPolicy
+    }
+    participant(token: $participantToken) @skip(if: $isAuthenticated) {
+      consentPrivacyPolicy
+    }
     step: node(id: $stepId) {
       ... on ProposalStep {
         open
@@ -85,6 +96,7 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView, disa
         show={isOpen}
         onClose={onClose}
         onOpen={() => dispatch(reset(formName))}
+        contributorConsentPrivacyPolicy={data.viewer?.consentPrivacyPolicy || data.participant?.consentPrivacyPolicy}
       />
       <Flex justify="center" maxWidth={'100%'} width="100%">
         <Box width={FILTERS_WIDTH} minWidth={FILTERS_WIDTH} bg="gray.100">

@@ -15,6 +15,15 @@ Object {
         },
         "title": "Projet avec administrateur de projet - proposal-form",
       },
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "EmailVerifiedRequirement",
+            },
+          },
+        ],
+      },
       "title": "Dépôt",
     },
   },
@@ -35,6 +44,15 @@ Object {
           "username": "admin",
         },
         "title": "Appel à projets - proposal-form",
+      },
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "EmailVerifiedRequirement",
+            },
+          },
+        ],
       },
       "title": "Dépôt",
     },
@@ -57,6 +75,15 @@ Object {
         },
         "title": "projectOrgaVisibilityMe - proposal-form",
       },
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "EmailVerifiedRequirement",
+            },
+          },
+        ],
+      },
       "title": "Dépôt",
     },
   },
@@ -77,6 +104,15 @@ Object {
           "username": "GIEC",
         },
         "title": "Budget Participatif d'organisation - proposal-form",
+      },
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "EmailVerifiedRequirement",
+            },
+          },
+        ],
       },
       "title": "Dépôt",
     },

@@ -19,14 +19,17 @@ import ChangeProposalContentMutation from '@mutations/ChangeProposalContentMutat
 import CreateProposalMutation from '@mutations/CreateProposalMutation'
 import { ProposalFormModalThemesQuery } from '@relay/ProposalFormModalThemesQuery.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { isResponseValueEmpty } from '@shared/utils/isResponseValueEmpty'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import * as React from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { useIntl } from 'react-intl'
-import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { fetchQuery, graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { environment } from '@utils/relay-environement'
 import { SubmitButtonType } from '../VoteStep.type'
+import { buildVoteStepQueryVariables, VOTE_STEP_POST_CREATE_REFRESH_QUERY } from '../VoteStep.queries'
 import ExternalLinks from './ExternalLinks'
 import {
   AddressInput,
@@ -222,10 +225,16 @@ const ProposalFormModal: React.FC<Props> = props => {
   const isMobile = useIsMobile()
   const { onOpen, onClose: onDisclosureClose } = useDisclosure(false)
   const { viewerSession } = useAppContext()
+  const canSaveDraft = !!viewerSession?.id
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
   const addressJsonRef = React.useRef<any>(null)
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
+  const participantToken = viewerSession ? undefined : CookieMonster.getParticipantCookie()
+  const emailToken = React.useMemo(
+    () => (typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token') ?? undefined),
+    [],
+  )
 
   // Initialize addressJsonRef with existing address data when editing
   React.useEffect(() => {
@@ -558,7 +567,12 @@ const ProposalFormModal: React.FC<Props> = props => {
       }
 
       if (mode === 'edit' && proposal) {
-        const editModeInput = { id: proposal.id, ...input }
+        const editModeInput = {
+          id: proposal.id,
+          ...input,
+          ...(participantToken && { participantToken }),
+          ...(emailToken && { emailToken }),
+        }
 
         const response = await ChangeProposalContentMutation.commit({ input: editModeInput })
 
@@ -572,7 +586,13 @@ const ProposalFormModal: React.FC<Props> = props => {
           props.onClose()
         }
       } else {
-        const createModeInput = { proposalFormId: proposalForm.id, ...input }
+        const onWorkflowTrigger = mode === 'create' ? props.onWorkflowTrigger : undefined
+        const createModeInput = {
+          proposalFormId: proposalForm.id,
+          ...input,
+          ...(participantToken && { participantToken }),
+        }
+        const shouldRefetchAnonymousPublishedProposal = viewerSession === null && !isDraft
 
         const response = await CreateProposalMutation.commit({
           variables: {
@@ -581,17 +601,52 @@ const ProposalFormModal: React.FC<Props> = props => {
             isAuthenticated: viewerSession != null,
           },
           stepId: props.stepId,
+          skipUpdater: shouldRefetchAnonymousPublishedProposal,
         })
 
         if (response.createProposal.userErrors?.length > 0) {
           return mutationErrorToast(intl)
         }
 
-        if (response.createProposal?.proposal) {
+        const createProposal = response.createProposal
+
+        if (createProposal?.proposal) {
+          if (!participantToken && viewerSession === null && createProposal.participantToken) {
+            CookieMonster.addParticipantCookie(createProposal.participantToken)
+          }
+
+          if (createProposal.shouldTriggerWorkflow && createProposal.proposalId?.id) {
+            onWorkflowTrigger?.(createProposal.proposalId.id)
+            return
+          }
+
+          if (shouldRefetchAnonymousPublishedProposal && typeof window !== 'undefined') {
+            const searchParams = new URLSearchParams(window.location.search)
+
+            await fetchQuery(
+              environment as any,
+              VOTE_STEP_POST_CREATE_REFRESH_QUERY,
+              buildVoteStepQueryVariables({
+                stepId: props.stepId,
+                isAuthenticated: false,
+                searchParams: {
+                  sort: searchParams.get('sort'),
+                  category: searchParams.get('category'),
+                  theme: searchParams.get('theme'),
+                  status: searchParams.get('status'),
+                  userType: searchParams.get('userType'),
+                  district: searchParams.get('district'),
+                  term: searchParams.get('term'),
+                  latlngBounds: searchParams.get('latlngBounds'),
+                },
+              }),
+            ).toPromise()
+          }
+
           successToast(
             intl.formatMessage(
               { id: isDraft ? 'proposal-draft-saved' : 'proposal-created-successfully' },
-              { title: response.createProposal.proposal.title },
+              { title: createProposal.proposal.title },
             ),
           )
           reset()
@@ -695,18 +750,20 @@ const ProposalFormModal: React.FC<Props> = props => {
         </Flex>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          type="button"
-          variantSize="big"
-          variant="secondary"
-          isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
-          onClick={() => {
-            submitButtonRef.current = 'save-as-draft'
-            handleSaveAsDraft(hide)
-          }}
-        >
-          {intl.formatMessage({ id: 'global.save_as_draft' })}
-        </Button>
+        {canSaveDraft ? (
+          <Button
+            type="button"
+            variantSize="big"
+            variant="secondary"
+            isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
+            onClick={() => {
+              submitButtonRef.current = 'save-as-draft'
+              handleSaveAsDraft(hide)
+            }}
+          >
+            {intl.formatMessage({ id: 'global.save_as_draft' })}
+          </Button>
+        ) : null}
 
         <Button
           type="button"

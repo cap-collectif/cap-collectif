@@ -72,16 +72,16 @@ class CollectParticipantExporter extends ParticipantExporter
                     }
                 }
 
-                if ($participant instanceof User) {
-                    return $participant->getProposals()->exists(
-                        fn ($key, Proposal $proposal) => $this->shouldExportProposalInSimplifiedVariant($proposal)
-                    );
-                }
-
-                return false;
+                return $participant->getProposals()->exists(
+                    fn ($key, Proposal $proposal) => $this->shouldExportProposalInSimplifiedVariant($proposal)
+                );
             });
 
             $data = array_values($data);
+
+            if (!$data) {
+                return;
+            }
         }
 
         if (null !== $this->step) {

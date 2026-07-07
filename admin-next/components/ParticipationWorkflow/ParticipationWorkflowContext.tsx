@@ -1,9 +1,10 @@
 import * as React from 'react'
 
 type Props = {
-  children: JSX.Element | JSX.Element[] | string
+  children: React.ReactNode
   value: {
     contributionUrl: string
+    giveUpUrl: string
     logo: {
       url: string
       width: number
@@ -22,6 +23,7 @@ type Props = {
 
 type Context = {
   contributionUrl: string
+  giveUpUrl: string
   logo: {
     url: string
     width: number

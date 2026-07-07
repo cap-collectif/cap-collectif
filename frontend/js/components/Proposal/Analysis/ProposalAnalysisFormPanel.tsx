@@ -32,6 +32,7 @@ import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisi
 import { RevisionButton } from '~/shared/ProposalRevision/styles'
 import ProposalAnalysisComments from '~/components/Proposal/Analysis/ProposalAnalysisComments'
 import type { ProposalAnalysisFormPanel_viewer$data } from '~relay/ProposalAnalysisFormPanel_viewer.graphql'
+import { Tooltip } from '@cap-collectif/ui'
 
 const memoizeAvailableQuestions: any = memoize(() => {})
 export const Validation = styled.div`
@@ -174,6 +175,8 @@ export const ProposalAnalysisFormPanel = ({
   const [status, setStatus] = useState(initialStatus)
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get('availableQuestions')
   const analysis = proposal.analyses?.find(a => a.analyst.id === userId)
+  const hasEmail = !!proposal.author.email
+
   return (
     <>
       <form
@@ -272,11 +275,21 @@ export const ProposalAnalysisFormPanel = ({
           </ValidateButton>
           {proposalRevisionsEnabled && (
             <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
-              {openModal => (
-                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                  <FormattedMessage id="request.author.review" />
-                </RevisionButton>
-              )}
+              {openModal =>
+                hasEmail ? (
+                  <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                    <FormattedMessage id="request.author.review" />
+                  </RevisionButton>
+                ) : (
+                  <Tooltip label={intl.formatMessage({ id: 'proposal.revision.impossible_email' })}>
+                    <div>
+                      <RevisionButton disabled id="proposal-analysis-revision" type="button">
+                        <FormattedMessage id="request.author.review" />
+                      </RevisionButton>
+                    </div>
+                  </Tooltip>
+                )
+              }
             </ProposalRevision>
           )}
         </Validation>
@@ -336,6 +349,9 @@ export default createFragmentContainer(container, {
         responses {
           ...responsesHelper_response @relay(mask: false)
         }
+      }
+      author {
+        email
       }
       form {
         analysisConfiguration {

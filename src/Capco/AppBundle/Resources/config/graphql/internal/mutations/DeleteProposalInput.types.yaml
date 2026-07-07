@@ -6,3 +6,6 @@ DeleteProposalInput:
             proposalId:
                 type: 'ID!'
                 description: 'The proposal id'
+            participantToken:
+                type: 'String'
+                description: 'The participant token'

@@ -33,7 +33,18 @@ type Props = {
 }
 
 const QUERY = graphql`
-  fragment VoteStepPageMobileLayout_query on Query @argumentDefinitions(stepId: { type: "ID!" }) {
+  fragment VoteStepPageMobileLayout_query on Query
+  @argumentDefinitions(
+    stepId: { type: "ID!" }
+    participantToken: { type: "String" }
+    isAuthenticated: { type: "Boolean!" }
+  ) {
+    viewer @include(if: $isAuthenticated) {
+      consentPrivacyPolicy
+    }
+    participant(token: $participantToken) @skip(if: $isAuthenticated) {
+      consentPrivacyPolicy
+    }
     step: node(id: $stepId) {
       ... on ProposalStep {
         open
@@ -100,6 +111,7 @@ export const VoteStepPageMobileLayout: React.FC<Props> = ({ query: queryKey, ste
         onClose={onClose}
         onOpen={() => dispatch(reset(formName))}
         fullSizeOnMobile
+        contributorConsentPrivacyPolicy={data.viewer?.consentPrivacyPolicy || data.participant?.consentPrivacyPolicy}
       />
       <Flex direction="column" width="100%">
         <Flex
@@ -117,11 +129,7 @@ export const VoteStepPageMobileLayout: React.FC<Props> = ({ query: queryKey, ste
           zIndex={99}
         >
           <VoteStepPageSearchBarMobile onClick={() => setShowFiltersPage(true)} />
-          <ViewChangePanel
-            hideText
-            hasMapView={hasMapView}
-            hasVotesView={isVotable}
-          />
+          <ViewChangePanel hideText hasMapView={hasMapView} hasVotesView={isVotable} />
         </Flex>
         {view === View.Map ? (
           <React.Suspense fallback={<VoteStepMapSkeleton />}>

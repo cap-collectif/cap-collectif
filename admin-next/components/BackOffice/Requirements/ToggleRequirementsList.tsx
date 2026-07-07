@@ -1,14 +1,18 @@
 import React from 'react'
-import { Flex } from '@cap-collectif/ui'
+import { Flex, toast } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
 import RequirementItem from '@components/BackOffice/Requirements/RequirementItem'
 import { ToggleRequirement } from '@components/BackOffice/Requirements/Requirements'
 import PhoneRequirementItem from '@components/BackOffice/Requirements/PhoneRequirementItem'
 
 type Props = {
   toggleRequirements: Array<ToggleRequirement>
+  isCollectStep: boolean
 }
 
-const ToggleRequirementsList: React.FC<Props> = ({ toggleRequirements }) => {
+const ToggleRequirementsList: React.FC<Props> = ({ toggleRequirements, isCollectStep }) => {
+  const intl = useIntl()
+
   const isSmsVoteEnabled = toggleRequirements.some(requirement => requirement.typename === 'PhoneVerifiedRequirement')
 
   return (
@@ -38,6 +42,17 @@ const ToggleRequirementsList: React.FC<Props> = ({ toggleRequirements }) => {
               key={requirement.typename}
               typename={requirement.typename}
               disabled={requirement.disabled}
+              onChange={
+                requirement.typename === 'EmailVerifiedRequirement'
+                  ? ({ isChecked }) => {
+                      if (!isChecked && isCollectStep)
+                        toast({
+                          variant: 'warning',
+                          content: intl.formatMessage({ id: 'requirements.email_disabled' }),
+                        })
+                    }
+                  : undefined
+              }
             />
           )
         })}

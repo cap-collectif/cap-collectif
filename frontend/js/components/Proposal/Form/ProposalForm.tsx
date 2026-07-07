@@ -11,7 +11,7 @@ import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-r
 import { Alert, Collapse, ListGroup, ListGroupItem, Panel, Glyphicon, Button } from 'react-bootstrap'
 
 import styled from 'styled-components'
-import { toast, Button as DsButton, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
+import { toast, Button as DsButton, Text, Icon, CapUIIcon, CapUIIconSize, Box } from '@cap-collectif/ui'
 import { styleGuideColors } from '~/utils/colors'
 import component from '~/components/Form/Field'
 import type {
@@ -46,6 +46,8 @@ import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql'
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql'
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
 import scrollToFormError from '~/components/Proposal/Form/ProposalForm.utils'
+import CookieMonster from '@shared/utils/CookieMonster'
+import { CONTRIBUTION_ID_URL_PARAM } from '~/components/ParticipationWorkflow/ParticipationWorkflow'
 
 const SELECT_DISTRICT = '-1'
 
@@ -79,37 +81,38 @@ const searchProposalsQuery = graphql`
   }
 `
 type LatLng = {
-  readonly lat: number
-  readonly lng: number
+  lat: number
+  lng: number
 }
 export const formName = 'proposal-form'
 export const EDIT_MODAL_ANCHOR = '#edit-proposal'
 type RelayProps = {
-  readonly proposalForm: ProposalForm_proposalForm$data
-  readonly proposal: ProposalForm_proposal$data | null | undefined
+  proposalForm: ProposalForm_proposalForm$data
+  proposal: ProposalForm_proposal$data | null | undefined
 }
 export type Props = ReduxFormFormProps &
   RelayProps & {
-    readonly intl: IntlShape
-    readonly themes: Array<Record<string, any>>
-    readonly dispatch: Dispatch
-    readonly features: FeatureToggles
-    readonly titleValue: string | null | undefined
-    readonly addressValue: string | null | undefined
-    readonly category: string | null | undefined
-    readonly responses: ResponsesInReduxForm
-    readonly user: {
+    intl: IntlShape
+    themes: Array<Record<string, any>>
+    dispatch: Dispatch
+    features: FeatureToggles
+    titleValue: string | null | undefined
+    addressValue: string | null | undefined
+    category: string | null | undefined
+    responses: ResponsesInReduxForm
+    user: {
       id: string
       username: string
     }
-    readonly geoJsons: Array<GeoJson>
-    readonly onSubmitSuccess: () => void
-    readonly onSubmitFailed: () => void
-    readonly onSubmit?: () => void
-    readonly isBackOfficeInput?: boolean
-    readonly errorCount?: number
-    readonly onAddressEdit?: () => void
-    readonly setValuesSaved?: (values: CreateProposalInput | ChangeProposalContentInput) => void
+    geoJsons: Array<GeoJson>
+    onSubmitSuccess: () => void
+    onSubmitFailed: () => void
+    onSubmit?: () => void
+    isBackOfficeInput?: boolean
+    errorCount?: number
+    onAddressEdit?: () => void
+    setValuesSaved?: (values: CreateProposalInput | ChangeProposalContentInput) => void
+    isAuthenticated?: boolean
   }
 export type FormValues = {
   title: string | null | undefined
@@ -166,7 +169,7 @@ export const ExternalLinks = styled.div<{ paddingY?: string }>`
 const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
-  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, setValuesSaved }: Props,
+  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, setValuesSaved, isAuthenticated }: Props,
 ) => {
   const data = {
     title: values.title,
@@ -210,10 +213,18 @@ const onSubmit = (
     throw new SubmissionError(errors)
   }
 
+  const participantToken = CookieMonster.getParticipantCookie()
+  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+
   if (proposal) {
     if (setValuesSaved) setValuesSaved({ ...data, id: proposal.id })
     return ChangeProposalContentMutation.commit({
-      input: { ...data, id: proposal.id },
+      input: {
+        ...data,
+        id: proposal.id,
+        participantToken: isAuthenticated ? undefined : participantToken,
+        emailToken: isAuthenticated ? undefined : emailToken,
+      },
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
     })
       .then(response => {
@@ -239,9 +250,15 @@ const onSubmit = (
   }
 
   if (setValuesSaved) setValuesSaved({ ...data, proposalFormId: proposalForm.id })
+
   return CreateProposalMutation.commit({
-    input: { ...data, proposalFormId: proposalForm.id },
+    input: {
+      ...data,
+      proposalFormId: proposalForm.id,
+      participantToken: isAuthenticated ? undefined : participantToken,
+    },
     stepId: proposalForm.step?.id || '',
+    isAuthenticated,
   })
     .then((response: CreateProposalMutation$data) => {
       if (response.createProposal && response.createProposal.userErrors) {
@@ -254,8 +271,23 @@ const onSubmit = (
         }
       }
 
-      if (!response.createProposal || !response.createProposal.proposal) {
+      if (!response.createProposal || (!response.createProposal.proposal && !response.createProposal.proposalId)) {
         throw new Error('Mutation "createProposal" failed.')
+      }
+
+      if (!participantToken && !isAuthenticated) {
+        const newParticipantToken = response.createProposal.participantToken
+        CookieMonster.addParticipantCookie(newParticipantToken)
+      }
+
+      if (response.createProposal.shouldTriggerWorkflow) {
+        const url = new URL(window.location.href)
+        if (!url.searchParams.has('workflow')) {
+          url.searchParams.append('workflow', '')
+          url.searchParams.append(CONTRIBUTION_ID_URL_PARAM, response.createProposal.proposalId.id)
+          window.history.pushState({}, '', url)
+        }
+        return
       }
 
       const createdProposal = response.createProposal.proposal
@@ -364,9 +396,9 @@ export const retrieveDistrictForLocation = (
 }
 type State = {
   titleSuggestions: Array<{
-    readonly id: string
-    readonly title: string
-    readonly url: any
+    id: string
+    title: string
+    url: any
   }>
   isLoadingTitleSuggestions: boolean
   districtIdsFilteredByAddress: Array<string>
@@ -514,9 +546,14 @@ export class ProposalForm extends React.Component<Props, State> {
         })}
       </Text>
     )
+
     return (
       <form id="proposal-form">
-        {!isBackOfficeInput && <WYSIWYGRender className="mb-15" value={proposalForm.description} />}
+        {!isBackOfficeInput && (
+          <Box mt={[4, 0]} mb={[4, 4]}>
+            <WYSIWYGRender value={proposalForm.description} />
+          </Box>
+        )}
         {error && this.renderError()}
         <Field
           divClassName="bo_width_747 proposal_title_container"
@@ -948,6 +985,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm, isBackOff
     isBackOfficeInput,
     currentStepId: state.project.currentProjectStepById,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
+    isAuthenticated: !!state.user.user,
   }
 }
 

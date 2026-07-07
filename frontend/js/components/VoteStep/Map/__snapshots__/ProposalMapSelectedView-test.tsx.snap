@@ -55,7 +55,7 @@ Array [
             }
           >
             <img
-              alt="Jane Doe"
+              alt="<mock-value-for-field-\\"username\\">"
               className="sc-bcXGCL fUNjxh"
               src="profile_pic.jpg"
             />
@@ -63,7 +63,7 @@ Array [
           <span
             className="sc-bcXGCL cxXLsF cap-text"
           >
-            Jane Doe
+            &lt;mock-value-for-field-"username"&gt;
           </span>
         </div>
         <div

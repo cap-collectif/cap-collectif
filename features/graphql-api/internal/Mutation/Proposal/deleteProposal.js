@@ -14,20 +14,6 @@ const deleteProposalMutation = /* GraphQL */ `
 `
 
 describe('Internal|delete proposal', () => {
-  it('Anonymous GraphQL client can not delete a proposal', async () => {
-    await expect(
-      graphql(
-        deleteProposalMutation,
-        {
-          input: {
-            proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwx2',
-          },
-        },
-        'internal',
-      ),
-    ).rejects.toThrowError('Access denied to this field.')
-  })
-
   it('User GraphQL client can delete his proposal', async () => {
 
     await expect(
@@ -69,5 +55,19 @@ describe('Internal|delete proposal', () => {
         },
       },
     })
+  })
+
+  it('Anonymous GraphQL client can not delete a proposal', async () => {
+    await expect(
+      graphql(
+        deleteProposalMutation,
+        {
+          input: {
+            proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwx',
+          },
+        },
+        'internal',
+      ),
+    ).rejects.toThrowError("Can't delete proposal")
   })
 })

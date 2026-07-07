@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
+use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -49,7 +50,8 @@ class ConfirmationController extends Controller
         private readonly ParticipantRepository $participantRepository,
         private readonly Encryptor $encryptor,
         private readonly ReplyReconcilier $replyReconcilier,
-        private readonly VotesReconcilier $votesReconcilier
+        private readonly VotesReconcilier $votesReconcilier,
+        private readonly ProposalReconcillier $proposalReconcillier
     ) {
         $this->login = true;
     }
@@ -59,7 +61,7 @@ class ConfirmationController extends Controller
      * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", requirements={"token"="[A-Za-z0-9\-_]{43}"}, options={"i18n" = false})
      * @Route("/account/email_confirmation/{token}/{stepId}", name="account_confirm_email_step", requirements={"token"="[A-Za-z0-9\-_]{43}", "stepId"="[A-Za-z0-9+/=]+"}, options={"i18n" = false})
      */
-    public function emailAction(string $token, ?string $stepId = null): RedirectResponse
+    public function emailAction(Request $request, string $token, ?string $stepId = null): RedirectResponse
     {
         $step = $stepId ? $this->stepRepo->find($stepId) : null;
 
@@ -93,6 +95,7 @@ class ConfirmationController extends Controller
         $user->setLastLogin(new \DateTime());
 
         $hasPublishedContributions = $this->confirmUser($user);
+        $this->reconcileParticipantContributions($request, $user);
 
         // If user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password
@@ -273,6 +276,12 @@ class ConfirmationController extends Controller
         }
 
         if ($existingParticipant) {
+            $proposal = $participant->getProposals()->first();
+
+            if ($proposal) {
+                $proposal->setParticipant($existingParticipant);
+            }
+
             $this->em->remove($participant);
             $this->em->flush();
 
@@ -381,5 +390,29 @@ class ConfirmationController extends Controller
         $user->setConfirmedAccountAt(new \DateTime());
 
         return $hasPulishedContributions;
+    }
+
+    private function reconcileParticipantContributions(Request $request, User $user): void
+    {
+        $participantCookie = $request->cookies->get(ParticipationCookieManager::PARTICIPANT_COOKIE);
+        if (!$participantCookie) {
+            return;
+        }
+
+        $participant = $this->participantRepository->findByTokens(
+            $participantCookie,
+            (string) base64_decode($participantCookie)
+        );
+
+        if (!$participant instanceof Participant) {
+            return;
+        }
+
+        if ($request->cookies->get(ParticipationCookieManager::REPLY_COOKIE)) {
+            $this->replyReconcilier->reconcile($participant, $user);
+        }
+
+        $this->proposalReconcillier->reconcile($participant, $user);
+        $this->votesReconcilier->reconcile($participant, $user);
     }
 }

@@ -11,7 +11,7 @@ user17,user17,user17@cap-collectif.com,Oui,,Citoyen,firstname17,lastname17,,,,,h
 user18,user18,user18@cap-collectif.com,Oui,,Citoyen,firstname18,lastname18,,,,,https://capco.dev/profile/user18,
 user19,user19,user19@cap-collectif.com,Oui,,Citoyen,firstname19,lastname19,,,,,https://capco.dev/profile/user19,
 user20,user20,user20@cap-collectif.com,Oui,,Citoyen,firstname20,lastname20,,,,,https://capco.dev/profile/user20,
-user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996-03-01 00:00:00",,75012,Paris,https://capco.dev/profile/user,DK2AZ554
+user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996-03-01 00:00:00","26 Rue Claude Tillier, 75012 Paris, France",75012,Paris,https://capco.dev/profile/user,DK2AZ554
 user515,user_updating_email,user_updating_email@test.com,Non,,Citoyen,user_updating_email,user_updating_email,,,,,https://capco.dev/profile/userupdatingemail,
 user6,user6,user6@cap-collectif.com,Oui,,Citoyen,firstname6,lastname6,,,,,https://capco.dev/profile/user6,
 user7,user7,user7@cap-collectif.com,Oui,,Citoyen,firstname7,lastname7,,,,,https://capco.dev/profile/user7,

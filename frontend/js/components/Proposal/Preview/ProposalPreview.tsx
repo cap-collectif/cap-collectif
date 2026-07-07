@@ -66,7 +66,7 @@ export class ProposalPreview extends React.Component<Props> {
         <ProposalCard
           id={`proposal-${proposal.id}`}
           className={
-            proposal.author && proposal.author.vip
+            proposal.author && (proposal.author as any).vip
               ? 'bg-vip proposal-preview block--shadowed'
               : 'block--shadowed proposal-preview'
           }
@@ -150,7 +150,9 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
         url
       }
       author {
-        vip
+        ... on User {
+          vip
+        }
       }
       category {
         icon

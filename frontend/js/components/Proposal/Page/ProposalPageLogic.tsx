@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useScrollYPosition } from 'react-use-scroll-position'
 
@@ -24,9 +24,8 @@ import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
-import { createPortal } from 'react-dom'
-import ModalSkeleton from '~/components/ParticipationWorkflow/ModalSkeleton'
-import ParticipationWorkflowModal from '~/components/ParticipationWorkflow/ParticipationWorkflowModal'
+import ParticipationWorkflow from '~/components/ParticipationWorkflow/ParticipationWorkflow'
+import { useUrlToast } from '~/utils/hooks/useUrlToast'
 
 export type Props = {
   queryRef: ProposalPageLogic_query$key | null | undefined
@@ -76,7 +75,8 @@ const FRAGMENT = graphql`
     stepId: { type: "ID!" }
     isAuthenticated: { type: "Boolean!" }
     proposalRevisionsEnabled: { type: "Boolean!" }
-    token: { type: "String" }
+    participantToken: { type: "String" }
+    emailToken: { type: "String" }
   ) {
     viewer @include(if: $isAuthenticated) {
       id
@@ -90,21 +90,27 @@ const FRAGMENT = graphql`
         title
         url
       }
-      ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated, token: $participantToken)
       ...ProposalPageTabs_step
-      ...ProposalVoteBasketWidget_step @arguments(token: $token)
+      ...ProposalVoteBasketWidget_step @arguments(token: $participantToken)
     }
-    proposal: proposalFromSlug(slug: $proposalSlug) {
+    proposal: proposalFromSlug(slug: $proposalSlug, participantToken: $participantToken) {
       ...ProposalPageAside_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalDraftAlert_proposal
-      ...ProposalPageMainContent_proposal @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalPageMainContent_proposal
+        @arguments(isAuthenticated: $isAuthenticated, token: $participantToken)
       ...ProposalPageAlert_proposal
       ...ProposalPageTabs_proposal
       ...ProposalPageVotes_proposal
       ...ProposalPageBlog_proposal
       ...ProposalPageFollowers_proposal
       ...ProposalPageHeader_proposal
-        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled, token: $token)
+        @arguments(
+          isAuthenticated: $isAuthenticated
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
+          token: $participantToken
+          emailToken: $emailToken
+        )
       ...ProposalPageMainAside_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         @include(if: $isAuthenticated)
@@ -147,6 +153,7 @@ const FRAGMENT = graphql`
 export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }: Props) => {
   const query = useFragment(FRAGMENT, queryRef)
   const intl = useIntl()
+  useUrlToast()
   const { width, height } = useResize()
   const [tabKey, setTabKey] = useState('content')
   const isMobile = width < bootstrapGrid.smMax
@@ -191,24 +198,17 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
   }, [show, viewer, hasAnalysis, isMobile])
 
   const [voteId, setVoteId] = React.useState<string | null>(null)
-  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false);
+  const [showRequirementsModal, setShowRequirementsModal] = React.useState(false)
 
   const triggerRequirementsModal = (voteId: string) => {
-    setVoteId(voteId);
-    setShowRequirementsModal(true);
+    setVoteId(voteId)
+    setShowRequirementsModal(true)
   }
 
 
   if (showRequirementsModal && voteId) {
     return (
-      createPortal(
-        <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
-          <Suspense fallback={<ModalSkeleton/>}>
-            <ParticipationWorkflowModal stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
-          </Suspense>
-        </Box>,
-        document.body
-      )
+      <ParticipationWorkflow stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
     )
   }
 
@@ -284,12 +284,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
         </PageContainer>
       </Tab.Container>
       {hasAnalysis && !isMobile && proposal && tabKey === 'content' && (
-        <PanelContainer
-          isAnalysing={isAnalysing}
-          scrollY={scrollY}
-          bottom={bottom}
-          hasVoteBar={showVotesWidget}
-        >
+        <PanelContainer isAnalysing={isAnalysing} scrollY={scrollY} bottom={bottom} hasVoteBar={showVotesWidget}>
           <ProposalAnalysisPanel
             viewer={viewer}
             proposal={proposal}

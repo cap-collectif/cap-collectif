@@ -241,9 +241,11 @@ export default createFragmentContainer(container, {
       deletedAt
       author {
         id
-        isEmailConfirmed
         email @include(if: $viewerIsAdmin)
-        isViewer
+        ...on User {
+          isEmailConfirmed
+          isViewer
+        }
       }
     }
   `,

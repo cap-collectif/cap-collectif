@@ -31,6 +31,8 @@ import {
   getEmailRule,
   getMinLengthRule,
   getMaxLengthRule,
+  formatPhoneValue,
+  normalizePhoneValue,
 } from './FieldInput.utils'
 import { DateHour } from '../dateHour'
 import { forwardRef } from 'react'
@@ -39,27 +41,10 @@ import moment from 'moment'
 export type FieldInputProps = BaseField & AllFieldTypes
 
 export const FieldInput: FC<FieldInputProps> = forwardRef(
-  (
-    {
-      name,
-      type = 'text',
-      control,
-      rules,
-      defaultValue,
-      onChange,
-      onBlur,
-      id,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ name, type = 'text', control, rules, defaultValue, onChange, onBlur, id, ...props }, ref) => {
     const intl = useIntl()
-    const minLengthRule = props.minLength
-      ? getMinLengthRule(props.minLength, intl)
-      : undefined
-    const maxLengthRule = props.maxLength
-      ? getMaxLengthRule(props.maxLength, intl)
-      : undefined
+    const minLengthRule = props.minLength ? getMinLengthRule(props.minLength, intl) : undefined
+    const maxLengthRule = props.maxLength ? getMaxLengthRule(props.maxLength, intl) : undefined
     const emailRule = type === 'email' ? getEmailRule(intl) : undefined
 
     const { field } = useController({
@@ -93,6 +78,18 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
       field.onChange(e)
     }
 
+    const handleOnPhoneChange = (e): void => {
+      if (onChange) onChange(e)
+      const value = normalizePhoneValue(e.target.value)
+      field.onChange({
+        ...e,
+        target: {
+          ...e.target,
+          value,
+        },
+      })
+    }
+
     const handleOnDateChange = (e): void => {
       const date = moment(e.target.value)
       if (onChange) onChange(date)
@@ -105,11 +102,14 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
     }
 
     switch (type) {
-      default:
       case 'hidden':
       case 'text':
       case 'email':
       case 'password':
+      default:
+        return (
+          <Input type={type} {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
+        )
       case 'tel':
         return (
           <Input
@@ -117,44 +117,20 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
             {...props}
             {...field}
             id={id}
-            onChange={handleOnChange}
+            onChange={handleOnPhoneChange}
+            value={formatPhoneValue(field.value)}
             onBlur={handleOnBlur}
             ref={ref}
           />
         )
       case 'number':
         return (
-          <InputNumber
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnNumberChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
+          <InputNumber {...props} {...field} id={id} onChange={handleOnNumberChange} onBlur={handleOnBlur} ref={ref} />
         )
       case 'textarea':
-        return (
-          <TextArea
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <TextArea {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'select':
-        return (
-          <Select
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <Select {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'switch':
         return (
           <Switch
@@ -169,14 +145,7 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
         )
       case 'checkbox':
         return props?.choices ? (
-          <MultipleCheckbox
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
+          <MultipleCheckbox {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
         ) : (
           <Checkbox
             {...props}
@@ -190,14 +159,7 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
         )
       case 'radio':
         return props?.choices ? (
-          <MultipleRadio
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
+          <MultipleRadio {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
         ) : (
           <Radio
             {...props}
@@ -222,16 +184,7 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
           />
         )
       case 'flagSelect':
-        return (
-          <FlagSelect
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <FlagSelect {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'date':
         return (
           <DateInput
@@ -245,49 +198,13 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
           />
         )
       case 'hour':
-        return (
-          <HourInput
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <HourInput {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'dateHour':
-        return (
-          <DateHour
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <DateHour {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'address':
-        return (
-          <Address
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <Address {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
       case 'colorPicker':
-        return (
-          <ColorPicker
-            {...props}
-            {...field}
-            id={id}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            ref={ref}
-          />
-        )
+        return <ColorPicker {...props} {...field} id={id} onChange={handleOnChange} onBlur={handleOnBlur} ref={ref} />
     }
   },
 )

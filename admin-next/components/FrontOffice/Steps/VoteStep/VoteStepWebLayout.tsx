@@ -1,6 +1,5 @@
 import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
-import ModalSkeleton from '@components/ParticipationWorkflow/ModalSkeleton'
-import ParticipationWorkflowModal from '@components/ParticipationWorkflow/ParticipationWorkflowModal'
+import ParticipationWorkflow from '@components/ParticipationWorkflow/ParticipationWorkflow'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
@@ -8,8 +7,6 @@ import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
-import { Suspense } from 'react'
-import { createPortal } from 'react-dom'
 import { graphql, useFragment } from 'react-relay'
 import StepLinkedEvents from '../StepLinkedEvents'
 import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
@@ -118,19 +115,15 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   // We add bottom padding, otherwise the map is fullsize minus its top position
   const mapHeight = `calc(100vh - ${pxToRem(mapStickyPositionFromTop + 24)})`
 
-  // TODO : when parcours dépôt is merged replace with <ParticipationWork /> abstraction
   if (contributionId) {
-    return createPortal(
-      <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
-        <Suspense fallback={<ModalSkeleton />}>
-          <ParticipationWorkflowModal stepId={step.id} contributionId={contributionId} />
-        </Suspense>
-      </Box>,
-      document.body,
-    )
+    return <ParticipationWorkflow stepId={step.id} contributionId={contributionId} />
   }
 
   const triggerRequirementModal = (id: string) => {
+    setContributionId(id)
+  }
+
+  const triggerProposalWorkflow = (id: string) => {
     setContributionId(id)
   }
 
@@ -146,7 +139,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
         </Flex>
         {!isMobile ? (
           <Box position="sticky" top={0} zIndex={1} backgroundColor="neutral-gray.50" py="lg">
-            <VoteStepListHeader step={step} />
+            <VoteStepListHeader step={step} onWorkflowTrigger={triggerProposalWorkflow} />
           </Box>
         ) : step.votable ? (
           <Box flex={`0 1 100%`} position="relative" minHeight={pxToRem(116)} pb={4}>
@@ -191,6 +184,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                   step={step}
                   showMapPlaceholder={showMapPlaceholder}
                   removePlaceholderAndShowMap={() => setShowMapPlaceholder(false)}
+                  onWorkflowTrigger={triggerProposalWorkflow}
                 />
               </Box>
             ) : null}
@@ -198,11 +192,16 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
         </Box>
         {step.form?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
           <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={1999} backgroundColor="white">
-            <VoteStepMap step={step} showMapPlaceholder={false} removePlaceholderAndShowMap={() => {}} />
+            <VoteStepMap
+              step={step}
+              showMapPlaceholder={false}
+              removePlaceholderAndShowMap={() => {}}
+              onWorkflowTrigger={triggerProposalWorkflow}
+            />
           </Box>
         ) : null}
       </Box>
-      {isMobile && <StepVoteMobileActions step={step} />}
+      {isMobile && <StepVoteMobileActions step={step} onWorkflowTrigger={triggerProposalWorkflow} />}
     </Box>
   )
 }

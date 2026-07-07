@@ -52,7 +52,7 @@ Array [
             <p
               className="sc-bcXGCL fOaiAM cap-text"
             >
-              Jane Doe
+              &lt;mock-value-for-field-"username"&gt;
             </p>
           </div>
         </div>

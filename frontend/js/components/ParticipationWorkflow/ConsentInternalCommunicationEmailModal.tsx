@@ -11,6 +11,7 @@ import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/Par
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { useSendParticipantConsentInternalCommunicationEmailMutation } from '~/mutations/SendParticipantConsentInternalCommunicationEmailMutation'
 import { GlobalState } from '~/types'
+import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
 
 type FormValues = {
   email: string
@@ -66,8 +67,10 @@ const ConsentInternalCommunicationEmailModal = () => {
   }, [remainingSecondsUntilRetry, hasRetryError])
 
   const getRedirectUrl = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'your-participation-is-confirmed' })
-    return `${contributionUrl}?toast=${toastConfig}`
+    return buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'your-participation-is-confirmed',
+    })
   }
 
   const redirectUrl = getRedirectUrl()
@@ -121,7 +124,7 @@ const ConsentInternalCommunicationEmailModal = () => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="email" control={control}>
-            <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
+            <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput
               id="email"
               name="email"

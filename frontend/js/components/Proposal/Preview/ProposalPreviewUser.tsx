@@ -2,13 +2,13 @@ import React from 'react'
 import moment from 'moment'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedDate } from 'react-intl'
-
+import { Text } from '@cap-collectif/ui'
 import styled from 'styled-components'
 import Media from '../../Ui/Medias/Media/Media'
-import UserLink from '../../User/UserLink'
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel'
 import type { ProposalPreviewUser_proposal } from '~relay/ProposalPreviewUser_proposal.graphql'
 import UserAvatar from '~/components/User/UserAvatar'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 
 type Props = {
   proposal: ProposalPreviewUser_proposal
@@ -26,13 +26,22 @@ export class ProposalPreviewUser extends React.Component<Props> {
   render() {
     const { proposal } = this.props
     const date = proposal.publishedAt || proposal.createdAt
+    const authorName = getProposalAuthorDisplayName(proposal.author)
     return (
       <Media>
         <Media.Left>
           <UserAvatar user={proposal.author} />
         </Media.Left>
         <MediaBody>
-          <UserLink className="excerpt" user={proposal.author} />
+          {
+            !proposal.author.slug || !proposal.author.url ? (
+              <Text>{authorName}</Text>
+            ) : (
+              <a className="excerpt" href={proposal.author.url}>
+                {authorName}
+              </a>
+            )
+          }
           <div className="excerpt small">
             <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" />
           </div>
@@ -50,12 +59,15 @@ export default createFragmentContainer(ProposalPreviewUser, {
       createdAt
       author {
         ...UserAvatar_user
-        ...UserLink_user
         id
+        username
         displayName
-        url
-        media {
+        ...on User {
           url
+          media {
+            url
+          }
+          slug
         }
       }
     }

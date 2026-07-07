@@ -47,7 +47,9 @@ const ChangeProposalContentAsSuperAdminMutation = /* GraphQL */ `
         title
         body
         author {
-          _id
+          ... on User {
+            _id
+          }
         }
         theme {
           id

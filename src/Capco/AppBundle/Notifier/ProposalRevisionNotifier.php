@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
@@ -12,6 +13,7 @@ use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
@@ -45,6 +47,11 @@ class ProposalRevisionNotifier extends BaseNotifier
             ->findOneByKeyname('color.btn.primary.bg')
             ->getValue()
         ;
+        $contributor = $proposal->getContributor();
+        if (null === $contributor) {
+            throw new \RuntimeException('Proposal author must not be null to send proposal revision creation email.');
+        }
+
         $btnTextColor = $this->siteColorRepository->findOneByKeyname('color.btn.text')->getValue();
         $this->mailer->createAndSendMessage(
             ProposalRevisionMessage::class,
@@ -54,14 +61,11 @@ class ProposalRevisionNotifier extends BaseNotifier
                 'btnColor' => $btnColor,
                 'btnTextColor' => $btnTextColor,
                 'local' => $this->defaultLocale,
-                'proposalURL' => $this->proposalUrlResolver->__invoke(
-                    $proposal,
-                    $this->requestStack
-                ),
+                'proposalURL' => $this->getProposalUrl($proposal, $contributor),
             ],
-            $proposal->getAuthor(),
-            $proposal->getAuthor()->getEmail(),
-            $revision->getAuthor()->getEmail()
+            $contributor,
+            $contributor->getEmail(),
+            $revision->getAuthor()?->getEmail()
         );
     }
 
@@ -95,5 +99,18 @@ class ProposalRevisionNotifier extends BaseNotifier
                 $user
             );
         }
+    }
+
+    private function getProposalUrl(Proposal $proposal, ContributorInterface $contributor): string
+    {
+        $proposalUrl = $this->proposalUrlResolver->__invoke($proposal, $this->requestStack);
+
+        if ($contributor instanceof User) {
+            return $proposalUrl;
+        }
+
+        $separator = str_contains($proposalUrl, '?') ? '&' : '?';
+
+        return sprintf('%s%stoken=%s', $proposalUrl, $separator, $proposal->getEmailToken());
     }
 }

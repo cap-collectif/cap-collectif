@@ -4,6 +4,7 @@ type Props = {
   children: JSX.Element | JSX.Element[] | string
   value: {
     contributionUrl: string
+    giveUpUrl: string
     logo: {
       url: string
       width: number
@@ -31,6 +32,7 @@ type Context = {
   stepId: string
   contributionId: string
   contributionTypeName: string
+  giveUpUrl: string
   captchaError: string | null
   setCaptchaError: (captchaError: string | null) => void
   captchaStepIndex: number | null

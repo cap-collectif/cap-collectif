@@ -11,7 +11,7 @@ type Props = {
 
 const ModalClose: React.FC<Props> = ({ onClose }) => {
   const intl = useIntl()
-  const { contributionUrl } = useParticipationWorkflow()
+  const { giveUpUrl } = useParticipationWorkflow()
   const isMobile = useIsMobile()
 
   return (
@@ -39,7 +39,7 @@ const ModalClose: React.FC<Props> = ({ onClose }) => {
             </ResetCss>
             <Modal.Body>{intl.formatMessage({ id: 'participation-close-modal-body' })}</Modal.Body>
             <Modal.Footer direction={isMobile ? 'column' : 'row'}>
-              <Button variantSize="big" variant="tertiary" as="a" href={contributionUrl} color="gray.500">
+              <Button variantSize="big" variant="tertiary" as="a" href={giveUpUrl} color="gray.500">
                 {intl.formatMessage({ id: 'give-up' })}
               </Button>
               <Button variantSize="big" onClick={hide} width={isMobile ? '100%' : 'auto'}>

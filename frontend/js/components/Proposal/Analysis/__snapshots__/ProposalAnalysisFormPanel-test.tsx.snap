@@ -161,6 +161,9 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
               "state": "FAVOURABLE",
             },
           ],
+          "author": Object {
+            "email": "toto@toto.com",
+          },
           "form": Object {
             "analysisConfiguration": Object {
               "evaluationForm": Object {
@@ -290,6 +293,9 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly with proposal revisio
                 "state": "FAVOURABLE",
               },
             ],
+            "author": Object {
+              "email": "toto@toto.com",
+            },
             "form": Object {
               "analysisConfiguration": Object {
                 "evaluationForm": Object {

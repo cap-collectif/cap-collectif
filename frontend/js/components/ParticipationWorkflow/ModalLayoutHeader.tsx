@@ -5,15 +5,16 @@ import { IntlShape } from 'react-intl'
 import { NavBarLogo } from '@shared/navbar/NavBar.components'
 
 type HeaderProps = {
-  goBackCallback: () => void,
+  goBackCallback: () => void
   logo: {
     width: number
     height: number
     url: string
-  },
-  intl: IntlShape,
-  onClose: () => void,
+  }
+  intl: IntlShape
+  onClose: () => void
   isMobile: boolean
+  optional?: boolean
 }
 
 export const DefaultLayout: React.FC<HeaderProps> = ({
@@ -21,19 +22,25 @@ export const DefaultLayout: React.FC<HeaderProps> = ({
   goBackCallback,
   isMobile,
   onClose,
-  intl
-})=> {
+  intl,
+  optional = false,
+}) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px" >
+    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="52px">
       <Box ml={6} display={['none', 'block']}>
         <NavBarLogo logo={logo} my={0} />
       </Box>
-      <Flex justifyContent="space-between" alignItems="center" margin="auto" maxWidth="540px" width="100%"
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        margin="auto"
+        maxWidth="540px"
+        width="100%"
         sx={{
           position: 'absolute',
           top: '50%',
           left: '50%',
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
         }}
       >
         <Icon
@@ -44,13 +51,25 @@ export const DefaultLayout: React.FC<HeaderProps> = ({
           color="gray.900"
           tabIndex={0}
         />
-        <Box textAlign="center">
-          <Heading as="h2" fontWeight={400} color={isMobile ? 'gray.700' : 'neutral-gray.900'} mb={0} fontSize={CapUIFontSize.Headline}>
-            {
-              isMobile ? intl.formatMessage({ id: 'participation-workflow.validation' }) : intl.formatMessage({ id: 'participation-workflow.requirements' })
-            }
+        <Box textAlign="center" backgroundColor="yellow">
+          <Heading
+            as="h2"
+            sx={{
+              fontWeight: '400 !important',
+            }}
+            color={isMobile ? 'gray.700' : 'neutral-gray.900'}
+            mb={0}
+            fontSize={CapUIFontSize.Headline}
+          >
+            {isMobile
+              ? intl.formatMessage({ id: 'participation-workflow.validation' })
+              : intl.formatMessage({
+                  id: optional ? 'participation-workflow.not_required' : 'participation-workflow.requirements',
+                })}
           </Heading>
-          <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700" >{intl.formatMessage({ id: 'participation-workflow.validation' })}</Text>
+          <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700">
+            {intl.formatMessage({ id: 'participation-workflow.validation' })}
+          </Text>
         </Box>
         <ModalClose onClose={onClose} />
       </Flex>
@@ -58,9 +77,9 @@ export const DefaultLayout: React.FC<HeaderProps> = ({
   )
 }
 
-export const CenteredLogoLayout = ({logo}: Pick<HeaderProps, 'logo'>) => {
+export const CenteredLogoLayout = ({ logo }: Pick<HeaderProps, 'logo'>) => {
   return (
-    <Flex alignItems="center" justifyContent="center" position="relative">
+    <Flex alignItems="center" justifyContent="center" position="relative" minHeight="52px">
       <Box pl={6}>
         <NavBarLogo logo={logo} />
       </Box>
@@ -68,37 +87,47 @@ export const CenteredLogoLayout = ({logo}: Pick<HeaderProps, 'logo'>) => {
   )
 }
 
-export const HideBackArrowLayout: React.FC<HeaderProps> = ({
-   logo,
-   isMobile,
-   onClose,
-   intl
- }) => {
+export const HideBackArrowLayout: React.FC<HeaderProps> = ({ logo, isMobile, onClose, intl, optional = false }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="24px" >
+    <Flex alignItems="center" justifyContent="space-between" position="relative" minHeight="52px">
       <Box ml={6} display={['none', 'block']}>
-          <NavBarLogo logo={logo} my={0} />
+        <NavBarLogo logo={logo} my={0} />
       </Box>
-      <Flex justifyContent="space-between" alignItems="center" margin="auto" maxWidth="540px" width="100%"
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        margin="auto"
+        maxWidth="540px"
+        width="100%"
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
       >
         <Box textAlign="center" width="100%" pl="24px">
-          <Heading as="h2" fontWeight={400} color={isMobile ? 'gray.700' : 'neutral-gray.900'} mb={0} fontSize={CapUIFontSize.Headline}>
-            {
-              isMobile ? intl.formatMessage({ id: 'participation-workflow.validation' }) : intl.formatMessage({ id: 'participation-workflow.requirements' })
-            }
+          <Heading
+            as="h2"
+            sx={{
+              fontWeight: '400 !important',
+            }}
+            color={isMobile ? 'gray.700' : 'neutral-gray.900'}
+            mb={0}
+            fontSize={CapUIFontSize.Headline}
+          >
+            {isMobile
+              ? intl.formatMessage({ id: 'participation-workflow.validation' })
+              : intl.formatMessage({
+                  id: optional ? 'participation-workflow.not_required' : 'participation-workflow.requirements',
+                })}
           </Heading>
-          <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700" >{intl.formatMessage({ id: 'participation-workflow.validation' })}</Text>
+          <Text display={['none', 'block']} fontSize={CapUIFontSize.BodyRegular} color="neutral-gray.700">
+            {intl.formatMessage({ id: 'participation-workflow.validation' })}
+          </Text>
         </Box>
         <ModalClose onClose={onClose} />
       </Flex>
     </Flex>
   )
 }
-
-

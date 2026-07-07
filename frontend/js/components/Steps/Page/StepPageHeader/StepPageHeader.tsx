@@ -29,7 +29,7 @@ type Props = {
   step: StepPageHeader_step$key
 }
 const FRAGMENT = graphql`
-  fragment StepPageHeader_step on Step {
+  fragment StepPageHeader_step on Step @argumentDefinitions(token: { type: "String" }) {
     __typename
     body
     state
@@ -88,7 +88,7 @@ const FRAGMENT = graphql`
       }
     }
     ... on CollectStep {
-      allProposals: proposals(first: 0) {
+      allProposals: proposals(first: 0, participantToken: $token) {
         totalCount
       }
       contributors {
@@ -99,7 +99,7 @@ const FRAGMENT = graphql`
       votable
       voteThreshold
       canDisplayBallot
-      allProposals: proposals(first: 0) {
+      allProposals: proposals(first: 0, participantToken: $token) {
         totalCount
       }
       contributors {

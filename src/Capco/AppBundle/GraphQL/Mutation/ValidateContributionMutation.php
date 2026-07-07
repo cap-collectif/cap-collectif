@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractProposalVote;
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
@@ -13,11 +15,15 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -31,6 +37,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class ValidateContributionMutation implements MutationInterface
 {
@@ -50,6 +58,7 @@ class ValidateContributionMutation implements MutationInterface
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
         private readonly ParticipantRepository $paritcipantRepository,
+        private readonly Publisher $publisher,
     ) {
     }
 
@@ -132,14 +141,36 @@ class ValidateContributionMutation implements MutationInterface
         }
 
         $contribution->setCompletedStatus();
-        $contribution->setPublishedAt(new \DateTime());
+        if ($contribution instanceof Publishable) {
+            $contribution->setPublishedAt(new \DateTime());
+        }
 
         if ($contribution instanceof Reply) {
             $this->em->flush();
             $this->replyCounterIndexer->syncIndex($contribution);
         }
 
+        if ($contribution instanceof Proposal) {
+            $messageBody = json_encode(['proposalId' => $contribution->getId()]);
+            if (false === $messageBody) {
+                throw new UserError('Could not encode proposalId.');
+            }
+
+            $this->em->flush();
+
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
+                new Message($messageBody)
+            );
+
+            $this->indexer->index(Proposal::class, $contribution->getId());
+            $this->indexer->finishBulk();
+        }
+
         if ($contribution instanceof AbstractProposalVote) {
+            if (!$step instanceof ProposalStepInterface) {
+                throw new UserError('Invalid step for proposal votes');
+            }
             if ($contributor instanceof Participant) {
                 $project = $step->getProject();
                 $hasAlreadyParticipatedInThisProject = $this->paritcipantRepository->findWithContributionsByProjectAndParticipant($project, $contributor);
@@ -149,7 +180,13 @@ class ValidateContributionMutation implements MutationInterface
                 $this->indexer->index(AbstractVote::class, $contribution->getId());
                 $this->indexer->index(Proposal::class, $contribution->getProposal()->getId());
 
-                if ($step->isVotesRanking()) {
+                if ($step instanceof CollectStep || $step instanceof SelectionStep) {
+                    $isVotesRanking = $step->isVotesRanking();
+                } else {
+                    $isVotesRanking = false;
+                }
+
+                if ($isVotesRanking) {
                     $votes = [];
                     if ($contribution instanceof ProposalSelectionVote) {
                         $votes = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'participant' => $contributor]);
@@ -175,7 +212,13 @@ class ValidateContributionMutation implements MutationInterface
 
                 $this->indexer->index(User::class, $contributor->getId());
 
-                if ($step->isVotesRanking()) {
+                if ($step instanceof CollectStep || $step instanceof SelectionStep) {
+                    $isVotesRanking = $step->isVotesRanking();
+                } else {
+                    $isVotesRanking = false;
+                }
+
+                if ($isVotesRanking) {
                     $votes = [];
                     if ($contribution instanceof ProposalSelectionVote) {
                         $votes = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'user' => $contributor]);
@@ -202,6 +245,10 @@ class ValidateContributionMutation implements MutationInterface
 
     private function validateViewer(ContributionInterface $contribution, User $viewer, AbstractStep $step): void
     {
+        if (!$contribution instanceof Authorable) {
+            throw new UserError('Contribution does not have an author');
+        }
+
         if ($contribution->getAuthor() !== $viewer) {
             throw new UserError('Given viewer is not the author of the contribution');
         }

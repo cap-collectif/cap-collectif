@@ -229,11 +229,18 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "User",
+                        "concreteType": null,
                         "kind": "LinkedField",
                         "name": "author",
                         "plural": false,
                         "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
                           Object {
                             "alias": null,
                             "args": null,
@@ -245,36 +252,43 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "isEmailConfirmed",
+                            "name": "displayName",
                             "storageKey": null,
                           },
                           Object {
-                            "condition": "viewerIsAdmin",
-                            "kind": "Condition",
-                            "passingValue": true,
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "email",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "username",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "email",
+                                "name": "isEmailConfirmed",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isViewer",
                                 "storageKey": null,
                               },
                             ],
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isViewer",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "displayName",
-                            "storageKey": null,
+                            "type": "User",
                           },
                         ],
                         "storageKey": null,
@@ -1483,11 +1497,18 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "User",
+                        "concreteType": null,
                         "kind": "LinkedField",
                         "name": "likers",
                         "plural": true,
                         "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
                           Object {
                             "alias": null,
                             "args": null,
@@ -2423,7 +2444,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "fa47533db6e8e2af404d2b508055b44a",
+            "cacheID": "6cba0a7fabe6a5d1a938765b3b2aa084",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2452,6 +2473,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
   id
   estimation
   likers {
+    __typename
     id
     displayName
   }
@@ -2469,8 +2491,11 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     }
   }
   author {
+    __typename
     id
     displayName
+    email
+    username
   }
   theme {
     id
@@ -2806,10 +2831,13 @@ fragment ProposalAdminStatusForm_proposal_2TMsX8 on Proposal {
   trashedReason
   deletedAt
   author {
+    __typename
     id
-    isEmailConfirmed
     email @include(if: $viewerIsAdmin)
-    isViewer
+    ... on User {
+      isEmailConfirmed
+      isViewer
+    }
   }
 }
 

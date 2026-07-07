@@ -2,7 +2,9 @@
 
 namespace Capco\Tests\Mutation;
 
+use ArrayObject;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -51,8 +53,8 @@ class DeleteProposalMutationTest extends TestCase
             $this->publisher,
             $this->indexer,
             $this->dataloader,
-            $this->globalIdResolver,
             $this->proposalAccessResolver,
+            $this->globalIdResolver,
         );
     }
 
@@ -84,7 +86,7 @@ class DeleteProposalMutationTest extends TestCase
 
         $this->globalIdResolver
             ->method('resolve')
-            ->with($proposalId, $user)
+            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
             ->willReturn($proposal)
         ;
 
@@ -109,7 +111,14 @@ class DeleteProposalMutationTest extends TestCase
             )
         ;
 
-        $this->deleteProposalMutation->__invoke($proposalId, $user);
+        $arguments = new Argument([
+            'input' => [
+                'proposalId' => $proposalId,
+                'participantToken' => null,
+            ],
+        ]);
+
+        $this->deleteProposalMutation->__invoke($arguments, $user);
     }
 
     public function testDeleteProposalPublishesMessageWithoutSupervisorAndDecisionMaker(): void
@@ -133,7 +142,7 @@ class DeleteProposalMutationTest extends TestCase
 
         $this->globalIdResolver
             ->method('resolve')
-            ->with($proposalId, $user)
+            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
             ->willReturn($proposal)
         ;
 
@@ -158,6 +167,64 @@ class DeleteProposalMutationTest extends TestCase
             )
         ;
 
-        $this->deleteProposalMutation->__invoke($proposalId, $user);
+        $arguments = new Argument([
+            'input' => [
+                'proposalId' => $proposalId,
+                'participantToken' => null,
+            ],
+        ]);
+
+        $this->deleteProposalMutation->__invoke($arguments, $user);
+    }
+
+    public function testDeleteProposalDoesNotRecomputeCountersForAnonymousParticipantWithoutLinkedUser(): void
+    {
+        $proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwxMw==';
+        $internalProposalId = 'proposal13';
+
+        $user = $this->createMock(User::class);
+        $participant = $this->createMock(Participant::class);
+        $proposal = $this->createMock(Proposal::class);
+        $proposalForm = $this->createMock(ProposalForm::class);
+        $step = $this->createMock(CollectStep::class);
+
+        $proposal->method('getId')->willReturn($internalProposalId);
+        $proposal->method('getAuthor')->willReturn($participant);
+        $proposal->method('getSupervisor')->willReturn(null);
+        $proposal->method('getDecisionMaker')->willReturn(null);
+        $proposal->method('getProposalForm')->willReturn($proposalForm);
+
+        $proposalForm->method('getStep')->willReturn($step);
+
+        $this->globalIdResolver
+            ->method('resolve')
+            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
+            ->willReturn($proposal)
+        ;
+
+        $this->proposalAccessResolver
+            ->method('__invoke')
+            ->with($proposal, self::isInstanceOf(Argument::class), $user)
+            ->willReturn(['canDelete' => true])
+        ;
+
+        $this->redisHelper
+            ->expects($this->never())
+            ->method('recomputeUserCounters')
+        ;
+
+        $this->publisher
+            ->expects($this->once())
+            ->method('publish')
+        ;
+
+        $arguments = new Argument([
+            'input' => [
+                'proposalId' => $proposalId,
+                'participantToken' => 'participant-token',
+            ],
+        ]);
+
+        $this->deleteProposalMutation->__invoke($arguments, $user);
     }
 }

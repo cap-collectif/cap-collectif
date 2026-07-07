@@ -149,6 +149,9 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
             "officialResponse": "Je ne minterdis pas de jeter un oeil sur les caméras de surveillance dès lors quaucun membre du codir ne sera présent dans le locaux.",
             "state": "IN_PROGRESS",
           },
+          "author": Object {
+            "email": "toto@toto.com",
+          },
           "form": Object {
             "analysisConfiguration": Object {
               "costEstimationEnabled": true,
@@ -291,6 +294,9 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
               "id": "assessmentid1",
               "officialResponse": "Je ne minterdis pas de jeter un oeil sur les caméras de surveillance dès lors quaucun membre du codir ne sera présent dans le locaux.",
               "state": "IN_PROGRESS",
+            },
+            "author": Object {
+              "email": "toto@toto.com",
             },
             "form": Object {
               "analysisConfiguration": Object {

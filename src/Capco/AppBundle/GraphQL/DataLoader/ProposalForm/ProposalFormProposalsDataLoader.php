@@ -5,13 +5,16 @@ namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\ProposalAffiliations;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Search\Search;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -36,7 +39,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
-        bool $enableCache
+        bool $enableCache,
+        private readonly ParticipantHelper $participantHelper
     ) {
         parent::__construct(
             $this->all(...),
@@ -106,6 +110,14 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ) {
             // we need viewer in cache key
             $cacheKey['viewerId'] = $viewer ? $viewer->getId() : null;
+            $cacheKey['participantId'] = null;
+
+            if (!$viewer instanceof User && $proposalForm->getStep()?->isPrivate()) {
+                $cacheKey['participantId'] = $this
+                    ->getParticipant($args->offsetGet('participantToken'))
+                    ?->getId()
+                ;
+            }
         }
 
         return $cacheKey;
@@ -137,6 +149,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['includeDraft'],
             $filters['excludeViewerVotes'],
             $filters['analysts'],
+            $participantToken,
         ] = [
             $args->offsetGet('term'),
             $args->offsetGet('includeUnpublished'),
@@ -155,6 +168,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('includeDraft'),
             $args->offsetGet('excludeViewerVotes'),
             $args->offsetGet('analysts'),
+            $args->offsetGet('participantToken'),
         ];
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
         if (!$form->getStep()) {
@@ -163,6 +177,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $filters['restrictedViewerId'] = null;
 
         $organization = $form->getCreator() ? $form->getCreator()->getOrganization() : null;
+        $direction = $ordersBy[0]['direction'] ?? 'DESC';
+        $field = $ordersBy[0]['field'] ?? 'PUBLISHED_AT';
 
         /*
          * When a collect step is private, only the author
@@ -173,9 +189,44 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
          * disable public export anyway.
          */
         if (!$isExporting && $form->getStep()->isPrivate()) {
-            // If viewer is not authenticated we return an empty connection
             if (!$viewer instanceof User) {
-                return $emptyConnection;
+                $participant = $this->getParticipant($participantToken);
+
+                if (!$participant) {
+                    return $emptyConnection;
+                }
+
+                $paginator = new Paginator(function (int $offset, int $limit) use (
+                    $form,
+                    $direction,
+                    $field,
+                    $participant,
+                    &$totalCount
+                ) {
+                    $totalCount = $this->proposalRepo->countProposalsByFormAndParticipant($form, $participant);
+
+                    return $this->proposalRepo
+                        ->getProposalsByFormAndParticipant(
+                            $form,
+                            $participant,
+                            $offset,
+                            $limit,
+                            $field,
+                            $direction
+                        )
+                        ->getIterator()
+                        ->getArrayCopy()
+                    ;
+                });
+
+                $connection = $paginator->auto($args, $totalCount);
+                if (!$connection instanceof ConnectionInterface) {
+                    throw new \RuntimeException('Expected participant proposals pagination to return a connection.');
+                }
+                $connection->setTotalCount($totalCount);
+                $connection->{'fusionCount'} = $this->getFusionsCount($form);
+
+                return $connection;
             }
             // If viewer is asking for proposals of someone else we return an empty connection
             if ($author && $viewer->getId() !== $author) {
@@ -189,9 +240,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         } elseif ($author) {
             $filters['author'] = $author;
         }
-
-        $direction = $ordersBy[0]['direction'] ?? 'DESC';
-        $field = $ordersBy[0]['field'] ?? 'PUBLISHED_AT';
 
         if ($affiliations) {
             if (\in_array(ProposalAffiliations::OWNER, $affiliations, true)) {
@@ -259,6 +307,19 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $connection->{'fusionCount'} = $this->getFusionsCount($form);
 
         return $connection;
+    }
+
+    private function getParticipant(?string $participantToken): ?Participant
+    {
+        if (!$participantToken) {
+            return null;
+        }
+
+        try {
+            return $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException) {
+            return null;
+        }
     }
 
     private function getFusionsCount(ProposalForm $form): int

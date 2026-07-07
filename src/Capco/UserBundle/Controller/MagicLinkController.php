@@ -7,6 +7,7 @@ namespace Capco\UserBundle\Controller;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Authenticator\MagicLinkAuthenticator;
@@ -35,12 +36,15 @@ class MagicLinkController extends AbstractController
         private readonly ParticipantHelper $participantHelper,
         private readonly EntityManagerInterface $em,
         private readonly VotesReconcilier $votesReconcilier,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly ProposalReconcillier $proposalReconcillier
     ) {
     }
 
     /**
      * @Route("/magic-link/{token}", name="capco_magic_link", methods={"GET"}, options={"i18n" = false})
+     *
+     * @throws \JsonException|ParticipantNotFoundException
      */
     public function magicLinkAction(Request $request, string $token): Response
     {
@@ -75,7 +79,7 @@ class MagicLinkController extends AbstractController
         }
 
         $decryptedParticipationCookies = $this->encryptor->decryptData($participationCookies);
-        $cookies = json_decode($decryptedParticipationCookies, true);
+        $cookies = json_decode($decryptedParticipationCookies, true, 512, \JSON_THROW_ON_ERROR);
 
         $decryptedParticipantCookie = ($cookies['participantCookie'] ?? null)
             ? $this->encryptor->decryptData($cookies['participantCookie'])
@@ -97,6 +101,7 @@ class MagicLinkController extends AbstractController
         $viewer = $this->tokenStorage->getToken()->getUser();
 
         $this->votesReconcilier->reconcile($participant, $viewer);
+        $this->proposalReconcillier->reconcile($participant, $viewer);
 
         $decryptedReplyCookie = ($cookies['replyCookie'] ?? null)
             ? $this->encryptor->decryptData($cookies['replyCookie'])

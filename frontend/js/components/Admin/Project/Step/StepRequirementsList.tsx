@@ -97,7 +97,10 @@ export function createRequirements(
   const isSupportingPhoneVerifiedRequirement =
     (step.__typename === 'CollectStep' || step.__typename === 'SelectionStep' || step.__typename === 'QuestionnaireStep') && twilioEnabled
   const initialRequirements = step.requirements || []
-  if (!initialRequirements.some((r: Requirement) => r.type === 'EMAIL_VERIFIED') && step.__typename === 'QuestionnaireStep') {
+  if (
+    !initialRequirements.some((r: Requirement) => r.type === 'EMAIL_VERIFIED') &&
+    (step.__typename === 'CollectStep' || step.__typename === 'QuestionnaireStep')
+  ) {
     requirements.push(requirementFactory('EMAIL_VERIFIED', false, 'user_email', null, false))
   }
   if (!initialRequirements.some((r: Requirement) => r.type === 'FIRSTNAME'))
@@ -133,7 +136,7 @@ export function createRequirements(
 
     switch (requirement.type) {
       case 'EMAIL_VERIFIED':
-        if (step.__typename === 'QuestionnaireStep') {
+        if (step.__typename === 'CollectStep' || step.__typename === 'QuestionnaireStep') {
           requirements.push(requirementFactory('EMAIL_VERIFIED', true, 'user_email', requirement.id))
         }
         break

@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
@@ -27,6 +28,11 @@ class PersonalDataFormType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('lastname', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'admin',
+            ])
+            ->add('username', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
@@ -69,6 +75,9 @@ class PersonalDataFormType extends AbstractType
             ])
             ->add('consentInternalCommunication')
             ->add('consentPrivacyPolicy')
+            ->add('media', EntityType::class, [
+                'class' => Media::class,
+            ])
         ;
     }
 

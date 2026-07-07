@@ -27,9 +27,14 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
             ),
             'projectLink' => $params['stepURL'],
             'proposalLink' => $params['proposalURL'],
+            'proposalShowUrl' => $params['proposalShowUrl'],
+            'proposalEditUrl' => $params['proposalEditURL'],
             'confirmationUrl' => $params['confirmationURL'],
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
+            'proposalTitle' => $proposal->getTitle(),
+            'proposalPublishedDate' => $params['proposalPublishedDate'],
+            'proposalPublishedDateTime' => $params['proposalPublishedDateTime'],
             'proposal' => $proposal,
             'typeOfMail' => 'update',
             'sendAt' => $proposal->getUpdatedAt(),
@@ -41,6 +46,7 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],
+            'platformName' => $params['platformName'],
         ];
     }
 }

@@ -9,10 +9,10 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import BirdNotificationSVG from './assets/BirdNotificationSVG'
 import { useUpdateParticipantMutation } from './mutations/UpdateParticipantMutation'
 import { useUpdateProfilePersonalDataMutation } from './mutations/UpdateProfilePersonalDataMutation'
-import { useSelector } from 'react-redux'
-import type { GlobalState } from './types'
 import { CenteredLogoLayout } from './ModalLayoutHeader'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { buildToastUrl } from './utils/buildToastUrl'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type FormValues = {
   email: string
@@ -21,10 +21,9 @@ type FormValues = {
 const ConsentInternalCommunicationModal = () => {
   const { contributionUrl } = useParticipationWorkflow()
   const intl = useIntl()
-
-  const [isAuthenticated, linkColor] = useSelector((state: GlobalState) => {
-    return [!!state.user.user, state.default.parameters['color.link.default']] as const
-  })
+  const { viewerSession, siteColors } = useAppContext()
+  const isAuthenticated = !!viewerSession?.id
+  const linkColor = siteColors?.linkColor ?? 'inherit'
 
   const updateParticipantMutation = useUpdateParticipantMutation()
   const updateProfilePersonalDataMutation = useUpdateProfilePersonalDataMutation()
@@ -36,14 +35,18 @@ const ConsentInternalCommunicationModal = () => {
   const isMobile = useIsMobile()
 
   const getRedirectUrl = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'your-participation-is-confirmed' })
-    return `${contributionUrl}?toast=${toastConfig}`
+    return buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'your-participation-is-confirmed',
+    })
   }
   const redirectUrl = getRedirectUrl()
 
   const redirectOnSubscribtion = () => {
-    const toastConfig = JSON.stringify({ variant: 'success', message: 'thank-you-you-are-subscribed-to-newsletter' })
-    window.location.href = `${contributionUrl}?toast=${toastConfig}`
+    window.location.href = buildToastUrl(contributionUrl, {
+      variant: 'success',
+      message: 'thank-you-you-are-subscribed-to-newsletter',
+    })
   }
 
   const updateUser = () => {

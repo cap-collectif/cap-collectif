@@ -7,13 +7,18 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\MediaRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +27,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class UpdateProposalIllustrationMutation extends CreateProposalMutation
 {
@@ -43,7 +49,13 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        private readonly MediaRepository $mediaRepository
+        private readonly MediaRepository $mediaRepository,
+        ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver,
+        ParticipantHelper $participantHelper,
+        ParticipantRepository $participantRepository,
+        ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        TokenGeneratorInterface $tokenGenerator
     ) {
         parent::__construct(
             $logger,
@@ -57,11 +69,17 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
             $toggleManager,
             $responsesFormatter,
             $proposalRepository,
-            $publisher
+            $publisher,
+            $participantIsMeetingRequirementsResolver,
+            $viewerIsMeetingRequirementsResolver,
+            $participantHelper,
+            $participantRepository,
+            $participantsTotalCountCacheHandler,
+            $tokenGenerator
         );
     }
 
-    public function __invoke(Arg $input, $user): array
+    public function __invoke(Arg $input, ?User $user = null): array
     {
         $this->formatInput($input);
 

@@ -22,6 +22,9 @@ class AuthorTypeResolver implements QueryInterface
         if ($node instanceof Organization) {
             return $this->typeResolver->resolve('InternalOrganization');
         }
+        if ($node instanceof \Capco\AppBundle\Entity\Participant) {
+            return $this->typeResolver->resolve('InternalParticipant');
+        }
         if ($node instanceof User) {
             if ('public' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PublicUser');

@@ -8,6 +8,7 @@ import { VoteStepContextProvider } from '~/components/VoteStep/Context/VoteStepC
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 import { VoteStepPageQuery } from '~relay/VoteStepPageQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
+import { useSelector } from 'react-redux'
 import ProposalStepPage from '~/components/Page/ProposalStepPage'
 import { ProjectTrash } from '~/startup/ProjectStepPageAppTrash'
 import VoteStepPageDescription from './VoteStepPageDescription'
@@ -15,6 +16,7 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
 import { useUrlToast } from '~/utils/hooks/useUrlToast'
+import type { State } from '~/types'
 
 type Props = {
   stepId: string
@@ -25,9 +27,11 @@ type Props = {
 }
 
 const QUERY = graphql`
-  query VoteStepPageQuery($stepId: ID!, $token: String) {
-    ...VoteStepPageWebLayout_query @arguments(stepId: $stepId)
-    ...VoteStepPageMobileLayout_query @arguments(stepId: $stepId)
+  query VoteStepPageQuery($stepId: ID!, $token: String, $isAuthenticated: Boolean!) {
+    ...VoteStepPageWebLayout_query
+      @arguments(stepId: $stepId, participantToken: $token, isAuthenticated: $isAuthenticated)
+    ...VoteStepPageMobileLayout_query
+      @arguments(stepId: $stepId, participantToken: $token, isAuthenticated: $isAuthenticated)
     step: node(id: $stepId) {
       ... on ProposalStep {
         __typename
@@ -77,10 +81,12 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
   const { state } = useLocation<{ stepId?: string }>()
   const disableDesktopMapView = width > 767 && width < 1133
   const step: string = state?.stepId || stepId
+  const isAuthenticated = useSelector((state: State) => state.user.user !== null)
 
   const data = useLazyLoadQuery<VoteStepPageQuery>(QUERY, {
     stepId: step,
     token: CookieMonster.getParticipantCookie(),
+    isAuthenticated,
   })
 
   const hasMapView =

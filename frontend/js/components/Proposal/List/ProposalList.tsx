@@ -8,6 +8,7 @@ import ProposalListTable from './ProposalListTable'
 import VisibilityBox from '../../Utils/VisibilityBox'
 import type { ProposalList_step$data } from '~relay/ProposalList_step.graphql'
 import type { ProposalList_viewer$data } from '~relay/ProposalList_viewer.graphql'
+import type { ProposalList_participant$data } from '~relay/ProposalList_participant.graphql'
 import type { ProposalList_proposals$data } from '~relay/ProposalList_proposals.graphql'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
 
@@ -85,7 +86,7 @@ export class ProposalList extends React.Component<Props> {
           </React.Fragment>
         )}
         {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length > 0 && (
-          <VisibilityBox enabled>
+          <VisibilityBox enabled participant={participant}>
             {view === 'GRID'
               ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer, participant)
               : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}

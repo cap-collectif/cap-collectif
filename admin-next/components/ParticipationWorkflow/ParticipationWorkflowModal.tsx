@@ -35,6 +35,9 @@ import IdentificationCodeRequirementModal from './IdentificationCodeRequirementM
 import ConsentPrivacyPolicyRequirementModal from './ConsentPrivacyPolicyRequirementModal'
 import moment from 'moment'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { buildToastUrl } from './utils/buildToastUrl'
+import UsernameRequirementModal from './UsernameRequirementModal'
+import MediaRequirementModal from './MediaRequirementModal'
 
 type Props = {
   stepId: string
@@ -55,6 +58,8 @@ export type FormValues = {
     [requirementId: string]: boolean
   }
   userIdentificationCode: string
+  username: string
+  media: { id: string; url: string }
   consentPrivacyPolicy: boolean
 }
 
@@ -130,6 +135,11 @@ export const QUERY = graphql`
         requirementsUrl
         completionStatus
       }
+      ... on Proposal {
+        url
+        requirementsUrl
+        completionStatus
+      }
     }
     siteImage(keyname: "image.logo") {
       media {
@@ -141,10 +151,18 @@ export const QUERY = graphql`
     viewer @include(if: $isAuthenticated) {
       consentInternalCommunication
       email
+      username
+      media {
+        id
+      }
     }
     participant(token: $participantToken) {
       consentInternalCommunication
       email
+      username
+      media {
+        id
+      }
     }
   }
 `
@@ -156,7 +174,7 @@ const getParticipantToken = (): string | null => {
 
 const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId }) => {
   const { viewerSession } = useAppContext()
-  const isAuthenticated = !!viewerSession
+  const isAuthenticated = !!viewerSession?.id
   const participantToken = getParticipantToken()
   const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
     stepId,
@@ -167,16 +185,18 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
 
   const viewer = query?.viewer ?? null
   const participant = query?.participant ?? null
+  const [username, setUsername] = React.useState(participant?.username || viewer?.username)
 
   const intl = useIntl()
 
   const { step, siteColors, contribution, siteImage } = query
 
   const logo = siteImage?.media ?? null
-
-  const contributionUrl = step?.url ?? '/'
-  const requirementsUrl = contribution?.__typename !== '%other' ? (contribution?.requirementsUrl as string) : ''
+  const giveUpUrl = step?.url ?? ''
   const contributionTypeName = contribution?.__typename as string
+  const contributionUrl =
+    contribution?.__typename === 'Proposal' && contribution.url ? contribution.url : step?.url ?? '/'
+  const requirementsUrl = contribution?.__typename !== '%other' ? (contribution?.requirementsUrl as string) : ''
 
   useEffect(() => {
     clearToasts()
@@ -298,8 +318,10 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
   const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication
 
   if (!contribution && step?.url) {
-    const toastConfig = JSON.stringify({ variant: 'danger', message: 'participant-already-contributed-title' })
-    window.location.href = `${step.url}?toast=${toastConfig}`
+    window.location.href = buildToastUrl(step.url, {
+      variant: 'danger',
+      message: 'participant-already-contributed-title',
+    })
     return <ModalSkeleton />
   }
 
@@ -307,11 +329,15 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
     return null
   }
 
+  const showUsername = !participant?.username && !viewer?.username && contributionTypeName === 'Proposal'
+  const shouldShowMedia = !participant?.media && !viewer?.media && contributionTypeName === 'Proposal'
+
   return (
     <ParticipationWorkflowContextProvider
       value={{
         stepId,
         contributionUrl,
+        giveUpUrl,
         logo,
         requirementsUrl,
         contributionId,
@@ -332,6 +358,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
           onClose={() => {}}
           show
           fullSizeOnMobile
+          alwaysOpenInPortal
         >
           {fcRequirement && !isMeetingFcRequirement && <FranceConnectRequirementModal />}
           {ssoRequirement && !isMeetingSSORequirement && (
@@ -361,6 +388,8 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
           {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkForm />}
           {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkCaptcha />}
           {emailRequirement && !isMeetingEmailRequirement && <EmailMagicLinkCheckEmail query={query} />}
+          {showUsername && <UsernameRequirementModal onSuccess={setUsername} hideGoBackArrow />}
+          {shouldShowMedia && <MediaRequirementModal username={username} />}
           {phonesRequirements.map((requirement, index) => {
             const { __typename } = requirement
             if (__typename === 'PhoneRequirement') {

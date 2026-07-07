@@ -29,9 +29,14 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             ),
             'projectLink' => $params['stepURL'],
             'proposalLink' => $params['proposalURL'],
+            'proposalShowUrl' => $params['proposalShowUrl'],
+            'proposalEditUrl' => $params['proposalEditURL'],
             'confirmationUrl' => $params['confirmationURL'],
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
+            'proposalTitle' => $proposal->getTitle(),
+            'proposalPublishedDate' => $params['proposalPublishedDate'],
+            'proposalPublishedDateTime' => $params['proposalPublishedDateTime'],
             'proposal' => $proposal,
             'typeOfMail' => 'create',
             'sendAt' => $proposal->getPublishedAt(),
@@ -43,6 +48,7 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],
+            'platformName' => $params['platformName'],
         ];
     }
 
@@ -59,9 +65,14 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             ),
             'projectLink' => 'projectLink',
             'proposalLink' => 'proposalURL',
+            'proposalShowUrl' => 'proposalShowUrl',
+            'proposalEditUrl' => 'proposalEditUrl',
             'confirmationUrl' => 'confirmationURL',
             'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
+            'proposalTitle' => $proposal->getTitle(),
+            'proposalPublishedDate' => 'proposalPublishedDate',
+            'proposalPublishedDateTime' => 'proposalPublishedDateTime',
             'typeOfMail' => 'create',
             'sendAt' => $proposal->getPublishedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),
@@ -72,6 +83,7 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             'baseUrl' => 'baseURL',
             'siteName' => 'site name',
             'siteUrl' => 'site URL',
+            'platformName' => 'platform name',
             'user_locale' => 'fr_FR',
         ];
     }

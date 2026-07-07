@@ -14,6 +14,7 @@ import ProgressListItem from '../../Ui/List/ProgressListItem'
 import InlineList from '../../Ui/List/InlineList'
 import { translateContent } from '@shared/utils/contentTranslator'
 import UserAvatar from '~/components/User/UserAvatar'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 
 type Props = {
   proposals: ProposalListTable_proposals$data
@@ -253,16 +254,17 @@ export class ProposalListTable extends React.Component<Props, State> {
       }
 
       if (keyName === 'author' && value) {
+        const authorName = getProposalAuthorDisplayName(value)
         return (
           <td key={key}>
             <div className="d-flex align-items-center text-ellipsis">
               <UserAvatar user={value} />
               {value.url ? (
                 <a href={value.url}>
-                  <span>{value.displayName}</span>
+                  <span>{authorName}</span>
                 </a>
               ) : (
-                <span>{value.displayName}</span>
+                <span>{authorName}</span>
               )}
             </div>
           </td>
@@ -383,8 +385,11 @@ export default createFragmentContainer(ProposalListTable, {
           }
           author {
             ...UserAvatar_user
+            username
             displayName
-            url
+            ...on User {
+              url
+            }
           }
           reference
           district {

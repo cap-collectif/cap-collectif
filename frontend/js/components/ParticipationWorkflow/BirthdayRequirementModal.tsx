@@ -109,7 +109,11 @@ const BirthdayRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="birthday" control={control} isRequired>
-            <FormLabel htmlFor="birthday" label={intl.formatMessage({ id: 'form.label_date_of_birth' })} />
+            <FormLabel
+              fontWeight={[400, 600]}
+              htmlFor="birthday"
+              label={intl.formatMessage({ id: 'form.label_date_of_birth' })}
+            />
             <FieldInput
               id="birthday"
               name="birthday"

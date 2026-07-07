@@ -5,6 +5,12 @@ CreateProposalPayload:
             proposal:
                 type: 'InternalProposal'
                 description: 'The created proposal, if everything goes well !'
+            participantToken:
+                type: 'String'
+                description: 'The participant token'
+            shouldTriggerWorkflow:
+                type: 'Boolean!'
+                description: 'Whether the workflow should be triggered'
             userErrors:
                 type: '[UserError!]'
                 description: 'An unsuccessful mutation will return one or more `UserError` objects.'

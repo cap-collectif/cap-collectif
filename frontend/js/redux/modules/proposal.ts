@@ -7,6 +7,7 @@ import AddProposalSmsVoteMutation from '../../mutations/AddProposalSmsVoteMutati
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation'
 import type { Exact, Dispatch, Uuid, Action } from '../../types'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
+import CookieMonster from '@shared/utils/CookieMonster'
 export type ProposalViewMode = 'LIST' | 'GRID' | 'MAP'
 export type Filters = {
   types: string | null | undefined
@@ -191,11 +192,19 @@ const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 })
 
-export const deleteProposal = (proposalId: string, dispatch: Dispatch, intl: IntlShape): void => {
+export const deleteProposal = (
+  proposalId: string,
+  dispatch: Dispatch,
+  intl: IntlShape,
+  isAuthenticated: boolean,
+): void => {
   dispatch(deleteRequest())
+  const participantToken = CookieMonster.getParticipantCookie()
+
   DeleteProposalMutation.commit({
     input: {
       proposalId,
+      participantToken: isAuthenticated ? undefined : participantToken,
     },
   })
     .then(response => {

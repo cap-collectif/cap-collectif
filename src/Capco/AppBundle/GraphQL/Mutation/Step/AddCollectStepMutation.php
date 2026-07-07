@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Step;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -54,8 +55,14 @@ class AddCollectStepMutation implements MutationInterface
         /** * @var CollectStep $step */
         ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'COLLECT');
         $step->setProposalForm($proposalForm);
+        $emailVerifiedRequirement = (new Requirement())
+            ->setType(Requirement::EMAIL_VERIFIED)
+            ->setPosition(0)
+        ;
+        $step->addRequirement($emailVerifiedRequirement);
 
         $this->em->persist($proposalForm);
+        $this->em->persist($emailVerifiedRequirement);
         $this->em->flush();
 
         return ['step' => $step];

@@ -4,10 +4,24 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
 <form
   id="proposal-form"
 >
-  <WYSIWYGRender
-    className="mb-15"
-    value="Description 1"
-  />
+  <Box
+    mb={
+      Array [
+        4,
+        4,
+      ]
+    }
+    mt={
+      Array [
+        4,
+        0,
+      ]
+    }
+  >
+    <WYSIWYGRender
+      value="Description 1"
+    />
+  </Box>
   <Field
     addonAfter={
       <Glyphicon
@@ -855,10 +869,24 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
 <form
   id="proposal-form"
 >
-  <WYSIWYGRender
-    className="mb-15"
-    value="Description 1"
-  />
+  <Box
+    mb={
+      Array [
+        4,
+        4,
+      ]
+    }
+    mt={
+      Array [
+        4,
+        0,
+      ]
+    }
+  >
+    <WYSIWYGRender
+      value="Description 1"
+    />
+  </Box>
   <Field
     addonAfter={
       <Glyphicon
@@ -1261,10 +1289,24 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
 <form
   id="proposal-form"
 >
-  <WYSIWYGRender
-    className="mb-15"
-    value="Description 1"
-  />
+  <Box
+    mb={
+      Array [
+        4,
+        4,
+      ]
+    }
+    mt={
+      Array [
+        4,
+        0,
+      ]
+    }
+  >
+    <WYSIWYGRender
+      value="Description 1"
+    />
+  </Box>
   <Field
     addonAfter={
       <Glyphicon
@@ -1667,10 +1709,24 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
 <form
   id="proposal-form"
 >
-  <WYSIWYGRender
-    className="mb-15"
-    value="Description 1"
-  />
+  <Box
+    mb={
+      Array [
+        4,
+        4,
+      ]
+    }
+    mt={
+      Array [
+        4,
+        0,
+      ]
+    }
+  >
+    <WYSIWYGRender
+      value="Description 1"
+    />
+  </Box>
   <Field
     addonAfter={
       <Glyphicon

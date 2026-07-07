@@ -6,6 +6,7 @@ import type { RelayPaginationProp } from 'react-relay'
 import { graphql, createPaginationContainer } from 'react-relay'
 import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPaginated_step.graphql'
 import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql'
+import type { ProposalListViewPaginated_participant } from '~relay/ProposalListViewPaginated_participant.graphql'
 import VisibilityBox from '../../Utils/VisibilityBox'
 import ProposalList from './ProposalList'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
@@ -24,6 +25,7 @@ type Props = {
   viewer: ProposalListViewPaginated_viewer | null | undefined
   participant: ProposalListViewPaginated_participant | null | undefined
   count: number
+  contributorConsentPrivacyPolicy?: boolean | null
 }
 
 const ProposalListViewPaginated = ({
@@ -36,6 +38,7 @@ const ProposalListViewPaginated = ({
   relay,
   displayMode,
   count,
+  contributorConsentPrivacyPolicy,
 }: Props) => {
   const [loading, setLoading] = React.useState<boolean>(false)
   const isOpinion = step.form?.objectType === 'OPINION'
@@ -47,10 +50,16 @@ const ProposalListViewPaginated = ({
       })}
     >
       {displayMap && displayMode === 'MAP' ? (
-        <ProposalsDisplayMap className="zi-0" step={step} geoJsons={geoJsons} defaultMapOptions={defaultMapOptions} />
+        <ProposalsDisplayMap
+          className="zi-0"
+          step={step}
+          geoJsons={geoJsons}
+          defaultMapOptions={defaultMapOptions}
+          contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
+        />
       ) : (
         <React.Fragment>
-          <VisibilityBox enabled={step.private || false}>
+          <VisibilityBox enabled={step.private || false} participant={participant}>
             <ProposalList
               step={step}
               proposals={step.proposals}
@@ -115,6 +124,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
           category: $category
           status: $status
           userType: $userType
+          participantToken: $token
           state: $state
         ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
           ...ProposalList_proposals

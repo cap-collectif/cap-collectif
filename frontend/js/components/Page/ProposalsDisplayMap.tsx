@@ -13,10 +13,11 @@ type Props = RelayProps & {
   readonly relay: RelayPaginationProp
   readonly geoJsons?: Array<GeoJson>
   readonly defaultMapOptions: MapOptions
+  readonly contributorConsentPrivacyPolicy?: boolean | null
 }
 const PAGINATION = 50
 let hasMore = false
-export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
+export const ProposalsDisplayMap = ({ step, relay, contributorConsentPrivacyPolicy, ...rest }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   hasMore = step.proposals?.pageInfo.hasNextPage || false
@@ -60,6 +61,7 @@ export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
       proposalInAZoneRequired={step.form?.proposalInAZoneRequired}
       retry={retry}
       isCollectStep={step.form && step.kind === 'collect'}
+      contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
       {...rest}
     />
   ) : null
@@ -89,6 +91,7 @@ export default createPaginationContainer(
           category: $category
           status: $status
           userType: $userType
+          participantToken: $token
           state: $state
         ) @connection(key: "ProposalsDisplayMap_proposals", filters: []) {
           pageInfo {
@@ -131,6 +134,7 @@ export default createPaginationContainer(
         $status: ID
         $theme: ID
         $userType: ID
+        $token: String
         $state: ProposalsState
       ) {
         step: node(id: $stepId) {

@@ -8,6 +8,7 @@ export type CreateModeProps = {
   proposal?: never
   onClose?: never
   onButtonClick?: () => void
+  onWorkflowTrigger?: (contributionId: string) => void
 }
 
 export type EditModeProps = {

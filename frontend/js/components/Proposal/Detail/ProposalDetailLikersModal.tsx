@@ -84,12 +84,14 @@ export default createFragmentContainer(container, {
         ...UserAvatar_user
         id
         displayName
-        userType {
-          name
-        }
-        url
         username
-        vip
+        ... on User {
+          url
+          vip
+          userType {
+            name
+          }
+        }
       }
     }
   `,

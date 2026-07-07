@@ -2,7 +2,7 @@
 
 {% block field %}
     {% apply spaceless %}
-        {% if value %}
+        {% if value and value.id %}
             <a href="{{ path('admin_capco_user_user_edit', {id: value.id}) }}">
                 {{ value.displayName | trans({}, 'CapcoAppBundle') }}
             </a>

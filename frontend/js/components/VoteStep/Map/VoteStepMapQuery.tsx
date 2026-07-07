@@ -9,6 +9,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile'
 import { useSelector } from 'react-redux'
 import { State } from '~/types'
 import { useIntl } from 'react-intl'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 const QUERY = graphql`
   query VoteStepMapQueryQuery(
@@ -24,9 +25,14 @@ const QUERY = graphql`
     $geoBoundingBox: GeoBoundingBox
     $term: String
     $isAuthenticated: Boolean!
+    $participantToken: String
   ) {
     viewer @include(if: $isAuthenticated) {
+      consentPrivacyPolicy
       ...VoteStepMap_viewer @arguments(stepId: $stepId)
+    }
+    participant(token: $participantToken) @skip(if: $isAuthenticated) {
+      consentPrivacyPolicy
     }
     voteStep: node(id: $stepId) {
       ... on ProposalStep {
@@ -91,6 +97,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
       geoBoundingBox,
       term: term || null,
       isAuthenticated,
+      participantToken: CookieMonster.getParticipantCookie(),
     },
     {
       fetchPolicy: 'store-and-network',
@@ -112,6 +119,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
       <VoteStepMap
         voteStep={voteStep}
         viewer={data.viewer}
+        contributorConsentPrivacyPolicy={data.viewer?.consentPrivacyPolicy || data.participant?.consentPrivacyPolicy}
         handleMapPositionChange={handleMapPositionChange}
         urlCenter={urlCenter}
         DEFAULT_CENTER={DEFAULT_CENTER}

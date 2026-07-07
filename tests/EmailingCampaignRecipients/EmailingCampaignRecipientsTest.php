@@ -884,6 +884,10 @@ class EmailingCampaignRecipientsTest extends KernelTestCase
                 'email' => 'user52@cap-collectif.com',
             ],
             [
+                'username' => 'JohnDoe',
+                'email' => 'participant1@cap-collectif.com',
+            ],
+            [
                 'username' => 'OnePunchMan',
                 'email' => 'saitama@cap-collectif.com',
             ],

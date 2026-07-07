@@ -14,6 +14,13 @@ const PreConfigureProject = /* GraphQL*/ `
             enabled
             slug
             ...on CollectStep {
+              requirements {
+                edges {
+                  node {
+                    __typename
+                  }
+                }
+              }
               form {
                 title
                 analysisConfiguration {
@@ -193,7 +200,11 @@ const participatoryBudgetInput = {
         mainView: 'GRID',
         proposalForm: proposalFormTitle,
         private: false,
-        requirements: [],
+        requirements: [
+          {
+            type: 'EMAIL_VERIFIED',
+          },
+        ],
         type: 'COLLECT',
         voteType: 'DISABLED',
         proposalArchivedTime: 0,

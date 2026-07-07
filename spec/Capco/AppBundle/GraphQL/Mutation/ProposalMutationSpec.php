@@ -15,11 +15,16 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
@@ -38,6 +43,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ProposalMutationSpec extends ObjectBehavior
 {
@@ -58,6 +64,12 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
         ProposalLikersDataLoader $proposalLikersDataLoader,
+        ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver,
+        ParticipantHelper $participantHelper,
+        ParticipantRepository $participantRepository,
+        ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        TokenGeneratorInterface $tokenGenerator,
         ProposalAccessResolver $proposalAccessResolver,
     ) {
         $this->beConstructedWith(
@@ -75,6 +87,12 @@ class ProposalMutationSpec extends ObjectBehavior
             $publisher,
             $authorizationChecker,
             $proposalLikersDataLoader,
+            $participantIsMeetingRequirementsResolver,
+            $viewerIsMeetingRequirementsResolver,
+            $participantHelper,
+            $participantRepository,
+            $participantsTotalCountCacheHandler,
+            $tokenGenerator,
             $proposalAccessResolver
         );
     }
@@ -100,6 +118,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ProposalSocialNetworks $proposalSocialNetworks,
         Cache $cacheDriver,
         Configuration $configuration,
+        ProposalRepository $proposalRepository,
         CollectStep $step,
         ProposalAccessResolver $proposalAccessResolver,
         $wasDraft = true,
@@ -114,7 +133,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $user = $author;
         $toggleManager->isActive(Manager::proposal_revisions)->willReturn(false);
 
-        $proposalAccessResolver->__invoke($proposal, new Argument(), $user)->willreturn([
+        $proposalAccessResolver->__invoke($proposal, \Prophecy\Argument::type(Argument::class), $user)->willreturn([
             'canEdit' => true,
         ]);
 
@@ -122,6 +141,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $author->getUsername()->willReturn('aUser');
         $author->isEmailConfirmed()->willReturn(true);
         $author->isAdmin()->willReturn(false);
+        $author->isConsentInternalCommunication()->willReturn(false);
+        $proposalForm->getStep()->willReturn($step);
+
+        $proposalRepository->getProposalCountByStepAndContributor($step, $author)->willReturn(1);
 
         $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
@@ -168,6 +191,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
+                'proposalHasParticipant' => false,
             ])
             ->willReturn($form)
         ;
@@ -185,6 +209,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
         $form->remove('author')->shouldBeCalled();
+        $form->remove('participant')->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
@@ -201,7 +226,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
+        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => true]);
     }
 
     public function it_change_content_from_revision_as_role_user(
@@ -225,6 +250,7 @@ class ProposalMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         Cache $cacheDriver,
         Configuration $configuration,
+        ProposalRepository $proposalRepository,
         CollectStep $step,
         ProposalAccessResolver $proposalAccessResolver,
         $wasDraft = false,
@@ -238,7 +264,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['author'] = 'VXNlcix1c2VyNTAx';
 
         $user = $author;
-        $proposalAccessResolver->__invoke($proposal, new Argument(), $user)->willreturn([
+        $proposalAccessResolver->__invoke($proposal, \Prophecy\Argument::type(Argument::class), $user)->willreturn([
             'canEdit' => true,
         ]);
 
@@ -247,6 +273,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $author->getUsername()->willReturn('aUser');
         $author->isEmailConfirmed()->willReturn(true);
         $author->isAdmin()->willReturn(false);
+        $author->isConsentInternalCommunication()->willReturn(true);
+        $proposalRepository->getProposalCountByStepAndContributor($step, $author)->willReturn(1);
+        $proposalForm->getStep()->willReturn($step);
+
         $admin->getId()->willReturn('userMaxime');
         $admin->getUsername()->willReturn('aUser');
         $admin->isEmailConfirmed()->willReturn(true);
@@ -334,6 +364,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
+                'proposalHasParticipant' => false,
             ])
             ->willReturn($form)
         ;
@@ -351,6 +382,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
         $form->remove('author')->shouldBeCalled();
+        $form->remove('participant')->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
@@ -367,7 +399,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
+        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
     }
 
     public function it_change_content_as_project_owner(
@@ -388,7 +420,8 @@ class ProposalMutationSpec extends ObjectBehavior
         Cache $cacheDriver,
         Configuration $configuration,
         CollectStep $step,
-        ProposalAccessResolver $proposalAccessResolver
+        ProposalAccessResolver $proposalAccessResolver,
+        ProposalRepository $proposalRepository,
     ) {
         $this->setContainer($container);
 
@@ -402,19 +435,22 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
         $proposalAuthor->isAdmin()->willReturn(false);
 
-        $proposalAccessResolver->__invoke($proposal, new Argument(), $owner)->willreturn([
+        $proposalAccessResolver->__invoke($proposal, \Prophecy\Argument::type(Argument::class), $owner)->willreturn([
             'canEdit' => true,
         ]);
 
         $owner->getId()->willReturn('userThéo');
         $owner->getUsername()->willReturn('aUser');
         $owner->isEmailConfirmed()->willReturn(true);
+        $owner->isConsentInternalCommunication()->willReturn(false);
         $owner
             ->isAdmin()
             ->shouldBeCalled()
             ->willReturn(false)
         ;
 
+        $proposalRepository->getProposalCountByStepAndContributor($step, $owner)->willReturn(3);
+        $proposalForm->getStep()->willReturn($step);
         $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
 
@@ -456,6 +492,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
+                'proposalHasParticipant' => false,
             ])
             ->willReturn($form)
         ;
@@ -479,6 +516,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
 
         $form->remove('author')->shouldBeCalled();
+        $form->remove('participant')->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
@@ -495,7 +533,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal]);
+        $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
     }
 
     public function it_change_content_as_role_admin(
@@ -515,6 +553,7 @@ class ProposalMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         Cache $cacheDriver,
         Configuration $configuration,
+        ProposalRepository $proposalRepository,
         CollectStep $step,
         ProposalAccessResolver $proposalAccessResolver,
     ) {
@@ -531,7 +570,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalAuthor->isEmailConfirmed()->willReturn(true);
         $proposalAuthor->isAdmin()->willReturn(false);
 
-        $proposalAccessResolver->__invoke($proposal, new Argument(), $admin)->willreturn([
+        $proposalAccessResolver->__invoke($proposal, \Prophecy\Argument::type(Argument::class), $admin)->willreturn([
             'canEdit' => true,
         ]);
 
@@ -539,6 +578,10 @@ class ProposalMutationSpec extends ObjectBehavior
         $admin->getUsername()->willReturn('aUser');
         $admin->isEmailConfirmed()->willReturn(true);
         $admin->isAdmin()->willReturn(true);
+        $admin->isConsentInternalCommunication()->willReturn(false);
+
+        $proposalRepository->getProposalCountByStepAndContributor($step, $admin)->willReturn(3);
+        $proposalForm->getStep()->willReturn($step);
 
         $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
@@ -581,6 +624,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
+                'proposalHasParticipant' => false,
             ])
             ->willReturn($form)
         ;
@@ -603,7 +647,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
 
-        $form->remove('author')->shouldNotBeCalled();
+        $form->remove('author')->shouldBeCalled();
+        $form->remove('participant')->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
@@ -620,7 +665,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal]);
+        $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
     }
 
     public function it_hydrate_social_networks(

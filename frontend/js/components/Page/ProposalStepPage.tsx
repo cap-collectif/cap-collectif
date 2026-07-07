@@ -24,6 +24,7 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import MediatorAddVotesLink from './MediatorAddVotesLink'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useUrlToast } from '~/utils/hooks/useUrlToast'
+import ParticipationWorkflow, { CONTRIBUTION_ID_URL_PARAM } from '../ParticipationWorkflow/ParticipationWorkflow'
 
 type OwnProps = {
   stepId: string
@@ -45,6 +46,7 @@ type RenderedProps = ProposalStepPageQuery$data & {
   projectId?: string
 }
 export const ProposalStepPageRendered = (props: RenderedProps) => {
+  const url = new URL(window.location.href)
   const { viewer, isAuthenticated, features, step, count, participant } = props
   const [displayMode, setDisplayMode] = React.useState(step?.mainView)
   const intl = useIntl()
@@ -84,6 +86,11 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
 
   const relatedMediatorProjectId = viewer?.projectsMediator?.edges?.find(edge => edge.node.id === props.projectId)?.node
     ?.id
+
+  // Move this up cause several ProposalCreate or EditModal ?
+  const contributionId = url.searchParams.get(CONTRIBUTION_ID_URL_PARAM)
+  const showRequirementsModal = url.searchParams.has('workflow') && !!contributionId;
+  if (showRequirementsModal) return <ParticipationWorkflow stepId={step.id} contributionId={contributionId} />
 
   return (
     <>
@@ -129,7 +136,11 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         {relatedMediatorProjectId && step.votable && step.state === 'OPENED' ? (
           <MediatorAddVotesLink projectId={relatedMediatorProjectId} />
         ) : null}
-        <ProposalStepPageHeader step={step} displayMode={displayMode} />
+        <ProposalStepPageHeader
+          step={step}
+          displayMode={displayMode}
+          contributorConsentPrivacyPolicy={viewer?.consentPrivacyPolicy || participant?.consentPrivacyPolicy}
+        />
         <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
         <ProposalListView
           participant={participant}
@@ -139,6 +150,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
           count={count}
           displayMode={displayMode}
           viewer={viewer || null}
+          contributorConsentPrivacyPolicy={viewer?.consentPrivacyPolicy || participant?.consentPrivacyPolicy}
           defaultMapOptions={{
             center: {
               lat: form.mapCenter?.lat || 48.8586047,
@@ -182,10 +194,12 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             $state: ProposalsState
           ) {
             participant(token: $token) @skip(if: $isAuthenticated) {
+              consentPrivacyPolicy
               ...ProposalVoteBasketWidget_participant @arguments(stepId: $stepId)
               ...ProposalListView_participant @arguments(stepId: $stepId)
             }
             viewer @include(if: $isAuthenticated) {
+              consentPrivacyPolicy
               ...ProposalListView_viewer @arguments(stepId: $stepId)
               ...UnpublishedProposalListView_viewer @arguments(stepId: $stepId)
               ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
@@ -251,7 +265,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
                 }
                 kind
                 ...ProposalsDisplayMap_step
-                ...StepPageHeader_step
+                ...StepPageHeader_step @arguments(token: $token)
                 ...ProposalListFilters_step
                 ...ProposalListView_step
                 ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\Selection;
@@ -58,6 +59,7 @@ class ProposalNotifier extends BaseNotifier
 
     public function onCreate(Proposal $proposal)
     {
+        $author = $proposal->getAuthor();
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isNotifyingOnCreate()) {
             $this->mailer->createAndSendMessage(
                 ProposalCreateAdminMessage::class,
@@ -71,22 +73,22 @@ class ProposalNotifier extends BaseNotifier
                         $this->requestStack
                     ),
                     'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
-                    'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
+                    'authorURL' => $author instanceof User ? $this->userUrlResolver->__invoke($author) : '',
                 ],
                 null,
                 $this->getRecipientEmail($proposal)
             );
         }
 
-        if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {
+        if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge() && null !== $author->getEmail()) {
             $stepUrl = $this->urlResolver->getStepUrl($proposal->getStep(), true);
             $confirmationUrl = null;
 
-            if ($proposal->getAuthor() && !$proposal->getAuthor()->isEmailConfirmed()) {
+            if (!$author->isEmailConfirmed()) {
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $proposal->getAuthor()->getConfirmationToken(),
+                        'token' => $author->getConfirmationToken(),
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
@@ -101,9 +103,21 @@ class ProposalNotifier extends BaseNotifier
                         $proposal,
                         $this->requestStack
                     ),
+                    'proposalShowUrl' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'proposalEditURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack,
+                        emailToken: $author instanceof Participant ? $proposal->getEmailToken() : '',
+                    ),
                     'confirmationURL' => $confirmationUrl,
+                    'proposalPublishedDate' => $proposal->getPublishedAt()?->format('j F Y'),
+                    'proposalPublishedDateTime' => $proposal->getPublishedAt()?->format('H\hi'),
+                    'platformName' => $this->siteParams->getValue('global.site.fullname'),
                 ],
-                $proposal->getAuthor()
+                $author
             );
         }
     }
@@ -189,7 +203,18 @@ class ProposalNotifier extends BaseNotifier
                         $proposal,
                         $this->requestStack
                     ),
+                    'proposalShowUrl' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'proposalEditURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
                     'confirmationURL' => $confirmationUrl,
+                    'proposalPublishedDate' => $proposal->getPublishedAt()?->format('j F Y'),
+                    'proposalPublishedDateTime' => $proposal->getPublishedAt()?->format('H\hi'),
+                    'platformName' => $this->siteParams->getValue('global.site.fullname'),
                 ],
                 $proposal->getAuthor()
             );
@@ -198,7 +223,7 @@ class ProposalNotifier extends BaseNotifier
         $this->notifyAllAnalystsOnUpdate($proposal, $updateDateTime);
     }
 
-    public function onUpdateStatus(Proposal $proposal, \DateTime $date)
+    public function onUpdateStatus(Proposal $proposal, \DateTime $date): void
     {
         $this->mailer->createAndSendMessage(
             ProposalStatusChangeMessage::class,

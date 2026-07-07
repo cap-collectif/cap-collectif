@@ -20,6 +20,7 @@ class ContributionCompletionStatusFilter extends SQLFilter
         $validEntities = [
             \Capco\AppBundle\Entity\Reply::class,
             \Capco\AppBundle\Entity\AbstractVote::class,
+            \Capco\AppBundle\Entity\Proposal::class,
         ];
 
         if (\in_array($targetEntity->getName(), $validEntities)) {

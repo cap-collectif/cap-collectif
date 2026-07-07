@@ -29,6 +29,9 @@ InternalWithProposals:
                     term:
                         type: 'String'
                         description: 'If non-null, filters proposals with the given string to look for.'
+                    participantToken:
+                        type: 'String'
+                        description: 'Token of the participant used to filter private collect step proposals.'
                     reference:
                         type: 'String'
                     affiliations:

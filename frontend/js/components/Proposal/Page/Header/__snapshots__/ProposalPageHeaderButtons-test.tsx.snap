@@ -12,12 +12,12 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "id": "authorid",
           "slug": "metal",
         },
+        "canContactAuthor": true,
         "contribuable": true,
         "currentVotableStep": Object {
           "id": "stepid",
         },
         "form": Object {
-          "canContact": true,
           "contribuable": true,
         },
         "id": "proposalId",
@@ -48,12 +48,12 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "id": "authorid",
           "slug": "metal",
         },
+        "canContactAuthor": true,
         "contribuable": true,
         "currentVotableStep": Object {
           "id": "stepid",
         },
         "form": Object {
-          "canContact": true,
           "contribuable": true,
         },
         "id": "proposalId",
@@ -68,7 +68,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
     }
   />
   <ProposalContactButton
-    authorName="flex"
+    authorName="Anonyme"
     proposalId="proposalId"
   />
 </ProposalPageHeaderButtons__Buttons>

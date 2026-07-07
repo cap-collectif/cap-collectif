@@ -646,9 +646,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         />
       </ProposalAdminContentForm__NotationCard>
     </ForwardRef>
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <ForwardRef
       className="box-content__toolbar"
+      spacing={4}
     >
       <Connect(SubmitButton)
         bsStyle="primary"
@@ -665,7 +665,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         submitting={false}
         valid={true}
       />
-    </ButtonToolbar>
+    </ForwardRef>
   </form>
 </Fragment>
 `;
@@ -1316,9 +1316,9 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
         />
       </ProposalAdminContentForm__NotationCard>
     </ForwardRef>
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <ForwardRef
       className="box-content__toolbar"
+      spacing={4}
     >
       <Connect(SubmitButton)
         bsStyle="primary"
@@ -1335,7 +1335,7 @@ exports[`<ProposalAdminContentForm /> render correctly with estimation 1`] = `
         submitting={false}
         valid={true}
       />
-    </ButtonToolbar>
+    </ForwardRef>
   </form>
 </Fragment>
 `;
@@ -1986,9 +1986,9 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         />
       </ProposalAdminContentForm__NotationCard>
     </ForwardRef>
-    <ButtonToolbar
-      bsClass="btn-toolbar"
+    <ForwardRef
       className="box-content__toolbar"
+      spacing={4}
     >
       <Connect(SubmitButton)
         bsStyle="primary"
@@ -1998,156 +1998,20 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         onSubmit={[Function]}
         type="submit"
       />
-      <ProposalRevision
-        isAdminView={true}
-        proposal={
-          Object {
-            " $fragmentRefs": null,
-            " $refType": null,
-            "address": null,
-            "author": Object {
-              "displayName": "Author",
-              "id": "1",
-            },
-            "body": "body",
-            "category": Object {
-              "id": "1",
-            },
-            "decision": Object {
-              "estimatedCost": null,
-              "state": "IN_PROGRESS",
-            },
-            "district": Object {
-              "id": "1",
-            },
-            "estimation": 1000,
-            "facebookUrl": "https://facebook.com",
-            "form": Object {
-              "adminUrl": "http://capco.dev/pfrom",
-              "analysisConfiguration": Object {
-                "costEstimationEnabled": false,
-                "isImmediatelyEffective": false,
-              },
-              "categories": Array [
-                Object {
-                  "id": "1",
-                  "name": "category-1",
-                },
-                Object {
-                  "id": "2",
-                  "name": "category-2",
-                },
-              ],
-              "categoryMandatory": true,
-              "descriptionMandatory": true,
-              "districtMandatory": true,
-              "districts": Array [],
-              "id": "form1",
-              "isUsingAnySocialNetworks": true,
-              "questions": Array [
-                Object {
-                  "__typename": "SimpleQuestion",
-                  "alwaysJumpDestinationQuestion": null,
-                  "choices": Object {
-                    "edges": Array [],
-                    "pageInfo": Object {
-                      "hasNextPage": false,
-                    },
-                    "totalCount": 0,
-                  },
-                  "description": null,
-                  "descriptionUsingJoditWysiwyg": false,
-                  "destinationJumps": Array [],
-                  "helpText": "Help 1",
-                  "hidden": false,
-                  "id": "1",
-                  "isOtherAllowed": false,
-                  "jumps": Array [],
-                  "level": 0,
-                  "number": 1,
-                  "position": 0,
-                  "private": false,
-                  "required": true,
-                  "title": "title",
-                  "type": "text",
-                  "validationRule": null,
-                },
-              ],
-              "themeMandatory": true,
-              "usingAddress": true,
-              "usingCategories": true,
-              "usingDescription": true,
-              "usingDistrict": true,
-              "usingFacebook": true,
-              "usingInstagram": true,
-              "usingLinkedIn": true,
-              "usingSummary": true,
-              "usingThemes": true,
-              "usingTwitter": true,
-              "usingWebPage": true,
-              "usingYoutube": true,
-            },
-            "id": "1",
-            "instagramUrl": "https://instagram.com",
-            "likers": Array [
-              Object {
-                "displayName": "liker-1",
-                "id": "1",
-              },
-            ],
-            "linkedInUrl": "https://linkedin.com",
-            "media": Object {
-              "id": "1",
-              "url": "",
-            },
-            "mergedFrom": Array [
-              Object {
-                "adminUrl": "http://capco.dev/child1",
-                "id": "1",
-                "title": "Child 1",
-              },
-              Object {
-                "adminUrl": "http://capco.dev/child2",
-                "id": "2",
-                "title": "Child 2",
-              },
-            ],
-            "mergedIn": Array [],
-            "publicationStatus": "DRAFT",
-            "responses": Array [
-              Object {
-                "question": Object {
-                  "id": "1",
-                },
-                "value": "value-1",
-              },
-              Object {
-                "medias": Array [
-                  Object {
-                    "id": "1",
-                    "name": "media-1",
-                    "size": "100",
-                    "url": "",
-                  },
-                ],
-                "question": Object {
-                  "id": "2",
-                },
-              },
-            ],
-            "summary": "summary",
-            "theme": Object {
-              "id": "theme-1",
-            },
-            "title": "title-1",
-            "twitterUrl": "https://twitter.com",
-            "webPageUrl": "",
-            "youtubeUrl": "",
-          }
-        }
+      <Tooltip
+        label="proposal.revision.impossible_email"
       >
-        <Component />
-      </ProposalRevision>
+        <div>
+          <ProposalAdminContentForm__RevisionButton
+            bsStyle="link"
+            className="bg-white"
+            disabled={true}
+            id="proposal_admin_content_revision"
+          >
+            request.author.review
+          </ProposalAdminContentForm__RevisionButton>
+        </div>
+      </Tooltip>
       <AlertForm
         invalid={false}
         submitFailed={false}
@@ -2155,7 +2019,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
         submitting={false}
         valid={true}
       />
-    </ButtonToolbar>
+    </ForwardRef>
   </form>
 </Fragment>
 `;

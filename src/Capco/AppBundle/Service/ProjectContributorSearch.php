@@ -341,6 +341,7 @@ class ProjectContributorSearch
                 $this->getSourceSQL(),
                 $this->getSourceOpinionVersionSQL(),
                 $this->getProposalSQL(),
+                $this->getParticipantProposalSQL(),
                 $this->getDebateArgumentSQL(),
                 $this->getDebateVoteSQL(),
                 $this->getUserOpinionVoteSQL(),
@@ -639,6 +640,39 @@ class ProjectContributorSearch
             INNER JOIN proposal pr ON pr.proposal_form_id = pf.id
             INNER JOIN fos_user u ON u.id = pr.author_id
             WHERE pas.project_id = :projectId
+              AND pr.published = 1
+              AND pr.is_draft = 0
+              AND pr.deleted_at IS NULL
+            SQL;
+    }
+
+    private function getParticipantProposalSQL(): string
+    {
+        return <<<'SQL'
+            SELECT
+                1 AS source_priority,
+                'participant' AS contributor_type,
+                p.id AS contributor_id,
+                pas.project_id AS project_id,
+                s.id AS step_id,
+                p.created_at AS created_at,
+                p.id AS participant_sort_id,
+                p.username AS username,
+                p.firstname AS firstname,
+                p.lastname AS lastname,
+                NULL AS user_email,
+                p.email AS participant_email,
+                NULL AS vip,
+                NULL AS user_type_id,
+                CASE WHEN p.confirmation_token IS NULL THEN 1 ELSE 0 END AS email_confirmed,
+                p.consent_internal_communication AS consent_internal_communication
+            FROM project_abstractstep pas
+            INNER JOIN step s ON s.id = pas.step_id
+            INNER JOIN proposal_form pf ON pf.step_id = s.id
+            INNER JOIN proposal pr ON pr.proposal_form_id = pf.id
+            INNER JOIN participant p ON p.id = pr.participant_id
+            WHERE pas.project_id = :projectId
+              AND pr.completion_status = 'COMPLETED'
               AND pr.published = 1
               AND pr.is_draft = 0
               AND pr.deleted_at IS NULL

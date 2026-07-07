@@ -170,13 +170,16 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             ))
         ) {
             $sets = $externalSets->getResultSets();
-            if (isset($sets['visitors'])) {
+            if (isset($sets['visitors']) && !$this->hasResultSetError($sets['visitors'], 'visitors')) {
                 $results['visitors'] = AnalyticsVisitors::fromEs($sets['visitors']);
             }
-            if (isset($sets['pageViews'])) {
+            if (isset($sets['pageViews']) && !$this->hasResultSetError($sets['pageViews'], 'pageViews')) {
                 $results['pageViews'] = AnalyticsPageViews::fromEs($sets['pageViews']);
             }
-            if (isset($sets['mostVisitedPages'])) {
+            if (
+                isset($sets['mostVisitedPages'])
+                && !$this->hasResultSetError($sets['mostVisitedPages'], 'mostVisitedPages')
+            ) {
                 $results['mostVisitedPages'] = AnalyticsMostVisitedPages::fromEs(
                     $sets['mostVisitedPages']
                 );
@@ -190,6 +193,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
                 $end,
                 $projectSlug
             ))
+            && !$this->hasMultiResultSetError($trafficSources, 'trafficSources')
         ) {
             $results['trafficSources'] = AnalyticsTrafficSources::fromEs($trafficSources);
         }
@@ -206,5 +210,32 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             'requestedFields' => $key['requestedFields'],
             'topContributorsCount' => $key['topContributorsCount'],
         ];
+    }
+
+    private function hasResultSetError(\Elastica\ResultSet $set, string $field): bool
+    {
+        if (!$set->getResponse()->hasError()) {
+            return false;
+        }
+
+        $this->logger->warning('External analytics result set failed.', [
+            'field' => $field,
+            'response' => $set->getResponse()->getData(),
+        ]);
+
+        return true;
+    }
+
+    private function hasMultiResultSetError(\Elastica\Multi\ResultSet $set, string $field): bool
+    {
+        if (!$set->hasError()) {
+            return false;
+        }
+
+        foreach ($set->getResultSets() as $name => $resultSet) {
+            $this->hasResultSetError($resultSet, sprintf('%s.%s', $field, $name));
+        }
+
+        return true;
     }
 }

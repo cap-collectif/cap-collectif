@@ -3,16 +3,23 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +29,7 @@ use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class CreateProposalFromBackofficeMutation extends CreateProposalMutation
 {
@@ -40,7 +48,13 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver,
+        ParticipantHelper $participantHelper,
+        ParticipantRepository $participantRepository,
+        ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        TokenGeneratorInterface $tokenGenerator
     ) {
         parent::__construct(
             $logger,
@@ -54,26 +68,34 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
             $toggleManager,
             $responsesFormatter,
             $proposalRepository,
-            $publisher
+            $publisher,
+            $participantIsMeetingRequirementsResolver,
+            $viewerIsMeetingRequirementsResolver,
+            $participantHelper,
+            $participantRepository,
+            $participantsTotalCountCacheHandler,
+            $tokenGenerator
         );
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, ?User $user = null): array
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
         $proposalForm = $this->getProposalForm($values, $user);
         unset($values['proposalFormId']); // This only useful to retrieve the proposalForm
         $author = $this->globalIdResolver->resolve($values['author'], $user);
+        unset($values['author']);
 
         $proposal = $this->createAndIndexProposal(
             $values,
             $proposalForm,
-            $author,
-            $author,
             false,
-            ProposalAdminType::class
+            ProposalAdminType::class,
+            $author
         );
+
+        $this->em->flush();
 
         return ['proposal' => $proposal];
     }
@@ -94,8 +116,12 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
         return false;
     }
 
-    protected function getProposalForm(array $values, User $viewer): ProposalForm
+    protected function getProposalForm(array $values, ?ContributorInterface $userOrParticipant = null): ProposalForm
     {
+        if ($userOrParticipant instanceof Participant) {
+            throw new UserError('Participants cannot create proposals from back office');
+        }
+
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($values['proposalFormId']);
         if (!$proposalForm) {

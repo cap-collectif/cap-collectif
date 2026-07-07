@@ -57,6 +57,36 @@ class ExportCollectParticipantsCommandTest extends KernelTestCase
         $this->assertStringContainsString('userSpyl,spyl,aurelien@cap-collectif.com', $fullExport);
     }
 
+    public function testSimplifiedExportIncludesParticipantProposalAuthors(): void
+    {
+        $this->emptyOutputDirectory();
+
+        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
+        $connection = $em->getConnection();
+        $connection->beginTransaction();
+
+        try {
+            $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find('proposal1');
+            $proposal->setTrashedStatus(null);
+            $em->flush();
+
+            $actualOutputs = $this->executeCommand(self::COMMAND, [self::OUTPUT_DIRECTORY], [
+                '--stepId' => self::BUDGET_PARTICIPATIF_RENNES_COLLECT_STEP_ID,
+            ]);
+
+            $this->assertArrayHasKey(self::BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT, $actualOutputs);
+
+            $simplifiedExport = $actualOutputs[self::BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT];
+
+            $this->assertIsString($simplifiedExport);
+            $this->assertStringContainsString('participant1,JohnDoe,participant1@cap-collectif.com', $simplifiedExport);
+            $this->assertStringNotContainsString("\n\n", $simplifiedExport);
+        } finally {
+            $connection->rollBack();
+            $em->clear();
+        }
+    }
+
     public function testCommand(): void
     {
         $this->emptyOutputDirectory();

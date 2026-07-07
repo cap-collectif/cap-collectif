@@ -121,7 +121,11 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           <FormControl name="address" control={control} isRequired>
-            <FormLabel htmlFor="address" label={intl.formatMessage({ id: 'form.label-postal-Address' })} />
+            <FormLabel
+              fontWeight={[400, 600]}
+              htmlFor="address"
+              label={intl.formatMessage({ id: 'form.label-postal-Address' })}
+            />
             <FieldInput
               id="address"
               name="address"

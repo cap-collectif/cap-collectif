@@ -22,7 +22,7 @@ import moment from 'moment'
  * Ce compo injecte tout ce qui est configurable à l'échelle globale d'une plateforme dans le BO, à savoir
  * les fonts, les couleurs de titres, le code personnalisé, les scripts ads/analytics.
  */
-const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.ReactNode; captchaKey: string }> = ({
+const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.ReactNode; captchaKey?: string }> = ({
   children,
   SSRData,
   captchaKey,
@@ -59,6 +59,11 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
   const titleFonts = `${titleFont?.name},system-ui,sans-serif`
 
   const primary = generatePalette(siteColors.primaryColor)
+  const resolvedCaptchaKey =
+    captchaKey ||
+    process.env.NEXT_PUBLIC_SYMFONY_TURNSTILE_PUBLIC_KEY ||
+    process.env.SYMFONY_TURNSTILE_PUBLIC_KEY ||
+    ''
 
   const CapUITheme = extendTheme({
     colors: {
@@ -68,7 +73,7 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
   })
 
   // @ts-expect-error TURNSTILE_PUBLIC_KEY doesn't exist on generic window type
-  window.TURNSTILE_PUBLIC_KEY = captchaKey
+  window.TURNSTILE_PUBLIC_KEY = resolvedCaptchaKey
   // @ts-expect-error CAPTCHETAT_BACKEND_URL doesn't exist on generic window type
   window.CAPTCHETAT_BACKEND_URL = '/api/captchetat-proxy'
 
@@ -109,7 +114,7 @@ export default function Providers({
   viewerSession: ViewerSession
   siteColors: GlobalTheme
   SSRData: layoutQuery$data
-  captchaKey: string
+  captchaKey?: string
 }>) {
   moment.locale(intl.locale)
   return (

@@ -1,4 +1,4 @@
-import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, Flex, FormLabel, InputGroup, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
 import * as React from 'react'
@@ -253,22 +253,9 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
         })}
       >
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
-          <FormLabel htmlFor="phone" label={intl.formatMessage({ id: 'form.label_phone' })} />
+          <FormLabel fontWeight={[400, 600]} htmlFor="phone" label={intl.formatMessage({ id: 'form.label_phone' })}  />
           <Flex>
             <InputGroup width="100%">
-              <FormControl name="countryCode" control={control} isDisabled width="max-content">
-                <FieldInput
-                  uniqueCountry={COUNTRY_CODES.FR}
-                  type="flagSelect"
-                  name="countryCode"
-                  control={control}
-                  placeholder={intl.formatMessage({
-                    id: 'select.country.placeholder',
-                  })}
-                  defaultValue="+33"
-                  variantColor="hierarchy"
-                />
-              </FormControl>
               <FormControl name="phone" control={control} isRequired width="auto" flex={1}>
                 <FieldInput
                   id="phone"

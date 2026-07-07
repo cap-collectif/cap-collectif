@@ -399,7 +399,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
             href="google.com"
           >
             <span>
-              admin
+              Anonyme
             </span>
           </a>
         </div>
@@ -464,7 +464,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
             href="google.com"
           >
             <span>
-              admin2
+              Anonyme
             </span>
           </a>
         </div>

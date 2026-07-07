@@ -15,7 +15,7 @@ class ProposalUrlResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(Proposal $proposal, ?RequestStack $requestStack = null): string
+    public function __invoke(Proposal $proposal, ?RequestStack $requestStack = null, ?string $emailToken = null): string
     {
         $step = $proposal->getStep();
         if (!$step) {
@@ -40,6 +40,10 @@ class ProposalUrlResolver implements QueryInterface
 
         if (isset($locale)) {
             $params['_locale'] = $locale;
+        }
+
+        if ($emailToken) {
+            $params['token'] = $emailToken;
         }
 
         return $this->router->generate(

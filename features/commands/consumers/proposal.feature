@@ -1,7 +1,7 @@
 @consumers
 Feature: Proposal consumers
 
-@rabbitmq
+@rabbitmq @toto
 Scenario: Email should be sent if a message is sent to the proposal_create queue
   Given I publish in "proposal_create" with message below:
   """
@@ -13,7 +13,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   Then I open mail with subject "notification.proposal.create.subject"
   And I should see "notification.contribution.create.body" in mail
   Then I open mail with subject "acknowledgement-of-receipt"
-  And I should see "your-contribution-has-been-registered" in mail
+  And I should see "notification.proposal.edit.participation.title" in mail
 
 @rabbitmq
 Scenario: Email should be sent if a message is sent to the proposal_delete queue
@@ -39,7 +39,7 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   Then I open mail with subject "notification.contribution.update.subject"
   And I should see "notification.contribution.update.body" in mail
   Then I open mail with subject "acknowledgement-of-receipt"
-  And I should see "you-have-modified-your-proposal" in mail
+  And I should see "participation_proposal_edit_email" in mail
 
 @rabbitmq
 Scenario: Email should be sent if a message is sent to the proposal_create queue
@@ -296,7 +296,7 @@ Scenario: User delete an news on his proposal
   Then I open mail to "admin@cap-collectif.com"
   And email should match snapshot "notifyDeleteProposalNewsAdmin.html"
 
-@rabbitmq @snapshot-email
+@rabbitmq @snapshot-email @toto
 Scenario: User participated in a proposal
   Given I publish in "proposal_create" with message below:
   """

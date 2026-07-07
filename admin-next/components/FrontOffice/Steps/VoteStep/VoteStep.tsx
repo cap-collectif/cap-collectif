@@ -9,45 +9,13 @@ import { useCookies } from 'next-client-cookies'
 import { parseAsString, useQueryStates } from 'nuqs'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { graphql, useLazyLoadQuery } from 'react-relay'
+import { useLazyLoadQuery } from 'react-relay'
 import { evalCustomCode } from 'src/app/custom-code'
 import { LeafletStyles } from 'src/app/styles'
-import { getOrderByArgs } from './utils'
+import { buildVoteStepQueryVariables, VOTE_STEP_QUERY } from './VoteStep.queries'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-
-const QUERY = graphql`
-  query VoteStepQuery(
-    $term: String
-    $orderBy: [ProposalOrder]
-    $stepId: ID!
-    $userType: ID
-    $theme: ID
-    $category: ID
-    $district: ID
-    $status: ID
-    $isAuthenticated: Boolean!
-  ) {
-    step: node(id: $stepId) {
-      id
-      ... on ProposalStep {
-        ...VoteStepWebLayout_proposalStep
-          @arguments(
-            count: 50
-            term: $term
-            orderBy: $orderBy
-            userType: $userType
-            theme: $theme
-            category: $category
-            district: $district
-            status: $status
-            isAuthenticated: $isAuthenticated
-          )
-      }
-    }
-  }
-`
 
 export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepId }) => {
   const { viewerSession } = useAppContext()
@@ -65,33 +33,14 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepI
     { history: 'push' },
   )
 
-  // Apply defaults after getting the values
-  const effectiveFilters = {
-    sort: filters.sort || 'random',
-    category: filters.category || 'ALL',
-    theme: filters.theme || 'ALL',
-    status: filters.status || 'ALL',
-    userType: filters.userType || 'ALL',
-    district: filters.district || 'ALL',
-    term: filters.term,
-  }
-
-  const data = useLazyLoadQuery<VoteStepQuery>(QUERY, {
-    stepId: stepId,
-    term: effectiveFilters.term || undefined,
-    orderBy: getOrderByArgs(effectiveFilters.sort) || [
-      {
-        field: 'RANDOM',
-        direction: 'ASC',
-      },
-    ],
-    isAuthenticated: viewerSession !== null,
-    userType: effectiveFilters.userType === 'ALL' ? undefined : effectiveFilters.userType,
-    theme: effectiveFilters.theme === 'ALL' ? undefined : effectiveFilters.theme,
-    category: effectiveFilters.category === 'ALL' ? undefined : effectiveFilters.category,
-    district: effectiveFilters.district === 'ALL' ? undefined : effectiveFilters.district,
-    status: effectiveFilters.status === 'ALL' ? undefined : effectiveFilters.status,
-  })
+  const data = useLazyLoadQuery<VoteStepQuery>(
+    VOTE_STEP_QUERY,
+    buildVoteStepQueryVariables({
+      stepId,
+      isAuthenticated: viewerSession !== null,
+      searchParams: filters,
+    }) as VoteStepQuery['variables'],
+  )
 
   if (!data) return null
 

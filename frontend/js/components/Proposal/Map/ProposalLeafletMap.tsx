@@ -16,7 +16,6 @@ import { Button } from '@cap-collectif/ui'
 import type { MapCenterObject, MapOptions, PopupRef } from './Map.types'
 import type { State, Dispatch } from '~/types'
 import ProposalMapPopover from './ProposalMapPopover'
-import LoginOverlay from '~/components/Utils/LoginOverlay'
 import type { ProposalLeafletMap_proposals$data } from '~relay/ProposalLeafletMap_proposals.graphql'
 import type { ProposalLeafletMap_proposalForm$data } from '~relay/ProposalLeafletMap_proposalForm.graphql'
 import { isSafari, Emitter } from '~/config'
@@ -65,6 +64,7 @@ type Props = {
   isCollectStep?: boolean
   btnBgColor: string
   btnTextColor: string
+  contributorConsentPrivacyPolicy?: boolean | null
 }
 
 const goToPosition = (mapRef: L.Map, address: MapCenterObject | null | undefined) =>
@@ -191,6 +191,7 @@ export const ProposalLeafletMap = ({
   isCollectStep,
   btnBgColor,
   btnTextColor,
+  contributorConsentPrivacyPolicy,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
@@ -239,6 +240,7 @@ export const ProposalLeafletMap = ({
         proposalForm={proposalForm}
         show={isOpen}
         onClose={onClose}
+        contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
         onOpen={async () => {
           const geoAddr = await getAddressFromLatLng(lastPopoverLatLng)
           dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
@@ -296,20 +298,18 @@ export const ProposalLeafletMap = ({
           autoPan={false}
           className="popup-proposal"
         >
-          <LoginOverlay placement="top">
-            <Button
-              bg={`${btnBgColor} !important`}
-              color={`${btnTextColor} !important`}
-              opacity={!proposalForm?.contribuable ? 0.5 : 1}
-              variantSize="small"
-              onClick={onOpen}
-              disabled={!proposalForm?.contribuable}
-            >
-              {intl.formatMessage({
-                id: titleTradKey,
-              })}
-            </Button>
-          </LoginOverlay>
+          <Button
+            bg={`${btnBgColor} !important`}
+            color={`${btnTextColor} !important`}
+            opacity={!proposalForm?.contribuable ? 0.5 : 1}
+            variantSize="small"
+            onClick={onOpen}
+            disabled={!proposalForm?.contribuable}
+          >
+            {intl.formatMessage({
+              id: titleTradKey,
+            })}
+          </Button>
         </Popup>
         <MarkerClusterGroup
           spiderfyOnMaxZoom

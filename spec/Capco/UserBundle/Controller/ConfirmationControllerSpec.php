@@ -12,6 +12,7 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Service\Encryptor;
+use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Controller\ConfirmationController;
@@ -52,7 +53,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
         SendInBluePublisher $sendInBluePublisher,
         Encryptor $encryptor,
         ReplyReconcilier $replyReconcilier,
-        VotesReconcilier $votesReconcilier
+        VotesReconcilier $votesReconcilier,
+        ProposalReconcillier $proposalReconcillier
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -71,7 +73,8 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $participantRepository,
             $encryptor,
             $replyReconcilier,
-            $votesReconcilier
+            $votesReconcilier,
+            $proposalReconcillier
         );
         $this->login = false;
     }
@@ -102,8 +105,9 @@ class ConfirmationControllerSpec extends ObjectBehavior
         ;
         $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->emailAction(
+            new Request(),
             'unknowntoken',
-            false
+            null
         );
     }
 
@@ -165,8 +169,9 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $flashBag->add('success', 'global.alert.email_confirmed_with_republish')->shouldBeCalled();
 
         $this->emailAction(
+            new Request(),
             'validtoken',
-            false
+            null
         );
     }
 

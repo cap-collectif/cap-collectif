@@ -67,6 +67,9 @@ InternalParticipant:
             consentPrivacyPolicy:
                 type: 'Boolean!'
                 description: 'Wether or not the participant consent the privacy policy.'
+            media:
+                type: 'InternalMedia'
+                description: 'The participant media.'
             isEmailConfirmed:
                 type: 'Boolean!'
                 description: 'Wether or not the participant has confirmed his email.'

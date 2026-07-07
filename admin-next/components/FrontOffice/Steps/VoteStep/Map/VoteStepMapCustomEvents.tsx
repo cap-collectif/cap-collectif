@@ -7,6 +7,7 @@ import { VoteStepMapCustomEvents_proposalStep$key } from '@relay/VoteStepMapCust
 
 interface Props {
   step: VoteStepMapCustomEvents_proposalStep$key
+  onWorkflowTrigger?: (contributionId: string) => void
 }
 
 const FRAGMENT = graphql`
@@ -19,7 +20,7 @@ const FRAGMENT = graphql`
     }
   }
 `
-const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey }) => {
+const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) => {
   const step = useFragment<VoteStepMapCustomEvents_proposalStep$key>(FRAGMENT, stepKey)
   const [position, setPosition] = useState(null)
 
@@ -37,7 +38,13 @@ const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey }) => {
 
   return (
     <Popup position={position}>
-      <ProposalFormModal mode="create" disabled={!step.form.contribuable} proposalForm={step.form} stepId={step.id} />
+      <ProposalFormModal
+        mode="create"
+        disabled={!step.form.contribuable}
+        proposalForm={step.form}
+        stepId={step.id}
+        onWorkflowTrigger={onWorkflowTrigger}
+      />
     </Popup>
   )
 }

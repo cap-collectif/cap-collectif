@@ -40,11 +40,17 @@ type Props = {
   showMapPlaceholder: boolean
   removePlaceholderAndShowMap: () => void
   step: VoteStepMap_proposalStep$key
+  onWorkflowTrigger?: (contributionId: string) => void
 }
 
 const backOnCardId = 'cap-back-on-card'
 
-export const VoteStepMap: FC<Props> = ({ showMapPlaceholder, removePlaceholderAndShowMap, step: stepKey }) => {
+export const VoteStepMap: FC<Props> = ({
+  showMapPlaceholder,
+  removePlaceholderAndShowMap,
+  step: stepKey,
+  onWorkflowTrigger,
+}) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
 
@@ -61,7 +67,7 @@ export const VoteStepMap: FC<Props> = ({ showMapPlaceholder, removePlaceholderAn
           </Button>
         </VoteStepMapPlaceholder>
       ) : (
-        <VoteStepMapContainer step={step} />
+        <VoteStepMapContainer step={step} onWorkflowTrigger={onWorkflowTrigger} />
       )}
       <a href={`#${mapId}`} id={backOnCardId} className="sr-only sr-only-focusable">
         {intl.formatMessage({ id: 'return-on-map' })}

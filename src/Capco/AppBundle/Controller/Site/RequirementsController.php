@@ -62,7 +62,8 @@ class RequirementsController extends Controller
 
         $contributor = $user ?? $participant;
 
-        if (!$this->contributionValidator->canContributeAgain($step, $contributor)) {
+        $contribution = $this->globalIdResolver->resolve($contributionId, $this->getUser());
+        if (!$this->contributionValidator->canContributeAgain($step, $contributor, $contribution)) {
             $url = $this->stepUrlResolver->__invoke($step) . '?toast={"variant":"danger","message":"participant-already-contributed-title"} ';
 
             return $this->redirect($url);

@@ -28,6 +28,7 @@ use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\Manager\RepositoryManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -37,16 +38,34 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class GlobalIdResolverSpec extends ObjectBehavior
 {
+    public function let(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        RepositoryManager $repositoryManager,
+        RequestStack $requestStack,
+        ParticipantHelper $participantHelper
+    ) {
+        $this->beConstructedWith(
+            $container,
+            $logger,
+            $entityManager,
+            $repositoryManager,
+            $requestStack,
+            $participantHelper
+        );
+    }
+
     public function it_is_initializable(
         ContainerInterface $container,
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager
     ) {
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
         $this->shouldHaveType(GlobalIdResolver::class);
     }
 
@@ -71,8 +90,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('Event')->willReturn($eventRepo);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('Event', 'event1');
 
         $this->resolve($globalId, null)->shouldReturn($event);
@@ -96,8 +113,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $repositoryManager->get('Project')->willReturn($projectRepository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
-
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
 
         $globalId = GlobalId::toGlobalId('Project', 'ProjectAccessibleForMeOnly');
 
@@ -130,8 +145,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('Requirement')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('Requirement', 'requirement1');
 
         $this->resolve($globalId, null)->shouldReturn($requirement);
@@ -158,8 +171,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('DebateStep')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('DebateStep', 'debateStepCannabis');
 
         $this->resolve($globalId, null)->shouldReturn($debateStep);
@@ -183,8 +194,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $repositoryManager->get('DebateOpinion')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
-
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
 
         $globalId = GlobalId::toGlobalId('DebateOpinion', 'debateCannabisOpinion1');
 
@@ -210,8 +219,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('DebateArticle')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('DebateArticle', 'canabisArticleBfm');
 
         $this->resolve($globalId, null)->shouldReturn($article);
@@ -235,8 +242,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $repositoryManager->get('DebateArgument')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
-
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
 
         $globalId = GlobalId::toGlobalId('DebateArgument', 'debateArgument1');
 
@@ -266,8 +271,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('DebateArgument')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('DebateArgument', 'debateArgument1');
 
         $this->resolve($globalId, null)->shouldReturn($argument);
@@ -292,8 +295,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('Debate')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('Debate', 'debateCannabis');
 
         $this->resolve($globalId, null)->shouldReturn($debate);
@@ -317,8 +318,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $repositoryManager->get('OfficialResponse')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
-
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
 
         $globalId = GlobalId::toGlobalId('OfficialResponse', 'officialResponse11');
 
@@ -346,8 +345,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $logger->warning('Could not resolve node with uuid ' . $globalId)->shouldBeCalled();
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $this->resolve($globalId, null)->shouldReturn(null);
     }
 
@@ -368,7 +365,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $opinionRepo->find($uuid)->willReturn($opinion);
         $container->get(OpinionRepository::class)->willReturn($opinionRepo);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
         $this->resolve($uuid, null)->shouldReturn($opinion);
     }
 
@@ -393,8 +389,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $repositoryManager->get('CASSSOConfiguration')->willReturn($repository);
         $container->get(RepositoryManager::class)->willReturn($repositoryManager);
 
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
-
         $globalId = GlobalId::toGlobalId('CASSSOConfiguration', $id);
 
         $this->resolve($globalId, null)->shouldReturn($casSSOConfiguration);
@@ -418,8 +412,6 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $logger->warning("Could not resolve node with uuid {$id}")->shouldBeCalled();
 
         $container->get(Argument::any())->willReturn($repository);
-
-        $this->beConstructedWith($container, $logger, $entityManager, $repositoryManager);
 
         $this->resolve($id, null)->shouldReturn(null);
     }

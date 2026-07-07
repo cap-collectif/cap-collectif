@@ -95,7 +95,7 @@ export const UserAvatarRender = connect(mapStateToProps)(
 
     const renderAvatar = () => (
       <Avatar
-        name={user?.username || ''}
+        name={user?.username || 'A'}
         alt={user?.username}
         src={user?.avatarUrl || defaultAvatar}
         mr={2}

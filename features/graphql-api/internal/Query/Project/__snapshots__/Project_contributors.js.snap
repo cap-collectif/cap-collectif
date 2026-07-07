@@ -7,6 +7,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -22,6 +23,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -37,6 +39,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -52,6 +55,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -67,6 +71,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 4,
             },
@@ -81,7 +86,7 @@ Object {
           },
         },
       ],
-      "totalCount": 7,
+      "totalCount": 8,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },
@@ -95,6 +100,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -110,6 +116,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 4,
             },
@@ -125,6 +132,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 50,
             },
@@ -138,8 +146,14 @@ Object {
             },
           },
         },
+        Object {
+          "node": Object {
+            "__typename": "Participant",
+            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQx",
+          },
+        },
       ],
-      "totalCount": 3,
+      "totalCount": 4,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },
@@ -153,6 +167,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 6,
             },
@@ -166,6 +181,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -179,6 +195,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 0,
             },
@@ -192,6 +209,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -205,6 +223,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 3,
             },
@@ -231,6 +250,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -246,6 +266,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 1,
             },
@@ -261,6 +282,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -276,6 +298,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -291,6 +314,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 4,
             },
@@ -305,7 +329,7 @@ Object {
           },
         },
       ],
-      "totalCount": 7,
+      "totalCount": 8,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },
@@ -319,6 +343,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 50,
             },
@@ -334,6 +359,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 50,
             },
@@ -349,6 +375,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 4,
             },
@@ -364,6 +391,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -379,6 +407,7 @@ Object {
         },
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -393,7 +422,7 @@ Object {
           },
         },
       ],
-      "totalCount": 7,
+      "totalCount": 8,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },
@@ -407,6 +436,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 50,
             },
@@ -435,6 +465,7 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "__typename": "User",
             "contributions": Object {
               "totalCount": 2,
             },
@@ -456,7 +487,7 @@ Object {
 }
 `;
 
-exports[`Internal.projects.contributors project owner checks the internal communication consent of contributors 1`] = `
+exports[`Internal.projects.contributors fetches participant contributors that added a published completed proposal 1`] = `
 Object {
   "project": Object {
     "contributors": Object {
@@ -464,9 +495,44 @@ Object {
         Object {
           "node": Object {
             "__typename": "Participant",
-            "consentInternalCommunication": false,
+            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnRQcm9wb3NhbFNlYXJjaA==",
           },
         },
+      ],
+      "totalCount": 1,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors get contributors total count with participant meeting requirement 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "totalCount": 9,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors get contributors total count without participant meeting requirement 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "totalCount": 8,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors project owner checks the internal communication consent of contributors 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
         Object {
           "node": Object {
             "__typename": "User",
@@ -500,6 +566,12 @@ Object {
         Object {
           "node": Object {
             "__typename": "User",
+            "consentInternalCommunication": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Participant",
             "consentInternalCommunication": true,
           },
         },

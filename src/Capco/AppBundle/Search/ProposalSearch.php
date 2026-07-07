@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProposalOrderField;
 use Capco\AppBundle\Enum\ProposalsState;
@@ -71,6 +72,7 @@ class ProposalSearch extends Search
             $this->searchTermsInMultipleNestedFields($boolQuery, [$providedFilters['term']]);
         }
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
+        $this->excludeMissingRequirementsProposals($boolQuery);
 
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
@@ -144,6 +146,7 @@ class ProposalSearch extends Search
         ?array $orders = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
+        $this->excludeMissingRequirementsProposals($boolQuery);
 
         $reference = $providedFilters['reference'] ?? null;
         if ($term && $reference) {
@@ -850,6 +853,17 @@ class ProposalSearch extends Search
                 $boolQuery->addMustNot($existsFilter);
             }
         }
+    }
+
+    private function excludeMissingRequirementsProposals(BoolQuery $boolQuery): void
+    {
+        $boolQuery->addMustNot(
+            new Term([
+                'completionStatus' => [
+                    'value' => ContributionCompletionStatus::MISSING_REQUIREMENTS,
+                ],
+            ])
+        );
     }
 
     private function searchTermsInMultipleNestedFields(BoolQuery $boolQuery, array $terms, array $searchFields = self::SEARCH_FIELDS): void

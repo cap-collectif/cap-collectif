@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState, forwardRef } from 'react'
 import { Uploader as CapUploader, InfoMessage, FileList } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'

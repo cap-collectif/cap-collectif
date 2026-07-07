@@ -10,6 +10,7 @@ import type { ProposalMapSelectedView_step$key } from '~relay/ProposalMapSelecte
 import VoteButton from '../VoteButton'
 import { Link } from '../utils'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
+import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 
 type Props = {
   proposal: ProposalMapSelectedView_proposal$key
@@ -44,9 +45,12 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
     }
     summaryOrBodyExcerpt
     author {
+      username
       displayName
-      media {
-        url
+      ...on User {
+        media {
+          url
+        }
       }
     }
     ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
@@ -69,6 +73,7 @@ export const ProposalMapSelectedView = ({
 
   const myRef = useRef<HTMLElement | null>(null)
   const { projectSlug } = useParams<{ projectSlug?: string }>()
+  const authorName = getProposalAuthorDisplayName(data.author)
   const [prevClientY, setPrevClientY] = React.useState(0)
 
   const startTouch = (e: TouchEvent) => {
@@ -159,9 +164,9 @@ export const ProposalMapSelectedView = ({
         </Link>
         <Flex justifyContent="space-between" alignItems="start" direction="column" mt={4}>
           <Flex alignItems="center" spacing={2}>
-            <Avatar src={author.media?.url} alt={author.displayName || ''} name={author.displayName || ''} />
+            <Avatar src={author.media?.url} alt={authorName} name={authorName} />
             <Text as="span" fontSize={CapUIFontSize.BodySmall} color="gray.500">
-              {author.displayName}
+              {authorName}
             </Text>
           </Flex>
           <Flex alignItems="center" spacing={4} width="100%" justifyContent="center" my={4}>

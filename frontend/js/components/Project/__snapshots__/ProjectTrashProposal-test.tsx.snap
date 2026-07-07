@@ -242,7 +242,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "User",
+                                    "concreteType": null,
                                     "kind": "LinkedField",
                                     "name": "author",
                                     "plural": false,
@@ -251,38 +251,20 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "vip",
+                                        "name": "__typename",
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "displayName",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
                                         "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "vip",
+                                            "storageKey": null,
+                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -293,33 +275,69 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                           Object {
                                             "alias": null,
                                             "args": null,
+                                            "concreteType": "Media",
+                                            "kind": "LinkedField",
+                                            "name": "media",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "url",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
                                             "kind": "ScalarField",
-                                            "name": "id",
+                                            "name": "slug",
                                             "storageKey": null,
                                           },
                                         ],
+                                        "type": "User",
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
                                         "storageKey": null,
                                       },
                                       Object {
                                         "abstractKey": "__isContributor",
-                                        "kind": "InlineFragment",
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "username",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "avatarUrl",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "type": "Contributor",
+                                        "kind": "TypeDiscriminator",
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "username",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
                                       },
                                     ],
                                     "storageKey": null,
@@ -636,7 +654,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "User",
+                                    "concreteType": null,
                                     "kind": "LinkedField",
                                     "name": "likers",
                                     "plural": true,
@@ -645,47 +663,65 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "id",
+                                        "name": "__typename",
                                         "storageKey": null,
                                       },
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "displayName",
+                                        "name": "id",
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "UserType",
-                                        "kind": "LinkedField",
-                                        "name": "userType",
-                                        "plural": false,
+                                        "abstractKey": "__isContributor",
+                                        "kind": "TypeDiscriminator",
+                                      },
+                                      Object {
+                                        "abstractKey": null,
+                                        "kind": "InlineFragment",
                                         "selections": Array [
                                           Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
-                                            "name": "name",
+                                            "name": "url",
                                             "storageKey": null,
                                           },
                                           Object {
                                             "alias": null,
                                             "args": null,
                                             "kind": "ScalarField",
-                                            "name": "id",
+                                            "name": "vip",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "concreteType": "UserType",
+                                            "kind": "LinkedField",
+                                            "name": "userType",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "name",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                            ],
                                             "storageKey": null,
                                           },
                                         ],
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
+                                        "type": "User",
                                       },
                                       Object {
                                         "alias": null,
@@ -698,22 +734,15 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "vip",
+                                        "name": "avatarUrl",
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "abstractKey": "__isContributor",
-                                        "kind": "InlineFragment",
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "avatarUrl",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "type": "Contributor",
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
                                       },
                                     ],
                                     "storageKey": null,
@@ -915,7 +944,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "7bc28a835a9fb3cb970b9164ef327bd9",
+            "cacheID": "930fb7cc170e1d14c88601a450de13a6",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashProposalQuery",
@@ -941,6 +970,7 @@ fragment ProposalDetailEstimation_proposal on Proposal {
 fragment ProposalDetailLikersLabel_proposal on Proposal {
   id
   likers {
+    __typename
     id
   }
 }
@@ -948,22 +978,26 @@ fragment ProposalDetailLikersLabel_proposal on Proposal {
 fragment ProposalDetailLikersModal_proposal on Proposal {
   id
   likers {
+    __typename
     ...UserAvatar_user
     id
     displayName
-    userType {
-      name
-      id
-    }
-    url
     username
-    vip
+    ... on User {
+      url
+      vip
+      userType {
+        name
+        id
+      }
+    }
   }
 }
 
 fragment ProposalDetailLikers_proposal on Proposal {
   id
   likers {
+    __typename
     id
   }
   ...ProposalDetailLikersLabel_proposal
@@ -1045,14 +1079,18 @@ fragment ProposalPreviewUser_proposal on Proposal {
   publishedAt
   createdAt
   author {
+    __typename
     ...UserAvatar_user
-    ...UserLink_user
     id
+    username
     displayName
-    url
-    media {
+    ... on User {
       url
-      id
+      media {
+        url
+        id
+      }
+      slug
     }
   }
 }
@@ -1064,7 +1102,10 @@ fragment ProposalPreview_proposal_26Htv1 on Proposal {
     id
   }
   author {
-    vip
+    __typename
+    ... on User {
+      vip
+    }
     id
   }
   category {
@@ -1128,11 +1169,6 @@ fragment UserAvatar_user on Contributor {
   }
   username
   avatarUrl
-}
-
-fragment UserLink_user on User {
-  displayName
-  url
 }
 ",
           },

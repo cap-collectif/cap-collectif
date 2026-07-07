@@ -30,7 +30,8 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
           $stepId: ID!
           $isAuthenticated: Boolean!
           $proposalRevisionsEnabled: Boolean!
-          $token: String
+          $participantToken: String
+          $emailToken: String
         ) {
           ...ProposalPageLogic_query
             @arguments(
@@ -39,7 +40,8 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
               stepId: $stepId
               isAuthenticated: $isAuthenticated
               proposalRevisionsEnabled: $proposalRevisionsEnabled
-              token: $token
+              participantToken: $participantToken
+              emailToken: $emailToken
             )
           step: node(id: $stepId) @include(if: $hasVotableStep) {
             id
@@ -51,8 +53,9 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
         hasVotableStep,
         stepId: state?.currentVotableStepId || currentVotableStepId || '',
         isAuthenticated,
-        proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
-        token: CookieMonster.getParticipantCookie(),
+        proposalRevisionsEnabled: proposalRevisionsEnabled,
+        participantToken: isAuthenticated ? null : CookieMonster.getParticipantCookie(),
+        emailToken: new URLSearchParams(window.location.search).get('token'),
       }}
       render={({
         error,
@@ -69,6 +72,9 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
         if (props && hasVotableStep && !props.step) {
           console.warn("L'étape n'a pas pu être récupérée") // eslint-disable-line no-console
         }
+
+        console.log('toto', new URLSearchParams(window.location.search).get('token'))
+        // debugger
 
         return (
           <ProposalPageLogic

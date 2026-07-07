@@ -6,6 +6,7 @@ class ProposalStatementErrorCode implements EnumType
 {
     final public const NON_EXISTING_PROPOSAL = 'NON_EXISTING_PROPOSAL';
     final public const NOT_ASSIGNED_PROPOSAL = 'NOT_ASSIGNED_PROPOSAL';
+    final public const PROPOSAL_AUTHOR_HAS_NO_EMAIL = 'PROPOSAL_AUTHOR_HAS_NO_EMAIL';
     final public const DECISION_ALREADY_GIVEN = 'DECISION_ALREADY_GIVEN';
     final public const NON_EXISTING_ASSESSMENT = 'NON_EXISTING_ASSESSMENT';
     final public const NON_EXISTING_ANALYSIS = 'NON_EXISTING_ANALYSIS';
@@ -23,6 +24,7 @@ class ProposalStatementErrorCode implements EnumType
         return [
             self::NON_EXISTING_PROPOSAL,
             self::NOT_ASSIGNED_PROPOSAL,
+            self::PROPOSAL_AUTHOR_HAS_NO_EMAIL,
             self::DECISION_ALREADY_GIVEN,
             self::NON_EXISTING_ASSESSMENT,
             self::INTERNAL_ERROR,

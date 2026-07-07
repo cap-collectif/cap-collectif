@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use ArrayObject;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,25 +20,34 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteProposalMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly RedisStorageHelper $redisHelper,
         private readonly Publisher $publisher,
         private readonly Indexer $indexer,
         private readonly ProposalFormProposalsDataLoader $dataloader,
-        private readonly GlobalIdResolver $globalIdResolver,
         private readonly ProposalAccessResolver $proposalAccessResolver,
+        private readonly GlobalIdResolver $globalIdResolver,
     ) {
     }
 
-    public function __invoke(string $proposalId, User $user): array
+    public function __invoke(Argument $arguments, ?User $user = null): array
     {
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $this->formatInput($arguments);
+
+        $proposalId = $arguments->offsetGet('proposalId');
+        $participantToken = $arguments->offsetGet('participantToken');
+        $proposal = $this->globalIdResolver->resolve($proposalId, $user, new ArrayObject(['disable_acl' => true]));
         if (!$proposal instanceof Proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
 
-        ['canDelete' => $canDelete] = $this->proposalAccessResolver->__invoke($proposal, new Argument(), $user);
+        ['canDelete' => $canDelete] = $this->proposalAccessResolver->__invoke($proposal, new Argument([
+            'participantToken' => $participantToken,
+        ]), $user);
+
         if (!$canDelete) {
             throw new UserError("Can't delete proposal");
         }
@@ -45,7 +56,9 @@ class DeleteProposalMutation implements MutationInterface
         $this->em->remove($proposal); // softdeleted
         $this->em->flush();
 
-        $this->redisHelper->recomputeUserCounters($author);
+        if ($author instanceof User) {
+            $this->redisHelper->recomputeUserCounters($author);
+        }
 
         $this->publish($proposal);
 

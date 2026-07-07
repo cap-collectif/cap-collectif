@@ -111,7 +111,11 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
         <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
           {showFirstname && (
             <FormControl name="firstname" control={control} isRequired>
-              <FormLabel htmlFor="firstname" label={intl.formatMessage({ id: 'form.label_firstname' })} />
+              <FormLabel
+                fontWeight={[400, 600]}
+                htmlFor="firstname"
+                label={intl.formatMessage({ id: 'form.label_firstname' })}
+              />
               <FieldInput
                 id="firstname"
                 name="firstname"
@@ -124,7 +128,11 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
           )}
           {showLastname && (
             <FormControl name="lastname" control={control} isRequired>
-              <FormLabel htmlFor="lastname" label={intl.formatMessage({ id: 'form.label_lastname' })} />
+              <FormLabel
+                fontWeight={[400, 600]}
+                htmlFor="lastname"
+                label={intl.formatMessage({ id: 'form.label_lastname' })}
+              />
               <FieldInput
                 id="lastname"
                 name="lastname"

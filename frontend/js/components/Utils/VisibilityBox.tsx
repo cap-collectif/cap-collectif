@@ -8,15 +8,16 @@ import type { State } from '../../types'
 
 type Props = {
   user?: Record<string, any> | null | undefined
+  participant?: Record<string, any> | null | undefined
   children: any
   enabled?: boolean
 }
-export const VisibilityBox = ({ user, children, enabled }: Props) => {
+export const VisibilityBox = ({ user, participant, children, enabled }: Props) => {
   if (!enabled) {
     return children
   }
 
-  if (enabled && !user) {
+  if (enabled && !user && !participant) {
     return (
       <Jumbotron
         className={{
@@ -44,7 +45,7 @@ export const VisibilityBox = ({ user, children, enabled }: Props) => {
   return (
     <div className={rootClasses}>
       <p id="privateInfo">
-        <i className="glyphicon glyphicon-lock" />{' '}
+        <i className="glyphicon glyphicon-lock" />
         <strong>
           <FormattedMessage id="global.private" />
         </strong>
@@ -55,6 +56,7 @@ export const VisibilityBox = ({ user, children, enabled }: Props) => {
 }
 VisibilityBox.defaultProps = {
   user: null,
+  participant: null,
   enabled: false,
 }
 

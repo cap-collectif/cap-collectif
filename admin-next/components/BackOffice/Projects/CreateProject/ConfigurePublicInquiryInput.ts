@@ -248,7 +248,14 @@ const getPublicInquiryInput = ({
           mainView: 'GRID',
           proposalForm: proposalFormTitle,
           private: false,
-          requirements: [],
+          requirements: [
+            {
+              type: 'EMAIL_VERIFIED',
+            },
+            {
+              type: 'CONSENT_PRIVACY_POLICY',
+            },
+          ],
           type: 'COLLECT',
           voteType: 'DISABLED',
           proposalArchivedTime: 0,

@@ -10,6 +10,7 @@ import ReplyValidationSVG from './assets/ReplyValidationSVG'
 import VoteValidationSVG from './assets/VoteValidationSVG'
 import { useParticipationWorkflow } from './ParticipationWorkflowContext'
 import { CenteredLogoLayout } from './ModalLayoutHeader'
+import { buildToastUrl } from './utils/buildToastUrl'
 
 type Props = {
   contributionId: string
@@ -35,6 +36,12 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
       title: intl.formatMessage({ id: 'vote-validation-workflow' }),
       info: intl.formatMessage({ id: 'it-is-a-good-choice' }),
       svg: <VoteValidationSVG />,
+      successTranslationKey: 'your-participation-is-confirmed',
+    },
+    Proposal: {
+      title: intl.formatMessage({ id: 'participation-workflow.validation' }),
+      info: intl.formatMessage({ id: 'it-is-a-good-choice' }),
+      svg: <ReplyValidationSVG />,
       successTranslationKey: 'your-participation-is-confirmed',
     },
   }
@@ -75,8 +82,10 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
           return
         }
 
-        const toastConfig = JSON.stringify({ variant: 'success', message: `${successTranslationKey}` })
-        window.location.href = `${response?.validateContribution?.redirectUrl}?toast=${toastConfig}`
+        window.location.href = buildToastUrl(response?.validateContribution?.redirectUrl, {
+          variant: 'success',
+          message: successTranslationKey,
+        })
       },
       onError: () => {
         return mutationErrorToast(intl)

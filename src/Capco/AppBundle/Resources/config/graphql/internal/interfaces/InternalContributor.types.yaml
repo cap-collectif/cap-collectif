@@ -11,6 +11,9 @@ InternalContributor:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Contributor
+            displayName:
+                type: 'String!'
+                description: "The contributor's display name."
             username:
                 type: 'String'
             email:

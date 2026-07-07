@@ -102,6 +102,12 @@ global.resetFeatureFlags = async () => {
   console.log(`Successfully reset feature flags`)
 }
 
+global.runSql = async sql => {
+  console.log(`fab ${env}.app.sql --sql="${sql}" --environment=test`)
+  await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+  return Promise.resolve(null)
+};
+
 global.graphql = (query, variables, client = 'anonymous') => {
   if (typeof client === 'object') {
     return authenticatedInternalRequest(client.email, client.password, query, variables)

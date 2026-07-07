@@ -53,6 +53,7 @@ type Props = {
   }
   stepId: string
   disabled: boolean
+  contributorConsentPrivacyPolicy?: boolean | null
 }
 
 type ProposalFormContributionState = {
@@ -213,6 +214,7 @@ export const VoteStepMap = ({
   stepId,
   DEFAULT_CENTER,
   disabled,
+  contributorConsentPrivacyPolicy,
 }: Props) => {
   const intl = useIntl()
   const mapRef = useRef<L.Map>(null)
@@ -236,7 +238,6 @@ export const VoteStepMap = ({
   const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [popoverLatLng, setPopoverLatLng] = useState<L.LatLng | null>(null)
-  const isCollectStep = data.kind === 'collect'
   const canCreateProposalOnMap = isProposalCreationAvailableOnMap(data.kind, proposalForm)
   const shouldDisplayProposalCreatePopup = shouldRenderProposalCreatePopup(data.kind, proposalForm, popoverLatLng)
   const geoJsons = formatGeoJsons(proposalForm.districts)
@@ -263,21 +264,20 @@ export const VoteStepMap = ({
 
   return (
     <>
-      {isCollectStep && proposalForm ? (
-        <ProposalCreateModal
-          title="proposal.add"
-          fullSizeOnMobile
-          proposalForm={proposalForm}
-          show={isOpen}
-          onClose={onClose}
-          onOpen={async () => {
-            if (!popoverLatLng) return
-            const geoAddr = await getAddressFromLatLng(popoverLatLng)
-            dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
-            dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr))
-          }}
-        />
-      ) : null}
+      <ProposalCreateModal
+        title="proposal.add"
+        fullSizeOnMobile
+        proposalForm={proposalForm}
+        show={isOpen}
+        onClose={onClose}
+        contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
+        onOpen={async () => {
+          if (!popoverLatLng) return
+          const geoAddr = await getAddressFromLatLng(popoverLatLng)
+          dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
+          dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr))
+        }}
+      />
       <MapContainer>
         <Map
           id="map"

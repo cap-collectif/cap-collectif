@@ -19,10 +19,10 @@ describe('<ProposalPageHeaderButtons />', () => {
       slug: 'metal',
       displayName: 'flex',
     },
+    canContactAuthor: true,
     contribuable: true,
     form: {
       contribuable: true,
-      canContact: true,
     },
     publicationStatus: 'PUBLISHED',
     currentVotableStep: {

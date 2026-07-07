@@ -8,6 +8,13 @@ const AddCollectStep = /* GraphQL*/ `
         __typename
         title
         ...on CollectStep {
+          requirements {
+            edges {
+              node {
+                __typename
+              }
+            }
+          }
           form {
             allowAknowledge
             title

@@ -139,9 +139,11 @@ export default createFragmentContainer(form, {
       id
       author {
         id
-        isEmailConfirmed
         email
-        isViewer
+        ...on User {
+          isEmailConfirmed
+          isViewer
+        }
       }
     }
   `,

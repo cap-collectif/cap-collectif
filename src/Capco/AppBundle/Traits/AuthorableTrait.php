@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,15 +26,17 @@ trait AuthorableTrait
         return $this->getAuthor() === $viewer;
     }
 
-    public function setAuthor(?Author $author): self
+    public function setAuthor(Author|ContributorInterface|null $author): self
     {
         if ($author instanceof User) {
             $this->organization = null;
             $this->author = $author;
-        }
-        if ($author instanceof Organization) {
+        } elseif ($author instanceof Organization) {
             $this->author = null;
             $this->organization = $author;
+        } elseif (null === $author) {
+            $this->author = null;
+            $this->organization = null;
         }
 
         return $this;

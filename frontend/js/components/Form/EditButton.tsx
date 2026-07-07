@@ -13,6 +13,7 @@ type Props = {
   editable?: boolean
   id?: string
   user?: Record<string, any>
+  canEdit?: boolean
 }
 
 class EditButton extends React.Component<Props> {
@@ -26,8 +27,8 @@ class EditButton extends React.Component<Props> {
   }
 
   isEditable = () => {
-    const { editable } = this.props
-    return editable && this.isTheUserTheAuthor()
+    const { editable, canEdit } = this.props
+    return editable && (canEdit || this.isTheUserTheAuthor())
   }
 
   isTheUserTheAuthor = () => {

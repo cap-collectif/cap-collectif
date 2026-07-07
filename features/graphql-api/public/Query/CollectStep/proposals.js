@@ -27,14 +27,16 @@ const OpenDataProposalsQuery = /* GraphQL */ `
               trashedStatus
               author {
                 id
-                userType {
-                  name
-                }
-                responses {
-                  edges {
-                    node {
-                      ... on ValueResponse {
-                        value
+                ... on User {
+                  userType {
+                    name
+                  }
+                  responses {
+                    edges {
+                      node {
+                        ... on ValueResponse {
+                          value
+                        }
                       }
                     }
                   }

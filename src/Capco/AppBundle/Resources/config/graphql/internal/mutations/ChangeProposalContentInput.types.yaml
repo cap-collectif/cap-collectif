@@ -48,3 +48,9 @@ ChangeProposalContentInput:
                 type: 'Float'
             likers:
                 type: '[ID!]'
+            participantToken:
+                type: 'String'
+                description: 'The participant token'
+            emailToken:
+                type: 'String'
+                description: 'The email token'

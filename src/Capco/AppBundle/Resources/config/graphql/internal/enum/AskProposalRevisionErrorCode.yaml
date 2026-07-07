@@ -10,3 +10,6 @@ AskProposalRevisionErrorCode:
             INVALID_FORM:
                 value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::INVALID_FORM
                 description: 'The provided values are not valid.'
+            PROPOSAL_AUTHOR_HAS_NO_EMAIL:
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::PROPOSAL_AUTHOR_HAS_NO_EMAIL
+                description: 'The author of the proposal does not have an associated email.'

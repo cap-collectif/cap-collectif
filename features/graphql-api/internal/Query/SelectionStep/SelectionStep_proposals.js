@@ -16,9 +16,11 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
                 name
               }
               author {
-                userType {
-                  id
-                  name
+                ... on User {
+                  userType {
+                    id
+                    name
+                  }
                 }
               }
               title

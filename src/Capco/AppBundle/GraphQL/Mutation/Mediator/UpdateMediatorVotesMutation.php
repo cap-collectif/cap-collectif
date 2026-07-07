@@ -82,9 +82,6 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
                 $this->canReusePhone($step, $participant, $participantInfos['phone']);
                 $participant->setPhoneConfirmed(true);
             } catch (ContributorAlreadyUsedPhoneException) {
-                $this->entityManager->remove($participant);
-                $this->entityManager->flush();
-
                 return [
                     'errors' => [
                         ['field' => 'phone', 'message' => $this->translator->trans('PHONE_ALREADY_USED_BY_ANOTHER_USER')],

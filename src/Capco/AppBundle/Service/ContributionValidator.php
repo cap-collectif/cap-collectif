@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Service;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
@@ -83,12 +84,12 @@ class ContributionValidator
         }
     }
 
-    public function canContributeAgain(AbstractStep $step, ContributorInterface $contributor): bool
+    public function canContributeAgain(AbstractStep $step, ContributorInterface $contributor, ?ContributionInterface $contribution = null): bool
     {
         if ($step instanceof QuestionnaireStep) {
             return $this->canContributeAgainReply($step->getQuestionnaire(), $contributor);
         }
-        if ($step instanceof ProposalStepInterface) {
+        if ($step instanceof ProposalStepInterface && $contribution instanceof AbstractVote) {
             return $this->canContributeAgainProposalStepVote($step, $contributor);
         }
 

@@ -25,6 +25,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PHPUnit\Framework\TestCase;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 /**
  * @internal
@@ -60,6 +61,7 @@ class ValidateContributionMutationTest extends TestCase
 
     private ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler;
     private ParticipantRepository $participantRepository;
+    private Publisher $publisher;
 
     protected function setUp(): void
     {
@@ -81,7 +83,7 @@ class ValidateContributionMutationTest extends TestCase
         $this->proposalCollectVoteRepository = $this->createMock(ProposalCollectVoteRepository::class);
         $this->projectParticipantsTotalCountCacheHandler = $this->createMock(ProjectParticipantsTotalCountCacheHandler::class);
         $this->participantRepository = $this->createMock(ParticipantRepository::class);
-
+        $this->publisher = $this->createMock(Publisher::class);
         $this->validateContributionMutation = new ValidateContributionMutation(
             $em,
             $this->globalIdResolver,
@@ -95,7 +97,8 @@ class ValidateContributionMutationTest extends TestCase
             $this->proposalSelectionVoteRepository,
             $this->proposalCollectVoteRepository,
             $this->projectParticipantsTotalCountCacheHandler,
-            $this->participantRepository
+            $this->participantRepository,
+            $this->publisher
         );
     }
 

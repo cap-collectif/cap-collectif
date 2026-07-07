@@ -157,7 +157,7 @@ class ParticipantRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countWithVotes(Project $project, ?ProposalStepInterface $step = null): int
+    public function countWithVotes(Project $project, ?AbstractStep $step = null): int
     {
         $sql = <<<'SQL'
                         SELECT COUNT(p.id)
@@ -241,10 +241,22 @@ class ParticipantRepository extends EntityRepository
 
         if ($step instanceof ProposalStepInterface) {
             $sql = "
-            SELECT count(distinct p.id)
-            FROM participant p
-            JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = :stepId OR v.collect_step_id = :stepId) AND v.completion_status = 'COMPLETED' AND v.is_accounted = 1
-            {$where}
+            SELECT count(distinct p.id) FROM (
+                SELECT distinct p.id
+                FROM participant p
+                JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = :stepId OR v.collect_step_id = :stepId) AND v.completion_status = 'COMPLETED' AND v.is_accounted = 1
+                {$where}
+                UNION
+                SELECT distinct p.id
+                FROM participant p
+                JOIN proposal ON proposal.participant_id = p.id
+                    AND proposal.completion_status = 'COMPLETED'
+                    AND proposal.published = 1
+                    AND proposal.is_draft = 0
+                    AND proposal.deleted_at IS NULL
+                JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = :stepId
+                {$where}
+            ) p
         ";
         } elseif ($step instanceof QuestionnaireStep) {
             $sql = "
@@ -283,6 +295,18 @@ class ParticipantRepository extends EntityRepository
                                 AND r.questionnaire_id = q.id
                                 AND r.completion_status = 'COMPLETED'
                             WHERE pas.project_id = :projectId
+                        )
+                        OR EXISTS(
+                            SELECT 1
+                               FROM project_abstractstep pas
+                               JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                               JOIN proposal ON proposal.participant_id = p.id
+                                   AND proposal.completion_status = 'COMPLETED'
+                                   AND proposal.published = 1
+                                   AND proposal.is_draft = 0
+                                   AND proposal.deleted_at IS NULL
+                               JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = s.id
+                               WHERE pas.project_id = :projectId
                         )
                     )
                     {$whereClause}
@@ -323,10 +347,20 @@ class ParticipantRepository extends EntityRepository
 
         if ($step instanceof ProposalStepInterface) {
             $sql = "
-            SELECT distinct p.*
-            FROM participant p
-            JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = :stepId OR v.collect_step_id = :stepId) AND v.completion_status = 'COMPLETED' AND v.is_accounted = 1
-            ORDER BY p.id, p.firstname
+            SELECT p.* FROM (
+                SELECT distinct p.*
+                FROM participant p
+                JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = :stepId OR v.collect_step_id = :stepId) AND v.completion_status = 'COMPLETED' AND v.is_accounted = 1
+                UNION
+                SELECT distinct p.*
+                FROM participant p
+                JOIN proposal ON proposal.participant_id = p.id
+                    AND proposal.completion_status = 'COMPLETED'
+                    AND proposal.published = 1
+                    AND proposal.is_draft = 0
+                    AND proposal.deleted_at IS NULL
+                JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = :stepId
+            ) p ORDER BY p.id, p.firstname
         ";
         } elseif ($step instanceof QuestionnaireStep) {
             $sql = "
@@ -353,6 +387,18 @@ class ParticipantRepository extends EntityRepository
                 JOIN reply r ON r.participant_id = p.id AND r.completion_status = 'COMPLETED'
                 JOIN questionnaire q ON r.questionnaire_id = q.id AND s.id = q.step_id
                 {$where}
+                UNION
+                SELECT p.*
+                FROM participant p
+                JOIN project_abstractstep pas ON pas.project_id = :projectId
+                JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                JOIN proposal ON proposal.participant_id = p.id
+                    AND proposal.completion_status = 'COMPLETED'
+                    AND proposal.published = 1
+                    AND proposal.is_draft = 0
+                    AND proposal.deleted_at IS NULL
+                JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = s.id
+                {$where}
             ) p ORDER BY p.id, p.firstname
         ";
         }
@@ -376,7 +422,7 @@ class ParticipantRepository extends EntityRepository
     /**
      * @return array<Participant>
      */
-    public function findWithVotes(Project $project, ?ProposalStepInterface $step = null, ?string $term = null): array
+    public function findWithVotes(Project $project, ?AbstractStep $step = null, ?string $term = null): array
     {
         $em = $this->getEntityManager();
         $rsm = new ResultSetMappingBuilder($em);
@@ -508,6 +554,37 @@ class ParticipantRepository extends EntityRepository
         return $qb;
     }
 
+    /**
+     * @return array<Participant>
+     */
+    public function findWithProposals(Project $project, ?CollectStep $step = null, ?string $term = null): array
+    {
+        $qb = $this->createQueryBuilder('pr')
+            ->join('pr.proposals', 'p')
+            ->join('p.proposalForm', 'pf')
+            ->join('pf.step', 's')
+            ->join('s.projectAbstractStep', 'pas')
+            ->where('pas.project = :project')
+            ->addOrderBy('pr.id')
+            ->addOrderBy('pr.firstname', 'ASC')
+            ->setParameter('project', $project->getId())
+        ;
+
+        if ($term) {
+            $qb->andWhere('pr.firstname LIKE :term OR pr.lastname LIKE :term OR pr.email LIKE :term')
+                ->setParameter('term', '%' . $term . '%')
+            ;
+        }
+
+        if ($step) {
+            $qb->andWhere('pas.step = :step')
+                ->setParameter('step', $step->getId())
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findWithContributionsByProjectAndParticipant(Project $project, Participant $participant): bool
     {
         $em = $this->getEntityManager();
@@ -526,8 +603,19 @@ class ParticipantRepository extends EntityRepository
             JOIN reply r ON r.participant_id = p.id AND r.completion_status = 'COMPLETED'
             JOIN questionnaire q ON r.questionnaire_id = q.id AND s.id = q.step_id
             WHERE p.id = :participantId
+            UNION
+            SELECT p.id
+            FROM participant p
+            JOIN project_abstractstep pas ON pas.project_id = :projectId
+            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+            JOIN proposal ON proposal.participant_id = p.id
+                AND proposal.completion_status = 'COMPLETED'
+                AND proposal.published = 1
+                AND proposal.is_draft = 0
+                AND proposal.deleted_at IS NULL
+            JOIN proposal_form pf ON proposal.proposal_form_id = pf.id AND pf.step_id = s.id
+            WHERE p.id = :participantId
 ";
-        // todo implements parcours proposal when merged
 
         $params = ['projectId' => $project->getId(), 'participantId' => $participant->getId()];
 
@@ -627,28 +715,42 @@ class ParticipantRepository extends EntityRepository
     /**
      * @return array<Participant>
      */
-    public function findVotersForCollect(CollectStep $collectStep, int $offset, int $limit): array
+    public function findVotersAndProposalForCollect(CollectStep $collectStep, int $offset, int $limit): array
     {
-        $subQueryBuilder = $this->createQueryBuilder('pv');
-        $subQuery = $subQueryBuilder->select('IDENTITY(participantVote.participant)')
-            ->from('CapcoAppBundle:ProposalCollectVote', 'participantVote')
-            ->where('participantVote.collectStep = :collectStep')
-            ->andWhere('participantVote.isAccounted = 1')
-            ->getDQL()
-        ;
+        $qb = $this->createQueryBuilder('participant');
 
-        $queryBuilder = $this->createQueryBuilder('participant');
-        $query = $queryBuilder->select('participant')
-            ->where(
-                $queryBuilder->expr()->in('participant.id', $subQuery)
+        $qb
+            ->leftJoin(
+                'CapcoAppBundle:ProposalCollectVote',
+                'vote',
+                'WITH',
+                'vote.participant = participant AND vote.collectStep = :collectStep AND vote.isAccounted = 1'
+            )
+            ->leftJoin(
+                'CapcoAppBundle:Proposal',
+                'proposal',
+                'WITH',
+                'proposal.participant = participant'
+            )
+            ->leftJoin(
+                'proposal.proposalForm',
+                'proposalForm'
+            )
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->isNotNull('vote.id'),
+                    $qb->expr()->andX(
+                        'proposalForm.step = :collectStep',
+                        $qb->expr()->isNotNull('proposal.id')
+                    )
+                )
             )
             ->setParameter('collectStep', $collectStep)
             ->setMaxResults($limit)
             ->setFirstResult($offset)
-            ->getQuery()
         ;
 
-        return $query->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     public function hasNewParticipantsForASelectionStep(SelectionStep $selectionStep, \DateTime $mostRecentFileModificationDate): bool

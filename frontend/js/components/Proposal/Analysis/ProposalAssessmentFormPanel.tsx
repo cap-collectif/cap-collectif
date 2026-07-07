@@ -3,7 +3,7 @@ import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import debounce from 'debounce-promise'
 import React, { useState } from 'react'
 import { Glyphicon, InputGroup } from 'react-bootstrap'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import { FormattedMessage, injectIntl, useIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { change, Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form'
@@ -25,6 +25,7 @@ import { getLabelData, IN_PROGRESS_KEY, TODO_KEY } from './ProposalAnalysisUserR
 import ProposalAssessmentConfirmModal from './ProposalAssessmentConfirmModal'
 import './ProposalFormSwitcher'
 import type { SubmittingState } from './ProposalFormSwitcher'
+import { Tooltip } from '@cap-collectif/ui'
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE'
 
@@ -99,6 +100,7 @@ export const ProposalAssessmentFormPanel = ({
   proposal,
   proposalRevisionsEnabled,
 }: Props) => {
+  const intl = useIntl()
   const [status, setStatus] = useState(initialStatus)
   const { width } = useResize()
   const isLarge = width < bootstrapGrid.mdMax
@@ -114,6 +116,8 @@ export const ProposalAssessmentFormPanel = ({
     dispatch(change(formName, 'validate', true))
     dispatch(change(formName, 'goBack', true))
   }
+
+  const hasEmail = !!proposal.author.email
 
   return (
     <>
@@ -231,11 +235,21 @@ export const ProposalAssessmentFormPanel = ({
           </ValidateButton>
           {proposalRevisionsEnabled && (
             <ProposalRevision proposal={proposal} unstable__enableCapcoUiDs>
-              {openModal => (
-                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                  <FormattedMessage id="request.author.review" />
-                </RevisionButton>
-              )}
+              {openModal =>
+                hasEmail ? (
+                  <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                    <FormattedMessage id="request.author.review" />
+                  </RevisionButton>
+                ) : (
+                  <Tooltip label={intl.formatMessage({ id: 'proposal.revision.impossible_email' })}>
+                    <div>
+                      <RevisionButton disabled id="proposal-analysis-revision" type="button">
+                        <FormattedMessage id="request.author.review" />
+                      </RevisionButton>
+                    </div>
+                  </Tooltip>
+                )
+              }
             </ProposalRevision>
           )}
         </Validation>
@@ -298,6 +312,9 @@ export default createFragmentContainer(container, {
         analysisConfiguration {
           costEstimationEnabled
         }
+      }
+      author {
+        email
       }
     }
   `,

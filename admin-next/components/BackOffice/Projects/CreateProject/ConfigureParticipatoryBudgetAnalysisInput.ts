@@ -172,7 +172,14 @@ const getParticipatoryBudgetAnalysisInput = ({
           mainView: 'GRID',
           proposalForm: proposalFormTitle,
           private: false,
-          requirements: [],
+          requirements: [
+            {
+              type: 'EMAIL_VERIFIED',
+            },
+            {
+              type: 'CONSENT_PRIVACY_POLICY',
+            },
+          ],
           type: 'COLLECT',
           voteType: 'DISABLED',
           proposalArchivedTime: 0,
@@ -190,7 +197,11 @@ const getParticipatoryBudgetAnalysisInput = ({
           endAt: stepsDates.selectionStep1.endAt(),
           isEnabled: true,
           mainView: 'GRID',
-          requirements: [],
+          requirements: [
+            {
+              type: 'CONSENT_PRIVACY_POLICY',
+            },
+          ],
           statuses: [
             {
               color: 'WARNING',
@@ -283,7 +294,11 @@ const getParticipatoryBudgetAnalysisInput = ({
           endAt: stepsDates.selectionStep3.endAt(),
           isEnabled: true,
           mainView: 'GRID',
-          requirements: [],
+          requirements: [
+            {
+              type: 'CONSENT_PRIVACY_POLICY',
+            },
+          ],
           allowAuthorsToAddNews: true,
           statuses: [
             {

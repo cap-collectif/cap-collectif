@@ -50,9 +50,14 @@ const mutation = graphql`
         paperVotesTotalCount
         estimation
       }
+      proposalId: proposal {
+        id
+      }
       userErrors {
         message
       }
+      shouldTriggerWorkflow
+      participantToken
     }
   }
 ` as GraphQLTaggedNode
@@ -60,13 +65,16 @@ const mutation = graphql`
 type CommitOptions = {
   variables: CreateProposalMutation$variables
   stepId: string
+  skipUpdater?: boolean
 }
 
-const commit = ({ variables, stepId }: CommitOptions): Promise<CreateProposalMutation$data> =>
+const commit = ({ variables, stepId, skipUpdater = false }: CommitOptions): Promise<CreateProposalMutation$data> =>
   commitMutation<CreateProposalMutationType>(environment, {
     mutation,
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
+      if (skipUpdater) return
+
       const payload = store.getRootField('createProposal')
       if (!payload) return
 
