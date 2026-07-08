@@ -68,6 +68,10 @@ class ProposalReconcillierTest extends TestCase
     {
         $this->disableCompletionStatusFilter();
 
+        $emailRequirement = $this->createMock(Requirement::class);
+        $emailRequirement->method('getType')->willReturn(Requirement::EMAIL_VERIFIED);
+        $this->requirements = [$emailRequirement];
+
         $this->participant->method('getEmail')->willReturn('user@capco.com');
         $this->viewer->method('getEmail')->willReturn('user@capco.com');
         $this->participant->method('isEmailConfirmed')->willReturn(true);
