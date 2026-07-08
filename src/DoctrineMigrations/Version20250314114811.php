@@ -86,7 +86,7 @@ final class Version20250314114811 extends AbstractMigration
     {
         return \array_key_exists(
             strtolower($columnName),
-            array_change_key_case($this->connection->getSchemaManager()->listTableColumns($tableName), CASE_LOWER)
+            array_change_key_case($this->connection->getSchemaManager()->listTableColumns($tableName), \CASE_LOWER)
         );
     }
 
@@ -94,7 +94,7 @@ final class Version20250314114811 extends AbstractMigration
     {
         return \array_key_exists(
             strtolower($foreignKeyName),
-            array_change_key_case($this->connection->getSchemaManager()->listTableForeignKeys($tableName), CASE_LOWER)
+            array_change_key_case($this->connection->getSchemaManager()->listTableForeignKeys($tableName), \CASE_LOWER)
         );
     }
 
@@ -102,7 +102,7 @@ final class Version20250314114811 extends AbstractMigration
     {
         return \array_key_exists(
             strtolower($indexName),
-            array_change_key_case($this->connection->getSchemaManager()->listTableIndexes($tableName), CASE_LOWER)
+            array_change_key_case($this->connection->getSchemaManager()->listTableIndexes($tableName), \CASE_LOWER)
         );
     }
 }
