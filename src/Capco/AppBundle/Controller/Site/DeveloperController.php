@@ -233,6 +233,10 @@ class DeveloperController extends Controller
      */
     private function getSchemaTypeNames(string $schemaPath): array
     {
+        if (!is_readable($schemaPath)) {
+            return [];
+        }
+
         $schema = file_get_contents($schemaPath);
         if (false === $schema) {
             return [];
