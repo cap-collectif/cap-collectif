@@ -9,11 +9,9 @@ import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/Par
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { useSendParticipantPhoneValidationCodeMutation } from '~/mutations/SendParticipantPhoneValidationCodeMutation'
 import { useSendSmsPhoneValidationCodeMutation } from '~/mutations/SendSmsPhoneValidationCodeMutation'
-import { useValidatePhoneReusabilityMutation } from '~/mutations/ValidatePhoneReusabilityMutation'
 import { useVerifyParticipantPhoneNumberMutation } from '~/mutations/VerifyParticipantPhoneNumberMutation'
 import { useVerifyUserPhoneNumberMutation } from '~/mutations/VerifyUserPhoneNumberMutation'
 import type { GlobalState } from '~/types'
-import { fakeTimer } from '~/utils/timer'
 import ModalLayout from './ModalLayout'
 import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 
@@ -28,7 +26,6 @@ const PhoneConfirmationModal: React.FC = () => {
   const verifyParticipantPhoneNumberMutation = useVerifyParticipantPhoneNumberMutation()
   const sendParticipantPhoneValidationCodeMutation = useSendParticipantPhoneValidationCodeMutation()
   const sendSmsPhoneValidationCodeMutation = useSendSmsPhoneValidationCodeMutation()
-  const validatePhoneReusabilityMutation = useValidatePhoneReusabilityMutation()
 
   const {
     control,
@@ -39,15 +36,12 @@ const PhoneConfirmationModal: React.FC = () => {
   } = useFormContext()
 
   const verifyCodeIsLoading =
-    verifyUserPhoneNumberMutation.isLoading ||
-    verifyParticipantPhoneNumberMutation.isLoading ||
-    validatePhoneReusabilityMutation.isLoading
+    verifyUserPhoneNumberMutation.isLoading || verifyParticipantPhoneNumberMutation.isLoading
   const sendCodeIsLoading =
     sendParticipantPhoneValidationCodeMutation.isLoading || sendSmsPhoneValidationCodeMutation.isLoading
 
   const phone = watch('phone')
-  const participantToken = CookieMonster.getParticipantCookie()
-  const { contributionId, contributionUrl } = useParticipationWorkflow()
+  const { requirementsUrl } = useParticipationWorkflow()
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -129,6 +123,36 @@ const PhoneConfirmationModal: React.FC = () => {
     sendCodeToParticipant(phone)
   }
 
+  const handleVerificationCompletion = (errorCode?: string | null, reconciliationMode?: string | null) => {
+    if (errorCode === 'CODE_EXPIRED' || errorCode === 'CODE_NOT_VALID' || errorCode === 'RETRY_LIMIT_REACHED') {
+      setError('code', {
+        type: 'custom',
+        message: intl.formatMessage({ id: errorCode }),
+      })
+      return
+    }
+
+    if (errorCode === 'PHONE_ALREADY_USED_BY_ANOTHER_USER') {
+      toast({
+        variant: 'danger',
+        content: intl.formatMessage({ id: errorCode }),
+      })
+      return
+    }
+
+    if (errorCode) {
+      mutationErrorToast(intl)
+      return
+    }
+
+    if (reconciliationMode === 'USER_AUTHENTICATED') {
+      window.location.href = requirementsUrl
+      return
+    }
+
+    goToNextStep()
+  }
+
   const verifyCode = (code: string) => {
     if (isAuthenticated) {
       verifyUserPhoneNumberMutation.commit({
@@ -141,44 +165,10 @@ const PhoneConfirmationModal: React.FC = () => {
           if (errors && errors.length > 0) {
             return mutationErrorToast(intl)
           }
-          const errorCode = response.verifyUserPhoneNumber?.errorCode
-
-          if (errorCode === 'CODE_EXPIRED' || errorCode === 'CODE_NOT_VALID' || errorCode === 'RETRY_LIMIT_REACHED') {
-            setError('code', {
-              type: 'custom',
-              message: intl.formatMessage({ id: errorCode }),
-            })
-            return
-          }
-
-          if (errorCode) {
-            return mutationErrorToast(intl)
-          }
-
-          validatePhoneReusabilityMutation.commit({
-            variables: {
-              input: {
-                participantToken: !isAuthenticated ? participantToken : null,
-                contributionId,
-              },
-            },
-            onCompleted: async (response, errors) => {
-              if (errors && errors.length > 0) {
-                return mutationErrorToast(intl)
-              }
-              const errorCode = response.validatePhoneReusability?.errorCode
-              if (errorCode === 'PHONE_ALREADY_USED') {
-                toast({
-                  variant: 'danger',
-                  content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
-                })
-                await fakeTimer(10000)
-                window.location.href = contributionUrl
-                return
-              }
-              goToNextStep()
-            },
-          })
+          handleVerificationCompletion(
+            response.verifyUserPhoneNumber?.errorCode,
+            response.verifyUserPhoneNumber?.reconciliationMode,
+          )
         },
         onError: () => {
           return mutationErrorToast(intl)
@@ -196,44 +186,10 @@ const PhoneConfirmationModal: React.FC = () => {
           if (errors && errors.length > 0) {
             return mutationErrorToast(intl)
           }
-          const errorCode = response.verifyParticipantPhoneNumber?.errorCode
-
-          if (errorCode === 'CODE_EXPIRED' || errorCode === 'CODE_NOT_VALID' || errorCode === 'RETRY_LIMIT_REACHED') {
-            setError('code', {
-              type: 'custom',
-              message: intl.formatMessage({ id: errorCode }),
-            })
-            return
-          }
-
-          if (errorCode) {
-            return mutationErrorToast(intl)
-          }
-
-          validatePhoneReusabilityMutation.commit({
-            variables: {
-              input: {
-                participantToken: !isAuthenticated ? participantToken : null,
-                contributionId,
-              },
-            },
-            onCompleted: async (response, errors) => {
-              if (errors && errors.length > 0) {
-                return mutationErrorToast(intl)
-              }
-              const errorCode = response.validatePhoneReusability?.errorCode
-              if (errorCode === 'PHONE_ALREADY_USED') {
-                toast({
-                  variant: 'danger',
-                  content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
-                })
-                await fakeTimer(10000)
-                window.location.href = contributionUrl
-                return
-              }
-              goToNextStep()
-            },
-          })
+          handleVerificationCompletion(
+            response.verifyParticipantPhoneNumber?.errorCode,
+            response.verifyParticipantPhoneNumber?.reconciliationMode,
+          )
         },
         onError: () => {
           return mutationErrorToast(intl)

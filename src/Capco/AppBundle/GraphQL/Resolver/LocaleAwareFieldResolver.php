@@ -51,7 +51,9 @@ class LocaleAwareFieldResolver
             return $parentValue->{$method}();
         }
 
-        return $parentValue->{$fieldName} ?? null;
+        $objectProperties = get_object_vars($parentValue);
+
+        return \array_key_exists($fieldName, $objectProperties) ? $objectProperties[$fieldName] : null;
     }
 
     private function resolveMethod(object $object, string $fieldName): ?string

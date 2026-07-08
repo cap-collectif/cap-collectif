@@ -275,33 +275,6 @@ describe('Questionnaire workflow as anonymous', () => {
       expected: 2,
     })
   })
-  it('should display already used phone error message when using a phone already confirmed in another reply', () => {
-    const isAnonymous = true
-    QuestionnairePage.visitAnonymousQuestionnaire()
-    QuestionnairePage.fillAnonymousQuestionnaire()
-    QuestionnairePage.submitForm({
-      isAnonymous,
-      waitForRequirements: true,
-    })
-
-    cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
-
-    ParticipationWorkflowPage.sendParticipantEmailWorkflowMutation({
-      email: 'johndoe@gmail.com',
-      isAnonymous,
-    })
-    ParticipationWorkflowPage.fillPhoneNumber({
-      number: '0602020202',
-      isAnonymous,
-      isSendingSms: true,
-      waitForRequirements: true,
-    })
-    ParticipationWorkflowPage.fillSMSCode({
-      code: '123456',
-      isAnonymous,
-    })
-    cy.contains('phone.already.used.in.this.step')
-  })
   it('should reconcile replies as participant when replying twice with the same email and multiple replies are allowed', () => {
     const isAnonymous = true
     QuestionnairePage.visitAnonymousQuestionnaire()

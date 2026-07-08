@@ -7,6 +7,9 @@ VerifySMSErrorCode:
             PHONE_ALREADY_CONFIRMED:
                 value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::PHONE_ALREADY_CONFIRMED
                 description: 'The given phone is already confirmed.'
+            PHONE_ALREADY_USED_BY_ANOTHER_USER:
+                value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::PHONE_ALREADY_USED_BY_ANOTHER_USER
+                description: 'The given phone is already used by another confirmed user.'
             CODE_EXPIRED:
                 value: !php/const Capco\AppBundle\Enum\VerifySMSErrorCode::CODE_EXPIRED
                 description: 'The given given code is expired.'

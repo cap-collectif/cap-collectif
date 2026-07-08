@@ -6,6 +6,7 @@ const mutation = graphql`
   mutation VerifyParticipantPhoneNumberMutation($input: VerifyParticipantPhoneNumberInput!) {
     verifyParticipantPhoneNumber(input: $input) {
       errorCode
+      reconciliationMode
       participant {
         id
       }

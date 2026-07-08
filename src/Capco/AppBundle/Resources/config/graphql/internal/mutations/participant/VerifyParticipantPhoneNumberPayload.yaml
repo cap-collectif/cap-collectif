@@ -8,3 +8,6 @@ VerifyParticipantPhoneNumberPayload:
             errorCode:
                 type: 'VerifySMSErrorCode'
                 description: 'The error code, if failing.'
+            reconciliationMode:
+                type: 'PhoneReconciliationMode!'
+                description: 'The reconciliation mode applied after phone verification.'

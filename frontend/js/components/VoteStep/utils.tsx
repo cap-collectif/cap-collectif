@@ -123,10 +123,14 @@ export type Bounds = {
 
 export const boundsToLeaflet = (bounds: Bounds) => [bounds.topLeft, bounds.bottomRight]
 
+export const isValidLatLng = (
+  value: { readonly lat?: number | null; readonly lng?: number | null } | null | undefined,
+) => Number.isFinite(value?.lat) && Number.isFinite(value?.lng)
+
 export const parseLatLng = (latlng: string) => {
   try {
     const value = JSON.parse(latlng)
-    return value
+    return isValidLatLng(value) ? value : null
   } catch (e) {
     return null
   }
@@ -136,7 +140,7 @@ export const parseLatLngBounds = (latlngBounds: string) => {
   try {
     const value = JSON.parse(latlngBounds)
 
-    if (value.topLeft && value.bottomRight) {
+    if (isValidLatLng(value.topLeft) && isValidLatLng(value.bottomRight)) {
       const bounds = L.latLngBounds(boundsToLeaflet(value))
       if (bounds.isValid()) return value
     }

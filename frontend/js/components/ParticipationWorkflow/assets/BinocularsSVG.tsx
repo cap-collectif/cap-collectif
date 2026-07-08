@@ -1,7 +1,6 @@
 import { useTheme } from '@cap-collectif/ui'
 import React from 'react'
 
-
 const BinocularsSVG = () => {
   const { colors } = useTheme()
   const primaryColor500 = colors.primary[500]
@@ -12,7 +11,10 @@ const BinocularsSVG = () => {
       height="300"
       viewBox="0 0 300 300"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path
         d="M105.42 203.474C108.809 216.811 110.739 230.477 111.175 244.232C94.5068 247.353 77.3904 247.2 60.7807 243.781C60.3952 243.736 60.0292 243.587 59.7219 243.35C59.361 243.014 59.2767 242.483 59.213 241.994C57.3929 228.014 55.5929 213.636 59.0457 199.968"
         fill="black"

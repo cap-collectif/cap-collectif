@@ -27,7 +27,11 @@ class SessionWithJsonHandlerTest extends TestCase
         $redis
             ->expects($this->once())
             ->method('set')
-            ->with($lockKey, 1, ['NX', 'EX' => 5])
+            ->with(
+                $lockKey,
+                $this->callback(static fn (string $lockToken): bool => 32 === \strlen($lockToken) && ctype_xdigit($lockToken)),
+                ['NX', 'EX' => 5]
+            )
             ->willReturn(true)
         ;
         $redis
@@ -44,8 +48,14 @@ class SessionWithJsonHandlerTest extends TestCase
         ;
         $redis
             ->expects($this->once())
-            ->method('del')
-            ->with($lockKey)
+            ->method('eval')
+            ->with(
+                $this->stringContains('redis.call("get", KEYS[1])'),
+                $this->callback(static fn (array $arguments): bool => $arguments[0] === $lockKey
+                    && 32 === \strlen((string) $arguments[1])
+                    && ctype_xdigit((string) $arguments[1])),
+                1
+            )
             ->willReturn(1)
         ;
 

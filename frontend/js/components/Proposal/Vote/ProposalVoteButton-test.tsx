@@ -3,9 +3,20 @@ import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
+import { act } from 'react-dom/test-utils'
 import ProposalVoteButton from './ProposalVoteButton'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProposalVoteButtonTestQuery } from '~relay/ProposalVoteButtonTestQuery.graphql'
+import AddProposalSmsVoteMutation from '~/mutations/AddProposalSmsVoteMutation'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
+jest.mock('~/mutations/AddProposalSmsVoteMutation', () => ({
+  commit: jest.fn(),
+}))
+
+jest.mock('~/components/Utils/MutationErrorToast', () => ({
+  mutationErrorToast: jest.fn(),
+}))
 
 describe('<ProposalVoteButton />', () => {
   let environment
@@ -50,16 +61,19 @@ describe('<ProposalVoteButton />', () => {
   `
   afterEach(() => {
     clearSupportForPortals()
+    jest.clearAllMocks()
+    localStorage.clear()
   })
   beforeEach(() => {
     addsSupportForPortals()
     environment = createMockEnvironment()
 
     const TestRenderer = props => {
+      const isAuthenticated = props.isAuthenticated ?? true
       const data = useLazyLoadQuery<ProposalVoteButtonTestQuery>(query, {
         proposalId: 'proposal1',
         id: 'step1',
-        isAuthenticated: true,
+        isAuthenticated,
       })
       if (!data.proposal || !data.step) return null
       return (
@@ -75,11 +89,71 @@ describe('<ProposalVoteButton />', () => {
       )
     }
 
-    TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
+    TestComponent = ({ store, ...props }) => (
+      <RelaySuspensFragmentTest environment={environment} store={store}>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
+  })
+  it('handles anonymous vote mutation network errors', async () => {
+    ;(AddProposalSmsVoteMutation.commit as jest.Mock).mockRejectedValue(new TypeError('Load failed'))
+    environment.mock.queueOperationResolver(operation =>
+      MockPayloadGenerator.generate(operation, {
+        Proposal: () => ({
+          id: 'proposal1',
+          contributorVote: null,
+          votes: {
+            totalCount: 0,
+          },
+        }),
+        ProposalVote: () => ({
+          completionStatus: 'PUBLISHED',
+        }),
+        ProposalStep: () => ({
+          id: 'step1',
+          votesRanking: false,
+          votesMin: 1,
+          viewerVotes: {
+            totalCount: 0,
+            edges: [],
+          },
+        }),
+        RequirementConnection: () => ({
+          participantMeetsTheRequirements: false,
+        }),
+      }),
+    )
+    const triggerRequirementsModal = jest.fn()
+    testComponentTree = ReactTestRenderer.create(
+      <TestComponent
+        hasVoted={false}
+        isAuthenticated={false}
+        usesNewUI
+        store={{
+          user: {
+            user: null,
+          },
+        }}
+        triggerRequirementsModal={triggerRequirementsModal}
+      />,
+    )
+
+    const voteButton = testComponentTree.root.findAll(
+      node =>
+        node.type === 'button' &&
+        node.props.id === 'proposal-vote-btn-proposal1' &&
+        typeof node.props.onClick === 'function',
+    )[0]
+
+    expect(voteButton).toBeDefined()
+
+    await act(async () => {
+      await expect(voteButton.props.onClick()).resolves.toBeUndefined()
+    })
+
+    expect(triggerRequirementsModal).not.toHaveBeenCalled()
+    expect(AddProposalSmsVoteMutation.commit).toHaveBeenCalledTimes(1)
+    expect(mutationErrorToast).toHaveBeenCalledTimes(1)
   })
   it('renders viewer has not voted', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))

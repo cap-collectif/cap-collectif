@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Service\ParticipationWorkflow;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -36,25 +35,7 @@ class ReplyReconcilier extends ContributionsReconcilier
                 continue;
             }
 
-            $hasSSORequirements = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::SSO === $requirement->getType())->count() > 0;
-            if ($hasSSORequirements) {
-                $this->reconcileRepliesByQuestionnaire($questionnaire, $participant, $contributorTarget);
-
-                continue;
-            }
-
-            $hasEmailVerifiedRequirement = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::EMAIL_VERIFIED === $requirement->getType())->count() > 0;
-
-            if (!$hasEmailVerifiedRequirement) {
-                continue;
-            }
-
-            $isSameEmail = $participant->getEmail() === $contributorTarget->getEmail() && ($participant->isEmailConfirmed() && $contributorTarget->isEmailConfirmed());
-
-            // participant->getEmail() returning null means he comes from magic link or attempting to log in through the workflow
-            // if email verified is required and participant has an email different from the user we skip reconciling because we consider that they are not the same person
-            // otherwise if he has no email set we can reconcile with the logged-in user assuming he is logged-in through the workflow with either email password / sso / magic link
-            if (null !== $participant->getEmail() && !$isSameEmail) {
+            if (!$this->canReconcileForStep($step, $participant, $contributorTarget)) {
                 continue;
             }
 

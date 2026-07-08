@@ -4,6 +4,7 @@ exports[`Internal|verifyUserPhoneNumber mutation should return PHONE_ALREADY_CON
 Object {
   "verifyUserPhoneNumber": Object {
     "errorCode": "PHONE_ALREADY_CONFIRMED",
+    "reconciliationMode": "NONE",
     "user": null,
   },
 }

@@ -1,10 +1,8 @@
-import * as React from 'react'
-import { Box, Flex, Skeleton } from '@cap-collectif/ui'
-import ProjectHeader from '~ui/Project/ProjectHeader'
-import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery'
+import { Box, Skeleton } from '@cap-collectif/ui'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { useSelector } from 'react-redux'
-import { GlobalState } from '~/types'
+import * as React from 'react'
+import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery'
+import ProjectHeader from '~ui/Project/ProjectHeader'
 
 type Props = {
   hasError: boolean
@@ -13,7 +11,6 @@ type Props = {
 
 const ProjectHeaderPlaceholder = ({ hasError, fetchData }: Props): JSX.Element => {
   const isIdfProjectHeader = useFeatureFlag('idf_project_header')
-  const mainColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
 
   React.useEffect(() => {
     if (!isIdfProjectHeader) {
@@ -40,31 +37,7 @@ const ProjectHeaderPlaceholder = ({ hasError, fetchData }: Props): JSX.Element =
   }, [isIdfProjectHeader])
 
   if (isIdfProjectHeader) {
-    return (
-      <Box
-        className="projectHeaderIdfPlaceholder"
-        bg={mainColor || 'neutral-gray.900'}
-        width="100%"
-        paddingY={[3, 4]}
-        paddingX={[4, 8]}
-      >
-        {hasError && <ErrorQuery retry={fetchData} />}
-        <Flex direction={['column', 'row']} alignItems={['flex-start', 'center']} justifyContent="space-between">
-          <Flex direction={['column', 'row']} alignItems={['flex-start', 'center']} spacing={[2, 8]} flexWrap="wrap">
-            <Skeleton.Text size="sm" width={['75%', '260px']} />
-            <Flex direction="row" alignItems="center" spacing={[4, 8]} flexWrap="wrap">
-              <Skeleton.Text width="70px" />
-              <Skeleton.Text width="70px" />
-              <Skeleton.Text width="70px" />
-            </Flex>
-          </Flex>
-          <Flex direction="row" alignItems="center" spacing={[4, 6]} marginTop={[2, 0]}>
-            <Skeleton.Text width="70px" />
-            <Skeleton.Text width="110px" />
-          </Flex>
-        </Flex>
-      </Box>
-    )
+    return null
   }
 
   return (

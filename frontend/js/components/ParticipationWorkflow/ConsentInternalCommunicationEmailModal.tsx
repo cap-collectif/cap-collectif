@@ -76,6 +76,8 @@ const ConsentInternalCommunicationEmailModal = () => {
   const redirectUrl = getRedirectUrl()
 
   const onSubmit = (values: FormValues) => {
+    if (!values.email) return
+
     const input = {
       email: values.email.toString(),
       participantToken: CookieMonster.getParticipantCookie(),

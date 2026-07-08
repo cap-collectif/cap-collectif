@@ -16,11 +16,21 @@ use Symfony\Component\Security\Core\Security;
 class SessionWithJsonHandler extends RedisSessionHandler
 {
     final public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
+    private const MICROSECONDS_PER_SECOND = 1_000_000;
+    private const RELEASE_LOCK_SCRIPT = <<<'LUA'
+        if redis.call("get", KEYS[1]) == ARGV[1] then
+            return redis.call("del", KEYS[1])
+        end
+
+        return 0
+        LUA;
+
     private int $lockTimeout = 5;
-    private string $lockKeyPrefix = 'session_lock_';
+    private readonly string $lockKeyPrefix;
     private readonly \Redis $redis;
     private int $retryDelay = 10000;
-    private int $maxRetries = 100;
+    /** @var array<string, string> */
+    private array $lockTokens = [];
 
     public function __construct(
         \Redis $redis,
@@ -45,6 +55,7 @@ class SessionWithJsonHandler extends RedisSessionHandler
 
         parent::__construct($redis, $options);
         $this->redis = $redis;
+        $this->lockKeyPrefix = $prefix . 'session_lock_';
     }
 
     public function write($sessionId, $data): bool
@@ -167,22 +178,46 @@ class SessionWithJsonHandler extends RedisSessionHandler
      */
     private function acquireLock(string $sessionId): void
     {
-        $lockKey = $this->lockKeyPrefix . $sessionId;
-        $attempt = 0;
+        $lockKey = $this->getLockKey($sessionId);
+        $lockToken = bin2hex(random_bytes(16));
+        $maxRetries = $this->getMaxRetries();
 
-        while (!$this->redis->set($lockKey, 1, ['NX', 'EX' => $this->lockTimeout])) {
-            if ($attempt >= $this->maxRetries) {
+        for ($attempt = 0; $attempt <= $maxRetries; ++$attempt) {
+            if ($this->redis->set($lockKey, $lockToken, ['NX', 'EX' => $this->lockTimeout])) {
+                $this->lockTokens[$sessionId] = $lockToken;
+
+                return;
+            }
+
+            if ($attempt === $maxRetries) {
                 throw new \RuntimeException('Unable to acquire session lock after multiple retries.');
             }
 
             usleep($this->retryDelay);
-            ++$attempt;
         }
     }
 
     private function releaseLock(string $sessionId): void
     {
-        $lockKey = $this->lockKeyPrefix . $sessionId;
-        $this->redis->del($lockKey);
+        $lockToken = $this->lockTokens[$sessionId] ?? null;
+        if (null === $lockToken) {
+            return;
+        }
+
+        try {
+            $this->redis->eval(self::RELEASE_LOCK_SCRIPT, [$this->getLockKey($sessionId), $lockToken], 1);
+        } finally {
+            unset($this->lockTokens[$sessionId]);
+        }
+    }
+
+    private function getLockKey(string $sessionId): string
+    {
+        return $this->lockKeyPrefix . $sessionId;
+    }
+
+    private function getMaxRetries(): int
+    {
+        return (int) ceil($this->lockTimeout * self::MICROSECONDS_PER_SECOND / $this->retryDelay);
     }
 }

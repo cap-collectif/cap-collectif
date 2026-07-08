@@ -111,7 +111,12 @@ class ValidateContributionMutationTest extends TestCase
             'captcha' => 'captcha-token',
         ]]);
 
-        $this->globalIdResolver->method('resolve')->with($contributionId)->willreturn($this->reply);
+        $this->globalIdResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->with($contributionId, $this->viewer, null)
+            ->willReturn($this->reply)
+        ;
         $this->reply->method('getQuestionnaire')->willReturn($this->questionnaire);
         $this->questionnaireStep->method('isOpen')->willReturn(true);
         $this->questionnaire->method('getStep')->willreturn($this->questionnaireStep);
@@ -201,6 +206,25 @@ class ValidateContributionMutationTest extends TestCase
         $this->validateContributionMutation->__invoke($args, $this->viewer);
     }
 
+    public function testUnknownContributionError(): void
+    {
+        $args = new Argument(['input' => [
+            'contributionId' => 'missingContributionId',
+        ]]);
+
+        $this->globalIdResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->with('missingContributionId', $this->viewer, null)
+            ->willReturn(null)
+        ;
+
+        $this->expectException(UserError::class);
+        $this->expectExceptionMessage('Contribution with ID missingContributionId not found.');
+
+        $this->validateContributionMutation->__invoke($args, $this->viewer);
+    }
+
     /**
      * @return array{Argument, string}
      */
@@ -216,7 +240,16 @@ class ValidateContributionMutationTest extends TestCase
         ]]);
 
         $this->participantHelper->method('getParticipantByToken')->with($token)->willReturn($this->participant);
-        $this->globalIdResolver->method('resolve')->with($contributionId)->willreturn($this->reply);
+        $this->globalIdResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->with(
+                $contributionId,
+                null,
+                $this->callback(static fn ($context): bool => $context instanceof \ArrayObject && true === $context->offsetGet('disable_acl'))
+            )
+            ->willReturn($this->reply)
+        ;
         $this->reply->method('getQuestionnaire')->willReturn($this->questionnaire);
 
         $this->questionnaireStep->method('isOpen')->willReturn(true);

@@ -75,7 +75,7 @@ export const ProposalPreviewVote: React.FC<Props> = ({
   }
 
   if (showRequirementsModal && voteId) {
-    return <ParticipationWorkflow stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
+    return <ParticipationWorkflow stepId={step.id} contributionId={voteId} />
   }
 
   return (

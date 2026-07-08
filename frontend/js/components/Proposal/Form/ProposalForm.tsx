@@ -275,7 +275,7 @@ const onSubmit = (
         throw new Error('Mutation "createProposal" failed.')
       }
 
-      if (!participantToken && !isAuthenticated) {
+      if (!isAuthenticated && response.createProposal.participantToken) {
         const newParticipantToken = response.createProposal.participantToken
         CookieMonster.addParticipantCookie(newParticipantToken)
       }

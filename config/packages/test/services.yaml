@@ -43,4 +43,7 @@ services:
     Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
         arguments:
             $firewallName: '%fos_user.firewall_name%'
-            $translator: '@Capco\AppBundle\Translator\NoTranslator'
+
+    Capco\AppBundle\GraphQL\Mutation\Participant\VerifyParticipantPhoneNumberMutation:
+        arguments:
+            $firewallName: '%fos_user.firewall_name%'

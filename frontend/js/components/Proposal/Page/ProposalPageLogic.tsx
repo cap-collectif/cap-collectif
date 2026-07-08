@@ -208,7 +208,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
 
   if (showRequirementsModal && voteId) {
     return (
-      <ParticipationWorkflow stepId={step.id} contributionId={window.btoa(`AbstractVote:${voteId.toString()}`)} />
+      <ParticipationWorkflow stepId={step.id} contributionId={voteId} />
     )
   }
 

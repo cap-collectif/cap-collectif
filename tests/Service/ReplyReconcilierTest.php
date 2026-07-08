@@ -79,6 +79,22 @@ class ReplyReconcilierTest extends TestCase
         $this->viewer->method('isEmailConfirmed')->willReturn(true);
     }
 
+    public function setUpPhoneRequirement(bool $isSamePhone = true): void
+    {
+        $phoneRequirement = $this->createMock(Requirement::class);
+        $phoneRequirement->method('getType')->willReturn(Requirement::PHONE_VERIFIED);
+
+        $requirements = new ArrayCollection([$phoneRequirement]);
+        $this->questionnaireStep->method('getRequirements')->willReturn($requirements);
+
+        $participantPhone = $isSamePhone ? '+33601020304' : '+33699999999';
+        $this->participant->method('getPhone')->willReturn($participantPhone);
+        $this->viewer->method('getPhone')->willReturn('+33601020304');
+
+        $this->participant->method('isPhoneConfirmed')->willReturn(true);
+        $this->viewer->method('isPhoneConfirmed')->willReturn(true);
+    }
+
     public function testShouldNotReconcileWhenStepIsClosed(): void
     {
         $this->disableCompletionStatusFilter();
@@ -179,6 +195,37 @@ class ReplyReconcilierTest extends TestCase
 
         $reply->expects($this->once())->method('setContributor');
 
+        $this->em->expects($this->once())->method('flush');
+
+        $this->replyReconcilier->reconcile($this->participant, $this->viewer);
+    }
+
+    public function testShouldReconcileWhenPhoneVerifiedRequirementMatches(): void
+    {
+        $this->disableCompletionStatusFilter();
+
+        $this->setUpQuestionnaire();
+        $this->questionnaireStep->method('isClosed')->willReturn(false);
+        $this->setUpPhoneRequirement();
+
+        $reply = $this->createMock(Reply::class);
+        $reply->method('getCompletionStatus')->willReturn(ContributionCompletionStatus::MISSING_REQUIREMENTS);
+
+        $this->replyRepository->method('findBy')->willReturnCallback(function ($criteria) use ($reply) {
+            if (isset($criteria['participant']) && $criteria['participant'] === $this->participant) {
+                return [$reply];
+            }
+
+            if (isset($criteria['author']) && $criteria['author'] === $this->viewer) {
+                return [];
+            }
+
+            return [];
+        });
+
+        $this->questionnaire->method('isMultipleRepliesAllowed')->willReturn(false);
+
+        $reply->expects($this->once())->method('setContributor')->with($this->viewer);
         $this->em->expects($this->once())->method('flush');
 
         $this->replyReconcilier->reconcile($this->participant, $this->viewer);

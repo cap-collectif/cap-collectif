@@ -67,8 +67,14 @@ type Props = {
   contributorConsentPrivacyPolicy?: boolean | null
 }
 
-const goToPosition = (mapRef: L.Map, address: MapCenterObject | null | undefined) =>
-  mapRef?.panTo([address?.lat || 0, address?.lng || 0])
+const isValidLatLng = (lat: number | null | undefined, lng: number | null | undefined) =>
+  Number.isFinite(lat) && Number.isFinite(lng)
+
+const goToPosition = (mapRef: L.Map, address: MapCenterObject | null | undefined) => {
+  if (!address || !isValidLatLng(address.lat, address.lng)) return null
+
+  return mapRef?.panTo([address.lat, address.lng])
+}
 
 const locationIcon = L.divIcon({
   className: 'leaflet-control-locate-location',
@@ -78,13 +84,10 @@ const locationIcon = L.divIcon({
 let locationMarker: any = {}
 
 export const flyToPosition = (map: L.Map, lat: number, lng: number) => {
-  if (map) {
-    map.removeLayer(locationMarker)
-  }
+  if (!map || !isValidLatLng(lat, lng)) return
 
-  if (map) {
-    map.flyTo([lat, lng], 18)
-  }
+  map.removeLayer(locationMarker)
+  map.flyTo([lat, lng], 18)
 
   locationMarker = L.marker([lat, lng], {
     icon: locationIcon,
@@ -210,7 +213,7 @@ export const ProposalLeafletMap = ({
   const [address, setAddress] = useState(null)
   const { width } = useResize()
   const isMobile = width < bootstrapGrid.smMin
-  const markers = proposals.filter(proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng))
+  const markers = proposals.filter(proposal => isValidLatLng(proposal.address?.lat, proposal.address?.lng))
 
   useEffect(() => {
     Emitter.on(MapEvents.OpenPopupOnMap, (addr: MapCenterObject) => {

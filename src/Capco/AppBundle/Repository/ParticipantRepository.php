@@ -27,6 +27,27 @@ use Doctrine\ORM\QueryBuilder;
  */
 class ParticipantRepository extends EntityRepository
 {
+    public function findConfirmedByPhone(string $phone, ?Participant $excludedParticipant = null): ?Participant
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.phone = :phone')
+            ->andWhere('p.phoneConfirmed = true')
+            ->setParameter('phone', $phone)
+            ->orderBy('p.createdAt', 'ASC')
+            ->addOrderBy('p.id', 'ASC')
+            ->setMaxResults(1)
+        ;
+
+        if ($excludedParticipant instanceof Participant) {
+            $qb
+                ->andWhere('p != :excludedParticipant')
+                ->setParameter('excludedParticipant', $excludedParticipant)
+            ;
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findPaginated(
         ?int $limit = null,
         ?int $offset = null,
@@ -233,83 +254,100 @@ class ParticipantRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $where = '';
+        $participantTermFilter = '';
 
         if ($term) {
-            $where .= 'WHERE p.firstname LIKE :term OR p.lastname LIKE :term OR p.email LIKE :term';
+            $participantTermFilter = 'AND (p.firstname LIKE :term OR p.lastname LIKE :term OR p.email LIKE :term)';
         }
 
         if ($step instanceof ProposalStepInterface) {
             $sql = "
-            SELECT count(distinct p.id) FROM (
-                SELECT distinct p.id
-                FROM participant p
-                JOIN votes v ON v.participant_id = p.id AND (v.selection_step_id = :stepId OR v.collect_step_id = :stepId) AND v.completion_status = 'COMPLETED' AND v.is_accounted = 1
-                {$where}
+            SELECT COUNT(participants.id)
+            FROM (
+                SELECT v.participant_id AS id
+                FROM votes v
+                JOIN participant p ON p.id = v.participant_id
+                WHERE v.selection_step_id = :stepId
+                  AND v.completion_status = 'COMPLETED'
+                  AND v.is_accounted = 1
+                  {$participantTermFilter}
                 UNION
-                SELECT distinct p.id
-                FROM participant p
-                JOIN proposal ON proposal.participant_id = p.id
-                    AND proposal.completion_status = 'COMPLETED'
-                    AND proposal.published = 1
-                    AND proposal.is_draft = 0
-                    AND proposal.deleted_at IS NULL
-                JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = :stepId
-                {$where}
-            ) p
+                SELECT v.participant_id AS id
+                FROM votes v
+                JOIN participant p ON p.id = v.participant_id
+                WHERE v.collect_step_id = :stepId
+                  AND v.completion_status = 'COMPLETED'
+                  AND v.is_accounted = 1
+                  {$participantTermFilter}
+                UNION
+                SELECT proposal.participant_id AS id
+                FROM proposal
+                JOIN proposal_form pf ON proposal.proposal_form_id = pf.id AND pf.step_id = :stepId
+                JOIN participant p ON p.id = proposal.participant_id
+                WHERE proposal.completion_status = 'COMPLETED'
+                  AND proposal.published = 1
+                  AND proposal.is_draft = 0
+                  AND proposal.deleted_at IS NULL
+                  {$participantTermFilter}
+            ) participants
         ";
         } elseif ($step instanceof QuestionnaireStep) {
             $sql = "
-                SELECT count(distinct p.id)
-                FROM participant p
-                JOIN reply r ON r.participant_id = p.id AND r.completion_status = 'COMPLETED'
-                JOIN questionnaire q ON r.questionnaire_id = q.id AND q.step_id = :stepId
-                {$where}
+                SELECT COUNT(DISTINCT r.participant_id)
+                FROM questionnaire q
+                JOIN reply r ON r.questionnaire_id = q.id
+                JOIN participant p ON p.id = r.participant_id
+                WHERE q.step_id = :stepId
+                  AND r.completion_status = 'COMPLETED'
+                  {$participantTermFilter}
         ";
         } else {
-            $whereClause = '';
-            if ($term) {
-                $whereClause = ' AND (p.firstname LIKE :term OR p.lastname LIKE :term OR p.email LIKE :term)';
-            }
-
             $sql = "
-                    SELECT COUNT(p.id)
-                    FROM participant p
-                    WHERE (
-                        EXISTS(
-                            SELECT 1
-                            FROM project_abstractstep pas
-                            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
-                            JOIN votes v ON v.participant_id = p.id
-                                AND (v.selection_step_id = s.id OR v.collect_step_id = s.id)
-                                AND v.completion_status = 'COMPLETED'
-                                AND v.is_accounted = 1
-                            WHERE pas.project_id = :projectId
-                        )
-                        OR EXISTS(
-                            SELECT 1
-                            FROM project_abstractstep pas
-                            JOIN step s ON pas.step_id = s.id AND s.step_type IN ('questionnaire')
-                            JOIN questionnaire q ON s.id = q.step_id
-                            JOIN reply r ON r.participant_id = p.id
-                                AND r.questionnaire_id = q.id
-                                AND r.completion_status = 'COMPLETED'
-                            WHERE pas.project_id = :projectId
-                        )
-                        OR EXISTS(
-                            SELECT 1
-                               FROM project_abstractstep pas
-                               JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
-                               JOIN proposal ON proposal.participant_id = p.id
-                                   AND proposal.completion_status = 'COMPLETED'
-                                   AND proposal.published = 1
-                                   AND proposal.is_draft = 0
-                                   AND proposal.deleted_at IS NULL
-                               JOIN proposal_form pf ON proposal.proposal_form_id = pf.id and pf.step_id = s.id
-                               WHERE pas.project_id = :projectId
-                        )
-                    )
-                    {$whereClause}
+                    SELECT COUNT(participants.id)
+                    FROM (
+                        SELECT v.participant_id AS id
+                        FROM project_abstractstep pas
+                        JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                        JOIN votes v ON v.selection_step_id = s.id
+                            AND v.completion_status = 'COMPLETED'
+                            AND v.is_accounted = 1
+                        JOIN participant p ON p.id = v.participant_id
+                        WHERE pas.project_id = :projectId
+                          {$participantTermFilter}
+                        UNION
+                        SELECT v.participant_id AS id
+                        FROM project_abstractstep pas
+                        JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                        JOIN votes v ON v.collect_step_id = s.id
+                            AND v.completion_status = 'COMPLETED'
+                            AND v.is_accounted = 1
+                        JOIN participant p ON p.id = v.participant_id
+                        WHERE pas.project_id = :projectId
+                          {$participantTermFilter}
+                        UNION
+                        SELECT r.participant_id AS id
+                        FROM project_abstractstep pas
+                        JOIN step s ON pas.step_id = s.id AND s.step_type IN ('questionnaire')
+                        JOIN questionnaire q ON s.id = q.step_id
+                        JOIN reply r ON r.questionnaire_id = q.id
+                            AND r.completion_status = 'COMPLETED'
+                        JOIN participant p ON p.id = r.participant_id
+                        WHERE pas.project_id = :projectId
+                          {$participantTermFilter}
+                        UNION
+                        SELECT proposal.participant_id AS id
+                        FROM project_abstractstep pas
+                        JOIN step s ON pas.step_id = s.id AND s.step_type IN ('collect', 'selection')
+                        JOIN proposal_form pf ON pf.step_id = s.id
+                        JOIN proposal ON proposal.proposal_form_id = pf.id
+                            AND proposal.completion_status = 'COMPLETED'
+                            AND proposal.published = 1
+                            AND proposal.is_draft = 0
+                            AND proposal.deleted_at IS NULL
+                        JOIN participant p ON p.id = proposal.participant_id
+                        WHERE pas.project_id = :projectId
+                          {$participantTermFilter}
+                    ) participants
         ";
         }
 
@@ -327,7 +365,7 @@ class ParticipantRepository extends EntityRepository
         $stmt = $em->getConnection()->prepare($sql);
         $stmt->execute($params);
 
-        return $stmt->fetchColumn();
+        return (int) $stmt->fetchColumn();
     }
 
     /**
@@ -720,6 +758,7 @@ class ParticipantRepository extends EntityRepository
         $qb = $this->createQueryBuilder('participant');
 
         $qb
+            ->distinct()
             ->leftJoin(
                 'CapcoAppBundle:ProposalCollectVote',
                 'vote',

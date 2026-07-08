@@ -83,7 +83,7 @@ class ValidateContributionMutation implements MutationInterface
         $contributor = $participant ?? $viewer;
 
         $contributionId = $input->offsetGet('contributionId');
-        $contribution = $this->getContribution($contributionId);
+        $contribution = $this->getContribution($contributionId, $viewer, $participant);
         $step = $this->getStep($contribution);
 
         if (!$step->isOpen()) {
@@ -99,12 +99,17 @@ class ValidateContributionMutation implements MutationInterface
         return ['redirectUrl' => $redirectUrl];
     }
 
-    private function getContribution(string $contributionId): ContributionInterface
+    private function getContribution(string $contributionId, ?User $viewer = null, ?Participant $participant = null): ContributionInterface
     {
-        $contribution = $this->globalIdResolver->resolve($contributionId);
+        $context = null;
+        if (!$viewer && $participant) {
+            $context = new \ArrayObject(['disable_acl' => true]);
+        }
+
+        $contribution = $this->globalIdResolver->resolve($contributionId, $viewer, $context);
 
         if (!$contribution instanceof ContributionInterface) {
-            throw new UserError('Contribution should either be of type Reply, Proposal or Vote');
+            throw new UserError(sprintf('Contribution with ID %s not found.', $contributionId));
         }
 
         return $contribution;

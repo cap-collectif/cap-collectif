@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -43,32 +42,16 @@ class VotesReconcilier extends ContributionsReconcilier
 
         $steps = array_merge($selectionSteps, $collectSteps);
 
-        $isSameEmail = $participant->getEmail() === $contributorTarget->getEmail() && ($participant->isEmailConfirmed() && $contributorTarget->isEmailConfirmed());
-
         /** * @var SelectionStep $step  */
         foreach ($steps as $step) {
             if ($step->isClosed()) {
                 continue;
             }
 
-            $hasSSORequirements = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::SSO === $requirement->getType())->count() > 0;
-            if ($hasSSORequirements) {
-                $this->reconcileByStep($step, $participant, $contributorTarget);
-
+            if (!$this->canReconcileForStep($step, $participant, $contributorTarget)) {
                 continue;
             }
 
-            $hasEmailVerifiedRequirement = $step->getRequirements()->filter(fn (Requirement $requirement) => Requirement::EMAIL_VERIFIED === $requirement->getType())->count() > 0;
-
-            if (!$hasEmailVerifiedRequirement) {
-                continue;
-            }
-
-            // if participant has an email different from the user we skip reconciling because we consider that they are not the same person
-            // otherwise if he has no email set we can reconcile with the logged-in user assuming he is logged-in through the workflow with either email password / sso / magic link
-            if (null !== $participant->getEmail() && !$isSameEmail) {
-                continue;
-            }
             $this->reconcileByStep($step, $participant, $contributorTarget);
         }
     }

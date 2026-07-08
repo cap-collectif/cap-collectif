@@ -611,7 +611,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         const createProposal = response.createProposal
 
         if (createProposal?.proposal) {
-          if (!participantToken && viewerSession === null && createProposal.participantToken) {
+          if (viewerSession === null && createProposal.participantToken) {
             CookieMonster.addParticipantCookie(createProposal.participantToken)
           }
 

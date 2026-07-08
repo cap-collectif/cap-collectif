@@ -1,16 +1,16 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
-import { openPrivacyModal } from './PrivacyModal'
-import type { RegistrationForm_query$key } from '@relay/RegistrationForm_query.graphql'
-import { openChartModal } from './ChartModal'
+import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, CapInputSize, CapUIFontSize, FormLabel, Text } from '@cap-collectif/ui'
-import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
-import { useFormContext } from 'react-hook-form'
+import type { RegistrationForm_query$key } from '@relay/RegistrationForm_query.graphql'
 import Captcha from '@shared/form/Captcha'
 import Password from '@shared/form/Password'
-import { FieldInput, FormControl } from '@cap-collectif/form'
 import Responses from '@shared/form/Responses'
+import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
+import * as React from 'react'
+import { useFormContext } from 'react-hook-form'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { openChartModal } from './ChartModal'
+import { openPrivacyModal } from './PrivacyModal'
 
 const REGEX_USERNAME = RegExp("^[a-zA-Z0-9_\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F-·' ]+$")
 
@@ -154,7 +154,7 @@ export const RegistrationForm: React.FC<Props> = ({ query: queryFragment }) => {
           border="normal"
           backgroundColor="red.100"
           borderColor="red.400"
-          color="red.600"
+          color="red.700"
           mb={5}
           fontWeight={600}
         >

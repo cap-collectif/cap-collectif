@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
+use Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository;
 use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
@@ -37,7 +38,8 @@ class MagicLinkController extends AbstractController
         private readonly EntityManagerInterface $em,
         private readonly VotesReconcilier $votesReconcilier,
         private readonly TranslatorInterface $translator,
-        private readonly ProposalReconcillier $proposalReconcillier
+        private readonly ProposalReconcillier $proposalReconcillier,
+        private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
     ) {
     }
 
@@ -111,9 +113,21 @@ class MagicLinkController extends AbstractController
             $this->replyReconcilier->reconcile($participant, $viewer);
         }
 
+        $this->removePhoneVerificationSms($participant);
         $this->em->remove($participant);
         $this->em->flush();
 
         return null;
+    }
+
+    private function removePhoneVerificationSms(\Capco\AppBundle\Entity\Participant $participant): void
+    {
+        $phoneVerificationSmsList = $this->participantPhoneVerificationSmsRepository->findBy([
+            'participant' => $participant,
+        ]);
+
+        foreach ($phoneVerificationSmsList as $phoneVerificationSms) {
+            $this->em->remove($phoneVerificationSms);
+        }
     }
 }

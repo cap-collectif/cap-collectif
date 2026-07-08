@@ -52,6 +52,28 @@ class UserRepository extends EntityRepository
         $this->logger = $logger;
     }
 
+    public function findConfirmedByPhone(string $phone, ?User $excludedUser = null): ?User
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.phone = :phone')
+            ->andWhere('u.phoneConfirmed = true')
+            ->andWhere('u.confirmationToken IS NULL')
+            ->setParameter('phone', $phone)
+            ->orderBy('u.createdAt', 'ASC')
+            ->addOrderBy('u.id', 'ASC')
+            ->setMaxResults(1)
+        ;
+
+        if ($excludedUser instanceof User) {
+            $qb
+                ->andWhere('u != :excludedUser')
+                ->setParameter('excludedUser', $excludedUser)
+            ;
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findFacebookUsers(): array
     {
         $qb = $this->createQueryBuilder('u');

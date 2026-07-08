@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
+use Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
@@ -25,7 +27,8 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
         private readonly TokenStorageInterface $tokenStorage,
         private readonly ParticipantHelper $participantHelper,
         private readonly VotesReconcilier $votesReconcilier,
-        private readonly ProposalReconcillier $proposalReconcillier
+        private readonly ProposalReconcillier $proposalReconcillier,
+        private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
     ) {
     }
 
@@ -71,6 +74,7 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $this->removePhoneVerificationSms($participant);
         $this->em->remove($participant);
         $this->em->flush();
     }
@@ -87,5 +91,16 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
         $response = $event->getResponse();
         $response->headers->clearCookie('CapcoAnonReply');
         $response->headers->clearCookie('CapcoParticipant');
+    }
+
+    private function removePhoneVerificationSms(Participant $participant): void
+    {
+        $phoneVerificationSmsList = $this->participantPhoneVerificationSmsRepository->findBy([
+            'participant' => $participant,
+        ]);
+
+        foreach ($phoneVerificationSmsList as $phoneVerificationSms) {
+            $this->em->remove($phoneVerificationSms);
+        }
     }
 }

@@ -6,6 +6,7 @@ import VoteStepMapBoundsHandler from './VoteStepMapBoundsHandler'
 import ProposalMarker from './ProposalMarker'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import MobileProposalCard from './MobileProposalCard'
+import { isValidLatLng } from '@utils/leaflet'
 
 type Props = { step: VoteStepMapMarkers_proposalStep$key }
 
@@ -73,10 +74,7 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
   }, [isMobile])
 
   const proposals = useMemo(
-    () =>
-      data.entity.edges
-        ?.map(edge => edge?.node)
-        .filter(node => !!(node?.address && node.address.lat && node.address.lng)) || [],
+    () => data.entity.edges?.map(edge => edge?.node).filter(node => isValidLatLng(node?.address)) || [],
     [data.entity.edges],
   )
 

@@ -7,6 +7,7 @@ use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
@@ -134,6 +135,15 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $token = $args->offsetGet('token');
         $decodedToken = base64_decode((string) $token);
 
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($token);
+        } catch (ParticipantNotFoundException) {
+            return ConnectionBuilder::empty([
+                'creditsSpent' => 0,
+                'creditsLeft' => $step->getBudget(),
+            ]);
+        }
+
         $this->em->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
 
         if ($step instanceof CollectStep) {
@@ -157,7 +167,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 
         $connection = $paginator->auto($args, $totalCount);
 
-        $participant = $this->participantHelper->getParticipantByToken($token);
         $creditsSpent = $this->helper->getSpentCreditsForContributor($participant, $step);
         $connection->{'creditsSpent'} = $creditsSpent;
         $connection->{'creditsLeft'} = $step->getBudget() - $creditsSpent;

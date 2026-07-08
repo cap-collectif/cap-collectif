@@ -73,9 +73,6 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
           console.warn("L'étape n'a pas pu être récupérée") // eslint-disable-line no-console
         }
 
-        console.log('toto', new URLSearchParams(window.location.search).get('token'))
-        // debugger
-
         return (
           <ProposalPageLogic
             queryRef={props}

@@ -45,7 +45,7 @@ export const LoginButton: React.FC<ButtonProps & { query: LoginButton_query$key 
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
-  const loginWithOpenID = query.oauth2sso.edges.some(({ node }) => node.enabled)
+  const loginWithOpenID = query.oauth2sso?.edges?.some(edge => edge?.node?.enabled) ?? false
   const baseUrl = getBaseUrl()
   let redirectUrl: string = baseUrl
 

@@ -1,6 +1,5 @@
 import { Box, Button, CapUIIcon, CapUIIconSize, Flex, Icon, Link, Skeleton, Text } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import useIsMobile from '@shared/hooks/useIsMobile'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import moment from 'moment'
 import React from 'react'
@@ -9,21 +8,22 @@ import { connect, useSelector } from 'react-redux'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { useLocation, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
-import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import UserAvatar from '~/components/User/UserAvatar'
 import { getBaseUrl } from '~/config'
 import type { GlobalState } from '~/types'
 import colors from '~/utils/colors'
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
 import { bootstrapGrid, mediaQueryMobile } from '~/utils/sizes'
 import type { ProposalPageHeader_proposal$data } from '~relay/ProposalPageHeader_proposal.graphql'
 import type { ProposalPageHeader_step$data } from '~relay/ProposalPageHeader_step.graphql'
 import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_viewer.graphql'
-import Image from '~ui/Primitives/Image'
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
 import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
+import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
+import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
+import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
+import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
+import Image from '~ui/Primitives/Image'
+import useIsMobile from '@shared/hooks/useIsMobile'
 
 type Props = {
   title: string | null | undefined
@@ -35,7 +35,6 @@ type Props = {
   shouldDisplayPictures: boolean
   platformLocale: string
   triggerRequirementsModal: (voteId: string) => void
-  proposalReferer?: string | null | undefined
 }
 const Header = styled.header`
   border-bottom: 1px solid ${colors.lightGray};
@@ -165,29 +164,6 @@ const AvatarPlaceholder = () => (
   </Flex>
 )
 
-const stripQueryParams = (value?: string | null): string => {
-  if (!value) {
-    return ''
-  }
-
-  const [pathWithHash] = value.split('?')
-  return pathWithHash || ''
-}
-
-const normalizeStepBackUrl = (value: string | null | undefined): string => {
-  if (!value) {
-    return ''
-  }
-
-  const normalizedValue = stripQueryParams(value.replace(getBaseUrl(), ''))
-
-  if (!normalizedValue || normalizedValue.includes('/contribution/')) {
-    return ''
-  }
-
-  return /^\/project\/[^/]+\/(?:collect|selection|vote)\/[^/]+$/.test(normalizedValue) ? normalizedValue : ''
-}
-
 const BackUrl = ({
   originStepUrl,
   defaultStepUrl,
@@ -201,9 +177,7 @@ const BackUrl = ({
   platformLocale: string
   currentVotableStep?: string | null | undefined
 }) => {
-  const cleanedOriginStepUrl = stripQueryParams(originStepUrl)
-  const cleanedDefaultStepUrl = stripQueryParams(defaultStepUrl)
-  const url = getBaseUrlFromStepUrl(cleanedOriginStepUrl || cleanedDefaultStepUrl)
+  const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl)
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const { projectSlug } = useParams<{ projectSlug?: string }>()
@@ -218,7 +192,17 @@ const BackUrl = ({
   })
 
   const handleGoBack = () => {
-    window.location.href = stripQueryParams(fullUrl)
+    // !important: `fullUrl` won't work on mobile / mobile sized view
+    // Detect if the user is on a mobile device or a small screen
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent) || window.innerWidth < 768
+
+    // If on mobile and there is a previous page in history, use the browser's back() which works better
+    if (isMobile && window.history.length > 1) {
+      window.history.back()
+    } else {
+      // navigate to `fullUrl` as defined in the parent component
+      window.location.href = fullUrl
+    }
   }
 
   return (
@@ -258,7 +242,6 @@ export const ProposalPageHeader = ({
   shouldDisplayPictures,
   platformLocale,
   triggerRequirementsModal,
-  proposalReferer,
 }: Props) => {
   const isMobile = useIsMobile()
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
@@ -296,48 +279,37 @@ export const ProposalPageHeader = ({
   }
 
   const getGoBackUrl = (): string => {
-    const lastStepContainingProposalUrl = normalizeStepBackUrl(proposal?.lastStepContainingProposal?.url)
+    const lastStepContainingProposalUrl = proposal?.lastStepContainingProposal?.url
+    const baseUrl = getBaseUrl()
 
     // 1- If the user comes from the "my votes" view, we redirect them to the last step the proposal is in
     const comesFromVotesView =
       (state?.from && state.from?.includes('view=votes')) ||
       (document?.referrer && document.referrer.includes('view=votes'))
     if (comesFromVotesView && lastStepContainingProposalUrl) {
-      return lastStepContainingProposalUrl
+      return lastStepContainingProposalUrl.replace(baseUrl, '') || ''
     }
 
-    // 2- Prefer the canonical step URL injected by the backend.
-    const canonicalReferer = normalizeStepBackUrl(proposalReferer)
-    if (canonicalReferer) {
-      return canonicalReferer
-    }
-
-    // 3- If the user comes from a step, the link should redirect there
+    // 2- If the user comes from a step, the link should redirect there
     // this works for the new vote step ("vue IDF")
-    const stateFromUrl = normalizeStepBackUrl(state?.from)
-    if (stateFromUrl) {
-      return stateFromUrl
+    if (state?.from) {
+      return state.from.replace(baseUrl, '')
     }
 
-    // 4- Check document.referrer, but only if it points to a valid step page
+    // 3- Check document.referrer, but only if it points to a valid step page
     if (document.referrer) {
-      const referrerPath = normalizeStepBackUrl(document.referrer)
-      const currentPath = stripQueryParams(window.location.pathname + window.location.search)
+      const referrerPath = document.referrer.replace(baseUrl, '')
+      const currentPath = window.location.pathname
       // Only use referrer if it's not the current page
-      const isCurrentPage = referrerPath === currentPath
+      const isCurrentPage = referrerPath === currentPath || referrerPath === currentPath + window.location.search
       if (!isCurrentPage && referrerPath) {
         return referrerPath
       }
     }
 
-    // 5- Fallback: redirect to the last step the proposal is in
+    // 4- Fallback: redirect to the last step the proposal is in
     if (lastStepContainingProposalUrl) {
-      return lastStepContainingProposalUrl
-    }
-
-    const defaultStepUrl = normalizeStepBackUrl(proposal?.form?.step?.url)
-    if (defaultStepUrl) {
-      return defaultStepUrl
+      return lastStepContainingProposalUrl.replace(baseUrl, '')
     }
 
     return ''
@@ -445,7 +417,6 @@ export const ProposalPageHeader = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
-  proposalReferer: state.proposal.referer,
 })
 
 // @ts-ignore

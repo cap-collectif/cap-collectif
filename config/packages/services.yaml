@@ -330,6 +330,10 @@ services:
         arguments:
             $firewallName: '%fos_user.firewall_name%'
 
+    Capco\AppBundle\GraphQL\Mutation\Participant\VerifyParticipantPhoneNumberMutation:
+        arguments:
+            $firewallName: '%fos_user.firewall_name%'
+
     Symfony\Component\Cache\Adapter\ApcuAdapter:
         public: true
 

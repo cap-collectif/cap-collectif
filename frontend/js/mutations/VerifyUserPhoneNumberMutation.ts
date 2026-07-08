@@ -15,6 +15,7 @@ const mutation = graphql`
         id
       }
       errorCode
+      reconciliationMode
     }
   }
 `

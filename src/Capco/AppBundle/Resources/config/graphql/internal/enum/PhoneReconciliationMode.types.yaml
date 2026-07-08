@@ -1,0 +1,12 @@
+PhoneReconciliationMode:
+    type: enum
+    config:
+        name: PhoneReconciliationMode
+        description: 'Available reconciliation modes after a phone verification.'
+        values:
+            NONE:
+                value: !php/const Capco\AppBundle\Enum\PhoneReconciliationMode::NONE
+            PARTICIPANT_MERGED:
+                value: !php/const Capco\AppBundle\Enum\PhoneReconciliationMode::PARTICIPANT_MERGED
+            USER_AUTHENTICATED:
+                value: !php/const Capco\AppBundle\Enum\PhoneReconciliationMode::USER_AUTHENTICATED

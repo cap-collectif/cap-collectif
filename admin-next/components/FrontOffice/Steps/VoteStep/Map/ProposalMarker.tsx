@@ -17,6 +17,7 @@ import convertIconToDs from '@shared/utils/convertIconToDs'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalMarker_proposal$key } from '@relay/ProposalMarker_proposal.graphql'
+import { isValidLatLng } from '@utils/leaflet'
 
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalMarker_proposal on Proposal {
@@ -91,7 +92,7 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
     })
   }, [icon, proposal.category?.color, colors])
 
-  if (!proposal || !proposal.address?.lat || !proposal.address?.lng) return null
+  if (!proposal || !isValidLatLng(proposal.address)) return null
 
   return (
     <Marker

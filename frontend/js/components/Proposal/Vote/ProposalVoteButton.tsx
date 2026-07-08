@@ -323,65 +323,71 @@ const ProposalVoteButton = ({
         }
         return
       } catch (error) {
+        setIsLoading(false)
         return mutationErrorToast(intl)
       }
     } else {
       setIsLoading(true)
-      const response = await AddProposalSmsVoteMutation.commit({
-        token: participantToken ?? '',
-        stepId: currentStep.id,
-        input: {
-          proposalId: proposal.id,
+      try {
+        const response = await AddProposalSmsVoteMutation.commit({
+          token: participantToken ?? '',
           stepId: currentStep.id,
-          token: participantToken,
-        },
-      })
-      setIsLoading(false)
-
-      const errorCode = response?.addProposalSmsVote?.errorCode
-
-      if (errorCode === 'PHONE_ALREADY_USED') {
-        toast({
-          variant: 'danger',
-          content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
+          input: {
+            proposalId: proposal.id,
+            stepId: currentStep.id,
+            token: participantToken,
+          },
         })
-        return
-      }
+        setIsLoading(false)
 
-      if (!participantToken) {
-        const newParticipantToken = response.addProposalSmsVote.participantToken
-        CookieMonster.addParticipantCookie(newParticipantToken)
-        dispatchEvent(VoteStepEvent.NewParticipantToken, {
-          token: newParticipantToken,
-        })
-      }
+        const errorCode = response?.addProposalSmsVote?.errorCode
 
-      const newVote = response.addProposalSmsVote.voteEdge.node
-      let updatedVotesCount = newVote.step.viewerVotes.totalCount || 1
+        if (errorCode === 'PHONE_ALREADY_USED') {
+          toast({
+            variant: 'danger',
+            content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
+          })
+          return
+        }
 
-      if (newVote.completionStatus === 'MISSING_REQUIREMENTS') {
-        updatedVotesCount += 1
-      }
+        if (response.addProposalSmsVote.participantToken) {
+          const newParticipantToken = response.addProposalSmsVote.participantToken
+          CookieMonster.addParticipantCookie(newParticipantToken)
+          dispatchEvent(VoteStepEvent.NewParticipantToken, {
+            token: newParticipantToken,
+          })
+        }
 
-      let hasReachedVotesMin = true
-      if (votesMin && votesMin > 1) {
-        hasReachedVotesMin = votesMin === updatedVotesCount
-      }
+        const newVote = response.addProposalSmsVote.voteEdge.node
+        let updatedVotesCount = newVote.step.viewerVotes.totalCount || 1
 
-      const { shouldTriggerConsentInternalCommunication } = response.addProposalSmsVote
+        if (newVote.completionStatus === 'MISSING_REQUIREMENTS') {
+          updatedVotesCount += 1
+        }
 
-      if ((!isMeetingRequirements || shouldTriggerConsentInternalCommunication) && hasReachedVotesMin) {
-        triggerRequirementsModal(newVote.id)
-        return
-      }
+        let hasReachedVotesMin = true
+        if (votesMin && votesMin > 1) {
+          hasReachedVotesMin = votesMin === updatedVotesCount
+        }
 
-      if (response && hasReachedVotesMin) {
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({
-            id: 'vote.add_success',
-          }),
-        })
+        const { shouldTriggerConsentInternalCommunication } = response.addProposalSmsVote
+
+        if ((!isMeetingRequirements || shouldTriggerConsentInternalCommunication) && hasReachedVotesMin) {
+          triggerRequirementsModal(newVote.id)
+          return
+        }
+
+        if (response && hasReachedVotesMin) {
+          toast({
+            variant: 'success',
+            content: intl.formatMessage({
+              id: 'vote.add_success',
+            }),
+          })
+        }
+      } catch (error) {
+        setIsLoading(false)
+        return mutationErrorToast(intl)
       }
     }
   }

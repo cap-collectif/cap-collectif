@@ -94,6 +94,9 @@ const formatBounds = bounds => {
   return bounds
 }
 
+const isValidLatLng = (lat: number | null | undefined, lng: number | null | undefined) =>
+  Number.isFinite(lat) && Number.isFinite(lng)
+
 const Mark = ({ marker, icon }) => (
   <Marker key={marker.id} position={[marker.googleMapsAddress.lat, marker.googleMapsAddress.lng]} icon={icon}>
     <Popup autoPanPadding={[50, 50]} maxWidth={250} minWidth={250}>
@@ -134,7 +137,9 @@ const Markers = ({ markers }) => {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(marker =>
-            marker.googleMapsAddress ? <Mark key={marker.id} marker={marker} icon={getMarkerIcon(marker)} /> : null,
+            marker.googleMapsAddress && isValidLatLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng) ? (
+              <Mark key={marker.id} marker={marker} icon={getMarkerIcon(marker)} />
+            ) : null,
           )}
     </>
   )
@@ -165,7 +170,7 @@ export const LeafletMap = ({
       .map(edge => edge.node)
       .filter(Boolean)
       .map(marker => {
-        if (marker.googleMapsAddress) {
+        if (marker.googleMapsAddress && isValidLatLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng)) {
           markersGroup.push(L.latLng(marker.googleMapsAddress.lat, marker.googleMapsAddress.lng))
         }
       })

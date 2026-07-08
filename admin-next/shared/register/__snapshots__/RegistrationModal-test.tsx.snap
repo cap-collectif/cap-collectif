@@ -316,7 +316,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 class="sc-bcXGCL grQllb"
               >
                 <span
-                  class="sc-bcXGCL sc-aded36a0-0 keKWCf bYouec"
+                  class="sc-bcXGCL sc-4261d69-0 keKWCf heodyy"
                 >
                   registration.charte
                 </span>
@@ -656,7 +656,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 class="sc-bcXGCL grQllb"
               >
                 <span
-                  class="sc-bcXGCL sc-aded36a0-0 keKWCf bYouec"
+                  class="sc-bcXGCL sc-4261d69-0 keKWCf heodyy"
                 >
                   registration.charte
                 </span>

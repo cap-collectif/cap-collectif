@@ -10992,6 +10992,13 @@ type PendingOrganizationInvitationEdge {
   cursor: String!
 }
 
+"""Available reconciliation modes after a phone verification."""
+enum PhoneReconciliationMode {
+  NONE
+  PARTICIPANT_MERGED
+  USER_AUTHENTICATED
+}
+
 """Requires a phone"""
 type PhoneRequirement implements Node & Requirement {
   """The ID of an object"""
@@ -22630,6 +22637,9 @@ type VerifyParticipantPhoneNumberPayload {
 
   """The error code, if failing."""
   errorCode: VerifySMSErrorCode
+
+  """The reconciliation mode applied after phone verification."""
+  reconciliationMode: PhoneReconciliationMode!
   clientMutationId: String
 }
 
@@ -22639,6 +22649,9 @@ Available errors for an `verifyParticipantPhoneNumber and verifyUserPhoneNumber`
 enum VerifySMSErrorCode {
   """The given phone is already confirmed."""
   PHONE_ALREADY_CONFIRMED
+
+  """The given phone is already used by another confirmed user."""
+  PHONE_ALREADY_USED_BY_ANOTHER_USER
 
   """The given given code is expired."""
   CODE_EXPIRED
@@ -22665,6 +22678,9 @@ type VerifyUserPhoneNumberPayload {
 
   """The error code, if failing."""
   errorCode: VerifySMSErrorCode
+
+  """The reconciliation mode applied after phone verification."""
+  reconciliationMode: PhoneReconciliationMode!
   clientMutationId: String
 }
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -23,7 +24,17 @@ class ConsentInternalCommunicationController extends Controller
      */
     public function participantConsentInternalCommunicationAction(string $email, string $token): Response
     {
-        $participant = $this->participantHelper->getParticipantByToken($token);
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($token);
+        } catch (ParticipantNotFoundException) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
+            );
+
+            return $this->redirectToRoute('app_homepage');
+        }
+
         $participant->setConsentInternalCommunication(true);
         $participant->setEmail($email);
 

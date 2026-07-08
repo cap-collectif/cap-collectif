@@ -5,6 +5,7 @@ const VerifyUserPhoneNumberMutation = /* GraphQL */ `
   mutation VerifyUserPhoneNumber($input: VerifyUserPhoneNumberInput!) {
     verifyUserPhoneNumber(input: $input) {
       errorCode
+      reconciliationMode
       user {
         email
         phoneConfirmed

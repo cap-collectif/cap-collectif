@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Box, CapUIFontSize, Flex, Input } from '@cap-collectif/ui'
+import * as React from 'react'
 import { useIntl } from 'react-intl'
 import getBaseUrl from '../utils/getBaseUrl'
 
@@ -171,7 +171,15 @@ const CaptchetatCaptcha = React.forwardRef<HTMLInputElement, Props>(({ onChange,
               onClick={playSound}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="25" height="25" viewBox="0 0 75 75">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.0"
+                width="25"
+                height="25"
+                viewBox="0 0 75 75"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path
                   d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
                   style={{ stroke: '#111', strokeWidth: 5, strokeLinejoin: 'round', fill: '#111' }}
@@ -189,7 +197,15 @@ const CaptchetatCaptcha = React.forwardRef<HTMLInputElement, Props>(({ onChange,
               onClick={fetchImage}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 17 20" fill="none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 17 20"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
                 <path
                   d="M9.00003 4.0001C11.1 4.0001 13.1 4.8001 14.6 6.3001C17.7 9.4001 17.7 14.5001 14.6 17.6001C12.8 19.5001 10.3 20.2001 7.90003 19.9001L8.40003 17.9001C10.1 18.1001 11.9 17.5001 13.2 16.2001C15.5 13.9001 15.5 10.1001 13.2 7.7001C12.1 6.6001 10.5 6.0001 9.00003 6.0001V10.6001L4.00003 5.6001L9.00003 0.600098V4.0001ZM3.30003 17.6001C0.700029 15.0001 0.300029 11.0001 2.10003 7.9001L3.60003 9.4001C2.50003 11.6001 2.90003 14.4001 4.80003 16.2001C5.30003 16.7001 5.90003 17.1001 6.60003 17.4001L6.00003 19.4001C5.00003 19.0001 4.10003 18.4001 3.30003 17.6001V17.6001Z"
                   fill="black"
@@ -212,11 +228,12 @@ const CaptchetatCaptcha = React.forwardRef<HTMLInputElement, Props>(({ onChange,
             value={code}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCodeChange(e.target.value)}
             placeholder={intl.formatMessage({ id: 'captchetat.input.placeholder' })}
+            title={intl.formatMessage({ id: 'captchetat.input.placeholder' })}
             autoComplete="off"
           />
         </Flex>
         {error ? (
-          <Box color="red.500" lineHeight="normal" fontSize={CapUIFontSize.BodyRegular} role="alert" mt={1}>
+          <Box color="red.700" lineHeight="normal" fontSize={CapUIFontSize.BodyRegular} role="alert" mt={1}>
             {intl.formatMessage({ id: error })}
           </Box>
         ) : null}

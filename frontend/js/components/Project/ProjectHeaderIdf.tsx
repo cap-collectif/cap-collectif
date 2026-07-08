@@ -1,9 +1,7 @@
 import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 import { graphql, useFragment } from 'react-relay'
 import htmlDecode from '~/components/Utils/htmlDecode'
-import { GlobalState } from '~/types'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
 import type { ProjectHeaderIdf_project$key } from '~relay/ProjectHeaderIdf_project.graphql'
 
@@ -38,10 +36,10 @@ type Props = {
 
 const Counter = ({ label, value }: { label: string; value: number }) => (
   <Flex direction="column" spacing={1} minWidth="max-content">
-    <Text fontSize={CapUIFontSize.BodySmall} fontWeight="semibold" color="white">
+    <Text fontSize={CapUIFontSize.BodySmall} fontWeight="semibold" color="inherit">
       {label}
     </Text>
-    <Text fontSize={CapUIFontSize.Headline} fontWeight="semibold" color="white">
+    <Text fontSize={CapUIFontSize.Headline} fontWeight="semibold" color="inherit">
       {formatBigNumber(value)}
     </Text>
   </Flex>
@@ -50,7 +48,6 @@ const Counter = ({ label, value }: { label: string; value: number }) => (
 const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const data = useFragment(FRAGMENT, project)
-  const mainColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
   const counters = React.useMemo(() => {
     const votesTotalCount = (data?.votes?.totalCount ?? 0) + (data?.paperVotesTotalCount ?? 0)
     const participantsTotalCount = data?.contributors?.totalCount
@@ -94,11 +91,11 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
         href={link.href}
         fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.BodyRegular]}
         fontWeight="regular"
-        color="white"
+        color="inherit"
         sx={{
           textDecoration: 'none',
-          '&:hover': { textDecoration: 'underline', color: 'white' },
-          '&:focus': { textDecoration: 'underline', color: 'white' },
+          '&:hover': { textDecoration: 'underline', color: 'inherit' },
+          '&:focus': { textDecoration: 'underline', color: 'inherit' },
         }}
       >
         {link.label}
@@ -112,10 +109,12 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
       alignItems={['flex-start', 'center']}
       justifyContent="space-between"
       width="100%"
-      bg={mainColor || 'neutral-gray.900'}
+      bg={'transparent'}
+      color="white"
       paddingY={[6, 4]}
       paddingX={[4, 8]}
       minHeight="94px"
+      sx={{ '& *': { color: 'inherit' } }}
     >
       {/* Left: title + counters */}
       <Flex
@@ -136,7 +135,7 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
               : [CapUIFontSize.BodyRegular, CapUIFontSize.BodyLarge]
           }
           fontWeight="semibold"
-          color="white"
+          color="inherit"
           alignSelf="start"
         >
           {htmlDecode(title)}
@@ -163,7 +162,7 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
           aria-label="Ouvrir le menu"
           aria-expanded={isMenuOpen}
         >
-          <Icon name={CapUIIcon.Burger} size={CapUIIconSize.Md} color="white" />
+          <Icon name={CapUIIcon.Burger} size={CapUIIconSize.Md} color="inherit" />
         </Box>
         {isMenuOpen && (
           <>

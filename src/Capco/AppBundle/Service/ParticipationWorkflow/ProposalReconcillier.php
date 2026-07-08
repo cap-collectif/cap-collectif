@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Service\ParticipationWorkflow;
 
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
-use Capco\AppBundle\Entity\Requirement;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProposalReconcillier extends ContributionsReconcilier
@@ -27,10 +26,7 @@ class ProposalReconcillier extends ContributionsReconcilier
                 continue;
             }
 
-            $isSameEmail = $participant->getEmail() === $contributorTarget->getEmail() && ($participant->isEmailConfirmed() && $contributorTarget->isEmailConfirmed());
-
-            $hasSSORequirement = $step->getRequirements()?->filter(fn (Requirement $requirement) => Requirement::SSO === $requirement->getType())->count() > 0;
-            if (!$hasSSORequirement && !$isSameEmail) {
+            if (!$step || !$this->canReconcileForStep($step, $participant, $contributorTarget)) {
                 continue;
             }
 

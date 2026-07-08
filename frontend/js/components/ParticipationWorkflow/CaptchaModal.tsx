@@ -1,12 +1,12 @@
+import { Box, CapUIFontSize, Flex, Text, useMultiStepModal } from '@cap-collectif/ui'
 import React from 'react'
-import Captcha from '~/components/Form/Captcha'
 import { useIntl } from 'react-intl'
-import { Box, Flex, Text, useMultiStepModal, CapUIFontSize } from '@cap-collectif/ui'
-import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
-import { fakeTimer } from '~/utils/timer'
+import Captcha from '~/components/Form/Captcha'
 import BinocularsSVG from '~/components/ParticipationWorkflow/assets/BinocularsSVG'
+import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { CenteredLogoLayout } from '~/components/ParticipationWorkflow/ModalLayoutHeader'
 import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/ParticipationWorkflowContext'
+import { fakeTimer } from '~/utils/timer'
 
 type Props = {
   onCaptchaSuccess?: () => void
@@ -58,7 +58,7 @@ const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
             }}
           />
           {captchaError ? (
-            <Text mt={2} color="red.800" fontSize={CapUIFontSize.BodySmall} role="alert">
+            <Text mt={2} color="red.700" fontSize={CapUIFontSize.BodySmall} role="alert">
               {intl.formatMessage({ id: captchaError })}
             </Text>
           ) : null}

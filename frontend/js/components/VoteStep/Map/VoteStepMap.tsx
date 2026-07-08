@@ -27,6 +27,7 @@ import {
   VoteStepEvent,
   DELAY_BEFORE_PROPOSAL_REMOVAL,
   boundsToLeaflet,
+  isValidLatLng,
   parseLatLngBounds,
   DELAY_BEFORE_MAP_RELOADING,
   Bounds,
@@ -56,9 +57,12 @@ type Props = {
   contributorConsentPrivacyPolicy?: boolean | null
 }
 
-type ProposalFormContributionState = {
-  readonly contribuable?: boolean | null
-} | null | undefined
+type ProposalFormContributionState =
+  | {
+      readonly contribuable?: boolean | null
+    }
+  | null
+  | undefined
 
 export const isProposalCreationAvailableOnMap = (
   stepKind: string | null | undefined,
@@ -232,7 +236,7 @@ export const VoteStepMap = ({
     data.proposals.edges
       ?.map(edge => edge?.node)
       .filter(Boolean)
-      .filter(proposal => !!(proposal?.address && proposal.address.lat && proposal.address.lng)) || []
+      .filter(proposal => isValidLatLng(proposal?.address)) || []
   const proposal = data.proposals.edges?.map(edge => edge?.node).find(p => p?.id === selectedProposal)
   const proposalForm = data.form
   const dispatch = useDispatch()

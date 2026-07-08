@@ -116,11 +116,14 @@ export const CapcoTileLayer = () => <MapLibreTileLayer />
 export const parseLatLng = (latlng: string) => {
   try {
     const value = JSON.parse(latlng)
-    return value
+    return isValidLatLng(value) ? value : null
   } catch (e) {
     return null
   }
 }
+
+export const isValidLatLng = (value?: { lat?: number | null; lng?: number | null } | null) =>
+  Number.isFinite(value?.lat) && Number.isFinite(value?.lng)
 
 type Bounds = {
   readonly topLeft: {
@@ -139,7 +142,7 @@ export const parseLatLngBounds = (latlngBounds: string) => {
   try {
     const value = JSON.parse(latlngBounds)
 
-    if (value.topLeft && value.bottomRight) {
+    if (isValidLatLng(value.topLeft) && isValidLatLng(value.bottomRight)) {
       const bounds = L.latLngBounds(boundsToLeaflet(value))
       if (bounds.isValid()) return value
     }

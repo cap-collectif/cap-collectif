@@ -76,11 +76,12 @@ export const ShieldBody = ({ query, loginWithOpenId }: Props) => {
 
 export const ShieldPage = () => {
   const query = useLazyLoadQuery<ShieldPageQuery>(QUERY, {})
+  const loginWithOpenId = query.oauth2sso?.edges?.some(edge => edge?.node?.enabled) ?? false
 
   return (
     <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
       <div className="panel-body">
-        <ShieldBody query={query} loginWithOpenId={query.oauth2sso.edges.some(({ node }) => node.enabled)} />
+        <ShieldBody query={query} loginWithOpenId={loginWithOpenId} />
       </div>
     </div>
   )

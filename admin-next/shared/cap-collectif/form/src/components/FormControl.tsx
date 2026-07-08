@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import type { FC } from 'react'
-import React, { useId } from 'react'
-import { useIntl } from 'react-intl'
-import { Control, useController, FormState } from 'react-hook-form'
 import {
-  CapInputSize,
   FormControl as CapFormControl,
   FormControlProps as CapFormControlProps,
+  CapInputSize,
   FormErrorMessage,
 } from '@cap-collectif/ui'
+import type { FC } from 'react'
+import React, { useId } from 'react'
+import { Control, FormState, useController } from 'react-hook-form'
+import { useIntl } from 'react-intl'
 
 export interface FormControlProps extends CapFormControlProps {
   name: string
@@ -101,7 +101,7 @@ export const FormControl: FC<FormControlProps> = ({
       {childrenWithProps}
 
       {isInvalid && error?.message && (
-        <FormErrorMessage color="red.600" id={errorFieldId}>
+        <FormErrorMessage color="red.700" id={errorFieldId}>
           {error.message}
         </FormErrorMessage>
       )}
