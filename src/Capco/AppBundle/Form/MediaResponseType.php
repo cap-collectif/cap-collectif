@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
@@ -31,6 +32,7 @@ class MediaResponseType extends AbstractType
                 ],
             ])
             ->add('user', EntityType::class, ['class' => User::class])
+            ->add('participant', EntityType::class, ['class' => Participant::class])
         ;
 
         $builder->add('position', HiddenType::class, [

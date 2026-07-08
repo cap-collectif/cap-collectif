@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
@@ -21,6 +22,7 @@ class ValueResponseType extends AbstractType
             ->add('value', TextType::class)
             ->add('question', EntityType::class, ['class' => AbstractQuestion::class])
             ->add('user', EntityType::class, ['class' => User::class])
+            ->add('participant', EntityType::class, ['class' => Participant::class])
         ;
 
         $builder->add('position', HiddenType::class, [

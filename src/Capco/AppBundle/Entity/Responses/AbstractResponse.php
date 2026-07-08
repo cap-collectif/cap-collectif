@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
@@ -65,6 +66,12 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $user = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Participant", cascade={"persist"})
+     * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private ?Participant $participant = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
@@ -132,6 +139,18 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
     public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    public function setParticipant(?Participant $participant = null): self
+    {
+        $this->participant = $participant;
+
+        return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
     }
 
     /**
