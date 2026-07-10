@@ -129,7 +129,7 @@ const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) =
           </Flex>
           <FormControl name="media" control={control}>
             <FieldInput
-              format=".jpg,.png,.gif,.svg"
+              format=".jpg,.png,.gif"
               maxSize={500000}
               id="media"
               name="media"
@@ -142,7 +142,7 @@ const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) =
               uploadURI={`${localConfig.getApiUrl()}/files`}
             />
             <FormGuideline>
-              {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png, gif, svg' })}
+              {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png, gif' })}
               {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '500ko' })}
               {intl.formatMessage({ id: 'min-size-dynamic' }, { width: '300', height: '300' })}
             </FormGuideline>
