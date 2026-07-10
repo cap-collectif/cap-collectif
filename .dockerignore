@@ -1,4 +1,6 @@
-#node_modules
+/node_modules
+/admin-next/node_modules
+/cypress/node_modules
 codemod
 features
 spec

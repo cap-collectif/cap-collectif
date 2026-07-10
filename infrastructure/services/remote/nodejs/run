@@ -4,4 +4,32 @@ echo "[$(date -u)][NODEJS] Started!"
 
 cd /var/www/admin-next
 
-exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- start
+export PORT="${ADMIN_NEXT_PORT:-3000}"
+export HOSTNAME="0.0.0.0"
+
+SERVER_FILE=""
+
+if [ -f server.js ]; then
+    SERVER_FILE="server.js"
+elif [ -f admin-next/server.js ]; then
+    SERVER_FILE="admin-next/server.js"
+fi
+
+if [ -z "$SERVER_FILE" ]; then
+    echo "[$(date -u)][NODEJS] Unable to find standalone server.js"
+    exit 1
+fi
+
+cd "$(dirname "$SERVER_FILE")"
+echo "[$(date -u)][NODEJS] Using standalone server: $SERVER_FILE"
+
+if [ ! -d .next/static ] && [ -d /var/www/admin-next/.next/static ]; then
+    mkdir -p .next
+    ln -s /var/www/admin-next/.next/static .next/static
+fi
+
+if [ ! -d public ] && [ -d /var/www/admin-next/public ]; then
+    ln -s /var/www/admin-next/public public
+fi
+
+exec node server.js

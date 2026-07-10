@@ -4,6 +4,7 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  output: 'standalone',
   // TODO enable this
   reactStrictMode: false,
   basePath: '',

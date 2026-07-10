@@ -290,10 +290,9 @@ COPY --chown=capco:capco config /var/www/config
 COPY --chown=capco:capco fixtures /var/www/fixtures
 
 # -- NextJS app (admin-next) --
-# Make sure "admin-next/.next" is built during previous CI step
-# For now we copy everything, but it can be improved see https://nextjs.org/docs/deployment#docker-image
-COPY --chown=capco:capco admin-next /var/www/admin-next
-COPY --chown=capco:capco node_modules /var/www/node_modules
+COPY --chown=capco:capco admin-next/.next/standalone /var/www/admin-next
+COPY --chown=capco:capco admin-next/.next/static /var/www/admin-next/.next/static
+COPY --chown=capco:capco admin-next/public /var/www/admin-next/public
 
 RUN mkdir -m 755 -p /tmp/phpstan/cache/PHPStan/
 
