@@ -61,8 +61,6 @@ Il est possible de faire la même chose avec [prettier](https://medium.com/@dyan
 
 <div id="yarn-audit-fix">Appliquer les patches de mise à jour des dépendances</div>
 ---
-A ce jour, yarn ne dispose pas de l'équivalent de `npm audit fix`.
+Lancez la commande `yarn audit` afin d'identifier les dépendances présentant des failles.
 
-Le paquet [yarn-audit-fix](https://www.npmjs.com/package/yarn-audit-fix) a été ajouté pour répondre à ce besoin.
-
-Lancez la commande `yarn audit` afin d'identifier les dépendances présentant des failles, puis lancez la commande `yarn yarn-audit-fix` pour faire les mises à jour nécessaires.
+Pour corriger une faille sur une dépendance transitive, ajoutez une entrée dans le champ `resolutions` du `package.json` racine pour forcer une version corrigée, puis relancez `yarn install`. Pour une dépendance directe, mettez à jour sa version dans le `package.json` concerné.

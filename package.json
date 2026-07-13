@@ -261,11 +261,9 @@
         "moment-locales-webpack-plugin": "^1.2.0",
         "moment-timezone": "^0.5.45",
         "moment-timezone-data-webpack-plugin": "^1.5.1",
-        "now": "19.2.0",
         "papaparse": "^5.2.0",
         "postcss": "7",
         "postcss-loader": "3",
-        "postinstall-postinstall": "^2.1.0",
         "prettier": "^2.5.1",
         "process": "^0.11.10",
         "react": "18.2.0",
@@ -402,8 +400,7 @@
         "lint-staged": "^10.0.7",
         "pre-commit": "^1.2.2",
         "typescript": "^5.8.3",
-        "vscode-apollo-relay": "^1.5.2",
-        "yarn-audit-fix": "^10.1.1"
+        "vscode-apollo-relay": "^1.5.2"
     },
     "packageManager": "yarn@1.22.22"
 }
