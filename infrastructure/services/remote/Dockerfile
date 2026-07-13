@@ -235,30 +235,12 @@ RUN set -eux; \
   node --version; \
   npm --version
 
-ENV YARN_VERSION 1.22.13
+# Yarn is provided by corepack: the version is resolved at runtime from the
+# "packageManager" field of the project package.json, so upgrading Yarn does
+# not require rebuilding this image.
+RUN corepack enable
 
-RUN set -ex \
-  && for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-    6D98490C6F1ACDDD448E45954F77679369475BAA \
-  ; do \
-    gpg --batch --keyserver hkps://keyserver.ubuntu.com --recv-keys "$key" || \
-    gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
-    gpg --batch --keyserver hkps://pgp.mit.edu --recv-keys "$key" ; \
-    gpg --batch --list-keys "$key" > /dev/null ; \
-  done \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
-  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && mkdir -p /opt \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  # smoke test
-  && yarn --version
-
-RUN yarn global add pm2
+RUN npm install -g pm2
 
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
 RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates

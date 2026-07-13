@@ -127,14 +127,12 @@ RUN set -eux; \
   node --version; \
   npm --version
 
-ENV YARN_VERSION 1.22.13
+# Yarn is provided by corepack: the version is resolved at runtime from the
+# "packageManager" field of the project package.json, so upgrading Yarn does
+# not require rebuilding this image.
+RUN corepack enable
 
-RUN set -ex \
-  && corepack enable \
-  && corepack prepare "yarn@${YARN_VERSION}" --activate \
-  && yarn --version
-
-RUN yarn global add pm2
+RUN npm install -g pm2
 
 # Install blackfire PHP Probe
 #RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
