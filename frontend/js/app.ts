@@ -99,7 +99,7 @@ require('./modernizr')
 require('es6-promise')
 
 if (!global.fetch) {
-  require('fetch')
+  require('whatwg-fetch')
 }
 
 if (!Modernizr.intl) {
