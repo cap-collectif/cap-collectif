@@ -59,6 +59,11 @@ export default new (class ProposalVoteListPage {
     if (hasVotesRanking) {
       this.updateVotesMutation(userAuthenticationState).wait()
     }
+    // The app dispatches closeVoteModal() in the mutation's .then(), which can run
+    // after cy.wait() resolves (it resolves on the network response). Wait for the
+    // modal to actually close, otherwise the delayed closeVoteModal() can close the
+    // modal opened by the next vote, making the test flaky in CI.
+    cy.contains('proposal.validate.votes').should('not.exist')
   }
 
   validateSimpleVote(proposalId: string, userAuthenticationState: UserAuthenticationState, hasVotesRanking = false) {

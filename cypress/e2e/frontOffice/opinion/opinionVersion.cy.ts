@@ -26,7 +26,13 @@ describe('Opinion versions actions', () => {
     cy.get('.loader').should('not.exist')
 
     cy.get('#opinion-delete').should('exist').click({ force: true })
+
+    cy.interceptGraphQLOperation({ operationName: 'DeleteVersionMutation' })
     cy.get('#confirm-opinion-delete').should('exist').should('be.visible').click({ force: true })
+    cy.wait('@DeleteVersionMutation', { timeout: 10000 })
+    // The app redirects to the section page once the deletion succeeds,
+    // wait for it so the next visit does not race with the redirect
+    cy.url().should('not.include', '/versions/')
 
     OpinionPage.visitVersionPage('NavBarMenuQuery')
     cy.contains('error.404.title').should('be.visible')
