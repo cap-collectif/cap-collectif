@@ -1,7 +1,40 @@
 /* eslint-env jest */
 import { shallow } from 'enzyme'
 import { $fragmentRefs, $refType } from '~/mocks'
-import { ProposalPageHeader } from './ProposalPageHeader'
+import { prepareProposalBackNavigation, ProposalPageHeader } from './ProposalPageHeader'
+
+describe('prepareProposalBackNavigation', () => {
+  it('removes participation workflow parameters from the step URL', () => {
+    expect(
+      prepareProposalBackNavigation(
+        '/project/test-project/collect/test-step?workflow=&contributionId=UHJvcG9zYWw6cHJvcG9zYWwx',
+      ),
+    ).toEqual({
+      returnUrl: '/project/test-project/collect/test-step',
+      comesFromParticipationWorkflow: true,
+    })
+  })
+
+  it('preserves unrelated parameters and the hash', () => {
+    expect(
+      prepareProposalBackNavigation(
+        '/project/test-project/collect/test-step?workflow=&view=map&contributionId=proposal-id#proposals',
+      ),
+    ).toEqual({
+      returnUrl: '/project/test-project/collect/test-step?view=map#proposals',
+      comesFromParticipationWorkflow: true,
+    })
+  })
+
+  it('leaves regular step URLs unchanged', () => {
+    const stepUrl = '/project/test-project/collect/test-step?view=votes'
+
+    expect(prepareProposalBackNavigation(stepUrl)).toEqual({
+      returnUrl: stepUrl,
+      comesFromParticipationWorkflow: false,
+    })
+  })
+})
 
 describe('<ProposalPageHeader />', () => {
   const proposal = {

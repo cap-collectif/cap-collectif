@@ -164,6 +164,42 @@ const AvatarPlaceholder = () => (
   </Flex>
 )
 
+type ProposalBackNavigation = {
+  returnUrl: string
+  comesFromParticipationWorkflow: boolean
+}
+
+/**
+ * Build a safe return URL for the proposal page.
+ *
+ * ProposalStepPage opens the participation workflow when `workflow` and
+ * `contributionId` are present. Those parameters can survive in the referrer
+ * after a participant submits a proposal, so they must not be kept in the
+ * return URL. Other query parameters and the hash are preserved.
+ */
+export const prepareProposalBackNavigation = (rawReturnUrl?: string | null): ProposalBackNavigation => {
+  if (!rawReturnUrl) {
+    return { returnUrl: '', comesFromParticipationWorkflow: false }
+  }
+
+  const parsedReturnUrl = new URL(rawReturnUrl, window.location.origin)
+  const comesFromParticipationWorkflow =
+    parsedReturnUrl.searchParams.has('workflow') || parsedReturnUrl.searchParams.has('contributionId')
+
+  if (!comesFromParticipationWorkflow) {
+    return { returnUrl: rawReturnUrl, comesFromParticipationWorkflow }
+  }
+
+  parsedReturnUrl.searchParams.delete('workflow')
+  parsedReturnUrl.searchParams.delete('contributionId')
+
+  // URL.toString() would include window.location.origin, while getBaseUrlFromStepUrl expects a relative URL.
+  return {
+    returnUrl: `${parsedReturnUrl.pathname}${parsedReturnUrl.search}${parsedReturnUrl.hash}`,
+    comesFromParticipationWorkflow,
+  }
+}
+
 const BackUrl = ({
   originStepUrl,
   defaultStepUrl,
@@ -177,7 +213,9 @@ const BackUrl = ({
   platformLocale: string
   currentVotableStep?: string | null | undefined
 }) => {
-  const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl)
+  const rawReturnUrl = originStepUrl || defaultStepUrl
+  const { returnUrl, comesFromParticipationWorkflow } = prepareProposalBackNavigation(rawReturnUrl)
+  const url = getBaseUrlFromStepUrl(returnUrl)
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const { projectSlug } = useParams<{ projectSlug?: string }>()
@@ -192,15 +230,12 @@ const BackUrl = ({
   })
 
   const handleGoBack = () => {
-    // !important: `fullUrl` won't work on mobile / mobile sized view
-    // Detect if the user is on a mobile device or a small screen
     const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent) || window.innerWidth < 768
+    const useBrowserHistoryBack = isMobile && window.history.length > 1 && !comesFromParticipationWorkflow
 
-    // If on mobile and there is a previous page in history, use the browser's back() which works better
-    if (isMobile && window.history.length > 1) {
+    if (useBrowserHistoryBack) {
       window.history.back()
     } else {
-      // navigate to `fullUrl` as defined in the parent component
       window.location.href = fullUrl
     }
   }
