@@ -34,6 +34,17 @@ describe('prepareProposalBackNavigation', () => {
       comesFromParticipationWorkflow: false,
     })
   })
+
+  it('ignores the requirements workflow URL after email confirmation', () => {
+    expect(
+      prepareProposalBackNavigation(
+        '/requirements/step/Q29sbGVjdFN0ZXA6c3RlcC1pZA==/contribution/UHJvcG9zYWw6cHJvcG9zYWwtaWQ=',
+      ),
+    ).toEqual({
+      returnUrl: '',
+      comesFromParticipationWorkflow: true,
+    })
+  })
 })
 
 describe('<ProposalPageHeader />', () => {

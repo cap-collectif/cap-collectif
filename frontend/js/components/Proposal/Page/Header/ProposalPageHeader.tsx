@@ -173,8 +173,8 @@ type ProposalBackNavigation = {
  * Build a safe return URL for the proposal page.
  *
  * ProposalStepPage opens the participation workflow when `workflow` and
- * `contributionId` are present. Those parameters can survive in the referrer
- * after a participant submits a proposal, so they must not be kept in the
+ * `contributionId` are present. The requirements URL can also survive in the
+ * referrer after a participant submits a proposal. Neither must be used as a
  * return URL. Other query parameters and the hash are preserved.
  */
 export const prepareProposalBackNavigation = (rawReturnUrl?: string | null): ProposalBackNavigation => {
@@ -183,11 +183,18 @@ export const prepareProposalBackNavigation = (rawReturnUrl?: string | null): Pro
   }
 
   const parsedReturnUrl = new URL(rawReturnUrl, window.location.origin)
+  const isRequirementsWorkflowUrl = parsedReturnUrl.pathname.startsWith('/requirements/step/')
   const comesFromParticipationWorkflow =
-    parsedReturnUrl.searchParams.has('workflow') || parsedReturnUrl.searchParams.has('contributionId')
+    isRequirementsWorkflowUrl ||
+    parsedReturnUrl.searchParams.has('workflow') ||
+    parsedReturnUrl.searchParams.has('contributionId')
 
   if (!comesFromParticipationWorkflow) {
     return { returnUrl: rawReturnUrl, comesFromParticipationWorkflow }
+  }
+
+  if (isRequirementsWorkflowUrl) {
+    return { returnUrl: '', comesFromParticipationWorkflow }
   }
 
   parsedReturnUrl.searchParams.delete('workflow')
@@ -215,7 +222,7 @@ const BackUrl = ({
 }) => {
   const rawReturnUrl = originStepUrl || defaultStepUrl
   const { returnUrl, comesFromParticipationWorkflow } = prepareProposalBackNavigation(rawReturnUrl)
-  const url = getBaseUrlFromStepUrl(returnUrl)
+  const url = getBaseUrlFromStepUrl(returnUrl || defaultStepUrl)
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const { projectSlug } = useParams<{ projectSlug?: string }>()
