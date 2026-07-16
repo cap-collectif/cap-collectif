@@ -341,8 +341,6 @@ Or from root: `yarn cy:open`, `yarn cy:run`
 > **Important**: See [Critical Preconditions](#️-critical-preconditions) section above for required environment setup before running Cypress tests.
 
 ### packages/ (Internal Tools)
-- **packages/trad-hook/**: Translation verification tool
-- **packages/trad-analyser/**: Translation analysis/sync with Loco
 - **packages/graphql-query-analytics/**: Elasticsearch query analytics
 
 These are internal tooling and rarely need manual builds.

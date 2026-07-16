@@ -348,8 +348,6 @@ Translations are synchronized through Localise.biz and tooling under `packages/t
   yarn trad
   ```
 
-(Additional translation analysis tools live in `packages/trad-analyser` and `packages/trad-hook` and are typically run by maintainers following the guidance in their respective `README.md` files.)
-
 ## How to use this file as an agent
 
 - Prefer running scoped tests and linters based on the part of the system you are modifying:

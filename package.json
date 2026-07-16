@@ -19,7 +19,6 @@
         "build:prod": "NODE_ENV=production node --max_old_space_size=8192 node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.client.js",
         "build-relay-schema": "relay-compiler",
         "build-relay-schema:watch": "relay-compiler --watch",
-        "trad-analyser": "node --experimental-modules trad-analyser.mjs --max-same 816 --max-unused 858",
         "fetch-translations": "node -r dotenv/config ./fetch_translations.mjs dotenv_config_path=.env.local",
         "trad": "yarn run fetch-translations",
         "compile-graphql": "pipenv run fab local.qa.compile-graphql",
