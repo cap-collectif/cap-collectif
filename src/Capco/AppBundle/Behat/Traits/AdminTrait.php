@@ -5,9 +5,7 @@ namespace Capco\AppBundle\Behat\Traits;
 trait AdminTrait
 {
     use AdminGlobalDistrictTrait;
-    use AdminProposalFormTrait;
     use AdminProposalTrait;
-    use AdminQuestionnaireTrait;
     use AdminUserTrait;
 
     /**
@@ -42,14 +40,6 @@ trait AdminTrait
     {
         $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalId]);
         $this->waitAndThrowOnFailure(10000, "$('#proposal-admin-page-tabs').length > 0");
-    }
-
-    /**
-     * @When I go to the admin proposal form page with id :id
-     */
-    public function iGoToTheAdminProposalFormPageWithId(string $id)
-    {
-        $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
     }
 
     /**

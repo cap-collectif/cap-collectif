@@ -7,6 +7,7 @@ context('Project', () => {
       cy.directLoginAs('admin')
       cy.task('disable:feature', 'unstable__new_create_project')
     })
+
     it('should enable secret ballot on collect', () => {
       cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
       AdminProjectPage.visit('projectIdf3')
@@ -33,11 +34,77 @@ context('Project', () => {
 
       cy.contains('global.saved')
     })
+
+    it('should save project metadata changes', () => {
+      AdminProjectPage.visit('project12')
+
+      cy.get('textarea[name="metaDescription"]').clear().type('Such meta')
+      cy.get('#video').clear().type('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+      cy.selectReactSelectOption('#districts', 'Premier Quartier')
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+    })
+
+    it('should update an English project title and authors', () => {
+      cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+      AdminProjectPage.visit('englishProject')
+
+      cy.get('input[name="title"]').clear().type('English Project Edited')
+      cy.get('#project-author .react-select__input input').type('spyl')
+      cy.wait('@UserListFieldQuery')
+      cy.contains('.react-select__option', 'spyl').click()
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+    })
+
+    it('should add presentation and consultation steps', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminConsultationStepFormConsultationsQuery' })
+      AdminProjectPage.visit('project4')
+
+      AdminProjectPage.addStep('presentation_step')
+      AdminProjectPage.fillStepInputs('PresentationStepTitle', 'PresentationStepLabel')
+      AdminProjectPage.submitStepModal()
+
+      AdminProjectPage.addStep('global.consultation')
+      cy.wait('@ProjectAdminConsultationStepFormConsultationsQuery')
+      AdminProjectPage.fillStepInputs('ConsultationStepTitle', 'ConsultationStepLabel')
+      cy.selectReactSelectOption('#step-consultations', 'Consultation in project without step')
+      AdminProjectPage.submitStepModal()
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+      cy.contains('PresentationStepTitle').should('be.visible')
+      cy.contains('ConsultationStepTitle').should('be.visible')
+    })
   })
   describe('Authorization', () => {
     it('should display an unauthorized screen when admin project attempt to edit a project that he does not own', () => {
       cy.directLoginAs('project_owner')
       cy.checkAccessDenied('/admin/alpha/project/projectWithAnonymousQuestionnaire/edit')
+    })
+  })
+  describe('Project access', () => {
+    beforeEach(() => {
+      cy.task('db:restore')
+      cy.directLoginAs('super_admin')
+    })
+
+    it('should restrict a project to selected groups', () => {
+      AdminProjectPage.visit('project12')
+
+      cy.get('#project-visibility-CUSTOM').check({ force: true })
+      cy.selectReactSelectOption('#project-restrictedViewerGroups', 'Agent de la ville')
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+      cy.visit('/project/projet-sans-etapes-participatives/presentation/presentation-3')
+      cy.get('#restricted-access').should('be.visible')
     })
   })
   describe('Contributions page', () => {

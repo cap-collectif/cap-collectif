@@ -96,6 +96,11 @@ export default new (class AdminProjectPage {
     this.addButton.click()
   }
 
+  addStep(type: string) {
+    this.openAddModal()
+    this.cy.get(`[id="${type}"]`).should('exist').and('be.visible').click()
+  }
+
   get sortSelect() {
     return this.cy.get('#argument_sort_label')
   }

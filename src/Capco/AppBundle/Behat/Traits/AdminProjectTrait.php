@@ -21,14 +21,6 @@ trait AdminProjectTrait
     }
 
     /**
-     * @When I go to the admin questionnaire list page
-     */
-    public function iGoToTheAdminQuestionnaireListPage()
-    {
-        $this->iVisitedPage('AdminProjectQuestionnairePage');
-    }
-
-    /**
      * @When I fill the project authors field with name :username
      */
     public function iFillProjectAuthorsFieldWithName(string $username)
