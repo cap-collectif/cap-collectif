@@ -281,13 +281,6 @@ exports[`<UserAdminPage/> should render 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "kind": "ScalarField",
-                        "name": "contributionsToDeleteCount",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
                         "concreteType": "Media",
                         "kind": "LinkedField",
                         "name": "media",
@@ -569,7 +562,7 @@ exports[`<UserAdminPage/> should render 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "cf325c7909f0cb6cef8c034b940959f2",
+            "cacheID": "62107ba092633dafae45eb045266e684",
             "id": null,
             "metadata": Object {},
             "name": "UserAdminPageQuery",
@@ -599,7 +592,6 @@ fragment DeleteAccountModal_viewer on User {
   votes {
     totalCount
   }
-  contributionsToDeleteCount
   id
 }
 

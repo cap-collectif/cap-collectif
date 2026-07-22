@@ -11,7 +11,6 @@ describe('<DeleteAccountModal />', () => {
     votes: {
       totalCount: 10,
     },
-    contributionsToDeleteCount: 5,
     id: 'userAdmin',
   }
   const props = {

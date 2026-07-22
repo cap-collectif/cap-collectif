@@ -21908,11 +21908,6 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     first: Int = 100
   ): CommentVoteConnection!
 
-  """
-  Provisional number of contributions who will be totally deleted if the user chose to delete his account.
-  """
-  contributionsToDeleteCount: Int!
-
   """A list of replies associated to the user."""
   replies(
     """

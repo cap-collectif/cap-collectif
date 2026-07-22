@@ -160,7 +160,6 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                               nbVotes: viewer.votes.totalCount,
                               // TODO Request the number of events created by the user once feature available
                               nbEvents: 0,
-                              nbContributionsToDelete: viewer.contributionsToDeleteCount,
                             }}
                           />
                         </p>
@@ -281,7 +280,6 @@ export default createFragmentContainer(DeleteAccountModal, {
       votes {
         totalCount
       }
-      contributionsToDeleteCount
       id
     }
   `,

@@ -183,7 +183,6 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                       values={
                         Object {
                           "nbContributions": 20,
-                          "nbContributionsToDelete": 5,
                           "nbEvents": 0,
                           "nbVotes": 10,
                         }
@@ -560,7 +559,6 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                       values={
                         Object {
                           "nbContributions": 20,
-                          "nbContributionsToDelete": 5,
                           "nbEvents": 0,
                           "nbVotes": 10,
                         }

@@ -155,18 +155,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
-    public function countContributionsToDelete(User $user): int
-    {
-        $count = 0;
-        foreach ($user->getContributions() as $contribution) {
-            if ($this->shallContributionBeDeleted($user, $contribution)) {
-                ++$count;
-            }
-        }
-
-        return $count;
-    }
-
     public function anonymizeUser(User $user): void
     {
         $email = $user->getEmail();

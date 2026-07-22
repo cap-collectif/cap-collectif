@@ -157,10 +157,6 @@ InternalUser:
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comment votes of the user.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", value, args)'
-            contributionsToDeleteCount:
-                type: 'Int!'
-                description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", value)'
             replies:
                 type: 'InternalReplyConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
