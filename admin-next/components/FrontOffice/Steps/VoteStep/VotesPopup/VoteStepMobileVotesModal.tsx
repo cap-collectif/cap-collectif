@@ -15,6 +15,7 @@ import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import VotesPopup from './VotesPopup'
 import VoteStepUserInfos from '../VoteStepUserInfos'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
   step: VoteStepMobileVotesModal_proposalStep$key
@@ -69,11 +70,11 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
       hideCloseButton
       alwaysOpenInPortal
       hideOnClickOutside={false}
-      zIndex={2000}
+      zIndex={1999}
     >
-      <Modal.Body pt="md">
+      <Modal.Body pt="md" pb={pxToRem(72)} overflow="hidden">
         <VoteStepUserInfos step={step} />
-        <Box mt="xs">
+        <Box mt="xs" overflow="auto">
           <VotesPopup step={step} />
         </Box>
       </Modal.Body>

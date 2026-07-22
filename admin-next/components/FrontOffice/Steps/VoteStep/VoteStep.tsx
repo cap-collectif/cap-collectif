@@ -17,12 +17,17 @@ import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
-export const VoteStepWeb: React.FC<{ token: string; stepId: string }> = ({ stepId }) => {
+export const VoteStepWeb: React.FC<{ token: string; stepId: string; defaultSort?: string | null }> = ({
+  stepId,
+  defaultSort,
+}) => {
   const { viewerSession } = useAppContext()
+
+  const sortDefault = defaultSort?.toLowerCase() ?? 'random'
 
   const [filters] = useQueryStates(
     {
-      sort: parseAsString.withDefault('random'),
+      sort: parseAsString.withDefault(sortDefault),
       category: parseAsString.withDefault('ALL'),
       theme: parseAsString.withDefault('ALL'),
       status: parseAsString.withDefault('ALL'),
@@ -64,7 +69,7 @@ export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProje
   }
 
   const { setBreadCrumbItems } = useNavBarContext()
-  const { project, label, form, __typename } = prefetchedStep
+  const { project, label, form, __typename, defaultSort } = prefetchedStep
   const cookies = useCookies()
   const intl = useIntl()
   const token = cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)
@@ -91,7 +96,7 @@ export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProje
     <>
       {hasMapView ? <LeafletStyles /> : null}
       <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
-        <VoteStepWeb stepId={prefetchedStep.id} token={token} />
+        <VoteStepWeb stepId={prefetchedStep.id} token={token} defaultSort={defaultSort} />
       </React.Suspense>
     </>
   )

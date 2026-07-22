@@ -18,6 +18,7 @@ import useIsMobile from '@shared/hooks/useIsMobile'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalMarker_proposal$key } from '@relay/ProposalMarker_proposal.graphql'
 import { isValidLatLng } from '@utils/leaflet'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalMarker_proposal on Proposal {
@@ -121,8 +122,8 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
     >
       {!isMobile && (
         <Popup className="leaflet-card-popup" closeButton={false}>
-          <Card format="horizontal" maxHeight="83px">
-            <CardCover>
+          <Card format="horizontal" height={pxToRem(66)}>
+            <CardCover width="auto" maxWidth="none" sx={{ aspectRatio: '3/2' }}>
               {proposalCover ? (
                 <CardCoverImage src={proposalCover} />
               ) : (

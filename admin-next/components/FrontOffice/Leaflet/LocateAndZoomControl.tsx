@@ -62,8 +62,10 @@ const LocateAndZoomControl: React.FC<{ children?: React.ReactNode }> = ({ childr
       <LeafletControl position="topright">
         <Flex direction="column" m="1rem">
           <ControlButton mb={4} onClick={() => map.locate()} icon={CapUIIcon.LocationTarget} />
-          <ControlButton mb={1} onClick={() => map.zoomIn()} icon={CapUIIcon.Add} />
-          <ControlButton onClick={() => map.zoomOut()} icon={CapUIIcon.Minus} mb={4} />
+          <Flex direction="column" display={['none', 'flex']}>
+            <ControlButton mb={1} onClick={() => map.zoomIn()} icon={CapUIIcon.Add} />
+            <ControlButton onClick={() => map.zoomOut()} icon={CapUIIcon.Minus} mb={4} />
+          </Flex>
           {children}
         </Flex>
       </LeafletControl>

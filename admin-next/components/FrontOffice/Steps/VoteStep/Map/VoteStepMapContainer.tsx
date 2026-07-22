@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css'
 
-import { Box } from '@cap-collectif/ui'
+import { Box, CapUIIcon } from '@cap-collectif/ui'
 import { CapcoTileLayer, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
 import { FC, Suspense, useState } from 'react'
 import { MapContainer } from 'react-leaflet'
@@ -114,7 +114,11 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
         </Suspense>
         <CapcoTileLayer />
         <LocateAndZoomControl>
-          <ChangeSizeButton onClick={() => setIsMapExpanded(isMapExpanded == 1 ? 0 : 1)} />
+          <ChangeSizeButton
+            display={['none', 'block']}
+            onClick={() => setIsMapExpanded(isMapExpanded == 1 ? 0 : 1)}
+            icon={isMapExpanded ? CapUIIcon.Shrink : CapUIIcon.Expand}
+          />
         </LocateAndZoomControl>
       </MapContainer>
     </Box>

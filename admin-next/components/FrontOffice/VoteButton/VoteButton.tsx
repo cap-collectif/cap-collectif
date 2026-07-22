@@ -191,11 +191,13 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
         }`
       : null
 
+  const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
+
   // Step closed: show vote count only
   if (!step.open) {
     const tagContent = (
       <Tag variantColor="infoGray" transparent>
-        <Icon name={CapUIIcon.ThumbUpO} />
+        <Icon name={voteIcon} />
         <Text>
           {step.canDisplayBallot
             ? votesCount
@@ -210,7 +212,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   }
 
   const isSupport = step.actionButtonLabel === 'SUPPORT'
-  const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
   const votedTextId = isSupport ? 'global.support' : 'front.proposal.voted-for'
   const voteTextId = isSupport ? 'global.support.for' : 'global.vote.for'
 

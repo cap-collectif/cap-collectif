@@ -21,7 +21,7 @@ import {
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import stripHTML from '@shared/utils/stripHTML'
 import convertIconToDs from '@shared/utils/convertIconToDs'
-import { useQueryState } from 'nuqs'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
 import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
 import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
@@ -55,7 +55,7 @@ const PROPOSAL_FRAGMENT = graphql`
       }
     }
     comments {
-      totalCount
+      totalCountWithAnswers
     }
     author {
       username
@@ -121,6 +121,9 @@ export const ProposalCard: React.FC<Props> = ({
   const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
   const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
+  const [isMapShown] = useQueryState('map_shown', parseAsInteger)
+
+  const descriptionLineClamp = isMapShown !== 0 ? 3 : 4
 
   return (
     <Card
@@ -156,10 +159,16 @@ export const ProposalCard: React.FC<Props> = ({
         flex={1}
         sx={
           {
+            '& .cap-card-primaryInfo': {
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+            },
             '& .cap-card-primaryInfo ~ div': {
               overflow: 'hidden',
               display: '-webkit-box',
-              WebkitLineClamp: 3,
+              WebkitLineClamp: descriptionLineClamp,
               WebkitBoxOrient: 'vertical',
             },
           } as any
@@ -186,7 +195,7 @@ export const ProposalCard: React.FC<Props> = ({
               ) : (
                 <Tag variantColor="infoGray" transparent>
                   <Icon name={CapUIIcon.BubbleO} />
-                  <Text>{proposal.comments.totalCount}</Text>
+                  <Text>{proposal.comments.totalCountWithAnswers}</Text>
                 </Tag>
               )}
             </Flex>

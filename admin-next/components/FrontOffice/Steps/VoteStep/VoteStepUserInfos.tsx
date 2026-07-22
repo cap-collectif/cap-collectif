@@ -135,6 +135,7 @@ const FRAGMENT = graphql`
     votesLimit
     votesMin
     votesHelpText
+    voteThreshold
     voteTypes
     viewerVotes {
       totalCount
@@ -197,13 +198,13 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
       case 'vote-more':
         return (step.votesLimit ?? 0) - voteProgress
       case 'threshold':
-        return step.votesMin ?? 0
+        return step.voteThreshold ?? 0
       default:
         return undefined
     }
   })()
 
-  const progress = circularLimit > 0 ? (100 * circularProgress) / circularLimit : 0
+  const progress = circularLimit > 0 ? Math.min(100, (100 * circularProgress) / circularLimit) : 0
 
   return (
     <Box

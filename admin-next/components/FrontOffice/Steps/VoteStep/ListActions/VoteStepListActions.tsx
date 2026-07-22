@@ -78,7 +78,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   ]
 
   return (
-    <Flex flexGrow={step.votable ? 1 : 0} flexShrink={0} justify="space-between" align="stretch" height={40}>
+    <Flex flexGrow={step.votable ? 1 : 0} flexShrink={0} justify="space-between" align="stretch" height={40} gap="xl">
       {width > 1024 && step.votable && (
         <Flex gap={width >= 1200 ? 'md' : 'xs'}>
           {quickFilterButtons.map((filter, index) => (
@@ -94,12 +94,13 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               key={viewButton.id}
               variantColor="info"
               variantSize="medium"
+              color={listView !== viewButton.id ? colors.infoMessage.text.infoGray : undefined}
               transparent={listView !== viewButton.id}
               label={viewButton.icon}
-              color={colors.primary.base}
               aria-label={`Vue ${viewButton.label}`}
               height="100%"
               justifyContent="center"
+              tooltipLabel={viewButton.label}
               sx={{
                 aspectRatio: width <= 1024 ? 'none' : '1 / 1',
                 cursor: 'pointer',
@@ -118,19 +119,19 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       <VoteStepFiltersModal stepId={step.id} />
 
       {hasMapView && (hasGridView || hasListView) ? (
-        <Box flex="none">
-          <Button
-            height="100%"
-            variant="tertiary"
-            leftIcon={CapUIIcon.Pin}
-            onClick={() => {
-              setIsMapExpanded(0)
-              setIsMapShown(isMapShown === 1 ? 0 : 1)
-            }}
-          >
-            {isMapShown !== 0 ? intl.formatMessage({ id: 'map.hide' }) : intl.formatMessage({ id: 'map.display' })}
-          </Button>
-        </Box>
+        <Button
+          height="100%"
+          variant="tertiary"
+          variantColor="hierarchy"
+          minWidth="160px"
+          leftIcon={CapUIIcon.PinO}
+          onClick={() => {
+            setIsMapExpanded(0)
+            setIsMapShown(isMapShown === 1 ? 0 : 1)
+          }}
+        >
+          {isMapShown !== 0 ? intl.formatMessage({ id: 'map.hide' }) : intl.formatMessage({ id: 'map.display' })}
+        </Button>
       ) : null}
     </Flex>
   )

@@ -72,7 +72,7 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
 
   return (
     <>
-      <Button variant="tertiary" leftIcon={CapUIIcon.Filter} onClick={onOpen}>
+      <Button variant="tertiary" variantColor="hierarchy" leftIcon={CapUIIcon.Filter} onClick={onOpen}>
         {activeFiltersCount > 0
           ? `${intl.formatMessage({ id: 'btn_filter' })} (${activeFiltersCount})`
           : intl.formatMessage({ id: 'btn_filter' })}

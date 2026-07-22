@@ -182,7 +182,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
               >
                 <VoteStepMap
                   step={step}
-                  showMapPlaceholder={showMapPlaceholder}
+                  showMapPlaceholder={isMapOnlyView ? false : showMapPlaceholder}
                   removePlaceholderAndShowMap={() => setShowMapPlaceholder(false)}
                   onWorkflowTrigger={triggerProposalWorkflow}
                 />

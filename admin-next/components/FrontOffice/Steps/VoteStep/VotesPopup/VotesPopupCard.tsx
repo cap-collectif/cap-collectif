@@ -109,7 +109,7 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
       {step.votesRanking && <VotesPopupCardRanking vote={vote} step={step} />}
       <Card format="horizontal" p="0" _hover={{ boxShadow: 'none' }}>
         {!step.votesRanking && (proposal.form?.usingIllustration || (proposalIcon && proposalCover)) ? (
-          <CardCover alignSelf="stretch" height="initial">
+          <CardCover width="auto" maxWidth="none" height="66px" sx={{ aspectRatio: '3/2' }}>
             {proposalCover ? (
               <CardCoverImage src={proposalCover} />
             ) : (
@@ -117,7 +117,20 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
             )}
           </CardCover>
         ) : null}
-        <CardContent flex="1" primaryInfo={vote.proposal.title} />
+        <CardContent
+          flex="1"
+          primaryInfo={vote.proposal.title}
+          sx={
+            {
+              '& .cap-card-primaryInfo': {
+                overflow: 'hidden',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+              },
+            } as any
+          }
+        />
       </Card>
       <Button
         variant="tertiary"

@@ -37,7 +37,7 @@ const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey, onWorkflowTrigger }
   }
 
   return (
-    <Popup position={position}>
+    <Popup position={position} closeButton={false}>
       <ProposalFormModal
         mode="create"
         disabled={!step.form.contribuable}

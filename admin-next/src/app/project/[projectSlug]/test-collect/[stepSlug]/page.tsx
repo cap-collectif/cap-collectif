@@ -19,6 +19,7 @@ export const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
         label
         metaDescription
         votable
+        defaultSort
         form {
           contribuable
           isMapViewEnabled
