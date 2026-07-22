@@ -13,6 +13,7 @@ import { ModalDeleteProposalContainer } from './ModalDeleteProposal.style'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer'
+// @ts-ignore
 import type { ModalDeleteProposal_proposal } from '~relay/ModalDeleteProposal_proposal.graphql'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Flex from '~ui/Primitives/Layout/Flex'

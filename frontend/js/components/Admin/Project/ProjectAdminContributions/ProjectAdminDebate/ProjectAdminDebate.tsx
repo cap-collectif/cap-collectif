@@ -2,7 +2,9 @@ import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { useHistory } from 'react-router-dom'
+// @ts-ignore
 import type { ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate.graphql'
+// @ts-ignore
 import type { ProjectAdminDebate_debateStep } from '~relay/ProjectAdminDebate_debateStep.graphql'
 import FaceToFace from './FaceToFace/FaceToFace'
 import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery'

@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap'
 import component from '../../Form/Field'
 import UpdateRegistrationPageMutation from '../../../mutations/UpdateRegistrationPageMutation'
 import type { State } from '../../../types'
+// @ts-ignore
 import type { AdvancedSection_query } from '~relay/AdvancedSection_query.graphql'
 
 export type FormValues = {

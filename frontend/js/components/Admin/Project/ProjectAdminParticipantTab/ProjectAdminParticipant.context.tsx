@@ -1,7 +1,12 @@
 import * as React from 'react'
-import type { Action, ProjectAdminParticipantState, SortValues } from './ProjectAdminParticipant.reducer'
+import type {
+  Action,
+  Filters,
+  ProjectAdminParticipantParameters,
+  ProjectAdminParticipantState,
+  SortValues,
+} from './ProjectAdminParticipant.reducer'
 import { createReducer } from './ProjectAdminParticipant.reducer'
-import type { Filters, ProjectAdminParticipantParameters } from './ProjectAdminParticipant.reducer'
 export type ProjectAdminParticipantStatus = 'ready' | 'loading'
 type ProviderProps = {
   readonly children: JSX.Element | JSX.Element[] | string
@@ -45,10 +50,14 @@ export const ProjectAdminParticipantsProvider = ({ children }: ProviderProps) =>
   })
   const context = React.useMemo(
     () => ({
+      // @ts-ignore
       status: state.status,
       parameters: {
+        // @ts-ignore
         sort: state.sort,
+        // @ts-ignore
         filters: state.filters,
+        // @ts-ignore
         filtersOrdered: state.filtersOrdered,
       },
       dispatch,

@@ -4,11 +4,14 @@ import { createFragmentContainer } from 'react-relay'
 import isEqual from 'lodash/isEqual'
 import { connect } from 'react-redux'
 import type {
+  // @ts-ignore
   ProjectAdminProposalsPageQueryResponse,
+  // @ts-ignore
   ProjectAdminProposalsPageQueryVariables,
   ProposalOrderField,
   OrderDirection,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql'
+// @ts-ignore
 import type { ProjectAdminProposalsPage_query } from '~relay/ProjectAdminProposalsPage_query.graphql'
 import type { Query, GlobalState } from '~/types'
 import type { ProjectAdminPageParameters, SortValues } from './ProjectAdminPage.reducer'
@@ -235,6 +238,7 @@ const ProjectAdminProposalsPage = ({
     queryVariablesWithParameters,
   )
 
+  // @ts-ignore
   const {
     props: data,
     error,

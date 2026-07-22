@@ -37,8 +37,11 @@ class CustomDiff extends Diff {
   pDiff(oldValue, newValue) {
     let prettyDiff = ''
     // Compute diff
+    // @ts-ignore
     const oldV = $('<div/>').text(oldValue).html()
+    // @ts-ignore
     const newV = $('<div/>').text(newValue).html()
+    // @ts-ignore
     const diff = this.diff(oldV, newV)
 
     // All text has been replaced

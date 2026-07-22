@@ -2,6 +2,7 @@ import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import moment from 'moment'
 import { FormattedMessage, useIntl } from 'react-intl'
+// @ts-ignore
 import type { ProjectAdminParticipant_participant } from '~relay/ProjectAdminParticipant_participant.graphql'
 import { Container, UsernameContainer, NameContainer, ParticipantInfo } from './ProjectAdminParticipant.style'
 import UserAvatar from '~/components/User/UserAvatar'

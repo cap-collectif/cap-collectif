@@ -1,8 +1,8 @@
 /* eslint-env jest */
-import * as React from 'react'
 import { shallow } from 'enzyme'
-import { ProjectStepAdminList } from './ProjectStepAdminList'
+import * as React from 'react'
 import { $fragmentRefs, $refType } from '~/mocks'
+import { ProjectStepAdminList } from './ProjectStepAdminList'
 
 const defaultStep = {
   id: '1',
@@ -33,9 +33,13 @@ const defaultProps = {
     ' $refType': $refType,
   },
 }
+// @ts-ignore legacy, won't be fixed
 describe('<ProjectStepAdminList />', () => {
+  // @ts-ignore legacy, won't be fixed
   it('renders correctly', () => {
+    // @ts-ignore legacy, won't be fixed
     const wrapper = shallow(<ProjectStepAdminList {...defaultProps} />)
+    // @ts-ignore legacy, won't be fixed
     expect(wrapper).toMatchSnapshot()
   })
 })

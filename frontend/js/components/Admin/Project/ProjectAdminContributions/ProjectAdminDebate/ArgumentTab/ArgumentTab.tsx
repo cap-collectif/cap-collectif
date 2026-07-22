@@ -4,6 +4,7 @@ import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import { useIntl } from 'react-intl'
 import DebateArgument from '~/components/Admin/Debate/DebateArgument/DebateArgument'
+// @ts-ignore
 import type { ArgumentTab_debate } from '~relay/ArgumentTab_debate.graphql'
 import '~relay/ArgumentTab_debate.graphql'
 import Spinner from '~ds/Spinner/Spinner'

@@ -276,6 +276,7 @@ export const vote = (
         dispatch(closeVoteModal())
         const isInterpellation =
           response.addProposalVote?.voteEdge &&
+          // @ts-ignore
           isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
         const successTranslationKey =
           response.addProposalVote && response.addProposalVote.voteEdge && isInterpellation

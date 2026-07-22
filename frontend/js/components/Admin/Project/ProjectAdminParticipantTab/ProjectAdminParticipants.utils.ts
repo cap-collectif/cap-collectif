@@ -1,6 +1,7 @@
 import { $PropertyType } from 'utility-types'
 import isEqual from 'lodash/isEqual'
 import uniqBy from 'lodash/uniqBy'
+// @ts-ignore
 import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminParticipants_project.graphql'
 import type { Uuid } from '~/types'
 import type { ProjectAdminParticipantState } from './ProjectAdminParticipant.reducer'

@@ -4,6 +4,7 @@ import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import ProjectMetadataAdminForm from '~/components/Admin/Project/Metadata/ProjectMetadataAdminForm'
+// @ts-ignore
 import type { ProjectMetadataAdminPage_project } from '~relay/ProjectMetadataAdminPage_project.graphql'
 import '~relay/ProjectMetadataAdminPage_project.graphql'
 

@@ -8,6 +8,7 @@ import renderComponent from '~/components/Form/Field'
 import type { GlobalState } from '~/types'
 import environment from '~/createRelayEnvironment'
 import select from '~/components/Form/Select'
+// @ts-ignore
 import type { ProjectAccessAdminForm_project, ProjectVisibility } from '~relay/ProjectAccessAdminForm_project.graphql'
 import '~relay/ProjectAccessAdminForm_project.graphql'
 import { ProjectBoxHeader, ProjectAccessContainer, ProjectBoxContainer } from '../Form/ProjectAdminForm.style'

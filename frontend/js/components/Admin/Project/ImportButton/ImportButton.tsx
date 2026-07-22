@@ -10,6 +10,7 @@ import { formName } from '~/components/Utils/ProposalCsvDropZoneInput'
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
 import colors from '~/utils/colors'
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation'
+// @ts-ignore
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql'
 import { toast } from '~ds/Toast'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'

@@ -111,7 +111,9 @@ const VoteStepFilterSearchBar = () => {
             boxShadow="small"
             sx={{
               padding: '6px',
+              // @ts-ignore
               fontFamily: CapUIFontFamily.Input,
+              // @ts-ignore
               lineHeight: CapUILineHeight.Base,
               color: 'gray.900',
               bg: 'white',

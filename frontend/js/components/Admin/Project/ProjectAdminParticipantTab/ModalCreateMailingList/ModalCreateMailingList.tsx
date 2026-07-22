@@ -11,9 +11,11 @@ import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import type { Dispatch, GlobalState } from '~/types'
 import { Container, InfoContainer, ButtonSave } from './ModalCreateMailingList.style'
 import CreateMailingListMutation from '~/mutations/CreateMailingListMutation'
+// @ts-ignore
 import type { ModalCreateMailingList_project } from '~relay/ModalCreateMailingList_project.graphql'
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation'
 import colors from '~/styles/modules/colors'
+// @ts-ignore
 import type { ModalCreateMailingList_viewer } from '~relay/ModalCreateMailingList_viewer.graphql'
 import { toast } from '~ds/Toast'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'

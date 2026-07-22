@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
+// @ts-ignore
 import type { UserSearchDropdownChoice_user } from '~relay/UserSearchDropdownChoice_user.graphql'
 import DropdownSelectChoice from '~ui/DropdownSelect/choice'
 import UserAvatar from '~/components/User/UserAvatar'

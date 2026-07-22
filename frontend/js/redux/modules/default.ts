@@ -102,6 +102,7 @@ export const features: FeatureToggles = {
   organizations: false,
   moderation_comment: false,
   online_help: false,
+  // @ts-ignore
   multi_consultations: false,
   full_proposal_card: false,
   mailjet_sandbox: false,

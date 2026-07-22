@@ -6,6 +6,7 @@ import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedMessage } from 'react-intl'
 
 import styled from 'styled-components'
+// @ts-ignore
 import type { ProjectMetadataAdminForm_project } from '~relay/ProjectMetadataAdminForm_project.graphql'
 import '~relay/ProjectMetadataAdminForm_project.graphql'
 import component from '~/components/Form/Field'
@@ -61,7 +62,9 @@ const getThemeOptions = graphql`
   }
 `
 export const formatInput = ({ publishedAt, themes, cover, video, districts }: FormValues) => {
+  // @ts-ignore
   if (publishedAt && typeof publishedAt !== 'string' && !(publishedAt instanceof String)) {
+    // @ts-ignore
     publishedAt = publishedAt.format('YYYY-MM-DD HH:mm:ss')
   }
 
@@ -103,6 +106,7 @@ export const loadThemeOptions = (search: string | null | undefined) => {
   return fetchQuery_DEPRECATED(environment as any, getThemeOptions, {
     title: search,
   }).then(data => {
+    // @ts-ignore
     return data.themes.map(u => ({
       value: u.id,
       label: u.title,
@@ -114,7 +118,9 @@ export const loadDistrictOptions = (search: string | null | undefined) => {
     name: search,
   }).then(data => {
     return (
+      // @ts-ignore
       data.globalDistricts.edges &&
+      // @ts-ignore
       data.globalDistricts.edges
         .filter(d => d.node)
         .map(d => {

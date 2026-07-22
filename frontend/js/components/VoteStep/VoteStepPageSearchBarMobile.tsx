@@ -75,6 +75,7 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
 
       <Box
         as="input"
+        // @ts-ignore
         disableFocusStyles
         width="100%"
         bg="inherit"

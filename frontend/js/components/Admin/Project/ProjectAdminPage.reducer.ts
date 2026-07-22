@@ -1,7 +1,7 @@
-import { $Values, $PropertyType } from 'utility-types'
-import type { Uuid } from '~/types'
+import { $PropertyType, $Values } from 'utility-types'
 import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.utils'
 import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl, URL_FILTER_WHITELIST } from '~/shared/utils/getFieldsFromUrl'
+import type { Uuid } from '~/types'
 export const ORDER_BY: {
   OLDEST: 'oldest'
   NEWEST: 'newest'
@@ -182,6 +182,7 @@ export const getInitialState = (initialSelectedStep: string | null | undefined):
   status: DEFAULT_STATUS,
   sort: DEFAULT_SORT,
   filters: { ...DEFAULT_FILTERS, step: initialSelectedStep },
+  // @ts-ignore
   filtersOrdered: [
     ...(initialSelectedStep
       ? [

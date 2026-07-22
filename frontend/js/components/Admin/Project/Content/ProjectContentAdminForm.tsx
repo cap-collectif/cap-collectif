@@ -11,6 +11,7 @@ import UserListField from '../../Field/UserListField'
 import type { Author } from '../Form/ProjectAdminForm'
 import '../Form/ProjectAdminForm'
 import ProjectTypeListField from '../../Field/ProjectTypeListField'
+// @ts-ignore
 import type { ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql'
 import '~relay/ProjectContentAdminForm_project.graphql'
 import { loadDistrictOptions, loadThemeOptions } from '../Metadata/ProjectMetadataAdminForm'

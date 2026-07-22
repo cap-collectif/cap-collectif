@@ -2,8 +2,11 @@ import * as React from 'react'
 import { useQuery } from 'relay-hooks'
 import { createFragmentContainer, graphql } from 'react-relay'
 import isEqual from 'lodash/isEqual'
+// @ts-ignore
 import type { VoteTabQueryResponse, VoteTabQueryVariables } from '~relay/VoteTabQuery.graphql'
+// @ts-ignore
 import type { VoteTabQuery_debate } from '~relay/VoteTabQuery_debate.graphql'
+// @ts-ignore
 import type { VoteTabQuery_debateStep } from '~relay/VoteTabQuery_debateStep.graphql'
 import type { Query } from '~/types'
 import VoteTab, { VOTE_PAGINATION } from './VoteTab'
@@ -57,6 +60,7 @@ const VoteTabQuery = ({ debate, debateStep }: Props) => {
     { ...initialVariables, debateId: debate?.id, stepId: debateStep?.id },
     queryVariablesWithParameters,
   )
+  // @ts-ignore
   const { props: data }: PropsQuery = useQuery(queryVote, queryVariablesWithParameters, {
     fetchPolicy: 'store-or-network',
     skip: !hasFilters,

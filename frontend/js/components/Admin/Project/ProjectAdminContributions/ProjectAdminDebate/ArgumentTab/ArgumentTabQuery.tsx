@@ -2,8 +2,11 @@ import * as React from 'react'
 import { useQuery } from 'relay-hooks'
 import { createFragmentContainer, graphql } from 'react-relay'
 import isEqual from 'lodash/isEqual'
+// @ts-ignore
 import type { ArgumentTabQueryResponse, ArgumentTabQueryVariables } from '~relay/ArgumentTabQuery.graphql'
+// @ts-ignore
 import type { ArgumentTabQuery_debate } from '~relay/ArgumentTabQuery_debate.graphql'
+// @ts-ignore
 import type { ArgumentTabQuery_debateStep } from '~relay/ArgumentTabQuery_debateStep.graphql'
 import type { Query } from '~/types'
 import ArgumentTab, { ARGUMENT_PAGINATION } from './ArgumentTab'
@@ -62,6 +65,7 @@ const ArgumentTabQuery = ({ debate, debateStep }: Props) => {
   const { parameters } = useProjectAdminDebateContext()
   const queryVariablesWithParameters = createQueryVariables(debate?.id || '', parameters)
   const hasFilters: boolean = !isEqual({ ...initialVariables, debateId: debate?.id }, queryVariablesWithParameters)
+  // @ts-ignore
   const { props: data }: PropsQuery = useQuery(queryArgument, queryVariablesWithParameters, {
     fetchPolicy: 'store-or-network',
     skip: !hasFilters,

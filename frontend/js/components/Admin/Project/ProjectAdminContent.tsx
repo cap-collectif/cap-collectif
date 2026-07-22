@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import type { ProjectAdminContent_project$data } from '~relay/ProjectAdminContent_project.graphql'
 import '~relay/ProjectAdminContent_project.graphql'
+// @ts-ignore
 import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query.graphql'
 import '~relay/ProjectAdminContent_query.graphql'
 import environment from '~/createRelayEnvironment'

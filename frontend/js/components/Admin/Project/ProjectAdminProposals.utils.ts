@@ -2,16 +2,22 @@ import { $PropertyType } from 'utility-types'
 import type { IntlShape } from 'react-intl'
 import uniqBy from 'lodash/uniqBy'
 import isEqual from 'lodash/isEqual'
+// @ts-ignore
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql'
+// @ts-ignore
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql'
 import type { Uuid } from '~/types'
 import type { ProjectAdminPageState, ProposalsStepValues } from './ProjectAdminPage.reducer'
 import { DEFAULT_FILTERS } from './ProjectAdminPage.reducer'
 import type {
+  // @ts-ignore
   UserSearchDropdownChoice_user,
+  // @ts-ignore
   UserSearchDropdownChoice_user$ref,
 } from '~relay/UserSearchDropdownChoice_user.graphql'
+// @ts-ignore
 import type { ModalConfirmRevokement_analystsWithAnalyseBegin } from '~relay/ModalConfirmRevokement_analystsWithAnalyseBegin.graphql'
+// @ts-ignore
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql'
 import type { RowType, AllUserAssigned } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils'
 import '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils'
@@ -22,6 +28,7 @@ import {
 import { PROPOSAL_STATUS, SHOWING_STEP_TYPENAME } from '~/constants/AnalyseConstants'
 import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory'
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict'
+// @ts-ignore
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql'
 import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme'
 import { CapUIIcon } from '@cap-collectif/ui'

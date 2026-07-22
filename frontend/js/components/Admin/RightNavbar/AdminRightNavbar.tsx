@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import UserBlockProfile from '../../Ui/BackOffice/UserBlockProfile'
 import EarthIcon from '@shared/ui/LegacyIcons/EarthIcon'
+// @ts-ignore
 import type { AdminRightNavbar_query } from '~relay/AdminRightNavbar_query.graphql'
 import type { FeatureToggles, GlobalState } from '~/types'
 import colors from '../../../utils/colors'

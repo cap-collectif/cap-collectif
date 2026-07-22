@@ -192,6 +192,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     },
     userType: {
       isEnabled: userTypeEnabled && types.length > 0,
+      // @ts-ignore
       options: [allOption, ...types],
       label: intl.formatMessage({
         id: 'global.contributors',
@@ -199,6 +200,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     },
     theme: {
       isEnabled: (themesEnabled && form?.usingThemes && (themes?.length ?? 0) > 0) ?? false,
+      // @ts-ignore
       options: [allOption, ...themes],
       label: intl.formatMessage({
         id: 'main-theme',

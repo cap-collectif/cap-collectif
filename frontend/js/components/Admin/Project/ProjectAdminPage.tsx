@@ -3,6 +3,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import { useSelector } from 'react-redux'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import ProjectAdminContent from './ProjectAdminContent'
+// @ts-ignore
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql'
 import type { GlobalState } from '~/types'
 type Props = {

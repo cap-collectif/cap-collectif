@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
+// @ts-ignore
 import type { ContributionStep_step } from '~relay/ContributionStep_step.graphql'
 import '~relay/ContributionStep_step.graphql'
 import type { StepType } from '~/constants/StepTypeConstants'

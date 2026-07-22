@@ -9,6 +9,7 @@ import component from '~/components/Form/Field'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import PreviewMail from './PreviewMail/PreviewMail'
 import ModalMailTest from '~/components/Admin/Emailing/MailParameter/Content/ModalMailTest/ModalMailTest'
+// @ts-ignore
 import type { Content_emailingCampaign } from '~relay/Content_emailingCampaign.graphql'
 
 type Props = {

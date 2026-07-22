@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// @ts-ignore
 import type { ProjectExternalProjectAdminAppDeprecatedQueryResponse } from '~relay/ProjectExternalProjectAdminAppDeprecatedQuery.graphql'
 import ProjectExternalAdminFormDeprecated from '~/components/Admin/Project/External/ProjectExternalAdminFormDeprecated'
 import type { Dispatch, FeatureToggle, FeatureToggles } from '~/types'

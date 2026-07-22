@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type {
-  Filters,
   Action,
+  Filters,
   ProjectAdminDebateParameters,
   ProjectAdminDebateState,
 } from './ProjectAdminDebate.reducer'
@@ -44,6 +44,7 @@ export const ProjectAdminDebateProvider = ({ children }: ProviderProps) => {
   const context = React.useMemo(
     () => ({
       parameters: {
+        // @ts-ignore
         filters: state.filters,
       },
       dispatch,

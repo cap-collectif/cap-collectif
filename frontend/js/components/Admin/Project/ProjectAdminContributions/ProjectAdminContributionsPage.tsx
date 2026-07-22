@@ -114,9 +114,12 @@ export const queryContributions = graphql`
 `
 
 const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
+  // @ts-ignore
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch)
   const { path: baseUrl } = useRouteMatch()
+  // @ts-ignore
   const project = dataPreloaded?.project || null
+  // @ts-ignore
   const viewer = dataPreloaded?.viewer || null
   const collectSteps = project?.steps.filter(step => step.__typename === 'CollectStep') || []
   const debateSteps = project?.steps.filter(step => step.__typename === 'DebateStep') || []

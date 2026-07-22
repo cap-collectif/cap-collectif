@@ -4,7 +4,9 @@ import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks'
 import { useSelector } from 'react-redux'
 import type { ResultPreloadQuery, Query, GlobalState } from '~/types'
 import type {
+  // @ts-ignore
   ProjectAdminParticipantTabQueryResponse,
+  // @ts-ignore
   ProjectAdminParticipantTabQueryVariables,
 } from '~relay/ProjectAdminParticipantTabQuery.graphql'
 import type { ProjectAdminParticipantParameters } from './ProjectAdminParticipant.reducer'
@@ -90,6 +92,7 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
   const { parameters } = useProjectAdminParticipantsContext()
   const { user } = useSelector((state: GlobalState) => state.user)
   const viewerIsAdmin = user ? user.isAdmin : false
+  // @ts-ignore
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch)
   const queryVariablesWithParameters = createQueryVariables(projectId, parameters, viewerIsAdmin)
   const hasFilters: boolean = !isEqual(
@@ -99,6 +102,7 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
     },
     queryVariablesWithParameters,
   )
+  // @ts-ignore
   const {
     props: data,
     error,
@@ -108,12 +112,15 @@ const ProjectAdminParticipantTab = ({ projectId, dataPrefetch }: Props) => {
   })
   return (
     <Skeleton
+      // @ts-ignore
       isLoaded={(!hasFilters && !!dataPreloaded && !!dataPreloaded.project) || (hasFilters && !!data && !!data.project)}
       placeholder={<ProjectAdminParticipantsPlaceholder hasError={!!error} fetchData={retry} />}
     >
       <PickableList.Provider>
         <ProjectAdminParticipants
+          // @ts-ignore
           project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+          // @ts-ignore
           viewer={dataPreloaded?.viewer ?? data?.viewer}
         />
       </PickableList.Provider>

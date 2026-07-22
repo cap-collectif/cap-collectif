@@ -7,7 +7,9 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import type { Step } from './ProjectStepAdminList'
 import './ProjectStepAdminList'
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal'
+// @ts-ignore
 import type { ProjectStepAdminItemStep_project } from '~relay/ProjectStepAdminItemStep_project.graphql'
+// @ts-ignore
 import type { ProjectStepAdminItemStep_query } from '~relay/ProjectStepAdminItemStep_query.graphql'
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
 import Text from '~ui/Primitives/Text'

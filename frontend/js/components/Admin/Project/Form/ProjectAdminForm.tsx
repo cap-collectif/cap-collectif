@@ -12,8 +12,10 @@ import AlertForm from '../../../Alert/AlertForm'
 import type { Dispatch, GlobalState } from '~/types'
 import CreateProjectAlphaMutation from '~/mutations/CreateProjectAlphaMutation'
 import UpdateProjectAlphaMutation from '~/mutations/UpdateProjectAlphaMutation'
+// @ts-ignore
 import type { ProjectAdminForm_project } from '~relay/ProjectAdminForm_project.graphql'
 import '~relay/ProjectAdminForm_project.graphql'
+// @ts-ignore
 import type { ProjectAdminForm_query } from '~relay/ProjectAdminForm_query.graphql'
 import '~relay/ProjectAdminForm_query.graphql'
 import ProjectStepAdmin, { validate as validateSteps } from '../Steps/ProjectStepAdmin'

@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { createFragmentContainer, graphql } from 'react-relay'
 import ContributionStep from './ContributionStep'
+// @ts-ignore
 import type { IndexContributions_project } from '~relay/IndexContributions_project.graphql'
 import '~relay/IndexContributions_project.graphql'
 import { clearToasts } from '~ds/Toast'

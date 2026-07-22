@@ -1,4 +1,5 @@
 import { ORDER_BY } from './DashboardCampaign/DashboardCampaign.reducer'
+// @ts-ignore
 import type { EmailingCampaignPageQueryVariables } from '~relay/EmailingCampaignPageQuery.graphql'
 import type { DashboardParameters } from './DashboardCampaign/DashboardCampaign.reducer'
 

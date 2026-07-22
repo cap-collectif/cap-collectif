@@ -5,7 +5,9 @@ import { FormattedMessage } from 'react-intl'
 import { Container, Tiles } from './NoContributionsStep.style'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
+// @ts-ignore
 import type { NoContributionsStep_project } from '~relay/NoContributionsStep_project.graphql'
+// @ts-ignore
 import type { NoContributionsStep_viewer } from '~relay/NoContributionsStep_viewer.graphql'
 import Flex from '~ui/Primitives/Layout/Flex'
 

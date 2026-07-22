@@ -2,6 +2,7 @@ import * as React from 'react'
 import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import { HelpBlock } from 'react-bootstrap'
 import { useState } from 'react'
+// @ts-ignore
 import type { DropzoneFile } from 'react-dropzone'
 import { Heading, Button } from '@cap-collectif/ui'
 import Flex from '~ui/Primitives/Layout/Flex'
@@ -205,6 +206,7 @@ export const ImportPaperVotesFromCsvModal = ({
         <FileUpload
           accept="text/csv"
           maxSize={CSV_MAX_UPLOAD_SIZE}
+          // @ts-ignore
           inputProps={{
             id: 'csv-file_field',
           }}
@@ -214,6 +216,7 @@ export const ImportPaperVotesFromCsvModal = ({
             const reader = new window.FileReader()
 
             reader.onload = () => {
+              // @ts-ignore
               analyseReaderResult(reader.result)
             }
 

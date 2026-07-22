@@ -1,6 +1,6 @@
 import { $PropertyType } from 'utility-types'
-import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
 import '~relay/DebateArgument_argument.graphql'
+import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
 export type ArgumentState = 'PUBLISHED' | 'WAITING' | 'TRASHED'
 export type VoteState = 'ALL' | 'PUBLISHED' | 'WAITING'
 export type FilterArgument = {

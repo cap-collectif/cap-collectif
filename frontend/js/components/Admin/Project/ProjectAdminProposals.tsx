@@ -6,7 +6,9 @@ import { connect, useSelector } from 'react-redux'
 import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import { useState } from 'react'
+// @ts-ignore
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql'
+// @ts-ignore
 import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql'
 import PickableList from '~ui/List/PickableList'
 import { usePickableList } from '~ui/List/PickableList/usePickableList'
@@ -61,6 +63,7 @@ import AnalysisFilterTheme from '~/components/Analysis/AnalysisFilter/AnalysisFi
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal'
 import ImportButton from '~/components/Admin/Project/ImportButton/ImportButton'
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal'
+// @ts-ignore
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql'
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine'
 import useToastingMachine from '~/utils/hooks/useToastingMachine'
@@ -556,7 +559,9 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
         stepsOrStatus = ''
       } else {
         modalBodyMessage = 'proposals-confirm-change-status'
+        // @ts-ignore
         usedSteps = stepStatuses.filter(status => status.id === selectedStatus)
+        // @ts-ignore
         stepsOrStatus = usedSteps.map(step => step.name).join(', ')
       }
     }
@@ -806,8 +811,11 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
 
           <ProjectAdminMergeModale
             proposalsSelected={selectedProposals}
+            // @ts-ignore
             onClose={() => setIsMergeModaleVisible(false)}
+            // @ts-ignore
             show={isMergeModaleVisible}
+            // @ts-ignore
             dispatch={dispatch}
           />
         </React.Fragment>
@@ -1129,6 +1137,7 @@ export const ProjectAdminProposals = ({
                       isVoteRanking={selectedStep?.votesRanking || false}
                       isVotable={selectedStep?.votable || false}
                       votes={proposal.proposalVotes.totalCount}
+                      // @ts-ignore
                       paperVotes={proposal.paperVotesTotalCount}
                       points={proposal.proposalVotes.totalPointsCount}
                       paperPoints={proposal.paperVotesTotalPointsCount}

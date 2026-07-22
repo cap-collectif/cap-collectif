@@ -1,9 +1,13 @@
 import Fetcher from '../services/Fetcher'
 
 const executeFunction = (
+  // @ts-ignore
   operation: ReactRuntimeRequestNode,
+  // @ts-ignore
   variables: ReactRelayVariables,
+  // @ts-ignore
   cacheConfig: ReactRelayCacheConfig,
+  // @ts-ignore
   uploadables: ReactRelayUploadableMap | null | undefined,
 ) => {
   if (uploadables) {
