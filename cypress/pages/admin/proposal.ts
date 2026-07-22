@@ -39,6 +39,22 @@ export default new (class AdminproposalPage {
     return this.cy.get('#proposal-admin-page-tabs-pane-6')
   }
 
+  get advancementTab() {
+    return this.cy.get('#proposal-admin-page-tabs-tab-2')
+  }
+
+  get advancementTabPane() {
+    return this.cy.get('#proposal-admin-page-tabs-pane-2')
+  }
+
+  get followersTab() {
+    return this.cy.get('#proposal-admin-page-tabs-tab-5')
+  }
+
+  get followersTabPane() {
+    return this.cy.get('#proposal-admin-page-tabs-pane-5')
+  }
+
   publicationStatusInput(status: string) {
     return this.cy.get(
       `#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="${status}"]`,
@@ -50,9 +66,27 @@ export default new (class AdminproposalPage {
   }
 
   saveStatus() {
-    this.cy
-      .get('#proposal-admin-page-tabs-pane-6 button[type="submit"].btn.btn-primary')
-      .click()
+    this.cy.get('#proposal-admin-page-tabs-pane-6 button[type="submit"].btn.btn-primary').click()
+  }
+
+  selectSelectionStatus(status: string) {
+    this.cy.get('select[name="selections[0].status"]').select(status)
+  }
+
+  saveAdvancement() {
+    this.cy.get('#proposal_advancement_save').click()
+  }
+
+  enableRealisationStep() {
+    this.cy.get('input[name="selections[4].selected"]').check({ force: true })
+  }
+
+  addRealisationStep(title: string) {
+    this.cy.get('#proposal-admin-progress-steps-add').click()
+    this.cy.get('#realisation-step-modal').should('be.visible')
+    this.cy.get('input[name="progressSteps[0].title"]').type(title)
+    this.cy.get('#ProposalAdminRealisationStepModal-submit').click()
+    this.cy.get('#realisation-step-modal').should('not.exist')
   }
 
   fillProposalInputs(title: string, summary: string, body: string, response: string, privateResponse: string) {

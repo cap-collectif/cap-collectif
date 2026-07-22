@@ -22,52 +22,6 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I go to the admin proposal :tab tab
-     */
-    public function iGoToTheAdminProposalTab(string $tab)
-    {
-        $page = $this->getCurrentPage();
-        // Wait alert to disappear
-        $this->iWait(5);
-        // Wait tab to appear
-        $this->waitAndThrowOnFailure(
-            5000,
-            "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0"
-        );
-        $page->clickOnTab("proposal {$tab}");
-        // Wait delay of tab being shown
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I toggle a proposal advancement :elementName
-     */
-    public function iToggleAProposalAdvancementButton(string $elementName)
-    {
-        $page = $this->getCurrentPage();
-        $this->iWait(3);
-        $page->toggleProposalElement($elementName);
-        $this->iWait(3);
-    }
-
-    /**
-     * @When I change the proposal advancement select :select with option :value
-     */
-    public function iChangeTheProposalAdvancementSelect(string $select, string $value)
-    {
-        $this->getCurrentPage()->selectProposalAdvancementStatus($value, $select);
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I save current proposal admin advancement
-     */
-    public function iSaveTheProposalAdminAdvancement()
-    {
-        $this->getCurrentPage()->clickSaveProposalAdvancementButton();
-    }
-
-    /**
      * @When I fill :analyst1 and :analyst2 to the analyst select
      */
     public function iFillProposalEvaluationAnalysts(string $analyst1, string $analyst2)
@@ -162,41 +116,5 @@ trait AdminProposalTrait
             ->find('css', $element)
             ->click()
         ;
-    }
-
-    /**
-     * @When I delete the proposal
-     */
-    public function iDeleteTheProposal()
-    {
-        $element = '#proposal-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
-        $this->getCurrentPage()
-            ->find('css', $element)
-            ->click()
-        ;
-    }
-
-    /**
-     * @When I confirm the admin proposal deletion
-     */
-    public function iConfirmAdminProposalDeletion()
-    {
-        $this->getSession()
-            ->getDriver()
-            ->getWebDriverSession()
-            ->accept_alert()
-        ;
-    }
-
-    /**
-     * @When I should see status :status
-     */
-    public function iShouldSeeTheProposalStatus(string $status)
-    {
-        $element =
-            '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' .
-            $status .
-            '"]+span';
-        $this->getCurrentPage()->find('css', $element);
     }
 }
