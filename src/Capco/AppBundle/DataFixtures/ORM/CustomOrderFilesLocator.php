@@ -357,6 +357,16 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Qa/UserInvite.yaml',
             $this->fixturesDir . 'Qa/UserType.yaml',
             $this->fixturesDir . 'Qa/UserTypeTranslation.yaml',
+
+            // Budget Participatif project.
+            $this->fixturesDir . 'Qa/Project.yaml',
+            $this->fixturesDir . 'Qa/CollectStep.yaml',
+            $this->fixturesDir . 'Qa/SelectionStep.yaml',
+            $this->fixturesDir . 'Qa/Status.yaml',
+            $this->fixturesDir . 'Qa/ProjectAbstractStep.yaml',
+            $this->fixturesDir . 'Qa/ProposalFormNotificationConfiguration.yaml',
+            $this->fixturesDir . 'Qa/ProposalForm.yaml',
+            $this->fixturesDir . 'Qa/Proposal.yaml',
         ];
     }
 }

@@ -1,0 +1,1076 @@
+Capco\AppBundle\Entity\Proposal:
+    proposalBP1:
+        id: proposalBP1
+        title: Construction d'un centre culturel polyvalent ouvert à toutes les générations proposant des ateliers artistiques, des spectacles et des expositions tout au long de l'année
+        body: Nous proposons l'installation d'abris vélos sécurisés et couverts dans tous les équipements publics de la ville pour encourager l'usage du vélo et protéger les deux-roues contre le vol et les intempéries.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Capitole, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP2:
+        id: proposalBP2
+        title: Air pur dans nos rues
+        body: Cette proposition vise à renforcer la cohésion sociale dans notre commune en créant des espaces de rencontre intergénérationnels où les jeunes et les seniors peuvent échanger, s'entraider et partager leurs expériences de vie.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP3:
+        id: proposalBP3
+        title: Pour un quartier sans voiture le dimanche matin
+        body: Notre proposition vise à créer un fonds d'urgence municipal pour aider les habitants victimes de sinistres domestiques à se reloger rapidement et à remplacer les biens essentiels perdus lors d'un incendie.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 3 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP4:
+        id: proposalBP4
+        title: Des arbres partout
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Peyrolières, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 4 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP5:
+        id: proposalBP5
+        title: Zéro déchet
+        body: Nous proposons l'organisation de courses solidaires mensuelles pour les personnes âgées ou à mobilité réduite qui ne peuvent pas faire leurs courses seules, assurées par des bénévoles de la commune.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Saint-Rome, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 5 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP6:
+        id: proposalBP6
+        title: Potager collectif sur le toit de la mairie
+        body: La pollution lumineuse nuit à la santé et à la biodiversité nocturne. Nous proposons d'équiper l'éclairage public de minuteries et de détecteurs de mouvement pour réduire la consommation et les nuisances lumineuses.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Peyrolières, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 6 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP7:
+        id: proposalBP7
+        title: Installation de nichoirs à oiseaux sur tous les bâtiments publics de la ville
+        body: La biodiversité en ville est menacée par l'urbanisation croissante. Nous proposons la création d'un réseau de corridors écologiques reliant les parcs et espaces verts, permettant à la faune et à la flore de se développer librement.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Fer à Cheval, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 7 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP8:
+        id: proposalBP8
+        title: Programme de végétalisation des façades
+        body: Nous proposons d'organiser des échanges de savoirs entre habitants sous forme d'une université populaire gratuite et ouverte à tous, avec des cours animés par des bénévoles experts dans leur domaine.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Émile Cartailhac, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 8 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP9:
+        id: proposalBP9
+        title: Installation de panneaux solaires photovoltaïques sur l'ensemble des bâtiments communaux afin de produire de l'énergie renouvelable et réduire la facture énergétique
+        body: Nous souhaitons aménager un cheminement piéton sécurisé et agréable entre la gare et le centre-ville pour faciliter les déplacements des voyageurs et inciter à abandonner la voiture pour les courtes distances.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Saint-Rome, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 9 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP10:
+        id: proposalBP10
+        title: Rampe d'accès pour personnes à mobilité réduite sur les trottoirs principaux
+        body: Nous proposons la mise en place d'un système de navette gratuite entre les quartiers périphériques et le centre-ville les soirs de week-end pour permettre à tous de profiter de l'offre culturelle et festive.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Peyrolières, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 10 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP11:
+        id: proposalBP11
+        title: Installation de ruches urbaines sur les toits
+        body: Notre proposition vise à créer un programme de don de repas entre voisins permettant aux personnes qui cuisinent en grande quantité de partager leurs plats avec des personnes isolées ou dans le besoin.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Boulevard de la Marquette, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 11 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP12:
+        id: proposalBP12
+        title: Mise en place d'une navette électrique gratuite
+        body: Nous demandons la création d'une ligne téléphonique d'écoute et d'orientation pour les habitants en situation de détresse financière, afin de les mettre en contact avec les services d'aide disponibles.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Capitole, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 12 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP13:
+        id: proposalBP13
+        title: Création d'une épicerie solidaire gérée par les habitants du quartier
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Pomme, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 13 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP14:
+        id: proposalBP14
+        title: Terrasse végétalisée sur le parking municipal du centre-ville
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue des Lois, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 14 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP15:
+        id: proposalBP15
+        title: Développement d'un programme d'agriculture urbaine sur les toits et les espaces délaissés pour produire des légumes locaux et sensibiliser à une alimentation durable
+        body: La délinquance dans certains quartiers est liée à un manque de perspectives pour les jeunes. Nous proposons un programme d'activités culturelles et sportives gratuites pendant les vacances scolaires.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place de la Trinité, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 15 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP16:
+        id: proposalBP16
+        title: Jardins ouverts
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Capitole, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 16 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP17:
+        id: proposalBP17
+        title: Mise en place d'un service de médiation sociale et culturelle itinérant pour aller à la rencontre des habitants isolés et faciliter leur accès aux services publics de proximité
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Saint-Étienne, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 17 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP18:
+        id: proposalBP18
+        title: Programme de plantation massive d'arbres à feuilles caduques le long des axes routiers pour réduire les îlots de chaleur urbains et améliorer significativement le cadre de vie
+        body: Nous proposons la création d'un lieu de mémoire dédié à l'histoire ouvrière et populaire de notre ville pour valoriser le patrimoine immatériel local et transmettre cette mémoire aux jeunes générations.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Concorde, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 18 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP19:
+        id: proposalBP19
+        title: Nuit calme garantie
+        body: Les accidents de vélo sont trop fréquents dans notre ville. Nous proposons la mise en place d'une signalétique dédiée aux cyclistes, de pistes séparées et de cours de vélo gratuits pour les adultes débutants.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue Jean Rieux, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 19 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP20:
+        id: proposalBP20
+        title: Moins de béton
+        body: La gestion de l'eau dans notre ville est perfectible. Nous proposons l'installation de systèmes de récupération des eaux pluviales sur tous les bâtiments publics pour irriguer les espaces verts de façon durable.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Peyrolières, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 20 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP21:
+        id: proposalBP21
+        title: Création d'un jardin partagé dans le quartier nord
+        body: Nous proposons la création d'un centre de ressources pour les aidants familiaux, offrant information, soutien psychologique et solutions de répit pour les personnes qui s'occupent d'un proche dépendant.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Pomme, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 21 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP22:
+        id: proposalBP22
+        title: Nature
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Olivier, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 22 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP23:
+        id: proposalBP23
+        title: Mur d'expression artistique libre et gratuit
+        body: Notre proposition consiste à créer des jardins partagés sur les terrains municipaux inoccupés pour permettre aux habitants sans jardin de cultiver des légumes et de tisser des liens avec leurs voisins.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Salin, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 23 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP24:
+        id: proposalBP24
+        title: Manger bio à l'école
+        body: La santé mentale est un enjeu majeur souvent négligé par les politiques publiques. Cette proposition prévoit la création d'un espace d'écoute et de soutien psychologique gratuit et accessible à tous les habitants de la commune.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Bayard, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 24 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP25:
+        id: proposalBP25
+        title: Mise en place d'un programme d'éducation à l'environnement dans toutes les écoles primaires de la ville avec des sorties nature et des ateliers pratiques hebdomadaires
+        body: Face à la hausse des températures estivales, notre ville manque cruellement d'îlots de fraîcheur. Nous proposons l'installation de brumisateurs et la plantation massive d'arbres sur les places et artères principales.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Émile Cartailhac, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 25 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP26:
+        id: proposalBP26
+        title: Rénovation de l'aire de jeux pour enfants
+        body: Nous proposons la mise en place d'un service de livraison à domicile pour les personnes âgées ou handicapées qui ne peuvent pas se déplacer facilement jusqu'aux commerces et services de proximité.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Jeanne d''Arc, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 26 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP27:
+        id: proposalBP27
+        title: Création d'un réseau de récupération des eaux de pluie pour arroser les espaces verts publics et réduire la consommation d'eau potable de la commune
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue du Taur, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 27 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP28:
+        id: proposalBP28
+        title: Récupération des eaux de pluie sur les marchés
+        body: Les personnes âgées de notre commune souffrent d'un isolement croissant. Nous proposons la création d'un café associatif intergénérationnel où seniors et jeunes se retrouvent autour d'activités communes et d'échanges de savoirs.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue Jean Rieux, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 28 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP29:
+        id: proposalBP29
+        title: Carte interactive des ressources et services disponibles dans le quartier
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 29 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP30:
+        id: proposalBP30
+        title: Culture
+        body: Notre proposition vise à développer les toitures végétalisées sur les bâtiments publics et à inciter les propriétaires privés à faire de même grâce à des aides financières et un accompagnement technique.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue d''Alsace-Lorraine, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 30 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP31:
+        id: proposalBP31
+        title: Solidarité
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place de la Trinité, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 31 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP32:
+        id: proposalBP32
+        title: Aide aux jeunes en insertion professionnelle
+        body: Nous demandons la mise en place d'un service de garde d'animaux solidaire pour permettre aux personnes hospitalisées ou en situation d'urgence de confier temporairement leurs animaux de compagnie.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de Metz, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 32 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP33:
+        id: proposalBP33
+        title: Système d'alerte inondation en temps réel pour les riverains
+        body: Les aires de jeux pour enfants de notre quartier sont vétustes et dangereuses. Nous demandons leur rénovation complète avec des équipements inclusifs permettant à tous les enfants, y compris handicapés, de jouer ensemble.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de Metz, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 33 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP34:
+        id: proposalBP34
+        title: Une piscine naturelle en plein air
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Jeanne d''Arc, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 34 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP35:
+        id: proposalBP35
+        title: Silence s'il vous plaît
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de Metz, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 35 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP36:
+        id: proposalBP36
+        title: Créer une piste cyclable sur le boulevard principal
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Concorde, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 36 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP37:
+        id: proposalBP37
+        title: Création d'un itinéraire patrimoine historique
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 37 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP38:
+        id: proposalBP38
+        title: Arbres
+        body: Nous proposons la mise en place d'un service public de partage de vélos adaptés pour les personnes handicapées, permettant à tous de se déplacer librement et de profiter des espaces verts de la ville.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Olivier, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 38 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP39:
+        id: proposalBP39
+        title: Lien
+        body: Les déchets plastiques souillent nos rues et nos espaces naturels de façon alarmante. Notre proposition vise à mettre en place un système de collecte innovant avec des points de dépôt sécurisés et une campagne de sensibilisation.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Chemin de Lapujade, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 39 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP40:
+        id: proposalBP40
+        title: Fontaines
+        body: Nous proposons d'installer des tables de pique-nique et des barbecues collectifs dans les espaces verts municipaux pour permettre aux familles de profiter de leur ville et de se retrouver en plein air.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Jeanne d''Arc, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 40 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP41:
+        id: proposalBP41
+        title: Création d'un espace coworking de quartier
+        body: Notre proposition vise à créer un réseau de points de collecte de dons alimentaires dans les commerces du quartier pour alimenter une banque alimentaire locale et lutter contre le gaspillage alimentaire.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Olivier, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 41 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP42:
+        id: proposalBP42
+        title: Création d'un réseau de points d'eau potable gratuits et accessibles dans tous les espaces publics pour lutter contre la déshydratation lors des vagues de chaleur estivales
+        body: Notre proposition vise à créer un programme de soutien scolaire gratuit dans les écoles du quartier, animé par des bénévoles retraités, pour aider les enfants en difficulté et réduire les inégalités éducatives.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue Jean Rieux, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 42 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP43:
+        id: proposalBP43
+        title: Développement d'un réseau de bibliothèques de rue et de boîtes à livres pour promouvoir la lecture et le partage de la culture dans tous les quartiers de la ville
+        body: Nous proposons d'aménager des espaces de travail nomade gratuits dans les bibliothèques et centres culturels de la ville pour les télétravailleurs et les étudiants qui manquent d'espace chez eux.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue des Amidonniers, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 43 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP44:
+        id: proposalBP44
+        title: Un skatepark digne de ce nom enfin
+        body: Notre proposition consiste à organiser des marchés de producteurs locaux dans chaque quartier de la ville, une fois par semaine, pour encourager l'alimentation locale et soutenir les agriculteurs du territoire.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Gabriel Péri, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 44 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP45:
+        id: proposalBP45
+        title: Ensemble c'est mieux
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des Minimes, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 45 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP46:
+        id: proposalBP46
+        title: Bornes de recharge pour vélos électriques dans les équipements publics
+        body: Nous proposons de créer un programme d'adoption de parcelles de nature urbaine permettant aux habitants de prendre soin d'un espace vert public en échange d'une reconnaissance officielle de la ville.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Boulevard de la Marquette, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 46 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP47:
+        id: proposalBP47
+        title: Mise en place de toilettes publiques supplémentaires
+        body: Notre proposition vise à améliorer la gestion des déchets verts en créant des sites de compostage collectif dans les parcs et jardins publics, avec formation des habitants à leur utilisation correcte.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Capitole, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 47 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP48:
+        id: proposalBP48
+        title: Cours de premiers secours ouverts à tous les habitants gratuitement
+        body: Notre proposition porte sur la création d'un réseau de points relais pour faciliter la livraison des colis à domicile et réduire les trajets inutiles des livreurs dans les quartiers résidentiels.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 48 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP49:
+        id: proposalBP49
+        title: Paix
+        body: Nous proposons la mise en place d'un service de médiation de voisinage gratuit et accessible pour aider les habitants à résoudre leurs conflits à l'amiable et améliorer la qualité de vie dans les immeubles.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 49 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP50:
+        id: proposalBP50
+        title: Fontaine à eau réfrigérée et filtrée sur la place du marché
+        body: La qualité de l'air dans notre ville dépasse régulièrement les seuils réglementaires. Nous proposons l'installation d'un réseau de capteurs de qualité de l'air et la mise en place de mesures correctives immédiates.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Chemin de Lapujade, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 50 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP51:
+        id: proposalBP51
+        title: Ombrage
+        body: Le sport est bon pour la santé mais les équipements sportifs de notre ville sont vieillissants et insuffisants. Notre projet prévoit la construction d'une nouvelle salle omnisports accessible à tous les habitants avec des horaires adaptés.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Bayard, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 51 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP52:
+        id: proposalBP52
+        title: Des classes vertes pour toutes les écoles
+        body: La traversée de certaines grandes artères est dangereuse pour les piétons. Nous proposons l'installation de passages piétons supplémentaires et l'allongement des temps de feux verts pour les traversées.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Salin, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 52 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP53:
+        id: proposalBP53
+        title: Réduction de la vitesse aux abords des écoles
+        body: Notre proposition consiste à développer un programme de formation numérique gratuit pour les seniors afin de les aider à utiliser les services en ligne et à rester connectés avec leurs proches.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Quai de la Daurade, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 53 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP54:
+        id: proposalBP54
+        title: Eau propre en ville
+        body: Notre proposition vise à développer l'économie circulaire locale en créant un réseau de ressourceries où les habitants peuvent déposer, emprunter et échanger des objets du quotidien gratuitement ou à faible coût.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Bayard, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 54 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP55:
+        id: proposalBP55
+        title: Réhabilitation de la salle des fêtes du quartier
+        body: Il est essentiel de réduire les nuisances sonores liées à la circulation automobile dense en centre-ville. Nous proposons l'installation de revêtements phoniques et la création de zones à faibles émissions sonores.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des Minimes, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 55 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP56:
+        id: proposalBP56
+        title: Réhabilitation et mise aux normes de l'ensemble des équipements sportifs de plein air pour les rendre accessibles aux personnes en situation de handicap moteur ou sensoriel
+        body: Notre proposition consiste à créer un programme de mentorat entre les habitants expérimentés et les jeunes en recherche d'emploi pour faciliter leur insertion professionnelle et renforcer la solidarité locale.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 56 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP57:
+        id: proposalBP57
+        title: Carrefour sécurisé devant l'école primaire
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Chemin de Lapujade, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 57 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP58:
+        id: proposalBP58
+        title: Bibliothèque de rue en libre accès permanent
+        body: Notre proposition consiste à créer un programme d'art public participatif permettant aux habitants de contribuer à l'embellissement de leur quartier par des fresques murales, des sculptures et des installations.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Wilson, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 58 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP59:
+        id: proposalBP59
+        title: Propreté urbaine
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue du Taur, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 59 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP60:
+        id: proposalBP60
+        title: Bancs publics supplémentaires
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Boulevard de Strasbourg, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 60 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP61:
+        id: proposalBP61
+        title: Réhabilitation complète et transformation de l'ancienne friche industrielle en parc urbain inclusif accessible à tous avec des espaces de jeux, de repos et de culture
+        body: Notre proposition consiste à mettre en place un programme de remplacement progressif des véhicules municipaux par des véhicules électriques ou à hydrogène pour réduire les émissions de gaz à effet de serre.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Quai de la Daurade, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 61 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP62:
+        id: proposalBP62
+        title: Vélos
+        body: Face aux défis du changement climatique, il devient urgent d'agir localement. Notre proposition consiste à installer des panneaux solaires sur les bâtiments municipaux afin de réduire notre empreinte carbone collective.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 62 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP63:
+        id: proposalBP63
+        title: Mise en place d'un composteur collectif de quartier
+        body: La qualité de l'eau potable est une préoccupation légitime et partagée par de nombreux habitants. Notre proposition vise à installer des fontaines à eau réfrigérée sur les principales places publiques de la ville.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 63 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP64:
+        id: proposalBP64
+        title: Végétalisation des parkings du centre-ville
+        body: Notre marché hebdomadaire est un lieu de vie essentiel mais il manque d'infrastructures adaptées. Nous proposons sa rénovation complète avec des équipements modernes, des sanitaires accessibles et une meilleure gestion des déchets.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue d''Alsace-Lorraine, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 64 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP65:
+        id: proposalBP65
+        title: Lumière
+        body: Notre proposition consiste à installer des panneaux d'affichage numérique dans les principales places publiques pour informer les habitants en temps réel des événements locaux et des informations pratiques.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allées Jean Jaurès, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 65 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP66:
+        id: proposalBP66
+        title: Mise en place d'un réseau de repair cafés où les habitants peuvent venir réparer leurs objets du quotidien gratuitement avec l'aide de bénévoles qualifiés et passionnés
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des États-Unis, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 66 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP67:
+        id: proposalBP67
+        title: Amélioration de la signalétique pour les piétons
+        body: Notre proposition vise à créer une maison du projet participatif permanente où les habitants peuvent venir proposer, débattre et suivre l'avancement des projets citoyens financés par la commune.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Pomme, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 67 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP68:
+        id: proposalBP68
+        title: Atelier réparation vélo gratuit chaque samedi
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Concorde, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 68 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP69:
+        id: proposalBP69
+        title: Création d'une maison de santé pluridisciplinaire avec médecins généralistes, spécialistes et professionnels paramédicaux pour améliorer l'accès aux soins de proximité
+        body: Notre proposition vise à installer des panneaux solaires acoustiques le long des voies ferrées traversant la ville pour produire de l'électricité renouvelable tout en réduisant les nuisances sonores.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Bayard, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 69 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP70:
+        id: proposalBP70
+        title: Aménagement de corridors écologiques entre les espaces verts de la ville pour favoriser la biodiversité urbaine et le passage de la faune sauvage en milieu urbain dense
+        body: Notre proposition consiste à installer des distributeurs de protections hygiéniques gratuites dans tous les établissements scolaires et les équipements publics pour lutter contre la précarité menstruelle.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 70 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP71:
+        id: proposalBP71
+        title: Plus de vélos !
+        body: Nous demandons la création d'un sentier nature balisé traversant les espaces verts de la ville pour permettre aux promeneurs de découvrir la faune et la flore locales grâce à des panneaux pédagogiques.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place de la Trinité, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 71 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP72:
+        id: proposalBP72
+        title: Réaménagement de la place du marché
+        body: Nous proposons la mise en place d'ateliers de cuisine collective dans les centres sociaux du quartier pour permettre aux habitants de cuisiner ensemble, partager leurs recettes et créer du lien social.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Émile Cartailhac, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 72 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP73:
+        id: proposalBP73
+        title: Création d'un dispositif d'aide à la rénovation énergétique des logements anciens pour les ménages modestes afin de réduire leurs factures et améliorer leur confort thermique
+        body: Notre proposition consiste à mettre en place des horaires décalés dans les équipements sportifs municipaux pour permettre aux travailleurs en horaires atypiques de pratiquer une activité physique régulière.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue de Muret, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 73 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP74:
+        id: proposalBP74
+        title: Reforestation de la colline du quartier nord
+        body: Notre proposition vise à créer une application mobile citoyenne permettant aux habitants de signaler les problèmes de voirie, de propreté et de sécurité et de suivre le traitement de leurs signalements.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Wilson, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 74 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP75:
+        id: proposalBP75
+        title: Trottoirs accessibles
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue Jean Rieux, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 75 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP76:
+        id: proposalBP76
+        title: Aménagement d'une zone de rencontre entre piétons, cyclistes et automobilistes pour favoriser la cohabitation douce et apaisée dans le cœur de ville
+        body: Les personnes à mobilité réduite rencontrent de nombreux obstacles dans nos rues. Nous proposons un audit complet de l'accessibilité de la voirie et la mise en conformité systématique des points noirs identifiés.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des Minimes, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 76 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP77:
+        id: proposalBP77
+        title: Installation d'un système de compostage collectif à grande échelle avec points de dépôt dans chaque quartier et redistribution du compost aux jardins communautaires locaux
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Saint-Rome, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 77 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP78:
+        id: proposalBP78
+        title: Subvention pour les associations sportives locales
+        body: Notre proposition vise à améliorer la propreté des espaces publics en installant des poubelles supplémentaires et en organisant des collectes citoyennes mensuelles dans chaque quartier de la ville.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Salin, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 78 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP79:
+        id: proposalBP79
+        title: Rue conviviale
+        body: La création d'une ferme urbaine participative permettrait de produire des légumes frais localement, de sensibiliser les habitants à l'agriculture durable et de créer du lien social dans le quartier tout au long de l'année.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue d''Alsace-Lorraine, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 79 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP80:
+        id: proposalBP80
+        title: Programme de covoiturage scolaire organisé entre les familles du quartier
+        body: Les jeunes de notre quartier manquent d'espaces de socialisation adaptés à leurs besoins. Nous proposons la création d'une maison des jeunes ouverte tous les soirs avec des activités culturelles et sportives diversifiées.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue des Lois, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 80 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP81:
+        id: proposalBP81
+        title: Journée mensuelle sans voiture dans le centre historique de la commune
+        body: Les transports en commun de notre ville sont insuffisants, notamment pour les habitants des quartiers périphériques. Nous proposons la création d'une nouvelle ligne de bus reliant le centre-ville aux zones résidentielles éloignées.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Fer à Cheval, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 81 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP82:
+        id: proposalBP82
+        title: Piétonnisation du centre historique de la ville
+        body: Nous proposons l'organisation de journées portes ouvertes dans tous les équipements publics de la ville pour permettre aux habitants de découvrir les services disponibles et rencontrer les agents municipaux.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue d''Alsace-Lorraine, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 82 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP83:
+        id: proposalBP83
+        title: Création d'un parcours sportif inclusif et accessible dans le parc municipal avec des équipements adaptés à tous les niveaux et toutes les capacités physiques des usagers
+        body: Nous demandons la création d'un fonds municipal d'aide à la rénovation énergétique pour permettre aux propriétaires modestes de financer l'isolation de leur logement et réduire leur consommation d'énergie.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Concorde, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 83 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP84:
+        id: proposalBP84
+        title: Refuges pour insectes dans chaque square
+        body: Notre quartier souffre d'un manque criant d'espaces verts. Il serait souhaitable d'implanter des arbres et des plantes le long des rues principales pour améliorer la qualité de l'air et offrir de l'ombre aux habitants pendant les canicules estivales.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des Minimes, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 84 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP85:
+        id: proposalBP85
+        title: Création d'un verger urbain participatif sur le terrain municipal inutilisé
+        body: Notre proposition vise à créer un observatoire citoyen de l'environnement urbain pour mesurer et publier régulièrement des indicateurs de qualité de vie et interpeller les élus sur les points d'amélioration.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des États-Unis, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 85 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP86:
+        id: proposalBP86
+        title: Mise en place d'une plateforme numérique participative pour permettre aux habitants de signaler les problèmes de voirie et de suivre leur traitement en temps réel
+        body: Notre proposition consiste à créer un programme de résidences d'artistes dans les quartiers populaires pour favoriser la création culturelle locale et l'appropriation des espaces publics par les habitants.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue des Amidonniers, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 86 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP87:
+        id: proposalBP87
+        title: Bacs à compost dans chaque résidence et immeuble collectif
+        body: L'accès à la culture doit être un droit pour tous sans exception. Nous proposons la création d'une médiathèque de quartier ouverte le soir et le week-end, avec une offre diversifiée incluant livres, films et ateliers créatifs.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Bayard, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 87 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP88:
+        id: proposalBP88
+        title: Programme de soutien aux petits commerces locaux via des aides à l'installation et une campagne de communication pour encourager l'achat local et la relocalisation économique
+        body: La précarité alimentaire touche de nombreuses familles dans notre commune. Nous proposons la création d'une épicerie solidaire proposant des produits de qualité à prix réduits pour les personnes en difficulté financière.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Pomme, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 88 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP89:
+        id: proposalBP89
+        title: Éclairage solaire intelligent pour les allées piétonnes des parcs
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Allée de Bellefontaine, 31100 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 89 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP90:
+        id: proposalBP90
+        title: Mise en place d'un bus de nuit le week-end
+        body: Notre proposition porte sur la création d'un label de qualité pour les commerces de proximité qui s'engagent dans une démarche éco-responsable, avec une communication valorisante auprès des habitants.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place Olivier, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 90 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP91:
+        id: proposalBP91
+        title: Améliorer l'éclairage dans les parcs municipaux
+        body: Notre proposition consiste à créer un réseau de pistes cyclables sécurisées et continues pour encourager l'usage du vélo au quotidien, réduire la pollution et améliorer la santé des habitants de façon durable.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue de Muret, 31300 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 91 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP92:
+        id: proposalBP92
+        title: Un parc pour tous
+        body: Notre proposition porte sur la création d'un jardin thérapeutique au sein de l'hôpital local, accessible aux patients, aux soignants et aux familles pour favoriser le bien-être et accélérer la guérison.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue Saint-Rome, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 92 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP93:
+        id: proposalBP93
+        title: Sport pour tous
+        body: La végétalisation des murs et toitures des bâtiments publics permettrait de réduire les îlots de chaleur, améliorer l'isolation thermique et offrir un cadre de vie plus agréable à tous les habitants.
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Boulevard de la Marquette, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 93 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP94:
+        id: proposalBP94
+        title: Installer des panneaux solaires sur les toits des écoles
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Chemin de Lapujade, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 94 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP95:
+        id: proposalBP95
+        title: Ville apaisée
+        body: Nous proposons d'installer des bornes interactives d'information touristique et citoyenne dans les principaux points de passage de la ville pour mieux orienter les habitants et les visiteurs.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue des Amidonniers, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 95 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP96:
+        id: proposalBP96
+        title: Mobilité douce
+        body: Notre proposition vise à créer un programme de sciences participatives permettant aux habitants de contribuer à la connaissance de la biodiversité locale en observant et signalant les espèces animales et végétales.
+        author: '@userCreateurProjet'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Place du Fer à Cheval, 31500 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 96 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP97:
+        id: proposalBP97
+        title: Rénovation de la fresque murale historique du gymnase municipal
+        author: '@userMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des Minimes, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 97 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP98:
+        id: proposalBP98
+        title: Eau gratuite
+        body: Nous demandons la mise en place d'une signalétique bilingue dans les équipements publics de la ville pour faciliter l'accès aux services des habitants non francophones et favoriser leur intégration.
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Rue de la Pomme, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 98 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP99:
+        id: proposalBP99
+        title: Rénovation des trottoirs dégradés
+        body: Notre quartier manque d'équipements sportifs en plein air. Nous proposons l'installation d'un parcours de fitness extérieur avec des agrès adaptés à tous les âges et toutes les conditions physiques.
+        author: '@userOrgaMax'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Quai de la Daurade, 31000 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 99 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    proposalBP100:
+        id: proposalBP100
+        title: Des douches publiques gratuites pour tous
+        author: '@userCollectivite'
+        proposalForm: '@proposalformBP'
+        address: '[{"formatted_address":"Avenue des États-Unis, 31200 Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"ROOFTOP"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["street_address"]}]'
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00'))->modify("+ 100 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt

@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\Project:
+    projectBP:
+        id: 'projectBP'
+        title: BP 100 propal
+        creator: '@userMax'
+        createdAt: <identity((new \DateTime('2024-02-01 00:00:00')))>
+        updatedAt: <identity((new \DateTime('2024-02-01 00:00:00')))>
+        publishedAt: <identity((new \DateTime('2024-02-01 00:00:00')))>
+        visibility: 2

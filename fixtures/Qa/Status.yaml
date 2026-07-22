@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\Status:
+    statusBPAnalysing:
+        id: statusBPAnalysing
+        name: Sous analyse
+        position: 0
+        step: '@selectionStepBPAnalyse'
+        color: warning
+    statusBPToVote:
+        id: statusBPToVote
+        name: Mis au vote
+        position: 1
+        step: '@selectionStepBPAnalyse'
+        color: success
+    statusBPNotFeasible:
+        id: statusBPNotFeasible
+        name: Non réalisable
+        position: 2
+        step: '@selectionStepBPAnalyse'
+        color: danger
+    statusBPVote:
+        id: statusBPVote
+        name: Mis au vote
+        position: 0
+        step: '@selectionStepBPVote'
+        color: primary

@@ -1,0 +1,20 @@
+Capco\AppBundle\Entity\Steps\SelectionStep:
+    selectionStepBPAnalyse:
+        id: selectionStepBPAnalyse
+        title: Analyse
+        label: Analyse
+        body: Les projets déposés sont en cours d'analyse par les services concernés.
+        startAt: <identity((new \DateTime('2024-02-01')))>
+        endAt: <identity((new \DateTime('2031-12-31')))>
+        voteType: 0
+        defaultStatus: '@statusBPAnalysing'
+    selectionStepBPVote:
+        id: selectionStepBPVote
+        title: Vote
+        label: Vote
+        body: Votez pour vos projets préférés du budget participatif.
+        startAt: <identity((new \DateTime('2024-02-01')))>
+        endAt: <identity((new \DateTime('2031-12-31')))>
+        voteType: 2
+        votesLimit: 3
+        defaultStatus: '@statusBPVote'

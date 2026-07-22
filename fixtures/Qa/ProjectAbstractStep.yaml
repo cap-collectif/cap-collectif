@@ -1,0 +1,16 @@
+Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
+    pasBP1:
+        id: pasBP1
+        step: '@collectStepBP'
+        project: '@projectBP'
+        position: 1
+    pasBP2:
+        id: pasBP2
+        step: '@selectionStepBPAnalyse'
+        project: '@projectBP'
+        position: 2
+    pasBP3:
+        id: pasBP3
+        step: '@selectionStepBPVote'
+        project: '@projectBP'
+        position: 3

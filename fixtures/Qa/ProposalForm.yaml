@@ -1,0 +1,22 @@
+Capco\AppBundle\Entity\ProposalForm:
+    proposalformBP:
+        id: proposalformBP
+        title: Formulaire de dépôt des projets
+        description: Déposez votre projet pour le budget participatif
+        step: '@collectStepBP'
+        usingThemes: false
+        usingAddress: true
+        usingDistrict: false
+        usingDescription: true
+        usingIllustration: true
+        isMapViewEnabled: true
+        usingCategories: true
+        usingSummary: false
+        districtMandatory: false
+        themeMandatory: false
+        descriptionMandatory: false
+        categoryMandatory: false
+        objectType: 'proposal'
+        zoomMap: 12
+        mapCenter: '[{"formatted_address":"Toulouse, France","geometry":{"location":{"lat":43.6047,"lng":1.4442},"location_type":"APPROXIMATE"},"address_components":[{"long_name":"Toulouse","short_name":"Toulouse","types":["locality","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"types":["locality","political"]}]'
+        notificationsConfiguration: '@proposalFormNotificationConfigurationBP'

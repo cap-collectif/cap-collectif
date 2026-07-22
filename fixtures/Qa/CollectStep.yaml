@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Steps\CollectStep:
+    collectStepBP:
+        id: collectStepBP
+        title: Dépôt des projets
+        label: Dépôt
+        body: Déposez votre projet pour le budget participatif.
+        startAt: <identity((new \DateTime('2024-02-01')))>
+        endAt: <identity((new \DateTime('2031-12-31')))>
