@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DeveloperController extends Controller
@@ -33,10 +34,18 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects|delete-account-by-email"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     * @Route("/developer/guides/{guide}", name="app_developer_guide", requirements={"guide" = "using-global-node-ids|intro-to-graphql|events|proposals|questionnaires|consultations|projects|anonymize-account-by-email|delete-account-by-email"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      */
-    public function guideAction(string $guide)
+    public function guideAction(string $guide): Response
     {
+        if ('delete-account-by-email' === $guide) {
+            return $this->redirectToRoute(
+                'app_developer_guide',
+                ['guide' => 'anonymize-account-by-email'],
+                Response::HTTP_MOVED_PERMANENTLY
+            );
+        }
+
         return $this->render('@CapcoApp/Developer/guides/' . $guide . '.html.twig');
     }
 

@@ -25,10 +25,10 @@ PreviewMutation:
                     inputType: PreviewDeleteEventInput
                     payloadType: PreviewDeleteEventPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", args, getUser())'
-            deleteAccountByEmail:
+            anonymizeAccountByEmail:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: PreviewDeleteAccountByEmailInput
-                    payloadType: PreviewDeleteAccountByEmailPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountByEmailMutation", args, getUser())'
+                    inputType: PreviewAnonymizeAccountByEmailInput
+                    payloadType: PreviewAnonymizeAccountByEmailPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AnonymizeAccountByEmailMutation", args, getUser())'

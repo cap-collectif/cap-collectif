@@ -1012,6 +1012,30 @@ type AnalysisConfiguration {
   effectiveDateProcessed: Boolean
 }
 
+"""Available errors on AnonymizeAccountByEmail mutation."""
+enum AnonymizeAccountByEmailErrorCode {
+  """The given email does not correspond to an existing user."""
+  NON_EXISTING_EMAIL
+
+  """You can't anonymize a user that has role 'ROLE_SUPER_ADMIN'."""
+  ANONYMIZATION_DENIED
+}
+
+input AnonymizeAccountByEmailInput {
+  """The email of the user account to anonymize."""
+  email: String!
+  clientMutationId: String
+}
+
+type AnonymizeAccountByEmailPayload {
+  """The anonymized user's former email."""
+  email: String
+
+  """Contains the error code if one occurred."""
+  errorCode: AnonymizeAccountByEmailErrorCode
+  clientMutationId: String
+}
+
 """A contribution"""
 type Answer {
   """Identifies the date and time when the object was created."""
@@ -5655,30 +5679,6 @@ enum DebateVoteOrderField {
   CREATED_AT
 }
 
-"""Available errors on DeleteAccountByEmail mutation."""
-enum DeleteAccountByEmailErrorCode {
-  """The given email does not correspond to an existing user."""
-  NON_EXISTING_EMAIL
-
-  """You can't delete a user that has role 'ROLE_SUPER_ADMIN'."""
-  DELETION_DENIED
-}
-
-input DeleteAccountByEmailInput {
-  """The user's email to delete"""
-  email: String!
-  clientMutationId: String
-}
-
-type DeleteAccountByEmailPayload {
-  """The deleted user's email."""
-  email: String
-
-  """Contains the error code if one occurred."""
-  errorCode: DeleteAccountByEmailErrorCode
-  clientMutationId: String
-}
-
 """Available errors for a `DeleteAccount` mutation."""
 enum DeleteAccountErrorCode {
   """Cannot delete super admin account !"""
@@ -9355,7 +9355,7 @@ type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
   deleteEvent(input: DeleteEventInput!): DeleteEventPayload
-  deleteAccountByEmail(input: DeleteAccountByEmailInput!): DeleteAccountByEmailPayload
+  anonymizeAccountByEmail(input: AnonymizeAccountByEmailInput!): AnonymizeAccountByEmailPayload
   removeSiteFavicon(input: RemoveSiteFaviconInput!): RemoveSiteFaviconPayload
   changeSiteFavicon(input: ChangeSiteFaviconInput!): ChangeSiteFaviconPayload
   reviewEvent(input: ReviewEventInput!): ReviewEventPayload

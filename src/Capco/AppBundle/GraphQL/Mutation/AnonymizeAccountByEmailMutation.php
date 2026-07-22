@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Anonymizer\UserAnonymizer;
-use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
+use Capco\AppBundle\Enum\AnonymizeAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -31,7 +31,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
+class AnonymizeAccountByEmailMutation extends BaseAccountAnonymizationMutation
 {
     use MutationTrait;
 
@@ -56,7 +56,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        UserAnonymizer $userAnonymiser,
+        UserAnonymizer $userAnonymizer,
         SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct(
@@ -79,7 +79,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $userAnonymiser,
+            $userAnonymizer,
             $sendInBluePublisher
         );
     }
@@ -87,39 +87,24 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
     public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);
-        $user = $viewer;
         $email = $input->offsetGet('email');
+        $user = $this->userRepository->findOneByEmail($email);
 
-        if (isset($email)) {
-            $user = $this->userRepository->findOneByEmail($email);
-            if (!$user) {
-                return ['errorCode' => DeleteAccountByEmailErrorCode::NON_EXISTING_EMAIL];
-            }
-            if ($user->hasRole(User::ROLE_SUPER_ADMIN)) {
-                return ['errorCode' => DeleteAccountByEmailErrorCode::DELETION_DENIED];
-            }
-            $email = $user->getEmail();
+        if (!$user) {
+            return ['errorCode' => AnonymizeAccountByEmailErrorCode::NON_EXISTING_EMAIL];
+        }
+        if ($user->hasRole(User::ROLE_SUPER_ADMIN)) {
+            return ['errorCode' => AnonymizeAccountByEmailErrorCode::ANONYMIZATION_DENIED];
         }
 
         try {
-            $this->hardDeleteUserContributionsInActiveSteps($user);
-        } catch (Exception $e) {
-            $this->logger->error($e->getMessage(), ['context' => 'delete_user_account_by_email']);
-
-            throw new UserError("An error occured during user's contributions deletion");
-        }
-        //in order not to reference dead relationships between entities
-        $this->em->refresh($user);
-
-        try {
-            $this->userAnonymizer->anonymize($user);
+            $this->anonymizeAccount($user);
             $this->em->refresh($user);
-            $this->softDeleteContents($user);
             $this->em->flush();
         } catch (Exception $e) {
-            $this->logger->error($e->getMessage(), ['context' => 'delete_user_account_by_email']);
+            $this->logger->error($e->getMessage(), ['context' => 'anonymize_user_account_by_email']);
 
-            throw new UserError("An error occured during the user's anonymization");
+            throw new UserError("An error occurred during the user's anonymization");
         }
 
         return ['email' => $email];

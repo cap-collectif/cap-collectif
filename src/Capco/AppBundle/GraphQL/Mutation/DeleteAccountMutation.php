@@ -32,7 +32,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class DeleteAccountMutation extends BaseDeleteUserMutation
+class DeleteAccountMutation extends BaseAccountAnonymizationMutation
 {
     use MutationTrait;
 
@@ -111,11 +111,11 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
     public function deleteAccount(string $deleteType, User $user): void
     {
         if (DeleteAccountType::HARD === $deleteType) {
-            $this->hardDeleteUserContributionsInActiveSteps($user);
+            $this->deleteRemovableContributions($user);
             $this->em->refresh($user);
-            $this->softDeleteContents($user);
+            $this->eraseRemainingAssociatedContent($user);
         }
-        $this->anonymizeUser($user);
+        $this->anonymizeAccount($user);
         $this->em->refresh($user);
 
         $this->em->flush();

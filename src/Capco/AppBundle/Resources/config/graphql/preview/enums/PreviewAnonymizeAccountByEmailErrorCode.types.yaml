@@ -1,0 +1,12 @@
+PreviewAnonymizeAccountByEmailErrorCode:
+    type: enum
+    config:
+        name: AnonymizeAccountByEmailErrorCode
+        description: 'Available errors on AnonymizeAccountByEmail mutation.'
+        values:
+            NON_EXISTING_EMAIL:
+                value: !php/const Capco\AppBundle\Enum\AnonymizeAccountByEmailErrorCode::NON_EXISTING_EMAIL
+                description: 'The given email does not correspond to an existing user.'
+            ANONYMIZATION_DENIED:
+                value: !php/const Capco\AppBundle\Enum\AnonymizeAccountByEmailErrorCode::ANONYMIZATION_DENIED
+                description: "You can't anonymize a user that has role 'ROLE_SUPER_ADMIN'."

@@ -1,0 +1,9 @@
+PreviewAnonymizeAccountByEmailInput:
+    type: relay-mutation-input
+    config:
+        name: AnonymizeAccountByEmailInput
+        description: "The PreviewAnonymizeAccountByEmail mutation's input."
+        fields:
+            email:
+                type: 'String!'
+                description: 'The email of the user account to anonymize.'

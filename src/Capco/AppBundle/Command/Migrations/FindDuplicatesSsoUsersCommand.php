@@ -163,7 +163,7 @@ class FindDuplicatesSsoUsersCommand extends Command
                 }
             }
 
-            $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps($user);
+            $this->deleteAccountMutation->deleteRemovableContributions($user);
             $this->em->refresh($user);
             $this->em->remove($user);
             $this->em->flush();

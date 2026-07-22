@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Enum;
 
-class DeleteAccountByEmailErrorCode implements EnumType
+class AnonymizeAccountByEmailErrorCode implements EnumType
 {
     final public const NON_EXISTING_EMAIL = 'NON_EXISTING_EMAIL';
-    final public const DELETION_DENIED = 'DELETION_DENIED';
+    final public const ANONYMIZATION_DENIED = 'ANONYMIZATION_DENIED';
 
     public static function isValid($value): bool
     {
@@ -14,7 +14,7 @@ class DeleteAccountByEmailErrorCode implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [self::NON_EXISTING_EMAIL, self::DELETION_DENIED];
+        return [self::NON_EXISTING_EMAIL, self::ANONYMIZATION_DENIED];
     }
 
     public static function getAvailableTypesToString(): string

@@ -19196,14 +19196,14 @@ parameters:
 			path: src/Capco/AppBundle/Enum/CreateMailingListErrorCode.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\DeleteAccountByEmailErrorCode\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Enum/DeleteAccountByEmailErrorCode.php
+			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\DeleteAccountByEmailErrorCode\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Enum/DeleteAccountByEmailErrorCode.php
+			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\DeleteAccountType\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -22586,29 +22586,29 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/AssignSupervisorToProposalsMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseDeleteUserMutation\\:\\:deleteResponsesAndEvaluationsFromProposal\\(\\) has parameter \\$proposal with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseAccountAnonymizationMutation\\:\\:deleteResponsesAndEvaluationsFromProposal\\(\\) has parameter \\$proposal with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/BaseDeleteUserMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/BaseAccountAnonymizationMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseDeleteUserMutation\\:\\:removeObjectMedia\\(\\) has parameter \\$object with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseAccountAnonymizationMutation\\:\\:removeObjectMedia\\(\\) has parameter \\$object with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/BaseDeleteUserMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/BaseAccountAnonymizationMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseDeleteUserMutation\\:\\:shallContributionBeDeleted\\(\\) has parameter \\$contribution with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseAccountAnonymizationMutation\\:\\:shouldContributionBeDeleted\\(\\) has parameter \\$contribution with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/BaseDeleteUserMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/BaseAccountAnonymizationMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseDeleteUserMutation\\:\\:shallContributionBeHidden\\(\\) has parameter \\$contribution with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseAccountAnonymizationMutation\\:\\:shouldContributionBeHidden\\(\\) has parameter \\$contribution with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/BaseDeleteUserMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/BaseAccountAnonymizationMutation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseDeleteUserMutation\\:\\:\\$originalEventListeners type has no value type specified in iterable type array\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseAccountAnonymizationMutation\\:\\:\\$originalEventListeners type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/BaseDeleteUserMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/BaseAccountAnonymizationMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\BaseUpdateProfile\\:\\:__invoke\\(\\) has no return type specified\\.$#"
@@ -23276,9 +23276,9 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Debate/UpdateDebateOpinionMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteAccountByEmailMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AnonymizeAccountByEmailMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteAccountByEmailMutation.php
+			path: src/Capco/AppBundle/GraphQL/Mutation/AnonymizeAccountByEmailMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteAccountMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"

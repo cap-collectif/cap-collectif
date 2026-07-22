@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Anonymize account by email Allows an admin to anonymize an account 1`] = `
+Object {
+  "anonymizeAccountByEmail": Object {
+    "email": "userToDelete@cap-collectif.com",
+    "errorCode": null,
+  },
+}
+`
+
+exports[
+  `Anonymize account by email Refuses access to a regular user 1`
+] = `[Error: Access denied to this field.: {"response":{"errors":[{"message":"Access denied to this field.","extensions":{"category":"user"},"locations":[{"line":3,"column":5}],"path":["anonymizeAccountByEmail"]}],"data":{"anonymizeAccountByEmail":null},"status":200},"request":{"query":"\\n  mutation anonymizeAccountByEmail($input: AnonymizeAccountByEmailInput!) {\\n    anonymizeAccountByEmail(input: $input) {\\n      email\\n      errorCode\\n    }\\n  }\\n","variables":{"input":{"email":"userToDelete@cap-collectif.com"}}}}]`
+
+exports[`Anonymize account by email Refuses to anonymize a super admin 1`] = `
+Object {
+  "anonymizeAccountByEmail": Object {
+    "email": null,
+    "errorCode": "ANONYMIZATION_DENIED",
+  },
+}
+`
+
+exports[`Anonymize account by email Returns an error for a non-existing email 1`] = `
+Object {
+  "anonymizeAccountByEmail": Object {
+    "email": null,
+    "errorCode": "NON_EXISTING_EMAIL",
+  },
+}
+`

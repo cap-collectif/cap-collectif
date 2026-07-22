@@ -34,7 +34,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-abstract class BaseDeleteUserMutation extends BaseDeleteMutation
+abstract class BaseAccountAnonymizationMutation extends BaseDeleteMutation
 {
     protected array $originalEventListeners = [];
 
@@ -64,7 +64,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         parent::__construct($em, $mediaProvider);
     }
 
-    public function softDeleteContents(User $user): void
+    public function eraseRemainingAssociatedContent(User $user): void
     {
         $contributions = $user->getContributions();
         $reports = $this->reportingRepository->findBy(['Reporter' => $user]);
@@ -118,7 +118,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
-    public function hardDeleteUserContributionsInActiveSteps(User $user): void
+    public function deleteRemovableContributions(User $user): void
     {
         // Disable the built-in softdelete
         $filters = $this->em->getFilters();
@@ -130,10 +130,10 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $contributions = $user->getContributions();
         $toDeleteList = [];
         foreach ($contributions as $contribution) {
-            if ($this->shallContributionBeDeleted($user, $contribution)) {
+            if ($this->shouldContributionBeDeleted($user, $contribution)) {
                 $toDeleteList[] = $contribution;
                 $this->deleteResponsesAndEvaluationsFromProposal($user, $contribution);
-            } elseif ($this->shallContributionBeHidden($contribution)) {
+            } elseif ($this->shouldContributionBeHidden($contribution)) {
                 $contribution->setBody($this->translator->trans('deleted-content-by-author'));
             }
 
@@ -155,7 +155,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
-    public function anonymizeUser(User $user): void
+    protected function anonymizeAccount(User $user): void
     {
         $email = $user->getEmail();
         $this->userAnonymizer->anonymize($user);
@@ -188,7 +188,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
     }
 
-    private function shallContributionBeDeleted(User $user, $contribution): bool
+    private function shouldContributionBeDeleted(User $user, $contribution): bool
     {
         if (
             null !== $contribution->getRelated()
@@ -217,7 +217,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         return false;
     }
 
-    private function shallContributionBeHidden($contribution): bool
+    private function shouldContributionBeHidden($contribution): bool
     {
         return $contribution instanceof Comment
             && $this->commentRepository->findOneBy(['parent' => $contribution->getId()]);

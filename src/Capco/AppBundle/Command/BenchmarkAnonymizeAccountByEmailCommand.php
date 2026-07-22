@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\GraphQL\Mutation\DeleteAccountByEmailMutation;
+use Capco\AppBundle\GraphQL\Mutation\AnonymizeAccountByEmailMutation;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\DBAL\Logging\DebugStack;
@@ -18,13 +18,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 #[AsCommand(
-    name: 'capco:benchmark:delete-account-by-email',
-    description: 'Run deleteAccountByEmail across many users and report timings/memory/query stats.'
+    name: 'capco:benchmark:anonymize-account-by-email',
+    description: 'Run anonymizeAccountByEmail across many users and report timings/memory/query stats.',
 )]
-class BenchmarkDeleteAccountByEmailCommand extends Command
+class BenchmarkAnonymizeAccountByEmailCommand extends Command
 {
     public function __construct(
-        private readonly DeleteAccountByEmailMutation $mutation,
+        private readonly AnonymizeAccountByEmailMutation $mutation,
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager
     ) {
@@ -37,7 +37,7 @@ class BenchmarkDeleteAccountByEmailCommand extends Command
             ->addArgument(
                 'emails',
                 InputArgument::IS_ARRAY,
-                'Email addresses to delete. If omitted, the command will pick recent non-admin users (use --limit).'
+                'Email addresses to anonymize. If omitted, the command will pick recent non-admin users (use --limit).'
             )
             ->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'How many users to pick when no emails are provided.', 10)
             ->addOption('viewer-email', null, InputOption::VALUE_REQUIRED, 'Admin email used as mutation viewer.', 'admin@cap-collectif.com')
@@ -66,12 +66,12 @@ class BenchmarkDeleteAccountByEmailCommand extends Command
         }
 
         if (!$emails) {
-            $io->warning('No users found to delete.');
+            $io->warning('No users found to anonymize.');
 
             return Command::SUCCESS;
         }
 
-        if (!$input->getOption('force') && !$io->confirm(sprintf('This will delete %d users. Continue?', \count($emails)), false)) {
+        if (!$input->getOption('force') && !$io->confirm(sprintf('This will anonymize %d users. Continue?', \count($emails)), false)) {
             return Command::SUCCESS;
         }
 
@@ -85,13 +85,13 @@ class BenchmarkDeleteAccountByEmailCommand extends Command
             $connection->getConfiguration()->setSQLLogger($sqlLogger);
         }
 
-        $io->section(sprintf('Starting deleteAccountByEmail for %d users...', \count($emails)));
-        $overallEvent = $stopwatch->start('delete_accounts');
+        $io->section(sprintf('Starting anonymizeAccountByEmail for %d users...', \count($emails)));
+        $overallEvent = $stopwatch->start('anonymize_accounts');
         $rows = [];
         $peakMemory = 0;
 
         foreach ($emails as $email) {
-            $eventName = 'delete_' . $email;
+            $eventName = 'anonymize_' . $email;
             $perUserStopwatch->start($eventName);
             $status = 'ok';
             $message = '';
@@ -119,14 +119,14 @@ class BenchmarkDeleteAccountByEmailCommand extends Command
             ];
         }
 
-        $overallEvent = $stopwatch->stop('delete_accounts');
+        $overallEvent = $stopwatch->stop('anonymize_accounts');
         if ($profileSql) {
             $connection->getConfiguration()->setSQLLogger($previousSqlLogger);
         }
 
         $io->table(['Email', 'Duration (ms)', 'Memory (MB)', 'Status', 'Message'], $rows);
         $io->success(sprintf(
-            'Deleted %d users in %d ms (peak memory %.2f MB).',
+            'Anonymized %d users in %d ms (peak memory %.2f MB).',
             \count($emails),
             $overallEvent->getDuration(),
             $peakMemory / 1024 / 1024

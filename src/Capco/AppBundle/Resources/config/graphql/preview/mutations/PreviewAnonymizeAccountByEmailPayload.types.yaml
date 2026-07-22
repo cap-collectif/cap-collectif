@@ -1,0 +1,12 @@
+PreviewAnonymizeAccountByEmailPayload:
+    type: relay-mutation-payload
+    config:
+        name: AnonymizeAccountByEmailPayload
+        description: "The AnonymizeAccountByEmail mutation's payload."
+        fields:
+            email:
+                type: 'String'
+                description: "The anonymized user's former email."
+            errorCode:
+                type: 'PreviewAnonymizeAccountByEmailErrorCode'
+                description: 'Contains the error code if one occurred.'

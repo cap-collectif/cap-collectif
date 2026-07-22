@@ -224,13 +224,13 @@ Object {
         "name": "DeleteEventPayload",
       },
       Object {
-        "name": "DeleteAccountByEmailInput",
+        "name": "AnonymizeAccountByEmailInput",
       },
       Object {
-        "name": "DeleteAccountByEmailPayload",
+        "name": "AnonymizeAccountByEmailPayload",
       },
       Object {
-        "name": "DeleteAccountByEmailErrorCode",
+        "name": "AnonymizeAccountByEmailErrorCode",
       },
       Object {
         "name": "__Schema",

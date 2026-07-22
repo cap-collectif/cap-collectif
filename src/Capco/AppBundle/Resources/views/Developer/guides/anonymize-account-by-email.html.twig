@@ -1,0 +1,48 @@
+{% extends "@CapcoApp/base.html.twig" %}
+
+{% block metaTags %}
+    {% include '@CapcoApp/Default/meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block body %}
+    <div class="container  developers__container">
+
+        {% include '@CapcoApp/Developer/header.html.twig' with {'active': 'guides'} only %}
+
+        <h3>Anonymize a user's account by email</h3>
+
+        <p>To use this mutation you must be authenticated as an administrator. Check the <a href="{{ path('app_developer') }}">authentication guide</a> for more details.</p>
+        <p>This mutation can be used with an SSO to anonymize user accounts.</p>
+        <p>The following mutation anonymizes the account associated with anonymizeaccount@cap-collectif.com while preserving its associated content:</p>
+
+        {% set query = '
+mutation anonymizeAccountByEmail {
+  anonymizeAccountByEmail(input: {email: "anonymizeaccount@cap-collectif.com"}) {
+    email
+    errorCode
+  }
+}' %}
+        <p class="explorer-link"><a href="{{ path('graphiql_endpoint') ~ '?query=' ~ (query|url_encode) }}">Run in Explorer</a></p>
+
+        <pre><code>{{ query }}</code></pre>
+
+        <p>The <code>email</code> argument must be the valid email of an existing user who does not have the role <code>ROLE_SUPER_ADMIN</code>.</p>
+        <p>You must have at least the role <code>ROLE_ADMIN</code> to anonymize a user account.</p>
+        <p>If the email does not exist, the mutation does nothing and returns an error code:</p>
+
+        {% set error = '{
+  "data": {
+    "anonymizeAccountByEmail": {
+      "email": null,
+      "errorCode": "NON_EXISTING_EMAIL"
+    }
+  }
+}' %}
+        <pre><code>{{ error }}</code></pre>
+
+        <p>Check <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': 'anonymizeAccountByEmail' }) }}">the associated reference</a> for more details.</p>
+    </div>
+{% endblock %}
