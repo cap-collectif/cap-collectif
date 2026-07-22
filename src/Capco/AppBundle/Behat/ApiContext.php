@@ -288,34 +288,6 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with a stored XSS file$/
-     */
-    public function iUploadXSSFile(string $method, string $url)
-    {
-        $body = [];
-        $body[] = [
-            'name' => 'file',
-            'contents' => fopen('/var/www/features/files/stored_xss', 'r'),
-            'filename' => 'stored_xss',
-        ];
-        $this->uploadFile($method, $url, $body);
-    }
-
-    /**
-     * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" with a stored XSS HTML file$/
-     */
-    public function iUploadXSSHTMLFile(string $method, string $url)
-    {
-        $body = [];
-        $body[] = [
-            'name' => 'file',
-            'contents' => fopen('/var/www/features/files/stored_xss.html', 'r'),
-            'filename' => 'stored_xss.html',
-        ];
-        $this->uploadFile($method, $url, $body);
-    }
-
-    /**
      * @When /^(?:I )?send a "([A-Z]+)" request to "([^"]+)" without attached file$/
      */
     public function iUploadWithoutFile(string $method, string $url)
