@@ -5,7 +5,6 @@ import { RelayEnvironmentProvider } from 'react-relay'
 import type { FeatureFlags } from '../types'
 import { intlMock, features as mockFeatures } from './mocks'
 import GlobalCSS from 'styles/GlobalCSS'
-import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { ReactPortal } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { TranslationLocale } from '@relay/layoutQuery.graphql'
@@ -14,16 +13,6 @@ import CookieManager from '@components/FrontOffice/Cookies/CookieManager'
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5
-}
-
-export const enableFeatureFlags = (flags: [FeatureFlagType]) => {
-  global.mockFeatureFlag.mockImplementation((flag: FeatureFlagType) => {
-    return flags.includes(flag as FeatureFlagType)
-  })
-}
-
-export const disableFeatureFlags = () => {
-  global.mockFeatureFlag.mockImplementation(() => false)
 }
 
 export const mockUrl = (url: string) => {
