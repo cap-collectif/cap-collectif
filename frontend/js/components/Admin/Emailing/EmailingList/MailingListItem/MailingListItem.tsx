@@ -3,6 +3,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Container, ButtonMembers } from './MailingListItem.style'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
+// @ts-ignore
 import type { MailingListItem_mailingList } from '~relay/MailingListItem_mailingList.graphql'
 import '~relay/MailingListItem_mailingList.graphql'
 import Text from '~ui/Primitives/Text'

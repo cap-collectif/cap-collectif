@@ -4,7 +4,9 @@ import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks'
 import { connect } from 'react-redux'
 import type { ResultPreloadQuery, Query, GlobalState } from '~/types'
 import type {
+  // @ts-ignore
   ProjectAdminAnalysisTabQueryResponse,
+  // @ts-ignore
   ProjectAdminAnalysisTabQueryVariables,
 } from '~relay/ProjectAdminAnalysisTabQuery.graphql'
 import type { ProjectAdminPageParameters, SortValues } from '~/components/Admin/Project/ProjectAdminPage.reducer'
@@ -146,6 +148,7 @@ export const initialVariables = {
 
 const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEnabled }: Props) => {
   const { parameters } = useProjectAdminProposalsContext()
+  // @ts-ignore
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch)
   const queryVariablesWithParameters = createQueryVariables(projectId, parameters, proposalRevisionsEnabled)
   const hasFilters: boolean = !isEqual(
@@ -156,6 +159,7 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEna
     },
     queryVariablesWithParameters,
   )
+  // @ts-ignore
   const {
     props: data,
     error,
@@ -165,13 +169,17 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEna
   })
   return (
     <Skeleton
+      // @ts-ignore
       isLoaded={(!hasFilters && !!dataPreloaded && !!dataPreloaded.project) || (hasFilters && !!data && !!data.project)}
       placeholder={<ProjectAdminAnalysisPlaceholder hasError={!!error} fetchData={retry} />}
     >
       <PickableList.Provider>
         <ProjectAdminAnalysis
+          // @ts-ignore
           project={dataPreloaded && !hasFilters ? dataPreloaded.project : data?.project}
+          // @ts-ignore
           defaultUsers={dataPreloaded && !hasFilters ? dataPreloaded.defaultUsers : data?.defaultUsers}
+          // @ts-ignore
           themes={dataPreloaded && !hasFilters ? dataPreloaded.themes : data?.themes}
         />
       </PickableList.Provider>

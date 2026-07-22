@@ -3,6 +3,7 @@ import moment from 'moment'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl'
+// @ts-ignore
 import type { DebateArgument_argument } from '~relay/DebateArgument_argument.graphql'
 import '~relay/DebateArgument_argument.graphql'
 import { ICON_NAME } from '~ds/Icon/Icon'
@@ -96,7 +97,9 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
               <FormattedMessage
                 id="global.publishDate.publishTime.feminine"
                 values={{
+                  // @ts-ignore
                   date: <FormattedDate value={moment(publishedAt)} day="numeric" month="short" year="numeric" />,
+                  // @ts-ignore
                   time: <FormattedDate value={moment(publishedAt)} hour="numeric" minute="numeric" />,
                 }}
               />

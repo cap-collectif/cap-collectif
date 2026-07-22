@@ -12,6 +12,7 @@ import { formName, selectorForm } from '../Header/Header'
 import { FieldContainer, InfoRow } from './style'
 import LabelState from '~/components/Admin/Emailing/MailParameter/LabelState/LabelState'
 import colors from '~/utils/colors'
+// @ts-ignore
 import type { Sending_emailingCampaign } from '~relay/Sending_emailingCampaign.graphql'
 import '~relay/Sending_emailingCampaign.graphql'
 
@@ -24,6 +25,7 @@ type Props = {
   plannedDate?: string
 }
 
+// @ts-ignore
 const isValidDate = (current: moment) => {
   const yesterday = moment().subtract(1, 'days')
   return current.isAfter(yesterday)
@@ -98,6 +100,7 @@ export const SendingPage = ({ dispatch, sendingSchedule, disabled, emailingCampa
                 id: 'global.plannedDate',
               },
               {
+                // @ts-ignore
                 date: intl.formatDate(moment(sendAt), {
                   day: 'numeric',
                   month: 'long',
@@ -120,6 +123,7 @@ export const SendingPage = ({ dispatch, sendingSchedule, disabled, emailingCampa
                 id: 'global.sentAt.date',
               },
               {
+                // @ts-ignore
                 date: intl.formatDate(moment(sendAt), {
                   day: 'numeric',
                   month: 'long',

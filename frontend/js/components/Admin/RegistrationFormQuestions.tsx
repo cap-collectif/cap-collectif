@@ -6,6 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { Button } from 'react-bootstrap'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
+// @ts-ignore
 import type { RegistrationFormQuestions_registrationForm } from '~relay/RegistrationFormQuestions_registrationForm.graphql'
 import type { State } from '../../types'
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions'

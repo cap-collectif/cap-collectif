@@ -137,9 +137,12 @@ const ModalAddEmailSender = ({ senderEmailDomains: senderEmailDomainsFragment, i
                 clearable={false}
                 component={select}
                 options={uniqBy(senderEmailDomains, 'value')
+                  // @ts-ignore
                   .filter(senderEmailDomain => senderEmailDomain.spfValidation && senderEmailDomain.dkimValidation)
                   .map(senderEmailDomain => ({
+                    // @ts-ignore
                     value: senderEmailDomain.value,
+                    // @ts-ignore
                     label: `@${senderEmailDomain.value}`,
                   }))}
                 placeholder="global.placeholder.domain"
@@ -177,5 +180,6 @@ const ModalAddEmailSender = ({ senderEmailDomains: senderEmailDomainsFragment, i
 const ModalAddEmailSenderForm = reduxForm({
   form: formName,
   onSubmit,
+// @ts-ignore
 })(ModalAddEmailSender) as React.AbstractComponent<BeforeProps>
 export default ModalAddEmailSenderForm

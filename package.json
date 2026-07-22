@@ -11,6 +11,7 @@
         "test-e2e-types": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.queries.js --ci --runInBand",
         "test-e2e-mutations": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.mutations.js --ci --runInBand",
         "ts": "tsc --project tsconfig.json --noEmit",
+        "ts:count": "tsc --project tsconfig.json --noEmit | grep frontend/js | wc -l | xargs -I{} echo 'TS errors in frontend/js: {}'",
         "build": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.js",
         "build:analyzer": "NODE_ENV=development webpack --config webpack/webpack.client.analyzer.js",
         "build:analyzer:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.analyzer.js",

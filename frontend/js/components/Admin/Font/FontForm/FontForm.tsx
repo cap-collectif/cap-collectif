@@ -1,16 +1,16 @@
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { commitLocalUpdate } from 'react-relay'
 import { Field, reduxForm, submit } from 'redux-form'
-import type { Dispatch } from '~/types'
+import type { FormError } from '~/components/Admin/Font/FontAdminContent/FontAdminContent'
+import AlertForm from '~/components/Alert/AlertForm'
 import type { FormatFile } from '~/components/Form/FileInput/FileInput'
 import FileInput from '~/components/Form/FileInput/FileInput'
-import FontFormContainer from './FontForm.style'
-import Fetcher, { json } from '~/services/Fetcher'
 import environment from '~/createRelayEnvironment'
-import AlertForm from '~/components/Alert/AlertForm'
-import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import type { FormError } from '~/components/Admin/Font/FontAdminContent/FontAdminContent'
+import Fetcher, { json } from '~/services/Fetcher'
+import type { Dispatch } from '~/types'
+import FontFormContainer from './FontForm.style'
 
 const MESSAGE_INVALID_FONT_FORMAT = 'Invalid font format.'
 
@@ -49,7 +49,7 @@ const saveToServer = (
             if (window.FontFace !== undefined) {
               const font = new window.FontFace(res.name, `url(${res.url})`, {
                 style: 'normal',
-                weight: 700,
+                weight: '700',
               })
               font.load().then(loaded => {
                 window.document.fonts.add(loaded)
@@ -90,6 +90,7 @@ const onSubmit = (values: FormValues, dispatch, props: Props) => {
 
 export const FontForm = ({ handleSubmit, valid, invalid, pristine, submitting, error }: Props) => {
   return (
+    // @ts-ignore
     <FontFormContainer id={formName} onSubmit={handleSubmit} enctype="multipart/form-data">
       <AlertForm valid={valid} invalid={invalid && !pristine} submitting={submitting} errorMessage={error} />
       <Field

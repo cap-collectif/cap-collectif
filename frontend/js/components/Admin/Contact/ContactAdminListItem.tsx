@@ -7,6 +7,7 @@ import Translation from '~/services/Translation'
 import DeleteModal from '~/components/Modal/DeleteModal'
 import ContactFormAdminModal from './ContactFormAdminModal'
 import RemoveContactFormMutation from '~/mutations/RemoveContactFormMutation'
+// @ts-ignore
 import type { ContactAdminListItem_contactForm } from '~relay/ContactAdminListItem_contactForm.graphql'
 import { toast } from '~ds/Toast'
 

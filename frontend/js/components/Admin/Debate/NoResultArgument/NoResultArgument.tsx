@@ -10,6 +10,7 @@ import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
 import '~relay/DebateArgument_argument.graphql'
 import Tag from '~ds/Tag/Tag'
 import { FontWeight } from '~ui/Primitives/constants'
+// @ts-ignore
 import type { NoResultArgument_debate } from '~relay/NoResultArgument_debate.graphql'
 import '~relay/NoResultArgument_debate.graphql'
 import SpotIcon, { SPOT_ICON_NAME, SPOT_ICON_SIZE } from '~ds/SpotIcon/SpotIcon'

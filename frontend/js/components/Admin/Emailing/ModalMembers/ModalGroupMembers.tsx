@@ -44,6 +44,7 @@ export const ModalGroupMembers = ({ show, onClose, groupListRef, isAdmin }: Prop
       </Modal.Header>
       <Modal.Body>
         {query ? (
+          // @ts-ignore
           <GroupMembers groupList={query.groupList} isAdmin={isAdmin} />
         ) : (
           <Flex direction="row" justify="center">

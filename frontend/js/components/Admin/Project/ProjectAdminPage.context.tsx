@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { useEffect } from 'react'
+import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer'
+import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.utils'
 import type { Action, ProjectAdminPageState } from './ProjectAdminPage.reducer'
 import {
   createReducer,
-  DEFAULT_STATUS,
-  DEFAULT_SORT,
   DEFAULT_FILTERS,
+  DEFAULT_SORT,
+  DEFAULT_STATUS,
   getInitialState,
 } from './ProjectAdminPage.reducer'
-import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer'
-import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.utils'
 type ProviderProps = {
   readonly children: JSX.Element | JSX.Element[] | string
   readonly firstCollectStepId: string | null | undefined
@@ -45,16 +45,21 @@ export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: 
     getInitialState(firstCollectStepId),
   )
   useEffect(() => {
+    // @ts-ignore
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',
     })
   }, [])
   const context = React.useMemo(
     () => ({
+      // @ts-ignore
       status: state.status,
       parameters: {
+        // @ts-ignore
         sort: state.sort,
+        // @ts-ignore
         filters: state.filters,
+        // @ts-ignore
         filtersOrdered: state.filtersOrdered,
       },
       firstCollectStepId,

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 import { useSelector } from 'react-redux'
 import environment, { graphqlError } from '~/createRelayEnvironment'
+// @ts-ignore
 import type { MailParameterQueryQueryResponse } from '~relay/MailParameterQueryQuery.graphql'
 import MailParameterPage from './MailParameterPage'
 import Loader from '~ui/FeedbacksIndicators/Loader'

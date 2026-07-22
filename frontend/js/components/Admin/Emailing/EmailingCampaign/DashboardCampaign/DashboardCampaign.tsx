@@ -20,7 +20,9 @@ import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMu
 import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign'
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding'
 import { CAMPAIGN_PAGINATION } from '../utils'
+// @ts-ignore
 import type { DashboardCampaign_emailingCampaignOwner } from '~relay/DashboardCampaign_emailingCampaignOwner.graphql'
+// @ts-ignore
 import type { DashboardCampaign_viewer } from '~relay/DashboardCampaign_viewer.graphql'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 

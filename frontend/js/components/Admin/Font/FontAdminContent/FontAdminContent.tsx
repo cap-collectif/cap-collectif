@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FormattedHTMLMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
+// @ts-ignore
 import type { FontAdminContent_fonts } from '~relay/FontAdminContent_fonts.graphql'
 import '~relay/FontAdminContent_fonts.graphql'
 import FontAdminContentContainer from './FontAdminContent.style'

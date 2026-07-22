@@ -15,8 +15,10 @@ import SendingPage from '~/components/Admin/Emailing/MailParameter/Sending'
 import type { Dispatch, GlobalState } from '~/types'
 import ModalCancelSending from '~/components/Admin/Emailing/MailParameter/ModalCancelSending/ModalCancelSending'
 import UpdateEmailingCampaignMutation from '~/mutations/UpdateEmailingCampaignMutation'
+// @ts-ignore
 import type { MailParameterPage_emailingCampaign } from '~relay/MailParameterPage_emailingCampaign.graphql'
 import '~relay/MailParameterPage_emailingCampaign.graphql'
+// @ts-ignore
 import type { MailParameterPage_query } from '~relay/MailParameterPage_query.graphql'
 import '~relay/MailParameterPage_query.graphql'
 import Header, { formName, PATHS } from './Header/Header'
@@ -24,6 +26,7 @@ import SendEmailingCampaignMutation from '~/mutations/SendEmailingCampaignMutati
 import stripHtml from '@shared/utils/stripHTML'
 import { DATE_ISO8601_FORMAT } from '~/shared/date'
 import { fromGlobalId } from '@shared/utils/fromGlobalId'
+// @ts-ignore
 import type { MailParameterPage_viewer } from '~relay/MailParameterPage_viewer.graphql'
 import { toast } from '~ds/Toast'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'

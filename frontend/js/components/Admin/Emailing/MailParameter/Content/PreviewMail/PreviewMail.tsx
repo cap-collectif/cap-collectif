@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
+// @ts-ignore
 import type { PreviewMail_emailingCampaign } from '~relay/PreviewMail_emailingCampaign.graphql'
 import stripHtml from '@shared/utils/stripHTML'
 
@@ -9,6 +10,7 @@ type Props = {
 }
 export const PreviewMail = ({ emailingCampaign, reference }: Props) =>
   emailingCampaign.content && stripHtml(emailingCampaign.content) ? (
+    // @ts-ignore
     <div className="preview-mail" ref={reference}>
       <p
         dangerouslySetInnerHTML={{

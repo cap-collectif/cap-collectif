@@ -9,6 +9,7 @@ import Text from '~ui/Primitives/Text'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction'
 import { ICON_NAME } from '~ds/Icon/Icon'
+// @ts-ignore
 import type { DebateOpinion_debateOpinion } from '~relay/DebateOpinion_debateOpinion.graphql'
 import '~relay/DebateOpinion_debateOpinion.graphql'
 import UserAvatar from '~/components/User/UserAvatar'

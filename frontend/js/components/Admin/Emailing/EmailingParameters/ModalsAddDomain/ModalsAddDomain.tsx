@@ -98,6 +98,7 @@ const ModalsAddDomain = ({ dispatch, domain, service, intl }: Props): JSX.Elemen
               dispatch={dispatch}
             />
             <ModalDNSSupplier
+              // @ts-ignore
               id="dns-supplier"
               label={intl.formatMessage({
                 id: 'dns-supplier',
@@ -144,6 +145,7 @@ const ModalsAddDomain = ({ dispatch, domain, service, intl }: Props): JSX.Elemen
 const ModalsAddDomainForm = reduxForm({
   form: formName,
   onSubmit,
+// @ts-ignore
 })(ModalsAddDomain) as React.AbstractComponent<{}>
 
 const mapStateToProps = (state: GlobalState) => {
@@ -161,5 +163,6 @@ const mapStateToProps = (state: GlobalState) => {
 
 const ModalsAddDomainFormConnected = connect(mapStateToProps)(
   ModalsAddDomainForm,
+// @ts-ignore
 ) as React.AbstractComponent<BeforeProps>
 export default ModalsAddDomainFormConnected

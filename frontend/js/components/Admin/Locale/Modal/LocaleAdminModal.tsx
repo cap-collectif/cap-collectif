@@ -7,6 +7,7 @@ import { reduxForm, SubmissionError, submit } from 'redux-form'
 import type { GlobalState, Dispatch } from '~/types'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import LocaleAdminModalList from './LocaleAdminModalList'
+// @ts-ignore
 import type { LocaleAdminModal_locales } from '~relay/LocaleAdminModal_locales.graphql'
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation'
 

@@ -85,12 +85,14 @@ export default class UserListField extends React.Component<Props> {
           notInIds: usersIds,
           displayName: terms,
           authorOfEventOnly: authorOfEvent,
+        // @ts-ignore
         }).then(data => formatUsersData(data.userSearch))
       }
 
       return fetchQuery_DEPRECATED(environment, getUsersList, {
         displayName: terms,
         authorOfEventOnly: authorOfEvent,
+      // @ts-ignore
       }).then(data => formatUsersData(data.userSearch))
     }
 

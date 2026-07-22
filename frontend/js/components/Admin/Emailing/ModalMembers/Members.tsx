@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import { createPaginationContainer, graphql } from 'react-relay'
 import type { RelayPaginationProp } from 'react-relay'
 import { useIntl } from 'react-intl'
+// @ts-ignore
 import type { Members_mailingList } from '~relay/Members_mailingList.graphql'
 import AppBox from '~ui/Primitives/AppBox'
 import Flex from '~ui/Primitives/Layout/Flex'

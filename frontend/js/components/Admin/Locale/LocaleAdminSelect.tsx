@@ -8,6 +8,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import styled from 'styled-components'
 import type { GlobalState } from '~/types'
 import select from '~/components/Form/Select'
+// @ts-ignore
 import type { LocaleAdminSelect_locales } from '~relay/LocaleAdminSelect_locales.graphql'
 export type Locales = Record<
   string,

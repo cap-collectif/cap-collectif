@@ -13,7 +13,9 @@ import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers'
 import NoMailingList from '~/components/Admin/Emailing/EmailingList/NoMailingList/NoMailingList'
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding'
 import InfoMessage from '~ds/InfoMessage/InfoMessage'
+// @ts-ignore
 import type { DashboardMailingList_viewer } from '~relay/DashboardMailingList_viewer.graphql'
+// @ts-ignore
 import type { DashboardMailingList_mailingListOwner } from '~relay/DashboardMailingList_mailingListOwner.graphql'
 
 export const MAILING_LIST_PAGINATION = 30

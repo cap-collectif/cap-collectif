@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { Container, Circle, InfoRow } from './CampaignItem.style'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
+// @ts-ignore
 import type { CampaignItem_campaign } from '~relay/CampaignItem_campaign.graphql'
 import '~relay/CampaignItem_campaign.graphql'
 import { getWordingMailingInternal } from '~/components/Admin/Emailing/MailParameter/Parameter'

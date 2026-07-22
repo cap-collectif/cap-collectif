@@ -1,4 +1,4 @@
-import { $Values, $PropertyType } from 'utility-types'
+import { $PropertyType, $Values } from 'utility-types'
 import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/getFieldsFromUrl'
 export const ORDER_BY: {
   OLDEST: 'oldest'

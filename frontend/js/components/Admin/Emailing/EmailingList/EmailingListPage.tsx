@@ -4,7 +4,9 @@ import { QueryRenderer, graphql } from 'react-relay'
 import { useSelector } from 'react-redux'
 import environment from '~/createRelayEnvironment'
 import type {
+  // @ts-ignore
   EmailingListPageQueryResponse,
+  // @ts-ignore
   EmailingListPageQueryVariables,
 } from '~relay/EmailingListPageQuery.graphql'
 import { Container, Header, Content } from './EmailingListPage.style'

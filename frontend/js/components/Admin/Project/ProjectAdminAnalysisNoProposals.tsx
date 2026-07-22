@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
+// @ts-ignore
 import type { ProjectAdminAnalysisNoProposals_project } from '~relay/ProjectAdminAnalysisNoProposals_project.graphql'
 import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal'
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context'

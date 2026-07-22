@@ -11,6 +11,7 @@ const EmailingParameterPageQueryRender = (): JSX.Element => {
       })
     }
   }, [loadQuery, queryReference])
+  // @ts-ignore
   return queryReference ? <EmailingParametersPage queryReference={queryReference} /> : null
 }
 

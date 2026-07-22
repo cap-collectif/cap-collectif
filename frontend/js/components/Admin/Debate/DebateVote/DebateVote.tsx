@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
+// @ts-ignore
 import type { DebateVote_vote } from '~relay/DebateVote_vote.graphql'
 import '~relay/DebateVote_vote.graphql'
 import Tag from '~ds/Tag/Tag'
@@ -42,7 +43,9 @@ export const DebateVote = ({ vote }: Props) => {
             <FormattedMessage
               id="global.dates.full_day"
               values={{
+                // @ts-ignore
                 date: <FormattedDate value={moment(createdAt)} day="numeric" month="short" year="numeric" />,
+                // @ts-ignore
                 time: <FormattedDate value={moment(createdAt)} hour="numeric" minute="numeric" />,
               }}
             />

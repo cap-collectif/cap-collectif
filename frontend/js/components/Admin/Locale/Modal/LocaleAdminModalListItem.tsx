@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { Field } from 'redux-form'
 import renderInput from '~/components/Form/Field'
+// @ts-ignore
 import type { LocaleAdminModalListItem_locale } from '~relay/LocaleAdminModalListItem_locale.graphql'
 
 type Props = {

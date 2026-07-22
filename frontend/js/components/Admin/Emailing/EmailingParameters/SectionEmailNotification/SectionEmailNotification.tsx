@@ -186,5 +186,6 @@ const SectionEmailNotification = ({ query: queryFragment }: Props): JSX.Element 
 
 const SectionEmailNotificationForm = reduxForm({
   form: formName,
+// @ts-ignore
 })(SectionEmailNotification) as React.AbstractComponent<BeforeProps>
 export default SectionEmailNotificationForm

@@ -10,6 +10,7 @@ import SubmitButton from '~/components/Form/SubmitButton'
 import component from '~/components/Form/Field'
 import { isEmail } from '~/services/Validator'
 import TestEmailingCampaignMutation from '~/mutations/TestEmailingCampaignMutation'
+// @ts-ignore
 import type { ModalMailTest_emailingCampaign } from '~relay/ModalMailTest_emailingCampaign.graphql'
 import '~relay/ModalMailTest_emailingCampaign.graphql'
 import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style'

@@ -11,6 +11,7 @@ import AlertForm from '~/components/Alert/AlertForm'
 import LocaleAdminList from './List/LocaleAdminList'
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation'
 import SetDefaultLocaleMutation from '~/mutations/SetDefaultLocaleMutation'
+// @ts-ignore
 import type { LocaleAdminForm_query } from '~relay/LocaleAdminForm_query.graphql'
 
 type Props = ReduxFormFormProps & {

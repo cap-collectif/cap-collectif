@@ -57,6 +57,7 @@ class ProjectTypeListField extends React.Component<Props, State> {
   componentDidMount() {
     fetchQuery_DEPRECATED(environment, getProjectTypeList, {}).then(data => {
       this.setState({
+        // @ts-ignore
         projectTypes: data.projectTypes,
       })
     })

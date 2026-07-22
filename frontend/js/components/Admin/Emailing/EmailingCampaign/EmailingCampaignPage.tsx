@@ -8,6 +8,7 @@ import DashboardCampaign from '~/components/Admin/Emailing/EmailingCampaign/Dash
 import PickableList from '~ui/List/PickableList'
 import type { DashboardParameters } from './DashboardCampaign/DashboardCampaign.reducer'
 import { useDashboardCampaignContext } from './DashboardCampaign/DashboardCampaign.context'
+// @ts-ignore
 import type { EmailingCampaignPageQueryResponse } from '~relay/EmailingCampaignPageQuery.graphql'
 import DashboardCampaignPlaceholder from './DashboardCampaignPlaceholder/DashboardCampaignPlaceholder'
 import Flex from '~ui/Primitives/Layout/Flex'

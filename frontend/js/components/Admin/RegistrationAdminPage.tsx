@@ -11,7 +11,9 @@ import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 import RegistrationFormQuestions from './RegistrationFormQuestions'
 import AdvancedSection from './Registration/AdvancedSection'
+// @ts-ignore
 import type { RegistrationAdminPage_query } from '~relay/RegistrationAdminPage_query.graphql'
+// @ts-ignore
 import type { RegistrationAdminPageQueryResponse } from '~relay/RegistrationAdminPageQuery.graphql'
 import RegistrationFormCommunication from '~/components/Admin/RegistrationFormCommunication'
 

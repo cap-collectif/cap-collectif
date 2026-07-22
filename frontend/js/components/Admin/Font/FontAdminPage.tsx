@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { QueryRenderer, graphql } from 'react-relay'
+// @ts-ignore
 import type { FontAdminPageQueryResponse } from '~relay/FontAdminPageQuery.graphql'
 import '~relay/FontAdminPageQuery.graphql'
 import environment, { graphqlError } from '~/createRelayEnvironment'

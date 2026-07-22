@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import type { RelayFragmentContainer } from 'react-relay'
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay'
+// @ts-ignore
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql'
 import type { State, Dispatch } from '~/types'
 import AlertForm from '../../Alert/AlertForm'
@@ -16,6 +17,7 @@ import environment, { graphqlError } from '~/createRelayEnvironment'
 import UpdateContactPageMutation from '~/mutations/UpdateContactPageMutation'
 import type { FormValues as CustomFormValues } from '../Field/CustomPageFields'
 import { getTranslation } from '~/services/Translation'
+// @ts-ignore
 import type { ContactAdminPageQueryResponse } from '~relay/ContactAdminPageQuery.graphql'
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer'
 type RelayProps = {

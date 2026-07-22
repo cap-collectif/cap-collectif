@@ -6,6 +6,7 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { Container, ButtonConfirmation } from './ModalCancelSending.style'
 import colors from '~/utils/colors'
 import CancelEmailingCampaignMutation from '~/mutations/CancelEmailingCampaignMutation'
+// @ts-ignore
 import type { ModalCancelSending_emailingCampaign } from '~relay/ModalCancelSending_emailingCampaign.graphql'
 import '~relay/ModalCancelSending_emailingCampaign.graphql'
 import { toast } from '~ds/Toast'

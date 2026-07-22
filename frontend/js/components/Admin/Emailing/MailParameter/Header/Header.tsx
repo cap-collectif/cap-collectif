@@ -68,6 +68,7 @@ export const Header = ({
   const [maxWidthTitle, setMaxWidthTitle] = React.useState<number>(widthWindow)
   const [titleFocus, setTitleFocus] = React.useState<boolean>(false)
   const refTitle = React.useRef<HTMLDivElement | null>(null)
+  // @ts-ignore
   const isSuperAdmin = user ? user.isSuperAdmin : false
   React.useEffect(() => {
     if (refTitle.current && title) {

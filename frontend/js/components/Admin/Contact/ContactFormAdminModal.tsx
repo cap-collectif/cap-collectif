@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { Modal } from 'react-bootstrap'
-import { useIntl, FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import type { RelayFragmentContainer } from 'react-relay'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { ContactFormAdminModal_contactForm } from '~relay/ContactFormAdminModal_contactForm.graphql'
-import '~relay/ContactFormAdminModal_contactForm.graphql'
 import CloseButton from '~/components/Form/CloseButton'
-import ContactFormAdminForm from './ContactFormAdminForm'
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer'
+import '~relay/ContactFormAdminModal_contactForm.graphql'
+// @ts-ignore
+import type { ContactFormAdminModal_contactForm } from '~relay/ContactFormAdminModal_contactForm.graphql'
+import ContactFormAdminForm from './ContactFormAdminForm'
 type Props = {
   readonly show: boolean
   readonly contactForm: ContactFormAdminModal_contactForm | null | undefined
@@ -34,7 +35,7 @@ const ContactFormAdminModal = ({ contactForm, show, onClose }: Props): JSX.Eleme
           </h3>
         </div>
         <div className="col-md-6">
-          <div align="right" className="m-15">
+          <div className="m-15 text-right">
             <LanguageButtonContainer />
           </div>
         </div>

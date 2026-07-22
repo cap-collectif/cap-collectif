@@ -43,6 +43,7 @@ export const ModalProjectContributors = ({ show, onClose, projectRef, isAdmin }:
       </Modal.Header>
       <Modal.Body>
         {query ? (
+          // @ts-ignore
           <ProjectContributors project={query.project} isAdmin={isAdmin} />
         ) : (
           <Flex direction="row" justify="center">

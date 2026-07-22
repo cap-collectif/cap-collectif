@@ -2,10 +2,12 @@ import * as React from 'react'
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay'
 import { Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+// @ts-ignore
 import type { ModalMembers_mailingList } from '~relay/ModalMembers_mailingList.graphql'
 import '~relay/ModalMembers_mailingList.graphql'
 import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style'
 import environment, { graphqlError } from '~/createRelayEnvironment'
+// @ts-ignore
 import type { ModalMembersQueryResponse } from '~relay/ModalMembersQuery.graphql'
 import Members from '~/components/Admin/Emailing/ModalMembers/Members'
 import Spinner from '~ds/Spinner/Spinner'

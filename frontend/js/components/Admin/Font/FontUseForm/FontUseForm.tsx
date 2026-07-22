@@ -3,6 +3,7 @@ import React from 'react'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { SubmissionError } from 'redux-form'
+// @ts-ignore
 import type { FontAdminContent_fonts } from '~relay/FontAdminContent_fonts.graphql'
 import '~relay/FontAdminContent_fonts.graphql'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'

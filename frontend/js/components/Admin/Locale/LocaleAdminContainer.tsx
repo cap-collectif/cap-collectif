@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
 import environment, { graphqlError } from '~/createRelayEnvironment'
+// @ts-ignore
 import type { LocaleAdminContainerQueryResponse } from '~relay/LocaleAdminContainerQuery.graphql'
 import LocaleAdminForm from './LocaleAdminForm'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'

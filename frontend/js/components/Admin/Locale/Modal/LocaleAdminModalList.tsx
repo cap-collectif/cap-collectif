@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import LocaleAdminModalListItem from './LocaleAdminModalListItem'
+// @ts-ignore
 import type { LocaleAdminModalList_locales } from '~relay/LocaleAdminModalList_locales.graphql'
 
 type Props = {

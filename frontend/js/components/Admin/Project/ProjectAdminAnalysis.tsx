@@ -5,7 +5,9 @@ import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import PickableList from '~ui/List/PickableList'
 import { usePickableList } from '~ui/List/PickableList/usePickableList'
+// @ts-ignore
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql'
+// @ts-ignore
 import type { ProjectAdminAnalysis_themes } from '~relay/ProjectAdminAnalysis_themes.graphql'
 import DropdownSelect from '~ui/DropdownSelect'
 import Collapsable from '~ui/Collapsable'
@@ -35,6 +37,7 @@ import {
 } from './ProjectAdminProposals.utils'
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect'
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice'
+// @ts-ignore
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql'
 import {
   AnalysisPickableListContainer,
@@ -69,6 +72,7 @@ import { AnalysisDataContainer, AnalysisHeader } from './ProjectAdminAnalysis.st
 import AnalysisStatus from '~/components/Analysis/AnalysisStatus/AnalysisStatus'
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton'
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal'
+// @ts-ignore
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 import { clearToasts, toast } from '~ds/Toast'

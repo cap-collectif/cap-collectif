@@ -7,6 +7,7 @@ import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import styled from 'styled-components'
 
+// @ts-ignore
 import type { RegistrationFormCommunication_registrationForm } from '~relay/RegistrationFormCommunication_registrationForm.graphql'
 import type { FeatureToggles, State, Dispatch } from '../../types'
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer'

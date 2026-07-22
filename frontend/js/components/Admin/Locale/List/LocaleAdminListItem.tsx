@@ -8,6 +8,7 @@ import { ListGroupItem, Button, ButtonToolbar, Badge } from 'react-bootstrap'
 import config from '~/config'
 import Toggle from '~/components/Form/Toggle'
 import DeleteModal from '~/components/Modal/DeleteModal'
+// @ts-ignore
 import type { LocaleAdminListItem_locale } from '~relay/LocaleAdminListItem_locale.graphql'
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation'
 import { toast } from '~ds/Toast'

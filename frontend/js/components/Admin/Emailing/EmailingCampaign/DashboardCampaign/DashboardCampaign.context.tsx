@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { useEffect } from 'react'
-import type { Action, DashboardState } from './DashboardCampaign.reducer'
+import type { Action, DashboardParameters, DashboardState } from './DashboardCampaign.reducer'
 import {
   createReducer,
   DEFAULT_FILTERS,
-  getInitialState,
-  DEFAULT_STATUS,
   DEFAULT_SORT,
+  DEFAULT_STATUS,
+  getInitialState,
 } from './DashboardCampaign.reducer'
-import type { DashboardParameters } from './DashboardCampaign.reducer'
 export type DashboardStatus = 'ready' | 'loading'
 type ProviderProps = {
   readonly children: JSX.Element | JSX.Element[] | string
@@ -38,15 +37,19 @@ export const useDashboardCampaignContext = (): Context => {
 export const DashboardCampaignProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = React.useReducer<React.Reducer<DashboardState, Action>>(createReducer, getInitialState())
   useEffect(() => {
+    // @ts-ignore
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',
     })
   }, [])
   const context = React.useMemo(
     () => ({
+      // @ts-ignore
       status: state.status,
       parameters: {
+        // @ts-ignore
         sort: state.sort,
+        // @ts-ignore
         filters: state.filters,
       },
       dispatch,

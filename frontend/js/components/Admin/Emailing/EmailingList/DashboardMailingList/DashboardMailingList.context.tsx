@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect } from 'react'
-import type { DashboardParameters, Action, DashboardState } from './DashboardMailingList.reducer'
+import type { Action, DashboardParameters, DashboardState } from './DashboardMailingList.reducer'
 import { DEFAULT_FILTERS, createReducer } from './DashboardMailingList.reducer'
 export type DashboardStatus = 'ready' | 'loading'
 type ProviderProps = {
@@ -35,14 +35,17 @@ export const getInitialState = (): DashboardState => ({
 export const DashboardMailingListProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = React.useReducer<React.Reducer<DashboardState, Action>>(createReducer, getInitialState())
   useEffect(() => {
+    // @ts-ignore
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',
     })
   }, [])
   const context = React.useMemo(
     () => ({
+      // @ts-ignore
       status: state.status,
       parameters: {
+        // @ts-ignore
         filters: state.filters,
       },
       dispatch,

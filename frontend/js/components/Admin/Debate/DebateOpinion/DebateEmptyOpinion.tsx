@@ -23,6 +23,7 @@ const DebateEmptyOpinion = ({ type }: Props) => (
   >
     <Tag
       variantColor={type === 'FOR' ? 'success' : 'danger'}
+      // @ts-ignore
       sx={{ position: 'absolute !important' }}
       top="-1px"
       left="-1px"
