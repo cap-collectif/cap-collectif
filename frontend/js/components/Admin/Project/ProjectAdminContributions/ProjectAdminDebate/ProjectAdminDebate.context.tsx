@@ -38,7 +38,7 @@ export const useProjectAdminDebateContext = (): Context => {
   return context
 }
 export const ProjectAdminDebateProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<ProjectAdminDebateState, Action>(createReducer, {
+  const [state, dispatch] = React.useReducer<React.Reducer<ProjectAdminDebateState, Action>>(createReducer, {
     filters: DEFAULT_FILTERS,
   })
   const context = React.useMemo(

@@ -36,7 +36,7 @@ export const useDashboardCampaignContext = (): Context => {
   return context
 }
 export const DashboardCampaignProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<DashboardState, Action>(createReducer, getInitialState())
+  const [state, dispatch] = React.useReducer<React.Reducer<DashboardState, Action>>(createReducer, getInitialState())
   useEffect(() => {
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',

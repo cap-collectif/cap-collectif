@@ -40,7 +40,7 @@ export const useProjectAdminProposalsContext = (): Context => {
   return context
 }
 export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<ProjectAdminPageState, Action>(
+  const [state, dispatch] = React.useReducer<React.Reducer<ProjectAdminPageState, Action>>(
     createReducer,
     getInitialState(firstCollectStepId),
   )

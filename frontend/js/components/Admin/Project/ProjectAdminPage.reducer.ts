@@ -187,14 +187,14 @@ export const getInitialState = (initialSelectedStep: string | null | undefined):
       ? [
           {
             id: initialSelectedStep,
-            type: 'step',
+            type: 'step' as const,
           },
         ]
       : []),
   ],
   initialSelectedStep,
 })
-export const createReducer = (state: ProjectAdminPageState, action: Action) => {
+export const createReducer = (state: ProjectAdminPageState, action: Action): ProjectAdminPageState => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, status: 'loading' }
@@ -280,7 +280,7 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
             ? [
                 {
                   id: action.payload,
-                  type: 'step',
+                  type: 'step' as const,
                 },
               ]
             : []),
@@ -504,6 +504,6 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
     }
 
     default:
-      throw new Error(`Unknown action : ${action.type}`)
+      throw new Error(`Unknown action : ${(action as { type: string }).type}`)
   }
 }

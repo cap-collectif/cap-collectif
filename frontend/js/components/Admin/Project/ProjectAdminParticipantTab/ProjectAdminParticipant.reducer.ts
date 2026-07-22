@@ -56,7 +56,7 @@ export type Action =
   | {
       type: 'CLEAR_TERM'
     }
-export const createReducer = (state: ProjectAdminParticipantState, action: Action) => {
+export const createReducer = (state: ProjectAdminParticipantState, action: Action): ProjectAdminParticipantState => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, status: 'loading' }
@@ -114,6 +114,6 @@ export const createReducer = (state: ProjectAdminParticipantState, action: Actio
       return { ...state, filters: { ...state.filters, term: null } }
 
     default:
-      throw new Error(`Unknown action : ${action.type}`)
+      throw new Error(`Unknown action : ${(action as { type: string }).type}`)
   }
 }

@@ -33,7 +33,7 @@ export const getInitialState = (): DashboardState => ({
   filters: DEFAULT_FILTERS,
 })
 export const DashboardMailingListProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<DashboardState, Action>(createReducer, getInitialState())
+  const [state, dispatch] = React.useReducer<React.Reducer<DashboardState, Action>>(createReducer, getInitialState())
   useEffect(() => {
     dispatch({
       type: 'INIT_FILTERS_FROM_URL',

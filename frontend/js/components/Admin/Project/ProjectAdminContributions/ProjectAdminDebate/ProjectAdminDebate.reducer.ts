@@ -33,7 +33,7 @@ export type Action =
       type: 'CHANGE_VOTE_STATE'
       payload: VoteState
     }
-export const createReducer = (state: ProjectAdminDebateState, action: Action) => {
+export const createReducer = (state: ProjectAdminDebateState, action: Action): ProjectAdminDebateState => {
   switch (action.type) {
     case 'CHANGE_ARGUMENT_TYPE':
       return { ...state, filters: { ...state.filters, argument: { ...state.filters.argument, type: action.payload } } }
@@ -45,6 +45,6 @@ export const createReducer = (state: ProjectAdminDebateState, action: Action) =>
       return { ...state, filters: { ...state.filters, vote: { ...state.filters.vote, state: action.payload } } }
 
     default:
-      throw new Error(`Unknown action : ${action.type}`)
+      throw new Error(`Unknown action : ${(action as { type: string }).type}`)
   }
 }

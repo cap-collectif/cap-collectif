@@ -37,7 +37,7 @@ export const useProjectAdminParticipantsContext = (): Context => {
   return context
 }
 export const ProjectAdminParticipantsProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<ProjectAdminParticipantState, Action>(createReducer, {
+  const [state, dispatch] = React.useReducer<React.Reducer<ProjectAdminParticipantState, Action>>(createReducer, {
     status: DEFAULT_STATUS,
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,

@@ -151,7 +151,7 @@ export type Action =
       type: 'INIT_FILTERS_FROM_URL'
     }
 const url = new URL(window.location.href)
-export const createReducer = (state: AnalysisProjectPageState, action: Action) => {
+export const createReducer = (state: AnalysisProjectPageState, action: Action): AnalysisProjectPageState => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, status: 'loading' }
@@ -371,6 +371,6 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
     }
 
     default:
-      throw new Error(`Unknown action : ${action.type}`)
+      throw new Error(`Unknown action : ${(action as { type: string }).type}`)
   }
 }

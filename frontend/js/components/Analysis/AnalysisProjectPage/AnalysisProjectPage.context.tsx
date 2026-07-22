@@ -31,7 +31,7 @@ export const useAnalysisProposalsContext = (): Context => {
   return context
 }
 export const AnalysisProposalsProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<AnalysisProjectPageState, Action>(createReducer, {
+  const [state, dispatch] = React.useReducer<React.Reducer<AnalysisProjectPageState, Action>>(createReducer, {
     status: DEFAULT_STATUS,
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,

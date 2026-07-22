@@ -59,7 +59,7 @@ export type Action =
   | {
       type: 'INIT_FILTERS_FROM_URL'
     }
-export const createReducer = (state: DashboardState, action: Action) => {
+export const createReducer = (state: DashboardState, action: Action): DashboardState => {
   const url = new URL(window.location.href)
 
   switch (action.type) {
@@ -109,6 +109,6 @@ export const createReducer = (state: DashboardState, action: Action) => {
     }
 
     default:
-      throw new Error(`Unknown action : ${action.type}`)
+      throw new Error(`Unknown action : ${(action as { type: string }).type}`)
   }
 }
