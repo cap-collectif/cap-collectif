@@ -16,7 +16,7 @@ class OrangeClient
 {
     final public const CLIENT_CREDENTIALS = 'client_credentials';
     final public const SMS_OTP = 'sms_otp';
-    final public const GET_ACCESS_TOKEN_URL = 'https://li.liveidentity.com/ag-authorize/public/token';
+    final public const GET_ACCESS_TOKEN_URL = 'https://li.liveidentity.com/ag-authorize/public/v2/token';
     final public const SEND_SMS_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/send';
     final public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
 
