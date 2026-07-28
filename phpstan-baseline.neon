@@ -5320,60 +5320,6 @@ parameters:
 			count: 3
 			path: src/Capco/AppBundle/Behat/Page/BlogPage.php
 
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ChangePasswordPage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/ChangePasswordPage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CollectPage\\:\\:changeTypeOfProposalFollow\\(\\) has no return type specified\\.$#"
@@ -6524,11 +6470,6 @@ parameters:
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
 			count: 3
 			path: src/Capco/AppBundle/Behat/Page/LegalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ManageFollowingsPage\\:\\:verifyPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ManageFollowingsPage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\MembersPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
