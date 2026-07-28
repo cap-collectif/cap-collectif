@@ -6,6 +6,11 @@ context('Proposal Page', () => {
       cy.task('db:restore')
       cy.task('disable:feature', 'new_vote_step')
     })
+    afterEach(() => {
+      cy.task('disable:feature', 'blog')
+      cy.task('disable:feature', 'captcha')
+      cy.task('disable:feature', 'districts')
+    })
     it('should see votes', () => {
       cy.directLoginAs('project_owner')
       ProposalPage.visitSelectionStepWithOpenedVoteAndDisplayed()
@@ -73,6 +78,188 @@ context('Proposal Page', () => {
           cy.wait('@ProposalVotesByStepQuery')
           cy.get('h1').should('exist').and('be.visible').should('contain', 'Nouveau titre')
         })
+    })
+    it('prevents contributions when proposal collection is closed', () => {
+      cy.directLoginAs('user')
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions-fermee',
+      })
+
+      cy.get('#main').should('contain', 'step.selection.alert.ended.title').and('contain', 'thank.for.contribution')
+      cy.get('#add-proposal').should('be.disabled')
+    })
+    it('opens the proposal form for anonymous visitors who want to contribute', () => {
+      cy.clearCookies()
+      cy.clearLocalStorage()
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions',
+      })
+
+      cy.get('#add-proposal').should('be.visible').click()
+      cy.get('#proposal-form').should('exist')
+    })
+    it('allows an anonymous visitor to comment a proposal', () => {
+      cy.task('disable:feature', 'moderation_comment')
+      cy.clearCookies()
+      cy.clearLocalStorage()
+      ProposalPage.visitProposalPage()
+
+      cy.get('#CommentForm').should('be.visible')
+      cy.get('textarea[name="body"]').type('Un commentaire Cypress')
+      cy.get('input[name="authorName"]').type('Marie Lopez')
+      cy.get('input[name="authorEmail"]').type('marie.lopez@example.com')
+      cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
+      cy.get('#comment-submit').should('be.enabled').click()
+      cy.wait('@AddCommentMutation')
+
+      cy.get('#CommentListViewPaginated').should('contain', 'Un commentaire Cypress')
+    })
+    it('allows a logged-in user to create a proposal with its required information', () => {
+      cy.task('enable:feature', 'districts')
+      cy.directLoginAs('user')
+      cy.interceptGraphQLOperation({ operationName: 'CreateProposalMutation' })
+      cy.intercept('POST', '**/files').as('uploadDocument')
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions',
+      })
+
+      cy.get('.proposal-preview').should('have.length', 8)
+      cy.get('#add-proposal').should('be.visible').click()
+      cy.get('#proposal_title').type('Nouvelle proposition Cypress')
+      cy.get('#proposal_body .jodit-wysiwyg').type('Description de la proposition Cypress')
+      cy.get('#proposal-form-responses1').type('Reponse a la question 1')
+      cy.get('#proposal-form-responses2').type('Reponse a la question 2')
+      cy.get('[id="global.category"]').select('Politique')
+      cy.get('[id="global.theme"]').select('Justice')
+      cy.get('#proposal_address').type('5 Allee Rallier-du-Baty 35000 Rennes')
+      cy.get('#list-suggestion > li').first().should('be.visible').click()
+      cy.get('#proposal_district').select('Beauregard')
+      cy.get('#proposal-form-responses3_field').selectFile('fixtures/document.pdf', { force: true })
+      cy.wait('@uploadDocument')
+      cy.get('#proposal-form-responses3 .document-container').should('contain.text', 'document.pdf')
+      cy.get('#confirm-proposal-create').should('be.enabled').click()
+      cy.wait('@CreateProposalMutation')
+        .its('response.body.data.createProposal.proposal.title')
+        .should('equal', 'Nouvelle proposition Cypress')
+      cy.contains('.toasts-container--top div', 'proposal.create.redirecting').should('be.visible')
+      cy.visit(
+        '/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/nouvelle-proposition-cypress',
+      )
+      cy.get('#proposal-page-tabs-tab-followers').should('be.visible').click()
+      cy.get('#proposal-page-tabs-pane-followers').should('contain', 'user')
+    })
+    it('shows a validation error when a required response is missing', () => {
+      cy.task('enable:feature', 'districts')
+      cy.directLoginAs('user')
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions',
+      })
+
+      cy.get('#add-proposal').should('be.visible').click()
+      cy.get('#proposal_title').type('Proposition incomplete Cypress')
+      cy.get('#proposal_body .jodit-wysiwyg').type('Description de la proposition incomplete Cypress')
+      cy.get('#proposal-form-responses1').type('Reponse a la question 1')
+      cy.get('[id="global.category"]').select('Politique')
+      cy.get('#proposal_address').type('5 Allee Rallier-du-Baty 35000 Rennes')
+      cy.get('#list-suggestion > li').first().should('be.visible').click()
+      cy.get('#proposal_district').select('Beauregard')
+      cy.get('#confirm-proposal-create').click({ force: true })
+      cy.contains('proposal.constraints.field_mandatory').should('be.visible')
+
+      const beforeUnload = cy.stub()
+      cy.on('window:before:unload', beforeUnload)
+      cy.reload()
+      cy.wrap(beforeUnload).should('have.been.called')
+    })
+    it('allows an author to delete their proposal', () => {
+      cy.directLoginAs('user')
+      cy.interceptGraphQLOperation({ operationName: 'DeleteProposalMutation' })
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions',
+      })
+      cy.get('.proposal-preview').should('have.length', 8)
+      ProposalPage.visitProposalPage()
+
+      cy.get('#proposal-delete-button').should('be.visible').click()
+      cy.get('#confirm-proposal-delete').should('be.visible').click()
+      cy.wait('@DeleteProposalMutation')
+      cy.location('pathname').should('include', '/collect/collecte-des-propositions')
+      cy.contains('Rénovation du gymnase').should('not.exist')
+      cy.get('.proposal-preview').should('have.length', 7)
+    })
+    describe('proposal news', () => {
+      const proposalNewsPath = {
+        project: 'budget-participatif-idf',
+        step: 'collecte-des-projets-idf-privee',
+        stepType: 'collect',
+        proposal: 'mon-projet-local-en-tant-quassociation-avec-rna',
+      }
+      const proposalNewsNotifiablePath = {
+        project: 'sauvons-nos-cafes',
+        step: 'soutenons-nos-bistros-et-cafes-dans-cette-periode-difficile',
+        stepType: 'collect',
+        proposal: 'le-petit-cafe',
+      }
+
+      beforeEach(() => {
+        cy.on('uncaught:exception', err => {
+          // ponytail: remove this filter when the duplicated Twig declaration can be fixed.
+          if (
+            err.name === 'SyntaxError' &&
+            err.message.includes("Identifier 'onElementAvailable' has already been declared")
+          ) {
+            return false
+          }
+        })
+        cy.task('enable:feature', 'blog')
+      })
+
+      it('allows an author to create news for their proposal', () => {
+        cy.directLoginAs('ian')
+        cy.interceptGraphQLOperation({ operationName: 'AddProposalNewsMutation' })
+        ProposalPage.visitWithoutVotes(proposalNewsPath)
+
+        cy.get('#add-proposal-news').should('be.visible').click()
+        cy.get('#proposal_news_title').type('Une actualite Cypress')
+        cy.get('#proposal_news_abstract').type('Un resume Cypress')
+        cy.get('#proposal_news_body .jodit-wysiwyg').type('Le contenu de l actualite Cypress')
+        cy.get('#confirm-post-create').should('be.enabled').click()
+        cy.wait('@AddProposalNewsMutation')
+        cy.location('pathname').should('include', '/blog/une-actualite-cypress')
+      })
+
+      it('allows an author to update their proposal news', () => {
+        cy.directLoginAs('user')
+        cy.interceptGraphQLOperation({ operationName: 'UpdateProposalNewsMutation' })
+        ProposalPage.visitWithoutVotes(proposalNewsNotifiablePath)
+        cy.contains('Remerciment').should('be.visible').click()
+
+        cy.get('#edit-proposal-news').should('be.visible').click()
+        cy.get('#proposal_news_abstract').clear().type('Un resume modifie par Cypress')
+        cy.get('#confirm-post-edit').should('be.enabled').click()
+        cy.wait('@UpdateProposalNewsMutation')
+      })
+
+      it('allows an author to delete their proposal news', () => {
+        cy.directLoginAs('ian')
+        cy.interceptGraphQLOperation({ operationName: 'DeleteProposalNewsMutation' })
+        ProposalPage.visitWithoutVotes(proposalNewsPath)
+
+        cy.contains('Mon premier article').should('be.visible').click()
+        cy.get('#edit-proposal-news').should('be.visible').click()
+        cy.get('#delete-proposal-news').should('be.visible').click()
+        cy.get('#confirm-post-delete').should('be.visible').click()
+        cy.wait('@DeleteProposalNewsMutation')
+        cy.location('pathname').should(
+          'include',
+          '/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-rna',
+        )
+      })
     })
     it('is possible to contact the author of a proposal', () => {
       cy.task('enable:feature', 'captcha')

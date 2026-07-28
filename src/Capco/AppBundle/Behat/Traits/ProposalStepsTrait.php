@@ -73,11 +73,6 @@ trait ProposalStepsTrait
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
     ];
-    protected static $proposalsByUserTest = [
-        'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
-    ];
     protected static $proposalCommentNotNotifiable = [
         'projectSlug' => 'appel-a-projets',
         'stepSlug' => 'collecte-des-propositions-avec-vote-simple',
@@ -125,16 +120,6 @@ trait ProposalStepsTrait
         'proposalSlug' => 'installation-de-bancs-sur-la-place-de-la-mairie',
     ];
 
-    protected static $proposalNewsNotNotifiable = [
-        'projectSlug' => 'budget-participatif-idf',
-        'stepSlug' => 'collecte-des-projets-idf-privee',
-        'proposalSlug' => 'mon-projet-local-en-tant-quassociation-avec-rna',
-    ];
-    protected static $proposalNewsNotifiable = [
-        'projectSlug' => 'sauvons-nos-cafes',
-        'stepSlug' => 'soutenons-nos-bistros-et-cafes-dans-cette-periode-difficile',
-        'proposalSlug' => 'le-petit-cafe',
-    ];
     protected static $proposalNotNewsable = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
@@ -177,14 +162,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a closed collect step
-     */
-    public function iGoToAClosedCollectStep()
-    {
-        $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
-    }
-
-    /**
      * @When I go to a proposal
      */
     public function iGoToAProposal()
@@ -217,14 +194,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a proposal made by user@test.com
-     */
-    public function iGoToAProposalMadeByUser()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
-    }
-
-    /**
      * @When I go to a proposal which is comment notifiable
      */
     public function iGoToACommentNotifiableProposal()
@@ -233,103 +202,11 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a proposal which is news notifiable
-     */
-    public function iGoToAProposalNotifiableNews()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNewsNotifiable);
-        $this->waitAndThrowOnFailure(10000, "$('#add-proposal-news').length > 0");
-    }
-
-    /**
-     * @When I go to a proposal which is not news notifiable
-     */
-    public function iGoToAProposalNotNotifiableNews()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNewsNotNotifiable);
-    }
-
-    /**
      * @When I go to a proposal which is not newsable
      */
     public function iGoToAProposalNotNewsable()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotNewsable);
-    }
-
-    /**
-     * @When I click on button to add news
-     */
-    public function iClickButtonToAddNews()
-    {
-        $this->iWaitElementToAppearOnPage('#add-proposal-news');
-        $this->navigationContext->getPage('proposal page')->clickCreateProposalNewsButton();
-        $this->iWaitTextToAppearOnPage('proposal-add-news');
-    }
-
-    /**
-     * @When I click on button to edit news
-     */
-    public function iClickButtonToEditNews()
-    {
-        $this->iWaitElementToAppearOnPage('#edit-proposal-news');
-        $this->navigationContext->getPage('proposal page')->clickEditProposalNewsButton();
-        $this->iWaitTextToAppearOnPage('proposal-edit-news');
-    }
-
-    /**
-     * @When I click on button to delete news
-     */
-    public function iClickButtonToDeleteNews()
-    {
-        $this->iWaitElementToAppearOnPage('#delete-proposal-news');
-        $this->navigationContext->getPage('proposal page')->clickDeleteProposalNewsButton();
-    }
-
-    /**
-     * @When I should not see button to add news
-     */
-    public function iShouldNotSeeButtonToAddNews()
-    {
-        $this->iWaitElementToDisappearOnPage('#add-proposal-news');
-    }
-
-    /**
-     * @When I publish my news
-     */
-    public function iClickButtonToPublishNews()
-    {
-        $this->iWaitElementToAppearOnPage('#add-proposal-news');
-        $this->navigationContext->getPage('proposal page')->clickPublishProposalNewsButton();
-        $this->iWaitElementToDisappearOnPage('#add-proposal-news');
-    }
-
-    /**
-     * @When I publish my updated news
-     */
-    public function iClickButtonToPublishUpdatedNews()
-    {
-        $this->iWaitElementToAppearOnPage('#confirm-post-edit');
-        $this->navigationContext->getPage('proposal page')->clickPublishUpdatedProposalNewsButton();
-        $this->iWaitElementToDisappearOnPage('#confirm-post-edit');
-    }
-
-    /**
-     * @When I confirm to delete my news
-     */
-    public function iClickButtonToConfirmDeleteNews()
-    {
-        $this->iWaitElementToAppearOnPage('#confirm-post-delete');
-        $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalNewsButton();
-        $this->iWaitElementToDisappearOnPage('#confirm-post-delete');
-    }
-
-    /**
-     * @When I fill proposal news body field
-     */
-    public function iFillProposalNewsBody()
-    {
-        $this->navigationContext->getPage('proposal page')->fillProposalNewsBody();
     }
 
     /**
@@ -549,34 +426,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then I click the create proposal button
-     */
-    public function iClickTheCreateProposalButton()
-    {
-        $this->iWaitElementToAppearOnPage('#add-proposal');
-        $this->scrollToElement('h1.projectHeader__title');
-        $this->navigationContext->getPage('collect page')->clickCreateProposalButton();
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I fill the proposal form
-     */
-    public function iFillTheProposalForm()
-    {
-        $this->fillProposalForm();
-    }
-
-    /**
-     * @When I fill the simple proposal form
-     */
-    public function iFillTheSimpleProposalForm()
-    {
-        $this->iWaitElementToAppearOnPage('#proposal_title');
-        $this->fillField('proposal_title', 'This is a good title');
-    }
-
-    /**
      * @When I comment :body
      */
     public function iComment(string $body)
@@ -595,33 +444,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I fill the proposal form with a theme
-     */
-    public function iFillTheProposalFormWithATheme()
-    {
-        $this->fillProposalForm(true, true);
-    }
-
-    /**
-     * @When I fill the proposal form without required response
-     */
-    public function iFillTheProposalFormWithoutRequiredResponse()
-    {
-        $this->fillProposalForm(true, false, false);
-    }
-
-    /**
-     * @When I submit the create proposal form
-     */
-    public function iSubmitTheCreateProposalForm()
-    {
-        $this->navigationContext->getPage('collect page')->submitProposalForm();
-        // We wait for page reloading and new proposal show up
-        $this->getSession()->wait(8000, "$('.loader').length > 0");
-        $this->getSession()->wait(8000, "$('.loader').length == 0");
-    }
-
-    /**
      * @When I submit the comment form
      */
     public function iSubmitTheCommentForm()
@@ -637,23 +459,6 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('proposal page')->submitEditProposalForm();
         $this->iWait(2);
-    }
-
-    /**
-     * @Then the create proposal button should be disabled
-     */
-    public function theCreateProposalButtonShouldBeDisabled()
-    {
-        $button = $this->navigationContext->getPage('collect page')->getCreateProposalButton();
-        Assert::assertTrue($button->hasAttribute('disabled'));
-    }
-
-    /**
-     * @Then I should see my new proposal
-     */
-    public function iShouldSeMyNewProposal()
-    {
-        $this->assertPageContainsText('Nouvelle proposition créée');
     }
 
     /**
@@ -713,34 +518,6 @@ trait ProposalStepsTrait
     {
         $selector = $this->navigationContext->getPage('proposal page')->getUpdateButtonSelector();
         $this->assertElementNotOnPage($selector);
-    }
-
-    /**
-     * @Then I click the delete proposal button
-     */
-    public function iClickTheDeleteProposalButton()
-    {
-        $this->waitAndThrowOnFailure(10000, "$('#proposal-delete-button').length > 0");
-        $this->navigationContext->getPage('proposal page')->clickDeleteProposalButton();
-    }
-
-    /**
-     * @Then I confirm proposal deletion
-     */
-    public function iConfirmProposalDeletion()
-    {
-        $this->waitAndThrowOnFailure(10000, "$('#confirm-proposal-delete').length > 0");
-        $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalButton();
-        $this->iWait(3);
-        $this->currentPage = 'collect page';
-    }
-
-    /**
-     * @Then I should not see my proposal anymore
-     */
-    public function iShouldNotSeeMyProposalAnymore()
-    {
-        $this->assertPageNotContainsText('Rénovation du gymnase');
     }
 
     /**
@@ -1444,33 +1221,6 @@ trait ProposalStepsTrait
             $proposal2,
             '.proposal-preview .card__title'
         );
-    }
-
-    protected function fillProposalForm(
-        $fillDistrict = false,
-        $fillTheme = false,
-        $requiredResponse = 'Réponse à la question 2'
-    ) {
-        $tableNode = new TableNode([
-            ['proposal_title', 'Nouvelle proposition créée'],
-            ['proposal_body', 'Description de ma proposition'],
-            ['responses[1].value', 'Réponse à la question 1'],
-            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
-        ]);
-        if (false !== $requiredResponse) {
-            $this->fillField('responses[2].value', $requiredResponse);
-        }
-        $this->fillFields($tableNode);
-        $this->selectOption('global.category', 'Politique');
-        if ($fillTheme) {
-            $this->selectOption('global.theme', 'Justice');
-        }
-        if ($fillDistrict) {
-            $this->selectOption('proposal_district', 'Beauregard');
-        }
-        $this->waitAndThrowOnFailure(10000, "$('#list-suggestion > li:first-child').length > 0");
-        $this->iClickElement('#list-suggestion > li:first-child');
-        $this->iWait(1);
     }
 
     protected function fillComment($body)

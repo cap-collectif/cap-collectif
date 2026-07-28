@@ -24,7 +24,6 @@ class ProposalPage extends Page
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
-        'confirm delete proposal button' => '#confirm-proposal-delete',
         'confirm edit proposal button' => '#confirm-proposal-edit',
         'report proposal button' => '.proposal__btn--report',
         'comment button' => 'button.btn--comment',
@@ -36,13 +35,6 @@ class ProposalPage extends Page
         'proposal follow minimal' => '#proposal-follow-btn-minimal',
         'proposal follow essential' => '#proposal-follow-btn-essential',
         'proposal follow all' => '#proposal-follow-btn-all',
-        'proposal create news button' => '#add-proposal-news',
-        'proposal edit news button' => '#edit-proposal-news',
-        'proposal delete news button' => '#delete-proposal-news',
-        'publish proposal news button' => '#confirm-post-create',
-        'publish updated proposal news button' => '#confirm-post-edit',
-        'confirm delete proposal news' => '#confirm-post-delete',
-        'proposal news create body field' => '#ProposalNewsForm #proposal_news_body .jodit-wysiwyg',
     ];
 
     /**
@@ -55,14 +47,14 @@ class ProposalPage extends Page
         }
     }
 
-    public function getDeleteButtonSelector()
-    {
-        return $this->getSelector('delete proposal button');
-    }
-
     public function getUpdateButtonSelector()
     {
         return $this->getSelector('edit proposal button');
+    }
+
+    public function getDeleteButtonSelector()
+    {
+        return $this->getSelector('delete proposal button');
     }
 
     public function getVoteButtonSelector($id)
@@ -126,47 +118,6 @@ class ProposalPage extends Page
         $button->click();
     }
 
-    public function clickCreateProposalNewsButton()
-    {
-        $button = $this->getElement('proposal create news button');
-        $button->click();
-    }
-
-    public function clickEditProposalNewsButton()
-    {
-        $button = $this->getElement('proposal edit news button');
-        $button->click();
-    }
-
-    public function clickDeleteProposalNewsButton()
-    {
-        $button = $this->getElement('proposal delete news button');
-        $button->click();
-    }
-
-    public function clickConfirmDeleteProposalNewsButton()
-    {
-        $button = $this->getElement('confirm delete proposal news');
-        $button->click();
-    }
-
-    public function clickPublishProposalNewsButton()
-    {
-        $button = $this->getElement('publish proposal news button');
-        $button->click();
-    }
-
-    public function clickPublishUpdatedProposalNewsButton()
-    {
-        $button = $this->getElement('publish updated proposal news button');
-        $button->click();
-    }
-
-    public function fillProposalNewsBody()
-    {
-        $this->getElement('proposal news create body field')->setValue('Contenu du body');
-    }
-
     public function submitCommentForm()
     {
         $button = $this->getCommentButton();
@@ -186,16 +137,6 @@ class ProposalPage extends Page
     public function clickEditProposalButton()
     {
         $this->getElement('edit proposal button')->click();
-    }
-
-    public function clickDeleteProposalButton()
-    {
-        $this->getElement('delete proposal button')->click();
-    }
-
-    public function clickConfirmDeleteProposalButton()
-    {
-        $this->getElement('confirm delete proposal button')->click();
     }
 
     public function clickReportProposalButton()
