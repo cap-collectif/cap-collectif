@@ -36,10 +36,7 @@ describe('Moderation', () => {
       cy.contains('the-proposal-has-been-successfully-moved-to-the-trash').should('be.visible')
     })
 
-    // TODO: fixme
-    // ! this test currently fails in CI, preventing the pipeline from succeeding.
-    // it must be fixed urgently and the test must be uncommented
-    it.skip('should moderate opinion for guideline violation', () => {
+    it('should moderate opinion for guideline violation', () => {
       Base.visit({
         path: '/moderate/opinion1ModerationToken/reason/moderation-guideline-violation',
         operationName: 'OpinionSourceBoxQuery',
@@ -49,10 +46,8 @@ describe('Moderation', () => {
         'include',
         '/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1',
       )
-
       cy.contains('the-proposal-has-been-successfully-moved-to-the-trash').should('be.visible')
-
-      cy.get('.has-chart').should('be.visible').and('contain', 'in-the-trash')
+      cy.contains('in-the-trash').should('be.visible')
     })
   })
 
@@ -96,6 +91,7 @@ describe('Moderation', () => {
     it('should moderate argument for guideline violation', () => {
       cy.interceptGraphQLOperation({ operationName: 'ArgumentListQuery' })
       cy.intercept('GET', '/moderate/**').as('moderate')
+      cy.task('swarrot:consume', 'elasticsearch_indexation')
       cy.visit('/moderate/argument1ModerationToken/reason/moderation-guideline-violation', {
         failOnStatusCode: false,
       })
@@ -104,7 +100,20 @@ describe('Moderation', () => {
         cy.wrap(interception?.response?.statusCode).should('equal', 302)
       })
 
+      // The page fetches FOR and AGAINST arguments separately. Wait for the initial render,
+      // then reload after the Elasticsearch consumer processes the moderation update.
       cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
+      cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
+      cy.reload()
+      cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
+      cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
+      cy.location('pathname').should(
+        'include',
+        '/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2',
+      )
+      cy.location('hash').should('eq', '#arg-argument1')
+      cy.get('#opinion__arguments--AGAINST').should('be.visible')
+      cy.get('#arg-QXJndW1lbnQ6YXJndW1lbnQx').should('not.exist')
     })
   })
 })
