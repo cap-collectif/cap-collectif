@@ -61,6 +61,6 @@ Il est possible de faire la même chose avec [prettier](https://medium.com/@dyan
 
 <div id="yarn-audit-fix">Appliquer les patches de mise à jour des dépendances</div>
 ---
-Lancez la commande `yarn audit` afin d'identifier les dépendances présentant des failles.
+Lancez la commande `yarn npm audit --all --recursive` afin d'identifier les dépendances présentant des failles.
 
 Pour corriger une faille sur une dépendance transitive, ajoutez une entrée dans le champ `resolutions` du `package.json` racine pour forcer une version corrigée, puis relancez `yarn install`. Pour une dépendance directe, mettez à jour sa version dans le `package.json` concerné.

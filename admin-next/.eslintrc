@@ -1,5 +1,7 @@
 {
+  "root": true,
   "extends": ["next", "next/core-web-vitals"],
+  "plugins": ["@typescript-eslint", "relay"],
   "rules": {
     "react/display-name": "warn",
     "react/no-unescaped-entities": "off",
@@ -8,8 +10,7 @@
     "@next/next/no-img-element": "off",
     "@next/next/no-sync-scripts": "warn",
     "prefer-destructuring": "off",
-    "import/no-anonymous-default-export": "off",
-    "relay/no-future-added-value": "off"
+    "import/no-anonymous-default-export": "off"
   },
   "overrides": [
     {

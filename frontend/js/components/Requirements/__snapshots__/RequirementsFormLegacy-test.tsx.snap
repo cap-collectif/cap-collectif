@@ -195,7 +195,7 @@ exports[`<RequirementsFormLegacy /> should render a vote widget for a simple vot
     placeholder={null}
     type="text"
   />
-  <EmotionCssPropInternal
+  <ForwardRef
     __EMOTION_TYPE_PLEASE_DO_NOT_USE__={
       Object {
         "$$typeof": Symbol(react.forward_ref),

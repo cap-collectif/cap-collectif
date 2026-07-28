@@ -1,22 +1,22 @@
 'use client'
 import { CapUIProvider, extendTheme, generatePalette } from '@cap-collectif/ui'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { AppProvider } from '@components/BackOffice/AppProvider/AppProvider'
+import { layoutQuery$data } from '@relay/layoutQuery.graphql'
+import { GlobalTheme } from '@shared/navbar/NavBar.utils'
+import { ADS_COOKIE, ANALYTICS_COOKIE } from '@shared/utils/cookies'
 import NoSSR from '@utils/NoSSR'
 import getEnvironment from '@utils/relay-environement'
 import { domAnimation, LazyMotion } from 'framer-motion'
+import moment from 'moment'
+import { useCookies } from 'next-client-cookies'
 import { FC, useEffect } from 'react'
 import { IntlProvider } from 'react-intl'
 import { RelayEnvironmentProvider } from 'react-relay'
 import { FeatureFlags, IntlType, ViewerSession } from 'types'
-import MainLayout from './MainLayout'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
-import { GlobalFrontOfficeStyles } from './styles'
-import { useCookies } from 'next-client-cookies'
-import { GlobalTheme } from '@shared/navbar/NavBar.utils'
-import { layoutQuery$data } from '@relay/layoutQuery.graphql'
-import { ADS_COOKIE, ANALYTICS_COOKIE } from '@shared/utils/cookies'
 import { evalCustomCode, formatCustomCode } from './custom-code'
-import moment from 'moment'
+import MainLayout from './MainLayout'
+import { GlobalFrontOfficeStyles } from './styles'
 
 /**
  * Ce compo injecte tout ce qui est configurable à l'échelle globale d'une plateforme dans le BO, à savoir
@@ -60,10 +60,7 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
 
   const primary = generatePalette(siteColors.primaryColor)
   const resolvedCaptchaKey =
-    captchaKey ||
-    process.env.NEXT_PUBLIC_SYMFONY_TURNSTILE_PUBLIC_KEY ||
-    process.env.SYMFONY_TURNSTILE_PUBLIC_KEY ||
-    ''
+    captchaKey || process.env.NEXT_PUBLIC_SYMFONY_TURNSTILE_PUBLIC_KEY || process.env.SYMFONY_TURNSTILE_PUBLIC_KEY || ''
 
   const CapUITheme = extendTheme({
     colors: {
@@ -118,7 +115,6 @@ export default function Providers({
 }>) {
   moment.locale(intl.locale)
   return (
-    // @ts-expect-error types inconsistencies between react-relay and relay-runtime
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
       {/** @ts-expect-error MAJ react-intl */}
       <IntlProvider locale={intl.locale} messages={intl.messages}>

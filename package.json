@@ -24,8 +24,8 @@
         "trad": "yarn run fetch-translations",
         "compile-graphql": "pipenv run fab local.qa.compile-graphql",
         "dump-graphql-schemas": "pipenv run fab local.qa.graphql-schemas",
-        "clean-cache": "rm -rf var/cache/* && pipenv run fab local.app.clear-cache",
-        "clean-logs": "rm -rf var/log/* var/logs/*",
+        "clean-cache": "find var/cache -mindepth 1 -maxdepth 1 -exec rm -rf {} + && pipenv run fab local.app.clear-cache",
+        "clean-logs": "find var/log var/logs -mindepth 1 -maxdepth 1 -exec rm -rf {} +",
         "generate-graphql-files": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schemas",
         "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
         "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
@@ -402,5 +402,5 @@
         "typescript": "^5.8.3",
         "vscode-apollo-relay": "^1.5.2"
     },
-    "packageManager": "yarn@1.22.22"
+    "packageManager": "yarn@4.17.1+sha512.ccbfabf7d7b6b32075088be9386fb9a2e00bb6887ef07fa56effabc890a56d53da1ccc4128d62db245fcbd3961b236d75335bdf7d5320ed6eafb7588b7ad4697"
 }

@@ -60,6 +60,13 @@ infrastructure/services/databasefixtures/dump.sql
 **/node_modules/
 /app/Resources/libs
 
+# Yarn Berry (yarn itself comes from corepack via the packageManager field)
+.yarn/*
+!.yarn/patches
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
 # redis
 dump.rdb
 .bundle

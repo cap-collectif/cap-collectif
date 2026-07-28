@@ -1,5 +1,5 @@
 #!/bin/sh
 
-yarn install || echo 'Erreur de yarn install'
+corepack yarn install || echo 'Erreur de yarn install'
 
-yarn relay && yarn dev
+corepack yarn relay && corepack yarn dev

@@ -13,7 +13,6 @@ export const environment = new Environment({
 })
 
 const getEnvironment = (featureFlags: FeatureFlags) => {
-  // @ts-expect-error types inconsistencies between react-relay and relay-runtime
   commitLocalUpdate(environment, storeProxy => {
     if (storeProxy.get(`client:root:featureFlags:shield_mode`) !== undefined) {
       // If features flags are already set, we don't need to do anything.

@@ -78,6 +78,12 @@ NEXT_PUBLIC_SYMFONY_ENV=test
 
 > **Why:** Cypress tests require the test environment to be configured in Next.js. Without this variable, tests will fail or run against the wrong environment.
 
+### Yarn Version
+
+The package manager is Yarn 4.x (Berry), managed via [Corepack](https://nodejs.org/api/corepack.html) — the exact version is pinned in the `packageManager` field of `package.json`, not installed globally.
+
+**Before running any `yarn` command**, run `corepack enable` once per machine/environment (dev laptop, CI image). Without it, `yarn` may resolve to a different globally-installed version, or fail outright.
+
 ## Common Commands
 
 ### Build & Development

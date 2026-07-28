@@ -7,6 +7,7 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION__: Function
     Beacon?: (method: string, options?: Record<string, unknown>) => void
   }
+
   type ReactRelayReadyState = {
     error: Error | null | undefined
     props: Object | null | undefined

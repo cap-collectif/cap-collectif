@@ -94,7 +94,7 @@ Array [
                   onTouchEnd={[Function]}
                 >
                   <div
-                    className="react-select__value-container css-g1d714-ValueContainer"
+                    className="react-select__value-container css-1hwfws3"
                   >
                     <div
                       className="react-select__placeholder css-1wa3eu0-placeholder"
@@ -102,7 +102,7 @@ Array [
                       global.placeholder.email
                     </div>
                     <div
-                      className="css-b8ldur-Input"
+                      className="css-1g6gooi"
                     >
                       <div
                         className="react-select__input"
@@ -159,7 +159,7 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                    className="react-select__indicators css-1wy0on6"
                   >
                     <span
                       className="react-select__indicator-separator css-1okebmr-indicatorSeparator"
