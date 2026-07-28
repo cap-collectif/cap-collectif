@@ -184,20 +184,19 @@ class ApplicationContext extends UserContext
 
         /** @var IndexBuilder $indexManager */
         $indexManager = $this->getService(IndexBuilder::class);
-        $indexManager->getLiveSearchIndex()->close();
+        $liveSearchIndexName = $indexManager->getLastIndexRealName();
+        $indexManager->getClient()->getIndex($liveSearchIndexName)->close();
         $this->snapshot->restoreSnapshot(
             REPOSITORY_NAME,
             SNAPSHOT_NAME,
-            [
-                'feature_states' => ['geoip'],
-            ],
+            ['indices' => $liveSearchIndexName],
             true
         );
         $openRequest = new Open();
         $openRequest->setParams(['wait_for_active_shards' => 1]);
-        $indexManager->getLiveSearchIndex()->requestEndpoint($openRequest);
+        $indexManager->getClient()->getIndex($liveSearchIndexName)->requestEndpoint($openRequest);
         $indexManager->markAsLive(
-            $indexManager->getClient()->getIndex($indexManager->getLastIndexRealName())
+            $indexManager->getClient()->getIndex($liveSearchIndexName)
         );
     }
 
