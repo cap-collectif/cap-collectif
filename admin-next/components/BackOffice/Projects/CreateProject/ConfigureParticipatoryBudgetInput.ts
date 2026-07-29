@@ -6,12 +6,14 @@ const getParticipatoryBudgetInput = ({
   authors,
   intl,
   isNewBackOfficeEnabled,
+  isSsoByPassAuthEnabled,
 }): PreConfigureProjectInput => {
   const { proposalForms, project } = getParticipatoryBudgetAnalysisInput({
     projectTitle,
     authors,
     intl,
     isNewBackOfficeEnabled,
+    isSsoByPassAuthEnabled,
   })
 
   const updatedInput = {

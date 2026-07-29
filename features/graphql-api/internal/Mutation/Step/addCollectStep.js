@@ -31,6 +31,16 @@ const AddCollectStep = /* GraphQL*/ `
   }
 `
 
+const ToggleFeature = /* GraphQL */ `
+  mutation ToggleFeature($input: ToggleFeatureInput!) {
+    toggleFeature(input: $input) {
+      featureFlag {
+        enabled
+      }
+    }
+  }
+`
+
 describe('mutations.addCollectStepMutation', () => {
   it('admin should be able to add collect step.', async () => {
     const response = await graphql(
@@ -63,5 +73,27 @@ describe('mutations.addCollectStepMutation', () => {
       'internal_super_admin',
     )
     expect(response).toMatchSnapshot()
+  })
+
+  it('uses SSO instead of email verification when SSO bypass authentication is enabled.', async () => {
+    await graphql(
+      ToggleFeature,
+      { input: { type: 'sso_by_pass_auth', enabled: true } },
+      'internal_super_admin',
+    ) 
+
+    const response = await graphql(
+      AddCollectStep,
+      { input: { projectId: toGlobalId('Project', 'project9') } },
+      'internal_admin',
+    )
+
+    expect(response.addCollectStep.step.requirements.edges).toEqual([
+      {
+        node: {
+          __typename: 'SSORequirement',
+        },
+      },
+    ])
   })
 })

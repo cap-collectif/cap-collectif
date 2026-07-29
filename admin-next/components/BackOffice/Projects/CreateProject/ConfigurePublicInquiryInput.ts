@@ -17,6 +17,7 @@ const getPublicInquiryInput = ({
   authors,
   intl,
   isNewBackOfficeEnabled,
+  isSsoByPassAuthEnabled,
   visibility,
 }): PreConfigureProjectInput => {
   const proposalFormTitle = `${projectTitle} - ${intl.formatMessage({ id: 'proposal-form' })}`
@@ -250,7 +251,7 @@ const getPublicInquiryInput = ({
           private: false,
           requirements: [
             {
-              type: 'EMAIL_VERIFIED',
+              type: isSsoByPassAuthEnabled ? 'SSO' : 'EMAIL_VERIFIED',
             },
             {
               type: 'CONSENT_PRIVACY_POLICY',

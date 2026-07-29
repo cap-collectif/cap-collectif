@@ -27,6 +27,7 @@ type Params = {
   authors: Array<string>
   intl: IntlShape
   isNewBackOfficeEnabled: boolean
+  isSsoByPassAuthEnabled: boolean
 }
 
 const getParticipatoryBudgetAnalysisInput = ({
@@ -34,6 +35,7 @@ const getParticipatoryBudgetAnalysisInput = ({
   authors,
   intl,
   isNewBackOfficeEnabled,
+  isSsoByPassAuthEnabled,
 }: Params): PreConfigureProjectInput => {
   const proposalFormTitle = `${projectTitle} - ${intl.formatMessage({ id: 'proposal-form' })}`
   const questionnaireTitle = `${projectTitle} - ${intl.formatMessage({ id: 'export.option.analysis-form' })}`
@@ -174,7 +176,7 @@ const getParticipatoryBudgetAnalysisInput = ({
           private: false,
           requirements: [
             {
-              type: 'EMAIL_VERIFIED',
+              type: isSsoByPassAuthEnabled ? 'SSO' : 'EMAIL_VERIFIED',
             },
             {
               type: 'CONSENT_PRIVACY_POLICY',

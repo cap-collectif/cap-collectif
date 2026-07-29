@@ -60,6 +60,7 @@ const VIEWER_FRAGMENT = graphql`
 const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHelpMessage }) => {
   const intl = useIntl()
   const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project')
+  const isSsoByPassAuthEnabled = useFeatureFlag('sso_by_pass_auth')
 
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
@@ -153,6 +154,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             authors,
             intl,
             isNewBackOfficeEnabled,
+            isSsoByPassAuthEnabled,
           })
 
           response = await PreConfigureProjectMutation.commit({
@@ -166,6 +168,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             authors,
             intl,
             isNewBackOfficeEnabled,
+            isSsoByPassAuthEnabled,
           })
 
           response = await PreConfigureProjectMutation.commit({
@@ -179,6 +182,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             authors,
             intl,
             isNewBackOfficeEnabled,
+            isSsoByPassAuthEnabled,
             visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
           })
 
@@ -193,6 +197,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             authors,
             intl,
             isNewBackOfficeEnabled,
+            isSsoByPassAuthEnabled,
             visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
           })
 

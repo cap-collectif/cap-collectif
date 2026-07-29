@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Service\AddStepService;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -21,7 +22,8 @@ class AddCollectStepMutation implements MutationInterface
     public function __construct(
         private readonly AddStepService $addStepService,
         private readonly TranslatorInterface $translator,
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
+        private readonly Manager $toggleManager
     ) {
     }
 
@@ -55,14 +57,18 @@ class AddCollectStepMutation implements MutationInterface
         /** * @var CollectStep $step */
         ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'COLLECT');
         $step->setProposalForm($proposalForm);
-        $emailVerifiedRequirement = (new Requirement())
-            ->setType(Requirement::EMAIL_VERIFIED)
+        $authenticationRequirement = (new Requirement())
+            ->setType(
+                $this->toggleManager->isActive(Manager::sso_by_pass_auth)
+                    ? Requirement::SSO
+                    : Requirement::EMAIL_VERIFIED
+            )
             ->setPosition(0)
         ;
-        $step->addRequirement($emailVerifiedRequirement);
+        $step->addRequirement($authenticationRequirement);
 
         $this->em->persist($proposalForm);
-        $this->em->persist($emailVerifiedRequirement);
+        $this->em->persist($authenticationRequirement);
         $this->em->flush();
 
         return ['step' => $step];
