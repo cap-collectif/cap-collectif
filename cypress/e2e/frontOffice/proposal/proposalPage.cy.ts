@@ -10,6 +10,8 @@ context('Proposal Page', () => {
       cy.task('disable:feature', 'blog')
       cy.task('disable:feature', 'captcha')
       cy.task('disable:feature', 'districts')
+      cy.task('disable:feature', 'reporting')
+      cy.task('disable:feature', 'share_buttons')
     })
     it('should see votes', () => {
       cy.directLoginAs('project_owner')
@@ -25,35 +27,166 @@ context('Proposal Page', () => {
     })
     it('follow proposal and change type of following', () => {
       cy.directLoginAs('project_owner')
+      cy.interceptGraphQLOperation({ operationName: 'FollowProposalMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateFollowProposalMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UnfollowProposalMutation' })
       ProposalPage.visitProposalPage()
-      cy.on('uncaught:exception', (err, runnable) => {
-        console.log('ERROR', err)
-        return false
-      })
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() //follow
-      cy.wait(2000)
+      cy.wait('@FollowProposalMutation')
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() //open menu
       cy.get('.cap-menu__list') // expect menu
       cy.get('.cap-menu__list #proposal-follow-btn-minimal-UHJvcG9zYWw6cHJvcG9zYWwy input').should('be.checked') // check minimal is checked
       // essential
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // close menu
-      cy.wait(1000)
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // open menu
       cy.get('.cap-menu__list #proposal-follow-btn-essential-UHJvcG9zYWw6cHJvcG9zYWwy input').check({ force: true }) //check essential
-      cy.wait(1000)
+      cy.wait('@UpdateFollowProposalMutation')
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // open menu
       cy.get('.cap-menu__list #proposal-follow-btn-essential-UHJvcG9zYWw6cHJvcG9zYWwy input').should('be.checked') // check essential is checked
+      ProposalPage.visitProposalPage()
+      cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click()
+      cy.get('.cap-menu__list #proposal-follow-btn-essential-UHJvcG9zYWw6cHJvcG9zYWwy input').should('be.checked')
       //ALL
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // close menu
-      cy.wait(1000)
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // open menu
+      cy.get('.cap-menu__list').should('be.visible')
       cy.get('.cap-menu__list #proposal-follow-btn-all-UHJvcG9zYWw6cHJvcG9zYWwy input').check({ force: true }) //check all
-      cy.wait(1000)
+      cy.wait('@UpdateFollowProposalMutation')
       cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click() // open menu
       cy.get('.cap-menu__list #proposal-follow-btn-all-UHJvcG9zYWw6cHJvcG9zYWwy input').should('be.checked') // check all is checked
       // check if in follower list
       cy.get('#proposal-page-tabs-tab-followers').click()
       cy.get('#proposal-page-tabs-pane-followers').contains('Théo QP')
+
+      cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click()
+      cy.get('.proposal__unfollow').click()
+      cy.wait('@UnfollowProposalMutation')
+      ProposalPage.visitProposalPage()
+      cy.get('#proposal-page-tabs-tab-followers').click()
+      cy.get('#proposal-page-tabs-pane-followers').should('not.contain', 'Théo QP')
+    })
+
+    it('keeps proposal preview follow settings after revisiting the collect step', () => {
+      const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwyMg=='
+      const followButton = `[id="proposal-follow-btn-${proposalId}"]`
+      const essentialOption = `[id="proposal-follow-btn-essential-${proposalId}"] input`
+      const allOption = `[id="proposal-follow-btn-all-${proposalId}"] input`
+      const minimalOption = `[id="proposal-follow-btn-minimal-${proposalId}"] input`
+      const unfollowButton = `[id="proposal-unfollow-btn-${proposalId}"]`
+
+      cy.directLoginAs('user')
+      cy.interceptGraphQLOperation({ operationName: 'FollowProposalMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateFollowProposalMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UnfollowProposalMutation' })
+
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'depot-avec-vote',
+      })
+      cy.get(`.proposal-preview-list ${followButton}`).should('be.visible').click()
+      cy.wait('@FollowProposalMutation')
+      cy.get(`.proposal-preview-list ${followButton}`).click()
+      cy.get(essentialOption).check({ force: true })
+      cy.wait('@UpdateFollowProposalMutation')
+
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'depot-avec-vote',
+      })
+      cy.get(`.proposal-preview-list ${followButton}`).should('contain', 'following').click()
+      cy.get(essentialOption).should('be.checked')
+      cy.get(allOption).check({ force: true })
+      cy.wait('@UpdateFollowProposalMutation')
+      cy.get(`.proposal-preview-list ${followButton}`).click()
+      cy.get(minimalOption).check({ force: true })
+      cy.wait('@UpdateFollowProposalMutation')
+      cy.get(`.proposal-preview-list ${followButton}`).click()
+      cy.get(unfollowButton).click()
+      cy.wait('@UnfollowProposalMutation')
+
+      ProposalPage.visitCollectStepPage({
+        project: 'budget-participatif-rennes',
+        step: 'depot-avec-vote',
+      })
+      cy.get(`.proposal-preview-list ${followButton}`).should('contain', 'follow').and('not.contain', 'following')
+    })
+
+    it('does not redirect a true unfollow token to followed proposals', () => {
+      cy.visit('/profile/notifications/user-unsubscribe-token')
+
+      cy.location('pathname').should('eq', '/profile/edit-profile')
+    })
+
+    it('opens login for an anonymous visitor who wants to follow a proposal', () => {
+      cy.clearCookies()
+      cy.clearLocalStorage()
+      ProposalPage.visitProposalPage()
+
+      cy.get('#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy').click()
+      cy.get('#login-popover').should('be.visible')
+    })
+    it('allows a logged-in user to comment a proposal', () => {
+      cy.directLoginAs('user')
+      cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
+      ProposalPage.visitProposalPage()
+
+      cy.get('[name="body"]').should('be.visible').type('Commentaire Cypress')
+      cy.contains('comment.submit').should('be.visible').click({ force: true })
+      cy.wait('@AddCommentMutation')
+      cy.contains('.toasts-container--top div', 'comment.submit_success').should('be.visible')
+      cy.contains('.comments__section', 'Commentaire Cypress').should('be.visible')
+    })
+    it('allows an anonymous visitor to comment a proposal', () => {
+      cy.clearCookies()
+      cy.clearLocalStorage()
+      cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
+      ProposalPage.visitProposalPage()
+
+      cy.get('[name="body"]').should('be.visible').type('Commentaire anonyme Cypress')
+      cy.get('[name="authorName"]').type('Marie Lopez')
+      cy.get('[name="authorEmail"]').type('marie.lopez@example.test')
+      cy.contains('comment.submit').should('be.visible').click({ force: true })
+      cy.wait('@AddCommentMutation')
+      cy.contains('.comments__section', 'Commentaire anonyme Cypress').should('be.visible')
+    })
+    it('allows an administrator to edit their proposal comment', () => {
+      cy.directLoginAs('sfavot')
+      ProposalPage.visit({
+        project: 'budget-participatif-rennes',
+        step: 'collecte-des-propositions',
+        stepType: 'collect',
+        proposal: 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
+      })
+
+      cy.get('#CommentEdit-Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx').should('be.visible').click()
+      cy.get('#body').clear().type('Commentaire modifie par Cypress')
+      cy.get('#confirm').check({ force: true })
+      cy.get('button[type="submit"]').click()
+      cy.contains('Commentaire modifie par Cypress').should('be.visible')
+    })
+    it('allows a user to report a proposal', () => {
+      cy.task('enable:feature', 'reporting')
+      cy.directLoginAs('admin')
+      cy.interceptGraphQLOperation({ operationName: 'ReportMutation' })
+      ProposalPage.visitProposalPage()
+
+      cy.get('.proposal__btn--report').should('be.visible').click()
+      cy.get('#reportBody').type('Contenu de signalement Cypress')
+      cy.get('#reportType').select('reporting.status.spam')
+      cy.get('#report-button-submit').should('be.visible').click()
+      cy.wait('@ReportMutation')
+      cy.contains('.toasts-container--top div', 'alert.success.report.proposal').should('be.visible')
+    })
+    it('opens the share link modal for anonymous visitors', () => {
+      cy.task('enable:feature', 'share_buttons')
+      cy.clearCookies()
+      cy.clearLocalStorage()
+      ProposalPage.visitProposalPage()
+
+      cy.get('#proposal-share-button').should('be.visible').click()
+      cy.get('.cap-menu__list.share-button-dropdown').should('contain', 'share.facebook').and('contain', 'share.link')
+      cy.get('.share-option').last().click()
+      cy.get('.modal--share-link').should('be.visible')
     })
     it('should allow the author of a proposal to update it', () => {
       cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })

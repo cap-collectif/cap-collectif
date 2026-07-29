@@ -28,8 +28,6 @@ use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
-use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
-use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\UserProfileTrait;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
@@ -71,8 +69,6 @@ class ApplicationContext extends UserContext
     use ProposalEvaluationTrait;
     use ProposalStepsTrait;
     use QuestionnaireStepsTrait;
-    use ReportingStepsTrait;
-    use SharingStepsTrait;
     use UserProfileTrait;
 
     protected $cookieConsented;
@@ -189,7 +185,10 @@ class ApplicationContext extends UserContext
         $this->snapshot->restoreSnapshot(
             REPOSITORY_NAME,
             SNAPSHOT_NAME,
-            ['indices' => $liveSearchIndexName],
+            [
+                'indices' => $liveSearchIndexName,
+                'feature_states' => ['none'],
+            ],
             true
         );
         $openRequest = new Open();

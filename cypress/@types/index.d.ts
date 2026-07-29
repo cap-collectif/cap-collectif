@@ -45,6 +45,7 @@ declare namespace Cypress {
     | 'agui'
     | 'no_name'
     | 'ian'
+    | 'sfavot'
   interface MailcatcherMessage {
     id: number
     sender: string

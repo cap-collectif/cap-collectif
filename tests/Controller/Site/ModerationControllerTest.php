@@ -38,6 +38,9 @@ class ModerationControllerTest extends KernelTestCase
         ;
 
         $container = static::getContainer();
+        $entityManager = $container->get('doctrine')->getManager();
+        $connection = $entityManager->getConnection();
+        $connection->beginTransaction();
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->method('trans')->willReturn('translated');
         $controller = new ModerationController(
@@ -47,9 +50,14 @@ class ModerationControllerTest extends KernelTestCase
         );
         $controller->setContainer($container);
 
-        $response = $controller->moderateAction($token, $reason);
+        try {
+            $response = $controller->moderateAction($token, $reason);
 
-        self::assertTrue($response->isRedirection());
+            self::assertTrue($response->isRedirection());
+        } finally {
+            $connection->rollBack();
+            $entityManager->clear();
+        }
     }
 
     public static function moderatedContributions(): \Generator
