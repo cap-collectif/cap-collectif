@@ -6,6 +6,7 @@ describe('Newsletter', () => {
   })
   beforeEach(() => {
     cy.task('db:restore')
+    cy.task('disable:feature', 'turnstile_captcha')
     cy.interceptGraphQLOperation({ operationName: 'SubscribeNewsletterMutation' })
   })
 
@@ -16,7 +17,6 @@ describe('Newsletter', () => {
 
   it('correctly handles subscribing, for non-subscribed and subscribed emails, without captcha', () => {
     cy.task('disable:feature', 'captcha')
-    cy.task('disable:feature', 'turnstile_captcha')
 
     // Subscribing with a non-subscribed email should work the first time
     Base.visitHomepage()
