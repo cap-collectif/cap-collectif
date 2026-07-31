@@ -16,16 +16,17 @@
 import './commands'
 import './mailcatcher'
 
+Cypress.on('uncaught:exception', err => {
+  const resizeObserverErrors = [
+    'ResizeObserver loop limit exceeded',
+    'ResizeObserver loop completed with undelivered notifications',
+  ]
+
+  if (resizeObserverErrors.some(substring => err.message.includes(substring))) {
+    return false
+  }
+})
+
 beforeEach(() => {
   cy.appendOperationToGraphQLFetch()
-  Cypress.on('uncaught:exception', err => {
-    const resizeObserverErrors = [
-      'ResizeObserver loop limit exceeded',
-      'ResizeObserver loop completed with undelivered notifications',
-    ]
-
-    if (resizeObserverErrors.some(substring => err.message.includes(substring))) {
-      return false
-    }
-  })
 })
