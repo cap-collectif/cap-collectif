@@ -7,6 +7,7 @@ export default defineConfig({
   viewportWidth: 1280,
   viewportHeight: 1000,
   chromeWebSecurity: false,
+  experimentalMemoryManagement: true,
   retries: {
     runMode: 2,
     openMode: 0,
