@@ -79,7 +79,8 @@ const unAuthenticatedInternalRequest = (query, variables) => {
 }
 
 global.runSQL = async sql => {
-  await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+  const { stdout } = await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+  return stdout
 }
 
 global.enableFeatureFlag = async name => {

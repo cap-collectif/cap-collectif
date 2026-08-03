@@ -38,6 +38,7 @@ class QueryHomePageSectionsResolver implements QueryInterface
         $orderDirection = $orderBy['direction'] ?? OrderDirection::ASC;
         $orderByClause = [
             $this->getOrderByField($orderField) => $orderDirection,
+            'id' => OrderDirection::ASC,
         ];
 
         /** @var array<Section> $allSections */

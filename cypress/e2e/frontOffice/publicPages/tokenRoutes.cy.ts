@@ -11,18 +11,18 @@ describe('Public token routes', () => {
     cy.get('h3').should('contain', 'unsubscribe.page.title')
 
     cy.visit('/actionToken?token=wrong')
-    cy.get('#symfony-flash-messages').should('contain', 'invalid-token')
+    cy.get('.flash-notif').should('be.visible').and('contain.text', 'invalid-token')
   })
 
   it('publishes a debate argument from a valid token and rejects invalid or consumed tokens', () => {
     cy.visit('/publishDebateArgument?token=jesuisletokendudebateanonymousargumentagainst1')
-    cy.get('#symfony-flash-messages').should('contain', 'argument.published.confirmation')
+    cy.get('.flash-notif').should('be.visible').and('contain.text', 'argument.published.confirmation')
 
     cy.visit('/publishDebateArgument?token=jenexistepas')
-    cy.get('#symfony-flash-messages').should('contain', 'invalid-token')
+    cy.get('.flash-notif').should('be.visible').and('contain.text', 'invalid-token')
 
     cy.visit('/publishDebateArgument?token=jesuisletokendudebateanonymousargumentfor1')
-    cy.get('#symfony-flash-messages').should('contain', 'argument.published.already')
+    cy.get('.flash-notif').should('be.visible').and('contain.text', 'argument.published.already')
   })
 
   it('renders an open debate widget and returns a 404 for an unknown widget', () => {

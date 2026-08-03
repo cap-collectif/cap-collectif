@@ -4,6 +4,11 @@ describe('Login', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.purgeEmails()
+    cy.task('enable:feature', 'profiles')
+  })
+
+  afterEach(() => {
+    cy.task('disable:feature', 'profiles')
   })
 
   it('should show a login button and no logout button if not connected', () => {
