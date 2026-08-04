@@ -96,6 +96,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
             return (
               <ListCard.Item
                 key={jump.id}
+                data-cy={isRedirection ? 'questionnaire-redirection' : 'questionnaire-conditional-jump'}
                 bg="white"
                 borderRadius="normal"
                 borderWidth="1px"

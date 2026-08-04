@@ -228,6 +228,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                         />
                       )}
                       <ButtonQuickAction
+                        data-cy={`edit-question-${index}`}
                         tooltipZIndex={2}
                         variantColor="primary"
                         icon={CapUIIcon.Pencil}

@@ -67,11 +67,13 @@ context('Project', () => {
 
       AdminProjectPage.addStep('presentation_step')
       AdminProjectPage.fillStepInputs('PresentationStepTitle', 'PresentationStepLabel')
+      cy.get('#step-body .jodit-wysiwyg').type('PresentationStepBody')
       AdminProjectPage.submitStepModal()
 
       AdminProjectPage.addStep('global.consultation')
       cy.wait('@ProjectAdminConsultationStepFormConsultationsQuery')
       AdminProjectPage.fillStepInputs('ConsultationStepTitle', 'ConsultationStepLabel')
+      cy.get('#step-body .jodit-wysiwyg').type('ConsultationStepBody')
       cy.selectReactSelectOption('#step-consultations', 'Consultation in project without step')
       AdminProjectPage.submitStepModal()
       AdminProjectPage.save()
@@ -80,6 +82,62 @@ context('Project', () => {
       cy.contains('global.saved').should('be.visible')
       cy.contains('PresentationStepTitle').should('be.visible')
       cy.contains('ConsultationStepTitle').should('be.visible')
+
+      cy.visit('/project/projet-vide/presentation/presentationsteptitle')
+      cy.get('#details').should('be.visible')
+      cy.contains('PresentationStepTitle').should('be.visible')
+      cy.contains('PresentationStepBody').should('be.visible')
+
+      cy.visit('/project/projet-vide/consultation/consultationsteptitle')
+      cy.contains('ConsultationStepBody').should('be.visible')
+    })
+
+    it('should add a collect step with a proposal form', () => {
+      AdminProjectPage.visit('project4')
+      AdminProjectPage.openAddModal()
+      AdminProjectPage.collectStepSelector.click()
+      cy.wait('@ProjectAdminCollectStepFormProposalsQuery')
+
+      AdminProjectPage.fillStepInputs('CollectStepTitle', 'CollectStepLabel')
+      cy.get('#step-body .jodit-wysiwyg').type('CollectStepBody')
+      cy.get('#step-proposalForm').click()
+      cy.contains('Formulaire avec propriétaire').click()
+      cy.get('#gridView').check({ force: true })
+      AdminProjectPage.submitStepModal()
+      cy.contains('CollectStepTitle').should('be.visible')
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+
+      cy.visit('/project/projet-vide/collect/collectsteptitle')
+      cy.get('.ProposalStepPage-rendered').should('be.visible')
+      cy.contains('CollectStepTitle').should('be.visible')
+      cy.contains('CollectStepBody').should('be.visible')
+    })
+
+    it('should add a questionnaire step and render its content publicly', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminQuestionnaireStepFormQuestionnairesQuery' })
+      AdminProjectPage.visit('project4')
+      AdminProjectPage.openAddModal()
+      AdminProjectPage.questionnaireSelector.click()
+      cy.wait('@ProjectAdminQuestionnaireStepFormQuestionnairesQuery')
+
+      AdminProjectPage.fillStepInputs('QuestionnaireStepTitle', 'QuestionnaireStepLabel')
+      cy.get('#step-body .jodit-wysiwyg').type('QuestionnaireStepBody')
+      cy.get('#step-footer .jodit-wysiwyg').type('QuestionnaireStepFooter')
+      cy.get('#step-questionnaire').click()
+      cy.contains('Questionnaire visible par un owner sans step').click()
+      AdminProjectPage.submitStepModal()
+      AdminProjectPage.save()
+
+      cy.wait('@UpdateProjectAlphaMutation')
+      cy.contains('global.saved').should('be.visible')
+
+      cy.visit('/project/projet-vide/questionnaire/questionnairesteptitle')
+      cy.get('#reply-form-container').should('be.visible')
+      cy.contains('QuestionnaireStepBody').should('be.visible')
+      cy.contains('QuestionnaireStepFooter').should('be.visible')
     })
   })
   describe('Authorization', () => {

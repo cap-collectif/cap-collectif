@@ -4,13 +4,15 @@ export default new (class AdminQuestionnaireStepPage {
   }
 
   visitQuestionnaireStepPage() {
-    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestep1')
     cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
+    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestep1')
+    cy.wait('@QuestionnaireStepFormQuery')
   }
 
   visitQuestionnaireStepPageWithJumps() {
-    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestepJump')
     cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
+    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestepJump')
+    cy.wait('@QuestionnaireStepFormQuery')
   }
 
   save() {
@@ -18,8 +20,7 @@ export default new (class AdminQuestionnaireStepPage {
     cy.interceptGraphQLOperation({ operationName: 'UpdateQuestionnaireMutation' })
     this.getSaveButton().click()
     cy.wait('@UpdateQuestionnaireStepMutation')
-    cy.wait('@UpdateQuestionnaireMutation')
-    cy.contains('global.changes.saved')
+    return cy.wait('@UpdateQuestionnaireMutation')
   }
 
   fillLabel(text: string) {
@@ -83,6 +84,10 @@ export default new (class AdminQuestionnaireStepPage {
     cy.openDSSelect(destinationId)
     this.cy.selectDSSelectFirstOption()
     cy.get('#confirm-form-create').click()
+  }
+
+  editQuestion(index: number) {
+    cy.getByDataCy(`edit-question-${index}`).click()
   }
 
   addARedirection() {

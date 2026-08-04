@@ -145,6 +145,7 @@ const SubSectionQuestionAdminModal = ({
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
+            buttonId={`${member}.cancel`}
             onClose={() => {
               const isEmpty = resetSection()
               onClose(isEmpty)
