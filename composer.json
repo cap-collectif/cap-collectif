@@ -146,7 +146,6 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "friendsofphp/php-cs-fixer": "^3",
         "icanhazstring/composer-unused": "^0.8.9",
-        "mikey179/vfsstream": "^1.6",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "^1.10",

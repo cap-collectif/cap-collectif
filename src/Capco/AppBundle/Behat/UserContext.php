@@ -39,22 +39,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :email has response :value to question :questionId
-     */
-    public function userHasResponseToQuestion(string $email, string $value, int $questionId)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository(User::class)->findOneByEmail($email);
-        foreach ($user->getResponses() as $response) {
-            if ($response->getQuestion()->getId() === $questionId && $response->getValue() === $value) {
-                return;
-            }
-        }
-
-        throw new \RuntimeException('userHasResponseToQuestion failed.');
-    }
-
-    /**
      * @Then user :userId registered less than 1 hour ago
      */
     public function userRegisteredLessThan1hAgo(string $userId)
@@ -74,18 +58,6 @@ class UserContext extends DefaultContext
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
         $user->setCreatedAt(new \DateTime("-{$time} minutes"));
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Then user :userName should have email :email
-     */
-    public function userEmailIs(string $userName, string $email)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($userName);
-        if ($user->getEmail() !== $email) {
-            throw new \RuntimeException('Could not find user\'s email associated with username:' . $userName);
-        }
     }
 
     /**

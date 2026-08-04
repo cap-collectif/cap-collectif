@@ -115,21 +115,6 @@ class ExportContext implements Context
         $this->compareFileWithSnapshot($realPath, $snapshotPath);
     }
 
-    /**
-     * @Then /^exported "([^"]*)" model file with name "([^"]*)" should match its snapshot$/
-     */
-    public function exportedModelFileShouldLooksLikeItsSnapshot(
-        string $fileType,
-        string $name
-    ): void {
-        $this->setConfigParameter('readerType', $fileType);
-
-        $realPath = "/tmp/{$name}";
-        $snapshotPath = $this->kernel->getProjectDir() . '/__snapshots__/imports' . "/{$name}";
-
-        $this->compareFileWithSnapshot($realPath, $snapshotPath);
-    }
-
     public function compareFileWithSnapshot(string $realPath, string $snapshotPath)
     {
         $csvLines = $this->getFileLines($realPath);

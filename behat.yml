@@ -184,7 +184,6 @@ commands:
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
-        - Capco\AppBundle\Behat\FileSystemContext
     consumers:
       paths: ['%paths.base%/features/commands/consumers']
       contexts:
@@ -194,7 +193,6 @@ commands:
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
-        - Capco\AppBundle\Behat\FileSystemContext
 
 api:
   extensions:

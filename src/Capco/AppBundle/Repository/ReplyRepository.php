@@ -502,6 +502,7 @@ class ReplyRepository extends EntityRepository
             ->select('reply')
             ->where('reply.questionnaire = :questionnaireId')
             ->setParameter('questionnaireId', $questionnaireId)
+            ->orderBy('reply.id', 'ASC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
         ;

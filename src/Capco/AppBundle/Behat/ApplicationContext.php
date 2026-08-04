@@ -526,18 +526,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Given feature :featureA should be enabled
-     */
-    public function featureIsEnabled(string $feature)
-    {
-        $toggleManager = $this->getService('qandidate.toggle.manager');
-        $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
-        if (true !== $toggleManager->active($feature, $contextFactory->createContext())) {
-            throw new \RuntimeException("Feature {$feature} is not enabled");
-        }
-    }
-
-    /**
      * @When I set my locale to :locale
      */
     public function iSetMyCurrentLocaleTo(string $locale)
@@ -570,7 +558,6 @@ class ApplicationContext extends UserContext
 
     /**
      * @Given feature :featureA is disabled
-     * @Given feature :featureA should be disabled
      */
     public function featureIsDisabled(string $feature)
     {
