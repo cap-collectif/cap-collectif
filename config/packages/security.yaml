@@ -45,6 +45,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        graphql_internal_api_key:
+            request_matcher: Capco\AppBundle\PublicApi\InternalGraphQLApiKeyRequestMatcher
+            provider: public_api_key_user_provider
+            stateless: true
+            anonymous: true
+            guard:
+                authenticators:
+                    - Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator
+
         # This is our Public API authenticated with Personal Access Token
         graphql_public:
             pattern: ^/graphql$

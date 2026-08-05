@@ -17,6 +17,21 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class MediaRepository extends EntityRepository
 {
     /**
+     * @return array<Media>
+     */
+    public function findByProviderReferencePrefix(string $providerName, string $providerReferencePrefix): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.providerName = :providerName')
+            ->andWhere('m.providerReference LIKE :providerReferencePrefix')
+            ->setParameter('providerName', $providerName)
+            ->setParameter('providerReferencePrefix', $providerReferencePrefix . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * @return array<Media> list of Media entities that belong to default categories
      */
     public function getAllDefaultCategoryImages(): array

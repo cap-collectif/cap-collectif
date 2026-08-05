@@ -1,0 +1,14 @@
+SynchronizeHubApiGreenMediaPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            stepId:
+                type: 'ID'
+            aiotCode:
+                type: 'String'
+            folderNumber:
+                type: 'String'
+            synchronizedAt:
+                type: 'DateTime'
+            errorCode:
+                type: 'SynchronizeHubApiGreenMediaErrorCode'

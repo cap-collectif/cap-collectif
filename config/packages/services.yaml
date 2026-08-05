@@ -80,6 +80,7 @@ services:
         public: true
     Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
         public: true
+    Capco\AppBundle\PublicApi\InternalGraphQLApiKeyRequestMatcher: ~
     Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
         arguments:
             - '@webonyx_graphql.sync_promise_adapter'

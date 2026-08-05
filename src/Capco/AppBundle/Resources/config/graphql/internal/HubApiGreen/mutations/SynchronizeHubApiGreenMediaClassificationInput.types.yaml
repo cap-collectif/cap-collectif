@@ -1,0 +1,12 @@
+SynchronizeHubApiGreenMediaClassificationInput:
+    type: input-object
+    config:
+        fields:
+            fileType:
+                type: 'String!'
+            documentTypeCode:
+                type: 'String!'
+            documentTypeLabel:
+                type: 'String!'
+            category:
+                type: 'String'

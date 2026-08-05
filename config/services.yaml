@@ -111,6 +111,8 @@ parameters:
     max_media_folder_size: '%env(int:SYMFONY_MAX_MEDIA_FOLDER_SIZE)%'
     media_size_limit: '%env(SYMFONY_MEDIA_SIZE_LIMIT)%'
     tus_media_size_limit: '%env(int:SYMFONY_TUS_MEDIA_SIZE_LIMIT)%'
+    hub_api_green_s3_bucket: '%env(SYMFONY_HUB_API_GREEN_S3_BUCKET)%'
+    hub_api_green_s3_public_url: '%env(SYMFONY_HUB_API_GREEN_S3_PUBLIC_URL)%'
 
     #
     # Default env values :
@@ -186,6 +188,8 @@ parameters:
     env(SYMFONY_MAX_MEDIA_FOLDER_SIZE): '32212254720' # 30G
     env(SYMFONY_MEDIA_SIZE_LIMIT): '10M'
     env(SYMFONY_TUS_MEDIA_SIZE_LIMIT): '104857600' # 100M
+    env(SYMFONY_HUB_API_GREEN_S3_BUCKET): 'hub-api-green'
+    env(SYMFONY_HUB_API_GREEN_S3_PUBLIC_URL): 'https://hub-api-green.s3.fr-par.scw.cloud'
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): null
     # ELASTICSEARCH-LOGPUSH
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): 'INSERT_A_REAL_SECRET'

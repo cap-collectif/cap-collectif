@@ -21,6 +21,11 @@ services:
         public: true
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ContactFormMutation.php}'
 
+    Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation:
+        arguments:
+            $hubApiGreenS3Bucket: '%hub_api_green_s3_bucket%'
+            $hubApiGreenS3PublicUrl: '%hub_api_green_s3_public_url%'
+
     #follwoing mutations are legacy : now we make on mutation file for each mutation
     Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
         public: true

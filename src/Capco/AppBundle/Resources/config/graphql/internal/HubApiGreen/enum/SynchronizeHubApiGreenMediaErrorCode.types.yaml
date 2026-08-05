@@ -1,0 +1,16 @@
+SynchronizeHubApiGreenMediaErrorCode:
+    type: enum
+    config:
+        name: SynchronizeHubApiGreenMediaErrorCode
+        description: 'Available errors for Hub API Green media synchronization.'
+        values:
+            INVALID_SIZE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation::INVALID_SIZE
+            INVALID_S3_PATH:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation::INVALID_S3_PATH
+            INVALID_FILE_TYPE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation::INVALID_FILE_TYPE
+            INVALID_DATE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation::INVALID_DATE
+            STEP_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation::STEP_NOT_FOUND

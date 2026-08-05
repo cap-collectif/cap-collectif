@@ -1,0 +1,32 @@
+SynchronizeHubApiGreenMediaDocumentInput:
+    type: input-object
+    config:
+        fields:
+            documentId:
+                type: 'Int!'
+            documentVersion:
+                type: 'Int!'
+            documentName:
+                type: 'String!'
+            documentLabel:
+                type: 'String!'
+            s3Path:
+                type: 'String!'
+            fileId:
+                type: 'Int!'
+            fileVersion:
+                type: 'Int!'
+            filename:
+                type: 'String!'
+            mimeType:
+                type: 'String!'
+            sizeBytes:
+                type: 'Int!'
+            checksum:
+                type: 'String!'
+            creationDate:
+                type: 'DateTime!'
+            lastUpdate:
+                type: 'DateTime!'
+            classification:
+                type: 'SynchronizeHubApiGreenMediaClassificationInput!'

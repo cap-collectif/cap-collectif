@@ -9471,6 +9471,7 @@ type Mutation {
   createGlobalDistrict(input: CreateGlobalDistrictInput!): CreateGlobalDistrictPayload
   deleteGlobalDistrict(input: DeleteGlobalDistrictInput!): DeleteGlobalDistrictPayload
   updateGlobalDistrict(input: UpdateGlobalDistrictInput!): CreateGlobalDistrictPayload
+  synchronizeHubApiGreenMedia(input: SynchronizeHubApiGreenMediaInput!): SynchronizeHubApiGreenMediaPayload
   deleteMediaAdmin(input: DeleteMediaAdminInput!): DeleteMediaAdminPayload
   updateShieldAdminForm(input: UpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
   createOauth2SSOConfiguration(input: CreateOauth2SSOConfigurationInput!): CreateOauth2SSOConfigurationPayload
@@ -18707,6 +18708,56 @@ enum SubscriptionTypeValue {
 
   """Get minimal notifications for this subscription"""
   MINIMAL
+}
+
+input SynchronizeHubApiGreenMediaClassificationInput {
+  fileType: String!
+  documentTypeCode: String!
+  documentTypeLabel: String!
+  category: String
+}
+
+input SynchronizeHubApiGreenMediaDocumentInput {
+  documentId: Int!
+  documentVersion: Int!
+  documentName: String!
+  documentLabel: String!
+  s3Path: String!
+  fileId: Int!
+  fileVersion: Int!
+  filename: String!
+  mimeType: String!
+  sizeBytes: Int!
+  checksum: String!
+  creationDate: DateTime!
+  lastUpdate: DateTime!
+  classification: SynchronizeHubApiGreenMediaClassificationInput!
+}
+
+"""Available errors for Hub API Green media synchronization."""
+enum SynchronizeHubApiGreenMediaErrorCode {
+  INVALID_SIZE
+  INVALID_S3_PATH
+  INVALID_FILE_TYPE
+  INVALID_DATE
+  STEP_NOT_FOUND
+}
+
+input SynchronizeHubApiGreenMediaInput {
+  stepId: ID!
+  aiotCode: String!
+  folderNumber: String!
+  documents: [SynchronizeHubApiGreenMediaDocumentInput!]!
+  clientMutationId: String
+}
+
+type SynchronizeHubApiGreenMediaPayload {
+  stepId: ID
+  aiotCode: String
+  folderNumber: String
+  synchronizedAt: DateTime
+  errorCode: SynchronizeHubApiGreenMediaErrorCode
+  clientMutationId: String
 }
 
 """Object containing the tag value and the number of occurrences."""

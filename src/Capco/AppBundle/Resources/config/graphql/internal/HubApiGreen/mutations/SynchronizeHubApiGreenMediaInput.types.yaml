@@ -1,0 +1,13 @@
+SynchronizeHubApiGreenMediaInput:
+    type: relay-mutation-input
+    config:
+        description: 'Synchronize media metadata received from Hub API Green.'
+        fields:
+            stepId:
+                type: 'ID!'
+            aiotCode:
+                type: 'String!'
+            folderNumber:
+                type: 'String!'
+            documents:
+                type: '[SynchronizeHubApiGreenMediaDocumentInput!]!'

@@ -837,6 +837,14 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateGlobalDistrictMutation", args, getUser())'
 
             # Media Admin
+            synchronizeHubApiGreenMedia:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SynchronizeHubApiGreenMediaInput
+                    payloadType: SynchronizeHubApiGreenMediaPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HubApiGreen\\SynchronizeHubApiGreenMediaMutation", args)'
+
             deleteMediaAdmin:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

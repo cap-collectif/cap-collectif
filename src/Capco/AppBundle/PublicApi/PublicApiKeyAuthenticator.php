@@ -14,7 +14,8 @@ class PublicApiKeyAuthenticator extends AbstractGuardAuthenticator
 {
     public function supports(Request $request): bool
     {
-        return '/graphql' === $request->getPathInfo() && $request->headers->has('Authorization');
+        return \in_array($request->getPathInfo(), ['/graphql', '/graphql/internal'], true)
+            && $request->headers->has('Authorization');
     }
 
     public function getCredentials(Request $request)
