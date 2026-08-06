@@ -175,6 +175,9 @@ InternalFeatureFlagType:
             new_project_page:
                 value: !php/const Capco\AppBundle\Toggle\Manager::new_project_page
                 description: 'Whether or not the new project page is enabled'
+            hub_api_green:
+                value: !php/const Capco\AppBundle\Toggle\Manager::hub_api_green
+                description: 'Whether or not Hub API Green folder association is enabled'
             mediator:
                 value: !php/const Capco\AppBundle\Toggle\Manager::mediator
                 description: 'Whether or not votes can be added by mediators'

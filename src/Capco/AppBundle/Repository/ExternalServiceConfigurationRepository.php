@@ -13,6 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExternalServiceConfigurationRepository extends EntityRepository
 {
+    public function findHubApiGreenToken(): ?ExternalServiceConfiguration
+    {
+        return $this->findOneBy(['type' => ExternalServiceConfiguration::HUB_API_GREEN_TOKEN]);
+    }
+
     public function findTwilioConfig(): array
     {
         $qb = $this->createQueryBuilder('e')

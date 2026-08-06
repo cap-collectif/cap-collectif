@@ -29,6 +29,8 @@ ProjectStepInput:
                 type: 'String'
             customCode:
                 type: 'String'
+            hubMetadata:
+                type: 'HubMetadataInput'
             isEnabled:
                 type: 'Boolean!'
             requirements:

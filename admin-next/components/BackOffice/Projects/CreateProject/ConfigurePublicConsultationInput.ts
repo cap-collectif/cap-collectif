@@ -118,7 +118,7 @@ const getPublicConsultationInput = ({
     project: {
       title: `${projectTitle}`,
       authors,
-      projectType: null,
+      projectType: 'public-consultation',
       themes: [],
       districts: [],
       metaDescription: null,
@@ -227,6 +227,9 @@ const getPublicConsultationInput = ({
           requirements: [],
           type: 'OTHER',
           timeless: true,
+          hubMetadata: {
+            enabled: true,
+          },
         },
         {
           body: `<div><h3 style="margin-bottom:16px;"><strong>${text({

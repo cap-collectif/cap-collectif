@@ -203,6 +203,10 @@ services:
         autowire: true
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Client/*'
 
+    Capco\AppBundle\Client\HubApiGreenClient:
+        arguments:
+            $hubApiGreenUrl: '%hub_api_green_url%'
+
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true
         arguments:

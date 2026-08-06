@@ -20,6 +20,7 @@ class ExternalServiceConfiguration implements EntityInterface
     final public const TWILIO_VERIFY_SERVICE_NAME = 'twilio_verify_service_name';
     final public const TWILIO_SUBACCOUNT_SID = 'twilio_subaccount_sid';
     final public const TWILIO_SUBACCOUNT_AUTH_TOKEN = 'twilio_subaccount_auth_token';
+    final public const HUB_API_GREEN_TOKEN = 'hub_api_green_token';
 
     final public const TYPES = [
         self::TYPE_MAILER,
@@ -27,6 +28,7 @@ class ExternalServiceConfiguration implements EntityInterface
         self::TWILIO_VERIFY_SERVICE_NAME,
         self::TWILIO_SUBACCOUNT_SID,
         self::TWILIO_SUBACCOUNT_AUTH_TOKEN,
+        self::HUB_API_GREEN_TOKEN,
     ];
     final public const AVAILABLE_VALUES = [
         self::TYPE_MAILER => [self::MAILER_MANDRILL, self::MAILER_MAILJET],

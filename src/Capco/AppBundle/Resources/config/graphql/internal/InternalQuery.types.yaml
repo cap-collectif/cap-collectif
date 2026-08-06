@@ -606,6 +606,11 @@ InternalQuery:
                 description: 'Get site settings.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
+            hubApiGreenConfiguration:
+                type: 'HubApiGreenConfiguration!'
+                description: 'Get the Hub API Green configuration.'
+                access: "@=hasRole('ROLE_SUPER_ADMIN') and hasFeatureFlag('hub_api_green')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\HubApiGreenConfigurationResolver")'
             httpRedirects:
                 type: 'HttpRedirectConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

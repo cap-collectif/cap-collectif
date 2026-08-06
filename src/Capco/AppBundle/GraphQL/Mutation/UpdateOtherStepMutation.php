@@ -2,14 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Client\HubApiGreenClient;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -29,7 +32,10 @@ class UpdateOtherStepMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
-        private readonly ActionLogger $actionLogger
+        private readonly ActionLogger $actionLogger,
+        private readonly HubApiGreenClient $hubApiGreenClient,
+        private readonly Manager $toggleManager,
+        private readonly ProjectUrlResolver $projectUrlResolver
     ) {
     }
 
@@ -45,7 +51,10 @@ class UpdateOtherStepMutation implements MutationInterface
 
         unset($data['stepId'], $data['operationType']);
 
-        $form = $this->formFactory->create(OtherStepFormType::class, $step);
+        $hubMetadataRequired = (bool) ($data['hubMetadata']['enabled'] ?? false);
+        $form = $this->formFactory->create(OtherStepFormType::class, $step, [
+            'hub_metadata_required' => $hubMetadataRequired,
+        ]);
         $form->submit($data, false);
 
         if (!$form->isValid()) {
@@ -54,8 +63,34 @@ class UpdateOtherStepMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        if ($step->getHubMetadata()?->isEnabled() && !$step->getHubMetadata()->isComplete()) {
+            throw GraphQLException::fromString('Hub API Green metadata is required when the association is enabled.');
+        }
+
         $this->em->persist($step);
         $this->em->flush();
+
+        $hubMetadata = $step->getHubMetadata();
+        $project = $step->getProject();
+        if (
+            $this->toggleManager->isActive(Manager::hub_api_green)
+            && $hubMetadata?->isEnabled()
+            && $hubMetadata->isComplete()
+            && $project
+        ) {
+            try {
+                $this->hubApiGreenClient->associateFolder($step, $hubMetadata, $this->projectUrlResolver->__invoke($project));
+            } catch (\RuntimeException $exception) {
+                $this->logger->error('Hub API Green folder association failed while updating an other step.', [
+                    'stepId' => $step->getId(),
+                    'exception' => $exception,
+                ]);
+
+                throw GraphQLException::fromString(
+                    'L’association du dossier au registre a échoué. Vérifiez le numéro de dossier, le code AIOT et l’adresse e-mail de contact, puis réessayez.'
+                );
+            }
+        }
 
         $this->actionLogger->logGraphQLMutation(
             $viewer,

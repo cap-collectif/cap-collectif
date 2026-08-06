@@ -71,3 +71,7 @@ Capco\AppBundle\Entity\ProjectType:
         title: project.types.testimony
         slug: testimony
         color: '#999999'
+    projectType19:
+        title: project.types.publicConsultation
+        slug: public-consultation
+        color: '#337ab7'

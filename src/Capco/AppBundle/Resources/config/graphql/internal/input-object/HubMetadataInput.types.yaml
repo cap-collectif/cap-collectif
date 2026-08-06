@@ -1,0 +1,13 @@
+HubMetadataInput:
+    type: input-object
+    config:
+        fields:
+            enabled:
+                type: 'Boolean'
+                defaultValue: false
+            aiotCode:
+                type: 'String'
+            folderNumber:
+                type: 'String'
+            contactEmail:
+                type: 'String'

@@ -245,6 +245,12 @@
                 "featuresRequired": []
             },
             {
+                "title": "admin.hub-api-green",
+                "href": "/admin-next/hub-api-green",
+                "rolesRequired": ["superAdmin"],
+                "featuresRequired": ["hub_api_green"]
+            },
+            {
                 "title": "admin.label.settings.notifications",
                 "href": "/admin/settings/settings.notifications/list",
                 "rolesRequired": [],

@@ -32,5 +32,8 @@ UpdateOtherStepInput:
             timeless:
                 type: 'Boolean!'
                 description: 'Wether or not the step is timeless'
+            hubMetadata:
+                type: 'HubMetadataInput'
+                description: 'Metadata used to associate the step with a Hub folder.'
             operationType:
                 type: 'StepAdminUrlOperationType'

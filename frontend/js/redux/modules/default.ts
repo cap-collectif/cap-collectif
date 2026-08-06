@@ -106,6 +106,7 @@ export const features: FeatureToggles = {
   multi_consultations: false,
   full_proposal_card: false,
   mailjet_sandbox: false,
+  hub_api_green: false,
 }
 export const initialState: State = {
   themes: [],

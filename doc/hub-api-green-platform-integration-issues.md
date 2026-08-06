@@ -112,6 +112,7 @@ synchroniser. `stepId` doit correspondre à un step existant dans Platform et
 enregistre automatiquement `source: hub-api-green` et `storage: s3` dans les
 métadonnées du média.
 
+
 Platform valide que le bucket de `s3Path` correspond à
 `SYMFONY_HUB_API_GREEN_S3_BUCKET`. Pour publier le document dans le
 `stepBody`, Platform conserve la clé de l'objet et remplace `s3://{bucket}` par
@@ -162,5 +163,122 @@ les gestionnaires de secrets des deux services. Les clés Platform → Hub sont
 distinguées par `organization_id` dans le Secret Kubernetes du Hub et peuvent
 être rotées indépendamment.
 
-État testable : le contrat, le mapping et un exemple JSON réel sont relus et
-validés ; aucun appel Platform n'est encore effectué.
+État actuel : la mutation de synchronisation est implémentée dans Platform et
+couverte par des tests PHPUnit. Le contrat externe, le mapping et l'exemple
+JSON restent la référence à valider avec le Hub.
+
+## Interface d'association d'un dossier Hub
+
+Toutes les étapes personnalisées (`OtherStep`) peuvent porter les métadonnées
+Hub suivantes : `aiotCode`, `folderNumber` et `contactEmail`. Elles sont
+stockées dans `hub_metadata`, avec le booléen `enabled` (faux par défaut).
+
+Lorsque le feature flag `hub_api_green` est actif, le BO affiche sur l'étape un
+toggle « Association avec le Hub API Green ». Les trois champs sont affichés
+et deviennent obligatoires uniquement lorsque le toggle est activé. Leur
+validation inclut le format de l'adresse e-mail.
+
+Lors de la création d'un projet à partir des templates `public-inquiry` ou
+`public-consultation`, le toggle est activé par défaut sur l'étape Documents.
+Les projets existants ne sont pas activés par la migration : la colonne est
+ajoutée avec une valeur par défaut à `false`.
+
+Le token Hub est renseigné dans l'onglet BO `Hub API Green` et stocké dans la
+configuration `external_service_configuration` sous le type
+`hub_api_green_token`. Platform appelle le Hub uniquement lorsque le feature
+flag est actif, que le toggle est activé et que les trois valeurs sont valides,
+après l'enregistrement de l'étape :
+
+```text
+POST {SYMFONY_HUB_API_GREEN_URL}/api/v1/folder-links
+Authorization: Bearer {token configuré dans le BO}
+```
+
+Le payload d'association suit le contrat Hub actuel :
+
+```json
+{
+  "folderNumber": "T0603151600",
+  "aiotCode": "0003013833",
+  "stepId": "step-id-platform",
+  "consultationUrl": "https://{platform_instance_url}/projects/{project_slug}",
+  "contactEmail": "contact@example.com"
+}
+```
+
+Les valeurs de l'étape sont enregistrées avant l'appel au Hub. En cas de refus
+du service tiers, la mutation retourne une erreur, mais les valeurs restent
+enregistrées afin de pouvoir les corriger et relancer l'association.
+
+## Issue 2 — Enregistrer ou réutiliser un média S3 dans Platform
+
+Commit : `feat: synchroniser les medias s3 vers platform`
+
+- implémenter la mutation Platform dédiée avec l'entrée `SynchronizeHubApiGreenMediaInput` ;
+- transmettre uniquement le chemin S3 et les métadonnées : aucun upload binaire vers S3 dans cet appel ;
+- créer ou réutiliser la ligne `media__media` avec `content_size` en octets ;
+- placer `source: hub-api-green`, `storage: s3`, `stepId` et les informations de classement dans les métadonnées du média ; `s3Path` reste le champ fonctionnel unique du document, sans modifier le schéma BDD Platform ;
+- dériver une référence stable de `stepId` et `documentId` pour mettre à jour le même média lors d'une nouvelle version et rendre un appel rejoué idempotent.
+
+État actuel : implémenté dans
+`SynchronizeHubApiGreenMediaMutation`, avec couverture PHPUnit pour la création,
+la réutilisation et les rejoués.
+
+## Issue 3 — Publier l'arborescence complète dans `other.stepBody`
+
+Commit : `feat: reconstruire l'arborescence des documents`
+
+- récupérer le snapshot complet des documents publiables ;
+- aplatir la hiérarchie fournie par le Hub ;
+- regrouper les fichiers par `category` lorsqu'elle est renseignée, sinon par `fileType` ; ordonner les groupes selon leur plus petit `fileType`, puis trier les fichiers de chaque groupe par `fileType`, `documentTypeCode`, `documentLabel`, `filename`, `documentId` et `documentVersion` ;
+- réécrire la totalité de `other.stepBody` à chaque synchronisation, en reliant chaque entrée à l'URL S3 publique du document.
+
+Le rendu est stocké dans `OtherStep::body` sous forme de HTML : un titre et une
+introduction, suivis de groupes `<p><strong>…</strong></p>` et de liens
+`<p><a href="https://{s3_public_url}/...">nom du fichier</a></p>`. La catégorie est utilisée
+comme titre de groupe ; lorsqu'elle est absente, le libellé du type de document
+sert de repli. Les URLs des liens sont générées à partir de la clé contenue
+dans `s3Path` et de `SYMFONY_HUB_API_GREEN_S3_PUBLIC_URL`. Un seul titre HTML
+est généré par groupe.
+
+État actuel : implémenté dans
+`SynchronizeHubApiGreenMediaMutation`, avec reconstruction complète et stable
+du `stepBody`.
+
+## Issue 4 — Gérer les rejoués et les nouvelles versions
+
+Commit : `feat: rendre la synchronisation idempotente`
+
+- garantir qu'un appel rejoué ne duplique ni le média ni l'entrée de l'arborescence ;
+- identifier un média par `stepId` et `documentId`, indépendamment de sa version et de son chemin S3 ;
+- mettre à jour la ligne existante avec la nouvelle version Hub ;
+- conserver les hashes et versions Hub dans les métadonnées pour l'investigation.
+
+État actuel : l'identification par `stepId` et `documentId` permet les rejoués,
+les nouvelles versions et la reprise après une erreur de validation.
+
+## Issue 5 — Retirer les documents absents du snapshot
+
+Commit : `feat: réconcilier les suppressions de documents`
+
+- considérer l'absence d'un document dans le snapshot complet comme un retrait ;
+- retirer l'entrée de `other.stepBody` et supprimer la ligne `media__media` Platform concernée ;
+- ne pas supprimer l'objet S3 ;
+- recréer le média sans doublon si le document réapparaît dans un snapshot ultérieur.
+
+État actuel : l'absence d'un document dans le snapshot supprime le média et
+l'entrée de l'arborescence Platform, sans supprimer l'objet S3. Un snapshot
+ultérieur peut recréer le média.
+
+## Issue 6 — Fiabiliser la publication asynchrone
+
+Commit : `feat: fiabiliser la publication platform`
+
+- publier la synchronisation via le worker NATS JetStream existant ;
+- acquitter le message uniquement après le succès de Platform ;
+- appliquer les retries et la file d'échec existants aux erreurs GraphQL, timeouts et réponses non valides ;
+- journaliser `stepId`, `folderNumber`, l'origine Platform, l'opération et le statut HTTP sans secret ni contenu de fichier ;
+- documenter les scénarios de reprise et les tests d'intégration.
+
+État actuel : la publication asynchrone via NATS JetStream n'est pas encore
+implémentée dans Platform. Les retries et la file d'échec restent à traiter.

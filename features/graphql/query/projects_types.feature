@@ -35,7 +35,8 @@ Scenario: GraphQL client wants to list projects types
         {"id":"15","title":"project.types.inquiry"},
         {"id":"16","title":"project.types.callForApplications"},
         {"id":"17","title":"project.types.quizz"},
-        {"id":"18","title":"project.types.testimony"}
+        {"id":"18","title":"project.types.testimony"},
+        {"id":"19","title":"project.types.publicConsultation"}
       ]
     }
   }

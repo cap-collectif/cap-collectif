@@ -253,6 +253,9 @@ Object {
       "type": "new_project_page",
     },
     Object {
+      "type": "hub_api_green",
+    },
+    Object {
       "type": "captchetat",
     },
   ],

@@ -39,7 +39,10 @@ export const getSideBarItemsFiltered = (
           featureRequired => allFeatureFlags[featureRequired],
         )
 
-        if (isSubItemForAdminOnly || isSubItemForSuperAdminOnly || (isSubItemForAll && hasSubItemsFeatureRequired))
+        if (
+          (isSubItemForAdminOnly || isSubItemForSuperAdminOnly || isSubItemForAll) &&
+          hasSubItemsFeatureRequired
+        )
           return subItem
       })
 
@@ -48,13 +51,14 @@ export const getSideBarItemsFiltered = (
     if (isItemForSuperAdminOnly && hasItemFeatureRequired) {
       // Filtering sub items of a menu here
       sideBarItem.items = sideBarItem.items.filter(subItem => {
-        const isSubItemForSuperAdminOnly = (subItem.rolesRequired as string[]).includes('admin') && isAdmin
+        const isSubItemForSuperAdminOnly =
+          (subItem.rolesRequired as string[]).includes('superAdmin') && isSuperAdmin
         const isSubItemForAll = subItem.rolesRequired.length === 0
         const hasSubItemsFeatureRequired = (subItem.featuresRequired as FeatureFlagType[]).every(
           featureRequired => allFeatureFlags[featureRequired],
         )
 
-        if (isSubItemForSuperAdminOnly || (isSubItemForAll && hasSubItemsFeatureRequired)) return subItem
+        if ((isSubItemForSuperAdminOnly || isSubItemForAll) && hasSubItemsFeatureRequired) return subItem
       })
 
       acc.push(sideBarItem)

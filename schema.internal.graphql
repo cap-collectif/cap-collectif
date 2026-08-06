@@ -7442,6 +7442,9 @@ enum FeatureFlagType {
   """Whether or not the new project page is enabled"""
   new_project_page
 
+  """Whether or not Hub API Green folder association is enabled"""
+  hub_api_green
+
   """Whether or not votes can be added by mediators"""
   mediator
 
@@ -8317,6 +8320,25 @@ enum HttpRedirectErrorCode {
 enum HttpRedirectType {
   REDIRECTION
   URL_SHORTENING
+}
+
+"""Hub API Green configuration."""
+type HubApiGreenConfiguration {
+  isConfigured: Boolean!
+}
+
+type HubMetadata {
+  enabled: Boolean!
+  aiotCode: String
+  folderNumber: String
+  contactEmail: String
+}
+
+input HubMetadataInput {
+  enabled: Boolean = false
+  aiotCode: String
+  folderNumber: String
+  contactEmail: String
 }
 
 """A string containing an IP address."""
@@ -9590,6 +9612,9 @@ type Mutation {
   """Update an external service configuration."""
   updateExternalServiceConfiguration(input: UpdateExternalServiceConfigurationInput!): UpdateExternalServiceConfigurationPayload
 
+  """Update the Hub API Green configuration."""
+  updateHubApiGreenConfiguration(input: UpdateHubApiGreenConfigurationInput!): UpdateHubApiGreenConfigurationPayload
+
   """Create a senderEmailDomain."""
   createSenderEmailDomain(input: CreateSenderEmailDomainInput!): CreateSenderEmailDomainPayload
 
@@ -10740,6 +10765,7 @@ type OtherStep implements NodeSlug & Node & Step {
     """Filter mediators by user username."""
     username: String
   ): MediatorConnection
+  hubMetadata: HubMetadata
 }
 
 """A page."""
@@ -12337,6 +12363,7 @@ input ProjectStepInput {
   bodyUsingJoditWysiwyg: Boolean
   metaDescription: String
   customCode: String
+  hubMetadata: HubMetadataInput
   isEnabled: Boolean!
   requirements: [StepRequirementInput!]!
   requirementsReason: String
@@ -14930,6 +14957,9 @@ type Query {
 
   """Get site settings."""
   siteSettings: SiteSettings
+
+  """Get the Hub API Green configuration."""
+  hubApiGreenConfiguration: HubApiGreenConfiguration!
 
   """List all HTTP redirects."""
   httpRedirects(
@@ -19957,6 +19987,17 @@ type UpdateHttpRedirectPayload {
   clientMutationId: String
 }
 
+input UpdateHubApiGreenConfigurationInput {
+  """The Hub API Green token."""
+  token: String!
+  clientMutationId: String
+}
+
+type UpdateHubApiGreenConfigurationPayload {
+  configuration: HubApiGreenConfiguration!
+  clientMutationId: String
+}
+
 input UpdateLocaleInput {
   locale: String!
   clientMutationId: String
@@ -20332,6 +20373,9 @@ input UpdateOtherStepInput {
 
   """Wether or not the step is timeless"""
   timeless: Boolean!
+
+  """Metadata used to associate the step with a Hub folder."""
+  hubMetadata: HubMetadataInput
   operationType: StepAdminUrlOperationType
   clientMutationId: String
 }

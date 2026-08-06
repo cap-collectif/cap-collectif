@@ -275,6 +275,11 @@
                         "title": "capco.module.user_anonymization_automated",
                         "description": "description.module.user_anonymization_automated",
                         "onlySuperAdmin": true
+                    },
+                    "hub_api_green": {
+                        "title": "Hub API Green",
+                        "description": "",
+                        "onlySuperAdmin": true
                     }
                 }
             }

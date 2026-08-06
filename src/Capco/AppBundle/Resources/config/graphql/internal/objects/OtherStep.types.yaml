@@ -9,3 +9,5 @@ OtherStep:
         fields:
             kind:
                 resolve: 'other'
+            hubMetadata:
+                type: 'HubMetadata'

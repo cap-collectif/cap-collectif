@@ -1,5 +1,15 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, FormLabel, Text } from '@cap-collectif/ui'
+import {
+  Accordion,
+  Box,
+  Button,
+  CapUIAccordionColor,
+  CapUIFontSize,
+  Flex,
+  FormLabel,
+  Switch,
+  Text,
+} from '@cap-collectif/ui'
 import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import { StepDurationTypeEnum } from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
@@ -39,6 +49,12 @@ type FormValues = {
   metaDescription: string
   customCode: string | null
   cover: string | null
+  hubMetadata?: {
+    enabled: boolean
+    aiotCode: string
+    folderNumber: string
+    contactEmail: string
+  }
 }
 
 export const QUERY = graphql`
@@ -61,6 +77,12 @@ export const QUERY = graphql`
           title
           canEdit
           adminAlphaUrl
+        }
+        hubMetadata {
+          enabled
+          aiotCode
+          folderNumber
+          contactEmail
         }
       }
     }
@@ -85,6 +107,8 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { operationType, setOperationType } = useOtherStep()
   const isEditing = operationType === 'EDIT'
+  const newProjectPage = useFeatureFlag('new_project_page')
+  const hubApiGreen = useFeatureFlag('hub_api_green')
 
   const createStepLink = `/admin-next/project/${project.id}/create-step`
   const getBreadCrumbItems = () => {
@@ -132,6 +156,14 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       metaDescription: step.metaDescription ?? '',
       customCode: step.customCode ?? '',
       cover: null,
+      hubMetadata: hubApiGreen
+        ? {
+            enabled: step.hubMetadata?.enabled ?? false,
+            aiotCode: step.hubMetadata?.aiotCode ?? '',
+            folderNumber: step.hubMetadata?.folderNumber ?? '',
+            contactEmail: step.hubMetadata?.contactEmail ?? '',
+          }
+        : undefined,
     }
   }
 
@@ -140,13 +172,17 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     defaultValues: getInitialValues(),
   })
 
-  const { handleSubmit, formState, control } = formMethods
+  const { handleSubmit, formState, control, watch, setValue } = formMethods
+  const hubAssociationEnabled = watch('hubMetadata.enabled')
   const { isSubmitting } = formState
-  const newProjectPage = useFeatureFlag('new_project_page')
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
     delete values.cover
+
+    if (!hubApiGreen) {
+      delete values.hubMetadata
+    }
 
     const input = {
       ...values,
@@ -169,7 +205,12 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       }
       setOperationType('EDIT')
     } catch (error) {
-      return mutationErrorToast(intl)
+      const errorMessage =
+        typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
+          ? error.message
+          : undefined
+
+      return mutationErrorToast(intl, errorMessage)
     }
   }
 
@@ -184,7 +225,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         {intl.formatMessage({ id: 'customize-your-custom-step' })}
       </Text>
       <FormProvider {...formMethods}>
-        <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" mt={4} noValidate onSubmit={handleSubmit(onSubmit)}>
           <Flex spacing={6} alignItems="flex-start">
             <Box flex="1">
               <FormControl
@@ -229,6 +270,52 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               required: false,
             }}
           />
+          {hubApiGreen && (
+            <Box mt={6} mb={6}>
+              <Flex justify="space-between" alignItems="center" mb={hubAssociationEnabled ? 4 : 0}>
+                <Text fontWeight={600} color="blue.800">
+                  {intl.formatMessage({ id: 'hub-folder-association' })}
+                </Text>
+                <Switch
+                  id="hubMetadata.enabled"
+                  checked={!!hubAssociationEnabled}
+                  onChange={() => setValue('hubMetadata.enabled', !hubAssociationEnabled)}
+                />
+              </Flex>
+              {hubAssociationEnabled && (
+                <>
+                  <FormControl name="hubMetadata.aiotCode" control={control} isRequired mb={4}>
+                    <FormLabel htmlFor="hubMetadata.aiotCode" label={intl.formatMessage({ id: 'hub-aiot-code' })} />
+                    <FieldInput id="hubMetadata.aiotCode" name="hubMetadata.aiotCode" control={control} type="text" />
+                  </FormControl>
+                  <FormControl name="hubMetadata.folderNumber" control={control} isRequired mb={4}>
+                    <FormLabel
+                      htmlFor="hubMetadata.folderNumber"
+                      label={intl.formatMessage({ id: 'hub-folder-number' })}
+                    />
+                    <FieldInput
+                      id="hubMetadata.folderNumber"
+                      name="hubMetadata.folderNumber"
+                      control={control}
+                      type="text"
+                    />
+                  </FormControl>
+                  <FormControl name="hubMetadata.contactEmail" control={control} isRequired>
+                    <FormLabel
+                      htmlFor="hubMetadata.contactEmail"
+                      label={intl.formatMessage({ id: 'hub-contact-email' })}
+                    />
+                    <FieldInput
+                      id="hubMetadata.contactEmail"
+                      name="hubMetadata.contactEmail"
+                      control={control}
+                      type="email"
+                    />
+                  </FormControl>
+                </>
+              )}
+            </Box>
+          )}
           <Accordion color={CapUIAccordionColor.white} sx={{ summary: { pl: 0 } }}>
             <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>

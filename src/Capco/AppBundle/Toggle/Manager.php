@@ -95,6 +95,7 @@ class Manager
     final public const antivirus = 'antivirus';
     final public const mailjet_sandbox = 'mailjet_sandbox';
     final public const new_project_page = 'new_project_page';
+    final public const hub_api_green = 'hub_api_green';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -144,6 +145,7 @@ class Manager
         self::oauth2_switch_user,
         self::mailjet_sandbox,
         self::new_project_page,
+        self::hub_api_green,
         self::captchetat,
     ];
 
@@ -231,6 +233,7 @@ class Manager
         self::antivirus,
         self::mailjet_sandbox,
         self::new_project_page,
+        self::hub_api_green,
         self::captchetat,
     ];
 

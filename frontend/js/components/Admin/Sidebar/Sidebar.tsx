@@ -254,6 +254,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   )}
                   <SidebarLink text="admin.label.settings.appearance" href="/admin/settings/settings.appearance/list" />
                   <SidebarLink text="secured-participation" href="/admin-next/secured-participation" />
+                  {features.hub_api_green && isSuperAdmin ? (
+                    <SidebarLink text="admin.hub-api-green" href="/admin-next/hub-api-green" />
+                  ) : null}
                   <SidebarLink text="menu.activity-log" href="/admin-next/activity-log" />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>

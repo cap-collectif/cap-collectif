@@ -18,6 +18,9 @@ const baseParams = {
 const getCollectStepRequirementTypes = input =>
   input.project.steps.find(step => step.type === 'COLLECT').requirements.map(requirement => requirement.type)
 
+const getDocumentsStepHubMetadataEnabled = input =>
+  input.project.steps.find(step => step.type === 'OTHER' && step.timeless)?.hubMetadata?.enabled
+
 const templateInputs = [
   [
     'participatory budget',
@@ -46,5 +49,18 @@ describe('project template collect-step requirements', () => {
 
   test.each(templateInputs)('%s uses SSO when SSO bypass authentication is enabled', (_name, getInput) => {
     expect(getCollectStepRequirementTypes(getInput(true))).toEqual(['SSO', 'CONSENT_PRIVACY_POLICY'])
+  })
+})
+
+describe('Hub API Green project templates', () => {
+  test.each([
+    ['public inquiry', getPublicInquiryInput],
+    ['public consultation', getPublicConsultationInput],
+  ])('%s enables Hub API Green on the documents step', (_name, getInput) => {
+    expect(
+      getDocumentsStepHubMetadataEnabled(
+        getInput({ ...baseParams, isSsoByPassAuthEnabled: false, visibility: 'ADMIN' }),
+      ),
+    ).toBe(true)
   })
 })

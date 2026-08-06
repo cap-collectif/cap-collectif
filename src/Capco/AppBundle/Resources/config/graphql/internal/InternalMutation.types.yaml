@@ -1422,6 +1422,14 @@ InternalMutation:
                     inputType: UpdateExternalServiceConfigurationInput
                     payloadType: UpdateExternalServiceConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateExternalServiceConfigurationMutation", args)'
+            updateHubApiGreenConfiguration:
+                description: 'Update the Hub API Green configuration.'
+                access: "@=hasRole('ROLE_SUPER_ADMIN') and hasFeatureFlag('hub_api_green')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateHubApiGreenConfigurationInput
+                    payloadType: UpdateHubApiGreenConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHubApiGreenConfigurationMutation", args)'
             createSenderEmailDomain:
                 description: 'Create a senderEmailDomain.'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"

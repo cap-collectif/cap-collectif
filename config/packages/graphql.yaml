@@ -117,6 +117,7 @@ overblog_graphql:
                     - InternalProjectTabNews
                     - InternalProjectTabEvents
                     - InternalProjectTabCustom
+                    - HubApiGreenConfiguration
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement

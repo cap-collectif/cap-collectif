@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\HubMetadata;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
@@ -102,6 +103,11 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
      * @Assert\Choice(choices={"GRID", "MAP", "LIST"})
      */
     protected string $mainView = ViewConfiguration::GRID;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\HubMetadata", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private ?HubMetadata $hubMetadata = null;
 
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
@@ -334,6 +340,21 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
         }
 
         return null;
+    }
+
+    public function getHubMetadata(): ?HubMetadata
+    {
+        return $this->hubMetadata;
+    }
+
+    public function setHubMetadata(?HubMetadata $hubMetadata): self
+    {
+        $this->hubMetadata = $hubMetadata;
+        if ($hubMetadata && $hubMetadata->getStep() !== $this) {
+            $hubMetadata->setStep($this);
+        }
+
+        return $this;
     }
 
     public function getProjectId(): ?string
