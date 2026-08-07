@@ -37,6 +37,12 @@ Le découpage peut toujours être optimisé selon le quota de parallélisme disp
 
 **Raison** : Réduit le temps total d'exécution en exploitant le test splitting.
 
+Le job `unit-js` utilise 5 exécuteurs. Les tests historiques de `frontend/` sont répartis par CircleCI et les tests `admin-next` utilisent le sharding natif de Jest à partir de `CIRCLE_NODE_INDEX` et `CIRCLE_NODE_TOTAL`. Toute nouvelle suite ajoutée à ce job doit également être répartie, ou être explicitement limitée à un seul exécuteur, afin de ne pas être exécutée 5 fois.
+
+Le job `phpunit-tests` utilise 2 exécuteurs et répartit les fichiers selon leurs temps d'exécution historiques. Les résultats JUnit doivent être conservés pour alimenter cette répartition et permettre de ne relancer que les tests en échec.
+
+Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et régénère une base de données complète. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût fixe, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
+
 #### 4. Jobs non exécutés sur `master`
 
 **Décision** : Certains jobs peuvent être désactivés sur `master` (ex: `typecheck-js`, `unit-js`, `unit-php`, `build-production-image`).

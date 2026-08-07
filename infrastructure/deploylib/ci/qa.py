@@ -43,7 +43,8 @@ def save_es_snapshot(ctx):
     environments.ci()
     qa.save_es_snapshot()
 
+
 @task
-def phpunit(ctx):
+def phpunit(ctx, tests='false', log_junit='false'):
     environments.ci()
-    qa.phpunit()
+    qa.phpunit(tests=tests, log_junit=log_junit)

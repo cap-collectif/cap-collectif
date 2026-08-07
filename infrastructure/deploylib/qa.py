@@ -32,12 +32,18 @@ def phpspec(desc='false'):
             'php -d memory_limit=-1 bin/phpspec run --no-code-generation',
             'application', Config.www_app)
 
-def phpunit(filter='false'):
+
+def phpunit(filter='false', tests='false', log_junit='false'):
     "Run PHPUnit tests"
     cmd = 'php -d memory_limit=-1 bin/phpunit --configuration=phpunit.xml --color --testdox'
     if filter != 'false':
         cmd += ' --filter=' + filter
+    if tests != 'false':
+        cmd += ' ' + tests
+    if log_junit != 'false':
+        cmd += ' --log-junit=' + log_junit
     command(cmd, 'application', Config.www_app)
+
 
 def compile_graphql():
     "Compile GraphQL PHP code - runs inside the application container to use the container's PHP version (8.1)"
