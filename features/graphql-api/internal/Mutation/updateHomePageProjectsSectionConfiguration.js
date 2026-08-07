@@ -59,6 +59,20 @@ const inputCustomDisplayMode = {
   ],
 }
 
+const HomePageProjectsSectionConfigurationQuery = /* GraphQL */ `
+  query HomePageProjectsSectionConfigurationQuery {
+    homePageProjectsSectionConfiguration {
+      projects {
+        edges {
+          node {
+            title
+          }
+        }
+      }
+    }
+  }
+`
+
 describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
   it('should update a HomePageProjectsSectionConfiguration with MOST_RECENT displayMode', async () => {
     await expect(
@@ -73,6 +87,8 @@ describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
     await expect(
       graphql(UpdateHomePageProjectsSectionConfigurationMutation, { input: inputCustomDisplayMode }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
+
+    await expect(graphql(HomePageProjectsSectionConfigurationQuery, {}, 'internal')).resolves.toMatchSnapshot()
   })
   it('should delete a project with CUSTOM displayMode', async () => {
     // add custom projects

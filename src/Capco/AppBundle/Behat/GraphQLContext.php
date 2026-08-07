@@ -16,7 +16,6 @@ class GraphQLContext implements Context
      */
     public $client;
     public $response;
-    public $rawResponse;
     public $statusCode;
 
     public $resultChecker = '';
@@ -158,22 +157,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Then response header :header contains :value
-     */
-    public function headerContainsValue(string $header, string $value)
-    {
-        if ($this->rawResponse->getHeaders()[$header][0] !== $value) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Header %s does not contain %s',
-                    $header,
-                    $value
-                )
-            );
-        }
-    }
-
-    /**
      * @Given I store the result
      */
     public function iStoreTheResult()
@@ -192,22 +175,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I send a public GraphQL OPTIONS request with origin :origin :
-     */
-    public function iSendAPreflightPublicGraphQLPostRequest(string $origin, PyStringNode $string)
-    {
-        $this->iSendAGraphQLPostRequest('public', $string, 'OPTIONS', $origin);
-    }
-
-    /**
-     * @Given /^I send an internal GraphQL OPTIONS request:$/
-     */
-    public function iSendAPreflightInternalGraphQLPostRequest(PyStringNode $string)
-    {
-        $this->iSendAGraphQLPostRequest('internal', $string, 'OPTIONS');
-    }
-
-    /**
      * @When /^I send a GraphQL POST request:$/
      */
     public function iSendAnInternalGraphQLPostRequest(PyStringNode $string)
@@ -221,24 +188,6 @@ class GraphQLContext implements Context
     public function iSendAnInternalGraphQLPostRequestWithoutThrowing(PyStringNode $string)
     {
         $this->iSendAGraphQLPostRequest('internal', $string, 'POST', 'https://capco.dev', false);
-    }
-
-    /**
-     * @When I send a public GraphQL POST request with origin :origin :
-     */
-    public function iSendAPublicGraphQLPostRequestWithOrigin(string $origin, PyStringNode $string)
-    {
-        $this->iSendAGraphQLPostRequest('public', $string, 'POST', $origin);
-    }
-
-    /**
-     * @When I send an internal GraphQL POST request with origin :origin :
-     */
-    public function iSendAnInternalGraphQLPostRequestWithOrigin(
-        string $origin,
-        PyStringNode $string
-    ) {
-        $this->iSendAGraphQLPostRequest('internal', $string, 'POST', $origin);
     }
 
     /**
@@ -325,7 +274,6 @@ class GraphQLContext implements Context
             ]);
 
             $this->response = (string) $response->getBody();
-            $this->rawResponse = $response;
             $this->statusCode = $response->getStatusCode();
         } catch (ClientException $exception) {
             if ($shouldThrow) {
@@ -333,7 +281,6 @@ class GraphQLContext implements Context
             }
             // fail silently
             $this->response = (string) $exception->getResponse()->getBody();
-            $this->rawResponse = $exception->getResponse();
             $this->statusCode = $exception->getResponse()->getStatusCode();
         }
     }

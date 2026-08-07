@@ -65,6 +65,32 @@ Object {
 }
 `;
 
+exports[`mutations.updateHomePageProjectsSectionConfigurationMutation should update a HomePageProjectsSectionConfiguration with CUSTOM displayMode 2`] = `
+Object {
+  "homePageProjectsSectionConfiguration": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Food project",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Débat du mois",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Débat Wysiwyg",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`mutations.updateHomePageProjectsSectionConfigurationMutation should update a HomePageProjectsSectionConfiguration with MOST_RECENT displayMode 1`] = `
 Object {
   "updateHomePageProjectsSectionConfiguration": Object {

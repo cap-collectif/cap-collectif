@@ -1,0 +1,313 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query configuration and internationalization returns contact forms anonymously 1`] = `
+Object {
+  "contactForms": Array [
+    Object {
+      "body": "<p>This is a contact form body</p>",
+      "email": "admin1@email.com",
+      "title": "Contact form 1",
+    },
+    Object {
+      "body": "<p>This is another contact form body</p>",
+      "email": "admin2@email.com",
+      "title": "Contact form 2",
+    },
+    Object {
+      "body": "<p></p>",
+      "email": "assistance@cap-collectif.com",
+      "title": "Formulaire de contact avec confidentiality null",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns disabled locales to an administrator when requested 1`] = `
+Object {
+  "availableLocales": Array [
+    Object {
+      "code": "DE_DE",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "deutsch",
+    },
+    Object {
+      "code": "EN_GB",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "english",
+    },
+    Object {
+      "code": "ES_ES",
+      "isDefault": false,
+      "isEnabled": false,
+      "isPublished": false,
+      "traductionKey": "spanish",
+    },
+    Object {
+      "code": "EU_EU",
+      "isDefault": false,
+      "isEnabled": false,
+      "isPublished": false,
+      "traductionKey": "basque",
+    },
+    Object {
+      "code": "FR_FR",
+      "isDefault": true,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "french",
+    },
+    Object {
+      "code": "NL_NL",
+      "isDefault": false,
+      "isEnabled": false,
+      "isPublished": false,
+      "traductionKey": "dutchman",
+    },
+    Object {
+      "code": "OC_OC",
+      "isDefault": false,
+      "isEnabled": false,
+      "isPublished": false,
+      "traductionKey": "gascon",
+    },
+    Object {
+      "code": "SV_SE",
+      "isDefault": false,
+      "isEnabled": false,
+      "isPublished": false,
+      "traductionKey": "swedish",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns districts for a matching location 1`] = `
+Object {
+  "availableDistrictsForLocalisation": Array [
+    Object {
+      "name": "Rennes",
+    },
+    Object {
+      "name": "La Touche",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns enabled locales to an administrator by default 1`] = `
+Object {
+  "availableLocales": Array [
+    Object {
+      "code": "DE_DE",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "deutsch",
+    },
+    Object {
+      "code": "EN_GB",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "english",
+    },
+    Object {
+      "code": "FR_FR",
+      "isDefault": true,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "french",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns every sender email to an administrator 1`] = `
+Object {
+  "senderEmails": Array [
+    Object {
+      "address": "assistance@cap-collectif.com",
+      "domain": "cap-collectif.com",
+      "isDefault": true,
+      "locale": "assistance",
+    },
+    Object {
+      "address": "dev@cap-collectif.com",
+      "domain": "cap-collectif.com",
+      "isDefault": false,
+      "locale": "dev",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns no district for a location outside every district 1`] = `
+Object {
+  "availableDistrictsForLocalisation": Array [],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns only the default sender email to a project owner 1`] = `
+Object {
+  "senderEmails": Array [
+    Object {
+      "address": "assistance@cap-collectif.com",
+      "domain": "cap-collectif.com",
+      "isDefault": true,
+      "locale": "assistance",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns sender email domains to an administrator 1`] = `
+Object {
+  "senderEmailDomains": Array [
+    Object {
+      "dkimValidation": false,
+      "service": "MAILJET",
+      "spfValidation": false,
+      "value": "cap-collectif.com",
+    },
+    Object {
+      "dkimValidation": false,
+      "service": "MANDRILL",
+      "spfValidation": false,
+      "value": "cap-collectif.com",
+    },
+    Object {
+      "dkimValidation": false,
+      "service": "MAILJET",
+      "spfValidation": false,
+      "value": "elysee.gouv",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the contact.title translated site parameter 1`] = `
+Object {
+  "siteParameter": Object {
+    "isTranslatable": true,
+    "keyname": "contact.title",
+    "translations": Array [
+      Object {
+        "locale": "fr-FR",
+        "value": "Contact",
+      },
+    ],
+    "value": "Contact",
+  },
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the current favicon anonymously 1`] = `
+Object {
+  "siteFavicon": Object {
+    "id": Any<String>,
+    "keyname": "favicon",
+    "media": null,
+  },
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the default and published locales anonymously 1`] = `
+Object {
+  "defaultLocale": Object {
+    "code": "FR_FR",
+    "isDefault": true,
+    "isEnabled": true,
+    "isPublished": true,
+    "traductionKey": "french",
+  },
+  "locales": Array [
+    Object {
+      "code": "DE_DE",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "deutsch",
+    },
+    Object {
+      "code": "EN_GB",
+      "isDefault": false,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "english",
+    },
+    Object {
+      "code": "FR_FR",
+      "isDefault": true,
+      "isEnabled": true,
+      "isPublished": true,
+      "traductionKey": "french",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the global.timezone non-translatable site parameter 1`] = `
+Object {
+  "siteParameter": Object {
+    "isTranslatable": false,
+    "keyname": "global.timezone",
+    "translations": Array [],
+    "value": "Europe/Paris",
+  },
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the i.wish.i.exist missing site parameter 1`] = `
+Object {
+  "siteParameter": null,
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the mailer configuration to an administrator 1`] = `
+Object {
+  "externalServiceConfiguration": Object {
+    "type": "MAILER",
+    "value": "mandrill",
+  },
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the most recent home-page project section anonymously 1`] = `
+Object {
+  "homePageProjectsSectionConfiguration": Object {
+    "displayMode": "MOST_RECENT",
+    "enabled": true,
+    "nbObjects": 4,
+    "position": 4,
+    "projects": Object {
+      "edges": Array [],
+    },
+    "teaser": "Maître corbeau, sur un arbre perché, | Tenait en son bec un fromage.",
+    "title": "Projets participatifs",
+  },
+}
+`;
+
+exports[`Internal|Query configuration and internationalization returns the shield configuration to an administrator 1`] = `
+Object {
+  "shieldAdminForm": Object {
+    "introduction": Any<String>,
+    "media": Object {
+      "id": Any<String>,
+      "name": Any<String>,
+      "url": Any<String>,
+    },
+    "shieldMode": Any<Boolean>,
+    "translations": Array [
+      Object {
+        "introduction": Any<String>,
+        "locale": "fr-FR",
+      },
+    ],
+  },
+}
+`;
