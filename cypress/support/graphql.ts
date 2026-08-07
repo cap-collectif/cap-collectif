@@ -16,7 +16,7 @@ Cypress.Commands.add('appendOperationToGraphQLFetch', () => {
       }
       return originalFetch(path, options, ...rest)
     }
-    cy.stub(win, 'fetch', fetch)
+    cy.stub(win, 'fetch').callsFake(fetch)
   })
 })
 

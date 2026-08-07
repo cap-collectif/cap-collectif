@@ -3,7 +3,6 @@
   "videosFolder": "./videos",
   "screenshotsFolder": "./screenshots",
   "screenshotOnRunFailure": true,
-  "videoUploadOnPasses": false,
   "videoCompression": false,
   "retries": {
     "runMode": 0,
