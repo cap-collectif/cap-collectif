@@ -2,13 +2,14 @@
 
 [⬅️](../README.md) Retour
 
-### Sommaire :
+## Sommaire :
 1. [Standards de code](#standard)
 2. [CLEAN CODE](#cleanCode)
 3. [CS-FIXER](#csfixer)
 4. [Créer le FileWatcher sous PhpStorm](#filewatcher)
 5. [Config VisualStudio](https://blog.theodo.com/2019/07/vscode-php-development/)
 6. [Correction des failles des dépendances](#yarn-audit-fix)
+7. [Dédupliquer les dépendances](#yarn-dedupe)
 
 <div id="standard">1 Standard de code</div>
 ---
@@ -66,3 +67,17 @@ Lancez `yarn audit:report` pour lister les failles connues sur les dépendances 
 Lancez `yarn audit:fix` pour corriger automatiquement ce qui peut l'être : le script identifie les paquets vulnérables puis les re-résout dans le lockfile vers la version la plus haute autorisée par les ranges déjà déclarés (`yarn up -R`), sans toucher aux `package.json`. Seul `yarn.lock` est modifié : relisez le diff, lancez les tests, puis committez.
 
 Les failles qui subsistent après `yarn audit:fix` n'ont pas de version corrigée disponible dans les ranges déclarées : il faut alors monter manuellement la version dans le `package.json` du ou des paquets dépendants (le script affiche la liste des dépendants concernés).
+Pour corriger une faille sur une dépendance transitive, ajoutez une entrée dans le champ `resolutions` du `package.json` racine pour forcer une version corrigée, puis relancez `yarn install`. Pour une dépendance directe, mettez à jour sa version dans le `package.json` concerné.
+
+<div id="yarn-dedupe">7 Dédupliquer les dépendances (yarn dedupe)</div>
+---
+Yarn garantit des installs déterministes : si deux paquets demandent des ranges différents du même package (ex. `^2.7.4` et `^2.8.0`), il peut verrouiller chacun sur une version distincte dans `yarn.lock`, même quand une version plus récente satisferait les deux. Ces doublons alourdissent `node_modules` et le lockfile pour rien.
+
+`yarn dedupe` consolide ces doublons vers la version la plus haute déjà présente, sans jamais faire de downgrade ni sortir des ranges déclarés dans les `package.json`. À lancer de temps en temps, notamment après plusieurs `yarn add`/`yarn up` :
+
+```bash
+yarn dedupe          # applique la déduplication
+yarn dedupe --check  # vérifie s'il y a des doublons, sans rien modifier (utile en CI)
+```
+
+Seul `yarn.lock` est modifié : il suffit de vérifier le diff et de committer.
