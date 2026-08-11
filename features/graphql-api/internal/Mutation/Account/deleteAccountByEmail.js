@@ -1,9 +1,9 @@
 /* eslint-env jest */
 import '../../../_setupDB'
 
-const AnonymizeAccountByEmailMutation = /* GraphQL */ `
-  mutation AnonymizeAccountByEmail($input: AnonymizeAccountByEmailInput!) {
-    anonymizeAccountByEmail(input: $input) {
+const DeleteAccountByEmailMutation = /* GraphQL */ `
+  mutation DeleteAccountByEmail($input: DeleteAccountByEmailInput!) {
+    deleteAccountByEmail(input: $input) {
       email
       errorCode
     }
@@ -196,9 +196,9 @@ const ClosedVoteQuery = /* GraphQL */ `
   }
 `
 
-const anonymizeAccount = email => graphql(AnonymizeAccountByEmailMutation, { input: { email } }, 'internal_super_admin')
+const anonymizeAccount = email => graphql(DeleteAccountByEmailMutation, { input: { email } }, 'internal_super_admin')
 
-describe('mutations.anonymizeAccountByEmail', () => {
+describe('mutations.deleteAccountByEmail', () => {
   it('preserves content in open and closed steps while anonymizing its author', async () => {
     const variables = {
       accountId: 'VXNlcjp1c2VyNQ==', // User:user5

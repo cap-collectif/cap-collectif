@@ -19,8 +19,8 @@
         <p>The following mutation anonymizes the account associated with anonymizeaccount@cap-collectif.com while preserving its associated content:</p>
 
         {% set query = '
-mutation anonymizeAccountByEmail {
-  anonymizeAccountByEmail(input: {email: "anonymizeaccount@cap-collectif.com"}) {
+mutation deleteAccountByEmail {
+  deleteAccountByEmail(input: {email: "anonymizeaccount@cap-collectif.com"}) {
     email
     errorCode
   }
@@ -35,7 +35,7 @@ mutation anonymizeAccountByEmail {
 
         {% set error = '{
   "data": {
-    "anonymizeAccountByEmail": {
+    "deleteAccountByEmail": {
       "email": null,
       "errorCode": "NON_EXISTING_EMAIL"
     }
@@ -43,6 +43,6 @@ mutation anonymizeAccountByEmail {
 }' %}
         <pre><code>{{ error }}</code></pre>
 
-        <p>Check <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': 'anonymizeAccountByEmail' }) }}">the associated reference</a> for more details.</p>
+        <p>Check <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': 'deleteAccountByEmail' }) }}">the associated reference</a> for more details.</p>
     </div>
 {% endblock %}

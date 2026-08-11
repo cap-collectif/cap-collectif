@@ -1,9 +1,9 @@
 /* eslint-env jest */
 import '../../_setupDB'
 
-const AnonymizeAccountByEmail = /* GraphQL */ `
-  mutation anonymizeAccountByEmail($input: AnonymizeAccountByEmailInput!) {
-    anonymizeAccountByEmail(input: $input) {
+const DeleteAccountByEmail = /* GraphQL */ `
+  mutation deleteAccountByEmail($input: DeleteAccountByEmailInput!) {
+    deleteAccountByEmail(input: $input) {
       email
       errorCode
     }
@@ -94,35 +94,33 @@ const withoutAuthor = content => {
 describe('Anonymize account by email', () => {
   it('Returns an error for a non-existing email', async () => {
     await expect(
-      graphql(AnonymizeAccountByEmail, { input: { email: 'nonExistingUser@cap-collectif.com' } }, 'super_admin'),
+      graphql(DeleteAccountByEmail, { input: { email: 'nonExistingUser@cap-collectif.com' } }, 'super_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('Refuses to anonymize a super admin', async () => {
     await expect(
-      graphql(AnonymizeAccountByEmail, { input: { email: 'lbrunet@cap-collectif.com' } }, 'super_admin'),
+      graphql(DeleteAccountByEmail, { input: { email: 'lbrunet@cap-collectif.com' } }, 'super_admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('Allows an admin to anonymize an account', async () => {
     await expect(
-      graphql(AnonymizeAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'admin'),
+      graphql(DeleteAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'admin'),
     ).resolves.toMatchSnapshot()
   })
 
   it('Refuses access to a regular user', async () => {
     await expect(
-      graphql(AnonymizeAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'user'),
+      graphql(DeleteAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'user'),
     ).rejects.toMatchSnapshot()
   })
 
   it('Preserves associated content while anonymizing its author', async () => {
     const before = await graphql(AssociatedContentQuery, {}, 'super_admin')
 
-    await expect(
-      graphql(AnonymizeAccountByEmail, { input: { email: 'user@test.com' } }, 'super_admin'),
-    ).resolves.toEqual({
-      anonymizeAccountByEmail: {
+    await expect(graphql(DeleteAccountByEmail, { input: { email: 'user@test.com' } }, 'super_admin')).resolves.toEqual({
+      deleteAccountByEmail: {
         email: 'user@test.com',
         errorCode: null,
       },

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.anonymizeAccountByEmail preserves a vote in a closed step while anonymizing its author 1`] = `
+exports[`mutations.deleteAccountByEmail preserves a vote in a closed step while anonymizing its author 1`] = `
 Object {
   "account": Object {
     "deletedAccountAt": null,
@@ -28,16 +28,16 @@ Object {
 }
 `;
 
-exports[`mutations.anonymizeAccountByEmail preserves a vote in a closed step while anonymizing its author 2`] = `
+exports[`mutations.deleteAccountByEmail preserves a vote in a closed step while anonymizing its author 2`] = `
 Object {
-  "anonymizeAccountByEmail": Object {
+  "deleteAccountByEmail": Object {
     "email": "emailing.user17@fake-email.com",
     "errorCode": null,
   },
 }
 `;
 
-exports[`mutations.anonymizeAccountByEmail preserves a vote in a closed step while anonymizing its author 3`] = `
+exports[`mutations.deleteAccountByEmail preserves a vote in a closed step while anonymizing its author 3`] = `
 Object {
   "account": Object {
     "deletedAccountAt": Any<String>,
@@ -65,7 +65,7 @@ Object {
 }
 `;
 
-exports[`mutations.anonymizeAccountByEmail preserves content in open and closed steps while anonymizing its author 1`] = `
+exports[`mutations.deleteAccountByEmail preserves content in open and closed steps while anonymizing its author 1`] = `
 Object {
   "account": Object {
     "deletedAccountAt": null,
@@ -250,16 +250,16 @@ Object {
 }
 `;
 
-exports[`mutations.anonymizeAccountByEmail preserves content in open and closed steps while anonymizing its author 2`] = `
+exports[`mutations.deleteAccountByEmail preserves content in open and closed steps while anonymizing its author 2`] = `
 Object {
-  "anonymizeAccountByEmail": Object {
+  "deleteAccountByEmail": Object {
     "email": "user@test.com",
     "errorCode": null,
   },
 }
 `;
 
-exports[`mutations.anonymizeAccountByEmail preserves content in open and closed steps while anonymizing its author 3`] = `
+exports[`mutations.deleteAccountByEmail preserves content in open and closed steps while anonymizing its author 3`] = `
 Object {
   "account": Object {
     "deletedAccountAt": Any<String>,

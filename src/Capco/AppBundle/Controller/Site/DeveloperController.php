@@ -38,10 +38,10 @@ class DeveloperController extends Controller
      */
     public function guideAction(string $guide): Response
     {
-        if ('delete-account-by-email' === $guide) {
+        if ('anonymize-account-by-email' === $guide) {
             return $this->redirectToRoute(
                 'app_developer_guide',
-                ['guide' => 'anonymize-account-by-email'],
+                ['guide' => 'delete-account-by-email'],
                 Response::HTTP_MOVED_PERMANENTLY
             );
         }

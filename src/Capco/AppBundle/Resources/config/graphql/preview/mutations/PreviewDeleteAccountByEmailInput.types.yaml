@@ -1,8 +1,8 @@
-PreviewAnonymizeAccountByEmailInput:
+PreviewDeleteAccountByEmailInput:
     type: relay-mutation-input
     config:
-        name: AnonymizeAccountByEmailInput
-        description: "The PreviewAnonymizeAccountByEmail mutation's input."
+        name: DeleteAccountByEmailInput
+        description: "The PreviewDeleteAccountByEmail mutation's input."
         fields:
             email:
                 type: 'String!'
