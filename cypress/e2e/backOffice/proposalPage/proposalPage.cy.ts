@@ -2,9 +2,10 @@ import { AdminProjectPage } from '~e2e-pages/index'
 
 describe('Project Page BO', () => {
   beforeEach(() => {
-    cy.directLoginAs('admin')
     cy.task('db:restore')
+    cy.directLoginAs('admin')
   })
+
   it('merges two proposals from the contribution tab', () => {
     cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
     cy.interceptGraphQLOperation({ operationName: 'CreateProposalFusionMutation' })
