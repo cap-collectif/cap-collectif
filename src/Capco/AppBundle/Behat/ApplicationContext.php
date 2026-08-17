@@ -22,7 +22,6 @@ use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\DebateTrait;
-use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
@@ -63,7 +62,6 @@ class ApplicationContext extends UserContext
     use AdminTrait;
     use CommentStepsTrait;
     use DebateTrait;
-    use ExportDatasUserTrait;
     use NotificationsStepTrait;
     use ProjectStepsTrait;
     use ProposalEvaluationTrait;

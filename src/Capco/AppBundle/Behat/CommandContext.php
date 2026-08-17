@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -43,19 +42,6 @@ class CommandContext implements Context
                 ' --env=test --max-execution-time=10 --max-messages=' .
                 $maxMessage
         );
-    }
-
-    /**
-     * @Given I run a command :command with parameters:
-     */
-    public function runCommandWithParameters(mixed $command, TableNode $parameters)
-    {
-        $options = [];
-        foreach ($parameters->getRowsHash() as $key => $value) {
-            $options[$key] = $value;
-        }
-
-        $this->run($command, $options);
     }
 
     /**

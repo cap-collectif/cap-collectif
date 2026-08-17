@@ -82,6 +82,7 @@ class DebateRepository extends EntityRepository
             ->where('a.debate = :debate')
             ->andWhere('au.confirmationToken IS NULL')
             ->setParameter('debate', $debate)
+            ->orderBy('a.id', 'ASC')
             ->setFirstResult($anonymousArgumentsOffset)
             ->setMaxResults($maxResults)
         ;
@@ -93,6 +94,7 @@ class DebateRepository extends EntityRepository
             ->where('daa.debate = :debate')
             ->andWhere('daa.publishedAt IS NOT NULL')
             ->setParameter('debate', $debate)
+            ->orderBy('daa.id', 'ASC')
             ->setFirstResult($anonymousArgumentsOffset)
             ->setMaxResults($maxResults)
         ;
