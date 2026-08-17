@@ -119,7 +119,7 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       d'alourdir la CI. Si un scénario semble réellement manquant/critique (ex: cas d'erreur non couvert,
       accès non testé), l'ajouter avec parcimonie — et **demander à l'utilisateurice confirmation** avant
       d'ajouter des tests non explicitement demandés si un doute existe sur leur utilité.
-        - **Ne pas faire d'action base de données (`cy.task('run:sql', ...)`) dans un test Cypress sauf si
+    - **Ne pas faire d'action base de données (`cy.task('run:sql', ...)`) dans un test Cypress sauf si
       explicitement demandé ou si ça s'avère nécessaire.** `cy.task('db:restore')` (déjà présent dans le
       `beforeEach` de la plupart des specs existantes) réinitialise déjà toute la base sur le snapshot de
       fixtures avant chaque test — un `run:sql` de nettoyage "au cas où" après ça est redondant si les
@@ -205,6 +205,42 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   ..., edgeTypeName: "XEdge")` (create) et `@deleteEdge(connections: ...)` (delete) directement dans le texte
   de la mutation GraphQL, sans écrire de fonction `updater` manuelle avec `ConnectionHandler` — voir
   `CreateUserTypeMutation.ts`/`DeleteUserTypeMutation.ts` pour l'exemple le plus simple.
+
+## Connection ID pour les mutations create/delete (Relay)
+
+Beaucoup de listes Relay paginées ont besoin du `__id` de la connection pour que les mutations `create`/`delete`
+mettent à jour le cache local (`connections: [connectionId]` passé à la mutation). Deux cas très différents se
+présentent, à ne pas traiter de la même façon :
+
+- **Le composant qui déclenche la mutation vit au même niveau que le composant qui a le fragment de la liste**
+  (ex : un bouton "modifier"/"supprimer" rendu à l'intérieur du `.map()` de la liste elle-même, comme dans
+  `SourceCategoriesList.tsx`) : la liste a déjà `__id` disponible directement dans les données de son fragment
+  (le champ `@connection(key: "...")` expose un champ client `__id`), il suffit de le passer en prop au composant
+  enfant. **Pas besoin de `ConnectionHandler` dans ce cas.**
+- **Le composant qui déclenche la mutation vit dans un composant parent qui n'a pas le fragment de la liste**
+  (ex : un bouton "Ajouter" tout en haut de la page, au-dessus du `<Suspense>` qui contient la liste paginée —
+  cas de `SourceCategoryModal context="create"` rendu dans `pages/admin-next/source-categories.tsx`) : **ne
+  pas** dupliquer la query parente pour aller chercher `__id`, et surtout **ne pas** créer un `useState` +
+  un setter passé en prop à la liste pour "remonter" le `__id` du fragment vers le parent via un `useEffect`: cela crée un état dupliqué
+  avec les données Relay, un rendu supplémentaire, et un court instant où la valeur est vide au premier rendu
+  — ce qui casse silencieusement le bouton "Ajouter" jusqu'à ce que l'effet se déclenche. À la place, calculer
+  l'ID de la connection directement au moment du commit de la mutation avec
+  `ConnectionHandler.getConnectionID(parentId, connectionKey, filters)` (import depuis `relay-runtime`) :
+  - `parentId` : l'id du noeud parent du champ connection dans le schéma GraphQL. Pour une connection exposée
+    directement sur `Query` (comme `sourceCategories`), c'est `ROOT_ID` (également importé de `relay-runtime`) ;
+    pour une connection sous un objet (ex: `organization.proposalForms`), c'est l'id de cet objet.
+  - `connectionKey` : la valeur du `key:` déclarée dans `@connection(key: "...")` sur le champ, dans le
+    fragment de la liste (ex: `"SourceCategoriesList_sourceCategories"`).
+  - `filters` : un objet reprenant les arguments de la query autres que la pagination (`first`/`after`/
+    `last`/`before`), s'il y en a (recherche, tri, filtres métier...) — objet vide (`{}`) si la connection n'a
+    pas d'autre argument. Voir `CreateFormModal.tsx` pour un exemple avec filtres (recherche + tri + type).
+  - Ce pattern est déjà utilisé ailleurs dans `admin-next/` : `components/BackOffice/Forms/CreateFormModal.tsx`,
+    `components/BackOffice/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes.tsx`,
+    `components/BackOffice/Mediator/MediatorVoteModal/MediatorVoteModal.tsx`.
+
+En résumé : si `__id` est déjà dans les données du composant courant, le passer directement en prop ; sinon le
+calculer avec `ConnectionHandler.getConnectionID` au point d'usage — jamais via un état React + un setter
+prop-drillé entre la liste et un ancêtre.
 
 ## Pièges connus
 
