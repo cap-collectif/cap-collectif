@@ -4,6 +4,11 @@ Il a vocation à être complété et utilisé par les outils IA, et doit être s
 Il peut être incrémenté et complété au fil des refontes si nécessaire.
 Il sert à lister les étapes / informations nécessaires / utiles à ces refontes.
 
+**Consigne pour les outils IA** : après chaque retour/correction de l'utilisateurice pendant une migration
+(pas seulement quand c'est explicitement demandé), vérifier si ce retour révèle une information générique et
+réutilisable pour de futures migrations — si oui, l'ajouter ici. Ne pas attendre la fin de la tâche ni une
+demande explicite de mise à jour de la doc pour faire cette vérification.
+
 ## Contexte général
 
 Toutes les pages d'administration encore construites avec Sonata (`src/Capco/AdminBundle/`, routes
@@ -114,6 +119,24 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       d'alourdir la CI. Si un scénario semble réellement manquant/critique (ex: cas d'erreur non couvert,
       accès non testé), l'ajouter avec parcimonie — et **demander à l'utilisateurice confirmation** avant
       d'ajouter des tests non explicitement demandés si un doute existe sur leur utilité.
+        - **Ne pas faire d'action base de données (`cy.task('run:sql', ...)`) dans un test Cypress sauf si
+      explicitement demandé ou si ça s'avère nécessaire.** `cy.task('db:restore')` (déjà présent dans le
+      `beforeEach` de la plupart des specs existantes) réinitialise déjà toute la base sur le snapshot de
+      fixtures avant chaque test — un `run:sql` de nettoyage "au cas où" après ça est redondant si les
+      données créées par le test utilisent un identifiant unique (ex: un titre suffixé par `Date.now()`), ce
+      qui suffit à éviter toute collision entre runs sans toucher à la base.
+      **Pour la précondition d'un test qui n'est pas celui qui teste la création (ex: `it('updates ...')`,
+      `it('deletes ...')`), préférer réutiliser une ligne déjà présente grâce aux fixtures chargées par
+      `db:restore`** plutôt que de créer une nouvelle ligne (via SQL, ou même via l'UI) juste pour la
+      modifier/supprimer ensuite — ça ajoute une étape et une action qui ne font que dupliquer ce que le test
+      `it('creates ...')` vérifie déjà. Exemple concret sur cette page : les tests `updates`/`deletes` de
+      `footerSocialNetwork.cy.ts` éditent/suppriment directement une ligne de fixture existante (`'Linkedin'`,
+      `'Facebook'`, seedées par `fixtures/Dev/FooterSocialNetwork.yaml`) au lieu d'en créer une au préalable ;
+      seul `it('creates ...')` crée réellement une ligne, via le formulaire de l'UI (pas de `run:sql`). Ordre
+      de préférence pour poser une précondition : 1) une ligne de fixture déjà là après `db:restore`, 2) créer
+      via le formulaire de l'UI si le scénario a vraiment besoin d'une ligne fraîche/spécifique qu'aucune
+      fixture ne fournit, 3) `run:sql` seulement si même l'UI ne permet pas de poser cet état (ex: état
+      legacy/corrompu à reproduire).
 13. **Supprimer le code Sonata de la page migrée dans la même PR**, à condition de vérifier au préalable
     qu'aucun fichier (controller, templates, entité, repository) n'est partagé avec une autre feature encore
     active. Par défaut, préférer supprimer dans la même PR sauf indication contraire de l'auteur de la
@@ -143,9 +166,141 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `Layout navTitle={...}` + `Suspense fallback={<Spinner .../>}` + `export const getServerSideProps = withPageAuthRequired`.
 - **Bouton booléen (activer/désactiver un champ simple)** : ne pas faire un bouton texte "Activer"/"Désactiver" —
   utiliser le composant `Switch` de `@cap-collectif/ui` (`checked={value} onChange={() => mutation(...)}`).
-  Voir l'exemple dans `admin-next/components/BackOffice/Authentication/SSOList/Facebook/CardFacebook.tsx`.
+  Deux variantes possibles selon la consigne :
+  - **Par défaut : toggle uniquement dans la modale d'édition** — la colonne liste affiche juste un statut,
+    pas un contrôle interactif — utiliser un `Tag` avec `variantColor="success"` + `global.yes` ("Oui", vert)
+    si `true`, `variantColor="infoGray"` + `global.no` ("Non", gris) si `false`, plutôt qu'une checkbox/case
+    non cliquable qui induirait en erreur sur l'interactivité. Le `Switch` reste alors uniquement dans la
+    modale d'édition. C'est le cas par défaut : sauf consigne explicite contraire, "remplacer un booléen par
+    un Switch" veut dire "dans la modale", pas "dans la liste".
+  - **Cas marginal : toggle éditable directement dans la liste** (comme `CardFacebook.tsx`) : `Switch` dans
+    la colonne, une seule mutation `update` avec tous les champs optionnels sauf l'id (voir point "CRUD
+    complet" ci-dessous) permet d'envoyer soit l'objet complet (modale), soit juste `{id, isEnabled}` (Switch
+    dans la liste). Voir l'exemple dans
+    `admin-next/components/BackOffice/Authentication/SSOList/Facebook/CardFacebook.tsx`. Ne suivre ce pattern
+    que si la consigne le demande explicitement (ex. besoin de toggler rapidement plusieurs entités sans
+    ouvrir de modale) — ne pas l'utiliser par défaut.
+- **CRUD complet (create/edit/delete) dans une seule modale**, comme demandé pour `UserTypesList.tsx` /
+  `UserTypeModal.tsx` : un unique composant modale reçoit un prop optionnel (l'entité à éditer, absent =
+  mode création) et gère les trois actions. Le bouton "Modifier" (pencil) dans la liste ouvre la modale en
+  mode édition ; le bouton "Supprimer" est **dans le footer de cette même modale d'édition**, pas un
+  `Popover`/une modale de confirmation séparée (contrairement à
+  `Redirection/DeleteRedirectModal.tsx`, qui utilise un `Popover` — ne pas suivre ce pattern-là si la
+  consigne demande explicitement des modales pour les 3 actions). Utiliser un état de chargement séparé pour
+  le bouton delete (ex. `isDeleting`) plutôt que `formState.isSubmitting` de react-hook-form, qui ne reflète
+  que les soumissions passées par `handleSubmit`.
+- **Bouton de création au-dessus d'une liste/`Table`** : le laisser aligné à gauche (comportement par défaut d'un `Flex`) et lui donner `variantSize="small"` — c'est la taille
+  standard pour ce type de bouton d'action au-dessus d'une liste admin-next, pas `"big"` (réservé aux boutons
+  de `Modal.Footer`).
+- **Entité à identifiant entier auto-incrémenté (pas d'UUID, ex. `IdTrait`)** : ne pas chercher à l'enregistrer
+  dans `GlobalIdResolver::AVAILABLE_TYPES` ni à implémenter l'interface `Node`/`Relay::GlobalId` — exposer
+  simplement `id: type: 'ID!'` (l'entier brut) et résoudre les mutations avec
+  `$repository->find($args->offsetGet('id'))`. C'est le pattern déjà utilisé par `ProjectType`
+  (`UpdateProjectTypeMutation`) ; `Node`/`GlobalId` est réservé aux entités UUID (`HttpRedirect`, `UserType`,
+  `GlobalDistrict`...).
+- **Liste avec CRUD complet mais peu volumineuse** (pas besoin de scroll infini) : l'exposer quand même comme
+  une **Relay connection** (`argsBuilder: 'Relay::ForwardConnection'` côté yaml + `Paginator::auto($args,
+  $totalCount)` côté resolver PHP, voir `HttpRedirectListResolver`/`QueryGlobalDistrictResolver`) plutôt
+  qu'une simple liste `[X!]!`. Ça permet d'utiliser côté client les directives Relay `@prependNode(connections:
+  ..., edgeTypeName: "XEdge")` (create) et `@deleteEdge(connections: ...)` (delete) directement dans le texte
+  de la mutation GraphQL, sans écrire de fonction `updater` manuelle avec `ConnectionHandler` — voir
+  `CreateUserTypeMutation.ts`/`DeleteUserTypeMutation.ts` pour l'exemple le plus simple.
+
+## Pièges connus
+
+- **Cliquer sur un `Switch` (`@cap-collectif/ui`) dans un test Cypress** : l'`<input type="checkbox">` sous-
+  jacent est rendu **visuellement caché** (`width:0, height:0, opacity:0`) — c'est le `<span
+  class="cap-switch__slider">` (le rail visible) qui joue le rôle visuel, tous deux enveloppés dans un
+  `<label htmlFor={id}>` interne au composant. Faire `cy.get('#monId').click({ force: true })` directement sur
+  l'input force un clic sur un élément de taille 0×0, ce qui est sensible au timing (calcul de coordonnées sur
+  une bounding box dégénérée) et produit un test **flaky** (a été observé à ~1 échec sur 3, pas un échec
+  systématique donc facile à manquer en un seul run). `cy.get('label[for="monId"]').click()` n'est pas non
+  plus fiable : si le champ a aussi un `<FormLabel htmlFor="monId">` séparé pour son texte (ex: "Publié" à
+  côté du Switch, cf. `FooterSocialNetworkModal.tsx`), il y a **deux** éléments `label[for="monId"]` dans le
+  DOM et `cy.click()` échoue ("Your subject contained 2 elements"). Le sélecteur fiable est
+  `cy.get('.cap-switch__slider').click()` (sans `force`) : c'est le seul élément à la fois unique, réel
+  (taille non nulle) et à l'intérieur du label interne du `Switch`, donc le clic déclenche bien le toggle par
+  délégation native du `<label>`.
+- **Ne pas copier un `dangerToast`/`successToast` d'un composant de référence sans relire le texte qui va
+  avec** : dans `UserTypeModal.tsx`, la suppression utilise `dangerToast` (rouge) mais avec un message
+  **rédigé pour la suppression** (ex: "type supprimé"). Si on réutilise `dangerToast` pour la suppression
+  tout en gardant un message générique comme `global.changes.saved` ("Modifications enregistrées") pour
+  factoriser les clés de traduction entre create/update/delete, le résultat est un toast rouge qui dit
+  "Modifications enregistrées" — incohérent visuellement (le rouge fait penser à une erreur). Si le message
+  reste générique/neutre, utiliser `successToast` pour les trois actions (create/update/delete) plutôt que
+  `dangerToast` ; réserver `dangerToast` aux cas où le texte est explicitement écrit pour une action
+  destructive.
+- **Champ `position` géré par Gedmo `@Sortable`** (`PositionableTrait`) sur une colonne SQL `NOT NULL` sans
+  valeur par défaut : Gedmo ne calcule **pas** automatiquement une position au flush si le champ est laissé à
+  `null` par une mutation GraphQL — ça remonte en erreur SQL (`Column 'position' cannot be null`), pas en
+  erreur PHP visible à la compilation. Si `position` est optionnel côté input GraphQL (ex: pour permettre un
+  ajout "à la fin" sans que le client ait à connaître le max actuel), calculer explicitement un fallback dans
+  la mutation `create` (ex: `MAX(position) + 1` via une méthode dédiée du repository) plutôt que de compter
+  sur un comportement automatique de Gedmo.
+- **Clé de traduction déjà utilisée côté Symfony/Twig (Sonata) mais jamais encore appelée depuis React** :
+  même si la clé existe déjà dans `translations/fr-FR.json` (et dans les `.xlf`), vérifier qu'elle apparaît
+  bien dans le bundle utilisé par `admin-next` avant de supposer qu'elle s'affichera correctement — dans le
+  doute, `grep` la clé dans `translations/fr-FR.json` (le fichier réellement importé par
+  `admin-next/utils/withPageAuthRequired.ts` via l'alias `@translations/*`) pour confirmer sa présence.
+- **`redirectOnError` (dans `admin-next/utils/withPageAuthRequired.ts`) lève une exception au lieu de
+  rediriger tant que `__isDev__` est vrai** — un 500 obtenu en testant manuellement l'accès refusé d'un
+  compte non autorisé (page ou garde-fou de rôle ajouté à l'étape 4 de la méthodologie) est le comportement
+  **attendu** en environnement dev, pas un bug : seule la prod fait un vrai redirect 302 vers `/`. Ne pas
+  perdre de temps à "corriger" ce 500.
+- **Vérifier une query/mutation GraphQL directement en `curl`** quand un navigateur ou Cypress n'est pas
+  disponible dans l'environnement : se logger via `POST /login_check` avec un body JSON
+  `{"username":"...","password":"..."}` (récupère un cookie `PHPSESSID` valide), puis appeler
+  `POST https://capco.dev/graphql/internal` avec ce cookie et `{"query": "..."}`. Ça permet de valider un
+  vrai comportement bout-en-bout (accès refusé pour un rôle, données réellement persistées/retournées) sans
+  dépendre d'un navigateur headless — utile en complément (pas en remplacement) d'un vrai test dans le
+  navigateur.
+- **Si `cypress run`/`cypress verify` échoue en local avec `bad option: --no-sandbox` (ou tout autre flag)** :
+  c'est que la variable d'environnement `ELECTRON_RUN_AS_NODE=1` est positionnée dans le shell — elle force
+  tout binaire Electron (donc Cypress) à démarrer en simple process Node au lieu de lancer l'app, et Node
+  rejette alors les flags Electron avec ce message. Relancer la commande avec
+  `env -u ELECTRON_RUN_AS_NODE npx cypress ...` (ou `unset ELECTRON_RUN_AS_NODE` dans le shell) résout le
+  symptôme. Si l'erreur suivante est `Cannot find module 'lazy-ass'` (ou un autre module introuvable) au
+  chargement de `cypress/lib/util.js`, il y a en plus un **package `cypress` dupliqué et périmé** dans
+  `cypress/node_modules/cypress` (une vieille version, ex. 13.x, qui a survécu à la montée de version alors
+  que la racine a bien été mise à jour vers la version courante) — le symlink
+  `cypress/node_modules/.bin/cypress` pointe dessus en priorité. Le supprimer
+  (`rm -rf cypress/node_modules/cypress`) puis relancer `yarn install` (et `npx cypress install` pour
+  télécharger le binaire de la bonne version) répare l'installation. C'est le même genre de dérive de
+  `yarn.lock`/hoisting que les correctifs "chore: dedupe yarn.lock" / "fix: add missing lodash range" faits
+  après la montée de version de Cypress — probable qu'il y en ait d'autres du même genre si Cypress n'a pas
+  été relancé localement depuis cette montée de version.
+
+## Validation yup : toujours un schéma, et un champ texte requis n'est pas juste `.required()`
+
+- **Ne jamais se contenter du prop `isRequired` de `FormControl` seul** pour valider un formulaire React Hook
+  Form, même à un seul champ. `FormControl` et `FieldInput` (`admin-next/shared/cap-collectif/form/src/components/`)
+  appellent chacun `useController` séparément pour le même `name`/`control` — `FormControl` enregistre la règle
+  `required`, `FieldInput` enregistre `minLength`/`maxLength`/`pattern`. Selon l'ordre de montage des effets,
+  l'un peut écraser silencieusement les règles de l'autre, ce qui rend `isRequired` seul non fiable (rencontré
+  sur `SourceCategoryModal.tsx` : un titre vide était accepté côté client et provoquait une erreur backend au
+  lieu d'un message de validation). Toujours définir un schéma `yup` + `resolver: yupResolver(schema)` sur
+  `useForm` — voir le skill `form-mutation`.
+- **`.required()` seul n'exclut pas les chaînes composées uniquement d'espaces** (`"   "` passe `.required()`
+  car ce n'est pas une chaîne vide). Pour qu'un champ texte considère une valeur "juste des espaces" comme
+  vide, utiliser la méthode yup custom réutilisable `notBlank(message)` définie dans
+  `admin-next/shared/utils/yupExtensions.ts` (enregistrée via `yup.addMethod(yup.string, 'notBlank', ...)`) à
+  la place de `.required()` :
+  ```typescript
+  import * as yup from 'yup'
+  import '@shared/utils/yupExtensions' // charge l'extension yup — sans cet import, .notBlank() n'existe pas au runtime
+
+  const schema = yup.object().shape({
+    title: yup.string().notBlank(intl.formatMessage({ id: 'global.required' })),
+  })
+  ```
+  Ce cas (champ texte requis pouvant être rempli avec des espaces) se représente à chaque formulaire de
+  création/édition avec un champ titre/nom — utiliser `notBlank` plutôt que de réécrire un `.test(...)` ad hoc
+  à chaque fois. Si un nouveau besoin de validation générique apparaît (autre que "pas vide/blanc"), ajouter la
+  méthode custom dans ce même fichier `yupExtensions.ts` plutôt que de la dupliquer dans chaque schéma.
 
 Ce document ne doit **pas** contenir de section de suivi par page migrée (type "ProjectType : fait, voir
 détails") — cette information est déjà dans l'historique git (commits, PR) et devient vite obsolète ici.
 Seules les informations **génériques**, réutilisables pour n'importe quelle future migration, ont leur place
 dans ce fichier.
+
+Mettre à jour ce fichier avec tous les apprentissages faits lors des migrations effectuées qui pourront être utiles à d'autres migrations (consignes, common pitfalls, etc.)

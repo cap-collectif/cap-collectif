@@ -7,12 +7,28 @@ description: Crée un formulaire React Hook Form connecté à une mutation Relay
 
 Crée un formulaire React Hook Form connecté à une mutation Relay avec les patterns du projet.
 
+> **Toujours définir un schéma yup + `resolver: yupResolver(schema)`, même pour un formulaire à un seul champ.**
+> Ne pas se fier uniquement au prop `isRequired` de `FormControl`. `FormControl` et `FieldInput` appellent chacun
+> `useController` séparément pour le même `name`/`control` : `FormControl` enregistre la règle `required`,
+> `FieldInput` enregistre `minLength`/`maxLength`/`pattern`. Selon l'ordre de montage des effets, l'un peut
+> écraser silencieusement les règles de l'autre, ce qui rend `isRequired` seul non fiable (un champ vide peut
+> alors passer côté client et provoquer une erreur backend au lieu d'un message de validation).
+> Un `resolver` yup valide l'objet complet en un seul passage et alimente `formState.errors` directement,
+> indépendamment de ce risque de collision entre les deux `useController`.
+>
+> **Pour un champ texte requis, `.required()` ne suffit pas** : une chaîne composée uniquement d'espaces
+> (`"   "`) passe `.required()` (ce n'est pas une chaîne vide). Utiliser la méthode custom réutilisable
+> `.notBlank(message)` à la place — définie dans `admin-next/shared/utils/yupExtensions.ts`, à importer une
+> fois par fichier de schéma (`import '@shared/utils/yupExtensions'`) pour que la méthode existe au runtime.
+> Voir `REFONTE_SONATA.md` pour le détail.
+
 ## Structure de base
 
 ```typescript
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import '@shared/utils/yupExtensions' // registers the notBlank() custom method
 import { useIntl } from 'react-intl'
 import { Button, Flex } from '@cap-collectif/ui'
 import { FormControl, FieldInput } from '@cap-collectif/form'
@@ -31,7 +47,7 @@ const getSchema = (intl: IntlShape) =>
   yup.object().shape({
     title: yup
       .string()
-      .required(intl.formatMessage({ id: 'global.required' }))
+      .notBlank(intl.formatMessage({ id: 'global.required' }))
       .min(2, intl.formatMessage({ id: 'global.min-length' }, { count: 2 })),
     description: yup.string().nullable(),
     isActive: yup.boolean(),
@@ -271,7 +287,7 @@ React.useEffect(() => {
 ## Checklist
 
 - [ ] Types `FormValues` définis
-- [ ] Schéma yup avec messages i18n
+- [ ] Schéma yup avec messages i18n (obligatoire, même pour un seul champ requis — ne pas compter sur `isRequired` seul)
 - [ ] `defaultValues` depuis les données Relay
 - [ ] `FormProvider` enveloppe le form
 - [ ] Gestion `isSubmitting` / `isLoading`
