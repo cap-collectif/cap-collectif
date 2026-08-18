@@ -121,7 +121,7 @@ bin/phpspec run --format=progress --no-interaction # CI mode
 
 # Behat ⚠️ Legacy (deprecated) - migrate to Cypress
 pipenv run fab local.qa.behat                    # All tests
-pipenv run fab local.qa.behat --suite=bp         # Specific suite
+pipenv run fab local.qa.behat --suite=sso        # Specific suite
 pipenv run fab local.qa.behat --tags=@mytag      # By tag
 
 # Static Analysis

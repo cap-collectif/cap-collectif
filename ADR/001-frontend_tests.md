@@ -12,6 +12,8 @@ Cypress est choisi pour sa stabilité, son ergonomie et son intégration avec le
 Les tests Behat existants sont graduellement migrés, certains relèvent du back-end ; les front-end sont migrés vers cypress.
 --> Cette précision pourra être supprimée en même temps que Behat
 
+⚠️ Quand on supprime un dossier de tests Behat devenu inutile (couverture reprise par Cypress), il faut aussi nettoyer la suite correspondante dans `behat.yml` et le job associé dans `.circleci/config.yml` (définition + référence dans le workflow). Sinon la suite pointe vers un chemin qui n'existe plus et le job échoue ou tourne à vide dans la CI.
+
 
 ## Structure
 Afin de garantir que les tests soient bien joués dans la CI, il est nécessaire de les ajouter dans l'un des dossiers suivants
