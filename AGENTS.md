@@ -64,6 +64,17 @@ Cap Collectif is a civic participation SaaS platform built with:
 
 Before running certain commands, **ALWAYS verify** these critical preconditions:
 
+### PHP and Fabric Commands
+
+**Never run PHP executables on the host machine.** Run every PHP command directly in the application container, using this wrapper:
+```bash
+docker exec -w /var/www capco_application_1 <command>
+```
+
+This applies to `php`, `bin/phpunit`, `bin/phpstan`, `bin/console`, `bin/php-cs-fixer`, and `bin/phpspec`. Do not first try the host executable.
+
+**Never run `fab` directly.** Fabric is available through Pipenv only, so every Fabric command must start with `pipenv run fab`.
+
 ### Cypress E2E Tests
 
 **Before running `yarn cy:open` or `yarn cy:run`**, ensure that `admin-next/.env.local` contains:
@@ -98,9 +109,9 @@ yarn relay:watch              # Watch mode for Relay compiler only
 ### Testing
 ```bash
 # PHPUnit (unit tests) ✅ Active
-bin/phpunit                                        # Run all tests
-bin/phpunit tests/UnitTests                        # Unit tests only
-bin/phpunit --filter=TestClassName                 # Run specific test
+docker exec -w /var/www capco_application_1 bin/phpunit                                        # Run all tests
+docker exec -w /var/www capco_application_1 bin/phpunit tests/UnitTests                        # Unit tests only
+docker exec -w /var/www capco_application_1 bin/phpunit --filter=TestClassName                 # Run specific test
 
 # Jest (API tests) ✅ Active
 yarn test                     # Unit tests
@@ -116,8 +127,8 @@ yarn cy:open                  # Open Cypress UI
 yarn cy:run                   # Run Cypress tests
 
 # PHPSpec ⚠️ Legacy (deprecated) - migrate to PHPUnit
-bin/phpspec run                                    # Run all specs
-bin/phpspec run --format=progress --no-interaction # CI mode
+docker exec -w /var/www capco_application_1 bin/phpspec run                                    # Run all specs
+docker exec -w /var/www capco_application_1 bin/phpspec run --format=progress --no-interaction # CI mode
 
 # Behat ⚠️ Legacy (deprecated) - migrate to Cypress
 pipenv run fab local.qa.behat                    # All tests
@@ -125,15 +136,14 @@ pipenv run fab local.qa.behat --suite=sso        # Specific suite
 pipenv run fab local.qa.behat --tags=@mytag      # By tag
 
 # Static Analysis
-php -d memory_limit=-1 bin/phpstan analyse         # PHPStan
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/phpstan analyse         # PHPStan
 ```
 
 ### Linting & Quality
 ```bash
 yarn lint                     # ESLint
 yarn prettier                 # Format JS/TS/YAML
-yarn php:quality              # PHP CS Fixer + PHPStan + PHPSpec
-bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v
+docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v
 ```
 
 ### Fabric Commands (Docker & Infrastructure)
@@ -151,13 +161,13 @@ pipenv run fab local.qa.graphql-schemas             # Dump GraphQL schemas
 ### Symfony Console Commands
 ```bash
 # Feature flags
-php -d memory_limit=-1 bin/console capco:toggle:enable <flag>
-php -d memory_limit=-1 bin/console capco:toggle:disable <flag>
-php -d memory_limit=-1 bin/console capco:toggle:list
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:toggle:enable <flag>
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:toggle:disable <flag>
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:toggle:list
 
 # Elasticsearch
-php -d memory_limit=-1 bin/console capco:es:create
-php -d memory_limit=-1 bin/console capco:es:populate
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:es:create
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:es:populate
 
 # Run any Symfony command via fabric
 pipenv run fab local.app.cmd --commandName="<cmd>"
