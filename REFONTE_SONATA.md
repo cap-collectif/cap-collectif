@@ -141,6 +141,25 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
     qu'aucun fichier (controller, templates, entité, repository) n'est partagé avec une autre feature encore
     active. Par défaut, préférer supprimer dans la même PR sauf indication contraire de l'auteur de la
     migration — à confirmer au cas par cas.
+    - **Cas des pages `/admin/settings/{category}/list`** (`SettingsController.php`, `SiteParameterAdmin.php`,
+      `Settings/list.html.twig`, tous dans `src/Capco/AdminBundle/`) : ce contrôleur/template est **générique**,
+      partagé par plusieurs catégories (`settings.global`, `settings.performance`, `settings.modules`,
+      `settings.appearance`, `settings.notifications`, `pages.*`...) via un paramètre de route `{category}`. Ne
+      **jamais** le supprimer tant que toutes ces catégories n'ont pas été migrées — seule la migration de la
+      **dernière** catégorie restante permettra de le supprimer entièrement. Pour une migration individuelle
+      (ex: `settings.performance`), le seul code à retirer est l'entrée de cette catégorie dans le whitelist
+      `FeaturesCategoryResolver::$categories` (`src/Capco/AdminBundle/Resolver/FeaturesCategoryResolver.php`) et,
+      le cas échéant, le `if` spécifique à cette catégorie dans `SettingsVoter::canView`
+      (`src/Capco/AppBundle/Security/SettingsVoter.php`) si un rôle particulier y était exigé — ne pas toucher
+      au reste du contrôleur/admin/template.
+    - Pour repérer ces enregistrements dispersés par catégorie (qui ne vivent pas dans un seul dossier dédié à
+      la feature), grep sur **la chaîne de catégorie elle-même** (ex: `settings.performance`) en plus du nom de
+      l'entité/du contrôleur — elle apparaît typiquement dans `FeaturesCategoryResolver`, un éventuel Voter, les
+      clés de traduction (`admin.label.<category>`, à garder si réutilisées côté `admin-next`), et parfois
+      `config/packages/admin.yaml` (tag `group:` du service Sonata admin) / `config/packages/sonata_admin.yaml`
+      (groupes du dashboard) — vérifier ces deux derniers fichiers même s'ils ne contiennent souvent rien de
+      spécifique à la catégorie migrée (l'admin `SiteParameter`/`SiteColor`/`SiteImage` y est enregistré une
+      seule fois pour toutes les catégories, sous `admin.group.parameters`, sans filtre par catégorie).
 
 ## Patterns de référence dans `admin-next/`
 
