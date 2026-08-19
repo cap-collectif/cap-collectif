@@ -399,4 +399,22 @@ describe('Internal | updateProposalForm', () => {
       ),
     ).rejects.toThrowError('No view is active. At least one must be selected')
   })
+
+  it.each(['PROPOSAL', 'PROJECT', 'MISSION', 'OPINION', 'IDEA', 'QUESTION', 'REPORTING', 'TESTIMONY', 'PICTURE'])(
+    'admin can set object type %s',
+    async objectType => {
+      const response = await graphql(
+        mutation,
+        {
+          input: {
+            proposalFormId: 'proposalForm13',
+            objectType,
+          },
+        },
+        'internal_admin',
+      )
+
+      expect(response.updateProposalForm.proposalForm.objectType).toBe(objectType)
+    },
+  )
 })

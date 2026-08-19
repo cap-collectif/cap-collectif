@@ -15,6 +15,7 @@ import InlineList from '../../Ui/List/InlineList'
 import { translateContent } from '@shared/utils/contentTranslator'
 import UserAvatar from '~/components/User/UserAvatar'
 import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   proposals: ProposalListTable_proposals$data
@@ -73,7 +74,7 @@ export class ProposalListTable extends React.Component<Props, State> {
           return {
             title: {
               text:
-                step.form?.objectType === 'PROPOSAL'
+                isProposalLikeObjectType(step.form?.objectType)
                   ? 'admin.fields.selection.proposal'
                   : step.form?.objectType === 'QUESTION'
                   ? 'question-title'

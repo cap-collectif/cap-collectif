@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Control } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { FormValues } from '../ProposalFormModal.type'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   control: Control<FormValues>
@@ -15,7 +16,7 @@ const TitleInput: React.FC<Props> = ({ control, objectType, titleHelpText }) => 
   const intl = useIntl()
 
   const getTitleLabel = () => {
-    if (objectType === 'PROPOSAL') return 'global.title'
+    if (isProposalLikeObjectType(objectType)) return 'global.title'
     if (objectType === 'OPINION') return 'opinion-title'
     return 'title'
   }

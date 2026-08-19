@@ -17,6 +17,7 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import withColors from '~/components/Utils/withColors'
 import type { GlobalState } from '~/types'
 import CookieMonster from '@shared/utils/CookieMonster'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 type RelayProps = {
   step: ProposalsUserVotesStep_step$data
@@ -33,7 +34,7 @@ export const ProposalsUserVotesStep = ({ step, dirty, submitting, dispatch, isAu
   const token = CookieMonster.getParticipantCookie()
   const intl = useIntl()
   const keyTradProjectCount =
-    step.form?.objectType === 'PROPOSAL'
+    isProposalLikeObjectType(step.form?.objectType)
       ? isInterpellationContextFromStep(step)
         ? 'interpellation.support.count'
         : 'votes-count'

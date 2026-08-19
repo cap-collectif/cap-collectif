@@ -19,6 +19,7 @@ import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_v
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
 import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
@@ -305,9 +306,9 @@ export const ProposalPageHeader = ({
   const modified = moment(proposal?.updatedAt).diff(proposal?.createdAt, 'seconds') > 1
 
   const getGoBackButtonLabel = () => {
-    return proposal?.form.objectType === 'PROPOSAL' && isInterpellationContextFromProposal(proposal)
+    return isProposalLikeObjectType(proposal?.form.objectType) && isInterpellationContextFromProposal(proposal)
       ? 'interpellation.back'
-      : proposal?.form.objectType === 'PROPOSAL'
+      : isProposalLikeObjectType(proposal?.form.objectType)
       ? 'proposal.back'
       : proposal?.form.objectType === 'OPINION'
       ? 'opinions-list'

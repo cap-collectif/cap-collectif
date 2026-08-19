@@ -21,6 +21,7 @@ import {
   CollectStepFormQuery,
   MainView,
   ProposalArchivedUnitTime,
+  ProposalFormObjectType,
   ProposalStepStatusColor,
   ProposalStepVoteType,
 } from '@relay/CollectStepFormQuery.graphql'
@@ -54,6 +55,7 @@ type Questionnaire = { questions: Array<QuestionInput>; questionsWithJumps: Arra
 
 type ProposalFormType = {
   id: string | null
+  objectType: ProposalFormObjectType
   title: string | null
   titleHelpText: string | null
   usingSummary: boolean
@@ -218,6 +220,7 @@ const COLLECT_FRAGMENT = graphql`
         ...ProposalFormForm_step
         form {
           id
+          objectType
           title
           isGridViewEnabled
           isListViewEnabled

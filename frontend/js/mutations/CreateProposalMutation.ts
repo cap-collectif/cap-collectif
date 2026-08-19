@@ -9,6 +9,7 @@ import type {
   CreateProposalMutationVariables,
   CreateProposalMutationResponse,
 } from '~relay/CreateProposalMutation.graphql'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 const mutation = graphql`
   mutation CreateProposalMutation($input: CreateProposalInput!, $stepId: ID!, $isAuthenticated: Boolean!) {
@@ -131,7 +132,7 @@ const commit = (
             }
           }
 
-          if (objectType === 'PROPOSAL') {
+          if (isProposalLikeObjectType(objectType)) {
             const proposals = projectProxy.getLinkedRecord('proposals', {
               type: 'PROPOSAL',
             })

@@ -16,6 +16,7 @@ import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal'
 import { formName } from '../Proposal/Form/ProposalForm'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   step: ProposalStepPageHeader_step
@@ -37,7 +38,7 @@ export const ProposalStepPageHeader = ({ step, displayMode, contributorConsentPr
   const { fusionCount } = step.allProposals
   const isInterpellation = isInterpellationContextFromStep(step)
   const isOpinion = isOpinionFormStep(step)
-  const isProposalForm = step.form && step.form.objectType === 'PROPOSAL'
+  const isProposalForm = isProposalLikeObjectType(step.form?.objectType)
   const titleTradKey = step.form?.objectType === 'QUESTION'
     ? 'submit-a-question'
     : isOpinion

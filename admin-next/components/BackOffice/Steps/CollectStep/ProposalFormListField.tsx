@@ -22,6 +22,7 @@ const PROPOSAL_FORMS_QUERY = graphql`
         edges {
           node {
             id
+            objectType
             title
             isGridViewEnabled
             isListViewEnabled
@@ -156,6 +157,7 @@ const PROPOSAL_FORMS_QUERY = graphql`
           edges {
             node {
               id
+              objectType
               title
               isGridViewEnabled
               isListViewEnabled
@@ -359,6 +361,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
     if (proposalForm) {
       setValue('form_model', {
         id: proposalForm.id ?? null,
+        objectType: proposalForm.objectType,
         title: proposalForm.title ?? null,
         titleHelpText: proposalForm.title ?? null,
         usingSummary: proposalForm.usingSummary ?? false,

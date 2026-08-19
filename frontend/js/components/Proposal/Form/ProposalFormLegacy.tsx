@@ -33,6 +33,7 @@ import { validateProposalContent } from '../Admin/ProposalAdminContentForm'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { ResponsesInReduxForm } from '~/components/Form/Form.type'
 import { isInterpellationContextFromProposal, isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues'
 import renderResponses from '~/components/Form/RenderResponses'
@@ -479,11 +480,11 @@ export class ProposalFormLegacy extends React.Component<Props, State> {
     } = this.props
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions')
     const titleFieldTradKey =
-      proposalForm.objectType === 'PROPOSAL'
+      isProposalLikeObjectType(proposalForm.objectType)
         ? 'global.title'
         : 'title'
     const titleSuggestHeader =
-      proposalForm.objectType === 'PROPOSAL'
+      isProposalLikeObjectType(proposalForm.objectType)
         ? 'proposal.suggest_header'
         : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
         ? 'interpellation.suggest_header'

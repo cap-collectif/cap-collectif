@@ -10,6 +10,7 @@ import CollectStepImapConfigForm from '@components/BackOffice/Steps/CollectStep/
 import { ProposalSettings_step$key } from '@relay/ProposalSettings_step.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { proposalStepObjectTypeOptions } from '@shared/constants/proposalStepObjectType'
+import { useCollectStep } from '../CollectStep/CollectStepContext'
 
 const STEP_FRAGMENT = graphql`
   fragment ProposalSettings_step on ProposalStep {
@@ -30,6 +31,7 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
   const newVoteStep = useFeatureFlag('new_new_vote_step')
   const intl = useIntl()
   const { control } = useFormContext()
+  const { proposalFormKey } = useCollectStep()
 
   const sortOptions = [
     {
@@ -158,26 +160,27 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
         />
       </FormControl>
       {newVoteStep && (
-        <FormControl name="objectType" control={control}>
+        <FormControl name={`${proposalFormKey}.objectType`} control={control}>
           <Box as="p" fontSize={CapUIFontSize.BodySmall}>
             {intl.formatMessage({
               id: 'proposal.step.fields.object_type.label',
             })}
           </Box>
           <FormLabel
-            htmlFor="objectType"
+            htmlFor={`${proposalFormKey}.objectType`}
             label={intl.formatMessage({
               id: 'proposal.step.fields.object_type.notice',
             })}
           />
-          <FieldInput
-            id="objectType"
-            name="objectType"
-            control={control}
-            type="select"
-            options={objectTypeOptions}
-            defaultValue={objectTypeOptions[0].value}
-          />
+          <Box maxWidth="256px">
+            <FieldInput
+              id={`${proposalFormKey}.objectType`}
+              name={`${proposalFormKey}.objectType`}
+              control={control}
+              type="select"
+              options={objectTypeOptions}
+            />
+          </Box>
         </FormControl>
       )}
       <FormControl name="defaultStatus" control={control} maxWidth="256px">

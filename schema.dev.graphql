@@ -13524,16 +13524,34 @@ input ProposalFormNotificationsInput {
   onDelete: Boolean!
 }
 
-"""Value of a proposal sorting"""
+"""Value of a proposal form object type"""
 enum ProposalFormObjectType {
   """The proposal form allows to submit proposals"""
   PROPOSAL
+
+  """The proposal form allows to submit projects"""
+  PROJECT
+
+  """The proposal form allows to submit missions"""
+  MISSION
 
   """The proposal form allows to submit questions."""
   QUESTION
 
   """The proposal form allows to submit opinions."""
   OPINION
+
+  """The proposal form allows to submit ideas"""
+  IDEA
+
+  """The proposal form allows to submit reports"""
+  REPORTING
+
+  """The proposal form allows to submit testimonies"""
+  TESTIMONY
+
+  """The proposal form allows to submit pictures"""
+  PICTURE
 }
 
 """Ways in which lists of proposalForms can be ordered upon return."""

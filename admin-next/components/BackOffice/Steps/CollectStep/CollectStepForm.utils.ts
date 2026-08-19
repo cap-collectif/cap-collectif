@@ -40,6 +40,7 @@ export const getInitialValues = (
     },
     form: {
       id: step?.form?.id ?? null,
+      objectType: step?.form?.objectType ?? 'PROPOSAL',
       title: step?.form?.title ?? null,
       titleHelpText: step?.form?.titleHelpText ?? null,
       usingSummary: step?.form?.usingSummary ?? false,
@@ -152,6 +153,7 @@ export const getProposalFormUpdateVariablesInput = (
 
   return {
     proposalFormId: selectedTab === FormTabsEnum.NEW ? formValues.id : undefined,
+    objectType: formValues.objectType,
     description: formValues.description,
     descriptionUsingJoditWysiwyg: false,
     usingThemes: formValues.usingThemes,

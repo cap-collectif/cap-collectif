@@ -1,14 +1,32 @@
 ProposalFormObjectType:
     type: enum
     config:
-        description: 'Value of a proposal sorting'
+        description: 'Value of a proposal form object type'
         values:
             PROPOSAL:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PROPOSAL
                 description: 'The proposal form allows to submit proposals'
+            PROJECT:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PROJECT
+                description: 'The proposal form allows to submit projects'
+            MISSION:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::MISSION
+                description: 'The proposal form allows to submit missions'
             QUESTION:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::QUESTION
                 description: 'The proposal form allows to submit questions.'
             OPINION:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::OPINION
                 description: 'The proposal form allows to submit opinions.'
+            IDEA:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::IDEA
+                description: 'The proposal form allows to submit ideas'
+            REPORTING:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::REPORTING
+                description: 'The proposal form allows to submit reports'
+            TESTIMONY:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::TESTIMONY
+                description: 'The proposal form allows to submit testimonies'
+            PICTURE:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PICTURE
+                description: 'The proposal form allows to submit pictures'
