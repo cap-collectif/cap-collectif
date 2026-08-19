@@ -24,7 +24,7 @@ La CI du projet rencontre plusieurs problématiques :
 **Décision** : L'ancien job `e2e-cypress` est découpé en 3 jobs distincts :
 - `e2e-cypress-frontoffice` : tests du front office
 - `e2e-cypress-backoffice` : tests du back office
-- `e2e-cypress-workflow` : tests du parcours "participation workflow"
+- `e2e-cypress-frontoffice-workflow` : tests du parcours "participation workflow"
 
 **Raison** : Permet une meilleure parallélisation et un debugging plus ciblé en cas d'échec. On ne rejoue pas l'intégralité des test cypress mais "uniquement" ceux du dossier concerné.
 
@@ -43,7 +43,15 @@ Le job `phpunit-tests` utilise 2 exécuteurs et répartit les fichiers selon leu
 
 Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et régénère une base de données complète. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût fixe, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
 
-#### 4. Jobs non exécutés sur `master`
+#### 4. Vérification de la couverture des specs Cypress
+
+**Décision** : Un job `check-cypress-spec-coverage` s'exécute avant les jobs `e2e-*` / `api-*` (au même titre que `unit-php`, `phpunit-tests`, `lint-js`, `unit-js`, `typecheck-js`, etc.) et fait échouer la CI si un fichier de spec Cypress se trouve en dehors des dossiers `frontOffice`, `frontOfficeWorkflow` ou `backOffice` couverts par les jobs `e2e-cypress-*`.
+
+**Raison** : Suite au découpage des tests Cypress par dossier (cf. décision #2), un spec ajouté en dehors de ces dossiers ne serait exécuté par aucun job CircleCI et échouerait silencieusement de couvrir du code. Ce job détecte ces specs orphelins tôt, avant les jobs gourmands en ressources.
+
+Voir `.circleci/check-cypress-spec-coverage.sh`. Si un nouveau dossier de premier niveau est ajouté sous `cypress/e2e`, il faut à la fois créer un job `e2e-cypress-*` dédié et l'ajouter à la liste `KNOWN_DIRS` du script.
+
+#### 5. Jobs non exécutés sur `master`
 
 **Décision** : Certains jobs peuvent être désactivés sur `master` (ex: `typecheck-js`, `unit-js`, `unit-php`, `build-production-image`).
 
@@ -88,7 +96,7 @@ Les tests flaky (tests qui peuvent échouer et passer sur le même commit) font 
 #### Structure des workflows
 
 ```
-prepare → lint-js / unit-js / unit-php / typecheck-js → (si succès) → e2e-* / build-*
+prepare → lint-js / unit-js / unit-php / typecheck-js / check-cypress-spec-coverage → (si succès) → e2e-* / build-*
 ```
 
 Si l'un des jobs de vérification rapide échoue, les jobs suivants ne sont pas exécutés.
