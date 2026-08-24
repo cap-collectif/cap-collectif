@@ -990,6 +990,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('v')
             ->where('v.participant = :participant')
             ->setParameter('participant', $participant)
+            ->orderBy('v.id', 'ASC')
         ;
 
         if ($mediator) {

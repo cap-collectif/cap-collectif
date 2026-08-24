@@ -8,13 +8,13 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "1053",
+            "id": "1000",
             "kind": "proposalSelectionVote",
           },
         },
         Object {
           "node": Object {
-            "id": "1000",
+            "id": "1053",
             "kind": "proposalSelectionVote",
           },
         },
