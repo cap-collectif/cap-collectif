@@ -9,6 +9,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -31,6 +32,28 @@ class AnonymizeUsersAutomatedCommand extends Command
         $this->connection = $this->entityManager->getConnection();
     }
 
+    protected function configure(): void
+    {
+        $this->addOption(
+            'startAt',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Inclusive start date for the activity range (Y-m-d).'
+        );
+        $this->addOption(
+            'endAt',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Inclusive end date for the activity range (Y-m-d).'
+        );
+        $this->addOption(
+            'dry-run',
+            null,
+            InputOption::VALUE_NONE,
+            'Count identities that would be anonymized without changing any data.'
+        );
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -44,11 +67,46 @@ class AnonymizeUsersAutomatedCommand extends Command
         $limit = $this->anonymizationInactivityDays + $this->anonymizationInactivityEmailReminderDays;
         $dateLimit = (new \DateTimeImmutable())->modify('-' . $limit . ' days');
 
+        try {
+            $dateRange = $this->resolveDateRange($input);
+        } catch (\InvalidArgumentException $exception) {
+            $io->error($exception->getMessage());
+
+            return Command::INVALID;
+        }
+
+        if (null !== $dateRange) {
+            $io->info(
+                'Explicit date range: '
+                . $dateRange['inclusiveStart']->format('Y-m-d')
+                . ' to '
+                . $dateRange['exclusiveEnd']->modify('-1 day')->format('Y-m-d')
+            );
+        } else {
+            $io->info('Scheduled inactivity mode');
+        }
+
         $stopwatch = new Stopwatch();
         $stopwatch->start(self::STOP_WATCH_EVENT);
 
-        $this->createMatchingUsersTemporaryTable($dateLimit);
-        $this->createMatchingParticipantsTemporaryTable($dateLimit);
+        $this->createMatchingUsersTemporaryTable($dateLimit, $dateRange);
+        $this->createMatchingParticipantsTemporaryTable($dateLimit, $dateRange);
+
+        if ((bool) $input->getOption('dry-run')) {
+            $userCount = (int) $this->connection->fetchOne('SELECT COUNT(*) FROM matching_users');
+            $participantCount = (int) $this->connection->fetchOne(
+                'SELECT COUNT(*) FROM matching_participants'
+            );
+
+            $io->section('Dry run');
+            $io->writeln("Users to anonymize: {$userCount}");
+            $io->writeln("Participants to anonymize: {$participantCount}");
+            $io->writeln('Total people to anonymize: ' . ($userCount + $participantCount));
+            $io->success('Dry run completed. No data was changed.');
+            $stopwatch->stop(self::STOP_WATCH_EVENT);
+
+            return Command::SUCCESS;
+        }
 
         $io->info('Start Deleting Medias');
         $this->deleteMedias();
@@ -67,7 +125,7 @@ class AnonymizeUsersAutomatedCommand extends Command
 
         $io->info('Start Anonymizing Debate App Data');
         $this->deleteDebateVoteToken();
-        $this->anonymizeDebateAnonymousArgument($dateLimit);
+        $this->anonymizeDebateAnonymousArgument($dateLimit, $dateRange);
         $this->anonymizeDebateArgument();
         $this->anonymizeDebateVote();
 
@@ -98,24 +156,130 @@ class AnonymizeUsersAutomatedCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function createMatchingUsersTemporaryTable(\DatetimeInterface $lastLoginLimit): void
-    {
-        $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_users (id VARCHAR(255) COLLATE utf8mb4_unicode_ci, email VARCHAR(255) COLLATE utf8mb4_unicode_ci)');
-        $this->connection->executeStatement('CREATE UNIQUE INDEX idx_matching_users_email ON matching_users(email)');
+    /**
+     * @param null|array{inclusiveStart: \DateTimeImmutable, exclusiveEnd: \DateTimeImmutable} $dateRange
+     */
+    private function createMatchingUsersTemporaryTable(
+        \DatetimeInterface $lastLoginLimit,
+        ?array $dateRange = null
+    ): void {
+        $dateRangeCondition = '';
+        $parameters = ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')];
+
+        if (null !== $dateRange) {
+            $dateRangeCondition = ' AND u.last_login >= :startAt AND u.last_login < :endAt';
+            $parameters = array_merge($parameters, $this->formatDateRangeSqlParameters($dateRange));
+        }
+
+        $this->connection->executeStatement('DROP TEMPORARY TABLE IF EXISTS matching_users');
         $this->connection->executeStatement(
-            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (u.last_login < :lastLoginLimit OR u.last_login IS NULL) AND u.anonymized_at IS NULL",
-            ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')]
+            'CREATE TEMPORARY TABLE matching_users (
+                id VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+                email VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+                UNIQUE INDEX idx_matching_users_email (email)
+            )'
+        );
+        $this->connection->executeStatement(
+            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (u.last_login < :lastLoginLimit OR u.last_login IS NULL) AND u.anonymized_at IS NULL{$dateRangeCondition}",
+            $parameters
         );
     }
 
-    private function createMatchingParticipantsTemporaryTable(\DatetimeInterface $lastContributedAtLimit): void
+    /**
+     * @return null|array{inclusiveStart: \DateTimeImmutable, exclusiveEnd: \DateTimeImmutable}
+     */
+    private function resolveDateRange(InputInterface $input): ?array
     {
-        $this->connection->executeStatement('CREATE TEMPORARY TABLE matching_participants (id VARCHAR(255) COLLATE utf8mb4_unicode_ci, email VARCHAR(255) COLLATE utf8mb4_unicode_ci)');
-        $this->connection->executeStatement('CREATE INDEX idx_matching_participants_id ON matching_participants(id)');
-        $this->connection->executeStatement('CREATE INDEX idx_matching_participants_email ON matching_participants(email)');
+        $startAtOption = $input->getOption('startAt');
+        $endAtOption = $input->getOption('endAt');
+        $startAt = null === $startAtOption ? null : (string) $startAtOption;
+        $endAt = null === $endAtOption ? null : (string) $endAtOption;
+
+        if ((null === $startAt) !== (null === $endAt)) {
+            throw new \InvalidArgumentException(
+                'The --startAt and --endAt options must be used together.'
+            );
+        }
+
+        if (null === $startAt) {
+            return null;
+        }
+
+        $inclusiveStart = $this->parseDateOption($startAt);
+        $inclusiveEnd = $this->parseDateOption($endAt);
+
+        if ($inclusiveStart > $inclusiveEnd) {
+            throw new \InvalidArgumentException(
+                'The --startAt option must be earlier than or equal to --endAt.'
+            );
+        }
+
+        return [
+            'inclusiveStart' => $inclusiveStart,
+            'exclusiveEnd' => $inclusiveEnd->modify('+1 day'),
+        ];
+    }
+
+    private function parseDateOption(string $value): \DateTimeImmutable
+    {
+        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', $value);
+        $errors = \DateTimeImmutable::getLastErrors();
+
+        if (
+            false === $date
+            || (false !== $errors && (0 < $errors['warning_count'] || 0 < $errors['error_count']))
+            || $date->format('Y-m-d') !== $value
+        ) {
+            throw new \InvalidArgumentException(
+                'The --startAt and --endAt options must use the Y-m-d format.'
+            );
+        }
+
+        return $date;
+    }
+
+    /**
+     * @param array{inclusiveStart: \DateTimeImmutable, exclusiveEnd: \DateTimeImmutable} $dateRange
+     *
+     * @return array{startAt: string, endAt: string}
+     */
+    private function formatDateRangeSqlParameters(array $dateRange): array
+    {
+        return [
+            'startAt' => $dateRange['inclusiveStart']->format('Y-m-d H:i:s'),
+            'endAt' => $dateRange['exclusiveEnd']->format('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * @param null|array{inclusiveStart: \DateTimeImmutable, exclusiveEnd: \DateTimeImmutable} $dateRange
+     */
+    private function createMatchingParticipantsTemporaryTable(
+        \DatetimeInterface $lastContributedAtLimit,
+        ?array $dateRange = null
+    ): void {
+        $dateRangeCondition = '';
+        $parameters = [
+            'lastContributedAtLimit' => $lastContributedAtLimit->format('Y-m-d H:i:s'),
+        ];
+
+        if (null !== $dateRange) {
+            $dateRangeCondition = ' AND p.last_contributed_at >= :startAt AND p.last_contributed_at < :endAt';
+            $parameters = array_merge($parameters, $this->formatDateRangeSqlParameters($dateRange));
+        }
+
+        $this->connection->executeStatement('DROP TEMPORARY TABLE IF EXISTS matching_participants');
         $this->connection->executeStatement(
-            'INSERT INTO matching_participants SELECT p.id, p.email FROM participant p WHERE p.last_contributed_at < :lastContributedAtLimit AND p.anonymized_at IS NULL',
-            ['lastContributedAtLimit' => $lastContributedAtLimit->format('Y-m-d H:i:s')]
+            'CREATE TEMPORARY TABLE matching_participants (
+                id VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+                email VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+                INDEX idx_matching_participants_id (id),
+                INDEX idx_matching_participants_email (email)
+            )'
+        );
+        $this->connection->executeStatement(
+            'INSERT INTO matching_participants SELECT p.id, p.email FROM participant p WHERE p.last_contributed_at < :lastContributedAtLimit AND p.anonymized_at IS NULL' . $dateRangeCondition,
+            $parameters
         );
     }
 
@@ -181,8 +345,21 @@ class AnonymizeUsersAutomatedCommand extends Command
         $this->connection->executeStatement($sql);
     }
 
-    private function anonymizeDebateAnonymousArgument(\DatetimeInterface $dateLimit): void
-    {
+    /**
+     * @param null|array{inclusiveStart: \DateTimeImmutable, exclusiveEnd: \DateTimeImmutable} $dateRange
+     */
+    private function anonymizeDebateAnonymousArgument(
+        \DatetimeInterface $dateLimit,
+        ?array $dateRange = null
+    ): void {
+        $dateRangeCondition = '';
+        $parameters = ['dateLimit' => $dateLimit->format('Y-m-d H:i:s')];
+
+        if (null !== $dateRange) {
+            $dateRangeCondition = ' AND daa.created_at >= :startAt AND daa.created_at < :endAt';
+            $parameters = array_merge($parameters, $this->formatDateRangeSqlParameters($dateRange));
+        }
+
         $sql = <<<'SQL'
             UPDATE debate_anonymous_argument daa
             SET
@@ -193,7 +370,7 @@ class AnonymizeUsersAutomatedCommand extends Command
                 daa.consent_internal_communication = FALSE
             WHERE daa.created_at < :dateLimit
             SQL;
-        $this->connection->executeStatement($sql, ['dateLimit' => $dateLimit->format('Y-m-d H:i:s')]);
+        $this->connection->executeStatement($sql . $dateRangeCondition, $parameters);
     }
 
     private function anonymizeDebateVote(): void

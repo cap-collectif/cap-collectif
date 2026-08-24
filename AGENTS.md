@@ -169,9 +169,23 @@ docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console c
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:es:create
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:es:populate
 
+# Account anonymization by inclusive activity-date range
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:anonymize_users_automated --startAt=2020-01-01 --endAt=2020-12-31
+
+# Preview how many identities would be anonymized without modifying application data
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:anonymize_users_automated --startAt=2020-01-01 --endAt=2020-12-31 --dry-run
+
 # Run any Symfony command via fabric
 pipenv run fab local.app.cmd --commandName="<cmd>"
 ```
+
+The `--startAt` and `--endAt` account-anonymization options must be supplied together in
+`Y-m-d` format. They narrow both the identities that already satisfy the configured inactivity
+period and the anonymous debate arguments to the requested activity range; they never make a
+recently active identity eligible.
+
+The optional `--dry-run` flag uses the same selection criteria and reports user, participant,
+and total counts without modifying application data.
 
 ## Architecture
 
