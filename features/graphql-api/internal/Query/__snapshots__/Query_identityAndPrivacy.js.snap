@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query identity and privacy filters organizations by their title for an administrator 1`] = `
+Object {
+  "organizations": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "title": "Communauté de commune de Parthenay",
+        },
+      },
+    ],
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy lists all organizations for an administrator 1`] = `
+Object {
+  "organizations": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "title": "Communauté de commune de Parthenay",
+        },
+      },
+      Object {
+        "node": Object {
+          "title": "GIEC",
+        },
+      },
+      Object {
+        "node": Object {
+          "title": "Organisation sans members",
+        },
+      },
+    ],
+    "totalCount": 3,
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy reports an existing email address as taken 1`] = `
+Object {
+  "isEmailAlreadyTaken": true,
+}
+`;
+
+exports[`Internal|Query identity and privacy reports an unused email address as available 1`] = `
+Object {
+  "isEmailAlreadyTaken": false,
+}
+`;
+
+exports[`Internal|Query identity and privacy returns all user count filters to an administrator 1`] = `
+Object {
+  "users": Object {
+    "totalCount": 254,
+  },
+  "usersConfirmed": Object {
+    "totalCount": 252,
+  },
+  "usersNotConfirmed": Object {
+    "totalCount": 2,
+  },
+  "usersOnlyProjectAdmin": Object {
+    "totalCount": 2,
+  },
+  "usersWithConsentInternalCommunication": Object {
+    "totalCount": 225,
+  },
+  "usersWithDisabled": Object {
+    "totalCount": 256,
+  },
+  "usersWithSuperAdmin": Object {
+    "totalCount": 265,
+  },
+  "usersWithoutConsentInternalCommunication": Object {
+    "totalCount": 29,
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy returns another user personal data to an administrator 1`] = `
+Object {
+  "user": Object {
+    "address": "12 rue des boulets",
+    "address2": "2ieme etages",
+    "city": "Paris",
+    "dateOfBirth": "1996-03-01 00:00:00",
+    "firstname": "Utilisateur",
+    "lastname": "authentifier",
+    "phone": "+33635492871",
+    "zipCode": "75012",
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy returns opinions followed by the current user 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+      "node": Object {
+        "id": "T3BpbmlvbjpvcGluaW9uNg==",
+      },
+    },
+    Object {
+      "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+      "node": Object {
+        "id": "T3BpbmlvbjpvcGluaW9uNw==",
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query identity and privacy returns proposals followed by the current user 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+      "node": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      },
+    },
+    Object {
+      "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+      "node": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query identity and privacy returns the authenticated user personal data 1`] = `
+Object {
+  "viewer": Object {
+    "address": "12 rue des boulets",
+    "address2": "2ieme etages",
+    "city": "Paris",
+    "dateOfBirth": "1996-03-01 00:00:00",
+    "firstname": "Utilisateur",
+    "gender": "FEMALE",
+    "lastname": "authentifier",
+    "phone": "+33635492871",
+    "zipCode": "75012",
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy returns the registration tracking script 1`] = `
+Object {
+  "registrationScript": "<script>if(typeof fbq !== 'undefined'){fbq('track', 'CompleteRegistration');}console.log('Facebook pixel - activated'); </script><noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=1133038790219319&ev=PageView&noscript=1' /></noscript>",
+}
+`;
+
+exports[`Internal|Query identity and privacy returns user identification code lists to an administrator 1`] = `
+Object {
+  "viewer": Object {
+    "userIdentificationCodeLists": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "alreadyUsedCount": 1,
+            "codesCount": 2,
+            "id": "VXNlcklkZW50aWZpY2F0aW9uQ29kZUxpc3Q6bmV3TGlzdA==",
+            "name": "Nouvelle Liste",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Query identity and privacy scores a strong password 1`] = `
+Object {
+  "passwordComplexityScore": 4,
+}
+`;
+
+exports[`Internal|Query identity and privacy scores a weak password 1`] = `
+Object {
+  "passwordComplexityScore": 1,
+}
+`;

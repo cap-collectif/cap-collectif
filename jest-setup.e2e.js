@@ -78,6 +78,31 @@ const unAuthenticatedInternalRequest = (query, variables) => {
   }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')))
 }
 
+global.rawInternalGraphql = async (query, variables, credentials = null) => {
+  const sessionResponse = await fetch(HOSTNAME + (credentials ? '/login_check' : '/logout'), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: credentials ? JSON.stringify({ username: credentials.email, password: credentials.password }) : undefined,
+  })
+
+  if (!sessionResponse.ok) {
+    return Promise.reject('Bad request')
+  }
+
+  const response = await fetch(ENDPOINT + '/internal', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ query, variables }),
+  })
+
+  return response.json()
+}
+
 global.runSQL = async sql => {
   const { stdout } = await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
   return stdout

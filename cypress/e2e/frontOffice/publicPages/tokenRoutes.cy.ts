@@ -1,3 +1,5 @@
+import { Base } from '~e2e-pages/index'
+
 describe('Public token routes', () => {
   beforeEach(() => {
     cy.task('db:restore')
@@ -15,13 +17,19 @@ describe('Public token routes', () => {
   })
 
   it('publishes a debate argument from a valid token and rejects invalid or consumed tokens', () => {
-    cy.visit('/publishDebateArgument?token=jesuisletokendudebateanonymousargumentagainst1')
+    Base.visit({
+      path: '/publishDebateArgument?token=jesuisletokendudebateanonymousargumentagainst1',
+      operationName: 'NavbarRightQuery',
+    })
     cy.get('.flash-notif').should('be.visible').and('contain.text', 'argument.published.confirmation')
 
-    cy.visit('/publishDebateArgument?token=jenexistepas')
+    Base.visit({ path: '/publishDebateArgument?token=jenexistepas', operationName: 'NavbarRightQuery' })
     cy.get('.flash-notif').should('be.visible').and('contain.text', 'invalid-token')
 
-    cy.visit('/publishDebateArgument?token=jesuisletokendudebateanonymousargumentfor1')
+    Base.visit({
+      path: '/publishDebateArgument?token=jesuisletokendudebateanonymousargumentfor1',
+      operationName: 'NavbarRightQuery',
+    })
     cy.get('.flash-notif').should('be.visible').and('contain.text', 'argument.published.already')
   })
 
