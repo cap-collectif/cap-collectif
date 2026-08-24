@@ -5,10 +5,105 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Doctrine\ORM\EntityRepository;
 
 class AbstractResponseRepository extends EntityRepository
 {
+    /**
+     * @param list<Proposal>     $proposals
+     * @param array<int, string> $questionTitlesByFormReference
+     *
+     * @return array<string, ValueResponse>
+     */
+    public function findValueResponsesByProposalId(
+        array $proposals,
+        array $questionTitlesByFormReference
+    ): array {
+        if ([] === $proposals || [] === $questionTitlesByFormReference) {
+            return [];
+        }
+
+        $queryBuilder = $this->createQueryBuilder('response')
+            ->addSelect('question', 'proposal', 'proposalForm')
+            ->innerJoin('response.question', 'question')
+            ->innerJoin('response.proposal', 'proposal')
+            ->innerJoin('proposal.proposalForm', 'proposalForm')
+            ->andWhere('proposal IN (:proposals)')
+            ->setParameter('proposals', $proposals)
+        ;
+        $conditions = $queryBuilder->expr()->orX();
+        foreach ($questionTitlesByFormReference as $formReference => $questionTitle) {
+            $conditions->add($queryBuilder->expr()->andX(
+                "proposalForm.reference = :formReference{$formReference}",
+                "question.title = :questionTitle{$formReference}"
+            ));
+            $queryBuilder
+                ->setParameter("formReference{$formReference}", $formReference)
+                ->setParameter("questionTitle{$formReference}", $questionTitle)
+            ;
+        }
+
+        $responsesByProposalId = [];
+        foreach ($queryBuilder->andWhere($conditions)->getQuery()->getResult() as $response) {
+            if (!$response instanceof ValueResponse || null === $response->getProposal()) {
+                continue;
+            }
+
+            $responsesByProposalId[$response->getProposal()->getId()] = $response;
+        }
+
+        return $responsesByProposalId;
+    }
+
+    /**
+     * @param list<Proposal>           $proposals
+     * @param array<int, list<string>> $questionTitlesByFormReference
+     *
+     * @return array<string, array<string, ValueResponse>>
+     */
+    public function findValueResponsesByProposalIdAndQuestionTitle(
+        array $proposals,
+        array $questionTitlesByFormReference
+    ): array {
+        if ([] === $proposals || [] === $questionTitlesByFormReference) {
+            return [];
+        }
+
+        $queryBuilder = $this->createQueryBuilder('response')
+            ->addSelect('question', 'proposal', 'proposalForm')
+            ->innerJoin('response.question', 'question')
+            ->innerJoin('response.proposal', 'proposal')
+            ->innerJoin('proposal.proposalForm', 'proposalForm')
+            ->andWhere('proposal IN (:proposals)')
+            ->setParameter('proposals', $proposals)
+        ;
+        $conditions = $queryBuilder->expr()->orX();
+        foreach ($questionTitlesByFormReference as $formReference => $questionTitles) {
+            $conditions->add($queryBuilder->expr()->andX(
+                "proposalForm.reference = :structureFormReference{$formReference}",
+                "question.title IN (:structureQuestionTitles{$formReference})"
+            ));
+            $queryBuilder
+                ->setParameter("structureFormReference{$formReference}", $formReference)
+                ->setParameter("structureQuestionTitles{$formReference}", $questionTitles)
+            ;
+        }
+
+        $responsesByProposalIdAndQuestionTitle = [];
+        foreach ($queryBuilder->andWhere($conditions)->getQuery()->getResult() as $response) {
+            if (!$response instanceof ValueResponse || null === $response->getProposal()) {
+                continue;
+            }
+
+            $responsesByProposalIdAndQuestionTitle[$response->getProposal()->getId()][
+                $response->getQuestion()->getTitle()
+            ] = $response;
+        }
+
+        return $responsesByProposalIdAndQuestionTitle;
+    }
+
     public function getByReplyAsArray($replyId): iterable
     {
         $qb = $this->createQueryBuilder('r')

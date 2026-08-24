@@ -65,6 +65,37 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param array<int, list<int>> $referencesByForm
+     *
+     * @return list<Proposal>
+     */
+    public function findByFormAndReferences(array $referencesByForm): array
+    {
+        if ([] === $referencesByForm) {
+            return [];
+        }
+
+        $queryBuilder = $this->createQueryBuilder('proposal')
+            ->addSelect('proposalForm', 'author')
+            ->innerJoin('proposal.proposalForm', 'proposalForm')
+            ->leftJoin('proposal.author', 'author')
+        ;
+        $conditions = $queryBuilder->expr()->orX();
+        foreach ($referencesByForm as $formReference => $proposalReferences) {
+            $conditions->add($queryBuilder->expr()->andX(
+                "proposalForm.reference = :formReference{$formReference}",
+                "proposal.reference IN (:proposalReferences{$formReference})"
+            ));
+            $queryBuilder
+                ->setParameter("formReference{$formReference}", $formReference)
+                ->setParameter("proposalReferences{$formReference}", array_values(array_unique($proposalReferences)))
+            ;
+        }
+
+        return $queryBuilder->andWhere($conditions)->getQuery()->getResult();
+    }
+
     public static function getOneBySlugCacheKey(string $id)
     {
         return 'SiteImageRepository_getValuesIfEnabled_resultcache_' . $id;
