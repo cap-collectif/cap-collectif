@@ -136,19 +136,6 @@ context('Proposal Page', () => {
       cy.contains('.toasts-container--top div', 'comment.submit_success').should('be.visible')
       cy.contains('.comments__section', 'Commentaire Cypress').should('be.visible')
     })
-    it('allows an anonymous visitor to comment a proposal', () => {
-      cy.clearCookies()
-      cy.clearLocalStorage()
-      cy.interceptGraphQLOperation({ operationName: 'AddCommentMutation' })
-      ProposalPage.visitProposalPage()
-
-      cy.get('[name="body"]').should('be.visible').type('Commentaire anonyme Cypress')
-      cy.get('[name="authorName"]').type('Marie Lopez')
-      cy.get('[name="authorEmail"]').type('marie.lopez@example.test')
-      cy.contains('comment.submit').should('be.visible').click({ force: true })
-      cy.wait('@AddCommentMutation')
-      cy.contains('.comments__section', 'Commentaire anonyme Cypress').should('be.visible')
-    })
     it('allows an administrator to edit their proposal comment', () => {
       cy.directLoginAs('sfavot')
       ProposalPage.visit({

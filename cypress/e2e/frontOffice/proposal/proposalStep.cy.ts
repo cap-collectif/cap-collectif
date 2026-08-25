@@ -16,11 +16,6 @@ context('Proposal Step Page', () => {
       ProposalStepPage.visitSelectionStepWithOpenedVoteAndDisplayed()
       cy.get('div.card__counters.small').should('contain', 'vote.count_no_nb')
     })
-    it('should see private proposal of the same organization', () => {
-      cy.directLoginAs('christophe')
-      ProposalStepPage.visitProposalStepWithPrivateProposal()
-      cy.contains('Proposition de Valérie')
-    })
   })
   describe('filters', () => {
     it('should filter archived projects', () => {

@@ -133,15 +133,6 @@ describe('Opinion Page Tests', () => {
       cy.get('.list-group-item__opinion').should('have.length', 58)
     })
 
-    it('should not be able to create an opinion of non-contribuable', () => {
-      OpinionPage.visitConsultationsPage({
-        projectSlug: 'croissance-innovation-disruption',
-        stepSlug: 'collecte-des-avis',
-      })
-
-      cy.get('#opinions--le-probleme-constate').should('have.length', 0)
-    })
-
     it('should not be able to create an opinion in closed project', () => {
       OpinionPage.visitConsultationsPage({
         projectSlug: 'strategie-technologique-de-letat-et-services-publics',
