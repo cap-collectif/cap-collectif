@@ -228,7 +228,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                 <SidebarButton icon={ICON_NAME.COG_O} text="admin.group.parameters" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin.label.menu_item" href="/admin/capco/app/menuitem/list" />
-                  <SidebarLink text="admin.label.social_network" href="/admin/capco/app/socialnetwork/list" />
+                  <SidebarLink text="admin.label.social_network" href="/admin-next/social-networks" />
                   <SidebarLink
                     text="admin.label.footer_social_network"
                     href="/admin/capco/app/footersocialnetwork/list"

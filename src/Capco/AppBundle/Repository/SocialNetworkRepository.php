@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\SocialNetwork;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -25,5 +26,34 @@ class SocialNetworkRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return SocialNetwork[]
+     */
+    public function getPaginated(?int $offset = null, ?int $limit = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->orderBy('s.position', 'ASC')
+        ;
+
+        if (null !== $offset) {
+            $queryBuilder->setFirstResult($offset);
+        }
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function countAll(): int
+    {
+        return (int) $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

@@ -617,6 +617,12 @@ InternalQuery:
                 description: 'List all HTTP redirects.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\HttpRedirect\\HttpRedirectListResolver", args)'
+            socialNetworks:
+                type: 'SocialNetworkConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all social networks.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SocialNetwork\\SocialNetworkListResolver", args)'
             smsOrders:
                 type: 'SmsOrderConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

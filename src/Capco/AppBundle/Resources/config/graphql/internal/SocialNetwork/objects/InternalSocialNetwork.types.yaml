@@ -1,0 +1,41 @@
+InternalSocialNetwork:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: SocialNetwork
+        description: 'A social network link managed in the admin.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: SocialNetwork
+            title:
+                type: 'String!'
+                description: 'The title of the social network.'
+                resolve: '@=value.getTitle()'
+            link:
+                type: 'String!'
+                description: 'The URL of the social network.'
+                resolve: '@=value.getLink()'
+            position:
+                type: 'Int!'
+                description: 'The display position of the social network.'
+                resolve: '@=value.getPosition()'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the social network is published.'
+                resolve: '@=value.getIsEnabled()'
+            media:
+                type: 'InternalMedia'
+                description: 'The icon of the social network.'
+                resolve: '@=value.getMedia()'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime'
+                resolve: '@=value.getUpdatedAt()'

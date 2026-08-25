@@ -186,7 +186,7 @@
             },
             {
                 "title": "admin.label.social_network",
-                "href": "/admin/capco/app/socialnetwork/list",
+                "href": "/admin-next/social-networks",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

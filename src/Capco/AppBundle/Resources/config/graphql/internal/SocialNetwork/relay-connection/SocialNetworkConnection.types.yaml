@@ -1,0 +1,4 @@
+SocialNetworkConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalSocialNetwork!

@@ -1015,6 +1015,27 @@ InternalMutation:
                     inputType: DeleteHttpRedirectInput
                     payloadType: DeleteHttpRedirectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HttpRedirect\\DeleteHttpRedirectMutation", args)'
+            createSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateSocialNetworkInput
+                    payloadType: CreateSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SocialNetwork\\CreateSocialNetworkMutation", args)'
+            updateSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateSocialNetworkInput
+                    payloadType: UpdateSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SocialNetwork\\UpdateSocialNetworkMutation", args)'
+            deleteSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteSocialNetworkInput
+                    payloadType: DeleteSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SocialNetwork\\DeleteSocialNetworkMutation", args)'
             revokeAnalystsToProposals:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

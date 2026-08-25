@@ -1,0 +1,10 @@
+DeleteSocialNetworkPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedSocialNetworkId:
+                type: 'ID'
+                description: 'The deleted social network ID.'
+            errorCode:
+                type: 'SocialNetworkErrorCode'
+                description: 'The available errors if any.'

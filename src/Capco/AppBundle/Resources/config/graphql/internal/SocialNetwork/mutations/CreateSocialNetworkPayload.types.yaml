@@ -1,0 +1,10 @@
+CreateSocialNetworkPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            socialNetwork:
+                type: 'InternalSocialNetwork'
+                description: 'The created social network.'
+            errorCode:
+                type: 'SocialNetworkErrorCode'
+                description: 'The available errors if any.'

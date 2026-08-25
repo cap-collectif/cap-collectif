@@ -1,0 +1,22 @@
+UpdateSocialNetworkInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the social network to update.'
+            title:
+                type: 'String!'
+                description: 'The title of the social network.'
+            link:
+                type: 'String!'
+                description: 'The URL of the social network.'
+            position:
+                type: 'Int!'
+                description: 'The display position of the social network.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the social network is published.'
+            media:
+                type: 'ID'
+                description: 'The id of the media to use as icon.'

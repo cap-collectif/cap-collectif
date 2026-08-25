@@ -1,0 +1,7 @@
+DeleteSocialNetworkInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The social network ID.'

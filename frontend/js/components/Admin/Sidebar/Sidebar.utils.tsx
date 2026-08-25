@@ -40,7 +40,7 @@ export const URL_MAP = {
   reglages: [
     '/admin/locale/',
     '/admin/capco/app/menuitem/',
-    '/admin/capco/app/socialnetwork/',
+    '/admin-next/social-networks',
     '/admin/capco/app/footersocialnetwork/',
     '/admin-next/geographical-areas',
     '/admin/map/',

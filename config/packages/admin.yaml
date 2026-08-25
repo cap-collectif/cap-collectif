@@ -358,19 +358,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\SocialNetworkAdmin:
-        arguments: [~, Capco\AppBundle\Entity\SocialNetwork, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.social_network,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\SiteImageAdmin:
         arguments: [~, Capco\AppBundle\Entity\SiteImage, Capco\AdminBundle\Controller\SiteParameterController]
         tags:

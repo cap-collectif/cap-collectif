@@ -4614,6 +4614,33 @@ type CreateSmsOrderPayload {
   clientMutationId: String
 }
 
+input CreateSocialNetworkInput {
+  """The title of the social network."""
+  title: String!
+
+  """The URL of the social network."""
+  link: String!
+
+  """The display position of the social network."""
+  position: Int!
+
+  """Whether the social network is published."""
+  isEnabled: Boolean = false
+
+  """The id of the media to use as icon."""
+  media: ID
+  clientMutationId: String
+}
+
+type CreateSocialNetworkPayload {
+  """The created social network."""
+  socialNetwork: SocialNetwork
+
+  """The available errors if any."""
+  errorCode: SocialNetworkErrorCode
+  clientMutationId: String
+}
+
 input CreateUserIdentificationCodeListInput {
   """Name of the list to create."""
   name: String!
@@ -6286,6 +6313,21 @@ type DeleteSmsOrderPayload {
 
   """The error generated, if any."""
   errorCode: DeleteSmsOrderErrorCode
+  clientMutationId: String
+}
+
+input DeleteSocialNetworkInput {
+  """The social network ID."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSocialNetworkPayload {
+  """The deleted social network ID."""
+  deletedSocialNetworkId: ID
+
+  """The available errors if any."""
+  errorCode: SocialNetworkErrorCode
   clientMutationId: String
 }
 
@@ -9516,6 +9558,9 @@ type Mutation {
   createHttpRedirect(input: CreateHttpRedirectInput!): CreateHttpRedirectPayload
   updateHttpRedirect(input: UpdateHttpRedirectInput!): UpdateHttpRedirectPayload
   deleteHttpRedirect(input: DeleteHttpRedirectInput!): DeleteHttpRedirectPayload
+  createSocialNetwork(input: CreateSocialNetworkInput!): CreateSocialNetworkPayload
+  updateSocialNetwork(input: UpdateSocialNetworkInput!): UpdateSocialNetworkPayload
+  deleteSocialNetwork(input: DeleteSocialNetworkInput!): DeleteSocialNetworkPayload
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
   assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
@@ -14990,6 +15035,17 @@ type Query {
     first: Int = 100
   ): HttpRedirectConnection!
 
+  """List all social networks."""
+  socialNetworks(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): SocialNetworkConnection!
+
   """Get list of sms orders."""
   smsOrders(
     """
@@ -18255,6 +18311,52 @@ enum SmsOrdersFilters {
   UNPROCESSED
 }
 
+"""A social network link managed in the admin."""
+type SocialNetwork implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The title of the social network."""
+  title: String!
+
+  """The URL of the social network."""
+  link: String!
+
+  """The display position of the social network."""
+  position: Int!
+
+  """Whether the social network is published."""
+  isEnabled: Boolean!
+
+  """The icon of the social network."""
+  media: Media
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A connection to a list of items."""
+type SocialNetworkConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SocialNetworkEdge]
+}
+
+"""An edge in a connection."""
+type SocialNetworkEdge {
+  """The item at the end of the edge."""
+  node: SocialNetwork!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for social networks."""
+enum SocialNetworkErrorCode {
+  NOT_FOUND
+}
+
 """A source"""
 type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor {
   """Whether or not the user has report the source."""
@@ -21402,6 +21504,36 @@ type UpdateSiteParameterPayload {
 
   """The error generated, if any."""
   errorCode: UpdateSiteParameterErrorCode
+  clientMutationId: String
+}
+
+input UpdateSocialNetworkInput {
+  """The id of the social network to update."""
+  id: ID!
+
+  """The title of the social network."""
+  title: String!
+
+  """The URL of the social network."""
+  link: String!
+
+  """The display position of the social network."""
+  position: Int!
+
+  """Whether the social network is published."""
+  isEnabled: Boolean!
+
+  """The id of the media to use as icon."""
+  media: ID
+  clientMutationId: String
+}
+
+type UpdateSocialNetworkPayload {
+  """The updated social network."""
+  socialNetwork: SocialNetwork
+
+  """The available errors if any."""
+  errorCode: SocialNetworkErrorCode
   clientMutationId: String
 }
 

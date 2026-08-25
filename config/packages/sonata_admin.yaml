@@ -60,7 +60,6 @@ sonata_admin:
             admin.group.parameters:
                 items:
                     - Capco\AdminBundle\Admin\MenuItemAdmin
-                    - Capco\AdminBundle\Admin\SocialNetworkAdmin
                     - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
                     - Capco\AdminBundle\Admin\GlobalDistrictAdmin
                     - Capco\AdminBundle\Admin\FontAdmin

@@ -1,0 +1,8 @@
+SocialNetworkErrorCode:
+    type: enum
+    config:
+        name: SocialNetworkErrorCode
+        description: 'The available errors for social networks.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\SocialNetworkErrorCode::NOT_FOUND
