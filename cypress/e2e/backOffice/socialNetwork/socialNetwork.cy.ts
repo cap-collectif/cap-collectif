@@ -1,6 +1,9 @@
 describe('Social networks back office', () => {
   const visitSocialNetworksPage = () => {
-    cy.visit('/admin-next/social-networks')
+    // A non-admin account gets redirected to `/admin-next/403`, which responds with an actual
+    // HTTP 403 status code (see `pages/admin-next/403.tsx`) — disable the status check so this
+    // helper still works for the "redirected away" test case.
+    cy.visit('/admin-next/social-networks', { failOnStatusCode: false })
   }
 
   const fillVisibleField = (fieldId: string, value: string) => {
@@ -18,7 +21,8 @@ describe('Social networks back office', () => {
   it('redirects a non-ROLE_ADMIN account away from the social networks page', () => {
     cy.directLoginAs('project_owner')
     visitSocialNetworksPage()
-    cy.url().should('not.contain', '/admin-next/social-networks')
+    cy.url().should('contain', '/admin-next/403')
+    cy.contains('unauthorized-access').should('be.visible')
   })
 
   it('creates, edits and deletes a social network through the back office', () => {
