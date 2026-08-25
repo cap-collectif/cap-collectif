@@ -51,15 +51,7 @@ Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre
 
 Voir `.circleci/check-cypress-spec-coverage.sh`. Si un nouveau dossier de premier niveau est ajouté sous `cypress/e2e`, il faut à la fois créer un job `e2e-cypress-*` dédié et l'ajouter à la liste `KNOWN_DIRS` du script.
 
-#### 5. Arrêt de la CI sur les branches ne contenant que des changements de documentation
-
-**Décision** : Le job `prepare` compare la branche à `origin/preprod` (`git diff --name-only origin/preprod...HEAD`). Si tous les fichiers modifiés correspondent aux dossiers/fichiers `ADR/`, `doc/`, `.contextive/`, `crontab` ou à des fichiers `*.md`, la CI s'arrête immédiatement via `circleci-agent step halt` (le job et le workflow sont marqués comme réussis, aucun job suivant ne s'exécute).
-
-**Raison** : Ces fichiers n'ont aucun impact sur le code applicatif ; inutile de consommer des minutes CI (build, tests, e2e) pour les valider.
-
-Voir `.circleci/check-branch-changes.sh`. Ce check est désactivé sur `preprod` et `master` (le diff contre `origin/preprod` y serait vide et arrêterait la CI à tort). Le job `check-cypress-spec-coverage` ne dépend pas de `prepare` et continue de s'exécuter indépendamment (coût négligeable).
-
-#### 6. Jobs non exécutés sur `master`
+#### 5. Jobs non exécutés sur `master`
 
 **Décision** : Certains jobs peuvent être désactivés sur `master` (ex: `typecheck-js`, `unit-js`, `unit-php`, `build-production-image`).
 
@@ -123,5 +115,4 @@ Validé
 - [CircleCI - Automatic reruns](https://circleci.com/docs/guides/orchestrate/automatic-reruns/)
 - Issue flaky tests : [#17159](https://github.com/cap-collectif/platform/issues/17159)
 - PR découpage Cypress : [#18869](https://github.com/cap-collectif/platform/issues/18869)
-- Issue arrêt CI sur changements de documentation : [#18875](https://github.com/cap-collectif/platform/issues/18875)
 - PR arrêt CI sur échec : [#18873](https://github.com/cap-collectif/platform/issues/18873)
