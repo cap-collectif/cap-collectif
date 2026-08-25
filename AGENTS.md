@@ -39,6 +39,7 @@ Symlinks: `CLAUDE.md` and `GEMINI.md` point to this file.
 | `001-custom_code.md` | Custom code guidelines |
 | `001-translation_keys_naming_convention.md` | Translation key naming conventions |
 | `001-map_stack_maplibre_openstreetmap.md` | Migration from Mapbox to MapLibre/OpenStreetMap |
+| `001-admin_next_authorization_errors.md` | admin-next 403/access-denied handling for auth/role failures |
 
 Each ADR contains: Context, Decision, Alternatives considered, and Consequences. Templates in `ADR/adr-docs/`.
 

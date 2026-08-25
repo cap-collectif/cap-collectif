@@ -42,25 +42,38 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
      `ROLE_ADMIN` : il autorise admin **OU** project admin **OU** organization member **OU** mediator — un
      périmètre bien plus large. L'utiliser seul ne suffit donc **pas** à protéger une page qui, sous Sonata,
      exigeait strictement `ROLE_ADMIN` (ou plus).
-   - `rolesRequired` dans `SideBarItems.json` **ne sert qu'à l'affichage du menu** (voir
-     `SideBar.utils.ts`/`getSideBarItemsFiltered`) — ce n'est **pas** un contrôle d'accès. Une utilisatrice qui
-     connaît l'URL directe contourne entièrement ce filtre.
-   - L'endroit naturel pour une vraie restriction est le champ GraphQL concerné (`access:` dans les yaml,
-     ex: `access: "@=hasRole('ROLE_ADMIN')"` sur une mutation). **Mais avant d'ajouter/modifier un `access:`
-     sur une query ou une mutation existante, chercher TOUS ses usages** (`grep` sur `frontend/js/` **et**
-     `admin-next/`, pas seulement le nouveau composant qu'on écrit) : certains champs sont volontairement
-     partagés avec le front-office public (ex: `projectTypes` alimente aussi le filtre public de la page
-     `/projects`, accessible aux visiteurs non connectés) — les restreindre casserait cet usage légitime. En
-     général la **mutation** (écriture) peut être restreinte sans risque, alors que la **query** (lecture)
-     partagée doit souvent rester ouverte si la donnée est déjà publique ailleurs.
-   - Si la query/mutation GraphQL doit rester partagée mais que la **page** admin-next exige un rôle plus
-     strict que ce que couvre `withPageAuthRequired`, ajouter un garde-fou au niveau de la page : composer
-     `withPageAuthRequired` dans `getServerSideProps` puis vérifier le rôle voulu sur `viewerSession` (ex:
-     `viewerSession.isAdmin`), avec redirection manuelle si besoin — attention, `withPageAuthRequired` ne
-     retourne pas le format Next.js `{ redirect: {...} }` mais gère la réponse lui-même
-     (`res.writeHead(302, { Location: '/' }); res.end(); return { props: {} }`), il faut donc composer en
-     conséquence plutôt que retourner un objet `redirect` classique. Voir l'exemple dans
-     `pages/admin-next/project-types.tsx`.
+   - `rolesRequired` dans `SideBarItems.json` pilotait historiquement **seulement l'affichage du menu**
+     (voir `SideBar.utils.ts`/`getSideBarItemsFiltered`), pas un contrôle d'accès — une utilisatrice qui
+     connaît l'URL directe pouvait contourner ce filtre. **Ce n'est plus le cas** : `withPageAuthRequired`
+     (dans `admin-next/utils/withPageAuthRequired.ts`) relit désormais lui-même le `rolesRequired` de la
+     page demandée dans `SideBarItems.json` (via son URL) et l'applique côté serveur, en plus du check
+     générique. **Résultat : aucune page n'a rien à faire de spécial** — `export const getServerSideProps =
+     withPageAuthRequired` suffit partout, comme avant. Il suffit que l'entrée `rolesRequired` de la page
+     dans `SideBarItems.json` soit correcte (`["admin"]` ou `["superAdmin"]`) pour que la restriction soit
+     réellement appliquée, pas seulement visuelle. Le rôle effectif d'une page est l'**union** de son propre
+     `rolesRequired` et de celui de son groupe englobant (ex: le groupe "Utilisateurs" est `["admin"]`, donc
+     `/admin-next/user-types` est protégée même si son propre `rolesRequired` est `[]`) — ça correspond à ce
+     que le menu affiche réellement (un item n'est visible que si le groupe **et** l'item l'autorisent).
+     - `withPageAuthRequired` gère aussi, automatiquement, le cas où le viewer n'a pas (ou plus) accès à la
+       page demandée — **rien à faire dans la page migrée**. Deux redirections possibles, chacune vers une
+       page qui doit vivre sous `/admin-next/` et jamais à la racine (le reverse-proxy ne route que ces
+       chemins vers l'app Next.js, tout le reste tombe sur Symfony) :
+       - rôle insuffisant pour cette page précise, mais accès back-office valide par ailleurs →
+         `/admin-next/403` (layout back-office).
+       - aucun accès back-office exploitable (non connectée, ou connectée sans rôle BO) → page d'accueil
+         publique (`/`).
+       Voir `ADR/001-admin_next_authorization_errors.md` pour le détail et la justification de cette
+       distinction.
+   - L'endroit naturel pour une vraie restriction **côté GraphQL** (utile si la query/mutation n'est pas déjà
+     couverte par le point précédent, ou si on veut protéger l'API elle-même) est le champ concerné
+     (`access:` dans les yaml, ex: `access: "@=hasRole('ROLE_ADMIN')"` sur une mutation). **Mais avant
+     d'ajouter/modifier un `access:` sur une query ou une mutation existante, chercher TOUS ses usages**
+     (`grep` sur `frontend/js/` **et** `admin-next/`, pas seulement le nouveau composant qu'on écrit) :
+     certains champs sont volontairement partagés avec le front-office public (ex: `projectTypes` alimente
+     aussi le filtre public de la page `/projects`, accessible aux visiteurs non connectés) — les restreindre
+     casserait cet usage légitime. En général la **mutation** (écriture) peut être restreinte sans risque,
+     alors que la **query** (lecture) partagée doit souvent rester ouverte si la donnée est déjà publique
+     ailleurs.
 5. **Repérer une page `admin-next/` déjà migrée avec une structure similaire** pour copier le pattern plutôt
    que d'en inventer un nouveau. Voir la section "Patterns de référence" ci-dessous pour choisir le bon
    template selon la forme de la donnée (liste plate vs paginée, avec/sans traductions, avec/sans couleur...).
@@ -75,7 +88,7 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
      nouveau `href` Next.js (`/admin-next/...`) pour l'entrée de menu correspondante.
    - `frontend/js/components/Admin/Sidebar/Sidebar.tsx` : menu latéral **legacy**, affiché sur les pages
      encore rendues par Sonata/Twig. Il faut y mettre à jour le `href` du `<SidebarLink>` correspondant de
-     la même façon (ex: `<SidebarLink text="admin.label.pages.types" href="/admin-next/project-types" />`).
+     la même façon (ex: `<SidebarLink text="admin.label.user_type" href="/admin-next/user-types" />`).
    - `frontend/js/components/Admin/Sidebar/Sidebar.utils.tsx` (`URL_MAP`) : ce fichier liste, par groupe de
      menu (`projets`, `reglages`, etc.), les préfixes d'URL permettant au menu legacy de savoir quel
      sous-menu ouvrir par défaut selon l'URL courante (`window.location.href.includes(val)`). Remplacer
@@ -168,7 +181,7 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Liste plate non paginée avec action d'édition en pencil** (~ce que fait `ProjectType`, `HttpRedirect`) :
   `admin-next/components/BackOffice/Redirection/CustomRedirection.tsx` — `Table` + `Table.Thead`/`Table.Th`
   par colonne + `Table.Tbody`/`Table.Tr`/`Table.Td` + `ButtonQuickAction icon={CapUIIcon.Pencil}` en dernière
-  colonne. C'est le pattern utilisé pour `ProjectTypesList.tsx`.
+  colonne.
 - **Liste de cards à un seul "label"** (ex: `GlobalDistrict`) : `GeographicalAreasList.tsx` — `ListCard` +
   `ListCard.Item` + `ButtonQuickAction` (pencil/trash) dans un `ButtonGroup`.
 - **Liste paginée (Relay connection) avec recherche / infinite scroll** : `ProjectList.tsx` / `PostList.tsx`
@@ -183,6 +196,8 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`.
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
   `Layout navTitle={...}` + `Suspense fallback={<Spinner .../>}` + `export const getServerSideProps = withPageAuthRequired`.
+  Le rôle requis (le cas échéant) se règle dans `rolesRequired` de `SideBarItems.json`, pas dans le code de
+  la page — voir l'étape 4 de la méthodologie ci-dessus.
 - **Bouton booléen (activer/désactiver un champ simple)** : ne pas faire un bouton texte "Activer"/"Désactiver" —
   utiliser le composant `Switch` de `@cap-collectif/ui` (`checked={value} onChange={() => mutation(...)}`).
   Deux variantes possibles selon la consigne :
