@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   CapUIFontSize,
   CapUIIcon,
   CapUIIconSize,
@@ -10,6 +11,7 @@ import {
   Heading,
   Icon,
   Modal,
+  Text,
 } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import useIsMobile from '@shared/hooks/useIsMobile'
@@ -20,6 +22,7 @@ import CreateProposalMutation from '@mutations/CreateProposalMutation'
 import { ProposalFormModalThemesQuery } from '@relay/ProposalFormModalThemesQuery.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CookieMonster from '@shared/utils/CookieMonster'
+import { openChartModal } from '@shared/register/ChartModal'
 import { isResponseValueEmpty } from '@shared/utils/isResponseValueEmpty'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
@@ -232,7 +235,8 @@ const ProposalFormModal: React.FC<Props> = props => {
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
   const participantToken = viewerSession ? undefined : CookieMonster.getParticipantCookie()
   const emailToken = React.useMemo(
-    () => (typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token') ?? undefined),
+    () =>
+      typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token') ?? undefined,
     [],
   )
 
@@ -734,7 +738,13 @@ const ProposalFormModal: React.FC<Props> = props => {
             }
 
             return (
-              <QuestionField key={question.id} question={question} name={`responses.${idx}.value`} control={control} />
+              <QuestionField
+                key={question.id}
+                question={question}
+                name={`responses.${idx}.value`}
+                control={control}
+                defaultLocale={defaultLocale}
+              />
             )
           })}
 
@@ -750,33 +760,60 @@ const ProposalFormModal: React.FC<Props> = props => {
         </Flex>
       </Modal.Body>
       <Modal.Footer>
-        {canSaveDraft ? (
-          <Button
-            type="button"
-            variantSize="big"
-            variant="secondary"
-            isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
-            onClick={() => {
-              submitButtonRef.current = 'save-as-draft'
-              handleSaveAsDraft(hide)
-            }}
-          >
-            {intl.formatMessage({ id: 'global.save_as_draft' })}
-          </Button>
-        ) : null}
+        <Flex direction="column" gap={2} align="flex-end">
+          <ButtonGroup direction={['column', 'row']} width={['100%', 'auto']}>
+            {canSaveDraft ? (
+              <Button
+                type="button"
+                variantSize="big"
+                variant="secondary"
+                isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
+                onClick={() => {
+                  submitButtonRef.current = 'save-as-draft'
+                  handleSaveAsDraft(hide)
+                }}
+              >
+                {intl.formatMessage({ id: 'global.save_as_draft' })}
+              </Button>
+            ) : null}
 
-        <Button
-          type="button"
-          variantSize="big"
-          variant="primary"
-          isLoading={isSubmitting && submitButtonRef.current === 'publish'}
-          onClick={() => {
-            submitButtonRef.current = 'publish'
-            handlePublish(hide)
-          }}
-        >
-          {intl.formatMessage({ id: mode === 'edit' ? 'global.publish' : 'front.collect.submit-proposal' })}
-        </Button>
+            <Button
+              type="button"
+              variantSize="big"
+              variant="primary"
+              width={['100%', 'auto']}
+              isLoading={isSubmitting && submitButtonRef.current === 'publish'}
+              onClick={() => {
+                submitButtonRef.current = 'publish'
+                handlePublish(hide)
+              }}
+            >
+              {intl.formatMessage({ id: mode === 'edit' ? 'global.publish' : 'front.collect.submit-proposal' })}
+            </Button>
+          </ButtonGroup>
+
+          {mode === 'create' && !viewerSession?.id ? (
+            <Text fontSize="sm">
+              {intl.formatMessage(
+                { id: 'by-participating-i-accept-the-chart' },
+                {
+                  chartLink: (
+                    <Box
+                      as="button"
+                      type="button"
+                      fontSize="sm"
+                      onClick={() => dispatchEvent(new Event(openChartModal))}
+                    >
+                      <Text as="span" fontWeight={600} sx={{ textDecoration: 'underline' }}>
+                        {intl.formatMessage({ id: 'the-charter' })}
+                      </Text>
+                    </Box>
+                  ),
+                },
+              )}
+            </Text>
+          ) : null}
+        </Flex>
       </Modal.Footer>
     </FormProvider>
   )

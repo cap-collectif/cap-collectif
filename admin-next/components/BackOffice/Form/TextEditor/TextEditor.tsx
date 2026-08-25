@@ -29,6 +29,7 @@ export type TextEditorProps = FlexProps & {
     submit?: string
   }
   limitChars?: number
+  clientConfig?: boolean
   advancedEditor?: boolean
   noModalAdvancedEditor?: boolean
   variantColor?: InputProps['variantColor']
@@ -43,6 +44,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
   platformLanguage = 'fr',
   buttonLabels,
   limitChars,
+  clientConfig,
   advancedEditor = true,
   noModalAdvancedEditor = false,
   disabled,
@@ -81,6 +83,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
             value={value}
             platformLanguage={platformLanguage}
             limitChars={limitChars}
+            clientConfig={clientConfig}
             disabled={disabled}
           />
         </>
@@ -125,6 +128,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                       value={value}
                       platformLanguage={platformLanguage}
                       limitChars={limitChars}
+                      clientConfig={clientConfig}
                       disabled={disabled}
                     />
                   </Modal.Body>
@@ -175,6 +179,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                   selectedLanguage={isOpen || reloadContent ? '_suspend' : selectedLanguage}
                   platformLanguage={platformLanguage}
                   limitChars={limitChars}
+                  clientConfig={clientConfig}
                   disabled={disabled}
                   variantColor={variantColor}
                 />

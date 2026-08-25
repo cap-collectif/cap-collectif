@@ -31,6 +31,7 @@ type Props = {
   selectedLanguage?: string
   placeholder?: string
   limitChars?: number
+  clientConfig?: boolean
   variantColor?: InputProps['variantColor']
 }
 
@@ -63,6 +64,30 @@ const limitedConf = [
   'fullsize',
 ]
 
+const clientConfig = [
+  'bold',
+  'italic',
+  'underline',
+  'strikethrough',
+  'eraser',
+  '|',
+  'ul',
+  'ol',
+  '|',
+  'left',
+  'center',
+  'right',
+  'justify',
+  '|',
+  'fontsize',
+  'brush',
+  'paragraph',
+  '|',
+  'image',
+  'video',
+  'link',
+]
+
 const getConfig = (
   platformLanguage: string | null,
   placeholder: string,
@@ -71,9 +96,12 @@ const getConfig = (
   intl: IntlShape,
   limitChars?: number,
   disabled?: boolean,
+  isClientConfig = false,
 ) => {
   const buttons = limitChars
     ? limitedConf
+    : isClientConfig
+    ? clientConfig
     : [
         'bold',
         'italic',
@@ -188,6 +216,7 @@ const Jodit = ({
   selectedLanguage,
   placeholder = '',
   limitChars,
+  clientConfig: isClientConfig = false,
   disabled,
   variantColor = 'default',
 }: Props) => {
@@ -225,8 +254,8 @@ const Jodit = ({
     : {}
 
   const config = useMemo(
-    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, intl, limitChars, disabled),
-    [platformLanguage],
+    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, intl, limitChars, disabled, isClientConfig),
+    [platformLanguage, placeholder, textAreaOnly, intl, limitChars, disabled, isClientConfig],
   )
 
   return useMemo(

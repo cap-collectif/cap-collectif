@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, forwardRef } from 'react'
+import { useEffect, useRef, useState, forwardRef } from 'react'
 import { Uploader as CapUploader, InfoMessage, FileList } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import {
@@ -19,6 +19,11 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
     const intl = useIntl()
     const [error, setError] = useState<UploaderError>([])
     const [warning, setWarning] = useState<UploaderWarning>(null)
+    const uploadedFilesRef = useRef(value)
+
+    useEffect(() => {
+      uploadedFilesRef.current = value
+    }, [value])
 
     const wordingUploader = {
       uploaderPrompt: intl.formatMessage({ id: 'uploader-prompt' }, { count: multiple ? 2 : 1 }),
@@ -43,8 +48,15 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
               const filesUploaded = await uploadFiles(args[0], uploadURI)
 
               if (onChange) {
-                if (multiple) onChange(filesUploaded)
-                else onChange(filesUploaded[0])
+                if (multiple) {
+                  const allFiles = [
+                    ...(Array.isArray(uploadedFilesRef.current) ? uploadedFilesRef.current : []),
+                    ...filesUploaded,
+                  ]
+                  const files = props.maxFiles ? allFiles.slice(0, props.maxFiles) : allFiles
+                  uploadedFilesRef.current = files
+                  onChange(files)
+                } else onChange(filesUploaded[0])
               }
             }
 

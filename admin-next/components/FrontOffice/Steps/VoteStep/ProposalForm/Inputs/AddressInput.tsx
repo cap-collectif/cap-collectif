@@ -44,7 +44,7 @@ const AddressInput: React.FC<Props> = ({
 
   return (
     <>
-      <FormControl name="address" control={control}>
+      <FormControl name="address" control={control} mb={showLocateButton ? 1 : 4}>
         <FormLabel label={intl.formatMessage({ id: 'proposal_form.address' })} htmlFor="address" />
         {isLoaded ? (
           <FieldInput

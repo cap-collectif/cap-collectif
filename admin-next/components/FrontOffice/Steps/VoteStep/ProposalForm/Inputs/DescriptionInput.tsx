@@ -21,6 +21,7 @@ const DescriptionInput: React.FC<Props> = ({ descriptionMandatory, descriptionHe
         placeholder={intl.formatMessage({ id: 'admin.content.start-writing' })}
         required={descriptionMandatory}
         noModalAdvancedEditor
+        clientConfig
         platformLanguage={defaultLocale}
         selectedLanguage={defaultLocale}
       />
