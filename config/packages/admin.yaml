@@ -610,19 +610,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\ProjectTypeAdmin:
-        arguments: [~, Capco\AppBundle\Entity\ProjectType, Capco\AdminBundle\Controller\ProjectTypeController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.pages.types,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     sonata.admin.action.retrieve_autocomplete_items:
         class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
         autowire: true

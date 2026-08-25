@@ -1,0 +1,9 @@
+UpdateProjectTypeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Updates a project type color'
+        fields:
+            id:
+                type: 'ID!'
+            color:
+                type: 'String!'

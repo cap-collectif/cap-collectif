@@ -813,6 +813,13 @@ InternalMutation:
                     inputType: DeleteProjectInput
                     payloadType: DeleteProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProjectMutation", args, getUser())'
+            updateProjectType:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProjectTypeInput
+                    payloadType: UpdateProjectTypePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectTypeMutation", args)'
             # Project District
             createGlobalDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"

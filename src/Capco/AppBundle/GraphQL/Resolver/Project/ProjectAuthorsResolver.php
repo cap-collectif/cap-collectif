@@ -22,13 +22,10 @@ class ProjectAuthorsResolver implements QueryInterface
 
     public function __invoke(Argument $args, ?User $user): array
     {
-        $totalCount = 0;
-        $orderBy = $args->offsetGet('orderBy');
-
         try {
             $authorsIds = array_map(
                 fn ($item) => $item['oid'] ?? $item['uid'],
-                $this->projectRepository->getProjectAuthorsId($user, $orderBy)
+                $this->projectRepository->getProjectAuthorsId($user)
             );
 
             return $this->getHydratedResults($authorsIds);

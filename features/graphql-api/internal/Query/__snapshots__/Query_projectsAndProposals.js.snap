@@ -125,80 +125,80 @@ exports[`Internal|Query projects and proposals lists all project types 1`] = `
 Object {
   "projectTypes": Array [
     Object {
+      "id": "16",
+      "title": "project.types.callForApplications",
+    },
+    Object {
       "id": "1",
       "title": "project.types.callForProject",
-    },
-    Object {
-      "id": "2",
-      "title": "global.consultation",
-    },
-    Object {
-      "id": "3",
-      "title": "project.types.interpellation",
-    },
-    Object {
-      "id": "4",
-      "title": "project.types.participatoryBudgeting",
-    },
-    Object {
-      "id": "5",
-      "title": "project.types.petition",
-    },
-    Object {
-      "id": "6",
-      "title": "project.types.publicInquiry",
-    },
-    Object {
-      "id": "7",
-      "title": "global.questionnaire",
-    },
-    Object {
-      "id": "8",
-      "title": "project.types.suggestionBox",
-    },
-    Object {
-      "id": "9",
-      "title": "global.debate",
-    },
-    Object {
-      "id": "10",
-      "title": "voting",
-    },
-    Object {
-      "id": "11",
-      "title": "project.types.questionAnswer",
-    },
-    Object {
-      "id": "12",
-      "title": "project.types.participatoryFunding",
-    },
-    Object {
-      "id": "13",
-      "title": "project.types.mutualHelp",
     },
     Object {
       "id": "14",
       "title": "project.types.concertation",
     },
     Object {
+      "id": "2",
+      "title": "global.consultation",
+    },
+    Object {
+      "id": "9",
+      "title": "global.debate",
+    },
+    Object {
       "id": "15",
       "title": "project.types.inquiry",
     },
     Object {
-      "id": "16",
-      "title": "project.types.callForApplications",
+      "id": "3",
+      "title": "project.types.interpellation",
+    },
+    Object {
+      "id": "13",
+      "title": "project.types.mutualHelp",
+    },
+    Object {
+      "id": "4",
+      "title": "project.types.participatoryBudgeting",
+    },
+    Object {
+      "id": "12",
+      "title": "project.types.participatoryFunding",
+    },
+    Object {
+      "id": "5",
+      "title": "project.types.petition",
+    },
+    Object {
+      "id": "19",
+      "title": "project.types.publicConsultation",
+    },
+    Object {
+      "id": "6",
+      "title": "project.types.publicInquiry",
+    },
+    Object {
+      "id": "11",
+      "title": "project.types.questionAnswer",
+    },
+    Object {
+      "id": "7",
+      "title": "global.questionnaire",
     },
     Object {
       "id": "17",
       "title": "project.types.quizz",
     },
     Object {
+      "id": "8",
+      "title": "project.types.suggestionBox",
+    },
+    Object {
       "id": "18",
       "title": "project.types.testimony",
     },
     Object {
-      "id": "19",
-      "title": "project.types.publicConsultation",
+      "id": "10",
+      "title": "voting",
     },
   ],
 }
@@ -208,19 +208,19 @@ exports[`Internal|Query projects and proposals lists project authors 1`] = `
 Object {
   "projectAuthors": Array [
     Object {
+      "username": "emailingadmin",
+    },
+    Object {
       "username": "lbrunet",
-    },
-    Object {
-      "username": "sfavot",
-    },
-    Object {
-      "username": "xlacot",
     },
     Object {
       "username": "admin",
     },
     Object {
-      "username": "welcomattic",
+      "username": "Vince",
+    },
+    Object {
+      "username": "Jpec",
     },
     Object {
       "username": "spyl",
@@ -229,13 +229,13 @@ Object {
       "username": "Théo QP",
     },
     Object {
-      "username": "Jpec",
+      "username": "welcomattic",
     },
     Object {
-      "username": "Vince",
+      "username": "xlacot",
     },
     Object {
-      "username": "emailingadmin",
+      "username": "sfavot",
     },
     Object {
       "username": "GIEC",

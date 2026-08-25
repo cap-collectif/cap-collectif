@@ -13,7 +13,7 @@ context('Projects Features', () => {
         '/admin-next/forms',
         '/admin/capco/app/sourcecategory/list',
         '/admin/capco/app/consultation/list',
-        '/admin/capco/app/projecttype/list',
+        '/admin-next/project-types',
         '/admin/capco/app/proposalform/list',
       ]
 

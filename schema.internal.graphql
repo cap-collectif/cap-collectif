@@ -9532,6 +9532,7 @@ type Mutation {
   duplicateProject(input: DuplicateProjectInput!): DuplicateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
+  updateProjectType(input: UpdateProjectTypeInput!): UpdateProjectTypePayload
   createGlobalDistrict(input: CreateGlobalDistrictInput!): CreateGlobalDistrictPayload
   deleteGlobalDistrict(input: DeleteGlobalDistrictInput!): DeleteGlobalDistrictPayload
   updateGlobalDistrict(input: UpdateGlobalDistrictInput!): CreateGlobalDistrictPayload
@@ -20913,6 +20914,18 @@ type UpdateProjectSlugPayload {
 
   """Available errors for updateProjectSlug mutation."""
   errorCode: UpdateProjectSlugErrorCode
+  clientMutationId: String
+}
+
+input UpdateProjectTypeInput {
+  id: ID!
+  color: String!
+  clientMutationId: String
+}
+
+type UpdateProjectTypePayload {
+  """The updated project type"""
+  projectType: ProjectType!
   clientMutationId: String
 }
 

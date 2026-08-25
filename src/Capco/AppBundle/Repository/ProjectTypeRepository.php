@@ -14,6 +14,7 @@ class ProjectTypeRepository extends EntityRepository
     public function findAll()
     {
         return $this->createQueryBuilder('p')
+            ->orderBy('p.slug', 'ASC')
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::findAllCacheKey())

@@ -1,0 +1,7 @@
+UpdateProjectTypePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            projectType:
+                type: 'InternalProjectType!'
+                description: 'The updated project type'

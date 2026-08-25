@@ -29,7 +29,7 @@ export const URL_MAP = {
     '/admin/capco/app/consultation/',
     '/admin/capco/app/proposalform/',
     '/admin/capco/app/questionnaire/',
-    '/admin/capco/app/projecttype/',
+    '/admin-next/project-types',
   ],
   utilisateurs: [
     '/admin/capco/user/user/',

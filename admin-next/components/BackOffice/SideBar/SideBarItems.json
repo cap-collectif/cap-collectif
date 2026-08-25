@@ -122,7 +122,7 @@
             },
             {
                 "title": "admin.label.pages.types",
-                "href": "/admin/capco/app/projecttype/list",
+                "href": "/admin-next/project-types",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             }

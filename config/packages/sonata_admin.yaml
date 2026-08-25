@@ -52,7 +52,6 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\ConsultationAdmin
                     - Capco\AdminBundle\Admin\ProposalFormAdmin
                     - Capco\AdminBundle\Admin\QuestionnaireAdmin
-                    - Capco\AdminBundle\Admin\ProjectTypeAdmin
             sonata.admin.group.user:
                 items:
                     - Capco\AdminBundle\Admin\UserAdmin

@@ -248,6 +248,7 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
             ->leftJoin('pa.user', 'u')
             ->andWhere('u.id IS NOT NULL OR organization.id IS NOT NULL')
             ->orderBy('pa.createdAt', $order)
+            ->addOrderBy('pa.id', $order)
         ;
 
         return $qb->getQuery()->execute();
@@ -374,6 +375,7 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
             ->leftJoin('p.projectType', 'pt')
             ->where('p IN (:projects)')
             ->andWhere('p.projectType IS NOT NULL')
+            ->orderBy('p.projectType', 'ASC')
             ->setParameter('projects', $projects)
             ->getQuery()
             ->useQueryCache(true)
