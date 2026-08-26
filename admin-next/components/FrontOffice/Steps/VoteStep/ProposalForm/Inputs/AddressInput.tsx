@@ -9,6 +9,7 @@ import { useIntl } from 'react-intl'
 import { FormValues } from '../ProposalFormModal.type'
 
 const LocateOnMapModal = dynamic(() => import('../LocateOnMapModal'), { ssr: false })
+const AddressMapPreview = dynamic(() => import('./AddressMapPreview'), { ssr: false })
 
 const GOOGLE_MAPS_LIBRARIES: 'places'[] = ['places']
 
@@ -16,9 +17,14 @@ type Props = {
   control: Control<FormValues>
   addressHelpText: string | null
   showLocateButton: boolean
-  onAddressChange?: (address: AddressComplete) => void
+  onAddressChange?: (address: AddressComplete | null) => void
   currentAddress?: AddressComplete | null
+  initialPosition?: { lat: number; lng: number } | null
+  category?: { color?: string | null; icon?: string | null } | null
   mapCenter?: { lat: number; lng: number } | null
+  proposalInAZoneRequired: boolean
+  districts: any[]
+  onDistrictChange: (district: string | null) => void
 }
 
 const AddressInput: React.FC<Props> = ({
@@ -27,7 +33,12 @@ const AddressInput: React.FC<Props> = ({
   showLocateButton,
   onAddressChange,
   currentAddress,
+  initialPosition,
+  category,
   mapCenter,
+  proposalInAZoneRequired,
+  districts,
+  onDistrictChange,
 }) => {
   const intl = useIntl()
   const { setValue } = useFormContext<FormValues>()
@@ -41,6 +52,21 @@ const AddressInput: React.FC<Props> = ({
     setValue('address', address.formatted_address)
     onAddressChange?.(address)
   }
+
+  React.useEffect(() => {
+    if (!isLoaded || !initialPosition || currentAddress) return
+
+    new window.google.maps.Geocoder().geocode({ location: initialPosition }).then(response => {
+      const address = response.results?.[0]
+      if (!address) return
+      const completeAddress = {
+        ...address,
+        geometry: { ...address.geometry, location: initialPosition },
+      } as unknown as AddressComplete
+      setValue('address', completeAddress.formatted_address)
+      onAddressChange?.(completeAddress)
+    })
+  }, [currentAddress, initialPosition, isLoaded, onAddressChange, setValue])
 
   return (
     <>
@@ -71,9 +97,11 @@ const AddressInput: React.FC<Props> = ({
         )}
       </FormControl>
 
+      {currentAddress && <AddressMapPreview address={currentAddress} category={category} />}
+
       {showLocateButton && (
         <Button variant="link" variantColor="primary" pl={0} pt={0} onClick={() => setShowMapModal(true)}>
-          {intl.formatMessage({ id: 'front.proposal.locate-on-map' })}
+          {intl.formatMessage({ id: currentAddress ? 'edit-on-card' : 'locate-on-card' })}
         </Button>
       )}
 
@@ -83,7 +111,11 @@ const AddressInput: React.FC<Props> = ({
           onClose={() => setShowMapModal(false)}
           onConfirm={handleMapAddressConfirm}
           initialAddress={currentAddress || null}
+          category={category || null}
           mapCenter={mapCenter || null}
+          proposalInAZoneRequired={proposalInAZoneRequired}
+          districts={districts}
+          onDistrictChange={onDistrictChange}
         />
       )}
     </>

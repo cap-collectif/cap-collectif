@@ -43,6 +43,7 @@ const VoteStepMapCustomEvents: FC<Props> = ({ step: stepKey, onWorkflowTrigger }
         disabled={!step.form.contribuable}
         proposalForm={step.form}
         stepId={step.id}
+        initialPosition={position}
         onWorkflowTrigger={onWorkflowTrigger}
       />
     </Popup>

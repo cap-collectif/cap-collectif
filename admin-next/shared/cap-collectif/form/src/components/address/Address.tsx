@@ -9,7 +9,7 @@ import { BaseField } from '../fieldInput'
 
 export type AddressProps = BaseField &
   InputProps & {
-    getAddress?: (address: AddressComplete) => void
+    getAddress?: (address: AddressComplete | null) => void
     getPosition?: (lat: number, lng: number) => void
   }
 
@@ -51,12 +51,32 @@ const Address = forwardRef<HTMLInputElement, AddressProps>(
                 ref={ref}
                 width="100%"
                 pl="28px!important"
+                pr={value ? 'xxl!important' : undefined}
                 {...getInputProps({
                   placeholder: placeholder,
                   className: cn('cap-address__input', className),
                 })}
                 {...props}
               />
+              {value && (
+                <Box
+                  as="button"
+                  type="button"
+                  aria-label="Clear address"
+                  position="absolute"
+                  right="xxs"
+                  top="xxs"
+                  p={0}
+                  border={0}
+                  background="transparent"
+                  onClick={() => {
+                    onChange('')
+                    getAddress?.(null)
+                  }}
+                >
+                  <Icon name={CapUIIcon.Cross} />
+                </Box>
+              )}
             </Box>
             {suggestions.length > 0 && (
               <Dropdown zIndex={1000} width={width} className={cn('cap-address__dropdown', className)}>

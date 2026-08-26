@@ -104,10 +104,24 @@ const PROPOSAL_FORM_FRAGMENT = graphql`
     categories(order: ALPHABETICAL) {
       id
       name
+      color
+      icon
     }
     districts(order: ALPHABETICAL) {
       id
       name
+      geojson
+      displayedOnMap
+      border {
+        color
+        opacity
+        size
+      }
+      background {
+        color
+        opacity
+        size
+      }
     }
     questions {
       id
@@ -224,6 +238,7 @@ type Props = CreateModeProps | EditModeProps
 
 const ProposalFormModal: React.FC<Props> = props => {
   const { mode, proposalForm: proposalFormKey } = props
+  const initialPosition = mode === 'create' ? props.initialPosition : null
   const intl = useIntl()
   const isMobile = useIsMobile()
   const { onOpen, onClose: onDisclosureClose } = useDisclosure(false)
@@ -232,6 +247,7 @@ const ProposalFormModal: React.FC<Props> = props => {
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
   const addressJsonRef = React.useRef<any>(null)
+  const [selectedAddress, setSelectedAddress] = React.useState<any>(null)
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
   const participantToken = viewerSession ? undefined : CookieMonster.getParticipantCookie()
   const emailToken = React.useMemo(
@@ -247,6 +263,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         const addressArray = JSON.parse(proposal.address.json)
         if (Array.isArray(addressArray) && addressArray.length > 0) {
           addressJsonRef.current = addressArray[0]
+          setSelectedAddress(addressArray[0])
         }
       } catch (err) {
         // Invalid JSON, ignore
@@ -345,7 +362,16 @@ const ProposalFormModal: React.FC<Props> = props => {
     formState: { isSubmitting },
   } = methods
 
+  const resetProposalForm = () => {
+    reset()
+    if (mode === 'create') {
+      addressJsonRef.current = null
+      setSelectedAddress(null)
+    }
+  }
+
   const watchedResponses = useWatch({ control, name: 'responses' })
+  const selectedCategoryId = useWatch({ control, name: 'category' })
 
   const availableQuestionIds = React.useMemo(
     () => getAvailableQuestionIds(proposalForm.questions, watchedResponses || []),
@@ -653,7 +679,7 @@ const ProposalFormModal: React.FC<Props> = props => {
               { title: createProposal.proposal.title },
             ),
           )
-          reset()
+          resetProposalForm()
           hide?.()
         }
       }
@@ -704,9 +730,15 @@ const ProposalFormModal: React.FC<Props> = props => {
               showLocateButton={mode === 'create'}
               onAddressChange={address => {
                 addressJsonRef.current = address
+                setSelectedAddress(address)
               }}
-              currentAddress={addressJsonRef.current}
+              currentAddress={selectedAddress}
+              initialPosition={initialPosition}
+              category={proposalForm.categories.find(category => category.id === selectedCategoryId)}
               mapCenter={proposalForm.mapCenter}
+              proposalInAZoneRequired={proposalForm.proposalInAZoneRequired}
+              districts={proposalForm.districts}
+              onDistrictChange={district => setValue('district', district)}
             />
           )}
 
@@ -838,7 +870,7 @@ const ProposalFormModal: React.FC<Props> = props => {
   }
 
   const handleMobileClose = () => {
-    reset()
+    resetProposalForm()
     onDisclosureClose()
   }
 
@@ -881,7 +913,7 @@ const ProposalFormModal: React.FC<Props> = props => {
       }
       ariaLabel={intl.formatMessage({ id: 'proposal.submit' })}
       size={CapUIModalSize.Xl}
-      onClose={reset}
+      onClose={resetProposalForm}
       hideOnClickOutside={false}
     >
       {({ hide }) => renderFormContent(hide)}

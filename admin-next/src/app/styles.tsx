@@ -167,6 +167,18 @@ export const LeafletStyles = createGlobalStyle`
       pointer-events: none;
     }
 
+    .proposal-address-pin svg:nth-child(1) {
+      height: 40px;
+      width: 40px;
+    }
+
+    .proposal-address-pin svg:nth-child(2) {
+      position: absolute;
+      top: 7px;
+      left: 12px;
+      pointer-events: none;
+    }
+
     .preview-icn.active svg,
     .preview-icn > svg:hover,
     .preview-icn > svg:hover + svg {

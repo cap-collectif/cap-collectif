@@ -9,6 +9,7 @@ export type CreateModeProps = {
   onClose?: never
   onButtonClick?: () => void
   onWorkflowTrigger?: (contributionId: string) => void
+  initialPosition?: { lat: number; lng: number } | null
 }
 
 export type EditModeProps = {
