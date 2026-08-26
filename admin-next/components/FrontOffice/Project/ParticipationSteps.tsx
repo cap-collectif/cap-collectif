@@ -41,6 +41,7 @@ const FRAGMENT = graphql`
       id
       title
       state
+      enabled
       url
       body
       cover {
@@ -64,12 +65,14 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
 
   const showStepsOrder = project.stepDisplayType === 'NUMBERED_LIST'
 
-  if (!project.steps.length) return null
+  const enabledSteps = project.steps.filter(step => step.enabled)
+
+  if (!enabledSteps.length) return null
 
   const openedStepIds =
-    project.steps.length === 1 && isWide
-      ? [project.steps[0].id]
-      : project.steps.filter(step => step.state === 'OPENED').map(step => step.id)
+    enabledSteps.length === 1 && isWide
+      ? [enabledSteps[0].id]
+      : enabledSteps.filter(step => step.state === 'OPENED').map(step => step.id)
 
   const getStatusTag = (state: string) => {
     if (state === 'OPENED') {
@@ -106,8 +109,8 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
   }
 
   return (
-    <Box width={['100%', isWide ? '100%' : '40%']} alignSelf="stretch">
-      <Box position={!isWide ? 'sticky' : undefined} top={!isWide ? 0 : undefined} py="lg">
+    <Box width="100%" maxWidth={['none', 410]} alignSelf="stretch">
+      <Box position={!isWide ? 'sticky' : undefined} top={!isWide ? 0 : undefined}>
         <Flex alignItems="center" justifyContent={!isWide ? 'center' : 'flex-start'} gap="xs" mb="md">
           <Icon name={CapUIIcon.UserO} size={CapUIIconSize.Xl} color="blue.500" />
           <Text
@@ -119,8 +122,13 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
             {intl.formatMessage({ id: 'front.project.participation-steps.title' })}
           </Text>
         </Flex>
-        <Accordion allowMultiple defaultAccordion={openedStepIds} color={CapUIAccordionColor.white}>
-          {project.steps.map((step, index) => {
+        <Accordion
+          allowMultiple
+          defaultAccordion={openedStepIds}
+          color={CapUIAccordionColor.white}
+          iconPosition="right"
+        >
+          {enabledSteps.map((step, index) => {
             const { id, cover, body, title, state, url } = step
             const remainingTimeLabel = getRemainingTimeLabel(step.timeRange.remainingTime)
             const strippedBody = body ? stripHTML(body) : null
@@ -136,16 +144,19 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
                 }}
                 _hover={{ boxShadow: 'small' }}
               >
-                <Accordion.Button
-                  fontWeight={CapUIFontWeight.Normal}
-                  fontSize={CapUIFontSize.Headline}
-                  lineHeight={CapUILineHeight.M}
-                >
-                  {showStepsOrder ? `${index + 1}. ` : ''}
-                  {title}
+                <Accordion.Button>
+                  <Text
+                    as="h3"
+                    fontWeight={CapUIFontWeight.Normal}
+                    fontSize={CapUIFontSize.Headline}
+                    lineHeight={CapUILineHeight.M}
+                  >
+                    {showStepsOrder ? `${index + 1}. ` : ''}
+                    {title}
+                  </Text>
                 </Accordion.Button>
                 <Accordion.Panel ml={0}>
-                  <Card format={isWide ? 'horizontal' : 'vertical'}>
+                  <Card format={isWide ? 'horizontal' : 'vertical'} sx={{ '&:hover': { boxShadow: 'none' } }}>
                     {cover?.url ? (
                       <CardCover>
                         <CardCoverImage {...getSrcSet(cover.url)} />
@@ -153,7 +164,7 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
                       </CardCover>
                     ) : null}
                     <CardContent
-                      primaryInfo={title}
+                      primaryInfo={''}
                       secondaryInfo={strippedBody ?? undefined}
                       href={url}
                       sx={
@@ -167,12 +178,12 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
                         } as any
                       }
                     >
-                      <CardTagList>
-                        <Button variant="primary" variantSize="medium" as="span">
-                          {state === 'OPENED'
-                            ? intl.formatMessage({ id: 'project.preview.action.participe' })
-                            : intl.formatMessage({ id: 'global.access' })}
-                        </Button>
+                      <Button variant="primary" variantSize="medium" as="span" justifyContent="center">
+                        {state === 'OPENED'
+                          ? intl.formatMessage({ id: 'project.preview.action.participe' })
+                          : intl.formatMessage({ id: 'global.access' })}
+                      </Button>
+                      <CardTagList alignSelf="center">
                         {state === 'OPENED' && remainingTimeLabel && (
                           <Tag variantColor="infoGray" transparent>
                             <Tag.LeftIcon name={CapUIIcon.ClockO} />

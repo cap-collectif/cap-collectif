@@ -23,6 +23,7 @@ import { pxToRem } from '@shared/utils/pxToRem'
 import ShareButtons from '../SocialNetworks/ShareButtons'
 import ProjectPageHeroStats from './ProjectPageHeroStats'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 const QUERY_FRAGMENT = graphql`
   fragment ProjectPageHero_query on Query {
@@ -86,6 +87,7 @@ const ProjectPageHero: React.FC<Props> = ({ project: projectKey, query: queryKey
   const profiles = useFeatureFlag('profiles')
   const project = useFragment(FRAGMENT, projectKey)
   const { defaultAvatar } = useFragment(QUERY_FRAGMENT, queryKey)
+  const { siteColors } = useAppContext()
 
   const { title, cover, url, archived, status, authors, themes, address, districts } = project
 
@@ -132,9 +134,12 @@ const ProjectPageHero: React.FC<Props> = ({ project: projectKey, query: queryKey
   }
 
   return (
-    <Box backgroundColor="white" as="header" role="banner" maxWidth={pxToRem(1280)} width="100%" margin="auto">
-      <Card format={isMobile ? 'vertical' : 'horizontal'} sx={{ '.cap-card-content': { justifyContent: 'center' } }}>
-        <CardCover>
+    <Box backgroundColor="white" as="header" role="banner" maxWidth={pxToRem(1280)} width="100%" margin="auto" pt="4xl">
+      <Card
+        format={isMobile ? 'vertical' : 'horizontal'}
+        sx={{ '&:hover': { boxShadow: 'none' }, '.cap-card-content': { justifyContent: 'center' } }}
+      >
+        <CardCover maxWidth={576}>
           {cover?.url ? (
             <CardCoverImage {...getSrcSet(cover.url)} alt="" loading="eager" sizes="(max-width: 640px) 640px, 960px" />
           ) : (
@@ -142,7 +147,11 @@ const ProjectPageHero: React.FC<Props> = ({ project: projectKey, query: queryKey
           )}
           {renderStatusTag()}
         </CardCover>
-        <CardContent primaryInfo={title} primaryInfoTag="h1">
+        <CardContent
+          primaryInfo={title}
+          primaryInfoTag="h1"
+          sx={{ '.cap-card-primaryInfo': { color: siteColors.h1Color } }}
+        >
           {/* Stats (votes, contributions, participants) */}
           <ProjectPageHeroStats project={project} />
 

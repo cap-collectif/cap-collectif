@@ -28,6 +28,7 @@ const FRAGMENT = graphql`
 type TabItemProps = {
   tab: TabItem_tab$key
   isActive: boolean
+  hasContent: boolean
   dropEdge: Edge | null
   onSelect: (slug: string) => void
   onSaved: (values: SavedValues) => Promise<void>
@@ -35,7 +36,16 @@ type TabItemProps = {
   dragHandleRef: React.RefObject<HTMLSpanElement>
 }
 
-const TabItem: React.FC<TabItemProps> = ({ tab: tabRef, isActive, dropEdge, onSelect, onSaved, onDeleted, dragHandleRef }) => {
+const TabItem: React.FC<TabItemProps> = ({
+  tab: tabRef,
+  isActive,
+  hasContent,
+  dropEdge,
+  onSelect,
+  onSaved,
+  onDeleted,
+  dragHandleRef,
+}) => {
   const tab = useFragment(FRAGMENT, tabRef)
 
   return (
@@ -78,11 +88,18 @@ const TabItem: React.FC<TabItemProps> = ({ tab: tabRef, isActive, dropEdge, onSe
             : {},
       }}
     >
-      {isActive && (
-        <Box as="span" ref={dragHandleRef} sx={{ cursor: 'grab' }}>
-          <Icon name={CapUIIcon.Drag} size={CapUIIconSize.Sm} color="gray.base" />
-        </Box>
-      )}
+      <Box
+        as="span"
+        ref={dragHandleRef}
+        sx={{
+          cursor: 'grab',
+          visibility: isActive ? 'visible' : 'hidden',
+          width: isActive ? 'auto' : 0,
+          overflow: 'hidden',
+        }}
+      >
+        <Icon name={CapUIIcon.Drag} size={CapUIIconSize.Sm} color="gray.base" />
+      </Box>
       <Text
         fontSize={CapUIFontSize.Caption}
         fontWeight={CapUIFontWeight.Bold}
@@ -92,7 +109,7 @@ const TabItem: React.FC<TabItemProps> = ({ tab: tabRef, isActive, dropEdge, onSe
       >
         {tab.title}
       </Text>
-      {isActive && <EditTabPopover tab={tab} onSaved={onSaved} onDeleted={onDeleted} />}
+      {isActive && <EditTabPopover tab={tab} hasContent={hasContent} onSaved={onSaved} onDeleted={onDeleted} />}
     </Flex>
   )
 }

@@ -32,11 +32,18 @@ const FRAGMENT = graphql`
     enabled
     type
     position
+    ... on ProjectTabCustom {
+      body
+    }
+    ... on ProjectTabPresentation {
+      body
+    }
   }
 `
 
 type Props = {
   tab: EditTabModal_tab$key
+  hasContent: boolean
   onSaved: (values: SavedValues) => Promise<void>
   onDeleted: (tabId: string) => Promise<void>
 }
@@ -113,7 +120,7 @@ const PopoverPanel = ({ anchorRef, onClose, children }: PopoverPanelProps) => {
   )
 }
 
-const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
+const EditTabPopover = ({ tab: tabRef, hasContent, onSaved, onDeleted }: Props) => {
   const intl = useIntl()
   const tab = useFragment(FRAGMENT, tabRef)
 
@@ -179,7 +186,7 @@ const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
                 <Flex direction="column" gap="md" p="md">
                   <Flex direction="column" gap="md">
-                    <FormControl name="title" control={control} isRequired>
+                    <FormControl name="title" control={control} isRequired mb={0}>
                       <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'global.title' })} />
                       <FieldInput name="title" type="text" control={control} maxLength={60} />
                     </FormControl>
@@ -205,10 +212,14 @@ const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
                         leftIcon={CapUIIcon.Trash}
                         isLoading={isDeleting}
                         disabled={isSubmitting || isDeleting}
-                        onClick={e => {
+                        onClick={async e => {
                           e.stopPropagation()
                           closePopover()
-                          setDeleteModalOpen(true)
+                          if (hasContent) {
+                            setDeleteModalOpen(true)
+                          } else {
+                            await onDelete()
+                          }
                         }}
                       >
                         {intl.formatMessage({ id: 'global.delete' })}
@@ -219,6 +230,8 @@ const EditTabPopover = ({ tab: tabRef, onSaved, onDeleted }: Props) => {
                       variant="primary"
                       isLoading={isSubmitting}
                       disabled={isSubmitting || isDeleting}
+                      flex={1}
+                      justifyContent="center"
                     >
                       {intl.formatMessage({ id: 'global.save' })}
                     </Button>

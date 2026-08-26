@@ -97,13 +97,13 @@ const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
   const statusTag = renderStatusTag()
 
   return (
-    <Card format={isMobile ? 'vertical' : 'horizontal'}>
-      <CardCover>
+    <Card format={isMobile ? 'vertical' : 'horizontal'} gap="md" variantSize="medium">
+      <CardCover width="none" maxWidth="none">
         <Box position="relative" width="100%" height="100%">
           {event.media?.url ? (
             <CardCoverImage src={event.media.url} />
           ) : (
-            <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" />
+            <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" sx={{ aspectRatio: '3 / 2' }} />
           )}
           {statusTag && (
             <Box position="absolute" top="xxs" left="xxs">
@@ -113,7 +113,7 @@ const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
         </Box>
       </CardCover>
       <CardContent primaryInfo={event.title} href={event.url}>
-        <CardTagList>
+        <CardTagList gap="md">
           {(event.timeRange.startAt || event.timeRange.endAt) && (
             <CardTag>
               <CardTagLeftIcon name={CapUIIcon.CalendarO} />

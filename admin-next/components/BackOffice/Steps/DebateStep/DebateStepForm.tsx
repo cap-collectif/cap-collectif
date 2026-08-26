@@ -57,7 +57,7 @@ type FormValues = {
   isAnonymousParticipationAllowed: boolean
   metaDescription: string | null
   customCode: string | null
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   debateType: DebateType
   debateContent: string
   stepDurationType?: {
@@ -83,6 +83,13 @@ const DEBATE_QUERY = graphql`
         isAnonymousParticipationAllowed
         metaDescription
         customCode
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
         debateType
         debateContent
         debate {
@@ -194,7 +201,15 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
       metaDescription: step?.metaDescription ?? '',
       customCode: step?.customCode ?? '',
-      cover: null,
+      cover: step?.cover
+        ? {
+            id: step.cover.id,
+            name: step.cover.name,
+            size: step.cover.size,
+            type: step.cover.type,
+            url: step.cover.url,
+          }
+        : null,
       debateType: step?.debateType ?? DebateTypeEnum.WYSIWYG,
       debateContent: step?.debateContent ?? '',
       articles,
@@ -223,11 +238,11 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
-    delete values.cover
     const articles = values.articles.filter(article => !!article.url)
 
     const input: UpdateDebateStepInput = {
       ...values,
+      cover: (values.cover as any)?.id ?? null,
       isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
       timeless,

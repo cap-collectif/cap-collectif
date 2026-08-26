@@ -49,7 +49,8 @@ const ProjectPageLayout: React.FC<Props> = ({ project, query: queryKey }) => {
         flexWrap={['wrap', 'nowrap']}
         width="100%"
         margin="auto"
-        px={['md', 'lg']}
+        py="lg"
+        px={['md', 0]}
       >
         {width >= 768 && <ProjectPageTabsDesktop project={data} />}
         <ParticipationSteps project={data} />

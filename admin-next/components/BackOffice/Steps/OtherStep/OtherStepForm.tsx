@@ -48,7 +48,7 @@ type FormValues = {
   }
   metaDescription: string
   customCode: string | null
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   hubMetadata?: {
     enabled: boolean
     aiotCode: string
@@ -72,6 +72,13 @@ export const QUERY = graphql`
         enabled
         metaDescription
         customCode
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
         project {
           id
           title
@@ -155,7 +162,15 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       metaDescription: step.metaDescription ?? '',
       customCode: step.customCode ?? '',
-      cover: null,
+      cover: step.cover
+        ? {
+            id: step.cover.id,
+            name: step.cover.name,
+            size: step.cover.size,
+            type: step.cover.type,
+            url: step.cover.url,
+          }
+        : null,
       hubMetadata: hubApiGreen
         ? {
             enabled: step.hubMetadata?.enabled ?? false,
@@ -178,7 +193,6 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
-    delete values.cover
 
     if (!hubApiGreen) {
       delete values.hubMetadata
@@ -187,6 +201,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     const input = {
       ...values,
       stepId,
+      cover: (values.cover as any)?.id ?? null,
       operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
       isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       timeless,

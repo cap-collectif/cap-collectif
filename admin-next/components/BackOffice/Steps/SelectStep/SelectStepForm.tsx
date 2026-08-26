@@ -104,7 +104,7 @@ export type FormValues = {
   }
   metaDescription: string
   customCode: string
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   voteBtnIcon: string | undefined
   voteBtnAction: string | undefined
 } & RequirementsFormValues
@@ -200,6 +200,13 @@ const SELECTION_QUERY = graphql`
           }
         }
         mainView
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
         ...ProposalStepRequirementsTabs_proposalStep
       }
       ...ProposalStepOptionnalAccordion_step
@@ -336,6 +343,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
           allowingProgressSteps: values.allowingProgressSteps,
+          cover: (values.cover as any)?.id ?? null,
           voteButtonIcon: values.voteBtnIcon,
           actionButtonLabel: values.voteBtnAction?.toUpperCase(),
           operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,

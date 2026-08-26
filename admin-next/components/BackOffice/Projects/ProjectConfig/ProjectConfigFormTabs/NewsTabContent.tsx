@@ -5,7 +5,7 @@ import { graphql, useFragment } from 'react-relay'
 import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 import { environment } from '@utils/relay-environement'
 import UpdateNewsProjectTabMutation from '@mutations/UpdateNewsProjectTabMutation'
-import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { mutationErrorToast } from '@shared/utils/toasts'
 import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import { NewsTabContent_tab$key } from '@relay/NewsTabContent_tab.graphql'
 import DraggableItemRow from './DraggableItemRow'
@@ -68,7 +68,6 @@ const NewsTabContent: React.FC<NewsTabContentProps> = ({ tab: tabRef }) => {
           newsItems: items.map((item, i) => ({ id: item.id, position: i + 1 })),
         },
       })
-      successToast(intl.formatMessage({ id: 'global.changes.saved' }))
       return true
     } catch {
       mutationErrorToast(intl)
@@ -101,15 +100,17 @@ const NewsTabContent: React.FC<NewsTabContentProps> = ({ tab: tabRef }) => {
 
   return (
     <Flex p={8} direction="column" gap="md" bg="white" borderRadius="normal">
-      <Flex align="center" gap="md">
-        <SpotIcon name={CapUISpotIcon.NEWSPAPER} size={CapUISpotIconSize.Lg} />
-        <Flex direction="column" gap="xs">
-          <Heading as="h3" color="blue.900" fontWeight="semibold">
-            {intl.formatMessage({ id: 'back.project.tab.news.title' })}
-          </Heading>
-          <Text color="blue.900">{intl.formatMessage({ id: 'back.project.tab.news.description' })}</Text>
+      {localItems.length === 0 && (
+        <Flex align="center" gap="md">
+          <SpotIcon name={CapUISpotIcon.NEWSPAPER} size={CapUISpotIconSize.Lg} />
+          <Flex direction="column" gap="xs">
+            <Heading as="h3" color="blue.900" fontWeight="semibold">
+              {intl.formatMessage({ id: 'back.project.tab.news.title' })}
+            </Heading>
+            <Text color="blue.900">{intl.formatMessage({ id: 'back.project.tab.news.description' })}</Text>
+          </Flex>
         </Flex>
-      </Flex>
+      )}
       <Flex direction="column" gap="xxs">
         <Text fontSize="13px" color="gray.900">
           {intl.formatMessage({ id: 'back.project.tab.news.select.label' })}{' '}

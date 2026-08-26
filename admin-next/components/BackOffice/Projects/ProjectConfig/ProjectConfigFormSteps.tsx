@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import {
-  Accordion,
   Box,
   Button,
   ButtonGroup,
   ButtonQuickAction,
   CapUIFontSize,
+  CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
   CapUILineHeight,
@@ -105,9 +105,9 @@ const ProjectConfigFormSteps: React.FC = () => {
                       id: 'global.edit',
                     })}
                     onClick={() => {
-                      window.location.href = `${window.location.pathname}/update-step/${getStepUri(stepsValues[index].__typename)}/${
-                        stepsValues[index].id
-                      }`
+                      window.location.href = `${window.location.pathname}/update-step/${getStepUri(
+                        stepsValues[index].__typename,
+                      )}/${stepsValues[index].id}`
                     }}
                     type="button"
                   />
@@ -148,169 +148,169 @@ const ProjectConfigFormSteps: React.FC = () => {
         />
       ) : null}
       {isNewProjectPage ? (
-        <>
-          <Accordion.Button>
-            <Flex gap="xs" mr="xs">
-              <Text>{intl.formatMessage({ id: 'project-header-step-modal-title' })}</Text>
-              <Box onClick={e => e.stopPropagation()}>
-                <Modal
-                  disclosure={
-                    <Button variant="link" p={0}>
-                      <Icon color="gray.base" name={CapUIIcon.Cog} />
-                    </Button>
-                  }
-                  size={CapUIModalSize.Lg}
-                  ariaLabel={intl.formatMessage({ id: 'back.project-step.display-configuration' })}
-                  position="absolute"
-                  top="50%"
-                  left="50%"
-                  mt="0!important"
-                  maxHeight="none!important"
-                  sx={{
-                    transform: 'translate(-50%, -50%)!important',
-                  }}
-                >
-                  {({ hide }) => (
-                    <>
-                      <Modal.Header>
-                        <Modal.Header.Label>
-                          {intl.formatMessage({ id: 'global.participative.project.label' })}
-                        </Modal.Header.Label>
-                        <Heading>{intl.formatMessage({ id: 'back.project-step.display-configuration' })}</Heading>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Text mb={4}>{intl.formatMessage({ id: 'back.project-step.select-step' })}</Text>
-                        <Flex gap={8} direction="row">
-                          {(['BULLETTED_LIST', 'NUMBERED_LIST'] as const).map(mode => {
-                            const isSelected = pendingMode === mode
-                            const modeSteps =
-                              mode === 'BULLETTED_LIST'
-                                ? ['questionnaire_step', 'ideas_box_step', 'vote_step']
-                                : ['collect_step', 'analysis_step', 'vote_step']
-                            return (
-                              <Flex
-                                key={mode}
-                                direction="column"
-                                align="center"
-                                flex={1}
-                                gap={6}
-                                border="1px solid"
-                                borderColor={isSelected ? '#C2DFFF' : '#DADEE1'}
-                                backgroundColor={isSelected ? '#FAFCFF' : 'white'}
-                                borderRadius="normal"
-                                p={6}
-                                sx={{ cursor: 'pointer' }}
-                                onClick={() => setPendingMode(mode)}
-                              >
-                                {/* Header */}
-                                <Flex align="center" justify="center" gap={1}>
-                                  <Flex
-                                    align="center"
-                                    justify="center"
-                                    width="48px"
-                                    height="48px"
-                                    p={2}
-                                    overflow="hidden"
-                                  >
-                                    <Icon name={CapUIIcon.UserO} size={CapUIIconSize.Xl} color="primary.base" />
-                                  </Flex>
-                                  <Text
-                                    fontSize={CapUIFontSize.Headline}
-                                    lineHeight={CapUILineHeight.M}
-                                    color="gray.900"
-                                    sx={{ whiteSpace: 'nowrap' }}
-                                  >
-                                    {intl.formatMessage({ id: 'global.participative.project.label' })}
-                                  </Text>
-                                </Flex>
-
-                                {/* Step list */}
-                                <Box
-                                  backgroundColor={isSelected ? 'white' : 'transparent'}
+        <Box p="lg" bg="white" borderRadius="xs">
+          <Flex alignItems="center" gap="xs">
+            <Flex gap="xs" alignItems="center">
+              <Text fontSize={CapUIFontSize.Headline} fontWeight={CapUIFontWeight.Semibold}>
+                {intl.formatMessage({ id: 'project-header-step-modal-title' })}
+              </Text>
+              <Modal
+                disclosure={
+                  <Button variant="link" p={0} height="auto">
+                    <Icon color="gray.base" name={CapUIIcon.Cog} />
+                  </Button>
+                }
+                size={CapUIModalSize.Lg}
+                ariaLabel={intl.formatMessage({ id: 'back.project-step.display-configuration' })}
+                position="absolute"
+                top="50%"
+                left="50%"
+                mt="0!important"
+                maxHeight="none!important"
+                sx={{
+                  transform: 'translate(-50%, -50%)!important',
+                }}
+              >
+                {({ hide }) => (
+                  <>
+                    <Modal.Header>
+                      <Modal.Header.Label>
+                        {intl.formatMessage({ id: 'global.participative.project.label' })}
+                      </Modal.Header.Label>
+                      <Heading>{intl.formatMessage({ id: 'back.project-step.display-configuration' })}</Heading>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Text mb={4}>{intl.formatMessage({ id: 'back.project-step.select-step' })}</Text>
+                      <Flex gap={8} direction="row">
+                        {(['BULLETTED_LIST', 'NUMBERED_LIST'] as const).map(mode => {
+                          const isSelected = pendingMode === mode
+                          const modeSteps =
+                            mode === 'BULLETTED_LIST'
+                              ? ['questionnaire_step', 'ideas_box_step', 'vote_step']
+                              : ['collect_step', 'analysis_step', 'vote_step']
+                          return (
+                            <Flex
+                              key={mode}
+                              direction="column"
+                              align="center"
+                              flex={1}
+                              gap={6}
+                              border="1px solid"
+                              borderColor={isSelected ? '#C2DFFF' : '#DADEE1'}
+                              backgroundColor={isSelected ? '#FAFCFF' : 'white'}
+                              borderRadius="normal"
+                              p={6}
+                              sx={{ cursor: 'pointer' }}
+                              onClick={() => setPendingMode(mode)}
+                            >
+                              {/* Header */}
+                              <Flex align="center" justify="center" gap={1}>
+                                <Flex
+                                  align="center"
+                                  justify="center"
+                                  width="48px"
+                                  height="48px"
                                   p={2}
-                                  borderRadius="xs"
-                                  width="100%"
+                                  overflow="hidden"
                                 >
-                                  <Flex direction="column" gap={4}>
-                                    {modeSteps.map((step, index) => (
-                                      <Flex key={step} align="center" justify="space-between" p={2} borderRadius="xs">
-                                        <Text
-                                          fontSize={CapUIFontSize.BodyRegular}
-                                          lineHeight={CapUILineHeight.M}
-                                          color="gray.700"
-                                        >
-                                          {mode === 'NUMBERED_LIST' ? `${index + 1}. ` : ''}
-                                          {intl.formatMessage({ id: step })}
-                                        </Text>
-                                        <Flex align="center" justify="center" width="24px" height="24px" p={2}>
-                                          <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} color="gray.500" />
-                                        </Flex>
-                                      </Flex>
-                                    ))}
-                                  </Flex>
-                                </Box>
-
-                                {/* Description */}
-                                <Flex align="flex-start" justify="center" gap={1} px={6}>
-                                  <Icon name={CapUIIcon.CheckO} size={CapUIIconSize.Sm} color="primary.base" />
-                                  <Text
-                                    fontSize={CapUIFontSize.BodySmall}
-                                    lineHeight={CapUILineHeight.S}
-                                    color="gray.900"
-                                    textAlign="center"
-                                    flex={1}
-                                  >
-                                    {intl.formatMessage({
-                                      id: `back.project-step.mode-${
-                                        mode === 'NUMBERED_LIST' ? 'numbered' : 'flat'
-                                      }.description`,
-                                    })}
-                                  </Text>
+                                  <Icon name={CapUIIcon.UserO} size={CapUIIconSize.Xl} color="primary.base" />
                                 </Flex>
-
-                                {/* Radio */}
-                                <Radio
-                                  id={`step-display-${mode}`}
-                                  name="stepDisplayMode"
-                                  value={mode}
-                                  checked={isSelected}
-                                  onChange={() => setPendingMode(mode)}
+                                <Text
+                                  fontSize={CapUIFontSize.Headline}
+                                  lineHeight={CapUILineHeight.M}
+                                  color="gray.900"
+                                  sx={{ whiteSpace: 'nowrap' }}
                                 >
-                                  {''}
-                                </Radio>
+                                  {intl.formatMessage({ id: 'global.participative.project.label' })}
+                                </Text>
                               </Flex>
-                            )
-                          })}
-                        </Flex>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button
-                          variant="secondary"
-                          variantColor="primary"
-                          variantSize="big"
-                          onClick={() => {
-                            setPendingMode(stepDisplayType)
-                            hide()
-                          }}
-                        >
-                          {intl.formatMessage({ id: 'global.back' })}
-                        </Button>
-                        <Button
-                          variant="primary"
-                          variantColor="primary"
-                          variantSize="big"
-                          onClick={() => {
-                            setValue('stepDisplayType', pendingMode, { shouldDirty: true })
-                            hide()
-                          }}
-                        >
-                          {intl.formatMessage({ id: 'global.validate' })}
-                        </Button>
-                      </Modal.Footer>
-                    </>
-                  )}
-                </Modal>
-              </Box>
+
+                              {/* Step list */}
+                              <Box
+                                backgroundColor={isSelected ? 'white' : 'transparent'}
+                                p={2}
+                                borderRadius="xs"
+                                width="100%"
+                              >
+                                <Flex direction="column" gap={4}>
+                                  {modeSteps.map((step, index) => (
+                                    <Flex key={step} align="center" justify="space-between" p={2} borderRadius="xs">
+                                      <Text
+                                        fontSize={CapUIFontSize.BodyRegular}
+                                        lineHeight={CapUILineHeight.M}
+                                        color="gray.700"
+                                      >
+                                        {mode === 'NUMBERED_LIST' ? `${index + 1}. ` : ''}
+                                        {intl.formatMessage({ id: step })}
+                                      </Text>
+                                      <Flex align="center" justify="center" width="24px" height="24px" p={2}>
+                                        <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} color="gray.500" />
+                                      </Flex>
+                                    </Flex>
+                                  ))}
+                                </Flex>
+                              </Box>
+
+                              {/* Description */}
+                              <Flex align="flex-start" justify="center" gap={1} px={6}>
+                                <Icon name={CapUIIcon.CheckO} size={CapUIIconSize.Sm} color="primary.base" />
+                                <Text
+                                  fontSize={CapUIFontSize.BodySmall}
+                                  lineHeight={CapUILineHeight.S}
+                                  color="gray.900"
+                                  textAlign="center"
+                                  flex={1}
+                                >
+                                  {intl.formatMessage({
+                                    id: `back.project-step.mode-${
+                                      mode === 'NUMBERED_LIST' ? 'numbered' : 'flat'
+                                    }.description`,
+                                  })}
+                                </Text>
+                              </Flex>
+
+                              {/* Radio */}
+                              <Radio
+                                id={`step-display-${mode}`}
+                                name="stepDisplayMode"
+                                value={mode}
+                                checked={isSelected}
+                                onChange={() => setPendingMode(mode)}
+                              >
+                                {''}
+                              </Radio>
+                            </Flex>
+                          )
+                        })}
+                      </Flex>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        variantColor="primary"
+                        variantSize="big"
+                        onClick={() => {
+                          setPendingMode(stepDisplayType)
+                          hide()
+                        }}
+                      >
+                        {intl.formatMessage({ id: 'global.back' })}
+                      </Button>
+                      <Button
+                        variant="primary"
+                        variantColor="primary"
+                        variantSize="big"
+                        onClick={() => {
+                          setValue('stepDisplayType', pendingMode, { shouldDirty: true })
+                          hide()
+                        }}
+                      >
+                        {intl.formatMessage({ id: 'global.validate' })}
+                      </Button>
+                    </Modal.Footer>
+                  </>
+                )}
+              </Modal>
             </Flex>
             <Button
               variant="secondary"
@@ -320,9 +320,9 @@ const ProjectConfigFormSteps: React.FC = () => {
             >
               {intl.formatMessage({ id: 'global.add' })}
             </Button>
-          </Accordion.Button>
-          <Accordion.Panel ml={0}>{stepsContent}</Accordion.Panel>
-        </>
+          </Flex>
+          <Box mt="lg">{stepsContent}</Box>
+        </Box>
       ) : (
         <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
           <Heading as="h4" fontWeight="semibold" color="blue.800">

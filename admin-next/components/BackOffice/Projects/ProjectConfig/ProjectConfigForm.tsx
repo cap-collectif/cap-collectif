@@ -289,7 +289,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
               {!isNewProjectPageEnabled && <ProjectConfigFormSteps />}
               {isNewProjectPageEnabled && <ProjectConfigFormTabs project={project} />}
             </Flex>
-            <Flex direction="column" spacing="lg" width="30%">
+            <Flex direction="column" gap="lg" width="30%">
               <ProjectConfigFormSide query={query} project={project} />
             </Flex>
           </Flex>

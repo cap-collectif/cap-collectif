@@ -3,6 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import type { QuestionnaireHeader_step$key } from '~relay/QuestionnaireHeader_step.graphql'
 import { QuestionnaireHeaderContainer } from './QuestionnaireHeader.style'
 import { BodyText } from '~ui/Boxes/BodyText'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const FRAGMENT = graphql`
   fragment QuestionnaireHeader_step on Step {
@@ -15,9 +16,10 @@ type QuestionnaireHeaderProps = {
 
 const QuestionnaireHeader = ({ step: stepFragment }: QuestionnaireHeaderProps) => {
   const step = useFragment(FRAGMENT, stepFragment)
+  const newProjectPage = useFeatureFlag('new_project_page')
   return (
     <QuestionnaireHeaderContainer>
-      {step.body && <BodyText maxLines={5} text={step.body} />}
+      {!newProjectPage && step.body && <BodyText maxLines={5} text={step.body} />}
     </QuestionnaireHeaderContainer>
   )
 }

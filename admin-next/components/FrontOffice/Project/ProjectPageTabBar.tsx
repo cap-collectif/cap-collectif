@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { ProjectPageTabBar_project$key } from '@relay/ProjectPageTabBar_project.graphql'
-import { Box, CapUIFontWeight, CapUIIcon, CapUIIconSize, CapUIShadow, Flex, Icon } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontWeight, CapUIIcon, CapUIIconSize, CapUIShadow, Flex, Icon } from '@cap-collectif/ui'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
@@ -96,27 +96,8 @@ const ProjectPageTabBar: React.FC<Props> = ({ project: projectRef, activeTab, on
       maxWidth={pxToRem(1280)}
       mx="auto"
       px={['md', 'lg']}
+      gap="xs"
     >
-      {/* Left arrow */}
-      {canScrollLeft && (
-        <Box
-          as="button"
-          onClick={scrollLeft}
-          flexShrink={0}
-          mr="xs"
-          backgroundColor="white"
-          boxShadow={CapUIShadow.Small}
-          borderRadius="4px"
-          p="xs"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ border: 'none', cursor: 'pointer', color: 'gray.700', '&:hover': { color: 'blue.500' } }}
-        >
-          <Icon name={CapUIIcon.ArrowLeft} size={CapUIIconSize.Sm} />
-        </Box>
-      )}
-
       {/* Scrollable tabs */}
       <Flex
         ref={scrollRef}
@@ -134,8 +115,8 @@ const ProjectPageTabBar: React.FC<Props> = ({ project: projectRef, activeTab, on
           <Box
             key={tab.id}
             as="button"
-            fontWeight={CapUIFontWeight.Bold}
-            color={isActive(tab.slug) ? 'blue.500' : 'gray.700'}
+            fontWeight={CapUIFontWeight.Semibold}
+            color={isActive(tab.slug) ? 'primary.base' : 'gray.700'}
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -148,8 +129,8 @@ const ProjectPageTabBar: React.FC<Props> = ({ project: projectRef, activeTab, on
               border: 'none',
               padding: '0',
               borderBottom: isActive(tab.slug) ? '2px solid' : '2px solid transparent',
-              borderBottomColor: isActive(tab.slug) ? 'blue.500' : 'transparent',
-              '&:hover': { color: 'blue.500', borderBottomColor: 'blue.500' },
+              borderBottomColor: isActive(tab.slug) ? 'primary.base' : 'transparent',
+              '&:hover': { color: 'primary.base', borderBottomColor: 'primary.base' },
             }}
           >
             {tab.title}
@@ -157,24 +138,53 @@ const ProjectPageTabBar: React.FC<Props> = ({ project: projectRef, activeTab, on
         ))}
       </Flex>
 
-      {/* Right arrow */}
-      {canScrollRight && (
-        <Box
-          as="button"
-          onClick={scrollRight}
-          flexShrink={0}
-          ml="xs"
-          backgroundColor="white"
-          boxShadow={CapUIShadow.Small}
-          borderRadius="4px"
-          p="xs"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ border: 'none', cursor: 'pointer', color: 'gray.700', '&:hover': { color: 'blue.500' } }}
-        >
-          <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} />
-        </Box>
+      {(canScrollLeft || canScrollRight) && (
+        <Flex gap="xs">
+          <Button
+            as="button"
+            onClick={scrollLeft}
+            flexShrink={0}
+            backgroundColor="white"
+            borderRadius="4px"
+            p="xs"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            disabled={!canScrollLeft}
+            variant="link"
+            variantColor="hierarchy"
+            sx={{
+              border: 'none',
+              cursor: 'pointer',
+              color: 'gray.700',
+              '&:hover:not(:disabled)': { boxShadow: CapUIShadow.Small },
+            }}
+          >
+            <Icon name={CapUIIcon.ArrowLeft} size={CapUIIconSize.Sm} />
+          </Button>
+          <Button
+            as="button"
+            onClick={scrollRight}
+            flexShrink={0}
+            backgroundColor="white"
+            borderRadius="4px"
+            p="xs"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            disabled={!canScrollRight}
+            variant="link"
+            variantColor="hierarchy"
+            sx={{
+              border: 'none',
+              cursor: 'pointer',
+              color: 'gray.700',
+              '&:hover:not(:disabled)': { boxShadow: CapUIShadow.Small },
+            }}
+          >
+            <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} />
+          </Button>
+        </Flex>
       )}
     </Flex>
   )

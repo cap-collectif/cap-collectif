@@ -48,17 +48,15 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
 
   return (
     <>
+      {isNewProjectPage && <ProjectConfigFormSteps />}
       <Accordion
         allowMultiple
         defaultAccordion={['steps']}
         size={CapUIAccordionSize.md}
         color={CapUIAccordionColor.white}
+        gap="lg"
+        spacing="0"
       >
-        {isNewProjectPage && (
-          <Accordion.Item id="steps">
-            <ProjectConfigFormSteps />
-          </Accordion.Item>
-        )}
         <Accordion.Item id="publication" position="relative">
           <ProjectConfigFormPublication locales={locales} project={project} />
         </Accordion.Item>

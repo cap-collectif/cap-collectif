@@ -1,10 +1,13 @@
 import * as React from 'react'
-import { Box, Button, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
+import { Box, Button, CapUIIcon, CapUIIconSize, CapUIShadow, Flex, Icon } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import { extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge'
-import { ProjectConfigFormTabs_project$key } from '@relay/ProjectConfigFormTabs_project.graphql'
+import {
+  ProjectConfigFormTabs_project$data,
+  ProjectConfigFormTabs_project$key,
+} from '@relay/ProjectConfigFormTabs_project.graphql'
 import Jodit from '@components/BackOffice/Form/TextEditor/Jodit'
 import debounce from '@shared/utils/debounce-promise'
 import CreateCustomProjectTabMutation from '@mutations/CreateCustomProjectTabMutation'
@@ -27,6 +30,8 @@ import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 export type ProjectConfigFormTabsProps = {
   project: ProjectConfigFormTabs_project$key
 }
+
+type ProjectTab = ProjectConfigFormTabs_project$data['tabs'][number]
 
 const FRAGMENT = graphql`
   fragment ProjectConfigFormTabs_project on Project {
@@ -63,6 +68,11 @@ const FRAGMENT = graphql`
 
 const SCROLL_AMOUNT = 200
 
+const isBodyEmpty = (body: string | null | undefined): boolean => {
+  if (!body) return true
+  return body.replace(/<[^>]*>/g, '').trim() === ''
+}
+
 const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: projectRef }) => {
   const intl = useIntl()
   const { setSaving } = useNavBarContext()
@@ -90,6 +100,7 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
   const tabMap = React.useMemo(() => Object.fromEntries((project.tabs ?? []).map(t => [t.id, t])), [project.tabs])
 
   const [isAddingTab, setIsAddingTab] = React.useState(false)
+  const pendingScrollToTabId = React.useRef<string | null>(null)
 
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = React.useState(false)
@@ -101,6 +112,19 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
     setCanScrollLeft(el.scrollLeft > 0)
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
   }, [])
+
+  const scrollTabToEnd = React.useCallback(
+    (tabId: string) => {
+      const el = scrollRef.current
+      const tabElement = el?.querySelector<HTMLElement>(`[data-project-tab-id="${tabId}"]`)
+      if (!el || !tabElement) return false
+
+      el.scrollLeft = Math.max(0, el.scrollWidth - el.clientWidth)
+      updateScrollState()
+      return true
+    },
+    [updateScrollState],
+  )
 
   React.useEffect(() => {
     const el = scrollRef.current
@@ -114,6 +138,30 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
       observer.disconnect()
     }
   }, [updateScrollState])
+
+  React.useEffect(() => {
+    let animationFrameId: number | null = null
+    let successfulScrolls = 0
+
+    const scrollPendingTab = () => {
+      const tabId = pendingScrollToTabId.current
+      if (!tabId) return
+
+      if (scrollTabToEnd(tabId)) successfulScrolls += 1
+      if (successfulScrolls >= 5) {
+        pendingScrollToTabId.current = null
+        return
+      }
+
+      animationFrameId = requestAnimationFrame(scrollPendingTab)
+    }
+
+    animationFrameId = requestAnimationFrame(scrollPendingTab)
+
+    return () => {
+      if (animationFrameId !== null) cancelAnimationFrame(animationFrameId)
+    }
+  }, [project.tabs, scrollTabToEnd, tabOrder])
 
   React.useEffect(() => {
     return monitorForElements({
@@ -200,12 +248,9 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
         return
       }
       if (created) {
+        pendingScrollToTabId.current = created.id
         setTabOrder(prev => [...prev, created.id])
         setActiveTabSlug(created.slug)
-        requestAnimationFrame(() => {
-          const el = scrollRef.current
-          if (el) el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' })
-        })
       }
     } catch {
       mutationErrorToast(intl)
@@ -299,31 +344,25 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
     }
   }
 
+  const hasTabContent = React.useCallback(
+    (tab: ProjectTab) => {
+      if (tab.type === 'CUSTOM' || tab.type === 'PRESENTATION') {
+        return !isBodyEmpty(tabContents[tab.id] ?? (tab as any).body)
+      }
+
+      if (tab.type === 'NEWS') return ((tab as any).news ?? []).length > 0
+      if (tab.type === 'EVENTS') return ((tab as any).events ?? []).length > 0
+
+      return false
+    },
+    [tabContents],
+  )
+
   return (
     <>
       <Flex direction="column" overflow="hidden" mt={0} px="lg" pb="lg" height="100%">
         {/* Tab bar */}
         <Flex align="center" borderBottom={isWysiwyg ? '' : '1px solid'} borderColor="gray.lighter" gap="lg">
-          {canScrollLeft && (
-            <Box
-              as="button"
-              onClick={() => scrollRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' })}
-              flexShrink={0}
-              mr={2}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                border: 'none',
-                background: 'none',
-                cursor: 'pointer',
-                color: 'gray.700',
-                '&:hover': { color: 'primary.base' },
-              }}
-            >
-              <Icon name={CapUIIcon.ArrowLeft} size={CapUIIconSize.Sm} />
-            </Box>
-          )}
           <Flex
             ref={scrollRef}
             flex="1"
@@ -345,6 +384,7 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
                   tab={tabRef}
                   index={index}
                   isActive={tabRef.slug === activeTabSlug}
+                  hasContent={hasTabContent(tabRef)}
                   onSelect={slug => setActiveTabSlug(slug)}
                   onSaved={handleSaved}
                   onDeleted={handleDeleted}
@@ -352,25 +392,41 @@ const ProjectConfigFormTabs: React.FC<ProjectConfigFormTabsProps> = ({ project: 
               )
             })}
           </Flex>
-          {canScrollRight && (
-            <Box
-              as="button"
-              onClick={() => scrollRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' })}
-              flexShrink={0}
-              ml={2}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                border: 'none',
-                background: 'none',
-                cursor: 'pointer',
-                color: 'gray.700',
-                '&:hover': { color: 'primary.base' },
-              }}
-            >
-              <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} />
-            </Box>
+          {(canScrollLeft || canScrollRight) && (
+            <Flex gap="xs">
+              <Button
+                onClick={() => scrollRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' })}
+                flexShrink={0}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                p="xs"
+                variant="link"
+                variantColor="hierarchy"
+                disabled={!canScrollLeft}
+                sx={{
+                  '&:hover:not(:disabled)': { boxShadow: CapUIShadow.Small },
+                }}
+              >
+                <Icon name={CapUIIcon.ArrowLeft} size={CapUIIconSize.Sm} />
+              </Button>
+              <Button
+                onClick={() => scrollRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' })}
+                flexShrink={0}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                p="xs"
+                variant="link"
+                variantColor="hierarchy"
+                disabled={!canScrollRight}
+                sx={{
+                  '&:hover:not(:disabled)': { boxShadow: CapUIShadow.Small },
+                }}
+              >
+                <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Sm} />
+              </Button>
+            </Flex>
           )}
           <Button
             variant="tertiary"

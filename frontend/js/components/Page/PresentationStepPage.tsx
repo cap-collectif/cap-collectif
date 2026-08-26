@@ -68,6 +68,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   const calendar = useFeatureFlag('calendar')
   const blog = useFeatureFlag('blog')
   const unstable__new_create_project = useFeatureFlag('unstable__new_create_project')
+  const newProjectPage = useFeatureFlag('new_project_page')
   const intl = useIntl()
 
   React.useEffect(() => {
@@ -98,9 +99,11 @@ export const PresentationStepPage = ({ stepId }: Props) => {
         }}
       >
         {unstable__new_create_project ? null : <h2 className="h2">{title}</h2>}
-        <div className="block ">
-          <WYSIWYGRender value={body} />
-        </div>
+        {!newProjectPage && (
+          <div className="block ">
+            <WYSIWYGRender value={body} />
+          </div>
+        )}
         <div className="block">
           {consultationStepOpen ? (
             <p>

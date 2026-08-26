@@ -199,16 +199,18 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({
             </FormControl>
           ) : null}
         </Flex>
-        <FormProvider {...methods}>
-          <TextEditor
-            mb={0}
-            mt={6}
-            name="description"
-            label={intl.formatMessage({ id: 'admin.project.presentation' })}
-            platformLanguage={defaultLocale?.code}
-            selectedLanguage={defaultLocale?.code}
-          />
-        </FormProvider>
+        {!isNewProjectPage && (
+          <FormProvider {...methods}>
+            <TextEditor
+              mb={0}
+              mt={6}
+              name="description"
+              label={intl.formatMessage({ id: 'admin.project.presentation' })}
+              platformLanguage={defaultLocale?.code}
+              selectedLanguage={defaultLocale?.code}
+            />
+          </FormProvider>
+        )}
       </Flex>
     </Flex>
   )

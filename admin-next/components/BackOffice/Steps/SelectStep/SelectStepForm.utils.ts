@@ -68,7 +68,9 @@ export const getDefaultValues = (
     },
     metaDescription: step?.metaDescription || '',
     customCode: step?.customCode || '',
-    cover: null,
+    cover: step?.cover
+      ? { id: step.cover.id, name: step.cover.name, size: step.cover.size, type: step.cover.type, url: step.cover.url }
+      : null,
     enabled: {
       labels: stepEnabledType,
     },

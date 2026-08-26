@@ -118,7 +118,9 @@ const StepPageHeaderNew: React.FC<Props> = ({
               <Box position="absolute" top={2} left={2} zIndex={1}>
                 <Tag variantColor="info">
                   <Icon name={CapUIIcon.HourglassO} size={CapUIIconSize.Sm} />
-                  <Text>{intl.formatMessage({ id: 'count.daysLeft' }, { count: remainingDays })}</Text>
+                  <Text>
+                    {remainingDays} {intl.formatMessage({ id: 'count.daysLeft' }, { count: remainingDays })}
+                  </Text>
                 </Tag>
               </Box>
             )}
@@ -202,8 +204,9 @@ const StepPageHeaderNew: React.FC<Props> = ({
 
             {/* Counters */}
             <Flex direction="row" wrap="wrap" gap={4} align="center">
-              {votesCount !== null && votesCount !== undefined && (
-                votesTooltipData && (votesTooltipData.numeric > 0 || votesTooltipData.paper > 0) ? (
+              {votesCount !== null &&
+                votesCount !== undefined &&
+                (votesTooltipData && (votesTooltipData.numeric > 0 || votesTooltipData.paper > 0) ? (
                   <Tooltip
                     label={
                       <Box padding={1} textAlign="center">
@@ -244,10 +247,10 @@ const StepPageHeaderNew: React.FC<Props> = ({
                       {intl.formatNumber(votesCount)} {intl.formatMessage({ id: 'global.vote' })}
                     </Text>
                   </Flex>
-                )
-              )}
-              {contributionsCount !== null && contributionsCount !== undefined && (
-                contributionsTooltipData &&
+                ))}
+              {contributionsCount !== null &&
+                contributionsCount !== undefined &&
+                (contributionsTooltipData &&
                 (contributionsTooltipData.opinions > 0 ||
                   contributionsTooltipData.opinionVersions > 0 ||
                   contributionsTooltipData.arguments > 0 ||
@@ -263,10 +266,7 @@ const StepPageHeaderNew: React.FC<Props> = ({
                             fontSize={CapUIFontSize.Caption}
                             marginBottom={0}
                           >
-                            {intl.formatMessage(
-                              { id: 'proposal-count' },
-                              { count: contributionsTooltipData.opinions },
-                            )}
+                            {intl.formatMessage({ id: 'proposal-count' }, { count: contributionsTooltipData.opinions })}
                           </Text>
                         )}
                         {contributionsTooltipData.opinionVersions > 0 && (
@@ -302,10 +302,7 @@ const StepPageHeaderNew: React.FC<Props> = ({
                             fontSize={CapUIFontSize.Caption}
                             marginBottom={0}
                           >
-                            {intl.formatMessage(
-                              { id: 'source-count' },
-                              { count: contributionsTooltipData.sources },
-                            )}
+                            {intl.formatMessage({ id: 'source-count' }, { count: contributionsTooltipData.sources })}
                           </Text>
                         )}
                         {contributionsTooltipData.replies > 0 && (
@@ -315,10 +312,7 @@ const StepPageHeaderNew: React.FC<Props> = ({
                             fontSize={CapUIFontSize.Caption}
                             marginBottom={0}
                           >
-                            {intl.formatMessage(
-                              { id: 'answer-count' },
-                              { count: contributionsTooltipData.replies },
-                            )}
+                            {intl.formatMessage({ id: 'answer-count' }, { count: contributionsTooltipData.replies })}
                           </Text>
                         )}
                       </Box>
@@ -338,8 +332,7 @@ const StepPageHeaderNew: React.FC<Props> = ({
                       {intl.formatNumber(contributionsCount)} {intl.formatMessage({ id: 'global.contribution' })}
                     </Text>
                   </Flex>
-                )
-              )}
+                ))}
               {participantsCount !== null && participantsCount !== undefined && (
                 <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
                   <Icon name={CapUIIcon.UserO} size={CapUIIconSize.Sm} color="text.secondary" />
@@ -353,7 +346,8 @@ const StepPageHeaderNew: React.FC<Props> = ({
                 <Flex align="center" gap={1} p={1} borderRadius="sm" bg="white">
                   <Icon name={CapUIIcon.FileO} size={CapUIIconSize.Sm} color="text.secondary" />
                   <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary">
-                    {intl.formatNumber(repliesCount)} {intl.formatMessage({ id: 'reply.count_no_nb' }, { count: repliesCount })}
+                    {intl.formatNumber(repliesCount)}{' '}
+                    {intl.formatMessage({ id: 'reply.count_no_nb' }, { count: repliesCount })}
                   </Text>
                 </Flex>
               )}

@@ -180,7 +180,7 @@ export type FormValues = {
   isCollectByEmailEnabled: boolean
   preventProposalEdit: boolean
   preventProposalDelete: boolean
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   voteBtnIcon: string | undefined
   voteBtnAction: string | undefined
 } & RequirementsFormValues
@@ -385,6 +385,13 @@ const COLLECT_FRAGMENT = graphql`
         ...ProposalStepRequirementsTabs_proposalStep
         ...ProposalStepOptionnalAccordion_step
         isCollectByEmailEnabled
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
       }
     }
     ...ProposalFormForm_query

@@ -20,6 +20,10 @@ const commit = (variables: DeleteStepMutation$variables): Promise<DeleteStepMuta
   commitMutation<DeleteStepMutation>(environment, {
     mutation,
     variables,
+    updater: (store, data) => {
+      const stepId = data?.deleteStep?.stepId
+      if (stepId) store.delete(stepId)
+    },
   })
 
 export default { commit }

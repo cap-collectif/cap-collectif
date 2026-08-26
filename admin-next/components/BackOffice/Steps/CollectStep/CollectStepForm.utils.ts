@@ -138,6 +138,9 @@ export const getInitialValues = (
       labels: stepEnabledType,
     },
     isCollectByEmailEnabled: step?.isCollectByEmailEnabled,
+    cover: step?.cover
+      ? { id: step.cover.id, name: step.cover.name, size: step.cover.size, type: step.cover.type, url: step.cover.url }
+      : null,
     voteBtnIcon: step?.voteButtonIcon,
     voteBtnAction: step?.actionButtonLabel?.toLowerCase() ?? 'vote',
   }
@@ -234,6 +237,7 @@ export const getCollectStepInput = (
     isCollectByEmailEnabled: formValues.isCollectByEmailEnabled ?? false,
     preventProposalEdit: formValues.preventProposalEdit ?? false,
     preventProposalDelete: formValues.preventProposalDelete ?? false,
+    cover: (formValues.cover as any)?.id ?? null,
     voteButtonIcon: formValues.voteBtnIcon,
     actionButtonLabel: formValues.voteBtnAction?.toUpperCase(),
     operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,

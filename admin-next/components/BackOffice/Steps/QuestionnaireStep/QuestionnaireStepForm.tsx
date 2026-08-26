@@ -44,7 +44,7 @@ export type FormValues = {
   metaDescription: string | null
   footer: string | null
   customCode: string | null
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   stepDurationType?: {
     labels: Array<string>
   }
@@ -78,6 +78,13 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
         metaDescription
         customCode
         footer
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
         project {
           id
           title
@@ -224,10 +231,9 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     const questionnaire = isUsingModel && !isEditing ? MODELquestionnaire : CURRENTquestionnaire
 
-    delete values.cover
-
     const stepInput: UpdateQuestionnaireStepInput = {
       ...values,
+      cover: (values.cover as any)?.id ?? null,
       timeless,
       endAt: timeless ? null : values.endAt,
       startAt: timeless ? null : values.startAt,

@@ -70,7 +70,7 @@ export type FormValues = {
   }
   metaDescription: string | null
   customCode: string | null
-  cover: string | null
+  cover: { id: string; name: string; size: string; type: string; url: string } | null
   stepDurationType?: {
     labels: Array<string>
   }
@@ -133,6 +133,13 @@ const CONSULTATION_STEP_QUERY = graphql`
         }
         metaDescription
         customCode
+        cover {
+          id
+          name
+          size
+          type: contentType
+          url(format: "reference")
+        }
         consultations {
           edges {
             node {
@@ -267,7 +274,15 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       metaDescription: step?.metaDescription ?? '',
       customCode: step?.customCode ?? '',
-      cover: null,
+      cover: step?.cover
+        ? {
+            id: step.cover.id,
+            name: step.cover.name,
+            size: step.cover.size,
+            type: step.cover.type,
+            url: step.cover.url,
+          }
+        : null,
       // @ts-ignore relay stuff
       requirements: getDefaultRequirements(step),
       requirementsReason: step?.requirements?.reason ?? '',
@@ -298,7 +313,6 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
-    delete values.cover
 
     const consultations = values.consultations.map((consultation, consultationIndex) => {
       const sections = consultation.sections.map((section, sectionIndex) => {
@@ -338,6 +352,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
       const updateStepInput: UpdateConsultationStepInput = {
         ...values,
+        cover: (values.cover as any)?.id ?? null,
         isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
         timeless,
         endAt: timeless ? null : values.endAt,

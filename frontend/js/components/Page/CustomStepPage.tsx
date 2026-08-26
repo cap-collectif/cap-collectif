@@ -48,6 +48,7 @@ refresh this page
 export const CustomStepPage = ({ stepId }: Props) => {
   const { state } = useLocation<{ stepId?: string }>()
   const hasFeatureFlagCalendar = useFeatureFlag('calendar')
+  const newProjectPage = useFeatureFlag('new_project_page')
   const intl = useIntl()
   const data = useLazyLoadQuery<CustomStepPageQueryType>(QUERY, {
     stepId: state?.stepId || stepId,
@@ -84,9 +85,11 @@ export const CustomStepPage = ({ stepId }: Props) => {
           </div>
         )}
 
-        <div className="block">
-          <WYSIWYGRender value={body} />
-        </div>
+        {!newProjectPage && (
+          <div className="block">
+            <WYSIWYGRender value={body} />
+          </div>
+        )}
       </div>
     </section>
   )

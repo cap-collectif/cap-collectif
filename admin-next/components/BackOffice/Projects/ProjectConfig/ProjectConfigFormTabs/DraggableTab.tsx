@@ -16,12 +16,21 @@ type DraggableTabProps = {
   tab: DraggableTab_tab$key
   index: number
   isActive: boolean
+  hasContent: boolean
   onSelect: (slug: string) => void
   onSaved: (values: SavedValues) => Promise<void>
   onDeleted: (tabId: string) => Promise<void>
 }
 
-const DraggableTab: React.FC<DraggableTabProps> = ({ tab: tabRef, index, isActive, onSelect, onSaved, onDeleted }) => {
+const DraggableTab: React.FC<DraggableTabProps> = ({
+  tab: tabRef,
+  index,
+  isActive,
+  hasContent,
+  onSelect,
+  onSaved,
+  onDeleted,
+}) => {
   const tab = useFragment(FRAGMENT, tabRef)
 
   const elementRef = React.useRef<HTMLDivElement>(null)
@@ -37,10 +46,11 @@ const DraggableTab: React.FC<DraggableTabProps> = ({ tab: tabRef, index, isActiv
   })
 
   return (
-    <div ref={elementRef}>
+    <div ref={elementRef} data-project-tab-id={tab.id}>
       <TabItem
         tab={tab}
         isActive={isActive}
+        hasContent={hasContent}
         dropEdge={dropEdge as Edge | null}
         onSelect={onSelect}
         onSaved={onSaved}

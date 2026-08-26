@@ -14,7 +14,7 @@ type TemplateColumns = {
 }
 
 type Props = {
-  step: VoteStepProposalsList_proposalStep$key;
+  step: VoteStepProposalsList_proposalStep$key
   templateColumns: TemplateColumns
   triggerRequirementModal: (id: string) => void
 }

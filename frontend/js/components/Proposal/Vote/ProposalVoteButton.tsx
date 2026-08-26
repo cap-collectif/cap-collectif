@@ -57,6 +57,12 @@ const getHasFilledCaptcha = () => {
   return hasFilledCaptcha ? JSON.parse(hasFilledCaptcha) === true : false
 }
 
+const markCaptchaAsFilled = () => {
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('hasFilledCaptcha', JSON.stringify(true))
+  }
+}
+
 const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalVoteButton_proposal on Proposal
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }, token: { type: "String" }) {
@@ -395,6 +401,7 @@ const ProposalVoteButton = ({
   const handleCaptchaChange = async (value: any) => {
     if (!value) return
 
+    markCaptchaAsFilled()
     setHasFilledCaptcha(true)
     await onButtonClick()
   }

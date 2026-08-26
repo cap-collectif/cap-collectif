@@ -5,11 +5,13 @@ import type { ConsultationStepHeader_step } from '~relay/ConsultationStepHeader_
 import DatesInterval from '../Utils/DatesInterval'
 import RemainingTime from '../Utils/RemainingTime'
 import BodyInfos from '../Ui/Boxes/BodyInfos'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type RelayProps = {
   readonly step: ConsultationStepHeader_step
 }
 type Props = RelayProps
 export const ConsultationStepHeader = ({ step }: Props) => {
+  const newProjectPage = useFeatureFlag('new_project_page')
   const {
     timeless,
     timeRange: { startAt, endAt },
@@ -61,7 +63,7 @@ export const ConsultationStepHeader = ({ step }: Props) => {
           </div>
         </div>
       )}
-      {step.body && <BodyInfos maxLines={7} body={step.body} />}
+      {!newProjectPage && step.body && <BodyInfos maxLines={7} body={step.body} />}
     </React.Fragment>
   )
 }

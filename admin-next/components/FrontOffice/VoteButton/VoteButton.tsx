@@ -82,7 +82,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
 
   const hasIncompleteVote = proposal.viewerVote?.completionStatus === 'MISSING_REQUIREMENTS'
   const votesMin = step.votesMin ?? 0
-  const viewerMeetsRequirements = step.requirements?.viewerMeetsTheRequirements
   const viewerVotesCount = step.viewerVotes?.totalCount ?? 0
 
   // When the viewer has a valid counted vote, show at least 1.
@@ -115,16 +114,17 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
       }
 
       const hasNowReachedVotesMin = votesMin === 0 || step.viewerVotes?.totalCount + 1 >= votesMin
+      const createdVote = response?.addProposalVote?.vote
 
-      // If requirements not met and reached minimum votes, trigger requirements flow
-      if (!viewerMeetsRequirements && hasNowReachedVotesMin && response?.addProposalVote?.vote?.id) {
-        triggerRequirementModal(response.addProposalVote.vote.id)
+      // The mutation is the source of truth: open the workflow only when the created vote is incomplete.
+      if (createdVote?.completionStatus === 'MISSING_REQUIREMENTS' && hasNowReachedVotesMin) {
+        triggerRequirementModal(createdVote.id)
         return
       }
     } catch (error) {
       mutationErrorToast(intl)
     }
-  }, [step?.id, proposal?.id, intl, viewerMeetsRequirements, votesMin, step.viewerVotes?.totalCount, viewerSession])
+  }, [step?.id, proposal?.id, intl, votesMin, step.viewerVotes?.totalCount, viewerSession, triggerRequirementModal])
 
   const deleteVote = useCallback(async () => {
     if (!step?.id || !proposal?.id) return
