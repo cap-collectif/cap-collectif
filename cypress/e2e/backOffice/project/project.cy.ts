@@ -85,7 +85,6 @@ context('Project', () => {
 
       cy.visit('/project/projet-vide/presentation/presentationsteptitle')
       cy.get('#details').should('be.visible')
-      cy.contains('PresentationStepTitle').should('be.visible')
       cy.contains('PresentationStepBody').should('be.visible')
 
       cy.visit('/project/projet-vide/consultation/consultationsteptitle')
@@ -112,7 +111,6 @@ context('Project', () => {
 
       cy.visit('/project/projet-vide/collect/collectsteptitle')
       cy.get('.ProposalStepPage-rendered').should('be.visible')
-      cy.contains('CollectStepTitle').should('be.visible')
       cy.contains('CollectStepBody').should('be.visible')
     })
 

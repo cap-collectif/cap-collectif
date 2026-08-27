@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
+exports[`<StepPageHeader /> should not render the timeline title 1`] = `
 Array [
   <div
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
@@ -8,11 +8,6 @@ Array [
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <h2
-      className="h2"
-    >
-      I am a title
-    </h2>
     <div
       className="mb-30 project__step-dates"
     >
@@ -38,11 +33,6 @@ Array [
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <h2
-      className="h2"
-    >
-      I am a title
-    </h2>
     <div
       className="mb-30 project__step-dates"
     >
@@ -68,11 +58,6 @@ Array [
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <h2
-      className="h2"
-    >
-      I am a title
-    </h2>
     <div
       className="mb-30 project__step-dates"
     >
@@ -98,11 +83,6 @@ Array [
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <h2
-      className="h2"
-    >
-      I am a title
-    </h2>
     <div
       className="mb-30 project__step-dates"
     >
@@ -128,11 +108,6 @@ Array [
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <h2
-      className="h2"
-    >
-      I am a title
-    </h2>
     <div
       className="mb-30 project__step-dates"
     >

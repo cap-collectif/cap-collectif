@@ -225,7 +225,6 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
 
   return (
     <StepPageHeaderContainer>
-      <h2 className="h2">{step.title}</h2>
       <div className="mb-30 project__step-dates">
         {(step.timeRange.startAt || step.timeRange.endAt) && (
           <div className="mr-15 d-ib">

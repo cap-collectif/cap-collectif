@@ -9,6 +9,7 @@ import type { StepPageHeaderTestQuery } from '~relay/StepPageHeaderTestQuery.gra
 
 describe('<StepPageHeader />', () => {
   let environment
+  let mockResolvers
   let testComponentTree
   let TestStepPageHeader
   const defaultMockResolvers = {
@@ -37,6 +38,7 @@ describe('<StepPageHeader />', () => {
   beforeEach(() => {
     addsSupportForPortals()
     environment = createMockEnvironment()
+    mockResolvers = defaultMockResolvers
 
     const TestRenderer = props => {
       const data = useLazyLoadQuery<StepPageHeaderTestQuery>(query, {})
@@ -50,10 +52,11 @@ describe('<StepPageHeader />', () => {
       </RelaySuspensFragmentTest>
     )
 
-    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
+    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, mockResolvers))
   })
-  it('should render correctly a consultationStep', () => {
+  it('should not render the timeline title', () => {
     testComponentTree = ReactTestRenderer.create(<TestStepPageHeader />)
+    expect(testComponentTree.root.findAllByType('h2')).toHaveLength(0)
     expect(testComponentTree).toMatchSnapshot()
   })
   it('should render correctly a consultationStep with a description', () => {
@@ -66,33 +69,29 @@ describe('<StepPageHeader />', () => {
     expect(testComponentTree).toMatchSnapshot()
   })
   it('should render correctly a selectionStep', () => {
-    environment.mock.queueOperationResolver(operation =>
-      MockPayloadGenerator.generate(operation, {
-        Step: () => ({ ...defaultMockResolvers.Node(), __typename: 'SelectionStep', voteThreshold: 1, votable: true }),
-      }),
-    )
+    mockResolvers = {
+      Node: () => ({ ...defaultMockResolvers.Node(), __typename: 'SelectionStep', voteThreshold: 1, votable: true }),
+    }
     testComponentTree = ReactTestRenderer.create(<TestStepPageHeader />)
     expect(testComponentTree).toMatchSnapshot()
   })
   it('should render correctly a selectionStep with interpellation', () => {
-    environment.mock.queueOperationResolver(operation =>
-      MockPayloadGenerator.generate(operation, {
-        Step: () => ({
-          ...defaultMockResolvers.Node(),
-          __typename: 'SelectionStep',
-          voteThreshold: 1,
-          votable: true,
-          form: {
-            objectType: 'PROPOSAL',
+    mockResolvers = {
+      Node: () => ({
+        ...defaultMockResolvers.Node(),
+        __typename: 'SelectionStep',
+        voteThreshold: 1,
+        votable: true,
+        form: {
+          objectType: 'PROPOSAL',
+        },
+        project: {
+          type: {
+            title: 'project.types.interpellation',
           },
-          project: {
-            type: {
-              title: 'project.types.interpellation',
-            },
-          },
-        }),
+        },
       }),
-    )
+    }
     testComponentTree = ReactTestRenderer.create(<TestStepPageHeader />)
     expect(testComponentTree).toMatchSnapshot()
   })
