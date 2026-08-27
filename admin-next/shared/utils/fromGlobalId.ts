@@ -24,6 +24,11 @@ export function fromGlobalId(globalId?: string): ResolvedGlobalId {
     id: unbasedGlobalId.substring(delimiterPos + 1),
   }
 }
+
+export function ensureGlobalId(type: string, id: string): Base64String {
+  return fromGlobalId(id).type ? id : base64(`${type}:${id}`)
+}
+
 export function isGlobalId(id: string) {
   if (!id) return false
   return !id.match('-')

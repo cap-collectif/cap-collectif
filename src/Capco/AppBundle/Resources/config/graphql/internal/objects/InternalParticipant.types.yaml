@@ -15,6 +15,31 @@ InternalParticipant:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Participant
+            email:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            firstname:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            lastname:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            phone:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            postalAddress:
+                type: 'PreviewGoogleMapsAddress'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            dateOfBirth:
+                type: 'DateTime'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            zipCode:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
+            userIdentificationCode:
+                type: 'String'
+                resolve: '@=value.getUserIdentificationCodeValue()'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
             token:
                 access: '@=hasRole("ROLE_ADMIN") or hasRole("ROLE_MEDIATOR")'
                 type: 'String!'
@@ -22,6 +47,7 @@ InternalParticipant:
             phoneConfirmed:
                 type: 'Boolean!'
                 description: 'Wether or not the participant has confirmed his phone.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
             replies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -61,15 +87,19 @@ InternalParticipant:
             consentSmsCommunication:
                 type: 'Boolean!'
                 description: 'Wether or not the participant consent receiving sms communication.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
             consentInternalCommunication:
                 type: 'Boolean!'
                 description: 'Wether or not the participant consent receiving internal communication.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
             consentPrivacyPolicy:
                 type: 'Boolean!'
                 description: 'Wether or not the participant consent the privacy policy.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'
             media:
                 type: 'InternalMedia'
                 description: 'The participant media.'
             isEmailConfirmed:
                 type: 'Boolean!'
                 description: 'Wether or not the participant has confirmed his email.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver").canAccessPersonalData(value, getUser(), context)'

@@ -26,8 +26,11 @@ class EventExportParticipantsUrlResolver implements QueryInterface
         );
     }
 
-    public function isGranted(Event $event): bool
+    public function isGranted(Event $event, ?\ArrayObject $context = null): bool
     {
-        return $this->authorizationChecker->isGranted(EventVoter::EXPORT, $event);
+        return ($context
+                && $context->offsetExists('disable_acl')
+                && true === $context->offsetGet('disable_acl'))
+            || $this->authorizationChecker->isGranted(EventVoter::EXPORT, $event);
     }
 }

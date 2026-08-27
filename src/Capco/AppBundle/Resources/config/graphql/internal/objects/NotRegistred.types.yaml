@@ -6,6 +6,7 @@ NotRegistered:
             email:
                 type: 'String'
                 description: 'Email of the user.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver").isGranted(value.getEvent(), context)'
             username:
                 type: 'String'
                 description: 'Username of the user.'

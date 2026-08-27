@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\EventOrderField;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Search\EventSearch;
@@ -15,6 +16,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class QueryEventsResolver implements QueryInterface
 {
@@ -23,7 +25,8 @@ class QueryEventsResolver implements QueryInterface
     public function __construct(
         private EventSearch $eventSearch,
         private LoggerInterface $logger,
-        private QueryAnalyzer $queryAnalyzer
+        private QueryAnalyzer $queryAnalyzer,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
     }
 
@@ -75,8 +78,10 @@ class QueryEventsResolver implements QueryInterface
                     $filters['isRegistrable'] = $args->offsetGet('isRegistrable');
                 }
 
-                if ($args->offsetExists('enabled')) {
-                    // Maybe also check that viewer is an admin
+                if (
+                    $args->offsetExists('enabled')
+                    && $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN)
+                ) {
                     $filters['enabled'] = $args->offsetGet('enabled');
                 } else {
                     $filters['enabled'] = true;

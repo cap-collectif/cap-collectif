@@ -1939,7 +1939,7 @@ InternalMutation:
                 builderConfig:
                     inputType: UpdateParticipantInput
                     payloadType: UpdateParticipantPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Participant\\UpdateParticipantMutation", args, getUser())'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Participant\\UpdateParticipantMutation", args, context)'
             validateContribution:
                 builder: 'Relay::Mutation'
                 builderConfig:

@@ -45,13 +45,16 @@ Scenario: GraphQL client want to get the list of participants of an event
           },
           "edges": [
             { "node": { "_id":"user1" }},
-            { "node": { "username": @string@, "email": @string@ }},
-            { "node": { "username": @string@, "email": @string@ }},
-            { "node": { "username": @string@, "email": @string@ }},
-            { "node": { "username": @string@, "email": @string@ }}
+            { "node": { "username": @string@, "email": null }},
+            { "node": { "username": @string@, "email": null }},
+            { "node": { "username": @string@, "email": null }},
+            { "node": { "username": @string@, "email": null }}
           ]
         }
       }
+    },
+    "extensions": {
+      "warnings": @array@
     }
   }
   """

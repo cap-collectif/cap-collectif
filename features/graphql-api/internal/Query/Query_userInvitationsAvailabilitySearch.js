@@ -15,6 +15,18 @@ const UserInvitationsAvailabilitySearch = /* GraphQL */ `
 `
 
 describe('Internal|UserInvitationsAvailabilitySearch', () => {
+  it('denies anonymous access', async () => {
+    await expect(
+      graphql(
+        UserInvitationsAvailabilitySearch,
+        {
+          emails: ['theo@cap-collectif.com', 'rem@chan.com'],
+        },
+        'internal',
+      ),
+    ).rejects.toThrowError('Access denied to this field.')
+  })
+
   it('should fetch the already used email addresses among the given ones', async () => {
     await expect(
       graphql(

@@ -38,6 +38,7 @@ import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { buildToastUrl } from './utils/buildToastUrl'
 import UsernameRequirementModal from './UsernameRequirementModal'
 import MediaRequirementModal from './MediaRequirementModal'
+import { ensureGlobalId } from '@shared/utils/fromGlobalId'
 
 type Props = {
   stepId: string
@@ -176,11 +177,12 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
   const { viewerSession } = useAppContext()
   const isAuthenticated = !!viewerSession?.id
   const participantToken = getParticipantToken()
+  const contributionGlobalId = ensureGlobalId('AbstractVote', contributionId)
   const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
     stepId,
     participantToken,
     isAuthenticated,
-    contributionId,
+    contributionId: contributionGlobalId,
   })
 
   const viewer = query?.viewer ?? null
@@ -340,7 +342,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
         giveUpUrl,
         logo,
         requirementsUrl,
-        contributionId,
+        contributionId: contributionGlobalId,
         contributionTypeName,
         captchaError,
         setCaptchaError,
@@ -450,7 +452,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
             }
           })}
           {!emailRequirement && !isAuthenticated && !hasMetAllRequirements && <CaptchaModal />}
-          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionId} />}
+          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionGlobalId} />}
           {!email && !consentInternalCommunication && <ConsentInternalCommunicationEmailModal />}
           {email && !consentInternalCommunication && <ConsentInternalCommunicationModal />}
           {/* Uncomment when registration is implemented */}

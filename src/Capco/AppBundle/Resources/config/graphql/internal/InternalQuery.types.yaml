@@ -234,6 +234,7 @@ InternalQuery:
                         defaultValue: false
             userSearch:
                 type: '[InternalContributor]'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver").isGranted(getUser())'
                 args:
                     isMediatorCompliant:
                         type: 'Boolean'
@@ -288,6 +289,7 @@ InternalQuery:
             proposalForms:
                 description: 'Lookup forms.'
                 type: '[InternalProposalForm]!'
+                access: "@=hasRole('ROLE_ADMIN')"
                 args:
                     query:
                         type: 'String'
@@ -329,6 +331,7 @@ InternalQuery:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", args)'
             availableQuestionnaires:
                 type: '[InternalQuestionnaire!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
                 args:
                     term:
                         description: 'the term to filter questions'
@@ -506,6 +509,7 @@ InternalQuery:
             userInvitationsAvailabilitySearch:
                 type: 'UserInvitationsAvailabilityConnection!'
                 description: 'Check availability of a given email list among existing users and invitations.'
+                access: "@=hasRole('ROLE_ADMIN')"
                 args:
                     emails:
                         type: '[String!]!'
@@ -677,7 +681,7 @@ InternalQuery:
                     token:
                         type: 'String'
                         description: 'get a participant by its token'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver", args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantResolver", args, context)'
             menuItems:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'

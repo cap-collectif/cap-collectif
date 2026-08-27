@@ -59,7 +59,6 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -305,11 +304,7 @@ class ExportController extends Controller
             throw new BadRequestHttpException('You must provide a valid step id.');
         }
 
-        $organization = $this->getUser()->getOrganization();
-        $projectOwner = $step->getProject()->getOwner();
-        if ($organization && ($projectOwner !== $organization)) {
-            throw new AccessException();
-        }
+        $this->denyAccessUnlessGranted(ProjectVoter::EXPORT, $step->getProject());
 
         $isSimplified = 'true' === $request->query->get('simplified');
         $variant = $isSimplified ? ExportVariantsEnum::SIMPLIFIED : ExportVariantsEnum::FULL;

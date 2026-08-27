@@ -39,6 +39,7 @@ import moment from 'moment'
 import UsernameRequirementModal from './UsernameRequirementModal'
 import MediaRequirementModal from './MediaRequirementModal'
 import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
+import { ensureGlobalId } from '@shared/utils/fromGlobalId'
 
 export type Props = {
   stepId: string
@@ -177,11 +178,12 @@ const getParticipantToken = (): string | null => {
 const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId }) => {
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
   const participantToken = getParticipantToken()
+  const contributionGlobalId = ensureGlobalId('AbstractVote', contributionId)
   const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
     stepId,
     participantToken,
     isAuthenticated,
-    contributionId,
+    contributionId: contributionGlobalId,
   })
 
   const viewer = query?.viewer ?? null
@@ -341,7 +343,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
         giveUpUrl,
         logo,
         requirementsUrl,
-        contributionId,
+        contributionId: contributionGlobalId,
         contributionTypeName,
         captchaError,
         setCaptchaError,
@@ -451,7 +453,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
             }
           })}
           {(!emailRequirement || isMeetingEmailRequirement) && !hasMetAllRequirements && <CaptchaModal />}
-          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionId} />}
+          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionGlobalId} />}
           {!email && !consentInternalCommunication && <ConsentInternalCommunicationEmailModal />}
           {email && !consentInternalCommunication && <ConsentInternalCommunicationModal />}
           {/* Uncomment when registration is implemented */}

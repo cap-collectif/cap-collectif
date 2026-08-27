@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\SortField;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Search\UserSearch;
@@ -13,6 +14,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class QueryUsersResolver implements QueryInterface
 {
@@ -23,7 +25,8 @@ class QueryUsersResolver implements QueryInterface
     public function __construct(
         UserRepository $userRepo,
         private QueryAnalyzer $queryAnalyzer,
-        private UserSearch $userSearch
+        private UserSearch $userSearch,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->userRepo = $userRepo;
     }
@@ -33,11 +36,12 @@ class QueryUsersResolver implements QueryInterface
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
-        $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
-        $includeDisabled = isset($args['withDisabled']) && true === $args['withDisabled'];
-        $emailConfirmed = $args['emailConfirmed'];
-        $consentInternalCommunication = $args['consentInternalCommunication'];
-        $onlyProjectAdmins = $args['onlyProjectAdmins'];
+        $isAdmin = $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        $includeSuperAdmin = $isAdmin && isset($args['superAdmin']) && true === $args['superAdmin'];
+        $includeDisabled = $isAdmin && isset($args['withDisabled']) && true === $args['withDisabled'];
+        $emailConfirmed = $isAdmin ? $args['emailConfirmed'] : null;
+        $consentInternalCommunication = $isAdmin ? $args['consentInternalCommunication'] : null;
+        $onlyProjectAdmins = $isAdmin ? $args['onlyProjectAdmins'] : null;
 
         $orderBy = $args->offsetExists('orderBy')
             ? $args->offsetGet('orderBy')

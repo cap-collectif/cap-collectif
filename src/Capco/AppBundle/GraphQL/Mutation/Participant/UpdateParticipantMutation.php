@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Participant;
 
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Form\ParticipantType;
+use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Traits\FormValidationErrorsTraits;
@@ -27,7 +28,7 @@ class UpdateParticipantMutation implements MutationInterface
     /**
      * @return array{participant: Capco\AppBundle\Entity\Participant|null, validationErrors: non-empty-string|false}
      */
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, ?\ArrayObject $context = null): array
     {
         $this->formatInput($input);
         $data = $input->getArrayCopy();
@@ -35,6 +36,7 @@ class UpdateParticipantMutation implements MutationInterface
         unset($data['token']);
 
         $participant = $this->participantHelper->getParticipantByToken($token);
+        $context?->offsetSet(ParticipantResolver::CONTEXT_PARTICIPANT_ID, $participant->getId());
         $form = $this->formFactory->create(ParticipantType::class, $participant);
 
         if ($input->offsetGet('phone')) {

@@ -124,7 +124,7 @@ InternalEvent:
                 description: 'The event status.'
                 resolve: '@=value.getStatus()'
             exportParticipantsUrl:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver").isGranted(value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver").isGranted(value, context)'
                 type: 'URI'
                 description: 'The url to export participants'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver", value)'
