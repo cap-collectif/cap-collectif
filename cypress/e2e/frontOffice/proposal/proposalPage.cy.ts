@@ -149,7 +149,8 @@ context('Proposal Page', () => {
       cy.get('#body').clear().type('Commentaire modifie par Cypress')
       cy.get('#confirm').check({ force: true })
       cy.get('button[type="submit"]').click()
-      cy.contains('Commentaire modifie par Cypress').should('be.visible')
+      cy.get('#CommentEdit-Q29tbWVudDpwcm9wb3NhbENvbW1lbnQx').should('be.visible')
+      cy.contains('.comments__section', 'Commentaire modifie par Cypress').should('be.visible')
     })
     it('allows a user to report a proposal', () => {
       cy.task('enable:feature', 'reporting')

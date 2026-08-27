@@ -154,6 +154,7 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
           mode="edit"
           proposal={selectedProposal}
           proposalForm={proposalForm}
+          stepId={stepId}
           onClose={() => {
             setIsEditModalOpen(false)
             setSelectedProposal(null)

@@ -16,9 +16,9 @@ export type EditModeProps = {
   mode: 'edit'
   proposal: any
   proposalForm: any
+  stepId: string
   onClose: () => void
   disabled?: never
-  stepId?: never
 }
 
 /**

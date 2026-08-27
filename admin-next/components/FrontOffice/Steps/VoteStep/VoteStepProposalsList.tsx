@@ -47,6 +47,7 @@ const PROPOSALS_FRAGMENT = graphql`
       status: $status
       geoBoundingBox: $geoBoundingBox
       term: $term
+      state: PUBLISHED
     )
       @connection(
         key: "ProposalsList_proposals"

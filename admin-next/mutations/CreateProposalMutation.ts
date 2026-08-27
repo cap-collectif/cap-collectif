@@ -33,7 +33,7 @@ const mutation = graphql`
           }
         }
         comments {
-          totalCount
+          totalCountWithAnswers
         }
         author {
           username
@@ -49,6 +49,9 @@ const mutation = graphql`
         }
         paperVotesTotalCount
         estimation
+        form {
+          usingIllustration
+        }
       }
       proposalId: proposal {
         id

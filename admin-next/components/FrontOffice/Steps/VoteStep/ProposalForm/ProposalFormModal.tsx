@@ -604,12 +604,16 @@ const ProposalFormModal: React.FC<Props> = props => {
           ...(emailToken && { emailToken }),
         }
 
-        const response = await ChangeProposalContentMutation.commit({ input: editModeInput })
+        const response = await ChangeProposalContentMutation.commit({
+          variables: { input: editModeInput },
+          stepId: props.stepId,
+          wasDraft: proposal.publicationStatus === 'DRAFT',
+        })
 
         if (response.changeProposalContent?.proposal) {
           successToast(
             intl.formatMessage(
-              { id: isDraft ? 'proposal-draft-saved' : 'proposal-published-successfully' },
+              { id: isDraft ? 'draft.create.registered' : 'proposal-create' },
               { title: response.changeProposalContent.proposal.title },
             ),
           )
@@ -623,7 +627,6 @@ const ProposalFormModal: React.FC<Props> = props => {
           ...(participantToken && { participantToken }),
         }
         const shouldRefetchAnonymousPublishedProposal = viewerSession === null && !isDraft
-
         const response = await CreateProposalMutation.commit({
           variables: {
             input: createModeInput,
@@ -670,12 +673,13 @@ const ProposalFormModal: React.FC<Props> = props => {
                   latlngBounds: searchParams.get('latlngBounds'),
                 },
               }),
+              { fetchPolicy: 'network-only' },
             ).toPromise()
           }
 
           successToast(
             intl.formatMessage(
-              { id: isDraft ? 'proposal-draft-saved' : 'proposal-created-successfully' },
+              { id: isDraft ? 'draft.create.registered' : 'proposal-create' },
               { title: createProposal.proposal.title },
             ),
           )

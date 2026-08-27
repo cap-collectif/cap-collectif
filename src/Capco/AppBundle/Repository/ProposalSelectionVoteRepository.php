@@ -484,6 +484,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         ?int $offset = null
     ): array {
         $qb = $this->findByParticipantQueryBuilder($participant, $mediator, $project, $step)
+            ->orderBy('v.id', 'ASC')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->setParameter('participant', $participant)

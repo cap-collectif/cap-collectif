@@ -165,6 +165,7 @@ export default new (class AdminProjectPage {
 
   submitStepModal() {
     this.stepModalSubmitButton.click()
+    this.stepModalSubmitButton.should('not.exist')
   }
 
   get stepModalSubmitButton() {
