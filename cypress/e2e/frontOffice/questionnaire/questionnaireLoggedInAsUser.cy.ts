@@ -1,12 +1,10 @@
 import { QuestionnairePage } from '~e2e/pages'
 
 context('Opened Questionnaire - Logged-in as user', () => {
-  beforeEach(() => {
-    cy.directLoginAs('user')
-  })
   describe('Mutation', () => {
     beforeEach(() => {
       cy.task('db:restore')
+      cy.directLoginAs('user')
       QuestionnairePage.visitOpenedQuestionnaire()
     })
     it('should correctly add a reply to a questionnaire', () => {
@@ -52,7 +50,11 @@ context('Opened Questionnaire - Logged-in as user', () => {
     })
   })
   describe('Errors', () => {
+    before(() => {
+      cy.task('db:restore')
+    })
     beforeEach(() => {
+      cy.directLoginAs('user')
       QuestionnairePage.visitOpenedQuestionnaire()
     })
     it('should correctly display errors when user attempts to add a reply to a questionnaire without filling the required questions', () => {
@@ -79,17 +81,28 @@ context('Opened Questionnaire - Logged-in as user', () => {
       cy.contains('reply.constraints.choices_min').should('exist')
     })
   })
-  it('should correctly place a ranking answer to the choice box', () => {
-    QuestionnairePage.visitOpenedQuestionnaire()
-    QuestionnairePage.clickAnswerAgainButton()
-    cy.get('#reply-form-container')
-    QuestionnairePage.fillCreateFormWithRequiredFields()
-    cy.contains('global.form.ranking.select').click({ force: true })
-    cy.get('#ranking__selection [draggable="true"]').contains('Choix 1')
+  describe('Ranking', () => {
+    before(() => {
+      cy.task('db:restore')
+    })
+    beforeEach(() => {
+      cy.directLoginAs('user')
+    })
+    it('should correctly place a ranking answer to the choice box', () => {
+      QuestionnairePage.visitOpenedQuestionnaire()
+      QuestionnairePage.clickAnswerAgainButton()
+      cy.get('#reply-form-container')
+      QuestionnairePage.fillCreateFormWithRequiredFields()
+      cy.contains('global.form.ranking.select').click({ force: true })
+      cy.get('#ranking__selection [draggable="true"]').contains('Choix 1')
+    })
   })
 })
 
 context('Closed Questionnaire - Logged-in as user', () => {
+  before(() => {
+    cy.task('db:restore')
+  })
   beforeEach(() => {
     cy.directLoginAs('user')
     QuestionnairePage.visitClosedQuestionnaire()

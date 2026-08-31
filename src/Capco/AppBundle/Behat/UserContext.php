@@ -39,28 +39,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userId registered less than 1 hour ago
-     */
-    public function userRegisteredLessThan1hAgo(string $userId)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        $user->setCreatedAt(new \DateTime('-30 minutes '));
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Then user :userId registered less than :time minutes ago
-     */
-    public function userRegisteredLessThanXMinutesgo(string $userId, mixed $time)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        $user->setCreatedAt(new \DateTime("-{$time} minutes"));
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * @Then user identified by email :email should have username :userName
      */
     public function userNameIs(string $email, string $userName)
