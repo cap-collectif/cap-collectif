@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Section.opinions connection lists opinions ordered by comments 1`] = `
+Object {
+  "node": Object {
+    "opinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTY=",
+            "pinned": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNA==",
+            "pinned": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 93,
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uMw==",
+            "pinned": false,
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Section.opinions connection lists opinions ordered by favorites 1`] = `
+Object {
+  "node": Object {
+    "opinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uMw==",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNTY=",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNA==",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Section.opinions connection lists opinions ordered by positions 1`] = `
+Object {
+  "node": Object {
+    "opinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uMw==",
+            "pinned": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNA==",
+            "pinned": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNTY=",
+            "pinned": false,
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Section.opinions connection lists opinions ordered by votes 1`] = `
+Object {
+  "node": Object {
+    "opinions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uMw==",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 1,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNA==",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvbjpvcGluaW9uNTY=",
+            "pinned": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;

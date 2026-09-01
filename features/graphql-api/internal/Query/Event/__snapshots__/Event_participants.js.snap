@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Event.participants lists the participants of an event 1`] = `
+Object {
+  "event": Object {
+    "participants": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "user1",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": null,
+            "username": "dicki.harmony",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": null,
+            "username": "istracke",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": null,
+            "username": "lila.paucek",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": null,
+            "username": "lbashirian",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "hasNextPage": true,
+      },
+      "totalCount": 51,
+    },
+  },
+}
+`;
+
+exports[`Internal|Event.participants lists the registered user of an event 1`] = `
+Object {
+  "event": Object {
+    "participants": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "user3",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;

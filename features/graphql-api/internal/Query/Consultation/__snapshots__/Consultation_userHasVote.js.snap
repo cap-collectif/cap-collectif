@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Consultation.userHasVote checks whether users voted on a consultation 1`] = `
+Object {
+  "consultation": Object {
+    "lbrunetHasVote": true,
+    "spylHasVote": false,
+    "unknownUserHasVote": false,
+  },
+}
+`;

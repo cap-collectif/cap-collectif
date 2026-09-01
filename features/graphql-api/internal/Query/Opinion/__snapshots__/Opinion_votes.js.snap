@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Opinion.votes connection lists the YES votes for an opinion 1`] = `
+Object {
+  "opinion": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+            "id": "T3BpbmlvblZvdGU6NA==",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "_id": "user3",
+            },
+            "id": "T3BpbmlvblZvdGU6Mw==",
+            "value": "YES",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Opinion.votes connection lists the votes for an opinion 1`] = `
+Object {
+  "opinion": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "id": "T3BpbmlvblZvdGU6NQ==",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+            "id": "T3BpbmlvblZvdGU6NA==",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMw==",
+            },
+            "id": "T3BpbmlvblZvdGU6Mw==",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvblZvdGU6Mg==",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "hasNextPage": false,
+      },
+      "totalCount": 4,
+    },
+  },
+}
+`;

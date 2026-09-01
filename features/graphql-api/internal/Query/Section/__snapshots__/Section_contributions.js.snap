@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Section.contributionConnection lists contributions ordered by vote count 1`] = `
+Object {
+  "section": Object {
+    "contributionConnection": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjQ2O2k6MjtzOjk6Im9waW5pb241OSI7fQ==",
+          "node": Object {
+            "title": "Article 2",
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjQ7aToyO3M6OToib3BpbmlvbjU3Ijt9",
+          "node": Object {
+            "title": "Article 1",
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjA7aToyO3M6OToib3BpbmlvbjU4Ijt9",
+          "node": Object {
+            "title": "Article 3",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
