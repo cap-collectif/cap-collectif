@@ -115,7 +115,7 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
                     dispatch(submit(formName))
                   }}
                 >
-                  <FormattedHTMLMessage id="import-failed-retry" />
+                  {intl.formatMessage({ id: 'import-failed-retry' })}
                 </Button>
               </div>
             ),
@@ -136,9 +136,7 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
                   dispatch(submit(formName))
                 }}
               >
-                {intl.formatMessage({
-                  id: 'import-failed-retry',
-                })}
+                {intl.formatMessage({ id: 'import-failed-retry' })}
               </Button>
             </div>
           ),

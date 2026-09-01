@@ -428,6 +428,12 @@ Capco\AppBundle\Entity\Media:
         name: proposalToImport
         category: '@MediaCategory1'
         providerReference: proposals_idf_bp3.csv
+    importedCsvProposalsBadLengths:
+        id: 'importedCsvProposalsBadLengths'
+        binaryContentPath: proposals_idf_bp3_invalid_text_lengths.csv
+        name: proposalToImportWithInvalidTextLengths
+        category: '@MediaCategory1'
+        providerReference: proposals_idf_bp3_invalid_text_lengths.csv
     ProfilePicVMD:
         id: 'ProfilePicVMD'
         binaryContentPath: user/vmd.jpg

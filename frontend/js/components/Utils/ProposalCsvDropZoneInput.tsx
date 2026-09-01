@@ -36,6 +36,26 @@ type FileUploadFieldProps = {
 }
 const CSV_MAX_UPLOAD_SIZE = 8000000
 
+const lineErrorMessageIds = {
+  TITLE_TOO_SHORT: 'admin.proposals-import.line-error.title-too-short',
+  TITLE_TOO_LONG: 'admin.proposals-import.line-error.title-too-long',
+  SUMMARY_TOO_SHORT: 'admin.proposals-import.line-error.summary-too-short',
+  SUMMARY_TOO_LONG: 'admin.proposals-import.line-error.summary-too-long',
+  DESCRIPTION_TOO_SHORT: 'admin.proposals-import.line-error.description-too-short',
+  MISSING_MANDATORY_FIELD: 'admin.proposals-import.line-error.missing-mandatory-field',
+  DUPLICATE: 'admin.proposals-import.line-error.duplicate',
+  INVALID_ADDRESS: 'admin.proposals-import.line-error.invalid-address',
+  INVALID_DISTRICT: 'admin.proposals-import.line-error.invalid-district',
+  INVALID_STATUS: 'admin.proposals-import.line-error.invalid-status',
+  INVALID_THEME: 'admin.proposals-import.line-error.invalid-theme',
+  INVALID_CATEGORY: 'admin.proposals-import.line-error.invalid-category',
+  INVALID_AUTHOR: 'admin.proposals-import.line-error.invalid-author',
+  INVALID_MEDIA_URL: 'admin.proposals-import.line-error.invalid-media-url',
+  INVALID_SOCIAL_NETWORK_URL: 'admin.proposals-import.line-error.invalid-social-network-url',
+  INVALID_CUSTOM_FIELD: 'admin.proposals-import.line-error.invalid-custom-field',
+  INVALID_COST: 'admin.proposals-import.line-error.invalid-cost',
+}
+
 export const formName = `ImportProposalsFromCsvModal`
 
 export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUploadFieldProps) => {
@@ -148,6 +168,17 @@ export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUp
                 }}
               />
             </InfoMessage.Title>
+            {input.value.lineErrors
+              ?.filter(({ reason }) => reason !== 'MISSING_MANDATORY_FIELD' && reason !== 'DUPLICATE')
+              .map(({ line, reason, field, expected, actual, duplicateOfLine }, index) => (
+                <InfoMessage.Content key={`${line}-${reason}-${index}`}>
+                  #{line} —{' '}
+                  {intl.formatMessage(
+                    { id: lineErrorMessageIds[reason] },
+                    { field, expected, actual, duplicateOfLine: duplicateOfLine ?? 0 },
+                  )}
+                </InfoMessage.Content>
+              ))}
           </InfoMessage>
         </Card>
       )}
@@ -171,6 +202,17 @@ export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUp
                 },
               )}
             </InfoMessage.Title>
+            {input.value.lineErrors
+              ?.filter(({ reason }) => reason === 'MISSING_MANDATORY_FIELD')
+              .map(({ line, reason, field, expected, actual, duplicateOfLine }, index) => (
+                <InfoMessage.Content key={`${line}-${reason}-${index}`}>
+                  #{line} —{' '}
+                  {intl.formatMessage(
+                    { id: lineErrorMessageIds[reason] },
+                    { field, expected, actual, duplicateOfLine: duplicateOfLine ?? 0 },
+                  )}
+                </InfoMessage.Content>
+              ))}
           </InfoMessage>
         </Card>
       )}
@@ -194,6 +236,17 @@ export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUp
                 },
               )}
             </InfoMessage.Title>
+            {input.value.lineErrors
+              ?.filter(({ reason }) => reason === 'DUPLICATE')
+              .map(({ line, reason, field, expected, actual, duplicateOfLine }, index) => (
+                <InfoMessage.Content key={`${line}-${reason}-${index}`}>
+                  #{line} —{' '}
+                  {intl.formatMessage(
+                    { id: lineErrorMessageIds[reason] },
+                    { field, expected, actual, duplicateOfLine: duplicateOfLine ?? 0 },
+                  )}
+                </InfoMessage.Content>
+              ))}
           </InfoMessage>
         </Card>
       )}

@@ -1,0 +1,17 @@
+title;author;cost;address;category;theme;body;summary;webPageUrl;linkedInUrl;youtubeUrl;facebookUrl;twitterUrl;instagramUrl;status;No Mes Démarches;No IRIS;Raison sociale
+ab;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Résumé trop court;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;a;;;;;;;;1337;IRIS 02;SAS
+Résumé trop long;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;;;;;;;;1337;IRIS 02;SAS
+Description trop courte;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;ab;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Champ obligatoire manquant;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;
+Adresse invalide;user@test.com;;[];Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Catégorie introuvable;user@test.com;;"[{""address_components":[]}]";Catégorie inexistante;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Thème introuvable;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Thème inexistant;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Statut introuvable;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;Statut inexistant;1337;IRIS 02;SAS
+Auteur introuvable;inconnu@example.test;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Coût invalide;user@test.com;invalide;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+URL sociale invalide;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;url-invalide;;;;;;;1337;IRIS 02;SAS
+Champ personnalisé invalide;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;pas-un-nombre;IRIS 02;SAS
+Référence de doublon;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS
+Référence de doublon;user@test.com;;"[{""address_components":[]}]";Santé environnementale;Justice;Description valide;Résumé valide;;;;;;;;1337;IRIS 02;SAS

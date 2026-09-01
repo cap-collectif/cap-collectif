@@ -20,6 +20,14 @@ const mutation = graphql`
   ) {
     addProposalsFromCsv(input: $input) {
       badLines
+      lineErrors {
+        line
+        reason
+        field
+        expected
+        actual
+        duplicateOfLine
+      }
       duplicates
       mandatoryMissing
       importableProposals

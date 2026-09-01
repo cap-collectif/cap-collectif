@@ -1,0 +1,17 @@
+ProposalCsvLineError:
+    type: object
+    config:
+        description: 'A validation error on a CSV line.'
+        fields:
+            line:
+                type: 'Int!'
+            reason:
+                type: 'String!'
+            field:
+                type: 'String'
+            expected:
+                type: 'String'
+            actual:
+                type: 'String'
+            duplicateOfLine:
+                type: 'Int'

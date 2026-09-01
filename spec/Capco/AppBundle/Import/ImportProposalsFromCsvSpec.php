@@ -23,8 +23,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ImportProposalsFromCsvSpec extends ObjectBehavior
 {
@@ -42,9 +43,11 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         LoggerInterface $logger,
         TokenGeneratorInterface $tokenGenerator,
         ValidatorInterface $validator,
-        TranslatorInterface $translator,
         SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
     ) {
+        $translator = new Translator('fr');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource('array', ['global-well' => 'Bien'], 'fr', 'CapcoAppBundle');
         $this->beConstructedWith(
             $mediaManager,
             $districtRepository,
@@ -122,18 +125,19 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(false);
     }
 
-    public function it_check_majority_question(ProposalForm $proposalForm, SimpleQuestion $question)
-    {
+    public function it_allows_a_valid_majority_question_response(
+        ProposalForm $proposalForm,
+        SimpleQuestion $question
+    ) {
         $customFields = ['majority decision'];
         $proposalForm->getQuestionByTitle('majority decision')->willReturn($question);
         $question->setTitle('majority decision');
         $question->getType()->willReturn(AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION);
-        $row['majority decision'] = '';
+        $row['majority decision'] = 'Bien';
         $this->setCustomFields($customFields);
         $this->setProposalForm($proposalForm);
 
         $proposalForm->getQuestions()->willReturn(new ArrayCollection([$question]));
-
         $this->checkIfCustomQuestionResponseIsValid($row, 2)->shouldReturn(true);
     }
 

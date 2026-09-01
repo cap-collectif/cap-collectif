@@ -712,6 +712,9 @@ type AddProposalsFromCsvPayload {
   """List of bad lines."""
   badLines: [Int]!
 
+  """Reasons for invalid CSV lines."""
+  lineErrors: [ProposalCsvLineError]!
+
   """Number of doubloon"""
   duplicates: [Int]!
 
@@ -13200,6 +13203,16 @@ type ProposalConnection {
 
   """Information to aid in pagination."""
   edges: [ProposalEdge]
+}
+
+"""A validation error on a CSV line."""
+type ProposalCsvLineError {
+  line: Int!
+  reason: String!
+  field: String
+  expected: String
+  actual: String
+  duplicateOfLine: Int
 }
 
 """A proposal decision."""

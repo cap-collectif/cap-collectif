@@ -12,6 +12,9 @@ InternalAddProposalsFromCsvPayload:
             badLines:
                 type: '[Int]!'
                 description: 'List of bad lines.'
+            lineErrors:
+                type: '[ProposalCsvLineError]!'
+                description: 'Reasons for invalid CSV lines.'
             duplicates:
                 type: '[Int]!'
                 description: 'Number of doubloon'

@@ -45,6 +45,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ImportProposalsFromCsv
 {
     use TranslationTrait;
+    private const MIN_TITLE_LENGTH = 3;
+    private const MAX_TITLE_LENGTH = 255;
+    private const MIN_SUMMARY_LENGTH = 2;
+    private const MAX_SUMMARY_LENGTH = 140;
+    private const MIN_DESCRIPTION_LENGTH = 3;
     public bool $permissiveSocialNetworksUrl = false;
     private ?string $filePath = null;
     private ?string $delimiter = null;
@@ -54,9 +59,12 @@ class ImportProposalsFromCsv
     private array $createdProposals = [];
     private int $importableProposals = 0;
     private array $badData = [];
+    /** @var list<array{line: int, reason: string, field: ?string, expected: ?string, actual: ?string, duplicateOfLine: ?int}> */
+    private array $lineErrors = [];
+    /** @var array<int, int> */
+    private array $duplicateOfLines = [];
     private array $mandatoryMissing = [];
     private ?Proposal $lastEntity = null;
-    private readonly TranslatorInterface $translator;
 
     public function __construct(
         private readonly MediaManager $mediaManager,
@@ -72,11 +80,10 @@ class ImportProposalsFromCsv
         private readonly LoggerInterface $logger,
         private readonly TokenGeneratorInterface $tokenGenerator,
         private readonly ValidatorInterface $validator,
-        TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         private readonly ?string $projectDir,
         private readonly SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
     ) {
-        $this->translator = $translator;
     }
 
     public function setProposalForm(ProposalForm $proposalForm): void
@@ -159,6 +166,9 @@ class ImportProposalsFromCsv
         $duplicateLinesToBeSkipped = $skipDuplicateLines
             ? $this->getDuplicates($associativeRowsWithHeaderLine)
             : [];
+        foreach ($duplicateLinesToBeSkipped as $line) {
+            $this->addLineError($line, 'DUPLICATE', 'title', 'unique', null, $this->duplicateOfLines[$line] ?? null);
+        }
 
         $progress = null;
         if ($output) {
@@ -200,6 +210,7 @@ class ImportProposalsFromCsv
             'importedProposals' => !$dryRun && !empty($this->createdProposals) ? $this->createdProposals : [],
             'importableProposals' => $this->importableProposals,
             'badLines' => $this->badData,
+            'lineErrors' => $this->lineErrors,
             'duplicates' => array_values($duplicateLinesToBeSkipped),
             'mandatoryMissing' => $this->mandatoryMissing,
             'errorCode' => null,
@@ -222,7 +233,7 @@ class ImportProposalsFromCsv
                             && !$question->isChoiceValid(trim((string) $row[$questionTitle]))
                             && !$question->isOtherAllowed())
                     ) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
+                        $this->addBadDataError($key, 'INVALID_CUSTOM_FIELD', $questionTitle, 'valid choice');
                         $this->logger->error(
                             sprintf(
                                 'bad data for question %s in line %d with value %s',
@@ -239,7 +250,7 @@ class ImportProposalsFromCsv
 
                 case AbstractQuestion::QUESTION_TYPE_NUMBER:
                     if (!empty($row[$questionTitle]) && !is_numeric($row[$questionTitle])) {
-                        $this->badData = $this->incrementBadData($this->badData, $key);
+                        $this->addBadDataError($key, 'INVALID_CUSTOM_FIELD', $questionTitle, 'number', $row[$questionTitle]);
                         $this->logger->error(
                             sprintf(
                                 'bad data for question %s in line %d with value %s',
@@ -264,7 +275,7 @@ class ImportProposalsFromCsv
                             !$translationExist
                             || !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
                         ) {
-                            $this->badData = $this->incrementBadData($this->badData, $key);
+                            $this->addBadDataError($key, 'INVALID_CUSTOM_FIELD', $questionTitle, 'valid choice');
                             $this->logger->error(
                                 sprintf(
                                     'bad data for question %s in line %d with value %s',
@@ -315,6 +326,7 @@ class ImportProposalsFromCsv
         foreach ($fields as $field => $mandatory) {
             if ($mandatory && empty($row[$field])) {
                 $mandatoryMissing = $this->incrementBadData($mandatoryMissing, $key);
+                $this->addLineError($key, 'MISSING_MANDATORY_FIELD', $field, 'required');
             }
         }
 
@@ -370,6 +382,7 @@ class ImportProposalsFromCsv
             $current = [$row['title'], $row['author']];
             if (\in_array($current, $proposals)) {
                 $duplicateLinesToBeSkipped[] = $key;
+                $this->duplicateOfLines[$key] = array_search($current, $proposals, true) + 2;
             } elseif (
                 $this->proposalRepository->getProposalByEmailAndTitleOnProposalForm(
                     trim((string) $row['title']),
@@ -431,6 +444,9 @@ class ImportProposalsFromCsv
                         $column = Detector::removeEmoji($column);
                     }
                 }
+                if (!$this->hasValidTextLengths($row, $key)) {
+                    $isCurrentLineFail = true;
+                }
                 [
                     'isCurrentLineFail' => $isCurrentLineFail,
                     'author' => $author,
@@ -478,7 +494,7 @@ class ImportProposalsFromCsv
                 $address = json_decode((string) $row['address'], true);
                 if (!isset($address[0]['address_components'])) {
                     $isCurrentLineFail = true;
-                    $this->badData = $this->incrementBadData($this->badData, $key);
+                    $this->addBadDataError($key, 'INVALID_ADDRESS', 'address', 'valid address');
                     $this->logger->error('bad data address in line ' . $key);
                 }
                 $address = $row['address'];
@@ -486,7 +502,7 @@ class ImportProposalsFromCsv
                 $address = $this->map->getFormattedAddress($row['address']);
                 if (!$address) {
                     $isCurrentLineFail = true;
-                    $this->badData = $this->incrementBadData($this->badData, $key);
+                    $this->addBadDataError($key, 'INVALID_ADDRESS', 'address', 'valid address');
                     $this->logger->error(sprintf('bad data address in line %s: "%s"', $key, $row['address']));
                 }
             }
@@ -499,7 +515,7 @@ class ImportProposalsFromCsv
                 ))
             ) {
                 $isCurrentLineFail = true;
-                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->addBadDataError($key, 'INVALID_DISTRICT', 'district', 'existing district', $row['district']);
                 $this->logger->error('bad data district in line ' . $key);
             }
         }
@@ -511,14 +527,14 @@ class ImportProposalsFromCsv
                 ]))
             ) {
                 $isCurrentLineFail = true;
-                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->addBadDataError($key, 'INVALID_STATUS', 'status', 'existing status', $row['status']);
                 $this->logger->error('bad data statute in line ' . $key);
             }
         }
         if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
             $theme = str_replace('’', "'", trim((string) $row['theme']));
             if (!($theme = $this->themeRepository->findOneWithTitle($theme))) {
-                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->addBadDataError($key, 'INVALID_THEME', 'theme', 'existing theme', $row['theme']);
                 $isCurrentLineFail = true;
                 $this->logger->error('bad data theme in line ' . $key . ' : ' . $theme);
             }
@@ -530,7 +546,7 @@ class ImportProposalsFromCsv
                     'form' => $this->proposalForm,
                 ]))
             ) {
-                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->addBadDataError($key, 'INVALID_CATEGORY', 'category', 'existing category', $row['category']);
                 $isCurrentLineFail = true;
                 $this->logger->error(
                     sprintf(
@@ -542,13 +558,13 @@ class ImportProposalsFromCsv
             }
         }
         if (!($author = $this->userRepository->findOneByEmail(trim((string) $row['author'])))) {
-            $this->badData = $this->incrementBadData($this->badData, $key);
+            $this->addBadDataError($key, 'INVALID_AUTHOR', 'author', 'existing user', $row['author']);
             $isCurrentLineFail = true;
             $this->logger->error('bad data author in line ' . $key);
         }
         if ($this->proposalForm->isUsingIllustration() && !empty($row['media_url']) && $isCli) {
             if (!($media = $this->getMedia($row['media_url'], $dryRun))) {
-                $this->badData = $this->incrementBadData($this->badData, $key);
+                $this->addBadDataError($key, 'INVALID_MEDIA_URL', 'media_url', 'valid URL');
                 $isCurrentLineFail = true;
                 $this->logger->error('bad data media_url in line ' . $key);
             }
@@ -557,7 +573,7 @@ class ImportProposalsFromCsv
             $this->proposalForm->isUsingAnySocialNetworks()
             && !$this->proposalForm->checkIfSocialNetworksAreGood($row, $this->validator)
         ) {
-            $this->badData = $this->incrementBadData($this->badData, $key);
+            $this->addBadDataError($key, 'INVALID_SOCIAL_NETWORK_URL', 'social_networks', 'valid URL');
             $isCurrentLineFail = true;
             $this->logger->error('bad data social_networks_url in line ' . $key);
         }
@@ -568,7 +584,7 @@ class ImportProposalsFromCsv
             $isCurrentLineFail = true;
         }
         if (!empty($row['cost']) && !is_numeric($row['cost'])) {
-            $this->badData = $this->incrementBadData($this->badData, $key);
+            $this->addBadDataError($key, 'INVALID_COST', 'cost', 'number', $row['cost']);
             $isCurrentLineFail = true;
             $this->logger->error('bad data cost in line ' . $key);
         }
@@ -594,6 +610,94 @@ class ImportProposalsFromCsv
         }
 
         return $badData;
+    }
+
+    /**
+     * @param array<string, mixed> $row
+     */
+    private function hasValidTextLengths(array $row, int $key): bool
+    {
+        $isValid = true;
+
+        if (!$this->hasLengthBetween($row['title'], self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH)) {
+            $this->addBadDataError(
+                $key,
+                mb_strlen((string) $row['title']) < self::MIN_TITLE_LENGTH ? 'TITLE_TOO_SHORT' : 'TITLE_TOO_LONG',
+                'title',
+                sprintf('%d..%d characters', self::MIN_TITLE_LENGTH, self::MAX_TITLE_LENGTH),
+                (string) mb_strlen((string) $row['title'])
+            );
+            $isValid = false;
+        }
+
+        if (
+            $this->proposalForm->getUsingSummary()
+            && !empty($row['summary'])
+            && !$this->hasLengthBetween(
+                $row['summary'],
+                self::MIN_SUMMARY_LENGTH,
+                self::MAX_SUMMARY_LENGTH
+            )
+        ) {
+            $this->addBadDataError(
+                $key,
+                mb_strlen((string) $row['summary']) < self::MIN_SUMMARY_LENGTH ? 'SUMMARY_TOO_SHORT' : 'SUMMARY_TOO_LONG',
+                'summary',
+                sprintf('%d..%d characters', self::MIN_SUMMARY_LENGTH, self::MAX_SUMMARY_LENGTH),
+                (string) mb_strlen((string) $row['summary'])
+            );
+            $isValid = false;
+        }
+
+        if (
+            $this->proposalForm->getUsingDescription()
+            && $this->proposalForm->getDescriptionMandatory()
+            && !$this->hasLengthBetween($row['body'], self::MIN_DESCRIPTION_LENGTH)
+        ) {
+            $this->addBadDataError(
+                $key,
+                'DESCRIPTION_TOO_SHORT',
+                'body',
+                sprintf('%d characters minimum', self::MIN_DESCRIPTION_LENGTH),
+                (string) mb_strlen((string) $row['body'])
+            );
+            $isValid = false;
+        }
+
+        if (!$isValid) {
+            $this->logger->error('invalid text length in line ' . $key);
+        }
+
+        return $isValid;
+    }
+
+    private function addBadDataError(
+        int $line,
+        string $reason,
+        ?string $field = null,
+        ?string $expected = null,
+        ?string $actual = null
+    ): void {
+        $this->badData = $this->incrementBadData($this->badData, $line);
+        $this->addLineError($line, $reason, $field, $expected, $actual);
+    }
+
+    private function addLineError(
+        int $line,
+        string $reason,
+        ?string $field = null,
+        ?string $expected = null,
+        ?string $actual = null,
+        ?int $duplicateOfLine = null
+    ): void {
+        $this->lineErrors[] = compact('line', 'reason', 'field', 'expected', 'actual', 'duplicateOfLine');
+    }
+
+    private function hasLengthBetween(string $value, int $minimum, ?int $maximum = null): bool
+    {
+        $length = mb_strlen($value);
+
+        return $length >= $minimum && (null === $maximum || $length <= $maximum);
     }
 
     private function getMedia(?string $url, $dryRun = false): ?Media

@@ -69,6 +69,7 @@ const getInputFromFile = (
     step: selectedStepId,
   })
     .then((response: AddProposalsFromCsvMutationResponse) => {
+      output.lineErrors = response.addProposalsFromCsv?.lineErrors
       if (response.addProposalsFromCsv && response.addProposalsFromCsv.badLines.length >= 1) {
         let lines = response.addProposalsFromCsv.badLines
         const last = lines.length > 1 ? lines[lines.length - 1] : 0
