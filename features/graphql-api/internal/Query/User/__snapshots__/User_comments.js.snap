@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.comments visibility returns admin comments to an admin 1`] = `
+Object {
+  "user": Object {
+    "comments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "eventComment2",
+            "commentable": Object {},
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment42",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "ADMIN",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment41",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "ADMIN",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment40",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "ADMIN",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment39",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "ADMIN",
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.comments visibility returns comments visible to a user in the same group 1`] = `
+Object {
+  "user": Object {
+    "comments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "eventComment2",
+            "commentable": Object {},
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment71",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment4",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment3",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment2",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.comments visibility returns public comments to an anonymous user 1`] = `
+Object {
+  "user": Object {
+    "comments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "eventComment21",
+            "commentable": Object {},
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "eventComment20",
+            "commentable": Object {},
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment55",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment54",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment53",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.comments visibility returns visible comments to a super admin 1`] = `
+Object {
+  "user": Object {
+    "comments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "_id": "proposalComment60",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment59",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment58",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment57",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "_id": "proposalComment56",
+            "commentable": Object {
+              "project": Object {
+                "visibility": "CUSTOM",
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;

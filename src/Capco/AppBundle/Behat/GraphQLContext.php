@@ -29,14 +29,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to graphql as :email with password :password
-     */
-    public function iAmLoggedInToGraphQLAs(string $email, string $password)
-    {
-        $this->createAuthenticatedClient($email, $password);
-    }
-
-    /**
      * @When I am logged in to graphql as admin
      */
     public function iAmLoggedInToGraphQLAsAdmin()
@@ -53,38 +45,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to graphql as VMD
-     */
-    public function iAmLoggedInToGraphQLAsVMD()
-    {
-        $this->createAuthenticatedClient('valerie.massondelmotte@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @When I am logged in to graphql as user_without_phone
-     */
-    public function iAmLoggedInToGraphQLAsUserWithoutPhone()
-    {
-        $this->createAuthenticatedClient('user_without_phone@test.com', 'user_without_phone');
-    }
-
-    /**
-     * @When I am logged in to graphql as Agui
-     */
-    public function iAmLoggedInToGraphQLAsAgui()
-    {
-        $this->createAuthenticatedClient('julien.aguilar@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @When I am logged in to graphql as user_not_confirmed
-     */
-    public function iAmLoggedInToGraphQLAsUserNotConfirmed()
-    {
-        $this->createAuthenticatedClient('user_not_confirmed@test.com', 'user_not_confirmed');
-    }
-
-    /**
      * @Given I am logged in to graphql as super admin
      */
     public function iAmLoggedInToGraphQLAsSfavot()
@@ -93,43 +53,11 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I am logged in to graphql as welcomatic
-     */
-    public function iAmLoggedInToGraphQLAsWelcomatic()
-    {
-        $this->createAuthenticatedClient('msantostefano@cap-collectif.com', 'capco');
-    }
-
-    /**
      * @Given I am logged in to graphql as pierre
      */
     public function iAmLoggedInToGraphQLAsPierre()
     {
         $this->createAuthenticatedClient('pierre@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @Given I am logged in to graphql as jean
-     */
-    public function iAmLoggedInToGraphQLAsJean()
-    {
-        $this->createAuthenticatedClient('jean@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @Given I am logged in to graphql as lbrunet
-     */
-    public function iAmLoggedInToGraphQLAsLbrunet()
-    {
-        $this->createAuthenticatedClient('lbrunet@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @Given I am logged in to graphql as theo
-     */
-    public function iAmLoggedInToGraphQLAsTheo()
-    {
-        $this->createAuthenticatedClient('theo@cap-collectif.com', 'toto');
     }
 
     /**

@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.replies visibility hides user5 replies from another user 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "replies": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.replies visibility returns all userAdmin replies to an admin 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyQWRtaW4=",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.replies visibility returns an author replies 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "private": true,
+          },
+        },
+      ],
+      "totalCount": 8,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.replies visibility returns group replies to an administrator in the group 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlHcm91cA==",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "private": true,
+          },
+        },
+      ],
+      "totalCount": 9,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.replies visibility returns user5 replies to an admin 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2020-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "private": true,
+          },
+        },
+      ],
+      "totalCount": 8,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.replies visibility returns userAdmin replies to another user 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyQWRtaW4=",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;

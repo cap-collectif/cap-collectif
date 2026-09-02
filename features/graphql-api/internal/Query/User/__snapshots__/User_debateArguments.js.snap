@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.debateArguments visibility orders debate arguments by lower popularity 1`] = `
+Object {
+  "user": Object {
+    "debateArguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQ29uZmluZW1lbnQx",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "votes": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|User.debateArguments visibility returns published debate arguments to an anonymous user 1`] = `
+Object {
+  "user": Object {
+    "debateArguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "votes": Object {
+              "totalCount": 2,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQ29uZmluZW1lbnQx",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

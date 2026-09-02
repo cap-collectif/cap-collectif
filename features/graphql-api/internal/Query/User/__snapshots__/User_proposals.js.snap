@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.proposals visibility returns proposals visible to a user in the same group 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 53",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 52",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 51",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 50",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 49",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.proposals visibility returns public proposals to an anonymous user 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication sans accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition très intéressante",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition vraiment intéressante",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project7",
+              "title": "Dépot avec selection vote budget",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition pas chère",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.proposals visibility returns visible proposals to a super admin 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication sans accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition très intéressante",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition vraiment intéressante",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "ProjectAccessibleForAdminOnly",
+              "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
+              "visibility": "ADMIN",
+            },
+            "title": "Batman",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "ProjectAccessibleForMeOnly",
+              "title": "Project pour La Force (visible par mauriau seulement)",
+              "visibility": "ME",
+            },
+            "title": "Trouver un anti dote à la force",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.proposals visibility returns visible proposals to an admin 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "projectCorona",
+              "title": "Solidarité Covid-19",
+              "visibility": "PUBLIC",
+            },
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition n'est pas jetée",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition qui va être jetée",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication sans accusé de réception",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

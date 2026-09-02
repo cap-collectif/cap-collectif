@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.debateVotes visibility returns published debate votes to an anonymous user 1`] = `
+Object {
+  "user": Object {
+    "debateVotes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "RGViYXRlVm90ZToxMzAwNA==",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

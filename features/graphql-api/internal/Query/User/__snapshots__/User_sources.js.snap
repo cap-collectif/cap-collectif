@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|User.sources visibility returns user5 sources to an admin 1`] = `
+Object {
+  "user": Object {
+    "id": "VXNlcjp1c2VyNQ==",
+    "sources": Object {
+      "totalCount": 3,
+    },
+  },
+}
+`;
