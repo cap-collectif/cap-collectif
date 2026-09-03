@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|QuestionChoice node resolves a question choice by global ID 1`] = `
+Object {
+  "questionChoice": Object {
+    "__typename": "QuestionChoice",
+    "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux",
+    "title": "Athlétisme",
+  },
+}
+`;

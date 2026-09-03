@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|Section.contributionConnection lists contributions ordered by position 1`] = `
+Object {
+  "section": Object {
+    "contributionConnection": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            "pinned": false,
+            "position": 3,
+            "publishedAt": "2018-03-01 08:00:00",
+            "title": "Article 3",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTk=",
+            "pinned": false,
+            "position": 2,
+            "publishedAt": "2018-03-01 10:00:00",
+            "title": "Article 2",
+            "votes": Object {
+              "totalCount": 46,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 4,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+            "pinned": false,
+            "position": 1,
+            "publishedAt": "2018-03-01 07:00:00",
+            "title": "Article 1",
+            "votes": Object {
+              "totalCount": 4,
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
 exports[`Internal|Section.contributionConnection lists contributions ordered by vote count 1`] = `
 Object {
   "section": Object {
@@ -25,6 +91,138 @@ Object {
         },
       ],
       "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Section.contributionConnection lists contributions ordered by votes 1`] = `
+Object {
+  "section": Object {
+    "contributionConnection": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTk=",
+            "pinned": false,
+            "position": 2,
+            "publishedAt": "2018-03-01 10:00:00",
+            "title": "Article 2",
+            "votes": Object {
+              "totalCount": 46,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 4,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTc=",
+            "pinned": false,
+            "position": 1,
+            "publishedAt": "2018-03-01 07:00:00",
+            "title": "Article 1",
+            "votes": Object {
+              "totalCount": 4,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            "pinned": false,
+            "position": 3,
+            "publishedAt": "2018-03-01 08:00:00",
+            "title": "Article 3",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Section.contributionConnection lists contributions ordered by votes with a pinned contribution first 1`] = `
+Object {
+  "section": Object {
+    "contributionConnection": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyMg==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNjE=",
+            "pinned": true,
+            "position": 1,
+            "publishedAt": "2018-03-01 12:00:00",
+            "title": "Lié à article et épinglé",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 38,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uNjk=",
+            "pinned": false,
+            "position": 1,
+            "publishedAt": "2018-04-01 01:09:00",
+            "title": "Opinion d hier 69",
+            "votes": Object {
+              "totalCount": 29,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "arguments": Object {
+              "totalCount": 0,
+            },
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+            },
+            "id": "T3BpbmlvbjpvcGluaW9uMTc2",
+            "pinned": false,
+            "position": 1,
+            "publishedAt": "2019-04-01 02:56:00",
+            "title": "Opinion d hier 176",
+            "votes": Object {
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 58,
     },
   },
 }

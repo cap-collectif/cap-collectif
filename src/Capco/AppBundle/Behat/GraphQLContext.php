@@ -6,7 +6,6 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Coduo\PHPMatcher\PHPMatcher;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use PHPUnit\Framework\Assert;
 
 class GraphQLContext implements Context
@@ -16,9 +15,6 @@ class GraphQLContext implements Context
      */
     public $client;
     public $response;
-    public $statusCode;
-
-    public $resultChecker = '';
 
     /**
      * @BeforeScenario
@@ -53,22 +49,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I am logged in to graphql as pierre
-     */
-    public function iAmLoggedInToGraphQLAsPierre()
-    {
-        $this->createAuthenticatedClient('pierre@cap-collectif.com', 'toto');
-    }
-
-    /**
-     * @Given I am logged out
-     */
-    public function iAmLoggedOut()
-    {
-        $this->resetClient();
-    }
-
-    /**
      * @When /^I send a GraphQL request:$/
      */
     public function iSendAraphQLQuery(PyStringNode $query)
@@ -85,37 +65,11 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I store the result
-     */
-    public function iStoreTheResult()
-    {
-        $this->resultChecker = $this->response;
-    }
-
-    /**
-     * @Then the current result should not match with the stored result
-     */
-    public function compareWithStoredResult()
-    {
-        $body = $this->response;
-        $matcher = new PHPMatcher();
-        Assert::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->error());
-    }
-
-    /**
      * @When /^I send a GraphQL POST request:$/
      */
     public function iSendAnInternalGraphQLPostRequest(PyStringNode $string)
     {
-        $this->iSendAGraphQLPostRequest('internal', $string);
-    }
-
-    /**
-     * @When /^I send a GraphQL POST request without throwing:$/
-     */
-    public function iSendAnInternalGraphQLPostRequestWithoutThrowing(PyStringNode $string)
-    {
-        $this->iSendAGraphQLPostRequest('internal', $string, 'POST', 'https://capco.dev', false);
+        $this->iSendAGraphQLPostRequest($string);
     }
 
     /**
@@ -128,28 +82,6 @@ class GraphQLContext implements Context
             $matcher->match($this->response, $pattern->getRaw()),
             $matcher->error() . ' ' . $this->response
         );
-    }
-
-    /**
-     * @Then the JSON response should have error :errorMessage
-     */
-    public function theJsonResponseShouldHaveError(string $errorMessage)
-    {
-        $found = 0;
-        foreach (json_decode((string) $this->response)->errors as $responseError) {
-            if ($responseError->message === $errorMessage) {
-                ++$found;
-            }
-        }
-        Assert::assertEquals(1, $found);
-    }
-
-    /**
-     * @Then /^the GraphQL response status code should be (?P<code>\d+)$/
-     */
-    public function theGraphQLResponseStatusCodeShouldBe(mixed $statusCode)
-    {
-        Assert::assertEquals($statusCode, $this->statusCode);
     }
 
     protected function createAuthenticatedClient(
@@ -174,42 +106,22 @@ class GraphQLContext implements Context
     }
 
     private function iSendAGraphQLPostRequest(
-        string $schemaName,
-        PyStringNode $string,
-        string $method = 'POST',
-        string $origin = 'https://capco.dev',
-        bool $shouldThrow = true
+        PyStringNode $string
     ) {
-        $endpoint = 'internal' === $schemaName ? '/graphql/internal' : '/graphql';
-        $accept =
-            'preview' === $schemaName
-                ? 'application/vnd.cap-collectif.preview+json'
-                : 'application/json';
-
         $headers = [
             'Content-Type' => 'application/json',
-            'Accept' => $accept,
-            'Origin' => $origin,
+            'Accept' => 'application/json',
+            'Origin' => 'https://capco.dev',
         ];
 
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
 
-        try {
-            $response = $this->client->request($method, $endpoint, [
-                'json' => json_decode((string) $string, true),
-                'headers' => $headers,
-            ]);
+        $response = $this->client->request('POST', '/graphql/internal', [
+            'json' => json_decode((string) $string, true),
+            'headers' => $headers,
+        ]);
 
-            $this->response = (string) $response->getBody();
-            $this->statusCode = $response->getStatusCode();
-        } catch (ClientException $exception) {
-            if ($shouldThrow) {
-                throw $exception;
-            }
-            // fail silently
-            $this->response = (string) $exception->getResponse()->getBody();
-            $this->statusCode = $exception->getResponse()->getStatusCode();
-        }
+        $this->response = (string) $response->getBody();
     }
 }

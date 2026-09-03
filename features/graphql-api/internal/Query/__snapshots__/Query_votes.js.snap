@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.votes returns the total number of votes to an admin 1`] = `
+Object {
+  "votes": Object {
+    "totalCount": 304,
+  },
+}
+`;

@@ -69,6 +69,21 @@ class GraphQLControllerTest extends KernelTestCase
         self::assertSame([], $content['data']['nodes']);
     }
 
+    public function testPostRequestWithInvalidGraphQLSyntaxReturnsBadRequest(): void
+    {
+        $response = $this->createClient()->request(Request::METHOD_POST, '/graphql/internal', [
+            'http_errors' => false,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Origin' => 'https://capco.dev',
+            ],
+            'json' => ['query' => "'{ registrationScript }"],
+        ]);
+
+        self::assertSame(400, $response->getStatusCode());
+    }
+
     public static function graphQlEndpoints(): \Generator
     {
         yield 'public API' => ['/graphql', '*'];

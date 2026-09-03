@@ -3946,11 +3946,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/FileSystemContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:compareWithStoredResult\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:createClient\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
@@ -3971,62 +3966,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsAgui\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsJean\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsLbrunet\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsPierre\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsSfavot\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsTheo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsUser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsUserNotConfirmed\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsUserWithoutPhone\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsVMD\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAsWelcomatic\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedOut\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
@@ -4061,27 +4006,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAnInternalGraphQLPostRequestWithoutThrowing\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAraphQLQuery\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iStoreTheResult\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:theGraphQLResponseStatusCodeShouldBe\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:theJsonResponseShouldHaveError\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
@@ -4097,16 +4022,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:\\$response has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:\\$resultChecker has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:\\$statusCode has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 

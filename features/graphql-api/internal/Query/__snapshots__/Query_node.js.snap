@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.node hides restricted nodes from an anonymous user 1`] = `
+Object {
+  "project": null,
+  "proposal": null,
+}
+`;
+
+exports[`Internal|Query.node hides restricted nodes from an unauthorized user 1`] = `
+Object {
+  "project": null,
+  "proposal": null,
+}
+`;
+
+exports[`Internal|Query.node resolves nodes for all supported types 1`] = `
+Object {
+  "district": Object {
+    "__typename": "GlobalDistrict",
+    "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
+  },
+  "event": Object {
+    "title": "Event with registrations",
+  },
+  "form": Object {
+    "title": "Collecte des propositions pour le budget 2016 de la Ville de Rennes",
+  },
+  "group": null,
+  "opinion": Object {
+    "title": "Opinion 1",
+  },
+  "organization": Object {
+    "__typename": "Organization",
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",
+  },
+  "project": Object {
+    "title": "Croissance, innovation, disruption",
+  },
+  "proposal": Object {
+    "title": "Ravalement de la façade de la bibliothèque municipale",
+  },
+  "question": Object {
+    "id": "UXVlc3Rpb246Mg==",
+  },
+  "questionnaire": Object {
+    "title": "Votre avis sur les JO 2024 à Paris",
+  },
+  "requirement": Object {
+    "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
+  },
+  "response": Object {
+    "__typename": "ValueResponse",
+    "id": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
+  },
+}
+`;
+
+exports[`Internal|Query.node returns restricted nodes to a super admin 1`] = `
+Object {
+  "project": Object {
+    "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+  },
+  "proposal": Object {
+    "title": "Quel type de bière ?",
+  },
+}
+`;
+
+exports[`Internal|Query.node returns restricted nodes to an admin 1`] = `
+Object {
+  "project": Object {
+    "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+  },
+  "proposal": Object {
+    "title": "Quel type de bière ?",
+  },
+}
+`;

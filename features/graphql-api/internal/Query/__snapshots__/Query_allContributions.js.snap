@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.allContributions returns the total number of contributions 1`] = `
+Object {
+  "allContributions": 1376,
+}
+`;

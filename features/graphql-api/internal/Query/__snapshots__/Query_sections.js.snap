@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.sections lists all sections 1`] = `
+Object {
+  "sections": Array [
+    Object {
+      "id": "opinionTyp2ndIn2ndMultiConsultation",
+    },
+    Object {
+      "id": "opinionType1",
+    },
+    Object {
+      "id": "opinionType10",
+    },
+    Object {
+      "id": "opinionType11",
+    },
+    Object {
+      "id": "opinionType12",
+    },
+    Object {
+      "id": "opinionType13",
+    },
+    Object {
+      "id": "opinionType17",
+    },
+    Object {
+      "id": "opinionType18",
+    },
+    Object {
+      "id": "opinionType19",
+    },
+    Object {
+      "id": "opinionType1stIn1stMultiConsultation",
+    },
+    Object {
+      "id": "opinionType1stIn2ndMultiConsultation",
+    },
+    Object {
+      "id": "opinionType2",
+    },
+    Object {
+      "id": "opinionType20",
+    },
+    Object {
+      "id": "opinionType21",
+    },
+    Object {
+      "id": "opinionType22",
+    },
+    Object {
+      "id": "opinionType23",
+    },
+    Object {
+      "id": "opinionType24",
+    },
+    Object {
+      "id": "opinionType25",
+    },
+    Object {
+      "id": "opinionType26",
+    },
+    Object {
+      "id": "opinionType27",
+    },
+    Object {
+      "id": "opinionType28",
+    },
+    Object {
+      "id": "opinionType28ter",
+    },
+    Object {
+      "id": "opinionType29",
+    },
+    Object {
+      "id": "opinionType29ter",
+    },
+    Object {
+      "id": "opinionType2ndIn1stMultiConsultation",
+    },
+    Object {
+      "id": "opinionType3",
+    },
+    Object {
+      "id": "opinionType4",
+    },
+    Object {
+      "id": "opinionType5",
+    },
+    Object {
+      "id": "opinionType5bis",
+    },
+    Object {
+      "id": "opinionType5ter",
+    },
+    Object {
+      "id": "opinionType6",
+    },
+    Object {
+      "id": "opinionType7",
+    },
+    Object {
+      "id": "opinionType8",
+    },
+    Object {
+      "id": "opinionType9",
+    },
+    Object {
+      "id": "opinionTypeCustomAccess",
+    },
+    Object {
+      "id": "opinionTypeEmailingLebowski",
+    },
+    Object {
+      "id": "opinionTypeEmailingTypo",
+    },
+    Object {
+      "id": "opinionTypeEndless",
+    },
+    Object {
+      "id": "opinionTypeFirstInMultiForExport",
+    },
+    Object {
+      "id": "opinionTypeFirstInPo",
+    },
+    Object {
+      "id": "opinionTypeManyOptions",
+    },
+    Object {
+      "id": "opinionTypePrivate",
+    },
+    Object {
+      "id": "opinionTypeSecondInMultiForExport",
+    },
+    Object {
+      "id": "opinionTypeSecondInPo",
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.sections lists sections for a user 1`] = `
+Object {
+  "sections": Array [
+    Object {
+      "id": "opinionTypeFirstInMultiForExport",
+    },
+    Object {
+      "id": "opinionType6",
+    },
+    Object {
+      "id": "opinionTypeManyOptions",
+    },
+    Object {
+      "id": "opinionType1stIn1stMultiConsultation",
+    },
+    Object {
+      "id": "opinionType5",
+    },
+    Object {
+      "id": "opinionType8",
+    },
+    Object {
+      "id": "opinionType2ndIn1stMultiConsultation",
+    },
+    Object {
+      "id": "opinionType12",
+    },
+    Object {
+      "id": "opinionType10",
+    },
+  ],
+}
+`;
