@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ProposalStep.requirements lists requirements and their viewer status 1`] = `
+Object {
+  "step": Object {
+    "requirements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "viewerMeetsTheRequirement": true,
+            "viewerValue": "+33635492871",
+          },
+        },
+        Object {
+          "node": Object {
+            "viewerMeetsTheRequirement": true,
+            "viewerValue": "Utilisateur",
+          },
+        },
+        Object {
+          "node": Object {
+            "viewerMeetsTheRequirement": true,
+            "viewerValue": "authentifier",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
+            "label": "J'atteste avoir plus de 16 ans",
+            "viewerMeetsTheRequirement": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy",
+            "label": "J'atteste résider sur l'une des communes de la Métropole grenobloise",
+            "viewerMeetsTheRequirement": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+            "label": "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises",
+            "viewerMeetsTheRequirement": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "viewerDateOfBirth": "1996-03-01 00:00:00",
+            "viewerMeetsTheRequirement": true,
+          },
+        },
+      ],
+      "reason": "Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.",
+      "totalCount": 7,
+      "viewerMeetsTheRequirements": false,
+    },
+  },
+}
+`;

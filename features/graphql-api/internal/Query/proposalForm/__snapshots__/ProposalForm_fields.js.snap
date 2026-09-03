@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|ProposalForm fields returns evaluation form questions to a user 1`] = `
+Object {
+  "proposalForm": Object {
+    "evaluationForm": Object {
+      "questions": Array [
+        Object {
+          "id": "UXVlc3Rpb246OA==",
+        },
+        Object {
+          "id": "UXVlc3Rpb246OQ==",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjA=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjE=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjI=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjM=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246NDc=",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalForm fields returns evaluation form questions to an anonymous user 1`] = `
+Object {
+  "proposalForm": Object {
+    "evaluationForm": Object {
+      "questions": Array [
+        Object {
+          "id": "UXVlc3Rpb246OA==",
+        },
+        Object {
+          "id": "UXVlc3Rpb246OQ==",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjA=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjE=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjI=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246MjM=",
+        },
+        Object {
+          "id": "UXVlc3Rpb246NDc=",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalForm fields returns evaluations for the current user 1`] = `
+Object {
+  "proposalForm": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+    "step": Object {
+      "project": Object {
+        "title": "Budget Participatif Rennes",
+      },
+      "title": "Collecte des propositions",
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalForm fields returns the proposal form social network configuration 1`] = `
+Object {
+  "proposalForm": Object {
+    "usingFacebook": true,
+    "usingInstagram": true,
+    "usingLinkedIn": true,
+    "usingTwitter": true,
+    "usingWebPage": true,
+    "usingYoutube": true,
+  },
+}
+`;
+
+exports[`Internal|ProposalForm fields returns the proposal form view configuration 1`] = `
+Object {
+  "proposalForm": Object {
+    "isGridViewEnabled": true,
+    "isListViewEnabled": false,
+    "isMapViewEnabled": false,
+  },
+}
+`;

@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Proposal.news related content lists all related content of proposal news 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+    "news": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UG9zdDpwb3N0MTY=",
+            "relatedContent": Array [
+              Object {
+                "id": "theme1",
+              },
+              Object {
+                "id": "theme2",
+              },
+              Object {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              },
+              Object {
+                "id": "UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=",
+              },
+            ],
+            "title": "Post d'un projet privé pour admin@test.com",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Proposal.news related content lists only proposals related to proposal news 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+    "news": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UG9zdDpwb3N0MTY=",
+            "relatedContent": Array [
+              Object {},
+              Object {},
+              Object {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+              },
+              Object {},
+            ],
+            "title": "Post d'un projet privé pour admin@test.com",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Proposal.news related content lists only themes related to proposal news 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+    "news": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UG9zdDpwb3N0MTY=",
+            "relatedContent": Array [
+              Object {
+                "id": "theme1",
+              },
+              Object {
+                "id": "theme2",
+              },
+              Object {},
+              Object {},
+            ],
+            "title": "Post d'un projet privé pour admin@test.com",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

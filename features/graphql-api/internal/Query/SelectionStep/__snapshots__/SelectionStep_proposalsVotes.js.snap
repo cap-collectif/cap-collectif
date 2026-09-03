@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SelectionStep.proposals votes connection hides votes for proposals in a secret ballot 1`] = `
+Object {
+  "selectionStep": Object {
+    "canDisplayBallot": false,
+    "form": Object {
+      "objectType": "PROPOSAL",
+    },
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+    "isSecretBallot": true,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
+            "votes": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1063",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "1065",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbldpdGhvdXRBZGRyZXNz",
+            "votes": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+          },
+        },
+      ],
+      "totalCount": 303,
+    },
+  },
+}
+`;
+
+exports[`Internal|SelectionStep.proposals votes connection lists votes for proposals in a selection step 1`] = `
+Object {
+  "selectionStep": Object {
+    "canDisplayBallot": true,
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "isSecretBallot": false,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "votes": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1066",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "1000",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1047",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "1046",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "1045",
+                  },
+                },
+              ],
+              "totalCount": 47,
+            },
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|SelectionStep.proposals votes connection lists votes for the question form in a selection step 1`] = `
+Object {
+  "selectionStep": Object {
+    "canDisplayBallot": true,
+    "form": Object {
+      "objectType": "QUESTION",
+    },
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25RdWVzdGlvblN0ZXBWb3RlQ2xhc3NlbWVudA==",
+    "isSecretBallot": false,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cXVlc3Rpb24x",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1057",
+                  },
+                },
+              ],
+              "totalCount": 1,
+            },
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

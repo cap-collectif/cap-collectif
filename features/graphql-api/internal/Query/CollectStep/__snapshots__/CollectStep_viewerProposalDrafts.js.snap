@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|CollectStep.viewerProposalDrafts lists the current user draft proposals 1`] = `
+Object {
+  "step": Object {
+    "viewerProposalDrafts": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Proposition brouillon 3",
+            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/proposition-brouillon-3?_locale=fr-FR",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

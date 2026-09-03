@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Proposal.reportings lists reportings for a proposal 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+    "reportings": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "body": "Je signale",
+            "id": "2",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
