@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Reply.responses hides responses from an anonymous user for a private questionnaire 1`] = `
+Object {
+  "reply": Object {
+    "responses": Array [],
+  },
+}
+`;
+
+exports[`Internal|Reply.responses returns responses to an admin for a private questionnaire 1`] = `
+Object {
+  "reply": Object {
+    "responses": Array [
+      Object {
+        "value": "secret",
+      },
+      Object {
+        "value": "{\\"labels\\":[],\\"other\\":null}",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Reply.responses returns responses to their author for a private questionnaire 1`] = `
+Object {
+  "reply": Object {
+    "responses": Array [
+      Object {
+        "value": "secret",
+      },
+      Object {
+        "value": "{\\"labels\\":[],\\"other\\":null}",
+      },
+    ],
+  },
+}
+`;

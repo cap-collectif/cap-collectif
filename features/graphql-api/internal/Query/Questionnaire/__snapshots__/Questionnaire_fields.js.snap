@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Questionnaire fields returns participants for an anonymous questionnaire 1`] = `
+Object {
+  "questionnaire": Object {
+    "participants": Object {
+      "totalCount": 4,
+    },
+    "questions": Array [
+      Object {
+        "id": "UXVlc3Rpb246MTQwMw==",
+        "participants": Object {
+          "totalCount": 3,
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Questionnaire fields returns question participants 1`] = `
+Object {
+  "questionnaire": Object {
+    "participants": Object {
+      "totalCount": 20,
+    },
+    "questions": Array [
+      Object {
+        "id": "UXVlc3Rpb246Mg==",
+        "participants": Object {
+          "totalCount": 3,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM=",
+        "participants": Object {
+          "totalCount": 3,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTQ=",
+        "participants": Object {
+          "totalCount": 1,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTU=",
+        "participants": Object {
+          "totalCount": 2,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTY=",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTg=",
+        "participants": Object {
+          "totalCount": 1,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTk=",
+        "participants": Object {
+          "totalCount": 1,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAx",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAy",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM4NQ==",
+        "participants": Object {
+          "totalCount": 16,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246Mzk0NA==",
+        "participants": Object {
+          "totalCount": 2,
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Questionnaire fields returns question participants including unconfirmed users 1`] = `
+Object {
+  "questionnaire": Object {
+    "participants": Object {
+      "totalCount": 20,
+    },
+    "questions": Array [
+      Object {
+        "id": "UXVlc3Rpb246Mg==",
+        "participants": Object {
+          "totalCount": 4,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM=",
+        "participants": Object {
+          "totalCount": 3,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTQ=",
+        "participants": Object {
+          "totalCount": 1,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTU=",
+        "participants": Object {
+          "totalCount": 2,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTY=",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTg=",
+        "participants": Object {
+          "totalCount": 1,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTk=",
+        "participants": Object {
+          "totalCount": 2,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAx",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAy",
+        "participants": Object {
+          "totalCount": 0,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM4NQ==",
+        "participants": Object {
+          "totalCount": 16,
+        },
+      },
+      Object {
+        "id": "UXVlc3Rpb246Mzk0NA==",
+        "participants": Object {
+          "totalCount": 2,
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Questionnaire fields returns questionnaire questions 1`] = `
+Object {
+  "questionnaire": Object {
+    "questions": Array [
+      Object {
+        "id": "UXVlc3Rpb246Mg==",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTQ=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTU=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTY=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTg=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTk=",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAx",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MzAy",
+      },
+      Object {
+        "id": "UXVlc3Rpb246MTM4NQ==",
+      },
+      Object {
+        "id": "UXVlc3Rpb246Mzk0NA==",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal|Questionnaire fields returns the current user replies 1`] = `
+Object {
+  "questionnaire": Object {
+    "viewerReplies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UmVwbHk6cmVwbHk5",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UmVwbHk6cmVwbHk1",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UmVwbHk6cmVwbHky",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

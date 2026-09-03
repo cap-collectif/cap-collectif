@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Questionnaire.userHasReply checks whether users replied to a questionnaire 1`] = `
+Object {
+  "questionnaire": Object {
+    "msantostefanoHasReply": true,
+    "spylHasReply": false,
+    "unknownUserHasReply": false,
+  },
+}
+`;

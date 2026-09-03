@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|QuestionChoice.ranking returns the ranking of answered choices 1`] = `
+Object {
+  "questionnaire": Object {
+    "questions": Array [
+      Object {},
+      Object {},
+      Object {
+        "choices": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Au top",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Du pur bullshit",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "choices": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Incohérente",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "C'est de la diffamation !",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Que de la publicité (mensongère en plus !)",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "choices": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Je dis oui",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Je dis non",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "J'ai rien compris",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "choices": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "ranking": Array [
+                  Object {
+                    "position": 2,
+                    "responses": Object {
+                      "totalCount": 1,
+                    },
+                  },
+                  Object {
+                    "position": 3,
+                    "responses": Object {
+                      "totalCount": 1,
+                    },
+                  },
+                ],
+                "title": "Compréhensible",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": Array [
+                  Object {
+                    "position": 1,
+                    "responses": Object {
+                      "totalCount": 2,
+                    },
+                  },
+                ],
+                "title": "Réalisable",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": Array [
+                  Object {
+                    "position": 2,
+                    "responses": Object {
+                      "totalCount": 1,
+                    },
+                  },
+                  Object {
+                    "position": 3,
+                    "responses": Object {
+                      "totalCount": 1,
+                    },
+                  },
+                ],
+                "title": "Importante",
+              },
+            },
+          ],
+        },
+      },
+      Object {
+        "choices": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "React",
+              },
+            },
+            Object {
+              "node": Object {
+                "ranking": null,
+                "title": "Vue",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
