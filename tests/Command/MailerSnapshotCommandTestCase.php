@@ -14,7 +14,7 @@ use Twig\Environment;
 
 abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
 {
-    private const EMAIL_SNAPSHOT_DIRECTORY = __DIR__ . '/../../__snapshots__/emails';
+    protected const EMAIL_SNAPSHOT_DIRECTORY = __DIR__ . '/../../__snapshots__/emails';
 
     protected function captureEmails(): EmailCaptureListener
     {
@@ -82,10 +82,22 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
         \Swift_Mime_SimpleMessage $message,
         string $snapshotFilename
     ): void {
-        $snapshot = file_get_contents(self::EMAIL_SNAPSHOT_DIRECTORY . '/' . $snapshotFilename);
+        $snapshot = file_get_contents(static::EMAIL_SNAPSHOT_DIRECTORY . '/' . $snapshotFilename);
 
         self::assertIsString($snapshot);
         self::assertSame($snapshot, $this->getSnapshotBody($message));
+    }
+
+    protected function updateEmailSnapshot(
+        \Swift_Mime_SimpleMessage $message,
+        string $snapshotFilename
+    ): void {
+        $written = file_put_contents(
+            static::EMAIL_SNAPSHOT_DIRECTORY . '/' . $snapshotFilename,
+            $this->getSnapshotBody($message)
+        );
+
+        self::assertIsInt($written);
     }
 
     protected function getSnapshotBody(\Swift_Mime_SimpleMessage $message): string
@@ -133,6 +145,17 @@ final class EmailCaptureListener implements \Swift_Events_SendListener
         }
 
         throw new \RuntimeException(sprintf('No email was captured for %s.', $recipient));
+    }
+
+    public function getMessageWithSubject(string $subject): \Swift_Mime_SimpleMessage
+    {
+        foreach ($this->messages as $message) {
+            if (str_contains((string) $message->getSubject(), $subject)) {
+                return $message;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('No email was captured with subject %s.', $subject));
     }
 }
 

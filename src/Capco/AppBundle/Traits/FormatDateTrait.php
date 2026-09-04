@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Utils\DateHelper;
+
 trait FormatDateTrait
 {
     public function getTime(\DateTimeInterface $dateTime): string
@@ -19,15 +21,10 @@ trait FormatDateTrait
             $locale,
             $format,
             \IntlDateFormatter::NONE,
-            static::clearTimeZone($timezone),
+            DateHelper::clearTimeZone($timezone),
             \IntlDateFormatter::GREGORIAN
         );
 
         return $dateFormatter->format($dateTime->getTimestamp());
-    }
-
-    public static function clearTimeZone(string $timezone): string
-    {
-        return explode(' ', $timezone)[0];
     }
 }

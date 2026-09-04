@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
-use Capco\AppBundle\Traits\FormatDateTrait;
+use Capco\AppBundle\Utils\DateHelper;
 
 final class ProposalStatusChangeMessage extends AbstractExternalMessage
 {
@@ -26,7 +26,7 @@ final class ProposalStatusChangeMessage extends AbstractExternalMessage
             $params['locale'],
             \IntlDateFormatter::FULL,
             \IntlDateFormatter::NONE,
-            FormatDateTrait::clearTimeZone($params['timezone']),
+            DateHelper::clearTimeZone($params['timezone']),
             \IntlDateFormatter::GREGORIAN
         );
 

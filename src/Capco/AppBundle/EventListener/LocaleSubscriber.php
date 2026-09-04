@@ -5,7 +5,7 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Resolver\RequestLocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Traits\FormatDateTrait;
+use Capco\AppBundle\Utils\DateHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -13,8 +13,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
-    use FormatDateTrait;
-
     public function __construct(
         private readonly SiteParameterResolver $siteParameters,
         private readonly Manager $toggleManager,
@@ -26,7 +24,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $timeZone = $this->siteParameters->getValue('global.timezone');
         if ($timeZone && date_default_timezone_get() !== $timeZone) {
-            date_default_timezone_set(static::clearTimeZone($timeZone));
+            date_default_timezone_set(DateHelper::clearTimeZone($timeZone));
         }
 
         $request = $event->getRequest();
