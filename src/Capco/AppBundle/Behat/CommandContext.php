@@ -30,7 +30,6 @@ class CommandContext implements Context
 
     /**
      * @Given I consume :queue
-     * @Given I consume :maxMessage messages in :queue
      */
     public function iConsume(string $queue, mixed $maxMessage = 1)
     {

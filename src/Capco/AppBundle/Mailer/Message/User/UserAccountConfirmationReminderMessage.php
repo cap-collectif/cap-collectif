@@ -24,6 +24,7 @@ final class UserAccountConfirmationReminderMessage extends AbstractExternalMessa
             'confirmationUrl' => $params['confirmationURL'],
             'organizationName' => 'Cap Collectif',
             'siteUrl' => $params['siteURL'],
+            'baseUrl' => $params['baseURL'],
         ];
     }
 
