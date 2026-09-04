@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
@@ -129,7 +130,7 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
         return $this;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user = null): self
     {
         $this->user = $user;
 
@@ -151,6 +152,19 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
     public function getParticipant(): ?Participant
     {
         return $this->participant;
+    }
+
+    public function setContributor(ContributorInterface $contributor): self
+    {
+        if ($contributor instanceof User) {
+            $this->setParticipant(null);
+            $this->setUser($contributor);
+        } elseif ($contributor instanceof Participant) {
+            $this->setParticipant($contributor);
+            $this->setUser(null);
+        }
+
+        return $this;
     }
 
     /**

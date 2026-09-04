@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
@@ -60,6 +61,7 @@ class ProposalReconcillierTest extends TestCase
         $this->viewer->method('isEmailConfirmed')->willReturn(true);
 
         $this->proposal->expects($this->never())->method('setContributor');
+        $this->proposal->expects($this->never())->method('getResponses');
 
         $this->proposalReconcillier->reconcile($this->participant, $this->viewer);
     }
@@ -77,9 +79,33 @@ class ProposalReconcillierTest extends TestCase
         $this->participant->method('isEmailConfirmed')->willReturn(true);
         $this->viewer->method('isEmailConfirmed')->willReturn(true);
 
+        $response = (new ValueResponse())->setParticipant($this->participant);
+        $this->proposal->method('getResponses')->willReturn(new ArrayCollection([$response]));
         $this->proposal->expects($this->once())->method('setContributor')->with($this->viewer);
 
         $this->proposalReconcillier->reconcile($this->participant, $this->viewer);
+
+        $this->assertSame($this->viewer, $response->getUser());
+        $this->assertNull($response->getParticipant());
+    }
+
+    public function testShouldReconcileProposalResponsesToAnotherParticipant(): void
+    {
+        $this->disableCompletionStatusFilter();
+
+        $ssoRequirement = $this->createMock(Requirement::class);
+        $ssoRequirement->method('getType')->willReturn(Requirement::SSO);
+        $this->requirements = [$ssoRequirement];
+
+        $targetParticipant = $this->createMock(Participant::class);
+        $response = (new ValueResponse())->setParticipant($this->participant);
+        $this->proposal->method('getResponses')->willReturn(new ArrayCollection([$response]));
+        $this->proposal->expects($this->once())->method('setContributor')->with($targetParticipant);
+
+        $this->proposalReconcillier->reconcile($this->participant, $targetParticipant);
+
+        $this->assertSame($targetParticipant, $response->getParticipant());
+        $this->assertNull($response->getUser());
     }
 
     public function testShouldReconcileProposalWhenStepHasSsoRequirement(): void

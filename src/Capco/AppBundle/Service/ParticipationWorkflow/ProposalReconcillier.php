@@ -31,6 +31,10 @@ class ProposalReconcillier extends ContributionsReconcilier
             }
 
             $this->reconcileContributor($proposal, $contributorTarget);
+
+            foreach ($proposal->getResponses() as $response) {
+                $response->setContributor($contributorTarget);
+            }
         }
 
         $this->em->flush();
