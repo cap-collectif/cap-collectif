@@ -25,6 +25,7 @@
     "graphql-tag": "^2.12.6",
     "next": "14.2.35",
     "next-client-cookies": "^1.1.1",
+    "node-fetch": "^2.6.7",
     "nookies": "^2.5.2",
     "nuqs": "^2.8.1",
     "react": "18.2.0",

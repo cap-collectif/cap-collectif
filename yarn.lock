@@ -5860,6 +5860,7 @@ __metadata:
     local-ssl-proxy: "npm:1.3.0"
     next: "npm:14.2.35"
     next-client-cookies: "npm:^1.1.1"
+    node-fetch: "npm:^2.6.7"
     nookies: "npm:^2.5.2"
     nuqs: "npm:^2.8.1"
     react: "npm:18.2.0"

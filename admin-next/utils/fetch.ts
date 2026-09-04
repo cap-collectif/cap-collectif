@@ -1,7 +1,4 @@
-import gql from 'graphql-tag'
 import config from './config'
-import { print } from 'graphql/language/printer'
-import { GraphQLTaggedNode } from 'relay-runtime'
 
 const status = (response: Response): Response => {
   if (response.status >= 200 && response.status < 300) {
@@ -44,36 +41,6 @@ const Fetcher = {
     })
       .then(status)
       .then(json)
-  },
-
-  ssrGraphql<T, U = any>(
-    request: GraphQLTaggedNode,
-    variables?: U,
-    Cookie: string = '',
-    cache: RequestCache = 'no-store',
-    locale?: string,
-  ): Promise<T> {
-    const ENV = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
-    const isProd = ENV === 'prod'
-    let URL = isProd ? 'http://127.0.0.1/graphql/internal' : 'http://application:8080/graphql/internal'
-
-    if (locale) {
-      URL += `?tl=${encodeURIComponent(locale)}`
-    }
-
-    return fetch(URL, {
-      cache,
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createHeaders({
-        Cookie,
-      }),
-      // @ts-ignore for now relay doesn't handle SSR so we do this manually
-      body: JSON.stringify({ query: print(gql(request?.default?.params?.text)), variables }),
-    })
-      .then(status)
-      .then(json)
-      .then(e => e.data)
   },
 
   postFormData(uri: string, body: FormData): Promise<Response> {
