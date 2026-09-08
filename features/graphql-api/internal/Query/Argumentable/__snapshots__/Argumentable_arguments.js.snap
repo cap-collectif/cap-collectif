@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Argumentable.arguments fetches arguments for an opinion 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQy",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQx",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Argumentable.arguments fetches arguments for an opinion version 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDU=",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMDQ=",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQyMTE=",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Argumentable.arguments filters arguments by type 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal|Argumentable.arguments filters arguments by type 2`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5NQ==",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5NA==",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5Mw==",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5Mg==",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQ5MQ==",
+            "published": true,
+            "type": "FOR",
+          },
+        },
+      ],
+      "totalCount": 93,
+    },
+  },
+}
+`;
+
+exports[`Internal|Argumentable.arguments includes trashed arguments when requested 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQzdHJhc2hlZA==",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQy",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "QXJndW1lbnQ6YXJndW1lbnQx",
+            "published": true,
+            "type": "AGAINST",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;

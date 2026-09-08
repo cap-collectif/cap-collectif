@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Comment.votes lists votes for a comment 1`] = `
+Object {
+  "comment": Object {
+    "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "90001",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

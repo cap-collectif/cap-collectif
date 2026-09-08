@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Comment.reportings lists reportings for a comment 1`] = `
+Object {
+  "comment": Object {
+    "id": "Q29tbWVudDpldmVudENvbW1lbnQx",
+    "reportings": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "6",
+            "type": "SPAM",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

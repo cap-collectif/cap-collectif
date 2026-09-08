@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Commentable.comments lists comments for commentables 1`] = `
+Object {
+  "commentables": Array [
+    Object {
+      "comments": Object {
+        "edges": Array [
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+            "node": Object {
+              "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQ0",
+            },
+          },
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+            "node": Object {
+              "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQz",
+            },
+          },
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+            "node": Object {
+              "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQy",
+            },
+          },
+        ],
+      },
+    },
+    Object {
+      "comments": Object {
+        "edges": Array [
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+            "node": Object {
+              "id": "Q29tbWVudDpldmVudENvbW1lbnQxOQ==",
+            },
+          },
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+            "node": Object {
+              "id": "Q29tbWVudDpldmVudENvbW1lbnQxOA==",
+            },
+          },
+          Object {
+            "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+            "node": Object {
+              "id": "Q29tbWVudDpldmVudENvbW1lbnQxNw==",
+            },
+          },
+        ],
+      },
+    },
+    null,
+  ],
+}
+`;

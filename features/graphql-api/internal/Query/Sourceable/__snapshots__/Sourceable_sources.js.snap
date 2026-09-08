@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Sourceable.sources lists sources for an opinion 1`] = `
+Object {
+  "opinion": Object {
+    "sources": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTE=",
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTI=",
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTM=",
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTQ=",
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTU=",
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "U291cmNlOnNvdXJjZTY=",
+            "published": true,
+          },
+        },
+      ],
+      "totalCount": 6,
+    },
+  },
+}
+`;

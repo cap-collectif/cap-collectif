@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Source.votes lists votes for a source 1`] = `
+Object {
+  "source": Object {
+    "id": "U291cmNlOnNvdXJjZTQz",
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "60002",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "60003",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

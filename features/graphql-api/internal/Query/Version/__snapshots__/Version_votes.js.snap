@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Version.votes lists votes for a version 1`] = `
+Object {
+  "version": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNTA=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDUw",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDk=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ5",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDg=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ4",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDc=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ3",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDY=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ2",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDU=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ1",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDQ=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQ0",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDM=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQz",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDI=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQy",
+            "value": "YES",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNDE=",
+            },
+            "id": "VmVyc2lvblZvdGU6NzAwMDQx",
+            "value": "YES",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "hasNextPage": true,
+      },
+      "totalCount": 50,
+    },
+  },
+}
+`;
