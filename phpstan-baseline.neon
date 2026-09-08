@@ -508,16 +508,6 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
 			count: 1
-			path: src/Capco/AdminBundle/Admin/ProjectTypeAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProjectTypeAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/ProjectTypeAdmin.php
-
-		-
-			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
-			count: 1
 			path: src/Capco/AdminBundle/Admin/ProposalAdmin.php
 
 		-
@@ -654,21 +644,6 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SiteParameterAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SiteParameterAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\SocialNetworkAdmin\\:\\:__construct\\(\\) has parameter \\$baseControllerName with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SocialNetworkAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\SocialNetworkAdmin\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SocialNetworkAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SocialNetworkAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SocialNetworkAdmin.php
 
 		-
 			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
@@ -1421,16 +1396,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApiContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApiContext\\:\\:iUploadXSSFile\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApiContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApiContext\\:\\:iUploadXSSHTMLFile\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApiContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApiContext\\:\\:proposalWithIdShouldBeSoftDeleted\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApiContext.php
@@ -1481,16 +1446,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApiContext.php
 
 		-
-			message: "#^Access to an undefined property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$exportContext\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Access to an undefined property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$headers\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Access to an undefined property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$indexManager\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -1512,16 +1467,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:VIPCommentsShouldBeOnTopOfTheList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:activateFeatures\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:allFeaturesAreEnabled\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -1621,11 +1566,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:deactivateFeatures\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:element1ShouldBeBeforeElement2ForSelector\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -1652,16 +1592,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:eventModerationShouldBeDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:featureIsDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:featureIsEnabled\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -1701,26 +1631,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:fillProposalForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:fillProposalForm\\(\\) has parameter \\$fillDistrict with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:fillProposalForm\\(\\) has parameter \\$fillTheme with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:fillProposalForm\\(\\) has parameter \\$requiredResponse with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:fillQuestionnaireForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -1756,36 +1666,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownload\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownloadAnalysisExport\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownloadDecisionExport\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownloadEventParticipantsExport\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownloadParticipantExport\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanDownloadProjectContributorsExport\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCanNotParticipateInJitsiRoom\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -1811,17 +1691,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iChangeTheProposalAdvancementSelect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iChangeTheProposalContributorTypeTo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iChangeTheProposalFormSelect\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -1851,27 +1721,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCheckAProposalFormButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCheckAProposalFormCheckbox\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCheckEnoughRequiredCustomCheckbox\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCheckIfTheArchiveIsCreatedForTheUser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iCheckIfTheArchiveIsDeletedForTheUser\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -1911,36 +1761,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToAddNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToConfirmDeleteNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToDeleteNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToEditNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToPublishNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickButtonToPublishUpdatedNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickConfirmDeletePopover\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -1967,11 +1787,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickOnAddQuestionnaireButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2046,16 +1861,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheCreateProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheDeleteProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheDeleteReplyButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2106,11 +1911,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareLinkButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareProposalButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2136,11 +1936,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iConfirmAdminProposalDeletion\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iConfirmAdminUserDeletion\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2152,11 +1947,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iConfirmMyVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iConfirmProposalDeletion\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2186,11 +1976,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iDeleteTheProposal\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iDeleteTheUser\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2202,11 +1987,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iDisableElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iDownloadFile\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2256,32 +2036,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillProposalNewsBody\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheEditCommentForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheProposalElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheProposalForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheProposalFormWithATheme\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheProposalFormWithoutRequiredResponse\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2336,16 +2096,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheReportingFormFromTheModal\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillTheSimpleProposalForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iFillThemeFilterWithValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2377,11 +2127,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoBPWithVoteRankingPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAClosedCollectStep\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2446,27 +2191,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAProposalMadeByUser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAProposalNotCommentNotifiable\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAProposalNotNewsable\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAProposalNotNotifiableNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAProposalNotifiableNews\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2551,32 +2281,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminProposalFormPageWithId\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminProposalFormTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminProposalPageWithId\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminProposalTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminQuestionnaireEditPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToTheAdminQuestionnaireListPage\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2646,22 +2351,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSaveTheProposalAdminAdvancement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSaveTheProposalContent\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSaveTheProposalEvaluationAnalystGroupes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSaveTheProposalForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2726,22 +2421,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldNotSeeButtonToAddNews\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldNotSeeCookieNamed\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldNotSeeElementOnPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldNotSeeMyProposalAnymore\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2777,11 +2462,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldNotSeeTheEditProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeMyNewProposal\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2941,27 +2621,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheProposalStatus\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheProposalVoteLimitedTooltip\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheProposalVoteTooltip\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheShareDropdown\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheShareLinkModal\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3021,11 +2686,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSubmitTheCreateProposalForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSubmitTheEditProposalForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -3041,32 +2701,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iSubmitTheReportingFormFromTheModal\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iToggleAProposalAdvancementButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iToggleAProposalFormButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iToggleVoteAccessOfProposal\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iTriggerElementWithAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iTryToDownload\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3166,22 +2806,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:loginButtonShouldRedirectTo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:maximizeWindow\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:notifyEnd\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:oauth2SSOIsSetToEnabled\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3351,11 +2981,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:theCreateProposalButtonShouldBeDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:theElementHasAttribute\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -3448,11 +3073,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:votesDetailsPageIsOpen\\(\\) has no return type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^PHPDoc tag @param for parameter \\$tab with type mixed is not subtype of native type string\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
@@ -3566,16 +3186,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$proposalNewsNotNotifiable has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$proposalNewsNotifiable has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$proposalNotNewsable has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -3617,11 +3227,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$proposalWithSimpleVoteParams has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$proposalsByUserTest has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3726,11 +3331,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/CommandContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:runCommandWithParameters\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:\\$output has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/CommandContext.php
@@ -3739,11 +3339,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:\\$statusCode has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Access to an undefined property Capco\\\\AppBundle\\\\Behat\\\\DefaultContext\\:\\:\\$exportContext\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/DefaultContext.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\DefaultContext\\:\\:assertPageContainsText\\(\\) has no return type specified\\.$#"
@@ -3786,177 +3381,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/DefaultContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareFileWithSnapshot\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareHeader\\(\\) has parameter \\$actual with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareHeader\\(\\) has parameter \\$expected with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareHeaderOrder\\(\\) has parameter \\$actual with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareHeaderOrder\\(\\) has parameter \\$expected with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareLines\\(\\) has parameter \\$actual with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareLines\\(\\) has parameter \\$expected with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:compareOutput\\(\\) has parameter \\$output with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:exportedStepContributorsFilesShouldMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) has parameter \\$actualHeader with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) has parameter \\$actualLines with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) has parameter \\$expectedHeader with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) has parameter \\$expectedLines with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getConfig\\(\\) is unused\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getFileLines\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:\\$config has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ExportContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:afterScenario\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:assertFileContents\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:assertFileEndsWith\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:assertFileExists\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:assertFileStartWith\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:beforeScenario\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:prepareFileToBeWrittenOnVfs\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:printFileContents\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\FileSystemContext\\:\\:setFileContents\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$haystack of function str_ends_with expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$haystack of function str_starts_with expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/FileSystemContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:createClient\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:headerContainsValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iAmLoggedInToGraphQLAs\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
@@ -3981,27 +3406,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAPreflightInternalGraphQLPostRequest\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAPreflightPublicGraphQLPostRequest\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAPublicGraphQLPostRequestWithOrigin\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAnInternalGraphQLPostRequest\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:iSendAnInternalGraphQLPostRequestWithOrigin\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
@@ -4012,11 +3417,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:theJsonResponseShouldMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/GraphQLContext.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\GraphQLContext\\:\\:\\$rawResponse has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
@@ -4506,76 +3906,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/AdminProjectAppendixPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:clickAddQuestionnaireButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:verifyPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectListQuestionnairePage\\:\\:\\$elements type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 4
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectListQuestionnairePage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/AdminProjectPage.php
@@ -4631,191 +3961,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/AdminProjectPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProjectQuestionnairePage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/AdminProjectQuestionnairePage.php
-
-		-
-			message: "#^Call to an undefined method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:getCurrentPage\\(\\)\\.$#"
-			count: 6
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Call to an undefined method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iWait\\(\\)\\.$#"
-			count: 6
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Call to an undefined method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:waitAndThrowOnFailure\\(\\)\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickOnButtonOrRadio\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickSaveProposalFormAdressButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:clickSaveProposalFormButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iChangeTheProposalFormSelect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iCheckAProposalFormButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iCheckAProposalFormCheckbox\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iGoToTheAdminProposalFormTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iSaveTheProposalForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:iToggleAProposalFormButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:selectProposalFormDropDown\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:verifyPage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^PHPDoc tag @param for parameter \\$tab with type mixed is not subtype of native type string\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 10
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalFormPage\\:\\:\\$elements type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 11
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalFormPage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
@@ -4832,11 +3977,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalPage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalPage\\:\\:clickSaveProposalAdvancementButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
 
@@ -4886,18 +4026,8 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalPage\\:\\:selectProposalAdvancementStatus\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminProposalPage\\:\\:toggleProposalElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
-
-		-
 			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 8
+			count: 5
 			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
 
 		-
@@ -4907,7 +4037,7 @@ parameters:
 
 		-
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 9
+			count: 6
 			path: src/Capco/AppBundle/Behat/Page/AdminProposalPage.php
 
 		-
@@ -5234,7 +4364,6 @@ parameters:
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
 			count: 3
 			path: src/Capco/AppBundle/Behat/Page/BlogPage.php
-
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\CollectPage\\:\\:changeTypeOfProposalFollow\\(\\) has no return type specified\\.$#"
@@ -5970,61 +5099,6 @@ parameters:
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
 			count: 6
 			path: src/Capco/AppBundle/Behat/Page/EditCommentPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EditProfilePage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/EditProfilePage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\EvaluationsPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
@@ -7562,42 +6636,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickConfirmDeleteProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickConfirmDeleteProposalNewsButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickCreateProposalNewsButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickDeleteProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickDeleteProposalNewsButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickEditCommentButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickEditProposalButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickEditProposalNewsButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
@@ -7642,16 +6686,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickPublishProposalNewsButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickPublishUpdatedProposalNewsButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:clickReportProposalButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
@@ -7688,11 +6722,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\ProposalPage\\:\\:fillProposalNewsBody\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
@@ -7823,7 +6852,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 23
+			count: 14
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
 		-
@@ -7833,7 +6862,7 @@ parameters:
 
 		-
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 24
+			count: 15
 			path: src/Capco/AppBundle/Behat/Page/ProposalPage.php
 
 		-
@@ -8572,11 +7601,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:IJumpToOpenidLoginScreen\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:IShouldBeDisconnectedFromFranceConnect\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
@@ -8588,11 +7612,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:IShouldSeeTheFranceConnectLoginScreen\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:IShouldSeeTheOpenidConnectLoginScreen\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
@@ -8632,11 +7651,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iAmLoggedInAsNoName\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iAmLoggedInAsPierre\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
@@ -8667,11 +7681,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iAuthenticateWithOpenid\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iCanAccessAdminInNavbar\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
@@ -8683,11 +7692,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iCloseCurrentAlert\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:iGoToMySsoProfile\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
@@ -8742,27 +7746,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:userEmailIs\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:userHasResponseToQuestion\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:userNameIs\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:userRegisteredLessThan1hAgo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/UserContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\UserContext\\:\\:userRegisteredLessThanXMinutesgo\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/UserContext.php
 
@@ -10978,11 +9962,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\DeveloperController\\:\\:explorerAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/DeveloperController.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\DeveloperController\\:\\:guideAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/DeveloperController.php
 
@@ -18962,6 +17941,16 @@ parameters:
 			path: src/Capco/AppBundle/Entity/VideoTranslation.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AvailableProposalCategoryColor\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Enum/AvailableProposalCategoryColor.php
@@ -19050,16 +18039,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\CreateMailingListErrorCode\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Enum/CreateMailingListErrorCode.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\AnonymizeAccountByEmailErrorCode\\:\\:isValid\\(\\) has parameter \\$value with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Enum/AnonymizeAccountByEmailErrorCode.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\DeleteAccountType\\:\\:getAvailableTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -19575,16 +18554,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\EventListener\\\\GraphQlAclListener\\:\\:\\$disableAcl has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/EventListener/GraphQlAclListener.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\LocaleSubscriber\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/EventListener/LocaleSubscriber.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\LocaleSubscriber\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/EventListener/LocaleSubscriber.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\LocaleSubscriber\\:\\:onKernelRequest\\(\\) has no return type specified\\.$#"
@@ -21397,11 +20366,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalAuthorDataLoader.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Proposal\\\\ProposalAuthorDataLoader\\:\\:resolve\\(\\) should return Capco\\\\UserBundle\\\\Entity\\\\User but returns Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalAuthorDataLoader.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Proposal\\\\ProposalAuthorDataLoader\\:\\:serializeKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Proposal/ProposalAuthorDataLoader.php
@@ -22195,6 +21159,11 @@ parameters:
 			message: "#^Parameter \\#2 \\$proposalAnalysis of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AnalyseProposalAnalysisMutation\\:\\:notifyIfDecision\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis, object given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AnalyseProposalAnalysisMutation.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AnonymizeAccountByEmailMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/AnonymizeAccountByEmailMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AskProposalRevisionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -23130,11 +22099,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Debate\\\\UpdateDebateOpinionMutation\\:\\:generateSuccessFulPayload\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/Debate/UpdateDebateOpinionMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AnonymizeAccountByEmailMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AnonymizeAccountByEmailMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteAccountMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -42750,6 +41714,16 @@ parameters:
 			message: "#^Property Application\\\\Migrations\\\\Version20230920133435\\:\\:\\$translator \\(Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: src/DoctrineMigrations/Version20230920133435.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of function parse_url expects string, array\\|string given\\.$#"
+			count: 1
+			path: tests/Controller/Site/SSOControllerTest.php
+
+		-
+			message: "#^Property Capco\\\\Tests\\\\Controller\\\\Site\\\\SSOControllerTest\\:\\:\\$toggleManager \\(Capco\\\\AppBundle\\\\Toggle\\\\Manager\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Controller/Site/SSOControllerTest.php
 
 		-
 			message: "#^Trait Capco\\\\Tests\\\\phpspec\\\\MockHelper\\\\GraphQLMock is used zero times and is not analysed\\.$#"

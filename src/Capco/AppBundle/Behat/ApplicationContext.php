@@ -28,17 +28,10 @@ use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\UserProfileTrait;
-use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
-use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
-use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
-use Capco\AppBundle\Command\CreateStepContributorsCommand;
-use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Locale;
-use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Text;
 use Elastica\Snapshot;
 use Elasticsearch\Endpoints\Indices\Open;
@@ -421,23 +414,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Given enable sso provider :ssoName
-     */
-    public function oauth2SSOIsSetToEnabled(string $ssoName)
-    {
-        $entityManager = $this->getEntityManager();
-        $oauth2Repository = $entityManager->getRepository(Oauth2SSOConfiguration::class);
-        $ssoConfig = $oauth2Repository->find($ssoName);
-        if (null === $ssoConfig) {
-            throw new \RuntimeException('Cannot find Oauth2SSOConfiguration');
-        }
-        $ssoConfig->setEnabled(true);
-        $entityManager->persist($ssoConfig);
-        $entityManager->flush();
-        $entityManager->clear();
-    }
-
-    /**
      * @Then I set currentDate as the start event date for event :eventId
      */
     public function setStartDateForEvent(string $eventId)
@@ -455,72 +431,6 @@ class ApplicationContext extends UserContext
         $entityManager->persist($event);
         $entityManager->flush();
         $entityManager->clear();
-    }
-
-    /**
-     * @Given all features are enabled
-     */
-    public function allFeaturesAreEnabled()
-    {
-        $this->getService(Manager::class)->activateAll();
-    }
-
-    /**
-     * @Given feature :featureA is enabled
-     * @Given features :featureA, :featureB are enabled
-     * @Given features :featureA, :featureB, :featureC are enabled
-     * @Given features :featureA, :featureB, :featureC, :featureD are enabled
-     * @Given features :featureA, :featureB, :featureC, :featureD, :featureE are enabled
-     */
-    public function activateFeatures(
-        string $featureA,
-        ?string $featureB = null,
-        ?string $featureC = null,
-        ?string $featureD = null,
-        ?string $featureE = null
-    ) {
-        $this->getService(Manager::class)->activate($featureA);
-        if ($featureB) {
-            $this->getService(Manager::class)->activate($featureB);
-            if ($featureC) {
-                $this->getService(Manager::class)->activate($featureC);
-            }
-            if ($featureD) {
-                $this->getService(Manager::class)->activate($featureD);
-            }
-            if ($featureE) {
-                $this->getService(Manager::class)->activate($featureE);
-            }
-        }
-    }
-
-    /**
-     * @Given I disable feature :featureA
-     * @Given I disable features :featureA, :featureB
-     * @Given I disable features :featureA, :featureB, :featureC
-     * @Given I disable features :featureA, :featureB, :featureC, :featureD
-     * @Given I disable features :featureA, :featureB, :featureC, :featureD, :featureE
-     */
-    public function deactivateFeatures(
-        string $featureA,
-        ?string $featureB = null,
-        ?string $featureC = null,
-        ?string $featureD = null,
-        ?string $featureE = null
-    ) {
-        $this->getService(Manager::class)->deactivate($featureA);
-        if ($featureB) {
-            $this->getService(Manager::class)->deactivate($featureB);
-            if ($featureC) {
-                $this->getService(Manager::class)->deactivate($featureC);
-            }
-            if ($featureD) {
-                $this->getService(Manager::class)->deactivate($featureD);
-            }
-            if ($featureE) {
-                $this->getService(Manager::class)->deactivate($featureE);
-            }
-        }
     }
 
     /**
@@ -552,18 +462,6 @@ class ApplicationContext extends UserContext
         $newDefaultLocale->setDefault();
 
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Given feature :featureA is disabled
-     */
-    public function featureIsDisabled(string $feature)
-    {
-        $toggleManager = $this->getService('qandidate.toggle.manager');
-        $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
-        if (false !== $toggleManager->active($feature, $contextFactory->createContext())) {
-            throw new \RuntimeException("Feature {$feature} is not disabled");
-        }
     }
 
     /**
@@ -967,141 +865,6 @@ class ApplicationContext extends UserContext
     public function iWaitForDebug()
     {
         $this->iWait(1000);
-    }
-
-    /**
-     * @When I try to download :path
-     */
-    public function iTryToDownload(string $path)
-    {
-        // Fix SSL problem.
-        stream_context_set_default([
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ],
-        ]);
-
-        $url = 'https://capco.test' . $path;
-        $this->headers = get_headers($url);
-        $this->getSession()->visit($url);
-    }
-
-    /**
-     * @When I download file at :path
-     */
-    public function iDownloadFile(string $path)
-    {
-        // Fix SSL problem.
-        stream_context_set_default([
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ],
-        ]);
-
-        $url = 'https://capco.test' . $path;
-        $this->headers = get_headers($url);
-        $this->getSession()->visit($url);
-        $this->assertSession()->pageTextNotContains($this->fixStepArgument('error.404.title'));
-        $this->assertSession()->elementTextNotContains(
-            'css',
-            '#symfony-flash-messages',
-            $this->fixStepArgument('file.not-found')
-        );
-    }
-
-    /**
-     * @When I can download :format export for project :projectSlug and step :stepSlug
-     */
-    public function iCanDownload(string $format, string $projectSlug, string $stepSlug)
-    {
-        // Simulate a generated export, in production export
-        // are written by crons
-        $fileName = CreateCsvFromProposalStepCommand::getShortenedFilename(
-            $projectSlug . '_' . $stepSlug,
-            '.' . $format
-        );
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_project_download', [
-            'projectSlug' => $projectSlug,
-            'stepSlug' => $stepSlug,
-        ]);
-        $this->iDownloadFile($url);
-    }
-
-    /**
-     * @When I can download participant :format export for step :stepId with slug :stepSlug
-     */
-    public function iCanDownloadParticipantExport(string $format, string $stepId, string $stepSlug)
-    {
-        $fileName = CreateStepContributorsCommand::getShortenedFilename(
-            'participants_' . $stepSlug,
-            '.' . $format
-        );
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_export_step_contributors', [
-            'stepId' => $stepId,
-        ]);
-        $this->iDownloadFile($url);
-    }
-
-    /**
-     * @When I can download event participant export with eventId :eventId and eventSlug :eventSlug
-     */
-    public function iCanDownloadEventParticipantsExport(string $eventId, string $eventSlug)
-    {
-        $fileName = CreateCsvFromEventParticipantsCommand::getFilename($eventSlug);
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_export_my_event_participants', [
-            'eventId' => $eventId,
-        ]);
-        $this->iDownloadFile($url);
-    }
-
-    /**
-     * @When I can download analysis export with project slug :projectSlug
-     */
-    public function iCanDownloadAnalysisExport(string $projectSlug)
-    {
-        $fileName = ExportAnalysisCSVCommand::getFilename($projectSlug, false);
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_project_analysis_download', [
-            'projectSlug' => $projectSlug,
-        ]);
-        $this->iDownloadFile($url);
-    }
-
-    /**
-     * @When I can download decision export with project slug :projectSlug
-     */
-    public function iCanDownloadDecisionExport(string $projectSlug)
-    {
-        $fileName = ExportAnalysisCSVCommand::getFilename($projectSlug, true);
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_project_decisions_download', [
-            'projectSlug' => $projectSlug,
-        ]);
-        $this->iDownloadFile($url);
-    }
-
-    /**
-     * @When I can download project contributor export with project slug :projectSlug and projectId :projectId
-     */
-    public function iCanDownloadProjectContributorsExport(string $projectSlug, string $projectId)
-    {
-        $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($projectSlug);
-        file_put_contents('/var/www/public/export/' . $fileName, '');
-
-        $url = $this->getService('router')->generate('app_export_project_contributors', [
-            'projectId' => $projectId,
-        ]);
-        $this->iDownloadFile($url);
     }
 
     /**

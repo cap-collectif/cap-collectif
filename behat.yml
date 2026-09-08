@@ -1,69 +1,12 @@
 # List of profiles
 
 aliases:
-    - &bo-config
-      - Capco\AppBundle\Behat\ApplicationContext
-      - Capco\AppBundle\Behat\NavigationContext
-      - Capco\AppBundle\Behat\MailCatcherContext
-    - &core-config
-      - Capco\AppBundle\Behat\ApplicationContext
-      - Capco\AppBundle\Behat\RabbitMQContext
-      - Capco\AppBundle\Behat\NavigationContext
-      - Capco\AppBundle\Behat\MailCatcherContext
-    - &bp-config
-      - Capco\AppBundle\Behat\ApplicationContext
-      - Capco\AppBundle\Behat\RabbitMQContext
-      - Capco\AppBundle\Behat\NavigationContext
-      - Capco\AppBundle\Behat\MailCatcherContext
     - &graphql-config
       - Capco\AppBundle\Behat\ApplicationContext
       - Capco\AppBundle\Behat\GraphQLContext
       - Capco\AppBundle\Behat\RabbitMQContext
       - Capco\AppBundle\Behat\MailCatcherContext
 
-e2e:
-    extensions:
-        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-            url: http://mailcatchersmtp
-            purge_before_scenario: true
-        FriendsOfBehat\SymfonyExtension:
-            bootstrap: './vendor/autoload.php'
-            kernel:
-                path: 'src/Kernel.php'
-                class: App\Kernel
-                environment: test
-                debug: false
-        SensioLabs\Behat\PageObjectExtension:
-            namespaces:
-                page: [Capco\AppBundle\Behat\Page]
-        Behat\MinkExtension:
-            base_url: 'https://capco.test'
-            browser_name: chrome
-            sessions:
-                default:
-                    selenium2:
-                        capabilities:
-                            version: ''
-                            acceptSslCerts: true
-                            extra_capabilities:
-                                acceptSslCerts: true
-                                acceptInsecureCerts: true
-                        wd_host: http://selenium:4444/wd/hub
-        Bex\Behat\StepTimeLoggerExtension:
-            output: [console, csv]
-    suites:
-        # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
-        sso:
-            paths: ['%paths.base%/features/front/sso']
-            contexts: *bp-config
-            filters:
-                tags: '@sso'
-        export-feature:
-            paths: ['%paths.base%/features/front/features']
-            contexts: *bp-config
-            filters:
-                tags: '@export'
-        # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
 commands:
     extensions:
         # Tonic\Behat\ParallelScenarioExtension: ~

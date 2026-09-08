@@ -1,8 +1,9 @@
+import json
+import os
+
 from fabric import Config, Connection
 from infrastructure.deploylib.environments import command
 from invoke import run
-
-import os
 
 capcobot = {
     'user': 'capco',
@@ -149,10 +150,35 @@ def save_es_snapshot():
 
 
 def restore_es_snapshot():
-    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_close"')
-    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"')
-    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/capco/_open"')
-    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_aliases" -H "Content-Type: application/json" --data "{\\\"actions\\\":[{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"remove\\\":{\\\"index\\\":\\\"*\\\",\\\"alias\\\":\\\"capco\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco_indexing\\\"}},{\\\"add\\\":{\\\"index\\\":\\\"capco\\\",\\\"alias\\\":\\\"capco\\\"}}]}"')
+    snapshot = json.loads(run(
+        'docker exec capco_application_1 curl -fsS "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"',
+        hide='out',
+    ).stdout)
+    snapshot_indices = [
+        index
+        for index in snapshot['snapshots'][0]['indices']
+        if index.startswith('capco_')
+    ]
+    if not snapshot_indices:
+        raise RuntimeError('Could not identify the Elasticsearch index in snap_qa.')
+
+    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"', hide='out')
+    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"', hide='out')
+    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"', hide='out')
+
+    restored_index = sorted(snapshot_indices)[-1]
+    aliases = json.dumps({
+        'actions': [
+            {'remove': {'index': '*', 'alias': 'capco_indexing'}},
+            {'remove': {'index': '*', 'alias': 'capco'}},
+            {'add': {'index': restored_index, 'alias': 'capco_indexing', 'is_write_index': True}},
+            {'add': {'index': restored_index, 'alias': 'capco', 'is_write_index': True}},
+        ],
+    })
+    run(
+        "docker exec capco_application_1 curl -fsS -XPOST 'http://elasticsearch:9200/_aliases' -H 'Content-Type: application/json' --data '{}'".format(aliases),
+        hide='out',
+    )
 
 
 def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):

@@ -133,7 +133,6 @@ docker exec -w /var/www capco_application_1 bin/phpspec run --format=progress --
 
 # Behat ⚠️ Legacy (deprecated) - migrate to Cypress
 pipenv run fab local.qa.behat                    # All tests
-pipenv run fab local.qa.behat --suite=sso        # Specific suite
 pipenv run fab local.qa.behat --tags=@mytag      # By tag
 
 # Static Analysis

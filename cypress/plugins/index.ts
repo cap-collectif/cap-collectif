@@ -67,6 +67,12 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
   const defaultEnvironment = await parseEnvFile(appConfigPath)
   const localEnvironment = await parseEnvFile(appLocalConfigPath)
   const testEnvironment = await parseEnvFile(appTestConfigPath)
+  const cypressEnvironment: Record<string, string> = {}
+
+  for (const key of ['SYMFONY_OPENID_TEST_USERNAME', 'SYMFONY_OPENID_TEST_PASSWORD']) {
+    const value = process.env[key] ?? testEnvironment[key] ?? localEnvironment[key] ?? defaultEnvironment[key]
+    if (value) cypressEnvironment[key] = value
+  }
 
   on('task', {
     'db:restore': async () => {
@@ -162,9 +168,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     ...environments,
     env: {
       ...cypressConfig.env,
-      ...defaultEnvironment,
-      ...localEnvironment,
-      ...testEnvironment,
+      ...cypressEnvironment,
     },
   }
 }

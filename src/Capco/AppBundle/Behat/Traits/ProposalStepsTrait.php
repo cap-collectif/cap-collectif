@@ -1156,16 +1156,6 @@ trait ProposalStepsTrait
         Assert::assertSame($filesNumber, $filesCount);
     }
 
-    /**
-     * @Given login button should redirect to :redirectUri
-     */
-    public function loginButtonShouldRedirectTo(string $redirectUri)
-    {
-        $page = $this->getCurrentPage();
-        $redirection = $page->getLoginRedirectDestinationFromVoteButton();
-        Assert::assertEquals($redirectUri, $redirection, 'Incorrect redirection for login button.');
-    }
-
     // ********************************* Proposals *********************************************
 
     protected function IwaitForSuccessfulRefetchQuery(): void

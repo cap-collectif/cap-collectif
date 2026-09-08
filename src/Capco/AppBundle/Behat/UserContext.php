@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Behat\Storage\BehatStorage;
 use Capco\AppBundle\Behat\Traits\FranceConnectTrait;
-use Capco\AppBundle\Behat\Traits\OpenidConnectTrait;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Doctrine\UserManager;
@@ -15,7 +14,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class UserContext extends DefaultContext
 {
     use FranceConnectTrait;
-    use OpenidConnectTrait;
 
     /**
      * @Given I logout
