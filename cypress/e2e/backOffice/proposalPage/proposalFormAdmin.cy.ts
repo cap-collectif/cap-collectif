@@ -1,3 +1,5 @@
+import { Base } from '~e2e-pages/index'
+
 describe('Proposal form administration', () => {
   beforeEach(() => {
     cy.task('db:restore')
@@ -6,7 +8,10 @@ describe('Proposal form administration', () => {
 
   it('saves notification settings', () => {
     cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormNotificationsConfigurationMutation' })
-    cy.visit('/admin/capco/app/proposalform/proposalFormVote/edit')
+    Base.visit({
+      path: '/admin/capco/app/proposalform/proposalFormVote/edit',
+      operationName: 'ProposalFormAdminPageQuery',
+    })
 
     cy.get('#link-tab-notification').click()
     cy.get('#proposal_form_notification_on_update').uncheck({ force: true })
@@ -20,7 +25,8 @@ describe('Proposal form administration', () => {
     cy.wait('@UpdateProposalFormNotificationsConfigurationMutation')
     cy.contains('global.saved').should('be.visible')
 
-    cy.reload()
+    cy.interceptGraphQLOperation({ operationName: 'ProposalFormAdminPageQuery' })
+    Base.reload({ operationName: 'ProposalFormAdminPageQuery' })
     cy.get('#link-tab-notification').click()
     cy.get('#proposal_form_notification_on_update').should('be.checked')
     cy.get('#proposal_form_notification_comment_on_create').should('be.checked')

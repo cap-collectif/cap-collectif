@@ -1,4 +1,4 @@
-import { AdminProjectPage } from '~e2e-pages/index'
+import { AdminProjectPage, Base } from '~e2e-pages/index'
 
 context('Project', () => {
   describe('Project BO', () => {
@@ -83,11 +83,17 @@ context('Project', () => {
       cy.contains('PresentationStepTitle').should('be.visible')
       cy.contains('ConsultationStepTitle').should('be.visible')
 
-      cy.visit('/project/projet-vide/presentation/presentationsteptitle')
+      Base.visit({
+        path: '/project/projet-vide/presentation/presentationsteptitle',
+        operationName: 'PresentationStepPageQuery',
+      })
       cy.get('#details').should('be.visible')
       cy.contains('PresentationStepBody').should('be.visible')
 
-      cy.visit('/project/projet-vide/consultation/consultationsteptitle')
+      Base.visit({
+        path: '/project/projet-vide/consultation/consultationsteptitle',
+        operationName: 'ConsultationPropositionBoxQuery',
+      })
       cy.contains('ConsultationStepBody').should('be.visible')
     })
 
