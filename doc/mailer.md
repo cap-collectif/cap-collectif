@@ -238,26 +238,4 @@ vous devriez avoir trigger l'envoi d'email en question, il se retrouve sur l'URL
 
 ###  <div id="test"/></div> Les tests e2e [⬆️](#mailer)
 
-On utilise les tests e2e pour avoir un snapshot d'email et donc déceler les éventuelles régressions. Mais on peut aussi tester le résultat comme le nombre d'emails envoyés, le titre du sujet etc.
-
-Pour ajouter un test e2e, ça se passe dans `features/commands/consumers`
-Exemple :
-
-
-```gherkin
-
-@database @rabbitmq @snapshot-email @dev
-Scenario: A user invitation is asynchronous
-Given I publish in "user_invite_invitation_by_organization" with message below:
-"""
-  {
-    "id": "organizationInvitationMessage"
-  }
-  """
-And I consume 1 messages in "user_invite_invitation_by_organization"
-And I open mail with subject "notification-subject-organization-invite"
-Then email should match snapshot 'userOrganizationInvitation.html'
-```
-
-Dans le container de l'application Docker vous pouvez jouer cette commande pour générer le snapshot
-`UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=dev`
+Les tests de commandes et PHPUnit couvrent les envois d’e-mails et utilisent les snapshots présents dans `__snapshots__/emails` pour détecter les régressions.

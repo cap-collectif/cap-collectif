@@ -61,7 +61,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 - PHP tests:
   - PHPUnit configuration: `phpunit.xml` (tests under `tests/**`).
   - PHPSpec specs: `spec/**`, configured via `phpspec.yml`.
-  - Behat BDD tests: `features/**` with profiles configured in `behat.yml` (both browser-based end-to-end scenarios and command/consumer tests).
+  - GraphQL API snapshot tests: `features/graphql-api/**`.
 - JavaScript/TypeScript tests:
   - Unit and integration tests via Jest in both `frontend/**` and `admin-next/**`.
   - End-to-end browser tests via Cypress in `cypress/**`.
@@ -151,7 +151,7 @@ Fabric tasks are namespaced; use `pipenv run fab` with the `local.*` namespace.
   pipenv run fab local.app.stop-consumers
   ```
 
-> Many backend tests (Behat, some Jest e2e tests, and Cypress) assume the Docker stack, database, and queues are up and the app is reachable at local domains (e.g. `https://capco.dev`).
+> Many backend tests (Jest e2e tests and Cypress) assume the Docker stack, database, and queues are up and the app is reachable at local domains (e.g. `https://capco.dev`).
 
 ### Webpack/React frontend (legacy UI)
 
@@ -329,13 +329,7 @@ Backend quality tooling is surfaced as a Yarn script and via Composer / Fabric.
   php -d memory_limit=-1 bin/phpspec run
   ```
 
-- Behat end-to-end and email snapshot tests (require Docker stack and test data):
-
-  ```bash
-  php -d memory_limit=-1 ./bin/behat -p commands --tags=dev
-  ```
-
-Use the profiles and tags defined in `behat.yml` to scope scenarios when iterating on a specific feature.
+- Email snapshot tests are covered by the command and PHPUnit test suites.
 
 ### Translations
 
@@ -353,7 +347,7 @@ Translations are synchronized through Localise.biz and tooling under `packages/t
 - Prefer running scoped tests and linters based on the part of the system you are modifying:
   - Frontend React changes → `yarn lint`, `yarn ts`, `yarn test` (or a single Jest file).
   - Admin-next changes → `yarn workspace admin-next lint`, `yarn workspace admin-next test`.
-  - Backend PHP changes → `yarn php:quality` and, where relevant, targeted PHPUnit or Behat suites.
+  - Backend PHP changes → `yarn php:quality` and, where relevant, targeted PHPUnit suites.
 - For changes that touch GraphQL types, resolvers, or front-end queries:
   - Regenerate schemas and Relay artifacts with `yarn relay` (or `yarn generate-graphql-files` + `yarn build-relay-schema`).
-- For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`pipenv run fab local.infrastructures.up` + `pipenv run fab local.app.deploy` + `pipenv run fab local.database.generate`) before executing Cypress, Behat, or Jest E2E suites.
+  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`pipenv run fab local.infrastructures.up` + `pipenv run fab local.app.deploy` + `pipenv run fab local.database.generate`) before executing Cypress or Jest E2E suites.

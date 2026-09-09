@@ -99,7 +99,7 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
      les pages Sonata auront été migrées (ils sont partagés par toutes les pages Sonata restantes).
    - **Et ailleurs si besoin** : faire une recherche globale de l'ancienne URL Sonata (`grep -rn` sur tout le
      repo) avant de considérer le remplacement terminé. Elle peut aussi apparaître dans des tests (Cypress,
-     Behat — voir l'étape dédiée aux tests plus bas), de la documentation, ou d'autres liens internes.
+     Cypress, de la documentation, ou d'autres liens internes.
 9. **Si de nouvelles mutations/types GraphQL backend ont été ajoutés** (nouveaux fichiers yaml sous
    `src/Capco/AppBundle/Resources/config/graphql/internal/`), il faut, **dans cet ordre**, avant que
    `admin-next` puisse les consommer :
@@ -120,11 +120,9 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
     de rôles différents** (ex: un admin et un simple project admin) pour vérifier que la restriction d'accès
     de l'étape 4 fonctionne réellement (accès autorisé pour l'un, redirection/refus pour l'autre), pas
     seulement que la page s'affiche.
-12. **Tests : Behat → Cypress, et vérification des Cypress existants** :
+12. **Tests Cypress et vérification des tests existants** :
     - Ne pas chercher à lire / modifier les variables d'environnement, demander à la développeuse aux commandes de modifier les éléments nécessaires.
-    - Chercher si des **scénarios Behat** couvrent la page Sonata migrée (dossiers `features/back/...`,
-      voir `behat.yml` pour la liste des suites et leurs `paths`). Si oui : **les supprimer** et les
-      remplacer par des tests **Cypress** équivalents, rangés dans `cypress/e2e/backOffice/<feature>/`
+    - Vérifier les tests **Cypress** qui couvrent la page Sonata migrée, rangés dans `cypress/e2e/backOffice/<feature>/`
       (convention de dossier par feature, ex: `cypress/e2e/backOffice/project/`).
     - Si des tests **Cypress** existent déjà pour cette page, **vérifier qu'ils passent toujours** après la
       migration (les sélecteurs, les URLs, la structure du DOM ont pu changer) et les réparer si besoin.

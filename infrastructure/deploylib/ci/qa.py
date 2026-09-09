@@ -3,12 +3,6 @@ from infrastructure.deploylib import qa, environments
 
 
 @task
-def behat(ctx, fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
-    environments.ci()
-    qa.behat(fast_failure, profile, suite, tags, timer)
-
-
-@task
 def graphql_schemas(ctx, checkSame=False):
     environments.ci()
     qa.graphql_schemas(checkSame)

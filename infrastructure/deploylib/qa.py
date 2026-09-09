@@ -102,16 +102,6 @@ def snapshots(tags='false'):
     print(color_cyan + '/ ! \\ Your database must be up to date, to generate accurate snapshots !' + color_white)
 
     if tags == 'false':
-        print(color_cyan + 'Deleting email snapshots...' + color_white)
-        os.system('rm -rf __snapshots__/emails/*')
-    for suite in ['api', 'e2e', 'commands']:
-        command(
-            'UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p ' + suite + ' ' + ('--tags=snapshot-email', '--tags=snapshot-email&&' + tags)[tags != 'false'],
-            'application',
-            Config.www_app)
-    print(color_cyan + 'Successfully generated emails snapshots !' + color_white)
-
-    if tags == 'false':
         print(color_cyan + 'Running user RGPD archive commands...' + color_white)
         for user_archives_command in user_archives_commands:
             command('bin/console ' + user_archives_command + ' --env test --no-debug', 'application', Config.www_app)
@@ -179,24 +169,6 @@ def restore_es_snapshot():
         "docker exec capco_application_1 curl -fsS -XPOST 'http://elasticsearch:9200/_aliases' -H 'Content-Type: application/json' --data '{}'".format(aliases),
         hide='out',
     )
-
-
-def behat(fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
-    "Run Gherkin Tests"
-    command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', Config.www_app)
-    if profile != 'false':
-        profiles = [profile]
-    else:
-        profiles = ['api', 'commands', 'e2e']
-
-    php_option = ''
-    env_option = '--format=junit --out=./coverage --format=pretty --out=std'
-
-    for job in profiles:
-        commandToExecute = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[
-            timer != 'false'] + ' -p ' + job + ('', '  --suite=' + suite)[suite != 'false'] + ('', '  --tags=' + tags)[
-            tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'])
-        command(commandToExecute, 'application', Config.www_app, 'root')
 
 
 def view(firefox='false'):

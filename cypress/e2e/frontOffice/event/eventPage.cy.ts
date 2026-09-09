@@ -39,7 +39,7 @@ describe('Event Page - Event author want to export guests list', () => {
       win.addEventListener('beforeunload', triggerAutIframeLoad)
     })
 
-    // TODO: A column is missing in the generated snapshot, we should investigate more when we migrate all export tests from behat to cypress
+    // TODO: A column is missing in the generated snapshot, we should investigate this with the export tests.
     cy.get('#download-event-registration')
       .click({ force: true })
       .then(() => {

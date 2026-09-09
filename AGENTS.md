@@ -131,10 +131,6 @@ yarn cy:run                   # Run Cypress tests
 docker exec -w /var/www capco_application_1 bin/phpspec run                                    # Run all specs
 docker exec -w /var/www capco_application_1 bin/phpspec run --format=progress --no-interaction # CI mode
 
-# Behat ⚠️ Legacy (deprecated) - migrate to Cypress
-pipenv run fab local.qa.behat                    # All tests
-pipenv run fab local.qa.behat --tags=@mytag      # By tag
-
 # Static Analysis
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/phpstan analyse         # PHPStan
 ```
@@ -298,7 +294,6 @@ Using `qandidate_toggle` with Redis. Access via `window._capco_featureFlags` on 
 ### Test Structure
 - `spec/` - PHPSpec (mirror source structure)
 - `tests/` - PHPUnit
-- `features/` - Behat (organized by area: front, back, graphql-api)
 - `features/graphql-api/` - GraphQL snapshot tests
 
 ### Fixtures
@@ -321,7 +316,6 @@ Located in `fixtures/` with folders:
 | `config/packages/graphql_dataloaders.yaml` | DataLoader config |
 | `config/packages/snc_redis.yaml` | Redis config |
 | `config/rabbitmq.yaml` | RabbitMQ queues/exchanges |
-| `behat.yml` | Behat test suites |
 
 ## Other Useful Symfony Commands
 

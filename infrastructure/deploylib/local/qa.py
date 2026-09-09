@@ -3,12 +3,6 @@ from infrastructure.deploylib import qa, environments
 
 
 @task
-def behat(ctx, fast_failure='true', profile='false', suite='false', tags='false', timer='true'):
-    environments.local()
-    qa.behat(fast_failure, profile, suite, tags, timer)
-
-
-@task
 def blackfire_curl(ctx, url):
     environments.local()
     qa.blackfire_curl(url)
