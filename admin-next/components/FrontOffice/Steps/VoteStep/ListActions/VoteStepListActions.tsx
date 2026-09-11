@@ -20,7 +20,25 @@ interface Props {
 const FRAGMENT = graphql`
   fragment VoteStepListActions_proposalStep on ProposalStep {
     id
+    __typename
     votable
+    ... on CollectStep {
+      mainView
+      mapShownByDefault
+    }
+    ... on SelectionStep {
+      project {
+        firstCollectStep {
+          mainView
+          mapShownByDefault
+          form {
+            isMapViewEnabled
+            isGridViewEnabled
+            isListViewEnabled
+          }
+        }
+      }
+    }
     ...VoteStepQuickFilter_proposalStep
     form {
       isMapViewEnabled
@@ -43,16 +61,27 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
 
   const step = useFragment(FRAGMENT, stepKey)
 
-  const hasMapView = step.form?.isMapViewEnabled
-  const hasGridView = step.form?.isGridViewEnabled
-  const hasListView = step.form?.isListViewEnabled
+  const viewStep =
+    step.__typename === 'CollectStep'
+      ? step
+      : step.__typename === 'SelectionStep'
+        ? step.project?.firstCollectStep
+        : null
+  const viewForm = viewStep?.form ?? step.form
+  const hasMapView = viewForm?.isMapViewEnabled
+  const hasGridView = viewForm?.isGridViewEnabled
+  const hasListView = viewForm?.isListViewEnabled
   const hasBothViews = hasGridView && hasListView
 
-  const defaultView = hasGridView ? 'grid' : 'list'
+  const defaultView = viewStep?.mainView === 'LIST' ? 'list' : hasGridView ? 'grid' : 'list'
 
-  const [isMapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
+  const mapShownByDefault = viewStep?.mapShownByDefault ?? true
+  const [mapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
   const [listView, setListView] = useQueryState('list_view', { defaultValue: defaultView })
   const [, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
+  const isMapShown =
+    mapShown ??
+    (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
 
   const quickFilterButtons: QuickFilter[] = [
     {

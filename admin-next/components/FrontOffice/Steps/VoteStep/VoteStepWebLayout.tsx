@@ -64,6 +64,23 @@ const FRAGMENT = graphql`
     ...VoteStepListHeader_proposalStep
     ...StepLinkedEvents_step
     id
+    ... on CollectStep {
+      mainView
+      mapShownByDefault
+    }
+    ... on SelectionStep {
+      project {
+        firstCollectStep {
+          mainView
+          mapShownByDefault
+          form {
+            isMapViewEnabled
+            isGridViewEnabled
+            isListViewEnabled
+          }
+        }
+      }
+    }
     ...VoteStepMobileActions_proposalStep
     ...VoteStepUserInfos_proposalStep
     ...ProposalDrafts_step
@@ -98,15 +115,27 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
 
-  const [isMapShown] = useQueryState('map_shown', parseAsInteger.withDefault(1))
-  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(0))
+  const viewStep =
+    step.__typename === 'CollectStep'
+      ? step
+      : step.__typename === 'SelectionStep'
+        ? step.project?.firstCollectStep
+        : null
+  const viewForm = viewStep?.form ?? step.form
+  const mapShownByDefault = viewStep?.mapShownByDefault ?? true
+  const mapExpandedByDefault = viewStep?.mainView === 'MAP'
+  const [mapShown] = useQueryState('map_shown', parseAsInteger)
+  const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(mapExpandedByDefault ? 1 : 0))
+  const isMapShown =
+    mapShown ?? (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
   // Mobile: map hidden by default, only shown when map_shown=1 explicitly in URL
   const [mobileMapShown] = useQueryState('map_shown', parseAsInteger)
 
   if (!step) return null
 
   const isMapOnlyView =
-    isMapExpanded || (step.form?.isMapViewEnabled && !step.form?.isGridViewEnabled && !step.form?.isListViewEnabled)
+    isMapShown !== 0 &&
+    (isMapExpanded || (viewForm?.isMapViewEnabled && !viewForm?.isGridViewEnabled && !viewForm?.isListViewEnabled))
 
   const isMobileMapVisible = isMobile && mobileMapShown === 1
 
@@ -157,7 +186,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                       <ProjectsListPlaceholder
                         count={10}
                         templateColumns={(() => {
-                          const cols = getTemplateColumns(step.form?.isMapViewEnabled && !isMobile && isMapShown !== 0)
+                          const cols = getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)
                           return [cols.base, cols.tablet, cols.desktop]
                         })()}
                         mt={0}
@@ -167,13 +196,13 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
                 >
                   <VoteStepProposalsList
                     step={step}
-                    templateColumns={getTemplateColumns(step.form?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
+                    templateColumns={getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
                     triggerRequirementModal={triggerRequirementModal}
                   />
                 </React.Suspense>
               </Box>
             ) : null}
-            {step.form?.isMapViewEnabled && (isMapOnlyView || isMapShown !== 0) && !isMobile ? (
+            {viewForm?.isMapViewEnabled && (isMapOnlyView || isMapShown !== 0) && !isMobile ? (
               <Box
                 flex={isMapOnlyView ? '1 1 100%' : `0 1 ${pxToRem(395)}`}
                 position="sticky"
@@ -190,7 +219,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
             ) : null}
           </Flex>
         </Box>
-        {step.form?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
+        {viewForm?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
           <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={1999} backgroundColor="white">
             <VoteStepMap
               step={step}

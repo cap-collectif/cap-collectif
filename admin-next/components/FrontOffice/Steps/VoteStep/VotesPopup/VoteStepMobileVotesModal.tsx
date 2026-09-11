@@ -28,6 +28,7 @@ const FRAGMENT = graphql`
     ...VotesPopup_proposalStep
     ...VoteStepUserInfos_proposalStep
     voteType
+    actionButtonLabel
     budget
     votesLimit
     votesMin
@@ -47,6 +48,7 @@ const FRAGMENT = graphql`
 const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, onButtonClick }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
+  const isSupport = step.actionButtonLabel === 'SUPPORT'
 
   return (
     <Modal
@@ -60,11 +62,11 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
         >
           <Icon name={CapUIIcon.ThumbUpO} size={CapUIIconSize.Md} />
           <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
-            {intl.formatMessage({ id: 'global.vote' })}
+            {intl.formatMessage({ id: isSupport ? 'global.support' : 'global.vote' })}
           </Box>
         </Button>
       }
-      ariaLabel={intl.formatMessage({ id: 'proposal.step.user.votes.infos.btn.votes' })}
+      ariaLabel={intl.formatMessage({ id: isSupport ? 'proposal.step.user.supports.infos.btn.supports' : 'proposal.step.user.votes.infos.btn.votes' })}
       size={CapUIModalSize.Fullscreen}
       fullSizeOnMobile
       hideCloseButton

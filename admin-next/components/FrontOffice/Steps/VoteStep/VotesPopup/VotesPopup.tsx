@@ -12,6 +12,7 @@ interface Props {
 const FRAGMENT = graphql`
   fragment VotesPopup_proposalStep on ProposalStep {
     id
+    actionButtonLabel
     ...VotesPopupCard_proposalStep
     viewerVotes {
       edges {
@@ -31,6 +32,7 @@ const FRAGMENT = graphql`
 const VotesPopup: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
+  const emptyVoteLabelId = step.actionButtonLabel === 'SUPPORT' ? 'front.proposal.empty-support' : 'front.proposal.empty-vote'
 
   return (
     <Flex width="100%" justifyContent="flex-start" flexDirection="column" gap="md">
@@ -41,7 +43,7 @@ const VotesPopup: FC<Props> = ({ step: stepKey }) => {
           .map(edge => <VotesPopupCard key={edge.node.id} step={step} vote={edge.node} />)
       ) : (
         <Box padding="md" textAlign="center" fontSize={CapUIFontSize.BodyLarge}>
-          {intl.formatMessage({ id: 'front.proposal.empty-vote' })}
+          {intl.formatMessage({ id: emptyVoteLabelId })}
         </Box>
       )}
     </Flex>

@@ -206,6 +206,8 @@ const COLLECT_FRAGMENT = graphql`
         allowAuthorsToAddNews
         defaultSort
         private
+        mainView
+        mapShownByDefault
         statuses {
           id
           name

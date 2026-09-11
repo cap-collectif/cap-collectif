@@ -35,10 +35,12 @@ const PROPOSAL_FRAGMENT = graphql`
       id
       completionStatus
     }
-    votes {
+    votes(stepId: $stepId, first: 0) {
       totalCount
+      totalPointsCount
     }
-    paperVotesTotalCount
+    paperVotesTotalCount(stepId: $stepId)
+    paperVotesTotalPointsCount(stepId: $stepId)
   }
 `
 
@@ -47,6 +49,7 @@ const STEP_FRAGMENT = graphql`
     id
     votesMin
     votesLimit
+    votesRanking
     budget
     open
     viewerVotes {
@@ -89,8 +92,17 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   // and the count hasn't been reflected yet after a page reload.
   const isViewerVoteAccounted =
     !!proposal.viewerHasVote && !hasIncompleteVote && (votesMin === 0 || viewerVotesCount >= votesMin)
-  const rawVotesCount = proposal.votes?.totalCount ?? 0
-  const votesCount = isViewerVoteAccounted ? Math.max(rawVotesCount, 1) : rawVotesCount
+  const numericVotesCount = proposal.votes?.totalCount ?? 0
+  const votesCount = numericVotesCount + proposal.paperVotesTotalCount
+  const numericPointsCount = proposal.votes?.totalPointsCount ?? 0
+  const pointsCount = numericPointsCount + proposal.paperVotesTotalPointsCount
+  const isRankedVote = step.votesRanking
+  const isSupport = step.actionButtonLabel === 'SUPPORT'
+  const numericDisplayCount = isRankedVote ? numericPointsCount : numericVotesCount
+  const paperDisplayCount = isRankedVote ? proposal.paperVotesTotalPointsCount : proposal.paperVotesTotalCount
+  const numericLabelId = isRankedVote ? 'numeric-points-count' : isSupport ? 'numeric-supports-count' : 'numeric-votes-count'
+  const paperLabelId = isRankedVote ? 'paper-points-count' : isSupport ? 'paper-supports-count' : 'paper-votes-count'
+  const displayedCount = isRankedVote ? pointsCount : isViewerVoteAccounted ? Math.max(votesCount, 1) : votesCount
   const hasReachedVotesLimit = step.votesLimit != null && viewerVotesCount >= step.votesLimit && !proposal.viewerHasVote
 
   const addVote = useCallback(async () => {
@@ -141,7 +153,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
           proposalId: proposal.id,
           stepId: step.id,
           voteId: proposal.viewerVote?.id ?? null,
-          currentVotesCount: votesCount,
+          currentVotesCount: numericVotesCount,
           currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
           currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
           proposalEstimation: proposal.estimation ?? null,
@@ -156,7 +168,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     proposal?.id,
     proposal.viewerVote?.id,
     intl,
-    votesCount,
+    numericVotesCount,
     step.viewerVotes?.totalCount,
     step.viewerVotes?.creditsLeft,
     proposal.estimation,
@@ -176,20 +188,20 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     }
   }, [hasIncompleteVote, proposal.viewerHasVote, addVote, deleteVote, triggerRequirementModal])
 
+  const votedTextId = isSupport ? 'front.proposal.supported' : 'front.proposal.voted-for'
+  const voteTextId = isSupport ? 'global.support.for' : 'global.vote.for'
   const tooltipLabel =
-    votesCount > 0
-      ? `${proposal.votes?.totalCount - proposal.paperVotesTotalCount} ${intl.formatMessage(
-          { id: 'numeric-votes' },
-          { num: proposal.votes?.totalCount - proposal.paperVotesTotalCount },
-        )}${
-          proposal.paperVotesTotalCount > 0
-            ? `<br />${proposal.paperVotesTotalCount} ${intl.formatMessage(
-                { id: 'paper-votes-count' },
-                { num: proposal.paperVotesTotalCount },
-              )}`
-            : ''
-        }`
-      : null
+    displayedCount > 0 ? (
+      <>
+        {intl.formatMessage({ id: numericLabelId }, { num: numericDisplayCount })}
+        {paperDisplayCount > 0 && (
+          <>
+            <br />
+            {intl.formatMessage({ id: paperLabelId }, { num: paperDisplayCount })}
+          </>
+        )}
+      </>
+    ) : null
 
   const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
 
@@ -200,8 +212,8 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
         <Icon name={voteIcon} />
         <Text>
           {step.canDisplayBallot
-            ? votesCount
-            : intl.formatMessage({ id: proposal.viewerHasVote ? 'front.proposal.voted-for' : 'global.vote.for' })}
+            ? displayedCount
+            : intl.formatMessage({ id: proposal.viewerHasVote ? votedTextId : voteTextId })}
         </Text>
       </Tag>
     )
@@ -210,10 +222,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
 
     return <Tooltip label={tooltipLabel}>{tagContent}</Tooltip>
   }
-
-  const isSupport = step.actionButtonLabel === 'SUPPORT'
-  const votedTextId = isSupport ? 'global.support' : 'front.proposal.voted-for'
-  const voteTextId = isSupport ? 'global.support.for' : 'global.vote.for'
 
   const buttonContent = (
     <Button
@@ -227,7 +235,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
       <Text fontWeight={CapUIFontWeight.Semibold}>
         {step.canDisplayBallot ? (
           <>
-            {votesCount}
+            {displayedCount}
             {step.voteThreshold ? ` / ${step.voteThreshold}` : ''}
           </>
         ) : (

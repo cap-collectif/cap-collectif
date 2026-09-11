@@ -36,6 +36,17 @@ const PROPOSALS_FRAGMENT = graphql`
   )
   @refetchable(queryName: "VoteStepWebLayoutQuery") {
     id
+    __typename
+    ... on CollectStep {
+      mainView
+    }
+    ... on SelectionStep {
+      project {
+        firstCollectStep {
+          mainView
+        }
+      }
+    }
     proposals(
       first: $count
       after: $cursor
@@ -68,7 +79,14 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
   const { data, refetch } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
 
   const [latlngBounds] = useQueryState('latlngBounds')
-  const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
+  const mainView =
+    data.__typename === 'CollectStep'
+      ? data.mainView
+      : data.__typename === 'SelectionStep'
+        ? data.project?.firstCollectStep?.mainView
+        : undefined
+  const defaultView = mainView === 'LIST' ? 'list' : 'grid'
+  const [listView] = useQueryState('list_view', { defaultValue: defaultView })
   const [isMapShown] = useQueryState('map_shown')
 
   const itemRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})

@@ -130,7 +130,7 @@ export const getInitialValues = (
     },
     private: step?.private,
     mainView: {
-      labels: [step?.mainView],
+      labels: [step?.mainView === 'MAP' || !step?.mapShownByDefault ? step?.mainView : `${step.mainView}_WITH_MAP`],
     },
     metaDescription: step?.metaDescription || '',
     customCode: step?.customCode || '',
@@ -220,7 +220,8 @@ export const getCollectStepInput = (
     metaDescription: formValues.metaDescription,
     customCode: formValues.customCode,
     requirementsReason: formValues.requirementsReason,
-    mainView: formValues.mainView.labels[0] as MainView,
+    mainView: formValues.mainView.labels[0].replace('_WITH_MAP', '') as MainView,
+    mapShownByDefault: formValues.mainView.labels[0].endsWith('_WITH_MAP'),
     statuses: statusesList as StepStatusInput[],
     defaultStatus: formValues.defaultStatus,
     defaultSort: formValues.defaultSort as ProposalSort,

@@ -12,13 +12,14 @@ import {
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UseFormReturn } from 'react-hook-form'
 import * as React from 'react'
-import { MainViewEnum, zoomLevels } from '../CollectStep/CollectStepForm'
+import { zoomLevels } from '../CollectStep/CollectStepForm'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalStepOptionnalAccordion_step$key } from '@relay/ProposalStepOptionnalAccordion_step.graphql'
 import { useEffect } from 'react'
 import { addRequiredInfo } from '../CollectStep/ProposalFormForm.utils'
 import { FormKeyType } from '../CollectStep/CollectStepContext'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   step: ProposalStepOptionnalAccordion_step$key
@@ -41,6 +42,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
   const intl = useIntl()
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const { watch, setValue, control } = formMethods
+  const newVoteStepEnabled = useFeatureFlag('new_new_vote_step')
 
   const isListViewEnabled = watch(`${proposalFormKey}.isListViewEnabled`)
   const isGridViewEnabled = watch(`${proposalFormKey}.isGridViewEnabled`)
@@ -60,51 +62,63 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
   }, [hasMainViewSelected, setMainViewError])
 
   useEffect(() => {
-    const views = {
-      LIST: isListViewEnabled,
-      GRID: isGridViewEnabled,
-      MAP: isMapViewEnabled,
-    }
-
-    const activeViews = Object.entries(views).reduce((acc, [key, enabled]) => {
-      if (enabled) {
-        acc.push(key)
-      }
-      return acc
-    }, [])
+    const activeViews = [
+      isGridViewEnabled && 'GRID',
+      isListViewEnabled && 'LIST',
+      isMapViewEnabled && 'MAP',
+      newVoteStepEnabled && isGridViewEnabled && isMapViewEnabled && 'GRID_WITH_MAP',
+      newVoteStepEnabled && isListViewEnabled && isMapViewEnabled && 'LIST_WITH_MAP',
+    ].filter(Boolean)
 
     const currentMainView = mainView['labels'][0] ?? null
 
     if (activeViews.includes(currentMainView) === false) {
-      setValue('mainView', { labels: [activeViews[0]] })
+      const mainViewWithoutMap = currentMainView?.replace('_WITH_MAP', '')
+      setValue('mainView', { labels: [activeViews.includes(mainViewWithoutMap) ? mainViewWithoutMap : activeViews[0]] })
     }
-  }, [isListViewEnabled, isGridViewEnabled, isMapViewEnabled, mainView, setValue])
+  }, [isListViewEnabled, isGridViewEnabled, isMapViewEnabled, mainView, newVoteStepEnabled, setValue])
 
   const mainViewChoices = [
     {
-      id: MainViewEnum.LIST,
+      id: 'GRID',
       useIdAsValue: true,
-      label: intl.formatMessage({
-        id: 'collect.step.mainView.list',
-      }),
-      disabled: !isListViewEnabled,
-    },
-    {
-      id: MainViewEnum.GRID,
-      useIdAsValue: true,
-      label: intl.formatMessage({
-        id: 'collect.step.mainView.grid',
-      }),
+      label: intl.formatMessage({ id: 'collect.step.mainView.grid' }),
       disabled: !isGridViewEnabled,
     },
     {
-      id: MainViewEnum.MAP,
+      id: 'LIST',
+      useIdAsValue: true,
+      label: intl.formatMessage({ id: 'collect.step.mainView.list' }),
+      disabled: !isListViewEnabled,
+    },
+    {
+      id: 'MAP',
       useIdAsValue: true,
       label: intl.formatMessage({
         id: 'collect.step.mainView.map',
       }),
       disabled: !isMapViewEnabled,
     },
+    ...(newVoteStepEnabled
+      ? [
+          {
+            id: 'GRID_WITH_MAP',
+            useIdAsValue: true,
+            label: `${intl.formatMessage({ id: 'collect.step.mainView.grid' })} + ${intl.formatMessage({
+              id: 'collect.step.mainView.map',
+            })}`,
+            disabled: !isGridViewEnabled || !isMapViewEnabled,
+          },
+          {
+            id: 'LIST_WITH_MAP',
+            useIdAsValue: true,
+            label: `${intl.formatMessage({ id: 'collect.step.mainView.list' })} + ${intl.formatMessage({
+              id: 'collect.step.mainView.map',
+            })}`,
+            disabled: !isListViewEnabled || !isMapViewEnabled,
+          },
+        ]
+      : []),
   ]
 
   return (

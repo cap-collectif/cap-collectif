@@ -1,0 +1,16 @@
+{
+  "proposal.step.user.supports.infos.title.proposals": "Soutenez des propositions",
+  "proposal.step.user.supports.infos.title.proposal-number": "Soutenez {n, plural, one {{n} proposition} other {{n} propositions}}",
+  "proposal.step.user.supports.infos.desc.threshold": "Aidez-les à atteindre {n, plural, one {{n} soutien} other {{n} soutiens}}",
+  "proposal.step.user.supports.infos.desc.supports-validated": "{n, plural, zero {} one {{n} soutien validé} other {{n} soutiens validés}}",
+  "proposal.step.user.supports.infos.desc.support-others": "Soutenez d'autres propositions",
+  "proposal.step.user.supports.infos.desc.support-more": "Soutenez encore {n, plural, one {{n} proposition} other {{n} propositions}}",
+  "proposal.step.user.supports.infos.desc.budget-ended": "{n}€ de budget et {v, plural, one {{v} soutien restant} other {{v} soutiens restants}}",
+  "proposal.step.user.supports.infos.btn.supports": "Voir mes soutiens",
+  "proposal.step.user.supports.infos.btn.ranking": "Voir et classer mes soutiens",
+  "front.proposal.supports-popup.help": "À propos des soutiens",
+  "front.proposal.empty-support": "Vous n'avez pas encore soutenu de propositions.",
+  "front.proposal.supported": "Soutenu",
+  "numeric-supports-count": "{num, plural, one {# soutien numérique} other {# soutiens numériques}}",
+  "paper-supports-count": "{num, plural, one {# soutien papier} other {# soutiens papier}}"
+}

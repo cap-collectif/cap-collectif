@@ -124,6 +124,14 @@ const VOTE_TYPE_CONFIG: Record<StepUserVotesType, VoteTypeConfig> = {
   },
 }
 
+const SUPPORT_DESC_KEYS = {
+  threshold: 'threshold',
+  'votes-validated': 'supports-validated',
+  'vote-more': 'support-more',
+  'vote-others': 'support-others',
+  'budget-ended': 'budget-ended',
+} as const
+
 interface Props {
   step: VoteStepUserInfos_proposalStep$key
 }
@@ -137,6 +145,7 @@ const FRAGMENT = graphql`
     votesHelpText
     voteThreshold
     voteTypes
+    actionButtonLabel
     viewerVotes {
       totalCount
       edges {
@@ -160,6 +169,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
 
   const type = deriveTypeFromVoteTypes(step.voteTypes)
   const { buttonKey, showCircularProgress, getTitleKey, getDescKey } = VOTE_TYPE_CONFIG[type]
+  const isSupport = step.actionButtonLabel === 'SUPPORT'
 
   const currentBudget = step.viewerVotes.edges.reduce((acc, edge) => acc + edge.node.proposal.estimation, 0)
   const voteProgress = step.viewerVotes.totalCount
@@ -179,6 +189,16 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
 
   const titleKey = getTitleKey(isEnded, isValidated)
   const descKey = getDescKey(isEnded, isValidated, voteProgress)
+  const supportDescKey =
+    isSupport && descKey && descKey in SUPPORT_DESC_KEYS
+      ? SUPPORT_DESC_KEYS[descKey as keyof typeof SUPPORT_DESC_KEYS]
+      : undefined
+  const titleNamespace =
+    isSupport && (titleKey === 'proposals' || titleKey === 'proposal-number') ? 'supports' : 'votes'
+  const descNamespace = isSupport && supportDescKey ? 'supports' : 'votes'
+  const buttonNamespace = isSupport ? 'supports' : 'votes'
+  const displayButtonKey = isSupport && buttonKey === 'votes' ? 'supports' : buttonKey
+  const helpLabelId = isSupport ? 'front.proposal.supports-popup.help' : 'front.proposal.votes-popup.help'
 
   // Remaining votes/budget toward the next milestone, used by `proposal-number` title
   const titleValue = (() => {
@@ -228,12 +248,15 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
         )}
         <Box color="text.primary" fontSize={CapUIFontSize.BodyLarge} flex="1">
           <Box fontWeight={CapUIFontWeight.Semibold}>
-            {intl.formatMessage({ id: `proposal.step.user.votes.infos.title.${titleKey}` }, { n: titleValue })}
+            {intl.formatMessage(
+              { id: `proposal.step.user.${titleNamespace}.infos.title.${titleKey}` },
+              { n: titleValue },
+            )}
           </Box>
           {descKey && (
             <Box as="p">
               {intl.formatMessage(
-                { id: `proposal.step.user.votes.infos.desc.${descKey}` },
+                { id: `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}` },
                 { n: descriptionValue, v: (step.votesLimit ?? 0) - voteProgress },
               )}
             </Box>
@@ -247,7 +270,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
               rightIcon={isVotePopupOpen ? CapUIIcon.ArrowUpO : CapUIIcon.ArrowDownO}
               onClick={() => setIsVotePopupOpen(!isVotePopupOpen)}
             >
-              {intl.formatMessage({ id: `proposal.step.user.votes.infos.btn.${buttonKey}` })}
+              {intl.formatMessage({ id: `proposal.step.user.${buttonNamespace}.infos.btn.${displayButtonKey}` })}
             </Button>
           )}
         </Box>
@@ -267,14 +290,14 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
             }
             hideCloseButton={false}
             size={CapUIModalSize.Md}
-            ariaLabel={intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
+            ariaLabel={intl.formatMessage({ id: helpLabelId })}
           >
             {({ hide }) => (
               <>
                 <Modal.Header>
                   <Heading as="h2" color={`${colors.text.secondary}!important`}>
                     {/* Needs !important otherwise it's overridden by the default color u_U */}
-                    {intl.formatMessage({ id: 'front.proposal.votes-popup.help' })}
+                    {intl.formatMessage({ id: helpLabelId })}
                   </Heading>
                 </Modal.Header>
                 <Modal.Body>

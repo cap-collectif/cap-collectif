@@ -31,6 +31,17 @@ const FRAGMENT = graphql`
       contribuable
       ...ProposalFormModal_proposalForm
     }
+    ... on SelectionStep {
+      project {
+        firstCollectStep {
+          form {
+            isMapViewEnabled
+            isGridViewEnabled
+            isListViewEnabled
+          }
+        }
+      }
+    }
     ...VoteStepMobileVotesModal_proposalStep
   }
 `
@@ -39,6 +50,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
   const isCollectStep = step.__typename === 'CollectStep'
+  const viewForm = step.__typename === 'SelectionStep' ? step.project?.firstCollectStep?.form : step.form
   const [activeAction, setActiveAction] = useState<ActiveAction>(null)
 
   // Mobile: map hidden by default, shown when map_shown=1
@@ -82,8 +94,8 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
             onButtonClick={() => handleActionClick('vote')}
           />
         )}
-        {step.form?.isMapViewEnabled &&
-          (step.form?.isGridViewEnabled !== false || step.form?.isListViewEnabled !== false) && (
+        {viewForm?.isMapViewEnabled &&
+          (viewForm.isGridViewEnabled !== false || viewForm.isListViewEnabled !== false) && (
             <StepVoteMobileActionBtn
               icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
               onClick={() => handleActionClick('map')}

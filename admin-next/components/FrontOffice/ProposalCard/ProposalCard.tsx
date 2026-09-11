@@ -79,11 +79,22 @@ const PROPOSAL_FRAGMENT = graphql`
 const STEP_FRAGMENT = graphql`
   fragment ProposalCard_step on ProposalStep @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     id
+    __typename
     votable
     budget
     votesRanking
     votesLimit
     votesMin
+    ... on CollectStep {
+      mainView
+    }
+    ... on SelectionStep {
+      project {
+        firstCollectStep {
+          mainView
+        }
+      }
+    }
     allProposals: proposals {
       totalCount
     }
@@ -120,7 +131,14 @@ export const ProposalCard: React.FC<Props> = ({
   const proposalColor = category?.color || undefined
   const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
-  const [listView] = useQueryState('list_view', { defaultValue: 'grid' })
+  const mainView =
+    step.__typename === 'CollectStep'
+      ? step.mainView
+      : step.__typename === 'SelectionStep'
+        ? step.project?.firstCollectStep?.mainView
+        : undefined
+  const defaultView = mainView === 'LIST' ? 'list' : 'grid'
+  const [listView] = useQueryState('list_view', { defaultValue: defaultView })
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
 
   const descriptionLineClamp = isMapShown !== 0 ? 3 : 4

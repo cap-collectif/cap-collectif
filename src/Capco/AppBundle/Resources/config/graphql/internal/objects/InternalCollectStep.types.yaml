@@ -49,6 +49,9 @@ InternalCollectStep:
             mainView:
                 type: 'MainView!'
                 description: 'The main view : GRID, LIST or MAP'
+            mapShownByDefault:
+                type: 'Boolean!'
+                description: 'Whether the map is displayed alongside the main view by default.'
             allowAuthorsToAddNews:
                 type: 'Boolean!'
                 description: 'Whether or not authors can add news on proposals collected in this step'

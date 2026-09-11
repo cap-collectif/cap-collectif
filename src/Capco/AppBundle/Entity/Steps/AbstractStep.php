@@ -105,6 +105,11 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
     protected string $mainView = ViewConfiguration::GRID;
 
     /**
+     * @ORM\Column(name="map_shown_by_default", type="boolean", options={"default": false})
+     */
+    protected bool $mapShownByDefault = false;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\HubMetadata", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private ?HubMetadata $hubMetadata = null;
@@ -487,6 +492,18 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
     public function setMainView(string $mainView): self
     {
         $this->mainView = $mainView;
+
+        return $this;
+    }
+
+    public function isMapShownByDefault(): bool
+    {
+        return $this->mapShownByDefault;
+    }
+
+    public function setMapShownByDefault(bool $mapShownByDefault): self
+    {
+        $this->mapShownByDefault = $mapShownByDefault;
 
         return $this;
     }
