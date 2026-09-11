@@ -3,6 +3,8 @@
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
+use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Group;
@@ -1844,6 +1846,91 @@ class UserRepository extends EntityRepository
         ;
 
         return $qbCombined->getQuery()->getResult();
+    }
+
+    public function countDebateParticipantsCombined(Debate $debate): int
+    {
+        $userIdsFromArguments = $this->createQueryBuilder('u')
+            ->select('DISTINCT u.id')
+            ->innerJoin('u.debateArguments', 'da')
+            ->where('da.debate = :debate')
+            ->andWhere('da.published = true')
+            ->andWhere('da.trashedStatus IS NULL')
+            ->andWhere('u.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $userIdsFromVotes = $this->createQueryBuilder('dv')
+            ->select('DISTINCT voter.id')
+            ->from(DebateVote::class, 'vote')
+            ->join('vote.debate', 'debate')
+            ->join('vote.user', 'voter')
+            ->where('debate = :debate')
+            ->andWhere('voter.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return \count(array_unique(array_column(array_merge($userIdsFromArguments, $userIdsFromVotes), 'id')));
+    }
+
+    public function countDebateParticipants(Debate $debate): int
+    {
+        $userIdsFromArguments = array_column($this->createQueryBuilder('u')
+            ->select('DISTINCT u.id')
+            ->innerJoin('u.debateArguments', 'da')
+            ->where('da.debate = :debate')
+            ->andWhere('da.published = true')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult(), 'id');
+
+        $userIdsFromDebateVotes = array_column($this->createQueryBuilder('u')
+            ->select('DISTINCT voter.id')
+            ->from(DebateVote::class, 'vote')
+            ->join('vote.debate', 'debate')
+            ->join('vote.user', 'voter')
+            ->where('debate = :debate')
+            ->andWhere('vote.published = true')
+            ->andWhere('(vote.isCreatedBeforeWorkflow = true OR (vote.isCreatedBeforeWorkflow = false AND vote.isAccounted = true))')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult(), 'id');
+
+        $userIdsFromDebateArgumentVotes = array_column($this->createQueryBuilder('u')
+            ->select('DISTINCT voter.id')
+            ->from(DebateArgumentVote::class, 'vote')
+            ->join('vote.debateArgument', 'argument')
+            ->join('vote.user', 'voter')
+            ->where('argument.debate = :debate')
+            ->andWhere('argument.published = true')
+            ->andWhere('vote.published = true')
+            ->andWhere('(vote.isCreatedBeforeWorkflow = true OR (vote.isCreatedBeforeWorkflow = false AND vote.isAccounted = true))')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult(), 'id');
+
+        $userIdsFromDebateAnonymousArgumentVotes = array_column($this->createQueryBuilder('u')
+            ->select('DISTINCT voter.id')
+            ->from(DebateAnonymousArgumentVote::class, 'vote')
+            ->join('vote.debateAnonymousArgument', 'argument')
+            ->join('vote.user', 'voter')
+            ->where('argument.debate = :debate')
+            ->andWhere('vote.published = true')
+            ->andWhere('(vote.isCreatedBeforeWorkflow = true OR (vote.isCreatedBeforeWorkflow = false AND vote.isAccounted = true))')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult(), 'id');
+
+        return \count(array_unique(array_merge(
+            $userIdsFromArguments,
+            $userIdsFromDebateVotes,
+            $userIdsFromDebateArgumentVotes,
+            $userIdsFromDebateAnonymousArgumentVotes
+        )));
     }
 
     public function hasNewParticipantsForAQuestionnaire(Questionnaire $questionnaire, \DateTime $mostRecentFileModificationDate): bool

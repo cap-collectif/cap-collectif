@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository\Debate;
 
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
@@ -41,6 +42,28 @@ class DebateAnonymousVoteRepository extends EntityRepository
             ->innerJoin('s.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->setParameter('project', $project)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('dav')
+            ->select('COUNT(dav.id)')
+            ->where('dav.debate = :debate')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countDistinctTokensByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('dav')
+            ->select('COUNT(DISTINCT dav.token)')
+            ->where('dav.debate = :debate')
+            ->setParameter('debate', $debate)
             ->getQuery()
             ->getSingleScalarResult()
         ;

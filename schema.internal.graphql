@@ -5575,6 +5575,15 @@ type DebateStep implements NodeSlug & Step & Node {
     first: Int = 100
   ): UserConnection!
 
+  """The participants count of the debate step."""
+  participants: AggregatedResult!
+
+  """The contributions count of the debate step."""
+  contributions: AggregatedResult!
+
+  """The votes count of the debate step."""
+  votes: AggregatedResult!
+
   """the type of the debate"""
   debateType: DebateType!
 

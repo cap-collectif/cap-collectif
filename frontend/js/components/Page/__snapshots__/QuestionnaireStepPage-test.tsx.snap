@@ -1443,9 +1443,45 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "UserConnection",
+                                  "concreteType": "AggregatedResult",
                                   "kind": "LinkedField",
-                                  "name": "contributors",
+                                  "name": "participants",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "debateContributions",
+                                  "args": null,
+                                  "concreteType": "AggregatedResult",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "debateVotes",
+                                  "args": null,
+                                  "concreteType": "AggregatedResult",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
                                   "plural": false,
                                   "selections": Array [
                                     Object {
@@ -2767,7 +2803,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0a196ecd6c557f810f3d15c3b20ac6f6",
+          "cacheID": "9e35ed57fac881152ff7075d52883eac",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -3237,7 +3273,13 @@ fragment StepPageHeader_step on Step {
     }
   }
   ... on DebateStep {
-    contributors {
+    participants {
+      totalCount
+    }
+    debateContributions: contributions {
+      totalCount
+    }
+    debateVotes: votes {
       totalCount
     }
   }
@@ -4746,9 +4788,45 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "UserConnection",
+                                  "concreteType": "AggregatedResult",
                                   "kind": "LinkedField",
-                                  "name": "contributors",
+                                  "name": "participants",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "debateContributions",
+                                  "args": null,
+                                  "concreteType": "AggregatedResult",
+                                  "kind": "LinkedField",
+                                  "name": "contributions",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": "debateVotes",
+                                  "args": null,
+                                  "concreteType": "AggregatedResult",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
                                   "plural": false,
                                   "selections": Array [
                                     Object {
@@ -6070,7 +6148,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "0a196ecd6c557f810f3d15c3b20ac6f6",
+          "cacheID": "9e35ed57fac881152ff7075d52883eac",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -6540,7 +6618,13 @@ fragment StepPageHeader_step on Step {
     }
   }
   ... on DebateStep {
-    contributors {
+    participants {
+      totalCount
+    }
+    debateContributions: contributions {
+      totalCount
+    }
+    debateVotes: votes {
       totalCount
     }
   }

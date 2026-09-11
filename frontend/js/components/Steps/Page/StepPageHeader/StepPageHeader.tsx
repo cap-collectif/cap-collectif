@@ -119,7 +119,13 @@ const FRAGMENT = graphql`
       }
     }
     ... on DebateStep {
-      contributors {
+      participants {
+        totalCount
+      }
+      debateContributions: contributions {
+        totalCount
+      }
+      debateVotes: votes {
         totalCount
       }
     }
@@ -144,6 +150,8 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
     const votesCount =
       step.__typename === 'ConsultationStep'
         ? step.votes?.totalCount ?? null
+        : step.__typename === 'DebateStep'
+        ? step.debateVotes?.totalCount ?? null
         : isSelectionStepVotable
         ? numericVotesCount + paperVotesCount
         : null
@@ -152,6 +160,8 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
     const contributionsCount =
       step.__typename === 'ConsultationStep'
         ? step.contributions?.totalCount ?? null
+        : step.__typename === 'DebateStep'
+        ? step.debateContributions?.totalCount ?? null
         : step.__typename === 'CollectStep' || (step.__typename === 'SelectionStep' && !isSelectionStepVotable)
         ? step.allProposals?.totalCount ?? null
         : null
@@ -160,9 +170,10 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
       step.__typename === 'ConsultationStep' ||
       step.__typename === 'CollectStep' ||
       step.__typename === 'SelectionStep' ||
-      step.__typename === 'QuestionnaireStep' ||
-      step.__typename === 'DebateStep'
+      step.__typename === 'QuestionnaireStep'
         ? step.contributors?.totalCount ?? null
+        : step.__typename === 'DebateStep'
+        ? step.participants?.totalCount ?? null
         : null
 
     // Replies: QuestionnaireStep only, when multipleRepliesAllowed

@@ -84,6 +84,8 @@ class RemoveDebateVoteMutation implements MutationInterface
             }
             $this->indexer->remove(DebateVote::class, $previousVoteId);
             $this->indexer->finishBulk();
+            $this->indexer->index(User::class, $viewer->getId());
+            $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()

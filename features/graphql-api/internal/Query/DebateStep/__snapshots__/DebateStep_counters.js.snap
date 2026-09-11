@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DebateStep counters fetches debate step counters with BO participant rules 1`] = `
+Object {
+  "node": Object {
+    "contributions": Object {
+      "totalCount": 10,
+    },
+    "participants": Object {
+      "totalCount": 20,
+    },
+    "votes": Object {
+      "totalCount": 19,
+    },
+  },
+}
+`;

@@ -74,6 +74,8 @@ class AddDebateVoteMutation implements MutationInterface
             }
             $this->indexer->index(DebateVote::class, $debateVote->getId());
             $this->indexer->finishBulk();
+            $this->indexer->index(User::class, $viewer->getId());
+            $this->indexer->finishBulk();
         } catch (DriverException $e) {
             $this->logger->error(
                 __METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage()

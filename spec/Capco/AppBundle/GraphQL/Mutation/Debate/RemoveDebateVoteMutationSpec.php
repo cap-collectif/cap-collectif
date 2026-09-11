@@ -66,13 +66,15 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
 
         $debateVote->getId()->willReturn('456');
         $voteRepository->getOneByDebateAndUser($debate, $viewer)->willReturn($debateVote);
+        $viewer->getId()->willReturn('viewer-id');
 
         $argumentRepository->getOneByDebateAndUser($debate, $viewer)->willReturn(null);
 
         $em->remove($debateVote)->shouldBeCalled();
         $indexer->remove(DebateVote::class, '456')->shouldBeCalled();
         $em->flush()->shouldBeCalled();
-        $indexer->finishBulk()->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalledTimes(2);
+        $indexer->index(User::class, 'viewer-id')->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(4);
@@ -103,6 +105,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
 
         $debateVote->getId()->willReturn('456');
         $voteRepository->getOneByDebateAndUser($debate, $viewer)->willReturn($debateVote);
+        $viewer->getId()->willReturn('viewer-id');
 
         $debateArgument->getId()->willReturn('789');
         $argumentRepository->getOneByDebateAndUser($debate, $viewer)->willReturn($debateArgument);
@@ -112,7 +115,8 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalled();
         $indexer->remove(DebateArgument::class, '789')->shouldBeCalled();
         $indexer->remove(DebateVote::class, '456')->shouldBeCalled();
-        $indexer->finishBulk()->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalledTimes(2);
+        $indexer->index(User::class, 'viewer-id')->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(4);

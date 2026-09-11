@@ -37,4 +37,56 @@ class DebateAnonymousArgumentRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function countByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('daa')
+            ->select('COUNT(daa.id)')
+            ->where('daa.debate = :debate')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countPublishedByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('daa')
+            ->select('COUNT(daa.id)')
+            ->where('daa.debate = :debate')
+            ->andWhere('daa.published = true')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countDistinctPublishedTokensByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('daa')
+            ->select('COUNT(DISTINCT daa.token)')
+            ->where('daa.debate = :debate')
+            ->andWhere('daa.published = true')
+            ->andWhere('daa.trashedStatus IS NULL')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getDistinctTokensByDebate(Debate $debate): array
+    {
+        $rows = $this->createQueryBuilder('daa')
+            ->select('DISTINCT daa.token AS token')
+            ->where('daa.debate = :debate')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        return array_values(array_filter(array_map(static fn (array $row): ?string => $row['token'] ?? null, $rows)));
+    }
 }

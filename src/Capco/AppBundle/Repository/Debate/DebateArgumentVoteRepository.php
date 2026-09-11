@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository\Debate;
 
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
@@ -49,6 +50,19 @@ class DebateArgumentVoteRepository extends EntityRepository
     {
         return (int) $this->getByDebateArgumentQueryBuilder($debateArgument)
             ->select('COUNT(v)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countByDebate(Debate $debate): int
+    {
+        return (int) $this->createQueryBuilder('dav')
+            ->select('COUNT(dav.id)')
+            ->innerJoin('dav.debateArgument', 'da')
+            ->where('da.debate = :debate')
+            ->andWhere('dav.published = true')
+            ->setParameter('debate', $debate)
             ->getQuery()
             ->getSingleScalarResult()
         ;
