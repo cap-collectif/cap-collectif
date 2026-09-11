@@ -23,6 +23,10 @@ const mutation = graphql`
         }
         body
         summary
+        address {
+          json
+          formatted
+        }
         category {
           icon
           color
