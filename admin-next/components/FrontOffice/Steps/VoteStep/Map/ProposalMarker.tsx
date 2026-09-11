@@ -133,7 +133,20 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
                 />
               )}
             </CardCover>
-            <CardContent primaryInfo={proposal.title} href={proposal.url} />
+            <CardContent
+              primaryInfo={proposal.title}
+              href={proposal.url}
+              sx={
+                {
+                  '& .cap-card-primaryInfo': {
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                  },
+                } as any
+              }
+            />
           </Card>
         </Popup>
       )}
