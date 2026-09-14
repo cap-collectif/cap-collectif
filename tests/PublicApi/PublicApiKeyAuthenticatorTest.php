@@ -16,6 +16,31 @@ use Symfony\Component\HttpFoundation\Request;
 class PublicApiKeyAuthenticatorTest extends TestCase
 {
     /**
+     * @dataProvider credentialsProvider
+     */
+    public function testGetCredentials(string $authorization, string $expected): void
+    {
+        $request = Request::create('/graphql/internal', 'POST');
+        $request->headers->set('Authorization', $authorization);
+
+        self::assertSame($expected, (new PublicApiKeyAuthenticator())->getCredentials($request));
+    }
+
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public static function credentialsProvider(): iterable
+    {
+        yield 'Bearer scheme' => ['Bearer Api-Key', 'Api-Key'];
+        yield 'lowercase scheme' => ['bearer Api-Key', 'Api-Key'];
+        yield 'uppercase scheme' => ['BEARER Api-Key', 'Api-Key'];
+        yield 'mixed case scheme' => ['bEaReR Api-Key', 'Api-Key'];
+        yield 'Basic credentials are not API keys' => ['Basic dXNlcjpwYXNzd29yZA==', 'Basic dXNlcjpwYXNzd29yZA=='];
+        yield 'empty token' => ['Bearer ', ''];
+        yield 'only strip the prefix' => ['Bearer invalid Bearer token', 'invalid Bearer token'];
+    }
+
+    /**
      * @dataProvider supportsProvider
      */
     public function testSupports(string $path, bool $withAuthorization, bool $expected): void
