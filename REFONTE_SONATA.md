@@ -80,27 +80,39 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
 6. **Créer la page** dans `admin-next/pages/admin-next/<nom-en-kebab-case>.tsx` (le nom de fichier = la route).
 7. **Créer le(s) composant(s)** dans `admin-next/components/BackOffice/<NomDeLaFeature>/` (PascalCase pour le
    dossier et les fichiers de composants).
-8. **Mettre à jour systématiquement l'URL de la page migrée partout où elle apparaît — il existe DEUX menus
-   latéraux distincts à maintenir en parallèle tant que la migration n'est pas terminée, plus d'éventuelles
-   autres références à traquer au cas par cas** :
+8. **Déployer la refonte derrière un feature flag dédié à la migration — ne pas remplacer définitivement les
+   routes Sonata pendant la PR de migration.** Le feature flag fonctionnel existant de la page (ex:
+   `members_list`) reste inchangé : il contrôle l'existence de la fonctionnalité, pas le choix entre Sonata et
+   Admin Next. Tant que la migration n'est pas complètement généralisée :
+   - conserver le code et l'URL Sonata existants, ainsi que la nouvelle page Admin Next ;
+   - lorsque le feature flag de migration est désactivé, les menus doivent conserver le lien Sonata ; lorsqu'il
+     est activé, ils doivent pointer vers la route Admin Next ;
+   - protéger également l'accès direct à la route Admin Next avec ce feature flag : masquer ou rediriger un
+     lien de menu seul ne protège pas une URL saisie manuellement ;
+   - utiliser le même feature flag pour toutes les pages déjà migrées, afin d'activer progressivement la
+     refonte sans multiplier les règles d'accès temporaires. Les pages non encore migrées restent naturellement
+     sur Sonata.
+9. **Maintenir les références de menu dans les deux interfaces** : il existe DEUX menus latéraux distincts,
+   plus d'éventuelles autres références à traquer au cas par cas :
    - `admin-next/components/BackOffice/SideBar/SideBarItems.json` : menu latéral utilisé par les pages
-     `admin-next/` elles-mêmes (via `Layout.tsx`). Remplacer le `href` Sonata (`/admin/capco/...`) par le
-     nouveau `href` Next.js (`/admin-next/...`) pour l'entrée de menu correspondante.
+     `admin-next/` elles-mêmes (via `Layout.tsx`). Y faire dépendre le lien du feature flag de migration.
    - `frontend/js/components/Admin/Sidebar/Sidebar.tsx` : menu latéral **legacy**, affiché sur les pages
-     encore rendues par Sonata/Twig. Il faut y mettre à jour le `href` du `<SidebarLink>` correspondant de
-     la même façon (ex: `<SidebarLink text="admin.label.user_type" href="/admin-next/user-types" />`).
+     encore rendues par Sonata/Twig. Y faire dépendre le `href` du `<SidebarLink>` correspondant du même
+     feature flag.
    - `frontend/js/components/Admin/Sidebar/Sidebar.utils.tsx` (`URL_MAP`) : ce fichier liste, par groupe de
      menu (`projets`, `reglages`, etc.), les préfixes d'URL permettant au menu legacy de savoir quel
-     sous-menu ouvrir par défaut selon l'URL courante (`window.location.href.includes(val)`). Remplacer
-     l'ancienne entrée Sonata (ex: `/admin/capco/app/projecttype/`) par la nouvelle route `/admin-next/...`
-     dans le tableau du bon groupe (sans slash final, comme les autres entrées `/admin-next/...` déjà
-     présentes, ex: `/admin-next/geographical-areas`).
+     sous-menu ouvrir par défaut selon l'URL courante (`window.location.href.includes(val)`). Conserver les
+     deux préfixes pendant le rollout pour que le menu fonctionne sur Sonata comme sur Admin Next.
    - Ces deux fichiers `Sidebar.tsx`/`Sidebar.utils.tsx` ne pourront être supprimés que lorsque **toutes**
      les pages Sonata auront été migrées (ils sont partagés par toutes les pages Sonata restantes).
    - **Et ailleurs si besoin** : faire une recherche globale de l'ancienne URL Sonata (`grep -rn` sur tout le
-     repo) avant de considérer le remplacement terminé. Elle peut aussi apparaître dans des tests (Cypress,
-     Cypress, de la documentation, ou d'autres liens internes.
-9. **Si de nouvelles mutations/types GraphQL backend ont été ajoutés** (nouveaux fichiers yaml sous
+     repo). Lorsqu'une référence Sonata est conservée dans un fichier de navigation ou de routes, l'annoter
+     avec un commentaire **en anglais** indiquant qu'elle est maintenue pendant le rollout derrière le feature
+     flag et devra être supprimée lors du nettoyage final, par exemple :
+     ```typescript
+     // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
+     ```
+10. **Si de nouvelles mutations/types GraphQL backend ont été ajoutés** (nouveaux fichiers yaml sous
    `src/Capco/AppBundle/Resources/config/graphql/internal/`), il faut, **dans cet ordre**, avant que
    `admin-next` puisse les consommer :
    1. `bin/console graphql:compile` (génère les classes PHP dans `src/Capco/AppBundle/GraphQL/__generated__`
@@ -110,9 +122,9 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       (regénère `schema.internal.graphql` à la racine, utilisé par le compilateur Relay de `admin-next`).
    3. Un `bin/console cache:clear` peut être nécessaire avant l'étape 1 si le cache Symfony est déjà chaud
       et ne détecte pas les nouveaux fichiers yaml.
-10. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
+11. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
     (les artefacts générés vivent tous dans `admin-next/__generated__/`, pas de dossier colocalisé).
-11. **Vérifier** : `yarn ts` (TypeScript), `yarn lint` (ESLint), et un test visuel réel dans le navigateur
+12. **Vérifier** : `yarn ts` (TypeScript), `yarn lint` (ESLint), et un test visuel réel dans le navigateur
     (le stack Docker local expose `capco_nextjs_1` sur le port 3000, proxifié derrière `https://capco.dev`).
     Si le serveur Next.js dev sert une erreur qui ne correspond plus au code sur disque (ex: référence à un
     import déjà supprimé) après plusieurs éditions rapides, c'est probablement un cache HMR périmé : un
@@ -120,7 +132,7 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
     de rôles différents** (ex: un admin et un simple project admin) pour vérifier que la restriction d'accès
     de l'étape 4 fonctionne réellement (accès autorisé pour l'un, redirection/refus pour l'autre), pas
     seulement que la page s'affiche.
-12. **Tests Cypress et vérification des tests existants** :
+13. **Tests Cypress et vérification des tests existants** :
     - Ne pas chercher à lire / modifier les variables d'environnement, demander à la développeuse aux commandes de modifier les éléments nécessaires.
     - Vérifier les tests **Cypress** qui couvrent la page Sonata migrée, rangés dans `cypress/e2e/backOffice/<feature>/`
       (convention de dossier par feature, ex: `cypress/e2e/backOffice/project/`).
@@ -148,17 +160,17 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       via le formulaire de l'UI si le scénario a vraiment besoin d'une ligne fraîche/spécifique qu'aucune
       fixture ne fournit, 3) `run:sql` seulement si même l'UI ne permet pas de poser cet état (ex: état
       legacy/corrompu à reproduire).
-13. **Supprimer le code Sonata de la page migrée dans la même PR**, à condition de vérifier au préalable
-    qu'aucun fichier (controller, templates, entité, repository) n'est partagé avec une autre feature encore
-    active. Par défaut, préférer supprimer dans la même PR sauf indication contraire de l'auteur de la
-    migration — à confirmer au cas par cas.
+14. **Ne pas supprimer le code Sonata dans la PR de migration.** Il doit rester disponible tant que le
+    feature flag de migration permet de revenir à la route historique. Le nettoyage des contrôleurs, templates,
+    entrées de menu et URLs Sonata intervient dans une PR dédiée, une fois la refonte généralisée et le feature
+    flag supprimé.
     - **Cas des pages `/admin/settings/{category}/list`** (`SettingsController.php`, `SiteParameterAdmin.php`,
       `Settings/list.html.twig`, tous dans `src/Capco/AdminBundle/`) : ce contrôleur/template est **générique**,
       partagé par plusieurs catégories (`settings.global`, `settings.performance`, `settings.modules`,
       `settings.appearance`, `settings.notifications`, `pages.*`...) via un paramètre de route `{category}`. Ne
       **jamais** le supprimer tant que toutes ces catégories n'ont pas été migrées — seule la migration de la
-      **dernière** catégorie restante permettra de le supprimer entièrement. Pour une migration individuelle
-      (ex: `settings.performance`), le seul code à retirer est l'entrée de cette catégorie dans le whitelist
+      **dernière** catégorie restante permettra de le supprimer entièrement. Lors du nettoyage final, retirer
+      l'entrée de chaque catégorie devenue inutile dans la whitelist
       `FeaturesCategoryResolver::$categories` (`src/Capco/AdminBundle/Resolver/FeaturesCategoryResolver.php`) et,
       le cas échéant, le `if` spécifique à cette catégorie dans `SettingsVoter::canView`
       (`src/Capco/AppBundle/Security/SettingsVoter.php`) si un rôle particulier y était exigé — ne pas toucher
