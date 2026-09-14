@@ -22,7 +22,7 @@ class PublicApiKeyAuthenticator extends AbstractGuardAuthenticator
     {
         $authorizationHeader = $request->headers->get('Authorization');
 
-        return 0 === stripos($authorizationHeader, 'Bearer ') ? substr($authorizationHeader, 7) : $authorizationHeader;
+        return str_replace('Bearer ', '', $authorizationHeader);
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
