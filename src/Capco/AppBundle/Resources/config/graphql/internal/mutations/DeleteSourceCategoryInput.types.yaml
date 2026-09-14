@@ -1,0 +1,7 @@
+DeleteSourceCategoryInput:
+    type: relay-mutation-input
+    config:
+        description: 'Deletes a source category'
+        fields:
+            id:
+                type: 'ID!'

@@ -1,0 +1,7 @@
+CreateSourceCategoryPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            sourceCategory:
+                type: 'SourceCategory!'
+                description: 'Source category created successfully !'

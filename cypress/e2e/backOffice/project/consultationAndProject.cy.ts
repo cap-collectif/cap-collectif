@@ -11,7 +11,7 @@ context('Projects Features', () => {
       const urls = [
         '/admin-next/projects',
         '/admin-next/forms',
-        '/admin/capco/app/sourcecategory/list',
+        '/admin-next/source-categories',
         '/admin/capco/app/consultation/list',
         '/admin-next/project-types',
         '/admin/capco/app/proposalform/list',

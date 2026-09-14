@@ -1,0 +1,11 @@
+UpdateSourceCategoryInput:
+    type: relay-mutation-input
+    config:
+        description: 'Updates a source category'
+        fields:
+            id:
+                type: 'ID!'
+            title:
+                type: 'String'
+            isEnabled:
+                type: 'Boolean'

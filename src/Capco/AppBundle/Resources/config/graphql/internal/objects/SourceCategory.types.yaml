@@ -7,3 +7,10 @@ SourceCategory:
                 type: 'ID!'
             title:
                 type: 'String!'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the source category is published.'
+            createdAt:
+                type: 'DateTime!'
+            updatedAt:
+                type: 'DateTime!'

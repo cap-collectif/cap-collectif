@@ -1,0 +1,6 @@
+DeleteSourceCategoryPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedSourceCategoryId:
+                type: 'ID!'

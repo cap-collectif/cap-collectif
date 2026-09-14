@@ -203,7 +203,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin.label.project" href="/admin-next/projects" />
                   {isSuperAdmin ? (
-                    <SidebarLink text="admin.label.category" href="/admin/capco/app/sourcecategory/list" />
+                    <SidebarLink text="admin.label.category" href="/admin-next/source-categories" />
                   ) : null}
                   <SidebarLink text="steps.forms" href="/admin-next/forms" />
                   {isAdmin ? (

@@ -372,19 +372,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\SourceCategoryAdmin:
-        arguments: [~, Capco\AppBundle\Entity\SourceCategory, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.category,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\SourceAdmin:
         arguments:
             [~, Capco\AppBundle\Entity\Source, Capco\AdminBundle\Controller\CRUDController, '@security.token_storage']

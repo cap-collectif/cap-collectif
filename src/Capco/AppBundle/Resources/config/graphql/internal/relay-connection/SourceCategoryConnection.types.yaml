@@ -1,0 +1,7 @@
+SourceCategoryConnection:
+    type: relay-connection
+    config:
+        nodeType: SourceCategory!
+        connectionFields:
+            totalCount:
+                type: Int!

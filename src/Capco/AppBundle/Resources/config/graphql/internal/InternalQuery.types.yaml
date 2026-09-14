@@ -196,6 +196,12 @@ InternalQuery:
                         description: 'If true, filter the projectTypes only used by the projects'
                         defaultValue: false
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", args, getUser())'
+            sourceCategories:
+                description: 'Lookup source categories.'
+                type: 'SourceCategoryConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SourceCategory\\SourceCategoryListResolver", args)'
             users:
                 type: 'InternalUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

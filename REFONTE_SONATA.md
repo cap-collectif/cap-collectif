@@ -366,6 +366,42 @@ prop-drillé entre la liste et un ancêtre.
   à chaque fois. Si un nouveau besoin de validation générique apparaît (autre que "pas vide/blanc"), ajouter la
   méthode custom dans ce même fichier `yupExtensions.ts` plutôt que de la dupliquer dans chaque schéma.
 
+## Connection ID pour les mutations create/delete (Relay)
+
+Beaucoup de listes Relay paginées ont besoin du `__id` de la connection pour que les mutations `create`/`delete`
+mettent à jour le cache local (`connections: [connectionId]` passé à la mutation). Deux cas très différents se
+présentent, à ne pas traiter de la même façon :
+
+- **Le composant qui déclenche la mutation vit au même niveau que le composant qui a le fragment de la liste**
+  (ex : un bouton "modifier"/"supprimer" rendu à l'intérieur du `.map()` de la liste elle-même, comme dans
+  `SourceCategoriesList.tsx`) : la liste a déjà `__id` disponible directement dans les données de son fragment
+  (le champ `@connection(key: "...")` expose un champ client `__id`), il suffit de le passer en prop au composant
+  enfant. **Pas besoin de `ConnectionHandler` dans ce cas.**
+- **Le composant qui déclenche la mutation vit dans un composant parent qui n'a pas le fragment de la liste**
+  (ex : un bouton "Ajouter" tout en haut de la page, au-dessus du `<Suspense>` qui contient la liste paginée —
+  cas de `SourceCategoryModal context="create"` rendu dans `pages/admin-next/source-categories.tsx`) : **ne
+  pas** dupliquer la query parente pour aller chercher `__id`, et surtout **ne pas** créer un `useState` +
+  un setter passé en prop à la liste pour "remonter" le `__id` du fragment vers le parent via un `useEffect`: cela crée un état dupliqué
+  avec les données Relay, un rendu supplémentaire, et un court instant où la valeur est vide au premier rendu
+  — ce qui casse silencieusement le bouton "Ajouter" jusqu'à ce que l'effet se déclenche. À la place, calculer
+  l'ID de la connection directement au moment du commit de la mutation avec
+  `ConnectionHandler.getConnectionID(parentId, connectionKey, filters)` (import depuis `relay-runtime`) :
+  - `parentId` : l'id du noeud parent du champ connection dans le schéma GraphQL. Pour une connection exposée
+    directement sur `Query` (comme `sourceCategories`), c'est `ROOT_ID` (également importé de `relay-runtime`) ;
+    pour une connection sous un objet (ex: `organization.proposalForms`), c'est l'id de cet objet.
+  - `connectionKey` : la valeur du `key:` déclarée dans `@connection(key: "...")` sur le champ, dans le
+    fragment de la liste (ex: `"SourceCategoriesList_sourceCategories"`).
+  - `filters` : un objet reprenant les arguments de la query autres que la pagination (`first`/`after`/
+    `last`/`before`), s'il y en a (recherche, tri, filtres métier...) — objet vide (`{}`) si la connection n'a
+    pas d'autre argument. Voir `CreateFormModal.tsx` pour un exemple avec filtres (recherche + tri + type).
+  - Ce pattern est déjà utilisé ailleurs dans `admin-next/` : `components/BackOffice/Forms/CreateFormModal.tsx`,
+    `components/BackOffice/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes.tsx`,
+    `components/BackOffice/Mediator/MediatorVoteModal/MediatorVoteModal.tsx`.
+
+En résumé : si `__id` est déjà dans les données du composant courant, le passer directement en prop ; sinon le
+calculer avec `ConnectionHandler.getConnectionID` au point d'usage — jamais via un état React + un setter
+prop-drillé entre la liste et un ancêtre.
+
 Ce document ne doit **pas** contenir de section de suivi par page migrée (type "ProjectType : fait, voir
 détails") — cette information est déjà dans l'historique git (commits, PR) et devient vite obsolète ici.
 Seules les informations **génériques**, réutilisables pour n'importe quelle future migration, ont leur place

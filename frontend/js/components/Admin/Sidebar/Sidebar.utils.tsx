@@ -25,7 +25,7 @@ export const URL_MAP = {
     '/admin/capco/app/project/',
     '/admin/alpha/project/',
     '/admin/capco/app/appendixtype/',
-    '/admin/capco/app/sourcecategory/',
+    '/admin-next/source-categories',
     '/admin/capco/app/consultation/',
     '/admin/capco/app/proposalform/',
     '/admin/capco/app/questionnaire/',

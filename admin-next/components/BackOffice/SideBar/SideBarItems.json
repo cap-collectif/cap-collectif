@@ -110,7 +110,7 @@
             },
             {
                 "title": "admin.label.category",
-                "href": "/admin/capco/app/sourcecategory/list",
+                "href": "/admin-next/source-categories",
                 "rolesRequired": ["superAdmin"],
                 "featuresRequired": []
             },

@@ -4647,6 +4647,17 @@ type CreateSocialNetworkPayload {
   clientMutationId: String
 }
 
+input CreateSourceCategoryInput {
+  title: String!
+  clientMutationId: String
+}
+
+type CreateSourceCategoryPayload {
+  """Source category created successfully !"""
+  sourceCategory: SourceCategory!
+  clientMutationId: String
+}
+
 input CreateUserIdentificationCodeListInput {
   """Name of the list to create."""
   name: String!
@@ -6343,6 +6354,16 @@ type DeleteSocialNetworkPayload {
 
   """The available errors if any."""
   errorCode: SocialNetworkErrorCode
+  clientMutationId: String
+}
+
+input DeleteSourceCategoryInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteSourceCategoryPayload {
+  deletedSourceCategoryId: ID!
   clientMutationId: String
 }
 
@@ -9455,6 +9476,9 @@ type Mutation {
   deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
   deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
   deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
+  createSourceCategory(input: CreateSourceCategoryInput!): CreateSourceCategoryPayload
+  updateSourceCategory(input: UpdateSourceCategoryInput!): UpdateSourceCategoryPayload
+  deleteSourceCategory(input: DeleteSourceCategoryInput!): DeleteSourceCategoryPayload
   deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
   addUserReply(input: AddUserReplyInput!): AddUserReplyPayload
@@ -14731,6 +14755,17 @@ type Query {
     """If true, filter the projectTypes only used by the projects"""
     onlyUsedByProjects: Boolean = false
   ): [ProjectType!]!
+
+  """Lookup source categories."""
+  sourceCategories(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): SourceCategoryConnection!
   userSearch(
     """
     Filter users with ROLE_USER only and who does not belong to an organization.
@@ -18480,6 +18515,31 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
 type SourceCategory {
   id: ID!
   title: String!
+
+  """Whether the source category is published."""
+  isEnabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type SourceCategoryConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SourceCategoryEdge]
+}
+
+"""An edge in a connection."""
+type SourceCategoryEdge {
+  """The item at the end of the edge."""
+  node: SourceCategory!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A connection to a list of items."""
@@ -21575,6 +21635,19 @@ type UpdateSocialNetworkPayload {
 
   """The available errors if any."""
   errorCode: SocialNetworkErrorCode
+  clientMutationId: String
+}
+
+input UpdateSourceCategoryInput {
+  id: ID!
+  title: String
+  isEnabled: Boolean
+  clientMutationId: String
+}
+
+type UpdateSourceCategoryPayload {
+  """Source category updated successfully !"""
+  sourceCategory: SourceCategory!
   clientMutationId: String
 }
 

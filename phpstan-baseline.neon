@@ -19572,6 +19572,11 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Group/GroupListResolver.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\SourceCategory\\\\SourceCategoryListResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/SourceCategory/SourceCategoryListResolver.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Group\\\\GroupPendingInvitationsResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Group/GroupPendingInvitationsResolver.php

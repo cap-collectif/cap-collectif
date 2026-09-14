@@ -1,0 +1,7 @@
+CreateSourceCategoryInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a source category'
+        fields:
+            title:
+                type: 'String!'

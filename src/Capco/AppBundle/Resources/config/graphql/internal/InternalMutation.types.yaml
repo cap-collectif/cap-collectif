@@ -165,6 +165,27 @@ InternalMutation:
                     inputType: DeleteSourceInput
                     payloadType: DeleteSourcePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceMutation", args, getUser())'
+            createSourceCategory:
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateSourceCategoryInput
+                    payloadType: CreateSourceCategoryPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateSourceCategoryMutation", args)'
+            updateSourceCategory:
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateSourceCategoryInput
+                    payloadType: UpdateSourceCategoryPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSourceCategoryMutation", args)'
+            deleteSourceCategory:
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteSourceCategoryInput
+                    payloadType: DeleteSourceCategoryPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceCategoryMutation", args)'
             deleteOpinion:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
