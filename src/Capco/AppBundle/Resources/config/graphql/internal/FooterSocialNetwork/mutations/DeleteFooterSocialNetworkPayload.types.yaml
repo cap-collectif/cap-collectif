@@ -1,0 +1,7 @@
+DeleteFooterSocialNetworkPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedFooterSocialNetworkId:
+                type: 'ID!'
+                description: 'The deleted footer social network ID.'

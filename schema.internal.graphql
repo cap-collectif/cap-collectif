@@ -3962,6 +3962,37 @@ input CreateEventsProjectTabInput {
   clientMutationId: String
 }
 
+input CreateFooterSocialNetworkInput {
+  """The label displayed for the social network link."""
+  title: String!
+
+  """The URL the link points to."""
+  link: String!
+
+  """
+  The icon style/slug used to render the link (e.g. facebook, x, linkedin...).
+  """
+  style: String!
+
+  """Whether the social network link is published in the footer."""
+  isEnabled: Boolean = true
+
+  """
+  The display order position in the footer. Defaults to the last position when omitted.
+  """
+  position: Int
+  clientMutationId: String
+}
+
+type CreateFooterSocialNetworkPayload {
+  """The created footer social network."""
+  footerSocialNetwork: FooterSocialNetwork
+
+  """The available errors if any."""
+  errorCode: FooterSocialNetworkErrorCode
+  clientMutationId: String
+}
+
 input CreateGlobalDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -6003,6 +6034,18 @@ type DeleteFontPayload {
   clientMutationId: String
 }
 
+input DeleteFooterSocialNetworkInput {
+  """The footer social network ID."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteFooterSocialNetworkPayload {
+  """The deleted footer social network ID."""
+  deletedFooterSocialNetworkId: ID!
+  clientMutationId: String
+}
+
 input DeleteGlobalDistrictInput {
   id: ID!
 }
@@ -7726,6 +7769,58 @@ type FooterLegals {
 type FooterLinks {
   name: String!
   url: URI!
+}
+
+"""
+A social network link displayed in the platform footer, manageable from the admin.
+"""
+type FooterSocialNetwork implements Node {
+  """The ID of the footer social network."""
+  id: ID!
+
+  """The label displayed for the social network link."""
+  title: String!
+
+  """The URL the link points to."""
+  link: String!
+
+  """
+  The icon style/slug used to render the link (e.g. facebook, x, linkedin...).
+  """
+  style: String!
+
+  """Whether the social network link is published in the footer."""
+  isEnabled: Boolean!
+
+  """The display order position in the footer."""
+  position: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type FooterSocialNetworkConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [FooterSocialNetworkEdge]
+}
+
+"""An edge in a connection."""
+type FooterSocialNetworkEdge {
+  """The item at the end of the edge."""
+  node: FooterSocialNetwork!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for footer social networks."""
+enum FooterSocialNetworkErrorCode {
+  VALUE_TOO_LONG
 }
 
 """An object containing footer social networks data."""
@@ -9601,6 +9696,9 @@ type Mutation {
   createSocialNetwork(input: CreateSocialNetworkInput!): CreateSocialNetworkPayload
   updateSocialNetwork(input: UpdateSocialNetworkInput!): UpdateSocialNetworkPayload
   deleteSocialNetwork(input: DeleteSocialNetworkInput!): DeleteSocialNetworkPayload
+  createFooterSocialNetwork(input: CreateFooterSocialNetworkInput!): CreateFooterSocialNetworkPayload
+  updateFooterSocialNetwork(input: UpdateFooterSocialNetworkInput!): UpdateFooterSocialNetworkPayload
+  deleteFooterSocialNetwork(input: DeleteFooterSocialNetworkInput!): DeleteFooterSocialNetworkPayload
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
   assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
@@ -15107,6 +15205,17 @@ type Query {
     first: Int = 100
   ): SocialNetworkConnection!
 
+  """List all footer social networks, manageable from the admin."""
+  footerSocialNetworks(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): FooterSocialNetworkConnection!
+
   """Get list of sms orders."""
   smsOrders(
     """
@@ -20011,6 +20120,38 @@ type UpdateFollowProposalPayload {
   follower: Follower
   followerEdge: FollowerEdge
   proposal: Proposal
+  clientMutationId: String
+}
+
+input UpdateFooterSocialNetworkInput {
+  """The footer social network ID."""
+  id: ID!
+
+  """The label displayed for the social network link."""
+  title: String
+
+  """The URL the link points to."""
+  link: String
+
+  """
+  The icon style/slug used to render the link (e.g. facebook, x, linkedin...).
+  """
+  style: String
+
+  """Whether the social network link is published in the footer."""
+  isEnabled: Boolean
+
+  """The display order position in the footer."""
+  position: Int
+  clientMutationId: String
+}
+
+type UpdateFooterSocialNetworkPayload {
+  """The updated footer social network."""
+  footerSocialNetwork: FooterSocialNetwork
+
+  """The available errors if any."""
+  errorCode: FooterSocialNetworkErrorCode
   clientMutationId: String
 }
 

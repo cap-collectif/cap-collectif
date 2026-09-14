@@ -192,7 +192,7 @@
             },
             {
                 "title": "admin.label.footer_social_network",
-                "href": "/admin/capco/app/footersocialnetwork/list",
+                "href": "/admin-next/footer-social-networks",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

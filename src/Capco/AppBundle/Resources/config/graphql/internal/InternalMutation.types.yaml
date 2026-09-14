@@ -1064,6 +1064,27 @@ InternalMutation:
                     inputType: DeleteSocialNetworkInput
                     payloadType: DeleteSocialNetworkPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SocialNetwork\\DeleteSocialNetworkMutation", args)'
+            createFooterSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateFooterSocialNetworkInput
+                    payloadType: CreateFooterSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSocialNetwork\\CreateFooterSocialNetworkMutation", args)'
+            updateFooterSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateFooterSocialNetworkInput
+                    payloadType: UpdateFooterSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSocialNetwork\\UpdateFooterSocialNetworkMutation", args)'
+            deleteFooterSocialNetwork:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteFooterSocialNetworkInput
+                    payloadType: DeleteFooterSocialNetworkPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSocialNetwork\\DeleteFooterSocialNetworkMutation", args)'
             revokeAnalystsToProposals:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

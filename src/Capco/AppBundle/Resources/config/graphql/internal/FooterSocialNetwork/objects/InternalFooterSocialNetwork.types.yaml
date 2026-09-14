@@ -1,0 +1,41 @@
+InternalFooterSocialNetwork:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: FooterSocialNetwork
+        description: 'A social network link displayed in the platform footer, manageable from the admin.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of the footer social network.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: FooterSocialNetwork
+            title:
+                type: 'String!'
+                description: 'The label displayed for the social network link.'
+                resolve: '@=value.getTitle()'
+            link:
+                type: 'String!'
+                description: 'The URL the link points to.'
+                resolve: '@=value.getLink()'
+            style:
+                type: 'String!'
+                description: 'The icon style/slug used to render the link (e.g. facebook, x, linkedin...).'
+                resolve: '@=value.getStyle()'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the social network link is published in the footer.'
+                resolve: '@=value.getIsEnabled()'
+            position:
+                type: 'Int!'
+                description: 'The display order position in the footer.'
+                resolve: '@=value.getPosition()'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime!'
+                resolve: '@=value.getUpdatedAt()'

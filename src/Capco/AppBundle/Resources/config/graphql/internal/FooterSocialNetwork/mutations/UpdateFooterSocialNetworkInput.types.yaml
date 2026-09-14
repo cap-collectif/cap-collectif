@@ -1,0 +1,23 @@
+UpdateFooterSocialNetworkInput:
+    type: relay-mutation-input
+    config:
+        description: 'Updates a footer social network link. Fields left null are left unchanged.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The footer social network ID.'
+            title:
+                type: 'String'
+                description: 'The label displayed for the social network link.'
+            link:
+                type: 'String'
+                description: 'The URL the link points to.'
+            style:
+                type: 'String'
+                description: 'The icon style/slug used to render the link (e.g. facebook, x, linkedin...).'
+            isEnabled:
+                type: 'Boolean'
+                description: 'Whether the social network link is published in the footer.'
+            position:
+                type: 'Int'
+                description: 'The display order position in the footer.'

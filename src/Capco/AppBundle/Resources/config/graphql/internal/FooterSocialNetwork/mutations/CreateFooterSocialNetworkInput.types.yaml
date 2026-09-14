@@ -1,0 +1,21 @@
+CreateFooterSocialNetworkInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a footer social network link.'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The label displayed for the social network link.'
+            link:
+                type: 'String!'
+                description: 'The URL the link points to.'
+            style:
+                type: 'String!'
+                description: 'The icon style/slug used to render the link (e.g. facebook, x, linkedin...).'
+            isEnabled:
+                type: 'Boolean'
+                description: 'Whether the social network link is published in the footer.'
+                defaultValue: true
+            position:
+                type: 'Int'
+                description: 'The display order position in the footer. Defaults to the last position when omitted.'

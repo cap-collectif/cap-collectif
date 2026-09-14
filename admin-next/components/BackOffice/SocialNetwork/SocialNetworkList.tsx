@@ -130,7 +130,7 @@ const SocialNetworkList: React.FC = () => {
                       <ButtonQuickAction
                         icon={CapUIIcon.Pencil}
                         size={CapUIIconSize.Md}
-                        variantColor="hierarchy"
+                        variantColor="primary"
                         label={intl.formatMessage({ id: 'global.edit' })}
                       />
                     }

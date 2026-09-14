@@ -220,19 +220,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\FooterSocialNetworkAdmin:
-        arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.footer_social_network,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\GlobalDistrictAdmin:
         arguments: [~, Capco\AppBundle\Entity\District\GlobalDistrict, Capco\AdminBundle\Controller\CRUDController]
         tags:

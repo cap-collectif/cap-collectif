@@ -111,6 +111,7 @@ class GlobalIdResolver
         'AbstractVote',
         'HttpRedirect',
         'SocialNetwork',
+        'FooterSocialNetwork',
     ];
 
     private const CUSTOM_REPOSITORY_RESOLVER = [

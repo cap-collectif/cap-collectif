@@ -1,0 +1,7 @@
+FooterSocialNetworkConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalFooterSocialNetwork!
+        connectionFields:
+            totalCount:
+                type: Int!

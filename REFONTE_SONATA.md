@@ -194,6 +194,9 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   colonne.
 - **Liste de cards à un seul "label"** (ex: `GlobalDistrict`) : `GeographicalAreasList.tsx` — `ListCard` +
   `ListCard.Item` + `ButtonQuickAction` (pencil/trash) dans un `ButtonGroup`.
+- **Couleur des `ButtonQuickAction`** : le bouton d'édition (`icon={CapUIIcon.Pencil}`) doit avoir
+  `variantColor="primary"`, le bouton de suppression (`icon={CapUIIcon.Trash}`) doit avoir
+  `variantColor="danger"`.
 - **Liste paginée (Relay connection) avec recherche / infinite scroll** : `ProjectList.tsx` / `PostList.tsx`
   (`usePaginationFragment` + `Table.Tbody useInfiniteScroll`) ou `UserGroupsList.tsx`.
 - **Entité avec traductions multi-langues + media** : `UserTypesList.tsx` / `UserTypeModal.tsx` (Types de profil).
@@ -286,6 +289,31 @@ En résumé : si `__id` est déjà dans les données du composant courant, le pa
 calculer avec `ConnectionHandler.getConnectionID` au point d'usage — jamais via un état React + un setter
 prop-drillé entre la liste et un ancêtre.
 
+## Pièges connus
+
+- **Cliquer sur un `Switch` (`@cap-collectif/ui`) dans un test Cypress** : l'`<input type="checkbox">` sous-
+  jacent est rendu **visuellement caché** (`width:0, height:0, opacity:0`) — c'est le `<span
+  class="cap-switch__slider">` (le rail visible) qui joue le rôle visuel, tous deux enveloppés dans un
+  `<label htmlFor={id}>` interne au composant. Faire `cy.get('#monId').click({ force: true })` directement sur
+  l'input force un clic sur un élément de taille 0×0, ce qui est sensible au timing (calcul de coordonnées sur
+  une bounding box dégénérée) et produit un test **flaky** (a été observé à ~1 échec sur 3, pas un échec
+  systématique donc facile à manquer en un seul run). `cy.get('label[for="monId"]').click()` n'est pas non
+  plus fiable : si le champ a aussi un `<FormLabel htmlFor="monId">` séparé pour son texte (ex: "Publié" à
+  côté du Switch, cf. `FooterSocialNetworkModal.tsx`), il y a **deux** éléments `label[for="monId"]` dans le
+  DOM et `cy.click()` échoue ("Your subject contained 2 elements"). Le sélecteur fiable est
+  `cy.get('.cap-switch__slider').click()` (sans `force`) : c'est le seul élément à la fois unique, réel
+  (taille non nulle) et à l'intérieur du label interne du `Switch`, donc le clic déclenche bien le toggle par
+  délégation native du `<label>`.
+- **Ne pas copier un `dangerToast`/`successToast` d'un composant de référence sans relire le texte qui va
+  avec** : dans `UserTypeModal.tsx`, la suppression utilise `dangerToast` (rouge) mais avec un message
+  **rédigé pour la suppression** (ex: "type supprimé"). Si on réutilise `dangerToast` pour la suppression
+  tout en gardant un message générique comme `global.changes.saved` ("Modifications enregistrées") pour
+  factoriser les clés de traduction entre create/update/delete, le résultat est un toast rouge qui dit
+  "Modifications enregistrées" — incohérent visuellement (le rouge fait penser à une erreur). Si le message
+  reste générique/neutre, utiliser `successToast` pour les trois actions (create/update/delete) plutôt que
+  `dangerToast` ; réserver `dangerToast` aux cas où le texte est explicitement écrit pour une action
+  destructive.
+  
 ## Pièges connus
 
 - **Cliquer sur un `Switch` (`@cap-collectif/ui`) dans un test Cypress** : l'`<input type="checkbox">` sous-
@@ -414,9 +442,13 @@ En résumé : si `__id` est déjà dans les données du composant courant, le pa
 calculer avec `ConnectionHandler.getConnectionID` au point d'usage — jamais via un état React + un setter
 prop-drillé entre la liste et un ancêtre.
 
+## Suivi des migrations
+
 Ce document ne doit **pas** contenir de section de suivi par page migrée (type "ProjectType : fait, voir
 détails") — cette information est déjà dans l'historique git (commits, PR) et devient vite obsolète ici.
 Seules les informations **génériques**, réutilisables pour n'importe quelle future migration, ont leur place
 dans ce fichier.
+
+## Mise à jour de ce fichier
 
 Mettre à jour ce fichier avec tous les apprentissages faits lors des migrations effectuées qui pourront être utiles à d'autres migrations (consignes, common pitfalls, etc.)

@@ -633,6 +633,12 @@ InternalQuery:
                 description: 'List all social networks.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SocialNetwork\\SocialNetworkListResolver", args)'
+            footerSocialNetworks:
+                type: 'FooterSocialNetworkConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all footer social networks, manageable from the admin.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\FooterSocialNetwork\\FooterSocialNetworksAdminResolver", args)'
             smsOrders:
                 type: 'SmsOrderConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

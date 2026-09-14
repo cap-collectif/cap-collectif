@@ -58,6 +58,10 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    Capco\AppBundle\EventListener\FooterSocialNetworkCacheSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
     Http\Client\Common\HttpMethodsClient: '@httplug.client.default.http_methods'
     authentication_failure_handler: '@Capco\AppBundle\EventListener\AuthenticationHandler'
 

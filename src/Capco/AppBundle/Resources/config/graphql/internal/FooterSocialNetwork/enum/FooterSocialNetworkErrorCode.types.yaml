@@ -1,0 +1,8 @@
+FooterSocialNetworkErrorCode:
+    type: enum
+    config:
+        name: FooterSocialNetworkErrorCode
+        description: 'The available errors for footer social networks.'
+        values:
+            VALUE_TOO_LONG:
+                value: !php/const Capco\AppBundle\Enum\FooterSocialNetworkErrorCode::VALUE_TOO_LONG

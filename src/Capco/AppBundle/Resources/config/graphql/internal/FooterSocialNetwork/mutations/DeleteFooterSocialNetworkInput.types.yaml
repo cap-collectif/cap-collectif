@@ -1,0 +1,8 @@
+DeleteFooterSocialNetworkInput:
+    type: relay-mutation-input
+    config:
+        description: 'Deletes a footer social network link.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The footer social network ID.'

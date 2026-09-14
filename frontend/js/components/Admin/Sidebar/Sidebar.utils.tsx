@@ -41,7 +41,7 @@ export const URL_MAP = {
     '/admin/locale/',
     '/admin/capco/app/menuitem/',
     '/admin-next/social-networks',
-    '/admin/capco/app/footersocialnetwork/',
+    '/admin-next/footer-social-networks',
     '/admin-next/geographical-areas',
     '/admin/map/',
     '/admin/redirect/',

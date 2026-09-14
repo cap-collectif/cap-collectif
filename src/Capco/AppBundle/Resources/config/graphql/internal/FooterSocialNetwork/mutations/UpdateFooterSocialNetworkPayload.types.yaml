@@ -1,0 +1,10 @@
+UpdateFooterSocialNetworkPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            footerSocialNetwork:
+                type: 'InternalFooterSocialNetwork'
+                description: 'The updated footer social network.'
+            errorCode:
+                type: 'FooterSocialNetworkErrorCode'
+                description: 'The available errors if any.'

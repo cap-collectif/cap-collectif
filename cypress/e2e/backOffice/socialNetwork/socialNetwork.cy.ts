@@ -1,8 +1,5 @@
 describe('Social networks back office', () => {
   const visitSocialNetworksPage = () => {
-    // A non-admin account gets redirected to `/admin-next/403`, which responds with an actual
-    // HTTP 403 status code (see `pages/admin-next/403.tsx`) — disable the status check so this
-    // helper still works for the "redirected away" test case.
     cy.visit('/admin-next/social-networks', { failOnStatusCode: false })
   }
 
