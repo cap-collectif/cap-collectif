@@ -55,23 +55,19 @@ Object {
     Object {
       "analysts": Array [
         Object {
-          "id": "VXNlcjp1c2VyMjY=",
-          "username": "user26",
-        },
-        Object {
           "id": "VXNlcjp1c2VyQW5hbHlzdA==",
           "username": "analyst",
         },
         Object {
-          "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-          "username": "analyst2",
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
+          "username": "supervisor",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+          "username": "supervisor2",
         },
       ],
       "categories": Array [
-        Object {
-          "id": "pCategoryAssigned3",
-          "name": "Auto diagnostique",
-        },
         Object {
           "id": "pCategoryAssigned1",
           "name": "On veut des masques",
@@ -79,6 +75,10 @@ Object {
         Object {
           "id": "pCategoryAssigned2",
           "name": "Théories du complot au cachot",
+        },
+        Object {
+          "id": "pCategoryAssigned3",
+          "name": "Auto diagnostique",
         },
       ],
       "decisionMakers": Array [
@@ -213,23 +213,19 @@ Object {
     Object {
       "analysts": Array [
         Object {
-          "id": "VXNlcjp1c2VyMjY=",
-          "username": "user26",
-        },
-        Object {
           "id": "VXNlcjp1c2VyQW5hbHlzdA==",
           "username": "analyst",
         },
         Object {
-          "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-          "username": "analyst2",
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
+          "username": "supervisor",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+          "username": "supervisor2",
         },
       ],
       "categories": Array [
-        Object {
-          "id": "pCategoryAssigned3",
-          "name": "Auto diagnostique",
-        },
         Object {
           "id": "pCategoryAssigned1",
           "name": "On veut des masques",
@@ -237,6 +233,10 @@ Object {
         Object {
           "id": "pCategoryAssigned2",
           "name": "Théories du complot au cachot",
+        },
+        Object {
+          "id": "pCategoryAssigned3",
+          "name": "Auto diagnostique",
         },
       ],
       "decisionMakers": Array [
@@ -323,23 +323,19 @@ Object {
     Object {
       "analysts": Array [
         Object {
-          "id": "VXNlcjp1c2VyMjY=",
-          "username": "user26",
-        },
-        Object {
           "id": "VXNlcjp1c2VyQW5hbHlzdA==",
           "username": "analyst",
         },
         Object {
-          "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-          "username": "analyst2",
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
+          "username": "supervisor",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+          "username": "supervisor2",
         },
       ],
       "categories": Array [
-        Object {
-          "id": "pCategoryAssigned3",
-          "name": "Auto diagnostique",
-        },
         Object {
           "id": "pCategoryAssigned1",
           "name": "On veut des masques",
@@ -347,6 +343,10 @@ Object {
         Object {
           "id": "pCategoryAssigned2",
           "name": "Théories du complot au cachot",
+        },
+        Object {
+          "id": "pCategoryAssigned3",
+          "name": "Auto diagnostique",
         },
       ],
       "decisionMakers": Array [

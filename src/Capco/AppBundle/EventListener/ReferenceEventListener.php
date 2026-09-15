@@ -11,7 +11,6 @@ class ReferenceEventListener
 {
     final public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
-    private $lastProposals = [];
     private $lastProposalFormsReferences = [];
 
     public function preFlush(PreFlushEventArgs $args)
@@ -22,14 +21,38 @@ class ReferenceEventListener
         foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
             $classMetaData = $om->getClassMetadata($entityInsertion::class);
 
-            // if entity has Reference Trait & has not already a reference (specific case in fixtures)
-            if (
-                $this->hasTrait($classMetaData->getReflectionClass())
-                && !$entityInsertion->getReference()
-            ) {
+            if (!$this->hasTrait($classMetaData->getReflectionClass())) {
+                continue;
+            }
+
+            if ($entityInsertion instanceof Proposal && $entityInsertion->getReference()) {
+                $this->synchronizeProposalFormReference($om, $entityInsertion);
+
+                continue;
+            }
+
+            // Explicit references are used by fixtures and must not be replaced.
+            if (!$entityInsertion->getReference()) {
                 $this->updateReferenceIsNecessary($om, $entityInsertion);
             }
         }
+    }
+
+    private function synchronizeProposalFormReference(EntityManagerInterface $om, Proposal $proposal): void
+    {
+        $proposalForm = $proposal->getProposalForm();
+        $reference = $proposal->getReference();
+
+        if ($om->getUnitOfWork()->isScheduledForInsert($proposalForm)) {
+            $proposalForm->synchronizeLastProposalReference($reference);
+
+            return;
+        }
+
+        $om
+            ->getRepository('CapcoAppBundle:ProposalForm')
+            ->synchronizeLastProposalReference($proposalForm->getId(), $reference)
+        ;
     }
 
     private function updateReferenceIsNecessary(EntityManagerInterface $om, $entity)
@@ -39,19 +62,16 @@ class ReferenceEventListener
 
             $proposalFormRep = $om->getRepository('CapcoAppBundle:ProposalForm');
 
-            if (isset($this->lastProposals[$proposalForm->getId()])) {
-                $lastReference = $this->lastProposals[$proposalForm->getId()];
-            } else {
-                // Disable the built-in softdelete
-                $filters = $om->getFilters();
-                if ($filters->isEnabled('softdeleted')) {
-                    $filters->disable('softdeleted');
+            $nextReference = $proposalFormRep->allocateNextProposalReference($proposalForm->getId());
+            if (null === $nextReference) {
+                if (!$om->getUnitOfWork()->isScheduledForInsert($proposalForm)) {
+                    throw new \LogicException('Cannot allocate a proposal reference for an unknown proposal form.');
                 }
-                $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId());
+
+                $nextReference = $proposalForm->allocateNextProposalReference();
             }
 
-            $entity->setReference($lastReference + 1);
-            $this->lastProposals[$proposalForm->getId()] = $lastReference + 1;
+            $entity->setReference($nextReference);
 
             return;
         }

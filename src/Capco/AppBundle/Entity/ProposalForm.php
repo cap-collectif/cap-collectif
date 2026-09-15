@@ -84,6 +84,11 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
     protected bool $isMapViewEnabled = false;
 
     /**
+     * @ORM\Column(name="last_proposal_reference", type="integer", nullable=false, options={"default": 0})
+     */
+    private int $lastProposalReference = 0;
+
+    /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private ?string $description = null;
@@ -288,6 +293,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
             $this->id = null;
             $this->step = null;
             $this->reference = null;
+            $this->lastProposalReference = 0;
             $this->createdAt = new \DateTime();
             $this->updatedAt = new \DateTime();
             $this->proposals = new ArrayCollection();
@@ -338,6 +344,16 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
     public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
+    }
+
+    public function allocateNextProposalReference(): int
+    {
+        return ++$this->lastProposalReference;
+    }
+
+    public function synchronizeLastProposalReference(int $reference): void
+    {
+        $this->lastProposalReference = max($this->lastProposalReference, $reference);
     }
 
     public function initializeNotificationConfiguration(): void

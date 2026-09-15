@@ -23,6 +23,7 @@ use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -64,7 +65,6 @@ class ImportProposalsFromCsv
     /** @var array<int, int> */
     private array $duplicateOfLines = [];
     private array $mandatoryMissing = [];
-    private ?Proposal $lastEntity = null;
 
     public function __construct(
         private readonly MediaManager $mediaManager,
@@ -353,20 +353,11 @@ class ImportProposalsFromCsv
 
     private function setProposalReferenceAndModerationToken(Proposal $proposal): void
     {
-        if (!$this->lastEntity) {
-            $this->lastEntity = $this->proposalRepository->findOneBy(
-                ['proposalForm' => $proposal->getProposalForm()],
-                ['createdAt' => 'DESC', 'reference' => 'DESC']
-            );
-        }
-        if (null === $this->lastEntity) {
-            $proposal->setReference(1);
-        } else {
-            $proposal->setReference($this->lastEntity->getReference() + 1);
-        }
+        /** @var ProposalFormRepository $proposalFormRepository */
+        $proposalFormRepository = $this->om->getRepository(ProposalForm::class);
+        $proposal->setReference($proposalFormRepository->allocateNextProposalReference($proposal->getProposalForm()->getId()));
         $token = $this->tokenGenerator->generateToken();
         $proposal->setModerationToken($token);
-        $this->lastEntity = $proposal;
     }
 
     private function getDuplicates(array $rows): array

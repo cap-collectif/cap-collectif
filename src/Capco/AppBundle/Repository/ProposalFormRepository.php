@@ -119,16 +119,27 @@ class ProposalFormRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getLastProposalReference(string $formId): int
+    public function allocateNextProposalReference(string $formId): ?int
     {
-        $qb = $this->createQueryBuilder('f')
-            ->select('MAX(p.reference) AS last_reference')
-            ->leftJoin('f.proposals', 'p')
-            ->where('f.id = :form_id')
-            ->setParameter('form_id', $formId)
-        ;
+        $connection = $this->_em->getConnection();
+        $updatedRows = $connection->executeStatement(
+            'UPDATE proposal_form SET last_proposal_reference = LAST_INSERT_ID(last_proposal_reference + 1) WHERE id = :form_id',
+            ['form_id' => $formId]
+        );
 
-        return $qb->getQuery()->getSingleScalarResult() ?? 0;
+        if (0 === $updatedRows) {
+            return null;
+        }
+
+        return (int) $connection->lastInsertId();
+    }
+
+    public function synchronizeLastProposalReference(string $formId, int $reference): void
+    {
+        $this->_em->getConnection()->executeStatement(
+            'UPDATE proposal_form SET last_proposal_reference = GREATEST(last_proposal_reference, :reference) WHERE id = :form_id',
+            ['form_id' => $formId, 'reference' => $reference]
+        );
     }
 
     public function getAll(
