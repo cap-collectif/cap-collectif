@@ -59,7 +59,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
         </tr>
       </thead>
       <tbody
-        class="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cIPeia cap-table__tbody"
       >
         <tr
           class="sc-bcXGCL eozKTK cap-table__tr"
@@ -101,7 +101,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             <button
               aria-describedby=":r0:"
               aria-label="action_delete"
-              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+              class="sc-bcXGCL dodkqw cap-buttonQuickAction"
             >
               <svg
                 aria-hidden="true"
@@ -168,7 +168,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   action_delete
                 </div>
@@ -216,7 +216,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             <button
               aria-describedby=":r3:"
               aria-label="action_delete"
-              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+              class="sc-bcXGCL dodkqw cap-buttonQuickAction"
             >
               <svg
                 aria-hidden="true"
@@ -283,7 +283,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   action_delete
                 </div>

@@ -6,7 +6,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
-    class="sc-bcXGCL kEQBzE cookie-banner"
+    class="sc-bcXGCL jCKEUm cookie-banner"
     id="cookie-banner"
   >
     <div
@@ -37,7 +37,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
         decline-optional-cookies
       </button>
       <button
-        class="sc-bcXGCL erIlBM btn-cookie-consent"
+        class="sc-bcXGCL WNzEm btn-cookie-consent"
         id="cookie-consent"
         type="button"
       >
@@ -94,7 +94,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
     class="sc-bcXGCL keKWCf"
   >
     <div
-      class="sc-bcXGCL kEQBzE cookie-banner"
+      class="sc-bcXGCL jCKEUm cookie-banner"
       id="cookie-banner"
     >
       <div
@@ -125,7 +125,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
           decline-optional-cookies
         </button>
         <button
-          class="sc-bcXGCL erIlBM btn-cookie-consent"
+          class="sc-bcXGCL WNzEm btn-cookie-consent"
           id="cookie-consent"
           type="button"
         >

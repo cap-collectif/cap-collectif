@@ -23,7 +23,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL ltUuc"
+            className="sc-bcXGCL iTVlfG"
             id="proposal-<Proposal-mock-id-3>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
@@ -249,7 +249,7 @@ Array [
                 className="sc-bcXGCL gKYyRu"
               >
                 <div
-                  className="sc-bcXGCL cIaZtO"
+                  className="sc-bcXGCL hhEMqu"
                 >
                   <div
                     aria-label="Tag <mock-value-for-field-\\"name\\">"

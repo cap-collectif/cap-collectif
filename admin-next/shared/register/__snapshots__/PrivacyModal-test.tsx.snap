@@ -7,37 +7,37 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
   />
   <div
     aria-label="contained-modal-title-lg"
-    data-dialog="true"
-    id="id-g"
+    class="cap-modal-dialog"
+    data-dialog=""
+    data-open="true"
+    id=":r0:"
     role="dialog"
+    style="opacity: 0; transition: all 0.2s; position: relative; z-index: 9999; --dialog-viewport-height: 768px;"
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL inqKcp sc-jRwapC cap-modal__overlay"
-      style="opacity: 0;"
+      class="sc-bcXGCL kKhLBk cap-modal__overlay"
     >
       <div
-        class="sc-bcXGCL guZZlV sc-fvEvfv dVyCbT cap-modal privacy-policy"
+        class="sc-bcXGCL fivkIW sc-jRwapC hfJPOF cap-modal privacy-policy"
         id="privacy-modal"
-        style="opacity: 0; transform: translateY(-20px) translateZ(0);"
       >
         <div
-          class="sc-bcXGCL jJSzZW cap-modal__header privacy-policy"
+          class="sc-bcXGCL fKKqjA cap-modal__header privacy-policy"
         >
           <div
-            class="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL fgXvQZ"
           >
             <h2
               class="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
-              style="margin-left: 0px; margin-top: 0px;"
             >
               privacy-policy
             </h2>
           </div>
           <button
             aria-describedby="modal-title"
-            class="sc-bcXGCL cNICVM"
+            class="sc-bcXGCL iPUkdz"
             type="button"
           >
             <svg
@@ -70,10 +70,10 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
           </div>
         </div>
         <footer
-          class="sc-bcXGCL fMWhlA cap-modal__footer privacy-policy"
+          class="sc-bcXGCL jVElxr cap-modal__footer privacy-policy"
         >
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC hVgzVQ cap-button"
             style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >

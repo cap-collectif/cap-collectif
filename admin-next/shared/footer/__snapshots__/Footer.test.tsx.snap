@@ -6,7 +6,7 @@ exports[`<Footer /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <footer
-    class="sc-bcXGCL bIdJHI"
+    class="sc-bcXGCL cBpqWG"
     role="contentinfo"
   >
     <div
@@ -19,12 +19,12 @@ exports[`<Footer /> renders correctly 1`] = `
           class="sc-bcXGCL keKWCf"
         >
           <h3
-            class="sc-bcXGCL lgoFwA cap-heading"
+            class="sc-bcXGCL AWwpy cap-heading"
           >
             À Propos
           </h3>
           <p
-            class="sc-bcXGCL gTAibA cap-text"
+            class="sc-bcXGCL kDnfUa cap-text"
           />
           <div
             class=" ql-editor wysiwyg-render"
@@ -47,7 +47,7 @@ exports[`<Footer /> renders correctly 1`] = `
                     class="sc-bcXGCL sc-oZHua gzkypG fzfEdP cap-icon"
                   />
                   <a
-                    class="sc-bcXGCL fhmLqw"
+                    class="sc-bcXGCL kdvVRu"
                     href="x.com/cap-collectif"
                   >
                     <span>
@@ -60,7 +60,7 @@ exports[`<Footer /> renders correctly 1`] = `
           </div>
         </div>
         <div
-          class="sc-bcXGCL bVbpT"
+          class="sc-bcXGCL cnDtzR"
         >
           <a
             class="sc-bcXGCL fjrJsl"
@@ -172,12 +172,12 @@ exports[`<Footer /> renders correctly 1`] = `
         class="sc-bcXGCL gGWHIo"
       >
         <h4
-          class="sc-bcXGCL hAtLJx cap-heading"
+          class="sc-bcXGCL wtfKf cap-heading"
         >
           other-links
         </h4>
         <ul
-          class="sc-bcXGCL bqSwQX footer-links"
+          class="sc-bcXGCL VgrUx footer-links"
         >
           <li>
             <a
@@ -217,7 +217,7 @@ exports[`<Footer /> renders correctly 1`] = `
         </ul>
       </div>
       <div
-        class="sc-bcXGCL fLBqOj"
+        class="sc-bcXGCL kySytZ"
       >
         <a
           class="sc-bcXGCL fjrJsl"

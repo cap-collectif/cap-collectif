@@ -45,7 +45,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL dhlCFS sc-fbYNKQ fEcFBX cap-avatar"
+                className="sc-bcXGCL hSxDkG sc-fbYNKQ fEcFBX cap-avatar"
               >
                 &lt;
               </div>
@@ -73,7 +73,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
         onClick={[MockFunction]}
         type="button"
       >

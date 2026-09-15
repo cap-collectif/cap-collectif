@@ -40,12 +40,11 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
   </a>
   &lt;mock-value-for-field-"username"&gt;&lt;mock-value-for-field-"username"&gt;01/03/205001/03/2050
   <button
-    aria-controls="id-g"
     aria-describedby=":r0:"
     aria-expanded="false"
     aria-haspopup="dialog"
     aria-label="global.delete"
-    class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+    class="sc-bcXGCL dodkqw cap-buttonQuickAction"
     type="button"
   >
     <svg
@@ -113,21 +112,11 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.delete
       </div>
     </div>
   </div>
-  <div
-    aria-label="delete-confirmation"
-    aria-modal="true"
-    data-dialog="true"
-    hidden=""
-    id="id-g"
-    role="dialog"
-    style="display: none;"
-    tabindex="-1"
-  />
 </DocumentFragment>
 `;

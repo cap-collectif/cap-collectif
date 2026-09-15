@@ -67,7 +67,6 @@ describe('Event Admin Page', () => {
     const filePath = 'fixtures/events_to_import.csv'
     EventFormPage.importCsvFile(filePath)
     cy.wait('@AddEventsMutation')
-    cy.get('#AdminImportEventsButton-submit').click()
     cy.get('p').contains('count-events-found').should('exist').and('be.visible') // num: 1
     cy.get('#AdminImportEventsButton-submit').click()
     cy.get('div .cap-toast').contains('events-successfully-imported').should('exist').and('be.visible')

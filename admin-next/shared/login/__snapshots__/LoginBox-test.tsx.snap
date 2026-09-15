@@ -148,7 +148,7 @@ exports[`<LoginBox /> renders 1`] = `
               </svg>
             </div>
             <div
-              class="sc-bcXGCL bdghCN"
+              class="sc-bcXGCL cHeekz"
             >
               global.password.show
             </div>

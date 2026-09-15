@@ -94,7 +94,7 @@ exports[`<Projects /> renders correctly 1`] = `
           class="sc-bcXGCL cpoarP"
         >
           <div
-            class="sc-bcXGCL hVTpxV cap-card cap-project-card"
+            class="sc-bcXGCL oOUGT cap-card cap-project-card"
             id="cap-project-card-project-id-1"
           >
             <div
@@ -150,7 +150,7 @@ exports[`<Projects /> renders correctly 1`] = `
               >
                 <div
                   aria-label="Tag 0 project.votes.widget.votes"
-                  class="sc-bcXGCL krZafx cap-tag"
+                  class="sc-bcXGCL elGwKn cap-tag"
                   title="0 project.votes.widget.votes"
                 >
                   <svg
@@ -201,7 +201,7 @@ exports[`<Projects /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 global.contribution"
-                  class="sc-bcXGCL krZafx cap-tag"
+                  class="sc-bcXGCL elGwKn cap-tag"
                   title="0 global.contribution"
                 >
                   <svg
@@ -233,7 +233,7 @@ exports[`<Projects /> renders correctly 1`] = `
                 </div>
                 <div
                   aria-label="Tag 0 capco.section.metrics.participants"
-                  class="sc-bcXGCL krZafx cap-tag"
+                  class="sc-bcXGCL elGwKn cap-tag"
                   title="0 capco.section.metrics.participants"
                 >
                   <svg

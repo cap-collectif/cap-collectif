@@ -32,7 +32,7 @@ describe('Project access back office', () => {
     cy.wait(300)
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
     cy.wait('@DeleteGroupMutation')
-    AdminGroupsPage.checkToast('admin.group.delete.last-restricted-viewer-group')
+    cy.get('.cap-toast').contains('admin.group.delete.last-restricted-viewer-group').should('exist')
     cy.get('.cap-table__tbody').should('contain', 'Agent de la ville')
 
     cy.interceptGraphQLOperation({ operationName: 'ProjectIdQuery' })

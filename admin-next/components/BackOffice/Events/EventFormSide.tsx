@@ -41,6 +41,7 @@ const EventFormSide: React.FC<PostFormSideProps> = ({
   const { viewerSession } = useAppContext()
   const { isAdmin, isProjectAdmin, isSuperAdmin, isAdminOrganization } = viewerSession
   const allowUsersToProposeEvents = useFeatureFlag('allow_users_to_propose_events')
+  const multilangue = useFeatureFlag('multilangue')
   const displayThemesField = isAdmin
   const refusedReasons = getRefusedReasons(intl)
 
@@ -179,9 +180,11 @@ const EventFormSide: React.FC<PostFormSideProps> = ({
           ) : null}
         </PublicationSidePanel>
       </Accordion.Item>
-      <Accordion.Item id="multilingual">
-        <MultilangueSidePanel availableLocales={availableLocales} setCurrentLocale={setCurrentLocale} />
-      </Accordion.Item>
+      {multilangue && (
+        <Accordion.Item id="multilingual">
+          <MultilangueSidePanel availableLocales={availableLocales} setCurrentLocale={setCurrentLocale} />
+        </Accordion.Item>
+      )}
       <Accordion.Item id="advanced">
         <AdvancedSidePanel
           showTransfer={allowUsersToProposeEvents && !(!isAdmin && isProjectAdmin)}

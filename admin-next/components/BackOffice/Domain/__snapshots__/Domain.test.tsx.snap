@@ -6,7 +6,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <form
-    class="sc-bcXGCL hoKWeu"
+    class="sc-bcXGCL cFMruc"
     id="custom-domain-form"
   >
     <h4
@@ -158,16 +158,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </div>
       </div>
     </div>
-    <div
-      aria-label="delete-custom-domain"
-      aria-modal="true"
-      data-dialog="true"
-      hidden=""
-      id="id-g"
-      role="dialog"
-      style="display: none;"
-      tabindex="-1"
-    />
   </form>
 </DocumentFragment>
 `;
@@ -178,7 +168,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <form
-    class="sc-bcXGCL hoKWeu"
+    class="sc-bcXGCL cFMruc"
     id="custom-domain-form"
   >
     <h4
@@ -295,7 +285,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
               type="text"
             />
             <button
-              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
               disabled=""
               type="submit"
             >
@@ -305,16 +295,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </div>
       </div>
     </div>
-    <div
-      aria-label="delete-custom-domain"
-      aria-modal="true"
-      data-dialog="true"
-      hidden=""
-      id="id-g"
-      role="dialog"
-      style="display: none;"
-      tabindex="-1"
-    />
   </form>
 </DocumentFragment>
 `;

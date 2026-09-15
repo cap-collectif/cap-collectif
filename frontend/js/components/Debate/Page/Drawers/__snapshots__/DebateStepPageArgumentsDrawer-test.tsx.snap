@@ -9,7 +9,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,

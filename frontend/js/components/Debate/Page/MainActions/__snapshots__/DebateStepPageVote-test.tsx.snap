@@ -10,7 +10,7 @@ Array [
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL jLCCpW"
+      class="sc-bcXGCL jivkBE"
     >
       <div
         class="sc-bcXGCL dCeLwM"
@@ -37,7 +37,7 @@ Array [
       </div>
     </button>
     <button
-      class="sc-bcXGCL fjBkoL"
+      class="sc-bcXGCL cqtEct"
     >
       <div
         class="sc-bcXGCL dCeLwM"
@@ -80,7 +80,7 @@ Array [
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bcXGCL jLCCpW"
+      class="sc-bcXGCL jivkBE"
       type="button"
     >
       <div
@@ -145,7 +145,7 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bcXGCL eHnnHB"
+        class="sc-bcXGCL gcYGij"
       >
         <p
           class="sc-bcXGCL juddyS cap-text"
@@ -162,11 +162,11 @@ Array [
             vote.popover.body
           </p>
           <span
-            class="sc-GKYOR bdvZKn"
+            class="sc-fcCDYY fjzOll"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
               type="button"
             >
               global.close
@@ -174,7 +174,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy iUOKky gqDBVl cap-button"
             id="login-button"
             type="button"
           >
@@ -187,7 +187,7 @@ Array [
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bcXGCL fjBkoL"
+      class="sc-bcXGCL cqtEct"
       type="button"
     >
       <div
@@ -252,7 +252,7 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bcXGCL eHnnHB"
+        class="sc-bcXGCL gcYGij"
       >
         <p
           class="sc-bcXGCL juddyS cap-text"
@@ -269,11 +269,11 @@ Array [
             vote.popover.body
           </p>
           <span
-            class="sc-GKYOR bdvZKn"
+            class="sc-fcCDYY fjzOll"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
               type="button"
             >
               global.close
@@ -281,7 +281,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy iUOKky gqDBVl cap-button"
             id="login-button"
             type="button"
           >
@@ -304,7 +304,7 @@ Array [
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL jLCCpW"
+      class="sc-bcXGCL jivkBE"
     >
       <div
         class="sc-bcXGCL dCeLwM"
@@ -331,7 +331,7 @@ Array [
       </div>
     </button>
     <button
-      class="sc-bcXGCL fjBkoL"
+      class="sc-bcXGCL cqtEct"
     >
       <div
         class="sc-bcXGCL dCeLwM"
@@ -371,7 +371,7 @@ Array [
     style="opacity:0"
   >
     <button
-      class="sc-bcXGCL jLCCpW"
+      class="sc-bcXGCL jivkBE"
     >
       <div
         class="sc-bcXGCL dCeLwM"
@@ -398,7 +398,7 @@ Array [
       </div>
     </button>
     <button
-      class="sc-bcXGCL fjBkoL"
+      class="sc-bcXGCL cqtEct"
     >
       <div
         class="sc-bcXGCL dCeLwM"

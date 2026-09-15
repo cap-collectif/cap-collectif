@@ -21,7 +21,7 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
     <div
       aria-labelledby=":r0:"
       aria-orientation="vertical"
-      class="sc-bcXGCL bvFpIu cap-menu__list"
+      class="sc-bcXGCL cuJBJE cap-menu__list"
       data-dialog=""
       data-placing="true"
       hidden=""
@@ -31,10 +31,9 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
       tabindex="0"
     >
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r4:"
         role="menuitem"
         type="button"
@@ -45,16 +44,6 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
            admin.global.delete 
         </p>
       </button>
-      <div
-        aria-label="delete-confirmation"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
     </div>
   </div>
 </DocumentFragment>

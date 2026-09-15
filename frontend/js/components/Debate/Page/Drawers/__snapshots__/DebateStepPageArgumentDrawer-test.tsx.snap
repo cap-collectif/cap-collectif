@@ -9,7 +9,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -78,7 +78,7 @@ Array [
         </p>
       </div>
       <div
-        className="sc-bcXGCL fZKMFC"
+        className="sc-bcXGCL cNQfuo"
         onClose={[MockFunction]}
       >
         <button
@@ -132,7 +132,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -201,7 +201,7 @@ Array [
         </p>
       </div>
       <div
-        className="sc-bcXGCL fZKMFC"
+        className="sc-bcXGCL cNQfuo"
         onClose={[MockFunction]}
       >
         <button
@@ -255,7 +255,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -324,7 +324,7 @@ Array [
         </p>
       </div>
       <div
-        className="sc-bcXGCL fZKMFC"
+        className="sc-bcXGCL cNQfuo"
         onClose={[MockFunction]}
       >
         <button

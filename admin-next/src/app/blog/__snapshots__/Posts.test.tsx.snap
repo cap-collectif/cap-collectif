@@ -91,7 +91,7 @@ exports[`<Posts /> renders correctly 1`] = `
         class="sc-bcXGCL jhFiXu post-list-section-posts"
       >
         <div
-          class="sc-bcXGCL eHRonD cap-card cap-post-card"
+          class="sc-bcXGCL lcwKih cap-card cap-post-card"
           id="cap-post-card-post-id-1"
         >
           <div
@@ -136,7 +136,7 @@ exports[`<Posts /> renders correctly 1`] = `
             >
               <div
                 aria-label="Tag Invalid Date (export_proposal_news_published_at)"
-                class="sc-bcXGCL krZafx cap-tag"
+                class="sc-bcXGCL elGwKn cap-tag"
                 title="Invalid Date (export_proposal_news_published_at)"
               >
                 <svg
@@ -169,7 +169,7 @@ exports[`<Posts /> renders correctly 1`] = `
               </div>
               <div
                 aria-label="Tag <mock-value-for-field-"title"> (export_proposal_news_themes)"
-                class="sc-bcXGCL krZafx cap-tag"
+                class="sc-bcXGCL elGwKn cap-tag"
                 title="<mock-value-for-field-"title"> (export_proposal_news_themes)"
               >
                 <svg

@@ -82,7 +82,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               <div
                 aria-labelledby=":r0:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -102,7 +102,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </span>
                   <div
                     aria-checked="true"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":ra:"
                     role="menuitemradio"
                     tabindex="0"
@@ -140,7 +140,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </div>
                   <div
                     aria-checked="false"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":rc:"
                     role="menuitemradio"
                     tabindex="0"
@@ -185,7 +185,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
         </tr>
       </thead>
       <tbody
-        class="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cIPeia cap-table__tbody"
       >
         <tr
           class="sc-bcXGCL eozKTK cap-table__tr"
@@ -243,12 +243,11 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             style="white-space: initial;"
           >
             <button
-              aria-controls="id-g"
               aria-describedby=":r4:"
               aria-expanded="false"
               aria-haspopup="dialog"
               aria-label="global.delete"
-              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+              class="sc-bcXGCL dodkqw cap-buttonQuickAction"
               type="button"
             >
               <svg
@@ -316,22 +315,12 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.delete
                 </div>
               </div>
             </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal="true"
-              data-dialog="true"
-              hidden=""
-              id="id-g"
-              role="dialog"
-              style="display: none;"
-              tabindex="-1"
-            />
           </td>
         </tr>
         <tr
@@ -390,12 +379,11 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             style="white-space: initial;"
           >
             <button
-              aria-controls="id-g"
               aria-describedby=":r7:"
               aria-expanded="false"
               aria-haspopup="dialog"
               aria-label="global.delete"
-              class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+              class="sc-bcXGCL dodkqw cap-buttonQuickAction"
               type="button"
             >
               <svg
@@ -463,22 +451,12 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.delete
                 </div>
               </div>
             </div>
-            <div
-              aria-label="delete-confirmation"
-              aria-modal="true"
-              data-dialog="true"
-              hidden=""
-              id="id-g"
-              role="dialog"
-              style="display: none;"
-              tabindex="-1"
-            />
           </td>
         </tr>
       </tbody>

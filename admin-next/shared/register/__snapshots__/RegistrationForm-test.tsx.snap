@@ -141,7 +141,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
               </svg>
             </div>
             <div
-              class="sc-bcXGCL bdghCN"
+              class="sc-bcXGCL cHeekz"
             >
               global.password.show
             </div>
@@ -235,7 +235,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           type="checkbox"
         />
         <span
-          class="sc-bcXGCL blGjAA cap-checkbox__box"
+          class="sc-bcXGCL bpHPpy cap-checkbox__box"
         />
       </span>
       <span
@@ -397,7 +397,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
               </svg>
             </div>
             <div
-              class="sc-bcXGCL bdghCN"
+              class="sc-bcXGCL cHeekz"
             >
               global.password.show
             </div>
@@ -589,7 +589,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           type="checkbox"
         />
         <span
-          class="sc-bcXGCL blGjAA cap-checkbox__box"
+          class="sc-bcXGCL bpHPpy cap-checkbox__box"
         />
       </span>
       <span
@@ -747,7 +747,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
               </svg>
             </div>
             <div
-              class="sc-bcXGCL bdghCN"
+              class="sc-bcXGCL cHeekz"
             >
               global.password.show
             </div>
@@ -869,7 +869,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
           type="checkbox"
         />
         <span
-          class="sc-bcXGCL blGjAA cap-checkbox__box"
+          class="sc-bcXGCL bpHPpy cap-checkbox__box"
         />
       </span>
       <span

@@ -52,7 +52,7 @@ Array [
   border-radius: 4px;
   border: 1px solid;
   border-color: #E8EBED;
-  background-color: #fff;
+  background-color: #ffffff;
   flex: 1;
   max-height: 400px;
   overflow: hidden;
@@ -459,7 +459,7 @@ Array [
   border-radius: 4px;
   border: 1px solid;
   border-color: #E8EBED;
-  background-color: #fff;
+  background-color: #ffffff;
   flex: 1;
   max-height: 400px;
   overflow: hidden;
@@ -866,7 +866,7 @@ Array [
   border-radius: 4px;
   border: 1px solid;
   border-color: #E8EBED;
-  background-color: #fff;
+  background-color: #ffffff;
   flex: 1;
   max-height: 2000px;
   overflow: hidden;
@@ -1256,7 +1256,7 @@ Array [
   border-radius: 4px;
   border: 1px solid;
   border-color: #E8EBED;
-  background-color: #fff;
+  background-color: #ffffff;
   flex: 1;
   max-height: 400px;
   overflow: hidden;
@@ -1743,7 +1743,7 @@ Array [
   border-radius: 4px;
   border: 1px solid;
   border-color: #E8EBED;
-  background-color: #fff;
+  background-color: #ffffff;
   flex: 1;
   max-height: 2000px;
   overflow: hidden;

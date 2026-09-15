@@ -3,41 +3,56 @@
 exports[`<MediaModal /> should render correctly 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
+    style="pointer-events: none; user-select: none; cursor: default;"
+  />
+  <div
+    data-backdrop=":r0:"
+    data-open="true"
+    id=":r2:"
+    role="presentation"
+    style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 1300;"
   />
   <div
     aria-label="global.image_uploader.image.preview"
-    aria-modal="true"
-    data-dialog="true"
-    id="id-g"
+    class="cap-modal-dialog"
+    data-dialog=""
+    data-open="true"
+    id=":r0:"
     role="dialog"
+    style="opacity: 0; transition: all 0.2s; position: relative; z-index: 1300; --dialog-viewport-height: 768px;"
     tabindex="-1"
   >
+    <button
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
+      tabindex="-1"
+      type="button"
+    >
+      Dismiss popup
+    </button>
     <div
-      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
-      style="opacity: 0;"
+      class="sc-bcXGCL cHpjye cap-modal__overlay"
     >
       <div
-        class="sc-bcXGCL dtnFPI sc-fvEvfv dVyCbT cap-modal"
-        style="opacity: 0; transform: translateY(-20px) translateZ(0);"
+        class="sc-bcXGCL fmVFgD sc-jRwapC hfJPOF cap-modal"
       >
         <div
-          class="sc-bcXGCL jJSzZW cap-modal__header"
+          class="sc-bcXGCL fKKqjA cap-modal__header"
         >
           <div
-            class="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL fgXvQZ"
           >
             <h2
               class="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
-              style="margin-left: 0px; margin-top: 0px;"
             >
               Maison.png
             </h2>
           </div>
           <button
             aria-describedby="modal-title"
-            class="sc-bcXGCL cNICVM"
+            class="sc-bcXGCL iPUkdz"
             type="button"
           >
             <svg
@@ -70,7 +85,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
           />
         </div>
         <footer
-          class="sc-bcXGCL gGgQoy cap-modal__footer"
+          class="sc-bcXGCL cCzdFF cap-modal__footer"
         >
           <div
             class="sc-bcXGCL fdboPV"
@@ -102,20 +117,20 @@ exports[`<MediaModal /> should render correctly 1`] = `
             class="sc-bcXGCL iOrCWg"
           >
             <button
-              class="sc-bcXGCL sc-gGvGpy kAXCTC hnTjeM cap-button"
+              class="sc-bcXGCL sc-gGvGpy kAXCTC kcvvSa cap-button"
               style="margin-left: 0px; margin-top: 0px;"
               type="button"
             >
               global.delete
             </button>
             <button
-              class="sc-bcXGCL sc-gGvGpy kAXCTC dmtkzs cap-button"
+              class="sc-bcXGCL sc-gGvGpy kAXCTC hVgzVQ cap-button"
               type="button"
             >
               copy-link
             </button>
             <button
-              class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+              class="sc-bcXGCL sc-gGvGpy kAXCTC gqDBVl cap-button"
               type="button"
             >
               global.close

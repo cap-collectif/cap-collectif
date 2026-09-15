@@ -9,7 +9,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gbBHfa"
+    className="sc-bcXGCL gEPTlg"
     onTouchEnd={[Function]}
     onTouchStart={[Function]}
   >
@@ -46,7 +46,7 @@ Array [
           className="sc-bcXGCL esabwN"
         >
           <div
-            className="sc-bcXGCL fBmbrD sc-fbYNKQ gtfjcJ cap-avatar"
+            className="sc-bcXGCL btWBsj sc-fbYNKQ gtfjcJ cap-avatar"
             style={
               Object {
                 "marginLeft": 0,

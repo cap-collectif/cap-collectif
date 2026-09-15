@@ -9,7 +9,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -47,7 +47,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL kEDDCW sc-fbYNKQ qltGU cap-avatar"
+              className="sc-bcXGCL foPpZQ sc-fbYNKQ qltGU cap-avatar"
             >
               <img
                 alt="Agui le penseur"
@@ -121,7 +121,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -159,7 +159,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL kEDDCW sc-fbYNKQ qltGU cap-avatar"
+              className="sc-bcXGCL foPpZQ sc-fbYNKQ qltGU cap-avatar"
             >
               <img
                 alt="Agui le penseur"

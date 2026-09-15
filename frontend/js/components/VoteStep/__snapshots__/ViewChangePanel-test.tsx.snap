@@ -12,7 +12,7 @@ Array [
     <button
       aria-current={false}
       aria-label="front.results.list-view"
-      className="sc-bcXGCL eTgPiA"
+      className="sc-bcXGCL bolmce"
       id="change-to-list-view"
       onClick={[Function]}
     >
@@ -68,12 +68,12 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bcXGCL omXpk"
+      className="sc-bcXGCL kuBTFK"
     />
     <button
       aria-current={false}
       aria-label="front.results.map-view"
-      className="sc-bcXGCL huOhWp"
+      className="sc-bcXGCL bERFAb"
       id="change-to-map-view"
       onClick={[Function]}
     >
@@ -99,12 +99,12 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bcXGCL omXpk"
+      className="sc-bcXGCL kuBTFK"
     />
     <button
       aria-current={false}
       aria-label="project.votes.title"
-      className="sc-bcXGCL foTwdv"
+      className="sc-bcXGCL bQAobd"
       id="change-to-votes-view"
       onClick={[Function]}
     >
@@ -145,7 +145,7 @@ Array [
     <button
       aria-current={false}
       aria-label="front.results.list-view"
-      className="sc-bcXGCL eTgPiA"
+      className="sc-bcXGCL bolmce"
       id="change-to-list-view"
       onClick={[Function]}
     >
@@ -201,12 +201,12 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bcXGCL omXpk"
+      className="sc-bcXGCL kuBTFK"
     />
     <button
       aria-current={false}
       aria-label="front.results.map-view"
-      className="sc-bcXGCL huOhWp"
+      className="sc-bcXGCL bERFAb"
       id="change-to-map-view"
       onClick={[Function]}
     >
@@ -232,12 +232,12 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bcXGCL omXpk"
+      className="sc-bcXGCL kuBTFK"
     />
     <button
       aria-current={false}
       aria-label="project.votes.title"
-      className="sc-bcXGCL foTwdv"
+      className="sc-bcXGCL bQAobd"
       id="change-to-votes-view"
       onClick={[Function]}
     >

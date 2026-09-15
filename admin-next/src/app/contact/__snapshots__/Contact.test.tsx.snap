@@ -51,7 +51,7 @@ exports[`<Contact /> renders correctly 1`] = `
             class="sc-bcXGCL gwZFMb"
           >
             <details
-              class="sc-bcXGCL fzWTwc cap-accordion__item"
+              class="sc-bcXGCL kgRAu cap-accordion__item"
               id="contactForm1"
               name="accordion-:r0:"
               open=""
@@ -223,7 +223,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </div>
                   </div>
                   <button
-                    class="sc-bcXGCL sc-gGvGpy cxSbzw jrAhSN cap-button"
+                    class="sc-bcXGCL sc-gGvGpy cxSbzw gqDBVl cap-button"
                     type="submit"
                   >
                     global.send
@@ -236,7 +236,7 @@ exports[`<Contact /> renders correctly 1`] = `
             class="sc-bcXGCL gwZFMb"
           >
             <details
-              class="sc-bcXGCL fzWTwc cap-accordion__item"
+              class="sc-bcXGCL kgRAu cap-accordion__item"
               id="contactForm2"
               name="accordion-:r5:"
               style="margin-left: 0px; margin-top: 0px;"

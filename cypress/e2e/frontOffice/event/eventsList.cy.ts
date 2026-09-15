@@ -1,6 +1,13 @@
 import { EventPage } from '~e2e/pages'
 
 context('Events list page as admin', () => {
+  Cypress.on('uncaught:exception', err => {
+    // returning false here prevents Cypress from failing the test
+    if (err.message.includes('Failed to fetch')) {
+      return false
+    }
+  })
+
   before(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'themes')

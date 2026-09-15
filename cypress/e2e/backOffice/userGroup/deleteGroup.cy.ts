@@ -53,7 +53,7 @@ describe('Group deletion from the users groups page', () => {
     cy.wait(300)
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
     cy.wait('@DeleteGroupMutation')
-    AdminGroupsPage.checkToast('admin.group.delete.last-restricted-viewer-group')
+    cy.get('.cap-toast').contains('admin.group.delete.last-restricted-viewer-group').should('exist')
     cy.checkTableLength(9)
     cy.get('.cap-table__tbody').should('contain', 'Agent de la ville')
     AdminGroupsPage.findModal().should('exist').and('be.visible')

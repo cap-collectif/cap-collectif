@@ -11,7 +11,7 @@ exports[`<RegistrationButton /> renders a button 1`] = `
   />
   <button
     aria-label="open.inscription_modal"
-    class="sc-bcXGCL sc-gGvGpy euZpGu dmtkzs cap-button"
+    class="sc-bcXGCL sc-gGvGpy euZpGu hVgzVQ cap-button"
     id="registration-button"
     type="button"
   >

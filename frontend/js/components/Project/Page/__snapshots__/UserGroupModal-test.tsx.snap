@@ -108,7 +108,7 @@ Array [
                     hasBadge={false}
                   >
                     <div
-                      className="sc-bcXGCL dhlCFS sc-fbYNKQ fEcFBX cap-avatar"
+                      className="sc-bcXGCL hSxDkG sc-fbYNKQ fEcFBX cap-avatar"
                     >
                       <img
                         alt="<mock-value-for-field-\\"username\\">"
@@ -131,7 +131,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+                className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -146,7 +146,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -265,7 +265,7 @@ Array [
                     hasBadge={false}
                   >
                     <div
-                      className="sc-bcXGCL dhlCFS sc-fbYNKQ fEcFBX cap-avatar"
+                      className="sc-bcXGCL hSxDkG sc-fbYNKQ fEcFBX cap-avatar"
                     >
                       <img
                         alt="<mock-value-for-field-\\"username\\">"
@@ -288,7 +288,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+                className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -303,7 +303,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -422,7 +422,7 @@ Array [
                     hasBadge={false}
                   >
                     <div
-                      className="sc-bcXGCL dhlCFS sc-fbYNKQ fEcFBX cap-avatar"
+                      className="sc-bcXGCL hSxDkG sc-fbYNKQ fEcFBX cap-avatar"
                     >
                       <img
                         alt="<mock-value-for-field-\\"username\\">"
@@ -445,7 +445,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+                className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -460,7 +460,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-gGvGpy iaJbua jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy iaJbua gqDBVl cap-button"
         onClick={[MockFunction]}
         type="button"
       >

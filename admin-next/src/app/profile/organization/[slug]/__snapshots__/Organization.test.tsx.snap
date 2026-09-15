@@ -9,11 +9,11 @@ exports[`<Organization /> renders correctly 1`] = `
     class="sc-bcXGCL gkMwg"
   >
     <section
-      class="sc-bcXGCL clEFoW"
+      class="sc-bcXGCL bQmMxs"
       id="organizationHeader"
     >
       <div
-        class="sc-bcXGCL LFaWQ"
+        class="sc-bcXGCL cRXIiS"
       >
         <div
           class="sc-bcXGCL bBxOOJ"
@@ -48,7 +48,7 @@ exports[`<Organization /> renders correctly 1`] = `
             class="sc-bcXGCL cLxXtn"
           >
             <div
-              class="sc-bcXGCL bPhmsP cap-card cap-project-card"
+              class="sc-bcXGCL bLoqkp cap-card cap-project-card"
               id="cap-project-card-project-id-1"
             >
               <div
@@ -104,7 +104,7 @@ exports[`<Organization /> renders correctly 1`] = `
                 >
                   <div
                     aria-label="Tag 0 project.votes.widget.votes"
-                    class="sc-bcXGCL krZafx cap-tag"
+                    class="sc-bcXGCL elGwKn cap-tag"
                     title="0 project.votes.widget.votes"
                   >
                     <svg
@@ -155,7 +155,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   </div>
                   <div
                     aria-label="Tag 0 global.contribution"
-                    class="sc-bcXGCL krZafx cap-tag"
+                    class="sc-bcXGCL elGwKn cap-tag"
                     title="0 global.contribution"
                   >
                     <svg
@@ -187,7 +187,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   </div>
                   <div
                     aria-label="Tag 0 capco.section.metrics.participants"
-                    class="sc-bcXGCL krZafx cap-tag"
+                    class="sc-bcXGCL elGwKn cap-tag"
                     title="0 capco.section.metrics.participants"
                   >
                     <svg
@@ -241,7 +241,7 @@ exports[`<Organization /> renders correctly 1`] = `
               menu.news
             </h2>
             <div
-              class="sc-bcXGCL kLYTKq cap-card"
+              class="sc-bcXGCL deXulA cap-card"
             >
               <div
                 class="sc-bcXGCL jcmCEk cap-card-cover"
@@ -298,7 +298,7 @@ exports[`<Organization /> renders correctly 1`] = `
                 aria-controls=":r1:"
                 aria-expanded="false"
                 aria-haspopup="menu"
-                class="sc-bcXGCL sc-gGvGpy hSrtJu iugnuM cap-button cap-menu__disclosure"
+                class="sc-bcXGCL sc-gGvGpy hSrtJu eKIHaW cap-button cap-menu__disclosure"
                 id=":r0:"
                 type="button"
               >
@@ -320,7 +320,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </button>
             </div>
             <div
-              class="sc-bcXGCL kLYTKq cap-card"
+              class="sc-bcXGCL deXulA cap-card"
               style="display: none;"
             >
               <div
@@ -330,7 +330,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   class="sc-bcXGCL eJQvyz"
                 >
                   <div
-                    class="sc-bcXGCL ejqAQg"
+                    class="sc-bcXGCL hdZHqy"
                   >
                     Invalid date
                   </div>

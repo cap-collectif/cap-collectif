@@ -85,7 +85,7 @@ export const DeleteGroupModal: React.FC<Props> = ({
           {intl.formatMessage({ id: 'global.delete' })}
         </Button>
       )}
-      <Modal size={CapUIModalSize.Md} ariaLabel={'modal-title'} show={isOpen}>
+      <Modal size={CapUIModalSize.Md} ariaLabel={'modal-title'} show={isOpen} onClose={onClose} alwaysOpenInPortal>
         <Modal.Header height={pxToRem(72)}>
           <Heading>{intl.formatMessage({ id: 'group.admin.parameters.modal.delete.title' })}</Heading>
         </Modal.Header>

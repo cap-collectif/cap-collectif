@@ -120,7 +120,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
       </div>
     </div>
     <button
-      class="sc-bcXGCL sc-gGvGpy hRwdLZ jrAhSN cap-button"
+      class="sc-bcXGCL sc-gGvGpy hRwdLZ gqDBVl cap-button"
       id="confirm-login"
       type="submit"
     >

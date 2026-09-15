@@ -93,7 +93,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":r0:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -113,7 +113,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </span>
                   <div
                     aria-checked="true"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":r10:"
                     role="menuitemradio"
                     tabindex="0"
@@ -151,7 +151,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </div>
                   <div
                     aria-checked="false"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":r12:"
                     role="menuitemradio"
                     tabindex="0"
@@ -196,7 +196,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
         </tr>
       </thead>
       <tbody
-        class="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cIPeia cap-table__tbody"
       >
         <tr
           class="sc-bcXGCL eozKTK cap-table__tr"
@@ -271,7 +271,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
               id=":r4:"
               type="button"
             >
@@ -339,7 +339,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.plus
                 </div>
@@ -351,7 +351,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":r4:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -361,7 +361,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabindex="0"
               >
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r15:"
                   role="menuitem"
                   type="button"
@@ -373,10 +373,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r17:"
                   role="menuitem"
                   type="button"
@@ -387,18 +386,8 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      project.download.button 
                   </p>
                 </button>
-                <div
-                  aria-label="import-list"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r19:"
                   role="menuitem"
                   type="button"
@@ -410,10 +399,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1b:"
                   role="menuitem"
                   type="button"
@@ -424,16 +412,6 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      admin.global.delete 
                   </p>
                 </button>
-                <div
-                  aria-label="delete-confirmation"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
               </div>
             </div>
           </td>
@@ -511,7 +489,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
               id=":rb:"
               type="button"
             >
@@ -579,7 +557,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.plus
                 </div>
@@ -591,7 +569,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":rb:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -601,7 +579,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabindex="0"
               >
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1e:"
                   role="menuitem"
                   type="button"
@@ -613,10 +591,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1g:"
                   role="menuitem"
                   type="button"
@@ -627,18 +604,8 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      project.download.button 
                   </p>
                 </button>
-                <div
-                  aria-label="import-list"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1i:"
                   role="menuitem"
                   type="button"
@@ -650,10 +617,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1k:"
                   role="menuitem"
                   type="button"
@@ -664,16 +630,6 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      admin.global.delete 
                   </p>
                 </button>
-                <div
-                  aria-label="delete-confirmation"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
               </div>
             </div>
           </td>
@@ -751,7 +707,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
               id=":ri:"
               type="button"
             >
@@ -819,7 +775,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.plus
                 </div>
@@ -831,7 +787,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":ri:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -841,7 +797,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabindex="0"
               >
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1n:"
                   role="menuitem"
                   type="button"
@@ -853,10 +809,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1p:"
                   role="menuitem"
                   type="button"
@@ -867,18 +822,8 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      project.download.button 
                   </p>
                 </button>
-                <div
-                  aria-label="import-list"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1r:"
                   role="menuitem"
                   type="button"
@@ -890,10 +835,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r1t:"
                   role="menuitem"
                   type="button"
@@ -904,16 +848,6 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      admin.global.delete 
                   </p>
                 </button>
-                <div
-                  aria-label="delete-confirmation"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
               </div>
             </div>
           </td>
@@ -991,7 +925,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="menu"
               aria-label="global.plus"
-              class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+              class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
               id=":rp:"
               type="button"
             >
@@ -1059,7 +993,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   global.plus
                 </div>
@@ -1071,7 +1005,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":rp:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -1081,7 +1015,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabindex="0"
               >
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r20:"
                   role="menuitem"
                   type="button"
@@ -1093,10 +1027,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r22:"
                   role="menuitem"
                   type="button"
@@ -1107,18 +1040,8 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      project.download.button 
                   </p>
                 </button>
-                <div
-                  aria-label="import-list"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
                 <button
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r24:"
                   role="menuitem"
                   type="button"
@@ -1130,10 +1053,9 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </p>
                 </button>
                 <button
-                  aria-controls="id-g"
                   aria-expanded="false"
                   aria-haspopup="dialog"
-                  class="sc-bcXGCL iLHRqt cap-menu__item"
+                  class="sc-bcXGCL cJXogn cap-menu__item"
                   id=":r26:"
                   role="menuitem"
                   type="button"
@@ -1144,16 +1066,6 @@ exports[`<ProjectList /> should render correctly 1`] = `
                      admin.global.delete 
                   </p>
                 </button>
-                <div
-                  aria-label="delete-confirmation"
-                  aria-modal="true"
-                  data-dialog="true"
-                  hidden=""
-                  id="id-g"
-                  role="dialog"
-                  style="display: none;"
-                  tabindex="-1"
-                />
               </div>
             </div>
           </td>

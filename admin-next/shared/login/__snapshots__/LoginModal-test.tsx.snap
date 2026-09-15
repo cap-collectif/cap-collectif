@@ -7,37 +7,38 @@ exports[`<LoginModal /> render correctly 1`] = `
   />
   <div
     aria-label="login.with"
-    data-dialog="true"
-    id="id-g"
+    class="cap-modal-dialog"
+    data-dialog=""
+    data-open="true"
+    id=":r0:"
     role="dialog"
+    style="opacity: 0; transition: all 0.2s; position: relative; z-index: 1300; --dialog-viewport-height: 768px;"
     tabindex="-1"
   >
     <div
-      class="sc-bcXGCL embsrb sc-jRwapC cap-modal__overlay"
-      style="opacity: 0;"
+      class="sc-bcXGCL cHpjye cap-modal__overlay"
     >
       <div
-        class="sc-bcXGCL dRDYMK sc-fvEvfv iKfoPd cap-modal"
-        style="z-index: 9000; opacity: 0; transform: translateY(-20px) translateZ(0);"
+        class="sc-bcXGCL irSPMx sc-jRwapC giLDgr cap-modal"
+        style="z-index: 9000;"
       >
         <div
-          class="sc-bcXGCL jJSzZW cap-modal__header"
+          class="sc-bcXGCL fKKqjA cap-modal__header"
           id="contained-modal-title-lg"
         >
           <div
-            class="sc-bcXGCL jevVsb"
+            class="sc-bcXGCL fgXvQZ"
           >
             <h2
               class="sc-bcXGCL YIciv cap-heading"
               id="modal-title"
-              style="margin-left: 0px; margin-top: 0px;"
             >
               login.with
             </h2>
           </div>
           <button
             aria-describedby="modal-title"
-            class="sc-bcXGCL cNICVM"
+            class="sc-bcXGCL iPUkdz"
             type="button"
           >
             <svg
@@ -78,7 +79,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             >
               <label
                 class="sc-bcXGCL fTPHCc cap-form-label"
-                for=":r0:"
+                for=":r2:"
                 style="margin-left: 0px; margin-top: 0px;"
               >
                 <span
@@ -92,7 +93,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 aria-required="true"
                 autocomplete="email"
                 class="sc-bcXGCL sc-fXqqsB egzrup ieLfuE cap-input"
-                id=":r0:"
+                id=":r2:"
                 name="username"
                 placeholder="email.placeholder"
                 required=""
@@ -104,7 +105,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             >
               <label
                 class="sc-bcXGCL fTPHCc cap-form-label"
-                for=":r1:"
+                for=":r3:"
                 style="margin-left: 0px; margin-top: 0px;"
               >
                 <span
@@ -121,13 +122,13 @@ exports[`<LoginModal /> render correctly 1`] = `
                   aria-required="true"
                   autocomplete="off"
                   class="sc-bcXGCL dANhtW cap-input"
-                  id=":r1:"
+                  id=":r3:"
                   name="password"
                   required=""
                   type="password"
                 />
                 <button
-                  aria-describedby=":r2:"
+                  aria-describedby=":r4:"
                   class="sc-bcXGCL fROdoz"
                   type="button"
                 >
@@ -164,7 +165,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                     data-dialog=""
                     data-placing="true"
                     hidden=""
-                    id=":r2:"
+                    id=":r4:"
                     role="tooltip"
                     style="position: relative; z-index: 1800; display: none;"
                     tabindex="-1"
@@ -183,14 +184,14 @@ exports[`<LoginModal /> render correctly 1`] = `
                           <path
                             d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                             fill="none"
-                            mask="url(#:r5:)"
+                            mask="url(#:r7:)"
                           />
                           <path
                             d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
                             stroke="none"
                           />
                           <mask
-                            id=":r5:"
+                            id=":r7:"
                             maskUnits="userSpaceOnUse"
                           >
                             <rect
@@ -206,7 +207,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                       </svg>
                     </div>
                     <div
-                      class="sc-bcXGCL bdghCN"
+                      class="sc-bcXGCL cHeekz"
                     >
                       global.password.show
                     </div>
@@ -232,17 +233,17 @@ exports[`<LoginModal /> render correctly 1`] = `
           </div>
         </div>
         <footer
-          class="sc-bcXGCL fMWhlA cap-modal__footer"
+          class="sc-bcXGCL jVElxr cap-modal__footer"
         >
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC iugnuM cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC eKIHaW cap-button"
             style="margin-left: 0px; margin-top: 0px;"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC gqDBVl cap-button"
             id="confirm-login"
             type="submit"
           >

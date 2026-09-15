@@ -6,12 +6,11 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <button
-    aria-controls="id-g"
     aria-describedby=":r0:"
     aria-expanded="false"
     aria-haspopup="dialog"
     aria-label="global.delete"
-    class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+    class="sc-bcXGCL dodkqw cap-buttonQuickAction"
     type="button"
   >
     <svg
@@ -79,22 +78,12 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.delete
       </div>
     </div>
   </div>
-  <div
-    aria-label="delete-confirmation"
-    aria-modal="true"
-    data-dialog="true"
-    hidden=""
-    id="id-g"
-    role="dialog"
-    style="display: none;"
-    tabindex="-1"
-  />
 </DocumentFragment>
 `;
 
@@ -104,12 +93,11 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <button
-    aria-controls="id-g"
     aria-describedby=":r4:"
     aria-expanded="false"
     aria-haspopup="dialog"
     aria-label="global.delete"
-    class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+    class="sc-bcXGCL dodkqw cap-buttonQuickAction"
     type="button"
   >
     <svg
@@ -177,21 +165,11 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.delete
       </div>
     </div>
   </div>
-  <div
-    aria-label="delete-confirmation"
-    aria-modal="true"
-    data-dialog="true"
-    hidden=""
-    id="id-g"
-    role="dialog"
-    style="display: none;"
-    tabindex="-1"
-  />
 </DocumentFragment>
 `;

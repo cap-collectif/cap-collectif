@@ -6,7 +6,7 @@ Array [
     className="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL hgFRgf"
+    className="sc-bcXGCL ducaYd"
   >
     <div
       className="sc-bcXGCL keKWCf"
@@ -23,7 +23,7 @@ Array [
         try-new-keywords
       </p>
       <button
-        className="sc-bcXGCL sc-gGvGpy czuwuU jrAhSN cap-button"
+        className="sc-bcXGCL sc-gGvGpy czuwuU gqDBVl cap-button"
         onClick={[Function]}
         type="button"
       >

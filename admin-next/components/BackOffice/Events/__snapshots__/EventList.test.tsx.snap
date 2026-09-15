@@ -67,7 +67,7 @@ exports[`<EventList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":r0:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -87,7 +87,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   </span>
                   <div
                     aria-checked="true"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":ra:"
                     role="menuitemradio"
                     tabindex="0"
@@ -125,7 +125,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   </div>
                   <div
                     aria-checked="false"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":rc:"
                     role="menuitemradio"
                     tabindex="0"
@@ -189,7 +189,7 @@ exports[`<EventList /> should render correctly 1`] = `
         </tr>
       </thead>
       <tbody
-        class="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cIPeia cap-table__tbody"
       >
         <tr
           class="sc-bcXGCL eozKTK cap-table__tr"
@@ -267,7 +267,7 @@ exports[`<EventList /> should render correctly 1`] = `
               <button
                 aria-describedby=":r4:"
                 aria-label="global.download"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                 href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
               >
                 <svg
@@ -337,7 +337,7 @@ exports[`<EventList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.download
                   </div>
@@ -507,7 +507,7 @@ exports[`<EventList /> should render correctly 1`] = `
               <button
                 aria-describedby=":r7:"
                 aria-label="global.download"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                 href="<mock-value-for-field-"exportParticipantsUrl">"
               >
                 <svg
@@ -577,7 +577,7 @@ exports[`<EventList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.download
                   </div>

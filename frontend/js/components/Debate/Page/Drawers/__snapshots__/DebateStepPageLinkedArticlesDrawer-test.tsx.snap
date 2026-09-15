@@ -9,7 +9,7 @@ Array [
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL eWfsbC DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL gqjjtQ DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -63,20 +63,20 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL cnswNO cap-abstract-card"
+              className="sc-bcXGCL cIGEYQ cap-abstract-card"
             >
               <div
                 className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-GKYOR kPbGMb DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-fcCDYY jUGtCt DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="https://www.generationlibre.eu/wp-content/uploads/2021/03/markus-winkler-eNyIi0oS7P4-unsplash-e1616584197949-1024x576.jpg"
                 />
               </div>
               <div
-                className="sc-bcXGCL dovjmC"
+                className="sc-bcXGCL nPsFU"
               >
                 <h2
                   className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
@@ -98,20 +98,20 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL cnswNO cap-abstract-card"
+              className="sc-bcXGCL cIGEYQ cap-abstract-card"
             >
               <div
                 className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-GKYOR kPbGMb DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-fcCDYY jUGtCt DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="http://media1.woopic.com/api/v1/images/1039%2Fmulti%2F3ukfr%2Fmacron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent%7Cfzqpqs-H.jpg?format=470x264&facedetect=1&quality=85"
                 />
               </div>
               <div
-                className="sc-bcXGCL dovjmC"
+                className="sc-bcXGCL nPsFU"
               >
                 <h2
                   className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
@@ -138,20 +138,20 @@ Array [
             target="_blank"
           >
             <div
-              className="sc-bcXGCL cnswNO cap-abstract-card"
+              className="sc-bcXGCL cIGEYQ cap-abstract-card"
             >
               <div
                 className="sc-bcXGCL enIGoH"
               >
                 <img
                   alt=""
-                  className="sc-GKYOR kPbGMb DebateArticleCard___StyledImage-daVza-D kvGbEx"
+                  className="sc-fcCDYY jUGtCt DebateArticleCard___StyledImage-daVza-D kvGbEx"
                   loading="lazy"
                   src="https://www.francetvinfo.fr/pictures/XG0eIHnEfHnOuHCFy2xOQse_Um4/1500x843/2021/03/09/phplNpe9r.jpg"
                 />
               </div>
               <div
-                className="sc-bcXGCL dovjmC"
+                className="sc-bcXGCL nPsFU"
               >
                 <h2
                   className="sc-bcXGCL kcSEdy cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"

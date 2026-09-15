@@ -92,7 +92,7 @@ exports[`<PostItem /> should render correctly 1`] = `
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         Invalid Date
       </div>
@@ -105,7 +105,7 @@ exports[`<PostItem /> should render correctly 1`] = `
     <button
       aria-describedby=":r3:"
       aria-label="global.preview"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
     >
       <svg
         aria-hidden="true"
@@ -179,19 +179,18 @@ exports[`<PostItem /> should render correctly 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           global.preview
         </div>
       </div>
     </div>
     <button
-      aria-controls="id-g"
       aria-describedby=":r6:"
       aria-expanded="false"
       aria-haspopup="dialog"
       aria-label="admin.global.delete"
-      class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+      class="sc-bcXGCL dodkqw cap-buttonQuickAction"
       type="button"
     >
       <svg
@@ -259,22 +258,12 @@ exports[`<PostItem /> should render correctly 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           admin.global.delete
         </div>
       </div>
     </div>
-    <div
-      aria-label="delete-confirmation"
-      aria-modal="true"
-      data-dialog="true"
-      hidden=""
-      id="id-g"
-      role="dialog"
-      style="display: none;"
-      tabindex="-1"
-    />
   </div>
 </DocumentFragment>
 `;
@@ -371,7 +360,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         Invalid Date
       </div>
@@ -384,7 +373,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
     <button
       aria-describedby=":rf:"
       aria-label="global.preview"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
     >
       <svg
         aria-hidden="true"
@@ -458,19 +447,18 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           global.preview
         </div>
       </div>
     </div>
     <button
-      aria-controls="id-g"
       aria-describedby=":ri:"
       aria-expanded="false"
       aria-haspopup="dialog"
       aria-label="admin.global.delete"
-      class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+      class="sc-bcXGCL dodkqw cap-buttonQuickAction"
       type="button"
     >
       <svg
@@ -538,22 +526,12 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           admin.global.delete
         </div>
       </div>
     </div>
-    <div
-      aria-label="delete-confirmation"
-      aria-modal="true"
-      data-dialog="true"
-      hidden=""
-      id="id-g"
-      role="dialog"
-      style="display: none;"
-      tabindex="-1"
-    />
   </div>
 </DocumentFragment>
 `;

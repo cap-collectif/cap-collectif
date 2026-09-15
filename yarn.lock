@@ -1759,9 +1759,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cap-collectif/ui@npm:6.0.11":
-  version: 6.0.11
-  resolution: "@cap-collectif/ui@npm:6.0.11"
+"@cap-collectif/ui@npm:6.0.12":
+  version: 6.0.12
+  resolution: "@cap-collectif/ui@npm:6.0.12"
   dependencies:
     "@ariakit/react": "npm:^0.4.17"
     "@atlaskit/pragmatic-drag-and-drop": "npm:^1.7.7"
@@ -1786,7 +1786,7 @@ __metadata:
     moment: ^2.29.1
     react: ">=18"
     styled-components: ^6.1.8
-  checksum: 10c0/5aa56b75f943d8f1aa1afe0716c2cdffc90b4ceb282d4a6cbd0233f22c94e47b0437ab0e8172b84a46ce53810eba63f9e039d525178f20ee51746363e9b04dc0
+  checksum: 10c0/4fe7e03cd938f3888925fc52c97271af17e93f31c1232092950d6792d184acfa0516b7a8c1a257e6520e8c6ca5e612f149b2fae18ad6a875dc4bc3ce690532dc
   languageName: node
   linkType: hard
 
@@ -7671,7 +7671,7 @@ __metadata:
     "@babel/preset-stage-0": "npm:^7.0.0"
     "@babel/preset-typescript": "npm:^7.23.0"
     "@babel/runtime-corejs3": "npm:^7.28.4"
-    "@cap-collectif/ui": "npm:6.0.11"
+    "@cap-collectif/ui": "npm:6.0.12"
     "@cfaester/enzyme-adapter-react-18": "npm:0.7.1"
     "@emotion/babel-preset-css-prop": "npm:^11.11.0"
     "@emotion/cache": "npm:^10.0.29"

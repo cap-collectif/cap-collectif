@@ -44,7 +44,7 @@ Array [
         label="copied-link"
       >
         <button
-          class="sc-bcXGCL sc-gGvGpy hZZnlT diblCZ cap-button"
+          class="sc-bcXGCL sc-gGvGpy iVaBIN dviuVh cap-button"
           type="button"
         >
           <svg
@@ -70,7 +70,7 @@ Array [
       </div>
     </div>
     <div
-      class="sc-bcXGCL iFoOXv cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
+      class="sc-bcXGCL LDUxd cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
     >
       <form
         class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -120,7 +120,7 @@ Array [
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC gqDBVl cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -161,7 +161,7 @@ Array [
       </button>
     </div>
     <div
-      class="sc-bcXGCL iFoOXv cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
+      class="sc-bcXGCL LDUxd cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
     >
       <form
         class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -211,7 +211,7 @@ Array [
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC gqDBVl cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -256,7 +256,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bcXGCL sc-gGvGpy dAsOeD jrAhSN cap-button"
+      class="sc-bcXGCL sc-gGvGpy dAsOeD gqDBVl cap-button"
       type="button"
     >
       publish-argument
@@ -313,7 +313,7 @@ Array [
         label="copied-link"
       >
         <button
-          class="sc-bcXGCL sc-gGvGpy hZZnlT diblCZ cap-button"
+          class="sc-bcXGCL sc-gGvGpy iVaBIN dviuVh cap-button"
           type="button"
         >
           <svg
@@ -339,7 +339,7 @@ Array [
       </div>
     </div>
     <button
-      class="sc-bcXGCL sc-gGvGpy dAsOeD jrAhSN cap-button"
+      class="sc-bcXGCL sc-gGvGpy dAsOeD gqDBVl cap-button"
       type="button"
     >
       publish-argument
@@ -377,7 +377,7 @@ Array [
       </button>
     </div>
     <div
-      class="sc-bcXGCL iFoOXv cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
+      class="sc-bcXGCL LDUxd cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
     >
       <form
         class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -427,7 +427,7 @@ Array [
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-gGvGpy kAXCTC jrAhSN cap-button"
+            class="sc-bcXGCL sc-gGvGpy kAXCTC gqDBVl cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -468,7 +468,7 @@ Array [
       </button>
     </div>
     <div
-      class="sc-bcXGCL iFoOXv cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
+      class="sc-bcXGCL LDUxd cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
     >
       <form
         class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -603,7 +603,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bcXGCL sc-gGvGpy dAsOeD jrAhSN cap-button"
+      class="sc-bcXGCL sc-gGvGpy dAsOeD gqDBVl cap-button"
       type="button"
     >
       publish-argument

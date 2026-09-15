@@ -329,7 +329,7 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL eHnnHB"
+      className="sc-bcXGCL gcYGij"
     >
       <p
         className="sc-bcXGCL juddyS cap-text"
@@ -351,11 +351,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-GKYOR bdvZKn"
+          className="sc-fcCDYY fjzOll"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -364,7 +364,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
+          className="sc-bcXGCL sc-gGvGpy iUOKky gqDBVl cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -706,7 +706,7 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL eHnnHB"
+      className="sc-bcXGCL gcYGij"
     >
       <p
         className="sc-bcXGCL juddyS cap-text"
@@ -728,11 +728,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-GKYOR bdvZKn"
+          className="sc-fcCDYY fjzOll"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -741,7 +741,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
+          className="sc-bcXGCL sc-gGvGpy iUOKky gqDBVl cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -1083,7 +1083,7 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL eHnnHB"
+      className="sc-bcXGCL gcYGij"
     >
       <p
         className="sc-bcXGCL juddyS cap-text"
@@ -1105,11 +1105,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-GKYOR bdvZKn"
+          className="sc-fcCDYY fjzOll"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-gGvGpy hSrtJu jrAhSN cap-button"
+            className="sc-bcXGCL sc-gGvGpy hSrtJu gqDBVl cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1118,7 +1118,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-gGvGpy iUOKky jrAhSN cap-button"
+          className="sc-bcXGCL sc-gGvGpy iUOKky gqDBVl cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"

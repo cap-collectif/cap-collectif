@@ -212,14 +212,16 @@ export const EditGroupModal: React.FC<Props> = ({ group: groupRef, refetch, term
                   </Button>
                 </Flex>
 
-                <DeleteGroupModal
-                  button="regular"
-                  groupId={group.id}
-                  closeParentModal={onClose}
-                  refetch={refetch}
-                  term={term}
-                  connectionId={connectionId}
-                />
+                <Box>
+                  <DeleteGroupModal
+                    button="regular"
+                    groupId={group.id}
+                    closeParentModal={onClose}
+                    refetch={refetch}
+                    term={term}
+                    connectionId={connectionId}
+                  />
+                </Box>
               </Flex>
             </Modal.Footer>
           </>

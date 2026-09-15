@@ -11,7 +11,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
     class="sc-bcXGCL hHvZtB frise"
   >
     <ul
-      class="sc-bcXGCL kfBfPW frise__stepList"
+      class="sc-bcXGCL eTqAas frise__stepList"
     >
       <div
         class="slick-slider sc-e313a7f-0 dUQVAC slick-initialized"
@@ -32,7 +32,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             >
               <div>
                 <li
-                  class="sc-bcXGCL kCUHOf frise__stepItem"
+                  class="sc-bcXGCL xlUXF frise__stepItem"
                 >
                   <svg
                     fill="none"
@@ -83,7 +83,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             >
               <div>
                 <li
-                  class="sc-bcXGCL StdhZ frise__stepItem"
+                  class="sc-bcXGCL gnopSP frise__stepItem"
                 >
                   <svg
                     fill="none"
@@ -137,7 +137,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             >
               <div>
                 <li
-                  class="sc-bcXGCL StdhZ frise__stepItem"
+                  class="sc-bcXGCL gnopSP frise__stepItem"
                 >
                   <svg
                     fill="none"
@@ -232,7 +232,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                           </svg>
                         </div>
                         <div
-                          class="sc-bcXGCL bdghCN"
+                          class="sc-bcXGCL cHeekz"
                         >
                           fromDayToDay
                         </div>
@@ -252,7 +252,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
             >
               <div>
                 <li
-                  class="sc-bcXGCL isjtcp frise__stepItem"
+                  class="sc-bcXGCL hsvYLJ frise__stepItem"
                 >
                   <svg
                     fill="none"
@@ -334,7 +334,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                           </svg>
                         </div>
                         <div
-                          class="sc-bcXGCL bdghCN"
+                          class="sc-bcXGCL cHeekz"
                         >
                           frise-tooltip-text
                         </div>

@@ -28,7 +28,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rg:"
                 aria-label="global.more"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                 style="margin-left: 0px; margin-top: 0px;"
               >
                 <svg
@@ -98,7 +98,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.more
                   </div>
@@ -107,7 +107,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rj:"
                 aria-label="copy-link"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -177,7 +177,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     copy-link
                   </div>
@@ -186,7 +186,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rm:"
                 aria-label="global.delete"
-                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                class="sc-bcXGCL dodkqw cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -253,7 +253,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.delete
                   </div>
@@ -262,7 +262,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             </div>
           </div>
           <div
-            class="sc-bcXGCL hMrLTp"
+            class="sc-bcXGCL kPdkID"
           >
             <div
               class="sc-bcXGCL fdboPV"
@@ -312,7 +312,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rp:"
                 aria-label="global.more"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                 style="margin-left: 0px; margin-top: 0px;"
               >
                 <svg
@@ -382,7 +382,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.more
                   </div>
@@ -391,7 +391,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rs:"
                 aria-label="copy-link"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -461,7 +461,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     copy-link
                   </div>
@@ -470,7 +470,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby=":rv:"
                 aria-label="global.delete"
-                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                class="sc-bcXGCL dodkqw cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -537,7 +537,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.delete
                   </div>
@@ -546,7 +546,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             </div>
           </div>
           <div
-            class="sc-bcXGCL hMrLTp"
+            class="sc-bcXGCL kPdkID"
           >
             <div
               class="sc-bcXGCL fdboPV"
@@ -651,7 +651,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
           </tr>
         </thead>
         <tbody
-          class="sc-bcXGCL cqfhNk cap-table__tbody"
+          class="sc-bcXGCL cIPeia cap-table__tbody"
         >
           <tr
             class="sc-bcXGCL eozKTK cap-table__tr"
@@ -735,7 +735,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby=":r0:"
                   aria-label="copy-link"
-                  class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                  class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                   style="margin-left: 0px; margin-top: 0px;"
                 >
                   <svg
@@ -806,7 +806,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                       </svg>
                     </div>
                     <div
-                      class="sc-bcXGCL bdghCN"
+                      class="sc-bcXGCL cHeekz"
                     >
                       copy-link
                     </div>
@@ -815,7 +815,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby=":r3:"
                   aria-label="global.delete"
-                  class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                  class="sc-bcXGCL dodkqw cap-buttonQuickAction"
                 >
                   <svg
                     aria-hidden="true"
@@ -882,7 +882,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                       </svg>
                     </div>
                     <div
-                      class="sc-bcXGCL bdghCN"
+                      class="sc-bcXGCL cHeekz"
                     >
                       global.delete
                     </div>
@@ -973,7 +973,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby=":r6:"
                   aria-label="copy-link"
-                  class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                  class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
                   style="margin-left: 0px; margin-top: 0px;"
                 >
                   <svg
@@ -1044,7 +1044,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                       </svg>
                     </div>
                     <div
-                      class="sc-bcXGCL bdghCN"
+                      class="sc-bcXGCL cHeekz"
                     >
                       copy-link
                     </div>
@@ -1053,7 +1053,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby=":r9:"
                   aria-label="global.delete"
-                  class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                  class="sc-bcXGCL dodkqw cap-buttonQuickAction"
                 >
                   <svg
                     aria-hidden="true"
@@ -1120,7 +1120,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                       </svg>
                     </div>
                     <div
-                      class="sc-bcXGCL bdghCN"
+                      class="sc-bcXGCL cHeekz"
                     >
                       global.delete
                     </div>

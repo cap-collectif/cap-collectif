@@ -42,7 +42,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     <button
       aria-describedby=":r0:"
       aria-label="global.download"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
       href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
     >
       <svg
@@ -112,7 +112,7 @@ exports[`<EventItem /> should render correctly 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           global.download
         </div>
@@ -164,7 +164,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     <button
       aria-describedby=":r4:"
       aria-label="global.download"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
       href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
     >
       <svg
@@ -234,7 +234,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           global.download
         </div>

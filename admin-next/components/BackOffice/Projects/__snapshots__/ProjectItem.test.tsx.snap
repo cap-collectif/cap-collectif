@@ -54,7 +54,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     aria-expanded="false"
     aria-haspopup="menu"
     aria-label="global.plus"
-    class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+    class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
     id=":r0:"
     type="button"
   >
@@ -122,7 +122,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.plus
       </div>
@@ -134,7 +134,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     <div
       aria-labelledby=":r0:"
       aria-orientation="vertical"
-      class="sc-bcXGCL bvFpIu cap-menu__list"
+      class="sc-bcXGCL cuJBJE cap-menu__list"
       data-dialog=""
       data-placing="true"
       hidden=""
@@ -144,7 +144,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       tabindex="0"
     >
       <button
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r8:"
         role="menuitem"
         type="button"
@@ -156,10 +156,9 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         </p>
       </button>
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":ra:"
         role="menuitem"
         type="button"
@@ -170,21 +169,10 @@ exports[`<ProjectItem /> should render correctly 1`] = `
            project.download.button 
         </p>
       </button>
-      <div
-        aria-label="import-list"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":rc:"
         role="menuitem"
         type="button"
@@ -195,16 +183,6 @@ exports[`<ProjectItem /> should render correctly 1`] = `
            admin.global.delete 
         </p>
       </button>
-      <div
-        aria-label="delete-confirmation"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
     </div>
   </div>
 </DocumentFragment>
@@ -264,7 +242,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     aria-expanded="false"
     aria-haspopup="menu"
     aria-label="global.plus"
-    class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+    class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
     id=":re:"
     type="button"
   >
@@ -332,7 +310,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.plus
       </div>
@@ -344,7 +322,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     <div
       aria-labelledby=":re:"
       aria-orientation="vertical"
-      class="sc-bcXGCL bvFpIu cap-menu__list"
+      class="sc-bcXGCL cuJBJE cap-menu__list"
       data-dialog=""
       data-placing="true"
       hidden=""
@@ -354,7 +332,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       tabindex="0"
     >
       <button
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":rm:"
         role="menuitem"
         type="button"
@@ -366,10 +344,9 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         </p>
       </button>
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":ro:"
         role="menuitem"
         type="button"
@@ -380,21 +357,10 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
            project.download.button 
         </p>
       </button>
-      <div
-        aria-label="import-list"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":rq:"
         role="menuitem"
         type="button"
@@ -405,16 +371,6 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
            admin.global.delete 
         </p>
       </button>
-      <div
-        aria-label="delete-confirmation"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
     </div>
   </div>
 </DocumentFragment>
@@ -474,7 +430,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     aria-expanded="false"
     aria-haspopup="menu"
     aria-label="global.plus"
-    class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+    class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
     id=":r1a:"
     type="button"
   >
@@ -542,7 +498,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.plus
       </div>
@@ -554,7 +510,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     <div
       aria-labelledby=":r1a:"
       aria-orientation="vertical"
-      class="sc-bcXGCL bvFpIu cap-menu__list"
+      class="sc-bcXGCL cuJBJE cap-menu__list"
       data-dialog=""
       data-placing="true"
       hidden=""
@@ -564,7 +520,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       tabindex="0"
     >
       <button
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r1i:"
         role="menuitem"
         type="button"
@@ -576,10 +532,9 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         </p>
       </button>
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r1k:"
         role="menuitem"
         type="button"
@@ -590,16 +545,6 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
            admin.global.delete 
         </p>
       </button>
-      <div
-        aria-label="delete-confirmation"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
     </div>
   </div>
 </DocumentFragment>
@@ -643,7 +588,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     aria-expanded="false"
     aria-haspopup="menu"
     aria-label="global.plus"
-    class="sc-bcXGCL cxVtKf cap-buttonQuickAction cap-menu__disclosure"
+    class="sc-bcXGCL hFteaJ cap-buttonQuickAction cap-menu__disclosure"
     id=":rs:"
     type="button"
   >
@@ -711,7 +656,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         </svg>
       </div>
       <div
-        class="sc-bcXGCL bdghCN"
+        class="sc-bcXGCL cHeekz"
       >
         global.plus
       </div>
@@ -723,7 +668,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     <div
       aria-labelledby=":rs:"
       aria-orientation="vertical"
-      class="sc-bcXGCL bvFpIu cap-menu__list"
+      class="sc-bcXGCL cuJBJE cap-menu__list"
       data-dialog=""
       data-placing="true"
       hidden=""
@@ -733,7 +678,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       tabindex="0"
     >
       <button
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r14:"
         role="menuitem"
         type="button"
@@ -745,10 +690,9 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         </p>
       </button>
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r16:"
         role="menuitem"
         type="button"
@@ -759,21 +703,10 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
            project.download.button 
         </p>
       </button>
-      <div
-        aria-label="import-list"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
       <button
-        aria-controls="id-g"
         aria-expanded="false"
         aria-haspopup="dialog"
-        class="sc-bcXGCL iLHRqt cap-menu__item"
+        class="sc-bcXGCL cJXogn cap-menu__item"
         id=":r18:"
         role="menuitem"
         type="button"
@@ -784,16 +717,6 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
            admin.global.delete 
         </p>
       </button>
-      <div
-        aria-label="delete-confirmation"
-        aria-modal="true"
-        data-dialog="true"
-        hidden=""
-        id="id-g"
-        role="dialog"
-        style="display: none;"
-        tabindex="-1"
-      />
     </div>
   </div>
 </DocumentFragment>

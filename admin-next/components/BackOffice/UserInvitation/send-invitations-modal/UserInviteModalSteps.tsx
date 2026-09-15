@@ -15,8 +15,6 @@ const FRAGMENT = graphql`
 `
 
 export const UserInviteModalSteps = ({ query: queryFragment }): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isOpen, setIsOpen] = React.useState(false)
   const query = useFragment(FRAGMENT, queryFragment)
   const intl = useIntl()
 
@@ -43,7 +41,6 @@ export const UserInviteModalSteps = ({ query: queryFragment }): JSX.Element => {
     <FormProvider {...methods}>
       <MultiStepModal
         size={CapUIModalSize.Xl}
-        show={isOpen}
         onClose={() => reset()}
         ariaLabel={intl.formatMessage({ id: 'invite-users-button-body' })}
         disclosure={

@@ -8,7 +8,7 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
   <section
     aria-label="menu.news"
     aria-roledescription="global.scrolling-header"
-    class="sc-bcXGCL bGwxQV"
+    class="sc-bcXGCL jAkUvD"
     id="carrousel"
   >
     <div
@@ -57,12 +57,12 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
                 class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  class="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL izFnDQ cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  class="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL cbHLYs"
                 >
                   Lorem ipsum
                 </p>
@@ -114,12 +114,12 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
                 class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  class="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL izFnDQ cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  class="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL cbHLYs"
                 >
                   Lorem ipsum
                 </p>
@@ -170,12 +170,12 @@ exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
                 class="sc-bcXGCL keKWCf"
               >
                 <h3
-                  class="sc-bcXGCL dbjepS cap-heading"
+                  class="sc-bcXGCL izFnDQ cap-heading"
                 >
                   Item1
                 </h3>
                 <p
-                  class="sc-bcXGCL fEByha"
+                  class="sc-bcXGCL cbHLYs"
                 >
                   Lorem ipsum
                 </p>

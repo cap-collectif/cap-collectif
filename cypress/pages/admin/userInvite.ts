@@ -125,7 +125,7 @@ export default new (class UserInvitePage {
     return this.cy.get('div[title="global.expired.feminine"]')
   }
   addEmailToInvite() {
-    return this.cy.get('#inputEmails').click().type('future@admin.com')
+    return this.cy.get('#inputEmails').should('be.visible').type('future@admin.com')
   }
   selectAdminRole() {
     return this.cy.get('#role_choice-ROLE_ADMIN').check()

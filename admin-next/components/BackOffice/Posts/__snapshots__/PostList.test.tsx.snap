@@ -74,7 +74,7 @@ exports[`<PostList /> should render correctly 1`] = `
               aria-controls=":r1:"
               aria-expanded="false"
               aria-haspopup="menu"
-              class="sc-bcXGCL sc-gGvGpy iOwHYh dZaZxQ cap-button cap-menu__disclosure"
+              class="sc-bcXGCL sc-gGvGpy iOwHYh fhglki cap-button cap-menu__disclosure"
               id=":r0:"
               type="button"
             >
@@ -108,7 +108,7 @@ exports[`<PostList /> should render correctly 1`] = `
               <div
                 aria-labelledby=":r0:"
                 aria-orientation="vertical"
-                class="sc-bcXGCL bvFpIu cap-menu__list"
+                class="sc-bcXGCL cuJBJE cap-menu__list"
                 data-dialog=""
                 data-placing="true"
                 hidden=""
@@ -128,7 +128,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   </span>
                   <div
                     aria-checked="true"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":rp:"
                     role="menuitemradio"
                     tabindex="0"
@@ -166,7 +166,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   </div>
                   <div
                     aria-checked="false"
-                    class="sc-bcXGCL iLHRqt cap-menu__optionItem cap-menu__item cap-menu__optionItem"
+                    class="sc-bcXGCL cJXogn cap-menu__optionItem cap-menu__item cap-menu__optionItem"
                     id=":rr:"
                     role="menuitemradio"
                     tabindex="0"
@@ -211,7 +211,7 @@ exports[`<PostList /> should render correctly 1`] = `
         </tr>
       </thead>
       <tbody
-        class="sc-bcXGCL cqfhNk cap-table__tbody"
+        class="sc-bcXGCL cIPeia cap-table__tbody"
       >
         <tr
           class="sc-bcXGCL eozKTK cap-table__tr"
@@ -297,7 +297,7 @@ exports[`<PostList /> should render correctly 1`] = `
               <button
                 aria-describedby=":r4:"
                 aria-label="global.preview"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -371,19 +371,18 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.preview
                   </div>
                 </div>
               </div>
               <button
-                aria-controls="id-g"
                 aria-describedby=":r7:"
                 aria-expanded="false"
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                class="sc-bcXGCL dodkqw cap-buttonQuickAction"
                 type="button"
               >
                 <svg
@@ -451,22 +450,12 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     admin.global.delete
                   </div>
                 </div>
               </div>
-              <div
-                aria-label="delete-confirmation"
-                aria-modal="true"
-                data-dialog="true"
-                hidden=""
-                id="id-g"
-                role="dialog"
-                style="display: none;"
-                tabindex="-1"
-              />
             </div>
           </td>
         </tr>
@@ -554,7 +543,7 @@ exports[`<PostList /> should render correctly 1`] = `
               <button
                 aria-describedby=":ra:"
                 aria-label="global.preview"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -628,19 +617,18 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.preview
                   </div>
                 </div>
               </div>
               <button
-                aria-controls="id-g"
                 aria-describedby=":rd:"
                 aria-expanded="false"
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                class="sc-bcXGCL dodkqw cap-buttonQuickAction"
                 type="button"
               >
                 <svg
@@ -708,22 +696,12 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     admin.global.delete
                   </div>
                 </div>
               </div>
-              <div
-                aria-label="delete-confirmation"
-                aria-modal="true"
-                data-dialog="true"
-                hidden=""
-                id="id-g"
-                role="dialog"
-                style="display: none;"
-                tabindex="-1"
-              />
             </div>
           </td>
         </tr>
@@ -846,7 +824,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   </svg>
                 </div>
                 <div
-                  class="sc-bcXGCL bdghCN"
+                  class="sc-bcXGCL cHeekz"
                 >
                   05/11/2070
                 </div>
@@ -869,7 +847,7 @@ exports[`<PostList /> should render correctly 1`] = `
               <button
                 aria-describedby=":rj:"
                 aria-label="global.preview"
-                class="sc-bcXGCL cxVtKf cap-buttonQuickAction"
+                class="sc-bcXGCL hFteaJ cap-buttonQuickAction"
               >
                 <svg
                   aria-hidden="true"
@@ -943,19 +921,18 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     global.preview
                   </div>
                 </div>
               </div>
               <button
-                aria-controls="id-g"
                 aria-describedby=":rm:"
                 aria-expanded="false"
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+                class="sc-bcXGCL dodkqw cap-buttonQuickAction"
                 type="button"
               >
                 <svg
@@ -1023,22 +1000,12 @@ exports[`<PostList /> should render correctly 1`] = `
                     </svg>
                   </div>
                   <div
-                    class="sc-bcXGCL bdghCN"
+                    class="sc-bcXGCL cHeekz"
                   >
                     admin.global.delete
                   </div>
                 </div>
               </div>
-              <div
-                aria-label="delete-confirmation"
-                aria-modal="true"
-                data-dialog="true"
-                hidden=""
-                id="id-g"
-                role="dialog"
-                style="display: none;"
-                tabindex="-1"
-              />
             </div>
           </td>
         </tr>

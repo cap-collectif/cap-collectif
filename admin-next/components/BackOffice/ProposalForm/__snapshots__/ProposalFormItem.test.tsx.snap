@@ -18,7 +18,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     <button
       aria-describedby=":r8:"
       aria-label="duplicate"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction btn-duplicate"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction btn-duplicate"
       style="margin-left: 0px; margin-top: 0px;"
     >
       <svg
@@ -90,7 +90,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           duplicate
         </div>
@@ -118,7 +118,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     <button
       aria-describedby=":r0:"
       aria-label="duplicate"
-      class="sc-bcXGCL cxVtKf cap-buttonQuickAction btn-duplicate"
+      class="sc-bcXGCL hFteaJ cap-buttonQuickAction btn-duplicate"
       style="margin-left: 0px; margin-top: 0px;"
     >
       <svg
@@ -190,19 +190,18 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           duplicate
         </div>
       </div>
     </div>
     <button
-      aria-controls="id-g"
       aria-describedby=":r3:"
       aria-expanded="false"
       aria-haspopup="dialog"
       aria-label="global.delete"
-      class="sc-bcXGCL iDqdWa cap-buttonQuickAction"
+      class="sc-bcXGCL dodkqw cap-buttonQuickAction"
       type="button"
     >
       <svg
@@ -270,22 +269,12 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
           </svg>
         </div>
         <div
-          class="sc-bcXGCL bdghCN"
+          class="sc-bcXGCL cHeekz"
         >
           global.delete
         </div>
       </div>
     </div>
-    <div
-      aria-label="delete-confirmation"
-      aria-modal="true"
-      data-dialog="true"
-      hidden=""
-      id="id-g"
-      role="dialog"
-      style="display: none;"
-      tabindex="-1"
-    />
   </div>
 </DocumentFragment>
 `;
