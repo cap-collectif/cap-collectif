@@ -220,6 +220,9 @@ Object {
       "type": "unstable__new_create_project",
     },
     Object {
+      "type": "unstable__sonata_migration_to_admin_next",
+    },
+    Object {
       "type": "new_vote_step",
     },
     Object {

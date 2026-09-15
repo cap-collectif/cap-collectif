@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|notificationSettings returns the notification settings as super-admin 1`] = `
+Object {
+  "notificationSettings": Array [
+    Object {
+      "isEnabled": true,
+      "keyname": "admin.mail.notifications.receive_address",
+      "value": "dev@cap-collectif.com",
+    },
+    Object {
+      "isEnabled": true,
+      "keyname": "admin.mail.notifications.send_name",
+      "value": "Cap Collectif",
+    },
+    Object {
+      "isEnabled": true,
+      "keyname": "admin.mail.notifications.send_address",
+      "value": "assistance@cap-collectif.com",
+    },
+  ],
+}
+`;

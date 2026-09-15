@@ -72,6 +72,7 @@ export const features: FeatureFlags = {
   helpscout_beacon: false,
   moderation_comment: false,
   unstable__new_create_project: false,
+  unstable__sonata_migration_to_admin_next: false,
   organizations: false,
   import_proposals: false,
   analytics_page: false,

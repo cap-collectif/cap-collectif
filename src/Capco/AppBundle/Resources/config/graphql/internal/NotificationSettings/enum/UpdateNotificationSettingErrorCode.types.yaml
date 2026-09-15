@@ -1,0 +1,12 @@
+UpdateNotificationSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateNotificationSettingErrorCode
+        description: 'Available errors for an `updateNotificationSetting` mutation.'
+        values:
+            SITE_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\NotificationSettings\UpdateNotificationSettingMutation::SITE_PARAMETER_NOT_FOUND
+                description: 'No SiteParameter of the `settings.notifications` category was found for the given id.'
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\NotificationSettings\UpdateNotificationSettingMutation::INVALID_VALUE
+                description: 'The value is invalid for the SiteParameter type.'

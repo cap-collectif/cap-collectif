@@ -463,6 +463,11 @@ InternalQuery:
                         description: 'keyname of the site parameter to get'
                 type: 'SiteParameter'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", args)'
+            notificationSettings:
+                description: 'get all site parameters of the settings.notifications category'
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[SiteParameter!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NotificationSettings\\NotificationSettingsQueryResolver")'
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'

@@ -1,0 +1,14 @@
+UpdateNotificationSettingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateNotificationSetting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the SiteParameter to update.'
+            value:
+                type: 'String!'
+                description: 'The new value of the SiteParameter.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the SiteParameter is enabled.'

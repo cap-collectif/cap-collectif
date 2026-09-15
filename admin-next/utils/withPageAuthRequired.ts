@@ -190,3 +190,18 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
 }
 
 export default withPageAuthRequired
+
+export const withFeatureFlagRequired = (
+  featureFlag: keyof PageProps['featureFlags'],
+  redirectTo: string,
+): GetServerSideProps => {
+  return async context => {
+    const result = await withPageAuthRequired(context)
+
+    if ('props' in result && 'featureFlags' in result.props && !result.props.featureFlags[featureFlag]) {
+      return { redirect: { destination: redirectTo, permanent: false } }
+    }
+
+    return result
+  }
+}

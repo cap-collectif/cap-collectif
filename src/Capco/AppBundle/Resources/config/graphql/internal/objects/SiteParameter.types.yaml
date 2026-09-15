@@ -9,6 +9,8 @@ SiteParameter:
                 type: 'String!'
             isTranslatable:
                 type: 'Boolean'
+            isEnabled:
+                type: 'Boolean!'
             translations:
                 type: '[SiteParameterTranslation]'
             value:

@@ -7554,6 +7554,9 @@ enum FeatureFlagType {
   """Whether or not project create rework is enabled"""
   unstable__new_create_project
 
+  """Whether or not Sonata migrations use Admin Next pages"""
+  unstable__sonata_migration_to_admin_next
+
   """Whether or not new voting step is enabled"""
   new_vote_step
 
@@ -9812,6 +9815,9 @@ type Mutation {
 
   """update a SiteParameter."""
   updateSiteParameter(input: UpdateSiteParameterInput!): UpdateSiteParameterPayload
+
+  """update a SiteParameter of the settings.notifications category."""
+  updateNotificationSetting(input: UpdateNotificationSettingInput!): UpdateNotificationSettingPayload
 
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
@@ -15065,6 +15071,9 @@ type Query {
     keyname: String!
   ): SiteParameter
 
+  """get all site parameters of the settings.notifications category"""
+  notificationSettings: [SiteParameter!]!
+
   """get consultations without step"""
   availableConsultations(
     """Retrieve consultation where title match term param."""
@@ -18345,6 +18354,7 @@ type SiteParameter {
   id: ID!
   keyname: String!
   isTranslatable: Boolean
+  isEnabled: Boolean!
   translations: [SiteParameterTranslation]
   value: String
 }
@@ -20488,6 +20498,38 @@ input UpdateNewsProjectTabInput {
   title: String!
   enabled: Boolean!
   newsItems: [ProjectTabNewsItemInput!]
+  clientMutationId: String
+}
+
+"""Available errors for an `updateNotificationSetting` mutation."""
+enum UpdateNotificationSettingErrorCode {
+  """
+  No SiteParameter of the `settings.notifications` category was found for the given id.
+  """
+  SITE_PARAMETER_NOT_FOUND
+
+  """The value is invalid for the SiteParameter type."""
+  INVALID_VALUE
+}
+
+input UpdateNotificationSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """The new value of the SiteParameter."""
+  value: String!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateNotificationSettingPayload {
+  """The updated SiteParameter."""
+  siteParameter: SiteParameter
+
+  """The available errors if any."""
+  errorCode: UpdateNotificationSettingErrorCode
   clientMutationId: String
 }
 

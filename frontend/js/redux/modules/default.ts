@@ -101,6 +101,7 @@ export const features: FeatureToggles = {
   helpscout_beacon: false,
   organizations: false,
   moderation_comment: false,
+  unstable__sonata_migration_to_admin_next: false,
   online_help: false,
   // @ts-ignore
   multi_consultations: false,

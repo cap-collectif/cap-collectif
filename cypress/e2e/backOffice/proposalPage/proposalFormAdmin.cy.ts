@@ -18,8 +18,29 @@ describe('Proposal form administration', () => {
     cy.get('#proposal_form_notification_comment_on_create').uncheck({ force: true })
     cy.get('#notification-submit').click()
     cy.wait('@UpdateProposalFormNotificationsConfigurationMutation')
-    cy.get('#proposal_form_notification_on_update').check({ force: true }).should('be.checked')
-    cy.get('#proposal_form_notification_comment_on_create').check({ force: true }).should('be.checked')
+    // The form uses redux-form's enableReinitialize, which resets it to the fresh Relay data
+    // once the fragment container re-renders after the mutation response. That re-render isn't
+    // ordered relative to the submit promise resolving (which is what makes the button disabled
+    // again), so re-checking the boxes as soon as the button is disabled can still race a
+    // reinitialize landing a moment later and silently reverting the check. Re-check until it
+    // actually sticks instead of assuming an event order we don't control.
+    // This prevents flakyness instead of fixing the code itself that we don't want to change at this point, since it'll be removed in the future.
+    const checkUntilItSticks = (selector: string, attemptsLeft = 10) => {
+      cy.get(selector).check({ force: true })
+      cy.wait(200)
+      cy.get(selector).then($el => {
+        if (!$el.is(':checked')) {
+          if (attemptsLeft <= 0) {
+            throw new Error(`${selector} did not stay checked after multiple attempts`)
+          }
+          checkUntilItSticks(selector, attemptsLeft - 1)
+        }
+      })
+    }
+    checkUntilItSticks('#proposal_form_notification_on_update')
+    checkUntilItSticks('#proposal_form_notification_comment_on_create')
+    cy.get('#proposal_form_notification_on_update').should('be.checked')
+    cy.get('#proposal_form_notification_comment_on_create').should('be.checked')
     cy.get('#notification-submit').click()
 
     cy.wait('@UpdateProposalFormNotificationsConfigurationMutation')

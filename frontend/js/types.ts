@@ -105,6 +105,7 @@ export type FeatureToggles = {
   helpscout_beacon: boolean | null | undefined
   organizations: boolean | null | undefined
   moderation_comment: boolean | null | undefined
+  unstable__sonata_migration_to_admin_next: boolean | null | undefined
   online_help: boolean | null | undefined
   full_proposal_card: boolean | null | undefined
   mailjet_sandbox: boolean | null | undefined

@@ -84,6 +84,7 @@ class Manager
     final public const organizations = 'organizations';
     final public const moderation_comment = 'moderation_comment';
     final public const unstable__new_create_project = 'unstable__new_create_project';
+    final public const unstable__sonata_migration_to_admin_next = 'unstable__sonata_migration_to_admin_next';
     final public const new_vote_step = 'new_vote_step';
     final public const new_new_vote_step = 'new_new_vote_step';
     final public const mediator = 'mediator';
@@ -147,6 +148,7 @@ class Manager
         self::new_project_page,
         self::hub_api_green,
         self::captchetat,
+        self::unstable__sonata_migration_to_admin_next,
     ];
 
     public static $toggles = [
@@ -222,6 +224,7 @@ class Manager
         self::organizations,
         self::moderation_comment,
         self::unstable__new_create_project,
+        self::unstable__sonata_migration_to_admin_next,
         self::new_vote_step,
         self::new_new_vote_step,
         self::mediator,

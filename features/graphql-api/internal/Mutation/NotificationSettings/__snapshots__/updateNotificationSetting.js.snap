@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updateNotificationSetting returns INVALID_VALUE for an invalid email 1`] = `
+Object {
+  "updateNotificationSetting": Object {
+    "errorCode": "INVALID_VALUE",
+    "siteParameter": null,
+  },
+}
+`;
+
+exports[`Internal|updateNotificationSetting updates the value and isEnabled as super-admin 1`] = `
+Object {
+  "updateNotificationSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": false,
+      "keyname": "admin.mail.notifications.receive_address",
+      "value": "notifications@example.com",
+    },
+  },
+}
+`;

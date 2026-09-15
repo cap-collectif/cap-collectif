@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
 /**
- * @method null|SiteParameter findOneBy(array $criteria, array $orderBy = null)
+ * @method null|SiteParameter findOneBy(array<mixed> $criteria, array<null|string> $orderBy = null)
+ * @method SiteParameter[]    findBy(array<mixed> $criteria, array<null|string> $orderBy = null, $limit = null, $offset = null)
  */
 class SiteParameterRepository extends EntityRepository
 {

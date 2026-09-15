@@ -2,6 +2,10 @@ import sideBarItems from './SideBarItems.json'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { FeatureFlags } from 'types'
 
+const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
+  '/admin-next/notification-settings': '/admin/settings/settings.notifications/list',
+}
+
 export const getSideBarItemsFiltered = (
   isAdmin: boolean,
   isSuperAdmin: boolean,
@@ -10,7 +14,18 @@ export const getSideBarItemsFiltered = (
   organization: string | null,
   isOrganizationMember: boolean,
 ): typeof sideBarItems => {
-  return sideBarItems.reduce<typeof sideBarItems>((acc, sideBarItem) => {
+  const items = sideBarItems.map(sideBarItem => ({
+    ...sideBarItem,
+    items: sideBarItem.items.map(item => {
+      const sonataUrl = SONATA_URL_BY_ADMIN_NEXT_URL[item.href]
+
+      return sonataUrl && !allFeatureFlags.unstable__sonata_migration_to_admin_next
+        ? { ...item, href: sonataUrl }
+        : item
+    }),
+  }))
+
+  return items.reduce<typeof sideBarItems>((acc, sideBarItem) => {
     const isItemForAdminOnly = (sideBarItem.rolesRequired as string[]).includes('admin') && isAdmin
     const isItemForSuperAdminOnly = (sideBarItem.rolesRequired as string[]).includes('superAdmin') && isSuperAdmin
     const isItemForAll = sideBarItem.rolesRequired.length === 0
@@ -38,10 +53,15 @@ export const getSideBarItemsFiltered = (
         const hasSubItemsFeatureRequired = (subItem.featuresRequired as FeatureFlagType[]).every(
           featureRequired => allFeatureFlags[featureRequired],
         )
+        const isNotificationSettingsHidden =
+          subItem.title === 'admin.label.settings.notifications' &&
+          allFeatureFlags.emailing &&
+          allFeatureFlags.emailing_parameters
 
         if (
           (isSubItemForAdminOnly || isSubItemForSuperAdminOnly || isSubItemForAll) &&
-          hasSubItemsFeatureRequired
+          hasSubItemsFeatureRequired &&
+          !isNotificationSettingsHidden
         )
           return subItem
       })
@@ -51,14 +71,22 @@ export const getSideBarItemsFiltered = (
     if (isItemForSuperAdminOnly && hasItemFeatureRequired) {
       // Filtering sub items of a menu here
       sideBarItem.items = sideBarItem.items.filter(subItem => {
-        const isSubItemForSuperAdminOnly =
-          (subItem.rolesRequired as string[]).includes('superAdmin') && isSuperAdmin
+        const isSubItemForSuperAdminOnly = (subItem.rolesRequired as string[]).includes('superAdmin') && isSuperAdmin
         const isSubItemForAll = subItem.rolesRequired.length === 0
         const hasSubItemsFeatureRequired = (subItem.featuresRequired as FeatureFlagType[]).every(
           featureRequired => allFeatureFlags[featureRequired],
         )
+        const isNotificationSettingsHidden =
+          subItem.title === 'admin.label.settings.notifications' &&
+          allFeatureFlags.emailing &&
+          allFeatureFlags.emailing_parameters
 
-        if ((isSubItemForSuperAdminOnly || isSubItemForAll) && hasSubItemsFeatureRequired) return subItem
+        if (
+          (isSubItemForSuperAdminOnly || isSubItemForAll) &&
+          hasSubItemsFeatureRequired &&
+          !isNotificationSettingsHidden
+        )
+          return subItem
       })
 
       acc.push(sideBarItem)

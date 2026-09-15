@@ -252,7 +252,7 @@
             },
             {
                 "title": "admin.label.settings.notifications",
-                "href": "/admin/settings/settings.notifications/list",
+                "href": "/admin-next/notification-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

@@ -1,0 +1,11 @@
+UpdateNotificationSettingPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of updateNotificationSetting mutation.'
+        fields:
+            siteParameter:
+                type: 'SiteParameter'
+                description: 'The updated SiteParameter.'
+            errorCode:
+                type: 'UpdateNotificationSettingErrorCode'
+                description: 'The available errors if any.'

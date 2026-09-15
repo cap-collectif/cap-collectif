@@ -96,6 +96,11 @@
                         "description": "",
                         "onlySuperAdmin": true
                     },
+                    "unstable__sonata_migration_to_admin_next": {
+                        "title": "Sonata to Admin Next migration",
+                        "description": "",
+                        "onlySuperAdmin": true
+                    },
                     "new_project_page": {
                         "title": "New project page",
                         "description": "",
