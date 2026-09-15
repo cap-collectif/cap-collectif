@@ -10,6 +10,6 @@ final class InternalGraphQLApiKeyRequestMatcher implements RequestMatcherInterfa
     public function matches(Request $request): bool
     {
         return '/graphql/internal' === $request->getPathInfo()
-            && $request->headers->has('Authorization');
+            && 0 === stripos((string) $request->headers->get('Authorization', ''), 'Bearer ');
     }
 }
