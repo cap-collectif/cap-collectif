@@ -14,14 +14,7 @@ describe('Notification settings back office', () => {
     cy.contains('unauthorized-access').should('be.visible')
   })
 
-  it('redirects admins to Sonata while the migration is disabled', () => {
-    cy.directLoginAs('admin')
-    visitNotificationSettingsPage()
-    cy.url().should('contain', '/admin/settings/settings.notifications/list')
-  })
-
   it('edits a notification setting as admin', () => {
-    cy.task('enable:feature', 'unstable__sonata_migration_to_admin_next')
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'NotificationSettingsListQuery' })
     visitNotificationSettingsPage()

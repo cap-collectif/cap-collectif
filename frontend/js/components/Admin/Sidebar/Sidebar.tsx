@@ -244,14 +244,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   ) : null}
                   <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />
                   {(!features.emailing || (features.emailing && !features.emailing_parameters)) && (
-                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
                     <SidebarLink
                       text="admin.label.settings.notifications"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/notification-settings'
-                          : '/admin/settings/settings.notifications/list'
-                      }
+                      href="/admin-next/notification-settings"
                     />
                   )}
                   <SidebarLink text="admin.label.settings.appearance" href="/admin/settings/settings.appearance/list" />

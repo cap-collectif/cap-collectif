@@ -81,7 +81,6 @@ class FeaturesCategoryResolver
                 ],
             ],
         ],
-        'settings.notifications' => ['conditions' => [], 'features' => []],
         'settings.appearance' => ['conditions' => [], 'features' => []],
     ];
 

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
 import NotificationSettingsList from '@components/BackOffice/NotificationSettings/NotificationSettingsList'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 
 const NotificationSettings: React.FC = () => {
   const intl = useIntl()
@@ -24,9 +24,6 @@ const NotificationSettings: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/settings/settings.notifications/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default NotificationSettings

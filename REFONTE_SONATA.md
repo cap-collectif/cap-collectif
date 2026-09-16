@@ -92,6 +92,9 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
    - utiliser le même feature flag pour toutes les pages déjà migrées, afin d'activer progressivement la
      refonte sans multiplier les règles d'accès temporaires. Les pages non encore migrées restent naturellement
      sur Sonata.
+   - lorsqu'une page sort définitivement du rollout, faire une PR de nettoyage dédiée : rendre son URL Admin
+     Next permanente et supprimer ses références Sonata. Conserver le feature flag global et son mécanisme pour
+     les autres pages encore en rollout.
 9. **Maintenir les références de menu dans les deux interfaces** : il existe DEUX menus latéraux distincts,
    plus d'éventuelles autres références à traquer au cas par cas :
    - `admin-next/components/BackOffice/SideBar/SideBarItems.json` : menu latéral utilisé par les pages
@@ -163,11 +166,11 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
 14. **Ne pas supprimer le code Sonata dans la PR de migration.** Il doit rester disponible tant que le
     feature flag de migration permet de revenir à la route historique. Le nettoyage des contrôleurs, templates,
     entrées de menu et URLs Sonata intervient dans une PR dédiée, une fois la refonte généralisée et le feature
-    flag supprimé.
+    flag supprimé pour cette page.
     - **Cas des pages `/admin/settings/{category}/list`** (`SettingsController.php`, `SiteParameterAdmin.php`,
       `Settings/list.html.twig`, tous dans `src/Capco/AdminBundle/`) : ce contrôleur/template est **générique**,
       partagé par plusieurs catégories (`settings.global`, `settings.performance`, `settings.modules`,
-      `settings.appearance`, `settings.notifications`, `pages.*`...) via un paramètre de route `{category}`. Ne
+      `settings.appearance`, `pages.*`...) via un paramètre de route `{category}`. Ne
       **jamais** le supprimer tant que toutes ces catégories n'ont pas été migrées — seule la migration de la
       **dernière** catégorie restante permettra de le supprimer entièrement. Lors du nettoyage final, retirer
       l'entrée de chaque catégorie devenue inutile dans la whitelist

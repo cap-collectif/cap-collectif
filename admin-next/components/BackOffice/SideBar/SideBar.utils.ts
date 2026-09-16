@@ -2,9 +2,7 @@ import sideBarItems from './SideBarItems.json'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { FeatureFlags } from 'types'
 
-const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
-  '/admin-next/notification-settings': '/admin/settings/settings.notifications/list',
-}
+const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {}
 
 export const getSideBarItemsFiltered = (
   isAdmin: boolean,
