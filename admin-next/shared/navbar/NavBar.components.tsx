@@ -257,6 +257,12 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
       py={2}
       borderTop={`1px solid ${colors['neutral-gray']['150']}`}
       bg="white"
+      sx={{
+        a: {
+          '&:focus': { outline: 'none' },
+          '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        },
+      }}
     >
       {isMobile ? (
         <Flex alignItems="center" mr={1} fontSize={CapUIFontSize.BodySmall} px={4}>

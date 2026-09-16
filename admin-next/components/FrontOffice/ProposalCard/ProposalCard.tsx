@@ -1,30 +1,30 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
 import {
   BoxProps,
-  Card,
   CapUIIcon,
+  CapUIShadow,
+  Card,
+  CardContent,
+  CardCover,
   CardCoverImage,
   CardCoverPlaceholder,
-  CardCover,
-  CardContent,
   CardProps,
-  CapUIShadow,
-  CardTagList,
   CardStatusTag,
   CardTagLabel,
+  CardTagList,
   Flex,
   Icon,
-  Text,
   Tag,
+  Text,
 } from '@cap-collectif/ui'
-import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
-import stripHTML from '@shared/utils/stripHTML'
-import convertIconToDs from '@shared/utils/convertIconToDs'
-import { parseAsInteger, useQueryState } from 'nuqs'
-import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
 import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
+import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
+import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
+import convertIconToDs from '@shared/utils/convertIconToDs'
+import stripHTML from '@shared/utils/stripHTML'
 import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import * as React from 'react'
+import { graphql, useFragment } from 'react-relay'
 
 type Props = BoxProps & {
   proposal: ProposalCard_proposal$key
@@ -135,8 +135,8 @@ export const ProposalCard: React.FC<Props> = ({
     step.__typename === 'CollectStep'
       ? step.mainView
       : step.__typename === 'SelectionStep'
-        ? step.project?.firstCollectStep?.mainView
-        : undefined
+      ? step.project?.firstCollectStep?.mainView
+      : undefined
   const defaultView = mainView === 'LIST' ? 'list' : 'grid'
   const [listView] = useQueryState('list_view', { defaultValue: defaultView })
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
@@ -188,6 +188,12 @@ export const ProposalCard: React.FC<Props> = ({
               display: '-webkit-box',
               WebkitLineClamp: descriptionLineClamp,
               WebkitBoxOrient: 'vertical',
+            },
+            '& .cap-card-link:focus': { outline: 'none' },
+            '& .cap-card-link:focus-visible': {
+              outline: '2px solid',
+              outlineColor: 'primary.base',
+              borderRadius: '2px',
             },
           } as any
         }

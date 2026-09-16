@@ -72,7 +72,19 @@ export const ProjectEventPreview = ({ event, vertical }: Props) => {
             </CardStatusTag>
           )}
         </CardCover>
-        <CardContent primaryInfo={title ?? ''} href={url ?? undefined} secondaryInfo={dateLabel ?? undefined}>
+        <CardContent
+          primaryInfo={title ?? ''}
+          href={url ?? undefined}
+          secondaryInfo={dateLabel ?? undefined}
+          sx={{
+            '& .cap-card-link:focus': { outline: 'none' },
+            '& .cap-card-link:focus-visible': {
+              outline: '2px solid',
+              outlineColor: 'primary.base',
+              borderRadius: '2px',
+            },
+          }}
+        >
           <CardTagList>
             {googleMapsAddress && (
               <CardTag>

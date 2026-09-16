@@ -18,9 +18,9 @@ import { LOCALE_COOKIE } from '@shared/utils/cookies'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { CookieClient } from '@shared/utils/universalCookies'
 import { Cookies } from 'next-client-cookies'
+import { usePathname } from 'next/navigation'
 import React, { FC, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
-import { usePathname } from 'next/navigation'
 import { FooterBrand } from './FooterBrand'
 
 const getIconName = (item: string): string => {
@@ -59,8 +59,7 @@ export const Footer: FC<Props> = props => {
   const { socialNetworks, links, legalPath, legals, cookiesPath, privacyPath } = footer
   const pathname = usePathname()
 
-  const normalizeLocale = (locale?: string | null): string =>
-    (locale || '').replace(/_/g, '-').toLowerCase()
+  const normalizeLocale = (locale?: string | null): string => (locale || '').replace(/_/g, '-').toLowerCase()
   const getLocalePrefix = (localeCode: string): string => normalizeLocale(localeCode).split('-')[0] || ''
 
   const pathPrefix = pathname?.split('/').filter(Boolean)[0]?.toLowerCase() ?? ''
@@ -120,7 +119,15 @@ export const Footer: FC<Props> = props => {
                           as="a"
                           color={footer.textColor}
                           fontSize={CapUIFontSize.BodyRegular}
-                          sx={{ textDecoration: 'underline' }}
+                          sx={{
+                            textDecoration: 'underline',
+                            '&:focus': { outline: 'none' },
+                            '&:focus-visible': {
+                              outline: '2px solid',
+                              outlineColor: 'primary.base',
+                              borderRadius: '2px',
+                            },
+                          }}
                           href={socialNetwork.link}
                         >
                           <span>{`${socialNetwork.title}`}</span>
@@ -151,7 +158,14 @@ export const Footer: FC<Props> = props => {
             gridRowGap="xs"
             gridColumnGap="md"
             gridTemplateColumns="repeat(auto-fit, minmax(150px, auto))"
-            sx={{ listStyle: 'none', a: { color: footer.textColor } }}
+            sx={{
+              listStyle: 'none',
+              a: {
+                color: footer.textColor,
+                '&:focus': { outline: 'none' },
+                '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+              },
+            }}
           >
             {legals.cookies && (
               <li>

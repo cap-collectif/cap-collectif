@@ -1,13 +1,13 @@
-import * as React from 'react'
 import { Box, Button, Flex, useTheme } from '@cap-collectif/ui'
-import { NavBarLink, NavBarMenu, NavBarSkipLinks, NavBarBreadCrumb, NavBarLogo } from './NavBar.components'
-import { LinkProps, useNavBarContext } from './NavBar.context'
 import useShowMore from '@shared/hooks/useShowMore'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
+import * as React from 'react'
+import { NavBarBreadCrumb, NavBarLink, NavBarLogo, NavBarMenu, NavBarSkipLinks } from './NavBar.components'
+import { LinkProps, useNavBarContext } from './NavBar.context'
 
+import { pxToRem } from '@shared/utils/pxToRem'
 import { useIntl } from 'react-intl'
 import { NavBarTheme } from './NavBar.utils'
-import { pxToRem } from '@shared/utils/pxToRem'
 
 type LinkOrMenu = LinkProps & { children?: readonly LinkProps[] }
 const navBarZIndex = 1040
@@ -59,6 +59,12 @@ const NavBarContent = ({
       flexWrap="wrap"
       width="100%"
       direction={['column', 'column', 'row']}
+      sx={{
+        a: {
+          '&:focus': { outline: 'none' },
+          '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        },
+      }}
     >
       {links.map((link, index) => {
         const showBorder = isMobile && index < links.length - 1

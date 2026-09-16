@@ -69,7 +69,15 @@ const PostCard: React.FC<{ post: PostNode }> = ({ post }) => {
           <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" />
         )}
       </CardCover>
-      <CardContent primaryInfo={post.title ?? ''} href={post.url} secondaryInfo={post.abstract}>
+      <CardContent
+        primaryInfo={post.title ?? ''}
+        href={post.url}
+        secondaryInfo={post.abstract}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
+      >
         <CardTagList>
           {date && (
             <CardTag>

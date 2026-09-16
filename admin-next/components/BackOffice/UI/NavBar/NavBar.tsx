@@ -2,10 +2,10 @@ import cn from 'classnames'
 import * as React from 'react'
 
 import { Flex, FlexProps } from '@cap-collectif/ui'
-import NavBarItem from './item/NavBarItem'
-import NavBarTitle from './title/NavBarTitle'
-import NavBarList from './list/NavBarList'
 import NavBarData from './data/NavBarData'
+import NavBarItem from './item/NavBarItem'
+import NavBarList from './list/NavBarList'
+import NavBarTitle from './title/NavBarTitle'
 
 export interface NavBarProps extends FlexProps {}
 
@@ -29,6 +29,12 @@ export const NavBar: React.FC<NavBarProps> & SubComponents = ({ children, classN
     className={cn('navBar', className)}
     borderBottom="normal"
     borderColor="gray.150"
+    sx={{
+      a: {
+        '&:focus': { outline: 'none' },
+        '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+      },
+    }}
     {...props}
   >
     {children}

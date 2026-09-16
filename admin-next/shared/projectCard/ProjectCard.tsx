@@ -1,21 +1,21 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
-import type { ProjectCardshared_project$key } from '@relay/ProjectCardshared_project.graphql'
-import { formatCounter, renderTag } from './ProjectCard.utils'
 import {
   BoxProps,
-  Card,
   CapUIIcon,
+  Card,
+  CardContent,
+  CardCover,
   CardCoverImage,
   CardCoverPlaceholder,
-  CardCover,
-  CardContent,
-  CardTagList,
   CardProps,
+  CardTagList,
 } from '@cap-collectif/ui'
-import htmlDecode from '@shared/utils/htmlDecode'
+import type { ProjectCardshared_project$key } from '@relay/ProjectCardshared_project.graphql'
 import { getSrcSet } from '@shared/ui/Image'
+import htmlDecode from '@shared/utils/htmlDecode'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import { formatCounter, renderTag } from './ProjectCard.utils'
 
 type Props = BoxProps & {
   project: ProjectCardshared_project$key
@@ -108,6 +108,10 @@ export const ProjectCard = ({ project: projectKey, primaryInfoTag, ...props }: P
         primaryInfo={htmlDecode(project.title)}
         href={project.externalLink || project.url}
         primaryInfoTag={primaryInfoTag}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
       >
         {showCounters ? (
           <CardTagList>

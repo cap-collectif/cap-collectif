@@ -50,7 +50,18 @@ const MobileProposalCard: FC<Props> = ({ proposal: proposalKey, onClose }) => {
             />
           )}
         </CardCover>
-        <CardContent primaryInfo={proposal.title} href={proposal.url} />
+        <CardContent
+          primaryInfo={proposal.title}
+          href={proposal.url}
+          sx={{
+            '& .cap-card-link:focus': { outline: 'none' },
+            '& .cap-card-link:focus-visible': {
+              outline: '2px solid',
+              outlineColor: 'primary.base',
+              borderRadius: '2px',
+            },
+          }}
+        />
       </Card>
     </Box>
   )

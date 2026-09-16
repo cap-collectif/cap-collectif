@@ -75,6 +75,10 @@ export const PostCard: React.FC<Props> = ({ post: postKey, primaryInfoTag, hideD
         href={url}
         primaryInfoTag={primaryInfoTag}
         secondaryInfo={hideDescription ? null : stripHTML(description)}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
       >
         {!isMobile || props.format === 'vertical' ? (
           <CardTagList>

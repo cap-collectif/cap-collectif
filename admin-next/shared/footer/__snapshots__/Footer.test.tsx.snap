@@ -47,7 +47,7 @@ exports[`<Footer /> renders correctly 1`] = `
                     class="sc-bcXGCL sc-oZHua gzkypG fzfEdP cap-icon"
                   />
                   <a
-                    class="sc-bcXGCL kdvVRu"
+                    class="sc-bcXGCL fdFCUg"
                     href="x.com/cap-collectif"
                   >
                     <span>
@@ -177,7 +177,7 @@ exports[`<Footer /> renders correctly 1`] = `
           other-links
         </h4>
         <ul
-          class="sc-bcXGCL VgrUx footer-links"
+          class="sc-bcXGCL jmOuWb footer-links"
         >
           <li>
             <a

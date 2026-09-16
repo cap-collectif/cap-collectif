@@ -37,7 +37,14 @@ export const EventCard: React.FC<BoxProps & { event: EventCard_event$key }> = ({
           </Flex>
         </Box>
       </CardCover>
-      <CardContent primaryInfo={event.title} href={event.url} />
+      <CardContent
+        primaryInfo={event.title}
+        href={event.url}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
+      />
     </Card>
   )
 }

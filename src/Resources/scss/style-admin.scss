@@ -91,3 +91,5 @@ body {
 // #endregion -- this styles need to be in sync with Jodit.tsx Box styles
 
 .cap-link:before { display:none; }
+.cap-link:focus { outline: none; }
+.cap-link:focus-visible { outline: 2px solid $dark; }

@@ -5,6 +5,12 @@
     >li {
         display: flex;
     }
+    a:focus {
+        outline: none;
+    }
+    a:focus-visible {
+        outline: 2px solid $dark;
+    }
 }
 
 .proposal__step-page .PrivateList {

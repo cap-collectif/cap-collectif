@@ -74,7 +74,14 @@ const ItemCardCompact: React.FC<{ item: CompactItem }> = ({ item }) => (
         <CardCoverPlaceholder icon={CapUIIcon.FileO} color="primary.base" />
       )}
     </CardCover>
-    <CardContent primaryInfo={item.title} href={item.url} />
+    <CardContent
+      primaryInfo={item.title}
+      href={item.url}
+      sx={{
+        '& .cap-card-link:focus': { outline: 'none' },
+        '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+      }}
+    />
   </Card>
 )
 

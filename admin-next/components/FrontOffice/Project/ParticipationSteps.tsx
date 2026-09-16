@@ -175,6 +175,12 @@ const ParticipationSteps: React.FC<Props> = ({ project: projectKey }) => {
                             WebkitLineClamp: 5,
                             WebkitBoxOrient: 'vertical',
                           },
+                          '& .cap-card-link:focus': { outline: 'none' },
+                          '& .cap-card-link:focus-visible': {
+                            outline: '2px solid',
+                            outlineColor: 'primary.base',
+                            borderRadius: '2px',
+                          },
                         } as any
                       }
                     >

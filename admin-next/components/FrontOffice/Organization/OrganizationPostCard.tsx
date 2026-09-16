@@ -43,7 +43,14 @@ export const OrganizationPostCard = ({ post: postQuery, ...props }: Props) => {
           <CardCoverPlaceholder color="primary.base" icon={CapUIIcon.FileO} />
         )}
       </CardCover>
-      <CardContent primaryInfo={post.title} href={post.url} />
+      <CardContent
+        primaryInfo={post.title}
+        href={post.url}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
+      />
     </Card>
   )
 }

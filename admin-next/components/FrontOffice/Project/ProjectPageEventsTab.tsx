@@ -112,7 +112,14 @@ const EventCard: React.FC<{ event: EventNode }> = ({ event }) => {
           )}
         </Box>
       </CardCover>
-      <CardContent primaryInfo={event.title} href={event.url}>
+      <CardContent
+        primaryInfo={event.title}
+        href={event.url}
+        sx={{
+          '& .cap-card-link:focus': { outline: 'none' },
+          '& .cap-card-link:focus-visible': { outline: '2px solid', outlineColor: 'primary.base', borderRadius: '2px' },
+        }}
+      >
         <CardTagList gap="md">
           {(event.timeRange.startAt || event.timeRange.endAt) && (
             <CardTag>
