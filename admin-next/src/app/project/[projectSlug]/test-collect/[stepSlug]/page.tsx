@@ -30,6 +30,7 @@ export const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
           }
           title
           url
+          customCode
           firstCollectStep {
             form {
               isMapViewEnabled
@@ -96,10 +97,13 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
   const slug = removeAccents(decodeURI(stepSlug))
   const projectSlug = removeAccents(decodeURI(ps))
 
-  const { step } = await ssrGraphqlWithLocale<pageProjectStepMetadataQuery$data>(COLLECT_SELECTION_STEP_METADATA_QUERY, {
-    slug,
-    projectSlug,
-  })
+  const { step } = await ssrGraphqlWithLocale<pageProjectStepMetadataQuery$data>(
+    COLLECT_SELECTION_STEP_METADATA_QUERY,
+    {
+      slug,
+      projectSlug,
+    },
+  )
 
   if (!step) return notFound()
 
@@ -108,8 +112,15 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
       {step?.customCode ? (
         <div id="step-page-code" className="cap-custom-code" dangerouslySetInnerHTML={{ __html: step?.customCode }} />
       ) : null}
+      {step?.project?.customCode ? (
+        <div
+          id="project-page-code"
+          className="cap-custom-code"
+          dangerouslySetInnerHTML={{ __html: step.project.customCode }}
+        />
+      ) : null}
       <section id={`vote-step-page-${step?.id}`}>
-        <VoteStep prefetchedStep={step} customCode={step.customCode} />
+        <VoteStep prefetchedStep={step} customCode={step.customCode} projectCustomCode={step.project?.customCode} />
       </section>
       <ProjectShowTrash projectSlug={projectSlug} />
     </>

@@ -10,17 +10,19 @@ import { parseAsString, useQueryStates } from 'nuqs'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useLazyLoadQuery } from 'react-relay'
-import { evalCustomCode } from 'src/app/custom-code'
 import { LeafletStyles } from 'src/app/styles'
 import { buildVoteStepQueryVariables, VOTE_STEP_QUERY } from './VoteStep.queries'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepWebLayoutSkeleton from './VoteStepWebLayoutSkeleton'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
-export const VoteStepWeb: React.FC<{ token: string; stepId: string; defaultSort?: string | null }> = ({
-  stepId,
-  defaultSort,
-}) => {
+export const VoteStepWeb: React.FC<{
+  customCode?: string
+  defaultSort?: string | null
+  projectCustomCode?: string
+  token: string
+  stepId: string
+}> = ({ stepId, customCode, defaultSort, projectCustomCode }) => {
   const { viewerSession } = useAppContext()
 
   const sortDefault = defaultSort?.toLowerCase() ?? 'random'
@@ -53,21 +55,17 @@ export const VoteStepWeb: React.FC<{ token: string; stepId: string; defaultSort?
 
   return (
     <React.Suspense>
-      <VoteStepWebLayout step={step} />
+      <VoteStepWebLayout step={step} customCode={customCode} projectCustomCode={projectCustomCode} />
     </React.Suspense>
   )
 }
 
-export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProjectStepMetadataQuery$data['step'] }> = ({
-  prefetchedStep,
-  customCode,
-}) => {
+export const VoteStep: React.FC<{
+  customCode?: string
+  projectCustomCode?: string
+  prefetchedStep: pageProjectStepMetadataQuery$data['step']
+}> = ({ prefetchedStep, customCode, projectCustomCode }) => {
   const new_new_vote_step = useFeatureFlag('new_new_vote_step')
-
-  if (!new_new_vote_step) {
-    return <p>new_new_vote_step feature toggle must be enabled</p>
-  }
-
   const { setBreadCrumbItems } = useNavBarContext()
   const { project, label, form, __typename, defaultSort } = prefetchedStep
   const cookies = useCookies()
@@ -75,10 +73,6 @@ export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProje
   const token = cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)
     ? JSON.parse(atob(cookies.get(ANONYMOUS_AUTHENTICATED_WITH_CONFIRMED_PHONE)))
     : null
-
-  React.useEffect(() => {
-    evalCustomCode(customCode)
-  }, [customCode])
 
   React.useEffect(() => {
     setBreadCrumbItems([
@@ -92,11 +86,21 @@ export const VoteStep: React.FC<{ customCode?: string; prefetchedStep: pageProje
   const hasMapView =
     __typename === 'CollectStep' ? form?.isMapViewEnabled : project?.firstCollectStep?.form?.isMapViewEnabled
 
+  if (!new_new_vote_step) {
+    return <p>new_new_vote_step feature toggle must be enabled</p>
+  }
+
   return (
     <>
       {hasMapView ? <LeafletStyles /> : null}
       <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
-        <VoteStepWeb stepId={prefetchedStep.id} token={token} defaultSort={defaultSort} />
+        <VoteStepWeb
+          stepId={prefetchedStep.id}
+          token={token}
+          customCode={customCode}
+          defaultSort={defaultSort}
+          projectCustomCode={projectCustomCode}
+        />
       </React.Suspense>
     </>
   )

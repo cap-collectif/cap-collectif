@@ -1,4 +1,4 @@
-import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
+import { AbstractCard, Box, CapUIIcon, CapUIIconSize, Icon, Flex, Text } from '@cap-collectif/ui'
 import ParticipationWorkflow from '@components/ParticipationWorkflow/ParticipationWorkflow'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -7,16 +7,21 @@ import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
+import { evalCustomCode } from 'src/app/custom-code'
 import StepLinkedEvents from '../StepLinkedEvents'
 import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
 import VoteStepMap from './Map/VoteStepMap'
 import ProposalDrafts from './ProposalDrafts/ProposalDrafts'
+import VoteStepProjectHero from './VoteStepProjectHero'
 import VoteStepListHeader from './VoteStepListHeader'
 import VoteStepProposalsList from './VoteStepProposalsList'
 import VoteStepUserInfos from './VoteStepUserInfos'
 
 type Props = {
+  customCode?: string
+  projectCustomCode?: string
   step: VoteStepWebLayout_proposalStep$key
 }
 
@@ -84,9 +89,14 @@ const FRAGMENT = graphql`
     ...VoteStepMobileActions_proposalStep
     ...VoteStepUserInfos_proposalStep
     ...ProposalDrafts_step
+    ...VoteStepProjectHero_proposalStep
     body
     open
     votable
+    project {
+      visibility
+      adminAlphaUrl
+    }
     form {
       id
       objectType
@@ -108,9 +118,10 @@ const getTemplateColumns = (isMapVisible: boolean) => ({
   desktop: isMapVisible ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
 })
 
-export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
+export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, projectCustomCode }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
+  const intl = useIntl()
 
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
@@ -144,6 +155,13 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
   // We add bottom padding, otherwise the map is fullsize minus its top position
   const mapHeight = `calc(100vh - ${pxToRem(mapStickyPositionFromTop + 24)})`
 
+  React.useEffect(() => {
+    evalCustomCode(customCode)
+  }, [customCode])
+
+  React.useEffect(() => {
+    evalCustomCode(projectCustomCode)
+  }, [projectCustomCode])
   if (contributionId) {
     return <ParticipationWorkflow stepId={step.id} contributionId={contributionId} />
   }
@@ -156,8 +174,68 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey }) => {
     setContributionId(id)
   }
 
+  const restrictedAccessAlert =
+    step.project?.visibility === 'ME' || step.project?.visibility === 'ADMIN'
+      ? intl.formatMessage({
+          id: step.project.visibility === 'ME' ? 'global.draft.only_visible_by_you' : 'only-visible-by-administrators',
+        })
+      : null
+
   return (
     <Box backgroundColor="neutral-gray.50">
+      {restrictedAccessAlert ? (
+        <Box
+          position="relative"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          top={0}
+          width="100%"
+          backgroundColor="#fcf8e3"
+          color="#8a6d3b"
+          border="1px solid #faebcc"
+          px={3}
+          py="10px"
+          textAlign="center"
+          mb={0}
+          zIndex={1}
+        >
+          <Icon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} mr={1} verticalAlign="text-bottom" />
+          <Text as="span" color="inherit">
+            {restrictedAccessAlert}
+          </Text>
+          {step.project?.adminAlphaUrl ? (
+            <Box
+              as="a"
+              id="action_show"
+              href={step.project.adminAlphaUrl}
+              display="inline-flex"
+              alignItems="center"
+              marginLeft="15px"
+              padding="5px 10px"
+              backgroundColor="#f0ad4e"
+              border="1px solid"
+              borderColor="#eea236"
+              borderRadius="4px"
+              color="white"
+              fontSize="12px"
+              lineHeight="1.5"
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#ec971f',
+                  borderColor: '#d58512',
+                  color: 'white',
+                  textDecoration: 'none',
+                },
+              }}
+            >
+              {intl.formatMessage({ id: 'action_edit' })}
+              <Icon name={CapUIIcon.Preview} size={CapUIIconSize.Sm} ml={1} />
+            </Box>
+          ) : null}
+        </Box>
+      ) : null}
+      <VoteStepProjectHero step={step} />
       <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={8} px={[4, 6]}>
         <Flex direction="column" gap="md" mb="xl">
           <StepLinkedEvents step={step} />

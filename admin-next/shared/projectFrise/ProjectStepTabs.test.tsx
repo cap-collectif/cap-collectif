@@ -124,4 +124,14 @@ describe('<ProjectStepTabs />', () => {
     const { asFragment } = render(<TestComponent />)
     expect(asFragment()).toMatchSnapshot()
   })
+  it('should render desktop steps with slick classes', () => {
+    const { container } = render(<TestComponent />)
+
+    expect(container.querySelector('.slick-slider')).not.toBeNull()
+    expect(container.querySelector('.slick-list')).not.toBeNull()
+    expect(container.querySelector('.slick-track')).not.toBeNull()
+    expect(container.querySelectorAll('.slick-slide')).toHaveLength(4)
+    expect(container.querySelector('.slick-current')).not.toBeNull()
+    expect(container.querySelectorAll('.slick-active')).toHaveLength(4)
+  })
 })

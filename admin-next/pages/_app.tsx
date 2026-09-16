@@ -6,6 +6,8 @@ import { NuqsAdapter } from 'nuqs/adapters/next/pages'
 import type { FC } from 'react'
 import { PageProps } from 'types'
 import GlobalCSS from '../styles/GlobalCSS'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 // We use this component to only render when window is available (it's used by our Redux store)
 const SafeHydrate: FC<{ children?: React.ReactNode }> = ({ children }) => {

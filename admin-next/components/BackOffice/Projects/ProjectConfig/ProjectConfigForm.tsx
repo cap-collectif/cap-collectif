@@ -127,7 +127,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
   const query = useLazyLoadQuery<ProjectConfigFormQuery>(QUERY, {})
   const isNewProjectPageEnabled = useFeatureFlag('new_project_page')
   const project = useFragment(FRAGMENT, projectRef)
-  const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
+  const { setSaving: triggerNavBarSaving, setBreadCrumbItems, setPreview } = useNavBarContext()
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const initialValues = React.useMemo(() => getInitialValues(project, intl), [project, intl])
   const lastSavedRestrictedViewerGroupsRef = React.useRef<FormValues['restrictedViewerGroups']>(
@@ -230,6 +230,11 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     setBreadCrumbItems(breadCrumbItems)
     return () => setBreadCrumbItems([])
   }, [setBreadCrumbItems, title])
+
+  React.useEffect(() => {
+    setPreview(project.url)
+    return () => setPreview(null)
+  }, [project.url, setPreview])
 
   React.useEffect(() => {
     if (!isSubmitting) setTimeout(() => triggerNavBarSaving(isSubmitting), 1000)
