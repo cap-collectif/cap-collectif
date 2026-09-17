@@ -134,9 +134,18 @@ def purge_rabbitmq():
 
 
 def save_es_snapshot():
+    snapshot_options = json.dumps({
+        'indices': 'capco',
+        'include_global_state': False,
+        'feature_states': ['none'],
+    })
     run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
     run('docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
-    run('docker exec capco_application_1 curl -XPUT "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true" -H "Content-Type: application/json" --data "{\\\"indices\\\": \\\"capco\\\"}"')
+    run(
+        "docker exec capco_application_1 curl -fsS -XPUT "
+        "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true' "
+        "-H 'Content-Type: application/json' --data '{}'".format(snapshot_options)
+    )
 
 
 def restore_es_snapshot():
@@ -152,11 +161,22 @@ def restore_es_snapshot():
     if not snapshot_indices:
         raise RuntimeError('Could not identify the Elasticsearch index in snap_qa.')
 
+    restored_index = sorted(snapshot_indices)[-1]
+    restore_options = json.dumps({
+        'indices': restored_index,
+        'ignore_unavailable': True,
+        'include_global_state': False,
+        'feature_states': ['none'],
+    })
     run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"', hide='out')
-    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true" -H "Content-type: application/json" --data "{\\\"ignore_unavailable\\\":true,\\\"include_global_state\\\":false,\\\"feature_states\\\":[\\\"geoip\\\"]}"', hide='out')
+    run(
+        "docker exec capco_application_1 curl -fsS -XPOST "
+        "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true' "
+        "-H 'Content-type: application/json' --data '{}'".format(restore_options),
+        hide='out',
+    )
     run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"', hide='out')
 
-    restored_index = sorted(snapshot_indices)[-1]
     aliases = json.dumps({
         'actions': [
             {'remove': {'index': '*', 'alias': 'capco_indexing'}},
