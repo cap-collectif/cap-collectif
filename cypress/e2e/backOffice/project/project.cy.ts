@@ -68,12 +68,14 @@ context('Project', () => {
       AdminProjectPage.addStep('presentation_step')
       AdminProjectPage.fillStepInputs('PresentationStepTitle', 'PresentationStepLabel')
       cy.get('#step-body .jodit-wysiwyg').type('PresentationStepBody')
+      cy.wait(100) // Jodit debounces its change event for 100 ms.
       AdminProjectPage.submitStepModal()
 
       AdminProjectPage.addStep('global.consultation')
       cy.wait('@ProjectAdminConsultationStepFormConsultationsQuery')
       AdminProjectPage.fillStepInputs('ConsultationStepTitle', 'ConsultationStepLabel')
       cy.get('#step-body .jodit-wysiwyg').type('ConsultationStepBody')
+      cy.wait(100) // Jodit debounces its change event for 100 ms.
       cy.selectReactSelectOption('#step-consultations', 'Consultation in project without step')
       AdminProjectPage.submitStepModal()
       AdminProjectPage.save()
