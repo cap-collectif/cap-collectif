@@ -212,6 +212,12 @@ services:
             $hubApiGreenUrl: '%hub_api_green_url%'
             $instanceName: '%instance_name%'
 
+    Capco\AppBundle\Client\OnePasswordClient:
+        arguments:
+            $connectUrl: '%onepassword_connect_url%'
+            $connectToken: '%onepassword_connect_token%'
+            $vaultId: '%onepassword_vault_id%'
+
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true
         arguments:

@@ -114,6 +114,9 @@ parameters:
     hub_api_green_s3_bucket: '%env(SYMFONY_HUB_API_GREEN_S3_BUCKET)%'
     hub_api_green_s3_public_url: '%env(SYMFONY_HUB_API_GREEN_S3_PUBLIC_URL)%'
     hub_api_green_url: '%env(SYMFONY_HUB_API_GREEN_URL)%'
+    onepassword_connect_url: '%env(SYMFONY_ONEPASSWORD_CONNECT_URL)%'
+    onepassword_connect_token: '%env(SYMFONY_ONEPASSWORD_CONNECT_TOKEN)%'
+    onepassword_vault_id: '%env(SYMFONY_ONEPASSWORD_VAULT_ID)%'
 
     #
     # Default env values :
@@ -192,6 +195,9 @@ parameters:
     env(SYMFONY_HUB_API_GREEN_S3_BUCKET): 'hub-api-green'
     env(SYMFONY_HUB_API_GREEN_S3_PUBLIC_URL): 'https://hub-api-green.s3.fr-par.scw.cloud'
     env(SYMFONY_HUB_API_GREEN_URL): 'http://host.docker.internal:8080'
+    env(SYMFONY_ONEPASSWORD_CONNECT_URL): ''
+    env(SYMFONY_ONEPASSWORD_CONNECT_TOKEN): ''
+    env(SYMFONY_ONEPASSWORD_VAULT_ID): ''
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): null
     # ELASTICSEARCH-LOGPUSH
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): 'INSERT_A_REAL_SECRET'

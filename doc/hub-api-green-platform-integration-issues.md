@@ -1,5 +1,28 @@
 # Intégration Platform — Hub API Green
 
+## Lot 1 — Client 1Password Connect côté Platform
+
+Platform doit résoudre les credentials de l'instance dans 1Password avant les
+appels authentifiés vers le Hub API Green. Le nom de l'item 1Password est le
+nom exact de l'instance Platform (`SYMFONY_INSTANCE_NAME`). L'item doit
+contenir un champ `USERNAME` égal à ce nom et un champ `PASSWORD` utilisé pour
+l'authentification Basic Auth.
+
+Le client Platform utilise les paramètres d'infrastructure suivants pour
+accéder à 1Password Connect :
+
+```text
+SYMFONY_ONEPASSWORD_CONNECT_URL
+SYMFONY_ONEPASSWORD_CONNECT_TOKEN
+SYMFONY_ONEPASSWORD_VAULT_ID
+```
+
+Le token `SYMFONY_ONEPASSWORD_CONNECT_TOKEN` est uniquement le credential
+technique d'accès à 1Password Connect. `HubApiGreenClient` résout désormais
+les credentials de l'instance dans 1Password et les utilise pour appeler le
+Hub en Basic Auth. L'ajout de `instance_name` au payload et la suppression de
+l'ancien paramétrage du token feront l'objet de lots séparés.
+
 ## Étape de cadrage — Figer le contrat Hub, `fileType` et Platform
 
 Cette étape n'est pas une issue d'implémentation et ne produit pas de commit
@@ -183,15 +206,14 @@ Lors de la création d'un projet à partir des templates `public-inquiry` ou
 Les projets existants ne sont pas activés par la migration : la colonne est
 ajoutée avec une valeur par défaut à `false`.
 
-Le token Hub est renseigné dans l'onglet BO `Hub API Green` et stocké dans la
-configuration `external_service_configuration` sous le type
-`hub_api_green_token`. Platform appelle le Hub uniquement lorsque le feature
-flag est actif, que le toggle est activé et que les trois valeurs sont valides,
-après l'enregistrement de l'étape :
+Les credentials Hub sont résolus dans 1Password à partir de l'item dont le
+nom est `SYMFONY_INSTANCE_NAME`. Platform appelle le Hub uniquement lorsque le
+feature flag est actif, que le toggle est activé et que les trois valeurs sont
+valides, après l'enregistrement de l'étape :
 
 ```text
 POST {SYMFONY_HUB_API_GREEN_URL}/api/v1/folder-links
-Authorization: Bearer {token configuré dans le BO}
+Authorization: Basic {credentials de l'item 1Password}
 ```
 
 Le payload d'association suit le contrat Hub actuel :

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Crawler;
 
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Symfony\Component\DomCrawler\UriResolver;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DebateArticleMetadataCrawler
@@ -133,7 +134,7 @@ class DebateArticleMetadataCrawler
 
             $statusCode = $response->getStatusCode();
             $content = $response->getContent(false);
-            if ($statusCode < 200 || $statusCode >= 300) {
+            if ($statusCode < Response::HTTP_OK || $statusCode >= Response::HTTP_MULTIPLE_CHOICES) {
                 return ['error' => sprintf('HTTP %d when fetching %s', $statusCode, $url)];
             }
             if ('' === trim($content)) {

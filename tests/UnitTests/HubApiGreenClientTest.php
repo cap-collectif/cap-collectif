@@ -3,12 +3,13 @@
 namespace Capco\Tests\UnitTests;
 
 use Capco\AppBundle\Client\HubApiGreenClient;
-use Capco\AppBundle\Entity\ExternalServiceConfiguration;
+use Capco\AppBundle\Client\OnePasswordClient;
 use Capco\AppBundle\Entity\HubMetadata;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -32,9 +33,9 @@ class HubApiGreenClientTest extends TestCase
                 'http://hub.example/api/v1/folder-links',
                 [
                     'headers' => [
-                        'Authorization' => 'Bearer hub-token',
                         'Content-Type' => 'application/json',
                     ],
+                    'auth_basic' => ['platform-instance', 'password'],
                     'json' => [
                         'instance_name' => 'platform-instance',
                         'folderNumber' => 'T0603151600',
@@ -59,15 +60,16 @@ class HubApiGreenClientTest extends TestCase
             httpClient: $httpClient,
             logger: $this->createMock(LoggerInterface::class),
             hubApiGreenUrl: 'http://hub.example',
-            instanceName: 'platform-instance',
-            configurationRepository: $this->createConfiguredMock(
-                ExternalServiceConfigurationRepository::class,
-                [
-                    'findHubApiGreenToken' => (new ExternalServiceConfiguration())
-                        ->setType(ExternalServiceConfiguration::HUB_API_GREEN_TOKEN)
-                        ->setValue('hub-token'),
-                ]
+            onePasswordClient: new OnePasswordClient(
+                new MockHttpClient([
+                    new MockResponse('[{"id":"item-id","title":"platform-instance"}]'),
+                    new MockResponse('{"fields":[{"purpose":"USERNAME","value":"platform-instance"},{"purpose":"PASSWORD","value":"password"}]}'),
+                ]),
+                'https://connect.example',
+                'connect-token',
+                'vault-id',
             ),
+            instanceName: 'platform-instance',
         );
 
         $client->associateFolder($step, $metadata, 'https://platform.example/projects/test');
