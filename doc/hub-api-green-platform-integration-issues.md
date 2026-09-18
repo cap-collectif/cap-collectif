@@ -198,6 +198,7 @@ Le payload d'association suit le contrat Hub actuel :
 
 ```json
 {
+  "instance_name": "{platform_instance_name}",
   "folderNumber": "T0603151600",
   "aiotCode": "0003013833",
   "stepId": "step-id-platform",

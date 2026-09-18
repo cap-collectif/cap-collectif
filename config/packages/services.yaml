@@ -210,6 +210,7 @@ services:
     Capco\AppBundle\Client\HubApiGreenClient:
         arguments:
             $hubApiGreenUrl: '%hub_api_green_url%'
+            $instanceName: '%instance_name%'
 
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true

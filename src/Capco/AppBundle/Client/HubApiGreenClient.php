@@ -14,6 +14,7 @@ class HubApiGreenClient
         private readonly HttpClientInterface $httpClient,
         private readonly LoggerInterface $logger,
         private readonly string $hubApiGreenUrl,
+        private readonly string $instanceName,
         private readonly ExternalServiceConfigurationRepository $configurationRepository
     ) {
     }
@@ -27,6 +28,7 @@ class HubApiGreenClient
         }
 
         $payload = [
+            'instance_name' => $this->instanceName,
             'folderNumber' => $metadata->getFolderNumber(),
             'aiotCode' => $metadata->getAiotCode(),
             'stepId' => $step->getId(),

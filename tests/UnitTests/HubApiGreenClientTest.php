@@ -36,6 +36,7 @@ class HubApiGreenClientTest extends TestCase
                         'Content-Type' => 'application/json',
                     ],
                     'json' => [
+                        'instance_name' => 'platform-instance',
                         'folderNumber' => 'T0603151600',
                         'aiotCode' => '0003013833',
                         'stepId' => 'step-1',
@@ -58,6 +59,7 @@ class HubApiGreenClientTest extends TestCase
             httpClient: $httpClient,
             logger: $this->createMock(LoggerInterface::class),
             hubApiGreenUrl: 'http://hub.example',
+            instanceName: 'platform-instance',
             configurationRepository: $this->createConfiguredMock(
                 ExternalServiceConfigurationRepository::class,
                 [
