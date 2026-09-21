@@ -43,13 +43,17 @@ describe('Questionnaire Step back office', () => {
   })
 
   it('should include VOTING questionnaire in model list', () => {
-    cy.task('run:sql', 'UPDATE questionnaire SET type = "VOTING"')
+    cy.task('run:sql', 'UPDATE questionnaire SET type = "VOTING" WHERE id = "questionnaire10"')
+    cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListFieldQuery' })
     cy.visit(
       'admin-next/project/UHJvamVjdDpwcm9qZWN0V2l0aEFub255bW91c1F1ZXN0aW9ubmFpcmU=/update-step/questionnaire-step/qStepProjectAnonymousQuestionnaire?operationType=CREATE',
     )
-    AdminQuestionnaireStepPage.getFromModelTab().click({ force: true })
-    AdminQuestionnaireStepPage.getFromModelTabListInput().click({ force: true })
-    cy.contains('Votre avis sur les JO 2024 à Paris')
+    cy.wait('@QuestionnaireStepFormQuery')
+    AdminQuestionnaireStepPage.getFromModelTab().should('be.visible').click()
+    AdminQuestionnaireStepPage.getFromModelTabListInput().should('be.visible').click()
+    cy.wait('@QuestionnaireListFieldQuery')
+    cy.contains('Questionnaire non rattaché').should('be.visible')
   })
 
   it('edits a question and discards unsaved question changes', () => {
