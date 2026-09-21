@@ -119,6 +119,11 @@ SYMFONY_MAGICLINKS_DURATION_IN_DAYS=0
 SYMFONY_SMS_PROVIDER=orange
 SYMFONY_ORANGE_API_CLIENT_ID=INSERT_A_REAL_SECRET
 SYMFONY_ORANGE_API_CLIENT_SECRET=INSERT_A_REAL_SECRET
+
+# 1password
+SYMFONY_ONEPASSWORD_CONNECT_URL=https://hub-api-green.services.cap-collectif.com
+SYMFONY_ONEPASSWORD_CONNECT_TOKEN=INSERT_A_REAL_SECRET
+SYMFONY_ONEPASSWORD_VAULT_ID=INSERT_A_REAL_SECRET
 """ \
         .format(host=Config.local_ip, asset_host=Config.assets_host)
     print('Generating your default environment variables...')

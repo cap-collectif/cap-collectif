@@ -19,16 +19,18 @@ final class OnePasswordClientTest extends TestCase
     /**
      * @dataProvider invalidConfigurationProvider
      */
-    public function testItRejectsInvalidConfiguration(
+    public function testItRejectsInvalidConfigurationWhenCredentialsAreRequested(
         string $connectUrl,
         string $connectToken,
         string $vaultId,
         string $exceptionMessage,
     ): void {
-        $this->expectException(\InvalidArgumentException::class);
+        $client = new OnePasswordClient(new MockHttpClient(), $connectUrl, $connectToken, $vaultId);
+
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage($exceptionMessage);
 
-        new OnePasswordClient(new MockHttpClient(), $connectUrl, $connectToken, $vaultId);
+        $client->credentials('instance');
     }
 
     /**

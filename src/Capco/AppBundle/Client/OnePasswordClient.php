@@ -21,10 +21,7 @@ final class OnePasswordClient
         private readonly string $connectToken,
         private readonly string $vaultId,
     ) {
-        $connectUrl = rtrim(trim($connectUrl), '/');
-        $this->validateConfiguration($connectUrl, $connectToken, $vaultId);
-
-        $this->connectUrl = $connectUrl;
+        $this->connectUrl = rtrim(trim($connectUrl), '/');
     }
 
     /**
@@ -36,6 +33,8 @@ final class OnePasswordClient
         if ('' === $itemName) {
             throw new \InvalidArgumentException('1Password item name is required.');
         }
+
+        $this->validateConfiguration();
 
         $items = $this->request($this->itemsUrl());
         $itemId = null;
@@ -137,21 +136,21 @@ final class OnePasswordClient
         return $data;
     }
 
-    private function validateConfiguration(string $connectUrl, string $connectToken, string $vaultId): void
+    private function validateConfiguration(): void
     {
-        $parsedUrl = parse_url($connectUrl);
+        $parsedUrl = parse_url($this->connectUrl);
         if (
             false === $parsedUrl
             || !isset($parsedUrl['scheme'], $parsedUrl['host'])
             || !\in_array($parsedUrl['scheme'], ['http', 'https'], true)
         ) {
-            throw new \InvalidArgumentException('1Password Connect URL must be an absolute HTTP(S) URL.');
+            throw new \RuntimeException('1Password Connect URL must be an absolute HTTP(S) URL.');
         }
-        if ('' === trim($connectToken)) {
-            throw new \InvalidArgumentException('1Password Connect token is required.');
+        if ('' === trim($this->connectToken)) {
+            throw new \RuntimeException('1Password Connect token is required.');
         }
-        if ('' === trim($vaultId)) {
-            throw new \InvalidArgumentException('1Password vault ID is required.');
+        if ('' === trim($this->vaultId)) {
+            throw new \RuntimeException('1Password vault ID is required.');
         }
     }
 
