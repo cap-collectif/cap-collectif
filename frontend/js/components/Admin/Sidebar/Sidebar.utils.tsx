@@ -52,7 +52,6 @@ export const URL_MAP = {
     '/admin/settings/settings.modules/',
     '/admin-next/notification-settings',
     '/admin/settings/settings.appearance/',
-    '/admin-next/hub-api-green',
     '/admin/capco/app/sitecolor/',
   ],
   pages: [

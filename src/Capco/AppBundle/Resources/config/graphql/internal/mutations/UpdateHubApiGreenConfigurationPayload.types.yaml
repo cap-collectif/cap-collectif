@@ -1,6 +1,0 @@
-UpdateHubApiGreenConfigurationPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            configuration:
-                type: 'HubApiGreenConfiguration!'

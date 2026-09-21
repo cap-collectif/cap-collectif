@@ -1,7 +1,0 @@
-HubApiGreenConfiguration:
-    type: object
-    config:
-        description: 'Hub API Green configuration.'
-        fields:
-            isConfigured:
-                type: 'Boolean!'

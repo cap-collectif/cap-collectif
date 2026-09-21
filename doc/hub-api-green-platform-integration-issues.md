@@ -20,8 +20,8 @@ SYMFONY_ONEPASSWORD_VAULT_ID
 Le token `SYMFONY_ONEPASSWORD_CONNECT_TOKEN` est uniquement le credential
 technique d'accès à 1Password Connect. `HubApiGreenClient` résout désormais
 les credentials de l'instance dans 1Password et les utilise pour appeler le
-Hub en Basic Auth. L'ajout de `instance_name` au payload et la suppression de
-l'ancien paramétrage du token feront l'objet de lots séparés.
+Hub en Basic Auth. L'ajout de `instance_name` au payload est traité dans un
+lot séparé ; l'ancien paramétrage du token a été supprimé.
 
 ## Étape de cadrage — Figer le contrat Hub, `fileType` et Platform
 

@@ -1,7 +1,0 @@
-UpdateHubApiGreenConfigurationInput:
-    type: relay-mutation-input
-    config:
-        fields:
-            token:
-                type: 'String!'
-                description: 'The Hub API Green token.'
