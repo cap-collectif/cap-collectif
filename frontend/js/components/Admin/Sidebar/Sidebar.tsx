@@ -239,7 +239,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {isSuperAdmin ? (
                     <SidebarLink
                       text="admin.label.settings.performance"
-                      href="/admin/settings/settings.performance/list"
+                      href="/admin-next/performance-settings"
                     />
                   ) : null}
                   <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />

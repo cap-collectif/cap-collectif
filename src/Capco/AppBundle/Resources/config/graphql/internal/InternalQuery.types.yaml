@@ -468,6 +468,11 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[SiteParameter!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NotificationSettings\\NotificationSettingsQueryResolver")'
+            performanceSettings:
+                description: 'get all site parameters of the settings.performance category'
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                type: '[SiteParameter!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\PerformanceSettings\\PerformanceSettingsQueryResolver")'
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'

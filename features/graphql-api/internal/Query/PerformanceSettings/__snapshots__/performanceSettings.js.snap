@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|performanceSettings returns the performance settings as super-admin 1`] = `
+Object {
+  "performanceSettings": Array [
+    Object {
+      "isEnabled": true,
+      "keyname": "proposal.pagination",
+      "value": "50",
+    },
+  ],
+}
+`;

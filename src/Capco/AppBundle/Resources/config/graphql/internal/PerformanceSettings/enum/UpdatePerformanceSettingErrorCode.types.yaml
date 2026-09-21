@@ -1,0 +1,12 @@
+UpdatePerformanceSettingErrorCode:
+    type: enum
+    config:
+        name: UpdatePerformanceSettingErrorCode
+        description: 'Available errors for an `updatePerformanceSetting` mutation.'
+        values:
+            SITE_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\PerformanceSettings\UpdatePerformanceSettingMutation::SITE_PARAMETER_NOT_FOUND
+                description: 'No SiteParameter of the `settings.performance` category was found for the given id.'
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\PerformanceSettings\UpdatePerformanceSettingMutation::INVALID_VALUE
+                description: 'The value is invalid for the SiteParameter type.'

@@ -234,7 +234,7 @@
             },
             {
                 "title": "admin.label.settings.performance",
-                "href": "/admin/settings/settings.performance/list",
+                "href": "/admin-next/performance-settings",
                 "rolesRequired": ["superAdmin"],
                 "featuresRequired": []
             },

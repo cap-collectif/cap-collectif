@@ -9819,6 +9819,9 @@ type Mutation {
   """update a SiteParameter of the settings.notifications category."""
   updateNotificationSetting(input: UpdateNotificationSettingInput!): UpdateNotificationSettingPayload
 
+  """update a SiteParameter of the settings.performance category."""
+  updatePerformanceSetting(input: UpdatePerformanceSettingInput!): UpdatePerformanceSettingPayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -15073,6 +15076,9 @@ type Query {
 
   """get all site parameters of the settings.notifications category"""
   notificationSettings: [SiteParameter!]!
+
+  """get all site parameters of the settings.performance category"""
+  performanceSettings: [SiteParameter!]!
 
   """get consultations without step"""
   availableConsultations(
@@ -20848,6 +20854,38 @@ input UpdateParticipantRequirementInput {
 type UpdateParticipantRequirementPayload {
   participant: Participant
   requirements: [Requirement]
+  clientMutationId: String
+}
+
+"""Available errors for an `updatePerformanceSetting` mutation."""
+enum UpdatePerformanceSettingErrorCode {
+  """
+  No SiteParameter of the `settings.performance` category was found for the given id.
+  """
+  SITE_PARAMETER_NOT_FOUND
+
+  """The value is invalid for the SiteParameter type."""
+  INVALID_VALUE
+}
+
+input UpdatePerformanceSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """The new value of the SiteParameter."""
+  value: String!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdatePerformanceSettingPayload {
+  """The updated SiteParameter."""
+  siteParameter: SiteParameter
+
+  """The available errors if any."""
+  errorCode: UpdatePerformanceSettingErrorCode
   clientMutationId: String
 }
 

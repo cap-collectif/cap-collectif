@@ -33,7 +33,6 @@ class FeaturesCategoryResolver
         'pages.charter' => ['conditions' => [], 'features' => []],
         'pages.shield' => ['conditions' => [], 'features' => ['shield_mode']],
         'settings.global' => ['conditions' => [], 'features' => []],
-        'settings.performance' => ['conditions' => [], 'features' => []],
         'settings.modules' => [
             'conditions' => [],
             'features' => [

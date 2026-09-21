@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updatePerformanceSetting returns INVALID_VALUE for a non-positive integer value 1`] = `
+Object {
+  "updatePerformanceSetting": Object {
+    "errorCode": "INVALID_VALUE",
+    "siteParameter": null,
+  },
+}
+`;
+
+exports[`Internal|updatePerformanceSetting returns SITE_PARAMETER_NOT_FOUND for a parameter outside the settings.performance category 1`] = `
+Object {
+  "updatePerformanceSetting": Object {
+    "errorCode": "SITE_PARAMETER_NOT_FOUND",
+    "siteParameter": null,
+  },
+}
+`;
+
+exports[`Internal|updatePerformanceSetting updates the value and isEnabled as super-admin 1`] = `
+Object {
+  "updatePerformanceSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": false,
+      "keyname": "proposal.pagination",
+      "value": "25",
+    },
+  },
+}
+`;

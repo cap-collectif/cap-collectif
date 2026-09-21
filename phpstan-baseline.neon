@@ -29447,16 +29447,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SiteImageRepository.php
 
 		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteParameterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
-
-		-
-			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteParameterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
-
-		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteSettingsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php

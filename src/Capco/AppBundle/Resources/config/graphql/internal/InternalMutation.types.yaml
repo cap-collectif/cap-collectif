@@ -1548,6 +1548,14 @@ InternalMutation:
                     inputType: UpdateNotificationSettingInput
                     payloadType: UpdateNotificationSettingPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\NotificationSettings\\UpdateNotificationSettingMutation", args)'
+            updatePerformanceSetting:
+                description: 'update a SiteParameter of the settings.performance category.'
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePerformanceSettingInput
+                    payloadType: UpdatePerformanceSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\PerformanceSettings\\UpdatePerformanceSettingMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

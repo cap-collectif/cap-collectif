@@ -48,7 +48,7 @@ export const URL_MAP = {
     '/admin/favicon/',
     '/admin/font/',
     '/admin/settings/settings.global/',
-    '/admin/settings/settings.performance/',
+    '/admin-next/performance-settings',
     '/admin/settings/settings.modules/',
     '/admin-next/notification-settings',
     '/admin/settings/settings.appearance/',

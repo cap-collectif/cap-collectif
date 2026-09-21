@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class SettingsVoter extends Voter
 {
     final public const VIEW = 'view';
-    final public const SETTINGS_PERFORMANCE = 'settings.performance';
 
     protected function supports($attribute, $subject)
     {
@@ -33,21 +32,13 @@ class SettingsVoter extends Voter
         }
 
         return match ($attribute) {
-            self::VIEW => $this->canView($subject, $viewer),
+            self::VIEW => $this->canView($viewer),
             default => throw new \LogicException('This code should not be reached!'),
         };
     }
 
-    private function canView($subject, User $viewer): bool
+    private function canView(User $viewer): bool
     {
-        if (!$viewer->isAdmin()) {
-            return false;
-        }
-
-        if (self::SETTINGS_PERFORMANCE === $subject && !$viewer->isSuperAdmin()) {
-            return false;
-        }
-
-        return true;
+        return $viewer->isAdmin();
     }
 }
