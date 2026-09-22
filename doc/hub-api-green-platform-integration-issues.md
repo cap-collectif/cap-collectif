@@ -233,6 +233,32 @@ Les valeurs de l'étape sont enregistrées avant l'appel au Hub. En cas de refus
 du service tiers, la mutation retourne une erreur, mais les valeurs restent
 enregistrées afin de pouvoir les corriger et relancer l'association.
 
+Pour les projets de type `public-consultation` et `public-inquiry`, Platform
+synchronise également les dates de l'étape de collecte lorsque `startAt` ou
+`endAt` est modifié :
+
+```text
+POST {SYMFONY_HUB_API_GREEN_URL}/api/v1/metadata
+Authorization: Basic {credentials de l'item 1Password}
+```
+
+Le payload contient le numéro de dossier et les dates au format
+`YYYY-MM-DD HH:MM:SS` :
+
+```json
+{
+  "instance_name": "{platform_instance_name}",
+  "folderNumber": "T0603151600",
+  "aiotCode": "0003013833",
+  "stepId": "step-id-platform",
+  "startDate": "2026-09-21 10:00:00",
+  "endDate": "2026-09-30 18:00:00"
+}
+```
+
+L'appel est effectué après l'enregistrement Platform, uniquement lorsqu'une
+date a changé et qu'une association Hub complète est active sur le projet.
+
 ## Issue 2 — Enregistrer ou réutiliser un média S3 dans Platform
 
 Commit : `feat: synchroniser les medias s3 vers platform`

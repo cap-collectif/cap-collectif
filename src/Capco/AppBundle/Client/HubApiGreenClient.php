@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Client;
 
 use Capco\AppBundle\Entity\HubMetadata;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,6 @@ class HubApiGreenClient
 
     public function associateFolder(OtherStep $step, HubMetadata $metadata, string $consultationUrl): void
     {
-        $credentials = $this->onePasswordClient->credentials($this->instanceName);
-
         $payload = [
             'instance_name' => $this->instanceName,
             'folderNumber' => $metadata->getFolderNumber(),
@@ -32,7 +31,28 @@ class HubApiGreenClient
             'contactEmail' => $metadata->getContactEmail(),
         ];
 
-        $response = $this->httpClient->request('POST', rtrim($this->hubApiGreenUrl, '/') . '/api/v1/folder-links', [
+        $this->request('/api/v1/folder-links', $payload, 'folder association', $step->getId());
+    }
+
+    public function updateConsultationDates(CollectStep $step, HubMetadata $metadata): void
+    {
+        $this->request('/api/v1/metadata', [
+            'instance_name' => $this->instanceName,
+            'folderNumber' => $metadata->getFolderNumber(),
+            'aiotCode' => $metadata->getAiotCode(),
+            'stepId' => $metadata->getStep()?->getId(),
+            'startDate' => $step->getStartAt()?->format('Y-m-d H:i:s'),
+            'endDate' => $step->getEndAt()?->format('Y-m-d H:i:s'),
+        ], 'consultation dates update', $step->getId());
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function request(string $path, array $payload, string $operation, string $stepId): void
+    {
+        $credentials = $this->onePasswordClient->credentials($this->instanceName);
+        $response = $this->httpClient->request('POST', rtrim($this->hubApiGreenUrl, '/') . $path, [
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
@@ -42,14 +62,13 @@ class HubApiGreenClient
 
         $statusCode = $response->getStatusCode();
         if ($statusCode < Response::HTTP_OK || $statusCode >= Response::HTTP_MULTIPLE_CHOICES) {
-            $body = $response->getContent(false);
-            $this->logger->error('Hub API Green folder association failed.', [
+            $this->logger->error(sprintf('Hub API Green %s failed.', $operation), [
                 'statusCode' => $statusCode,
-                'stepId' => $step->getId(),
-                'response' => $body,
+                'stepId' => $stepId,
+                'response' => $response->getContent(false),
             ]);
 
-            throw new \RuntimeException(sprintf('Hub API Green folder association failed with status %d.', $statusCode));
+            throw new \RuntimeException(sprintf('Hub API Green %s failed with status %d.', $operation, $statusCode));
         }
     }
 }
