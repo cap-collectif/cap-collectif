@@ -325,8 +325,17 @@ React.useEffect(() => {
 
 ## Pagination avec Relay
 
+La taille de page est une constante `CONNECTION_NODES_PER_PAGE`, definie dans un fichier `utils.ts` a cote du composant de liste (pas inline dans le composant). C'est la convention utilisee sur la plupart des pages du back office (voir `components/BackOffice/FooterSocialNetworks/utils.ts`, `components/BackOffice/UserGroups/utils.ts`, etc.).
+
 ```typescript
+// components/BackOffice/MyFeature/utils.ts
+export const CONNECTION_NODES_PER_PAGE = 20
+```
+
+```typescript
+// components/BackOffice/MyFeature/MyList.tsx
 import { usePaginationFragment } from 'react-relay'
+import { CONNECTION_NODES_PER_PAGE } from './utils'
 
 const FRAGMENT = graphql`
   fragment MyList_query on Query
@@ -363,7 +372,7 @@ const MyList: React.FC<Props> = ({ query: queryRef }) => {
       ))}
       {hasNext && (
         <Button
-          onClick={() => loadNext(20)}
+          onClick={() => loadNext(CONNECTION_NODES_PER_PAGE)}
           isLoading={isLoadingNext}
         >
           Load more
@@ -450,6 +459,7 @@ const Page: NextPage = () => (
 - [ ] Props typees avec `$key`
 - [ ] `useFragment` pour unwrap les donnees
 - [ ] `yarn relay` execute
+- [ ] Constantes de pagination (`CONNECTION_NODES_PER_PAGE`) dans un `utils.ts` a cote du composant, pas inline
 
 ### Page
 - [ ] Query GraphQL au niveau module

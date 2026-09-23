@@ -242,6 +242,12 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Bouton de création au-dessus d'une liste/`Table`** : le laisser aligné à gauche (comportement par défaut d'un `Flex`) et lui donner `variantSize="small"` — c'est la taille
   standard pour ce type de bouton d'action au-dessus d'une liste admin-next, pas `"big"` (réservé aux boutons
   de `Modal.Footer`).
+- **Accessibilité : intitulé explicite pour les boutons et champs de recherche, jamais un libellé générique
+  seul.** Un lecteur d'écran annonce le bouton/champ hors du contexte visuel de la page : "Créer" ou
+  "Rechercher" seuls ne disent pas quoi. Toujours préciser l'entité concernée : "Créer le type", "Créer la
+  vidéo", "Créer un type de profil" plutôt que "Créer" ; "Rechercher une utilisatrice" plutôt que
+  "Rechercher". S'applique au texte visible du bouton/label, et à l'`aria-label` si le bouton n'a qu'une
+  icône (ex: `ButtonQuickAction`).
 - **Entité à identifiant entier auto-incrémenté (pas d'UUID, ex. `IdTrait`)** : ne pas chercher à l'enregistrer
   dans `GlobalIdResolver::AVAILABLE_TYPES` ni à implémenter l'interface `Node`/`Relay::GlobalId` — exposer
   simplement `id: type: 'ID!'` (l'entier brut) et résoudre les mutations avec
@@ -255,6 +261,126 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   ..., edgeTypeName: "XEdge")` (create) et `@deleteEdge(connections: ...)` (delete) directement dans le texte
   de la mutation GraphQL, sans écrire de fonction `updater` manuelle avec `ConnectionHandler` — voir
   `CreateUserTypeMutation.ts`/`DeleteUserTypeMutation.ts` pour l'exemple le plus simple.
+- **Catégorie `SiteParameter` de la page générique `/admin/settings/{category}/list`** (voir le cas
+  `SettingsController.php` dans la méthodologie ci-dessus) : toujours vérifier `SiteParameter::isTranslatable()`
+  (la constante `NOT_TRANSLATABLE` liste les exceptions par `keyname`) avant de choisir le template, les deux
+  cas ayant une forme très différente bien que la table Sonata source soit la même :
+  - **Non traduisible** (ex: `settings.notifications` — adresses email, nom d'expéditeur) :
+    `NotificationSettingsList.tsx` / `NotificationSettingModal.tsx` — `Table` + modale avec un simple
+    `FieldInput type="text"` pour `value`, pas de sélecteur de langue. Query `notificationSettings: [SiteParameter!]!`
+    ne charge pas `translations`.
+  - **Traduisible** (ex: `pages.login` — texte riche affiché publiquement — et `pages.blog`, voir
+    `BlogSettingsList.tsx`/`UpdateBlogSettingMutation.php` sur la branche `19937-posts-sonata-refonte`) :
+    `LoginSettingsList.tsx` / `LoginSettingModal.tsx` / `LoginSettingForm.tsx` — même structure `Table`/modale,
+    mais la query charge aussi `translations { id locale value }` (le resolver doit appeler `addTranslation()`
+    pour chaque `SiteParameterTranslation`, comme `SiteParameterQueryResolver::loadTranslations`) et
+    `availableLocales(includeDisabled: false) { id code isDefault traductionKey }`. Côté Sonata, le multilangue
+    reposait sur un rechargement de la page d'édition avec `?tl=<locale>` (`TranslatableAdminExtension` posait
+    `setCurrentLocale()` sur l'entité) : une seule langue éditée à la fois, champ vide pour une langue sans
+    traduction (pas de repli sur la langue par défaut). Le comportement à reproduire côté admin-next :
+    - **Le formulaire vit dans le corps de la modale** (`LoginSettingForm.tsx` est rendu dans le render-prop
+      `{({ hide }) => ...}` de `Modal`) : `Modal` (CapUI) démonte son contenu à la fermeture (`unmountOnHide`),
+      donc `useForm` repart des dernières valeurs sauvegardées à chaque ouverture, sans `reset()` à la
+      fermeture ni après succès, et sans désynchronisation entre la langue sélectionnée et les valeurs.
+    - **Une valeur de formulaire par langue** (`translations: Record<locale, string>`, clés au format `fr-FR`
+      de `SiteParameterTranslation.locale`), toutes chargées au montage. Le sélecteur de langue ne fait que
+      changer le champ affiché : `<FormControl name={`translations.${locale}`} key={locale}>` — le `key`
+      **remonte** le `TextEditor` (pattern `PostForm.tsx`/`UserTypeModal.tsx`). C'est indispensable :
+      `Jodit.tsx` mémoïse tout son rendu sur sa seule prop `selectedLanguage` (`useMemo(..., [selectedLanguage])`)
+      et la branche `noModalAdvancedEditor` de `TextEditor.tsx` ne la transmet pas, donc un simple `reset()` ou
+      changement de `value` n'est **jamais** répercuté dans l'éditeur : le texte de la langue précédente reste
+      affiché, et c'est lui qui finit enregistré dans la nouvelle langue. Ne pas contourner avec un système de
+      brouillons + `reset()` par langue — les valeurs de toutes les langues vivent déjà dans react-hook-form.
+    - Sélecteur de langue, uniquement si le feature flag `multilangue` est actif (sinon seule la langue par
+      défaut de la plateforme est éditable, sans sélecteur) : `Select` importé depuis `@cap-collectif/form`
+      (piloté à la main en `value`/`onChange` avec des chaînes, HORS react-hook-form), **pas** `FieldInput
+      type="select"` (warning React "Function components cannot be given refs", `Select` n'étant pas un
+      `forwardRef`) ni `Menu` (voir le piège dédié plus bas).
+    - Pour le texte : `TextEditor` (pas `Jodit` directement) avec `noModalAdvancedEditor` si le type Sonata
+      d'origine est `SiteParameter::TYPE_RICH_TEXT`, et `selectedLanguage={locale}` — `TextEditor` exige un
+      `FormProvider` ambiant (`useFormContext()`). La modale doit garder `forceModalDialogToFalse` **et**
+      `hideOnClickOutside={false}` : Jodit rend ses popups (lien, couleur...) hors du dialogue, un dialogue
+      `modal` (focus trap) les rend inutilisables et les traite comme un clic extérieur.
+    - Ne pas se rabattre sur `siteParameter.value` pour pré-remplir la langue par défaut : ce champ est résolu
+      sur la locale de **la requête** (celle de l'admin), pas sur la langue par défaut de la plateforme. La
+      valeur d'une langue est `translations.find(t => t.locale === locale)?.value ?? ''`, rien de plus.
+    - **Mutation `update*` avec un tableau `translations: [{ locale: TranslationLocale!, value: String! }]`**
+      (input-object `UpdateLoginSettingTranslationInput`, enum `TranslationLocale` dont les valeurs PHP sont
+      déjà au format `fr-FR`), comme `UpdateUserTypeMutation`/`UpdatePostMutation` : une seule mutation,
+      atomique, quel que soit le nombre de langues modifiées. Le front n'envoie que les langues dont la valeur a
+      changé (comparaison avec les valeurs initiales — `dirtyFields` n'est pas fiable ici, `TextEditor` appelle
+      `setValue()` sans `shouldDirty`) ; le back ne touche qu'aux langues reçues, une valeur vide supprime la
+      ligne (même sémantique que `mergeNewTranslations()`), et **si le feature flag `multilangue` est inactif, la
+      valeur est stockée sous la langue par défaut de la plateforme** (`LocaleRepository::getDefaultCode()`)
+      quelle que soit la locale envoyée. Le cache est invalidé pour chaque locale reçue (voir plus bas).
+    - **Persister chaque traduction en interrogeant directement le repository `SiteParameterTranslation`**
+      (chercher `{translatable: $siteParameter, locale}`, mettre à jour si trouvé, sinon créer + `persist()`),
+      puis **`$em->refresh($siteParameter)` après le `flush()`** avant de renvoyer l'entité dans le payload.
+      **Ne pas** utiliser `SiteParameter::setValue($value, $locale)` + `mergeNewTranslations()` (pattern de
+      `UpdateBlogSettingMutation.php` sur `19937-posts-sonata-refonte` et de Sonata) : il paraît propre mais
+      échoue par intermittence. Cause réelle, vérifiée avec le general log MySQL : `SiteParameterResolver`
+      (appelé sur chaque requête par `LocaleSubscriber`/`SiteParameterCacheSubscriber`) exécute, quand son
+      cache `site_parameters_<locale>` est froid, `SiteParameterRepository::getValues($locale)` — une requête
+      DQL qui **fetch-join les traductions filtrées sur la locale courante** (`leftJoin('p.translations', 't',
+      WITH 't.locale = :locale')` + `select('p', 't')`). Doctrine hydrate alors tous les `SiteParameter` dans
+      l'identity map avec une collection `translations` **initialisée mais partielle** (la seule traduction de
+      la locale courante, ou vide). `$repository->find($id)` dans la mutation renvoie cette même instance :
+      `setValue()`/`translate()` ne trouve pas la traduction d'une autre locale, en crée une nouvelle,
+      `mergeNewTranslations()` l'ajoute et le `flush()` viole la contrainte unique
+      `site_parameter_translation_unique_translation` ; et même avec la requête directe au repository (qui
+      persiste correctement), le payload renvoie un `translations` partiel (`[]` si la locale courante n'a pas
+      de traduction) tant que l'entité n'est pas rafraîchie. Comme ça ne se produit que si le cache du resolver
+      est froid pendant la requête, le bug est intermittent et invisible au premier essai. `refresh()`
+      remplace la collection partielle par une collection lazy propre ; `LoginSettingsQueryResolver` (lecture)
+      contourne le même problème en appelant `addTranslation()` pour chaque ligne du repository.
+  - Dans les deux cas, `isEnabled` reste un champ non traduisible partagé entre toutes les langues — la valeur
+    du `Switch`/`Tag` ne dépend donc pas de la langue sélectionnée dans la modale.
+  - **Invalidation du cache : passer explicitement la locale éditée, ne pas se fier à la locale de la requête
+    courante.** `UpdateSiteParameterMutation::invalidateCache(SiteParameter $siteParameter, ?string $locale =
+    null)` (réutilisée par `UpdateNotificationSettingMutation`/`UpdateLoginSettingMutation` via injection) et
+    `SiteParameterRuntime::invalidateCache(string $key, ?string $locale = null)` défaut, si `$locale` n'est pas
+    fourni, sur `$this->requestStack->getCurrentRequest()->getLocale()` — c'est-à-dire la locale de **l'admin
+    qui fait l'appel**, pas celle de la traduction qui vient d'être modifiée. Ce défaut est correct pour
+    l'ancien flow Sonata (où l'admin change sa propre langue d'interface pour éditer chaque traduction l'une
+    après l'autre) et pour les `keyname` non traduisibles (une seule valeur, peu importe la locale), mais casse
+    silencieusement tout endpoint qui permet d'éditer une locale arbitraire indépendamment de la langue de
+    session de l'admin (typiquement un sélecteur de langue dans une modale admin-next, comme
+    `LoginSettingModal.tsx`) : la traduction est bien persistée en base, mais le cache de la **locale éditée**
+    n'est jamais invalidé — seul celui de la locale de l'admin l'est. Symptôme observé : la mutation retourne
+    un succès, la traduction est bien en base (vérifiable en SQL), mais **le texte traduit n'apparaît jamais
+    sur le frontend public** dans cette langue. Toujours passer `$locale` explicitement (celui reçu dans
+    l'input de la mutation) à ces deux méthodes dès que la mutation permet d'éditer une locale différente de
+    celle de la requête courante.
+  - **Pour vérifier qu'une traduction s'affiche bien côté frontend public**, ne pas tester uniquement via une
+    requête GraphQL brute (`curl`) sans contexte de locale réaliste : le champ `value` de `SiteParameter` n'a
+    pas d'argument `locale` explicite dans le schéma, il est résolu via `GraphQLLocaleResolver`/
+    `RequestLocaleResolver` à partir (dans cet ordre) de l'attribut de route `_locale`, du préfixe d'URL, du
+    cookie `locale`, de la session, puis du header `Accept-Language` — un simple `curl -b "locale=en-GB"` sur
+    `/graphql/internal` peut donner un résultat différent de ce qu'un vrai navigateur obtiendrait (notamment si
+    la session déjà ouverte a persisté une locale différente). Le test le plus fiable et le plus simple à
+    scripter est un `curl` **sans session**, avec un header `Accept-Language` correctement formé (ex:
+    `Accept-Language: en-US,en;q=0.9`, pas juste `en-GB`) — ça correspond au comportement réel d'un visiteur
+    anonyme et évite les effets de bord de session.
+  - **Snapshots e2e GraphQL, Cypress et dump `var/db.backup`** : `jest-setup-global.e2e.js` (tests e2e
+    GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `fab local.qa.save-db`,
+    c'est-à-dire qu'ils **écrasent le dump avec l'état courant de la base locale**, puis `_setupDB.js` /
+    `cy.task('db:restore')` restaurent ce dump. Si la base locale a été modifiée à la main (traductions ajoutées
+    depuis l'UI pendant des tests manuels) ou par un run Cypress précédent (un spec qui enregistre des données
+    laisse la base dans cet état à la fin), les snapshots générés avec `-u` embarquent ces données et ne
+    correspondent plus aux fixtures, et un spec Cypress qui suppose l'état des fixtures échoue dès son premier
+    `should` — le symptôme est un snapshot ou un test qui change alors que le code testé n'a pas bougé. Avant de
+    (re)générer des snapshots ou d'enchaîner des runs Cypress : `pipenv run fab local.database.generate` pour
+    repartir des fixtures. Le champ `translations` est renvoyé dans l'ordre de la base, non déterministe pour
+    des lignes fraîchement insérées : trier par `locale` dans le test avant `toMatchSnapshot()`.
+  - **Cypress en local sur une page admin-next protégée par un feature flag** : `withFeatureFlagRequired` lit
+    les flags dans Redis côté Next.js avec le préfixe `SYMFONY_REDIS_PREFIX` du conteneur `capco_nextjs_1`
+    (`dev`), alors que `cy.task('enable:feature', ...)` active le flag de l'environnement **test** (namespace
+    `testfeature_toggle`, voir `config/packages/test/quandidate_toggle.yaml`). En local, la redirection SSR
+    dépend donc du flag **dev** (`bin/console capco:toggle:enable <flag>` sans `--env`), et le test « redirige
+    vers Sonata quand la migration est désactivée » ne peut pas passer tant que le flag dev est actif — en CI
+    les deux préfixes coïncident et le spec complet passe. Le run Cypress refuse aussi de démarrer depuis un
+    terminal VS Code si `ELECTRON_RUN_AS_NODE=1` est hérité (`bad option: --no-sandbox`) : lancer
+    `env -u ELECTRON_RUN_AS_NODE yarn cy:run ...`.
 
 ## Connection ID pour les mutations create/delete (Relay)
 
@@ -316,31 +442,12 @@ prop-drillé entre la liste et un ancêtre.
   reste générique/neutre, utiliser `successToast` pour les trois actions (create/update/delete) plutôt que
   `dangerToast` ; réserver `dangerToast` aux cas où le texte est explicitement écrit pour une action
   destructive.
-  
-## Pièges connus
-
-- **Cliquer sur un `Switch` (`@cap-collectif/ui`) dans un test Cypress** : l'`<input type="checkbox">` sous-
-  jacent est rendu **visuellement caché** (`width:0, height:0, opacity:0`) — c'est le `<span
-  class="cap-switch__slider">` (le rail visible) qui joue le rôle visuel, tous deux enveloppés dans un
-  `<label htmlFor={id}>` interne au composant. Faire `cy.get('#monId').click({ force: true })` directement sur
-  l'input force un clic sur un élément de taille 0×0, ce qui est sensible au timing (calcul de coordonnées sur
-  une bounding box dégénérée) et produit un test **flaky** (a été observé à ~1 échec sur 3, pas un échec
-  systématique donc facile à manquer en un seul run). `cy.get('label[for="monId"]').click()` n'est pas non
-  plus fiable : si le champ a aussi un `<FormLabel htmlFor="monId">` séparé pour son texte (ex: "Publié" à
-  côté du Switch, cf. `FooterSocialNetworkModal.tsx`), il y a **deux** éléments `label[for="monId"]` dans le
-  DOM et `cy.click()` échoue ("Your subject contained 2 elements"). Le sélecteur fiable est
-  `cy.get('.cap-switch__slider').click()` (sans `force`) : c'est le seul élément à la fois unique, réel
-  (taille non nulle) et à l'intérieur du label interne du `Switch`, donc le clic déclenche bien le toggle par
-  délégation native du `<label>`.
-- **Ne pas copier un `dangerToast`/`successToast` d'un composant de référence sans relire le texte qui va
-  avec** : dans `UserTypeModal.tsx`, la suppression utilise `dangerToast` (rouge) mais avec un message
-  **rédigé pour la suppression** (ex: "type supprimé"). Si on réutilise `dangerToast` pour la suppression
-  tout en gardant un message générique comme `global.changes.saved` ("Modifications enregistrées") pour
-  factoriser les clés de traduction entre create/update/delete, le résultat est un toast rouge qui dit
-  "Modifications enregistrées" — incohérent visuellement (le rouge fait penser à une erreur). Si le message
-  reste générique/neutre, utiliser `successToast` pour les trois actions (create/update/delete) plutôt que
-  `dangerToast` ; réserver `dangerToast` aux cas où le texte est explicitement écrit pour une action
-  destructive.
+- **Clé de traduction du `successToast` après un enregistrement : préférer une clé générique à une clé
+  spécifique à la page.** Pour une **mise à jour**, utiliser `admin.update.successful` ("Modifications
+  enregistrées") plutôt que de créer une nouvelle clé dédiée (ex: ne pas créer `admin.videos.successfully-
+  updated`, rencontré sur la page vidéo). Pour la **création** et la **suppression**, une clé dédiée reste
+  acceptable si le contexte le justifie. Dans tous les cas, **vérifier d'abord si une clé déjà existante
+  convient** (`grep` dans `translations/fr-FR.json`) avant d'en créer une nouvelle.
 - **Champ `position` géré par Gedmo `@Sortable`** (`PositionableTrait`) sur une colonne SQL `NOT NULL` sans
   valeur par défaut : Gedmo ne calcule **pas** automatiquement une position au flush si le champ est laissé à
   `null` par une mutation GraphQL — ça remonte en erreur SQL (`Column 'position' cannot be null`), pas en
@@ -380,6 +487,176 @@ prop-drillé entre la liste et un ancêtre.
   `yarn.lock`/hoisting que les correctifs "chore: dedupe yarn.lock" / "fix: add missing lodash range" faits
   après la montée de version de Cypress — probable qu'il y en ait d'autres du même genre si Cypress n'a pas
   été relancé localement depuis cette montée de version.
+- **`Jodit`/`TextEditor` (WYSIWYG) rendu à l'intérieur d'un `Modal` (`@cap-collectif/ui`)** : sans
+  `hideOnClickOutside={false}` sur ce `Modal`, il se ferme dès qu'un clic est détecté hors de sa propre
+  arborescence DOM — un clic dans l'éditeur (sélection de texte, toolbar, popup de lien...) peut être
+  interprété comme un clic extérieur selon comment Jodit monte son DOM, ce qui ferme la modale en plein milieu
+  de la saisie. `TextEditor.tsx` passe déjà `hideOnClickOutside={false}` (accompagné de
+  `forceModalDialogToFalse`) sur son `Modal` interne (l'"éditeur avancé") pour cette raison précise —
+  reproduire au moins `hideOnClickOutside={false}` sur tout `Modal` qui contient un `Jodit`/`TextEditor`.
+  Repéré en testant `LoginSettingModal.tsx` (refonte de `pages.login`) : cliquer dans le corps de l'éditeur
+  pour positionner le curseur fermait la modale.
+- **Pour un sélecteur de langue dans un formulaire, préférer le composant `Select` importé directement depuis
+  `@cap-collectif/form`** (piloté en `value`/`onChange` "à la main", hors react-hook-form — voir
+  `BlogSettingsList.tsx` sur `19937-posts-sonata-refonte`, ou `LoginSettingModal.tsx`) **plutôt que**
+  `FieldInput type="select"` **ou** le composant `Menu` :
+  - `Menu` (`@cap-collectif/ui`, pattern utilisé par `Shield.tsx`) repose sur Ariakit (portail + gestion de
+    focus dédiée) et s'est avéré peu fiable dans une `Modal` en pratique (voir le piège dédié un peu plus haut).
+  - `FieldInput type="select"` wrappe ce même `Select` mais le pilote via `useController`/`ref` — `Select`
+    n'étant pas un `React.forwardRef`, ça déclenche un warning React ("Function components cannot be given
+    refs") visible dans la console. Ça reste fonctionnel, mais `Select` utilisé directement (comme fait
+    `PostFormSide.tsx` avec `currentLocale`, ou `BlogSettingsList.tsx`) l'évite et convient mieux ici puisque
+    la langue sélectionnée est un état d'affichage de la modale, pas une donnée du formulaire à soumettre.
+  Voir aussi la clé de traduction générique `global-languages` ("Langues") pour le label, plutôt que
+  `admin.post.languages` qui est spécifique aux articles de blog.
+- **Avant de conclure qu'un correctif ne fonctionne pas suite à un retour utilisateurice pendant un test
+  manuel dans le navigateur, vérifier que le serveur `capco_nextjs_1` a bien reconstruit le code modifié —
+  ne pas se fier aux seuls logs `[INFO] Compiled ...`.** Sur `LoginSettingModal.tsx` (refonte de `pages.login`),
+  plusieurs allers-retours de correctifs (`hideOnClickOutside`, `forceModalDialogToFalse`, puis le remplacement
+  de `Menu` par `FieldInput type="select"`) ont chacun été signalés comme "ne fonctionne toujours pas" par
+  l'utilisatrice alors que le code sur disque était pourtant correct. Cause réelle : le HMR de Next.js restait
+  bloqué sur une build périmée malgré des logs affichant `✓ Compiled /admin-next/login-settings` à chaque
+  édition — signe révélateur repéré a posteriori dans les logs (`docker logs capco_nextjs_1`) : des lignes
+  répétées `⚠ Fast Refresh had to perform a full reload` et des `GET .../webpack.hot-update.json 404`, qui
+  indiquent un état HMR déjà désynchronisé. Un test avec un navigateur headless fraîchement lancé (aucun cache
+  navigateur, donc immunisé aux problèmes de cache **côté client**) confirmait pourtant que le DOM réellement
+  servi correspondait encore à une **ancienne** version du composant — la build était donc périmée côté
+  **serveur**, pas seulement dans le cache du navigateur de l'utilisatrice. Un `docker restart capco_nextjs_1`
+  (puis attendre que `https://capco.dev/<route>` réponde à nouveau, voir le piège plus bas sur `502` pendant le
+  redémarrage) a résolu le problème : le comportement observé correspondait enfin au code sur disque. **Leçon
+  générale** : si un correctif censé être trivial et correct continue d'échouer après plusieurs itérations dans
+  la même session de dev, suspecter une build HMR périmée et faire un restart du conteneur Next.js **avant**
+  de continuer à chercher une cause applicative plus complexe — ça évite de partir sur de fausses pistes (ici,
+  plusieurs hypothèses sur le focus-trap d'Ariakit qui n'ont jamais pu être invalidées correctement tant que le
+  test portait sur une ancienne build).
+- **Piloter un navigateur headless réel pour diagnostiquer un bug d'interaction UI rapporté par
+  l'utilisatrice**, quand l'analyse statique du code ne suffit plus à trancher : `playwright-core` (le paquet
+  JS seul, sans télécharger de binaire navigateur) peut piloter le Google Chrome déjà installé sur la machine
+  via `chromium.launch({ channel: 'chrome', headless: true, args: ['--ignore-certificate-errors'] })` — installer
+  avec `npm install playwright-core --no-save` dans un dossier du scratchpad (pas dans le repo). Se logger avec
+  `page.request.post('https://capco.dev/login_check', { data: { username, password }, ... })` (même credentials
+  de fixture dev que pour `curl`, voir le piège dédié plus haut), puis `page.goto(...)`. Capturer
+  `page.on('console', ...)` et `page.on('pageerror', ...)` pour choper les erreurs JS/React réelles (ex: un
+  warning React affiché uniquement dans la vraie console du navigateur, invisible autrement), et
+  `page.screenshot({ fullPage: true })` pour voir l'état réel rendu. Beaucoup plus fiable qu'un aller-retour de
+  correctifs à l'aveugle basés sur la seule lecture du bundle compilé (`ui.cjs.development.js`) quand un
+  symptôme resiste à plusieurs hypothèses.
+- **Session de dev créée via `curl`/`POST /login_check` non reconnue par `admin-next` (redirection vers `/`
+  malgré des identifiants valides)** : `admin-next/utils/session-resolver.ts` va chercher la session dans Redis
+  sous une clé préfixée par `getEnv()` (dérivé de `NEXT_PUBLIC_SYMFONY_ENV`), qui doit correspondre à
+  l'environnement Symfony ayant réellement créé la session (`SYMFONY_ENV` du conteneur `capco_application_1`,
+  généralement `dev` en local). Si `admin-next/.env.local` contient `NEXT_PUBLIC_SYMFONY_ENV=test`, une
+  connexion `curl` classique (donc `dev`) ne sera jamais retrouvée par Next.js, qui redirige silencieusement
+  vers `/` comme si la session n'existait pas — **ne pas modifier `admin-next/.env.local` pour contourner ça
+  sans demander** : demander à la développeuse de
+  confirmer/ajuster la variable. Un
+  changement de cette variable nécessite un `docker restart capco_nextjs_1` pour être pris en compte (les
+  variables `NEXT_PUBLIC_*` sont lues au démarrage du process Next.js).
+- **L'énum GraphQL `TranslationLocale` sérialise ses valeurs en SCREAMING_SNAKE_CASE (`FR_FR`, `EN_GB`...),
+  pas au format code-langue brut (`fr-FR`, `en-GB`...)** utilisé par l'entité `Locale`/les fixtures/les
+  colonnes `locale` en base. Concrètement : une query `availableLocales { code }` renvoie `code: "FR_FR"`
+  côté client, **pas** `"fr-FR"`. Piège rencontré sur la page vidéo : un champ de formulaire nommé
+  dynamiquement `` `${currentLocale}-title` `` (pattern `MultilangueSidePanel`/`PostFormWrapper`, voir plus
+  bas) se retrouve avec l'id réel `FR_FR-title`, pas `fr-FR-title` — un sélecteur Cypress écrit "à
+  l'intuition" (`#fr-FR-title`) ne trouve alors **aucun élément visible** de façon peu évidente à déboguer
+  (le champ existe bien dans le DOM, juste pas à l'id attendu). Toujours vérifier l'id réel du champ dans le
+  DOM (ex: `cy.get('input, textarea, select').then($els => cy.log(...))` pour lister tous les ids présents)
+  plutôt que de deviner le format à partir du code des fixtures. Côté backend, ce n'est en général pas un
+  problème : le champ GraphQL `locale: TranslationLocale!` reconverti automatiquement la valeur reçue
+  (`FR_FR`) vers la constante PHP mappée dans le yaml de l'enum (qui, elle, vaut bien `'fr-FR'`) avant
+  d'arriver dans le resolver/la mutation — donc `$translationInput['locale']` côté PHP est déjà au bon
+  format `fr-FR`, seul le **client** (id de champ, sélecteurs Cypress) voit la forme `FR_FR`.
+- **`translations/` (fr-FR.json, les `.xlf`...) est un dossier entièrement généré et gitignored
+  (`translations/*` dans `.gitignore`, seul `translations/routes/` et `translations/README.md` sont
+  versionnés) — ne jamais l'éditer à la main pour ajouter une clé.** `translations/README.md` le dit
+  explicitement : "This directory is generated do NOT modify — You should run `yarn trad` instead !", et
+  `yarn trad` (`fetch-translations` → `fetch_translations.mjs`) va chercher les traductions depuis une
+  source externe (plateforme de traduction), pas depuis le repo. Conséquence pour une migration : si de
+  nouvelles clés de traduction sont nécessaires (ex: un nouveau message de succès `admin.videos.successfully-
+  created`) et qu'aucune clé existante ne convient, un outil IA **ne peut pas** les ajouter lui-même de façon
+  durable — les ajouter localement dans `translations/fr-FR.json` permet de tester immédiatement en local
+  (le fichier n'étant pas versionné, ça ne casse rien et ne pollue pas la PR), mais il faut explicitement
+  prévenir l'utilisateurice que ces clés doivent être ajoutées côté plateforme de traduction externe pour
+  survivre à un futur `yarn trad`. Réutiliser une clé déjà existante (`grep` dans `translations/fr-FR.json`
+  avant d'en inventer une nouvelle) reste donc préférable à chaque fois que c'est possible.
+- **Colonne `NOT NULL` sans défaut sur un champ de traduction optionnel côté GraphQL** (variante du piège
+  Gedmo `position` déjà documenté plus haut, mais pour un champ texte) : si une mutation `create`/`update`
+  manuelle (sans Symfony Form) construit l'entité de traduction directement (ex: `$translation->setBody($input['body'] ?? null)`)
+  et que la colonne SQL correspondante est `NOT NULL` sans valeur par défaut (ex: `body` sur une entité
+  utilisant `TextableTrait`, `@ORM\Column(name="body", type="text")` sans `nullable=true`), envoyer `null`
+  quand le champ optionnel est vide fait planter le flush avec une `NotNullConstraintViolationException` —
+  erreur qui remonte au client GraphQL comme un simple "Internal server Error" générique (catégorie
+  `internal`), sans aucun détail exploitable côté frontend/Cypress ; le vrai message SQL n'apparaît que dans
+  les logs Symfony (`var/log/{env}.log`, canal `app.CRITICAL`). Toujours vérifier la nullabilité réelle de la
+  colonne (pas seulement la nullabilité du champ GraphQL/du type d'input) et défaulter à `''` plutôt qu'à
+  `null` pour les colonnes texte `NOT NULL` sans défaut.
+- **`cy.task('db:restore')`/`db:save'` (plugin Cypress local) opèrent sur la même base de données locale
+  "dev" partagée, pas sur un snapshot isolé par exécution.** Le tout premier `db:save` d'un `cypress run`
+  capture l'état **courant** de la base au moment du lancement, et chaque `db:restore` ultérieur (dans
+  `beforeEach`) restaure **ce même instantané** — donc si un test précédent (un run cypress antérieur, ou un
+  test manuel) a réellement supprimé une ligne de fixture via une mutation `delete`, cette suppression est
+  définitive dans la base "dev" locale et se retrouve comme nouvel état de référence dans **tous les runs
+  cypress suivants**, y compris pour des tests qui n'ont rien à voir avec la suppression. Symptôme observé :
+  un test de suppression passait une fois puis se mettait à échouer de façon apparemment aléatoire sur un
+  tout autre test qui `cy.contains()` une ligne de fixture désormais absente. Si des tests Cypress locaux
+  échouent de façon incohérente en réutilisant des lignes de fixtures normalement présentes, relancer
+  `pipenv run fab local.database.generate` pour repartir d'un état propre avant de chercher un bug côté
+  code.
+- **`GlobalIdResolver::resolve()` ne sait pas résoudre un id de `Media`** : `Media.id` est exposé **brut** (pas
+  de `Relay::GlobalId`, ex: `media4`, ou l'uuid renvoyé par l'uploader), or `resolve()` ne gère que les global
+  ids encodés (`User:xxx` en base64) et quelques repositories "legacy" — un id brut de média renvoie donc
+  `null` **silencieusement**, ce qui dans une mutation `update` écrase le média existant par `null`. Dans
+  une mutation manuelle (sans Symfony Form), résoudre les relations avec le repository concerné après
+  `GlobalIdResolver::getDecodedId($id, true)` (qui accepte les deux formes) et un `instanceof`, en levant
+  une `UserError` si l'id ne résout pas (cf. `VideoTranslationsTrait::applyAuthorAndMedia`, précédent :
+  `HandleProposalFormCategoryImageMutation`). Le pattern Symfony Form (`RelayNodeType`) fait déjà ça pour
+  Post/UserType, d'où l'absence du problème sur ces pages.
+- **Liste paginée sur une entité traduisible : `leftJoin('x.translations')` + `setMaxResults()` compte des
+  lignes SQL, pas des entités.** Dès qu'une entité a plusieurs traductions, chaque page rend moins d'items
+  qu'annoncé et un item à cheval sur la limite apparaît sur deux pages — invisible tant que `multilangue`
+  est off (une seule traduction par ligne). Utiliser `Doctrine\ORM\Tools\Pagination\Paginator` (comme
+  `GlobalDistrictRepository::getWithPagination`) et ajouter un `addOrderBy('x.id')` de départage si le tri
+  principal (ex: `position`) peut avoir des égalités, sinon l'ordre entre pages n'est pas stable.
+- **Champ numérique optionnel côté UI (`FieldInput type="number"`) vidé par l'utilisateurice avant
+  d'enregistrer : vérifier ce que la mutation `update` fait réellement d'un `null` explicite avant de
+  laisser le champ non requis.** Rencontré sur le champ `position` de la page vidéo : côté front, un champ
+  vidé donne `''` (pas un number), converti en `null` avant l'envoi ; côté mutation PHP,
+  `$entity->setPosition((int) ($input->offsetGet('position') ?? $entity->getPosition()))` retombe alors
+  silencieusement sur la valeur **déjà en base** au lieu de la réinitialiser — l'utilisateurice vide le
+  champ, enregistre, voit le toast de succès, mais la valeur ne change pas (et réapparaît telle quelle au
+  rechargement), ce qui donne l'impression que "le champ ne fonctionne pas". Si le champ n'a pas vocation à
+  être effacé/optionnel, le rendre requis **avec un vrai schéma yup** (`yup.number().typeError(msg).required(msg)`,
+  voir la section "Validation yup" plus haut — `isRequired` sur `FormControl` seul ne suffit pas) plutôt que
+  de compter sur le fallback silencieux du backend. Aucun changement backend nécessaire dans ce cas : un
+  champ GraphQL `Int` nullable accepte très bien de toujours recevoir un entier non-null envoyé par le
+  front.
+- **Une vidéo/entité sans aucune traduction peut être créée si la validation ne rejette pas
+  `translations: []`** : un `foreach` de validation sur une liste vide retourne vrai par défaut. Exiger au
+  moins une traduction (l'UI en envoie toujours une, mais pas l'API).
+- **Ne pas vérifier une page `admin-next` en `curl` avec une session obtenue par `POST /login_check`
+  seul** : Next.js lit la session dans Redis via `SessionWithJsonHandler`, qui n'est écrite avec le `viewer`
+  qu'au premier rendu d'une page PHP — la sonde répond alors `302 /` (« session not found in redis ») même
+  si tout va bien. Le curl reste valable pour `POST /graphql/internal` (côté PHP).
+- **Si tous les tests Cypress redirigent vers `/` avec « This session key ... could not be found in redis »
+  dans les logs de `capco_nextjs_1`** : vérifier en premier `NEXT_PUBLIC_SYMFONY_ENV=test` dans
+  `admin-next/.env.local` (précondition d'AGENTS.md). Next recharge ce fichier à chaud (`Reload env`) — le
+  recommenter pour tester à la main sur `capco.dev` casse immédiatement Cypress, qui tourne sur `capco.test`.
+- **Après un changement de signature d'une méthode publique d'un repository** (ex: `getPaginated(): array`
+  → `: Paginator`), le conteneur compilé de l'env `test` garde un proxy lazy avec l'ancienne signature et
+  **toute** requête `capco.test` répond 500 (`Compile Error: Declaration of ... must be compatible`) — l'env
+  `dev` recompile seul en debug. Vider le cache avec `pipenv run fab local.app.clear-cache --environment=test`
+  (qui fait `rm -rf var/cache/test`), **pas** avec `bin/console cache:clear --env=test` via `docker exec`, qui
+  reconstruit le conteneur avec les variables d'env du shell et non celles du serveur.
+- **Ne jamais passer un fichier `.json` (ex: `SideBarItems.json`) dans la même commande `prettier --write`
+  que des fichiers `.ts`/`.tsx`.** Observé sur cette migration : une commande `prettier --write` regroupant
+  plusieurs fichiers `.ts(x)` et un `.json` a fait détecter le mauvais parser pour le `.json` (parser
+  JS/Babel au lieu de JSON), le réécrivant avec des clés non quotées, des guillemets simples et un `;`
+  d'ouverture — un fichier qui n'est alors plus du JSON valide, cassant silencieusement tout ce qui
+  l'importe (ex: `import sideBarItems from './SideBarItems.json'`, erreur webpack "Cannot parse JSON" côté
+  Next.js). Le run Prettier n'a signalé aucune erreur pour ce fichier (contrairement à un `.json` invalide en
+  entrée, où Prettier échoue explicitement) car il s'agit ici d'un JSON *valide en entrée* mal *ré-émis* en
+  sortie. Formater les `.json` dans une commande Prettier séparée des `.ts`/`.tsx`, et vérifier le diff (`git
+  diff --stat`) d'un fichier de config JSON après un passage Prettier avant de continuer.
 
 ## Validation yup : toujours un schéma, et un champ texte requis n'est pas juste `.required()`
 
@@ -408,42 +685,6 @@ prop-drillé entre la liste et un ancêtre.
   création/édition avec un champ titre/nom — utiliser `notBlank` plutôt que de réécrire un `.test(...)` ad hoc
   à chaque fois. Si un nouveau besoin de validation générique apparaît (autre que "pas vide/blanc"), ajouter la
   méthode custom dans ce même fichier `yupExtensions.ts` plutôt que de la dupliquer dans chaque schéma.
-
-## Connection ID pour les mutations create/delete (Relay)
-
-Beaucoup de listes Relay paginées ont besoin du `__id` de la connection pour que les mutations `create`/`delete`
-mettent à jour le cache local (`connections: [connectionId]` passé à la mutation). Deux cas très différents se
-présentent, à ne pas traiter de la même façon :
-
-- **Le composant qui déclenche la mutation vit au même niveau que le composant qui a le fragment de la liste**
-  (ex : un bouton "modifier"/"supprimer" rendu à l'intérieur du `.map()` de la liste elle-même, comme dans
-  `SourceCategoriesList.tsx`) : la liste a déjà `__id` disponible directement dans les données de son fragment
-  (le champ `@connection(key: "...")` expose un champ client `__id`), il suffit de le passer en prop au composant
-  enfant. **Pas besoin de `ConnectionHandler` dans ce cas.**
-- **Le composant qui déclenche la mutation vit dans un composant parent qui n'a pas le fragment de la liste**
-  (ex : un bouton "Ajouter" tout en haut de la page, au-dessus du `<Suspense>` qui contient la liste paginée —
-  cas de `SourceCategoryModal context="create"` rendu dans `pages/admin-next/source-categories.tsx`) : **ne
-  pas** dupliquer la query parente pour aller chercher `__id`, et surtout **ne pas** créer un `useState` +
-  un setter passé en prop à la liste pour "remonter" le `__id` du fragment vers le parent via un `useEffect`: cela crée un état dupliqué
-  avec les données Relay, un rendu supplémentaire, et un court instant où la valeur est vide au premier rendu
-  — ce qui casse silencieusement le bouton "Ajouter" jusqu'à ce que l'effet se déclenche. À la place, calculer
-  l'ID de la connection directement au moment du commit de la mutation avec
-  `ConnectionHandler.getConnectionID(parentId, connectionKey, filters)` (import depuis `relay-runtime`) :
-  - `parentId` : l'id du noeud parent du champ connection dans le schéma GraphQL. Pour une connection exposée
-    directement sur `Query` (comme `sourceCategories`), c'est `ROOT_ID` (également importé de `relay-runtime`) ;
-    pour une connection sous un objet (ex: `organization.proposalForms`), c'est l'id de cet objet.
-  - `connectionKey` : la valeur du `key:` déclarée dans `@connection(key: "...")` sur le champ, dans le
-    fragment de la liste (ex: `"SourceCategoriesList_sourceCategories"`).
-  - `filters` : un objet reprenant les arguments de la query autres que la pagination (`first`/`after`/
-    `last`/`before`), s'il y en a (recherche, tri, filtres métier...) — objet vide (`{}`) si la connection n'a
-    pas d'autre argument. Voir `CreateFormModal.tsx` pour un exemple avec filtres (recherche + tri + type).
-  - Ce pattern est déjà utilisé ailleurs dans `admin-next/` : `components/BackOffice/Forms/CreateFormModal.tsx`,
-    `components/BackOffice/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes.tsx`,
-    `components/BackOffice/Mediator/MediatorVoteModal/MediatorVoteModal.tsx`.
-
-En résumé : si `__id` est déjà dans les données du composant courant, le passer directement en prop ; sinon le
-calculer avec `ConnectionHandler.getConnectionID` au point d'usage — jamais via un état React + un setter
-prop-drillé entre la liste et un ancêtre.
 
 ## Suivi des migrations
 
