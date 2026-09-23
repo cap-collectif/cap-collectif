@@ -47,6 +47,7 @@ const ExportModal: FC<ExportModalProps> = ({ project: projectRef, disclosure }) 
   return (
     <MultiStepModal
       ariaLabel={intl.formatMessage({ id: 'import-list' })}
+      alwaysOpenInPortal
       disclosure={
         disclosure ?? (
           <Button variant="tertiary" variantColor="primary" variantSize="small" leftIcon={CapUIIcon.Download}>

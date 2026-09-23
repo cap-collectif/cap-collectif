@@ -42,6 +42,7 @@ const ProjectModalConfirmationDelete: React.FC<ProjectModalConfirmationDeletePro
     <Modal
       size={CapUIModalSize.Md}
       ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
+      alwaysOpenInPortal
       disclosure={
         <Menu.Item closeOnSelect={false}>
           <Text> {intl.formatMessage({ id: 'admin.global.delete' })} </Text>

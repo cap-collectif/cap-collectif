@@ -1,22 +1,21 @@
-import type { FC } from 'react'
-import React, { useEffect } from 'react'
 import {
   Button,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUILineHeight,
+  Flex,
+  Heading,
   MultiStepModal,
   Text,
-  Heading,
   useMultiStepModal,
-  CapUIIcon,
-  Flex,
-  CapUIFontSize,
-  CapUILineHeight,
 } from '@cap-collectif/ui'
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { ExportProps } from './ExportModal'
-import ChooseExportTypeCheckboxOption from './ChooseExportTypeCheckboxOption'
 import { graphql, useFragment } from 'react-relay'
 import { ChooseExportTypeModal_project$key } from '~relay/ChooseExportTypeModal_project.graphql'
-
+import ChooseExportTypeCheckboxOption from './ChooseExportTypeCheckboxOption'
+import { ExportProps } from './ExportModal'
 
 type ChooseExportTypeModalProps = {
   readonly project: ChooseExportTypeModal_project$key
@@ -27,9 +26,9 @@ type ChooseExportTypeModalProps = {
 }
 
 const PROJECT_FRAGMENT = graphql`
-    fragment ChooseExportTypeModal_project on Project {
-        title
-    }
+  fragment ChooseExportTypeModal_project on Project {
+    title
+  }
 `
 
 const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
@@ -40,7 +39,7 @@ const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
   votesEnabled,
 }) => {
   const intl = useIntl()
-  const project = useFragment(PROJECT_FRAGMENT, projectRef);
+  const project = useFragment(PROJECT_FRAGMENT, projectRef)
   const { goToNextStep, goToPreviousStep } = useMultiStepModal()
   const onlyParticipantsAllowed = enforcedChoice
 
@@ -51,8 +50,7 @@ const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
 
     // @ts-ignore
     setExportParams(previous => {
-      const hasOnlyParticipants =
-        previous.selectedData.length === 1 && previous.selectedData[0] === 'participants'
+      const hasOnlyParticipants = previous.selectedData.length === 1 && previous.selectedData[0] === 'participants'
       if (hasOnlyParticipants) {
         return previous
       }
@@ -79,7 +77,12 @@ const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
           >
             {project.title}
           </Text>
-          <Heading color="#3D454C !important" fontSize={CapUIFontSize.Headline} lineHeight={CapUILineHeight.M} fontWeight={600}>
+          <Heading
+            color="#3D454C !important"
+            fontSize={CapUIFontSize.Headline}
+            lineHeight={CapUILineHeight.M}
+            fontWeight={600}
+          >
             {intl.formatMessage({
               id: 'global.export',
             })}
@@ -88,13 +91,12 @@ const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
       </MultiStepModal.Header>
 
       <MultiStepModal.Body>
-        <Text marginBottom={4} color="#3D454C !important">
-          {intl.formatMessage({
-            id: 'export.select_type',
-          })}
-        </Text>
-
         <Flex direction="column" spacing={4}>
+          <Text marginBottom={4} color="#3D454C !important" alignSelf="flex-start">
+            {intl.formatMessage({
+              id: 'export.select_type',
+            })}
+          </Text>
           <ChooseExportTypeCheckboxOption
             option={'contribution'}
             exportParams={exportParams}
