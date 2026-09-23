@@ -4,7 +4,11 @@ InternalSiteColor:
         description: 'A site color.'
         name: SiteColor
         fields:
+            id:
+                type: 'ID!'
             keyname:
                 type: 'String!'
             value:
                 type: 'String'
+            isEnabled:
+                type: 'Boolean!'

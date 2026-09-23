@@ -9819,6 +9819,8 @@ type Mutation {
 
   """Update a blog page image."""
   updateBlogImage(input: UpdateBlogImageInput!): UpdateBlogImagePayload
+  updateAppearanceColor(input: UpdateAppearanceColorInput!): UpdateAppearanceColorPayload
+  updateAppearanceImage(input: UpdateAppearanceImageInput!): UpdateAppearanceImagePayload
 
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
@@ -15127,6 +15129,8 @@ type Query {
 
   """List all site colors."""
   siteColors: [SiteColor!]!
+  appearanceColors: [SiteColor!]!
+  appearanceImages: [SiteImage!]!
 
   """Retrieve the current version of the app."""
   appVersion: String
@@ -18328,8 +18332,10 @@ type SimpleQuestion implements Question & Node {
 
 """A site color."""
 type SiteColor {
+  id: ID!
   keyname: String!
   value: String
+  isEnabled: Boolean!
 }
 
 """A site image"""
@@ -19586,6 +19592,37 @@ type UpdateAnonymousReplyPayload {
   reply: Reply
   errorCode: UpdateAnonymousReplyErrorCode
   clientMutationId: String
+}
+
+input UpdateAppearanceColorInput {
+  id: ID!
+  value: String!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateAppearanceColorPayload {
+  siteColor: SiteColor
+  errorCode: UpdateAppearanceSettingErrorCode
+  clientMutationId: String
+}
+
+input UpdateAppearanceImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateAppearanceImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateAppearanceSettingErrorCode
+  clientMutationId: String
+}
+
+enum UpdateAppearanceSettingErrorCode {
+  SITE_COLOR_NOT_FOUND
+  SITE_IMAGE_NOT_FOUND
 }
 
 enum UpdateBlogImageErrorCode {

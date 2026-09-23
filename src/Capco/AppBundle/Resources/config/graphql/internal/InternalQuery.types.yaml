@@ -544,6 +544,14 @@ InternalQuery:
                 description: 'List all site colors.'
                 type: '[InternalSiteColor!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuerySiteColorsResolver")'
+            appearanceColors:
+                type: '[InternalSiteColor!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\AppearanceSettings\\AppearanceColorsQueryResolver")'
+            appearanceImages:
+                type: '[SiteImage!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\AppearanceSettings\\AppearanceImagesQueryResolver")'
             appVersion:
                 description: 'Retrieve the current version of the app.'
                 type: 'String'

@@ -52,6 +52,8 @@ export const URL_MAP = {
     '/admin/settings/settings.modules/',
     '/admin-next/notification-settings',
     '/admin/settings/settings.appearance/',
+    '/admin-next/appearance-settings',
+    '/admin-next/hub-api-green',
     '/admin/capco/app/sitecolor/',
   ],
   pages: [
@@ -72,11 +74,7 @@ export const URL_MAP = {
     '/admin/settings/pages.charter/',
     '/admin/settings/pages.shield/',
   ],
-  emailing: [
-    '/admin/mailingCampaign/',
-    '/admin/mailingList/',
-    '/admin/capco/app/newslettersubscription/',
-  ],
+  emailing: ['/admin/mailingCampaign/', '/admin/mailingList/', '/admin/capco/app/newslettersubscription/'],
 }
 
 export const CAP_COLLECTIF_SVG: JSX.Element | JSX.Element[] | string = (
@@ -130,4 +128,4 @@ export const CAP_COLLECTIF_SVG: JSX.Element | JSX.Element[] | string = (
       fill="#FEFCF6"
     />
   </svg>
-);
+)

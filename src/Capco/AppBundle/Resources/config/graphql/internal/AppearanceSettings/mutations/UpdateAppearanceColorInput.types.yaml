@@ -1,0 +1,10 @@
+UpdateAppearanceColorInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+            value:
+                type: 'String!'
+            isEnabled:
+                type: 'Boolean!'

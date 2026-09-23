@@ -79,7 +79,6 @@ class FeaturesCategoryResolver
                 ],
             ],
         ],
-        'settings.appearance' => ['conditions' => [], 'features' => []],
     ];
 
     public function __construct(

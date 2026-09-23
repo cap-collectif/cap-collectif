@@ -249,7 +249,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                       href="/admin-next/notification-settings"
                     />
                   )}
-                  <SidebarLink text="admin.label.settings.appearance" href="/admin/settings/settings.appearance/list" />
+                  <SidebarLink text="admin.label.settings.appearance" href="/admin-next/appearance-settings" />
                   <SidebarLink text="secured-participation" href="/admin-next/secured-participation" />
                   <SidebarLink text="menu.activity-log" href="/admin-next/activity-log" />
                 </SidebarAccordionPanel>

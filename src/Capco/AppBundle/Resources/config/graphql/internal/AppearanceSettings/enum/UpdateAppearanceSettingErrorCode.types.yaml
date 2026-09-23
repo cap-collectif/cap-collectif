@@ -1,0 +1,8 @@
+UpdateAppearanceSettingErrorCode:
+    type: enum
+    config:
+        values:
+            SITE_COLOR_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AppearanceSettings\UpdateAppearanceColorMutation::SITE_COLOR_NOT_FOUND
+            SITE_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AppearanceSettings\UpdateAppearanceImageMutation::SITE_IMAGE_NOT_FOUND

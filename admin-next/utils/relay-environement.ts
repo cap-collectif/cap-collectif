@@ -7,9 +7,18 @@ const store = new Store(new RecordSource())
 // @ts-ignore fixme
 const network = Network.create(executeFunction)
 
+const getDataID = (fieldValue: Record<string, unknown>, typeName: string) => {
+  const id = fieldValue.id
+  if ((typeName === 'SiteColor' || typeName === 'SiteImage') && typeof id === 'string') {
+    return `${typeName}:${id}`
+  }
+  return typeof id === 'string' ? id : null
+}
+
 export const environment = new Environment({
   network,
   store,
+  getDataID,
 })
 
 const getEnvironment = (featureFlags: FeatureFlags) => {

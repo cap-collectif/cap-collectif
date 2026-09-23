@@ -252,7 +252,7 @@
             },
             {
                 "title": "admin.label.settings.appearance",
-                "href": "/admin/settings/settings.appearance/list",
+                "href": "/admin-next/appearance-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

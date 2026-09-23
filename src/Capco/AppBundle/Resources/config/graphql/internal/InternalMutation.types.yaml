@@ -1564,6 +1564,20 @@ InternalMutation:
                     inputType: UpdateBlogImageInput
                     payloadType: UpdateBlogImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\BlogSettings\\UpdateBlogImageMutation", args)'
+            updateAppearanceColor:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateAppearanceColorInput
+                    payloadType: UpdateAppearanceColorPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AppearanceSettings\\UpdateAppearanceColorMutation", args)'
+            updateAppearanceImage:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateAppearanceImageInput
+                    payloadType: UpdateAppearanceImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AppearanceSettings\\UpdateAppearanceImageMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

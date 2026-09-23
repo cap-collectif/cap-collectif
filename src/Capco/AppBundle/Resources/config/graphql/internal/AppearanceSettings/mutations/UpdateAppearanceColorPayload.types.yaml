@@ -1,0 +1,8 @@
+UpdateAppearanceColorPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteColor:
+                type: 'InternalSiteColor'
+            errorCode:
+                type: 'UpdateAppearanceSettingErrorCode'
