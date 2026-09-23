@@ -1,0 +1,10 @@
+UpdateBlogImageInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+            mediaId:
+                type: 'ID'
+            isEnabled:
+                type: 'Boolean!'

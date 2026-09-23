@@ -66,6 +66,16 @@ InternalQuery:
                     keyname:
                         type: 'String!'
                         description: 'The site image keyname'
+            blogSettings:
+                type: '[SiteParameter!]!'
+                description: 'Get blog page settings.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('blog')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\BlogSettings\\BlogSettingsQueryResolver")'
+            blogSettingsImages:
+                type: '[SiteImage!]!'
+                description: 'Get blog page images.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('blog')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\BlogSettings\\BlogSettingsImageQueryResolver")'
             registrationForm:
                 type: 'InternalRegistrationForm'
                 description: 'Get the current registration form'

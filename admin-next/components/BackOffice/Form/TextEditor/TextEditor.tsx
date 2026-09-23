@@ -81,6 +81,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
             placeholder={placeholder}
             onChange={value => setValue(name, value)}
             value={value}
+            selectedLanguage={selectedLanguage}
             platformLanguage={platformLanguage}
             limitChars={limitChars}
             clientConfig={clientConfig}

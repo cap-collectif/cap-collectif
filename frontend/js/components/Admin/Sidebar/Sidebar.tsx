@@ -262,7 +262,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.section" href="/admin/capco/app/section/list" />
                   <SidebarLink text="admin.label.pages.contact" href="/admin/contact/list" />
                   <SidebarLink text="admin.label.pages.homepage" href="/admin/settings/pages.homepage/list" />
-                  <SidebarLink text="admin.label.pages.blog" href="/admin/settings/pages.blog/list" />
+                  <SidebarLink text="admin.label.pages.blog" href="/admin-next/blog-settings" />
                   <SidebarLink text="admin.label.pages.events" href="/admin/settings/pages.events/list" />
                   <SidebarLink text="admin.label.pages.themes" href="/admin/settings/pages.themes/list" />
                   <SidebarLink text="admin.label.pages.projects" href="/admin/settings/pages.projects/list" />

@@ -1548,6 +1548,22 @@ InternalMutation:
                     inputType: UpdatePerformanceSettingInput
                     payloadType: UpdatePerformanceSettingPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\PerformanceSettings\\UpdatePerformanceSettingMutation", args)'
+            updateBlogSetting:
+                description: 'Update a blog page setting.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('blog')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateBlogSettingInput
+                    payloadType: UpdateBlogSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\BlogSettings\\UpdateBlogSettingMutation", args)'
+            updateBlogImage:
+                description: 'Update a blog page image.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('blog')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateBlogImageInput
+                    payloadType: UpdateBlogImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\BlogSettings\\UpdateBlogImageMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

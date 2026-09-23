@@ -10,7 +10,6 @@ class FeaturesCategoryResolver
 {
     protected static array $categories = [
         'pages.homepage' => ['conditions' => [], 'features' => []],
-        'pages.blog' => ['conditions' => ['blog'], 'features' => []],
         'pages.events' => [
             'conditions' => ['calendar'],
             'features' => [

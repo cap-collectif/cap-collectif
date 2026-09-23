@@ -297,7 +297,7 @@
             },
             {
                 "title": "admin.label.pages.blog",
-                "href": "/admin/settings/pages.blog/list",
+                "href": "/admin-next/blog-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

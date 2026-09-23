@@ -59,7 +59,7 @@ export const URL_MAP = {
     '/admin/capco/app/section/',
     '/admin/contact/',
     '/admin/settings/pages.homepage/',
-    '/admin/settings/pages.blog/',
+    '/admin-next/blog-settings',
     '/admin/settings/pages.events/',
     '/admin/settings/pages.themes/',
     '/admin/settings/pages.projects/',

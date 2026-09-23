@@ -15,3 +15,5 @@ SiteParameter:
                 type: '[SiteParameterTranslation]'
             value:
                 type: 'String'
+            type:
+                type: 'Int!'

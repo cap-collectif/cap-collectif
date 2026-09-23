@@ -9814,6 +9814,12 @@ type Mutation {
   """update a SiteParameter of the settings.performance category."""
   updatePerformanceSetting(input: UpdatePerformanceSettingInput!): UpdatePerformanceSettingPayload
 
+  """Update a blog page setting."""
+  updateBlogSetting(input: UpdateBlogSettingInput!): UpdateBlogSettingPayload
+
+  """Update a blog page image."""
+  updateBlogImage(input: UpdateBlogImageInput!): UpdateBlogImagePayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -14829,6 +14835,12 @@ type Query {
     keyname: String!
   ): SiteImage
 
+  """Get blog page settings."""
+  blogSettings: [SiteParameter!]!
+
+  """Get blog page images."""
+  blogSettingsImages: [SiteImage!]!
+
   """Get the current registration form"""
   registrationForm: RegistrationForm
 
@@ -18352,6 +18364,7 @@ type SiteParameter {
   isEnabled: Boolean!
   translations: [SiteParameterTranslation]
   value: String
+  type: Int!
 }
 
 """translation of site parameter"""
@@ -19571,6 +19584,42 @@ type UpdateAnonymousReplyPayload {
   """The updated AnonymousReply"""
   reply: Reply
   errorCode: UpdateAnonymousReplyErrorCode
+  clientMutationId: String
+}
+
+enum UpdateBlogImageErrorCode {
+  BLOG_IMAGE_NOT_FOUND
+}
+
+input UpdateBlogImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateBlogImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateBlogImageErrorCode
+  clientMutationId: String
+}
+
+enum UpdateBlogSettingErrorCode {
+  BLOG_PARAMETER_NOT_FOUND
+  BLOG_PARAMETER_INVALID_VALUE
+}
+
+input UpdateBlogSettingInput {
+  id: ID!
+  value: String!
+  locale: String!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateBlogSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateBlogSettingErrorCode
   clientMutationId: String
 }
 

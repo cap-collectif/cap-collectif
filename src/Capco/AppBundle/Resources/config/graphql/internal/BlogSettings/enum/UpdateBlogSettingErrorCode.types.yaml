@@ -1,0 +1,9 @@
+UpdateBlogSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateBlogSettingErrorCode
+        values:
+            BLOG_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\BlogSettings\UpdateBlogSettingMutation::BLOG_PARAMETER_NOT_FOUND
+            BLOG_PARAMETER_INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\BlogSettings\UpdateBlogSettingMutation::BLOG_PARAMETER_INVALID_VALUE

@@ -1,0 +1,7 @@
+UpdateBlogImageErrorCode:
+    type: enum
+    config:
+        name: UpdateBlogImageErrorCode
+        values:
+            BLOG_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\BlogSettings\UpdateBlogImageMutation::BLOG_IMAGE_NOT_FOUND
