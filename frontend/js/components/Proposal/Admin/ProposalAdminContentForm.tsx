@@ -441,7 +441,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
     )
     const { showEditFusionModal } = this.state
 
-    const hasEmail = !!proposal.author?.email
+    const hasEmail = !!proposal.authorEmail
     const isParticipant = proposal.author?.__typename === 'Participant'
 
     return (
@@ -1050,9 +1050,9 @@ export default createFragmentContainer(container, {
         __typename
         id
         displayName
-        email
         username
       }
+      authorEmail
       theme {
         id
       }

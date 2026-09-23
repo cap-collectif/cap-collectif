@@ -14,8 +14,8 @@ describe('<ProposalAdminStatusForm />', () => {
         id: 'author1',
         isViewer: false,
         isEmailConfirmed: false,
-        email: 'soon@yopmail.com',
       },
+      authorEmail: 'soon@yopmail.com',
       deletedAt: null,
       publicationStatus: 'UNPUBLISHED',
     }
@@ -23,7 +23,6 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="UNPUBLISHED"
         isSuperAdmin
-        viewerIsAdmin
         pristine
         invalid={false}
         valid={false}
@@ -46,8 +45,8 @@ describe('<ProposalAdminStatusForm />', () => {
         id: 'author1',
         isEmailConfirmed: true,
         isViewer: false,
-        email: 'soon@yopmail.com',
       },
+      authorEmail: 'soon@yopmail.com',
       trashedReason: null,
       deletedAt: null,
       publicationStatus: 'PUBLISHED',
@@ -56,7 +55,6 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="PUBLISHED"
         isSuperAdmin
-        viewerIsAdmin
         pristine
         invalid={false}
         valid={false}

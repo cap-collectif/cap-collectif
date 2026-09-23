@@ -12,7 +12,6 @@ export type Props = {
   proposalId: number
   dirty: boolean
   proposalRevisionsEnabled: boolean
-  viewerIsAdmin: boolean
 }
 
 const onUnload = e => {
@@ -37,7 +36,7 @@ const component = ({ error, props }: { error: Error | null | undefined; props: a
   return <Loader />
 }
 
-export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, viewerIsAdmin, dirty }: Props) => {
+export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, dirty }: Props) => {
   React.useEffect(() => {
     if (dirty) window.addEventListener('beforeunload', onUnload)
     else window.removeEventListener('beforeunload', onUnload)
@@ -52,7 +51,6 @@ export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, viewer
             $id: ID!
             $count: Int!
             $proposalRevisionsEnabled: Boolean!
-            $viewerIsAdmin: Boolean!
             $cursor: String
           ) {
             viewer {
@@ -60,7 +58,7 @@ export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, viewer
             }
             proposal: node(id: $id) {
               ...ProposalAdminPageTabs_proposal
-                @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled, viewerIsAdmin: $viewerIsAdmin)
+                @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
             }
           }
         `}
@@ -68,7 +66,6 @@ export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, viewer
           id: proposalId,
           count: PROPOSAL_FOLLOWERS_TO_SHOW,
           proposalRevisionsEnabled,
-          viewerIsAdmin,
           cursor: null,
         }}
         render={component}
@@ -77,10 +74,9 @@ export const ProposalAdminPage = ({ proposalId, proposalRevisionsEnabled, viewer
   )
 }
 
-const mapStateToProps = (state: State, props: Props) => {
+const mapStateToProps = (state: State) => {
   return {
     proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
-    viewerIsAdmin: props.viewerIsAdmin,
     dirty:
       isDirty('proposal-admin-edit')(state) ||
       isDirty('proposal-admin-selections')(state) ||

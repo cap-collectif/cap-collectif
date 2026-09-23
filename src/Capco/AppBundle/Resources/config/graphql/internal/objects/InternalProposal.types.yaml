@@ -87,6 +87,9 @@ InternalProposal:
                 type: 'InternalProposalDistrict'
             author:
                 type: 'InternalContributor!'
+            authorEmail:
+                type: 'String'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorEmailResolver", value)'
             deletedAt:
                 type: 'DateTime'
                 description: 'The delete date.'

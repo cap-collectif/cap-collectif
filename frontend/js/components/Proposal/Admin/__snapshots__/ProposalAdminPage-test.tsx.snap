@@ -32,11 +32,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                 "kind": "LocalArgument",
                 "name": "proposalRevisionsEnabled",
               },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "viewerIsAdmin",
-              },
             ],
             "kind": "Fragment",
             "metadata": null,
@@ -79,11 +74,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                         "name": "proposalRevisionsEnabled",
                         "variableName": "proposalRevisionsEnabled",
                       },
-                      Object {
-                        "kind": "Variable",
-                        "name": "viewerIsAdmin",
-                        "variableName": "viewerIsAdmin",
-                      },
                     ],
                     "kind": "FragmentSpread",
                     "name": "ProposalAdminPageTabs_proposal",
@@ -94,7 +84,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
             "type": "Query",
           },
-          "hash": "fe7e748b7a20fc22448d0e9230c1c958",
+          "hash": "22994334a1dcfc0467fde86854af3a3f",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -112,11 +102,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "proposalRevisionsEnabled",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "viewerIsAdmin",
               },
               Object {
                 "defaultValue": null,
@@ -249,27 +234,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                             "storageKey": null,
                           },
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "displayName",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "email",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
                             "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
@@ -290,7 +254,28 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                             ],
                             "type": "User",
                           },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "displayName",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "username",
+                            "storageKey": null,
+                          },
                         ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "authorEmail",
                         "storageKey": null,
                       },
                       Object {
@@ -2444,7 +2429,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6cba0a7fabe6a5d1a938765b3b2aa084",
+            "cacheID": "917477d54c51466456f53a99827a314e",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2453,7 +2438,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
   $id: ID!
   $count: Int!
   $proposalRevisionsEnabled: Boolean!
-  $viewerIsAdmin: Boolean!
   $cursor: String
 ) {
   viewer {
@@ -2462,7 +2446,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
   }
   proposal: node(id: $id) {
     __typename
-    ...ProposalAdminPageTabs_proposal_1WGO9S
+    ...ProposalAdminPageTabs_proposal_2uwUKI
     id
   }
 }
@@ -2494,9 +2478,9 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     __typename
     id
     displayName
-    email
     username
   }
+  authorEmail
   theme {
     id
   }
@@ -2752,10 +2736,10 @@ fragment ProposalAdminOfficialAnswer_viewer on User {
   ...ProposalAdminOfficialAnswerForm_viewer
 }
 
-fragment ProposalAdminPageTabs_proposal_1WGO9S on Proposal {
+fragment ProposalAdminPageTabs_proposal_2uwUKI on Proposal {
   url
   reference
-  ...ProposalAdminStatusForm_proposal_2TMsX8
+  ...ProposalAdminStatusForm_proposal
   ...ProposalAdminSelections_proposal
   ...ProposalAdminContentForm_proposal_2uwUKI
   ...ProposalAdminNewsForm_proposal
@@ -2825,7 +2809,7 @@ fragment ProposalAdminSelections_proposal on Proposal {
   }
 }
 
-fragment ProposalAdminStatusForm_proposal_2TMsX8 on Proposal {
+fragment ProposalAdminStatusForm_proposal on Proposal {
   id
   publicationStatus
   trashedReason
@@ -2833,12 +2817,12 @@ fragment ProposalAdminStatusForm_proposal_2TMsX8 on Proposal {
   author {
     __typename
     id
-    email @include(if: $viewerIsAdmin)
     ... on User {
       isEmailConfirmed
       isViewer
     }
   }
+  authorEmail
 }
 
 fragment ProposalFusionEditForm_proposal on Proposal {
@@ -2965,7 +2949,6 @@ fragment UserPreview_user on User {
         "cursor": null,
         "id": 1,
         "proposalRevisionsEnabled": false,
-        "viewerIsAdmin": true,
       }
     }
   />

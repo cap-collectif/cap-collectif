@@ -18,18 +18,15 @@ type Variables = ChangeProposalPublicationStatusMutationVariables & {
     readonly __typename?: string
     readonly id: string
     readonly isEmailConfirmed: boolean | null | undefined
-    readonly email: string | null | undefined
     readonly isViewer: boolean
   }
+  readonly authorEmail: string | null | undefined
 }
 const mutation = graphql`
-  mutation ChangeProposalPublicationStatusMutation(
-    $input: ChangeProposalPublicationStatusInput!
-    $viewerIsAdmin: Boolean!
-  ) {
+  mutation ChangeProposalPublicationStatusMutation($input: ChangeProposalPublicationStatusInput!) {
     changeProposalPublicationStatus(input: $input) {
       proposal {
-        ...ProposalAdminStatusForm_proposal @arguments(viewerIsAdmin: $viewerIsAdmin)
+        ...ProposalAdminStatusForm_proposal
       }
     }
   }
@@ -112,6 +109,7 @@ const commit = (variables: Variables): Promise<ChangeProposalPublicationStatusMu
             __typename: variables.author.__typename ?? 'User',
             ...variables.author,
           },
+          authorEmail: variables.authorEmail,
           deletedAt: null,
           id: variables.input.proposalId,
           publicationStatus: variables.input.publicationStatus,

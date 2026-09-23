@@ -12975,6 +12975,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   estimation: Float
   media: Media
   district: ProposalDistrict
+  authorEmail: String
 
   """The delete date."""
   deletedAt: DateTime

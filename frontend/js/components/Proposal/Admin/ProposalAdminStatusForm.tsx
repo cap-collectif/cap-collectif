@@ -23,7 +23,6 @@ type RelayProps = {
 type Props = RelayProps & {
   publicationStatus: string
   isSuperAdmin: boolean
-  viewerIsAdmin: boolean
   pristine: boolean
   invalid: boolean
   valid: boolean
@@ -49,7 +48,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalPublicationStatusMutation.commit({
     input,
     author: props.proposal.author,
-    viewerIsAdmin: props.viewerIsAdmin,
+    authorEmail: props.proposal.authorEmail,
   })
 }
 
@@ -103,7 +102,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 <FormattedMessage
                   id="author-email-waiting-confirmation"
                   values={{
-                    email: proposal.author.email,
+                    email: proposal.authorEmail,
                   }}
                 />
               </p>
@@ -221,7 +220,6 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  viewerIsAdmin: state.user.user ? state.user.user.roles.includes('ROLE_ADMIN') : false,
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
@@ -234,19 +232,19 @@ const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
 const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAdminStatusForm_proposal on Proposal @argumentDefinitions(viewerIsAdmin: { type: "Boolean!" }) {
+    fragment ProposalAdminStatusForm_proposal on Proposal {
       id
       publicationStatus
       trashedReason
       deletedAt
       author {
         id
-        email @include(if: $viewerIsAdmin)
         ...on User {
           isEmailConfirmed
           isViewer
         }
       }
+      authorEmail
     }
   `,
 })
