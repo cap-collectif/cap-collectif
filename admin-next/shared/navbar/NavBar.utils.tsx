@@ -3,6 +3,11 @@ import { LinkProps } from './NavBar.context'
 export type NavBarEvent = 'set-breadcrumb'
 
 export const onElementAvailable = (selector, callback) => {
+  if (document.querySelector(selector)) {
+    callback()
+    return
+  }
+
   const observer = new MutationObserver(() => {
     if (document.querySelector(selector)) {
       observer.disconnect()

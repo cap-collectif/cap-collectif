@@ -25,6 +25,8 @@ import ProposalDeleteModal from '../../Delete/ProposalDeleteModal'
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton'
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm'
 import { getProposalAuthorDisplayName } from '~/utils/proposalAuthor'
+import { openLoginModal } from '@shared/login/LoginButton'
+import { onElementAvailable } from '@shared/navbar/NavBar.utils'
 type ReduxProps = {
   readonly dispatch: Dispatch
 }
@@ -100,12 +102,28 @@ export const ProposalPageHeaderButtons = ({
   const canEdit = isParticipant ? proposal?.access?.canEdit : isAuthor
   const canEditProposal = editable && canEdit
   const hasExpiredRevisions = proposal?.expiredRevisions ? proposal.expiredRevisions.totalCount > 0 : false
+  const hasRevisionToRespondTo = hasPendingRevisions || hasExpiredRevisions
 
   useEffect(() => {
-    if ((canEditProposal || (hasExpiredRevisions && isAuthor)) && window.location.href.includes(EDIT_MODAL_ANCHOR)) {
+    if (!window.location.href.includes(EDIT_MODAL_ANCHOR)) return
+
+    // Responding to a revision request must work even when the step is closed
+    // (editable/canEditProposal depends on the step being open), and for a
+    // participant authenticated only via the emailToken/participantToken in the URL.
+    if (canEditProposal || (hasRevisionToRespondTo && canEdit)) {
       onOpen()
+      return
     }
-  }, [hasExpiredRevisions, canEditProposal, onOpen, isAuthor])
+
+    // The author has an account but isn't logged in on this browser: the revision
+    // email link carries no token for account holders, so prompt login. On success
+    // LoginFormWrapper reloads the page on the same URL, which re-runs this effect.
+    if (hasRevisionToRespondTo && !viewer) {
+      onElementAvailable('button#login-button', () => {
+        setTimeout(() => dispatchEvent(new Event(openLoginModal)), 200)
+      })
+    }
+  }, [hasRevisionToRespondTo, canEditProposal, canEdit, viewer, onOpen])
 
   return (
     <Buttons>
