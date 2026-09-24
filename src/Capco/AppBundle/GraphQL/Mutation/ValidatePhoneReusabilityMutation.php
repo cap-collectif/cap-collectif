@@ -47,7 +47,7 @@ class ValidatePhoneReusabilityMutation implements MutationInterface
         $contributionId = $input->offsetGet('contributionId');
 
         $contributor = $this->getContributor($viewer, $participantToken);
-        $contribution = $this->getContribution($contributionId);
+        $contribution = $this->getContribution($contributionId, $contributor);
         $step = $contribution->getStep();
 
         try {
@@ -76,9 +76,9 @@ class ValidatePhoneReusabilityMutation implements MutationInterface
         return $participant;
     }
 
-    private function getContribution(string $contributionId): ContributionInterface
+    private function getContribution(string $contributionId, ContributorInterface $contributor): ContributionInterface
     {
-        $contribution = $this->globalIdResolver->resolve($contributionId);
+        $contribution = $this->globalIdResolver->resolve($contributionId, $contributor);
 
         if (!$contribution instanceof ContributionInterface) {
             throw new UserError(sprintf('Contribution with ID %s not found.', $contributionId));

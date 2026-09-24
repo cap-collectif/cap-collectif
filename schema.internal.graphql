@@ -15828,8 +15828,6 @@ type Questionnaire implements Node {
     filterStatus: [ReplyStatus] = [PUBLISHED, PENDING, NOT_PUBLISHED, DRAFT]
   ): ReplyConnection!
 
-  """Results of survey are private"""
-  privateResult: Boolean!
   exportResultsUrl: URI!
   adminUrl: URI!
   isIndexationDone: Boolean!

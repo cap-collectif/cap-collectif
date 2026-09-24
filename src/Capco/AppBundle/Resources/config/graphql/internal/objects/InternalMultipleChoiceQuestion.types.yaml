@@ -19,7 +19,7 @@ InternalMultipleChoiceQuestion:
             otherResponses:
                 type: 'InternalResponseConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", value, args, getUser())'
                 description: 'Responses of the `other` question choice.'
             choices:
                 type: 'InternalQuestionChoiceConnection!'
@@ -57,4 +57,4 @@ InternalMultipleChoiceQuestion:
                         defaultValue: 20
                         description: 'Defines the number of aggregation for the tag cloud.'
                 description: "Return array containing object with number of occurrences by response's keywords."
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", value, args, getUser())'

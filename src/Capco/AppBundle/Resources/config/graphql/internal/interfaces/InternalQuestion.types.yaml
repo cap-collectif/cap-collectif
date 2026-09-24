@@ -62,7 +62,7 @@ InternalQuestion:
             participants:
                 type: 'EventParticipantConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", value, args, getUser())'
                 description: 'Return users who answered the question'
                 args:
                     withNotConfirmedUser:

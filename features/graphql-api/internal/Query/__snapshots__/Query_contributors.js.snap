@@ -920,7 +920,7 @@ Object {
         },
       },
     ],
-    "totalCount": 267,
+    "totalCount": 269,
   },
 }
 `;
@@ -1057,6 +1057,15 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "multi-organization@test.com",
+          "id": "VXNlcjp1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25z",
+          "roles": Array [
+            "ROLE_USER",
+          ],
+        },
+      },
+      Object {
+        "node": Object {
           "email": "omar@cap-collectif.com",
           "id": "VXNlcjp1c2VyT21hcg==",
           "roles": Array [
@@ -1074,7 +1083,7 @@ Object {
         },
       },
     ],
-    "totalCount": 10,
+    "totalCount": 12,
   },
 }
 `;
@@ -2902,7 +2911,7 @@ Object {
         },
       },
     ],
-    "totalCount": 256,
+    "totalCount": 258,
   },
 }
 `;
@@ -2949,6 +2958,15 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "multi-organization@test.com",
+          "id": "VXNlcjp1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25z",
+          "roles": Array [
+            "ROLE_USER",
+          ],
+        },
+      },
+      Object {
+        "node": Object {
           "email": "omar@cap-collectif.com",
           "id": "VXNlcjp1c2VyT21hcg==",
           "roles": Array [
@@ -2966,7 +2984,7 @@ Object {
         },
       },
     ],
-    "totalCount": 6,
+    "totalCount": 8,
   },
 }
 `;
@@ -3876,7 +3894,7 @@ Object {
         },
       },
     ],
-    "totalCount": 252,
+    "totalCount": 254,
   },
 }
 `;
@@ -4313,6 +4331,15 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "multi-organization@test.com",
+          "id": "VXNlcjp1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25z",
+          "roles": Array [
+            "ROLE_USER",
+          ],
+        },
+      },
+      Object {
+        "node": Object {
           "email": "omar@cap-collectif.com",
           "id": "VXNlcjp1c2VyT21hcg==",
           "roles": Array [
@@ -4330,7 +4357,7 @@ Object {
         },
       },
     ],
-    "totalCount": 17,
+    "totalCount": 19,
   },
 }
 `;
@@ -5448,6 +5475,15 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "multi-organization@test.com",
+          "id": "VXNlcjp1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25z",
+          "roles": Array [
+            "ROLE_USER",
+          ],
+        },
+      },
+      Object {
+        "node": Object {
           "email": "omar@cap-collectif.com",
           "id": "VXNlcjp1c2VyT21hcg==",
           "roles": Array [
@@ -5465,7 +5501,7 @@ Object {
         },
       },
     ],
-    "totalCount": 21,
+    "totalCount": 23,
   },
 }
 `;
@@ -7311,7 +7347,7 @@ Object {
         },
       },
     ],
-    "totalCount": 263,
+    "totalCount": 265,
   },
 }
 `;

@@ -71,7 +71,7 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2016-03-07'))>
         updatedAt: <(new \DateTime('2019-03-07'))>
         undraftAt: $createdAt
-    # Reply on a private result questionnaire
+    # Reply on a questionnaire
     reply8:
         id: 'reply8'
         draft: 0
@@ -215,6 +215,13 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2017-03-01'))>
         createdAt: <(new \DateTime('2017-03-01'))>
         updatedAt: <(new \DateTime('2017-03-01'))>
+        participant: '@participant1'
+    replyQuestionnaireOrga:
+        id: 'replyQuestionnaireOrga'
+        questionnaire: '@questionnaireOrga'
+        publishedAt: <(new \DateTime('2022-09-12'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
         participant: '@participant1'
     replyEmailingCampaign1:
         id: 'replyEmailingCampaign1'

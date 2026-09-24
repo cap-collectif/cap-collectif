@@ -252,7 +252,7 @@ InternalMutation:
                 builderConfig:
                     inputType: DeleteRepliesInput
                     payloadType: DeleteRepliesPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteRepliesMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteRepliesMutation", args, getUser())'
             # User notifications
             changeUserNotificationsConfiguration:
                 access: "@=hasRole('ROLE_USER')"

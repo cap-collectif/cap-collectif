@@ -11,24 +11,19 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ParticipantRepliesResolver implements QueryInterface
 {
-    public function __construct(
-        private readonly ReplyRepository $replyRepository
-    ) {
+    public function __construct(private readonly ReplyRepository $replyRepository)
+    {
     }
 
-    public function __invoke(Participant $participant, ?Argument $args = null): ConnectionInterface
+    public function __invoke(Participant $participant, mixed $viewer, ?Argument $args = null): ConnectionInterface
     {
+        $replies = $this->replyRepository->findBy(['participant' => $participant]);
+
         $paginator = new Paginator(
-            fn (int $offset, int $limit) => $this->replyRepository->findPaginatedByParticipant(
-                $participant,
-                $limit,
-                $offset
-            )
+            fn (int $offset, int $limit) => \array_slice($replies, $offset, $limit)
         );
 
-        $totalCount = $this->replyRepository->countByParticipant(
-            $participant
-        );
+        $totalCount = \count($replies);
 
         return $paginator->auto($args, $totalCount);
     }

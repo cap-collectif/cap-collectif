@@ -25,16 +25,6 @@ class QuestionResponsesResolver implements QueryInterface
     {
         $emptyConnection = ConnectionBuilder::empty();
 
-        if (
-            $question->getQuestionnaire()
-            && $question->getQuestionnaire()->isPrivateResult()
-            && (!$viewer || !$viewer->isAdmin())
-            && $question->getQuestionnaire()->getOwner() !== $viewer
-            && $question->getQuestionnaire()->getOwner() !== $viewer->getOrganization()
-        ) {
-            return $emptyConnection;
-        }
-
         if ($question->getQuestionnaire() && !$question->getQuestionnaire()->canDisplay($viewer)) {
             return $emptyConnection;
         }

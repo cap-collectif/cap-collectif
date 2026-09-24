@@ -29,7 +29,7 @@ PreviewProject:
                 type: 'ContributionConnection!'
                 description: 'Contributions associated with the project.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", value, args, getUser())'
             cover:
                 type: 'PreviewMedia'
                 resolve: '@=value.getCover()'

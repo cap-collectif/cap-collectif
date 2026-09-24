@@ -38,6 +38,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
   } = useFieldArray({
     control,
     name: `${fieldName}.questionsWithJumps`,
+    keyName: 'fieldId',
   })
 
   const questionsWithJumpsValues = watch(`${fieldName}.questionsWithJumps`, questionsWithJumps)
@@ -95,7 +96,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
               !questionsWithJumpsValues[index]?.jumps?.length
             return (
               <ListCard.Item
-                key={jump.id}
+                key={questionsWithJumpsValues[index]?.id}
                 data-cy={isRedirection ? 'questionnaire-redirection' : 'questionnaire-conditional-jump'}
                 bg="white"
                 borderRadius="normal"

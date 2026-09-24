@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -76,22 +77,26 @@ class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInte
     {
         $replyId = $argument->offsetGet('replyId');
 
+        $participantToken = $argument->offsetGet('participantToken');
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException $e) {
+            throw new UserError($e->getMessage());
+        }
         /** * @var Reply $reply  */
-        $reply = $this->globalIdResolver->resolve($replyId);
+        $reply = $this->globalIdResolver->resolve($replyId, $participant);
 
         if (null === $reply) {
             throw new UserError('Reply not found');
         }
 
-        $participant = $reply->getParticipant();
-        if (null === $participant) {
+        $replyParticipant = $reply->getParticipant();
+        if (null === $replyParticipant) {
             throw new UserError('Reply is not anonymous');
         }
 
-        $participantToken = $argument->offsetGet('participantToken');
-        $decodedToken = base64_decode((string) $participantToken);
-
-        if ($participant->getToken() !== $decodedToken) {
+        if ($replyParticipant->getId() !== $participant->getId()) {
             throw new UserError('Given token does not match corresponding Participant');
         }
 

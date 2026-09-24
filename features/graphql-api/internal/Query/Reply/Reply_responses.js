@@ -14,18 +14,37 @@ const ReplyResponsesQuery = /* GraphQL */ `
   }
 `
 
+const ValueResponseQuery = /* GraphQL */ `
+  query ValueResponseQuery($responseId: ID!) {
+    node(id: $responseId) {
+      ... on ValueResponse {
+        value
+        formattedValue
+      }
+    }
+  }
+`
+
 const variables = { replyId: 'reply8' }
+const anonymousReplyVariables = { replyId: toGlobalId('Reply', 'replyAnonymous1') }
 
 describe('Internal|Reply.responses', () => {
-  it('hides responses from an anonymous user for a private questionnaire', async () => {
-    await expect(graphql(ReplyResponsesQuery, variables, 'internal')).resolves.toMatchSnapshot()
+  it('returns questionnaire responses to an anonymous user', async () => {
+    await expect(
+      graphql(ReplyResponsesQuery, variables, 'internal'),
+    ).resolves.toMatchObject({ reply: { responses: expect.arrayContaining([{ value: 'secret' }]) } })
   })
 
-  it('returns responses to their author for a private questionnaire', async () => {
-    await expect(graphql(ReplyResponsesQuery, variables, 'internal_user')).resolves.toMatchSnapshot()
-  })
-
-  it('returns responses to an admin for a private questionnaire', async () => {
-    await expect(graphql(ReplyResponsesQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
+  it('returns anonymous replies and response nodes without a participant cookie', async () => {
+    await expect(
+      graphql(ReplyResponsesQuery, anonymousReplyVariables, 'internal'),
+    ).resolves.toMatchObject({ reply: { responses: expect.arrayContaining([{ value: 'bien' }]) } })
+    await expect(
+      graphql(
+        ValueResponseQuery,
+        { responseId: toGlobalId('ValueResponse', 'responseAnonymousQuestionnaire1') },
+        'internal',
+      ),
+    ).resolves.toMatchObject({ node: { value: 'bien' } })
   })
 })

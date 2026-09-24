@@ -25,7 +25,7 @@ class DeleteUserReplyMutation implements MutationInterface
 
     public function __invoke(string $id, User $viewer): array
     {
-        $reply = $this->globalIdResolver->resolve($id);
+        $reply = $this->globalIdResolver->resolve($id, $viewer);
 
         if (!$reply instanceof Reply) {
             throw new UserError('Reply not found');

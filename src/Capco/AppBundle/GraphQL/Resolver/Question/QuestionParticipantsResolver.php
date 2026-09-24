@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Search\ResponseSearch;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -16,7 +17,7 @@ class QuestionParticipantsResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(AbstractQuestion $question, Arg $args): ConnectionInterface
+    public function __invoke(AbstractQuestion $question, Arg $args, ?User $viewer = null): ConnectionInterface
     {
         $totalCount = $this->responseSearch->countParticipantsByQuestion(
             $question,

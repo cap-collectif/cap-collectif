@@ -51,7 +51,7 @@ InternalParticipant:
             replies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", value, getUser(), args)'
             votes:
                 type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

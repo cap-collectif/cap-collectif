@@ -18,6 +18,7 @@ use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -88,7 +89,7 @@ class ContributionSearch extends Search
     }
 
     public function getUserContributions(
-        Author $user,
+        User $user,
         int $limit,
         string $order,
         string $seed,

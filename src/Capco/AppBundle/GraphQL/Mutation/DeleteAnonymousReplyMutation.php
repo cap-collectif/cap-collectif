@@ -5,9 +5,11 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -23,7 +25,8 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         private EntityManagerInterface $em,
         private Indexer $indexer,
         private Publisher $publisher,
-        private GlobalIdResolver $globalIdResolver
+        private GlobalIdResolver $globalIdResolver,
+        private ParticipantHelper $participantHelper,
     ) {
     }
 
@@ -81,22 +84,27 @@ class DeleteAnonymousReplyMutation implements MutationInterface
     {
         $replyId = $argument->offsetGet('replyId');
 
+        $participantToken = $argument->offsetGet('participantToken');
+
+        try {
+            $participant = $this->participantHelper->getParticipantByToken($participantToken);
+        } catch (ParticipantNotFoundException $e) {
+            throw new UserError($e->getMessage());
+        }
+
         /** * @var Reply $reply  */
-        $reply = $this->globalIdResolver->resolve($replyId);
+        $reply = $this->globalIdResolver->resolve($replyId, $participant);
 
         if (null === $reply) {
             throw new UserError('Reply not found');
         }
 
-        $participant = $reply->getParticipant();
-        if (null === $participant) {
+        $replyParticipant = $reply->getParticipant();
+        if (null === $replyParticipant) {
             throw new UserError('Reply is not anonymous');
         }
 
-        $participantToken = $argument->offsetGet('participantToken');
-        $decodedToken = base64_decode((string) $participantToken);
-
-        if ($participant->getToken() !== $decodedToken) {
+        if ($replyParticipant->getId() !== $participant->getId()) {
             throw new UserError('Given token does not match corresponding Participant');
         }
 

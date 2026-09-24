@@ -39,7 +39,6 @@ class UserHasReplyResolverSpec extends ObjectBehavior
             ->offsetGet('login')
             ->willReturn('pierre@cap-collectif.com')
         ;
-
         $userRepository
             ->findOneByEmail('pierre@cap-collectif.com')
             ->willReturn($user)

@@ -125,6 +125,25 @@ const ReplyContributionFieldsQuery = /* GraphQL */ `
   }
 `
 
+const QuestionnaireResponsesQuery = /* GraphQL */ `
+  query QuestionnaireResponsesQuery($id: ID!) {
+    node(id: $id) {
+      ... on SimpleQuestion {
+        responses {
+          totalCount
+          edges {
+            node {
+              ... on ValueResponse {
+                value
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 describe('Preview|Questionnaire.replies connection', () => {
   it('fetches the first hundred published replies with a cursor', async () => {
     await expect(
@@ -172,6 +191,25 @@ describe('Preview|Questionnaire.replies connection', () => {
         'preview',
       ),
     ).resolves.toMatchSnapshot()
+  })
+
+  it('returns replies and participation volume to an anonymous user', async () => {
+    const result = await graphql(AllRepliesQuery, {
+      id: toGlobalId('Questionnaire', 'questionnaireAnonymous'),
+      count: 1,
+      includeDraft: false,
+      includeUnpublished: false,
+    })
+
+    expect(result.node.replies.totalCount).toBeGreaterThan(0)
+  })
+
+  it('returns response values and participation volume to an anonymous user', async () => {
+    const result = await graphql(QuestionnaireResponsesQuery, {
+      id: toGlobalId('Question', 1403),
+    })
+
+    expect(result.node.responses.totalCount).toBeGreaterThan(0)
   })
 
   it('exposes replies as contributions in the preview schema', async () => {

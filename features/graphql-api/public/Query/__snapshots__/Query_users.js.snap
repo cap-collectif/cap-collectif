@@ -5,6 +5,30 @@ Object {
   "users": Object {
     "edges": Array [
       Object {
+        "cursor": "YToyOntpOjA7aToxNzM1NzcyNDAwMDAwO2k6MTtzOjI1OiJ1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25zIjt9",
+        "node": Object {
+          "biography": null,
+          "consentInternalCommunication": null,
+          "createdAt": "2025-01-02 00:00:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25z",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "url": "https://capco.test/profile/multiorganizationmember",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "Multi organization member",
+          "websiteUrl": null,
+        },
+      },
+      Object {
         "cursor": "YToyOntpOjA7aToxNzM1NzQ3MjAwMDAwO2k6MTtzOjEzOiJlbWFpbGluZ1VzZXIxIjt9",
         "node": Object {
           "biography": null,
@@ -2362,38 +2386,14 @@ Object {
           "websiteUrl": null,
         },
       },
-      Object {
-        "cursor": "YToyOntpOjA7aToxNDgzMjMzMTgwMDAwO2k6MTtzOjc6InVzZXIxMzMiO30=",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2017-01-01 02:13:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyMTMz",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "url": "https://capco.test/profile/user133",
-          "userType": Object {
-            "name": "Citoyen",
-          },
-          "username": "user133",
-          "websiteUrl": null,
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YToyOntpOjA7aToxNDgzMjMzMTgwMDAwO2k6MTtzOjc6InVzZXIxMzMiO30=",
+      "endCursor": "YToyOntpOjA7aToxNDgzMjMzMjQwMDAwO2k6MTtzOjc6InVzZXIxMzQiO30=",
       "hasNextPage": true,
       "hasPreviousPage": false,
-      "startCursor": "YToyOntpOjA7aToxNzM1NzQ3MjAwMDAwO2k6MTtzOjEzOiJlbWFpbGluZ1VzZXIxIjt9",
+      "startCursor": "YToyOntpOjA7aToxNzM1NzcyNDAwMDAwO2k6MTtzOjI1OiJ1c2VyTXVsdGlwbGVPcmdhbml6YXRpb25zIjt9",
     },
-    "totalCount": 254,
+    "totalCount": 255,
   },
 }
 `;
@@ -2402,6 +2402,12 @@ exports[`Preview|Query.users connection fetches the five first users, including 
 Object {
   "users": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "_id": "userMultipleOrganizations",
+          "isSuperAdmin": false,
+        },
+      },
       Object {
         "node": Object {
           "_id": "emailingAdmin",
@@ -2426,12 +2432,6 @@ Object {
           "isSuperAdmin": false,
         },
       },
-      Object {
-        "node": Object {
-          "_id": "emailingUser12",
-          "isSuperAdmin": false,
-        },
-      },
     ],
   },
 }
@@ -2441,6 +2441,12 @@ exports[`Preview|Query.users connection fetches the five last users 1`] = `
 Object {
   "users": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "_id": "userMultipleOrganizations",
+          "createdAt": "2025-01-02 00:00:00",
+        },
+      },
       Object {
         "node": Object {
           "_id": "emailingUser1",
@@ -2462,12 +2468,6 @@ Object {
       Object {
         "node": Object {
           "_id": "emailingUser12",
-          "createdAt": "2025-01-01 17:00:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "emailingUser13",
           "createdAt": "2025-01-01 17:00:00",
         },
       },
@@ -2607,7 +2607,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 254,
+    "totalCount": 255,
   },
 }
 `;

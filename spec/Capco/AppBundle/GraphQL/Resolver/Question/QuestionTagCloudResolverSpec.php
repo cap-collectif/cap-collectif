@@ -41,6 +41,7 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
                 'occurrencesCount' => 4,
             ],
         ];
+        $question->getQuestionnaire()->willReturn(null);
         $question->getId()->willReturn('question1');
         $args->offsetGet('size')->willReturn(2);
         $cache
@@ -101,6 +102,7 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
             ],
         ];
         $cacheItem->set($results);
+        $question->getQuestionnaire()->willReturn(null);
         $question->getId()->willReturn('question2');
         $args->offsetGet('size')->willReturn(2);
         $cache

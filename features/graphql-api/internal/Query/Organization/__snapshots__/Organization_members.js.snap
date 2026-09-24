@@ -17,6 +17,14 @@ Object {
           "node": Object {
             "role": "USER",
             "user": Object {
+              "username": "Multi organization member",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "role": "USER",
+            "user": Object {
               "username": "Omar <3 Rem",
             },
           },
@@ -38,7 +46,7 @@ Object {
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 5,
     },
     "title": "Communauté de commune de Parthenay",
   },

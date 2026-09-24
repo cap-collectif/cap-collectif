@@ -83,6 +83,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
   const { fields: questionsWithJumps } = useFieldArray({
     control,
     name: `${fieldName}.questionsWithJumps`,
+    keyName: 'fieldId',
   })
 
   const questionsValues = watch(`${fieldName}.questions`, questions)

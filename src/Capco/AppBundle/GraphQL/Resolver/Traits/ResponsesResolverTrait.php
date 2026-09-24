@@ -42,8 +42,7 @@ trait ResponsesResolverTrait
         bool $isAnalyst = false
     ): iterable {
         $skipVerification =
-            $context
-            && $context->offsetExists('disable_acl')
+            $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
         $isAuthor = $author === $viewer;
         $isAnalystOrAdmin = $skipVerification;

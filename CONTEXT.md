@@ -1,8 +1,8 @@
-# Account Anonymization
+# Cap Collectif Vocabulary
 
-This context defines the language used when a registered user asks for their identity to be erased while their participation content may remain available.
+This context defines terms whose meaning must remain consistent across the platform.
 
-## Language
+## Account anonymization
 
 **Account anonymization**:
 The irreversible removal of identifying and personal data from a user account while retaining an anonymous author identity and leaving its associated content unchanged.
@@ -15,6 +15,10 @@ _Avoid_: Profile data, account data
 **Account anonymization with content erasure**:
 Account anonymization combined with removal of associated content, either by deleting records or replacing their content when structural integrity requires the records to remain.
 _Avoid_: Hard deletion, complete account deletion
+
+**Administrative reply list**:
+The reply list used by the administration interface. It is visible only to global administrators.
+_Avoid_: Owner reply list, organization reply list
 
 ## Example dialogue
 

@@ -28,6 +28,7 @@ use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Service\ParticipantAccessResolver;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\Manager\RepositoryManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,7 +49,8 @@ class GlobalIdResolverSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         RepositoryManager $repositoryManager,
         RequestStack $requestStack,
-        ParticipantHelper $participantHelper
+        ParticipantHelper $participantHelper,
+        ParticipantAccessResolver $participantAccessResolver
     ) {
         $this->beConstructedWith(
             $container,
@@ -56,7 +58,8 @@ class GlobalIdResolverSpec extends ObjectBehavior
             $entityManager,
             $repositoryManager,
             $requestStack,
-            $participantHelper
+            $participantHelper,
+            $participantAccessResolver
         );
     }
 

@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: false
         notificationsConfiguration: '@questionnaireNotificationConfiguration1'
     questionnaire2:
         id: questionnaire2
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\Questionnaire:
         description: Tester c'est douter
         step: '@questionnairestep2'
         multipleRepliesAllowed: false
-        privateResult: false
         notificationsConfiguration: '@questionnaireNotificationConfiguration2'
     questionnaire3:
         id: questionnaire3
@@ -24,19 +22,16 @@ Capco\AppBundle\Entity\Questionnaire:
         description: Je suis fermé mais bon pourquoi pas
         step: '@questionnairestep3'
         multipleRepliesAllowed: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration3'
     questionnaire4:
         id: questionnaire4
         title: Questionnaire pour budget participatif
         description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration4'
     questionnaire5:
         id: questionnaire5
         title: Questionnaire pour budget participatif disponible
         description: Le Budget Participatif permet ainsi aux citoyens parisiens d'apporter des solutions à des problèmes qui les concernent directement
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration5'
     questionnaireWithJumps:
         id: questionnaireWithJumps
@@ -46,31 +41,26 @@ Capco\AppBundle\Entity\Questionnaire:
         multipleRepliesAllowed: true
         anonymousAllowed: true
         acknowledgeReplies: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfigurationWithJumps'
     questionnaire6:
         id: questionnaire6
         title: Questionnaire pour budget participatif de la Force
         description: Star Wars est un univers de fantasy et de science-fiction créé par George Lucas. D'abord conçue comme une trilogie cinématographique sortie entre 1977 et 1983, la saga s'accroît ensuite, entre 1999 et 2005, de trois nouveaux films, qui racontent des événements antérieurs à la première trilogie.
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration6'
     questionnaire7:
         id: questionnaire7
         title: Consultation pour conquerir le monde
         description: Comment faire pour conquérir le monde ?
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration7'
     questionnaire8:
         id: questionnaire8
         title: Consultation pour la capcoBeer
         description: La bière est une boisson alcoolisée obtenue par fermentation alcoolique d'un moût de produits végétaux amylacés tels que l'orge, le maïs, le riz, la banane, le manioc...
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration8'
     questionnaire9:
         id: questionnaire9
         title: Consultation pour la FLNJ
         description: Le Front de libération des nains de jardin est un réseau de groupes informels se présentant comme une association à but non lucratif dont l'objectif « vise à rendre la liberté des nains de jardin » en les transportant depuis les jardins de leurs propriétaires vers des lieux où ils sont considérés comme libres.
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration9'
     questionnaireWithJumps2:
         id: questionnaireWithJumps2
@@ -80,7 +70,6 @@ Capco\AppBundle\Entity\Questionnaire:
         multipleRepliesAllowed: true
         anonymousAllowed: true
         acknowledgeReplies: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfigurationWithJumps2'
     questionnaire10:
         id: questionnaire10
@@ -89,7 +78,6 @@ Capco\AppBundle\Entity\Questionnaire:
         multipleRepliesAllowed: true
         anonymousAllowed: true
         acknowledgeReplies: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration10'
     questionnaire11:
         id: questionnaire11
@@ -97,7 +85,6 @@ Capco\AppBundle\Entity\Questionnaire:
         description: Je suis le questionnaire pour les analystes.
         multipleRepliesAllowed: true
         acknowledgeReplies: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfiguration11'
     questionnaireAdmin:
         id: questionnaireAdmin
@@ -105,7 +92,6 @@ Capco\AppBundle\Entity\Questionnaire:
         description: Merci Jpec
         step: '@questionnairestep4'
         multipleRepliesAllowed: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfigurationAdmin'
     questionnaireGroup:
         id: questionnaireForGroup
@@ -113,7 +99,6 @@ Capco\AppBundle\Entity\Questionnaire:
         description: Questionnaire visible pour le group2
         step: '@questionnairestep5'
         multipleRepliesAllowed: true
-        privateResult: true
         notificationsConfiguration: '@questionnaireNotificationConfigurationGroup'
     questionnaireLotChoices:
         id: questionnaireLotChoices
@@ -130,7 +115,6 @@ Capco\AppBundle\Entity\Questionnaire:
         id: questionnaireExport
         title: Vote majo
         description: Vote barjot
-        privateResult: false
         multipleRepliesAllowed: true
         step: '@questionnaireStepExport'
         notificationsConfiguration: '@questionnaireNotificationConfigurationExport'
@@ -143,7 +127,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: false
         notificationsConfiguration: '@questionnaireNotificationConfigurationFood'
     questionnaireProjectWithOwner:
         id: questionnaireProjectWithOwner
@@ -154,7 +137,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@userTheo'
         creator: '@userTheo'
         createdAt: <(new \DateTime('2019-09-11'))>
@@ -168,7 +150,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@userTheo'
         creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
@@ -182,7 +163,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: false
         notificationsConfiguration: '@questionnaireNotificationConfigurationConditionRequise'
     questionnaireAnonymous:
         id: questionnaireAnonymous
@@ -193,7 +173,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@user1'
         creator: '@user1'
         createdAt: <(new \DateTime('2020-09-11'))>
@@ -206,7 +185,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@userTheo'
         creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
@@ -219,7 +197,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@userTheo'
         creator: '@userTheo'
         createdAt: <(new \DateTime('2020-09-11'))>
@@ -232,7 +209,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@organization2'
         creator: '@valerieMassonDelmotte'
         createdAt: <(new \DateTime('2022-09-11'))>
@@ -244,7 +220,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@organization2'
         creator: '@ChristopheCassou'
         createdAt: <(new \DateTime('2022-09-11'))>
@@ -256,7 +231,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@user1'
         creator: '@user1'
         createdAt: <(new \DateTime('2022-09-11'))>
@@ -269,7 +243,6 @@ Capco\AppBundle\Entity\Questionnaire:
         anonymousAllowed: true
         acknowledgeReplies: 1
         type: 'QUESTIONNAIRE'
-        privateResult: true
         owner: '@emailingAdmin'
         creator: '@emailingAdmin'
         createdAt: <(new \DateTime('2025-07-04'))>

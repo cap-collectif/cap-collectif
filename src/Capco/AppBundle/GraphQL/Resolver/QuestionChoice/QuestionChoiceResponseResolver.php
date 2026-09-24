@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Search\ResponseSearch;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -18,7 +19,7 @@ class QuestionChoiceResponseResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(QuestionChoice $questionChoice, Arg $args): ConnectionInterface
+    public function __invoke(QuestionChoice $questionChoice, Arg $args, ?User $viewer = null): ConnectionInterface
     {
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $questionChoice

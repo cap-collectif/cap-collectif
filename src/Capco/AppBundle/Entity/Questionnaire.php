@@ -115,12 +115,6 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
     private $proposalForm;
 
     /**
-     * @var bool
-     * @ORM\Column(name="private_result", type="boolean", nullable=false)
-     */
-    private $privateResult = true;
-
-    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="questionnaire")
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
@@ -460,18 +454,6 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
     public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
-
-        return $this;
-    }
-
-    public function isPrivateResult(): bool
-    {
-        return $this->privateResult;
-    }
-
-    public function setPrivateResult(bool $privateResult): self
-    {
-        $this->privateResult = $privateResult;
 
         return $this;
     }

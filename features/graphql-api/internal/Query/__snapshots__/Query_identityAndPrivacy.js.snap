@@ -55,10 +55,10 @@ Object {
 exports[`Internal|Query identity and privacy returns all user count filters to an administrator 1`] = `
 Object {
   "users": Object {
-    "totalCount": 254,
+    "totalCount": 255,
   },
   "usersConfirmed": Object {
-    "totalCount": 252,
+    "totalCount": 253,
   },
   "usersNotConfirmed": Object {
     "totalCount": 2,
@@ -70,13 +70,13 @@ Object {
     "totalCount": 225,
   },
   "usersWithDisabled": Object {
-    "totalCount": 256,
+    "totalCount": 257,
   },
   "usersWithSuperAdmin": Object {
-    "totalCount": 265,
+    "totalCount": 266,
   },
   "usersWithoutConsentInternalCommunication": Object {
-    "totalCount": 29,
+    "totalCount": 30,
   },
 }
 `;

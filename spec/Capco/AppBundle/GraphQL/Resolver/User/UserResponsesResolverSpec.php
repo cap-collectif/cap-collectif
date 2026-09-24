@@ -35,6 +35,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $question->isPrivate()->willReturn(true);
         $question->getHidden()->willReturn(true);
         $response->getQuestion()->willReturn($question);
+        $response->getReply()->willReturn(null);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
 
@@ -59,6 +60,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $question->isPrivate()->willReturn(true);
         $question->getHidden()->willReturn(false);
         $response->getQuestion()->willReturn($question);
+        $response->getReply()->willReturn(null);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
 
@@ -83,6 +85,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $question->isPrivate()->willReturn(false);
         $question->getHidden()->willReturn(true);
         $response->getQuestion()->willReturn($question);
+        $response->getReply()->willReturn(null);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
 
@@ -106,6 +109,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $question->isPrivate()->willReturn(true);
         $question->getHidden()->willReturn(false);
         $response->getQuestion()->willReturn($question);
+        $response->getReply()->willReturn(null);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
 

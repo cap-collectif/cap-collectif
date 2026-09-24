@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Search\ResponseSearch;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
@@ -18,7 +19,7 @@ class QuestionTagCloudResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(AbstractQuestion $question, Argument $args): array
+    public function __invoke(AbstractQuestion $question, Argument $args, ?User $viewer = null): array
     {
         $size = $args->offsetGet('size');
         $cachedQuestionTagCloudData = $this->cache->getItem(

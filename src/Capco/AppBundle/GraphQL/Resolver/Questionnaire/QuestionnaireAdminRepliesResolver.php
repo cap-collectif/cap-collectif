@@ -6,17 +6,21 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Search\ReplySearch;
+use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class QuestionnaireAdminRepliesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ReplySearch $replySearch,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
     }
 
@@ -56,5 +60,14 @@ class QuestionnaireAdminRepliesResolver implements QueryInterface
         });
 
         return $paginator->auto($args);
+    }
+
+    public function isGranted(Questionnaire $questionnaire): bool
+    {
+        $project = $questionnaire->getStep()?->getProject();
+
+        return $project
+            ? $this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)
+            : $this->authorizationChecker->isGranted(QuestionnaireVoter::EXPORT, $questionnaire);
     }
 }

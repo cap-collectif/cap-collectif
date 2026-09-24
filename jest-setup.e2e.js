@@ -1,4 +1,5 @@
 /* eslint-disable */
+require('https').globalAgent.keepAlive = false
 global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')) // Allow fetch to use cookies
 
 // In development you can use, if you prefer:

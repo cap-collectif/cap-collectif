@@ -586,6 +586,18 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <(new \DateTime('2019-06-03 09:30:00'))>
         consentInternalCommunication: true
+    userMultipleOrganizations:
+        id: 'userMultipleOrganizations'
+        username: Multi organization member
+        firstname: Multi
+        lastname: Organization
+        email: multi-organization@test.com
+        plainPassword: toto
+        userType: '@UserType1'
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <(new \DateTime('2025-01-02 00:00:00'))>
     userJpec:
         id: 'userJpec'
         username: Jpec

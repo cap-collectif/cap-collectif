@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\ViewerPermissionInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -170,9 +171,12 @@ class GlobalIdResolver
         }
 
         $user = null;
+        $participant = null;
 
         if ($userOrAnon instanceof User) {
             $user = $userOrAnon;
+        } elseif ($userOrAnon instanceof Participant) {
+            $participant = $userOrAnon;
         }
 
         if ($user && $user->isProjectAdmin()) {
@@ -195,7 +199,7 @@ class GlobalIdResolver
             $this->entityManager->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
         }
 
-        return $this->viewerCanSee($node, $user, $skipVerification) ? $node : null;
+        return $this->viewerCanSee($node, $user, $skipVerification, $participant) ? $node : null;
     }
 
     public function resolveTypeByIds(
@@ -334,7 +338,7 @@ class GlobalIdResolver
         throw new NotFoundHttpException();
     }
 
-    private function viewerCanSee($node, ?User $user, bool $skipVerification): bool
+    private function viewerCanSee($node, ?User $user, bool $skipVerification, ?Participant $participant = null): bool
     {
         $projectContributionClass = [
             Project::class,

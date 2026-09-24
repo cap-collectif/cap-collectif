@@ -20,7 +20,7 @@ class ProjectContributionResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(Project $project, ?Argument $args = null): ConnectionInterface
+    public function __invoke(Project $project, ?Argument $args = null, mixed $viewer = null): ConnectionInterface
     {
         if (!$args) {
             $args = new Arg(['first' => 0]);
@@ -65,7 +65,13 @@ class ProjectContributionResolver implements QueryInterface
                     $cursor
                 );
 
-                $totalCount = $response->getTotalCount();
+                $totalCount = $this->contributionSearch->getContributionsByProject(
+                    $project->getId(),
+                    $order,
+                    $filters,
+                    0,
+                    null
+                )->getTotalCount();
 
                 return $response;
             });

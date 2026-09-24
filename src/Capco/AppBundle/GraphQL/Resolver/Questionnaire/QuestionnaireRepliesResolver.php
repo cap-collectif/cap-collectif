@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Search\ReplySearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -25,6 +26,10 @@ class QuestionnaireRepliesResolver implements QueryInterface
         Arg $args,
         ?User $viewer = null
     ): ConnectionInterface {
+        if (!$questionnaire->canDisplay($viewer)) {
+            return ConnectionBuilder::empty();
+        }
+
         $includeUnpublished = false;
         $includeDraft = false;
         $filters = [

@@ -2,31 +2,34 @@
 
 namespace Capco\AppBundle\Service;
 
-use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Entity\Reply;
 
 class ParticipantAccessResolver
 {
     public function __construct(
         private readonly ParticipantHelper $participantHelper,
-        private readonly ReplyRepository $replyRepository
+        private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder
     ) {
     }
 
-    /**
-     * @return array{'EDIT': bool}
-     */
-    public function getReplyAccess(string $replyId, string $participantToken): array
+    public function canViewReplyFromCookie(Reply $reply, ?string $cookie): bool
     {
-        $canEdit = false;
-        $participant = $this->participantHelper->getParticipantByToken($participantToken);
-        $reply = $this->replyRepository->findOneBy(['id' => $replyId, 'participant' => $participant]);
-
-        if ($reply) {
-            $canEdit = true;
+        if (!$cookie || !$reply->getQuestionnaire()) {
+            return false;
         }
 
-        return [
-            'EDIT' => $canEdit,
-        ];
+        try {
+            $replies = $this->capcoAnonReplyDecoder->decode($cookie)[$reply->getQuestionnaire()->getId()] ?? [];
+            foreach ($replies as $replyAccess) {
+                if ($replyAccess['replyId'] === $reply->getId()) {
+                    $participant = $this->participantHelper->getParticipantByToken($replyAccess['token']);
+
+                    return $reply->getParticipant()?->getId() === $participant->getId();
+                }
+            }
+        } catch (\Throwable) {
+        }
+
+        return false;
     }
 }

@@ -22,7 +22,8 @@ InternalQuestionChoice:
                 type: 'InternalMedia'
             responses:
                 type: 'InternalResponseConnection!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", value, args, getUser())'
             ranking:
                 type: '[InternalQuestionChoiceRanking]'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", value)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", value, getUser())'
                 description: 'Return the ranking of the given question choice'

@@ -28,7 +28,7 @@ class DeleteRepliesMutation implements MutationInterface
     ) {
     }
 
-    public function __invoke(Argument $args): array
+    public function __invoke(Argument $args, User $viewer): array
     {
         $this->formatInput($args);
         $replyGlobalIds = $args->offsetGet('replyIds');
@@ -38,7 +38,7 @@ class DeleteRepliesMutation implements MutationInterface
         $userIdsToReIndex = [];
         $participantIdsToReIndex = [];
         foreach ($replyGlobalIds as $replyGlobalId) {
-            $reply = $this->globalIdResolver->resolve($replyGlobalId);
+            $reply = $this->globalIdResolver->resolve($replyGlobalId, $viewer);
 
             if (!$reply instanceof Reply) {
                 $this->logger->error(sprintf('Unknown reply with id : %s, are you passing other objects ?', $replyGlobalId));

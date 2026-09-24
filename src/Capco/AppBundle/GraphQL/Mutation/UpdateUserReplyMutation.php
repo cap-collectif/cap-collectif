@@ -71,7 +71,7 @@ class UpdateUserReplyMutation extends ReplyMutation implements MutationInterface
 
     private function getReply(string $id, User $viewer): Reply
     {
-        $reply = $this->globalIdResolver->resolve($id);
+        $reply = $this->globalIdResolver->resolve($id, $viewer);
 
         if (!$reply instanceof Reply) {
             throw new UserError('Reply not found.');

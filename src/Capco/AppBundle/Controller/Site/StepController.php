@@ -24,7 +24,6 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Security\StepVoter;
-use Capco\AppBundle\Service\CapcoAnonReplyDecoder;
 use Capco\AppBundle\Service\ParticipantAccessResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,7 +47,6 @@ class StepController extends Controller
         private readonly OpinionSearch $opinionSearch,
         private readonly VersionSearch $versionSearch,
         private readonly LocaleRepository $localeRepo,
-        private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder,
         private readonly ParticipantAccessResolver $participantAccessResolver,
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker
@@ -404,15 +402,10 @@ class StepController extends Controller
             }
 
             $anonReplyBase64 = $request->cookies->get('CapcoAnonReply');
-            $participantHasAccess = false;
-            if (!$viewer && $anonReplyBase64) {
-                $decodedAnonReply = $this->capcoAnonReplyDecoder->decode($anonReplyBase64);
-                $questionnaireId = $step->getQuestionnaire()->getId();
-                $replies = $decodedAnonReply[$questionnaireId] ?? [];
-                foreach ($replies as $reply) {
-                    ['EDIT' => $participantHasAccess] = $this->participantAccessResolver->getReplyAccess($reply['replyId'], $reply['token']);
-                }
-            }
+            $participantHasAccess = !$viewer && $this->participantAccessResolver->canViewReplyFromCookie(
+                $reply,
+                $anonReplyBase64
+            );
 
             $hasAccess = $participantHasAccess || ($reply && $viewer && $reply->viewerCanSee($viewer));
 
@@ -427,7 +420,6 @@ class StepController extends Controller
         $props = $this->serializer->serialize(
             [
                 'step' => $step,
-                'isPrivateResult' => $step->getQuestionnaire() && $step->getQuestionnaire()->isPrivateResult(),
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
                     : null,

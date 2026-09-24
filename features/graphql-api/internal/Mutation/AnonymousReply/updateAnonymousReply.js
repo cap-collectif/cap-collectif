@@ -53,6 +53,6 @@ describe('mutations.updateAnonymousReply', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Given token does not match corresponding Participant')
+    ).rejects.toThrowError('Participant not found.')
   })
 })

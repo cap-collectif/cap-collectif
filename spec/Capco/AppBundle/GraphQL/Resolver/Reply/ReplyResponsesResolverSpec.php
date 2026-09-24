@@ -13,18 +13,15 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Util\TokenGenerator;
 use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
 
 class ReplyResponsesResolverSpec extends ObjectBehavior
 {
     public function let(
-        LoggerInterface $logger,
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         TokenGenerator $tokenGenerator
     ) {
         $this->beConstructedWith(
-            $logger,
             $abstractQuestionRepository,
             $abstractResponseRepository,
             $tokenGenerator
@@ -84,7 +81,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);
@@ -116,7 +112,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);
@@ -145,7 +140,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);
@@ -174,7 +168,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);
@@ -204,7 +197,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $viewer->isAdmin()->willReturn(false);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);
@@ -234,7 +226,6 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $viewer->isAdmin()->willReturn(false);
-        $questionnaire->isPrivateResult()->willReturn(false);
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $reply->isAnonymous()->willReturn(false);

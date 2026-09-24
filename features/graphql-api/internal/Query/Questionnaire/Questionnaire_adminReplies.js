@@ -50,6 +50,42 @@ const QuestionnaireAdminStatusRepliesQuery = /** GraphQL */ `
   }
 `
 
+const OrganizationQuestionnaireAdminRepliesQuery = /** GraphQL */ `
+  query OrganizationQuestionnaireAdminReplies {
+    node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3JnYQ==") {
+      ... on Questionnaire {
+        adminReplies {
+          totalCount
+        }
+      }
+    }
+  }
+`
+
+const ProjectAdminQuestionnaireAdminRepliesQuery = /** GraphQL */ `
+  query ProjectAdminQuestionnaireAdminReplies {
+    node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlUHJvamVjdE93bmVyQW5vbnltb3Vz") {
+      ... on Questionnaire {
+        adminReplies {
+          totalCount
+        }
+      }
+    }
+  }
+`
+
+const StandaloneQuestionnaireAdminRepliesQuery = /** GraphQL */ `
+  query StandaloneQuestionnaireAdminReplies {
+    node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3duZXJXaXRob3V0U3RlcA==") {
+      ... on Questionnaire {
+        adminReplies {
+          totalCount
+        }
+      }
+    }
+  }
+`
+
 const QuestionnaireAdminOrderRepliesQuery = /** GraphQL */ `
   query QuestionnaireAdminReplies($term: String, $orderBy: ReplyOrder, $filterStatus: [ReplyStatus]) {
     node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
@@ -79,6 +115,42 @@ const variables = {
 }
 
 describe('Internal|Questionnaire.adminReplies', () => {
+  it('denies a non-admin user', async () => {
+    await expect(graphql(QuestionnaireAdminRepliesQuery, variables, 'internal_user')).resolves.toMatchObject({
+      node: null,
+    })
+  })
+
+  it('allows an organization member to fetch replies', async () => {
+    const response = await graphql(OrganizationQuestionnaireAdminRepliesQuery, undefined, 'internal_valerie')
+
+    expect(response.node?.adminReplies.totalCount).toBeGreaterThan(0)
+  })
+
+  it('denies an organization member replies from another organization', async () => {
+    await expect(graphql(OrganizationQuestionnaireAdminRepliesQuery, undefined, 'internal_mickael')).resolves.toMatchObject({
+      node: null,
+    })
+  })
+
+  it('allows a project admin to fetch replies from their questionnaire', async () => {
+    const response = await graphql(ProjectAdminQuestionnaireAdminRepliesQuery, undefined, 'internal_project_admin')
+
+    expect(response.node?.adminReplies.totalCount).toBeGreaterThan(0)
+  })
+
+  it('denies a project admin replies from another organization', async () => {
+    await expect(
+      graphql(OrganizationQuestionnaireAdminRepliesQuery, undefined, 'internal_project_admin'),
+    ).resolves.toMatchObject({ node: null })
+  })
+
+  it('uses questionnaire access for a standalone questionnaire', async () => {
+    const response = await graphql(StandaloneQuestionnaireAdminRepliesQuery, undefined, 'internal_project_admin')
+
+    expect(response.node?.adminReplies).toBeDefined()
+  })
+
   it('should fetch all replies given all status filters', async () => {
     await expect(graphql(QuestionnaireAdminRepliesQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
   })

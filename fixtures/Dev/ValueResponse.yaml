@@ -943,6 +943,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Bon chance Agui pour le nuage de mots. !' }
         createdAt: <(new \DateTime('2021-01-01 04:30:00'))>
     responseAnonymousQuestionnaire1:
+        id: 'responseAnonymousQuestionnaire1'
         question: '@simpleQuestionAnonymousQuestionnaire'
         reply: '@replyAnonymous1'
         value: 'bien'

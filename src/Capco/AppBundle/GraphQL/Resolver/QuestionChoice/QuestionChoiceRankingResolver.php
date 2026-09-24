@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionChoiceRankingResolver implements QueryInterface
@@ -13,7 +14,7 @@ class QuestionChoiceRankingResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(QuestionChoice $questionChoice): ?array
+    public function __invoke(QuestionChoice $questionChoice, ?User $viewer = null): ?array
     {
         if (
             $questionChoice->getQuestion()

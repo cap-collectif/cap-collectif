@@ -4,12 +4,25 @@ This file provides guidance to AI coding assistants (Claude Code, Gemini CLI, Op
 
 Symlinks: `CLAUDE.md` and `GEMINI.md` point to this file.
 
+## Agent skills
+
+### Domain docs
+
+This is a single-context repository with its glossary at `CONTEXT.md`; architecture records live in `ADR/`.
+See `docs/agents/domain.md`.
+
 ## Rules for AI Assistants
 
 1. **Comments in English**: Always write code comments in English, regardless of the conversation language.
-2. **Default branch is `preprod`**: All new branches should be created from `preprod`, unless explicitly specified otherwise (e.g., urgent production hotfix from `master`).
-3. **Consult ADRs**: Before implementing features or making architectural decisions, read relevant Architecture Decision Records in the `ADR/` directory. These documents explain important technical decisions, conventions, and patterns used in the codebase.
-4. **Keep documentation in sync**: When making code changes, check if related documentation needs updating. This includes:
+2. **PHP commit quality gate**: Before committing changes that include PHP files, run the following commands in the application container. Do not commit if one fails; report the failure and ask for direction if fixing it would expand the requested scope.
+   ```bash
+   docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/phpstan analyse
+   docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php
+   docker exec -w /var/www capco_application_1 bin/rector process --dry-run
+   ```
+3. **Default branch is `preprod`**: All new branches should be created from `preprod`, unless explicitly specified otherwise (e.g., urgent production hotfix from `master`).
+4. **Consult ADRs**: Before implementing features or making architectural decisions, read relevant Architecture Decision Records in the `ADR/` directory. These documents explain important technical decisions, conventions, and patterns used in the codebase.
+5. **Keep documentation in sync**: When making code changes, check if related documentation needs updating. This includes:
    - Local `README.md` files in affected directories
    - This `AGENTS.md` file if patterns/commands/architecture change
    - ADRs if architectural decisions are modified

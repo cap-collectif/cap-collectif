@@ -25,7 +25,7 @@ describe('mutations.deleteAnonymousReply', () => {
         },
         'internal',
       ),
-    ).rejects.toThrowError('Given token does not match corresponding Participant')
+    ).rejects.toThrowError('Participant not found.')
   })
 
   it('should delete an anonymous reply', async () => {

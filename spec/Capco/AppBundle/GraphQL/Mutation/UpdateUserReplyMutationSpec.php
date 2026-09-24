@@ -82,7 +82,7 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn($replyId);
 
-        $globalIdResolver->resolve($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId, $viewer)->willReturn($reply);
 
         $viewer
             ->isEmailConfirmed()
@@ -163,7 +163,7 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn($replyId);
 
-        $globalIdResolver->resolve($replyId)->willReturn(null);
+        $globalIdResolver->resolve($replyId, $viewer)->willReturn(null);
         $em->flush()->shouldNotBeCalled();
 
         $this->shouldThrow(new UserError('Reply not found.'))->during('__invoke', [
@@ -197,7 +197,7 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $reply->getId()->willReturn('reply5');
         $reply->getAuthor()->willReturn($author);
 
-        $globalIdResolver->resolve($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId, $viewer)->willReturn($reply);
         $reply->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->willReturn($reply);
         $em->flush()->shouldNotBeCalled();
         $this->shouldThrow(
@@ -239,7 +239,7 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $reply->getAuthor()->willReturn($viewer);
         $reply->getQuestionnaire()->willReturn($questionnaire);
 
-        $globalIdResolver->resolve($replyId)->willReturn($reply);
+        $globalIdResolver->resolve($replyId, $viewer)->willReturn($reply);
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
         $questionnaire->isAnonymousAllowed()->willReturn(true);

@@ -23,3 +23,11 @@ Capco\AppBundle\Entity\Organization\OrganizationMember:
         organization: '@organization2'
         user: '@ChristopheCassou'
         role: 'user'
+    organizationMember9:
+        organization: '@organization1'
+        user: '@userMultipleOrganizations'
+        role: 'user'
+    organizationMember10:
+        organization: '@organization2'
+        user: '@userMultipleOrganizations'
+        role: 'user'

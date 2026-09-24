@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -18,7 +19,7 @@ class UserHasReplyResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(Questionnaire $questionnaire, Argument $args): bool
+    public function __invoke(Questionnaire $questionnaire, Argument $args, ?User $viewer = null): bool
     {
         $user = $this->userRepository->findOneByEmail($args->offsetGet('login'));
 
