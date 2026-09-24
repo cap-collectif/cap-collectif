@@ -211,6 +211,9 @@ COPY infrastructure/services/remote/cron/rabbitmq_queues_supervision      /usr/l
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
 
 # NodeJS
+# The production image only runs the standalone Next.js server with Node.js.
+# Remove the package managers bundled with Node.js because dependencies are
+# installed and the application is built before this image is assembled.
 ENV NODE_VERSION 20.19.6
 RUN apt-get update \
   && apt-get install -y curl ca-certificates
@@ -232,15 +235,13 @@ RUN set -eux; \
   grep " node-v${NODE_VERSION}-linux-${ARCH}.tar.xz\$" SHASUMS256.txt | sha256sum -c -; \
   tar -xJf "node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" -C /usr/local --strip-components=1; \
   rm "node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" SHASUMS256.txt; \
+  rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack; \
+  rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack \
+    /usr/local/bin/yarn /usr/local/bin/yarnpkg /usr/local/bin/pnpm /usr/local/bin/pnpx; \
   node --version; \
-  npm --version
-
-# Yarn is provided by corepack: the version is resolved at runtime from the
-# "packageManager" field of the project package.json, so upgrading Yarn does
-# not require rebuilding this image.
-RUN corepack enable
-
-RUN npm install -g pm2
+  ! command -v npm; \
+  ! command -v corepack; \
+  ! command -v yarn
 
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
 RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates
