@@ -297,10 +297,15 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
       type="select"` (warning React "Function components cannot be given refs", `Select` n'étant pas un
       `forwardRef`) ni `Menu` (voir le piège dédié plus bas).
     - Pour le texte : `TextEditor` (pas `Jodit` directement) avec `noModalAdvancedEditor` si le type Sonata
-      d'origine est `SiteParameter::TYPE_RICH_TEXT`, et `selectedLanguage={locale}` — `TextEditor` exige un
-      `FormProvider` ambiant (`useFormContext()`). La modale doit garder `forceModalDialogToFalse` **et**
-      `hideOnClickOutside={false}` : Jodit rend ses popups (lien, couleur...) hors du dialogue, un dialogue
-      `modal` (focus trap) les rend inutilisables et les traite comme un clic extérieur.
+      d'origine est `SiteParameter::TYPE_RICH_TEXT`. **`selectedLanguage` (et `platformLanguage`) doivent être
+      fixés sur la langue par défaut de la plateforme (`defaultLocaleCode`), jamais sur `locale` (la langue
+      actuellement affichée dans le sélecteur)** — voir le piège "Maximum update depth exceeded" plus bas : le
+      `key={locale}` sur le `FormControl` englobant suffit déjà à faire remonter `TextEditor` quand on change de
+      langue, faire varier `selectedLanguage` en plus fait entrer cette prop en conflit avec la mémoïsation
+      interne de Jodit et provoque une boucle de rendu infinie. `TextEditor` exige un `FormProvider` ambiant
+      (`useFormContext()`). La modale doit garder `forceModalDialogToFalse` **et** `hideOnClickOutside={false}` :
+      Jodit rend ses popups (lien, couleur...) hors du dialogue, un dialogue `modal` (focus trap) les rend
+      inutilisables et les traite comme un clic extérieur.
     - Ne pas se rabattre sur `siteParameter.value` pour pré-remplir la langue par défaut : ce champ est résolu
       sur la locale de **la requête** (celle de l'admin), pas sur la langue par défaut de la plateforme. La
       valeur d'une langue est `translations.find(t => t.locale === locale)?.value ?? ''`, rien de plus.
@@ -496,6 +501,21 @@ prop-drillé entre la liste et un ancêtre.
   reproduire au moins `hideOnClickOutside={false}` sur tout `Modal` qui contient un `Jodit`/`TextEditor`.
   Repéré en testant `LoginSettingModal.tsx` (refonte de `pages.login`) : cliquer dans le corps de l'éditeur
   pour positionner le curseur fermait la modale.
+- **Warning React "Maximum update depth exceeded" en ouvrant/changeant de langue dans la modale d'édition
+  d'un `SiteParameter` traduisible de type `TYPE_RICH_TEXT`** : cause réelle, faire varier la prop
+  `selectedLanguage` de `TextEditor` avec la langue actuellement affichée (`selectedLanguage={locale}`), en
+  plus du `key={locale}` déjà posé sur le `FormControl` englobant pour forcer le remount de l'éditeur au
+  changement de langue (voir plus haut, section "traduisible"). Les deux mécanismes se marchent dessus :
+  `Jodit.tsx` mémoïse déjà tout son rendu sur sa seule prop `selectedLanguage` (`useMemo(...,
+  [selectedLanguage])`), donc à l'intérieur de l'instance fraîchement remontée par le `key`, faire varier
+  *aussi* `selectedLanguage` déclenche une boucle de re-render entre cette mémoïsation interne et le cycle de
+  render React. Corrigé sur `ProjectSettingsList.tsx`/`MemberSettingsList.tsx` en fixant `selectedLanguage`
+  (et `platformLanguage`) sur la langue par défaut de la plateforme (`defaultLocaleCode`), constante quelle
+  que soit la langue affichée — le `key={locale}` seul suffit à remonter l'éditeur avec le bon contenu, il n'y
+  a besoin d'aucune autre prop variable pour ça. **Ce bug affecte potentiellement toute page migrée avant
+  cette découverte qui suit l'ancien pattern documenté** (`selectedLanguage={locale}` variable) : à vérifier
+  et corriger de la même façon sur `LoginSettingsList.tsx`/`LoginSettingModal.tsx` (`pages.login`) et
+  `BlogSettingsList.tsx` (`pages.blog`, branche `19937-posts-sonata-refonte`) si ce n'est pas déjà fait.
 - **Pour un sélecteur de langue dans un formulaire, préférer le composant `Select` importé directement depuis
   `@cap-collectif/form`** (piloté en `value`/`onChange` "à la main", hors react-hook-form — voir
   `BlogSettingsList.tsx` sur `19937-posts-sonata-refonte`, ou `LoginSettingModal.tsx`) **plutôt que**
