@@ -22,6 +22,14 @@ const execFile = util.promisify(cp.execFile)
 
 const env = process.env.CI ? 'ci' : 'local'
 
+// `capco:toggle:enable/disable` picks its Redis namespace from the Symfony kernel env passed via
+// `--env`. In CI the whole app runs as `test`, so writing toggles there is consistent. Locally the
+// app container runs as `dev` (see infrastructure/environments/development.yml), which resolves a
+// different Redis namespace (`config/packages/test/quandidate_toggle.yaml` hardcodes `testfeature_toggle`
+// instead of the default `%redis_prefix%feature_toggle`) — so toggling with `--env=test` locally writes
+// a key the running app never reads, and the flag silently never appears enabled.
+const toggleEnvironment = env === 'ci' ? 'test' : 'dev'
+
 type Json = Record<string, unknown>
 
 const rootDir = path.resolve('.')
@@ -112,7 +120,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Enabling feature flag "${name}"...`)
       console.time('enable_feature')
 
-      await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=test`)
+      await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=${toggleEnvironment}`)
       console.log(`Successfully enabled "${name}"`)
       console.timeEnd('enable_feature')
       return Promise.resolve(null)
@@ -121,7 +129,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Disabling feature flag "${name}"...`)
       console.time('disable_feature')
 
-      await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=test`)
+      await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=${toggleEnvironment}`)
       console.log(`Successfully disabled "${name}"`)
       console.timeEnd('enable_disable')
       return Promise.resolve(null)

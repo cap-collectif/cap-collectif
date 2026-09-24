@@ -1043,6 +1043,27 @@ InternalMutation:
                     inputType: DeleteHttpRedirectInput
                     payloadType: DeleteHttpRedirectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HttpRedirect\\DeleteHttpRedirectMutation", args)'
+            createVideo:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateVideoInput
+                    payloadType: CreateVideoPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Video\\CreateVideoMutation", args)'
+            updateVideo:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateVideoInput
+                    payloadType: UpdateVideoPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Video\\UpdateVideoMutation", args)'
+            deleteVideo:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteVideoInput
+                    payloadType: DeleteVideoPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Video\\DeleteVideoMutation", args)'
             createSocialNetwork:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

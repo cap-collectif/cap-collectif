@@ -1,0 +1,23 @@
+CreateVideoInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createVideo mutation.'
+        fields:
+            translations:
+                type: '[CreateVideoTranslationInput!]!'
+                description: 'The video translations.'
+            link:
+                type: 'String!'
+                description: 'The video embed URL.'
+            author:
+                type: 'ID'
+                description: 'The id of the video author.'
+            media:
+                type: 'ID'
+                description: 'The id of the media used as the video thumbnail.'
+            isEnabled:
+                type: 'Boolean'
+                description: 'Whether the video should be published.'
+            position:
+                type: 'Int'
+                description: 'The display position of the video.'

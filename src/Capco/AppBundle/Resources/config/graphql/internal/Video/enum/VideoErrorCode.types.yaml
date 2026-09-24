@@ -1,0 +1,12 @@
+VideoErrorCode:
+    type: enum
+    config:
+        name: VideoErrorCode
+        description: 'The available errors for videos.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\VideoErrorCode::NOT_FOUND
+            TITLE_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\VideoErrorCode::TITLE_REQUIRED
+            LINK_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\VideoErrorCode::LINK_REQUIRED

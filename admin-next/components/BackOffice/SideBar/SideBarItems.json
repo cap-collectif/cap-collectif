@@ -77,7 +77,7 @@
             },
             {
                 "title": "admin.label.video",
-                "href": "/admin/capco/app/video/list",
+                "href": "/admin-next/videos",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             },

@@ -1,0 +1,7 @@
+VideoConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalVideo!
+        connectionFields:
+            totalCount:
+                type: Int!

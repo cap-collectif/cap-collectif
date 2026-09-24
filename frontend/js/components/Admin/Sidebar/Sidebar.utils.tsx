@@ -18,6 +18,8 @@ export const URL_MAP = {
     '/admin/capco/app/post/',
     '/admin/capco/app/event/',
     '/admin/capco/app/video/',
+    '/admin-next/videos',
+    '/admin-next/video',
     '/admin/capco/app/page/',
     '/admin/capco/media/media/',
   ],

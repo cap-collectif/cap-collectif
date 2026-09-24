@@ -191,7 +191,17 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
                   {features.calendar && <SidebarLink text="admin.label.events" href="/admin-next/events" />}
-                  {isAdmin && <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />}
+                  {isAdmin && (
+                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
+                    <SidebarLink
+                      text="admin.label.video"
+                      href={
+                        features.unstable__sonata_migration_to_admin_next
+                          ? '/admin-next/videos'
+                          : '/admin/capco/app/video/list'
+                      }
+                    />
+                  )}
                   {isAdmin && <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />}
                   {isAdmin && <SidebarLink text="media" href="/admin-next/medias" />}
                 </SidebarAccordionPanel>
@@ -206,9 +216,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin.label.category" href="/admin-next/source-categories" />
                   ) : null}
                   <SidebarLink text="steps.forms" href="/admin-next/forms" />
-                  {isAdmin ? (
-                    <SidebarLink text="admin.label.pages.types" href="/admin-next/project-types" />
-                  ) : null}
+                  {isAdmin ? <SidebarLink text="admin.label.pages.types" href="/admin-next/project-types" /> : null}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

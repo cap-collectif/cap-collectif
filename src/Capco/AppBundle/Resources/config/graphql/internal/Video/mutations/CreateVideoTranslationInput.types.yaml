@@ -1,0 +1,14 @@
+CreateVideoTranslationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a video translation.'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The video title.'
+            body:
+                type: 'String'
+                description: 'The video description.'
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the translation.'

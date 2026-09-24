@@ -1,0 +1,47 @@
+InternalVideo:
+    type: object
+    config:
+        name: Video
+        description: 'A video displayed on the platform.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the video.'
+                resolve: '@=value.getId()'
+            title:
+                type: 'String!'
+                description: "The video's title, in the current locale."
+                resolve: '@=value.getTitle()'
+            body:
+                type: 'String'
+                description: "The video's description, in the current locale."
+                resolve: '@=value.getBody()'
+            link:
+                type: 'String!'
+                description: 'The video embed URL.'
+                resolve: '@=value.getLink()'
+            author:
+                type: 'InternalUser'
+                description: 'The video author.'
+                resolve: '@=value.getAuthor()'
+            media:
+                type: 'InternalMedia'
+                description: 'The video thumbnail image.'
+                resolve: '@=value.getMedia()'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the video is published.'
+                resolve: '@=value.getIsEnabled()'
+            position:
+                type: 'Int'
+                description: 'The display position of the video.'
+                resolve: '@=value.getPosition()'
+            translations:
+                type: '[InternalVideoTranslation!]!'
+                resolve: '@=value.getTranslations()'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime'
+                resolve: '@=value.getUpdatedAt()'

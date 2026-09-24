@@ -1,0 +1,10 @@
+UpdateVideoInput:
+    type: relay-mutation-input
+    inherits:
+        - CreateVideoInput
+    config:
+        description: 'Input of updateVideo mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the video to update.'

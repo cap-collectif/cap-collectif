@@ -1,0 +1,10 @@
+DeleteVideoPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedVideoId:
+                type: 'ID'
+                description: 'The deleted video id.'
+            errorCode:
+                type: 'VideoErrorCode'
+                description: 'The available errors if any.'

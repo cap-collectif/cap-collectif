@@ -1,0 +1,8 @@
+DeleteVideoInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteVideo mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the video to delete.'

@@ -4782,6 +4782,48 @@ input CreateUserTypeTranslationInput {
   clientMutationId: String
 }
 
+input CreateVideoInput {
+  """The video translations."""
+  translations: [CreateVideoTranslationInput!]!
+
+  """The video embed URL."""
+  link: String!
+
+  """The id of the video author."""
+  author: ID
+
+  """The id of the media used as the video thumbnail."""
+  media: ID
+
+  """Whether the video should be published."""
+  isEnabled: Boolean
+
+  """The display position of the video."""
+  position: Int
+  clientMutationId: String
+}
+
+type CreateVideoPayload {
+  """The created video."""
+  video: Video
+
+  """The available errors if any."""
+  errorCode: VideoErrorCode
+  clientMutationId: String
+}
+
+input CreateVideoTranslationInput {
+  """The video title."""
+  title: String!
+
+  """The video description."""
+  body: String
+
+  """The locale of the translation."""
+  locale: TranslationLocale!
+  clientMutationId: String
+}
+
 input CropMediaInput {
   """The media id."""
   mediaId: ID!
@@ -6512,6 +6554,21 @@ type DeleteVersionPayload {
 
   """The parent of the deleted `Version`."""
   opinion: Opinion
+  clientMutationId: String
+}
+
+input DeleteVideoInput {
+  """The id of the video to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteVideoPayload {
+  """The deleted video id."""
+  deletedVideoId: ID
+
+  """The available errors if any."""
+  errorCode: VideoErrorCode
   clientMutationId: String
 }
 
@@ -9691,6 +9748,9 @@ type Mutation {
   createHttpRedirect(input: CreateHttpRedirectInput!): CreateHttpRedirectPayload
   updateHttpRedirect(input: UpdateHttpRedirectInput!): UpdateHttpRedirectPayload
   deleteHttpRedirect(input: DeleteHttpRedirectInput!): DeleteHttpRedirectPayload
+  createVideo(input: CreateVideoInput!): CreateVideoPayload
+  updateVideo(input: UpdateVideoInput!): UpdateVideoPayload
+  deleteVideo(input: DeleteVideoInput!): DeleteVideoPayload
   createSocialNetwork(input: CreateSocialNetworkInput!): CreateSocialNetworkPayload
   updateSocialNetwork(input: UpdateSocialNetworkInput!): UpdateSocialNetworkPayload
   deleteSocialNetwork(input: DeleteSocialNetworkInput!): DeleteSocialNetworkPayload
@@ -15214,6 +15274,23 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): HttpRedirectConnection!
+
+  """List all videos."""
+  videos(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): VideoConnection!
+
+  """Get a single video by id."""
+  video(id: ID!): Video
 
   """List all social networks."""
   socialNetworks(
@@ -22144,6 +22221,39 @@ type UpdateUsernamePayload {
   clientMutationId: String
 }
 
+input UpdateVideoInput {
+  """The video translations."""
+  translations: [CreateVideoTranslationInput!]!
+
+  """The video embed URL."""
+  link: String!
+
+  """The id of the video author."""
+  author: ID
+
+  """The id of the media used as the video thumbnail."""
+  media: ID
+
+  """Whether the video should be published."""
+  isEnabled: Boolean
+
+  """The display position of the video."""
+  position: Int
+  clientMutationId: String
+
+  """The id of the video to update."""
+  id: ID!
+}
+
+type UpdateVideoPayload {
+  """The updated video."""
+  video: Video
+
+  """The available errors if any."""
+  errorCode: VideoErrorCode
+  clientMutationId: String
+}
+
 input UpdateVotesVisibilityInput {
   """SelectionStep global ID."""
   stepId: ID!
@@ -23598,6 +23708,70 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
   value: YesNoPairedVoteValue!
+}
+
+"""A video displayed on the platform."""
+type Video {
+  """The id of the video."""
+  id: ID!
+
+  """The video's title, in the current locale."""
+  title: String!
+
+  """The video's description, in the current locale."""
+  body: String
+
+  """The video embed URL."""
+  link: String!
+
+  """The video author."""
+  author: User
+
+  """The video thumbnail image."""
+  media: Media
+
+  """Whether the video is published."""
+  isEnabled: Boolean!
+
+  """The display position of the video."""
+  position: Int
+  translations: [VideoTranslation!]!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A connection to a list of items."""
+type VideoConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [VideoEdge]
+}
+
+"""An edge in a connection."""
+type VideoEdge {
+  """The item at the end of the edge."""
+  node: Video!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for videos."""
+enum VideoErrorCode {
+  NOT_FOUND
+  TITLE_REQUIRED
+  LINK_REQUIRED
+}
+
+"""A translation of a video."""
+type VideoTranslation {
+  locale: TranslationLocale!
+  title: String!
+  body: String
 }
 
 interface Vote {

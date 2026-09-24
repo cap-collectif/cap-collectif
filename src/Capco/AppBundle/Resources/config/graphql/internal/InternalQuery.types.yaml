@@ -650,6 +650,25 @@ InternalQuery:
                 description: 'List all HTTP redirects.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\HttpRedirect\\HttpRedirectListResolver", args)'
+            videos:
+                type: 'VideoConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all videos.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Video\\VideoListResolver", args)'
+            video:
+                type: 'InternalVideo'
+                description: 'Get a single video by id.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Video\\VideoResolver", args)'
             socialNetworks:
                 type: 'SocialNetworkConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

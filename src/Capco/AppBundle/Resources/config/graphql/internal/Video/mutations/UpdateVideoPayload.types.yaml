@@ -1,0 +1,10 @@
+UpdateVideoPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            video:
+                type: 'InternalVideo'
+                description: 'The updated video.'
+            errorCode:
+                type: 'VideoErrorCode'
+                description: 'The available errors if any.'

@@ -1,6 +1,7 @@
 import './graphql'
 import './auth'
 import './dom'
+import './featureFlags'
 import './inputs'
 import './react-select'
 import './security'

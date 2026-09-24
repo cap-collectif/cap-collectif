@@ -1,0 +1,15 @@
+InternalVideoTranslation:
+    type: object
+    config:
+        name: VideoTranslation
+        description: 'A translation of a video.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                resolve: '@=value.getLocale()'
+            title:
+                type: 'String!'
+                resolve: '@=value.getTitle()'
+            body:
+                type: 'String'
+                resolve: '@=value.getBody()'
