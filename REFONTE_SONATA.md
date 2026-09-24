@@ -242,6 +242,13 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Bouton de création au-dessus d'une liste/`Table`** : le laisser aligné à gauche (comportement par défaut d'un `Flex`) et lui donner `variantSize="small"` — c'est la taille
   standard pour ce type de bouton d'action au-dessus d'une liste admin-next, pas `"big"` (réservé aux boutons
   de `Modal.Footer`).
+- **Colonne d'action contenant un ou plusieurs boutons dans une `Table`** (ex: `ButtonQuickAction`, `Button`,
+  `SettingModal`/`ImageModal`...) : centrer à la fois le libellé de la colonne et son contenu, plutôt que de
+  les laisser ferrés à gauche (comportement par défaut) :
+  - Sur le `Table.Th` de la colonne : `display="flex" justifyContent="center"`.
+  - Sur chaque `Table.Td` de cette colonne : wrapper le(s) bouton(s) dans un `<Flex justifyContent="center">`.
+  Voir `ProjectSettingsList.tsx` (colonne "Action" : le `Table.Th` et les deux `Table.Td` concernés, celui de
+  `ProjectFeatureRow` et celui de `settings.map(...)`).
 - **Accessibilité : intitulé explicite pour les boutons et champs de recherche, jamais un libellé générique
   seul.** Un lecteur d'écran annonce le bouton/champ hors du contexte visuel de la page : "Créer" ou
   "Rechercher" seuls ne disent pas quoi. Toujours préciser l'entité concernée : "Créer le type", "Créer la
@@ -297,12 +304,15 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
       type="select"` (warning React "Function components cannot be given refs", `Select` n'étant pas un
       `forwardRef`) ni `Menu` (voir le piège dédié plus bas).
     - Pour le texte : `TextEditor` (pas `Jodit` directement) avec `noModalAdvancedEditor` si le type Sonata
-      d'origine est `SiteParameter::TYPE_RICH_TEXT`. **`selectedLanguage` (et `platformLanguage`) doivent être
-      fixés sur la langue par défaut de la plateforme (`defaultLocaleCode`), jamais sur `locale` (la langue
-      actuellement affichée dans le sélecteur)** — voir le piège "Maximum update depth exceeded" plus bas : le
-      `key={locale}` sur le `FormControl` englobant suffit déjà à faire remonter `TextEditor` quand on change de
-      langue, faire varier `selectedLanguage` en plus fait entrer cette prop en conflit avec la mémoïsation
-      interne de Jodit et provoque une boucle de rendu infinie. `TextEditor` exige un `FormProvider` ambiant
+      d'origine est `SiteParameter::TYPE_RICH_TEXT`. Fixer `selectedLanguage` (et `platformLanguage`) sur la
+      langue par défaut de la plateforme (`defaultLocaleCode`), pas sur `locale` (la langue actuellement
+      affichée) : le `key={locale}` sur le `FormControl` englobant suffit déjà à remonter `TextEditor` au
+      changement de langue (`Jodit.tsx` mémoïse tout son rendu sur sa seule prop `selectedLanguage` —
+      `useMemo(..., [selectedLanguage])` — donc dans l'instance fraîchement remontée par le `key`, `value`/
+      `onChange` sont déjà à jour dès le premier rendu ; faire varier `selectedLanguage` en plus est inutile et
+      a été vu comme corrélé à un test cassé une fois). **Ce n'est en revanche pas la cause du warning React
+      "Maximum update depth exceeded" — voir le piège dédié plus bas, dont la cause réelle est ailleurs
+      (`rowId` sur `Table.Tr`), pas ce mécanisme Jodit.** `TextEditor` exige un `FormProvider` ambiant
       (`useFormContext()`). La modale doit garder `forceModalDialogToFalse` **et** `hideOnClickOutside={false}` :
       Jodit rend ses popups (lien, couleur...) hors du dialogue, un dialogue `modal` (focus trap) les rend
       inutilisables et les traite comme un clic extérieur.
@@ -501,21 +511,46 @@ prop-drillé entre la liste et un ancêtre.
   reproduire au moins `hideOnClickOutside={false}` sur tout `Modal` qui contient un `Jodit`/`TextEditor`.
   Repéré en testant `LoginSettingModal.tsx` (refonte de `pages.login`) : cliquer dans le corps de l'éditeur
   pour positionner le curseur fermait la modale.
-- **Warning React "Maximum update depth exceeded" en ouvrant/changeant de langue dans la modale d'édition
-  d'un `SiteParameter` traduisible de type `TYPE_RICH_TEXT`** : cause réelle, faire varier la prop
-  `selectedLanguage` de `TextEditor` avec la langue actuellement affichée (`selectedLanguage={locale}`), en
-  plus du `key={locale}` déjà posé sur le `FormControl` englobant pour forcer le remount de l'éditeur au
-  changement de langue (voir plus haut, section "traduisible"). Les deux mécanismes se marchent dessus :
-  `Jodit.tsx` mémoïse déjà tout son rendu sur sa seule prop `selectedLanguage` (`useMemo(...,
-  [selectedLanguage])`), donc à l'intérieur de l'instance fraîchement remontée par le `key`, faire varier
-  *aussi* `selectedLanguage` déclenche une boucle de re-render entre cette mémoïsation interne et le cycle de
-  render React. Corrigé sur `ProjectSettingsList.tsx`/`MemberSettingsList.tsx` en fixant `selectedLanguage`
-  (et `platformLanguage`) sur la langue par défaut de la plateforme (`defaultLocaleCode`), constante quelle
-  que soit la langue affichée — le `key={locale}` seul suffit à remonter l'éditeur avec le bon contenu, il n'y
-  a besoin d'aucune autre prop variable pour ça. **Ce bug affecte potentiellement toute page migrée avant
-  cette découverte qui suit l'ancien pattern documenté** (`selectedLanguage={locale}` variable) : à vérifier
-  et corriger de la même façon sur `LoginSettingsList.tsx`/`LoginSettingModal.tsx` (`pages.login`) et
-  `BlogSettingsList.tsx` (`pages.blog`, branche `19937-posts-sonata-refonte`) si ce n'est pas déjà fait.
+- **Warning React "Maximum update depth exceeded" sur une liste `Table` (`@cap-collectif/ui`) — la cause
+  réelle est le prop `rowId` sur `Table.Tr`, pas `TextEditor`/Jodit.** Une précédente version de cette entrée
+  attribuait ce warning à la prop `selectedLanguage` de `TextEditor` variant avec la langue affichée dans une
+  modale traduisible — **c'était un mauvais diagnostic, corrigé ici après qu'il se soit avéré que le warning
+  persistait malgré ce correctif.** Repéré sur `MemberSettingsList.tsx` (refonte de `pages.members`) : le
+  warning apparaît dès le **chargement initial de la page**, avant toute ouverture de modale (confirmé avec un
+  navigateur headless réel, `console.error` intercepté juste après le premier rendu, stack pointant dans le
+  sous-arbre de `Table`, pas dans `TextEditor`/`Jodit`) — ce qui exclut d'emblée toute cause liée à la modale
+  d'édition ou à `selectedLanguage`. Cause isolée par un test A/B en navigateur headless (voir plus bas) :
+  retirer `rowId={setting.id}` de `<Table.Tr key={setting.id} rowId={setting.id} ...>` fait disparaître le
+  warning intégralement (0 occurrence sur le chargement de la page et sur l'ouverture successive de toutes ses
+  modales, y compris celles avec `TextEditor`). `rowId` ne sert qu'à l'affichage d'une checkbox de sélection de
+  ligne (`Table.Tr`/`TrCheckbox`, actif seulement si `Table selectable`) et pose un attribut HTML `id` sur le
+  `<tr>` : sur une liste non `selectable` (le cas courant des pages de settings), il n'a aucune utilité
+  fonctionnelle et peut être retiré sans perte — garder `key={setting.id}` (React) qui, lui, reste nécessaire.
+  Le mécanisme interne exact côté `@cap-collectif/ui` (version `6.0.12`) n'a pas pu être isolé en relisant le
+  code source non minifié de `Table`/`Tr`/`Tbody`/`Thead`/`Th` (aucun n'a de `useEffect` conditionné sur
+  `rowId` dans ce qui est lisible) — seule la reproduction empirique fait foi ici, pas une explication de
+  mécanisme. **`ProjectSettingsList.tsx` a le même correctif** (`git show 4c80a8a433 -- '*ProjectSettingsList.tsx'`
+  sur la branche `19942-projects-participatifs-sonata-refonte` retire ce même `rowId` de son `Table.Tr`), mais
+  le message et les commentaires de ce commit ("fix: infinite rerender + locales management") attribuaient
+  tout le mérite du fix au changement `selectedLanguage`/`TextEditor` décrit plus haut — c'est cette
+  attribution erronée qui a été recopiée dans une précédente version de cette doc, et qui a fait perdre du
+  temps sur `MemberSettingsList.tsx` (le port du seul changement `TextEditor` n'a rien résolu, puisque
+  `MemberSettingsList.tsx` avait `rowId` sur son `Table.Tr` **depuis son commit de migration initial**, sans
+  aucun `key={locale}`/`selectedLanguage` variable à l'époque — le vrai bug n'avait donc aucun rapport avec la
+  traduction). **Sur toute page qui affiche ce warning sur une `Table` non `selectable`, tester en premier le
+  retrait de `rowId` sur `Table.Tr` avant toute autre hypothèse** (Jodit, effets locaux du composant de page,
+  etc.) : c'est un test d'une ligne, rapide à éliminer ou confirmer.
+  - **Méthode pour isoler ce genre de warning avec certitude (A/B empirique, pas déduction sur le code)** :
+    piloter un vrai navigateur headless (voir le piège `playwright-core` plus haut) avec
+    `page.on('console', msg => ...)` filtré sur `msg.type() === 'error' && msg.text().includes('Maximum update
+    depth exceeded')`, se connecter via `context.request.post('/login_check', ...)` (JSON, cf. piège dédié),
+    puis un `page.goto()` du **premier** rendu Symfony (`/`, pour peupler la session Redis) suivi du
+    `page.goto()` de la page admin-next à tester. Compter les occurrences juste après le chargement (avant
+    toute interaction) pour confirmer que le bug est bien un problème de rendu initial et non déclenché par une
+    action utilisateur, puis retirer/modifier une seule prop suspecte à la fois entre deux runs (HMR recompile
+    en ~2s, vérifiable dans `docker logs capco_nextjs_1`) pour confirmer/infirmer chaque hypothèse — beaucoup
+    plus fiable que de déduire la cause depuis un commit de référence dont les commentaires peuvent eux-mêmes
+    être un faux diagnostic, comme ici.
 - **Pour un sélecteur de langue dans un formulaire, préférer le composant `Select` importé directement depuis
   `@cap-collectif/form`** (piloté en `value`/`onChange` "à la main", hors react-hook-form — voir
   `BlogSettingsList.tsx` sur `19937-posts-sonata-refonte`, ou `LoginSettingModal.tsx`) **plutôt que**
