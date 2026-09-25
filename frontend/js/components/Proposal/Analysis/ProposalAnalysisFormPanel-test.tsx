@@ -35,9 +35,7 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
           },
         },
       },
-      author: {
-        email: "toto@toto.com"
-    },
+      authorEmail: 'toto@toto.com',
     },
     viewer: {
       ' $fragmentRefs': $fragmentRefs,

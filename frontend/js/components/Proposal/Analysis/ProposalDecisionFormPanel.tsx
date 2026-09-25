@@ -103,7 +103,7 @@ export const ProposalDecisionFormPanel = ({
   const refusedReasons = proposal?.form.analysisConfiguration?.unfavourableStatuses || []
   const effectiveDate = proposal?.form.analysisConfiguration?.effectiveDate
 
-  const hasEmail = !!proposal.author.email
+  const hasEmail = !!proposal.authorEmail
 
   return (
     <>
@@ -337,9 +337,7 @@ export default createFragmentContainer(container, {
           }
         }
       }
-      author {
-        email
-      }
+      authorEmail
     }
   `,
 })

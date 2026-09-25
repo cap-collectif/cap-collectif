@@ -51,9 +51,7 @@ describe('<ProposalDecisionFormPanel  /> ', () => {
           ],
         },
       },
-      author: {
-        email: "toto@toto.com"
-    },
+      authorEmail: 'toto@toto.com',
     },
   }
   it('renders correctly', () => {

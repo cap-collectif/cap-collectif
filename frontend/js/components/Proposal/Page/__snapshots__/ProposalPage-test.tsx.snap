@@ -5669,19 +5669,8 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": null,
-                      "kind": "LinkedField",
-                      "name": "author",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "email",
-                          "storageKey": null,
-                        },
-                      ],
+                      "kind": "ScalarField",
+                      "name": "authorEmail",
                       "storageKey": null,
                     },
                     Object {
@@ -8655,7 +8644,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "edba064a139a7b1b82751c4dee0bdcc5",
+          "cacheID": "9cf8a21470736a1883fa50e4429e4717",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9209,11 +9198,7 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
       id
     }
   }
-  author {
-    __typename
-    email
-    id
-  }
+  authorEmail
   form {
     analysisConfiguration {
       id
@@ -9408,11 +9393,7 @@ fragment ProposalAssessmentFormPanel_proposal_2uwUKI on Proposal {
     }
     id
   }
-  author {
-    __typename
-    email
-    id
-  }
+  authorEmail
 }
 
 fragment ProposalChangeAddressModal_proposalForm on ProposalForm {
@@ -9498,11 +9479,7 @@ fragment ProposalDecisionFormPanel_proposal_2uwUKI on Proposal {
     }
     id
   }
-  author {
-    __typename
-    email
-    id
-  }
+  authorEmail
 }
 
 fragment ProposalDeleteModal_proposal on Proposal {

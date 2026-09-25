@@ -175,7 +175,7 @@ export const ProposalAnalysisFormPanel = ({
   const [status, setStatus] = useState(initialStatus)
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get('availableQuestions')
   const analysis = proposal.analyses?.find(a => a.analyst.id === userId)
-  const hasEmail = !!proposal.author.email
+  const hasEmail = !!proposal.authorEmail
 
   return (
     <>
@@ -350,9 +350,7 @@ export default createFragmentContainer(container, {
           ...responsesHelper_response @relay(mask: false)
         }
       }
-      author {
-        email
-      }
+      authorEmail
       form {
         analysisConfiguration {
           id

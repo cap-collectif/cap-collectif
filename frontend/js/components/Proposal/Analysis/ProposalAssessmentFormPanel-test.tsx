@@ -30,9 +30,7 @@ describe('<ProposalAssessmentFormPanel  /> ', () => {
           costEstimationEnabled: true,
         },
       },
-      author: {
-        email: "toto@toto.com"
-    },
+      authorEmail: 'toto@toto.com',
     },
   }
   it('renders correctly', () => {

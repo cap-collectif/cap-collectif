@@ -117,7 +117,7 @@ export const ProposalAssessmentFormPanel = ({
     dispatch(change(formName, 'goBack', true))
   }
 
-  const hasEmail = !!proposal.author.email
+  const hasEmail = !!proposal.authorEmail
 
   return (
     <>
@@ -313,9 +313,7 @@ export default createFragmentContainer(container, {
           costEstimationEnabled
         }
       }
-      author {
-        email
-      }
+      authorEmail
     }
   `,
 })
