@@ -80,8 +80,23 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
 6. **Créer la page** dans `admin-next/pages/admin-next/<nom-en-kebab-case>.tsx` (le nom de fichier = la route).
 7. **Créer le(s) composant(s)** dans `admin-next/components/BackOffice/<NomDeLaFeature>/` (PascalCase pour le
    dossier et les fichiers de composants).
-8. **Déployer la refonte derrière un feature flag dédié à la migration — ne pas remplacer définitivement les
-   routes Sonata pendant la PR de migration.** Le feature flag fonctionnel existant de la page (ex:
+8. **Choisir le mode de livraison — avec ou sans feature flag de migration — en demandant à l'utilisateurice
+   lequel s'applique à la PR en cours.** Deux cas coexistent tant que les premières refontes ne sont pas toutes
+   fusionnées :
+   - **Sans feature flag** (PR ouvertes avant la décision d'utiliser un feature flag de migration, ex:
+     `pages.blog`, `pages.projects`, `pages.events`) : la route Admin Next remplace définitivement la route
+     Sonata **dans la PR de migration elle-même** — liens de menu (`SideBarItems.json`, `Sidebar.tsx`,
+     `URL_MAP`) pointés directement sur `/admin-next/...`, et code/références Sonata de la page supprimés en
+     suivant les consignes de nettoyage de l'étape 14 (ex: entrée de la catégorie dans
+     `FeaturesCategoryResolver::$categories`). Les règles « avec feature flag » des étapes 8, 9 et 14 ne
+     s'appliquent pas à ce cas ; leurs consignes de repérage et de nettoyage des références Sonata, si.
+   - **Avec feature flag** (toute PR ouverte depuis cette décision) : règles ci-dessous, code Sonata conservé.
+
+   Quand toutes les PR « sans feature flag » seront fusionnées, cette nuance sera retirée et la suppression du
+   code Sonata sera interdite hors PR de nettoyage dédiée.
+
+   **Avec feature flag : déployer la refonte derrière un feature flag dédié à la migration — ne pas remplacer
+   définitivement les routes Sonata pendant la PR de migration.** Le feature flag fonctionnel existant de la page (ex:
    `members_list`) reste inchangé : il contrôle l'existence de la fonctionnalité, pas le choix entre Sonata et
    Admin Next. Tant que la migration n'est pas complètement généralisée :
    - conserver le code et l'URL Sonata existants, ainsi que la nouvelle page Admin Next ;
@@ -97,6 +112,9 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
      les autres pages encore en rollout.
 9. **Maintenir les références de menu dans les deux interfaces** : il existe DEUX menus latéraux distincts,
    plus d'éventuelles autres références à traquer au cas par cas :
+   (Les consignes « dépendre du feature flag » ci-dessous valent pour le cas « avec feature flag » de l'étape 8 ;
+   sans feature flag, pointer directement les `href` et le préfixe d'`URL_MAP` sur la route Admin Next, sans
+   conserver l'ancienne URL Sonata.)
    - `admin-next/components/BackOffice/SideBar/SideBarItems.json` : menu latéral utilisé par les pages
      `admin-next/` elles-mêmes (via `Layout.tsx`). Y faire dépendre le lien du feature flag de migration.
    - `frontend/js/components/Admin/Sidebar/Sidebar.tsx` : menu latéral **legacy**, affiché sur les pages
@@ -163,10 +181,11 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       via le formulaire de l'UI si le scénario a vraiment besoin d'une ligne fraîche/spécifique qu'aucune
       fixture ne fournit, 3) `run:sql` seulement si même l'UI ne permet pas de poser cet état (ex: état
       legacy/corrompu à reproduire).
-14. **Ne pas supprimer le code Sonata dans la PR de migration.** Il doit rester disponible tant que le
-    feature flag de migration permet de revenir à la route historique. Le nettoyage des contrôleurs, templates,
-    entrées de menu et URLs Sonata intervient dans une PR dédiée, une fois la refonte généralisée et le feature
-    flag supprimé pour cette page.
+14. **Ne pas supprimer le code Sonata dans la PR de migration (cas « avec feature flag » de l'étape 8 ; sans
+    feature flag, ce nettoyage se fait dans la PR de migration elle-même, avec les mêmes consignes).** Il doit
+    rester disponible tant que le feature flag de migration permet de revenir à la route historique. Le nettoyage
+    des contrôleurs, templates, entrées de menu et URLs Sonata intervient dans une PR dédiée, une fois la refonte
+    généralisée et le feature flag supprimé pour cette page.
     - **Cas des pages `/admin/settings/{category}/list`** (`SettingsController.php`, `SiteParameterAdmin.php`,
       `Settings/list.html.twig`, tous dans `src/Capco/AdminBundle/`) : ce contrôleur/template est **générique**,
       partagé par plusieurs catégories (`settings.global`, `settings.performance`, `settings.modules`,
@@ -188,6 +207,11 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       seule fois pour toutes les catégories, sous `admin.group.parameters`, sans filtre par catégorie).
 
 ## Patterns de référence dans `admin-next/`
+
+> Certains fichiers cités dans ce document vivent sur des branches parallèles pas encore fusionnées : la doc est
+> fusionnée avant le code qu'elle décrit, pour servir aux refontes menées en parallèle. Si un fichier cité
+> n'existe pas sur la branche courante, le lire depuis sa branche (`git log --all --oneline -- <chemin>` puis
+> `git show <sha>:<chemin>`) ou suivre la recette autonome correspondante quand il y en a une.
 
 Selon la forme des données à afficher, s'inspirer du composant le plus proche :
 
@@ -276,106 +300,11 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     `NotificationSettingsList.tsx` / `NotificationSettingModal.tsx` — `Table` + modale avec un simple
     `FieldInput type="text"` pour `value`, pas de sélecteur de langue. Query `notificationSettings: [SiteParameter!]!`
     ne charge pas `translations`.
-  - **Traduisible** (ex: `pages.login` — texte riche affiché publiquement — et `pages.blog`, voir
-    `BlogSettingsList.tsx`/`UpdateBlogSettingMutation.php` sur la branche `19937-posts-sonata-refonte`) :
-    `LoginSettingsList.tsx` / `LoginSettingModal.tsx` / `LoginSettingForm.tsx` — même structure `Table`/modale,
-    mais la query charge aussi `translations { id locale value }` (le resolver doit appeler `addTranslation()`
-    pour chaque `SiteParameterTranslation`, comme `SiteParameterQueryResolver::loadTranslations`) et
-    `availableLocales(includeDisabled: false) { id code isDefault traductionKey }`. Côté Sonata, le multilangue
-    reposait sur un rechargement de la page d'édition avec `?tl=<locale>` (`TranslatableAdminExtension` posait
-    `setCurrentLocale()` sur l'entité) : une seule langue éditée à la fois, champ vide pour une langue sans
-    traduction (pas de repli sur la langue par défaut). Le comportement à reproduire côté admin-next :
-    - **Le formulaire vit dans le corps de la modale** (`LoginSettingForm.tsx` est rendu dans le render-prop
-      `{({ hide }) => ...}` de `Modal`) : `Modal` (CapUI) démonte son contenu à la fermeture (`unmountOnHide`),
-      donc `useForm` repart des dernières valeurs sauvegardées à chaque ouverture, sans `reset()` à la
-      fermeture ni après succès, et sans désynchronisation entre la langue sélectionnée et les valeurs.
-    - **Une valeur de formulaire par langue** (`translations: Record<locale, string>`, clés au format `fr-FR`
-      de `SiteParameterTranslation.locale`), toutes chargées au montage. Le sélecteur de langue ne fait que
-      changer le champ affiché : `<FormControl name={`translations.${locale}`} key={locale}>` — le `key`
-      **remonte** le `TextEditor` (pattern `PostForm.tsx`/`UserTypeModal.tsx`). C'est indispensable :
-      `Jodit.tsx` mémoïse tout son rendu sur sa seule prop `selectedLanguage` (`useMemo(..., [selectedLanguage])`)
-      et la branche `noModalAdvancedEditor` de `TextEditor.tsx` ne la transmet pas, donc un simple `reset()` ou
-      changement de `value` n'est **jamais** répercuté dans l'éditeur : le texte de la langue précédente reste
-      affiché, et c'est lui qui finit enregistré dans la nouvelle langue. Ne pas contourner avec un système de
-      brouillons + `reset()` par langue — les valeurs de toutes les langues vivent déjà dans react-hook-form.
-    - Sélecteur de langue, uniquement si le feature flag `multilangue` est actif (sinon seule la langue par
-      défaut de la plateforme est éditable, sans sélecteur) : `Select` importé depuis `@cap-collectif/form`
-      (piloté à la main en `value`/`onChange` avec des chaînes, HORS react-hook-form), **pas** `FieldInput
-      type="select"` (warning React "Function components cannot be given refs", `Select` n'étant pas un
-      `forwardRef`) ni `Menu` (voir le piège dédié plus bas).
-    - Pour le texte : `TextEditor` (pas `Jodit` directement) avec `noModalAdvancedEditor` si le type Sonata
-      d'origine est `SiteParameter::TYPE_RICH_TEXT`. Fixer `selectedLanguage` (et `platformLanguage`) sur la
-      langue par défaut de la plateforme (`defaultLocaleCode`), pas sur `locale` (la langue actuellement
-      affichée) : le `key={locale}` sur le `FormControl` englobant suffit déjà à remonter `TextEditor` au
-      changement de langue (`Jodit.tsx` mémoïse tout son rendu sur sa seule prop `selectedLanguage` —
-      `useMemo(..., [selectedLanguage])` — donc dans l'instance fraîchement remontée par le `key`, `value`/
-      `onChange` sont déjà à jour dès le premier rendu ; faire varier `selectedLanguage` en plus est inutile et
-      a été vu comme corrélé à un test cassé une fois). **Ce n'est en revanche pas la cause du warning React
-      "Maximum update depth exceeded" — voir le piège dédié plus bas, dont la cause réelle est ailleurs
-      (`rowId` sur `Table.Tr`), pas ce mécanisme Jodit.** `TextEditor` exige un `FormProvider` ambiant
-      (`useFormContext()`). La modale doit garder `forceModalDialogToFalse` **et** `hideOnClickOutside={false}` :
-      Jodit rend ses popups (lien, couleur...) hors du dialogue, un dialogue `modal` (focus trap) les rend
-      inutilisables et les traite comme un clic extérieur.
-    - Ne pas se rabattre sur `siteParameter.value` pour pré-remplir la langue par défaut : ce champ est résolu
-      sur la locale de **la requête** (celle de l'admin), pas sur la langue par défaut de la plateforme. La
-      valeur d'une langue est `translations.find(t => t.locale === locale)?.value ?? ''`, rien de plus.
-    - **Mutation `update*` avec un tableau `translations: [{ locale: TranslationLocale!, value: String! }]`**
-      (input-object `UpdateLoginSettingTranslationInput`, enum `TranslationLocale` dont les valeurs PHP sont
-      déjà au format `fr-FR`), comme `UpdateUserTypeMutation`/`UpdatePostMutation` : une seule mutation,
-      atomique, quel que soit le nombre de langues modifiées. Le front n'envoie que les langues dont la valeur a
-      changé (comparaison avec les valeurs initiales — `dirtyFields` n'est pas fiable ici, `TextEditor` appelle
-      `setValue()` sans `shouldDirty`) ; le back ne touche qu'aux langues reçues, une valeur vide supprime la
-      ligne (même sémantique que `mergeNewTranslations()`), et **si le feature flag `multilangue` est inactif, la
-      valeur est stockée sous la langue par défaut de la plateforme** (`LocaleRepository::getDefaultCode()`)
-      quelle que soit la locale envoyée. Le cache est invalidé pour chaque locale reçue (voir plus bas).
-    - **Persister chaque traduction en interrogeant directement le repository `SiteParameterTranslation`**
-      (chercher `{translatable: $siteParameter, locale}`, mettre à jour si trouvé, sinon créer + `persist()`),
-      puis **`$em->refresh($siteParameter)` après le `flush()`** avant de renvoyer l'entité dans le payload.
-      **Ne pas** utiliser `SiteParameter::setValue($value, $locale)` + `mergeNewTranslations()` (pattern de
-      `UpdateBlogSettingMutation.php` sur `19937-posts-sonata-refonte` et de Sonata) : il paraît propre mais
-      échoue par intermittence. Cause réelle, vérifiée avec le general log MySQL : `SiteParameterResolver`
-      (appelé sur chaque requête par `LocaleSubscriber`/`SiteParameterCacheSubscriber`) exécute, quand son
-      cache `site_parameters_<locale>` est froid, `SiteParameterRepository::getValues($locale)` — une requête
-      DQL qui **fetch-join les traductions filtrées sur la locale courante** (`leftJoin('p.translations', 't',
-      WITH 't.locale = :locale')` + `select('p', 't')`). Doctrine hydrate alors tous les `SiteParameter` dans
-      l'identity map avec une collection `translations` **initialisée mais partielle** (la seule traduction de
-      la locale courante, ou vide). `$repository->find($id)` dans la mutation renvoie cette même instance :
-      `setValue()`/`translate()` ne trouve pas la traduction d'une autre locale, en crée une nouvelle,
-      `mergeNewTranslations()` l'ajoute et le `flush()` viole la contrainte unique
-      `site_parameter_translation_unique_translation` ; et même avec la requête directe au repository (qui
-      persiste correctement), le payload renvoie un `translations` partiel (`[]` si la locale courante n'a pas
-      de traduction) tant que l'entité n'est pas rafraîchie. Comme ça ne se produit que si le cache du resolver
-      est froid pendant la requête, le bug est intermittent et invisible au premier essai. `refresh()`
-      remplace la collection partielle par une collection lazy propre ; `LoginSettingsQueryResolver` (lecture)
-      contourne le même problème en appelant `addTranslation()` pour chaque ligne du repository.
-  - Dans les deux cas, `isEnabled` reste un champ non traduisible partagé entre toutes les langues — la valeur
-    du `Switch`/`Tag` ne dépend donc pas de la langue sélectionnée dans la modale.
-  - **Invalidation du cache : passer explicitement la locale éditée, ne pas se fier à la locale de la requête
-    courante.** `UpdateSiteParameterMutation::invalidateCache(SiteParameter $siteParameter, ?string $locale =
-    null)` (réutilisée par `UpdateNotificationSettingMutation`/`UpdateLoginSettingMutation` via injection) et
-    `SiteParameterRuntime::invalidateCache(string $key, ?string $locale = null)` défaut, si `$locale` n'est pas
-    fourni, sur `$this->requestStack->getCurrentRequest()->getLocale()` — c'est-à-dire la locale de **l'admin
-    qui fait l'appel**, pas celle de la traduction qui vient d'être modifiée. Ce défaut est correct pour
-    l'ancien flow Sonata (où l'admin change sa propre langue d'interface pour éditer chaque traduction l'une
-    après l'autre) et pour les `keyname` non traduisibles (une seule valeur, peu importe la locale), mais casse
-    silencieusement tout endpoint qui permet d'éditer une locale arbitraire indépendamment de la langue de
-    session de l'admin (typiquement un sélecteur de langue dans une modale admin-next, comme
-    `LoginSettingModal.tsx`) : la traduction est bien persistée en base, mais le cache de la **locale éditée**
-    n'est jamais invalidé — seul celui de la locale de l'admin l'est. Symptôme observé : la mutation retourne
-    un succès, la traduction est bien en base (vérifiable en SQL), mais **le texte traduit n'apparaît jamais
-    sur le frontend public** dans cette langue. Toujours passer `$locale` explicitement (celui reçu dans
-    l'input de la mutation) à ces deux méthodes dès que la mutation permet d'éditer une locale différente de
-    celle de la requête courante.
-  - **Pour vérifier qu'une traduction s'affiche bien côté frontend public**, ne pas tester uniquement via une
-    requête GraphQL brute (`curl`) sans contexte de locale réaliste : le champ `value` de `SiteParameter` n'a
-    pas d'argument `locale` explicite dans le schéma, il est résolu via `GraphQLLocaleResolver`/
-    `RequestLocaleResolver` à partir (dans cet ordre) de l'attribut de route `_locale`, du préfixe d'URL, du
-    cookie `locale`, de la session, puis du header `Accept-Language` — un simple `curl -b "locale=en-GB"` sur
-    `/graphql/internal` peut donner un résultat différent de ce qu'un vrai navigateur obtiendrait (notamment si
-    la session déjà ouverte a persisté une locale différente). Le test le plus fiable et le plus simple à
-    scripter est un `curl` **sans session**, avec un header `Accept-Language` correctement formé (ex:
-    `Accept-Language: en-US,en;q=0.9`, pas juste `en-GB`) — ça correspond au comportement réel d'un visiteur
-    anonyme et évite les effets de bord de session.
+  - **Traduisible** (ex: `pages.login`, `pages.blog`, `pages.events`, `pages.projects` — textes affichés
+    publiquement) : suivre la section « Recette : catégorie `SiteParameter` traduisible (multilangue) »
+    ci-dessous, autonome et à appliquer telle quelle. Elle couvre aussi les catégories qui mélangent des
+    `keyname` traduisibles et non traduisibles dans une même liste (ex: `pages.events` avec `event.customcode`),
+    ainsi que la validation par langue, l'invalidation du cache et la vérification côté site public.
   - **Snapshots e2e GraphQL, Cypress et dump `var/db.backup`** : `jest-setup-global.e2e.js` (tests e2e
     GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `fab local.qa.save-db`,
     c'est-à-dire qu'ils **écrasent le dump avec l'état courant de la base locale**, puis `_setupDB.js` /
@@ -396,6 +325,498 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     les deux préfixes coïncident et le spec complet passe. Le run Cypress refuse aussi de démarrer depuis un
     terminal VS Code si `ELECTRON_RUN_AS_NODE=1` est hérité (`bad option: --no-sandbox`) : lancer
     `env -u ELECTRON_RUN_AS_NODE yarn cy:run ...`.
+
+## Recette : catégorie `SiteParameter` traduisible (multilangue)
+
+S'applique à toute catégorie de `/admin/settings/{category}/list` contenant au moins un `keyname` traduisible
+(`SiteParameter::isTranslatable()`, c'est-à-dire absent de `SiteParameter::NOT_TRANSLATABLE`), y compris quand
+la liste mélange des `keyname` traduisibles et non traduisibles (ex: `pages.events` avec `event.customcode`).
+Référence canonique, à reproduire en remplaçant `Event`/`event`/`pages.events` par la feature migrée :
+`admin-next/components/BackOffice/EventSettings/EventSettingsList.tsx`,
+`src/Capco/AppBundle/GraphQL/Resolver/EventSettings/EventSettingsQueryResolver.php`,
+`src/Capco/AppBundle/GraphQL/Mutation/EventSettings/UpdateEventSettingMutation.php` et
+`src/Capco/AppBundle/Resources/config/graphql/internal/EventSettings/`. Les autres pages traduisibles déjà
+migrées (`BlogSettingsList.tsx`, `ProjectSettingsList.tsx`) sont des variantes antérieures : ne pas les copier
+pour la gestion des langues (voir « Pourquoi » en fin de section). La recette est autonome : elle suffit même si
+les fichiers de référence ne sont pas sur la branche courante.
+
+### 1. Comportement attendu
+
+| Situation | Liste (colonne « Valeur ») | Modale d'édition | Sauvegarde |
+|---|---|---|---|
+| `multilangue` actif, paramètre traduisible | valeur dans la langue de l'interface admin (`intl.locale`), repli sur la langue par défaut de la plateforme si cette langue n'est pas disponible | sélecteur de langue ouvert sur la langue de l'interface ; changer de langue conserve ce qui a été saisi dans les autres ; champ vide pour une langue sans traduction (pas de repli) | une seule mutation avec toutes les langues modifiées ; une valeur vide supprime la traduction de cette langue ; les langues non envoyées sont intouchées |
+| `multilangue` inactif, paramètre traduisible | toujours la langue par défaut de la plateforme, même si le cookie `locale` de l'admin dit autre chose | pas de sélecteur, seule la langue par défaut est éditable | le back stocke sous la langue par défaut quelle que soit la locale reçue |
+| paramètre non traduisible (ex: `event.customcode`) | colonne `value` | pas de sélecteur | une seule valeur, stockée dans la colonne `value` de `site_parameter` |
+| tous les cas | `isEnabled` en `Tag` Oui/Non | `Switch` « Publié », commun à toutes les langues | `isEnabled` enregistré même si aucune valeur n'a changé |
+
+Validation côté back, pour **chaque** valeur reçue : `TYPE_INTEGER` → entier strictement positif ;
+`isSocialNetworkDescription()` → 160 caractères maximum (limite de la contrainte `LessThanIfMetaDescription`).
+Erreur → `errorCode` dans le payload, `mutationErrorToast` côté front. Après sauvegarde, la nouvelle valeur doit
+apparaître sur le site public dans la langue éditée (cache invalidé, voir 2d).
+
+Pour mémoire, Sonata éditait une seule langue à la fois via un rechargement `?tl=<locale>`
+(`TranslatableAdminExtension` posait `setCurrentLocale()` sur l'entité), champ vide pour une langue sans
+traduction, sans repli sur la langue par défaut.
+
+### 2. Backend
+
+Fichiers à créer :
+
+```
+src/Capco/AppBundle/GraphQL/Resolver/EventSettings/EventSettingsQueryResolver.php
+src/Capco/AppBundle/GraphQL/Resolver/EventSettings/EventSettingsImageQueryResolver.php   # si la catégorie a des SiteImage
+src/Capco/AppBundle/GraphQL/Mutation/EventSettings/UpdateEventSettingMutation.php
+src/Capco/AppBundle/GraphQL/Mutation/EventSettings/UpdateEventImageMutation.php          # idem
+src/Capco/AppBundle/Resources/config/graphql/internal/EventSettings/enum/UpdateEventSettingErrorCode.types.yaml
+src/Capco/AppBundle/Resources/config/graphql/internal/EventSettings/input-object/UpdateEventSettingTranslationInput.types.yaml
+src/Capco/AppBundle/Resources/config/graphql/internal/EventSettings/mutations/UpdateEventSettingInput.types.yaml
+src/Capco/AppBundle/Resources/config/graphql/internal/EventSettings/mutations/UpdateEventSettingPayload.types.yaml
+```
+plus une entrée `eventSettings` dans `InternalQuery.types.yaml` et `updateEventSetting` dans
+`InternalMutation.types.yaml`.
+
+**2a. Query.** Le type GraphQL `SiteParameter` existe déjà (`id`, `keyname`, `value`, `isEnabled`, `type`,
+`isTranslatable`, `translations { locale value }`) : ne rien y ajouter. Le resolver recharge explicitement
+toutes les traductions, sinon la collection `translations` de l'entité peut n'en contenir qu'une (voir
+« Pourquoi »). Exclure les `keyname` que Sonata excluait déjà (`SettingsController::EXCLUDED_SETTINGS_KEYNAME`,
+ex: `events.map.country`).
+
+```php
+public function __invoke(): array
+{
+    $parameters = $this->repository->findBy(['category' => 'pages.events'], ['position' => 'ASC']);
+    $translationRepository = $this->entityManager->getRepository(SiteParameterTranslation::class);
+
+    foreach ($parameters as $parameter) {
+        if (!$parameter->isTranslatable()) {
+            continue;
+        }
+        // Complete the (possibly partial) translations collection with every stored translation.
+        foreach ($translationRepository->findBy(['translatable' => $parameter]) as $translation) {
+            $parameter->addTranslation($translation);
+        }
+    }
+
+    return $parameters;
+}
+```
+
+```yaml
+# InternalQuery.types.yaml — reprendre la condition de FeaturesCategoryResolver::$categories[<category>]['conditions']
+eventSettings:
+    type: '[SiteParameter!]!'
+    access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('calendar')"
+    resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventSettings\\EventSettingsQueryResolver")'
+```
+
+**2b. Mutation — types.**
+
+```yaml
+# input-object/UpdateEventSettingTranslationInput.types.yaml
+UpdateEventSettingTranslationInput:
+    type: input-object
+    config:
+        fields:
+            locale:
+                type: 'TranslationLocale!'   # enum existante ; côté PHP la valeur arrive déjà au format 'fr-FR'
+            value:
+                type: 'String!'              # vide = suppression de la traduction de cette langue
+
+# mutations/UpdateEventSettingInput.types.yaml
+UpdateEventSettingInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'                  # uuid brut de SiteParameter, pas de global id
+            translations:
+                type: '[UpdateEventSettingTranslationInput!]!'   # langues absentes = intouchées ; [] autorisé
+            isEnabled:
+                type: 'Boolean!'
+
+# mutations/UpdateEventSettingPayload.types.yaml
+UpdateEventSettingPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteParameter:
+                type: 'SiteParameter'
+            errorCode:
+                type: 'UpdateEventSettingErrorCode'
+
+# enum/UpdateEventSettingErrorCode.types.yaml : EVENT_PARAMETER_NOT_FOUND et EVENT_PARAMETER_INVALID_VALUE,
+# valeurs en `!php/const` sur les constantes de la mutation.
+
+# InternalMutation.types.yaml
+updateEventSetting:
+    access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('calendar')"
+    builder: 'Relay::Mutation'
+    builderConfig:
+        inputType: UpdateEventSettingInput
+        payloadType: UpdateEventSettingPayload
+        mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\EventSettings\\UpdateEventSettingMutation", args)'
+```
+
+**2c. Mutation — PHP.** Dépendances : `SiteParameterRepository`, `LocaleRepository`, `EntityManagerInterface`,
+`UpdateSiteParameterMutation` (pour `invalidateCache()`), `Capco\AppBundle\Toggle\Manager`. Reproduire cette
+structure telle quelle :
+
+```php
+public function __invoke(Argument $input): array
+{
+    $this->formatInput($input);
+
+    try {
+        // find($id) + check of the category, otherwise UserError(EVENT_PARAMETER_NOT_FOUND)
+        $siteParameter = $this->getSiteParameter($input);
+        $valuesByLocale = $this->resolveValuesByLocale(
+            $siteParameter,
+            (array) ($input->offsetGet('translations') ?? [])
+        );
+        foreach ($valuesByLocale as $value) {
+            self::checkValue($siteParameter, $value);
+        }
+
+        $siteParameter->setIsEnabled((bool) $input->offsetGet('isEnabled'));
+        foreach ($valuesByLocale as $locale => $value) {
+            $this->updateValue($siteParameter, $value, $locale);
+        }
+        $this->entityManager->flush();
+        // Discard a possibly partial `translations` collection so the payload exposes every translation.
+        $this->entityManager->refresh($siteParameter);
+    } catch (UserError $error) {
+        return ['errorCode' => $error->getMessage()];
+    }
+
+    // Always pass the edited locale: the default is the admin's request locale, not the edited one.
+    foreach (array_keys($valuesByLocale) as $locale) {
+        $this->updateSiteParameterMutation->invalidateCache($siteParameter, $locale);
+    }
+
+    return ['siteParameter' => $siteParameter];
+}
+
+/**
+ * @return array<string, string> the values indexed by locale
+ */
+private function resolveValuesByLocale(SiteParameter $siteParameter, array $translations): array
+{
+    $valuesByLocale = [];
+    foreach ($translations as $translation) {
+        $valuesByLocale[(string) $translation['locale']] = (string) $translation['value'];
+    }
+    if ([] === $valuesByLocale) {
+        return [];
+    }
+    if ($siteParameter->isTranslatable() && $this->toggleManager->isActive(Manager::multilangue)) {
+        return $valuesByLocale;
+    }
+    // Non-translatable setting, or multilangue disabled: a single value, stored under the default locale.
+    $defaultLocale = $this->localeRepository->getDefaultCode();
+
+    return [$defaultLocale => $valuesByLocale[$defaultLocale] ?? array_values($valuesByLocale)[0]];
+}
+
+private static function checkValue(SiteParameter $siteParameter, string $value): void
+{
+    if (SiteParameter::TYPE_INTEGER === (int) $siteParameter->getType() && (!ctype_digit($value) || (int) $value <= 0)) {
+        throw new UserError(self::EVENT_PARAMETER_INVALID_VALUE);
+    }
+    // Same limit as the LessThanIfMetaDescription constraint on SiteParameter
+    if ($siteParameter->isSocialNetworkDescription() && mb_strlen($value) > 160) {
+        throw new UserError(self::EVENT_PARAMETER_INVALID_VALUE);
+    }
+}
+
+// Query SiteParameterTranslation directly: never `SiteParameter::setValue($value, $locale)` + `mergeNewTranslations()`.
+private function updateValue(SiteParameter $siteParameter, string $value, string $locale): void
+{
+    if (!$siteParameter->isTranslatable()) {
+        $siteParameter->setValue($value);
+
+        return;
+    }
+
+    $translation = $this->entityManager
+        ->getRepository(SiteParameterTranslation::class)
+        ->findOneBy(['translatable' => $siteParameter, 'locale' => $locale]);
+
+    if ('' === trim($value)) {
+        // An emptied value removes the translation, as `mergeNewTranslations()` does
+        if ($translation) {
+            $this->entityManager->remove($translation);
+        }
+
+        return;
+    }
+    if ($translation) {
+        $translation->setValue($value);
+
+        return;
+    }
+
+    $this->entityManager->persist(
+        (new SiteParameterTranslation())->setTranslatable($siteParameter)->setLocale($locale)->setValue($value)
+    );
+}
+```
+
+Ne pas passer par `$validator->validate($siteParameter)` : la contrainte `LessThanIfMetaDescription` ne lit
+que `getValue()` (locale courante de l'entité), donc ni les autres langues reçues, ni rien du tout quand les
+traductions sont persistées via le repository.
+
+**2d. Cache.** `SiteParameterCacheSubscriber` (subscriber Doctrine `postFlush`, enregistré dans
+`config/packages/services.yaml`) invalide déjà, après le `flush()`, la locale de chaque
+`SiteParameterTranslation` persistée/modifiée/supprimée, et **toutes** les locales publiées quand l'entité
+`SiteParameter` elle-même change (`isEnabled`, `value` d'un non traduisible). L'appel explicite
+`invalidateCache($siteParameter, $locale)` par locale reçue est conservé par cohérence avec les autres
+mutations ; ne **jamais** l'appeler sans `$locale` (voir « Pourquoi »).
+
+**2e. Compiler et vérifier** (dans `capco_application_1`) : `bin/console graphql:compile`, puis
+`bin/console graphql:dump-schema --schema=internal --format=graphql --file=schema.internal.graphql --with-descriptions`
+(étape 10 de la méthodologie), puis `bin/phpstan analyse <dossiers créés>`.
+
+**2f. Test unitaire** : `tests/GraphQL/Mutation/UpdateEventSettingMutationTest.php` sur le modèle de
+`tests/GraphQL/Mutation/UpdateProjectSettingMutationTest.php` (mocks, sans base). Cas à couvrir : `multilangue`
+inactif → valeur stockée sous la langue par défaut ; paramètre non traduisible → `setValue()` sans traduction ;
+valeur vide → `remove()` de la traduction ; meta description > 160 → `errorCode`, aucun `flush()` ;
+`translations: []` → `isEnabled` enregistré, aucune invalidation explicite.
+
+### 3. Frontend (`admin-next/`)
+
+Fichiers : `pages/admin-next/event-settings.tsx` (squelette standard `Layout` + `Suspense` +
+`withPageAuthRequired`), `mutations/UpdateEventSettingMutation.ts`,
+`components/BackOffice/EventSettings/EventSettingsList.tsx`. Puis `yarn relay` dans `admin-next/`, `yarn ts`,
+`yarn lint`.
+
+**3a. Query et mutation.**
+
+```graphql
+query EventSettingsListQuery {
+  eventSettings { id keyname value isEnabled type isTranslatable translations { locale value } }
+  availableLocales(includeDisabled: false) { code isDefault traductionKey }
+}
+
+mutation UpdateEventSettingMutation($input: UpdateEventSettingInput!) {
+  updateEventSetting(input: $input) {
+    siteParameter { id value isEnabled translations { locale value } }   # Relay met à jour la ligne de la liste
+    errorCode
+  }
+}
+```
+
+Formats de locale : `availableLocales.code` et l'enum `TranslationLocale` valent `FR_FR` ; `translations.locale`
+et `intl.locale` valent `fr-FR`. Conversion avec `formatCodeToLocale()` de `@utils/locale-helper`. Ne jamais
+utiliser `siteParameter.value` pour pré-remplir une langue (résolu sur la locale de la requête de l'admin, pas
+sur la langue par défaut) : la valeur d'une langue est `translations.find(t => t.locale === locale)?.value ?? ''`.
+
+**3b. Helpers.**
+
+```ts
+const getSettingValue = (setting: SiteParameter, locale: string) =>
+  setting.isTranslatable
+    ? setting.translations?.find(translation => translation.locale === locale)?.value ?? ''
+    : setting.value ?? ''
+
+// Without the multilangue feature only the platform default locale is editable, whatever the admin's
+// locale cookie says (the back-end stores the value under the default locale in that case)
+const getDisplayedLocale = (availableLocales: ReadonlyArray<Locale>, viewerLocale: string, multilangue: boolean): Locale => {
+  const defaultLocale = availableLocales.find(locale => locale.isDefault) ?? availableLocales[0]
+  if (!multilangue) return defaultLocale
+  return availableLocales.find(locale => formatCodeToLocale(locale.code) === viewerLocale) ?? defaultLocale
+}
+```
+
+Liste : `multilangue = useFeatureFlag('multilangue')`, colonne « Valeur » =
+`getSettingValue(setting, formatCodeToLocale(getDisplayedLocale(availableLocales, intl.locale, multilangue).code))`.
+
+**3c. Modale et formulaire.** Le formulaire est un composant rendu **dans** le render-prop
+`{({ hide }) => ...}` de `Modal` : CapUI démonte son contenu à la fermeture, donc `useForm` repart des
+dernières valeurs sauvegardées à chaque ouverture, sans `reset()` à gérer. `Modal` avec
+`forceModalDialogToFalse` **et** `hideOnClickOutside={false}` (Jodit rend ses popups hors du dialogue).
+
+```tsx
+type SettingFormValues = { isEnabled: boolean } & Record<string, string | boolean>
+
+const EventSettingForm = ({ siteParameter, availableLocales, hide }: SettingFormProps) => {
+  const intl = useIntl()
+  const formId = React.useId()
+  const multilangue = useFeatureFlag('multilangue')
+  const defaultLocaleCode = formatCodeToLocale(
+    (availableLocales.find(locale => locale.isDefault) ?? availableLocales[0]).code,
+  )
+  const [currentLocale, setCurrentLocale] = React.useState<TranslationLocale>(
+    getDisplayedLocale(availableLocales, intl.locale, multilangue).code,
+  )
+  const getFieldName = (code: TranslationLocale) => `${code}-value` // DOM id: "FR_FR-value"
+  // One field per locale, all loaded at mount, so switching language only changes which field is displayed
+  const defaultValues = React.useMemo(() => {
+    const values: SettingFormValues = { isEnabled: siteParameter.isEnabled }
+    availableLocales.forEach(({ code }) => {
+      values[getFieldName(code)] = getSettingValue(siteParameter, formatCodeToLocale(code))
+    })
+    return values
+  }, [siteParameter, availableLocales])
+  const form = useForm<SettingFormValues>({ defaultValues })
+  const { control, handleSubmit, formState } = form
+  const inputType = siteParameter.type === 2 ? 'number' : siteParameter.type === 3 ? 'textarea' : 'text'
+  const fieldName = getFieldName(currentLocale)
+
+  // Only the locales whose value changed are sent (dirtyFields is not reliable: TextEditor calls
+  // setValue() without shouldDirty). A non-translatable setting has a single value.
+  const getTranslationsToSave = (values: SettingFormValues) => {
+    const codes = siteParameter.isTranslatable ? availableLocales.map(({ code }) => code) : [currentLocale]
+    return codes
+      .filter(code => {
+        const initialValue = String(defaultValues[getFieldName(code)] ?? '')
+        const newValue = String(values[getFieldName(code)] ?? '')
+        if (newValue === initialValue) return false
+        // Rich text editors normalize an empty content to markup like "<p><br></p>"
+        return !(isWYSIWYGContentEmpty(initialValue) && isWYSIWYGContentEmpty(newValue))
+      })
+      .map(code => ({ locale: code, value: String(values[getFieldName(code)] ?? '') }))
+  }
+
+  const onSubmit = async (values: SettingFormValues) => {
+    try {
+      const response = await UpdateEventSettingMutation.commit({
+        input: { id: siteParameter.id, translations: getTranslationsToSave(values), isEnabled: Boolean(values.isEnabled) },
+      })
+      if (response.updateEventSetting.errorCode) return mutationErrorToast(intl)
+      successToast(intl.formatMessage({ id: 'global.changes.saved' }))
+      hide()
+    } catch {
+      mutationErrorToast(intl)
+    }
+  }
+
+  return (
+    <FormProvider {...form}> {/* required by TextEditor (useFormContext) */}
+      <Modal.Body direction="column">
+        <Flex as="form" id={formId} direction="column" onSubmit={handleSubmit(onSubmit)}>
+          {siteParameter.isTranslatable && multilangue && (
+            <Box width="180px" mb={4}>
+              {/* `Select` from '@cap-collectif/form', driven by hand, outside react-hook-form */}
+              <Select
+                options={availableLocales.map(locale => ({
+                  label: intl.formatMessage({ id: locale.traductionKey }),
+                  value: locale.code,
+                }))}
+                value={currentLocale}
+                onChange={value => {
+                  const locale = availableLocales.find(({ code }) => code === value)
+                  if (locale) setCurrentLocale(locale.code)
+                }}
+              />
+            </Box>
+          )}
+          {/* The key remounts the editor on locale change: Jodit only re-renders on selectedLanguage change */}
+          <FormControl name={fieldName} control={control} key={fieldName}>
+            {siteParameter.type === 1 ? (
+              <TextEditor
+                label={intl.formatMessage({ id: 'global.value' })}
+                name={fieldName}
+                noModalAdvancedEditor
+                platformLanguage={defaultLocaleCode}
+                selectedLanguage={defaultLocaleCode}
+              />
+            ) : (
+              <>
+                <FormLabel htmlFor={fieldName} label={intl.formatMessage({ id: 'global.value' })} />
+                <FieldInput id={fieldName} name={fieldName} control={control} type={inputType} />
+              </>
+            )}
+          </FormControl>
+          <FormControl name="isEnabled" control={control}>
+            <FormLabel htmlFor="isEnabled" label={intl.formatMessage({ id: 'global.published' })} />
+            <FieldInput id="isEnabled" name="isEnabled" control={control} type="switch" />
+          </FormControl>
+        </Flex>
+      </Modal.Body>
+      <Modal.Footer>
+        <ButtonGroup>
+          <Button variant="secondary" variantColor="hierarchy" onClick={hide}>
+            {intl.formatMessage({ id: 'global.cancel' })}
+          </Button>
+          <Button type="submit" form={formId} isLoading={formState.isSubmitting}>
+            {intl.formatMessage({ id: 'global.save' })}
+          </Button>
+        </ButtonGroup>
+      </Modal.Footer>
+    </FormProvider>
+  )
+}
+```
+
+Points non négociables de ce bloc : `selectedLanguage` et `platformLanguage` restent fixés sur la langue par
+défaut (le `key` suffit à remonter l'éditeur) ; `TextEditor` (pas `Jodit` directement) avec
+`noModalAdvancedEditor` pour `TYPE_RICH_TEXT` ; sélecteur = `Select` de `@cap-collectif/form`, pas
+`FieldInput type="select"` (warning « Function components cannot be given refs ») ni `Menu` (Ariakit, peu
+fiable dans une modale) ; `isWYSIWYGContentEmpty` vient de `@shared/utils/isWYSIWYGContentEmpty`.
+
+### 4. Tests Cypress
+
+`cypress/e2e/backOffice/<feature>Settings/<feature>Settings.cy.ts`, `cy.task('db:restore')` en `beforeEach`.
+Le champ a pour id `<TranslationLocale>-value` (`FR_FR-value`, `EN_GB-value`…) : cibler
+`cy.get('[id$="-value"]').filter(':visible')`, jamais `#value`. Si un scénario doit exercer le sélecteur de
+langue : `cy.task('enable:feature', 'multilangue')` avant `cy.visit()` (cf. `event/eventAdminPage.cy.ts`).
+Scénarios suffisants : édition d'un paramètre simple puis vérification de la ligne ; `errorCode` sur une meta
+description > 160 (`cy.interceptGraphQLOperation` + `its('response.body.data.updateEventSetting.errorCode')`).
+
+### 5. Vérification manuelle avant de rendre la main
+
+1. `multilangue` actif : changer la langue de l'interface (NavBar) → la colonne « Valeur » suit ; ouvrir la
+   modale → sélecteur sur cette langue ; saisir dans deux langues, passer de l'une à l'autre, enregistrer → les
+   deux sont en base (champ `translations` de la query) et visibles sur le site public dans chaque langue.
+2. `multilangue` inactif (`capco:toggle:disable multilangue`) : pas de sélecteur ; la valeur affichée et
+   enregistrée est celle de la langue par défaut, même avec un cookie `locale` d'une autre langue.
+3. Paramètre non traduisible : pas de sélecteur, valeur en colonne `value`.
+4. `Switch` « Publié » seul, sans changer la valeur → enregistré.
+5. Site public : `curl` **sans session** avec un header `Accept-Language` bien formé
+   (`Accept-Language: en-US,en;q=0.9`, pas juste `en-GB`). Le champ `value` de `SiteParameter` n'a pas
+   d'argument `locale` : il est résolu (`GraphQLLocaleResolver`/`RequestLocaleResolver`) depuis `_locale`, le
+   préfixe d'URL, le cookie `locale`, la session puis `Accept-Language` — une session déjà ouverte fausse le
+   test, un `curl -b "locale=en-GB"` aussi.
+6. Avant de (re)générer des snapshots ou d'enchaîner des runs Cypress : piège « Snapshots e2e GraphQL, Cypress
+   et dump `var/db.backup` » ci-dessus.
+
+### 6. Pourquoi (à lire avant de dévier de la recette)
+
+- **Collection `translations` partielle.** `SiteParameterResolver` (appelé à chaque requête par
+  `LocaleSubscriber`) exécute, quand son cache `site_parameters_<locale>` est froid,
+  `SiteParameterRepository::getValues($locale)` : un fetch-join des traductions filtré sur la locale courante
+  (`leftJoin('p.translations', 't', WITH 't.locale = :locale')` + `select('p', 't')`). Doctrine hydrate alors
+  tous les `SiteParameter` de l'identity map avec une collection `translations` initialisée mais partielle (la
+  seule traduction de la locale courante, ou vide). `$repository->find($id)` renvoie cette instance :
+  `setValue($value, $locale)`/`translate()` ne trouve pas la traduction d'une autre locale, en crée une,
+  `mergeNewTranslations()` l'ajoute et le `flush()` viole la contrainte unique (`translatable_id`, `locale`).
+  Comme ça ne se produit qu'avec un cache froid, le bug est intermittent et invisible au premier essai. D'où :
+  lecture par `addTranslation()` de chaque ligne du repository (2a), écriture via le repository
+  `SiteParameterTranslation` (2c), `refresh()` après `flush()` pour que le payload expose toutes les
+  traductions au lieu d'une collection partielle (`[]` si la locale courante n'a pas de traduction).
+- **`SiteParameter.value` GraphQL** est `getValue()` sans locale, donc `translate($currentLocale)` avec la
+  locale posée au `postLoad` par `TranslatableEventSubscriber` : la valeur dans la langue de l'admin, pas dans
+  la langue par défaut.
+- **`Jodit.tsx`** mémoïse tout son rendu sur sa seule prop `selectedLanguage` (`useMemo(..., [selectedLanguage])`)
+  et la branche `noModalAdvancedEditor` de `TextEditor.tsx` ne la transmet pas : un `reset()` ou un changement
+  de `value` n'est jamais répercuté dans l'éditeur, le texte de la langue précédente reste affiché et finit
+  enregistré dans la nouvelle langue. Un système de brouillons + `reset()` par langue (variante
+  `BlogSettingsList.tsx`) ne règle pas ça et complique la sauvegarde multi-langues ; le `key` sur le
+  `FormControl` remonte une instance fraîche dont `value`/`onChange` sont justes dès le premier rendu. Faire
+  varier `selectedLanguage` en plus est inutile (et a été corrélé une fois à un test cassé) ; ce n'est pas la
+  cause du warning « Maximum update depth exceeded », voir le piège `rowId` plus bas.
+- **`invalidateCache()` sans locale** (`UpdateSiteParameterMutation::invalidateCache(SiteParameter, ?string
+  $locale = null)`, `SiteParameterRuntime::invalidateCache(string $key, ?string $locale = null)`) retombe sur la
+  locale de la requête courante, c'est-à-dire celle de l'admin : correct pour Sonata (l'admin change sa propre
+  langue pour éditer chaque traduction) et pour les `keyname` non traduisibles, faux pour une modale qui édite
+  une locale arbitraire. Symptôme : mutation en succès, traduction en base, mais le site public ne la montre
+  jamais dans cette langue. `SiteParameterCacheSubscriber` couvre désormais ce cas au `postFlush` ; passer quand
+  même la locale.
+- **`TranslationLocale`** : enum GraphQL sérialisée en `FR_FR`, constante PHP `'fr-FR'`. Côté PHP,
+  `$translation['locale']` est déjà `fr-FR` ; côté client (ids de champs, sélecteurs Cypress), c'est `FR_FR`.
+- **Une mutation par langue** (variante `ProjectSettingsList.tsx`) n'est pas atomique et multiplie les appels
+  et les invalidations ; le tableau `translations` règle ça en un appel, et permet `translations: []` pour un
+  changement de `isEnabled` seul.
 
 ## Connection ID pour les mutations create/delete (Relay)
 
