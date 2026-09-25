@@ -36,11 +36,14 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
         return $cachedItem->get();
     }
 
-    public function invalidateCache(string $key): void
+    public function invalidateCache(string $key, ?string $locale = null): void
     {
-        $defaultLocale = $this->resolver->getDefaultLocale();
-        $request = $this->requestStack->getCurrentRequest();
-        $locale = $request ? $request->getLocale() : $defaultLocale;
+        if (null === $locale) {
+            $defaultLocale = $this->resolver->getDefaultLocale();
+            $request = $this->requestStack->getCurrentRequest();
+            $locale = $request ? $request->getLocale() : $defaultLocale;
+        }
+
         $this->cache->deleteItem(self::getCacheKey($key, $locale));
     }
 

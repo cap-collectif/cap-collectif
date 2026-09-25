@@ -18,7 +18,6 @@ class FeaturesCategoryResolver
             ],
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
-        'pages.projects' => ['conditions' => [], 'features' => ['projects_form', 'project_trash']],
         'pages.registration' => [
             'conditions' => [],
             'features' => ['user_type', 'zipcode_at_register'],

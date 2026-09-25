@@ -76,6 +76,16 @@ InternalQuery:
                 description: 'Get blog page images.'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('blog')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\BlogSettings\\BlogSettingsImageQueryResolver")'
+            projectSettings:
+                type: '[SiteParameter!]!'
+                description: 'Get project page settings.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectSettings\\ProjectSettingsQueryResolver")'
+            projectSettingsImages:
+                type: '[SiteImage!]!'
+                description: 'Get project page images.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectSettings\\ProjectSettingsImageQueryResolver")'
             registrationForm:
                 type: 'InternalRegistrationForm'
                 description: 'Get the current registration form'

@@ -9882,6 +9882,12 @@ type Mutation {
   updateAppearanceColor(input: UpdateAppearanceColorInput!): UpdateAppearanceColorPayload
   updateAppearanceImage(input: UpdateAppearanceImageInput!): UpdateAppearanceImagePayload
 
+  """Update a project page setting."""
+  updateProjectSetting(input: UpdateProjectSettingInput!): UpdateProjectSettingPayload
+
+  """Update a project page image."""
+  updateProjectImage(input: UpdateProjectImageInput!): UpdateProjectImagePayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -14903,6 +14909,12 @@ type Query {
 
   """Get blog page images."""
   blogSettingsImages: [SiteImage!]!
+
+  """Get project page settings."""
+  projectSettings: [SiteParameter!]!
+
+  """Get project page images."""
+  projectSettingsImages: [SiteImage!]!
 
   """Get the current registration form"""
   registrationForm: RegistrationForm
@@ -21282,6 +21294,23 @@ type UpdateProfilePublicDataPayload {
   clientMutationId: String
 }
 
+enum UpdateProjectImageErrorCode {
+  PROJECT_IMAGE_NOT_FOUND
+}
+
+input UpdateProjectImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateProjectImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateProjectImageErrorCode
+  clientMutationId: String
+}
+
 input UpdateProjectInput {
   """The project's ID"""
   id: ID!
@@ -21339,6 +21368,25 @@ input UpdateProjectInput {
 type UpdateProjectPayload {
   """The created project"""
   project: Project
+  clientMutationId: String
+}
+
+enum UpdateProjectSettingErrorCode {
+  PROJECT_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateProjectSettingInput {
+  id: ID!
+  value: String!
+  locale: String!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateProjectSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateProjectSettingErrorCode
   clientMutationId: String
 }
 

@@ -1,0 +1,7 @@
+UpdateProjectImageErrorCode:
+    type: enum
+    config:
+        name: UpdateProjectImageErrorCode
+        values:
+            PROJECT_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ProjectSettings\UpdateProjectImageMutation::PROJECT_IMAGE_NOT_FOUND

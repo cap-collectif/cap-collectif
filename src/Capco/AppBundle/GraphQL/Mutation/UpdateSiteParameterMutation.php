@@ -51,12 +51,14 @@ class UpdateSiteParameterMutation implements MutationInterface
         return ['siteParameter' => $siteParameter];
     }
 
-    public function invalidateCache(SiteParameter $siteParameter): void
+    public function invalidateCache(SiteParameter $siteParameter, ?string $locale = null): void
     {
-        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+        // Mutations that edit an arbitrary translation pass its locale explicitly. Other callers
+        // keep the historical behavior of invalidating the current request's locale.
+        $locale ??= $this->requestStack->getCurrentRequest()->getLocale();
         $keyname = $siteParameter->getKeyname();
 
-        $this->siteParamRuntime->invalidateCache($siteParameter->getKeyname());
+        $this->siteParamRuntime->invalidateCache($keyname, $locale);
         $cacheDriver = $this->entityManager->getConfiguration()->getResultCacheImpl();
         $cacheDriver->delete(SiteParameterRepository::getValuesIfEnabledCacheKey($locale));
         $cacheDriver->delete(SiteParameterRepository::getValueCacheKey($locale, $keyname));

@@ -1,0 +1,9 @@
+UpdateProjectSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateProjectSettingErrorCode
+        values:
+            PROJECT_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ProjectSettings\UpdateProjectSettingMutation::PROJECT_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ProjectSettings\UpdateProjectSettingMutation::INVALID_VALUE

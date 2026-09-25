@@ -1,0 +1,6 @@
+UpdateProjectImagePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteImage: { type: 'SiteImage' }
+            errorCode: { type: 'UpdateProjectImageErrorCode' }

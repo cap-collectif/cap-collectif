@@ -1599,6 +1599,22 @@ InternalMutation:
                     inputType: UpdateAppearanceImageInput
                     payloadType: UpdateAppearanceImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AppearanceSettings\\UpdateAppearanceImageMutation", args)'
+            updateProjectSetting:
+                description: 'Update a project page setting.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProjectSettingInput
+                    payloadType: UpdateProjectSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectSettings\\UpdateProjectSettingMutation", args)'
+            updateProjectImage:
+                description: 'Update a project page image.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProjectImageInput
+                    payloadType: UpdateProjectImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectSettings\\UpdateProjectImageMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

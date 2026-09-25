@@ -315,7 +315,7 @@
             },
             {
                 "title": "admin.label.pages.projects",
-                "href": "/admin/settings/pages.projects/list",
+                "href": "/admin-next/project-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

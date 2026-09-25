@@ -1,0 +1,8 @@
+UpdateProjectSettingInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id: { type: 'ID!' }
+            value: { type: 'String!' }
+            locale: { type: 'String!' }
+            isEnabled: { type: 'Boolean!' }
