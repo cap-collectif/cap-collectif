@@ -1,0 +1,14 @@
+UpdateLoginSettingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateLoginSetting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the SiteParameter to update.'
+            translations:
+                type: '[UpdateLoginSettingTranslationInput!]!'
+                description: 'The values to save, one per locale. Locales that are not listed are left untouched. When the multilangue feature is disabled, the value is stored under the platform default locale.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the SiteParameter is enabled.'

@@ -333,7 +333,7 @@
             },
             {
                 "title": "admin.label.pages.login",
-                "href": "/admin/settings/pages.login/list",
+                "href": "/admin-next/login-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

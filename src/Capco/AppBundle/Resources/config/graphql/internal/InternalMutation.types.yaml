@@ -1615,6 +1615,14 @@ InternalMutation:
                     inputType: UpdateProjectImageInput
                     payloadType: UpdateProjectImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectSettings\\UpdateProjectImageMutation", args)'
+            updateLoginSetting:
+                description: 'update a SiteParameter of the pages.login category.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateLoginSettingInput
+                    payloadType: UpdateLoginSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\LoginSettings\\UpdateLoginSettingMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

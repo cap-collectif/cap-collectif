@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updateLoginSetting creates, updates and removes the translation of another locale when multilangue is enabled: create 1`] = `
+Object {
+  "updateLoginSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "login.text.top",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Top text</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Texte du haut</p>",
+        },
+      ],
+      "value": "<p>Texte du haut</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateLoginSetting creates, updates and removes the translation of another locale when multilangue is enabled: remove 1`] = `
+Object {
+  "updateLoginSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "login.text.top",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Texte du haut</p>",
+        },
+      ],
+      "value": "<p>Texte du haut</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateLoginSetting creates, updates and removes the translation of another locale when multilangue is enabled: update 1`] = `
+Object {
+  "updateLoginSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "login.text.top",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Top text, edited</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Texte du haut</p>",
+        },
+      ],
+      "value": "<p>Texte du haut</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateLoginSetting stores the value under the platform default locale when multilangue is disabled 1`] = `
+Object {
+  "updateLoginSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "login.text.top",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "Stored under the default locale",
+        },
+      ],
+      "value": "Stored under the default locale",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateLoginSetting updates the value and isEnabled as super-admin 1`] = `
+Object {
+  "updateLoginSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": false,
+      "keyname": "login.text.top",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "New warning message",
+        },
+      ],
+      "value": "New warning message",
+    },
+  },
+}
+`;

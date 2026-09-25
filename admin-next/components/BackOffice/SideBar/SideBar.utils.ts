@@ -4,6 +4,7 @@ import { FeatureFlags } from 'types'
 
 const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/videos': '/admin/capco/app/video/list',
+  '/admin-next/login-settings': '/admin/settings/pages.login/list',
 }
 
 export const getSideBarItemsFiltered = (

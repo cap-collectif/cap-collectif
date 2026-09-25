@@ -21,4 +21,33 @@ describe('getSideBarItemsFiltered', () => {
     ).toBeUndefined()
   })
 
+  const getLoginSettingsItem = (featureFlags = defaultFeatureFlags) => {
+    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+    return sideBarItems.find(item => item.id === 'pages')?.items.find(item => item.title === 'admin.label.pages.login')
+  }
+
+  it('keeps the Sonata login settings route while the migration is disabled', () => {
+    expect(getLoginSettingsItem()?.href).toBe('/admin/settings/pages.login/list')
+  })
+
+  it('uses the Admin Next login settings route while the migration is enabled', () => {
+    expect(getLoginSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
+      '/admin-next/login-settings',
+    )
+  })
+
+  it('hides the Hub API Green item when its feature flag is disabled', () => {
+    const sideBarItems = getSideBarItemsFiltered(
+      true,
+      true,
+      { ...defaultFeatureFlags, hub_api_green: false },
+      false,
+      null,
+      false,
+    )
+
+    const settings = sideBarItems.find(item => item.id === 'settings')
+
+    expect(settings?.items.some(item => item.href === '/admin-next/hub-api-green')).toBe(false)
+  })
 })

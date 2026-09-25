@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|loginSettings returns the login settings as super-admin 1`] = `
+Object {
+  "loginSettings": Array [
+    Object {
+      "isEnabled": true,
+      "keyname": "login.text.top",
+      "value": "<p>Je suis un texte</p>",
+    },
+    Object {
+      "isEnabled": true,
+      "keyname": "login.text.bottom",
+      "value": "<p>Et moi aussi</p>",
+    },
+  ],
+}
+`;

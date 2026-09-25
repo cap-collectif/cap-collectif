@@ -43,7 +43,6 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
             $request = $this->requestStack->getCurrentRequest();
             $locale = $request ? $request->getLocale() : $defaultLocale;
         }
-
         $this->cache->deleteItem(self::getCacheKey($key, $locale));
     }
 

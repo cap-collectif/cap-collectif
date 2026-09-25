@@ -1,0 +1,11 @@
+UpdateLoginSettingPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of updateLoginSetting mutation.'
+        fields:
+            siteParameter:
+                type: 'SiteParameter'
+                description: 'The updated SiteParameter.'
+            errorCode:
+                type: 'UpdateLoginSettingErrorCode'
+                description: 'The available errors if any.'

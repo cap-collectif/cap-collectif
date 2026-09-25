@@ -1,0 +1,9 @@
+UpdateLoginSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateLoginSettingErrorCode
+        description: 'Available errors for an `updateLoginSetting` mutation.'
+        values:
+            SITE_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\LoginSettings\UpdateLoginSettingMutation::SITE_PARAMETER_NOT_FOUND
+                description: 'No SiteParameter of the `pages.login` category was found for the given id.'

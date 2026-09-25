@@ -9888,6 +9888,9 @@ type Mutation {
   """Update a project page image."""
   updateProjectImage(input: UpdateProjectImageInput!): UpdateProjectImagePayload
 
+  """update a SiteParameter of the pages.login category."""
+  updateLoginSetting(input: UpdateLoginSettingInput!): UpdateLoginSettingPayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -15158,6 +15161,9 @@ type Query {
 
   """get all site parameters of the settings.performance category"""
   performanceSettings: [SiteParameter!]!
+
+  """get all site parameters of the pages.login category"""
+  loginSettings: [SiteParameter!]!
 
   """get consultations without step"""
   availableConsultations(
@@ -20533,6 +20539,52 @@ input UpdateLocaleStatusInput {
 type UpdateLocaleStatusPayload {
   locales: LocaleConnection!
   clientMutationId: String
+}
+
+"""Available errors for an `updateLoginSetting` mutation."""
+enum UpdateLoginSettingErrorCode {
+  """
+  No SiteParameter of the `pages.login` category was found for the given id.
+  """
+  SITE_PARAMETER_NOT_FOUND
+}
+
+input UpdateLoginSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. When the multilangue feature is disabled, the value is stored under
+  the platform default locale.
+  """
+  translations: [UpdateLoginSettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateLoginSettingPayload {
+  """The updated SiteParameter."""
+  siteParameter: SiteParameter
+
+  """The available errors if any."""
+  errorCode: UpdateLoginSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.login category for a given locale.
+"""
+input UpdateLoginSettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 input UpdateMediatorVotesInput {

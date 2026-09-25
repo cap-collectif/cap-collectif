@@ -69,6 +69,7 @@ export const URL_MAP = {
     '/admin-next/project-settings',
     '/admin/settings/pages.registration/',
     '/admin/settings/pages.login/',
+    '/admin-next/login-settings',
     '/admin/settings/pages.footer/',
     '/admin/settings/pages.cookies/',
     '/admin/settings/pages.privacy/',
