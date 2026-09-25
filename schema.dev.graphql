@@ -15839,7 +15839,6 @@ type Questionnaire implements Node {
     """Filter by status"""
     filterStatus: [ReplyStatus] = [PUBLISHED, PENDING, NOT_PUBLISHED, DRAFT]
   ): ReplyConnection!
-
   exportResultsUrl: URI!
   adminUrl: URI!
   isIndexationDone: Boolean!
