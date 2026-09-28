@@ -1,0 +1,14 @@
+UpdateThemeSettingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateThemeSetting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the SiteParameter to update.'
+            translations:
+                type: '[UpdateThemeSettingTranslationInput!]!'
+                description: 'The values to save, one per locale. Locales that are not listed are left untouched. For a non-translatable setting, or when the multilangue feature is disabled, a single value is expected.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the SiteParameter is enabled.'

@@ -272,7 +272,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.pages.homepage" href="/admin/settings/pages.homepage/list" />
                   <SidebarLink text="admin.label.pages.blog" href="/admin-next/blog-settings" />
                   <SidebarLink text="admin.label.pages.events" href="/admin-next/event-settings" />
-                  <SidebarLink text="admin.label.pages.themes" href="/admin/settings/pages.themes/list" />
+                  <SidebarLink text="admin.label.pages.themes" href="/admin-next/theme-settings" />
                   <SidebarLink text="admin.label.pages.projects" href="/admin-next/project-settings" />
                   <SidebarLink text="admin.label.pages.registration" href="/admin/settings/pages.registration/list" />
                   {features.members_list && (

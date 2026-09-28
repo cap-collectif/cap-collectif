@@ -96,6 +96,16 @@ InternalQuery:
                 description: 'Get event page images.'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('calendar')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventSettings\\EventSettingsImageQueryResolver")'
+            themeSettings:
+                type: '[SiteParameter!]!'
+                description: 'Get theme page settings.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('themes')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ThemeSettings\\ThemeSettingsQueryResolver")'
+            themeSettingsImages:
+                type: '[SiteImage!]!'
+                description: 'Get theme page images.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('themes')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ThemeSettings\\ThemeSettingsImageQueryResolver")'
             registrationForm:
                 type: 'InternalRegistrationForm'
                 description: 'Get the current registration form'

@@ -1,0 +1,9 @@
+UpdateThemeSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateThemeSettingErrorCode
+        values:
+            THEME_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ThemeSettings\UpdateThemeSettingMutation::THEME_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ThemeSettings\UpdateThemeSettingMutation::INVALID_VALUE

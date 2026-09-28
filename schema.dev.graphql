@@ -9897,6 +9897,12 @@ type Mutation {
   """Update an event page image."""
   updateEventImage(input: UpdateEventImageInput!): UpdateEventImagePayload
 
+  """Update a theme page setting."""
+  updateThemeSetting(input: UpdateThemeSettingInput!): UpdateThemeSettingPayload
+
+  """Update a theme page image."""
+  updateThemeImage(input: UpdateThemeImageInput!): UpdateThemeImagePayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -14930,6 +14936,12 @@ type Query {
 
   """Get event page images."""
   eventSettingsImages: [SiteImage!]!
+
+  """Get theme page settings."""
+  themeSettings: [SiteParameter!]!
+
+  """Get theme page images."""
+  themeSettingsImages: [SiteImage!]!
 
   """Get the current registration form"""
   registrationForm: RegistrationForm
@@ -22178,6 +22190,63 @@ type UpdateSourceCategoryPayload {
   """Source category updated successfully !"""
   sourceCategory: SourceCategory!
   clientMutationId: String
+}
+
+enum UpdateThemeImageErrorCode {
+  SITE_IMAGE_NOT_FOUND
+}
+
+input UpdateThemeImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateThemeImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateThemeImageErrorCode
+  clientMutationId: String
+}
+
+enum UpdateThemeSettingErrorCode {
+  THEME_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateThemeSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. For a non-translatable setting, or when the multilangue feature is
+  disabled, a single value is expected.
+  """
+  translations: [UpdateThemeSettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateThemeSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateThemeSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.themes category for a given locale.
+"""
+input UpdateThemeSettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 """Available errors for an `updateTwilioVerifyService` mutation."""

@@ -65,7 +65,7 @@ export const URL_MAP = {
     '/admin/settings/pages.homepage/',
     '/admin-next/blog-settings',
     '/admin-next/event-settings',
-    '/admin/settings/pages.themes/',
+    '/admin-next/theme-settings',
     '/admin-next/project-settings',
     '/admin/settings/pages.registration/',
     '/admin/settings/pages.login/',

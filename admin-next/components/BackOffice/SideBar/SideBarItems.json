@@ -309,9 +309,9 @@
             },
             {
                 "title": "admin.label.pages.themes",
-                "href": "/admin/settings/pages.themes/list",
+                "href": "/admin-next/theme-settings",
                 "rolesRequired": [],
-                "featuresRequired": []
+                "featuresRequired": ["themes"]
             },
             {
                 "title": "admin.label.pages.projects",

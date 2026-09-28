@@ -1639,6 +1639,22 @@ InternalMutation:
                     inputType: UpdateEventImageInput
                     payloadType: UpdateEventImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\EventSettings\\UpdateEventImageMutation", args)'
+            updateThemeSetting:
+                description: 'Update a theme page setting.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('themes')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateThemeSettingInput
+                    payloadType: UpdateThemeSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ThemeSettings\\UpdateThemeSettingMutation", args)'
+            updateThemeImage:
+                description: 'Update a theme page image.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('themes')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateThemeImageInput
+                    payloadType: UpdateThemeImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ThemeSettings\\UpdateThemeImageMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

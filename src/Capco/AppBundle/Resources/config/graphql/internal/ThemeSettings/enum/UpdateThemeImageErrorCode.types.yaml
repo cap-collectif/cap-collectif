@@ -1,0 +1,7 @@
+UpdateThemeImageErrorCode:
+    type: enum
+    config:
+        name: UpdateThemeImageErrorCode
+        values:
+            SITE_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ThemeSettings\UpdateThemeImageMutation::SITE_IMAGE_NOT_FOUND

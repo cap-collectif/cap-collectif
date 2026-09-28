@@ -10,7 +10,6 @@ class FeaturesCategoryResolver
 {
     protected static array $categories = [
         'pages.homepage' => ['conditions' => [], 'features' => []],
-        'pages.themes' => ['conditions' => ['themes'], 'features' => []],
         'pages.registration' => [
             'conditions' => [],
             'features' => ['user_type', 'zipcode_at_register'],

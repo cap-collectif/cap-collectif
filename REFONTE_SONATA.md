@@ -580,7 +580,9 @@ mutations ; ne **jamais** l'appeler sans `$locale` (voir « Pourquoi »).
 `tests/GraphQL/Mutation/UpdateProjectSettingMutationTest.php` (mocks, sans base). Cas à couvrir : `multilangue`
 inactif → valeur stockée sous la langue par défaut ; paramètre non traduisible → `setValue()` sans traduction ;
 valeur vide → `remove()` de la traduction ; meta description > 160 → `errorCode`, aucun `flush()` ;
-`translations: []` → `isEnabled` enregistré, aucune invalidation explicite.
+`translations: []` → `isEnabled` enregistré, aucune invalidation explicite. PHPStan analyse aussi `tests/` : un mock
+gardé en propriété se type `Foo & MockObject` (intersection, espaces imposés par php-cs-fixer), pas `Foo|MockObject`.
+Modèle : `tests/Mutation/UpdateThemeSettingMutationTest.php`.
 
 ### 3. Frontend (`admin-next/`)
 
