@@ -167,7 +167,7 @@ const SocialNetworkModal: React.FC<Props> = ({ connectionId, editingSocialNetwor
                     maxFiles={1}
                     showThumbnail
                     isFullWidth
-                    size={UPLOADER_SIZE.LG}
+                    size={UPLOADER_SIZE.MD}
                     uploadURI={UPLOAD_PATH}
                   />
                 </FormControl>

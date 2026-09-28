@@ -1,0 +1,58 @@
+UpdateMemberSettingErrorCode:
+    type: enum
+    config:
+        values:
+            MEMBER_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\MemberSettings\UpdateMemberSettingMutation::MEMBER_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\MemberSettings\UpdateMemberSettingMutation::INVALID_VALUE
+UpdateMemberImageErrorCode:
+    type: enum
+    config:
+        values:
+            MEMBER_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\MemberSettings\UpdateMemberImageMutation::MEMBER_IMAGE_NOT_FOUND
+UpdateMemberSettingTranslationInput:
+    type: input-object
+    config:
+        description: 'The value of a SiteParameter of the pages.members category for a given locale.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the value.'
+            value:
+                type: 'String!'
+                description: 'The value for this locale. An empty value removes the translation of this locale.'
+UpdateMemberSettingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateMemberSetting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the SiteParameter to update.'
+            translations:
+                type: '[UpdateMemberSettingTranslationInput!]!'
+                description: 'The values to save, one per locale. Locales that are not listed are left untouched. For a non-translatable setting, or when the multilangue feature is disabled, a single value is expected.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the SiteParameter is enabled.'
+UpdateMemberSettingPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteParameter: { type: 'SiteParameter' }
+            errorCode: { type: 'UpdateMemberSettingErrorCode' }
+UpdateMemberImageInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id: { type: 'ID!' }
+            mediaId: { type: 'ID' }
+            isEnabled: { type: 'Boolean!' }
+UpdateMemberImagePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteImage: { type: 'SiteImage' }
+            errorCode: { type: 'UpdateMemberImageErrorCode' }

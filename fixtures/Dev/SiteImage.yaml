@@ -73,7 +73,6 @@ Capco\AppBundle\Entity\SiteImage:
     SiteImageMembersPicto:
         keyname: members.picto
         category: pages.members
-        media: '@Picto'
         isSocialNetworkThumbnail: true
         isEnabled: true
         position: 11

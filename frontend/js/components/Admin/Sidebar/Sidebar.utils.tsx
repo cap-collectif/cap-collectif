@@ -59,7 +59,7 @@ export const URL_MAP = {
     '/admin/capco/app/sitecolor/',
   ],
   pages: [
-    '/admin/settings/pages.members/',
+    '/admin-next/member-settings',
     '/admin/capco/app/section/',
     '/admin/contact/',
     '/admin/settings/pages.homepage/',

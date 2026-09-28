@@ -106,6 +106,14 @@ InternalQuery:
                 description: 'Get theme page images.'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('themes')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ThemeSettings\\ThemeSettingsImageQueryResolver")'
+            memberSettings:
+                type: '[SiteParameter!]!'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('members_list')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MemberSettings\\MemberSettingsQueryResolver")'
+            memberSettingsImages:
+                type: '[SiteImage!]!'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('members_list')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MemberSettings\\MemberSettingsImageQueryResolver")'
             registrationForm:
                 type: 'InternalRegistrationForm'
                 description: 'Get the current registration form'

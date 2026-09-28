@@ -276,7 +276,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.pages.projects" href="/admin-next/project-settings" />
                   <SidebarLink text="admin.label.pages.registration" href="/admin/settings/pages.registration/list" />
                   {features.members_list && (
-                    <SidebarLink text="admin.label.pages.members" href="/admin/settings/pages.members/list" />
+                    <SidebarLink text="admin.label.pages.members" href="/admin-next/member-settings" />
                   )}
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink

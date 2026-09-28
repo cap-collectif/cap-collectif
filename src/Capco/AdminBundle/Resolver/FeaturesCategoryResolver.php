@@ -14,7 +14,6 @@ class FeaturesCategoryResolver
             'conditions' => [],
             'features' => ['user_type', 'zipcode_at_register'],
         ],
-        'pages.members' => ['conditions' => ['members_list'], 'features' => []],
         'pages.login' => ['conditions' => [], 'features' => []],
         'pages.footer' => ['conditions' => [], 'features' => []],
         'pages.cookies' => ['conditions' => [], 'features' => []],

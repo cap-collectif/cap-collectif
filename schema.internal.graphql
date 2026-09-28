@@ -9902,6 +9902,8 @@ type Mutation {
 
   """Update a theme page image."""
   updateThemeImage(input: UpdateThemeImageInput!): UpdateThemeImagePayload
+  updateMemberSetting(input: UpdateMemberSettingInput!): UpdateMemberSettingPayload
+  updateMemberImage(input: UpdateMemberImageInput!): UpdateMemberImagePayload
 
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
@@ -14942,6 +14944,8 @@ type Query {
 
   """Get theme page images."""
   themeSettingsImages: [SiteImage!]!
+  memberSettings: [SiteParameter!]!
+  memberSettingsImages: [SiteImage!]!
 
   """Get the current registration form"""
   registrationForm: RegistrationForm
@@ -20681,6 +20685,63 @@ type UpdateMediatorVotesPayload {
   participant: Participant
   errors: [FieldError]
   clientMutationId: String
+}
+
+enum UpdateMemberImageErrorCode {
+  MEMBER_IMAGE_NOT_FOUND
+}
+
+input UpdateMemberImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateMemberImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateMemberImageErrorCode
+  clientMutationId: String
+}
+
+enum UpdateMemberSettingErrorCode {
+  MEMBER_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateMemberSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. For a non-translatable setting, or when the multilangue feature is
+  disabled, a single value is expected.
+  """
+  translations: [UpdateMemberSettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateMemberSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateMemberSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.members category for a given locale.
+"""
+input UpdateMemberSettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 """Available errors for an `updateNewProject` mutation."""
