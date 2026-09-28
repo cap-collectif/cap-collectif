@@ -9891,6 +9891,12 @@ type Mutation {
   """update a SiteParameter of the pages.login category."""
   updateLoginSetting(input: UpdateLoginSettingInput!): UpdateLoginSettingPayload
 
+  """Update an event page setting."""
+  updateEventSetting(input: UpdateEventSettingInput!): UpdateEventSettingPayload
+
+  """Update an event page image."""
+  updateEventImage(input: UpdateEventImageInput!): UpdateEventImagePayload
+
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
 
@@ -14918,6 +14924,12 @@ type Query {
 
   """Get project page images."""
   projectSettingsImages: [SiteImage!]!
+
+  """Get event page settings."""
+  eventSettings: [SiteParameter!]!
+
+  """Get event page images."""
+  eventSettingsImages: [SiteImage!]!
 
   """Get the current registration form"""
   registrationForm: RegistrationForm
@@ -20230,6 +20242,63 @@ type UpdateEmailingCampaignPayload {
   """The error code, if any"""
   error: UpdateEmailingCampaignErrorCode
   clientMutationId: String
+}
+
+enum UpdateEventImageErrorCode {
+  EVENT_IMAGE_NOT_FOUND
+}
+
+input UpdateEventImageInput {
+  id: ID!
+  mediaId: ID
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateEventImagePayload {
+  siteImage: SiteImage
+  errorCode: UpdateEventImageErrorCode
+  clientMutationId: String
+}
+
+enum UpdateEventSettingErrorCode {
+  EVENT_PARAMETER_NOT_FOUND
+  EVENT_PARAMETER_INVALID_VALUE
+}
+
+input UpdateEventSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. For a non-translatable setting, or when the multilangue feature is
+  disabled, a single value is expected.
+  """
+  translations: [UpdateEventSettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateEventSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateEventSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.events category for a given locale.
+"""
+input UpdateEventSettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 input UpdateEventsProjectTabInput {

@@ -303,9 +303,9 @@
             },
             {
                 "title": "admin.label.pages.events",
-                "href": "/admin/settings/pages.events/list",
+                "href": "/admin-next/event-settings",
                 "rolesRequired": [],
-                "featuresRequired": []
+                "featuresRequired": ["calendar"]
             },
             {
                 "title": "admin.label.pages.themes",

@@ -10,13 +10,6 @@ class FeaturesCategoryResolver
 {
     protected static array $categories = [
         'pages.homepage' => ['conditions' => [], 'features' => []],
-        'pages.events' => [
-            'conditions' => ['calendar'],
-            'features' => [
-                UserRole::ROLE_SUPER_ADMIN => [],
-                UserRole::ROLE_ADMIN => [Manager::allow_users_to_propose_events],
-            ],
-        ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
         'pages.registration' => [
             'conditions' => [],

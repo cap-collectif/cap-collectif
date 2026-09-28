@@ -1,0 +1,7 @@
+UpdateEventImageErrorCode:
+    type: enum
+    config:
+        name: UpdateEventImageErrorCode
+        values:
+            EVENT_IMAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\EventSettings\UpdateEventImageMutation::EVENT_IMAGE_NOT_FOUND

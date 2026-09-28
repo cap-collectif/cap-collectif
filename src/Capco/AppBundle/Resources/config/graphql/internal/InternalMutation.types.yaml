@@ -1623,6 +1623,22 @@ InternalMutation:
                     inputType: UpdateLoginSettingInput
                     payloadType: UpdateLoginSettingPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\LoginSettings\\UpdateLoginSettingMutation", args)'
+            updateEventSetting:
+                description: 'Update an event page setting.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('calendar')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateEventSettingInput
+                    payloadType: UpdateEventSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\EventSettings\\UpdateEventSettingMutation", args)'
+            updateEventImage:
+                description: 'Update an event page image.'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('calendar')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateEventImageInput
+                    payloadType: UpdateEventImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\EventSettings\\UpdateEventImageMutation", args)'
             # POST
             createPost:
                 description: 'Create blog post'

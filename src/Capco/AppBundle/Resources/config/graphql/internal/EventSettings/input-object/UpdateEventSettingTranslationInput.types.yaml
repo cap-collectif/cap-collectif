@@ -1,0 +1,12 @@
+UpdateEventSettingTranslationInput:
+    type: input-object
+    config:
+        name: UpdateEventSettingTranslationInput
+        description: 'The value of a SiteParameter of the pages.events category for a given locale.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the value.'
+            value:
+                type: 'String!'
+                description: 'The value for this locale. An empty value removes the translation of this locale.'

@@ -1,0 +1,9 @@
+UpdateEventSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateEventSettingErrorCode
+        values:
+            EVENT_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\EventSettings\UpdateEventSettingMutation::EVENT_PARAMETER_NOT_FOUND
+            EVENT_PARAMETER_INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\EventSettings\UpdateEventSettingMutation::EVENT_PARAMETER_INVALID_VALUE
