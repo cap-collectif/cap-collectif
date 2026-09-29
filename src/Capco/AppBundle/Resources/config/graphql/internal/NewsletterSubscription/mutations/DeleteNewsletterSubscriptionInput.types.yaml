@@ -1,0 +1,8 @@
+DeleteNewsletterSubscriptionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteNewsletterSubscription mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the newsletter subscription to delete.'

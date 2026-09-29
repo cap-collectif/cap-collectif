@@ -1,0 +1,22 @@
+InternalNewsletterSubscription:
+    type: object
+    config:
+        name: NewsletterSubscription
+        description: 'An email subscribed (or unsubscribed) to the platform newsletter.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the newsletter subscription.'
+                resolve: '@=value.getId()'
+            email:
+                type: 'String!'
+                description: 'The subscribed email.'
+                resolve: '@=value.getEmail()'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the email is currently subscribed to the newsletter.'
+                resolve: '@=value.getIsEnabled()'
+            createdAt:
+                type: 'DateTime!'
+                description: 'The creation date of the subscription.'
+                resolve: '@=value.getCreatedAt()'

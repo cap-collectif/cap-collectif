@@ -309,9 +309,14 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}
                   {(isAdmin || isSuperAdmin) && (
+                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
                     <SidebarLink
                       text="admin.label.newsletter_subscription"
-                      href="/admin/capco/app/newslettersubscription/list"
+                      href={
+                        features.unstable__sonata_migration_to_admin_next
+                          ? '/admin-next/newsletter-subscriptions'
+                          : '/admin/capco/app/newslettersubscription/list'
+                      }
                     />
                   )}
                 </SidebarAccordionPanel>

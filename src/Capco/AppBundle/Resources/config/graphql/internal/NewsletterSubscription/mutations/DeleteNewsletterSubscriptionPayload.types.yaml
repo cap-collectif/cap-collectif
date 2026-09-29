@@ -1,0 +1,10 @@
+DeleteNewsletterSubscriptionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedNewsletterSubscriptionId:
+                type: 'ID'
+                description: 'The deleted newsletter subscription id.'
+            errorCode:
+                type: 'NewsletterSubscriptionErrorCode'
+                description: 'The available errors if any.'

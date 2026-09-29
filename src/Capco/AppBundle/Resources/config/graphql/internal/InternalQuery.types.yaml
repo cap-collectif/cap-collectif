@@ -748,6 +748,17 @@ InternalQuery:
                     id:
                         type: 'ID!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Video\\VideoResolver", args)'
+            newsletterSubscriptions:
+                type: 'NewsletterSubscriptionConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all newsletter subscriptions, ordered by email.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by email.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NewsletterSubscription\\NewsletterSubscriptionListResolver", args)'
             socialNetworks:
                 type: 'SocialNetworkConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

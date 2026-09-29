@@ -1,0 +1,10 @@
+UpdateNewsletterSubscriptionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            newsletterSubscription:
+                type: 'InternalNewsletterSubscription'
+                description: 'The updated newsletter subscription.'
+            errorCode:
+                type: 'NewsletterSubscriptionErrorCode'
+                description: 'The available errors if any.'

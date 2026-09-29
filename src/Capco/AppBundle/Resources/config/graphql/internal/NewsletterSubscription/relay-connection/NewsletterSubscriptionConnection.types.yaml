@@ -1,0 +1,7 @@
+NewsletterSubscriptionConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalNewsletterSubscription!
+        connectionFields:
+            totalCount:
+                type: Int!

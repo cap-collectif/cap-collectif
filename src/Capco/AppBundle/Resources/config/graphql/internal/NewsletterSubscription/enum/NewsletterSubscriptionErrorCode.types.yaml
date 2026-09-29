@@ -1,0 +1,15 @@
+NewsletterSubscriptionErrorCode:
+    type: enum
+    config:
+        name: NewsletterSubscriptionErrorCode
+        description: 'The available errors for newsletter subscriptions.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\NewsletterSubscriptionErrorCode::NOT_FOUND
+                description: 'The newsletter subscription does not exist.'
+            INVALID_EMAIL:
+                value: !php/const Capco\AppBundle\Enum\NewsletterSubscriptionErrorCode::INVALID_EMAIL
+                description: 'The email is not a valid email address.'
+            EMAIL_ALREADY_USED:
+                value: !php/const Capco\AppBundle\Enum\NewsletterSubscriptionErrorCode::EMAIL_ALREADY_USED
+                description: 'Another newsletter subscription already uses this email.'

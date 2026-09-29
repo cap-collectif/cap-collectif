@@ -1,0 +1,14 @@
+UpdateNewsletterSubscriptionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateNewsletterSubscription mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the newsletter subscription to update.'
+            email:
+                type: 'String!'
+                description: 'The subscribed email.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the email is subscribed to the newsletter.'

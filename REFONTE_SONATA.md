@@ -22,6 +22,13 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
    `ProjectTypeAdmin.php`) pour lister : les champs affichés en liste, les champs éditables en formulaire,
    les actions disponibles (create/edit/delete/batch), et les éventuelles règles métier dans
    `postUpdate`/`postPersist`/`prePersist` (invalidation de cache, etc.) à ne pas perdre lors de la migration.
+   Si l'Admin class déclare `getExportFormats()`, Sonata affiche un bouton d'export : vérifier qu'il fonctionne
+   (`GET /admin/capco/app/<entité>/export?format=csv` avec une session admin) et demander à l'utilisateurice s'il
+   faut le reprendre. Si oui, ne pas pointer vers la route Sonata (supprimée au nettoyage) : créer une route
+   Symfony dédiée (`@Security("is_granted('ROLE_ADMIN')")`, `ActionLogger::logExport()` puisque l'export contient
+   des données personnelles) et l'appeler depuis Admin Next avec `downloadCSV()` (`@utils/download-csv`). Voir
+   `NewsletterSubscriptionExportController.php`. `downloadCSV()` lit le nom de fichier par un simple
+   `split('=')` sur `Content-Disposition` : garder un nom sans caractère qui forcerait des guillemets.
 2. **Identifier l'entité Doctrine** associée (`src/Capco/AppBundle/Entity/`) pour connaître les champs réels
    et savoir si l'entité est traduisible (présence d'une entité `*Translation` / `TranslatableTrait`) ou non.
 3. **Vérifier l'existant GraphQL** (`schema.internal.graphql` + `src/Capco/AppBundle/Resources/config/graphql/internal/`) :
@@ -143,6 +150,11 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       (regénère `schema.internal.graphql` à la racine, utilisé par le compilateur Relay de `admin-next`).
    3. Un `bin/console cache:clear` peut être nécessaire avant l'étape 1 si le cache Symfony est déjà chaud
       et ne détecte pas les nouveaux fichiers yaml.
+   4. La CI compare les schémas générés par `pipenv run fab local.qa.graphql-schemas` (les 4 schémas, en
+      `--no-debug`) : régénérer avec cette commande et committer aussi `schema.dev.graphql`, qui embarque les
+      types internes. Si elle échoue avec `Could not find type with alias "..."`, le cache `--no-debug` est
+      périmé : `pipenv run fab local.app.clear-cache` puis `pipenv run fab local.qa.compile-graphql` avant de
+      relancer.
 11. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
     (les artefacts générés vivent tous dans `admin-next/__generated__/`, pas de dossier colocalisé).
 12. **Vérifier** : `yarn ts` (TypeScript), `yarn lint` (ESLint), et un test visuel réel dans le navigateur
@@ -246,7 +258,9 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     si `true`, `variantColor="infoGray"` + `global.no` ("Non", gris) si `false`, plutôt qu'une checkbox/case
     non cliquable qui induirait en erreur sur l'interactivité. Le `Switch` reste alors uniquement dans la
     modale d'édition. C'est le cas par défaut : sauf consigne explicite contraire, "remplacer un booléen par
-    un Switch" veut dire "dans la modale", pas "dans la liste".
+    un Switch" veut dire "dans la modale", pas "dans la liste". Ça reste vrai quand la liste Sonata permettait
+    l'édition inline (`'editable' => true` dans `configureListFields`) : confirmé sur la page des inscrits à la
+    lettre d'information.
   - **Cas marginal : toggle éditable directement dans la liste** (comme `CardFacebook.tsx`) : `Switch` dans
     la colonne, une seule mutation `update` avec tous les champs optionnels sauf l'id (voir point "CRUD
     complet" ci-dessous) permet d'envoyer soit l'objet complet (modale), soit juste `{id, isEnabled}` (Switch
@@ -871,15 +885,16 @@ prop-drillé entre la liste et un ancêtre.
   `cy.get('.cap-switch__slider').click()` (sans `force`) : c'est le seul élément à la fois unique, réel
   (taille non nulle) et à l'intérieur du label interne du `Switch`, donc le clic déclenche bien le toggle par
   délégation native du `<label>`.
-- **Ne pas copier un `dangerToast`/`successToast` d'un composant de référence sans relire le texte qui va
-  avec** : dans `UserTypeModal.tsx`, la suppression utilise `dangerToast` (rouge) mais avec un message
-  **rédigé pour la suppression** (ex: "type supprimé"). Si on réutilise `dangerToast` pour la suppression
-  tout en gardant un message générique comme `global.changes.saved` ("Modifications enregistrées") pour
-  factoriser les clés de traduction entre create/update/delete, le résultat est un toast rouge qui dit
-  "Modifications enregistrées" — incohérent visuellement (le rouge fait penser à une erreur). Si le message
-  reste générique/neutre, utiliser `successToast` pour les trois actions (create/update/delete) plutôt que
-  `dangerToast` ; réserver `dangerToast` aux cas où le texte est explicitement écrit pour une action
-  destructive.
+- **Toast après une suppression réussie : toujours `dangerToast`, jamais `successToast`.** `dangerToast`
+  (rouge) n'est pas réservé aux erreurs : il sert aussi à signaler le succès d'une action destructive
+  (suppression d'un élément). Le rouge encode "action irréversible effectuée", pas uniquement "échec". Voir
+  `DeleteNewsletterSubscriptionModal.tsx` (`dangerToast` avec la clé de succès `success.delete.flash`) et
+  `UserTypeModal.tsx` (`dangerToast` avec un message "type supprimé"). Pour create/update, utiliser
+  `successToast`.
+  Corollaire : ne pas réutiliser pour une suppression un message générique pensé pour `successToast` (ex.
+  `global.changes.saved` / "Modifications enregistrées") juste pour factoriser les clés de traduction entre
+  create/update/delete — passé dans un `dangerToast`, un texte neutre devient incohérent avec le rouge.
+  Écrire un message dédié à la suppression (ex. "Élément supprimé").
 - **Clé de traduction du `successToast` après un enregistrement : préférer une clé générique à une clé
   spécifique à la page.** Pour une **mise à jour**, utiliser `admin.update.successful` ("Modifications
   enregistrées") plutôt que de créer une nouvelle clé dédiée (ex: ne pas créer `admin.videos.successfully-
@@ -963,6 +978,16 @@ prop-drillé entre la liste et un ancêtre.
   traduction). **Sur toute page qui affiche ce warning sur une `Table` non `selectable`, tester en premier le
   retrait de `rowId` sur `Table.Tr` avant toute autre hypothèse** (Jodit, effets locaux du composant de page,
   etc.) : c'est un test d'une ligne, rapide à éliminer ou confirmer.
+  - **Mécanisme réel identifié depuis (page des inscrits à la lettre d'information), et correctif préférable
+    au retrait de `rowId`.** `Table.Tbody` enregistre les `rowId` de ses enfants dans un `useEffect` et ne
+    redispatche que si `JSON.stringify(rowIds) != JSON.stringify(Object.keys(rows))`. Or `Object.keys()` trie
+    numériquement les clés qui ressemblent à des entiers : avec des ids entiers (entités `IdTrait`, ex:
+    `SiteParameter`) affichés dans un autre ordre que l'ordre numérique, la comparaison n'est jamais égale et
+    l'effet boucle. Et **retirer `rowId` casse `emptyMessage`** : `Table` n'affiche le message vide que si
+    `rowsCount === 0`, et `rowsCount` ne compte que les lignes qui ont un `rowId` — sans `rowId`, le message
+    « Aucun résultat » s'affiche sous des résultats bien présents. Correctif : garder `rowId` mais le préfixer
+    pour qu'il ne soit pas numérique, ex: `rowId={\`newsletter-subscription-${node.id}\`}` (un uuid ou un
+    global id base64 n'a pas le problème). Voir `NewsletterSubscriptionList.tsx`.
   - **Méthode pour isoler ce genre de warning avec certitude (A/B empirique, pas déduction sur le code)** :
     piloter un vrai navigateur headless (voir le piège `playwright-core` plus haut) avec
     `page.on('console', msg => ...)` filtré sur `msg.type() === 'error' && msg.text().includes('Maximum update
@@ -974,6 +999,26 @@ prop-drillé entre la liste et un ancêtre.
     en ~2s, vérifiable dans `docker logs capco_nextjs_1`) pour confirmer/infirmer chaque hypothèse — beaucoup
     plus fiable que de déduire la cause depuis un commit de référence dont les commentaires peuvent eux-mêmes
     être un faux diagnostic, comme ici.
+- **Une création/modification/suppression qui ne se reflète pas dans une `Table` paginée (`usePaginationFragment`)
+  sans recharger la page** : sur la page des inscrits à la lettre d'information, le create/delete reposaient sur
+  `@prependNode`/`@deleteEdge` avec un `connectionId` (soit calculé à la main via `ConnectionHandler.getConnectionID`
+  pour la modale de création, sibling de la liste ; soit lu via `__id` pour les modales d'édition/suppression,
+  enfants de la liste) — et l'update ne touchait pas du tout la connexion (seule la fusion par `id` met à jour les
+  champs déjà affichés). Le vrai problème sous-jacent : la connexion `newsletterSubscriptions` est triée
+  côté serveur par email (`ORDER BY email ASC`), pas par ordre de création — un `@prependNode` place donc la
+  nouvelle ligne en tête indépendamment de sa vraie position alphabétique, et rien ne réordonne la liste après une
+  modification d'email. **Correctif adopté : appeler `refetch()` (celui renvoyé par `usePaginationFragment`)
+  après le succès de chaque mutation**, en plus des directives déclaratives existantes (`refetch` écrase de toute
+  façon leur résultat avec la vraie page triée par le serveur, donc les garder ne coûte rien). Il n'existait
+  aucun pattern déjà établi dans `admin-next` pour faire remonter ce `refetch` (interne à `usePaginationFragment`,
+  donc à la liste) jusqu'à une modale de création sibling de la liste au niveau de la page — le seul précédent
+  proche est `UserGroupsList.tsx`, qui fait déjà remonter `data.groups.__id` vers son `CreateGroupModal` sibling
+  via un callback `setConnectionId` prop-drillé (liste → état de la page → modale) : `NewsletterSubscriptionList.tsx`
+  reproduit ce même câblage mais pour `refetch` (`setRefetch`), et passe `refetch`/`search` directement en prop
+  aux modales d'édition/suppression qui sont, elles, déjà enfants de la liste (comme le fait déjà
+  `EditGroupModal.tsx`/`DeleteGroupModal.tsx` avec `refetch({ term })`). **Vérifié en pilotant un vrai Chrome
+  headless** (voir le piège `playwright-core` plus haut) : create/edit/delete font bien apparaître/disparaître/
+  mettre à jour la ligne concernée immédiatement, sans `page.reload()`.
 - **Pour un sélecteur de langue dans un formulaire, préférer le composant `Select` importé directement depuis
   `@cap-collectif/form`** (piloté en `value`/`onChange` "à la main", hors react-hook-form — voir
   `BlogSettingsList.tsx` sur `19937-posts-sonata-refonte`, ou `LoginSettingModal.tsx`) **plutôt que**
@@ -1135,6 +1180,14 @@ prop-drillé entre la liste et un ancêtre.
   entrée, où Prettier échoue explicitement) car il s'agit ici d'un JSON *valide en entrée* mal *ré-émis* en
   sortie. Formater les `.json` dans une commande Prettier séparée des `.ts`/`.tsx`, et vérifier le diff (`git
   diff --stat`) d'un fichier de config JSON après un passage Prettier avant de continuer.
+
+- **`FieldInput type="email"` dans un `<form>` : ajouter `noValidate` sur le formulaire.** Sans ça, la
+  validation native du navigateur bloque la soumission avant que `handleSubmit` n'appelle yup : l'utilisatrice
+  voit une infobulle du navigateur dans la langue du navigateur (« Please include an '@'... »), jamais le
+  message traduit du schéma (`global.constraints.email.invalid`).
+- **`Search` (`@cap-collectif/ui`) est un react-select** : son `placeholder` est un `<div>`, pas un attribut de
+  l'`<input>`. Lui passer un `aria-label` explicite (accessibilité), et le cibler en test par
+  `input[aria-label="..."]`, pas par placeholder.
 
 ## Validation yup : toujours un schéma, et un champ texte requis n'est pas juste `.required()`
 

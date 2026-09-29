@@ -1064,6 +1064,27 @@ InternalMutation:
                     inputType: DeleteVideoInput
                     payloadType: DeleteVideoPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Video\\DeleteVideoMutation", args)'
+            createNewsletterSubscription:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateNewsletterSubscriptionInput
+                    payloadType: CreateNewsletterSubscriptionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\NewsletterSubscription\\CreateNewsletterSubscriptionMutation", args)'
+            updateNewsletterSubscription:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateNewsletterSubscriptionInput
+                    payloadType: UpdateNewsletterSubscriptionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\NewsletterSubscription\\UpdateNewsletterSubscriptionMutation", args)'
+            deleteNewsletterSubscription:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteNewsletterSubscriptionInput
+                    payloadType: DeleteNewsletterSubscriptionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\NewsletterSubscription\\DeleteNewsletterSubscriptionMutation", args)'
             createSocialNetwork:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

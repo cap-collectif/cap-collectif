@@ -78,7 +78,13 @@ export const URL_MAP = {
     '/admin/settings/pages.charter/',
     '/admin/settings/pages.shield/',
   ],
-  emailing: ['/admin/mailingCampaign/', '/admin/mailingList/', '/admin/capco/app/newslettersubscription/'],
+  emailing: [
+    '/admin/mailingCampaign/',
+    '/admin/mailingList/',
+    '/admin/mailingParameters/list',
+    '/admin/capco/app/newslettersubscription/',
+    '/admin-next/newsletter-subscriptions',
+  ],
 }
 
 export const CAP_COLLECTIF_SVG: JSX.Element | JSX.Element[] | string = (

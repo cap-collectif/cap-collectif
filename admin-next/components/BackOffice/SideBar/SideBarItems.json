@@ -408,7 +408,7 @@
             },
             {
                 "title": "admin.label.newsletter_subscription",
-                "href": "/admin/capco/app/newslettersubscription/list",
+                "href": "/admin-next/newsletter-subscriptions",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             }

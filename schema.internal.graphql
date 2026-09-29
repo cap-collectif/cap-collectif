@@ -4124,6 +4124,24 @@ input CreateNewsProjectTabInput {
   clientMutationId: String
 }
 
+input CreateNewsletterSubscriptionInput {
+  """The email to subscribe."""
+  email: String!
+
+  """Whether the email is subscribed to the newsletter."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type CreateNewsletterSubscriptionPayload {
+  """The created newsletter subscription."""
+  newsletterSubscription: NewsletterSubscription
+
+  """The available errors if any."""
+  errorCode: NewsletterSubscriptionErrorCode
+  clientMutationId: String
+}
+
 input CreateOauth2SSOConfigurationInput {
   """Client ID."""
   clientId: String!
@@ -6267,6 +6285,21 @@ input DeleteMediatorInput {
 
 type DeleteMediatorPayload {
   deletedMediatorId: ID!
+  clientMutationId: String
+}
+
+input DeleteNewsletterSubscriptionInput {
+  """The id of the newsletter subscription to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteNewsletterSubscriptionPayload {
+  """The deleted newsletter subscription id."""
+  deletedNewsletterSubscriptionId: ID
+
+  """The available errors if any."""
+  errorCode: NewsletterSubscriptionErrorCode
   clientMutationId: String
 }
 
@@ -9847,6 +9880,9 @@ type Mutation {
   createVideo(input: CreateVideoInput!): CreateVideoPayload
   updateVideo(input: UpdateVideoInput!): UpdateVideoPayload
   deleteVideo(input: DeleteVideoInput!): DeleteVideoPayload
+  createNewsletterSubscription(input: CreateNewsletterSubscriptionInput!): CreateNewsletterSubscriptionPayload
+  updateNewsletterSubscription(input: UpdateNewsletterSubscriptionInput!): UpdateNewsletterSubscriptionPayload
+  deleteNewsletterSubscription(input: DeleteNewsletterSubscriptionInput!): DeleteNewsletterSubscriptionPayload
   createSocialNetwork(input: CreateSocialNetworkInput!): CreateSocialNetworkPayload
   updateSocialNetwork(input: UpdateSocialNetworkInput!): UpdateSocialNetworkPayload
   deleteSocialNetwork(input: DeleteSocialNetworkInput!): DeleteSocialNetworkPayload
@@ -10129,6 +10165,53 @@ input NewsTranslationInput {
 
   """the locale of the translation"""
   locale: TranslationLocale!
+}
+
+"""An email subscribed (or unsubscribed) to the platform newsletter."""
+type NewsletterSubscription {
+  """The id of the newsletter subscription."""
+  id: ID!
+
+  """The subscribed email."""
+  email: String!
+
+  """Whether the email is currently subscribed to the newsletter."""
+  isEnabled: Boolean!
+
+  """The creation date of the subscription."""
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type NewsletterSubscriptionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [NewsletterSubscriptionEdge]
+}
+
+"""An edge in a connection."""
+type NewsletterSubscriptionEdge {
+  """The item at the end of the edge."""
+  node: NewsletterSubscription!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for newsletter subscriptions."""
+enum NewsletterSubscriptionErrorCode {
+  """The newsletter subscription does not exist."""
+  NOT_FOUND
+
+  """The email is not a valid email address."""
+  INVALID_EMAIL
+
+  """Another newsletter subscription already uses this email."""
+  EMAIL_ALREADY_USED
 }
 
 """Fetches an object given its ID"""
@@ -15463,6 +15546,20 @@ type Query {
 
   """Get a single video by id."""
   video(id: ID!): Video
+
+  """List all newsletter subscriptions, ordered by email."""
+  newsletterSubscriptions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by email."""
+    search: String = null
+  ): NewsletterSubscriptionConnection!
 
   """List all social networks."""
   socialNetworks(
@@ -20992,6 +21089,27 @@ input UpdateNewsProjectTabInput {
   title: String!
   enabled: Boolean!
   newsItems: [ProjectTabNewsItemInput!]
+  clientMutationId: String
+}
+
+input UpdateNewsletterSubscriptionInput {
+  """The id of the newsletter subscription to update."""
+  id: ID!
+
+  """The subscribed email."""
+  email: String!
+
+  """Whether the email is subscribed to the newsletter."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateNewsletterSubscriptionPayload {
+  """The updated newsletter subscription."""
+  newsletterSubscription: NewsletterSubscription
+
+  """The available errors if any."""
+  errorCode: NewsletterSubscriptionErrorCode
   clientMutationId: String
 }
 
