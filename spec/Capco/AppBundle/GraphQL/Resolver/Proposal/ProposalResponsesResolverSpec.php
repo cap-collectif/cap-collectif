@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Util\TokenGenerator;
@@ -24,14 +25,16 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
         AuthorizationCheckerInterface $authorizationChecker,
-        TokenGenerator $tokenGenerator
+        TokenGenerator $tokenGenerator,
+        ParticipantHelper $participantHelper
     ): void {
         $this->beConstructedWith(
             $abstractQuestionRepository,
             $abstractResponseRepository,
             $viewerIsAnEvaluer,
             $authorizationChecker,
-            $tokenGenerator
+            $tokenGenerator,
+            $participantHelper
         );
     }
 

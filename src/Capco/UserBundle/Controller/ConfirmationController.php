@@ -280,6 +280,10 @@ class ConfirmationController extends Controller
 
             if ($proposal) {
                 $proposal->setParticipant($existingParticipant);
+
+                foreach ($proposal->getResponses() as $proposalResponse) {
+                    $proposalResponse->setContributor($existingParticipant);
+                }
             }
 
             $this->em->remove($participant);

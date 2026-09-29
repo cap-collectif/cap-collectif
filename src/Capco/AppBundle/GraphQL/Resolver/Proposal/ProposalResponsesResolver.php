@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
+use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Util\TokenGenerator;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -23,14 +25,15 @@ class ProposalResponsesResolver implements QueryInterface
         AbstractResponseRepository $abstractResponseRepository,
         private ProposalViewerIsAnEvaluerResolver $proposalViewerIsAnEvaluerResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        TokenGenerator $tokenGenerator
+        TokenGenerator $tokenGenerator,
+        private readonly ParticipantHelper $participantHelper
     ) {
         $this->abstractQuestionRepository = $repository;
         $this->abstractResponseRepository = $abstractResponseRepository;
         $this->tokenGenerator = $tokenGenerator;
     }
 
-    public function __invoke(Proposal $proposal, $viewer, \ArrayObject $context): array
+    public function __invoke(Proposal $proposal, $viewer, \ArrayObject $context, ?string $participantToken = null): array
     {
         $isLegacyAnalyst = $this->proposalViewerIsAnEvaluerResolver->__invoke($proposal, $viewer);
         $isAnalyst = false;
@@ -39,6 +42,13 @@ class ProposalResponsesResolver implements QueryInterface
                 ProposalAnalysisRelatedVoter::VIEW,
                 $proposal
             );
+        }
+
+        if (null === $viewer && $participantToken) {
+            try {
+                $viewer = $this->participantHelper->getParticipantByToken($participantToken);
+            } catch (ParticipantNotFoundException) {
+            }
         }
 
         $responses = $this->filterVisibleResponses(
