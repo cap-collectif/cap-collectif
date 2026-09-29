@@ -1,0 +1,9 @@
+UpdateCookieSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateCookieSettingErrorCode
+        values:
+            COOKIE_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CookieSettings\UpdateCookieSettingMutation::COOKIE_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CookieSettings\UpdateCookieSettingMutation::INVALID_VALUE

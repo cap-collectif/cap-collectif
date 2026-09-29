@@ -562,6 +562,11 @@ InternalQuery:
                         description: 'Number of latest versions to skip.'
                 type: '[CustomCodeVersion!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CustomCode\\CustomCodeVersionsQueryResolver", args)'
+            cookieSettings:
+                description: 'get all site parameters of the pages.cookies category'
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[SiteParameter!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CookieSettings\\CookieSettingsQueryResolver")'
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'

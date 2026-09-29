@@ -36,6 +36,23 @@ describe('getSideBarItemsFiltered', () => {
     )
   })
 
+  const getCookieSettingsItem = (featureFlags = defaultFeatureFlags) => {
+    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+    return sideBarItems
+      .find(item => item.id === 'pages')
+      ?.items.find(item => item.title === 'admin.label.pages.cookies')
+  }
+
+  it('keeps the Sonata cookies settings route while the migration is disabled', () => {
+    expect(getCookieSettingsItem()?.href).toBe('/admin/settings/pages.cookies/list')
+  })
+
+  it('uses the Admin Next cookies settings route while the migration is enabled', () => {
+    expect(
+      getCookieSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href,
+    ).toBe('/admin-next/cookie-settings')
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,

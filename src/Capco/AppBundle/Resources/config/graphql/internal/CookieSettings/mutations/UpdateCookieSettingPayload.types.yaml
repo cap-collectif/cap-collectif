@@ -1,0 +1,8 @@
+UpdateCookieSettingPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            siteParameter:
+                type: 'SiteParameter'
+            errorCode:
+                type: 'UpdateCookieSettingErrorCode'

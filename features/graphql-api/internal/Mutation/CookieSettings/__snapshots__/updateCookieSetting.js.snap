@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updateCookieSetting creates, updates and removes the translation of another locale when multilangue is enabled: create 1`] = `
+Object {
+  "updateCookieSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "cookies-list",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Cookie list</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Liste des cookies</p>",
+        },
+      ],
+      "value": "<p>Liste des cookies</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateCookieSetting creates, updates and removes the translation of another locale when multilangue is enabled: remove 1`] = `
+Object {
+  "updateCookieSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "cookies-list",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Liste des cookies</p>",
+        },
+      ],
+      "value": "<p>Liste des cookies</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateCookieSetting creates, updates and removes the translation of another locale when multilangue is enabled: update 1`] = `
+Object {
+  "updateCookieSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "cookies-list",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Cookie list, edited</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Liste des cookies</p>",
+        },
+      ],
+      "value": "<p>Liste des cookies</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateCookieSetting stores the value under the platform default locale when multilangue is disabled 1`] = `
+Object {
+  "updateCookieSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "cookies-list",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "Stored under the default locale",
+        },
+      ],
+      "value": "Stored under the default locale",
+    },
+  },
+}
+`;
+
+exports[`Internal|updateCookieSetting updates the value and isEnabled as super-admin 1`] = `
+Object {
+  "updateCookieSetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": false,
+      "keyname": "cookies-list",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "New cookie list",
+        },
+      ],
+      "value": "New cookie list",
+    },
+  },
+}
+`;

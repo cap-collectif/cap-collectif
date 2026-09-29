@@ -10023,6 +10023,9 @@ type Mutation {
   """update a SiteParameter of the pages.login category."""
   updateLoginSetting(input: UpdateLoginSettingInput!): UpdateLoginSettingPayload
 
+  """update a SiteParameter of the pages.cookies category."""
+  updateCookieSetting(input: UpdateCookieSettingInput!): UpdateCookieSettingPayload
+
   """Update an event page setting."""
   updateEventSetting(input: UpdateEventSettingInput!): UpdateEventSettingPayload
 
@@ -15402,6 +15405,9 @@ type Query {
     offset: Int = 0
   ): [CustomCodeVersion!]!
 
+  """get all site parameters of the pages.cookies category"""
+  cookieSettings: [SiteParameter!]!
+
   """get consultations without step"""
   availableConsultations(
     """Retrieve consultation where title match term param."""
@@ -20299,6 +20305,46 @@ type UpdateContactPagePayload {
   """The locale of the contact page."""
   locale: String
   clientMutationId: String
+}
+
+enum UpdateCookieSettingErrorCode {
+  COOKIE_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateCookieSettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. For a non-translatable setting, or when the multilangue feature is
+  disabled, a single value is expected.
+  """
+  translations: [UpdateCookieSettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateCookieSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateCookieSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.cookies category for a given locale.
+"""
+input UpdateCookieSettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 """Available errors for an `updateCustomDomain` mutation."""
