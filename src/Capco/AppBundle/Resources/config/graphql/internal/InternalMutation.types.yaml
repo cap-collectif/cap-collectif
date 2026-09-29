@@ -1669,6 +1669,22 @@ InternalMutation:
                     inputType: UpdateMemberImageInput
                     payloadType: UpdateMemberImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\MemberSettings\\UpdateMemberImageMutation", args)'
+            commitCustomCodeVersion:
+                description: 'Commit a global custom code version.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CommitCustomCodeVersionInput
+                    payloadType: CommitCustomCodeVersionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CustomCode\\CommitCustomCodeVersionMutation", args, getUser())'
+            restoreCustomCodeVersion:
+                description: 'Restore a global custom code version by creating a new version.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RestoreCustomCodeVersionInput
+                    payloadType: RestoreCustomCodeVersionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CustomCode\\RestoreCustomCodeVersionMutation", args, getUser())'
             # POST
             createPost:
                 description: 'Create blog post'

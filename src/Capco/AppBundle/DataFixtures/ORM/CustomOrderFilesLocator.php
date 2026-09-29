@@ -187,6 +187,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/MenuItem.yaml',
             $this->fixturesDir . 'Dev/MenuItemTranslation.yaml',
             $this->fixturesDir . 'Dev/SiteParameter.yaml',
+            $this->fixturesDir . 'Dev/CustomCodeVersion.yaml',
             $this->fixturesDir . 'Dev/SiteParameterTranslation.yaml',
             $this->fixturesDir . 'Dev/ExternalServiceConfiguration.yaml',
             $this->fixturesDir . 'Dev/SiteImage.yaml',

@@ -45,6 +45,7 @@ export const URL_MAP = {
     '/admin-next/social-networks',
     '/admin-next/footer-social-networks',
     '/admin-next/geographical-areas',
+    '/admin-next/custom-code',
     '/admin/map/',
     '/admin/redirect/',
     '/admin/favicon/',

@@ -1,0 +1,8 @@
+CustomCodeVersionConnection:
+    type: relay-connection
+    config:
+        nodeType: CustomCodeVersion!
+        connectionFields:
+            totalCount:
+                type: 'Int!'
+                description: 'Identifies the total count of items in the connection.'

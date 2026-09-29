@@ -1,0 +1,10 @@
+CommitCustomCodeVersionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            customCode:
+                type: 'CustomCode'
+            version:
+                type: 'CustomCodeVersion'
+            errorCode:
+                type: 'CustomCodeVersionErrorCode'

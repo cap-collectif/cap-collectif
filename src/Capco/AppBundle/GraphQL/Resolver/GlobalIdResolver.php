@@ -94,6 +94,7 @@ class GlobalIdResolver
         'Argument',
         'Opinion',
         'Version',
+        'CustomCodeVersion',
         'UserInvite',
         'MailingList',
         'EmailingCampaign',

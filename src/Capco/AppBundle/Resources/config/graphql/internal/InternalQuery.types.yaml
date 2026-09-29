@@ -526,6 +526,42 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[SiteParameter!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\LoginSettings\\LoginSettingsQueryResolver")'
+            customCodeConfiguration:
+                description: 'List global custom code configurations with their version history.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    versionsLimit:
+                        type: 'Int'
+                        defaultValue: 5
+                        description: 'Maximum number of versions returned for each custom code.'
+                type: '[CustomCode!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CustomCode\\CustomCodeConfigurationQueryResolver", args)'
+            customCodeVersion:
+                description: 'Get a global custom code version with its content.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                        description: 'ID of the custom code version to get.'
+                type: 'CustomCodeVersion'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CustomCode\\CustomCodeVersionQueryResolver", args)'
+            customCodeVersions:
+                description: 'List global custom code version metadata for a keyname.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    keyname:
+                        type: 'String!'
+                        description: 'Custom code keyname.'
+                    limit:
+                        type: 'Int'
+                        defaultValue: 5
+                        description: 'Maximum number of versions returned.'
+                    offset:
+                        type: 'Int'
+                        defaultValue: 0
+                        description: 'Number of latest versions to skip.'
+                type: '[CustomCodeVersion!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CustomCode\\CustomCodeVersionsQueryResolver", args)'
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'

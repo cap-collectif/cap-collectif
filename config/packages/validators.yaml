@@ -82,6 +82,9 @@ services:
     Capco\AppBundle\Validator\Constraints\CheckColorValidator:
         tags:
             - { name: validator.constraint_validator, alias: check_color.validator }
+    Capco\AppBundle\Validator\Constraints\ValidCustomCodeContentValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: valid_custom_code_content.validator }
     Capco\AppBundle\Validator\Constraints\CheckMapCenterValidator:
         tags:
             - { name: validator.constraint_validator, alias: map_center.validator }

@@ -215,6 +215,12 @@
                 "featuresRequired": []
             },
             {
+                "title": "admin.customcode",
+                "href": "/admin-next/custom-code",
+                "rolesRequired": ["admin"],
+                "featuresRequired": []
+            },
+            {
                 "title": "website-icon",
                 "href": "/admin/favicon/list",
                 "rolesRequired": [],

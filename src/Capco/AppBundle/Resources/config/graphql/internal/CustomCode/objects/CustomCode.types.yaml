@@ -1,0 +1,36 @@
+CustomCode:
+    type: object
+    config:
+        description: 'A global custom code configuration.'
+        fields:
+            id:
+                type: 'ID!'
+                resolve: '@=value["id"]'
+            keyname:
+                type: 'String!'
+                resolve: '@=value["keyname"]'
+            label:
+                type: 'String!'
+                resolve: '@=value["label"]'
+            description:
+                type: 'String!'
+                resolve: '@=value["description"]'
+            activeContent:
+                type: 'String'
+                resolve: '@=value["activeContent"]'
+            activeContentHash:
+                type: 'String!'
+                resolve: '@=value["activeContentHash"]'
+            versions:
+                type: '[CustomCodeVersion!]!'
+                resolve: '@=value["versions"]'
+            versionsConnection:
+                type: 'CustomCodeVersionConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CustomCode\\CustomCodeVersionsConnectionResolver", value, args)'
+            hasMoreVersions:
+                type: 'Boolean!'
+                resolve: '@=value["hasMoreVersions"]'
+            versionsCount:
+                type: 'Int!'
+                resolve: '@=value["versionsCount"]'

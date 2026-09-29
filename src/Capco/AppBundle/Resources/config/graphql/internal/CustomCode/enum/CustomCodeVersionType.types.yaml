@@ -1,0 +1,12 @@
+CustomCodeVersionType:
+    type: enum
+    config:
+        name: CustomCodeVersionType
+        description: 'Available global custom code version types.'
+        values:
+            INITIAL:
+                value: !php/const Capco\AppBundle\Entity\CustomCodeVersion::TYPE_INITIAL
+            COMMIT:
+                value: !php/const Capco\AppBundle\Entity\CustomCodeVersion::TYPE_COMMIT
+            RESTORE:
+                value: !php/const Capco\AppBundle\Entity\CustomCodeVersion::TYPE_RESTORE

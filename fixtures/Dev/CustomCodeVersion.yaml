@@ -1,0 +1,46 @@
+Capco\AppBundle\Entity\CustomCodeVersion:
+    customCodeVersionMembersInitial:
+        id: 'customCodeVersionMembersInitial'
+        keyname: members.customcode
+        title: Version initiale membres
+        authorName: System
+        description: Fixture initiale membres
+        referenceUrl: null
+        content: <identity("<style>.api-members-v1{color:#123456}</style>")>
+        contentHash: a8fb43996797a549edf250a6c5da3f6a71a01b059b3294b0ffccda8260cf2f5e
+        previousContentHash: null
+        type: INITIAL
+        restoredFromVersion: null
+        createdByUserId: null
+        createdAt: <identity((new \DateTime('2030-01-01 10:00:00')))>
+
+
+    customCodeVersionMembersCurrent:
+        id: 'customCodeVersionMembersCurrent'
+        keyname: members.customcode
+        title: Version courante membres
+        authorName: Cap Collectif
+        description: Fixture version courante membres
+        referenceUrl: https://example.com/custom-code/members-current
+        content: <identity("<style>.api-members-v2{color:#abcdef}</style>")>
+        contentHash: 80baa053af7bd02fd0c0cf23b548f1f00a2fa5ec4beae1dbec53a1f05c48b04b
+        previousContentHash: a8fb43996797a549edf250a6c5da3f6a71a01b059b3294b0ffccda8260cf2f5e
+        type: COMMIT
+        restoredFromVersion: null
+        createdByUserId: null
+        createdAt: <identity((new \DateTime('2030-01-02 10:00:00')))>
+
+    customCodeVersionContactInitial:
+        id: 'customCodeVersionContactInitial'
+        keyname: contact.customcode
+        title: Version initiale contact
+        authorName: System
+        description: Fixture initiale contact
+        referenceUrl: null
+        content: <identity("<script>window.__api_contact_v1 = true;</script>")>
+        contentHash: 9a8c2014c4b9cacce26cdca40e8fd04aa3b6395f2c6a44b64e30fb8ffc6c11f0
+        previousContentHash: null
+        type: INITIAL
+        restoredFromVersion: null
+        createdByUserId: null
+        createdAt: <identity((new \DateTime('2030-01-01 11:00:00')))>

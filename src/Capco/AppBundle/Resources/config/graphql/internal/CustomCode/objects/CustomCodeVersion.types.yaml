@@ -1,0 +1,44 @@
+CustomCodeVersion:
+    type: object
+    config:
+        description: 'A version of a global custom code.'
+        fields:
+            id:
+                type: 'ID!'
+                resolve: '@=value["id"]'
+            keyname:
+                type: 'String!'
+                resolve: '@=value["keyname"]'
+            title:
+                type: 'String!'
+                resolve: '@=value["title"]'
+            authorName:
+                type: 'String!'
+                resolve: '@=value["authorName"]'
+            description:
+                type: 'String'
+                resolve: '@=value["description"]'
+            referenceUrl:
+                type: 'String'
+                resolve: '@=value["referenceUrl"]'
+            content:
+                type: 'String'
+                resolve: '@=value["content"]'
+            contentHash:
+                type: 'String!'
+                resolve: '@=value["contentHash"]'
+            previousContentHash:
+                type: 'String'
+                resolve: '@=value["previousContentHash"]'
+            type:
+                type: 'CustomCodeVersionType!'
+                resolve: '@=value["type"]'
+            restoredFromVersion:
+                type: 'CustomCodeVersion'
+                resolve: '@=value["restoredFromVersion"]'
+            createdByUserId:
+                type: 'ID'
+                resolve: '@=value["createdByUserId"]'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value["createdAt"]'

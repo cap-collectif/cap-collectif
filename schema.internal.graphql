@@ -2937,6 +2937,24 @@ interface Commentable {
   ): CommentConnection
 }
 
+input CommitCustomCodeVersionInput {
+  keyname: String!
+  title: String!
+  authorName: String!
+  description: String
+  referenceUrl: String
+  content: String
+  baseContentHash: String!
+  clientMutationId: String
+}
+
+type CommitCustomCodeVersionPayload {
+  customCode: CustomCode
+  version: CustomCodeVersion
+  errorCode: CustomCodeVersionErrorCode
+  clientMutationId: String
+}
+
 """The different available types of step."""
 enum ConcreteStepType {
   """Represent a collect step."""
@@ -4872,6 +4890,84 @@ input CroppingStartOptionInput {
 
 """A string containing CSS."""
 scalar CssJSON
+
+"""A global custom code configuration."""
+type CustomCode {
+  id: ID!
+  keyname: String!
+  label: String!
+  description: String!
+  activeContent: String
+  activeContentHash: String!
+  versions: [CustomCodeVersion!]!
+  versionsConnection(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): CustomCodeVersionConnection!
+  hasMoreVersions: Boolean!
+  versionsCount: Int!
+}
+
+"""A version of a global custom code."""
+type CustomCodeVersion {
+  id: ID!
+  keyname: String!
+  title: String!
+  authorName: String!
+  description: String
+  referenceUrl: String
+  content: String
+  contentHash: String!
+  previousContentHash: String
+  type: CustomCodeVersionType!
+  restoredFromVersion: CustomCodeVersion
+  createdByUserId: ID
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type CustomCodeVersionConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [CustomCodeVersionEdge]
+}
+
+"""An edge in a connection."""
+type CustomCodeVersionEdge {
+  """The item at the end of the edge."""
+  node: CustomCodeVersion!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Available errors for global custom code version mutations."""
+enum CustomCodeVersionErrorCode {
+  INVALID_KEYNAME
+  INVALID_CONTENT
+  INVALID_METADATA
+  INVALID_REFERENCE_URL
+  NO_CHANGES
+  CONFLICT
+  VERSION_NOT_FOUND
+}
+
+"""Available global custom code version types."""
+enum CustomCodeVersionType {
+  INITIAL
+  COMMIT
+  RESTORE
+}
 
 """A requirement where data can be collected by france connect"""
 interface DataCollectedByFranceConnectRequirement {
@@ -9904,6 +10000,12 @@ type Mutation {
   updateThemeImage(input: UpdateThemeImageInput!): UpdateThemeImagePayload
   updateMemberSetting(input: UpdateMemberSettingInput!): UpdateMemberSettingPayload
   updateMemberImage(input: UpdateMemberImageInput!): UpdateMemberImagePayload
+
+  """Commit a global custom code version."""
+  commitCustomCodeVersion(input: CommitCustomCodeVersionInput!): CommitCustomCodeVersionPayload
+
+  """Restore a global custom code version by creating a new version."""
+  restoreCustomCodeVersion(input: RestoreCustomCodeVersionInput!): RestoreCustomCodeVersionPayload
 
   """Create blog post"""
   createPost(input: CreatePostInput!): CreatePostPayload
@@ -15193,6 +15295,30 @@ type Query {
   """get all site parameters of the pages.login category"""
   loginSettings: [SiteParameter!]!
 
+  """List global custom code configurations with their version history."""
+  customCodeConfiguration(
+    """Maximum number of versions returned for each custom code."""
+    versionsLimit: Int = 5
+  ): [CustomCode!]!
+
+  """Get a global custom code version with its content."""
+  customCodeVersion(
+    """ID of the custom code version to get."""
+    id: ID!
+  ): CustomCodeVersion
+
+  """List global custom code version metadata for a keyname."""
+  customCodeVersions(
+    """Custom code keyname."""
+    keyname: String!
+
+    """Maximum number of versions returned."""
+    limit: Int = 5
+
+    """Number of latest versions to skip."""
+    offset: Int = 0
+  ): [CustomCodeVersion!]!
+
   """get consultations without step"""
   availableConsultations(
     """Retrieve consultation where title match term param."""
@@ -17227,6 +17353,23 @@ enum ResponsesOrderField {
 
   """Allows ordering a list of responses by its category."""
   CATEGORY
+}
+
+input RestoreCustomCodeVersionInput {
+  versionId: ID!
+  title: String!
+  authorName: String!
+  description: String
+  referenceUrl: String
+  baseContentHash: String!
+  clientMutationId: String
+}
+
+type RestoreCustomCodeVersionPayload {
+  customCode: CustomCode
+  version: CustomCodeVersion
+  errorCode: CustomCodeVersionErrorCode
+  clientMutationId: String
 }
 
 input ReviewEventInput {

@@ -1,0 +1,20 @@
+CustomCodeVersionErrorCode:
+    type: enum
+    config:
+        name: CustomCodeVersionErrorCode
+        description: 'Available errors for global custom code version mutations.'
+        values:
+            INVALID_KEYNAME:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::INVALID_KEYNAME
+            INVALID_CONTENT:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::INVALID_CONTENT
+            INVALID_METADATA:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::INVALID_METADATA
+            INVALID_REFERENCE_URL:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::INVALID_REFERENCE_URL
+            NO_CHANGES:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::NO_CHANGES
+            CONFLICT:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::CONFLICT
+            VERSION_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Service\CustomCodeVersioningService::VERSION_NOT_FOUND

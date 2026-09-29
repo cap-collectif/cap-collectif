@@ -1,0 +1,17 @@
+RestoreCustomCodeVersionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of restoreCustomCodeVersion mutation.'
+        fields:
+            versionId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            authorName:
+                type: 'String!'
+            description:
+                type: 'String'
+            referenceUrl:
+                type: 'String'
+            baseContentHash:
+                type: 'String!'

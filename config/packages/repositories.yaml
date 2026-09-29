@@ -45,6 +45,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ContactForm\ContactForm']
 
+    Capco\AppBundle\Repository\CustomCodeVersionRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:CustomCodeVersion']
+
     Capco\AppBundle\Repository\AbstractQuestionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
