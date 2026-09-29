@@ -3,12 +3,6 @@ from infrastructure.deploylib import app, environments
 
 
 @task
-def clean(ctx):
-    environments.local()
-    app.clean()
-
-
-@task
 def clear_cache(ctx, environment='dev'):
     environments.local()
     app.clear_cache(environment)

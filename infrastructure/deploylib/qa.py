@@ -191,13 +191,6 @@ def restore_es_snapshot():
     )
 
 
-def view(firefox='false'):
-    if firefox != 'false':
-        run('open vnc://:secret@localhost:5901')
-    else:
-        run('open vnc://:secret@localhost:5900')
-
-
 def clear_fixtures():
     run(
         'docker ps -a | awk \'{ print $1,$2 }\' | grep capco/fixtures | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')

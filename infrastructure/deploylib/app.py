@@ -1,6 +1,6 @@
 from sys import platform as _platform
 from fabric import Config, Connection
-from infrastructure.deploylib.environments import command, ssh_into, compose
+from infrastructure.deploylib.environments import command, ssh_into
 from invoke import run
 
 import os
@@ -167,12 +167,6 @@ def toggle_enable(toggle='public_api', environment='test'):
 def toggle_disable(toggle='public_api', environment='test'):
     "Disable a feature toggle."
     command('php bin/console capco:toggle:disable ' + toggle + ' --no-interaction --env=' + environment, 'application', Config.www_app, "capco", False)
-
-
-def clean():
-    "Clean"
-    compose('stop chrome || true')
-    compose('rm -f chrome')
 
 
 def rabbitmq_queues():

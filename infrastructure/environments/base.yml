@@ -37,7 +37,6 @@ services:
             - database:database
             - elasticsearch:elasticsearch
             - redis:redis
-            - seleniumhub:selenium
             - mailcatcher:mailcatchersmtp
         extra_hosts: # Used to ban varnish cache and blackfire
             - 'capco.test:0.0.0.0'
@@ -70,32 +69,6 @@ services:
                 soft: -1
                 hard: -1
         # mem_limit: 1g
-
-    seleniumhub:
-        container_name: capco_seleniumhub_1
-        image:
-            selenium/hub:4.1.2
-            # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md
-            # You can browse http://0.0.0.0:4444/ui/ to check available browsers
-        ports:
-            - '4442:4442'
-            - '4443:4443'
-            - '4444:4444'
-
-    chrome:
-        container_name: capco_chrome_1
-        image: selenium/node-chrome:4.1.2
-        environment:
-            - TZ='Europe/Paris'
-            - SE_EVENT_BUS_HOST=seleniumhub
-            - SE_EVENT_BUS_PUBLISH_PORT=4442
-            - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-        links:
-            - seleniumhub:seleniumhub
-            - application:capco.test
-        depends_on:
-            - seleniumhub
-        shm_size: 2gb
 
     mailcatcher:
         container_name: capco_mailcatcher_1

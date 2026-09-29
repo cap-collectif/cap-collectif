@@ -5,7 +5,6 @@ services:
             - elasticsearch:elasticsearch
             - kibana:kibana
             - redis:redis
-            - seleniumhub:selenium
             - mailcatcher:mailcatchersmtp
             - nextjs
         environment:
@@ -67,11 +66,6 @@ services:
         # mem_limit: 1g
         ports:
             - '9200:9200'
-
-    chrome:
-        ports:
-            # Port is used for VNC only
-            - '5900:5900'
 
 volumes:
     php_sf_cache:

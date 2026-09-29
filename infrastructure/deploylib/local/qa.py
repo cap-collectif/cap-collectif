@@ -84,9 +84,3 @@ def save_es_snapshot(ctx):
 def snapshots(ctx, tags='false'):
     environments.local()
     qa.snapshots(tags)
-
-
-@task
-def view(ctx, firefox='false'):
-    environments.local()
-    qa.view(firefox)
