@@ -23,4 +23,8 @@ describe('maplibre Jest mapping', () => {
     expect(typeof L.maplibreGL).toBe('function')
     L.maplibreGL = previousMaplibreGL
   })
+
+  it('mocks the worker URL configuration', () => {
+    expect(typeof require('maplibre-gl').setWorkerUrl).toBe('function')
+  })
 })

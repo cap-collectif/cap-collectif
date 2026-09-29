@@ -23,6 +23,9 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
   const geoJSON = formatGeoJsons([district])
   const districtGeoJSON = getDistrict(geoJSON)
   const isValidGeoJSON = district.geojson && geoJSON.length && geoJSON[0].district && districtGeoJSON
+  const previewStyle = geoJSON[0]?.style.border?.color
+    ? convertToGeoJsonStyle(geoJSON[0].style)
+    : { color: '#5e5e5e', opacity: 1, weight: 1, fillColor: '#000000', fillOpacity: 0.12 }
 
   React.useEffect(() => {
     if (mapRef && geoJsonLayerRef.current && isValidGeoJSON) {
@@ -73,7 +76,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
         {isValidGeoJSON ? (
           <GeoJSON
             // @ts-ignore https://github.com/cap-collectif/platform/issues/15975
-            style={convertToGeoJsonStyle(geoJSON[0].style)}
+            style={previewStyle}
             data={geoJSON[0].district}
             ref={geoJsonLayerRef}
           />

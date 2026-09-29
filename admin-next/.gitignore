@@ -15,6 +15,7 @@ __generated__/*
 .next/*
 !.next/.gitkeep
 /out/
+/public/maplibre/
 
 # production
 /build

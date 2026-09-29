@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
+    "predev": "node scripts/copy-maplibre-worker.mjs",
     "dev": "SYMFONY_REDIS_PREFIX=dev next dev -p 3000",
     "build": "next build",
     "start": "next start -p ${ADMIN_NEXT_PORT:-3000}",

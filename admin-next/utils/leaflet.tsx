@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
+import { setWorkerUrl } from 'maplibre-gl'
 import '@maplibre/maplibre-gl-leaflet'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const MAP_STYLE_URL = '/map-style.json'
+
+setWorkerUrl('/maplibre/maplibre-gl-worker.mjs')
 
 export type District = {
   id: string

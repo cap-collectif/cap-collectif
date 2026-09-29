@@ -13,6 +13,7 @@ __snapshots-diff__/*
 
 # Symfony directories
 /public/js/**
+/public/maplibre/
 !public/js/.gitkeep
 /public/images/*
 /public/assets/*

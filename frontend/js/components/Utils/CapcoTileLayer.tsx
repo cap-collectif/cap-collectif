@@ -65,7 +65,8 @@ const CapcoTileLayer = () => {
 
     const mountLayer = async () => {
       // Load maplibre only when a map is rendered to avoid inflating commons.js.
-      await import('@maplibre/maplibre-gl-leaflet')
+      const [{ setWorkerUrl }] = await Promise.all([import('maplibre-gl'), import('@maplibre/maplibre-gl-leaflet')])
+      setWorkerUrl('/maplibre/maplibre-gl-worker.mjs')
 
       if (hasUnmounted || !isMapMounted(map) || typeof L.maplibreGL !== 'function') {
         return

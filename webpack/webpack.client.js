@@ -167,6 +167,14 @@ const devConf = {
           from: path.resolve(__dirname, '../assets/js/'),
           to: path.resolve(__dirname, '../public/js/'),
         },
+        {
+          from: path.resolve(__dirname, '../node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs'),
+          to: path.resolve(__dirname, '../public/maplibre/maplibre-gl-worker.mjs'),
+        },
+        {
+          from: path.resolve(__dirname, '../node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs'),
+          to: path.resolve(__dirname, '../public/maplibre/maplibre-gl-shared.mjs'),
+        },
       ],
     }),
     new webpack.ProvidePlugin({
