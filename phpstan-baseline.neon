@@ -4392,21 +4392,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/Migrations/MigrateThemesToCategoriesCommand.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Migrations\\\\MigrationOnRealDatabasesCommand\\:\\:checkDatabase\\(\\) has parameter \\$noLimit with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Migrations/MigrationOnRealDatabasesCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Migrations\\\\MigrationOnRealDatabasesCommand\\:\\:launchCommand\\(\\) has parameter \\$command with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Migrations/MigrationOnRealDatabasesCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$command of class Symfony\\\\Component\\\\Process\\\\Process constructor expects array, Symfony\\\\Component\\\\Process\\\\Process given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Migrations/MigrationOnRealDatabasesCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ProcessingProposalCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ProcessingProposalCommand.php

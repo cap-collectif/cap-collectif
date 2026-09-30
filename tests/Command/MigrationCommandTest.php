@@ -24,6 +24,7 @@ class MigrationCommandTest extends KernelTestCase
         ]);
         $this->runCommand($application, 'doctrine:database:create');
         $this->runCommand($application, 'doctrine:migrations:migrate');
+        $this->runCommand($application, 'doctrine:schema:validate');
     }
 
     /**
@@ -32,8 +33,14 @@ class MigrationCommandTest extends KernelTestCase
     private function runCommand(Application $application, string $command, array $arguments = []): void
     {
         $tester = new CommandTester($application->find($command));
-        $tester->execute($arguments, ['interactive' => false]);
+        ob_start();
 
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode(), $tester->getDisplay());
+        try {
+            $tester->execute($arguments, ['interactive' => false]);
+        } finally {
+            $directOutput = ob_get_clean();
+        }
+
+        self::assertSame(Command::SUCCESS, $tester->getStatusCode(), $tester->getDisplay() . $directOutput);
     }
 }
