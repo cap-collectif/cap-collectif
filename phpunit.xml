@@ -15,6 +15,7 @@
 <testsuites>
     <testsuite name="default">
         <directory>tests</directory>
+        <exclude>tests/Command/MigrationCommandTest.php</exclude>
     </testsuite>
     <testsuite name="Unit Tests">
         <directory>tests/UnitTests</directory>

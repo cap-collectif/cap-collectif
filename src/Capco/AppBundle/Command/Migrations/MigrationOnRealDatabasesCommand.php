@@ -6,6 +6,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class MigrationOnRealDatabasesCommand extends Command
@@ -29,56 +31,56 @@ class MigrationOnRealDatabasesCommand extends Command
         $encodedDatabase = $database . '.gzip.enc';
         $compressedDatabase = $database . '.gz';
 
-        // decrypt
-        $this->launchCommand($wdir, [
-            'openssl',
-            'enc',
-            '-d',
-            '-aes-256-cbc',
-            '-in',
-            $encodedDatabase,
-            '-out',
-            $compressedDatabase,
-            '-k',
-            $key,
-        ]);
+        try {
+            // decrypt
+            $this->launchCommand($wdir, [
+                'openssl',
+                'enc',
+                '-d',
+                '-aes-256-cbc',
+                '-in',
+                $encodedDatabase,
+                '-out',
+                $compressedDatabase,
+                '-k',
+                $key,
+            ]);
 
-        //unzip
-        $this->launchCommand($wdir, ['gunzip', '-f', $compressedDatabase]);
+            //unzip
+            $this->launchCommand($wdir, ['gunzip', '-f', $compressedDatabase]);
 
-        //reset database schema
-        $this->launchCommand(
-            $this->projectRootDir,
-            array_merge($noLimit, ['bin/console', 'doctrine:d:drop', '--force'])
-        );
-        $this->launchCommand(
-            $this->projectRootDir,
-            array_merge($noLimit, ['bin/console', 'doctrine:d:create'])
-        );
+            //reset database schema
+            $this->launchCommand(
+                $this->projectRootDir,
+                array_merge($noLimit, ['bin/console', 'doctrine:d:drop', '--force'])
+            );
+            $this->launchCommand(
+                $this->projectRootDir,
+                array_merge($noLimit, ['bin/console', 'doctrine:d:create'])
+            );
 
-        $output->writeln('<info>Loading data...</info>');
-        $job = Process::fromShellCommandline(
-            'mysql -h database -u root symfony < ' . 'databases/' . $database
-        );
-        $job->setTimeout(3600 * 20);
-        $job->run();
-        $output->writeln('<info>Done loading data.</info>');
+            $output->writeln('<info>Loading data...</info>');
+            $job = Process::fromShellCommandline(
+                'mysql -h database -u root symfony < ' . 'databases/' . $database
+            );
+            $job->setTimeout(3600 * 20);
+            $job->mustRun();
+            $output->writeln('<info>Done loading data.</info>');
 
-        //migrate
-        $this->launchCommand(
-            $this->projectRootDir,
-            array_merge($noLimit, ['bin/console', 'doctrine:migrations:migrate'])
-        );
-        //validate
-        $this->launchCommand(
-            $this->projectRootDir,
-            array_merge($noLimit, ['bin/console', 'doctrine:schema:validate'])
-        );
-        $output->writeln('<info>Database ' . $database . ' has successfully migrated</info>');
-
-        //cleaning
-        $this->launchCommand($wdir, ['rm', '-f', $compressedDatabase]);
-        $this->launchCommand($wdir, ['rm', '-f', $database]);
+            //migrate
+            $this->launchCommand(
+                $this->projectRootDir,
+                array_merge($noLimit, ['bin/console', 'doctrine:migrations:migrate'])
+            );
+            //validate
+            $this->launchCommand(
+                $this->projectRootDir,
+                array_merge($noLimit, ['bin/console', 'doctrine:schema:validate'])
+            );
+            $output->writeln('<info>Database ' . $database . ' has successfully migrated</info>');
+        } finally {
+            (new Filesystem())->remove([$wdir . '/' . $compressedDatabase, $wdir . '/' . $database]);
+        }
     }
 
     protected function configure(): void
@@ -94,14 +96,16 @@ class MigrationOnRealDatabasesCommand extends Command
         $process->setWorkingDirectory($wdir);
 
         try {
-            $process->run();
-        } catch (\Exception) {
-            if (!$process->isSuccessful()) {
-                //cleaning to be sure no private date remain in case of error
-                throw new Process($process);
-            }
-            $this->launchCommand($wdir, ['rm', '-f', '*.gz']);
-            $this->launchCommand($wdir, ['rm', '-f', '*.sql']);
+            $process->mustRun();
+        } catch (\Exception $exception) {
+            throw new \RuntimeException(sprintf(
+                "%s failed (exit %s).\n%s\n%s%s",
+                $command[0],
+                $process->getExitCode() ?? 'unknown',
+                $exception::class,
+                $process->getOutput(),
+                $process->getErrorOutput()
+            ), 0, $exception);
         }
 
         if ($echoOutput) {
@@ -122,9 +126,15 @@ class MigrationOnRealDatabasesCommand extends Command
             foreach ($databases as $database) {
                 $this->checkDatabase($key, $database, $output, $wdir, $noLimit);
             }
-        } catch (\Exception) {
-            $this->launchCommand($wdir, ['rm', '-f', '*.gz']);
-            $this->launchCommand($wdir, ['rm', '-f', '*.sql']);
+        } catch (\Exception $exception) {
+            $output->writeln('<error>Migration check failed.</error>');
+            if ($exception instanceof ProcessFailedException) {
+                $process = $exception->getProcess();
+                $message = sprintf("SQL import failed (exit %d).\n%s%s", $process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
+            } else {
+                $message = $exception->getMessage();
+            }
+            $output->writeln(str_replace((string) $key, '[REDACTED]', $message), OutputInterface::OUTPUT_RAW);
 
             return 1;
         }
