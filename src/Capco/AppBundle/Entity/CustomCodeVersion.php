@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CustomCodeVersionRepository::class)
- * @ORM\Table(name="custom_code_version")
+ * @ORM\Table(name="custom_code_version", indexes={
+ *     @ORM\Index(name="custom_code_version_keyname_created_at_idx", columns={"keyname", "created_at"})
+ * })
  */
 class CustomCodeVersion
 {
