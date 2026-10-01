@@ -13,11 +13,14 @@ const SEVERITY_COLOR = {
   low: '\x1b[36m', // cyan
   info: '\x1b[90m', // grey
 }
-const RESET = '\x1b[0m'
+const colorsEnabled = process.stdout.isTTY
+const RESET = colorsEnabled ? '\x1b[0m' : ''
 
 const includeDeprecations = process.argv.includes('--all')
 const minSeverityArg = process.argv.find(arg => arg.startsWith('--severity='))
 const minSeverity = minSeverityArg ? minSeverityArg.split('=')[1] : null
+const onlySeverityArg = process.argv.find(arg => arg.startsWith('--only-severity='))
+const onlySeverity = onlySeverityArg ? onlySeverityArg.split('=')[1] : null
 
 const child = spawn('yarn', ['npm', 'audit', '--all', '--recursive', '--json'], {
   stdio: ['ignore', 'pipe', 'inherit'],
@@ -55,6 +58,7 @@ child.on('close', code => {
     .map(entry => entry.children && { ...entry.children, package: entry.value })
     .filter(c => c && c.Severity)
     .filter(c => includeDeprecations || c.URL)
+    .filter(c => !onlySeverity || c.Severity === onlySeverity)
     .filter(c => !minSeverity || SEVERITY_ORDER[c.Severity] <= SEVERITY_ORDER[minSeverity])
     .sort((a, b) => SEVERITY_ORDER[a.Severity] - SEVERITY_ORDER[b.Severity])
 
@@ -70,7 +74,7 @@ child.on('close', code => {
 
   console.log('Vulnerabilities found:\n')
   for (const advisory of advisories) {
-    const color = SEVERITY_COLOR[advisory.Severity] || ''
+    const color = colorsEnabled ? SEVERITY_COLOR[advisory.Severity] || '' : ''
     const severity = `${color}${advisory.Severity.toUpperCase().padEnd(8)}${RESET}`
     console.log(`${severity} ${advisory.Issue}`)
     console.log(`         package: ${advisory.package}  (vulnerable: ${advisory['Vulnerable Versions']})`)
@@ -80,7 +84,7 @@ child.on('close', code => {
 
   const summary = Object.entries(counts)
     .sort(([a], [b]) => SEVERITY_ORDER[a] - SEVERITY_ORDER[b])
-    .map(([severity, count]) => `${SEVERITY_COLOR[severity]}${count} ${severity}${RESET}`)
+    .map(([severity, count]) => `${colorsEnabled ? SEVERITY_COLOR[severity] : ''}${count} ${severity}${RESET}`)
     .join(', ')
   console.log(`Summary: ${summary}`)
 })

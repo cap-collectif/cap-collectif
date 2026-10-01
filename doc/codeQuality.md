@@ -60,14 +60,16 @@ En argument j'ai mis le chemin du fichier de config en absolut
 
 Il est possible de faire la même chose avec [prettier](https://medium.com/@dyanagi/format-with-prettier-on-save-in-intellij-based-ides-webstorm-451e0c69bab1)
 
-<div id="yarn-audit-fix">Appliquer les patches de mise à jour des dépendances</div>
+<div id="yarn-audit-fix">Appliquer les mises à jour des dépendances</div>
 ---
-Lancez `yarn audit:report` pour lister les failles connues sur les dépendances (directes et transitives), triées par sévérité. Ajoutez `--severity=high` (ou utilisez `yarn audit:report:high`) pour ne voir que les failles high et critical.
+Lancez `yarn audit:report` pour lister toutes les failles connues sur les dépendances directes et transitives, triées par sévérité. Les options `--severity=high`, `--only-severity=low` et `yarn audit:report:high` restent disponibles pour des rapports ciblés, mais ne sont pas utilisées par le contrôle mensuel.
 
-Lancez `yarn audit:fix` pour corriger automatiquement ce qui peut l'être : le script identifie les paquets vulnérables puis les re-résout dans le lockfile vers la version la plus haute autorisée par les ranges déjà déclarés (`yarn up -R`), sans toucher aux `package.json`. Seul `yarn.lock` est modifié : relisez le diff, lancez les tests, puis committez.
+Lancez `yarn audit:fix` pour corriger automatiquement ce qui peut l'être : le script identifie tous les paquets vulnérables puis les re-résout dans le lockfile vers la version la plus haute autorisée par les ranges déjà déclarés (`yarn up -R`). Les mises à jour automatiques restent limitées aux versions mineures et patch et ne touchent pas aux `package.json`. Seul `yarn.lock` est modifié : relisez le diff, lancez les tests, puis committez.
 
 Les failles qui subsistent après `yarn audit:fix` n'ont pas de version corrigée disponible dans les ranges déclarées : il faut alors monter manuellement la version dans le `package.json` du ou des paquets dépendants (le script affiche la liste des dépendants concernés).
 Pour corriger une faille sur une dépendance transitive, ajoutez une entrée dans le champ `resolutions` du `package.json` racine pour forcer une version corrigée, puis relancez `yarn install`. Pour une dépendance directe, mettez à jour sa version dans le `package.json` concerné.
+
+Le contrôle mensuel exécute un rapport complet avant et après `yarn audit:fix`. Une PR est créée depuis `preprod` uniquement si `yarn.lock` a été modifié. Si aucun changement n'est détecté, l'issue mensuelle est commentée puis clôturée automatiquement.
 
 <div id="yarn-dedupe">7 Dédupliquer les dépendances (yarn dedupe)</div>
 ---

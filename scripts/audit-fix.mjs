@@ -2,10 +2,10 @@
 // Yarn Berry has no built-in equivalent of `npm audit fix`, but it has the
 // right primitive: `yarn up -R <pkg>` re-resolves every lockfile entry for
 // that package to the highest version allowed by the ranges already declared
-// in the tree, without touching any package.json (same non-breaking guarantee
-// as `npm audit fix`). This script simply feeds it the packages flagged by
-// `yarn npm audit --all --recursive`, then re-runs the audit to list what
-// still needs a manual (potentially breaking) version bump.
+// in the tree, without touching any package.json. This limits the automatic
+// upgrade to non-breaking minor and patch versions. The script feeds it the
+// packages flagged by `yarn npm audit --all --recursive`, then re-runs the
+// audit to list what still needs a manual (potentially breaking) version bump.
 
 /* eslint-disable no-console */
 import { spawnSync } from 'node:child_process'
@@ -55,7 +55,7 @@ const packages = [...new Set(before.map(a => a.package))].sort()
 console.log(`\n${before.length} advisories affecting ${packages.length} package(s):`)
 packages.forEach(p => console.log(`  ${p}`))
 
-console.log('\nRe-resolving them within the declared ranges (yarn up -R)...\n')
+console.log('\nRe-resolving them within the declared ranges (minor and patch upgrades only)...\n')
 const up = spawnSync('yarn', ['up', '-R', ...packages], { stdio: 'inherit' })
 if (up.status !== 0) process.exit(up.status ?? 1)
 
