@@ -348,7 +348,10 @@ const MemberImageModal = ({ image }: { image: SiteImage }) => {
 
 const MemberSettingsList = () => {
   const intl = useIntl()
-  const { memberSettings, memberSettingsImages, availableLocales } = useLazyLoadQuery<MemberSettingsListQuery>(QUERY, {})
+  const { memberSettings, memberSettingsImages, availableLocales } = useLazyLoadQuery<MemberSettingsListQuery>(
+    QUERY,
+    {},
+  )
   const settings = [...memberSettings, ...memberSettingsImages]
   const multilangue = useFeatureFlag('multilangue')
   const displayedLocaleCode = formatCodeToLocale(getDisplayedLocale(availableLocales, intl.locale, multilangue).code)

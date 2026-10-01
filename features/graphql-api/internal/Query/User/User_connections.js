@@ -60,13 +60,7 @@ describe('Internal|User connection attempts', () => {
       connection: {
         connectionAttempt: {
           totalCount: 5,
-          edges: [
-            '00:01:00',
-            '00:02:00',
-            '00:03:00',
-            '00:04:00',
-            '00:05:00',
-          ].map(datetime => ({
+          edges: ['00:01:00', '00:02:00', '00:03:00', '00:04:00', '00:05:00'].map(datetime => ({
             node: {
               user: null,
               ipAddress: '192.168.64.1',

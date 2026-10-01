@@ -7,7 +7,17 @@ import type { UpdateMemberImageMutation as Mutation } from '@relay/UpdateMemberI
 const mutation = graphql`
   mutation UpdateMemberImageMutation($input: UpdateMemberImageInput!) {
     updateMemberImage(input: $input) {
-      siteImage { id isEnabled media { id name size type: contentType url(format: "default_logo") } }
+      siteImage {
+        id
+        isEnabled
+        media {
+          id
+          name
+          size
+          type: contentType
+          url(format: "default_logo")
+        }
+      }
       errorCode
     }
   }

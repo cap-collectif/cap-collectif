@@ -45,7 +45,8 @@ const DashboardContainer: FC = () => {
   })
   const { viewer } = query
   const { allProject, inProgressProjects, doneProjects } = viewer
-  const { allProjectOrganization, inProgressProjectsOrganization, doneProjectsOrganization } = viewer.organizations?.[0] || {}
+  const { allProjectOrganization, inProgressProjectsOrganization, doneProjectsOrganization } =
+    viewer.organizations?.[0] || {}
   return (
     <Layout
       navTitle={intl.formatMessage({ id: 'dashboard-platform' })}

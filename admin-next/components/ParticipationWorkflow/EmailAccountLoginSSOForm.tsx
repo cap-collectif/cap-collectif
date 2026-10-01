@@ -67,7 +67,8 @@ const EmailAccountLoginSSOForm: React.FC<Props> = ({ children, colors: colorsRef
 
   const primaryColor = colors.find(color => color.keyname === 'color.btn.primary.bg')?.value || siteColors?.primaryColor
 
-  const btnTextColor = colors.find(color => color.keyname === 'color.btn.primary.text')?.value || siteColors?.primaryLabel
+  const btnTextColor =
+    colors.find(color => color.keyname === 'color.btn.primary.text')?.value || siteColors?.primaryLabel
 
   return (
     <ModalLayout

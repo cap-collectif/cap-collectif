@@ -6,8 +6,7 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const env = process.env.CI ? 'ci' : 'local'
 
-const restoreDebateVotesFixture = () =>
-  exec(`fab ${env}.app.cmd --commandName="capco:es:populate" --environment=test`)
+const restoreDebateVotesFixture = () => exec(`fab ${env}.app.cmd --commandName="capco:es:populate" --environment=test`)
 
 // TODO: when https://github.com/cap-collectif/platform/pull/12175 will be merged, the debate votes
 // count should reflect the change because we'll add both of the anonymous votes and the

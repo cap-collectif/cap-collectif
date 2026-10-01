@@ -44,11 +44,7 @@ const NavBarQueryRender: React.FC<{ children: React.ReactNode }> = ({ children }
     <>
       <ChartModal query={query} />
       <PrivacyModal query={query} />
-      <NavBar
-        links={menuItems}
-        theme={getTheme(siteColors)}
-        logo={siteImage?.media}
-      >
+      <NavBar links={menuItems} theme={getTheme(siteColors)} logo={siteImage?.media}>
         {children}
       </NavBar>
     </>
@@ -64,11 +60,7 @@ const NavBarQuery: React.FC<{ children: React.ReactNode; SSRData?: layoutQuery$d
     <>
       <ChartModalQuery />
       <PrivacyModalQuery />
-      <NavBar
-        links={menuItems}
-        theme={getTheme(siteColors)}
-        logo={logo?.media}
-      >
+      <NavBar links={menuItems} theme={getTheme(siteColors)} logo={logo?.media}>
         {children}
       </NavBar>
     </>

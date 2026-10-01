@@ -23,7 +23,6 @@ const AddMediatorsMutation = /* GraphQL*/ `
 `
 
 describe('mutations|addMediators', () => {
-  
   it('admin add users as mediator.', async () => {
     const variables = {
       input: {

@@ -577,7 +577,9 @@ class CookieMonster {
 
     const expireIn13Months = new Date()
     expireIn13Months.setMonth(expireIn13Months.getMonth() + 13)
-    document.cookie = `locale=${encodeURIComponent(locale)}; expires=${expireIn13Months.toUTCString()}; path=/; samesite=Strict${secureAttr}`
+    document.cookie = `locale=${encodeURIComponent(
+      locale,
+    )}; expires=${expireIn13Months.toUTCString()}; path=/; samesite=Strict${secureAttr}`
   }
   getLocale = () => {
     return Cookies.getJSON('locale')

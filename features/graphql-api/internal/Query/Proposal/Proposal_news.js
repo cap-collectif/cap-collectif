@@ -79,9 +79,7 @@ const variables = { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwx' }
 
 describe('Internal|Proposal.news related content', () => {
   it('lists all related content of proposal news', async () => {
-    await expect(
-      graphql(ProposalNewsRelatedContentQuery, variables, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(ProposalNewsRelatedContentQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
   it('lists only themes related to proposal news', async () => {
@@ -89,8 +87,6 @@ describe('Internal|Proposal.news related content', () => {
   })
 
   it('lists only proposals related to proposal news', async () => {
-    await expect(
-      graphql(ProposalNewsProposalsQuery, variables, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(ProposalNewsProposalsQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()
   })
 })

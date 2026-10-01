@@ -182,11 +182,7 @@ type CustomCodeEditorProps = {
   onChange: (value: string) => void
 }
 
-export const CustomCodeEditor: FC<CustomCodeEditorProps> = ({
-  height,
-  value,
-  onChange,
-}) => {
+export const CustomCodeEditor: FC<CustomCodeEditorProps> = ({ height, value, onChange }) => {
   const intl = useIntl()
   const [, forceEditorRefresh] = useState(0)
 

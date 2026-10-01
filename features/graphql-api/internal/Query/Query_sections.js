@@ -22,8 +22,6 @@ describe('Internal|Query.sections', () => {
   })
 
   it('lists sections for a user', async () => {
-    await expect(
-      graphql(SectionsByUserQuery, { user: 'VXNlcjp1c2VyNQ==' }, 'internal'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(SectionsByUserQuery, { user: 'VXNlcjp1c2VyNQ==' }, 'internal')).resolves.toMatchSnapshot()
   })
 })

@@ -9,46 +9,48 @@ import type {
 } from '@relay/HandleProposalFormCategoryImageMutation.graphql'
 
 const mutation = graphql`
-    mutation HandleProposalFormCategoryImageMutation($input: HandleProposalFormCategoryImageInput!) {
-        handleProposalFormCategoryImage(input: $input) {
-            categoryImage {
-                id
-                image {
-                    url
-                    id
-                    name
-                    type: contentType
-                }
-            }
-            deletedCategoryImageId
+  mutation HandleProposalFormCategoryImageMutation($input: HandleProposalFormCategoryImageInput!) {
+    handleProposalFormCategoryImage(input: $input) {
+      categoryImage {
+        id
+        image {
+          url
+          id
+          name
+          type: contentType
         }
+      }
+      deletedCategoryImageId
     }
+  }
 ` as GraphQLTaggedNode
 
-const commit = (variables: HandleProposalFormCategoryImageMutation$variables): Promise<HandleProposalFormCategoryImageMutation$data> =>
+const commit = (
+  variables: HandleProposalFormCategoryImageMutation$variables,
+): Promise<HandleProposalFormCategoryImageMutation$data> =>
   commitMutation<HandleProposalFormCategoryImageMutation>(environment, {
     mutation,
     variables,
     updater: store => {
-      const root = store.getRoot();
-      const payload = store.getRootField('handleProposalFormCategoryImage');
+      const root = store.getRoot()
+      const payload = store.getRootField('handleProposalFormCategoryImage')
 
-      if (!payload) return;
+      if (!payload) return
 
-      const categoryImage = payload.getLinkedRecord('categoryImage');
-      const deletedCategoryImageId = payload.getValue('deletedCategoryImageId');
-      const categoryImages = root.getLinkedRecords('categoryImages', {isDefault: false});
+      const categoryImage = payload.getLinkedRecord('categoryImage')
+      const deletedCategoryImageId = payload.getValue('deletedCategoryImageId')
+      const categoryImages = root.getLinkedRecords('categoryImages', { isDefault: false })
 
       if (deletedCategoryImageId) {
         // delete from all categories images
-        const updatedCategoryImages = categoryImages.filter(record => record.getDataID() !== deletedCategoryImageId);
+        const updatedCategoryImages = categoryImages.filter(record => record.getDataID() !== deletedCategoryImageId)
         root.setLinkedRecords(updatedCategoryImages, 'categoryImages', { isDefault: false })
-        return;
+        return
       }
 
       const updatedCategoryImages = [...categoryImages, categoryImage]
       root.setLinkedRecords(updatedCategoryImages, 'categoryImages', { isDefault: false })
-    }
+    },
   })
 
 export default {

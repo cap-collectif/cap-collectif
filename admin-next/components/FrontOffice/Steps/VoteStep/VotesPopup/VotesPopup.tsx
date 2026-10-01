@@ -32,7 +32,8 @@ const FRAGMENT = graphql`
 const VotesPopup: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
-  const emptyVoteLabelId = step.actionButtonLabel === 'SUPPORT' ? 'front.proposal.empty-support' : 'front.proposal.empty-vote'
+  const emptyVoteLabelId =
+    step.actionButtonLabel === 'SUPPORT' ? 'front.proposal.empty-support' : 'front.proposal.empty-vote'
 
   return (
     <Flex width="100%" justifyContent="flex-start" flexDirection="column" gap="md">

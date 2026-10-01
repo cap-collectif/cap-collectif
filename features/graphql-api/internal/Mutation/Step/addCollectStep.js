@@ -76,11 +76,7 @@ describe('mutations.addCollectStepMutation', () => {
   })
 
   it('uses SSO instead of email verification when SSO bypass authentication is enabled.', async () => {
-    await graphql(
-      ToggleFeature,
-      { input: { type: 'sso_by_pass_auth', enabled: true } },
-      'internal_super_admin',
-    ) 
+    await graphql(ToggleFeature, { input: { type: 'sso_by_pass_auth', enabled: true } }, 'internal_super_admin')
 
     const response = await graphql(
       AddCollectStep,

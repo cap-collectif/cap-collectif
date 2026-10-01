@@ -20,11 +20,7 @@ const ViewerProposalDraftsQuery = /* GraphQL */ `
 describe('Internal|CollectStep.viewerProposalDrafts', () => {
   it('lists the current user draft proposals', async () => {
     await expect(
-      graphql(
-        ViewerProposalDraftsQuery,
-        { stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx' },
-        'internal_admin',
-      ),
+      graphql(ViewerProposalDraftsQuery, { stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx' }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 })

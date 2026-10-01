@@ -13,10 +13,7 @@ export type ApiFileInfo = {
 export type UploaderValue = ApiFileInfo | ApiFileInfo[] | null | undefined
 
 export interface UploaderProps
-  extends Omit<
-    CapUploaderProps,
-    'wording' | 'isInvalid' | 'isRequired' | 'onDrop' | 'onChange'
-  > {
+  extends Omit<CapUploaderProps, 'wording' | 'isInvalid' | 'isRequired' | 'onDrop' | 'onChange'> {
   onDrop?: CapUploaderProps['onDrop']
   uploadURI?: string
   onChange?: (value: UploaderValue) => void
@@ -45,10 +42,7 @@ const formatMediaSize = (size: number) => {
 export type UploaderError = string | string[] | null
 export type UploaderWarning = string | null
 
-export async function uploadFiles(
-  files: File[],
-  uploadURI: string,
-): Promise<ApiFileInfo[]> {
+export async function uploadFiles(files: File[], uploadURI: string): Promise<ApiFileInfo[]> {
   const allFilesUpload: Promise<ApiFileInfo>[] = files.map(file => {
     const formData = new FormData()
     formData.append('file', file)
@@ -85,21 +79,12 @@ const getErrorsFile = (
       const mainError = fileWithError.errors[0]
 
       if (rules?.maxSize && mainError.code === ErrorCode.FileTooLarge) {
-        return intl.formatMessage(
-          { id: 'error-image-too-big' },
-          { size: formatMediaSize(rules.maxSize) },
-        )
-      } else if (
-        rules?.format &&
-        mainError.code === ErrorCode.FileInvalidType
-      ) {
+        return intl.formatMessage({ id: 'error-image-too-big' }, { size: formatMediaSize(rules.maxSize) })
+      } else if (rules?.format && mainError.code === ErrorCode.FileInvalidType) {
         const fileExtension = fileWithError.file.type.split('/')[1]
         const fileName = fileWithError.file.name
 
-        return intl.formatMessage(
-          { id: 'error-file-not-supported' },
-          { fileName, fileExtension },
-        )
+        return intl.formatMessage({ id: 'error-file-not-supported' }, { fileName, fileExtension })
       }
 
       return ''
@@ -137,16 +122,8 @@ export const handleWarning = (
     const img = new Image()
 
     img.onload = function () {
-      if (
-        img.width &&
-        img.height &&
-        minResolution.width &&
-        minResolution.height
-      ) {
-        if (
-          img.width < minResolution.width ||
-          img.height < minResolution.height
-        )
+      if (img.width && img.height && minResolution.width && minResolution.height) {
+        if (img.width < minResolution.width || img.height < minResolution.height)
           setWarning(intl.formatMessage({ id: 'warning-image-quality' }))
       }
     }

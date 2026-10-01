@@ -67,13 +67,13 @@ const PROJECT_FRAGMENT = graphql`
         variant
         url
       }
-      ...on ProposalStep {
+      ... on ProposalStep {
         exportVotesUrls {
           variant
           url
         }
       }
-      ...on DebateStep {
+      ... on DebateStep {
         exportVotesUrls {
           variant
           url

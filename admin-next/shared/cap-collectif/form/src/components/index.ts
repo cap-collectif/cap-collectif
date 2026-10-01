@@ -4,10 +4,7 @@ export * from './fieldInput'
 export * from './address'
 
 export { default as MultipleCheckbox } from './MultipleCheckbox'
-export type {
-  MultipleCheckboxProps,
-  MultipleCheckboxValue,
-} from './MultipleCheckbox'
+export type { MultipleCheckboxProps, MultipleCheckboxValue } from './MultipleCheckbox'
 
 export { default as MultipleRadio } from './MultipleRadio'
 export type { MultipleRadioProps, MultipleRadioValue } from './MultipleRadio'

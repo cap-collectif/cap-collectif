@@ -29,7 +29,6 @@ const DENIED_ERROR_MESSAGE = 'Access denied to this field.'
 describe('mutations.askProposalRevision', () => {
   // admin
   it('admin should ask a revision on proposal.', async () => {
-
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
       {
@@ -43,10 +42,8 @@ describe('mutations.askProposalRevision', () => {
       'internal_admin',
     )
     expect(askProposalRevisionMutation).toMatchSnapshot()
-
   })
   it('admin should ask a revision on proposal,even if date expires after analyse step end.', async () => {
-
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
       {
@@ -58,29 +55,11 @@ describe('mutations.askProposalRevision', () => {
         },
       },
       'internal_admin',
-    );
-    expect(askProposalRevisionMutation).toMatchSnapshot();
-  });
-  it('should not ask if proposal has no author.', async () => {
-    await runSql('UPDATE proposal SET author_id = NULL WHERE id = "proposalIdf1"');
-    const response = await graphql(
-        AskProposalRevisionMutation,
-        {
-          input: {
-            proposalId: toGlobalId('Proposal', 'proposalIdf1'),
-            reason: 'Le champs cout est incomplet !',
-            body: 'Blablabla',
-            expiresAt: '2030-11-14 11:59:30',
-          },
-        },
-        'internal_admin',
     )
-    expect(response).toMatchSnapshot()
-    await runSql('UPDATE proposal SET author_id = "userKiroule" WHERE id = "proposalIdf1"');
-
+    expect(askProposalRevisionMutation).toMatchSnapshot()
   })
-  it('should not ask if proposal\'s author has no email.', async () => {
-    await runSql('UPDATE fos_user SET email = NULL WHERE id = "userKiroule"');
+  it('should not ask if proposal has no author.', async () => {
+    await runSql('UPDATE proposal SET author_id = NULL WHERE id = "proposalIdf1"')
     const response = await graphql(
       AskProposalRevisionMutation,
       {
@@ -94,8 +73,25 @@ describe('mutations.askProposalRevision', () => {
       'internal_admin',
     )
     expect(response).toMatchSnapshot()
-    await runSql('UPDATE fos_user SET email = "pierre@cap-collectif.com" WHERE id = "userKiroule"');
-  });
+    await runSql('UPDATE proposal SET author_id = "userKiroule" WHERE id = "proposalIdf1"')
+  })
+  it("should not ask if proposal's author has no email.", async () => {
+    await runSql('UPDATE fos_user SET email = NULL WHERE id = "userKiroule"')
+    const response = await graphql(
+      AskProposalRevisionMutation,
+      {
+        input: {
+          proposalId: toGlobalId('Proposal', 'proposalIdf1'),
+          reason: 'Le champs cout est incomplet !',
+          body: 'Blablabla',
+          expiresAt: '2030-11-14 11:59:30',
+        },
+      },
+      'internal_admin',
+    )
+    expect(response).toMatchSnapshot()
+    await runSql('UPDATE fos_user SET email = "pierre@cap-collectif.com" WHERE id = "userKiroule"')
+  })
   // user
   it('user should not ask a revision on proposal.', async () => {
     await expect(

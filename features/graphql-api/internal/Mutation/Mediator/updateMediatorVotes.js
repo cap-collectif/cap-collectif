@@ -35,8 +35,6 @@ const UpdateMediatorVotesMutation = /* GraphQL*/ `
 `
 
 describe('mutations|updateMediatorVotes', () => {
-  
-
   it('Mediator update votes participant Infos and remove one proposal.', async () => {
     const variables = {
       input: {

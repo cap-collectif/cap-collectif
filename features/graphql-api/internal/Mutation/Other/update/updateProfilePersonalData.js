@@ -27,24 +27,24 @@ const UpdateProfilePersonalDataMutation = /* GraphQL*/ `
             errorCode
         }
     }
-`;
+`
 
 const input = {
-  "firstname": "firstname",
-  "lastname": "lastname",
-  "username": "username",
-  "postalAddress": null,
-  "address": null,
-  "address2": null,
-  "city": null,
-  "zipCode": null,
-  "phone": "+33611111111",
-  "gender": null,
-  "dateOfBirth": null,
-  "birthPlace": "East blue",
-  "media": "ProfilePicAgui",
-  "consentPrivacyPolicy": true,
-};
+  firstname: 'firstname',
+  lastname: 'lastname',
+  username: 'username',
+  postalAddress: null,
+  address: null,
+  address2: null,
+  city: null,
+  zipCode: null,
+  phone: '+33611111111',
+  gender: null,
+  dateOfBirth: null,
+  birthPlace: 'East blue',
+  media: 'ProfilePicAgui',
+  consentPrivacyPolicy: true,
+}
 
 describe('mutations.updateProfilePersonalData', () => {
   it('should return PHONE_INVALID_LENGTH errorCode', async () => {
@@ -57,8 +57,8 @@ describe('mutations.updateProfilePersonalData', () => {
         },
       },
       'internal_admin',
-    );
-    expect(tooShortResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH');
+    )
+    expect(tooShortResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH')
 
     const tooLongResponse = await graphql(
       UpdateProfilePersonalDataMutation,
@@ -69,9 +69,9 @@ describe('mutations.updateProfilePersonalData', () => {
         },
       },
       'internal_admin',
-    );
-    expect(tooLongResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH');
-  });
+    )
+    expect(tooLongResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH')
+  })
   it('should return updated profile personal data', async () => {
     const updateProfilePersonalData = await graphql(
       UpdateProfilePersonalDataMutation,
@@ -81,7 +81,7 @@ describe('mutations.updateProfilePersonalData', () => {
         },
       },
       'internal_admin',
-    );
-    expect(updateProfilePersonalData).toMatchSnapshot();
-  });
-});
+    )
+    expect(updateProfilePersonalData).toMatchSnapshot()
+  })
+})

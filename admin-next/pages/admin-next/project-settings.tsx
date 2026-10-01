@@ -11,7 +11,13 @@ const ProjectSettings = () => {
 
   return (
     <Layout navTitle={intl.formatMessage({ id: 'admin.label.pages.projects' })}>
-      <Suspense fallback={<Flex alignItems="center" justifyContent="center"><Spinner size={CapUIIconSize.Xxl} color="gray.150" /></Flex>}>
+      <Suspense
+        fallback={
+          <Flex alignItems="center" justifyContent="center">
+            <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
+          </Flex>
+        }
+      >
         <ProjectSettingsList />
       </Suspense>
     </Layout>

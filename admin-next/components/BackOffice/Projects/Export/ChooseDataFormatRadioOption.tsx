@@ -51,8 +51,8 @@ const ChooseDataFormatRadioOption: FC<ChooseDataFormatRadioOptionProps> = ({
         '&:hover': {
           cursor: disabled ? 'not-allowed' : 'pointer',
         },
-        'alignItems': 'center',
-        'justifyContent': 'space-between',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       }}
       border="1px solid"
       backgroundColor={

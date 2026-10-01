@@ -65,8 +65,8 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
     step.__typename === 'CollectStep'
       ? step
       : step.__typename === 'SelectionStep'
-        ? step.project?.firstCollectStep
-        : null
+      ? step.project?.firstCollectStep
+      : null
   const viewForm = viewStep?.form ?? step.form
   const hasMapView = viewForm?.isMapViewEnabled
   const hasGridView = viewForm?.isGridViewEnabled
@@ -79,9 +79,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   const [mapShown, setIsMapShown] = useQueryState('map_shown', parseAsInteger)
   const [listView, setListView] = useQueryState('list_view', { defaultValue: defaultView })
   const [, setIsMapExpanded] = useQueryState('map_expanded', parseAsInteger)
-  const isMapShown =
-    mapShown ??
-    (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
+  const isMapShown = mapShown ?? (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
 
   const quickFilterButtons: QuickFilter[] = [
     {

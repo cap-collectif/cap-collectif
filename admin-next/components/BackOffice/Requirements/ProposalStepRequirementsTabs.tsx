@@ -23,11 +23,11 @@ const ProposalStepRequirementsTabs: React.FC<Props> = ({ proposalStep: proposalS
   const proposalStep = useFragment(COLLECT_STEP_FRAGMENT, proposalStepRef)
 
   return (
-      <FormProvider {...formMethods}>
-        <Box backgroundColor="gray.100" p={5}>
-          <Requirements requirementStep={proposalStep} />
-        </Box>
-      </FormProvider>
+    <FormProvider {...formMethods}>
+      <Box backgroundColor="gray.100" p={5}>
+        <Requirements requirementStep={proposalStep} />
+      </Box>
+    </FormProvider>
   )
 }
 

@@ -77,9 +77,7 @@ const ShortenUrlModal: React.FC<RedirectModalProps> = ({
 
   const validateSourceDomain = React.useCallback(
     (value?: string): true | string =>
-      isAllowedSourceUrl(value, allowedSourceHosts)
-        ? true
-        : intl.formatMessage({ id: 'global.invalid-url' }),
+      isAllowedSourceUrl(value, allowedSourceHosts) ? true : intl.formatMessage({ id: 'global.invalid-url' }),
     [allowedSourceHosts, intl],
   )
 
@@ -164,7 +162,10 @@ const ShortenUrlModal: React.FC<RedirectModalProps> = ({
           <Modal.Body direction="column">
             <Flex as="form" id={formId} direction="column" onSubmit={handleSubmit(values => onSubmit(values, hide))}>
               <FormControl name="longUrl" control={control} isRequired>
-                <FormLabel htmlFor="longUrl" label={intl.formatMessage({ id: 'admin.domain-url.url-management.long-url' })} />
+                <FormLabel
+                  htmlFor="longUrl"
+                  label={intl.formatMessage({ id: 'admin.domain-url.url-management.long-url' })}
+                />
                 <FieldInput
                   id="longUrl"
                   name="longUrl"
@@ -176,7 +177,10 @@ const ShortenUrlModal: React.FC<RedirectModalProps> = ({
                 />
               </FormControl>
               <FormControl name="shortUrl" control={control} isRequired>
-                <FormLabel htmlFor="shortUrl" label={intl.formatMessage({ id: 'admin.domain-url.url-management.short-url' })} />
+                <FormLabel
+                  htmlFor="shortUrl"
+                  label={intl.formatMessage({ id: 'admin.domain-url.url-management.short-url' })}
+                />
                 <FieldInput
                   id="shortUrl"
                   name="shortUrl"
@@ -190,7 +194,12 @@ const ShortenUrlModal: React.FC<RedirectModalProps> = ({
           </Modal.Body>
           <Modal.Footer spacing={2}>
             <ButtonGroup>
-              <Button variant="secondary" variantColor="hierarchy" variantSize="medium" onClick={() => closeModal(hide)}>
+              <Button
+                variant="secondary"
+                variantColor="hierarchy"
+                variantSize="medium"
+                onClick={() => closeModal(hide)}
+              >
                 {intl.formatMessage({ id: 'cancel' })}
               </Button>
               <Button

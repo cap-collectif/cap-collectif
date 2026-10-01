@@ -78,8 +78,6 @@ const input = {
 }
 
 describe('mutations.updateUserMutation', () => {
-  
-
   it('should update user', async () => {
     await expect(graphql(UpdateUserMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()
   })

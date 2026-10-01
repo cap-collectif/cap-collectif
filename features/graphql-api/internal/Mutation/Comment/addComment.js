@@ -26,7 +26,6 @@ const AddCommentMutation = /* GraphQL*/ `
 
 describe('mutations.addCommentMutation', () => {
   it('User wants to add a comment on a proposal', async () => {
-
     await expect(
       graphql(
         AddCommentMutation,
@@ -76,7 +75,6 @@ describe('mutations.addCommentMutation', () => {
   })
 
   it('User wants to comment when moderation is disabled', async () => {
-
     await expect(
       graphql(
         AddCommentMutation,

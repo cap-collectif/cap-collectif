@@ -8,9 +8,13 @@ import { useIntl } from 'react-intl'
 const MemberSettings = () => {
   const intl = useIntl()
 
-  return <Layout navTitle={intl.formatMessage({ id: 'admin.label.pages.members' })}>
-    <Suspense fallback={<Spinner m="auto" />}><MemberSettingsList /></Suspense>
-  </Layout>
+  return (
+    <Layout navTitle={intl.formatMessage({ id: 'admin.label.pages.members' })}>
+      <Suspense fallback={<Spinner m="auto" />}>
+        <MemberSettingsList />
+      </Suspense>
+    </Layout>
+  )
 }
 
 export const getServerSideProps = withPageAuthRequired

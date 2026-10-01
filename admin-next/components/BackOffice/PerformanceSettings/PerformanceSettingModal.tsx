@@ -90,7 +90,12 @@ const PerformanceSettingModal: React.FC<Props> = ({ siteParameter, disclosure })
           </Modal.Body>
           <Modal.Footer spacing={2}>
             <ButtonGroup>
-              <Button variant="secondary" variantColor="hierarchy" variantSize="medium" onClick={() => closeModal(hide)}>
+              <Button
+                variant="secondary"
+                variantColor="hierarchy"
+                variantSize="medium"
+                onClick={() => closeModal(hide)}
+              >
                 {intl.formatMessage({ id: 'global.cancel' })}
               </Button>
               <Button

@@ -38,11 +38,7 @@ const ProposalStepRequirementsQuery = /* GraphQL */ `
 describe('Internal|ProposalStep.requirements', () => {
   it('lists requirements and their viewer status', async () => {
     await expect(
-      graphql(
-        ProposalStepRequirementsQuery,
-        { proposalStepId: 'collectstepVoteClassement' },
-        'internal_user',
-      ),
+      graphql(ProposalStepRequirementsQuery, { proposalStepId: 'collectstepVoteClassement' }, 'internal_user'),
     ).resolves.toMatchSnapshot()
   })
 })

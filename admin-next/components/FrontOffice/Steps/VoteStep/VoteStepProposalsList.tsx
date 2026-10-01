@@ -83,8 +83,8 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
     data.__typename === 'CollectStep'
       ? data.mainView
       : data.__typename === 'SelectionStep'
-        ? data.project?.firstCollectStep?.mainView
-        : undefined
+      ? data.project?.firstCollectStep?.mainView
+      : undefined
   const defaultView = mainView === 'LIST' ? 'list' : 'grid'
   const [listView] = useQueryState('list_view', { defaultValue: defaultView })
   const [isMapShown] = useQueryState('map_shown')

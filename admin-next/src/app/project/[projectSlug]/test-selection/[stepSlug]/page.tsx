@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
-import { getCollectAndSelectionStepPage, getCollectAndSelectionStepPageMetadata } from '../../test-collect/[stepSlug]/page'
+import {
+  getCollectAndSelectionStepPage,
+  getCollectAndSelectionStepPageMetadata,
+} from '../../test-collect/[stepSlug]/page'
 
 type Params = { params: { stepSlug: string; projectSlug: string } }
 

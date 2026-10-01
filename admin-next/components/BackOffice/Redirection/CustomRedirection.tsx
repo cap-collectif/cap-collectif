@@ -61,10 +61,12 @@ const FRAGMENT = graphql`
 const CustomRedirection: React.FC = () => {
   const intl = useIntl()
   const queryRef = useLazyLoadQuery<CustomRedirectionQuery>(QUERY, { count: REDIRECTS_PAGINATION_COUNT })
-  const { data: query, loadNext, hasNext, isLoadingNext } = usePaginationFragment<
-    CustomRedirectionPaginationQuery,
-    CustomRedirection_query$key
-  >(FRAGMENT, queryRef)
+  const {
+    data: query,
+    loadNext,
+    hasNext,
+    isLoadingNext,
+  } = usePaginationFragment<CustomRedirectionPaginationQuery, CustomRedirection_query$key>(FRAGMENT, queryRef)
 
   const redirects = React.useMemo<RedirectRow[]>(() => {
     return (
@@ -134,7 +136,9 @@ const CustomRedirection: React.FC = () => {
       <Table emptyMessage={<Box />} width="100%">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th width="40%">{intl.formatMessage({ id: 'admin.domain-url.url-management.platform-url' })}</Table.Th>
+            <Table.Th width="40%">
+              {intl.formatMessage({ id: 'admin.domain-url.url-management.platform-url' })}
+            </Table.Th>
             <Table.Th width="35%">
               {intl.formatMessage({ id: 'admin.domain-url.url-management.destination-url' })}
             </Table.Th>

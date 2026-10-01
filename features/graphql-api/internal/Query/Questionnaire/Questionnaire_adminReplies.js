@@ -128,7 +128,9 @@ describe('Internal|Questionnaire.adminReplies', () => {
   })
 
   it('denies an organization member replies from another organization', async () => {
-    await expect(graphql(OrganizationQuestionnaireAdminRepliesQuery, undefined, 'internal_mickael')).resolves.toMatchObject({
+    await expect(
+      graphql(OrganizationQuestionnaireAdminRepliesQuery, undefined, 'internal_mickael'),
+    ).resolves.toMatchObject({
       node: null,
     })
   })

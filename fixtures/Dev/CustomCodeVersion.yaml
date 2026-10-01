@@ -14,7 +14,6 @@ Capco\AppBundle\Entity\CustomCodeVersion:
         createdByUserId: null
         createdAt: <identity((new \DateTime('2030-01-01 10:00:00')))>
 
-
     customCodeVersionMembersCurrent:
         id: 'customCodeVersionMembersCurrent'
         keyname: members.customcode

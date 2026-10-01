@@ -49,7 +49,6 @@ describe('mutations.updateAlphaProjectMutation', () => {
   })
 
   it('GraphQL admin wants to update project with votesMin greater than votesLimit', async () => {
-
     await expect(
       graphql(
         UpdateAlphaProjectMutation,
@@ -98,7 +97,6 @@ describe('mutations.updateAlphaProjectMutation', () => {
   })
 
   it('GraphQL admin wants to update project with votesMin below 1', async () => {
-
     await expect(
       graphql(
         UpdateAlphaProjectMutation,

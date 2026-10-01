@@ -26,8 +26,7 @@ const useDraggableElement = ({ id, index, type, allowedEdges, elementRef, handle
     const cleanups: Array<() => void> = [
       dropTargetForElements({
         element: el,
-        getData: ({ input }) =>
-          attachClosestEdge({ id, index }, { input, element: el, allowedEdges }),
+        getData: ({ input }) => attachClosestEdge({ id, index }, { input, element: el, allowedEdges }),
         onDragEnter: ({ self }) => setDropEdge(extractClosestEdge(self.data) as AllowedEdge),
         onDrag: ({ self }) => setDropEdge(extractClosestEdge(self.data) as AllowedEdge),
         onDragLeave: () => setDropEdge(null),

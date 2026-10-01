@@ -45,7 +45,11 @@ describe('Internal|updateNotificationSetting', () => {
     const id = await getNotificationSettingId()
 
     await expect(
-      graphql(UpdateNotificationSettingMutation, { input: { id, value: 'notifications@example.com', isEnabled: false } }, 'internal_user'),
+      graphql(
+        UpdateNotificationSettingMutation,
+        { input: { id, value: 'notifications@example.com', isEnabled: false } },
+        'internal_user',
+      ),
     ).rejects.toThrowError('Access denied to this field.')
   })
 
@@ -53,7 +57,11 @@ describe('Internal|updateNotificationSetting', () => {
     const id = await getNotificationSettingId()
 
     await expect(
-      graphql(UpdateNotificationSettingMutation, { input: { id, value: 'invalid', isEnabled: true } }, 'internal_super_admin'),
+      graphql(
+        UpdateNotificationSettingMutation,
+        { input: { id, value: 'invalid', isEnabled: true } },
+        'internal_super_admin',
+      ),
     ).resolves.toMatchSnapshot()
   })
 })

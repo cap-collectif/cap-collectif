@@ -36,7 +36,7 @@ export const RegistrationFormWrapper: React.FC<{
   children: React.ReactNode
   query: RegistrationFormWrapper_query$key
   invitationToken?: string
-  email?: string,
+  email?: string
   onSuccess?: (email: string, password: string) => void
 }> = ({ children, query: queryFragment, invitationToken, email, onSuccess }) => {
   const query = useFragment(FRAGMENT, queryFragment)

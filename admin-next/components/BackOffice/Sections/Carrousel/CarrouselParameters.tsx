@@ -10,7 +10,6 @@ import { CarrouselParameters_query$key } from '@relay/CarrouselParameters_query.
 
 export const SECTION_TITLE_MAX_LENGTH = 11
 
-
 const QUERY_FRAGMENT = graphql`
   fragment CarrouselParameters_query on Query {
     homePageSections(enabled: null) {
@@ -19,7 +18,10 @@ const QUERY_FRAGMENT = graphql`
   }
 `
 
-export const CarrouselParameters: FC<{ type: SectionType, query: CarrouselParameters_query$key }> = ({ type, query: queryRef }) => {
+export const CarrouselParameters: FC<{ type: SectionType; query: CarrouselParameters_query$key }> = ({
+  type,
+  query: queryRef,
+}) => {
   const intl = useIntl()
   const { control } = useFormContext()
   const query = useFragment(QUERY_FRAGMENT, queryRef)
@@ -33,13 +35,7 @@ export const CarrouselParameters: FC<{ type: SectionType, query: CarrouselParame
     <Flex direction="column" spacing={6} width="30%">
       <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion" position="relative">
         <Flex color="blue.500" position="absolute" right={6} top={6}>
-          <Button
-            href="/"
-            target="_blank"
-            ml={1}
-            fontWeight={600}
-            as="a"
-          >
+          <Button href="/" target="_blank" ml={1} fontWeight={600} as="a">
             {intl.formatMessage({ id: 'global.preview' })}
           </Button>
         </Flex>
@@ -63,12 +59,7 @@ export const CarrouselParameters: FC<{ type: SectionType, query: CarrouselParame
           ) : null}
           <FormControl name="position" control={control} isRequired>
             <FormLabel label={intl.formatMessage({ id: 'section-admin-display-order' })} />
-            <FieldInput
-              type="select"
-              control={control}
-              name="position"
-              options={positionOptions}
-            />
+            <FieldInput type="select" control={control} name="position" options={positionOptions} />
           </FormControl>
           <FormControl
             name="enabled"

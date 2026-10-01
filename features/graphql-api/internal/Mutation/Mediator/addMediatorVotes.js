@@ -45,7 +45,6 @@ const AddMediatorVotesMutation = /* GraphQL*/ `
 `
 
 describe('mutations|addMediatorVotes', () => {
-  
   it('Mediator add votes.', async () => {
     const variables = {
       input: {

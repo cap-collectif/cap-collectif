@@ -1,18 +1,8 @@
 /* eslint-env jest */
 
 const HomePageSectionsQuery = /* GraphQL */ `
-  query HomePageSections(
-    $enabled: Boolean
-    $first: Int
-    $after: String
-    $orderBy: HomePageSectionOrder
-  ) {
-    homePageSections(
-      enabled: $enabled
-      first: $first
-      after: $after
-      orderBy: $orderBy
-    ) {
+  query HomePageSections($enabled: Boolean, $first: Int, $after: String, $orderBy: HomePageSectionOrder) {
+    homePageSections(enabled: $enabled, first: $first, after: $after, orderBy: $orderBy) {
       totalCount
       pageInfo {
         hasPreviousPage
@@ -47,21 +37,15 @@ const HomePageSectionsQuery = /* GraphQL */ `
 
 describe('Internal|Query.homePageSections', () => {
   it('fetches all home page sections (enabled: null)', async () => {
-    await expect(
-      graphql(HomePageSectionsQuery, { enabled: null }, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(HomePageSectionsQuery, { enabled: null }, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
   it('fetches only enabled home page sections (enabled: true)', async () => {
-    await expect(
-      graphql(HomePageSectionsQuery, { enabled: true }, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(HomePageSectionsQuery, { enabled: true }, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
   it('fetches only disabled home page sections (enabled: false)', async () => {
-    await expect(
-      graphql(HomePageSectionsQuery, { enabled: false }, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(HomePageSectionsQuery, { enabled: false }, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
   it('fetches home page sections with pagination (first 3)', async () => {
@@ -71,19 +55,11 @@ describe('Internal|Query.homePageSections', () => {
   })
 
   it('fetches home page sections with pagination (next page)', async () => {
-    const firstPage = await graphql(
-      HomePageSectionsQuery,
-      { enabled: null, first: 3 },
-      'internal_admin',
-    )
+    const firstPage = await graphql(HomePageSectionsQuery, { enabled: null, first: 3 }, 'internal_admin')
     const endCursor = firstPage.homePageSections.pageInfo.endCursor
 
     await expect(
-      graphql(
-        HomePageSectionsQuery,
-        { enabled: null, first: 3, after: endCursor },
-        'internal_admin',
-      ),
+      graphql(HomePageSectionsQuery, { enabled: null, first: 3, after: endCursor }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 

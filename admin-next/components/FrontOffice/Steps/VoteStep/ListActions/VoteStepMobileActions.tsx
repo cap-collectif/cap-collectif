@@ -94,17 +94,16 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
             onButtonClick={() => handleActionClick('vote')}
           />
         )}
-        {viewForm?.isMapViewEnabled &&
-          (viewForm.isGridViewEnabled !== false || viewForm.isListViewEnabled !== false) && (
-            <StepVoteMobileActionBtn
-              icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
-              onClick={() => handleActionClick('map')}
-            >
-              {isMapVisible
-                ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
-                : intl.formatMessage({ id: 'global.card' })}
-            </StepVoteMobileActionBtn>
-          )}
+        {viewForm?.isMapViewEnabled && (viewForm.isGridViewEnabled !== false || viewForm.isListViewEnabled !== false) && (
+          <StepVoteMobileActionBtn
+            icon={isMapVisible ? CapUIIcon.Grid : CapUIIcon.PinO}
+            onClick={() => handleActionClick('map')}
+          >
+            {isMapVisible
+              ? intl.formatMessage({ id: 'step.vote.list_actions.thumbnails' })
+              : intl.formatMessage({ id: 'global.card' })}
+          </StepVoteMobileActionBtn>
+        )}
       </Flex>
     </Box>
   )

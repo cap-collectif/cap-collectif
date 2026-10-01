@@ -10,11 +10,7 @@ import type {
   ColorPickerProps,
 } from '@cap-collectif/ui'
 import type { SyntheticEvent } from 'react'
-import type {
-  Control,
-  RegisterOptions,
-  UseControllerProps,
-} from 'react-hook-form'
+import type { Control, RegisterOptions, UseControllerProps } from 'react-hook-form'
 
 import type { MultipleCheckboxProps } from '../MultipleCheckbox'
 import type { MultipleRadioProps } from '../MultipleRadio'

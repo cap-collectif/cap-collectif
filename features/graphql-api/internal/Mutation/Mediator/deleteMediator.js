@@ -10,7 +10,6 @@ const DeleteMediatorMutation = /* GraphQL*/ `
 `
 
 describe('mutations|deleteMediator', () => {
-  
   it('admin should be able to delete a mediator.', async () => {
     const variables = {
       input: {

@@ -192,7 +192,6 @@ describe('mutations.addProposalVote', () => {
   })
 
   it('Logged in API client wants to vote for proposals until his votes are taken into account', async () => {
-
     // First vote - not yet accounted (minimum not reached)
     await expect(
       graphql(

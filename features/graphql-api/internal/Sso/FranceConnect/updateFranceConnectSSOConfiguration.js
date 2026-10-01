@@ -15,7 +15,7 @@ const SelectionStepMediatorsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 
 describe('Internal|SSO.FranceConnect', () => {
   it('Admin wants to update France Connect configuration with v1', async () => {
@@ -40,8 +40,8 @@ describe('Internal|SSO.FranceConnect', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Admin wants to update France Connect configuration and turn it to production mode with v1', async () => {
     await expect(
@@ -65,8 +65,8 @@ describe('Internal|SSO.FranceConnect', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Admin wants to update France Connect configuration with v2', async () => {
     await expect(
@@ -91,8 +91,8 @@ describe('Internal|SSO.FranceConnect', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('Admin wants to update France Connect configuration and turn it to production mode', async () => {
     await expect(
@@ -117,6 +117,6 @@ describe('Internal|SSO.FranceConnect', () => {
         },
         'internal_super_admin',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

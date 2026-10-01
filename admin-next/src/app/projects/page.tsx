@@ -62,11 +62,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const requestLocale = getRequestLocale()
   const { customCode, pageTitle, body, secondaryBody, pagination } =
-    await ssrGraphqlWithLocale<pageProjectsMetadataQuery$data>(
-      METADATA_QUERY,
-      {},
-      { locale: requestLocale },
-    )
+    await ssrGraphqlWithLocale<pageProjectsMetadataQuery$data>(METADATA_QUERY, {}, { locale: requestLocale })
   const bodyValue = body?.value
   const secBodyValue = secondaryBody?.value
 

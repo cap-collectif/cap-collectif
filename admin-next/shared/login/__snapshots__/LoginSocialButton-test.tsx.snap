@@ -11,7 +11,7 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
       <div>
         <div
           buttoncolor="#fffeee"
-          class="sc-cb1ada3e-0 cyRFFJ"
+          class="sc-9a4ca058-0 fuNgOU"
           labelcolor="#fff"
           type="facebook"
         >
@@ -40,7 +40,7 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
     <div>
       <div
         buttoncolor="#fffeee"
-        class="sc-cb1ada3e-0 cyRFFJ"
+        class="sc-9a4ca058-0 fuNgOU"
         labelcolor="#fff"
         type="facebook"
       >
@@ -132,7 +132,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
           </p>
         </p>
         <div
-          class="sc-cb1ada3e-1 bbfUU"
+          class="sc-9a4ca058-1 jbcWXt"
           justifycontent="center"
         >
           <a
@@ -182,7 +182,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
         </p>
       </p>
       <div
-        class="sc-cb1ada3e-1 bbfUU"
+        class="sc-9a4ca058-1 jbcWXt"
         justifycontent="center"
       >
         <a
@@ -281,7 +281,7 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
         class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
       />
       <div
-        class="sc-cb1ada3e-2 gyHaVx"
+        class="sc-9a4ca058-2 dCKvo"
       >
         <a
           href="/login/openid?_destination=http://localhost/"
@@ -304,7 +304,7 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
       class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
     />
     <div
-      class="sc-cb1ada3e-2 gyHaVx"
+      class="sc-9a4ca058-2 dCKvo"
     >
       <a
         href="/login/openid?_destination=http://localhost/"
@@ -386,7 +386,7 @@ exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] =
       <div>
         <div
           buttoncolor="#fffeee"
-          class="sc-cb1ada3e-0 eYJPwN"
+          class="sc-9a4ca058-0 fECAmo"
           labelcolor="#fff"
           type="openId"
         >
@@ -417,7 +417,7 @@ exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] =
     <div>
       <div
         buttoncolor="#fffeee"
-        class="sc-cb1ada3e-0 eYJPwN"
+        class="sc-9a4ca058-0 fECAmo"
         labelcolor="#fff"
         type="openId"
       >

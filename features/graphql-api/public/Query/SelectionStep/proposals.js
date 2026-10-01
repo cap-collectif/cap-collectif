@@ -54,7 +54,6 @@ const ProposalsQuery = /* GraphQL */ `
 
 describe('Preview|Query.proposals connection', () => {
   it('fetches proposals order by revision asc and revision state in pending', async () => {
-
     await expect(
       graphql(
         ProposalsQuery,

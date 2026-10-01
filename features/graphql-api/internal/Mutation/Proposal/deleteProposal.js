@@ -15,7 +15,6 @@ const deleteProposalMutation = /* GraphQL */ `
 
 describe('Internal|delete proposal', () => {
   it('User GraphQL client can delete his proposal', async () => {
-
     await expect(
       graphql(
         deleteProposalMutation,

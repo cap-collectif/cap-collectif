@@ -96,8 +96,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
     const baseTitle = siteTitle?.value ?? 'Cap Collectif'
 
-    const title = messages[requestLocale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || 'fr-FR']
-      ?.charter
+    const title =
+      messages[requestLocale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || 'fr-FR']?.charter
     return {
       title: `${baseTitle}${title ? ` - ${title}` : ''}`,
     }
@@ -156,9 +156,8 @@ export default async function Page({ params }: Params) {
       { locale: requestLocale },
     )
     if (!charter?.value) return notFound()
-    const title = messages[
-      requestLocale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || Locale.frFR
-    ]?.charter
+    const title =
+      messages[requestLocale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || Locale.frFR]?.charter
 
     return (
       <main role="main" id="charter-page">

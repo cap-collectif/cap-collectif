@@ -37,8 +37,8 @@ const mutation = graphql`
         }
       }
       errors {
-          field
-          message
+        field
+        message
       }
     }
   }

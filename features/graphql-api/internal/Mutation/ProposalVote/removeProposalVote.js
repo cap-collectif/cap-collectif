@@ -57,7 +57,6 @@ describe('mutations.removeProposalVote', () => {
   })
 
   it('Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore', async () => {
-
     await expect(
       graphql(
         RemoveProposalVote,

@@ -128,9 +128,7 @@ describe('Internal|Query.node', () => {
   })
 
   it('hides restricted nodes from an anonymous user', async () => {
-    await expect(
-      graphql(RestrictedProjectQuery, RestrictedProjectVariables, 'internal'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(RestrictedProjectQuery, RestrictedProjectVariables, 'internal')).resolves.toMatchSnapshot()
   })
 
   it('hides restricted nodes from an unauthorized user', async () => {

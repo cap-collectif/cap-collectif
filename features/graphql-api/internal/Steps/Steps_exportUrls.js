@@ -1,42 +1,42 @@
 //* eslint-env jest */
 const StepQuery = /* GraphQL */ `
-    query StepQuery($id: ID!) {
-        node(id: $id) {
-            ...on Step {
-                exportContributorsUrls {
-                    variant
-                    url
-                }
-                exportContributionsUrls {
-                    variant
-                    url
-                }
-                exportGroupedUrls {
-                    variant
-                    url
-                }        
-            }
-            ...on ProposalStep {
-                exportVotesUrls {
-                    variant
-                    url
-                }
-            }
-            ...on DebateStep {
-                exportVotesUrls {
-                    variant
-                    url
-                }
-            }
+  query StepQuery($id: ID!) {
+    node(id: $id) {
+      ... on Step {
+        exportContributorsUrls {
+          variant
+          url
         }
+        exportContributionsUrls {
+          variant
+          url
+        }
+        exportGroupedUrls {
+          variant
+          url
+        }
+      }
+      ... on ProposalStep {
+        exportVotesUrls {
+          variant
+          url
+        }
+      }
+      ... on DebateStep {
+        exportVotesUrls {
+          variant
+          url
+        }
+      }
     }
-`;
+  }
+`
 
 const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
   userType: 1,
   status: null,
-};
+}
 
 describe('Internal|Step exports urls', () => {
   it('fetches export urls for DebateStep', async () => {
@@ -49,8 +49,8 @@ describe('Internal|Step exports urls', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches export urls for QuestionnaireStep', async () => {
     await expect(
       graphql(
@@ -61,8 +61,8 @@ describe('Internal|Step exports urls', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches export urls for ConsultationStep', async () => {
     await expect(
       graphql(
@@ -73,8 +73,8 @@ describe('Internal|Step exports urls', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches export urls for CollectStep', async () => {
     await expect(
       graphql(
@@ -85,8 +85,8 @@ describe('Internal|Step exports urls', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
   it('fetches export urls for SelectionStep', async () => {
     await expect(
       graphql(
@@ -97,7 +97,6 @@ describe('Internal|Step exports urls', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot();
-  });
-
-});
+    ).resolves.toMatchSnapshot()
+  })
+})

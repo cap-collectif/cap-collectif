@@ -39,8 +39,7 @@ const ChooseExportTypeModal: FC<ChooseExportTypeModalProps> = ({
     }
 
     setExportParams(previous => {
-      const hasOnlyParticipants =
-        previous.selectedData.length === 1 && previous.selectedData[0] === 'participants'
+      const hasOnlyParticipants = previous.selectedData.length === 1 && previous.selectedData[0] === 'participants'
       if (hasOnlyParticipants) {
         return previous
       }

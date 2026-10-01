@@ -30,12 +30,12 @@ const PROJECT_FRAGMENT = graphql`
         label
         __typename
         exportContributionsUrls {
-            url
-            variant
+          url
+          variant
         }
         exportContributorsUrls {
-            url
-            variant
+          url
+          variant
         }
       }
     }

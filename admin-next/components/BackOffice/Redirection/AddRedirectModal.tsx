@@ -82,9 +82,7 @@ const AddRedirectModal: React.FC<RedirectModalProps> = ({
 
   const validateSourceDomain = React.useCallback(
     (value?: string): true | string =>
-      isAllowedSourceUrl(value, allowedSourceHosts)
-        ? true
-        : intl.formatMessage({ id: 'global.invalid-url' }),
+      isAllowedSourceUrl(value, allowedSourceHosts) ? true : intl.formatMessage({ id: 'global.invalid-url' }),
     [allowedSourceHosts, intl],
   )
 
@@ -172,12 +170,7 @@ const AddRedirectModal: React.FC<RedirectModalProps> = ({
             <Heading>{intl.formatMessage({ id: 'admin.domain-url.url-management.add-redirect' })}</Heading>
           </Modal.Header>
           <Modal.Body direction="column">
-            <Flex
-              as="form"
-              id={formId}
-              direction="column"
-              onSubmit={handleSubmit(values => onSubmit(values, hide))}
-            >
+            <Flex as="form" id={formId} direction="column" onSubmit={handleSubmit(values => onSubmit(values, hide))}>
               <FormControl name="originalUrl" control={control} isRequired>
                 <FormLabel
                   htmlFor="originalUrl"
@@ -245,7 +238,12 @@ const AddRedirectModal: React.FC<RedirectModalProps> = ({
           </Modal.Body>
           <Modal.Footer spacing={2}>
             <ButtonGroup>
-              <Button variant="secondary" variantColor="hierarchy" variantSize="medium" onClick={() => closeModal(hide)}>
+              <Button
+                variant="secondary"
+                variantColor="hierarchy"
+                variantSize="medium"
+                onClick={() => closeModal(hide)}
+              >
                 {intl.formatMessage({ id: 'cancel' })}
               </Button>
               <Button

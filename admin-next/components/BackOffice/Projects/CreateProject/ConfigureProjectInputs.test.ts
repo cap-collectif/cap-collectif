@@ -32,8 +32,7 @@ const templateInputs = [
   ],
   [
     'public inquiry',
-    isSsoByPassAuthEnabled =>
-      getPublicInquiryInput({ ...baseParams, isSsoByPassAuthEnabled, visibility: 'ADMIN' }),
+    isSsoByPassAuthEnabled => getPublicInquiryInput({ ...baseParams, isSsoByPassAuthEnabled, visibility: 'ADMIN' }),
   ],
   [
     'public consultation',
@@ -43,9 +42,12 @@ const templateInputs = [
 ]
 
 describe('project template collect-step requirements', () => {
-  test.each(templateInputs)('%s uses email verification when SSO bypass authentication is disabled', (_name, getInput) => {
-    expect(getCollectStepRequirementTypes(getInput(false))).toEqual(['EMAIL_VERIFIED', 'CONSENT_PRIVACY_POLICY'])
-  })
+  test.each(templateInputs)(
+    '%s uses email verification when SSO bypass authentication is disabled',
+    (_name, getInput) => {
+      expect(getCollectStepRequirementTypes(getInput(false))).toEqual(['EMAIL_VERIFIED', 'CONSENT_PRIVACY_POLICY'])
+    },
+  )
 
   test.each(templateInputs)('%s uses SSO when SSO bypass authentication is enabled', (_name, getInput) => {
     expect(getCollectStepRequirementTypes(getInput(true))).toEqual(['SSO', 'CONSENT_PRIVACY_POLICY'])

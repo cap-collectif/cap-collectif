@@ -1,14 +1,5 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  FormGuideline,
-  Text,
-  UPLOADER_SIZE,
-  useMultiStepModal,
-} from '@cap-collectif/ui'
+import { Avatar, Box, Button, Flex, FormGuideline, Text, UPLOADER_SIZE, useMultiStepModal } from '@cap-collectif/ui'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import CookieMonster from '@shared/utils/CookieMonster'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'

@@ -38,11 +38,7 @@ const ChooseExportTypeCheckboxOption: FC<ChooseExportTypeCheckboxOptionProps> = 
           : 'inherit'
 
       case 'votes':
-        return disabled
-          ? 'neutral-gray.100'
-          : exportParams.selectedData.includes('votes')
-          ? 'primary.100'
-          : 'inherit'
+        return disabled ? 'neutral-gray.100' : exportParams.selectedData.includes('votes') ? 'primary.100' : 'inherit'
 
       case 'participants':
         return exportParams.selectedData.includes('participants') ? 'primary.100' : 'inherit'

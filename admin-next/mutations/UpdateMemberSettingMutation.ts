@@ -7,7 +7,15 @@ import type { UpdateMemberSettingMutation as Mutation } from '@relay/UpdateMembe
 const mutation = graphql`
   mutation UpdateMemberSettingMutation($input: UpdateMemberSettingInput!) {
     updateMemberSetting(input: $input) {
-      siteParameter { id value isEnabled translations { locale value } }
+      siteParameter {
+        id
+        value
+        isEnabled
+        translations {
+          locale
+          value
+        }
+      }
       errorCode
     }
   }

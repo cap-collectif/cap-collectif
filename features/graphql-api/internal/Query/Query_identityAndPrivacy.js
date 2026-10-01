@@ -278,9 +278,7 @@ describe('Internal|Query identity and privacy', () => {
   })
 
   it('denies anonymous access to another user personal data', async () => {
-    await expect(
-      rawInternalGraphql(PersonalDataQuery, { userId: toGlobalId('User', 'user5') }),
-    ).resolves.toEqual({
+    await expect(rawInternalGraphql(PersonalDataQuery, { userId: toGlobalId('User', 'user5') })).resolves.toEqual({
       data: {
         user: {
           firstname: null,
@@ -307,10 +305,14 @@ describe('Internal|Query identity and privacy', () => {
 
   it('denies a user access to another user personal data', async () => {
     await expect(
-      rawInternalGraphql(PersonalDataQuery, { userId: toGlobalId('User', 'user5') }, {
-        email: 'pierre@cap-collectif.com',
-        password: 'toto',
-      }),
+      rawInternalGraphql(
+        PersonalDataQuery,
+        { userId: toGlobalId('User', 'user5') },
+        {
+          email: 'pierre@cap-collectif.com',
+          password: 'toto',
+        },
+      ),
     ).resolves.toEqual({
       data: {
         user: {

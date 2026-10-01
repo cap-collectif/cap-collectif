@@ -41,22 +41,17 @@ const ProjectContributorsQuery = /* GraphQL */ `
 `
 
 const ProjectContributorsTotalCountQuery = /* GraphQL */ `
-  query ProjectContributors(
-    $projectId: ID!
-    $stepId: ID
-  ) {
+  query ProjectContributors($projectId: ID!, $stepId: ID) {
     project: node(id: $projectId) {
       id
       ... on Project {
-        contributors(
-          step: $stepId
-        ) {
+        contributors(step: $stepId) {
           totalCount
         }
       }
     }
   }
-`;
+`
 
 const ProjectContributorsConsentQuery = /* GraphQL */ `
   query ProjectContributors($projectId: ID!) {
@@ -83,9 +78,9 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-          "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-          "contribuableId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           isVip: true,
           userTypeId: 'VXNlclR5cGU6MQ==', // UserType:1
         },
@@ -99,9 +94,9 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-          "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-          "contribuableId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         },
         'internal_admin',
       ),
@@ -113,10 +108,10 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-          "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+          stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
           orderBy: { field: 'ACTIVITY', direction: 'DESC' },
-          "contribuableId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
         },
         'internal_admin',
       ),
@@ -142,9 +137,9 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-        "contribuableId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-        "term": 'sf',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        term: 'sf',
       },
       'internal_admin',
     )
@@ -156,12 +151,12 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-        "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-        "contribuableId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-        "isVip": true,
-        "userTypeId": 1,
-        "term": 'msantos',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        isVip: true,
+        userTypeId: 1,
+        term: 'msantos',
       },
       'internal_admin',
     )
@@ -170,8 +165,12 @@ describe('Internal.projects.contributors', () => {
   })
 
   it('fetches participant contributors that added a published completed proposal', async () => {
-    await runSql('INSERT INTO participant (id, token, firstname, lastname, email, consent_sms_communication, consent_internal_communication, consent_privacy_policy, phone_confirmed, created_at) VALUES ("participantProposalSearch", "participantProposalToken", "Proposal", "Participant", "proposal-participant@test.com", "0", "1", "0", "1", "2020-01-14 00:00:00")')
-    await runSql('UPDATE proposal SET participant_id = "participantProposalSearch", completion_status = "COMPLETED", published = 1, is_draft = 0, deleted_at = NULL WHERE id = "proposal10"')
+    await runSql(
+      'INSERT INTO participant (id, token, firstname, lastname, email, consent_sms_communication, consent_internal_communication, consent_privacy_policy, phone_confirmed, created_at) VALUES ("participantProposalSearch", "participantProposalToken", "Proposal", "Participant", "proposal-participant@test.com", "0", "1", "0", "1", "2020-01-14 00:00:00")',
+    )
+    await runSql(
+      'UPDATE proposal SET participant_id = "participantProposalSearch", completion_status = "COMPLETED", published = 1, is_draft = 0, deleted_at = NULL WHERE id = "proposal10"',
+    )
 
     try {
       const response = await graphql(
@@ -187,7 +186,9 @@ describe('Internal.projects.contributors', () => {
 
       expect(response).toMatchSnapshot()
       expect(response.project.contributors.edges[0].node.__typename).toBe('Participant')
-      expect(response.project.contributors.edges[0].node.id).toBe('UGFydGljaXBhbnQ6cGFydGljaXBhbnRQcm9wb3NhbFNlYXJjaA==')
+      expect(response.project.contributors.edges[0].node.id).toBe(
+        'UGFydGljaXBhbnQ6cGFydGljaXBhbnRQcm9wb3NhbFNlYXJjaA==',
+      )
     } finally {
       await runSql('UPDATE proposal SET participant_id = NULL WHERE id = "proposal10"')
       await runSql('DELETE FROM participant WHERE id = "participantProposalSearch"')
@@ -199,8 +200,8 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsQuery,
         {
-          "projectId": 'UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=', // Project:projectCannabis
-          "first": 5,
+          projectId: 'UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=', // Project:projectCannabis
+          first: 5,
         },
         'internal_admin',
       ),
@@ -211,10 +212,10 @@ describe('Internal.projects.contributors', () => {
     const response = await graphql(
       ProjectContributorsQuery,
       {
-        "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
-        "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-        "contribuableId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
-        "term": 'jolicode',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==', // Project:project6
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx', // CollectStep:collectstep1
+        term: 'jolicode',
       },
       'internal_user',
     )
@@ -226,41 +227,47 @@ describe('Internal.projects.contributors', () => {
       graphql(
         ProjectContributorsConsentQuery,
         {
-          "projectId": 'UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy', // Project:projectWithOwner
+          projectId: 'UHJvamVjdDpwcm9qZWN0V2l0aE93bmVy', // Project:projectWithOwner
         },
         'internal_theo',
       ),
-    ).resolves.toMatchSnapshot();
-  });
+    ).resolves.toMatchSnapshot()
+  })
 
   it('get contributors total count with participant meeting requirement', async () => {
-    await runSql('INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")')
-    await runSql('INSERT INTO participant (id, token, consent_sms_communication, consent_internal_communication, consent_privacy_policy, phone_confirmed, created_at) VALUES ("participantTest", "fakeToken1", "0", "1", "0", "1", "2020-01-14 00:00:00")')
+    await runSql(
+      'INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")',
+    )
+    await runSql(
+      'INSERT INTO participant (id, token, consent_sms_communication, consent_internal_communication, consent_privacy_policy, phone_confirmed, created_at) VALUES ("participantTest", "fakeToken1", "0", "1", "0", "1", "2020-01-14 00:00:00")',
+    )
     await runSql('UPDATE proposal SET participant_id = "participantTest" WHERE id = "proposal10"')
     const response = await graphql(
       ProjectContributorsTotalCountQuery,
       {
-        "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==',
-        "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
+    )
+    expect(response).toMatchSnapshot()
     await runSql('DELETE FROM requirement WHERE id = "requirementTest"')
     await runSql('UPDATE proposal SET participant_id = NULL WHERE id = "proposal10"')
     await runSql('DELETE FROM participant WHERE id = "participantTest"')
-  });
+  })
   it('get contributors total count without participant meeting requirement', async () => {
-    await runSql('INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")')
+    await runSql(
+      'INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")',
+    )
     const response = await graphql(
       ProjectContributorsTotalCountQuery,
       {
-        "projectId": 'UHJvamVjdDpwcm9qZWN0Ng==',
-        "stepId": 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
       },
       'internal_admin',
-    );
-    expect(response).toMatchSnapshot();
+    )
+    expect(response).toMatchSnapshot()
     await runSql('DELETE FROM requirement WHERE id = "requirementTest"')
-  });
-});
+  })
+})

@@ -17,22 +17,14 @@ export const CarrouselEmptyList: FC<{
     <Flex spacing={8}>
       <Box>
         <Heading as="h3" mb={2}>
-          {
-            title ? (
-              intl.formatMessage({ id: 'section.carousel_param' }, { title })
-            ) : (
-              intl.formatMessage({ id: 'section.carousel_param_default' })
-            )
-          }
+          {title
+            ? intl.formatMessage({ id: 'section.carousel_param' }, { title })
+            : intl.formatMessage({ id: 'section.carousel_param_default' })}
         </Heading>
         <Text mb={4} lineHeight="base" fontSize={CapUIFontSize.Headline}>
-          {
-            title ? (
-              intl.formatMessage({ id: 'section.carousel_helptext' }, { title })
-            ) : (
-              intl.formatMessage({ id: 'section.carousel_helptext_default' })
-            )
-          }
+          {title
+            ? intl.formatMessage({ id: 'section.carousel_helptext' }, { title })
+            : intl.formatMessage({ id: 'section.carousel_helptext_default' })}
         </Text>
         <CarrouselAddItemButton prepend={prepend} type={type} />
       </Box>

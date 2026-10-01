@@ -118,7 +118,7 @@ const getPublicInquiryInput = ({
           onCreate: true,
           onDelete: true,
           onUpdate: true,
-        }
+        },
       },
     ],
     project: {

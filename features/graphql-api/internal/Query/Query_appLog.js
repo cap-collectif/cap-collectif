@@ -28,7 +28,6 @@ const appLogQuery = /* GraphQL */ `
 `
 describe('Query.appLog connection', () => {
   it('fetches app logs without arguments', async () => {
-
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
   })
 
@@ -231,13 +230,7 @@ describe('Query.appLog connection', () => {
   it('fetches app logs without organizations feature flag', async () => {
     await global.disableFeatureFlag('organizations')
 
-    await expect(
-      graphql(
-        appLogQuery,
-        {},
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
 
     await global.resetFeatureFlags()
   })
@@ -245,13 +238,7 @@ describe('Query.appLog connection', () => {
   it('fetches app logs without project_admin feature flag', async () => {
     await global.disableFeatureFlag('project_admin')
 
-    await expect(
-      graphql(
-        appLogQuery,
-        {},
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
 
     await global.resetFeatureFlags()
   })
@@ -260,13 +247,7 @@ describe('Query.appLog connection', () => {
     await global.disableFeatureFlag('organizations')
     await global.disableFeatureFlag('project_admin')
 
-    await expect(
-      graphql(
-        appLogQuery,
-        {},
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
 
     await global.resetFeatureFlags()
   })

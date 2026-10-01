@@ -130,15 +130,14 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
     step.__typename === 'CollectStep'
       ? step
       : step.__typename === 'SelectionStep'
-        ? step.project?.firstCollectStep
-        : null
+      ? step.project?.firstCollectStep
+      : null
   const viewForm = viewStep?.form ?? step.form
   const mapShownByDefault = viewStep?.mapShownByDefault ?? true
   const mapExpandedByDefault = viewStep?.mainView === 'MAP'
   const [mapShown] = useQueryState('map_shown', parseAsInteger)
   const [isMapExpanded] = useQueryState('map_expanded', parseAsInteger.withDefault(mapExpandedByDefault ? 1 : 0))
-  const isMapShown =
-    mapShown ?? (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
+  const isMapShown = mapShown ?? (viewStep?.mainView === 'MAP' ? 1 : mapShownByDefault ? 1 : 0)
   // Mobile: map hidden by default, only shown when map_shown=1 explicitly in URL
   const [mobileMapShown] = useQueryState('map_shown', parseAsInteger)
 

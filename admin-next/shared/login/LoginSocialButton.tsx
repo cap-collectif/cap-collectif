@@ -210,10 +210,14 @@ export const LoginSocialButton = ({
   primaryColor,
   colorText,
   fcTitle = 'fc-title',
-  customRedirectUri
+  customRedirectUri,
 }: Props) => {
   const [isHover, seIsHover] = useState<boolean>(false)
-  const redirectUri = customRedirectUri ? customRedirectUri : switchUserMode ? `${getBaseUrl()}/sso/switch-user` : window && window.location.href
+  const redirectUri = customRedirectUri
+    ? customRedirectUri
+    : switchUserMode
+    ? `${getBaseUrl()}/sso/switch-user`
+    : window && window.location.href
   const intl = useIntl()
 
   if (text === 'grandLyonConnect') {

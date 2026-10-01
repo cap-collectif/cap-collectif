@@ -21,9 +21,7 @@ const mutation = graphql`
   }
 ` as GraphQLTaggedNode
 
-const commit = (
-  variables: UpdateSourceCategoryMutation$variables,
-): Promise<UpdateSourceCategoryMutation$data> =>
+const commit = (variables: UpdateSourceCategoryMutation$variables): Promise<UpdateSourceCategoryMutation$data> =>
   commitMutation<UpdateSourceCategoryMutation>(environment, {
     mutation,
     variables,

@@ -100,7 +100,11 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const isSupport = step.actionButtonLabel === 'SUPPORT'
   const numericDisplayCount = isRankedVote ? numericPointsCount : numericVotesCount
   const paperDisplayCount = isRankedVote ? proposal.paperVotesTotalPointsCount : proposal.paperVotesTotalCount
-  const numericLabelId = isRankedVote ? 'numeric-points-count' : isSupport ? 'numeric-supports-count' : 'numeric-votes-count'
+  const numericLabelId = isRankedVote
+    ? 'numeric-points-count'
+    : isSupport
+    ? 'numeric-supports-count'
+    : 'numeric-votes-count'
   const paperLabelId = isRankedVote ? 'paper-points-count' : isSupport ? 'paper-supports-count' : 'paper-votes-count'
   const displayedCount = isRankedVote ? pointsCount : isViewerVoteAccounted ? Math.max(votesCount, 1) : votesCount
   const hasReachedVotesLimit = step.votesLimit != null && viewerVotesCount >= step.votesLimit && !proposal.viewerHasVote

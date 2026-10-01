@@ -36,8 +36,7 @@ const PhoneConfirmationModal: React.FC = () => {
     setFocus,
   } = useFormContext()
 
-  const verifyCodeIsLoading =
-    verifyUserPhoneNumberMutation.isLoading || verifyParticipantPhoneNumberMutation.isLoading
+  const verifyCodeIsLoading = verifyUserPhoneNumberMutation.isLoading || verifyParticipantPhoneNumberMutation.isLoading
   const sendCodeIsLoading =
     sendParticipantPhoneValidationCodeMutation.isLoading || sendSmsPhoneValidationCodeMutation.isLoading
 

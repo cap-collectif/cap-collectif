@@ -88,7 +88,7 @@
         ],
         "{features/graphql-api,frontend/js}/**/*.ts": [
             "eslint --fix --report-unused-disable-directives",
-            "prettier --parser flow --write",
+            "prettier --parser typescript --write",
             "jest -c jest.config.js --bail --findRelatedTests --runInBand --coverage=false",
             "git add"
         ],

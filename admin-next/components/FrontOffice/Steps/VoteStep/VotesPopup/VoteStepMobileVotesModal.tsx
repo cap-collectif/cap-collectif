@@ -66,7 +66,9 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
           </Box>
         </Button>
       }
-      ariaLabel={intl.formatMessage({ id: isSupport ? 'proposal.step.user.supports.infos.btn.supports' : 'proposal.step.user.votes.infos.btn.votes' })}
+      ariaLabel={intl.formatMessage({
+        id: isSupport ? 'proposal.step.user.supports.infos.btn.supports' : 'proposal.step.user.votes.infos.btn.votes',
+      })}
       size={CapUIModalSize.Fullscreen}
       fullSizeOnMobile
       hideCloseButton

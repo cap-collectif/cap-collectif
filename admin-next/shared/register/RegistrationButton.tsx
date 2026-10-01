@@ -37,7 +37,7 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
   const query = useFragment(FRAGMENT, queryKey)
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
-  const [showPendingEmailConfirmation, setShowPendingEmailConfirmation] = React.useState(false);
+  const [showPendingEmailConfirmation, setShowPendingEmailConfirmation] = React.useState(false)
 
   const registration = useFeatureFlag('registration')
 
@@ -48,7 +48,12 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
   return (
     <>
       <RegistrationFormWrapper query={query} onSuccess={() => setShowPendingEmailConfirmation(true)}>
-        <RegistrationModal show={isOpen} onClose={onClose} query={query} showPendingEmailConfirmation={showPendingEmailConfirmation} />
+        <RegistrationModal
+          show={isOpen}
+          onClose={onClose}
+          query={query}
+          showPendingEmailConfirmation={showPendingEmailConfirmation}
+        />
       </RegistrationFormWrapper>
       <Button
         id="registration-button"

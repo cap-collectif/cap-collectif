@@ -70,9 +70,7 @@ const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ=='
 
 describe('Internal|Questionnaire fields', () => {
   it('returns questionnaire questions', async () => {
-    await expect(
-      graphql(QuestionnaireQuestionsQuery, { questionnaireId }, 'internal_user'),
-    ).resolves.toMatchSnapshot()
+    await expect(graphql(QuestionnaireQuestionsQuery, { questionnaireId }, 'internal_user')).resolves.toMatchSnapshot()
   })
 
   it('returns the current user replies', async () => {

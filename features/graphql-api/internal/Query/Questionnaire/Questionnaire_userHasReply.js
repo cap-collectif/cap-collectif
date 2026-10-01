@@ -1,12 +1,7 @@
 /* eslint-env jest */
 
 const QuestionnaireUserHasReplyQuery = /* GraphQL */ `
-  query QuestionnaireUserHasReplyQuery(
-    $questionnaireId: ID!
-    $loginA: String!
-    $loginB: String!
-    $loginC: String!
-  ) {
+  query QuestionnaireUserHasReplyQuery($questionnaireId: ID!, $loginA: String!, $loginB: String!, $loginC: String!) {
     questionnaire: node(id: $questionnaireId) {
       ... on Questionnaire {
         spylHasReply: userHasReply(login: $loginA)

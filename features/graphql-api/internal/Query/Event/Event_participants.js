@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 const EventParticipantsQuery = /* GraphQL */ `
-  query node ($event: ID!) {
+  query node($event: ID!) {
     event: node(id: $event) {
       ... on Event {
         participants(first: 5) {

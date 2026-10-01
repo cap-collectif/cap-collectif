@@ -11,7 +11,7 @@ import { useFormContext } from 'react-hook-form'
 type Props = {
   query: RegistrationModal_query$key
   show: boolean
-  onClose: () => void,
+  onClose: () => void
   showPendingEmailConfirmation: boolean
 }
 
@@ -36,10 +36,7 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment, showPen
 
   const intl = useIntl()
 
-
-  const {
-    getValues,
-  } = useFormContext()
+  const { getValues } = useFormContext()
   const email = getValues('email')
 
   const {
@@ -90,18 +87,14 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment, showPen
             <WYSIWYGRender value={bottomText} />
           </Box>
         )}
-        {
-          showPendingEmailConfirmation && (
-            <InfoMessage variant="warning" mt={2} id="email-confirmation-help-message">
-              <InfoMessage.Title>
-                {intl.formatMessage({ id: 'confirm-your-email' })}
-              </InfoMessage.Title>
-              <InfoMessage.Content>
-                {intl.formatMessage({ id: 'email-confirmation-help-message'}, { email })}
-              </InfoMessage.Content>
-            </InfoMessage>
-          )
-        }
+        {showPendingEmailConfirmation && (
+          <InfoMessage variant="warning" mt={2} id="email-confirmation-help-message">
+            <InfoMessage.Title>{intl.formatMessage({ id: 'confirm-your-email' })}</InfoMessage.Title>
+            <InfoMessage.Content>
+              {intl.formatMessage({ id: 'email-confirmation-help-message' }, { email })}
+            </InfoMessage.Content>
+          </InfoMessage>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -115,8 +108,7 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment, showPen
           {intl.formatMessage({ id: 'global.cancel' })}
         </Button>
 
-        <Button variant="primary" id="confirm-login" type="submit" isLoading={isSubmitting}
-                variantSize="big">
+        <Button variant="primary" id="confirm-login" type="submit" isLoading={isSubmitting} variantSize="big">
           {intl.formatMessage({ id: isSubmitting ? 'global.loading' : 'global.register' })}
         </Button>
       </Modal.Footer>
