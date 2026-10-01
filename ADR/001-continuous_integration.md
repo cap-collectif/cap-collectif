@@ -106,6 +106,15 @@ Si l'un des jobs de vérification rapide échoue, les jobs suivants ne sont pas 
 Le cache CircleCI est limité (2GB inclus par période de facturation). Éviter de stocker des artefacts volumineux inutilement.
 Afin de limiter les problèmes liés au cache et de diminuer les factures, nous avons choisi de diminuer la durée de conservation du cache.
 
+Les clés des caches de build JavaScript et des fichiers Relay sont calculées à partir des
+sources suivies par Git avant leur restauration. Les traductions téléchargées sont également
+prises en compte pour les builds. La même clé est utilisée lors de la sauvegarde : calculer
+la clé à partir des fichiers générés empêcherait sa réutilisation au run suivant.
+
+`prepare` génère les fichiers Relay seulement en l'absence d'artefacts restaurés depuis le
+cache, puis les transmet aux jobs de lint, de vérification TypeScript et de tests Jest par le
+workspace. Ces jobs ne relancent pas le compilateur Relay.
+
 ### Statut
 
 Validé
