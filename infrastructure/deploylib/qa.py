@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from fabric import Config, Connection
 from infrastructure.deploylib.environments import command
@@ -122,7 +123,10 @@ def snapshots(tags='false'):
 
 
 def restore_db():
-    command('mysql -h database -u root symfony < var/db.backup', 'application', Config.www_app, "capco", False)
+    if os.environ.get('CI_SHARED_TEST_DATA') == '1':
+        command('bash .circleci/profile-mysql-restore.sh', 'application', Config.www_app, "capco", False)
+    else:
+        command('mysql -h database -u root symfony < var/db.backup', 'application', Config.www_app, "capco", False)
 
 
 def save_db():
@@ -170,20 +174,30 @@ def save_es_snapshot():
 
 def restore_es_snapshot():
     shared = os.environ.get('CI_SHARED_TEST_DATA') == '1'
+
+    def timed_run(label, command):
+        started_at = time.time()
+        result = run(command, hide='out')
+        if shared:
+            print('CI_RESTORE_TIMING {}_ms={}'.format(
+                label, int(round((time.time() - started_at) * 1000)),
+            ))
+        return result
+
     if shared:
         repository_options = json.dumps({
             'type': 'fs',
             'settings': {'location': '/usr/share/elasticsearch/ci-snapshots', 'readonly': True},
         })
-        run(
+        timed_run(
+            'es_register_repository',
             "docker exec capco_application_1 curl -fsS -XPUT "
             "'http://elasticsearch:9200/_snapshot/repository_qa' "
             "-H 'Content-Type: application/json' --data '{}'".format(repository_options),
-            hide='out',
         )
-    snapshot = json.loads(run(
+    snapshot = json.loads(timed_run(
+        'es_read_snapshot',
         'docker exec capco_application_1 curl -fsS "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"',
-        hide='out',
     ).stdout)
     snapshot_indices = [
         index
@@ -204,31 +218,31 @@ def restore_es_snapshot():
         'feature_states': ['none'],
     })
     if shared:
-        existing_indices = json.loads(run(
+        existing_indices = json.loads(timed_run(
+            'es_list_indices',
             "docker exec capco_application_1 curl -fsS "
             "'http://elasticsearch:9200/_cat/indices?format=json&h=index'",
-            hide='out',
         ).stdout)
         for entry in existing_indices:
             index = entry['index']
             if index.startswith('capco_') or index == 'analytics_test':
-                run(
+                timed_run(
+                    'es_delete_index',
                     "docker exec capco_application_1 curl -fsS -XDELETE "
                     "'http://elasticsearch:9200/{}'".format(index),
-                    hide='out',
                 )
     else:
-        run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"', hide='out')
-    restored = json.loads(run(
+        timed_run('es_close_index', 'docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"')
+    restored = json.loads(timed_run(
+        'es_restore_snapshot',
         "docker exec capco_application_1 curl -fsS -XPOST "
         "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true' "
         "-H 'Content-type: application/json' --data '{}'".format(restore_options),
-        hide='out',
     ).stdout)
     if restored['snapshot']['shards']['failed']:
         raise RuntimeError('The Elasticsearch snapshot restoration failed.')
     if not shared:
-        run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"', hide='out')
+        timed_run('es_open_index', 'docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"')
 
     aliases = json.dumps({
         'actions': ([] if shared else [
@@ -239,9 +253,9 @@ def restore_es_snapshot():
             {'add': {'index': restored_index, 'alias': 'capco', 'is_write_index': True}},
         ],
     })
-    run(
+    timed_run(
+        'es_update_aliases',
         "docker exec capco_application_1 curl -fsS -XPOST 'http://elasticsearch:9200/_aliases' -H 'Content-Type: application/json' --data '{}'".format(aliases),
-        hide='out',
     )
 
 

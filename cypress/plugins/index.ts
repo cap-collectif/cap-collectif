@@ -30,6 +30,13 @@ const env = process.env.CI ? 'ci' : 'local'
 // a key the running app never reads, and the flag silently never appears enabled.
 const toggleEnvironment = env === 'ci' ? 'test' : 'dev'
 
+const logRestoreTimings = (output: string) => {
+  output
+    .split(/\r?\n/)
+    .filter(line => line.includes('CI_RESTORE_TIMING '))
+    .forEach(line => console.log(line.trim()))
+}
+
 type Json = Record<string, unknown>
 
 const rootDir = path.resolve('.')
@@ -92,7 +99,8 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       console.log('Restoring database…')
       console.time('restore_db')
-      const { stderr: stderrDb } = await exec(`fab ${env}.qa.restore-db`)
+      const { stdout: stdoutDb, stderr: stderrDb } = await exec(`fab ${env}.qa.restore-db`)
+      logRestoreTimings(`${stdoutDb}\n${stderrDb}`)
 
       if (stderrDb) {
         console.error(`error: ${stderrDb}`)
@@ -102,7 +110,8 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       console.log('Restoring ElasticSearch snapshot…')
       console.time('restore_es')
-      const { stderr: stderrEs } = await exec(`fab ${env}.qa.restore-es-snapshot`)
+      const { stdout: stdoutEs, stderr: stderrEs } = await exec(`fab ${env}.qa.restore-es-snapshot`)
+      logRestoreTimings(`${stdoutEs}\n${stderrEs}`)
       if (stderrEs) {
         console.error(`error: ${stderrEs}`)
       }
