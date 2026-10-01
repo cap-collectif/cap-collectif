@@ -5,6 +5,8 @@ const exec = util.promisify(require('child_process').exec)
 const env = process.env.CI ? 'ci' : 'local'
 
 module.exports = async () => {
+  if (process.env.CI_SHARED_TEST_DATA === '1') return
+
   console.log('Saving database…')
   console.time('save_db')
   const { stderrDb } = await exec('fab ' + env + '.qa.save-db')

@@ -70,3 +70,10 @@ services:
         image: circleci/redis:3
         ports:
             - '6379:6379'
+
+    elasticsearch:
+        build:
+            args:
+                ELASTICSEARCH_UID: '1001'
+        volumes:
+            - ../../var/ci-test-data/es-repository:/usr/share/elasticsearch/ci-snapshots

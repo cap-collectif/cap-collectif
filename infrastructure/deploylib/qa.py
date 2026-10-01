@@ -134,21 +134,53 @@ def purge_rabbitmq():
 
 
 def save_es_snapshot():
+    shared = os.environ.get('CI_SHARED_TEST_DATA') == '1'
+    repository_location = '/usr/share/elasticsearch/ci-snapshots' if shared else 'var'
+    repository_options = json.dumps({
+        'type': 'fs',
+        'settings': {'location': repository_location},
+    })
     snapshot_options = json.dumps({
-        'indices': 'capco',
+        'indices': 'capco_*,analytics_test' if shared else 'capco',
         'include_global_state': False,
         'feature_states': ['none'],
     })
-    run('docker exec capco_application_1 curl -i -XPOST "http://elasticsearch:9200/_snapshot/repository_qa" -H "Content-Type: application/json" --data "{\\\"type\\\":\\\"fs\\\",\\\"settings\\\":{\\\"location\\\":\\\"var\\\"}}"')
-    run('docker exec capco_application_1 curl -i -XDELETE "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"')
     run(
         "docker exec capco_application_1 curl -fsS -XPUT "
-        "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true' "
-        "-H 'Content-Type: application/json' --data '{}'".format(snapshot_options)
+        "'http://elasticsearch:9200/_snapshot/repository_qa' "
+        "-H 'Content-Type: application/json' --data '{}'".format(repository_options),
+        hide='out',
     )
+    if not shared:
+        run(
+            "docker exec capco_application_1 curl -fsS -XDELETE "
+            "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa'",
+            warn=True,
+            hide='out',
+        )
+    snapshot = json.loads(run(
+        "docker exec capco_application_1 curl -fsS -XPUT "
+        "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?wait_for_completion=true' "
+        "-H 'Content-Type: application/json' --data '{}'".format(snapshot_options),
+        hide='out',
+    ).stdout)['snapshot']
+    if snapshot['state'] != 'SUCCESS' or (shared and 'analytics_test' not in snapshot['indices']):
+        raise RuntimeError('The Elasticsearch test snapshot is incomplete.')
 
 
 def restore_es_snapshot():
+    shared = os.environ.get('CI_SHARED_TEST_DATA') == '1'
+    if shared:
+        repository_options = json.dumps({
+            'type': 'fs',
+            'settings': {'location': '/usr/share/elasticsearch/ci-snapshots', 'readonly': True},
+        })
+        run(
+            "docker exec capco_application_1 curl -fsS -XPUT "
+            "'http://elasticsearch:9200/_snapshot/repository_qa' "
+            "-H 'Content-Type: application/json' --data '{}'".format(repository_options),
+            hide='out',
+        )
     snapshot = json.loads(run(
         'docker exec capco_application_1 curl -fsS "http://elasticsearch:9200/_snapshot/repository_qa/snap_qa?pretty"',
         hide='out',
@@ -160,27 +192,49 @@ def restore_es_snapshot():
     ]
     if not snapshot_indices:
         raise RuntimeError('Could not identify the Elasticsearch index in snap_qa.')
+    if shared and 'analytics_test' not in snapshot['snapshots'][0]['indices']:
+        raise RuntimeError('The shared Elasticsearch snapshot does not contain analytics_test.')
 
     restored_index = sorted(snapshot_indices)[-1]
     restore_options = json.dumps({
-        'indices': restored_index,
-        'ignore_unavailable': True,
+        'indices': '{},analytics_test'.format(restored_index) if shared else restored_index,
+        'ignore_unavailable': not shared,
         'include_global_state': False,
+        'include_aliases': not shared,
         'feature_states': ['none'],
     })
-    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"', hide='out')
-    run(
+    if shared:
+        existing_indices = json.loads(run(
+            "docker exec capco_application_1 curl -fsS "
+            "'http://elasticsearch:9200/_cat/indices?format=json&h=index'",
+            hide='out',
+        ).stdout)
+        for entry in existing_indices:
+            index = entry['index']
+            if index.startswith('capco_') or index == 'analytics_test':
+                run(
+                    "docker exec capco_application_1 curl -fsS -XDELETE "
+                    "'http://elasticsearch:9200/{}'".format(index),
+                    hide='out',
+                )
+    else:
+        run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_close"', hide='out')
+    restored = json.loads(run(
         "docker exec capco_application_1 curl -fsS -XPOST "
         "'http://elasticsearch:9200/_snapshot/repository_qa/snap_qa/_restore?wait_for_completion=true' "
         "-H 'Content-type: application/json' --data '{}'".format(restore_options),
         hide='out',
-    )
-    run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"', hide='out')
+    ).stdout)
+    if restored['snapshot']['shards']['failed']:
+        raise RuntimeError('The Elasticsearch snapshot restoration failed.')
+    if not shared:
+        run('docker exec capco_application_1 curl -fsS -XPOST "http://elasticsearch:9200/capco/_open"', hide='out')
 
     aliases = json.dumps({
-        'actions': [
+        'actions': ([] if shared else [
             {'remove': {'index': '*', 'alias': 'capco_indexing'}},
             {'remove': {'index': '*', 'alias': 'capco'}},
+        ]) + [
             {'add': {'index': restored_index, 'alias': 'capco_indexing', 'is_write_index': True}},
             {'add': {'index': restored_index, 'alias': 'capco', 'is_write_index': True}},
         ],

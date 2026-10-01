@@ -151,6 +151,8 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     ...mailcatcherTasks,
   })
   on('before:run', async () => {
+    if (process.env.CI_SHARED_TEST_DATA === '1') return
+
     console.log('Saving database…')
     console.time('save_db')
     const { stderr: stderrDb } = await exec(`fab ${env}.qa.save-db`)

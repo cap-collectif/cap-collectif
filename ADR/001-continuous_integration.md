@@ -41,9 +41,19 @@ Le job `unit-js` utilise 5 exécuteurs. Les tests historiques de `frontend/` son
 
 Le job `phpunit-tests` utilise 2 exécuteurs et répartit les fichiers selon leurs temps d'exécution historiques. Les résultats JUnit doivent être conservés pour alimenter cette répartition et permettre de ne relancer que les tests en échec.
 
-Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et régénère une base de données complète. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût fixe, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
+Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et restaure les données de test. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût de restauration, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
 
-#### 4. Vérification de la couverture des specs Cypress
+#### 4. Données de test communes aux exécuteurs
+
+**Décision** : Le job `prepare-test-data` réinitialise MySQL et Elasticsearch une seule fois par workflow. Il transmet par le workspace CircleCI le dump MySQL, l'instantané Elasticsearch, le pipeline d'ingestion `geoip` et les médias créés par les fixtures. Les jobs Cypress, GraphQL API et PHPUnit restaurent ces données dans leur propre stack Docker, puis reconstruisent le cache Symfony `test` pour générer les proxies Doctrine dans le conteneur. Les feature flags Redis sont réinitialisés dans chaque stack ; Cypress continue à restaurer les données avant chaque suite.
+
+**Raison** : Éviter de rejouer les migrations, les fixtures et l'indexation dans chaque exécuteur tout en conservant leur isolation. Les données sont recréées à chaque workflow car certaines fixtures dépendent de la date. Un artefact manquant ou une restauration incomplète fait échouer le job.
+
+Dans l'image de test, Elasticsearch utilise l'UID 1001 et partage le GID 1000 avec l'application (UID 1000) pour accéder au dépôt d'instantanés. L'image de développement conserve l'UID Elasticsearch par défaut.
+
+Les médias des fixtures restent possédés par l'application (UID 1000) et sont accessibles en écriture au groupe de l'exécuteur CircleCI, afin que les tests GraphQL puissent créer leurs copies temporaires.
+
+#### 5. Vérification de la couverture des specs Cypress
 
 **Décision** : Un job `check-cypress-spec-coverage` s'exécute avant les jobs `e2e-*` / `api-*` (au même titre que `unit-php`, `phpunit-tests`, `lint-js`, `unit-js`, `typecheck-js`, etc.) et fait échouer la CI si un fichier de spec Cypress se trouve en dehors des dossiers `frontOffice`, `frontOfficeWorkflow` ou `backOffice` couverts par les jobs `e2e-cypress-*`.
 
@@ -51,7 +61,7 @@ Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre
 
 Voir `.circleci/check-cypress-spec-coverage.sh`. Si un nouveau dossier de premier niveau est ajouté sous `cypress/e2e`, il faut à la fois créer un job `e2e-cypress-*` dédié et l'ajouter à la liste `KNOWN_DIRS` du script.
 
-#### 5. Jobs non exécutés sur `master`
+#### 6. Jobs non exécutés sur `master`
 
 **Décision** : Certains jobs peuvent être désactivés sur `master` (ex: `typecheck-js`, `unit-js`, `unit-php`, `build-production-image`).
 
@@ -96,7 +106,9 @@ Les tests flaky (tests qui peuvent échouer et passer sur le même commit) font 
 #### Structure des workflows
 
 ```
-prepare → lint-js / unit-js / unit-php / typecheck-js / check-cypress-spec-coverage → (si succès) → e2e-* / build-*
+prepare → prepare-docker → prepare-test-data → phpunit-tests / e2e-* / api-*
+
+prepare → lint-js / unit-js / unit-php / typecheck-js / check-cypress-spec-coverage → (si succès) → e2e-* / api-* / build-*
 ```
 
 Si l'un des jobs de vérification rapide échoue, les jobs suivants ne sont pas exécutés.
