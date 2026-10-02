@@ -112,6 +112,8 @@ const FRAGMENT = graphql`
       id
       label
       __typename
+      canEdit
+      canDelete
     }
     customCode
     ...ProjectConfigFormSide_project

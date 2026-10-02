@@ -41,7 +41,13 @@ export type FormValues = {
   externalContributionsCount: number | null
   externalVotesCount: number | null
   addressText?: string | null
-  steps: Array<{ id: string; label: string; __typename: string }>
+  steps: Array<{
+    id: string
+    label: string
+    __typename: string
+    canEdit: boolean
+    canDelete: boolean
+  }>
   customCode?: string | null
   stepDisplayType: StepDisplayType
 }

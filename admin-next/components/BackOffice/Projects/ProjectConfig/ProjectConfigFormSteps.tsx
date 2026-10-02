@@ -23,7 +23,6 @@ import {
 import { useIntl } from 'react-intl'
 import DeleteModal from './DeleteModal'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { FormValues } from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.utils'
 import { StepDisplayType } from '@relay/UpdateNewProjectMutation.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
@@ -41,7 +40,6 @@ const ProjectConfigFormSteps: React.FC = () => {
   const stepDisplayType = watch('stepDisplayType')
   const [pendingMode, setPendingMode] = React.useState<StepDisplayType>(stepDisplayType)
   const stepsValues = watch('steps')
-  const { viewerSession } = useAppContext()
   const isNewProjectPage = useFeatureFlag('new_project_page')
 
   const {
@@ -60,18 +58,12 @@ const ProjectConfigFormSteps: React.FC = () => {
     move(result.source.index, result.destination.index)
   }
 
-  const hasSelectionStep = stepsValues.some(s => s.__typename === 'SelectionStep')
-
-  // Super admins can always delete collect steps
-  // Non-super admins can delete collect steps **only** if there is no selection step in the project
-  const canDeleteCollectStep = viewerSession.isSuperAdmin || !hasSelectionStep
-
   const stepsContent = steps.length ? (
     // @ts-ignore https://github.com/cap-collectif/ui/issues/367
     <DragnDrop onDragEnd={onDragEnd} ml={0}>
       <DragnDrop.List droppableId="steps">
         {steps.map((step, index) => {
-          const disableDelete = !canDeleteCollectStep && step.__typename === 'CollectStep'
+          const disableDelete = !step.canDelete
           return (
             // @ts-ignore https://github.com/cap-collectif/ui/issues/367
             <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
@@ -104,6 +96,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                     label={intl.formatMessage({
                       id: 'global.edit',
                     })}
+                    disabled={!step.canEdit}
                     onClick={() => {
                       window.location.href = `${window.location.pathname}/update-step/${getStepUri(
                         stepsValues[index].__typename,

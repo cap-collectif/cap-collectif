@@ -28,6 +28,7 @@ import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import StepDurationInput from '../Shared/StepDurationInput'
 import { useOtherStep } from './OtherStepContext'
+import { isHubDocumentsProject } from '../hubDocuments'
 
 type Props = {
   stepId: string
@@ -62,6 +63,7 @@ export const QUERY = graphql`
     step: node(id: $stepId) {
       id
       ... on OtherStep {
+        canEdit
         label
         body
         timeless
@@ -82,8 +84,10 @@ export const QUERY = graphql`
         project {
           id
           title
-          canEdit
           adminAlphaUrl
+          type {
+            slug
+          }
         }
         hubMetadata {
           enabled
@@ -116,6 +120,10 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const isEditing = operationType === 'EDIT'
   const newProjectPage = useFeatureFlag('new_project_page')
   const hubApiGreen = useFeatureFlag('hub_api_green')
+  const isHubDocumentsProjectStep = hubApiGreen && isHubDocumentsProject(project.type?.slug)
+  const isHubAssociationEnabled = isHubDocumentsProjectStep && step.hubMetadata?.enabled === true
+  const showAdvancedEditor = !isHubAssociationEnabled
+  const disableEditor = isHubAssociationEnabled
 
   const createStepLink = `/admin-next/project/${project.id}/create-step`
   const getBreadCrumbItems = () => {
@@ -171,7 +179,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             url: step.cover.url,
           }
         : null,
-      hubMetadata: hubApiGreen
+      hubMetadata: isHubDocumentsProjectStep
         ? {
             enabled: step.hubMetadata?.enabled ?? false,
             aiotCode: step.hubMetadata?.aiotCode ?? '',
@@ -192,14 +200,18 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
-    delete values.stepDurationType
-
-    if (!hubApiGreen) {
-      delete values.hubMetadata
-    }
+    const hubMetadata = isHubDocumentsProjectStep
+      ? {
+          enabled: values.hubMetadata?.enabled ?? false,
+          aiotCode: values.hubMetadata?.aiotCode ?? '',
+          folderNumber: values.hubMetadata?.folderNumber ?? '',
+          contactEmail: values.hubMetadata?.contactEmail ?? '',
+        }
+      : undefined
 
     const input = {
       ...values,
+      hubMetadata,
       stepId,
       cover: (values.cover as any)?.id ?? null,
       operationType: operationType === LogActionTypeEnum.CREATE ? LogActionTypeEnum.CREATE : LogActionTypeEnum.EDIT,
@@ -207,6 +219,10 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       timeless,
       endAt: timeless ? null : values?.endAt,
       startAt: timeless ? null : values?.startAt,
+    }
+    delete input.stepDurationType
+    if (!isHubDocumentsProjectStep) {
+      delete input.hubMetadata
     }
 
     try {
@@ -229,7 +245,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     }
   }
 
-  if (!project.canEdit) {
+  if (!step.canEdit) {
     window.location.href = '/admin-next/projects'
     return null
   }
@@ -269,6 +285,8 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 name="body"
                 label={intl.formatMessage({ id: 'step-description' })}
                 platformLanguage={defaultLocale?.code}
+                disabled={disableEditor}
+                advancedEditor={showAdvancedEditor}
                 selectedLanguage="fr"
                 buttonLabels={{
                   submit: isEditing
@@ -285,7 +303,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               required: false,
             }}
           />
-          {hubApiGreen && (
+          {isHubDocumentsProjectStep && (
             <Box mt={6} mb={6}>
               <Flex justify="space-between" alignItems="center" mb={hubAssociationEnabled ? 4 : 0}>
                 <Text fontWeight={600} color="blue.800">

@@ -9,9 +9,10 @@ use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepAccessResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Logger\ActionLogger;
-use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +21,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateOtherStepMutation implements MutationInterface
 {
@@ -29,13 +29,14 @@ class UpdateOtherStepMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
-        private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
         private readonly ActionLogger $actionLogger,
         private readonly HubApiGreenClient $hubApiGreenClient,
         private readonly Manager $toggleManager,
-        private readonly ProjectUrlResolver $projectUrlResolver
+        private readonly ProjectUrlResolver $projectUrlResolver,
+        private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
+        private readonly StepAccessResolver $stepAccessResolver
     ) {
     }
 
@@ -45,6 +46,9 @@ class UpdateOtherStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
 
         $step = $this->getStep($data['stepId'], $viewer);
+        if ($this->hubDocumentsStepGuard->isProtectedDocumentsStep($step)) {
+            unset($data['body']);
+        }
         $step->setTitle('');
 
         $operationType = $data['operationType'];
@@ -109,9 +113,8 @@ class UpdateOtherStepMutation implements MutationInterface
             return false;
         }
         $step = $this->getStep($stepId, $viewer);
-        $project = $step->getProject();
 
-        return $this->authorizationChecker->isGranted(ProjectVoter::EDIT, $project);
+        return $this->stepAccessResolver->canEdit($step, $viewer);
     }
 
     private function getStep(string $stepId, User $viewer): OtherStep

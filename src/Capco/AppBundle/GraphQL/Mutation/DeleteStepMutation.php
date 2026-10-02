@@ -9,15 +9,14 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepAccessResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Logger\ActionLogger;
-use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteStepMutation implements MutationInterface
 {
@@ -26,8 +25,8 @@ class DeleteStepMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
-        private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly ActionLogger $actionLogger
+        private readonly ActionLogger $actionLogger,
+        private readonly StepAccessResolver $stepAccessResolver
     ) {
     }
 
@@ -62,9 +61,8 @@ class DeleteStepMutation implements MutationInterface
             return false;
         }
         $step = $this->getStep($stepId, $viewer);
-        $project = $step->getProject();
 
-        return $this->authorizationChecker->isGranted(ProjectVoter::DELETE, $project);
+        return $this->stepAccessResolver->canDelete($step, $viewer);
     }
 
     private function getStep(string $stepId, User $viewer): AbstractStep

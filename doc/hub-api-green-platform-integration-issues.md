@@ -192,19 +192,22 @@ JSON restent la référence à valider avec le Hub.
 
 ## Interface d'association d'un dossier Hub
 
-Toutes les étapes personnalisées (`OtherStep`) peuvent porter les métadonnées
-Hub suivantes : `aiotCode`, `folderNumber` et `contactEmail`. Elles sont
+Les métadonnées Hub suivantes peuvent être associées à une étape personnalisée
+(`OtherStep`) : `aiotCode`, `folderNumber` et `contactEmail`. Elles sont
 stockées dans `hub_metadata`, avec le booléen `enabled` (faux par défaut).
 
-Lorsque le feature flag `hub_api_green` est actif, le BO affiche sur l'étape un
-toggle « Association avec le Hub API Green ». Les trois champs sont affichés
-et deviennent obligatoires uniquement lorsque le toggle est activé. Leur
-validation inclut le format de l'adresse e-mail.
+Lorsque le feature flag `hub_api_green` est actif, le BO affiche le toggle
+« Association avec le Hub API Green » uniquement sur l'étape Documents créée
+avec les templates concernés. Les trois champs sont affichés et deviennent
+obligatoires uniquement lorsque le toggle est activé. Leur validation inclut le
+format de l'adresse e-mail.
 
 Lors de la création d'un projet à partir des templates `public-inquiry` ou
-`public-consultation`, le toggle est activé par défaut sur l'étape Documents.
-Les projets existants ne sont pas activés par la migration : la colonne est
-ajoutée avec une valeur par défaut à `false`.
+`public-consultation`, trois étapes sont créées et le toggle est activé par
+défaut sur la première, Documents. Cette étape ne peut pas être supprimée,
+mais son libellé et sa position restent modifiables. Son contenu est verrouillé
+dans le BO et ne peut être modifié que par la synchronisation Hub API Green.
+Les autres étapes restent supprimables et ne proposent pas ce toggle.
 
 Les credentials Hub sont résolus dans 1Password à partir de l'item dont le
 nom est `SYMFONY_INSTANCE_NAME`. Platform appelle le Hub uniquement lorsque le

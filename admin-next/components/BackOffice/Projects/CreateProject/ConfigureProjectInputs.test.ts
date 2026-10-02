@@ -21,6 +21,8 @@ const getCollectStepRequirementTypes = input =>
 const getDocumentsStepHubMetadataEnabled = input =>
   input.project.steps.find(step => step.type === 'OTHER' && step.timeless)?.hubMetadata?.enabled
 
+const getVisibleTemplateSteps = input => input.project.steps.filter(step => step.type !== 'PRESENTATION')
+
 const templateInputs = [
   [
     'participatory budget',
@@ -59,10 +61,10 @@ describe('Hub API Green project templates', () => {
     ['public inquiry', getPublicInquiryInput],
     ['public consultation', getPublicConsultationInput],
   ])('%s enables Hub API Green on the documents step', (_name, getInput) => {
-    expect(
-      getDocumentsStepHubMetadataEnabled(
-        getInput({ ...baseParams, isSsoByPassAuthEnabled: false, visibility: 'ADMIN' }),
-      ),
-    ).toBe(true)
+    const input = getInput({ ...baseParams, isSsoByPassAuthEnabled: false, visibility: 'ADMIN' })
+
+    expect(getDocumentsStepHubMetadataEnabled(input)).toBe(true)
+    expect(input.project.steps.filter(step => step.hubMetadata)).toHaveLength(1)
+    expect(getVisibleTemplateSteps(input)).toHaveLength(3)
   })
 })

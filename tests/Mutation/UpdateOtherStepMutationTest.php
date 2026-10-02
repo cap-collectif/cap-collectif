@@ -11,7 +11,9 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateOtherStepMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepAccessResolver;
 use Capco\AppBundle\Logger\ActionLogger;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +23,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @internal
@@ -223,18 +224,21 @@ class UpdateOtherStepMutationTest extends TestCase
         ?ActionLogger $actionLogger = null,
         ?HubApiGreenClient $hubApiGreenClient = null,
         ?Manager $toggleManager = null,
-        ?ProjectUrlResolver $projectUrlResolver = null
+        ?ProjectUrlResolver $projectUrlResolver = null,
+        ?HubDocumentsStepGuard $hubDocumentsStepGuard = null,
+        ?StepAccessResolver $stepAccessResolver = null
     ): UpdateOtherStepMutation {
         return new UpdateOtherStepMutation(
             $globalIdResolver ?? $this->createMock(GlobalIdResolver::class),
             $entityManager ?? $this->createMock(EntityManagerInterface::class),
-            $this->createMock(AuthorizationCheckerInterface::class),
             $formFactory ?? $this->createMock(FormFactoryInterface::class),
             $logger ?? $this->createMock(LoggerInterface::class),
             $actionLogger ?? $this->createMock(ActionLogger::class),
             $hubApiGreenClient ?? $this->createMock(HubApiGreenClient::class),
             $toggleManager ?? $this->createMock(Manager::class),
-            $projectUrlResolver ?? $this->createMock(ProjectUrlResolver::class)
+            $projectUrlResolver ?? $this->createMock(ProjectUrlResolver::class),
+            $hubDocumentsStepGuard ?? $this->createMock(HubDocumentsStepGuard::class),
+            $stepAccessResolver ?? $this->createMock(StepAccessResolver::class)
         );
     }
 }

@@ -33,6 +33,14 @@ InternalStep:
             enabled:
                 description: 'Is the step enabled or not'
                 type: 'Boolean!'
+            canEdit:
+                description: 'Whether or not the logged in user can edit the step.'
+                type: 'Boolean!'
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAccessResolver").canEdit(value, getUser())'
+            canDelete:
+                description: 'Whether or not the logged in user can delete the step.'
+                type: 'Boolean!'
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAccessResolver").canDelete(value, getUser())'
             label:
                 description: 'The label of the step'
                 type: 'String!'
