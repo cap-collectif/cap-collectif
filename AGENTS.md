@@ -48,6 +48,8 @@ See `docs/agents/domain.md`.
 | `001-git.md` | Git workflow and branching strategy |
 | `001-preprod_deployment_process.md` | Deployment process to preprod |
 | `001-frontend_tests.md` | Frontend testing strategy |
+| `001-phpunit_tests.md` | PHPUnit testing decision; topic guides indexed in `docs/tests/README.md` |
+| `001-jest_tests.md` | Jest testing decision (frontend, admin-next, GraphQL API); topic guides indexed in `docs/tests/README.md` |
 | `001-frontend_packages_management.md` | Package management for frontend |
 | `001-custom_code.md` | Custom code guidelines |
 | `001-translation_keys_naming_convention.md` | Translation key naming conventions |
@@ -55,6 +57,7 @@ See `docs/agents/domain.md`.
 | `001-admin_next_authorization_errors.md` | admin-next 403/access-denied handling for auth/role failures |
 
 Each ADR contains: Context, Decision, Alternatives considered, and Consequences. Templates in `ADR/adr-docs/`.
+For test implementation instructions, use `docs/tests/README.md` to select the relevant topic guides.
 
 ## Project Overview
 
