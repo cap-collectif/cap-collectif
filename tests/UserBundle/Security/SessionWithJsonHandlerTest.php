@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
- * @covers \Capco\UserBundle\Security\SessionWithJsonHandler::read
+ * @coversNothing
  */
 class SessionWithJsonHandlerTest extends TestCase
 {

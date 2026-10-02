@@ -11,9 +11,8 @@ use Capco\AppBundle\Service\ParticipantHelper;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Capco\AppBundle\Service\ParticipantAccessResolver
- *
  * @internal
+ * @coversNothing
  */
 class ParticipantAccessResolverTest extends TestCase
 {

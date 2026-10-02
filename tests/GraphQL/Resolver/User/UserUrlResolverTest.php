@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @internal
- * @covers \Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver
+ * @coversNothing
  */
 class UserUrlResolverTest extends TestCase
 {

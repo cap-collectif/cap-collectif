@@ -53,8 +53,6 @@ final class FranceConnectOptionsModifierTest extends TestCase
     }
 
     /**
-     * @covers \FranceConnectOptionsModifier::getAllowedData
-     *
      * @throws MockException
      */
     public function testGetAllowedData(): void
@@ -77,8 +75,6 @@ final class FranceConnectOptionsModifierTest extends TestCase
     }
 
     /**
-     * @covers \FranceConnectOptionsModifier::getAllowedData
-     *
      * @throws MockException
      */
     public function testDidntGetAllowedData(): void
@@ -89,8 +85,6 @@ final class FranceConnectOptionsModifierTest extends TestCase
     }
 
     /**
-     * @covers \FranceConnectOptionsModifier::modifyOptions
-     *
      * @throws MockException
      */
     public function testModifiesOptionsBeforeGoingToFranceconnect(): void
@@ -142,8 +136,6 @@ final class FranceConnectOptionsModifierTest extends TestCase
     }
 
     /**
-     * @covers \FranceConnectOptionsModifier::modifyOptions
-     *
      * @throws MockException
      */
     public function testModifiesOptionsWhenComingBackFromFranceconnect(): void

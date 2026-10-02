@@ -15,9 +15,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * @internal
- * @covers \FranceConnectLogoutSubscriber
  *
- * @uses \FranceConnectLogoutHandler::clearFranceConnectSession
+ * @coversNothing
  */
 class FranceConnectLogoutSubscriberTest extends TestCase
 {
@@ -36,9 +35,6 @@ class FranceConnectLogoutSubscriberTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Capco\AppBundle\EventListener\FranceConnectLogoutSubscriber::onKernelRequest
-     */
     public function testItRedirectsToFranceConnectLogoutWhenImmediateLogoutIsRequired(): void
     {
         $request = Request::create('https://capco.dev/profile/edit-profile#account');

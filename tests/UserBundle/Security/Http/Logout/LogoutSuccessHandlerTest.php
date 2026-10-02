@@ -17,9 +17,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class LogoutSuccessHandlerTest extends TestCase
 {
-    /**
-     * @covers \LogoutSuccessHandler::setOauthTokenFromSession()
-     */
     public function testUnserializeMaliciousContent(): void
     {
         $this->expectExceptionMessage('Given content is not unserializable.');

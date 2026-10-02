@@ -13,9 +13,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
- * @covers
- *
  * @internal
+ * @coversNothing
  */
 class MaxFolderSizeValidatorTest extends TestCase
 {
@@ -45,9 +44,6 @@ class MaxFolderSizeValidatorTest extends TestCase
         yield [new \stdClass()];
     }
 
-    /**
-     * @covers
-     */
     public function testValidateWithUploadedFileAndFolderSizeUnderLimit(): void
     {
         $maxFolderSizeValidator = $this->init();
@@ -67,9 +63,6 @@ class MaxFolderSizeValidatorTest extends TestCase
         $maxFolderSizeValidator->validate($this->getUploadedFile(), $this->constraint);
     }
 
-    /**
-     * @covers
-     */
     public function testValidateWithUploadedFileAndFolderSizeOverLimit(): void
     {
         $maxFolderSizeValidator = $this->init();
@@ -102,9 +95,6 @@ class MaxFolderSizeValidatorTest extends TestCase
         $maxFolderSizeValidator->validate($this->getUploadedFile(), $this->constraint);
     }
 
-    /**
-     * @covers
-     */
     public function testValidateWithEmptyFolder(): void
     {
         $maxFolderSizeValidator = $this->init();
@@ -147,9 +137,6 @@ class MaxFolderSizeValidatorTest extends TestCase
         $maxFolderSizeValidator->validate($this->getUploadedFile(), $this->constraint);
     }
 
-    /**
-     * @covers
-     */
     public function testValidateWithMultipleSmallFiles(): void
     {
         $maxFolderSizeValidator = $this->init();
@@ -170,9 +157,6 @@ class MaxFolderSizeValidatorTest extends TestCase
         $maxFolderSizeValidator->validate($this->getUploadedFile(), $this->constraint);
     }
 
-    /**
-     * @covers
-     */
     public function testValidateWithZeroSizeFiles(): void
     {
         $maxFolderSizeValidator = $this->init();

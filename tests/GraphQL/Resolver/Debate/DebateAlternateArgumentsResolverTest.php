@@ -13,9 +13,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DebateAlternateArgumentsResolverTest extends TestCase
 {
-    /**
-     * @covers \DebateAlternateArgumentsResolver::decodeCursor()
-     */
     public function testUnserializeMaliciousContent(): void
     {
         $this->expectExceptionMessage('Given content is not unserializable.');

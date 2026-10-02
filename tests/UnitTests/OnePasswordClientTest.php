@@ -10,9 +10,8 @@ use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
 /**
- * @covers \Capco\AppBundle\Client\OnePasswordClient
- *
  * @internal
+ * @coversNothing
  */
 final class OnePasswordClientTest extends TestCase
 {

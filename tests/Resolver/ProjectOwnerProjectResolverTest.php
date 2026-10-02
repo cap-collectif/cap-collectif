@@ -11,9 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers
- *
  * @internal
+ * @coversNothing
  */
 class ProjectOwnerProjectResolverTest extends TestCase
 {

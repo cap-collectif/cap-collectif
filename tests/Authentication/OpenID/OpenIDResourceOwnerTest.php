@@ -76,9 +76,6 @@ final class OpenIDResourceOwnerTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
-     */
     public function testGetUserInformationCompletesMissingClaimsWithIdTokenPayload(): void
     {
         $this->httpClientMock->expects($this->never())->method('sendRequest');
@@ -103,9 +100,6 @@ final class OpenIDResourceOwnerTest extends TestCase
         self::assertSame('jean.michel+other@ca-ts.fr', $userInformation->getData()['other email']);
     }
 
-    /**
-     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
-     */
     public function testGetUserInformationCompletesMissingClaimsWithIdTokenOutsideCatp(): void
     {
         $resourceOwner = $this->createOpenIDResourceOwner('capco');
@@ -130,9 +124,6 @@ final class OpenIDResourceOwnerTest extends TestCase
         self::assertSame('jean.michel+other@ca-ts.fr', $userInformation->getData()['other email']);
     }
 
-    /**
-     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
-     */
     public function testGetUserInformationUsesIdTokenWhenAccessTokenIsOpaque(): void
     {
         $this->httpClientMock->expects($this->never())->method('sendRequest');
@@ -151,9 +142,6 @@ final class OpenIDResourceOwnerTest extends TestCase
         self::assertSame($idToken, $userInformation->getAccessToken());
     }
 
-    /**
-     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
-     */
     public function testGetUserInformationUsesAccessTokenWhenIdTokenIsMissing(): void
     {
         $this->httpClientMock->expects($this->never())->method('sendRequest');
@@ -172,9 +160,6 @@ final class OpenIDResourceOwnerTest extends TestCase
         self::assertSame($accessToken, $userInformation->getAccessToken());
     }
 
-    /**
-     * @covers \Capco\UserBundle\OpenID\OpenIDResourceOwner::getUserInformation
-     */
     public function testGetUserInformationFallsBackToUserInfoWhenNoTokenPayloadCanBeDecoded(): void
     {
         $responseMock = $this->createMock(ResponseInterface::class);

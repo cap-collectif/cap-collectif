@@ -94,17 +94,11 @@ final class FranceConnectResourceOwnerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \FranceConnectResourceOwner::__construct
-     */
     public function testInitializable(): void
     {
         $this->assertInstanceOf(FranceConnectResourceOwner::class, $this->franceConnectResourceOwner);
     }
 
-    /**
-     * @covers \FranceConnectResourceOwner::getScope
-     */
     public function testUsesConfiguredScope(): void
     {
         $this->optionsModifierMock->expects($this->once())->method('getAllowedData')->willReturn(['given_name', 'family_name', 'birthplace']);
@@ -115,9 +109,6 @@ final class FranceConnectResourceOwnerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \FranceConnectResourceOwner::getAuthorizationUrl
-     */
     public function testGeneratesNonceIfItIsNotFoundInStorage(): void
     {
         $this->featureCheckerMock->expects($this->once())->method('isServiceEnabled')->with('franceconnect')->willReturn(true);
@@ -132,9 +123,6 @@ final class FranceConnectResourceOwnerTest extends TestCase
         );
     }
 
-    /**
-     * @covers \FranceConnectResourceOwner::getUserInformation
-     */
     public function testGetUserInformationV2(): void
     {
         $fcConfiguration = new FranceConnectSSOConfiguration();
@@ -177,9 +165,6 @@ final class FranceConnectResourceOwnerTest extends TestCase
         self::assertEquals([], $userInformation->getData());
     }
 
-    /**
-     * @covers \Capco\UserBundle\FranceConnect\FranceConnectResourceOwner::checkSignature
-     */
     public function testCheckSignatureConvertsUnexpectedJwtErrorsToAuthenticationException(): void
     {
         $fcConfiguration = new FranceConnectSSOConfiguration();

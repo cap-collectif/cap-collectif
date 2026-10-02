@@ -105,9 +105,6 @@ final class OauthUserProviderTest extends TestCase
         $this->oauthUserProvider = $this->createOauthUserProvider();
     }
 
-    /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     */
     public function testLoadsNewOpenidUser(): void
     {
         $responseMock = $this->responseMock;
@@ -140,8 +137,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsNewOpenidUserUsingIdTokenAsAccessToken(): void
@@ -177,8 +172,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsNewOpenidRedhatUser(): void
@@ -213,8 +206,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsNewOpenidUserWithOtherEmailForCatp(): void
@@ -249,8 +240,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testKeepsLegacyOpenidEmailLookupOutsideCatp(): void
@@ -284,8 +273,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testPrefersEmailOverOtherEmailForOpenidUser(): void
@@ -323,8 +310,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsNewFacebookUser(): void
@@ -359,8 +344,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsExistingOpenidUser(): void
@@ -389,8 +372,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::connect
-     *
      * @throws MockException
      */
     public function testConnectUsesOtherEmailForOpenidAssociationForCatp(): void
@@ -430,8 +411,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::connect
-     *
      * @throws MockException
      */
     public function testConnectUsesIdTokenAsAccessToken(): void
@@ -470,8 +449,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::connect
-     *
      * @throws MockException
      */
     public function testConnectKeepsLegacyEmailLookupOutsideCatp(): void
@@ -510,8 +487,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testAssociatesAUserToFranceconnect(): void
@@ -564,8 +539,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::connect
-     *
      * @throws MockException
      */
     public function testDoesNotDisconnectPreviousFranceConnectUserWhenEmailMismatch(): void
@@ -612,8 +585,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      */
     public function testLoadsExistingOpenidUserAndUpdatesValues(): void
@@ -642,8 +613,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::loadUserByOAuthUserResponse
-     *
      * @throws MockException
      * @throws InvalidArgumentException
      */
@@ -721,8 +690,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::mapFranceConnectData
-     *
      * @throws MockException
      */
     public function testMapsFranceconnectData(): void
@@ -765,8 +732,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::mapFranceConnectData
-     *
      * @throws MockException
      */
     public function testMapsFranceconnectDataWithUsername(): void
@@ -814,8 +779,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::mapFranceConnectData
-     *
      * @throws MockException
      */
     public function testDoesntMapFranceconnectDataWhenUserExists(): void
@@ -866,8 +829,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::verifyFranceConnectStateAndNonce
-     *
      * @throws MockException
      * @throws InvalidArgumentException
      */
@@ -895,8 +856,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::verifyFranceConnectStateAndNonce
-     *
      * @throws MockException
      * @throws InvalidArgumentException
      */
@@ -911,8 +870,6 @@ final class OauthUserProviderTest extends TestCase
     }
 
     /**
-     * @covers \Capco\UserBundle\Security\Core\User\OauthUserProvider::verifyFranceConnectStateAndNonce
-     *
      * @throws MockException
      */
     public function testThrowsExceptionWhenFranceconnectTokenHasExpired(): void

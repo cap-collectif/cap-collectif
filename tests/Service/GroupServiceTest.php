@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers
+ * @coversNothing
  */
 class GroupServiceTest extends TestCase
 {

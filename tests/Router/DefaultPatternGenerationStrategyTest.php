@@ -30,9 +30,6 @@ class DefaultPatternGenerationStrategyTest extends TestCase
         $this->deleteRecursive($this->cacheDir);
     }
 
-    /**
-     * @covers \DefaultPatternGenerationStrategy::addResources()
-     */
     public function testUnserializeMaliciousContent(): void
     {
         $this->expectExceptionMessage('Given content is not unserializable.');

@@ -43,9 +43,6 @@ class ActionLoggerTest extends TestCase
         $this->logger = $this->createMock(LoggerInterface::class);
     }
 
-    /**
-     * @covers
-     */
     public function testLogGraphQLQuery(): void
     {
         $user = new User();
@@ -83,8 +80,6 @@ class ActionLoggerTest extends TestCase
     }
 
     /**
-     * @covers
-     *
      * @dataProvider logGraphQLQueryWithErrorProvider
      */
     public function testLogGraphQLQueryWithError(
@@ -130,9 +125,6 @@ class ActionLoggerTest extends TestCase
         ];
     }
 
-    /**
-     * @covers
-     */
     public function testLogExport(): void
     {
         $user = new User();
@@ -167,9 +159,6 @@ class ActionLoggerTest extends TestCase
         self::assertTrue($actual);
     }
 
-    /**
-     * @covers
-     */
     public function testLogGraphQLMutation(): void
     {
         $user = new User();
@@ -204,9 +193,6 @@ class ActionLoggerTest extends TestCase
         self::assertTrue($actual);
     }
 
-    /**
-     * @covers
-     */
     public function testLogError(): void
     {
         $user = new User();

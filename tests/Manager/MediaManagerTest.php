@@ -6,9 +6,8 @@ use Capco\AppBundle\Manager\MediaManager;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers
- *
  * @internal
+ * @coversNothing
  */
 class MediaManagerTest extends TestCase
 {

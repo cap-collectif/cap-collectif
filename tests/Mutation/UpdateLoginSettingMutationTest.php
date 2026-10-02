@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \Capco\AppBundle\GraphQL\Mutation\LoginSettings\UpdateLoginSettingMutation
+ * @coversNothing
  */
 class UpdateLoginSettingMutationTest extends TestCase
 {
