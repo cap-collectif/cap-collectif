@@ -10,6 +10,11 @@ const comment = {
   trashed: false,
   trashedReason: 'mdr',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentBody />', () => {
   it('should render correctly', () => {
     const props = {

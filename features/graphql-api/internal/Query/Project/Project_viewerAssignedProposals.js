@@ -36,6 +36,10 @@ const ProjectViewerAssignedProposalsQuery = /* GraphQL */ `
 `
 
 describe('Internal|Project.viewerAssignedProposals', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project, category (NONE)", async () => {
     await expect(
       graphql(
@@ -49,6 +53,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project, category (pCategoryIdf2).", async () => {
     await expect(
       graphql(
@@ -62,6 +70,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project, district (NONE).", async () => {
     await expect(
       graphql(
@@ -75,6 +87,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project, district (districtIdf2).", async () => {
     await expect(
       graphql(
@@ -88,6 +104,11 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches viewer's assigned proposals by project, district (districtIdf2), category (NONE).", async () => {
     const response = await graphql(
       ProjectViewerAssignedProposalsQuery,
@@ -101,6 +122,11 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     expect(response.project.viewerAssignedProposals.totalCount).toBe(0)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches viewer's assigned proposals by project, district (NONE), category (pCategoryIdf2).", async () => {
     const response = await graphql(
       ProjectViewerAssignedProposalsQuery,
@@ -114,6 +140,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     expect(response.project.viewerAssignedProposals.totalCount).toBe(0)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project, theme (NONE).", async () => {
     await expect(
       graphql(
@@ -127,6 +157,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project that match search term.", async () => {
     await expect(
       graphql(
@@ -140,6 +174,10 @@ describe('Internal|Project.viewerAssignedProposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches viewer's assigned proposals by project that match search term and district.", async () => {
     await expect(
       graphql(

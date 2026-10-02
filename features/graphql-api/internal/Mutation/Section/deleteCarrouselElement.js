@@ -14,6 +14,10 @@ const input = {
 }
 
 describe('mutations.deleteCarrouselElement', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should delete a deleteCarrouselElement as an admin', async () => {
     await expect(
       graphql(
@@ -25,6 +29,11 @@ describe('mutations.deleteCarrouselElement', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not delete a deleteCarrouselElement as user', async () => {
     await expect(
       graphql(

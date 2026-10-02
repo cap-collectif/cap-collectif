@@ -11,6 +11,11 @@ const RemoveProposalVote = /* GraphQL*/ `
 `
 
 describe('mutations.removeProposalVote', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote but has not voted', async () => {
     await expect(
       graphql(
@@ -26,6 +31,11 @@ describe('mutations.removeProposalVote', () => {
     ).rejects.toThrowError('You have not voted for this proposal in this step.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote in a step no longer contributable', async () => {
     await expect(
       graphql(
@@ -41,6 +51,10 @@ describe('mutations.removeProposalVote', () => {
     ).rejects.toThrowError('This step is no longer contributable.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to remove a vote', async () => {
     await expect(
       graphql(
@@ -56,6 +70,10 @@ describe('mutations.removeProposalVote', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore', async () => {
     await expect(
       graphql(

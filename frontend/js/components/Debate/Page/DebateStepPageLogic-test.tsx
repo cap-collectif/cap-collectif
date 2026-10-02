@@ -41,6 +41,11 @@ const props = {
     },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateStepPageLogic />', () => {
   it('should renders correctly when not authenticated', () => {
     const wrapper = shallow(<DebateStepPageLogic {...props.basic} />)

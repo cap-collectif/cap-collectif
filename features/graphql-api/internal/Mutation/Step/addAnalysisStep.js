@@ -27,6 +27,10 @@ const AddAnalysisStep = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addAnalysisStepMutation', () => {
   it('admin should be able to add analysis step.', async () => {
     const response = await graphql(

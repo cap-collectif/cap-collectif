@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalAdminFollowers } from './ProposalAdminFollowers'
 import { intlMock, $fragmentRefs, $refType } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalAdminFollowers />', () => {
   const proposalWithUsers = {
     ' $refType': $refType,

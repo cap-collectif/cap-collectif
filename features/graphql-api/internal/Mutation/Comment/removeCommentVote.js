@@ -16,6 +16,10 @@ const RemoveCommentVoteMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.removeCommentVoteMutation', () => {
   it('Logged in API super admin wants to remove a vote for an comment', async () => {
     await expect(

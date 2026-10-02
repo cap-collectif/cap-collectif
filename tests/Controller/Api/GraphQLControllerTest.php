@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Checks actual HTTP statuses, response data and CORS headers and restores the public API
+ * flag.
  */
 class GraphQLControllerTest extends KernelTestCase
 {

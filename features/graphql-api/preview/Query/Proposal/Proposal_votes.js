@@ -30,6 +30,10 @@ const ProposalVotesPreviewData = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview.Proposal_votes', () => {
   it("fetches votes's related to a proposal", async () => {
     await expect(

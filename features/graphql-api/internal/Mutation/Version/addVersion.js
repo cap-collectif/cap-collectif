@@ -24,6 +24,10 @@ const AddVersionMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addVersionMutation', () => {
   it('User wants to add a version on an opinion', async () => {
     await expect(

@@ -35,6 +35,10 @@ const input = {
   ],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addContactFormInput', () => {
   it('wants to add contact form as admin', async () => {
     await expect(graphql(AddContactFormMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()

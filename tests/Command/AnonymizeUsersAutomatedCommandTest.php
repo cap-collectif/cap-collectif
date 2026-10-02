@@ -16,6 +16,9 @@ use Symfony\Component\Console\Command\Command;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Exercises CLI refusals, dry-run and reloaded SQL effects with transactional fixtures and
+ * restored feature flags; Elasticsearch is outside this test scope.
  */
 class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
 {

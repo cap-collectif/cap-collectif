@@ -8,6 +8,11 @@ import { $refType, $fragmentRefs, formMock, intlMock } from '~/mocks'
 import MockProviders, { addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 import { MachineContext } from './DebateStepPageStateMachine'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateStepPageVoteForm/>', () => {
   const debate = {
     ' $fragmentRefs': $fragmentRefs,

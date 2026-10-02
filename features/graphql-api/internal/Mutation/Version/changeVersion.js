@@ -14,6 +14,10 @@ const ChangeVersionMutation = /* GraphQL*/ `
 `
 
 describe('mutations.changeVersionMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Author wants to update his version', async () => {
     await expect(
       graphql(
@@ -35,6 +39,11 @@ describe('mutations.changeVersionMutation', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('User wants to update a version but is not the author', async () => {
     await expect(
       graphql(

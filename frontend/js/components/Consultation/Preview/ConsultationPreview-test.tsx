@@ -20,18 +20,33 @@ const props = {
     votesCount: 0,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConsultationPreview />', () => {
   it('should render correctly with a given consultation', () => {
     const wrapper = shallow(<ConsultationPreview {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConsultationPreviewBody />', () => {
   it('should render correctly with a given consultation', () => {
     const wrapper = shallow(<ConsultationPreviewBody consultation={props.consultation} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConsultationPreviewCover />', () => {
   it('should render with a default illustration when consultation does not have an image', () => {
     const wrapper = shallow(<ConsultationPreviewCover consultation={props.consultation} />)

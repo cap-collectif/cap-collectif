@@ -6,6 +6,10 @@ import EventList, { EVENT_LIST_PAGINATION } from './EventList'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { EventListTestQuery } from '@relay/EventListTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<EventList />', () => {
   let environment: any
   let TestComponent: any

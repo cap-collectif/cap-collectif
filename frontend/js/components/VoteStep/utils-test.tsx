@@ -1,5 +1,9 @@
 import { isValidLatLng, parseLatLng, parseLatLngBounds } from './utils'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('VoteStep utils', () => {
   describe('isValidLatLng', () => {
     it('accepts finite coordinates, including zero', () => {

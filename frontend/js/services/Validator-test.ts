@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { checkOnlyNumbers } from './Validator'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('checkOnlyNumbers', () => {
   it('Check all cases possible with numbers', () => {
     expect(checkOnlyNumbers('1')).toEqual(true)

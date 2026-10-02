@@ -157,6 +157,10 @@ const SiteFaviconQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query configuration and internationalization', () => {
   it('returns districts for a matching location', async () => {
     await expect(

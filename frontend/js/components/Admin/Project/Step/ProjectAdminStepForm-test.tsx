@@ -6,6 +6,11 @@ import { formMock, intlMock, $refType } from '~/mocks'
 import { features } from '~/redux/modules/default'
 import MockProviders from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectAdminStepForm />', () => {
   const defaultProps = {
     ...formMock,

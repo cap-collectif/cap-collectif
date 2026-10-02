@@ -31,6 +31,11 @@ const UserSearchQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|Participant personal data', () => {
   it('denies anonymous access to the contributor search', async () => {
     const response = await rawInternalGraphql(UserSearchQuery, {})

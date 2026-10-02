@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks the participant, reply and requirements graph and its internal calls instead of real
+ * domain objects.
  */
 class ParticipantAccessResolverTest extends TestCase
 {

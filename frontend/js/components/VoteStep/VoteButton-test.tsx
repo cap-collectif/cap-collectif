@@ -7,6 +7,11 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { VoteButtonTestQuery } from '~relay/VoteButtonTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<VoteButton />', () => {
   let environment: any
   let testComponentTree: any

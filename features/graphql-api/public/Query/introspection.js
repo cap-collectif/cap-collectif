@@ -10,6 +10,11 @@ const IntrospectionQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('Public|introspection query', () => {
   it('fetch schema if enabled', async () => {
     await expect(graphql(IntrospectionQuery)).resolves.toMatchSnapshot()

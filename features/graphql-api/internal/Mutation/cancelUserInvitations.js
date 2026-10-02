@@ -11,6 +11,11 @@ const CancelUserInvitationsMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|cancelUserInvitations mutation access control', () => {
   const input = {
     invitationsEmails: ['blablapookie@pookie.com', 'danslside@pookie.com'],
@@ -21,6 +26,11 @@ describe('Internal|cancelUserInvitations mutation access control', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|cancelUserInvitations mutation', () => {
   it('should cancel user invitations', async () => {
     const remInvitationId = toGlobalId('UserInvite', 'remInvitation')

@@ -14,6 +14,11 @@ const UserIdentificationCodeListMutation = /* GraphQL */ `
 `
 
 describe('mutations.userIdentificationCodeListMutation', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('API client wants to create a list but is not admin', async () => {
     await expect(
       graphql(
@@ -39,6 +44,10 @@ describe('mutations.userIdentificationCodeListMutation', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('API admin creates a list', async () => {
     await expect(
       graphql(
@@ -97,6 +106,10 @@ describe('mutations.userIdentificationCodeListMutation', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('API admin creates a list with 8 length code', async () => {
     await expect(
       graphql(

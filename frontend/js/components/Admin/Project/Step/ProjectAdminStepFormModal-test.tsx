@@ -5,6 +5,11 @@ import { ProjectAdminStepFormModal } from './ProjectAdminStepFormModal'
 import { $fragmentRefs, $refType } from '~/mocks'
 import MockProviders from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectAdminStepFormModal />', () => {
   const defaultProps = {
     onClose: jest.fn(),

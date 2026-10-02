@@ -38,6 +38,11 @@ const props = {
   disabled: { ...baseProps, disabled: true },
   inQuestionnaire: { ...baseProps, typeForm: TYPE_FORM.QUESTIONNAIRE },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<MultipleRadio />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<MultipleRadio {...props.basic} />)

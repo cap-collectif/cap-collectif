@@ -67,6 +67,10 @@ const questionReorderVotesMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|update proposal vote', () => {
   it('Logged in API client wants to delete all votes', async () => {
     const response = await graphql(

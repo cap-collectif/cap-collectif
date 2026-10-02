@@ -50,6 +50,10 @@ const variables = {
   opinionId: 'T3BpbmlvbjpvcGluaW9uNTc=',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Opinion.votes connection', () => {
   it('lists the votes for an opinion', async () => {
     await expect(graphql(OpinionVotesQuery, variables, 'internal')).resolves.toMatchSnapshot()

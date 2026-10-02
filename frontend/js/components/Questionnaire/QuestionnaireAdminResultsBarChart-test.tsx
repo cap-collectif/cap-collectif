@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { QuestionnaireAdminResultsBarChart } from './QuestionnaireAdminResultsBarChart'
 import { $refType, intlMock } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<QuestionnaireAdminResultsBarChart />', () => {
   const otherAllowed = {
     backgroundColor: '#128085',

@@ -48,6 +48,11 @@ const AddEventsMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('mutations.addEventMutation', () => {
   it('Admin wants to add an event with registration by external link', async () => {
     await expect(

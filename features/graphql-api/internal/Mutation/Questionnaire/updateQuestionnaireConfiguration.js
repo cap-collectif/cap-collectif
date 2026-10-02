@@ -43,6 +43,10 @@ const UpdateQuestionnaireConfigurationMutation = /* GraphQL*/ `
 `
 
 describe('mutations.updateQuestionnaireConfigurationMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update a questionnaire', async () => {
     await expect(
       graphql(
@@ -59,6 +63,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to reorder questions', async () => {
     await expect(
       graphql(
@@ -97,6 +105,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to delete first question', async () => {
     await expect(
       graphql(
@@ -149,6 +161,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to delete first question choice', async () => {
     await expect(
       graphql(
@@ -205,6 +221,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to delete a logic jump of a question in a questionnaire with jumps', async () => {
     await expect(
       graphql(
@@ -838,6 +858,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to delete a condition in a logic jump of a question in a questionnaire with jumps', async () => {
     await expect(
       graphql(
@@ -1484,6 +1508,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to edit first question', async () => {
     await expect(
       graphql(
@@ -1548,6 +1576,10 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to edit first question with valid color', async () => {
     await expect(
       graphql(
@@ -1586,6 +1618,11 @@ describe('mutations.updateQuestionnaireConfigurationMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to edit first question with invalid color', async () => {
     await expect(
       graphql(

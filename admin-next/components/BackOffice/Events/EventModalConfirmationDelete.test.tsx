@@ -6,6 +6,10 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import EventModalConfirmationDelete from './EventModalConfirmationDelete'
 import { EventModalConfirmationDeleteTestQuery } from '@relay/EventModalConfirmationDeleteTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<EventModalConfirmationDelete />', () => {
   let environment: any
   let TestEventModalConfirmationDelete: any

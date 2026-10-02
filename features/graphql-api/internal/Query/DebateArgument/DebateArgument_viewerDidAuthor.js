@@ -9,6 +9,10 @@ const DebateArgumentViewerDidAuthorQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Debate.viewerDidAuthor bool', () => {
   it('fetches if viewer is the argument author', async () => {
     await expect(

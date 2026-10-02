@@ -11,6 +11,11 @@ const defaultMapOptions = {
   },
   zoom: 12,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 it('should render correctly with proposals', () => {
   const proposals = [
     {
@@ -52,6 +57,11 @@ it('should render correctly with proposals', () => {
   const wrapper = shallow(<ProposalsDisplayMap {...props} />)
   expect(wrapper).toMatchSnapshot()
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 it('should not render when no proposals are in the step', () => {
   const step = { ...$refType }
   const props = {

@@ -67,6 +67,11 @@ const input = {
 }
 
 describe('mutations.createEvent', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should create an event as project admin', async () => {
     const response = await graphql(
       AddEventMutation,
@@ -80,6 +85,10 @@ describe('mutations.createEvent', () => {
     expect(response.addEvent.eventEdge.node.author.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should create an event', async () => {
     await expect(
       graphql(
@@ -92,6 +101,10 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should create an event with measurable registration', async () => {
     await expect(
       graphql(
@@ -108,6 +121,11 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not create an event with measurable registration', async () => {
     await expect(
       graphql(
@@ -124,6 +142,10 @@ describe('mutations.createEvent', () => {
     ).rejects.toThrowError()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should create an event as organization', async () => {
     const organizationId = toGlobalId('Organization', 'organization2')
     await expect(

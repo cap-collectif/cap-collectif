@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { EventCreateModal } from './EventCreateModal'
 import { $refType, $fragmentRefs } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventCreateModal />', () => {
   it('it renders correctly', () => {
     const props = {

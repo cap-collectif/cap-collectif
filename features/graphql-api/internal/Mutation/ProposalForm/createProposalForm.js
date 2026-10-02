@@ -15,6 +15,10 @@ const mutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal | createProposalForm', () => {
   it('create proposalForm', async () => {
     const response = await graphql(

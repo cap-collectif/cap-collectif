@@ -9,6 +9,10 @@ import { render } from '@testing-library/react'
 
 jest.mock('@shared/hooks/useFeatureFlag')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<RegistrationForm />', () => {
   let environment
   let TestComponent

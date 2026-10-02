@@ -6,6 +6,10 @@ import { RelaySuspensFragmentTest } from 'tests/testUtils'
 import ProjectListSection from './ProjectListSection'
 import { ProjectListSectionTestQuery } from '@relay/ProjectListSectionTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ProjectListSection />', () => {
   let environment: any
   let TestModalConfirmationDelete: any

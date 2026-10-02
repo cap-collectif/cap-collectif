@@ -31,6 +31,10 @@ const revokeAnalystsToProposalsMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.revokeAnalystsToProposalsMutation', () => {
   it('should not revoke all analyst to a proposal, logged as decision maker.', async () => {
     const revokeAllAnalystToProposals2 = await graphql(

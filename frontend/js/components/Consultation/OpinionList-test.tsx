@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { OpinionList } from './OpinionList'
 import { $refType, $fragmentRefs, intlMock } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<OpinionList />', () => {
   const defaultConsultation = {
     id: 'consultation1',

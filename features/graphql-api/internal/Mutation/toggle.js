@@ -13,6 +13,10 @@ const ToggleFeatureMutation = /* GraphQL */ `
 `
 
 describe('Internal|toggleFeature', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('toggles a feature as super-admin', async () => {
     await expect(
       graphql(
@@ -28,6 +32,10 @@ describe('Internal|toggleFeature', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('toggles a feature as admin', async () => {
     await expect(
       graphql(
@@ -43,6 +51,11 @@ describe('Internal|toggleFeature', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to toggle a feature anonymously', async () => {
     await expect(
       graphql(

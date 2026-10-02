@@ -26,6 +26,11 @@ const props = {
   noContributionsStep: baseProps,
   withContributionsStep: { ...baseProps, hasContributionsStep: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectAdminDebate />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProjectAdminDebate {...props.noContributionsStep} />)

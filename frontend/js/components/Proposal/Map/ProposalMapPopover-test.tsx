@@ -5,6 +5,11 @@ import { ProposalMapPopover } from './ProposalMapPopover'
 import { $fragmentRefs, $refType } from '../../../mocks'
 import { features } from '../../../redux/modules/default'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalMapPopover />', () => {
   const proposal = {
     ' $refType': $refType,

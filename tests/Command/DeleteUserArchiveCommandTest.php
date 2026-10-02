@@ -9,6 +9,9 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Checks deletedAt on the preloaded archive instead of reloading it to prove the deletion
+ * state was persisted.
  */
 class DeleteUserArchiveCommandTest extends DatabaseCommandTestCase
 {

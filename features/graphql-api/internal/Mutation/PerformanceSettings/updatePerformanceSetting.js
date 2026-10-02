@@ -42,6 +42,10 @@ const getSiteParameterId = async keyname => {
 }
 
 describe('Internal|updatePerformanceSetting', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('updates the value and isEnabled as super-admin', async () => {
     const id = await getProposalPaginationId()
 
@@ -54,6 +58,11 @@ describe('Internal|updatePerformanceSetting', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('denies the mutation as admin', async () => {
     const id = await getProposalPaginationId()
 
@@ -62,6 +71,10 @@ describe('Internal|updatePerformanceSetting', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns INVALID_VALUE for a non-positive integer value', async () => {
     const id = await getProposalPaginationId()
 
@@ -74,6 +87,10 @@ describe('Internal|updatePerformanceSetting', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns SITE_PARAMETER_NOT_FOUND for a parameter outside the settings.performance category', async () => {
     const id = await getSiteParameterId('global.site.fullname')
 

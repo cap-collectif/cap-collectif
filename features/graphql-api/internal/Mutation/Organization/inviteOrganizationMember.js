@@ -22,6 +22,10 @@ const input = {
 }
 
 describe('Internal|inviteOrganizationMember mutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should invite an unregistered user', async () => {
     const response = await graphql(
       InviteOrganizationMember,
@@ -36,6 +40,11 @@ describe('Internal|inviteOrganizationMember mutation', () => {
 
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return USER_NOT_ONLY_ROLE_USER errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,
@@ -50,6 +59,11 @@ describe('Internal|inviteOrganizationMember mutation', () => {
     expect(response.inviteOrganizationMember.errorCode).toBe('USER_NOT_ONLY_ROLE_USER')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return USER_ALREADY_INVITED errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,
@@ -65,6 +79,11 @@ describe('Internal|inviteOrganizationMember mutation', () => {
     expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_INVITED')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,
@@ -80,6 +99,11 @@ describe('Internal|inviteOrganizationMember mutation', () => {
     expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,

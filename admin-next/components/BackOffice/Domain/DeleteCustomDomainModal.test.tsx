@@ -9,6 +9,10 @@ import type { DeleteCustomDomainModalTestQuery } from '@relay/DeleteCustomDomain
 const onClose = jest.fn()
 const onSuccess = jest.fn()
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<DeleteCustomDomainModal />', () => {
   let environment: any
   let TestDeleteCustomDomainModal: any

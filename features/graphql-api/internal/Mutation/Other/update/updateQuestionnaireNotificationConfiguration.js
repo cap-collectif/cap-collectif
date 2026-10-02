@@ -20,6 +20,10 @@ const UpdateQuestionnaireNotificationConfigurationMutation = /* GraphQL */ `
 `
 
 describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update correctly', async () => {
     await expect(
       graphql(
@@ -38,6 +42,11 @@ describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () =>
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw an access denied if a project admin user attempt to update a questionnaire notification configuration that he does not own', async () => {
     await expect(
       graphql(
@@ -56,6 +65,11 @@ describe('Internal|updateQuestionnaireNotificationConfiguration mutation', () =>
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw an access denied when questionnaire does not exist', async () => {
     await expect(
       graphql(

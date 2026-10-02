@@ -43,6 +43,10 @@ const baseInput = {
   media: 'ProfilePicAgui',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateParticipant', () => {
   it('should update participant', async () => {
     await expect(graphql(UpdateParticipant, { input: baseInput }, 'internal_user')).resolves.toMatchSnapshot()

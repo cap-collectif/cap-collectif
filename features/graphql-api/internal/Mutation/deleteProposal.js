@@ -11,6 +11,11 @@ const DeleteProposal = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('mutations.deleteProposal', () => {
   it('as proposal author should not be able to delete a proposal when preventProposalDelete is enabled in the step', async () => {
     await global.runSQL('UPDATE step SET prevent_proposal_delete = 1 WHERE id = "collectstepIdf"')

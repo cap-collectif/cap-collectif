@@ -15,6 +15,10 @@ const AddSourceVoteMutation = /* GraphQL*/ `
 `
 
 describe('mutations.addSourceVote', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for a source', async () => {
     await expect(
       graphql(
@@ -37,6 +41,11 @@ describe('mutations.addSourceVote', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for a source without meeting requirements', async () => {
     await expect(
       graphql(

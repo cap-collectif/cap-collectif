@@ -28,6 +28,10 @@ const DENIED_ERROR_MESSAGE = 'Access denied to this field.'
 
 describe('mutations.askProposalRevision', () => {
   // admin
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should ask a revision on proposal.', async () => {
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
@@ -43,6 +47,10 @@ describe('mutations.askProposalRevision', () => {
     )
     expect(askProposalRevisionMutation).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should ask a revision on proposal,even if date expires after analyse step end.', async () => {
     const askProposalRevisionMutation = await graphql(
       AskProposalRevisionMutation,
@@ -58,6 +66,10 @@ describe('mutations.askProposalRevision', () => {
     )
     expect(askProposalRevisionMutation).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should not ask if proposal has no author.', async () => {
     await runSql('UPDATE proposal SET author_id = NULL WHERE id = "proposalIdf1"')
     const response = await graphql(
@@ -75,6 +87,10 @@ describe('mutations.askProposalRevision', () => {
     expect(response).toMatchSnapshot()
     await runSql('UPDATE proposal SET author_id = "userKiroule" WHERE id = "proposalIdf1"')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("should not ask if proposal's author has no email.", async () => {
     await runSql('UPDATE fos_user SET email = NULL WHERE id = "userKiroule"')
     const response = await graphql(
@@ -93,6 +109,11 @@ describe('mutations.askProposalRevision', () => {
     await runSql('UPDATE fos_user SET email = "pierre@cap-collectif.com" WHERE id = "userKiroule"')
   })
   // user
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('user should not ask a revision on proposal.', async () => {
     await expect(
       graphql(
@@ -110,6 +131,11 @@ describe('mutations.askProposalRevision', () => {
     ).rejects.toThrowError(DENIED_ERROR_MESSAGE)
   })
   // anonym
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('anonym should not ask a revision on proposal.', async () => {
     await expect(
       graphql(

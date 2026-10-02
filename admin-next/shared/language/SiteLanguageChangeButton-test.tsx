@@ -3,6 +3,10 @@ import { render } from '@testing-library/react'
 import SiteLanguageChangeButton from './SiteLanguageChangeButton'
 import MockProviders from 'tests/testUtils'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<SiteLanguageChangeButton />', () => {
   const props = {
     onChange: jest.fn(),

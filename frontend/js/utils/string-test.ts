@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { cleanDomId } from './string'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('cleanDomId', () => {
   it('should return a correct DOM ID', () => {
     const value = cleanDomId('CreateReplyForm-responses[0]')

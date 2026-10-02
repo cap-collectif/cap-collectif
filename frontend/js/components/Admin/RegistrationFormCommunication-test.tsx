@@ -5,6 +5,11 @@ import { features } from '~/redux/modules/default'
 import { RegistrationFormCommunication } from './RegistrationFormCommunication'
 import { $refType, formMock, intlMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<RegistrationFormCommunication />', () => {
   const props = {
     ...formMock,

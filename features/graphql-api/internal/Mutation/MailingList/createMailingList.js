@@ -19,6 +19,10 @@ const CreateMailingListMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.createMailingListMutation', () => {
   it('GraphQL project owner wants to create a mailing list without project', async () => {
     await expect(

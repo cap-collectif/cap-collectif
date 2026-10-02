@@ -7,6 +7,10 @@ import ProjectModalConfirmationDelete from './ProjectModalConfirmationDelete'
 import type { ProjectModalConfirmationDeleteTestQuery } from '@relay/ProjectModalConfirmationDeleteTestQuery.graphql'
 import { Menu } from '@cap-collectif/ui'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ProjectModalConfirmationDelete />', () => {
   let environment: any
   let TestModalConfirmationDelete: any

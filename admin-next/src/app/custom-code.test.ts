@@ -1,5 +1,9 @@
 import { evalCustomCode } from './custom-code'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Writes DOM nodes and window.__customCodeRan but does not clean up after the final test.
+ */
 describe('evalCustomCode', () => {
   beforeAll(() => {
     jest.useFakeTimers()

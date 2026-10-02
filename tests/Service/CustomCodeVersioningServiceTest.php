@@ -20,6 +20,9 @@ use Symfony\Component\Validator\Validation;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason The shared service factory asserts Doctrine transaction depth and cache-invalidation call
+ * counts instead of only versioning results.
  */
 class CustomCodeVersioningServiceTest extends KernelTestCase
 {

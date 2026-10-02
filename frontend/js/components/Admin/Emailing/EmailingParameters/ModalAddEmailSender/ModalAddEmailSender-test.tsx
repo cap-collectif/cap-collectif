@@ -8,6 +8,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { ModalAddEmailSenderTestQuery } from '~relay/ModalAddEmailSenderTestQuery.graphql'
 import ModalAddEmailSender from './ModalAddEmailSender'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ModalAddEmailSender />', () => {
   let environment
   let testComponentTree

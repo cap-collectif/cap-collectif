@@ -51,14 +51,27 @@ const superAdminOnly = [
 ]
 
 describe('Internal|toggleFeature', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   test.each(successCases)('%s', async (_label, user, input) => {
     await expect(graphql(ToggleFeatureMutation, { input }, user)).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   test.each(failureCases)('%s', async (_label, user, input, error) => {
     await expect(graphql(ToggleFeatureMutation, { input }, user)).rejects.toThrowError(error)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   test.each(superAdminOnly)('Toggles %s as super-admin', async feature => {
     await expect(
       graphql(ToggleFeatureMutation, { input: { type: feature, enabled: true } }, 'internal_super_admin'),
@@ -68,6 +81,11 @@ describe('Internal|toggleFeature', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   test.each(superAdminOnly)('Tries to toggle %s as admin', async feature => {
     await expect(
       graphql(ToggleFeatureMutation, { input: { type: feature, enabled: true } }, 'internal_admin'),

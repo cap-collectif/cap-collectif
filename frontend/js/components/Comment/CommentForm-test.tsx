@@ -20,6 +20,11 @@ const userProps = {
     displayName: 'admin',
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentForm />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentForm {...props} user={null} />)

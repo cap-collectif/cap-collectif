@@ -78,10 +78,19 @@ const input = {
 }
 
 describe('mutations.updateUserMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update user', async () => {
     await expect(graphql(UpdateUserMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return PHONE_INVALID_LENGTH validation error', async () => {
     const tooShortResponse = await graphql(
       UpdateUserMutation,
@@ -108,6 +117,11 @@ describe('mutations.updateUserMutation', () => {
     expect(tooLongResponse.updateUser.validationErrors).toBe('{"phone":"PHONE_INVALID_LENGTH"}')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return CODE_ALREADY_USED validation error when attempting to add an identification code, but code is already used', async () => {
     const response = await graphql(
       UpdateUserMutation,
@@ -122,6 +136,11 @@ describe('mutations.updateUserMutation', () => {
     expect(response.updateUser.validationErrors).toBe('{"userIdentificationCode":"CODE_ALREADY_USED"}')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return BAD_CODE validation error when attempting to add an identification code, but code does not exist', async () => {
     const response = await graphql(
       UpdateUserMutation,
@@ -136,6 +155,11 @@ describe('mutations.updateUserMutation', () => {
     expect(response.updateUser.validationErrors).toBe('{"userIdentificationCode":"BAD_CODE"}')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return MAX_LENGTH_EXCEEDED validation error when attempting to update biography with length over 246 chars', async () => {
     const response = await graphql(
       UpdateUserMutation,
@@ -151,6 +175,11 @@ describe('mutations.updateUserMutation', () => {
     expect(response.updateUser.validationErrors).toBe('{"biography":"MAX_LENGTH_EXCEEDED"}')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return EMAIL_ALREADY_USED validation error when attempting to update an email used by another user', async () => {
     const response = await graphql(
       UpdateUserMutation,

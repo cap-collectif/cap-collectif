@@ -13,6 +13,10 @@ const DeleteVersionMutation = /* GraphQL*/ `
 `
 
 describe('mutations.deleteVersionMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Author wants to delete his version', async () => {
     await expect(
       graphql(
@@ -27,6 +31,11 @@ describe('mutations.deleteVersionMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('User wants to delete a version but is not the author', async () => {
     await expect(
       graphql(

@@ -12,6 +12,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Overrides fixture-loading methods on the command under test rather than verifying real CLI
+ * effects.
  */
 class LoadProdDataCommandTest extends TestCase
 {

@@ -29,6 +29,11 @@ const props = {
   basic: baseProps,
   anonymous: withAnonymousProps,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateVote />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<DebateVote {...props.basic} />)

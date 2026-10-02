@@ -118,6 +118,11 @@ const ProjectProposalTotalCountQuery = /* GraphQL */ `
 `
 
 describe('Internal.projects.proposals', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches proposals filtered by none category, district, status', async () => {
     const response = await graphql(
       ProjectProposalQuery,
@@ -137,6 +142,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.edges[0].node.status).toBe(null)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches proposals filtered by step and status', async () => {
     await expect(
       graphql(
@@ -154,6 +163,11 @@ describe('Internal.projects.proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches project proposal's total count (draft) including trashed drafts", async () => {
     const response = await graphql(
       ProjectProposalTotalCountQuery,
@@ -166,6 +180,11 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.totalCount).toBe(2)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches project proposal's total count (published)", async () => {
     const response = await graphql(
       ProjectProposalTotalCountQuery,
@@ -178,6 +197,11 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.totalCount).toBe(8)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches project proposal's total count (all)", async () => {
     const response = await graphql(
       ProjectProposalTotalCountQuery,
@@ -191,6 +215,11 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.totalCount).toBe(11)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches project proposal's total count (trashed)", async () => {
     const response = await graphql(
       ProjectProposalTotalCountQuery,
@@ -203,6 +232,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.totalCount).toBe(1)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("search project's proposals by given theme", async () => {
     const response = await graphql(
       ProjectProposalQuery,
@@ -216,6 +249,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("search project's proposals with theme value NONE", async () => {
     const response = await graphql(
       ProjectProposalQuery,
@@ -231,6 +268,10 @@ describe('Internal.projects.proposals', () => {
 
   //========= TERM TESTS ==========//
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("it should return project's proposals with title that matches the given term, ordered by score", async () => {
     const response = await graphql(
       ProjectProposalTermSearchQuery,
@@ -245,6 +286,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("should return project's proposals with public responses which contains objectValue that matches the given term, ordered by score", async () => {
     const response = await graphql(
       ProjectProposalTermSearchQuery,
@@ -259,6 +304,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("shouldn't return proposals with private responses that matches the given term", async () => {
     const response = await graphql(
       ProjectProposalTermSearchQuery,
@@ -273,6 +322,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("should return project's proposal with district that matches the given term, ordered by score", async () => {
     const response = await graphql(
       ProjectProposalTermSearchQuery,
@@ -287,6 +340,10 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("should return project's proposals with address that matches the given term, ordered by score", async () => {
     const response = await graphql(
       ProjectProposalTermSearchQuery,

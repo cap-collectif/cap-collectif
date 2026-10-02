@@ -12,6 +12,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status reference
+ * @phpunit-reason Exercises CLI outcomes and flag state, including idempotence and refusals, with
+ * failure-safe restoration of the initial flag.
  */
 class FeatureToggleCommandTest extends KernelTestCase
 {

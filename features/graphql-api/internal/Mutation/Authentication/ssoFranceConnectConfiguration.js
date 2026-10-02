@@ -56,6 +56,10 @@ const productionConfig = {
 }
 
 describe('Internal|SSO|FranceConnect', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Updates a config as super admin', async () => {
     await expect(
       graphql(UpdateFranceConnectSSOConfiguration, testingConfig, 'internal_super_admin'),
@@ -68,6 +72,10 @@ describe('Internal|SSO|FranceConnect', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Updates a config and turn it to production as super admin', async () => {
     await expect(
       graphql(UpdateFranceConnectSSOConfiguration, productionConfig, 'internal_super_admin'),
@@ -80,6 +88,11 @@ describe('Internal|SSO|FranceConnect', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Tries to update the configuration as admin only', async () => {
     await expect(graphql(UpdateFranceConnectSSOConfiguration, testingConfig, 'internal_admin')).rejects.toThrowError(
       'Access denied to this field.',

@@ -15,6 +15,10 @@ const CreateSenderEmailDomainMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.createSenderEmailDomain', () => {
   it('Admin wants to add a new SenderEmailDomain but already exists', async () => {
     await expect(

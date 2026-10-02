@@ -40,6 +40,10 @@ const DeleteSSOConfiguration = /* GraphQL */ `
 `
 
 describe('Internal|SSO|CAS', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Creates a config as super admin', async () => {
     const creationResult = await graphql(
       CreateCASSSOConfiguration,
@@ -63,6 +67,10 @@ describe('Internal|SSO|CAS', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Updates a config as super admin', async () => {
     const creationResult = await graphql(
       CreateCASSSOConfiguration,
@@ -102,6 +110,10 @@ describe('Internal|SSO|CAS', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Deletes a config as admin only', async () => {
     const creationResult = await graphql(
       CreateCASSSOConfiguration,
@@ -135,6 +147,11 @@ describe('Internal|SSO|CAS', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Tries to create a config as admin only', async () => {
     await expect(
       graphql(
@@ -152,6 +169,11 @@ describe('Internal|SSO|CAS', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Tries to update a config as admin only', async () => {
     await expect(
       graphql(

@@ -36,6 +36,10 @@ const getResult = (type: QuestionType) => {
   }
 }
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('formatQuestions', () => {
   it('should format SELECT correctly', () => {
     const response = 'Je suis select'

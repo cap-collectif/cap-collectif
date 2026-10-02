@@ -22,6 +22,10 @@ const input = {
   notifiedOf: 'ALL',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.globalDistrict', () => {
   it('should follow to a project district', async () => {
     const response = await graphql(

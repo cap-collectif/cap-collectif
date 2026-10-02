@@ -118,6 +118,10 @@ const updateCollectStepWithVoteIconAndButtonLabelInput = {
   voteButtonIcon: 'MONEY_BAG',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateCollectStep', () => {
   it('admin should be able to edit collectStep step.', async () => {
     const response = await graphql(UpdateCollectStep, { input: { ...input } }, 'internal_admin')

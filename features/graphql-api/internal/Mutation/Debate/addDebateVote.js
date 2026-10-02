@@ -41,6 +41,11 @@ const AddDebateVoteAndGetOriginMutation = /* GraphQL */ `
 `
 
 describe('Internal|addDebateVote mutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('Add and update a debate vote.', async () => {
     const response = await graphql(
       AddDebateVoteMutation,
@@ -88,6 +93,10 @@ describe('Internal|addDebateVote mutation', () => {
     expect(response.addDebateVote.debateVote.id).toBe(updateResponse.addDebateVote.previousVoteId)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Add a vote by widget.', async () => {
     const response = await graphql(
       AddDebateVoteAndGetOriginMutation,

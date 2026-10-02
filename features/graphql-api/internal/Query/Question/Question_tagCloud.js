@@ -35,6 +35,10 @@ const QuestionTagCloudQuery = /** GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Question.tagCloud', () => {
   it('does fetch tag cloud data from question', async () => {
     await expect(

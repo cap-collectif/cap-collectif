@@ -91,6 +91,10 @@ const DebateVoteOriginQuery = /* GraphQL */ `
 `
 
 describe('Internal|Debate.Votes connection', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches 5 first votes associated to a debate with a cursor', async () => {
     await expect(
       graphql(
@@ -105,6 +109,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches 5 next votes associated to a debate with a cursor', async () => {
     await expect(
       graphql(
@@ -119,6 +127,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches votes associated to a debate and a FOR type with a cursor', async () => {
     await expect(
       graphql(
@@ -134,6 +146,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches votes associated to a debate and an AGAINST type with a cursor', async () => {
     await expect(
       graphql(
@@ -149,6 +165,11 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Uses every() without asserting that votes exist, so an empty response satisfies the
+   * publication filter assertion.
+   */
   it('should not fetch unpublished only votes associated to a debate when client is not an admin', async () => {
     const response = await graphql(
       DebateVotesQuery,
@@ -163,6 +184,11 @@ describe('Internal|Debate.Votes connection', () => {
     expect(votes.every(v => v.published === true)).toBe(true)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Uses every() without asserting that votes exist, so an empty response satisfies the
+   * publication filter assertion.
+   */
   it('should fetch unpublished only votes associated to a debate when client is an admin', async () => {
     const response = await graphql(
       DebateVotesQuery,
@@ -177,6 +203,10 @@ describe('Internal|Debate.Votes connection', () => {
     expect(votes.every(v => v.published === false)).toBe(true)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches all votes counters associated to a debate when client is an admin', async () => {
     await expect(
       graphql(
@@ -190,6 +220,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches published votes counters associated to a debate', async () => {
     await expect(
       graphql(
@@ -203,6 +237,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches unpublished votes counters associated to a debate when client is an admin', async () => {
     await expect(
       graphql(
@@ -216,6 +254,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches votes ip associated to a debate without rights', async () => {
     await expect(
       graphql(
@@ -229,6 +271,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches votes ip associated to a debate', async () => {
     await expect(
       graphql(
@@ -242,6 +288,10 @@ describe('Internal|Debate.Votes connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches votes origin', async () => {
     await expect(
       graphql(

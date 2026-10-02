@@ -223,6 +223,10 @@ const BASE_COLLECT_STEP = {
   proposalArchivedUnitTime: 'MONTHS',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|createAlphaProject simple mutations', () => {
   it('create a project without any steps', async () => {
     await expect(
@@ -639,6 +643,10 @@ describe('Internal|createAlphaProject simple mutations', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|createAlphaProject complex mutations', () => {
   it('create a project with a CollectStep that contains requirements and SelectionStep that contains statuses', async () => {
     const query = graphql(
@@ -792,6 +800,10 @@ describe('Internal|createAlphaProject complex mutations', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 it('create a project with group of users as visibility', async () => {
   const query = graphql(
     CreateAlphaProjectGroupMutation,
@@ -822,16 +834,31 @@ it('create a project with group of users as visibility', async () => {
 })
 
 describe('access control', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should create a project when the user is a project admin', async () => {
     const response = await graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_theo')
     expect(response.createAlphaProject.project.owner.username).toStrictEqual('Théo QP')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should create a project when the user is a project admin and should be the author', async () => {
     const response = await graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_theo')
     expect(response.createAlphaProject.project.authors).toStrictEqual([{ username: 'Théo QP' }])
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not create a project when user is a not a project admin', async () => {
     await expect(
       graphql(CreateAlphaProjectWithOwnerMutation, { input: { ...BASE_PROJECT } }, 'internal_saitama'),

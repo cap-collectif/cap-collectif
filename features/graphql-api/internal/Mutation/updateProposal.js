@@ -622,14 +622,27 @@ describe('mutations.changeProposalContentMutation', () => {
     email: 'userNotConfirmedWithContributions@test.com',
     password: 'userNotConfirmedWithContributions',
   }
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('wants to edit a proposal without required response', async () => {
     await expect(
       graphql(ChangeProposalContentMutation, { input: inputEditWithoutRes }, 'internal_user'),
     ).rejects.toThrowError('proposal.missing_required_responses')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should be notified if GraphQL user modify his proposal', async () => {
     await expect(graphql(ChangeProposalContentMutation, { input: input }, 'internal_user')).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to edit his proposal as user', async () => {
     await expect(
       graphql(ChangeProposalContentMutation, { input: inputEdit }, 'internal_user'),
@@ -638,22 +651,39 @@ describe('mutations.changeProposalContentMutation', () => {
       graphql(ChangeMoreProposalContentMutation, { input: inputEditMore }, 'internal_user'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to edit a proposal as super admin', async () => {
     await expect(
       graphql(ChangeProposalContentAsSuperAdminMutation, { input: inputSuperAdmin }, 'internal_super_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to update a and published a draft proposal as admin', async () => {
     await expect(
       graphql(ChangeProposalContentDraftMutation, { input: inputDraft }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('tries to update his proposal in revision as pierre', async () => {
     await expect(
       graphql(ChangeProposalContentRevisionMutation, { input: inputRevision }, 'internal_kiroule'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should not be able to update a proposal when preventProposalEdit is enabled in the step', async () => {
     await global.runSQL('UPDATE step SET prevent_proposal_edit = 1 WHERE id = "collectstep1"')
 

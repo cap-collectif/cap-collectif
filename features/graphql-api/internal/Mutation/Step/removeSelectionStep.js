@@ -39,6 +39,11 @@ const ProjectQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|SelectionStep.remove', () => {
   it('removes a selectionStep', async () => {
     const response = await graphql(

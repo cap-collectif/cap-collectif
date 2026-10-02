@@ -31,6 +31,11 @@ const propsWithoutCounter = {
     archived: false,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectPreviewProgressBar />', () => {
   it('should render correctly an external project with counter', () => {
     const wrapper = shallow(<ProjectPreviewExternalCounters {...props} />)

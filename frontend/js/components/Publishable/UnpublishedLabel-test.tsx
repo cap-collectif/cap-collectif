@@ -7,6 +7,11 @@ import UnpublishedLabel from './UnpublishedLabel'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { UnpublishedLabelTestQuery } from '~relay/UnpublishedLabelTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<UnpublishedLabel />', () => {
   let environment
   let testComponentTree

@@ -6,6 +6,10 @@ const defaultInitialState = {
   isLoading: false,
   elements: [],
 }
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('Report Reducer', () => {
   it('Should handle OPEN_MODAL', () => {
     const newState = reducer(defaultInitialState, {

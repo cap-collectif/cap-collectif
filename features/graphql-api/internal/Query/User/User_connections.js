@@ -26,6 +26,11 @@ const UserConnectionsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Writes fixture data in shared setup without a final restoration after the suite; the database
+ * helper restores only before each test.
+ */
 describe('Internal|User connection attempts', () => {
   it('returns successful connection attempts to an administrator', async () => {
     await expect(

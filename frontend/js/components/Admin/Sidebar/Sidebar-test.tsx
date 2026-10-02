@@ -49,6 +49,11 @@ const userProjectAdmin = {
   uniqueId: 'theoqp',
   roles: ['ROLE_USER', 'ROLE_PROJECT_ADMIN'],
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Sidebar />', () => {
   it('renders correctly', () => {
     const wrapper = render(

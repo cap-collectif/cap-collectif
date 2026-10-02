@@ -198,6 +198,10 @@ const ClosedVoteQuery = /* GraphQL */ `
 
 const anonymizeAccount = email => graphql(DeleteAccountByEmailMutation, { input: { email } }, 'internal_super_admin')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.deleteAccountByEmail', () => {
   it('preserves content in open and closed steps while anonymizing its author', async () => {
     const variables = {

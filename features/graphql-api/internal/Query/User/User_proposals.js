@@ -24,6 +24,10 @@ const UserProposalsVisibilityQuery = /* GraphQL */ `
 
 const userAdminId = toGlobalId('User', 'userAdmin')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|User.proposals visibility', () => {
   it('returns visible proposals to an admin', async () => {
     await expect(

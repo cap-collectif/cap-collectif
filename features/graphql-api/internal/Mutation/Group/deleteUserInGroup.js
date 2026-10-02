@@ -17,6 +17,10 @@ const DeleteUserInGroupMutation = /* GraphQL */ `
     }
   }
 `
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|DeleteUserInGroup', () => {
   it('GraphQL client wants to remove a user from group', async () => {
     await expect(

@@ -16,6 +16,10 @@ const input = {
   amount: 2000,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.createSmsOrder', () => {
   it('should create an sms order', async () => {
     await expect(

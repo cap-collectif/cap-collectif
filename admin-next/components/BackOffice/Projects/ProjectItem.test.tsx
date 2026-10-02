@@ -6,6 +6,10 @@ import ProjectItem from './ProjectItem'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { ProjectItemTestQuery } from '@relay/ProjectItemTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ProjectItem />', () => {
   let environment: any
   let TestComponent: any

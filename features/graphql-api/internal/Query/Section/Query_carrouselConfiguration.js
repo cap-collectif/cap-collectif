@@ -62,6 +62,10 @@ const carrouselHighlightedConfigurationQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query carrouselConfiguration', () => {
   it('Get Carrousel Section Configuration as admin', async () => {
     await expect(graphql(carrouselConfigurationQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()

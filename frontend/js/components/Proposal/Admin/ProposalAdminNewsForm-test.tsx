@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalAdminNewsForm } from './ProposalAdminNewsForm'
 import { intlMock, $refType } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalAdminNewsForm />', () => {
   const props = {
     intl: intlMock,

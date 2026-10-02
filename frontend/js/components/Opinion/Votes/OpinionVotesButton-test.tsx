@@ -12,6 +12,11 @@ const defaultStep = {
     viewerMeetsTheRequirements: true,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<OpinionVotesButton />', () => {
   const defaultProps = {
     dispatch: jest.fn(),

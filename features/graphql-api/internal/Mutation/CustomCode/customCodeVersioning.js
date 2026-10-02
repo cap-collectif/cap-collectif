@@ -79,6 +79,11 @@ const validRestoreInput = {
 }
 
 describe('Internal|CustomCode versioning mutations', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('commits a custom code version as an authorized admin user', async () => {
     const response = await graphql(CommitCustomCodeVersionMutation, { input: validCommitInput }, 'internal_super_admin')
 
@@ -103,6 +108,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('restores a custom code version as an authorized admin user', async () => {
     const response = await graphql(
       RestoreCustomCodeVersionMutation,
@@ -138,6 +148,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   test.each([
     ['commitCustomCodeVersion', CommitCustomCodeVersionMutation, validCommitInput],
     ['restoreCustomCodeVersion', RestoreCustomCodeVersionMutation, validRestoreInput],
@@ -161,6 +176,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     expect(accepted[field].version.referenceUrl).toBe(referenceUrl)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   test.each([
     {
       scenario: 'saving custom code for an unsupported area',
@@ -217,6 +237,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   test.each([
     {
       scenario: 'restoring a version with a whitespace-only title',
@@ -236,6 +261,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('returns VERSION_NOT_FOUND when restoring a version that no longer exists', async () => {
     const response = await graphql(
       RestoreCustomCodeVersionMutation,
@@ -255,6 +285,11 @@ describe('Internal|CustomCode versioning mutations', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   test.each([
     ['commitCustomCodeVersion', CommitCustomCodeVersionMutation, { input: validCommitInput }],
     ['restoreCustomCodeVersion', RestoreCustomCodeVersionMutation, { input: validRestoreInput }],

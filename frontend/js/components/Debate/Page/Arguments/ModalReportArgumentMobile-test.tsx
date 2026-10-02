@@ -30,6 +30,11 @@ jest.mock('react-dom', () => ({
 
 global.Math.random = () => 0.5
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalReportArgumentMobile />', () => {
   it('should renders correcty with argument', () => {
     const wrapper = render(

@@ -41,6 +41,11 @@ jest.mock('next/navigation', () => ({
   notFound: jest.fn(() => mockNotFound()),
 }))
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Invokes the server layout with mocked navigation and inspects React elements instead of
+ * observing its HTTP or rendered behavior.
+ */
 describe('test-project layout', () => {
   beforeEach(() => {
     jest.clearAllMocks()

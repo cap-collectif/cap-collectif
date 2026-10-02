@@ -7,6 +7,11 @@ import RenderPrivateAccess from './RenderPrivateAccess'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { RenderPrivateAccessTestQuery } from '~relay/RenderPrivateAccessTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<RenderPrivateAccess />', () => {
   let environment
   let TestComponent

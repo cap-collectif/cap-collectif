@@ -10,6 +10,10 @@ const DeleteSenderEmailDomainMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.deleteSenderEmailDomain', () => {
   it('Admin tries to delete an used SenderEmailDomain', async () => {
     await expect(

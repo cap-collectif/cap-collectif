@@ -60,6 +60,11 @@ const props = {
   dispatch: jest.fn(),
   features: { ...features, themes: true, projects_form: true, display_map: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventListPaginated />', () => {
   it('renders correctly when status all', () => {
     const wrapper = shallow(<EventListPaginated {...props} />)

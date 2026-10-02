@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { getExternalExposedLink } from './externalExposedLink'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('validateResponses', () => {
   it('Should return github.com', () => {
     const value = getExternalExposedLink('https://github.com/cap-collectif/platform/issues/8639')

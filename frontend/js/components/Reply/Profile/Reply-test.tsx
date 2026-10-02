@@ -22,6 +22,11 @@ const dataReply = {
   basic: { ...baseReply },
   withoutStep: { ...baseReply, questionnaire: { ...baseReply.questionnaire, step: null } },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Reply />', () => {
   it('should render correctly with step', () => {
     const wrapper = shallow(<Reply reply={dataReply.basic} />)

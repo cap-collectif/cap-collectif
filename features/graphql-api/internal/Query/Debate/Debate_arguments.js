@@ -112,6 +112,10 @@ const DebateArgumentsIPQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Debate.arguments connection', () => {
   it('fetches arguments associated to a debate with a cursor', async () => {
     await expect(

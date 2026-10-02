@@ -26,6 +26,10 @@ const AssignAnalystsToProposalsMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.assignAnalystsToProposals', () => {
   // admin
   it('admin should assign a user as Analysts to a proposal.', async () => {

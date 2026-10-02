@@ -88,6 +88,10 @@ const InternalQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Consultation.contributions connection', () => {
   it('fetches the contributions of a consultation ordered by publication date DESC', async () => {
     await expect(

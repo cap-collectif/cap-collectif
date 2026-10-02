@@ -68,6 +68,10 @@ const QuestionnaireParticipantsQuery = /* GraphQL */ `
 
 const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ=='
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Questionnaire fields', () => {
   it('returns questionnaire questions', async () => {
     await expect(graphql(QuestionnaireQuestionsQuery, { questionnaireId }, 'internal_user')).resolves.toMatchSnapshot()

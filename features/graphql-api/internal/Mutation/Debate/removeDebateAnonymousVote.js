@@ -30,6 +30,10 @@ const RemoveDebateAnonymousVoteMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|RemoveDebateAnonymousVote mutation', () => {
   beforeEach(async () => {
     // Rebuild Elasticsearch from the restored database fixtures.

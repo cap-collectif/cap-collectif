@@ -14,6 +14,10 @@ const TrashMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Trash', () => {
   it('try to trash non trashable entity', async () => {
     await expect(

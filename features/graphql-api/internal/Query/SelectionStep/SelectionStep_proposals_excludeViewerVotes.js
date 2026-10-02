@@ -36,6 +36,10 @@ const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 it('fetches the proposals from a selection step with excludeViewerVotes filter', async () => {
   await expect(
     graphql(

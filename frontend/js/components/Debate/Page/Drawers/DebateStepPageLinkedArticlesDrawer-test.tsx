@@ -7,6 +7,11 @@ import { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals
 import type { DebateStepPageLinkedArticlesDrawerTestQuery } from '~relay/DebateStepPageLinkedArticlesDrawerTestQuery.graphql'
 import DebateStepPageLinkedArticlesDrawer from './DebateStepPageLinkedArticlesDrawer'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<DebateStepPageLinkedArticlesDrawer />', () => {
   let environment
   let testComponentTree

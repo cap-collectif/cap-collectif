@@ -19,6 +19,11 @@ const defaultState = {
   isRefetching: false,
   highlightedComment: null,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentListView />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentListView {...defaultProps} />)

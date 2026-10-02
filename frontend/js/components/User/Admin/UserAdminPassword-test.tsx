@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { intlMock, formMock, $refType } from '../../../mocks'
 import { UserAdminPassword } from './UserAdminPassword'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserAdminPassword/>', () => {
   const props = { ...formMock, intl: intlMock }
   const user = {

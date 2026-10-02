@@ -4,6 +4,11 @@ import { shallow, mount } from 'enzyme'
 import 'jest-styled-components'
 import { Container, Loader } from './Loader'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Loader />', () => {
   it('renders LoaderContainer', () => {
     const wrapper = mount(<Container />)

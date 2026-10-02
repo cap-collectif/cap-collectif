@@ -22,6 +22,10 @@ const InternalQuery = /* GraphQL */ `
 `
 
 describe('Internal Opinion_versions', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches versions of an opinion', async () => {
     const response = await graphql(
       InternalQuery,
@@ -34,6 +38,11 @@ describe('Internal Opinion_versions', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches versions of an opinion with right count', async () => {
     const response = await graphql(
       InternalQuery,
@@ -46,6 +55,10 @@ describe('Internal Opinion_versions', () => {
     expect(response.opinion.versions.edges.length).toBe(2)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches versions of an opinion in restricted project when autorized', async () => {
     const response = await graphql(
       InternalQuery,

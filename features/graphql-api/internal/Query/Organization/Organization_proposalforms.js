@@ -27,6 +27,10 @@ const OrganizationProposalForms = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Organization.ProposalForms', () => {
   it('organization admin should be able to fetch all proposalForms from organization', async () => {
     await expect(

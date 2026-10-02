@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import CounterNavItem from './CounterNavItem'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CounterNavItem />', () => {
   const props = {
     counter: 2,

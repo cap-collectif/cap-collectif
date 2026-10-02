@@ -11,6 +11,9 @@ use Symfony\Component\Security\Core\Security;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Checks Redis locking method calls inside the session handler instead of an observable
+ * session behavior.
  */
 class SessionWithJsonHandlerTest extends TestCase
 {

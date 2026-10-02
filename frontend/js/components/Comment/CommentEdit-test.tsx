@@ -18,6 +18,11 @@ const defaultComment = {
 const defaultProps = {
   comment: defaultComment,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentEdit />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentEdit {...defaultProps} />)

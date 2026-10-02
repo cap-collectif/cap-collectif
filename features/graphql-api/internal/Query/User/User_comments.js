@@ -25,6 +25,10 @@ const UserCommentsVisibilityQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|User.comments visibility', () => {
   it('returns comments visible to a user in the same group', async () => {
     await expect(

@@ -44,6 +44,11 @@ const getFollowedProposalIds = async () => {
   return response.viewer.followingProposals.edges.map(({ node }) => node.id)
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|follow proposal', () => {
   it('follows a proposal with the selected notification level', async () => {
     const response = await graphql(follow, { input: { proposalId, notifiedOf: 'MINIMAL' } }, 'internal_admin')

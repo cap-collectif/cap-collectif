@@ -82,6 +82,10 @@ const variablesByProjectOwnerUsername = {
   term: 'GIEC',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query projects', () => {
   it('fetches all projects', async () => {
     await expect(graphql(ProjectQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()

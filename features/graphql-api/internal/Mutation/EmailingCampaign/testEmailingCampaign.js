@@ -10,6 +10,10 @@ const TestEmailingCampaignMutation = /* GraphQL */ `
   }
 `
 describe('Internal|TestEmailingCampaign', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin tests a campaign', async () => {
     await expect(
       graphql(
@@ -30,6 +34,10 @@ describe('Internal|TestEmailingCampaign', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL project owner wants to test its campaign but not sendable', async () => {
     await expect(
       graphql(
@@ -45,6 +53,11 @@ describe('Internal|TestEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL project owner wants to test another one campaign', async () => {
     await expect(
       graphql(
@@ -60,6 +73,10 @@ describe('Internal|TestEmailingCampaign', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Organization admin tests a campaign', async () => {
     await expect(
       graphql(

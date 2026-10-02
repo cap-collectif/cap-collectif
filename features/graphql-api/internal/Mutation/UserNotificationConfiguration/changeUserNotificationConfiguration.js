@@ -14,6 +14,10 @@ const ChangeUserNotificationConfigurationMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.changeUserNotificationConfigurationMutation', () => {
   it('GraphQL client wants to modify a user notifications configuration', async () => {
     await expect(

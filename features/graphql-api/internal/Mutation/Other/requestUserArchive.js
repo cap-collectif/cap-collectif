@@ -14,6 +14,11 @@ const mutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|requestUserArchive mutation', () => {
   it('creates a pending archive request for the authenticated user', async () => {
     await expect(graphql(mutation, { input: {} }, 'internal_admin')).resolves.toEqual({

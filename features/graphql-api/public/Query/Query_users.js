@@ -45,6 +45,10 @@ const OpenDataUsersQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.users connection', () => {
   it('fetches the first hundred users with a cursor', async () => {
     await expect(

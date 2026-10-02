@@ -101,6 +101,10 @@ const ProposalStepProposalsCommentableQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|ProposalStep.proposals connection', () => {
   it('fetches published proposals associated to a collect step with a cursor ordered by comments count DESC', async () => {
     await expect(

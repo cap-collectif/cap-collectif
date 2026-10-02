@@ -1,6 +1,11 @@
 import L from 'leaflet'
 import { createGuardedMaplibreLayer } from './CapcoTileLayer'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Invokes private Leaflet layer methods and checks internal calls rather than the observable map
+ * lifecycle.
+ */
 describe('createGuardedMaplibreLayer', () => {
   const originalMaplibreGL = L.maplibreGL
   const originalRequestAnimFrame = L.Util.requestAnimFrame

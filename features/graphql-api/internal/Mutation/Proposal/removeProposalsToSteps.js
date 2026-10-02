@@ -24,6 +24,10 @@ const removeProposalsToSteps = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|remove proposals to steps', () => {
   it('Admin tries to remove an invalid proposal and receives an error', async () => {
     const response = await graphql(

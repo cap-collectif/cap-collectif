@@ -29,6 +29,10 @@ const getNotificationSettingId = async () => {
 }
 
 describe('Internal|updateNotificationSetting', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('updates the value and isEnabled as super-admin', async () => {
     const id = await getNotificationSettingId()
 
@@ -41,6 +45,11 @@ describe('Internal|updateNotificationSetting', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('denies the mutation as regular user', async () => {
     const id = await getNotificationSettingId()
 
@@ -53,6 +62,10 @@ describe('Internal|updateNotificationSetting', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns INVALID_VALUE for an invalid email', async () => {
     const id = await getNotificationSettingId()
 

@@ -44,6 +44,11 @@ const questionnaireProjectAdminInput = {
 }
 
 describe('mutations.deleteReplies', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should delete reply and anon reply as admin.', async () => {
     let countResponse = await graphql(
       QuestionnaireCountQuery,
@@ -74,6 +79,11 @@ describe('mutations.deleteReplies', () => {
     expect(countResponse.node.contributions.totalCount).toBe(nbContributions - 2)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should delete reply and anon reply as project owner', async () => {
     let countResponse = await graphql(
       QuestionnaireCountQuery,
@@ -97,6 +107,11 @@ describe('mutations.deleteReplies', () => {
     expect(countResponse.node.contributions.totalCount).toBe(nbContributions - 2)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw access denied if project admin user attempt to update a reply that belongs to a project he does not own', async () => {
     await expect(
       graphql(DeleteRepliesMutation, { input: questionnaireAnonymousInput }, 'internal_theo'),

@@ -12,6 +12,10 @@ const ProjectAuthorsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal.projects.authors', () => {
   it('Check its display logo organization for project', async () => {
     await expect(

@@ -7,6 +7,11 @@ import { ProposalVoteModal } from './ProposalVoteModal'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProposalVoteModalTestQuery } from '~relay/ProposalVoteModalTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalVoteModal />', () => {
   let environment
   let TestComponent

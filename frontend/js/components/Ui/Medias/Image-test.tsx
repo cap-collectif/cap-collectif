@@ -12,6 +12,11 @@ const props = {
   className: 'myClass',
   ariaHidden: false,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Image />', () => {
   it('should render correctly default Image', () => {
     const wrapper = shallow(<Image src="https://source.unsplash.com/collection/1353633" />)

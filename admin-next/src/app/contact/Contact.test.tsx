@@ -5,6 +5,10 @@ import { NavBarContext } from 'shared/navbar/NavBar.context'
 import { MockProviders } from 'tests/testUtils'
 import Contact from './Contact'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<Contact />', () => {
   const data = {
     contactPageTitle: { value: 'Contact us' },

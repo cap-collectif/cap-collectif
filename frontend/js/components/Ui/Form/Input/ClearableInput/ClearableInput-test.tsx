@@ -4,6 +4,11 @@ import { shallow, mount } from 'enzyme'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ClearableInput />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ClearableInput id="search" name="search" type="text" placeholder="Rechercher" />)

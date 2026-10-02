@@ -19,6 +19,10 @@ const input = {
   proposalFormId: 'proposalFormVote',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.setEvaluationFormInProposalFormInput', () => {
   it('wants to add an evaluation form to a proposal as admin', async () => {
     await expect(

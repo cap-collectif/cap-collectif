@@ -10,6 +10,10 @@ import { RelaySuspensFragmentTest } from 'tests/testUtils'
 
 jest.mock('@shared/hooks/useFeatureFlag')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ShieldPage />', () => {
   let environment
   let TestComponent

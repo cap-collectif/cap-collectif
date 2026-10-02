@@ -24,6 +24,11 @@ const AddCommentMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('mutations.addCommentMutation', () => {
   it('User wants to add a comment on a proposal', async () => {
     await expect(

@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProjectAdminPage } from './ProjectAdminPage'
 import MockProviders from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectAdminPage />', () => {
   const defaultProps = {
     projectId: 'oui',

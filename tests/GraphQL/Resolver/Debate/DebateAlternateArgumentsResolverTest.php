@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the resolver directly instead of proving the exposed GraphQL contract through HTTP.
  */
 class DebateAlternateArgumentsResolverTest extends TestCase
 {

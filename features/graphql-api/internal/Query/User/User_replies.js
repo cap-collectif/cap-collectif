@@ -46,6 +46,10 @@ const UserRepliesAuthorQuery = /* GraphQL */ `
 
 const user5Id = toGlobalId('User', 'user5')
 const userAdminId = toGlobalId('User', 'userAdmin')
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|User.replies visibility', () => {
   it('hides user5 replies from another user', async () => {
     await expect(

@@ -18,6 +18,10 @@ const ContributorsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query contributors', () => {
   it('fetches contributors with role admin', async () => {
     const variables = { roles: ['ROLE_ADMIN'] }

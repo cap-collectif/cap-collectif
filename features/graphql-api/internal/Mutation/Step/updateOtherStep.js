@@ -41,6 +41,10 @@ const input = {
   stepId: toGlobalId('OtherStep', 'ostep1'), // T3RoZXJTdGVwOm9zdGVwMQ==
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addOtherStepMutation', () => {
   it('admin should be able to edit other step.', async () => {
     const response = await graphql(UpdateOtherStep, { input }, 'internal_admin')

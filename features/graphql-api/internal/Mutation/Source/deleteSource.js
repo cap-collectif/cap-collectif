@@ -17,6 +17,10 @@ const input = {
 }
 
 describe('mutations.deleteSource', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should delete a Source as an admin', async () => {
     const response = await graphql(
       DeleteSource,
@@ -28,6 +32,10 @@ describe('mutations.deleteSource', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Author wants to delete his source', async () => {
     await expect(
       graphql(
@@ -42,6 +50,11 @@ describe('mutations.deleteSource', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('User wants to delete an source but is not the author', async () => {
     await expect(
       graphql(
@@ -56,6 +69,11 @@ describe('mutations.deleteSource', () => {
     ).rejects.toThrowError('You are not the author of source with id: source1')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('User wants to delete an source without requirements', async () => {
     await expect(
       graphql(

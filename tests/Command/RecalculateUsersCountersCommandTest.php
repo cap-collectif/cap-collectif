@@ -12,6 +12,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Changes fixture counters and the shared Redis queue without restoring their initial states
+ * after each scenario.
  */
 class RecalculateUsersCountersCommandTest extends KernelTestCase
 {

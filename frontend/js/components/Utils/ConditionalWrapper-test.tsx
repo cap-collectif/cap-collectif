@@ -3,6 +3,11 @@ import * as React from 'react'
 import { mount } from 'enzyme'
 import ConditionalWrapper from './ConditionalWrapper'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConditionalWrapper />', () => {
   it('renders the wrapper when the condition is true', () => {
     const wrapper = mount(

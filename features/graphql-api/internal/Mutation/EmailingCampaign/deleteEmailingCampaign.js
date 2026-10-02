@@ -11,6 +11,10 @@ const DeleteEmailingCampaignMutation = /* GraphQL */ `
   }
 `
 describe('Internal|DeleteEmailingCampaign', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin deletes a draft campaign and archives a sent campaign', async () => {
     await expect(
       graphql(
@@ -28,6 +32,10 @@ describe('Internal|DeleteEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL project owner deletes its draft campaign', async () => {
     await expect(
       graphql(
@@ -42,6 +50,11 @@ describe('Internal|DeleteEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL project owner tries to delete the another person draft campaign', async () => {
     await expect(
       graphql(
@@ -56,6 +69,11 @@ describe('Internal|DeleteEmailingCampaign', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin gives wrong id for deleting', async () => {
     await expect(
       graphql(
@@ -74,6 +92,10 @@ describe('Internal|DeleteEmailingCampaign', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin gives no id for deleting', async () => {
     await expect(
       graphql(

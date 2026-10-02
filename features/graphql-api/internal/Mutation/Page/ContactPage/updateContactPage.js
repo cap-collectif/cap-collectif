@@ -12,6 +12,10 @@ const UpdateContactPageMutation = /* GraphQL*/ `
 `
 
 describe('mutations.updateContactPage', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to update contact page informations.', async () => {
     await expect(
       graphql(
@@ -28,6 +32,10 @@ describe('mutations.updateContactPage', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to create a new traduction of contact page informations in english', async () => {
     await expect(
       graphql(
@@ -43,6 +51,10 @@ describe('mutations.updateContactPage', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to update contact page informations in english', async () => {
     await expect(
       graphql(
@@ -58,6 +70,11 @@ describe('mutations.updateContactPage', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Normal user wants to update contact page informations', async () => {
     await expect(
       graphql(

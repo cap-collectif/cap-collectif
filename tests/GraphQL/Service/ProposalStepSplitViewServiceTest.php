@@ -14,6 +14,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks the domain step instead of supplying a real step to the public split-view rule.
  */
 class ProposalStepSplitViewServiceTest extends TestCase
 {

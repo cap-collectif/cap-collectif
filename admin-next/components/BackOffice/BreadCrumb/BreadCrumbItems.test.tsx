@@ -4,6 +4,10 @@ import { CapUIProvider } from '@cap-collectif/ui'
 import BreadCrumbItems from './BreadCrumbItems'
 import { BreadCrumbItemType } from './BreadCrumbItem'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<BreadCrumbItems />', () => {
   const singleItem = [
     {

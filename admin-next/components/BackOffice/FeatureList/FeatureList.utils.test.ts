@@ -12,6 +12,10 @@ const getVisibleFeatureIds = (viewerSuperAdmin: boolean): string[] =>
     featureItem.groups.flatMap(group => Object.keys(group.items)),
   )
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('FeatureList.utils', () => {
   it('hides new_project_page from non super admins', () => {
     expect(getVisibleFeatureIds(false)).not.toContain('new_project_page')

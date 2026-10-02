@@ -26,6 +26,10 @@ const EventParticipantsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Event.participants', () => {
   it('lists the participants of an event', async () => {
     await expect(

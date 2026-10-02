@@ -11,6 +11,11 @@ const user = {
     url: "url de l'image",
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<TagUser />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<TagUser user={user} size={15} />)

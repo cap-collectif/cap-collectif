@@ -5,6 +5,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import ProposalsList from './ProposalsList'
 import { VoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalsList />', () => {
   let environment: any
   let testComponentTree: any

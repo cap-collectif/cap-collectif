@@ -6,6 +6,11 @@ import { DefaultAvatarGroup } from './DefaultAvatarGroup'
 const props = {
   size: 'small',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DefaultAvatarGroup />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<DefaultAvatarGroup />)

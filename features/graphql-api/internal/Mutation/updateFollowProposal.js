@@ -16,6 +16,10 @@ const input = {
   notifiedOf: 'MINIMAL',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateFollowProposalMutation', () => {
   it('should update follow proposal with current user', async () => {
     await expect(graphql(UpdateFollowProposalMutation, { input: input }, 'internal_user')).resolves.toMatchSnapshot()

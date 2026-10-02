@@ -13,6 +13,10 @@ const ChangeArgumentMutation = /* GraphQL*/ `
 `
 
 describe('mutations.changeArgumentMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Author wants to update his argument', async () => {
     await expect(
       graphql(
@@ -28,6 +32,11 @@ describe('mutations.changeArgumentMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('User wants to update an argument but is not the author', async () => {
     await expect(
       graphql(

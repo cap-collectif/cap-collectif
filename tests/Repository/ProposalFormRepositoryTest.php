@@ -15,6 +15,11 @@ use PHPUnit\Framework\TestCase;
  */
 class ProposalFormRepositoryTest extends TestCase
 {
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
+     * of asserting a domain effect through HTTP or CLI.
+     */
     public function testAllocatesTheNextProposalReferenceFromTheDatabaseSequence(): void
     {
         $connection = $this->createMock(Connection::class);
@@ -36,6 +41,11 @@ class ProposalFormRepositoryTest extends TestCase
         self::assertSame(106, $repository->allocateNextProposalReference('proposal-form-id'));
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
+     * of asserting a domain effect through HTTP or CLI.
+     */
     public function testDoesNotUseLastInsertIdWhenTheProposalFormDoesNotExist(): void
     {
         $connection = $this->createMock(Connection::class);
@@ -49,6 +59,11 @@ class ProposalFormRepositoryTest extends TestCase
         self::assertNull($repository->allocateNextProposalReference('new-proposal-form-id'));
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
+     * of asserting a domain effect through HTTP or CLI.
+     */
     public function testSynchronizesTheProposalReferenceWithAnExplicitReference(): void
     {
         $connection = $this->createMock(Connection::class);
@@ -68,6 +83,11 @@ class ProposalFormRepositoryTest extends TestCase
         $repository->synchronizeLastProposalReference('proposal-form-id', 106);
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks proposal-reference allocation on a real new domain entity without invoking the
+     * repository.
+     */
     public function testNewProposalFormAllocatesReferencesInMemoryBeforeItIsPersisted(): void
     {
         $proposalForm = new ProposalForm();
@@ -76,6 +96,11 @@ class ProposalFormRepositoryTest extends TestCase
         self::assertSame(2, $proposalForm->allocateNextProposalReference());
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks proposal-reference allocation on a real new domain entity without invoking the
+     * repository.
+     */
     public function testNewProposalFormSynchronizesWithAnExplicitReference(): void
     {
         $proposalForm = new ProposalForm();

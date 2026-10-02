@@ -7,6 +7,11 @@ import ProposalPreviewVote from './ProposalPreviewVote'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProposalPreviewVoteTestQuery } from '~relay/ProposalPreviewVoteTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalPreviewVote />', () => {
   let environment
   let TestComponent

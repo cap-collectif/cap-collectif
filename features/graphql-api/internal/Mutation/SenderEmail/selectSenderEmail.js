@@ -12,6 +12,10 @@ const SelectSenderEmailMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.selectSenderEmail', () => {
   it('Admin tries to select a non existing SenderEmail', async () => {
     await expect(

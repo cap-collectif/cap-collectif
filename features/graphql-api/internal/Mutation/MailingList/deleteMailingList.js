@@ -10,6 +10,10 @@ const DeleteMailingListMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.createMailingListMutation', () => {
   it('GraphQL admin wants to delete a mailing list', async () => {
     await expect(

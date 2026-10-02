@@ -78,6 +78,11 @@ const QuestionnaireOwnerQuestionnaireQueryAvailableOnly = /* GraphQL */ `
 `
 
 describe('Internal.viewer.questionnaires', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch questionnaires that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(
       QuestionnaireOwnerQuestionnairesQuery,
@@ -94,6 +99,11 @@ describe('Internal.viewer.questionnaires', () => {
     expect(response.viewer.questionnaires.edges[2].node.owner.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch all questionnaires if no affiliations given.', async () => {
     const response = await graphql(
       QuestionnaireOwnerQuestionnairesQuery,
@@ -107,6 +117,11 @@ describe('Internal.viewer.questionnaires', () => {
     expect(response.viewer.questionnaires.edges).toHaveLength(29)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly filter questionnaires by a given `query`', async () => {
     const response = await graphql(
       QuestionnaireOwnerQuestionnaireQueryFilterByQuery,
@@ -121,6 +136,11 @@ describe('Internal.viewer.questionnaires', () => {
     expect(response.viewer.questionnaires.edges).toHaveLength(2)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch all questionnaires if given `query` is empty', async () => {
     const response = await graphql(
       QuestionnaireOwnerQuestionnaireQueryFilterByQuery,
@@ -135,6 +155,11 @@ describe('Internal.viewer.questionnaires', () => {
     expect(response.viewer.questionnaires.edges).toHaveLength(4)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly order questionnaires by a given field and direction', async () => {
     const response = await graphql(
       QuestionnaireOwnerQuestionnaireQueryOrderBy,
@@ -153,6 +178,10 @@ describe('Internal.viewer.questionnaires', () => {
     expect(response.viewer.questionnaires.edges[2].node.createdAt).toBe('2020-09-11 00:00:00')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should correctly fetch all available questionnaires.', async () => {
     await expect(
       graphql(

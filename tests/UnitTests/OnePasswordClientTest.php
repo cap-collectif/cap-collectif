@@ -17,6 +17,9 @@ final class OnePasswordClientTest extends TestCase
 {
     /**
      * @dataProvider invalidConfigurationProvider
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
      */
     public function testItRejectsInvalidConfigurationWhenCredentialsAreRequested(
         string $connectUrl,
@@ -45,6 +48,11 @@ final class OnePasswordClientTest extends TestCase
         ];
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsAnEmptyItemName(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -55,6 +63,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Asserts the HTTP client buffer implementation option in addition to the public
+     * credentials and outgoing request contract.
+     */
     public function testItResolvesCredentialsFromTheNamedItem(): void
     {
         $requests = [];
@@ -84,6 +97,11 @@ final class OnePasswordClientTest extends TestCase
         self::assertFalse($requests[0]['options']['buffer']);
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsAnUnknownItem(): void
     {
         $requests = [];
@@ -96,6 +114,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsAUsernameThatDoesNotMatchTheItemName(): void
     {
         $requests = [];
@@ -114,6 +137,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItDoesNotExposeTheResponseBodyOnHttpErrors(): void
     {
         $requests = [];
@@ -126,6 +154,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItWrapsRequestErrors(): void
     {
         $httpClient = new MockHttpClient(static function (): MockResponse {
@@ -139,6 +172,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsInvalidJson(): void
     {
         $httpClient = new MockHttpClient([
@@ -152,6 +190,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsIncompleteLoginFields(): void
     {
         $httpClient = new MockHttpClient([
@@ -166,6 +209,11 @@ final class OnePasswordClientTest extends TestCase
         ;
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
+     * external-service boundary.
+     */
     public function testItRejectsResponsesLargerThanOneMiB(): void
     {
         $requests = [];

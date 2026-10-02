@@ -34,6 +34,9 @@ class AnonymousArgumentNormalizerTest extends TestCase
      * @dataProvider normalizationDataProvider
      *
      * @throws ExceptionInterface
+     * @phpunit-status non-compliant
+     * @phpunit-reason Uses loose array equality for the serialized export contract instead of asserting the
+     * expected values and types precisely.
      */
     public function testNormalize(mixed $context, mixed $expectedResult): void
     {
@@ -48,6 +51,11 @@ class AnonymousArgumentNormalizerTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
+     * service responses.
+     */
     public function testSupportsNormalization(): void
     {
         $debate = new Debate();

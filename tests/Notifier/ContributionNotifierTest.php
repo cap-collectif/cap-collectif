@@ -16,6 +16,9 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks contribution domain objects and the service graph instead of using real objects and
+ * stubbing only the notification boundary.
  */
 class ContributionNotifierTest extends TestCase
 {

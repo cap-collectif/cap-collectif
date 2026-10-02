@@ -26,6 +26,10 @@ const createGlobalDistrictMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Global district', () => {
   it('Admin wants to create a district in projects', async () => {
     await expect(

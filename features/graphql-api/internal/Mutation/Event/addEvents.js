@@ -71,6 +71,10 @@ const input = {
   dryRun: false,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addEventsInput', () => {
   it('wants to add a list of events with dry run as admin', async () => {
     await expect(graphql(AddEventsMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()

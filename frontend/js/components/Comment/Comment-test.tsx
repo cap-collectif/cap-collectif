@@ -19,6 +19,11 @@ const props = {
     id: 'proposalComment1',
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Comment />', () => {
   it('should render correctly highlighted', () => {
     const comment = {

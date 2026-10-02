@@ -20,6 +20,10 @@ const GroupMembersQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal.Group.members', () => {
   it('should fetch all members of a group ', async () => {
     await expect(

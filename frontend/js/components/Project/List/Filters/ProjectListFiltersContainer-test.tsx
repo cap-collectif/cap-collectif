@@ -19,6 +19,11 @@ const defaultState = {
     totalCount: 2,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectListFiltersContainer />', () => {
   it('should render correctly without filters', () => {
     const wrapper = shallow(<ProjectListFiltersContainer {...defaultProps} />)

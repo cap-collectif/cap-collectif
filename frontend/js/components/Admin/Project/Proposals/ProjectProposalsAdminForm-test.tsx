@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProjectProposalsAdminForm } from './ProjectProposalsAdminForm'
 import { formMock, intlMock, $refType } from '../../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectProposalsAdminForm />', () => {
   const defaultProps = { ...formMock, intl: intlMock, project: null, dispatch: jest.fn() }
   it('renders correctly empty', () => {

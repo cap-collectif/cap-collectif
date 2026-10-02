@@ -5,6 +5,11 @@ import { createMemoryHistory } from 'history'
 import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks'
 import { ReplyForm } from './ReplyForm'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ReplyForm />', () => {
   const step = {
     id: 'step1',

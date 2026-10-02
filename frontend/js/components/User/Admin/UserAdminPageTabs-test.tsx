@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { intlMock, $refType, $fragmentRefs } from '../../../mocks'
 import { UserAdminPageTabs } from './UserAdminPageTabs'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserAdminPageTabs/>', () => {
   const props1 = {
     intl: intlMock,

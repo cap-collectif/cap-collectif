@@ -17,6 +17,11 @@ const props = {
   disabled: { ...baseProps, disabled: true },
   withError: { ...baseProps, showError: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ContentPage />', () => {
   it('should renders correctly', () => {
     const wrapper = shallow(<ContentPage {...props.basic} />)

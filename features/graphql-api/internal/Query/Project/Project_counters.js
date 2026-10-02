@@ -18,6 +18,10 @@ const ProjectCountersQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal.project counters', () => {
   it('fetches participations counters by project', async () => {
     await expect(

@@ -73,6 +73,10 @@ const ProjectContributorsConsentQuery = /* GraphQL */ `
 `
 
 describe('Internal.projects.contributors', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches contributors filtered by project, step, user type, vip', async () => {
     await expect(
       graphql(
@@ -89,6 +93,10 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches contributors filtered by project, step', async () => {
     await expect(
       graphql(
@@ -103,6 +111,10 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches contributors sorted by their activities desc', async () => {
     await expect(
       graphql(
@@ -118,6 +130,10 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches contributors sorted by their activities asc', async () => {
     await expect(
       graphql(
@@ -133,6 +149,11 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches contributors that match term parameter', async () => {
     const response = await graphql(
       ProjectContributorsQuery,
@@ -147,6 +168,11 @@ describe('Internal.projects.contributors', () => {
     expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyMg==')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches contributors that match term, step, userType, vip', async () => {
     const response = await graphql(
       ProjectContributorsQuery,
@@ -164,6 +190,11 @@ describe('Internal.projects.contributors', () => {
     expect(response.project.contributors.edges[0].node.id).toBe('VXNlcjp1c2VyV2VsY29tYXR0aWM=')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches participant contributors that added a published completed proposal', async () => {
     await runSql(
       'INSERT INTO participant (id, token, firstname, lastname, email, consent_sms_communication, consent_internal_communication, consent_privacy_policy, phone_confirmed, created_at) VALUES ("participantProposalSearch", "participantProposalToken", "Proposal", "Participant", "proposal-participant@test.com", "0", "1", "0", "1", "2020-01-14 00:00:00")',
@@ -195,6 +226,10 @@ describe('Internal.projects.contributors', () => {
     }
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches contributors on debate project', async () => {
     await expect(
       graphql(
@@ -208,6 +243,11 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('cannot fetch contributors that match email if user not admin', async () => {
     const response = await graphql(
       ProjectContributorsQuery,
@@ -222,6 +262,10 @@ describe('Internal.projects.contributors', () => {
     expect(response.project.contributors.totalCount).toBe(0)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('project owner checks the internal communication consent of contributors', async () => {
     await expect(
       graphql(
@@ -234,6 +278,10 @@ describe('Internal.projects.contributors', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('get contributors total count with participant meeting requirement', async () => {
     await runSql(
       'INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")',
@@ -255,6 +303,10 @@ describe('Internal.projects.contributors', () => {
     await runSql('UPDATE proposal SET participant_id = NULL WHERE id = "proposal10"')
     await runSql('DELETE FROM participant WHERE id = "participantTest"')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('get contributors total count without participant meeting requirement', async () => {
     await runSql(
       'INSERT INTO requirement (id, step_id, type, position) VALUES ("requirementTest", "collectstep1", "PHONE_VERIFIED", "1")',

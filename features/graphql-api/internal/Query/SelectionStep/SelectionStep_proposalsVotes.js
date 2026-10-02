@@ -62,6 +62,10 @@ const SelectionStepProposalVotesWithFormQuery = /* GraphQL */ `
 
 const count = 3
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|SelectionStep.proposals votes connection', () => {
   it('lists votes for proposals in a selection step', async () => {
     await expect(

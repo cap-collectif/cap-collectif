@@ -22,6 +22,10 @@ const OrganizationQuestionnaires = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Organization.Questionnaires', () => {
   it('organization admin should be able to fetch all questionnaires from organization', async () => {
     await expect(

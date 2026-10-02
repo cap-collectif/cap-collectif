@@ -7,6 +7,11 @@ import { RelaySuspensFragmentTest } from '~/testUtils'
 import type { EventModerationMotiveTestQuery } from '~relay/EventModerationMotiveTestQuery.graphql'
 import EventModerationMotive from './EventModerationMotive'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<EventModerationMotive />', () => {
   let environment
   let testComponentTree

@@ -14,6 +14,11 @@ const DeleteFontMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|deleteFont mutation', () => {
   it('should delete a custom added font', async () => {
     const file = fs.readFileSync(path.join(__dirname, '../../__files__/lato.zip'))

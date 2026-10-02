@@ -13,6 +13,11 @@ const RemoveOpinionVote = /* GraphQL*/ `
 `
 
 describe('mutations.removeOpinionVote', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote in a not contribuable opinion', async () => {
     await expect(
       graphql(
@@ -27,6 +32,11 @@ describe('mutations.removeOpinionVote', () => {
     ).rejects.toThrowError('Uncontribuable opinion.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote but has not voted', async () => {
     await expect(
       graphql(
@@ -41,6 +51,11 @@ describe('mutations.removeOpinionVote', () => {
     ).rejects.toThrowError('You have not voted for this opinion.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote without meeting requirements', async () => {
     await expect(
       graphql(
@@ -55,6 +70,10 @@ describe('mutations.removeOpinionVote', () => {
     ).rejects.toThrowError('You dont meets all the requirements.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to remove a vote', async () => {
     await expect(
       graphql(

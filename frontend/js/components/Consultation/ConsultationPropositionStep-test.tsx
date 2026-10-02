@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ConsultationPropositionStep } from './ConsultationPropositionStep'
 import { $fragmentRefs, $refType } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConsultationPropositionStep />', () => {
   const props = {
     showConsultationPlan: true,

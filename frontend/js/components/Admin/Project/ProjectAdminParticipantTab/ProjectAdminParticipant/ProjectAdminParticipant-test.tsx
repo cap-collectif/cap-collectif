@@ -8,6 +8,11 @@ import type { ProjectAdminParticipantTestQuery } from '~relay/ProjectAdminPartic
 import type { OwnProps } from './ProjectAdminParticipant'
 import ProjectAdminParticipant from './ProjectAdminParticipant'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectAdminParticipant />', () => {
   let environment
   let testComponentTree

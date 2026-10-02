@@ -27,6 +27,11 @@ const props = {
   viewerNotAdmin: { ...baseProps, viewerIsAdmin: false },
   noCollectStep: { ...baseProps, project: { ...baseProps.project, firstCollectStep: null } },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectStepAdmin />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<ProjectStepAdmin {...props.basic} />)

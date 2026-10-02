@@ -333,6 +333,10 @@ const DEFAULT_PROJECT = {
     },
   ],
 }
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('ProjectAdminProposals utils functions', () => {
   it('should get a correctly formatted categories choices for a given project', () => {
     const categories = getFormattedAllCategoriesForProject(DEFAULT_PROJECT)

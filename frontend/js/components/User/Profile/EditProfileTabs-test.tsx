@@ -39,38 +39,76 @@ describe('<EditProfileTabs />', () => {
   afterEach(() => {
     mockUrl('http://localhost')
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render all tabs', () => {
     const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render all tabs except profile, password and account (OpenID)', () => {
     const wrapper = shallow(<EditProfileTabs {...propsWithOpenIdAndNotProfiles} {...globalProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return profile from hashkey', () => {
     const result = getHashKey('profile')
     expect(result).toEqual('profile')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return password from hashkey', () => {
     const result = getHashKey('password')
     expect(result).toEqual('password')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return personal-data from hashkey', () => {
     const result = getHashKey('personal-data')
     expect(result).toEqual('personal-data')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return account from hashkey', () => {
     const result = getHashKey('account')
     expect(result).toEqual('account')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return notifications from hashkey', () => {
     const result = getHashKey('notifications')
     expect(result).toEqual('notifications')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return followings from hashkey', () => {
     const result = getHashKey('followings')
     expect(result).toEqual('followings')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+   */
   it('should return account from empty hashkey', () => {
     const result = getHashKey('')
     expect(result).toEqual('account')

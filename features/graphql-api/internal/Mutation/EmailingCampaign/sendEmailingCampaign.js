@@ -12,6 +12,10 @@ const SendEmailingCampaignMutation = /* GraphQL */ `
   }
 `
 describe('Internal|SendEmailingCampaign', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin send a draft campaign', async () => {
     await expect(
       graphql(
@@ -26,6 +30,10 @@ describe('Internal|SendEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin plans a draft campaign', async () => {
     await expect(
       graphql(
@@ -52,6 +60,10 @@ describe('Internal|SendEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin tries send a campaign already sent', async () => {
     await expect(
       graphql(
@@ -66,6 +78,10 @@ describe('Internal|SendEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL project owner tries to send its draft campaign but is not complete', async () => {
     await expect(
       graphql(
@@ -80,6 +96,11 @@ describe('Internal|SendEmailingCampaign', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL project owner tries to send other one campaign', async () => {
     await expect(
       graphql(
@@ -94,6 +115,10 @@ describe('Internal|SendEmailingCampaign', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Organization admin send a draft campaign', async () => {
     await expect(
       graphql(

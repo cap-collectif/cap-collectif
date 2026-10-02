@@ -14,6 +14,11 @@ const ChangeFontMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|changeFont mutation', () => {
   it('sets Courier as a heading font and Geneva as a body font', async () => {
     const courierId = toGlobalId('Font', 'courierFont')

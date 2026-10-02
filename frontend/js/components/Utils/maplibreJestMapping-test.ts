@@ -1,5 +1,9 @@
 /* eslint-env jest */
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks Jest module mappings and mocks rather than the application map behavior.
+ */
 describe('maplibre Jest mapping', () => {
   it('uses anchored patterns and keeps plugin mapping first', () => {
     const { moduleNameMapper } = require('../../../../jest.config')

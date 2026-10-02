@@ -89,6 +89,10 @@ const AssignedViewerProposalsByProjectQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
   it('fetches all analyst, supervisors and decisionMakers assigned to my projects; Logged as supervisor', async () => {
     await expect(graphql(InternalQuery, {}, 'internal_supervisor')).resolves.toMatchSnapshot()

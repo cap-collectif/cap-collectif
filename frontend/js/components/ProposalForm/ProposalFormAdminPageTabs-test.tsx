@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalFormAdminPageTabs } from './ProposalFormAdminPageTabs'
 import { $fragmentRefs, intlMock, $refType } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalFormAdminPageTabs />', () => {
   const proposalForm = {
     ' $refType': $refType,

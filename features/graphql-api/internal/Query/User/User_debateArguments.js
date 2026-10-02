@@ -24,6 +24,10 @@ const UserDebateArgumentsQuery = /* GraphQL */ `
 
 const userId = toGlobalId('User', 'userTheo')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|User.debateArguments visibility', () => {
   it('returns published debate arguments to an anonymous user', async () => {
     await expect(graphql(UserDebateArgumentsQuery, { userId, orderBy: null }, 'internal')).resolves.toMatchSnapshot()

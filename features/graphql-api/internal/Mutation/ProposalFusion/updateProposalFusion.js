@@ -17,6 +17,10 @@ const UpdateProposalFusionMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateProposalFusionMutation', () => {
   it('GraphQL admin wants to update a fusion', async () => {
     await expect(

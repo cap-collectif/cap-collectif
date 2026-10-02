@@ -24,6 +24,10 @@ const AddReplyMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addUserReplyMutation', () => {
   it('User wants to add a reply', async () => {
     await expect(

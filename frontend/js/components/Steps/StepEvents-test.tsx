@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import StepEvents from './StepEvents'
 import type { StepEventsTestQuery } from '~relay/StepEventsTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<StepEvents />', () => {
   let environment: any
   let testComponentTree: any

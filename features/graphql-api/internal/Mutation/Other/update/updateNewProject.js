@@ -149,6 +149,10 @@ const inputVisibility = {
   },
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|UpdateNewProject mutation', () => {
   it('admin should be able to update a project.', async () => {
     const response = await graphql(

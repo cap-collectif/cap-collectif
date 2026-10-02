@@ -27,6 +27,11 @@ const props = {
   intl: intlMock,
   ...formMock,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<HomePageProjectsSectionConfigurationPage />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<HomePageProjectsSectionConfigurationPage {...props} />)

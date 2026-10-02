@@ -11,6 +11,11 @@ const deleteUserIdentificationMutation = /* GraphQL*/ `
 `
 
 describe('mutations.deleteUserIdentification', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('API client wants to delete a list but is not admin', async () => {
     await expect(
       graphql(
@@ -25,6 +30,10 @@ describe('mutations.deleteUserIdentification', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('API admin wants to delete a list but wrong id', async () => {
     await expect(
       graphql(
@@ -39,6 +48,10 @@ describe('mutations.deleteUserIdentification', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('API admin wants to delete a list', async () => {
     await expect(
       graphql(

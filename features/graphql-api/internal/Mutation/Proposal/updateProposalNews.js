@@ -18,6 +18,10 @@ const updateProposalNews = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|update proposal news', () => {
   const input = {
     postId: 'UG9zdDpwb3N0MTc=',

@@ -98,6 +98,10 @@ const UserVotesMinQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.votes connection', () => {
   it("fetches a user's votes as super admin.", async () => {
     await Promise.all(

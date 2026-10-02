@@ -20,6 +20,10 @@ const AddOpinionVoteMutation = /* GraphQL*/ `
 `
 
 describe('mutations.AddOpinionVoteMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for an opinion', async () => {
     await expect(
       graphql(
@@ -41,6 +45,11 @@ describe('mutations.AddOpinionVoteMutation', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for an opinion not contributable', async () => {
     await expect(
       graphql(
@@ -56,6 +65,10 @@ describe('mutations.AddOpinionVoteMutation', () => {
     ).rejects.toThrowError('Uncontribuable opinion.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to update an existing vote', async () => {
     await expect(
       graphql(
@@ -77,6 +90,11 @@ describe('mutations.AddOpinionVoteMutation', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for an opinion without requirement', async () => {
     await expect(
       graphql(

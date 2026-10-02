@@ -101,6 +101,10 @@ const input = {
   allowingProgressSteps: true,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateSelectionStep', () => {
   it('admin should be able to edit selectionStep step.', async () => {
     const response = await graphql(UpdateSelectionStep, { input: { ...input } }, 'internal_admin')

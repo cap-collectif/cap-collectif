@@ -7,6 +7,11 @@ const props = {
   page: 3,
   onSelect: () => {},
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<PaginationItem />', () => {
   it('should render a pagination item', () => {
     const wrapper = shallow(<PaginationItem {...props} />)

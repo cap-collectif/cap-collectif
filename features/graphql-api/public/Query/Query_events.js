@@ -128,6 +128,10 @@ const InternalRemoteEventsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.events connection', () => {
   it('fetches the first hundred events with a cursor', async () => {
     await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot()

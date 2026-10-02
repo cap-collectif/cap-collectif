@@ -57,11 +57,20 @@ const input = {
 }
 
 describe('Internal mutation.addProposalsFromCsv', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should not import', async () => {
     const importProposals = await graphql(AddProposalsFromCsvMutation, { input }, 'internal_admin')
     expect(importProposals).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should report every row that violates a text length constraint', async () => {
     const importProposals = await graphql(
       AddProposalsFromCsvWithLineErrorsMutation,
@@ -130,6 +139,10 @@ describe('Internal mutation.addProposalsFromCsv', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should import as admin', async () => {
     const importInput = {
       ...input,
@@ -139,6 +152,10 @@ describe('Internal mutation.addProposalsFromCsv', () => {
     const importProposals = await graphql(AddProposalsFromCsvMutation, { input: importInput }, 'internal_admin')
     expect(importProposals).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should import as project admin', async () => {
     const importInput = {
       ...input,
@@ -148,6 +165,11 @@ describe('Internal mutation.addProposalsFromCsv', () => {
     const importProposals = await graphql(AddProposalsFromCsvMutation, { input: importInput }, 'internal_theo')
     expect(importProposals).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not import when project admin is not owner', async () => {
     await expect(
       graphql(

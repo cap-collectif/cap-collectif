@@ -202,6 +202,11 @@ const ViewerQuery = /* GraphQL */ `
 `
 
 describe('Internal|Query identity and privacy', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('lists groups and separates users by internal-communication consent', async () => {
     const response = await graphql(GroupsQuery, {}, 'internal_admin')
     expect(response.groups.edges[0].node).toEqual({
@@ -235,6 +240,11 @@ describe('Internal|Query identity and privacy', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('paginates the users of a group', async () => {
     const response = await graphql(
       GroupUsersQuery,
@@ -253,30 +263,55 @@ describe('Internal|Query identity and privacy', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('reports an unused email address as available', async () => {
     await expect(
       graphql(IsEmailAlreadyTakenQuery, { email: 'notused@test.com' }, 'internal'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('reports an existing email address as taken', async () => {
     await expect(
       graphql(IsEmailAlreadyTakenQuery, { email: 'julien.aguilar@cap-collectif.com' }, 'internal'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists all organizations for an administrator', async () => {
     await expect(graphql(OrganizationsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('filters organizations by their title for an administrator', async () => {
     await expect(graphql(OrganizationsQuery, { search: 'parthenay' }, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns the authenticated user personal data', async () => {
     await expect(graphql(ViewerPersonalDataQuery, {}, 'internal_user')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('denies anonymous access to another user personal data', async () => {
     await expect(rawInternalGraphql(PersonalDataQuery, { userId: toGlobalId('User', 'user5') })).resolves.toEqual({
       data: {
@@ -297,12 +332,21 @@ describe('Internal|Query identity and privacy', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns another user personal data to an administrator', async () => {
     await expect(
       graphql(PersonalDataQuery, { userId: toGlobalId('User', 'user5') }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('denies a user access to another user personal data', async () => {
     await expect(
       rawInternalGraphql(
@@ -332,24 +376,45 @@ describe('Internal|Query identity and privacy', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns the registration tracking script', async () => {
     await expect(graphql(RegistrationScriptQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('denies a non-administrator access to user identification code lists', async () => {
     await expect(graphql(UserIdentificationCodeListsQuery, {}, 'internal_theo')).rejects.toThrow(
       'Access denied to this field.',
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns user identification code lists to an administrator', async () => {
     await expect(graphql(UserIdentificationCodeListsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns all user count filters to an administrator', async () => {
     await expect(graphql(UsersQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('scores a strong password', async () => {
     await expect(
       graphql(
@@ -360,6 +425,10 @@ describe('Internal|Query identity and privacy', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('scores a weak password', async () => {
     await expect(
       graphql(
@@ -370,16 +439,28 @@ describe('Internal|Query identity and privacy', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only the notification flag type rather than the expected preference value.
+   */
   it('returns the current user notification configuration', async () => {
     const response = await graphql(ViewerQuery, { count: 5, cursor: null }, 'internal_user')
     expect(response.viewer.notificationsConfiguration.onProposalCommentMail).toEqual(expect.any(Boolean))
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns opinions followed by the current user', async () => {
     const response = await graphql(ViewerQuery, { count: 5, cursor: null }, 'internal_user')
     expect(response.viewer.followingOpinions).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('returns proposals followed by the current user', async () => {
     const response = await graphql(ViewerQuery, { count: 32, cursor: null }, 'internal_admin')
     expect(response.viewer.followingProposals).toMatchSnapshot()

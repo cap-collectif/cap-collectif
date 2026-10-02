@@ -6,6 +6,10 @@ import PostList from './PostList'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import { PostListTestQuery } from '@relay/PostListTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<PostList />', () => {
   let environment: any
   let TestComponent: any

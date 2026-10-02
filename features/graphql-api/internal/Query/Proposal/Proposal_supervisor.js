@@ -20,6 +20,10 @@ const SupervisedProposalsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.supervisedProposals', () => {
   it("fetches user's supervised proposals when authenticated as supervisor.", async () => {
     await expect(
@@ -67,6 +71,10 @@ const ProposalSupervisorRelatedQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Proposal.supervisor|assessment|viewerCanEvaluate', () => {
   it("fetches proposal's supervisor|assessment|viewerCanEvaluate authenticated as supervisor", async () => {
     await expect(

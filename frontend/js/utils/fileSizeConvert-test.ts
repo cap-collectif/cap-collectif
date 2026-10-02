@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import fileSizeConvert from '~/utils/fileSizeConvert'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('fileSizeConvert', () => {
   it('megabytes to bytes', () => {
     const size = 10

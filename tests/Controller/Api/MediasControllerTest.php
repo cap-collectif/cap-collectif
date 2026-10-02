@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the controller action directly instead of uploading the malicious file through HTTP.
  */
 class MediasControllerTest extends KernelTestCase
 {

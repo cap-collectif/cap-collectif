@@ -106,10 +106,20 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     features,
     relay: relayRefetchMock,
   }
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly', () => {
     const wrapper = shallow(<ProposalFormAdminConfigurationForm {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly with question type number', () => {
     const questionWithRange = {
       id: 'field-1',
@@ -137,6 +147,11 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     const wrapper = shallow(<ProposalFormAdminConfigurationForm {...numberProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render error with question type number', () => {
     const ppForm = {
       ...proposalForm,
@@ -231,6 +246,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     const wrapper = shallow(<ProposalFormAdminConfigurationForm {...numberProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as 0', () => {
     const values = {
       viewEnabled: true,
@@ -248,6 +267,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     }
     expect(validate(values)).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as null', () => {
     const values = {
       viewEnabled: true,
@@ -265,6 +288,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     }
     expect(validate(values)).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as min > max', () => {
     const values = {
       viewEnabled: true,
@@ -282,6 +309,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     }
     expect(validate(values)).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as min < max', () => {
     const values = {
       viewEnabled: true,
@@ -299,6 +330,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     }
     expect(validate(values)).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as min equal 0 and max equal 10000', () => {
     const values = {
       viewEnabled: true,
@@ -316,6 +351,10 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     }
     expect(validate(values)).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('render error with question type number with value as min equal 1000 and max equal 0', () => {
     const values = {
       viewEnabled: true,

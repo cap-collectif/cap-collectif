@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the request listener directly instead of triggering redirects through HTTP.
  */
 class HttpRedirectRequestListenerTest extends TestCase
 {

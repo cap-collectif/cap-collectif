@@ -29,6 +29,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Exercises the OAuth resource owner with mocked framework internals instead of an
+ * authentication request.
  */
 final class FranceConnectResourceOwnerTest extends TestCase
 {

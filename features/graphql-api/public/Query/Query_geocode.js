@@ -9,6 +9,11 @@ const GeoCodeQueryQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|Query.geocode connection', () => {
   it('fetches the not found address from lat lng', async () => {
     const response = await graphql(

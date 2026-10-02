@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { CookieContent } from './CookieContent'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CookieContent />', () => {
   it('should render correctly with 3 cookies type', () => {
     const props = {

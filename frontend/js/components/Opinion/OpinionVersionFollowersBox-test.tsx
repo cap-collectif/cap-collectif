@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { relayPaginationMock, $refType, $fragmentRefs } from '../../mocks'
 import { OpinionVersionFollowersBox } from './OpinionVersionFollowersBox'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<OpinionVersionFollowersBox />', () => {
   const props = {
     relay: relayPaginationMock,

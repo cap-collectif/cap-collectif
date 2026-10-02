@@ -104,6 +104,10 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.proposals connection', () => {
   it('fetches the first hundred proposals with a cursor', async () => {
     await expect(

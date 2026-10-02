@@ -18,6 +18,11 @@ const defaultProps = {
 beforeEach(() => {
   jest.useFakeTimers().setSystemTime(new Date('2023-01-01T12:00:00Z'))
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentDate />', () => {
   it('should render correctly', () => {
     const props = { ...defaultProps, comment: defaultComment }

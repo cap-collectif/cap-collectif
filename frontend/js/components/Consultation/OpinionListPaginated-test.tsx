@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { OpinionListPaginated } from './OpinionListPaginated'
 import { $refType, $fragmentRefs, relayPaginationMock } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<OpinionListPaginated />', () => {
   const props = {
     relay: { ...relayPaginationMock, hasMore: () => true },

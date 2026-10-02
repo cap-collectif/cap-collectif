@@ -18,6 +18,10 @@ const ParticipantVotes = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Participant.Votes', () => {
   it('super admin should be able to fetch votes from participant', async () => {
     await expect(

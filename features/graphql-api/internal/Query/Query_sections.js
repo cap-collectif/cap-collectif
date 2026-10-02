@@ -16,6 +16,10 @@ const SectionsByUserQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.sections', () => {
   it('lists all sections', async () => {
     await expect(graphql(SectionsQuery, {}, 'internal')).resolves.toMatchSnapshot()

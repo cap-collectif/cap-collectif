@@ -8,6 +8,11 @@ const props = {
   ratioX: 9,
   ratioY: 3,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<RatioMediaContainer />', () => {
   it('should render correctly default RatioMediaContainer', () => {
     const wrapper = shallow(

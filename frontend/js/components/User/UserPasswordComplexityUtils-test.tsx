@@ -34,6 +34,11 @@ describe('<UserPasswordComplexityField />', () => {
   beforeEach(() => {
     config.isMobile = false
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a mobile version of the field', () => {
     config.isMobile = true
     const wrapper = shallow(
@@ -49,12 +54,24 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets correct passwordConditions with checkPasswordConditions', () => {
     expect(checkPasswordConditions('passWord91')).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets bad passwordConditions with checkPasswordConditions', () => {
     expect(checkPasswordConditions('password')).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets all errors with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -64,6 +81,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets length and uppercase errors with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -73,6 +94,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets no error with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -82,6 +107,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets length and digit errors with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -91,6 +120,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets digit and uppercase errors with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -100,6 +133,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets length error with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -109,6 +146,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets uppercase error with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -118,6 +159,10 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('gets digit error with getMatchingPasswordError', () => {
     expect(
       getMatchingPasswordError('password-field', {
@@ -127,6 +172,11 @@ describe('<UserPasswordComplexityField />', () => {
       }),
     ).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 0', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -141,6 +191,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 1', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -156,6 +211,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 2', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -170,6 +230,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 3', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -184,6 +249,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 4', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -198,6 +268,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 5', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -212,6 +287,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 6', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField
@@ -226,6 +306,11 @@ describe('<UserPasswordComplexityField />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('renders a UserPasswordComplexityField with a passwordComplexityScore of 7', () => {
     const wrapper = shallow(
       <UserPasswordComplexityField

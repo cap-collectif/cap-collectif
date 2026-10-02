@@ -47,6 +47,11 @@ const defaultProps = {
   initialValues: null,
   currentLanguage: 'fr-FR',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventAdminFormPage />', () => {
   it('it renders correctly, with props at true', () => {
     const props = { ...defaultProps }

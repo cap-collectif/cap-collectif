@@ -14,6 +14,11 @@ const props = {
   confirmedUsers: { ...baseProps, type: 'CONFIRMED' as EmailingCampaignInternalList },
   notConfirmedUsers: { ...baseProps, type: 'NOT_CONFIRMED' as EmailingCampaignInternalList },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalInternalMembers />', () => {
   it('should open with internal list with registered users', () => {
     const wrapper = shallow(<ModalInternalMembers {...props.basic} />)

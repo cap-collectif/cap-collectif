@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { UserAdminCreateButton } from './UserAdminCreateButton'
 import { intlMock, formMock } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserAdminCreateButton/>', () => {
   const props1 = { ...formMock, intl: intlMock }
   it('should render', () => {

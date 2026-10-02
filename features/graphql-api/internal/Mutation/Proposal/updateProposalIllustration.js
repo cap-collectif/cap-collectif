@@ -16,6 +16,10 @@ const UpdateProposalIllustrationMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal | Update proposal illustration without illustration', () => {
   it('add illustration on proposal', async () => {
     const updateProposalIllustration = await graphql(

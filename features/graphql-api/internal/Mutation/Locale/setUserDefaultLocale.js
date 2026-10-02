@@ -9,6 +9,11 @@ const mutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|setUserDefaultLocale mutation', () => {
   it('changes a user default locale as an admin', async () => {
     await expect(

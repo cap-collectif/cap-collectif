@@ -20,6 +20,10 @@ const UpdateOfficialResponseMutation = /* GraphQL*/ `
 `
 
 describe('mutations.updateOfficialResponse', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin creates an officialResponse', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,
@@ -36,6 +40,10 @@ describe('mutations.updateOfficialResponse', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin unpublish an officialResponse', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,
@@ -53,6 +61,10 @@ describe('mutations.updateOfficialResponse', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to create an officialResponse but gives no author', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,
@@ -69,6 +81,10 @@ describe('mutations.updateOfficialResponse', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to create an officialResponse but wrong author id', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,
@@ -85,6 +101,11 @@ describe('mutations.updateOfficialResponse', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to create an officialResponse but wrong proposal id', async () => {
     await expect(
       graphql(
@@ -102,6 +123,10 @@ describe('mutations.updateOfficialResponse', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update an officialResponse but wrong id', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,
@@ -120,6 +145,10 @@ describe('mutations.updateOfficialResponse', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin remove an author from an officialResponse', async () => {
     const response = await graphql(
       UpdateOfficialResponseMutation,

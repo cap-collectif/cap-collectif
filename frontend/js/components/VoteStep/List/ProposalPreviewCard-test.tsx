@@ -6,6 +6,11 @@ import type { ProposalPreviewCardTestQuery } from '~relay/ProposalPreviewCardTes
 import MockProviders, { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 import ProposalPreviewCard from './ProposalPreviewCard'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalPreviewCard />', () => {
   let environment: any
   let testComponentTree: any

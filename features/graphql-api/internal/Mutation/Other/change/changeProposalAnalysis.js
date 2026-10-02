@@ -98,6 +98,10 @@ const responses = [
   },
 ]
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.changeProposalAnalysis', () => {
   it("should not create the proposal's analysis when authenticated as user", async () => {
     const createAnalysis = await graphql(

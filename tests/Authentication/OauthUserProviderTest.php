@@ -41,6 +41,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks domain users and persistence interactions instead of observing an authentication flow
+ * and its persisted effects.
  */
 final class OauthUserProviderTest extends TestCase
 {

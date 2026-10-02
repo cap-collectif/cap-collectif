@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { QuestionnaireAdminParametersForm } from '~/components/Questionnaire/QuestionnaireAdminParametersForm'
 import { $refType, formMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<QuestionnaireAdminParametersForm />', () => {
   const questionnaireProps = {
     questionnaire: {

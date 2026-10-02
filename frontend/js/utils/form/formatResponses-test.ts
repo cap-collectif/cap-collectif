@@ -120,6 +120,10 @@ const result = [
     constraintes: null,
   },
 ]
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('formatResponses', () => {
   it('should format correctly', () => {
     const formattedResponses = formatResponses(allTypeQuestions, allTypeResponses)

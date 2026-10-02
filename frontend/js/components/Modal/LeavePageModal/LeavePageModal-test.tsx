@@ -13,6 +13,11 @@ const props = {
   btnCloseAndConfirmlMessage: 'save-quit',
   onCloseAndConfirm: jest.fn(),
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<LeavePageModal />', () => {
   it('render correctly', () => {
     const wrapper = shallow(<LeavePageModal {...props} />)

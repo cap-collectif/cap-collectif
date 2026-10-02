@@ -12,6 +12,10 @@ const UserRepliesQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.replies connection', () => {
   it("fetches a user's published, non-draft, public replies", async () => {
     await Promise.all(

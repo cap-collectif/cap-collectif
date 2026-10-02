@@ -17,6 +17,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Replaces domain SSO configuration with a mock graph instead of real scenario objects.
  */
 final class FranceConnectOptionsModifierTest extends TestCase
 {

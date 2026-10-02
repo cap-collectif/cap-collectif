@@ -5,6 +5,11 @@ import { Profile } from './Profile'
 import { intlMock, formMock, $refType } from '~/mocks'
 import { enableFeatureFlags, disableFeatureFlags } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Profile />', () => {
   const props = {
     ...formMock,

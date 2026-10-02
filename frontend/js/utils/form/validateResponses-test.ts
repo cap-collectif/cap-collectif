@@ -90,6 +90,10 @@ const allTypeErrorResponses = {
     },
   ],
 }
+/**
+ * @jest-status non-compliant
+ * @jest-reason Mutates imported allTypeResponses fixtures without restoring them between scenarios.
+ */
 describe('validateResponses', () => {
   it('should work correctly with all questions required and right responses', () => {
     const availableQuestionsIds = getAvailableQuestionsIds(allTypeQuestions, allTypeResponses)

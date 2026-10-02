@@ -34,6 +34,11 @@ const props = {
   isMobile: { ...defaultProps, isMobile: true },
   noViewer: { ...defaultProps, viewer: null },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateStepPageArguments />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<DebateStepPageArguments {...props.basic} />)

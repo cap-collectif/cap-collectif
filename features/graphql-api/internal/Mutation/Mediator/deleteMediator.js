@@ -9,6 +9,10 @@ const DeleteMediatorMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations|deleteMediator', () => {
   it('admin should be able to delete a mediator.', async () => {
     const variables = {

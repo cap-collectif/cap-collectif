@@ -74,11 +74,19 @@ const inputSectionTypeCarrouselHighlighted = {
 }
 
 describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should create and update a CarrouselConfiguration for carrousel section type as admin', async () => {
     await expect(
       graphql(createOrUpdateCarrouselConfigurationMutation, { input: inputSectionTypeCarrousel }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should not create more than 8 section carrousel items for carrousel section type', async () => {
     await expect(
       graphql(
@@ -125,11 +133,20 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not create and update a CarrouselConfiguration for carrousel section type as user', async () => {
     await expect(
       graphql(createOrUpdateCarrouselConfigurationMutation, { input: inputSectionTypeCarrousel }, 'internal_user'),
     ).rejects.toThrowError('Access denied to this field.')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should create and update a CarrouselConfiguration for carrousel highlighted section type as admin', async () => {
     await expect(
       graphql(
@@ -139,6 +156,10 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should not create more than 8 section carrousel items for carrousel highlighted section type', async () => {
     await expect(
       graphql(
@@ -185,6 +206,11 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not create and update a CarrouselConfiguration for carrousel highlighted section type as user', async () => {
     await expect(
       graphql(

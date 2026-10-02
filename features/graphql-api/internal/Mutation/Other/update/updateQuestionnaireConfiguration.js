@@ -40,6 +40,10 @@ const UpdateQuestionnaireMutation = /* GraphQL */ `
 `
 
 describe('Internal|updateQuestionnaireConfiguration mutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Add over 1000 choices and some duplicates choices', async () => {
     const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA='
     const generatedChoices = []
@@ -96,6 +100,11 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('Add over 1500 choices and some duplicates choices', async () => {
     const questionnaireId = 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQWRtaW4='
     const generatedChoices = []
@@ -142,6 +151,11 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should update correctly', async () => {
     const response = await graphql(
       UpdateQuestionnaireMutation,
@@ -160,6 +174,11 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
     expect(response.updateQuestionnaireConfiguration.questionnaire.owner).toBe(null)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw an access denied if a project admin user attempt to update a questionnaire that he does not own', async () => {
     await expect(
       graphql(
@@ -175,6 +194,11 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw an access denied when questionnaire does not exist', async () => {
     await expect(
       graphql(

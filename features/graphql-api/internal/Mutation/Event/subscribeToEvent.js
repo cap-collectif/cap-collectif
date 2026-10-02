@@ -22,6 +22,10 @@ const SubscribeToEventAsNonRegisteredMutation = /* GraphQL*/ `
 `
 
 describe('mutations.subscribeToEvent', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin wants to subscribe to an event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
@@ -33,6 +37,10 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('theo wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
@@ -44,6 +52,11 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('user wants to subscribe to a registered event.', async () => {
     // Event:event3 => max registrations : 2
     let eventId = 'RXZlbnQ6ZXZlbnQz'
@@ -70,6 +83,11 @@ describe('mutations.subscribeToEvent', () => {
     ).rejects.toThrowError('Event is complete')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('user wants to subscribe to a complete event.', async () => {
     await expect(
       graphql(
@@ -82,6 +100,10 @@ describe('mutations.subscribeToEvent', () => {
     ).rejects.toThrowError('Event is complete')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('user wants to subscribe to event as anonymous.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
@@ -93,6 +115,10 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('anonymous wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsNonRegisteredMutation,
@@ -104,6 +130,10 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('anonymous wants to subscribe to event as anonymous.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsNonRegisteredMutation,
@@ -119,6 +149,11 @@ describe('mutations.subscribeToEvent', () => {
     )
     expect(subscribeToEvent).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('anonymous wants to subscribe ever subscribed event.', async () => {
     await graphql(
       SubscribeToEventAsNonRegisteredMutation,
@@ -148,6 +183,11 @@ describe('mutations.subscribeToEvent', () => {
       ),
     ).rejects.toThrowError('User is already registered for this event.')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('anonymous wants to subscribe to a complete event.', async () => {
     await expect(
       graphql(

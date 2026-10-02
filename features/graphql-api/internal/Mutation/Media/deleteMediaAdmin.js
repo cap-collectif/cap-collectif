@@ -13,6 +13,11 @@ const DeleteMediaAdminMutation = /* GraphQL */ `
 `
 const basePath = path.join(process.cwd(), 'public/media/default/0001/01')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Delete Media (admin media page)', () => {
   it('deletes one media as admin', async () => {
     const abbaPath = path.join(basePath, 'abba_money.jpg')

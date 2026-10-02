@@ -26,6 +26,11 @@ const defaultPropsAuthor = {
   author: null,
   intl: intlMock,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectsListFilterAuthors />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProjectsListFilterAuthors {...defaultPropsAuthor} />)

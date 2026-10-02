@@ -22,6 +22,11 @@ const ProjectProposalsQuery = /* GraphQL */ `
 `
 
 describe('Preview|Project.proposals connection', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks viewer authentication explicitly but leaves the returned proposal contract to a
+   * response snapshot.
+   */
   it('fetches the proposals of a public project as anonymous', async () => {
     const response = await graphql(
       ProjectProposalsQuery,
@@ -32,6 +37,11 @@ describe('Preview|Project.proposals connection', () => {
     expect(response.viewer).toBe(undefined)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('fetches the proposals of a private project', async () => {
     const response = await graphql(
       ProjectProposalsQuery,
@@ -42,6 +52,11 @@ describe('Preview|Project.proposals connection', () => {
     expect(response.viewer).toBe(undefined)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks viewer authentication explicitly but leaves the returned proposal contract to a
+   * response snapshot.
+   */
   it('fetches the proposals of a private project as an admin', async () => {
     const response = await graphql(
       ProjectProposalsQuery,

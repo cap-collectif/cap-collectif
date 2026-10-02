@@ -18,6 +18,11 @@ jest.mock('~/components/Utils/MutationErrorToast', () => ({
   mutationErrorToast: jest.fn(),
 }))
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalVoteButton />', () => {
   let environment
   let TestComponent

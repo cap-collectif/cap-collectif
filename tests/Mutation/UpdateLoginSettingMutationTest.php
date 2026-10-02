@@ -15,6 +15,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
+ * contract and persisted effects.
  */
 class UpdateLoginSettingMutationTest extends TestCase
 {

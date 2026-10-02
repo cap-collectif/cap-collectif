@@ -74,6 +74,10 @@ const UserArgumentPaginationAfterQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.arguments connection', () => {
   it("fetches a user's arguments", async () => {
     await Promise.all(
@@ -93,6 +97,10 @@ describe('User.arguments connection', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.arguments connection pagination', () => {
   it("should paginate correctly after a user's arguments", async () => {
     await Promise.all(

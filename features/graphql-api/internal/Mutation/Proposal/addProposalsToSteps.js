@@ -27,6 +27,10 @@ const addProposalsToSteps = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|add proposals to steps', () => {
   it('Admin tries to add an invalid proposal and receives an error', async () => {
     const response = await graphql(

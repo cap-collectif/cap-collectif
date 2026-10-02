@@ -10,6 +10,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Changes the indexation flag and Elasticsearch contents without restoring their initial
+ * states in teardown.
  */
 class PopulateIndexCommandTest extends KernelTestCase
 {

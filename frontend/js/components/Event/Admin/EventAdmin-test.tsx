@@ -6,6 +6,11 @@ import { EventAdmin } from './EventAdmin'
 const defaultProps = {
   eventId: 'event1',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventAdmin />', () => {
   it('it renders correctly with event Id', () => {
     const props = { ...defaultProps }

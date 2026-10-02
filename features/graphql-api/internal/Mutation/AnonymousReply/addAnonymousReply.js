@@ -36,6 +36,10 @@ const propertyMatchers = {
   },
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addAnonymousReply', () => {
   it('should create an anonymous reply', async () => {
     const response = await graphql(

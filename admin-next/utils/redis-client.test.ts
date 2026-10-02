@@ -1,3 +1,7 @@
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes SYMFONY_REDIS_HOST without restoring its initial value between tests.
+ */
 export default describe('redis-client', () => {
   beforeEach(() => {
     jest.resetModules()

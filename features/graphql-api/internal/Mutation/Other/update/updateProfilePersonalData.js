@@ -47,6 +47,11 @@ const input = {
 }
 
 describe('mutations.updateProfilePersonalData', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should return PHONE_INVALID_LENGTH errorCode', async () => {
     const tooShortResponse = await graphql(
       UpdateProfilePersonalDataMutation,
@@ -72,6 +77,10 @@ describe('mutations.updateProfilePersonalData', () => {
     )
     expect(tooLongResponse.updateProfilePersonalData.errorCode).toBe('PHONE_INVALID_LENGTH')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should return updated profile personal data', async () => {
     const updateProfilePersonalData = await graphql(
       UpdateProfilePersonalDataMutation,

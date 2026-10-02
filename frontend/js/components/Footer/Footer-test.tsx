@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { Footer } from './Footer'
 import { features } from '../../redux/modules/default'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Footer />', () => {
   it('renders correcty', () => {
     const props = {

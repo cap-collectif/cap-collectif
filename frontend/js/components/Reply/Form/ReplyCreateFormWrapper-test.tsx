@@ -65,6 +65,11 @@ const props = {
     },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ReplyCreateFormWrapper />', () => {
   it('should render no alert an an enabled form', () => {
     const wrapper = shallow(<ReplyCreateFormWrapper {...props.basic} />)

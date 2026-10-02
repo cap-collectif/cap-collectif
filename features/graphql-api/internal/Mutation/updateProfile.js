@@ -199,6 +199,10 @@ const inputOtherUserAccountAsAdminToSuperAdmin = {
   roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_USER'],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateUsernameMutation', () => {
   it('should update update user username', async () => {
     await expect(graphql(UpdateUsernameMutation, { input: inputUsername }, 'internal_user')).resolves.toMatchSnapshot()
@@ -206,16 +210,29 @@ describe('mutations.updateUsernameMutation', () => {
 })
 
 describe('mutations.updateUserAccountMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update other user account as super admin', async () => {
     await expect(
       graphql(UpdateUserAccountMutation, { input: inputOtherUserAccountAsSuperAdmin }, 'internal_super_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update other user account as admin', async () => {
     await expect(
       graphql(UpdateUserAccountMutation, { input: inputOtherUserAccountAsAdmin }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not update other/own user as admin to super admin', async () => {
     await expect(
       graphql(UpdateUserAccountMutation, { input: inputOtherUserAccountAsAdminToSuperAdmin }, 'internal_admin'),
@@ -224,31 +241,56 @@ describe('mutations.updateUserAccountMutation', () => {
 })
 
 describe('mutations.updateProfilePersonalDataMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update user personal data', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataMutation, { input: inputPersonalData }, 'internal_user'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update personal data of an other user as super admin', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataMutation, { input: inputOtherUserDataAsSuperAdmin }, 'internal_super_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not update personal data of an other user as user', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataMutation, { input: inputOtherUserDataAsUser }, 'internal_user'),
     ).rejects.toThrowError('Only a SUPER_ADMIN can edit data from another user. ')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should add identification code, and code is ok', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataIdCodeMutation, { input: inputUserIdCode }, 'internal_kiroule'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should add identification code, but code is already used', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataIdCodeMutation, { input: inputUserIdCodeUsed }, 'internal_kiroule'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should add identification code, but the code is wrong', async () => {
     await expect(
       graphql(UpdateProfilePersonalDataIdCodeMutation, { input: inputUserIdCodeWrong }, 'internal_kiroule'),
@@ -257,21 +299,38 @@ describe('mutations.updateProfilePersonalDataMutation', () => {
 })
 
 describe('mutations.updateProfilePublicDataMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update user public data', async () => {
     await expect(
       graphql(UpdateProfilePublicDataMutation, { input: inputPublicData }, 'internal_user'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update public data of an other user as super admin', async () => {
     await expect(
       graphql(UpdateProfilePublicDataMutation, { input: inputOtherUserPublicData }, 'internal_super_admin'),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not update public data of an other user as user', async () => {
     await expect(
       graphql(UpdateProfilePublicDataMutation, { input: inputOtherUserPublicData }, 'internal_user'),
     ).rejects.toThrowError('Only a SUPER_ADMIN can edit data from another user.')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should inject HTML into username', async () => {
     await expect(
       graphql(UpdateProfilePublicDataUsernameMutation, { input: inputPublicDataUsername }, 'internal_user'),
@@ -279,6 +338,10 @@ describe('mutations.updateProfilePublicDataMutation', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateProfilePasswordMutation', () => {
   it('should update user password if current password is wrong', async () => {
     await expect(

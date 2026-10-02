@@ -20,6 +20,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the resolver directly instead of proving the exposed GraphQL contract through HTTP.
  */
 class ProposalResponsesResolverTest extends TestCase
 {

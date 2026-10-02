@@ -24,6 +24,10 @@ const ProjectContributorsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Project.contributors connection', () => {
   it('fetches the contributiors of a project', async () => {
     await expect(

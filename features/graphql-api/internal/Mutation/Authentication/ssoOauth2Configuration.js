@@ -54,6 +54,10 @@ const fixtureId = global.toGlobalId('Oauth2SSOConfiguration', 'ssoOauth2')
 describe('Internal|SSO|Oauth2', () => {
   let createdId
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Creates a config as super admin', async () => {
     const creationResult = await graphql(
       CreateOauth2SSOConfiguration,
@@ -85,6 +89,10 @@ describe('Internal|SSO|Oauth2', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Deletes a config as admin only', async () => {
     const creationResult = await graphql(
       CreateOauth2SSOConfiguration,
@@ -125,6 +133,10 @@ describe('Internal|SSO|Oauth2', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Updates a config as super admin', async () => {
     await expect(
       graphql(
@@ -156,6 +168,11 @@ describe('Internal|SSO|Oauth2', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Tries to create a config as admin only', async () => {
     await expect(
       graphql(
@@ -180,6 +197,11 @@ describe('Internal|SSO|Oauth2', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Tries to update a config as admin only', async () => {
     await expect(
       graphql(

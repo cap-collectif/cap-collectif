@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { $refType, $fragmentRefs } from '../../mocks'
 import { OpinionBody } from './OpinionBody'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<OpinionBody />', () => {
   const props = {
     opinion: {

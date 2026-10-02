@@ -20,6 +20,10 @@ const input = {
 }
 
 describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('assigned supervisor should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
@@ -30,6 +34,10 @@ describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('assigned analyst should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
@@ -40,6 +48,10 @@ describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('assigned decision maker should be able to comment an analysis.', async () => {
     const response = await graphql(
       CreateProposalAnalysisComment,
@@ -50,6 +62,11 @@ describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('supervisor not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(
@@ -61,6 +78,11 @@ describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
       ),
     ).rejects.toThrowError('Access denied to this field.')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('analyst not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(
@@ -72,6 +94,11 @@ describe('CreateProposalAnalysisComments.createAnalysisComment', () => {
       ),
     ).rejects.toThrowError('Access denied to this field.')
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('decision maker not assigned to this analysis should not be able to comment.', async () => {
     await expect(
       graphql(

@@ -11,6 +11,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Creates and recursively deletes a fixed shared temporary directory rather than a directory
+ * owned by this test.
  */
 class DefaultPatternGenerationStrategyTest extends TestCase
 {

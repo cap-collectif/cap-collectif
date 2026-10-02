@@ -19,6 +19,11 @@ const countAllProposalFormsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal | viewer_proposalForm', () => {
   it('user get his proposalForms', async () => {
     const response = await graphql(countViewerProposalFormsQuery, { availableOnly: false }, 'internal_user')

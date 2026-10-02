@@ -62,6 +62,11 @@ const closedAndCurrentStep = {
   },
   isCurrentStep: true,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectPreviewProgressBar />', () => {
   it('should render correctly progress bar for open step', () => {
     const wrapper = shallow(<ProjectPreviewProgressBar {...props} {...openStep} />)

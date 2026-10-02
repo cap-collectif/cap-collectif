@@ -156,6 +156,11 @@ const defaultInput = {
 }
 
 describe('Internal | updateProposalForm', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('project admin cannot update someone else proposalForm', async () => {
     await expect(
       graphql(
@@ -167,6 +172,10 @@ describe('Internal | updateProposalForm', () => {
       ),
     ).rejects.toThrowError('Access denied to this field.')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('project admin update his proposalForm', async () => {
     let input = defaultInput
     input.proposalFormId = 'proposalFormWithOwner'
@@ -179,6 +188,10 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin update someone else proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -189,6 +202,10 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin update custom fields of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -221,6 +238,10 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin delete first question choice of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -275,6 +296,10 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin delete first question of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -320,6 +345,10 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin delete first district of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -346,6 +375,11 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('admin delete first category of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -369,6 +403,10 @@ describe('Internal | updateProposalForm', () => {
       'internal_admin',
     )
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin update view configuration of a proposalForm', async () => {
     const response = await graphql(
       mutation,
@@ -383,6 +421,11 @@ describe('Internal | updateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('admin cannot disable all views of a proposalForm', async () => {
     await expect(
       graphql(
@@ -400,6 +443,11 @@ describe('Internal | updateProposalForm', () => {
     ).rejects.toThrowError('No view is active. At least one must be selected')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it.each(['PROPOSAL', 'PROJECT', 'MISSION', 'OPINION', 'IDEA', 'QUESTION', 'REPORTING', 'TESTIMONY', 'PICTURE'])(
     'admin can set object type %s',
     async objectType => {

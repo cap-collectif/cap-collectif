@@ -35,6 +35,10 @@ const HomePageSectionsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.homePageSections', () => {
   it('fetches all home page sections (enabled: null)', async () => {
     await expect(graphql(HomePageSectionsQuery, { enabled: null }, 'internal_admin')).resolves.toMatchSnapshot()

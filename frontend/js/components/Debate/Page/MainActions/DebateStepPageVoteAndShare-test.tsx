@@ -49,6 +49,11 @@ const nonConfirmedUser = {
     isEmailConfirmed: false,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateStepPageVoteAndShare/>', () => {
   it('renders correctly', () => {
     const wrapper = render(

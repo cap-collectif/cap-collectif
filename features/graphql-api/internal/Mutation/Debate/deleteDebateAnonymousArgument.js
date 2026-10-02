@@ -13,6 +13,10 @@ const DeleteDebateAnonymousArgumentMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|DeleteDebateAnonymousArgument mutation', () => {
   it('should successfully delete an existing anonymous argument when the given hash is valid.', async () => {
     // FOR / jesuisletokendudebateanonymousargumentfor1

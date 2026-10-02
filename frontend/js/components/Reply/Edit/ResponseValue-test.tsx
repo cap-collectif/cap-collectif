@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { $refType } from '../../../mocks'
 import { ResponseValue } from './ResponseValue'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UpdateReplyModal />', () => {
   const defaultProps = {
     show: true,

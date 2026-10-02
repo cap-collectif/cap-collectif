@@ -64,6 +64,10 @@ const input = {
   ],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateQuestionnaireStep', () => {
   it('admin should be able to edit questionnaireStep step.', async () => {
     const response = await graphql(UpdateQuestionnaireStep, { input: { ...input } }, 'internal_admin')

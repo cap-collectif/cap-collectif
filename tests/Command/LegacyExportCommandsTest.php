@@ -12,6 +12,9 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Writes shared export paths and removes only files reached by the assertions; failures can
+ * leave other generated files behind.
  */
 class LegacyExportCommandsTest extends DatabaseCommandTestCase
 {

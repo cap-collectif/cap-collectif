@@ -14,6 +14,10 @@ const UpdateProposalSocialNetworksMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal | Update proposal social networks without sn', () => {
   it('update proposal sn', async () => {
     const updateProposalSocialNetwork = await graphql(

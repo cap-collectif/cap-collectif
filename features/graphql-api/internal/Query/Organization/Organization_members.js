@@ -20,6 +20,10 @@ const OrganizationMembers = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Organization.Members', () => {
   it('GraphQL admin wants to get all members of an organization', async () => {
     await expect(graphql(OrganizationMembers, {}, 'internal_admin')).resolves.toMatchSnapshot()

@@ -52,7 +52,29 @@ non conforme par défaut. Un test qui passe n’est pas automatiquement une réf
 
 La promotion requiert une revue de la frontière, de l’isolation et des assertions.
 Ces marqueurs ne sont pas encore contrôlés automatiquement pour PHPUnit ou Jest
-et ne remplacent pas la CI. Ce guide ne promeut aucun test historique à lui seul.
+et ne remplacent pas la CI.
+
+## Références relues
+
+Les tests suivants sont explicitement marqués `reference` après revue dans les
+suites actuelles.
+
+### PHPUnit
+
+- [`HttpRedirectUrlNormalizerTest`](../../tests/HttpRedirect/HttpRedirectUrlNormalizerTest.php) : logique publique, objets réels et restauration de la configuration.
+- [`ValidCustomCodeContentValidatorTest`](../../tests/Validator/ValidCustomCodeContentValidatorTest.php) : validation métier et variantes nommées dans un data provider.
+- [`FeatureToggleCommandTest`](../../tests/Command/FeatureToggleCommandTest.php) : contrat CLI, idempotence, refus et restauration du flag initial.
+
+### Jest
+
+- [`csvToArray-test.ts`](../../frontend/js/utils/csvToArray-test.ts) : conversion pure avec entrées et lignes attendues explicites.
+- [`request-locale.test.ts`](../../admin-next/src/app/server/request-locale.test.ts) : priorité du header sur le cookie et locale de repli.
+- [`proposalStepObjectType.test.ts`](../../admin-next/shared/constants/proposalStepObjectType.test.ts) : règle publique avec cas positifs et négatifs paramétrés.
+
+Les références Jest couvrent la logique locale ; aucun modèle canonique de
+composant DOM ou de mutation GraphQL n’est désigné dans ce premier marquage.
+Voir le [bilan du marquage](../agents/test-status-audit.md) pour le périmètre,
+la méthode et les limites de l’analyse initiale.
 
 ## Références
 

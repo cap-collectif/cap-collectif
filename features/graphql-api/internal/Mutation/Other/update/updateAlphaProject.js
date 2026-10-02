@@ -243,6 +243,11 @@ const BASE_COLLECT_STEP = {
   proposalArchivedUnitTime: 'MONTHS',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|updateAlphaProject simple mutations', () => {
   it('update a newly created project and add a new PresentationStep', async () => {
     const createResponse = await graphql(
@@ -652,6 +657,11 @@ describe('Internal|updateAlphaProject simple mutations', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|updateAlphaProject complex mutations', () => {
   it('update a newly created project and add a CollectStep that contains requirements and SelectionStep that contains statuses', async () => {
     const createResponse = await graphql(
@@ -914,6 +924,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 it('update a newly created project and add a group', async () => {
   const createResponse = await graphql(
     CreateAlphaProjectMutation,
@@ -953,6 +968,11 @@ it('update a newly created project and add a group', async () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 it('update a newly created project and add a minimum vote number', async () => {
   const createResponse = await graphql(
     CreateAlphaProjectMutation,
@@ -985,6 +1005,11 @@ it('update a newly created project and add a minimum vote number', async () => {
   expect(projectId).toBe(updateResponse.updateAlphaProject.project.id)
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 it('update a newly created project and add a new DebateStep', async () => {
   const createResponse = await graphql(
     CreateAlphaProjectMutation,
@@ -1024,6 +1049,10 @@ it('update a newly created project and add a new DebateStep', async () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 it('update an existing project with a DebateStep to add a PresentationStep', async () => {
   const updateResponse = await graphql(
     UpdateAlphaProjectMutation,
@@ -1145,6 +1174,11 @@ describe('project access control', () => {
     locale: null,
     archived: false,
   }
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should update a project with an owner when user is a project admin and the owner', async () => {
     const response = await graphql(
       UpdateAlphaProjectMutation,
@@ -1154,6 +1188,11 @@ describe('project access control', () => {
     expect(response.updateAlphaProject).not.toBeNull()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not update a project with an owner when user is a project admin and not the owner', async () => {
     await expect(
       graphql(
@@ -1164,6 +1203,11 @@ describe('project access control', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should not update a project when user is a project admin and set the project visibility to `ADMIN`', async () => {
     await expect(
       graphql(
@@ -1180,6 +1224,11 @@ describe('project access control', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should not update the owner when admin edit a owned project ', async () => {
     const response = await graphql(
       UpdateAlphaProjectMutation,
@@ -1195,6 +1244,10 @@ describe('project access control', () => {
     expect(response.updateAlphaProject.project.owner.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update a collectStep with proposalArchivedTime and proposalArchivedUnitTime ', async () => {
     await expect(
       graphql(

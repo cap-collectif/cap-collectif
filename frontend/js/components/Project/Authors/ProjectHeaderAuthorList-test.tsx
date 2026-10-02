@@ -7,6 +7,11 @@ import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderA
 import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderAuthorListTestQuery } from '~relay/ProjectHeaderAuthorListTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectHeaderAuthorList />', () => {
   let environment
   let TestComponent

@@ -31,6 +31,10 @@ const RemoveDebateVoteMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|RemoveDebateVote mutation', () => {
   it('Remove a debate vote.', async () => {
     const response = await graphql(

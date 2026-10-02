@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
  * @internal
  *
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Checks the project request-selection rule with real requests and explicit named path and
+ * authorization cases.
  */
 class InternalGraphQLApiKeyRequestMatcherTest extends TestCase
 {

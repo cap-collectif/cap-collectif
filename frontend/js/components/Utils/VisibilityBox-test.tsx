@@ -3,6 +3,11 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { VisibilityBox } from './VisibilityBox'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<VisibilityBox />', () => {
   const props = {}
   it('renders children if not enabled', () => {

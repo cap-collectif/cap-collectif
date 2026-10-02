@@ -73,6 +73,10 @@ const HomePageProjectsSectionConfigurationQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
   it('should update a HomePageProjectsSectionConfiguration with MOST_RECENT displayMode', async () => {
     await expect(

@@ -4,6 +4,11 @@ import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import VotesList from './VotesList'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<VotesList />', () => {
   let environment: any
   let testComponentTree: any

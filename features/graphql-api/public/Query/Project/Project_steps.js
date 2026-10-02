@@ -16,6 +16,10 @@ const ProjectStepsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Project.steps array', () => {
   it('fetches the steps of a project with consultation', async () => {
     await expect(graphql(ProjectStepsQuery, { id: toGlobalId('Project', 'project1') })).resolves.toMatchSnapshot()

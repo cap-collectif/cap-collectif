@@ -34,6 +34,10 @@ const UpdateMediatorVotesMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations|updateMediatorVotes', () => {
   it('Mediator update votes participant Infos and remove one proposal.', async () => {
     const variables = {

@@ -50,6 +50,10 @@ const variables = {
   status: null,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|SelectionStep.proposals', () => {
   it('fetches the proposals from a selection step with status 4 & type 1 filters', async () => {
     await expect(

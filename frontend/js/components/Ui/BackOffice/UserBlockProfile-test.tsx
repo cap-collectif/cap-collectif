@@ -20,6 +20,11 @@ const props = {
 const projectAdminProps = {
   query: { ...props.query, user: { ...props.query.user, isAdmin: false } },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserBlockProfile />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<UserBlockProfile {...props} />)

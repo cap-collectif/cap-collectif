@@ -40,6 +40,10 @@ const defaultVariables = {
   orderBy: { field: 'CREATED_AT', direction: 'DESC' },
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|SelectionStep.mediators.participants', () => {
   it('fetches the participants created by a mediator from a selectionStep', async () => {
     await expect(

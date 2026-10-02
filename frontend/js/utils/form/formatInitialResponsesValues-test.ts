@@ -202,6 +202,10 @@ const resultWithoutResponse = [
     value: null,
   },
 ]
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('formatInitialResponsesValues', () => {
   it('should format correctly', () => {
     const responsesFormatted = formatInitialResponsesValues(allTypeQuestions, responses)

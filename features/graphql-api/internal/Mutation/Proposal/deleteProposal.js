@@ -14,6 +14,10 @@ const deleteProposalMutation = /* GraphQL */ `
 `
 
 describe('Internal|delete proposal', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('User GraphQL client can delete his proposal', async () => {
     await expect(
       graphql(
@@ -35,6 +39,10 @@ describe('Internal|delete proposal', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants delete a proposal', async () => {
     await expect(
       graphql(
@@ -56,6 +64,11 @@ describe('Internal|delete proposal', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Anonymous GraphQL client can not delete a proposal', async () => {
     await expect(
       graphql(

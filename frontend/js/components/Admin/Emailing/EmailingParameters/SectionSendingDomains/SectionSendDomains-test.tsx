@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { SectionSendDomainsTestQuery } from '~relay/SectionSendDomainsTestQuery.graphql'
 import SectionSendingDomains from './SectionSendingDomains'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<SectionSendingDomains />', () => {
   let environment
   let testComponentTree

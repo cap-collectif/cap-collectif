@@ -7,6 +7,11 @@ import ProjectHeaderAuthorsModal from './ProjectHeaderAuthorsModal'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderAuthorsModalTestQuery } from '~relay/ProjectHeaderAuthorsModalTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectHeaderAuthorsModal />', () => {
   let environment
   let TestComponent

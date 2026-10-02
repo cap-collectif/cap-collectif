@@ -6,6 +6,10 @@ import MediaList from './MediaList'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import { MediaListTestQuery } from '@relay/MediaListTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<MediaList />', () => {
   let environment: any
   let TestComponent: any

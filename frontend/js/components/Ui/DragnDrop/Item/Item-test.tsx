@@ -12,6 +12,11 @@ const item = {
   withOtherProps: { ...baseItem, id: '2', position: 2 },
   empty: { ...baseItem, isEmpty: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Item />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<Item {...item.basic}>Bonjour</Item>)

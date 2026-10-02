@@ -37,6 +37,11 @@ const props = {
     },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalListToggleViewBtn />', () => {
   it('should render a toggle button with grid selected', () => {
     const wrapper = shallow(<ProposalListToggleViewBtn {...props.basic} />)

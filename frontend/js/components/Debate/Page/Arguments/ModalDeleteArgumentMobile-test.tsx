@@ -17,6 +17,11 @@ const defaultProps = {
 const props = {
   basic: defaultProps,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalDeleteArgumentMobile />', () => {
   it('should renders correcty with argument', () => {
     const wrapper = shallow(<ModalDeleteArgumentMobile {...props.basic} />)

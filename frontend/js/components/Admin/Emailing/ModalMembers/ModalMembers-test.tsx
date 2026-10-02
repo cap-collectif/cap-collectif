@@ -32,6 +32,11 @@ const userProjectOwner = {
   email: 'theo@cap-collectif.com',
   isAdmin: false,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalMembers />', () => {
   it('should render correctly for admin', () => {
     const wrapper = shallow(

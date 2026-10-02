@@ -30,6 +30,10 @@ const UserAwaitingOrRefusedEventsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.awaitingOrRefusedEvents connection', () => {
   it("fetches a user's event in awaiting or refused review status", async () => {
     await Promise.all(

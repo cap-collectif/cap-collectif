@@ -31,6 +31,10 @@ const inputProgressStepsEmpty = {
   progressSteps: [],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.changeProposalProgressStepsMutation', () => {
   it('should create and delete a proposal step in admin as admin', async () => {
     await expect(

@@ -7,6 +7,10 @@ import type { ProjectModalExportStepsTestQuery } from '@relay/ProjectModalExport
 import { Menu } from '@cap-collectif/ui'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ProjectModalExportSteps />', () => {
   let environment: any
   let TestProjectModalExportSteps: any

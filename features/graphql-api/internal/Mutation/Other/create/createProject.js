@@ -32,6 +32,11 @@ const BASE_INPUT = {
 }
 
 describe('createProject', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   describe('visibility', () => {
     it('should create by default a project visibility set to `ME` when user is a project admin', async () => {
       const response = await graphql(CreateProjectMutation, { input: { ...BASE_INPUT, authors: [] } }, 'internal_theo')
@@ -47,22 +52,41 @@ describe('createProject', () => {
     })
   })
   describe('authors', () => {
+    /**
+     * @jest-status non-compliant
+     * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend
+     * data; the database helper runs only before each test.
+     */
     it('should set the author to the user that created the project when user is project admin and no authors have been provided', async () => {
       const response = await graphql(CreateProjectMutation, { input: { ...BASE_INPUT, authors: [] } }, 'internal_theo')
       expect(response.createProject.project.authors).toHaveLength(1)
       expect(response.createProject.project.authors[0].username).toStrictEqual('Théo QP')
     })
+    /**
+     * @jest-status compliant
+     * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request
+     * inputs and identity.
+     */
     it('should throw an error when user is an admin and no authors have been provided', async () => {
       await expect(
         graphql(CreateProjectMutation, { input: { ...BASE_INPUT, authors: [] } }, 'internal_admin'),
       ).rejects.toThrowError('You must specify at least one author.')
     })
+    /**
+     * @jest-status non-compliant
+     * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend
+     * data; the database helper runs only before each test.
+     */
     it('should create a project when the user is a project admin', async () => {
       const response = await graphql(CreateProjectMutation, { input: { ...BASE_INPUT, authors: [] } }, 'internal_theo')
       expect(response.createProject.project.owner.username).toStrictEqual('Théo QP')
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants to create a project', async () => {
     await expect(
       graphql(
@@ -85,6 +109,10 @@ describe('createProject', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants to create a project without type', async () => {
     await expect(
       graphql(
@@ -106,6 +134,11 @@ describe('createProject', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL client wants to create a project without authors', async () => {
     await expect(
       graphql(
@@ -121,6 +154,10 @@ describe('createProject', () => {
     ).rejects.toThrowError('You must specify at least one author')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants to create a project in english', async () => {
     await expect(
       graphql(

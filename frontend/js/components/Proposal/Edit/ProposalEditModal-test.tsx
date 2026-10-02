@@ -28,6 +28,11 @@ const defaultProps = {
   dispatch: jest.fn(),
   onClose: jest.fn(),
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalEditModal />', () => {
   it('should render correctly with PUBLISHED status', () => {
     const wrapper = shallow(<ProposalEditModal {...defaultProps} />)

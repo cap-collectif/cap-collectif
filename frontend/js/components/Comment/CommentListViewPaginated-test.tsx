@@ -39,6 +39,11 @@ const defaultProps = {
   highlightedComment: 'string',
   useBodyColor: false,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CommentListViewPaginated />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentListViewPaginated {...defaultProps} />)

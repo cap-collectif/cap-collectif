@@ -182,6 +182,11 @@ const initialValuesComplete = {
     json: googleMapsAddress,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventForm />', () => {
   it('it renders correctly without default props', () => {
     const props = { ...defaultProps, ...eventNotComplete }

@@ -39,6 +39,11 @@ const defaultProps = {
     ' $refType': $refType,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectStepAdminItemStep />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<ProjectStepAdminItemStep {...defaultProps} />)

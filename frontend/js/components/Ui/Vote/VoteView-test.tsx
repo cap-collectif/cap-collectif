@@ -3,6 +3,11 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import VoteView from './VoteView'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<VoteView />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<VoteView positivePercentage={42} votesCount={null} />)

@@ -15,6 +15,10 @@ const getTree = props =>
     </MockProviders>,
   )
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<WYSIWYGRender />', () => {
   it('should render correctly', () => {
     expect(getTree(props)).toMatchSnapshot()

@@ -21,6 +21,10 @@ const CollectStepContributorsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|CollectStep.contributors connection', () => {
   it('fetches the contributors of a collect step', async () => {
     await expect(

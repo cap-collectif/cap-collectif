@@ -25,6 +25,11 @@ const propswithDefaultProps = {
   colors: ['#fff', '#000', '#F9F9F9'],
 }
 const props = { ...propswithDefaultProps, width: '110px', height: '479px', innerRadius: 15, outerRadius: 55 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<PieChart />', () => {
   it('renders PieChart', () => {
     const wrapper = shallow(<PieChart {...props} />)

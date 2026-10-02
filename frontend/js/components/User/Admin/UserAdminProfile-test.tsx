@@ -5,6 +5,11 @@ import { intlMock, formMock, $refType } from '~/mocks'
 import { UserAdminProfile } from './UserAdminProfile'
 import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserAdminProfile/>', () => {
   const userTypeGlobalId = 'VXNlclR5cGU6MQ=='; // UserType:1
   const props1 = {

@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalAdminStatusForm } from './ProposalAdminStatusForm'
 import { intlMock, $refType } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalAdminStatusForm />', () => {
   it('render correctly if unpublished', () => {
     const proposalUnpulished = {

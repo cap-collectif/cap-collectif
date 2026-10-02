@@ -15,6 +15,10 @@ const AddSmsCreditMutation = /* GraphQL*/ `
 
 const input = { amount: 5000, smsOrder: 'U21zT3JkZXI6c21zT3JkZXIy' }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addSmsCredit', () => {
   it('should create an sms credit', async () => {
     await expect(

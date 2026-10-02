@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import DropdownSelect from '~ui/DropdownSelect'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DropdownSelect />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(

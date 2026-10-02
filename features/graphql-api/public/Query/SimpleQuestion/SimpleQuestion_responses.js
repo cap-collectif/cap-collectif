@@ -19,6 +19,10 @@ const SimpleQuestionResponsesQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('SimpleQuestion.responses array', () => {
   it("fetches a simple question's responses", async () => {
     await Promise.all(

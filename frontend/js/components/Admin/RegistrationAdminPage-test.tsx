@@ -5,6 +5,11 @@ import { RegistrationAdminPage } from './RegistrationAdminPage'
 import { features } from '../../redux/modules/default'
 import { $refType, $fragmentRefs } from '../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<RegistrationAdminPage />', () => {
   const props = {
     isSuperAdmin: true,

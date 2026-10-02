@@ -12,6 +12,10 @@ const ProjectStatusQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal project status', () => {
   it('OPENED_PARTICIPATION project', async () => {
     await expect(

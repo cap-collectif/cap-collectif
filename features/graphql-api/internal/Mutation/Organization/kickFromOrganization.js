@@ -22,6 +22,11 @@ const CountMembersOfOrganization = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|kickFromOrganization mutation', () => {
   it('should fail on unknown organization', async () => {
     const response = await graphql(

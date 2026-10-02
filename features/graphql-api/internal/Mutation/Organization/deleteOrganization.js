@@ -54,15 +54,28 @@ const input = {
 }
 
 describe('mutations.updateOrganization', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should be able to delete organization and organization should be anonymized', async () => {
     const response = await graphql(DeleteOrganization, { input }, 'internal_admin')
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('admin organization should not be able to delete organization', async () => {
     await expect(graphql(DeleteOrganization, { input }, 'internal_valerie')).rejects.toThrowError(
       'Access denied to this field.',
     )
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
       DeleteOrganization,
@@ -75,6 +88,10 @@ describe('mutations.updateOrganization', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should return ORGANIZATION_ALREADY_ANONYMIZED errorCode', async () => {
     const response = await graphql(
       DeleteOrganization,

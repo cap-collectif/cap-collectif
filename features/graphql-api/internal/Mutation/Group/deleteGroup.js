@@ -12,6 +12,11 @@ const DeleteGroupMutation = /* GraphQL*/ `
 `
 
 describe('mutations|deleteGroup', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('user should not be able to delete a group.', async () => {
     const variables = {
       input: {
@@ -22,6 +27,10 @@ describe('mutations|deleteGroup', () => {
     await expect(graphql(DeleteGroupMutation, variables, 'internal')).rejects.toThrowError(DENIED_ERROR_MESSAGE)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should be able to delete a group.', async () => {
     const variables = {
       input: {

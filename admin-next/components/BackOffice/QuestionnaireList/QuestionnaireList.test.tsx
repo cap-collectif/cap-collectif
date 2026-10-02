@@ -6,6 +6,10 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { QuestionnaireListTestQuery } from '@relay/QuestionnaireListTestQuery.graphql'
 import QuestionnaireList from './QuestionnaireList'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<QuestionnaireList />', () => {
   let environment: any
   let TestQuestionnaireList: any

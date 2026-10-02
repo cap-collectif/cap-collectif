@@ -9,6 +9,10 @@ const NodeQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Query.node', () => {
   it('returns null for bad IDs', async () => {
     await expect(graphql(NodeQuery, { id: 'abcde' })).resolves.toMatchSnapshot()

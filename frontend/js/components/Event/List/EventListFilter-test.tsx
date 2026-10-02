@@ -36,6 +36,11 @@ const defaultProps = {
   isRegistrable: 'all',
   features: { ...features, themes: true, projects_form: true, display_map: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventListFilters />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(

@@ -17,6 +17,10 @@ const CommentableCommentsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Commentable.comments', () => {
   it('lists comments for commentables', async () => {
     await expect(

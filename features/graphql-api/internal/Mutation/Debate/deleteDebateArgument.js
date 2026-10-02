@@ -26,6 +26,11 @@ const DeleteDebateArgumentMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|Mutation.deleteDebateArgument', () => {
   const deletedDebateArgumentId = toGlobalId('DebateArgument', 'debateArgument2')
   it('Remove debate argument', async () => {

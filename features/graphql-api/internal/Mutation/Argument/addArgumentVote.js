@@ -21,6 +21,10 @@ const AddArgumentVoteMutation = /* GraphQL*/ `
 `
 
 describe('mutations.addArgumentVoteMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for an argument', async () => {
     await expect(
       graphql(
@@ -35,6 +39,11 @@ describe('mutations.addArgumentVoteMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client can not vote for a trashed argument', async () => {
     await expect(
       graphql(
@@ -49,6 +58,11 @@ describe('mutations.addArgumentVoteMutation', () => {
     ).rejects.toThrowError('Uncontribuable argument.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client can not vote for a argument in a closed step', async () => {
     await expect(
       graphql(
@@ -63,6 +77,11 @@ describe('mutations.addArgumentVoteMutation', () => {
     ).rejects.toThrowError('Uncontribuable argument.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for an argument without requirements', async () => {
     await expect(
       graphql(

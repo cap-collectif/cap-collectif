@@ -19,6 +19,10 @@ const CommentReportingsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Comment.reportings', () => {
   it('lists reportings for a comment', async () => {
     await expect(

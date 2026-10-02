@@ -5,6 +5,11 @@ import { ProposalVoteBasketWidget } from './ProposalVoteBasketWidget'
 import { relayRefetchMock as relay, $refType } from '~/mocks'
 import { features } from '~/redux/modules/default'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalVoteBasketWidget />', () => {
   const colorProps = {
     voteBarBackgroundColor: '#FFF',

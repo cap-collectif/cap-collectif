@@ -4,6 +4,11 @@ import { mount, shallow } from 'enzyme'
 import { IntlProvider } from 'react-intl'
 import ChangeLanguageOnWebsiteHeader, { Content } from './ChangeLanguageOnWebsiteHeader'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ChangeLanguageOnWebsiteHeader />', () => {
   const props = {
     onChange: jest.fn(),

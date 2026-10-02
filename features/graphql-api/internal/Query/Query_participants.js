@@ -20,6 +20,10 @@ const variables = {
   cursor: null,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query participants', () => {
   it('fetches all participants as admin', async () => {
     await expect(graphql(ParticipantsQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()

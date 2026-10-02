@@ -32,6 +32,10 @@ const RemoveSiteFaviconMutation = /* GraphQL*/ `
 `
 
 describe('mutations.removeSiteFavicon', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin client wants to remove the current favicon', async () => {
     await graphql(
       ChangeSiteFaviconMutation,
@@ -60,6 +64,11 @@ describe('mutations.removeSiteFavicon', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL client who is not an admin wants to remove the current favicon', async () => {
     await expect(
       graphql(

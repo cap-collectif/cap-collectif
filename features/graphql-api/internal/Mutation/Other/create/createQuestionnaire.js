@@ -16,6 +16,11 @@ const CreateQuestionnaireMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal.viewer.posts', () => {
   it('should create a questionnaire', async () => {
     const response = await graphql(

@@ -38,6 +38,11 @@ const unselect = /* GraphQL */ `
 const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWw4' // Proposal:proposal8
 const stepId = 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==' // SelectionStep:selectionstep1
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|select proposal', () => {
   it('selects a proposal without a status', async () => {
     const response = await graphql(select, { input: { proposalId, stepId, statusId: null } }, 'internal_admin')

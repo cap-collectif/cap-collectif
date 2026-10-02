@@ -41,6 +41,11 @@ const props = {
   opinionCanBeFollowed: false,
   isAnalysing: false,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPageAside />', () => {
   afterEach(() => {
     disableFeatureFlags()

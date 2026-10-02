@@ -46,6 +46,10 @@ const input = {
   consultations: [toGlobalId('Consultation', 'default')],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateConsultationStep', () => {
   it('admin should be able to edit consultationStep step.', async () => {
     const response = await graphql(UpdateConsultationStep, { input }, 'internal_admin')

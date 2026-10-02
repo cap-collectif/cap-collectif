@@ -3,6 +3,11 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { DeleteModal } from './DeleteModal'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DeleteModal />', () => {
   const props = {
     showDeleteModal: true,

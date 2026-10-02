@@ -14,6 +14,10 @@ jest.mock('use-analytics', () => ({
   useAnalytics: () => ({ track: () => {} }),
 }))
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<RegistrationButton />', () => {
   let environment
   let TestComponent

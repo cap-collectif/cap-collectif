@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { EventMap } from './EventMap'
 import { $refType, relayPaginationMock, $fragmentRefs } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventMap />', () => {
   it('renders correctly', () => {
     const props = {

@@ -17,6 +17,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Checks SQL construction and hydration calls with mocked domain entities instead of a
+ * contributor search result from real data.
  */
 class ProjectContributorSearchTest extends TestCase
 {

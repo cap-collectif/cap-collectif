@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
  * @internal
  *
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Checks credential extraction and supported request paths with real requests; this does not
+ * prove end-to-end authentication.
  */
 class PublicApiKeyAuthenticatorTest extends TestCase
 {

@@ -21,6 +21,10 @@ const UpdateUserTypeMutation = /* GraphQL */ `
 describe('mutations.updateUserType', () => {
   const userTypeGlobalId = 'VXNlclR5cGU6NA==' // UserType:4
   // the media:user-type-nonprofit and id:4 should be in the fixtures
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('updates a user type', async () => {
     await expect(
       graphql(
@@ -43,6 +47,11 @@ describe('mutations.updateUserType', () => {
   })
 
   // the id:4 should be in the fixtures
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to update a user type with a non-existing media', async () => {
     await expect(
       graphql(
@@ -65,6 +74,11 @@ describe('mutations.updateUserType', () => {
   })
 
   // the id:4 should be in the fixtures
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to update a user type with a basic user', async () => {
     await expect(
       graphql(
@@ -86,6 +100,11 @@ describe('mutations.updateUserType', () => {
   })
 
   // the id:4 should be in the fixtures
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to update a user type without being authenticated', async () => {
     await expect(
       graphql(

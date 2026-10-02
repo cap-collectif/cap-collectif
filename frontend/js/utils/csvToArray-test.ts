@@ -13,6 +13,11 @@ another one
 const CSV_CONTENT_NO_EMPTY_LINES = `rem@chan.com
 ram@chan.com
 another one`
+/**
+ * @jest-status reference
+ * @jest-reason Checks the public CSV conversion result with explicit inputs and expected rows, including
+ * conversion options.
+ */
 describe('csvToArray', () => {
   it('should convert a simple one column csv file content to an array', () => {
     const result = csvToArray(CSV_CONTENT_EMPTY_LINES)

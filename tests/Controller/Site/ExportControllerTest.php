@@ -23,6 +23,9 @@ class ExportControllerTest extends WebTestCase
     /**
      * @runInSeparateProcess
      * @preserveGlobalState disabled
+     * @phpunit-status non-compliant
+     * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
+     * initial contents.
      */
     public function testAdminCanRequestEventParticipantExport(): void
     {
@@ -38,6 +41,9 @@ class ExportControllerTest extends WebTestCase
     /**
      * @runInSeparateProcess
      * @preserveGlobalState disabled
+     * @phpunit-status non-compliant
+     * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
+     * initial contents.
      */
     public function testAdminCanDownloadProjectRelatedExports(): void
     {
@@ -88,6 +94,9 @@ class ExportControllerTest extends WebTestCase
     /**
      * @runInSeparateProcess
      * @preserveGlobalState disabled
+     * @phpunit-status non-compliant
+     * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
+     * initial contents.
      */
     public function testAdminCanDownloadStepParticipantExportUsingRawAndGlobalIds(): void
     {
@@ -114,6 +123,9 @@ class ExportControllerTest extends WebTestCase
     /**
      * @runInSeparateProcess
      * @preserveGlobalState disabled
+     * @phpunit-status non-compliant
+     * @phpunit-reason Disables HTTP exception handling and expects an internal access-denied exception
+     * instead of asserting the HTTP refusal.
      */
     public function testUserCannotExportAnotherProjectsParticipants(): void
     {

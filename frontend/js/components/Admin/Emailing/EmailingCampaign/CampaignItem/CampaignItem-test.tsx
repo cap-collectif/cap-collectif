@@ -41,6 +41,11 @@ const props = {
     },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<CampaignItem />', () => {
   it('should renders correctly', () => {
     const wrapper = shallow(<CampaignItem {...props.basic} />)

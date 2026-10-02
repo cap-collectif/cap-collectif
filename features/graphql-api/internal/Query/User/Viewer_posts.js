@@ -52,6 +52,11 @@ const ViewerPostsQueryOrderBy = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal.viewer.posts', () => {
   it('should correctly fetch posts that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(

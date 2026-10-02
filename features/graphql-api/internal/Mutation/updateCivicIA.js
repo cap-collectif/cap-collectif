@@ -20,6 +20,10 @@ const inputNewsCategory = {
   clientMutationId: id,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateCivicIAMutation', () => {
   it('should update civicIA in news category', async () => {
     await expect(

@@ -33,6 +33,10 @@ const InternalQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.globalDistricts', () => {
   it('fetches all project districts', async () => {
     await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()

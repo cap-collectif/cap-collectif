@@ -346,6 +346,10 @@ const participatoryBudgetInput = {
   },
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.preConfigureProject', () => {
   it('should configure a project with participatory budget preset', async () => {
     const response = await graphql(

@@ -46,6 +46,10 @@ const input = {
 }
 
 describe('mutations.updateOrganization', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should be able to edit organization', async () => {
     const response = await graphql(
       UpdateOrganization,
@@ -56,6 +60,10 @@ describe('mutations.updateOrganization', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin organization should be able to edit organization', async () => {
     const response = await graphql(
       UpdateOrganization,
@@ -66,6 +74,11 @@ describe('mutations.updateOrganization', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('organization member with role user should not be able to edit organization', async () => {
     await expect(graphql(UpdateOrganization, { input }, 'internal_user')).rejects.toThrowError(
       'Access denied to this field.',

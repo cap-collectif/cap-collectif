@@ -29,6 +29,10 @@ const input = {
 }
 
 describe('mutations.updateAnonymousReply', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should update an anonymous reply', async () => {
     const response = await graphql(
       UpdateAnonymousReplyMutation,
@@ -41,6 +45,11 @@ describe('mutations.updateAnonymousReply', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw an error when participant token is not found', async () => {
     await expect(
       graphql(

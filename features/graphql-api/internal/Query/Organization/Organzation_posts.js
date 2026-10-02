@@ -24,6 +24,10 @@ const OrganizationPosts = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Organization.Posts', () => {
   it('organization admin should be able to fetch all posts from organization', async () => {
     await expect(

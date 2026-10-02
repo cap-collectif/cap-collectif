@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import List from './List'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<List />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<List id="1">Bonjour</List>)

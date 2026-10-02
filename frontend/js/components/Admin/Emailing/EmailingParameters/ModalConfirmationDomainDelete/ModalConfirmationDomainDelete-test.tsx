@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { ModalConfirmationDomainDeleteTestQuery } from '~relay/ModalConfirmationDomainDeleteTestQuery.graphql'
 import ModalConfirmationDomainDelete from './ModalConfirmationDomainDelete'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ModalConfirmationDomainDelete />', () => {
   let environment
   let testComponentTree

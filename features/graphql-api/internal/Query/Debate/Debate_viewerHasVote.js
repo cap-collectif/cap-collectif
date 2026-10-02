@@ -12,6 +12,10 @@ const DebateViewerHasVoteQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Debate.viewerHasVote bool', () => {
   it('fetches debate not voted by viewer', async () => {
     await expect(

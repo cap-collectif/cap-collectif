@@ -100,6 +100,11 @@ const EventOwnerEventsByAuthorQuery = /* GraphQL */ `
 `
 
 describe('Internal.EventOwner.events', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch events that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(
       EventOwnerEventsQuery,
@@ -114,6 +119,11 @@ describe('Internal.EventOwner.events', () => {
     expect(response.viewer.events.edges[0].node.owner.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch all events if no affiliations given', async () => {
     const response = await graphql(
       EventOwnerEventsQuery,
@@ -127,6 +137,11 @@ describe('Internal.EventOwner.events', () => {
     expect(response.viewer.events.edges).toHaveLength(25)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should filter by a given query', async () => {
     const response = await graphql(
       EventOwnerEventsSearchQuery,
@@ -141,6 +156,10 @@ describe('Internal.EventOwner.events', () => {
     expect(response.viewer.events.edges[0].node.title).toBe('SymfonyLive Paris')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should order by a given field and direction ', async () => {
     await expect(
       graphql(
@@ -156,6 +175,10 @@ describe('Internal.EventOwner.events', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter by `APPROVED` status  ', async () => {
     await expect(
       graphql(
@@ -168,6 +191,10 @@ describe('Internal.EventOwner.events', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter by `AWAITING` status  ', async () => {
     await expect(
       graphql(
@@ -180,6 +207,10 @@ describe('Internal.EventOwner.events', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter by `REFUSED` status  ', async () => {
     await expect(
       graphql(
@@ -192,6 +223,10 @@ describe('Internal.EventOwner.events', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter by `DELETED` status  ', async () => {
     await expect(
       graphql(
@@ -204,6 +239,10 @@ describe('Internal.EventOwner.events', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches a user's events", async () => {
     await Promise.all(
       ['user1', 'user2', 'user3', 'userAdmin', 'user5'].map(async id => {

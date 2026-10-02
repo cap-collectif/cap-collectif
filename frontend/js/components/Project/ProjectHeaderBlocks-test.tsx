@@ -7,6 +7,11 @@ import ProjectHeaderBlocks from '~/components/Project/ProjectHeaderBlocks'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderBlocksTestQuery } from '~relay/ProjectHeaderBlocksTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectHeaderBlocks />', () => {
   let environment
   let TestComponent

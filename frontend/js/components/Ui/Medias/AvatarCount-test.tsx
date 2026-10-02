@@ -6,6 +6,11 @@ import { AvatarCount } from './AvatarCount'
 const props = {
   size: 'small',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<AvatarCount />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<AvatarCount>9</AvatarCount>)

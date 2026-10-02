@@ -17,6 +17,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Requires a specific getStatusCode call count instead of limiting assertions to the outgoing
+ * Hub request contract.
  */
 class HubApiGreenClientTest extends TestCase
 {

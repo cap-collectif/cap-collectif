@@ -52,6 +52,10 @@ const ProposalsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.proposals connection', () => {
   it('fetches proposals order by revision asc and revision state in pending', async () => {
     await expect(

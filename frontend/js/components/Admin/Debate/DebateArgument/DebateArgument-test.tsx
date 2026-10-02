@@ -26,6 +26,11 @@ const props = {
   basic: baseProps,
   noPublished: { ...baseProps, argument: { ...baseProps.argument, published: false, publishedAt: null } },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateArgument />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<DebateArgument {...props.basic} />)

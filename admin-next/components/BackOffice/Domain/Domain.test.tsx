@@ -6,6 +6,10 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import Domain from './Domain'
 import type { DomainTestQuery } from '@relay/DomainTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<Domain />', () => {
   let environment: any
   let TestDomain: any

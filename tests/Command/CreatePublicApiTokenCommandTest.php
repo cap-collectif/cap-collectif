@@ -41,6 +41,11 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Creates persisted API tokens without rolling back or deleting the tokens after the
+     * scenario.
+     */
     public function testCreateTokenForExistingUser(): void
     {
         $user = $this->userRepository->findOneByEmail(self::EXISTING_USER_EMAIL);
@@ -64,6 +69,11 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
         $this->assertSame($countBefore + 1, $countAfter, 'A new token should have been created');
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Creates persisted API tokens without rolling back or deleting the tokens after the
+     * scenario.
+     */
     public function testCreateTokenGeneratesValidHexToken(): void
     {
         $this->commandTester->execute([
@@ -77,6 +87,10 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
         $this->assertSame(32, \strlen($matches[1]), 'Token should be 32 hex characters (16 bytes)');
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks the real CLI refusal and exit code for an absent user without creating a token.
+     */
     public function testCreateTokenForNonExistingUserFails(): void
     {
         $this->commandTester->execute([

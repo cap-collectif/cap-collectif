@@ -22,6 +22,8 @@ use Symfony\Component\Translation\Translator;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Checks export contracts with loose array equality instead of precise values and types.
  */
 class ProposalNormalizerTest extends KernelTestCase
 {

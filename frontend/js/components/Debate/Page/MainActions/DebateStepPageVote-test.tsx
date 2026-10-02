@@ -38,6 +38,11 @@ const nonConfirmedUser = {
 const nonAuthenticated = {
   user: null,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateStepPageVote/>', () => {
   it('should renders correctly', () => {
     const wrapper = render(

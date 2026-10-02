@@ -29,6 +29,10 @@ const variables = {
   filter: null,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Questionnaire.questions', () => {
   it('should fetch all questions', async () => {
     await expect(graphql(QuestionnaireQuestionsQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()

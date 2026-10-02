@@ -19,6 +19,11 @@ const EventAttendeeEmailQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|Event participant personal data', () => {
   it('hides non-registered attendee emails from anonymous viewers', async () => {
     const response = await rawInternalGraphql(EventAttendeeEmailQuery, {

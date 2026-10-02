@@ -30,6 +30,11 @@ const mutation = /* GraphQL */ `
 const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwx' // Proposal:proposal1
 
 describe('Internal|apply proposal status', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('rejects unknown proposals and statuses', async () => {
     await expect(
       graphql(
@@ -40,6 +45,11 @@ describe('Internal|apply proposal status', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it.each([
     ['status4', 'status1', 'status4'],
     ['status5', 'status1', 'status5'],
@@ -65,6 +75,11 @@ describe('Internal|apply proposal status', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('returns an error when the status does not belong to the proposal step', async () => {
     const response = await graphql(
       mutation,

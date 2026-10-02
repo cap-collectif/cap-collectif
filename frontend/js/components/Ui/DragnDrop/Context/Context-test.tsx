@@ -13,6 +13,11 @@ jest.mock('@atlaskit/pragmatic-drag-and-drop/element/adapter', () => ({
   }),
 }))
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Context />', () => {
   beforeEach(() => {
     mockMonitorArgs = null

@@ -30,6 +30,10 @@ const ConfigureAnalysisMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.configureAnalysis', () => {
   it('should modify specified analysis configuration', async () => {
     const modifyAnalysisConfiguration = await graphql(

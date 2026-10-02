@@ -9,6 +9,9 @@ use Symfony\Component\Validator\Validation;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status reference
+ * @phpunit-reason Checks the public custom-code validation rule with explicit documents and named valid and
+ * invalid cases.
  */
 class ValidCustomCodeContentValidatorTest extends TestCase
 {

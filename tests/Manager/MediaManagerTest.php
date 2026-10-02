@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Checks public byte-formatting results and MIME acceptance or rejection with local inputs.
  */
 class MediaManagerTest extends TestCase
 {

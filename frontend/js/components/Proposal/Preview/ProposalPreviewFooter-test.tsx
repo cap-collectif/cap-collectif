@@ -5,6 +5,11 @@ import { ProposalPreviewFooter } from './ProposalPreviewFooter'
 import { $refType } from '~/mocks'
 import { ProposalStepVoteType } from '~relay/ProposalPreviewFooter_step.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPreviewFooter />', () => {
   const stepWithVoteActive = {
     ' $refType': $refType,

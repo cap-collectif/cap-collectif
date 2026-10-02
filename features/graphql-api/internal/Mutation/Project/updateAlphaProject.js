@@ -20,6 +20,11 @@ const UpdateAlphaProjectMutation = /* GraphQL*/ `
 `
 
 describe('mutations.updateAlphaProjectMutation', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to update project with empty group in custom view', async () => {
     await expect(
       graphql(
@@ -48,6 +53,11 @@ describe('mutations.updateAlphaProjectMutation', () => {
     ).rejects.toThrowError('global.no_group_when_mandatory')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to update project with votesMin greater than votesLimit', async () => {
     await expect(
       graphql(
@@ -96,6 +106,11 @@ describe('mutations.updateAlphaProjectMutation', () => {
     ).rejects.toThrowError('maximum-vote-must-be-higher-than-minimum')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to update project with votesMin below 1', async () => {
     await expect(
       graphql(
@@ -144,6 +159,10 @@ describe('mutations.updateAlphaProjectMutation', () => {
     ).rejects.toThrowError('minimum-vote-must-be-greater-than-or-equal')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update step with another questionnaire', async () => {
     await expect(
       graphql(

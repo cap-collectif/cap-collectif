@@ -14,6 +14,10 @@ const ChangeDistrictMutation = /* GraphQL*/ `
 `
 
 describe('mutations.changeDistrict', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants to change district of a proposal', async () => {
     await expect(
       graphql(
@@ -31,6 +35,11 @@ describe('mutations.changeDistrict', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL client wants to change district of a proposal but geojson is not even json', async () => {
     await expect(
       graphql(
@@ -48,6 +57,11 @@ describe('mutations.changeDistrict', () => {
     ).rejects.toThrowError('Input not valid.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL client wants to change district of a proposal but has invalid geojson', async () => {
     await expect(
       graphql(
@@ -65,6 +79,10 @@ describe('mutations.changeDistrict', () => {
     ).rejects.toThrowError('Input not valid.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL client wants to change district of a proposal and use a valid geoJson', async () => {
     await expect(
       graphql(

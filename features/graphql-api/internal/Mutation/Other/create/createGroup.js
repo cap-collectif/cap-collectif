@@ -19,6 +19,10 @@ const createGroupMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Group', () => {
   it('GraphQL client wants to create a group', async () => {
     await expect(

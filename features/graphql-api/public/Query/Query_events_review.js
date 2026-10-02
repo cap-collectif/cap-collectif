@@ -26,6 +26,10 @@ const InternalEventsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.events_review connection', () => {
   it('fetches all events enabled or approved', async () => {
     await expect(graphql(InternalEventsQuery, { count: 100 }, 'internal')).resolves.toMatchSnapshot()

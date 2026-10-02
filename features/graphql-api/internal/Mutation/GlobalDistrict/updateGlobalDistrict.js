@@ -31,6 +31,10 @@ const UpdateGlobalDistrictMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateGlobalDistrictMutation', () => {
   it('Admin can update a global district', async () => {
     await expect(

@@ -27,6 +27,10 @@ const AnalysisConfigurationQuery = /** GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('ProposalForm.analysisConfiguration', () => {
   it("does not fetch proposal form's analysis configuration when authenticated as user", async () => {
     await expect(

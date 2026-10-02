@@ -16,6 +16,9 @@ use Swarrot\Broker\Message;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status legacy
+ * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
+ * action and the supported message architecture.
  */
 class CommentProcessorTest extends MailerSnapshotCommandTestCase
 {

@@ -35,6 +35,10 @@ const input = {
 }
 
 describe('Internal|deleteOrganizationInvitation mutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should delete an invitation as admin', async () => {
     const deleteInvitationResponse = await graphql(
       DeleteOrganizationInvitation,
@@ -53,6 +57,10 @@ describe('Internal|deleteOrganizationInvitation mutation', () => {
     expect(organizationPendingOrganizationInvitationsQueryResponse).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should delete an invitation when called with admin organization who belongs to the org', async () => {
     const deleteInvitationResponse = await graphql(
       DeleteOrganizationInvitation,
@@ -75,6 +83,11 @@ describe('Internal|deleteOrganizationInvitation mutation', () => {
     expect(organizationPendingOrganizationInvitationsQueryResponse).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should forbid organization member who belongs to the org to delete the invitation', async () => {
     await expect(
       graphql(
@@ -87,6 +100,11 @@ describe('Internal|deleteOrganizationInvitation mutation', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should forbid admin organization who does not belong to the org to delete the invitation', async () => {
     await expect(
       graphql(

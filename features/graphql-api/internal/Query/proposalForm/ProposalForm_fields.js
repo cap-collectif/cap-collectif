@@ -65,6 +65,10 @@ const ProposalFormSocialNetworksQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|ProposalForm fields', () => {
   it('returns evaluations for the current user', async () => {
     await expect(graphql(ProposalFormEvaluationsQuery, {}, 'internal_user')).resolves.toMatchSnapshot()

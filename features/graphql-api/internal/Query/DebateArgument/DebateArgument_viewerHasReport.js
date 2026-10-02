@@ -9,6 +9,10 @@ const DebateViewerHasReportQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|DebateArgument.viewerHasReport bool', () => {
   it('fetches if viewer has report an argument', async () => {
     await expect(

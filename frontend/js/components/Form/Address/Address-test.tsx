@@ -16,6 +16,11 @@ const props = {
   hiddenSearchBar: { ...baseProps, showSearchBar: false },
   noValue: { ...baseProps, value: null },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Address />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<Address {...props.basic} />)

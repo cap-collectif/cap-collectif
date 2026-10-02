@@ -65,6 +65,10 @@ const ProposalResponsesAnalystQuery = /* GraphQL */ `
 const proposalId = 'UHJvcG9zYWw6cHJvcG9zYWwy'
 
 describe('Proposal.responses array', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches only a proposal's public responses when not authenticated.", async () => {
     await Promise.all(
       [proposalId].map(async id => {
@@ -82,6 +86,11 @@ describe('Proposal.responses array', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks requester roles or assignments explicitly but leaves private-response visibility to
+   * snapshots instead of explicit privacy assertions.
+   */
   it("fetches a proposal's private responses when author.", async () => {
     await Promise.all(
       [proposalId].map(async id => {
@@ -99,6 +108,11 @@ describe('Proposal.responses array', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks requester roles or assignments explicitly but leaves private-response visibility to
+   * snapshots instead of explicit privacy assertions.
+   */
   it("fetches a proposal's private responses when admin.", async () => {
     await Promise.all(
       [proposalId].map(async id => {
@@ -116,6 +130,11 @@ describe('Proposal.responses array', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks requester roles or assignments explicitly but leaves private-response visibility to
+   * snapshots instead of explicit privacy assertions.
+   */
   it("fetches a proposal's private responses when evaluer on this proposal.", async () => {
     await Promise.all(
       [proposalId].map(async id => {
@@ -135,6 +154,11 @@ describe('Proposal.responses array', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks requester roles or assignments explicitly but leaves private-response visibility to
+   * snapshots instead of explicit privacy assertions.
+   */
   it("fetches only a proposal's public responses when user is evaluer but not on this proposal.", async () => {
     await Promise.all(
       [proposalId].map(async id => {
@@ -154,6 +178,11 @@ describe('Proposal.responses array', () => {
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks requester roles or assignments explicitly but leaves private-response visibility to
+   * snapshots instead of explicit privacy assertions.
+   */
   it("fetches proposal's private responses when user is analyst on this proposal.", async () => {
     await Promise.all(
       ['UHJvcG9zYWw6cHJvcG9zYWxJZGYx'].map(async id => {

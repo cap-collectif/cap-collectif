@@ -311,6 +311,10 @@ const FollowingProposalsQuery = /* GraphQL */ `
 `
 
 describe('Internal|Query projects and proposals', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists trashed project comments in reverse publication order', async () => {
     await expect(
       graphql(
@@ -326,6 +330,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('gets the open consultation step of a project', async () => {
     await expect(
       graphql(
@@ -338,6 +346,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('gets the published posts linked to a project', async () => {
     await expect(
       graphql(
@@ -350,6 +362,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('gets the groups allowed to view a restricted project', async () => {
     await expect(
       graphql(
@@ -364,14 +380,26 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists project authors', async () => {
     await expect(graphql(ProjectAuthorsQuery, {}, 'internal')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists all project types', async () => {
     await expect(graphql(ProjectTypesQuery, {}, 'internal')).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it.each(['internal', 'internal_user', 'internal_admin'])(
     'lists project types used by projects for %s',
     async client => {
@@ -379,6 +407,11 @@ describe('Internal|Query projects and proposals', () => {
     },
   )
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Compares two uncontrolled random orderings, which can match by chance; control the ordering
+   * inputs and assert the intended contract.
+   */
   it('returns a different random proposal ordering for two users', async () => {
     const variables = { proposalForm: 'proposalform1' }
     const userResult = await graphql(ProposalRandomOrderQuery, variables, 'internal_user')
@@ -386,6 +419,10 @@ describe('Internal|Query projects and proposals', () => {
     expect(adminResult).not.toEqual(userResult)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('includes unpublished votes when requested', async () => {
     await expect(
       graphql(
@@ -401,6 +438,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it.each([5, 15])('paginates proposal-step votes with a page size of %i', async count => {
     await expect(
       graphql(
@@ -414,6 +455,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('paginates proposal votes after a cursor', async () => {
     await expect(
       graphql(
@@ -428,6 +473,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('separates votes on collect and selection steps', async () => {
     await expect(
       graphql(
@@ -442,6 +491,10 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists a proposal followers', async () => {
     await expect(
       graphql(
@@ -456,12 +509,20 @@ describe('Internal|Query projects and proposals', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('lists proposals followed by the current user', async () => {
     await expect(
       graphql(FollowingProposalsQuery, { count: 32, cursor: null }, 'internal_admin'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it.each([null, 'YXJyYXljb25uZWN0aW9uOjMx'])('paginates proposal followers after %s', async cursor => {
     await expect(
       graphql(

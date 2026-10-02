@@ -14,6 +14,10 @@ const MetaStepNavigationBoxQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query step related module', () => {
   it('fetches the correct related module when in a ConsultationStep (consultation)', async () => {
     await expect(

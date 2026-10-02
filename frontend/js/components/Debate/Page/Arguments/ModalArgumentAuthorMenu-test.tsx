@@ -10,6 +10,11 @@ const props = {
     ' $fragmentRefs': $fragmentRefs,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalArgumentAuthorMenu />', () => {
   it('should renders correcty', () => {
     const wrapper = shallow(<ModalArgumentAuthorMenu {...props} />)

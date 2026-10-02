@@ -6,6 +6,11 @@ import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { RelaySuspensFragmentTest } from '~/testUtils'
 import type { DebateStepPageNotYetStartedTestQuery } from '~relay/DebateStepPageNotYetStartedTestQuery.graphql'
 import DebateStepPageNotYetStarted from './DebateStepPageNotYetStarted'
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<DebateStepPageNotYetStarted />', () => {
   let environment
   let testComponentTree

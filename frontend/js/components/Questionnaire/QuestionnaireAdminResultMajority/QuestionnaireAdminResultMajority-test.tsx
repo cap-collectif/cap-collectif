@@ -43,6 +43,11 @@ const props = {
     majorityQuestion: { ...baseProps.majorityQuestion, totalVotesCount: 0, responsesByChoice: [] },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<QuestionnaireAdminResultMajority />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<QuestionnaireAdminResultMajority {...props.basic} />)

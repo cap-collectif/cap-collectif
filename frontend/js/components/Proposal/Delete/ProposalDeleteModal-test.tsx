@@ -42,6 +42,11 @@ const interpellationProps = {
   isDeleting: false,
   dispatch: jest.fn(),
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalDeleteModal />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProposalDeleteModal {...defaultProps} />)

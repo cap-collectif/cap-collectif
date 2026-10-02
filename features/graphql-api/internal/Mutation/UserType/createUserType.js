@@ -45,6 +45,11 @@ const queryObjectPattern = {
 }
 
 describe('mutations.createUserType', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('creates a new user type', async () => {
     const before = await graphql(UserTypesQuery, null, 'internal_admin')
     expect(before).toMatchObject(queryObjectPattern)
@@ -77,6 +82,11 @@ describe('mutations.createUserType', () => {
   })
 
   // the user-type-nonprofit should be in the fixtures
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('creates a new user type with a media', async () => {
     const before = await graphql(UserTypesQuery, null, 'internal_admin')
     expect(before).toMatchObject(queryObjectPattern)
@@ -105,6 +115,11 @@ describe('mutations.createUserType', () => {
     expect(after.userTypes.edges.some(u => u.node.id === result.createUserType.userType.id)).toBe(true)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('creates a new user type with a non-existing media', async () => {
     await expect(
       graphql(
@@ -125,6 +140,11 @@ describe('mutations.createUserType', () => {
     ).rejects.toThrowError('This value is not valid.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to create a user type as a basic user', async () => {
     await expect(
       graphql(
@@ -144,6 +164,11 @@ describe('mutations.createUserType', () => {
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to create a user type while being unauthenticated', async () => {
     await expect(
       graphql(

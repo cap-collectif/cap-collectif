@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { getEndDateFromStartAt, isEventLive } from '~/components/Event/EventPageContent/EventHelperFunctions'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('EventHelperFunctions', () => {
   it('getEndDateFromStartAt should render correct Date', () => {
     expect(getEndDateFromStartAt('1996-11-28T12:00:00+0200').toLocaleDateString('fr-FR')).toBe('29/11/1996')

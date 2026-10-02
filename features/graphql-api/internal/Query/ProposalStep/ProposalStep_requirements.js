@@ -35,6 +35,10 @@ const ProposalStepRequirementsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|ProposalStep.requirements', () => {
   it('lists requirements and their viewer status', async () => {
     await expect(

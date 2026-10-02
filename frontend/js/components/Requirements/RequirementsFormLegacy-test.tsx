@@ -79,6 +79,11 @@ describe('<RequirementsFormLegacy />', () => {
       ],
     },
   }
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a vote widget for a simple vote without limit', () => {
     const wrapper = shallow(
       <RequirementsFormLegacy
@@ -91,6 +96,10 @@ describe('<RequirementsFormLegacy />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Enables fake timers without returning to real timers after the helper scenario.
+   */
   it('doesnt call api when value is same', () => {
     jest.useFakeTimers()
     const previousValues = {
@@ -115,6 +124,10 @@ describe('<RequirementsFormLegacy />', () => {
     expect(UpdateRequirementMutation.commit).not.toHaveBeenCalled()
     expect(UpdateProfilePersonalDataMutation.commit).not.toHaveBeenCalled()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Enables fake timers without returning to real timers after the helper scenario.
+   */
   it('call api on every value changed', () => {
     jest.useFakeTimers()
     const previousValues = {
@@ -149,6 +162,10 @@ describe('<RequirementsFormLegacy />', () => {
     // called for requirement1 to 4
     expect(UpdateProfilePersonalDataMutation.commit).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks public helper results only through snapshots instead of explicit expected values.
+   */
   it('validate correctly', () => {
     const props = {
       ...formMock,

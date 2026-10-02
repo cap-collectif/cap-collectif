@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { UserInvitationSSOPageTestQuery } from '~relay/UserInvitationSSOPageTestQuery.graphql'
 import UserInvitationSSOPage from './UserInvitationSSOPage'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<UserInvitationSSOPage />', () => {
   let environment
   let testComponentTree

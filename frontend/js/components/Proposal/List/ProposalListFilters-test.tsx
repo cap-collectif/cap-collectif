@@ -5,6 +5,11 @@ import { ProposalListFilters } from './ProposalListFilters'
 import { features } from '~/redux/modules/default'
 import { $refType, $fragmentRefs, intlMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalListFilters />', () => {
   const defaultProps = {
     setDisplayMode: jest.fn(),

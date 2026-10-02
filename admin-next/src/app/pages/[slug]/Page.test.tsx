@@ -5,6 +5,10 @@ import { MockProviders } from 'tests/testUtils'
 import { NavBarContext } from 'shared/navbar/NavBar.context'
 import PageRender from './PageRender'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<PageRender />', () => {
   it('renders correctly', () => {
     const { asFragment } = render(

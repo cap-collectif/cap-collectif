@@ -3,6 +3,10 @@ import { shallow } from 'enzyme'
 import { $fragmentRefs, $refType } from '~/mocks'
 import { prepareProposalBackNavigation, ProposalPageHeader } from './ProposalPageHeader'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('prepareProposalBackNavigation', () => {
   it('removes participation workflow parameters from the step URL', () => {
     expect(
@@ -47,6 +51,11 @@ describe('prepareProposalBackNavigation', () => {
   })
 })
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPageHeader />', () => {
   const proposal = {
     ' $refType': $refType,

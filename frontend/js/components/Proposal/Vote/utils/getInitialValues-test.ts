@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import getInitialValues from './getInitialValues'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('getInitialValues', () => {
   it('Should return correct value for all requirements', () => {
     const requirements = [

@@ -77,6 +77,10 @@ const ProposalNewsProposalsQuery = /* GraphQL */ `
 
 const variables = { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwx' }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Proposal.news related content', () => {
   it('lists all related content of proposal news', async () => {
     await expect(graphql(ProposalNewsRelatedContentQuery, variables, 'internal_admin')).resolves.toMatchSnapshot()

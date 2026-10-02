@@ -32,6 +32,11 @@ const InviteUsersMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|inviteUsers mutation access control', () => {
   const input = {
     emails: ['iwillberejected@sad.com'],
@@ -44,6 +49,11 @@ describe('Internal|inviteUsers mutation access control', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|inviteUsers mutation', () => {
   it('should invite new users as non admin', async () => {
     const response = await graphql(

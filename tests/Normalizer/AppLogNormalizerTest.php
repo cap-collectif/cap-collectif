@@ -36,6 +36,9 @@ class AppLogNormalizerTest extends TestCase
      *
      * @param array<string, bool>        $context
      * @param array<string, null|string> $expectedResult
+     * @phpunit-status non-compliant
+     * @phpunit-reason Uses loose array equality for the serialized export contract instead of asserting the
+     * expected values and types precisely.
      */
     public function testNormalize(array $context, array $expectedResult): void
     {
@@ -58,6 +61,11 @@ class AppLogNormalizerTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
+     * service responses.
+     */
     public function testSupportsNormalization(): void
     {
         $this->assertTrue($this->logAdminNormalizer->supportsNormalization(new AppLog(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));

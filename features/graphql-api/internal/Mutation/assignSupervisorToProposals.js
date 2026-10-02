@@ -22,6 +22,10 @@ const AssignSupervisorToProposalsMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.assignSupervisorToProposals', () => {
   // admin
   it('admin should assign a user as supervisor to a proposal.', async () => {

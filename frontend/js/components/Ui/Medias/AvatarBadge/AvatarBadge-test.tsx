@@ -14,6 +14,11 @@ const props = {
   iconColor: '#fff',
   iconSize: 5,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<AvatarBadge />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<AvatarBadge {...props} />)

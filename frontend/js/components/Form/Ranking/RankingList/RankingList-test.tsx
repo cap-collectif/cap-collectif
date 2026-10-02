@@ -36,6 +36,11 @@ const rankingList = {
   basic: { ...baseRankingList },
   isDisabled: { ...baseRankingList, isDisabled: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<RankingList />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<RankingList {...rankingList.basic} hasIllustrationDisplayed />)

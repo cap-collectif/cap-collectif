@@ -16,6 +16,11 @@ const theme = {
     },
   ],
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<TagThemes />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<TagThemes themes={theme.basic} size="15px" />)

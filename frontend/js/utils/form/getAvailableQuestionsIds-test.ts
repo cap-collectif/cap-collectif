@@ -85,6 +85,10 @@ const ALL_CASE_QUESTIONNAIRE = {
     result: ['UXVlc3Rpb246Mjg='],
   },
 }
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('getAvailableQuestionsIds', () => {
   it('SIMPLE CASE - should render correctly', () => {
     const ids = getAvailableQuestionsIds(ALL_CASE_QUESTIONNAIRE.simple.form, [])

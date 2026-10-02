@@ -22,6 +22,10 @@ const assignDecisionMakerToProposalsMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.assignDecisionMakerToProposals', () => {
   // admin
   it('admin should assign a user as decision maker to a proposal.', async () => {

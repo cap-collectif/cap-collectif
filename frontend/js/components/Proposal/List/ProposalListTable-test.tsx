@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalListTable } from './ProposalListTable'
 import { $refType } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalListTable />', () => {
   const step = {
     form: {

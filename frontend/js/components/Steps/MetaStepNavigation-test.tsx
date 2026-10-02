@@ -18,24 +18,44 @@ const cStep = {
   },
   ' $refType': $refType,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<MetaStepNavigation />', () => {
   it('should render correctly for a ConsultationStep', () => {
     const wrapper = shallow(<MetaStepNavigation step={cStep} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<MetaStepNavigationShare />', () => {
   it('should render correctly for a ConsultationStep', () => {
     const wrapper = shallow(<MetaStepNavigationShare step={cStep} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<MetaStepNavigationTitle />', () => {
   it('should render correctly for a ConsultationStep', () => {
     const wrapper = shallow(<MetaStepNavigationTitle step={cStep} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<MetaStepNavigationBackButton />', () => {
   it('should render correctly for a ConsultationStep', () => {
     const wrapper = shallow(<MetaStepNavigationBackButton step={cStep} />)

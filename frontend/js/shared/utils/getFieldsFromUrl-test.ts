@@ -1,6 +1,11 @@
 /* eslint-env jest */
 import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from './getFieldsFromUrl'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Replaces window.history and window.location in shared setup without restoring their original
+ * property descriptors.
+ */
 describe('shared/utils/getFieldsFromUrl', () => {
   beforeAll(() => {
     delete global.window.history

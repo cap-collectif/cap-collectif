@@ -139,6 +139,11 @@ const event1Id = toGlobalId('Event', 'event1')
 const event2Id = toGlobalId('Event', 'event2')
 
 describe('mutations.projectTabs', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects duplicate slug on create', async () => {
     const response = await graphql(
       CreateCustomProjectTabMutation,
@@ -157,6 +162,11 @@ describe('mutations.projectTabs', () => {
     expect(response.createCustomProjectTab.errorCode).toBe('SLUG_ALREADY_EXISTS')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects a second presentation tab', async () => {
     const response = await graphql(
       CreatePresentationProjectTabMutation,
@@ -175,6 +185,10 @@ describe('mutations.projectTabs', () => {
     expect(response.createPresentationProjectTab.errorCode).toBe('PRESENTATION_ALREADY_EXISTS')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('creates a custom tab', async () => {
     await expect(
       graphql(
@@ -192,6 +206,11 @@ describe('mutations.projectTabs', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('requires news items for news tabs', async () => {
     const response = await graphql(
       CreateNewsProjectTabMutation,
@@ -209,6 +228,10 @@ describe('mutations.projectTabs', () => {
     expect(response.createNewsProjectTab.errorCode).toBe('NEWS_ITEMS_REQUIRED')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('updates a custom tab', async () => {
     await expect(
       graphql(
@@ -226,6 +249,11 @@ describe('mutations.projectTabs', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects update when the mutation type does not match the tab type', async () => {
     const response = await graphql(
       UpdatePresentationProjectTabMutation,
@@ -244,6 +272,11 @@ describe('mutations.projectTabs', () => {
     expect(response.updatePresentationProjectTab.errorCode).toBe('INVALID_TAB_TYPE')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('updates news items with the provided order', async () => {
     const response = await graphql(
       UpdateNewsProjectTabMutation,
@@ -265,6 +298,11 @@ describe('mutations.projectTabs', () => {
     expect(response.updateNewsProjectTab.projectTab.news.map(({ id }) => id)).toEqual([post1Id, post2Id])
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects duplicated news item positions', async () => {
     const response = await graphql(
       UpdateNewsProjectTabMutation,
@@ -286,6 +324,11 @@ describe('mutations.projectTabs', () => {
     expect(response.updateNewsProjectTab.errorCode).toBe('INVALID_NEWS_ITEMS')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects duplicated event items', async () => {
     const response = await graphql(
       UpdateEventsProjectTabMutation,
@@ -307,6 +350,11 @@ describe('mutations.projectTabs', () => {
     expect(response.updateEventsProjectTab.errorCode).toBe('INVALID_EVENT_ITEMS')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects duplicated event item positions', async () => {
     const response = await graphql(
       UpdateEventsProjectTabMutation,
@@ -328,6 +376,11 @@ describe('mutations.projectTabs', () => {
     expect(response.updateEventsProjectTab.errorCode).toBe('INVALID_EVENT_ITEMS')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('deletes a tab', async () => {
     const response = await graphql(
       DeleteProjectTabMutation,
@@ -343,6 +396,11 @@ describe('mutations.projectTabs', () => {
     expect(response.deleteProjectTab.errorCode).toBe(null)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rejects invalid reorder payloads', async () => {
     const response = await graphql(
       ReorderProjectTabsMutation,
@@ -359,6 +417,10 @@ describe('mutations.projectTabs', () => {
     expect(response.reorderProjectTabs.errorCode).toBe('INVALID_REORDER')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('reorders tabs', async () => {
     await expect(
       graphql(

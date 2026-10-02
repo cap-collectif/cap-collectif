@@ -30,3 +30,6 @@ les marqueurs et les conditions pour choisir un test comme modèle.
 
 Les principes d’isolation et de comportement observable reprennent les consignes
 backend v2, adaptées aux suites et emplacements actuels du dépôt.
+
+Le [bilan du marquage initial](../agents/test-status-audit.md) décrit l’analyse
+de la suite historique et ses limites.

@@ -22,6 +22,11 @@ const props = {
     { ...font, id: '4', isCustom: true },
   ],
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<FontAdminContent />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<FontUseForm {...props} />)

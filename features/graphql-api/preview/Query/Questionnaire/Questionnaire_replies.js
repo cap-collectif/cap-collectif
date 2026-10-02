@@ -145,6 +145,10 @@ const QuestionnaireResponsesQuery = /* GraphQL */ `
 `
 
 describe('Preview|Questionnaire.replies connection', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches the first hundred published replies with a cursor', async () => {
     await expect(
       graphql(OpenDataRepliesQuery, {
@@ -154,6 +158,10 @@ describe('Preview|Questionnaire.replies connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches the first hundred replies including draft and unpublished with a cursor as an admin', async () => {
     await expect(
       graphql(
@@ -169,6 +177,10 @@ describe('Preview|Questionnaire.replies connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches all replies counters as an admin', async () => {
     await expect(
       graphql(
@@ -181,6 +193,10 @@ describe('Preview|Questionnaire.replies connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('fetches published counters only as anonymous', async () => {
     await expect(
       graphql(
@@ -193,6 +209,11 @@ describe('Preview|Questionnaire.replies connection', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only presence or a positive count instead of the expected API data or authorization
+   * contract.
+   */
   it('returns replies and participation volume to an anonymous user', async () => {
     const result = await graphql(AllRepliesQuery, {
       id: toGlobalId('Questionnaire', 'questionnaireAnonymous'),
@@ -204,6 +225,11 @@ describe('Preview|Questionnaire.replies connection', () => {
     expect(result.node.replies.totalCount).toBeGreaterThan(0)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only presence or a positive count instead of the expected API data or authorization
+   * contract.
+   */
   it('returns response values and participation volume to an anonymous user', async () => {
     const result = await graphql(QuestionnaireResponsesQuery, {
       id: toGlobalId('Question', 1403),
@@ -212,6 +238,10 @@ describe('Preview|Questionnaire.replies connection', () => {
     expect(result.node.responses.totalCount).toBeGreaterThan(0)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('exposes replies as contributions in the preview schema', async () => {
     await expect(
       graphql(

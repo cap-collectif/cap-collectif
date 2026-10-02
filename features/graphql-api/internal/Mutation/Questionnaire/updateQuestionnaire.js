@@ -33,6 +33,10 @@ const UpdateQuestionnaireMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateQuestionnaireMutation', () => {
   it('GraphQL admin wants to update a questionnaire', async () => {
     await expect(

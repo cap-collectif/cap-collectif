@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalPageFollowers } from './ProposalPageFollowers'
 import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPageFollowers />', () => {
   const pageAdmin = false
   const proposalWithUsers = {

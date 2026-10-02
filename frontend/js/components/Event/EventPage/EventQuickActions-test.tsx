@@ -4,6 +4,11 @@ import ReactTestRenderer from 'react-test-renderer'
 import EventQuickActions from './EventQuickActions'
 import MockProviders, { enableFeatureFlags, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<EventQuickActions />', () => {
   beforeEach(() => {
     addsSupportForPortals()

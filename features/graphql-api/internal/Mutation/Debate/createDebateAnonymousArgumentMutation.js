@@ -18,6 +18,10 @@ const CreateDebateAnonymousArgumentMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|CreateDebateAnonymousArgument', () => {
   it('try to create argument with wrong debate id', async () => {
     await expect(

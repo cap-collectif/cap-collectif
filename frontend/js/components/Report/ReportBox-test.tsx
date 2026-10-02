@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { ReportBox } from './ReportBox'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ReportBox />', () => {
   const defaultProps = {
     id: 'opinion-1',

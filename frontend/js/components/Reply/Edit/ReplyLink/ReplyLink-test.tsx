@@ -28,6 +28,11 @@ const notContribuableReply = {
   viewerCanDelete: false,
 }
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ReplyLink />', () => {
   it('render a reply in a contribuable questionnaire', () => {
     const wrapper = shallow(<ReplyLink reply={reply} questionnaire={questionnaire} />)

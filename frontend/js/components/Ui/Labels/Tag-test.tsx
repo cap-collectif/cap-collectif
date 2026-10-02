@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { Tag } from './Tag'
 
 const children = 'Label'
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Tag />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<Tag id="example">{children}</Tag>)

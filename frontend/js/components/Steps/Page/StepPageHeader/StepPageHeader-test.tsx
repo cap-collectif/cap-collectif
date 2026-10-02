@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import { StepPageHeader } from './StepPageHeader'
 import type { StepPageHeaderTestQuery } from '~relay/StepPageHeaderTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<StepPageHeader />', () => {
   let environment
   let mockResolvers

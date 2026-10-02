@@ -150,11 +150,19 @@ describe('mutations.updateProposalVotesMutation', () => {
     email: 'user@test.com',
     password: 'user',
   }
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to delete everything as user anonymous votes included', async () => {
     await expect(
       graphql(UpdateProposalVotesWithVotesMutation, { input: inputWithAnonymousVote }, user),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to reorder his votes as user', async () => {
     await expect(
       graphql(
@@ -168,6 +176,10 @@ describe('mutations.updateProposalVotesMutation', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to reorder votes on question as user', async () => {
     await expect(
       graphql(
@@ -179,12 +191,21 @@ describe('mutations.updateProposalVotesMutation', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('wants to delete everything as user', async () => {
     await expect(
       graphql(UpdateProposalVotesWithoutVotesMutation, { input: inputVotesEmpty }, user),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('rewrites ranking positions from the input order', async () => {
     await global.runSQL('UPDATE votes SET position = NULL WHERE id IN (2051, 2052, 2053)')
 

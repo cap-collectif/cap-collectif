@@ -5,6 +5,11 @@ import { PersonalData } from './PersonalData'
 import { intlMock, formMock, $fragmentRefs, $refType } from '../../../mocks'
 import { mockUrl } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<PersonalData />', () => {
   const viewer1 = {
     ' $refType': $refType,

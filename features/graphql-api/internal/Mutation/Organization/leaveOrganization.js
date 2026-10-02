@@ -23,6 +23,11 @@ const viewerOrganizations = /* GraphQL */ `
 
 const vmd = { email: 'valerie.massondelmotte@cap-collectif.com', password: 'toto' }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|leaveOrganization mutation', () => {
   it('removes the member from the organization and from the viewer organizations', async () => {
     const response = await graphql(

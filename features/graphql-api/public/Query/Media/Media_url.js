@@ -15,6 +15,10 @@ const EventMediaQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Media.url', () => {
   it('it fetches a media url', async () => {
     await Promise.all(

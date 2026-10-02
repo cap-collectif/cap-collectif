@@ -25,6 +25,10 @@ jest.mock('@shared/hooks/useFeatureFlag', () => ({
   default: () => true,
 }))
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Uses only truthiness assertions instead of checking the expected contract precisely.
+ */
 describe('ProjectPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()

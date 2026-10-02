@@ -3,6 +3,10 @@
 import { defaultFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { getSideBarItemsFiltered } from './SideBar.utils'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('getSideBarItemsFiltered', () => {
   const getNotificationSettingsItem = (featureFlags = defaultFeatureFlags) => {
     const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)

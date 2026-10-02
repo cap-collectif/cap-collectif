@@ -94,6 +94,10 @@ const ExternalAnalyticsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Analytics', () => {
   it('fetches analytics data', async () => {
     await expect(
@@ -124,6 +128,10 @@ describe('Internal|Analytics', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('External|Analytics', () => {
   it('fetches external analytics data filtered by url', async () => {
     await expect(

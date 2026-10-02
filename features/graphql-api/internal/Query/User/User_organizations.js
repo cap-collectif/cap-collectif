@@ -11,6 +11,10 @@ const UserOrganizationsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('User.organizations connection', () => {
   it("fetches a user's organization when authenticated as admin.", async () => {
     await expect(

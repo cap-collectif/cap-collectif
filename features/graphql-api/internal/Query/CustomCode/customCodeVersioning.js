@@ -62,6 +62,11 @@ const CustomCodeVersionQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|CustomCode versioning queries', () => {
   it('returns custom code configuration with descriptions and version metadata', async () => {
     const response = await graphql(CustomCodeConfigurationQuery, { versionsLimit: 2 }, 'internal_super_admin')

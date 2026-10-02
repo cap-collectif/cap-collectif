@@ -21,6 +21,10 @@ const QuestionnaireStepContributorsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|QuestionnaireStep.contributors connection', () => {
   it('fetches the contributors of a questionnaire step', async () => {
     await expect(

@@ -5,6 +5,11 @@ import { ArgumentsBox } from './ArgumentsBox'
 import { $refType, $fragmentRefs } from '../../mocks'
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ArgumentsBox />', () => {
   const opinion = {
     ' $refType': $refType,

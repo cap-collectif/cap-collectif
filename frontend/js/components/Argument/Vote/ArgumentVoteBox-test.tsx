@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ArgumentVoteBox } from './ArgumentVoteBox'
 import { $refType, $fragmentRefs } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ArgumentVoteBox />', () => {
   it('renders correctly', () => {
     const argument = {

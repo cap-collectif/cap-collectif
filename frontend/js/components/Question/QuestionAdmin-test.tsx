@@ -285,22 +285,47 @@ describe('<QuestionAdmin />', () => {
     },
     questions: getDeleteQuestions(),
   }
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly a section', () => {
     const wrapper = shallow(<QuestionAdmin {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly a text question', () => {
     const wrapper = shallow(<QuestionAdmin {...propsQuestion} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly a medias question', () => {
     const wrapper = shallow(<QuestionAdmin {...propsMedia} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly a checkbox question', () => {
     const wrapper = shallow(<QuestionAdmin {...propsCheckbox} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Mutates the shared questions fixture while computing the expectation and asserts internal
+   * redux-form calls.
+   */
   it('should call dispatch 1 time when I delete 1 question related to a jump and there are still other questions related to the jump', () => {
     const { question, questions, dispatch, formName, handleDeleteQuestionRow, index } = deleteChoicesProps
     handleConfirmDelete(question, questions, dispatch, formName, handleDeleteQuestionRow, index)
@@ -308,6 +333,11 @@ describe('<QuestionAdmin />', () => {
     expect(change.mock.calls[0][2]).toStrictEqual(questions[0].jumps.splice(1, 1))
     expect(change.mock.calls.length).toBe(1)
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Asserts the internal redux-form change call sequence rather than the resulting form
+   * behavior.
+   */
   it('should call dispatch 2 times when I delete the only question related to the jump', () => {
     const deleteQuestionsPropsWithOneJump = { ...deleteChoicesProps, questions: getDeleteQuestions(2, 1) }
     const { question, questions, dispatch, formName, handleDeleteQuestionRow, index } = deleteQuestionsPropsWithOneJump

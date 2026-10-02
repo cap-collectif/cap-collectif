@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProjectAdminQuestionnaireStepForm } from './ProjectAdminQuestionnaireStepForm'
 import MockProviders from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectAdminQuestionnaireStepForm />', () => {
   const props = {
     dispatch: jest.fn(),

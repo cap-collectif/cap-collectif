@@ -15,6 +15,11 @@ const duplicateProposalFormMutation = /* GraphQl */ `
 `
 
 describe('Internal | duplicateProposalForm', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('cannot duplicate if not owner', async () => {
     await expect(
       graphql(
@@ -28,6 +33,10 @@ describe('Internal | duplicateProposalForm', () => {
       ),
     ).rejects.toThrowError('Access denied to this field.')
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('duplicate own proposalForm', async () => {
     const response = await graphql(
       duplicateProposalFormMutation,
@@ -40,6 +49,10 @@ describe('Internal | duplicateProposalForm', () => {
     )
     expect(response).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('duplicate someone else proposalForm as admin', async () => {
     const response = await graphql(
       duplicateProposalFormMutation,

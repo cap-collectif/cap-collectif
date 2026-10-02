@@ -19,6 +19,10 @@ const UserArgumentsVisibilityQuery = /* GraphQL */ `
 
 const userId = toGlobalId('User', 'userAdmin')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|User.arguments visibility', () => {
   it('returns visible arguments to an admin', async () => {
     await expect(graphql(UserArgumentsVisibilityQuery, { userId }, 'internal_admin')).resolves.toMatchSnapshot()

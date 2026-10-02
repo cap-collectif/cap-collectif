@@ -54,6 +54,10 @@ const inputDryRunFalse = {
   groupId: 'R3JvdXA6Z3JvdXA1',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addUsersToGroupFromEmailInput', () => {
   it('wants to add a list of emails to a group with some wrong email with dry run as admin', async () => {
     const mutationResponse = await graphql(AddUsersToGroupFromEmailMutation, { input: input }, 'internal_admin')

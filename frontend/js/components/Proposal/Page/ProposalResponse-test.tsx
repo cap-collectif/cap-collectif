@@ -5,6 +5,11 @@ import { IntlProvider } from 'react-intl'
 import { ProposalResponse } from './ProposalResponse'
 import { $refType } from '../../../mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalResponse />', () => {
   it('should render a section response', () => {
     const props = {

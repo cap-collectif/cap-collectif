@@ -45,33 +45,68 @@ describe('<AccountForm />', () => {
       email: 'initial-email@gmail.fr',
     },
   }
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a form', () => {
     const wrapper = shallow(<AccountForm {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a form with an alert if submitted password is wrong', () => {
     const wrapper = shallow(<AccountForm {...props} error="user.confirm.wrong_password" />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a form with associated account', () => {
     const franceConnectViewer = { ...defaultViewer, hasPassword: false, isFranceConnectAccount: true }
     const Props = { ...props, viewer: { ...franceConnectViewer } }
     const wrapper = shallow(<AccountForm {...Props} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a form with information about new email', () => {
     const wrapper = shallow(<AccountForm {...props} newEmailToConfirm="new-email@test.com" />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render a form with an info if a confirmation email has been resent', () => {
     const wrapper = shallow(<AccountForm {...props} newEmailToConfirm="new-email@test.com" />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('should render with button to delete account only', () => {
     const wrapper = shallow(<AccountForm {...props} loginWithOpenId newEmailToConfirm="new-email@test.com" />)
     expect(wrapper).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Changes the module mutation mock implementation without resetting it after the scenario;
+   * clearMocks only clears call history.
+   */
   it('should submit email mutation for france connect user without password even if passwordConfirm is empty', async () => {
     ;(UpdateProfileAccountEmailMutation.commit as jest.Mock).mockResolvedValue({
       updateProfileAccountEmail: {

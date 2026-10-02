@@ -5,6 +5,11 @@ import { ProjectPublishAdminForm } from './ProjectPublishAdminForm'
 import { formMock, intlMock, $refType, $fragmentRefs } from '~/mocks'
 import { disableFeatureFlags, enableFeatureFlags } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectPublishAdminForm />', () => {
   const defaultProps = { ...formMock, intl: intlMock, project: null }
   afterEach(() => {

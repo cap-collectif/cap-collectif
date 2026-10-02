@@ -48,6 +48,10 @@ const ConsultationStepCountersQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query step.consultations connection', () => {
   it('fetches the correct consultations', async () => {
     await expect(
@@ -62,6 +66,10 @@ describe('Internal|Query step.consultations connection', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query step.consultation', () => {
   it('fetches the correct first consultation by slug of the step', async () => {
     await expect(
@@ -89,6 +97,10 @@ describe('Internal|Query step.consultation', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query step', () => {
   it('fetches the correct contributions count for a given consultation step', async () => {
     await expect(

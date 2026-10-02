@@ -7,6 +7,11 @@ import ProjectHeaderDistrictsList, { DistrictsButton } from './ProjectHeaderDist
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderDistrictsListTestQuery } from '~relay/ProjectHeaderDistrictsListTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectHeaderDistrictsList />', () => {
   let environment
   let TestComponent

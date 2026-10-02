@@ -7,6 +7,11 @@ import ProposalFollowButton from './ProposalFollowButton'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProposalFollowButtonTestQuery } from '~relay/ProposalFollowButtonTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalFollowButton />', () => {
   let environment
   let testComponentTree

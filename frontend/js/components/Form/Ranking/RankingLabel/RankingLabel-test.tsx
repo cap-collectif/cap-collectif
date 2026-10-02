@@ -19,6 +19,11 @@ const rankingLabel = {
   withoutImage: { ...baseRankingLabel, image: null },
   disabled: { ...baseRankingLabel, isDisabled: true },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<RankingLabel />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<RankingLabel {...rankingLabel.basic} hasIllustrationDisplayed />)

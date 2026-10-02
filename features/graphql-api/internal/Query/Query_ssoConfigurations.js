@@ -43,6 +43,10 @@ const InternalQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.ssoConfigurations', () => {
   it('fetches all configurations', async () => {
     await expect(graphql(InternalQuery, {}, 'internal_admin')).resolves.toMatchSnapshot({

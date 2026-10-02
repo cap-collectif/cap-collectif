@@ -9,6 +9,11 @@ import Loader from '~ui/FeedbacksIndicators/Loader'
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 const loadOptionsEmptyResultsMock = jest.fn().mockResolvedValue([])
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<SearchableDropdownSelect />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
@@ -159,6 +164,11 @@ describe('<SearchableDropdownSelect />', () => {
     expect(wrapper.find(DropdownSelectChoice).at(2).prop('value')).toBe('anime3')
   })
 })
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 it('should render correctly with reset button', () => {
   const wrapper = shallow(
     <SearchableDropdownSelect

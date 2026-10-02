@@ -23,6 +23,11 @@ const validInput = {
 }
 
 describe('Internal|create opinion', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('creates an opinion for an authenticated user', async () => {
     const response = await graphql(mutation, { input: validInput }, 'internal_admin')
 
@@ -32,12 +37,22 @@ describe('Internal|create opinion', () => {
     )
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('requires authentication', async () => {
     await expect(graphql(mutation, { input: validInput }, 'internal')).rejects.toThrowError(
       'Access denied to this field.',
     )
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it.each([
     [
       'disabled opinion type',
@@ -57,6 +72,11 @@ describe('Internal|create opinion', () => {
     expect(response.createOpinion).toEqual({ opinion: null, errorCode })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('creates an opinion with appendices', async () => {
     const response = await graphql(
       mutation,
@@ -76,6 +96,11 @@ describe('Internal|create opinion', () => {
     expect(response.createOpinion).toMatchObject({ errorCode: null, opinion: { title: 'le titre' } })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('enforces contribution requirements and the rate limit', async () => {
     const missingRequirements = await graphql(
       mutation,

@@ -37,6 +37,10 @@ const AddProposalVoteWithRankingMutation = /* GraphQL */ `
 `
 
 describe('mutations.addProposalVote', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for a proposal anonymously', async () => {
     await expect(
       graphql(
@@ -59,6 +63,11 @@ describe('mutations.addProposalVote', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for a proposal in a step with vote limited but has already reached vote limit', async () => {
     await expect(
       graphql(
@@ -74,6 +83,10 @@ describe('mutations.addProposalVote', () => {
     ).rejects.toThrowError('You have reached the limit of votes.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for a question in a step with requirements', async () => {
     await expect(
       graphql(
@@ -95,6 +108,10 @@ describe('mutations.addProposalVote', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for a proposal', async () => {
     await expect(
       graphql(
@@ -116,6 +133,11 @@ describe('mutations.addProposalVote', () => {
     })
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote several times for a proposal in a step', async () => {
     await expect(
       graphql(
@@ -131,6 +153,11 @@ describe('mutations.addProposalVote', () => {
     ).rejects.toThrowError('proposal.vote.already_voted')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for a proposal in a wrong selection step', async () => {
     await expect(
       graphql(
@@ -146,6 +173,11 @@ describe('mutations.addProposalVote', () => {
     ).rejects.toThrowError('This proposal is not associated to this selection step.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for a proposal in a not votable selection step', async () => {
     await expect(
       graphql(
@@ -161,6 +193,10 @@ describe('mutations.addProposalVote', () => {
     ).rejects.toThrowError('This step is not votable.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for a proposal in a not contribuable selection step', async () => {
     await expect(
       graphql(
@@ -176,6 +212,11 @@ describe('mutations.addProposalVote', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to vote for a proposal in a not votable selection step', async () => {
     await expect(
       graphql(
@@ -191,6 +232,10 @@ describe('mutations.addProposalVote', () => {
     ).rejects.toThrowError('proposal.vote.not_enough_credits')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to vote for proposals until his votes are taken into account', async () => {
     // First vote - not yet accounted (minimum not reached)
     await expect(
@@ -235,6 +280,11 @@ describe('mutations.addProposalVote', () => {
     })
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('assigns the next ranking position when adding a vote without reordering votes', async () => {
     await global.runSQL(
       'DELETE FROM votes WHERE voter_id = "userMaxime" AND proposal_id = "proposal24" AND collect_step_id = "collectstepVoteClassement"',

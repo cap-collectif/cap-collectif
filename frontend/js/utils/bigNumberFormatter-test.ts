@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('validateResponses', () => {
   it('Should not format too short number', () => {
     const value = formatBigNumber(19)

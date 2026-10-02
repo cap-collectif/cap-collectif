@@ -5,6 +5,11 @@ import { ProposalPageOfficialAnswer } from './ProposalPageOfficialAnswer'
 import { $refType } from '~/mocks'
 import moment from 'moment'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPageOfficialAnswer />', () => {
   const emptyProposal = {
     ' $refType': $refType,

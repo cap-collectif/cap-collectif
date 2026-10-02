@@ -31,6 +31,10 @@ const CollectStepRequirementsParticipantsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|CollectStep.requirements connection', () => {
   it('fetches requirements for a participant', async () => {
     await expect(

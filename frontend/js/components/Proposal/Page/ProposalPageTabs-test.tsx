@@ -13,6 +13,11 @@ import {
 import type { ProposalPageTabsTestQuery } from '~relay/ProposalPageTabsTestQuery.graphql'
 import { ProposalPageTabs } from './ProposalPageTabs'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProposalPageTabs />', () => {
   let environment
   let testComponentTree

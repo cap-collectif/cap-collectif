@@ -24,6 +24,11 @@ const UpdateProfileAccountLocaleMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('mutations.updateProfileAccountEmail', () => {
   it('should  update user email', async () => {
     const updateEmail = await graphql(

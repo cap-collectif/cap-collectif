@@ -17,6 +17,10 @@ const RemoveArgumentVoteMutation = /* GraphQL*/ `
 `
 
 describe('mutations.removeArgumentVote', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Logged in API client wants to remove a vote for an argument', async () => {
     await expect(
       graphql(
@@ -31,6 +35,11 @@ describe('mutations.removeArgumentVote', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote but has not voted', async () => {
     await expect(
       graphql(
@@ -45,6 +54,11 @@ describe('mutations.removeArgumentVote', () => {
     ).rejects.toThrowError('You have not voted for this argument.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('Logged in API client wants to remove a vote without requirements', async () => {
     await expect(
       graphql(

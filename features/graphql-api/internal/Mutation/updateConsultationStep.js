@@ -68,6 +68,10 @@ const input = {
   consultations: ['Q29uc3VsdGF0aW9uOmRlZmF1bHQ='],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateConsultationStep', () => {
   it('should update the step', async () => {
     await expect(graphql(UpdateConsultationStepMutation, { input }, 'internal_admin')).resolves.toMatchSnapshot()

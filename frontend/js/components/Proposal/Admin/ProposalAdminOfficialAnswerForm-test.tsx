@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { ProposalAdminOfficialAnswerForm } from './ProposalAdminOfficialAnswerForm'
 import { $refType, formMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalAdminOfficialAnswerForm />', () => {
   const props = {
     dispatch: jest.fn(),

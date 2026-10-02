@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import Cookie from './Cookie'
 import { intlMock } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Cookie />', () => {
   const props = {
     analyticsJs:

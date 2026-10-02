@@ -19,6 +19,10 @@ const ProposalReportingsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Proposal.reportings', () => {
   it('lists reportings for a proposal', async () => {
     await expect(

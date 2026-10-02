@@ -29,6 +29,10 @@ const variables = {
   geoBoundingBox: null,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|SelectionStep.proposals location argument', () => {
   it('fetches the proposals from a selection step filtered by a given bounding box', async () => {
     await expect(

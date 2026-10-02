@@ -32,6 +32,11 @@ const props = {
   editingOpinion: baseProps,
   creatingOpinion: { ...baseProps, isCreating: true, opinion: undefined },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalDebateOpinion />', () => {
   it('should render correctly when editing opinion', () => {
     const wrapper = shallow(<ModalDebateOpinion {...props.editingOpinion} />)

@@ -7,6 +7,11 @@ const props = {
   nbPages: 10,
   onChange: () => {},
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<Pagination />', () => {
   it('should render pagination with first, prev, next and last items plus correct number of items inbetween', () => {
     const wrapper = shallow(<Pagination {...props} current={5} />)

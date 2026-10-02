@@ -3,6 +3,11 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import FooterLinksRender from './FooterLinksRender'
 // TODO : write a test for the multilangue button when props are ready #9440
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<FooterLinksRender />', () => {
   it('renders correcty', () => {
     const props = {

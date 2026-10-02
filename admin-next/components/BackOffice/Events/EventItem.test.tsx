@@ -6,6 +6,10 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { EventItemTestQuery } from '@relay/EventItemTestQuery.graphql'
 import { act, render } from '@testing-library/react'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<EventItem />', () => {
   let environment: any
   let TestComponent: any

@@ -43,6 +43,10 @@ const templateInputs = [
   ],
 ]
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('project template collect-step requirements', () => {
   test.each(templateInputs)(
     '%s uses email verification when SSO bypass authentication is disabled',
@@ -56,6 +60,10 @@ describe('project template collect-step requirements', () => {
   })
 })
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('Hub API Green project templates', () => {
   test.each([
     ['public inquiry', getPublicInquiryInput],

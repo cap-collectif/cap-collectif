@@ -198,15 +198,30 @@ describe('<ProposalAdminContentForm />', () => {
     },
     responses: [],
   }
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly', () => {
     const wrapper = shallow(<ProposalAdminContentForm {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly with proposals revisions feature enabled', () => {
     const ownProps = { ...props, features: { ...props.features, proposal_revisions: true } }
     const wrapper = shallow(<ProposalAdminContentForm {...ownProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status legacy
+   * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+   * public DOM behavior.
+   */
   it('render correctly with estimation', () => {
     const ownProps = {
       ...props,
@@ -228,6 +243,10 @@ describe('<ProposalAdminContentForm />', () => {
     const wrapper = shallow(<ProposalAdminContentForm {...ownProps} />)
     expect(wrapper).toMatchSnapshot()
   })
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+   */
   it('doest not allow title > 255 chars', () => {
     expect(
       checkProposalContent(

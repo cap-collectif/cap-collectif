@@ -43,6 +43,11 @@ class ActionLoggerTest extends TestCase
         $this->logger = $this->createMock(LoggerInterface::class);
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason The success cases check only the dispatched message class, and the error provider
+     * ignores its user and request inputs.
+     */
     public function testLogGraphQLQuery(): void
     {
         $user = new User();
@@ -81,6 +86,9 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @dataProvider logGraphQLQueryWithErrorProvider
+     * @phpunit-status non-compliant
+     * @phpunit-reason The success cases check only the dispatched message class, and the error provider
+     * ignores its user and request inputs.
      */
     public function testLogGraphQLQueryWithError(
         ?User $user,
@@ -125,6 +133,11 @@ class ActionLoggerTest extends TestCase
         ];
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason The success cases check only the dispatched message class, and the error provider
+     * ignores its user and request inputs.
+     */
     public function testLogExport(): void
     {
         $user = new User();
@@ -159,6 +172,11 @@ class ActionLoggerTest extends TestCase
         self::assertTrue($actual);
     }
 
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason The success cases check only the dispatched message class, and the error provider
+     * ignores its user and request inputs.
+     */
     public function testLogGraphQLMutation(): void
     {
         $user = new User();
@@ -193,6 +211,11 @@ class ActionLoggerTest extends TestCase
         self::assertTrue($actual);
     }
 
+    /**
+     * @phpunit-status compliant
+     * @phpunit-reason Checks the outbound error-log contract and absence of dispatched messages with real
+     * per-test domain data.
+     */
     public function testLogError(): void
     {
         $user = new User();

@@ -6,6 +6,10 @@ import CookieContent from './CookieContent'
 import CookieManager from './CookieManager'
 import MockProviders, { mockedSSRData } from 'tests/testUtils'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<CookieModal />', () => {
   it('renders correctly', () => {
     const { asFragment } = render(
@@ -16,6 +20,10 @@ describe('<CookieModal />', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<CookieBanner />', () => {
   it('renders correctly', () => {
     const { asFragment } = render(
@@ -26,6 +34,10 @@ describe('<CookieBanner />', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<CookieContent />', () => {
   it('renders correctly', () => {
     const { asFragment } = render(
@@ -36,6 +48,10 @@ describe('<CookieContent />', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 })
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<CookieManager />', () => {
   it('renders correctly', () => {
     const { asFragment } = render(

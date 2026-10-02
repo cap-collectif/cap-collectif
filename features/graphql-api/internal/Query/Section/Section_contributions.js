@@ -52,6 +52,10 @@ const OpinionContributionsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Section.contributionConnection', () => {
   it('lists contributions ordered by vote count', async () => {
     await expect(graphql(SectionContributionsQuery, {}, 'internal')).resolves.toMatchSnapshot()

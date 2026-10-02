@@ -17,6 +17,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * @internal
  *
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the subscriber directly instead of triggering its effect through HTTP or CLI.
  */
 class FranceConnectLogoutSubscriberTest extends TestCase
 {

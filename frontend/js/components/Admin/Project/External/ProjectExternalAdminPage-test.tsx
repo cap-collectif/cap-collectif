@@ -5,6 +5,11 @@ import { ProjectExternalAdminPage } from './ProjectExternalAdminPage'
 import { formMock, intlMock, $refType, $fragmentRefs } from '../../../../mocks'
 import { features } from '../../../../redux/modules/default'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProjectExternalAdminPage />', () => {
   const defaultProps = {
     ...formMock,

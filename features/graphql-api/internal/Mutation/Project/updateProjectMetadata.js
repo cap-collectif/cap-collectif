@@ -29,6 +29,10 @@ const UpdateProjectMetadataMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateProjectMetadataMutation', () => {
   it('GraphQL admin wants to update a project metadata', async () => {
     await expect(

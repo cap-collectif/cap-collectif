@@ -127,6 +127,10 @@ const ProjectsDistrictsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview|Query.projects connection', () => {
   it('fetches the public projects with a cursor', async () => {
     await expect(

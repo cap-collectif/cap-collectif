@@ -24,6 +24,10 @@ const FooterQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query footer', () => {
   it('Get Footer data', async () => {
     await expect(graphql(FooterQuery, {}, 'internal')).resolves.toMatchSnapshot()

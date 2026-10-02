@@ -7,6 +7,11 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import type { SectionEmailingServiceTestQuery } from '~relay/SectionEmailingServiceTestQuery.graphql'
 import SectionEmailingService from './SectionEmailingService'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<SectionEmailingService />', () => {
   let environment
   let testComponentTree

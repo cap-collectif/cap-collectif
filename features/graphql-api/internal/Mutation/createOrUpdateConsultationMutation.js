@@ -420,6 +420,10 @@ const inputWithSubSections = {
   stepId: 'Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.createOrUpdateConsultationMutation', () => {
   it('should update the existing sections and add a new one', async () => {
     await expect(graphql(CreateOrUpdateConsultationMutation, { input }, 'internal_admin')).resolves.toMatchSnapshot()

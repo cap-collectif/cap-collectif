@@ -5,6 +5,9 @@ namespace Capco\Tests\Command;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Writes and deletes a fixed temporary export filename without preserving a pre-existing file
+ * at that path.
  */
 class GenerateCSVFromProposalFormCommandTest extends DatabaseCommandTestCase
 {

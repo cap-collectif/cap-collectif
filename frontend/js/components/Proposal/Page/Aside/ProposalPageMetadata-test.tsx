@@ -29,6 +29,11 @@ const proposal = {
     voteThreshold: 0,
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalPageMetadata />', () => {
   it('should render proposal page metadata', () => {
     const wrapper = shallow(

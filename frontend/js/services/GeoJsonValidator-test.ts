@@ -1,6 +1,10 @@
 /* eslint-env jest */
 import { isValid } from './GeoJsonValidator'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('GeoJsonValidator fails if not geojson', () => {
   it('json but absolutely not geojson', () => {
     expect(
@@ -25,6 +29,10 @@ describe('GeoJsonValidator fails if not geojson', () => {
     expect(isValid(almostValidGeoJson)).toEqual(false)
   })
 })
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('GeoJSonValidator success', () => {
   it('FeatureCollection', () => {
     const validGeoJson = {

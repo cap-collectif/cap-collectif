@@ -13,6 +13,11 @@ const user = {
   ' $refType': $refType,
   username: 'Username test',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<UserRegister />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<UserRegister event={event} user={user} intl={intlMock} />)

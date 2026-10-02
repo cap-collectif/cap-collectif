@@ -48,6 +48,10 @@ const inputDraft = {
     },
   ],
 }
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateUserReplyMutation', () => {
   it('wants to update reply as admin', async () => {
     await expect(graphql(UpdateUserReplyMutation, { input: input }, 'internal_admin')).resolves.toMatchSnapshot()

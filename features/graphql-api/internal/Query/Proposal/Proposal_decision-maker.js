@@ -28,6 +28,10 @@ const ProposalDecisionQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Proposal.decision', () => {
   it("fetches proposal's decision when authenticated as decision-maker.", async () => {
     await expect(

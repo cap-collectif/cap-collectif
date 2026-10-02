@@ -49,6 +49,11 @@ const input = {
   ],
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|register mutation', () => {
   beforeEach(async () => {
     await global.resetFeatureFlags()

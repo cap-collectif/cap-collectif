@@ -43,6 +43,11 @@ const defaultProps = {
     },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalCreateFusionButton />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ProposalCreateFusionButton {...defaultProps} />)

@@ -20,6 +20,11 @@ const cases = [
   ['cas', 'CASSSOConfiguration'],
 ]
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+ * the database helper runs only before each test.
+ */
 describe('Internal|ssoConfigurationStatus', () => {
   test.each(cases)('Toggles twice the status of %s as admin', async (ssoId, ssoType) => {
     const ssoConfigurationId = global.toGlobalId(ssoType, ssoId)

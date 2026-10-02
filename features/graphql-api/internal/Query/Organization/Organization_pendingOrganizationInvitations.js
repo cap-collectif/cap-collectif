@@ -24,6 +24,10 @@ const OrganizationPendingOrganizationInvitation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Organization.PendingOrganizationInvitation', () => {
   it('admin should be able to fetch invitations', async () => {
     await expect(

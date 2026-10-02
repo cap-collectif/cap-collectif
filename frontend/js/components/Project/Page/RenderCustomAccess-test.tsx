@@ -7,6 +7,11 @@ import RenderCustomAccess from './RenderCustomAccess'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { RenderCustomAccessTestQuery } from '~relay/RenderCustomAccessTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<RenderCustomAccess />', () => {
   let environment
   let TestComponent

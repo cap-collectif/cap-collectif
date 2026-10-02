@@ -18,6 +18,10 @@ const ProposalRevisionsQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal.revisions', () => {
   it("fetches proposal's related revisions with state done", async () => {
     await expect(

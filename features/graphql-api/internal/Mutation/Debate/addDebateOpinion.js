@@ -21,6 +21,10 @@ const AddDebateOpinionMutation = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|addDebateOpinion mutation', () => {
   it('Add a debate opinion.', async () => {
     const response = await graphql(

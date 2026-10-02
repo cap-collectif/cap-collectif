@@ -3,6 +3,11 @@ import React from 'react'
 import moment from 'moment-timezone'
 import { shallow } from 'enzyme'
 import { DatesInterval } from './DatesInterval'
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DatesInterval />', () => {
   beforeEach(() => {
     moment.locale('fr')

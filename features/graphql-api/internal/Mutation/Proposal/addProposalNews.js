@@ -16,6 +16,10 @@ const addProposalNews = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|add proposal news', () => {
   const input = {
     proposalId: toGlobalId('Proposal', 'lePetitCafe'),

@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks the domain user and token while invoking a session helper directly instead of
+ * observing the logout flow.
  */
 class LogoutSuccessHandlerTest extends TestCase
 {

@@ -6,6 +6,11 @@ import ProjectStepTabs from './ProjectStepTabs'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { ProjectStepTabsTestQuery } from '@relay/ProjectStepTabsTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Asserts slick CSS classes and implementation selectors instead of the accessible step
+ * navigation behavior.
+ */
 describe('<ProjectStepTabs />', () => {
   let environment
   let TestComponent

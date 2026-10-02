@@ -5,6 +5,11 @@ import { createMockEnvironment } from 'relay-test-utils'
 import ProjectHeaderThemeList, { ThemesButton } from '~/components/Project/ProjectHeaderThemeList'
 import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<ProjectHeaderThemeList />', () => {
   afterEach(() => {
     clearSupportForPortals()

@@ -18,6 +18,10 @@ const ProjectsExcludePresentationStepQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal.project.steps', () => {
   it('should exclude presentation step if excludePresentationStep is set to true', async () => {
     await expect(

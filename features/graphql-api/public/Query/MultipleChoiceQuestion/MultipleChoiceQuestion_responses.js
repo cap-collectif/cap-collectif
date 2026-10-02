@@ -46,6 +46,10 @@ const QuestionChoiceResponsesQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('MultipleChoiceQuestion.responses array', () => {
   it("fetches a multiple choice question's responses", async () => {
     await global.asyncForEach(

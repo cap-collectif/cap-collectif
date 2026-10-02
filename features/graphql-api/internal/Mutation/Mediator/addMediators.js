@@ -22,6 +22,10 @@ const AddMediatorsMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations|addMediators', () => {
   it('admin add users as mediator.', async () => {
     const variables = {

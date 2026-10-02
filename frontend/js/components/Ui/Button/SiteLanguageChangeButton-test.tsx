@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import SiteLanguageChangeButton from './SiteLanguageChangeButton'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<SiteLanguageChangeButton />', () => {
   const props = {
     onChange: jest.fn(),

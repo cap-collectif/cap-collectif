@@ -20,6 +20,10 @@ const AddCommentVoteMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addCommentVoteMutation', () => {
   it('Logged in API client wants to vote for a comment', async () => {
     await expect(

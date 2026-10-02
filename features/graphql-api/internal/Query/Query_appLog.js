@@ -26,6 +26,11 @@ const appLogQuery = /* GraphQL */ `
     }
   }
 `
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('Query.appLog connection', () => {
   it('fetches app logs without arguments', async () => {
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()

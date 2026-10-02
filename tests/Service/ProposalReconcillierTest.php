@@ -19,6 +19,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Mocks domain objects and persistence calls instead of observing the resulting contribution
+ * ownership.
  */
 class ProposalReconcillierTest extends TestCase
 {

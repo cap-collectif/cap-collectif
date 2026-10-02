@@ -12,6 +12,11 @@ const props = {
   onClose: jest.fn(),
   debateId: 'debate123',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalModerateArgument />', () => {
   it('should renders correcty with argument', () => {
     const wrapper = shallow(<ModalDeleteArgument {...props} />)

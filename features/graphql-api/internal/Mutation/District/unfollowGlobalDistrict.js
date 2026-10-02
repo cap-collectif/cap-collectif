@@ -24,6 +24,10 @@ const input = {
   globalDistrictId: 'globalDistrict6',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.globalDistrict', () => {
   it('should unfollow to a global district', async () => {
     const response = await graphql(

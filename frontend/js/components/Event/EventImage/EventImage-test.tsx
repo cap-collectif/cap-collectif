@@ -14,6 +14,11 @@ const event = {
   basic: { ...baseEvent },
   noImage: { ...baseEvent, media: null },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<EventImage />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<EventImage event={event.basic} enabled />)

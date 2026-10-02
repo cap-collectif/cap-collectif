@@ -34,6 +34,10 @@ const DeleteAccountMutation = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.deleteAccount', () => {
   it('User5 who decides to hard delete his account should have his content anonymised (closed step).', async () => {
     await expect(

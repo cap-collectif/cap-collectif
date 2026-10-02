@@ -92,30 +92,51 @@ const withoutAuthor = content => {
 }
 
 describe('Anonymize account by email', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Returns an error for a non-existing email', async () => {
     await expect(
       graphql(DeleteAccountByEmail, { input: { email: 'nonExistingUser@cap-collectif.com' } }, 'super_admin'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Refuses to anonymize a super admin', async () => {
     await expect(
       graphql(DeleteAccountByEmail, { input: { email: 'lbrunet@cap-collectif.com' } }, 'super_admin'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Allows an admin to anonymize an account', async () => {
     await expect(
       graphql(DeleteAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'admin'),
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Refuses access to a regular user', async () => {
     await expect(
       graphql(DeleteAccountByEmail, { input: { email: 'userToDelete@cap-collectif.com' } }, 'user'),
     ).rejects.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('Preserves associated content while anonymizing its author', async () => {
     const before = await graphql(AssociatedContentQuery, {}, 'super_admin')
 

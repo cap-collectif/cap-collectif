@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Invokes the recipient provider with the container and fixture database instead of observing
+ * the campaign HTTP or CLI boundary.
  */
 class EmailingCampaignRecipientsTest extends KernelTestCase
 {

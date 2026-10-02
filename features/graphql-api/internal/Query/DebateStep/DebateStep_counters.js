@@ -19,6 +19,10 @@ const DebateStepCountersQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|DebateStep counters', () => {
   it('fetches debate step counters with BO participant rules', async () => {
     await expect(

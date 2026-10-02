@@ -11,6 +11,10 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 jest.mock('@shared/hooks/useFeatureFlag')
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<LoginButton />', () => {
   let environment
   let TestComponent

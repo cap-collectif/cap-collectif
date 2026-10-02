@@ -39,6 +39,11 @@ const baseProps = {
 const props = {
   basic: baseProps,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DashboardMailingList />', () => {
   it('should renders correctly', () => {
     const wrapper = shallow(<DashboardMailingList {...props.basic} />)

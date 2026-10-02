@@ -41,6 +41,11 @@ const sortTranslations = response => {
   return response
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
+ * and Elasticsearch resets do not restore Redis flags.
+ */
 describe('Internal|updateCookieSetting', () => {
   it('updates the value and isEnabled as super-admin', async () => {
     const id = await getCookieSettingId()

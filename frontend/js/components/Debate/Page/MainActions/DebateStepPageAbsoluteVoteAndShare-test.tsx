@@ -9,6 +9,11 @@ import type { DebateStepPageAbsoluteVoteAndShareTestQuery } from '~relay/DebateS
 import { MockProviders, RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 import { MachineContext } from './DebateStepPageStateMachine'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<DebateStepPageAbsoluteVoteAndShare />', () => {
   let environment
   let testComponentTree

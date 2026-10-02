@@ -7,6 +7,11 @@ import UserGroupModal from './UserGroupModal'
 import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { UserGroupModalTestQuery } from '~relay/UserGroupModalTestQuery.graphql'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<UserGroupModal />', () => {
   let environment
   let TestComponent

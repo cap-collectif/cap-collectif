@@ -28,6 +28,10 @@ const UpdateProjectMutation = /* GraphQL*/ `
 `
 
 describe('mutations.updateProjectMutation', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update a project and add an author', async () => {
     await expect(
       graphql(
@@ -53,6 +57,10 @@ describe('mutations.updateProjectMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update a project and delete an author', async () => {
     await expect(
       graphql(
@@ -71,6 +79,10 @@ describe('mutations.updateProjectMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to update a project without type', async () => {
     await expect(
       graphql(
@@ -88,6 +100,11 @@ describe('mutations.updateProjectMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('GraphQL admin wants to update a project without authors', async () => {
     await expect(
       graphql(
@@ -105,6 +122,10 @@ describe('mutations.updateProjectMutation', () => {
     ).rejects.toThrowError('You must specify at least one author')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to add a locale to a project', async () => {
     await expect(
       graphql(
@@ -120,6 +141,10 @@ describe('mutations.updateProjectMutation', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('GraphQL admin wants to remove locale from a project', async () => {
     await graphql(
       UpdateProjectMutation,

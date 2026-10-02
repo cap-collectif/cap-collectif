@@ -18,6 +18,10 @@ const QuestionResponsesCivicIAQuery = /** GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Question.civicIA', () => {
   it('fail to get civicIA analysis if not admin', async () => {
     await expect(

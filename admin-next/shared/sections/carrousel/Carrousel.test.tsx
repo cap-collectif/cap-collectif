@@ -21,6 +21,10 @@ const item = {
   endAt: null,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<Carrousel />', () => {
   let environment
   let TestComponent

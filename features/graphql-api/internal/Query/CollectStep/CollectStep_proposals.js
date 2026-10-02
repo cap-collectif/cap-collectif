@@ -21,6 +21,10 @@ const CollectStepProposalsArchivedQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|CollectStep.proposals connection', () => {
   it('fetches archived proposals of a collect step', async () => {
     await expect(

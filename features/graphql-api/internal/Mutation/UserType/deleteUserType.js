@@ -40,6 +40,11 @@ const queryObjectPattern = {
 }
 
 describe('mutations.deleteUserType', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('deletes an existing user type', async () => {
     // save the number of user types before the deletion
     const before = await graphql(UserTypesQuery, null, 'internal_admin')
@@ -58,6 +63,11 @@ describe('mutations.deleteUserType', () => {
     expect(after.userTypes.edges.some(u => u.node.id === userTypeGlobalID)).toBe(false)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('deletes a non-existing user type', async () => {
     await expect(
       graphql(
@@ -72,12 +82,22 @@ describe('mutations.deleteUserType', () => {
     ).rejects.toThrowError('Unknown userType with globalID: dW5rbm93biB1c2Vy')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to delete a user type as a basic user', async () => {
     await expect(graphql(DeleteUserTypeMutation, input, 'internal_user')).rejects.toThrowError(
       'Access denied to this field.',
     )
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('tries to delete a user type wihtout being authenticated', async () => {
     await expect(graphql(DeleteUserTypeMutation, input, 'internal')).rejects.toThrowError(
       'Access denied to this field.',

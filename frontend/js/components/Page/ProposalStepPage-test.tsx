@@ -5,6 +5,11 @@ import { ProposalStepPageRendered } from './ProposalStepPage'
 import { features } from '~/redux/modules/default'
 import { $fragmentRefs } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalStepPage />', () => {
   const props = {
     count: 10,

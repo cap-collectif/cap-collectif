@@ -30,6 +30,11 @@ jest.mock('react-dom', () => ({
     return element
   }),
 }))
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ModalModerateArgument />', () => {
   it('should renders correcty with argument', () => {
     const wrapper = render(

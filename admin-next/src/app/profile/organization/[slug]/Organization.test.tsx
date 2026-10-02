@@ -6,6 +6,10 @@ import { RelaySuspensFragmentTest } from 'tests/testUtils'
 import { NavBarContext } from 'shared/navbar/NavBar.context'
 import Organization from './Organization'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<Organization />', () => {
   const title = 'Nice Org'
   const projectTitle = 'My nice project'

@@ -15,6 +15,11 @@ const props = {
   intl: intlMock,
   canDisplayBallot: true,
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ProposalListOrderSorting />', () => {
   it('should render the list order sorting component', () => {
     const wrapper = shallow(<ProposalListOrderSorting {...props} />)

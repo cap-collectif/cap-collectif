@@ -12,6 +12,11 @@ const DebateViewerUnpublishedArgumentQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|Debate.viewerUnpublishedArgument', () => {
   const variables = {
     id: toGlobalId('Debate', 'debateCannabis'),

@@ -2,6 +2,10 @@
 import { isAsync } from '~/utils/isAsync'
 import { wait } from '~/utils/wait'
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
+ */
 describe('isAsync', () => {
   it('should return true when the given function is async', () => {
     const arrowAsync = isAsync(async () => {

@@ -17,6 +17,11 @@ const props = {
   basic: baseProps,
   withWidgetDestination: { ...baseProps, widget: { ...baseProps.widget, destination: 'https://google.com' } },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DebateWidgetForm />', () => {
   it('should renders correctly', () => {
     const wrapper = shallow(<DebateWidgetForm {...props.basic} />)

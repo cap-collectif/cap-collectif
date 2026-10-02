@@ -13,6 +13,10 @@ const UpdateGroupMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations|updateGroup', () => {
   it('GraphQL client wants to update a group', async () => {
     const variables = {

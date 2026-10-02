@@ -51,6 +51,10 @@ const SelectionStepMediatorsUernameQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|SelectionStep.mediators', () => {
   it('fetches the mediators', async () => {
     await expect(graphql(SelectionStepMediatorsQuery, {}, 'internal_admin')).resolves.toMatchSnapshot()

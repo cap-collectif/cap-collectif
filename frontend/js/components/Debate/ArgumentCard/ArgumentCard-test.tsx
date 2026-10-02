@@ -51,6 +51,11 @@ const props = {
     viewer: { ...defaultProps.viewer, $refType, isAdmin: true, isEmailConfirmed: true },
   },
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ArgumentCard />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<ArgumentCard {...props.basic} />)

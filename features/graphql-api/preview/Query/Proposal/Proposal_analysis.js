@@ -48,6 +48,10 @@ const ProposalAnalysisPreviewData = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview.proposals', () => {
   it("fetches proposal's related analysis data", async () => {
     await expect(

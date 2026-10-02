@@ -4,6 +4,11 @@ import { shallow } from 'enzyme'
 import { QuestionnaireAdminResultsRanking } from './QuestionnaireAdminResultsRanking'
 import { $refType, $fragmentRefs } from '~/mocks'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<QuestionnaireAdminResultsRanking />', () => {
   const props = {
     ' $refType': $refType,

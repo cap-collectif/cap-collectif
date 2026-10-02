@@ -12,6 +12,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Calls the controller directly and asserts publication instead of exercising the moderation
+ * HTTP boundary.
  */
 class ModerationControllerTest extends KernelTestCase
 {

@@ -31,6 +31,9 @@ class FooterSocialNetworkInputValidatorTest extends TestCase
      * @dataProvider provideValidInputs
      *
      * @param array{title: string, link: string, style: string} $input
+     * @phpunit-status compliant
+     * @phpunit-reason Checks the public input validation rule with explicit boundary values and a named data
+     * provider.
      */
     public function testAcceptsValuesAtDatabaseColumnLimits(array $input): void
     {
@@ -41,6 +44,9 @@ class FooterSocialNetworkInputValidatorTest extends TestCase
      * @dataProvider provideInvalidInputs
      *
      * @param array{title: string, link: string, style: string} $input
+     * @phpunit-status non-compliant
+     * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the
+     * HTTP contract and persisted effects.
      */
     public function testCreateDoesNotPersistValuesExceedingDatabaseColumnLimits(array $input): void
     {
@@ -59,6 +65,9 @@ class FooterSocialNetworkInputValidatorTest extends TestCase
      * @dataProvider provideInvalidInputs
      *
      * @param array{title: string, link: string, style: string} $input
+     * @phpunit-status non-compliant
+     * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the
+     * HTTP contract and persisted effects.
      */
     public function testUpdateDoesNotPersistValuesExceedingDatabaseColumnLimits(array $input): void
     {

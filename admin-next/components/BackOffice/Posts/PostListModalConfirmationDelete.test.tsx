@@ -6,6 +6,10 @@ import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest
 import PostListModalConfirmationDelete from './PostListModalConfirmationDelete'
 import { PostListModalConfirmationDeleteTestQuery } from '@relay/PostListModalConfirmationDeleteTestQuery.graphql'
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a snapshot; add explicit assertions for the observable result.
+ */
 describe('<ModalConfirmationDelete />', () => {
   let environment: any
   let TestModalConfirmationDelete: any

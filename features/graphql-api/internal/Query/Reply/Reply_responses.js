@@ -28,6 +28,11 @@ const ValueResponseQuery = /* GraphQL */ `
 const variables = { replyId: 'reply8' }
 const anonymousReplyVariables = { replyId: toGlobalId('Reply', 'replyAnonymous1') }
 
+/**
+ * @jest-status compliant
+ * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable fixture
+ * data.
+ */
 describe('Internal|Reply.responses', () => {
   it('returns questionnaire responses to an anonymous user', async () => {
     await expect(graphql(ReplyResponsesQuery, variables, 'internal')).resolves.toMatchObject({

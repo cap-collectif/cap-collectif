@@ -3,6 +3,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { ConfirmPasswordModal } from './ConfirmPasswordModal'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<ConfirmPasswordModal />', () => {
   const props = {
     handleClose: jest.fn(),

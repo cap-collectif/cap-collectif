@@ -12,6 +12,10 @@ const QuestionnaireUserHasReplyQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Questionnaire.userHasReply', () => {
   it('checks whether users replied to a questionnaire', async () => {
     await expect(

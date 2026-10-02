@@ -7,6 +7,11 @@ import { RelaySuspensFragmentTest } from '~/testUtils'
 import type { EventPageProjectListTestQuery } from '~relay/EventPageProjectListTestQuery.graphql'
 import EventPageProjectList from './EventPageProjectList'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses react-test-renderer or the historical Relay renderer instead of observing public DOM
+ * behavior.
+ */
 describe('<EventPageProjectList />', () => {
   let environment
   let testComponentTree

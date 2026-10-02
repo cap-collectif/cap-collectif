@@ -26,6 +26,10 @@ const ProposalSelectionsPreviewData = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Preview.Proposal_selections', () => {
   it('fetches selections related to a proposal', async () => {
     await expect(

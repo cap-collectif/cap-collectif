@@ -22,6 +22,10 @@ const MediaQuestionResponsesQuery = /* GraphQL */ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('MediaQuestion.responses array', () => {
   it("it fetches a media question's responses", async () => {
     await Promise.all(

@@ -76,6 +76,10 @@ const optionnalInput = {
 }
 
 describe('mutations.updatePost', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should update a post with required fields.', async () => {
     const response = await graphql(
       UpdatePostMutation,
@@ -87,6 +91,10 @@ describe('mutations.updatePost', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should update a post with optional fields.', async () => {
     const response = await graphql(
       UpdatePostMutation,
@@ -98,6 +106,11 @@ describe('mutations.updatePost', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('admin should have an error when submitting an invalid form.', async () => {
     const response = await graphql(
       UpdatePostMutation,
@@ -111,12 +124,22 @@ describe('mutations.updatePost', () => {
     expect(response.updatePost.errorCode).toBe('INVALID_FORM')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('admin should have an error when attempting to update a unknown post.', async () => {
     await expect(
       graphql(UpdatePostMutation, { input: { ...requiredInput, id: 'abc' } }, 'internal_admin'),
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('response body should be html_purified to prevent XSS attack.', async () => {
     const response = await graphql(
       UpdatePostMutation,
@@ -139,6 +162,11 @@ describe('mutations.updatePost', () => {
     expect(response.updatePost.errorCode).toBe(null)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should return NOT_AUTHORIZED errorCode if project admin user attempt to update a post that he does not own', async () => {
     await expect(graphql(UpdatePostMutation, { input: requiredInput }, 'internal_theo')).rejects.toThrowError(
       'Access denied to this field.',

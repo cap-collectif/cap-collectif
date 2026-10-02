@@ -28,6 +28,10 @@ const inputWithNoRequirement = {
     },
   ],
 }
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.updateRequirementMutation', () => {
   it('wants to accept a requirement as user', async () => {
     console.log(JSON.stringify({ input }))

@@ -3,6 +3,11 @@ import React from 'react'
 import { mount } from 'enzyme'
 import TagCloud from './TagCloud'
 
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<TagCloud />', () => {
   it('should render correctly', () => {
     global.Math.random = () => 0.5

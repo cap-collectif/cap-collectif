@@ -11,6 +11,11 @@ const props = {
   alt: 'my alternative',
   role: 'img',
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<DarkenGradientMedia />', () => {
   it('should render correctly default darkenGradientMedia', () => {
     const wrapper = shallow(<DarkenGradientMedia url="https://source.unsplash.com/collection/1353633" />)

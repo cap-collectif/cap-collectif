@@ -25,6 +25,10 @@ const AddConsultationStep = /* GraphQL*/ `
   }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addConsultationStepMutation', () => {
   it('admin should be able to add consultation step.', async () => {
     const response = await graphql(

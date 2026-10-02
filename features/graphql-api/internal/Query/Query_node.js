@@ -116,6 +116,10 @@ const RestrictedProjectVariables = {
   projectId: 'UHJvamVjdDpQcm9qZWN0QWNjZXNzaWJsZUZvck1lT25seUJ5QWRtaW4=',
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('Internal|Query.node', () => {
   it('resolves nodes for all supported types', async () => {
     await expect(graphql(NodeQuery, NodeQueryVariables, 'internal')).resolves.toMatchSnapshot()

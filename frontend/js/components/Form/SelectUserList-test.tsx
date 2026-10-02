@@ -14,6 +14,11 @@ const defaultProps = {
   label: 'userLsit',
   userList: ['user1', 'user2'],
 }
+/**
+ * @jest-status legacy
+ * @jest-reason Uses the historical Enzyme renderer and component-tree or instance assertions instead of
+ * public DOM behavior.
+ */
 describe('<SelectUserList />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<SelectUserList {...defaultProps} />)

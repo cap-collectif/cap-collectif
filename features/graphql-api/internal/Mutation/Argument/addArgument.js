@@ -26,6 +26,10 @@ const AddArgumentMutation = /* GraphQL*/ `
     }
 `
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.addArgumentMutation', () => {
   it('User wants to add an argument on an opinion', async () => {
     await expect(

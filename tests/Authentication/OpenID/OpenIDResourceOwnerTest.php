@@ -21,6 +21,9 @@ use Symfony\Component\Security\Http\HttpUtils;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Partially mocks the resource owner under test, including its HTTP request and option
+ * methods.
  */
 final class OpenIDResourceOwnerTest extends TestCase
 {

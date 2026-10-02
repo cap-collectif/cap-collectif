@@ -44,6 +44,10 @@ const PaginatedMultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
 `
 
 describe('MultipleChoiceQuestion.choices array', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it("fetches a question's choices and the number of answers to each of them", async () => {
     await expect(
       graphql(
@@ -56,6 +60,11 @@ describe('MultipleChoiceQuestion.choices array', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches a question's choices that match the given term and paginate the results", async () => {
     const variables = {
       id: toGlobalId('Question', '3916'),
@@ -81,6 +90,11 @@ describe('MultipleChoiceQuestion.choices array', () => {
     expect(response1.question.choices.edges[0].node.id).not.toBe(response2.question.choices.edges[0].node.id)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it("fetches a question's choices and paginate the results", async () => {
     const variables = {
       id: toGlobalId('Question', '3916'),

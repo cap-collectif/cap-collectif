@@ -21,6 +21,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  * @internal
  *
  * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Uses reflection to invoke a private method rather than exercising the public question-jump
+ * behavior.
  */
 class QuestionJumpsHandlerTest extends TestCase
 {

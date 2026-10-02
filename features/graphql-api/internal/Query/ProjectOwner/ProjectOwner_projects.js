@@ -51,6 +51,11 @@ const ProjectOwnerProjectsOrderQuery = /* GraphQL */ `
 `
 
 describe('Internal.viewer.projects', () => {
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an explicit result or refusal from the real GraphQL read contract using stable
+   * fixture data.
+   */
   it('should correctly fetch projects that a user owns when given the `OWNER` affiliations', async () => {
     const response = await graphql(
       ProjectOwnerProjectsAffiliationsQuery,
@@ -65,6 +70,10 @@ describe('Internal.viewer.projects', () => {
     expect(response.viewer.projects.edges[0].node.owner.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should fetch all projects when no affiliations given', async () => {
     await expect(
       graphql(
@@ -77,6 +86,10 @@ describe('Internal.viewer.projects', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter projects by a given search query', async () => {
     await expect(
       graphql(
@@ -89,6 +102,10 @@ describe('Internal.viewer.projects', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should sort projects by a given field and direction', async () => {
     await expect(
       graphql(
@@ -104,6 +121,10 @@ describe('Internal.viewer.projects', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('should filter project by author', async () => {
     await expect(
       graphql(

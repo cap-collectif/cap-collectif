@@ -80,6 +80,10 @@ const optionnalInput = {
 }
 
 describe('mutations.createPost', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should create a post with required fields.', async () => {
     const response = await graphql(
       CreatePostMutation,
@@ -91,6 +95,10 @@ describe('mutations.createPost', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('admin should create a post with optional fields.', async () => {
     const response = await graphql(
       CreatePostMutation,
@@ -102,6 +110,11 @@ describe('mutations.createPost', () => {
     expect(response).toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('admin should have an error when submitting an invalid form.', async () => {
     const response = await graphql(
       CreatePostMutation,
@@ -115,6 +128,11 @@ describe('mutations.createPost', () => {
     expect(response.createPost.errorCode).toBe('INVALID_FORM')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('response body should be html_purified to prevent XSS attack.', async () => {
     const response = await graphql(
       CreatePostMutation,
@@ -137,6 +155,11 @@ describe('mutations.createPost', () => {
     expect(response.createPost.errorCode).toBe(null)
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('authors should be set to project admin when project admin user create a post', async () => {
     const response = await graphql(
       CreatePostMutation,
@@ -153,6 +176,11 @@ describe('mutations.createPost', () => {
     expect(response.createPost.post.owner.username).toBe('Théo QP')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('owner should be the organization if user creating the article belongs to one', async () => {
     const response = await graphql(
       CreatePostMutation,

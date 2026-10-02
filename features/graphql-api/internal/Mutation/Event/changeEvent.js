@@ -70,6 +70,11 @@ const input = {
 }
 
 describe('mutations.createEvent', () => {
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
+   * the database helper runs only before each test.
+   */
   it('should update an event that a project admin owns', async () => {
     const response = await graphql(
       ChangeEventMutation,
@@ -90,18 +95,32 @@ describe('mutations.createEvent', () => {
     expect(response.changeEvent.event.maxRegistrations).toBe(50)
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should have an error when attempting to update a unknown event.', async () => {
     await expect(
       graphql(ChangeEventMutation, { input: { ...input, id: 'abc' } }, 'internal_admin'),
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
   it('should throw error if project admin user attempt to update an event that he does not own', async () => {
     await expect(
       graphql(ChangeEventMutation, { input: { ...input, id: 'RXZlbnQ6ZXZlbnQz' } }, 'internal_theo'),
     ).rejects.toThrowError('Access denied to this field.')
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to change an event', async () => {
     await expect(
       graphql(
@@ -127,6 +146,10 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to change an event with external to register', async () => {
     await expect(
       graphql(
@@ -152,6 +175,10 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('User wants to change an event', async () => {
     await expect(
       graphql(
@@ -176,6 +203,10 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('User wants to change his refused event', async () => {
     await expect(
       graphql(
@@ -200,6 +231,10 @@ describe('mutations.createEvent', () => {
     ).resolves.toMatchSnapshot()
   })
 
+  /**
+   * @jest-status non-compliant
+   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   */
   it('Admin wants to change an event to add steps', async () => {
     await expect(
       graphql(

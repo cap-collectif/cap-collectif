@@ -14,6 +14,9 @@ use Symfony\Component\Validator\Validation;
 /**
  * @internal
  * @coversNothing
+ * @phpunit-status compliant
+ * @phpunit-reason Checks project metadata requirements through the form public validation result using real
+ * domain data.
  */
 class HubMetadataTypeTest extends TestCase
 {

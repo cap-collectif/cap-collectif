@@ -47,6 +47,10 @@ const BASE_ASSESSMENT = {
   estimatedCost: 1500,
 }
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.changeProposalAssessment', () => {
   it('should create a new proposal assessment on the proposal.', async () => {
     const createAssessment = await graphql(
@@ -115,6 +119,10 @@ describe('mutations.changeProposalAssessment', () => {
   })
 })
 
+/**
+ * @jest-status non-compliant
+ * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ */
 describe('mutations.evaluateProposalAssessment', () => {
   it('should evaluate the proposal assessment when authenticated as supervisor', async () => {
     const evaluateAssessment = await graphql(
