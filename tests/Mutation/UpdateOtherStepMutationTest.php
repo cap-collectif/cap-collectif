@@ -80,62 +80,30 @@ class UpdateOtherStepMutationTest extends TestCase
 
     public function testDisabledAssociationDoesNotCallHubApiGreen(): void
     {
-        $step = $this->createMock(OtherStep::class);
-        $step->expects($this->once())->method('setTitle')->with('');
-        $step->method('getId')->willReturn('step-id');
-        $step->method('getTitle')->willReturn('');
+        $scenario = $this->createAssociationScenario(false, false);
+        $payload = ($scenario['mutation'])($this->argument(false), $scenario['viewer']);
 
-        $metadata = $this->createMock(HubMetadata::class);
-        $metadata->expects($this->atLeastOnce())->method('isEnabled')->willReturn(false);
-        $step->expects($this->atLeastOnce())->method('getHubMetadata')->willReturn($metadata);
-
-        $project = $this->createMock(Project::class);
-        $project->method('getTitle')->willReturn('Project');
-        $step->method('getProject')->willReturn($project);
-
-        $viewer = $this->createMock(User::class);
-        $globalIdResolver = $this->createMock(GlobalIdResolver::class);
-        $globalIdResolver->method('resolve')->with('step-id', $viewer)->willReturn($step);
-
-        $form = $this->createMock(FormInterface::class);
-        $form->expects($this->once())->method('submit')->with(['hubMetadata' => ['enabled' => false]], false);
-        $form->method('isValid')->willReturn(true);
-        $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory
-            ->expects($this->once())
-            ->method('create')
-            ->with(OtherStepFormType::class, $step, ['hub_metadata_required' => false])
-            ->willReturn($form)
-        ;
-
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects($this->once())->method('persist')->with($step);
-        $entityManager->expects($this->once())->method('flush');
-
-        $toggleManager = $this->createMock(Manager::class);
-        $toggleManager->expects($this->once())->method('isActive')->with(Manager::hub_api_green)->willReturn(true);
-
-        $hubApiGreenClient = $this->createMock(HubApiGreenClient::class);
-        $hubApiGreenClient->expects($this->never())->method('associateFolder');
-
-        $actionLogger = $this->createMock(ActionLogger::class);
-        $actionLogger->expects($this->once())->method('logGraphQLMutation');
-
-        $mutation = $this->createMutation(
-            globalIdResolver: $globalIdResolver,
-            entityManager: $entityManager,
-            formFactory: $formFactory,
-            actionLogger: $actionLogger,
-            hubApiGreenClient: $hubApiGreenClient,
-            toggleManager: $toggleManager
-        );
-
-        $payload = $mutation($this->argument(false), $viewer);
-
-        self::assertSame($step, $payload['step']);
+        self::assertSame($scenario['step'], $payload['step']);
     }
 
-    public function testValuesAreFlushedBeforeARejectedHubApiGreenAssociation(): void
+    public function testUnchangedMetadataDoesNotCallHubApiGreen(): void
+    {
+        $scenario = $this->createAssociationScenario(true, true);
+        $payload = ($scenario['mutation'])($this->argument(true), $scenario['viewer']);
+
+        self::assertSame($scenario['step'], $payload['step']);
+    }
+
+    public function testEnablingAssociationCallsHubApiGreen(): void
+    {
+        $scenario = $this->createAssociationScenario(false, true, true);
+
+        $payload = ($scenario['mutation'])($this->argument(true), $scenario['viewer']);
+
+        self::assertSame($scenario['step'], $payload['step']);
+    }
+
+    public function testValuesAreNotFlushedWhenHubApiGreenAssociationIsRejected(): void
     {
         $step = $this->createMock(OtherStep::class);
         $step->expects($this->once())->method('setTitle')->with('');
@@ -143,6 +111,9 @@ class UpdateOtherStepMutationTest extends TestCase
         $metadata = $this->createMock(HubMetadata::class);
         $metadata->method('isEnabled')->willReturn(true);
         $metadata->method('isComplete')->willReturn(true);
+        $metadata->method('getAiotCode')->willReturnOnConsecutiveCalls('old-aiot', '0003013833');
+        $metadata->method('getFolderNumber')->willReturnOnConsecutiveCalls('old-folder', 'T0603151600');
+        $metadata->method('getContactEmail')->willReturnOnConsecutiveCalls('old@example.com', 'contact@example.com');
         $step->expects($this->atLeastOnce())->method('getHubMetadata')->willReturn($metadata);
 
         $project = $this->createMock(Project::class);
@@ -164,12 +135,9 @@ class UpdateOtherStepMutationTest extends TestCase
             ->willReturn($form)
         ;
 
-        $flushed = false;
         $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects($this->once())->method('persist')->with($step);
-        $entityManager->expects($this->once())->method('flush')->willReturnCallback(static function () use (&$flushed): void {
-            $flushed = true;
-        });
+        $entityManager->expects($this->never())->method('persist');
+        $entityManager->expects($this->never())->method('flush');
 
         $toggleManager = $this->createMock(Manager::class);
         $toggleManager->method('isActive')->with(Manager::hub_api_green)->willReturn(true);
@@ -181,10 +149,8 @@ class UpdateOtherStepMutationTest extends TestCase
             ->expects($this->once())
             ->method('associateFolder')
             ->with($step, $metadata, 'project-url')
-            ->willReturnCallback(static function () use (&$flushed): void {
-                TestCase::assertTrue($flushed);
-
-                throw new \RuntimeException('Hub refused the association');
+            ->willReturnCallback(static function (): void {
+                throw new \RuntimeException('folder "T0603151600" is already associated with AIOT "0003013833"', 409);
             })
         ;
 
@@ -204,8 +170,90 @@ class UpdateOtherStepMutationTest extends TestCase
             projectUrlResolver: $projectUrlResolver
         );
 
-        $this->expectException(GraphQLException::class);
-        $mutation($this->argument(true), $viewer);
+        try {
+            $mutation($this->argument(true), $viewer);
+            self::fail('Expected a GraphQL exception.');
+        } catch (GraphQLException $exception) {
+            self::assertSame(
+                'folder "T0603151600" is already associated with AIOT "0003013833"',
+                $exception->getErrors()[0]->getMessage()
+            );
+        }
+    }
+
+    /**
+     * @return array{mutation: UpdateOtherStepMutation, step: OtherStep, viewer: User}
+     */
+    private function createAssociationScenario(bool $previousEnabled, bool $enabled, bool $associateHub = false): array
+    {
+        $step = $this->createMock(OtherStep::class);
+        $step->expects($this->once())->method('setTitle')->with('');
+        $step->method('getId')->willReturn('step-id');
+        $step->method('getTitle')->willReturn('');
+
+        $metadata = $this->createMock(HubMetadata::class);
+        $metadata->method('isEnabled')->willReturnOnConsecutiveCalls($previousEnabled, $enabled, $enabled, $enabled);
+        $metadata->method('isComplete')->willReturn($enabled);
+        $metadata->method('getAiotCode')->willReturn('0003013833');
+        $metadata->method('getFolderNumber')->willReturn('T0603151600');
+        $metadata->method('getContactEmail')->willReturn('contact@example.com');
+        $step->method('getHubMetadata')->willReturn($metadata);
+
+        $project = $this->createMock(Project::class);
+        $project->method('getTitle')->willReturn('Project');
+        $step->method('getProject')->willReturn($project);
+
+        $viewer = $this->createMock(User::class);
+        $globalIdResolver = $this->createMock(GlobalIdResolver::class);
+        $globalIdResolver->method('resolve')->with('step-id', $viewer)->willReturn($step);
+
+        $form = $this->createMock(FormInterface::class);
+        $form->expects($this->once())->method('submit')->with(['hubMetadata' => ['enabled' => $enabled]], false);
+        $form->method('isValid')->willReturn(true);
+        $formFactory = $this->createMock(FormFactoryInterface::class);
+        $formFactory
+            ->expects($this->once())
+            ->method('create')
+            ->with(OtherStepFormType::class, $step, ['hub_metadata_required' => $enabled])
+            ->willReturn($form)
+        ;
+
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager->expects($this->once())->method('flush');
+
+        $toggleManager = $this->createMock(Manager::class);
+        $toggleManager->expects($this->once())->method('isActive')->with(Manager::hub_api_green)->willReturn(true);
+
+        $hubApiGreenClient = $this->createMock(HubApiGreenClient::class);
+        if ($associateHub) {
+            $projectUrlResolver = $this->createMock(ProjectUrlResolver::class);
+            $projectUrlResolver->expects($this->once())->method('__invoke')->with($project)->willReturn('project-url');
+            $hubApiGreenClient
+                ->expects($this->once())
+                ->method('associateFolder')
+                ->with($step, $metadata, 'project-url')
+            ;
+        } else {
+            $hubApiGreenClient->expects($this->never())->method('associateFolder');
+            $projectUrlResolver = null;
+        }
+
+        $actionLogger = $this->createMock(ActionLogger::class);
+        $actionLogger->expects($this->once())->method('logGraphQLMutation');
+
+        return [
+            'mutation' => $this->createMutation(
+                globalIdResolver: $globalIdResolver,
+                entityManager: $entityManager,
+                formFactory: $formFactory,
+                actionLogger: $actionLogger,
+                hubApiGreenClient: $hubApiGreenClient,
+                toggleManager: $toggleManager,
+                projectUrlResolver: $projectUrlResolver
+            ),
+            'step' => $step,
+            'viewer' => $viewer,
+        ];
     }
 
     private function argument(bool $enabled): Argument

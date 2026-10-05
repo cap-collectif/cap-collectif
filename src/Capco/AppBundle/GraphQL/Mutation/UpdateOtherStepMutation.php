@@ -21,6 +21,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateOtherStepMutation implements MutationInterface
 {
@@ -46,6 +47,11 @@ class UpdateOtherStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
 
         $step = $this->getStep($data['stepId'], $viewer);
+        $previousHubMetadata = $step->getHubMetadata();
+        $previousHubMetadataEnabled = $previousHubMetadata?->isEnabled();
+        $previousAiotCode = $previousHubMetadata?->getAiotCode();
+        $previousFolderNumber = $previousHubMetadata?->getFolderNumber();
+        $previousContactEmail = $previousHubMetadata?->getContactEmail();
         if ($this->hubDocumentsStepGuard->isProtectedDocumentsStep($step)) {
             unset($data['body']);
         }
@@ -71,15 +77,17 @@ class UpdateOtherStepMutation implements MutationInterface
             throw GraphQLException::fromString('Hub API Green metadata is required when the association is enabled.');
         }
 
-        $this->em->persist($step);
-        $this->em->flush();
-
         $hubMetadata = $step->getHubMetadata();
+        $hubMetadataChanged = $previousHubMetadataEnabled !== $hubMetadata?->isEnabled()
+            || $previousAiotCode !== $hubMetadata?->getAiotCode()
+            || $previousFolderNumber !== $hubMetadata?->getFolderNumber()
+            || $previousContactEmail !== $hubMetadata?->getContactEmail();
         $project = $step->getProject();
         if (
             $this->toggleManager->isActive(Manager::hub_api_green)
             && $hubMetadata?->isEnabled()
             && $hubMetadata->isComplete()
+            && $hubMetadataChanged
             && $project
         ) {
             try {
@@ -90,11 +98,15 @@ class UpdateOtherStepMutation implements MutationInterface
                     'exception' => $exception,
                 ]);
 
-                throw GraphQLException::fromString(
-                    'L’association du dossier au registre a échoué. Vérifiez le numéro de dossier, le code AIOT et l’adresse e-mail de contact, puis réessayez.'
-                );
+                $message = Response::HTTP_CONFLICT === $exception->getCode()
+                    ? $exception->getMessage()
+                    : 'L’association du dossier au registre a échoué. Vérifiez le numéro de dossier, le code AIOT et l’adresse e-mail de contact, puis réessayez.';
+
+                throw GraphQLException::fromString($message);
             }
         }
+
+        $this->em->flush();
 
         $this->actionLogger->logGraphQLMutation(
             $viewer,

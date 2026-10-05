@@ -85,6 +85,10 @@ services:
     Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
         public: true
     Capco\AppBundle\PublicApi\InternalGraphQLApiKeyRequestMatcher: ~
+    Capco\AppBundle\PublicApi\InternalGraphQLBasicRequestMatcher: ~
+    Capco\AppBundle\PublicApi\InternalGraphQLBasicAuthenticator:
+        arguments:
+            $instanceName: '%instance_name%'
     Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
         arguments:
             - '@webonyx_graphql.sync_promise_adapter'

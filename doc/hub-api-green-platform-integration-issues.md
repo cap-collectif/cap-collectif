@@ -33,8 +33,8 @@ applicatif. Elle sert à valider le contrat utilisé par les issues suivantes.
 - valider que `fileType` est un code numérique APIGREEN sur trois chiffres (`000`, `003`, `041`) ;
 - figer les dates au format `YYYY-MM-DD HH:MM:SS` pour Platform ;
 - figer `filesize` APIGREEN en Ko et la conversion `sizeBytes = filesize * 1024` vers `media__media.content_size` ;
-- documenter l'appel `POST https://{instance_url}/graphql/internal` et la clé commune utilisée par le Hub pour cet appel ;
-- documenter la clé distincte par instance utilisée par Platform pour appeler l'API Hub ;
+- documenter l'appel `POST https://{instance_url}/graphql/internal` et les credentials Basic Auth de l'instance ;
+- documenter la clé APIGREEN distincte utilisée par InternalHub pour appeler l'API registre ;
 - valider la mutation et le payload GraphQL de référence ci-dessous.
 
 Endpoint :
@@ -104,24 +104,26 @@ interne de l'instance Platform :
 https://{platform_instance_url}/graphql/internal
 ```
 
-L'appel doit fournir la clé Hub → Platform dans l'en-tête HTTP `Authorization` :
+L'appel doit fournir les credentials Basic Auth de l'instance. Platform vérifie le
+login et le mot de passe auprès de l'item 1Password nommé
+`SYMFONY_INSTANCE_NAME` :
 
 ```http
-Authorization: Bearer {hub_to_platform_api_key}
+Authorization: Basic base64({instance_name}:{password_1password})
 Content-Type: application/json
 ```
 
-La clé est une donnée secrète. Elle ne doit être ni placée dans l'URL, ni
-écrite dans les logs, ni envoyée dans le payload GraphQL. Elle doit être liée à
-un utilisateur Platform disposant de `ROLE_ADMIN`, car la mutation est protégée
-par ce rôle.
+Le mot de passe est une donnée secrète. Il ne doit être ni placé dans l'URL, ni
+écrit dans les logs, ni envoyé dans le payload GraphQL. L'authentification crée
+un principal technique temporaire avec `ROLE_INTERNAL_HUB` ; aucun utilisateur
+correspondant n'est enregistré en base Platform.
 
 Exemple d'appel :
 
 ```bash
 curl --fail-with-body --request POST \
   --url 'https://{platform_instance_url}/graphql/internal' \
-  --header 'Authorization: Bearer {hub_to_platform_api_key}' \
+  --user '{instance_name}:{password_1password}' \
   --header 'Content-Type: application/json' \
   --data @synchronize-hub-api-green-media.json
 ```
@@ -163,28 +165,27 @@ Les erreurs d'authentification (`401` ou `403`) et les erreurs GraphQL de
 transport doivent être traitées comme des erreurs techniques et peuvent être
 retentées selon la politique du Hub. Une réponse `200` avec un `errorCode`
 non nul correspond à une erreur fonctionnelle et doit être journalisée sans
-la clé API ni le contenu des fichiers.
+les credentials ni le contenu des fichiers.
 
-Le firewall API key et son authenticator couvrent `/graphql/internal`. La clé
-est donc résolue comme un utilisateur Platform avant l'évaluation du
-`ROLE_ADMIN` requis par la mutation.
+Le firewall Basic Auth et son authenticator couvrent `/graphql/internal`. Les
+credentials sont vérifiés via 1Password avant l'évaluation du
+`ROLE_INTERNAL_HUB` requis par la mutation.
 
 `sizeBytes` est calculé à partir du `filesize` APIGREEN documenté en Ko :
 `sizeBytes = filesize * 1024`. Il correspond à `media__media.content_size`,
 exprimé en octets. Aucun upload binaire n'est réalisé vers S3 par cette
 mutation : le fichier est déjà stocké et Platform reçoit son chemin S3.
 
-L'intégration utilise deux types de clés :
+L'intégration utilise deux mécanismes d'authentification :
 
 | Sens | Clé | Usage |
 |---|---|---|---|
-| Hub → Platform | Une clé commune à toutes les instances Platform | Enregistrer les métadonnées des images dans Platform |
-| Platform → Hub | Une clé distincte par instance | Uploader les médias vers le Hub |
+| Hub → Platform | Login/mot de passe de l'item 1Password de l'instance | Enregistrer les métadonnées des images dans Platform |
+| Platform → Hub | Login/mot de passe du même item 1Password | Appeler les endpoints Hub de l'instance |
 
-La clé commune Hub → Platform et les clés Platform → Hub sont stockées dans
-les gestionnaires de secrets des deux services. Les clés Platform → Hub sont
-distinguées par `organization_id` dans le Secret Kubernetes du Hub et peuvent
-être rotées indépendamment.
+`APIGREEN_REGISTRY_API_KEY` est distinct : il sert uniquement à authentifier
+les notifications envoyées par InternalHub à l'API registre APIGREEN et n'est
+pas utilisé pour l'appel GraphQL Platform.
 
 État actuel : la mutation de synchronisation est implémentée dans Platform et
 couverte par des tests PHPUnit. Le contrat externe, le mapping et l'exemple
@@ -228,7 +229,7 @@ Le payload d'association suit le contrat Hub actuel :
   "aiotCode": "0003013833",
   "stepId": "step-id-platform",
   "consultationUrl": "https://{platform_instance_url}/projects/{project_slug}",
-  "contactEmail": "contact@example.com"
+  "emailContact": "contact@example.com"
 }
 ```
 
@@ -241,21 +242,17 @@ synchronise également les dates de l'étape de collecte lorsque `startAt` ou
 `endAt` est modifié :
 
 ```text
-POST {SYMFONY_HUB_API_GREEN_URL}/api/v1/metadata
+PUT {SYMFONY_HUB_API_GREEN_URL}/api/v1/folder-links/{folderNumber}/metadata
 Authorization: Basic {credentials de l'item 1Password}
 ```
 
-Le payload contient le numéro de dossier et les dates au format
-`YYYY-MM-DD HH:MM:SS` :
+Le numéro de dossier est transmis dans l'URL et les dates dans le payload au
+format `YYYY-MM-DD` :
 
 ```json
 {
-  "instance_name": "{platform_instance_name}",
-  "folderNumber": "T0603151600",
-  "aiotCode": "0003013833",
-  "stepId": "step-id-platform",
-  "startDate": "2026-09-21 10:00:00",
-  "endDate": "2026-09-30 18:00:00"
+  "consultationStartDate": "2026-09-21",
+  "consultationEndDate": "2026-09-30"
 }
 ```
 

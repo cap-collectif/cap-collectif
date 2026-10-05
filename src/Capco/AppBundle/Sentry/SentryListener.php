@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Sentry;
 
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Sentry\State\HubInterface;
 use Sentry\State\Scope;
@@ -36,8 +37,10 @@ class SentryListener implements EventSubscriberInterface
         $userData['ip_address'] = RequestGuesser::getClientIpFromRequest($request);
 
         if ($user = $this->security->getUser()) {
-            $userData['username'] = $user->getUsername();
-            $userData['email'] = $user->getEmail();
+            $userData['username'] = $user instanceof User ? $user->getUsername() : $user->getUserIdentifier();
+            if ($user instanceof User) {
+                $userData['email'] = $user->getEmail();
+            }
             $userData['roles'] = json_encode($user->getRoles());
         } else {
             $userData['username'] = 'anon.';

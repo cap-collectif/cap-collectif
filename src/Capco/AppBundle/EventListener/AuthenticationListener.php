@@ -42,17 +42,20 @@ class AuthenticationListener implements EventSubscriberInterface
 
     public function onAuthenticationSuccess(InteractiveLoginEvent $event): void
     {
-        $request = $event->getRequest();
-        $session = $request->getSession();
-
         // Authentication
         $authenticationToken = $event->getAuthenticationToken();
+        $user = $authenticationToken->getUser();
+        if (!$user instanceof User) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        $session = $request->getSession();
         $serialized = $authenticationToken->serialize();
         $session->set('theToken', $serialized);
 
         // Save a successfull user login.
         $data = $this->requestGuesser->getJsonContent();
-        $user = $authenticationToken->getUser();
         $email = $data['username'] ?? '';
         $userConnection = new UserConnection();
         $userConnection
@@ -63,7 +66,7 @@ class AuthenticationListener implements EventSubscriberInterface
             ->setNavigator($this->requestGuesser->getUserAgent())
         ;
 
-        if ($user instanceof User && $request->query->get('session_state')) {
+        if ($request->query->get('session_state')) {
             $this->setUserOpenIdSID($request, $user);
         }
         $this->em->persist($userConnection);

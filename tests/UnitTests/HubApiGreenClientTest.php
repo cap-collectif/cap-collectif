@@ -46,7 +46,7 @@ class HubApiGreenClientTest extends TestCase
                         'aiotCode' => '0003013833',
                         'stepId' => 'step-1',
                         'consultationUrl' => 'https://platform.example/projects/test',
-                        'contactEmail' => 'contact@example.com',
+                        'emailContact' => 'contact@example.com',
                     ],
                 ]
             )
@@ -73,20 +73,16 @@ class HubApiGreenClientTest extends TestCase
             ->expects($this->once())
             ->method('request')
             ->with(
-                'POST',
-                'http://hub.example/api/v1/metadata',
+                'PUT',
+                'http://hub.example/api/v1/folder-links/T0603151600/metadata',
                 [
                     'headers' => [
                         'Content-Type' => 'application/json',
                     ],
                     'auth_basic' => ['platform-instance', 'password'],
                     'json' => [
-                        'instance_name' => 'platform-instance',
-                        'folderNumber' => 'T0603151600',
-                        'aiotCode' => '0003013833',
-                        'stepId' => 'hub-step-1',
-                        'startDate' => '2026-09-21 10:00:00',
-                        'endDate' => '2026-09-30 18:00:00',
+                        'consultationStartDate' => '2026-09-21',
+                        'consultationEndDate' => '2026-09-30',
                     ],
                 ]
             )
@@ -105,6 +101,35 @@ class HubApiGreenClientTest extends TestCase
         ;
 
         $this->createClient($httpClient)->updateConsultationDates($step, $metadata);
+    }
+
+    public function testAssociateFolderPropagatesConflictDetails(): void
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->once())->method('getStatusCode')->willReturn(409);
+        $response->expects($this->once())->method('getContent')->with(false)->willReturn(
+            'folder "T0603151600" is already associated with AIOT "0003013833"'
+        );
+
+        $httpClient = $this->createMock(HttpClientInterface::class);
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->willReturn($response)
+        ;
+
+        $step = (new OtherStep())->setId('step-1');
+        $metadata = (new HubMetadata())
+            ->setAiotCode('0003013834')
+            ->setFolderNumber('T0603151600')
+            ->setContactEmail('contact@example.com')
+        ;
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(409);
+        $this->expectExceptionMessage('folder "T0603151600" is already associated with AIOT "0003013833"');
+
+        $this->createClient($httpClient)->associateFolder($step, $metadata, 'https://platform.example/projects/test');
     }
 
     private function createClient(HttpClientInterface $httpClient): HubApiGreenClient

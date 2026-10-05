@@ -28,7 +28,7 @@ class HubApiGreenClient
             'aiotCode' => $metadata->getAiotCode(),
             'stepId' => $step->getId(),
             'consultationUrl' => $consultationUrl,
-            'contactEmail' => $metadata->getContactEmail(),
+            'emailContact' => $metadata->getContactEmail(),
         ];
 
         $this->request('/api/v1/folder-links', $payload, 'folder association', $step->getId());
@@ -36,23 +36,25 @@ class HubApiGreenClient
 
     public function updateConsultationDates(CollectStep $step, HubMetadata $metadata): void
     {
-        $this->request('/api/v1/metadata', [
-            'instance_name' => $this->instanceName,
-            'folderNumber' => $metadata->getFolderNumber(),
-            'aiotCode' => $metadata->getAiotCode(),
-            'stepId' => $metadata->getStep()?->getId(),
-            'startDate' => $step->getStartAt()?->format('Y-m-d H:i:s'),
-            'endDate' => $step->getEndAt()?->format('Y-m-d H:i:s'),
-        ], 'consultation dates update', $step->getId());
+        $this->request(
+            '/api/v1/folder-links/' . $metadata->getFolderNumber() . '/metadata',
+            [
+                'consultationStartDate' => $step->getStartAt()?->format('Y-m-d'),
+                'consultationEndDate' => $step->getEndAt()?->format('Y-m-d'),
+            ],
+            'consultation dates update',
+            $step->getId(),
+            'PUT'
+        );
     }
 
     /**
      * @param array<string, mixed> $payload
      */
-    private function request(string $path, array $payload, string $operation, string $stepId): void
+    private function request(string $path, array $payload, string $operation, string $stepId, string $method = 'POST'): void
     {
         $credentials = $this->onePasswordClient->credentials($this->instanceName);
-        $response = $this->httpClient->request('POST', rtrim($this->hubApiGreenUrl, '/') . $path, [
+        $response = $this->httpClient->request($method, rtrim($this->hubApiGreenUrl, '/') . $path, [
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
@@ -62,13 +64,19 @@ class HubApiGreenClient
 
         $statusCode = $response->getStatusCode();
         if ($statusCode < Response::HTTP_OK || $statusCode >= Response::HTTP_MULTIPLE_CHOICES) {
+            $responseBody = trim($response->getContent(false));
             $this->logger->error(sprintf('Hub API Green %s failed.', $operation), [
                 'statusCode' => $statusCode,
                 'stepId' => $stepId,
-                'response' => $response->getContent(false),
+                'response' => $responseBody,
             ]);
 
-            throw new \RuntimeException(sprintf('Hub API Green %s failed with status %d.', $operation, $statusCode));
+            throw new \RuntimeException(
+                Response::HTTP_CONFLICT === $statusCode && '' !== $responseBody
+                    ? $responseBody
+                    : sprintf('Hub API Green %s failed with status %d.', $operation, $statusCode),
+                $statusCode
+            );
         }
     }
 }

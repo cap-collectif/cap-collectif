@@ -54,6 +54,15 @@ security:
                 authenticators:
                     - Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator
 
+        graphql_internal_basic:
+            request_matcher: Capco\AppBundle\PublicApi\InternalGraphQLBasicRequestMatcher
+            provider: public_api_key_user_provider
+            stateless: true
+            anonymous: false
+            guard:
+                authenticators:
+                    - Capco\AppBundle\PublicApi\InternalGraphQLBasicAuthenticator
+
         # This is our Public API authenticated with Personal Access Token
         graphql_public:
             pattern: ^/graphql$

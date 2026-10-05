@@ -866,7 +866,7 @@ InternalMutation:
 
             # Media Admin
             synchronizeHubApiGreenMedia:
-                access: "@=hasRole('ROLE_ADMIN')"
+                access: "@=hasRole('ROLE_INTERNAL_HUB')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SynchronizeHubApiGreenMediaInput
