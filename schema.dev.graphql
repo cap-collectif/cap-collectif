@@ -2387,6 +2387,12 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
   """Is the step enabled or not"""
   enabled: Boolean!
 
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
+
   """The label of the step"""
   label: String!
 
@@ -3276,6 +3282,12 @@ type ConsultationStep implements NodeSlug & Node & Step & RequirementStep {
 
   """Is the step enabled or not"""
   enabled: Boolean!
+
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
 
   """The label of the step"""
   label: String!
@@ -5709,6 +5721,12 @@ type DebateStep implements NodeSlug & Step & Node {
 
   """Is the step enabled or not"""
   enabled: Boolean!
+
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
 
   """The label of the step"""
   label: String!
@@ -11180,6 +11198,12 @@ type OtherStep implements NodeSlug & Node & Step {
   """Is the step enabled or not"""
   enabled: Boolean!
 
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
+
   """The label of the step"""
   label: String!
 
@@ -12124,6 +12148,12 @@ type PresentationStep implements NodeSlug & Node & Step {
 
   """Is the step enabled or not"""
   enabled: Boolean!
+
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
 
   """The label of the step"""
   label: String!
@@ -14446,6 +14476,12 @@ interface ProposalStep implements NodeSlug {
   """Is the step enabled or not"""
   enabled: Boolean!
 
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
+
   """The label of the step"""
   label: String!
 
@@ -16253,6 +16289,12 @@ type QuestionnaireStep implements NodeSlug & Node & Step & RequirementStep {
   """Is the step enabled or not"""
   enabled: Boolean!
 
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
+
   """The label of the step"""
   label: String!
 
@@ -16393,6 +16435,12 @@ type RankingStep implements NodeSlug & Node & Step {
 
   """Is the step enabled or not"""
   enabled: Boolean!
+
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
 
   """The label of the step"""
   label: String!
@@ -17978,6 +18026,12 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
   """Is the step enabled or not"""
   enabled: Boolean!
 
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
+
   """The label of the step"""
   label: String!
 
@@ -19240,6 +19294,12 @@ interface Step implements NodeSlug {
 
   """Is the step enabled or not"""
   enabled: Boolean!
+
+  """Whether or not the logged in user can edit the step."""
+  canEdit: Boolean!
+
+  """Whether or not the logged in user can delete the step."""
+  canDelete: Boolean!
 
   """The label of the step"""
   label: String!
