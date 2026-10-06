@@ -416,8 +416,8 @@ Le retrait global de PHPSpec reste distinct : des specs hors de ce périmètre s
 
 ### Hygiène CI — à traiter rapidement en parallèle des parties suivantes
 
-1. Supprimer les exclusivités Cypress, notamment le `it.only` toujours présent dans le workflow de sélection, et ajouter une garde CI contre `it.only`, `describe.only`, `test.only` et leurs équivalents.
-2. Documenter le sort de chaque `.skip` des workflows User/Participant : réparer, remplacer par PHPUnit ou supprimer avec justification. La couverture de réconciliation à ajouter relève de la partie 3.
+1. Ajouter une garde CI contre `it.only`, `describe.only`, `test.only` et leurs équivalents. Les exclusivités des workflows User/Participant sont supprimées dans la partie 3.
+2. Les `.skip` des workflows User/Participant sont retirés dans la partie 3, avec leurs décisions de remplacement/suppression documentées ci-dessous.
 3. Corriger le glob CircleCI Jest legacy pour exécuter aussi les fichiers `-test.ts`.
 4. Ajouter `db:restore` à `shield.cy.ts`; sortir `rgpd.cy.ts` du périmètre User si seuls les cookies sont visés, sinon l'isoler conformément à l'ADR frontend.
 5. Vérifier que la CI découvre et exécute effectivement les nouveaux tests de chaque partie.
@@ -741,7 +741,7 @@ Ne pas créer d'emblée une famille d'interfaces `AccountManager`, `AccountPassw
 
 **Critères de sortie de la partie 2 :** les parcours locaux ci-dessus et leurs principaux refus sont protégés par des assertions fonctionnelles explicites ; les tests exercent la validation, le hash et la persistance réels ; les lacunes de comportement découvertes sont documentées ; la CI exécute le filet. Le remplacement de FOS doit ensuite pouvoir rejouer ces tests sans changer leurs attentes fonctionnelles.
 
-### Partie 3 — Participant et réconciliation
+### Partie 3 — Participant et réconciliation — implémentée et validée localement
 
 Ajouter les tests unitaires de `Participant`, `ContributionsReconcilier` et `VotesReconcilier`. Couvrir les conflits entre identités, l'idempotence, les limites/budget/ranking et l'absence de perte de contenu associé. Compléter les codes d'erreur des mutations Participant, notamment suppression et vérification du téléphone.
 
@@ -844,6 +844,91 @@ La branche contient désormais le commit réécrit `c4b3f09dbd` correspondant au
 Validation complémentaire : **62 tests / 1 146 assertions** dans la suite fonctionnelle en ordre aléatoire (seed `20261005`), **39 tests / 514 assertions** dans les suites existantes directement concernées, et **4 tests / 11 assertions** pour les limiteurs seuls. PHPStan, PHP-CS-Fixer en dry-run et Rector en dry-run passent sur la suite fonctionnelle et `UserTest`. Une mutation temporaire qui ignore la durée demandée au limiteur fait échouer le scénario d'expiration ; le fichier de production est restauré à l'identique.
 
 Les suites utilisant les mêmes flags Redis doivent être exécutées séquentiellement : un lancement simultané a provoqué des refus incohérents, puis le rejeu séparé a validé les deux suites. Le README documente cette contrainte. Les résultats ci-dessus viennent du rejeu séparé, pas de cette exécution concurrente. Ces dernières corrections restent non commitées ; les contrôles PHP globaux avant commit restent à exécuter si un commit est demandé.
+
+## Résultats initiaux de la partie 3 — 1er octobre 2026
+
+La branche `20284-participant-reconciliation-tests` part de `20284-users-local-auth-tests` (commit `b57248f1c8`) et ajoute un filet de caractérisation sans import/double FOS, SQL sur la table historique ou snapshots :
+
+- `ParticipantTest` : état anonyme, consentements, confirmation, jetons indépendants, association à un User et collections de contenu associé ;
+- `ParticipantHelperTest` : résolution des tokens bruts/encodés, refus sans écriture et création de nouvelles identités avec le générateur de tokens ;
+- `ContributionsReconcilierTest` : matrice des exigences e-mail/téléphone/SSO pour les cibles User et Participant, conflits d'identité, transfert idempotent et rotation du token de fusion ;
+- `VotesReconcilierTest` : collecte/sélection × User/Participant, doublons, bulletins vides, minimum/maximum, budget, classement, étapes fermées et rejeu ;
+- `SendParticipantPhoneValidationCodeMutationTest` : normalisation du numéro, limite de deux SMS par minute, refus fournisseur, persistance de la demande et bypass de l'environnement test ;
+- trois suites sous `tests/Participant/Functional` : sorties GraphQL et persistance réelles de la suppression et du téléphone, authentification du User correspondant, fusion de Participant et rotation de son token, transferts de propositions/réponses/votes, conservation du contenu associé, idempotence et rollback fourni par l'appelant.
+
+La suppression n'expose pas de champ `errorCode` : son contrat actuel utilise une erreur GraphQL pour un Participant introuvable et un refus d'accès pour un utilisateur connecté sans droit. Un appel anonyme provoque actuellement une erreur interne de type, caractérisée séparément. Les tests vérifient ces sorties et l'absence de suppression, plutôt que d'inventer un code d'erreur. Les refus SMS vérifient explicitement `PHONE_ALREADY_CONFIRMED`, `RETRY_LIMIT_REACHED`, `INVALID_NUMBER`, `CODE_EXPIRED`, `CODE_NOT_VALID` et `SERVER_ERROR` aux couches correspondantes.
+
+Le fournisseur SMS est remplacé à sa frontière, sans credentials ni appel réseau. Seule la définition du fetcher en configuration **test** devient publique. Les tests de succès/refus fournisseur de vérification construisent la vraie mutation avec un kernel déclarant `prod`, puis restaurent immédiatement le kernel HTTP de test : ils traversent donc la branche fournisseur que l'environnement `test` ignore habituellement. Le succès fournisseur vérifie l'approbation persistée du SMS ; les autres succès GraphQL conservent le bypass de test. Aucun scénario ne prétend contacter le fournisseur réel.
+
+### Réduction Cypress et décisions sur les cas ignorés
+
+Les trois fichiers existants du job CircleCI `e2e-cypress-frontoffice-workflow` conservent chacun trois scénarios :
+
+| Suite | Parcours conservés |
+|---|---|
+| Collecte | Participant avec exigences et consentements ; connexion locale dans le workflow ; fusion de votes avec un User existant |
+| Sélection | Participant avec exigences et consentements ; connexion locale dans le workflow ; fusion de votes avec un User existant |
+| Questionnaire | Ajout/modification/suppression d'une réponse anonyme ; connexion locale dans le workflow ; deux réponses du même Participant |
+
+Chaque scénario est dans sa propre suite avec `db:restore` en `before`, puis désactivation du feature flag et restauration de la base en `after`. Les scénarios anonymes utilisent des e-mails/numéros distincts et valident le CAPTCHA final. Les assertions de questionnaire attendent la réponse de `ValidateContributionMutation` plutôt qu'un écran transitoire. Ces specs ne contiennent plus de SQL direct, `.only` ou `.skip`. Les tâches Fabric du runner Cypress passent par `pipenv run fab`.
+
+| Ancien bloc ignoré | Décision explicite |
+|---|---|
+| Budget collecte et sélection | Remplacé par la matrice PHPUnit : budget dépassé, borne exacte et déduplication ; validation de la persistance dans la suite fonctionnelle de votes |
+| Classement collecte et cas « conserver le bulletin User ayant atteint le minimum » | Remplacés par la matrice PHPUnit pour collecte **et** sélection : priorité du bulletin établi, adoption du premier bulletin complet et positions des doublons |
+| Counters collecte/sélection et cas sélection sans minimum/maximum avec exigences | Les variantes de configuration sont supprimées de Cypress ; les parcours retenus vérifient les compteurs visibles après validation et fusion. La matrice algorithmique est exercée en PHPUnit. Cela ne prétend pas conserver toutes les anciennes combinaisons d'interface |
+| Consentement interne collecte sans exigences | Variante de configuration supprimée de cette suite ; le consentement est exercé dans le parcours Participant avec exigences. Le rendu spécifique sans exigences n'est pas couvert par les neuf scénarios retenus |
+
+Les variantes actives fondées sur du SQL (classement, compteurs, exigences supprimées) sont également retirées. Les variantes magic link du workflow sont supprimées comme duplication du mode de connexion ; la partie 2 conserve le contrat backend du magic link. Les réponses multiples/conflits sont protégés par les suites de reconciliation et le parcours questionnaire représentatif. Cette réduction protège un filet représentatif et ne constitue pas une revendication d'équivalence exhaustive de couverture UI.
+
+### Comportements observés et limites
+
+- Une fusion de Participant par téléphone supprime actuellement une réponse sur une étape fermée : le reconciler refuse le transfert, puis la suppression du Participant source déclenche le `ON DELETE CASCADE`. Cette perte de contenu associé est caractérisée et nécessite une correction/décision séparée.
+- La suppression appelée anonymement produit une erreur GraphQL interne (viewer nul passé à un argument User non nullable), sans supprimer le Participant. Le refus métier explicite reste à décider/corriger séparément.
+- Une fusion sans minimum peut dépasser le maximum si aucun des deux bulletins n'atteint individuellement la limite (`maximum=3`, deux votes de chaque côté → quatre votes).
+- Plusieurs nouveaux votes classés peuvent recevoir la même position dans la branche de fusion par défaut.
+- La règle de réconciliation privilégie SSO, puis e-mail, puis téléphone ; elle ne combine pas toutes les exigences. La comparaison d'e-mail est stricte et sensible à la casse.
+- Le rollback vérifié protège les données SQL lorsque **l'appelant** fournit une transaction/savepoint. Les reconcilers effectuent plusieurs flushes et ne fournissent pas eux-mêmes l'atomicité ni le rollback des effets d'indexation externes.
+- En environnement `test`, l'envoi de SMS ne persiste pas lui-même le numéro et la vérification ignore le code fournisseur ; le parcours fonctionnel met à jour le Participant via `updateParticipant` avant envoi/vérification, comme le workflow.
+
+Les cas `CharacterizationGap` rendent ces lacunes visibles sans correction de production. Leur résolution et l'atomicité des orchestrateurs restent des décisions séparées.
+
+### Validation
+
+Le rejeu PHPUnit du périmètre Participant/réconciliation, incluant les tests existants de propositions/réponses, passe : **159 tests, 1 646 assertions**. Les trois suites fonctionnelles passent également en ordre aléatoire (`--random-order-seed=20261001`) : **29 tests, 577 assertions**.
+
+Les dernières exécutions Cypress sont vertes : collecte 3/3, sélection 3/3, puis questionnaire 3/3 après ajout du CAPTCHA final manquant. Aucun scénario n'est ignoré. ESLint, PHPStan global, PHP-CS-Fixer global en dry-run, Rector global en dry-run, `git diff --check` et `.circleci/check-cypress-spec-coverage.sh` passent.
+
+Limite de cette validation Cypress : les assets de développement initiaux échouaient sur `graphql: Unexpected invocation` dans `admin-next/shared/navbar/NavBarQuery.tsx`. Le build local a été refait sans cache Webpack/Babel, avec `compilerOptions.target: 'es6'` pour `ts-loader`, afin de préserver le tagged template avant la transformation Relay. Ce réglage est temporaire et aucun fichier de configuration du build n'est modifié sur cette branche. Les résultats verts ne prouvent donc pas le fonctionnement du build d'assets par défaut ; ce problème reste séparé.
+
+Les trois nouvelles suites fonctionnelles sont découvertes par `tests/**/*Test.php`, et les specs Cypress restent dans le dossier déjà exécuté en CI. Cette vérification de configuration ne prouve pas une exécution CI distante.
+
+## Mise en conformité de la partie 3 — 5 octobre 2026
+
+Revue du commit `712d708fbd`, seul commit propre à la branche actuelle `20284-participant-reconciliation-tests`, dont le parent est `0a93ca9887`.
+
+**Bilan de périmètre : la partie 3 dispose du filet demandé**, mais son implémentation initiale ne respectait pas entièrement les ADR du 2 octobre. La fin de cette partie ne vaut ni correction des anomalies caractérisées, ni achèvement des parties 4 et 5, ni validation globale de la suppression de FOSUserBundle.
+
+Les corrections apportées sont les suivantes :
+
+- La matrice des exigences ne contourne plus la visibilité protégée avec un `Probe` : les vrais reconcilers de propositions et réponses sont exercés par leur méthode publique. Les assertions vérifient le propriétaire résultant, y compris pour une cible Participant, une identité en conflit ou une étape fermée.
+- Les tests unitaires de votes et du helper Participant ne prescrivent plus le nombre ou l'ordre des appels à Doctrine. Les objets métier sont réels, les repositories fournissent les données du scénario, et les assertions scalaires/tableaux sont strictes. Les tests unitaires ne revendiquent pas de preuve de persistance.
+- Les tests fonctionnels de contributions et votes déclenchent la réconciliation depuis HTTP : connexion avec cookies de participation ou mutation de vérification du téléphone. Ils relisent les données SQL après vidage de l'EntityManager ; les votes sont vérifiés par leurs propositions distinctes et leurs propriétaires, pas seulement par un compteur.
+- La matrice d'envoi SMS traverse également HTTP et vérifie les demandes réellement persistées, leur statut, le numéro normalisé et l'absence d'effet sur une identité voisine. Les refus de vérification laissent le téléphone non confirmé et le SMS en attente ; les refus de suppression préservent aussi un Participant voisin.
+- Le scénario d'erreur d'indexation vérifie une erreur GraphQL et l'absence de payload de succès, puis le bulletin restauré par le savepoint de l'appelant. Il ne prétend pas que le workflow fournit lui-même une transaction.
+- Les fixtures choisies sont explicites, les étapes ouvertes/fermées ont des dates connues, et les neuf parcours Cypress ont des données déterministes sur un socle restauré. Les réponses des mutations de validation/suppression sont attendues et contrôlées ; le nom trompeur du scénario de fusion « max = 4 » est corrigé, car la fixture utilisée a un maximum de cinq.
+
+Les contrats GraphQL restent dans les suites HTTP PHPUnit existantes pour exercer des risques distincts avec une transaction SQL et des frontières SMS/indexation contrôlées. Le guide Jest recommande sa suite API pour les nouveaux contrats GraphQL, mais n'impose pas de déplacer ces tests ni de dupliquer les mêmes scénarios. Aucun fichier Jest ne fait partie du commit audité.
+
+Deux injections temporaires de régression ont confirmé la discrimination : neutraliser le transfert de propriétaire fait échouer la matrice publique ; supprimer la persistance de la demande SMS fait échouer le scénario HTTP d'envoi réussi. Ces modifications de production ont été intégralement restaurées.
+
+Les deux variantes fonctionnelles auparavant exécutées directement sur les services (conflit et étape fermée vers Participant) sont couvertes dans la matrice publique de propositions **et** de réponses. La suite HTTP vérifie la conservation lors de la connexion vers User et le transfert réussi vers Participant ; la perte de réponse du workflow téléphone sur étape fermée reste caractérisée séparément. On ne présente pas l'ancien appel direct comme une preuve du comportement complet de l'orchestrateur.
+
+Validation PHPUnit actualisée : **174 tests, 1 956 assertions**, en ordre aléatoire (`--random-order-seed=20261005`). Le périmètre comprend les huit classes du commit, les tests historiques de propositions/réponses et `LocalAuthenticationTest`, afin de vérifier aussi le point d'extension du harness d'indexation. La découverte PHPUnit liste ces 174 cas et le glob CircleCI conserve les huit classes concrètes.
+
+PHPStan global, PHP-CS-Fixer global en dry-run, Rector global en dry-run, ESLint des trois specs et du plugin Cypress, `git diff --check` et `.circleci/check-cypress-spec-coverage.sh` passent. Les injections temporaires de régression sont restaurées ; aucun fichier de production ou de configuration n'est modifié.
+
+Validation Cypress actualisée : **9/9 scénarios passent**, sans test ignoré ni retry, en 4 min 17 s. Le rejeu utilise les assets installés, sans reconstruction ni changement de configuration pendant cette revue. Cela ne prouve pas que le build d'assets par défaut fonctionne, puisque les assets peuvent provenir de la reconstruction temporaire documentée le 1er octobre. La CI distante reste non vérifiée.
 
 ## Mise en conformité du commit `0a93ca9887` — 6 octobre 2026
 

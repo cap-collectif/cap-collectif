@@ -43,12 +43,25 @@ export default new (class AdminCollectStepPage {
   }
 
   fillPostalAddress({ isAnonymous, address }: { isAnonymous: boolean; address: string }) {
-    AdminCollectStepPage.interceptUpdateContributorMutation(isAnonymous)
+    const operationName = isAnonymous ? 'UpdateParticipantMutation' : 'UpdateProfilePersonalDataMutation'
+    cy.interceptGraphQLOperation({ operationName }, req => {
+      if (req.body.variables.input.postalAddress) {
+        req.alias = 'UpdatePostalAddressMutation'
+      }
+    })
     cy.get('#address').clear().type(address)
     cy.get('.cap-address__dropdown').children().first().click({ force: true })
-    cy.wait(200)
+    // Geocoding sets the address data before replacing the search text with the formatted address.
+    cy.get('#address').should('not.have.value', address).and('not.have.value', '')
     this.submitStep()
-    AdminCollectStepPage.waitUpdateContributorMutation(isAnonymous)
+    cy.wait('@UpdatePostalAddressMutation').then(({ response }) => {
+      assert.notExists(response?.body.errors)
+      if (isAnonymous) {
+        assert.isNull(response?.body.data.updateParticipant.validationErrors)
+      } else {
+        assert.isNull(response?.body.data.updateProfilePersonalData.errorCode)
+      }
+    })
   }
   fillPhoneNumber({
     number,

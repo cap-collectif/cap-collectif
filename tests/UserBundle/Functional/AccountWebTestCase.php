@@ -65,7 +65,7 @@ abstract class AccountWebTestCase extends WebTestCase
         $this->em->getConnection()->beginTransaction();
         $listener = $container->get(ElasticsearchDoctrineListener::class);
         $this->em->getEventManager()->removeEventListener($listener->getSubscribedEvents(), $listener);
-        $container->set(Indexer::class, $this->createStub(Indexer::class));
+        $container->set(Indexer::class, $this->createIndexer());
         $this->mailer = $this->createMock(MailerService::class);
         $container->set(MailerService::class, $this->mailer);
         $publisher = $this->createStub(Publisher::class);
@@ -132,6 +132,11 @@ abstract class AccountWebTestCase extends WebTestCase
                 }
             }
         }
+    }
+
+    protected function createIndexer(): Indexer
+    {
+        return $this->createStub(Indexer::class);
     }
 
     /**
