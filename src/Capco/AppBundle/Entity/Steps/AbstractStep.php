@@ -293,6 +293,9 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
     public function setProjectAbstractStep(?ProjectAbstractStep $projectAbstractStep): self
     {
         $this->projectAbstractStep = $projectAbstractStep;
+        if ($projectAbstractStep && $this->hubMetadata && $projectAbstractStep->getProject()) {
+            $this->hubMetadata->setProject($projectAbstractStep->getProject());
+        }
 
         return $this;
     }
@@ -357,6 +360,9 @@ abstract class AbstractStep implements EntityInterface, DisplayableInBOInterface
         $this->hubMetadata = $hubMetadata;
         if ($hubMetadata && $hubMetadata->getStep() !== $this) {
             $hubMetadata->setStep($this);
+        }
+        if ($hubMetadata && $this->getProject()) {
+            $hubMetadata->setProject($this->getProject());
         }
 
         return $this;

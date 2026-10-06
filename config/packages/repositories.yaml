@@ -343,6 +343,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProjectType']
 
+    Capco\AppBundle\Repository\HubMetadataRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:HubMetadata']
+
     Capco\AppBundle\Repository\AbstractStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

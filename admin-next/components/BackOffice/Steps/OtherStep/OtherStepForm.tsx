@@ -22,7 +22,7 @@ import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
@@ -124,6 +124,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const isHubAssociationEnabled = isHubDocumentsProjectStep && step.hubMetadata?.enabled === true
   const showAdvancedEditor = !isHubAssociationEnabled
   const disableEditor = isHubAssociationEnabled
+  const [associationFinalized, setAssociationFinalized] = useState(step.hubMetadata?.enabled ?? false)
 
   const createStepLink = `/admin-next/project/${project.id}/create-step`
   const getBreadCrumbItems = () => {
@@ -199,6 +200,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const hubAssociationEnabled = watch('hubMetadata.enabled')
   const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
+    const associationEnabled = !!values.hubMetadata?.enabled
     const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     const hubMetadata = isHubDocumentsProjectStep
       ? {
@@ -231,6 +233,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         return mutationErrorToast(intl)
       }
       successToast(intl.formatMessage({ id: 'global.saved' }))
+      setAssociationFinalized(associationEnabled)
       if (!isEditing) {
         return (window.location.href = `/admin-next/project/${project?.id}`)
       }
@@ -319,7 +322,13 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 <>
                   <FormControl name="hubMetadata.aiotCode" control={control} isRequired mb={4}>
                     <FormLabel htmlFor="hubMetadata.aiotCode" label={intl.formatMessage({ id: 'hub-aiot-code' })} />
-                    <FieldInput id="hubMetadata.aiotCode" name="hubMetadata.aiotCode" control={control} type="text" />
+                    <FieldInput
+                      id="hubMetadata.aiotCode"
+                      name="hubMetadata.aiotCode"
+                      control={control}
+                      type="text"
+                      disabled={associationFinalized}
+                    />
                   </FormControl>
                   <FormControl name="hubMetadata.folderNumber" control={control} isRequired mb={4}>
                     <FormLabel
@@ -331,6 +340,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                       name="hubMetadata.folderNumber"
                       control={control}
                       type="text"
+                      disabled={associationFinalized}
                     />
                   </FormControl>
                   <FormControl name="hubMetadata.contactEmail" control={control} isRequired>

@@ -82,7 +82,7 @@ const createProtectedDocumentsStep = async projectTypeSlug => {
     'UPDATE step SET label = "Documents et ressources", body = "<p>Contenu initial</p>", timeless = 1 WHERE id = "ostep1"',
   )
   await global.runSQL(
-    'INSERT INTO hub_metadata (id, step_id, enabled, aiot_code, folder_number, contact_email) VALUES (UUID(), "ostep1", 1, "0003013833", "T0603151600", "contact@example.com") ON DUPLICATE KEY UPDATE enabled = 1, aiot_code = "0003013833", folder_number = "T0603151600", contact_email = "contact@example.com"',
+    'INSERT INTO hub_metadata (id, step_id, project_id, enabled, aiot_code, folder_number, contact_email) VALUES (UUID(), "ostep1", "project1", 1, "0003013833", "T0603151600", "contact@example.com") ON DUPLICATE KEY UPDATE project_id = "project1", enabled = 1, aiot_code = "0003013833", folder_number = "T0603151600", contact_email = "contact@example.com"',
   )
 }
 

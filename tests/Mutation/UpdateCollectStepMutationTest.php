@@ -7,13 +7,14 @@ use Capco\AppBundle\Entity\HubMetadata;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateCollectStepMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Logger\ActionLogger;
+use Capco\AppBundle\Repository\HubMetadataRepository;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +42,8 @@ class UpdateCollectStepMutationTest extends TestCase
         bool $datesChanged,
         int $expectedHubCalls
     ): void {
-        $scenario = $this->createScenario($projectTypeSlug, $datesChanged, $expectedHubCalls);
+        $events = [];
+        $scenario = $this->createScenario($projectTypeSlug, $datesChanged, $expectedHubCalls, $events);
         $startAt = $datesChanged ? '2026-09-22 10:00:00' : '2026-09-21 10:00:00';
         $endAt = $datesChanged ? '2026-10-01 18:00:00' : '2026-09-30 18:00:00';
 
@@ -58,6 +60,10 @@ class UpdateCollectStepMutationTest extends TestCase
         );
 
         self::assertSame($scenario['collectStep'], $payload['collectStep']);
+        self::assertSame(
+            $expectedHubCalls > 0 ? ['hub', 'flush'] : ['flush'],
+            $events
+        );
     }
 
     /**
@@ -73,7 +79,8 @@ class UpdateCollectStepMutationTest extends TestCase
 
     public function testConvertsHubErrorToGraphQLException(): void
     {
-        $scenario = $this->createScenario('public-consultation', true, 1, true);
+        $events = [];
+        $scenario = $this->createScenario('public-consultation', true, 1, $events, true);
 
         try {
             ($scenario['mutation'])(
@@ -97,6 +104,8 @@ class UpdateCollectStepMutationTest extends TestCase
     }
 
     /**
+     * @param list<string> $events
+     *
      * @return array{
      *     mutation: UpdateCollectStepMutation,
      *     collectStep: CollectStep,
@@ -107,6 +116,7 @@ class UpdateCollectStepMutationTest extends TestCase
         string $projectTypeSlug,
         bool $datesChanged,
         int $expectedHubCalls,
+        array &$events,
         bool $hubFailure = false
     ): array {
         $oldStartAt = new \DateTime('2026-09-21 10:00:00');
@@ -128,10 +138,6 @@ class UpdateCollectStepMutationTest extends TestCase
         $hubMetadata = $this->createMock(HubMetadata::class);
         $hubMetadata->method('isEnabled')->willReturn(true);
         $hubMetadata->method('isComplete')->willReturn(true);
-        $hubStep = $this->createMock(OtherStep::class);
-        $hubStep->method('getHubMetadata')->willReturn($hubMetadata);
-        $project->method('getRealSteps')->willReturn([$hubStep]);
-
         $form = $this->createMock(FormInterface::class);
         $form
             ->expects($this->once())
@@ -160,12 +166,31 @@ class UpdateCollectStepMutationTest extends TestCase
             ->willReturn($form)
         ;
 
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $flushExpectation = $entityManager
+            ->expects($hubFailure ? $this->never() : $this->once())
+            ->method('flush')
+        ;
+        if (!$hubFailure) {
+            $flushExpectation->willReturnCallback(static function () use (&$events): void {
+                $events[] = 'flush';
+            });
+        }
+
         $toggleManager = $this->createMock(Manager::class);
         $toggleManager
-            ->expects($this->once())
+            ->expects($datesChanged ? $this->once() : $this->never())
             ->method('isActive')
             ->with(Manager::hub_api_green)
             ->willReturn(true)
+        ;
+
+        $hubMetadataRepository = $this->createMock(HubMetadataRepository::class);
+        $hubMetadataRepository
+            ->expects($expectedHubCalls > 0 ? $this->once() : $this->never())
+            ->method('findOneByProject')
+            ->with($project)
+            ->willReturn($hubMetadata)
         ;
 
         $hubApiGreenClient = $this->createMock(HubApiGreenClient::class);
@@ -175,20 +200,29 @@ class UpdateCollectStepMutationTest extends TestCase
             ->with($collectStep, $hubMetadata)
         ;
         if ($hubFailure) {
-            $hubExpectation->willThrowException(new \RuntimeException('Hub refused the update.'));
+            $hubExpectation->willReturnCallback(static function () use (&$events): void {
+                $events[] = 'hub';
+
+                throw new \RuntimeException('Hub refused the update.');
+            });
+        } elseif ($expectedHubCalls > 0) {
+            $hubExpectation->willReturnCallback(static function () use (&$events): void {
+                $events[] = 'hub';
+            });
         }
 
         return [
             'mutation' => new UpdateCollectStepMutation(
                 globalIdResolver: $globalIdResolver,
-                em: $this->createMock(EntityManagerInterface::class),
+                em: $entityManager,
                 authorizationChecker: $this->createMock(AuthorizationCheckerInterface::class),
                 formFactory: $formFactory,
                 logger: $this->createMock(LoggerInterface::class),
                 proposalStepSplitViewService: $this->createMock(ProposalStepSplitViewService::class),
                 actionLogger: $this->createMock(ActionLogger::class),
                 hubApiGreenClient: $hubApiGreenClient,
-                toggleManager: $toggleManager,
+                hubMetadataRepository: $hubMetadataRepository,
+                hubDocumentsStepGuard: new HubDocumentsStepGuard($toggleManager),
             ),
             'collectStep' => $collectStep,
             'viewer' => $viewer,

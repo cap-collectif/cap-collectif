@@ -11,8 +11,9 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Logger\ActionLogger;
+use Capco\AppBundle\Repository\HubMetadataRepository;
 use Capco\AppBundle\Security\ProjectVoter;
-use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -35,7 +36,8 @@ class UpdateCollectStepMutation implements MutationInterface
         private readonly ProposalStepSplitViewService $proposalStepSplitViewService,
         private readonly ActionLogger $actionLogger,
         private readonly HubApiGreenClient $hubApiGreenClient,
-        private readonly Manager $toggleManager
+        private readonly HubMetadataRepository $hubMetadataRepository,
+        private readonly HubDocumentsStepGuard $hubDocumentsStepGuard
     ) {
     }
 
@@ -60,8 +62,8 @@ class UpdateCollectStepMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $this->em->flush();
         $this->synchronizeHubConsultationDates($collectStep, $previousStartAt, $previousEndAt);
+        $this->em->flush();
 
         $this->actionLogger->logGraphQLMutation(
             $viewer,
@@ -111,31 +113,29 @@ class UpdateCollectStepMutation implements MutationInterface
         $datesChanged = $previousStartAt !== $collectStep->getStartAt()?->format('Y-m-d H:i:s')
             || $previousEndAt !== $collectStep->getEndAt()?->format('Y-m-d H:i:s');
         if (
-            !$this->toggleManager->isActive(Manager::hub_api_green)
-            || !$datesChanged
+            !$datesChanged
             || null === $project
+            || !$this->hubDocumentsStepGuard->isProtectedDocumentsProject($project)
         ) {
             return;
         }
 
-        foreach ($project->getRealSteps() as $projectStep) {
-            $hubMetadata = $projectStep->getHubMetadata();
-            if (!$hubMetadata?->isEnabled() || !$hubMetadata->isComplete()) {
-                continue;
-            }
+        $hubMetadata = $this->hubMetadataRepository->findOneByProject($project);
+        if (!$hubMetadata?->isEnabled() || !$hubMetadata->isComplete()) {
+            return;
+        }
 
-            try {
-                $this->hubApiGreenClient->updateConsultationDates($collectStep, $hubMetadata);
-            } catch (\RuntimeException $exception) {
-                $this->logger->error('Hub API Green consultation dates update failed while updating a collect step.', [
-                    'stepId' => $collectStep->getId(),
-                    'exception' => $exception,
-                ]);
+        try {
+            $this->hubApiGreenClient->updateConsultationDates($collectStep, $hubMetadata);
+        } catch (\RuntimeException $exception) {
+            $this->logger->error('Hub API Green consultation dates update failed while updating a collect step.', [
+                'stepId' => $collectStep->getId(),
+                'exception' => $exception,
+            ]);
 
-                throw GraphQLException::fromString(
-                    'La mise à jour des dates de consultation dans le Hub API Green a échoué. Réessayez.'
-                );
-            }
+            throw GraphQLException::fromString(
+                'La mise à jour des dates de consultation dans le Hub API Green a échoué. Réessayez.'
+            );
         }
     }
 }

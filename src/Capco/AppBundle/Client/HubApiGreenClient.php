@@ -48,6 +48,17 @@ class HubApiGreenClient
         );
     }
 
+    public function updateConsultationUrl(string $consultationUrl, HubMetadata $metadata): void
+    {
+        $this->request(
+            '/api/v1/folder-links/' . $metadata->getFolderNumber() . '/metadata',
+            ['consultationUrl' => $consultationUrl],
+            'consultation URL update',
+            $metadata->getStep()?->getId() ?? 'unknown',
+            'PUT'
+        );
+    }
+
     /**
      * @param array<string, mixed> $payload
      */
@@ -72,7 +83,7 @@ class HubApiGreenClient
             ]);
 
             throw new \RuntimeException(
-                Response::HTTP_CONFLICT === $statusCode && '' !== $responseBody
+                '' !== $responseBody
                     ? $responseBody
                     : sprintf('Hub API Green %s failed with status %d.', $operation, $statusCode),
                 $statusCode

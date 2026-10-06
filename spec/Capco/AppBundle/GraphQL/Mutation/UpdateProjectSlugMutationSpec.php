@@ -2,14 +2,19 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Client\HubApiGreenClient;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProjectSlugMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Capco\AppBundle\Repository\HubMetadataRepository;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -22,9 +27,24 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         SluggerInterface $slugger,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        HubApiGreenClient $hubApiGreenClient,
+        HubMetadataRepository $hubMetadataRepository,
+        HubDocumentsStepGuard $hubDocumentsStepGuard,
+        ProjectUrlResolver $projectUrlResolver,
+        LoggerInterface $logger
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $slugger, $authorizationChecker);
+        $this->beConstructedWith(
+            $em,
+            $globalIdResolver,
+            $slugger,
+            $authorizationChecker,
+            $hubApiGreenClient,
+            $hubMetadataRepository,
+            $hubDocumentsStepGuard,
+            $projectUrlResolver,
+            $logger
+        );
     }
 
     public function it_is_initializable()
@@ -39,7 +59,8 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         User $viewer,
         Project $project,
         SluggerInterface $slugger,
-        AbstractUnicodeString $abstractUnicodeString
+        AbstractUnicodeString $abstractUnicodeString,
+        HubDocumentsStepGuard $hubDocumentsStepGuard
     ) {
         $projectId = 'projectId';
         $this->getMockedGraphQLArgumentFormatted($input);
@@ -53,6 +74,16 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
             ->resolve($projectId, $viewer)
             ->shouldBeCalledOnce()
             ->willReturn($project)
+        ;
+
+        $project
+            ->getSlug()
+            ->willReturn('old-slug')
+        ;
+
+        $hubDocumentsStepGuard
+            ->isProtectedDocumentsProject($project)
+            ->willReturn(false)
         ;
 
         $rawSlug = 'my new slug';

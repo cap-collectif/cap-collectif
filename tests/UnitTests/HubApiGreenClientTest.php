@@ -103,6 +103,40 @@ class HubApiGreenClientTest extends TestCase
         $this->createClient($httpClient)->updateConsultationDates($step, $metadata);
     }
 
+    public function testUpdateConsultationUrlBuildsTheHubPayload(): void
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->once())->method('getStatusCode')->willReturn(204);
+
+        $httpClient = $this->createMock(HttpClientInterface::class);
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->with(
+                'PUT',
+                'http://hub.example/api/v1/folder-links/T0603151600/metadata',
+                [
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                    ],
+                    'auth_basic' => ['platform-instance', 'password'],
+                    'json' => [
+                        'consultationUrl' => 'https://platform.example/projects/new-slug',
+                    ],
+                ]
+            )
+            ->willReturn($response)
+        ;
+
+        $step = (new OtherStep())->setId('hub-step-1');
+        $metadata = (new HubMetadata())
+            ->setFolderNumber('T0603151600')
+            ->setStep($step)
+        ;
+
+        $this->createClient($httpClient)->updateConsultationUrl('https://platform.example/projects/new-slug', $metadata);
+    }
+
     public function testAssociateFolderPropagatesConflictDetails(): void
     {
         $response = $this->createMock(ResponseInterface::class);
@@ -128,6 +162,35 @@ class HubApiGreenClientTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionCode(409);
         $this->expectExceptionMessage('folder "T0603151600" is already associated with AIOT "0003013833"');
+
+        $this->createClient($httpClient)->associateFolder($step, $metadata, 'https://platform.example/projects/test');
+    }
+
+    public function testAssociateFolderPropagatesValidationDetails(): void
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->once())->method('getStatusCode')->willReturn(400);
+        $response->expects($this->once())->method('getContent')->with(false)->willReturn(
+            'Le domaine de l\'url ne fait pas partie des domaines autorisés pour le registre.'
+        );
+
+        $httpClient = $this->createMock(HttpClientInterface::class);
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->willReturn($response)
+        ;
+
+        $step = (new OtherStep())->setId('step-1');
+        $metadata = (new HubMetadata())
+            ->setAiotCode('0003013833')
+            ->setFolderNumber('T0603151600')
+            ->setContactEmail('contact@example.com')
+        ;
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(400);
+        $this->expectExceptionMessage('Le domaine de l\'url ne fait pas partie des domaines autorisés pour le registre.');
 
         $this->createClient($httpClient)->associateFolder($step, $metadata, 'https://platform.example/projects/test');
     }
