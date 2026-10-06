@@ -1,0 +1,843 @@
+# Audit des tests User et Participant avant suppression de FOSUserBundle
+
+> Audit statique réalisé le 25 septembre 2026 sur la branche `20284-tests-users`, commit `48f0cc82ac`.
+>
+> Objectif : disposer de tests de caractérisation qui restent valides lorsque FOSUserBundle est remplacé. Les seuls frameworks cibles sont PHPUnit, Jest et Cypress.
+
+## Résumé exécutif
+
+La couverture fonctionnelle existe, mais elle n'est pas encore suffisamment indépendante pour sécuriser la suppression de FOSUserBundle.
+
+Les points positifs sont les suivants :
+
+- les principaux parcours visibles sont couverts par Cypress : inscription, connexion, déconnexion, confirmation d'adresse e-mail, changement et réinitialisation du mot de passe, profil, suppression/anonymisation, invitations, groupes et SSO ;
+- les contrats GraphQL sont largement exercés par Jest dans `features/graphql-api` ;
+- les algorithmes d'anonymisation automatisée, une partie de la réconciliation `Participant` → `User`, les exports et les fournisseurs OAuth/OpenID/FranceConnect disposent déjà de tests PHPUnit substantiels ;
+- les mutations Jest restaurent la base avant chaque test et 25 des 27 fichiers Cypress retenus par le screening appliquent `db:restore`.
+
+Les blocages à traiter avant de reprendre la suppression sont :
+
+1. **PHPSpec est encore une suite active de CI.** Le dépôt contient 239 specs, dont 62 fichiers candidats sur le périmètre identité. Les contrats utiles doivent être migrés vers PHPUnit ; les specs « initializable » sans contrat métier peuvent être supprimées.
+2. **23 artefacts de test nomment directement FOSUserBundle ou `fos_user`.** Ils ne survivront pas à un remplacement du vendor sans modification.
+3. **Les suites Cypress de réconciliation ne sont pas fiables comme filet de sécurité.** `proposalSelectionVoteWorkflow.cy.ts` contient un `it.only`, ainsi que plusieurs suites/tests ignorés ; `proposalCollectVoteWorkflow.cy.ts` contient également plusieurs suites/tests ignorés.
+4. **Le cœur du modèle est peu caractérisé.** `UserSpec` ne vérifie que l'initialisation et un cas de `getContributions()`. Il n'existe pas de test unitaire direct de `Participant`, des invariants d'identité, des rôles, de l'état du compte ou du cycle des jetons.
+5. **Des composants critiques n'ont pas de test backend dédié** : `SamlAuthenticator`, `SamlUserProvider`, `SAMLLogoutHandler`, `CasAuthenticator`, `SimplePreAuthenticator`, `ResettingController`, `MagicLinkController`, `ProfileController`, `MembersController`, `CreateUserMutation`, `DeleteParticipantMutation`, `SendMagicLinkEmailMutation`, `ResetPasswordMutation`, `ResendEmailConfirmationMutation` et les mutations de téléphone du `Participant`.
+6. **Une partie importante des assertions repose sur des snapshots.** 98 des 110 candidats Jest GraphQL et les 94 candidats Jest UI utilisent `toMatchSnapshot`. Les snapshots sont utiles pour la forme d'une réponse, mais protègent mal les invariants d'identité et rendent les migrations bruyantes.
+
+Verdict : **ne pas utiliser la suite actuelle comme unique garde-fou de la suppression de FOSUserBundle**. Il faut d'abord migrer les contrats PHPSpec prioritaires, éliminer les dépendances directes au vendor et ajouter les tests manquants décrits dans cet audit.
+
+## Périmètre et méthode
+
+Le terme « User » est pris ici au sens large :
+
+- **User** : compte persistant, identifiants, rôles, profil, préférences, consentements et contenu associé ;
+- **Participant** : identité sans compte utilisée dans les parcours de participation ;
+- **identité authentifiée** : connexion locale, magic link, CAS, SAML, OAuth2, OpenID, Facebook et FranceConnect ;
+- **cycle de compte** : inscription, invitation, confirmation, changement d'adresse e-mail, mot de passe, suppression, account anonymization et archive ;
+- **passage Participant → User** : réconciliation des propositions, réponses et votes ;
+- **autorisations liées à l'identité** : rôles, groupes, types d'utilisateur, appartenance à une organisation et exigences de participation.
+
+Un test est retenu lorsqu'il vérifie directement un de ces contrats ou lorsque son résultat dépend de la nature de l'identité (`User`, `Participant`, anonyme, rôle ou groupe). Un test qui se connecte seulement comme précondition d'une fonctionnalité sans vérifier de comportement d'identité est hors inventaire principal.
+
+Le screening initial a porté sur :
+
+| Suite | Taille totale | Fichiers candidats inspectés |
+|---|---:|---:|
+| PHPUnit (`tests/**/*Test.php`) | 107 | 50 par nom, plus les 2 reconcilers |
+| PHPSpec (`spec/**/*Spec.php`) | 239 | 62 |
+| Jest UI legacy (`frontend/**/*-test.*`) | 548 | inclus dans 94 candidats UI |
+| Jest admin-next | 77 | inclus dans 94 candidats UI |
+| Jest GraphQL (`features/graphql-api`) | 428 | 110 |
+| Cypress (`cypress/e2e/**/*.cy.ts`) | 91 | 27 |
+
+Ces nombres sont un screening conservateur par nom et contenu, pas une mesure de couverture. Les fichiers qui ne font qu'envoyer un e-mail ou afficher l'auteur d'un contenu ont ensuite été classés comme adjacents ou exclus.
+
+## Carte du domaine et des tests existants
+
+### 1. Modèle User et état du compte
+
+Production principale :
+
+- `src/Capco/Capco/UserBundle/Entity/AbstractUser.php` étend directement `FOS\UserBundle\Model\User` ;
+- `src/Capco/UserBundle/Entity/User.php` porte à la fois les données de compte, le profil, les rôles, les compteurs, les consentements, les jetons, les associations SSO et les relations vers les contributions ;
+- la persistance reste configurée autour de la table `fos_user`.
+
+Tests existants :
+
+- `spec/Capco/UserBundle/Entity/UserSpec.php` : initialisation et un cas de contributions ;
+- `spec/Capco/AppBundle/Model/UserActivitySpec.php` : agrégation d'activité ;
+- `tests/Command/RecalculateUsersCountersCommandTest.php` : recalcul de compteurs ;
+- les queries Jest sous `features/graphql-api/internal/Query/User/` et `features/graphql-api/public/Query/User/` : arguments, commentaires, connexions, organisations, propositions, réponses, sources et votes ;
+- les tests Jest UI sous `frontend/js/components/User/`, ainsi que `frontend/js/redux/modules/user-test.ts` ;
+- `cypress/e2e/frontOffice/userProfile/userProfile.cy.ts` : affichage public du profil ;
+- `cypress/e2e/backOffice/user/userBO.cy.ts` : création, modification et suppression depuis le back-office.
+
+Évaluation : **insuffisant au niveau du modèle**. Les tests de lecture GraphQL et d'interface sont nombreux, mais les invariants de l'entité qui remplaceront ceux hérités de FOS ne sont pas explicités.
+
+À ajouter en PHPUnit, sans dépendre de FOS :
+
+- valeur par défaut des rôles et déduplication/hiérarchie des rôles ;
+- identité de sécurité (`getUserIdentifier`), comparaison de deux identités et comportement d'un compte anonymisé/supprimé/verrouillé ;
+- normalisation/canonicalisation de l'adresse e-mail et du nom d'utilisateur ;
+- invariants des états `enabled`, confirmé, verrouillé, supprimé et anonymisé ;
+- cycle de vie des jetons de confirmation, de réinitialisation, de changement d'adresse e-mail et de magic link ;
+- conservation des relations et du contenu associé lors de l'account anonymization ;
+- compteurs et collections, avec tests unitaires ciblés plutôt qu'une dépendance à des fixtures SQL.
+
+### 2. Participant, identité anonyme et réconciliation
+
+Tests existants :
+
+- `tests/Normalizer/ParticipantNormalizerTest.php` ;
+- `tests/Normalizer/Debate/AnonymousArgumentNormalizerTest.php` ;
+- `tests/Normalizer/Debate/DebateParticipantNormalizerKeysTest.php` ;
+- `tests/Service/ParticipantAccessResolverTest.php` ;
+- `tests/Service/ProposalReconcillierTest.php` ;
+- `tests/Service/ReplyReconcilierTest.php` ;
+- `tests/Mutation/SendParticipantEmailWorkflowMutationTest.php` ;
+- les exports `Export*ParticipantsCommandTest.php` ;
+- les mutations Jest `AnonymousReply/*`, `Debate/*Anonymous*`, `updateParticipant.js` et les queries `Participant/*`, `Query_participantPersonalData.js`, `Query_participants.js` ;
+- les trois grandes suites Cypress `frontOfficeWorkflow/*Workflow.cy.ts` ;
+- `cypress/e2e/frontOffice/debate/anonymousVote.cy.ts` et `event/eventRegistration.cy.ts`.
+
+Les reconcilers de proposition et de réponse disposent de bons cas métier : e-mail identique/différent, étape fermée, réponses multiples, exigence SSO et téléphone vérifié.
+
+Lacunes :
+
+- aucun test unitaire direct de `Participant` ;
+- aucun test dédié de `ContributionsReconcilier` ou `VotesReconcilier` ;
+- `DeleteParticipantMutation` n'a pas de test backend identifié ;
+- les mutations d'envoi et de vérification du téléphone d'un `Participant` n'ont pas de matrice backend dédiée ;
+- les règles de fusion des votes sont surtout protégées par de très gros scénarios Cypress, dont une partie est ignorée ;
+- l'unicité et la rotation du token `Participant`, la confirmation d'adresse e-mail, les consentements et les transitions vers un `User` ne sont pas caractérisés au niveau du domaine.
+
+À ajouter : une matrice PHPUnit sur les reconcilers (aucune perte de contenu, idempotence, limites/budget/ranking, conflit entre identités, rollback) et des tests GraphQL explicites des codes d'erreur des mutations Participant.
+
+### 3. Inscription, invitations et confirmation d'adresse e-mail
+
+Tests existants :
+
+- `spec/Capco/AppBundle/GraphQL/Mutation/RegisterMutationSpec.php` ;
+- `features/graphql-api/internal/Mutation/Other/register.js` ;
+- `features/graphql-api/internal/Mutation/inviteUsers.js` et `cancelUserInvitations.js` ;
+- `features/graphql-api/internal/Query/Query_userInvitations*.js` ;
+- `tests/Processor/UserInvite/UserInviteNewInvitationProcessorTest.php` et son snapshot ;
+- `spec/Capco/AppBundle/Notifier/UserInviteEmailMessageNotifierSpec.php` ;
+- `spec/Capco/UserBundle/Handler/UserInvitationHandlerSpec.php` ;
+- `spec/Capco/UserBundle/Controller/ConfirmationControllerSpec.php` ;
+- les tests Jest des composants `admin-next/shared/register/`, `frontend/js/components/Admin/Registration*` et `frontend/js/components/User/Invitation/` ;
+- `cypress/e2e/frontOffice/user/user.cy.ts` ;
+- `cypress/e2e/frontOffice/user/emailConfirmation.cy.ts` ;
+- `cypress/e2e/frontOffice/invitation/invitation.cy.ts` ;
+- `cypress/e2e/backOffice/invitation/userInvite.cy.ts` ;
+- `cypress/e2e/frontOffice/invitation/organizationInvitation.cy.ts`.
+
+Les happy paths sont bien visibles. Les branches suivantes sont à renforcer :
+
+- collision après canonicalisation de l'adresse e-mail et casse/espaces ;
+- jeton invalide, expiré, rejoué ou déjà consommé ;
+- atomicité entre création du compte, association aux groupes et invitation d'organisation ;
+- comportement identique avec inscription désactivée ou shield activé ;
+- validation serveur de la complexité du mot de passe ;
+- conservation des consentements et du type utilisateur ;
+- réponse non révélatrice lorsqu'une adresse existe déjà.
+
+### 4. Connexion locale, session, magic link et mot de passe
+
+Tests existants :
+
+- `spec/Capco/AppBundle/EventListener/AuthenticationHandlerSpec.php` ;
+- `spec/Capco/AppBundle/EventListener/EmptyUsernameListenerSpec.php` ;
+- `spec/Capco/UserBundle/Authenticator/MagicLinkAuthenticatorSpec.php` ;
+- `spec/Capco/UserBundle/Security/SessionWithJsonHandlerSpec.php` et `tests/UserBundle/Security/SessionWithJsonHandlerTest.php` ;
+- `tests/UserBundle/Security/Http/Logout/LogoutSuccessHandlerTest.php` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/Profile/UpdateProfilePasswordMutationSpec.php` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/UpdateProfileAccountEmailMutationSpec.php` ;
+- `features/graphql-api/internal/Mutation/updateProfile.js` et `cancelEmailChange.js` ;
+- les tests Jest `Login*-test.tsx`, `AccountForm-test.tsx`, `ChangePasswordForm-test.tsx`, `ResetPasswordForm-test.tsx`, `UserPassword*-test.tsx` ;
+- `cypress/e2e/frontOffice/user/login.cy.ts`, `account.cy.ts` et la partie mot de passe de `profile.cy.ts`.
+
+Couverture fonctionnelle actuelle : connexion/déconnexion, erreur de mot de passe, apparition du CAPTCHA après échecs, demande de réinitialisation, réinitialisation heureuse, changement de mot de passe et validation de formulaire.
+
+Lacunes prioritaires :
+
+- aucun test backend dédié de `ResettingController` ou `ResetPasswordMutation` ;
+- aucun test backend dédié de `MagicLinkController` ou `SendMagicLinkEmailMutation` ;
+- aucun test backend dédié de `ResendEmailConfirmationMutation` ;
+- aucun contrat sur jeton expiré/réutilisé, rotation du jeton, invalidation des sessions ou mise à niveau du hash ;
+- pas de matrice claire verrouillé/désactivé/non confirmé/anonymisé/supprimé ;
+- pas de test explicite d'anti-énumération des comptes et de rate limiting sur les demandes de reset/magic link ;
+- `UserEmailProvider` n'est exercé qu'indirectement par le spec du magic link.
+
+### 5. SSO : CAS, SAML, OAuth2, OpenID, Facebook et FranceConnect
+
+Tests existants :
+
+- `tests/Authentication/OauthUserProviderTest.php` : création/chargement, mapping OpenID/FranceConnect/Facebook, association et validation state/nonce ;
+- `tests/Authentication/OpenID/OpenIDResourceOwnerTest.php` ;
+- `tests/Authentication/FranceConnect/FranceConnectOptionsModifierTest.php` ;
+- `tests/Authentication/FranceConnect/FranceConnectResourceOwnerTest.php` ;
+- `tests/Controller/Site/SSOControllerTest.php` ;
+- `tests/EventListener/OpenIdCallbackTargetPathSubscriberTest.php` ;
+- `tests/EventListener/FranceConnectLogoutSubscriberTest.php` ;
+- `tests/Mutation/RemoveSsoConnectionMutationTest.php` ;
+- les specs PHPSpec `CasUserProviderSpec`, `CASLogoutHandlerSpec`, `OpenIDLogoutHandlerSpec`, `FranceConnectLogoutHandlerSpec`, `CasHandlerSpec` et `CapebUserFilterSpec` ;
+- les mutations Jest `Authentication/sso*.js`, `Sso/FranceConnect/updateFranceConnectSSOConfiguration.js` et la query `Query_ssoConfigurations.js` ;
+- `cypress/e2e/frontOffice/user/sso.cy.ts` et `frontend/js/components/Page/SSOSwitchUserPage-test.tsx`.
+
+La couverture OAuth/OpenID/FranceConnect est la partie backend la plus avancée, mais `OauthUserProviderTest` mocke directement `FOS\UserBundle\Model\UserManagerInterface` : le test cassera au retrait du vendor même si le comportement reste correct.
+
+Composants sans test dédié identifié :
+
+- `SamlAuthenticator`, `SamlUserProvider`, `SAMLLogoutHandler` ;
+- `CasAuthenticator` et `SimplePreAuthenticator` ;
+- callback SSO complet, collision d'adresse e-mail et rattachement à un compte existant ;
+- validation de signature/issuer/audience/nonce pour tous les fournisseurs concernés ;
+- logout local + fournisseur et nettoyage de session pour SAML/CAS/OpenID/FranceConnect ;
+- scénarios de refus du fournisseur et erreurs réseau.
+
+Les futurs tests doivent viser une interface interne de gestion des comptes et vérifier les résultats (compte créé ou rattaché, claims copiés, session, redirection), pas les classes FOS.
+
+### 6. Profil, données personnelles, préférences et consentements
+
+Tests existants :
+
+- `spec/Capco/AppBundle/GraphQL/Mutation/UpdateProfilePersonalDataMutationSpec.php` ;
+- `features/graphql-api/internal/Mutation/Other/update/updateProfileAccount.js` et `updateProfilePersonalData.js` ;
+- `features/graphql-api/internal/Mutation/updateUser.js`, `updateProfile.js`, `UserNotificationConfiguration/changeUserNotificationConfiguration.js` et `Locale/setUserDefaultLocale.js` ;
+- les tests Jest des composants `frontend/js/components/User/Profile/`, `User/Admin/`, alertes de confirmation et préférences ;
+- `cypress/e2e/frontOffice/user/profile.cy.ts` et `account.cy.ts` ;
+- `cypress/e2e/frontOffice/rgpd/rgpd.cy.ts` pour les cookies.
+
+La couverture UI est large mais souvent composée de snapshots. Ajouter des assertions backend explicites sur :
+
+- qui peut lire/modifier chaque champ ;
+- consentements interne, externe, SMS et privacy policy ;
+- changement de locale ;
+- validation/normalisation du téléphone ;
+- suppression des données personnelles sans suppression involontaire du contenu associé ;
+- préférences de notifications et invalidation des tokens à usage unique.
+
+### 7. Suppression, account anonymization et archive
+
+Tests existants :
+
+- `tests/Command/AnonymizeUsersAutomatedCommandTest.php` : plage de dates, dry-run, feature flag, idempotence, garde-fous, User et Participant, nettoyage des liens et conservation du contenu associé ;
+- `tests/Mutation/AnonymizeAccountByEmailMutationTest.php` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/DeleteAccountMutationSpec.php` ;
+- `features/graphql-api/internal/Mutation/Account/deleteAccount.js` et `deleteAccountByEmail.js` ;
+- `features/graphql-api/public/Mutation/deleteAccountByEmail.js` ;
+- `features/graphql-api/internal/Mutation/Other/requestUserArchive.js` ;
+- `tests/Command/DeleteUserArchiveCommandTest.php` ;
+- `tests/Processor/UserArchive/UserArchiveRequestProcessorTest.php` ;
+- `cypress/e2e/frontOffice/user/profile.cy.ts` et `sso.cy.ts`.
+
+C'est la zone la mieux caractérisée au niveau intégration. Il reste à isoler les contrats de `UserAnonymizer` en PHPUnit afin que les mutations ne soient pas les seules à protéger l'algorithme : champs effacés, champs conservés, déconnexion, révocation des credentials/tokens, idempotence et contenu associé inchangé.
+
+### 8. Groupes, rôles, types, organisations et autorisations
+
+Tests existants :
+
+- `tests/Service/GroupServiceTest.php` ;
+- `features/graphql-api/internal/Mutation/Group/*`, `User/addUsersToGroupFromEmail.js` et `Query/Group/Group_members.js` ;
+- les mutations/queries `UserType/*` et `Query_userTypes.js` ;
+- les invitations d'organisation Jest et Cypress ;
+- les specs `UserIsGrantedResolverSpec`, `OwnerableCreatorAccessResolverSpec`, `RequirementViewerValueResolverSpec`, `ViewerMeetsTheRequirementResolverSpec` et plusieurs voters ;
+- les quatre suites Cypress `backOffice/userGroup/*.cy.ts` ;
+- `cypress/e2e/backOffice/userType/userType.cy.ts` ;
+- `cypress/e2e/backOffice/user/userBO.cy.ts`.
+
+Lacunes :
+
+- `CreateUserMutation` n'a pas de test backend dédié ; sa création back-office n'est protégée que par Cypress ;
+- invariants et hiérarchie des rôles non testés sur le modèle ;
+- matrice d'accès incomplète pour User, admin, super-admin, project owner, membre/admin d'organisation et anonyme ;
+- peu de tests sur retrait du dernier administrateur, changement de rôle, compte supprimé ou désactivé ;
+- tests GraphQL souvent centrés sur snapshots plutôt que sur les codes d'erreur et l'absence d'effet de bord.
+
+### 9. Exports, recherche, compteurs et API
+
+Tests existants :
+
+- `tests/Command/ExportUsersCommandTest.php` ;
+- `tests/Command/ExportUserGroupsCommandTest.php` ;
+- `tests/Command/Export*ParticipantsCommandTest.php` ;
+- `tests/GraphQL/Resolver/Query/QueryUsersResolverTest.php` ;
+- `tests/GraphQL/Resolver/User/UserUrlResolverTest.php` ;
+- `tests/Service/ProjectContributorSearchTest.php` ;
+- `tests/Command/CreatePublicApiTokenCommandTest.php` ;
+- `tests/PublicApi/PublicApiKeyAuthenticatorTest.php` ;
+- les queries GraphQL User/Participant listées plus haut.
+
+Les tests d'export sont de bons tests de sortie, mais restent très liés à la base de fixtures. Il faut conserver des assertions précises sur la confidentialité, l'ordre et la stabilité des colonnes, et éviter d'asserter le nom physique de la table User.
+
+## Dépendances directes à FOSUserBundle dans les tests
+
+### Imports ou collaborateurs FOS
+
+À migrer vers une interface applicative ou un double interne :
+
+- `tests/Authentication/OauthUserProviderTest.php` — `FOS\UserBundle\Model\UserManagerInterface` ;
+- `tests/Mutation/RemoveSsoConnectionMutationTest.php` — même interface ;
+- `spec/Capco/AppBundle/Controller/Site/Organization/OrganizationControllerSpec.php` — `LoginManagerInterface` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/RegisterMutationSpec.php` — `UserManagerInterface` et `TokenGeneratorInterface` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/UpdateProfileAccountEmailMutationSpec.php` — `TokenGeneratorInterface` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/AddCommentMutationSpec.php` et `spec/Capco/AppBundle/Import/ImportProposalsFromCsvSpec.php` — `TokenGeneratorInterface` ;
+- `spec/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolverSpec.php` et `ReplyResponsesResolverSpec.php` — `TokenGenerator` concret ;
+- `spec/Capco/UserBundle/Authenticator/MagicLinkAuthenticatorSpec.php` — `FOS\UserBundle\Model\UserInterface` ;
+- `spec/Capco/UserBundle/Controller/ConfirmationControllerSpec.php` — `FOS\UserBundle\Security\LoginManager`.
+
+### Nom physique `fos_user`
+
+Ces tests modifient ou lisent directement l'implémentation de persistance :
+
+- `tests/Command/RecalculateUsersCountersCommandTest.php` ;
+- `features/graphql-api/internal/Mutation/Other/register.js` ;
+- `features/graphql-api/internal/Mutation/askProposalRevision.js` ;
+- `features/graphql-api/internal/Mutation/Mediator/addMediatorVotes.js` ;
+- `features/graphql-api/internal/Mutation/Mediator/updateMediatorVotes.js` ;
+- `cypress/e2e/frontOfficeWorkflow/proposalCollectVoteWorkflow.cy.ts` ;
+- `cypress/e2e/frontOfficeWorkflow/proposalSelectionVoteWorkflow.cy.ts` ;
+- `cypress/e2e/frontOfficeWorkflow/questionnaireWorkflow.cy.ts`.
+
+Action recommandée : remplacer les SQL directs par des builders de fixtures ou des commandes de test exprimant l'intention (`confirmUserPhone`, `setInternalCommunicationConsent`, `removeUserEmail`). Si un test d'intégration doit vérifier la persistance, utiliser le repository/l'EntityManager et l'identité métier, jamais le nom de table historique.
+
+### Routes, paramètres et clés FOS
+
+- `spec/Capco/AppBundle/GraphQL/Resolver/User/UserResettingPasswordUrlResolverSpec.php` attend la route `fos_user_resetting_reset` ;
+- `spec/Capco/AppBundle/GraphQL/Mutation/Profile/UpdateProfilePasswordMutationSpec.php`, le snapshot `features/graphql-api/internal/Mutation/__snapshots__/updateProfile.js.snap` et `cypress/e2e/frontOffice/user/profile.cy.ts` attendent des clés `fos_user.*` ;
+- `config/packages/test/services.yaml` injecte `%fos_user.firewall_name%` ;
+- les helpers Jest/Cypress utilisent `/login_check` et `/logout`, et Cypress vérifie directement le cookie `PHPSESSID`.
+
+Décision à prendre : `/login_check`, `/logout` et les URLs fonctionnelles peuvent être conservés comme contrats publics pendant la migration. En revanche, les noms de route `fos_user_*`, les paramètres `%fos_user.*%`, les clés de traduction `fos_user.*` et le nom `fos_user` de la table sont des détails d'implémentation à faire disparaître des tests.
+
+## Indépendance et fiabilité des suites
+
+### PHPUnit
+
+Bon profil lorsqu'un test instancie un service et vérifie une sortie ou un effet métier. Les tests d'anonymisation automatisée et les reconcilers vont dans la bonne direction.
+
+Risques :
+
+- mocks des interfaces FOS au lieu de ports applicatifs ;
+- SQL sur `fos_user` ;
+- nombreux tests d'intégration dépendant d'une base de fixtures globale ;
+- `RecalculateUsersCountersCommandTest` peut se marquer ignoré si aucune fixture adéquate n'est trouvée, ce qui masque une régression de fixture ou de comportement.
+
+### Jest GraphQL
+
+Le dossier `features/graphql-api` est bien une suite Jest, pas Behat. Les mutations importent le setup de restauration de base ; les queries sont supposées read-only et partagent une base restaurée une fois.
+
+Risques :
+
+- snapshots trop larges pour identifier l'invariant réellement protégé ;
+- sur le corpus inspecté, 98 fichiers sur 110 utilisent un snapshot, contre seulement 21 contenant au moins une assertion explicite de valeur ;
+- identifiants de fixtures et credentials globaux dans `jest-setup.e2e.js` ;
+- SQL direct sur `fos_user` ;
+- helpers d'authentification liés aux routes actuelles ;
+- une mutation qui écrit dans un test classé Query contaminerait les autres tests.
+
+Pour les contrats User, préférer des assertions explicites sur `errorCode`, état du compte et effets persistés, en gardant éventuellement un snapshot réduit pour la forme GraphQL.
+
+### Jest UI
+
+La couverture de rendu est large, notamment sous `frontend/js/components/User/` et `admin-next/shared/login|register`.
+
+Risques :
+
+- beaucoup de tests de snapshots/Enzyme qui valident la structure du composant plus que le comportement ;
+- les 94 candidats UI inspectés utilisent tous un snapshot et seuls 6 contiennent également une assertion explicite de valeur ou d'interaction Jest ;
+- peu de tests d'accessibilité et d'interaction sur les erreurs serveur ;
+- la CI legacy ne collecte que `frontend/**/*-test.tsx` : les fichiers `-test.ts`, notamment `frontend/js/redux/modules/user-test.ts`, ne sont pas inclus par le glob CircleCI actuel ;
+- les tests UI ne doivent pas devenir le seul endroit où sont encodées la complexité de mot de passe ou les transitions de compte.
+
+### Cypress
+
+Les scénarios sont utiles comme tests de contrat utilisateur. L'appel HTTP à `/login_check` peut rester un black box si cette route est volontairement stable.
+
+Problèmes constatés :
+
+- `cypress/e2e/frontOfficeWorkflow/proposalSelectionVoteWorkflow.cy.ts` contient un `it.only`, trois blocs/tests `skip` et plusieurs mutations SQL directes ;
+- `cypress/e2e/frontOfficeWorkflow/proposalCollectVoteWorkflow.cy.ts` contient cinq blocs/tests `skip` ;
+- `cypress/e2e/frontOffice/rgpd/rgpd.cy.ts` et `cypress/e2e/frontOffice/shield.cy.ts` n'appellent pas `db:restore`, contrairement à l'ADR frontend ;
+- les helpers valident le nom de cookie `PHPSESSID`, qui n'est pas un résultat fonctionnel ;
+- les workflows de plus de 1 000 lignes cumulent setup, réconciliation, exigences et ranking, ce qui rend les échecs difficiles à diagnostiquer.
+
+Action : supprimer les exclusivités, décider explicitement du sort de chaque test ignoré, découper les workflows par règle métier et déplacer les matrices algorithmiques vers PHPUnit. Cypress doit conserver quelques parcours représentatifs de bout en bout.
+
+### PHPSpec et Behat
+
+- PHPSpec est installé directement, compte 239 specs et est exécuté par le job CircleCI `unit-php` ;
+- aucun fichier `.feature` ni configuration Behat n'a été trouvé ;
+- `behat/behat` n'apparaît que comme dépendance transitive de PHPSpec dans `composer.lock`.
+
+La migration de PHPSpec doit donc être suivie de la suppression du job, de `phpspec/phpspec`, de `phpspec.yml`, des matchers spécifiques et de la dépendance transitive Behat.
+
+## Matrice de couverture cible
+
+Légende : **OK** = filet substantiel, **partiel** = happy path ou couche unique, **manquant** = pas de test de contrat identifié.
+
+| Contrat | Unitaire/service | API/intégration | E2E | État cible avant retrait FOS |
+|---|---|---|---|---|
+| Inscription locale | PHPSpec couplé | Jest GraphQL | Cypress | Partiel : migrer et compléter erreurs/atomicité |
+| Login/logout local | PHPSpec partiel | faible | Cypress | Partiel : ajouter matrice états de compte |
+| Confirmation d'adresse e-mail | PHPSpec couplé | Jest partiel | Cypress happy path | Partiel : invalidité, expiration, replay |
+| Changement d'adresse e-mail | PHPSpec couplé | Jest | Cypress | Partiel : collision et rollback |
+| Reset/changement de mot de passe | PHPSpec + Jest UI | faible | Cypress happy path | Manque backend du cycle des jetons |
+| Magic link | PHPSpec couplé | faible | Cypress via workflow | Manque contrôleur/mutation et replay |
+| User entity/invariants | quasi absent | indirect | indirect | **Manquant** |
+| Participant entity/invariants | absent | partiel | workflows | **Manquant** |
+| Réconciliation proposals/replies | PHPUnit | indirect | Cypress | Correct mais incomplet |
+| Réconciliation votes/contributions | absent | indirect | Cypress partiellement ignoré | **Manquant** |
+| OAuth/OpenID/FranceConnect | PHPUnit couplé à FOS | Jest config | faible | Bon socle, à découpler |
+| CAS | PHPSpec | Jest config | absent | Partiel, migrer |
+| SAML | absent | absent | absent | **Manquant** |
+| Groupes/types/rôles | PHPSpec + PHPUnit | Jest | Cypress | Partiel : invariants et refus |
+| Téléphone User | PHPSpec | Jest | workflows | Partiel, migrer |
+| Téléphone Participant | absent | indirect | workflows | **Manquant** |
+| Suppression/anonymization | PHPUnit + PHPSpec | Jest | Cypress | Bon socle, isoler UserAnonymizer |
+| Archive personnelle | PHPUnit | Jest | absent | Correct |
+| Notifications/consentements | partiel | Jest | Cypress partiel | Partiel |
+| Exports User/Participant | PHPUnit intégration | n/a | n/a | Correct, réduire couplage fixtures |
+| Profil public et contenu associé | PHPSpec/Jest UI | Jest queries | Cypress | Correct en lecture |
+
+## Plan de migration actualisé
+
+> Plan mis à jour le 30 septembre 2026 sur la branche `20284-users-phpspec-migration`.
+> L'inventaire et la matrice ci-dessus décrivent l'état initial du 25 septembre ; ils ne constituent pas un nouvel audit de la branche après migration.
+
+### Partie 1 — Migration du périmètre identité de PHPSpec vers PHPUnit — réalisée
+
+Les contrats existants du périmètre User/identité ont été déplacés vers PHPUnit : mutations de compte, confirmation, magic link, invitations, providers et handlers, autorisations, requirements et resolvers. Les specs sans contrat métier utile ont été supprimées.
+
+Cette partie fournit un socle PHPUnit : les mutations traversent désormais les vrais formulaires et services de compte par HTTP, et vérifient le hash et les effets SQL après rechargement. Elle ne comble pas à elle seule toutes les lacunes de caractérisation : `UserTest` reste limité aux contributions, et les parcours complémentaires de la partie 2 restent à couvrir.
+
+Le retrait global de PHPSpec reste distinct : des specs hors de ce périmètre subsistent, ainsi que la dépendance Composer et son exécution en CI.
+
+### Hygiène CI — à traiter rapidement en parallèle des parties suivantes
+
+1. Supprimer les exclusivités Cypress, notamment le `it.only` toujours présent dans le workflow de sélection, et ajouter une garde CI contre `it.only`, `describe.only`, `test.only` et leurs équivalents.
+2. Documenter le sort de chaque `.skip` des workflows User/Participant : réparer, remplacer par PHPUnit ou supprimer avec justification. La couverture de réconciliation à ajouter relève de la partie 3.
+3. Corriger le glob CircleCI Jest legacy pour exécuter aussi les fichiers `-test.ts`.
+4. Ajouter `db:restore` à `shield.cy.ts`; sortir `rgpd.cy.ts` du périmètre User si seuls les cookies sont visés, sinon l'isoler conformément à l'ADR frontend.
+5. Vérifier que la CI découvre et exécute effectivement les nouveaux tests de chaque partie.
+
+#### Revue après la décision PHPUnit du 2 octobre 2026
+
+Les 57 fichiers PHPUnit touchés par la partie 1 (53 classes de tests et quatre
+socles) ont été relus selon
+[`ADR/001-phpunit_tests.md`](ADR/001-phpunit_tests.md) et ses guides :
+
+- les règles de droits, l'activité, l'agrégation des contributions, l'encodage et la
+  sérialisation publique utilisent des objets métier réels ; les assertions de
+  câblage, les appels internes attendus et la réflexion ont été retirés ;
+- les contrôleurs et listeners, les mutations, les résolveurs dépendant de SQL et
+  les parcours de session passent par HTTP. Les effets sont relus après `clear()` ;
+- les liens de compte sont suivis par HTTP pour vérifier leur destination et leur
+  effet réel, au lieu d'attendre un appel au routeur ;
+- les erreurs de fournisseur, refus, limites et ressources voisines sont vérifiés.
+  La correspondance des statuts Mailjet/Mandrill reste un contrat unitaire sur un
+  message réel ; elle ne prétend pas prouver une persistance SQL ;
+- `IdentityWebTestCase`, `ResponseVisibilityWebTestCase` et `OAuthLogoutWebTestCase`
+  isolent SQL par transaction, restaurent les flags et l'environnement, et
+  remplacent les frontières externes (messagerie, mail et SSO/SMS).
+  La recherche des publications utilise de vrais documents Elasticsearch, indexés
+  pour la préparation puis supprimés et rafraîchis après chaque scénario.
+  L’indexation déclenchée par l’application reste neutralisée : ces tests ne la valident pas.
+  Les clés Redis de limitation et les CSV temporaires sont nettoyés explicitement.
+
+Les tests GraphQL PHPUnit protègent ici la persistance et la sélection réelle des
+identités, la confidentialité des réponses, les consentements et les sessions.
+Ils complètent les contrats API Jest existants pour ces risques d'intégration.
+Le contexte interne `disable_acl` reste testé par la méthode publique de la règle
+avec de vraies réponses. Le contrôle de type `supportsClass` du provider CAS et
+les getters/setters sans règle métier ne sont pas conservés comme contrats.
+
+Les scénarios SMS et de limitation construisent uniquement le service concerné
+avec un environnement fournisseur, car la production contourne ces comportements
+en environnement `test`. Le kernel HTTP reste en environnement de test et aucun
+appel réseau fournisseur n'est exécuté. Ce choix ne valide pas les services tiers.
+
+La revue complémentaire vérifie le filtre propriétaire, la recherche, le tri et
+la pagination des publications sans mock de `PostSearch`. Elle ajoute les refus
+sur un questionnaire voisin et la conservation d’un compte voisin pendant
+l’anonymisation. Les refus de confirmation et de suppression sont des scénarios
+indépendants ; les erreurs de mot de passe sont vérifiées par leur code explicite.
+La lecture d’une session inactive est couverte par son résultat public, sans
+assertion sur les appels de verrouillage Redis. Les doubles de lecture des
+fournisseurs sont des stubs ; seuls les effets externes observables restent mockés.
+Le nettoyage des CSV, des flags, de SQL et d’Elasticsearch fonctionne aussi en cas
+d’échec d’une assertion.
+
+Les fichiers sont marqués `compliant` après cette revue, sans promotion en référence.
+La découverte reste celle de `tests/**/*Test.php`, sans nouvelle exclusion.
+
+Validation de cette revue : les 235 scénarios concernés passent avec 2 627
+assertions en ordre aléatoire (seed `20284`). La suppression temporaire du filtre
+propriétaire fait échouer les deux scénarios de recherche attendus ; le code
+applicatif est restauré après cette vérification. PHPStan, PHP CS Fixer et Rector
+passent dans le conteneur applicatif.
+
+#### Revue complémentaire du 5 octobre 2026
+
+Le périmètre reste celui des 53 classes migrées et des quatre socles PHPUnit,
+identifiés par le diff de la branche avec `preprod`. Aucun fichier de test Jest
+n'est modifié par cette migration ; son ADR précise le choix de frontière pour
+les contrats GraphQL, dont les risques d'intégration distincts sont décrits ci-dessus.
+
+Les écarts résiduels corrigés concernent :
+
+- les variantes d'identité, de rôle d'organisation, d'affectation, de statut de
+  revue, de flag et de contexte ACL : des providers nommés fournissent uniquement
+  des valeurs, et chaque scénario crée ses propres objets métier ;
+- les sessions authentifiées : la connexion et les liens de confirmation,
+  d'archive et de magic link vérifient aussi l'identifiant du compte connecté ;
+- les refus de magic link : le statut, la destination et le message public
+  `invalid-token` sont explicites, en complément de l'absence de session ;
+- les payloads : l'identifiant de l'argument supprimé est vérifié selon le type
+  public `DebateArgument`, et le provider des réponses requises exprime le préfixe
+  d'erreur réellement attendu ;
+- l'isolation Redis : le socle conserve et restaure les objets de configuration
+  des flags, y compris leur absence ou leurs conditions, et supprime les sessions
+  créées par les requêtes, même après une assertion en échec.
+
+La découverte avec la configuration PHPUnit habituelle retrouve les 53 classes.
+Une suppression temporaire de l'identifiant d'argument dans le payload fait
+échouer le scénario concerné ; il passe de nouveau après restauration du code
+applicatif.
+
+Validation finale : 253 scénarios et 2 108 assertions passent en ordre aléatoire
+(seed `20285`). L'empreinte de la configuration Redis des flags est identique
+avant et après l'exécution, et aucune nouvelle session Redis de test ne subsiste.
+PHPStan, PHP CS Fixer et Rector passent dans le conteneur applicatif.
+
+#### Vérification de la préservation des contrats PHPSpec — 5 octobre 2026
+
+La comparaison avec les specs supprimées retrouve des contrats métier omis malgré
+les marqueurs `compliant`. Dix fichiers de tests sont complétés, sans modification
+du comportement applicatif :
+
+- refus d'un code SMS expiré et absence de confirmation persistée ;
+- collision d'adresse e-mail pour un compte FranceConnect sans mot de passe :
+  aucune création de mot de passe, aucun changement d'adresse ni message envoyé,
+  et conservation du compte possédant déjà l'adresse ;
+- droits du propriétaire d'un projet sur ses propositions et publications,
+  suppression d'une publication ou liste de diffusion par le créateur membre
+  de l'organisation, et protection des listes non supprimables ;
+- droits d'affectation des propriétaires, superviseurs et analystes, refus
+  d'évaluation par un utilisateur non affecté, et visibilité des événements
+  selon leur revue ;
+- réponses du profil visibles à l'auteur, à un autre compte ou à un visiteur
+  anonyme, avec rechargement de Doctrine avant la requête pour ne pas lire une
+  collection conservée en mémoire pendant la préparation ;
+- activation du compte à la confirmation, publication SQL des contributions
+  lors des deux types de confirmation, conservation des contributions d'un compte
+  voisin et refus d'un jeton Participant inconnu ;
+- autorisation d'anonymiser un autre super-administrateur pour un
+  super-administrateur, avec conservation du compte demandeur et de sa session ;
+- absence de lien de confirmation d'inscription après consommation du jeton.
+
+Les variantes utilisent des providers nommés contenant uniquement des valeurs.
+Les effets HTTP sont relus après `clear()` et les ressources restent prises en
+charge par les transactions et nettoyages existants. Les tests de publication
+vérifient SQL ; l'indexation applicative reste neutralisée comme décrit plus haut.
+
+Les suppressions sans remplacement de `CasHandlerSpec` et `CapebUserFilterSpec`
+sont justifiées : le premier ne conservait qu'un scénario actif d'initialisation ;
+le second appelait un client Guzzle simulé sans exercer `CapebUserFilter` ni
+vérifier de résultat métier.
+
+La persistance prématurée d'un mot de passe avant le refus d'une adresse
+FranceConnect a été introduite temporairement : le nouveau scénario échoue sur
+le mot de passe relu en base. Le code applicatif a ensuite été restauré.
+
+Validation : les 53 classes migrées sont découvertes par la configuration PHPUnit
+habituelle. Les 280 scénarios migrés et un scénario du contrôleur de confirmation
+voisin passent ensemble : 281 tests, 2 302 assertions, ordre aléatoire avec la seed
+`20290`. Le nouveau scénario FranceConnect passe également seul après restauration
+du code. PHPStan, PHP CS Fixer et Rector passent dans le conteneur applicatif.
+
+#### Seconde passe de préservation et d'isolation — 5 octobre 2026
+
+La comparaison complémentaire avec les specs supprimées et le contrôle du
+nettoyage font ressortir cinq corrections :
+
+- les commentaires connectés vérifient à nouveau l'auteur persisté, l'absence
+  de jeton de confirmation et le statut de modération, pour un compte ordinaire
+  et un administrateur ; les refus anonymes ne produisent ni commentaire ni message ;
+- l'envoi SMS accepte encore une tentative après un seul SMS récent et après
+  deux SMS anciens ; les SMS récents d'un compte voisin ne consomment pas la limite
+  du demandeur et restent conservés ;
+- le JSON de session conserve les indicateurs de rôle et l'organisation pour
+  six profils réels, ainsi qu'une date d'activité courante ; la lecture préserve
+  aussi une session encore active ;
+- le socle supprime désormais les sessions Redis enregistrées pendant la
+  préparation, avant toute réponse HTTP. Une sonde temporaire reproduit la fuite
+  avec `loginUser()`, puis confirme le nettoyage après correction, y compris
+  lorsqu'une assertion du scénario échoue ;
+- le rôle administrateur du test de recherche de réponse à un questionnaire
+  est explicitement persisté avant la connexion, sans dépendre d'un flush du login.
+
+Les providers contiennent uniquement des valeurs ; les commentaires et SMS sont
+relus en base après vidage de Doctrine. Aucun comportement applicatif n'est modifié.
+Une limite SMS temporairement ramenée de deux tentatives à une fait échouer le
+nouveau scénario de relance ; le code applicatif est ensuite rétabli. La sonde
+de nettoyage est retirée après la vérification.
+
+Validation : la configuration PHPUnit habituelle découvre les 53 classes et
+leurs 291 scénarios. Ils passent tous en ordre aléatoire (seed `20292`) :
+291 tests et 2 558 assertions. Les 26 scénarios de commentaire, SMS et session
+passent également dans une exécution ciblée (seed `20291`). PHPStan, PHP CS Fixer
+et Rector passent dans le conteneur applicatif ; `git diff --check` ne signale
+aucun défaut.
+
+#### Troisième passe des effets métier et des frontières externes — 5 octobre 2026
+
+Quatre points supplémentaires sont corrigés :
+
+- les scénarios de suppression distinguent désormais l'anonymisation du compte
+  de l'anonymisation avec effacement du contenu associé : suppression SQL du
+  contenu amovible, remplacement des textes d'une structure conservée, et maintien
+  du contenu d'un autre auteur. Les refus couvrent les deux types et vérifient
+  aussi l'identifiant du compte protégé dans le payload ;
+- le scénario de données personnelles sans `userId` de l'ancienne spec est
+  rétabli avec vérification SQL du nom et de l'e-mail, conservation du téléphone
+  confirmé et protection d'un compte voisin. La matrice ajoute le super-administrateur
+  modifiant ses propres données et vérifie le compte retourné ainsi que l'absence
+  de modification du demandeur lorsqu'il agit sur un autre compte ;
+- les doubles Mailjet et Mandrill vérifient à nouveau le message ciblé par la
+  requête et l'absence d'appel à l'autre fournisseur. Plusieurs identifiants
+  distincts évitent qu'un identifiant fixe passe inaperçu ; les statuts Mailjet
+  `opened` et `clicked` sont aussi distingués d'un échec. Les assertions portent
+  sur cette frontière externe et sur le statut métier, sans compter les appels
+  Doctrine ni prétendre vérifier la persistance SQL du notifier ;
+- une suppression `HARD` ajoutait encore l'identifiant du compte à la file Redis
+  `recalculate_user_counters` après le rollback SQL. Le socle enregistre les comptes
+  créés par son helper et retire uniquement ces membres lors du nettoyage, dans
+  un `finally`. Une sonde temporaire reproduit la fuite, puis vérifie le nettoyage
+  après une exécution normale et après un échec volontaire d'assertion, tout en
+  conservant un membre voisin. La sonde est ensuite retirée.
+
+Deux régressions sont introduites temporairement : exécuter le comportement
+`SOFT` pour une demande `HARD`, puis interroger un identifiant Mailjet fixe.
+Les tests renforcés échouent respectivement sur la présence du contenu en SQL
+et sur le message demandé au fournisseur. Le code applicatif est rétabli.
+
+Validation : les 23 scénarios ciblés passent seuls en ordre aléatoire (seed
+`20293`), puis les 53 classes migrées passent ensemble : 298 tests et 2 689
+assertions, seed `20294`. La configuration PHPUnit habituelle découvre ces 298
+scénarios. PHPStan, PHP CS Fixer et Rector passent dans le conteneur applicatif ;
+`git diff --check` ne signale aucun défaut.
+
+#### Quatrième passe des refus et de la discrimination — 5 octobre 2026
+
+Cette passe complète des matrices de refus qui restaient limitées au visiteur
+anonyme, même lorsque les scénarios PHPSpec nominaux étaient conservés :
+
+- les arguments et opinions de débat distinguent désormais un auteur, un compte
+  connecté sans droit et un administrateur. Le droit de supprimer un argument
+  n'autorise pas l'administrateur à le modifier ; la fermeture du débat bloque
+  aussi sa participation. Les attributs inconnus sont testés avec un sujet reconnu,
+  et les arguments anonymes ne supportent pas les actions de modification/suppression ;
+- les commentaires d'analyse autorisent l'analyste ayant rédigé l'analyse,
+  le superviseur et le décideur concernés, mais refusent un compte extérieur ou
+  un analyste simplement affecté à la proposition. Les identités réelles ont des
+  identifiants distincts pour ne pas dépendre de l'égalité d'objets non initialisés ;
+- les exigences de profil couvrent les valeurs absentes et vérifient un champ
+  JSON nommé, sans dépendre de l'ordre des champs. Un consentement explicitement
+  faux reste faux malgré l'existence de sa ligne SQL ; les consentements d'un autre
+  compte et ceux donnés à une autre exigence ne satisfont pas l'exigence demandée ;
+- les magic links malformés et les liens dont l'e-mail a été modifié sans refaire
+  la signature sont refusés par HTTP, avec la destination et le message publics
+  attendus, sans session authentifiée.
+
+Les providers contiennent uniquement des valeurs et les règles d'autorisation
+utilisent des objets métier réels. Trois régressions temporaires font échouer les
+nouveaux scénarios : accorder la modification d'un argument à un administrateur
+non auteur, supprimer la vérification de signature JWT, et assimiler une ligne
+de consentement à une acceptation indépendamment de sa valeur. Le code applicatif
+est ensuite rétabli.
+
+Validation : les 39 scénarios ciblés passent après restauration du code (seed
+`20295`). Les 53 classes migrées et leurs 315 scénarios sont découvertes par la
+configuration PHPUnit habituelle et passent ensemble en ordre aléatoire :
+315 tests et 2 826 assertions, seed `20296`. PHPStan, PHP CS Fixer et Rector
+passent dans le conteneur applicatif ; `git diff --check` ne signale aucun défaut.
+
+#### Cinquième passe des invitations, du téléphone et de CAS — 5 octobre 2026
+
+Cette passe renforce trois scénarios dont les seules données nominales pouvaient
+laisser passer une régression :
+
+- l'acceptation d'une invitation d'organisation vérifie la connexion automatique
+  du destinataire anonyme, le rôle membre ou administrateur enregistré en SQL,
+  et la conservation de la session du destinataire déjà connecté. Un autre compte
+  ou un jeton inconnu est refusé sans créer d'adhésion ; l'invitation voisine reste
+  disponible avec son rôle et son destinataire ;
+- la vérification du téléphone départage deux SMS du compte et un SMS plus récent
+  d'un autre compte, avec des dates fixes. Seul le dernier SMS du bon compte est
+  approuvé. Les erreurs conservent les statuts SQL initiaux et ne renvoient aucun
+  compte dans le payload ; le succès renvoie l'identité du compte vérifié. Le
+  téléphone et son état de confirmation restent inchangés pour le compte voisin,
+  y compris en cas de collision ;
+- l'authentification CAS couvre aussi un compte déjà rattaché dont le profil a
+  été modifié. Les deux requêtes authentifiées conservent son identité, son nom,
+  son adresse et son mot de passe persistés, sans doubler le compte ni l'adhésion
+  au groupe CAS. La première réponse HTTP identifie également le bon compte.
+
+Les contrôles SQL passent par des lectures après `EntityManager::clear()` ;
+les providers restent composés de valeurs. Les doubles remplacent uniquement
+les frontières externes, avec l'isolation SQL, Redis et des feature flags du socle
+existant. Aucun code applicatif permanent ni contrat Jest n'est modifié.
+
+Trois régressions temporaires font échouer les scénarios attendus : forcer le rôle
+d'organisation à `user`, sélectionner le SMS le plus ancien, et réinitialiser le
+profil d'un compte CAS existant. Le code applicatif est ensuite rétabli.
+
+Validation : les 13 scénarios ciblés passent en ordre aléatoire (seed `20297`).
+La configuration PHPUnit habituelle découvre les 53 classes migrées et leurs
+320 scénarios. Après restauration du code applicatif, ils passent ensemble en
+ordre aléatoire : 320 tests et 2 989 assertions, seed `20298`. PHPStan,
+PHP CS Fixer et Rector passent dans le conteneur applicatif ; `git diff --check`
+ne signale aucun défaut.
+
+### Partie 2 — Caractérisation du compte et de l'authentification locale — prochaine priorité
+
+**Objectif : remplacer FOSUserBundle en conservant les attentes fonctionnelles des tests du cycle de compte local.**
+
+#### 2.1 — Règles du compte
+
+Ajouter des tests PHPUnit ciblés sur les comportements réellement présents :
+
+- rôles par défaut, déduplication et règles de hiérarchie à leur couche effective ;
+- identité de sécurité et comportement des comptes désactivés, non confirmés, verrouillés, supprimés ou anonymisés, selon les états effectivement utilisés ;
+- canonicalisation de l'adresse e-mail et du nom d'utilisateur, notamment les collisions après normalisation ;
+- transitions de confirmation et cycle de vie des jetons de compte.
+
+Placer les tests à la couche qui porte la règle : entité pour un invariant local, service ou intégration pour la canonicalisation, l'authentification ou la persistance. Distinguer les comportements existants à préserver des comportements souhaités mais absents ; ne pas modifier implicitement les règles produit pour satisfaire une nouvelle matrice.
+
+#### 2.2 — Parcours fonctionnels backend
+
+Ajouter des tests HTTP/GraphQL traversant les vrais formulaires, services de compte et mécanismes de persistance pour :
+
+- inscription → confirmation d'adresse e-mail → connexion → déconnexion ;
+- changement et réinitialisation du mot de passe ;
+- changement d'adresse e-mail ;
+- demande et utilisation d'un magic link.
+
+Vérifier explicitement les réponses HTTP/GraphQL, les codes d'erreur, l'état persisté et la possibilité effective de se connecter avec les nouveaux credentials. Pour la déconnexion, vérifier la perte d'accès authentifié plutôt que le nom du cookie de session.
+
+Prioriser les cas de refus : collision d'adresse e-mail, mauvais mot de passe actuel, validation serveur du nouveau mot de passe, jeton invalide, expiré ou réutilisé, et états de compte empêchant l'accès. Caractériser également la rotation des jetons, les limites de demandes, les réponses aux adresses inconnues et l'invalidation des sessions lorsqu'elles existent. Toute absence d'un comportement attendu doit être signalée et faire l'objet d'une décision séparée.
+
+#### 2.3 — Indépendance et exécution du filet de tests
+
+- Préparer les données via les objets, repositories ou helpers exprimant une intention métier ; éviter le SQL direct sur `fos_user`.
+- Utiliser des assertions explicites sur les résultats et effets persistés, avec des snapshots réduits seulement s'ils apportent un contrat de forme utile.
+- Ne pas importer ni mocker FOS dans les nouveaux tests. Réduire les dépendances historiques sur ce périmètre quand cela ne nécessite pas de refonte de production.
+- Conserver les URL publiques, telles que `/login_check` et `/logout`, si leur stabilité est un contrat choisi ; éviter de figer les noms de routes internes FOS.
+- Exécuter ce filet avec FOS avant son remplacement et vérifier sa découverte en CI.
+
+Ne pas créer d'emblée une famille d'interfaces `AccountManager`, `AccountPasswordHasher`, `AccountTokenGenerator` ou `AccountAuthenticator` pour écrire ces tests. Les tests fonctionnels fournissent le premier garde-fou ; les interfaces nécessaires seront introduites lors du remplacement, là où le couplage le justifie.
+
+**Critères de sortie de la partie 2 :** les parcours locaux ci-dessus et leurs principaux refus sont protégés par des assertions fonctionnelles explicites ; les tests exercent la validation, le hash et la persistance réels ; les lacunes de comportement découvertes sont documentées ; la CI exécute le filet. Le remplacement de FOS doit ensuite pouvoir rejouer ces tests sans changer leurs attentes fonctionnelles.
+
+### Partie 3 — Participant et réconciliation
+
+Ajouter les tests unitaires de `Participant`, `ContributionsReconcilier` et `VotesReconcilier`. Couvrir les conflits entre identités, l'idempotence, les limites/budget/ranking et l'absence de perte de contenu associé. Compléter les codes d'erreur des mutations Participant, notamment suppression et vérification du téléphone.
+
+Réduire ensuite les gros scénarios Cypress à quelques parcours représentatifs, avec une décision explicite pour les cas ignorés et une préparation indépendante du schéma SQL historique.
+
+### Partie 4 — SSO
+
+Découpler les tests OAuth des interfaces FOS, compléter les contrats CAS et ajouter SAML ainsi que les callbacks complets. Utiliser des réponses fournisseur figées et vérifier le compte créé ou rattaché, la session et la redirection, y compris les collisions d'adresse e-mail et les refus du fournisseur.
+
+La migration des specs CAS/handlers du périmètre identité appartient déjà à la partie 1 ; cette partie vise leur couverture manquante et leur indépendance au vendor.
+
+### Partie 5 — Découplage résiduel et nettoyage final
+
+1. Éliminer les dépendances résiduelles des tests à `FOS\UserBundle`, au SQL sur `fos_user`, aux paramètres et aux noms de routes/clés internes FOS. Les dépendances imposées par la production seront traitées avec les adaptations correspondantes lors du remplacement.
+2. Achever séparément la migration des specs hors du périmètre identité avant de supprimer `spec/`, `phpspec.yml`, les matchers PHPSpec, l'exécution PHPSpec en CI et les dépendances Composer correspondantes. Préserver le job PHPUnit s'il partage le même job CI.
+3. Exécuter les suites PHPUnit, Jest GraphQL, Jest UI et Cypress User/Participant comme quality gate de la PR de retrait de FOS.
+
+## Critères de sortie avant la PR de suppression de FOSUserBundle
+
+- aucun `.only` et aucun `.skip` non documenté sur le périmètre ;
+- aucun import ou mock FOS dans les tests ;
+- aucun SQL de test sur `fos_user` ;
+- aucune attente sur une route, un paramètre ou une clé de traduction FOS ;
+- tous les contrats PHPSpec utiles migrés vers PHPUnit ;
+- matrice locale complète : inscription, confirmation, login/logout, password reset/change, magic link et états du compte ;
+- matrice SSO minimale complète pour chaque fournisseur activé ;
+- `User`, `Participant` et les reconcilers caractérisés au niveau domaine/service ;
+- mutations GraphQL User/Participant couvertes par leurs sorties et codes d'erreur ;
+- parcours Cypress courts et représentatifs, avec base restaurée et sans dépendance au schéma SQL historique ;
+- CI exécutant réellement les fichiers PHPUnit/Jest/Cypress concernés.
+
+## Index des emplacements retenus
+
+Cet index complète la carte fonctionnelle ci-dessus. Un snapshot appartient au même contrat que son fichier de test parent. Les tests qui utilisent seulement `loginAs`/`directLoginAs` pour préparer une autre fonctionnalité ne sont pas inclus.
+
+### PHPUnit
+
+- authentification fédérée : `tests/Authentication/**`, `tests/Controller/Site/SSOControllerTest.php`, `tests/EventListener/FranceConnectLogoutSubscriberTest.php`, `tests/EventListener/OpenIdCallbackTargetPathSubscriberTest.php` ;
+- cycle du compte : `tests/Command/AnonymizeUsersAutomatedCommandTest.php`, `DeleteUserArchiveCommandTest.php`, `RemindUserAccountConfirmation*Test.php`, `tests/Mutation/AnonymizeAccountByEmailMutationTest.php`, `RemoveSsoConnectionMutationTest.php` ;
+- User/Participant et sorties : `tests/Command/Export*ParticipantsCommandTest.php`, `ExportUsersCommandTest.php`, `ExportUserGroupsCommandTest.php`, `RecalculateUsersCountersCommandTest.php`, `tests/Normalizer/ParticipantNormalizerTest.php`, `tests/Normalizer/Debate/*Participant*Test.php` ;
+- résolution et autorisation : `tests/GraphQL/Resolver/Query/QueryUsersResolverTest.php`, `tests/GraphQL/Resolver/User/**`, `tests/GraphQL/Resolver/Proposal/ProposalAuthorEmailResolverTest.php`, `tests/Service/GroupServiceTest.php`, `ParticipantAccessResolverTest.php`, `ProjectContributorSearchTest.php` ;
+- passage Participant → User : `tests/Service/ProposalReconcillierTest.php`, `ReplyReconcilierTest.php`, `tests/Mutation/SendParticipantEmailWorkflowMutationTest.php` ;
+- invitations, archives et messages de compte : `tests/Processor/User/**`, `tests/Processor/UserArchive/**`, `tests/Processor/UserInvite/**` ;
+- tokens/API et session : `tests/Command/CreatePublicApiTokenCommandTest.php`, `tests/PublicApi/PublicApiKeyAuthenticatorTest.php`, `tests/UserBundle/Security/**` ;
+- adjacents à revalider : `tests/EmailingCampaignRecipients/EmailingCampaignRecipientsTest.php` et les processors/notifiers qui différencient destinataire enregistré, Participant ou anonyme.
+
+### PHPSpec à migrer
+
+- tout `spec/Capco/UserBundle/**` ;
+- mutations de compte : `RegisterMutationSpec.php`, `DeleteAccountMutationSpec.php`, `UpdateProfileAccountEmailMutationSpec.php`, `UpdateProfilePersonalDataMutationSpec.php`, `Profile/UpdateProfilePasswordMutationSpec.php`, `Sms/SendSmsPhoneValidationCodeMutationSpec.php`, `Sms/VerifyUserPhoneNumberMutationSpec.php` ;
+- identité anonyme/Participant : `Encoder/DebateAnonymousParticipationHashEncoderSpec.php`, `Mutation/Debate/RemoveDebateAnonymousVoteMutationSpec.php`, `Mutation/UpdateUserReplyMutationSpec.php`, `Resolver/EventParticipant/IsViewerParticipatingAtEventResolverSpec.php` ;
+- resolvers User : tout `spec/Capco/AppBundle/GraphQL/Resolver/User/**`, plus `UserIsGrantedResolverSpec.php`, `Questionnaire/UserHasReplyResolverSpec.php`, `Requirement/*Viewer*Spec.php` et les resolvers `*Viewer*` dont le résultat dépend de l'identité ;
+- autorisations : `spec/Capco/AppBundle/Security/*VoterSpec.php`, `CanSetOwnerSpec.php`, `GraphQL/Resolver/Ownerable/OwnerableCreatorAccessResolverSpec.php` ;
+- invitations et activité : `Notifier/UserInviteEmailMessageNotifierSpec.php`, `Model/UserActivitySpec.php`, `EventListener/AuthenticationHandlerSpec.php`, `EventListener/EmptyUsernameListenerSpec.php` ;
+- dépendances FOS adjacentes déjà listées : `AddCommentMutationSpec.php`, `ProposalResponsesResolverSpec.php`, `ReplyResponsesResolverSpec.php`, `ImportProposalsFromCsvSpec.php` et `OrganizationControllerSpec.php`.
+
+### Jest GraphQL
+
+- mutations : `internal/Mutation/Account/**`, `AnonymousReply/**`, `Authentication/**`, `Group/**`, `Organization/*Invitation*`, `User/**`, `UserIdentification/**`, `UserIdentificationCodeList/**`, `UserNotificationConfiguration/**`, `UserType/**`, `Sso/**`, ainsi que `cancelEmailChange.js`, `cancelUserInvitations.js`, `inviteUsers.js`, `updateParticipant.js`, `updateProfile.js`, `updateUser.js`, `verifyUserPhoneNumber.js`, `Other/register.js`, `Other/requestUserArchive.js` et `Other/update/updateProfile*.js` ;
+- identité anonyme : les mutations `internal/Mutation/Debate/*Anonymous*` et leurs confirmations par e-mail ;
+- queries : `internal/Query/User/**`, `internal/Query/Participant/**`, `internal/Query/Group/**`, `Query_participantPersonalData.js`, `Query_participants.js`, `Query_eventParticipantPersonalData.js`, `Query_ssoConfigurations.js`, `Query_userInvitations*.js`, `Query_userTypes.js` ;
+- API publique : `public/Mutation/deleteAccountByEmail.js`, `public/Query/Query_users.js`, `Query_viewer.js`, `Query_notificationsFromEmail.js` et `public/Query/User/**` ;
+- contrats liés à la participation : queries `*userHasVote*`, `*userHasReply*`, `*viewer*`, `*requirements*`, ainsi que les mutations Mediator qui préparent un User avec téléphone vérifié.
+
+### Jest UI
+
+- tout `frontend/js/components/User/**/*-test.tsx` et `frontend/js/redux/modules/user-test.ts` ;
+- tout `admin-next/shared/login/*-test.tsx` et `admin-next/shared/register/*-test.tsx` ;
+- administration de l'inscription : `frontend/js/components/Admin/Registration*-test.tsx` ;
+- SSO et inscription à un événement : `frontend/js/components/Page/SSOSwitchUserPage-test.tsx`, `frontend/js/components/Event/UserRegister/UserRegister-test.tsx` ;
+- groupes et sélection de User : `Project/Page/UserGroupModal-test.tsx`, `UserInGroupModal-test.tsx`, `Form/SelectUserList-test.tsx`, `Tag/TagUser/TagUser-test.tsx` ;
+- exigences et Participant : `Requirements/RequirementsFormLegacy-test.tsx`, `Admin/Project/ProjectAdminParticipantTab/**` ;
+- vues de contenu rattaché au profil : tests `*Profile*`, `*UserVote*`, `*Author*` uniquement lorsqu'ils vérifient la visibilité ou les droits liés à l'identité.
+
+### Cypress
+
+- compte et profil : `frontOffice/user/{account,emailConfirmation,login,profile,sso,user}.cy.ts`, `frontOffice/userProfile/userProfile.cy.ts`, `backOffice/user/userBO.cy.ts` ;
+- invitations/groupes/types : `backOffice/invitation/userInvite.cy.ts`, `frontOffice/invitation/*.cy.ts`, `backOffice/userGroup/*.cy.ts`, `backOffice/userType/userType.cy.ts` ;
+- Participant et réconciliation : `frontOfficeWorkflow/*.cy.ts`, `frontOffice/debate/{anonymousVote,voteToken}.cy.ts`, `frontOffice/event/eventRegistration.cy.ts` ;
+- règles d'accès/compte : `frontOffice/shield.cy.ts`, `frontOffice/publicPages/tokenRoutes.cy.ts` et les cas d'identité de `frontOffice/questionnaire/questionnaireLoggedInAsUser.cy.ts` ;
+- `frontOffice/rgpd/rgpd.cy.ts` est adjacent : il teste le consentement cookie du navigateur, pas le consentement persistant du User.
+
+## Commandes de contrôle recommandées
+
+```bash
+# Toute dépendance directe résiduelle à FOS dans les tests
+rg -n 'FOS\\UserBundle|FOSUserBundle|fos_user|%fos_user\.|fos_user_|fos_user\.' \
+  tests spec features cypress frontend admin-next config/packages/test
+
+# Tests focalisés ou ignorés
+rg -n '\b(describe|context|it|test)\.(only|skip)\b|\b(xdescribe|xit|xtest)\b|markTestSkipped' \
+  tests spec features cypress frontend admin-next
+
+# Frameworks non cibles
+find spec -type f -name '*Spec.php'
+find . -type f -name '*.feature' -not -path './vendor/*' -not -path './node_modules/*'
+```
+
+Cet audit est volontairement orienté vers les contrats à préserver. Il ne recommande pas de figer les namespaces, le nom de table, les routes internes ou les classes de FOSUserBundle : ce sont précisément les détails que la migration doit pouvoir remplacer.

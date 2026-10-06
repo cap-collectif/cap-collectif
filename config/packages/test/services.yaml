@@ -27,6 +27,22 @@ services:
         autoconfigure: true
         public: true
 
+    # Keep SMS and CAS services replaceable before their consumers are instantiated.
+    # Redefinitions must retain scalar arguments that cannot be autowired.
+    Capco\AppBundle\Fetcher\SmsProviderFetcher:
+        public: true
+        arguments:
+            $smsProvider: '%sms_provider%'
+
+    # Separate preparation indexer: HTTP tests disable application indexation.
+    test.identity_search_indexer:
+        class: Capco\AppBundle\Elasticsearch\Indexer
+
+    Capco\UserBundle\Handler\CasHandler:
+        public: true
+        arguments:
+            $environment: '%kernel.environment%'
+
     # We disable captcha validation
     Capco\AppBundle\Validator\Constraints\CaptchaValidator:
         autowire: true
