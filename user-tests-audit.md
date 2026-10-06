@@ -701,7 +701,7 @@ ordre aléatoire : 320 tests et 2 989 assertions, seed `20298`. PHPStan,
 PHP CS Fixer et Rector passent dans le conteneur applicatif ; `git diff --check`
 ne signale aucun défaut.
 
-### Partie 2 — Caractérisation du compte et de l'authentification locale — prochaine priorité
+### Partie 2 — Caractérisation du compte et de l'authentification locale — réalisée
 
 **Objectif : remplacer FOSUserBundle en conservant les attentes fonctionnelles des tests du cycle de compte local.**
 
@@ -758,6 +758,105 @@ La migration des specs CAS/handlers du périmètre identité appartient déjà �
 1. Éliminer les dépendances résiduelles des tests à `FOS\UserBundle`, au SQL sur `fos_user`, aux paramètres et aux noms de routes/clés internes FOS. Les dépendances imposées par la production seront traitées avec les adaptations correspondantes lors du remplacement.
 2. Achever séparément la migration des specs hors du périmètre identité avant de supprimer `spec/`, `phpspec.yml`, les matchers PHPSpec, l'exécution PHPSpec en CI et les dépendances Composer correspondantes. Préserver le job PHPUnit s'il partage le même job CI.
 3. Exécuter les suites PHPUnit, Jest GraphQL, Jest UI et Cypress User/Participant comme quality gate de la PR de retrait de FOS.
+
+## Résultats de la partie 2 — 30 septembre 2026
+
+La branche `20284-users-local-auth-tests` ajoute six suites concrètes dans `tests/UserBundle/Functional` et complète `tests/UserBundle/Entity/UserTest.php`. Les suites HTTP/GraphQL traversent le kernel Symfony et utilisent les vrais formulaires, validateurs, gestionnaire de comptes, hash, persistance et sécurité de session. Les sorties mail, messages et indexation sont remplacées ; les clés RSA du magic link sont générées pour le test.
+
+Les tests couvrent les parcours locaux du plan, leurs refus, la canonicalisation, la hiérarchie des rôles, la consommation/rotation des jetons de confirmation et de changement d'e-mail, ainsi que deux sessions distinctes. Ils ne contiennent ni import/double FOS, ni SQL sur la table historique, ni attente sur un nom de cookie. Le refus de changement de mot de passe vérifie désormais le code d’erreur public `fos_user.password.not_current`, actuellement renvoyé par l’API pour les deux erreurs de validation ; une migration qui change ce contrat devra adapter cette assertion.
+
+Chaque test web utilise une transaction annulée en teardown, avec vérification que toutes les requêtes restent dans cette transaction, et restaure les feature flags modifiés. La suite d'inscription rend les questions personnalisées existantes facultatives dans sa transaction pour isoler le contrat de compte. Le détail du setup et des frontières se trouve dans `tests/UserBundle/Functional/README.md`.
+
+### Comportements observés nécessitant une décision séparée
+
+Ces résultats décrivent le comportement actuel. Les tests nommés `CharacterizationGap` servent à le rendre visible pendant la migration ; **ils ne font pas de ces lacunes des exigences produit à conserver indéfiniment**. Aucune correction de production n'est incluse dans cette partie.
+
+| Observation vérifiée | Conséquence pour la suite de la migration |
+|---|---|
+| L'inscription refuse un mot de passe vide/trop court, mais accepte des mots de passe sans chiffre, sans majuscule ou sans minuscule. | Décider d'appliquer réellement la complexité à l'inscription ; son groupe de validation actuel diffère de celui du changement/reset. |
+| La connexion locale accepte les comptes désactivés et verrouillés avec une session utilisable. | Décider et harmoniser les contrôles d'état du compte. |
+| Un compte non confirmé reçoit HTTP 200 avec `success: false`, et reste anonyme. Un compte portant seulement le marqueur supprimé reçoit `success: true`, mais sa session est rejetée à la requête suivante. | Préserver la distinction entre statut HTTP, résultat de connexion et accès effectif ; décider si la réponse du compte supprimé doit évoluer. |
+| Le contrôleur HTTP refuse un jeton de reset expiré, mais la mutation GraphQL l'accepte. | Harmoniser le contrôle d'expiration entre les deux points d'entrée. |
+| Les resets HTTP et GraphQL conservent le jeton, qui peut être rejoué. Une demande après expiration réutilise également le jeton existant. | Décider de la consommation et de la rotation des jetons de reset. |
+| Un jeton de confirmation d'e-mail reste utilisable un an après l'envoi. Il est consommé après confirmation. | Décider d'une durée de validité pour la confirmation, distincte de la consommation déjà présente. |
+| Le magic link rejette une signature invalide et un jeton expiré, mais un lien valide reste rejouable après déconnexion. Il permet aussi une session pour les comptes désactivés, verrouillés ou non confirmés. | Décider de l'usage unique et des contrôles d'état du compte sur ce parcours. |
+| Une seconde session reste authentifiée après changement du mot de passe. L'account anonymization invalide cette session et empêche une nouvelle connexion avec l'ancienne adresse. | Décider de la révocation des sessions lors du changement/reset de mot de passe. |
+| La canonicalisation du gestionnaire transforme la casse, mais conserve les espaces des valeurs fournies directement au modèle. | Ne pas confondre canonicalisation et nettoyage effectué par les formulaires. |
+
+Les demandes de reset pour une adresse connue/inconnue ont la même redirection publique ; le renvoi immédiat du reset n'envoie pas de nouveau mail. La demande de magic link pour une adresse inconnue renvoie le même `errorCode: null` sans publication ni création de compte. Le changement d'e-mail conserve l'ancienne adresse jusqu'à confirmation, remplace le jeton lors d'une nouvelle demande et consomme le jeton confirmé.
+
+### Validation et découverte CI
+
+Validation locale historique du commit `41916055f3` : **55 tests / 975 assertions** dans les nouvelles suites, avec rejeu en ordre aléatoire (seed `20260930`), et **32 tests / 122 assertions** dans les suites existantes directement concernées, dont les invariants `User`. PHPStan, PHP-CS-Fixer en dry-run et Rector en dry-run sont validés sur les fichiers PHP ajoutés/modifiés. Les trois commandes globales exigées par `AGENTS.md` avant un commit PHP ont également été exécutées avec succès dans `capco_application_1`.
+
+```bash
+# Suite du cycle local ; à rejouer pour vérifier l'isolation
+docker exec -w /var/www capco_application_1 bin/phpunit tests/UserBundle/Functional
+
+# Rejeu dans un ordre différent
+docker exec -w /var/www capco_application_1 bin/phpunit tests/UserBundle/Functional --order-by=random --random-order-seed=20260930
+
+# Suites existantes directement concernées (inclut les invariants User)
+docker exec -w /var/www capco_application_1 bin/phpunit tests --filter '(RegisterMutationTest|UpdateProfilePasswordMutationTest|UpdateProfileAccountEmailMutationTest|ConfirmationControllerTest|MagicLinkAuthenticatorTest|UserInvitationHandlerTest|AuthenticationHandlerTest|UserTest)::'
+
+# Invariants du modèle seuls
+docker exec -w /var/www capco_application_1 bin/phpunit tests/UserBundle/Entity/UserTest.php
+
+# Analyse des fichiers ajoutés/modifiés
+docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/phpstan analyse tests/UserBundle/Functional tests/UserBundle/Entity/UserTest.php tests/Mutation/RegisterMutationTest.php tests/Mutation/UpdateProfileAccountEmailMutationTest.php --no-progress
+docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php --path-mode=intersection tests/UserBundle/Functional tests/UserBundle/Entity/UserTest.php tests/Mutation/RegisterMutationTest.php tests/Mutation/UpdateProfileAccountEmailMutationTest.php
+docker exec -w /var/www capco_application_1 bin/rector process tests/UserBundle/Functional tests/UserBundle/Entity/UserTest.php tests/Mutation/RegisterMutationTest.php tests/Mutation/UpdateProfileAccountEmailMutationTest.php --dry-run
+```
+
+Le glob CircleCI existant `tests/**/*Test.php` inclut les six nouvelles classes concrètes, et la suite PHPUnit `default` inclut leur dossier. Aucun changement CI n'est nécessaire à leur découverte. Cela vérifie la configuration de découverte, pas le résultat d'une exécution CI distante.
+
+## Mise en conformité de la partie 2 — 5 octobre 2026
+
+Revue de tous les changements du commit `41916055f3` selon les ADR PHPUnit/Jest et les guides de `docs/tests`. Les invariants publics de `UserTest` sont conservés : objets réels, identité de sécurité, unicité des rôles et règle de confirmation ; aucune réflexion ni assertion de câblage n'est nécessaire.
+
+Corrections des suites fonctionnelles :
+
+- remplacement de l'inspection du service de hiérarchie Symfony par des requêtes HTTP autorisées/refusées pour les rôles utilisateur, médiateur, administrateur de projet, administrateur et super administrateur ;
+- remplacement du graphe de mocks de la mutation magic link par deux requêtes GraphQL réelles, un compte persisté et un limiteur réel avec cache isolé ; vérification du code de refus, de l'absence de nouvelle publication et du timestamp rechargé ;
+- suppression des assertions sur les appels internes au cache ; l'expiration et le bypass sont vérifiés par les décisions et exceptions publiques des limiteurs ;
+- erreurs d'inscription explicites par variante et vérifications ciblées des comptes après `EntityManager::clear()`, sans dépendance au nombre global de fixtures ; refus de changement d'e-mail séparés par data provider, avec contrôle du compte voisin ;
+- accès authentifié vérifiant l'identité attendue, et anonymisation de la seconde session déclenchée par la mutation publique `deleteAccount` ;
+- dates expirées fixes et résultats de canonicalisation écrits explicitement ;
+- contrôle de l'environnement `test` avant les écritures, nettoyage des sessions Redis propres au scénario et restauration des flags/configuration même après échec ;
+- conservation des diagnostics de tous niveaux dans le fichier de log du kernel au lieu du seuil global `EMERGENCY`.
+
+Les scénarios mixtes GraphQL/HTTP restent en PHPUnit pour vérifier le lien entre mutations de compte, credentials et sessions sur la même connexion transactionnelle. Le README précise ce risque distinct et réserve les futurs contrats GraphQL autonomes au runner Jest existant. Aucune nouvelle duplication de parcours Jest n'est ajoutée.
+
+Deux limites du contrat d'erreur actuel sont rendues explicites : le refus d'un mot de passe trop court à l'inscription expose `errorsCode: []`, et les deux refus de changement du mot de passe exposent un message opaque commun sans code métier stable. Les assertions vérifient aussi l'absence des effets interdits ; aucune correction produit n'est incluse.
+
+Validation de la mise en conformité : **60 tests / 1 216 assertions** en ordre aléatoire (seed `20261005`), **39 tests / 514 assertions** dans les suites existantes directement concernées (commande de filtre ci-dessus), et limiteurs exécutés seuls (**4 tests / 11 assertions**). PHPStan, PHP-CS-Fixer en dry-run et Rector en dry-run passent sur `tests/UserBundle/Functional` et `tests/UserBundle/Entity/UserTest.php`. Une mutation temporaire de la borne du limiteur (`<` remplacé par `<=`) provoque bien l'échec de son test public ; le fichier de production a été restauré à l'identique. Le glob CircleCI et la découverte PHPUnit sont préservés ; aucune exécution CI distante n'est revendiquée. Les contrôles globaux pré-commit cités plus haut restent les résultats historiques du commit initial ; cette correction est laissée dans le working tree.
+
+### Revue complémentaire de la mise en conformité
+
+La branche contient désormais le commit réécrit `c4b3f09dbd` correspondant au travail initial de `41916055f3`. La revue complémentaire conserve les corrections déjà présentes et renforce les points suivants :
+
+- restauration de la configuration complète des feature flags, avec leurs conditions et leur éventuelle absence initiale, plutôt que du seul booléen actif ;
+- contrôle de la transaction après chaque requête, en plus du teardown ;
+- expiration du limiteur provoquée par son API publique, sans préparer une clé de cache interne ;
+- refus de reset séparés en cas nommés, avec comparaison du hash, du jeton et du timestamp relus en base avant et après l'action ; refus HTTP du jeton inconnu conservé dans un scénario distinct ;
+- identité précise vérifiée pour la seconde session et les magic links ; absence de modification de l'adresse en attente, du jeton et du timestamp vérifiée lors des refus de confirmation et de renvoi.
+
+Validation complémentaire : **62 tests / 1 146 assertions** dans la suite fonctionnelle en ordre aléatoire (seed `20261005`), **39 tests / 514 assertions** dans les suites existantes directement concernées, et **4 tests / 11 assertions** pour les limiteurs seuls. PHPStan, PHP-CS-Fixer en dry-run et Rector en dry-run passent sur la suite fonctionnelle et `UserTest`. Une mutation temporaire qui ignore la durée demandée au limiteur fait échouer le scénario d'expiration ; le fichier de production est restauré à l'identique.
+
+Les suites utilisant les mêmes flags Redis doivent être exécutées séquentiellement : un lancement simultané a provoqué des refus incohérents, puis le rejeu séparé a validé les deux suites. Le README documente cette contrainte. Les résultats ci-dessus viennent du rejeu séparé, pas de cette exécution concurrente. Ces dernières corrections restent non commitées ; les contrôles PHP globaux avant commit restent à exécuter si un commit est demandé.
+
+## Mise en conformité du commit `0a93ca9887` — 6 octobre 2026
+
+Le périmètre reste limité aux tests touchés par ce commit et à leur documentation :
+
+- suppression des annotations `@coversNothing` et ajout des statuts `compliant` motivés ;
+- canonicalisation persistée vérifiée depuis l’inscription, la confirmation HTTP et la connexion ; conservation des espaces vérifiée séparément via l’API publique du canonicalizer, sans kernel ;
+- rôles par défaut et dupliqués vérifiés par leurs conséquences sur l’accès HTTP à l’administration, plutôt que par les méthodes héritées de FOS ;
+- refus vérifiés par leur code public et les effets interdits, confirmation invalide contrôlée après relecture du jeton et de la date en base ;
+- publication du message de changement de mot de passe vérifiée, doubles sans attente d’interaction remplacés par des stubs ;
+- date de suppression fixe et timestamp de reset borné par le début et la fin de la requête.
+
+Validation ciblée : **63 tests / 1 216 assertions** en ordre aléatoire (seed `20284`), **6 tests / 16 assertions** dans `UserTest`. PHPStan, PHP-CS-Fixer et Rector passent sur ces fichiers. Une mutation du canonicalizer chargée uniquement en mémoire, ajoutant un `trim()`, fait échouer les deux cas de conservation des espaces ; aucun fichier de production n’est modifié. Les scénarios `CharacterizationGap` sont conservés sans modifier les règles produit. Les contrôles PHP globaux avant commit restent à exécuter si un commit est demandé.
 
 ## Critères de sortie avant la PR de suppression de FOSUserBundle
 
