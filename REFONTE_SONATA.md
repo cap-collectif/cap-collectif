@@ -330,15 +330,55 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     (re)générer des snapshots ou d'enchaîner des runs Cypress : `pipenv run fab local.database.generate` pour
     repartir des fixtures. Le champ `translations` est renvoyé dans l'ordre de la base, non déterministe pour
     des lignes fraîchement insérées : trier par `locale` dans le test avant `toMatchSnapshot()`.
-  - **Cypress en local sur une page admin-next protégée par un feature flag** : `withFeatureFlagRequired` lit
-    les flags dans Redis côté Next.js avec le préfixe `SYMFONY_REDIS_PREFIX` du conteneur `capco_nextjs_1`
-    (`dev`), alors que `cy.task('enable:feature', ...)` active le flag de l'environnement **test** (namespace
-    `testfeature_toggle`, voir `config/packages/test/quandidate_toggle.yaml`). En local, la redirection SSR
-    dépend donc du flag **dev** (`bin/console capco:toggle:enable <flag>` sans `--env`), et le test « redirige
-    vers Sonata quand la migration est désactivée » ne peut pas passer tant que le flag dev est actif — en CI
-    les deux préfixes coïncident et le spec complet passe. Le run Cypress refuse aussi de démarrer depuis un
-    terminal VS Code si `ELECTRON_RUN_AS_NODE=1` est hérité (`bad option: --no-sandbox`) : lancer
-    `env -u ELECTRON_RUN_AS_NODE yarn cy:run ...`.
+  - **Cypress en local + feature flag Redis (`unstable__sonata_migration_to_admin_next`, `multilangue`...) —
+    deux bugs distincts corrigés lors de la refonte `pages.cookies`, tous deux causés par la même racine :
+    `capco.dev` et `capco.test` sont deux hostnames proxifiés vers le(s) même(s) process (PHP-FPM d'un côté,
+    l'unique `next dev` de l'autre), donc aucune variable d'environnement statique fixée une fois au démarrage
+    du process ne peut à elle seule distinguer une requête `capco.dev` d'une requête `capco.test` — il faut
+    une résolution dynamique, par requête.**
+    - **Symptôme 1 (mutation GraphQL, backend PHP)** : une mutation `updateXSetting` (Cypress ou `curl`) avec
+      plusieurs locales dans `translations` n'en enregistre qu'une seule (celle de la locale par défaut), comme
+      si `multilangue` était inactif, alors que `bin/console capco:toggle:list` dans `capco_application_1`
+      affiche bien `Yes`. Cause : `nginx.conf` (`infrastructure/services/local/nginx/nginx.conf`) fixe
+      `$symfonyEnv` **par host** — `capco.dev` → `dev`, `capco.test` → `test` (charge donc
+      `config/packages/test/quandidate_toggle.yaml`, qui bascule le namespace Redis sur `testfeature_toggle`,
+      en ignorant `%redis_prefix%`). Cypress vise `capco.test` (`cypress.config.ts` → `baseUrl`), donc toute
+      requête HTTP qu'il déclenche s'exécute réellement en env **test** côté PHP — mais `toggleEnvironment`
+      dans `cypress/plugins/index.ts` valait `env === 'ci' ? 'test' : 'dev'`, donc `enable:feature`/
+      `disable:feature` écrivaient en local dans le namespace **dev**, jamais lu par une requête `capco.test`.
+      Un `bin/console capco:toggle:list` via `docker exec` (qui hérite de l'env par défaut du conteneur, `dev`)
+      vérifie donc le mauvais namespace pour diagnostiquer ce symptôme précis. **Fix appliqué** :
+      `toggleEnvironment` vaut désormais toujours `'test'` dans `cypress/plugins/index.ts`, puisque `capco.test`
+      — la seule `baseUrl` que Cypress vise, local comme CI — résout systématiquement en env PHP `test`.
+    - **Symptôme 2 (SSR Next.js, `withFeatureFlagRequired`)** : une page migrée derrière
+      `unstable__sonata_migration_to_admin_next` redirige vers sa route Sonata (307) même juste après
+      `cy.task('enable:feature', 'unstable__sonata_migration_to_admin_next')` réussi. Cause :
+      `feature-flags-resolver.ts` (`getRedisFeatureFlagKey`) construisait la clé Redis à partir du seul
+      `process.env.SYMFONY_REDIS_PREFIX` — or `admin-next/package.json` **fixe ce script en dur**
+      (`"dev": "SYMFONY_REDIS_PREFIX=dev next dev -p 3000"`), donc cette variable vaut toujours `dev` pour
+      l'unique process Next.js local, quel que soit le hostname de la requête entrante, et **rien dans
+      `admin-next/.env.local` ne peut jamais la faire passer à `test`** (un export shell dans le script npm
+      passe avant tout chargement de `.env.local` par `@next/env`, qui ne réécrit jamais une variable déjà
+      présente dans `process.env`) — modifier `.env.local` pour ce cas précis est donc un correctif sans
+      aucun effet, à ne pas retenter. `session-resolver.ts` avait déjà résolu ce même problème pour les clés de
+      session, en combinant `SYMFONY_REDIS_PREFIX` avec `getEnv()` (`admin-next/config.ts`, dérivé de
+      `NEXT_PUBLIC_SYMFONY_ENV` — **cette variable-là, elle, est bien lue depuis `.env.local`**, voir la
+      précondition Cypress d'AGENTS.md) ; `feature-flags-resolver.ts` ne le faisait pas. **Fix appliqué** :
+      `getRedisFeatureFlagKey` calcule maintenant le namespace comme
+      `getEnv() === 'test' ? 'testfeature_toggle' : \`${process.env.SYMFONY_REDIS_PREFIX}feature_toggle\`` —
+      même logique que PHP (`config/packages/test/quandidate_toggle.yaml` bascule sur ce namespace littéral,
+      en ignorant `%redis_prefix%`), et cohérent avec le pattern déjà validé de `session-resolver.ts`.
+    - **Vérifiés ensemble** sur la refonte `pages.cookies` : `cookieSettings.cy.ts` et **`loginSettings.cy.ts`
+      déjà mergé** échouaient tous les deux en local avant ces deux fixes (le premier sur le symptôme 2 dès le
+      chargement de la page, le second sur la dernière assertion une fois le symptôme 2 contourné en activant
+      aussi le flag en `dev` — ce qui recréait alors le symptôme 1) ; les deux passent après. **Ce n'était pas
+      un bug du code migré** : la mutation/le resolver GraphQL étaient corrects (le test Jest e2e
+      `features/graphql-api/.../updateXSetting.js` passait déjà), prouvé aussi en rejouant la mutation en
+      `curl` (recette du piège ci-dessus) avec le toggle activé une fois en `--environment=dev` (échec, une
+      seule locale enregistrée) puis en `--environment=test` (succès, les deux locales enregistrées) — utile
+      pour isoler ce genre de symptôme entre un vrai bug applicatif et un problème d'environnement Cypress.
+    - Le run Cypress refuse aussi de démarrer depuis un terminal VS Code si `ELECTRON_RUN_AS_NODE=1` est
+      hérité (`bad option: --no-sandbox`) : lancer `env -u ELECTRON_RUN_AS_NODE yarn cy:run ...`.
 
 ## Recette : catégorie `SiteParameter` traduisible (multilangue)
 

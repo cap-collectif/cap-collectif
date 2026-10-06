@@ -23,12 +23,16 @@ const execFile = util.promisify(cp.execFile)
 const env = process.env.CI ? 'ci' : 'local'
 
 // `capco:toggle:enable/disable` picks its Redis namespace from the Symfony kernel env passed via
-// `--env`. In CI the whole app runs as `test`, so writing toggles there is consistent. Locally the
-// app container runs as `dev` (see infrastructure/environments/development.yml), which resolves a
-// different Redis namespace (`config/packages/test/quandidate_toggle.yaml` hardcodes `testfeature_toggle`
-// instead of the default `%redis_prefix%feature_toggle`) — so toggling with `--env=test` locally writes
-// a key the running app never reads, and the flag silently never appears enabled.
-const toggleEnvironment = env === 'ci' ? 'test' : 'dev'
+// `--env`. Cypress always runs against `capco.test` (see `baseUrl` in cypress.config.ts), and
+// `infrastructure/services/local/nginx/nginx.conf` forces `$symfonyEnv test` for that host (only
+// `capco.dev` resolves to `dev`) — so every HTTP request Cypress triggers (page load, GraphQL
+// query/mutation) is actually served under the `test` Symfony env, both locally and in CI, which
+// resolves the `testfeature_toggle` Redis namespace (`config/packages/test/quandidate_toggle.yaml`).
+// Toggling `dev` locally (as this used to do) writes a key the running app never reads: the flag
+// silently never appears enabled to any HTTP request, even though `docker exec ... bin/console
+// capco:toggle:list` reports it as active (that command inherits the container's own default env,
+// `dev`, which is irrelevant to how nginx routes a `capco.test` request).
+const toggleEnvironment = 'test'
 
 const logRestoreTimings = (output: string) => {
   output
