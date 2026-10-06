@@ -1,1067 +1,422 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Capco\Tests\Authentication;
 
-use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
-use Capco\AppBundle\Exception\FranceConnectAuthenticationException;
-use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\Tests\OAuthWebTestCase;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
-use Capco\UserBundle\Handler\UserInvitationHandler;
-use Capco\UserBundle\OpenID\OpenIDExtraMapper;
-use Capco\UserBundle\OpenID\OpenIDResourceOwner;
-use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Security\Core\User\OauthUserProvider;
-use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
-use DateTime;
-use FOS\UserBundle\Model\UserManagerInterface;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
-use const JSON_THROW_ON_ERROR;
-use JsonException;
-use PHPUnit\Framework\MockObject\Exception as MockException;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Psr\Cache\InvalidArgumentException;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
- * @coversNothing
- * @phpunit-status non-compliant
- * @phpunit-reason Mocks domain users and persistence interactions instead of observing an authentication flow
- * and its persisted effects.
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ * @phpunit-status compliant
+ * @phpunit-reason Exercises provider claims and account association through HTTP with real persistence and provider transport stubs.
  */
-final class OauthUserProviderTest extends TestCase
+final class OauthUserProviderTest extends OAuthWebTestCase
 {
-    private UserManagerInterface $userManagerMock;
-    private UserRepository $userRepositoryMock;
-    private OpenIDExtraMapper $extraMapperMock;
-    private Indexer $indexerMock;
-    private GroupMutation $groupMutationMock;
-    private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepositoryMock;
-    private LoggerInterface $loggerMock;
-    private UserInvitationHandler $userInvitationHandlerMock;
-    private TokenStorageInterface $tokenStorageMock;
-    private RequestStack $requestStackMock;
-    private RedisCache $redisCacheMock;
-    private TranslatorInterface $translatorMock;
-    private RouterInterface $routerMock;
-    private Session $sessionMock;
-    private OauthUserProvider $oauthUserProvider;
-    private UserResponseInterface & MockObject $responseMock;
-    private OpenIDResourceOwner & MockObject $resourceOwnerMock;
-    private TokenInterface & MockObject $tokenMock;
-
-    /**
-     * @throws MockException
-     * @throws JsonException
-     */
-    protected function setUp(): void
+    /** @dataProvider openidEmailClaims */
+    public function testOpenidCallbackSelectsTheEmailClaimWithoutLinkingAnUnrelatedAccount(string $instance, string $claim, bool $usesClaim): void
     {
-        $this->userManagerMock = $this->createMock(UserManagerInterface::class);
-        $this->userRepositoryMock = $this->createMock(UserRepository::class);
-        $this->extraMapperMock = $this->createMock(OpenIDExtraMapper::class);
-        $this->indexerMock = $this->createMock(Indexer::class);
-        $this->groupMutationMock = $this->createMock(GroupMutation::class);
-        $this->franceConnectSSOConfigurationRepositoryMock = $this->createMock(FranceConnectSSOConfigurationRepository::class);
-        $this->loggerMock = $this->createMock(LoggerInterface::class);
-        $this->userInvitationHandlerMock = $this->createMock(UserInvitationHandler::class);
-        $this->tokenStorageMock = $this->createMock(TokenStorageInterface::class);
-        $this->requestStackMock = $this->createMock(RequestStack::class);
-        $this->redisCacheMock = $this->createMock(RedisCache::class);
-        $this->translatorMock = $this->createMock(TranslatorInterface::class);
-        $this->routerMock = $this->createMock(RouterInterface::class);
-        $this->sessionMock = $this->createMock(Session::class);
-        $this->responseMock = $this->createMock(UserResponseInterface::class);
-        $this->resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        $this->tokenMock = $this->createMock(TokenInterface::class);
-
-        $state = urlencode(base64_encode((string) json_encode(['csrf_token' => '12345'], JSON_THROW_ON_ERROR)));
-        $request = new Request();
-        $request->query->set('state', $state);
-        $request->setSession($this->sessionMock);
-        $this->requestStackMock->method('getCurrentRequest')->willReturn($request);
-        $this->requestStackMock->method('getSession')->willReturn($this->sessionMock);
-        $this->sessionMock->method('getFlashBag')->willReturn($this->createMock(FlashBagInterface::class));
-        $this->routerMock
-            ->method('generate')
-            ->willReturnMap([
-                ['app_homepage', [], RouterInterface::ABSOLUTE_URL, 'https://capco.dev/'],
-                ['capco_profile_edit', [], RouterInterface::ABSOLUTE_URL, 'https://capco.dev/profile/edit-profile'],
-            ])
-        ;
-
-        $this->oauthUserProvider = $this->createOauthUserProvider();
-    }
-
-    public function testLoadsNewOpenidUser(): void
-    {
-        $responseMock = $this->responseMock;
-        $resourceOwnerMock = $this->resourceOwnerMock;
-        $tokenMock = $this->tokenMock;
-        $user = new User();
-
-        $this->generateGenericOpenIdResponse($responseMock, $resourceOwnerMock);
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        // We try to find a user that match the criterias, but could not find one.
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('openid_user@test.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')
-            ->willReturn($user)
-        ;
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-        // We flush the new values.
-        $this->userManagerMock->method('updateUser')->with($user);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_id', $user->getOpenId());
-        $this->assertSame('openid_access_token', $user->getOpenIdAccessToken());
-        $this->assertSame('openid_user', $user->getUsername());
-        $this->assertEquals('openid_user@test.com', $user->getEmail());
-        $this->assertTrue($user->isEnabled());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsNewOpenidUserUsingIdTokenAsAccessToken(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $user = new User();
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['email' => 'test@test.com'],
-            'openid_user@test.com',
-            ['id_token' => 'openid_id_token', 'access_token' => 'openid_access_token']
-        );
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_id_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('openid_user@test.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')->willReturn($user);
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-        $this->userManagerMock->method('updateUser')->with($user);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_id_token', $user->getOpenIdAccessToken());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsNewOpenidRedhatUser(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        $user = new User();
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $this->generateGenericRedhatResponse($responseMock, $resourceOwnerMock);
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        // We try to find a user that match the criteria, but could not find one.
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('openid_user@test.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')
-            ->willReturn($user)
-        ;
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_id', $user->getOpenId());
-        $this->assertSame('openid_access_token', $user->getOpenIdAccessToken());
-        $this->assertSame('openid_user', $user->getUsername());
-        $this->assertEquals('openid_user@test.com', $user->getEmail());
-        $this->assertTrue($user->isEnabled());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsNewOpenidUserWithOtherEmailForCatp(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $user = new User();
-        $this->oauthUserProvider = $this->createOauthUserProvider('catp');
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['other email' => 'openid_other_email@test.com'],
-            null
-        );
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('openid_other_email@test.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')->willReturn($user);
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_other_email@test.com', $user->getEmail());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testKeepsLegacyOpenidEmailLookupOutsideCatp(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $user = new User();
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['other email' => 'openid_other_email@test.com'],
-            null
-        );
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->expects($this->never())->method('findOneByEmail');
-        $this->userManagerMock->method('createUser')->willReturn($user);
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertNull($user->getEmail());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testPrefersEmailOverOtherEmailForOpenidUser(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $user = new User();
-        $this->oauthUserProvider = $this->createOauthUserProvider('catp');
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            [
-                'email' => 'openid_primary_email@test.com',
-                'other email' => 'openid_other_email@test.com',
-            ],
-            null
-        );
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('openid_primary_email@test.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')->willReturn($user);
-        $this->extraMapperMock->method('map')->with($user, $responseMock);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_primary_email@test.com', $user->getEmail());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsNewFacebookUser(): void
-    {
-        $ressourceOwner = $this->createMock(FacebookResourceOwner::class);
-        $ressourceOwner->method('getName')->willReturn('facebook');
-
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        $user = new User();
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $this->generateGenericFacebookResponse($responseMock, $ressourceOwner);
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        // We try to find a user that match the criteria, but could not find one.
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('facebook_access_token', '2081576388576162')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('facebook_2081576388576162')->willReturn(null);
-        $this->userManagerMock->method('createUser')
-            ->willReturn($user)
-        ;
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('2081576388576162', $user->getFacebookId());
-        $this->assertSame('facebook_access_token', $user->getFacebookAccessToken());
-        $this->assertSame('facebook_user', $user->getUsername());
-        $this->assertNull($user->getEmail());
-        $this->assertTrue($user->isEnabled());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsExistingOpenidUser(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $user = new User();
-
-        $this->generateGenericOpenIdResponse($responseMock, $resourceOwnerMock);
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        // We disable refresh user information at every login
-        $resourceOwnerMock->method('isRefreshingUserInformationsAtEveryLogin')->willReturn(false);
-        // We try to find a user that match the criterias, and find one.
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')
-            ->willReturn($user)
-        ;
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-
-        $this->assertSame('openid_id', $user->getOpenId());
-        $this->assertSame('openid_access_token', $user->getOpenIdAccessToken());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testConnectUsesOtherEmailForOpenidAssociationForCatp(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        $user = new User();
-        $this->oauthUserProvider = $this->createOauthUserProvider('catp');
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['other email' => 'openid_other_email@test.com'],
-            null
-        );
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findByAccessTokenOrUsername')
-            ->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findOneByEmail')
-            ->with('openid_other_email@test.com')
-            ->willReturn(null)
-        ;
-        $this->userManagerMock->expects($this->once())
-            ->method('updateUser')
-            ->with($user)
-        ;
-
-        $this->oauthUserProvider->connect($user, $responseMock);
-
-        $this->assertSame('openid_id', $user->getOpenId());
-        $this->assertSame('openid_access_token', $user->getOpenIdAccessToken());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testConnectUsesIdTokenAsAccessToken(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        $user = new User();
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['email' => 'openid_user@test.com'],
-            'openid_user@test.com',
-            ['id_token' => 'openid_id_token', 'access_token' => 'openid_access_token']
-        );
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findByAccessTokenOrUsername')
-            ->with('openid_id_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findOneByEmail')
-            ->with('openid_user@test.com')
-            ->willReturn(null)
-        ;
-        $this->userManagerMock->expects($this->once())
-            ->method('updateUser')
-            ->with($user)
-        ;
-
-        $this->oauthUserProvider->connect($user, $responseMock);
-
-        $this->assertSame('openid_id_token', $user->getOpenIdAccessToken());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testConnectKeepsLegacyEmailLookupOutsideCatp(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        $user = new User();
-
-        $this->generateGenericOpenIdResponseWithData(
-            $responseMock,
-            $resourceOwnerMock,
-            ['other email' => 'openid_other_email@test.com'],
-            null
-        );
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findByAccessTokenOrUsername')
-            ->with('openid_access_token', 'openid_id')
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->expects($this->once())
-            ->method('findOneByEmail')
-            ->with('openid_id')
-            ->willReturn(null)
-        ;
-        $this->userManagerMock->expects($this->once())
-            ->method('updateUser')
-            ->with($user)
-        ;
-
-        $this->oauthUserProvider->connect($user, $responseMock);
-
-        $this->assertSame('openid_id', $user->getOpenId());
-        $this->assertSame('openid_access_token', $user->getOpenIdAccessToken());
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testAssociatesAUserToFranceconnect(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var FranceConnectResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(FranceConnectResourceOwner::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        /** @var FranceConnectSSOConfiguration&MockObject $fcConfigMock */
-        $fcConfigMock = $this->createMock(FranceConnectSSOConfiguration::class);
-        /** @var OAuthToken&MockObject $OAuthTokenMock */
-        $OAuthTokenMock = $this->createMock(OAuthToken::class);
-        /** @var ItemInterface&MockObject $cacheItemMock */
-        $cacheItemMock = $this->createMock(ItemInterface::class);
-
-        $cacheItemMock->method('isHit')->willReturn(true);
-        $cacheItemMock->method('get')->willReturn(['state' => '12345', 'nonce' => '54321']);
-        $this->redisCacheMock->method('getItem')->with($this->isType('string'))->willReturn($cacheItemMock);
-
-        $this->generateGenericFranceConnectResponse($responseMock, $resourceOwnerMock, $OAuthTokenMock);
-
-        $user = new User();
-        $user->setId('some-uuid')
-            ->setFirstname('toto')
-            ->setLastname('ala')
-            ->setDateOfBirth(new DateTime('1992-12-12'))
-            ->setGender('m')
-            ->setEmail('viewer@email.com')
-            ->setUsername('toto')
-        ;
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn($user);
-        $allowedData = [
-            'given_name' => true,
-            'family_name' => true,
-            'birthdate' => true,
-            'gender' => true,
-            'birthplace' => false,
-            'birthcountry' => false,
-            'email' => true,
-            'preferred_username' => false,
-        ];
-        // We try to find a user that match the criteria, and find one.
-        $this->franceConnectSSOConfigurationRepositoryMock->method('find')->with('franceConnect')->willReturn($fcConfigMock);
-        $fcConfigMock->method('getAllowedData')->willReturn($allowedData);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testDoesNotDisconnectPreviousFranceConnectUserWhenEmailMismatch(): void
-    {
-        /** @var FranceConnectResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(FranceConnectResourceOwner::class);
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var User&MockObject $currentUser */
-        $currentUser = $this->createMock(User::class);
-        /** @var OAuthToken&MockObject $oauthTokenMock */
-        $oauthTokenMock = $this->createMock(OAuthToken::class);
-
-        $resourceOwnerMock->method('getName')->willReturn('franceconnect');
-        $responseMock->method('getResourceOwner')->willReturn($resourceOwnerMock);
-        $responseMock->method('getEmail')->willReturn('fc-id');
-        $responseMock->method('getUsername')->willReturn('fc-id');
-        $responseMock->method('getAccessToken')->willReturn('fc-access-token');
-        $responseMock->method('getData')->willReturn(['email' => 'fc@email.com']);
-        $responseMock->method('getOAuthToken')->willReturn($oauthTokenMock);
-        $oauthTokenMock->method('getRawToken')->willReturn(['id_token' => 'fc-id-token']);
-
-        $currentUser->method('getEmail')->willReturn('local@email.com');
-        $this->sessionMock->expects($this->exactly(5))->method('set')
-            ->withConsecutive(
-                [FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, true],
-                [FranceConnectLogoutHandler::SESSION_ID_TOKEN_KEY, 'fc-id-token'],
-                [FranceConnectLogoutHandler::SESSION_POST_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/'],
-                [FranceConnectLogoutHandler::SESSION_IMMEDIATE_LOGOUT_REQUIRED_KEY, true],
-                [FranceConnectLogoutHandler::SESSION_AFTER_LOGOUT_REDIRECT_URL_KEY, 'https://capco.dev/profile/edit-profile#account']
-            )
-        ;
-
-        $this->userRepositoryMock
-            ->expects($this->never())
-            ->method('findByAccessTokenOrUsername')
-        ;
-        $this->userManagerMock
-            ->expects($this->never())
-            ->method('updateUser')
-        ;
-
-        $this->oauthUserProvider->connect($currentUser, $responseMock);
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testLoadsExistingOpenidUserAndUpdatesValues(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var OpenIDResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(OpenIDResourceOwner::class);
-        /** @var User&MockObject $userMock */
-        $userMock = $this->createMock(User::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        $this->generateGenericOpenIdResponse($responseMock, $resourceOwnerMock);
-
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $resourceOwnerMock->method('isRefreshingUserInformationsAtEveryLogin')->willReturn(true);
-        $this->userRepositoryMock->method('findByAccessTokenOrUsername')->with('openid_access_token', 'openid_id')->willReturn($userMock);
-        $userMock->method('getId')->willReturn('<some uuid>');
-        $userMock->method('setOpenId')->with('openid_id')->willReturn($userMock);
-        $userMock->method('setOpenIdAccessToken')->with('openid_access_token')->willReturn($userMock);
-        $userMock->method('setUsername')->with('openid_user')->willReturn($userMock);
-        $userMock->method('setEmail')->with('openid_user@test.com')->willReturn($userMock);
-
-        $this->assertSame($userMock, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-    }
-
-    /**
-     * @throws MockException
-     * @throws InvalidArgumentException
-     */
-    public function testLoadsNewFranceConnectUserWhenAccessTokenAndUsernameAreNull(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var FranceConnectResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(FranceConnectResourceOwner::class);
-        /** @var OAuthToken&MockObject $OAuthTokenMock */
-        $OAuthTokenMock = $this->createMock(OAuthToken::class);
-        /** @var TokenInterface&MockObject $tokenMock */
-        $tokenMock = $this->createMock(TokenInterface::class);
-        /** @var ItemInterface&MockObject $cacheItemMock */
-        $cacheItemMock = $this->createMock(ItemInterface::class);
-        /** @var FranceConnectSSOConfiguration&MockObject $fcConfigMock */
-        $fcConfigMock = $this->createMock(FranceConnectSSOConfiguration::class);
-
-        $user = new User();
-        $data = [
-            'given_name' => 'Jean Jacques',
-            'family_name' => 'GoldMan',
-            'birthdate' => null,
-            'gender' => 'male',
-            'birthplace' => null,
-            'birthcountry' => null,
-            'email' => 'jeanjacques@goldman.com',
-            'preferred_username' => 'jj',
-        ];
-        $allowedData = [
-            'given_name' => true,
-            'family_name' => true,
-            'birthdate' => true,
-            'gender' => true,
-            'birthplace' => false,
-            'birthcountry' => false,
-            'email' => true,
-            'preferred_username' => true,
-        ];
-
-        $cacheItemMock->method('isHit')->willReturn(true);
-        $cacheItemMock->method('get')->willReturn(['state' => '12345', 'nonce' => '54321']);
-        $this->redisCacheMock->method('getItem')->with($this->isType('string'))->willReturn($cacheItemMock);
-
-        $resourceOwnerMock->method('getName')->willReturn('franceconnect');
-        $responseMock->method('getResourceOwner')->willReturn($resourceOwnerMock);
-        $responseMock->method('getOAuthToken')->willReturn($OAuthTokenMock);
-        $responseMock->method('getData')->willReturn($data);
-        $responseMock->method('getEmail')->willReturn('jeanjacques@goldman.com');
-        $responseMock->method('getNickname')->willReturn('JJ');
-        $responseMock->method('getAccessToken')->willReturn(null);
-        $responseMock->method('getUsername')->willReturn(null);
-        $responseMock->method('getFirstName')->willReturn('Jean Jacques');
-        $responseMock->method('getLastName')->willReturn('GoldMan');
-
-        $state = base64_encode((string) json_encode(['csrf_token' => '12345']));
-        $nonce = base64_encode((string) json_encode(['nonce' => '54321']));
-        $OAuthTokenMock->method('getRawToken')->willReturn(['id_token' => $state . '.' . $nonce]);
-
-        $this->tokenStorageMock->method('getToken')->willReturn($tokenMock);
-        $tokenMock->method('getUser')->willReturn(null);
-        $this->userRepositoryMock
-            ->expects($this->once())
-            ->method('findByAccessTokenOrUsername')
-            ->with(null, null)
-            ->willReturn(null)
-        ;
-        $this->userRepositoryMock->method('findOneByEmail')->with('jeanjacques@goldman.com')->willReturn(null);
-        $this->userManagerMock->method('createUser')->willReturn($user);
-        $this->franceConnectSSOConfigurationRepositoryMock->method('find')->with('franceConnect')->willReturn($fcConfigMock);
-        $fcConfigMock->method('getAllowedData')->willReturn($allowedData);
-        $this->translatorMock->method('trans')->willReturnCallback(fn ($messageKey) => $messageKey);
-
-        $this->assertSame($user, $this->oauthUserProvider->loadUserByOAuthUserResponse($responseMock));
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testMapsFranceconnectData(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-
-        $user = new User();
-        $data = [];
-        $data['given_name'] = 'toto';
-        $data['family_name'] = 'ala';
-        $data['birthplace'] = false;
-        $data['birthdate'] = '1992-12-12';
-        $data['gender'] = 'male';
-        $data['email'] = 'toto@alapla.ge';
-
-        $responseMock->method('getData')->willReturn($data);
-        $allowedData = [
-            'given_name' => true,
-            'family_name' => true,
-            'birthdate' => true,
-            'gender' => true,
-            'birthplace' => false,
-            'birthcountry' => false,
-            'email' => true,
-            'preferred_username' => false,
-        ];
-        $this->assertSame($user, $this->oauthUserProvider->mapFranceConnectData(
-            $user,
-            $responseMock,
-            $allowedData
-        ));
-
-        $this->assertSame(ucfirst(strtolower($data['given_name'])), $user->getFirstname());
-        $this->assertSame($data['family_name'], $user->getLastname());
-        $this->assertSame('ala Toto', $user->getUsername());
-        $this->assertSame('m', $user->getGender());
-        $this->assertSame($data['email'], $user->getEmail());
-        $this->assertSame('1992-12-12', $user->getDateOfBirth()->format('Y-m-d'));
-    }
-
-    /**
-     * @throws MockException
-     */
-    public function testMapsFranceconnectDataWithUsername(): void
-    {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-
-        $user = new User();
-        $data = [];
-        $data['given_name'] = 'toto';
-        $data['family_name'] = 'ala';
-        $data['birthplace'] = false;
-        $data['birthdate'] = '1992-12-12';
-        $data['gender'] = 'male';
-        $data['email'] = 'toto@alapla.ge';
-        $data['preferred_username'] = 'toto_fc_username';
-
-        $responseMock->method('getData')->willReturn($data);
-        $birthday = DateTime::createFromFormat('Y-m-d', $data['birthdate']) ?: null;
-        if ($birthday) {
-            $birthday->setTime(0, 0);
+        $localAccount = $this->account();
+        $localId = $localAccount->getId();
+        $email = $localAccount->getEmail();
+        $password = $localAccount->getPassword();
+        $this->configureProvider('openid', $email);
+        $claims = ['sub' => $this->providerSubject, 'given_name' => 'Provider', 'family_name' => 'Person', $claim => $email];
+        $this->providerResponses['/openid/userinfo'] = $claims;
+
+        $this->completeLogin('openid');
+
+        $account = $this->providerAccount('openId');
+        if ($usesClaim) {
+            self::assertSame($localId, $account->getId());
         }
-        $allowedData = [
-            'given_name' => true,
-            'family_name' => true,
-            'birthdate' => true,
-            'gender' => true,
-            'birthplace' => false,
-            'birthcountry' => false,
-            'email' => true,
-            'preferred_username' => true,
-        ];
-        $this->assertSame($user, $this->oauthUserProvider->mapFranceConnectData(
-            $user,
-            $responseMock,
-            $allowedData
-        ));
-
-        $this->assertSame(ucfirst(strtolower($data['given_name'])), $user->getFirstname());
-        $this->assertSame($data['family_name'], $user->getLastname());
-        $this->assertSame('toto_fc_username', $user->getUsername());
-        $this->assertSame('m', $user->getGender());
-        $this->assertSame($data['email'], $user->getEmail());
-        $this->assertSame('1992-12-12', $user->getDateOfBirth()->format('Y-m-d'));
+        self::assertSame($usesClaim ? $email : null, $account->getEmail());
+        self::assertSame($this->providerSubject, $account->getOpenId());
+        self::assertSame('provider-access-token', $account->getOpenIdAccessToken());
+        self::assertSame(['SSO', 'SSO openid'], $this->groupTitles($account));
+        $this->assertViewer(true, $account->getId());
+        $localAccount = $this->reload($localId);
+        self::assertSame($email, $localAccount->getEmail());
+        self::assertSame($password, $localAccount->getPassword());
+        if (!$usesClaim) {
+            self::assertNotSame($localId, $account->getId());
+            self::assertNull($localAccount->getOpenId());
+            self::assertCount(0, $localAccount->getUserGroups());
+        }
     }
 
-    /**
-     * @throws MockException
-     */
-    public function testDoesntMapFranceconnectDataWhenUserExists(): void
+    /** @return iterable<string, array{instance: string, claim: string, usesClaim: bool}> */
+    public static function openidEmailClaims(): iterable
     {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-
-        $data = [];
-        $data['given_name'] = 'toto';
-        $data['family_name'] = 'titi';
-        $data['birthplace'] = false;
-        $data['birthdate'] = '1992-12-12';
-        $data['gender'] = 'male';
-        $data['email'] = 'toto@alapla.ge';
-        $data['preferred_username'] = 'toto_fc_username';
-        $responseMock->method('getData')->willReturn($data);
-
-        $user = new User();
-        $user->setFirstname('TOTO_AVANT');
-        $user->setLastname('ALA');
-        $user->setUsername('initial_username');
-        $user->setDateOfBirth(DateTime::createFromFormat('Y-m-d', '1990-10-10'));
-        $user->setGender('mal');
-        $user->setEmail('totoala@ferme.com');
-
-        $allowedData = [
-            'given_name' => true,
-            'family_name' => true,
-            'birthdate' => false,
-            'gender' => true,
-            'birthplace' => false,
-            'birthcountry' => false,
-            'email' => true,
-            'preferred_username' => true,
-        ];
-        $this->assertSame($user, $this->oauthUserProvider->mapFranceConnectData(
-            $user,
-            $responseMock,
-            $allowedData
-        ));
-
-        $this->assertSame(ucfirst(strtolower($data['given_name'])), $user->getFirstname());
-        $this->assertSame($data['family_name'], $user->getLastname());
-        $this->assertSame('initial_username', $user->getUsername());
-        $this->assertSame('m', $user->getGender());
-        $this->assertSame('totoala@ferme.com', $user->getEmail());
-        $this->assertSame('1990-10-10', $user->getDateOfBirth()->format('Y-m-d'));
+        yield 'standard email' => ['instance' => 'dev', 'claim' => 'email', 'usesClaim' => true];
+        yield 'Red Hat mail fallback' => ['instance' => 'dev', 'claim' => 'mail', 'usesClaim' => true];
+        yield 'CATP other email fallback' => ['instance' => 'catp', 'claim' => 'other email', 'usesClaim' => true];
+        yield 'other email ignored outside CATP' => ['instance' => 'dev', 'claim' => 'other email', 'usesClaim' => false];
     }
 
-    /**
-     * @throws MockException
-     * @throws InvalidArgumentException
-     */
-    public function testThrowsExceptionWhenBadStateNonceFranceconnect(): void
+    /** @dataProvider catpInstance */
+    public function testCatpCallbackPrefersThePrimaryEmailOverTheAlternativeEmail(string $instance): void
     {
-        /** @var UserResponseInterface&MockObject $responseMock */
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var FranceConnectResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(FranceConnectResourceOwner::class);
-        /** @var OAuthToken&MockObject $OAuthTokenMock */
-        $OAuthTokenMock = $this->createMock(OAuthToken::class);
+        $primary = $this->account();
+        $alternative = $this->account();
+        $primaryId = $primary->getId();
+        $alternativeId = $alternative->getId();
+        $this->configureProvider('openid', $primary->getEmail());
+        $this->providerResponses['/openid/userinfo']['other email'] = $alternative->getEmail();
 
-        $this->generateGenericFranceConnectResponse($responseMock, $resourceOwnerMock, $OAuthTokenMock);
+        $this->completeLogin('openid');
 
-        /** @var FlashBagInterface&MockObject $flashBagMock */
-        $flashBagMock = $this->createMock(FlashBagInterface::class);
-        $this->sessionMock->method('remove')->with($this->isType('string'));
-        $this->sessionMock->method('getFlashBag')->willReturn($flashBagMock);
-
-        /** @var ItemInterface&MockObject $cacheItemMock */
-        $cacheItemMock = $this->createMock(ItemInterface::class);
-        $cacheItemMock->method('isHit')->willReturn(true);
-        $cacheItemMock->method('get')->willReturn(['nonce' => 'bad-nonce', 'state' => '12345']);
-        $this->testVerifyFranceConnectStateAndNonce($cacheItemMock, $responseMock);
+        $account = $this->providerAccount('openId');
+        self::assertSame($primaryId, $account->getId());
+        $this->assertViewer(true, $primaryId);
+        $alternative = $this->reload($alternativeId);
+        self::assertNull($alternative->getOpenId());
+        self::assertCount(0, $alternative->getUserGroups());
     }
 
-    /**
-     * @throws MockException
-     * @throws InvalidArgumentException
-     */
-    public function testThrowsExceptionWhenNoStateNonceInCacheFranceconnect(): void
+    /** @return iterable<string, array{instance: string}> */
+    public static function catpInstance(): iterable
     {
-        $responseMock = $this->prepareMocksFranceConnectStateNonce();
-
-        /** @var ItemInterface&MockObject $cacheItemMock */
-        $cacheItemMock = $this->createMock(ItemInterface::class);
-        $cacheItemMock->method('isHit')->willReturn(false);
-        $this->testVerifyFranceConnectStateAndNonce($cacheItemMock, $responseMock);
+        yield 'CATP' => ['instance' => 'catp'];
     }
 
-    /**
-     * @throws MockException
-     */
-    public function testThrowsExceptionWhenFranceconnectTokenHasExpired(): void
+    /** @dataProvider openidTokenClaims */
+    public function testOpenidCallbackPersistsTheTokenSelectedForTheInstance(string $instance, string $expectedToken): void
     {
-        $responseMock = $this->prepareMocksFranceConnectStateNonce([
-            'status' => 'fail',
-            'message' => 'token_not_found_or_expired',
-        ]);
+        $email = $this->uniqueEmail();
+        $this->configureProvider('openid', $email);
+        $idToken = $this->unsignedClaims(['sub' => $this->providerSubject, 'email' => $email, 'given_name' => 'Provider', 'family_name' => 'Person']);
+        $this->providerResponses['/openid/token'] = ['id_token' => $idToken, 'access_token' => 'provider-access-token'];
 
-        $this->expectException(FranceConnectAuthenticationException::class);
-        $this->expectExceptionMessage('france-connect-connection-error');
-        $this->oauthUserProvider->verifyFranceConnectResponse($responseMock);
+        $this->completeLogin('openid');
+
+        $account = $this->providerAccount('openId');
+        self::assertSame($email, $account->getEmail());
+        self::assertSame('id_token' === $expectedToken ? $idToken : 'provider-access-token', $account->getOpenIdAccessToken());
+        $this->assertViewer(true, $account->getId());
     }
 
-    private function generateGenericOpenIdResponse(
-        UserResponseInterface & MockObject $response,
-        OpenIDResourceOwner & MockObject $ressourceOwner
-    ): void {
-        $this->generateGenericOpenIdResponseWithData(
-            $response,
-            $ressourceOwner,
-            ['email' => 'test@test.com'],
-            'openid_user@test.com'
-        );
+    /** @return iterable<string, array{instance: string, expectedToken: string}> */
+    public static function openidTokenClaims(): iterable
+    {
+        yield 'standard access token' => ['instance' => 'dev', 'expectedToken' => 'access_token'];
+        yield 'CATP ID token priority' => ['instance' => 'catp', 'expectedToken' => 'id_token'];
     }
 
-    /**
-     * @param array<string, mixed>       $data
-     * @param null|array<string, string> $rawToken
-     */
-    private function generateGenericOpenIdResponseWithData(
-        UserResponseInterface & MockObject $response,
-        OpenIDResourceOwner & MockObject $ressourceOwner,
-        array $data,
-        ?string $email,
-        ?array $rawToken = null
-    ): void {
-        /** @var OAuthToken&MockObject $oAuthTokenMock */
-        $oAuthTokenMock = $this->createMock(OAuthToken::class);
-        if (null === $rawToken) {
-            $rawToken = ['access_token' => 'openid_access_token'];
+    /** @dataProvider openidRefreshPolicies */
+    public function testOpenidReconnectionRespectsTheProfileRefreshPolicy(string $instance, bool $refreshes): void
+    {
+        $account = $this->account()->setOpenId($this->providerSubject)->setUsername('Local profile');
+        $id = $account->getId();
+        $localEmail = $account->getEmail();
+        $password = $account->getPassword();
+        $this->em->flush();
+        $providerEmail = $this->uniqueEmail();
+        $this->configureProvider('openid', $providerEmail);
+
+        $this->completeLogin('openid');
+
+        $account = $this->reload($id);
+        self::assertSame($refreshes ? $providerEmail : $localEmail, $account->getEmail());
+        self::assertSame('Local profile', $account->getUsername());
+        self::assertSame($password, $account->getPassword());
+        self::assertSame('provider-access-token', $account->getOpenIdAccessToken());
+        $this->assertViewer(true, $id);
+    }
+
+    /** @return iterable<string, array{instance: string, refreshes: bool}> */
+    public static function openidRefreshPolicies(): iterable
+    {
+        yield 'standard profile preserved' => ['instance' => 'dev', 'refreshes' => false];
+        yield 'CATP email refreshed' => ['instance' => 'catp', 'refreshes' => true];
+    }
+
+    public function testFacebookCallbackCreatesAnAccountWithoutAnEmailClaim(): void
+    {
+        $this->configureProvider('facebook', $this->uniqueEmail());
+        unset($this->providerResponses['/v8.0/me']['email']);
+
+        $this->completeLogin('facebook');
+
+        $account = $this->providerAccount('facebook_id');
+        self::assertNull($account->getEmail());
+        self::assertSame('Provider Person', $account->getUsername());
+        self::assertSame('provider-access-token', $account->getFacebookAccessToken());
+        self::assertTrue($account->isEnabled());
+        self::assertSame(['SSO', 'SSO facebook'], $this->groupTitles($account));
+        $this->assertViewer(true, $account->getId());
+    }
+
+    /** @dataProvider openidAssociations */
+    public function testOpenidAssociationMovesTheProviderIdentityAndPreservesBothLocalAccounts(string $instance, string $claim, bool $usesIdToken): void
+    {
+        $previous = $this->account();
+        $previousId = $previous->getId();
+        $previousEmail = $previous->getEmail();
+        $previousPassword = $previous->getPassword();
+        $current = $this->account();
+        $currentId = $current->getId();
+        $currentEmail = $current->getEmail();
+        $currentPassword = $current->getPassword();
+        // Without a matching identity, association must find the previous account by its provider email.
+        if ('subject' === $claim) {
+            $previous->setOpenId($this->providerSubject)->setOpenIdAccessToken('previous-token');
+        }
+        $this->em->flush();
+        $this->configureProvider('openid', $previousEmail);
+        $claims = ['sub' => $this->providerSubject, 'given_name' => 'Provider', 'family_name' => 'Person'];
+        $claims['subject' === $claim ? 'email' : $claim] = 'sub' === $claim ? $this->providerSubject : $previousEmail;
+        if ('sub' === $claim) {
+            $previous->setEmail($this->providerSubject);
+            $previousEmail = $previous->getEmail();
+            $this->em->flush();
+        }
+        $this->providerResponses['/openid/userinfo'] = $claims;
+        $idToken = $this->unsignedClaims($claims);
+        if ($usesIdToken) {
+            $this->providerResponses['/openid/token']['id_token'] = $idToken;
         }
 
-        $ressourceOwner->method('getName')->willReturn('openid');
-        $ressourceOwner->method('resolveAccessToken')->with($rawToken)->willReturn($rawToken['id_token'] ?? $rawToken['access_token'] ?? null);
+        $this->associateProvider('openid', $current);
+
+        $current = $this->reload($currentId);
+        self::assertSame($this->providerSubject, $current->getOpenId());
+        self::assertSame($usesIdToken ? $idToken : 'provider-access-token', $current->getOpenIdAccessToken());
+        self::assertSame($currentEmail, $current->getEmail());
+        self::assertSame($currentPassword, $current->getPassword());
+        $previous = $this->reload($previousId);
+        self::assertNull($previous->getOpenId());
+        self::assertNull($previous->getOpenIdAccessToken());
+        self::assertSame($previousEmail, $previous->getEmail());
+        self::assertSame($previousPassword, $previous->getPassword());
+        $this->assertViewer(true, $currentId);
+    }
+
+    /** @return iterable<string, array{instance: string, claim: string, usesIdToken: bool}> */
+    public static function openidAssociations(): iterable
+    {
+        yield 'CATP other email lookup' => ['instance' => 'catp', 'claim' => 'other email', 'usesIdToken' => false];
+        yield 'CATP ID token association' => ['instance' => 'catp', 'claim' => 'subject', 'usesIdToken' => true];
+        yield 'standard subject fallback' => ['instance' => 'dev', 'claim' => 'sub', 'usesIdToken' => false];
+    }
+
+    /** @dataProvider franceConnectMappings */
+    public function testFranceConnectCallbackMapsOnlyAllowedClaimsAndPreservesTheLocalProfile(bool $existing, ?string $preferredUsername): void
+    {
+        $email = $this->uniqueEmail();
+        $existingId = null;
+        $password = null;
+        if ($existing) {
+            $account = $this->account($email)->setUsername('Local profile')->setDateOfBirth(new \DateTime('1990-10-10 00:00:00'));
+            $existingId = $account->getId();
+            $password = $account->getPassword();
+            $this->em->flush();
+        }
+        $this->configureProvider('franceconnect', $email);
+        $configuration = $this->em->getRepository(FranceConnectSSOConfiguration::class)->find('franceConnect');
+        $configuration->setAllowedData(['given_name' => true, 'family_name' => true, 'birthdate' => !$existing, 'gender' => true, 'email' => true, 'preferred_username' => null !== $preferredUsername]);
+        $this->em->flush();
+        $this->providerResponses['/franceconnect/userinfo'] = ['sub' => $this->providerSubject, 'given_name' => 'tOTO', 'family_name' => 'ala', 'email' => $email, 'birthdate' => '1992-12-12', 'gender' => 'male', 'preferred_username' => $preferredUsername];
+
+        $this->completeLogin('franceconnect');
+
+        $account = $this->providerAccount('franceConnectId');
+        self::assertSame('Toto', $account->getFirstName());
+        self::assertSame('ala', $account->getLastName());
+        self::assertSame($existing ? 'Local profile' : ($preferredUsername ?? 'tOTO ala'), $account->getUsername());
+        self::assertSame('m', $account->getGender());
+        self::assertSame($email, $account->getEmail());
+        self::assertSame($existing ? '1990-10-10' : '1992-12-12', $account->getDateOfBirth()?->format('Y-m-d'));
+        if ($existing) {
+            self::assertSame($existingId, $account->getId());
+            self::assertSame($password, $account->getPassword());
+        }
+        $this->assertViewer(true, $account->getId());
+    }
+
+    /** @return iterable<string, array{bool, ?string}> */
+    public static function franceConnectMappings(): iterable
+    {
+        yield 'generated display name' => [false, null];
+        yield 'preferred username' => [false, 'toto_fc_username'];
+        yield 'local profile and disabled birthday claim preserved' => [true, 'toto_fc_username'];
+    }
+
+    public function testFranceConnectAssociationWithAnotherEmailPreservesBothAccountsAndRequestsProviderLogout(): void
+    {
+        $current = $this->account();
+        $currentId = $current->getId();
+        $currentEmail = $current->getEmail();
+        $currentPassword = $current->getPassword();
+        $previous = $this->account()->setFranceConnectId($this->providerSubject)->setFranceConnectAccessToken('previous-token');
+        $previousId = $previous->getId();
+        $previousEmail = $previous->getEmail();
+        $this->em->flush();
+        $this->configureProvider('franceconnect', $previousEmail);
+
+        $this->associateProvider('franceconnect', $current);
+
+        $current = $this->reload($currentId);
+        self::assertNull($current->getFranceConnectId());
+        self::assertNull($current->getFranceConnectAccessToken());
+        self::assertSame($currentEmail, $current->getEmail());
+        self::assertSame($currentPassword, $current->getPassword());
+        $previous = $this->reload($previousId);
+        self::assertSame($this->providerSubject, $previous->getFranceConnectId());
+        self::assertSame('previous-token', $previous->getFranceConnectAccessToken());
+        self::assertSame($previousEmail, $previous->getEmail());
+        $this->assertViewer(true, $currentId);
+        self::assertNotEmpty($this->browser->getRequest()->getSession()->getFlashBag()->peek('danger'));
+        $this->browser->request('GET', '/projects');
+        self::assertSame(302, $this->browser->getResponse()->getStatusCode());
+        $location = (string) $this->browser->getResponse()->headers->get('Location');
+        self::assertSame('https://provider.test/franceconnect/logout', strtok($location, '?'));
+        parse_str((string) parse_url($location, \PHP_URL_QUERY), $parameters);
+        self::assertSame('https://capco.test/', $parameters['post_logout_redirect_uri']);
+        self::assertSame($this->providerResponses['/franceconnect/token']['id_token'], $parameters['id_token_hint']);
+    }
+
+    public function testExpiredFranceConnectProviderResponseDoesNotAssociateTheAccount(): void
+    {
+        $account = $this->account();
+        $id = $account->getId();
+        $email = $account->getEmail();
+        $password = $account->getPassword();
+        $this->configureProvider('franceconnect', $email);
+        $this->providerResponses['/franceconnect/userinfo']['status'] = 'fail';
+        $this->providerResponses['/franceconnect/userinfo']['message'] = 'token_not_found_or_expired';
+
+        $this->associateProvider('franceconnect', $account);
+
+        $account = $this->reload($id);
+        self::assertNull($account->getFranceConnectId());
+        self::assertNull($account->getFranceConnectAccessToken());
+        self::assertSame($email, $account->getEmail());
+        self::assertSame($password, $account->getPassword());
+        self::assertCount(0, $account->getUserGroups());
+        self::assertNotEmpty($this->browser->getRequest()->getSession()->getFlashBag()->peek('danger'));
+        $this->assertViewer(true, $id);
+    }
+
+    /**
+     * @dataProvider publicFranceConnectMappings
+     * @phpunit-status non-compliant
+     * @phpunit-reason Uses a kernel to obtain the real authentication service for its public mapping rule; no persistence is claimed.
+     */
+    public function testPublicFranceConnectMappingPreservesLocalValuesAndGeneratesTheDisplayName(bool $existing, bool $preferredUsername): void
+    {
+        $user = new User();
+        if ($existing) {
+            $user->setEmail('local@example.test')->setUsername('Local profile')->setDateOfBirth(new \DateTime('1990-10-10 00:00:00'));
+        }
+        $response = $this->createStub(UserResponseInterface::class);
+        $response->method('getData')->willReturn(['given_name' => 'tOTO', 'family_name' => 'ala', 'email' => 'provider@example.test', 'birthdate' => '1992-12-12', 'gender' => 'male', 'preferred_username' => 'provider_username']);
+
+        $mapped = self::getContainer()->get(OauthUserProvider::class)->mapFranceConnectData($user, $response, ['given_name' => true, 'family_name' => true, 'birthdate' => !$existing, 'gender' => true, 'email' => true, 'preferred_username' => $preferredUsername]);
+
+        self::assertSame($user, $mapped);
+        self::assertSame('Toto', $user->getFirstName());
+        self::assertSame('ala', $user->getLastName());
+        self::assertSame($existing ? 'Local profile' : ($preferredUsername ? 'provider_username' : 'ala Toto'), $user->getUsername());
+        self::assertSame($existing ? 'local@example.test' : 'provider@example.test', $user->getEmail());
+        self::assertSame('m', $user->getGender());
+        self::assertSame($existing ? '1990-10-10' : '1992-12-12', $user->getDateOfBirth()?->format('Y-m-d'));
+    }
+
+    /** @return iterable<string, array{bool, bool}> */
+    public static function publicFranceConnectMappings(): iterable
+    {
+        yield 'generated display name' => [false, false];
+        yield 'preferred username' => [false, true];
+        yield 'local email, display name and birthday preserved' => [true, true];
+    }
+
+    /**
+     * @phpunit-status non-compliant
+     * @phpunit-reason Characterizes a malformed response rejected before the HTTP callback; invokes the public provider directly with real persistence.
+     */
+    public function testMalformedFranceConnectResponseWithoutTokenOrSubjectStillCreatesAnAccount(): void
+    {
+        $email = $this->uniqueEmail();
+        $this->configureProvider('franceconnect', $email);
+        $parameters = $this->beginLogin('franceconnect');
+        $this->setProviderNonce($parameters['nonce']);
+        $this->browser->getRequest()->query->set('state', $parameters['state']);
+        $response = $this->createStub(UserResponseInterface::class);
+        $response->method('getResourceOwner')->willReturn(self::getContainer()->get('hwi_oauth.resource_owner.franceconnect'));
+        $token = $this->createStub(OAuthToken::class);
+        $token->method('getRawToken')->willReturn(['id_token' => $this->providerResponses['/franceconnect/token']['id_token']]);
+        $response->method('getOAuthToken')->willReturn($token);
+        $response->method('getData')->willReturn(['given_name' => 'Jean Jacques', 'family_name' => 'GoldMan', 'email' => $email, 'preferred_username' => 'JJ']);
         $response->method('getEmail')->willReturn($email);
-        $response->method('getNickname')->willReturn('openid_user');
-        $response->method('getAccessToken')->willReturn('openid_access_token');
-        $response->method('getUsername')->willReturn('openid_id');
-        $response->method('getResourceOwner')->willReturn($ressourceOwner);
-        $response->method('getOAuthToken')->willReturn($oAuthTokenMock);
-        $response->method('getLastName')->willReturn('Smith');
-        $response->method('getFirstName')->willReturn('jean');
-        $response->method('getData')->willReturn($data);
-        $oAuthTokenMock->method('getRawToken')->willReturn($rawToken);
-    }
-
-    private function createOauthUserProvider(string $instanceName = 'capco'): OauthUserProvider
-    {
-        return new OauthUserProvider(
-            $this->userManagerMock,
-            $this->userRepositoryMock,
-            $this->extraMapperMock,
-            $this->indexerMock,
-            [],
-            $this->groupMutationMock,
-            $this->franceConnectSSOConfigurationRepositoryMock,
-            $this->loggerMock,
-            $this->userInvitationHandlerMock,
-            $this->tokenStorageMock,
-            $this->requestStackMock,
-            $this->redisCacheMock,
-            $this->translatorMock,
-            $this->routerMock,
-            $instanceName
-        );
-    }
-
-    private function generateGenericRedhatResponse(
-        UserResponseInterface & MockObject $response,
-        OpenIDResourceOwner & MockObject $ressourceOwner
-    ): void {
-        $this->generateGenericOpenIdResponse($response, $ressourceOwner);
-        $response->method('getData')->willReturn(['mail' => 'redhatuser@test.com']);
-    }
-
-    private function generateGenericFacebookResponse(
-        UserResponseInterface & MockObject $response,
-        FacebookResourceOwner $ressourceOwner
-    ): void {
-        $response->method('getEmail')->willReturn(null);
-        $response->method('getNickname')->willReturn('facebook_user');
-        $response->method('getAccessToken')->willReturn('facebook_access_token');
-        $response->method('getUsername')->willReturn('2081576388576162');
-        $response->method('getResourceOwner')->willReturn($ressourceOwner);
-        $response->method('getLastName')->willReturn('Smith');
-        $response->method('getFirstName')->willReturn('jean');
-        $response->method('getData')->willReturn([]);
-    }
-
-    /**
-     * @param null|array<string, mixed> $data
-     */
-    private function generateGenericFranceConnectResponse(
-        UserResponseInterface & MockObject $response,
-        FranceConnectResourceOwner & MockObject $ressourceOwner,
-        OAuthToken & MockObject $OAuthToken,
-        ?array $data = null
-    ): void {
-        if (null === $data) {
-            $data = [
-                'given_name' => 'Jean Jacques',
-                'family_name' => 'GoldMan',
-                'birthdate' => null,
-                'gender' => 'male',
-                'birthplace' => null,
-                'birthcountry' => null,
-                'email' => 'jeanjacques@goldman.com',
-                'preferred_username' => 'jj',
-            ];
-        }
-        $response->method('getData')->willReturn($data);
-        $ressourceOwner->method('getName')->willReturn('franceconnect');
-        $response->method('getEmail')->willReturn('jeanjacques@goldman.com');
         $response->method('getNickname')->willReturn('JJ');
-        $response->method('getAccessToken')->willReturn('franceconnect_access_token');
-        $response->method('getUsername')->willReturn('jj');
-        $response->method('getResourceOwner')->willReturn($ressourceOwner);
-        $response->method('getLastName')->willReturn('GoldMan');
-        $response->method('getFirstName')->willReturn('Jean Jacques');
-        $response->method('getOAuthToken')->willReturn($OAuthToken);
-        $response->method('getExpiresIn')->willReturn(60);
-        $state = base64_encode((string) json_encode(['csrf_token' => '12345']));
-        $nonce = base64_encode((string) json_encode(['nonce' => '54321']));
-        $token = ['id_token' => $state . '.' . $nonce];
-        $OAuthToken->method('getRawToken')->willReturn($token);
 
-        $this->translatorMock->method('trans')->willReturnCallback(fn ($messageKey) => $messageKey);
+        $requests = self::getContainer()->get(RequestStack::class);
+        $requests->push($this->browser->getRequest());
+        $tokens = self::getContainer()->get(TokenStorageInterface::class);
+        $originalToken = $tokens->getToken();
+        $tokens->setToken(null);
+        $this->unlinkedProviderEmails[] = $email;
+
+        try {
+            $account = self::getContainer()->get(OauthUserProvider::class)->loadUserByOAuthUserResponse($response);
+        } finally {
+            $tokens->setToken($originalToken);
+            $requests->pop();
+        }
+
+        self::assertInstanceOf(User::class, $account);
+        $account = $this->reload($account->getId());
+        self::assertSame($email, $account->getEmail());
+        self::assertNull($account->getFranceConnectId());
+        self::assertNull($account->getFranceConnectAccessToken());
+        self::assertSame('Jean jacques', $account->getFirstName());
+        self::assertSame('GoldMan', $account->getLastName());
     }
 
-    /**
-     * @param array<string, mixed> $data
-     *
-     * @throws MockException
-     */
-    private function prepareMocksFranceConnectStateNonce(?array $data = null): UserResponseInterface & MockObject
+    private function completeLogin(string $provider): void
     {
-        $responseMock = $this->createMock(UserResponseInterface::class);
-        /** @var FranceConnectResourceOwner&MockObject $resourceOwnerMock */
-        $resourceOwnerMock = $this->createMock(FranceConnectResourceOwner::class);
-        /** @var OAuthToken&MockObject $OAuthTokenMock */
-        $OAuthTokenMock = $this->createMock(OAuthToken::class);
-        /** @var FlashBagInterface&MockObject $flashBagMock */
-        $flashBagMock = $this->createMock(FlashBagInterface::class);
-
-        $this->generateGenericFranceConnectResponse($responseMock, $resourceOwnerMock, $OAuthTokenMock, $data);
-        $this->sessionMock->method('getFlashBag')->willReturn($flashBagMock);
-
-        return $responseMock;
+        $parameters = $this->beginLogin($provider);
+        $this->setProviderNonce($parameters['nonce']);
+        $this->browser->request('GET', '/login/check-' . $provider . '?' . http_build_query(['code' => 'authorization-code', 'state' => $parameters['state'], '_destination' => '/projects']));
+        self::assertSame(302, $this->browser->getResponse()->getStatusCode(), (string) $this->browser->getResponse()->getContent());
+        self::assertSame('https://capco.test/projects', $this->browser->getResponse()->headers->get('Location'));
     }
 
-    /**
-     * @throws InvalidArgumentException
-     * @throws MockException
-     */
-    private function testVerifyFranceConnectStateAndNonce(MockObject|ItemInterface $cacheItemMock, UserResponseInterface & MockObject $responseMock): void
+    private function associateProvider(string $provider, User $current): void
     {
-        $this->redisCacheMock = $this->createMock(RedisCache::class);
-        $this->redisCacheMock->method('getItem')->willReturn($cacheItemMock);
-        $this->oauthUserProvider = new OauthUserProvider(
-            $this->userManagerMock,
-            $this->userRepositoryMock,
-            $this->extraMapperMock,
-            $this->indexerMock,
-            [],
-            $this->groupMutationMock,
-            $this->franceConnectSSOConfigurationRepositoryMock,
-            $this->loggerMock,
-            $this->userInvitationHandlerMock,
-            $this->tokenStorageMock,
-            $this->requestStackMock,
-            $this->redisCacheMock,
-            $this->translatorMock,
-            $this->routerMock,
-            'capco'
-        );
+        $this->browser->loginUser($current);
+        $parameters = $this->beginLogin($provider, true);
+        $this->setProviderNonce($parameters['nonce']);
+        $crawler = $this->browser->request('GET', '/login/service/' . $provider . '?' . http_build_query(['code' => 'authorization-code', 'state' => $parameters['state']]));
+        self::assertSame(200, $this->browser->getResponse()->getStatusCode(), (string) $this->browser->getResponse()->getContent());
+        // Submit the real confirmation form, including the CSRF token supplied over HTTP.
+        $this->browser->submit($crawler->filter('form')->form());
+        self::assertSame(302, $this->browser->getResponse()->getStatusCode(), (string) $this->browser->getResponse()->getContent());
+        self::assertSame('/projects', $this->browser->getResponse()->headers->get('Location'));
+    }
 
-        $this->expectException(FranceConnectAuthenticationException::class);
-        $this->expectExceptionMessage('france-connect-connection-error');
-        $this->oauthUserProvider->verifyFranceConnectStateAndNonce($responseMock);
+    private function providerAccount(string $field): User
+    {
+        $this->em->clear();
+        $accounts = $this->em->getRepository(User::class)->findBy([$field => $this->providerSubject]);
+        self::assertCount(1, $accounts);
+
+        return $accounts[0];
+    }
+
+    /** @param array<string, mixed> $claims */
+    private function unsignedClaims(array $claims): string
+    {
+        return base64_encode('{"alg":"none"}') . '.' . base64_encode(json_encode($claims, \JSON_THROW_ON_ERROR)) . '.fixture';
     }
 }

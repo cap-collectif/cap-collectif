@@ -14,6 +14,22 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
  */
 final class CasUserProviderTest extends IdentityWebTestCase
 {
+    private ?string $casIdentifier = null;
+
+    protected function tearDown(): void
+    {
+        try {
+            if (null !== $this->casIdentifier && isset($this->em)) {
+                $account = $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findOneBy(['casId' => $this->casIdentifier]);
+                if (null !== $account) {
+                    self::getContainer()->get('snc_redis.default')->srem('recalculate_user_counters', [$account->getId()]);
+                }
+            }
+        } finally {
+            parent::tearDown();
+        }
+    }
+
     /** @dataProvider accountStates */
     public function testCasLoginCreatesOrReusesItsLocalAccountWithoutOverwritingItsProfile(bool $existing): void
     {
@@ -23,6 +39,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
         $this->em->flush();
         $this->setFeature('login_cas', true);
         $identifier = 'cas-' . bin2hex(random_bytes(8));
+        $this->casIdentifier = $identifier;
         $expectedEmail = $identifier . '@fake-email-cap-collectif.com';
         $expectedUsername = $identifier;
         $existingId = null;
@@ -76,5 +93,41 @@ final class CasUserProviderTest extends IdentityWebTestCase
     {
         yield 'new CAS account' => [false];
         yield 'existing account with updated profile' => [true];
+    }
+
+    /** @dataProvider disabledCasConfigurations */
+    public function testCasSessionDoesNotAuthenticateWhenCasIsDisabled(bool $configurationEnabled, bool $featureEnabled): void
+    {
+        $configuration = $this->em->getRepository(\Capco\AppBundle\Entity\SSO\CASSSOConfiguration::class)->findOneBy([]) ?? new \Capco\AppBundle\Entity\SSO\CASSSOConfiguration();
+        $configuration->setEnabled($configurationEnabled);
+        $this->em->persist($configuration);
+        $this->setFeature('login_cas', $featureEnabled);
+        $identifier = 'cas-disabled-' . bin2hex(random_bytes(8));
+        $account = $this->account()->setCasId($identifier);
+        $id = $account->getId();
+        $email = $account->getEmail();
+        $password = $account->getPassword();
+        $this->em->flush();
+        self::getContainer()->set(\Capco\UserBundle\Handler\CasHandler::class, $this->createStub(\Capco\UserBundle\Handler\CasHandler::class));
+        $session = self::getContainer()->get('session');
+        $session->set('cas_login', $identifier);
+        $session->save();
+        $this->browser->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId()));
+
+        $this->assertViewer(false);
+
+        $account = $this->reload($id);
+        self::assertSame($identifier, $account->getCasId());
+        self::assertSame($email, $account->getEmail());
+        self::assertSame($password, $account->getPassword());
+        self::assertCount(0, $account->getUserGroups());
+        self::assertCount(1, $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findBy(['casId' => $identifier]));
+    }
+
+    /** @return iterable<string, array{bool, bool}> */
+    public static function disabledCasConfigurations(): iterable
+    {
+        yield 'feature disabled' => [true, false];
+        yield 'configuration disabled' => [false, true];
     }
 }

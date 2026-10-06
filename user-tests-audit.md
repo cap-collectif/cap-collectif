@@ -747,7 +747,7 @@ Ajouter les tests unitaires de `Participant`, `ContributionsReconcilier` et `Vot
 
 Réduire ensuite les gros scénarios Cypress à quelques parcours représentatifs, avec une décision explicite pour les cas ignorés et une préparation indépendante du schéma SQL historique.
 
-### Partie 4 — SSO
+### Partie 4 — SSO — filet minimal réalisé, validation locale le 6 octobre 2026
 
 Découpler les tests OAuth des interfaces FOS, compléter les contrats CAS et ajouter SAML ainsi que les callbacks complets. Utiliser des réponses fournisseur figées et vérifier le compte créé ou rattaché, la session et la redirection, y compris les collisions d'adresse e-mail et les refus du fournisseur.
 
@@ -942,6 +942,226 @@ Le périmètre reste limité aux tests touchés par ce commit et à leur documen
 - date de suppression fixe et timestamp de reset borné par le début et la fin de la requête.
 
 Validation ciblée : **63 tests / 1 216 assertions** en ordre aléatoire (seed `20284`), **6 tests / 16 assertions** dans `UserTest`. PHPStan, PHP-CS-Fixer et Rector passent sur ces fichiers. Une mutation du canonicalizer chargée uniquement en mémoire, ajoutant un `trim()`, fait échouer les deux cas de conservation des espaces ; aucun fichier de production n’est modifié. Les scénarios `CharacterizationGap` sont conservés sans modifier les règles produit. Les contrôles PHP globaux avant commit restent à exécuter si un commit est demandé.
+
+## Début de la partie 4 — 5 octobre 2026
+
+Le premier lot est réalisé sur `20284-sso-tests`, créée depuis
+`20284-participant-reconciliation-tests`. Il ne clôt pas la partie 4.
+
+- `OauthUserProviderTest` utilise désormais le gestionnaire interne `Capco\UserBundle\Doctrine\UserManager`, sans import ni mock direct de l'interface FOS. Ce gestionnaire hérite encore de FOS en production : le retrait du vendor reste un chantier séparé. Les deux utilisateurs auparavant simulés sont remplacés par des entités réelles, et une session en mémoire remplace les attentes sur l'ordre des écritures. Les assertions vérifient les identifiants, les jetons, la conservation du profil OpenID et, lors d'une collision FranceConnect, la conservation des deux comptes ainsi que les données de déconnexion et le message utilisateur. Les attentes historiques sur certaines interactions de recherche/mise à jour subsistent ; la classe conserve donc son marqueur `non-compliant` et ne prouve pas la persistance ni un callback HTTP OAuth complet.
+- `SamlUserProviderTest` ajoute cinq scénarios HTTP sur `/login-saml` : création, rattachement à un compte de même e-mail, réutilisation après changement d'e-mail local, priorité d'un identifiant SAML déjà lié sur l'e-mail d'un autre compte, et refus d'une réponse fournisseur vide. Les scénarios heureux vérifient la redirection, le viewer authentifié lors des requêtes suivantes, les données et le groupe SAML relus après vidage de l'EntityManager, l'absence de doublon à la reconnexion et la préservation d'un compte voisin.
+- `CasUserProviderTest` ajoute deux refus HTTP : feature flag désactivé et configuration CAS désactivée. Une session contenant un identifiant CAS connu reste anonyme ; le compte, son mot de passe et ses groupes sont préservés.
+
+Ces nouveaux scénarios suivent la frontière HTTP et les règles d'isolation de
+l'ADR PHPUnit. Le client SimpleSAML est la seule frontière fournisseur remplacée
+dans les scénarios SAML ; son service est rendu public uniquement en environnement
+`test`. Un kernel de test doté d'un cache distinct permet de conserver les services
+SAML, normalement supprimés à la compilation lorsque l'autorisation SAML est
+désactivée. Les variables d'environnement sont fixées puis restaurées, les feature
+flags et sessions sont nettoyés, les écritures SQL sont annulées et les entrées Redis
+de recalcul des comptes créés par SAML sont retirées. Ces tests ne valident ni la
+signature d'une assertion SAML ni les échanges réseau avec un fournisseur réel,
+ni l'indexation Elasticsearch. Aucun nouveau contrat Jest n'est ajouté ou dupliqué.
+
+Validation locale : **46 tests, 547 assertions**, en ordre aléatoire
+(`--random-order-seed=20261005`) sur OAuth, SAML, CAS, logout CAS et authentification
+locale. PHPStan global, PHP-CS-Fixer global en dry-run, Rector global en dry-run
+et `git diff --check` passent. La suppression temporaire du rattachement SAML
+par e-mail fait échouer l'assertion sur le compte relu en base ; le test repasse
+après restauration intégrale de la production. La suite SAML est découverte par
+PHPUnit et correspond au glob CircleCI `tests/**/*Test.php` ; la CI distante
+n'a pas été exécutée.
+
+À l'issue de ce premier lot restaient notamment les callbacks HTTP
+OAuth/OpenID/FranceConnect complets, les refus fournisseur et erreurs réseau,
+les autres mappings d'attributs SAML, les attributs manquants, le logout SAML
+et les contrats CAS encore absents.
+
+## Lot SAML de la partie 4 — 5 octobre 2026
+
+Ce lot complète les cinq scénarios SAML du premier lot avec seize nouveaux cas :
+
+- Les sept fournisseurs configurés (`dev`, `grandest`, `univ-lyon1`, `cd59`,
+  `april`, `clermont`, `sorbonne`) utilisent leur attribut d'identité attendu.
+  Chaque connexion traverse `/login-saml`, vérifie la redirection et le viewer,
+  puis relit le rattachement SAML, le profil local, le mot de passe et le groupe
+  après vidage de l'EntityManager.
+- Pour chaque fournisseur, une réponse contenant des attributs mais dépourvue
+  de l'attribut d'identité attendu renvoie actuellement **HTTP 500**. Le viewer
+  reste anonyme, sans rattachement ni groupe SAML, et le mot de passe est conservé.
+  Les cas `CharacterizationGap` documentent cette lacune ; ils ne font pas du
+  statut 500 une exigence produit à préserver indéfiniment.
+- La déconnexion HTTP efface l'authentification et les données privées de session,
+  y compris après rejeu du cookie précédent, et conserve le compte en base.
+  L'appel de déconnexion au fournisseur et sa destination sont vérifiés à la
+  frontière SimpleSAML uniquement lorsque le feature flag SAML est activé.
+
+`SamlWebTestCase` centralise le kernel SAML, l'injection du client externe,
+le choix du fournisseur et la restauration de l'environnement. L'authenticator
+réel est rendu public uniquement dans la configuration `test`, pour choisir le
+fournisseur sans modifier le cache commun. La suite de logout utilise une session
+SimpleSAML transitoire et des processus séparés ; les autres règles d'isolation
+SQL, Redis, sessions et feature flags du premier lot restent applicables.
+Ces tests ne valident ni les signatures SAML ni un échange réseau avec un IdP réel.
+
+La modification temporaire du mapping Sorbonne de `mail` vers `email` fait échouer
+le scénario HTTP correspondant (500 au lieu de 302). Le fichier de production
+est intégralement restauré avant le rejeu du périmètre.
+
+Les deux suites concrètes sont découvertes par PHPUnit : **21 cas SAML**,
+compatibles avec le glob CircleCI `tests/**/*Test.php`. La CI distante reste
+non exécutée. Aucun contrat Jest n'est ajouté ou dupliqué.
+
+Validation locale finale : **62 tests, 853 assertions**, en ordre aléatoire
+(`--random-order-seed=20261005`) sur OAuth, SAML, logout SAML, CAS, logout CAS
+et authentification locale. PHPStan global, PHP-CS-Fixer global en dry-run,
+Rector global en dry-run et `git diff --check` passent. Aucun fichier de
+production n'est modifié.
+
+Les callbacks HTTP OAuth/OpenID/FranceConnect, les refus et erreurs réseau
+de ces fournisseurs et les contrats CAS manquants restent à traiter. Les
+brouillons OAuth/CAS non validés sont conservés hors du checkout, sans ajout
+à la suite ni à sa configuration. Le travail s'arrête après ce lot SAML à la
+demande de l'utilisateur ; la partie 4 n'est pas entièrement terminée.
+
+## Lots CAS et callbacks OAuth de la partie 4 — 6 octobre 2026
+
+La reprise conserve le lot SAML et ajoute deux suites HTTP, après correction
+et validation des brouillons conservés hors du checkout :
+
+- `CasAuthenticationTest` couvre sept cas : retour de la passerelle CAS vers la
+  destination locale demandée, identité vide, entrée désactivée par flag ou
+  configuration, et autorisation CAPEB accordée pour deux types utilisateur ou
+  refusée. Les comptes, types et groupes sont relus en SQL après `clear()` ;
+  le compte voisin reste inchangé. Les refus empêchent la connexion ; l'entrée
+  désactivée ne contacte pas la passerelle. Le refus CAPEB actuel renvoie 403,
+  tandis qu'une identité CAS vide renvoie 401 avec un message générique.
+- `OAuthCallbackTest` couvre 35 cas OpenID, Facebook et FranceConnect v1/v2 :
+  création, rattachement par e-mail, priorité de l'identité fournisseur déjà liée
+  lorsque son nouvel e-mail appartient à un autre compte, conservation du profil
+  et du mot de passe, et absence de doublon dans les groupes SSO existants.
+  Chaque scénario commence par la redirection d'autorisation puis traverse le
+  callback HTTP ; le viewer et les données persistées sont contrôlés.
+- Les refus OAuth vérifient la redirection d'échec, l'erreur en session,
+  l'absence d'authentification et la conservation du compte sans rattachement :
+  refus fournisseur standard sans code, `invalid_grant`, absence de code et
+  erreurs réseau des endpoints token/userinfo. FranceConnect ajoute state
+  étranger, nonce étranger et absence du cache de state attendu.
+- FranceConnect v2 utilise de vrais JWT RS256 et vérifie la signature de la
+  réponse userinfo, ainsi que les refus d'une signature altérée, d'une réponse
+  malformée et d'un jeton expiré. Les clés publiques sont préparées dans le
+  cache isolé par l'API publique `CachedKeySet`, avec une réponse JWKS figée.
+  La récupération et la rotation des clés auprès du fournisseur réel ne sont
+  pas exercées.
+
+Les vrais resource owners, gestionnaire de comptes, Doctrine et firewall sont
+utilisés. Les doubles remplacent les passerelles CAS/CAPEB et le transport HTTP
+OAuth. La configuration `test` rend ces frontières remplaçables et permet un
+namespace Redis unique par scénario ; seul ce namespace est vidé. SQL, sessions,
+flags et variables d'environnement sont restaurés, et les comptes créés par les
+callbacks sont retirés de la file Redis de recalcul des compteurs. L'indexation
+Elasticsearch reste neutralisée par le socle HTTP.
+
+Chaque reconnexion OAuth prépare un compte et ses groupes déjà persistés, puis
+exécute un nouveau parcours HTTP dans un scénario indépendant. Elle ne conserve
+pas un resource owner FranceConnect à travers plusieurs cycles login/logout :
+ce service capture l'état de session lors de sa construction, alors que les
+requêtes de production reconstruisent les services. L'idempotence des groupes
+est vérifiée par leurs titres et la conservation du compte, après relecture SQL.
+
+Un refus standard OpenID/Facebook est actuellement enregistré comme absence de
+code OAuth ; FranceConnect conserve son message de refus dédié. Ce constat ne
+prescrit pas de conserver cette différence de messages lors d'une évolution.
+Ces suites ne revendiquent pas de validation des signatures SAML, ni des règles
+issuer/audience, ni de validation cryptographique complète des ID tokens
+OpenID/FranceConnect. Les échanges réels avec les fournisseurs restent exclus.
+
+Deux régressions temporaires sont discriminées : supprimer la validation de
+signature FranceConnect v2 transforme le refus attendu en callback réussi ;
+supprimer l'affectation du type CAPEB fait échouer sa relecture. Les fichiers de
+production sont intégralement restaurés avant le rejeu du périmètre.
+
+Le filet minimal demandé par la partie 4 est désormais réalisé : découplage du
+mock FOS OAuth, contrats CAS/SAML et callbacks OAuth avec collisions et refus.
+Cela ne clôt pas la partie 5, ne corrige pas les lacunes produit caractérisées et
+ne constitue pas une autorisation de supprimer FOSUserBundle. Avant la revue
+de conformité ci-dessous, la classe OAuth unitaire historique conservait son
+statut `non-compliant` ; les nouvelles suites HTTP complétaient ses preuves
+de persistance.
+
+Validation locale : **130 tests, 2 176 assertions**, en ordre aléatoire
+(`--random-order-seed=20261006`) sur les suites OAuth/CAS/SAML, leurs logouts,
+les resource owners OpenID/FranceConnect, les options FranceConnect, le
+contrôleur SSO, les subscribers de callback/logout et l'authentification locale.
+Les 42 nouveaux cas passent aussi ensemble en ordre aléatoire. PHPStan global,
+PHP-CS-Fixer global en dry-run, Rector global en dry-run et `git diff --check`
+passent. Aucun fichier de production n'est modifié dans le résultat final.
+
+La découverte PHPUnit retrouve les 35 cas OAuth et les sept cas CAS ; leurs
+fichiers correspondent au glob CircleCI `tests/**/*Test.php`. Aucun contrat Jest
+n'est ajouté ou dupliqué. La CI distante reste non exécutée.
+
+## Revue de conformité de la partie 4 — 6 octobre 2026
+
+La reprise reste dans le même commit de la branche. `OauthUserProviderTest`
+utilise maintenant les vrais services, repositories et gestionnaire de comptes.
+Ses assertions sur le nombre d'appels et les arguments des recherches/mises à
+jour sont supprimées. Les contrats communs déjà couverts par `OAuthCallbackTest`
+sont regroupés ; les variantes propres aux instances et les règles de mapping
+restent vérifiées explicitement.
+
+La classe comprend **18 scénarios HTTP** : sélection de l'e-mail principal,
+`mail` et `other email`, priorité du jeton OpenID selon l'instance, rafraîchissement
+ou conservation du profil, création Facebook sans adresse e-mail, déplacement
+d'une identité fournisseur après confirmation du formulaire réel, mapping
+FranceConnect autorisé et refus de rattachement. Les comptes sont relus après
+`clear()`, les mots de passe locaux sont préservés et les viewers contrôlés.
+La collision FranceConnect vérifie aussi la redirection de déconnexion du
+fournisseur et son `id_token_hint`, sans lire les clés internes de la session.
+
+Deux méthodes conservent un statut `non-compliant` explicite, au niveau le plus
+précis, afin de préserver **quatre scénarios historiques utiles** :
+
+- les trois variantes de la méthode publique de mapping FranceConnect utilisent
+  encore un kernel pour obtenir ce service, mais ne revendiquent aucune preuve
+  de persistance ; leurs résultats attendus sont littéraux ;
+- la réponse FranceConnect sans access token ni sujet est testée directement sur
+  le provider réel, car elle ne traverse pas le transport OAuth normal. Sa
+  persistance est relue et son contexte de requête/authentification est restauré.
+
+Aucun graphe de services métier n'est simulé dans ces exceptions. Elles évitent
+une modification de production uniquement destinée aux tests. Le statut de
+classe `compliant` s'applique aux scénarios HTTP, avec les exceptions de méthode
+ci-dessus. `@coversNothing` est retiré ; aucune annotation de couverture ne reste
+dans les fichiers PHP modifiés par ce commit.
+
+`OAuthWebTestCase` centralise les réponses externes, la configuration avant le
+boot du kernel, l'horloge JWT fixe et sa restauration, ainsi que l'isolation Redis.
+Chaque scénario possède un sujet fournisseur unique. Le nettoyage des comptes
+créés fonctionne aussi sans adresse e-mail ou sans identifiant fournisseur.
+`CasUserProviderTest` retire désormais de Redis le recalcul du compte créé par
+le callback avant le rollback SQL. Les cinq `public: true` redondants des services
+ajoutés sont retirés ; `_defaults.public: true` conserve leur caractère remplaçable.
+
+Le callback HTTP OpenID refuse actuellement une réponse contenant seulement un
+ID token sans access token : ce refus est ajouté aux **36 cas** de
+`OAuthCallbackTest`, avec absence de rattachement et de session authentifiée.
+Il distingue la priorité d'un ID token en présence d'un access token du refus du
+transport lorsque ce dernier manque.
+
+Validation après reprise : **112 tests / 2 308 assertions**, puis **27 tests /
+489 assertions** sur les contrats locaux et de logout voisins, le nettoyage CAS
+et le rattachement OpenID après restauration de production. Ces deux lots
+passent en ordre aléatoire avec la seed `20261006` et couvrent **132 scénarios
+uniques** ; sept scénarios sont rejoués dans le second lot. Une suppression
+temporaire de la dissociation de l'identité OpenID précédente fait échouer le
+rattachement (collision SQL, HTTP 500 au lieu de 302) ; le fichier de production
+est restauré octet pour octet et les trois variantes repassent.
+
+PHPStan global, PHP-CS-Fixer global en dry-run, Rector global en dry-run et
+`git diff --check` passent. Les deux classes OAuth concrètes restent découvertes
+par PHPUnit et le glob CircleCI `tests/**/*Test.php` ; le socle partagé est abstrait.
+Aucun contrat Jest n'est ajouté ou dupliqué. La CI distante reste non exécutée.
 
 ## Critères de sortie avant la PR de suppression de FOSUserBundle
 

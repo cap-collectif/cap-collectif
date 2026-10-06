@@ -43,6 +43,29 @@ services:
         arguments:
             $environment: '%kernel.environment%'
 
+    Capco\UserBundle\Security\Service\CapebUserFilter:
+        arguments:
+            $url: '%cas_verify_url_profile%'
+
+    # Keep the provider transport replaceable while using real resource owners.
+    hwi_oauth.http_client:
+        class: Http\Client\Common\HttpMethodsClient
+        arguments: ['@hwi_oauth.http.client', '@hwi_oauth.http.message_factory']
+
+    Capco\AppBundle\Cache\RedisCache:
+        arguments:
+            $redisClient: '@snc_redis.default'
+            $namespace: '%env(default:redis_prefix:CAPCO_TEST_PROVIDER_CACHE_NAMESPACE)%'
+
+    # Replace only the SAML provider boundary in HTTP authentication tests.
+    SimpleSAML\Auth\Simple:
+        arguments: ['%saml_sp%']
+
+    Capco\UserBundle\Authenticator\SamlAuthenticator:
+        arguments:
+            $samlAuth: '@SimpleSAML\Auth\Simple'
+            $samlIdp: '%saml_sp%'
+
     # We disable captcha validation
     Capco\AppBundle\Validator\Constraints\CaptchaValidator:
         autowire: true
