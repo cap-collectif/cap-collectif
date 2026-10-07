@@ -1,0 +1,8 @@
+UpdateLegalSettingErrorCode:
+    type: enum
+    config:
+        values:
+            LEGAL_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\LegalSettings\UpdateLegalSettingMutation::LEGAL_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\LegalSettings\UpdateLegalSettingMutation::INVALID_VALUE

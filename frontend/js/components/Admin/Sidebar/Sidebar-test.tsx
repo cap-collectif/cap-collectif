@@ -157,6 +157,27 @@ describe('<Sidebar />', () => {
     )
     expect(wrapper.find('a[href$="/admin-next/cookie-settings"]')).toHaveLength(1)
   })
+  it('links to Sonata legal settings while the migration is disabled', () => {
+    const wrapper = render(
+      <MockProviders store={{ default: { features }, user: { user: userAdmin } }}>
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="pages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin/settings/pages.legal/list"]')).toHaveLength(1)
+  })
+  it('links to Admin Next legal settings while the migration is enabled', () => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, unstable__sonata_migration_to_admin_next: true } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="pages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin-next/legal-settings"]')).toHaveLength(1)
+  })
   it('renders when the user is a project admin and not an admin', () => {
     const wrapper = render(
       <MockProviders

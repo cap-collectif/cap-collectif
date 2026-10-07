@@ -10041,6 +10041,9 @@ type Mutation {
   """update a SiteParameter of the pages.login category."""
   updateLoginSetting(input: UpdateLoginSettingInput!): UpdateLoginSettingPayload
 
+  """update a SiteParameter of the pages.legal category."""
+  updateLegalSetting(input: UpdateLegalSettingInput!): UpdateLegalSettingPayload
+
   """update a SiteParameter of the pages.cookies category."""
   updateCookieSetting(input: UpdateCookieSettingInput!): UpdateCookieSettingPayload
 
@@ -15416,6 +15419,9 @@ type Query {
 
   """get all site parameters of the pages.login category"""
   loginSettings: [SiteParameter!]!
+
+  """get all site parameters of the pages.legal category"""
+  legalSettings: [SiteParameter!]!
 
   """List global custom code configurations with their version history."""
   customCodeConfiguration(
@@ -20950,6 +20956,29 @@ type UpdateHttpRedirectPayload {
   """The available errors if any."""
   errorCode: HttpRedirectErrorCode
   clientMutationId: String
+}
+
+enum UpdateLegalSettingErrorCode {
+  LEGAL_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateLegalSettingInput {
+  id: ID!
+  translations: [UpdateLegalSettingTranslationInput!]!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateLegalSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateLegalSettingErrorCode
+  clientMutationId: String
+}
+
+input UpdateLegalSettingTranslationInput {
+  locale: TranslationLocale!
+  value: String!
 }
 
 input UpdateLocaleInput {

@@ -7,6 +7,7 @@ const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/login-settings': '/admin/settings/pages.login/list',
   '/admin-next/newsletter-subscriptions': '/admin/capco/app/newslettersubscription/list',
   '/admin-next/cookie-settings': '/admin/settings/pages.cookies/list',
+  '/admin-next/legal-settings': '/admin/settings/pages.legal/list',
 }
 
 export const getSideBarItemsFiltered = (

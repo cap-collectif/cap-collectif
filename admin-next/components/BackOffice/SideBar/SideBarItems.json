@@ -363,7 +363,7 @@
             },
             {
                 "title": "admin.label.pages.legal",
-                "href": "/admin/settings/pages.legal/list",
+                "href": "/admin-next/legal-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

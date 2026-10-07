@@ -1644,6 +1644,14 @@ InternalMutation:
                     inputType: UpdateLoginSettingInput
                     payloadType: UpdateLoginSettingPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\LoginSettings\\UpdateLoginSettingMutation", args)'
+            updateLegalSetting:
+                description: 'update a SiteParameter of the pages.legal category.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateLegalSettingInput
+                    payloadType: UpdateLegalSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\LegalSettings\\UpdateLegalSettingMutation", args)'
             updateCookieSetting:
                 description: 'update a SiteParameter of the pages.cookies category.'
                 access: "@=hasRole('ROLE_ADMIN')"

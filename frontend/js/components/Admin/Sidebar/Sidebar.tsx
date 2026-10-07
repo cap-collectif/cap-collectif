@@ -301,7 +301,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.privacy_policy && (
                     <SidebarLink text="admin.label.pages.privacy" href="/admin/settings/pages.privacy/list" />
                   )}
-                  <SidebarLink text="admin.label.pages.legal" href="/admin/settings/pages.legal/list" />
+                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
+                  <SidebarLink
+                    text="admin.label.pages.legal"
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/legal-settings'
+                        : '/admin/settings/pages.legal/list'
+                    }
+                  />
                   <SidebarLink text="admin.label.pages.charter" href="/admin/settings/pages.charter/list" />
                   <SidebarLink text="admin.label.pages.shield" href="/admin-next/authentication" />
                 </SidebarAccordionPanel>

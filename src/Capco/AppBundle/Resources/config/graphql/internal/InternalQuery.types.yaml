@@ -526,6 +526,11 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[SiteParameter!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\LoginSettings\\LoginSettingsQueryResolver")'
+            legalSettings:
+                description: 'get all site parameters of the pages.legal category'
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[SiteParameter!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\LegalSettings\\LegalSettingsQueryResolver")'
             customCodeConfiguration:
                 description: 'List global custom code configurations with their version history.'
                 access: "@=hasRole('ROLE_ADMIN')"

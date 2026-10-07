@@ -1,0 +1,10 @@
+UpdateLegalSettingInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+            translations:
+                type: '[UpdateLegalSettingTranslationInput!]!'
+            isEnabled:
+                type: 'Boolean!'
