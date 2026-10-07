@@ -46,7 +46,7 @@ const AddMediatorVotesMutation = /* GraphQL*/ `
 
 /**
  * @jest-status non-compliant
- * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ * @jest-reason The happy path relies on a response snapshot; outgoing API messages are not isolated.
  */
 describe('mutations|addMediatorVotes', () => {
   it('Mediator add votes.', async () => {
@@ -102,10 +102,11 @@ describe('mutations|addMediatorVotes', () => {
     expect(normalizedResponse).toMatchSnapshot()
   })
   it('Should return phone already used error.', async () => {
+    // The existing account reserves the same verified phone requested for the participant.
     await global.runSQL(
-      'INSERT INTO requirement (id, step_id, type, label, position) VALUES ("requirement1234", "selectionstep1", "PHONE_VERIFIED", null, 0)',
+      'INSERT INTO requirement (id, step_id, type, label, position) VALUES ("counterPhoneRequirement", "selectionstep1", "PHONE_VERIFIED", null, 0)',
     )
-    await global.runSQL('UPDATE fos_user SET phone = "+33601010101", phone_confirmed = 1 where id = "user27"')
+    await global.runSQL('UPDATE fos_user SET phone = "+33601010101", phone_confirmed = 1 WHERE id = "user27"')
 
     const variables = {
       input: {
@@ -125,6 +126,9 @@ describe('mutations|addMediatorVotes', () => {
       },
     }
     const addMediatorVotes = await graphql(AddMediatorVotesMutation, variables, 'mediator')
+    expect(addMediatorVotes).toEqual({
+      addMediatorVotes: { errors: [{ field: 'phone', message: 'PHONE_ALREADY_USED_BY_ANOTHER_USER' }], mediator: null },
+    })
     expect(addMediatorVotes).toMatchSnapshot()
   })
 })

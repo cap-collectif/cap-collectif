@@ -1,5 +1,6 @@
 /* eslint-env jest */
 import '../../../_setupDB'
+import '../../../_setupES'
 
 const registrationMutation = /* GraphQL */ `
   mutation Register($input: RegisterInput!) {
@@ -51,8 +52,7 @@ const input = {
 
 /**
  * @jest-status non-compliant
- * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
- * the database helper runs only before each test.
+ * @jest-reason Feature flags are reset to test defaults rather than their initial state; outgoing messages are not isolated.
  */
 describe('Internal|register mutation', () => {
   beforeEach(async () => {
@@ -130,12 +130,15 @@ describe('Internal|register mutation', () => {
       email: 'pwned@gmail.com',
     }
 
-    await expect(graphql(registrationErrorsMutation, { input: maliciousInput }, 'internal')).resolves.toEqual({
-      register: { errorsCode: null },
+    await expect(graphql(registrationMutation, { input: maliciousInput }, 'internal')).resolves.toEqual({
+      register: { user: { displayName: 'pwned' }, errorsCode: null },
     })
+    // Check the exact stored username so API rendering cannot hide retained markup.
     await expect(
-      global.runSQL(`SELECT username FROM fos_user WHERE email = "${maliciousInput.email}"`),
-    ).resolves.toContain('pwned')
+      global.runSQL(
+        `SELECT CONCAT("stored-account:", username, ":", email, ":") AS stored_account FROM fos_user WHERE email = "${maliciousInput.email}"`,
+      ),
+    ).resolves.toContain(`stored-account:pwned:${maliciousInput.email}:`)
   })
 
   it('adds a registered user to the invited group', async () => {

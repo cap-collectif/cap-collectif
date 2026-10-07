@@ -9,10 +9,10 @@ const env = process.env.CI ? 'ci' : 'local'
 beforeEach(async () => {
   console.log('Restoring ElasticSearch snapshot…')
   console.time('restore_es')
-  const { stderrEs } = await exec('fab ' + env + '.qa.restore-es-snapshot')
+  const { stderr } = await exec('fab ' + env + '.qa.restore-es-snapshot')
 
-  if (stderrEs) {
-    console.error(`error: ${stderrEs}`)
+  if (stderr) {
+    console.error(`error: ${stderr}`)
   }
   console.log('Successfully restored ES !')
   console.timeEnd('restore_es')

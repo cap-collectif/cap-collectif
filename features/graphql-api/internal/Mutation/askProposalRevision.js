@@ -1,5 +1,6 @@
 /* eslint-env jest */
 import '../../_setupDB'
+import '../../_setupES'
 
 const AskProposalRevisionMutation = /* GraphQL*/ `
   mutation askProposalRevision($input: AskProposalRevisionInput!) {
@@ -68,10 +69,10 @@ describe('mutations.askProposalRevision', () => {
   })
   /**
    * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-reason Checks the explicit refusal and snapshot without rereading persisted revisions or isolating outgoing messages.
    */
   it('should not ask if proposal has no author.', async () => {
-    await runSql('UPDATE proposal SET author_id = NULL WHERE id = "proposalIdf1"')
+    await global.runSQL('UPDATE proposal SET author_id = NULL WHERE id = "proposalIdf1"')
     const response = await graphql(
       AskProposalRevisionMutation,
       {
@@ -84,15 +85,15 @@ describe('mutations.askProposalRevision', () => {
       },
       'internal_admin',
     )
+    expect(response).toEqual({ askProposalRevision: { errorCode: 'PROPOSAL_AUTHOR_HAS_NO_EMAIL', proposal: null } })
     expect(response).toMatchSnapshot()
-    await runSql('UPDATE proposal SET author_id = "userKiroule" WHERE id = "proposalIdf1"')
   })
   /**
    * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-reason Checks the explicit refusal and snapshot without rereading persisted revisions or isolating outgoing messages.
    */
   it("should not ask if proposal's author has no email.", async () => {
-    await runSql('UPDATE fos_user SET email = NULL WHERE id = "userKiroule"')
+    await global.runSQL('UPDATE fos_user SET email = NULL WHERE id = "userKiroule"')
     const response = await graphql(
       AskProposalRevisionMutation,
       {
@@ -105,8 +106,8 @@ describe('mutations.askProposalRevision', () => {
       },
       'internal_admin',
     )
+    expect(response).toEqual({ askProposalRevision: { errorCode: 'PROPOSAL_AUTHOR_HAS_NO_EMAIL', proposal: null } })
     expect(response).toMatchSnapshot()
-    await runSql('UPDATE fos_user SET email = "pierre@cap-collectif.com" WHERE id = "userKiroule"')
   })
   // user
   /**

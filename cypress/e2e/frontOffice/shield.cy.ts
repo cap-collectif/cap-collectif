@@ -2,6 +2,7 @@ import { Base } from '~e2e-pages/index'
 
 describe('Shield Mode', () => {
   before(() => {
+    cy.task('db:restore')
     cy.task('enable:feature', 'shield_mode')
     cy.task('disable:feature', 'registration')
   })
@@ -50,9 +51,5 @@ describe('Shield Mode', () => {
     cy.get('#registration-button').should('be.visible')
 
     cy.contains('registration').should('be.visible')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'shield_mode') // prevent impacting other tests
   })
 })

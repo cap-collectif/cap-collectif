@@ -32,10 +32,9 @@ Avant revue, vérifier :
   sont restaurés même en cas d'échec.
 - Les snapshots éventuels ont été relus, et les artefacts Relay concernés régénérés.
 - La découverte CI est préservée. `admin-next` utilise le sharding Jest ; le partage
-  CircleCI historique cible actuellement `frontend/**/*-test.tsx`, alors que le
-  runner local reconnaît aussi `*-test.ts`. Lors d'un changement de cette répartition,
-  vérifier la couverture des fichiers et éviter une exécution répétée des tests `.ts`
-  sur plusieurs exécuteurs.
+  CircleCI frontend inclut `frontend/**/*-test.ts` et `frontend/**/*-test.tsx` dans
+  une même répartition. Chaque exécuteur utilise `--runTestsByPath` avec ses seuls
+  fichiers ; une répartition vide n'exécute pas le runner frontend.
 
 La couverture est un indicateur de zones à examiner, pas un objectif de pourcentage
 qui justifierait des tests de détails internes. Appliquer les contrôles de lint et

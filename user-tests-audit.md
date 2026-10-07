@@ -1,12 +1,24 @@
-# Audit des tests User et Participant avant suppression de FOSUserBundle
+# Audit et remise en état des tests User et Participant
 
-> Audit statique réalisé le 25 septembre 2026 sur la branche `20284-tests-users`, commit `48f0cc82ac`.
+> Audit statique initial réalisé le 25 septembre 2026 sur la branche `20284-tests-users`, commit `48f0cc82ac`.
 >
-> Objectif : disposer de tests de caractérisation qui restent valides lorsque FOSUserBundle est remplacé. Les seuls frameworks cibles sont PHPUnit, Jest et Cypress.
+> Les inventaires, chiffres et lacunes des sections initiales décrivent cet état historique. Le plan actualisé et les comptes rendus datés décrivent les travaux suivants ; les résultats de validation restent associés à la version exécutée. La partie 5 tient compte du retrait des restaurations Jest en fin de suite le 7 octobre 2026.
+>
+> Objectif : remettre les tests liés aux User et Participant d’aplomb : couverture des contrats existants, assertions explicites, isolation, exécution et découverte CI. Les frameworks cibles sur ce périmètre sont PHPUnit, Jest et Cypress.
 
-## Résumé exécutif
+## Décision de périmètre — clarifications des 6 et 7 octobre 2026
 
-La couverture fonctionnelle existe, mais elle n'est pas encore suffisamment indépendante pour sécuriser la suppression de FOSUserBundle.
+**Cet audit concerne uniquement la remise en état des tests User/Participant. Le code de production, FOSUserBundle et le schéma SQL restent en place. La table `fos_user`, ses colonnes et les données existantes ne sont pas renommées.**
+
+La suppression de FOSUserBundle appartient au chantier séparé `18981-remove-fos-user`, avec une stack de 11 branches en attente indiquée par l’utilisateur. Cette stack sera reprise plus tard ; elle ne fait pas partie du plan de cet audit.
+
+Les préparations et vérifications SQL des tests restent donc valables. Elles peuvent volontairement vérifier les noms physiques du schéma conservé et doivent échouer si ce contrat change. Elles ne constituent pas, à elles seules, une dépendance au code PHP de FOSUserBundle. Les tests peuvent réduire leurs dépendances aux détails internes lorsqu’ils passent par les contrats publics existants, sans refonte de production. Un préfixe `fos_user` dans le stockage ou un contrat public n’est pas un motif de remplacement.
+
+Les comptes rendus ci-dessous conservent les réalisations et validations historiques. Les prescriptions initiales demandant de supprimer tout SQL sur `fos_user` sont corrigées dans ce document. La partie 5 a été reprise sur la branche existante : les helpers Doctrine introduits uniquement pour masquer le schéma sont retirés et les accès SQL utiles sont rétablis. Le compte rendu de cette révision distingue les validations de l'ancienne approche de celles du résultat corrigé.
+
+## Résumé exécutif de l’audit initial — 25 septembre 2026
+
+La couverture fonctionnelle existe, mais certaines assertions, lacunes et dépendances entre scénarios limitent la fiabilité des tests User/Participant.
 
 Les points positifs sont les suivants :
 
@@ -15,16 +27,16 @@ Les points positifs sont les suivants :
 - les algorithmes d'anonymisation automatisée, une partie de la réconciliation `Participant` → `User`, les exports et les fournisseurs OAuth/OpenID/FranceConnect disposent déjà de tests PHPUnit substantiels ;
 - les mutations Jest restaurent la base avant chaque test et 25 des 27 fichiers Cypress retenus par le screening appliquent `db:restore`.
 
-Les blocages à traiter avant de reprendre la suppression sont :
+Les écarts de test identifiés dans l’audit initial sont :
 
 1. **PHPSpec est encore une suite active de CI.** Le dépôt contient 239 specs, dont 62 fichiers candidats sur le périmètre identité. Les contrats utiles doivent être migrés vers PHPUnit ; les specs « initializable » sans contrat métier peuvent être supprimées.
-2. **23 artefacts de test nomment directement FOSUserBundle ou `fos_user`.** Ils ne survivront pas à un remplacement du vendor sans modification.
+2. **23 artefacts de test nommaient directement FOSUserBundle ou `fos_user` lors de l’audit initial.** Cet inventaire mélange des dépendances PHP à remplacer et des références au schéma SQL conservé. Les références à la table `fos_user` restent valables. Les couplages PHP sont à examiner pour améliorer les tests, sans imposer une adaptation de production dans cet audit.
 3. **Les suites Cypress de réconciliation ne sont pas fiables comme filet de sécurité.** `proposalSelectionVoteWorkflow.cy.ts` contient un `it.only`, ainsi que plusieurs suites/tests ignorés ; `proposalCollectVoteWorkflow.cy.ts` contient également plusieurs suites/tests ignorés.
 4. **Le cœur du modèle est peu caractérisé.** `UserSpec` ne vérifie que l'initialisation et un cas de `getContributions()`. Il n'existe pas de test unitaire direct de `Participant`, des invariants d'identité, des rôles, de l'état du compte ou du cycle des jetons.
 5. **Des composants critiques n'ont pas de test backend dédié** : `SamlAuthenticator`, `SamlUserProvider`, `SAMLLogoutHandler`, `CasAuthenticator`, `SimplePreAuthenticator`, `ResettingController`, `MagicLinkController`, `ProfileController`, `MembersController`, `CreateUserMutation`, `DeleteParticipantMutation`, `SendMagicLinkEmailMutation`, `ResetPasswordMutation`, `ResendEmailConfirmationMutation` et les mutations de téléphone du `Participant`.
 6. **Une partie importante des assertions repose sur des snapshots.** 98 des 110 candidats Jest GraphQL et les 94 candidats Jest UI utilisent `toMatchSnapshot`. Les snapshots sont utiles pour la forme d'une réponse, mais protègent mal les invariants d'identité et rendent les migrations bruyantes.
 
-Verdict : **ne pas utiliser la suite actuelle comme unique garde-fou de la suppression de FOSUserBundle**. Il faut d'abord migrer les contrats PHPSpec prioritaires, éliminer les dépendances directes au vendor et ajouter les tests manquants décrits dans cet audit.
+Verdict initial : **renforcer les tests User/Participant et leur fiabilité**. Migrer leurs contrats PHPSpec utiles, privilégier les résultats publics et les effets persistés, puis compléter les lacunes de couverture décrites dans cet audit.
 
 ## Périmètre et méthode
 
@@ -58,7 +70,7 @@ Ces nombres sont un screening conservateur par nom et contenu, pas une mesure de
 
 Production principale :
 
-- `src/Capco/Capco/UserBundle/Entity/AbstractUser.php` étend directement `FOS\UserBundle\Model\User` ;
+- `src/Capco/UserBundle/Entity/AbstractUser.php` étend directement `FOS\UserBundle\Model\User` ;
 - `src/Capco/UserBundle/Entity/User.php` porte à la fois les données de compte, le profil, les rôles, les compteurs, les consentements, les jetons, les associations SSO et les relations vers les contributions ;
 - la persistance reste configurée autour de la table `fos_user`.
 
@@ -72,9 +84,9 @@ Tests existants :
 - `cypress/e2e/frontOffice/userProfile/userProfile.cy.ts` : affichage public du profil ;
 - `cypress/e2e/backOffice/user/userBO.cy.ts` : création, modification et suppression depuis le back-office.
 
-Évaluation : **insuffisant au niveau du modèle**. Les tests de lecture GraphQL et d'interface sont nombreux, mais les invariants de l'entité qui remplaceront ceux hérités de FOS ne sont pas explicités.
+Évaluation : **insuffisant au niveau du modèle**. Les tests de lecture GraphQL et d'interface sont nombreux, mais les invariants actuellement portés par l’entité et son héritage ne sont pas explicités.
 
-À ajouter en PHPUnit, sans dépendre de FOS :
+À caractériser en PHPUnit par les comportements publics existants :
 
 - valeur par défaut des rôles et déduplication/hiérarchie des rôles ;
 - identité de sécurité (`getUserIdentifier`), comparaison de deux identités et comportement d'un compte anonymisé/supprimé/verrouillé ;
@@ -196,7 +208,7 @@ Composants sans test dédié identifié :
 - logout local + fournisseur et nettoyage de session pour SAML/CAS/OpenID/FranceConnect ;
 - scénarios de refus du fournisseur et erreurs réseau.
 
-Les futurs tests doivent viser une interface interne de gestion des comptes et vérifier les résultats (compte créé ou rattaché, claims copiés, session, redirection), pas les classes FOS.
+Les tests doivent vérifier les résultats des parcours existants : compte créé ou rattaché, claims copiés, session et redirection. La création d’une nouvelle interface de gestion des comptes n’est pas requise pour ce travail.
 
 ### 6. Profil, données personnelles, préférences et consentements
 
@@ -269,13 +281,13 @@ Tests existants :
 - `tests/PublicApi/PublicApiKeyAuthenticatorTest.php` ;
 - les queries GraphQL User/Participant listées plus haut.
 
-Les tests d'export sont de bons tests de sortie, mais restent très liés à la base de fixtures. Il faut conserver des assertions précises sur la confidentialité, l'ordre et la stabilité des colonnes, et éviter d'asserter le nom physique de la table User.
+Les tests d'export sont de bons tests de sortie, mais restent très liés à la base de fixtures. Il faut conserver des assertions précises sur la confidentialité, l'ordre et la stabilité des colonnes exportées. Les préparations et vérifications SQL sur la table `fos_user` restent autorisées puisque son nom et son schéma sont conservés.
 
 ## Dépendances directes à FOSUserBundle dans les tests
 
 ### Imports ou collaborateurs FOS
 
-À migrer vers une interface applicative ou un double interne :
+Couplages historiques à réduire dans les tests lorsque les contrats publics existants le permettent, sans modifier la production :
 
 - `tests/Authentication/OauthUserProviderTest.php` — `FOS\UserBundle\Model\UserManagerInterface` ;
 - `tests/Mutation/RemoveSsoConnectionMutationTest.php` — même interface ;
@@ -287,9 +299,9 @@ Les tests d'export sont de bons tests de sortie, mais restent très liés à la 
 - `spec/Capco/UserBundle/Authenticator/MagicLinkAuthenticatorSpec.php` — `FOS\UserBundle\Model\UserInterface` ;
 - `spec/Capco/UserBundle/Controller/ConfirmationControllerSpec.php` — `FOS\UserBundle\Security\LoginManager`.
 
-### Nom physique `fos_user`
+### Schéma SQL conservé : table `fos_user`
 
-Ces tests modifient ou lisent directement l'implémentation de persistance :
+L’inventaire initial identifie les tests suivants qui préparent ou vérifient directement le schéma SQL conservé :
 
 - `tests/Command/RecalculateUsersCountersCommandTest.php` ;
 - `features/graphql-api/internal/Mutation/Other/register.js` ;
@@ -300,7 +312,7 @@ Ces tests modifient ou lisent directement l'implémentation de persistance :
 - `cypress/e2e/frontOfficeWorkflow/proposalSelectionVoteWorkflow.cy.ts` ;
 - `cypress/e2e/frontOfficeWorkflow/questionnaireWorkflow.cy.ts`.
 
-Action recommandée : remplacer les SQL directs par des builders de fixtures ou des commandes de test exprimant l'intention (`confirmUserPhone`, `setInternalCommunicationConsent`, `removeUserEmail`). Si un test d'intégration doit vérifier la persistance, utiliser le repository/l'EntityManager et l'identité métier, jamais le nom de table historique.
+Décision actualisée : conserver le SQL direct utile pour préparer et vérifier les données de `fos_user`. Aucun remplacement systématique par Doctrine ou par des builders n'est requis. Un helper peut centraliser une préparation répétitive en gardant le SQL explicite ; sa justification doit être la lisibilité ou l'isolation, pas la disparition du nom de table. Vérifier les valeurs persistées, choisir des données déterministes et restaurer les modifications même si le test échoue.
 
 ### Routes, paramètres et clés FOS
 
@@ -309,7 +321,7 @@ Action recommandée : remplacer les SQL directs par des builders de fixtures ou 
 - `config/packages/test/services.yaml` injecte `%fos_user.firewall_name%` ;
 - les helpers Jest/Cypress utilisent `/login_check` et `/logout`, et Cypress vérifie directement le cookie `PHPSESSID`.
 
-Décision à prendre : `/login_check`, `/logout` et les URLs fonctionnelles peuvent être conservés comme contrats publics pendant la migration. En revanche, les noms de route `fos_user_*`, les paramètres `%fos_user.*%`, les clés de traduction `fos_user.*` et le nom `fos_user` de la table sont des détails d'implémentation à faire disparaître des tests.
+Périmètre de cet audit : caractériser les URL et erreurs publiques existantes, y compris celles portant un préfixe `fos_user`, sans renommer les routes ou paramètres. Leur éventuelle adaptation lors de la suppression du bundle appartient au chantier séparé `18981-remove-fos-user`. Le nom de la table `fos_user` reste inchangé.
 
 ## Indépendance et fiabilité des suites
 
@@ -320,20 +332,20 @@ Bon profil lorsqu'un test instancie un service et vérifie une sortie ou un effe
 Risques :
 
 - mocks des interfaces FOS au lieu de ports applicatifs ;
-- SQL sur `fos_user` ;
+- modifications SQL non restaurées ou assertions insuffisantes sur les données persistées ;
 - nombreux tests d'intégration dépendant d'une base de fixtures globale ;
 - `RecalculateUsersCountersCommandTest` peut se marquer ignoré si aucune fixture adéquate n'est trouvée, ce qui masque une régression de fixture ou de comportement.
 
 ### Jest GraphQL
 
-Le dossier `features/graphql-api` est bien une suite Jest, pas Behat. Les mutations importent le setup de restauration de base ; les queries sont supposées read-only et partagent une base restaurée une fois.
+Le dossier `features/graphql-api` est bien une suite Jest, pas Behat. La restauration avant chaque test est enregistrée par les imports de `_setupDB` et `_setupES` dans les fichiers de test concernés ; elle n’est pas installée automatiquement par `setupFilesAfterEnv`. Le `globalSetup` sauvegarde l’état MySQL et Elasticsearch pour ces restaurations, sauf lorsque `CI_SHARED_TEST_DATA=1` ; il ne restaure pas lui-même les données. Les queries sont supposées en lecture seule et partagent l’état préparé pour leur exécution.
 
 Risques :
 
 - snapshots trop larges pour identifier l'invariant réellement protégé ;
 - sur le corpus inspecté, 98 fichiers sur 110 utilisent un snapshot, contre seulement 21 contenant au moins une assertion explicite de valeur ;
 - identifiants de fixtures et credentials globaux dans `jest-setup.e2e.js` ;
-- SQL direct sur `fos_user` ;
+- dépendance aux données partagées : les restaurations avant chaque test isolent MySQL et Elasticsearch dans les suites qui importent les helpers, mais ne neutralisent pas les messages asynchrones ni tous les effets Redis ; l’absence de restauration finale n’est pas, à elle seule, un défaut d’isolation entre ces tests ;
 - helpers d'authentification liés aux routes actuelles ;
 - une mutation qui écrit dans un test classé Query contaminerait les autres tests.
 
@@ -371,13 +383,13 @@ Action : supprimer les exclusivités, décider explicitement du sort de chaque t
 - aucun fichier `.feature` ni configuration Behat n'a été trouvé ;
 - `behat/behat` n'apparaît que comme dépendance transitive de PHPSpec dans `composer.lock`.
 
-La migration de PHPSpec doit donc être suivie de la suppression du job, de `phpspec/phpspec`, de `phpspec.yml`, des matchers spécifiques et de la dépendance transitive Behat.
+La migration des contrats PHPSpec User/Participant relève de cet audit. La migration des autres domaines et le retrait global de l’infrastructure PHPSpec/Behat restent hors périmètre.
 
 ## Matrice de couverture cible
 
 Légende : **OK** = filet substantiel, **partiel** = happy path ou couche unique, **manquant** = pas de test de contrat identifié.
 
-| Contrat | Unitaire/service | API/intégration | E2E | État cible avant retrait FOS |
+| Contrat | Unitaire/service | API/intégration | E2E | Améliorations des tests envisagées |
 |---|---|---|---|---|
 | Inscription locale | PHPSpec couplé | Jest GraphQL | Cypress | Partiel : migrer et compléter erreurs/atomicité |
 | Login/logout local | PHPSpec partiel | faible | Cypress | Partiel : ajouter matrice états de compte |
@@ -401,7 +413,7 @@ Légende : **OK** = filet substantiel, **partiel** = happy path ou couche unique
 | Exports User/Participant | PHPUnit intégration | n/a | n/a | Correct, réduire couplage fixtures |
 | Profil public et contenu associé | PHPSpec/Jest UI | Jest queries | Cypress | Correct en lecture |
 
-## Plan de migration actualisé
+## Plan de remise en état des tests actualisé
 
 > Plan mis à jour le 30 septembre 2026 sur la branche `20284-users-phpspec-migration`.
 > L'inventaire et la matrice ci-dessus décrivent l'état initial du 25 septembre ; ils ne constituent pas un nouvel audit de la branche après migration.
@@ -410,13 +422,13 @@ Légende : **OK** = filet substantiel, **partiel** = happy path ou couche unique
 
 Les contrats existants du périmètre User/identité ont été déplacés vers PHPUnit : mutations de compte, confirmation, magic link, invitations, providers et handlers, autorisations, requirements et resolvers. Les specs sans contrat métier utile ont été supprimées.
 
-Cette partie fournit un socle PHPUnit : les mutations traversent désormais les vrais formulaires et services de compte par HTTP, et vérifient le hash et les effets SQL après rechargement. Elle ne comble pas à elle seule toutes les lacunes de caractérisation : `UserTest` reste limité aux contributions, et les parcours complémentaires de la partie 2 restent à couvrir.
+Cette partie fournit un socle PHPUnit : les mutations traversent les vrais formulaires et services de compte par HTTP, et vérifient le hash et les effets SQL après rechargement. À l’issue du lot initial, `UserTest` restait limité aux contributions et les parcours complémentaires de la partie 2 restaient à couvrir ; les ajouts et validations de cette partie sont décrits dans son compte rendu.
 
-Le retrait global de PHPSpec reste distinct : des specs hors de ce périmètre subsistent, ainsi que la dépendance Composer et son exécution en CI.
+Le retrait global de PHPSpec reste hors périmètre : des specs d’autres domaines subsistent, ainsi que la dépendance Composer et son exécution en CI.
 
 ### Hygiène CI — à traiter rapidement en parallèle des parties suivantes
 
-1. Ajouter une garde CI contre `it.only`, `describe.only`, `test.only` et leurs équivalents. Les exclusivités des workflows User/Participant sont supprimées dans la partie 3.
+1. Vérifier en revue les tests focalisés (`it.only`, `describe.only`, `test.only` et leurs équivalents) et retirer les exclusivités du périmètre. Aucune garde dédiée en CJS n’est ajoutée, à la demande de l’utilisateur.
 2. Les `.skip` des workflows User/Participant sont retirés dans la partie 3, avec leurs décisions de remplacement/suppression documentées ci-dessous.
 3. Corriger le glob CircleCI Jest legacy pour exécuter aussi les fichiers `-test.ts`.
 4. Ajouter `db:restore` à `shield.cy.ts`; sortir `rgpd.cy.ts` du périmètre User si seuls les cookies sont visés, sinon l'isoler conformément à l'ADR frontend.
@@ -703,7 +715,7 @@ ne signale aucun défaut.
 
 ### Partie 2 — Caractérisation du compte et de l'authentification locale — réalisée
 
-**Objectif : remplacer FOSUserBundle en conservant les attentes fonctionnelles des tests du cycle de compte local.**
+**Objectif : caractériser et fiabiliser les tests du cycle de compte local, avec les services de production existants.**
 
 #### 2.1 — Règles du compte
 
@@ -731,21 +743,21 @@ Prioriser les cas de refus : collision d'adresse e-mail, mauvais mot de passe ac
 
 #### 2.3 — Indépendance et exécution du filet de tests
 
-- Préparer les données via les objets, repositories ou helpers exprimant une intention métier ; éviter le SQL direct sur `fos_user`.
+- Préparer des données déterministes et isolées. Les objets, repositories, helpers et SQL direct sur le schéma conservé sont possibles ; choisir la préparation adaptée au contrat vérifié, sans imposer le retrait de `fos_user`.
 - Utiliser des assertions explicites sur les résultats et effets persistés, avec des snapshots réduits seulement s'ils apportent un contrat de forme utile.
 - Ne pas importer ni mocker FOS dans les nouveaux tests. Réduire les dépendances historiques sur ce périmètre quand cela ne nécessite pas de refonte de production.
 - Conserver les URL publiques, telles que `/login_check` et `/logout`, si leur stabilité est un contrat choisi ; éviter de figer les noms de routes internes FOS.
 - Exécuter ce filet avec FOS avant son remplacement et vérifier sa découverte en CI.
 
-Ne pas créer d'emblée une famille d'interfaces `AccountManager`, `AccountPasswordHasher`, `AccountTokenGenerator` ou `AccountAuthenticator` pour écrire ces tests. Les tests fonctionnels fournissent le premier garde-fou ; les interfaces nécessaires seront introduites lors du remplacement, là où le couplage le justifie.
+Ne pas créer une famille d’interfaces `AccountManager`, `AccountPasswordHasher`, `AccountTokenGenerator` ou `AccountAuthenticator` pour écrire ces tests. Ce travail utilise les services de production existants et vérifie leurs contrats publics.
 
-**Critères de sortie de la partie 2 :** les parcours locaux ci-dessus et leurs principaux refus sont protégés par des assertions fonctionnelles explicites ; les tests exercent la validation, le hash et la persistance réels ; les lacunes de comportement découvertes sont documentées ; la CI exécute le filet. Le remplacement de FOS doit ensuite pouvoir rejouer ces tests sans changer leurs attentes fonctionnelles.
+**Critères de sortie de la partie 2 :** les parcours locaux ci-dessus et leurs principaux refus sont protégés par des assertions fonctionnelles explicites ; les tests exercent la validation, le hash et la persistance réels ; les lacunes de comportement découvertes sont documentées ; la CI exécute le filet. Ces tests doivent protéger les comportements existants sans imposer une modification de production.
 
 ### Partie 3 — Participant et réconciliation — implémentée et validée localement
 
 Ajouter les tests unitaires de `Participant`, `ContributionsReconcilier` et `VotesReconcilier`. Couvrir les conflits entre identités, l'idempotence, les limites/budget/ranking et l'absence de perte de contenu associé. Compléter les codes d'erreur des mutations Participant, notamment suppression et vérification du téléphone.
 
-Réduire ensuite les gros scénarios Cypress à quelques parcours représentatifs, avec une décision explicite pour les cas ignorés et une préparation indépendante du schéma SQL historique.
+Réduire ensuite les gros scénarios Cypress à quelques parcours représentatifs, avec une décision explicite pour les cas ignorés et une préparation déterministe, restaurée, compatible avec le schéma SQL conservé.
 
 ### Partie 4 — SSO — filet minimal réalisé, validation locale le 6 octobre 2026
 
@@ -753,11 +765,52 @@ Découpler les tests OAuth des interfaces FOS, compléter les contrats CAS et aj
 
 La migration des specs CAS/handlers du périmètre identité appartient déjà à la partie 1 ; cette partie vise leur couverture manquante et leur indépendance au vendor.
 
-### Partie 5 — Découplage résiduel et nettoyage final
+### Partie 5 — Isolation et assertions des tests User dans PHPUnit et Jest GraphQL — validation locale du 6 octobre, simplification Jest le 7 octobre 2026
 
-1. Éliminer les dépendances résiduelles des tests à `FOS\UserBundle`, au SQL sur `fos_user`, aux paramètres et aux noms de routes/clés internes FOS. Les dépendances imposées par la production seront traitées avec les adaptations correspondantes lors du remplacement.
-2. Achever séparément la migration des specs hors du périmètre identité avant de supprimer `spec/`, `phpspec.yml`, les matchers PHPSpec, l'exécution PHPSpec en CI et les dépendances Composer correspondantes. Préserver le job PHPUnit s'il partage le même job CI.
-3. Exécuter les suites PHPUnit, Jest GraphQL, Jest UI et Cypress User/Participant comme quality gate de la PR de retrait de FOS.
+**Lot retenu le 6 octobre 2026, puis corrigé après clarification du périmètre**, sur la branche `20284-user-counter-tests-decoupling`, créée depuis `preprod`. Le lot d’hygiène est suivi en partie 6 ; la validation finale des tests User/Participant est suivie en partie 7.
+
+Le lot comprend une suite PHPUnit, quatre suites Jest GraphQL et cet audit. Le code de production reste inchangé. L'ancienne approche retirant le SQL User reposait sur l'hypothèse erronée d'un changement de schéma. La reprise conserve les améliorations utiles et rétablit les accès au stockage existant ; les validations de ce résultat sont documentées ci-dessous.
+
+#### 5.1 — Recalcul des compteurs User en PHPUnit — vérifications SQL rétablies
+
+Conserver les améliorations de `RecalculateUsersCountersCommandTest` : données déterministes, absence de skip, exécution de la vraie commande CLI, compte voisin hors file, mode `--force`, consommation de la file et nettoyage après échec.
+
+Périmètre corrigé :
+
+- conserver ou réintroduire les préparations et lectures SQL utiles sur `fos_user`, notamment pour contrôler les quatre compteurs persistés ; leur présence ne dépend pas du bundle PHP ;
+- préserver les valeurs attendues explicites et les données propres à chaque scénario, sans revenir à la sélection du premier utilisateur ou d'un compteur quelconque dans les fixtures ;
+- garder le rollback SQL et le namespace Redis propre à chaque scénario ;
+- garder les assertions depuis CLI et le statut de conformité seulement si l'isolation et les preuves de persistance restent assurées après l'ajustement.
+
+**Critères de sortie :** aucun scénario ignoré, effets persistés contrôlés sur le schéma conservé, compte voisin préservé, état SQL/Redis restauré même en cas d'échec. La suite doit passer seule et en ordre aléatoire dans le conteneur applicatif, rester découverte par PHPUnit/CircleCI et satisfaire les contrôles PHP globaux avant commit. L'absence de SQL sur `fos_user` n'est plus un critère.
+
+#### 5.2 — Préparations et assertions Jest GraphQL — SQL rétabli, helpers Doctrine retirés
+
+Le périmètre reste `Other/register.js`, `askProposalRevision.js`, `Mediator/addMediatorVotes.js` et `Mediator/updateMediatorVotes.js`, sous `features/graphql-api/internal/Mutation/`.
+
+Périmètre corrigé :
+
+- conserver ou réintroduire les préparations SQL sur `fos_user` pour l'absence d'e-mail et les téléphones confirmés, ainsi que les lectures SQL utiles pour vérifier le pseudo réellement stocké après inscription ;
+- retirer `_userFixtures.js` et `_userFixtures.php`, introduits uniquement pour remplacer ces accès SQL, en rétablissant les préparations explicites des scénarios, y compris l'absence d'auteur d'une proposition ;
+- garder les assertions explicites sur les codes de refus, les valeurs nettoyées et les effets persistés ; les relectures API peuvent compléter les vérifications de stockage lorsqu'elles protègent un contrat distinct ;
+- garder les restaurations MySQL/Elasticsearch avant chaque test ;
+- conserver les invocations Fabric compatibles avec la CI et les environnements des autres développeurs.
+
+**Critères de sortie :** scénarios et snapshots utiles préservés, préparations SQL lisibles et état MySQL/Elasticsearch restauré avant chaque test, assertions de résultat maintenues, aucune dépendance directe aux classes ou interfaces PHP FOS ajoutée. Valider les quatre suites dans leur version corrigée ; les validations de l'ancienne implémentation ne suffisent pas à valider ce résultat.
+
+La migration du vendor appartient au chantier séparé `18981-remove-fos-user`. Les anomalies produit caractérisées nécessitent leurs propres décisions et corrections ; les erreurs publiques FOS et le schéma SQL ne sont pas renommés dans cet audit.
+
+### Partie 6 — Hygiène et exécution CI des suites User/Participant — implémentée localement le 7 octobre 2026, CI distante à confirmer
+
+La répartition des fichiers Jest legacy `-test.ts` et la restauration initiale de `shield.cy.ts` sont ajoutées. Le test focalisé de recherche est réactivé ; la garde dédiée en CJS est retirée à la demande de l’utilisateur. `rgpd.cy.ts` est classé hors du périmètre User : ses assertions concernent les cookies du navigateur, pas les consentements persistés du compte. Les cas ignorés résiduels, la dépendance à la PR #20296 pour les environnements Cypress/admin-next et les vérifications de découverte sont documentés dans le compte rendu de la partie 6 ci-dessous.
+
+Le problème de build d'assets documenté dans la partie 3 doit être vérifié avec la configuration par défaut ; s'il subsiste, sa correction fera l'objet d'un lot dédié. Ce lot ne constitue pas encore le quality gate global de suppression.
+
+### Partie 7 — Validation finale des tests User/Participant — à réaliser après clôture de l’hygiène
+
+Rejouer les suites User/Participant concernées en PHPUnit, Jest GraphQL, Jest UI et Cypress, vérifier les critères de clôture ci-dessous et confirmer leur exécution réelle en CI. Distinguer la découverte, les résultats locaux et les résultats distants. Documenter les exceptions et lacunes de couverture restantes, ainsi que les comportements produit caractérisés qui nécessitent une décision séparée.
+
+Le plan de cet audit s’arrête à la remise en état de ces tests. La migration PHPSpec des autres domaines, le retrait global de son infrastructure et la suppression de FOSUserBundle sont hors périmètre. La stack de 11 branches du chantier `18981-remove-fos-user` sera reprise plus tard.
 
 ## Résultats de la partie 2 — 30 septembre 2026
 
@@ -907,7 +960,7 @@ Les trois nouvelles suites fonctionnelles sont découvertes par `tests/**/*Test.
 
 Revue du commit `712d708fbd`, seul commit propre à la branche actuelle `20284-participant-reconciliation-tests`, dont le parent est `0a93ca9887`.
 
-**Bilan de périmètre : la partie 3 dispose du filet demandé**, mais son implémentation initiale ne respectait pas entièrement les ADR du 2 octobre. La fin de cette partie ne vaut ni correction des anomalies caractérisées, ni achèvement des parties 4 et 5, ni validation globale de la suppression de FOSUserBundle.
+**Bilan de périmètre : la partie 3 dispose du filet demandé**, mais son implémentation initiale ne respectait pas entièrement les ADR du 2 octobre. La fin de cette partie ne vaut ni correction des anomalies caractérisées, ni achèvement des parties 4 et 5, ni clôture de la remise en état de l’ensemble des tests User/Participant.
 
 Les corrections apportées sont les suivantes :
 
@@ -1083,8 +1136,8 @@ production sont intégralement restaurés avant le rejeu du périmètre.
 
 Le filet minimal demandé par la partie 4 est désormais réalisé : découplage du
 mock FOS OAuth, contrats CAS/SAML et callbacks OAuth avec collisions et refus.
-Cela ne clôt pas la partie 5, ne corrige pas les lacunes produit caractérisées et
-ne constitue pas une autorisation de supprimer FOSUserBundle. Avant la revue
+Cela ne clôt pas la partie 5 et ne corrige pas les lacunes produit caractérisées.
+La suppression de FOSUserBundle appartient au chantier séparé `18981-remove-fos-user`. Avant la revue
 de conformité ci-dessous, la classe OAuth unitaire historique conservait son
 statut `non-compliant` ; les nouvelles suites HTTP complétaient ses preuves
 de persistance.
@@ -1163,23 +1216,102 @@ PHPStan global, PHP-CS-Fixer global en dry-run, Rector global en dry-run et
 par PHPUnit et le glob CircleCI `tests/**/*Test.php` ; le socle partagé est abstrait.
 Aucun contrat Jest n'est ajouté ou dupliqué. La CI distante reste non exécutée.
 
-## Critères de sortie avant la PR de suppression de FOSUserBundle
+## Résultats de la partie 5 après correction du périmètre — 6 octobre 2026, mise à jour le 7 octobre
+
+La première implémentation retirait les accès SQL sur `fos_user`, ajoutait `_userFixtures.js` / `_userFixtures.php` et avait passé cinq tests PHPUnit (52 assertions), vingt tests Jest et huit snapshots. Cette approche a été revue après clarification : le schéma SQL reste inchangé et aucun retrait du bundle n’est effectué dans cet audit. Ces anciens résultats ne sont pas présentés comme validation du code corrigé.
+
+### 5.1 — PHPUnit : recalcul des compteurs et contrat SQL conservé
+
+`RecalculateUsersCountersCommandTest` utilise toujours le socle transactionnel `DatabaseCommandTestCase`, des comptes et votes propres aux scénarios, ainsi qu'un client Redis réel avec un préfixe unique par scénario. La vraie commande est enregistrée dans une application Console avec le véritable EntityManager. La file partagée n'est pas vidée ; le teardown supprime uniquement la clé de la file du scénario et annule les écritures SQL, même après un échec. L'indexation Elasticsearch reste neutralisée par le socle.
+
+Les lectures de compteurs passent désormais directement par `SELECT` sur `fos_user` et ses colonnes `proposal_votes_count`, `opinion_version_votes_count`, `argument_votes_count`, `source_votes_count`. Le scénario de consommation de la file réintroduit également une valeur obsolète par `UPDATE` sur cette table avant le deuxième passage. Ces accès vérifient explicitement le contrat du stockage conservé, sans utiliser le mapping Doctrine pour en déterminer les noms physiques.
+
+Les cinq scénarios restent : file vide, compte sans vote avec remise à zéro des quatre compteurs, compte placé dans la file avec voisin préservé et deuxième passage sans recalcul, mode `--force` incluant un compte hors file, exclusion des votes privés et propositions en brouillon. Les données de contexte réutilisées sont limitées à l'étape `collectstep1` et son formulaire. Aucun skip ni annotation `@coversNothing` ne reste dans cette classe.
+
+Validation de la reprise : **5 tests / 51 assertions**, en ordre aléatoire avec les seeds `20261006` et `20261007`. La différence avec les 52 assertions de l'ancienne version vient du retrait de la lecture ORM de préparation au deuxième passage. La suite protège les valeurs positives de votes de propositions et la remise à zéro des trois autres compteurs sur les comptes sans ces contributions ; elle ne revendique pas une matrice exhaustive des votes de versions d'opinion, arguments ou sources.
+
+### 5.2 — Jest GraphQL : préparations SQL et assertions de résultat
+
+Les quatre suites `Other/register.js`, `askProposalRevision.js`, `Mediator/addMediatorVotes.js` et `Mediator/updateMediatorVotes.js` retrouvent leurs préparations et lectures SQL explicites. Les helpers `_userFixtures.js` et `_userFixtures.php` sont supprimés.
+
+- L'inscription vérifie le pseudo nettoyé renvoyé par la mutation, puis relit directement le pseudo et l'e-mail stockés dans `fos_user`. Une valeur concaténée avec des délimiteurs permet de vérifier le pseudo et l’e-mail exacts dans la sortie du runner SQL avec `toContain`, sans imposer l’égalité de toute cette sortie.
+- Les refus de révision préparent directement l'absence d'auteur dans `proposal` ou d'e-mail dans `fos_user`. Ils vérifient le code `PROPOSAL_AUTHOR_HAS_NO_EMAIL` et l'absence de payload de succès, en conservant les snapshots utiles.
+- Les deux refus médiateur ajoutent par SQL une exigence `PHONE_VERIFIED` sur l'étape de sélection et affectent le numéro confirmé au compte voisin. Le code `PHONE_ALREADY_USED_BY_ANOTHER_USER` et l'absence de médiateur dans le payload sont vérifiés explicitement, avec maintien des snapshots.
+
+Les quatre suites importent `_setupDB` et `_setupES`, qui restaurent MySQL et Elasticsearch avant chaque test. Le 7 octobre, leurs restaurations en `afterAll` ont été retirées : elles sont redondantes pour l’isolation entre les tests, et aucun besoin de remise à zéro en fin d’exécution n’est identifié. Les helpers ne sont plus exportés. L’import de `_setupES` dans `register.js` est conservé pour la restauration avant chaque test. La lecture de `stderr` des commandes est corrigée. Les invocations Fabric restent sous leur forme historique `fab`, sans préfixe ajouté ni modification du setup global.
+
+**Limites conservées :** ce lot ne certifie pas la conformité globale des suites Jest. Les notifications et messages d'indexation produits par l'API ne sont pas isolés, et l'inscription remet les flags aux valeurs par défaut de test plutôt qu'à leur état initial. Les marqueurs `non-compliant` correspondants restent présents. La vérification exhaustive des effets persistés des mutations médiateur/révisions et la refonte de cette infrastructure restent des lots distincts.
+
+Validation historique de la reprise du 6 octobre, avant le retrait des `afterAll` : **4 suites Jest / 20 tests / 8 snapshots passent**, sans modification des snapshots, avec les invocations Fabric historiques et l'installation locale réparée. PHPStan, PHP-CS-Fixer et Rector globaux passent ; ESLint ne rapporte aucune erreur et le formatage est vérifié. Les avertissements historiques de logs et d'alias Jest restent distincts.
+
+Après le retrait des `afterAll` le 7 octobre, la syntaxe des six fichiers JavaScript concernés et `git diff --check` ont été vérifiés. Les suites d’intégration et les contrôles PHP n’ont pas été relancés pour cette modification ; les résultats précédents ne constituent pas un nouveau rejeu.
+
+Lors de la validation du 6 octobre, deux régressions temporaires ont été détectées : retirer le filtre des comptes de la file fait échouer l'assertion SQL sur le voisin ; retirer le contrôle de réutilisation du téléphone fait échouer le refus médiateur explicite. Les deux fichiers de production sont restaurés octet pour octet avant les rejeux réussis : les cinq scénarios PHPUnit repassent, ainsi que les trois scénarios Jest ciblant le pseudo stocké et les deux refus de téléphone (deux snapshots). Les scénarios non sélectionnés par ce filtre restent actifs dans leur suite complète. Aucun test focalisé ou ignoré n'est ajouté au code. La découverte PHPUnit et Jest conserve les emplacements existants ; la CI distante doit être vérifiée sur le commit corrigé. Aucun fichier de production, schéma SQL, fixture partagée ou instruction personnelle n'est modifié dans le résultat de cette branche.
+
+## Résultats de la partie 6 — 7 octobre 2026
+
+Le lot est réalisé sur `20284-user-tests-ci-hygiene`, créée depuis `20284-user-counter-tests-decoupling` à la demande de l’utilisateur. Il modifie uniquement l’infrastructure de test, les specs concernées et leur documentation.
+
+### Répartition CircleCI et tests focalisés
+
+Le `it.only` de la recherche Cypress est retiré : les trois scénarios de cette spec sont désormais exécutés. Les scripts CJS de contrôle et le job CI associé sont retirés à la demande de l’utilisateur ; aucune garde automatisée dédiée ne les remplace dans ce lot.
+
+Le job `unit-js` répartit ensemble `frontend/**/*-test.ts` et `frontend/**/*-test.tsx`, puis passe les chemins assignés à `--runTestsByPath`. Un exécuteur sans fichier frontend n’exécute pas toute la suite par défaut. Les changements de `.circleci/` déclenchent aussi les étapes Jest frontend et admin-next ; le sharding admin-next est conservé.
+
+### Isolation Cypress et cas ignorés
+
+`shield.cy.ts` restaure MySQL, Elasticsearch et la file RabbitMQ via `db:restore` avant d’activer ses flags. Son second hook de désactivation de `shield_mode`, redondant avec le premier, est supprimé.
+
+Le premier rejeu révèle un décalage d’environnement : les tâches locales activaient les flags dans le namespace Symfony `dev`, alors que Nginx sert `capco.test` avec le kernel `test`. Les trois scénarios shield attendaient donc une requête `ShieldPageQuery` absente. Un changement temporaire des tâches vers `test` a permis de valider les parcours.
+
+La [PR #20296 — test: fix feature toggles not working locally](https://github.com/cap-collectif/platform/pull/20296), mergée le 6 octobre, traite déjà ce défaut et le namespace Redis des flags côté SSR Next.js. Elle fixe `toggleEnvironment` à `test` et fait utiliser à `feature-flags-resolver.ts` le namespace `testfeature_toggle` lorsque `getEnv()` vaut `test`. `NEXT_PUBLIC_SYMFONY_ENV=test` dans `admin-next/.env.local` pilote ce dernier choix ; il ne configure pas directement les tâches Fabric du plugin. Les deux réglages alignent les écritures Cypress et les lectures PHP/Next.js.
+
+Cette PR est absente de la base locale de la branche au moment de la revue. La modification temporaire de `cypress/plugins/index.ts` est retirée de ce lot pour ne pas dupliquer sa correction, et aucun changement du résolveur de production n’est ajouté. La base doit intégrer #20296 avant de refaire les validations Cypress sur le code final de la branche.
+
+`rgpd.cy.ts` reste une suite de cookies du navigateur, adjacente et exclue de l’inventaire principal User. Aucun scénario `.skip` ne subsiste dans les trois workflows User/Participant. La recherche des tests focalisés ne relève plus de `.only` dans les suites Jest/Cypress inspectées.
+
+Dix scénarios Cypress historiques restent ignorés dans des suites adjacentes :
+
+| Fichier | Scénarios ignorés | Décision dans ce lot |
+|---|---:|---|
+| `frontOffice/event/eventPage.cy.ts` | 1 | Export des invités par l’auteur d’un événement : précondition d’identité et contrat d’export adjacent ; à reprendre dans son périmètre. |
+| `frontOffice/proposal/proposalVotes.cy.ts` | 1 | Réordonnancement des votes : le commentaire existant indique que le glisser-déposer ne modifie pas le HTML. Ce scénario UI n’est pas remplacé par les preuves algorithmiques de la partie 3 ; sa réparation reste distincte. |
+| `frontOffice/opinion/opinionVersion.cy.ts` | 1 | Lecture des votes d’une version : contrat de consultation adjacent ; à reprendre séparément. |
+| `frontOffice/customPage/customPage.cy.ts` | 1 | URL personnalisée : hors contrat d’identité. |
+| `frontOffice/multilangue/multilangue.cy.ts` | 6 | Langue et configuration multilingue : l’authentification de certains cas est une précondition ; les motifs de désactivation restent à diagnostiquer dans ce périmètre. |
+
+Ces cas ne sont pas réactivés sans validation de leur comportement. Ce lot ne certifie pas leur couverture.
+
+### Découverte et validation locale
+
+- Les deux globs frontend correspondent exactement aux **548 fichiers** découverts par Jest : **519 `.tsx` et 29 `.ts`**, dont `frontend/js/redux/modules/user-test.ts`. Les 29 suites `.ts` passent : **92 tests, 17 snapshots**.
+- Le runner admin-next découvre **77 fichiers**. Les runners GraphQL découvrent **236 mutations et 197 queries**, sans écart avec leurs globs CircleCI.
+- `bin/phpunit --list-tests`, exécuté dans le conteneur applicatif avec la configuration habituelle, découvre **191 classes concrètes et 1 138 scénarios**. Le glob CircleCI `tests/**/*Test.php` conserve l’exclusion existante de `MigrationCommandTest.php` et couvre les suites ajoutées dans les parties précédentes. Cette commande vérifie la découverte, pas leur réussite.
+- Le contrôle de couverture Cypress passe. Le YAML CircleCI est parsé et ses dépendances de workflow sont vérifiées localement ; cela ne remplace pas une validation par CircleCI.
+- ESLint des deux specs et du plugin temporairement corrigé, Prettier des fichiers de code/configuration modifiés et `git diff --check` passent. ESLint conserve son avertissement de configuration sur la version React. La modification du plugin a ensuite été retirée ; les contrôles de formatage et de diff ont été revérifiés après cet ajustement.
+- Avec la correction temporaire du namespace des flags, `shield` et `search` passent : **6/6 scénarios sans retry**, avec les assets issus de `yarn build`. Ces résultats ne constituent pas un rejeu après retrait de cette correction.
+
+Le build de développement par défaut `yarn build` compile avec deux avertissements, sans modification de Webpack, Babel ou `tsconfig.json`. Les trois workflows User/Participant passent avec ces assets et la correction temporaire du plugin : **9/9 scénarios sans retry**, en 4 min 7 s. Leur rejeu sur le code final reste à effectuer après intégration de #20296 dans la base. L’erreur historique `graphql: Unexpected invocation` n’est pas reproduite sur ces parcours avec la configuration actuelle. Le build de production et la CI distante ne sont pas validés par ce contrôle local.
+
+Aucun push ni lancement de pipeline distant n’est effectué dans ce lot. La réussite des jobs et leur répartition réelle en CI restent à confirmer avant de clôturer la partie 6. La validation finale des tests User/Participant en partie 7 reste à effectuer ; les décisions sur les lacunes produit et le chantier `18981-remove-fos-user` restent distincts.
+
+## Critères de clôture de la remise en état des tests User/Participant
 
 - aucun `.only` et aucun `.skip` non documenté sur le périmètre ;
-- aucun import ou mock FOS dans les tests ;
-- aucun SQL de test sur `fos_user` ;
-- aucune attente sur une route, un paramètre ou une clé de traduction FOS ;
-- tous les contrats PHPSpec utiles migrés vers PHPUnit ;
+- dépendances internes réduites lorsque les contrats publics existants le permettent ; exceptions imposées par la production documentées, sans refonte de production ;
+- table `fos_user`, colonnes et données existantes conservées ; SQL de préparation et de vérification autorisé, avec isolation et restauration ;
+- routes, erreurs et contrats publics actuels caractérisés sans renommage ni modification de production ;
+- contrats PHPSpec utiles du périmètre User/Participant migrés vers PHPUnit ;
 - matrice locale complète : inscription, confirmation, login/logout, password reset/change, magic link et états du compte ;
 - matrice SSO minimale complète pour chaque fournisseur activé ;
 - `User`, `Participant` et les reconcilers caractérisés au niveau domaine/service ;
 - mutations GraphQL User/Participant couvertes par leurs sorties et codes d'erreur ;
-- parcours Cypress courts et représentatifs, avec base restaurée et sans dépendance au schéma SQL historique ;
+- parcours Cypress courts et représentatifs, avec base restaurée et préparations compatibles avec le schéma SQL conservé ;
 - CI exécutant réellement les fichiers PHPUnit/Jest/Cypress concernés.
 
-## Index des emplacements retenus
+## Index initial des emplacements retenus — 25 septembre 2026
 
-Cet index complète la carte fonctionnelle ci-dessus. Un snapshot appartient au même contrat que son fichier de test parent. Les tests qui utilisent seulement `loginAs`/`directLoginAs` pour préparer une autre fonctionnalité ne sont pas inclus.
+Cet index complète la carte fonctionnelle initiale ci-dessus ; les specs migrées depuis ont été supprimées et leurs remplacements sont décrits dans les comptes rendus. Un snapshot appartient au même contrat que son fichier de test parent. Les tests qui utilisent seulement `loginAs`/`directLoginAs` pour préparer une autre fonctionnalité ne sont pas inclus.
 
 ### PHPUnit
 
@@ -1231,8 +1363,12 @@ Cet index complète la carte fonctionnelle ci-dessus. Un snapshot appartient au 
 ## Commandes de contrôle recommandées
 
 ```bash
-# Toute dépendance directe résiduelle à FOS dans les tests
-rg -n 'FOS\\UserBundle|FOSUserBundle|fos_user|%fos_user\.|fos_user_|fos_user\.' \
+# Direct PHP bundle dependencies; SQL references to fos_user remain valid
+rg -n 'FOS\\+UserBundle|FOSUserBundle' \
+  tests spec features cypress frontend admin-next config/packages/test
+
+# Review bundle-provided configuration and public contracts; do not require renaming
+rg -n '%fos_user\.|fos_user_|fos_user\.' \
   tests spec features cypress frontend admin-next config/packages/test
 
 # Tests focalisés ou ignorés
@@ -1244,4 +1380,4 @@ find spec -type f -name '*Spec.php'
 find . -type f -name '*.feature' -not -path './vendor/*' -not -path './node_modules/*'
 ```
 
-Cet audit est volontairement orienté vers les contrats à préserver. Il ne recommande pas de figer les namespaces, le nom de table, les routes internes ou les classes de FOSUserBundle : ce sont précisément les détails que la migration doit pouvoir remplacer.
+Cet audit vise la fiabilité et la couverture des tests User/Participant avec la production actuelle. Les tests peuvent vérifier explicitement le schéma `fos_user` et les contrats publics existants. La suppression de FOSUserBundle et la stack de 11 branches `18981-remove-fos-user` seront traitées séparément, ultérieurement.

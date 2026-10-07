@@ -8,10 +8,10 @@ const env = process.env.CI ? 'ci' : 'local'
 beforeEach(async () => {
   console.log('Restoring database…')
   console.time('restore_db')
-  const { stderrDb } = await exec('fab ' + env + '.qa.restore-db')
+  const { stderr } = await exec('fab ' + env + '.qa.restore-db')
 
-  if (stderrDb) {
-    console.error(`error: ${stderrDb}`)
+  if (stderr) {
+    console.error(`error: ${stderr}`)
   }
   console.log('Successfully restored database !')
   console.timeEnd('restore_db')
